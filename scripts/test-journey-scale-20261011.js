@@ -27,6 +27,10 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [20261011, 777, 424242, 99]);
 const DAYCAP = parseInt(process.env.DAYCAP || '140', 10);
+// ROAD: which national road the courtship strategy pushes. 'covenant' (default,
+// prior runs) or 'trade' (r2: the charter beat answered 'bargain', 1 covenant
+// link kept for a played covenant crisis).
+const ROAD = (process.env.ROAD || 'covenant').toLowerCase();
 
 let _s = 0;
 Math.random = function () {
@@ -206,8 +210,9 @@ function regionalPlay(Game, ctx) {
     }
     if (st.pendingNational) {
       const shape = st.pendingNational.shape;
-      const pick = { lead: 'feast', conquest: 'mercy', belong: 'swear', covenant: 'pact', trade: 'sign' }[shape] || 'feast';
-      try { Game.answerNationalChoice(pick); note({ ev: 'national', shape, how: pick, scale: Game.scaleRank() }); } catch (e) { note({ ev: 'national', shape, how: pick, err: String(e && e.message) }); }
+      const pick = { lead: 'feast', conquest: 'mercy', belong: 'swear', covenant: 'pact', trade: (ROAD === 'trade' ? 'bargain' : 'sign') }[shape] || 'feast';
+      const cap0 = capture.length;
+      try { Game.answerNationalChoice(pick); note({ ev: 'national', shape, how: pick, scale: Game.scaleRank(), lines: capture.slice(cap0, cap0 + 8) }); } catch (e) { note({ ev: 'national', shape, how: pick, err: String(e && e.message) }); }
     }
     if (st.pendingGlobal) {
       try { Game.answerGlobalChoice('feast'); note({ ev: 'global', how: 'feast', scale: Game.scaleRank() }); } catch (e) { note({ ev: 'global', how: 'feast', err: String(e && e.message) }); }
@@ -233,10 +238,29 @@ function regionalPlay(Game, ctx) {
       }
       if (link.pendingTradeCall) {
         const canSend = pantryKcal() > 10000;
+        const capT = capture.length;
         try {
           if (Game.answerTradeCall) Game.answerTradeCall(lid, canSend ? 'send' : 'refuse');
-          note({ ev: 'tradeCall', link: lid, how: canSend ? 'send' : 'refuse' });
+          note({ ev: 'tradeCall', link: lid, how: canSend ? 'send' : 'refuse', lines: capture.slice(capT, capT + 4) });
         } catch (e) { note({ ev: 'tradeCall', link: lid, err: String(e && e.message) }); }
+      }
+      // covenant/charter crisis — answered 'concede' (buys the league aloud)
+      if (link.pendingCovenantCrisis) {
+        const capC = capture.length;
+        try {
+          const r = Game.answerCovenantCrisis ? Game.answerCovenantCrisis(lid, 'concede') : null;
+          note({ ev: 'crisis', link: lid, kind: link.kind, how: 'concede', result: r, lines: capture.slice(capC, capC + 6) });
+          ctx._crisisPlayed = true;
+        } catch (e) { note({ ev: 'crisis', link: lid, err: String(e && e.message) }); }
+      }
+      // HARNESS-DRIVEN (trade road): if no crisis has fired naturally by day
+      // 95 on the covenant link, trigger one so the beat is played, not
+      // skipped. Logged as harness-triggered.
+      if (!ctx._crisisPlayed && day >= 95 && link.kind === 'covenant' && !link.pendingCovenantCrisis) {
+        try {
+          const r = Game.covenantCrisis ? Game.covenantCrisis(lid, 'strain') : null;
+          if (r && r !== 'pending') note({ ev: 'crisis-trigger', link: lid, how: 'harness', result: r });
+        } catch (e) { note({ ev: 'crisis-trigger', link: lid, err: String(e && e.message) }); }
       }
       if (link.subordinate !== 'haven') continue;
       if (link.pendingDemand) {
@@ -251,10 +275,12 @@ function regionalPlay(Game, ctx) {
       }
     }
     // SCALE COURTSHIP (scale leg): the national bar is 3 same-kind peer
-    // links (covenant or trade). Strategy:
+    // links (covenant or trade). ROAD selects the pushed road: 'covenant'
+    // (mutual defense first, then trade) or 'trade' (charter first, then
+    // exactly 1 covenant link — kept so a covenant crisis can be played).
+    // Strategy:
     //  1. day>=25: first link via proposeLink (regional accord) — the courtship climb.
-    //  2. once ANY link is active: propose peer links (covenant, then trade
-    //     if covenant declined) to every known village until one road has 3.
+    //  2. once ANY link is active: propose peer links toward the road's bar.
     //  COOLDOWN: a declined village isn't re-asked for 7 days.
     if (day >= 25 && !st.pendingCounter && !st.pendingAccord && !st.pendingNational && pantryKcal() > 12000) {
       const active = links.filter(l => l && l.status === 'active');
@@ -277,10 +303,16 @@ function regionalPlay(Game, ctx) {
         }
         return;
       }
-      // step 2: peer-link push toward national (covenant road first — mutual defense)
-      if (covN < 3 || trN < 3) {
+      // step 2: peer-link push toward national (road first, then the other
+      // kind — the trade road keeps exactly 1 covenant link for a crisis)
+      const roadKind = ROAD === 'trade' ? 'trade' : 'covenant';
+      const otherKind = ROAD === 'trade' ? 'covenant' : 'trade';
+      const roadN = roadKind === 'trade' ? trN : covN;
+      const otherN = roadKind === 'trade' ? covN : trN;
+      const otherTarget = roadKind === 'trade' ? 1 : 3;
+      if (roadN < 3 || otherN < otherTarget) {
         for (const t of cands) {
-          const kind = covN < 3 && coolOk(t.id, 'covenant') ? 'covenant' : (trN < 3 && coolOk(t.id, 'trade') ? 'trade' : null);
+          const kind = roadN < 3 && coolOk(t.id, roadKind) ? roadKind : (otherN < otherTarget && coolOk(t.id, otherKind) ? otherKind : null);
           if (!kind) continue;
           markCool(t.id, kind);
           try {
@@ -383,13 +415,36 @@ policy.fight = function (G, ctx) {
     const endTurn = () => {
       try { const q = G.tbFighter('p'); q.moveLeft = 0; q.acted = true; G.tbAfterPlayerAction(); } catch (e) {}
     };
+    // FLEE IS A TWO-STEP VERB (break-it turtle 2026-10-08): reach the grid
+    // edge step by step, then push through it with tbBarrierExit. The old
+    // policy tried a single 4-tile teleport to the edge: when moveLeft
+    // couldn't cover the path the move refused silently every turn, and a
+    // 0.22-HP player stood 2 tiles from a turtle that can't chase for
+    // 113k rounds (journey-scale r2 2026-10-11). Walk, then push.
+    // fled counts successful edge-ward moves; barrierExits counts actual
+    // push-throughs.
     const flee = () => {
       try {
         const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-        const tx = px <= 4 ? 0 : 8;
-        try { G.tbPlayerMove(tx, py); ctx.fled = (ctx.fled || 0) + 1; } catch (e) {}
+        const distL = px, distR = 8 - px, distU = py, distD = 8 - py;
+        const m = Math.min(distL, distR, distU, distD);
+        let sx = px, sy = py;
+        if (m === distL && px > 0) sx = px - 1; else if (m === distR && px < 8) sx = px + 1;
+        else if (m === distU && py > 0) sy = py - 1; else if (m === distD && py < 8) sy = py + 1;
+        try { if (G.tbPlayerMove(sx, sy)) ctx.fled = (ctx.fled || 0) + 1; } catch (e) {}
+        try {
+          const q = G.tbFighter('p');
+          if (q && G.tbIsPlayerTurn && G.tbIsPlayerTurn()) {
+            if (q.mx === 0) { if (G.tbBarrierExit(-1, 0)) ctx.barrierExits = (ctx.barrierExits || 0) + 1; }
+            else if (q.mx === 8) { if (G.tbBarrierExit(1, 0)) ctx.barrierExits = (ctx.barrierExits || 0) + 1; }
+            else if (q.my === 0) { if (G.tbBarrierExit(0, -1)) ctx.barrierExits = (ctx.barrierExits || 0) + 1; }
+            else if (q.my === 8) { if (G.tbBarrierExit(0, 1)) ctx.barrierExits = (ctx.barrierExits || 0) + 1; }
+          }
+        } catch (e) {}
       } catch (e) {}
-      endTurn();
+      try {
+        if (G.tbfight && !G.tbfight.over && G.tbIsPlayerTurn && G.tbIsPlayerTurn()) endTurn();
+      } catch (e) {}
       return true;
     };
     // NEW-FIGHT ASSESSMENT (scale leg): survival first. A competent
@@ -419,6 +474,37 @@ policy.fight = function (G, ctx) {
       } catch (e) {}
     }
     if (hpPct < 0.45) return flee();
+    // MODERATOR MUTE (journey-scale r2 2026-10-11): muted verbs spend the
+    // turn as violations (+3/Notice each). The counter is WAIT — never
+    // muted, and five quiet rounds clear the verb window so the mute LIFTS
+    // ("it loses the thread", announced plainly) — or stepping out of the
+    // field. A strike-only policy strikes into the mute forever (seed
+    // 271828: 102 unfinished moderator fights, 281k rounds) because muted
+    // attempts never enter the verb window, so the mute never flips on its
+    // own — and one wait is not enough, since the scan finds no mute
+    // message on quiet turns and the policy would strike again on round 2
+    // of 5. So: once muted, stay quiet for 6 full rounds; the lift
+    // announcement breaks the quiet early. Never strike into a mute twice.
+    try {
+      const fr = ctx._fr;
+      const since = fr._muteCk != null ? fr._muteCk : fr.capStart;
+      let muted = false, lifted = false;
+      for (let i = since; i < capture.length; i++) {
+        const l = capture[i] || '';
+        if (/IS MUTED inside the suppression field/.test(l)) muted = true;
+        if (/The mute LIFTS/.test(l)) lifted = true;
+      }
+      fr._muteCk = capture.length;
+      if (lifted) fr._muteWait = 0;
+      else if (muted) fr._muteWait = 6;
+      else if (fr._muteWait == null) fr._muteWait = 0;
+      if (fr._muteWait > 0) {
+        fr._muteWait--;
+        try { G.tbPlayerWait(); } catch (e) {}
+        if (G.tbfight && !G.tbfight.over && G.tbIsPlayerTurn && G.tbIsPlayerTurn()) endTurn();
+        return true;
+      }
+    } catch (e) {} catch (e) {}
     const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
     if (!alive.length) return false;
     alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
@@ -592,6 +678,10 @@ function buildCensus() {
 }
 
 const CONVO_DAYS = (process.env.CONVODAYS ? process.env.CONVODAYS.split(',').map(s => parseInt(s, 10)) : [85, 92, 100, 108, 115, 122, 130, 138]);
+// SCOREPROBE (journey-scale r2): when set, prints the full courtship score
+// components + band distribution at day 30 for the first seed, then exits.
+// Real policy, real history — tuning data for the longsim lever rotation.
+const SCOREPROBE = !!process.env.SCOREPROBE;
 
 async function runSeed(seed) {
   resetRng(seed);
@@ -628,6 +718,25 @@ async function runSeed(seed) {
   for (let day = 1; day <= DAYCAP; day++) {
     const gd = gday();
     maxGameDay = Math.max(maxGameDay, gd);
+
+    if (SCOREPROBE && gd >= 30) {
+      try {
+        const cands = (Game.state.otherVillages || []).filter(v => v && v.id !== 'haven' && Game.knowsVillage(v));
+        const rep = Game.representative ? Game.representative() : null;
+        let repS = 0; try { repS = rep ? Game.linkStanding(rep.id) : 0; } catch (e) {}
+        let ourS = 0; try { ourS = Game.regionalStanding(); } catch (e) {}
+        console.log(`SCOREPROBE day ${gd}: repStanding=${repS} ourRegionalStanding=${ourS} pantry=${pantryKcal()}`);
+        for (const t of cands.slice(0, 4)) {
+          let theirS = 0; try { theirS = Game.villageStandingOf(t.id); } catch (e) {}
+          const jl = [], jp = [];
+          for (let i = 0; i < 60; i++) { jl.push(Game.judgeLink(t.id).score); jp.push(Game._judgePeer(t.id).score); }
+          const bands = (xs) => xs.map(x => x >= 55 ? 'A' : (x >= 35 ? 'C' : 'D')).join('');
+          const med = (xs) => xs.slice().sort((a, b) => a - b)[30];
+          console.log(`  ${t.name}: opinion=${t.opinion ?? 0} theirStanding=${theirS} | judgeLink med=${med(jl)} bands=${bands(jl)} | _judgePeer med=${med(jp)} bands=${bands(jp)}`);
+        }
+      } catch (e) { console.log('SCOREPROBE ERROR: ' + (e && e.message)); }
+      return { seed, scoreProbe: true };
+    }
 
     const w = waveNow();
     if (w !== lastWave) {

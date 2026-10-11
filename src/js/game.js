@@ -28725,6 +28725,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (p && p.alive) {
         p.hp = Math.max(0, Math.min(p.maxHp, (p.hp || 0) + n));
         s.health = Math.max(0, p.hp);
+        // ZOMBIE-FIGHT FIX (journey-scale r2 2026-10-11): hitting 0 HP must
+        // mark the fighter dead, like tbDamage does. The old code left
+        // alive=true at hp=0 — tbEndCheck saw a living corpse and the fight
+        // spun forever (seed 271828: 113k rounds vs a turtle, 0-HP player
+        // "alive"; disease/ability/signature damage all route through here).
+        // The death then flows through the normal pipeline (maybeCheatDeath,
+        // phoenix hold, tbEnd('lost') -> playerDeath -> mantle).
+        if (p.hp <= 0) { p.alive = false; try { this.say('You go down.'); } catch (e) {} }
         if (p.hp <= 0) this.tbEndCheck();
         return s.health;
       }
@@ -34665,6 +34673,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbEndCheck() {
       const f = this.tbfight;
       if (!f || f.over) return f ? f.over : false;
+      // ZOMBIE-FIGHT SAFETY NET (journey-scale r2 2026-10-11): damage sites
+      // that write hp directly could leave a fighter at hp<=0 with
+      // alive=true — a corpse this check couldn't see, spinning the fight
+      // forever (271828: 113k rounds vs a turtle). The invariant: 0 HP in a
+      // fight means dead. Enforce it here, at the choke point, so every
+      // present and future damage site is covered. The death then flows
+      // through the normal pipeline below (maybeCheatDeath -> tbEnd).
+      try {
+        for (const x of (f.fighters || [])) {
+          if (x && x.alive && !x.fled && typeof x.hp === 'number' && x.hp <= 0) {
+            x.alive = false;
+            if (x.kind === 'player') { try { this.say('You go down.'); } catch (e2) {} }
+          }
+        }
+      } catch (e) {}
       const p = this.tbFighter('p');
       // DOUBLE-KO (Steve 2026-10-08, break-it round 2): the player can die on
       // the same tick the last monster drops (death-throes beam). The old

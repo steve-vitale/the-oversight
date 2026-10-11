@@ -340,6 +340,23 @@
                 if (target.kind === 'player') {
                   try { self.state.scholar.health = Math.max(0, target.hp); } catch (e) {}
                 }
+                // ZOMBIE-FIGHT FIX (journey-scale r2 2026-10-11): a tick that
+                // drops a fighter to 0 must kill them — the old code left
+                // alive=true at hp=0 and the fight spun forever (271828:
+                // 113k rounds vs a turtle, 0-HP "alive" player). Same
+                // invariant as tbDamage/addHealth.
+                if (target.hp <= 0 && target.alive) {
+                  target.alive = false;
+                  try {
+                    if (target.kind === 'player') self.say('You go down.');
+                    else if (target.kind === 'villager') {
+                      self.say(`☠ ${target.name} falls.`);
+                      if (self.tbVillagerFalls) self.tbVillagerFalls(target);
+                      if (self.registerDeath) self.registerDeath({ kind: 'person', villagerId: target.villagerId, name: target.name, mx: target.mx, my: target.my, cause: 'combat', witnesses: self.fightWitnesses ? self.fightWitnesses(target.villagerId) : [] });
+                    }
+                  } catch (e2) {}
+                  try { if (self.inCombat && self.inCombat()) self.tbEndCheck(); } catch (e3) {}
+                }
                 self.say(self.seFill(def.tickText || '{name} {verb} hurting. (-{n} HP)', target, { n: n }));
               }
             }

@@ -64,7 +64,7 @@
 //   - worldFeed()
 //   - _nudgeOpinion(villageId, delta)
 // rules:
-//   - courtship_moves_opinion: joining a village (+5, once) and studying its codex (+3, once) raise its opinion of Haven; cold proposals usually draw a counter-offer in the 35-54 band (judgeLink base 38) — the negotiation is the climb, and acceptance is earned through courtship (generosity bonus needs opinion 5+). (code: hierarchy.js)
+//   - courtship_moves_opinion: studying a village's codex (+3, once) and deeds the region hears (+2 per contest win) raise its opinion of Haven; the counter-offer band (35-54, judgeLink base 38) fires when the score lands there — struggling villages score below it, and the decline lines now say the climb aloud (codex +3 / wins +2 / time +1wk) instead of staying silent. "Join them" is not a climb verb: joining is leaving Haven, which ends proposing standing. Old slights fade +1/week (linkTick), so a shut door re-opens. (code: hierarchy.js)
 //   - join_surfaces_village_news: joining a village reads up to 3 recent village.news entries (named catch-up deaths/births) at their fire. (code: hierarchy.js)
 //   - negotiation_is_played: proposeLink scores the courtship; >=55 accepts, 35-54 counters with the village's own terms (accept/sweeten/walk away — played, never rolled), <35 declines. (code: hierarchy.js)
 //   - regional_dawn: Haven's first-ever link stages a played beat, not a threshold flip — the System overlay grows into coordination (networkLive) and the player chooses Haven's first gesture (gift/visit/cold), each with real costs. (code: hierarchy.js)
@@ -225,10 +225,13 @@
 
     // ---------- OPINION (the courtship currency) ----------
 
-    // _nudgeOpinion: a village's opinion of Haven moves ONLY through lived
+    // _nudgeOpinion: a village's opinion of Haven moves through lived
     // contact — joining them, honoring their knowledge, deeds on the
     // broadcast (ledger.arenaAct), or breaking faith (decline/breakLink).
-    // Clamped ±100. Drifter loop 2026-10-08: before this, joining a village,
+    // Clamped ±100. Old slights ALSO fade on their own: +1/week toward 0
+    // for unlinked villages (linkTick, journey-scale r2 2026-10-11) — the
+    // slow lane; lived contact is the fast lane. Drifter loop 2026-10-08:
+    // before this, joining a village,
     // living at their fire, and studying their codex moved opinion by exactly
     // nothing — the only positive source was arena broadcasts, and the
     // proposal was nearly free anyway. The climb didn't exist.
@@ -358,7 +361,9 @@
     // courtship, but the middle band is a negotiation, not a coin flip.
     // score >= 55: earned — they accept. 35-54: they COUNTER with their terms
     // (played: accept / sweeten / walk away). Below 35: declined — do the
-    // climb first (join them, study their book, deeds on the broadcast).
+    // climb first (study their book at their fire, wins the region hears,
+    // time). Joining is leaving Haven, not a climb verb — the decline line
+    // says so aloud.
     proposeLink(targetId, opts) {
       opts = opts || {};
       var ov = this._otherVillage(targetId);
@@ -368,16 +373,25 @@
       var j = this.judgeLink(targetId, opts);
       var nm = ov.name || 'them';
       var opinion = ov.opinion || 0;
-      // Active dislike isn't a negotiation — it's a closed door. The climb
-      // (join, study, deeds) has to come before the table.
+      // THE SHUT DOOR IS SILENCE (journey-scale r2 2026-10-11): they don't
+      // answer the knock — and a shut door knocked on doesn't deepen the
+      // insult (the old -5 here spiraled villages below -20 forever, with
+      // no recovery path). Old slights fade with the weeks (linkTick), so
+      // "not forever" is true in the engine now, not just in the line.
       if (opinion <= -20) {
-        this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut forever — but it is shut today.`);
-        try { if (this._nudgeOpinion) this._nudgeOpinion(targetId, -5); else ov.opinion = (ov.opinion || 0) - 5; } catch (e) {}
+        this.say(`${nm} doesn't answer the knock at all — the door is shut. Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
         return null;
       }
       if (j.score >= 55) return this._formLink(targetId, opts, j);
       if (j.score >= 35) return this._stageCounter(targetId, opts, j);
-      this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut — just not today.`);
+      // THE CLIMB IS VISIBLE (journey-scale r2 2026-10-11): the old line
+      // said nothing about HOW to be heard. The climb verbs are named with
+      // their real numbers (codex +3 once, broadcast wins +2 each, time
+      // +1/week), and the cold-ask cost (-5) is said aloud. "Join them" is
+      // deliberately NOT here: joinVillageReal is defection — leaving Haven
+      // ends your standing to propose at all (break-it regional r4). The
+      // line says so, honestly.
+      this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut — just not today. The climb is real, and it is visible: walk to their fire and sit with their book — study their codex (+3 in their eyes, once); win where the region hears it — every victory carries your name (+2 each); give it weeks — old slights fade (+1 a week). Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
       try { if (this._nudgeOpinion) this._nudgeOpinion(targetId, -5); else ov.opinion = (ov.opinion || 0) - 5; } catch (e) {}
       return null;
     },
@@ -865,6 +879,24 @@
             } catch (e) {}
           })(this, links[i]);
         }
+        // OLD SLIGHTS FADE (journey-scale r2 2026-10-11): the shut door used
+        // to be permanent — negative opinion never moved except through
+        // deeds, so opinion <= -20 closed the table forever and the decline
+        // line lied ("isn't shut forever"). Now slights ease +1/week toward
+        // 0 for villages Haven has no live link with. The fast lane is still
+        // lived contact (join +5, codex +3, deeds); this is the slow lane.
+        // A raid's -40 takes a season to thaw; a cold decline's -5 is gone
+        // in five weeks. Paced in weeks, never speedrunnable.
+        try {
+          var _ovs = this.state.otherVillages || [];
+          for (var _oi = 0; _oi < _ovs.length; _oi++) {
+            var _ov2 = _ovs[_oi];
+            if (!_ov2 || _ov2.id === HOME) continue;
+            if ((_ov2.opinion || 0) >= 0) continue;
+            if (this.linkWith && this.linkWith(_ov2.id)) continue;
+            _ov2.opinion = Math.min(0, (_ov2.opinion || 0) + 1);
+          }
+        } catch (_e3) {}
       } catch (e) {}
     },
 
@@ -2296,14 +2328,19 @@
       var nm = ov.name || 'them';
       var opinion = ov.opinion || 0;
       var kindName = kind === 'covenant' ? 'covenant' : 'charter';
+      // THE SHUT DOOR IS SILENCE (journey-scale r2 2026-10-11): see
+      // proposeLink — a shut door knocked on is silence, not a fresh
+      // insult, and old slights fade with the weeks (linkTick).
       if (opinion <= -20) {
-        this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut forever — but it is shut today.`);
-        try { this._nudgeOpinion(targetId, -5); } catch (e) {}
+        this.say(`${nm} doesn't answer the knock at all — the ${kindName} is off the table. Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
         return null;
       }
       if (j.score >= 55) return this._formPeerLink(targetId, { kind: kind });
       if (j.score >= 35) return this._stagePeerCounter(targetId, { kind: kind }, j);
-      this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut — just not today.`);
+      // THE CLIMB IS VISIBLE (journey-scale r2 2026-10-11): see proposeLink —
+      // the decline names the climb verbs with their real numbers. "Join
+      // them" is not among them: joining is leaving Haven (see proposeLink).
+      this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut — just not today. The climb is real, and it is visible: walk to their fire and sit with their book — study their codex (+3 in their eyes, once); win where the region hears it — every victory carries your name (+2 each); give it weeks — old slights fade (+1 a week). Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
       try { this._nudgeOpinion(targetId, -5); } catch (e) {}
       return null;
     },

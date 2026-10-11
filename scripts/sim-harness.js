@@ -370,7 +370,10 @@ function driveFights(Game, policy, ctx) {
     try {
       const f = Game.tbfight;
       if (!f) return 'none';
-      return f.turnIdx + ':' + f.fighters.map(x => Math.round(x.hp || 0)).join(',') + ':' + (f.over ? 1 : 0);
+      // Positions included: a stall where nobody moves or bleeds (the
+      // turtle standoff — journey-scale r2 2026-10-11) must read as
+      // no-progress. turnIdx alone always changes and masked it.
+      return f.fighters.map(x => Math.round(x.hp || 0) + '@' + (x.mx != null ? x.mx : '?') + ',' + (x.my != null ? x.my : '?')).join(';') + ':' + (f.over ? 1 : 0);
     } catch (e) { return 'err'; }
   };
   while (Game.tbfight && !Game.tbfight.over && guard++ < 200) {
@@ -397,7 +400,7 @@ function driveFights(Game, policy, ctx) {
       } catch (e) { break; }
     } else break;
     const s = sig();
-    if (s === lastSig) { if (++still > 10) { ctx.notes.push('driveFights: no progress for 10 rounds, breaking'); break; } }
+    if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} break; } }
     else { still = 0; lastSig = s; }
   }
 }
