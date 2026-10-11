@@ -1054,7 +1054,7 @@
     if (label === 'Hunt') { Game.huntAnimal(); return; }
     if (label === 'Stalk') { try { Game.audioEvent('animalStalk'); } catch (e) {} Game.stalkAnimal(); return; }
     if (label === 'Talk') { talkAction(); return; }
-    if (label === 'Clear the way' && extra && extra.blockX !== undefined) {
+    if (extra && extra.blockX !== undefined) {
       Game.clearBlockage(extra.blockX, extra.blockY);
       return;
     }
@@ -1185,7 +1185,11 @@
           if (block && !seen.has('Clear the way')) {
             if (block.blockType === 'creek' && Game.woodCount() < 4) continue;
             seen.add('Clear the way');
-            items.push({ cx: px, cy: py, label: 'Clear the way', blockDir: d.dir, blockX: nx, blockY: ny });
+            // NAME THE BLOCKAGE (Steve bug report 2026-10-11): "clear the way"
+            // on an invisible blockage reads as a bug. The button names what
+            // you're clearing — the blockage lives on the next node, off-screen.
+            const _blabel = { fallen_tree: '🪵 Clear the fallen tree', rubble: '🪨 Clear the rubble', washed_out: '🌊 Cross the washed-out gap', creek: '🌉 Bridge the creek' }[block.blockType] || 'Clear the way';
+            items.push({ cx: px, cy: py, label: _blabel, blockDir: d.dir, blockX: nx, blockY: ny });
           }
         } catch (e) {}
       }
@@ -14010,7 +14014,7 @@
     // you with a reason.
     if (tx < 0 || tx > 8 || ty < 0 || ty > 8) {
       const r = Game.tryNodeExit(step.dx, step.dy);
-      if (r && r.blocked) toast(r.blocked.blockType === 'creek' ? '🌊 Creek blocks the way — bridge it or swim it.' : `🚧 Blocked ${r.dir} — clear the way first.`);
+      if (r && r.blocked) { const _bt = r.blocked.blockType; const _bname = { fallen_tree: 'A fallen tree', rubble: 'Rubble', washed_out: 'A washed-out gap' }[_bt]; toast(_bt === 'creek' ? '🌊 Creek blocks the way — bridge it or swim it.' : _bname ? `🚧 ${_bname} blocks the ${r.dir} path — clear it to pass.` : `🚧 Blocked ${r.dir} — clear the way first.`); }
       // NODE EXIT (Steve 2026-10-06): a successful crossing kills hold-to-move.
       // A held finger must not chain-travel into the next node unintentionally.
       if (r && r.moved) MoveAnim.clearHold();
