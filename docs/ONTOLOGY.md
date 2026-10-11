@@ -1245,6 +1245,19 @@ Spoken villager dialogue via Piper TTS (open-source neural TTS, MIT voices). Pip
 
 **Consumes:** —
 
+### voice-system (`voice-system.js`)
+Fixed System narrator voice lines (ElevenLabs, pre-generated MP3s in src/audio/system/). Game.playSystemLine(id) fetches the MP3 as a blob and plays it through the EXISTING Game.audio graph — same bus, same mute, same gesture unlock as Piper voice. Manifest fetched once and cached; audio blobs cached per id.
+
+**Provides:** Game.playSystemLine(id), Game.systemLineEntry(id), Game.systemLineIds(), Game.systemAudioManifest()
+
+**Rules:**
+- Never auto-play before a user gesture (code: Game._voiceUnlocked gate, same one-way latch as voice-piper).
+- Mute silences System lines like every other audio (code: Game.audio.isMuted() gate; playVoice routes through the master gain).
+- Unknown id warns and no-ops, never throws (code: playSystemLine 'unknown').
+- New lines supersede: playVoice never queues speech behind speech, so callers stagger multi-line sequences themselves (code: app.js playVoice).
+
+**Consumes:** Game.audio.playVoice(blob), Game.audio.isMuted(), Game._voiceUnlocked
+
 ### waves (`waveLedger.js`)
 The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
 
