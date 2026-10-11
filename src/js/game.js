@@ -14959,7 +14959,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { wt = this.wrongTeaching(rid, pid, 'gratitude'); } catch (e) {}
             if (!wt) {
               this.say(`${first} presses something into your hand. "${plant ? plant.name : 'This'} — for what you did. Look for the ${plant ? (plant.leaf || 'leaves') : 'sign'}. You'll know it."`);
-              this.identifyPlant(pid, first);
+              // TEACH SOURCE HONESTY (longsim knowledge 2026-10-11): source is a
+              // channel type ('gratitude'), teacher name rides in teacherName.
+              this.identifyPlant(pid, 'gratitude', first);
               // NPC ATTENTION (Steve 2026-10-07, Drama A1): they just taught
               // you something real — 💬 marks new knowledge worth following up on.
               try { const p = v.positions[rid]; if (p) this.drama('npcAlert', p.mx, p.my, 'dialogue'); } catch (e2) {}
@@ -15147,6 +15149,125 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (present) this.combineKnowledge(pid);
     },
 
+    // VILLAGER EXPERIMENTS (longsim knowledge 2026-10-11): Steve's law —
+    // foraged things are experimentable for calorie and sickness knowledge
+    // BEFORE full identification. The player path (testCautiously /
+    // testMonsterMeat in food.js) was real in code but fired 0 times across
+    // 20x200-day sims — nobody presses a button they never discover. So the
+    // village experiments on its own now: once per day, a villager with food
+    // in their background runs the cautious protocol on one unknown lump (or
+    // unknown raw meat) from the camp stash, honestly, in the open, with real
+    // (small) risk. The verdict lands in sharedKnowledge and the rumor mill;
+    // the player learns by being there — presence-gated like every other fire
+    // lesson. (Away-from-home experiments are a documented future blank.)
+    villagerExperimentBeat(present) {
+      const v = this.state.village;
+      if (!v || !v.roster) return;
+      const day = (this.state.scholar || {}).day || 0;
+      if (v.lastExperimentDay === day) return; // one experiment per day
+      if (!present) return; // the story waits until you're there to witness it
+      // target: an unknown plant lump in the camp stash, else unknown raw meat
+      const stash = (this.state.scholar || {}).prepStash || [];
+      let lump = null, pid = null;
+      for (const cont of stash) {
+        if (!cont || !cont.lump) continue;
+        const unk = Object.keys(cont.lump || {}).filter(p => !this.plantKnown(p));
+        if (!unk.length) continue;
+        let best = null, bestN = -1;
+        for (const c of unk) { const n = ((cont.lump[c] || {}).units || 0); if (n > bestN) { bestN = n; best = c; } }
+        if (best) { lump = cont; pid = best; break; }
+      }
+      let meatIt = null, meatMid = null;
+      if (!pid) {
+        const inv = (this.state.scholar || {}).inventory || [];
+        for (const it of inv) {
+          if (it && it.foodKind === 'meat' && it.edible === false) {
+            const mid = String(it.plantId || '').replace(/^meat_/, '');
+            if (mid && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+          }
+        }
+      }
+      if (!pid && !meatIt) return;
+      // tester: someone at haven with food in their background, else anyone
+      // (a little randomness so it's not always the same person).
+      const cands = (v.roster || []).filter(rid =>
+        rid !== this.villagerId && !(v.away && v.away[rid]) && !((this.getPerson(rid) || {}).dead));
+      if (!cands.length) return;
+      const foodOcc = /cook|chef|forag|botan|herbal|hunter|gather|farm|nurse|medic/i;
+      let tester = cands[0], tScore = -1;
+      for (const rid of cands) {
+        let s = Math.random();
+        try { if (foodOcc.test(String((this.getPerson(rid) || {}).formerOccupation || ''))) s += 2; } catch (e) {}
+        if (s > tScore) { tScore = s; tester = rid; }
+      }
+      const tname = this.displayName(tester);
+      v.lastExperimentDay = day;
+      try { this.villagerGainXP(tester, 'survival', 1, 'experimenting'); } catch (e) {}
+      if (pid) {
+        const p = (this.data.plants || []).find(x => x.id === pid);
+        if (!p) return;
+        // the protocol consumes a couple of shoots
+        try {
+          const cell = lump.lump[pid] || {};
+          cell.units = Math.max(0, (cell.units || 0) - 2);
+          if (cell.units <= 0) delete lump.lump[pid];
+        } catch (e) {}
+        const ed = p.edibility || 'safe';
+        const verdict = ed === 'avoid' ? 'avoid' : ed === 'cook' ? 'cook' : ed === 'caution' ? 'caution' : 'safe';
+        const desc = (p.description || 'unfamiliar plant').toLowerCase();
+        // the protocol, narrated honestly (true name never spoken pre-naming)
+        if (verdict === 'avoid') {
+          try { this.hurtVillager(tester, 10, 'experiment'); } catch (e) {}
+          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. By evening ${tname} is thoroughly, educationally sick. "NOT food," they announce to the fire, pale. "My body told me so." The lesson is learned the hard way — and now the whole village knows it.`);
+        } else if (verdict === 'cook') {
+          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. Raw, it knots the stomach. Cooked... fine. The fire learns the rule before the name: cook it, or else.`);
+        } else if (verdict === 'caution') {
+          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. Edible, but it argues on the way down. The fire's verdict: food, carefully. Small amounts.`);
+        } else {
+          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. An hour passes. Then another. Nothing. The fire nods. That's dinner, maybe.`);
+        }
+        // you watched the whole protocol: the verdict lands with the name.
+        // (Parity with testCautiously's identifyAs: name + tested verdict.)
+        if (this.identifyPlant(pid, 'tested', tname)) {
+          const entry = this.state.codex.plants[pid];
+          if (entry) entry.tested = verdict;
+          if (verdict !== 'safe') this.say(`The ${this.journalName()} notes it: ${p.name} — ${verdict === 'avoid' ? 'NOT food' : verdict === 'cook' ? 'cook it, or else' : 'edible, carefully'}. (${tname} tested it.)`);
+        }
+        // the village learns: tester + shared record (verdict rides along)
+        try { this.villagerLearnsPlant(tester, pid, 'tested'); } catch (e) {}
+        v.sharedKnowledge = v.sharedKnowledge || {};
+        if (!v.sharedKnowledge[pid]) v.sharedKnowledge[pid] = { discoveredBy: tester, day, level: 1 };
+        v.sharedKnowledge[pid].tested = verdict;
+        v.sharedKnowledge[pid].testedBy = tester;
+        v.plantRumors = v.plantRumors || {};
+        if (!v.plantRumors[pid]) v.plantRumors[pid] = { day };
+        return;
+      }
+      // unknown raw meat: the same protocol testMonsterMeat runs, honestly,
+      // attributed. (The whole meat-safety economy hung on that one action —
+      // markMonsterFoodSafe's only caller was testMonsterMeat.)
+      const mdef = (this.data.monsters || []).find(m => m.id === meatMid) || {};
+      let mname = 'something';
+      try { mname = this.monsterNoun ? this.monsterNoun(meatMid) : 'something'; } catch (e) {}
+      const toxic = !!(mdef.toxicFlesh || meatMid === 'belltoad');
+      if (toxic) {
+        try { this.hurtVillager(tester, 15, 'experiment'); } catch (e) {}
+        if (!this.state.codex.monsters) this.state.codex.monsters = {};
+        const e = this.state.codex.monsters[meatMid] || {};
+        e.foodSafe = false; e.foodTested = 'poison'; e.foodTestedBy = tester;
+        this.state.codex.monsters[meatMid] = e;
+        meatIt.prep = '☠️ POISON. Tested, the hard way. Never eat this.';
+        this.say(`${tname} sets aside time with the ${mname} flesh. Look, smell, touch — then the smallest taste, and wait. Their tongue goes numb. Their stomach heaves. "NOT food," they gasp. "Poison." The ${this.journalName()} notes it in grim letters. You will not make this mistake twice — ${tname} already made it for you.`);
+      } else {
+        this.markMonsterFoodSafe(meatMid, 'tested');
+        try {
+          const e2 = this.state.codex.monsters[meatMid] || {};
+          e2.foodTestedBy = tester; this.state.codex.monsters[meatMid] = e2;
+        } catch (e) {}
+        this.say(`${tname} sets aside time with the ${mname} flesh. Look, smell, touch — then the smallest taste, and wait. An hour passes. Calm stomach. Another hour. Nothing. "It's food," ${tname} tells the fire. "You know it in your gut. Literally." The ${this.journalName()} notes it.`);
+      }
+    },
+
     // isKnowledgeTrader: some people trade in knowledge. They know things deeply
     // and they'll share — for food, favors, or knowledge in return.
     // "I'll tell you what's safe to eat in the north field, if you tell me
@@ -15257,7 +15378,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const tp = (this.data.plants || []).find(x => x.id === trade);
         this.say(`Trade: you teach ${first} about ${tp ? tp.name : trade}. They teach you about ${tCalled}. Knowledge for knowledge.`);
         // the price is actually collected: they learn what you taught them.
-        this.villagerLearnsPlant(vid, trade);
+        // SOURCE HONESTY (longsim knowledge 2026-10-11): the channel was
+        // missing — they learned it as trade price.
+        this.villagerLearnsPlant(vid, trade, 'traded');
       } else {
         this.say(`${first} trusts you. "Come here. Let me tell you about ${tCalled}..." (High trust — free.)`);
       }
@@ -22811,6 +22934,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.ambientSocial(present); } catch (e) {}
       // LIVING WORLD: knowledge moves human-to-human, by the fire.
       try { this.firesideTeaching(present); } catch (e) {}
+      // LIVING WORLD: the village experiments on its own (longsim knowledge
+      // 2026-10-11) — cautious testing of unknowns, in the open, by the fire.
+      try { this.villagerExperimentBeat(present); } catch (e) {}
       // UNIFIED PERSON SYSTEM (idle-village sim 2026-10-09): the old filter
       // (!data.villagers.find) matched NOBODY after hydration moved every
       // roster member into data.villagers — the home village silently stopped
@@ -22931,7 +23057,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const undiscovered = this.data.plants.filter(p => !this.state.codex.plants[p.id]);
             if (undiscovered.length && Math.random() < 0.3) {
               const p = undiscovered[Math.floor(Math.random() * undiscovered.length)];
-              if (this.identifyPlant(p.id, first)) {
+              // TEACH SOURCE HONESTY (longsim knowledge 2026-10-11): 'sample',
+              // teacher name in teacherName.
+              if (this.identifyPlant(p.id, 'sample', first)) {
                 this.say(`${first} brought you a sample. The ${this.journalName()} grows.`);
               }
             } else {
@@ -36321,6 +36449,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // entries carry their provenance.
       const preCodex = !this.state.scholar.codexUnlocked;
       this.state.codex.plants[pid] = { identifiedDay: this.state.scholar.day, level: 1, harvests: 0, tastings: 0, by: source || 'observation', journal: preCodex };
+      // TESTED VERDICTS TRAVEL (longsim knowledge 2026-10-11): if the village
+      // already ran the cautious protocol on this plant, the verdict comes
+      // with the name — that's the whole point of the village experimenting.
+      // Fires for every later identification channel (fireside, taught, ...).
+      try {
+        const sh = ((this.state.village || {}).sharedKnowledge || {})[pid];
+        const entry0 = this.state.codex.plants[pid];
+        if (sh && sh.tested && entry0 && !entry0.tested) {
+          entry0.tested = sh.tested;
+          let tby = 'someone';
+          try { tby = this.displayName(sh.testedBy); } catch (e) {}
+          const vtxt = sh.tested === 'avoid' ? 'NOT food' : sh.tested === 'cook' ? 'cook it, or else' : sh.tested === 'caution' ? 'edible, carefully' : 'safe';
+          this.say(`(The village already tested this one — ${tby} did the careful tasting. Verdict: ${vtxt}.)`);
+        }
+      } catch (e) {}
       this.state.codex.encounters[pid] = 99;
       this.refreshItemNames(pid);
       this.integrate(source === 'taught' ? 2 : 3, source === 'taught' ? 'taught' : 'discovery');
