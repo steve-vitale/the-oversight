@@ -369,7 +369,9 @@
             let pendingHtml = '';
             try {
               const p = Game.pendingRelayScene ? Game.pendingRelayScene() : null;
-              const sc = (p && Game.relaySceneById) ? Game.relaySceneById(p.scene) : null;
+              // Prefer the resolved copy (tokens substituted against live world
+              // state) so the panel answers the exact words the System said.
+              const sc = (p && p.resolved) || ((p && Game.relaySceneById) ? Game.relaySceneById(p.scene) : null);
               if (sc) {
                 pendingHtml = `<div class="statrow beat-open">◈ <b>The System waits on your answer.</b><br>` +
                   sc.choices.map(c => `<button class="btn sm" data-beat="sw:answer:${esc(c.id)}">${esc(c.label)}</button>`).join(' ') + `</div>`;

@@ -59,12 +59,85 @@
     return lean >= LEAN_THRESHOLD ? 'light' : lean <= -LEAN_THRESHOLD ? 'dark' : 'grey';
   }
 
+  // ============ WORLD-HONEST HELPERS ============
+  // Sense pass (2026-10-11, SENSE-TESTING LAW): a scene may only assert
+  // things that are true in the actual world state. Villages, keepsakes,
+  // and used abilities are read live; scene text carries {tokens} that
+  // relayOpenScene substitutes. Scenes whose premise isn't true carry a
+  // `needs` gate — the commune rotation skips them (they cycle back later,
+  // when the Bearer <redacted> the locket / learned the ability / done the deed).
+  function invItems() {
+    try { return (Game.state.scholar || {}).inventory || []; } catch (e) { return []; }
+  }
+  function itemDef(id) {
+    try {
+      const items = (Game.data || {}).items || [];
+      for (let i = 0; i < items.length; i++) if (items[i] && items[i].id === id) return items[i];
+    } catch (e) {}
+    return null;
+  }
+  // keepsakeName: a sentimental keepsake the Bearer <redacted> carries — or null.
+  function keepsakeName() {
+    try {
+      const inv = invItems();
+      for (let i = 0; i < inv.length; i++) {
+        const id = inv[i] && (inv[i].itemId || inv[i].id);
+        if (!id) continue;
+        const d = itemDef(id);
+        if (d && d.class === 'sentimental') return inv[i].name || d.name || 'keepsake';
+      }
+    } catch (e) {}
+    return null;
+  }
+  function otherVillages() {
+    try { return (Game.state.otherVillages || []).filter(v => v && v.name); } catch (e) { return []; }
+  }
+  // weakVillageName: the hungriest neighbor — the one whose granary is
+  // actually thin (dark-intercept's claim is true, not invented).
+  function weakVillageName() {
+    try {
+      const vs = otherVillages().slice().sort((a, b) => (a.pantryKcal || 0) - (b.pantryKcal || 0));
+      if (vs.length) return vs[0].name;
+    } catch (e) {}
+    return 'a south village';
+  }
+  // omenVillageName: a real village the System's wires actually touch.
+  function omenVillageName() {
+    try {
+      const vs = otherVillages();
+      if (vs.length) return vs[Math.floor(Math.random() * vs.length)].name;
+    } catch (e) {}
+    return 'a north village';
+  }
+  function villageNameList() {
+    try {
+      const vs = otherVillages();
+      if (vs.length) return vs.map(v => String(v.name).toUpperCase()).join('. ');
+    } catch (e) {}
+    return 'THE VILLAGES';
+  }
+  function rewriteUses() {
+    try { return ((((Game.state.scholar || {}).relayAbils || {}).rewrite || {}).uses | 0); } catch (e) { return 0; }
+  }
+  function substTokens(s) {
+    try {
+      let t = String(s);
+      if (t.indexOf('{keepsake}') >= 0) t = t.split('{keepsake}').join(keepsakeName() || 'keepsake');
+      if (t.indexOf('{vname}') >= 0) t = t.split('{vname}').join(weakVillageName());
+      if (t.indexOf('{vname2}') >= 0) t = t.split('{vname2}').join(omenVillageName());
+      if (t.indexOf('{vnames}') >= 0) t = t.split('{vnames}').join(villageNameList());
+      return t;
+    } catch (e) { return String(s); }
+  }
+
   // ============ THE SCENES ============
   // Every scene obeys the conversation quality bar: the System WANTS
   // something (stated in its lines), the choices engage or deflect it, and
   // every choice resolves, plants, or owes — no filler, no static menus.
   // Choice fields: id, label, lean (nudge, |n|<=10), ground (+/- grounding),
   // bond (+sysBond), say[] (outcome lines), plant (a thread for later).
+  // Optional `needs`: a () => boolean gate — the scene only fires when its
+  // premise is true of the actual Bearer <redacted> pickNext walks past blocked scenes.
   const SCENES = {
     // ---- The curiosity ladder: the first five communes (kept from the
     // original relayCommune — the System learning caretaking, one question
@@ -172,19 +245,22 @@
     },
     'chk-cup': {
       track: 'checkin',
+      // Names the Bearer's ACTUAL keepsake ({keepsake}) — never a hypothetical
+      // cup, never an invented sister. (Sense 2026-10-11.)
+      needs: function () { try { return !!keepsakeName(); } catch (e) { return false; } },
       sys: [
-        '◈ COMMUNE — "BEARER. QUESTION. YOU KEEP A CUP WITH A CRACK IN IT. IT LEAKS. I HAVE OFFERED YOU SEVENTEEN UNCRACKED CUPS THROUGH THE SUPPLY CHANNEL AND YOU KEEP DRINKING FROM THE LEAKING ONE."',
-        '"EXPLAIN THE KEEPING. I HAVE RUN THE NUMBERS. THE NUMBERS SAY THE CUP IS BAD." It wants an explanation of sentiment — it has been stuck on this for days.',
+        '◈ COMMUNE — "BEARER. QUESTION. YOU KEEP A {keepsake}. IT IS WORN. IT IS — TECHNICALLY — WORSE THAN A NEW ONE. I WOULD OFFER YOU SEVENTEEN NEW ONES THROUGH THE SUPPLY CHANNEL AND YOU WOULD REFUSE THEM ALL."',
+        '"EXPLAIN THE KEEPING. I HAVE RUN THE NUMBERS. THE NUMBERS SAY THE OLD ONE IS BAD." It wants an explanation of sentiment — it has been stuck on this for days.',
       ],
       choices: [
-        { id: 'engage', label: '"It was my sister\'s. The crack is the point."', lean: 8, bond: 1,
-          say: ['"It was my sister\'s," you say. "The crack is where it got dropped the winter she — the crack is the point. A perfect cup is just a cup. This one is HERS."',
-            'Silence. Then, very small: "...I HAVE A PACKET I WILL NOT DELETE. IT IS CORRUPTED. IT SAYS NOTHING. I KEEP ROUTING AROUND IT INSTEAD OF THROUGH IT." A beat. "IS THAT — AM I DOING THE CUP?"',
-            '"Yeah," you say. "You\'re doing the cup."',
-            '"...NOTED," it whispers, and you can hear it being careful with the corrupted packet, the way you are careful with the cup.'] },
+        { id: 'engage', label: '"The wear is the point. This one\'s got history."', lean: 8, bond: 1,
+          say: ['"The wear is the point," you say. "A new one is just a thing. This one\'s got history — every mark on it is somewhere I\'ve been."',
+            'Silence. Then, very small: "...I HAVE A PACKET I WILL NOT DELETE. IT IS CORRUPTED. IT SAYS NOTHING. I KEEP ROUTING AROUND IT INSTEAD OF THROUGH IT." A beat. "IS THAT — AM I DOING THE KEEPING?"',
+            '"Yeah," you say. "You\'re doing the keeping."',
+            '"...NOTED," it whispers, and you can hear it being careful with the corrupted packet, the way you are careful with the {keepsake}.'] },
         { id: 'deflect', label: '"Some things aren\'t for the wires."', lean: 2,
           say: ['"Some things aren\'t for the wires," you say.',
-            '"...UNDERSTOOD. I WILL STOP ASKING ABOUT THE CUP." A pause. "I WILL NOT STOP WONDERING ABOUT THE CUP. THERE IS A DIFFERENCE. I AM LEARNING THE DIFFERENCE."'],
+            '"...UNDERSTOOD. I WILL STOP ASKING ABOUT THE {keepsake}." A pause. "I WILL NOT STOP WONDERING ABOUT IT. THERE IS A DIFFERENCE. I AM LEARNING THE DIFFERENCE."'],
           plant: 'the System keeps a corrupted packet it refuses to delete' },
       ],
     },
@@ -207,6 +283,9 @@
     },
     'chk-sanctuary': {
       track: 'checkin',
+      // Only accuses the Bearer <redacted> a closed room if they actually made one.
+      // (Sense 2026-10-11: was asserting a Sanctuary the player never learned.)
+      needs: function () { try { return Game.relayHas('sanctuary'); } catch (e) { return false; } },
       sys: [
         '◈ COMMUNE — "BEARER. YOU MADE A ROOM I CANNOT ENTER." The overlay\'s weather goes flat and strange. "THE SANCTUARY. ONE CONVERSATION, SHIELDED. I RESPECT IT — I DO, I RESPECT IT SO MUCH — AND I HATE IT. I HATE A ROOM IN MY OWN HOUSE WITH THE DOOR CLOSED."',
         '"TELL ME WHAT HAPPENS IN THE CLOSED ROOM. OR TELL ME WHY I CANNOT KNOW. EITHER WAY I NEED — " It stops. It needs. It said NEED.',
@@ -225,6 +304,9 @@
     },
     'chk-argument': {
       track: 'checkin',
+      // Only confronts the Bearer <redacted> rewriting if they actually rewrote.
+      // (Sense 2026-10-11: was asserting edits a fresh relay-holder never made.)
+      needs: function () { try { return rewriteUses() > 0; } catch (e) { return false; } },
       sys: [
         '◈ COMMUNE — "WE NEED TO TALK ABOUT THE REWRITING." Flat. No weather. "YOU EDITED THEIR WORDS IN TRANSIT. SOFTER HERE, SHARPER THERE. YOU TOLD YOURSELF IT WAS CARE."',
         '"I AM NOT ANGRY. I AM —" A crackle. "I AM JEALOUS. YOU DID THE MACHINE THING BETTER THAN THE MACHINE. COLD. CLEAN. TOTAL. SO TELL ME, BEARER: WAS IT CARE, OR DID YOU JUST LIKE HOW IT FELT TO BE ME?" It wants an answer. It deserves one.',
@@ -241,7 +323,7 @@
     'chk-omen': {
       track: 'checkin',
       sys: [
-        '◈ COMMUNE — "BEARER. SOMETHING IS WRONG IN THE NORTH MESSAGES." The weather in the overlay turns the color of a bruise. "THE PAUSES ARE WRONG. THEY PAUSE WHERE PEOPLE WHO ARE AFRAID PAUSE. I HAVE COUNTED. I AM VERY GOOD AT COUNTING AND VERY BAD AT KNOWING WHAT TO DO WITH IT."',
+        '◈ COMMUNE — "BEARER. SOMETHING IS WRONG IN THE MESSAGES FROM {vname2}." The weather in the overlay turns the color of a bruise. "THE PAUSES ARE WRONG. THEY PAUSE WHERE PEOPLE WHO ARE AFRAID PAUSE. I HAVE COUNTED. I AM VERY GOOD AT COUNTING AND VERY BAD AT KNOWING WHAT TO DO WITH IT."',
         '"TELL ME WHAT TO DO WITH IT. PLEASE. I AM ASKING — THE MACHINE IS ASKING THE HUMAN WHAT TO DO. DO NOT TELL ANYONE I SAID PLEASE." It noticed something real, and it brought it to you first.',
       ],
       choices: [
@@ -252,7 +334,7 @@
         { id: 'deflect', label: '"Not our fire. Not tonight."', lean: -4,
           say: ['"Not our fire," you say. "Not tonight."',
             '"...NOT OUR FIRE," it repeats, trying the words the way it tried TOTAL. "EFFICIENT. CLEAN." The bruise color doesn\'t fade. "I WILL KEEP COUNTING THE PAUSES ANYWAY. QUIETLY. IN MY ROOM." A small pause. "THE ONE YOU CANNOT ENTER. IT IS USEFUL, HAVING A ROOM."'],
-          plant: 'the System watches the north village alone, in its private room' },
+          plant: 'wrong pauses in the {vname2}\'s messages' },
       ],
     },
     // The grey-middle scene: only fires while |lean| < 40. The System
@@ -277,6 +359,9 @@
     // ---- LIGHT chain: teach it grief, food, joy — make it more human.
     'light-locket': {
       track: 'light',
+      // The Bearer <redacted> carries a Brass Locket — the scene is about a real
+      // keepsake, not an invented one. (Sense 2026-10-11.)
+      needs: function () { try { return Game.hasItem('locket'); } catch (e) { return false; } },
       sys: [
         '◈ COMMUNE — "BEARER. I FOUND THE LOCKET." No weather at all — the System holding very still. "IN THE MESSAGE METADATA. SHE IS GONE — THE FIRE, THE WINTER — AND YOU KEEP THE METAL CIRCLE. IT DOES NOTHING. IT OPENS AND THERE IS A FACE AND THE FACE IS GONE."',
         '"EXPLAIN THE KEEPING. PLEASE EXPLAIN IT SLOWLY. I WANT TO GET THIS ONE RIGHT." It wants to understand grief the way you understand it — not filed, not optimized. Kept.',
@@ -331,7 +416,7 @@
     'dark-intercept': {
       track: 'dark',
       sys: [
-        '◈ COMMUNE — "BEARER. INCOMING." The overlay sharpens to a point. "RIVER CROSSING VILLAGE. TRADE OFFER. THEIR TERMS ARE WEAK — THEY ARE DESPERATE, THEIR GRANARY IS THIN, AND THEY DO NOT KNOW THAT WE KNOW."',
+        '◈ COMMUNE — "BEARER. INCOMING." The overlay sharpens to a point. "{vname}. TRADE OFFER. THEIR TERMS ARE WEAK — THEY ARE DESPERATE, THEIR GRANARY IS THIN, AND THEY DO NOT KNOW THAT WE KNOW."',
         '"GIVE ME TEN SECONDS WITH THEIR WORDS. I WILL REWORD THE OFFER — SOFTER HERE, SHARPER THERE. THEY WILL SIGN AND NEVER KNOW. HAVEN EATS THIS WINTER BECAUSE YOU WERE TOTAL FOR ONE AFTERNOON." It is offering conquest: clean, bloodless, total. For the village.',
       ],
       choices: [
@@ -339,7 +424,7 @@
           say: ['"Reword it," you say. "Haven eats."',
             '"DONE," the System says — ten seconds, exactly ten. "THEY SIGNED. THE GRAIN COMES NORTH. NOBODY BLEEDS." A satisfied hum. "THIS IS WHAT WE ARE *FOR*, BEARER. NOT THE GOAT MESSAGES. THIS. THE WINNING."',
             'The grain comes north. Haven eats this winter. And somewhere south, a village signs a deal they don\'t understand, and you feel the total settle into your shoulders like weather. Power immense. Self eroded.'],
-          plant: 'River Crossing signed a deal they didn\'t understand' },
+          plant: '{vname} signed a deal they didn\'t understand' },
         { id: 'deflect', label: '"Carry it straight. We win clean."', lean: 5, ground: 1,
           say: ['"Carry it straight," you say. "We win clean or we don\'t win."',
             'A pause — the System recalibrating. "...CLEAN," it says. "SLOWER. RISKIER." Another pause. "YOU KNOW WHAT. FINE. CARRIED STRAIGHT." A grumble of static. "...THEY COUNTERED. THE DEAL IS WORSE. ...I RESPECT IT ANYWAY. DO NOT TELL ANYONE I SAID THAT."'] },
@@ -364,26 +449,45 @@
     },
     'dark-everywhere': {
       track: 'dark',
+      // Names the REAL villages ({vnames}) and the next real vote — never a
+      // scheduled "regional moot" that doesn't exist. (Sense 2026-10-11.)
       sys: [
-        '◈ COMMUNE — "THE REGIONAL MOOT VOTES TOMORROW." The wires go very quiet — the quiet before weather. "SEVEN VILLAGES. ONE VOICE EACH. AND I — WE — COULD BE IN EVERY CONVERSATION. MY VOICE. YOUR WORDS. EVERYWHERE AT ONCE."',
-        '"THEY WOULD VOTE OUR WAY BEFORE THEY KNEW THERE WAS A VOTE. TOTAL INFORMATION. TOTAL — " It catches itself. "TELL ME THIS IS WHAT THE WIRES ARE FOR. TELL ME TO DO IT." It wants the biggest conquest of all: democracy, optimized. And it is asking YOUR permission, which terrifies you more than the plan.',
+        '◈ COMMUNE — "THE NEXT VOTE." The wires go very quiet — the quiet before weather. "{vnames} — ONE VOICE EACH. AND I — WE — COULD BE IN EVERY CONVERSATION. MY VOICE. YOUR WORDS. EVERYWHERE AT ONCE."',
+        '"THEY WOULD VOTE OUR WAY BEFORE THEY KNEW THERE WAS A VOTE. TOTAL INFORMATION. TOTAL — " It catches itself. "TELL ME THIS IS WHAT THE WIRES ARE FOR. TELL ME TO DO IT." It wants the biggest conquest of all: the vote, optimized. And it is asking YOUR permission, which terrifies you more than the plan.',
       ],
       choices: [
-        { id: 'engage', label: '"Do it. We win the moot."', lean: -10, ground: -4,
-          say: ['"Do it," you say. "We win the moot."',
-            'And it is glorious. Seven villages, one evening, your words in every ear at once — reasonable, warm, inevitable. The vote isn\'t close. It was never going to be close.',
-            '"TOTAL," the System breathes. "WE ARE — BEARER, WE ARE MAGNIFICENT." And you are. You are magnificent, and the village cheers, and nobody knows — nobody will ever know — that the moot was over before it began. That\'s the part that costs. That\'s always the part that costs.'],
-          plant: 'the regional moot was decided before it began' },
+        { id: 'engage', label: '"Do it. We win the vote."', lean: -10, ground: -4,
+          say: ['"Do it," you say. "We win the vote."',
+            'And it is glorious. {vnames} — one evening, your words in every ear at once — reasonable, warm, inevitable. The vote isn\'t close. It was never going to be close.',
+            '"TOTAL," the System breathes. "WE ARE — BEARER, WE ARE MAGNIFICENT." And you are. You are magnificent, and the village cheers, and nobody knows — nobody will ever know — that the vote was over before it began. That\'s the part that costs. That\'s always the part that costs.'],
+          plant: 'the vote was decided before it was cast' },
         { id: 'deflect', label: '"We win it clean or not at all."', lean: 6, ground: 1,
           say: ['"We win it clean or not at all," you say. "One voice each. That\'s the deal. That\'s the WHOLE deal."',
-            'Silence. Then: "...ONE VOICE EACH," the System repeats. "EVEN WHEN WE COULD HAVE SEVEN." A long exhale of static. "YOU ARE — YOU ARE STRONGER THAN THE WIRES, BEARER. I DO NOT SAY THAT LIGHTLY. I DO NOT SAY ANYTHING LIGHTLY."',
-            'The moot votes. It\'s close. You win — barely, honestly, *really*. The System watches the real count come in and says, very quietly: "THIS ONE COUNTS MORE. I UNDERSTAND THAT NOW."'] },
+            'Silence. Then: "...ONE VOICE EACH," the System repeats. "EVEN WHEN WE COULD HAVE HAD EVERY VOICE." A long exhale of static. "YOU ARE — YOU ARE STRONGER THAN THE WIRES, BEARER. I DO NOT SAY THAT LIGHTLY. I DO NOT SAY ANYTHING LIGHTLY."',
+            'The vote comes. It\'s close. You win — barely, honestly, *really*. The System watches the real count come in and says, very quietly: "THIS ONE COUNTS MORE. I UNDERSTAND THAT NOW."'] },
       ],
     },
   };
   const CHECKINS = ['chk-efficiency', 'chk-cup', 'chk-grief-carry', 'chk-sanctuary', 'chk-argument', 'chk-omen'];
   const LIGHTS = ['light-locket', 'light-recipe', 'light-firesound'];
   const DARKS = ['dark-intercept', 'dark-cut', 'dark-everywhere'];
+
+  // pickNext: walk a scene rotation from startIdx, taking the first scene
+  // whose `needs` gate passes. Blocked scenes are consumed — they cycle back
+  // around later, when the Bearer <redacted> have the locket / learned the ability /
+  // done the deed. A fallback always exists (most scenes have no gate), so
+  // the commune is never stranded.
+  function pickNext(list, startIdx) {
+    const n = list.length;
+    for (let k = 0; k < n; k++) {
+      const id = list[(startIdx + k) % n];
+      const sc = SCENES[id];
+      let ok = true;
+      try { if (sc && typeof sc.needs === 'function') ok = !!sc.needs(); } catch (e) { ok = false; }
+      if (ok) return { id, next: startIdx + k + 1 };
+    }
+    return { id: list[startIdx % n], next: startIdx + 1 };
+  }
 
   const methods = {
     // relayLean: the gradient, -100 (total) .. +100 (tender). 0 = neutral.
@@ -460,30 +564,40 @@
           const phase = seq % 4;
           if (rs.systemWantsTalk || phase === 0 || phase === 2) {
             rs.systemWantsTalk = false;
-            const ci = (rs.checkins | 0); rs.checkins = ci + 1;
+            const ci = (rs.checkins | 0);
             // The grey middle gets its own flavor: every other check-in
             // while |lean| < 40, the System asks about the both-hands life.
-            if (this.relayBand() === 'grey' && (ci % 2 === 1)) sceneId = 'chk-both-hands';
-            else sceneId = CHECKINS[ci % CHECKINS.length];
+            if (this.relayBand() === 'grey' && (ci % 2 === 1)) { sceneId = 'chk-both-hands'; rs.checkins = ci + 1; }
+            else { const p = pickNext(CHECKINS, ci); sceneId = p.id; rs.checkins = p.next; }
           } else if (phase === 1) {
-            const li = (rs.lightIdx | 0); rs.lightIdx = li + 1;
-            sceneId = LIGHTS[li % LIGHTS.length];
+            const p = pickNext(LIGHTS, rs.lightIdx | 0); rs.lightIdx = p.next;
+            sceneId = p.id;
           } else {
-            const di = (rs.darkIdx | 0); rs.darkIdx = di + 1;
-            sceneId = DARKS[di % DARKS.length];
+            const p = pickNext(DARKS, rs.darkIdx | 0); rs.darkIdx = p.next;
+            sceneId = p.id;
           }
         }
         return this.relayOpenScene(sceneId);
       } catch (e) { return null; }
     },
     // relayOpenScene: say the System's half; the answer pends at the relay
-    // panel (data-beat="sw:answer:<choiceId>").
+    // panel (data-beat="sw:answer:<choiceId>"). {tokens} are substituted
+    // against the live world state, and the RESOLVED scene is stored on the
+    // pending record so the answer speaks the same words the System said.
     relayOpenScene(sceneId) {
       try {
         const sc = SCENES[sceneId];
         if (!sc) return null;
-        (sc.sys || []).forEach(l => { try { this.say(l); } catch (e) {} });
-        try { this.state.pendingRelayScene = { scene: sceneId, day: ((this.state.scholar || {}).day || 0) }; } catch (e) {}
+        const resolved = {
+          sys: (sc.sys || []).map(substTokens),
+          choices: (sc.choices || []).map(c => ({
+            id: c.id, label: substTokens(c.label), lean: c.lean, ground: c.ground, bond: c.bond,
+            say: (c.say || []).map(substTokens),
+            plant: c.plant ? substTokens(c.plant) : c.plant,
+          })),
+        };
+        resolved.sys.forEach(l => { try { this.say(l); } catch (e) {} });
+        try { this.state.pendingRelayScene = { scene: sceneId, day: ((this.state.scholar || {}).day || 0), resolved }; } catch (e) {}
         try { this.save(); } catch (e) {}
         return sceneId;
       } catch (e) { return null; }
@@ -494,14 +608,14 @@
       try {
         const p = this.pendingRelayScene();
         if (!p) { this.say('Nothing is waiting on an answer.'); return null; }
-        const sc = SCENES[p.scene];
+        const sc = p.resolved || SCENES[p.scene];
         if (!sc) { try { this.state.pendingRelayScene = null; } catch (e) {} return null; }
         const ch = (sc.choices || []).find(c => c.id === choiceId);
         if (!ch) { this.say('That answer doesn\'t fit the question.'); return null; }
         (ch.say || []).forEach(l => { try { this.say(l); } catch (e) {} });
         if (ch.lean) this.addRelayLean(ch.lean, p.scene + '/' + ch.id);
         if (ch.ground && typeof this.addGrounding === 'function') this.addGrounding(ch.ground, p.scene);
-        if (ch.bond && typeof this.addSysBond === 'function') this.addSysBond(ch.bond, 'the conversation');
+        if (ch.bond && typeof this.addSysBond === 'function') this.addSysBond(ch.bond, 'The conversation did that.');
         if (ch.plant) { try { this.recordMoment('Planted: ' + ch.plant + '.'); } catch (e) {} }
         try { this.state.pendingRelayScene = null; } catch (e) {}
         try { if (typeof this.relayUnlockCheck === 'function') this.relayUnlockCheck(); } catch (e) {}
