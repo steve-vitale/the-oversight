@@ -480,10 +480,28 @@
   // 'dlg:subject', which skips this hook once — acceptable.
   const _dlgTurnInner = Game.convoTurn;
   Game.convoTurn = function (vid, choiceId) {
-    const r = _dlgTurnInner.call(this, vid, choiceId);
-    if (r && !r.ended && typeof choiceId === 'string' && choiceId.indexOf('dlg:') === 0 &&
-        typeof this.convoWantPostTurn === 'function') {
-      try { return this.convoWantPostTurn(vid, choiceId, r) || r; } catch (e) { return r; }
+    let r = _dlgTurnInner.call(this, vid, choiceId);
+    if (r && !r.ended && typeof choiceId === 'string' && choiceId.indexOf('dlg:') === 0) {
+      if (typeof this.convoWantPostTurn === 'function') {
+        try { r = this.convoWantPostTurn(vid, choiceId, r) || r; } catch (e) {}
+      }
+      // WINDDOWN (socialite 2026-10-11): the dlg: handlers return early and
+      // never reach the base turn's budget enforcement — the energy budget
+      // didn't apply to the rebuild's primary verbs (measured: 60 exchanges
+      // on budget 3, conversation never winding down; one 10-kcal conversation
+      // farmed the full 40 words-trust allowance on "tell me more" spam).
+      // Run the shared check here; rebuild the menu only if a goodbye newly
+      // queued, so the continuer surfaces on this turn's choices.
+      try {
+        if (typeof this.convoMaybeWinddown === 'function') {
+          const c0 = this.convoGet(vid);
+          const wasQueued = !!(c0 && c0.winddownQueued);
+          const wd = this.convoMaybeWinddown(vid);
+          if (wd) return wd;
+          const c1 = this.convoGet(vid);
+          if (c1 && c1.winddownQueued && !wasQueued) r.choices = this.convoChoices(vid);
+        }
+      } catch (e) {}
     }
     return r;
   };

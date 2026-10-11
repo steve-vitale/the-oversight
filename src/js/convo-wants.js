@@ -150,7 +150,7 @@
       resolve(vid, resolution) {
         if (resolution === 'promised') {
           // They owe you now — that's a seed (the dead 'repay' seed's real wantId).
-          return { wantId: 'repay', note: 'the favor they still owe you for' };
+          return { wantId: 'repay', note: 'the kindness they feel they owe you for' };
         }
         if (resolution === 'engaged') {
           // Favor stated, no commitment — still hanging.
@@ -164,9 +164,13 @@
     repay: {
       pick(vid) { return 0; },
       opener(vid) {
+        // The debt is a PROMISE, not a deed — the fiction must not claim the
+        // player already did the favor (socialite 2026-10-11: the old lines
+        // said "what you did for me" when the player had only said "I'll do
+        // it" — fabricated shared history, Steve's conversation quality bar).
         return Game.convoPickCycle(vid, 'want:repay:open', [
-          '"I\'ve been thinking about what you did for me. I don\'t like owing."',
-          '"About last time — I haven\'t forgotten. I want to make it right."',
+          '"I\'ve been thinking about what you promised. I don\'t like owing kindness."',
+          '"About last time — I haven\'t forgotten what you said you\'d do. I want to return it."',
         ]);
       },
       engageBeat(vid) {
@@ -184,7 +188,7 @@
       closeLine(vid, resolution) { return null; },
       resolve(vid, resolution) {
         if (resolution === 'engaged') return null; // repaid, debt clear
-        return { wantId: 'repay', note: 'the favor they still owe you for' };
+        return { wantId: 'repay', note: 'the kindness they feel they owe you for' };
       },
     },
     seek_comfort: {
@@ -642,6 +646,15 @@
         (want.stage >= 2 ? 'engaged' : (how === 'left' ? 'abandoned' : 'unresolved'));
       want.stage = 3;
       want.resolution = resolution;
+      // CONSUME BEFORE PLANT (socialite 2026-10-11): the old seed was this
+      // conversation's unfinished business — now resolved. It must be
+      // deleted BEFORE the def plants its follow-up seed: the old order
+      // (plant, then delete-if-fromSeed) destroyed the new seed unconditionally,
+      // so promised favors never got their 'repay' follow-up. No def's
+      // resolve() reads the live seed, so the reorder is safe.
+      if (want.fromSeed) {
+        try { delete this.state.village.convoSeeds[vid]; } catch (e) {}
+      }
       let seed = null;
       try {
         // 'how' is passed so defs can distinguish a walked-away-from
@@ -650,9 +663,6 @@
         seed = want.def.resolve.call(this, vid, resolution, how);
       } catch (e) {}
       if (seed) this.convoPlantSeed(vid, seed);
-      if (want.fromSeed) {
-        try { delete this.state.village.convoSeeds[vid]; } catch (e) {}
-      }
     },
 
     // convoWant: the dialogue layer's read of the current want (id string).

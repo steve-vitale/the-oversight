@@ -3310,7 +3310,7 @@
       // reset here like rumorDone/speakBackDone's cousins.
       c._interpThanks = false;
       c.traderMentioned = false; c.pendingTrade = null;
-      c.reactiveQ = null; c.windingDown = false; c.pastDeflected = false;
+      c.reactiveQ = null; c.windingDown = false; c.winddownQueued = false; c.winddownSpurns = 0; c.pastDeflected = false;
       // MOOD (convo-mood.js): every conversation starts at a temperature
       // derived from the relationship as it stands and who they are right
       // now — never stored, re-derived fresh each time (Steve 2026-10-06).
@@ -3527,6 +3527,19 @@
     convoDropUnspoken(vid, choiceId) {
       const c = this.convoGet(vid);
       if (!c || choiceId === 'goon' || !c.heldBeats || !c.heldBeats.length) return;
+      // DODGE COUNTING (socialite 2026-10-11): a queued-but-unrevealed
+      // question the player moves past without tapping the continuer is being
+      // dodged — by ANY choice, not just silence. r12 counted silence only;
+      // recap/ask:/dlg: choices discarded the beat with no dodge recorded,
+      // and the first-conversation forceQ re-queued a fresh question every
+      // turn — heldAsk true at every turn end, winddown never firing
+      // (measured infinite). After 2 dodges the moment passes (askedQs
+      // marked inside convoHeldAskDodge).
+      if ((c.heldBeats || []).some(h => h && h.ask)) {
+        try { this.convoHeldAskDodge(vid); } catch (e) {}
+      }
+      c.heldBeats = c.heldBeats.filter(h => h.winddown);
+      if (!c.heldBeats.length) { c.heldAsk = false; c.winddownQueued = false; }
       c.heldBeats = c.heldBeats.filter(h => h.winddown);
       if (!c.heldBeats.length) { c.heldAsk = false; c.winddownQueued = false; }
       // STUCK-HELDASK (socialite 2026-10-10): the filter discards a queued-
@@ -3538,6 +3551,63 @@
       // flag wasn't). The flag tracks the BEAT, not the turn: no ask beat
       // queued, no heldAsk.
       else if (!c.heldBeats.some(h => h.ask)) { c.heldAsk = false; }
+    },
+
+    // convoMaybeWinddown(vid): the energy budget's enforcement, shared by the
+    // base turn tail and the dlg: early-return handlers (convo-dialogue.js).
+    // Queues the goodbye beat when the budget is spent (revealed via the
+    // continuer — one-beat turns, Steve 2026-10-05); ends naturally once the
+    // goodbye is winding down. A queued question gets asked before the
+    // goodbye (heldAsk gate). Returns the endConvo result when the
+    // conversation ends on this turn, else null.
+    // SPURN RULE (socialite 2026-10-11): the queued goodbye can't be dodged
+    // forever by never tapping the continuer — one more beat is grace ("take
+    // one more beat of a live thread"), the second spurn lands the goodbye
+    // unilaterally (spoken, never a silent chop). Without this the budget was
+    // decorative: hostile players held 60-exchange conversations on budget 3.
+    convoMaybeWinddown(vid) {
+      const c = this.convoGet(vid);
+      if (!c || !c.active) return null;
+      if (c.pendingQ || c.heldAsk || c.exchanges < c.budget) return null;
+      if (!c.windingDown && !c.winddownQueued) {
+        c.winddownQueued = true;
+        c.winddownSpurns = 0;
+        const cg = (this.data.characterGen || {}).convo || {};
+        const temp = this.npcTemper(vid);
+        let wdPool = (cg.winddowns || {})[temp] || (cg.winddowns || {}).default
+          || ['"Anyway — I should get back to it."'];
+        // RELATIONSHIP AGE (Steve 2026-10-06): old friends don't wind down
+        // formally. Close tier gets a brief, warm "I should..." — the
+        // conversation tapers like it does between people who'll talk
+        // again tomorrow.
+        try {
+          if (this.convoVoiceTier && this.convoVoiceTier(vid) === 'close' && Math.random() < 0.5) {
+            wdPool = ['"Alright — I should get back to it."', '"I should go. You know where to find me."',
+                      '"Okay. We\'ll pick this up later."'];
+          }
+        } catch (e) {}
+        const wd = this.convoPickCycle(vid, 'winddown', wdPool);
+        c.heldBeats.push({ text: wd, winddown: true });
+        return null;
+      }
+      if (c.windingDown) return this.endConvo(vid, 'natural');
+      // Queued but unrevealed, and the player took another beat instead of
+      // the continuer. One is grace; two is stonewalling.
+      c.winddownSpurns = (c.winddownSpurns || 0) + 1;
+      if (c.winddownSpurns >= 2) {
+        const bi = (c.heldBeats || []).findIndex(h => h && h.winddown);
+        const hb = bi >= 0 ? c.heldBeats.splice(bi, 1)[0] : null;
+        c.windingDown = true;
+        c.winddownQueued = false;
+        c.winddownSpurns = 0;
+        const line = (hb && hb.text) || '"Anyway — I should get back to it."';
+        this.sayLine(vid, line);
+        const wdChoices = (typeof this.convoWinddownChoices === 'function')
+          ? this.convoWinddownChoices(vid)
+          : [{ id: 'leave', label: '"I should go."' }];
+        return { line, choices: wdChoices, ended: false, windingDown: true, transcript: c.transcript.slice() };
+      }
+      return null;
     },
 
     convoTurn(vid, choiceId) {
@@ -4266,7 +4336,10 @@
         // stays coherent: they notice the silence, then let it go.
         const _pqdLapse = this.convoPendingQDodge(vid);
         if (_pqdLapse) done(_pqdLapse, '(say nothing)');
-        else this.convoHeldAskDodge(vid);
+        // HELDASK DODGE is counted in convoDropUnspoken (turn top) for every
+        // non-continuer choice — silence included — so no second count here
+        // (socialite 2026-10-11: counting twice marked the question asked
+        // after a single silence).
         }
       } else if (choiceId === 'subject') {
         // Change the subject — but LET THE PLAYER PICK, not a random jump.
@@ -4421,7 +4494,11 @@
             c.heldBeats.push({ text: GQ_LAPSE });
             c.genericQ = null;
           }
-        } else if (!droveThread && !justAnswered && !c.windingDown && (forceQ || ((c.qCount || 0) < 2 && Math.random() < 0.3))) {
+        } else if (!droveThread && !justAnswered && !c.windingDown && !(c.heldAskDodges > 0) && (forceQ || ((c.qCount || 0) < 2 && Math.random() < 0.3))) {
+          // DODGE GRACE (socialite 2026-10-11): a queued question the player
+          // moved past is a declined moment, not an unasked one — don't
+          // re-queue a fresh question on the very next turn. The villager got
+          // the hint; the winddown gate can open. Next conversation may ask.
           const trust = (this.state.village.trust || {})[vid] || 10;
           const moodNow = this.npcMood(vid);
           const askedAny = this.villageAskedQs();
@@ -4470,27 +4547,11 @@
       // guards: a queued question gets asked before the goodbye.
       // The player can still say goodbye themselves, take one more beat of
       // a live thread, or just leave. Never a silent chop.
-      if (!c.pendingQ && !c.heldAsk && c.exchanges >= c.budget) {
-        if (!c.windingDown && !c.winddownQueued) {
-          c.winddownQueued = true;
-          let wdPool = (cg.winddowns || {})[temp] || (cg.winddowns || {}).default
-            || ['"Anyway — I should get back to it."'];
-          // RELATIONSHIP AGE (Steve 2026-10-06): old friends don't wind down
-          // formally. Close tier gets a brief, warm "I should..." — the
-          // conversation tapers like it does between people who'll talk
-          // again tomorrow.
-          try {
-            if (this.convoVoiceTier && this.convoVoiceTier(vid) === 'close' && Math.random() < 0.5) {
-              wdPool = ['"Alright — I should get back to it."', '"I should go. You know where to find me."',
-                        '"Okay. We\'ll pick this up later."'];
-            }
-          } catch (e) {}
-          const wd = this.convoPickCycle(vid, 'winddown', wdPool);
-          c.heldBeats.push({ text: wd, winddown: true });
-        } else if (c.windingDown) {
-          return this.endConvo(vid, 'natural');
-        }
-      }
+      // Shared enforcement — convoMaybeWinddown. The dlg: early-return
+      // handlers (convo-dialogue.js) call it too, so the energy budget binds
+      // every verb, not just the ones that reach this tail.
+      const wdEnd = this.convoMaybeWinddown(vid);
+      if (wdEnd) return wdEnd;
       // LEDGER (Steve 2026-10-07): the turn's beat lands on the current
       // thread — topic memory + subject-change detection. (dlg: turns speak
       // through sayLine instead; both collapse consecutive duplicates.)
