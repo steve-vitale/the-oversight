@@ -652,12 +652,16 @@
         } else if (unbacked.length) {
           const names = unbacked.map(a => a.name).join(' and ');
           this.say(`◈ OUTSHONE — ${names} did what you would not: acted, boldly, while there was still time. The village thrives. The god is someone else. The record notes, kindly and accurately, that you watched. It stings exactly as much as it should.`);
-        } else if (asc.length > 1 || (asc.length === 1 && facIds.length === 0)) {
-          // A pantheon, unplanned: politics among the ascended.
-          if (asc.length > 1) {
-            const names = asc.map(a => a.name).join(' and ');
-            this.say(`◈ THE PANTHEON — ${names} ascended together, and gods, it turns out, have politics. They argue about you the way the living argue about weather. Mostly, they agree: the village comes first. Mostly.`);
-          }
+        }
+        // THE PANTHEON (win-path lever 2026-10-11): was dead code — the old
+        // else-if chain made "asc.length > 1" unreachable here (asc partitions
+        // exactly into facAscended + unbacked, so reaching the third branch
+        // meant asc was empty). docs/TABLE.md: "the pantheon's politics get
+        // one beat" whenever multiple villagers ascend — it fires alongside
+        // the architect/outshone beat, not instead of it.
+        if (asc.length > 1) {
+          const names = asc.map(a => a.name).join(' and ');
+          this.say(`◈ THE PANTHEON — ${names} ascended together, and gods, it turns out, have politics. They argue about you the way the living argue about weather. Mostly, they agree: the village comes first. Mostly.`);
         }
         if (!asc.length && !facIds.length) {
           this.say(`◈ ${me} walks out of the light alone, which is how they walked in. The village endures. That was always the story.`);

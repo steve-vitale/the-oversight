@@ -597,12 +597,27 @@
       // contests survived, scale, crises. sentimentTaught + feastSurgeUsed
       // stay (food-thesis deeds, not knowledge) and stage>=3 stays (earned
       // standing). RETUNE 2026-10-10: every wave 1-5, ~100-day target.
-      if (want >= 3 && stage >= 3 && pg.sentimentTaught && s.prog.feastSurgeUsed && this.deedGateReady().ok) want = 4;
-      // TABLE RE-FIRE (deed gate 2026-10-10): the tableScene's
-      // defense-in-depth re-check can clear tableWaiting without firing;
-      // when the deeds hold again the invitation is re-extended — aloud,
-      // never silently.
-      if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && this.deedGateReady().ok) {
+      // ARC IV SEAT GATE (win-path lever 2026-10-11, docs/TABLE.md): the old
+      // gate was deedGateReady() only (the FULL seat — national+, all five
+      // waves). The table PRICES the run, never gates on godhood: competent
+      // non-god play reaches Arc IV on the LESSER seat (tableSeat(): waves
+      // 4/4/3 faced, 2+ contests, 2+ crises, regional+, stage>=2, food-thesis
+      // deeds — the seat bars already encode stage/scale/contests/crises, so
+      // no separate stage check). Before this change the lesser seat was dead
+      // code in the invitation path — tableWaiting was only ever set on the
+      // full gate, so the designed "reachable bar" never fired (0/32
+      // baseline runs reached any seat; the table never came). The full seat
+      // keeps its richer terms (indispensable needs full; the audit names
+      // the seat). Measured before/after on identical seeds via
+      // scripts/sweep-winpath.js.
+      let seatNow = 'none';
+      try { seatNow = (((typeof this.tableSeat === 'function') ? this.tableSeat() : null) || {}).seat || 'none'; } catch (e) {}
+      if (want >= 3 && (seatNow === 'full' || seatNow === 'lesser')) want = 4;
+      // TABLE RE-FIRE (deed gate 2026-10-10; seat bar 2026-10-11): the
+      // tableScene's defense-in-depth re-check can clear tableWaiting without
+      // firing; when the seat bar holds again the invitation is re-extended —
+      // aloud, never silently.
+      if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && (seatNow === 'full' || seatNow === 'lesser')) {
         pg.tableWaiting = true;
         this.say('The table is being set. They are watching to see who comes to it.');
       }
@@ -638,12 +653,26 @@
         this.say(arc3line);
         try { this.state.scholar.synergyBonus = true; } catch (e) {}
       } else if (n === 4) {
+        let seat4 = 'none';
         try {
           if (this.ledgerAdd) this.ledgerAdd('foodShared', 1);
+          try { seat4 = (((typeof this.tableSeat === 'function') ? this.tableSeat() : null) || {}).seat || 'none'; } catch (e2) {}
           this.progState().tableWaiting = true;
-          this.say('The table is being set. They are watching to see who comes to it.');
+          // The beat is honest about the seat: the full-seat text names all
+          // five waves; the lesser-seat text names only waves 1-3 (the ones
+          // the run actually faced). Claiming the Mirror Draft and the
+          // Producers on a lesser run would be a lie the audit would catch.
+          if (seat4 === 'full') {
+            this.say('The table is being set. They are watching to see who comes to it.');
+          } else {
+            this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+          }
         } catch (e) {}
-        this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
+        if (seat4 === 'full') {
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
+        } else {
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You stood up to the calibration fauna, the audience's notes, the Final Draft — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours, though unfinished, are undeniable. (Feasted buffs burn hotter from here.)`);
+        }
         try { this.state.scholar.arc4burn = 1.25; } catch (e) {}
       }
       try { this.save(); } catch (e) {}

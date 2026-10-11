@@ -68,7 +68,11 @@ const files = [
   'src/js/villager-agency.js', 'src/js/fieldFights.js',
   'src/js/villager-objectives.js', 'src/js/codex-people.js',
   'src/js/membership.js', 'src/js/havenGrowth.js', 'src/js/hierarchy.js',
-  'src/js/comms.js', 'src/js/safetynets.js', 'src/js/villageAgency.js',
+  'src/js/comms.js', 'src/js/table.js', 'src/js/table-feared.js',
+  'src/js/table-indispensable.js', 'src/js/table-beloved.js',
+  'src/js/table-witness.js', 'src/js/table-assimilated.js',
+  'src/js/table-defiant.js', 'src/js/relay-ext.js', 'src/js/table-relay.js',
+  'src/js/safetynets.js', 'src/js/villageAgency.js',
   'src/js/debug-scenarios.js', 'src/js/build.js',
 ];
 for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
