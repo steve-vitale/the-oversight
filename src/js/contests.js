@@ -286,6 +286,17 @@
         } catch (e) {}
       }
       const now = (typeof this.havenViewership === 'function') ? this.havenViewership() : (v.viewership || 0);
+      // WEAR DECAY (adaptation 2026-10-11): bodies and nerves recover
+      // slowly; crowds forget. Weekly tick, alongside the drift.
+      try {
+        const _ad = this._cxAdapt();
+        if (day - (_ad.wearDay || 0) >= 7) {
+          _ad.wearDay = day;
+          _ad.wear.blood = Math.max(0, _ad.wear.blood - 1);
+          _ad.wear.social = Math.max(0, _ad.wear.social - 1);
+          for (const _bk in (_ad.boredom || {})) _ad.boredom[_bk] = Math.max(0, _ad.boredom[_bk] - 1);
+        }
+      } catch (e) {}
       if (v._trendWeek !== weekB) {
         v._trendWeek = weekB;
         const lastWeek = v._lastWeekViewership;
@@ -431,7 +442,11 @@
     // higher risk, better prizes, twist on the rules.
     const seen = (this.state.contestsSeen || {})[pick.id] || 0;
     let variant = null;
-    if (seen > 0 && Math.random() < 0.3) {
+    // ADAPTATION (Steve 2026-10-11): heat DRIVES the hardened variant.
+    // Heat 1+ (a proven winner) is always hardened — the show doesn't
+    // need dice to know who you are. Heat 0 keeps the old 30% roll.
+    const _heat0 = this._cxHeatFor(pick.id);
+    if (seen > 0 && (_heat0 >= 1 || Math.random() < 0.3)) {
       variant = 'hardened';
     }
     // Track that we've seen it
@@ -464,6 +479,284 @@
     }
 
     return scaled;
+  };
+
+  // === CONTEST ADAPTATION (Steve 2026-10-11) ===
+  // The show learns. Four systems, one model: HISTORY IS STATE. Every
+  // adaptation below is a deterministic function of recorded history
+  // (wins, losses, approaches, appearances) — same history = same
+  // adaptation. No hidden RNG, no save-scum: reloading replays the
+  // identical show. Played, not RNG: adaptation changes the SITUATION
+  // (banned moves, hotter beasts, entry costs, new stipulations), never
+  // resolves by fiat. Death still only via health->0 / honest stakes.
+  // Knowledge-gating holds: the player sees adaptation diegetically (the
+  // System announces it), never raw numbers.
+  //
+  // 1. DOSSIER (Nemesis precedent): per-contest file on repeat winners.
+  //    The System studies your winning lines and takes them away.
+  // 2. HEAT (Heat/Ascension precedent): notability IS difficulty. Win
+  //    streaks book harder variants with better prizes; losing cools you.
+  //    Heat DRIVES the hardened variant (not the old 30% roll alone), and
+  //    hardened is now GENUINELY different phases/choices/rules — the old
+  //    byte-identical hardened was a documented blank (lever 6).
+  // 3. WEAR (Darkest Dungeon precedent): repeat appearances accumulate
+  //    costs that don't fully clear — trauma for blood, social wear for
+  //    shows. The dominant strategy stays legal but gets expensive.
+  // 4. AUDIENCE STIPULATIONS (wrestling-booking precedent): the crowd
+  //    votes twists when bored — blind draw, handicap, no-repeat. Shows
+  //    get staleness twists (new-bit demands) instead of dossiers.
+  G._cxAdapt = function() {
+    const st = this.state.cxAdapt || (this.state.cxAdapt = {});
+    st.dossier = st.dossier || {};   // contestId -> {approaches:{phaseIdx:{choiceIdx:n}}}
+    st.heat = st.heat || {};         // contestId -> 0..3
+    st.wear = st.wear || { blood: 0, social: 0 };
+    st.boredom = st.boredom || {};   // contestId -> n (audience boredom)
+    st.showStale = st.showStale || {}; // showId -> n (airings)
+    st.rival = st.rival || {};       // contestId -> {vid, w, l, name}
+    st.wearDay = st.wearDay || 0;
+    return st;
+  };
+
+  // Wins/losses read from the EXISTING codex record (contestLearn) — the
+  // dossier extends it, never duplicates it.
+  G._cxRecord = function(contestId) {
+    try { return ((this.state.codex || {}).contests || {})[contestId] || { seen: 0, wins: 0 }; }
+    catch (e) { return { seen: 0, wins: 0 }; }
+  };
+
+  // HEAT: wins minus losses, clamped 0..3. Death resets (the galaxy
+  // mourns; expectations reset). Refusal changes nothing.
+  G._cxHeatFor = function(contestId) {
+    const st = this._cxAdapt();
+    if (st.heat[contestId] == null) {
+      const r = this._cxRecord(contestId);
+      const losses = Math.max(0, (r.seen / 2 | 0) - r.wins);
+      st.heat[contestId] = Math.max(0, Math.min(3, r.wins - losses));
+    }
+    return st.heat[contestId];
+  };
+  G._cxBumpHeat = function(contestId, outcome) {
+    const st = this._cxAdapt();
+    let h = this._cxHeatFor(contestId);
+    if (outcome === 'won') h = Math.min(3, h + 1);
+    else if (outcome === 'lost') h = Math.max(0, h - 1);
+    else if (outcome === 'died') h = 0;
+    st.heat[contestId] = h;
+    return h;
+  };
+
+  // Record a finished contest into the dossier. Idempotent per ac.
+  G._cxRecordOutcome = function(ac, outcome) {
+    if (!ac || ac._adaptRecorded) return;
+    ac._adaptRecorded = true;
+    const id = ac.contestId, st = this._cxAdapt();
+    const isPlayer = !ac.participant || ac.participant === 'player';
+    // Approaches: which choice won each phase (player's played path).
+    if (isPlayer && outcome === 'won' && ac._approach) {
+      const d = st.dossier[id] || (st.dossier[id] = { approaches: {} });
+      for (const pk in ac._approach) {
+        d.approaches[pk] = d.approaches[pk] || {};
+        const ck = String(ac._approach[pk]);
+        d.approaches[pk][ck] = (d.approaches[pk][ck] || 0) + 1;
+      }
+    }
+    if (isPlayer) {
+      this._cxBumpHeat(id, outcome);
+      // Boredom: the crowd tires of repeat winners, forgives losers.
+      const b = st.boredom[id] || 0;
+      st.boredom[id] = outcome === 'won' ? b + 1 : Math.max(0, b - 2);
+      // WEAR: blood appearances cost the body, shows cost the nerves.
+      const cat = ((this.contestPool().find(c => c.id === id) || {}).cat) || '';
+      if (cat === 'blood') st.wear.blood += 2;
+      else st.wear.social += 0; // shows handled in _showEnd
+      if (outcome === 'died') st.wear.blood += 2;
+      // RIVAL (adaptation 2026-10-11, cheap Nemesis): the show keeps a
+      // champion beast for repeat blood winners — fed your tapes, named,
+      // and increasingly personal. Deterministic pick from the roster of
+      // the show's stable (history-indexed, not random).
+      if (outcome === 'won' && cat === 'blood') {
+        const wins = (this._cxRecord(id).wins || 0);
+        const rv = st.rival[id] || (st.rival[id] = {});
+        rv.winsVs = wins;
+        const NAMES = ['Manglejaw', 'The Quiet One', 'Second Dinner', 'Audience Favorite', 'The Rematch'];
+        rv.name = NAMES[wins % NAMES.length];
+      }
+    } else {
+      // Villager dossier: their wins heat THEIR file — the System casts
+      // hotter against proven villagers via the hardened variant path.
+      if (outcome === 'won') {
+        const r = this._cxRecord(id);
+        if ((r.wins || 0) >= 2) { try { ac._villagerHeat = true; } catch (e) {} }
+      }
+    }
+  };
+
+  // The System's dossier lines — said aloud, never raw numbers.
+  G._cxDossierLine = function(contest, wins) {
+    const n = contest.name;
+    if (wins >= 4) return `\uD83D\uDCFA We've run ${n} ${wins} times and you've won it ${wins} times. The producers have a file on you now. It's thick. They're casting against it.`;
+    if (wins === 3) return `\uD83D\uDCFA Third win in ${n}. The System has studied the tapes. Your favorite moves are... unavailable tonight.`;
+    const _rv = (this._cxAdapt().rival || {})[contest.id];
+    const _rn = (_rv && contest.cat === 'blood' && _rv.name) ? ` ${ _rv.name} has been fed your tapes and wants the rematch.` : '';
+    return `\uD83D\uDCFA You've won ${n} twice. The crowd remembers how. So does the casting office.${_rn}`;
+  };
+  // STIPULATIONS: the crowd votes when bored. Deterministic pick —
+  // boredom count rotates the table, so same history = same twist.
+  // kinds: 'no_repeat' (your winning moves are banned), 'handicap'
+  // (you start hurt — entry cost, said aloud), 'blind' (choice hints
+  // hidden — pick by gut). Wrong-arena flavor rides on handicap.
+  G._cxStipulationFor = function(contest, dossier) {
+    const st = this._cxAdapt();
+    const boredom = st.boredom[contest.id] || 0;
+    const wins = (this._cxRecord(contest.id).wins || 0);
+    if (boredom < 2 || wins < 2) return null;
+    const table = ['no_repeat', 'handicap', 'blind'];
+    let kind = table[boredom % table.length];
+    // no_repeat needs approach data; fall back to handicap without it.
+    if (kind === 'no_repeat') {
+      const d = st.dossier[contest.id];
+      if (!d || !Object.keys(d.approaches || {}).length) kind = 'handicap';
+    }
+    return kind;
+  };
+  G._cxStipulationLine = function(kind, contest) {
+    if (kind === 'no_repeat') return `\uD83D\uDCFA The crowd is bored of the reruns. They've voted: your greatest hits are BANNED tonight. New material, or else.`;
+    if (kind === 'handicap') return `\uD83D\uDCFA The crowd is bored. They've voted a HANDICAP — you start this one already hurt. The galaxy loves an underdog. Especially a bleeding one.`;
+    return `\uD83D\uDCFA The crowd is bored of experts. Tonight's stipulation: BLIND DRAW. No hints, no tells — pick by gut, like the rest of us.`;
+  };
+
+  // Insert a phase at index k, shifting numeric nexts >= k by +1.
+  // Terminal nexts ('WIN'/'LOSE'/'DIE'/'REFUSE') are untouched.
+  G._cxInsertPhase = function(phases, k, newPhase) {
+    const out = phases.slice();
+    out.splice(k, 0, newPhase);
+    for (const p of out) {
+      if (!p || !p.choices) continue;
+      for (const ch of p.choices) {
+        if (typeof ch.next === 'number' && ch.next >= k) ch.next += 1;
+      }
+    }
+    return out;
+  };
+
+  // Build the stipulation beat phase. Its choices forward to nextIdx.
+  G._cxStipulationPhase = function(contest, kind, nextIdx, heat) {
+    const dmg = kind === 'handicap' ? [4 + heat * 2, 8 + heat * 3] : [0, 0];
+    const trauma = kind === 'handicap' ? 1 + heat : 0;
+    const label = kind === 'handicap' ? 'Take the handicap' : kind === 'blind' ? 'Play it blind' : 'New material';
+    const sub = kind === 'handicap' ? 'the crowd insists' : kind === 'blind' ? 'no hints tonight' : 'the banned moves stay banned';
+    return {
+      beat: 'contestCall',
+      text: `\uD83D\uDCFA STIPULATION. ${this._cxStipulationLine(kind, contest).replace(/^\uD83D\uDCFA /, '')}`,
+      choices: [{ label: label, sub: sub, do: { dmg: dmg, trauma: trauma }, next: nextIdx }],
+    };
+  };
+
+  // Apply dossier bans: remove each phase's most-used WINNING choice.
+  // Never bans the last choice standing; never touches phase 0 (the
+  // participate/refuse choice screen). Returns {phases, banned} .
+  G._cxApplyBans = function(phases, contestId, wins) {
+    const st = this._cxAdapt();
+    const d = st.dossier[contestId];
+    // The dossier needs tapes — plural. One win is a fluke; two is a file.
+    if (!d || (wins || 0) < 2) return { phases: phases, banned: 0 };
+    let banned = 0;
+    const out = phases.map((p, pi) => {
+      if (pi === 0 || !p || !p.choices || p.choices.length < 2) return p;
+      const ap = (d.approaches || {})[String(pi)];
+      if (!ap) return p;
+      let best = null, bestN = 0;
+      for (const ck in ap) { if (ap[ck] > bestN) { bestN = ap[ck]; best = parseInt(ck, 10); } }
+      if (best == null || best < 0 || best >= p.choices.length) return p;
+      const np = Object.assign({}, p, { choices: p.choices.slice() });
+      const removed = np.choices.splice(best, 1)[0];
+      banned++;
+      np.text = (np.text || '') + `\n\n\uD83D\uDCFA "${(removed.label || 'that move')}" is off the table tonight — the crowd has seen it.`;
+      return np;
+    });
+    return { phases: out, banned: banned };
+  };
+
+  // Main adaptation pass for the PLAYER's played path. Called in
+  // contestInterruption after phases are assembled (post-shift).
+  // Returns the adapted phase array.
+  G._cxApplyAdaptation = function(contest, phases) {
+    const id = contest.id;
+    const wins = (this._cxRecord(id).wins || 0);
+    const heat = this._cxHeatFor(id);
+    const isHardened = contest.variant === 'hardened';
+    if (!wins && !isHardened) return phases; // first-timers play fair
+    let out = phases;
+    // The System says what it knows — dossier + heat, diegetically.
+    if (wins >= 2) this.sysSay(this._cxDossierLine(contest, wins));
+    if (heat >= 1) this.sysSay(this._cxHeatLine(contest, heat));
+    // Bans: the show takes your winning moves (dossier).
+    const br = this._cxApplyBans(out, id, wins);
+    out = br.phases;
+    // Stipulation: the bored crowd votes a twist.
+    const kind = this._cxStipulationFor(contest, this._cxAdapt().dossier[id]);
+    if (kind === 'blind') {
+      out = out.map((p, pi) => {
+        if (pi === 0 || !p || !p.choices) return p;
+        const np = Object.assign({}, p, { choices: p.choices.map(c => { const nc = Object.assign({}, c); delete nc.sub; return nc; }) });
+        return np;
+      });
+      this.sysSay(this._cxStipulationLine('blind', contest));
+    } else if (kind === 'handicap' || (isHardened && heat >= 2)) {
+      const sk = kind === 'handicap' ? 'handicap' : 'no_repeat';
+      const sp = this._cxStipulationPhase(contest, sk === 'handicap' ? 'handicap' : 'no_repeat', 2, heat);
+      out = this._cxInsertPhase(out, 1, sp);
+      if (sk === 'handicap') this.sysSay(this._cxStipulationLine('handicap', contest));
+      else this.sysSay(`\uD83D\uDCFA MAIN EVENT rules: no greatest hits. Your winning moves stay banned — and the crowd wants NEW blood.`);
+    } else if (isHardened) {
+      // Hardened without heat-2 still changes the game: the ban pass
+      // above already altered the choice trees. Say so honestly.
+      this.sysSay(`\uD83D\uDCFA Hardened rules tonight — some of your old lines won't work. The tapes don't lie.`);
+    }
+    return out;
+  };
+
+  // SHOW STALENESS (adaptation 2026-10-11): shows don't get dossiers —
+  // they get the audience's boredom. Same show aired 2+ times and the
+  // producers demand a twist: new-bit demands with real costs, bespoke
+  // for the big shows, honest-generic for the rest. TV doesn't kill —
+  // twists cost nerves, kcal, and dignity, never health.
+  G._cxShowTwist = function(show, phases, who) {
+    const st = this._cxAdapt();
+    const n = st.showStale[show.id] || 0;
+    if (n < 2 || !phases || !phases.length) return phases;
+    const TWISTS = {
+      why_eat: { line: 'MYSTERY INGREDIENT. The aliens provide something that is technically food. Technically.', cost: { kcal: -150 } },
+      ask_human: { line: 'HOSTILE CALLERS tonight. The galaxy has questions and no manners.', cost: { trauma: 2 } },
+      mouth_race: { line: 'SABOTAGE ROUND. Someone will ruin your station. The cameras will show it in slow motion.', cost: { trauma: 1 } },
+      break_room: { line: 'YOUR DRAMA, AIRED BACK. They kept the tapes. All of them.', cost: { trauma: 2 } },
+      death_reel: { line: 'TONIGHT: YOUR REEL. Every clip is you. The galaxy has notes.', cost: { trauma: 1 } },
+      moot_show: { line: 'SURPRISE WITNESS. Someone you did not expect is testifying tonight.', cost: { trauma: 1 } },
+    };
+    const tw = TWISTS[show.id] || { line: 'The producers want something NEW. The old bit is retired — improvise.', cost: { trauma: 1 } };
+    this.sysSay('📺 ' + tw.line);
+    this.sysSay('📺 The audience is bored of the rerun. Do something they haven\u2019t seen.');
+    const out = phases.map((ph, pi) => {
+      if (pi !== 0 || !ph || !ph.choices) return ph;
+      const np = Object.assign({}, ph, {
+        text: (ph.text || '') + '\n\n📺 Twist active: ' + tw.line,
+        choices: ph.choices.map(c => {
+          const nc = Object.assign({}, c, { do: Object.assign({}, c.do) });
+          if (tw.cost.trauma) nc.do.trauma = (nc.do.trauma || 0) + tw.cost.trauma;
+          if (tw.cost.kcal) nc.do.kcal = (nc.do.kcal || 0) + tw.cost.kcal;
+          nc.sub = ((nc.sub || '') + ' (twist!)').trim();
+          return nc;
+        }),
+      });
+      return np;
+    });
+    return out;
+  };
+
+  G._cxHeatLine = function(contest, heat) {
+    if (heat >= 3) return `\uD83D\uDCFA MAIN EVENT. Your heat is through the roof — the galaxy didn't come to see a contest, it came to see YOU survive one.`;
+    if (heat === 2) return `\uD83D\uDCFA Your heat is up. The billing got bigger because you did.`;
+    return `\uD83D\uDCFA You've been winning. The show noticed. It's worse now — on purpose.`;
   };
 
   // === TV SHOWS ===
@@ -697,7 +990,15 @@
       }
       this.sysSay(`📺 That's not an honor. It's just what the aliens like to see. You're going on television.`);
       try { this.audioEvent('contestTaken'); } catch (e) {}
-      phases = this.showPhases(s, 'player');
+      phases = this._cxShowTwist(s, this.showPhases(s, 'player'), 'player');
+      // SOCIAL WEAR (adaptation 2026-10-11): camera-tired players feel it.
+      try {
+        const _sw = this._cxAdapt().wear.social;
+        if (_sw >= 6) {
+          this.state.scholar.trauma = Math.max(0, Math.min(100, (this.state.scholar.trauma || 0) + 1));
+          this.sysSay('📺 The cameras feel heavier than they used to. That is ' + _sw + ' shows in this body.');
+        }
+      } catch (e) {}
     } else if (who === 'together') {
       if (cast.why === 'milestone') {
         this.sysSay(`📺 Biggest audience yet — the whole galaxy is watching tonight. The village gathers to watch itself be watched. Someone brings snacks. It helps.`);
@@ -914,6 +1215,13 @@
     if (ac._showEnded) return { done: true, outcome: 'show_' + outcome };
     ac._showEnded = true;
     ac.phase = 'done';
+    // ADAPTATION (Steve 2026-10-11): every airing feeds staleness; player
+    // appearances cost nerves that don't fully clear.
+    try {
+      const _sa = this._cxAdapt();
+      if (ac.showId) _sa.showStale[ac.showId] = (_sa.showStale[ac.showId] || 0) + 1;
+      if (who === 'player') _sa.wear.social += 1;
+    } catch (e) {}
     // BROADCAST MODE: the commentators call the outcome — tied to the
     // actual result, never a generic line. Must fire while the broadcast is
     // LIVE: broadcastEnd below kills the frame, and broadcastBeat is a no-op
@@ -1567,6 +1875,23 @@
     // The interruption itself — this is the sequence you can't skip
     this.sysSay(`📺 ═══ CONTEST INTERRUPTION ═══`);
     this.sysSay(`📺 ${contest.name}. ${contest.desc}`);
+    // WEAR ENTRY (adaptation 2026-10-11): ring-worn bodies pay at the door.
+    // Tiered, said aloud, honest. The village notices too (gossip).
+    if (isPlayer) try {
+      const _w = this._cxAdapt().wear, _s = this.state.scholar;
+      if (contest.cat === 'blood' && _w.blood >= 6) {
+        const _t = _w.blood >= 12 ? 4 : 2;
+        _s.trauma = Math.max(0, Math.min(100, (_s.trauma || 0) + _t));
+        this.sysSay(_w.blood >= 12
+          ? `📺 The limp is back before the lights are. This body has done this too many times \u2014 the crowd can count. (+${_t} trauma at the door.)`
+          : `📺 Your hands remember the last one. The body keeps score, even when the crowd forgets. (+${_t} trauma at the door.)`);
+        try {
+          const v = this.state.village; v.gossip = v.gossip || [];
+          const day = _s.day || 1, pk = day + ':wear:' + contest.id;
+          if (!v.gossip.some(g => g.partKey === pk)) v.gossip.push({ action: 'worried_wear', dims: { who: 'player' }, heard: [], distortion: 0, day, partKey: pk, noTrust: true, source: 'wear' });
+        } catch (e) {}
+      }
+    } catch (e) {}
     
     if (contest.arena) {
       this.sysSay(`📺 Arena:\n${contest.arena}`);
@@ -1642,7 +1967,7 @@
           others: others,
           phase: 'choice',
           phaseIdx: 0,
-          phases: [choicePhase, ...shifted],
+          phases: this._cxApplyAdaptation(contest, [choicePhase, ...shifted]),
           variant: contest.variant || null,
           wounds: 0,
         };
@@ -1677,7 +2002,7 @@
         others: others,
         phase: 'intro',
         phaseIdx: 0,
-        phases: phases,
+        phases: this._cxApplyAdaptation(contest, phases),
         variant: contest.variant || null,
         wounds: 0,
       };
@@ -1706,6 +2031,13 @@
       if (!wphases || !wphases.length) {
         try { wphases = this._contestGeneric(contest); } catch (e2) { wphases = null; }
       }
+      // ADAPTATION (Steve 2026-10-11): a proven villager's file is hot —
+      // the System casts hotter against them (contestEngine's hardened
+      // beast-hotness reads the variant).
+      try {
+        const _vh = this._cxHeatFor(contest.id + ':' + ids[0]);
+        if (_vh >= 1 && !contest.variant) contest.variant = 'hardened';
+      } catch (e) {}
       this.state.activeContest = {
         contestId: contest.id,
         participant: ids[0],
@@ -3656,6 +3988,9 @@
     const phase = phases[ac.phaseIdx || 0];
     if (!phase || !phase.choices || !phase.choices[idx]) return null;
     const choice = phase.choices[idx];
+    // ADAPTATION (Steve 2026-10-11): the dossier watches. Record which
+    // choice was taken at each phase — winning lines get studied.
+    try { ac._approach = ac._approach || {}; ac._approach[ac.phaseIdx || 0] = idx; } catch (e) {}
     // MOOT (Steve 2026-10-08): seed rhetorical standing from social capital
     // on the first beat — the argument starts where your reputation does.
     if (phase._mootBase !== undefined && ac.standing === undefined) {
@@ -3990,8 +4325,15 @@
       for (let i = 0; i < n; i++) {
         // Escalate: later waves run hotter. HARDENED (break-it contest
         // 2026-10-09): the announced variant runs one wave hotter — "worse"
-        // is real in the arena too.
-        const hot = (i > 0 ? 1 : 0) + (ac.variant === 'hardened' ? 1 : 0);
+        // is real in the arena too. RIVAL (adaptation 2026-10-11): a
+        // 3+ win dossier means the champion was picked FOR you — one
+        // hotter still. Counter-casting is real, played, and said aloud.
+        let _rivalHot = 0;
+        try {
+          const _rr = ((this._cxAdapt().rival || {})[(ac && ac.contestId) || ''] || {});
+          if ((_rr.winsVs || 0) >= 3) _rivalHot = 1;
+        } catch (e) {}
+        const hot = (i > 0 ? 1 : 0) + (ac.variant === 'hardened' ? 1 : 0) + _rivalHot;
         const cands = pool.filter(m => (m.wave || 1) <= wave + hot);
         const src = cands.length ? cands : pool;
         beasts.push(src[Math.floor(Math.random() * src.length)].id);
@@ -4144,6 +4486,8 @@
 
   G._contestEnd = function(ac, outcome, prize) {
     try { this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: outcome || '?' }); } catch (e) {}
+    // ADAPTATION (Steve 2026-10-11): the dossier records every ending.
+    try { this._cxRecordOutcome(ac, outcome); } catch (e) {}
     this._cxCountHeld(ac);
     const contest = this._cxScaledContest(ac);
     const s = this.state.scholar;
@@ -4400,6 +4744,9 @@
         dl[contest.id] = (dl[contest.id] || 0) + 1;
       } catch (e) {}
     }
+    // ADAPTATION (Steve 2026-10-11): death is the ultimate cooling —
+    // heat resets, the file stays.
+    try { this._cxRecordOutcome(ac, 'died'); } catch (e) {}
     this._cxCountHeld(ac);
     this.sysSay(`📺 ${contest.name} — ${how}`);
     this.sysSay('📺 ' + this._contestDeathLine(contest, how, pname));
