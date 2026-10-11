@@ -47,7 +47,7 @@ const BASE_TOP_KEYS = ['_comment', 'darkTells', 'curiosities', 'firstNames', 'la
 
 // established placeholder token vocab per pool (harvested from baseline entries)
 const TOKENS = {
-  questTemplates: ['{first}', '{occ}', '{origin}', '{city}', '{skill}', '{an_occ}'],
+  questTemplates: ['{first}', '{occ}', '{origin}', '{city}', '{skill}', '{an_occ}', '{hope}'],
   misunderstandTemplates: ['{first}', '{lang}'],
   talkTemplates: ['{an_occ}', '{Occ}', '{occ}', '{first}', '{origin}', '{skill}'],
   wakeUpSpeeches: ['{first}', '{occ}', '{origin}'],
@@ -271,10 +271,11 @@ const fillTalkLine = (line) => String(line)
 // wake-up fill (game.js): {first},{occ},{origin}
 const fillWake = (line) => String(line)
   .replaceAll('{first}', 'Mara').replaceAll('{occ}', 'cook').replaceAll('{origin}', 'the valley');
-// quest fill (game.js genRoster): {first},{occ},{origin},{city},{skill}
+// quest fill (game.js genRoster/genCharacter `fill`): {first},{occ},{origin},{city},{skill},{an_occ},{hope}
 const fillQuest = (line) => String(line)
   .replaceAll('{first}', 'Mara').replaceAll('{occ}', 'cook').replaceAll('{origin}', 'the valley')
-  .replaceAll('{city}', 'Reno').replaceAll('{skill}', 'making do');
+  .replaceAll('{city}', 'Reno').replaceAll('{skill}', 'making do')
+  .replaceAll('{an_occ}', 'a cook').replaceAll('{hope}', 'something better');
 // fillPronouns subset for darkTells (she/her): {first},{their},{Their},{them},{They} V,{they} V
 const fillTell = (line) => String(line)
   .replaceAll('{first}', 'Mara').replaceAll('{their}', 'her')
