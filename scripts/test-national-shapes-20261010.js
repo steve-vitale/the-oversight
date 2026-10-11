@@ -89,10 +89,20 @@ function ok(cond, label) {
   ovs.forEach(v => { v.generated = true; v.opinion = 0; });
   const stock = (kcal) => { Game.state.village.pantry = Game.state.village.pantry || []; Game.state.village.pantry.push({ name: 'test grain', kcalEach: kcal, units: 1, spoilDay: 9999 }); };
   const pantryKcal = () => (Game.state.village.pantry || []).reduce((a, it) => a + (it.kcalEach || 0) * (it.units || 0), 0);
-  const mkPeer = (vid, kind) => Game._formPeerLink(vid, { kind: kind });
+  const mkPeer = (vid, kind) => {
+    const l = Game._formPeerLink(vid, { kind: kind });
+    // SEASONED (scale-pacing 2026-10-11): the polity gates need 30+ day old
+    // links at trust 40+. Backdate + tend so the beat tests exercise the
+    // beat, not the gate (the gate is proven in test-scale-pacing.js).
+    if (l) { l.day = (Game.state.scholar.day || 0) - 31; l.trust = 40; }
+    return l;
+  };
   const mkVassal = (vid, conquered) => {
     const l = Game._formLink(vid, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
     if (conquered) { l.conquered = true; l.trust = 15; l.tributeKcalPerWeek = 7000; }
+    // SEASONED (scale-pacing 2026-10-11): 30+ days old (conquered: season
+    // only, no trust bar). Courtship vassals get trust 40.
+    if (l) { l.day = (Game.state.scholar.day || 0) - 31; if (!conquered) l.trust = 40; }
     return l;
   };
   function resetPolity() {
@@ -104,8 +114,17 @@ function ok(cond, label) {
     Game.state.leaguePoolKcal = 0; Game.state._leaguePoolWeek = -999;
     Game.state.covenantAway = null; Game.state.tradeAway = null; Game.state.raidParty = null;
     try { Game.state.networkLive = true; } catch (e) {}
+    // SEASONED (scale-pacing 2026-10-11): the national rung gate needs
+    // regional ≥ 30 days old. Backdate the Dawn so beat tests exercise the
+    // beat, not the gate.
+    try { Game.state.networkLiveDay = (Game.state.scholar.day || 0) - 31; } catch (e) {}
+    try { Game.state._regionalPending = null; } catch (e) {}
   }
   const wave5Ready = () => { Game.state.waveKills = { 4: 5 }; return Game.unlockedWave() === 5; };
+  // season(): backdate + tend a link so beat tests exercise the beat, not
+  // the gate (scale-pacing 2026-10-11). The gate is proven in
+  // test-scale-pacing.js.
+  const season = (l, trust) => { if (l) { l.day = (Game.state.scholar.day || 0) - 31; l.trust = trust || 40; } return l; };
 
   console.log(`[seed ${SEED}] villages: ${ovs.map(v => v.name || v.id).slice(0, 8).join(', ')}`);
 
@@ -117,6 +136,7 @@ function ok(cond, label) {
   Game._nudgeOpinion(cA.id, 100);
   says.length = 0;
   const covA = Game.proposeCovenant(cA.id);
+  season(covA);
   ok(!!covA && covA.kind === 'covenant', 'proposeCovenant accepts on earned courtship (played, not rolled)');
   ok(covA.primary === null && covA.subordinate === null && covA.a === 'haven', 'peer link has no primary/subordinate');
   ok(saidHas(/no primary, no kneeling/), 'covenant copy says the shape aloud');
@@ -125,6 +145,7 @@ function ok(cond, label) {
   ok(Game._stagePeerCounter(cB.id, { kind: 'covenant' }, null) === 'counter', 'counter staged for the middle band');
   ok(Game.state.pendingCounter && Game.state.pendingCounter.kind === 'covenant', 'counter carries the peer kind');
   const covB = Game.answerCounter('accept');
+  season(covB);
   ok(!!covB && covB.kind === 'covenant' && covB.poolKcalPerWeek === 2500, 'counter accepted at THEIR terms (2,500 pool share)');
   const covC = mkPeer(cC.id, 'covenant');
   // no knowledge gate: an unheard-of village can still be bound
@@ -209,6 +230,7 @@ function ok(cond, label) {
   // played proposal path
   Game._nudgeOpinion(tA.id, 100);
   const trA = Game.proposeTrade(tA.id);
+  season(trA);
   ok(!!trA && trA.kind === 'trade', 'proposeTrade accepts on earned courtship');
   ok(saidHas(/no mutual defense/), 'charter copy states the no-defense clause aloud');
   const trB = mkPeer(tB.id, 'trade');
@@ -280,6 +302,7 @@ function ok(cond, label) {
   ok(Game.raidVillage(qA.id) === true, 'muster again');
   says.length = 0;
   const slink = Game.answerRaid('strike');
+  season(slink, 15); // conquered: season only, trust stays 15
   ok(!!slink && slink.conquered === true, 'strike subjugates: conquered link');
   ok(slink.trust === 15 && slink.tributeKcalPerWeek === 7000, 'duress terms: trust 15, tribute 7,000');
   ok((Game.state.otherVillages.find(v => v.id === qA.id).opinion || 0) <= -40, 'hatred: opinion -40');
@@ -293,8 +316,10 @@ function ok(cond, label) {
   ok(Game.raidVillage(qB.id) === true, 'muster against a second fire');
   const rTerms = Game.answerRaid('terms');
   if (rTerms === 'refused') {
-    ok(Game.answerRaid('strike').conquered === true, 'refused terms -> strike still subjugates');
+    const rStrike = season(Game.answerRaid('strike'), 15);
+    ok(!!rStrike && rStrike.conquered === true, 'refused terms -> strike still subjugates');
   } else {
+    season(rTerms, 25); // conquered: season only, trust stays 25
     ok(!!rTerms && rTerms.conquered === true && rTerms.trust === 25, 'strong Haven: they yield without blood (trust 25, lighter yoke)');
   }
   const qCLink = mkVassal(qC.id, true); // third conquered fire (setup)
@@ -346,8 +371,9 @@ function ok(cond, label) {
   console.log('D: REFUSE — the sixth road');
   resetPolity();
   const sL1 = Game._formLink(ovs[0].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
-  Game._formLink(ovs[1].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
-  Game._formLink(ovs[2].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
+  season(sL1);
+  season(Game._formLink(ovs[1].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null));
+  season(Game._formLink(ovs[2].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null));
   says.length = 0;
   Game.hierarchyDaily();
   ok(!!Game.state.pendingNational && Game.state.pendingNational.shape === 'lead', 'lead beat staged (the offer)');
@@ -391,9 +417,9 @@ function ok(cond, label) {
   console.log('F: shape priority');
   resetPolity();
   mkPeer(ovs[0].id, 'covenant'); mkPeer(ovs[1].id, 'covenant'); mkPeer(ovs[2].id, 'covenant');
-  Game._formLink(ovs[3].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
-  Game._formLink(ovs[4].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
-  Game._formLink(ovs[5].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
+  season(Game._formLink(ovs[3].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null));
+  season(Game._formLink(ovs[4].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null));
+  season(Game._formLink(ovs[5].id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null));
   Game.hierarchyDaily();
   ok(!!Game.state.pendingNational && Game.state.pendingNational.shape === 'lead', 'lead beats covenant in priority (documented)');
 

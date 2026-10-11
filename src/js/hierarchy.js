@@ -62,12 +62,17 @@
 //   - answerGlobalChoice(how)
 //   - polityNews()
 //   - worldFeed()
-//   - _nudgeOpinion(villageId, delta)
+//   - _nudgeOpinion(villageId, delta, why)
 // rules:
-//   - courtship_moves_opinion: studying a village's codex (+3, once) and deeds the region hears (+2 per contest win) raise its opinion of Haven; the counter-offer band (35-54, judgeLink base 38) fires when the score lands there — struggling villages score below it, and the decline lines now say the climb aloud (codex +3 / wins +2 / time +1wk) instead of staying silent. "Join them" is not a climb verb: joining is leaving Haven, which ends proposing standing. Old slights fade +1/week (linkTick), so a shut door re-opens. (code: hierarchy.js)
+//   - courtship_moves_opinion: studying a village's codex (+3, once) and deeds the region hears (+2 per contest win) raise its opinion of Haven; the counter-offer band (35-54, judgeLink base 38) fires when the score lands there — struggling villages score below it, and the decline lines now say the climb aloud (codex +3 / wins +2 / time +1wk) instead of staying silent. "Join them" is not a climb verb: joining is leaving Haven, which ends proposing standing. Old slights fade +1/week (linkTick), so a shut door re-opens. A declined proposal banks courtshipDeclined — climb verbs ('codex'/'broadcast'/'aid'/'gift') land +1 harder for the next 28 days ("they're watching"); the decline names the single most relevant unbanked verb. (code: hierarchy.js)
+//   - polity_links_must_be_seasoned: a link counts toward a polity only when the relationship is real — 30+ days old (ONE SEASON: 1 season = 30 days, Steve 2026-10-11) AND trust 40+ (formed at 30; tending required). Conquered links need the season, not the trust. BELONG's gates are unchanged (trust 50, arrears 0, 14 days). Three cold covenant accepts in three days is a pact, not a nation. (code: hierarchy.js)
+//   - peer_binding_needs_courtship: covenant/trade proposals require opinion 10+ — knowsVillage alone no longer unlocks polity-level proposals. Below the bar the binding is refused before judgment, honestly, with no -5 (a prerequisite, not an ask). (code: hierarchy.js)
+//   - seasons_are_said_aloud: when the third bond/subordinate forms but the polity doesn't qualify on maturity, one honest line says why ("bonds aren't seasons") — said once at formation, never ticked daily. (code: hierarchy.js)
+//   - the_gesture_is_not_the_dawn: the first accord gesture stages at link formation, but the Regional Dawn (networkLive) waits until a bond is 21+ days old — three weeks of knowing them. Regional before ~day 25 is impossible. networkLiveDay tracks the Dawn for the rung gate. (code: hierarchy.js)
+//   - one_rung_per_season: national cannot stage until Haven has been regional for a full season (networkLiveDay + 30). The ladder is VILLAGE 1–30, REGIONAL 31–60, NATIONAL 61–90, GLOBAL 91+ (Steve 2026-10-11). Deed-backed, not a pure calendar flip. (code: hierarchy.js)
 //   - join_surfaces_village_news: joining a village reads up to 3 recent village.news entries (named catch-up deaths/births) at their fire. (code: hierarchy.js)
 //   - negotiation_is_played: proposeLink scores the courtship; >=55 accepts, 35-54 counters with the village's own terms (accept/sweeten/walk away — played, never rolled), <35 declines. (code: hierarchy.js)
-//   - regional_dawn: Haven's first-ever link stages a played beat, not a threshold flip — the System overlay grows into coordination (networkLive) and the player chooses Haven's first gesture (gift/visit/cold), each with real costs. (code: hierarchy.js)
+//   - regional_dawn: Haven's first gesture toward another fire stages a played beat (gift/visit/cold, each with real costs) — and the Regional Dawn itself, the System overlay growing into coordination (networkLive), fires when the bond is 21+ days old (the_gesture_is_not_the_dawn). Played, never a threshold flip. (code: hierarchy.js)
 //   - speaker_is_named: theirSpeaker is a named person from the sim's roster; when the sim kills them, theirLeaderDied fires the mirror succession beat. (code: hierarchy.js)
 //   - succession_is_with_the_village: a speaker death costs the link a trust haircut (-8, not -15) and opens a 7-day mourning window with no trust gains — it never snaps the link by itself; the new speaker inherits the village's bond. The snap survives only for the neglected: trust under 20 with no upkeep (tribute or trust-granting deeds) for 14+ days. Death + neglect kills; death alone doesn't. (code: hierarchy.js)
 //   - trust_gains_are_choked: every trust gain routes through _trustGain (mourning blocks, gains stamp lastKeptDay) — no silent side-channel gains. (code: hierarchy.js)
@@ -206,6 +211,24 @@
       return out;
     },
 
+    // _linkSeasoned: a link counts toward a polity only when the relationship
+    // behind it is real. Season = 30+ days old (ONE SEASON — 1 season =
+    // 30 days, Steve 2026-10-11) AND trust 40+ (peer/subordinate links form
+    // at 30 — tending required). Conquered links need the season, not the
+    // trust: force is force, and the rebellion mechanics handle the rest.
+    // "Not fresh conquests." (scale-pacing 2026-10-11, Steve: "National is
+    // being hit way too quickly" — three cold covenant accepts in three
+    // days was a nation.)
+    _linkSeasoned(link, forConquest) {
+      try {
+        if (!link || link.status !== 'active') return false;
+        var day = (this.state.scholar || {}).day || 0;
+        if ((day - (link.day || 0)) < 30) return false;
+        if (forConquest) return true;
+        return (link.trust || 0) >= 40;
+      } catch (e) { return false; }
+    },
+
     _otherVillage(id) {
       try {
         return (this.state.otherVillages || []).find(function (x) { return x.id === id; }) || null;
@@ -235,10 +258,19 @@
     // living at their fire, and studying their codex moved opinion by exactly
     // nothing — the only positive source was arena broadcasts, and the
     // proposal was nearly free anyway. The climb didn't exist.
-    _nudgeOpinion(villageId, delta) {
+    // THEY'RE WATCHING (scale-pacing 2026-10-11): a declined proposal banks
+    // courtshipDeclined — for the next 28 days, climb verbs ('codex',
+    // 'broadcast', 'aid', 'gift') land +1 harder. The decline is a
+    // beginning, not a shut door.
+    _nudgeOpinion(villageId, delta, why) {
       try {
         var ov = this._otherVillage(villageId);
         if (!ov) return 0;
+        var day = (this.state.scholar || {}).day || 0;
+        var watching = why && delta > 0 &&
+          (why === 'codex' || why === 'broadcast' || why === 'aid' || why === 'gift') &&
+          ov.courtshipDeclined != null && (day - ov.courtshipDeclined) <= 28;
+        if (watching) delta += 1;
         ov.opinion = Math.max(-100, Math.min(100, (ov.opinion || 0) + delta));
         return ov.opinion;
       } catch (e) { return 0; }
@@ -355,6 +387,17 @@
       return { score: Math.round(score), reasons: reasons, rep: rep };
     },
 
+    // _courtshipNextStep: the decline names the single most relevant
+    // unbanked climb verb — specific, not a menu. Codex unstudied → the
+    // book; otherwise the broadcast and time. (scale-pacing 2026-10-11)
+    _courtshipNextStep(ov) {
+      try {
+        if (ov && !ov._codexOpinionGiven)
+          return 'walk to their fire and sit with their book — study their codex (+3 in their eyes, once)';
+        return 'win where the region hears it — every victory carries your name (+2 each); give it weeks — old slights fade (+1 a week)';
+      } catch (e) { return 'give it time, and come back with deeds instead of words'; }
+    },
+
     // proposeLink: negotiate one organization, primary/subordinate.
     // opts: {asSubordinate: bool, tributeKcalPerWeek}
     // PLAYED, NOT ROLLED (regional audit 2026-10-09): judgeLink scores the
@@ -391,7 +434,12 @@
       // deliberately NOT here: joinVillageReal is defection — leaving Haven
       // ends your standing to propose at all (break-it regional r4). The
       // line says so, honestly.
-      this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut — just not today. The climb is real, and it is visible: walk to their fire and sit with their book — study their codex (+3 in their eyes, once); win where the region hears it — every victory carries your name (+2 each); give it weeks — old slights fade (+1 a week). Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
+      // THE DECLINE IS A BEGINNING (scale-pacing 2026-10-11): the decline
+      // banks courtshipDeclined — climb verbs land +1 harder for the next
+      // 28 days ("they're watching"). The line names the single most
+      // relevant unbanked verb, not the whole menu.
+      try { ov.courtshipDeclined = (this.state.scholar || {}).day || 0; } catch (e) {}
+      this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut — just not today. They're watching now, and the climb lands harder while they watch: ${this._courtshipNextStep(ov)}. Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
       try { if (this._nudgeOpinion) this._nudgeOpinion(targetId, -5); else ov.opinion = (ov.opinion || 0) - 5; } catch (e) {}
       return null;
     },
@@ -523,41 +571,104 @@
       // the moment on the next link (break-it regional 2026-10-10).
       if (!this.state.networkLive || this.state.accordUnanswered) this.stageFirstAccord(link);
       try { this.stirRegion('court', targetId); } catch (e) {}
+      // SEASONS NOT DAYS (scale-pacing 2026-10-11): three subordinates with
+      // no season behind them is leverage, not a realm. Said once, at the
+      // third — never ticked daily.
+      try {
+        if (!opts.asSubordinate && !this.polityOf(HOME) && !link._seasonSaid) {
+          var _subs = 0;
+          var _ls = this.hierarchyState();
+          for (var _si = 0; _si < _ls.length; _si++) {
+            if (_ls[_si].status === 'active' && _ls[_si].primary === HOME) _subs++;
+          }
+          if (_subs >= 3) {
+            link._seasonSaid = true;
+            this.say(`Three fires bow to Haven. But a realm isn't leverage — it's seasons. These bonds are young; tend them, keep the trust, and the court will come.`);
+          }
+        }
+      } catch (e) {}
       return link;
     },
 
     // ---------- THE REGIONAL DAWN ----------
 
-    // stageFirstAccord: THE MOMENT the village becomes regional. Not a stat
-    // threshold — a played beat. The System overlay visibly grows into
-    // coordination (networkLive), the village feels it, and the player
-    // decides Haven's FIRST GESTURE toward the other fire: a real gift of
-    // food, the representative's three days, or cold ink. They watch what
-    // you do first.
+    // stageFirstAccord: Haven's first gesture toward the other fire — a real
+    // gift of food, the representative's three days, or cold ink. They
+    // watch what you do first. THE GESTURE IS NOT THE DAWN (scale-pacing
+    // 2026-10-11): the gesture stages at formation (first-impression timing
+    // is correct), but the Regional Dawn — networkLive, the System's
+    // NETWORK announcement — waits until a bond is 21+ days old (three
+    // weeks of knowing them). Regional before ~day 25 is impossible; the
+    // 1–30 village season is for establishing. See _fireRegionalDawn and
+    // _checkRegional.
     stageFirstAccord(link) {
       if (!link) return null;
       if (this.state.networkLive && !this.state.accordUnanswered) return null;
-      this.state.networkLive = true;
       this.state.accordUnanswered = false;
+      var _day0 = (this.state.scholar || {}).day || 0;
       // SWITCHBOARD (parity 2026-10-10): the office arrives with the regional
       // game — stage the appointment beat. The player picks who holds the
       // words (the deliberate choice is who you lose to the relay).
       try {
         if (this.switchboardAvailable && this.switchboardAvailable()) {
-          this.state.pendingSwitchboard = { day: (this.state.scholar || {}).day || 0 };
+          this.state.pendingSwitchboard = { day: _day0 };
           this.say('📡 The relay needs hands. Every message in and out of Haven — runners\' pleas, traders\' word, all of it — should pass through ONE pair of hands. Name who holds the words. (The choice is up top: every candidate costs something different, and the village will react.)');
         }
       } catch (e) {}
       var other = this._linkOther(link, HOME);
-      this.state.pendingAccord = { linkId: link.id, day: (this.state.scholar || {}).day || 0 };
+      this.state.pendingAccord = { linkId: link.id, day: _day0 };
       var rep = null;
       try { rep = this.representative(); } catch (e) {}
       var rn = 'Someone';
       try { rn = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
-      this.say(`◈ SYSTEM: "One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast."`);
       this.say(`The village feels it before they understand it: Haven isn't just Haven anymore. ${rn} speaks at ${this._ovName(other)}'s table now — earned, not appointed. And the other fire is watching what Haven does FIRST.`);
-      try { if (this.journalNote) this.journalNote('village', 'accord', 'First link formed with ' + this._ovName(other) + '. Haven is regional now — the System tracks the network.'); } catch (e) {}
+      // The Dawn waits for seasons, not handshakes — _checkRegional fires it
+      // when a bond is 21+ days old. If this bond is already old enough
+      // (re-link, late first contact), the Dawn lands now.
+      if ((_day0 - (link.day || 0)) >= 21) {
+        this._fireRegionalDawn(link);
+      } else {
+        this.state._regionalPending = { linkId: link.id };
+        this.say(`Three weeks. That's how long before a handshake is a relationship — the System will say so when it's true. Tend this fire.`);
+      }
+      try { if (this.journalNote) this.journalNote('village', 'accord', 'First link formed with ' + this._ovName(other) + '. The gesture goes out now; the Dawn waits for seasons.'); } catch (e) {}
       return true;
+    },
+
+    // _fireRegionalDawn: THE MOMENT the village becomes regional — played,
+    // never a threshold flip. The System overlay visibly grows into
+    // coordination (networkLive). Fires once, via stageFirstAccord (old
+    // bond) or _checkRegional (the bond came of age).
+    _fireRegionalDawn(link) {
+      try {
+        if (this.state.networkLive) return false;
+        this.state.networkLive = true;
+        this.state.networkLiveDay = (this.state.scholar || {}).day || 0;
+        this.state._regionalPending = null;
+        var other = link ? this._linkOther(link, HOME) : null;
+        this.say(`◈ SYSTEM: "One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast."`);
+        if (other) this.say(`Three weeks of knowing ${this._ovName(other)} — and now it's real. Haven is regional.`);
+        try { if (this.journalNote) this.journalNote('village', 'accord', 'The Regional Dawn: Haven is regional — the System tracks the network.'); } catch (e) {}
+        try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'regional-dawn'); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    },
+
+    // _checkRegional: daily. If the Dawn is pending and any active bond is
+    // 21+ days old, the Dawn fires. Called from hierarchyDaily.
+    _checkRegional() {
+      try {
+        if (this.state.networkLive || !this.state._regionalPending) return;
+        var day = (this.state.scholar || {}).day || 0;
+        var links = this.hierarchyState();
+        for (var i = 0; i < links.length; i++) {
+          var l = links[i];
+          if (l.status === 'active' && (day - (l.day || 0)) >= 21) {
+            this._fireRegionalDawn(l);
+            return;
+          }
+        }
+      } catch (e) {}
     },
 
     // answerAccord: Haven's first gesture. Real costs, real consequences —
@@ -585,7 +696,7 @@
       if (how === 'gift') {
         var paid = this._removePantryKcal(2000);
         var gain = this._trustGain(link, paid >= 2000 ? 10 : Math.max(2, Math.round(10 * paid / 2000)));
-        this._nudgeOpinion(other, paid >= 2000 ? 5 : 2);
+        this._nudgeOpinion(other, paid >= 2000 ? 5 : 2, 'gift');
         this._linkNote(link, 'accord', 'First gesture: gift of ' + paid.toLocaleString() + ' kcal.');
         try { this.seedGossip('accord_' + link.id, { generous: 5 }, (this.npcIds ? this.npcIds().slice(0, 4) : [])); } catch (e) {}
         if (paid <= 0) {
@@ -1522,7 +1633,10 @@
         var subs = [], subLinks = [];
         for (i = 0; i < links.length; i++) {
           l = links[i];
-          if (l.status === 'active' && l.primary === HOME) { subs.push(l.subordinate); subLinks.push(l); }
+          // SEASONED ONLY (scale-pacing 2026-10-11): a subordinate counts
+          // toward the realm only when the relationship is real — 28+ days
+          // and trust 40+ (conquered: the season, not the trust).
+          if (l.status === 'active' && l.primary === HOME && this._linkSeasoned(l, !!l.conquered)) { subs.push(l.subordinate); subLinks.push(l); }
         }
         if (subs.length >= 3) {
           // CONQUEST (2026-10-10): a led realm where every subordinate was
@@ -1573,8 +1687,11 @@
     // _covenantPolity: the COVENANT road — a league of >=4 fires with no
     // primary. Four fires under no head is a polity; three is a pact.
     // Mutual defense + shared tribute pool; decisions by council vote.
+    // SEASONED ONLY (scale-pacing 2026-10-11): each counted link must be
+    // 28+ days old with trust 40+ — three cold accepts in three days is a
+    // pact, not a nation.
     _covenantPolity() {
-      var ls = this._peerLinks('covenant');
+      var ls = this._peerLinks('covenant').filter((l) => this._linkSeasoned(l));
       if (ls.length < 3) return null;
       var vs = ['haven'];
       for (var i = 0; i < ls.length; i++) vs.push(ls[i].a === HOME ? ls[i].b : ls[i].a);
@@ -1583,8 +1700,9 @@
 
     // _tradePolity: the TRADE road — a league of >=4 fires bound by the
     // charter. Pooled trade routes, tariff income, no mutual defense.
+    // SEASONED ONLY (scale-pacing 2026-10-11): same bar as covenant.
     _tradePolity() {
-      var ls = this._peerLinks('trade');
+      var ls = this._peerLinks('trade').filter((l) => this._linkSeasoned(l));
       if (ls.length < 3) return null;
       var vs = ['haven'];
       for (var i = 0; i < ls.length; i++) vs.push(ls[i].a === HOME ? ls[i].b : ls[i].a);
@@ -1623,7 +1741,7 @@
           if (!v || v.id === 'haven') continue;
           try { if (!this.knowsVillage(v)) continue; } catch (e) { continue; }
           heard++;
-          if (outcome === 'won') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, 2); } catch (e2) {} }
+          if (outcome === 'won') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, 2, 'broadcast'); } catch (e2) {} }
           else if (outcome === 'died') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, -2); } catch (e2) {} }
         }
         if (heard > 0) this.stirRegion('contest', contestName || 'the show');
@@ -1780,6 +1898,13 @@
         if (this.state.nationalLive || this.state.pendingNational) return;
         if (this.state.scaleRefused) return;
         var day = (this.state.scholar || {}).day || 0;
+        // ONE RUNG PER SEASON (scale-pacing 2026-10-11, Steve: 1 season =
+        // 30 days; VILLAGE 1–30, REGIONAL 31–60, NATIONAL 61–90): national
+        // cannot stage until Haven has been regional for a full season.
+        // The rung gate is deed-backed (the Dawn was earned), not a pure
+        // calendar flip — but the ladder is climbed one season at a time.
+        var _netDay = this.state.networkLiveDay || 0;
+        if (!this.state.networkLive || (day - _netDay) < 30) return;
         var defer = this.state._natDefer || {};
         var cands = [this.polityOf(HOME), this._belongPolity(), this._covenantPolity(), this._tradePolity()];
         for (var i = 0; i < cands.length; i++) {
@@ -2324,6 +2449,17 @@
       if (!ov || targetId === HOME) { this.say('No one to bind.'); return null; }
       if (this.linkWith(targetId)) { this.say('There is already a link. One organization, one link — tend it.'); return null; }
       if (this.state.pendingCounter) { this.say('There is already an offer on the table — answer it first.'); return 'counter'; }
+      var opinion0 = ov.opinion || 0;
+      var kindName0 = kind === 'covenant' ? 'covenant' : 'charter';
+      // PEER BINDING NEEDS COURTSHIP (scale-pacing 2026-10-11): knowsVillage
+      // alone unlocked polity-level proposals — three cold accepts in three
+      // days was a nation. A league is a relationship: they need to know
+      // Haven's name (opinion 10+) before the binding is even proposed.
+      // This is a prerequisite, not an ask — no proposal, no -5.
+      if (opinion0 < 10) {
+        this.say(`${ov.name || 'They'} barely know Haven's name — and a ${kindName0} is a relationship, not a handshake. Sit with them first: walk to their fire and study their codex, win where the region hears it, give it weeks. Come back when they know what Haven is.`);
+        return null;
+      }
       var j = this._judgePeer(targetId, { kind: kind });
       var nm = ov.name || 'them';
       var opinion = ov.opinion || 0;
@@ -2340,7 +2476,10 @@
       // THE CLIMB IS VISIBLE (journey-scale r2 2026-10-11): see proposeLink —
       // the decline names the climb verbs with their real numbers. "Join
       // them" is not among them: joining is leaving Haven (see proposeLink).
-      this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut — just not today. The climb is real, and it is visible: walk to their fire and sit with their book — study their codex (+3 in their eyes, once); win where the region hears it — every victory carries your name (+2 each); give it weeks — old slights fade (+1 a week). Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
+      // THE DECLINE IS A BEGINNING (scale-pacing 2026-10-11): banks
+      // courtshipDeclined — climb verbs land +1 harder for 28 days.
+      try { ov.courtshipDeclined = (this.state.scholar || {}).day || 0; } catch (e) {}
+      this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut — just not today. They're watching now, and the climb lands harder while they watch: ${this._courtshipNextStep(ov)}. Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
       try { this._nudgeOpinion(targetId, -5); } catch (e) {}
       return null;
     },
@@ -2412,6 +2551,17 @@
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'peer:' + kind + ':' + targetId); } catch (e) {}
       if (!this.state.networkLive || this.state.accordUnanswered) this.stageFirstAccord(link);
       try { this.stirRegion('court', kind + ':' + targetId); } catch (e) {}
+      // SEASONS NOT DAYS (scale-pacing 2026-10-11): three bonds with no
+      // season behind them is a pact, not a nation. Said once, at the
+      // third bond — never ticked daily.
+      try {
+        var _nl = this._peerLinks(kind);
+        var _pq = kind === 'covenant' ? this._covenantPolity() : this._tradePolity();
+        if (_nl.length >= 3 && !_pq && !link._seasonSaid) {
+          link._seasonSaid = true;
+          this.say(`Three bonds. But bonds aren't seasons — ${kind === 'covenant' ? 'a league' : 'a charter'} is a relationship, and relationships take seasons. Tend these fires — keep the trust, keep the weeks — and the ${kind === 'covenant' ? 'council' : 'charter'} will come.`);
+        }
+      } catch (e) {}
       return link;
     },
 
@@ -2950,6 +3100,7 @@
       try { this.linkTick(); } catch (e) {}
       try { this._foreignPolitySim(); } catch (e) {}
       try { this._renegotiationTick(); } catch (e) {}
+      try { this._checkRegional(); } catch (e) {}
       try { this._checkNational(); } catch (e) {}
       try { this._checkGlobal(); } catch (e) {}
       try { this.deliverVillageRumors(); } catch (e) {}
@@ -3039,7 +3190,7 @@
         var ov = (this.state.otherVillages || []).find(function (x) { return x.id === villageId; });
         if (ok && ov && !ov._codexOpinionGiven) {
           ov._codexOpinionGiven = true;
-          if (this._nudgeOpinion) this._nudgeOpinion(villageId, 3);
+          if (this._nudgeOpinion) this._nudgeOpinion(villageId, 3, 'codex');
           this.say(`Word gets around ${ov.name || 'the village'}: you sat with their book and treated it like it mattered. They noticed.`);
         }
       } catch (e) {}

@@ -16,19 +16,33 @@ gates System upgrades.
 ### 1. VILLAGE — one fire
 Haven alone. No mechanics change. `scaleRank()` → `'village'`.
 
-### 2. REGIONAL — two fires is a network (implemented, pre-existing)
-- **Bar:** Haven's first-ever link (`state.networkLive`).
-- **The beat:** the Regional Dawn — played, with Haven's first gesture (gift 2,000 pantry
-  kcal / send the representative 3 days / cold ink). The System overlay visibly grows into
-  coordination.
+### 2. REGIONAL — two fires is a network
+- **Bar:** Haven's first bond is 21+ days old (three weeks of knowing them).
+  The first gesture (gift 2,000 pantry kcal / send the representative 3 days /
+  cold ink) stages at link formation — first-impression timing is correct —
+  but the Regional Dawn itself (networkLive, the System's NETWORK
+  announcement) waits for seasons, not handshakes. Regional before ~day 25
+  is impossible; the 1–30 village season is for establishing.
+- **The beat:** the Regional Dawn — played, with Haven's first gesture. The
+  System overlay visibly grows into coordination.
 - **Unlocks:** tribute, demands, the climb (renegotiate, bid for primacy), succession.
 
 ### 3. NATIONAL — the polity moment
-- **Definition:** a polity is **one primary with ≥3 active subordinates** — four fires
-  under one head is a realm; two is a pact. (Deliberate design call, 2026-10-10: the
-  "three villages plus surplus" sketch Steve rejected as gameable becomes a bar about
-  *relationships held*, not villages counted — each subordinate is a live trust/tribute
-  relationship, any of which can snap.)
+- **Pacing (Steve 2026-10-11):** 1 season = 30 days. The ladder is one rung
+  per season: VILLAGE days 1–30, REGIONAL days 31–60, NATIONAL days 61–90,
+  GLOBAL/table days 91+. National before ~day 60 is effectively impossible;
+  a real courtship lands it ~day 65–90.
+- **Definition:** a polity is **one primary with ≥3 SEASONED subordinates**
+  — four fires under one head is a realm; two is a pact. Seasoned = 30+ days
+  old AND trust 40+ (links form at trust 30 — tending required). Conquered
+  links need the season, not the trust. (Deliberate design call, 2026-10-10:
+  the "three villages plus surplus" sketch Steve rejected as gameable becomes
+  a bar about *relationships held*, not villages counted — each subordinate
+  is a live trust/tribute relationship, any of which can snap. Seasoning
+  added 2026-10-11: three cold accepts in three days was a nation.)
+- **One rung per season:** national cannot stage until Haven has been
+  regional for a full season (networkLiveDay + 30). Deed-backed, not a pure
+  calendar flip — but the ladder is climbed one season at a time.
 - **Haven's six roads in** (Steve approved all six 2026-10-10; contract: "leads or
   belongs to" is now one of six):
   - **LEAD** — Haven is primary of ≥3 active subordinates. The built realm. Earned via
@@ -42,15 +56,17 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
     (winseek + oracle-v2 measurement; exploit audit). Steve's
     standing rule: you may NOT end the game at the top — joining another kingdom is a
     legitimate earned outcome, and this is its doorway.
-  - **COVENANT** — Haven holds covenant links with ≥3 other villages: a league with
-    **no primary**. Peer links (`kind: 'covenant'`, no primary/subordinate) — mutual
+  - **COVENANT** — Haven holds covenant links with ≥3 other villages, each
+    link seasoned (30+ days, trust 40+): a league with **no primary**. Peer
+    links (`kind: 'covenant'`, no primary/subordinate) — mutual
     defense (any member's call is answered with two villagers for three days, or
     refused aloud at −10 trust league-wide) + a shared tribute pool (2,000 kcal/week
     per fire, real food in and out; famine draws are written in the council's book).
     Decisions by council vote (played). Any member can trigger a succession-style
     crisis — concede (better terms), hold the line (they may secede), or release them
     with honor.
-  - **TRADE** — Haven holds trade links with ≥3 other villages: an economic polity.
+  - **TRADE** — Haven holds trade links with ≥3 other villages, each link
+    seasoned (30+ days, trust 40+): an economic polity.
     Pooled trade routes pay tariff income weekly (1,000 kcal/route, real food in;
     400 kcal route upkeep, real food out). **No mutual defense obligation** — when a
     member asks for help, Haven may refuse aloud (the charter allows it, −4 trust) or
@@ -124,9 +140,10 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
     designed — the BELONG road is its on-ramp.
 - **Knowledge never gates the scale:** peer proposals, raids, and all four new beats
   are never knowledge-gated — force and trade don't ask what you know.
-- **Anti-speedrun:** the climb is paced in weeks (the table is a weekly verb), trust is
-  deed-earned, tribute is real food, foreign polities grow off-screen slowly. No pure
-  calendar path exists.
+- **Anti-speedrun:** the climb is paced in weeks and seasons (the table is a
+  weekly verb; polity links need a 30-day season; national needs a 30-day-old
+  regional rung), trust is deed-earned, tribute is real food, foreign polities
+  grow off-screen slowly. No pure calendar path exists.
 - **National is a live state, not a title (2026-10-10, break-it r4):** when the realm
   dissolves — no qualifying polity and no pending beat — `nationalLive` and `globalLive`
   clear and any pending global summons dies, all said aloud. A polity is a live
@@ -173,7 +190,8 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
   - (UI wiring in app.js is a separate workstream — same pattern as
     `state.pendingAccord` / `Game.answerAccord`.)
 - Peer-polity API: `Game.proposeCovenant(vid)` / `Game.proposeTrade(vid)` (played
-  courtship bands, counter-offers via `pendingCounter.kind`), `Game.raidVillage(vid)` /
+  courtship bands, counter-offers via `pendingCounter.kind`; require opinion ≥ 10 —
+  a league is a relationship, not a handshake), `Game.raidVillage(vid)` /
   `Game.answerRaid('strike'|'terms'|'withdraw')`, `Game.covenantCrisis(linkId, why)` /
   `Game.answerCovenantCrisis(linkId, 'concede'|'hold'|'release')`,
   `Game.answerDefenseCall(linkId, 'send'|'refuse')` (covenant),
@@ -233,6 +251,15 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
 
 ## Change log
 
+- 2026-10-11: scale pacing (Steve: "National is being hit way too quickly").
+  1 season = 30 days pinned; ladder is one rung per season (VILLAGE 1–30,
+  REGIONAL 31–60, NATIONAL 61–90, GLOBAL 91+). Polity links must be seasoned
+  (30+ days, trust 40+; conquered: season only). The Regional Dawn waits for
+  a 21+ day bond (gesture stages at formation; the Dawn is not the gesture).
+  National requires regional ≥ 30 days old. Peer proposals need opinion ≥ 10.
+  Declines bank courtshipDeclined (+1 on climb verbs for 28 days). Proof:
+  scripts/test-scale-pacing.js (47/47 ×3 seeds; national median 81, zero
+  before 60). Evidence: evidence/2026-10-11/scale-pacing.md.
 - 2026-10-10: ladder designed and national/global implemented (prog-scale workstream).
 - 2026-10-10: endgame deed gate retuned (Steve: ~100-day target, every wave
   1-5 must be fought — 5/5/4/3/2 distinct per wave). scaleRank's national+

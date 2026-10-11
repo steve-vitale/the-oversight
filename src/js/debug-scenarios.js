@@ -1206,6 +1206,7 @@
       const ovs = Game.state.otherVillages || [];
       ovs.forEach(v => { v.generated = true; v.rumored = true; });
       Game.state.networkLive = true; // regional — the office arrives with it
+      Game.state.networkLiveDay = s.day || 0;
       if (ovs[0]) {
         try { Game._formLink(ovs[0].id, {}, null); } catch (e) { Game.say('🐞 link form failed: ' + e.message); }
         try {
