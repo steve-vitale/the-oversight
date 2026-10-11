@@ -2051,6 +2051,14 @@
         var tile = null;
         try { tile = this.tileAt ? this.tileAt(this.map.px, this.map.py) : null; } catch (e0b) {}
         if (tile && tile.type === 'haven') return false; // not Haven. Never Haven.
+        // SWEEP FIRST (break-it alien r14 2026-10-11, sibling of the r10
+        // apDousePlayerFire fix): expired-but-unswept fires still read 'fire'
+        // on the grid. Without the sweep, the purge below removes an entry
+        // whose flame was already gone and the burn announces "Your fire
+        // dies in the burn" about a pit that burned down on its own — the
+        // same copy-vs-engine class the douse path fixed. Sweep, then only
+        // live fires can be named as lost.
+        try { if (typeof this.sweepDeadFires === 'function') this.sweepDeadFires(); } catch (e0s) {}
         var bd = this.genDetail(this.map.px, this.map.py);
         var bpx = (s.mx == null ? 4 : s.mx), bpy = (s.my == null ? 4 : s.my);
         var want = 3 + Math.floor(Math.random() * 3), scorched = 0, btries = 0, burnedPlayerFire = false;

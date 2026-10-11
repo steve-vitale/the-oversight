@@ -6,12 +6,17 @@ standing designs applied: impersonate HUMANS not monsters (2026-10-07), "They
 are all other players too" (2026-10-11), "If you don't know, it doesn't show",
 encounters fought not rolled, monster tiers ≠ loot tiers.
 
-## Verdict: HELD. Nothing broke. No fixes, no sibling sweep needed.
+## Verdict: HELD, then one re-break on a known-fixed surface — FIXED.
 
-This is the 7th adversarial pass on this module (r3/r4/r6/r7/r11/r13 before).
-Prior rounds already hardened the sporting rules, death permanence, kill-only
-salvage, knowledge gating, and the beam path. This round re-attacked every
-class and found the armor holding.
+The full hostile battery (exploits, softlocks, honesty, dead code) held — see
+below. Per the coordinator heads-up, I then attacked the PATCHED
+apPlaygroundBurn (74d7ebc7, break-it camps 2026-10-11: phantom-fire purge) and
+re-broke it: the purge never swept dead fires first, so an EXPIRED-but-unswept
+fire was announced as "Your fire dies in the burn" — the same copy-vs-engine
+class the r10 apDousePlayerFire fix had already fixed by sweeping first.
+Fixed with the same one-line sweep; sibling-swept the class into game.js's
+_cellInteract (warm-hands lie at an expired fire). Both fixes proven
+before/after.
 
 ## Attacks attempted
 
@@ -107,9 +112,35 @@ and the corpse never re-rolled or re-activated. 19/19 × 3 seeds.
   migrates feet→shoes on load, so double-counting is unreachable in practice.
   Left alone.
 
+## Re-break: the burn fix's missing sweep (FIXED)
+Coordinator heads-up: master includes 74d7ebc7 (camps run: the burn rubbled the
+grid cell but left the tracked entry live — phantom fires). The fix purges the
+entry and names the loss. Attack on the PATCH:
+- The purge never calls `sweepDeadFires()` first. An expired-but-unswept fire
+  (till passed, cell still 'fire' on the grid) hit by the burn was purged AND
+  announced as "Your fire dies in the burn — the cell is rubble now, the flame
+  gone with it." The flame was already gone — a pit that burned down on its
+  own. Same class as the r10 apDousePlayerFire fix, which sweeps first.
+- Proof: `scripts/test-break-alien7-burnfix-20261011.js` — before the fix, the
+  expired-fire case SAID the lie (1/6 fail); after adding the sweep, 6/6 × 3
+  seeds. Live-fire control still names the loss honestly, entry purged, cell
+  rubble, playerFireAt false.
+- Fix (alienPlayers.js, apPlaygroundBurn): guarded `sweepDeadFires()` at the
+  top of the burn, mirroring apDousePlayerFire.
+- SIBLING SWEEP: hunted "acts on expired fire without sweeping" across the
+  tree. `nearFire`, `fireLastsTillDawn`, cook path, `hasCampfireNearby` all
+  sweep or check `till` directly. ONE sibling found: game.js `_cellInteract`
+  (tap a fire cell → "You warm your hands. The fire pops.") never swept —
+  tapping an expired fire narrated warmth at a dead pit. Fixed with a guarded
+  sweep after the over/combat guards. Verified: expired → swept to dirt, no
+  message; live → still warms.
+
 ## Proof
 - `scripts/test-break-alien7-20261011.js` — 31/31 × 3 seeds (777, 1234, 99999)
 - `scripts/test-break-alien7-fight-20261011.js` — 19/19 × 3 seeds (4242, 7777, 31337)
+- `scripts/test-break-alien7-burnfix-20261011.js` — 6/6 × 3 seeds (5150, 1234, 99999); FAILED 1/6 before the fix (the lie), green after
+- Regression: `scripts/test-break-camps-20261011.js` (the original burn-fix
+  proof) still 31/31 with the sweep added
 - Ontology validator: 63/63 systems, release permitted (no changes needed).
 
 ## Attack surface notes (why it held)

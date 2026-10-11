@@ -9725,6 +9725,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // forage...) for free AND hand monsters extra turns. Same class as the
       // examineCell/beginPathWalk/travelTo combat guards: refuse, loudly.
       if (this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      // SWEEP FIRST (break-it alien r14 2026-10-11, sibling of the
+      // apPlaygroundBurn/apDousePlayerFire fixes): expired-but-unswept fires
+      // still read 'fire' on the grid — tapping one said "You warm your
+      // hands. The fire pops." at a pit that burned down on its own. Every
+      // fire-touching path sweeps; this one didn't.
+      try { this.sweepDeadFires(); } catch (e) {}
       // ACTIONS move the world. Steps don't.
       this.monsterTurn();
       this.animalTurn();
