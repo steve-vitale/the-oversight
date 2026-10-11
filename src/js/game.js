@@ -9724,11 +9724,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // trail — next crossing, it tries again.
         if (mdef && mdef.follows && this.monsterAt(x, y)) {
           // (explorer loop 2026-10-06 bug 2, same class): monsterNoun can be a
-          // vague descriptor — never compose "The something…".
-          const mn = this.monsterNoun(mdef.id);
-          if (/^something\b/i.test(mn)) this.say(`It stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.`);
-          else this.say(`The ${mn} stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.`);
+          // vague descriptor — never compose "The something…". Nor "The The
+          // Redactor" — monsterNoun may already carry the article.
+          const mn0 = this.monsterNoun(mdef.id);
+          const mnB = /^something\b/i.test(mn0) ? mn0 : mn0.replace(/^the\s+/i, '');
+          if (/^something\b/i.test(mn0)) this.say(`It stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.`);
+          else this.say(`The ${mnB} stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.`);
         } else if (mdef && mdef.follows) {
+          // HAVENS ARE SAFE (Steve 2026-10-05): a follower does not chase you
+          // onto a safe tile — it holds at the boundary, same treatment as
+          // claimed ground above. (2026-10-11: wave-3 followers were entering
+          // haven tiles via this branch and starting combat inside the
+          // sanctuary — the one place the game promises is safe. Every other
+          // spawn/movement path already respects isSafeTile; this one didn't.)
+          const mn0 = this.monsterNoun(mdef.id);
+          const isVague = /^something\b/i.test(mn0);
+          const mn = isVague ? mn0 : mn0.replace(/^the\s+/i, '');
+          const mnCap = mn.charAt(0).toUpperCase() + mn.slice(1);
+          if (this.isSafeTile(x, y)) {
+            if (isVague) this.say(`It stops at the treeline — pacing, unwilling. The walls end the argument. ${mnCap} is still out there.`);
+            else this.say(`The ${mn} stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there.`);
+          } else {
           // FOLLOW RE-ENTRY (explorer loop 2026-10-05): the monster chases
           // you through the boundary and enters the NEW grid at the edge you
           // came from, a step or two behind you. Its old mx/my belonged to
@@ -9748,9 +9764,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // descriptor rather than a noun ("something huge, rooting in the
           // underbrush", or the 'something' fallback) — never compose
           // "The something…" or "The something huge…".
-          const mn = this.monsterNoun(mdef.id);
-          if (/^something\b/i.test(mn)) this.say(`It followed you. ${mn.charAt(0).toUpperCase() + mn.slice(1)} is here.`);
+          if (isVague) this.say(`It followed you. ${mnCap} is here.`);
           else this.say(`It followed you. The ${mn} is here.`);
+          }
         }
         // else: it stays on the old tile. Continuity — the world must live.
       }

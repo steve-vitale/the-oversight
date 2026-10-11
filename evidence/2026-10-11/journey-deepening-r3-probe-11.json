@@ -1,0 +1,1400 @@
+{
+ "seed": 11,
+ "probe": true,
+ "maxGameDay": 95,
+ "endReason": "survived",
+ "waveLog": [
+  {
+   "day": 2,
+   "wave": 1,
+   "w2points": 0,
+   "villageSlain": {},
+   "engaged": {
+    "w1": 0,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 34,
+   "wave": 2,
+   "w2points": 0,
+   "villageSlain": {
+    "hushwolf": 1,
+    "nightlight_catfish": 1,
+    "mirrormoth": 1,
+    "lockpick_raccoon": 1
+   },
+   "engaged": {
+    "w1": 6,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 45,
+   "probe": "w3-injected",
+   "w2points": 5,
+   "wave": 3
+  },
+  {
+   "day": 46,
+   "wave": 3,
+   "w2points": 5,
+   "villageSlain": {
+    "hushwolf": 1,
+    "nightlight_catfish": 1,
+    "mirrormoth": 3,
+    "lockpick_raccoon": 1,
+    "white_noise_heron": 1,
+    "giant_mosquito": 2
+   },
+   "engaged": {
+    "w1": 6,
+    "w2": 3,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  }
+ ],
+ "deedLog": [
+  {
+   "day": 50,
+   "engaged": {
+    "w1": 7,
+    "w2": 5,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   },
+   "wave": 3,
+   "pop": 6,
+   "pantry": 23950,
+   "w3fights": 0
+  },
+  {
+   "day": 70,
+   "engaged": {
+    "w1": 8,
+    "w2": 6,
+    "w3": 2,
+    "w4": 0,
+    "w5": 0
+   },
+   "wave": 3,
+   "pop": 4,
+   "pantry": 6925,
+   "w3fights": 2
+  },
+  {
+   "day": 90,
+   "engaged": {
+    "w1": 8,
+    "w2": 6,
+    "w3": 3,
+    "w4": 0,
+    "w5": 0
+   },
+   "wave": 3,
+   "pop": 2,
+   "pantry": 488,
+   "w3fights": 3
+  }
+ ],
+ "finalWave": 3,
+ "finalScale": "village",
+ "probed": true,
+ "engaged": {
+  "w1": 8,
+  "w2": 6,
+  "w3": 4,
+  "w4": 0,
+  "w5": 0
+ },
+ "wavesFaced": {
+  "hushwolf": 1,
+  "nightlight_catfish": 1,
+  "mirrormoth": 1,
+  "lockpick_raccoon": 1,
+  "nightcourt": 1,
+  "white_noise_heron": 1,
+  "giant_mosquito": 2,
+  "bright_idea": 2,
+  "heckler": 2,
+  "understudy": 2,
+  "statickite": 2,
+  "speedbump_turtle": 1,
+  "buffering": 3,
+  "spool": 3,
+  "gallowdeer": 1,
+  "memory_projector": 2,
+  "redactor": 3,
+  "chorus_line": 3
+ },
+ "w3fights": [
+  {
+   "day": 54,
+   "rounds": 41,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "wave": 3,
+     "name": "Spool",
+     "hp0": 302
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 0,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "spool",
+     "hp": 229,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "spool": [
+     "reel",
+     "REPLAY",
+     "the tape"
+    ]
+   },
+   "sample": [
+    "You STRIKE the spool for 10.",
+    "🎞 REC ● (1/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~10).",
+    "You STRIKE the spool for 12.",
+    "🎞 REC ● (2/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~12).",
+    "You STRIKE the spool for 9.",
+    "🎞 REC ● (3/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~9).",
+    "The reels spin up — WHIRRR. LOADED: 1. STRIKE (~10)  2. STRIKE (~12)  3. STRIKE (~9). Watch the reel, not the tape. (Examine the reel to read exact numbers.)",
+    "You STRIKE the spool for 7.",
+    "The spool’s replay hits you for 10.",
+    "▶ REPLAY 1/3: STRIKE — the tape plays your own swing back at you. (10)",
+    "You STRIKE the spool for 10.",
+    "The spool’s replay hits you for 12."
+   ]
+  },
+  {
+   "day": 63,
+   "rounds": 52,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "buffering",
+     "wave": 3,
+     "name": "Buffering",
+     "hp0": 303
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": -13,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "buffering",
+     "hp": 263,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "buffering": [
+     "afterimage",
+     "will step"
+    ]
+   },
+   "sample": [
+    "Your strike passes through the BRIGHTEST frame — light and noise. It was already gone; that frame is the past. (The faintest frame is the real present — close your eyes and swing at where it IS, or strike right after it moves.)",
+    "The frames are snapped together — for one heartbeat it is all HERE. You strike.",
+    "You STRIKE the buffering for 20 (Stone knife).",
+    "Buffering hits you for 15.",
+    "📖 Codex: Catch Up — strikes without warning when you get close. You won't forget this.",
+    "Your strike passes through the BRIGHTEST frame — light and noise. It was already gone; that frame is the past. (The faintest frame is the real present — close your eyes and swing at where it IS, or strike right after it moves.)",
+    "Buffering hits you for 17.",
+    "Your strike passes through the BRIGHTEST frame — light and noise. It was already gone; that frame is the past. (The faintest frame is the real present — close your eyes and swing at where it IS, or strike right after it moves.)",
+    "Your strike passes through the BRIGHTEST frame — light and noise. It was already gone; that frame is the past. (The faintest frame is the real present — close your eyes and swing at where it IS, or strike right after it moves.)",
+    "It steps up — exactly where it said it would. Three frames trail it; the faintest one is HERE. (Sync window — strike now.)",
+    "The frames are snapped together — for one heartbeat it is all HERE. You strike.",
+    "You STRIKE the buffering for 20 (Stone knife)."
+   ]
+  },
+  {
+   "day": 78,
+   "rounds": 34,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "redactor",
+     "wave": 3,
+     "name": "The Redactor",
+     "hp0": 282
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": -22,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "redactor",
+     "hp": 260,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "redactor": [
+     "REDACT",
+     "redact"
+    ]
+   },
+   "sample": [
+    "You STRIKE the redactor for 11.",
+    "Redactor's attack hits you for 42.",
+    "📖 Codex: Redact — locks onto one target — moving won't dodge it. You won't forget this.",
+    "You STRIKE the redactor for 11.",
+    "Redactor's Redact hits you for 34.",
+    "Redactor's Redact hits you for 46."
+   ]
+  },
+  {
+   "day": 82,
+   "rounds": 37,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "spool",
+     "wave": 3,
+     "name": "Spool",
+     "hp0": 322
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": -24,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "spool",
+     "hp": 196,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "spool": [
+     "reel",
+     "REPLAY",
+     "the tape"
+    ]
+   },
+   "sample": [
+    "You STRIKE the spool for 29 (Crowbar).",
+    "🎞 REC ● (1/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~29).",
+    "You STRIKE the spool for 29 (Crowbar).",
+    "🎞 REC ● (2/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~29).",
+    "You STRIKE the spool for 21 (Crowbar).",
+    "🎞 REC ● (3/3) — the spool’s lens-eye never leaves you. It saw: STRIKE (~21).",
+    "The reels spin up — WHIRRR. LOADED: 1. STRIKE (~29)  2. STRIKE (~29)  3. STRIKE (~21). Watch the reel, not the tape. (Examine the reel to read exact numbers.)",
+    "You STRIKE the spool for 26 (Crowbar).",
+    "The spool’s replay hits you for 27.",
+    "▶ REPLAY 1/3: STRIKE — the tape plays your own swing back at you. (27)",
+    "You STRIKE the spool for 21 (Crowbar).",
+    "The spool’s replay hits you for 32."
+   ]
+  },
+  {
+   "day": 92,
+   "rounds": 45,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "chorus_line",
+     "wave": 3,
+     "name": "Chorus Line",
+     "hp0": 318
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": -28,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "chorus_line",
+     "hp": 63,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "chorus_line": [
+     "downbeat"
+    ]
+   },
+   "sample": [
+    "You STRIKE the chorus line for 20 (Stone knife).",
+    "You STRIKE the chorus line for 24 (Stone knife).",
+    "You STRIKE the chorus line for 23 (Stone knife).",
+    "The downbeat kick hits you for 32.",
+    "You STRIKE the chorus line for 26 (Stone knife).",
+    "You STRIKE the chorus line for 20 (Stone knife).",
+    "You STRIKE the chorus line for 26 (Stone knife).",
+    "You STRIKE the chorus line for 20 (Stone knife).",
+    "The downbeat kick hits you for 32.",
+    "You STRIKE the chorus line for 25 (Stone knife).",
+    "You STRIKE the chorus line for 24 (Stone knife).",
+    "You STRIKE the chorus line for 22 (Stone knife)."
+   ]
+  }
+ ],
+ "w3killsByType": {},
+ "sigFired": {
+  "spool": [
+   "reel",
+   "REPLAY",
+   "the tape",
+   "reel",
+   "REPLAY",
+   "the tape"
+  ],
+  "buffering": [
+   "afterimage",
+   "will step"
+  ],
+  "redactor": [
+   "REDACT",
+   "redact"
+  ],
+  "chorus_line": [
+   "downbeat"
+  ]
+ },
+ "fightsByWave": {
+  "1": 7,
+  "2": 4,
+  "3": 5
+ },
+ "fightsTotal": 16,
+ "foughtWaves": [
+  {
+   "day": 19,
+   "waves": [
+    1
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 19,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 19,
+   "waves": [
+    1
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 26,
+   "waves": [
+    1
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 44,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 54,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 55,
+   "waves": [
+    2
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 55,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 63,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 66,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 66,
+   "waves": [
+    2
+   ],
+   "result": "won"
+  },
+  {
+   "day": 73,
+   "waves": [
+    1
+   ],
+   "result": "won"
+  },
+  {
+   "day": 73,
+   "waves": [
+    1
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 78,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 82,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 92,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  }
+ ],
+ "census": [
+  {
+   "id": "james_okonkwo",
+   "name": "James",
+   "alive": true,
+   "occupation": "carpenter",
+   "temperament": "steady",
+   "trust": 2,
+   "mood": "hungry",
+   "plantsKnown": 28,
+   "agencyXP": {
+    "gen_0qcghpo": {
+     "tracking": 1,
+     "survival": 0,
+     "bravery": 0
+    },
+    "gen_7ep4lmc": {
+     "tracking": 3,
+     "survival": 0,
+     "bravery": 0
+    },
+    "gen_1fo0vsd": {
+     "tracking": 21,
+     "survival": 33,
+     "bravery": 0
+    },
+    "sofia_chen": {
+     "tracking": 3,
+     "survival": 0,
+     "bravery": 0
+    },
+    "marcus_webb": {
+     "tracking": 3,
+     "survival": 0,
+     "bravery": 0
+    },
+    "gen_b34t404": {
+     "tracking": 0,
+     "survival": 0,
+     "bravery": 0
+    },
+    "gen_ieqh3a3": {
+     "tracking": 2,
+     "survival": 0,
+     "bravery": 0
+    },
+    "rosa_mendez": {
+     "tracking": 3,
+     "survival": 0,
+     "bravery": 0
+    },
+    "emma_larsen": {
+     "tracking": 17,
+     "survival": 14,
+     "bravery": 6
+    },
+    "james_okonkwo": {
+     "tracking": 1,
+     "survival": 0,
+     "bravery": 0
+    },
+    "david_kim": {
+     "tracking": 2,
+     "survival": 0,
+     "bravery": 0
+    }
+   }
+  }
+ ],
+ "deaths": [
+  {
+   "day": 19,
+   "who": "gen_dkjljvy",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 19,
+   "who": "hushwolf",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 19,
+   "who": "gen_1fo0vsd",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 20,
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 21,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 27,
+   "who": "marcus_webb",
+   "cause": "the expedition",
+   "kind": "villager"
+  },
+  {
+   "day": 33,
+   "who": "gen_b34t404",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 33,
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 39,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 39,
+   "who": "sofia_chen",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 43,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "white_noise_heron",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 44,
+   "who": "giant_mosquito",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 45,
+   "who": "gen_0qcghpo",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 54,
+   "who": "gen_7ep4lmc",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 54,
+   "who": "heckler",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 54,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 55,
+   "who": "gallowdeer",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 63,
+   "who": "rosa_mendez",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 66,
+   "who": "memory_projector",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 66,
+   "who": "memory_projector",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 72,
+   "who": "white_noise_heron",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 73,
+   "who": "white_noise_heron",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 78,
+   "who": "gen_ieqh3a3",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 82,
+   "who": "emma_larsen",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 92,
+   "who": "david_kim",
+   "cause": "combat",
+   "kind": "villager"
+  }
+ ],
+ "regionalLog": [
+  {
+   "day": 25,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  },
+  {
+   "day": 32,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  },
+  {
+   "day": 39,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  },
+  {
+   "day": 46,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  },
+  {
+   "day": 53,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  },
+  {
+   "day": 60,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "declined"
+  }
+ ],
+ "convoFiles": [
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day55.txt",
+  "/tmp/journey-deep-r3-transcript-11-day75.txt"
+ ],
+ "contestStuck": 0,
+ "contestCalls": 33,
+ "contestNote": null,
+ "ctxSummary": {
+  "struck": 72,
+  "fled": 39,
+  "fledDeepening": 3,
+  "fightsStarted": 16,
+  "geared": 74,
+  "armored": 23,
+  "beasttricksAsked": 0,
+  "beasttricksTaught": 0
+ },
+ "pacing": {
+  "perDay": [
+   {
+    "day": 1,
+    "verbs": 3,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 2,
+    "verbs": 3,
+    "policyCalls": 0,
+    "dayTicks": 138
+   },
+   {
+    "day": 3,
+    "verbs": 9,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 4,
+    "verbs": 16,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 5,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 6,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 7,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 8,
+    "verbs": 16,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 9,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 10,
+    "verbs": 10,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 11,
+    "verbs": 10,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 12,
+    "verbs": 10,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 13,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 14,
+    "verbs": 10,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 15,
+    "verbs": 15,
+    "policyCalls": 5,
+    "dayTicks": 391
+   },
+   {
+    "day": 16,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 17,
+    "verbs": 128,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 18,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 19,
+    "verbs": 136,
+    "policyCalls": 24,
+    "dayTicks": 399
+   },
+   {
+    "day": 20,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 425
+   },
+   {
+    "day": 21,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 433
+   },
+   {
+    "day": 22,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 23,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 399
+   },
+   {
+    "day": 24,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 442
+   },
+   {
+    "day": 25,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 26,
+    "verbs": 130,
+    "policyCalls": 6,
+    "dayTicks": 391
+   },
+   {
+    "day": 27,
+    "verbs": 131,
+    "policyCalls": 5,
+    "dayTicks": 410
+   },
+   {
+    "day": 28,
+    "verbs": 131,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 29,
+    "verbs": 135,
+    "policyCalls": 7,
+    "dayTicks": 391
+   },
+   {
+    "day": 30,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 426
+   },
+   {
+    "day": 31,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 32,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 33,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 410
+   },
+   {
+    "day": 34,
+    "verbs": 131,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 35,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 36,
+    "verbs": 131,
+    "policyCalls": 5,
+    "dayTicks": 410
+   },
+   {
+    "day": 37,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 38,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 39,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 40,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 41,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 42,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 408
+   },
+   {
+    "day": 43,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 44,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 391
+   },
+   {
+    "day": 45,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 405
+   },
+   {
+    "day": 46,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 47,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 391
+   },
+   {
+    "day": 48,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 49,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 50,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 51,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 52,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 53,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 54,
+    "verbs": 138,
+    "policyCalls": 15,
+    "dayTicks": 407
+   },
+   {
+    "day": 55,
+    "verbs": 1123,
+    "policyCalls": 19641,
+    "dayTicks": 256
+   },
+   {
+    "day": 56,
+    "verbs": 46,
+    "policyCalls": 2,
+    "dayTicks": 159
+   },
+   {
+    "day": 57,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 58,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 391
+   },
+   {
+    "day": 59,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 60,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 61,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 62,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 63,
+    "verbs": 134,
+    "policyCalls": 26,
+    "dayTicks": 391
+   },
+   {
+    "day": 64,
+    "verbs": 131,
+    "policyCalls": 5,
+    "dayTicks": 410
+   },
+   {
+    "day": 65,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 66,
+    "verbs": 146,
+    "policyCalls": 20,
+    "dayTicks": 393
+   },
+   {
+    "day": 67,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 68,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 69,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 70,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 71,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 72,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 73,
+    "verbs": 137,
+    "policyCalls": 12,
+    "dayTicks": 410
+   },
+   {
+    "day": 74,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 75,
+    "verbs": 138,
+    "policyCalls": 7,
+    "dayTicks": 400
+   },
+   {
+    "day": 76,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 77,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 78,
+    "verbs": 174,
+    "policyCalls": 9,
+    "dayTicks": 391
+   },
+   {
+    "day": 79,
+    "verbs": 88,
+    "policyCalls": 3,
+    "dayTicks": 280
+   },
+   {
+    "day": 80,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 405
+   },
+   {
+    "day": 81,
+    "verbs": 131,
+    "policyCalls": 5,
+    "dayTicks": 389
+   },
+   {
+    "day": 82,
+    "verbs": 135,
+    "policyCalls": 11,
+    "dayTicks": 403
+   },
+   {
+    "day": 83,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 403
+   },
+   {
+    "day": 84,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 387
+   },
+   {
+    "day": 85,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 86,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 387
+   },
+   {
+    "day": 87,
+    "verbs": 133,
+    "policyCalls": 7,
+    "dayTicks": 387
+   },
+   {
+    "day": 88,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 89,
+    "verbs": 130,
+    "policyCalls": 4,
+    "dayTicks": 387
+   },
+   {
+    "day": 90,
+    "verbs": 90,
+    "policyCalls": 4,
+    "dayTicks": 387
+   },
+   {
+    "day": 91,
+    "verbs": 50,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 92,
+    "verbs": 23,
+    "policyCalls": 20,
+    "dayTicks": 387
+   },
+   {
+    "day": 93,
+    "verbs": 87,
+    "policyCalls": 3,
+    "dayTicks": 256
+   },
+   {
+    "day": 94,
+    "verbs": 9,
+    "policyCalls": 4,
+    "dayTicks": 400
+   }
+  ],
+  "meanVerbsPerDay": 116.2,
+  "meanPolicyCallsPerDay": 214.3,
+  "meanTicksPerDay": 384.7
+ },
+ "ms": 10482
+}
