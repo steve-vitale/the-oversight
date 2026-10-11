@@ -525,7 +525,7 @@
       // unknown flesh keeps its warning — the generic risky-raw prep would
       // bury the honest "you don't know if this is food" state.
       if (foodSafe) it.prep = '\u26A0\uFE0F Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.';
-      it.kg = Math.max(0.2, gross * yfrac / 1000);
+      it.kg = Math.max(0.02, (net / 1000) / units); // KG PER-UNIT (break-it food r4 2026-10-10): packWeight/canCarry/UI all sum kg*units — storing the stack total here made one deer weigh units x too much and bricked the pack. ~1000 kcal/kg meat.
       // BUTCHERING YIELDS (Steve 2026-10-05): hide, bones, feathers, antlers,
       // shell — the parts the knowledge text promises. Charred remains give
       // nothing but the meat (the beam unmade the rest).
@@ -548,7 +548,7 @@
             edible: false, units: fatUnits, unit: 'slab',
             kcalEach: 0, hiddenKcal: fatKcal,
             spoilDay: this.state.scholar.day + 3,
-            kg: Math.max(0.2, fatKcal * fatUnits / 900),
+            kg: Math.max(0.02, fatKcal / 900), // KG PER-UNIT (break-it food r4 2026-10-10): fatKcal is per-slab; the old *fatUnits total bricked the pack.
             name: (adef.name || 'Animal') + ' fat (raw)',
             prep: knowRender
               ? 'Thick white slabs. Render low and slow over fire — liquid gold, and it keeps.'
@@ -567,7 +567,7 @@
           // not a side effect of labor.
           inv.push({
             material: mk, units: n2, name: (matName[mk] || mk) + (n2 > 1 ? 's' : ''),
-            kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3) * n2,
+            kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): matKg is per-item; the old *n2 total bricked the pack.
           });
           got.push(n2 + ' ' + (matName[mk] || mk).toLowerCase() + (n2 > 1 ? 's' : ''));
         }
@@ -750,7 +750,7 @@
         it.kcalEach = per; it.hiddenKcal = per;
         it.spoilDay = day + 90;
         it.diseaseRisk = null; it.safe = true;
-        it.kg = Math.max(0.1, per * (it.units || 1) / 900);
+        it.kg = Math.max(0.02, per / 900); // KG PER-UNIT (break-it food r4 2026-10-10): per is per-unit kcal; the old *units total bricked the pack.
         it.name = String(it.name).replace(' (raw)', '') + ' (rendered)';
         it.prep = 'Liquid gold, set firm. Keeps for months. Dried meat + berries + this is pemmican — the food that outlasts winter.';
         n++;
@@ -882,7 +882,7 @@
         inv.push({
           itemId: 'pemmican', plantId: null, foodKind: 'meat', foodState: 'pemmican',
           edible: true, units: set.bars, unit: 'bar', kcalEach: set.kcalEach,
-          spoilDay: day + 120, kg: 0.3 * set.bars, safe: true,
+          spoilDay: day + 120, kg: 0.3, safe: true, // KG PER-UNIT (break-it food r4 2026-10-10): 0.3 kg per bar; the old *bars total bricked the pack.
           name: 'Pemmican',
           prep: 'Dried meat pounded with rendered fat and berries. The original energy bar. Nearly indestructible.',
           ...(barRisk ? { parasiteRisk: barRisk } : {}),
@@ -1102,7 +1102,7 @@
         it.name = it.name.replace(' (carcass)', '').replace(' (trapped)', '').replace(' (charred remains)', '') + ' (cleaned)';
         if (foodSafe) it.prep = '\u26A0\uFE0F Risky: raw meat. Cook it, or preserve it.';
         else it.prep = '\u26A0\uFE0F Unknown flesh. You have no idea if this is food or poison. Test it cautiously, or ask someone who knows.';
-        it.kg = Math.max(0.2, gross * yfrac / 1000);
+          it.kg = Math.max(0.02, (net2 / 1000) / units2); // KG PER-UNIT (break-it food r4 2026-10-10): see self-butcher above — the stack total bricked the pack here too.
         if (!it.charred) {
           const aid2 = (it.plantId || '').replace(/^meat_/, '');
           const adef2 = (this.data.animals || []).find(x => x.id === aid2) || {};
@@ -1120,7 +1120,7 @@
               edible: false, units: fatUnits2, unit: 'slab',
               kcalEach: 0, hiddenKcal: fatKcal2,
               spoilDay: day + 3,
-              kg: Math.max(0.2, fatKcal2 * fatUnits2 / 900),
+              kg: Math.max(0.2, fatKcal2 / 900), // KG PER-UNIT (break-it food r4 2026-10-10): same fix as the self-butcher fat above.
               name: (adef2.name || 'Animal') + ' fat (raw)',
               prep: knowRender2
                 ? 'Thick white slabs. Render low and slow over fire — liquid gold, and it keeps.'
@@ -1137,7 +1137,7 @@
             // carcass was, not in your pack.
             inv.push({
               material: mk, units: n3, name: (matName2[mk] || mk) + (n3 > 1 ? 's' : ''),
-              kcalEach: 0, spoilDay: 9999, kg: (matKg2[mk] || 0.3) * n3,
+              kcalEach: 0, spoilDay: 9999, kg: (matKg2[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): same fix as above.
             });
             got2.push(n3 + ' ' + (matName2[mk] || mk).toLowerCase() + (n3 > 1 ? 's' : ''));
           }

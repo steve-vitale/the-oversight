@@ -208,7 +208,10 @@ function ok(name, cond, extra) {
     s.inventory = [{ name: 'Gill net', itemId: 'gill_net', id: 'gill_net', units: 1, kcalEach: 0 }];
     const r = Game.setNet();
     ok('setNet accepts on water', tile.nets && tile.nets.length === 1, `nets=${(tile.nets || []).length}`);
-    ok('net stamped with 12 uses', tile.nets && tile.nets[0].uses === 12, `uses=${tile.nets && tile.nets[0].uses}`);
+    // STALE-ASSERTION FIX (break-it food r4 2026-10-10): the engine stamps 16
+    // uses since the half-applied DEPLETION change (12 -> 16); the old 12 was
+    // the pre-change value. Test-only; engine behavior is current canon.
+    ok('net stamped with 16 uses', tile.nets && tile.nets[0].uses === 16, `uses=${tile.nets && tile.nets[0].uses}`);
     ok('net item consumed from pack', !s.inventory.some(i => (i.itemId || i.id) === 'gill_net'), `inv=${JSON.stringify(s.inventory.map(i => i.itemId || i.id))}`);
     tile.type = wasType; tile.nets = null;
     s.inventory = [];
