@@ -2913,6 +2913,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (blind && this.grantKnowledge) this.grantKnowledge('recipe', recipeId, 2, { type: 'discovery' }); } catch (e) {}
       }
       // ACTION CLOCK: crafting = 1 chunk (32 ticks, time + hand work).
+      // SIM TELEMETRY (2026-10-11, combat-lever): crafted-item acquisition
+      // by source (traps vs other). Zero gameplay effect.
+      try { this.tele('craft', { id: recipeId, name: recipe.name }); } catch (e) {}
       this.tickAction(32);
       return true;
     },
@@ -4064,7 +4067,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (topic === 'beasttricks') {
         // MONSTER COUNTERS (2026-10-10): the village learns together. Once
-        // the village has slain 2+ of a beast type, someone at the fire knows
+        // the village has slain 1+ of a beast type, someone at the fire knows
         // the trick — ask, and they teach you (villager experiences count —
         // Steve 2026-10-10). Gated by counterTeachable(); the UI only offers
         // the topic when there's actually a trick to learn.
@@ -25861,7 +25864,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.state.waveKills[wave] = (this.state.waveKills[wave] || 0) + 1;
       // MONSTER COUNTERS (2026-10-10): the village learns together. Every
       // kill — player TB kill or villager field-fight kill — feeds the
-      // village's per-type slain count; 2+ slain unlocks the askAbout
+      // village's per-type slain count; 1+ slain unlocks the askAbout
       // 'beasttricks' teaching channel (villager experiences count).
       this.state.villageSlain = this.state.villageSlain || {};
       this.state.villageSlain[monsterId] = (this.state.villageSlain[monsterId] || 0) + 1;
@@ -25989,7 +25992,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // the fight must spawn it right.
       const mid = monsterId || this.pendingMonsterId || 'bulldozer';
       const mdef = this.data.monsters.find(m => m.id === mid);
-      try { this.tele('combat_start', { vs: mid, wave: (mdef || {}).wave || null }); } catch (e) {}
       // NO SILENT FALLBACK (Steve 2026-10-06): an explicit unknown id used to
       // silently spawn monsters[0] (bulldozer) with the wrong intro text —
       // that's how deleted wave-2 ids hid in debug scenarios for a full wave.
@@ -26245,6 +26247,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         over: false, result: null,
         terraform: {}, // TERRAFORM (Steve 2026-10-06): monster-reshaped ground, "x,y" -> type
       };
+      // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
+      // fight entry. Zero gameplay effect. (Placed after tbfight creation —
+      // the earlier top-of-startCombat placement read a null fight.)
+      try {
+        const _csF = this.tbfight;
+        const _csPack = _csF ? _csF.fighters.filter(x => x.kind === 'monster' && x.alive !== false).length : 1;
+        const _csP = this.tbFighter ? this.tbFighter('p') : null;
+        this.tele('combat_start', { vs: mid, wave: (mdef || {}).wave || null, pack: _csPack, php: _csP ? Math.round(_csP.hp || 0) : null, maxhp: _csP ? Math.round(_csP.maxHp || _csP.hp || 0) : null });
+      } catch (e) {}
       // HIGHBEAM: anyone already too close is on the list from the first
       // bell — silently. The deer will announce itself soon enough.
       try {
@@ -26585,7 +26596,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     //     during windup, ...). checkMonsterCounter fires from the action
     //     handlers below; doing the trick mid-fight discovers it immediately.
     //  2. TOLD AT HAVEN — the village learns together. recordWaveKill tracks
-    //     state.villageSlain[type]; once the village has slain 2+ of a type,
+    //     state.villageSlain[type]; once the village has slain 1+ of a type,
     //     the askAbout 'beasttricks' topic lets a villager teach you the
     //     trick in conversation (villager experiences count — Steve 2026-10-10).
     //  3. THE CODEX HINT — slaying a monster surfaces its counter.hint in the
@@ -26599,6 +26610,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state.monsterCounters = this.state.monsterCounters || {};
         if (this.state.monsterCounters[mid]) return false;
         this.state.monsterCounters[mid] = true;
+        // SIM TELEMETRY (2026-10-11, combat-lever): counter discovery rate
+        // per monster type. Zero gameplay effect.
+        try { this.tele('counter_discovered', { id: mid, via: via }); } catch (e) {}
         const c = mdef.counter;
         const viaLine = via === 'taught' ? 'Someone at the haven knew the trick.'
           : 'You did the thing — and it worked.';
@@ -26658,15 +26672,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return t === lead;
       } catch (e) { return false; }
     },
-    // counterTeachable(): a beast type the village has slain 2+ of, whose
+    // counterTeachable(): a beast type the village has slain 1+ of, whose
     // trick you don't know yet. The askAbout 'beasttricks' topic gate.
+    // LONG-RUN SIM LEVER (combat 2026-10-11): was 2+ slain. One kill is
+    // enough for the fire to have a theory — the village learns together,
+    // and the counter-kill ledger bonus (2 pts) is the wave-unlock
+    // accelerator the design intends. The player must still ASK (the topic
+    // only appears when teachable); nothing is automatic.
     counterTeachable() {
       try {
         const slain = this.state.villageSlain || {};
         const known = this.state.monsterCounters || {};
         for (const mdef of (this.data.monsters || [])) {
           if (!mdef.counter || known[mdef.id]) continue;
-          if ((slain[mdef.id] || 0) >= 2) return mdef.id;
+          if ((slain[mdef.id] || 0) >= 1) return mdef.id;
         }
         return null;
       } catch (e) { return null; }
@@ -34687,7 +34706,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbEnd(result) {
       const f = this.tbfight;
       if (!f || f.over) return;
-      try { this.tele('combat_end', { result: result }); } catch (e) {}
+      try {
+        const _ceP = this.tbFighter ? this.tbFighter('p') : null;
+        this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
+      } catch (e) {}
       f.over = true; f.result = result;
       // COMBAT CLEANUP GUARANTEE (Steve 2026-10-06): the victory/defeat
       // narration below is long and calls many subsystems. If ANY of it
