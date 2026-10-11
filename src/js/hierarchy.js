@@ -32,6 +32,7 @@
 //   - bidForPrimacy(linkId)
 //   - villageLinks(villageId)
 //   - representative()
+//   - _availableRepresentative()
 //   - hierarchyDaily()
 //   - linkTick(a, b)
 //   - onLeaderDeath(vid)
@@ -251,6 +252,44 @@
         for (var i = 0; i < roster.length; i++) {
           var id = roster[i];
           if (!this.isMember(id)) continue;
+          var st = this.linkStanding(id);
+          if (st > bestS) { bestS = st; best = id; }
+        }
+      } catch (e) {}
+      return best ? { id: best, standing: bestS } : null;
+    },
+
+    // _availableRepresentative: the muster half of representative(). The
+    // social speaker (above) is who Haven IS — onLeaderDeath, judgeLink and
+    // the display beats need them even mid-absence. But LOANS need a body:
+    // the best-standing member who can actually walk out. Same availability
+    // bar as _musterAway (break-it travel r12): not node-travel away, not
+    // on another ledger (loaned/partied/wounded), not traveling with the
+    // player, not mid-conversation — and never the player (the player going
+    // is a dedicated fiction where designed, e.g. the accord 'visit'; the
+    // aid/champion loans have no player-serving branch and used to loan the
+    // player's own id, announcing a walk-out that never happened).
+    _availableRepresentative() {
+      var best = null, bestS = -1;
+      try {
+        var v = this.state.village || {};
+        var roster = v.roster || [];
+        var me = this.villagerId;
+        var nodeAway = {};
+        try { var _va = (v.away || {}); for (var _k in _va) nodeAway[_k] = 1; } catch (e0) {}
+        var withYou = {};
+        try {
+          var _tw = this.travelingWith ? this.travelingWith() : [];
+          for (var _ti = 0; _ti < _tw.length; _ti++) withYou[_tw[_ti]] = 1;
+        } catch (e1) {}
+        for (var i = 0; i < roster.length; i++) {
+          var id = roster[i];
+          if (id === me) continue;
+          if (!this.isMember(id)) continue;
+          try { if (this._isAwayVid(id)) continue; } catch (e2) {}
+          if (nodeAway[id]) continue;
+          if (withYou[id]) continue;
+          try { if (this.isEngaged(id)) continue; } catch (e3) {}
           var st = this.linkStanding(id);
           if (st > bestS) { bestS = st; best = id; }
         }
@@ -539,7 +578,7 @@
       }
       if (how === 'visit') {
         var rep = null;
-        try { rep = this.representative(); } catch (e) {}
+        try { rep = this._availableRepresentative(); } catch (e) {}
         var rnm = 'Someone';
         try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
         if (rep && rep.id !== this.villagerId) {
@@ -880,7 +919,11 @@
             try { if (this._nudgeOpinion) this._nudgeOpinion(link.primary, -2); } catch (e) {}
           }
         } else if (d.kind === 'aid') {
-          var rep = this.representative();
+          // BREAK-IT travel r12: the loan needs a body that can walk out —
+          // _availableRepresentative, not the social speaker (who might be
+          // foraging, away, or the player — the old code loaned the
+          // player's own id and announced a walk-out that never happened).
+          var rep = this._availableRepresentative();
           var m = this.mshipState();
           var day0 = (this.state.scholar || {}).day || 0;
           if (rep) {
@@ -1694,7 +1737,9 @@
       var links = this.hierarchyState();
       var day = (this.state.scholar || {}).day || 0;
       var rep = null, rnm = 'Someone';
-      try { rep = this.representative(); } catch (e) {}
+      // BREAK-IT travel r12: the host/serve branches below are 7-day loans —
+      // they need an available body, not just the social speaker.
+      try { rep = this._availableRepresentative(); } catch (e) {}
       try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
 
       // REFUSE THE SCALE (2026-10-10): every national beat offers 'refuse' —
@@ -2007,7 +2052,9 @@
       this.state.pendingGlobal = null;
       var day = (this.state.scholar || {}).day || 0;
       var rep = null, rnm = 'Someone';
-      try { rep = this.representative(); } catch (e) {}
+      // BREAK-IT travel r12: the champion is a 7-day loan — needs an
+      // available body, not just the social speaker.
+      try { rep = this._availableRepresentative(); } catch (e) {}
       try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
       if (how === 'champion') {
         var m = this.mshipState();
@@ -2329,6 +2376,26 @@
       try {
         var roster = this.state.village.roster || [];
         var me = this.villagerId;
+        // BREAK-IT travel r12: availability is wider than the away ledger.
+        // A villager out on node-travel business (v.away — foraging etc.)
+        // is not on the bench; neither is someone traveling with the
+        // player (party/followers are glued to you — placePartyAtPlayer
+        // teleports them to your node, startCombat drafts them into your
+        // fights), nor someone mid-conversation with you. Drafting them
+        // double-booked one villager in two places (a parley speaker sent
+        // out foraging the same part) or desynced the party (a companion
+        // "away" yet fighting beside you). The bench-is-empty fallback
+        // already exists at every call site — use it honestly.
+        var nodeAway = {};
+        try {
+          var _va = (this.state.village.away || {});
+          for (var _k in _va) nodeAway[_k] = 1;
+        } catch (e0) {}
+        var withYou = {};
+        try {
+          var _tw = this.travelingWith ? this.travelingWith() : [];
+          for (var _ti = 0; _ti < _tw.length; _ti++) withYou[_tw[_ti]] = 1;
+        } catch (e1) {}
         for (var i = 0; i < roster.length && out.length < n; i++) {
           var id = roster[i];
           if (id === me) continue;
@@ -2337,6 +2404,9 @@
           // villagers already out (raid party, defense call, wounded) —
           // the same two people could be "sent" to three fires at once.
           try { if (this._isAwayVid(id)) continue; } catch (e2) {}
+          if (nodeAway[id]) continue; // out on node-travel business
+          if (withYou[id]) continue; // traveling with you — not the bench
+          try { if (this.isEngaged(id)) continue; } catch (e3) {} // talking to you
           out.push(id);
         }
       } catch (e) {}

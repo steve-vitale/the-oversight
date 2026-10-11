@@ -785,10 +785,17 @@
         var nm = 'Someone';
         try { nm = String(this.displayName(m.loaned.vid)).split(' ')[0]; } catch (e) {}
         var to = m.loaned.to;
+        var lvid = m.loaned.vid;
         m.loaned = null;
         var tonm = 'them';
         try { tonm = this._ovName ? this._ovName(to) : tonm; } catch (e2) {}
-        this.say(`${nm} walks back in — days at ${tonm}'s fire, served. Still ours; membership never needed presence.`);
+        // BREAK-IT travel r12 (sibling): same dead-class as awayParties —
+        // a loaned representative killed while "abroad" (their node never
+        // moves) doesn't walk back in. The death was already said aloud.
+        var ldead = false;
+        try { var _lvp = this.vpOf ? this.vpOf(lvid) : null; if (_lvp && _lvp.dead) ldead = true; } catch (e0) {}
+        if (ldead) this.say(`Word comes late: ${nm} never made it home from ${tonm}'s fire.`);
+        else this.say(`${nm} walks back in — days at ${tonm}'s fire, served. Still ours; membership never needed presence.`);
       } catch (e) {}
     },
 
@@ -811,16 +818,28 @@
           for (var i = 0; i < ps.length; i++) {
             var p = ps[i];
             if (day < (p.untilDay || 0)) { keep.push(p); continue; }
-            var names = [];
+            var living = [], gone = [];
             try {
               var vs = p.vids || [];
-              for (var j = 0; j < vs.length; j++) names.push(String(this.displayName(vs[j])).split(' ')[0]);
+              for (var j = 0; j < vs.length; j++) {
+                var _nmj = String(this.displayName(vs[j])).split(' ')[0];
+                var _dead = false;
+                try { var _vpj = this.vpOf ? this.vpOf(vs[j]) : null; if (_vpj && _vpj.dead) _dead = true; } catch (e2b) {}
+                (_dead ? gone : living).push(_nmj);
+              }
             } catch (e2) {}
             var tonm = 'the road';
             try { tonm = (this._ovName && p.to) ? this._ovName(p.to) : (p.to || tonm); } catch (e3) {}
-            var kindWord = p.kind === 'raid' ? 'the raid' : p.kind === 'defense' ? 'the treeline' : p.kind === 'trade' ? 'the favor' : 'the road';
-            this.say(`${names.join(', ')} walk${names.length === 1 ? 's' : ''} back in — ${kindWord} at ${tonm}, days served. Still ours; membership never needed presence.`);
-            if ((p.repayKcal || 0) > 0) {
+            var kindWord = p.kind === 'raid' ? 'the raid' : p.kind === 'defense' ? 'the treeline' : p.kind === 'trade' ? 'the favor' : p.kind === 'parley' ? 'the parley' : 'the road';
+            // BREAK-IT travel r12: the return used to announce "X walks back
+            // in" with no death check — a villager killed at Haven while
+            // "away" (their node never moves) walked back in as a corpse,
+            // the same lie the DEAD-IS-DEAD rule (betrayal.js 2026-10-08)
+            // bans everywhere else. The dead don't walk in; the loss is
+            // said aloud (their death already was, when it happened).
+            if (living.length) this.say(`${living.join(', ')} walk${living.length === 1 ? 's' : ''} back in — ${kindWord} at ${tonm}, days served. Still ours; membership never needed presence.`);
+            if (gone.length) this.say(`Word comes late: ${gone.join(', ')} never made it home from ${kindWord} at ${tonm}.`);
+            if ((p.repayKcal || 0) > 0 && living.length) {
               try {
                 // PRICED FAVOR, HONESTLY PRICED (break-it regional
                 // 2026-10-10): the repayment used to mint from thin air —
@@ -860,7 +879,13 @@
             if ((wu[wk] || 0) > day) { wkeep[wk] = wu[wk]; continue; }
             var wnm = 'Someone';
             try { wnm = String(this.displayName(wk)).split(' ')[0]; } catch (e6) {}
-            this.say(`${wnm} is back on their feet — the raid's wounds closed. A week of healing is a week.`);
+            // BREAK-IT travel r12 (sibling): same dead-class as the party
+            // return above — a villager who died mid-recovery isn't "back
+            // on their feet". Their death was already said aloud; say
+            // nothing here, just close the recovery out.
+            var wdead = false;
+            try { var _wvp = this.vpOf ? this.vpOf(wk) : null; if (_wvp && _wvp.dead) wdead = true; } catch (e7) {}
+            if (!wdead) this.say(`${wnm} is back on their feet — the raid's wounds closed. A week of healing is a week.`);
           }
           m.woundedUntil = wkeep;
         }

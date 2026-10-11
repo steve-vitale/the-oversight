@@ -12996,6 +12996,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           continue;
         }
 
+        // BREAK-IT travel r12: the away-party machinery (parley / defense /
+        // trade / raid via _sendAwayParty, the representative loan, raid-
+        // wound recovery) keeps villagers on Haven's node — away by ledger,
+        // present by map. objMaybeDepart used to re-draft them mid-absence:
+        // a parley speaker sent out foraging the same part, one villager
+        // with two trips and two return announcements. Away by any ledger
+        // is away for the node system too — skip departures and door drift.
+        try { if (this._isAwayVid && this._isAwayVid(rid)) continue; } catch (e) {}
+
         // AT HAVEN (or wherever they are): decide to leave.
         // OBJECTIVES (villager-objectives.js): departures are objective-driven
         // with a danger check — go / ask (companion) / tighten / defer.
@@ -22089,7 +22098,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // roster member into data.villagers — the home village silently stopped
       // sending anyone out and the pantry starved with zero autonomous
       // income. Any unassigned roster member (not the player) lives their day.
-      const people = (v.roster || []).filter(id => id !== this.villagerId);
+      // DEAD IS DEAD (break-it travel r12, sibling): corpses don't live
+      // their day — a dead villager must never be picked to "come back
+      // with kcal".
+      const people = (v.roster || []).filter(id => id !== this.villagerId && !((this.getPerson(id) || {}).dead));
       if (!people.length) return;
       // LEADER: assigned villagers are out working — they don't do random things.
       const asg = v.assignments || {};
@@ -24595,9 +24607,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const mid of Object.keys(this.state.codex.monsters || {})) {
           const e = this.state.codex.monsters[mid];
           // SOMEONE ELSE SAW IT: a forager comes back white-faced. The news
-          // spreads on its own — no need for you to tell anyone.
-          if (e.reported && !e.namingKicked && Math.random() < 0.15) {
-            const roster = ((this.state.village || {}).roster || []).filter(id => id !== (scholar || {}).villagerId);
+            // spreads on its own — no need for you to tell anyone.
+            // DEAD IS DEAD (break-it travel r12, sibling): the witness must
+            // be alive — a corpse doesn't come back from the treeline.
+            if (e.reported && !e.namingKicked && Math.random() < 0.15) {
+              const roster = ((this.state.village || {}).roster || []).filter(id => id !== (scholar || {}).villagerId && !((this.getPerson(id) || {}).dead));
             const wit = roster[Math.floor(Math.random() * roster.length)];
             if (wit && !(e.knowers || []).includes(wit)) {
               e.knowers.push(wit);
