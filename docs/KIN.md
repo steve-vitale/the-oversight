@@ -36,31 +36,54 @@ NAPPING! Very cozy! Very still!"
 Children of KEPT adults (villagers who remained) stayed with the villages and
 grew up normally. The stasis kids are specifically the taken half's children.
 
-## Getting the kids back: devotion, not reward (Steve 2026-10-11)
+## Getting the kids back: a weight, not a meter (Steve 2026-10-11)
 
-The kids are NOT a prize for a clean ledger. They are a CAUSE. Returning
-them requires DEVOTION — the player must make a point of it across the run:
-ask the System about the pods, keep takenPromises, raise it in shows and
-contests, spend favor and political capital on it. A new ledger dimension
-tracks this devotion; it is active pursuit, never passive cleanliness.
+The kids are NOT a prize, NOT a quest line, NOT a meter to fill. They are
+a WEIGHT the run puts on the player — a standing moral burden that intrudes
+at dramatically-charged moments and forces real choices with real costs on
+both sides. There is no devotion score. There is a HISTORY of what you did,
+and the village remembers.
+
+**The intrusions (the pods keep coming up):** mourners ask (and promises
+become debts); the System puts a pod on camera mid-show ("Look at them!
+Napping! What should WE do with them?"); the prize dangle; famine makes
+someone do the math on life-support; the Jackpot contest. Each intrusion is
+a choice. Acting costs real resources — favor, food, contest entries, table
+leverage. NOT acting costs standing with the mourners, and they bring it up.
+Championing the kids MEANS having less for everything else. That tradeoff is
+the mechanic.
+
+**The social memory:** villagers don't track a number — they have opinions.
+"You promised my sister's girl." Broken promises surface where it hurts most
+(the Witness path especially). The village's memory of your choices IS the
+system.
+
+**The System monetizes your guilt:** the more you care, the better
+television it is. The Jackpot isn't just a contest — it's the System selling
+your devotion back to you as entertainment.
 
 **Callous oversight (Steve's coinage — a new meaning of the title):** reach
-a good ending WITHOUT devotion and the epilogue paints it. You saved the
-village, won the table — and never once asked about the pods. They're still
-out there. Still napping. A good ending curdles into a melancholy one. This
-must sting.
+a good ending having shrugged at every intrusion and the epilogue paints it.
+You saved the village, won the table — and never once asked about the pods.
+They're still out there. Still napping. A good ending curdles into a
+melancholy one. This must sting.
 
-**The Jackpot:** on some paths the System makes the pods a televised
-contest prize — the kids are the jackpot on the wheel of fortune. It is
-devastating television precisely because usually you don't win, and that's
-it. The pods stay shut. The show moves on.
+**The Jackpot:** on some paths the pods are the televised grand prize —
+the kids are the jackpot on the wheel of fortune. Devastating television
+precisely because usually you don't win, and that's it. The pods stay shut.
+The show moves on, and the game sits in that for a beat.
 
 **The dark reading (1–2 dark paths):** the pods as a RESOURCE. "What an
 amazing potential army of child soldiers you could conscript." The System
 sees it; a dark player can pursue it. This plays as HORROR — villagers
-react, the ledger remembers, and the game never lets it feel clever.
+react with terror, the ledger remembers, and the game never lets it feel
+clever.
 
-No quest, no ability, no bargain short of the table returns them — and at
-the table, only devotion opens the pods. The table-outcome build must honor
-this: devotion-gated return on good paths, the Jackpot contest on some,
-conscript horror on 1–2 dark paths, melancholy oversight otherwise.
+**The table:** your history determines what is POSSIBLE, not pass/fail. A
+run of championing → you can demand the pods opened (at a real cost — the
+table always charges). A run of shrugging → the oversight epilogue. A run
+that gambled on the Jackpot and lost → that loss is part of your story.
+
+No quest, no ability, no bargain short of the table returns them. The
+table-outcome build must honor this: the pods as a standing weight across
+the run, intrusion-driven, cost-bearing, socially remembered.
