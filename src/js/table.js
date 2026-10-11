@@ -283,6 +283,12 @@
     // untelevised, honestly.
     tableLiveWrap(genreLine) {
       try {
+        // The Assimilated is never televised — the footage leaks anyway.
+        // Contraband is its own genre.
+        if (this.tableState && this.tableState().path === 'assimilated') {
+          this.say('◈ CONTRABAND — the assimilation isn\'t televised. It doesn\'t matter. Somewhere, a camera that shouldn\'t exist is rolling, and the footage will leak. It always leaks.');
+          return;
+        }
         const vw = (typeof this.havenViewership === 'function') ? this.havenViewership() : 0;
         if (vw >= 12 && genreLine) this.sysSay('🔴 LIVE! ' + genreLine);
       } catch (e) {}
