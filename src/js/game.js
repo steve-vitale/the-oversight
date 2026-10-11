@@ -27461,6 +27461,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
 
+    // tbSurroundedBy(n): cornered_rat's trigger — n or more living enemies
+    // (monsters or hostiles) still standing in this fight. (2026-10-11)
+    tbSurroundedBy(n) {
+      const f = this.tbfight;
+      if (!f) return false;
+      let foes = 0;
+      for (const x of f.fighters || []) {
+        if ((x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled) foes++;
+      }
+      return foes >= (n || 3);
+    },
+
     tbPlayerStrike(targetKey) {
       const f = this.tbfight;
       if (!f || !this.tbIsPlayerTurn()) return false;
@@ -27573,9 +27585,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // TRUE SWING (passive): your strikes land cleaner.
       const tsBonus = this.passiveBonus('true_swing');
       if (tsBonus > 0) d = Math.round(d * (1 + tsBonus));
-      const hpFrac = p.hp / p.maxHp;
-      if (this.hasAbility('rage') && hpFrac < 0.5) { d *= 2; this.say('RAGE: +100% damage.'); }
-      if (this.hasAbility('cornered_rat') && hpFrac < 0.3) { d *= 2; this.say('CORNERED RAT: desperation is a weapon.'); }
+      // RAGE (card-honest 2026-10-11, brawler playtest): REMOVED the legacy
+      // possession passive (mere hasAbility('rage') + hp<50% = permanent x2).
+      // It contradicted the card — "Your next 3 strikes deal +100% damage" —
+      // and stacked silently with the honest rage.unleash_rage action
+      // (rageActive, 3 strikes, wired in _applyAbilityActionMods). Rage now
+      // works ONLY through Unleash Rage: activated, limited, narrated.
+      // CORNERED RAT (card-honest 2026-10-11): the card promises "When
+      // surrounded (3+ enemies), +100% damage and +50% dodge" — the old
+      // engine fired a permanent x2 below 30% HP with no enemy check and no
+      // dodge. Surrounded = 3+ living enemies standing. (The +50% dodge
+      // lands in tbDamage's dodge block under the same condition.)
+      if (this.hasAbility('cornered_rat') && this.tbSurroundedBy(3)) {
+        d *= 2;
+        this.say('CORNERED RAT: surrounded — desperation is a weapon. (+100% damage, +50% dodge)');
+      }
       // GRISTLEFIT (Steve 2026-10-08): the rage in your shoulders lands harder.
       if (this.hasStatus && this.hasStatus('scholar', 'gristlefit')) { d = Math.round(d * 1.25); this.say('GRISTLEFIT: your knotted shoulders put everything behind it. (+25% damage)'); }
       // LEMONS BLOOD-SENSE (Steve 2026-10-09): you feel heartbeats. A bleeding
@@ -28644,6 +28668,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           dodgeCh = 0;
         }
         try { dodgeCh += this.modTarget('combat.dodge_chance', 0); } catch (e) {}
+        // CORNERED RAT (card-honest 2026-10-11, brawler playtest): +50% dodge
+        // while surrounded — the card's second half. Same trigger as the
+        // strike bonus in tbPlayerStrike: one condition, both halves.
+        try { if (this.hasAbility && this.hasAbility('cornered_rat') && this.tbSurroundedBy && this.tbSurroundedBy(3)) dodgeCh += 0.5; } catch (e) {}
         // BURDEN (Steve 2026-10-06): a heavy pack slows your slip-aside.
         // Laden -3%, heavy -8%, straining -15% dodge chance.
         try {

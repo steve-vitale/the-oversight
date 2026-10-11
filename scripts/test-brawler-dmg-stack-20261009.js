@@ -2,9 +2,12 @@
 // BRAWLER BREAK-IT 2026-10-09: damage-stacking honesty.
 // Hostile question: how high can ONE strike's multiplier stack, and does
 // every stacked multiplier print its say() line (no silent stacking)?
-// Stackable sources in tbPlayerStrike: rage x2 (hp<0.5), cornered_rat x2
-// (hp<0.3), aimed x2.5, haymaker (via _applyAbilityActionMods), PATIENT AIM
-// x2 (round 1), AMBUSH, CLEAN KILL, true_swing +30%, gristlefit +25%,
+// Stackable sources in tbPlayerStrike (2026-10-11 honesty fix): rage works
+// ONLY via unleash_rage (rageActive, next 3 strikes — the legacy possession
+// passive x2 at hp<50% was removed as card-dishonest); cornered_rat x2 only
+// when surrounded by 3+ living enemies (+50% dodge, same trigger). Remaining
+// stack: aimed x2.5, haymaker (via _applyAbilityActionMods), PATIENT AIM x2
+// (round 1), AMBUSH, CLEAN KILL, true_swing +30%, gristlefit +25%,
 // feastBurn (dynamic). All multiplicative. Report, don't moralize:
 // broken builds are welcome (Steve) — the question is honesty + bounds.
 const H = require('./combat-break-harness.js');
