@@ -73,8 +73,10 @@
     lifeseedKinName(char, usedFirsts, rel) {
       const ownFirst = char.name.split(' ')[0];
       // relations carry gender: a grandfather isn't named Hana.
-      const fem = ['mother', 'sister', 'daughter', 'grandmother', 'aunt', 'grandchildren'];
-      const masc = ['father', 'brother', 'son', 'grandfather', 'uncle'];
+      // (background audit 2026-10-11, sense-read: "Larry — Joshua's niece"
+      // — niece/nephew/older/younger siblings weren't gender-filtered.)
+      const fem = ['mother', 'sister', 'daughter', 'grandmother', 'aunt', 'grandchildren', 'niece', 'older sister', 'younger sister'];
+      const masc = ['father', 'brother', 'son', 'grandfather', 'uncle', 'nephew', 'older brother', 'younger brother'];
       const want = fem.includes(rel) ? 'f' : masc.includes(rel) ? 'm' : null;
       for (let g = 0; g < 40; g++) {
         try {
@@ -101,26 +103,65 @@
       const town = pick(region.towns || ['the old town']);
       const workplace = pick(region.workplaces || ['the shop']);
       const usedFirsts = [];
+      // STREETS (background audit 2026-10-11): {street} was hardcoded to
+      // '5th' — every villager's childhood street was 5th street. Vary it.
+      const street = pick(['5th', 'Main', 'Oak', 'Elm', 'Maple', 'Cedar', 'Park', 'Hill', 'Mill', 'Church', 'Bridge', 'Depot']);
       // places first: kin fates can reference them ({place}).
+      // KIND VARIETY (background audit 2026-10-11): the old code took the
+      // first 2 kinds (home, cache) for EVERY villager — 12 names shared
+      // across the whole cast, so "the hunting cabin" recurred verbatim.
+      // Draw 2 random kinds from the full pool (14 kinds); kind-specific
+      // lookups (grave, woods, ...) resolve for real now.
       const places = [];
-      for (const pk of (LS.places || [])) {
+      const kindPool = [...(LS.places || [])];
+      for (let i = kindPool.length - 1; i > 0; i--) {
+        const j = Math.floor(R() * (i + 1));
+        [kindPool[i], kindPool[j]] = [kindPool[j], kindPool[i]];
+      }
+      // PLACE-NAME UNIQUENESS (background audit 2026-10-11): prefer place
+      // names unused this expedition, so two villagers never share "the
+      // lockbox under the porch" verbatim. (Raw templates dedup — names
+      // with {first} are already unique after fill.)
+      const _up = this._usedPlaces || (this._usedPlaces = new Set());
+      for (const pk of kindPool) {
         if (places.length >= 2) break;
+        const namePool = pk.names || ['somewhere'];
+        const freshNames = namePool.filter(n => !_up.has(n));
+        const rawName = pick(freshNames.length ? freshNames : namePool);
+        _up.add(rawName);
         places.push({
           kind: pk.kind,
-          name: String(pick(pk.names || ['somewhere']))
+          name: String(rawName)
             .replaceAll('{first}', first).replaceAll('{town}', town)
-            .replaceAll('{workplace}', workplace).replaceAll('{street}', '5th'),
+            .replaceAll('{workplace}', workplace).replaceAll('{street}', street),
         });
       }
       const placeName = (kind) => {
         const p = places.find(x => x.kind === kind) || places[0];
         return p ? p.name : 'somewhere';
       };
+      // ARTICLE COLLAPSE (background audit 2026-10-11): every workplace name
+      // carries its own 'the' ("the grain elevator"), so templates saying
+      // "the {workplace}" produced "the the grain elevator". Collapse the
+      // doubled article at fill time — robust to future article-less names.
+      // Same for "the {place}" (nearly all place names start with 'the').
+      const noThe = (s) => String(s || '').replace(/^the\s+/i, '');
+      // kinName is defined before takeKin (it reads `people` lazily) so
+      // fillBasic can resolve {kin} everywhere — wounds, events, and place
+      // names leaked raw "{kin}" before (background audit 2026-10-11).
+      const kinName = (rel) => {
+        const p = people.find(x => x.relation === rel) || people[0];
+        return p ? p.name.split(' ')[0] : 'someone';
+      };
       const fillBasic = (t) => String(t)
         .replaceAll('{first}', first)
         .replaceAll('{town}', town)
+        .replaceAll('the {workplace}', 'the ' + noThe(workplace))
         .replaceAll('{workplace}', workplace)
-        .replaceAll('{place}', placeName());
+        .replaceAll('the {place}', 'the ' + noThe(placeName()))
+        .replaceAll('{place}', placeName())
+        .replaceAll('{street}', street)
+        .replaceAll('{kin}', kinName());
 
       // people: cover the keepsake kin first (so flashbacks never name a
       // stranger), then fill out to 3 with distinct relations.
@@ -150,21 +191,28 @@
       }
 
       // places: chosen above (kin fates reference them).
-      const kinName = (rel) => {
-        const p = people.find(x => x.relation === rel) || people[0];
-        return p ? p.name.split(' ')[0] : 'someone';
-      };
+      // Place names can carry {kin} ("{kin}'s garage") — the people now
+      // exist, so resolve them (background audit 2026-10-11).
+      for (const pl of places) pl.name = String(pl.name).replaceAll('{kin}', kinName());
 
       // skill origins: 2, grounded in people and places.
       const soKeys = Object.keys(LS.skillOrigins || {});
       const skillOrigins = {};
       for (let i = 0; i < 2 && soKeys.length; i++) {
         const k = soKeys.splice(Math.floor(R() * soKeys.length), 1)[0];
-        const tmpl = pick(LS.skillOrigins[k]);
-        skillOrigins[k] = fillBasic(tmpl)
-          .replaceAll('{kin}', kinName())
-          .replaceAll('{place}', placeName());
+        skillOrigins[k] = fillBasic(pick(LS.skillOrigins[k]));
       }
+
+      // PRONOUN TRUTH (background audit 2026-10-11): two templates speak
+      // about the villager in plain English — "themself" in a wound and
+      // "than they do" in a want — which contradicts he/she villagers.
+      // Resolve to their actual pronoun here; the plural-they templates
+      // (arguing, tools, boats) are genuinely plural and stay as-is.
+      const pro = char.pro || 'they';
+      const refl = pro === 'she' ? 'herself' : pro === 'he' ? 'himself' : 'themself';
+      const wound = fillBasic(pick(LS.wounds || ['a quiet grief'])).replaceAll('themself', refl);
+      const want = fillBasic(pick(LS.wants || ['keep going']))
+        .replace('longer than they do', 'longer than ' + (pro === 'they' ? 'they do' : pro + ' does'));
 
       return {
         regionId: region.id,
@@ -175,8 +223,8 @@
         people,
         places,
         event: fillBasic(pick(LS.events || ['a hard year'])),
-        wound: fillBasic(pick(LS.wounds || ['a quiet grief'])),
-        want: fillBasic(pick(LS.wants || ['keep going'])).replaceAll('{kin}', kinName()),
+        wound,
+        want,
         skillOrigins,
       };
     },
@@ -223,18 +271,48 @@
       if (soEntries.length) {
         const [sk, how] = soEntries[0];
         const skName = { food: 'finding food', medicinal: 'patching people up', mending: 'fixing things', navigation: 'never getting lost', tracking: 'reading ground', trapping: 'traps', forecast: 'reading the sky' }[sk] || sk;
-        const howLower = how.charAt(0).toLowerCase() + how.slice(1);
-        bits.push(`${first} learned ${skName} ${howLower}.`);
+        // NAME-SAFE LOWERCASE (background audit 2026-10-11): templates like
+        // "{kin}'s level, square, ..." start with a proper name after fill —
+        // lowercasing produced "ashley's level". Only lowercase a genuinely
+        // lowercase-able start; a leading capital is a name, keep it.
+        const howLower = /^[A-Z]/.test(how) ? how : how.charAt(0).toLowerCase() + how.slice(1);
+        // SKILL-HOW FRAMING (background audit 2026-10-11, sense-read):
+        // "learned {sk} {how}" needs the how to connect. Bare noun phrases
+        // ("Seamus's rule:", "the constellations Joseph taught") read as
+        // missing a preposition — give them "from". A "learning X" how
+        // echoes the frame's "learned" ("learned canning learning the pop")
+        // — recast as "the hard way: X". Prepositional/gerund hows pass
+        // through untouched.
+        let howFrag = howLower;
+        if (/^learning\s/.test(howFrag)) howFrag = 'the hard way: ' + howFrag.replace(/^learning\s/, '');
+        else if (/^(the|a|an)\s|^[A-Z]/.test(howFrag) && !/^(in|from|at|on|during|with|by|through|under|after|before)\s/.test(howFrag))
+          howFrag = 'from ' + howFrag;
+        bits.push(`${first} learned ${skName} ${howFrag}.`);
       }
       const eventCap = ls.event.charAt(0).toUpperCase() + ls.event.slice(1);
-      const eventLine = [
+      const eventLow = eventCap.charAt(0).toLowerCase() + eventCap.slice(1);
+      const eventFrames = [
         `${eventCap} — that's the year everything changed, before the sky did.`,
         `${eventCap}, and everything changed that year, before the sky did.`,
-        `Then ${eventCap.charAt(0).toLowerCase() + eventCap.slice(1)}, and nothing was the same after.`,
-      ][Math.floor(R() * 3)];
-      bits.push(eventLine);
+        `Then ${eventLow}, and nothing was the same after.`,
+        `${eventCap}. ${first} still measures years against that one.`,
+        `Ask ${first} about ${eventLow} and watch the face change.`,
+        `${eventCap} — before the sky, before all of this. ${first} was there.`,
+      ];
+      // EVENT-FRAME UNIQUENESS (background audit 2026-10-11): two villagers
+      // from one town can share the regional event (shared history is good),
+      // but never the verbatim sentence. Prefer an unused event+frame combo
+      // this expedition; fall back to the full pool when exhausted.
+      const _uef = this._usedEventFrames || (this._usedEventFrames = new Set());
+      const freshF = eventFrames.map((_, i) => i).filter(i => !_uef.has(ls.event + '::' + i));
+      const fi = (freshF.length ? freshF : eventFrames.map((_, i) => i))[Math.floor(R() * (freshF.length ? freshF.length : eventFrames.length))];
+      _uef.add(ls.event + '::' + fi);
+      bits.push(eventFrames[fi]);
+      // (background audit 2026-10-11): the "What X wants now is simple:" frame
+      // was Steve-flagged as repetitive boilerplate — replaced with a
+      // natural third variant.
       const wantLine = [
-        `${ls.wound} What ${first} wants now is simple: ${ls.want}.`,
+        `${ls.wound} ${first} keeps circling back to the same thought: ${ls.want}.`,
         `${ls.wound} These days ${first} wants to ${ls.want}.`,
         `${ls.wound} ${first} keeps coming back to one thing: ${ls.want}.`,
       ][Math.floor(R() * 3)];
