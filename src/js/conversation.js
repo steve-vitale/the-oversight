@@ -1154,7 +1154,7 @@
       const whyLine = {
         'walked away mid-thread': 'we got cut off',
         'changed the subject': 'we wandered off it',
-        'unfinished business': 'we never finished',
+        'unfinished business': 'we left it mid-thought',
         'unanswered': 'you never answered',
       }[o.why] || 'we left it hanging';
       let inner;

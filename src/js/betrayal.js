@@ -869,12 +869,25 @@
     try {
       const bs = this.betrayalState ? this.betrayalState() : null;
       const dead = how === 'killed' || how === 'ambushed';
-      if (dead) for (const c of ((bs && bs.cases) || [])) {
-        if ((c.status === 'open' || c.status === 'dormant') && (c.accused || []).includes(vid)) {
-          c.status = 'resolved'; c.resolution = 'accused_died';
+      if (dead) {
+        // (journey-succession 2026-10-11): one voice for the dead — close
+        // every open case first, then say the line ONCE. The old code said
+        // it per case, and a bearer accused twice read the same sentence
+        // twice in a row.
+        const closed = [];
+        for (const c of ((bs && bs.cases) || [])) {
+          if ((c.status === 'open' || c.status === 'dormant') && (c.accused || []).includes(vid)) {
+            c.status = 'resolved'; c.resolution = 'accused_died';
+            closed.push(c);
+          }
+        }
+        if (closed.length) {
           const nm = (() => { try { return this.displayName(vid); } catch (e) { return 'They'; } })();
-          this.say(`${nm} is gone — the moot doesn't try the dead. The case dies with the accused; the fire remembers the rest.`);
-          try { this.journalNote && this.journalNote('village', 'trial', `Case against ${nm} closed: the accused is dead.`); } catch (e) {}
+          const caseWord = closed.length > 1 ? 'The cases die' : 'The case dies';
+          this.say(`${nm} is gone — the moot doesn't try the dead. ${caseWord} with the accused; the fire remembers the rest.`);
+          for (const c of closed) {
+            try { this.journalNote && this.journalNote('village', 'trial', `Case against ${nm} closed: the accused is dead.`); } catch (e) {}
+          }
         }
       }
     } catch (e) {}
