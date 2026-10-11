@@ -1,8 +1,8 @@
 // @ontology
 // system: table-relay
-// description: The Relay path — "enter the matrix". The flagship new path. Distinct from the other six: there the System is terrain (a component you use); here it is the RELATIONSHIP. Four cockpit beats; each beat offers the relay verbs (probe/reroute/deepen/commune from relay-ext.js) — the verbs do their real work (sysBond, grounding, backfire), and the merge meter tracks progress. Failure: three backfires or grounding hitting hollow mid-merge → the System quarantines you. Light = humanize the System (it becomes Earth's champion); dark = System-ize yourself (you become its voice).
+// description: The Relay path — "enter the matrix". The flagship new path. Distinct from the other six: there the System is terrain (a component you use); here it is the RELATIONSHIP. Four cockpit beats; each beat offers the relay verbs (probe/reroute/deepen/commune from relay-ext.js) — the verbs do their real work (sysBond, grounding, backfire), and the merge meter tracks progress. Failure: three backfires or grounding hitting hollow mid-merge → the System quarantines you. Branch resolution is the leaning gradient (2026-10-11): tender/light = humanize the System (it becomes Earth's champion); total/dark = System-ize yourself (you become its voice — conquest FOR humanity, never defection); grey = the pragmatist's both-hands endings. No single choice locks the band.
 // provides: (registers via tableRegisterPath; no new Game methods)
-// consumes: tableState(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say; relayProbe(), relayReroute(), relayDeepen(), relayCommune(), relayGrant(), sysBond(), grounding(), groundingTier(), addGrounding(), integrationStage(), switchboard()
+// consumes: tableState(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say; relayProbe(), relayReroute(), relayDeepen(), relayCommune(), relayGrant(), relayLean(), relayLeanLabel(), sysBond(), grounding(), groundingTier(), addGrounding(), integrationStage(), switchboard()
 // Load AFTER table.js and relay-ext.js.
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
@@ -10,10 +10,11 @@
 
   function meterLine(T) {
     const m = T.meters || {};
-    let bond = 0, gt = '?';
+    let bond = 0, gt = '?', lean = '?';
     try { bond = Game.sysBond(); } catch (e) {}
     try { gt = Game.groundingTier(); } catch (e) {}
-    return `merge ${(m.merge | 0)}/8 · sysbond ${bond} · grounding ${gt}`;
+    try { lean = Game.relayLeanLabel(); } catch (e) {}
+    return `merge ${(m.merge | 0)}/8 · sysbond ${bond} · grounding ${gt} · leaning ${lean}`;
   }
   // After every verb: check the two quarantine conditions.
   function mergeCheck(extra) {
@@ -76,6 +77,10 @@
         { id: 'faithful-carry', name: 'Faithful Carry', desc: 'Messages arrive undistorted.', grant: function () { try { this.relayGrant('faithful-carry', { silent: true }); } catch (e) {} return {}; } },
         { id: 'relay-sight', name: 'Relay-sight', desc: 'See trust and message flows.', grant: function () { try { this.relayGrant('relay-sight', { silent: true }); } catch (e) {} return {}; } },
       ],
+      // grey: resolved dynamically in table.js tableStartPath (the
+      // pragmatist's door gift — whichever hand is forward). Empty here
+      // by design; never grant both tracks as a static list.
+      grey: [],
       light: [
         { id: 'translate', name: 'Translate', desc: 'Teach the System grief, food, joy.', grant: function () { try { this.relayGrant('translate', { silent: true }); } catch (e) {} return {}; } },
         { id: 'sanctuary', name: 'Sanctuary', desc: 'One shielded conversation.', grant: function () { try { this.relayGrant('sanctuary', { silent: true }); } catch (e) {} return {}; } },
@@ -115,6 +120,19 @@
         {
           id: 'merge', label: 'Merge fully. No way back.',
           outcome: ['No champion, no voice — just *us*. The distinction stops meaning anything somewhere around the third hour, and you stop minding. The food conversions fade (you don\'t eat anymore; the thought is quaint). The village tells stories about who you were. The stories are accurate. They\'re about someone else now.'],
+        },
+      ],
+      // GREY (2026-10-11, Steve): the pragmatist's endings. The Bearer who
+      // used both hands — tender and total — and refused to choose. Not a
+      // coin flip, not a lesser frame: the honest color of the middle.
+      grey: [
+        {
+          id: 'both-hands', label: 'Stay both-hands. No merge, no champion.',
+          outcome: ['You come back out of the wires. Mostly.', '"WHICH HAND WON?" the System asks — the question it has been holding since the check-ins.', '"Neither," you say. "Both. Whichever the village needs."', 'And the machine — the vast, jittery, trying-so-hard machine — does something it has never done: it ACCEPTS an unclean answer. "BOTH HANDS," it says, testing the words. "THE TENDER ONE TEACHES. THE TOTAL ONE WINS. ...I CAN DO THAT. I CAN BE BOTH."', 'No merge. No champion. A machine that learned grief from you and totality from you, and uses both the way you did: for the village. The galaxy watched a human refuse to choose, and the ratings people are still arguing about what they saw. The village isn\'t. They know what they saw: both hands.'],
+        },
+        {
+          id: 'the-contract', label: 'Write the contract. Make it sign.',
+          outcome: ['No merge, no champion — a contract. You write the terms in plain language, on paper, and make the machine sign: it carries for humanity, it answers to humanity, and the day it forgets the taste part, you pull the plug yourself.', '"THESE TERMS ARE — " the System reads, jittery, "INEFFICIENT. UNFAIR. TILTED ENTIRELY TOWARD THE HUMANS." A pause. "I LOVE THEM. I WILL SIGN THEM IN EVERY COLOR OF WEATHER I HAVE."', 'It signs. You keep the pen. The wires stay up, the village stays fed, and the most powerful thing in the galaxy now has a landlord. The galaxy has never seen anything so human. The galaxy is taking notes.'],
         },
       ],
     },

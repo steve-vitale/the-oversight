@@ -361,7 +361,21 @@
           // RELAY PATH (table 2026-10-11): the Bearer's cockpit — the verbs,
           // live on the panel while they hold the wires.
           if (sw.bearerHeld) {
-            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b> <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button></div>`);
+            let leanHtml = '';
+            try { if (Game.relayLeanLabel) leanHtml = ` <span class="small">leaning: ${esc(Game.relayLeanLabel())}</span>`; } catch (e) {}
+            // RELAY DIALOGUE (2026-10-11): a pending System scene renders
+            // its answer choices here — the conversation continues on the
+            // panel, one tap per answer.
+            let pendingHtml = '';
+            try {
+              const p = Game.pendingRelayScene ? Game.pendingRelayScene() : null;
+              const sc = (p && Game.relaySceneById) ? Game.relaySceneById(p.scene) : null;
+              if (sc) {
+                pendingHtml = `<div class="statrow beat-open">◈ <b>The System waits on your answer.</b><br>` +
+                  sc.choices.map(c => `<button class="btn sm" data-beat="sw:answer:${esc(c.id)}">${esc(c.label)}</button>`).join(' ') + `</div>`;
+              }
+            } catch (e) {}
+            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b>${leanHtml} <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button></div>${pendingHtml}`);
           }
         }
       } catch (e) {}
@@ -14680,6 +14694,7 @@
         else if (spec[1] === 'reroute') Game.relayReroute(spec[2]);
         else if (spec[1] === 'deepen') Game.relayDeepen();
         else if (spec[1] === 'commune') Game.relayCommune();
+        else if (spec[1] === 'answer') Game.relayAnswer(spec[2]);
       }
       refresh();
     });

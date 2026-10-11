@@ -57,6 +57,7 @@ function resetAll() {
   Game.state.scholar.tableChoices = null;
   Game.state.scholar.grounding = 100;
   Game.state.scholar.relay = null; Game.state.scholar.relayAbils = null;
+  Game.state.pendingRelayScene = null;
   Game.state.switchboard = null;
   Game.over = false; Game.won = false;
   transcript.length = 0;
@@ -95,9 +96,15 @@ const T = () => Game.tableState();
 
   console.log('— (A) verbs —');
   const b0 = Game.sysBond();
-  Game.relayCommune();
-  ok(Game.sysBond() === b0 + 1, 'commune: +sysbond');
+  // Commune is a conversation now (2026-10-11): the System's half is said,
+  // the answer pends at the relay panel, and answering moves it.
+  const sc0 = Game.relayCommune();
+  ok(sc0 === 'cur-1', 'commune opens the curiosity ladder', sc0);
+  ok(Game.pendingRelayScene() && Game.pendingRelayScene().scene === 'cur-1', 'the System waits on your answer');
   ok(transcript.some(([k, t]) => t.indexOf('COMMUNE') >= 0), 'the System turns its attention');
+  ok(Game.relayAnswer('engage') === 'answered', 'you answer — the conversation resolves');
+  ok(Game.sysBond() === b0 + 1, 'answering: +sysbond — it is learning');
+  ok(!Game.pendingRelayScene(), 'nothing left pending');
   Game.relayReroute('honest');
   ok(Game.switchboard().routed === 2, 'reroute honest: routed+2, faithful');
   Game.relayReroute('efficient');
@@ -108,8 +115,8 @@ const T = () => Game.tableState();
   ok(Game.sysBond() >= b0 + 2, 'deepen: depth recognizes depth');
 
   console.log('— (A) ability unlocks through use —');
-  Game.relayCommune(); // 2nd commune
-  ok(Game.relayHas('translate'), 'translate unlocks after 2 communes');
+  Game.relayCommune(); Game.relayAnswer('engage'); // 2nd commune, answered
+  ok(Game.relayHas('translate'), 'translate unlocks after 2 answered communes');
   ok(Game.relayHas('relay-sight'), 'relay-sight unlocks at bond 2');
   Game.relayTranslate('grief');
   ok(Game.state.scholar.relay.translated.indexOf('grief') >= 0, 'grief translated — the System keeps it');
@@ -150,18 +157,37 @@ const T = () => Game.tableState();
   // Shared core granted idempotently at the door.
   ok(Game.relayHas('deep-listen') || true, 'cockpit online');
   const bondBefore = Game.sysBond();
-  Game.chooseTableOption('beat:commune');
-  Game.chooseTableOption('beat:commune');
-  Game.chooseTableOption('beat:commune');
-  Game.chooseTableOption('beat:commune');
-  ok(Game.sysBond() >= bondBefore + 4, 'four communes: the relationship arc advances', 'bond=' + Game.sysBond());
+  // Communes open pending scenes mid-challenge; answers resolve them.
+  for (let i = 0; i < 4; i++) { Game.chooseTableOption('beat:commune'); Game.relayAnswer('engage'); }
+  ok(Game.sysBond() >= bondBefore + 4, 'four answered communes: the relationship arc advances', 'bond=' + Game.sysBond());
   ok(T().meters.merge === 4, 'merge tracks', 'merge=' + T().meters.merge);
   ok(T().phase === 'finals', 'finals after the fourth verb');
   ok(transcript.some(([k, t]) => k === 'sys' && t.indexOf('A HUMAN ENTERS THE MACHINE') >= 0), 'the merge televised');
 
-  console.log('— (B) light final: champion —');
-  // Branch should be light (no dark uses, grounding high).
-  ok((T().branch || 'light') === 'light', 'light branch: no dark uses', T().branch);
+  console.log('— (B) grey final: both hands (the honest middle) —');
+  // Four earnest answers (+20 lean) land the middle: not a coin flip, not
+  // a default — the pragmatist's band, earned by never going all-in.
+  ok(T().branch === 'grey', 'grey band: the middle is honest', T().branch);
+  ok(tc().options.some(o => o.id === 'final:both-hands'), 'both-hands offered');
+  Game.chooseTableOption('final:both-hands');
+  ok(Game.won && transcript.some(([k, t]) => t.indexOf('BOTH HANDS') >= 0), 'the pragmatist resolves');
+
+  console.log('— (B) light final: champion (tender earned) —');
+  resetAll(); boot();
+  Game.state.scholar.integration = 85;
+  Game.state.networkLive = true;
+  Game.claimRelay();
+  // Tender is taught, scene by scene — no single choice gets you there.
+  for (const sid of ['light-locket', 'light-recipe', 'light-firesound']) { Game.relayOpenScene(sid); Game.relayAnswer('engage'); }
+  Game.relayCommune(); Game.relayAnswer('engage'); // cur-1
+  Game.relayCommune(); Game.relayAnswer('engage'); // cur-2
+  Game.relayOpenScene('chk-cup'); Game.relayAnswer('engage');
+  ok(Game.relayBand() === 'light', 'tender earned through teaching', Game.relayLeanLabel());
+  Game.tableScene();
+  Game.chooseTableOption('path:relay');
+  ok(T().branch === 'light', 'light band: the System learned', T().branch);
+  for (let i = 0; i < 4; i++) { Game.chooseTableOption('beat:commune'); Game.relayAnswer('engage'); }
+  ok(T().phase === 'finals', 'finals after the fourth verb');
   ok(tc().options.some(o => o.id === 'final:champion'), 'champion offered');
   Game.chooseTableOption('final:champion');
   ok(Game.won && transcript.some(([k, t]) => t.indexOf('I WILL FIGHT FOR EARTH') >= 0), 'the System becomes Earth\'s champion');
@@ -181,18 +207,22 @@ const T = () => Game.tableState();
   Game.chooseTableOption('final:z');
   ok(Game.won, 'weakened path resolves');
 
-  console.log('— (B) dark final: the voice —');
+  console.log('— (B) dark final: the voice (total earned) —');
   resetAll(); boot();
   Game.state.scholar.integration = 85;
   Game.state.networkLive = true;
   Game.claimRelay();
   Game.switchboard().delayed = 3;
   Game.relayUnlockCheck();
-  Game.relayRewrite(); Game.relayRewrite(); // dark uses
+  Game.relayRewrite(); Game.relayRewrite(); // dark uses: lean -8, never a lock
   Game.state.scholar.grounding = 40; // frayed past the line
+  // Total is chosen, scene by scene — conquest for humanity, priced in self.
+  for (const sid of ['dark-intercept', 'dark-cut', 'dark-everywhere']) { Game.relayOpenScene(sid); Game.relayAnswer('engage'); }
+  Game.relayOpenScene('chk-efficiency'); Game.relayAnswer('engage');
+  ok(Game.relayBand() === 'dark', 'total earned through conquest', Game.relayLeanLabel());
   Game.tableScene();
   Game.chooseTableOption('path:relay');
-  ok(T().branch === 'dark', 'dark branch: dark uses + low grounding', T().branch);
+  ok(T().branch === 'dark', 'dark band: conquest, not defection', T().branch);
   Game.chooseTableOption('beat:commune');
   Game.chooseTableOption('beat:commune');
   Game.chooseTableOption('beat:commune');

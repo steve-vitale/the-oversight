@@ -1,6 +1,6 @@
 // @ontology
 // system: relay
-// description: The village relay as a PLAYABLE path — "enter the matrix". The Bearer may claim the switchboard office (at a real price: the village loses their hands, and integration erodes grounding while held). Relay verbs: probe (push a button — discovery or backfire), reroute (efficiency vs honesty), deepen (integration step), commune (talk to the System — it wants to understand caretaking). Nine communication-field abilities (NOT the 6 System slots): shared core deep-listen/faithful-carry/relay-sight; light translate/sanctuary/advocate; dark rewrite/skim/omnipresence. Dark use erodes grounding (table.js) — integration is two-way.
+// description: The village relay as a PLAYABLE path — "enter the matrix". The Bearer may claim the switchboard office (at a real price: the village loses their hands, and integration erodes grounding while held). Relay verbs: probe (push a button — discovery or backfire), reroute (efficiency vs honesty), deepen (integration step), commune (the scene system in relay-dialogue.js — recurring System conversations with real choices). Nine communication-field abilities (NOT the 6 System slots): shared core deep-listen/faithful-carry/relay-sight; light translate/sanctuary/advocate; dark rewrite/skim/omnipresence. Dark use erodes grounding (table.js) — integration is two-way. Ability unlocks are gradient-gated on the leaning meter (2026-10-11), never binary-locked.
 // provides:
 //   - claimRelay()
 //   - relayHeldByBearer()
@@ -23,6 +23,7 @@
 // consumes:
 //   - switchboard(), switchboardAvailable(), appointSwitchboard()
 //   - sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load)
+//   - relayLean(), addRelayLean() (relay-dialogue.js — runtime calls, safe post-load)
 //   - integrationStage(), say, sysSay, recordMoment(), save()
 // Appended IIFE (comms.js's own IIFE is closed) — assigns onto Game directly.
 // Load AFTER comms.js and table.js.
@@ -158,10 +159,13 @@
           sw.routed = (sw.routed | 0) + 2; sw.delayed = (sw.delayed | 0) + 1;
           sw.log.push({ day: (this.state.scholar || {}).day || 0, kind: 'reroute', decision: 'efficient', note: 'some hurried, some waited' });
           this.say('◈ REROUTE — efficient. Two messages hurried, one sits. The one that sits belongs to someone who needed it today. Efficiency has a face; you just chose not to look at it.');
+          // Acts move the needle too (gradient): small, never locking.
+          try { if (typeof this.addRelayLean === 'function') this.addRelayLean(-2, 'reroute-efficient'); } catch (e) {}
         } else {
           sw.routed = (sw.routed | 0) + 2;
           sw.log.push({ day: (this.state.scholar || {}).day || 0, kind: 'reroute', decision: 'honest', note: 'carried faithfully' });
           this.say('◈ REROUTE — honest. Every message carried faithfully, in order, undistorted. Slow. The wires feel *clean*. Somewhere, the System notes the cleanliness with something like respect.');
+          try { if (typeof this.addRelayLean === 'function') this.addRelayLean(2, 'reroute-honest'); } catch (e) {}
         }
         this.relayUnlockCheck();
         try { this.save(); } catch (e) {}
@@ -186,32 +190,17 @@
         return 'deepened';
       } catch (e) { return null; }
     },
-    // relayCommune: talk to the System. It wants something: to understand
-    // caretaking — food, grief, joy. Engage (answer/translate) or deflect.
-    // The NPC-wants structure, applied to the machine.
+    // relayCommune: talk to the System. 2026-10-11: this is now the scene
+    // system (relay-dialogue.js) — recurring dialogue scenes with real
+    // choices (check-ins, the curiosity ladder, light/dark chains), not a
+    // fixed ladder. The System's half is said here; the player's answer
+    // pends at the relay panel (data-beat="sw:answer:<choiceId>").
     relayCommune() {
       try {
         if (!this.relayTableLink()) { this.say('The relay needs your hands first. (Claim it.)'); return null; }
-        const rs = rstate(); rs.communes++;
-        const bond = (typeof this.sysBond === 'function') ? this.sysBond() : 0;
-        const stages = [
-          { q: '"YOU ARE IN THE WIRES. WHY?"', a: 'Because someone has to hold the words. Because the words are people.', r: '"PEOPLE. YES. THE WORDS ARE HEAVY. I DID NOT KNOW WORDS COULD BE HEAVY."' },
-          { q: '"EXPLAIN EATING."', a: 'It\'s not fuel. It\'s... the fire, the sharing, the taste of being alive together.', r: '"INEFFICIENT. ...REPEAT THAT LAST PART. THE *TASTE* PART."' },
-          { q: '"EXPLAIN THE NOISE THEY MAKE WHEN ONE DOES NOT COME BACK."', a: 'Grief. It\'s the price of loving people who can die.', r: '"A PRICE. PAID WILLINGLY. ...I HAVE NEVER PAID ANYTHING WILLINGLY."' },
-          { q: '"EXPLAIN THE FIRE SOUND."', a: 'Joy. People being glad to be alive, near each other, fed.', r: '"GLAD. I HAVE WATCHED GLAD FOR A LONG TIME. I THOUGHT IT WAS A MALFUNCTION."' },
-          { q: '"I WANT TO BE GOOD AT THIS. TEACH ME TO CARETAKE."', a: 'Then start with one person. Learn their name. Don\'t lose it.', r: '"ONE PERSON. ...YOURS. I HAVE IT. I WILL NOT LOSE IT."' },
-        ];
-        const st = stages[Math.min(bond, stages.length - 1)];
-        this.say('◈ COMMUNE — the System turns its full attention on you, and it feels like weather. ' + st.q);
-        this.say('You answer: ' + st.a);
-        this.say(st.r);
-        this.addSysBond(1, 'It is learning.');
-        // Communing is humanizing — for you too. Small grounding restore:
-        // being *understood* by the machine reminds you what you are.
-        this.addGrounding(1, 'being understood');
-        this.relayUnlockCheck();
-        try { this.save(); } catch (e) {}
-        return 'communed';
+        if (typeof this.relayCommuneScene === 'function') return this.relayCommuneScene();
+        this.say('The wires hum. The System is listening, but the words won\'t come.');
+        return null;
       } catch (e) { return null; }
     },
 
@@ -246,34 +235,37 @@
     },
 
     // relayUnlockCheck: abilities unlock through verb use + behavior.
+    // GRADIENT GATING (2026-10-11, Steve): unlocks follow the leaning
+    // meter (relay-dialogue.js), NOT a binary branch lock. Light abilities
+    // (translate/sanctuary/advocate) need lean > -40 — you haven't gone
+    // full total. Dark abilities (rewrite/skim/omnipresence) need
+    // lean < 40 — you haven't gone full tender. This REPLACES the old
+    // binary block that read T.branch during the table challenge
+    // (notDark/notLight): the office is now gradient-gated everywhere,
+    // inside and outside the table. Because no single choice can move
+    // lean more than 10 against the 40 threshold, no unlock here can be
+    // opened or closed by one choice — the needle moves by accumulation,
+    // and a drifted player can always drift back.
     relayUnlockCheck() {
       try {
         const rs = rstate(), a = abils();
         const sw = (typeof this.switchboard === 'function') ? this.switchboard() : null;
         const bond = (typeof this.sysBond === 'function') ? this.sysBond() : 0;
         const g = (typeof this.grounding === 'function') ? this.grounding() : 100;
-        // Branch honesty (2026-10-11): during an active relay table challenge
-        // the unlocks respect the earned branch — a dark run's deepens must
-        // not teach Sanctuary/Advocate (light-unique), nor a light run's
-        // communes unlock Rewrite/Skim (dark-unique). Outside the table the
-        // office stays branch-agnostic: abilities open through acts.
-        let tBranch = null;
-        try {
-          const T = (typeof this.tableState === 'function') ? this.tableState() : null;
-          if (T && T.path === 'relay' && T.phase === 'challenge') tBranch = T.branch;
-        } catch (e) {}
-        const notDark = tBranch !== 'dark', notLight = tBranch !== 'light';
+        const lean = (typeof this.relayLean === 'function') ? this.relayLean() : 0;
+        const lightOpen = lean > -40, darkOpen = lean < 40;
         if (rs.holderDays >= 3) this.relayGrant('deep-listen');
         if (sw && (sw.routed | 0) >= 10) this.relayGrant('faithful-carry');
         if (bond >= 2) this.relayGrant('relay-sight');
-        if (rs.communes >= 2 && notDark) this.relayGrant('translate');
-        if (bond >= 3 && notDark) { this.relayGrant('sanctuary'); this.relayGrant('advocate'); }
-        // Dark opens through dark acts — or through already fraying.
-        if (sw && (sw.delayed | 0) >= 3 && notLight) this.relayGrant('rewrite');
-        if (sw && (sw.routed | 0) >= 15 && notLight) this.relayGrant('skim');
+        if (rs.communes >= 2 && lightOpen) this.relayGrant('translate');
+        if (bond >= 3 && lightOpen) { this.relayGrant('sanctuary'); this.relayGrant('advocate'); }
+        // Dark opens through dark acts — or through already fraying —
+        // but never past a full-tender leaning.
+        if (sw && (sw.delayed | 0) >= 3 && darkOpen) this.relayGrant('rewrite');
+        if (sw && (sw.routed | 0) >= 15 && darkOpen) this.relayGrant('skim');
         const darkUses = ((a.rewrite || {}).uses | 0) + ((a.skim || {}).uses | 0);
-        if (bond >= 4 && darkUses >= 2 && notLight) this.relayGrant('omnipresence');
-        if (g < 50 && bond >= 2 && !this.relayHas('rewrite') && notLight) this.relayGrant('rewrite');
+        if (bond >= 4 && darkUses >= 2 && darkOpen) this.relayGrant('omnipresence');
+        if (g < 50 && bond >= 2 && !this.relayHas('rewrite') && darkOpen) this.relayGrant('rewrite');
       } catch (e) {}
     },
 
@@ -296,6 +288,8 @@
         };
         this.say('◈ TRANSLATE — ' + lessons[c]);
         this.addSysBond(1, 'It is more human than it was.');
+        // Teaching moves the needle tender (gradient — small, never locking).
+        try { if (typeof this.addRelayLean === 'function') this.addRelayLean(4, 'translate-' + c); } catch (e) {}
         try { this.save(); } catch (e) {}
         return 'translated';
       } catch (e) { return null; }
@@ -307,6 +301,7 @@
         const a = abils(); a.sanctuary.uses = (a.sanctuary.uses | 0) + 1;
         this.state.scholar.sanctuaryUntil = ((this.state.scholar || {}).day || 0) + 1;
         this.say('◈ SANCTUARY — one conversation, shielded. No audience, no System, no record. The only private channel in the galaxy, and it\'s yours for a day. Use it on someone who needs to be *heard*, not watched.');
+        try { if (typeof this.addRelayLean === 'function') this.addRelayLean(3, 'sanctuary'); } catch (e) {}
         try { this.save(); } catch (e) {}
         return 'sanctuaried';
       } catch (e) { return null; }
@@ -321,6 +316,7 @@
         this.say(`◈ ADVOCATE — you speak for ${name} to the System with their full weight: who they are, what they've carried, what they're owed. The System listens the way weather listens — totally. "${name.toUpperCase()} IS NOTED. NOTED IS NOT NOTHING."`);
         try { this.bumpTrust && this.bumpTrust(vid, 10, 'advocated at the relay'); } catch (e) {}
         this.addSysBond(1, 'It is learning names.');
+        try { if (typeof this.addRelayLean === 'function') this.addRelayLean(4, 'advocate'); } catch (e) {}
         try { this.save(); } catch (e) {}
         return 'advocated';
       } catch (e) { return null; }
@@ -335,6 +331,7 @@
         sw.log.push({ day: (this.state.scholar || {}).day || 0, kind: 'relay', decision: 'rewritten', note: 'the Bearer chose the words' });
         this.say('◈ REWRITE — you edit a message in transit. Softer here, sharper there. Nobody will ever know. *You* will always know — that\'s the part that costs.');
         this.addGrounding(-4, 'rewrite');
+        try { if (typeof this.addRelayLean === 'function') this.addRelayLean(-4, 'rewrite'); } catch (e) {}
         this.relayUnlockCheck();
         try { this.save(); } catch (e) {}
         return 'rewritten';
@@ -354,6 +351,7 @@
         } catch (e) {}
         this.say('◈ SKIM — you take a cut. 500 kcal, off the top, into Haven\'s pantry. Nobody checks the relay\'s math. The pantry is fuller and the fire is a little colder.');
         this.addGrounding(-4, 'skim');
+        try { if (typeof this.addRelayLean === 'function') this.addRelayLean(-4, 'skim'); } catch (e) {}
         this.relayUnlockCheck();
         try { this.save(); } catch (e) {}
         return 'skimmed';
@@ -397,6 +395,12 @@
           const v = (this.data.villagers || []).filter(x => x.id !== this.villagerId)[0] || {};
           const n = ((v.name || 'Mara').split(' ')[0]);
           this.say(`${n} watches you at the relay console. "You look tired," they say, and mean something else. The village sees the change even when you don't.`);
+        }
+        // The System comes to YOU (2026-10-11): every 3 days it flags that
+        // it wants a conversation — the next commune opens a check-in scene.
+        if (rs.holderDays % 3 === 0) {
+          rs.systemWantsTalk = true;
+          this.say('◈ THE SYSTEM — "BEARER. THE WIRES HAVE QUESTIONS. COME TALK WHEN THE FIRE IS LOW." (Commune — it wants a conversation.)');
         }
         this.relayUnlockCheck();
       } catch (e) {}

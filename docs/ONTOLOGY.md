@@ -922,15 +922,25 @@ Character progression. XP, levels, abilities.
 
 **Consumes:** scholar.xp, scholar.abilities
 
+### relay-dialogue (`relay-dialogue.js`)
+The relay path's dialogue rework (Steve 2026-10-11) — the System as a real conversational presence. The leaning gradient (tender +100 .. total -100), the recurring check-in scenes, the light (humanize the System) and dark (conquest/domination THROUGH the System, pro-human) conversation chains, the grey-middle pragmatist band, and the pending-scene answer mechanism. No single choice may lock the branch — see the GRADIENT LAW below.
+
+**Provides:** relayLean(), addRelayLean(n, why), relayBand(), relayLeanLabel(), relayAllScenes(), relaySceneById(id), relayCommuneScene(), relayOpenScene(id), relayAnswer(choiceId), pendingRelayScene(), relayLeanNoticed(from, to)
+
+**Rules:**
+—
+
+**Consumes:** relayTableLink(), relayUnlockCheck() (relay-ext.js — runtime calls, safe post-load), sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load), say, save, recordMoment()
+
 ### relay (`relay-ext.js`)
-The village relay as a PLAYABLE path — "enter the matrix". The Bearer may claim the switchboard office (at a real price: the village loses their hands, and integration erodes grounding while held). Relay verbs: probe (push a button — discovery or backfire), reroute (efficiency vs honesty), deepen (integration step), commune (talk to the System — it wants to understand caretaking). Nine communication-field abilities (NOT the 6 System slots): shared core deep-listen/faithful-carry/relay-sight; light translate/sanctuary/advocate; dark rewrite/skim/omnipresence. Dark use erodes grounding (table.js) — integration is two-way.
+The village relay as a PLAYABLE path — "enter the matrix". The Bearer may claim the switchboard office (at a real price: the village loses their hands, and integration erodes grounding while held). Relay verbs: probe (push a button — discovery or backfire), reroute (efficiency vs honesty), deepen (integration step), commune (the scene system in relay-dialogue.js — recurring System conversations with real choices). Nine communication-field abilities (NOT the 6 System slots): shared core deep-listen/faithful-carry/relay-sight; light translate/sanctuary/advocate; dark rewrite/skim/omnipresence. Dark use erodes grounding (table.js) — integration is two-way. Ability unlocks are gradient-gated on the leaning meter (2026-10-11), never binary-locked.
 
 **Provides:** claimRelay(), relayHeldByBearer(), relayTableLink(), relayProbe(), relayReroute(mode), relayDeepen(), relayCommune(), relayHas(abilId), relayGrant(abilId), relayTranslate(concept), relaySanctuary(), relayAdvocate(vid), relayRewrite(), relaySkim(), relaySight(), relayCarry(), relayBackfire(), relayTick()
 
 **Rules:**
 —
 
-**Consumes:** switchboard(), switchboardAvailable(), appointSwitchboard(), sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load), integrationStage(), say, sysSay, recordMoment(), save()
+**Consumes:** switchboard(), switchboardAvailable(), appointSwitchboard(), sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load), relayLean(), addRelayLean() (relay-dialogue.js — runtime calls, safe post-load), integrationStage(), say, sysSay, recordMoment(), save()
 
 ### safety-nets (`safetynets.js`)
 Earned early-game survival safety nets — three played systems, not flat relief. (1) System aid quests (days 7-21): the System offers struggling villages played quests (fetch / treat / learn) with real costs and real failure; help is sometimes bizarrely wrong (canon: alien, out of touch). (2) Crisis relief: when a crisis (sickness cascade, raid aftermath, storm aftermath, hunger winter) hits, a villager-driven relief path opens — triage tents, rationing votes, emergency hunts — each with honest costs, finite per crisis. (3) Neighbor-village aid flows: struggling villages can REQUEST aid (food/medicine/hands) and richer neighbors can OFFER it; real deliveries, trust/reputation both ways, ingratitude remembered. Anti-farm: trigger-gated + cooldowns + finite neighbor pantries + bounded quest count.
@@ -1080,7 +1090,7 @@ The Indispensable path — contract drafting. Three clauses (supply, teaching, s
 **Consumes:** —
 
 ### table-relay (`table-relay.js`)
-The Relay path — "enter the matrix". The flagship new path. Distinct from the other six: there the System is terrain (a component you use); here it is the RELATIONSHIP. Four cockpit beats; each beat offers the relay verbs (probe/reroute/deepen/commune from relay-ext.js) — the verbs do their real work (sysBond, grounding, backfire), and the merge meter tracks progress. Failure: three backfires or grounding hitting hollow mid-merge → the System quarantines you. Light = humanize the System (it becomes Earth's champion); dark = System-ize yourself (you become its voice).
+The Relay path — "enter the matrix". The flagship new path. Distinct from the other six: there the System is terrain (a component you use); here it is the RELATIONSHIP. Four cockpit beats; each beat offers the relay verbs (probe/reroute/deepen/commune from relay-ext.js) — the verbs do their real work (sysBond, grounding, backfire), and the merge meter tracks progress. Failure: three backfires or grounding hitting hollow mid-merge → the System quarantines you. Branch resolution is the leaning gradient (2026-10-11): tender/light = humanize the System (it becomes Earth's champion); total/dark = System-ize yourself (you become its voice — conquest FOR humanity, never defection); grey = the pragmatist's both-hands endings. No single choice locks the band.
 
 **Provides:** —
 

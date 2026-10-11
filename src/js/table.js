@@ -170,11 +170,26 @@
           defiant: (s) => { if (g('killed') > 3 && g('defiance') > g('might') + g('brokerage')) s.dark += 2; if (pt.kept >= pt.broken) s.light += 1; },
           relay: (s) => {
             const ra = ((this.state.scholar || {}).relayAbils) || {};
-            const darkUses = (ra.rewriteUses | 0) + (ra.skimUses | 0) + (ra.omniUses | 0);
-            const lightUses = (ra.translateUses | 0) + (ra.sanctuaryUses | 0) + (ra.advocateUses | 0);
+            // 2026-10-11: uses live at ra.<id>.uses (the relayGrant shape) —
+            // the old read (ra.rewriteUses etc.) was always 0, so ability
+            // use never counted. Fixed.
+            const darkUses = ((ra.rewrite || {}).uses | 0) + ((ra.skim || {}).uses | 0) + ((ra.omnipresence || {}).uses | 0);
+            const lightUses = ((ra.translate || {}).uses | 0) + ((ra.sanctuary || {}).uses | 0) + ((ra.advocate || {}).uses | 0);
             if (darkUses > lightUses) s.dark += 3;
             if (lightUses > darkUses) s.light += 3;
             if (this.grounding() < 50) s.dark += 2; else s.light += 1;
+            // GRADIENT (2026-10-11, Steve): the relay path resolves on the
+            // leaning meter, not a binary branch. band 'light' (>=40,
+            // tender) / 'dark' (<=-40, total) / 'grey' (the pragmatist
+            // middle). The middle is honest, not a coin flip: grey takes
+            // neither side's +3. No single choice can set the band — lean
+            // moves in nudges of <=10 against the 40 threshold (see
+            // relay-dialogue.js GRADIENT LAW).
+            let lean = 0;
+            try { lean = (typeof this.relayLean === 'function') ? this.relayLean() : 0; } catch (e) {}
+            s.lean = lean;
+            s.band = lean >= 40 ? 'light' : lean <= -40 ? 'dark' : 'grey';
+            if (s.band === 'light') s.light += 3; else if (s.band === 'dark') s.dark += 3;
           },
         };
         if (W[pathId]) W[pathId](signals);
@@ -383,6 +398,10 @@
       T.meters = {}; T.branch = branch.branch; T.branchNotes = branch.notes;
       T.weakened = T.weakened | 0;
       T.abils = []; T.abilMods = {};
+      // GRADIENT (2026-10-11): the relay path runs on its leaning band —
+      // light / grey / dark — instead of the binary signals.branch. The
+      // grey middle is an honest ending color, not a coin flip.
+      if (pathId === 'relay' && branch.band) { T.branch = branch.band; T.band = branch.band; }
       // Path abilities: mostly shared + several branch-unique. Granted
       // aloud at the door; grant effects are immediate and honest.
       const ab = def.abilities || {};
@@ -403,7 +422,16 @@
         } catch (e2) {}
         this.say(already ? `◈ ABILITY — ${a.name}: already in your hands.` : `◈ ABILITY — ${a.name}: ${a.desc}`);
       });
-      grantList(ab.shared); grantList(ab[T.branch] || ab.light);
+      // The pragmatist's door gift (2026-10-11): a grey-band relay walker
+      // gets whichever hand is forward — a gradient read at the door, not
+      // a lock. Acts can still open the other track through the gradient
+      // gates in relayUnlockCheck.
+      let branchAbils = ab[T.branch] || ab.light;
+      if (T.path === 'relay' && T.branch === 'grey') {
+        const rl = (typeof this.relayLean === 'function') ? this.relayLean() : 0;
+        branchAbils = rl > 0 ? ab.light : rl < 0 ? ab.dark : [];
+      }
+      grantList(ab.shared); grantList(branchAbils);
       const seat = this.tableSeat();
       // The show component: televised in the path's genre.
       this.tableLiveWrap(def.showLive);
