@@ -29956,7 +29956,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const cap = atk === 'the attack' ? 'The attack' : 'The ' + atk;
       const mdef = (m && m.mdef) || {};
       const isNamed = String((m && m.name) || '').replace(/ \d+$/, '') !== (mdef.unknown || 'something moving');
-      if (!isNamed || atk === 'the attack') return cap;
+      if (!isNamed) return cap;
+      if (atk === 'the attack') {
+        // POSSESSIVE-GENERIC (scale-leg fix 2026-10-11): a NAMED monster with
+        // a knowledge-gated generic attack reads "Redactor's attack", never
+        // "Redactor's the attack".
+        return ((this.encShortLabel(m) || (m && m.name) || 'it') + "'s attack");
+      }
       return (this.encShortLabel(m) || (m && m.name) || 'it') + "'s " + atk;
     },
     // MONSTER BATCH 2: short, diegetic labels for combat attribution, both
