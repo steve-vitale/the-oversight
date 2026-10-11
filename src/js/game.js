@@ -5680,15 +5680,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     hurtVillager(vid, dmg, cause) {
       const v = this.state.village;
       v.health = v.health || {};
+      // BREAK-IT abilities r4: the player has ONE health pool
+      // (scholar.health). The old code burned contest/field damage against a
+      // shadow v.health[vid] pool (default 100) disconnected from the real
+      // one -- a player at 5 HP could soak 90 contest damage, and a lethal
+      // shadow-pool hit then ran playerDeath with s.health still 100, so
+      // the cheats (which read s.health) never fired. Damage the real pool;
+      // keep the shadow synced for the healer-round readers.
+      if (vid === this.villagerId) {
+        const s = this.state.scholar;
+        s.health = Math.max(0, (s.health || 0) - dmg);
+        v.health[vid] = s.health;
+        if (s.health <= 0 && typeof this.playerDeath === 'function') {
+          // Contest/field damage doesn't bypass the cheats. The arena path
+          // already runs maybeCheatDeath via tbEndCheck; this engine path
+          // killed the Unkillable with no cheat attempt. Cause is violent
+          // (contest/field damage), so the second_wind spite-ration keeps
+          // its honest semantics.
+          try { if (!this.maybeCheatDeath()) this.playerDeath(cause || 'injuries'); } catch (e) {}
+        }
+        return;
+      }
       const cur = (v.health[vid] !== undefined) ? v.health[vid] : 100;
       v.health[vid] = Math.max(0, cur - dmg);
       if (v.health[vid] <= 0) {
         // LETHAL HURT IS DEATH (2026-10-08): no silent roster vanishes.
         // The individual gets a real death: corpse, gossip, dead mark.
-        if (vid === this.villagerId && typeof this.playerDeath === 'function') {
-          try { this.playerDeath(cause || 'injuries'); } catch (e) {}
-          return;
-        }
         try {
           const rec = (this.data.villagers || []).find(x => x.id === vid)
             || (this.data.background_survivors || []).find(x => x.id === vid) || {};
@@ -6318,7 +6335,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // transition to over=true must wipe the save in the same tick. A
         // throwing playerDeath used to leave the last autosave behind and
         // Continue resurrected the dead run (load() resets over=false).
-        try { this.playerDeath('the expedition'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+        // BREAK-IT abilities r4: the road doesn't bypass the cheats. Molt,
+        // second_wind and phoenix_clause fire here like any death (canon:
+        // "unkillable means unkillable" -- PROGRESSION.md). The pit-trap
+        // path already checks; the expedition return was the one death
+        // path that killed the Unkillable with no cheat attempt.
+        if (!this.maybeCheatDeath()) {
+          try { this.playerDeath('the expedition'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+        }
       }
       else {
         // (homecomingSaid: the days-away beat above already welcomed you —
@@ -27186,11 +27210,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // trade_of_blows, rage, etc. flags set by Game.useAbility(). Each flag
       // is single-use unless noted; the hook narrates and clears.
       try { if (typeof this._applyAbilityActionMods === 'function') d = this._applyAbilityActionMods(d, p, t); } catch (e) {}
-      // PATIENT AIM: 2x damage on round 1 (combat.strike_damage modifier)
+      // STRIKE DAMAGE (break-it abilities r4): combat.strike_damage resolves
+      // EVERY round. Adrenaline Control (x1.3^level), Cornered Fury (x1.25),
+      // knowledge and relic multipliers carry no round condition in data --
+      // only patient_aim's own modifier declares condition round:1, and the
+      // engine gates it. The old code resolved the generic target inside the
+      // round-1 block, so every unconditional multiplier silently died after
+      // round 1, and the narration credited them all to PATIENT AIM -- even
+      // when the player didn't hold it.
       try {
-        if (f.round === 1) {
-          const paMult = this.modTarget('combat.strike_damage', 1, { round: 1 });
-          if (paMult > 1) { d = Math.round(d * paMult); this.say('PATIENT AIM: first strike, doubled.'); }
+        const _r1 = (f.round === 1);
+        const sdMult = this.modTarget('combat.strike_damage', 1, _r1 ? { round: 1 } : {});
+        if (sdMult > 1) {
+          d = Math.round(d * sdMult);
+          const _paFired = _r1 && this.hasAbility('patient_aim');
+          if (_paFired && sdMult > 2.01) this.say(`PATIENT AIM: first strike -- and your training piles on. (x${sdMult.toFixed(2)})`);
+          else if (_paFired) this.say('PATIENT AIM: first strike, doubled.');
+          else this.say(`Your strikes land harder. (x${sdMult.toFixed(2)} training)`);
+        }
+        if (_r1) {
           // AMBUSH (hunter loop 2026-10-07): the ambush passive — first
           // strikes hit harder. Declared in data, previously never consumed.
           const amMult = this.modTarget('combat.first_strike_damage', 1, { round: 1 });
@@ -34037,7 +34075,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } catch (e2) {}
           try { this.state.arenaContest = null; } catch (e3) {}
           try { this._contestEnd(_arenaAc, 'lost', false); } catch (e4) {}
-        } else if (!this.over) { try { this.playerDeath('combat'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} } }
+        } else if (!this.over) {
+          // BREAK-IT abilities r4: the player's own pending phoenix link
+          // holds this death at the threshold (maybeCheatDeath said so --
+          // tbEndCheck fell through with p.hp=0 because the fire, not a
+          // cheat, answered). The fight is lost -- you're down -- but the
+          // death is the fire's to decide, not the arena's. The link's
+          // resolution (struggle beats / dawn fuse) settles it; the arena
+          // doesn't get to kill you twice.
+          const _held = this.state.phoenixLink && this.state.phoenixLink.bearerIsPlayer !== false;
+          if (_held) {
+            this.say('🔥 You go down -- but the fire is already holding your death, and it does not let go. The fight is lost. What happens next is the fire\'s to decide.');
+          } else {
+            try { this.playerDeath('combat'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
+          }
+        }
       }
       } finally {
         this.tbfight = null;
@@ -34139,7 +34191,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // this death at the threshold. Firing molt/second_wind first burned
       // their weekly/daily uses for zero benefit -- the link was going to
       // hold anyway. The link holds; the cheats keep.
-      if (this.state.phoenixLink) return true;
+      // BREAK-IT abilities r4: the hold covers ONLY the link's own bearer.
+      // The old unconditional return held the PLAYER's death for a VILLAGER's
+      // pending link too -- then tbEndCheck saw p.hp=0 and ran 'lost' ->
+      // playerDeath anyway (the held promise was a lie), while molt /
+      // second_wind never fired and the player's own clause was silently
+      // swallowed by phoenixPlayerTrigger. The fire holds one death: a
+      // villager's link doesn't hold yours. Your cheats fire normally; your
+      // clause meets a busy fire honestly (see phoenixPlayerTrigger).
+      const _pl = this.state.phoenixLink;
+      if (_pl && _pl.bearerIsPlayer !== false) return true;
       // molt: once per week, shed your skin. Heal to full — but lose all equipped gear.
       const week = Math.floor(s.day / 7);
       const moltUses = (s.moltWeek === week) ? (s.moltUses || 1) : 0;
@@ -34316,7 +34377,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Returns true if death was cheated or is being held (caller: don't set over).
     phoenixPlayerTrigger() {
       const s = this.state.scholar, v = this.state.village;
-      if (this.state.phoenixLink) return true; // a link is already holding this death
+      // BREAK-IT abilities r4: one link slot (see phoenixVillagerTrigger).
+      // The fire is busy holding another death -- it cannot open a second
+      // link. The old silent `return true` pretended the death was held while
+      // tbEndCheck ran 'lost' -> playerDeath anyway. Honest now: the death
+      // proceeds normally, and the clause is NOT spent (the fire was busy,
+      // not the clause). (maybeCheatDeath returns before reaching here when
+      // the pending link is the player's own, so a link seen here is always
+      // someone else's.)
+      if (this.state.phoenixLink) {
+        const _bl = this.state.phoenixLink;
+        let _bn = 'another';
+        try { _bn = _bl.bearerIsPlayer ? 'your own' : this.displayName(_bl.bearer); } catch (e) {}
+        this.say(`🔥 Your phoenix clause stirs -- but the fire is already holding ${_bn} death. It lets this one through. (The clause is not spent -- the fire was busy.)`);
+        return false;
+      }
       const living = this.phoenixLivingVillagers();
       // No one left to burn for you -- or no village at all. Death sticks.
       if (!v || !living.length) {
