@@ -336,6 +336,78 @@
       "fleeAt": 1,
       "preTurnHooks": ["sponsorCling"],
       "preferredRange": 0
+    }    ,
+    "congregation": {
+      "aggroRange": 6,
+      "archetype": "liturgist",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): invite-then-absolve liturgy. Bell rings, absolution offered (heal 40 + cleanse for a 2-round geas); it cannot compel without inviting. Heresy breaks the geas.",
+      "preTurnHooks": ["sigCongregation"],
+      "preferredRange": 4
+    },
+    "strike": {
+      "aggroRange": 6,
+      "archetype": "organizer",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): posts readable demands, then 2-round shutdowns where nothing works. Meet a demand (it leaves) or scab at half strength.",
+      "preTurnHooks": ["sigStrike"],
+      "preferredRange": 4
+    },
+    "influencer": {
+      "aggroRange": 6,
+      "archetype": "broadcaster",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): recruits literal follower adds that sharpen Ratio and drain favor. Kill followers or out-entertain it to steal them.",
+      "preTurnHooks": ["sigInfluencer"],
+      "preferredRange": 4
+    },
+    "audit": {
+      "aggroRange": 6,
+      "archetype": "examiner",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): scheduled audit every 3 rounds taxes the most-used verb for 2 rounds. Deliberate jank or read the clipboard.",
+      "preTurnHooks": ["sigAudit"],
+      "preferredRange": 4
+    },
+    "reunion": {
+      "aggroRange": 6,
+      "archetype": "mirror",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): mirrors your most-used verb; repeats weaken (it knows the move). Novelty is the weapon.",
+      "preTurnHooks": ["sigReunion"],
+      "preferredRange": 3
+    },
+    "suburb": {
+      "aggroRange": 5,
+      "archetype": "trap",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): comfort trap. Rest heals 30 but stacks complacency (5 = you move in, routed). Escape by walking out or bring something alive inside.",
+      "preTurnHooks": ["sigSuburb"],
+      "preferredRange": 3
+    },
+    "eulogy": {
+      "aggroRange": 6,
+      "archetype": "narrator",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): 5-verse doom narration, each verse weighted. Contradict verses to strike them; 3 contradictions unlock the kind rewrite (dismissed).",
+      "preTurnHooks": ["sigEulogy"],
+      "preferredRange": 5
+    },
+    "algorithm": {
+      "aggroRange": 6,
+      "archetype": "predictor",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): thumbnail previews of its moves; repeats get countered (x1.5). Be unpredictable or tank on purpose to poison its data.",
+      "preTurnHooks": ["sigAlgorithm"],
+      "preferredRange": 4
+    },
+    "eater": {
+      "aggroRange": 7,
+      "archetype": "gorger",
+      "fleeAt": 0,
+      "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): Steve's monster. Eats grid food each round, +15 damage per 1000 kcal. Poison the meal or starve the field; it snacks packs when adjacent.",
+      "preTurnHooks": ["sigEater"],
+      "preferredRange": 2
     }
   }
 }

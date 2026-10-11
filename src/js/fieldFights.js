@@ -362,6 +362,19 @@
                   if (typeof _sig === 'number') total = _sig;
                 }
               } catch (e) {}
+              // SIGNATURE MECHANICS (sigW4, Steve 2026-10-11): wave-4
+              // "The Mirror Draft" signature layer (congregation/strike/
+              // influencer/audit/reunion/suburb/eulogy/algorithm/eater) in
+              // villager field fights. The module owns all state on rec.sigW4.
+              try {
+                if (typeof this.sigW4FieldMonster === 'function') {
+                  var _sig4 = this.sigW4FieldMonster(mdef, rec, {
+                    total: total, round: round, rr: RR, lroll: lroll,
+                    vName: vName, mName: mName
+                  });
+                  if (typeof _sig4 === 'number') total = _sig4;
+                }
+              } catch (e) {}
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in is exposed (no armor) and draws some of the hits.
               var hittingAlly = allyIn && allyHp > 0 && RR() < 0.4;

@@ -1047,6 +1047,21 @@ Wave 3 batch C signature combat mechanics (Steve 2026-10-10). THE CALLBACK wears
 
 **Consumes:** tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbDamage, tbEndCheck, tbRefreshTelegraphUI, encSubject, corpses, convLineLog, havenViewership, say
 
+### sig-w4 (`sigW4.js`)
+Wave-4 "The Mirror Draft" signature combat mechanics (Steve 2026-10-11): The Congregation (invite-then-absolve liturgy — absolution offered, geas if accepted, heresy breaks it), The Strike (posts demands, then shutdown rounds where nothing works — meet a demand or scab), The Influencer (literal follower adds buff its Ratio and drain favor — kill them or out-entertain it), The Audit (scheduled audit taxes your most-used ability — deliberate jank or read the clipboard), The Reunion (mirrors your most-used verb, repeats weaken — novelty is the weapon), The Suburb (comfort trap — rest heals but complacency stacks; escape or bring something alive), The Eulogy (5-verse doom narration — contradict verses or rewrite the ending), The Algorithm (thumbnail previews, predicts repeats — be unpredictable or tank), THE EATER (eats grid food and grows per kcal — poison the meal or starve the field). Hooks interleave with the generic encounter interpreter.
+
+**Provides:** sigCongregationHook (registered as MonsterBehaviorHooks.sigCongregation), sigStrikeHook (registered as MonsterBehaviorHooks.sigStrike), sigInfluencerHook (registered as MonsterBehaviorHooks.sigInfluencer), sigAuditHook (registered as MonsterBehaviorHooks.sigAudit), sigReunionHook (registered as MonsterBehaviorHooks.sigReunion), sigSuburbHook (registered as MonsterBehaviorHooks.sigSuburb), sigEulogyHook (registered as MonsterBehaviorHooks.sigEulogy), sigAlgorithmHook (registered as MonsterBehaviorHooks.sigAlgorithm), sigEaterHook (registered as MonsterBehaviorHooks.sigEater), Game.tbCongAccept(), Game.tbCongRefuse(), Game.tbCongHeresy(), Game.tbStrikeMeet(), Game.tbStrikeScab(), Game.tbInflOutentertain(), Game.tbAuditRead(), Game.tbSuburbRest(), Game.tbSuburbLeave(), Game.tbSuburbAlive(), Game.tbEulogyContradict(), Game.tbEulogyRewrite(), Game.tbAlgoTank(), Game.tbEaterPoison(), Game.sigW4CombatButtons(), Game.sigW4WireCombat(), Game.sigW4FieldMonster()
+
+**Rules:**
+- telegraph_honesty: every bell-ring, eye-inflate, ring-light, abacus-click, face-surface, streetlight-flicker, narration, thumbnail, and smack describes exactly what the hook executes next (code: sigAuditHook)
+- liturgy_binds: the Congregation cannot geas without inviting first — the offer always precedes compulsion (code: congInvite)
+- strike_announced: the Strike never shuts down unannounced — demands post first, eyes inflate first (code: sigStrikeHook)
+- novelty_real: the Reunion's repeat-penalty reads actual verb counts from the fight, never a script (code: sigNoteVerbW4)
+- doom_choke: Eulogy/Finale-style doom deaths route through maybeCheatDeath only (code: sigEulogyHook)
+- no_silent: every signature beat narrates via say() (code: sigEaterHook)
+
+**Consumes:** say, tbDamage, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, hasItem, consumeItem, hasStatus, applyStatus, audioEvent, havenViewership
+
 ### spawn-knack (`spawn-knack.js`)
 The spawn knack — a mysterious latent first ability chosen in the spawn sequence, pre-System. Backstory-rooted, unexplained.
 

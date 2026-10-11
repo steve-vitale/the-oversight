@@ -15562,6 +15562,7 @@
       <button class="self-btn" id="c-shout" ${p.acted ? 'disabled' : ''} title="Bellow — scatter noise-fearing monsters (2/fight)">📢 Shout</button>
       <button class="self-btn" id="c-offer" ${p.acted ? 'disabled' : ''} title="Offer food — buy off the curious thief">🍖 Offer</button>
       ${Game.sigW3bCombatButtons ? Game.sigW3bCombatButtons() : ''}
+      ${Game.sigW4CombatButtons ? Game.sigW4CombatButtons() : ''}
       <button class="self-btn" id="c-wait" title="Hold still — forfeit the rest of the turn">⏸ Wait</button>
     </div>
     <div class="actions" id="c-talkrow" style="display:none"></div>`;
@@ -15692,6 +15693,12 @@
     // funeral / name-it (callback), close eyes (buffering), skip ad /
     // look away (ad break). Buttons + wiring live in src/js/sigW3c.js.
     if (Game.sigW3cWireCombat) Game.sigW3cWireCombat(on, rerender);
+    // SIG W4 (wave 4 "The Mirror Draft", 2026-10-11): signature combat actions —
+    // congregation accept/refuse/heresy, strike meet/scab, influencer
+    // out-entertain, audit read, suburb rest/leave/alive, eulogy
+    // contradict/rewrite, algorithm tank, eater poison. Buttons + wiring
+    // live in src/js/sigW4.js.
+    if (Game.sigW4WireCombat) Game.sigW4WireCombat(on, rerender);
     // TALK: words are actions too. Pick who, then how.
     const showTalkRow = (targetKey) => {
       const row = document.getElementById('c-talkrow');
