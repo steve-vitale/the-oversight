@@ -21,6 +21,7 @@
 //   - threshold beats fire once per run per dimension, knowledge-gated (gossip always, show needs viewership, system needs the overlay, lived/witness always); ungated beats queue and fire when the world catches up (code: _checkDimBeats, flushLedgerBeats)
 //   - unified/fractured is a felt state machine, not a number; transitions are narrated, direction-aware, always visible — you live it (code: unityState, _checkUnityTransition)
 //   - foodShared vs foodHoarded resolve to a felt stance; stance transitions are narrated with social consequences (code: foodStance, _checkFoodStance)
+//   - viewership is deed-reactive, never pantry-reactive (code: havenViewership): inits from arc*5 + showmanship + codex breadth capped at 15, floored at 12 (the drift's resting state); a fat pantry is prosperity, not fame; ledger showmanship feeds live via _viewShoMark; spikes (recordMoment/arena/stunts) and spends (OBJECT/declines) ride the sticky pool, nothing refills it
 //   - the player's own epithet is never shown until hearsAboutSelf() (code: ledgerBeat)
 //   - table_deed_recheck: true (code: ledger.js — tableScene re-verifies deedGateReady() at dawn; a stale tableWaiting is withdrawn aloud, never fired silently)
 // consumes:
@@ -880,10 +881,30 @@
     // viewership scores, trends, and the moments that moved them. Don't
     // paint over it: every notable event should recordMoment().
     havenViewership() {
+      // VIEWERSHIP, deed-reactive (longsim travel 2026-10-11): the old init
+      // read the pantry as fame ((v.pantryKcal||0)/2000 + codexBreadth*1.5,
+      // frozen at first read) — a fat pantry froze viewership near the 40
+      // global bar by day 2-7, so "roughly a season+ of being worth watching"
+      // (docs/SCALE.md, provisional v1) was nearly free. Fame is now earned:
+      // arc*5 (the journey so far) + showmanship (playing to the audience —
+      // tracked live via _viewShoMark, so ledger showmanship keeps feeding
+      // the number instead of only the init) + codex breadth capped at 15
+      // (knowing things is interesting; hoarding food is not fame).
+      // The sticky pool still carries spikes (recordMoment +1, arena acts,
+      // show stunts +2) and real spends (OBJECT -3, declines) — those are the
+      // fame economy, and nothing here refills them. The init floors at 12:
+      // the audience-drift's resting state (contests.js: drift decays toward
+      // 12, never below) and the show-beat gate's "the show is watching"
+      // threshold — a quiet fire rests at 12, and 40 still takes a season.
       try {
         const v = this.state.village, pg = this.progState();
-        const base = (v.pantryKcal || 0) / 2000 + this.codexBreadth() * 1.5 + (pg.arc || 1) * 5 + (this.ledger().showmanship || 0);
-        v.viewership = v.viewership == null ? base : v.viewership;
+        const sho = (this.ledger().showmanship || 0);
+        const base = Math.max(12, (pg.arc || 1) * 5 + Math.min(20, sho) + Math.min(15, this.codexBreadth() * 0.5));
+        if (v.viewership == null) { v.viewership = base; v._viewShoMark = sho; }
+        else {
+          const mark = v._viewShoMark || 0;
+          if (sho > mark) { v.viewership += (sho - mark); v._viewShoMark = sho; }
+        }
         return v.viewership;
       } catch (e) { return 0; }
     },
