@@ -100,6 +100,18 @@
       line: (ctx) => `It happened on camera. Trillions watched ${ctx.name || 'someone'} die, and the show kept rolling. The village will remember who the cameras loved.`,
       sys: 'SYSTEM: "That was... a lot. The producers say the ratings were historic. I don\u2019t know what to do with that sentence."',
     },
+    // CRISIS (win-path lever 2026-10-11): THE SIEGE — raiders came for the
+    // pantry and the village drove them off. This is the peaceful-stable
+    // run's crisis: wealth has a scent, and the scent draws teeth. A
+    // competent village that never starves and never loses its walls still
+    // weathers THIS. Fires only when a RAID crisis (crisis.raiders, set by
+    // havenRaidTick) resolves 'fought' — not for generic monster-at-the-door
+    // aid crises. Once per run (fireCrisis dedupes).
+    'the-siege': {
+      name: 'THE SIEGE',
+      line: () => 'They came in the night for the pantry \u2014 and the village met them at the door with blades and fire and drove them back into the dark. Wealth has a scent. So does defiance.',
+      sys: 'SYSTEM: "INTRUDER REPELLED. The pantry\u2019s aroma is now classified as a defensive liability. The audience is chanting the defenders\u2019 names. Fan clubs are forming. This is how it starts."',
+    },
   };
 
   const methods = {

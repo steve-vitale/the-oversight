@@ -43,6 +43,7 @@
 //   - cry_is_build_gated: war_cry's bellow (and kin) punch through — targeted, same-part muster, honest message; gated on actually having the ability. (code: aidCry)
 //   - refusals_aloud_fast: aidAskVillage always speaks — acceptance, refusal, or no-link — never silent waiting. (code: aidAskVillage)
 //   - raid_raises_crisis: raids raise the crisis reactively (havenGrowth.js havenRaidTick) — the "monster at your door" beat the chain was built for; raiseAidCrisis had no organic caller (0/120 runs). Lingering raiders are the persistent threat; the crisis resolves 'fought' when the treeline is clear, 'moved-on' on the 6-day valve (lingering cleared). (code: commsTick, 2026-10-10)
+//   - raid_raises_siege: a RAID crisis (crisis.raiders) resolved 'fought' fires the 'the-siege' crisis kind (progression.js CRISIS_BEATS) — the peaceful-stable run's crisis: wealth drew teeth, teeth were answered. Generic monster-at-the-door aid crises don't qualify. Once per run (fireCrisis dedupes). (code: resolveAidCrisis, 2026-10-11)
 //   - standing_ge_ask: only links with trust >= 35 can be asked; below that the refusal names the number. (code: aidAskVillage)
 //   - mid_crisis_cant_come: a village with its own crisis says so aloud and stays home; foreign crises start/end reactively (seeded), never on a calendar. (code: aidAskVillage, foreignCrisisTick)
 //   - capped_party_named_face: help is a party of at most 4 led by one of the village's ~3 named faces (consistent across calls); the party marches real day-parts and can stand down aloud if the door goes quiet. (code: aidAskVillage, aidHelpArrived)
@@ -186,6 +187,12 @@
       this.state.aidCrisis = null;
       if (how === 'fought') {
         this.say('The door is quiet. Haven breathes.');
+        // CRISIS (win-path lever 2026-10-11): raiders driven off = THE SIEGE —
+        // a real setback the village weathered (wealth drew teeth; teeth were
+        // answered). Fires only for raid crises (crisis.raiders, set by
+        // havenRaidTick in havenGrowth.js) — generic monster-at-the-door aid
+        // crises don't qualify. Once per run (fireCrisis dedupes).
+        try { if (crisis.raiders && this.fireCrisis) this.fireCrisis('the-siege'); } catch (e) {}
         try { if (this.leadShift) this.leadShift('protection', 1); } catch (e) {}
       } else if (how === 'moved-on') {
         this.say('Whatever was at the door has moved on — or found easier meat. The call goes quiet.');
