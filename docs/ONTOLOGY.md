@@ -618,6 +618,19 @@ Food reality system. Food must be known-edible AND in edible state. Processing c
 
 **Consumes:** scholar.inventory, state.codex.plants
 
+### galactic-cast (`galactic-cast.js`)
+Per-run registry of the five galactic personae (Vex Marlowe, Countess Sable, Sarge, Dr. Fenwick, Pip Quindle) as the SAME characters recur across show, contest, alien-encounter, and table layers — Steve's world-building scaffold (2026-10-11). Arc stages: 0 unknown, 1 heard (show exposure), 2 seen (contest/producer contact), 3 faced, 4 known. Stages 1-2 advance here via sponsor cards and signed producer notes; stages 3-4 belong to the encounter/table systems via advanceCastStage. Knowledge-gated: stage 0 never renders a persona name.
+
+**Provides:** castState(), castStage(pid), castKnows(pid), castDisplayName(pid), advanceCastStage(pid, stage, why), castFlag(pid, flag, val), castShowSponsor(showId), castProducerDemand(), castSignOff()
+
+**Rules:**
+- Stages are monotonic: advanceCastStage never lowers a stage (code: advanceCastStage).
+- Stage 0: never render a persona name in player-facing text — use "a sponsor" / "the producers" (code: castDisplayName, castSignOff).
+- Max one cast mention per show; per-persona cooldown of 5 days; chance-gated so personae feel recurring, not spammy (code: castShowSponsor, COOLDOWN_DAYS).
+- This module never advances stages 3-4 from show/contest paths; those belong to encounter/table systems (code: castShowSponsor, castProducerDemand cap at stage 2).
+
+**Consumes:** —
+
 ### game-core (`game.js`)
 Central game controller. Owns state, map, day loop, actions, encounters, combat, village simulation. UI renders from it.
 
