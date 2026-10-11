@@ -504,7 +504,11 @@
       // merged 2-stack donated whole used to come back as one (the other
       // unit silently destroyed). The entry keeps its count now.
       st.tools.push({ itemId: id, name: item.name || def.name, units: item.units || 1 });
-      this.stashLog('give', item.name || def.name, 1);
+      // LEDGER HONESTY (miser break-it 2026-10-11): the stash keeps the
+      // entry's real unit count — the ledger used to record every tool
+      // give as 1×, so a donated 3-stack read "left 1×". The ledger is the
+      // village's social memory; it counts what moved.
+      this.stashLog('give', item.name || def.name, item.units || 1);
       const vid = this.state.scholar.villagerId;
       // ASH GEAR HONORED (Steve 2026-10-09): bringing a phoenix victim's
       // belongings home replaces the ordinary deposit grant. The say line
@@ -551,7 +555,9 @@
       if (carry + (def.kg || 0.8) * takeUnits > max) { this.say(`Too heavy for the ${st.tools[i].name}. Lighten your pack first.`); return null; }
       const [tool] = st.tools.splice(i, 1);
       inv.push({ itemId, name: tool.name, units: takeUnits, kcalEach: 0, kg: def.kg || 0.8 });
-      this.stashLog('take', tool.name, 1);
+      // LEDGER HONESTY (miser break-it 2026-10-11): log the whole entry's
+      // units, not 1 — the take returns every unit the entry held.
+      this.stashLog('take', tool.name, takeUnits);
       // TAKE-BACK (miser break-it 2026-10-08): only when you take a tool YOU
       // left and haven't re-taken. Borrowing a DIFFERENT tool is normal
       // communal use — the old flat net accused you falsely ("You took back
@@ -648,7 +654,9 @@
         kg: item.kg != null ? item.kg : (def.kg || 0.3), units: item.units || 1 };
       if (section === 'medicine') { entry.medType = item.medType; entry.doses = item.doses; }
       st[section].push(entry);
-      this.stashLog('give', item.name || def.name || id, 1);
+      // LEDGER HONESTY (miser break-it 2026-10-11): see donateTool — the
+      // ledger records the entry's real unit count, not 1×.
+      this.stashLog('give', item.name || def.name || id, item.units || 1);
       const vid = this.state.scholar.villagerId;
       const il = this._stashItemLedgers(vid, section === 'weapons' ? 'Weapon' : 'Medicine');
       // ASH GEAR HONORED (Steve 2026-10-09): bringing a phoenix victim's
@@ -694,7 +702,9 @@
       const back = { itemId, name: entry.name, units: takeUnits, kcalEach: 0, kg: def.kg || entry.kg || 0.5 };
       if (entry.medType) { back.medType = entry.medType; back.doses = entry.doses; }
       inv.push(back);
-      this.stashLog('take', entry.name, 1);
+      // LEDGER HONESTY (miser break-it 2026-10-11): log the whole entry's
+      // units, not 1 — same rule as takeTool.
+      this.stashLog('take', entry.name, takeUnits);
       // TAKE-BACK (miser break-it 2026-10-09): mirrors the tool rule —
       // re-taking your own un-returned deposit is noticed, -5. Taking
       // someone else's gift is normal communal use. Kills the

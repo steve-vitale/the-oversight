@@ -71,8 +71,10 @@ writes the location to `state.codex.places` ("Buried 4× Branch — at the creek
 bend, day 3") and announces the Journal note. `digUpCache(id)` returns it
 (weight-checked).
 
-Buried ≠ safe: ~6%/day discovery by others while NPCs are about. A robbed
-cache greets you with disturbed earth and an empty hole.
+Buried ≠ safe: ~0.8%/day discovery near Haven, falling with distance to
+~0.05%/day in the far wild — one roll per cache per day (dailyCacheCheck,
+theft risk = `cacheTheftChance(dist)`). A robbed cache greets you with
+disturbed earth and an empty hole.
 
 ## Files
 
@@ -94,6 +96,7 @@ cache greets you with disturbed earth and an empty hole.
   softlock attempt — held).
 - `scripts/test-miser-section-chronic-20261010.js` — 12 adversarial checks
 - `scripts/test-miser-cache-honesty-20261011.js` — 24 adversarial checks (bury/partial-take/dig unit + kcal conservation, heavy-cache dig refusal + portion-draw escape hatch, all-rot dig, clearBrush tool ladder honesty incl. the dead fell-branch fix, mixed-rot single announcement).
+- `scripts/test-miser-pantry-cap-20261011.js` — 19 adversarial checks (donateToPantry cap gate holds at/over cap incl. the merge case, donation-with-room regression, buried cache survives save/load with contents retrievable, stash ledger records real multi-unit give/take counts instead of 1×).
   (section chronic net-taker hole: 24 section takes of others' deposits were
   trust-free and invisible to _stashTotalNet; takeTool/_takeStashedItem now
   apply the -20 chronic block like takeMaterial; material control; donate-all
