@@ -170,27 +170,40 @@ function crisisCount(name) {
   }
 
   // ============ C6. arc gate integration ============
-  console.log('\n-- C6. crisis unblocks the Arc 3 gate --');
+  // ARC III CRUCIBLE (pacing build 2026-10-10): the gate is TWO distinct
+  // crises now (was crises>=1 — first-grave fired in ~every run by day 13
+  // and read as attrition, not bonding). The test fires two.
+  console.log('\n-- C6. crises unblock the Arc 3 gate --');
   {
     freshGame();
-    // force the other Arc 3 gates open, leave only the crisis gate
+    // force the other Arc 3 gates open, leave only the crisis gate.
+    // ARC II HONESTY (pacing build 2026-10-10): breadth must be EARNED — 6+
+    // new things since landing. Set baseBreadth with a first checkArc BEFORE
+    // teaching the 12 plants, or deedDone never fires.
     Game.state.systemArrived = true;
     const s = Game.state.scholar;
     s.day = 30;
-    // breadth: identify 12 plants directly through the codex
-    const ids = Game.data.plants.slice(0, 12).map(p => p.id);
+    s.integration = 50; // stage 2
+    Game.checkArc(); // stamps baseBreadth at the starting endowment
+    const before = Object.keys(Game.state.codex.plants || {}).length;
+    const ids = Game.data.plants.slice(0, 24).map(p => p.id).filter(pid => !(Game.state.codex.plants || {})[pid]).slice(0, 12);
     for (const pid of ids) Game.state.codex.plants[pid] = { level: 1, identifiedDay: 1 };
-    // stage: push integration to 2
-    s.integration = 50;
-    const crisesBefore = Object.keys((Game.progState().crises || {})).length;
     Game.checkArc();
     const arcBefore = Game.progState().arc;
-    // now fire a crisis and re-check
+    // fire the first crisis: still gated (one crisis is attrition, not a crucible)
     const nid = npcId();
     Game.registerDeath({ kind: 'person', villagerId: nid, name: 'Gate Test', cause: 'test' });
     Game.checkArc();
+    const arcMid = Game.progState().arc;
+    // fire a second, distinct crisis: the gate opens
+    Game.state.village.pantry = [];
+    for (let d = 0; d < 12 && !(Game.progState().crises || {})['hunger-winter']; d++) Game.villageEats();
+    Game.checkArc();
     const arcAfter = Game.progState().arc;
-    ok('crisis was the missing gate', arcBefore < 3 && arcAfter >= 3, `arc ${arcBefore} -> ${arcAfter} (crises before: ${crisesBefore})`);
+    const crisesBefore = 0;
+    ok('setup reached arc 2', arcBefore === 2, `arc=${arcBefore} (plants ${before} -> ${Object.keys(Game.state.codex.plants).length})`);
+    ok('one crisis is not enough', arcMid < 3, `arc ${arcBefore} -> ${arcMid} after 1 crisis`);
+    ok('two crises open the gate', arcBefore < 3 && arcAfter >= 3, `arc ${arcBefore} -> ${arcAfter} (crises before: ${crisesBefore})`);
   }
 
   console.log(`\n${pass} passed, ${fail} failed`);

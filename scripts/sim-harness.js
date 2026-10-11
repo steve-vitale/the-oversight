@@ -213,6 +213,12 @@ async function runDays(Game, policy, opts) {
   if (policy.setup) { try { await policy.setup(Game, ctx); } catch (e) { ctx.notes.push('setup: ' + e.message); } }
 
   let day;
+  // TIME-FREEZE WATCHDOG (crisis leg 2026-10-11): a fight that neither side
+  // can advance freezes the day clock (tickAction no-ops mid-fight) — probed
+  // 160 loop-days stuck on day 22 with fight=true. Mirrors winrate-iter4's
+  // proven guard: 8 loop-days with no day advance + an unresolved fight ->
+  // the player is routed (flee), the honest in-fiction resolution.
+  let lastSday = null, frozenIters = 0;
   // SIM-OPT: silence the [SLEEP] diagnostics during the day loop only.
   await quietLog(async () => {
   for (day = 1; day <= days; day++) {
@@ -221,7 +227,16 @@ async function runDays(Game, policy, opts) {
       driveFights(Game, policy, ctx);
       driveContests(Game, policy, ctx);
       if (Game.over) break;
-      try { Game.tickAction(128); } catch (e) {}
+      // DAY LOOP (crisis leg 2026-10-11): villagerTurn-corrected — NEVER raw
+      // tickAction(128). doAction('wait') ticks to the part boundary AND runs
+      // villagerTurn (NPCs act as individuals); raw tickAction skipped the
+      // villager turn entirely (0 calls in 30 parts probed) and stalled the
+      // day clock (~0.1 day/loop-day under a real policy: sleep() then
+      // refused on the half-spent day). Pattern matches winrate-iter4's
+      // proven runOne: wait, then drive fights+contests again after.
+      try { Game.doAction('wait'); } catch (e) {}
+      driveFights(Game, policy, ctx);
+      driveContests(Game, policy, ctx);
       if (Game.over) break;
     }
     if (Game.over) break;
@@ -229,6 +244,15 @@ async function runDays(Game, policy, opts) {
     try { Game.sleep(); } catch (e) {}
     driveContests(Game, policy, ctx);
     if (Game.over) break;
+    try {
+      const sday = (Game.state.scholar || {}).day || 0;
+      if (lastSday !== null && sday === lastSday) {
+        if (++frozenIters >= 8 && Game.tbfight && !Game.tbfight.over) {
+          try { Game.tbEnd('routed'); ctx.timeFreezeCleared = (ctx.timeFreezeCleared || 0) + 1; } catch (e) {}
+          frozenIters = 0;
+        }
+      } else { frozenIters = 0; lastSday = sday; }
+    } catch (e) {}
     if (day % sampleEvery === 0) {
       samples.pop.push([day, pop()]);
       samples.pantry.push([day, Math.round(pantryKcal())]);

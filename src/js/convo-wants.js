@@ -240,6 +240,46 @@
         };
       },
     },
+    sick_help: {
+      // THE SICKNESS ASK (crisis leg 2026-10-11): the want system had favor
+      // needs for hunger, wounds, water, and work — but none for disease, so
+      // sick villagers never asked for help and never mentioned being sick
+      // in conversation at all (sense-tested). A villager with a mundane
+      // v.sick record now surfaces it as their want, with the favor
+      // machinery (ask -> commit -> tend/treat -> keep; or rot honestly).
+      // SYMPTOM-ONLY (docs/DISEASES.md): diseases never announce their
+      // names — the NPC describes what their body is doing. The true name
+      // comes only from diagnosis.
+      keepKind: 'heal', goal: 'heal', deadlineDays: 2,
+      build(vid, need, ctx) {
+        const hh = this.convoFavorHash(vid, ctx);
+        const sickName = need.sickName || 'sick';
+        const sym = sickName === 'gut rot' ? 'doubled up with gut cramps'
+          : sickName === 'wound fever' ? 'feverish, a cut gone hot and angry'
+          : 'achy and wrung out, barely keeping food down';
+        const openers = [`I'm sorry \u2014`, `Please \u2014`, `I hate to ask this, but`];
+        const states = [
+          `I'm ${sym}.`,
+          `whatever this is, it's getting worse \u2014 I'm ${sym}.`,
+          `I can't shake it. I'm ${sym}.`,
+        ];
+        const asks = [
+          `Will you help me?`,
+          `can you do anything?`,
+          `I need help. Please.`,
+        ];
+        const line = '"' + openers[hh % 3] + ' ' + states[(hh >>> 2) % 3] + ' ' + asks[(hh >>> 4) % 3] + '"';
+        const whyLine = `"Rest and clean water aren't cutting it. If this turns, I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. I need someone who knows what they're doing."`;
+        return {
+          task: `help ${ctx.name} with their sickness \u2014 they're ${sym}`,
+          short: 'the sickness they\'re fighting',
+          line, whyLine,
+          commitLine: `"Thank you. Whatever you can do \u2014 thank you."`,
+          goodbye: `"I'll be resting. Come find me."`,
+          stakes: `${ctx.name} is ${sym} and worsening \u2014 an untreated sickness can kill.`,
+        };
+      },
+    },
     forage_help: {
       keepKind: 'food', goal: 'feed', deadlineDays: 2,
       build(vid, need, ctx) {
@@ -770,6 +810,14 @@
         // Acute personal needs first — the body doesn't wait.
         if ((n.hunger || 0) > 70) need = { kind: 'food_share', urgency: 4, hunger: n.hunger };
         else if (health != null && health < 60) need = { kind: 'heal_help', urgency: 4, health };
+        // SICKNESS (crisis leg 2026-10-11): a sick villager's body is the
+        // emergency — the want system had no disease need, so the sick
+        // talked about anything BUT being sick (sense-tested: a gutrot
+        // sufferer opened with small talk and never mentioned it).
+        // Mundane v.sick records only — alien quirks are never cured by
+        // earthly help, so no promise the engine can't keep (canon:
+        // docs/DISEASES.md, two pools never mix).
+        else if ((((v.sick || {})[vid] || {}).daysLeft || 0) > 0) need = { kind: 'sick_help', urgency: 4, sickName: ((v.sick || {})[vid] || {}).name || 'sick' };
         else if ((n.energy || 0) < 30) need = { kind: 'watch_shift', urgency: 3, energy: n.energy };
         else if ((n.fear || 0) > 70) need = { kind: 'stay_close', urgency: 3, fear: n.fear };
       } catch (e) {}
@@ -915,6 +963,7 @@
         switch (favor.kind) {
           case 'food_share': return (this.npcNeeds(favor.vid).hunger || 0) > 50;
           case 'heal_help': return ((v.health || {})[favor.vid] || 100) < 80;
+          case 'sick_help': return ((((v.sick || {})[favor.vid] || {}).daysLeft || 0) > 0);
           case 'watch_shift': return (this.npcNeeds(favor.vid).energy || 100) < 50;
           case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
           case 'water_haul': return ((v.water || {}).clean || 0) < 15;

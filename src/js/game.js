@@ -10613,6 +10613,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 1);
         this.say(`You sit with ${first} \u2014 cool cloth, water when they wake. It's not medicine, but it's not nothing.`);
       }
+      // KEEP PATH (crisis leg 2026-10-11): tending is a real 32-tick act of
+      // care — it keeps 'heal' promises the way treatVillager does. Sitting
+      // with the sick is doing something, not saying something.
+      try { this.checkPromises('heal', vid); } catch (e) {}
       return null;
     },
 
@@ -11079,6 +11083,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`${abName} on ${first}: ${this.treatNoFlavor(abilityId, def)}`);
         }
       }
+      // KEEP PATH (crisis leg 2026-10-11): working on someone's sickness is
+      // the deed a heal promise points at — curing (or genuinely treating)
+      // keeps 'heal' promises, including the sick_help favor. Without this,
+      // a kept promise could only be closed by words (comfort), never by
+      // actual medicine.
+      try { this.checkPromises('heal', vid); } catch (e) {}
       this.gainAbilityXP(abilityId, 2);
       return null;
     },
