@@ -97,6 +97,9 @@
       },
       opener(vid) {
         // The opener NAMES the need — the want is visible from beat one.
+        // (dialog-ui-fix 2026-10-11, defect 8: vague openers that fizzle are
+        // gone. Every opener below names a concrete, answerable want — the
+        // player can engage, deflect, or commit to something real.)
         try {
           const n = Game.npcNeeds(vid);
           if (n.hunger > 70) return '"I hate to ask, but — do you have anything to eat? Anything at all?"';
@@ -104,20 +107,30 @@
           if (n.energy < 30) return '"I\'m running on empty. Could you take my watch for a bit?"';
         } catch (e) {}
         return Game.convoPickCycle(vid, 'want:favor:open', [
-          '"There\'s something I\'ve been meaning to ask you."',
-          '"Could you do something for me? It\'s not big. Probably."',
+          '"My snare line needs mending and my hands are shaking — could you help me re-tie them tomorrow?"',
+          '"I need someone to haul water with me at first light. Two buckets, twice the speed. Will you come?"',
+          '"Would you walk the treeline with me tonight? Just there and back — I don\'t like going alone anymore."',
+          '"I\'ve got a splinter deep in my thumb I can\'t get out. Could you take a look?"',
         ]);
       },
       engageBeat(vid) {
         // "How can I help?" -> the concrete ask. Never "Here's the thing —"
         // looping: the favor is stated once, plainly.
+        // (dialog-ui-fix 2026-10-11, defect 7: the old fixed string below was
+        // spoken VERBATIM by every NPC in the run. It's a pool now — village
+        // freshness keeps it from repeating across NPCs.)
         try {
           const n = Game.npcNeeds(vid);
           if (n.hunger > 70) return '"Food. Anything you can spare — I\'m running on empty."';
           if (n.fear > 70) return '"Just — stay close tonight? When it gets dark, I don\'t want to be alone."';
           if (n.energy < 30) return '"Could you take my watch for a bit? An hour. That\'s all I need."';
         } catch (e) {}
-        return '"I need an extra pair of hands tomorrow. Nothing dangerous — just an extra pair of hands. Can you help?"';
+        return Game.convoPickCycle(vid, 'want:favor:ask', [
+          '"I need an extra pair of hands tomorrow. Nothing dangerous — just help me mend the snare line. Can you?"',
+          '"Hauling water at first light — two of us, half the trips. Will you come with me?"',
+          '"Walk the treeline with me tonight? There and back. I just don\'t want to go alone."',
+          '"There\'s a splinter buried in my thumb I can\'t reach. Could you get it out for me?"',
+        ]) || '"I need an extra pair of hands tomorrow. Can you help?"';
       },
       deflectBeat(vid) {
         return '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
@@ -143,8 +156,19 @@
         ];
       },
       closeLine(vid, resolution) {
-        if (resolution === 'promised') return '"Thank you. Really — I won\'t forget this."';
-        if (resolution === 'deflected') return '"Forget I asked. I\'ll figure it out."';
+        // (dialog-ui-fix 2026-10-11, defect 7: the old fixed strings were
+        // spoken VERBATIM by every NPC. Pools now — village freshness keeps
+        // closings from repeating across NPCs in a run.)
+        if (resolution === 'promised') return Game.convoPickCycle(vid, 'want:favor:close:promised', [
+          '"Thank you. Really — I won\'t forget this."',
+          '"You have no idea what that means. Thank you."',
+          '"I owe you one. I mean that."',
+        ]) || '"Thank you. Really."';
+        if (resolution === 'deflected') return Game.convoPickCycle(vid, 'want:favor:close:deflected', [
+          '"Forget I asked. I\'ll figure it out."',
+          '"No — you\'re right, it\'s a lot. Forget it."',
+          '"Okay. I\'ll manage on my own."',
+        ]) || '"Forget I asked."';
         return null;
       },
       resolve(vid, resolution) {

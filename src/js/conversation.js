@@ -678,33 +678,111 @@
     // wrapping those produced `Name: "leans in. "Oh?""`. If the beat contains
     // a quoted segment anywhere, it keeps its own layer. (Socialite playtest
     // 2026-10-07; the cleanDialogue defense only covered edge doublings.)
+    // convoSplitBeats: pagination for the one-screen rule (dialog-ui-fix
+    // 2026-10-11, Steve 2026-10-05: moment-to-moment play never scrolls).
+    // A single NPC beat must fit the dialogue box without scrolling — so a
+    // long line is split HERE, at the emission choke point, into multiple
+    // transcript entries. Tap-advance (▼) walks them beat by beat; the
+    // render layer never needs a scrollbar. Splits land on sentence
+    // boundaries, never mid-word; a pathological single sentence falls back
+    // to word boundaries. Returns [line] when it already fits.
+    convoSplitBeats(text) {
+      const MAX = 260;
+      const t = String(text || '');
+      if (t.length <= MAX) return [t];
+      // Split into sentences on . ! ? ; — : followed by space, plus em-dashes.
+      const parts = t.split(/(?<=[.!?;:])\s+|(?<=\u2014)\s+/);
+      const chunks = [];
+      let cur = '';
+      const flush = () => { if (cur) { chunks.push(cur); cur = ''; } };
+      for (const s of parts) {
+        if (!s) continue;
+        if ((cur + (cur ? ' ' : '') + s).length <= MAX) {
+          cur = cur ? cur + ' ' + s : s;
+        } else {
+          flush();
+          if (s.length <= MAX) { cur = s; }
+          else {
+            // Single over-long sentence: split at word boundaries.
+            const words = s.split(/\s+/);
+            let wcur = '';
+            for (const w of words) {
+              if ((wcur + (wcur ? ' ' : '') + w).length <= MAX) {
+                wcur = wcur ? wcur + ' ' + w : w;
+              } else {
+                if (wcur) chunks.push(wcur);
+                // A single word longer than MAX: hard cut (never happens
+                // with real dialogue, but the box must not scroll).
+                while (w.length > MAX) { chunks.push(w.slice(0, MAX)); w = w.slice(MAX); }
+                wcur = w;
+              }
+            }
+            if (wcur) chunks.push(wcur);
+          }
+        }
+      }
+      flush();
+      return chunks.length ? chunks : [t];
+    },
+
     sayLine(vid, line, opts) {
       const c = this.convoGet(vid);
       const t = String(line == null ? '' : line);
       if (!t) return null;
+      // PAGINATION (dialog-ui-fix 2026-10-11): long lines become multiple
+      // transcript entries — one beat per tap, never a scroll box.
+      const chunks = this.convoSplitBeats(t);
       // NO-REPEAT INVARIANT: per-conversation ledger of emitted NPC lines.
       // Checked on the final rendered string — what the player sees is what
       // must not repeat. saidLines survives the transcript cap (old entries
-      // shift off the transcript but stay in the ledger).
-      const key = t.trim();
+      // shift off the transcript but stay in the ledger). The first chunk
+      // identifies the line: a repeat blocks the whole line.
+      const key = chunks[0].trim();
       c.saidLines = c.saidLines || [];
       if (c.saidLines.indexOf(key) !== -1) return null; // blocked: already said
+      // RUN-WIDE LEDGER (dialog-ui-fix 2026-10-11, defect 7): the no-repeat
+      // choke point spans NPCs within a run — Lena and David must not speak
+      // the same line verbatim. Per-conversation saidLines can't catch that.
+      const runLedger = this.convoRunLedger();
+      if (runLedger.indexOf(key) !== -1) return null; // blocked: another NPC said it
       c.saidLines.push(key);
-      const entry = { who: 'them', text: t };
-      if (opts && opts.foreign) entry.foreign = opts.foreign;
-      // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
-      // from c.lastBeat when present — same as before.)
-      c.transcript.push(entry);
-      while (c.transcript.length > 200) c.transcript.shift();
-      const ownQuotes = /^"/.test(t) || /"[^"]+"/.test(t);
-      this.say(`${this.displayName(vid)}: ${ownQuotes ? t : `"${t}"`}`);
+      runLedger.push(key);
+      if (runLedger.length > 400) runLedger.splice(0, runLedger.length - 400);
+      let first = null;
+      for (const chunk of chunks) {
+        const entry = { who: 'them', text: chunk };
+        if (opts && opts.foreign) entry.foreign = opts.foreign;
+        // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
+        // from c.lastBeat when present — same as before.)
+        c.transcript.push(entry);
+        while (c.transcript.length > 200) c.transcript.shift();
+        if (first === null) first = chunk;
+      }
+      // ONE TEXT STREAM (dialog-ui-fix 2026-10-11, Steve: "same text in two
+      // stacked panels"): NPC speech in a conversation lives ONLY in the
+      // dialogue transcript — never echoed to the narration feed. The old
+      // this.say() echo rendered every line twice (dialogue box + narration
+      // box, truncating differently). The transcript is the record; the
+      // narration surface is for narration, not dialogue.
       // TOPIC LEDGER (Steve 2026-10-07): every spoken NPC line is a beat on
       // the current thread. The dialogue layer (convo-dialogue.js) speaks
       // its beats through here, so this is the one hook that sees both the
       // base turns and the dlg: turns — the ledger stays complete even
       // though the dialogue layer intercepts dlg: choices before convoTurn.
-      try { this.convoNoteSpokenBeat(vid, t); } catch (e) {}
-      return t;
+      // Paginated chunks note each beat (the full line's beats, in order).
+      try { for (const chunk of chunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
+      return first;
+    },
+
+    // convoRunLedger: the run-wide spoken-line registry (dialog-ui-fix
+    // 2026-10-11, defect 7). Per-conversation saidLines can't stop two
+    // different NPCs from speaking the same line verbatim in one run — this
+    // can. Stored on the village (survives across conversations, resets with
+    // the run). Capped so it can't grow unbounded.
+    convoRunLedger() {
+      const v = this.state.village || {};
+      if (!v.convoRunLines) v.convoRunLines = [];
+      return v.convoRunLines;
     },
 
     convoGet(vid) {
@@ -1951,6 +2029,21 @@
         l = this.convoPick(vid, 'pastdeep', cg.pastFollow || []);
       } else if (t === 'plans') {
         l = this.convoPick(vid, 'plansdeep', cg.plansFollow || []);
+      }
+      // WANT THREAD (dialog-ui-fix 2026-10-11, defect 8): "tell me more" on a
+      // want-driven conversation must deliver the want's content — not fizzle
+      // to "that's all of it." The want def owns the concrete beat (the news,
+      // the favor, the warning); the thread draws from it. If the beat was
+      // already spoken, sayLine's ledger blocks the repeat and the caller
+      // falls through to the honest dry admission — which is correct, the
+      // content WAS delivered.
+      else if (t === 'want') {
+        try {
+          const w = c.want;
+          if (w && w.def && typeof w.def.engageBeat === 'function') {
+            l = w.def.engageBeat.call(this, vid);
+          }
+        } catch (e) { l = null; }
       }
       // TOPIC PACK (Steve 2026-10-06): generated topic beats.
       else if (this.topic2Has && this.topic2Has(t)) l = this.topic2Beat(vid);

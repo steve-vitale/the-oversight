@@ -315,8 +315,15 @@
 
     // Pick one label per reply id, rotating via convoPickCycle.
     // (seen already holds the want menu's ids — the pools dedupe against them.)
+    // NO-REPEAT OFFER (dialog-ui-fix 2026-10-11, defect 6): once the want is
+    // engaged (stage 2+), the favor is STATED — the beat pool must not offer
+    // "How can I help?" again. Re-asking re-states the same beat, sayLine's
+    // ledger blocks the repeat, and the player gets options with no NPC
+    // reply. The want menu (commit/cant) owns the engaged offer flow.
+    const wantEngaged = !!(c.want && (c.want.stage || 0) >= 2);
     for (const entry of topicPool) {
       if (seen.has(entry.id)) continue;
+      if (wantEngaged && entry.id === 'dlg:help') continue;
       // Skip "tell me more" if the thread is dry. Skip the bare react once
       // it has produced two dead "Anyway."s in a row — the loop winds down
       // instead of offering the same dead acknowledgment forever (rethink

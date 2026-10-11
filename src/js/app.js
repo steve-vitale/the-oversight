@@ -12168,8 +12168,13 @@
       const who = e.who === 'you' ? 'You' : titleName;
       const ftag = e.foreign
         ? ` <span class="flang">${esc(Game.langDef(e.foreign).icon)} ${esc(Game.langDef(e.foreign).name)}</span>` : '';
+      // SPEAKER LABEL (dialog-ui-fix 2026-10-11): one formatter, both render
+      // sites (current beat + history). The space after the colon lives
+      // INSIDE the label span — it's part of the label, not whitespace
+      // between elements, so no markup edit or minifier can silently drop it.
+      const whoLabel = `<span class="dlg-who">${esc(who)}: </span>`;
       body = isSpeech
-        ? `<div class="dlg-line"><span class="dlg-who">${esc(who)}:</span> <span class="sp">${esc(clean)}</span>${ftag}</div>`
+        ? `<div class="dlg-line">${whoLabel}<span class="sp">${esc(clean)}</span>${ftag}</div>`
         : `<div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div>`;
     }
     const more = !thinking && !atEnd;
@@ -12188,8 +12193,10 @@
         const who = e.who === 'you' ? 'You' : titleName;
         const ftag = e.foreign
           ? ` <span class="flang">${esc(Game.langDef(e.foreign).icon)} ${esc(Game.langDef(e.foreign).name)}</span>` : '';
+        // Same speaker-label formatter as the current beat (space inside the label span).
+        const whoLabel = `<span class="dlg-who">${esc(who)}: </span>`;
         return isSpeech
-          ? `<div class="dlg-line"><span class="dlg-who">${esc(who)}:</span> <span class="sp">${esc(clean)}</span>${ftag}</div>`
+          ? `<div class="dlg-line">${whoLabel}<span class="sp">${esc(clean)}</span>${ftag}</div>`
           : `<div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div>`;
       };
       histBody = `<div class="dlg-history">${transcript.map(renderEntry).join('')}</div>`;

@@ -176,7 +176,18 @@ h1.title { color: var(--acc); font-size: 28px; letter-spacing: 2px; margin: 24px
 .ord-narration .dialogue-box .dlg-choices,
 .ord-narration .dialogue-box .dlg-next,
 .ord-narration .dialogue-box .inline-btns { flex: 0 0 auto; }
-.ord-narration .dialogue-box .dlg-line,
+/* ONE-SCREEN RULE (dialog-ui-fix 2026-10-11, Steve 2026-10-05: moment-to-
+   moment play never scrolls): the current beat never scrolls — long NPC
+   lines are paginated into tap-advance beats at the emission choke point
+   (Game.convoSplitBeats), so the line always fits. The history panel stays
+   scrollable: it's an explicit user-opened transcript (Steve 2026-10-05),
+   not moment-to-moment play. */
+.ord-narration .dialogue-box .dlg-line {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+}
 .ord-narration .dialogue-box .dlg-history {
   flex: 1 1 auto;
   min-height: 0;
@@ -1016,7 +1027,10 @@ body.in-combat .ord-log { order: 5.3; }
    Tall enough to actually read — 45vh, not a peephole. */
 .dlg-history { max-height: 45vh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .dlg-history .dlg-line { min-height: 0; margin-bottom: 8px; }
-.dlg-line { min-height: 40px; max-height: 30vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+/* CURRENT BEAT (dialog-ui-fix 2026-10-11): never scrolls — long lines are
+   paginated at emission (Game.convoSplitBeats). min-height keeps the box
+   from collapsing on short beats. */
+.dlg-line { min-height: 40px; overflow: hidden; }
 .dlg-line.narr { opacity: .85; font-style: italic; }
 .dlg-who { font-weight: bold; }
 .dlg-choices { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

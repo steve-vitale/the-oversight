@@ -12,7 +12,7 @@
 //   - thread_dry_collapse: "tell me more" is offered only while the thread has beats — once dry, the option disappears and the menu winds down instead of looping the admission line (code: buildMenu + dlg:more/dlg:react, 2026-10-06)
 //   - substantive_light_set: bare acknowledgments (goon/leave/recap/dlg:react/dlg:more/agree/joke/silence/nv:nod/nv:smile/nv:pointself) never flip c.substantive — only real engagement earns endConvo's mood residue, talk-capped at 40 (code: convoTurn wrapper + convoMarkSubstantive, break-it 2026-10-09 r8)
 //   - want_arc_in_handlers: every dlg: handler advances the want via convoWantEngage (engage/deflect/commit) and speaks the want def's beats — the want is the spine, not a post-turn afterthought (code: dlg:help/dlg:commit/dlg:heed/dlg:stay/dlg:cant/dlg:comfort, rebuild 2026-10-11)
-//   - emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript, feed) (code: every handler, rebuild 2026-10-11)
+//   - emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript; ONE TEXT STREAM 2026-10-11: no narration-feed echo) (code: every handler, rebuild 2026-10-11)
 //   - soft_probe_mounts_evidence: "That doesn't add up" is a real verb, not flavor — it mounts 'prodded' evidence on the first open doubt and the NPC visibly rattles with repeated prods (code: dlg:doubt handler, Steve 2026-10-06)
 // consumes:
 //   - village.villagers
@@ -283,6 +283,20 @@
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'dlg:help' }); } catch (e) {}
+        // HONEST REPEAT (dialog-ui-fix 2026-10-11, defect 6): if the want is
+        // already engaged, the favor is STATED -- re-stating it would hit
+        // sayLine's no-repeat ledger and produce NO NPC reply (options
+        // refresh, silence). Say so honestly instead of re-emitting.
+        if (c.want && (c.want.stage || 0) >= 2) {
+          const restated = this.convoPickCycle(vid, 'dlg:help:restated', [
+            '"Like I said -- I could really use the help."',
+            '"I already told you -- just say the word."',
+            '"Still the same thing I asked. It hasn\'t changed."',
+          ]) || '"Like I said -- I could use the help."';
+          const composedR = this.convoComposeDlg(vid, restated, choiceId);
+          this.sayLine(vid, composedR);
+          return { line: composedR, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         let favorLine = null;
         try {
           const w = c.want;
@@ -292,9 +306,24 @@
             favorLine = w.def.engageBeat.call(this, vid);
           }
         } catch (e) { favorLine = null; }
-        if (!favorLine) favorLine = '"Really? ...Thank you. I\'ll let you know what I need."';
+        // NO HOLLOW FALLBACK (dialog-ui-fix 2026-10-11, defect 6): the old
+        // "I'll let you know what I need" promised a favor that never came.
+        // Without a want def, the honest answer is that nothing is needed.
+        if (!favorLine) favorLine = this.convoPickCycle(vid, 'dlg:help:nowant', [
+          '"Honestly? I\'m alright right now. Just good to talk."',
+          '"Nothing I can name. Company\'s enough."',
+        ]) || '"Honestly? I\'m alright right now."';
         const composed = this.convoComposeDlg(vid, favorLine, choiceId);
-        this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
+        const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
+        // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6): if sayLine's
+        // ledger blocked the line, do NOT return it as if spoken -- that
+        // desyncs the UI into "options refreshed, no reply." Name it honestly.
+        if (!said) {
+          const dup = '"I just said -- did you miss it?"';
+          this.sayLine(vid, dup);
+          this.convoWantEngage(vid, 'engage');
+          return { line: dup, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // NOTE (socialite r11 2026-10-10): this does NOT set c.offeredHelp.
         // That's the FORMAL vow's flag (offer_help -> promiseHelp, tracked,
         // can rot). A casual "how can I help" must not lock the formal

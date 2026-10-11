@@ -68,7 +68,9 @@ const has = (block, prop, valRe) => {
   ok('dialogue-box flex column', has(b, 'display', /^flex$/) && has(b, 'flex-direction', /^column$/));
   ok('dialogue-box clips internally', has(b, 'overflow', /^hidden$/));
   const line = rule('.ord-narration .dialogue-box .dlg-line');
-  ok('dlg-line flexes + scrolls internally', has(line, 'flex', /1/) && has(line, 'overflow-y', /^(auto|scroll)$/));
+  // (dialog-ui-fix 2026-10-11: the current beat NEVER scrolls — long lines
+  // paginate at emission into tap-advance beats. Updated from scrolls to hidden.)
+  ok('dlg-line flexes + never scrolls', has(line, 'flex', /1/) && has(line, 'overflow', /^hidden$/));
   const hist = rule('.ord-narration .dialogue-box .dlg-history');
   ok('dlg-history scrolls inside box', !!hist && /overflow-y\s*:\s*(auto|scroll)/.test(hist));
   const card = rule('.ord-narration .inlinecard');
