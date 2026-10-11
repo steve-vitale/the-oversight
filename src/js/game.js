@@ -16949,10 +16949,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // and the land healed 60 days for 30 elapsed: free food from distance. The
     // land is one map; it heals once per elapsed day no matter how many villages
     // catch up over the same days. _landRegrowDay counts healed day-indices.
+    // DRIFTER BREAK-IT 2026-10-11: regrowTiles() keyed its %2/%4 stock cadence
+    // and its `regDay <= day` detail-cell gate on scholar.day — the APPROACH
+    // day, not the day being healed. A 30-day catch-up on an even approach day
+    // healed ~30 stock per tile; on an odd day, ZERO; detail cells due at
+    // end-of-today restored during a catch-up over past days. The amount of
+    // healing must not depend on which day you happen to walk up. dayIdx is
+    // now threaded through: the cadence and the regDay gate use the day
+    // being healed. (endDay passes scholar.day — unchanged behavior there.)
     regrowLand(dayIdx) {
       const s = this.state || {};
       if ((s._landRegrowDay || 0) > dayIdx) return; // already healed for this day
-      this.regrowTiles();
+      this.regrowTiles(dayIdx);
       s._landRegrowDay = dayIdx + 1;
     },
     // regrowTiles: one day of the land healing. DEPLETION 2026-10-10: two
@@ -16964,8 +16972,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // but their stock restore respects the vigor cap and needs vigor > 0 —
     // dead ground stays dead until it rests.
     // Called by endDay() and by the distant-village catch-up sim per simulated day.
-    regrowTiles() {
-      const day = (this.state.scholar || {}).day || 0;
+    // dayIdx: the day being healed. When regrowLand heals a past day for a
+    // catch-up sim, the %2/%4 cadence and the detail-cell regDay gate must
+    // use THAT day, not today (drifter break-it 2026-10-11).
+    regrowTiles(dayIdx) {
+      const day = (dayIdx !== undefined && dayIdx !== null) ? dayIdx : (((this.state || {}).scholar || {}).day || 0);
       for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
         const t = this.map.tiles[y][x];
         if (t.maxStock > 0) {
