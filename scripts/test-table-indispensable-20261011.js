@@ -109,7 +109,7 @@ const T = () => Game.tableState();
   Game.tableScene();
   Game.chooseTableOption('path:indispensable');
   ok(T().branch === 'light', 'light branch');
-  ok(T().abils.indexOf('ledger-eye') >= 0 && T().abils.indexOf('anchor') >= 0, 'shared abilities granted');
+  ok(T().abils.indexOf('ledger-eye') >= 0 && T().abils.indexOf('anchor') >= 0, 'ledger-eye + light-branch anchor granted');
   ok(T().meters.leverage === 3, 'ledger-eye + openhand: leverage starts at 3', 'lev=' + T().meters.leverage);
   ok(tc().prompt.indexOf('36,000 kcal') >= 0, 'beat 0 names the REAL pantry number in the modal');
   Game.chooseTableOption('beat:real'); // lev+2=5
@@ -129,7 +129,7 @@ const T = () => Game.tableState();
   resetAll(); fullSeat(); lightLedger();
   Game.tableScene();
   Game.chooseTableOption('path:indispensable');
-  Game.chooseTableOption('beat:inflate'); // cage+2 -> halved to +1 by anchor
+  Game.chooseTableOption('beat:inflate'); // cage+3 -> halved to +1 by anchor (light branch)
   ok(T().meters.cage === 1, 'anchor: cage gain halved', 'cage=' + T().meters.cage);
 
   console.log('— dark run + cage-closed failure —');
@@ -137,13 +137,14 @@ const T = () => Game.tableState();
   Game.tableScene();
   Game.chooseTableOption('path:indispensable');
   ok(T().branch === 'dark', 'dark branch');
-  ok(T().meters.leverage === 5 && T().meters.cage === 2, 'chokepoint grant applied', JSON.stringify(T().meters));
-  Game.chooseTableOption('beat:inflate'); // lev 8, cage 3 (anchor halves)
-  Game.chooseTableOption('beat:price'); // lev 10, cage 4
+  ok(T().abils.indexOf('anchor') < 0, 'dark branch: no anchor — the cage closes faster', T().abils.join(','));
+  ok(T().meters.leverage === 4 && T().meters.cage === 3, 'chokepoint grant applied', JSON.stringify(T().meters));
+  // The honest cage-close (2026-10-11): three cage-tightening clauses and
+  // then claiming the cage as your own idea — no rigged meters needed.
+  Game.chooseTableOption('beat:inflate'); // lev 5, cage 6
+  Game.chooseTableOption('beat:price'); // lev 6, cage 9
   ok(tc().options.some(o => o.id === 'beat:own'), 'dark twist: own it offered');
-  // Rig the cage shut: cage > leverage+4 on next check.
-  T().meters.cage = 20; T().meters.leverage = 5;
-  Game.chooseTableOption('beat:own');
+  Game.chooseTableOption('beat:own'); // lev 8, cage 14 > 12 -> the cage closes
   ok(T().phase === 'downgrade', 'cage closed -> downgrade, never a wipe');
   ok(transcript.some(([k, t]) => t.indexOf('cage closed') >= 0), 'failure said aloud');
   Game.chooseTableOption('downgrade:testbeta');

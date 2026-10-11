@@ -17,6 +17,27 @@
     const m = T.meters || {};
     return `alien-terror ${m.terror | 0} · villager-horror ${m.horror | 0}`;
   }
+  // The tightrope, made real (2026-10-11): horror is ABSOLUTE — your own
+  // people have a finite tolerance. The old check (horror > terror+3 on one
+  // choice) was mathematically unreachable: terror gains always outran
+  // horror, so the curdle could never fire and the failure beat was dead
+  // text. Now every fear-pushing move risks the curdle at horror 5: push
+  // fear at your people beat after beat without ever spending it down and
+  // they flinch where trillions watch — the table stops fearing and starts
+  // pitying. The mercy/hold/spend/refuse valves reduce horror; oathbound
+  // (light) halves horror gains, so the pledged shield genuinely protects.
+  function curdleCheck(extra) {
+    return function (T) {
+      const m = T.meters || {};
+      let gain = ((extra && extra.horror) | 0);
+      const mult = (T.abilMods && T.abilMods.horrorMult) || 1;
+      if (gain > 0) gain = Math.max(0, Math.floor(gain * mult));
+      if (((m.horror | 0) + gain) >= 5) {
+        return Object.assign({}, extra, { fail: 'the demonstration curdled — your own people flinched, visibly, where trillions watched' });
+      }
+      return extra;
+    };
+  }
 
   const FEARED_DEF = {
     id: 'feared',
@@ -46,7 +67,7 @@
       ],
       dark: [
         { id: 'redharvest', name: 'Red Harvest', desc: 'Your kills feed the broadcast. Every three kills this run is +1 terror, here and now.', grant: function () { const L = (this.ledger && this.ledger()) || {}; return { terror: Math.min(4, ((L.killed | 0) / 3) | 0) }; } },
-        { id: 'exemplum', name: 'Exemplum', desc: 'Name another village as the example. Terror +3, horror +2. (Offered in the final beat.)' },
+        { id: 'exemplum', name: 'Exemplum', desc: 'Name another village as the example. Terror +3, horror +3. (Offered in the final beat.)' },
       ],
     },
     beats: [
@@ -54,17 +75,17 @@
         say: ['BEAT ONE — THE FOOTAGE. The table doesn\'t ask what you did. It shows it: the deer, the fire, the feast-burned blade, the ones who came for you and didn\'t come back. A delegate with too many angles covers its face. "Choose," the System says, "what leads."'],
         meterLine,
         choices: [
-          { id: 'kill', label: 'Lead with the kill.', effects: { terror: 2, horror: 1 }, say: ['The deer. The cleanest kill. The table goes very still. Behind you, your own people go still too — a different stillness.'] },
-          { id: 'mercy', label: 'Lead with the mercy you showed once.', effects: { terror: 1, horror: -1 }, say: ['The time you stayed your hand. The table doesn\'t know what to do with it — which is its own kind of fear. Your people breathe.'] },
-          { id: 'fire', label: 'Lead with the feast-fire.', effects: { terror: 1, horror: 0 }, say: ['The fire you ate from and fought from. "Look what eating built," you say, and the footage agrees with you.'] },
+          { id: 'kill', label: 'Lead with the kill.', effects: curdleCheck({ terror: 2, horror: 2 }), say: ['The deer. The cleanest kill. The table goes very still. Behind you, your own people go still too — a different stillness.'] },
+          { id: 'mercy', label: 'Lead with the mercy you showed once.', effects: { terror: 1, horror: -2 }, say: ['The time you stayed your hand. The table doesn\'t know what to do with it — which is its own kind of fear. Your people breathe.'] },
+          { id: 'fire', label: 'Lead with the feast-fire.', effects: curdleCheck({ terror: 1, horror: 1 }), say: ['The fire you ate from and fought from. "Look what eating built," you say, and the footage agrees with you.'] },
         ],
       },
       {
         say: ['BEAT TWO — CALIBRATION. A delegate leans too far over the light and flinches at its own reflection in your eyes. The System watches the flinch the way it watches ratings. "MORE?" it asks. "LESS?" Or — the oldest door — "PROVE IT?"'],
         meterLine,
         choices: [
-          { id: 'lean', label: 'Lean in.', effects: function (T) { const m = T.meters || {}; const t = (m.terror | 0) + 2, h = (m.horror | 0) + 1; if (h > t + 3) return { terror: 2, horror: 1, fail: 'the demonstration curdled — your own people fear you more than the table does' }; return { terror: 2, horror: 1 }; }, say: ['You let them see it. All of it. The table recalculates. The fire back home burns a little lower.'] },
-          { id: 'hold', label: 'Hold back.', effects: { terror: 1, horror: -1 }, say: ['Restraint, from you, is the most frightening thing in the room. Your people notice the restraint too.'] },
+          { id: 'lean', label: 'Lean in.', effects: curdleCheck({ terror: 2, horror: 2 }), say: ['You let them see it. All of it. The table recalculates. The fire back home burns a little lower.'] },
+          { id: 'hold', label: 'Hold back.', effects: { terror: 1, horror: -2 }, say: ['Restraint, from you, is the most frightening thing in the room. Your people notice the restraint too.'] },
           { id: 'trial', label: 'Demand the champion. (TRIAL BY COMBAT — real fight, real death)', effects: { trial: true }, say: ['"Send your champion." The table goes quiet in eleven dimensions.'] },
         ],
       },
@@ -76,12 +97,12 @@
         meterLine,
         choices: function (T) {
           if ((T.branch || 'light') === 'light') return [
-            { id: 'spend', label: 'Spend the terror shielding them.', effects: { terror: -1, horror: -2 }, say: ['You spend it — the shield, not the sword. The small envoy stares. Your people stand a little straighter. Protective terror: the table writes it down and doesn\'t understand it, which is the point.'] },
-            { id: 'keep', label: 'Keep it. They\'re not yours.', effects: { terror: 1, horror: 1 }, say: ['You keep it. The envoy\'s face does something you will remember. The table nods — it understands this, and that should worry you.'] },
+            { id: 'spend', label: 'Spend the terror shielding them.', effects: { terror: -1, horror: -3 }, say: ['You spend it — the shield, not the sword. The small envoy stares. Your people stand a little straighter. Protective terror: the table writes it down and doesn\'t understand it, which is the point.'] },
+            { id: 'keep', label: 'Keep it. They\'re not yours.', effects: curdleCheck({ terror: 1, horror: 2 }), say: ['You keep it. The envoy\'s face does something you will remember. The table nods — it understands this, and that should worry you.'] },
           ];
           return [
-            { id: 'name', label: 'Name the village. (Exemplum)', effects: { terror: 3, horror: 2 }, say: ['You name it. The table feeds. Somewhere, people who never met you will fear your name forever. That was the price. You paid it gladly, and that\'s the worst part.'] },
-            { id: 'refuse', label: 'Refuse the table\'s hunger.', effects: { terror: 1, horror: -1 }, say: ['"No." The table blinks — it has never been refused *this*. Your people exhale. Refusal, from the feared one, is its own terror.'] },
+            { id: 'name', label: 'Name the village. (Exemplum)', effects: curdleCheck({ terror: 3, horror: 3 }), say: ['You name it. The table feeds. Somewhere, people who never met you will fear your name forever. That was the price. You paid it gladly, and that\'s the worst part.'] },
+            { id: 'refuse', label: 'Refuse the table\'s hunger.', effects: { terror: 1, horror: -2 }, say: ['"No." The table blinks — it has never been refused *this*. Your people exhale. Refusal, from the feared one, is its own terror.'] },
           ];
         },
       },

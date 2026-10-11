@@ -120,7 +120,7 @@ const T = () => Game.tableState();
   ok(tc().options.some(o => o.id === 'beat:callback'), 'callback offered once');
   T().meters.audience = 1;
   Game.chooseTableOption('beat:funny'); // +1 -> 2 (act one)
-  Game.chooseTableOption('beat:risk'); // -2 -> floored at 0 by standing-o (act two)
+  Game.chooseTableOption('beat:risk'); // -4 -> -2, floored at 0 by standing-o (act two)
   ok(T().meters.audience === 0, 'standing-o: audience cannot crater below 0', 'aud=' + T().meters.audience);
 
   console.log('— dark run: audience turns —');
@@ -130,18 +130,12 @@ const T = () => Game.tableState();
   Game.chooseTableOption('path:beloved');
   ok(T().branch === 'dark', 'dark branch');
   ok(T().abils.indexOf('plant') >= 0, 'dark ability: plant', T().abils.join(','));
-  Game.chooseTableOption('beat:truth'); // dark: -1 -> 2+2(plant)+2(spotlight)=6? recompute below
-  Game.chooseTableOption('beat:risk'); // -2
-  T().meters.audience = -2; // rig the turn
-  Game.chooseTableOption('beat:cut'); // dark twist cut: +3 -> 1, no fail; rig again instead
-  // Force the turn properly:
-  resetAll(); lesserSeat(); darkLedger();
-  Game.state.village.viewership = 20;
-  Game.tableScene();
-  Game.chooseTableOption('path:beloved');
-  Game.chooseTableOption('beat:funny');
-  T().meters.audience = -2;
-  Game.chooseTableOption('beat:risk'); // -2 -> -4 <= -3 -> turn
+  ok(T().meters.audience === 4, 'spotlight + plant: audience starts at 4', 'aud=' + T().meters.audience);
+  // The honest turn (2026-10-11): manufactured sincerity (-3) followed by a
+  // dead improv (-4) turns the room at -3 — no rigged meters needed.
+  Game.chooseTableOption('beat:truth'); // dark: -3 -> 1, the room cools
+  ok(T().phase === 'challenge', 'truth alone does not turn the room');
+  Game.chooseTableOption('beat:risk'); // -4 -> -3 -> the audience turns
   ok(T().phase === 'downgrade', 'audience turned -> downgrade, never a wipe');
   ok(transcript.some(([k, t]) => t.indexOf('audience turned') >= 0), 'the turn said aloud');
   Game.chooseTableOption('downgrade:testbeta');

@@ -14,32 +14,87 @@
   // The defense's witnesses: two villagers who testify about YOUR
   // leadership — in their own words, through their own personality, honest
   // to the vector. You don't control what they say.
+  // Villager testimony (2026-10-11): the old version had 3 fixed templates and
+  // the common case gave BOTH witnesses the identical line ("They kept us fed.
+  // That's the whole testimony." x2) — robotic, and it violated the path's own
+  // promise ("in their own words", "sampled by personality"). Now each witness
+  // testifies from their occupation, temperament, trust, and the dead they
+  // carry; the two witnesses never repeat each other.
   function witnesses() {
     try {
       const L = (typeof Game.ledger === 'function') ? Game.ledger() : {};
+      const trust = (((Game.state || {}).village || {}).trust) || {};
+      const dead = (((Game.state || {}).village || {}).dead) || {};
+      const deadNames = Object.keys(dead).map(id => {
+        const dv = (Game.data.villagers || []).find(x => x.id === id) || {};
+        return (dv.name || '').split(' ')[0];
+      }).filter(n => n);
+      const deadName = deadNames.length ? deadNames[(Math.random() * deadNames.length) | 0] : null;
       const ids = ((Game.data.villagers || []).map(v => v.id) || []).filter(id => id && id !== Game.villagerId).slice(0, 2);
-      return ids.map(id => {
+      const used = {};
+      return ids.map((id, wi) => {
         const v = (Game.data.villagers || []).find(x => x.id === id) || {};
         const name = (v.name || 'someone').split(' ')[0];
-        const traits = JSON.stringify(v.traits || v.personality || {});
-        const blunt = /blunt|bold|brash/i.test(traits);
+        const occ = (v.formerOccupation || v.occupation || 'villager').toLowerCase();
+        const p = v.personality || {};
+        const temp = String(p.temperament || '');
+        const blunt = /blunt|bold|brash/i.test(temp + ' ' + JSON.stringify(v.traits || {}));
+        const warm = /warm|kind|gentle|earnest/i.test(temp);
+        const t = trust[id] | 0;
+        // Pick a template this witness hasn't used and the other didn't.
+        const pick = (pool) => {
+          const h = temp.split('').reduce((a, c) => a + c.charCodeAt(0), 0) + wi * 7;
+          for (let k = 0; k < pool.length; k++) {
+            const idx = (h + k) % pool.length;
+            if (!used[idx + ':' + pool._case]) { used[idx + ':' + pool._case] = true; return pool[idx]; }
+          }
+          return pool[0];
+        };
         let line;
         if ((L.protected | 0) >= (L.killed | 0) && (L.protected | 0) > 0) {
-          line = blunt ? `"${name} kept us fed. I don't like them. I'd follow them anywhere."` : `"They kept us fed. That's the whole testimony."`;
+          const pool = [];
+          pool._case = 'aided';
+          if (blunt) pool.push(`"${name} kept us fed. I don't like them. I'd follow them anywhere."`);
+          pool.push(`"They carried me out of the treeline when I couldn't walk. That's the whole testimony — the rest is paperwork."`);
+          pool.push(`"I'm a ${occ}. I know work when I see it. They worked — every day, the same care."`);
+          if (t >= 50) pool.push(`"I'd trust them with my kids' dinner. I HAVE trusted them with my kids' dinner."`);
+          else if (t < 30) pool.push(`"I don't love them. But the pantry was full when it mattered. That's on the record."`);
+          else pool.push(`"They kept us fed. That's the whole testimony."`);
+          if (deadName) pool.push(`"${deadName} would've had good words about them. They're not here, so I'll say them instead."`);
+          if (warm) pool.push(`"They sat with me the night after. Didn't say much. Didn't need to."`);
+          line = pick(pool);
         } else if ((L.killed | 0) > (L.protected | 0)) {
-          line = blunt ? `"${name} spent us like firewood. Ask the graves."` : `"People died. I... people died following them."`;
+          const pool = [];
+          pool._case = 'bloody';
+          if (blunt) pool.push(`"${name} spent us like firewood. Ask the graves."`);
+          pool.push(`"People died. I... people died following them."`);
+          if (deadName) pool.push(`"${deadName} isn't here to testify. I am. They followed the Bearer and they didn't come back."`);
+          if (t < 30) pool.push(`"I said at the fire it was too much, too fast. Nobody listened. The graves listened."`);
+          else pool.push(`"I wanted to believe. The graves are full of people who wanted to believe."`);
+          line = pick(pool);
         } else {
-          line = `"I don't know what they are. None of us do. That's the truth."`;
+          const pool = [`"I don't know what they are. None of us do. That's the truth."`];
+          pool._case = 'unsure';
+          pool.push(`"They try. I don't know if trying counts in this court."`);
+          if (warm) pool.push(`"They're... they mean it. Whatever 'it' is this week."`);
+          line = pick(pool);
         }
         return { name, line };
       });
     } catch (e) { return []; }
   }
+  // The record convicts you (2026-10-11): the old bar (swing <= -3) was
+  // mathematically unreachable — the worst honest line bottomed out at 0 —
+  // so the failure beat was dead text. Now the tripwire is legible: trying
+  // to SILENCE your own witnesses (-3) when the ledger is dirty convicts
+  // you mid-trial at -1. A clean record (light) can never trip it; a dirty
+  // one played straight (cold/read, let them speak, take the verdict)
+  // stays safe. The defense is good, and the ledger is honest.
   function swingCheck(extra) {
     return function (T) {
       const m = T.meters || {};
       const sw = (m.swing | 0) + ((extra && extra.swing) | 0);
-      if (sw <= -3) return Object.assign({}, extra, { fail: 'your own record convicted you mid-trial — the defense was good, and the ledger was honest' });
+      if (sw <= -1) return Object.assign({}, extra, { fail: 'your own record convicted you mid-trial — the defense was good, and the ledger was honest' });
       return extra;
     };
   }
@@ -95,7 +150,7 @@
         meterLine,
         choices: function (T) {
           const L = (typeof Game.ledger === 'function') ? Game.ledger() : {};
-          const honest = ((L.protected | 0) >= (L.killed | 0)) ? 1 : -1;
+          const honest = ((L.protected | 0) >= (L.killed | 0)) ? 1 : -2;
           const list = [
             { id: 'let', label: 'Let them speak.', effects: swingCheck({ swing: honest }), say: ['You let them speak. All of it. The courtroom respects nothing the way it respects a prosecutor who doesn\'t flinch at their own witnesses.'] },
             { id: 'cross', label: 'Cross-examine your own people.', effects: swingCheck({ swing: 1 }), say: ['You cross-examine your own villagers — gently, surgically. It works. It also costs something at the fire tonight; you can feel the price being written.'] },
@@ -106,7 +161,11 @@
               say: ['You call the one you chose — the one whose story helps. It helps. The defense objects; the objection is overruled; the whole galaxy watches you work the room you built.'],
             });
           }
-          list.push({ id: 'silence', label: 'Move to silence them.', effects: swingCheck({ swing: -2 }), say: ['You move to silence your own witnesses. The courtroom smells it instantly — fear, from the Witness. The swing slides. Some doors, once knocked on, stay knocked.'] });
+          // Silencing your own witnesses lands differently on a dirty record
+          // (2026-10-11): the same act that costs a clean trial -2 convicts
+          // a dirty one at -4. Precedent: the beloved's truth varies by
+          // branch the same way — the branch IS the ledger summary.
+          list.push({ id: 'silence', label: 'Move to silence them.', effects: function (Tx) { const dark = (Tx.branch === 'dark'); return swingCheck({ swing: dark ? -4 : -2 })(Tx); }, say: ['You move to silence your own witnesses. The courtroom smells it instantly — fear, from the Witness. The swing slides. Some doors, once knocked on, stay knocked.'] });
           return list;
         },
       },

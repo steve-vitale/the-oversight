@@ -252,17 +252,28 @@
         const sw = (typeof this.switchboard === 'function') ? this.switchboard() : null;
         const bond = (typeof this.sysBond === 'function') ? this.sysBond() : 0;
         const g = (typeof this.grounding === 'function') ? this.grounding() : 100;
+        // Branch honesty (2026-10-11): during an active relay table challenge
+        // the unlocks respect the earned branch — a dark run's deepens must
+        // not teach Sanctuary/Advocate (light-unique), nor a light run's
+        // communes unlock Rewrite/Skim (dark-unique). Outside the table the
+        // office stays branch-agnostic: abilities open through acts.
+        let tBranch = null;
+        try {
+          const T = (typeof this.tableState === 'function') ? this.tableState() : null;
+          if (T && T.path === 'relay' && T.phase === 'challenge') tBranch = T.branch;
+        } catch (e) {}
+        const notDark = tBranch !== 'dark', notLight = tBranch !== 'light';
         if (rs.holderDays >= 3) this.relayGrant('deep-listen');
         if (sw && (sw.routed | 0) >= 10) this.relayGrant('faithful-carry');
         if (bond >= 2) this.relayGrant('relay-sight');
-        if (rs.communes >= 2) this.relayGrant('translate');
-        if (bond >= 3) { this.relayGrant('sanctuary'); this.relayGrant('advocate'); }
+        if (rs.communes >= 2 && notDark) this.relayGrant('translate');
+        if (bond >= 3 && notDark) { this.relayGrant('sanctuary'); this.relayGrant('advocate'); }
         // Dark opens through dark acts — or through already fraying.
-        if (sw && (sw.delayed | 0) >= 3) this.relayGrant('rewrite');
-        if (sw && (sw.routed | 0) >= 15) this.relayGrant('skim');
+        if (sw && (sw.delayed | 0) >= 3 && notLight) this.relayGrant('rewrite');
+        if (sw && (sw.routed | 0) >= 15 && notLight) this.relayGrant('skim');
         const darkUses = ((a.rewrite || {}).uses | 0) + ((a.skim || {}).uses | 0);
-        if (bond >= 4 && darkUses >= 2) this.relayGrant('omnipresence');
-        if (g < 50 && bond >= 2 && !this.relayHas('rewrite')) this.relayGrant('rewrite');
+        if (bond >= 4 && darkUses >= 2 && notLight) this.relayGrant('omnipresence');
+        if (g < 50 && bond >= 2 && !this.relayHas('rewrite') && notLight) this.relayGrant('rewrite');
       } catch (e) {}
     },
 

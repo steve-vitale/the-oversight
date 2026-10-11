@@ -127,9 +127,13 @@ const T = () => Game.tableState();
   // Long Road covers it once (shared ability).
   ok(T().phase === 'challenge' && T().longRoadUsed === true, 'long-road covers the unpayable price once');
   // Second unpayable price: the person, no cover left -> stall.
+  transcript.length = 0;
   Game.chooseTableOption('beat:name'); // no one to name
   ok(T().phase === 'downgrade', 'second unpayable price stalls the walk -> downgrade');
   ok(transcript.some(([k, t]) => t.indexOf('stalled at the door') >= 0), 'the stall said aloud');
+  ok(!transcript.some(([k, t]) => t.indexOf('You name someone') >= 0), 'failed choice narrates its failure, not its success (no "You name someone")');
+  const falter = transcript.find(([k, t]) => t.indexOf('THE TABLE FALTERS') >= 0);
+  ok(falter && (falter[1].match(/stalled at the door/g) || []).length === 1, 'stall frame said once, not duplicated', falter && falter[1].slice(0, 140));
   Game.chooseTableOption('downgrade:testbeta');
   Game.chooseTableOption('beat:ok');
   Game.chooseTableOption('final:z');

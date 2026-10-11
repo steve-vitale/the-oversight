@@ -110,9 +110,9 @@ Game.tableRegisterPath({
   ok(T().branch === 'light', 'light branch from behavior');
   ok(T().abils.indexOf('dreadfield') >= 0 && T().abils.indexOf('oathbound') >= 0, 'shared + light abilities granted', T().abils.join(','));
   ok(T().meters.terror === 2, 'dreadfield: terror starts at 2');
-  Game.chooseTableOption('beat:kill'); // terror+2, horror+1(halved by oathbound -> 0)
+  Game.chooseTableOption('beat:kill'); // terror+2, horror+2 (halved by oathbound -> +1)
   ok(T().meters.terror === 4, 'terror builds', 'terror=' + T().meters.terror);
-  ok(T().meters.horror === 0, 'oathbound halves horror gains', 'horror=' + T().meters.horror);
+  ok(T().meters.horror === 1, 'oathbound halves horror gains', 'horror=' + T().meters.horror);
   ok(transcript.some(([k, t]) => t.indexOf('Oathbound') >= 0), 'ability grant said aloud');
 
   console.log('— trial by combat: win —');
@@ -152,18 +152,11 @@ Game.tableRegisterPath({
   Game.chooseTableOption('path:feared');
   ok(T().branch === 'dark', 'dark branch from behavior');
   ok(T().abils.indexOf('redharvest') >= 0, 'dark ability granted', T().abils.join(','));
-  Game.chooseTableOption('beat:kill'); // terror 2+2+4(redharvest)=8, horror 1
-  Game.chooseTableOption('beat:lean'); // terror+2=10, horror+1=2 — not failing yet
-  // Force the curdle: horror must exceed terror+3.
-  T().meters.horror = 20;
-  Game.chooseTableOption('beat:refuse'); // dark twist refuse: terror+1, horror-1 -> 19 > 14? no fail here
-  // Drive it via another lean on a fresh run instead:
-  resetAll(); darkLedger();
-  Game.tableScene();
-  Game.chooseTableOption('path:feared');
-  Game.chooseTableOption('beat:fire'); // advance past beat 0
-  T().meters.terror = 0; T().meters.horror = 10; // rig the curdle
-  Game.chooseTableOption('beat:lean'); // horror 11 > terror 2+3 -> fail
+  Game.chooseTableOption('beat:kill'); // terror 2+2+4(redharvest)=8, horror 2
+  Game.chooseTableOption('beat:lean'); // terror+2=10, horror+2=4 — not failing yet (curdle at 5)
+  // The honest curdle (2026-10-11): push fear a third beat without spending
+  // it down and the demonstration curdles — no rigged meters needed.
+  Game.chooseTableOption('beat:name'); // exemplum: terror+3=13, horror+3=7 >= 5 -> curdle
   ok(T().phase === 'downgrade', 'curdled demonstration -> downgrade, never a wipe');
   ok(Game.over !== true, 'run survives the failed path');
   ok(transcript.some(([k, t]) => t.indexOf('curdled') >= 0), 'failure reason said aloud');

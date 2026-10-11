@@ -117,7 +117,7 @@ const T = () => Game.tableState();
   ok(T().branch === 'dark', 'dark branch');
   Game.chooseTableOption('beat:names');
   // Defense on a bloody ledger: honest testimony hurts.
-  Game.chooseTableOption('beat:let'); // killed>protected: -1
+  Game.chooseTableOption('beat:let'); // killed>protected: -2
   ok(T().meters.swing < 6, 'bloody ledger: your own witnesses hurt', 'swing=' + T().meters.swing);
   ok(tc().options.some(o => o.id === 'beat:blood'), 'dark twist: give them blood');
   Game.chooseTableOption('beat:blood');
@@ -128,9 +128,12 @@ const T = () => Game.tableState();
   resetAll(); lesserSeat(); darkLedger();
   Game.tableScene();
   Game.chooseTableOption('path:witness');
-  Game.chooseTableOption('beat:cold'); // advance past the opening
-  T().meters.swing = -2;
-  Game.chooseTableOption('beat:silence'); // -2 -> -4 <= -3 -> fail
+  ok(T().branch === 'dark', 'dark branch: dirty record', 'branch=' + T().branch);
+  ok(T().meters.swing === 3, 'docket + gavel: swing starts at 3', 'swing=' + T().meters.swing);
+  // The honest conviction (2026-10-11): hold a charge back, then try to
+  // silence your own witnesses on a dirty record — no rigged meters needed.
+  Game.chooseTableOption('beat:reserve'); // +0 -> 3
+  Game.chooseTableOption('beat:silence'); // dark: -4 -> -1 -> convicted mid-trial
   ok(T().phase === 'downgrade', 'convicted by your own record -> downgrade');
   ok(transcript.some(([k, t]) => t.indexOf('convicted you mid-trial') >= 0), 'failure said aloud');
   Game.chooseTableOption('downgrade:testbeta');

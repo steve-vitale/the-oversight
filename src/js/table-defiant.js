@@ -31,7 +31,9 @@
   }
   // payOrStall(cost, cantPay): the reverse auction's core. If you reach
   // for a price you can't pay, the walk stalls — unless Long Road covers
-  // it, once.
+  // it, once. The fail reason is the SPECIFIC why (2026-10-11); tableFail's
+  // beat already frames it ("the walk stalled at the door"), so the reason
+  // must not repeat the frame.
   function payOrStall(cost, cantPay, stallWhy) {
     return function (T) {
       if (cantPay()) {
@@ -39,7 +41,7 @@
           T.longRoadUsed = true; T.longRoadCovered = true;
           return Object.assign({}, cost);
         }
-        return { fail: 'the walk stalled at the door — ' + (stallWhy || 'you reached for a price you could not pay, and the table saw it') };
+        return { fail: stallWhy || 'you reached for a price you could not pay, and the table saw it' };
       }
       return cost;
     };

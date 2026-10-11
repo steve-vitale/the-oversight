@@ -35,7 +35,12 @@
       return Object.keys(fc).reduce((a, k) => a + (fc[k] | 0), 0);
     } catch (e) { return 0; }
   }
-  // Audience turn check: at -3 or below the room turns.
+  // Audience turn check: at -3 or below the room turns. Reachable (2026-10-11):
+  // the old numbers (truth-dark -1, risk -2) bottomed out at -1, so the turn
+  // could never fire and the failure beat was dead text. Now a manufactured
+  // sincerity (-2) followed by a dead improv (-3) turns the room at -3 —
+  // unless the Callback (+1) redid the weak moment first. Genuine (light)
+  // love never turns: its floor is the honest floor.
   function turnCheck(extra) {
     return function (T) {
       const m = T.meters || {};
@@ -90,7 +95,7 @@
           const list = [
             { id: 'hunter', label: `${c[0]}'s story: the hunt.`, effects: turnCheck({ audience: 2 }), say: [`${c[0]} tells the hunt — the real one, with the fear left in. The audience goes silent in the good way. Silence, at this scale, is deafening.`] },
             { id: 'funny', label: `${c[1]} does the funny one.`, effects: turnCheck({ audience: 1 }), say: [`${c[1]} does the bit about the System's tutorial. It kills. Somewhere, the System laughs too — you can hear it in the overlay's weather.`] },
-            { id: 'truth', label: `${c[2]} tells the truth.`, effects: function (Tx) { const dark = (Tx.branch === 'dark'); return turnCheck({ audience: dark ? -1 : 2 })(Tx); }, say: function (Tx) { return (Tx.branch === 'dark') ? [`${c[2]} tells the truth — and the audience smells the production around it. Manufactured sincerity is the one thing trillions of eyes always catch.`] : [`${c[2]} tells the truth — the unproduced kind. The audience weeps in eleven dimensions. You can't fake this. You didn't.`]; } },
+            { id: 'truth', label: `${c[2]} tells the truth.`, effects: function (Tx) { const dark = (Tx.branch === 'dark'); return turnCheck({ audience: dark ? -3 : 2 })(Tx); }, say: function (Tx) { return (Tx.branch === 'dark') ? [`${c[2]} tells the truth — and the audience smells the production around it. Manufactured sincerity is the one thing trillions of eyes always catch.`] : [`${c[2]} tells the truth — the unproduced kind. The audience weeps in eleven dimensions. You can't fake this. You didn't.`]; } },
           ];
           // Callback: one redo, once per finale.
           if ((T.abils || []).indexOf('callback') >= 0 && !T.callbackUsed) {
@@ -108,7 +113,7 @@
         choices: [
           { id: 'song', label: 'The feast song.', effects: turnCheck({ audience: 2 }), say: ['The feast song — the one about eating like it matters, because it does. Trillions of beings who never ate anything hear it and feel hungry for the first time. The ratings spike is audible.'] },
           { id: 'game', label: 'The children\'s game.', effects: turnCheck({ audience: 1 }), say: ['The children\'s game. It\'s chaotic and half the rules are made up mid-play. The audience adores it — chaos reads as honesty at scale.'] },
-          { id: 'risk', label: 'The risky improv.', effects: turnCheck({ audience: -2 }), say: ['The improv dies. It just dies — wrong crowd, wrong night, wrong everything. You can hear the silence change its mind about you. The show must go on. It goes on without you, for a minute.'] },
+          { id: 'risk', label: 'The risky improv.', effects: turnCheck({ audience: -4 }), say: ['The improv dies. It just dies — wrong crowd, wrong night, wrong everything. You can hear the silence change its mind about you. The show must go on. It goes on without you, for a minute.'] },
         ],
       },
       {

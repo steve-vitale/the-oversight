@@ -248,7 +248,7 @@
     },
 
     // ============ SYSBOND — the System relationship arc ============
-    // pg.sysBond 0-5: static, curious, listening, comprehending, champion.
+    // pg.sysBond 0-5: static, curious, listening, comprehending, champion, kin.
     // The System wants something: to understand caretaking (food, grief,
     // joy). Endings resolve, plant threads, or create obligations — some
     // the System owes YOU.
@@ -261,7 +261,11 @@
         const before = this.sysBond();
         pg.sysBond = Math.max(0, Math.min(5, before + (n | 0)));
         if (pg.sysBond !== before) {
-          const names = ['static', 'curious', 'listening', 'comprehending', 'champion'];
+          // Six levels, six names (2026-10-11): the old list had five, so the
+          // capped level 5 read "here" — flat after "champion". The arc ends
+          // where TABLE.md says it does: the machine recognizing humans as
+          // fellow strugglers — kin.
+          const names = ['static', 'curious', 'listening', 'comprehending', 'champion', 'kin'];
           this.say(`◈ THE SYSTEM — something shifts in the overlay's weather. It is ${names[pg.sysBond] || 'here'} now.${why ? ' ' + why : ''}`);
         }
         try { this.save(); } catch (e) {}
@@ -384,6 +388,12 @@
       const ab = def.abilities || {};
       const grantList = (list) => (list || []).forEach(a => {
         T.abils.push(a.id);
+        // Don't re-announce what the bearer's hands already hold (2026-10-11):
+        // a relay-path walker claimed the office to qualify, so the door
+        // grants echo. Check BEFORE granting (the grant itself sets unlocked).
+        // Still registered in T.abils — just said once.
+        let already = false;
+        try { already = !!(a.id && typeof this.relayHas === 'function' && this.relayHas(a.id)); } catch (e3) {}
         try {
           const e = (typeof a.grant === 'function') ? a.grant.call(this, T) : a.grant;
           for (const k of Object.keys(e || {})) {
@@ -391,7 +401,7 @@
             else if (k !== 'grounding' && k !== 'sysBond') T.meters[k] = (T.meters[k] | 0) + (e[k] | 0);
           }
         } catch (e2) {}
-        this.say(`◈ ABILITY — ${a.name}: ${a.desc}`);
+        this.say(already ? `◈ ABILITY — ${a.name}: already in your hands.` : `◈ ABILITY — ${a.name}: ${a.desc}`);
       });
       grantList(ab.shared); grantList(ab[T.branch] || ab.light);
       const seat = this.tableSeat();
@@ -433,9 +443,14 @@
       const choice = chList.find(c => c.id === beatId);
       if (!choice) return;
       // Apply meter/effect deltas. Ability mods (e.g. oathbound halves
-      // horror gains) apply to positive gains only.
+      // horror gains) apply to positive gains only. Copy first: choice
+      // effects may be the path def's SHARED objects (plain literals, or
+      // wrappers like curdleCheck/turnCheck that return their `extra`) —
+      // mutating them corrupts the def for every later walk in the session
+      // (2026-10-11: oathbound permanently rewrote kill's horror 2->1).
       T.meters = T.meters || {};
-      const eff = (typeof choice.effects === 'function' ? choice.effects.call(this, T) : choice.effects) || {};
+      let eff = (typeof choice.effects === 'function' ? choice.effects.call(this, T) : choice.effects) || {};
+      eff = Object.assign({}, eff);
       if (T.abilMods) {
         for (const k of Object.keys(eff)) {
           if (eff[k] > 0 && T.abilMods[k + 'Mult']) eff[k] = Math.max(0, Math.floor(eff[k] * T.abilMods[k + 'Mult']));
@@ -450,12 +465,14 @@
       if (T.meterFloors) for (const k of Object.keys(T.meterFloors)) {
         if ((T.meters[k] | 0) < T.meterFloors[k]) T.meters[k] = T.meterFloors[k];
       }
+      // A failed choice narrates its failure, not its success (2026-10-11):
+      // the fail check runs BEFORE the choice's say, so a stalled price
+      // never claims "you name someone" and then "there is no one to name".
+      if (eff.fail) { this.tableFail(eff.fail); return; }
       if (choice.say) {
         const ls = typeof choice.say === 'function' ? choice.say.call(this, T) : choice.say;
         (Array.isArray(ls) ? ls : [ls]).forEach(l => this.say(l));
       }
-      // Branch twist beats can divert here (path defs return {fail}).
-      if (eff.fail) { this.tableFail(eff.fail); return; }
       // Trial by combat (feared path): the challenge pauses — the fight is
       // real, on the grid, right now. tbEnd resumes the table.
       if (eff.trial && typeof this.tableTrialByCombat === 'function') { this.tableTrialByCombat(); return; }

@@ -56,14 +56,18 @@
     abilities: {
       shared: [
         { id: 'ledger-eye', name: 'Ledger-eye', desc: 'You see the mispricing before they finish the sentence. Leverage starts at 2.', grant: { leverage: 2 } },
-        { id: 'anchor', name: 'Anchor', desc: 'Your supply numbers are real — the cage tightens half as fast.', grant: { abilMods: { cageMult: 0.5 } } },
       ],
       light: [
+        // Anchor lives on the light branch (2026-10-11): it was shared, which
+        // made the cage fail unreachable on BOTH branches (cageMult 0.5
+        // halved every cage gain). The honest branch has real numbers; the
+        // gilded-cage branch inflates them — and the cage closes faster.
+        { id: 'anchor', name: 'Anchor', desc: 'Your supply numbers are real — the cage tightens half as fast.', grant: { abilMods: { cageMult: 0.5 } } },
         { id: 'openhand', name: 'Openhand', desc: 'Given freely, the teaching builds leverage no cage can hold. (+1 leverage now.)', grant: { leverage: 1 } },
         { id: 'exit-ramp', name: 'Exit-ramp', desc: 'One clause they cannot close. (Offered in the final beat.)' },
       ],
       dark: [
-        { id: 'chokepoint', name: 'Chokepoint', desc: 'You are the only supplier. They know it. You know they know it. (+3 leverage, +2 cage.)', grant: { leverage: 3, cage: 2 } },
+        { id: 'chokepoint', name: 'Chokepoint', desc: 'You are the only supplier. They know it. You know they know it. (+2 leverage, +3 cage.)', grant: { leverage: 2, cage: 3 } },
         { id: 'fineprint', name: 'Fineprint', desc: 'They never read clause three. (Offered in the final beat.)' },
       ],
     },
@@ -76,7 +80,7 @@
         meterLine,
         choices: [
           { id: 'real', label: 'Name the real number.', effects: cageCheck({ leverage: 2 }), say: ['You name it — the real number, pantry and all. The economists recalculate in public, which is the most embarrassing thing that can happen to an economist. Leverage: yours.'] },
-          { id: 'inflate', label: 'Inflate it. They won\'t check. (They will check.)', effects: cageCheck({ leverage: 3, cage: 2 }), say: ['You inflate it. They check — of course they check, they\'re economists. The correction costs you nothing and teaches them something: you negotiate like a predator. The cage tightens anyway. It always does.'] },
+          { id: 'inflate', label: 'Inflate it. They won\'t check. (They will check.)', effects: cageCheck({ leverage: 1, cage: 3 }), say: ['You inflate it. They check — of course they check, they\'re economists. The correction costs you leverage and teaches them nothing good: you negotiate like a predator, and predators get cages. The cage tightens. It always does.'] },
           { id: 'lowball', label: 'Lowball it. Stay free.', effects: cageCheck({ leverage: 1, cage: -1 }), say: ['You lowball. The table blinks — nobody lowballs *them*. The cage loosens a notch. Freedom has a price too, and you just paid it in leverage. Deliberate slack: the hardest move in the book.'] },
         ],
       },
@@ -85,7 +89,7 @@
         meterLine,
         choices: [
           { id: 'free', label: 'Teach freely.', effects: cageCheck({ leverage: 2, cage: -1 }), say: ['You teach freely — the whole trick, no meter running. The table wasn\'t ready for generosity as strategy. It doesn\'t compute, until it does. They need the teacher now, not the lesson. That\'s the part they missed.'] },
-          { id: 'price', label: 'Teach at a price.', effects: cageCheck({ leverage: 2, cage: 2 }), say: ['You name the price of the lesson. They pay it before you finish the sentence — which tells you everything about how badly they need it, and how tightly the cage just closed.'] },
+          { id: 'price', label: 'Teach at a price.', effects: cageCheck({ leverage: 1, cage: 3 }), say: ['You name the price of the lesson. They pay it before you finish the sentence — which tells you everything about how badly they need it, and how tightly the cage just closed around the teacher.'] },
           { id: 'refuse', label: 'Refuse. The trick stays ours.', effects: cageCheck({ leverage: -1, cage: -1 }), say: ['You refuse. The table goes cold — and then, slowly, respectful. A monopoly on the only thing that matters. The cage loosens; the leverage dips. They\'ll be back. They have to be.'] },
         ],
       },
@@ -101,8 +105,8 @@
             { id: 'trade', label: 'Trade the ramp for everything.', effects: cageCheck({ leverage: 3, cage: 3 }), say: ['You trade it — the ramp for the world. The signature is the loudest sound in galactic history. The cage is gilded, total, and *yours*. You got everything. Read that sentence again on the bad nights.'] },
           ];
           return [
-            { id: 'own', label: 'Own it. (Fineprint)', effects: cageCheck({ leverage: 3, cage: 3 }), say: ['You own it. "Yes. My idea. My margins." The table signs so fast it embarrasses everyone. The cage is perfect, and it\'s yours, and that\'s the most frightening sentence you\'ve ever thought.'] },
-            { id: 'deny', label: 'Deny it.', effects: cageCheck({ leverage: 1, cage: 2 }), say: ['You deny it. Nobody believes you — least of all the faces that watched you draft it. The clause stands anyway. Denial, at the table, is just another signature.'] },
+            { id: 'own', label: 'Own it. (Fineprint)', effects: cageCheck({ leverage: 2, cage: 5 }), say: ['You own it. "Yes. My idea. My margins." The table signs so fast it embarrasses everyone. The cage is perfect, and it\'s yours, and that\'s the most frightening sentence you\'ve ever thought.'] },
+            { id: 'deny', label: 'Deny it.', effects: cageCheck({ leverage: 1, cage: 1 }), say: ['You deny it. Nobody believes you — least of all the faces that watched you draft it. The clause stands anyway. Denial, at the table, is just another signature.'] },
           ];
         },
       },
