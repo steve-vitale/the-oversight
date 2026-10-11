@@ -2053,15 +2053,37 @@
         if (tile && tile.type === 'haven') return false; // not Haven. Never Haven.
         var bd = this.genDetail(this.map.px, this.map.py);
         var bpx = (s.mx == null ? 4 : s.mx), bpy = (s.my == null ? 4 : s.my);
-        var want = 3 + Math.floor(Math.random() * 3), scorched = 0, btries = 0;
+        var want = 3 + Math.floor(Math.random() * 3), scorched = 0, btries = 0, burnedPlayerFire = false;
         while (scorched < want && btries++ < 80) {
           var bx = Math.floor(Math.random() * 9), by = Math.floor(Math.random() * 9);
           if (bx === bpx && by === bpy) continue;
           var bc = bd[by] && bd[by][bx];
           if (!bc || bc === 'rubble' || bc === 'tent' || bc === 'wall' || bc === 'water' || bc === 'lodge') continue;
+          // BURN HONESTY (break-it camps 2026-10-11): a player fire caught in
+          // the burn dies WITH its cell. The old code rubbled the grid cell
+          // but left the tracked entry live — playerFireAt stayed true on
+          // rubble, so "Feed the fire" was offered on ash and fuel was spent
+          // into the void while hasCampfireNearby (grid-checked) said no
+          // fire. Purge the entry (same class as destroyCell's smashed-fire
+          // purge) and name the loss — no phantom fires, no split brain.
+          if (bc === 'fire') {
+            try {
+              var bffs = this.state.fires || [];
+              for (var bfi = bffs.length - 1; bfi >= 0; bfi--) {
+                var bff = bffs[bfi];
+                if (!bff.inside && bff.tx === this.map.px && bff.ty === this.map.py && bff.cx === bx && bff.cy === by) {
+                  bffs.splice(bfi, 1);
+                  burnedPlayerFire = true;
+                }
+              }
+            } catch (e0c) {}
+          }
           bd[by][bx] = 'rubble';
           s.burnedTiles[key].push({ mx: bx, my: by, day: day, by: pid });
           scorched++;
+        }
+        if (burnedPlayerFire) {
+          this.say('Your fire dies in the burn — the cell is rubble now, the flame gone with it.');
         }
         if (scorched < 3) return false; // couldn't scorch: no burn, no cooldown
       } catch (e) {}
