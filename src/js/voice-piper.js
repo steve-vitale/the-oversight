@@ -305,7 +305,7 @@
       if (Game.audio && Game.audio.isMuted && Game.audio.isMuted()) return 'muted';
       if (!Game._voiceUnlocked) return 'locked';
       if (opts && opts.foreign) return 'foreign-skip';
-      var person = (typeof Game.vpOf === 'function') ? Game.vpOf(vid) : {};
+      var person = (opts && opts.persona) || ((typeof Game.vpOf === 'function') ? Game.vpOf(vid) : {});
       var profile = voiceProfileFor(person);
       var pack = VOICE_PACKS[profile.packId];
       if (_cachedIds.indexOf(pack.voiceId) !== -1) {

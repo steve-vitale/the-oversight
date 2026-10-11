@@ -525,7 +525,7 @@
       } else if (p.introLines && p.introLines.length) {
         line = p.introLines[Math.floor(Math.random() * p.introLines.length)];
       }
-      if (line) this.say('🎭 ' + p.name + ': "' + line + '"');
+      if (line) { this.say('🎭 ' + p.name + ': "' + line + '"'); this.apSpeak(pid, line); }
       // Signature behavior note (knowledge-gated coaching)
       if (p.signature) this.say('(' + p.signature + ')');
       // Alien tech warning (knowledge-gated)
@@ -541,7 +541,9 @@
       if (!p || !p.taunts || !p.taunts.length) return;
       if (!this.apKnowsAlien(pid)) return;
       if (Math.random() < 0.35) {
-        this.say('🎭 ' + p.name + ': "' + p.taunts[Math.floor(Math.random() * p.taunts.length)] + '"');
+        var _tl = p.taunts[Math.floor(Math.random() * p.taunts.length)];
+        this.say('🎭 ' + p.name + ': "' + _tl + '"');
+        this.apSpeak(pid, _tl);
       }
     },
 
@@ -567,7 +569,54 @@
       if (Math.random() > chance) return false;
       var p = this.apPersona(pid);
       this.say('🎭 ' + p.name + ': "' + line + '"');
+      this.apSpeak(pid, line);
       return true;
+    },
+
+    // ============ PERSONA VOICES (Piper TTS, Steve 2026-10-11) ============
+    // Personas aren't villagers, so Game.vpOf can't resolve them. Each persona
+    // gets a fixed, characterful voice cast below — the same persona always
+    // sounds like themselves (voiceProfileFor hashes id+name deterministically).
+    // apSpeak routes a persona's SPOKEN line through the Piper hook; the text
+    // is always knowledge-gated by the caller, so this never voices a line the
+    // UI wouldn't show. Fire-and-forget: mute/toggle/unlock/foreign gates live
+    // inside Game.convoSpeakLine, not here.
+    apVoiceCast: {
+      'vex_marlowe':    { gender: 'f', age: 38, temperament: 'intense' },     // trophy hunter — performative, fast
+      'countess_sable': { gender: 'f', age: 54, temperament: 'stoic' },       // despair collector — deliberate, cold
+      'rax_dentist':    { gender: 'm', age: 58, temperament: 'intense' },     // pain researcher — older, menacing
+      'pip_quindle':    { gender: 'm', age: 24, temperament: 'mischievous' }, // extreme tourist — young, excitable
+      'sarge':          { gender: 'm', age: 61, temperament: 'stoic' },        // veteran — measured, gravelly
+      'dr_fenwick':     { gender: 'm', age: 47, temperament: 'precise' },     // xenobiologist — clinical, even
+      'wren':           { gender: 'f', age: 22, temperament: 'gentle' },      // student — young, earnest
+      'old_tam':        { gender: 'm', age: 71, temperament: 'withdrawn' },    // atoner — weary, slow
+    },
+
+    // Build a stable person-like record for a persona (for voiceProfileFor).
+    apVoiceRecord: function (pid) {
+      var p = this.apPersona(pid);
+      if (!p) return null;
+      var c = (this.apVoiceCast && this.apVoiceCast[pid]) || { gender: 'm', age: 35, temperament: 'steady' };
+      return {
+        id: 'ap:' + pid,
+        name: p.name,
+        gender: c.gender,
+        age: c.age,
+        personality: { temperament: c.temperament },
+      };
+    },
+
+    // Voice one spoken persona line. Returns the convoSpeakLine status
+    // (off | muted | locked | speaking-piper | speaking-fallback | ...),
+    // or 'no-hook' when the voice module isn't loaded (node tests, etc).
+    apSpeak: function (pid, text) {
+      try {
+        if (!text) return 'empty';
+        if (typeof Game.convoSpeakLine !== 'function') return 'no-hook';
+        var rec = this.apVoiceRecord(pid);
+        if (!rec) return 'no-persona';
+        return Game.convoSpeakLine('ap:' + pid, text, { persona: rec });
+      } catch (e) { return 'error'; }
     },
 
     // Situational commentary driver. Call with the fighter and what happened.
@@ -676,6 +725,7 @@
           };
           var el = enrageLines[pid] || "You've made me angry. That was expensive.";
           this.say('🎭 ' + p.name + ': "' + el + '"');
+          this.apSpeak(pid, el);
           this.say('(⚠ ' + p.name + ' is ENRAGED — hitting harder, fighting recklessly.)');
         } else if (stance === 'retreating') {
           var retreatLines = {
@@ -686,6 +736,7 @@
           };
           var rl = retreatLines[pid] || "I can't afford to die here. Falling back!";
           this.say('🎭 ' + p.name + ': "' + rl + '"');
+          this.apSpeak(pid, rl);
         } else if (stance === 'cautious' && prev === 'normal') {
           this.apSayCombat(pid, 'onLosing', 0.5);
         }
@@ -836,19 +887,37 @@
 
       if (hasVex && hasSable) {
         this.say('🎭 Vex Marlowe: "Sable. Darling. Try not to break this one before I get my shot."');
+        this.apSpeak('vex_marlowe', 'Sable. Darling. Try not to break this one before I get my shot.');
         this.say('🎭 Countess Sable: "Try not to bore it to death first, Vex. We all have our collections."');
+        this.apSpeak('countess_sable', 'Try not to bore it to death first, Vex. We all have our collections.');
       } else if (hasSarge) {
         this.say('🎭 Sarge: "Formation. No heroics. We do this clean."');
-        if (hasPip) this.say('🎭 Pip Quindle: "Ooh, formation! Like in the movies! Which one am I?"');
+        this.apSpeak('sarge', 'Formation. No heroics. We do this clean.');
+        if (hasPip) {
+          this.say('🎭 Pip Quindle: "Ooh, formation! Like in the movies! Which one am I?"');
+          this.apSpeak('pip_quindle', 'Ooh, formation! Like in the movies! Which one am I?');
+        }
       } else if (hasRax && hasFenwick) {
         this.say('🎭 Dr. Fenwick: "Fascinating — a multi-subject trial! Rax, you take pain responses, I\'ll take behavioral."');
+        this.apSpeak('dr_fenwick', "Fascinating — a multi-subject trial! Rax, you take pain responses, I'll take behavioral.");
         this.say('🎭 Rax "The Dentist": "Dibs on the screaming data."');
+        this.apSpeak('rax_dentist', 'Dibs on the screaming data.');
       } else if (hasPip) {
         this.say('🎭 Pip Quindle: "OH WOW, it\'s a TEAM UP! This is just like the season finale!"');
+        this.apSpeak('pip_quindle', "OH WOW, it's a TEAM UP! This is just like the season finale!");
       } else if (hasTam) {
         this.say('🎭 Old Tam: "...I didn\'t agree to this. But I\'m here. Let\'s get it over with."');
+        this.apSpeak('old_tam', "...I didn't agree to this. But I'm here. Let's get it over with.");
+      } else if (_allKnown) {
+        // Generic team-up, known speakers only: pre-reveal the strangers stay
+        // silent (a distinctive voice would identify them through the mask).
+        this.say('🎭 ' + names[0] + ': "Together, then. Don\'t get in my way."');
+        this.apSpeak(pids[0], "Together, then. Don't get in my way.");
+        this.say('🎭 ' + names[1] + ': "Wouldn\'t dream of it. Probably."');
+        this.apSpeak(pids[1], "Wouldn't dream of it. Probably.");
       } else {
-        // Generic team-up (also the pre-reveal fallback)
+        // PRE-REVEAL fallback: anonymous text only, intentionally unvoiced
+        // (a distinctive voice would identify the strangers through the mask).
         this.say('🎭 ' + names[0] + ': "Together, then. Don\'t get in my way."');
         this.say('🎭 ' + names[1] + ': "Wouldn\'t dream of it. Probably."');
       }
@@ -933,7 +1002,9 @@
         // spoken when the PERSONA wins; defeatLines when the persona loses.
         var lines = outcome === 'won' ? p.defeatLines : p.victoryLines;
         if (lines && lines.length && this.apKnowsAlien(pid)) {
-          this.say('🎭 ' + p.name + ': "' + lines[Math.floor(Math.random() * lines.length)] + '"');
+          var _ol = lines[Math.floor(Math.random() * lines.length)];
+          this.say('🎭 ' + p.name + ': "' + _ol + '"');
+          this.apSpeak(pid, _ol);
         }
       }
 
