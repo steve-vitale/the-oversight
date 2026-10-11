@@ -98,6 +98,7 @@
 //   - beat_audio: every contest beat fires a named audioEvent that resolves — new beats are composed, named dispatches over already-registered Game.audio synths, lazy-registered on first fire (Game.audio doesn't exist until app.js loads, after contests.js); phases declare beat:'name', _contestRenderPhase fires it (code: _cxBeat, _contestRenderPhase, Steve 2026-10-06); price/impress/exchange/auction beats now resolve (justiceVerdict+exileWalk, levelup+contestSpared, contestCall+rushHit, contestCall+horrorSting) — were silent no-ops (code: CX_BEAT_DEFS, Steve 2026-10-06); the 30 older contests now have per-phase composed beats contest<Id>Declare|Escalate|Climax|Resolve in CX_BEAT_DEFS, named by _cxB (Steve 2026-10-08); _contestEnd/_contestDie/_contestRefuse fire the Resolve beat (code: CX_BEAT_DEFS, _cxB, Steve 2026-10-08); the participate/refuse choice screen fires the small shared contestChoice beat (droneCorrect+lineCut), never a contest's Declare beat — firing Declare there double-stings on Participate and plays the bespoke sting on Refuse (code: contestInterruption choicePhase, Steve 2026-10-08)
 //   - no_intro_repeat: the choice-phase text must not re-say contest name+desc (contestInterruption says it two lines earlier); it says only "The System waits." (code: contestInterruption, Steve 2026-10-08)
 //   - countdown_announced: the warning names the grab ("at dawn, one more day"); the grab lands a dread beat first ("It is today") (code: fireContest, resolveContest, Steve 2026-10-08)
+//   - pilot_episode: the first contest of a run is the System's PILOT EPISODE — said out loud at the announcement (test broadcast, diegetic production jank: the name stumble, the still-warm arena, the new countdown); the grab-day beat calls it live; stakes and countdown dread untouched (code: fireContest, resolveContest, Steve 2026-10-05, docs/CONTESTS.md)
 //   - fear_honesty: high/extreme billing must mean it — phase damage x1.5 at the contestChoose choke point (stacks with hardened x1.25), said aloud once per contest; blood contests get 4x scheduling weight at wave 1 (~5% -> ~18%); the participate/refuse screen states the billing, the contest's real death count (state.contestDeathsById, ledgered in _contestDie/_cxKillContestant), and current health; show shame lands real rep damage (gossip moves REP only — skipTrust) while the galaxy still loves the trainwreck; high/extreme wins roll hotter prizes (+0.15/+0.3 chance, hardened stacks) — the risk side moved, so the reward side moves (code: contest-fear 2026-10-11)
 //   - gossip_aftermath: contest outcomes seed village gossip (contest_won/contest_survived/contest_died) via _cxGossip — news travels by mouth, distorted by retelling, not broadcast; villagers only (code: _cxGossip, _contestEnd, _contestDie, _contestResolveOthers, Steve 2026-10-08)
 //   - fan_favor_contests: televised wins move the fan club (+4 player, +2 villager); a player win can shake loose a fan care package (code: _contestEnd, Steve 2026-10-08)
@@ -126,6 +127,7 @@
 //   - scholar.day
 //   - state.showBudget
 //   - state.pendingContest
+//   - state.pilotAired
 //   - state.activeContest.participants/cheer/bet/comfort/others
 //   - state.contestsSeen
 //   - state.codex.contests
@@ -1761,6 +1763,19 @@
     if (!eligible.length) return;
     try { this.tele('contest_fired', { id: (contest && contest.id) || '?' }); } catch (e) {}
 
+    // PILOT EPISODE (Steve 2026-10-05, docs/CONTESTS.md): the first challenge
+    // of a run is the System's pilot episode — it says so OUT LOUD, and the
+    // jank is diegetic. Production stumbles only (the cold open, the name
+    // stumble, the still-warm arena, the new countdown) — never the stakes:
+    // death is on the table and the countdown dread below is untouched.
+    const isPilot = !this.state.pilotAired;
+    if (isPilot) {
+      this.state.pilotAired = true;
+      this.sysSay(`📺 Ahem. Testing. Testing. Is this thing on?`);
+      this.sysSay(`📺 PEOPLE OF HAVEN. What follows is our PILOT EPISODE — a test broadcast.`);
+      this.sysSay(`📺 Pardon the jank. The countdown is new, the arena is still warm from assembly, and we have never done this before. We are EXCITED.`);
+    }
+
     // MULTI-TAKE (Steve 2026-10-06): the contest's participant count is
     // real — the System takes that many people, not one. Four contestants
     // means four of yours, gone to the lights. More taken = more FEARED.
@@ -1815,6 +1830,13 @@
       this.sysSay(`📺 ⚠️ HARDENED VARIANT — you've seen this before. It's worse now.`);
     }
     this.sysSay(`📺 ${this._cxTakenLine(ids)} The village holds its breath.`);
+    // PILOT EPISODE (Steve 2026-10-05): the System stumbles over the names of
+    // its first-ever cast — real roster names via _cxNameList, never a fixed
+    // cast (the phantom-cast fix, journey-landing 2026-10-11).
+    if (isPilot) {
+      const firstCast = this._cxNameList(ids, true);
+      this.sysSay(`📺 Our first-ever contestants: ${firstCast}... ${firstCast}! Yes. We practiced the names.`);
+    }
     // COUNTDOWN DREAD (Steve 2026-10-08): the announcement never said WHEN
     // the grab happens — the countdown was invisible, so there was no dread.
     // One day. Named. The village holds its breath for a reason now.
@@ -1837,6 +1859,7 @@
       participants: ids,
       firesDay: (this.state.scholar.day || 1) + 1,
       variant: contest.variant || null,
+      pilot: isPilot,
     };
   };
 
@@ -2146,6 +2169,12 @@
     // today the cameras are already here. One beat of dread before the
     // interruption lands — the village has been holding its breath all day.
     this.sysSay(`📺 It is today. You dreamed about the cameras. Everyone did. The village is very quiet.`);
+    // PILOT EPISODE (Steve 2026-10-05): the grab-day beat calls the pilot
+    // live — the frame opened at the announcement closes here, then the
+    // contest itself plays straight. The dread line above is untouched.
+    if (pc.pilot) {
+      this.sysSay(`📺 The pilot is LIVE. Try to look like you've done this before.`);
+    }
     // INTERRUPTION (Steve 2026-10-05): the contest doesn't resolve via dice roll.
     // It INTERRUPTS. You go through the sequence. Participate or don't.
     // If you're not involved, you watch.
