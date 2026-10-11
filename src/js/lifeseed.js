@@ -501,6 +501,30 @@
       }
       return { errors: errors.slice(0, 40), total: errors.length, checked: n || 50 };
     },
+    // takenKinOf(vid): lifeseed kin whose fate mentions the Taking — the
+    // mourning hook for the stasis-kids content (2026-10-11, KIN canon:
+    // the Taking took half the adults at the Scattering, day zero, plus
+    // their children into stasis). Returns [{name, relation, fate}].
+    takenKinOf(vid) {
+      try {
+        const vp = this.vpOf ? this.vpOf(vid) : null;
+        const people = (vp && vp.lifeseed && vp.lifeseed.people) || [];
+        return people.filter(p => /tak(en|ing)|pod/i.test(p.fate || ''));
+      } catch (e) { return []; }
+    },
+    // villagersMourningTaken(): living roster villagers with taken kin.
+    // Used by the seek_taken want and the table reunion casting.
+    villagersMourningTaken() {
+      try {
+        const v = this.state.village || {};
+        return (v.roster || []).filter(id => {
+          if (!id || id === this.villagerId) return false;
+          const p = (typeof this.getPerson === 'function') ? this.getPerson(id) : null;
+          if (!p || p.dead) return false;
+          return this.takenKinOf(id).length > 0;
+        });
+      } catch (e) { return []; }
+    },
     // recordLifeseedEvent(vid, kind): the LIVED-EVENT writer. convoDrift reads
     // vp.lifeseed.lived to bend temperaments by what happened TO a villager —
     // but nothing ever wrote it (pacing audit 2026-10-09: the writer was dead,

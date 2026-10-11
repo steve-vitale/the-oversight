@@ -798,6 +798,72 @@
       },
       resolve(vid, resolution) { return null; },
     },
+    seek_taken: {
+      // THE TAKING WANT (2026-10-11, KIN canon): the NPC lost kin in the
+      // Taking -- half the adults at the Scattering, day zero, plus their
+      // children into stasis -- and wants something from the player: news,
+      // a promise to ask the System, a witness. Mourning, not melodrama.
+      // Only villagers with Taking-marked lifeseed kin can draw it, and
+      // never twice in three days.
+      pick(vid) {
+        try {
+          const day = (Game.state.scholar || {}).day || 0;
+          const c = this.convoGet(vid);
+          if ((c.takenWantDay || 0) >= day - 3) return 0;
+          if (!this.takenKinOf || !this.takenKinOf(vid).length) return 0;
+          return 2;
+        } catch (e) { return 0; }
+      },
+      opener(vid) {
+        try { this.convoGet(vid).takenWantDay = (Game.state.scholar || {}).day || 0; } catch (e) {}
+        const kin = (this.takenKinOf(vid) || [])[0] || {};
+        const first = (kin.name || 'them').split(' ')[0];
+        return Game.convoPickCycle(vid, 'want:taken:open', [
+          '"Have you heard anything? About the taken. The pods. Anything at all."',
+          `"You talk to it -- the System. Have you ever asked? About ${first}?"`,
+          '"I keep dreaming about rows of pods. Humming. Tell me I\'m not the only one."',
+        ]);
+      },
+      engageBeat(vid) {
+        const kin = (this.takenKinOf(vid) || [])[0] || {};
+        const first = (kin.name || 'they').split(' ')[0];
+        const rel = kin.relation || 'kin';
+        const fate = String(kin.fate || 'went up in the Taking');
+        const cap = fate.charAt(0).toUpperCase() + fate.slice(1);
+        return `"It's my ${rel}, ${first}. ${cap}. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."`;
+      },
+      deflectBeat(vid) {
+        return '"Yeah. Sorry. It\'s -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.';
+      },
+      commitBeat(vid) {
+        // The player promised to ask the System about the pods. Record it --
+        // the table reunion remembers who asked (kidsBackOutcome).
+        try {
+          const v = Game.state.village || {};
+          v.takenPromises = v.takenPromises || {};
+          v.takenPromises[vid] = (Game.state.scholar || {}).day || 0;
+        } catch (e) {}
+        return '"You\'d do that? Ask it? ...Thank you. Really. Even asking is more than the silence."';
+      },
+      menuOptions(vid, stage) {
+        return [
+          { id: 'dlg:more', labels: ['"Tell me about them."', '"What do you remember?"'], temper: 'kind' },
+          { id: 'dlg:commit', labels: ['"I\'ll ask the System about the pods."', '"I\'ll ask it. I promise."'], temper: 'kind' },
+          { id: 'dlg:cant', labels: ['"I don\'t know anything. I\'m sorry."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) {
+        if (resolution === 'promised') return '"If it answers -- you\'ll tell me? Whatever it says. I can take it."';
+        if (resolution === 'engaged') return '"Thanks for listening. Most people change the subject."';
+        return null;
+      },
+      resolve(vid, resolution) {
+        // Promised: the promise is recorded; no nagging seed. Heard but not
+        // promised, or deflected: they'll try again another day.
+        if (resolution === 'promised') return null;
+        return { wantId: 'seek_taken', note: 'what happened to their taken kin' };
+      },
+    },
   };
 
   const methods = {
@@ -1119,6 +1185,7 @@
         want.stage = 3;
         // The resolution names what the commitment MEANS per want.
         want.resolution = want.id === 'ask_favor' ? 'promised'
+          : want.id === 'seek_taken' ? 'promised'
           : want.id === 'seek_comfort' ? 'comforted'
           : want.id === 'warn_you' ? 'heeded'
           : want.id === 'repay' ? 'repaid' : 'engaged';

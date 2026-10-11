@@ -570,9 +570,17 @@
       const branch = T.branch || 'light';
       const finals = (def.finals && (def.finals[branch] || def.finals.light)) || [];
       this.say(`◈ ${def.name.toUpperCase()} — the last choice is yours, and it's live.`);
+      const finalOpts = finals.map(f => ({ id: 'final:' + f.id, label: f.label }));
+      // KIDS IN STASIS: the prize of the good path — offered only when the
+      // ledger earns it (kidsBackEligible), never on dark branches.
+      try {
+        if (branch === 'light' && this.kidsBackEligible()) {
+          finalOpts.push({ id: 'final:kidsback', label: 'Bring all the kids home.' });
+        }
+      } catch (e) {}
       this.tablePrompt(
         `<p>The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:</p>`,
-        finals.map(f => ({ id: 'final:' + f.id, label: f.label })),
+        finalOpts,
         def.name
       );
       try { this.save(); } catch (e) {}
@@ -584,7 +592,12 @@
       const fid = (id.indexOf('final:') === 0) ? id.slice(6) : id;
       const branch = T.branch || 'light';
       const finals = (def.finals && (def.finals[branch] || def.finals.light)) || [];
-      const fin = finals.find(f => f.id === fid) || finals[0];
+      let fin = finals.find(f => f.id === fid);
+      // KIDS IN STASIS: synthetic final — not in the path def, built here.
+      if (!fin && fid === 'kidsback' && this.kidsBackEligible()) {
+        fin = { id: 'kidsback', label: 'Bring all the kids home.', outcome: (Tx) => this.kidsBackOutcome(Tx) };
+      }
+      fin = fin || finals[0];
       if (!fin) return;
       const s = this.state.scholar, pg = this.progState();
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
@@ -600,6 +613,68 @@
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
       try { this.save(); } catch (e) {}
+    },
+
+    // ============ KIDS IN STASIS (2026-10-11, KIN canon) ============
+    // The Taking took half the adults at the Scattering, day zero, plus
+    // their children into stasis pods. Getting ALL the kids back is the
+    // prize of the good table path. Gated on the run's moral ledger —
+    // kindness and shared truth as behavior, never a checklist — and
+    // never offered on dark branches.
+    kidsBackEligible() {
+      try {
+        const T = this.tableState ? this.tableState() : {};
+        if ((T.branch || 'light') !== 'light') return false;
+        const L = (typeof this.ledger === 'function') ? this.ledger() : {};
+        const g = (v) => (L && L[v]) | 0;
+        if (!(g('protected') > g('killed'))) return false;
+        if (!(g('foodShared') >= g('foodHoarded'))) return false;
+        if (g('betrayed') > 0) return false;
+        const pt = (typeof this.tablePromiseTally === 'function') ? this.tablePromiseTally() : { kept: 0, broken: 0 };
+        if (!((pt.kept | 0) >= (pt.broken | 0))) return false;
+        return true;
+      } catch (e) { return false; }
+    },
+    // castTakingMourners(n): real villagers with Taking-marked kin, aunts
+    // and uncles of pod kids first. Never phantoms.
+    castTakingMourners(n) {
+      try {
+        const mourners = (typeof this.villagersMourningTaken === 'function') ? this.villagersMourningTaken() : [];
+        const isPodKin = (k) => /niece|nephew/i.test((k && k.relation) || '');
+        const scored = mourners.map(id => {
+          const kin = (typeof this.takenKinOf === 'function') ? (this.takenKinOf(id) || []) : [];
+          return { id, kin: kin.find(isPodKin) || kin[0] || null };
+        }).filter(s => s.kin);
+        scored.sort((a, b) => (isPodKin(b.kin) ? 1 : 0) - (isPodKin(a.kin) ? 1 : 0));
+        return scored.slice(0, n || 2);
+      } catch (e) { return []; }
+    },
+    kidsBackOutcome(T) {
+      const lines = [];
+      const full = (T.path === 'beloved'); // centerpiece on Beloved-light; lesser elsewhere
+      const cast = this.castTakingMourners(full ? 3 : 1);
+      const first = (id) => { try { return this.displayName(id).split(' ')[0]; } catch (e) { return 'someone'; } };
+      const promises = ((this.state.village || {}).takenPromises) || {};
+      lines.push('The ring goes quiet. Even the System stops smiling — for exactly one second. Then: "OH! Oh oh oh! The REUNION episode! LIVE! PODS OPENING! CAMERAS ON THE LITTLE ONES!"');
+      lines.push('Somewhere below, light spills out of rows of pods. Small figures sit up, blinking. The galaxy holds its breath — trillions of beings who never had childhoods watch children remember how.');
+      for (const m of cast) {
+        const name = first(m.id);
+        const kinFirst = (m.kin.name || 'the little one').split(' ')[0];
+        const kept = promises[m.id];
+        lines.push(`${name} pushes through the crowd — and stops. "${kinFirst}?" Then the running. The crying. The kind of crying that has no sound at first.${kept ? ` You asked the System, all those weeks ago. You kept your word. ${name} looks at you over ${kinFirst}'s head, and doesn't need to say it.` : ''}`);
+      }
+      if (!cast.length) {
+        lines.push('The village surges forward as one — every child claimed by shouting, laughing relatives. Nobody is left standing alone by an empty pod.');
+      }
+      lines.push('The System, bright as ever: "The grown-ups? Oh! Them! They\'re... elsewhere! Still! Don\'t worry! NEXT SEGMENT!" Nobody believes it. Everybody lets it pass. Today is not for that question.');
+      if (full) {
+        lines.push('The pods are empty. The village is loud. Somewhere in the control room, a producer is weeping into nutrient paste, and the ratings don\'t matter, and that\'s how you know it worked. You got all the kids back. All of them.');
+      } else {
+        lines.push('The pods are empty. It happened fast — a segment, not a saga. But the kids are home, and the village will tell the long version for years.');
+      }
+      try { this.state.village.kidsReturned = true; } catch (e) {}
+      try { this.recordMoment('The stasis pods opened. All the kids came home.'); } catch (e) {}
+      return lines;
     },
 
     // ============ NPC ASCENSION + FACILITATION ============

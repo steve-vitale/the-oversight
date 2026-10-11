@@ -19626,6 +19626,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           ],
         },
         {
+          id: 'pods', kicker: 'the napping ones', button: 'napping?',
+          lines: [
+            { who: 'sys', text: 'OH! The little ones! We should mention the little ones! They\'re NAPPING! Rows and rows of the coziest pods you ever saw! ...What do you mean "wake them up"?! They\'re COZY! Do YOU wake a napping toddler?! RUDE!' },
+            { who: 'sys', text: 'And the boring grown-ups? Elsewhere! Somewhere! They\'re FINE! Probably! The file says "fine"! Next question! ANY other question!' },
+            { who: 'sys', text: 'You know what\'d be GREAT television? A reunion episode! Pods OPENING! Little ones RUNNING! The audience would WEEP! ...Earn it. That\'s all we\'re saying. EARN it.' },
+            { who: 'narr', text: 'Nobody asks what "earn it" means. Everybody heard it.' },
+          ],
+        },
+        {
           id: 'food', kicker: 'the food question', button: 'rounding error?!',
           lines: [
             { who: 'sys', text: 'OH! The audience keeps asking! Why do the small humans keep putting organic matter in their FACE-HOLES? We ran the numbers! ANY old matter works! Rocks! Dirt! Regolith! Cold fusion! FREE energy! So why the... [chewing noises]?' },
