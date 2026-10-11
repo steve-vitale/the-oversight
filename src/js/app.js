@@ -350,7 +350,7 @@
         let cands = [];
         try { cands = Game.switchboardCandidates ? (Game.switchboardCandidates() || []) : []; } catch (e) {}
         const cbtns = cands.slice(0, 4).map(c => `<button class="btn sm ghost" data-beat="sw:appoint:${c.id}" title="${esc(c.cost || '')}${c.risk ? ' — ' + esc(c.risk) : ''}">${esc(c.name || c.id)}</button>`).join(' ');
-        out.push(`<div class="statrow beat-open">📡 <b>The relay needs hands.</b> Name Haven's voice — every message in and out passes through them. Hover a name for the cost.<br>${cbtns || '<span class="small">(no candidates hale right now)</span>'}</div>`);
+        out.push(`<div class="statrow beat-open">📡 <b>The relay needs hands.</b> Name Haven's voice — every message in and out passes through them. Hover a name for the cost.<br>${cbtns || '<span class="small">(no candidates hale right now)</span>'} <button class="btn sm" data-beat="sw:claim" title="Take the relay yourself — Haven loses your hands, and the wires erode you while you hold them">Claim it yourself</button></div>`);
       }
       try {
         const sw = Game.switchboard ? Game.switchboard() : null;
@@ -358,6 +358,11 @@
           let hn = sw.holderId;
           try { hn = Game.displayName ? String(Game.displayName(sw.holderId)).split(' ')[0] : hn; } catch (e) {}
           out.push(`<div class="statrow beat-open">📡 <b>Relay holder: ${esc(hn)}</b> (${esc(sw.stage || 'village relay')}) — routed ${sw.routed || 0}, delayed ${sw.delayed || 0}, edited ${sw.edited || 0}. <button class="btn sm ghost" data-beat="sw:log">Read the relay log</button> <button class="btn sm ghost" data-beat="sw:confront">Confront ${esc(hn)}</button></div>`);
+          // RELAY PATH (table 2026-10-11): the Bearer's cockpit — the verbs,
+          // live on the panel while they hold the wires.
+          if (sw.bearerHeld) {
+            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b> <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button></div>`);
+          }
         }
       } catch (e) {}
     } catch (e) {}
@@ -14616,6 +14621,12 @@
         if (spec[1] === 'appoint') Game.appointSwitchboard(spec[2]);
         else if (spec[1] === 'log') Game.switchboardLog();
         else if (spec[1] === 'confront') Game.confrontSwitchboard();
+        // RELAY PATH (table 2026-10-11): the cockpit verbs, answered aloud.
+        else if (spec[1] === 'claim') Game.claimRelay();
+        else if (spec[1] === 'probe') Game.relayProbe();
+        else if (spec[1] === 'reroute') Game.relayReroute(spec[2]);
+        else if (spec[1] === 'deepen') Game.relayDeepen();
+        else if (spec[1] === 'commune') Game.relayCommune();
       }
       refresh();
     });
