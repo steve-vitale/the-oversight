@@ -25994,6 +25994,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // use as day 1, so multi-day synergy streaks could never complete.
       // The village lives on the same clock as its scholar.
       if (this.state.village) this.state.village.day = scholar.day;
+      // PODS WEIGHT (2026-10-11, KIN canon): the pods keep coming up.
+      // Intrusion roll + the promise fuse (21 days unkept = broken, aloud).
+      try {
+        if (typeof this.podIntrusionTick === 'function') this.podIntrusionTick();
+        const v = this.state.village || {};
+        const promises = v.takenPromises || {};
+        const hist = (typeof this.podHistory === 'function') ? this.podHistory() : [];
+        for (const vid of Object.keys(promises)) {
+          const pday = promises[vid] || 0;
+          if (scholar.day - pday < 21) continue;
+          if (hist.some(h => (h.kind === 'promise-kept' || h.kind === 'promise-broken') && h.vid === vid)) continue;
+          if (typeof this.podRemember === 'function') this.podRemember('promise-broken', { vid, note: 'never asked; the promise went quiet' });
+          let nm = 'someone';
+          try { nm = (this.displayName(vid) || 'someone').split(' ')[0]; } catch (e) {}
+          this.say(`${nm} stops asking. That's how you know it's broken — not the anger, the stopping. Around the fire, people have opinions about promises made to the grieving.`);
+          try {
+            const vv = (this.data.villagers || []).find(x => x.id === vid);
+            if (vv) { vv.podFeeling = vv.podFeeling || { score: 0, notes: [] }; vv.podFeeling.score -= 10; vv.podFeeling.notes.push('promise broken'); }
+          } catch (e) {}
+          try { if (typeof this.gossip === 'function') this.gossip(`${nm}'s promise about the pods went quiet. People noticed.`); } catch (e) {}
+        }
+      } catch (e) {}
       scholar.relicResolveUsed = false;
       this.dayPart = 0; this.ap = 1;
       scholar.dayTicks = 0; scholar.actionClock = 0; // action clock: new day, fresh budget

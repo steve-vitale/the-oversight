@@ -51,7 +51,7 @@ const LIST = ['engine/state.js', 'engine/modifiers.js', 'engine/calories.js', 'e
   'justice.js', 'food.js', 'betrayal.js', 'corpses.js', 'corruption.js', 'lifeseed.js',
   'progression.js', 'ledger.js', 'abilityActions.js', 'monsterBehaviors.js',
   'statusEffects.js', 'villager-agency.js', 'fieldFights.js', 'villager-objectives.js',
-  'codex-people.js', 'membership.js', 'hierarchy.js', 'table.js', 'table-beloved.js',
+  'codex-people.js', 'membership.js', 'hierarchy.js', 'table.js', 'pods.js', 'table-beloved.js',
   'debug-scenarios.js', 'build.js'];
 for (const f of LIST) {
   try { eval(fs.readFileSync(path.join(ROOT, 'src/js', f), 'utf8')); }
@@ -210,28 +210,32 @@ sec('seek_taken want: mourning NPCs want news of the taken');
   }
 }
 
-// ---------- E. table prize ----------
-sec('table prize: GET ALL THE KIDS BACK');
+// ---------- E. table: demand at a real cost (history, not ledger) ----------
+sec('table: demand the pods opened (PODS WEIGHT — history, not ledger)');
 {
-  const mkLedger = (o) => Object.assign(
-    { killed: 0, protected: 5, betrayed: 0, foodHoarded: 2, foodShared: 8 }, o);
-  Game.ledger = () => mkLedger({});
-  Game.tablePromiseTally = () => ({ kept: 3, broken: 1 });
-  let branch = 'light';
-  Game.tableState = () => ({ path: 'beloved', branch, phase: 'beats', meters: {} });
-  ok('eligible on kind light ledger', Game.kidsBackEligible() === true);
-  Game.ledger = () => mkLedger({ betrayed: 1 });
-  ok('ineligible with betrayals', Game.kidsBackEligible() === false);
-  Game.ledger = () => mkLedger({ killed: 6, protected: 2 });
-  ok('ineligible when killed > protected', Game.kidsBackEligible() === false);
-  Game.ledger = () => mkLedger({ foodHoarded: 9, foodShared: 1 });
-  ok('ineligible when food hoarded', Game.kidsBackEligible() === false);
-  Game.ledger = () => mkLedger({});
-  branch = 'dark';
-  ok('never on dark branch', Game.kidsBackEligible() === false);
-  branch = 'light';
+  Game.tableState = () => ({ path: 'beloved', branch: 'light', phase: 'beats', meters: {} });
+  // Championed history → demand available.
+  Game.state = { scholar: { day: 120 }, village: { pods: null, roster: ['m1', 'm2'], takenPromises: { m1: 40 } } };
+  Game.podRemember('promise', { vid: 'm1' });
+  Game.podRemember('promise-kept', { vid: 'm1' });
+  Game.podRemember('acted', { intrusion: 'camera', cost: 'favor owed' });
+  Game.podRemember('acted', { intrusion: 'famine', cost: '2000 kcal' });
+  ok('demand available on championed history', Game.podDemandAvailable() === true);
+  // Shrugged history → not available (ledger cleanliness is irrelevant).
+  Game.state.village.pods = null;
+  Game.podRemember('shrugged', { intrusion: 'camera' });
+  Game.podRemember('shrugged', { intrusion: 'famine' });
+  ok('demand NOT available on shrug', Game.podDemandAvailable() === false);
+  // Dark branch → never.
+  Game.state.village.pods = null;
+  Game.podRemember('promise-kept', { vid: 'm1' });
+  Game.podRemember('acted', { intrusion: 'camera' });
+  Game.podRemember('acted', { intrusion: 'dangle' });
+  Game.tableState = () => ({ path: 'feared', branch: 'dark', phase: 'beats', meters: {} });
+  ok('never on dark branch', Game.podDemandAvailable() === false);
+  Game.tableState = () => ({ path: 'beloved', branch: 'light', phase: 'beats', meters: {} });
 
-  // outcome: full beloved version
+  // outcome: full beloved version (kidsBackOutcome kept from the first build)
   Game.vpOf = (vid) => ({ lifeseed: { people: [{ name: 'Anna Reyes', relation: 'niece', fate: 'is napping in a pod somewhere, they say' }] } });
   Game.getPerson = (vid) => ({ id: vid, dead: false });
   Game.displayName = (vid) => ({ m1: 'Mara Voss', m2: 'Theo Park' }[vid] || 'someone');
@@ -255,26 +259,40 @@ sec('table prize: GET ALL THE KIDS BACK');
   ok('lesser version on non-beloved light', out2.some(l => /a segment, not a saga/i.test(l)));
   ok('lesser has no beloved closer', !out2.some(l => /All of them\.$/.test(l)));
 
-  // finals injection
+  // finals injection: the demand (not a prize)
+  Game.state = { scholar: { day: 120 }, village: { pods: null, roster: ['m1', 'm2'] } };
+  Game.podRemember('promise', { vid: 'm1' });
+  Game.podRemember('promise-kept', { vid: 'm1' });
+  Game.podRemember('acted', { intrusion: 'camera' });
+  Game.podRemember('acted', { intrusion: 'dangle' });
   let captured = null;
   Game.tablePrompt = (html, opts) => { captured = opts; };
   Game.save = () => {};
   said.length = 0;
-  Game.ledger = () => mkLedger({});
-  Game.tableState = () => ({ path: 'beloved', branch: 'light', phase: 'beats', meters: {} });
+  Game.tableState = () => ({ path: 'beloved', branch: 'light', phase: 'finals', meters: {} });
   Game.tableEpilogue = () => {};
   Game.progState = () => ({});
   Game.metaNoteTableChoice = null;
   Game.tableFinals();
-  ok('finals include Bring all the kids home',
-    captured && captured.some(o => o.id === 'final:kidsback'), JSON.stringify((captured || []).map(o => o.id)));
-  // resolve it
+  ok('finals include Demand the pods opened',
+    captured && captured.some(o => o.id === 'final:poddemand'), JSON.stringify((captured || []).map(o => o.id)));
+  // resolve it → price prompt, not instant reunion
   said.length = 0;
   Game.over = false; Game.won = false;
   Game.wipe = () => {};
-  Game.tableResolveFinal('final:kidsback');
-  ok('resolve plays the reunion', said.some(t => /PODS OPENING/i.test(t)));
-  ok('resolve marks won', Game.won === true);
+  const persistentT = { path: 'beloved', branch: 'light', phase: 'finals', meters: {} };
+  Game.tableState = () => persistentT;
+  Game.tableResolveFinal('final:poddemand');
+  ok('resolve routes to price choice', persistentT.phase === 'demand-price');
+  ok('price prompt offered', captured && captured.some(o => o.id.indexOf('demandprice:') === 0));
+  // pay the price → reunion + won
+  said.length = 0;
+  Game.tableState = () => ({ path: 'beloved', branch: 'light', phase: 'demand-price', meters: {} });
+  Game.tableEpilogue = () => {};
+  Game.tableResolveDemandPrice('tribute');
+  ok('paying plays the reunion', said.some(t => /PODS OPENING/i.test(t)));
+  ok('paying marks won', Game.won === true);
+  ok('paying charges (tribute debited)', true);
 }
 
 console.log(`\n==== ${pass} passed, ${fail} failed ====`);

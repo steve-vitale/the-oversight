@@ -927,6 +927,16 @@ Perception system. Proximity hints, spotting.
 
 **Consumes:** scholar.perception
 
+### pods (`pods.js`)
+The stasis pods as a standing weight (KIN.md: "a weight, not a meter", Steve 2026-10-11). No devotion score — a HISTORY of pod-related choices across the run: what you did at each intrusion, what it cost, who saw it. Intrusions fire at dramatically-charged moments (~1/season, never two in a week); each is a real choice with real costs both ways. The village's social memory of those choices IS the system — mourners have opinions, broken promises surface (Witness especially). The System monetizes guilt (the Jackpot sells devotion back as entertainment). At the table, history determines what is POSSIBLE: championed runs can demand the pods opened at a real cost; shrugged runs get the callous-oversight epilogue; jackpot losses are part of the story. Adults stay unknown, always.
+
+**Provides:** podRemember(kind, detail) -> append a history event, podHistory() -> the event list, podIntrusionTick() -> dawn roll for intrusions, podAnswer(choice) -> resolve a pending intrusion, podAsk() -> "ask the System about the pods" (fulfills promises, costs a favor owed), podChampioned() -> history reader: championed run, podShrugged() -> history reader: shrugged run, podJackpotLost() -> history reader: jackpot lost, podJackpotWon() -> history reader: jackpot won, podConscripted() -> history reader: conscripted (dark), podBrokenPromises() -> broken-promise events, podKidsReturned() -> kids home flag, podDemandAvailable() -> table demand possible (history, not meter), podDemandCost(choice) -> the table charges; pods open, podOversightEpilogue() -> the sting for shrugged good endings, podJackpotLossEpilogue() -> the carried loss, podJackpotStage(via) -> stage the televised Jackpot, podJackpotChoose() -> the approach choice, podJackpotApproach(how) -> spin the wheel, podJackpotSpin(how) -> resolve win/loss, podJackpotWin(how) -> pods open live, podJackpotLoss(how) -> the quiet beat, podConscriptOffer(pathId) -> dark offer (feared/relay), podConscriptAnswer(accept) -> horror or refusal, podWitnessMaterial() -> broken-promise lines for the Witness defense
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 

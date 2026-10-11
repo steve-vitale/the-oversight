@@ -1499,9 +1499,29 @@
       } else if (inside) {
         desc += ' You\'re inside the hall. To leave Haven: tap the 🚪 door, step outside, walk to the edge of the grounds, then tap yourself.';
       }
+      // PODS WEIGHT (2026-10-11, KIN canon): the pods need answers. Pending
+      // intrusions, the ask, and the Jackpot wheel surface here — on the
+      // player's own tile, where "you" are.
+      try {
+        const pods = (Game.state.village || {}).pods;
+        if (pods && pods.pending) {
+          const pt = pods.pending.type;
+          const plabel = pt === 'camera' ? '📺 Answer the broadcast (the pod on screen)'
+            : pt === 'famine' ? '🍲 Answer the fire (the life-support math)' : '📡 Answer the System (the bargain)';
+          actions.push([plabel + ' — speak', () => { Game.podAnswer('act'); refresh(); }]);
+          actions.push([plabel + ' — stay quiet', () => { Game.podAnswer('shrug'); refresh(); }]);
+        }
+        const day = (Game.state.scholar || {}).day || 0;
+        if (day > 7 && Game.state.systemArrived && !(pods && pods.pending)) {
+          const lastAsk = (pods && pods.lastAsk) || 0;
+          if (day - lastAsk >= 7) actions.push(['📡 Ask about the pods', () => { Game.podAsk(); refresh(); }]);
+        }
+        if (pods && pods.jackpot && !pods.jackpot.resolved) {
+          actions.push(['🎡 Step up to the wheel (THE JACKPOT — the pods)', () => { Game.podJackpotChoose(); refresh(); }]);
+        }
+      } catch (e) {}
       // someone's standing with you? you walked up to them — talk is right here.
-      if (villagerId) {
-        const vp = Game.data.villagers.find(v => v.id === villagerId) || Game.data.background_survivors.find(v => v.id === villagerId);
+      if (villagerId) {        const vp = Game.data.villagers.find(v => v.id === villagerId) || Game.data.background_survivors.find(v => v.id === villagerId);
         const vname = Game.displayName(villagerId);
         desc += ` ${vname} is here with you.`;
         actions.push(['💬 Talk to ' + vname, () => openPerson(villagerId)]);

@@ -385,6 +385,17 @@
         if (id.indexOf('downgrade:') === 0 && T.phase === 'downgrade') { this.tableDowngradePick(id.slice(10)); return null; }
         if (T.phase === 'challenge') { this.tableChoose(id); return null; }
         if (T.phase === 'finals') { this.tableResolveFinal(id); return null; }
+        // PODS WEIGHT: the demand's price choice.
+        if (T.phase === 'demand-price' && id.indexOf('demandprice:') === 0) { this.tableResolveDemandPrice(id.slice(12)); return null; }
+        // PODS WEIGHT: dark conscript answer — then the challenge resumes.
+        if (T.phase === 'conscript' && id.indexOf('conscript:') === 0) {
+          try { if (typeof this.podConscriptAnswer === 'function') this.podConscriptAnswer(id === 'conscript:yes'); } catch (e) {}
+          T.phase = 'challenge'; T.beat = 0;
+          const def2 = pathDef(T.path);
+          if (def2) this.tableRunBeat(0);
+          try { this.save(); } catch (e) {}
+          return null;
+        }
       } catch (e) {}
       return null;
     },
@@ -441,6 +452,31 @@
         this.say(`The table has read your ledger. ${noteStr.charAt(0).toUpperCase() + noteStr.slice(1)}. The ${branch.branch} road is open.`);
       }
       try { this.metaNoteTable && this.metaNoteTable(pathId); } catch (e) {}
+      // PODS WEIGHT — DARK CONSCRIPT (2026-10-11, KIN canon): feared-dark
+      // (domination) and relay-dark (the instrument) get the offer before
+      // the challenge beats. A standalone beat; the challenge waits.
+      try {
+        const darkConscriptPaths = { feared: 1, relay: 1 };
+        const isDark = (T.branch === 'dark') || (pathId === 'relay' && (T.band === 'dark' || (typeof this.relayLean === 'function' && this.relayLean() < 0)));
+        if (darkConscriptPaths[pathId] && isDark && typeof this.podConscriptOffer === 'function') {
+          const already = (typeof this.podHistory === 'function') ? this.podHistory().some(h => h.kind === 'conscript-offered' || h.kind === 'conscript-accepted') : false;
+          const kidsHome = (typeof this.podKidsReturned === 'function') ? this.podKidsReturned() : false;
+          if (!already && !kidsHome && (Game.state.scholar || {}).day > 7) {
+            T.phase = 'conscript';
+            this.podConscriptOffer(pathId);
+            this.tablePrompt(
+              `<p>The System waits. The pods wait. The mourners — somewhere below the light — have gone very still.</p>`,
+              [
+                { id: 'conscript:yes', label: 'Take them. (An army. Instruments. Say it plainly.)' },
+                { id: 'conscript:no', label: 'Refuse. (Even here. Even now.)' },
+              ],
+              'the Table'
+            );
+            try { this.save(); } catch (e) {}
+            return;
+          }
+        }
+      } catch (e) {}
       this.tableRunBeat();
       try { this.save(); } catch (e) {}
     },
@@ -571,11 +607,13 @@
       const finals = (def.finals && (def.finals[branch] || def.finals.light)) || [];
       this.say(`◈ ${def.name.toUpperCase()} — the last choice is yours, and it's live.`);
       const finalOpts = finals.map(f => ({ id: 'final:' + f.id, label: f.label }));
-      // KIDS IN STASIS: the prize of the good path — offered only when the
-      // ledger earns it (kidsBackEligible), never on dark branches.
+      // PODS WEIGHT (2026-10-11, KIN canon "a weight, not a meter"): the prize
+      // of the good path is replaced by a DEMAND — history determines what
+      // is possible. A championed run can demand the pods opened, but the
+      // table always charges. Never on dark branches.
       try {
-        if (branch === 'light' && this.kidsBackEligible()) {
-          finalOpts.push({ id: 'final:kidsback', label: 'Bring all the kids home.' });
+        if (branch === 'light' && typeof this.podDemandAvailable === 'function' && this.podDemandAvailable()) {
+          finalOpts.push({ id: 'final:poddemand', label: 'Demand the pods opened. (The table will charge.)' });
         }
       } catch (e) {}
       this.tablePrompt(
@@ -593,9 +631,22 @@
       const branch = T.branch || 'light';
       const finals = (def.finals && (def.finals[branch] || def.finals.light)) || [];
       let fin = finals.find(f => f.id === fid);
-      // KIDS IN STASIS: synthetic final — not in the path def, built here.
-      if (!fin && fid === 'kidsback' && this.kidsBackEligible()) {
-        fin = { id: 'kidsback', label: 'Bring all the kids home.', outcome: (Tx) => this.kidsBackOutcome(Tx) };
+      // PODS WEIGHT: the demand is a synthetic final with a price choice —
+      // the table always charges. Route to the price prompt, not the outcome.
+      if (!fin && fid === 'poddemand' && typeof this.podDemandAvailable === 'function' && this.podDemandAvailable()) {
+        T.phase = 'demand-price';
+        this.say('◈ THE DEMAND — you name it aloud: the pods. Opened. Every one. The ring goes very still. Then the System, almost respectful: "Ooh. The BIG ask. ...Alright. Everything costs. PICK your price."');
+        this.tablePrompt(
+          `<p>The table will open the pods. But the table always charges. Pick your price:</p>`,
+          [
+            { id: 'demandprice:tribute', label: 'Pay in food — 12,000 kcal off the village\'s plate.' },
+            { id: 'demandprice:favor', label: 'Pay in debt — two favors owed to the System, terms unspecified.' },
+            { id: 'demandprice:standing', label: 'Pay in leverage — your bargaining strength, spent openly.' },
+          ],
+          'the Table'
+        );
+        try { this.save(); } catch (e) {}
+        return;
       }
       fin = fin || finals[0];
       if (!fin) return;
@@ -615,26 +666,31 @@
       try { this.save(); } catch (e) {}
     },
 
+    // tableResolveDemandPrice: the table charges, the pods open, then the
+    // normal epilogue (which will NOT sting — you paid).
+    tableResolveDemandPrice(price) {
+      const T = this.tableState();
+      const def = pathDef(T.path);
+      this.say(`◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`);
+      const lines = (typeof this.podDemandCost === 'function') ? this.podDemandCost(price) : [];
+      (Array.isArray(lines) ? lines : [lines]).forEach(l => this.say(l));
+      if (def) this.tableEpilogue(def, T.branch || 'light', { id: 'poddemand', label: 'Demanded the pods opened.' });
+      try { this.recordMoment(`Haven's table path: ${(def || {}).name} (${T.branch}), choice: demanded the pods opened (paid ${price}).`); } catch (e) {}
+      try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}
+      const s = this.state.scholar;
+      s.tableChoices = null;
+      T.phase = 'done';
+      this.over = true; this.won = true;
+      try { this.wipe(); } catch (e) {}
+      try { this.save(); } catch (e) {}
+    },
+
     // ============ KIDS IN STASIS (2026-10-11, KIN canon) ============
     // The Taking took half the adults at the Scattering, day zero, plus
-    // their children into stasis pods. Getting ALL the kids back is the
-    // prize of the good table path. Gated on the run's moral ledger —
-    // kindness and shared truth as behavior, never a checklist — and
-    // never offered on dark branches.
-    kidsBackEligible() {
-      try {
-        const T = this.tableState ? this.tableState() : {};
-        if ((T.branch || 'light') !== 'light') return false;
-        const L = (typeof this.ledger === 'function') ? this.ledger() : {};
-        const g = (v) => (L && L[v]) | 0;
-        if (!(g('protected') > g('killed'))) return false;
-        if (!(g('foodShared') >= g('foodHoarded'))) return false;
-        if (g('betrayed') > 0) return false;
-        const pt = (typeof this.tablePromiseTally === 'function') ? this.tablePromiseTally() : { kept: 0, broken: 0 };
-        if (!((pt.kept | 0) >= (pt.broken | 0))) return false;
-        return true;
-      } catch (e) { return false; }
-    },
+    // their children into stasis pods. The pods are a WEIGHT, not a prize
+    // ("a weight, not a meter", Steve 2026-10-11): history determines what
+    // is possible at the table. kidsBackEligible (ledger gate) is RETIRED —
+    // see pods.js podDemandAvailable() / podOversightEpilogue().
     // castTakingMourners(n): real villagers with Taking-marked kin, aunts
     // and uncles of pod kids first. Never phantoms.
     castTakingMourners(n) {
@@ -788,6 +844,12 @@
         }
         // Ascensions stack bargaining power — said aloud, priced in.
         if (asc.length) this.say(`The table notes ${asc.length} ascension${asc.length > 1 ? 's' : ''} from one village. Its terms improve accordingly. Nobody has ever seen that before.`);
+        // PODS WEIGHT (2026-10-11, KIN canon): the history is read here.
+        // Shrugged runs curdle (the oversight); jackpot losses are carried.
+        try {
+          if (typeof this.podJackpotLossEpilogue === 'function') this.podJackpotLossEpilogue();
+          if (typeof this.podOversightEpilogue === 'function') this.podOversightEpilogue();
+        } catch (e) {}
       } catch (e) {}
     },
 

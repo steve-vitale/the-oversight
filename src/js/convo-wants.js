@@ -842,6 +842,9 @@
           const v = Game.state.village || {};
           v.takenPromises = v.takenPromises || {};
           v.takenPromises[vid] = (Game.state.scholar || {}).day || 0;
+          // PODS WEIGHT (2026-10-11, KIN canon): the promise enters the
+          // village's social memory — kept or broken, it will surface.
+          try { if (typeof Game.podRemember === 'function') Game.podRemember('promise', { vid, note: 'promised ' + vid + ' to ask about the pods' }); } catch (e) {}
         } catch (e) {}
         return '"You\'d do that? Ask it? ...Thank you. Really. Even asking is more than the silence."';
       },

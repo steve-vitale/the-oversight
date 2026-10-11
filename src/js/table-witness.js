@@ -145,6 +145,12 @@
           const w = witnesses();
           const lines = ['THE DEFENSE — calls YOUR villagers. This is the part the table warned you about: the defense doesn\'t argue the charges. It argues *you*. Two of your own take the stand, and you don\'t control what they say.'];
           w.forEach(x => lines.push(`${x.name}, sworn: ${x.line}`));
+          // PODS WEIGHT (2026-10-11, KIN canon): broken promises surface
+          // where it hurts most. The defense found the mourners.
+          try {
+            const pm = (typeof Game.podWitnessMaterial === 'function') ? Game.podWitnessMaterial() : [];
+            pm.forEach(l => lines.push(l));
+          } catch (e) {}
           return lines;
         },
         meterLine,
