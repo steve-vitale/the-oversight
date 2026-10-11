@@ -802,9 +802,68 @@
       this.say(`📖 The Codex turns a page: ${oldName}, ${this.pluralize(s.day || 0, 'day')}. The mantle passes to ${newName}.`);
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
       // the trust of the office transfers, discounted — the person must earn the rest
+      // (journey-succession 2026-10-11: `|| 20` conflated a DISTRUSTED office
+      // (explicit 0) with a missing entry — a 0-trust Bearer <redacted> 12 free
+      // trust to the successor. Only a missing entry gets the 20 default.)
       try {
         v.trust = v.trust || {};
-        v.trust[newId] = Math.round((trust[oldId] || 20) * 0.6);
+        v.trust[newId] = Math.round((trust[oldId] == null ? 20 : trust[oldId]) * 0.6);
+      } catch (e) {}
+      // MANTLE HANDOFF RECORD (journey-succession 2026-10-11): the village is
+      // the protagonist — conversational continuity must survive the bearer,
+      // but HONESTLY. Threads, want-seeds, favors and memories planted with
+      // the dead Bearer <redacted> the predecessor's name from here on (see
+      // inheritedName() in conversation.js) — the new face never pretends
+      // they were in the room. Obligations the dead Bearer <redacted> not
+      // transfer silently: an open promise is released (neither kept nor
+      // broken — the promiser is dead; mirrors PROMISE RELEASE for dead NPCs
+      // in betrayal.js) and its favor reverts to a live ask, so the NPC
+      // re-asks the new Bearer <redacted> naming the predecessor. The repay
+      // seed references a promise that no longer exists — stale, deleted;
+      // the need-flow re-asks honestly via the favor record.
+      try {
+        v.mantleOf = v.mantleOf || [];
+        v.mantleOf.push({ from: oldId, fromName: oldName, to: newId, toName: newName, day: s.day || 0 });
+        if (v.mantleOf.length > 12) v.mantleOf.shift();
+        const pr = v.promises || {};
+        for (const pid of Object.keys(pr)) {
+          const p = pr[pid];
+          if (!p || p.kept) continue;
+          p.kept = 'released';
+          p.inherited = true;
+          try {
+            const fav = (v.favorLedger || {})[pid];
+            if (fav && fav.id === p.favorId && fav.state === 'promised') fav.state = 'asked';
+          } catch (e2) {}
+          try {
+            const sd = (v.convoSeeds || {})[pid];
+            if (sd && (sd.wantId === 'repay' || (sd.favorId && sd.favorId === p.favorId))) delete v.convoSeeds[pid];
+          } catch (e3) {}
+        }
+        // STAMP (journey-succession 2026-10-11): every open thread, seed,
+        // favor and memory that exists RIGHT NOW was the dead bearer's —
+        // stamp it with their name. Day-granularity cannot separate a
+        // morning thread from an afternoon death; the stamp can. Records
+        // planted after this keep no stamp, so same-day-after-death plants
+        // read as the new bearer's. Already-stamped records keep their
+        // stamp — the chain of faces stays honest across many deaths.
+        try {
+          for (const tid of Object.keys(v.topicLog || {})) {
+            const L = v.topicLog[tid] || {};
+            for (const o of (L.open || []).concat(L.lapsed || [])) { if (o && !o.inh) o.inh = oldName; }
+          }
+          for (const sid of Object.keys(v.convoSeeds || {})) {
+            const sd = v.convoSeeds[sid];
+            if (sd && !sd.inh) sd.inh = oldName;
+          }
+          for (const fid of Object.keys(v.favorLedger || {})) {
+            const fb = v.favorLedger[fid];
+            if (fb && !fb.inhFrom) fb.inhFrom = oldName;
+          }
+          for (const mid of Object.keys(v.memory || {})) {
+            for (const mm of v.memory[mid] || []) { if (mm && !mm.inh) mm.inh = oldName; }
+          }
+        } catch (e4) {}
       } catch (e) {}
       try { this.ledgerAdd('unified', 1); } catch (e) {}
       try { this.save(); } catch (e) {}

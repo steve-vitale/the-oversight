@@ -1094,6 +1094,34 @@
       } catch (e) {}
     },
 
+    // MANTLE HANDOFF (journey-succession 2026-10-11): conversational
+    // continuity must survive the Bearer <redacted> — the village is the
+    // protagonist — but HONESTLY. Threads, seeds, favors and memories
+    // planted with a previous Bearer <redacted> the predecessor's name; the
+    // new face never pretends they were in the room. (v.mantleOf is written
+    // by playerDeath in ledger.js.)
+    mantleOf() { try { return (this.state.village || {}).mantleOf || []; } catch (e) { return []; } },
+    bearerStartDay() {
+      const m = this.mantleOf();
+      return m.length ? (m[m.length - 1].day || 1) : 1;
+    },
+    // inheritedName(rec): first name of the Bearer <redacted> held the office
+    // when this conversational record (open thread, seed, favor, memory)
+    // was made — or null when the current Bearer <redacted> it. Prefers the
+    // explicit handoff stamp written by playerDeath (precise across
+    // same-day deaths); falls back to day comparison against the handoff.
+    inheritedName(rec) {
+      if (!rec) return null;
+      const stamped = rec.inh || rec.inhFrom;
+      if (stamped) return String(stamped).split(' ')[0];
+      const m = this.mantleOf();
+      if (!m.length) return null;
+      const last = m[m.length - 1];
+      const rday = rec.day != null ? rec.day : rec.askedDay;
+      if ((rday || 0) >= (last.day || 1)) return null;
+      return String(last.fromName || 'your predecessor').split(' ')[0];
+    },
+
     // convoResumeOpener: an unfinished thread resurfaces as the next
     // conversation's opening. Never ahead of a talk request, never twice
     // running, gated on a little trust — strangers don't pick up old threads.
@@ -1130,7 +1158,19 @@
         'unanswered': 'you never answered',
       }[o.why] || 'we left it hanging';
       let inner;
-      if (ago > 7) {
+      // INHERITED THREAD (journey-succession 2026-10-11): the thread was the
+      // predecessor's — the NPC names them. The new Bearer <redacted> pick it
+      // up, but never as if they were there.
+      const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+      if (pred) {
+        if (ago > 7) {
+          inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You're not ${pred}. Still on your mind?`;
+        } else if (ago > 1) {
+          inner = `${pred} and I never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
+        } else {
+          inner = `${pred} and I never finished talking about ${label} — ${whyLine}. You're wearing ${pred}'s shoes now — want to pick it up?`;
+        }
+      } else if (ago > 7) {
         inner = `We never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. Still on your mind?`;
       } else if (ago > 1) {
         inner = `We never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back.`;
@@ -3983,7 +4023,11 @@
           c.thread = akey; c.depth = 1;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:thread' });
           const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
-          done(beat || '"Yeah... where were we with that."', `"About ${label} — we never finished."`);
+          // INHERITED THREAD (journey-succession 2026-10-11): name whose
+          // thread it was — the new Bearer <redacted> resume it as their own.
+          const predT = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+          done(beat || '"Yeah... where were we with that."',
+            predT ? `"About ${label} — that was ${predT}'s thread. We never finished."` : `"About ${label} — we never finished."`);
         } else if (akind === 'memory') {
           // Name something you share. The ledger is continuity — they answer
           // from the specific memory, not a generic line.
@@ -3999,9 +4043,32 @@
             confronted: "\u201cYou were wrong, you know. But I hear you.\u201d",
             shared_goal: "\u201cWe talked about wanting that. Still do.\u201d",
           };
+          // INHERITED MEMORY (journey-succession 2026-10-11): the memory is
+          // the predecessor's deed — the NPC attributes it to them, never to
+          // the new face. A broken promise died with its maker: explicitly
+          // not the successor's to carry.
+          let memResp = MEM_RESP[akey] || '"Yeah. I think about that too."';
+          try {
+            const mems = (((this.state.village || {}).memory || {})[vid] || []).filter(m => m && m.t === akey);
+            const lastMem = mems[mems.length - 1];
+            const predM = (typeof this.inheritedName === 'function' && lastMem) ? this.inheritedName(lastMem) : null;
+            if (predM) {
+              const MEM_INH = {
+                gift: `\u201c${predM} didn\u2019t have to do that. I haven\u2019t forgotten.\u201d`,
+                private_gift: `\u201cNobody saw that but ${predM} and me. I haven\u2019t forgotten.\u201d`,
+                promise_kept: `\u201c${predM} kept their word. That\u2019s rare out here.\u201d`,
+                promise_broken: `\u201c${predM} never got to make that right. It\u2019s not yours to carry — but I remember.\u201d`,
+                comforted: `\u201c${predM} sat with me that night. Helped more than I said.\u201d`,
+                shared_fear: `\u201cI\u2019m glad I told ${predM}. ...Glad I\u2019m telling you, too.\u201d`,
+                you_threatened: `\u201cI haven\u2019t forgotten what ${predM} said. Just... careful.\u201d`,
+                confronted: `\u201c${predM} said I was wrong. Maybe. You\u2019re not ${predM} — but I\u2019ll hear you out.\u201d`,
+              };
+              if (MEM_INH[akey]) memResp = MEM_INH[akey];
+            }
+          } catch (e) {}
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:memory' });
           const about = (typeof this.convoMemoryAbout === 'function' && this.convoMemoryAbout(akey)) || 'that';
-          done(MEM_RESP[akey] || '"Yeah. I think about that too."', `"About ${about}..."`);
+          done(memResp, `"About ${about}..."`);
         } else if (akind === 'want') {
           // The want surfaces as a question (Principle 9): engage it.
           c.thread = 'want'; c.depth = 1;

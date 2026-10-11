@@ -313,7 +313,12 @@
           const ago = Math.max(0, day - (o.day || day));
           // Honest timeline: "N days back" for stale threads, no leaked
           // internal "(last time)" note for recent ones.
-          const label2 = ago > 1 ? `"We never finished — ${label}, ${ago} days back."` : `"We never finished — ${label}."`;
+          // INHERITED THREAD (journey-succession 2026-10-11): name whose
+          // thread it was — the menu must not offer the new Bearer <redacted>
+          // else's unfinished business as their own.
+          const predL = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+          const label2 = predL ? (ago > 1 ? `"${predL}'s unfinished — ${label}, ${ago} days back."` : `"${predL}'s unfinished — ${label}."`)
+            : (ago > 1 ? `"We never finished — ${label}, ${ago} days back."` : `"We never finished — ${label}."`);
           items.push({
             kind: 'thread', tid: o.tid,
             id: 'alive:thread:' + o.tid,

@@ -435,6 +435,21 @@
         }
         const need = this.convoFindFavorNeed(vid);
         if (!need) return null; // no real need — the want can't open
+        // INHERITED ASK (journey-succession 2026-10-11): the predecessor's
+        // released favor is still the live ask — the NPC re-asks the new
+        // Bearer <redacted> it, naming the predecessor, never pretending the
+        // ask is new. Same need kind required; a changed need is a new ask
+        // (the old favor goes moot, the follow-up says so honestly).
+        try {
+          const oldF = this.convoGetFavor(vid);
+          const predO = oldF && oldF.state === 'asked' && typeof this.inheritedName === 'function'
+            ? this.inheritedName(oldF) : null;
+          if (predO && oldF.kind === need.kind && this.convoFavorNeedLive(oldF)) {
+            if (c.want) c.want.favor = oldF;
+            return this.convoFavorFollowup(vid, oldF);
+          }
+          if (predO && oldF && oldF.kind !== need.kind) { try { oldF.state = 'moot'; } catch (e2) {} }
+        } catch (e) {}
         const favor = this.convoBuildFavor(vid, need);
         if (!favor) return null;
         if (c.want) c.want.favor = favor;
@@ -998,6 +1013,19 @@
         if (!this.convoFavorNeedLive(favor)) {
           favor.state = 'moot';
           return `"Never mind ${favor.short} — we got it handled. Thanks anyway."`;
+        }
+        // INHERITED ASK (journey-succession 2026-10-11): the ask was the
+        // predecessor's — the first re-ask after the handoff names them.
+        // The deadline refreshes: it's a new ask of a new bearer. (Death
+        // reverts 'promised' favors to 'asked' — see playerDeath.)
+        const predA = (typeof this.inheritedName === 'function') ? this.inheritedName(favor) : null;
+        if (predA && !favor.inheritedAcked) {
+          favor.inheritedAcked = true;
+          try {
+            const kdef = (typeof FAVOR_KINDS !== 'undefined' && FAVOR_KINDS[favor.kind]) || {};
+            favor.deadline = day + (kdef.deadlineDays || 2);
+          } catch (e) {}
+          return `"I asked ${predA} about ${favor.short} — ${predA}'s gone. Still need hands. Are you in?"`;
         }
         // RE-ASK VARIETY (journey sociallife 2026-10-11): the uncommitted ask
         // recurs for as long as the need is live (days, from several
