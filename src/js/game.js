@@ -17312,6 +17312,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return this.tickAction(64) || this.status();
     },
 
+    // guideForPlant(pid): the garden-duty villager whose knowledge guides your
+    // hands when you sow a plant you haven't learned — the teaching event's
+    // teacher. Null when nobody on garden duty knows it. (break-it knowledge
+    // 2026-10-11 r4: guided sowing must route through a real teacher, not an
+    // anonymous 'experiment' grant.)
+    guideForPlant(pid) {
+      try {
+        const v = this.state.village || {};
+        for (const [vid, a] of Object.entries(v.assignments || {})) {
+          if (a && a.task === 'garden' && this.villagerKnowsPlants) {
+            if ((this.villagerKnowsPlants(vid) || []).indexOf(pid) !== -1) return vid;
+          }
+        }
+      } catch (e) {}
+      return null;
+    },
+
     // sowOptions(): seed-eligible plants in your pack — known (L1+),
     // gardenable form, 2+ units (one to eat, one to sow — seed stock).
     // VILLAGER-GUIDED (bal-survival 2026-10-10): a gardener on garden duty
@@ -17321,16 +17338,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     sowOptions() {
       const inv = (this.state.scholar || {}).inventory || [];
       const codex = (this.state.codex || {}).plants || {};
-      // garden-duty villagers whose knowledge guides your hands
-      const guides = new Set();
-      try {
-        const v = this.state.village || {};
-        for (const [vid, a] of Object.entries(v.assignments || {})) {
-          if (a && a.task === 'garden' && this.villagerKnowsPlants) {
-            for (const pid of (this.villagerKnowsPlants(vid) || [])) guides.add(pid);
-          }
-        }
-      } catch (e) {}
       const seen = {};
       const opts = [];
       for (const item of inv) {
@@ -17341,11 +17348,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!['shoots', 'berries', 'roots'].includes(form)) continue;
         const entry = codex[item.plantId];
         const playerKnows = entry && (entry.level || 0) >= 1;
-        if (!playerKnows && !guides.has(item.plantId)) continue;
+        // GUIDED (break-it knowledge 2026-10-11 r4): the guide is a specific
+        // person (guideForPlant), not an anonymous store — sowing under
+        // guidance is THEIR teaching event, with their fallibility.
+        const guide = playerKnows ? null : this.guideForPlant(item.plantId);
+        if (!playerKnows && !guide) continue;
         const units = inv.filter(i => i.plantId === item.plantId).reduce((s, i) => s + (i.units || 1), 0);
         if (units < 2) continue;
         seen[item.plantId] = true;
-        opts.push({ pid: item.plantId, name: plant.name, form, units, growthDays: this.gardenGrowthDays(form), kcalEach: plant.caloriesPerUnit, guided: !playerKnows });
+        // GUIDED NAME HONESTY (break-it knowledge 2026-10-11 r4): a plant
+        // you haven't learned shows its honest descriptor in the sow sheet,
+        // never the true name — the guide's hands are the promise, not a
+        // label. ("If you don't know, it doesn't show.") The name arrives at
+        // the teaching beat in sowPlot, through the real teaching primitive.
+        const guided = !playerKnows;
+        opts.push({ pid: item.plantId,
+          name: guided ? (plant.description || 'an unfamiliar plant') : plant.name,
+          form, units, growthDays: this.gardenGrowthDays(form),
+          kcalEach: guided ? null : plant.caloriesPerUnit,
+          guided, guide });
       }
       return opts;
     },
@@ -17372,8 +17393,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
       const plant = (this.data.plants || []).find(p => p.id === plantId) || {};
       this.say(`You sow ${opt.name} — ${this.pluralize(opt.growthDays, 'day')} to maturity, then a harvest every 3 days as long as you tend it daily. (Seed stock: 2 units. The garden teaches patience; the wild taught hunger.)`);
-      // sowing teaches: working seed is knowledge
-      try { this.grantKnowledge('plant', plantId, 1, { type: 'experiment', by: null }); } catch (e) {}
+      // GUIDED SOWING IS A LESSON (break-it knowledge 2026-10-11 r4): the old
+      // code granted instant L1 identification ('experiment', no teacher) for
+      // any guided plant — an identify-anything machine that bypassed every
+      // teaching gate (language, trust, teacher quality, wrong-knowledge
+      // counterplay). Now the guide genuinely teaches, through the real
+      // teaching primitive: good teachers land the name, poor teachers build
+      // familiarity toward the field-click, wrong teachers teach you wrong.
+      // Working seed is knowledge — but only through a person, like every
+      // other lesson. (A plant you already know teaches you nothing new.)
+      if (!this.plantKnown(plantId)) {
+        try {
+          const gvid = this.guideForPlant ? this.guideForPlant(plantId) : null;
+          if (gvid) {
+            const gname = this.displayName(gvid);
+            this.say(`${gname} works the row beside you — the seed, the depth, the spacing. Hands teaching hands.`);
+            this.teachPlant(gvid, plantId);
+          }
+        } catch (e) {}
+      }
       return this.tickAction(16) || this.status();
     },
 
@@ -17410,7 +17448,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
       const first = this.displayName(vid);
       try { this.villagerGainXP(vid, 'field', 1, 'gardening'); } catch (e) {}
-      return `${first} sowed ${best.name} in the empty plot — seed from the village stores.`;
+      // NAME HONESTY (break-it knowledge 2026-10-11 r4): the true name is L1
+      // knowledge — a gardener's work doesn't teach it to you by osmosis. The
+      // believed name (wrongAs) or the honest descriptor until you've learned
+      // it ("if you don't know, it doesn't show").
+      const shown = this.plantCalledName ? this.plantCalledName(best.pid) : best.name;
+      return `${first} sowed ${shown} in the empty plot — seed from the village stores.`;
     },
 
     // plotYieldKcal(plot): one harvest. Knowledge pays: L1 5000, +25%/level.
@@ -35667,24 +35710,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
     // plantKnownBy(vid, pid, vv): does this villager know this plant — from
-    // ANY source (background familiarity OR learned in-run)? THE knowledge
-    // check. (convo rebuild 2026-10-11: the union reader for the split
-    // stores. Old saves predate v.familiar — the || {} fallbacks keep them
-    // working through v.taught alone. vv: alternate village object for
-    // away-party sims; defaults to the live village.)
+    // ANY source? THE knowledge check.
+    // (convo rebuild 2026-10-11: background familiarity and in-run teaching
+    // no longer share one array. Old saves predate v.familiar — the || {}
+    // fallbacks keep them working through v.taught alone. vv: alternate
+    // village object for away-party sims; defaults to the live village.)
+    // UNION (break-it knowledge 2026-10-11 r4): a third store survived the
+    // split — v.plantKnowledge (occupation background, seeded by food.js's
+    // seedBackgroundPlantKnowledge). Without it in the union, a botanist
+    // whose background knows a plant "couldn't teach it" in conversation
+    // (teachPlant's check failed) while the same botanist sorted your bag by
+    // it and guided your sowing with it. The docstring always promised ANY
+    // source — now the engine keeps the promise.
     plantKnownBy(vid, pid, vv) {
       const v = vv || this.state.village;
       if (!v || !vid || !pid) return false;
       return (((v.familiar || {})[vid] || []).indexOf(pid) !== -1) ||
-        (((v.taught || {})[vid] || []).indexOf(pid) !== -1);
+        (((v.taught || {})[vid] || []).indexOf(pid) !== -1) ||
+        (((v.plantKnowledge || {})[vid] || []).indexOf(pid) !== -1);
     },
-    // plantsKnownBy(vid, vv): every plant id they know, either store, deduped.
+    // plantsKnownBy(vid, vv): every plant id they know, from ANY store,
+    // deduped. (break-it knowledge 2026-10-11 r4: added the legacy
+    // v.plantKnowledge occupation-background store to the union — see
+    // plantKnownBy. Without it, background experts were invisible here.)
     plantsKnownBy(vid, vv) {
       const v = vv || this.state.village;
       if (!v || !vid) return [];
-      const f = (v.familiar || {})[vid] || [], t = (v.taught || {})[vid] || [];
+      const f = (v.familiar || {})[vid] || [], t = (v.taught || {})[vid] || [],
+        pk = (v.plantKnowledge || {})[vid] || [];
       const out = [];
-      for (const pid of f.concat(t)) if (out.indexOf(pid) === -1) out.push(pid);
+      for (const pid of f.concat(t).concat(pk)) if (out.indexOf(pid) === -1) out.push(pid);
       return out;
     },
     // playerTaughtPlants(vid): plants the PLAYER personally taught this

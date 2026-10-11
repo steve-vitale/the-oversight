@@ -1264,11 +1264,25 @@
       return this.atPlayerCamp ? this.atPlayerCamp() : false;
     },
 
-    // villagerKnowsPlants(vid): background knowledge — the seed that breaks
-    // the chicken-and-egg. Someone arrived knowing things.
+    // villagerKnowsPlants(vid): every plant this villager knows — the UNION of
+    // home-region familiarity (v.familiar, seeded in game.js newGame),
+    // in-run learning (v.taught, via villagerLearnsPlant), and occupation
+    // background (v.plantKnowledge, seedBackgroundPlantKnowledge in this
+    // file). THE villager knowledge read.
+    // (break-it knowledge 2026-10-11 r4: this read ONLY plantKnowledge while
+    // conversation's plantKnownBy read only familiar/taught — so a botanist
+    // could sort your bag and guide your sowing by a plant they "couldn't
+    // teach you" in conversation, and a region-familiar local could teach in
+    // talk but not sort or guide. One split, two contradictory villagers.)
     villagerKnowsPlants(vid) {
       const v = this.state.village;
-      return (v && v.plantKnowledge && v.plantKnowledge[vid]) || [];
+      if (!v || !vid) return [];
+      const out = [];
+      for (const store of [v.familiar, v.taught, v.plantKnowledge]) {
+        const list = (store || {})[vid] || [];
+        for (const pid of list) if (out.indexOf(pid) === -1) out.push(pid);
+      }
+      return out;
     },
 
     // seedBackgroundPlantKnowledge: the 12 arrive with what they know.

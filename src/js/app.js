@@ -1076,26 +1076,29 @@
   }
 
   // SOW SHEET (depletion 2026-10-10): seed choice is knowledge — the player
-  // picks which known crop to sow, with honest growth times. Only
-  // seed-eligible plants list (Game.sowOptions gates: L1+, gardenable form,
-  // 2+ units). Sowing costs 2 units of seed stock.
+  // picks which crop to sow, with honest growth times. Seed-eligible: L1+
+  // gardenable plants with 2+ units, OR guided plants (a gardener on duty
+  // who knows it works the row beside you — their lesson, their fallibility;
+  // break-it knowledge 2026-10-11 r4). Guided-unlearned plants show their
+  // honest descriptor, never the true name ("if you don't know, it doesn't
+  // show"). Sowing costs 2 units of seed stock.
   function openSowSheet() {
     let opts = [];
     try { opts = Game.sowOptions() || []; } catch (e) { opts = []; }
     if (!opts.length) {
-      Game.say('Nothing to sow — you need 2+ units of a KNOWN gardenable plant (shoots, berries, roots). Forage it, learn it, save seed.');
+      Game.say('Nothing to sow — you need 2+ units of a gardenable plant (shoots, berries, roots) you KNOW, or a gardener on duty who knows it. Forage it, learn it, save seed.');
       refresh();
       return;
     }
     const rows = opts.map(o =>
-      `<div class="sow-row"><b>${esc(o.name)}</b> <span class="small" style="opacity:.7">${esc(o.form)} · ${Game.pluralize(o.growthDays, 'day')} to mature · ${Game.pluralize(o.units, 'unit')} in pack</span></div>`
+      `<div class="sow-row"><b>${esc(o.name)}</b>${o.guided ? ' <span class="small" style="opacity:.7">(guided)</span>' : ''} <span class="small" style="opacity:.7">${esc(o.form)} · ${Game.pluralize(o.growthDays, 'day')} to mature · ${Game.pluralize(o.units, 'unit')} in pack</span></div>`
     ).join('');
     openSheet({
       id: 'sow-seeds',
       title: '\uD83C\uDF31 Sow seeds',
       html: `<p class="small" style="opacity:.8">One empty plot, one crop. Sowing costs 2 units of seed stock. Deeper plant knowledge = bigger harvests.</p>${rows}`,
       buttons: opts.map(o => ({
-        label: `Sow ${o.name}`,
+        label: `Sow ${o.name}${o.guided ? ' (guided)' : ''}`,
         onClick: () => { Game.sowPlot(o.pid); refresh(); },
       })),
     });
