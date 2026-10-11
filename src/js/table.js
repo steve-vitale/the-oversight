@@ -372,11 +372,30 @@
       T.path = pathId; T.phase = 'challenge'; T.beat = 0;
       T.meters = {}; T.branch = branch.branch; T.branchNotes = branch.notes;
       T.weakened = T.weakened | 0;
+      T.abils = []; T.abilMods = {};
+      // Path abilities: mostly shared + several branch-unique. Granted
+      // aloud at the door; grant effects are immediate and honest.
+      const ab = def.abilities || {};
+      const grantList = (list) => (list || []).forEach(a => {
+        T.abils.push(a.id);
+        try {
+          const e = (typeof a.grant === 'function') ? a.grant.call(this, T) : a.grant;
+          for (const k of Object.keys(e || {})) {
+            if (k === 'abilMods') Object.assign(T.abilMods, e.abilMods);
+            else if (k !== 'grounding' && k !== 'sysBond') T.meters[k] = (T.meters[k] | 0) + (e[k] | 0);
+          }
+        } catch (e2) {}
+        this.say(`◈ ABILITY — ${a.name}: ${a.desc}`);
+      });
+      grantList(ab.shared); grantList(ab[T.branch] || ab.light);
       const seat = this.tableSeat();
       // The show component: televised in the path's genre.
       this.tableLiveWrap(def.showLive);
       this.say(`◈ ${def.name.toUpperCase()} — ${def.openLine}`);
-      if (branch.notes.length) this.say(`The table has read your ledger. ${branch.notes.join('; ')}. The ${branch.branch} road is open.`);
+      if (branch.notes.length) {
+        const noteStr = branch.notes.join('; ');
+        this.say(`The table has read your ledger. ${noteStr.charAt(0).toUpperCase() + noteStr.slice(1)}. The ${branch.branch} road is open.`);
+      }
       try { this.metaNoteTable && this.metaNoteTable(pathId); } catch (e) {}
       this.tableRunBeat();
       try { this.save(); } catch (e) {}
@@ -392,7 +411,8 @@
       try { lines = (typeof beat.say === 'function' ? beat.say.call(this, T) : beat.say) || []; } catch (e) {}
       const prompt = lines.map(l => `<p>${this.escHtml(l)}</p>`).join('') +
         (beat.meterLine ? `<p><i>${this.escHtml(typeof beat.meterLine === 'function' ? beat.meterLine.call(this, T) : beat.meterLine)}</i></p>` : '');
-      const options = (beat.choices || []).map(c => ({ id: 'beat:' + c.id, label: c.label }));
+      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const options = chList.map(c => ({ id: 'beat:' + c.id, label: c.label }));
       this.tablePrompt(prompt, options, def.name);
     },
 
@@ -403,11 +423,18 @@
       const beatId = (id.indexOf('beat:') === 0) ? id.slice(5) : id;
       const beat = (def.beats || [])[T.beat];
       if (!beat) return;
-      const choice = (beat.choices || []).find(c => c.id === beatId);
+      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const choice = chList.find(c => c.id === beatId);
       if (!choice) return;
-      // Apply meter/effect deltas.
+      // Apply meter/effect deltas. Ability mods (e.g. oathbound halves
+      // horror gains) apply to positive gains only.
       T.meters = T.meters || {};
       const eff = (typeof choice.effects === 'function' ? choice.effects.call(this, T) : choice.effects) || {};
+      if (T.abilMods) {
+        for (const k of Object.keys(eff)) {
+          if (eff[k] > 0 && T.abilMods[k + 'Mult']) eff[k] = Math.max(0, Math.floor(eff[k] * T.abilMods[k + 'Mult']));
+        }
+      }
       for (const k of Object.keys(eff)) {
         if (k === 'grounding') { this.addGrounding(eff[k], 'the table'); continue; }
         if (k === 'sysBond') { this.addSysBond(eff[k]); continue; }
@@ -419,6 +446,9 @@
       }
       // Branch twist beats can divert here (path defs return {fail}).
       if (eff.fail) { this.tableFail(eff.fail); return; }
+      // Trial by combat (feared path): the challenge pauses — the fight is
+      // real, on the grid, right now. tbEnd resumes the table.
+      if (eff.trial && typeof this.tableTrialByCombat === 'function') { this.tableTrialByCombat(); return; }
       if (eff.goto != null) { T.beat = eff.goto; }
       else T.beat = (T.beat | 0) + 1;
       if (T.beat >= (def.beats || []).length) { this.tableFinals(); return; }
@@ -441,10 +471,21 @@
       if (!remaining.length) {
         // No path left: the honest rock-bottom — Assimilated on the
         // table's terms, or the walk with nothing. The story still ends.
+        // (Guarded: in production all seven paths register, so a missing
+        // assimilated def means the test rig is thin — end plainly rather
+        // than stranding the challenge.)
         this.say('No doors remain open. The table makes its final offer: comfort, on its terms — or the long walk with empty hands.');
-        T.path = 'assimilated'; T.phase = 'challenge'; T.beat = 0; T.meters = {};
         const ad = pathDef('assimilated');
-        if (ad) { this.say(`◈ ${ad.name.toUpperCase()} — ${ad.openLine}`); this.tableRunBeat(); }
+        if (ad) {
+          T.path = 'assimilated'; T.phase = 'challenge'; T.beat = 0; T.meters = {};
+          this.say(`◈ ${ad.name.toUpperCase()} — ${ad.openLine}`);
+          this.tableRunBeat();
+        } else {
+          this.say('You take the comfort. It is gentle. It is a trap. It is an ending — the story resolves, which is more than the void offered.');
+          T.phase = 'done';
+          this.over = true; this.won = true;
+          try { this.wipe(); } catch (e) {}
+        }
         try { this.save(); } catch (e) {}
         return;
       }

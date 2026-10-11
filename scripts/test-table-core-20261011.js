@@ -154,6 +154,8 @@ Game.tableRegisterPath({
 
   console.log('— table scene: audit + path selection —');
   resetTable();
+  // Isolate: zero the ledger so only the synthetic test paths are earned.
+  Game.progState().ledger = { might: 0, brokerage: 0, showmanship: 0, embrace: 0, defiance: 0, exposed: 0, unified: 0, fractured: 0, foodShared: 0, foodHoarded: 0, protected: 0, killed: 0, betrayed: 0 };
   Game.tableScene();
   let tc = Game.state.scholar.tableChoices;
   ok(!!tc && tc.options.length === 2, 'two earned test paths offered', 'options=' + (tc && tc.options.length));
