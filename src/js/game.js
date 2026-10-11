@@ -6373,9 +6373,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`\u{1F4AC} ${ev.title}`);
         this.say(ev.desc);
         if (ev.id === 'system_arrival_discussion') {
-          this.say('Mara: "The sky just... opened. And something talked to us. It said it was sorry. SORRY for what?!"');
-          this.say('Jesse: "It offered me something. A... gift? I said no. I don\'t trust gifts from the sky."');
-          this.say('Aki: "..." (Aki hasn\'t spoken since it happened.)');
+          // Beat cast: three distinct real villagers react, in their own
+          // names (the System labeled everyone on arrival). Never phantoms.
+          const dcast = this._beatCast(3);
+          const dtag = (i) => {
+            const nm = dcast[i] ? this.displayName(dcast[i]) : 'Someone';
+            return nm.charAt(0).toUpperCase() + nm.slice(1);
+          };
+          this.say(`${dtag(0)}: "The sky just... opened. And something talked to us. It said it was sorry. SORRY for what?!"`);
+          this.say(`${dtag(1)}: "It offered me something. A... gift? I said no. I don't trust gifts from the sky."`);
+          this.say(`${dtag(2)}: "..." (${dtag(2)} hasn't spoken since it happened.)`);
           this.say('The village looks to you. You\'re the scholar. You\'re supposed to know things.');
         }
       }
@@ -6514,9 +6521,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (this.won) {
         this.say(`You walk back into Haven with ${Math.round(brought)} kcal of food and ${this.pluralize(entries, 'Codex entry', 'Codex entries')}. The pantry is fuller than when you left.`);
-        this.say(`Mara: "Seven days. Thinner and smarter."`);
-        this.say(`Jesse: "Back. That's the whole test, really."`);
-        this.say(hasGreens ? `Aki: "You brought something green! I knew it."` : `Aki: "You're back. That's enough."`);
+        // Beat cast: the greeters are real villagers, in their own names.
+        const wcast = this._beatCast(3);
+        const wtag = (i) => {
+          const nm = wcast[i] ? this.displayName(wcast[i]) : 'Someone';
+          return nm.charAt(0).toUpperCase() + nm.slice(1);
+        };
+        this.say(`${wtag(0)}: "Seven days. Thinner and smarter."`);
+        this.say(`${wtag(1)}: "Back. That's the whole test, really."`);
+        this.say(hasGreens ? `${wtag(2)}: "You brought something green! I knew it."` : `${wtag(2)}: "You're back. That's enough."`);
       }
       else if (s.health <= 0) {
         // DEATH-PATH INVARIANT (break-it persistence-2 2026-10-08): every
@@ -6541,7 +6554,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // table (the village's ending) or the village dying out.
         if (entries >= 10 && this.pantryKcalLive(this.state.village) >= 8000 && !this.state.village.havenSecured) {
           this.state.village.havenSecured = true;
-          this.say('Mara looks at the pantry, then at the Codex, then at you. "We\u2019re going to make it." Haven will survive \u2014 because someone learned the land, and wrote it down. One less thing to fear.');
+          // Beat cast: the milestone voice belongs to a real villager.
+          const mcast = this._beatCast(1)[0];
+          let mwho = mcast ? this.firstRef(mcast) : 'someone';
+          mwho = mwho.charAt(0).toUpperCase() + mwho.slice(1);
+          this.say(`${mwho} looks at the pantry, then at the Codex, then at you. "We\u2019re going to make it." Haven will survive \u2014 because someone learned the land, and wrote it down. One less thing to fear.`);
           try { this.ledgerAdd('unified', 2); this.ledgerAdd('showmanship', 1); } catch (e) {}
         }
       }
@@ -13491,6 +13508,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // displayName: THE funnel. Names pre-System only if earned socially.
     displayName(vid) {
+      // YOU KNOW YOUR OWN NAME (playtest 2026-10-11, landing leg): the arrival
+      // text announces the player's full name and occupation, so gating the
+      // player's own displayName behind nameKnown ("A person, maybe 50s" at
+      // spawn) was incoherent. Knowledge gating is for OTHER people.
+      if (vid && vid === this.villagerId) return this.npcName(vid);
       if (this.state.systemArrived || this.nameKnown(vid)) return this.npcName(vid);
       return this.personDescriptor(vid);
     },
@@ -13526,6 +13548,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // fallback: descriptor without the leading "A"
       try { return this.personDescriptor(vid).replace(/^A /, 'the '); } catch (e) {}
       return 'someone';
+    },
+    // BEAT CAST (playtest 2026-10-11, landing leg): scripted beats used to
+    // hardcode "Mara"/"Jesse"/"Aki" — a fixed cast that doesn't exist in the
+    // generated 12-person roster (unique-person law: never hardcode a fixed
+    // cast). Returns n distinct living non-player villagers for beat dialogue;
+    // callers render them via displayName/firstRef so knowledge gating stays
+    // honest (post-arrival the System labels everyone, so true names land).
+    _beatCast(n) {
+      try {
+        const v = this.state.village || {};
+        const pool = (v.roster || []).filter(id =>
+          id !== this.villagerId && !((this.getPerson(id) || {}).dead));
+        const out = [];
+        while (out.length < (n || 1) && pool.length)
+          out.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+        return out;
+      } catch (e) { return []; }
     },
 
     // ============ GOALS ============
@@ -16380,6 +16419,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const startDay = s.day, startKcal = Math.round(s.kcal || 0);
       const healthBefore = Math.round(s.health || 0);
+      // BEDTIME BODY (playtest 2026-10-11, landing leg): the metabolic-crisis
+      // gate below is documented as a BEDTIME gate ("running on empty ... at
+      // bedtime") and the UI warns "drink and eat before you sleep" — but it
+      // read s.hydration/s.kcal AFTER the sleep loop, i.e. after endDay burned
+      // the night's metabolism (~58 hydration on a neutral day). One drink at
+      // bedtime (+50) burned to ~0 overnight, so the midnight spiral took its
+      // cut AND the dawn crisis fired: double punishment for one night, ~5
+      // HP/day bleed for a diligent player. (The dawn meal could likewise
+      // MASK bedtime starvation.) Capture the bedtime body the same way
+      // nightWeather/fireLasts are captured below: the gate grades what you
+      // went to bed with; the spiral keeps its midnight cut.
+      const bedHydration = Math.round(s.hydration || 0);
       // DIAGNOSTIC (Steve 2026-10-05): partner reports no healing from sleep.
       // Log health before/after to console for debugging.
       if (typeof console !== 'undefined') console.log(`[SLEEP] health before: ${healthBefore}, quality: ${prev.quality}, heal: ${prev.heal}, hydration: ${s.hydration}, kcal: ${s.kcal}`);
@@ -16458,12 +16509,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         // METABOLIC CRISIS (survivalist loop 2026-10-05): a body running on
         // empty does not recover in sleep. Dehydrated (hydration 0) or starving
-        // (kcal 0) at bedtime — the spiral already took its cut in endDay —
-        // and shelter can't paper over it: healing halved, a wrung-out
-        // half-rest (energy only to 60). Water and food first; rest second.
-        // (Before this, any shelter sleep fully erased the spiral: -15/+20
-        // netted positive at the hall, so the DEHYDRATED warning was a lie.)
-        const crisis = (s.hydration || 0) <= 0 || (s.kcal || 0) <= 0;
+        // (kcal 0) AT BEDTIME — graded on the bedtime body (bedHydration /
+        // startKcal, captured at sleep start), not the dawn body: the night's
+        // metabolism and the dawn meal both move the numbers mid-sleep, and
+        // the spiral already took its cut in endDay. Shelter can't paper over
+        // it: healing halved, a wrung-out half-rest (energy only to 60).
+        // Water and food first; rest second. (2026-10-11: gate was reading the
+        // post-burn dawn body — one bedtime drink still woke in crisis.)
+        const crisis = bedHydration <= 0 || startKcal <= 0;
         // DISEASE (Steve 2026-10-09): fever burns through rest. The sick heal
         // slower and wake less restored — sickness degrades everything.
         const dDb = this.diseaseDebuffs ? this.diseaseDebuffs('scholar') : null;
@@ -19280,15 +19333,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const hx = this.state.village.px ?? 4, hy = this.state.village.py ?? 4;
         const atHaven = this.map && this.map.px === hx && this.map.py === hy;
         if (!atHaven) {
+          // Beat cast, not phantoms: the old text hardcoded Mara/Jesse/Aki.
+          const acast = this._beatCast(3);
+          const anm = (i) => acast[i] ? this.firstRef(acast[i]) : 'someone';
           s.pendingVillageEvent = {
             id: 'system_arrival_discussion',
             title: 'The village saw the sky split.',
-            desc: 'You were out when it happened. When you return, everyone\'s talking at once. Mara\'s crying. Jesse\'s laughing. Aki hasn\'t said a word.',
+            desc: `You were out when it happened. When you return, everyone's talking at once. ${anm(0)} is crying. ${anm(1)} is laughing. ${anm(2)} hasn't said a word.`,
           };
           this.say('(You\'re not at Haven. The village is experiencing this without you. Return to hear what happened.)');
         } else {
-          // You were there. Witness it together.
-          this.say('🧑‍🤝‍🧑 The village gathers. Everyone\'s journal is changing. Everyone hears the voice. Mara grabs your arm. "Tell me you hear that too."');
+          // You were there. Witness it together — the one who trusts you most
+          // reaches for you. A real villager, never a hardcoded phantom.
+          const hcast = this._beatCast(12);
+          let reacher = hcast[0], best = -1;
+          for (const rid of hcast) {
+            const t = ((this.state.village.trust || {})[rid] || 0);
+            if (t > best) { best = t; reacher = rid; }
+          }
+          const who = reacher ? this.displayName(reacher) : 'Someone';
+          this.say(`🧑‍🤝‍🧑 The village gathers. Everyone's journal is changing. Everyone hears the voice. ${who} grabs your arm. "Tell me you hear that too."`);
         }
       }
     },
