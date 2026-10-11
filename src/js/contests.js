@@ -189,13 +189,22 @@
       if (!this.isMember(rid)) { out('not a member in good standing'); continue; }
       const vpos = (v.positions || {})[rid];
       if (!vpos) {
-        // Grid positions only exist for NPCs on your node — a villager out
-        // in the world (expedition, another node) has none. Say which.
-        const np = (v.nodePos || {})[rid];
+        // Grid positions only exist for NPCs on your node — but positions
+        // are RENDER state, cleared for everyone not on the player's node
+        // (game.js). An exiled or traveling player is off-node, so the whole
+        // village loses grid squares while standing at Haven. "No grid
+        // square" is not "not at Haven": the authority is npcNode(), which
+        // defaults home to Haven. Only the genuinely away are out —
+        // otherwise an overnight exile empties the recast pool and the System
+        // cancels with "no one left to take" while eleven living villagers
+        // stand at Haven (journey deepening r2, 2026-10-11).
+        let n = null;
+        try { n = this.npcNode(rid); } catch (e) {}
         const hnX = v.px ?? 4, hnY = v.py ?? 4;
-        const away = (v.away || {})[rid] || (np && (np.nx !== hnX || np.ny !== hnY));
-        out(away ? 'away from Haven' : 'unaccounted for');
-        continue;
+        const away = (v.away || {})[rid] || (n && (n.nx !== hnX || n.ny !== hnY));
+        if (away) { out('away from Haven'); continue; }
+        // At Haven, off-camera — eligible. The System doesn't need a grid
+        // square to take someone.
       }
       const age = (vp && typeof vp.age === 'number') ? vp.age : 30;
       if (age < 15) { out('too young'); continue; }    // children stay

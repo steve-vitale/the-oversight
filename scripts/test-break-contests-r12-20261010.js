@@ -247,7 +247,12 @@ sec('HONESTY H2 — eligibility: who can go, AND WHY (K2)');
   try { const vp = Game.vpOf(vOld); if (vp) vp.age = 80; } catch (e) {}
   V.health[vWound] = 15;
   try { const vp = Game.vpOf(vDead); if (vp) vp.dead = true; } catch (e) {}
-  delete V.positions[vOk]; // positionless at Haven: unaccounted for
+  // EXILE FIX (journey deepening r2, 2026-10-11): positionless at Haven is no
+  // longer "unaccounted for" — positions are render state, cleared whenever
+  // the player is off-node (exile/travel). npcNode() defaults home to Haven,
+  // so an off-camera villager at Haven is eligible; only the genuinely away
+  // are out. The old assertion codified the render-state leak.
+  delete V.positions[vOk]; // positionless at Haven: eligible (off-camera, home)
   V.nodePos = V.nodePos || {};
   const vAway = vills[7];
   delete V.positions[vAway]; V.nodePos[vAway] = { nx: 5, ny: 5 }; // out in the world
@@ -261,11 +266,12 @@ sec('HONESTY H2 — eligibility: who can go, AND WHY (K2)');
   ok('H2 elder out with reason', !ids.includes(vOld) && /old/.test(outById[vOld] || ''), outById[vOld]);
   ok('H2 gravely wounded out with reason', !ids.includes(vWound) && /wounded/.test(outById[vWound] || ''), outById[vWound]);
   ok('H2 dead-on-roster out with reason', !ids.includes(vDead) && /dead/.test(outById[vDead] || ''), outById[vDead]);
-  ok('H2 positionless villager out with reason', !ids.includes(vOk) && /unaccounted/.test(outById[vOk] || ''), outById[vOk]);
+  ok('H2 positionless-at-Haven villager eligible (off-camera, not away)', ids.includes(vOk) && !outById[vOk], `eligible=${ids.includes(vOk)} out=${outById[vOk]}`);
   ok('H2 away-from-Haven villager out with reason', !ids.includes(vAway) && /away from Haven/.test(outById[vAway] || ''), outById[vAway]);
-  // eligible set unchanged by the reporting (no one lost, no one gained)
+  // eligible set unchanged by the reporting (no one lost, no one gained) —
+  // vOk is eligible now (exile fix), so it leaves the excluded list.
   ok('H2 every excluded on-roster person is reported (none silently dropped)',
-    [vSev, vYoung, vOld, vWound, vDead, vOk, vAway].every(id => outById[id]));
+    [vSev, vYoung, vOld, vWound, vDead, vAway].every(id => outById[id]));
   // player exclusion reasons
   Game.state.scholar.exiled = true;
   const r2 = Game.contestEligible();
