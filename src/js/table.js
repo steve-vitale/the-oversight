@@ -440,6 +440,10 @@
         if (k === 'sysBond') { this.addSysBond(eff[k]); continue; }
         T.meters[k] = (T.meters[k] | 0) + (eff[k] | 0);
       }
+      // Meter floors (e.g. standing-o: genuine love can't crater).
+      if (T.meterFloors) for (const k of Object.keys(T.meterFloors)) {
+        if ((T.meters[k] | 0) < T.meterFloors[k]) T.meters[k] = T.meterFloors[k];
+      }
       if (choice.say) {
         const ls = typeof choice.say === 'function' ? choice.say.call(this, T) : choice.say;
         (Array.isArray(ls) ? ls : [ls]).forEach(l => this.say(l));
