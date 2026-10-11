@@ -1197,7 +1197,7 @@
       choices: [
         { label: 'Stand by it', sub: 'yes, too loud', end: 'won', note: '"Yes. Too loud." The alien wilts. The audience — which has also thought it — erupts. Complaints triple by morning.', do: { fanLane: { n: 2, why: 'stood by the complaint' }, notability: 'showmanship' } },
         { label: 'Soften it live', sub: 'diplomacy, on camera', end: 'mixed', note: '"What I meant was, the loudness has... character." The alien perks up. The audience boos the softening and loves you for the kindness, both at once.', do: { unity: 1, fanLane: { n: 1, why: 'the softened complaint' } } },
-        { label: 'File another one', sub: 'right now, on air', end: 'won', note: 'You pull out a SECOND complaint and read it yourself. "The chairs." The alien sits down, wounded, in the chair in question. The galaxy howls.', do: { trauma: 3, fanLane: { n: 2, why: 'the second complaint' } } },
+        { label: 'File another one', sub: 'right now, on air — 3 trauma', end: 'won', note: 'You pull out a SECOND complaint and read it yourself. "The chairs." The alien sits down, wounded, in the chair in question. The galaxy howls.', do: { trauma: 3, fanLane: { n: 2, why: 'the second complaint' } } },
       ],
       win: `The complaint box overflows for a week. The show gets quieter. The chairs get better. You did that.`,
       lose: ``,
@@ -1207,8 +1207,8 @@
       setup: `📺 Hot Take — defend a food opinion on live television.\n\nYour position: soup is a beverage. The galaxy has thoughts. The galaxy is wrong. Prove it.`,
       choices: [
         { label: 'Argue with science', sub: 'kcal as rhetoric', end: 'won', note: 'You cite viscosity, serving temperature, vessel design. The science is sound. The galaxy is furious. The galaxy is also taking notes.', do: { fanLane: { n: 2, why: 'the soup thesis' } } },
-        { label: 'Argue with passion', sub: 'weep about broth', end: 'mixed', note: 'You weep, actually weep, about a broth from your childhood. The panel doesn\'t know what to do. The audience does: it cries with you.', do: { trauma: 2, fanLane: { n: 3, why: 'the broth tears' } } },
-        { label: 'Concede', sub: 'soup is food, fine', end: 'lost', note: 'You concede at the first commercial break. "Fine. Soup is food." The galaxy wins. Your village will never let you hear the end of it.', do: { trauma: 4, fanLane: { n: -1, why: 'conceded the soup' } } },
+        { label: 'Argue with passion', sub: 'weep about broth — 2 trauma', end: 'mixed', note: 'You weep, actually weep, about a broth from your childhood. The panel doesn\'t know what to do. The audience does: it cries with you.', do: { trauma: 2, fanLane: { n: 3, why: 'the broth tears' } } },
+        { label: 'Concede', sub: 'soup is food, fine — 4 trauma', end: 'lost', note: 'You concede at the first commercial break. "Fine. Soup is food." The galaxy wins. Your village will never let you hear the end of it.', do: { trauma: 4, fanLane: { n: -1, why: 'conceded the soup' } } },
       ],
       win: `The soup thesis is taught, debated, memed. Beverage. The galaxy knows it now.`,
       lose: `The concession airs. "Fine. Soup is food." Four words that follow you forever.`,
@@ -1217,9 +1217,9 @@
     who_farted: {
       setup: `📺 Who Farted? — a full forensic investigation, televised.\n\nEvidence boards. Suspect interviews. Airflow modeling. It was you. Everyone will know by the end of the hour. The only question is how.`,
       choices: [
-        { label: 'Confess early', sub: 'efficient dignity loss', end: 'mixed', note: '"It was me." Eleven minutes in. The investigators are furious — they had forty more minutes of content. The audience respects the efficiency.', do: { trauma: 3, fanLane: { n: 2, why: 'the early confession' } } },
+        { label: 'Confess early', sub: 'efficient dignity loss — 3 trauma', end: 'mixed', note: '"It was me." Eleven minutes in. The investigators are furious — they had forty more minutes of content. The audience respects the efficiency.', do: { trauma: 3, fanLane: { n: 2, why: 'the early confession' } } },
         { label: 'Run a real investigation', sub: 'frame the wind', end: 'won', note: 'You build the case against the wind with total commitment — diagrams, witness testimony, a reenactment. The wind is convicted. You walk free.', do: { fanLane: { n: 3, why: 'the wind did it' } } },
-        { label: 'Blame the System', sub: 'it was the aliens', end: 'lost', note: '"The System did it." The System heard. The System replays the audio with enhancement. The System is very good at audio.', do: { trauma: 4, fanLane: { n: -1, why: 'blamed the System' } } },
+        { label: 'Blame the System', sub: 'it was the aliens — 4 trauma', end: 'lost', note: '"The System did it." The System heard. The System replays the audio with enhancement. The System is very good at audio.', do: { trauma: 4, fanLane: { n: -1, why: 'blamed the System' } } },
       ],
       win: `The wind is formally charged. You are exonerated on every screen in the galaxy. Justice is served.`,
       lose: `The enhanced audio airs. There is no coming back from enhanced audio.`,
@@ -1228,8 +1228,8 @@
     stare_down: {
       setup: `📺 The Stare-Down — out-stare an alien champion.\n\nBlinking is defeat. The champion has four eyelids and no mercy. Seventeen systems are watching both faces.`,
       choices: [
-        { label: 'Do not blink', sub: 'become the stare', end: 'won', note: 'You do not blink for six minutes. Your eyes water. The champion\'s fourth eyelid twitches — once — and that\'s enough. The galaxy erupts.', do: { trauma: 4, fanLane: { n: 3, why: 'won the Stare-Down' } } },
-        { label: 'Blink strategically', sub: 'a tactical blink', end: 'lost', note: 'You blink at minute two and call it strategy. The champion does not call it strategy. Nobody calls it strategy.', do: { trauma: 2, fanLane: { n: 1, why: 'the tactical blink' } } },
+        { label: 'Do not blink', sub: 'become the stare — 4 trauma', end: 'won', note: 'You do not blink for six minutes. Your eyes water. The champion\'s fourth eyelid twitches — once — and that\'s enough. The galaxy erupts.', do: { trauma: 4, fanLane: { n: 3, why: 'won the Stare-Down' } } },
+        { label: 'Blink strategically', sub: 'a tactical blink — 2 trauma', end: 'lost', note: 'You blink at minute two and call it strategy. The champion does not call it strategy. Nobody calls it strategy.', do: { trauma: 2, fanLane: { n: 1, why: 'the tactical blink' } } },
         { label: 'Make them laugh first', sub: 'unhinged offense', end: 'mixed', note: 'You cross your eyes. The champion\'s composure cracks — a sound like a dropped chandelier. You lose on a technicality and win the crowd outright.', do: { fanLane: { n: 2, why: 'broke the champion' } } },
       ],
       win: `Six minutes, no blinks. The champion requests a rematch. Your eyes take a day to forgive you.`,
@@ -1240,8 +1240,8 @@
       setup: `📺 Cribs: Burrow Edition — the aliens are touring your shelter.\n\nThey are horrified. Then delighted. Then they "improve" one thing. You get to watch.`,
       choices: [
         { label: 'Give the tour proudly', sub: 'this is my home', end: 'won', note: '"And THIS is where I keep the good rocks." Your pride is so total the aliens are charmed despite themselves. The episode is wholesome. Nobody expected wholesome.', do: { fanLane: { n: 2, why: 'the proud tour' } } },
-        { label: 'Hide the embarrassing shelf', sub: 'too late', end: 'mixed', note: 'You try to block the shelf. The camera drone goes around you. The shelf — its contents, its organization system — airs in 4K. The chat is kind. The chat is devastating.', do: { trauma: 3, fanLane: { n: 2, why: 'the shelf' } } },
-        { label: 'Let them improve it', sub: 'whatever they do', end: 'lost', note: 'They "improve" your bed into a sculpture. It is beautiful. It is unusable. You must live in it for a week. The galaxy watches you try.', do: { trauma: 2, fanLane: { n: 1, why: 'the sculpture bed' } } },
+        { label: 'Hide the embarrassing shelf', sub: 'too late — 3 trauma', end: 'mixed', note: 'You try to block the shelf. The camera drone goes around you. The shelf — its contents, its organization system — airs in 4K. The chat is kind. The chat is devastating.', do: { trauma: 3, fanLane: { n: 2, why: 'the shelf' } } },
+        { label: 'Let them improve it', sub: 'whatever they do — 2 trauma', end: 'lost', note: 'They "improve" your bed into a sculpture. It is beautiful. It is unusable. You must live in it for a week. The galaxy watches you try.', do: { trauma: 2, fanLane: { n: 1, why: 'the sculpture bed' } } },
       ],
       win: `The good rocks get their own fan following. Your shelter is declared "aspirational." You laugh for a week.`,
       lose: `The sculpture bed. Seven nights. The galaxy watches you sleep on art. Your back files a complaint.`,
@@ -1252,7 +1252,7 @@
       choices: [
         { label: 'Your real talent', sub: 'the true thing', end: 'won', note: 'You do the thing you\'re actually good at. The judges have no frame for it — so they feel it instead. Confusion, then delight, then the loudest almost-applause of the night.', do: { fanLane: { n: 3, why: 'the real talent' }, notability: 'showmanship' } },
         { label: 'A talent you invented', sub: 'tonight only', end: 'mixed', note: 'You invent "competitive pebble admiration" on the spot. The judges can\'t tell it\'s new. The audience can, and loves the audacity.', do: { fanLane: { n: 2, why: 'pebble admiration' } } },
-        { label: 'Stage fright, televised', sub: 'freeze', end: 'lost', note: 'You freeze. Full, total, televised freeze. The judges wait. The galaxy waits. You bow and walk off to the kindest applause ever given.', do: { trauma: 6, fanLane: { n: 1, why: 'the brave freeze' } } },
+        { label: 'Stage fright, televised', sub: 'freeze — 6 trauma', end: 'lost', note: 'You freeze. Full, total, televised freeze. The judges wait. The galaxy waits. You bow and walk off to the kindest applause ever given.', do: { trauma: 6, fanLane: { n: 1, why: 'the brave freeze' } } },
       ],
       win: `The judges demand an encore. You give one. Pebble admiration gets its own episode.`,
       lose: `The freeze is the clip — but the applause is real. Strangers write to say the freeze helped them.`,
@@ -1261,8 +1261,8 @@
     lost_found: {
       setup: `📺 Lost & Found — the System returns something you lost years ago.\n\nIt's yours. From before all this. It is not quite the same as you remember. Nobody says why.`,
       choices: [
-        { label: 'Take it back', sub: 'it\'s yours', end: 'mixed', note: 'You take it. It\'s heavier than you remember, or you\'re weaker, or both. The difference — the not-quite-sameness — sits in your chest all episode.', do: { trauma: 3, prize: true, fanLane: { n: 2, why: 'reclaimed the lost thing' } } },
-        { label: 'Ask what changed', sub: 'demand answers', end: 'lost', note: '"What did you DO to it?" The System changes the subject with enormous skill. The audience notices the dodge. You don\'t get answers. You get a segment.', do: { trauma: 4, fanLane: { n: 1, why: 'asked too much' } } },
+        { label: 'Take it back', sub: 'it\'s yours — 3 trauma, prize', end: 'mixed', note: 'You take it. It\'s heavier than you remember, or you\'re weaker, or both. The difference — the not-quite-sameness — sits in your chest all episode.', do: { trauma: 3, prize: true, fanLane: { n: 2, why: 'reclaimed the lost thing' } } },
+        { label: 'Ask what changed', sub: 'demand answers — 4 trauma', end: 'lost', note: '"What did you DO to it?" The System changes the subject with enormous skill. The audience notices the dodge. You don\'t get answers. You get a segment.', do: { trauma: 4, fanLane: { n: 1, why: 'asked too much' } } },
         { label: 'Thank them on camera', sub: 'grace', end: 'won', note: 'You thank them, simply, and mean it. The alien presenting it looks... moved? Something in its posture changes. The galaxy sees it too.', do: { fanLane: { n: 2, why: 'the gracious thank-you' } } },
       ],
       win: `The thank-you trends. The alien sends a follow-up note. It is almost warm. Almost.`,
@@ -1272,9 +1272,9 @@
     swear_jar: {
       setup: `📺 The Swear Jar — you're miked for a day.\n\nEvery curse costs the village a ration. Everyone is suddenly, terribly polite. The village is watching you like a hawk watches a field mouse.`,
       choices: [
-        { label: 'Go full silent film', sub: 'mime, grace, effort', end: 'won', note: 'You communicate entirely in mime for a full day. It is exhausting and magnificent. The village weeps laughing. Zero curses. Zero rations lost.', do: { kcal: -100, fanLane: { n: 3, why: 'the silent day' } } },
+        { label: 'Go full silent film', sub: 'mime, grace, effort — -100 kcal', end: 'won', note: 'You communicate entirely in mime for a full day. It is exhausting and magnificent. The village weeps laughing. Zero curses. Zero rations lost.', do: { kcal: -100, fanLane: { n: 3, why: 'the silent day' } } },
         { label: 'Curse in the old tongue', sub: 'a loophole', end: 'mixed', note: 'You curse fluently in your grandmother\'s language. The System\'s filter doesn\'t know it. The village does. The jar stays empty and the galaxy learns new words.', do: { fanLane: { n: 2, why: 'the loophole' } } },
-        { label: 'Slip once', sub: 'one ration', end: 'lost', note: 'Hour eleven. A stubbed toe. One perfect curse, broadcast to seventeen systems. A ration, gone. The village forgives you. The jar does not.', do: { kcal: -150, trauma: 3, fanLane: { n: 1, why: 'the slip' } } },
+        { label: 'Slip once', sub: 'one ration — -150 kcal, 3 trauma', end: 'lost', note: 'Hour eleven. A stubbed toe. One perfect curse, broadcast to seventeen systems. A ration, gone. The village forgives you. The jar does not.', do: { kcal: -150, trauma: 3, fanLane: { n: 1, why: 'the slip' } } },
       ],
       win: `The silent day enters village legend. Mimes are attempted at dinner for weeks. All of them worse than yours.`,
       lose: `The slip airs in slow motion. The ration is mourned. Your toe is fine. Your pride is not.`,
@@ -1284,8 +1284,8 @@
       setup: `📺 Extreme Burrow Makeover — you wake up redecorated.\n\nThe aliens did your shelter overnight. It is beautiful. It is unusable. You must live in it for a week. The reveal is being filmed.`,
       choices: [
         { label: 'Live in it graciously', sub: 'a week of art', end: 'won', note: 'You live in the beautiful unusable shelter with total grace. You learn to sleep diagonally. The galaxy admires your commitment to the bit.', do: { fanLane: { n: 2, why: 'the gracious week' } } },
-        { label: 'Fix it on camera', sub: 'un-improve it', end: 'mixed', note: 'You start moving furniture back while the cameras roll. The aliens watch, wounded, as you "ruin" their art. The audience takes your side immediately.', do: { kcal: -100, fanLane: { n: 2, why: 'the un-improvement' } } },
-        { label: 'Sleep outside', sub: 'protest', end: 'lost', note: 'You sleep outside for a week in protest. It rains twice. The beautiful shelter sits empty, perfect, useless. The galaxy finds this very funny.', do: { trauma: 2, fanLane: { n: 1, why: 'the protest' } } },
+        { label: 'Fix it on camera', sub: 'un-improve it — -100 kcal', end: 'mixed', note: 'You start moving furniture back while the cameras roll. The aliens watch, wounded, as you "ruin" their art. The audience takes your side immediately.', do: { kcal: -100, fanLane: { n: 2, why: 'the un-improvement' } } },
+        { label: 'Sleep outside', sub: 'protest — 2 trauma', end: 'lost', note: 'You sleep outside for a week in protest. It rains twice. The beautiful shelter sits empty, perfect, useless. The galaxy finds this very funny.', do: { trauma: 2, fanLane: { n: 1, why: 'the protest' } } },
       ],
       win: `Diagonal sleeping becomes a trend. The shelter is photographed for alien magazines. You are gracious in every one.`,
       lose: `A week outside. The rain. The perfect empty shelter. The galaxy's favorite comedy of the season.`,
@@ -1294,7 +1294,7 @@
     karaoke: {
       setup: `📺 Alien Karaoke — you must sing.\n\nThe System provides music from seventeen systems. None of it has a beat a human can find. The village provides backup vocals anyway.`,
       choices: [
-        { label: 'Sing your heart out', sub: 'no beat, no fear', end: 'won', note: 'You sing against the beat, around the beat, in open defiance of the beat. It shouldn\'t work. The village\'s backup vocals catch you and carry you home.', do: { trauma: 2, fanLane: { n: 3, why: 'the beatless ballad' } } },
+        { label: 'Sing your heart out', sub: 'no beat, no fear — 2 trauma', end: 'won', note: 'You sing against the beat, around the beat, in open defiance of the beat. It shouldn\'t work. The village\'s backup vocals catch you and carry you home.', do: { trauma: 2, fanLane: { n: 3, why: 'the beatless ballad' } } },
         { label: 'Let the village carry you', sub: 'everyone sings', end: 'won', note: 'You start, the village joins, and soon it\'s a chorus — ragged, loud, joyful. The aliens record it. They don\'t understand it. They play it twice.', do: { unity: 1, fanLane: { n: 2, why: 'the village chorus' } } },
         { label: 'Read the lyrics as poetry', sub: 'spoken word', end: 'mixed', note: 'You read the alien lyrics as dead-serious poetry. "MOON OF SEVEN HUNGRY LIGHTS." A judge weeps. Nobody knows what the song was supposed to be.', do: { fanLane: { n: 2, why: 'the poetry reading' } } },
       ],
@@ -1306,7 +1306,7 @@
       setup: `📺 Shelter Swap — you're living in someone else's shelter for a week.\n\nThe aliens film the adjustment. Someone always cries about someone else's storage system. This week, the someone might be you.`,
       choices: [
         { label: 'Embrace it', sub: 'their weird, your week', end: 'won', note: 'You learn their system, sleep in their bed, cook in their pot. By day three it feels almost like yours. The cameras capture you defending their storage to the village.', do: { fanLane: { n: 2, why: 'the gracious swap' } } },
-        { label: 'Cry about their storage', sub: 'the required crying', end: 'mixed', note: 'Day four. The storage system breaks you. You cry, on camera, about jars. The other villager cries about YOUR jars. The galaxy finds this deeply moving.', do: { trauma: 3, fanLane: { n: 2, why: 'the jar tears' } } },
+        { label: 'Cry about their storage', sub: 'the required crying — 3 trauma', end: 'mixed', note: 'Day four. The storage system breaks you. You cry, on camera, about jars. The other villager cries about YOUR jars. The galaxy finds this deeply moving.', do: { trauma: 3, fanLane: { n: 2, why: 'the jar tears' } } },
         { label: 'Sneak back nightly', sub: 'just to check', end: 'lost', note: 'You sneak back to your own shelter every night. The night-vision cameras catch all of it. The audience names the segment "HOMESICK."', do: { fanLane: { n: -1, why: 'the sneaking' } } },
       ],
       win: `You return the shelter cleaner than you found it. The swap is declared a triumph. Jars are respected now.`,
@@ -1318,7 +1318,7 @@
       choices: [
         { label: 'Argue the case', sub: 'your thing, your rules', end: 'won', note: 'You present the case with exhibits, a timeline, and a witness (the goat). The judges confer. The meteorite falls in your favor. The thing comes home.', do: { fanLane: { n: 2, why: 'won in Small Claims' } } },
         { label: 'Settle out of court', sub: 'split the difference', end: 'mixed', note: 'You settle in the hallway, on camera. Shared custody of the thing. The judges are disappointed — they wanted the meteorite. The village approves.', do: { unity: 1, fanLane: { n: 1, why: 'the hallway settlement' } } },
-        { label: 'Contempt of court', sub: 'laugh at the gavel', end: 'lost', note: 'You laugh at the meteorite gavel. The courtroom goes silent across seventeen systems. The judges confer for a long time. The ruling is... creative.', do: { trauma: 4, fanLane: { n: 1, why: 'contempt of the meteorite' } } },
+        { label: 'Contempt of court', sub: 'laugh at the gavel — 4 trauma', end: 'lost', note: 'You laugh at the meteorite gavel. The courtroom goes silent across seventeen systems. The judges confer for a long time. The ruling is... creative.', do: { trauma: 4, fanLane: { n: 1, why: 'contempt of the meteorite' } } },
       ],
       win: `The thing comes home. The goat's testimony is entered into the record. Property law remains confused.`,
       lose: `The creative ruling involves the thing, the goat, and a week of community service. The galaxy replays your laugh.`,
@@ -1329,7 +1329,7 @@
       choices: [
         { label: 'Demonstrate enthusiastically', sub: 'elbows, with joy', end: 'won', note: 'You demonstrate elbows like it\'s the most important joint in the body. Bending! Carrying! Leaning thoughtfully! The aliens take seventeen pages of notes.', do: { fanLane: { n: 3, why: 'the elbow masterclass' } } },
         { label: 'Improvise the curriculum', sub: 'today: knees?!', end: 'mixed', note: 'You go off-script into knees. The presenters panic — knees are TOMORROW\'s lesson. The galaxy loves a rebel academic.', do: { fanLane: { n: 2, why: 'the knees incident' } } },
-        { label: 'Go limp', sub: 'uncooperative prop', end: 'lost', note: 'You go completely limp. "THE MODEL IS BROKEN," the presenter announces. You are carried off by drones. It is the funniest thing on TV that night.', do: { trauma: 2, fanLane: { n: 1, why: 'the broken model' } } },
+        { label: 'Go limp', sub: 'uncooperative prop — 2 trauma', end: 'lost', note: 'You go completely limp. "THE MODEL IS BROKEN," the presenter announces. You are carried off by drones. It is the funniest thing on TV that night.', do: { trauma: 2, fanLane: { n: 1, why: 'the broken model' } } },
       ],
       win: `The elbow masterclass is archived as the definitive text. Aliens practice elbows now. Badly.`,
       lose: `"THE MODEL IS BROKEN" trends. You are carried everywhere in clips. Your dignity files a complaint.`,
@@ -1340,7 +1340,7 @@
       choices: [
         { label: 'Give it truly', sub: 'the real most-trustworthy', end: 'won', note: 'You give it to the person who deserves it, and say why, plainly. They cry. The village nods — the math checked out. The galaxy awws in seventeen languages.', do: { unity: 1, fanLane: { n: 2, why: 'the true rose' } } },
         { label: 'Give it strategically', sub: 'politics, televised', end: 'mixed', note: 'You give it to the person it HELPS to give it to. The village sees exactly what you did. The galaxy sees romance. Both are watching.', do: { fracture: 1, fanLane: { n: 1, why: 'the strategic rose' } } },
-        { label: 'Eat the rose', sub: 'unhinged', end: 'won', note: 'You eat the rose. On camera. Deliberately. "Trust is earned, not given," you say, chewing. The galaxy has never loved anyone more.', do: { trauma: 2, fanLane: { n: 3, why: 'ate the rose' } } },
+        { label: 'Eat the rose', sub: 'unhinged — 2 trauma', end: 'won', note: 'You eat the rose. On camera. Deliberately. "Trust is earned, not given," you say, chewing. The galaxy has never loved anyone more.', do: { trauma: 2, fanLane: { n: 3, why: 'ate the rose' } } },
       ],
       win: `The true rose is pressed in the journal. The village's math was right. Some things are simple.`,
       lose: ``,
@@ -1349,8 +1349,8 @@
     the_leak: {
       setup: `📺 The Leak — the System "accidentally" broadcasts a page from your private journal.\n\nIt's your handwriting. It's being read aloud. The village pretends it didn't hear. The village heard.`,
       choices: [
-        { label: 'Claim it proudly', sub: 'yes, I wrote that', end: 'mixed', note: '"Yes. I wrote that. Every word." The village stops pretending it didn\'t hear. Someone squeezes your shoulder. The galaxy leans in.', do: { trauma: 4, fanLane: { n: 3, why: 'claimed the leaked page' }, notability: 'showmanship' } },
-        { label: 'Deny everything', sub: 'not my handwriting', end: 'lost', note: '"That\'s not mine." It is obviously yours. The handwriting analysis airs. The denial is the clip. The page is the truth.', do: { trauma: 5, fanLane: { n: 1, why: 'denied the page' } } },
+        { label: 'Claim it proudly', sub: 'yes, I wrote that — 4 trauma', end: 'mixed', note: '"Yes. I wrote that. Every word." The village stops pretending it didn\'t hear. Someone squeezes your shoulder. The galaxy leans in.', do: { trauma: 4, fanLane: { n: 3, why: 'claimed the leaked page' }, notability: 'showmanship' } },
+        { label: 'Deny everything', sub: 'not my handwriting — 5 trauma', end: 'lost', note: '"That\'s not mine." It is obviously yours. The handwriting analysis airs. The denial is the clip. The page is the truth.', do: { trauma: 5, fanLane: { n: 1, why: 'denied the page' } } },
         { label: 'Read along', sub: 'duet with the System', end: 'won', note: 'You read along with the broadcast, in harmony with the System\'s voice. A duet. It shouldn\'t work. The galaxy is enchanted.', do: { fanLane: { n: 2, why: 'the journal duet' } } },
       ],
       win: `The duet is replayed for weeks. Your journal becomes the village's favorite literature. You lock the next one.`,
@@ -1360,9 +1360,9 @@
     museum_of_you: {
       setup: `📺 Museum of You — the aliens curated your life into an exhibit.\n\nYou must narrate the audio tour. Some rooms are closed for renovation. The audience wants the closed rooms.`,
       choices: [
-        { label: 'Narrate honestly', sub: 'the open rooms, true', end: 'mixed', note: 'You narrate the open rooms without flinching — the good, the wreckage, all of it. The audio tour becomes the most-borrowed recording in the galaxy.', do: { trauma: 4, fanLane: { n: 3, why: 'the honest tour' } } },
+        { label: 'Narrate honestly', sub: 'the open rooms, true — 4 trauma', end: 'mixed', note: 'You narrate the open rooms without flinching — the good, the wreckage, all of it. The audio tour becomes the most-borrowed recording in the galaxy.', do: { trauma: 4, fanLane: { n: 3, why: 'the honest tour' } } },
         { label: 'Skip the closed rooms', sub: 'renovation, sorry', end: 'lost', note: 'You glide past every closed door. "Renovation." The audience presses against the glass. The closed rooms become the whole story.', do: { fanLane: { n: 1, why: 'skipped the closed rooms' } } },
-        { label: 'Open one closed room', sub: 'the bravest TV', end: 'won', note: 'You open ONE closed door, on camera, and narrate what\'s inside. The galaxy goes completely silent. Then the messages start. Thousands of them.', do: { trauma: 8, fanLane: { n: 4, why: 'opened the closed room' }, notability: 'showmanship' } },
+        { label: 'Open one closed room', sub: 'the bravest TV — 8 trauma', end: 'won', note: 'You open ONE closed door, on camera, and narrate what\'s inside. The galaxy goes completely silent. Then the messages start. Thousands of them.', do: { trauma: 8, fanLane: { n: 4, why: 'opened the closed room' }, notability: 'showmanship' } },
       ],
       win: `The opened room changes the show. Strangers write to say it changed them. You don't regret it. Most days.`,
       lose: `The closed rooms trend without you. Speculation fills every silence you left. It is worse than the truth.`,
@@ -1373,7 +1373,7 @@
       choices: [
         { label: 'Sell the dream', sub: 'this rock changes lives', end: 'won', note: 'You sell the rock like it\'s destiny. "This rock has SEEN things." Orders flood in from four systems. The rock sells out. It\'s a rock.', do: { fanLane: { n: 3, why: 'sold the $400 rock' } } },
         { label: 'Sell it honestly', sub: "it's a rock", end: 'mixed', note: '"It\'s a rock. It\'s $400. I don\'t know why either." The honesty breaks the format. The galaxy respects it enormously and buys twelve.', do: { fanLane: { n: 2, why: 'the honest pitch' } } },
-        { label: 'Buy it yourself', sub: 'take the rock', end: 'mixed', note: 'You buy the rock yourself, on air, for $400. "I\'ve always wanted this specific rock." It\'s your rock now. The galaxy is delighted by your commitment.', do: { prize: true, trauma: 2, fanLane: { n: 1, why: 'bought the rock' } } },
+        { label: 'Buy it yourself', sub: 'take the rock — prize, 2 trauma', end: 'mixed', note: 'You buy the rock yourself, on air, for $400. "I\'ve always wanted this specific rock." It\'s your rock now. The galaxy is delighted by your commitment.', do: { prize: true, trauma: 2, fanLane: { n: 1, why: 'bought the rock' } } },
       ],
       win: `The rock sells out. A second rock is commissioned. You get a percentage. The percentage is also a rock.`,
       lose: ``,
