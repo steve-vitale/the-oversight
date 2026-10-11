@@ -337,11 +337,21 @@
         // "I'll do it." — the formal commitment. REBUILD 2026-10-11: new
         // handler. The want def speaks the commit beat; the state moves to
         // resolved with the def's resolution (promised/heeded/repaid).
+        // (journey establishment 2026-10-11: the handler was stage-blind —
+        // re-picking "Count me in." after the promise re-fired the
+        // thank-you beat and re-granted trust, a trust farm. A decided
+        // want hears the repeat honestly, once.)
         c.transcript.push({ who: 'you', text: '"I\'ll do it."' });
+        const w = c.want;
+        const wantLive = !!(w && w.def && (w.stage || 0) < 3);
+        if (!wantLive) {
+          const line = '"I know — you already said. I\'m counting on it."';
+          this.sayLine(vid, line);
+          return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         try { this.resolveConsequence(vid, { trust: 3, mood: 1, temper: 'kind', name: 'dlg:commit' }); } catch (e) {}
         let beat = null;
         try {
-          const w = c.want;
           if (w && w.def && typeof w.def.commitBeat === 'function') {
             beat = w.def.commitBeat.call(this, vid);
           }
@@ -411,23 +421,29 @@
         // 'deflected' memory — they remember you turned them down
         // (HURT_KINDS:'deflected' in convo-mood.js). Honest, and honest
         // things leave marks.
+        // (journey establishment 2026-10-11: the handler was stage-blind.
+        // After a promise, a later "I can't" (can't talk right now) fired
+        // the favor-refusal guilt trip AND wrote a false 'deflected'
+        // memory — the NPC mourned a refusal that never happened while the
+        // resolution stayed 'promised'. A decided want is not refused by
+        // small talk; only a LIVE want's deflectBeat speaks here.)
         c.transcript.push({ who: 'you', text: '"I can\'t right now."' });
+        const w = c.want;
+        const wantLive = !!(w && w.def && (w.stage || 0) < 3);
         // SCENE (Phase 2): through the resolver — cools mood AND writes
         // the 'deflected' memory (HURT_KINDS slot, wired Phase 1).
         try {
-          this.resolveConsequence(vid, {
-            trust: -1, mood: -1, temper: 'neutral',
-            memory: { type: 'deflected', note: 'you turned down their ask' },
-            name: 'dlg:cant',
-          });
+          this.resolveConsequence(vid, Object.assign(
+            { trust: wantLive ? -1 : 0, mood: wantLive ? -1 : 0, temper: 'neutral', name: 'dlg:cant' },
+            wantLive ? { memory: { type: 'deflected', note: 'you turned down their ask' } } : {}
+          ));
         } catch (e) {}
         // REBUILD 2026-10-11: the deflection speaks the WANT DEF's
         // deflectBeat (their actual reaction), and advances the want arc —
         // deflected, not evaporated. The ending will name it.
         let raw = null;
         try {
-          const w = c.want;
-          if (w && w.def && typeof w.def.deflectBeat === 'function') raw = w.def.deflectBeat.call(this, vid);
+          if (wantLive && typeof w.def.deflectBeat === 'function') raw = w.def.deflectBeat.call(this, vid);
         } catch (e) { raw = null; }
         const line = raw || this.convoPickCycle(vid, 'dlg:cant:lines', [
           '"Oh. ...No, I get it. Thanks for being straight with me."',

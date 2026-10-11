@@ -25538,11 +25538,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // BREAK-IT abilities 2026-10-10: the overnight spiral is starvation,
         // not violence -- the second_wind spite-ration must not fire here
         // (it printed 500 free kcal/day). Cause is named honestly.
+        // (journey establishment 2026-10-11: the cause was 'the night' while
+        // the comment, the cheat-death kind, and the villager parallel
+        // (cause: 'starvation') all say starvation. The village mourns a
+        // named cause, not a mystery.)
         if (this.maybeCheatDeath('starvation')) {
           this.say('Death knocked. Something else answered.');
         } else {
           // the village is the protagonist: the mantle passes, the story continues.
-          try { this.playerDeath('the night'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+          try { this.playerDeath('starvation'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
           this.returnToVillage();
           return this.status();
         }

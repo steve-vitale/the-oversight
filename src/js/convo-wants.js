@@ -42,6 +42,20 @@
   if (!Game) return;
 
   // ============ WANT DEFINITIONS ============
+  // gossipLine: the occupation/origin gossip sentence, grammatically sound.
+  // (journey establishment 2026-10-11: "weren't a what they said" was
+  // ungrammatical when no lie was known; "a ER nurse" broke a/an;
+  // occupations leaked mid-sentence capitals.)
+  function gossipLine(g) {
+    if (g.field === 'occupation') {
+      const liePart = g.lie ? `weren't a ${g.lie}` : `weren't what they said`;
+      let truth = String(g.truth || '');
+      if (truth.length > 1 && /[a-z]/.test(truth[1])) truth = truth[0].toLowerCase() + truth.slice(1);
+      const art = /^[aeiouAEIOU]/.test(truth) ? 'an' : 'a';
+      return `Turns out they ${liePart} — they're ${art} ${truth}.`;
+    }
+    return `They're not from ${g.lie || 'where they said'} — they're from ${g.truth}.`;
+  }
   // Each want: what the NPC wants from this conversation.
   // - pick(vid): weight for selection (higher = more likely)
   // - opener(vid): the opening line — the want, surfaced immediately
@@ -60,11 +74,19 @@
         return daysSince > 2 ? 3 : 1;
       },
       opener(vid) {
-        return Game.convoPickCycle(vid, 'want:news:open', [
-          '"You\'ll never guess what I saw by the treeline."',
-          '"Okay, so — something happened this morning."',
-          '"Have you heard? No? Good, I get to tell you first."',
-        ]);
+        // The hook is a promise — convoWantNews delivers the matching
+        // content first, so "what I saw by the treeline" is followed by
+        // the sighting, not random gossip. (journey establishment
+        // 2026-10-11: the treeline hook fizzled into occupation gossip.)
+        const hooks = [
+          { id: 'treeline', line: '"You\'ll never guess what I saw by the treeline."' },
+          { id: 'morning', line: '"Okay, so — something happened this morning."' },
+          { id: 'first', line: '"Have you heard? No? Good, I get to tell you first."' },
+        ];
+        const line = Game.convoPickCycle(vid, 'want:news:open', hooks.map(h => h.line)) || hooks[0].line;
+        const hook = (hooks.find(h => h.line === line) || hooks[0]).id;
+        try { const w = (Game.convoGet(vid) || {}).want; if (w) w.hook = hook; } catch (e) {}
+        return line;
       },
       engageBeat(vid) {
         // "Tell me more." -> the actual news. REAL content, never a shrug.
@@ -481,60 +503,116 @@
     // convoWantNews: the actual news behind a share_news want. REAL content —
     // a fresh memory, real gossip, a live village event, or an honest
     // observation. Never a shrug.
+    // (journey establishment 2026-10-11, three structural fixes:
+    //  1. NEWS-TYPE FRESHNESS: every "tell me more" used to re-roll the
+    //     same gossip template (three "Turns out they weren't a what they
+    //     said" beats in one conversation). Delivered types are recorded
+    //     on the want; a type never repeats inside one conversation, and
+    //     when every type is spent the thread exhausts honestly instead of
+    //     looping (canon: CONVERSATIONS.md).
+    //  2. HOOK PROMISE: the opener's hook ("what I saw by the treeline") is
+    //     kept on the want, and the first delivery answers it — the hook
+    //     no longer fizzles into unrelated gossip. The "something happened
+    //     this morning" hook prefers fresh memories and live events.
+    //  3. GOSSIP GRAMMAR: "weren't a what they said" -> "weren't what they
+    //     said" when no lie is known; a/an agreement ("an ER nurse");
+    //     occupations lowercased mid-sentence ("a veterinarian").)
     convoWantNews(vid) {
-      // 1. Fresh memories — things that happened between you.
-      try {
-        const mem = (((this.state.village || {}).memory || {})[vid]) || [];
-        const day = (this.state.scholar || {}).day || 0;
-        for (let i = mem.length - 1; i >= 0; i--) {
-          const m = mem[i];
-          if (!m || day - (m.day || 0) > 7) continue;
-          const about = this.convoMemoryAbout ? this.convoMemoryAbout(m.t) : null;
-          if (about) {
-            const line = this.convoPickCycle(vid, 'want:news:mem', [
-              `"So — ${about}. Did you hear? I can't stop thinking about it."`,
-              `"Have you been thinking about ${about}? Because I have. A lot."`,
-            ]);
-            if (line) return line;
+      const c = this.convoGet(vid) || {};
+      const w = c.want || {};
+      w.newsGiven = w.newsGiven || [];
+      const given = (t) => w.newsGiven.indexOf(t) >= 0;
+      const mark = (t) => { if (!given(t)) w.newsGiven.push(t); };
+      const hook = w.hook || null;
+
+      const memNews = () => {
+        try {
+          const mem = (((this.state.village || {}).memory || {})[vid]) || [];
+          const day = (this.state.scholar || {}).day || 0;
+          for (let i = mem.length - 1; i >= 0; i--) {
+            const m = mem[i];
+            if (!m || day - (m.day || 0) > 7) continue;
+            const about = this.convoMemoryAbout ? this.convoMemoryAbout(m.t) : null;
+            if (about) {
+              const line = this.convoPickCycle(vid, 'want:news:mem', [
+                `"So — ${about}. Did you hear? I can't stop thinking about it."`,
+                `"Have you been thinking about ${about}? Because I have. A lot."`,
+              ]);
+              if (line) { mark('memory'); return line; }
+            }
           }
-        }
-      } catch (e) {}
-      // 2. Real gossip — something they actually know about someone.
-      try {
-        const roster = ((this.state.village || {}).roster || []).filter(id => id !== vid && id !== this.villagerId);
-        for (let i = 0; i < 3 && roster.length; i++) {
-          const target = roster[Math.floor(Math.random() * roster.length)];
-          const g = this.npcGossipAbout ? this.npcGossipAbout(vid, target) : null;
-          if (g && g.truth) {
-            const nm = this.displayName ? this.displayName(target) : 'someone';
-            return `"Okay, so — ${nm}. ${g.field === 'occupation' ? `Turns out they weren't a ${g.lie || 'what they said'} — they're a ${g.truth}.` : `They're not from ${g.lie || 'where they said'} — they're from ${g.truth}.`} Don't say I told you."`;
+        } catch (e) {}
+        return null;
+      };
+      const eventNews = () => {
+        try {
+          const ev = this.t2LatelyEvent ? this.t2LatelyEvent(vid) : null;
+          if (ev && ev.kind) {
+            const EV_NEWS = {
+              naming: '"There\'s a real argument going about what to call that thing. People are heated."',
+              mourning: '"Nobody\'s saying it out loud, but everyone\'s thinking about them. The quiet ones worst."',
+              threat: '"Something\'s been moving out past the treeline. I\'m not the only one who\'s seen it."',
+              betrayal: '"Something happened between people. I don\'t have the whole of it yet."',
+              tension: '"You feel it too, right? The air around the fire. Something\'s building."',
+              hunger: '"People are going hungry and nobody wants to say it first. So I\'m saying it."',
+            };
+            if (EV_NEWS[ev.kind]) { mark('event'); return EV_NEWS[ev.kind]; }
           }
-        }
-      } catch (e) {}
-      // 3. Live village events.
-      try {
-        const ev = this.t2LatelyEvent ? this.t2LatelyEvent(vid) : null;
-        if (ev && ev.kind) {
-          const EV_NEWS = {
-            naming: '"There\'s a real argument going about what to call that thing. People are heated."',
-            mourning: '"Nobody\'s saying it out loud, but everyone\'s thinking about them. The quiet ones worst."',
-            threat: '"Something\'s been moving out past the treeline. I\'m not the only one who\'s seen it."',
-            betrayal: '"Something happened between people. I don\'t have the whole of it yet."',
-            tension: '"You feel it too, right? The air around the fire. Something\'s building."',
-            hunger: '"People are going hungry and nobody wants to say it first. So I\'m saying it."',
-          };
-          if (EV_NEWS[ev.kind]) return EV_NEWS[ev.kind];
-        }
-      } catch (e) {}
-      // 4. Honest observation — the village as it stands right now.
-      try {
-        const vg = this.state.village || {};
-        const hungry = (vg.roster || []).filter(id => { try { return this.npcNeeds(id).hunger > 70; } catch (e) { return false; } }).length;
-        if (hungry >= 2) return `"${hungry} people are going hungry and acting like it's fine. It's not fine."`;
-        if ((vg.grief || 0) > 0) return '"It\'s too quiet. That\'s the news — it\'s too quiet and everyone knows why."';
-        if ((vg.cheer || 0) > 0) return '"People are smiling today. I wanted someone to notice it with me."';
-      } catch (e) {}
-      return '"The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."';
+        } catch (e) {}
+        return null;
+      };
+      const gossipNews = () => {
+        try {
+          const roster = ((this.state.village || {}).roster || []).filter(id => id !== vid && id !== this.villagerId);
+          for (let i = 0; i < 3 && roster.length; i++) {
+            const target = roster[Math.floor(Math.random() * roster.length)];
+            const g = this.npcGossipAbout ? this.npcGossipAbout(vid, target) : null;
+            if (g && g.truth) {
+              const nm = this.displayName ? this.displayName(target) : 'someone';
+              mark('gossip');
+              return `"Okay, so — ${nm}. ${gossipLine(g)} Don't say I told you."`;
+            }
+          }
+        } catch (e) {}
+        return null;
+      };
+      const observeNews = () => {
+        try {
+          const vg = this.state.village || {};
+          const hungry = (vg.roster || []).filter(id => { try { return this.npcNeeds(id).hunger > 70; } catch (e) { return false; } }).length;
+          if (hungry >= 2) { mark('observation'); return `"${hungry} people are going hungry and acting like it's fine. It's not fine."`; }
+          if ((vg.grief || 0) > 0) { mark('observation'); return '"It\'s too quiet. That\'s the news — it\'s too quiet and everyone knows why."'; }
+          if ((vg.cheer || 0) > 0) { mark('observation'); return '"People are smiling today. I wanted someone to notice it with me."'; }
+        } catch (e) {}
+        return null;
+      };
+      const sightingNews = () => {
+        mark('sighting');
+        return '"The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."';
+      };
+
+      // 0. The hook's promise comes first — answer what the opener offered.
+      if (hook === 'treeline' && !given('sighting')) return sightingNews();
+
+      // The "something happened this morning" hook wants fresh happenings,
+      // not gossip: memories and live events answer it.
+      const morningFirst = (hook === 'morning');
+      const order = morningFirst
+        ? ['memory', 'event', 'gossip', 'observation', 'sighting']
+        : ['memory', 'gossip', 'event', 'observation', 'sighting'];
+      const fns = { memory: memNews, event: eventNews, gossip: gossipNews, observation: observeNews, sighting: sightingNews };
+      for (const t of order) {
+        if (given(t)) continue;
+        const line = fns[t]();
+        if (line) return line;
+        // Source dry but type unmarked (e.g. gossip found no target):
+        // don't mark — another type may still deliver, and this one can
+        // be retried only if nothing else works... no: mark it spent so a
+        // dry source can't wedge the loop into repeating the same dry roll.
+        mark(t);
+      }
+      // Every type spent or dry: exhaust honestly instead of looping.
+      return '"That\'s everything I\'ve got. You know as much as I do now."';
     },
 
     // convoWantWarning: the actual warning behind a warn_you want. Real
