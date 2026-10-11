@@ -21,8 +21,8 @@ R3 targeted exactly that blank — and found the reason no wave-3 fight had ever
 
 ## What R3 measured
 
-- **Wave-3 gate reachable**: unlocked day 73 (seed 1618032, honest) and day 91 (seed 314159, honest).
-- **First live wave-3 fights ever observed**: seed 1618032 fought a Spool (day 75, 41 rounds, lost); probe-11 fought 5 wave-3s (spool, buffering, redactor, spool, chorus_line), **4 distinct faced by day 92** — the endgame deed bar (4 distinct wave-3) completes when the gate opens ~day 45.
+- **Wave-3 gate reachable**: unlocked day 73 (seed 1618032, honest, pre-fix run) and day 91 (seed 314159, honest).
+- **First live wave-3 fights ever observed**: probe-11 fought 5 wave-3s (spool, buffering, redactor, spool, chorus_line), **4 distinct faced by day 92** — the endgame deed bar (4 distinct wave-3) completes when the gate opens ~day 45. CORRECTION (2026-10-11 post-commit): the run note originally credited seed 1618032 with "a Spool (day 75, 41 rounds, lost)" as a legitimate first — that fight was from the PRE-FIX run and was the follower-haven bug itself, not a legitimate encounter. The committed post-fix JSONs show 1618032 with 0 wave-3 fights (the fix working as intended). The probe-11 haven fights in the committed JSONs are RAIDERS (havenGrowth "WEALTH DRAWS TEETH" mechanic), not followers — the fix blocks followers; raids are a separate legitimate system.
 - **Signature mechanics fire in live play**: Spool REC●/REPLAY, Buffering afterimages ("IT WILL STEP LEFT"), Redactor REDACT, Chorus Line downbeat — all confirmed via capture markers.
 
 ## Village assessment (plain words)
