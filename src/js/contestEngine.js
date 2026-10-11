@@ -286,7 +286,7 @@
       }[rec.outcome] || ['lost', 'the judges decide'];
       if (rec.outcome === 'bDied') {
         // The partner died on camera: real removal, real news.
-        try { if (typeof this._cxKillContestant === 'function') this._cxKillContestant(partner); } catch (e) {}
+        try { if (typeof this._cxKillContestant === 'function') this._cxKillContestant(partner, (contest || {}).id); } catch (e) {}
         try { if (typeof this._cxGossip === 'function') this._cxGossip('died', partner, (contest || {}).name); } catch (e2) {}
       }
       return { outcome: map[0], detail: `dueled ${pnm}: ${map[1]}`, log: L };

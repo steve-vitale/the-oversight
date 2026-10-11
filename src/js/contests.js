@@ -98,6 +98,7 @@
 //   - beat_audio: every contest beat fires a named audioEvent that resolves — new beats are composed, named dispatches over already-registered Game.audio synths, lazy-registered on first fire (Game.audio doesn't exist until app.js loads, after contests.js); phases declare beat:'name', _contestRenderPhase fires it (code: _cxBeat, _contestRenderPhase, Steve 2026-10-06); price/impress/exchange/auction beats now resolve (justiceVerdict+exileWalk, levelup+contestSpared, contestCall+rushHit, contestCall+horrorSting) — were silent no-ops (code: CX_BEAT_DEFS, Steve 2026-10-06); the 30 older contests now have per-phase composed beats contest<Id>Declare|Escalate|Climax|Resolve in CX_BEAT_DEFS, named by _cxB (Steve 2026-10-08); _contestEnd/_contestDie/_contestRefuse fire the Resolve beat (code: CX_BEAT_DEFS, _cxB, Steve 2026-10-08); the participate/refuse choice screen fires the small shared contestChoice beat (droneCorrect+lineCut), never a contest's Declare beat — firing Declare there double-stings on Participate and plays the bespoke sting on Refuse (code: contestInterruption choicePhase, Steve 2026-10-08)
 //   - no_intro_repeat: the choice-phase text must not re-say contest name+desc (contestInterruption says it two lines earlier); it says only "The System waits." (code: contestInterruption, Steve 2026-10-08)
 //   - countdown_announced: the warning names the grab ("at dawn, one more day"); the grab lands a dread beat first ("It is today") (code: fireContest, resolveContest, Steve 2026-10-08)
+//   - fear_honesty: high/extreme billing must mean it — phase damage x1.5 at the contestChoose choke point (stacks with hardened x1.25), said aloud once per contest; blood contests get 4x scheduling weight at wave 1 (~5% -> ~18%); the participate/refuse screen states the billing, the contest's real death count (state.contestDeathsById, ledgered in _contestDie/_cxKillContestant), and current health; show shame lands real rep damage (gossip moves REP only — skipTrust) while the galaxy still loves the trainwreck; high/extreme wins roll hotter prizes (+0.15/+0.3 chance, hardened stacks) — the risk side moved, so the reward side moves (code: contest-fear 2026-10-11)
 //   - gossip_aftermath: contest outcomes seed village gossip (contest_won/contest_survived/contest_died) via _cxGossip — news travels by mouth, distorted by retelling, not broadcast; villagers only (code: _cxGossip, _contestEnd, _contestDie, _contestResolveOthers, Steve 2026-10-08)
 //   - fan_favor_contests: televised wins move the fan club (+4 player, +2 villager); a player win can shake loose a fan care package (code: _contestEnd, Steve 2026-10-08)
 //   - fan_favor_lanes: televised wins move the club that watched them — blood→fight, endurance→survival, moot→social, everything else→showbiz (code: _cxFanLane, _contestEnd, audit-shows 2026-10-09)
@@ -412,7 +413,18 @@
     if (wave < 3) candidates = candidates.filter(c => !['gauntlet', 'siege'].includes(c.id));
     
     // RNG: pick random (Steve 2026-10-05: mostly random which one you get)
-    const pick = candidates[Math.floor(Math.random() * candidates.length)];
+    // FEAR WEIGHT (contest-fear 2026-10-11): blood is the feared category,
+    // but at wave 1 only pit/duel are legal and uniform pick buries them
+    // (~5% — measured 1/35 contests). Blood gets 4x weight so the arena is
+    // a real presence (~18%), still an event, not tedium. Gauntlet/siege
+    // stay wave-gated (Steve 2026-10-06) — this only weights what's legal.
+    const _bw = candidates.map(c => c.cat === 'blood' ? 4 : 1);
+    let _br = Math.random() * _bw.reduce((a, b) => a + b, 0);
+    let pick = candidates[0];
+    for (let _bi = 0; _bi < candidates.length; _bi++) {
+      _br -= _bw[_bi];
+      if (_br <= 0) { pick = candidates[_bi]; break; }
+    }
     
     // VARIANT (Steve 2026-10-05): like monsters, contests get variants.
     // If you've seen this contest before, 30% chance it's HARDENED:
@@ -866,6 +878,12 @@
     if (outcome === 'shame' || outcome === 'both') {
       this.sysSay(`📺 It went... badly. The clip of ${pname} will outlive all of you. ${pname} comes home with shame — and, somehow, fans anyway. The galaxy loves a trainwreck.`);
       try { if (this.apAdjustFavor) this.apAdjustFavor(1, pname + "'s beautiful disaster on " + showName, 'showbiz'); } catch (e) {}
+      // SHAME BITES (contest-fear 2026-10-11): the galaxy forgives a
+      // trainwreck (+1 favor above — Steve's design, kept). The VILLAGE
+      // doesn't: shame lands as real reputation damage, said aloud. Gossip
+      // moves REP only, never trust (standing rule) — skipTrust=true.
+      try { this.applyRep(pid, { kind: -3, honest: -1 }, 1, true); } catch (e2) {}
+      this.sysSay(`📺 The village winces on their behalf. They'll be kind about it. And they will never, ever let it go.`);
       this._showGossip('shame', pid, showName);
     }
     if (ac.comfort) this.sysSay(`📺 You go to ${pname} after. They're quiet. They'll talk about it later. Or never.`);
@@ -1593,7 +1611,25 @@
           // here double-stings when the player participates, and plays the
           // bespoke sting even when they refuse.
           beat: 'contestChoice',
-          text: `📺 The System waits. The cameras are already rolling.\n\nParticipate — or refuse, and let the galaxy watch you say no.`,
+          // HONEST STAKES (contest-fear 2026-10-11): the choice screen is
+          // where dread lives or dies. It states the billing (risk tier),
+          // the honest record (this contest's real death count from the
+          // ledger — "that you know of" covers pre-ledger history), and
+          // your current health. No silent risks; the player decides with
+          // open eyes. Played, not RNG: the numbers are state, not dice.
+          text: (() => {
+            const rl = { low: 'LOW RISK — the audience expects entertainment, not blood.',
+              medium: 'MEDIUM RISK — people have been hurt in this one.',
+              high: 'HIGH RISK — people die in this one. Regularly.',
+              extreme: 'EXTREME RISK — almost nobody walks away from this one.' }[contest.risk] || '';
+            let dead = 0;
+            try { dead = ((this.state.contestDeathsById || {})[contest.id]) || 0; } catch (e) {}
+            const hp = Math.max(0, Math.round((this.state.scholar.health || 0)));
+            const record = dead > 0
+              ? `This one has killed ${dead} before.`
+              : `No one has died in this one yet. That you know of.`;
+            return `📺 The System waits. The cameras are already rolling.\n\n📺 The billing says ${rl}\n📺 ${record}\n📺 You are at ${hp} health.\n\nParticipate — or refuse, and let the galaxy watch you say no.`;
+          })(),
           choices: [
             { label: 'Participate', sub: 'step into the light', do: {}, next: 1 },
             { label: 'Refuse', sub: 'say no on camera', do: {}, next: 'REFUSE' },
@@ -3691,6 +3727,23 @@
       // the paper tiger gets teeth here, at the one choke point every
       // phase's damage flows through. Moot demand already scales via risk.
       if (ac.variant === 'hardened') amt = Math.ceil(amt * 1.25);
+      // FEAR HONESTY (contest-fear 2026-10-11): high/extreme billing must
+      // mean it — "People die in this one. Regularly." was decoration at a
+      // 97% win rate with zero deaths. High-risk contests hit 1.5x harder
+      // (stacks with hardened). Played, not RNG: the damage is real and
+      // state-driven, death still comes only from health hitting 0, and
+      // shows/summons keep the no-kill cap below. Said aloud once per
+      // contest — a silent multiplier is a lie.
+      try {
+        const _cxr = (this._cxScaledContest(ac) || {}).risk;
+        if (ac.kind !== 'show' && ac.kind !== 'summons' && (_cxr === 'high' || _cxr === 'extreme')) {
+          amt = Math.ceil(amt * 1.5);
+          if (!ac._fearSaid) {
+            ac._fearSaid = true;
+            this.sysSay(`📺 The billing said ${String(_cxr).toUpperCase()} RISK. The System doesn't pull its punches.`);
+          }
+        }
+      } catch (e) {}
       // SHOWS (audit-shows 2026-10-09): TV doesn't kill. Shows are
       // lower-stakes than contests by canon (docs/CONTESTS.md) — a Mouth
       // Race burn leaves you at 1 HP and ends the bit, never a death line.
@@ -4177,7 +4230,14 @@
             const wave = this.unlockedWave();
             const isExtreme = contest.risk === 'extreme';
             let prizeTier = Math.min(3, wave);
+            // FEAR HONESTY (contest-fear 2026-10-11): the contract is
+            // high-risk/high-reward — the lever raised the risk side, so the
+            // reward side moves too. High/extreme wins roll hotter on the
+            // prize table (hardened stacks). The prize is still a roll, not
+            // a guarantee — and the vault can still be shy.
             let prizeChance = ac.variant === 'hardened' ? 0.75 : 0.6;
+            if (contest.risk === 'high') prizeChance = Math.min(0.95, prizeChance + 0.15);
+            if (contest.risk === 'extreme') prizeChance = Math.min(0.95, prizeChance + 0.3);
             if (isExtreme && wave >= 4 && Math.random() < 0.25) prizeTier = 4;
             const loot = this.rollAlienLoot({ wave, loot: { chance: prizeChance, tier: prizeTier } });
             if (loot) {
@@ -4329,6 +4389,17 @@
     if (ac._dieLanded[_dieKey]) return { done: true, outcome: 'died' };
     ac._dieLanded[_dieKey] = true;
     ac.phase = 'done';
+    // DEATH LEDGER (contest-fear 2026-10-11): the village remembers what
+    // each contest has killed — the participate/refuse screen reads it back
+    // as the honest stakes ("This one has killed N before"). Villager deaths
+    // ledger in _cxKillContestant (the choke point); the player death lands
+    // here (the player never routes through _cxKillContestant).
+    if (!isWatch) {
+      try {
+        const dl = (this.state.contestDeathsById = this.state.contestDeathsById || {});
+        dl[contest.id] = (dl[contest.id] || 0) + 1;
+      } catch (e) {}
+    }
     this._cxCountHeld(ac);
     this.sysSay(`📺 ${contest.name} — ${how}`);
     this.sysSay('📺 ' + this._contestDeathLine(contest, how, pname));
@@ -4364,7 +4435,7 @@
       }
       // _cxKillContestant: removeVillager alone is a no-op wrapper — the
       // dead must actually leave the roster.
-      this._cxKillContestant(ac.participant);
+      this._cxKillContestant(ac.participant, ac.contestId);
       try { this.say(`☠ ${pname} is gone. The village will say the name for a long time.`); } catch (e) {}
       try { this.leadShift('fracture', 2); } catch (e) {}
       const s = this.state.scholar;
@@ -4939,13 +5010,22 @@
   // the roster, eligible to be taken AGAIN (the pre-existing watch-death
   // branch had the same hole). Belt and suspenders: call it for any module
   // hooks, then filter the roster directly so death is real.
-  G._cxKillContestant = function(pid) {
+  G._cxKillContestant = function(pid, contestId) {
     try { if (this.removeVillager) this.removeVillager(pid, 'killed'); } catch (e) {}
     try {
       const v = this.state.village;
       v.roster = (v.roster || []).filter(id => id !== pid);
       if (v.positions) delete v.positions[pid];
     } catch (e2) {}
+    // DEATH LEDGER (contest-fear 2026-10-11): see _contestDie — the honest
+    // record feeds the stakes display. contestId is optional; call sites
+    // that know it pass it.
+    try {
+      if (contestId) {
+        const dl = (this.state.contestDeathsById = this.state.contestDeathsById || {});
+        dl[contestId] = (dl[contestId] || 0) + 1;
+      }
+    } catch (e4) {}
     // CRISIS (Gap 4, 2026-10-10): blood on air — a villager died on camera.
     // _cxKillContestant is the choke point for EVERY contest death
     // (_contestDie watch path, _contestResolveOthers multi-take, the duel
@@ -5025,7 +5105,7 @@
         this.sysSay('📺 ' + this._contestDeathLine(contest, r.detail || '', pname));
         // GOSSIP (Steve 2026-10-08): their arena, their fate, the village's news.
         this._cxGossip('died', pid, contest.name);
-        this._cxKillContestant(pid);
+        this._cxKillContestant(pid, (contest || {}).id);
         try { this.say(`☠ ${pname} is gone. The village will say the name for a long time.`); } catch (e) {}
         try { this.leadShift('fracture', 1); } catch (e) {}
         s.trauma = Math.min(100, (s.trauma || 0) + 8);
