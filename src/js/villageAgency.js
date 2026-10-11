@@ -640,7 +640,10 @@
       var room = this.havenRoom();
       var names = pet.petitioners.map(function (p) { return firstOf(p.name); }).join(', ');
       if (room <= 0) {
-        this.say(`There's no room — every bed's full, every bowl spoken for. What would the moot even vote on? ${names} hear it plain. It's not unkind. It's full.`);
+        // GRAMMAR (journey-social 2026-10-11): "Wren hear it plain" was
+        // wrong — the verb must agree with the petitioner count.
+        var hearVerb = pet.petitioners.length === 1 ? 'hears' : 'hear';
+        this.say(`There's no room — every bed's full, every bowl spoken for. What would the moot even vote on? ${names} ${hearVerb} it plain. It's not unkind. It's full.`);
         return { room: 0 };
       }
       this.say(`You call a moot on it. The fire gets built up. The petitioners sit just outside the light, trying not to look like they're listening.`);

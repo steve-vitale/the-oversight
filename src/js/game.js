@@ -6070,6 +6070,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return;
       }
       const cur = (v.health[vid] !== undefined) ? v.health[vid] : 100;
+      // DOUBLE-DEATH GUARD (journey-social 2026-10-11): health already at 0
+      // means the death block below already ran (corpse, gossip, fallen,
+      // roster removal). A second lethal tick — disease after a field-fight
+      // kill — must not re-run it. Observed: Vikram died of 'monster' then
+      // of 'sickness' on the same day.
+      if (cur <= 0) return;
       v.health[vid] = Math.max(0, cur - dmg);
       if (v.health[vid] <= 0) {
         // LETHAL HURT IS DEATH (2026-10-08): no silent roster vanishes.
@@ -29896,6 +29902,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     tbVillagerFalls(t) {
       const v = this.state.village;
+      // DOUBLE-DEATH GUARD (journey-social 2026-10-11): same class as the
+      // hurtVillager guard — a fighter already removed from the roster is
+      // already dead; don't push a second fallen entry for them.
+      if (!((v.roster || []).includes(t.villagerId))) return;
       if (v.positions) delete v.positions[t.villagerId];
       v.fallen = v.fallen || [];
       v.fallen.push({ villagerId: t.villagerId, day: this.state.scholar.day, cause: 'combat' });

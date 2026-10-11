@@ -3638,15 +3638,22 @@
       line = l; youSaid = you || null;
       try {
         if (you) c.transcript.push({ who: 'you', text: you });
-        c.transcript.push({ who: narr ? 'narr' : 'them', text: line });
-        while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
+        if (narr) {
+          // AFTERMATH NARRATION (Steve 2026-10-08): the escape beat is not the
+          // leader speaking — they tried to kill you; they don't narrate your
+          // escape. Narration goes through this.say with a 'narr' transcript
+          // tag instead of sayLine on the ambusher.
+          c.transcript.push({ who: 'narr', text: line });
+          while (c.transcript.length > 200) c.transcript.shift();
+          this.say(line);
+        } else {
+          // SINGLE EMISSION (journey-social 2026-10-11): sayLine is the one
+          // transcript writer — the old direct push PLUS sayLine printed
+          // every betrayal beat twice. The fallback keeps a no-repeat-blocked
+          // beat from going silent.
+          line = this.sayLine(vid, line, { fallback: '"I just said — did you miss it?"' }) || line;
+        }
         c.exchanges = (c.exchanges || 0) + 1;
-        // AFTERMATH NARRATION (Steve 2026-10-08): the escape beat is not the
-        // leader speaking — they tried to kill you; they don't narrate your
-        // escape. Narration goes through this.say with a 'narr' transcript
-        // tag instead of sayLine on the ambusher.
-        if (narr) this.say(line);
-        else this.sayLine(vid, line);
       } catch (e) {}
       return { line, choices: this.convoChoices(vid), ended: false, transcript: (c.transcript || []).slice() };
     };

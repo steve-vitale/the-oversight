@@ -753,17 +753,39 @@
       // identifies the line: a repeat blocks the whole line.
       const key = chunks[0].trim();
       c.saidLines = c.saidLines || [];
-      if (c.saidLines.indexOf(key) !== -1) return null; // blocked: already said
       // RUN-WIDE LEDGER (dialog-ui-fix 2026-10-11, defect 7): the no-repeat
       // choke point spans NPCs within a run — Lena and David must not speak
       // the same line verbatim. Per-conversation saidLines can't catch that.
       const runLedger = this.convoRunLedger();
-      if (runLedger.indexOf(key) !== -1) return null; // blocked: another NPC said it
-      c.saidLines.push(key);
-      runLedger.push(key);
-      if (runLedger.length > 400) runLedger.splice(0, runLedger.length - 400);
+      const blocked = c.saidLines.indexOf(key) !== -1 || runLedger.indexOf(key) !== -1;
+      // FALLBACK (journey-social 2026-10-11): a blocked line must never go
+      // silent — "no silent actions" is a standing rule, and a blocked beat
+      // with fired consequences (trust/mood/evidence) but no words reads as
+      // a dead verb. Callers that pass opts.fallback get the fallback spoken
+      // instead; it is deliberately EXEMPT from the ledgers (it is generic
+      // by design — ledgering it would just re-silence the beat). Callers
+      // without a fallback keep the old null contract.
+      let useChunks = chunks;
+      if (blocked) {
+        const fb = opts && opts.fallback;
+        if (!fb) return null; // blocked: already said
+        useChunks = this.convoSplitBeats(String(fb));
+        // generic fallback: never ledgered, never blocked
+      } else {
+        c.saidLines.push(key);
+        runLedger.push(key);
+        // WINDOW, not run-history (journey-social 2026-10-11): the ledger is
+        // a backstop against ADJACENT parroting (defect 7: "Lena and David
+        // must not speak the same line verbatim") — the pools + freshness do
+        // the real work. A 400-entry whole-run window exhausted the shared
+        // pools (favor wants, recaps, mood beats are legitimately reused
+        // across villagers and days) and ate ~40% of npc beats. 48 entries
+        // ≈ the current + previous few conversations: adjacent NPCs can't
+        // parrot each other, day-old lines can breathe again.
+        if (runLedger.length > 48) runLedger.splice(0, runLedger.length - 48);
+      }
       let first = null;
-      for (const chunk of chunks) {
+      for (const chunk of useChunks) {
         const entry = { who: 'them', text: chunk };
         if (opts && opts.foreign) entry.foreign = opts.foreign;
         // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
@@ -783,12 +805,15 @@
       // its beats through here, so this is the one hook that sees both the
       // base turns and the dlg: turns — the ledger stays complete even
       // though the dialogue layer intercepts dlg: choices before convoTurn.
-      // Paginated chunks note each beat (the full line's beats, in order).
-      try { for (const chunk of chunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
+      // Paginated chunks note each beat (the full line's beats, in order) —
+      // the ACTUALLY SPOKEN chunks (fallback when the primary was blocked).
+      try { for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
       // VOICED DIALOGUE (Steve 2026-10-11): speak each NPC beat in the
       // villager's own deterministic voice (voice-piper.js). Fire-and-forget;
       // mute/unlock/setting/foreign gates live inside convoSpeakLine.
-      try { for (const chunk of chunks) this.convoSpeakLine(vid, chunk, opts); } catch (e) {}
+      // Speaks what was ACTUALLY spoken (useChunks: the fallback when the
+      // primary was no-repeat-blocked), never the blocked line.
+      try { for (const chunk of useChunks) this.convoSpeakLine(vid, chunk, opts); } catch (e) {}
       return first;
     },
 
@@ -796,7 +821,8 @@
     // 2026-10-11, defect 7). Per-conversation saidLines can't stop two
     // different NPCs from speaking the same line verbatim in one run — this
     // can. Stored on the village (survives across conversations, resets with
-    // the run). Capped so it can't grow unbounded.
+    // the run). Capped as a recent WINDOW in sayLine (adjacent-parroting
+    // backstop), not whole-run history.
     convoRunLedger() {
       const v = this.state.village || {};
       if (!v.convoRunLines) v.convoRunLines = [];
@@ -3783,7 +3809,11 @@
         c.winddownQueued = false;
         c.winddownSpurns = 0;
         const line = (hb && hb.text) || '"Anyway — I should get back to it."';
-        this.sayLine(vid, line);
+        this.sayLine(vid, line, {
+          // FALLBACK (journey-social 2026-10-11): a blocked goodbye must not
+          // go silent — the conversation is ending either way.
+          fallback: '"Right. Back to it, then."',
+        });
         const wdChoices = (typeof this.convoWinddownChoices === 'function')
           ? this.convoWinddownChoices(vid)
           : [{ id: 'leave', label: '"I should go."' }];
@@ -4601,13 +4631,15 @@
       // BEAT COMPOSITION (convo rebuild 2026-10-11): the beat acknowledges
       // what the player just said BEFORE emission — the transcript holds the
       // composed line and the no-repeat ledger sees the final string.
+      // FALLBACK (journey-social 2026-10-11): a no-repeat-blocked base beat
+      // must not go silent — the turn's consequences already fired.
       try {
         if (line && typeof this.convoComposeBeat === 'function' && typeof this.convoPlayerSaid === 'function') {
           const composed = this.convoComposeBeat(vid, line, this.convoPlayerSaid(vid, choiceId));
           if (composed) line = composed;
         }
       } catch (e) {}
-      this.sayLine(vid, line);
+      line = this.sayLine(vid, line, { fallback: '"I just said — did you miss it?"' }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.

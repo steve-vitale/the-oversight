@@ -574,8 +574,15 @@
           : prods === 2
           ? '"What are you getting at?" A glance away, then back. They\'re choosing their words now.'
           : 'They\'re rattled — hands busy, eyes everywhere but on you. "I\'ve told you what I\'ve told you."';
-        this.sayLine(vid, line);
-        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        // FALLBACK (journey-social 2026-10-11): the no-repeat ledger blocks
+        // the only branch line once it's been said (per-conversation or
+        // run-wide) — without a fallback the probe lands in total silence
+        // while its trust/mood/evidence consequences still fire. Stonewalling
+        // is honest; silence is a dead verb.
+        const said = this.sayLine(vid, line, {
+          fallback: 'They shake their head — not no, not yes. Done talking about it.',
+        });
+        return { line: said || line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
       if (dlg === 'theorize') {

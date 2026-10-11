@@ -144,6 +144,20 @@
     //        name, mx, my, cause, killerId?, items?}
     registerDeath(opts) {
       opts = opts || {};
+      // DOUBLE-DEATH GUARD (journey-social 2026-10-11): two systems can both
+      // process the same death (observed: a field-fight kill and a disease
+      // tick on the same day → two fallen entries, two corpses, double
+      // grief/gossip/tele). A villager dies once — the second registration
+      // is a no-op. (The phoenix link carries its own guard for the same
+      // class; this is the choke point for everything else.)
+      if (opts.villagerId) {
+        try {
+          const vv = this.state.village || {};
+          vv.deathSeen = vv.deathSeen || {};
+          if (vv.deathSeen[opts.villagerId]) return null;
+          vv.deathSeen[opts.villagerId] = (this.state.scholar || {}).day || 0;
+        } catch (e) {}
+      }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis
       // across world runs. kind covers person/monster/animal; wave for monsters.
       try {
