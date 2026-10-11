@@ -12914,7 +12914,8 @@
     openSheet({
       id: 'the-table',
       title: '\u{1F30C} The Table',
-      html: '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
+      html: tc.prompt ? tc.prompt :
+        '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
         '<p>Your case is made. Now — the last choice is yours, and it\'s live:</p>',
       buttons: tc.options.map(o => ({
         label: '<b>' + esc(o.label) + '</b>',

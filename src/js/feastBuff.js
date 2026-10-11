@@ -157,9 +157,14 @@
 
     // feastedMult: the true effective multiplier while feasted, else 1.
     // qualityUplift × devotion surge — one number for strikes and abilities.
+    // GROUNDING (table.js): the dark relay becomes what forgot food — food
+    // conversions weaken as grounding erodes. Always telegraphed in
+    // feastedLine below.
     feastedMult() {
       const b = this.feastedBuffState();
-      return b ? (b.mult || 1) : 1;
+      const base = b ? (b.mult || 1) : 1;
+      const g = (typeof this.groundingMult === 'function') ? this.groundingMult() : 1;
+      return base * g;
     },
 
     // clearFeastBuff(expired): drop the buff. The fade line fires once, only
@@ -182,7 +187,9 @@
         const cfg = this.feastSurgeCfg();
         const s = this.state.scholar || {};
         const parts = Math.max(0, ((b.untilDay || 0) - (s.day || 0)) * cfg.partsPerDay - this.dayPart);
-        return `FEASTED ×${b.mult} — strikes & abilities uplifted · until dawn (${parts} ${parts === 1 ? 'part' : 'parts'} left)`;
+        const eff = this.feastedMult();
+        const gnote = (eff < (b.mult || 1)) ? ` <i>(grounding ${((typeof this.groundingTier === 'function') ? this.groundingTier() : '')} — food conversions weaken)</i>` : '';
+        return `FEASTED ×${Math.round(eff * 100) / 100} — strikes & abilities uplifted · until dawn (${parts} ${parts === 1 ? 'part' : 'parts'} left)${gnote}`;
       } catch (e) { return ''; }
     },
 
