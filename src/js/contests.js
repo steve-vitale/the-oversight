@@ -1008,6 +1008,15 @@
     this.sysSay('📺 ───');
     // BROADCAST MODE (Steve 2026-10-09): the summons airs too.
     try { this.broadcastStart('summons', { showId: '__summons', showName: 'Ratings Summons', participant: 'player' }); } catch (e) {}
+    // DEAD COMMENTARY POOL (break-it shows r16 2026-10-11): the three authored
+    // G.BROADCAST_LINES.summons lines never fired — broadcastBeat is only ever
+    // called with beat names classifying to declare/triumph/embarrassment/
+    // refused/together/feast/deathreel (the summons phase declares
+    // 'showDeclare', the end beats are SHOW_WON/LOST/REFUSED). The commentators
+    // should OPEN a ratings summons like they open a pull: the synthetic
+    // '__summons' beat (mirrors the '__pull' pattern in broadcastStart;
+    // classifyBeat maps it to the summons pool).
+    try { this.broadcastBeat('__summons', {}); } catch (e) {}
     const rendered = this._contestRenderPhase(this.state.activeContest, phases[0], 0);
     this._cxStorePhase(this.state.activeContest, 0, rendered);
     this._cxPhaseSay(rendered.text);
@@ -1179,7 +1188,7 @@
         { label: 'Ask the chat', sub: 'they know', end: 'lost', note: 'You ask the chat. The chat lies, beautifully, in twelve directions at once. You dig up a compost heap on live TV. The smell was never there.', do: { trauma: 3, fanLane: { n: 1, why: 'the compost incident' } } },
         { label: 'Cook something better', sub: 'out-smell the mystery', end: 'mixed', note: 'You fire up your own pot and out-cook the mystery. The village eats YOUR food while the cameras hunt the smell. Both smells trend.', do: { kcal: -200, fanLane: { n: 2, why: 'the smell-off' } } },
       ],
-      win: `The catering crate feeds the village. "Mistake," the System says. Nobody believes it. Everybody eats.`,
+      win: `The catering crate feeds YOU. "Mistake," the System says. Nobody believes it. You eat. The village watches, envious, for once on the other side of the screen.`,
       lose: `The compost incident. The chat's directions were perfect and perfectly wrong. You can still smell it.`,
       mixed: `Two incredible smells, one village. The smell-off is declared a draw. Everyone eats twice.`,
     },
@@ -3707,6 +3716,11 @@
     if (d.heal) {
       s.health = Math.min(this.maxHealth(), (s.health || 0) + d.heal);
       log.push(`+${d.heal} hp`);
+      // SILENT HEAL (break-it shows r16 2026-10-11): d.dmg got a "You take N
+      // damage" sysSay but d.heal landed with zero narration — the nap_wars
+      // "Commit to the nap" choice healed +5 with the note describing only the
+      // sleep. No silent actions: say it like the damage line does.
+      this.sysSay(`📺 You recover ${d.heal} health.`);
     }
     if (d.kcal) {
       // BANK CAP (break-it food r3 2026-10-08): contest prizes are a kcal
