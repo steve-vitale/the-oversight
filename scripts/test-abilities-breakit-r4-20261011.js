@@ -166,12 +166,14 @@ const SRC = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
   ok('HELD: 6-slot sustained strike ceiling is scary-good, finite (~x2.75)', ceil < 10, `ceiling x${ceil.toFixed(2)}`);
   ok('HELD: no unbounded (recursive/additive-loop) strike multiplier in data', sdMults.every(([id]) => !/loop|recursive/.test(id)));
 
-  // ============ HELD: dead-17 tripwire unchanged ============
+  // ============ HELD: dead-ability tripwire (r6 2026-10-11: purify left the
+  // set — the pharmacist now grants it, so the poison cure is earnable.
+  // 16 remain dead, documented, Steve's call.) ============
   const cg = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/characterGen.json'), 'utf8'));
   const occGranted = new Set(); (cg.occupations || []).forEach(o => (o.granted || []).forEach(g => occGranted.add(g)));
   const dead = ab.filter(a => { const t = (a.unlock || {}).type; return t !== 'system_offer' && !occGranted.has(a.id); }).map(a => a.id).sort();
-  const deadR3 = ['adrenaline_surge','ambush','blood_trail','brawler_instinct','evidence_board','gossip_network','haymaker','intimidating_presence','iron_stomach','lie_detector','pathfinder','peacemaker','purify','silver_tongue','stalk','trade_of_blows','war_cry'].sort();
-  ok('HELD: dead-ability tripwire still exactly the r3 17', JSON.stringify(dead) === JSON.stringify(deadR3), `got ${dead.length}: ${dead.join(',')}`);
+  const deadR6 = ['adrenaline_surge','ambush','blood_trail','brawler_instinct','evidence_board','gossip_network','haymaker','intimidating_presence','iron_stomach','lie_detector','pathfinder','peacemaker','silver_tongue','stalk','trade_of_blows','war_cry'].sort();
+  ok('HELD: dead-ability tripwire is the r6 16 (purify earned via pharmacist)', JSON.stringify(dead) === JSON.stringify(deadR6), `got ${dead.length}: ${dead.join(',')}`);
 
   // ============ HELD: undiscoverable-20 tripwire unchanged ============
   const kn = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/knowledge.json'), 'utf8'));

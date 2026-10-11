@@ -118,7 +118,11 @@
       if (vp.knowsSnare) score += 1;
       try {
         var tags = [];
-        var odef = (this.data.occupations || []).find(function (o) { return o.id === occ; }) || {};
+        // BREAK-IT abilities r6 2026-10-11 (sibling sweep): the stale
+        // this.data.occupations path made odef {} forever, so no occupation
+        // ever scored its +2 teachTags ranging bonus. Same class as the
+        // ledger.js succession bug fixed the same run.
+        var odef = (((this.data.characterGen || {}).occupations) || []).find(function (o) { return o.id === occ; }) || {};
         tags = odef.teachTags || [];
         if (tags.some(function (t) { return /track|forag|surviv|hunt|trail|wild/i.test(t); })) score += 2;
       } catch (e) {}

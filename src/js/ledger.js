@@ -848,13 +848,24 @@
         if (this.map) { this.map.px = this.state.village.px ?? 4; this.map.py = this.state.village.py ?? 4; }
       } catch (e) {}
       // background abilities are THEIRS — their past, their hands.
+      // BREAK-IT abilities r6 2026-10-11: this read TWO wrong things --
+      // this.data.occupations (the key is characterGen.occupations; the
+      // stale path made occ {} forever) and newChar.occupation (runtime
+      // villagers carry occupationId). Every successor since the bug was
+      // born stepped up with ZERO background abilities -- "their past,
+      // their hands" was a lie for every body after the first.
       try {
-        const occ = (this.data.occupations || []).find(o => o.id === newChar.occupation) || {};
+        const occ = (((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {};
         const granted = (occ.granted || []).filter(id => (this.data.abilities || []).find(a => a.id === id));
         s.backgroundAbilities = granted.map(id => {
           const d = (this.data.abilities || []).find(a => a.id === id) || {};
           return { id, name: d.name || id, desc: d.description || '', level: 1, xp: 0, background: true };
         });
+        // BREAK-IT abilities r6: a new body's background legs change --
+        // activeSynergies was computed for the OLD body's legs. Recompute
+        // or the successor keeps firing synergies for legs they never held
+        // (and misses newly-completed ones).
+        try { this.recomputeActiveSynergies(); } catch (e2) {}
       } catch (e) {}
       // System abilities pass with the mantle — the System recognizes the
       // office, not the face. It's alien like that.
