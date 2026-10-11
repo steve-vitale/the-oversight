@@ -419,15 +419,34 @@
       if (dlg === 'stay') {
         // "I'll stay a while." — company kept. REBUILD 2026-10-11: new
         // handler for the just_company want's honest engagement.
+        // DEEPENING ARC (journey deepening 2026-10-11): staying on loop used
+        // to cycle the same 3 lines verbatim forever, the want stalling at
+        // stage 2 with the grief never named. Now the fourth stay deepens —
+        // the weight gets said out loud — and the want resolves as
+        // 'comforted' instead of looping. No filler loop, no stall.
         c.transcript.push({ who: 'you', text: '"I\'ll stay a while."' });
         try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:stay' }); } catch (e) {}
-        const line = this.convoPickCycle(vid, 'dlg:stay:lines', [
-          '"Nice. Sit. The fire\'s warm."',
-          '"Good. Company\'s company."',
-          'They shift over, making room. "Stay as long as you like."',
-        ]) || '"Nice. Sit. The fire\'s warm."';
-        this.sayLine(vid, line, { tag: 'small' });
-        this.convoWantEngage(vid, 'engage');
+        const stays = (c._stayCount = (c._stayCount || 0) + 1);
+        let line;
+        if (stays >= 4) {
+          const raw = this.convoPickCycle(vid, 'dlg:stay:deepen', [
+            '"...I keep thinking about them. About — everyone. Sorry. It just comes out, sitting here."',
+            '"You know what\'s worst? The quiet parts. When the fire\'s the only one talking."',
+          ]) || '"...I keep thinking about them. About — everyone."';
+          line = raw;
+          this.sayLine(vid, line, { tag: 'comfort' });
+          // seek_comfort resolves as 'comforted' — the want's own closeLine
+          // ("Thanks for... you know. Just listening.") carries the goodbye.
+          this.convoWantEngage(vid, 'commit');
+        } else {
+          line = this.convoPickCycle(vid, 'dlg:stay:lines', [
+            '"Nice. Sit. The fire\'s warm."',
+            '"Good. Company\'s company."',
+            'They shift over, making room. "Stay as long as you like."',
+          ]) || '"Nice. Sit. The fire\'s warm."';
+          this.sayLine(vid, line, { tag: 'small' });
+          this.convoWantEngage(vid, 'engage');
+        }
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 

@@ -658,7 +658,21 @@
       // convoPickCycle reshuffles when the pool runs dry.
       const bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
       if (!bit) return line;
-      return useOpen ? '"' + bit + inner + '"' : '"' + inner + ' ' + bit + '"';
+      // COMMA-OPENER CASE (journey deepening 2026-10-11): an opener that ends
+      // in ", " ("Honestly, ", "Well, ") continues the clause — the composed
+      // line must continue lowercase ("Honestly, we never finished…"), not
+      // "Honestly, We never finished…". Dash openers ("Let me be straight — ")
+      // and sentence openers ("Look. ") keep the capital: they start a new
+      // clause. Never touch the pronoun I, and never downcase a name — only
+      // common sentence-starters survive the rule.
+      let said = inner;
+      if (useOpen && /, $/.test(bit)) {
+        const fw = (/^([A-Za-z']+)/.exec(said) || [])[1] || '';
+        if (/^(we|you|they|he|she|it|that|this|these|those|there|then|the|a|an|my|our|your|their|his|her|its|no|yes|well|so|and|but|if|when|because|not|never|just|still|even|only)$/i.test(fw)) {
+          said = said.charAt(0).toLowerCase() + said.slice(1);
+        }
+      }
+      return useOpen ? '"' + bit + said + '"' : '"' + inner + ' ' + bit + '"';
     },
 
     // sayLine: THE single emission point for NPC speech (convo rebuild

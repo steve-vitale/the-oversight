@@ -207,32 +207,32 @@
   const REPLY_POOLS = {
     news: {
       past: [
-        { id: 'dlg:more', v: ['"What was that like?"', '"Do you ever miss it?"', '"Tell me about before."]'] },
-        { id: 'dlg:react', v: ['"Huh."', '"I can picture it."', '"That\'s a whole life."]'] },
+        { id: 'dlg:more', v: ['"What was that like?"', '"Do you ever miss it?"', '"Tell me about before."'] },
+        { id: 'dlg:react', v: ['"Huh."', '"I can picture it."', '"That\'s a whole life."'] },
       ],
       goal: [
-        { id: 'dlg:more', v: ['"How\'s that going?"', '"What\'s the hard part?"', '"What would it take?"]'] },
-        { id: 'dlg:react', v: ['"I hope you get there."', '"That matters."', '"Yeah."]'] },
+        { id: 'dlg:more', v: ['"How\'s that going?"', '"What\'s the hard part?"', '"What would it take?"'] },
+        { id: 'dlg:react', v: ['"I hope you get there."', '"That matters."', '"Yeah."'] },
       ],
       village: [
-        { id: 'dlg:more', v: ['"Who\'s struggling most?"', '"What do we do about it?"', '"How\'s everyone holding up, really?"]'] },
-        { id: 'dlg:react', v: ['"I\'ve noticed."', '"We\'ll figure it out."', '"Hm."]'] },
+        { id: 'dlg:more', v: ['"Who\'s struggling most?"', '"What do we do about it?"', '"How\'s everyone holding up, really?"'] },
+        { id: 'dlg:react', v: ['"I\'ve noticed."', '"We\'ll figure it out."', '"Hm."'] },
       ],
       plans: [
-        { id: 'dlg:more', v: ['"When?"', '"Want company?"', '"What do you need for that?"]'] },
-        { id: 'dlg:react', v: ['"Good plan."', '"Be careful out there."', '"Sounds right."]'] },
+        { id: 'dlg:more', v: ['"When?"', '"Want company?"', '"What do you need for that?"'] },
+        { id: 'dlg:react', v: ['"Good plan."', '"Be careful out there."', '"Sounds right."'] },
       ],
       gossip: [
-        { id: 'dlg:more', v: ['"Who told you?"', '"Do you believe it?"', '"What else have you heard?"]'] },
-        { id: 'dlg:react', v: ['"No kidding."', '"Huh. People talk."', '"I\'ll keep that in mind."]'] },
+        { id: 'dlg:more', v: ['"Who told you?"', '"Do you believe it?"', '"What else have you heard?"'] },
+        { id: 'dlg:react', v: ['"No kidding."', '"Huh. People talk."', '"I\'ll keep that in mind."'] },
       ],
       personal: [
-        { id: 'dlg:more', v: ['"Tell me more about that."', '"I didn\'t know that about you."', '"What else?"]'] },
-        { id: 'dlg:react', v: ['"That tracks."', '"I get that."', '"Huh."]'] },
+        { id: 'dlg:more', v: ['"Tell me more about that."', '"I didn\'t know that about you."', '"What else?"'] },
+        { id: 'dlg:react', v: ['"That tracks."', '"I get that."', '"Huh."'] },
       ],
       secret: [
-        { id: 'dlg:more', v: ['"Why are you telling me this?"', '"Does anyone else know?"', '"Go on."]'] },
-        { id: 'dlg:react', v: ['"I won\'t tell."', '"...Wow."', '"Okay."]'] },
+        { id: 'dlg:more', v: ['"Why are you telling me this?"', '"Does anyone else know?"', '"Go on."'] },
+        { id: 'dlg:react', v: ['"I won\'t tell."', '"...Wow."', '"Okay."'] },
       ],
       _default: [
         { id: 'dlg:more', v: ['"Go on."', '"Tell me more."', '"And then?"'] },
@@ -243,11 +243,11 @@
       grief: [
         { id: 'dlg:comfort', v: ['"You alright?"', '"Are you okay?"', '"Hey — you alright?"'] },
         { id: 'dlg:empathize', v: ['"Yeah. I get it."', '"That sounds really hard."', '"I hear you."'] },
-        { id: 'dlg:askwhy', v: ['"What happened?"', '"Want to talk about it?"', '"Do you want to tell me?"]'] },
+        { id: 'dlg:askwhy', v: ['"What happened?"', '"Want to talk about it?"', '"Do you want to tell me?"'] },
       ],
       cheer: [
-        { id: 'dlg:more', v: ['"What\'s got you smiling?"', '"Good. We needed that."', '"Tell me the good news."]'] },
-        { id: 'dlg:react', v: ['"Nice."', '"Ha — good."', '"That\'s the spirit."]'] },
+        { id: 'dlg:more', v: ['"What\'s got you smiling?"', '"Good. We needed that."', '"Tell me the good news."'] },
+        { id: 'dlg:react', v: ['"Nice."', '"Ha — good."', '"That\'s the spirit."'] },
       ],
       _default: [
         { id: 'dlg:comfort', v: ['"You alright?"', '"Are you okay?"', '"Hey — you alright?"'] },

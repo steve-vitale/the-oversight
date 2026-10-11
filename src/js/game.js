@@ -4024,10 +4024,39 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } catch (e2) {}
           return { ok: true, gossip: g, aboutOther: g.dims.who };
         }
-        // share the freshest remaining gossip, with their distortion
+        // share the freshest remaining gossip, with their distortion.
+        // HONEST RENDERING (journey deepening 2026-10-11): this branch used
+        // to fetch g and ignore it, saying a static "doing right by people"
+        // line while the comment promised distortion that was never written.
+        // Render the actual gossip: the strongest positive dim, exaggerated
+        // as the story travels (distortion >= 2 = third retelling and beyond,
+        // per the seedGossip contract: "she's giving away all the supplies").
         const g = heard[heard.length - 1];
-        const aboutYou = true; // gossip seeded from observe() is always about player actions
-        this.say(`${first}: "Word is you're doing right by people. Keep it up."`);
+        const gdims = (g && g.dims) || {};
+        const dimKeys = ['generous', 'brave', 'honest', 'competent', 'trustworthy'];
+        let gTop = null, gTopV = 0;
+        for (const k of dimKeys) {
+          const v = gdims[k];
+          if (typeof v === 'number' && v > gTopV) { gTop = k; gTopV = v; }
+        }
+        const gDist = (g && g.distortion) || 0;
+        const gPlain = {
+          generous: `"Word is you've been sharing. Giving freely, no questions asked."`,
+          brave: `"Word is you stood your ground out there."`,
+          honest: `"Word is you told it straight."`,
+          competent: `"Word is you know what you're doing out there."`,
+          trustworthy: `"Word is people can count on you."`,
+        };
+        const gBig = {
+          generous: `"Word is you've been giving away everything — the whole pantry, they say."`,
+          brave: `"Word is you charged in like you couldn't die."`,
+          honest: `"Word is you can't tell a lie to save your life."`,
+          competent: `"Word is there's nothing you can't do out there."`,
+          trustworthy: `"Word is you'd die before letting anyone down."`,
+        };
+        const gLine = gTop ? (gDist >= 2 ? gBig[gTop] : gPlain[gTop])
+          : `"Word is you're doing right by people. Keep it up."`;
+        this.say(`${first}: ${gLine}`);
         return { ok: true, gossip: g };
       }
       if (topic === 'village') {
