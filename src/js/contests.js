@@ -614,7 +614,9 @@
   // The System's dossier lines — said aloud, never raw numbers.
   G._cxDossierLine = function(contest, wins) {
     const n = contest.name;
-    if (wins >= 4) return `\uD83D\uDCFA We've run ${n} ${wins} times and you've won it ${wins} times. The producers have a file on you now. It's thick. They're casting against it.`;
+    // GALACTIC CAST (2026-10-11): the producers' file note can arrive signed
+    // by a known persona (stage >= 1). Never leaks a stage-0 name.
+    if (wins >= 4) { var _so = (typeof this.castSignOff === 'function') ? this.castSignOff() : ''; return `\uD83D\uDCFA We've run ${n} ${wins} times and you've won it ${wins} times. The producers have a file on you now. It's thick. They're casting against it.${_so}`; }
     if (wins === 3) return `\uD83D\uDCFA Third win in ${n}. The System has studied the tapes. Your favorite moves are... unavailable tonight.`;
     const _rv = (this._cxAdapt().rival || {})[contest.id];
     const _rn = (_rv && contest.cat === 'blood' && _rv.name) ? ` ${ _rv.name} has been fed your tapes and wants the rematch.` : '';
@@ -753,7 +755,11 @@
       death_reel: { line: 'TONIGHT: YOUR REEL. Every clip is you. The galaxy has notes.', cost: { trauma: 1 } },
       moot_show: { line: 'SURPRISE WITNESS. Someone you did not expect is testifying tonight.', cost: { trauma: 1 } },
     };
-    const tw = TWISTS[show.id] || { line: 'The producers want something NEW. The old bit is retired — improvise.', cost: { trauma: 1 } };
+    // GALACTIC CAST (2026-10-11): the generic producer twist now comes signed
+    // by a known persona (stage ≥ 1) with a characterful demand — advancing
+    // them toward stage 2 (seen). Unknown personae stay unsigned ("the producers").
+    const _cpd = (typeof this.castProducerDemand === 'function') ? this.castProducerDemand() : null;
+    const tw = TWISTS[show.id] || _cpd || { line: 'The producers want something NEW. The old bit is retired — improvise.', cost: { trauma: 1 } };
     this.sysSay('📺 ' + tw.line);
     this.sysSay('📺 The audience is bored of the rerun. Do something they haven\u2019t seen.');
     const out = phases.map((ph, pi) => {
@@ -982,6 +988,11 @@
   G.fireShow = function(show) {
     const s = (show && show.id) ? show : this.pickShow();
     this.sysSay(`📺 TONIGHT: ${s.name}. ${s.desc}`);
+    // GALACTIC CAST (2026-10-11, Steve: world-building scaffold): one sponsor
+    // card or recurring-persona mention per show. Stage-0 domain match names
+    // the persona (stage → 1, heard); stage ≥1 is a flavor mention. Cooldowns
+    // and chance gates keep personae recurring, not spammy.
+    try { var _cs = this.castShowSponsor ? this.castShowSponsor(s.id) : null; if (_cs) this.sysSay(_cs); } catch (e) {}
     // Who gets pulled — NOTABILITY-FIRST (Steve 2026-10-09; code:
     // showCastPull). The flat 30/40/30 die roll is gone: the aliens want
     // their stars, the pull is exposure not a prize, and popular isn't
