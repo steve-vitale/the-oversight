@@ -728,27 +728,74 @@
       if (choiceId === 'agency:ask_expedition' || choiceId === 'agency:ask_field') {
         var v = this.state.village;
         var k = st.know[vid] || { plants: 0, monsters: 0, places: [] };
-        var lines = [];
-        if ((k.places || []).length) lines.push(`"${k.places[k.places.length - 1]} — I'll show you on the map sometime. It's real."`);
+        var cands = [];
+        if ((k.places || []).length) cands.push(`"${k.places[k.places.length - 1]} — I'll show you on the map sometime. It's real."`);
         // real teaching: monster lore from someone who fought it. One
         // species per ask; the lesson lands as 'observed' — you've learned
-        // it the way the village learns things: through talk.
-        var taughtMonster = false;
-        try { taughtMonster = !!this.agencyTeachMonster(vid); } catch (e) {}
-        if (taughtMonster) lines.push(`"Ask me about the wild again sometime. There's more, but that's the one that matters."`);
-        else if ((k.monsters || 0) >= 2) lines.push(`"Saw things with too many joints. Give them room. That's the whole lesson."`);
-        if ((st.teachable[vid] || []).length) {
-          lines.push(`"The bitter greens by the creek — boil them twice. First water's a liar."`);
-          // real teaching: one plant identification per earned lesson entry.
-          // The entry is SPENT — talk doesn't print knowledge (gap-breadth
-          // 2026-10-10; the old path re-taught forever on k.plants>=3).
-          try { this.agencyTeachPlant(vid); } catch (e) {}
+        // it the way the village learns things: through talk. The line names
+        // the species: each lesson is specific, never a generic repeat.
+        var taughtMid = null;
+        try { taughtMid = this.agencyTeachMonster(vid); } catch (e) {}
+        if (taughtMid) {
+          var mwhat = 'that thing';
+          try { mwhat = this.monsterDisplayName(taughtMid); } catch (e2) {}
+          cands.push(`"The ${mwhat} — the tracks, the sound it makes before it moves, where not to stand. That's the one that matters. Ask me again sometime, there's more."`);
         }
-        if (!lines.length) lines.push('"Weather. Mostly weather. Ask me again when I\'ve been farther."');
+        else if ((k.monsters || 0) >= 2) cands.push(`"Saw things with too many joints. Give them room. That's the whole lesson."`);
+        // real teaching: one plant identification per earned lesson entry.
+        // The entry is SPENT — talk doesn't print knowledge (gap-breadth
+        // 2026-10-10; the old path re-taught forever on k.plants>=3).
+        // The line names the plant taught: specific beats repeat.
+        var taughtPlant = null;
+        if ((st.teachable[vid] || []).length) {
+          try {
+            if (this.agencyTeachPlant(vid)) taughtPlant = st.lastTaughtPlantName || 'a plant';
+          } catch (e) {}
+          if (taughtPlant) cands.push(`"This one — ${taughtPlant}. Leaf, stem, smell. You won't forget it now."`);
+        }
+        if (!cands.length) cands.push('"Weather. Mostly weather. Ask me again when I\'ve been farther."');
         if (v.explorerNews) delete v.explorerNews[vid];
-        try { this.bumpTrust(vid, 2); } catch (e) {}
-        try { this.recordDeed(vid, 'taught', `${nm} taught you something from the wild.`, 1); } catch (e) {}
-        return { line: pick(lines), choices: this.convoChoices(vid), ended: false };
+        // HONESTY (longsim agency 2026-10-11): the 'taught' deed and the
+        // teaching trust bump fire only when something was actually taught.
+        // Baseline: 133 of 160 asks recorded the deed with no lesson behind
+        // it — the village's book must not lie about its people.
+        var actuallyTaught = !!(taughtMid || taughtPlant);
+        if (actuallyTaught) {
+          try { this.bumpTrust(vid, 2); } catch (e) {}
+          try { this.recordDeed(vid, 'taught', `${nm} taught you something from the wild.`, 1); } catch (e) {}
+        }
+        // TRANSCRIPT (longsim agency 2026-10-11): agency turns bypassed the
+        // convoTurn wrapper, so teaching conversations left no trace in the
+        // dialogue transcript/history. Speak through sayLine — the single
+        // emission choke point — which pushes the transcript entry and
+        // enforces the no-repeat invariant (per-convo + run-wide ledgers).
+        // Each candidate is tried in turn; a blocked repeat falls through.
+        var c = null;
+        try { c = this.convoGet(vid); } catch (e) {}
+        var youLabel = choiceId === 'agency:ask_expedition'
+          ? '"What did you see out there?"' : '"Teach me something from the wild."';
+        if (c) c.transcript.push({ who: 'you', text: youLabel });
+        var order = cands.slice();
+        for (var oi = order.length - 1; oi > 0; oi--) {
+          var oj = Math.floor(R() * (oi + 1));
+          var ot = order[oi]; order[oi] = order[oj]; order[oj] = ot;
+        }
+        var spokenText = null;
+        for (var si = 0; si < order.length; si++) {
+          var emitted = null;
+          try { emitted = this.sayLine(vid, order[si]); } catch (e) { emitted = null; }
+          if (emitted) { spokenText = order[si]; break; }
+        }
+        if (!spokenText) {
+          // every candidate was a blocked repeat (or sayLine unavailable):
+          // an honest fallback, never a verbatim repeat.
+          var fb = '"There\'s more, but that\'s for another fire."';
+          try { if (this.sayLine(vid, fb)) spokenText = fb; } catch (e) {}
+          if (!spokenText) spokenText = fb;
+        }
+        var choices = [];
+        try { choices = this.convoChoices(vid); } catch (e) {}
+        return { line: spokenText, choices: choices, ended: false, transcript: c ? c.transcript.slice() : [] };
       }
       return null;
     },
@@ -759,6 +806,7 @@
       // declining returns, not an infinite talk faucet.
       var st = this.agencyState();
       var t = st.teachable[vid] || [];
+      st.lastTaughtPlantName = null; // read by agencyTurn for the spoken line
       if (!t.length) return false;
       t.shift();
       var plants = this.data.plants || [];
@@ -768,6 +816,7 @@
       if (!cands.length) return false;
       var p = pick(cands);
       cx.plants[p.id] = { level: 1, source: 'taught' };
+      st.lastTaughtPlantName = p.name || p.id;
       var nm = '';
       try { nm = this.displayName(vid).split(' ')[0]; } catch (e) { nm = 'They'; }
       this.say(`📖 ${nm} shows you ${p.name || 'a plant'} — leaf, stem, smell. You won't forget it now. (Codex: ${p.name || 'plant'} identified.)`);

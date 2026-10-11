@@ -95,6 +95,9 @@
       try { vp = this.vpOf(vid) || {}; } catch (e) {}
       if (vp.dead) { o.kind = 'idle'; o.state = 'idle'; return o; }
       o.tightened = false; // fresh pick: not a danger-tightened trip
+      o.chore = null; // fresh pick: a stale chore label must not linger on
+      // non-chore objectives (longsim agency 2026-10-11: census showed
+      // VISIT/out(fire), GUARD/out(teach) — old chore tags on new errands)
       var n = {};
       try { n = this.npcNeeds(vid); } catch (e) {}
       var goal = null;
