@@ -5,6 +5,11 @@
 //   - contestEligible() -> {eligible, ineligible, reason} (ineligible carries the legible why-out per person — dead, severed, age, gravely wounded, exiled)
 //   - _cxCountHeld(ac) -> counts one held contest per contest object at ANY terminal (end/die/refuse/arena-lost), once-guarded for multi-take verdicts
 //   - _cxWinnerShare(pname) -> the villager winner's share (pantryAdd, cap-real) for every villager-win path
+//   - _cxPrizeLane(ac, contest) -> rolls the non-item prize lanes on a player win (ability offer / synergy hint / knowledge dump); the System lane alongside the loot roll's item lane
+//   - _cxPrizeAbilityOffer(contest) -> sets s.abilityChoices (1-of-3 system_offer abilities, dark/OP tiers excluded, category-biased); false when slots full / offer pending / nothing to offer
+//   - _cxPrizeSynergyHint() -> +1 discovery attempt on an undiscovered synergy whose legs are held, through the real tease/unlock path; false when nothing qualifies
+//   - _cxPrizeKnowledgeDump() -> identifies one random unidentified plant via the real identifyPlant path; false when everything is named
+//   - _cxContestDeedTrack(contest) -> villager deed-XP track for a contest category (blood->combat, endurance/forage->field, else->social)
 //   - contestTick() -> event|null
 //   - contestPool()
 //   - pickContest()
@@ -118,6 +123,8 @@
 //   - summons_castability: the ratings summons is for the PLAYER specifically — a dead (over/health<=0) or exiled scholar is not summoned. The tick falls through to normal scheduling (unconsumed slot) and fireRatingsSummons refuses out loud (code: contestTick, fireRatingsSummons, break-it contest r10 2026-10-09)
 //   - summons_budget: ratings summons consume the shared 2/week TV budget like contests and shows (code: contestTick)
 //   - villager_prize_real: a watched villager win grants real pantry rations ("Winner's share"), not a placeholder line (code: _contestEnd, Steve 2026-10-08)
+//   - villager_prize_deed: a televised villager win is a DEED — +3 XP on the deed-XP track the contest belongs to (blood->combat, endurance/forage->field, else->social), so a win can light the first rung of the System's watching-grant path; the grant narrates its own "Earned, not given" when a threshold fires; applies to the watch-verdict path AND multi-take co-winners (code: _contestEnd, _contestResolveOthers, _cxContestDeedTrack, longsim abilities r2 2026-10-11)
+//   - prize_lanes: the contest prize table has two lanes — ITEM (the alien-loot roll) and SYSTEM (ability offer / synergy hint / knowledge dump, canon docs/CONTESTS.md "Prizes — every lane": item-evolution assists documented as the remaining blank, relic-system territory). System lane: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened, cap 0.90; a win should usually bring a System gift (canon "Prizes must be worth the fear" — wins are rare, so wins are the throttle); weights ability 0.45 / synergy 0.30 / knowledge 0.25 with fall-through when a lane is impossible (slots full, nothing held, everything named). Ability offers are alien-abilities-only (no human skills, no vile/body_horror/OP tiers), category-biased (blood->combat, moot->social), never trample a pending offer; synergy hints grant a real +1 discovery attempt on a fully-held undiscovered pairing through the tease/unlock path; knowledge dumps identify one plant through identifyPlant (facts only, no earthly skill). Independent of the loot roll — a shy vault can still bring a System gift (code: _cxPrizeLane, _cxPrizeAbilityOffer, _cxPrizeSynergyHint, _cxPrizeKnowledgeDump, longsim abilities r2 2026-10-11)
 //   - win_tax_announced: the -5 hp winner's mark is said out loud, never silent — a hidden HP tax is a lie (code: _contestEnd, Steve 2026-10-08)
 //   - aftermath_trauma: the contest end path applies aftermath trauma to the player, said out loud — win +4, lose +6 (canon docs/CONTESTS.md "Winners come home changed (prizes, trauma, fans)"); the old path applied none, so a merciful win landed trauma-free while refusing landed +5 (code: _contestEnd, break-it contests r15 2026-10-11)
 //   - bet_payout_honest: the watched-bet payout says the REAL kcal gained, not the promised 2x — at/near the kcal cap the grant clamps and the old "+400 kcal" line lied (at cap: wagered 200, won, gained nothing); a fully-capped win says the body is full instead of a phantom +400 (code: _contestVerdict, break-it contests r15 2026-10-11)
@@ -4535,6 +4542,142 @@
     }
   };
 
+  G._cxPrizeLane = function(ac, contest) {
+    // PRIZE LANES — the non-item half of the contest prize table (longsim
+    // abilities r2 2026-10-11). Canon docs/CONTESTS.md "Prizes — every
+    // lane": "ability unlocks, synergy hints, knowledge dumps, supplies,
+    // fan care packages". Supplies/care-packages exist (winner's share,
+    // apCarePackage); social lanes exist (favor, fans, leadShift,
+    // notability). The THREE MISSING lanes land here, all System-delivered:
+    //   - ABILITY OFFER: the System offers 1-of-3 into the 6 slots (alien
+    //     abilities only — human skills are NEVER granted here; canon
+    //     CANON.md "Human skills != alien abilities"). Vile/body_horror/OP
+    //     tiers are not in the gift bag — the Static's dark deals and
+    //     pact-tier power have their own gates.
+    //   - SYNERGY HINT: the System saw what you're doing — +1 discovery
+    //     attempt on an undiscovered synergy whose legs you hold, through
+    //     the real tease/unlock path (whisper->shimmer+hint->hero card).
+    //   - KNOWLEDGE DUMP: the System reads the world for you — identifies
+    //     one plant through the real identifyPlant path. Facts only; no
+    //     earthly SKILL is granted (herbal_remedy stays taught, never gifted).
+    // Item-evolution assists (the fourth missing lane) live in the
+    // relic/item system — documented, not built here (lever-9 boundary).
+    // Numbers: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened (cap
+    // 0.90) — the same risk-scaling grammar as the loot roll's fear-honesty
+    // move. A win should usually bring a System gift (canon "Prizes must be
+    // worth the fear"); wins are rare, so wins are the throttle, not this
+    // roll. Lane weights: ability 0.45 / synergy 0.30 / knowledge 0.25;
+    // each lane falls through to the next when impossible (slots full,
+    // nothing held, everything named).
+    if (!this.state.systemArrived) return false;
+    let chance = 0.60;
+    const risk = (contest && contest.risk) || '';
+    if (risk === 'high') chance += 0.10;
+    if (risk === 'extreme') chance += 0.20;
+    if (ac && ac.variant === 'hardened') chance += 0.10;
+    chance = Math.min(0.85, chance);
+    if (Math.random() >= chance) return false;
+    const r = Math.random();
+    const order = r < 0.45 ? ['a', 's', 'k'] : (r < 0.75 ? ['s', 'a', 'k'] : ['k', 'a', 's']);
+    for (const lane of order) {
+      try {
+        if (lane === 'a' && this._cxPrizeAbilityOffer(contest)) return true;
+        if (lane === 's' && this._cxPrizeSynergyHint()) return true;
+        if (lane === 'k' && this._cxPrizeKnowledgeDump()) return true;
+      } catch (e) {}
+    }
+    return false;
+  };
+
+  G._cxPrizeAbilityOffer = function(contest) {
+    const s = this.state.scholar || {};
+    if ((s.abilityChoices || []).length) return false; // don't trample a pending offer
+    const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
+    if ((s.abilities || []).length >= maxSlots) return false;
+    const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+    const owned = new Set((s.abilities || []).map(a => (a && a.id) || a));
+    // The gift bag: practical + wacky + mid tiers. The dark tiers (vile,
+    // body_horror) and the pact tier (overpowered) are NOT prizes — they
+    // arrive through their own gates (the Static, not the show).
+    const bag = all.filter(a => !owned.has(a.id) && ['utility', 'wacky', 'underpowered', 'uncommon', 'rare', 'combat', 'social'].indexOf(a.tier) >= 0);
+    if (!bag.length) return false;
+    const pick = (arr) => arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
+    const choices = [];
+    // The contest you won shapes the gift: blood->combat, moot->social.
+    const cat = (contest && contest.cat) || '';
+    const biasTier = cat === 'blood' ? 'combat' : (cat === 'moot' ? 'social' : null);
+    if (biasTier) {
+      const biased = bag.filter(a => a.tier === biasTier);
+      if (biased.length) {
+        const b = pick(biased);
+        const bi = bag.findIndex(a => a.id === b.id);
+        if (bi >= 0) bag.splice(bi, 1);
+        choices.push(b);
+      }
+    }
+    while (choices.length < 3 && bag.length) choices.push(pick(bag));
+    s.abilityChoices = choices.map(e => ({ id: e.id, name: e.name, description: e.description, flavor: e.flavor }));
+    try { this.tele('prize_ability_offer', { contest: (contest && contest.id) || '?', ids: choices.map(c => c.id) }); } catch (e2) {}
+    this.sysSay(`📺 The System LIKED that. "YOU. WINNER. PICK A TRICK — ON US. Choose." (The System offers you an ability — choose one.)`);
+    return true;
+  };
+
+  G._cxPrizeSynergyHint = function() {
+    const sch = this.state.scholar || {};
+    const syns = this.data.synergies || [];
+    if (!syns.length) return false;
+    const synIds = new Set(syns.map(x => x.id));
+    const discovered = new Set(sch.synergies || []);
+    // same leg-held grammar as recomputeActiveSynergies (prefix-aware,
+    // path-aware): a leg counts when held, known, leveled, or discovered.
+    const hasReq = (syn, rid) => {
+      const minLvl = syn.minLevel || 1;
+      if (synIds.has(rid)) return discovered.has(rid);
+      if (rid.startsWith('tech:')) return !!(((sch.codex || {}).techniques || {})[rid.slice(5)]);
+      if (rid.startsWith('skill:')) return (((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level >= minLvl;
+      return (this.abilityLevel ? this.abilityLevel(rid) : 0) >= minLvl;
+    };
+    const att = sch.synergyAttempts = sch.synergyAttempts || {};
+    const cands = syns.filter(syn => {
+      if (discovered.has(syn.id)) return false;
+      const paths = syn.requires_any || [syn.requires || []];
+      return paths.some(p => p.length && p.every(r => hasReq(syn, r)));
+    });
+    if (!cands.length) return false;
+    // momentum: prefer a pairing already warming up (attempts 1-2) — the
+    // System saw it starting, not just possible.
+    const warming = cands.filter(c => (att[c.id] || 0) > 0);
+    const pool = warming.length ? warming : cands;
+    const syn = pool[Math.floor(Math.random() * pool.length)];
+    this.sysSay(`📺 SYSTEM: "That thing you do — with the OTHER thing. The audience SAW it. Do it again. We want the third one on camera."`);
+    const n = (att[syn.id] || 0) + 1;
+    att[syn.id] = n;
+    if (n >= 3) { try { this.unlockSynergy(syn); } catch (e) {} }
+    else { try { this.synergyTease(syn, n); } catch (e) {} }
+    try { this.tele('prize_synergy_hint', { id: syn.id, attempt: n }); } catch (e2) {}
+    return true;
+  };
+
+  G._cxPrizeKnowledgeDump = function() {
+    const plants = (this.data.plants || []).filter(p => p && p.id && !this.plantKnown(p.id));
+    if (!plants.length) return false;
+    const p = plants[Math.floor(Math.random() * plants.length)];
+    this.sysSay(`📺 SYSTEM: "KNOWLEDGE DUMP. We read the world so you don't have to. Lazy. Effective."`);
+    try { this.identifyPlant(p.id, 'prize', 'THE SYSTEM'); } catch (e) { return false; }
+    try { this.tele('prize_knowledge_dump', { plant: p.id }); } catch (e2) {}
+    return true;
+  };
+
+  G._cxContestDeedTrack = function(contest) {
+    // A televised win is a DEED — it feeds the villager deed-XP track the
+    // contest belongs to. Performance is social; blood is combat; the land
+    // is the land.
+    const cat = (contest && contest.cat) || '';
+    if (cat === 'blood') return 'combat';
+    if (cat === 'endurance' || cat === 'forage') return 'field';
+    return 'social'; // moot, weird, puzzle, detective, chance: performance is social
+  };
+
   G._contestEnd = function(ac, outcome, prize) {
     try { this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: outcome || '?' }); } catch (e) {}
     // ADAPTATION (Steve 2026-10-11): the dossier records every ending.
@@ -4603,7 +4746,16 @@
         // WINNER'S SHARE (break-it contests r12 2026-10-10): one helper for
         // every villager-win path — the watch verdict here, multi-take
         // co-winners in _contestResolveOthers.
-        if (_grantPrize) { ac._prizeGranted[_grantKey] = true; this._cxWinnerShare(pname); }
+        if (_grantPrize) {
+          ac._prizeGranted[_grantKey] = true;
+          this._cxWinnerShare(pname);
+          // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): a
+          // televised win is a DEED — it feeds the deed-XP track the contest
+          // belongs to (+3 XP: a full first rung for a nobody, a nudge for a
+          // veteran). The System was watching; the watching pays. The grant
+          // path narrates its own "Earned, not given" when a threshold fires.
+          try { this.villagerGainXP(ac.participant, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e2) {}
+        }
       } else {
         this.sysSay(`📺 ${contest.name} — YOU WIN. The crowd is a weather system.`);
         this.addNotability('player', 'contestWin');
@@ -4660,6 +4812,12 @@
               // never silently pocket the prize.
               this.sysSay('📺 Prize: the System\'s favor (and a story). The vault was feeling shy tonight.');
             }
+            // PRIZE LANES (longsim abilities r2 2026-10-11): the roll above
+            // is the ITEM lane. This is the System lane — ability offers,
+            // synergy hints, knowledge dumps (canon docs/CONTESTS.md
+            // "Prizes — every lane"). Independent of the loot roll: a shy
+            // vault can still bring a System gift.
+            try { this._cxPrizeLane(ac, contest); } catch (e2) {}
           } catch (e) { this.sysSay('📺 Prize: the System\'s favor (and a story).'); }
         }
         // FEARED means winning costs: winners are marked. Said out loud —
@@ -5546,6 +5704,10 @@
         // WINNER'S SHARE (break-it contests r12 2026-10-10): a co-taken
         // winner's prize is real — same share the watch-verdict path grants.
         this._cxWinnerShare(pname);
+        // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): same
+        // win-deed as the watch path — the televised win feeds the
+        // contest's deed-XP track.
+        try { this.villagerGainXP(pid, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e3) {}
       } else {
         const survived = [
           `📺 ${pname} survived. Barely, by the look of them when the lights came up.`,
