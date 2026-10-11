@@ -1149,7 +1149,6 @@
         // AUDIO (Steve 2026-10-06): the specialist's knife work — same beat as self-clean.
         try { this.audioEvent('animalButcher'); } catch (e) {}
       } else if (task === 'cook') {
-        const mult = 1 + 0.05 * spec.skill;
         if (it.rawKcal) {
           // DIGESTIBILITY: the specialist's fire uses the same honest math —
           // skill buys better outcomes, never phantom energy.
@@ -2384,6 +2383,29 @@
       const kcal = it.kcalEach;
       if (this.blendKcalQuality) this.blendKcalQuality(kcal, this.mealQuality ? this.mealQuality(it) : 1);
       s.kcal = Math.min(this.kcalCap(), (s.kcal || 0) + kcal);
+      // L3 BENEFIT (break-it food r5): the level-up copy promises "+5 health
+      // when eaten" — the counter bite is eating. Same grant as eat()/eatOne().
+      // MEDICINE (break-it food r5): chewing medicinal plants heals — the
+      // knowledgeable get real healing, the ignorant a whisper. Same promise
+      // as the bulk path. MEAT: the animal track's deep/master +5, as eatOne.
+      try {
+        if (it.plantId && !String(it.plantId).startsWith('meat_')) {
+          const eBite = (this.state.codex.plants || {})[it.plantId];
+          if (eBite && eBite.level >= 3) this.addHealth(5);
+          const _mp = (this.data.plants || []).find(pp => pp.id === it.plantId);
+          if (_mp && _mp.medicinal) {
+            const _mname = this.plantKnown(it.plantId) ? this.plantCalledName(it.plantId) : (_mp.description || 'bitter leaves');
+            this.addHealth(2);
+            this.say(this.herbKnown && this.herbKnown()
+              ? `You chew the ${_mname} deliberately — the way you were taught. Bitter, working. (+2 health)`
+              : 'You chew the bitter leaves. Folk say it helps — you wouldn\'t know. (+2 health, maybe)');
+          }
+        } else if (it.plantId) {
+          const meatAid = String(it.plantId).replace(/^meat_/, '');
+          const mprep = (this.state.codex.animalPrep || {})[meatAid];
+          if (mprep && (mprep.masterKnown || mprep.deepKnown)) this.addHealth(5);
+        }
+      } catch (e) {}
       it.units -= 1;
       // HONESTY (break-it food r4): the old copy always said "You eat it raw"
       // even for cooked/smoked/pemmican bites off the counter.
@@ -2456,8 +2478,9 @@
         kcalEach: item.kcalEach, units: item.units,
         // GRANARY (haven growth 2026-10-10): cool dark bins slow spoilage
         // (+3d fresh, +14d preserved). Immortal-clock items (spoilDay 9999)
-        // are left alone.
-        spoilDay: (item.spoilDay || 9999) + ((this.granarySpoilBonus && isFinite(item.spoilDay)) ? this.granarySpoilBonus(item.foodState) : 0),
+        // are left alone. SPOILDAY HONESTY (break-it food r5): `??` not `||` —
+        // a spoilDay of 0 is a real (rotten) clock, not a missing one.
+        spoilDay: (item.spoilDay ?? 9999) + ((this.granarySpoilBonus && isFinite(item.spoilDay)) ? this.granarySpoilBonus(item.foodState) : 0),
         unit: item.unit,
         safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,

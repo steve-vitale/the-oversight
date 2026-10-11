@@ -6375,6 +6375,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const KEEP_KCAL = 2000;
         let kept = 0;
         const give = [];
+        // PANTRY CAP (break-it food r5): the homecoming haul is a pantry
+        // writer like any other — the cap binds here too (same class as the
+        // stockSurplus fix). A full pantry leaves the haul in your pack,
+        // honestly; the pack carried it home, it can carry it still. Checked
+        // BEFORE the keep/give split so a held-back split copy can never
+        // strand units (the split already reduced the pack original).
+        let pantryRoom = Infinity;
+        try { pantryRoom = Math.max(0, this.pantryCapKcal() - this.pantryKcal()); } catch (e) {}
+        if (pantryRoom <= 0) {
+          try {
+            this.say(`The pantry is full (${Math.round(this.pantryCapKcal()).toLocaleString()} kcal cap) — your haul stays in your pack. Expand storage to take more.`);
+          } catch (e) {}
+        } else {
         for (const item of s.inventory) {
           if (!((item.kcalEach || 0) > 0 && (item.units || 0) > 0 && !this.isUnprocessed(item))) continue;
           const itemKcal = (item.kcalEach || 0) * (item.units || 0);
@@ -6389,14 +6402,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             item.units = keepUnits;
           } else { give.push(item); }
         }
+        } // end else (pantry had room) — the keep/give split above
         const giveSet = new Set(give);
+        // SPOILAGE (break-it food r5 2026-10-11): the homecoming haul never
+        // stocks rot — the same gate donateToPantry's wrapper and
+        // putAwayFinished enforce. Before this, returning with today's-spoiled
+        // food pooled it into the pantry (measured: 4 spoiled portions in),
+        // inflating the feast plan's "have" and the pantry clock. Spoiled
+        // hauls are discarded on the trail, narrated — never silently kept.
+        // SPOILDAY HONESTY: `|| 9999` laundered spoilDay 0 (genuinely spoiled)
+        // into IMMORTAL stores — a falsy clock is not a missing clock. `??`
+        // fills only the truly absent.
+        for (let gi = give.length - 1; gi >= 0; gi--) {
+          if (this.isSpoiled && this.isSpoiled(give[gi])) give.splice(gi, 1);
+        }
+        if (give.length !== giveSet.size) {
+          this.say('Some of the haul went bad on the trail — left for the flies, not the pantry.');
+        }
         for (const item of give) {
           // FULL PROCESSING STATE (break-it food 2026-10-09): same toxin-
           // laundering class as pantryAdd — poisonRisk/wellMade/burnt were
           // silently washed. Same field contract as takeFromPantry's takenStack.
           vv.pantry.push({ name: item.name || 'Foraged food', plantId: item.plantId,
             kcalEach: item.kcalEach, units: item.units,
-            spoilDay: item.spoilDay || 9999, unit: item.unit,
+            spoilDay: item.spoilDay ?? 9999, unit: item.unit,
             safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
             foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
             hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk,
@@ -6528,13 +6557,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } else { give.push(item); }
       }
       const giveSet = new Set(give);
+      // SPOILAGE (break-it food r5 2026-10-11): amends don't take rot either —
+      // same gate as the homecoming haul. SPOILDAY HONESTY: `|| 9999`
+      // laundered spoilDay 0 into immortal stores; `??` fills only the absent.
+      for (let gi = give.length - 1; gi >= 0; gi--) {
+        if (this.isSpoiled && this.isSpoiled(give[gi])) give.splice(gi, 1);
+      }
       for (const item of give) {
         // FULL PROCESSING STATE (break-it food 2026-10-09): the old subset-push
         // was the same toxin-laundering class as pantryAdd — poisonRisk,
         // diseaseRisk and the rest silently washed on the way into the old
         // village's pantry. Same field contract as takeFromPantry's takenStack.
         ov.pantry.push({ name: item.name || 'Foraged food', plantId: item.plantId,
-          kcalEach: item.kcalEach, units: item.units, spoilDay: item.spoilDay || 9999,
+          kcalEach: item.kcalEach, units: item.units, spoilDay: item.spoilDay ?? 9999,
           unit: item.unit, safe: item.safe !== false, kg: item.kg || 0.2,
           foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
           diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk,
@@ -21951,6 +21986,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (it.units <= 0) scholar.inventory.splice(idx, 1);
       scholar.energy = Math.min(100, scholar.energy + 5);
       this.say(`You eat the ${it.name}. (+${kcal} kcal)`);
+      // MEDICINE (break-it food r5): the bulk path heals for chewed medicinal
+      // plants (knowledgeable: real healing; ignorant: a whisper). The pack
+      // bite is the live path since the Eat button was removed (Steve
+      // 2026-10-05 UI restructure) — it must keep the same promise. +2 per
+      // bite either way (bulk: min(8, medAte*2)).
+      try {
+        if (it.plantId && !String(it.plantId).startsWith('meat_')) {
+          const _mp1 = (this.data.plants || []).find(pp => pp.id === it.plantId);
+          if (_mp1 && _mp1.medicinal) {
+            const _mname1 = this.plantKnown(it.plantId) ? this.plantCalledName(it.plantId) : (_mp1.description || 'bitter leaves');
+            this.addHealth(2);
+            this.say(this.herbKnown && this.herbKnown()
+              ? `You chew the ${_mname1} deliberately — the way you were taught. Bitter, working. (+2 health)`
+              : 'You chew the bitter leaves. Folk say it helps — you wouldn\'t know. (+2 health, maybe)');
+          }
+        }
+      } catch (e) {}
       // ALIEN LOOT REVEAL (Steve 2026-10-06): tasting it teaches you.
       try { this.alienLootReveal(it); } catch (e) {}
       // EXPERIENTIAL LEARNING (Steve 2026-10-05): eating teaches you the calories.
@@ -23440,7 +23492,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (give <= 0) return;
       v.pantry = v.pantry || [];
       const freshDay = v.day + 3;
-      const newUnits = Math.ceil(give / 200); // ~200 kcal per unit
+      // ROUNDING HONESTY (break-it food r5 2026-10-11): Math.ceil minted up to
+      // +199 phantom kcal per surplus — a 1-kcal share deposited a whole
+      // 200-kcal unit, and the bias was always upward (measured ~+5000 over
+      // 50 small surpluses). Round to the nearest whole unit: symmetric error,
+      // no systematic inflation. A crumb that rounds to zero is eaten, not stored.
+      let newUnits = Math.round(give / 200); // ~200 kcal per unit
+      if (newUnits <= 0) return;
+      // PANTRY CAP (break-it food r5): the surplus is a pantry writer like any
+      // other — the cap binds here too. pantryAdd was the only capped door;
+      // this one overfilled silently (same class as the r3 putAwayFinished fix).
+      try {
+        const cap = this.pantryCapKcal();
+        const room = cap - this.pantryKcal();
+        if (room <= 0) return;
+        newUnits = Math.min(newUnits, Math.floor(room / 200));
+        if (newUnits <= 0) return;
+      } catch (e) {}
       const existing = v.pantry.find(p => p.name === 'Foraged food' && p.spoilDay === freshDay);
       if (existing) existing.units += newUnits;
       else v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
@@ -24481,7 +24549,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // take the same person twice: already-sick villagers don't roll.
     // Returns new cases (0/1). Narrated, never silent.
     villagerFoodPoisoning(v, vid, exposure) {
-      if (!v || !exposure || v.sick[vid]) return 0;
+      // GUARD (break-it food r5): v.sick inits lazily below — a direct call on
+      // a fresh village threw on `v.sick[vid]` before the init ran.
+      if (!v || !exposure || (v.sick && v.sick[vid])) return 0;
       let nm = 'Someone';
       let person = null;
       try { person = this.getPerson(vid); if (person) nm = String(person.name).split(' ')[0]; } catch (e) {}
