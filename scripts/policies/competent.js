@@ -494,6 +494,51 @@ function counterPlay(Game, ctx) {
   } catch (e) {}
 }
 
+// GEAR UP (longsim combat lever 2026-10-11): a competent player equips the
+// best weapon and armor they own. The sim policy never equipped anything —
+// every measured fight was bare-fisted and unarmored, which made the combat
+// death share measure naked-fighter lethality instead of the game's curve.
+// This only equips what the world already gave (loot, gifts, finds); it
+// crafts nothing and invents nothing.
+function gearUp(Game, ctx) {
+  try {
+    const s = Game.state.scholar;
+    if (!s) return;
+    const eq = s.equipped || {};
+    const inv = s.inventory || [];
+    const defOf = (it) => (Game.data.items || []).find(d => d.id === (it.itemId || it.id));
+    const wbonus = (slot) => {
+      const w = eq[slot];
+      if (!w) return -1;
+      const def = (Game.data.items || []).find(d => d.id === w.itemId);
+      return ((def || {}).weapon || {}).bonus || 0;
+    };
+    // WEAPON: best bonus in inventory -> melee or ranged slot
+    let bestI = -1, bestB = -1, bestSlot = 'melee';
+    for (let i = 0; i < inv.length; i++) {
+      const def = defOf(inv[i]);
+      if (def && def.class === 'weapon') {
+        const b = ((def.weapon || {}).bonus || 0);
+        if (b > bestB) { bestB = b; bestI = i; bestSlot = (def.weapon || {}).type === 'ranged' ? 'ranged' : 'melee'; }
+      }
+    }
+    if (bestI >= 0 && bestB > wbonus(bestSlot)) {
+      try { Game.equip(bestI, bestSlot); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
+    }
+    // ARMOR: any armor piece -> 'armor' slot when empty (equip() maps torso)
+    const hasArmor = ['torso', 'armor', 'head', 'body'].some(sl => eq[sl]);
+    if (!hasArmor) {
+      for (let i = 0; i < inv.length; i++) {
+        const def = defOf(inv[i]);
+        if (def && def.armor) {
+          try { Game.equip(i, 'armor'); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
+          break;
+        }
+      }
+    }
+  } catch (e) {}
+}
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -506,6 +551,7 @@ const competent = {
     drinkSafe(Game, ctx);
     checkTicks(Game, ctx);
     workWater(Game, ctx);
+    gearUp(Game, ctx); // equip best weapon/armor owned (longsim combat 2026-10-11)
   },
   daily(Game, ctx) {
     // the honest food run: forage, sort the haul at camp, sow seed first,
@@ -537,6 +583,22 @@ const competent = {
     } catch (e) {}
     talkRound(Game, ctx);
     lootCorpses(Game, ctx); // strip the dead after fights
+    // ASK ABOUT BEAST TRICKS (longsim combat 2026-11): a curious player asks
+    // when the village knows something. counterTeachable() gates the topic.
+    try {
+      if (Game.counterTeachable && Game.askAbout) {
+        const teachable = Game.counterTeachable();
+        if (teachable) {
+          const vv = Game.state.village || {};
+          const roster = (vv.roster || []).filter(id => id !== Game.villagerId);
+          if (roster.length) {
+            const vid = roster[Math.floor(Math.random() * roster.length)];
+            const r = Game.askAbout(vid, 'beasttricks');
+            if (r && r.taught) ctx.beastTricks = (ctx.beastTricks || 0) + 1;
+          }
+        }
+      }
+    } catch (e) {}
     // TAKE THE SYSTEM'S OFFER (coverage 2026-10-09): an experienced player
     // chooses an ability when offered — the sim never did, so ability_granted
     // never fired. Pick the first offer (a competent player takes the gift).

@@ -1,0 +1,3595 @@
+{
+ "meta": {
+  "days": 200,
+  "date": "2026-10-11"
+ },
+ "agg": {
+  "competent": {
+   "n": 20,
+   "medianDays": 64,
+   "maxDays": 200,
+   "endReasons": {
+    "village-lost": 18,
+    "survived": 2
+   },
+   "won": 0,
+   "tableWaiting": 0,
+   "maxArcDist": {
+    "3": 20
+   },
+   "maxWaveDist": {
+    "1": 1,
+    "2": 16,
+    "3": 3
+   },
+   "waveReachRuns": {
+    "1": 20,
+    "2": 18,
+    "3": 3
+   },
+   "scaleDist": {
+    "village": 20
+   },
+   "realmMaxMax": 0,
+   "totalDeaths": 219,
+   "playerDeaths": 164,
+   "villagerDeaths": 55,
+   "playerBuckets": {
+    "starvation": 57,
+    "combat": 107
+   },
+   "playerBucketShare": {
+    "starvation": 34.8,
+    "combat": 65.2
+   },
+   "villagerBuckets": {
+    "combat": 43,
+    "starvation": 1,
+    "wound": 6,
+    "disease": 2,
+    "murder": 2,
+    "other": 1
+   },
+   "villagerBucketShare": {
+    "combat": 78.2,
+    "starvation": 1.8,
+    "wound": 10.9,
+    "disease": 3.6,
+    "murder": 3.6,
+    "other": 1.8
+   },
+   "countersDiscovered": 39,
+   "counterKillProxy": 64,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "succession": {
+    "notes": 0,
+    "survived": 0,
+    "snapped": 0
+   },
+   "traumaTotal": 19,
+   "traumaKinds": {
+    "exile": 16,
+    "mentee-death": 1,
+    "killed": 2
+   },
+   "meanSlots": 6,
+   "meanAbilities": 3,
+   "meanBreadth": 45.2,
+   "meanStage": 3,
+   "meanTier": 0.9,
+   "deathBands": {
+    "1-30": 89,
+    "31-60": 93,
+    "61-100": 32,
+    "101+": 5
+   },
+   "deathBandBuckets": {
+    "1-30": {
+     "starvation": 18,
+     "combat": 64,
+     "wound": 3,
+     "murder": 2,
+     "disease": 1,
+     "other": 1
+    },
+    "31-60": {
+     "combat": 60,
+     "starvation": 29,
+     "wound": 3,
+     "disease": 1
+    },
+    "61-100": {
+     "starvation": 10,
+     "combat": 22
+    },
+    "101+": {
+     "combat": 4,
+     "starvation": 1
+    }
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 57,
+     "won": 56,
+     "lost": 73,
+     "fled": 1
+    },
+    "2": {
+     "lost": 46,
+     "won": 20,
+     "routed": 19,
+     "fled": 1
+    },
+    "3": {
+     "lost": 5
+    }
+   },
+   "lostProfile": {
+    "1": {
+     "n": 73,
+     "packs": {
+      "1": 71,
+      "4": 2
+     },
+     "vs": {
+      "hushwolf": 40,
+      "gallowdeer": 15,
+      "belltoad": 3,
+      "nightcourt": 5,
+      "hummice": 2,
+      "white_noise_heron": 3,
+      "nevermore": 2,
+      "bulldozer": 3
+     },
+     "medianPhp0": 56
+    },
+    "2": {
+     "n": 46,
+     "packs": {
+      "1": 46
+     },
+     "vs": {
+      "voice_mimic_radio": 7,
+      "warranty_caller": 1,
+      "statickite": 7,
+      "moderator": 12,
+      "memory_projector": 2,
+      "heckler": 1,
+      "landlord": 2,
+      "understudy": 5,
+      "bright_idea": 2,
+      "paparazzo": 6,
+      "mirror_stag": 1
+     },
+     "medianPhp0": 77
+    },
+    "3": {
+     "n": 5,
+     "packs": {
+      "1": 5
+     },
+     "vs": {
+      "spool": 1,
+      "callback": 2,
+      "focus_group": 2
+     },
+     "medianPhp0": 100
+    }
+   }
+  }
+ },
+ "runs": [
+  {
+   "seed": 1,
+   "policy": "competent",
+   "days": 70,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 11,
+    "2": 2
+   },
+   "ledgerPoints": {
+    "1": 10,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 35,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 4,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "starvation": 5,
+    "combat": 4
+   },
+   "villagerDeaths": 1,
+   "villagerBuckets": {
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 23,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 30,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 33,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 35,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 48,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 51,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 59,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 66,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 10,
+   "fightsPerWave": {
+    "1": 5,
+    "2": 4
+   },
+   "outcomesPerWave": {
+    "routed": 1,
+    "won": 4,
+    "lost": 4
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 1,
+     "won": 3,
+     "lost": 1
+    },
+    "2": {
+     "lost": 3,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 41,
+     "day": 33
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 74,
+     "day": 35
+    },
+    {
+     "wave": 2,
+     "vs": "warranty_caller",
+     "pack": 1,
+     "php0": 7,
+     "day": 43
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 57,
+     "day": 51
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 4169
+  },
+  {
+   "seed": 2,
+   "policy": "competent",
+   "days": 200,
+   "endReason": "survived",
+   "maxArc": 3,
+   "maxWaveUnlocked": 3,
+   "waveKills": {
+    "1": 18,
+    "2": 5
+   },
+   "ledgerPoints": {
+    "1": 13,
+    "2": 6,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 57,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 6,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 8,
+   "playerBuckets": {
+    "combat": 4,
+    "starvation": 4
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "combat": 3
+   },
+   "deathDays": [
+    {
+     "day": 12,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 23,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 44,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 62,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 69,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 76,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 11,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 17,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 69,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 8,
+   "fightsPerWave": {
+    "1": 13,
+    "2": 6,
+    "3": 1
+   },
+   "outcomesPerWave": {
+    "won": 10,
+    "lost": 4,
+    "routed": 5
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 7,
+     "lost": 3,
+     "routed": 3
+    },
+    "2": {
+     "routed": 2,
+     "lost": 1,
+     "won": 3
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 61,
+     "day": 12
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 53,
+     "day": 28
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 53,
+     "day": 44
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 53,
+     "day": 58
+    }
+   ],
+   "countersDiscovered": 4,
+   "counterTeleCount": 4,
+   "counterKillProxy": 8,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 25221
+  },
+  {
+   "seed": 3,
+   "policy": "competent",
+   "days": 57,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 12,
+    "2": 1
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 40,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 8,
+   "playerBuckets": {
+    "combat": 7,
+    "starvation": 1
+   },
+   "villagerDeaths": 4,
+   "villagerBuckets": {
+    "combat": 4
+   },
+   "deathDays": [
+    {
+     "day": 11,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 20,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 50,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 52,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 10,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 11,
+    "2": 3
+   },
+   "outcomesPerWave": {
+    "won": 2,
+    "lost": 9,
+    "routed": 3
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 2,
+     "lost": 6,
+     "routed": 3
+    },
+    "2": {
+     "lost": 3
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "belltoad",
+     "pack": 1,
+     "php0": 100,
+     "day": 11
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 33,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 100,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 53,
+     "day": 20
+    },
+    {
+     "wave": 1,
+     "vs": "nightcourt",
+     "pack": 1,
+     "php0": 28,
+     "day": 43
+    },
+    {
+     "wave": 1,
+     "vs": "hummice",
+     "pack": 4,
+     "php0": 84,
+     "day": 52
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 11,
+     "day": 58
+    },
+    {
+     "wave": 2,
+     "vs": "memory_projector",
+     "pack": 1,
+     "php0": 100,
+     "day": 58
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 39,
+     "day": 58
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1834
+  },
+  {
+   "seed": 4,
+   "policy": "competent",
+   "days": 99,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 3,
+   "waveKills": {
+    "1": 9,
+    "2": 5
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 5,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 53,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 4,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "combat": 8,
+    "starvation": 1
+   },
+   "villagerDeaths": 2,
+   "villagerBuckets": {
+    "combat": 2
+   },
+   "deathDays": [
+    {
+     "day": 13,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 27,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 63,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 73,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 74,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 80,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 91,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 97,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 7,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 73,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 10,
+    "2": 7,
+    "3": 2
+   },
+   "outcomesPerWave": {
+    "lost": 9,
+    "won": 6,
+    "routed": 4
+   },
+   "waveOutcomes": {
+    "1": {
+     "lost": 4,
+     "won": 3,
+     "routed": 3
+    },
+    "2": {
+     "lost": 3,
+     "won": 3,
+     "routed": 1
+    },
+    "3": {
+     "lost": 2
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 91,
+     "day": 13
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 83,
+     "day": 27
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 64,
+     "day": 63
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 69,
+     "day": 73
+    },
+    {
+     "wave": 2,
+     "vs": "heckler",
+     "pack": 1,
+     "php0": 100,
+     "day": 73
+    },
+    {
+     "wave": 2,
+     "vs": "landlord",
+     "pack": 1,
+     "php0": 54,
+     "day": 74
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 79,
+     "day": 80
+    },
+    {
+     "wave": 3,
+     "vs": "spool",
+     "pack": 1,
+     "php0": 100,
+     "day": 91
+    },
+    {
+     "wave": 3,
+     "vs": "callback",
+     "pack": 1,
+     "php0": 100,
+     "day": 97
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 2222
+  },
+  {
+   "seed": 5,
+   "policy": "competent",
+   "days": 74,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 8,
+    "2": 2
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 38,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "starvation": 8,
+    "combat": 1
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "combat": 3
+   },
+   "deathDays": [
+    {
+     "day": 24,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 36,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 49,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 54,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 61,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 68,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 75,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 50,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 76,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 12,
+   "fightsPerWave": {
+    "1": 8,
+    "2": 2
+   },
+   "outcomesPerWave": {
+    "routed": 6,
+    "lost": 3,
+    "won": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 6,
+     "lost": 2
+    },
+    "2": {
+     "won": 1,
+     "lost": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "nightcourt",
+     "pack": 1,
+     "php0": 4,
+     "day": 43
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 97,
+     "day": 50
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 82,
+     "day": 76
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 2,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile",
+    "mentee-death"
+   ],
+   "ms": 1795
+  },
+  {
+   "seed": 6,
+   "policy": "competent",
+   "days": 18,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 1,
+   "waveKills": {
+    "1": 2
+   },
+   "ledgerPoints": {
+    "1": 3,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 32,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 0,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 3,
+   "playerBuckets": {
+    "combat": 3
+   },
+   "villagerDeaths": 4,
+   "villagerBuckets": {
+    "combat": 2,
+    "starvation": 1,
+    "wound": 1
+   },
+   "deathDays": [
+    {
+     "day": 8,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 16,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 17,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 17,
+     "b": "starvation",
+     "p": false
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 18,
+     "b": "wound",
+     "p": false
+    }
+   ],
+   "lineageLen": 4,
+   "fightsPerWave": {
+    "1": 6
+   },
+   "outcomesPerWave": {
+    "won": 2,
+    "lost": 3,
+    "routed": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 2,
+     "lost": 3,
+     "routed": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 89,
+     "day": 8
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 60,
+     "day": 16
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 81,
+     "day": 18
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 1,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [],
+   "ms": 358
+  },
+  {
+   "seed": 7,
+   "policy": "competent",
+   "days": 97,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 13,
+    "2": 4
+   },
+   "ledgerPoints": {
+    "1": 10,
+    "2": 4,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 71,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 10,
+   "playerBuckets": {
+    "combat": 7,
+    "starvation": 3
+   },
+   "villagerDeaths": 2,
+   "villagerBuckets": {
+    "wound": 1,
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 23,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 26,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 32,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 39,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 74,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 83,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 83,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 90,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 98,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 98,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "wound",
+     "p": false
+    },
+    {
+     "day": 89,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 12,
+    "2": 5
+   },
+   "outcomesPerWave": {
+    "lost": 7,
+    "routed": 5,
+    "won": 5
+   },
+   "waveOutcomes": {
+    "1": {
+     "lost": 4,
+     "routed": 4,
+     "won": 4
+    },
+    "2": {
+     "routed": 1,
+     "lost": 3,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 16,
+     "day": 23
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 37,
+     "day": 32
+    },
+    {
+     "wave": 2,
+     "vs": "understudy",
+     "pack": 1,
+     "php0": 62,
+     "day": 83
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 100,
+     "day": 83
+    },
+    {
+     "wave": 2,
+     "vs": "understudy",
+     "pack": 1,
+     "php0": 68,
+     "day": 90
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 75,
+     "day": 98
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 100,
+     "day": 98
+    }
+   ],
+   "countersDiscovered": 3,
+   "counterTeleCount": 3,
+   "counterKillProxy": 6,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 3051
+  },
+  {
+   "seed": 8,
+   "policy": "competent",
+   "days": 53,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 12
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 39,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "combat": 6,
+    "starvation": 3
+   },
+   "villagerDeaths": 4,
+   "villagerBuckets": {
+    "combat": 3,
+    "disease": 1
+   },
+   "deathDays": [
+    {
+     "day": 17,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 24,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 33,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 40,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 40,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 46,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 47,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 54,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 54,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 23,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 40,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 49,
+     "b": "disease",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 4,
+    "2": 5
+   },
+   "outcomesPerWave": {
+    "lost": 7,
+    "won": 1,
+    "routed": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "lost": 3,
+     "won": 1
+    },
+    "2": {
+     "lost": 4,
+     "routed": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 100,
+     "day": 17
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 16,
+     "day": 24
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 17,
+     "day": 33
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 17,
+     "day": 40
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 100,
+     "day": 40
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 100,
+     "day": 40
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 82,
+     "day": 47
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 2247
+  },
+  {
+   "seed": 9,
+   "policy": "competent",
+   "days": 62,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 8,
+    "2": 1
+   },
+   "ledgerPoints": {
+    "1": 7,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 43,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 8,
+   "playerBuckets": {
+    "combat": 8
+   },
+   "villagerDeaths": 2,
+   "villagerBuckets": {
+    "murder": 1,
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 12,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 15,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 20,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 35,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 37,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 45,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 52,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 55,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 20,
+     "b": "murder",
+     "p": false
+    },
+    {
+     "day": 45,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 10,
+   "fightsPerWave": {
+    "1": 11,
+    "2": 4
+   },
+   "outcomesPerWave": {
+    "routed": 4,
+    "lost": 9,
+    "won": 2
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 3,
+     "lost": 7,
+     "won": 1
+    },
+    "2": {
+     "lost": 2,
+     "routed": 1,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 46,
+     "day": 12
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 62,
+     "day": 15
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 68,
+     "day": 20
+    },
+    {
+     "wave": 1,
+     "vs": "white_noise_heron",
+     "pack": 1,
+     "php0": 91,
+     "day": 35
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 88,
+     "day": 37
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 75,
+     "day": 45
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 100,
+     "day": 45
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 100,
+     "day": 52
+    },
+    {
+     "wave": 1,
+     "vs": "nightcourt",
+     "pack": 1,
+     "php0": 46,
+     "day": 55
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 1,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "killed"
+   ],
+   "ms": 1409
+  },
+  {
+   "seed": 10,
+   "policy": "competent",
+   "days": 200,
+   "endReason": "survived",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 11,
+    "2": 2
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 42,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 4,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 6,
+   "playerBuckets": {
+    "combat": 5,
+    "starvation": 1
+   },
+   "villagerDeaths": 1,
+   "villagerBuckets": {
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 27,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 31,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 50,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 27,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 7,
+   "fightsPerWave": {
+    "1": 12,
+    "2": 4
+   },
+   "outcomesPerWave": {
+    "won": 3,
+    "routed": 6,
+    "lost": 6
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 2,
+     "routed": 5,
+     "lost": 4
+    },
+    "2": {
+     "routed": 1,
+     "lost": 2,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 54,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 45,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "belltoad",
+     "pack": 1,
+     "php0": 100,
+     "day": 27
+    },
+    {
+     "wave": 1,
+     "vs": "nevermore",
+     "pack": 1,
+     "php0": 26,
+     "day": 31
+    },
+    {
+     "wave": 2,
+     "vs": "understudy",
+     "pack": 1,
+     "php0": 37,
+     "day": 50
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 92,
+     "day": 58
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 11109
+  },
+  {
+   "seed": 11,
+   "policy": "competent",
+   "days": 55,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 17,
+    "2": 2
+   },
+   "ledgerPoints": {
+    "1": 9,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 38,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 5,
+   "playerBuckets": {
+    "combat": 3,
+    "starvation": 2
+   },
+   "villagerDeaths": 7,
+   "villagerBuckets": {
+    "combat": 5,
+    "disease": 1,
+    "wound": 1
+   },
+   "deathDays": [
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 22,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 35,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 47,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 21,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 22,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 22,
+     "b": "disease",
+     "p": false
+    },
+    {
+     "day": 35,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 39,
+     "b": "wound",
+     "p": false
+    }
+   ],
+   "lineageLen": 8,
+   "fightsPerWave": {
+    "1": 13,
+    "2": 3
+   },
+   "outcomesPerWave": {
+    "won": 8,
+    "lost": 5,
+    "routed": 3
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 6,
+     "lost": 5,
+     "routed": 2
+    },
+    "2": {
+     "routed": 1,
+     "won": 2
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 31,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 110,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 27,
+     "day": 28
+    },
+    {
+     "wave": 1,
+     "vs": "bulldozer",
+     "pack": 1,
+     "php0": 37,
+     "day": 35
+    },
+    {
+     "wave": 1,
+     "vs": "bulldozer",
+     "pack": 1,
+     "php0": 100,
+     "day": 35
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 885
+  },
+  {
+   "seed": 12,
+   "policy": "competent",
+   "days": 62,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 10,
+    "2": 3
+   },
+   "ledgerPoints": {
+    "1": 10,
+    "2": 4,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 50,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 10,
+   "playerBuckets": {
+    "starvation": 4,
+    "combat": 6
+   },
+   "villagerDeaths": 1,
+   "villagerBuckets": {
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 23,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 25,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 25,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 34,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 35,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 37,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 49,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 57,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 59,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 7,
+    "2": 6
+   },
+   "outcomesPerWave": {
+    "routed": 4,
+    "lost": 6,
+    "won": 3
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 3,
+     "lost": 3,
+     "won": 1
+    },
+    "2": {
+     "routed": 1,
+     "lost": 3,
+     "won": 2
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 70,
+     "day": 25
+    },
+    {
+     "wave": 2,
+     "vs": "bright_idea",
+     "pack": 1,
+     "php0": 100,
+     "day": 25
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 36,
+     "day": 34
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 82,
+     "day": 35
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 35,
+     "day": 37
+    },
+    {
+     "wave": 1,
+     "vs": "belltoad",
+     "pack": 1,
+     "php0": 74,
+     "day": 59
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 4,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1442
+  },
+  {
+   "seed": 13,
+   "policy": "competent",
+   "days": 55,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 10,
+    "2": 3
+   },
+   "ledgerPoints": {
+    "1": 5,
+    "2": 3,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 38,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "starvation": 4,
+    "combat": 5
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "combat": 3
+   },
+   "deathDays": [
+    {
+     "day": 18,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 23,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 25,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 38,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 41,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 49,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 51,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 56,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 37,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 44,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 3,
+    "2": 7
+   },
+   "outcomesPerWave": {
+    "won": 3,
+    "lost": 6,
+    "routed": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "won": 1,
+     "lost": 2
+    },
+    "2": {
+     "lost": 4,
+     "routed": 1,
+     "won": 2
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 54,
+     "day": 25
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 73,
+     "day": 41
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 71,
+     "day": 43
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 100,
+     "day": 44
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 86,
+     "day": 51
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 61,
+     "day": 56
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 1,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1180
+  },
+  {
+   "seed": 14,
+   "policy": "competent",
+   "days": 102,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 3,
+   "waveKills": {
+    "1": 21,
+    "2": 7
+   },
+   "ledgerPoints": {
+    "1": 12,
+    "2": 7,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 53,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 4,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "combat": 6,
+    "starvation": 3
+   },
+   "villagerDeaths": 2,
+   "villagerBuckets": {
+    "combat": 2
+   },
+   "deathDays": [
+    {
+     "day": 10,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 45,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 50,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 65,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 78,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 88,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 93,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 101,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 30,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 101,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 11,
+   "fightsPerWave": {
+    "1": 10,
+    "2": 3,
+    "3": 3
+   },
+   "outcomesPerWave": {
+    "routed": 2,
+    "lost": 7,
+    "won": 7
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 1,
+     "lost": 3,
+     "won": 6
+    },
+    "2": {
+     "lost": 1,
+     "routed": 1,
+     "won": 1
+    },
+    "3": {
+     "lost": 3
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 51,
+     "day": 10
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 56,
+     "day": 19
+    },
+    {
+     "wave": 2,
+     "vs": "statickite",
+     "pack": 1,
+     "php0": 62,
+     "day": 50
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 76,
+     "day": 88
+    },
+    {
+     "wave": 3,
+     "vs": "callback",
+     "pack": 1,
+     "php0": 44,
+     "day": 93
+    },
+    {
+     "wave": 3,
+     "vs": "focus_group",
+     "pack": 1,
+     "php0": 64,
+     "day": 101
+    },
+    {
+     "wave": 3,
+     "vs": "focus_group",
+     "pack": 1,
+     "php0": 100,
+     "day": 101
+    }
+   ],
+   "countersDiscovered": 3,
+   "counterTeleCount": 3,
+   "counterKillProxy": 7,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [],
+   "ms": 1436
+  },
+  {
+   "seed": 15,
+   "policy": "competent",
+   "days": 63,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 5,
+    "2": 3
+   },
+   "ledgerPoints": {
+    "1": 6,
+    "2": 3,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 46,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 3,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "combat": 6,
+    "starvation": 3
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "combat": 3
+   },
+   "deathDays": [
+    {
+     "day": 23,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 33,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 39,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 42,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 49,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 57,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 64,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 20,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 49,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 64,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 12,
+   "fightsPerWave": {
+    "1": 10,
+    "2": 6
+   },
+   "outcomesPerWave": {
+    "routed": 5,
+    "won": 2,
+    "lost": 8,
+    "fled": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 4,
+     "won": 2,
+     "lost": 3,
+     "fled": 1
+    },
+    "2": {
+     "lost": 5,
+     "routed": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 22,
+     "day": 23
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 46,
+     "day": 33
+    },
+    {
+     "wave": 2,
+     "vs": "understudy",
+     "pack": 1,
+     "php0": 57,
+     "day": 42
+    },
+    {
+     "wave": 2,
+     "vs": "bright_idea",
+     "pack": 1,
+     "php0": 92,
+     "day": 43
+    },
+    {
+     "wave": 2,
+     "vs": "memory_projector",
+     "pack": 1,
+     "php0": 4,
+     "day": 49
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 100,
+     "day": 49
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 14,
+     "day": 64
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 100,
+     "day": 64
+    }
+   ],
+   "countersDiscovered": 2,
+   "counterTeleCount": 2,
+   "counterKillProxy": 2,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1344
+  },
+  {
+   "seed": 16,
+   "policy": "competent",
+   "days": 132,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 15,
+    "2": 2
+   },
+   "ledgerPoints": {
+    "1": 10,
+    "2": 2,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 66,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 4,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 7,
+   "playerBuckets": {
+    "combat": 5,
+    "starvation": 2
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "other": 1,
+    "wound": 1,
+    "combat": 1
+   },
+   "deathDays": [
+    {
+     "day": 10,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 22,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 25,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 66,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 106,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 128,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 132,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 18,
+     "b": "other",
+     "p": false
+    },
+    {
+     "day": 21,
+     "b": "wound",
+     "p": false
+    },
+    {
+     "day": 22,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 9,
+   "fightsPerWave": {
+    "1": 13,
+    "2": 5
+   },
+   "outcomesPerWave": {
+    "routed": 5,
+    "lost": 6,
+    "won": 7
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 4,
+     "lost": 3,
+     "won": 6
+    },
+    "2": {
+     "routed": 1,
+     "lost": 3,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 92,
+     "day": 10
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 54,
+     "day": 22
+    },
+    {
+     "wave": 1,
+     "vs": "gallowdeer",
+     "pack": 1,
+     "php0": 42,
+     "day": 22
+    },
+    {
+     "wave": 2,
+     "vs": "mirror_stag",
+     "pack": 1,
+     "php0": 77,
+     "day": 66
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 97,
+     "day": 106
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 85,
+     "day": 128
+    }
+   ],
+   "countersDiscovered": 4,
+   "counterTeleCount": 4,
+   "counterKillProxy": 4,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [],
+   "ms": 1888
+  },
+  {
+   "seed": 17,
+   "policy": "competent",
+   "days": 64,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 5
+   },
+   "ledgerPoints": {
+    "1": 5,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 36,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 8,
+   "playerBuckets": {
+    "combat": 4,
+    "starvation": 4
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "murder": 1,
+    "combat": 2
+   },
+   "deathDays": [
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 26,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 35,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 42,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 48,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 54,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 61,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 7,
+     "b": "murder",
+     "p": false
+    },
+    {
+     "day": 18,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 36,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 10,
+   "fightsPerWave": {
+    "1": 11
+   },
+   "outcomesPerWave": {
+    "routed": 4,
+    "lost": 5,
+    "won": 2
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 4,
+     "lost": 5,
+     "won": 2
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 45,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 42,
+     "day": 19
+    },
+    {
+     "wave": 1,
+     "vs": "white_noise_heron",
+     "pack": 1,
+     "php0": 96,
+     "day": 36
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 41,
+     "day": 42
+    },
+    {
+     "wave": 1,
+     "vs": "white_noise_heron",
+     "pack": 1,
+     "php0": 4,
+     "day": 61
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 1,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "killed",
+    "exile"
+   ],
+   "ms": 1789
+  },
+  {
+   "seed": 18,
+   "policy": "competent",
+   "days": 49,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 10,
+    "2": 1
+   },
+   "ledgerPoints": {
+    "1": 7,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 40,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 8,
+   "playerBuckets": {
+    "combat": 5,
+    "starvation": 3
+   },
+   "villagerDeaths": 4,
+   "villagerBuckets": {
+    "wound": 2,
+    "combat": 2
+   },
+   "deathDays": [
+    {
+     "day": 20,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 21,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 27,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 31,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 36,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 40,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 48,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 50,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "wound",
+     "p": false
+    },
+    {
+     "day": 28,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 48,
+     "b": "wound",
+     "p": false
+    },
+    {
+     "day": 49,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 10,
+   "fightsPerWave": {
+    "1": 8,
+    "2": 3
+   },
+   "outcomesPerWave": {
+    "routed": 3,
+    "lost": 6,
+    "won": 2
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 3,
+     "lost": 4,
+     "won": 1
+    },
+    "2": {
+     "lost": 2,
+     "won": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 36,
+     "day": 20
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 69,
+     "day": 21
+    },
+    {
+     "wave": 1,
+     "vs": "nightcourt",
+     "pack": 1,
+     "php0": 34,
+     "day": 36
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 65,
+     "day": 40
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 98,
+     "day": 49
+    },
+    {
+     "wave": 2,
+     "vs": "paparazzo",
+     "pack": 1,
+     "php0": 69,
+     "day": 50
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 2,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1067
+  },
+  {
+   "seed": 19,
+   "policy": "competent",
+   "days": 57,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 12,
+    "2": 1
+   },
+   "ledgerPoints": {
+    "1": 10,
+    "2": 1,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 46,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 9,
+   "playerBuckets": {
+    "combat": 5,
+    "starvation": 4
+   },
+   "villagerDeaths": 3,
+   "villagerBuckets": {
+    "combat": 3
+   },
+   "deathDays": [
+    {
+     "day": 23,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 23,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 28,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 31,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 38,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 42,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 49,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 57,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 58,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 19,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 22,
+     "b": "combat",
+     "p": false
+    },
+    {
+     "day": 26,
+     "b": "combat",
+     "p": false
+    }
+   ],
+   "lineageLen": 10,
+   "fightsPerWave": {
+    "1": 9,
+    "2": 6
+   },
+   "outcomesPerWave": {
+    "routed": 7,
+    "lost": 5,
+    "won": 3
+   },
+   "waveOutcomes": {
+    "1": {
+     "routed": 4,
+     "lost": 2,
+     "won": 3
+    },
+    "2": {
+     "lost": 3,
+     "routed": 3
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "nevermore",
+     "pack": 1,
+     "php0": 7,
+     "day": 23
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 35,
+     "day": 23
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 36,
+     "day": 28
+    },
+    {
+     "wave": 2,
+     "vs": "understudy",
+     "pack": 1,
+     "php0": 74,
+     "day": 31
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 97,
+     "day": 58
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 4,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1256
+  },
+  {
+   "seed": 20,
+   "policy": "competent",
+   "days": 67,
+   "endReason": "village-lost",
+   "maxArc": 3,
+   "maxWaveUnlocked": 2,
+   "waveKills": {
+    "1": 11,
+    "2": 3
+   },
+   "ledgerPoints": {
+    "1": 8,
+    "2": 3,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   },
+   "breadth": 41,
+   "stage": 3,
+   "slots": 6,
+   "abilitiesHeld": 2,
+   "tier": 1,
+   "maxScale": "village",
+   "realmMax": 0,
+   "playerDeaths": 11,
+   "playerBuckets": {
+    "combat": 9,
+    "starvation": 2
+   },
+   "villagerDeaths": 0,
+   "villagerBuckets": {},
+   "deathDays": [
+    {
+     "day": 18,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 21,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 26,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 30,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 32,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 43,
+     "b": "starvation",
+     "p": true
+    },
+    {
+     "day": 45,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 45,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 54,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 59,
+     "b": "combat",
+     "p": true
+    },
+    {
+     "day": 65,
+     "b": "combat",
+     "p": true
+    }
+   ],
+   "lineageLen": 12,
+   "fightsPerWave": {
+    "1": 12,
+    "2": 7
+   },
+   "outcomesPerWave": {
+    "lost": 9,
+    "routed": 6,
+    "won": 3,
+    "fled": 1
+   },
+   "waveOutcomes": {
+    "1": {
+     "lost": 6,
+     "routed": 3,
+     "won": 3
+    },
+    "2": {
+     "routed": 3,
+     "lost": 3,
+     "fled": 1
+    }
+   },
+   "lostProfiles": [
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 80,
+     "day": 18
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 11,
+     "day": 21
+    },
+    {
+     "wave": 1,
+     "vs": "hummice",
+     "pack": 4,
+     "php0": 67,
+     "day": 30
+    },
+    {
+     "wave": 1,
+     "vs": "bulldozer",
+     "pack": 1,
+     "php0": 98,
+     "day": 32
+    },
+    {
+     "wave": 1,
+     "vs": "hushwolf",
+     "pack": 1,
+     "php0": 70,
+     "day": 45
+    },
+    {
+     "wave": 2,
+     "vs": "moderator",
+     "pack": 1,
+     "php0": 100,
+     "day": 45
+    },
+    {
+     "wave": 2,
+     "vs": "landlord",
+     "pack": 1,
+     "php0": 67,
+     "day": 54
+    },
+    {
+     "wave": 2,
+     "vs": "voice_mimic_radio",
+     "pack": 1,
+     "php0": 100,
+     "day": 59
+    },
+    {
+     "wave": 1,
+     "vs": "nightcourt",
+     "pack": 1,
+     "php0": 53,
+     "day": 65
+    }
+   ],
+   "countersDiscovered": 1,
+   "counterTeleCount": 1,
+   "counterKillProxy": 3,
+   "trapsCrafted": 0,
+   "trapsLooted": 0,
+   "successionNotes": 0,
+   "successionSurvived": 0,
+   "successionSnapped": 0,
+   "traumaKinds": [
+    "exile"
+   ],
+   "ms": 1389
+  }
+ ]
+}

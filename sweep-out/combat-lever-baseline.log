@@ -1,0 +1,178 @@
+done: seed=1 days=62 end=village-lost wave=2 scale=village pd=8 vd=2 fights={"1":7,"2":5}
+done: seed=2 days=57 end=village-lost wave=2 scale=village pd=8 vd=5 fights={"1":11,"2":3}
+done: seed=3 days=63 end=village-lost wave=2 scale=village pd=5 vd=2 fights={"1":9,"2":2}
+done: seed=4 days=115 end=village-lost wave=2 scale=village pd=4 vd=5 fights={"1":9,"2":1}
+done: seed=5 days=68 end=village-lost wave=2 scale=village pd=9 vd=2 fights={"1":12,"2":3}
+done: seed=6 days=18 end=village-lost wave=1 scale=village pd=2 vd=3 fights={"1":6}
+done: seed=7 days=86 end=village-lost wave=2 scale=village pd=7 vd=4 fights={"1":10,"2":4}
+done: seed=8 days=53 end=village-lost wave=2 scale=village pd=8 vd=3 fights={"1":7,"2":1}
+done: seed=9 days=66 end=village-lost wave=2 scale=village pd=7 vd=4 fights={"1":10,"2":3}
+done: seed=10 days=70 end=village-lost wave=2 scale=village pd=9 vd=3 fights={"1":13,"2":8}
+done: seed=11 days=67 end=village-lost wave=2 scale=village pd=9 vd=3 fights={"1":10,"2":5}
+done: seed=12 days=59 end=village-lost wave=2 scale=village pd=9 vd=2 fights={"1":4,"2":7}
+done: seed=13 days=49 end=village-lost wave=2 scale=village pd=10 vd=3 fights={"1":4,"2":5}
+done: seed=14 days=115 end=village-lost wave=2 scale=village pd=9 vd=2 fights={"1":9,"2":10}
+done: seed=15 days=64 end=village-lost wave=2 scale=village pd=10 vd=2 fights={"1":14,"2":5}
+done: seed=16 days=133 end=village-lost wave=2 scale=village pd=5 vd=5 fights={"1":14,"2":5}
+done: seed=17 days=49 end=village-lost wave=2 scale=village pd=7 vd=4 fights={"1":9}
+done: seed=18 days=51 end=village-lost wave=2 scale=village pd=10 vd=3 fights={"1":8,"2":4}
+done: seed=19 days=45 end=village-lost wave=2 scale=village pd=7 vd=5 fights={"1":10,"2":2}
+done: seed=20 days=59 end=village-lost wave=2 scale=village pd=11 vd=1 fights={"1":10,"2":5}
+
+=== AGGREGATE ===
+{
+  "competent": {
+    "n": 20,
+    "medianDays": 63,
+    "maxDays": 133,
+    "endReasons": {
+      "village-lost": 20
+    },
+    "won": 0,
+    "tableWaiting": 0,
+    "maxArcDist": {
+      "3": 20
+    },
+    "maxWaveDist": {
+      "1": 1,
+      "2": 19
+    },
+    "waveReachRuns": {
+      "1": 20,
+      "2": 18
+    },
+    "scaleDist": {
+      "village": 20
+    },
+    "realmMaxMax": 0,
+    "totalDeaths": 217,
+    "playerDeaths": 154,
+    "villagerDeaths": 63,
+    "playerBuckets": {
+      "starvation": 52,
+      "combat": 102
+    },
+    "playerBucketShare": {
+      "starvation": 33.8,
+      "combat": 66.2
+    },
+    "villagerBuckets": {
+      "combat": 48,
+      "wound": 6,
+      "starvation": 3,
+      "murder": 2,
+      "other": 2,
+      "disease": 2
+    },
+    "villagerBucketShare": {
+      "combat": 76.2,
+      "wound": 9.5,
+      "starvation": 4.8,
+      "murder": 3.2,
+      "other": 3.2,
+      "disease": 3.2
+    },
+    "countersDiscovered": 43,
+    "counterKillProxy": 57,
+    "trapsCrafted": 0,
+    "trapsLooted": 0,
+    "succession": {
+      "notes": 0,
+      "survived": 0,
+      "snapped": 0
+    },
+    "traumaTotal": 18,
+    "traumaKinds": {
+      "exile": 15,
+      "mentee-death": 1,
+      "killed": 2
+    },
+    "meanSlots": 6,
+    "meanAbilities": 2.9,
+    "meanBreadth": 42.1,
+    "meanStage": 3,
+    "meanTier": 0.9,
+    "deathBands": {
+      "1-30": 88,
+      "31-60": 100,
+      "61-100": 26,
+      "101+": 3
+    },
+    "deathBandBuckets": {
+      "1-30": {
+        "starvation": 18,
+        "combat": 64,
+        "murder": 2,
+        "other": 2,
+        "wound": 2
+      },
+      "31-60": {
+        "combat": 60,
+        "starvation": 34,
+        "wound": 4,
+        "disease": 2
+      },
+      "61-100": {
+        "combat": 23,
+        "starvation": 3
+      },
+      "101+": {
+        "combat": 3
+      }
+    },
+    "waveOutcomes": {
+      "1": {
+        "routed": 67,
+        "won": 46,
+        "lost": 72,
+        "fled": 1
+      },
+      "2": {
+        "lost": 49,
+        "routed": 17,
+        "won": 12
+      }
+    },
+    "lostProfile": {
+      "1": {
+        "n": 72,
+        "packs": {
+          "1": 72
+        },
+        "vs": {
+          "hushwolf": 34,
+          "gallowdeer": 18,
+          "belltoad": 8,
+          "nightcourt": 4,
+          "ducks_in_a_row": 1,
+          "nevermore": 2,
+          "hummice": 3,
+          "white_noise_heron": 1,
+          "bulldozer": 1
+        },
+        "medianPhp0": null
+      },
+      "2": {
+        "n": 49,
+        "packs": {
+          "1": 49
+        },
+        "vs": {
+          "voice_mimic_radio": 8,
+          "moderator": 9,
+          "statickite": 4,
+          "mirror_stag": 1,
+          "landlord": 4,
+          "heckler": 6,
+          "paparazzo": 12,
+          "understudy": 1,
+          "memory_projector": 2,
+          "bright_idea": 1,
+          "giant_mosquito": 1
+        },
+        "medianPhp0": null
+      }
+    }
+  }
+}
+wrote sweep-out/combat-lever-baseline.json
