@@ -181,15 +181,24 @@
         c.transcript.push({ who: 'you', text: '"Tell me more."' });
         const beat = this.convoThreadBeat(vid);
         if (beat) {
-          c.threadDryFor = null; // thread is alive — clear any stale dry marker
-          // Beat composition: the beat acknowledges what was just said.
           const composed = this.convoComposeDlg(vid, beat, choiceId);
-          this.sayLine(vid, composed);
-          // Engaging with the thread engages the want behind it.
-          this.convoWantEngage(vid, 'engage');
-          // Trust: engaging builds it. SCENE (Phase 2): through the resolver.
-          try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
-          return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          // BLOCKED-REPEAT (journey sociallife 2026-10-11): sayLine is the
+          // no-repeat choke point — when it returns null the beat was
+          // already spoken. The old code returned the composed line anyway,
+          // so the player SAW the repeat the ledger had blocked (mourning
+          // thread: "My part? I remember them." x3, ledger clean). Treat a
+          // blocked beat as dry: honest admission, menu retires "tell me
+          // more".
+          const said = this.sayLine(vid, composed);
+          if (said) {
+            c.threadDryFor = null; // thread is alive — clear any stale dry marker
+            // Beat composition: the beat acknowledges what was just said.
+            // Engaging with the thread engages the want behind it.
+            this.convoWantEngage(vid, 'engage');
+            // Trust: engaging builds it. SCENE (Phase 2): through the resolver.
+            try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
+            return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          }
         }
         // Thread's dry — honest admission, once. Mark the thread dry so the
         // menu stops offering "tell me more" and winds down instead.
@@ -223,10 +232,16 @@
         // beat resets the count (see convoThreadBeat).
         const beat = (!dry && Math.random() < 0.6) ? this.convoThreadBeat(vid) : null;
         if (beat) {
-          c.threadDryFor = null;
           const composed = this.convoComposeDlg(vid, beat, choiceId);
-          this.sayLine(vid, composed);
-          return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          // BLOCKED-REPEAT (journey sociallife 2026-10-11): sayLine is the
+          // no-repeat choke point — a null return means the beat was already
+          // spoken. Don't show the player a repeat the ledger blocked; fall
+          // through to the dead-react wind-down like a dry thread.
+          const said = this.sayLine(vid, composed);
+          if (said) {
+            c.threadDryFor = null;
+            return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          }
         }
         c.reactDryCount = (c.reactDryCount || 0) + 1;
         // REBUILD 2026-10-11: the hardcoded "Anyway." looped VERBATIM —

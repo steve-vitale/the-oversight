@@ -321,9 +321,20 @@
     // ledger blocks the repeat, and the player gets options with no NPC
     // reply. The want menu (commit/cant) owns the engaged offer flow.
     const wantEngaged = !!(c.want && (c.want.stage || 0) >= 2);
+    // DECIDED WANT (journey sociallife 2026-10-11): once the want is decided
+    // (stage 3 — promised/deflected/comforted), the generic "Can't right
+    // now" must retire too. The want menu is already empty at stage 3; the
+    // generic pool re-offering the deflect verb let "Can't right now" be
+    // picked 7x in one conversation, cycling 2 lines ("No — it's fine. I
+    // shouldn't have asked." x4) after the refusal was already spoken.
+    // Backing out of an open promise has its own honest verb (dlg:renounce
+    // on the repay want); the generic cant after a decision is a filler
+    // loop, not a choice.
+    const wantDecided = !!(c.want && c.want.def && (c.want.stage || 0) >= 3);
     for (const entry of topicPool) {
       if (seen.has(entry.id)) continue;
       if (wantEngaged && entry.id === 'dlg:help') continue;
+      if (wantDecided && entry.id === 'dlg:cant') continue;
       // Skip "tell me more" if the thread is dry. Skip the bare react once
       // it has produced two dead "Anyway."s in a row — the loop winds down
       // instead of offering the same dead acknowledgment forever (rethink

@@ -189,8 +189,17 @@
       const folFn = this['t2fol_' + t];
       const fns = folFn ? folFn.call(this, vid) : [];
       const said = (c.said || {})['t2:' + t] || [];
+      // EXHAUSTION (journey sociallife 2026-10-11): the opener + one beat
+      // per follow-up level is the whole thread (topic2HasMore's contract:
+      // opener + 3 follow-ups). The old index clamp re-served the last
+      // level's line verbatim forever ("My part? I remember them." x3) and
+      // t2pick's pool[0] fallback defeated the no-repeat ledger. Return null
+      // when dry: the caller says the honest "that's all of it" and the
+      // menu retires "tell me more".
+      if (said.length - 1 >= fns.length) return null;
       const cands = fns[Math.min(Math.max(said.length - 1, 0), fns.length - 1)] || [];
-      let line = this.t2pick(vid, 't2:' + t, cands.length ? cands : ['"..."']);
+      let line = this.t2pick(vid, 't2:' + t, cands);
+      if (!line) return null;
       line = this.t2fill(line, this.vpOf(vid), vid);
       c.depth = (c.depth || 1) + 1;
       return line;

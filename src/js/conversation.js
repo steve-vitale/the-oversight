@@ -3515,17 +3515,36 @@
         : (typeof op === 'string' && op) ? op : '"Hey."';
       const opThread = (op && typeof op === 'object' && op.thread) ? op.thread : 'small';
       c.thread = opThread; c.depth = 1;
+      // WANT-OWNED QUESTION (journey sociallife 2026-10-11): when the opener
+      // came from the live want def and the want is already stated
+      // (stage >= 2), the want def OWNS the question — its menuOptions
+      // supply the answers (commit/deflect). Classifying the opener's
+      // trailing "Are you in?" as a generic yes/no question suppresses the
+      // want menu (see convoWantMenu), so an uncommitted favor follow-up
+      // became uncommittable: the player could say "Yes." but the favor
+      // stayed 'asked' and re-seeded forever. The fresh-ask flow
+      // (stage 0/1) is untouched — there the generic question IS the
+      // engagement path.
+      let wantOwnsQ = false;
+      try {
+        const w = c.want;
+        if (opThread === 'want' && w && w.def && (w.stage || 0) >= 2 &&
+            typeof w.def.menuOptions === 'function') {
+          const mo = w.def.menuOptions.call(this, vid, w.stage) || [];
+          wantOwnsQ = mo.length > 0;
+        }
+      } catch (e) { wantOwnsQ = false; }
       // REACTIVE: if the opener asked something direct ("Did you see that?"),
       // it becomes a lightweight question — answerable, follow-up-able,
       // not small talk the player can only dodge.
       // TALK REQUESTS are exempt: "Can we talk? ..." is the reason they came
       // to you, not a question — matching it produced the garbled
       // "Sorry — I asked you something there. Can we talk?" follow-up.
-      const rq = (opThread === 'request') ? null : this.convoMatchReactive(opLine);
+      const rq = (opThread === 'request' || wantOwnsQ) ? null : this.convoMatchReactive(opLine);
       if (rq) {
         c.reactiveQ = { id: rq.id, followedUp: false };
         if (rq.thread) { c.thread = rq.thread; }
-      } else {
+      } else if (!wantOwnsQ) {
         // GENERIC-Q: opener asked something direct with no bespoke def —
         // hang it as an answerable question (Rule 4).
         this.convoGenericQ(vid, opLine);

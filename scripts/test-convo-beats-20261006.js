@@ -141,7 +141,14 @@ function playConvo(vid, maxTurns) {
         (t.replyIds.includes('leave') || t.replyIds.includes('dlg:subject') || t.replyIds.includes('recap') || t.replyIds.includes('goon'));
       ok('wound-down news beat drops dead engagement honestly', honest, `replies=${t.replyIds.join(',')}`);
     } else {
-      const hasEngage = t.replyIds.some(id => id === 'dlg:more' || id === 'dlg:react');
+      // ENGAGEMENT IN EITHER DIALECT (journey sociallife 2026-10-11): when a
+      // generic question hangs, the question owns the menu BY DESIGN
+      // (conversation.js: the beat matrix is bypassed so answers come
+      // first). That menu's engagement reply is the bare 'more' id — gated
+      // on convoThreadHasMore, so it is never a dead button. The test's
+      // intent is "engagement offered, not just leave", which 'more'
+      // satisfies in the question-owned dialect.
+      const hasEngage = t.replyIds.some(id => id === 'dlg:more' || id === 'dlg:react' || id === 'more');
       ok('news beat offers engagement replies', hasEngage, `replies=${t.replyIds.join(',')}`);
     }
   }

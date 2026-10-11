@@ -950,7 +950,19 @@
           favor.state = 'moot';
           return `"Never mind ${favor.short} — we got it handled. Thanks anyway."`;
         }
-        return `"About ${favor.short} — still need hands. Are you in?"`;
+        // RE-ASK VARIETY (journey sociallife 2026-10-11): the uncommitted ask
+        // recurs for as long as the need is live (days, from several
+        // villagers). One template made it verbatim-identical across 60+
+        // days — robotic. Cycle variants; the ask stays the same ask.
+        const reasks = [
+          `"About ${favor.short} — still need hands. Are you in?"`,
+          `"About ${favor.short} — I still haven't found anyone. Any chance?"`,
+          `"About ${favor.short} — I hate to ask twice, but it's still open. Will you?"`,
+          `"About ${favor.short} — the need hasn't gone anywhere. I'm still asking."`,
+        ];
+        return (typeof this.convoPickCycle === 'function')
+          ? (this.convoPickCycle(vid, 'favor:asked:' + (favor.id || favor.kind || ''), reasks) || reasks[0])
+          : reasks[Math.floor(Math.random() * reasks.length)];
       }
       return null;
     },
