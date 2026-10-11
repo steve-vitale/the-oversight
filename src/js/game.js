@@ -3040,6 +3040,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // A trap only catches species actually present on its tile; each
           // catch removes one animal. Empty woods = a quiet line. This is the
           // regrowth rule made real: hunting depletes, absence lets it recover.
+          // TRAP SHYNESS (balance 2026-10-10): game learns. Every catch on a
+          // tile teaches the locals — the same trap on the same ground fools
+          // fewer animals. t.trapShy[recipeId] = {level, day}: +1 per catch
+          // (cap 3), multiplying trapChance by 0.65^level (floor 0.05);
+          // relaxes 1 level per 3 quiet days. Rest the ground or move the
+          // line — rotation is the trapper's real cost. Declining returns,
+          // not a cap: the first pit on fresh ground still hits full odds.
+          // (Steve: prefer declining returns and opportunity costs over hard caps.)
+          // RELAXATION (hunter break-it 2026-10-11): a quiet dawn is a quiet
+          // dawn — the locals' memory of the trap fades whether the ground
+          // holds game or not. The relaxation sat below the empty-ground
+          // `continue`, so shyness FROZE on hunted-out ground: resting the
+          // ground never cured it, contradicting the rule above. Hoisted
+          // before the eligibility check; the odds multiplier still applies
+          // below, after trapChance is known.
+          const _shyMap = (t.trapShy = t.trapShy || {});
+          let _shy = _shyMap[recipe.id] || { level: 0, day: 0 };
+          if (_shy.level > 0) {
+            const _relax = Math.floor((this.state.scholar.day - (_shy.day || 0)) / 3);
+            if (_relax > 0) {
+              _shy = { level: Math.max(0, _shy.level - _relax), day: _shy.day };
+              if (_shy.level === 0) _shy.day = 0;
+              _shyMap[recipe.id] = _shy;
+            }
+          }
           const _wl = t.wildlife || this.backfillWildlife(t, x, y);
           const eligible = (recipe.catches || []).filter(sid => (_wl[sid] || 0) > 0);
           if (!eligible.length) {
@@ -3056,25 +3081,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // game trails — +15% trap catch.
           let trapChance = Math.min(0.95, this.modTarget('hunt.trap_catch', 0.4));
           if (this.hasItem('binoculars')) trapChance = Math.min(0.95, trapChance + 0.15);
-          // TRAP SHYNESS (balance 2026-10-10): game learns. Every catch on a
-          // tile teaches the locals — the same trap on the same ground fools
-          // fewer animals. t.trapShy[recipeId] = {level, day}: +1 per catch
-          // (cap 3), multiplying trapChance by 0.65^level (floor 0.05);
-          // relaxes 1 level per 3 quiet days. Rest the ground or move the
-          // line — rotation is the trapper's real cost. Declining returns,
-          // not a cap: the first pit on fresh ground still hits full odds.
-          // (Steve: prefer declining returns and opportunity costs over hard caps.)
-          const _shyMap = (t.trapShy = t.trapShy || {});
-          let _shy = _shyMap[recipe.id] || { level: 0, day: 0 };
-          if (_shy.level > 0) {
-            const _relax = Math.floor((this.state.scholar.day - (_shy.day || 0)) / 3);
-            if (_relax > 0) {
-              _shy = { level: Math.max(0, _shy.level - _relax), day: _shy.day };
-              if (_shy.level === 0) _shy.day = 0;
-              _shyMap[recipe.id] = _shy;
-            }
-            if (_shy.level > 0) trapChance = Math.max(0.05, trapChance * Math.pow(0.65, _shy.level));
-          }
+          // shyness still bites on ground with game (relaxed above)
+          if (_shy.level > 0) trapChance = Math.max(0.05, trapChance * Math.pow(0.65, _shy.level));
           // STAGED INJURY (break-it abilities 2026-10-10): scarecrow's promise —
           // the next trap with game on its ground is GUARANTEED to trigger.
           // The staging waits for its moment: a trap with no eligible game
@@ -5100,9 +5108,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // player's), weapon bonus from their equipped gear (villagerGearUp arms
     // them before they walk out), and held abilities (tracker +0.3 like the
     // player's L1, game_sense x1.4 find chance — the same modifiers
-    // huntAnimal applies). A kill is butchered at the animal's real kcal
-    // (field_dressing: +30% waste reduction — the same butcherYieldFrac the
-    // player gets) and the wildlife count decrements. Returns
+    // huntAnimal applies). A kill is butchered at the animal's real kcal —
+    // the duty's own flat cleaning (0.60 base, 0.78 with field_dressing:
+    // +30% waste reduction, mirroring the player's skill direction). This is
+    // the VILLAGER's labor, not the scholar's — it deliberately does not read
+    // the player's butcherYieldFrac (scholar modifiers don't clean NPC kills;
+    // the numbers are pinned by scripts/attack-hunter-20261011.js H3, which
+    // caught the old comment claiming they were "the same butcherYieldFrac").
+    // The wildlife count decrements. Returns
     // {kcal, msg, note}. The duty's injury roll stays with the caller.
     villagerHuntResolve(vid, eff) {
       const v = this.state.village || {};
@@ -5167,10 +5180,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (Math.random() >= chance) {
         return { kcal: 0, msg: `🏹 ${first} stalks a ${animal.name || 'animal'} all morning — it winds them and it's gone. Nothing to bring home.` };
       }
-      // the kill: real kcal, real butchering, real ecology decrement
+      // the kill: real kcal, real butchering, real ecology decrement.
+      // flat duty cleaning (see header): the villager's own labor.
       let frac = 0.6;
       try {
-        if (this.npcHasAbility && this.npcHasAbility(vid, 'field_dressing')) frac = 0.78; // +30% waste reduction, like the player's
+        if (this.npcHasAbility && this.npcHasAbility(vid, 'field_dressing')) frac = 0.78; // +30% waste reduction, mirroring the player's skill direction
       } catch (e) {}
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
