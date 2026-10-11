@@ -83,9 +83,9 @@
 //   - (knowledge) alien identity hidden until earned: reveal, System feed slip, 3rd encounter with same persona, or spotting Wren at a dead drop (break-it 2026-10-08 r4: Wren never fights, so she had no reveal path) (code: alienPlayers.js)
 //   - (limits) dead drops max 1 per 3 days; feed max 1 per day; same-rival hunts min 2 days apart (sporting rules); group encounters max 1 per 14 days, cooldown recorded on successful start only (break-it 2026-10-08 r4); benevolent help is deniable and subtle (code: alienPlayers.js)
 //   - (favor) fan favor -100..100; high favor improves care packages and contest lean; low favor makes the crowd bloodthirsty (code: alienPlayers.js)
-//   - (fan_clubs_per_lane) four audience clubs (fight/survival/social/showbiz); apFavor() is the loudest lane; legacy favor seeds all lanes on migration; drift is per-lane toward 0 (code: apState, apFavor, apAdjustFavor, apDailyTick, audit-shows 2026-10-09)
-//   - (club_boons_vote) a lane at 50+ may vote a small favor — fight: +10 health, survival: +300 kcal pantry, social: +1 unity, showbiz: wacky curio — max 1 per 5 days, always announced (code: apClubBoon, audit-shows 2026-10-09)
-//   - (package_club_credit) care packages name the loudest club; feed messages get per-lane lines at 50+ (code: apCarePackage, apPackageClubLine, apFeedMessage, audit-shows 2026-10-09)
+//   - (fan_clubs_per_lane) four audience clubs (fight/survival/social/showbiz); apFavor() is the loudest lane; legacy favor seeds all lanes on migration; drift is per-lane toward 0, -1 per 3 days (code: apState, apFavor, apAdjustFavor, apDailyTick, audit-shows 2026-10-09; decay slowed longsim contests r4 2026-10-11 — -1/day erased every highlight between shows)
+//   - (club_boons_vote) a lane at 25+ may vote a small favor — fight: +10 health, survival: +300 kcal pantry, social: +1 unity, showbiz: wacky curio — max 1 per 5 days, always announced (code: apClubBoon, audit-shows 2026-10-09; gate 50->25 longsim contests r4 2026-10-11 — the old gate never fired in 16 long runs)
+//   - (package_club_credit) care packages name the loudest club (gate 20->12, longsim contests r4); feed messages get per-lane lines at 25+ (code: apCarePackage, apPackageClubLine, apFeedMessage, audit-shows 2026-10-09)
 //   - (integration) woven into contests (rigging/lifelines), codex (discoverable truth), village gossip, and NPC contacts (code: alienPlayers.js)
 //   - (knowledge_alien_word) the word "alien" IS the alien truth and never appears in player-facing copy pre-reveal — the beam-horror lesson, sadistic package, contact establishment, duel feed, and Pip's rookie mistakes all gate on apKnowsAlien; stripping alien armor off a body reveals the persona on the spot (the item is literally named "Alien <piece>") — same class as the gated "MULTIPLE alien players" line (break-it 2026-10-09 r7) (code: alienPlayers.js)
 //   - (knowledge_persona_names) persona names ("Countess Sable", "K'thari Expeditionary") are the alien truth too — there are no cover names in the data, so group banter, feed lines, and combat cards all gate names on apKnowsAlien (break-it 2026-10-10 r11: group encounters fire at 2 encounters, before the 3rd-encounter auto-reveal — the banter was naming them outright) (code: apGroupBanter, alienPlayers.js)
@@ -1149,7 +1149,11 @@
     apCarePackage: function () {
       var ap = this.apState();
       var favor = this.apFavor(); // wired (break-it 2026-10-08): apFavor had no runtime callers
-      if (favor < 20) return false; // the crowd doesn't love you enough yet
+      // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): the old gate (20)
+      // was reachable in 1 of 16 long runs — clubs could never grow enough to
+      // send packages, so "fan clubs send care packages" was decoration. 12
+      // is a good month of television, not a miracle.
+      if (favor < 12) return false; // the crowd doesn't love you enough yet
       var day = (this.state.scholar || {}).day || 1;
       if (day - (ap.lastPackageDay || -999) < 4) return false; // max 1 per 4 days
 
@@ -1206,16 +1210,20 @@
     },
 
     // CLUB BOONS (audit-shows 2026-10-09): the clubs "vote" (docs/CONTESTS.md:
-    // "the audience can vote small favors"). A lane at 50+ may vote you a
+    // "the audience can vote small favors"). A lane at 25+ may vote you a
     // small favor — max 1 per 5 days, always announced, always real. This is
     // the vote mechanic; the care package is the gift mechanic.
+    // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): the old gate (50)
+    // never fired in 16 long runs (max lane ever: 17) — "the audience can
+    // vote small favors" was dead canon. 25 is a genuine hot streak, not a
+    // drip.
     apClubBoon: function () {
       var ap = this.apState();
       var day = (this.state.scholar || {}).day || 1;
       if (day - (ap.lastBoonDay || -999) < 5) return false;
       if (Math.random() > 0.15) return false;
       var top = this.apTopLane();
-      if ((this.apFanLane(top) || 0) < 50) return false;
+      if ((this.apFanLane(top) || 0) < 25) return false;
       ap.lastBoonDay = day;
       var club = this.apClubName(top);
       if (top === 'fight') {
@@ -1319,7 +1327,11 @@
       }
 
       // Fan chatter scales with favor
-      if (favor >= 50) {
+      // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): the celebrity beat
+      // (50) could never fire — same unreachable gate as the vote. 25 is the
+      // vote threshold: the club is loud enough to be heard, so the feed
+      // hears it too. Favorite -> celebrity, said out loud.
+      if (favor >= 25) {
         msgs.push('"Your fan club is GROWING. There\'s fan art. It\'s... surprisingly good. The System is confused but supportive."'); msgPids.push(null);
         msgs.push('"Betting pools favor you 3-to-1 now. The smart money says you\'re learning faster than the monsters."'); msgPids.push(null);
       } else if (favor <= -30) {
@@ -1329,14 +1341,15 @@
         msgs.push('"The audience is watching. The gamblers are watching. Everyone\'s watching. No pressure."'); msgPids.push(null);
       }
 
-      // FAN CLUBS PER LANE (audit-shows 2026-10-09): a loud club (50+) gets
+      // FAN CLUBS PER LANE (audit-shows 2026-10-09; gates lowered to the vote
+      // threshold by longsim contests r4 2026-10-11): a loud club (25+) gets
       // its own feed line — the gossip lane has its own celebrities, and
       // the feed should know which crowd is chanting.
       try {
-        if (this.apFanLane('fight') >= 50) { msgs.push('"The fight clubs are making banners. Your name, in fire. The sadistic ones are taking it personally."'); msgPids.push(null); }
-        if (this.apFanLane('survival') >= 50) { msgs.push('"The long-haul fans are sending trail mix. Actual trail mix. Through the screen. Nobody knows how."'); msgPids.push(null); }
-        if (this.apFanLane('social') >= 50) { msgs.push('"The moot crowd has a chant for you now. It rhymes. It\'s devastating in debates."'); msgPids.push(null); }
-        if (this.apFanLane('showbiz') >= 50) { msgs.push('"Your showbiz fans voted you "most watchable human" three weeks running. The trophy is a small moon."'); msgPids.push(null); }
+        if (this.apFanLane('fight') >= 25) { msgs.push('"The fight clubs are making banners. Your name, in fire. The sadistic ones are taking it personally."'); msgPids.push(null); }
+        if (this.apFanLane('survival') >= 25) { msgs.push('"The long-haul fans are sending trail mix. Actual trail mix. Through the screen. Nobody knows how."'); msgPids.push(null); }
+        if (this.apFanLane('social') >= 25) { msgs.push('"The moot crowd has a chant for you now. It rhymes. It\'s devastating in debates."'); msgPids.push(null); }
+        if (this.apFanLane('showbiz') >= 25) { msgs.push('"Your showbiz fans voted you "most watchable human" three weeks running. The trophy is a small moon."'); msgPids.push(null); }
       } catch (e) {}
 
       // Benevolent whispers (deniable)
@@ -1366,13 +1379,21 @@
     apDailyTick: function () {
       if (!this.apEligible()) return;
       var ap = this.apState();
-      // Favor drifts slowly toward 0 (the crowd forgets) — per lane now.
+      // Favor drifts toward 0 (the crowd forgets) — per lane, SLOWLY.
+      // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): the old -1/day
+      // erased every highlight before the next show (TV runs ~0.5/week, so
+      // a +8 win decayed to zero in 8 days) — clubs could never accumulate,
+      // and the vote/package gates were decoration. Now -1 per 3 days: a
+      // highlight month carries, a quiet stretch still fades.
+      var _day = (this.state.scholar || {}).day || 1;
       var fc = ap.fanClubs || {};
       var lanes = ['fight', 'survival', 'social', 'showbiz'];
-      for (var li = 0; li < lanes.length; li++) {
-        var L = lanes[li];
-        if ((fc[L] || 0) > 0) fc[L] = Math.max(0, fc[L] - 1);
-        else if ((fc[L] || 0) < 0) fc[L] = Math.min(0, fc[L] + 1);
+      if (_day % 3 === 0) {
+        for (var li = 0; li < lanes.length; li++) {
+          var L = lanes[li];
+          if ((fc[L] || 0) > 0) fc[L] = Math.max(0, fc[L] - 1);
+          else if ((fc[L] || 0) < 0) fc[L] = Math.min(0, fc[L] + 1);
+        }
       }
       this.apSyncFavor();
 
@@ -1382,7 +1403,7 @@
       // Care packages are rarer — check every day, gate inside
       try { if (Math.random() < 0.25) this.apCarePackage(); } catch (e) {}
       // CLUB BOONS (audit-shows 2026-10-09): canon says clubs "vote" —
-      // a loud club (lane >= 50) votes you small favors. Max 1 per 5 days.
+      // a loud club (lane >= 25) votes you small favors. Max 1 per 5 days.
       try { this.apClubBoon(); } catch (e) {}
       // Playground: persistent aliens act (kill, burn, raid, duel)
       try { this.apPlaygroundTick(); } catch (e) {}

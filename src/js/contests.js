@@ -101,7 +101,9 @@
 //   - pilot_episode: the first contest of a run is the System's PILOT EPISODE — said out loud at the announcement (test broadcast, diegetic production jank: the name stumble, the still-warm arena, the new countdown); the grab-day beat calls it live; stakes and countdown dread untouched (code: fireContest, resolveContest, Steve 2026-10-05, docs/CONTESTS.md)
 //   - fear_honesty: high/extreme billing must mean it — phase damage x1.5 at the contestChoose choke point (stacks with hardened x1.25), said aloud once per contest; blood contests get 4x scheduling weight at wave 1 (~5% -> ~18%); the participate/refuse screen states the billing, the contest's real death count (state.contestDeathsById, ledgered in _contestDie/_cxKillContestant), and current health; show shame lands real rep damage (gossip moves REP only — skipTrust) while the galaxy still loves the trainwreck; high/extreme wins roll hotter prizes (+0.15/+0.3 chance, hardened stacks) — the risk side moved, so the reward side moves (code: contest-fear 2026-10-11)
 //   - gossip_aftermath: contest outcomes seed village gossip (contest_won/contest_survived/contest_died) via _cxGossip — news travels by mouth, distorted by retelling, not broadcast; villagers only (code: _cxGossip, _contestEnd, _contestDie, _contestResolveOthers, Steve 2026-10-08)
-//   - fan_favor_contests: televised wins move the fan club (+4 player, +2 villager); a player win can shake loose a fan care package (code: _contestEnd, Steve 2026-10-08)
+//   - fan_favor_contests: televised wins move the fan club — player wins +4/+6/+8 by risk (low-med/high/extreme), villager wins +2/+3/+4 (code: _contestEnd, Steve 2026-10-08; risk scaling longsim contests r4 2026-10-11); a player win can shake loose a fan care package
+//   - fan_club_highlights: clubs "grow with highlights" (docs/CONTESTS.md) — the Death Reel airing moves showbiz +2; a contest death moves the contest's club +2 (the highlight package replays forever — the galaxy loves a trainwreck, said out loud) (code: fireShow, _contestDie, _cxKillContestant, longsim contests r4 2026-10-11)
+//   - fan_club_gates: the vote gate (25+, was 50) and care-package gate (12+, was 20) are reachable — the old gates never fired in 16 long runs (code: apClubBoon, apCarePackage, alienPlayers.js, longsim contests r4 2026-10-11)
 //   - fan_favor_lanes: televised wins move the club that watched them — blood→fight, endurance→survival, moot→social, everything else→showbiz (code: _cxFanLane, _contestEnd, audit-shows 2026-10-09)
 //   - show_playable: shows are PLAYED beats, not announcements — the pull can land on the player (showPhases), a villager (showWatchPhases + deterministic showResolveVillager), or the village together (showTogetherPhases); every pool show has an authored beat in SHOW_BEATS, with _showGenericBeat as fallback (code: fireShow, SHOW_BEATS, audit-shows 2026-10-09)
 //   - show_casting: notability-first — the pull goes to the notable (ONE shared notabilityWeight: depth + impact, Steve 2026-10-09); zero-deed villagers never pulled while notables exist; NO default-together — with nobody notable the pull goes to the SCHOLAR ("the cameras don't know these people yet"); together episodes fire ONLY on triggers (viewership milestone +5); 10% whim announced and constrained to notables; exact ties share the top band (code: showCastPull, showEligible, notabilityWeight, Steve 2026-10-09)
@@ -980,6 +982,17 @@
     const cast = this.showCastPull();
     const who = cast.who; // 'player' | villagerId | 'together'
     try { this.tele('show_aired', { id: (show && show.id) || '?', who: who, why: cast.why || '?' }); } catch (e) {}
+    // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): the Death Reel is
+    // the highlight show — docs/CONTESTS.md says clubs "grow with highlights",
+    // and nothing implemented it. When the reel airs your greatest hits, the
+    // showbiz club grows. Said out loud (apAdjustFavor only announces |n|>=3,
+    // so the reel gets its own line).
+    try {
+      if (s && s.id === 'death_reel' && this.apAdjustFavor) {
+        this.apAdjustFavor(2, 'the Death Reel ran your highlights', 'showbiz');
+        this.sysSay('📺 The Death Reel ran your highlights. Somewhere out there, your showbiz fans are making clips.');
+      }
+    } catch (eHL) {}
     // FRESH-FACE LEDGER (longsim contests 2026-10-11): the never-pulled pool
     // for showCastPull's fresh-face path. Set here, at the one funnel every
     // pull passes through (player, villager, together).
@@ -4578,7 +4591,11 @@
         // ALIEN PLAYERS (Steve 2026-10-08; lanes audit-shows 2026-10-09): a
         // televised win moves the fan club that watched it (blood→fight,
         // endurance→survival, moot→social, else showbiz).
-        try { if (this.apAdjustFavor) this.apAdjustFavor(2, pname + ' won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
+        // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): bigger stages
+        // grow the club faster — a highlight is bigger on the main event.
+        // Old flat +2 could never reach the club gates in a real run.
+        const _vGain = contest.risk === 'extreme' ? 4 : contest.risk === 'high' ? 3 : 2;
+        try { if (this.apAdjustFavor) this.apAdjustFavor(_vGain, pname + ' won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
         // Villager gets the prize (not the player) — REAL, not a line: the
         // winner brings home alien rations the whole village feels.
         // (Steve 2026-10-08: "the System's favor (and a story)" was a
@@ -4595,7 +4612,10 @@
         // winning on camera moves the fan club that watched it — the crowd
         // watched, and the crowd has opinions. A televised win can also
         // shake loose a fan care package (rate-limited inside).
-        try { if (this.apAdjustFavor) this.apAdjustFavor(4, 'won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
+        // HIGHLIGHT GROWTH (longsim contests r4 2026-10-11): high/extreme
+        // wins are bigger highlights — the main event grows the club faster.
+        const _pGain = contest.risk === 'extreme' ? 8 : contest.risk === 'high' ? 6 : 4;
+        try { if (this.apAdjustFavor) this.apAdjustFavor(_pGain, 'won ' + contest.name + ' on camera', this._cxFanLane(contest)); } catch (e) {}
         try { if (this.apCarePackage) this.apCarePackage(); } catch (e) {}
         if (_grantPrize) {
           ac._prizeGranted[_grantKey] = true;
@@ -4781,6 +4801,17 @@
         const dl = (this.state.contestDeathsById = this.state.contestDeathsById || {});
         dl[contest.id] = (dl[contest.id] || 0) + 1;
       } catch (e) {}
+      // HIGHLIGHT PACKAGE (longsim contests r4 2026-10-11): "The System notes
+      // the exact time of death for the highlight package." The reel will run
+      // it forever — the club remembers, darkly. The galaxy loves a
+      // trainwreck (canon: shame moves favor too). Said out loud (own line —
+      // apAdjustFavor only announces |n|>=3).
+      try {
+        if (this.apAdjustFavor) {
+          this.apAdjustFavor(2, 'the highlight package', this._cxFanLane(contest));
+          this.sysSay('📺 The highlight package is already cut. ' + contest.name + ' will replay this forever — the club will remember.');
+        }
+      } catch (eHL) {}
     }
     // ADAPTATION (Steve 2026-10-11): death is the ultimate cooling —
     // heat resets, the file stays.
@@ -5416,6 +5447,20 @@
     // (_contestDie watch path, _contestResolveOthers multi-take, the duel
     // partner), so the crisis fires reactively wherever the show takes
     // someone. The player never routes through here.
+    // HIGHLIGHT PACKAGE (longsim contests r4 2026-10-11): a villager's death
+    // on camera grows the contest's club too - the club remembers, the reel
+    // runs it forever. The galaxy loves a trainwreck. Said out loud (own
+    // line - apAdjustFavor only announces |n|>=3).
+    try {
+      if (contestId && this.apAdjustFavor) {
+        let _cdef = null;
+        try { _cdef = (this.contestPool() || []).find(c => c.id === contestId); } catch (e0) {}
+        let _hlName = 'they';
+        try { _hlName = this.displayName(pid); } catch (e1) {}
+        this.apAdjustFavor(2, 'the highlight package', this._cxFanLane(_cdef || { cat: '' }));
+        this.sysSay('📺 The highlight package is already cut. ' + _hlName + ' will replay forever — the club will remember.');
+      }
+    } catch (eHL) {}
     try {
       if (pid && pid !== 'player' && this.fireCrisis)
         this.fireCrisis('blood-on-air', { name: this.displayName(pid) });
