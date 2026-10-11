@@ -14277,6 +14277,12 @@
           <div id="mapoverlay" class="mapoverlay hidden"></div>
         </div>
         <div class="game-col-side">
+          <!-- INTERACTION STACK (talk-button-obscurer-fix 2026-10-11, Steve:
+               "Don't let an element obscure crucial info"): the action menu
+               AND the narration region pin together. The person card renders
+               inside the narration region — it must never slide under the
+               pinned header. display:contents on narrow screens (see CSS). -->
+          <div class="ord-topstack">
           <div class="ord-controls">
             <div class="ord-dpad ${Game.dpadSide() === 'right' ? 'dpad-right' : 'dpad-left'}">${dpadHTML()}</div>
             <div class="ord-actions ${Game.dpadSide() === 'right' ? 'dpad-right' : 'dpad-left'}">
@@ -14288,9 +14294,10 @@
               ${feedbackHTML()}
             </div>
           </div>
+          <div class="ord-narration">${narrationBoxHTML(st, chatView)}</div>
+          </div><!-- /ord-topstack -->
           <button class="dpshow hidden" id="dpshow" aria-label="show walk pad">🧭</button>
           <div class="toast-layer" id="toast-layer"></div>
-          <div class="ord-narration">${narrationBoxHTML(st, chatView)}</div>
           ${st.activeQuest ? `<div class="ord-quest-top"><p class="small" style="border-left:3px solid #7fd67f;padding:6px 8px;margin:8px 0;background:rgba(127,214,127,0.08);border-radius:4px">📋 ${esc(st.activeQuest.text || (st.activeQuest.giverName + ' needs ' + st.activeQuest.qty + ' ' + st.activeQuest.plant + '.'))}</p></div>` : ''}
           <div class="ord-status">${statusBars(st)}</div>
           <div class="ord-lowermenu">${lowerMenuHTML(st)}</div>

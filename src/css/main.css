@@ -902,6 +902,14 @@ body.system-live .btn:not(.ghost) {
    screens the grid goes left and the panels dock right. */
 .game-cols { display: flex; flex-direction: column; min-width: 0; }
 .game-col-main, .game-col-side { display: contents; }
+/* INTERACTION STACK (talk-button-obscurer-fix 2026-10-11, Steve: "Don't let
+   an element obscure crucial info"): wrapper around .ord-controls +
+   .ord-narration. On narrow screens it is display:contents, so the two keep
+   their own flex orders in the single-column flow (mobile layout untouched).
+   On desktop it becomes the pinned sticky stack (see the min-width:900px
+   block) — the person card lives inside the narration region and must never
+   slide under the pinned header. */
+.ord-topstack { display: contents; }
 /* single-column order = the pre-columns flow: status, grid, interactions, panels */
 .ord-status { order: 1; }
 .ord-quest { order: 2; }
@@ -1135,19 +1143,29 @@ body.in-combat .ord-log { order: 5.3; }
     display: flex;
     flex-direction: column;
   }
-  /* Interactive first, info below — even on desktop */
-  body:has(.game-cols) .ord-controls { order: -3; }
-  body:has(.game-cols) .ord-narration { order: -2; }
+  /* Interaction stack first, info below — even on desktop */
+  body:has(.game-cols) .ord-topstack { order: -3; }
   body:has(.game-cols) .ord-status { order: -1; }
-  /* The action menu sticks. Everything else scrolls under it. */
-  body:has(.game-cols) .ord-controls {
+  /* THE INTERACTION STACK STICKS (talk-button-obscurer-fix 2026-10-11,
+     Steve: "Don't let an element obscure crucial info"). The action menu
+     AND the narration region pin together at the top of the side column.
+     The person card, dialogue box and contest box all render inside the
+     narration region — when only the action menu was sticky, the card slid
+     UNDER the opaque pinned header and its buttons (Talk, Close) failed
+     hit-testing: mouse clicks refused as "obscured" while keyboard worked.
+     The card is inside the pinned stack now, so no element can ever cover
+     it. Everything BELOW the stack (status, haven panel, compass, minimap)
+     still scrolls under it — that's info/management, not the thing you tap. */
+  body:has(.game-cols) .ord-topstack {
     position: sticky;
     top: 0;
     z-index: 10;
     background: var(--bg, #141414);
-    padding-bottom: 8px;
     border-bottom: 1px solid var(--line, #333);
   }
+  /* Breathing room between the action menu and the narration region,
+     inside the pinned stack. */
+  body:has(.game-cols) .ord-topstack .ord-controls { padding-bottom: 8px; }
   body:has(.game-cols) .sheet { max-width: 640px; }
   body:has(.game-cols) .minimap { max-width: 430px; }
   /* Node map (compass) stays with the grid in the main column */
