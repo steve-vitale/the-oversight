@@ -28639,23 +28639,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (cleared in tbBeginTurn) so the whole round is covered.
       if (t.kind === 'villager' && final > 0 && this.tbfight) {
         try {
-          const _pf = this.tbFighter('p');
-          const _near = _pf && _pf.alive && _pf.leechStance &&
-            Math.abs((_pf.mx || 0) - (t.mx || 0)) + Math.abs((_pf.my || 0) - (t.my || 0)) <= 2;
-          if (_near) {
-            const _half = Math.ceil(final / 2);
-            final = final - _half;
-            this.addHealth(-_half);
-            // HONESTY (break-it combat 2026-10-10): the redirected half IS
-            // damage taken — trade_of_blows.settle_debt promises "you cash in
-            // every bruise, every cut". addHealth doesn't write
-            // fightDamageTaken, so record it here.
-            this.state.scholar.fightDamageTaken = (this.state.scholar.fightDamageTaken || 0) + _half;
-            const _vt = (this.state.village.trust || {});
-            const _vid = t.villagerId || t.key;
-            if (_vid) _vt[_vid] = Math.min(100, (_vt[_vid] || 10) + this.trustGainProgressive(_vid, 5));
-            this.say(`You step in front of ${t.name || 'your ally'}. You take ${_half} of it. They owe you. (Leech Stance: trust +5)`);
-            try { this.noteAbilityUse('leech'); } catch (e) {}
+          // LEECH SELF-SOURCE (break-it combat r11 2026-10-11): you cannot
+          // bodyguard an ally from your OWN blow. The gristlefit lash
+          // (sourceKey 'p') was intercepting itself — "You step in front of
+          // X... They owe you. (trust +5)" — a lie that also cancelled half
+          // the lash's designed trust dent (-10, applied before tbDamage).
+          // Player-sourced damage keeps its own consequences (lash trauma /
+          // trust dent, betrayal paths); the stance only drinks ENEMY pain.
+          // (Player-sourced predicate mirrors the feasted block above.)
+          const _srcIsPlayer = sourceKey === 'p' || (sourceLabel === 'you' && sourceKey == null);
+          if (!_srcIsPlayer) {
+            const _pf = this.tbFighter('p');
+            const _near = _pf && _pf.alive && _pf.leechStance &&
+              Math.abs((_pf.mx || 0) - (t.mx || 0)) + Math.abs((_pf.my || 0) - (t.my || 0)) <= 2;
+            if (_near) {
+              const _half = Math.ceil(final / 2);
+              final = final - _half;
+              this.addHealth(-_half);
+              // HONESTY (break-it combat 2026-10-10): the redirected half IS
+              // damage taken — trade_of_blows.settle_debt promises "you cash in
+              // every bruise, every cut". addHealth doesn't write
+              // fightDamageTaken, so record it here.
+              this.state.scholar.fightDamageTaken = (this.state.scholar.fightDamageTaken || 0) + _half;
+              const _vt = (this.state.village.trust || {});
+              const _vid = t.villagerId || t.key;
+              // TRUST RATE LIMIT (break-it combat r11 2026-10-11): "They owe
+              // you" is ONE debt, not a per-hit annuity. Uncapped, an armored
+              // ally + weak chippers farmed trust 10 -> 70 in 12 hits at 1 HP
+              // per +5 (probe test-break-combat-r11). The stance still drinks
+              // half of every hit — the sacrifice is real — but the social
+              // debt is owed once per villager per fight. After that it's just
+              // what you do.
+              let _owed = false;
+              if (_vid) {
+                const _ff = this.tbfight;
+                _ff.leechOwed = _ff.leechOwed || {};
+                if (!_ff.leechOwed[_vid]) {
+                  _ff.leechOwed[_vid] = true;
+                  _owed = true;
+                  _vt[_vid] = Math.min(100, (_vt[_vid] || 10) + this.trustGainProgressive(_vid, 5));
+                }
+              }
+              this.say(`You step in front of ${t.name || 'your ally'}. You take ${_half} of it.` +
+                (_owed ? ' They owe you. (Leech Stance: trust +5)' : ' (Leech Stance)'));
+              try { this.noteAbilityUse('leech'); } catch (e) {}
+            }
           }
         } catch (e) {}
       }
