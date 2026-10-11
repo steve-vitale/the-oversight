@@ -5397,7 +5397,136 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { this.villagerGainXP(vid, 'field', 1, 'fishing'); } catch (e) {}
           this.bumpTrust(vid, 1, 'worked the creek for fish');
         }
-      } else if (a.task === 'cook' || a.task === 'tend' || a.task === 'teach' || a.task === 'mend') {
+      } else if (a.task === 'cook') {
+        // HAVEN ROLES (Steve 2026-10-09): haven work is contribution. The
+        // credit lands in v.gives so the ledger — and the freeloader pipeline
+        // — sees it. A villager who never leaves haven but keeps the home
+        // fires burning is pulling weight.
+        // (break-it food 2026-10-09: this is the SINGLE count — the old
+        // villagerMealDay fold-in is gone. havenToday tracks today's share
+        // for the "who's pulling weight" panel; reset daily in villageEats.)
+        const credit = this.havenRoleCredit(vid, this.state.village) || 400;
+        const vv2c = this.state.village;
+        vv2c.gives = vv2c.gives || {};
+        vv2c.gives[vid] = (vv2c.gives[vid] || 0) + credit;
+        vv2c.havenToday = vv2c.havenToday || {};
+        vv2c.havenToday[vid] = (vv2c.havenToday[vid] || 0) + credit;
+        // VILLAGE SMOKE TECHNIQUE (longsim food 2026-10-11): the cook's old
+        // line claimed "nothing wasted" while ~2.8k kcal/day rotted in the
+        // pantry — the duty was credit-only. The cook now actually works the
+        // smoke racks: fresh pantry surplus about to spoil is smoked/dried.
+        // Rate mirrors the player's own preserve path (food.js): anyone can
+        // work the racks (blind 0.80x, 15d — "blind penalties teach, never
+        // stupid-make"); a preserver (chef/fisherman/farmer/smoker —
+        // SPECIALIST_SKILLS.preserver) works at the specialist rate
+        // (0.95+0.02*skill capped 1.0, 30+5*skill days — energy never
+        // created). Canon grounding: knowledge.json "You can preserve
+        // anything: ... smoke fish"; synergy "the village smoke technique —
+        // the racks filled and stayed filled. Nothing spoiled. Nothing was
+        // wasted."; food.js header "let ... the preserver smoke."
+        // Throughput: one cook's part at the racks handles ~4000 kcal.
+        // Design call (Steve 2026-10-07: make the call, document it, he can
+        // overrule): fish smokes, plants dry — the verb follows the food,
+        // the rung (preserved) is one.
+        let preservedNote = '';
+        try {
+          const person = (this.getPerson ? this.getPerson(vid) : null) || vp || {};
+          const skill = this.specialistSkill ? this.specialistSkill(person, 'preserver') : 0;
+          const day = (this.state.scholar || {}).day || 1;
+          const v = this.state.village;
+          // DINNER-FIRST (longsim food 2026-10-11): the village eats
+          // fresh-first at the nightly meal (pantryDraw: smallest pieces,
+          // spoilDay tiebreak) — and the cook resolves 3x/day while the
+          // village eats once at night. Smoking tonight's dinner at 0.80x
+          // destroys value in efficient villages (measured: they flip from
+          // survived to lost). So: reserve ~2 nights of the village's ACTUAL
+          // pantry draw — measured ~1.5k/night for 12 (villagers eat own
+          // production first; total need is NOT the draw). The soonest-
+          // spoiling stays fresh for tonight and tomorrow; only the excess
+          // beyond the reserve hits the racks. The reserve errs big on
+          // purpose: a too-big reserve merely delays preservation a day; a
+          // too-small one steals dinner.
+          let reserve = 0;
+          try {
+            reserve = 250 * ((v.roster || []).length || 10);
+          } catch (e) { reserve = 2500; }
+          const eligible = [];
+          for (const it of (v.pantry || [])) {
+            if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0) continue;
+            if (it.bonded) continue;
+            if (it.foodState === 'preserved' || it.foodState === 'rendered') continue;
+            if ((it.foodKind || '') === 'pemmican') continue;
+            if (this.isKeepsake && this.isKeepsake(it)) continue;
+            const sd = it.spoilDay;
+            if (sd === undefined || sd === null || sd >= 9999) continue;
+            if (sd - day > 2) continue; // only the about-to-rot surplus
+            eligible.push(it);
+          }
+          // soonest-spoiling first: tonight's dinner is at the front, the
+          // would-rot excess at the back.
+          eligible.sort((a, b) => (a.spoilDay - b.spoilDay) ||
+            (((b.kcalEach || 0) * (b.units || 1)) - ((a.kcalEach || 0) * (a.units || 1))));
+          let keepFresh = reserve;
+          const toPreserve = [];
+          for (const it of eligible) {
+            const per = it.kcalEach || 1;
+            const k = per * (it.units || 1);
+            if (keepFresh <= 0) { toPreserve.push(it); continue; }
+            if (keepFresh >= k) { keepFresh -= k; continue; } // whole stack stays fresh
+            // partial: dinner's share stays fresh, the rest goes to the racks
+            const origUnits = it.units || 1;
+            const keepUnits = Math.min(origUnits, Math.ceil(keepFresh / per));
+            keepFresh = 0;
+            if (keepUnits < origUnits) {
+              v.pantry.push(Object.assign({}, it, { units: keepUnits }));
+              it.units = origUnits - keepUnits;
+              toPreserve.push(it);
+            }
+            // else the whole stack stays fresh
+          }
+          let budget = 4000, n = 0, keptKcal = 0;
+          const convert = (it) => {
+            // BLIND-RATE PARITY with the player's preserve: an unskilled cook
+            // does the rough job (0.80x, 15d); a preserver does it properly.
+            const mult = skill > 0 ? Math.min(1.0, 0.95 + 0.02 * skill) : 0.80;
+            const shelf = skill > 0 ? 30 + 5 * skill : 15;
+            it.kcalEach = Math.max(1, Math.round(it.kcalEach * mult));
+            it.foodState = 'preserved'; it.diseaseRisk = null; it.safe = true;
+            it.spoilDay = day + shelf;
+            const nm = String(it.name || 'food');
+            it.name = nm + (/fish/i.test(nm) ? ' (smoked)' : ' (dried)');
+            it.prep = skill > 0
+              ? 'Preserved by knowing hands. Keeps for weeks.'
+              : 'Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.';
+            it.wellMade = skill > 0;
+          };
+          for (const it of toPreserve) {
+            if (budget <= 0) break;
+            const per = it.kcalEach || 0;
+            if (per <= 0) continue;
+            const takeUnits = Math.min(it.units || 1, Math.floor(budget / per));
+            if (takeUnits <= 0) continue;
+            const stackKcal = per * takeUnits;
+            if (takeUnits < (it.units || 1)) {
+              // big stack: smoke what the budget covers, leave the rest fresh
+              it.units -= takeUnits;
+              const nit = Object.assign({}, it, { units: takeUnits });
+              convert(nit);
+              v.pantry.push(nit);
+            } else {
+              convert(it);
+            }
+            budget -= stackKcal; n++; keptKcal += Math.round(stackKcal * (skill > 0 ? Math.min(1.0, 0.95 + 0.02 * skill) : 0.80));
+          }
+          if (n > 0) {
+            preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
+            try { this.villagerGainXP(vid, 'field', 1, 'preserving'); } catch (e) {}
+          }
+          try { this.bumpTrust(vid, 1, 'kept the haven fed'); } catch (e) {}
+        } catch (e) {}
+        this.say(`🍲 ${first} cooked for the haven — meals stretched.${preservedNote}`);
+        this.bumpTrust(vid, 2, 'kept the haven work going');
+      } else if (a.task === 'tend' || a.task === 'teach' || a.task === 'mend') {
         // HAVEN ROLES (Steve 2026-10-09): haven work is contribution. The
         // credit lands in v.gives so the ledger — and the freeloader pipeline
         // — sees it. A villager who never leaves haven but keeps the home
@@ -5412,7 +5541,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         vv2.havenToday = vv2.havenToday || {};
         vv2.havenToday[vid] = (vv2.havenToday[vid] || 0) + credit;
         const roleLine = {
-          cook: `🍲 ${first} cooked for the haven — meals stretched, nothing wasted.`,
           tend: `🕯️ ${first} tended the fire and the sick — the haven held together.`,
           teach: `📖 ${first} taught what they know — the village is a little wiser.`,
           mend: `🧵 ${first} mended gear and clothing — everything lasts a little longer.`,

@@ -447,11 +447,11 @@ function counterPlay(Game, ctx) {
       }
     } catch (e) {}
     // STAFF THE SMOKE RACKS (longsim food 2026-10-11): a competent leader
-    // puts a preserver on cook duty when fresh food is about to rot. The
-    // village smoke technique only works if someone's tending the racks —
-    // and a cook who can't preserve is just morale, so this needs a real
-    // preserver (chef/fisherman/farmer/smoker) free. Only free villagers:
-    // pulling a fisher off the creek is the player's call, not the bot's.
+    // puts a cook on duty when fresh food is about to rot. Anyone can work
+    // the racks (rough job: 0.80x, 15d); a real preserver
+    // (chef/fisherman/farmer/smoker) is preferred and does it properly.
+    // Only free villagers: pulling a fisher off the creek to smoke is the
+    // player's call, not the bot's.
     try {
       const v = Game.state.village || {};
       const day = (Game.state.scholar || {}).day || 0;
@@ -465,7 +465,7 @@ function counterPlay(Game, ctx) {
             freshKcal += (it.kcalEach || 0) * (it.units || 1);
         }
         if (freshKcal > 1500) {
-          let best = null, bestSkill = 0;
+          let best = null, bestSkill = -1;
           for (const id of freeVillagers(Game)) {
             let sk = 0;
             try { sk = Game.specialistSkill ? Game.specialistSkill(Game.getPerson(id) || {}, 'preserver') : 0; }

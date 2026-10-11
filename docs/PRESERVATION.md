@@ -38,7 +38,11 @@ must earn meaningful rewards — that's the whole point of the ladder.
 
 ## Open / known gaps (2026-10-09)
 
-- Render/pemmican are not yet wired for the village stash path (`prepStash`).
+- ~~Render/pemmican are not yet wired for the village stash path (`prepStash`).~~
+  RESOLVED 2026-10-11: the stash counter wires both — `data-stash-render`
+  → `Game.renderFat(idx, stashOf())`, `data-stash-pemmican` →
+  `Game.makePemmican(stashOf())` (app.js); verified in node (raw fat in
+  prepStash renders to `foodState: 'rendered'`, 90d shelf, blind 0.65x).
 
 ## Change log
 
