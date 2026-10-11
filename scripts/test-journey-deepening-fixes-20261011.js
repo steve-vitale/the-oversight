@@ -143,6 +143,9 @@ function testGossipFresh(Game, seed) {
   // fighting the menu builder's trust/mood gating.
   const _dark = Game.npcDark;
   Game.npcDark = function () { return null; }; // keep the dark branch dry
+  const _gossipAbout = Game.npcGossipAbout;
+  Game.npcGossipAbout = function () { return null; }; // keep the 50/50
+  // people-gossip pre-branch dry — we are testing the fresh-path rendering
   try {
     Game.state.village.gossip = [];
     const roster = (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
@@ -167,7 +170,7 @@ function testGossipFresh(Game, seed) {
     check(tag + ' B5 plain variant not used at distortion 3', !/told it straight/.test(big), big.slice(0, 160));
     try { Game.endConvo(w0); } catch (e) {}
   } finally {
-    Game.npcDark = _dark;
+    Game.npcDark = _dark; Game.npcGossipAbout = _gossipAbout;
   }
 }
 
