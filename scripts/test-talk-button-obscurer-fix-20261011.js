@@ -27,8 +27,14 @@ const { execSync } = require('child_process');
 
 const css = fs.readFileSync('src/css/main.css', 'utf8');
 const app = fs.readFileSync('src/js/app.js', 'utf8');
-const oldCss = execSync('git show HEAD:src/css/main.css', { maxBuffer: 8 * 1024 * 1024 }).toString();
-const oldApp = execSync('git show HEAD:src/js/app.js', { maxBuffer: 32 * 1024 * 1024 }).toString();
+// Pre-fix baseline: the parent of the commit that introduced ord-topstack.
+// (Pinning to HEAD would break the moment the fix itself becomes HEAD.)
+const introCommit = execSync(`git log --format=%H -S 'ord-topstack' -- src/js/app.js | tail -1`).toString().trim();
+function showBaseline(p) {
+  return execSync(`git show ${introCommit}^:${p}`, { maxBuffer: 32 * 1024 * 1024 }).toString();
+}
+const oldCss = showBaseline('src/css/main.css');
+const oldApp = showBaseline('src/js/app.js');
 
 let pass = 0, fail = 0;
 function check(name, cond) {
