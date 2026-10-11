@@ -446,6 +446,39 @@ function counterPlay(Game, ctx) {
         else break;
       }
     } catch (e) {}
+    // STAFF THE SMOKE RACKS (longsim food 2026-10-11): a competent leader
+    // puts a preserver on cook duty when fresh food is about to rot. The
+    // village smoke technique only works if someone's tending the racks —
+    // and a cook who can't preserve is just morale, so this needs a real
+    // preserver (chef/fisherman/farmer/smoker) free. Only free villagers:
+    // pulling a fisher off the creek is the player's call, not the bot's.
+    try {
+      const v = Game.state.village || {};
+      const day = (Game.state.scholar || {}).day || 0;
+      const asg = v.assignments || {};
+      const hasCook = Object.values(asg).some(a => a && a.task === 'cook');
+      if (!hasCook) {
+        let freshKcal = 0;
+        for (const it of (v.pantry || [])) {
+          const sd = it.spoilDay == null ? 99999 : it.spoilDay;
+          if ((it.kcalEach || 0) > 0 && (it.units || 0) > 0 && sd - day <= 3 && sd - day >= 0 && it.foodState !== 'preserved')
+            freshKcal += (it.kcalEach || 0) * (it.units || 1);
+        }
+        if (freshKcal > 1500) {
+          let best = null, bestSkill = 0;
+          for (const id of freeVillagers(Game)) {
+            let sk = 0;
+            try { sk = Game.specialistSkill ? Game.specialistSkill(Game.getPerson(id) || {}, 'preserver') : 0; }
+            catch (e) {}
+            if (sk > bestSkill) { bestSkill = sk; best = id; }
+          }
+          if (best) {
+            try { Game.assignTask(best, 'cook', { via: 'in-person' }); ctx.cookStaffed = (ctx.cookStaffed || 0) + 1; }
+            catch (e) {}
+          }
+        }
+      }
+    } catch (e) {}
     // traps: a held trap set on wild ground works while you sleep
     try {
       if ((ctx._trapDay || 0) + 3 <= day) {
