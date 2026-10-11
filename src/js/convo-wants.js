@@ -305,7 +305,15 @@
         if (resolution === 'engaged') return '"Good talk. I feel like I know you a little better now."';
         return null;
       },
-      resolve(vid, resolution) { return null; },
+      // A walked-away-from question hangs: the curiosity plants a seed so
+      // the next conversation resumes it instead of evaporating. A natural
+      // close after answering plants nothing — the question was answered.
+      // (convo rebuild 2026-10-11: trust proof caught curious never seeding.)
+      resolve(vid, resolution, how) {
+        if (how === 'left' && resolution !== 'deflected' && resolution !== 'unestablished')
+          return { wantId: 'curious', note: 'that question' };
+        return null;
+      },
     },
     just_company: {
       pick(vid) {
@@ -636,7 +644,10 @@
       want.resolution = resolution;
       let seed = null;
       try {
-        seed = want.def.resolve.call(this, vid, resolution);
+        // 'how' is passed so defs can distinguish a walked-away-from
+        // conversation ('left') from a natural close — unfinished business
+        // is planted, finished business isn't. (convo rebuild 2026-10-11)
+        seed = want.def.resolve.call(this, vid, resolution, how);
       } catch (e) {}
       if (seed) this.convoPlantSeed(vid, seed);
       if (want.fromSeed) {
