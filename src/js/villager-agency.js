@@ -87,6 +87,7 @@
       a.ach = a.ach || [];
       a.stats = a.stats || {};
       a.teachable = a.teachable || {};
+      a.lessons = a.lessons || {}; // villager->villager field lessons (longsim agency r2 2026-10-11)
       // transfer high-potential seeds planted at genRoster time
       if (this._pendingPotential && !a._potTransferred) {
         for (var i = 0; i < this._pendingPotential.length; i++) {
@@ -724,7 +725,10 @@
     agencyTurn(vid, choiceId) {
       var st = this.agencyState();
       var nm = '';
-      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) { nm = 'They'; }
+      // SENSE (longsim agency r2): firstRef, never split(' ')[0] — a stranger
+      // descriptor's first word is bare "A" ("A taught you"), but firstRef
+      // gives the distinguishing descriptor.
+      try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; }
       if (choiceId === 'agency:ask_expedition' || choiceId === 'agency:ask_field') {
         var v = this.state.village;
         var k = st.know[vid] || { plants: 0, monsters: 0, places: [] };
@@ -788,13 +792,27 @@
         }
         if (!spokenText) {
           // every candidate was a blocked repeat (or sayLine unavailable):
-          // an honest fallback, never a verbatim repeat.
-          var fb = '"There\'s more, but that\'s for another fire."';
-          try { if (this.sayLine(vid, fb)) spokenText = fb; } catch (e) {}
-          if (!spokenText) spokenText = fb;
+          // honest closers, tried in order THROUGH the no-repeat ledger, so
+          // the view and the transcript can never disagree (sense-caught
+          // 2026-10-11: the old fallback returned a ledger-blocked line, so
+          // the view showed it while the transcript denied it). When even
+          // the closers are exhausted the exchange ends (noop) — the canon
+          // exhausted-thread behavior ("I've told you everything I know
+          // about that") instead of looping.
+          var closers = [
+            '"There\'s more, but that\'s for another fire."',
+            '"That\'s everything I brought back. The rest is just walking."',
+            '"I\'ve told you everything I know about that."',
+          ];
+          for (var ci = 0; ci < closers.length; ci++) {
+            var em2 = null;
+            try { em2 = this.sayLine(vid, closers[ci]); } catch (e) { em2 = null; }
+            if (em2) { spokenText = closers[ci]; break; }
+          }
         }
         var choices = [];
         try { choices = this.convoChoices(vid); } catch (e) {}
+        if (!spokenText) return { ended: true, line: null, choices: [], noop: true, transcript: c ? c.transcript.slice() : [] };
         return { line: spokenText, choices: choices, ended: false, transcript: c ? c.transcript.slice() : [] };
       }
       return null;
@@ -818,9 +836,59 @@
       cx.plants[p.id] = { level: 1, source: 'taught' };
       st.lastTaughtPlantName = p.name || p.id;
       var nm = '';
-      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) { nm = 'They'; }
+      try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; } // firstRef: never bare "A" for stranger descriptors
       this.say(`📖 ${nm} shows you ${p.name || 'a plant'} — leaf, stem, smell. You won't forget it now. (Codex: ${p.name || 'plant'} identified.)`);
       return true;
+    },
+    // agencyTeachVillager: the HAVEN_CHORE 'teach' chore made real (longsim
+    // agency r2 2026-10-11). A villager who knows plants (the identity
+    // system: familiar/taught/plantKnowledge via plantsKnownBy) shows a
+    // fellow villager one they don't know yet: villagerLearnsPlant lands
+    // the identity with source 'taught' — the same real teaching the
+    // duty-system 'teach' task does, but ambient, not assigned. The learner
+    // also gains one tracking xp (fieldcraft, the way discoveries earn it)
+    // and a real lesson record lands in a.lessons; the teacher gets the
+    // honest 'taught' deed (mag 1). The spoken line and deed name the
+    // plant through plantDisplayName — knowledge-gated, so the player
+    // reads a name or an honest descriptor, never a leak. Monster lore
+    // stays the player channel: villagers keep no monster codex.
+    agencyTeachVillager(teacherVid, learnerVid) {
+      var st = this.agencyState();
+      var v = this.state.village || {};
+      if (!learnerVid || (v.roster || []).indexOf(learnerVid) === -1) return { taught: false };
+      var dead = false;
+      try { var lvp = this.vpOf(learnerVid); if (lvp && lvp.dead) dead = true; } catch (e) {}
+      if (dead) return { taught: false };
+      var tKnown = [], lKnown = [];
+      try { tKnown = this.plantsKnownBy ? this.plantsKnownBy(teacherVid) : []; } catch (e) {}
+      try { lKnown = this.plantsKnownBy ? this.plantsKnownBy(learnerVid) : []; } catch (e) {}
+      var cands = tKnown.filter(function (pid) { return lKnown.indexOf(pid) === -1; });
+      if (!cands.length) return { taught: false }; // theater check: nothing to show
+      var pid = pick(cands);
+      var landed = false;
+      try { landed = this.villagerLearnsPlant ? this.villagerLearnsPlant(learnerVid, pid, 'taught') : false; } catch (e) {}
+      if (!landed) return { taught: false };
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      st.lessons[learnerVid] = st.lessons[learnerVid] || [];
+      st.lessons[learnerVid].push({ from: teacherVid, topic: 'plants', pid: pid, day: day });
+      try {
+        var la = this.agencyOf(learnerVid);
+        la.xp[learnerVid].tracking += 1;
+        this.agencyTierCheck(learnerVid, false);
+      } catch (e) {}
+      var pname = pid, pnameArt = pid;
+      try { pname = this.plantDisplayName ? this.plantDisplayName(pid) : pid; } catch (e) {}
+      // descriptors already carry their article ("a tree with...")
+      try { pnameArt = (/^(a|an)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
+      // SENSE: firstRef, never split(' ')[0] — a stranger descriptor's first
+      // word is bare "A" ("A taught A"), but firstRef gives the
+      // distinguishing descriptor ("the woman in her 30s").
+      var tnm = 'Someone', lnm = 'someone';
+      try { tnm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
+      try { lnm = this.firstRef ? this.firstRef(learnerVid) : this.displayName(learnerVid); } catch (e) {}
+      try { this.recordDeed(teacherVid, 'taught', `${tnm} taught ${lnm} ${pnameArt}.`, 1); } catch (e) {}
+      return { taught: true, learner: learnerVid, plant: pid, plantName: pname };
     },
     // agencyTeachMonster: one fought species, taught honestly. Lands as
     // 'observed' (never downgrades 'slain') — the village-name gate opens
@@ -832,7 +900,7 @@
       var e = this.ensureMonsterEntry(mid);
       if (e.stage !== 'slain') e.stage = 'observed';
       var nm = '';
-      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) { nm = 'They'; }
+      try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; } // firstRef: never bare "A" for stranger descriptors
       var what = '';
       try { what = this.monsterDisplayName(mid); } catch (err) { what = 'that thing'; }
       this.say(`📖 ${nm} walks you through it — the tracks, the sound it makes before it moves, where not to stand. "${what}" — you'll know it next time. (Monster codex: observed.)`);

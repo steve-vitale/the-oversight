@@ -205,7 +205,17 @@
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
         o.tx = hx; o.ty = hy; o.tightness = 0;
         o.partsLeft = 2 + Math.floor(R() * 3);
-        o.chore = pick(['fire', 'repair', 'teach', 'cook', 'sweep']);
+        // LONGSIM agency r2 (2026-10-11): 'teach' is only an honest chore
+        // when the villager actually knows a plant (the identity system —
+        // plantsKnownBy) — the old pool let anyone claim teaching with
+        // nothing behind it (theater: trust bumps and a deed for nothing
+        // transferred).
+        var chores = ['fire', 'repair', 'cook', 'sweep'];
+        try {
+          var _pk = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
+          if (_pk.length) chores.push('teach');
+        } catch (e) {}
+        o.chore = pick(chores);
         return o;
       }
       // outdoor target: a real direction, clamped to the 9x9 world
@@ -636,30 +646,35 @@
             sweep: `${nm} is sweeping the hall. Someone has to.`,
           };
           if (o.chore === 'teach') {
-            // teach what they actually know (agency's earned lessons)
-            var taught = false;
+            // LONGSIM agency r2 (2026-10-11): the teach chore is real
+            // teaching now. A villager who knows the wild shows a villager
+            // who is actually here something from it (agencyTeachVillager:
+            // recorded, xp-granted, honest deed) — never trust bumps and a
+            // deed for nothing transferred, the old theater.
+            var lesson = null;
             try {
-              var lessons = this.npcFieldLessons ? this.npcFieldLessons(rid) : [];
-              if (lessons.length) {
-                var mates = roster.filter(function (id) { return id !== rid && id !== this.villagerId; }, this);
-                var tn2 = null, tm = null;
-                try { tn2 = this.npcNode(pick(mates)); } catch (e) {}
-                if (mates.length) {
-                  tm = pick(mates);
-                  var tnode = null;
-                  try { tnode = this.npcNode(tm); } catch (e) {}
-                  if (tnode && tnode.nx === hx && tnode.ny === hy) {
-                    var tname = 'someone';
-                    try { tname = this.displayName(tm); } catch (e) {}
-                    this.bumpTrust(rid, 1); this.bumpTrust(tm, 1);
-                    this.seedGossip('deed', { generous: 2, who: rid }, [tm]);
-                    taught = true;
-                    if (playerAtHaven) this.say(`📖 ${nm} is showing ${tname} something from the wild — leaf, stem, smell.`);
-                  }
-                }
-              }
+              var mates = roster.filter(function (id) { return id !== rid && id !== this.villagerId; }, this);
+              var here = mates.filter(function (id) {
+                try { var nd = this.npcNode(id); return !!(nd && nd.nx === hx && nd.ny === hy); }
+                catch (e) { return false; }
+              }, this);
+              if (here.length) lesson = this.agencyTeachVillager(rid, pick(here));
             } catch (e) {}
-            if (!taught && playerAtHaven) this.say(`📖 ${nm} is talking through something they learned out there. Someone's listening.`);
+            if (lesson && lesson.taught) {
+              try { this.bumpTrust(rid, 1); this.bumpTrust(lesson.learner, 1); } catch (e) {}
+              if (playerAtHaven) {
+                var lnm2 = 'someone';
+                try { lnm2 = this.displayName(lesson.learner); } catch (e) {}
+                var pname2 = lesson.plantName || 'something from the wild';
+                // descriptors already carry their article ("a tree with...")
+                var pnameArt = (/^(a|an)\s/i.test(pname2)) ? pname2 : 'the ' + pname2;
+                this.say(`📖 ${nm} is showing ${lnm2} ${pnameArt} — leaf, stem, smell.`);
+              }
+            } else if (playerAtHaven) {
+              // no learner in earshot: they review their own finds, and the
+              // line says that — never claims a lesson was given.
+              this.say(`📖 ${nm} is going over their finds, re-tying the bundle.`);
+            }
           } else if (lines[o.chore] && playerAtHaven) {
             this.say(lines[o.chore]);
           }

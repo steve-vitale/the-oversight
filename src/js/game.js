@@ -5314,6 +5314,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const pname = this.plantDisplayName(p.id);
             learned = ` ${first} also learned to recognize ${pname} — village knowledge grows.`;
             if (this.state.systemArrived) this.flowVillageKnowledge();
+            // AGENCY BRIDGE (longsim agency r2 2026-10-11): the line above
+            // claims the forager learned the plant, but only the village
+            // store grew — the discoverer's own plantsKnownBy never
+            // included it, so the village's daily foraging (its main plant
+            // interaction) never made anyone knowledgeable enough to teach.
+            // Make the claim true: the discoverer learns the identity, the
+            // same 'fieldwork' source the curious-examine path uses.
+            try { if (this.villagerLearnsPlant) this.villagerLearnsPlant(vid, p.id, 'fieldwork'); } catch (e) {}
           }
         }
         // CURIOSITY (Steve 2026-10-09): curious foragers examine as they work.
