@@ -611,6 +611,11 @@ const competent = {
     } catch (e) {}
     const known = Object.keys((Game.state.codex || {}).plants || {}).length;
     ctx.knownPlants = known;
+    // EAT THE DAY'S HAUL (longsim food r2 2026-10-11): daily forages AFTER
+    // the last upkeep, so the upkeep's competentEat never sees the fresh
+    // haul — the player was sleeping (and starving) on foraged food still
+    // in the pack. Eat after the day's work, before the harness sleeps.
+    competentEat(Game);
   },
   // Fight only with advantage: assess at fight START and walk away from bad
   // ones (an experienced player doesn't take 3:1 fights). Below 35% HP,
