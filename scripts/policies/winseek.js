@@ -258,6 +258,30 @@ function diplomacyRoad(Game, ctx) {
         ctx.counterAccepted = (ctx.counterAccepted || 0) + 1;
       } catch (e) {}
     }
+    // Tend live links: answer young-link renegotiation beats and primary
+    // demands. The beats are the designed recovery path (gift +8 / visit +5,
+    // and the deferred leverage never lands); ignoring them is how links
+    // die. (travel longsim 2026-10-11: the policy predated the grace beat.)
+    try {
+      const links = Game.hierarchyState ? Game.hierarchyState() : [];
+      for (const l of links) {
+        if (!l || l.status !== 'active') continue;
+        if (l.pendingRenegotiation && Game.answerRenegotiation) {
+          let pan = 0;
+          try { pan = Game.pantryKcalLive ? Game.pantryKcalLive() : 0; } catch (e) {}
+          try {
+            Game.answerRenegotiation(l.id, pan > 8000 ? 'gift' : 'visit');
+            ctx.beatsAnswered = (ctx.beatsAnswered || 0) + 1;
+          } catch (e) {}
+        }
+        if (l.pendingDemand && Game.answerDemand) {
+          try {
+            Game.answerDemand(l.id, true);
+            ctx.demandsAnswered = (ctx.demandsAnswered || 0) + 1;
+          } catch (e) {}
+        }
+      }
+    } catch (e) {}
     // Answer the national beat — never refuse, never walk. Pick the
     // first non-refuse option the shape offers.
     if (Game.state.pendingNational && Game.answerNationalChoice) {

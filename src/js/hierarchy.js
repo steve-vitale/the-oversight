@@ -89,6 +89,10 @@
 //   - knowledge_never_gates_the_scale: peer proposals, raids, and all four new national beats are never knowledge-gated — force and trade don't ask what you know. (code: hierarchy.js)
 //   - foreign_fires_climb_too: known villages bind among themselves off-screen — a slow background drift (~12%/wk) PLUS engagement-driven acceleration off stirRegion beats (trade caravans, aid sent, crises answered, contests watched abroad, new courtships); Haven hears through traders — delayed, possibly wrong, never omniscience. (code: hierarchy.js)
 //   - region_moves_on_engagement: foreign-realm growth is engagement-driven, not clock-driven — waiting banks nothing; playing advances the arc. Haven-linked villages are NOT excluded from candidacy (the old exclusion punished courting: the more Haven courted, the slower the region climbed). Still earned: momentum is deed-gated, a 4-realm takes weeks of real beats, never a calendar path. (code: hierarchy.js)
+//   - grief_coalesces: one funeral doesn't become five — a link already grieving
+//     (young-link beat staged, or inside the mourning window) takes no new
+//     haircut, beat, or leverage grab from a further death; the first death
+//     keeps full force. The neglect snap still runs mid-grief. (code: hierarchy.js)
 //   - young_links_get_grace: succession on a link younger than 21 days costs -8 trust (not -15) and never snaps — instead a staged renegotiation beat (link.pendingRenegotiation, answered via answerRenegotiation: gift/visit/wait with real costs, expires aloud in 7 days). Older links still snap when trust craters — deaths hit hard. Grief delays the verdict because they're still deciding what Haven is. (code: hierarchy.js)
 //   - the_world_watches: global = national + deed-reactive viewership >= 40, staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
 //   - national_routes_tribute: when national, subordinate tribute grain arrives at x1.25 via the System's logistics layer — and the arrival line says the true amount. Copy and engine agree. (code: hierarchy.js)
@@ -1228,6 +1232,26 @@
       // they're still deciding what Haven is; grief delays the verdict.
       var day0 = (this.state.scholar || {}).day || 0;
       var other = link.subordinate === HOME ? link.primary : link.subordinate;
+      // GRIEF COALESCES (longsim travel 2026-10-11): one funeral doesn't
+      // become five. A link already grieving — a young-link beat already
+      // staged, or an older link inside its mourning window — doesn't take
+      // another haircut, another beat, or another leverage grab from a new
+      // death. The first death keeps its full designed force; the cascade
+      // doesn't multiply. (Measured: 5 leader deaths in 3 days cost -40
+      // trust per link and compounded tribute x1.5 four times, making the
+      // BELONG road's trust>=50 bar unreachable for any player who fights —
+      // and the win gate requires fighting.) The neglect snap still runs:
+      // death + neglect kills, even mid-grief.
+      if (link.pendingRenegotiation || (link.mourningUntil || 0) > day0) {
+        if (!link.pendingRenegotiation) this._markMourning(link); // still burying people; beat answers stay ungagged
+        this._linkNote(link, 'succession', 'Another death while the link already grieves — the grief is priced in; the new speaker inherits the same table.');
+        if (link.trust < 20 && this._linkNeglected(link)) {
+          this.say('In the chaos, the neglected link snaps — no tribute, no deeds, no one left who kept it. Nobody meant it. That\'s how these things go.');
+          this.breakLink(link.id, 'succession');
+          return 'broken';
+        }
+        return 'grieving';
+      }
       if (day0 - (link.day || 0) < 21) {
         link.trust = Math.max(0, link.trust - 8);
         if (!link.pendingRenegotiation) {
@@ -1281,6 +1305,21 @@
       if (!link || link.status !== 'active') return null;
       // peer leagues shake covenant-style
       if (link.kind === 'covenant' || link.kind === 'trade') return this.covenantCrisis(link.id, 'their-speaker-died');
+      var _tldDay = (this.state.scholar || {}).day || 0;
+      // GRIEF COALESCES (longsim travel 2026-10-11): same as successionCrisis —
+      // one funeral doesn't become five. A link already grieving takes no new
+      // haircut and no new tribute move from another death; the neglect snap
+      // still runs.
+      if (link.pendingRenegotiation || (link.mourningUntil || 0) > _tldDay) {
+        if (!link.pendingRenegotiation) this._markMourning(link);
+        this._linkNote(link, 'succession', 'Word of another death while the link already grieves — the grief is priced in.');
+        if (link.trust < 20 && this._linkNeglected(link)) {
+          this.say('In the chaos, the neglected link snaps — no tribute, no deeds, no one left who kept it. Nobody meant it. That\'s how these things go.');
+          this.breakLink(link.id, 'succession');
+          return 'broken';
+        }
+        return 'grieving';
+      }
       link.trust = Math.max(0, link.trust - 8);
       this._markMourning(link);
       var other = link.subordinate === HOME ? link.primary : link.subordinate;
