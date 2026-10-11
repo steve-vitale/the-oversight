@@ -889,6 +889,16 @@
             ? (typeof this.havenViewership === 'function' ? this.havenViewership() : 0)
             : vv.viewership;
           vv.viewership = cur + 2;
+          // DIP CLEARED (break-it shows r15 2026-10-11): the per-week dip
+          // flag (v._dipping, contestTick) is frozen for the whole week — the
+          // +2 above (and recordMoment's +1) could not move it, so the same
+          // dip re-summoned the player the next dawn (proved: 21/40 runs
+          // re-summoned days 16-20 after a delivered stunt). The stunt
+          // worked — the numbers ticked up, said out loud — so the week is
+          // no longer dipping. Clear the flag, not just the number. This
+          // also stands down the dip's other readers (75% contest share,
+          // +0.15 scheduling) for the rest of the week.
+          vv._dipping = false;
         } catch (e) {}
         try { if (this.recordMoment) this.recordMoment('Ratings stunt delivered — the numbers ticked up.'); } catch (e) {}
         let pkg = false;
