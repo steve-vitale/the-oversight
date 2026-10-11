@@ -25103,6 +25103,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // only survived it because villageLives' wounded branch happened to
       // init the map first on the old RNG sequence). Init it here, up front.
       v.health = v.health || {};
+      // LEAGUE GRANARY FAMINE DRAW (longsim food r2 2026-10-11): the
+      // covenant's headline promise is "draw on it in famine". If the pantry
+      // is bare at the day's start and the league pool holds food, the
+      // granary opens BEFORE the day's meals: draw the village's measured
+      // daily burn (7-day rolling honest net; fallback roster x 1000 kcal)
+      // so the day's meals exist. The insurance pays out; when the pool is
+      // empty, the famine is honest. drawLeaguePool writes the council's
+      // book; the famine framing here says why it opened.
+      try {
+        const pkNow = (v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
+        const poolNow = (typeof this.leaguePool === 'function') ? this.leaguePool() : 0;
+        if (pkNow <= 0 && poolNow > 0 && typeof this.drawLeaguePool === 'function') {
+          let burn = 0;
+          try {
+            const hist = (v.burnHistory || []).filter(x => x > 0);
+            if (hist.length) burn = Math.round(hist.reduce((a, b) => a + b, 0) / hist.length);
+          } catch (e) {}
+          if (!(burn > 0)) burn = (v.roster || []).length * 1000;
+          const drew = this.drawLeaguePool(Math.min(poolNow, burn));
+          if (drew > 0) {
+            this.say(`🌾 The pantry stands empty — and the league granary opens, as the covenant promised. Famine relief, not a feast.`);
+            // The granary fed the day: the end-of-day famine block must not
+            // mistake an eaten draw for a famine (the pantry will be bare
+            // again after the meals, but nobody went hungry).
+            try { v._granaryFedDay = (this.state.scholar || {}).day || 0; } catch (e) {}
+          }
+        }
+      } catch (e) {}
       v.mealLog = []; // today's co-eating record — company is organic, not scheduled
       const cookId = this.villageCookId(v);
       let totalEat = 0, totalGive = 0, totalDrawn = 0;
@@ -25168,8 +25196,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SURVIVAL-ATTRITION (2026-10-10): was -5/+2. The famine clock still
       // kills a bare pantry (the SCATTERING is untouched); people just fade
       // a day slower and come back a day faster.
+      // GRANARY FED (longsim food r2 2026-10-11): if the league granary drew
+      // today, the day's meals existed — a pantry bare again after eating is
+      // not a famine. The flag is set by the famine draw above.
       v.health = v.health || {};
-      const famine = (v.pantry || []).length === 0;
+      const _granaryFed = (v._granaryFedDay === ((this.state.scholar || {}).day || 0));
+      const famine = (v.pantry || []).length === 0 && !_granaryFed;
       if (famine) {
         for (const rid of (v.roster || [])) {
           if (rid === this.villagerId) continue;
@@ -25206,7 +25238,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         pg.hungryStreak = anyStarving ? (pg.hungryStreak || 0) + 1 : 0;
         if (pg.hungryStreak >= 3 && !(pg.crises || {})['hunger-winter'] && this.fireCrisis) this.fireCrisis('hunger-winter');
       } catch (e) {}
-      if (v.pantryKcal <= 0) {
+      // GRANARY FED (longsim food r2 2026-10-11): a day the league granary
+      // drew is not a hungry day — the meals existed. The scattering clock
+      // must not tick on fed days.
+      if (v.pantryKcal <= 0 && !_granaryFed) {
         v.hungryDays = (v.hungryDays || 0) + 1;
         this.say(`⚠ Haven's pantry is empty. Day ${v.hungryDays} of hunger.`);
         // GRANARY (haven growth 2026-10-10): sealed reserve bins — the
