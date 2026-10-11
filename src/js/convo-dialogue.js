@@ -341,6 +341,11 @@
         // re-picking "Count me in." after the promise re-fired the
         // thank-you beat and re-granted trust, a trust farm. A decided
         // want hears the repeat honestly, once.)
+        // FAVOR COMMIT (convo favor system 2026-10-11): for a favor want,
+        // "I'll do it" creates a TRACKED OBLIGATION (deadline, journal,
+        // fulfillment checks) — not just a line. If the player already
+        // carries an open commitment, the commit is honestly refused: no
+        // stacking, no phantom 'promised'.
         c.transcript.push({ who: 'you', text: '"I\'ll do it."' });
         const w = c.want;
         const wantLive = !!(w && w.def && (w.stage || 0) < 3);
@@ -351,15 +356,49 @@
         }
         try { this.resolveConsequence(vid, { trust: 3, mood: 1, temper: 'kind', name: 'dlg:commit' }); } catch (e) {}
         let beat = null;
+        let committed = true;
         try {
-          if (w && w.def && typeof w.def.commitBeat === 'function') {
+          if (w && w.id === 'ask_favor' && w.favor) {
+            const fc = this.convoFavorCommit(vid, w.favor);
+            if (fc && fc.ok) {
+              beat = w.favor.commitLine;
+            } else {
+              // Already carrying an open commitment — heard, not promised.
+              const openTask = ((this.state.village.promises || {})[vid] || {}).favorTask;
+              beat = openTask
+                ? `"Wait — you already gave me your word on ${openTask}. Keep that first."`
+                : '"Wait — you already gave your word somewhere. Keep that first."';
+              committed = false;
+            }
+          } else if (w && w.def && typeof w.def.commitBeat === 'function') {
             beat = w.def.commitBeat.call(this, vid);
           }
         } catch (e) { beat = null; }
         if (!beat) beat = '"Thank you. Seriously — thank you."';
         this.sayLine(vid, beat);
-        this.convoWantEngage(vid, 'commit');
+        // 'commit' ONLY when a real commitment was made. A blocked favor
+        // commit is heard ('stated' via defaultResolution), never 'promised'
+        // — 'engaged'/'promised' without an obligation would be the
+        // false-engagement lie.
+        this.convoWantEngage(vid, committed ? 'commit' : 'engage');
         return { line: beat, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
+
+      if (dlg === 'renounce') {
+        // "I can't do it. I'm sorry." — backing out of an OPEN favor
+        // obligation. It breaks NOW, with the cost, honestly — not a silent
+        // rot. (convo favor system 2026-10-11)
+        c.transcript.push({ who: 'you', text: '"I can\'t do it. I\'m sorry."' });
+        let renounced = false;
+        try { renounced = this.convoFavorRenounce(vid); } catch (e) {}
+        const line = renounced
+          ? '"...I see. Well — thanks for telling me straight, at least."'
+          : '"It\'s alright. Forget I mentioned it."';
+        this.sayLine(vid, line);
+        try { this.resolveConsequence(vid, { mood: -1, temper: 'neutral', name: 'dlg:renounce' }); } catch (e) {}
+        // The obligation broke: the want resolves as declined/deflected.
+        this.convoWantEngage(vid, 'deflect');
+        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
       if (dlg === 'heed') {
@@ -400,7 +439,16 @@
         if (!raw) {
           try {
             const w = c.want;
-            if (w && w.def && typeof w.def.engageBeat === 'function') raw = w.def.engageBeat.call(this, vid);
+            // FAVOR (convo favor system 2026-10-11): the ask was already
+            // stated in the opener. "Tell me more" gets the WHY and stakes
+            // — new content from the instance, never the ask re-emitted.
+            // (The old unconditional engageBeat call was the 7x verbatim
+            // repeat vector: pool cycling + ignored no-repeat signal.)
+            if (w && w.id === 'ask_favor' && w.favor && (w.stage || 0) >= 2) {
+              raw = w.favor.whyLine;
+            } else if (w && w.def && typeof w.def.engageBeat === 'function') {
+              raw = w.def.engageBeat.call(this, vid);
+            }
           } catch (e) { raw = null; }
         }
         raw = raw || this.convoPickCycle(vid, 'dlg:details:dry', [
@@ -408,7 +456,15 @@
           '"I don\'t have the words for all of it. But thank you for asking."',
         ]) || '"It\'s... complicated. But thank you for asking."';
         const composed = this.convoComposeDlg(vid, raw, choiceId);
-        this.sayLine(vid, composed);
+        const said = this.sayLine(vid, composed);
+        // HONEST REPEAT: respect sayLine's no-repeat signal. The old code
+        // displayed the blocked line anyway — the transcript showed a repeat
+        // the ledger had refused.
+        if (!said) {
+          const dup = '"I just said — did you miss it?"';
+          this.sayLine(vid, dup);
+          return { line: dup, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
         this.convoWantEngage(vid, 'engage');

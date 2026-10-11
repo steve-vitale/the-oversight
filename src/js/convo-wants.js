@@ -41,6 +41,235 @@
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
 
+  // ============ FAVOR OBLIGATION SYSTEM (2026-10-11, Steve: "Fix structurally.
+  // Design a system that's robust.") ============
+  // The old ask_favor drew from 4-entry string pools via convoPickCycle —
+  // which RESETS when exhausted, so verbatim repetition was built into the
+  // mechanism. A favor was a line, not an object: no identity, no grounding,
+  // no lifecycle. And 'engaged' (heard the ask) was recorded as if it were
+  // commitment (said "I'll do it") — the false-engagement lie.
+  //
+  // Now a favor is an OBLIGATION with a lifecycle:
+  //   need (real, from live state) -> asked (stated once) -> promised
+  //     (tracked, deadline, journal) -> fulfilled | broken
+  //   asked -> declined (social cost, memory) | stated (heard, no commit —
+  //     plants a thread, the NPC remembers)
+  // Favors are generated per-instance from live village state. If no real
+  // need exists, ask_favor.pick returns 0 and the want is never selected —
+  // a contentless favor is structurally impossible, not just unlikely.
+  const FAVOR_KINDS = {
+    // kind: { keepKind (for checkPromises), goal (promiseKeepKind vocab),
+    //         deadlineDays, build(vid, need, ctx) -> parts }
+    //
+    // PER-INSTANCE LINES: build() composes from live values (severity,
+    // quantities, day-anchors) with phrasing variants keyed by the instance
+    // sequence — the same need on a different day, or for a different
+    // villager, does not produce the same text. No pools, no cycles.
+    food_share: {
+      keepKind: 'food', goal: 'feed', deadlineDays: 1,
+      build(vid, need, ctx) {
+        const sev = (need.hunger || 75) > 85 ? 2 : (need.hunger || 75) > 77 ? 1 : 0;
+        const hungerWord = ['going hungry', 'running on empty', 'past hungry'][sev];
+        // Slot composition: opener x detail x anchor, keyed by instance hash.
+        // 3x3x2 = 18 combinations — the same NPC doesn't repeat.
+        const hh = this.convoFavorHash(vid, ctx);
+        const openers = [
+          `I hate to ask, but`, `I'm ${hungerWord} \u2014`, `Please \u2014`,
+        ];
+        const details = [
+          `do you have anything to eat? Anything at all?`,
+          `have you got anything to spare? Anything?`,
+          `tell me you've got food to spare. I'm ${hungerWord} here.`,
+        ];
+        const anchors = [`My hands shake when I try to work.`, `I can't keep going like this.`];
+        const line = `"` + openers[hh % 3] + ' ' + details[(hh >>> 2) % 3] + ' ' + anchors[(hh >>> 4) % 2] + `"`;
+        const whyBits = [
+          `I haven't eaten right in days.`,
+          `It's been ${sev >= 2 ? 'too long' : 'days'} since a real meal.`,
+          `My stomach's been empty so long I've stopped feeling it, and that's worse.`,
+        ];
+        const whyTails = [
+          `I can't pull my weight like this. Anything you can spare, I'll make it stretch.`,
+          `I'm slowing down — stupid, clumsy. Help me get back on my feet.`,
+          `I need food before I can't work at all.`,
+        ];
+        const whyLine = whyBits[(hh >>> 1) % 3] + ' ' + whyTails[(hh >>> 5) % 3];
+        return {
+          task: `share food with ${ctx.name} \u2014 they're ${hungerWord}`,
+          short: 'the food they needed',
+          line, whyLine,
+          commitLine: `"Thank you. I won't forget who fed me when it mattered."`,
+          goodbye: `"I'll be alright now. Thanks to you."`,
+          stakes: `${ctx.name} is ${hungerWord} and can't work at full strength.`,
+        };
+      },
+    },
+    water_haul: {
+      keepKind: 'task', goal: 'prove', deadlineDays: 2,
+      build(vid, need, ctx) {
+        const liters = Math.max(0, Math.round(need.water || 0));
+        const hh = this.convoFavorHash(vid, ctx);
+        const openers = [
+          `"The cistern's nearly dry \u2014 ${liters} liters left."`,
+          `"We're down to ${liters} liters of clean water."`,
+          `"Water's almost gone \u2014 ${liters} liters."`,
+        ];
+        const asks = [
+          `I need someone to haul water with me at first light. Two of us, half the trips. Will you come?`,
+          `Haul the creek with me at dawn? Two buckets each, there and back.`,
+          `I can't carry enough alone. First light, the creek, you and me?`,
+        ];
+        const line = openers[hh % 3] + ' ' + asks[(hh >>> 2) % 3];
+        const whyBits = [
+          `"${liters} liters. That's today's drinking water, and then we're boiling creek water and hoping."`,
+          `"Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water."`,
+          `"I checked the cistern three times hoping I misread it. ${liters} liters."`,
+        ];
+        const whyLine = whyBits[(hh >>> 1) % 3] + ` The creek's a twenty-minute walk \u2014 with two of us it's one trip, not three.`;
+        return {
+          task: `haul water from the creek at first light with ${ctx.name}`,
+          short: 'the creek water run',
+          line, whyLine,
+          commitLine: `"Dawn, then. Bring something to carry \u2014 and thank you."`,
+          goodbye: `"First light. Don't sleep through it."`,
+          stakes: `The village runs out of clean water tomorrow.`,
+        };
+      },
+    },
+    snare_mend: {
+      keepKind: 'task', goal: 'prove', deadlineDays: 2,
+      build(vid, need, ctx) {
+        const hh = this.convoFavorHash(vid, ctx);
+        const problems = [
+          `My snare line needs mending and my hands are shaking \u2014`,
+          `Three snares came loose in the wind.`,
+          `The snare line's a mess \u2014 wind took half of it.`,
+        ];
+        const asks = [
+          `could you help me re-tie them tomorrow?`,
+          `Help me re-tie the line tomorrow? I know the knots, I need steady hands.`,
+          `Tomorrow, you and me, re-tying? An hour's work for two.`,
+        ];
+        const line = '"' + problems[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        return {
+          task: `help ${ctx.name} re-tie the snare line tomorrow`,
+          short: 'the snare line',
+          line,
+          whyLine: `"No snares, no rabbits \u2014 and the protein's what keeps us going. I know every knot blindfolded; I just need a second pair of hands to hold the line taut."`,
+          commitLine: `"Good. The rabbits won't know what hit them."`,
+          goodbye: `"Tomorrow, then. Bring patience."`,
+          stakes: `No snares means no rabbits \u2014 the village's protein thins.`,
+        };
+      },
+    },
+    watch_shift: {
+      keepKind: 'task', goal: 'prove', deadlineDays: 1,
+      build(vid, need, ctx) {
+        const hh = this.convoFavorHash(vid, ctx);
+        const states = [
+          `I'm running on empty.`, `I can barely keep my eyes open.`, `Please \u2014 I'm no good like this.`,
+        ];
+        const asks = [
+          `Could you take my watch for a bit? An hour \u2014 that's all I need.`,
+          `Take my watch? Just an hour, then I'm back on.`,
+          `My watch. An hour's sleep and I'll take it back.`,
+        ];
+        const line = '"' + states[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        return {
+          task: `take ${ctx.name}'s watch for a bit so they can rest`,
+          short: 'the watch shift',
+          line,
+          whyLine: `"If I fall asleep on watch and something comes through the treeline... I don't want that on me. An hour's sleep and I'll take it back. Please."`,
+          commitLine: `"An hour. I'll take it back after \u2014 I swear."`,
+          goodbye: `"An hour. Then I'm back on."`,
+          stakes: `An exhausted watcher is no watcher at all.`,
+        };
+      },
+    },
+    stay_close: {
+      keepKind: 'social', goal: 'belong', deadlineDays: 1,
+      build(vid, need, ctx) {
+        const sev = (need.fear || 75) > 85 ? 2 : 0;
+        const hh = this.convoFavorHash(vid, ctx) + sev;
+        const opens = [
+          `Can you \u2014 would you stay close tonight?`,
+          `Stay near tonight? Please.`,
+          `I need company tonight \u2014 not talking, just... near.`,
+        ];
+        const reasons = [
+          `I don't want to be alone when it gets dark.`,
+          `I don't want to be alone when the light goes.`,
+          `Would you stay close?`,
+        ];
+        const line = '"' + opens[hh % 3] + ' ' + reasons[(hh >>> 2) % 3] + '"';
+        return {
+          task: `stay close to ${ctx.name} tonight`,
+          short: 'staying close tonight',
+          line,
+          whyLine: `"I keep hearing things past the treeline. I know it's probably nothing. I just \u2014 don't want to be alone with it tonight."`,
+          commitLine: `"Thank you. Just knowing you're there \u2014 it helps."`,
+          goodbye: `"Tonight, then. I'll be by the fire."`,
+          stakes: `${ctx.name} is scared and fraying.`,
+        };
+      },
+    },
+    heal_help: {
+      keepKind: 'heal', goal: 'heal', deadlineDays: 1,
+      build(vid, need, ctx) {
+        const hh = this.convoFavorHash(vid, ctx);
+        const wound = (need.health || 50) < 40 ? 'wound' : 'cut';
+        const problems = [
+          `This ${wound} \u2014 I can't clean it properly one-handed.`,
+          `My ${wound} needs a second pair of hands.`,
+          `I can't reach this properly.`,
+        ];
+        const asks = [
+          `Could you take a look?`,
+          `Will you help me clean it?`,
+          `Could you clean it out for me? Please.`,
+        ];
+        const line = '"' + problems[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        return {
+          task: `help ${ctx.name} with their injury`,
+          short: 'their injury',
+          line,
+          whyLine: `"It's getting worse, not better. If it festers I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."`,
+          commitLine: `"Careful with it. And \u2014 thank you."`,
+          goodbye: `"Come find me when you have a moment."`,
+          stakes: `An untreated wound festers \u2014 ${ctx.name} could go from hurt to helpless.`,
+        };
+      },
+    },
+    forage_help: {
+      keepKind: 'food', goal: 'feed', deadlineDays: 2,
+      build(vid, need, ctx) {
+        const n = ctx.rosterN || 1;
+        const hh = this.convoFavorHash(vid, ctx) + n;
+        const states = [
+          `The pantry's nearly bare.`,
+          `We're eating through stores faster than we replace them.`,
+          `Pantry's thin and getting thinner.`,
+        ];
+        const asks = [
+          `Will you forage with me tomorrow? Two pairs of eyes, twice the ground.`,
+          `Forage with me tomorrow? I know the east treeline.`,
+          `Come forage with me tomorrow \u2014 two of us can fill packs.`,
+        ];
+        const line = '"' + states[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        return {
+          task: `forage with ${ctx.name} tomorrow to rebuild the pantry`,
+          short: 'the pantry run',
+          line,
+          whyLine: `"Another day like today and we're choosing who eats. I know the east treeline \u2014 come with me and we'll fill packs before dark."`,
+          commitLine: `"Good. East treeline, first light. Bring a pack."`,
+          goodbye: `"First light. The pantry's counting on us."`,
+          stakes: `The village is ${n} hungry mouths from an empty pantry.`,
+        };
+      },
+    },
+  };
+
+
   // ============ WANT DEFINITIONS ============
   // gossipLine: the occupation/origin gossip sentence, grammatically sound.
   // (journey establishment 2026-10-11: "weren't a what they said" was
@@ -66,6 +295,9 @@
   // - resolve(vid, resolution): seed or null
   const WANTS = {
     share_news: {
+      // A reaction ("huh", "no kidding") engages news — that's the point.
+      // Answering an unrelated question does not.
+      reactEngages: true,
       pick(vid) {
         // They've seen something, heard something — bursting to tell.
         // More likely if they haven't talked in a while.
@@ -108,62 +340,95 @@
         return { wantId: 'share_news', note: 'that news they were bursting to share' };
       },
     },
+    // ask_favor: THE FAVOR OBLIGATION WANT (rebuilt 2026-10-11, Steve: "Fix
+    // structurally. Design a system that's robust.").
+    //
+    // A favor is an obligation instance, not a line. The lifecycle:
+    //   need (real, from live state) -> asked (stated once, opener) ->
+    //   promised (tracked obligation w/ deadline, via dlg:commit) ->
+    //     fulfilled | broken
+    //   asked -> stated (heard, no commit: plants a thread) |
+    //     deflected (refused: social cost, memory, no re-ask for 3 days)
+    //
+    // Structural guarantees:
+    // - pick returns 0 when no real need exists: a contentless favor can
+    //   never be selected (the old 4-entry template pools are gone).
+    // - The favor's lines are generated ONCE per instance and stored — never
+    //   re-rendered from a pool, so verbatim repetition is impossible.
+    // - The opener ASKS; engageBeat ("how can I help?") DEEPENS with the
+    //   why/stakes — new content, never the ask repeated.
+    // - 'engaged' is UNREACHABLE for favors: heard-but-not-committed resolves
+    //   as 'stated' (defaultResolution). Only dlg:commit sets 'promised',
+    //   and only when a real obligation was created.
     ask_favor: {
       pick(vid) {
-        // High need drives favors: hungry, scared, tired.
+        // No real need -> weight 0 -> the want is never selected. The picker
+        // falls through to other wants. This is the structural kill of
+        // contentless favors (the old baseline weight of 1 is gone).
         try {
-          const n = Game.npcNeeds(vid);
-          if (n.hunger > 70 || n.fear > 70 || n.energy < 30) return 4;
-        } catch (e) {}
-        return 1;
+          const need = this.convoFindFavorNeed(vid);
+          return need ? need.urgency : 0;
+        } catch (e) { return 0; }
       },
       opener(vid) {
-        // The opener NAMES the need — the want is visible from beat one.
-        // (dialog-ui-fix 2026-10-11, defect 8: vague openers that fizzle are
-        // gone. Every opener below names a concrete, answerable want — the
-        // player can engage, deflect, or commit to something real.)
-        try {
-          const n = Game.npcNeeds(vid);
-          if (n.hunger > 70) return '"I hate to ask, but — do you have anything to eat? Anything at all?"';
-          if (n.fear > 70) return '"Can you — would you stay close tonight? I don\'t want to be alone when it gets dark."';
-          if (n.energy < 30) return '"I\'m running on empty. Could you take my watch for a bit?"';
-        } catch (e) {}
-        return Game.convoPickCycle(vid, 'want:favor:open', [
-          '"My snare line needs mending and my hands are shaking — could you help me re-tie them tomorrow?"',
-          '"I need someone to haul water with me at first light. Two buckets, twice the speed. Will you come?"',
-          '"Would you walk the treeline with me tonight? Just there and back — I don\'t like going alone anymore."',
-          '"I\'ve got a splinter deep in my thumb I can\'t get out. Could you take a look?"',
-        ]);
+        const c = this.convoGet(vid);
+        const want = (c && c.want) || {};
+        // FOLLOW-UP: a seed for this favor — they asked before. The NPC
+        // remembers: the follow-up names the prior ask, never resets it.
+        if (want.fromSeed && want.seedFavorId) {
+          const favor = this.convoGetFavor(vid);
+          if (favor && favor.id === want.seedFavorId) {
+            const line = this.convoFavorFollowup(vid, favor);
+            if (line) {
+              if (c.want) {
+                c.want.favor = favor;
+                // The ask is already established — the menu goes straight
+                // to commit/deflect (stage 2), unless this is just an
+                // acknowledgment (fulfilled/broken/moot: settled states).
+                const settled = favor.state === 'thanked' || favor.state === 'acknowledged' || favor.state === 'moot';
+                if (!settled) c.want.stage = 2;
+              }
+              return line;
+            }
+          }
+          return null; // favor gone — honest fallback; seed consumed as unestablished
+        }
+        const need = this.convoFindFavorNeed(vid);
+        if (!need) return null; // no real need — the want can't open
+        const favor = this.convoBuildFavor(vid, need);
+        if (!favor) return null;
+        if (c.want) c.want.favor = favor;
+        this.convoStoreFavor(favor);
+        return favor.line;
       },
       engageBeat(vid) {
-        // "How can I help?" -> the concrete ask. Never "Here's the thing —"
-        // looping: the favor is stated once, plainly.
-        // (dialog-ui-fix 2026-10-11, defect 7: the old fixed string below was
-        // spoken VERBATIM by every NPC in the run. It's a pool now — village
-        // freshness keeps it from repeating across NPCs.)
-        try {
-          const n = Game.npcNeeds(vid);
-          if (n.hunger > 70) return '"Food. Anything you can spare — I\'m running on empty."';
-          if (n.fear > 70) return '"Just — stay close tonight? When it gets dark, I don\'t want to be alone."';
-          if (n.energy < 30) return '"Could you take my watch for a bit? An hour. That\'s all I need."';
-        } catch (e) {}
-        return Game.convoPickCycle(vid, 'want:favor:ask', [
-          '"I need an extra pair of hands tomorrow. Nothing dangerous — just help me mend the snare line. Can you?"',
-          '"Hauling water at first light — two of us, half the trips. Will you come with me?"',
-          '"Walk the treeline with me tonight? There and back. I just don\'t want to go alone."',
-          '"There\'s a splinter buried in my thumb I can\'t reach. Could you get it out for me?"',
-        ]) || '"I need an extra pair of hands tomorrow. Can you help?"';
+        // "How can I help?" — the ask was stated in the opener. This DEEPENS
+        // with the why and stakes: new content, never the ask repeated.
+        // (The old pool re-stated the ask — the verbatim-repeat vector.)
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (favor) return favor.whyLine;
+        return null; // no favor stated — the NO HOLLOW FALLBACK answers honestly
       },
       deflectBeat(vid) {
         return '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
       },
       commitBeat(vid) {
-        return Game.convoPickCycle(vid, 'want:favor:commit', [
-          '"Thank you. Seriously — thank you. I wouldn\'t ask if it wasn\'t important."',
-          '"You don\'t know what that means right now." They look away for a second. "Thank you."',
-        ]) || '"Thank you. Seriously."';
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (favor) return favor.commitLine;
+        return '"Thank you. Seriously — thank you."';
       },
       menuOptions(vid, stage) {
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // Settled favors (fulfilled/broken/moot) — this conversation is just
+        // the acknowledgment. No commit menu for a closed favor.
+        if (favor && (favor.state === 'fulfilled' || favor.state === 'thanked' ||
+                      favor.state === 'broken' || favor.state === 'acknowledged' ||
+                      favor.state === 'moot' || favor.state === 'declined')) {
+          return [];
+        }
         if ((stage || 0) >= 2) {
           // Favor stated — commit or back out. Honest, both ways.
           return [
@@ -178,43 +443,101 @@
         ];
       },
       closeLine(vid, resolution) {
-        // (dialog-ui-fix 2026-10-11, defect 7: the old fixed strings were
-        // spoken VERBATIM by every NPC. Pools now — village freshness keeps
-        // closings from repeating across NPCs in a run.)
-        if (resolution === 'promised') return Game.convoPickCycle(vid, 'want:favor:close:promised', [
-          '"Thank you. Really — I won\'t forget this."',
-          '"You have no idea what that means. Thank you."',
-          '"I owe you one. I mean that."',
-        ]) || '"Thank you. Really."';
-        if (resolution === 'deflected') return Game.convoPickCycle(vid, 'want:favor:close:deflected', [
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (resolution === 'promised') return (favor && favor.goodbye) || '"Thank you. Really."';
+        // 'stated' — the ask hangs, honestly. Not a fizzle: they name that
+        // it's open.
+        if (resolution === 'stated') return '"...Think about it? I\'ll be around."';
+        if (resolution === 'deflected') return this.convoPickCycle(vid, 'want:favor:close:deflected', [
           '"Forget I asked. I\'ll figure it out."',
           '"No — you\'re right, it\'s a lot. Forget it."',
           '"Okay. I\'ll manage on my own."',
         ]) || '"Forget I asked."';
         return null;
       },
+      // defaultResolution: heard-but-not-committed is STATED, never
+      // 'engaged'. 'engaged' reads as commitment — the false-engagement lie
+      // (a favor resolved 'engaged' with the player never choosing "I'll do
+      // it"). Only dlg:commit sets 'promised', and only when a real
+      // obligation was created.
+      defaultResolution(vid, want, how) {
+        if ((want.stage || 0) >= 2) return 'stated';
+        return null;
+      },
       resolve(vid, resolution) {
-        if (resolution === 'promised') {
-          // They owe you now — that's a seed (the dead 'repay' seed's real wantId).
-          return { wantId: 'repay', note: 'the kindness they feel they owe you for' };
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // Settled acknowledgments (fulfilled/broken/moot follow-ups) plant
+        // nothing — the business is closed.
+        if (favor && (favor.state === 'thanked' || favor.state === 'acknowledged' || favor.state === 'moot')) {
+          return null;
         }
-        if (resolution === 'engaged') {
-          // Favor stated, no commitment — still hanging.
+        if (resolution === 'promised') {
+          // The obligation was created at commit time and is tracked. The
+          // follow-up references it — a reminder, not a new ask.
+          if (favor) return { wantId: 'repay', note: favor.short + ' you promised', favorId: favor.id };
+          return { wantId: 'repay', note: 'what you promised' };
+        }
+        if (resolution === 'stated' || resolution === 'abandoned') {
+          // Heard, no commitment — still needs help. THE SAME favor, not a
+          // reset: the follow-up names the prior ask.
+          if (favor && favor.state === 'asked') {
+            return { wantId: 'ask_favor', note: 'the help they asked you for', favorId: favor.id };
+          }
+          if (favor) return { wantId: 'ask_favor', note: 'the help they asked you for', favorId: favor.id };
           return { wantId: 'ask_favor', note: 'the help they asked you for' };
         }
-        return { wantId: 'ask_favor', note: 'the help they asked you for' };
+        if (resolution === 'deflected') {
+          // Refused outright — the deflected memory carries it (written by
+          // the dlg:cant handler). No seed: they'll ask again only for a
+          // genuinely new need, and not for 3 days.
+          try {
+            const v = this.state.village || {};
+            v.favorDeclined = v.favorDeclined || {};
+            v.favorDeclined[vid] = (this.state.scholar || {}).day || 0;
+          } catch (e) {}
+          if (favor) favor.state = 'declined';
+          return null;
+        }
+        return null;
       },
     },
-    // repay: they owe you one. Seed-driven only — pick() returns 0 so it
-    // never surfaces spontaneously. Debts unpaid just sit there.
+    // repay: they remember what you promised. Seed-driven only — pick()
+    // returns 0 so it never surfaces spontaneously. Favor-aware (2026-10-11):
+    // the opener branches on the actual obligation state — a reminder while
+    // it's open, gratitude when kept, cool distance when broken. Debts unpaid
+    // just sit there, but the fiction always names the real state.
     repay: {
       pick(vid) { return 0; },
       opener(vid) {
+        const c = this.convoGet(vid);
+        const want = (c && c.want) || {};
+        let favor = null;
+        if (want.fromSeed && want.seedFavorId) favor = this.convoGetFavor(vid);
+        if (!favor || favor.id !== want.seedFavorId) favor = this.convoGetFavor(vid);
+        const open = this.openFavorObligation(vid);
+        // Obligation still open — a reminder naming the task, not a new ask.
+        if (open && open.favorTask && favor && favor.id === open.favorId) {
+          if (c.want) c.want.favor = favor;
+          return `"About ${favor.short} — have you had a chance? ${this.convoFavorDeadlineNote(favor)}"`;
+        }
+        if (favor && favor.state === 'fulfilled') {
+          if (c.want) c.want.favor = favor;
+          favor.state = 'thanked';
+          return `"You came through on ${favor.short}. I won't forget it."`;
+        }
+        if (favor && favor.state === 'broken') {
+          if (c.want) c.want.favor = favor;
+          favor.state = 'acknowledged';
+          return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+        }
+        // Legacy / no favor state — the old generic lines (defensive).
         // The debt is a PROMISE, not a deed — the fiction must not claim the
         // player already did the favor (socialite 2026-10-11: the old lines
         // said "what you did for me" when the player had only said "I'll do
         // it" — fabricated shared history, Steve's conversation quality bar).
-        return Game.convoPickCycle(vid, 'want:repay:open', [
+        return this.convoPickCycle(vid, 'want:repay:open', [
           '"I\'ve been thinking about what you promised. I don\'t like owing kindness."',
           '"About last time — I haven\'t forgotten what you said you\'d do. I want to return it."',
         ]);
@@ -226,6 +549,16 @@
         return '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.';
       },
       menuOptions(vid, stage) {
+        const open = this.openFavorObligation(vid);
+        if (open && open.favorTask) {
+          // The promise is OPEN — "we're square" would be a lie. Honest
+          // options: reaffirm it, or back out (which breaks it now, with
+          // the cost — dlg:renounce).
+          return [
+            { id: 'dlg:react', labels: ['"I haven\'t forgotten."', '"It\'s on my mind, I swear."'], temper: 'kind' },
+            { id: 'dlg:renounce', labels: ['"I can\'t do it. I\'m sorry."'], temper: 'neutral' },
+          ];
+        }
         return [
           { id: 'dlg:react', labels: ['"We\'re square."', '"Don\'t mention it."'], temper: 'kind' },
           { id: 'dlg:cant', labels: ['"Don\'t worry about it."'], temper: 'neutral' },
@@ -233,11 +566,19 @@
       },
       closeLine(vid, resolution) { return null; },
       resolve(vid, resolution) {
-        if (resolution === 'engaged') return null; // repaid, debt clear
-        return { wantId: 'repay', note: 'the kindness they feel they owe you for' };
+        // Still open — they still remember. Otherwise the business is
+        // closed: fulfilled, broken, or renounced all consume the seed.
+        const open = this.openFavorObligation(vid);
+        if (open && open.favorTask) {
+          const favor = this.convoGetFavor(vid);
+          return { wantId: 'repay', note: ((favor && favor.short) || 'the promise') + ' you made', favorId: favor && favor.id };
+        }
+        return null;
       },
     },
     seek_comfort: {
+      // Only the comfort menu (dlg:comfort/dlg:empathize) engages — a
+      // generic answer or reaction is not comfort.
       pick(vid) {
         try {
           const n = Game.npcNeeds(vid);
@@ -287,6 +628,7 @@
       },
     },
     warn_you: {
+      // Only the warning menu (dlg:details/dlg:heed) engages.
       pick(vid) {
         // They know something dangerous. More likely after monster activity.
         try {
@@ -325,6 +667,8 @@
       resolve(vid, resolution) { return null; }, // warning delivered or not, no seed
     },
     curious: {
+      // Answering IS the engagement for a question want.
+      answerEngages: true,
       pick(vid) {
         // They want to know about YOU. More likely at higher trust —
         // but strangers get curious too (Principle 12 override).
@@ -366,6 +710,8 @@
       },
     },
     just_company: {
+      // A reaction ("yeah, hey") engages company — presence, not content.
+      reactEngages: true,
       pick(vid) {
         try {
           const n = Game.npcNeeds(vid);
@@ -400,6 +746,224 @@
   };
 
   const methods = {
+    // convoFindFavorNeed: PURE scan for a real, current need — no phrasing,
+    // no side effects. Returns {kind, urgency, ...ctx} or null. A null means
+    // no favor can be honestly built: the want picker must skip ask_favor.
+    convoFindFavorNeed(vid) {
+      const v = this.state.village || {};
+      const day = (this.state.scholar || {}).day || 0;
+      // ONE OPEN COMMITMENT per villager — a new favor while one is open
+      // (or a formal vow is open) lies about capacity.
+      try {
+        const open = (v.promises || {})[vid];
+        if (open && !open.kept) return null;
+      } catch (e) {}
+      // Recently declined — they're not asking again yet.
+      try {
+        const lastDeclined = (v.favorDeclined || {})[vid];
+        if (lastDeclined != null && day - lastDeclined < 3) return null;
+      } catch (e) {}
+      let need = null;
+      try {
+        const n = this.npcNeeds(vid) || {};
+        const health = (v.health || {})[vid];
+        // Acute personal needs first — the body doesn't wait.
+        if ((n.hunger || 0) > 70) need = { kind: 'food_share', urgency: 4, hunger: n.hunger };
+        else if (health != null && health < 60) need = { kind: 'heal_help', urgency: 4, health };
+        else if ((n.energy || 0) < 30) need = { kind: 'watch_shift', urgency: 3, energy: n.energy };
+        else if ((n.fear || 0) > 70) need = { kind: 'stay_close', urgency: 3, fear: n.fear };
+      } catch (e) {}
+      if (!need) {
+        try {
+          const water = (v.water || {}).clean || 0;
+          if (water < 10) {
+            need = { kind: 'water_haul', urgency: 3, water };
+          } else {
+            const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : (v.pantryKcal || 0);
+            const rosterN = (v.roster || []).length || 1;
+            if (kcal < rosterN * 4000) need = { kind: 'forage_help', urgency: 2, kcal };
+          }
+        } catch (e) {}
+      }
+      if (!need) {
+        // Occupation-grounded work — day-gated so it doesn't spam.
+        try {
+          const chars = this.data.villagers || [];
+          const ch = chars.find(x => x.id === vid);
+          const occ = ch && ch.occupationId;
+          if (occ === 'hunting_guide' && (day % 3 === 0)) need = { kind: 'snare_mend', urgency: 2 };
+        } catch (e) {}
+      }
+      return need;
+    },
+
+    // convoFavorHash: per-instance variation key. Hashes (vid, day, seq) so
+    // the same NPC on different days — or different NPCs — don't get the
+    // same slot combination. Not cryptographic, just well-distributed.
+    convoFavorHash(vid, ctx) {
+      const s = String(vid) + '|' + (ctx.day || 0) + '|' + (ctx.seq || 0);
+      let h = 0;
+      for (let i = 0; i < s.length; i++) {
+        h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+      }
+      return h >>> 0;
+    },
+
+    // convoBuildFavor: turn a need into a favor INSTANCE — WHO, concrete
+    // task (verb+object+time+place), WHY (grounded), stakes, deadline.
+    // The lines are generated ONCE per instance and stored — never
+    // re-rendered from a pool, so verbatim repetition is impossible.
+    convoBuildFavor(vid, need) {
+      if (!need || !FAVOR_KINDS[need.kind]) return null;
+      const def = FAVOR_KINDS[need.kind];
+      const v = this.state.village || {};
+      const day = (this.state.scholar || {}).day || 0;
+      let name = 'them';
+      try { name = this.displayName(vid) || 'them'; } catch (e) {}
+      // Instance identity — unique per villager per day, sequenced. The seq
+      // also keys phrasing variants, so the same need on different days
+      // doesn't produce the same text.
+      v.favorSeq = (v.favorSeq || 0) + 1;
+      const ctx = { name, rosterN: (v.roster || []).length || 1, day, seq: v.favorSeq };
+      let parts = null;
+      try { parts = def.build.call(this, vid, need, ctx); } catch (e) { parts = null; }
+      if (!parts || !parts.task || !parts.line) return null;
+      return {
+        id: 'favor-' + vid + '-' + day + '-' + v.favorSeq,
+        vid, kind: need.kind,
+        keepKind: def.keepKind, goal: def.goal,
+        task: parts.task, short: parts.short || parts.task,
+        why: parts.stakes || '', stakes: parts.stakes || '',
+        line: parts.line, whyLine: parts.whyLine || parts.line,
+        commitLine: parts.commitLine || '"Thank you. Seriously — thank you."',
+        goodbye: parts.goodbye || '"Thank you."',
+        deadline: day + (def.deadlineDays || 2),
+        state: 'asked', askedDay: day,
+      };
+    },
+
+    // convoGetFavor / convoStoreFavor: the favor ledger — one current favor
+    // per villager. The instance survives across conversations so follow-ups
+    // reference the same ask (the NPC remembers).
+    convoGetFavor(vid) {
+      try { return (((this.state.village || {}).favorLedger || {})[vid]) || null; }
+      catch (e) { return null; }
+    },
+    convoStoreFavor(favor) {
+      if (!favor || !favor.vid) return;
+      try {
+        const v = this.state.village || {};
+        v.favorLedger = v.favorLedger || {};
+        v.favorLedger[favor.vid] = favor;
+      } catch (e) {}
+    },
+
+    // openFavorObligation: the tracked promise for a favor, if open.
+    openFavorObligation(vid) {
+      try {
+        const p = (((this.state.village || {}).promises || {})[vid]);
+        return (p && !p.kept && p.favorId) ? p : null;
+      } catch (e) { return null; }
+    },
+
+    // convoFavorCommit: "I'll do it" creates a TRACKED OBLIGATION — the same
+    // v.promises structure as formal vows, so checkPromises fulfillment,
+    // deadlines, and the journal all work. One open commitment per villager.
+    convoFavorCommit(vid, favor) {
+      if (!favor) return { ok: false };
+      const v = this.state.village || {};
+      v.promises = v.promises || {};
+      const day = (this.state.scholar || {}).day || 0;
+      const oldP = v.promises[vid];
+      if (oldP && !oldP.kept) return { ok: false, blocked: true };
+      if (oldP) delete v.promises[vid];
+      v.promises[vid] = {
+        goal: favor.goal, day: day, kept: false,
+        favorId: favor.id, favorTask: favor.task, favorDeadline: favor.deadline,
+      };
+      favor.state = 'promised';
+      favor.promisedDay = day;
+      try { this.remember(vid, 'promise', 'promised: ' + favor.task); } catch (e) {}
+      try { this.journalLearn(vid, 'promise', { text: favor.task }, {}); } catch (e) {}
+      try { this.notePlaystyle('social'); } catch (e) {}
+      return { ok: true };
+    },
+
+    // convoFavorRenounce: backing out of an open favor obligation — it breaks
+    // NOW, with the cost, honestly. Not a silent rot.
+    convoFavorRenounce(vid) {
+      const v = this.state.village || {};
+      const p = (v.promises || {})[vid];
+      if (!p || p.kept || !p.favorId) return false;
+      p.kept = 'broken';
+      const favor = this.convoGetFavor(vid);
+      if (favor && favor.id === p.favorId) favor.state = 'broken';
+      const t = v.trust || (v.trust = {});
+      t[vid] = Math.max(0, (t[vid] || 10) - 15);
+      try { this.remember(vid, 'promise_broken', p.favorTask || p.goal); } catch (e) {}
+      try { this.journalLearn(vid, 'promise', { text: p.favorTask || 'a promise', status: 'broken' }, {}); } catch (e) {}
+      try { this.say(`${this.displayName(vid)} goes quiet. "...Okay." The air between you cools a degree.`); } catch (e) {}
+      return true;
+    },
+
+    // convoFavorNeedLive: is this favor's underlying need still real?
+    // A follow-up must not re-ask for water after the cistern got filled.
+    convoFavorNeedLive(favor) {
+      if (!favor) return false;
+      try {
+        const v = this.state.village || {};
+        switch (favor.kind) {
+          case 'food_share': return (this.npcNeeds(favor.vid).hunger || 0) > 50;
+          case 'heal_help': return ((v.health || {})[favor.vid] || 100) < 80;
+          case 'watch_shift': return (this.npcNeeds(favor.vid).energy || 100) < 50;
+          case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
+          case 'water_haul': return ((v.water || {}).clean || 0) < 15;
+          case 'forage_help': {
+            const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : 0;
+            return kcal < (((v.roster || []).length || 1) * 6000);
+          }
+          default: return true;
+        }
+      } catch (e) { return true; }
+    },
+
+    // convoFavorFollowup: the NPC remembers the prior ask. The follow-up
+    // names it — never resets it, never re-asks verbatim.
+    convoFavorFollowup(vid, favor) {
+      const day = (this.state.scholar || {}).day || 0;
+      const open = this.openFavorObligation(vid);
+      if (favor.state === 'promised' && open) {
+        const daysLeft = favor.deadline - day;
+        const when = daysLeft <= 0 ? "Today's the day." : daysLeft === 1 ? 'Tomorrow, then.' : "We've got a couple days.";
+        return `"About ${favor.short} — have you had a chance? ${when}"`;
+      }
+      if (favor.state === 'fulfilled') {
+        favor.state = 'thanked';
+        return `"You came through on ${favor.short}. I won't forget it."`;
+      }
+      if (favor.state === 'broken') {
+        favor.state = 'acknowledged';
+        return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+      }
+      if (favor.state === 'asked') {
+        if (!this.convoFavorNeedLive(favor)) {
+          favor.state = 'moot';
+          return `"Never mind ${favor.short} — we got it handled. Thanks anyway."`;
+        }
+        return `"About ${favor.short} — still need hands. Are you in?"`;
+      }
+      return null;
+    },
+
+    // convoFavorDeadlineNote: for the repay reminder.
+    convoFavorDeadlineNote(favor) {
+      const day = (this.state.scholar || {}).day || 0;
+      const daysLeft = (favor.deadline || day) - day;
+      if (daysLeft <= 0) return "Today's the day.";
+      if (daysLeft === 1) return 'Tomorrow, then.';
+      return "We've got a couple days.";
+    },
+
     // convoSelectWant: pick the NPC's want for this conversation.
     // Priority: unresolved seeds > high needs > personality > random.
     // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): trust tier
@@ -409,7 +973,7 @@
     convoSelectWant(vid) {
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
-        return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note };
+        return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null };
       }
       let best = null, bestW = -1;
       for (const id of Object.keys(WANTS)) {
@@ -495,7 +1059,11 @@
       const w = c && c.want;
       if (!w || !w.def) return null;
       try {
-        const l = w.def.closeLine.call(this, vid, w.resolution || (w.stage >= 2 ? 'engaged' : 'unresolved'));
+        let res = w.resolution;
+        if (!res && typeof w.def.defaultResolution === 'function') {
+          try { res = w.def.defaultResolution.call(this, vid, w, 'closed'); } catch (e) {}
+        }
+        const l = w.def.closeLine.call(this, vid, res || (w.stage >= 2 ? 'engaged' : 'unresolved'));
         return l || null;
       } catch (e) { return null; }
     },
@@ -709,6 +1277,7 @@
         wantId: seed.wantId,
         note: seed.note || '',
         day: this.state.scholar.day || 0,
+        favorId: seed.favorId || null,
       };
     },
 
@@ -744,8 +1313,18 @@
         }
         return;
       }
-      const resolution = want.resolution ||
-        (want.stage >= 2 ? 'engaged' : (how === 'left' ? 'abandoned' : 'unresolved'));
+      // RESOLUTION HONESTY (convo favor system 2026-10-11): a want def may
+      // supply defaultResolution(vid, want, how) to name what "heard but not
+      // committed" means for it. ask_favor returns 'stated' — the old blind
+      // default ('engaged' for any stage>=2) recorded commitment that never
+      // happened (the false-engagement lie).
+      let resolution = want.resolution;
+      if (!resolution && want.def && typeof want.def.defaultResolution === 'function') {
+        try { resolution = want.def.defaultResolution.call(this, vid, want, how); } catch (e) {}
+      }
+      if (!resolution) {
+        resolution = want.stage >= 2 ? 'engaged' : (how === 'left' ? 'abandoned' : 'unresolved');
+      }
       want.stage = 3;
       want.resolution = resolution;
       // CONSUME BEFORE PLANT (socialite 2026-10-11): the old seed was this

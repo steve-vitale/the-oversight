@@ -1087,6 +1087,11 @@
       const v = this.state.village || {};
       const treq = (v.talkRequests || {})[vid];
       if (treq && !treq.delivered) return null;
+      // SEED PRIORITY (favor system 2026-10-11): a planted want-seed is more
+      // specific and more recent than a generic open thread. If the last
+      // conversation planted a seed (e.g. an unkept favor ask), the seed's
+      // follow-up opens — not the generic resume.
+      if ((v.convoSeeds || {})[vid]) return null;
       const c = this.convoGet(vid);
       if (c._resumedOnce) return null;
       const trust = ((v.trust || {})[vid] || 10);
@@ -1836,9 +1841,16 @@
         if (opener && opener.line) {
           // QUOTE HYGIENE (dialogue rethink, Steve 2026-10-07): the old
           // composition left a stray quote — the opener keeps its own layer.
-          const seedLine = `"About ${want.seedNote || 'last time'} — ` +
+          // FAVOR FOLLOW-UP (2026-10-11): the favor opener names the prior
+          // ask itself ("About {short} — ...") — don't double-prefix it.
+          const alreadyNamed = /^"About /.test(opener.line);
+          const seedLine = alreadyNamed ? opener.line :
+            `"About ${want.seedNote || 'last time'} — ` +
             opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
-          c.want.stage = 1; // surfaced
+          // FAVOR FOLLOW-UP (convo favor system 2026-10-11): the favor
+          // opener may have already established the ask (stage 2, menu goes
+          // straight to commit/deflect). Don't downgrade it.
+          if ((c.want.stage || 0) < 1) c.want.stage = 1; // surfaced
           // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
           // seed-driven conversations open one mood band cooler. Whatever
           // was left hanging, it wasn't nothing — the air is heavier.
@@ -3468,7 +3480,7 @@
       let want = null;
       try {
         want = this.convoSelectWant(vid);
-        if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null };
+        if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null, seedFavorId: want.seedFavorId || null };
       } catch (e) { want = null; }
       const op = (() => {
         // RESUME (Steve 2026-10-07): an unfinished thread from a previous
@@ -4495,10 +4507,20 @@
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
+      // WANT-AWARE ENGAGEMENT (convo favor system 2026-10-11): the old hook
+      // engaged WHATEVER want was live on any answer/reaction — answering an
+      // unrelated generic question "engaged" a favor want, which then
+      // resolved 'engaged' with no commitment (the false-engagement lie).
+      // Now: answers engage only question wants (curious), reactions engage
+      // only wants where reacting is the point (share_news, just_company).
+      // Favor/comfort/warning wants engage solely through their own menus.
       try {
         if (c.want && (c.want.stage || 0) < 3 && typeof this.convoWantEngage === 'function') {
-          if (/^(ans:|react:|gq:)/.test(choiceId || '') && choiceId.indexOf('honest_pass') === -1 && choiceId !== 'deflect_q') {
-            this.convoWantEngage(vid, 'engage');
+          const wdef = c.want.def || {};
+          if (/^(ans:|gq:)/.test(choiceId || '') && choiceId.indexOf('honest_pass') === -1) {
+            if (wdef.answerEngages) this.convoWantEngage(vid, 'engage');
+          } else if (/^react:/.test(choiceId || '')) {
+            if (wdef.reactEngages) this.convoWantEngage(vid, 'engage');
           } else if (choiceId === 'deflect_q') {
             this.convoWantEngage(vid, 'deflect');
           }

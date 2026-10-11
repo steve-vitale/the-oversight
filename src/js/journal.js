@@ -1169,9 +1169,13 @@
     try {
       for (const [vid, p] of Object.entries((this.state.village.promises || {}))) {
         if (before[vid] !== p.kept) {
-          const want = this.goalWant(vid) || 'something';
+          // FAVOR OBLIGATIONS (convo favor system 2026-10-11): the journal
+          // entry was opened with the concrete task text — the kept/broken
+          // update must match THAT text, not the generic goal want.
+          const pNow = (this.state.village.promises || {})[vid];
+          const text = (pNow && pNow.favorTask) || `Help them ${this.goalWant(vid) || 'something'}`;
           this.journalLearn(vid, 'promise',
-            { text: `Help them ${want}`, status: p.kept === true ? 'kept' : (p.kept === 'released' ? 'released — they\'re gone' : 'broken') }, {});
+            { text, status: p.kept === true ? 'kept' : (p.kept === 'released' ? 'released — they\'re gone' : 'broken') }, {});
         }
       }
     } catch (e) {}

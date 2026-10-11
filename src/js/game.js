@@ -4548,6 +4548,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const match = this.promiseKeepKind(p.goal) === kind;
         if (match) {
           p.kept = true;
+          // FAVOR OBLIGATIONS (convo favor system 2026-10-11): mark the
+          // favor instance fulfilled and name the task — the fiction must
+          // know WHAT was kept, not just that a promise was.
+          let favor = null;
+          try { favor = (p.favorId && typeof this.convoGetFavor === 'function') ? this.convoGetFavor(pid) : null; } catch (e) {}
+          if (favor && favor.id === p.favorId) { favor.state = 'fulfilled'; favor.fulfilledDay = this.state.scholar.day || 0; }
           // KEEPING is a real act, not words: talk:false (no 40 cap), but
           // still progressive — devotion isn't a grind. Routes through the
           // one resolver like every other gain.
@@ -4567,14 +4573,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const t = v.trust || (v.trust = {});
             t[pid] = Math.min(100, (t[pid] || 10) + 15);
           }
-          this.say(`${this.displayName(pid)} catches your eye across the fire. You kept your word. That meant everything.`);
-          this.remember(pid, 'promise_kept', p.goal);
-        } else if (age >= 7) {
+          if (p.favorTask) {
+            // Name the kept task — the fiction knows what was done, not
+            // just that a promise was. (Replaces the generic line.)
+            this.say(`${this.displayName(pid)} catches your eye across the fire. "${p.favorTask}" — done. You kept your word. That meant everything.`);
+          } else {
+            this.say(`${this.displayName(pid)} catches your eye across the fire. You kept your word. That meant everything.`);
+          }
+          this.remember(pid, 'promise_kept', p.favorTask || p.goal);
+        } else {
+          // FAVOR DEADLINES (convo favor system 2026-10-11): favor
+          // obligations rot on their own deadline (1-3 days), not the 7-day
+          // promise window — a water haul "at dawn" that rots for a week is
+          // a lie about urgency.
+          const limit = (p.favorDeadline != null) ? Math.max(1, p.favorDeadline - (p.day || 0)) : 7;
+          if (age >= limit) {
           p.kept = 'broken';
+          let favor = null;
+          try { favor = (p.favorId && typeof this.convoGetFavor === 'function') ? this.convoGetFavor(pid) : null; } catch (e) {}
+          if (favor && favor.id === p.favorId) favor.state = 'broken';
           const t = v.trust || (v.trust = {});
           t[pid] = Math.max(0, (t[pid] || 10) - 15);
-          this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
-          this.remember(pid, 'promise_broken', p.goal);
+          if (p.favorTask) {
+            this.say(`${this.displayName(pid)} doesn't say anything. But about "${p.favorTask}" — silence. Promises rot. (-15 trust)`);
+          } else {
+            this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
+          }
+          this.remember(pid, 'promise_broken', p.favorTask || p.goal);
+          }
         }
       }
     },
