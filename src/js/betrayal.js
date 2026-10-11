@@ -2669,7 +2669,7 @@
       grief: 0, cheer: 0,
       conflicts: [], groups: [],
       gossip: [], truthClaims: [],
-      taught: {},
+      taught: {}, familiar: {}, taughtByPlayer: {},
       met: {},
       positions: {}, nodePos: {}, away: {},
       // lazily-initialized systems (betrayal, justice, mship) start fresh
@@ -2689,8 +2689,8 @@
       }
       for (let i = local.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[local[i], local[j]] = [local[j], local[i]]; }
       for (let i = other.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[other[i], other[j]] = [other[j], other[i]]; }
-      v.taught[pid] = [...local, ...other].slice(0, tierCount[tier] || 1);
-    } catch (e) { v.taught[pid] = []; }
+      v.familiar[pid] = [...local, ...other].slice(0, tierCount[tier] || 1);
+    } catch (e) { v.familiar[pid] = []; }
     this.state.village = v;
     // social groups regenerate honestly on the new roster (solo → none)
     try { this.genGroups(); } catch (e) {}

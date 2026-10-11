@@ -1261,7 +1261,7 @@
       v.sharedKnowledge = v.sharedKnowledge || {};
       const fn = v.fieldNotes[vid] = v.fieldNotes[vid] || {};
       const fresh = this.data.plants.filter(pl =>
-        !((v.taught[vid] || []).includes(pl.id)) &&
+        !this.plantKnownBy(vid, pl.id, v) &&
         !(v.sharedKnowledge[pl.id]) &&
         !((this.state.codex.plants || {})[pl.id]));
       if (!fresh.length) return;
@@ -1269,7 +1269,7 @@
       // starts — 70% of looks continue a plant already under observation.
       // Uniform picks would take ~80 days to land 3 looks on one species.
       const fnKeys = Object.keys(fn).filter(pid =>
-        !((v.taught[vid] || []).includes(pid)) &&
+        !this.plantKnownBy(vid, pid, v) &&
         !(v.sharedKnowledge[pid]) &&
         !((this.state.codex.plants || {})[pid]) &&
         fresh.some(pl => pl.id === pid));
@@ -2069,7 +2069,20 @@
       // Familiarity matters: an Ohioan knows Ohio plants; an Arizonan dropped
       // into Georgia creek country knows almost nothing. Local plants come first:
       // what you knew back home is what you can teach.
+      // PLANT KNOWLEDGE SPLIT (convo rebuild 2026-10-11, Steve: fix
+      // structurally): background familiarity and in-run teaching no longer
+      // share one array.
+      //   v.familiar[vid]      = home-region knowledge, pre-game (seeded here).
+      //   v.taught[vid]        = genuinely learned DURING this run (taught by
+      //                        player/villagers, fieldwork, fireside, word of
+      //                        mouth). Starts empty; villagerLearnsPlant writes.
+      //   v.taughtByPlayer[vid]= the PLAYER personally taught them (subset of
+      //                        taught). Only the conversation teach path writes.
+      // "Do they know it?" readers use plantKnownBy/plantsKnownBy (the union).
+      // "What did YOU teach them?" readers use taughtByPlayer only.
       this.state.village.taught = {};
+      this.state.village.familiar = {};
+      this.state.village.taughtByPlayer = {};
       const shuf = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; };
       const plantsByFamiliarity = (tags) => {
         const tl = (tags || []).map(t => String(t).toLowerCase());
@@ -2085,7 +2098,7 @@
         const rc = (this.state.village.rosterChars || {})[rid];
         const tags = rc ? (rc.originTags || []) : [];
         const tier = this.familiarityTier(tags);
-        this.state.village.taught[rid] = plantsByFamiliarity(tags).slice(0, tierCount[tier] || 1);
+        this.state.village.familiar[rid] = plantsByFamiliarity(tags).slice(0, tierCount[tier] || 1);
       }
       const scholar = S.state.newScholar(this.villagerId);
       // REGION KNOWLEDGE (Steve 2026-10-07): the scholar carries the player's
@@ -2199,7 +2212,7 @@
       }
       // YOUR starting knowledge: what your old life taught you — if this land resembles it.
       // Arizona -> Georgia creek: you start knowing almost nothing. That's the point.
-      for (const pid of (this.state.village.taught[this.villagerId] || [])) {
+      for (const pid of this.plantsKnownBy(this.villagerId)) {
         this.state.codex.plants[pid] = { identifiedDay: 0, level: 1, harvests: 0, tastings: 0 };
         this.state.codex.encounters = this.state.codex.encounters || {};
         this.state.codex.encounters[pid] = 99;
@@ -2544,7 +2557,7 @@
           const vp = (this.data.villagers || []).find(x => x.id === vid)
             /* unified: getPerson */ || {};
           const malicious = vp.personality && vp.personality.dark && vp.personality.dark.kind === 'malicious';
-          const theyKnow = (v.taught && v.taught[vid]) || [];
+          const theyKnow = this.plantsKnownBy(vid, v);
           const plants = this.data.plants || [];
           if (theyKnow.length && plants.length > 1) {
             const rollWrong = malicious ? 0.3 : 0.12;
@@ -2711,7 +2724,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const plant = this.data.plants.find(p => p.id === plantId);
       if (!teacher || !plant) return null;
       // does the teacher know it?
-      const teacherKnows = (this.state.village.taught && this.state.village.taught[vid] || []).includes(plantId);
+      const teacherKnows = this.plantKnownBy(vid, plantId);
       // (for now, mains know 2 random plants; background know 1)
       if (!teacherKnows) {
         this.say(`${this.displayName(vid)} doesn\'t know that one either.`);
@@ -4732,7 +4745,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         const templates = ((this.data.characterGen || {}).wakeUpSpeeches || {})[key]
           || ((this.data.characterGen || {}).wakeUpSpeeches || {}).overwhelmed || [];
-        lines = templates.map(t => String(t)
+        // ARTICLE (convo rebuild 2026-10-11): wakeUpSpeeches carry "a {occ}"
+        // templates ("I was a {occ}") — without the article slot they'd ship
+        // "a appliance repair tech". {an_occ} fills before {occ}.
+        const _wOcc = String(occ || 'survivor');
+        const _wAnOcc = (/^[aeiou]/i.test(_wOcc) ? 'an ' : 'a ') + _wOcc.charAt(0).toLowerCase() + _wOcc.slice(1);
+        lines = templates.map(t => String(t).replaceAll('{an_occ}', _wAnOcc)
           .replaceAll('{first}', first).replaceAll('{occ}', occ).replaceAll('{origin}', origin));
       }
       // the finder remembers finding you. small trust bump.
@@ -5382,12 +5400,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the teacher actually teaches: one plant they know, passed on
         if (a.task === 'teach') {
           try {
-            const taught = (vv2.taught && vv2.taught[vid]) || [];
+            const taught = this.plantsKnownBy(vid, vv2);
             const learners = (vv2.roster || []).filter(rid => rid !== vid);
             let shared = 0;
             for (const pid of taught) {
               for (const rid of learners) {
-                const lt = (vv2.taught && vv2.taught[rid]) || [];
+                const lt = this.plantsKnownBy(rid, vv2);
                 if (!lt.includes(pid)) {
                   try { if (this.villagerLearnsPlant(rid, pid, 'taught')) shared++; } catch (e) {}
                   break;
@@ -6303,7 +6321,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const p = (this.data.plants || []).find(x => x.id === pid);
             const nm = p ? p.name : pid;
             const knower = (vv.roster || []).find(rid =>
-              rid !== this.villagerId && ((vv.taught || {})[rid] || []).includes(pid));
+              rid !== this.villagerId && this.plantKnownBy(rid, pid, vv));
             // Old news at home — no fanfare, but NEVER silence: the player
             // carried knowledge home, and the no-silent-actions rule means
             // the return must say so. (Fix 2026-10-07: old-news awayLearned
@@ -13873,7 +13891,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // silent knowledge-factor credit for plants the codex doesn't know.
       // (The player CAN still teach the fire: knows() is unchanged.)
       for (const pid of Object.keys(v.plantRumors)) {
-        const knows = rid => (v.taught[rid] || []).includes(pid) && !(away && rid === me);
+        const knows = rid => this.plantKnownBy(rid, pid, v) && !(away && rid === me);
         const canLearn = rid => rid !== me && !(away && rid === me);
         const knowers = roster.filter(knows);
         const learners = roster.filter(rid => !knows(rid) && canLearn(rid));
@@ -14532,7 +14550,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           stepToward(); done();
           // gratitude with hands: shares something useful
           const acts = [];
-          const untaught = (v.taught[rid] || []).filter(pid => !(this.state.codex.plants || {})[pid]);
+          const untaught = this.plantsKnownBy(rid, v).filter(pid => !(this.state.codex.plants || {})[pid]);
           if (untaught.length) acts.push('teach');
           acts.push('encourage', 'chore');
           const act = acts[Math.floor(Math.random() * acts.length)];
@@ -14658,7 +14676,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const askers = rosterA.filter(rid => {
           const pp = this.getPerson ? this.getPerson(rid) : null;
           const cc = pp && pp.personality && pp.personality.curiosity;
-          return (cc === 'curious' || cc === 'hungry-to-learn') && !((this.state.village.taught[rid] || []).includes(pid));
+          return (cc === 'curious' || cc === 'hungry-to-learn') && !this.plantKnownBy(rid, pid);
         });
         if (askers.length && present && Math.random() < 0.5) {
           const asker = this.displayName(askers[Math.floor(Math.random() * askers.length)]);
@@ -14830,7 +14848,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const cxp = this.state.codex.plants || {};
         const yourPlants = Object.keys(cxp).filter(k => this.plantKnown(k) && !(cxp[k] || {}).wrongAs);
         const theirPool = this.traderKnowledge(vid, true);
-        const theirTaught = ((this.state.village.taught || {})[vid]) || [];
+        const theirTaught = this.plantsKnownBy(vid);
         const theyKnow = new Set([...theirPool, ...theirTaught]);
         // find something you know that isn't in their teach pool
         trade = yourPlants.find(yPid => !theyKnow.has(yPid) && yPid !== pid);
@@ -22294,7 +22312,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // what grows where — and what they learn, the village can learn
           // (sharedKnowledge feeds firesideTeaching).
           try {
-            const known = (v.taught && v.taught[id]) || [];
+            const known = this.plantsKnownBy(id, v);
             if (known.length < 12 && Math.random() < 0.35 && (this.data.plants || []).length) {
               const cands = this.data.plants.filter(pl => !known.includes(pl.id));
               if (cands.length) {
@@ -23543,7 +23561,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     villagerKnowledgeFactor(vid, v) {
       const vv = v || this.state.village || {};
-      const known = (vv.taught && vv.taught[vid]) ? vv.taught[vid].length : 0;
+      const known = this.plantsKnownBy(vid, vv).length;
       // FOOD BALANCE (Steve 2026-10-09): 0.10/plant was too shallow to beat
       // the pantry clock — villages died at day ~13 while production was still
       // climbing. 0.13/plant (cap 2.0): a knowledgeable local feeds ~2x the
@@ -23752,7 +23770,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const m = (vv.mentored[vid] = vv.mentored[vid] || { sinceDay: day, plants: 0, xp: 0 });
         // learn by watching: one of the player's plants per day, if any's new
         if (known.length) {
-          const taught = (vv.taught && vv.taught[vid]) || [];
+          const taught = this.plantsKnownBy(vid, vv);
           const newOnes = known.filter(pid => !taught.includes(pid));
           if (newOnes.length && Math.random() < 0.7) {
             const pid = newOnes[Math.floor(Math.random() * newOnes.length)];
@@ -23829,7 +23847,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // teaches. Food-skilled people learn faster; everyone learns something
       // eventually. What one villager learns, the fireside spreads.
       try {
-        const knownW = (v.taught && v.taught[vid]) || [];
+        const knownW = this.plantsKnownBy(vid, v);
         const skillW = this.occupationFoodSkill ? this.occupationFoodSkill(person.formerOccupation) : 1;
         if (knownW.length < 12 && Math.random() < 0.06 * skillW && (this.data.plants || []).length) {
           const candsW = this.data.plants.filter(pl => !knownW.includes(pl.id));
@@ -35514,9 +35532,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
     // THE identification event. One path, every source. Names are earned here.
-    // villagerLearnsPlant: THE knowledge-growth primitive. taught[] is what
+    // villagerLearnsPlant: THE knowledge-growth primitive. v.taught[] is what
     // villageEats reads for the knowledge factor — every identification,
     // teaching, and fireside share flows through here. One store, not three.
+    // (convo rebuild 2026-10-11: v.taught is now the IN-RUN store only;
+    // background familiarity lives in v.familiar. "Do they know it?" readers
+    // must use plantKnownBy/plantsKnownBy — the union.)
     villagerLearnsPlant(vid, pid, source) {
       const v = this.state.village;
       if (!v || !vid || !pid) return false;
@@ -35531,6 +35552,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!pk.includes(pid)) pk.push(pid);
       } catch (e) {}
       return true;
+    },
+    // plantKnownBy(vid, pid, vv): does this villager know this plant — from
+    // ANY source (background familiarity OR learned in-run)? THE knowledge
+    // check. (convo rebuild 2026-10-11: the union reader for the split
+    // stores. Old saves predate v.familiar — the || {} fallbacks keep them
+    // working through v.taught alone. vv: alternate village object for
+    // away-party sims; defaults to the live village.)
+    plantKnownBy(vid, pid, vv) {
+      const v = vv || this.state.village;
+      if (!v || !vid || !pid) return false;
+      return (((v.familiar || {})[vid] || []).indexOf(pid) !== -1) ||
+        (((v.taught || {})[vid] || []).indexOf(pid) !== -1);
+    },
+    // plantsKnownBy(vid, vv): every plant id they know, either store, deduped.
+    plantsKnownBy(vid, vv) {
+      const v = vv || this.state.village;
+      if (!v || !vid) return [];
+      const f = (v.familiar || {})[vid] || [], t = (v.taught || {})[vid] || [];
+      const out = [];
+      for (const pid of f.concat(t)) if (out.indexOf(pid) === -1) out.push(pid);
+      return out;
+    },
+    // playerTaughtPlants(vid): plants the PLAYER personally taught this
+    // villager this run. THE teaching-event read — background familiarity
+    // never lands here, so "you taught them" openers can't fabricate.
+    // (convo rebuild 2026-10-11.)
+    playerTaughtPlants(vid) {
+      const v = this.state.village;
+      if (!v || !vid) return [];
+      return ((v.taughtByPlayer || {})[vid] || []).slice();
     },
     identifyPlant(pid, source, teacherName) {
       const p = this.data.plants.find(x => x.id === pid);
