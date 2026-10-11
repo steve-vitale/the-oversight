@@ -100,6 +100,7 @@
 //   - load_resets_session_death: load() clears villageLost (session state of a dead run, not save data) — a Continued living run always has a home (code: load, break-it persistence r5 2026-10-09)
 //   - fight_gates_round_trip: per-fight gates on the fight object (alien beam _beamCooldown) and the uprising's identity (uprising/uprisingAttackers, rebuilt into _lastBetrayal) persist in tbSave and restore verbatim — a mid-fight reload can neither re-arm the beam nor downgrade an uprising to an ordinary betrayal (code: syncRun, load, break-it persistence r6 2026-10-09)
 //   - fight_gate_sibling_sweep: the same save-scum class in related systems — hummice sound pressure (humStacks/humMice/humRiseRound/humDecayRound), the player shout cap (shouts) + its chorus-break duration (chorusBrokenUntil), the scorch narration flag (terraformScorched), the pending order re-sort (orderDirty) — all persist in tbSave and restore verbatim (code: syncRun, load, break-it persistence r6 2026-10-09)
+//   - fight_gate_counter_sweep: the same save-scum class in the counter engine (postdates the r6 sweep; r16 added _counterLastMoveDir without touching the boundary) — _counterStrikes (union_rep strike_first first-blood gate), _counterLastMoveRound/_counterLastMoveDir (review_drone move_x2 vary chain) persist in tbSave and restore verbatim. A mid-fight reload can neither re-arm firstStrike (save-scum counter discovery) nor silently break the drone's chain (code: syncRun, load, break-it persistence r11 2026-10-11)
 //   - scout_reports_are_shared: a scout's mapped tiles set t.revealed AND markSeen 'shared' — the world-map overlay agrees with the "mapped N new areas" log; never 'visited' (code: resolveOneAssignment, explorer break-it 2026-10-08)
 //   - path_blockages_hold: travelTo at d>1 checks every tile on a shortest path for entry blockages from the approach side (travelBlockage fx/fy) — a fallen tree on the middle tile refuses the jump, honestly, as if walked into; force (swim/debug) still bypasses (code: travelTo, explorer break-it 2026-10-10)
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
@@ -6692,6 +6693,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             chorusBrokenUntil: f.chorusBrokenUntil || 0,
             terraformScorched: !!f.terraformScorched,
             orderDirty: !!f.orderDirty,
+            // COUNTER GATES (break-it persistence 2026-10-11 r11): the
+            // counter engine's per-fight gates live on the fight object —
+            // _counterStrikes (firstStrike for union_rep's strike_first),
+            // _counterLastMoveRound/_counterLastMoveDir (review_drone's
+            // move_x2 vary chain). Dropping them on save let a mid-fight
+            // reload re-arm firstStrike — save-scum discovery of "first
+            // blood" counters without actual first blood — and silently
+            // broke the drone's chain (the trick became undiscoverable
+            // that fight). Same save-scum-gate class as the r6 sweep
+            // (beamCooldown, shouts, humStacks); the counter engine
+            // (2026-10-10) postdates that sweep and r16 added
+            // _counterLastMoveDir without touching the boundary.
+            // _counterLastMoveRound keeps its null/number distinction: a
+            // 0 would read as "moved in round 1" to the === round-1 check.
+            counterStrikes: f._counterStrikes || 0,
+            counterLastMoveRound: (f._counterLastMoveRound == null) ? null : f._counterLastMoveRound,
+            counterLastMoveDir: f._counterLastMoveDir || null,
           };
         }
       } catch (e) {}
@@ -7094,6 +7112,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             chorusBrokenUntil: tbS.chorusBrokenUntil || 0,
             terraformScorched: !!tbS.terraformScorched,
             orderDirty: !!tbS.orderDirty,
+            // COUNTER GATES (break-it persistence 2026-10-11 r11): persisted
+            // in syncRun; restore verbatim so a mid-fight reload can neither
+            // re-arm firstStrike (union_rep save-scum discovery) nor silently
+            // break the review_drone vary chain. Pre-gate saves lack the
+            // fields: _counterLastMoveRound restores as undefined (never
+            // moved), matching the old in-memory shape.
+            _counterStrikes: tbS.counterStrikes || 0,
+            _counterLastMoveRound: (tbS.counterLastMoveRound == null) ? undefined : tbS.counterLastMoveRound,
+            _counterLastMoveDir: tbS.counterLastMoveDir || null,
           };
           // BETRAYAL AFTERMATH CONTEXT (break-it combat r7 2026-10-09):
           // _lastBetrayal is session state, not save data — rebuild it from
