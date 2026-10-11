@@ -158,7 +158,10 @@ Game.tableRegisterPath({
   Game.progState().ledger = { might: 0, brokerage: 0, showmanship: 0, embrace: 0, defiance: 0, exposed: 0, unified: 0, fractured: 0, foodShared: 0, foodHoarded: 0, protected: 0, killed: 0, betrayed: 0 };
   Game.tableScene();
   let tc = Game.state.scholar.tableChoices;
-  ok(!!tc && tc.options.length === 2, 'two earned test paths offered', 'options=' + (tc && tc.options.length));
+  // The assimilated path is always open by design (the safe ending takes
+  // anyone) — filter to the synthetic paths for the isolation check.
+  const syn = (tc.options || []).filter(o => o.id.indexOf('path:test') === 0);
+  ok(!!tc && syn.length === 2, 'two earned test paths offered', 'options=' + syn.length);
   ok(transcript.some(([k, t]) => t.indexOf('lesser seat') >= 0), 'audit prices the lesser seat aloud');
   ok(Game.progState().tableDone === true, 'tableDone set — the table fires once');
 
@@ -186,7 +189,7 @@ Game.tableRegisterPath({
   ok(Game.tableState().phase === 'downgrade', 'failure -> downgrade phase, never a wipe');
   ok(Game.over !== true, 'run NOT over after failure');
   tc = Game.state.scholar.tableChoices;
-  ok(tc && tc.options.length === 1 && tc.options[0].id === 'downgrade:testbeta', 'remaining earned path offered weakened');
+  ok(tc && tc.options.some(o => o.id === 'downgrade:testbeta'), 'remaining earned path offered weakened', (tc && tc.options.map(o => o.id).join(',')));
   ok(tc.prompt.indexOf('smaller doors') >= 0, 'downgrade priced honestly');
   Game.chooseTableOption('downgrade:testbeta');
   ok(Game.tableState().path === 'testbeta' && Game.tableState().phase === 'challenge', 'downgrade pick starts weakened path');

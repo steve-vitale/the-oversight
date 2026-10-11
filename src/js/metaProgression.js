@@ -488,29 +488,10 @@
     wrapHook('_contestDie', function () {
       this.metaNotePlayerContest('died', false);
     });
-    // the table: the seat is reached (tableScene presents the earned paths).
-    // 2026-10-11: the stub's single-choice contract is gone; the real table
-    // (table.js) names the path on 'path:<id>' and the final on 'final:<id>'.
-    wrapHook('tableScene', function () {
-      try { this.metaUnlock('mt-table'); } catch (e) {}
-    });
-    // the live choice that names the run — path, then final within it.
-    wrapHook('chooseTableOption', function (args, r, pre) {
-      if (pre && pre.pathId) this.metaNoteTable(pre.pathId);
-      if (pre && pre.finalId) this.metaNoteTableChoice(pre.finalPath, 'final:' + pre.finalId);
-    }, function (origArgs) {
-      try {
-        const id = (origArgs && origArgs[0]) || '';
-        let m = /^path:(.+)$/.exec(id);
-        if (m) return { pathId: m[1] };
-        m = /^final:(.+)$/.exec(id);
-        if (m) {
-          const T = (typeof this.tableState === 'function') ? this.tableState() : {};
-          return { finalId: m[1], finalPath: (T && T.path) || 'unknown' };
-        }
-        return null;
-      } catch (e) { return null; }
-    });
+    // the table (2026-10-11): the real table (table.js) calls metaNoteTable /
+    // metaNoteTableChoice directly at scene, path choice, and final — these
+    // wraps are intentionally absent: they bind at this file's load time,
+    // before table.js loads, so they'd attach to nothing.
     // legend: how the run ended
     wrapHook('recordLegend', function () {
       try {

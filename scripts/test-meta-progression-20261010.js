@@ -72,12 +72,12 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
   console.log('\n-- 1. achievement data --');
   {
     const list = Game.metaList();
-    ok('45 achievements', list.length === 45, 'got ' + list.length);
+    ok('46 achievements', list.length === 46, 'got ' + list.length); // +mt-f-relay (2026-10-11)
     const ids = list.map(a => a.id);
     ok('unique ids', new Set(ids).size === ids.length);
     const cats = new Set(['flora', 'fauna', 'monsters', 'escalation', 'show', 'arcs', 'table', 'sickness', 'milestones']);
     ok('all fields present, valid cats', list.every(a => a.id && a.cat && cats.has(a.cat) && a.name && a.desc && a.hint));
-    ok('summary agrees', Game.metaSummary().total === 45 && Game.metaSummary().unlocked === 0);
+    ok('summary agrees', Game.metaSummary().total === 46 && Game.metaSummary().unlocked === 0);
     // hints must not leak content: no hint names a specific monster/plant/disease id
     const dataIds = new Set([
       ...(Game.data.plants || []).map(p => p.id),
@@ -155,11 +155,28 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
     Game.applyStatus('scholar', 'poison', { chance: 1 });
     ok('non-disease status ignored', !Game._meta().disease.contracted['poison']);
 
+    // the real table (2026-10-11) prices the real vector — rig a lesser seat
+    Game.state.networkLive = true;
+    Game.state.scholar.integration = 50;
+    Game.progState().sentimentTaught = true;
+    Game.state.scholar.prog = Game.state.scholar.prog || {};
+    Game.state.scholar.prog.feastSurgeUsed = true;
+    const faced = {};
+    [[1, 4], [2, 4], [3, 3]].forEach(([w, n]) => { for (let i = 0; i < n; i++) faced['w' + w + 'm' + i] = w; });
+    Game.progState().deeds = { wavesFaced: faced, contestsSurvived: 2 };
+    Game.progState().crises = { c1: 1, c2: 1 };
+    Game.ledger().exposed = 10; // the witness path, earned
     Game.tableScene();
     ok('mt-table unlocked', unlocked('mt-table'));
-    const frame = Game.state.scholar.tableChoices.frame;
-    ok('frame achievement unlocked (mt-f-' + frame + ')', unlocked('mt-f-' + frame));
-    Game.chooseTableOption(Game.state.scholar.tableChoices.options[0].id);
+    const tc = () => Game.state.scholar.tableChoices;
+    ok('witness offered', !!tc() && tc().options.some(o => o.id === 'path:witness'));
+    Game.chooseTableOption('path:witness');
+    ok('path achievement unlocked (mt-f-witness)', unlocked('mt-f-witness'));
+    Game.chooseTableOption('abil:subpoena');
+    Game.chooseTableOption('beat:cold');
+    Game.chooseTableOption('beat:subpoena');
+    Game.chooseTableOption('beat:public');
+    Game.chooseTableOption('final:charges');
     ok('mt-choice unlocked', unlocked('mt-choice'));
     ok('mx-win via recordLegend wrap', unlocked('mx-win'));
   }
@@ -232,7 +249,7 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
     const entryA = JSON.stringify(Game.state.codex.plants[pA]);
     // unlock everything, then identify a different plant on the same run
     for (const a of Game.metaList()) Game.metaUnlock(a.id);
-    ok('all 45 unlocked', Game.metaSummary().unlocked === 45);
+    ok('all 46 unlocked', Game.metaSummary().unlocked === 46);
     const pB = Game.data.plants[3].id;
     const rB = Game.identifyPlant(pB, 'fieldwork');
     const entryB = JSON.stringify(Game.state.codex.plants[pB]);
@@ -245,9 +262,13 @@ function unlocked(id) { return !!Game._meta().unlocked[id]; }
   // ============ 5. wraps installed + ontology ============
   console.log('\n-- 5. wrap installation & ontology --');
   {
+    // tableScene/chooseTableOption are NOT wrap-hooked: the real table
+    // (table.js, 2026-10-11) calls metaNoteTable/metaNoteTableChoice directly
+    // (the wraps would bind at metaProgression's load time, before table.js
+    // loads, and attach to nothing).
     const hooked = ['identifyPlant', '_noteAnimalDepth', 'ensureMonsterEntry', 'monsterNamingCheck',
       'recordWaveKill', 'unlockedWave', 'arcBeat', 'noteCrisis', 'contestLearn', '_contestEnd',
-      '_showEnd', '_contestDie', 'tableScene', 'chooseTableOption', 'recordLegend',
+      '_showEnd', '_contestDie', 'recordLegend',
       'checkSystemArrival', 'applyStatus', 'cureStatus'];
     const missing = hooked.filter(n => typeof Game[n] !== 'function');
     ok('all hook targets exist', missing.length === 0, missing.join(','));
