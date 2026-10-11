@@ -6240,12 +6240,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       while (remaining > 0) {
         const pk = Math.min(pieceMax, remaining);
         remaining -= pk;
+        // GRANARY (haven growth 2026-10-10): cool dark bins slow spoilage.
+        // GRANARY UNWIND (forager break-it 2026-10-11): granaryDays records
+        // the bonus so takeFromPantry(Bulk) can subtract it back — otherwise
+        // the village-stock take re-deposits the bonus and the clock grows.
+        const _sgb = this.granarySpoilBonus ? this.granarySpoilBonus() : 0;
         const item = {
           name: name || 'Foraged food', kcalEach: pk, units: 1,
-          // GRANARY (haven growth 2026-10-10): cool dark bins slow spoilage.
-          spoilDay: day + 3 + (this.granarySpoilBonus ? this.granarySpoilBonus() : 0),
+          spoilDay: day + 3 + _sgb,
           safe: true, kg: Math.max(0.05, Math.round(pk / 5) / 1000),
         };
+        if (_sgb > 0) item.granaryDays = _sgb;
         const existing = (this.stacksMatch && v.pantry.find(p => this.stacksMatch(p, item))) || null;
         if (existing) existing.units += 1;
         else v.pantry.push(item);
@@ -12460,7 +12465,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const donated = { ...item };
       try {
         const b = this.granarySpoilBonus ? this.granarySpoilBonus(donated.foodState) : 0;
-        if (b && isFinite(donated.spoilDay)) donated.spoilDay += b;
+        if (b && isFinite(donated.spoilDay)) {
+          donated.spoilDay += b;
+          // GRANARY UNWIND (forager break-it 2026-10-11): the bonus is a
+          // shelving benefit, not a clock extension — takeFromPantry(Bulk)
+          // subtracts granaryDays on the way out. Without the unwind, every
+          // donate/take-back cycle permanently grew the clock (measured
+          // +3/cycle fresh, +14/cycle preserved: infinite shelf life by
+          // shuttling food in and out of the pantry).
+          donated.granaryDays = (donated.granaryDays || 0) + b;
+        }
       } catch (e) {}
       const existing = v.pantry.find(p => this.stacksMatch(p, donated));
       if (existing) {
@@ -12621,6 +12635,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return { perPerson: 2000, daysLeft: daysLeft.toFixed(1), pantryKcal: Math.round(pantryKcal) };
     },
 
+    // pantryTakeSpoilDay: the granary bonus is a shelving benefit, not a clock
+    // extension — unwind it when food leaves the pantry (forager break-it
+    // 2026-10-11: the donate/take-back shuttle printed +3/+14 days per cycle,
+    // infinite shelf life). Legacy entries without granaryDays unwind 0.
+    pantryTakeSpoilDay(item) {
+      if (!item || item.spoilDay === undefined || item.spoilDay === null) return item && item.spoilDay;
+      return item.spoilDay - (item.granaryDays || 0);
+    },
+
     // takeFromPantryBulk: pack multiple items at once (slider UI).
     // selections: {idx: qty}. Respects weight, applies trust cost once.
     takeFromPantryBulk(selections) {
@@ -12679,7 +12702,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // first, merge only into a truly identical one — name-only merging
         // laundered kcalEach upward (created calories from nothing),
         // contaminated spoilDay clocks, and dropped diseaseRisk silently.
-        const takenStack = { name: item.name, kcalEach: item.kcalEach, units: canTake, spoilDay: item.spoilDay, safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
+        const takenStack = { name: item.name, kcalEach: item.kcalEach, units: canTake, spoilDay: this.pantryTakeSpoilDay(item), safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
           // FOOD REALITY: keep processing state — the haul stays workable.
           plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
@@ -12836,7 +12859,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // subset-push silently stripped foodState/plantId/diseaseRisk, so a
       // taken-back "cleaned" portion forgot it was cleaned (uncookable,
       // untestable — a phantom downgrade).
-      const takenStack = { name: item.name, kcalEach: item.kcalEach, units: 1, spoilDay: item.spoilDay, safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
+      const takenStack = { name: item.name, kcalEach: item.kcalEach, units: 1, spoilDay: this.pantryTakeSpoilDay(item), safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
           parasiteRisk: item.parasiteRisk };

@@ -2487,14 +2487,18 @@
       const kcal = (item.kcalEach || 0) * (item.units || 1);
       const cap = this.pantryCapKcal();
       if (this.pantryKcal() + kcal > cap) return false;
-      vv.pantry.push({
+      // GRANARY UNWIND (forager break-it 2026-10-11): granaryDays records the
+      // shelving bonus baked into spoilDay below, so takes subtract it back —
+      // otherwise the deposit/take shuttle grows the clock every cycle.
+      const _gb = (this.granarySpoilBonus && isFinite(item.spoilDay)) ? this.granarySpoilBonus(item.foodState) : 0;
+      const _entry = {
         name: item.name || 'Finished food', plantId: item.plantId,
         kcalEach: item.kcalEach, units: item.units,
         // GRANARY (haven growth 2026-10-10): cool dark bins slow spoilage
         // (+3d fresh, +14d preserved). Immortal-clock items (spoilDay 9999)
         // are left alone. SPOILDAY HONESTY (break-it food r5): `??` not `||` —
         // a spoilDay of 0 is a real (rotten) clock, not a missing one.
-        spoilDay: (item.spoilDay ?? 9999) + ((this.granarySpoilBonus && isFinite(item.spoilDay)) ? this.granarySpoilBonus(item.foodState) : 0),
+        spoilDay: (item.spoilDay ?? 9999) + _gb,
         unit: item.unit,
         safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
@@ -2511,7 +2515,9 @@
         // TRICHINOSIS (break-it food 2026-10-10): parasiteRisk rides the same
         // contract — the pantry never washes worms (only a real cooking does).
         parasiteRisk: item.parasiteRisk,
-      });
+      };
+      if (_gb > 0) _entry.granaryDays = _gb;
+      vv.pantry.push(_entry);
       vv.pantryKcal = vv.pantry.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
       return true;
     },
