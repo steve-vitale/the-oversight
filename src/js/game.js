@@ -24485,13 +24485,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const isP = this.isPlayer(vid);
       const nm = isP ? 'you' : this.displayName(vid);
       const first = isP ? 'You' : String(nm || 'Someone').split(' ')[0];
+      // BEAT CAST (journey landing r2 2026-10-11): the old player branch
+      // hardcoded "Mara corners you by the fire" — the F2 fixed-cast phantom
+      // class; no Mara exists in the generated 12-person roster. The
+      // confronter is a real living non-player villager via _beatCast,
+      // same as the F2 arrival/homecoming beats.
+      const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
+      const confronter = cast[0] ? this.displayName(cast[0]) : 'Someone';
       try {
         const v = this.state.village;
         v.trust = v.trust || {};
         v.trust[vid] = Math.max(0, (v.trust[vid] == null ? 15 : v.trust[vid]) - 10);
       } catch (e) {}
       this.say(isP
-        ? `Mara corners you by the fire. "We all eat from the same pot. You've been taking more than you bring for a while now. That can't continue — the village will decide." (Warning: pull weight or face a moot.)`
+        ? `${confronter} corners you by the fire. "We all eat from the same pot. You've been taking more than you bring for a while now. That can't continue — the village will decide." (Warning: pull weight or face a moot.)`
         : `${first} gets told straight: pull weight or the village will decide. The words hang in the air all evening. (Trust -10.)`);
       try { this.remember(vid, 'warned', 'freeloading warning'); } catch (e) {}
     },

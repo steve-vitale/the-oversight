@@ -2295,12 +2295,18 @@
       if (lostPantry.length) {
         // LEGIBILITY: the village names the loss in its own voice AND the fix.
         // When the player already knows smoking, the village just mutters;
-        // when they don't, Old Mara teaches it outright.
+        // when they don't, a real roster villager teaches it outright.
+        // (journey landing r2 2026-10-11: the old line hardcoded "Old Mara" —
+        // the F2 fixed-cast phantom class; no Mara exists in the generated
+        // 12-person roster. Beats name real villagers via _beatCast, same
+        // as the F2 arrival/homecoming beats.)
         const names = [...new Set(lostPantry)].join(', ');
         if (this.knowsTechnique('preserve')) {
           this.say(`The village threw out spoiled stores: ${names}. Someone mutters about the smoke rack going cold. (pantry)`);
         } else {
-          this.say(`The village threw out spoiled stores: ${names}. Old Mara mutters: "Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there." (pantry)`);
+          const cast = (typeof this._beatCast === 'function') ? this._beatCast(1) : [];
+          const who = cast[0] ? this.displayName(cast[0]) : 'Someone';
+          this.say(`The village threw out spoiled stores: ${names}. ${who} mutters: "Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there." (pantry)`);
         }
       }
       // CORPSE ROT (Steve 2026-10-06): meat left on a body rots there.
