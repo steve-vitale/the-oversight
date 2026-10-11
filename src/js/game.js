@@ -23275,6 +23275,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const sch = this.state.scholar;
       if (!sch || !abilityId) return;
       context = context || {};
+      // USE-LOG HYGIENE (longsim abilities 2026-10-11): the log feeds
+      // synergy discovery's "seen earlier today / same part" checks, and it
+      // caps at 40 entries. Six call sites logged "uses" for abilities the
+      // scholar doesn't hold (cold_blooded/hollow_bones on travel,
+      // rain_dancer on dowsing-in-rain, grave_robber on scavenge,
+      // photosynthesis/third_eye on forage, chitin_skin on ANY damage
+      // taken) — flooding the window and evicting real uses, which broke
+      // sequential/simultaneous pairing for players who DID hold the legs.
+      // Only held abilities log. Tech/skill synthesis ids (bare, non-synthetic
+      // only when known) aren't abilities and still pass through.
+      if (!context.synthetic) {
+        const cx = this.state.codex || {};
+        const isTechOrSkill = !!((cx.techniques || {})[abilityId]) ||
+          !!(((cx.skills || {})[abilityId] || {}).level);
+        if (!isTechOrSkill && (this.abilityLevel(abilityId) || 0) < 1) return;
+      }
       const day = (this.state.village && this.state.village.day) || (sch.day || 1);
       const part = this.dayPart || 0;
       sch.abilityUseLog = sch.abilityUseLog || [];
