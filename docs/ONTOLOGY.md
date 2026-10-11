@@ -1022,6 +1022,20 @@ Wave 3 batch C signature combat mechanics (Steve 2026-10-10). THE CALLBACK wears
 
 **Consumes:** tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbDamage, tbEndCheck, tbRefreshTelegraphUI, encSubject, corpses, convLineLog, havenViewership, say
 
+### spawn-knack (`spawn-knack.js`)
+The spawn knack — a mysterious latent first ability chosen in the spawn sequence, pre-System. Backstory-rooted, unexplained.
+
+**Provides:** knackChoicesFor(char), chooseKnack(id), grantVillagerKnacks(), npcKnack(vid), knackGossipLine(tellerVid, targetVid), knackDef(id)
+
+**Rules:**
+- latent_knack_not_system: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer; zero System chrome in copy or UI)
+- latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
+- knack_fills_slot_1: true (code: spawn-knack.js — chooseKnack pushes to s.abilities; the day-7 gift waits honestly for slot 2)
+- knack_lifeseed_tied: true (code: spawn-knack.js — choices derive from char.lifeseed.skillOrigins; memories fill {kin}/{place} from the seed)
+- villager_knacks_quiet: true (code: spawn-knack.js — villagers get knacks via lifeseed; gossip-visible, never UI)
+
+**Consumes:** Game.data.abilities (latent_knack pool), village.rosterChars.lifeseed (skillOrigins, people, places)
+
 ### sprites (`sprites.js`)
 Custom SVG sprite registry for the visual identity law.
 

@@ -13022,6 +13022,32 @@
     });
   }
 
+  // knackSheet: the spawn knack choice. Quiet, pre-System — no System chrome.
+  // This is a moment of self-recognition, not an offer. The framing is
+  // feeling/dream/quiet: no 🎁, no "PICK A TRICK", no System voice.
+  // Modal: the knack is the first rung of the level-up ladder — it must be
+  // named. (spawn-knack 2026-10-11)
+  function knackSheet() {
+    const choices = Game.state.scholar.knackChoices;
+    if (!choices || !choices.length) return;
+    openSheet({
+      id: 'knack-choice',
+      title: '\u{1F4AD} Something you never told anyone',
+      html:
+        '<p>The fire crackles. Twelve strangers breathe in the dark around you.</p>' +
+        '<p>And under all of it \u2014 under the fear, under the wrong-colored sky \u2014 something in you is awake. It\u2019s always been there. A knack. A trick you learned long ago that you never could explain, so you never mentioned it.</p>' +
+        '<p>The world ended. It didn\u2019t take this. If anything, it\u2019s louder now.</p>' +
+        '<p>Which one is it?</p>',
+      buttons: choices.map(c => ({
+        label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.description || c.desc) + '</span>' +
+          (c.memory ? '<br><i class="small">' + esc(c.memory) + '</i>' : ''),
+        primary: true,
+        onClick: () => { Game.chooseKnack(c.id); refresh(); },
+      })),
+      priority: 90, modal: true, dismissible: false,
+    });
+  }
+
   // AUTOSAVE: the phone kills background tabs. Save aggressively.
   // When you switch to Muse chat and back, your game must still be there.
   document.addEventListener('visibilitychange', () => {
@@ -14792,8 +14818,23 @@
     try {
       if (document.querySelector('.system-arrival-overlay')) return;
     } catch (e) {}
+    // SPAWN KNACK (2026-10-11): the quiet pre-System choice queues first —
+    // it fills slot 1 and must be named before the System's gift arrives.
+    if (s.knackChoices && s.knackChoices.length && !sheetQueued('knack-choice')) {
+      knackSheet();
+    }
     if (s.abilityChoices && s.abilityChoices.length && !sheetQueued('offer-ability')) {
-      abilitySheet();
+      // SLOT HONESTY (spawn-knack 2026-10-11): the knack fills slot 1, so the
+      // day-7 gift needs slot 2 (integration 20). If no slot is free, the
+      // gift WAITS — announced once, held pending, never silently eaten.
+      // The integrate() wrapper announces when the slot opens.
+      const free = Game.abilitySlots() - ((s.abilities || []).length);
+      if (free > 0) {
+        abilitySheet();
+      } else if (s._offerWaitFor !== s.abilityChoices) {
+        s._offerWaitFor = s.abilityChoices;
+        Game.say('\u{1F381} "We have a gift for you! ...Oh. You\u2019re FULL. One little slot and you filled it before we even got here. Rude! FINE \u2014 we\u2019ll hold it. It\u2019ll be here when you can hold more of you." (The System\u2019s gift waits for a free ability slot.)');
+      }
     }
     if (s.relicChoices && !sheetQueued('offer-relic')) {
       relicSheet();

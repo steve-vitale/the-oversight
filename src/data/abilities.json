@@ -1972,5 +1972,197 @@
     "paths": [
       "brawler"
     ]
+  }  ,
+  {
+    "description": "You can smell water. And fear. You've never told anyone \u2014 people look at you funny when you find things by smell.",
+    "id": "bloodhound",
+    "knackOrigins": [
+      "tracking"
+    ],
+    "memory": "You found {kin}'s lost tools by smell alone, near {place}. Nobody could explain it. You stopped trying to.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "hunt.find_chance",
+        "value": 1.3
+      }
+    ],
+    "name": "Bloodhound",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "Animals go quiet around you. Not tame \u2014 listening. Like they're waiting to see what you'll do.",
+    "id": "beast_calm",
+    "knackOrigins": [
+      "husbandry"
+    ],
+    "memory": "The mean dog at {place} \u2014 the one that bit everyone \u2014 let you touch it. {kin} saw. {kin} never looked at you quite the same way.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "monster.detect_chance",
+        "value": 0.75
+      }
+    ],
+    "name": "Beast-calm",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "Plants lean toward you. You know which ones are thirsty, which are sick, which are hiding something good. You've always known.",
+    "id": "green_whisper",
+    "knackOrigins": [
+      "food"
+    ],
+    "memory": "{kin} said you had a way with growing things. What you had was a way of knowing. The plants told you what they needed.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "forage.gift_chance",
+        "value": 1.4
+      }
+    ],
+    "name": "Green Whisper",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "You've eaten things that should have killed you. They didn't. Your stomach is a matter of local legend.",
+    "id": "iron_gut",
+    "knackOrigins": [
+      "butchery",
+      "canning"
+    ],
+    "memory": "{kin} dared you to eat the thing. You did. Then you ate more. The story got bigger every year. The stomach stayed the same.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "food.poison_chance",
+        "value": 0.6
+      }
+    ],
+    "name": "Iron Gut",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "The dark never bothered you. You see shapes in it that others miss \u2014 movement, mostly. You're always watching the movement.",
+    "id": "night_eyes",
+    "knackOrigins": [
+      "trapping",
+      "fishing"
+    ],
+    "memory": "You'd sit up at {place} watching the dark. {kin} asked what you were looking at. \u2018Everything,\u2019 you said. You meant it.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "stealth.move_silent",
+        "value": 1.3
+      }
+    ],
+    "name": "Night Eyes",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "You've never been lost. Not once. Even in places you've never been, your feet know the way.",
+    "id": "pathfinder",
+    "knackOrigins": [
+      "navigation"
+    ],
+    "memory": "You walked {kin} home through {place} in the dark \u2014 no map, no light. \u2018How did you know the way?\u2019 You didn't. Your feet did.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "travel.cost_mult",
+        "value": 0.85
+      }
+    ],
+    "name": "Pathfinder",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "Your hands don't shake. Ever. Not when you're scared, not when it matters. They just do the work.",
+    "id": "still_hands",
+    "knackOrigins": [
+      "mending",
+      "sewing"
+    ],
+    "memory": "{kin} watched you work once and went quiet. \u2018Your hands don't shake,\u2019 they said, like it was a question. You didn't have an answer.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "craft.success",
+        "value": 1.3
+      }
+    ],
+    "name": "Still Hands",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "You feel weather coming in your bones, a day out. It's never been wrong. Nobody taught you \u2014 the sky just tells you.",
+    "id": "storm_ear",
+    "knackOrigins": [
+      "forecast"
+    ],
+    "memory": "{kin} used to laugh when you'd call rain under a clear sky. Then the rain came. They stopped laughing.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "water.rain_catch",
+        "value": 1.5
+      }
+    ],
+    "name": "Storm-ear",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
+  },
+  {
+    "description": "Wounds close a little faster when your hands are on them. Not miracles \u2014 just faster. You don't know why. You've stopped asking.",
+    "id": "the_touch",
+    "knackOrigins": [
+      "medicinal"
+    ],
+    "memory": "When {kin} got hurt, your hands just knew where to press. They looked at you funny after. You learned not to mention it.",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "healing.amount",
+        "value": 1.3
+      }
+    ],
+    "name": "The Touch",
+    "pool": "latent_knack",
+    "unlock": {
+      "type": "latent_knack"
+    }
   }
 ]
