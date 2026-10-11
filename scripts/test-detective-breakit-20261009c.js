@@ -126,7 +126,7 @@ function check(name, cond, detail) {
   check('C1b starts as a lead', leadBefore, JSON.stringify(d.evidence));
   // now hear their story: ask 'past' with the lie live → cover claimed + stamp
   String(Game.convoAskTopic(vid, 'past') || ''); say();
-  const stamped = (d.evidence || []).some(e => /own story \(day/.test(String(e)));
+  const stamped = (d.evidence || []).some(e => /own story.*\(day/.test(String(e)));
   check('C1c story-heard stamp landed', stamped, JSON.stringify(d.evidence));
   // the engine's lead test must now say "not a lead"
   const isLead = Game.doubtIsLead ? Game.doubtIsLead(d) : (d.evidence || []).some(e => /haven't heard/.test(String(e)));

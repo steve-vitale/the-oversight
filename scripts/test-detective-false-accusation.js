@@ -101,7 +101,9 @@ const innocent = (roster) => roster.find(vid => {
   const lead = Game.getDoubts(vid3).find(d => d.kind === 'gossip');
   ok(!!lead && lead.evidence.some(e => String(e).includes("haven't heard")), 'lead carries "haven\'t heard" evidence');
   Game.trackClaimSilent(vid3, 'occupation', 'miller'); // hear their story (convo path)
-  ok(lead.evidence.some(e => String(e).includes("own story (day")), 'evidence stamped with heard-their-story', lead.evidence);
+  // STAMP FORMAT (detective 2026-10-11): stamps carry the claim's field —
+  // [occupation] — so cross-field chats can't expire the lead.
+  ok(lead.evidence.some(e => /own story \[occupation\] \(day/.test(String(e))), 'evidence stamped with field-tagged heard-their-story', lead.evidence);
 
   // ---- 4. true positive control: real liars are NOT punished as false ----
   console.log('4. control: confronting a real liar never records wrongly_accused');

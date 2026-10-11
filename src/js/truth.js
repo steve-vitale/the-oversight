@@ -37,6 +37,8 @@
 //   - plot_backed_doubts: a doubt tagged caseId with a live (open/dormant) case and the vid still a real participant (accused, or exposed fabricating accuser) resolves as 'pressed' — the accusation stands, they hold their story, the case record keeps what was earned; no false-accuser machinery ever fires on a real plot (code: plotBehindDoubt, confrontDoubt)
 //   - windup_owns_the_accusation: the tentative no-lie windup ("help me understand it") applies ONLY to tentative kinds (behavior, gossip lead); a real accusation that lands empty keeps its accusatory windup so the 'cleared' punishment narrates the scene that played (code: confrontWindup, r13 2026-10-10)
 //   - lead_expiry: a gossip lead stops being tentative once the story is heard — doubtIsLead checks the story-heard stamp, not just the stale "haven't heard" marker (code: doubtIsLead, confrontWindup, confrontDoubt, convoChoices)
+//   - lead_expiry_field_scoped: the story-heard stamp carries the claim's field ([occupation]/[origin]) and only expires leads about THAT field — a goal chat leaves an occupation lead tentative, so the menu/windup never turn accusatory over a story never heard and a baseless clear never runs the false-accuser punishment (code: stampHeardStory, doubtIsLead)
+//   - slip_label_honest: the confrontation menu names a verbal slip as a slip — the old generic "I've been watching" label lied about where the doubt came from (code: convoChoices wrapper)
 //   - slip_crack_only: slip lines name the cover's crack, never the truth — origin/goal slips match the occupation discipline (code: truthLinePools slipOrigin/slipGoal)
 //   - stale_before_field_fallback: a confessed lie matching the doubt's evidence resolves as already-confessed before any fallback; the fallback matches the doubt's own field only, never a kind-guess (code: confrontDoubt)
 //   - observe_wariness_bites: true (code: observePerson — 'observed' memories (14d, hit or miss) cut detectChance 0.08 each, floor 0.05; observer's own intellect drives the bonus, not the target's)
@@ -555,20 +557,29 @@
       }
       arr.push({ claim, day: day(), via: 'talk' });
       if (arr.length > 6) arr.shift();
-      try { this.stampHeardStory(vid, claim); } catch (e) {}
+      try { this.stampHeardStory(vid, claim, field); } catch (e) {}
     },
 
     // GOSSIP-FIRST LEAD FOLLOW-UP (detective feel 2026-10-08): a lead doubt
     // formed before you heard their story carries "you haven't heard X's
     // own story yet" in its evidence. Once a claim is on file, stamp the
     // evidence so the doubt reads as a timeline instead of going stale.
-    stampHeardStory(vid, claim) {
+    // FIELD SCOPING (detective playtest 2026-10-11): the stamp used to land
+    // on EVERY open gossip doubt of the villager whenever ANY claim was
+    // tracked — hearing their GOAL story expired a lead about their
+    // OCCUPATION. doubtIsLead flipped false, the menu/windup turned
+    // accusatory over a story never heard, and a baseless clear ran the
+    // full false-accuser punishment for a question that was never an
+    // accusation (H1 copy lie). The stamp now carries the claim's field and
+    // only lands on leads about that field.
+    stampHeardStory(vid, claim, field) {
       const first = this.firstRef(vid);
       for (const d of (this.state.codex.doubts || [])) {
         if (d.resolved || d.vid !== vid || d.kind !== 'gossip') continue;
+        if (field && d.field && d.field !== field) continue;
         if (d.evidence.some(e => String(e).includes("haven't heard")) &&
             !d.evidence.some(e => String(e).includes('heard their own story'))) {
-          d.evidence.push(`heard ${first}'s own story (day ${day()}) — "${claim}"`);
+          d.evidence.push(`heard ${first}'s own story${field ? ` [${field}]` : ''} (day ${day()}): "${claim}"`);
         }
       }
     },
@@ -725,11 +736,23 @@
     // contradiction is earned — the stale "haven't heard" marker must not
     // keep the doubt tentative forever, or the windup stays soft and clears
     // stay neutral for earned contradictions (detective break-it 2026-10-09c).
+    // FIELD-AWARE (detective playtest 2026-10-11): stamps carry the field
+    // they were heard for ([occupation], [origin]). A lead expires only on a
+    // stamp for ITS field — a goal chat must not earn an occupation
+    // accusation. Legacy untagged stamps predate field scoping and keep
+    // their old meaning (they expire any lead).
     doubtIsLead(doubt) {
       const ev = (doubt && doubt.evidence) || [];
       const marked = ev.some(e => /haven't heard/.test(String(e)));
-      const heard = ev.some(e => /own story \(day/.test(String(e)));
-      return marked && !heard;
+      if (!marked) return false;
+      const field = doubt && doubt.field;
+      const heard = ev.some(e => {
+        const m = String(e).match(/own story(?: \[(\w+)\])? \(day/);
+        if (!m) return false;
+        if (!m[1]) return true; // legacy untagged stamp: counts
+        return !field || m[1] === field;
+      });
+      return !heard;
     },
 
     // ---- observation ----
@@ -1722,7 +1745,7 @@
     const last = arr[arr.length - 1];
     if (!last || last.claim !== claim) arr.push({ claim, day: day(), via: 'talk' });
     if (arr.length > 6) arr.shift();
-    try { this.stampHeardStory(vid, claim); } catch (e) {}
+    try { this.stampHeardStory(vid, claim, field); } catch (e) {}
   };
 
   // 2. convoChoices: add confrontation when unresolved doubts exist.
@@ -1761,6 +1784,11 @@
             ? (this.doubtIsLead(d)
               ? `"Someone said something about you. I wanted to hear your side."`
               : `"Someone told me something about you that doesn't match. Explain."`)
+            // HONEST (detective playtest 2026-10-11): a slip is verbal, not
+            // watched — the old generic label ("I've been watching...") lied
+            // about where the doubt came from.
+            : d.kind === 'slip'
+            ? `"You said something odd the other day. Let's talk about it."`
             : `"I've been watching. Things don't add up. Talk to me."`;
           const item = { id: 'confront:' + d.id, label };
           // insert before 'leave'; if at cap, drop a topic ask to make room
