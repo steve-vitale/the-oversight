@@ -82,11 +82,13 @@ function endTurn(Game) {
   ok('4 w1 points (one short): not wave 2', Game.unlockedWave() === 1, 'got ' + Game.unlockedWave());
   setState(7, { 1: 5 }, () => 'village');
   ok('day 7 + 5 w1 points: not wave 2 (day floor)', Game.unlockedWave() === 1, 'got ' + Game.unlockedWave());
-  // wave 3: day 25 + 5 w2 points
+  // wave 3: day 25 + 4 w2 points (bar calibrated 5->4, 2026-10-11)
   setState(25, { 2: 5 }, () => 'village');
   ok('day 25 + 5 w2 points: wave 3', Game.unlockedWave() === 3, 'got ' + Game.unlockedWave());
   setState(25, { 1: 5, 2: 4 }, () => 'global');
-  ok('4 w2 points (one short): not wave 3', Game.unlockedWave() === 2, 'got ' + Game.unlockedWave());
+  ok('day 25 + 4 w2 points: wave 3 (calibrated bar)', Game.unlockedWave() === 3, 'got ' + Game.unlockedWave());
+  setState(25, { 1: 5, 2: 3 }, () => 'global');
+  ok('3 w2 points (one short): not wave 3', Game.unlockedWave() === 2, 'got ' + Game.unlockedWave());
   // wave 4: 4 w3 points + regional
   setState(60, { 3: 4 }, () => 'regional');
   ok('4 w3 points + regional: wave 4', Game.unlockedWave() === 4, 'got ' + Game.unlockedWave());

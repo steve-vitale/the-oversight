@@ -10,7 +10,7 @@
 //   - ledgerProgressLine()
 // rules:
 //   - ledger_kills_only: true (code: waveLedger.js — scoreLedgerKill is fed ONLY by recordWaveKill; engagements/flees/evades score nothing)
-//   - ledger_counter_convention: true (code: waveLedger.js — monsterCounterKnown: state.monsterCounters[id]===true AND the monster def carries a `counter` field; no def has one yet, so the mastery bonus is dormant — a kill never scores less than 1)
+//   - ledger_counter_convention: true (code: waveLedger.js — monsterCounterKnown: state.monsterCounters[id]===true AND the monster def carries a `counter` field; wave 1-2 defs all carry counter data, so the mastery bonus is LIVE since 2026-10-10 — a kill never scores less than 1)
 //   - ledger_per_type_cap: 2 (code: waveLedger.js — perTypeCap; breadth over farming)
 //   - ledger_announce_idempotent: true (code: waveLedger.js — 50%/full beats fire once per wave via state._ledgerAnn50/_ledgerAnnFull)
 //   - ledger_survives_scholar: true (code: waveLedger.js — ledgerState lives on this.state, not this.state.scholar)

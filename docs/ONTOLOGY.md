@@ -330,7 +330,7 @@ Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu 
 - thread_dry_collapse: "tell me more" is offered only while the thread has beats — once dry, the option disappears and the menu winds down instead of looping the admission line (code: buildMenu + dlg:more/dlg:react, 2026-10-06)
 - substantive_light_set: bare acknowledgments (goon/leave/recap/dlg:react/dlg:more/agree/joke/silence/nv:nod/nv:smile/nv:pointself) never flip c.substantive — only real engagement earns endConvo's mood residue, talk-capped at 40 (code: convoTurn wrapper + convoMarkSubstantive, break-it 2026-10-09 r8)
 - want_arc_in_handlers: every dlg: handler advances the want via convoWantEngage (engage/deflect/commit) and speaks the want def's beats — the want is the spine, not a post-turn afterthought (code: dlg:help/dlg:commit/dlg:heed/dlg:stay/dlg:cant/dlg:comfort, rebuild 2026-10-11)
-- emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript, feed) (code: every handler, rebuild 2026-10-11)
+- emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript; ONE TEXT STREAM 2026-10-11: no narration-feed echo) (code: every handler, rebuild 2026-10-11)
 - soft_probe_mounts_evidence: "That doesn't add up" is a real verb, not flavor — it mounts 'prodded' evidence on the first open doubt and the NPC visibly rattles with repeated prods (code: dlg:doubt handler, Steve 2026-10-06)
 
 **Consumes:** village.villagers, state.convos, convoGet(vid), buildMenu(vid) / convoChoices(vid) (conversation.js — the single menu pipeline), playerVoice()
@@ -1114,7 +1114,7 @@ The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per r
 
 **Rules:**
 - ledger_kills_only: true (code: waveLedger.js — scoreLedgerKill is fed ONLY by recordWaveKill; engagements/flees/evades score nothing)
-- ledger_counter_convention: true (code: waveLedger.js — monsterCounterKnown: state.monsterCounters[id]===true AND the monster def carries a `counter` field; no def has one yet, so the mastery bonus is dormant — a kill never scores less than 1)
+- ledger_counter_convention: true (code: waveLedger.js — monsterCounterKnown: state.monsterCounters[id]===true AND the monster def carries a `counter` field; wave 1-2 defs all carry counter data, so the mastery bonus is LIVE since 2026-10-10 — a kill never scores less than 1)
 - ledger_per_type_cap: 2 (code: waveLedger.js — perTypeCap; breadth over farming)
 - ledger_announce_idempotent: true (code: waveLedger.js — 50%/full beats fire once per wave via state._ledgerAnn50/_ledgerAnnFull)
 - ledger_survives_scholar: true (code: waveLedger.js — ledgerState lives on this.state, not this.state.scholar)

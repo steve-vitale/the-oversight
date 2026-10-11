@@ -44,7 +44,7 @@ const ok = (name, cond, detail) => {
   // config is live from the JSON levers
   const cfg = Game.waveLedgerCfg();
   ok('config loads (pointsPerKill=1)', cfg.pointsPerKill === 1, JSON.stringify(cfg.pointsPerKill));
-  ok('config loads (barsPerWave 1..5)', cfg.barsPerWave[1] === 5 && cfg.barsPerWave[2] === 5 &&
+  ok('config loads (barsPerWave 1..5)', cfg.barsPerWave[1] === 5 && cfg.barsPerWave[2] === 4 && // calibrated 2026-10-11 (was 5)
     cfg.barsPerWave[3] === 4 && cfg.barsPerWave[4] === 3 && cfg.barsPerWave[5] === 2,
     JSON.stringify(cfg.barsPerWave));
   ok('config loads (dayFloor=25, wave2DayFloor=8)', cfg.dayFloor === 25 && cfg.wave2DayFloor === 8);

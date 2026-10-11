@@ -212,17 +212,22 @@ scholar; a new adventurer inherits the village's ledger).
   `pointsPerCounterKill`** (default 2) — a kill executed with the monster's
   *discovered* counter (mastery bonus). The convention
   (`Game.monsterCounterKnown`): `state.monsterCounters[id] === true` AND the
-  monster def carries a `counter` field. Verified 2026-10-10: NO monster def
-  has counter data yet — the bonus is **dormant** (the parallel
-  signature-mechanics loop will adopt the convention; until then kills never
-  score less than 1, never punished).
+  monster def carries a `counter` field. Verified 2026-10-10: wave 1-2 defs
+  ALL carry counter data — the bonus is **LIVE** (measured 2026-10-11: 15
+  counter-bonus ledger points across 20 longsim runs; kills never score less
+  than 1, never punished).
 - **Per monster-type cap `perTypeCap`** (default 2) per wave — breadth, not
   farming. The 3rd kill of the same type in the same wave scores 0.
-- **Bars `barsPerWave` = {"1":5,"2":5,"3":4,"4":3,"5":2}** — Steve's settled
+- **Bars `barsPerWave` = {"1":5,"2":4,"3":4,"4":3,"5":2}** — Steve's settled
   bars, now POINT thresholds. To unlock wave N+1, wave N's ledger must reach
   barsPerWave[N]. **This is the pacing dial Steve will turn** ("It doesn't
   sound like this will scale for a 100 day game. But write the system and we
   can turn the rest of the levers." — calibration comes later, via sims).
+  CALIBRATION 2026-10-11 (longsim wave lever, 20 seeds x200d): the wave-2 bar
+  was 5 — the binding constraint on wave 3 (4/20 runs reached it, median fill
+  day 58 vs the day-25 floor; the bar, not the floor, blocked). Lowered to 4:
+  wave-3 reach 4/20 -> 6/20, four existing unlocks 1-11 days earlier, breadth
+  preserved (4 points still needs 2+ monster types at perTypeCap=2).
 - **Day floors:** wave 2 needs day >= `wave2DayFloor` (8); waves 3+ need day
   >= `dayFloor` (25). Floors, never scripts.
 - **Scale gates unchanged:** wave 4 needs scaleRank >= 'regional', wave 5 >=
@@ -255,9 +260,9 @@ deed gate.
 | Lever | Default | Turning it up | Turning it down |
 |---|---|---|---|
 | `pointsPerKill` | 1 | kill throughput; waves unlock faster per body | slower unlocks per kill; counter bonus matters relatively more |
-| `pointsPerCounterKill` | 2 | mastery reward weight — rewards learning counters (dormant until counter data ships) | flattens mastery (1 = no bonus at all) |
+| `pointsPerCounterKill` | 2 | mastery reward weight — rewards learning counters (LIVE since 2026-10-10: wave 1-2 defs carry counter data) | flattens mastery (1 = no bonus at all) |
 | `perTypeCap` | 2 | lets players farm one monster type longer (weaker breadth pressure) | forces breadth: 1 = every kill must be a new type (hardest) |
-| `barsPerWave` | {5,5,4,3,2} | THE pacing dial: higher bars delay every wave's unlock, stretching the 100-day game | lower bars accelerate the escalation; 1 = nearly instant |
+| `barsPerWave` | {5,4,4,3,2} (calibrated 2026-10-11; was {5,5,4,3,2}) | THE pacing dial: higher bars delay every wave's unlock, stretching the 100-day game | lower bars accelerate the escalation; 1 = nearly instant |
 | `dayFloor` / `wave2DayFloor` | 25 / 8 | calendar floors rise — unlocks can't arrive before the floor no matter the kills | floors drop — reactive kills can unlock waves very early |
 | `counterBonusEnabled` (per wave) | all true | kill-switch for the mastery bonus: false on a wave means counter kills score 1 there | (same dial, per-wave granularity) |
 

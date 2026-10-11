@@ -79,9 +79,9 @@ async function main() {
   // w3: day floor holds
   setDay(24); setLedger({ 2: W2 }); setFaced([]);
   check('w3 day floor (day 24, ledger full) stays locked', Game.unlockedWave() < 3, 'uw=' + Game.unlockedWave());
-  // w3: bar is 5, not 4
-  setDay(30); setLedger({ 2: W2.slice(0, 4) }); setFaced([]);
-  check('w3 needs 5 points (4 is not enough)', Game.unlockedWave() < 3, 'uw=' + Game.unlockedWave());
+  // w3: bar is 4, not 3 (calibrated 5->4, 2026-10-11)
+  setDay(30); setLedger({ 2: W2.slice(0, 3) }); setFaced([]);
+  check('w3 needs 4 points (3 is not enough)', Game.unlockedWave() < 3, 'uw=' + Game.unlockedWave());
 
   // w4: ledger lane — 4 w3 points + regional
   setDay(60); setLedger({ 3: W3 }); setFaced([]); setRank('regional');

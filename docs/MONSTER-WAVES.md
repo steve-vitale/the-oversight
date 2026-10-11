@@ -48,12 +48,12 @@ feel it.
 | mosquito | Giant freakish mosquito — plainly called "mosquito" (the shock is that it's just a mosquito). Alien-disease vector: bite can land Eurika virus or East Nile virus (see docs/DISEASES.md) | rush | crepuscular |
 | tick | Giant freakish tick — plainly called "tick". Latches on; vector for Lemons disease (alien pool, see docs/DISEASES.md) | single | both |
 
-## Wave 3: The Final Draft (day 25 + 5 wave-2 LEDGER points — kills only)
+## Wave 3: The Final Draft (day 25 + 4 wave-2 LEDGER points — kills only)
 
 The System stops pretending these are animals at all. The horror: it was
 never an animal. Gating logic lives in `unlockedWave()` (game.js): day 25+
-AND the wave-2 ledger reaches 5 points (kills only — 1 point per kill, 2 per
-counter-kill, 2-point per-type cap). Levers in `src/data/wave-ledger.json`;
+AND the wave-2 ledger reaches 4 points (kills only — 1 point per kill, 2 per
+counter-kill, 2-point per-type cap; bar calibrated 5->4, 2026-10-11). Levers in `src/data/wave-ledger.json`;
 see docs/PROGRESSION.md section 12.
 (HISTORY: an older plan gated it on integration 80+ — superseded. The
 bal-waves engagement lanes (2026-10-10, facing/fleeing counts as "faced")
@@ -263,8 +263,9 @@ known kills score 2 ledger points instead of 1 (perTypeCap 2, never less than
   `pierce` added to the schema 2026-10-10 — the armor-pierce hook's first real
   assignments).
 - `Game.monsterWavePool()` in game.js: filters by `unlockedWave()` — the WAVE
-  LEDGER (2026-10-10, Steve's reversal of 8730921c): day 8 + 5 wave-1 ledger
-  points (kills only) for wave 2; day 25 + 5 wave-2 ledger points for wave 3;
+  LEDGER (2026-10-10, Steve's reversal of 8730921c; w2 bar calibrated 5->4,
+  2026-10-11): day 8 + 5 wave-1 ledger
+  points (kills only) for wave 2; day 25 + 4 wave-2 ledger points for wave 3;
   4 wave-3 ledger points + scaleRank >= 'regional' for wave 4;
   3 wave-4 ledger points + scaleRank >= 'national' for wave 5. Levers:
   `src/data/wave-ledger.json`; docs/PROGRESSION.md section 12.

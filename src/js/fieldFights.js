@@ -573,17 +573,23 @@
     // fieldFightSummary(rec, vName, mName) -> one honest sentence for gossip/news
     fieldFightSummary: function (rec, vName, mName) {
       var r = rec.rounds;
+      var rounds = r + ' round' + (r === 1 ? '' : 's');
+      // mName may already carry its own article ("The Loud Beast" via
+      // monsterNoun) — never double it. (longsim wave lever 2026-10-11:
+      // awayNews read "the The Loud Beast".)
+      var bare = String(mName || 'beast').replace(/^(the|a|an)\s+/i, '');
+      var The = 'The ' + bare, the = 'the ' + bare;
       if (rec.outcome === 'alreadyDead')
-        return 'The ' + mName + ' was already dead when ' + vName + ' found it — old news, not a kill.';
+        return The + ' was already dead when ' + vName + ' found it — old news, not a kill.';
       if (rec.outcome === 'vKill')
-        return vName + ' killed the ' + mName + ' alone — ' + r + ' rounds, ' + rec.vTaken + ' taken. Word travels fast.';
+        return vName + ' killed ' + the + ' alone — ' + rounds + ', ' + rec.vTaken + ' taken. Word travels fast.';
       if (rec.outcome === 'mFlee')
-        return vName + ' stood down the ' + mName + ' and kept walking — ' + r + ' rounds, bloodied but breathing.';
+        return vName + ' stood down ' + the + ' and kept walking — ' + rounds + ', bloodied but breathing.';
       if (rec.outcome === 'vFlee')
-        return 'The ' + mName + ' mauled ' + vName + ' (-' + rec.vTaken + ' health) over ' + r + ' rounds. They\'re lucky to be breathing.';
+        return The + ' mauled ' + vName + ' (-' + rec.vTaken + ' health) over ' + rounds + '. They\'re lucky to be breathing.';
       if (rec.outcome === 'vDie')
-        return 'The ' + mName + ' killed ' + vName + ' in ' + r + ' rounds. The village mourns.';
-      return vName + ' met the ' + mName + ' and walked away from it.';
+        return The + ' killed ' + vName + ' in ' + rounds + '. The village mourns.';
+      return vName + ' met ' + the + ' and walked away from it.';
     },
   };
   Object.assign(G, methods);
