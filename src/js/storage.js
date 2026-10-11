@@ -1227,8 +1227,13 @@
     const wt = this.woodcutTier();
     const rank = TIER_RANK[wt.tier] || 0;
     // machete is MADE for this; an axe helps; bare hands are slow.
-    const ticks = rank >= TIER_RANK.brush ? 16 : rank >= TIER_RANK.fell ? 24 : 64;
-    const kcal = rank >= TIER_RANK.brush ? 20 : rank >= TIER_RANK.fell ? 30 : 50;
+    // TOOL LADDER (miser break-it 2026-10-11): the fell check must come
+    // FIRST — fell(4) satisfies `>= brush(2)`, so the old brush-first order
+    // made the axe branch dead code and the axe cleared brush in 16 ticks
+    // like a machete, contradicting the documented 24. Canon: machete 16 /
+    // axe 24 / hands 64.
+    const ticks = rank >= TIER_RANK.fell ? 24 : rank >= TIER_RANK.brush ? 16 : 64;
+    const kcal = rank >= TIER_RANK.fell ? 30 : rank >= TIER_RANK.brush ? 20 : 50;
     this.state.scholar.kcal = Math.max(0, this.state.scholar.kcal - kcal);
     this.addWood(1); // brushwood
     const fiber = 1 + Math.floor(Math.random() * 2);

@@ -93,6 +93,7 @@ cache greets you with disturbed earth and an empty hole.
   death; NPC armory/pharmacy honest consumption; bury-everything strand
   softlock attempt — held).
 - `scripts/test-miser-section-chronic-20261010.js` — 12 adversarial checks
+- `scripts/test-miser-cache-honesty-20261011.js` — 24 adversarial checks (bury/partial-take/dig unit + kcal conservation, heavy-cache dig refusal + portion-draw escape hatch, all-rot dig, clearBrush tool ladder honesty incl. the dead fell-branch fix, mixed-rot single announcement).
   (section chronic net-taker hole: 24 section takes of others' deposits were
   trust-free and invisible to _stashTotalNet; takeTool/_takeStashedItem now
   apply the -20 chronic block like takeMaterial; material control; donate-all
