@@ -261,7 +261,7 @@ deed gate.
 |---|---|---|---|
 | `pointsPerKill` | 1 | kill throughput; waves unlock faster per body | slower unlocks per kill; counter bonus matters relatively more |
 | `pointsPerCounterKill` | 2 | mastery reward weight — rewards learning counters (LIVE since 2026-10-10: wave 1-2 defs carry counter data) | flattens mastery (1 = no bonus at all) |
-| `perTypeCap` | 2 | lets players farm one monster type longer (weaker breadth pressure) | forces breadth: 1 = every kill must be a new type (hardest) |
+| `perTypeCap` | 2 | lets players farm one monster type longer (weaker breadth pressure) | forces breadth: 1 = every kill must be a new type (hardest) | CALIBRATION 2026-10-11 (longsim wave lever r2): 3 REJECTED — 20 seeds x200d identical vs cap 2: w1 bar filled 6d earlier but villages died faster (median survival 69d->50d, 0/20 reached day 200), w3 unlocks 6/20->4/20. The cap is a pacing brake on escalation, not just breadth pressure. |
 | `barsPerWave` | {5,4,4,3,2} (calibrated 2026-10-11; was {5,5,4,3,2}) | THE pacing dial: higher bars delay every wave's unlock, stretching the 100-day game | lower bars accelerate the escalation; 1 = nearly instant |
 | `dayFloor` / `wave2DayFloor` | 25 / 8 | calendar floors rise — unlocks can't arrive before the floor no matter the kills | floors drop — reactive kills can unlock waves very early |
 | `counterBonusEnabled` (per wave) | all true | kill-switch for the mastery bonus: false on a wave means counter kills score 1 there | (same dial, per-wave granularity) |

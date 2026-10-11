@@ -147,6 +147,8 @@ const BEAT_RE = /wave ledger|wave \d.*(unlock|released)|📺.*wave|beasttrick|co
 
       // ---- ledger detail ----
       const ledger = {};
+      let capNow = 2;
+      try { capNow = (Game.waveLedgerCfg && Game.waveLedgerCfg().perTypeCap) || 2; } catch (e) {}
       try {
         const wl = Game.state.waveLedger || {};
         const slain = Game.state.villageSlain || {};
@@ -160,9 +162,9 @@ const BEAT_RE = /wave ledger|wave \d.*(unlock|released)|📺.*wave|beasttrick|co
             perType[t] = {
               points: pts, kills, villKills: villK, playerKills: kills - villK,
               // counter-kill bonus extras: points beyond plain kills
-              // (each counter kill adds 1 extra; capped by perTypeCap)
+              // (each counter kill adds 1 extra; clipped by perTypeCap)
               counterBonusExtras: Math.max(0, pts - kills),
-              capHit: pts >= 2, // perTypeCap default 2
+              capHit: pts >= capNow, // perTypeCap from live config
             };
           }
           ledger[w] = { points: e.points | 0, perType };

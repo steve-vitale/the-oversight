@@ -9,6 +9,7 @@
 // rules:
 //   - fair-fight: the System threat-matches the beast to the contestant (Gap 4, 2026-10-10) — HP-matching produced hopeless routs that always ended in flight, so no villager ever died in a blood contest. Threat-matching makes competitive fights: real wins, real deaths. Gauntlet/siege escalate per wave (0.7/1.0/1.3); hardened runs 1.2x hotter. (code: contestBeastFor, _cxThreat, _cxBeastThreat, _cxBlood)
 //   - sealed-arena: pit/gauntlet/siege fights run with fieldFight noFlee — the System doesn't open the gate mid-fight; the fight runs to vKill/vDie/mFlee, round cap becomes a judges' call. (code: _cxBlood, Gap 4 2026-10-10)
+//   - contest-kills-score: villager vKills in blood/hide/beastmaster contests call recordWaveKill with the beast's real id — the ledger, villageSlain (beasttricks channel), and unlock beats see contest kills exactly like wild kills; mFlee/vFlee/evade score nothing on the ledger (8730921c reversal) but still feed the deed feed via the fieldFight wrap; honest win detail ('drove the beast off' / 'the beast would not engage', never 'killed the beast' for a non-kill). (code: _cxBlood, hide, beastmaster; longsim wave lever r2 2026-10-11)
 //   - duel: head-to-head via duelFight (to the yield — death only on massive overkill); a LONE duel contestant gets a System-cast sparring partner from the living roster (seeded stream, real duelFight) — never a canned loss; no partner -> honest 'no partner — forfeit' said aloud. (code: _cxDuelSingle, _cxDuelPartner; break-it 2026-10-09)
 //   - moot: caseScore = notability*2 + trust/10 + bravery/10 + temperament; p1 vs risk demand, p2 head-to-head with trust/notability tiebreaks. (code: mootResolve)
 //   - endurance: ordeals with honest costs — starve (health/day), drop (legs/speed/stamina), maw (nerve vs demand), vigil (bravery vs fear), exchange (team relay). (code: enduranceResolve)
@@ -324,6 +325,7 @@
       // pit/gauntlet/siege: real fights.
       const waves = (id === 'gauntlet' || id === 'siege') ? 3 : 1;
       const wave = this.unlockedWave ? this.unlockedWave() : 1;
+      let lastOut = null;
       for (let w = 1; w <= waves; w++) {
         const st = this._cxStats(pid);
         if (st.hp <= 0) return { outcome: 'died', detail: `fell on wave ${w}`, log };
@@ -358,8 +360,24 @@
         }
         // vKill / mFlee / evade: through to the next wave (evade in the
         // arena means the beast wouldn't engage — the System sends another).
+        // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): a real kill
+        // scores the ledger exactly like a wild kill — contests are fought,
+        // not rolled. (blank fixed: contest vKills never reached
+        // recordWaveKill, so the ledger, villageSlain, and unlock beats
+        // never saw them.)
+        if (rec.outcome === 'vKill') {
+          try { this.recordWaveKill(beast.id); } catch (e) {}
+          lastOut = 'vKill';
+        } else if (rec.outcome === 'mFlee') lastOut = 'mFlee';
+        else if (rec.outcome === 'evade') lastOut = 'evade';
       }
-      return { outcome: 'won', detail: waves > 1 ? `survived all ${waves} waves` : 'killed the beast', log };
+      // Honest detail: a drive-off is a win, but it is not a kill; a
+      // no-engage is a walkover, not a kill either.
+      const _bloodDetail = waves > 1 ? `survived all ${waves} waves`
+        : lastOut === 'mFlee' ? 'drove the beast off'
+        : lastOut === 'evade' ? 'the beast would not engage'
+        : 'killed the beast';
+      return { outcome: 'won', detail: _bloodDetail, log };
     },
 
     // ---- MOOT ----
@@ -575,6 +593,14 @@
               if (rec) {
                 if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
                 if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'found and killed', log };
+                else if (rec.outcome === 'vKill') {
+                  // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): the
+                  // seeker is a real wave-2 predator and this was a real
+                  // kill — it scores the ledger (blank fixed), and the log
+                  // says what happened instead of "walking".
+                  try { this.recordWaveKill(seeker.id); } catch (e2) {}
+                  results[pid] = { outcome: 'lost', detail: 'found, slew the seeker', log: log.concat(['Found — and slew the seeker.']) };
+                }
                 else results[pid] = { outcome: 'lost', detail: 'found', log: log.concat(['Found — but walking.']) };
               } else results[pid] = { outcome: 'lost', detail: 'found', log };
             }
@@ -593,7 +619,12 @@
           if (!rec) { results[pid] = { outcome: 'lost', detail: 'no fight', log: [] }; continue; }
           if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
           if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'the beast was not impressed', log: rec.log.slice(-2) };
-          else if (rec.outcome === 'vKill' || rec.outcome === 'mFlee') results[pid] = { outcome: 'won', detail: rec.outcome === 'mFlee' ? 'dominated' : 'slew', log: [`${st.name} masters the beast${rec.outcome === 'mFlee' ? ' — it yields' : ''}.`] };
+          else if (rec.outcome === 'vKill' || rec.outcome === 'mFlee') {
+            // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): a real
+            // kill scores the ledger exactly like a wild kill (blank fixed).
+            if (rec.outcome === 'vKill') { try { this.recordWaveKill(beast.id); } catch (e2) {} }
+            results[pid] = { outcome: 'won', detail: rec.outcome === 'mFlee' ? 'dominated' : 'slew', log: [`${st.name} masters the beast${rec.outcome === 'mFlee' ? ' — it yields' : ''}.`] };
+          }
           else results[pid] = { outcome: 'lost', detail: rec.outcome, log: [] };
         }
         return results;

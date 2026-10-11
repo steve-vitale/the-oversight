@@ -16067,7 +16067,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // monsters run): this used to key wave 2 on System arrival (day 7) with
     // no kill requirement, while unlockedWave() — used by castMonster, the
     // loot tiers, and the "Wave N released" announcement — requires day 8 +
-    // 4 wave-1 kills. The two spawn paths disagreed: tile-entry and
+    // 5 wave-1 ledger points (kills only). The two spawn paths disagreed: tile-entry and
     // background spawns were ~58% wave-2 on day 7 with zero kills, while the
     // System insisted wave 2 hadn't been released. The kill gate is the
     // deliberate design ("prove you can handle it"), so the pool follows it.
@@ -19226,7 +19226,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (Math.random() < effChance && !this.monsterAt(px, py)) {
         scholar.spawnMisses = 0;
         // MONSTER WAVES: the System escalates on the kill-gated schedule —
-        // wave 2 joins at day 8 + 4 wave-1 kills (see monsterWavePool, which
+        // wave 2 joins at day 8 + 5 wave-1 ledger points (kills only) (see monsterWavePool, which
         // follows unlockedWave). Earlier waves never leave the pool.
         const mdefs = this.monsterWavePool();
         // WAVE RATIO (Steve 2026-10-06): tile-entry spawns use the same wave
@@ -25974,22 +25974,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // schedule, but you can't cheese it with a lucky weapon find — and it
     // can't arrive before you've proven you can handle the last wave.
     // Wave 1: always — hummice, moths, raccoons, toads
-    // Wave 2: day 8+ AND (4 wave-1 kills OR 2 distinct wave-1 faced) — village-wide
-    // Wave 3 ("The Final Draft"): day 25+ AND (8 wave-2 kills OR 2 distinct wave-2 faced)
+    // Wave 2: day 8+ AND 5 wave-1 ledger points (kills only) — village-wide
+    // Wave 3 ("The Final Draft"): day 25+ AND 4 wave-2 ledger points (kills only)
     // Wave 2 needs day >= wave2DayFloor; wave 3+ needs day >= dayFloor.
-    // Wave 4 ("The Mirror Draft"): wave-3 ledger filled AND scaleRank >= 'regional'
-    // Wave 5 ("The Producers"): wave-4 ledger filled AND scaleRank >= 'national'
+    // Wave 4 ("The Mirror Draft"): 4 wave-3 ledger points AND scaleRank >= 'regional'
+    // Wave 5 ("The Producers"): 3 wave-4 ledger points AND scaleRank >= 'national'
     // (Wave 5 is the apex; readiness win comes after proving yourself there.)
     //
     // WAVE LEDGER (Steve 2026-10-10) — kills only, cumulative across player
     // deaths (the ledger lives on state, not the scholar). Kill =
     // pointsPerKill (1); a kill executed with the monster's discovered counter
-    // = pointsPerCounterKill (2, mastery bonus — dormant: no monster def has
-    // counter data yet). Per monster-type cap perTypeCap (2) per wave:
-    // breadth, not farming. barsPerWave = {1:5,2:5,3:4,4:3,5:2} — point
-    // thresholds the ledger for wave N must reach to unlock wave N+1 (the
-    // pacing dial Steve will turn; see docs/PROGRESSION.md for every lever).
-    // Day floors: wave2DayFloor (8), dayFloor (25) for waves 3+.
+    // = pointsPerCounterKill (2, mastery bonus — LIVE since 2026-10-10, wave
+    // 1-2 defs carry counter data). Per monster-type cap perTypeCap (2) per
+    // wave: breadth, not farming — and a pacing brake on escalation (cap 3
+    // rejected 2026-10-11: faster escalation killed villages). barsPerWave =
+    // {1:5,2:4,3:4,4:3,5:2} — point thresholds the ledger for wave N must
+    // reach to unlock wave N+1 (the pacing dial Steve will turn; see
+    // docs/PROGRESSION.md for every lever). Day floors: wave2DayFloor (8),
+    // dayFloor (25) for waves 3+.
     //
     // REVERSAL of 8730921c (Steve 2026-10-10): villager wave experiences no
     // longer count toward UNLOCKS. Engagements (faced/fled) score nothing —
