@@ -210,8 +210,12 @@ function buildCensus() {
     const p = person(id);
     let plants = 0;
     try { plants = (Game.plantsKnownBy(id) || []).length; } catch (e) {}
-    let ax = null;
-    try { ax = Game.agencyOf ? Game.agencyOf(id) : null; } catch (e) {}
+    // agencyOf(vid) returns the GLOBAL agency state (xp keyed by villager id)
+    // — reading .xp directly gives every villager the identical whole map.
+    // Per-villager: (agencyOf(id).xp||{})[id] (same convention as
+    // contestEngine.js / fieldFights.js).
+    let axp = null;
+    try { const a = Game.agencyOf ? Game.agencyOf(id) : null; axp = (a && a.xp && a.xp[id]) || null; } catch (e) {}
     let mood = null;
     try { mood = Game.npcMood ? Game.npcMood(id) : null; } catch (e) {}
     return {
@@ -222,7 +226,7 @@ function buildCensus() {
       trust: (trust[id] !== undefined) ? trust[id] : null,
       mood: mood,
       plantsKnown: plants,
-      agencyXP: (ax && typeof ax === 'object' && ax.xp != null) ? ax.xp : (typeof ax === 'number' ? ax : null),
+      agencyXP: axp,
     };
   });
 }
@@ -232,6 +236,23 @@ const CONVO_DAYS = [15, 20, 25, 30, 35, 40];
 async function runSeed(seed) {
   _s = seed >>> 0;
   capture = [];
+  // TELEMETRY SIDE-CHANNEL (2026-10-11): state.telemetry is capped at 300
+  // entries (game.js tele()) — on busy seeds the harness's once-per-day
+  // contestEvents() read missed contest_fired entries that were trimmed
+  // before the read (a 'honey' end with no fire, seed 777). Keep an
+  // unbounded side log of contest/show/prize events from day 1.
+  const teleSide = [];
+  (function wrapTele() {
+    const _tele = Game.tele;
+    Game.tele = function (t, d) {
+      try {
+        if (typeof t === 'string' && /^(contest_fired|contest_end|show_aired|prize_)/.test(t)) {
+          teleSide.push({ day: gday(), type: t, id: (d && d.id) || '?', who: (d && d.who) || null, outcome: (d && d.outcome) || null });
+        }
+      } catch (e) {}
+      return _tele.apply(this, arguments);
+    };
+  })();
   const ctx = {};
   console.log(`\n########## SEED ${seed} ##########`);
   await Game.init();
@@ -303,14 +324,14 @@ async function runSeed(seed) {
     try { Game.sleep(); } catch (e) {}
     driveContests(Game, competent, ctx);
 
-    // (d) new contest events today?
-    const ce = contestEvents();
-    if (ce.length > lastContestCount) {
-      for (const ev of ce.slice(lastContestCount)) {
-        contestLog.push({ day: gd, type: ev.type, id: ev.id, who: ev.who, outcome: ev.outcome, why: ev.why });
-        console.log(`*** day ${gd}: ${ev.type} id=${ev.id || '?'} who=${ev.who || '?'} outcome=${ev.outcome || '?'}`);
+    // (d) new contest events today? Read from the unbounded side-channel
+    // (teleSide), not the capped state.telemetry — trims used to drop fires.
+    if (teleSide.length > lastContestCount) {
+      for (const ev of teleSide.slice(lastContestCount)) {
+        contestLog.push({ day: ev.day, type: ev.type, id: ev.id, who: ev.who, outcome: ev.outcome, why: ev.why });
+        console.log(`*** day ${ev.day}: ${ev.type} id=${ev.id || '?'} who=${ev.who || '?'} outcome=${ev.outcome || '?'}`);
       }
-      lastContestCount = ce.length;
+      lastContestCount = teleSide.length;
     }
 
     const ps = pantryStats();
