@@ -145,9 +145,17 @@ sec('seek_taken want: mourning NPCs want news of the taken');
   Game.state = { scholar: { day: 20 }, village: { roster: ['m1', 'm2'], conv: {} } };
   Game.npcNeeds = () => ({ hunger: 0, fear: 0, social: 0, energy: 100 });
   Game.convoFindFavorNeed = () => null; // isolate: no favor needs in this fixture
-  // talked today: share_news drops to weight 1, no favor needs -> seek_taken (2) can win
-  Game.convoGet('m1').lastDay = 20;
-  Game.convoGet('m2').lastDay = 20;
+  // talked today: share_news drops to weight 1, no favor needs -> seek_taken (2) can win.
+  // count>1: not a first meeting, so the convo-gaps FIRST-MEETING CURIOSITY floor
+  // (curious forced to 3) doesn't apply — grief comes after introductions.
+  const meetBefore = (vid) => { const c = Game.convoGet(vid); c.lastDay = 20; c.count = 5; };
+  meetBefore('m1'); meetBefore('m2');
+  // first meetings DO lead with curiosity over grief (sibling design call, convo-gaps):
+  // document the interaction rather than fighting it.
+  { const c = Game.convoGet('m1'); c.count = 0; c.lastDay = -99;
+    const wf = Game.convoSelectWant('m1');
+    ok('first meeting leads with curiosity, not grief', wf.id !== 'seek_taken');
+    c.count = 5; c.lastDay = 20; }
   // reach into WANTS via convoSelectWant is heavy; call the def through a fresh select
   const c1 = Game.convoGet('m1'), c2 = Game.convoGet('m2');
   // reach into WANTS via convoSelectWant is heavy; call the def through a fresh select
@@ -157,7 +165,7 @@ sec('seek_taken want: mourning NPCs want news of the taken');
   let sawTaken = false;
   for (let i = 0; i < 40; i++) {
     Game.state.village.conv = {};
-    Game.convoGet('m1').lastDay = 20;
+    meetBefore('m1');
     const w = Game.convoSelectWant('m1');
     if (w.id === 'seek_taken') { sawTaken = true; break; }
   }
@@ -165,7 +173,7 @@ sec('seek_taken want: mourning NPCs want news of the taken');
   let sawTakenM2 = false;
   for (let i = 0; i < 40; i++) {
     Game.state.village.conv = {};
-    Game.convoGet('m2').lastDay = 20;
+    meetBefore('m2');
     const w = Game.convoSelectWant('m2');
     if (w.id === 'seek_taken') { sawTakenM2 = true; break; }
   }
@@ -175,7 +183,7 @@ sec('seek_taken want: mourning NPCs want news of the taken');
   let w = null;
   for (let i = 0; i < 40 && (!w || w.id !== 'seek_taken'); i++) {
     Game.state.village.conv = {};
-    Game.convoGet('m1').lastDay = 20;
+    meetBefore('m1');
     w = Game.convoSelectWant('m1');
   }
   if (w.id === 'seek_taken') {
