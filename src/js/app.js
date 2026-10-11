@@ -14353,7 +14353,12 @@
             // Travel happens by walking. The map shows where you've been.
             // HIVE SIGHT (break-it travel 2026-10-10): hive-sensed tiles name
             // their terrain honestly — and name the limit.
-            const how = seen === 'shared' ? ' <span class="dim">(shown to you by someone)</span>' : (hiveTap ? ' <span class="dim">(sensed by the hive — terrain only)</span>' : '');
+            // SENSE PROVENANCE (break-it travel r13 2026-10-11): 'shared'
+            // isn't always a villager's doing — dowsing/echo_location sense
+            // ground too. sharedTileNote names it; the old unconditional
+            // "(shown to you by someone)" lied on sensed ground.
+            const _sharedNote = (seen === 'shared' && Game.sharedTileNote) ? (Game.sharedTileNote(x, y) || '(shown to you by someone)') : '';
+            const how = seen === 'shared' ? ' <span class="dim">' + esc(_sharedNote) + '</span>' : (hiveTap ? ' <span class="dim">(sensed by the hive — terrain only)</span>' : '');
             const glyph = (typeof S !== 'undefined' && S.TILE_GLYPH && tl) ? (S.TILE_GLYPH[tl.type] || '·') : '·';
             const tname = tl ? (((typeof S !== 'undefined' && S.TILE_NAME && S.TILE_NAME[tl.type]) || tl.type)) : 'unknown';
             mapInfoEl.innerHTML = `${glyph} <b>${esc(tname)}</b>${how}.`;
@@ -14400,7 +14405,10 @@
         if (!seenHow) {
           info.innerHTML = `<div class="card"><p>🌫 <b>Unexplored.</b><br><span class="small">No one has been there. Walk to the edge and head out to see what's really there.</span></p></div>`;
         } else {
-          const via = seenHow === 'shared' ? '<br><span class="small" style="opacity:.7">Someone showed you this ground — you haven\'t walked it yourself.</span>' : (seenHow === 'hive' ? '<br><span class="small" style="opacity:.7">Sensed by the hive — terrain only. Walk it to truly know it.</span>' : '');
+          // SENSE PROVENANCE (break-it travel r13 2026-10-11): same as the
+          // map-overlay tap above — name the sense, not a phantom person.
+          const _sharedNote2 = (seenHow === 'shared' && Game.sharedTileNote) ? (Game.sharedTileNote(x, y) || 'Someone showed you this ground.') : '';
+          const via = seenHow === 'shared' ? '<br><span class="small" style="opacity:.7">' + esc(_sharedNote2) + ' Walk it to truly know it.</span>' : (seenHow === 'hive' ? '<br><span class="small" style="opacity:.7">Sensed by the hive — terrain only. Walk it to truly know it.</span>' : '');
           info.innerHTML = `<div class="card"><p>🗺 ${esc(S.TILE_NAME[tl.type] || tl.type)}.<br><span class="small">Walk to the edge of the map to travel there.</span>${via}</p></div>`;
         }
       };
@@ -16769,7 +16777,7 @@
         cells += '</div>';
       }
       return `<h1 class="title" style="font-size:18px">MAPS</h1>
-        <p class="small"><i>everywhere the village has walked, pooled together. ${n} place${n === 1 ? '' : 's'} known.</i></p>
+        <p class="small"><i>everywhere the village has walked — or sensed — pooled together. ${n} place${n === 1 ? '' : 's'} known.</i></p>
         <div class="map minimap" style="margin:8px 0">${cells}</div>`;
     } catch (e) { return ''; }
   }

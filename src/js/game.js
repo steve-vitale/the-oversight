@@ -41,6 +41,7 @@
 //   - hydrateSeed(seed) -> full person (unified person system: seed -> genCharacter depth)
 //   - getPerson(id) -> person | null (unified lookup: villagers + hydrated seeds)
 //   - markSeen(x, y, kind, by), mapSeen(x, y) -> 'visited'|'shared'|null (player map knowledge: fog of war display)
+//   - sharedTileNote(x, y) -> honest provenance parenthetical for 'shared' tiles (dowsing / echo_location / someone)
 //   - hiveSight() -> bool (hive_mind map reveal: overlay renders all tiles at 'shared' level, display-only, never writes seenTiles)
 //   - worldMonsters() -> [{id,tx,ty,mx,my,hp,...}] (living world: monsters on tiles, independent of the player)
 //   - monsterAt(tx, ty) -> monster | null
@@ -106,6 +107,7 @@
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - dowsing_reveals_the_water: dowsing reveals exactly the nearest water tile — direction + distance is the knowledge, walking there is still yours. The old reveal() call lit a 13-tile diamond around possibly-distant ground: free fog knowledge (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - sense_marks_shared: dowsing and echo_location markSeen their revealed tiles 'shared' — the world-map overlay agrees with the log ("water, south, 3 tiles" / "3x3 revealed"); never 'visited' until walked (code: _activateAbilityInner, playtest explorer 2026-10-11)
+//   - sense_provenance_honest: 'shared' no longer means only "a villager shared it" — dowsing/echo_location land sensed ground as 'shared' with by='dowsing'|'echo_location'. sharedTileNote(x, y) names the provenance honestly for both map taps (sensed ground was never "shown to you by someone"); the codex MAPS header says "walked — or sensed" since villageMapKnown pools sensed ground (code: sharedTileNote, break-it travel r13 2026-10-11)
 //   - dead_dont_theorize: theorizeWith refuses when over — the dead advance nothing: no theory lines, no skill encounters, no trust/energy/cheer/goals (code: theorizeWith, playtest explorer 2026-10-11)
 //   - no_mid_fight_theorize: theorizeWith refuses inCombat — theorizing is time-only (2 ticks) and tickAction no-ops in combat, so a stale conversation card could farm encounters, trust and energy for free; same class as the examineCell guard (code: theorizeWith, playtest explorer 2026-10-11)
 //   - day_parts: 4 nested (code: TIME)
@@ -8671,6 +8673,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const e = (this.state.scholar.seenTiles || {})[x + ',' + y];
         return e ? (e.k === 'v' ? 'visited' : 'shared') : null;
       } catch (e) { return null; }
+    },
+    // SENSE PROVENANCE (break-it travel r13 2026-10-11): 'shared' used to
+    // mean exactly one thing — a villager shared the ground (compareMaps /
+    // scout reports write by=<villager id>). The sense_marks_shared change
+    // (playtest explorer 2026-10-11) also lands SENSED ground as 'shared'
+    // (by='dowsing' | 'echo_location') — ground nobody showed you. The map
+    // taps claimed "(shown to you by someone)" for every 'shared' tile, so a
+    // dowsed water tile lied about a person showing it to you. This names
+    // the provenance honestly from the stored `by`. '' when the tile isn't
+    // shared (tap sites only call it for shared tiles).
+    sharedTileNote(x, y) {
+      try {
+        const e = (this.state.scholar.seenTiles || {})[x + ',' + y];
+        if (!e || e.k !== 's') return '';
+        if (e.by === 'dowsing') return '(your dowsing found water here — not walked)';
+        if (e.by === 'echo_location') return '(your echo mapped this ground — not walked)';
+        return '(shown to you by someone)';
+      } catch (e2) { return ''; }
     },
     // HIVE SIGHT (break-it travel 2026-10-10): hive_mind's copy promises
     // "(map reveals)" and its acquire line says "the map is open. Every
