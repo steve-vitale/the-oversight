@@ -103,7 +103,7 @@
 //   - beat_audio: every contest beat fires a named audioEvent that resolves — new beats are composed, named dispatches over already-registered Game.audio synths, lazy-registered on first fire (Game.audio doesn't exist until app.js loads, after contests.js); phases declare beat:'name', _contestRenderPhase fires it (code: _cxBeat, _contestRenderPhase, Steve 2026-10-06); price/impress/exchange/auction beats now resolve (justiceVerdict+exileWalk, levelup+contestSpared, contestCall+rushHit, contestCall+horrorSting) — were silent no-ops (code: CX_BEAT_DEFS, Steve 2026-10-06); the 30 older contests now have per-phase composed beats contest<Id>Declare|Escalate|Climax|Resolve in CX_BEAT_DEFS, named by _cxB (Steve 2026-10-08); _contestEnd/_contestDie/_contestRefuse fire the Resolve beat (code: CX_BEAT_DEFS, _cxB, Steve 2026-10-08); the participate/refuse choice screen fires the small shared contestChoice beat (droneCorrect+lineCut), never a contest's Declare beat — firing Declare there double-stings on Participate and plays the bespoke sting on Refuse (code: contestInterruption choicePhase, Steve 2026-10-08)
 //   - no_intro_repeat: the choice-phase text must not re-say contest name+desc (contestInterruption says it two lines earlier); it says only "The System waits." (code: contestInterruption, Steve 2026-10-08)
 //   - countdown_announced: the warning names the grab ("at dawn, one more day"); the grab lands a dread beat first ("It is today") (code: fireContest, resolveContest, Steve 2026-10-08)
-//   - pilot_episode: the first contest of a run is the System's PILOT EPISODE — said out loud at the announcement (test broadcast, diegetic production jank: the name stumble, the still-warm arena, the new countdown); the grab-day beat calls it live; stakes and countdown dread untouched (code: fireContest, resolveContest, Steve 2026-10-05, docs/CONTESTS.md)
+//   - pilot_episode: the first contest of a run is the System's PILOT EPISODE — said out loud at the announcement (test broadcast, diegetic production jank: the name stumble, the still-warm arena, the new countdown); the grab-day beat calls it live; stakes and countdown dread untouched (code: fireContest, resolveContest, Steve 2026-10-05, docs/CONTESTS.md). PILOT GUARANTEE (Steve 2026-10-11): ~13% of seeds rolled dry through day 21 — if day >= 21 and no pilot has aired, contestTick bumps the schedule (skips the chance roll and weekly budget; always a contest, never a show/summons).
 //   - fear_honesty: high/extreme billing must mean it — phase damage x1.5 at the contestChoose choke point (stacks with hardened x1.25), said aloud once per contest; blood contests get 4x scheduling weight at wave 1 (~5% -> ~18%); the participate/refuse screen states the billing, the contest's real death count (state.contestDeathsById, ledgered in _contestDie/_cxKillContestant), and current health; show shame lands real rep damage (gossip moves REP only — skipTrust) while the galaxy still loves the trainwreck; high/extreme wins roll hotter prizes (+0.15/+0.3 chance, hardened stacks) — the risk side moved, so the reward side moves (code: contest-fear 2026-10-11)
 //   - gossip_aftermath: contest outcomes seed village gossip (contest_won/contest_survived/contest_died) via _cxGossip — news travels by mouth, distorted by retelling, not broadcast; villagers only (code: _cxGossip, _contestEnd, _contestDie, _contestResolveOthers, Steve 2026-10-08)
 //   - fan_favor_contests: televised wins move the fan club — player wins +4/+6/+8 by risk (low-med/high/extreme), villager wins +2/+3/+4 (code: _contestEnd, Steve 2026-10-08; risk scaling longsim contests r4 2026-10-11); a player win can shake loose a fan care package
@@ -124,7 +124,7 @@
 //   - summons_budget: ratings summons consume the shared 2/week TV budget like contests and shows (code: contestTick)
 //   - villager_prize_real: a watched villager win grants real pantry rations ("Winner's share"), not a placeholder line (code: _contestEnd, Steve 2026-10-08)
 //   - villager_prize_deed: a televised villager win is a DEED — +3 XP on the deed-XP track the contest belongs to (blood->combat, endurance/forage->field, else->social), so a win can light the first rung of the System's watching-grant path; the grant narrates its own "Earned, not given" when a threshold fires; applies to the watch-verdict path AND multi-take co-winners (code: _contestEnd, _contestResolveOthers, _cxContestDeedTrack, longsim abilities r2 2026-10-11)
-//   - prize_lanes: the contest prize table has two lanes — ITEM (the alien-loot roll) and SYSTEM (ability offer / synergy hint / knowledge dump, canon docs/CONTESTS.md "Prizes — every lane": item-evolution assists documented as the remaining blank, relic-system territory). System lane: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened, cap 0.90; a win should usually bring a System gift (canon "Prizes must be worth the fear" — wins are rare, so wins are the throttle); weights ability 0.45 / synergy 0.30 / knowledge 0.25 with fall-through when a lane is impossible (slots full, nothing held, everything named). Ability offers are alien-abilities-only (no human skills, no vile/body_horror/OP tiers), category-biased (blood->combat, moot->social), never trample a pending offer; synergy hints grant a real +1 discovery attempt on a fully-held undiscovered pairing through the tease/unlock path; knowledge dumps identify one plant through identifyPlant (facts only, no earthly skill). Independent of the loot roll — a shy vault can still bring a System gift (code: _cxPrizeLane, _cxPrizeAbilityOffer, _cxPrizeSynergyHint, _cxPrizeKnowledgeDump, longsim abilities r2 2026-10-11)
+//   - prize_lanes: the contest prize table has two lanes — ITEM (the alien-loot roll) and SYSTEM (ability offer / synergy hint / knowledge dump, canon docs/CONTESTS.md "Prizes — every lane": item-evolution assists documented as the remaining blank, relic-system territory). System lane: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened, cap 0.90; a win should usually bring a System gift (canon "Prizes must be worth the fear" — wins are rare, so wins are the throttle); FIRST-WIN GIFT (Steve 2026-10-11): the player's first win of a run always grants a lane gift (flag cxFirstWinGift, set only on a real grant) — visible, not a fountain; weights ability 0.45 / synergy 0.30 / knowledge 0.25 with fall-through when a lane is impossible (slots full, nothing held, everything named). Ability offers are alien-abilities-only (no human skills, no vile/body_horror/OP tiers), category-biased (blood->combat, moot->social), never trample a pending offer; synergy hints grant a real +1 discovery attempt on a fully-held undiscovered pairing through the tease/unlock path; knowledge dumps identify one plant through identifyPlant (facts only, no earthly skill). Independent of the loot roll — a shy vault can still bring a System gift (code: _cxPrizeLane, _cxPrizeAbilityOffer, _cxPrizeSynergyHint, _cxPrizeKnowledgeDump, longsim abilities r2 2026-10-11)
 //   - win_tax_announced: the -5 hp winner's mark is said out loud, never silent — a hidden HP tax is a lie (code: _contestEnd, Steve 2026-10-08)
 //   - aftermath_trauma: the contest end path applies aftermath trauma to the player, said out loud — win +4, lose +6 (canon docs/CONTESTS.md "Winners come home changed (prizes, trauma, fans)"); the old path applied none, so a merciful win landed trauma-free while refusing landed +5 (code: _contestEnd, break-it contests r15 2026-10-11)
 //   - bet_payout_honest: the watched-bet payout says the REAL kcal gained, not the promised 2x — at/near the kcal cap the grant clamps and the old "+400 kcal" line lied (at cap: wagered 200, won, gained nothing); a fully-capped win says the body is full instead of a phantom +400 (code: _contestVerdict, break-it contests r15 2026-10-11)
@@ -353,7 +353,16 @@
     if (this.state.showBudget.week !== week) {
       this.state.showBudget = { week, used: 0 };
     }
-    if (this.state.showBudget.used >= 2) return null; // budget exhausted
+    // PILOT GUARANTEE (Steve 2026-10-11 "Address any gaps!"): the pilot
+    // episode is the diegetic on-ramp to televised contests — ~13% of seeds
+    // rolled the 0.25/day chance dry through day 21 and never saw it.
+    // Canon: contests are UNAVOIDABLE ("if you're not taken, it's
+    // announced"). If day >= 21 and no pilot has aired, the System bumps
+    // the schedule: skip the chance roll and the weekly budget for this
+    // one fire. It is always a CONTEST (never a show or summons) — the
+    // first challenge. Eligibility and one-interruption-at-a-time still hold.
+    const needsPilot = day >= 21 && !this.state.pilotAired;
+    if (!needsPilot && this.state.showBudget.used >= 2) return null; // budget exhausted (the pilot bumps the schedule)
 
     // RATINGS-DRIVEN (Steve 2026-10-08): the 30%/day flat roll is gone. The
     // System schedules television like a producer:
@@ -382,7 +391,7 @@
       if (recentDeath || fracture) chance += 0.10;
     } catch (e) {}
     chance = Math.max(0.05, Math.min(0.60, chance));
-    if (Math.random() > chance) return null;
+    if (!needsPilot && Math.random() > chance) return null;
 
     const { eligible } = this.contestEligible();
     if (!eligible.length) return null;
@@ -396,7 +405,7 @@
     // "Ratings summons (promos/stunts, small gifts, ties to care packages)")
     // — no doc covers it; noted here, not invented silently. Played via
     // fireRatingsSummons, inside the same 2/week budget.
-    if (ratingsDipping && Math.random() < 0.20) {
+    if (!needsPilot && ratingsDipping && Math.random() < 0.20) {
       // SUMMONS CASTABILITY (break-it contest r10 2026-10-09): the summons is
       // for YOU — the player, on camera, live. The eligibility check above
       // only proves the village has someone to televise; it does not prove
@@ -412,7 +421,7 @@
         return { id: '__summons' };
       }
     }
-    const isContest = Math.random() < contestShare;
+    const isContest = needsPilot || Math.random() < contestShare;
     const event = isContest ? this.pickContest() : this.pickShow();
     if (!event) return null;
     
@@ -4581,20 +4590,31 @@
     // each lane falls through to the next when impossible (slots full,
     // nothing held, everything named).
     if (!this.state.systemArrived) return false;
+    // FIRST-WIN GIFT (Steve 2026-10-11 "Address any gaps!"): wins are the
+    // throttle (~1.2/run), so at 0.60 the lanes were calibrated but rarely
+    // SEEN in-leg. The player's first win of a run now always brings a
+    // System gift — the System hooks its winners. Later wins keep the 0.60
+    // roll: visible, not a fountain. The flag sets only on a real grant, so
+    // an impossible roll (full slots, nothing left to teach) doesn't burn
+    // the guarantee.
+    const firstWin = !this.state.cxFirstWinGift;
     let chance = 0.60;
     const risk = (contest && contest.risk) || '';
     if (risk === 'high') chance += 0.10;
     if (risk === 'extreme') chance += 0.20;
     if (ac && ac.variant === 'hardened') chance += 0.10;
     chance = Math.min(0.85, chance);
+    if (firstWin) chance = 1.0;
     if (Math.random() >= chance) return false;
     const r = Math.random();
     const order = r < 0.45 ? ['a', 's', 'k'] : (r < 0.75 ? ['s', 'a', 'k'] : ['k', 'a', 's']);
     for (const lane of order) {
       try {
-        if (lane === 'a' && this._cxPrizeAbilityOffer(contest)) return true;
-        if (lane === 's' && this._cxPrizeSynergyHint()) return true;
-        if (lane === 'k' && this._cxPrizeKnowledgeDump()) return true;
+        let granted = false;
+        if (lane === 'a' && this._cxPrizeAbilityOffer(contest)) granted = true;
+        else if (lane === 's' && this._cxPrizeSynergyHint()) granted = true;
+        else if (lane === 'k' && this._cxPrizeKnowledgeDump()) granted = true;
+        if (granted) { this.state.cxFirstWinGift = true; return true; }
       } catch (e) {}
     }
     return false;
