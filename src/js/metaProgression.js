@@ -115,6 +115,7 @@
     { id: 'mt-f-witness', cat: 'table', name: 'The Witness', desc: 'Reach the table as the Witness.', hint: 'Become the one who kept the list.' },
     { id: 'mt-f-defiant', cat: 'table', name: 'The Defiant', desc: 'Reach the table as the Defiant.', hint: 'Become the one who said no.' },
     { id: 'mt-f-assimilated', cat: 'table', name: 'The Assimilated', desc: 'Reach the table as the Assimilated.', hint: 'Become the comfortable one.' },
+    { id: 'mt-f-relay', cat: 'table', name: 'The Relay', desc: 'Reach the table as the Relay — enter the matrix.', hint: 'Integrate deeply. Hold the wires.' },
     { id: 'mt-choice', cat: 'table', name: 'The Last Word', desc: 'Make the final live choice.', hint: 'Choose, at the end of everything.' },
     // sickness
     { id: 'md-m1', cat: 'sickness', name: 'Shouldn\u2019t Have Drunk That', desc: 'Contract a mundane disease.', hint: 'Risk the creek. See what happens.' },
@@ -487,20 +488,27 @@
     wrapHook('_contestDie', function () {
       this.metaNotePlayerContest('died', false);
     });
-    // the table: frame reached (tableScene sets scholar.tableChoices)
+    // the table: the seat is reached (tableScene presents the earned paths).
+    // 2026-10-11: the stub's single-choice contract is gone; the real table
+    // (table.js) names the path on 'path:<id>' and the final on 'final:<id>'.
     wrapHook('tableScene', function () {
-      try {
-        const tc = ((this.state || {}).scholar || {}).tableChoices;
-        if (tc && tc.frame) this.metaNoteTable(tc.frame);
-      } catch (e) {}
+      try { this.metaUnlock('mt-table'); } catch (e) {}
     });
-    // the final live choice — capture BEFORE the original (it clears tableChoices)
+    // the live choice that names the run — path, then final within it.
     wrapHook('chooseTableOption', function (args, r, pre) {
-      if (pre && pre.frame) this.metaNoteTableChoice(pre.frame, pre.choiceId);
+      if (pre && pre.pathId) this.metaNoteTable(pre.pathId);
+      if (pre && pre.finalId) this.metaNoteTableChoice(pre.finalPath, 'final:' + pre.finalId);
     }, function (origArgs) {
       try {
-        const tc = ((this.state || {}).scholar || {}).tableChoices;
-        return tc ? { frame: tc.frame, choiceId: (origArgs && origArgs[0]) || null } : null;
+        const id = (origArgs && origArgs[0]) || '';
+        let m = /^path:(.+)$/.exec(id);
+        if (m) return { pathId: m[1] };
+        m = /^final:(.+)$/.exec(id);
+        if (m) {
+          const T = (typeof this.tableState === 'function') ? this.tableState() : {};
+          return { finalId: m[1], finalPath: (T && T.path) || 'unknown' };
+        }
+        return null;
       } catch (e) { return null; }
     });
     // legend: how the run ended

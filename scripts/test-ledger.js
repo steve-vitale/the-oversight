@@ -17,7 +17,14 @@ global.localStorage = {
  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
  'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/food.js',
  'src/js/corpses.js', 'src/js/betrayal.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/ledger.js'
+ 'src/js/ledger.js',
+ // the integrated endgame (2026-10-11): the old single-choice table stub in
+ // ledger.js was replaced by the real 7-path table. Load it here.
+ 'src/js/table.js', 'src/js/table-feared.js', 'src/js/table-indispensable.js',
+ 'src/js/table-beloved.js', 'src/js/table-witness.js', 'src/js/table-assimilated.js',
+ 'src/js/table-defiant.js', 'src/js/relay-ext.js', 'src/js/table-relay.js',
+ // scaleRank() (the seat's scale check) lives in hierarchy.js
+ 'src/js/hierarchy.js',
 ].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 const Game = globalThis.Scattering.Game;
 
@@ -41,6 +48,20 @@ function freshGame() {
   return s;
 }
 function stack(L) { const l = Game.ledger(); for (const k of Object.keys(L)) l[k] = L[k]; }
+// Rig a lesser seat for table tests: waves 1-3 faced, 2 contests, 2 crises,
+// regional+ integration. (The table prices the REAL vector; tests rig it.)
+function seatUp() {
+  Game.state.systemArrived = true;
+  Game.state.networkLive = true; // regional scale for the seat
+  Game.state.scholar.integration = 50;
+  Game.progState().sentimentTaught = true;
+  Game.state.scholar.prog = Game.state.scholar.prog || {};
+  Game.state.scholar.prog.feastSurgeUsed = true;
+  const faced = {};
+  [[1, 4], [2, 4], [3, 3]].forEach(([w, n]) => { for (let i = 0; i < n; i++) faced['w' + w + 'm' + i] = w; });
+  Game.progState().deeds = { wavesFaced: faced, contestsSurvived: 2 };
+  Game.progState().crises = { c1: 1, c2: 1 };
+}
 
 (async () => {
   await Game.init();
@@ -121,16 +142,24 @@ function stack(L) { const l = Game.ledger(); for (const k of Object.keys(L)) l[k
     ok('no raw numbers in beat', !said.some(t => /showmanship|ledger/i.test(t)));
   }
 
-  // 6. The table: frame narration + final live choice.
+  // 6. The table (2026-10-11: the stub is gone; the real table prices the
+  // run, offers the earned paths, and plays the challenge). Witness full drive.
   {
-    freshGame();
+    freshGame(); seatUp();
     stack({ exposed: 10, defiance: 4 }); // witness
     Game.tableScene();
     ok('table scene fires once', Game.progState().tableDone === true);
-    ok('table choices offered', !!(Game.state.scholar.tableChoices && Game.state.scholar.tableChoices.options.length === 2));
+    const tc = () => Game.state.scholar.tableChoices;
+    ok('paths offered', !!(tc() && tc().options.some(o => o.id === 'path:witness')));
     ok('frame narration spoken', said.some(t => t.includes('THE TABLE')));
-    const optId = Game.state.scholar.tableChoices.options[0].id;
-    Game.chooseTableOption(optId);
+    Game.chooseTableOption('path:witness');
+    ok('light branch from behavior', Game.tableState().branch === 'light');
+    Game.chooseTableOption('abil:subpoena');
+    Game.chooseTableOption('beat:cold');
+    Game.chooseTableOption('beat:subpoena');
+    Game.chooseTableOption('beat:public');
+    ok('finals reached', Game.tableState().phase === 'finals');
+    Game.chooseTableOption('final:charges');
     ok('choice resolves', Game.state.scholar.tableChoices === null);
     ok('run ends at the table', Game.over === true && Game.won === true);
     const legends = Game.lineage();
@@ -138,13 +167,21 @@ function stack(L) { const l = Game.ledger(); for (const k of Object.keys(L)) l[k
     ok('legend has the choice', !!legends[0].choice);
   }
 
-  // 7. The feared leader can choose mercy (Steve's drama beat).
+  // 7. The feared leader can choose mercy (Steve's drama beat) — now the
+  // light branch of the real feared path, earned by protected >= killed.
   {
-    freshGame();
-    stack({ might: 20, killed: 6 });
+    freshGame(); seatUp();
+    stack({ might: 20, protected: 8, killed: 1 });
     Game.tableScene();
-    const opts = Game.state.scholar.tableChoices.options.map(o => o.label);
-    ok('mercy is on the table', opts.some(l => /mercy/i.test(l)), opts.join(' / '));
+    Game.chooseTableOption('path:feared');
+    ok('light branch', Game.tableState().branch === 'light');
+    Game.chooseTableOption('beat:mercy');
+    Game.chooseTableOption('beat:hold');
+    Game.chooseTableOption('beat:spend');
+    ok('light finals offered', Game.tableState().phase === 'finals' &&
+      Game.state.scholar.tableChoices.options.some(o => o.id === 'final:mercy'));
+    Game.chooseTableOption('final:mercy');
+    ok('mercy resolves the run', Game.over === true && Game.won === true);
   }
 
   // 8. THE MANTLE PASSES: death is not game over. The village is the protagonist.

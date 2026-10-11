@@ -90,33 +90,6 @@
     },
   };
 
-  const TABLE_CHOICES = {
-    indispensable: [
-      { id: 'price', label: 'Name your price.', outcome: 'You name it. Humanity becomes the galaxy\'s engine — prosperous, entangled, never quite free. The table agrees so fast it embarrasses everyone. Irreplaceable is its own kind of cage, but it\'s a gilded one, and it\'s yours.' },
-      { id: 'teach', label: 'Teach them freely.', outcome: 'You give away the trick. The table wasn\'t ready for generosity as strategy — it doesn\'t compute, until it does. Humanity becomes teachers, not fuel. The galaxy eats, at last, and remembers who fed it.' },
-    ],
-    feared: [
-      { id: 'example', label: 'Make an example.', outcome: 'Deterrence holds for a century. The footage never stops playing. Nobody bothers humanity again. You tell yourself the fear was the price of safety. Some nights you almost believe it.' },
-      { id: 'mercy', label: 'Show mercy.', outcome: 'The most frightening thing you ever did. The table doesn\'t know what to do with mercy from a predator. Neither do you, quite. But the audience weeps, and the galaxy learns that the feared one chose gentleness — and that choice echoes longer than any threat.' },
-    ],
-    beloved: [
-      { id: 'audience', label: 'Let the audience speak.', outcome: 'The show becomes the government. Strange. It works. Trillions of viewers hold the table to account in real time, and humanity\'s seat is wherever the cameras are. You made popularity into a constitution.' },
-      { id: 'quiet', label: 'Speak for the quiet ones.', outcome: 'You spend the love you earned on people who never had any. The villages nobody filmed, the dead nobody named. The audience weeps in eleven dimensions. This is what the show was for, it turns out.' },
-    ],
-    witness: [
-      { id: 'charges', label: 'Read the charges.', outcome: 'The trial of the judges. You read every charge, and some of them flinch — actual flinching, from beings of light. Justice, at last, with an audience. The galaxy\'s court has a new precedent, and your name is on it.' },
-      { id: 'wayback', label: 'Offer them a way back.', outcome: 'Even judges can be taught. It\'s the hardest thing you\'ve done — harder than the deer, harder than the hunger. One of them accepts. That\'s enough. That\'s everything.' },
-    ],
-    defiant: [
-      { id: 'walk', label: 'Walk away.', outcome: 'Humanity walks. The cameras follow for years — the long shot of small figures leaving the light, carrying their food and their dead and their songs. The highest-rated footage in galactic history. Nobody owns it.' },
-      { id: 'terms', label: 'Name your terms anyway.', outcome: 'Defiance with a contract. They sign. They hate signing. Humanity stays free and gets the trade routes too, because you refused to choose between dignity and dinner. The table learns a new word: no.' },
-    ],
-    assimilated: [
-      { id: 'comfort', label: 'Accept comfort.', outcome: 'Warm, safe, dim. The show gets a final season. You don\'t watch it. Somewhere, in a drawer of your mind, a locket clicks open and shut. You can\'t remember why that matters. That\'s the point of comfort.' },
-      { id: 'grief', label: 'Remember the taste of grief.', outcome: 'At the last second — the locket, the drawing, the coin. You choose the ache over the anesthesia. The table recoils; the audience erupts. You didn\'t come this far to be comfortable. The frame breaks, and something rawer walks out.' },
-    ],
-  };
-
   // ============ THRESHOLD BEATS — the ending written in real time ============
   // Steve's decision (2026-10-04): "You feel your ending being written
   // before you arrive." Counters are silent; beats are not. When a dimension
@@ -548,59 +521,13 @@
       return null;
     },
 
-    // ---------- THE TABLE ----------
-    // Arc IV sets tableWaiting. The scene fires the next dawn. One final
-    // live choice, inside the earned frame.
-    tableScene() {
-      const s = this.state.scholar, pg = this.progState();
-      if (pg.tableDone) return;
-      // DEED-GATE RE-CHECK (endgame deed gate 2026-10-10): checkArc's
-      // want-gate is the primary gate; the scene re-verifies at dawn,
-      // defense in depth. If the deeds no longer hold (stale tableWaiting,
-      // a realm that dissolved overnight), the table does NOT fire — said
-      // aloud, never silently. tableWaiting clears WITHOUT setting
-      // tableDone; checkArc's re-fire re-extends the invitation when the
-      // deeds hold again.
-      try {
-        if (typeof this.deedGateReady === 'function' && !this.deedGateReady().ok) {
-          pg.tableWaiting = false;
-          this.say('◈ THE TABLE — the ring of pale light flickers... and does not come. The System is embarrassed. "YOUR CASE IS NOT COMPLETE. THE DEEDS ARE NOT ALL DONE. WE WILL... RESCHEDULE." The table is withdrawn — for now. It will be set again when the deeds are done.');
-          try { this.save(); } catch (e) {}
-          return;
-        }
-      } catch (e) {}
-      pg.tableDone = true;
-      const frame = this.endingFrame() === 'unwritten' ? 'indispensable' : this.endingFrame();
-      const F = FRAMES[frame];
-      this.say('◈ THE TABLE — it is not a table. It\'s a ring of pale light, and around it, things with too many angles to be faces. Above it all — the audience. Trillions of eyes, and every one of them knows your name. The System speaks, and for once it isn\'t performing: "HUMANITY PRESENTS ITS CASE."');
-      this.say(`Your case. ${F.narrate}`);
-      this.say(`Out there they call you ${F.name.toLowerCase()}. Now — the last choice is yours, and it's live.`);
-      try { this.recordMoment(`Haven reached the table as ${F.name}.`); } catch (e) {}
-      s.tableChoices = {
-        frame,
-        options: (TABLE_CHOICES[frame] || []).map(c => ({ id: c.id, label: c.label })),
-      };
-      try { this.save(); } catch (e) {}
-    },
-    chooseTableOption(id) {
-      const s = this.state.scholar, pg = this.progState();
-      const tc = s.tableChoices;
-      if (!tc) return null;
-      const opt = (TABLE_CHOICES[tc.frame] || []).find(o => o.id === id);
-      if (!opt) return null;
-      s.tableChoices = null;
-      const F = FRAMES[tc.frame];
-      this.say(`◈ ${F.name.toUpperCase()} — "${opt.label}"`);
-      this.say(opt.outcome);
-      this.recordLegend({ outcome: 'table', frame: tc.frame, choice: opt.label });
-      this.over = true; this.won = true;
-      // WON RUNS ARE WIPED (break-it persistence-2 2026-10-08): save() no-ops
-      // when over, so the pre-choice save survived the finale — Continue
-      // resurrected tableChoices and the final live choice could be re-picked
-      // (ending-shopping). A finished run doesn't continue.
-      try { this.wipe(); } catch (e) {}
-      return null;
-    },
+
+    // ---------- THE TABLE (2026-10-11: the scene moved to table.js) ----------
+    // The old single-choice stub lived here; the integrated endgame (7 paths
+    // × light/dark, pricing, deed-gate re-check at dawn) is now tableScene()
+    // in src/js/table.js, which this file's checkArc re-fire calls (line ~1236).
+    // The deed-gate re-check (stale tableWaiting withdrawn aloud) lives there.
+
 
     // ---------- LINEAGE (the village's own remembered dead) ----------
     // Steve's correction: NO cross-run inheritance. The Codex spans one

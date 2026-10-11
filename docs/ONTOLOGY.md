@@ -916,6 +916,16 @@ Character progression. XP, levels, abilities.
 
 **Consumes:** scholar.xp, scholar.abilities
 
+### relay (`relay-ext.js`)
+The village relay as a PLAYABLE path — "enter the matrix". The Bearer may claim the switchboard office (at a real price: the village loses their hands, and integration erodes grounding while held). Relay verbs: probe (push a button — discovery or backfire), reroute (efficiency vs honesty), deepen (integration step), commune (talk to the System — it wants to understand caretaking). Nine communication-field abilities (NOT the 6 System slots): shared core deep-listen/faithful-carry/relay-sight; light translate/sanctuary/advocate; dark rewrite/skim/omnipresence. Dark use erodes grounding (table.js) — integration is two-way.
+
+**Provides:** claimRelay(), relayHeldByBearer(), relayTableLink(), relayProbe(), relayReroute(mode), relayDeepen(), relayCommune(), relayHas(abilId), relayGrant(abilId), relayTranslate(concept), relaySanctuary(), relayAdvocate(vid), relayRewrite(), relaySkim(), relaySight(), relayCarry(), relayBackfire(), relayTick()
+
+**Rules:**
+—
+
+**Consumes:** switchboard(), switchboardAvailable(), appointSwitchboard(), sysBond(), addSysBond(), grounding(), addGrounding() (table.js — runtime calls, safe post-load), integrationStage(), say, sysSay, recordMoment(), save()
+
 ### safety-nets (`safetynets.js`)
 Earned early-game survival safety nets — three played systems, not flat relief. (1) System aid quests (days 7-21): the System offers struggling villages played quests (fetch / treat / learn) with real costs and real failure; help is sometimes bizarrely wrong (canon: alien, out of touch). (2) Crisis relief: when a crisis (sickness cascade, raid aftermath, storm aftermath, hunger winter) hits, a villager-driven relief path opens — triage tents, rationing votes, emergency hunts — each with honest costs, finite per crisis. (3) Neighbor-village aid flows: struggling villages can REQUEST aid (food/medicine/hands) and richer neighbors can OFFER it; real deliveries, trust/reputation both ways, ingratitude remembered. Anti-farm: trigger-gated + cooldowns + finite neighbor pantries + bounded quest count.
 
@@ -1012,6 +1022,86 @@ Tool prerequisites, raw materials, village stash ledger, personal caches. (Save/
 - section_chronic: the chronic net-taker rule covers the item sections too — _stashTotalNet sums materials + tool/weapon/medicine ledgers, and takeTool/_takeStashedItem apply the -20 chronic block (-2 trust, observe('hoard')) exactly like takeMaterial (code: _stashTotalNet, takeTool, _takeStashedItem, miser break-it 2026-10-10)
 
 **Consumes:** scholar.inventory, state.codex
+
+### table-assimilated (`table-assimilated.js`)
+The Assimilated path — the long con. You don't negotiate freedom; you negotiate PLACEMENT: which branch takes you, which access tier, which secrets. Three picks, each a real tradeoff. The safest ending — there is almost no failure here, only worse quarters. The show component is the leaked footage: the only path whose broadcast is contraband. Light = Trojan horse (smuggle the truth inside); dark = true believer (you actually want the warm light).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table-beloved (`table-beloved.js`)
+The Beloved path — the live variety finale. Three acts; you cast villagers (notability-first, the show's own casting law), and the audience meter is live and can TURN on a bad pick. The village-as-protagonist pays off as an ensemble piece you can bomb. Light = genuine love (spend it on the unfilmed); dark = manufactured adoration (the producers offer the edit bay).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table-defiant (`table-defiant.js`)
+The Defiant path — a reverse auction against yourself. Walking away is free to choose; the table presents the price list and you choose the currency: tribute ships (real pantry kcal), the relay's person (a named villager — the switchboard's old price, now final), de-integration (real integration loss — abilities go dark, the overlay dies piece by piece). Each price is someone you know. Failure: the walk stalls at the door when you reach for a price you can't pay. Light = priced freedom; dark = scorched earth.
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table-feared (`table-feared.js`)
+The Feared path — calibrate terror. Three beats: the footage, the calibration, the branch twist. Meters in tension: alien-terror vs villager-horror. Trial by combat (opt-in, real startCombat vs the Finale) is the single existential risk: win and terror maxes; lose and the mantle passes, the village continues weakened. Light = protective terror; dark = domination.
+
+**Provides:** tableTrialByCombat(), tableTrialResume(result)
+
+**Rules:**
+—
+
+**Consumes:** tableState(), tableBranch(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say, sysSay, ledger(), deedState(), startCombat(), tbEnd (wrapped to resume the table), villagerId (mantle-pass detection)
+
+### table-indispensable (`table-indispensable.js`)
+The Indispensable path — contract drafting. Three clauses (supply, teaching, standing) negotiated against aliens who misprice everything; you spot their loopholes or they spot yours. Meters in tension: leverage vs cage — every clause that makes you more necessary tightens the cage, and the best play is sometimes deliberate slack. FULL seat only: the galaxy must actually need you. Light = mutual need (exit ramps); dark = gilded cage (the cage was your idea).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table-relay (`table-relay.js`)
+The Relay path — "enter the matrix". The flagship new path. Distinct from the other six: there the System is terrain (a component you use); here it is the RELATIONSHIP. Four cockpit beats; each beat offers the relay verbs (probe/reroute/deepen/commune from relay-ext.js) — the verbs do their real work (sysBond, grounding, backfire), and the merge meter tracks progress. Failure: three backfires or grounding hitting hollow mid-merge → the System quarantines you. Light = humanize the System (it becomes Earth's champion); dark = System-ize yourself (you become its voice).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table-witness (`table-witness.js`)
+The Witness path — the trial of the judges. Three beats: opening charges (from the real exposed count), the defense (your own villagers testify about YOUR leadership in their own words — sampled by personality, honest to the vector), the branch twist. Plays on the moot register: the exposed count came from real accusations. Meters: swing — your record can convict you mid-trial. Light = just trial (submit your own ledger); dark = show trial (the audience chants for blood).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### table (`table.js`)
+The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
+
+**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text)
+
+**Rules:**
+—
+
+**Consumes:** state.scholar, state.village, progState(), ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
 
 ### tile-scenes (`tile-scenes.js`)
 Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
