@@ -31808,7 +31808,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const flankD = this.tbFlankBonus ? this.tbFlankBonus(m, t) : 0;
             if (flankD > 0) dmg += flankD;
             if (m.blind > 0 && Math.random() < 0.5) { missed = true; }
-            if (missed) this.say(`${this.encShortLabel(m) || m.name}'s ${this.encAttackName(m, tg.attackName)} swipes at sand-ghosts. Missed. (pocket_sand)`);
+            // POSSESSIVE-GENERIC (endgame-leg fix 2026-10-11): the direct
+            // path composed its own "'s " + hitName, bypassing encDamageSource
+            // — a NAMED monster with a knowledge-gated generic attack read
+            // "Redactor's the attack" (observed in a live wave-3 fight;
+            // encDamageSource's scale-leg fix never reached this path).
+            // Route the source label through encDamageSource like the other
+            // strike paths: named+generic -> "Redactor's attack", unnamed ->
+            // "The attack".
+            const dmgSrc = this.encDamageSource(m, tg.attackName);
+            if (missed) this.say(`${dmgSrc} swipes at sand-ghosts. Missed. (pocket_sand)`);
             else {
               const hitName = this.encAttackName(m, tg.attackName);
               // UNDERSTUDY DESPERATE IMPROV (Steve 2026-10-06): the chain
@@ -31817,12 +31826,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 this.say(`💥 ${this.encShortLabel(m) || m.name}'s DESPERATE IMPROV — your ${tg.usImprovNames[0]}, then your ${tg.usImprovNames[1]} — finds you. Badly. Frantically.`);
                 this.tbDamage(t.key, dmg, (this.encShortLabel(m) || m.name) + "'s Desperate Improv", m.key);
               } else {
-                this.say(`💥 ${this.encShortLabel(m) || m.name}'s ${hitName} finds ${t.kind === 'player' ? 'you' : t.name} — no dodging it.` + (flankD > 0 ? ` (FLANKED +${flankD})` : ''));
+                this.say(`💥 ${dmgSrc} finds ${t.kind === 'player' ? 'you' : t.name} — no dodging it.` + (flankD > 0 ? ` (FLANKED +${flankD})` : ''));
                 // SUNBASKER (Steve 2026-10-06): the bite TRACKS — footwork can't
                 // dodge it. The fiction says "no dodging it" and means it; the
                 // counterplay is hitting it mid-windup to starve the charge.
                 // (Blindness can still make it whiff — that's not dodging.)
-                this.tbDamage(t.key, dmg, (this.encShortLabel(m) || m.name) + "'s " + hitName,
+                this.tbDamage(t.key, dmg, dmgSrc,
                   m.key, this.sunbaskerIs(m) ? { undodgeable: true } : undefined);
               }
               // HECKLER (Steve 2026-10-06): landing a hit feeds the set — it
