@@ -90,6 +90,13 @@
       try {
         var name = seName(this, target);
         var out = String(tpl == null ? '' : tpl);
+        // POSSESSIVE (break-it disease r14 2026-10-11): "{name}'s" renders as
+        // "You's" for the player — ungrammatical ("You's neck", "You's jaw").
+        // The player gets "your"; named targets keep the 's. Must run BEFORE
+        // the plain {name} replacement below. Both ASCII and curly apostrophes.
+        var poss = (name === 'You') ? 'your' : name + "'s";
+        out = out.split("{name}'s").join(poss);
+        out = out.split("{name}\u2019s").join(poss);
         out = out.split('{name}').join(name);
         out = out.split('{verb}').join(seVerb(name));
         if (vars) {
