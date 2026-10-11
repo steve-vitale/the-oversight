@@ -1322,17 +1322,19 @@
       const temp = ((v.personality || {}).temperament || 'steady').toLowerCase();
       const name = (v.name || 'they').split(' ')[0];
 
-      // Know from occupation
+      // Know from occupation. PRONOUN-NEUTRAL (background audit 2026-10-11):
+      // these lines were gendered ("she can look at a wound") while keyed
+      // only on occupation — a male nurse got "she". Neutral phrasing.
       const knowByOcc = {
-        'nurse': 'triage — she can look at a wound and tell you if it\'s going to kill you',
-        'cook': 'food — he can make anything edible, and most things delicious',
+        'nurse': 'triage — reading a wound like a weather report',
+        'cook': 'food — making anything edible, most things delicious',
         'chef': 'precision with a knife — no waste, no hesitation',
-        'driver': 'roads — thirty years of knowing where everything is, or was',
+        'driver': 'roads — decades of knowing where everything is, or was',
         'engineer': 'fixing things — wire, tape, and stubbornness',
-        'accountant': 'numbers — she can organize chaos into systems',
-        'teacher': 'explaining — she can make anything make sense',
-        'farmer': 'growing — she knows what the land wants',
-        'mechanic': 'engines — he hears what\'s wrong before he sees it',
+        'accountant': 'numbers — organizing chaos into systems',
+        'teacher': 'explaining — making anything make sense',
+        'farmer': 'growing — knowing what the land wants',
+        'mechanic': 'engines — hearing what\'s wrong before seeing it',
       };
       let know = 'surviving — they\'ve learned fast';
       for (const [k, val] of Object.entries(knowByOcc)) {
@@ -1349,13 +1351,27 @@
       ];
       const want = wants[Math.floor(Math.random() * wants.length)];
 
-      // Feel from temperament
+      // Feel from temperament. Every temperament gets its own read —
+      // falling back to 'steady' made a mischievous villager "calm on the
+      // surface", a voice/personality mismatch (background audit 2026-10-11).
       const feelByTemp = {
         'warm': 'Open and tired. They\'re holding on by holding others.',
         'steady': 'Calm on the surface. They\'ve decided to endure.',
         'sharp': 'Alert and a little angry. They\'re not going down easy.',
         'restless': 'Itchy. They need to move, to do, to not think.',
         'bold': 'Confident, or performing confidence. Hard to tell.',
+        'cautious': 'Careful. Measuring everyone, including you.',
+        'prickly': 'Guarded. The warmth is there; the door isn\'t.',
+        'dry': 'Amused at everything, including this.',
+        'gentle': 'Soft-spoken. Kindness as a deliberate practice.',
+        'intense': 'Focused like a held breath. A lot, all at once.',
+        'withdrawn': 'Far away even standing here. Watching, always.',
+        'anxious': 'Wound tight. Already rehearsing what could go wrong.',
+        'sardonic': 'Smirking at a world that keeps proving them right.',
+        'earnest': 'Sincere to the point of vulnerability. Means it all.',
+        'fidgety': 'Buzzing. Hands, feet, eyes — always in motion.',
+        'stoic': 'Still water. Feeling plenty, showing none.',
+        'mischievous': 'Up to something. Probably harmless. Probably.',
       };
       const feel = feelByTemp[temp] || feelByTemp.steady;
 
@@ -1372,6 +1388,20 @@
         `I ${['stole medicine from the stash once and never confessed', 'know who took the extra rations but won\'t say', 'saw something in the woods I\'m not telling anyone about'][Math.floor(Math.random() * 3)]}.`,
       ];
       const secret = secrets[Math.floor(Math.random() * secrets.length)];
+
+      // SECRET/WANT UNIQUENESS (background audit 2026-10-11, unique-person
+      // law): two villagers confessing the identical secret reads as one
+      // template. Re-roll on collision within the expedition (bounded —
+      // the pool still stands when exhausted).
+      try {
+        const _us = this._usedSecrets || (this._usedSecrets = new Set());
+        let w2 = want, s2 = secret, guard = 0;
+        while (_us.has('w:' + w2) && guard++ < 8) w2 = wants[Math.floor(Math.random() * wants.length)];
+        guard = 0;
+        while (_us.has('s:' + s2) && guard++ < 8) s2 = secrets[Math.floor(Math.random() * secrets.length)];
+        _us.add('w:' + w2); _us.add('s:' + s2);
+        return { want: w2, know, feel, secret: s2, relationships: [] };
+      } catch (e) { /* fall through */ }
 
       return { want, know, feel, secret, relationships: [] };
     },

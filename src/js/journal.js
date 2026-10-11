@@ -782,6 +782,10 @@
           bold: 'effusive', cautious: 'halting', warm: 'plainspoken',
           prickly: 'laconic', steady: 'plainspoken', restless: 'wry',
           dry: 'wry', gentle: 'formal', intense: 'laconic', withdrawn: 'halting',
+          // background audit 2026-10-11: these fell back to plainspoken —
+          // a mischievous villager should not sound plainspoken.
+          anxious: 'halting', sardonic: 'wry', earnest: 'plainspoken',
+          fidgety: 'effusive', stoic: 'laconic', mischievous: 'wry',
         };
         let register = REG_BY_TEMP[temp] || 'plainspoken';
         try {

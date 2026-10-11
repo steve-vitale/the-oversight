@@ -515,10 +515,17 @@
       // WORK: interpreters, ESL teachers, pilots and the like speak their claimed
       // tongues. The occupation IS the reason — it runs BEFORE the lingua-franca
       // roll so the random pick can never shadow it (no reason) or downgrade it.
+      // UNIQUENESS (background audit 2026-10-11): the old wording
+      // ("{They} learned English for work — the job demanded it.") was
+      // identical for every polyglot occupation. The occupation IS the
+      // differentiator (and it's deduped per expedition).
+      const _occTitleW = String((occ && occ.name) || 'survivor');
+      const _occLowW = _occTitleW.charAt(0).toLowerCase() + _occTitleW.slice(1);
+      const _anOccW = (/^[aeiou]/i.test(_occLowW) ? 'an ' : 'a ') + _occLowW;
       for (const l of ((occ && occ.polyglot) || [])) {
         if (!levels[l]) {
           levels[l] = 2;
-          reasons.push(`{They} learned ${langName(l)} for work — the job demanded it.`);
+          reasons.push(`{They} learned ${langName(l)} on the job as ${_anOccW}.`);
         }
       }
       // HERITAGE: the name's culture differs from home — diaspora family.
@@ -606,7 +613,7 @@
         // fillPronouns: substitute {They}/{they}/{their}/{them}/{first} AND conjugate
         // the verb that follows {They}/{they} for she/he. "They keep" but "She keeps".
         // Only listed verbs are touched — everything else passes through unchanged.
-        const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes' };
+        const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes', believe: 'believes', decide: 'decides', get: 'gets', lead: 'leads', live: 'lives', measure: 'measures', move: 'moves', notice: 'notices', own: 'owns', plant: 'plants', reach: 'reaches', remember: 'remembers', remind: 'reminds', respect: 'respects', smile: 'smiles', take: 'takes', watch: 'watches' }; // extended 2026-10-11: templates use these after {They}/{they} (believe/decide/get/lead/measure/own/plant/remember/respect/...) and she/he villagers got bare forms
         // skill/occ/origin are substituted in backstories too — defined before
         // fillPronouns runs (was a TDZ crash: fillPronouns is called at line ~262).
         const skill = (occ.teachTags || []).includes('medicinal') ? 'patching people up'
@@ -709,11 +716,36 @@
           for (let i = 0; i < w; i++) goalPool.push(g.id);
         }
         const goal = goalPool.length ? pick(goalPool) : null;
-        const fill = t => t.replaceAll('{first}', first).replaceAll('{occ}', occ.name || 'survivor')
-          .replaceAll('{origin}', origin).replaceAll('{city}', city).replaceAll('{skill}', skill);
+        const fill = (() => {
+          // SLOT COMPLETENESS (background audit 2026-10-11): talk/quest
+          // templates carry {an_occ}/{Occ}/{hope} but fill left them raw --
+          // stored lines leaked unresolved slots (fillTalkLine covered them
+          // at render, but stored-with-slots is a landmine). Resolve here,
+          // mirroring fillTalkLine's article logic; {an_occ} before {occ}.
+          const occRaw = String(occ.name || 'survivor');
+          const occLower = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
+          const an_occ = (/^[aeiou]/i.test(occLower) ? 'an ' : 'a ') + occLower;
+          const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
+          return t => String(t).replaceAll('{an_occ}', an_occ).replaceAll('{Occ}', Occ)
+            .replaceAll('{first}', first).replaceAll('{occ}', occLower)
+            .replaceAll('{origin}', origin).replaceAll('{city}', city)
+            .replaceAll('{skill}', skill).replaceAll('{hope}', hope || 'something better');
+        })();
         const talk = [];
+        // TALK UNIQUENESS (background audit 2026-10-11, unique-person law):
+        // two villagers quoting the identical talk line reads as a fixed
+        // cast. Prefer templates unused this expedition; fall back to the
+        // full pool only when exhausted (same pattern as pickFresh).
+        const _utk = this._usedTalkLines || (this._usedTalkLines = new Set());
         const tt = [...(cg.talkTemplates || [])];
-        while (talk.length < 3 && tt.length) talk.push(fill(tt.splice(Math.floor(Math.random() * tt.length), 1)[0]));
+        while (talk.length < 3 && tt.length) {
+          const fresh = tt.filter(t => !_utk.has(t));
+          const src = fresh.length ? fresh : tt;
+          const t = src.splice(Math.floor(Math.random() * src.length), 1)[0];
+          if (src !== tt) tt.splice(tt.indexOf(t), 1);
+          _utk.add(t);
+          talk.push(fill(t));
+        }
         const quest = (cg.questTemplates || []).map(fill);
         const secretFear = pickFresh(cg.fears && cg.fears.length ? cg.fears : ['being forgotten'], 'fear');
         // INTELLIGENCE: primary from occupation (what the job demanded — a nurse
@@ -722,7 +754,7 @@
         // every trait must be traceable to the character's story.
         const intelDefs = cg.intelligences || {};
         const intelPrimary = (occ.intel && intelDefs[occ.intel]) ? occ.intel : 'steady';
-        const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'] };
+        const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'], sardonic: ['analytical', 'creative'], earnest: ['social', 'steady'], fidgety: ['observant', 'practical'], stoic: ['steady', 'observant'], mischievous: ['creative', 'social'] };
         const curSec = { curious: ['analytical', 'creative'], 'hungry-to-learn': ['analytical', 'creative'], practical: ['practical', 'steady'], wary: ['observant', 'steady'], skeptical: ['analytical', 'observant'], indifferent: ['steady', 'practical'] };
         const secPool = [];
         for (const s of (tempSec[temperament] || ['steady'])) { secPool.push(s, s); }
@@ -748,6 +780,11 @@
           intense: [`${first} listens like the answer matters.`, `When ${first} focuses on someone, they feel it.`, `${first} doesn't do anything halfway, including conversation.`],
           withdrawn: [`${first} keeps to the edges and watches.`, `Drawing ${first} out takes patience; it's usually worth it.`, `${first} is present but elsewhere, if that makes sense.`],
           anxious: [`${first} worries the way other people breathe.`, `Everything is a worst case to ${first} until proven otherwise.`, `${first} checks the perimeter twice and still doesn't sleep well.`],
+          sardonic: [`${first} says the quiet part out loud, with a smile.`, `Nothing gets past ${first} uncommented.`, `${first}'s optimism comes with air quotes.`],
+          earnest: [`${first} means every word, which is rarer than it sounds.`, `What ${first} says is what ${first} thinks — no translation needed.`, `${first} believes in people the way other people believe in weather.`],
+          fidgety: [`${first} is always doing something with ${first} hands.`, `Stillness makes ${first} nervous; motion makes ${first} useful.`, `${first} thinks best while moving.`],
+          stoic: [`${first} takes things as they come, without commentary.`, `You can't tell what ${first} is feeling, which is the point.`, `${first} endures the way stone endures weather.`],
+          mischievous: [`${first} is always up to something, usually harmless.`, `There's a glint in ${first}'s eye that the others have learned to watch.`, `${first} laughs first and explains later.`],
         };
         const _assessClose = {
           steady: [`The others lean on that.`, `People notice, and stand a little closer.`, `It's the kind of steadiness people build plans around.`, `In a crisis, people look for ` + first + `.`, `Calm is contagious, apparently.`],
@@ -761,10 +798,32 @@
           intense: [`The others feel seen — or scrutinized.`, `It's a lot, but it's real.`, `Nobody doubts ${first} is paying attention.`, `Not everyone wants that much attention.`, `Intensity cuts both ways.`],
           withdrawn: [`The others give ${first} space.`, `What's unsaid carries weight with ${first}.`, `The quiet ones notice everything.`, `Still waters, as they say.`, `The quiet is a decision, not an absence.`],
           anxious: [`The others find it exhausting — or endearing.`, `Worry is ${first}'s love language.`, `Nobody doubts ${first} cares.`, `The fretting never stops, but neither does ${first}.`, `Anxiety keeps ${first} checking what others miss.`],
+          sardonic: [`The others laugh before they decide whether to be offended.`, `It's armor, mostly. Sharp armor.`, `Nobody takes ${first} lightly, which suits ${first} fine.`],
+          earnest: [`The others trust it completely.`, `Sincerity like that steadies a room.`, `Nobody doubts where ${first} stands.`],
+          fidgety: [`The others find it endearing — mostly.`, `Something is always getting fixed, sorted, or rearranged.`, `The energy has to go somewhere, and usually does.`],
+          stoic: [`The others take comfort in it.`, `Few words, all of them weighed.`, `Calm like that is load-bearing.`],
+          mischievous: [`The others keep one eye on ${first} at all times.`, `It's fun until it isn't — usually it's fun.`, `Trouble, but the useful kind.`],
         };
         const _ap = _assessPool[temperament] || _assessPool.steady;
         const _ac = _assessClose[temperament] || _assessClose.steady;
-        let sysAssess = _ap[Math.floor(Math.random() * _ap.length)] + ' ' + _ac[Math.floor(Math.random() * _ac.length)];
+        let sysAssess = (() => {
+          // ASSESSMENT UNIQUENESS (background audit 2026-10-11): two villagers
+          // sharing a verbatim sentence reads as one template. Combos alone
+          // weren't enough — two same-temperament villagers could share a
+          // closer via different openers. Dedupe openers and closers as
+          // separate sentences: prefer a combo where both are unused.
+          const _ua = this._usedAssess || (this._usedAssess = new Set());
+          const combos = [];
+          for (let ai = 0; ai < _ap.length; ai++) for (let ci = 0; ci < _ac.length; ci++)
+            combos.push([ai, ci]);
+          const score = ([ai, ci]) => (_ua.has(temperament + ':o:' + ai) ? 1 : 0) + (_ua.has(temperament + ':c:' + ci) ? 1 : 0);
+          const best = Math.min(...combos.map(score));
+          const srcC = combos.filter(c => score(c) === best);
+          const [ai, ci] = srcC[Math.floor(Math.random() * srcC.length)];
+          _ua.add(temperament + ':o:' + ai);
+          _ua.add(temperament + ':c:' + ci);
+          return _ap[ai] + ' ' + _ac[ci];
+        })();
         let darkStored = null;
         if (dark && dark._tell) {
           backstory += ' ' + fillPronouns(dark._tell.note);
@@ -851,7 +910,7 @@
       const their = pro === 'they' ? 'their' : pro === 'she' ? 'her' : 'his';
       const them = pro === 'they' ? 'them' : pro === 'she' ? 'her' : 'him';
       const They = pro === 'they' ? 'They' : pro === 'she' ? 'She' : 'He';
-      const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes' };
+      const conj = { keep: 'keeps', build: 'builds', look: 'looks', know: 'knows', stare: 'stares', read: 'reads', speak: 'speaks', talk: 'talks', stay: 'stays', are: 'is', have: 'has', were: 'was', do: 'does', go: 'goes', believe: 'believes', decide: 'decides', get: 'gets', lead: 'leads', live: 'lives', measure: 'measures', move: 'moves', notice: 'notices', own: 'owns', plant: 'plants', reach: 'reaches', remember: 'remembers', remind: 'reminds', respect: 'respects', smile: 'smiles', take: 'takes', watch: 'watches' }; // extended 2026-10-11: templates use these after {They}/{they} (believe/decide/get/lead/measure/own/plant/remember/respect/...) and she/he villagers got bare forms
       const skill = (occ.teachTags || []).includes('medicinal') ? 'patching people up'
         : (occ.teachTags || []).includes('food') ? 'finding food' : 'making do';
       const fillPronouns = t => t
@@ -950,17 +1009,40 @@
       const goal = goalPool.length ? pick(goalPool) : null;
 
       // Talk and quest templates.
-      const fill = t => t.replaceAll('{first}', first).replaceAll('{occ}', occ.name || 'survivor')
-        .replaceAll('{origin}', origin).replaceAll('{city}', city).replaceAll('{skill}', skill);
+      const fill = (() => {
+        // SLOT COMPLETENESS (background audit 2026-10-11): talk/quest
+        // templates carry {an_occ}/{Occ}/{hope} but fill left them raw --
+        // stored lines leaked unresolved slots (fillTalkLine covered them
+        // at render, but stored-with-slots is a landmine). Resolve here,
+        // mirroring fillTalkLine's article logic; {an_occ} before {occ}.
+        const occRaw = String(occ.name || 'survivor');
+        const occLower = occRaw.charAt(0).toLowerCase() + occRaw.slice(1);
+        const an_occ = (/^[aeiou]/i.test(occLower) ? 'an ' : 'a ') + occLower;
+        const Occ = occRaw.charAt(0).toUpperCase() + occRaw.slice(1);
+        return t => String(t).replaceAll('{an_occ}', an_occ).replaceAll('{Occ}', Occ)
+          .replaceAll('{first}', first).replaceAll('{occ}', occLower)
+          .replaceAll('{origin}', origin).replaceAll('{city}', city)
+          .replaceAll('{skill}', skill).replaceAll('{hope}', hope || 'something better');
+      })();
       const talk = [];
+      // TALK UNIQUENESS (background audit 2026-10-11): same per-expedition
+      // dedup as genCharacter — seeds are people too.
+      const _utk2 = this._usedTalkLines || (this._usedTalkLines = new Set());
       const tt = [...(cg.talkTemplates || [])];
-      while (talk.length < 3 && tt.length) talk.push(fill(tt.splice(Math.floor(Math.random() * tt.length), 1)[0]));
+      while (talk.length < 3 && tt.length) {
+        const fresh = tt.filter(t => !_utk2.has(t));
+        const src = fresh.length ? fresh : tt;
+        const t = src.splice(Math.floor(Math.random() * src.length), 1)[0];
+        if (src !== tt) tt.splice(tt.indexOf(t), 1);
+        _utk2.add(t);
+        talk.push(fill(t));
+      }
       const quest = (cg.questTemplates || []).map(fill);
 
       // Intelligence: same occupation + temperament mapping as genCharacter.
       const intelDefs = cg.intelligences || {};
       const intelPrimary = (occ.intel && intelDefs[occ.intel]) ? occ.intel : 'steady';
-      const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'] };
+      const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'], sardonic: ['analytical', 'creative'], earnest: ['social', 'steady'], fidgety: ['observant', 'practical'], stoic: ['steady', 'observant'], mischievous: ['creative', 'social'] };
       const curSec = { curious: ['analytical', 'creative'], 'hungry-to-learn': ['analytical', 'creative'], practical: ['practical', 'steady'], wary: ['observant', 'steady'], skeptical: ['analytical', 'observant'], indifferent: ['steady', 'practical'] };
       const secPool = [];
       for (const st of (tempSec[temperament] || ['steady'])) { secPool.push(st, st); }
@@ -981,6 +1063,11 @@
         intense: [`${first} listens like the answer matters.`, `When ${first} focuses on someone, they feel it.`, `${first} doesn't do anything halfway, including conversation.`],
         withdrawn: [`${first} keeps to the edges and watches.`, `Drawing ${first} out takes patience; it's usually worth it.`, `${first} is present but elsewhere, if that makes sense.`],
           anxious: [`${first} worries the way other people breathe.`, `Everything is a worst case to ${first} until proven otherwise.`, `${first} checks the perimeter twice and still doesn't sleep well.`],
+          sardonic: [`${first} says the quiet part out loud, with a smile.`, `Nothing gets past ${first} uncommented.`, `${first}'s optimism comes with air quotes.`],
+          earnest: [`${first} means every word, which is rarer than it sounds.`, `What ${first} says is what ${first} thinks — no translation needed.`, `${first} believes in people the way other people believe in weather.`],
+          fidgety: [`${first} is always doing something with ${first} hands.`, `Stillness makes ${first} nervous; motion makes ${first} useful.`, `${first} thinks best while moving.`],
+          stoic: [`${first} takes things as they come, without commentary.`, `You can't tell what ${first} is feeling, which is the point.`, `${first} endures the way stone endures weather.`],
+          mischievous: [`${first} is always up to something, usually harmless.`, `There's a glint in ${first}'s eye that the others have learned to watch.`, `${first} laughs first and explains later.`],
       };
       const _assessClose = {
         steady: [`The others lean on that.`, `People notice, and stand a little closer.`, `It's the kind of steadiness people build plans around.`, `In a crisis, people look for ` + first + `.`, `Calm is contagious, apparently.`],
@@ -994,10 +1081,32 @@
         intense: [`The others feel seen — or scrutinized.`, `It's a lot, but it's real.`, `Nobody doubts ${first} is paying attention.`, `Not everyone wants that much attention.`, `Intensity cuts both ways.`],
         withdrawn: [`The others give ${first} space.`, `What's unsaid carries weight with ${first}.`, `The quiet ones notice everything.`, `Still waters, as they say.`, `The quiet is a decision, not an absence.`],
           anxious: [`The others find it exhausting — or endearing.`, `Worry is ${first}'s love language.`, `Nobody doubts ${first} cares.`, `The fretting never stops, but neither does ${first}.`, `Anxiety keeps ${first} checking what others miss.`],
+          sardonic: [`The others laugh before they decide whether to be offended.`, `It's armor, mostly. Sharp armor.`, `Nobody takes ${first} lightly, which suits ${first} fine.`],
+          earnest: [`The others trust it completely.`, `Sincerity like that steadies a room.`, `Nobody doubts where ${first} stands.`],
+          fidgety: [`The others find it endearing — mostly.`, `Something is always getting fixed, sorted, or rearranged.`, `The energy has to go somewhere, and usually does.`],
+          stoic: [`The others take comfort in it.`, `Few words, all of them weighed.`, `Calm like that is load-bearing.`],
+          mischievous: [`The others keep one eye on ${first} at all times.`, `It's fun until it isn't — usually it's fun.`, `Trouble, but the useful kind.`],
       };
       const _ap = _assessPool[temperament] || _assessPool.steady;
       const _ac = _assessClose[temperament] || _assessClose.steady;
-      let sysAssess = _ap[Math.floor(Math.random() * _ap.length)] + ' ' + _ac[Math.floor(Math.random() * _ac.length)];
+      let sysAssess = (() => {
+          // ASSESSMENT UNIQUENESS (background audit 2026-10-11): two villagers
+          // sharing a verbatim sentence reads as one template. Combos alone
+          // weren't enough — two same-temperament villagers could share a
+          // closer via different openers. Dedupe openers and closers as
+          // separate sentences: prefer a combo where both are unused.
+          const _ua = this._usedAssess || (this._usedAssess = new Set());
+          const combos = [];
+          for (let ai = 0; ai < _ap.length; ai++) for (let ci = 0; ci < _ac.length; ci++)
+            combos.push([ai, ci]);
+          const score = ([ai, ci]) => (_ua.has(temperament + ':o:' + ai) ? 1 : 0) + (_ua.has(temperament + ':c:' + ci) ? 1 : 0);
+          const best = Math.min(...combos.map(score));
+          const srcC = combos.filter(c => score(c) === best);
+          const [ai, ci] = srcC[Math.floor(Math.random() * srcC.length)];
+          _ua.add(temperament + ':o:' + ai);
+          _ua.add(temperament + ':c:' + ci);
+          return _ap[ai] + ' ' + _ac[ci];
+        })();
       let darkStored = null;
       if (dark && dark._tell) {
         backstory += ' ' + fillPronouns(dark._tell.note);
@@ -1085,6 +1194,13 @@
       // personality dedupe registries: quirks, habits, hopes, fears shouldn't
       // repeat within an expedition either. Reset per roster.
       this._usedTraits = { quirk: new Set(), habit: new Set(), hope: new Set(), fear: new Set() };
+      // talk lines + system assessments: verbatim repeats across villagers
+      // read as a fixed cast (background audit 2026-10-11). Reset per roster.
+      this._usedTalkLines = new Set();
+      this._usedAssess = new Set();
+      this._usedSecrets = new Set();
+      this._usedEventFrames = new Set();
+      this._usedPlaces = new Set();
       const chars = [];
       for (let i = 0; i < 4; i++) {
         chars.push(this.genCharacter({ origin, forceCultureMatch: true, candidate: true, usedNames, usedOccs }));
@@ -1832,7 +1948,7 @@
       this.state.village.bgIntel = {};
       {
         const intelDefs = (this.data.characterGen || {}).intelligences || {};
-        const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'] };
+        const tempSec = { bold: ['creative', 'practical'], intense: ['creative', 'analytical'], cautious: ['observant', 'steady'], warm: ['social', 'steady'], gentle: ['social', 'steady'], steady: ['steady', 'practical'], withdrawn: ['analytical', 'observant'], prickly: ['analytical', 'observant'], restless: ['creative', 'observant'], dry: ['analytical', 'observant'], anxious: ['observant', 'steady'], sardonic: ['analytical', 'creative'], earnest: ['social', 'steady'], fidgety: ['observant', 'practical'], stoic: ['steady', 'observant'], mischievous: ['creative', 'social'] };
         for (const id of bg) {
           const person = (this.data.background_survivors || []).find(s => s.id === id) || {};
           const occName = String(person.formerOccupation || '').toLowerCase();
