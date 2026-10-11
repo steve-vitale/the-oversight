@@ -757,19 +757,34 @@
       // choke point spans NPCs within a run — Lena and David must not speak
       // the same line verbatim. Per-conversation saidLines can't catch that.
       const runLedger = this.convoRunLedger();
-      const blocked = c.saidLines.indexOf(key) !== -1 || runLedger.indexOf(key) !== -1;
+      const selfBlocked = c.saidLines.indexOf(key) !== -1;
+      const runBlocked = !selfBlocked && runLedger.indexOf(key) !== -1;
       // FALLBACK (journey-social 2026-10-11): a blocked line must never go
       // silent — "no silent actions" is a standing rule, and a blocked beat
       // with fired consequences (trust/mood/evidence) but no words reads as
-      // a dead verb. Callers that pass opts.fallback get the fallback spoken
-      // instead; it is deliberately EXEMPT from the ledgers (it is generic
-      // by design — ledgering it would just re-silence the beat). Callers
-      // without a fallback keep the old null contract.
+      // a dead verb. Self-repeat blocks use the caller's opts.fallback (or
+      // null); run-ledger blocks get the honest dry line (convoDryLine).
+      // Fallbacks are deliberately EXEMPT from the ledgers (generic by
+      // design — ledgering them would just re-silence the beat).
+      // RUN-BLOCK HONESTY (convo gaps 2026-10-11, Steve: "Address any
+      // gaps!"): when the block comes from the RUN ledger, another villager
+      // said the line recently — this speaker didn't. The old fallback
+      // ("I just said — did you miss it?") LIED, and because it was
+      // ledger-exempt it parroted verbatim on consecutive blocks, reading
+      // as the NPC snapping at the player. Run-blocks now get an honest dry
+      // line (per-conversation cycling, never verbatim); only true
+      // self-repeats keep the caller's "I just said" fallback.
       let useChunks = chunks;
-      if (blocked) {
-        const fb = opts && opts.fallback;
-        if (!fb) return null; // blocked: already said
-        useChunks = this.convoSplitBeats(String(fb));
+      if (selfBlocked || runBlocked) {
+        if (runBlocked) {
+          const dry = this.convoDryLine(vid);
+          if (!dry) return null;
+          useChunks = this.convoSplitBeats(dry);
+        } else {
+          const fb = opts && opts.fallback;
+          if (!fb) return null; // blocked: already said
+          useChunks = this.convoSplitBeats(String(fb));
+        }
         // generic fallback: never ledgered, never blocked
       } else {
         c.saidLines.push(key);
@@ -827,6 +842,26 @@
       const v = this.state.village || {};
       if (!v.convoRunLines) v.convoRunLines = [];
       return v.convoRunLines;
+    },
+
+    // convoDryLine: honest dry lines for run-ledger blocks. The line was
+    // swallowed because ANOTHER villager said it recently — the speaker
+    // didn't, so "I just said" would be a lie. These admit the dropped
+    // thread without snapping at the player. Per-conversation cycling so
+    // they never parrot verbatim (the old bug). Capped: past 9 uses in one
+    // conversation something else is broken and silence is the honest
+    // signal. Never ledgered (generic by design, like the old fallback).
+    convoDryLine(vid) {
+      const c = this.convoGet(vid);
+      const DRY = [
+        '"...Sorry, lost my train of thought."',
+        '"Hm. Never mind — go on."',
+        '"...Actually, forget it."',
+      ];
+      const used = c.dryLines || 0;
+      if (used >= DRY.length * 3) return null;
+      c.dryLines = used + 1;
+      return DRY[used % DRY.length];
     },
 
     convoGet(vid) {
@@ -1875,6 +1910,21 @@
       try {
         const vf = fresh.filter(l => this.villageLineFresh(l));
         if (vf.length) pickPool = vf;
+      } catch (e) {}
+      // RUN-LEDGER AWARENESS (convo gaps 2026-10-11): prefer lines no
+      // villager has spoken in the current window — sayLine would block
+      // them anyway, and the block is what produced the lying fallback.
+      // A preference, not a hard filter: small pools must not collapse.
+      try {
+        const rl = this.convoRunLedger ? this.convoRunLedger() : [];
+        if (rl.length) {
+          const key0 = (l) => {
+            try { return this.convoSplitBeats(String(l))[0].trim(); }
+            catch (e2) { return String(l).trim(); }
+          };
+          const unf = pickPool.filter(l => rl.indexOf(key0(l)) === -1);
+          if (unf.length) pickPool = unf;
+        }
       } catch (e) {}
       const line = pickPool[Math.floor(Math.random() * pickPool.length)];
       c.said[key].push(line);

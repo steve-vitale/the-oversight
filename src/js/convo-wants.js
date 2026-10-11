@@ -1059,16 +1059,30 @@
     // NEVER gates want depth. A stranger opens with something they want —
     // a question, a favor, news with a point. Small talk is the greeting,
     // never the whole conversation.
+    // FIRST-MEETING CURIOSITY (convo gaps 2026-10-11, Steve: "Address any
+    // gaps!"): the want economy had one winner — ask_favor's urgency 2-4
+    // beat every other want's 0.5-1.5 whenever ANY real need existed, so
+    // across 66 first meetings zero NPC questions fired and CONVERSATIONS.md's
+    // "strangers are curious" guarantee died. Design call: first meetings
+    // lead with curiosity about the stranger, not errands. ACUTE needs
+    // (urgency 4: hunger>70, health<60, sick) still lead — that's human.
+    // Chronic needs (urgency <= 3) are dampened on first meetings only.
     convoSelectWant(vid) {
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
         return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null };
       }
+      const c0 = this.convoGet(vid);
+      const firstMeeting = (c0.count || 0) <= 1;
       let best = null, bestW = -1;
       for (const id of Object.keys(WANTS)) {
         const def = WANTS[id];
         let w = 0;
         try { w = def.pick.call(this, vid); } catch (e) { w = 0; }
+        if (firstMeeting) {
+          if (id === 'curious') w = Math.max(w, 3);
+          else if (id === 'ask_favor' && w > 0 && w < 4) w = w * 0.4;
+        }
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }
@@ -1305,8 +1319,18 @@
       try { askedAny = this.villageAskedQs ? this.villageAskedQs() : []; } catch (e) {}
       const pool = (cg.questions || []).filter(q =>
         (c.askedQs || []).indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok(q));
-      if (!pool.length) return null;
-      return pool[Math.floor(Math.random() * pool.length)];
+      if (pool.length) return pool[Math.floor(Math.random() * pool.length)];
+      // VILLAGE-WIDE POOL EXHAUSTED (convo gaps 2026-10-11): with 36
+      // questions and village-wide dedup, a busy village drains the shared
+      // pool — then no low-trust stranger can ever ask anything. Fall back
+      // to per-villager-unasked: a small camp circles back to the same
+      // worries, and hearing a repeat from a different villager beats a
+      // stranger with no questions at all. (Mirrors the fallback the
+      // mid-conversation question path already had.)
+      const perVillager = (cg.questions || []).filter(q =>
+        (c.askedQs || []).indexOf(q.id) === -1 && qok(q));
+      if (!perVillager.length) return null;
+      return perVillager[Math.floor(Math.random() * perVillager.length)];
     },
 
     // convoHangWantQuestion: the curious want hangs its bespoke question as

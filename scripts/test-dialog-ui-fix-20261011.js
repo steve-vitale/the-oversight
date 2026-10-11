@@ -247,7 +247,13 @@ const ok = (name, cond, extra) => {
     const r2 = Game.sayLine(vidB, lineX);
     Game.endConvo(vidB, 'left');
     ok('D7: first NPC says the line', r1 === lineX);
-    ok('D7: run-wide ledger blocks verbatim cross-NPC repeat', r2 === null);
+    // RUN-BLOCK HONESTY (convo gaps 2026-10-11): a run-ledger block no
+    // longer returns null ("no silent actions" — a blocked beat with fired
+    // consequences but no words is a dead verb). It returns an honest dry
+    // line — never the original verbatim (defect 7 still holds), never the
+    // lying "I just said" snap (this speaker didn't say it).
+    ok('D7: run-wide ledger blocks verbatim cross-NPC repeat',
+      r2 !== null && r2 !== lineX && r2.indexOf('did you miss it') === -1);
     // engageBeat/closeLine are pools now (no fixed strings)
     const wants = fs.readFileSync(path.join(ROOT, 'src/js/convo-wants.js'), 'utf8');
     ok('D7: engageBeat fallback is a pool (convoPickCycle)',
