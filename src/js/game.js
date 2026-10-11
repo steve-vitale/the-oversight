@@ -9721,24 +9721,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // WATER: flow + clarity + source synthesize. running is better than stagnant.
       if (cell === 'water') {
         const mod = t.modifiers && t.modifiers[key];
+        const desc = mod ? `${mod.flow}, ${mod.clarity}, ${mod.source}` : 'water';
+        const wise = this.waterSafetyKnown();
         if (secret && !secret.known) {
           secret.known = true;
           if (mod) mod.known = true;
-          const desc = mod ? `${mod.flow}, ${mod.clarity}, ${mod.source}` : 'water';
-          const wise = this.waterSafetyKnown();
           if (!secret.safe) {
             if (wise) this.say(`This water is ${desc}. Wrong. Poison. You mark it. Don\'t drink.`);
             else this.say(`Water: ${desc}. You can't tell if it's safe — clear doesn't mean clean. (Someone with water knowledge could tell.)`);
             return true;
-          } else {
-            if (wise) this.say(`Water: ${desc}. Safe. You drink.`);
-            else this.say(`Water: ${desc}. Looks clear enough — you drink and hope.`);
           }
+          return this.drinkFromCell(desc, wise);
         } else if (secret && secret.known && !secret.safe) {
           this.say('Poison water. You know better.');
           return true;
         }
-        return this.doAction('drink');
+        // DRINK FROM THE CELL (survivalist loop 2026-10-11, r7): the Drink
+        // button only renders on known-safe water, and the fiction always
+        // promised "You drink" — but the engine drank the BOTTLES and said
+        // "No water" with empty bottles, contradicting the fiction two lines
+        // up (and double-charging the clock: drinkWater's tick plus
+        // cellInteract's tick). Drinking at safe water drinks the water
+        // you're standing at — clean, +50 hydration. Bottles are for
+        // carrying; drink them from the pack UI (doAction 'drink').
+        return this.drinkFromCell(desc, wise);
       }
       // TENT: maybe good, shredded, or packable. Looking is cheap and always
       // says something. RESTING is a separate explicit decision (96 ticks —
@@ -12198,6 +12204,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const occ = String(v.formerOccupation || '').toLowerCase();
       if (/hunter|tracker|scout|guide|ranger|soldier/i.test(occ)) return true;
       return false;
+    },
+    // drinkFromCell(desc, wise): drink the water you're standing at. The cell
+    // Drink button only renders on known-safe water, so this is always clean —
+    // no bottle needed, no disease roll. +50 hydration. The 1 tick is charged
+    // by cellInteract on the truthy return (every successful interact costs a
+    // glance) — no internal tick here, or the clock double-charges. The
+    // thirsty gate runs BEFORE any "You drink" fiction: a refusal must never
+    // print the fiction first. (Bottles are for carrying — drink them from
+    // the pack UI via doAction('drink') -> drinkWater.)
+    drinkFromCell(desc, wise) {
+      const s = this.state.scholar;
+      // NOT THIRSTY (same gate as the bottle path): don't burn the moment for
+      // near-zero benefit. Free, honest, and silent about drinking.
+      if ((s.hydration || 0) >= 95) { this.say("You're not thirsty — save it."); return null; }
+      if (wise) this.say(`Water: ${desc}. Safe. You drink.`);
+      else this.say(`Water: ${desc}. Looks clear enough — you drink and hope.`);
+      s.hydration = Math.min(100, (s.hydration || 0) + 50);
+      // ACTION CLOCK: cellInteract charges the tick on the truthy return.
+      // In combat, time doesn't pass — the drink costs your action instead,
+      // like every other consumable (Steve 2026-10-05).
+      if (this.inCombat()) this.spendCombatAction('drink');
+      this.checkQuest('drink');
+      this.maybeOfferQuest();
+      return true;
     },
     drinkWater() {
       const s = this.state.scholar;
@@ -21584,12 +21614,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say('You wait. The light changes. Nothing asks anything of you.');
         return wr || this.status();
       } else if (kind === 'drink') {
-        // Drinking water. Hydrates. FREE — you're just drinking, not making a decision.
+        // Bottle drink (pack UI "Drink"). drinkWater charges the canon 1 tick
+        // internally (TIME-ECONOMY.md) — the old "FREE" comment was stale.
         // (drinkWater says what happened; it returns null either way.)
         this.drinkWater();
         this.checkQuest(kind);
         this.maybeOfferQuest();
-        return true; // FREE: drinking isn't a day-part decision
+        return true;
       }
       this.say(msg);
       this.checkQuest(kind);

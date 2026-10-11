@@ -13444,7 +13444,7 @@
     // is L2 knowledge. The button names the odds; blind is never "disabled".
     const craftableRecipes = recipes.filter(r => ((Game.state.codex.recipes || {})[r.id] || {}).level >= 1);
     const bodyHtml = `
-        ${(() => { const w = Game.state.scholar.water || []; if (!w.length) return ''; const clean = w.filter(b => b.quality === 'clean').length; const risky = w.filter(b => b.quality === 'risky').length; const hasFilter = (Game.state.scholar.tools || []).some(t => t.recipeId === 'water_filter' && (t.uses || 0) > 0); return `<p class="small" style="margin:8px 0;padding:8px;background:#1a2a3a;border-radius:6px"><b>\uD83D\uDCA7 Water:</b> ${clean}L clean${risky ? `, ${risky}L risky` : ''} (${w.length}kg)${risky && hasFilter ? ` <button class="btn ghost sm" data-filterwater="1">Filter ${risky}L</button>` : ''} <button class="btn ghost sm" data-pourwater="1" title="Pour out 1L, risky first. Water is heavy.">Pour out 1L</button></p>`; })()}
+        ${(() => { const w = Game.state.scholar.water || []; if (!w.length) return ''; const clean = w.filter(b => b.quality === 'clean').length; const risky = w.filter(b => b.quality === 'risky').length; const hasFilter = (Game.state.scholar.tools || []).some(t => t.recipeId === 'water_filter' && (t.uses || 0) > 0); return `<p class="small" style="margin:8px 0;padding:8px;background:#1a2a3a;border-radius:6px"><b>\uD83D\uDCA7 Water:</b> ${clean}L clean${risky ? `, ${risky}L risky` : ''} (${w.length}kg)${risky && hasFilter ? ` <button class="btn ghost sm" data-filterwater="1">Filter ${risky}L</button>` : ''} <button class="btn ghost sm" data-drinkwater="1" title="Drink 1L from your bottles (clean first). 1 tick.">Drink</button> <button class="btn ghost sm" data-pourwater="1" title="Pour out 1L, risky first. Water is heavy.">Pour out 1L</button></p>`; })()}
         <h3 style="margin:12px 0 6px">🎒 Carried <span style="opacity:.6;font-weight:normal;font-size:13px">(${Game.pluralize(inv.length, 'item')})</span></h3>
         ${inv.length ? inv.map((i, idx) => {
           // FOOD REALITY: per-item processing buttons + state markers.
@@ -13543,6 +13543,10 @@
     slot.querySelectorAll('[data-shell]').forEach(b => b.onclick = rewire(() => Game.shellNuts(+b.dataset.shell), 'Shelled.'));
     // WATER FILTER: pour risky water through the filter, anywhere.
     slot.querySelectorAll('[data-filterwater]').forEach(b => b.onclick = rewire(() => Game.filterWater(), 'Filtered.'));
+    // DRINK (survivalist loop 2026-10-11, r7): carried water had no drink UI
+    // away from a water cell — the pack showed liters you couldn't drink.
+    // Bottles are for carrying; this drinks them (clean first, 1 tick).
+    slot.querySelectorAll('[data-drinkwater]').forEach(b => b.onclick = rewire(() => Game.doAction('drink'), 'Drank.'));
     // POUR OUT: shed water weight — water is heavy, and the pack is honest.
     slot.querySelectorAll('[data-pourwater]').forEach(b => b.onclick = rewire(() => Game.pourWater(), 'Poured out.'));
     // UNKNOWN MEAT: test cautiously to learn if it's food.
