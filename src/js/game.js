@@ -19499,6 +19499,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (ops.length && giftFits) {
           const gain = ops[Math.floor(Math.random() * ops.length)];
           s.abilities.push({ id: gain.id, name: gain.name, desc: gain.description, level: 1, xp: 0 });
+          // BREAK-IT abilities r5: the Static's gift is an acquisition too --
+          // priced gifts (e.g. hive_mind) pay their documented costs, like
+          // any other grant path. Used to skip abilityOnAcquire.
+          try { this.abilityOnAcquire(gain.id); } catch (e2) {}
           this.say(`PACT: the Static gives — ${gain.name}.`);
         } else if (ops.length) {
           const gain = ops[Math.floor(Math.random() * ops.length)];

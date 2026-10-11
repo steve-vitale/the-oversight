@@ -824,6 +824,20 @@
       // and an immediate "more scar than skin" refusal on a body that never
       // bled), contradicting "new body, no old afflictions" just below.
       s.bloodPriceWound = 0; s.bloodPriceDayPart = null; s.bloodPriceUses = 0;
+      // NEW BODY, NEW BUDGETS (break-it abilities r5): body budgets are the
+      // old body's, like the blood-price wound above -- the successor steps
+      // up fresh (molt's shed cycle, second_wind's day, the day-part heals).
+      // The office's progression (slots, arc, integration, ledger, Codex)
+      // passes; the body's counters don't.
+      s.moltWeek = null; s.moltUses = 0;
+      s.secondWindDay = null; s.secondWindUses = 0;
+      s.fieldMedDayPart = null; s.herbalDay = null; s.purifyDay = null;
+      s.echoDay = null; s.timeSkipDay = null; s.screamDay = null;
+      // SIBLING SWEEP: the feast buff is a metabolic state (the old body ate
+      // the feast), and a mid-rage death must not hand the successor a live
+      // rage (undying_fury reads rageActive.rounds). Both die with the body.
+      try { delete s.feastBuff; } catch (e) {}
+      try { delete s.rageActive; } catch (e2) {}
       s.kcal = 1500;
       try { s.health = this.maxHealth(); } catch (e) { s.health = 100; }
       s.trauma = 10; // the shock of stepping up
@@ -1076,7 +1090,10 @@
       } catch (e) {}
       this.say(`📺 ${nm} dies in the arena. The show keeps the footage. They always keep the footage.`);
       try { this.recordMoment(`${nm} died in the arena. The footage plays on.`); } catch (e) {}
-      try { this.playerDeath('the arena'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+      // BREAK-IT abilities r5: even this legacy path is a real death -- the
+      // cheats get their say first (violent cause). (No live callers; the
+      // invariant is that no playerDeath site bypasses the gate.)
+      try { if (!this.maybeCheatDeath()) this.playerDeath('the arena'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
       return null;
     },
     replayFootage() {

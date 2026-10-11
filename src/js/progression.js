@@ -735,6 +735,11 @@
           const def = this._synergyGiftPick(cands, owned) || pick(cands);
           s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
           gift = def.name;
+          // BREAK-IT abilities r5: a System gift is still an acquisition --
+          // priced abilities pay their documented costs (chitin_skin /
+          // fear_aura trust, hive_mind's map reveal), whichever path grants
+          // them. The trial used to skip abilityOnAcquire entirely.
+          try { this.abilityOnAcquire(def.id); } catch (e3) {}
           // BREAK-IT abilities 2026-10-10 (sibling sweep): a granted ability
           // can complete a synergy's legs — recompute, like every other
           // grant path (chooseAbility, pact, gainAbilityXP level-up).

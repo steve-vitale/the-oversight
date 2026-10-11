@@ -4286,7 +4286,12 @@
     // game reads Game.over) with no wipe: a throwing playerDeath left a live
     // save behind AND a split-brain zombie (Game.over=false, state.over=true
     // persisted across load). Now it matches the other four death catches.
-    try { this.playerDeath('contest'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+    // BREAK-IT abilities r5: a contest death is a real, violent death -- and
+    // the cheats get their say first ("unkillable means unkillable",
+    // PROGRESSION.md). Zero the pool so narrative DIE terminals (the Maw,
+    // a verdict) are answerable deaths too, not just the arena-fight path.
+    try { const cs = this.state.scholar; if (cs) cs.health = 0; } catch (e0) {}
+    try { if (!this.maybeCheatDeath()) this.playerDeath('contest'); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
     return { done: true, outcome: 'died' };
   };
 
