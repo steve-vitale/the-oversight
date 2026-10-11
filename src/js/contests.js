@@ -114,6 +114,10 @@
 //   - summons_budget: ratings summons consume the shared 2/week TV budget like contests and shows (code: contestTick)
 //   - villager_prize_real: a watched villager win grants real pantry rations ("Winner's share"), not a placeholder line (code: _contestEnd, Steve 2026-10-08)
 //   - win_tax_announced: the -5 hp winner's mark is said out loud, never silent — a hidden HP tax is a lie (code: _contestEnd, Steve 2026-10-08)
+//   - aftermath_trauma: the contest end path applies aftermath trauma to the player, said out loud — win +4, lose +6 (canon docs/CONTESTS.md "Winners come home changed (prizes, trauma, fans)"); the old path applied none, so a merciful win landed trauma-free while refusing landed +5 (code: _contestEnd, break-it contests r15 2026-10-11)
+//   - bet_payout_honest: the watched-bet payout says the REAL kcal gained, not the promised 2x — at/near the kcal cap the grant clamps and the old "+400 kcal" line lied (at cap: wagered 200, won, gained nothing); a fully-capped win says the body is full instead of a phantom +400 (code: _contestVerdict, break-it contests r15 2026-10-11)
+//   - show_end_idempotent: _showEnd lands once per ac (ac._showEnded) — a re-entrant call would re-grant the wacky-gift prize, re-fire favor, and re-add notability; sibling of the _contestEnd _prizeGranted guard. _showVillagerEnd lands once per ac (ac._showVillagerEnded) — no re-fired favor/notability/gossip/leadShift/XP (code: _showEnd, _showVillagerEnd, break-it contests r15 2026-10-11)
+//   - contest_die_idempotent: _contestDie lands once per (ac, participant) (ac._dieLanded) — a re-entrant death would re-fire the +12 trauma, the blood-on-air crisis, fracture, and gossip; the verdict loop calls per contestant so the key is per participant (code: _contestDie, break-it contests r15 2026-10-11)
 //   - fame_is_deed: showmanship notability (TV pull-aways, camera play) surfaces as "audience favorite" in the eligibility panel (code: notability, Steve 2026-10-06)
 //   - broadcast_hooks: BROADCAST MODE entry/exit/beat hooks — fireShow, fireRatingsSummons, and the contest watch branch call broadcastStart; all 7 activeContest=null end paths call broadcastEnd (idempotent); _contestRenderPhase routes phase.beat into broadcastBeat; _contestVerdict fires broadcastReplay; show phases declare beat names; _showEnd/_showVillagerEnd call the outcome beat (code: broadcast.js, Steve 2026-10-09)
 // consumes:
@@ -808,6 +812,12 @@
     let r = null;
     try { r = this.showResolveVillager(pid, { id: ac.showId }, { cheer: ac.cheer || 0, heckle: !!ac.heckle }); } catch (e) {}
     const outcome = (r && r.outcome) || 'both';
+    // RE-ENTRY IDEMPOTENCY (break-it contests r15 2026-10-11): sibling of
+    // the _contestEnd _prizeGranted guard (r14 2026-10-10) and the _showEnd
+    // guard above — a re-entrant call would re-fire favor, notability,
+    // gossip, leadShift, and villager XP. One landing per ac.
+    if (ac._showVillagerEnded) return { done: true, outcome: 'show_' + outcome };
+    ac._showVillagerEnded = true;
     ac.phase = 'done';
     // BROADCAST MODE: the commentators call the villager's fate — tied to
     // the actual result, never a generic line. Must fire while the broadcast
@@ -848,6 +858,14 @@
     const isPlayer = who === 'player';
     const isSummons = ac.kind === 'summons';
     const showName = ac.showName || 'the show';
+    // RE-ENTRY IDEMPOTENCY (break-it contests r15 2026-10-11): sibling of
+    // the _contestEnd _prizeGranted guard (r14 2026-10-10) — the phase
+    // engine blocks re-entry (phase==='done' in contestChoose), but a
+    // re-entrant call on one ac would re-grant the wacky-gift prize,
+    // re-fire favor, and re-add notability. One landing per ac; event
+    // records stay loud only on the first landing.
+    if (ac._showEnded) return { done: true, outcome: 'show_' + outcome };
+    ac._showEnded = true;
     ac.phase = 'done';
     // BROADCAST MODE: the commentators call the outcome — tied to the
     // actual result, never a generic line. Must fire while the broadcast is
@@ -4143,6 +4161,16 @@
         // a silent HP tax is a lie (break-it 2026-10-08).
         s.health = Math.max(1, (s.health || 0) - 5);
         this.sysSay('📺 The lights take their cut. Winning marks you. (-5 health.)');
+        // AFTERMATH TRAUMA (break-it contests r15 2026-10-11; canon
+        // docs/CONTESTS.md: "Winners come home changed (prizes, trauma,
+        // fans)"). The old end path applied NO aftermath trauma — trauma
+        // only existed per-beat, and a merciful win (e.g. "Accept their
+        // yield", no trauma in its do) landed with zero, while refusing
+        // the contest landed +5: refusing was more traumatic than winning
+        // a blood contest. The mark is the body's, the trauma is the
+        // mind's — said out loud, never silent.
+        s.trauma = Math.min(100, (s.trauma || 0) + 4);
+        this.sysSay('📺 You won. Your hands won\'t stop shaking for a while. (+4 trauma.)');
       }
     } else {
       if (!ac._suppressLearn) { try { this.contestLearn(ac.contestId, isWatch ? 'watched' : 'lost'); } catch (e) {} }
@@ -4157,6 +4185,12 @@
       } else {
         this.sysSay(`📺 ${contest.name} — over. You survived. The audience is polite.`);
         try { this.leadShift('showmanship', 1); } catch (e) {}
+        // AFTERMATH TRAUMA (break-it contests r15 2026-10-11): the lose path
+        // applied nothing — losing a televised contest cost less than
+        // refusing one (+5 in _contestRefuse). Losing hurts more than
+        // winning (+4 above), and it is said out loud.
+        s.trauma = Math.min(100, (s.trauma || 0) + 6);
+        this.sysSay('📺 The walk back is the longest part. The cameras stay on it. (+6 trauma.)');
       }
     }
     // MULTI-TAKE (Steve 2026-10-06): the others who were taken have their
@@ -4242,6 +4276,15 @@
     const contest = this._cxScaledContest(ac);
     const isWatch = ac.participant && ac.participant !== 'player';
     const pname = isWatch ? this.displayName(ac.participant) : 'You';
+    // RE-ENTRY IDEMPOTENCY (break-it contests r15 2026-10-11): sibling of
+    // the _prizeGranted / _showEnded guards — a re-entrant death on one ac
+    // would re-fire the +12 trauma, the blood-on-air crisis, fracture, and
+    // gossip. Death lands once per (ac, participant); the verdict loop
+    // calls per contestant, so the key is per participant, not per ac.
+    ac._dieLanded = ac._dieLanded || {};
+    const _dieKey = ac.participant || 'player';
+    if (ac._dieLanded[_dieKey]) return { done: true, outcome: 'died' };
+    ac._dieLanded[_dieKey] = true;
     ac.phase = 'done';
     this._cxCountHeld(ac);
     this.sysSay(`📺 ${contest.name} — ${how}`);
@@ -4793,8 +4836,17 @@
         if (outcome === 'won') {
           // BANK CAP (break-it food r3 2026-10-08): the payout is a kcal
           // grant — it respects the cap like every other source.
-          s.kcal = Math.min(this.kcalCap(), (s.kcal || 0) + amt * 2);
-          this.sysSay(`📺 Your bet pays out: +${amt * 2} kcal. The System honors wagers.`);
+          const kcalBefore = s.kcal || 0;
+          s.kcal = Math.min(this.kcalCap(), kcalBefore + amt * 2);
+          // HONEST PAYOUT (break-it contests r15 2026-10-11): the old line
+          // always said "+400 kcal" — but at/near the kcal cap the grant
+          // clamps, so the real gain is smaller (at cap: you wagered 200
+          // and "won", and gained nothing). A winning bet that pays
+          // nothing is a lie the house tells; say the real number, and
+          // when the body is full, say THAT instead of a phantom +400.
+          const gained = Math.max(0, Math.round(s.kcal - kcalBefore));
+          if (gained > 0) this.sysSay(`📺 Your bet pays out: +${gained} kcal. The System honors wagers.`);
+          else this.sysSay(`📺 Your bet paid out — but your body is full. The win lands as glory, not calories. The System honors wagers; physics doesn't.`);
         } else {
           this.sysSay(`📺 Your ${amt} kcal is gone. The house always eats.`);
         }
