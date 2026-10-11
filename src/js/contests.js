@@ -103,6 +103,7 @@
 //   - fan_favor_lanes: televised wins move the club that watched them — blood→fight, endurance→survival, moot→social, everything else→showbiz (code: _cxFanLane, _contestEnd, audit-shows 2026-10-09)
 //   - show_playable: shows are PLAYED beats, not announcements — the pull can land on the player (showPhases), a villager (showWatchPhases + deterministic showResolveVillager), or the village together (showTogetherPhases); every pool show has an authored beat in SHOW_BEATS, with _showGenericBeat as fallback (code: fireShow, SHOW_BEATS, audit-shows 2026-10-09)
 //   - show_casting: notability-first — the pull goes to the notable (ONE shared notabilityWeight: depth + impact, Steve 2026-10-09); zero-deed villagers never pulled while notables exist; NO default-together — with nobody notable the pull goes to the SCHOLAR ("the cameras don't know these people yet"); together episodes fire ONLY on triggers (viewership milestone +5); 10% whim announced and constrained to notables; exact ties share the top band (code: showCastPull, showEligible, notabilityWeight, Steve 2026-10-09)
+//   - show_fresh_face: once someone is notable (the debut stays the player's), 30% of non-whim show pulls go to a never-pulled castable villager — "the cameras want a new face", announced like the whim; the show-side answer to the gossip lane's celebrities never getting on screen (baseline 0/15 villager pulls, longsim contests 2026-10-11); sits after the 10% whim so the whim keeps its pinned priority (break-it shows H3); pulled villagers earn showmanship and enter the notability race (code: showCastPull, fireShow)
 //   - show_no_death: TV doesn't kill — show/summons damage clamps at 1 HP and DIE terminals land as a bad night; shows are lower-stakes than contests by canon (code: contestChoose, docs/CONTESTS.md)
 //   - villager_show_fates: a pulled villager comes home with fans or shame, sometimes both — deterministic score (2 base + min(showmanship,3)*2 fame bonus + stable per-villager hash + player cheer, -2 heckle, -2/deed overexposure beyond 5 deeds), fans>=7, shame<=3, else both; fame has a lifecycle (debut risky -> celebrity -> overexposed), never a permanent ratchet (code: showResolveVillager, _showVillagerEnd, audit-shows 2026-10-09; lifecycle playtest fame-seeker 2026-10-10)
 //   - show_favor: show beats move the showbiz fan club via do.fanLane ({lane, n, why} or bare n); shame still moves it +1, said out loud — the galaxy loves a trainwreck (code: contestChoose, _showEnd, _showVillagerEnd, audit-shows 2026-10-09)
@@ -615,6 +616,22 @@
       const pick = notable[Math.floor(Math.random() * notable.length)];
       return { who: pick.c.id, why: 'whim', note: (pick.c.notability || [])[0] || null };
     }
+    // FRESH FACE (longsim contests 2026-10-11): the gossip lane's celebrities
+    // never got on screen — the cast rule needed notability to be pulled, and
+    // notability needed being pulled (baseline: player took 13/15 show pulls,
+    // villagers 0/15 across 16 long runs). Once the show is established
+    // (someone is notable — the debut stays the player's), 30% of non-whim
+    // pulls go to a never-pulled castable villager instead: "the cameras want
+    // a new face". The show-side cousin of the contest whim — announced,
+    // legible, rare-ish. Sits AFTER the whim so the 10% whim keeps its pinned
+    // priority (break-it shows H3). Pulled villagers earn showmanship
+    // (addNotability in fireShow) and enter the notability race for real.
+    const pulled = (v._showPulled || {});
+    const fresh = cands.filter(c => c.id !== 'player' && !pulled[c.id]);
+    if (fresh.length && Math.random() < 0.30) {
+      const pick = fresh[Math.floor(Math.random() * fresh.length)];
+      return { who: pick.id, why: 'fresh', note: 'a face the galaxy has never seen' };
+    }
     let maxW = -1;
     for (const x of notable) if (x.w > maxW) maxW = x.w;
     const band = notable.filter(x => x.w === maxW);
@@ -647,6 +664,16 @@
     const cast = this.showCastPull();
     const who = cast.who; // 'player' | villagerId | 'together'
     try { this.tele('show_aired', { id: (show && show.id) || '?', who: who, why: cast.why || '?' }); } catch (e) {}
+    // FRESH-FACE LEDGER (longsim contests 2026-10-11): the never-pulled pool
+    // for showCastPull's fresh-face path. Set here, at the one funnel every
+    // pull passes through (player, villager, together).
+    try {
+      if (who && who !== 'player' && who !== 'together') {
+        const vv = this.state.village || {};
+        vv._showPulled = vv._showPulled || {};
+        vv._showPulled[who] = (this.state.scholar || {}).day || 1;
+      }
+    } catch (e) {}
     let phases = null;
     if (who === 'player') {
       if (cast.why === 'debut') {
@@ -672,6 +699,8 @@
         this.sysSay(`📺 The System's whim: ${pname} is *interesting*.`);
       } else if (cast.why === 'tie') {
         this.sysSay(`📺 The cameras couldn't decide — they chose ${pname}.`);
+      } else if (cast.why === 'fresh') {
+        this.sysSay(`📺 The cameras want a new face. ${pname} — the galaxy is about to learn your name.`);
       }
       this.sysSay(`📺 The cameras want ${pname} — ${cast.note || 'the galaxy knows their name'}. Not an honor. Just what the aliens like to see.`);
       this.sysSay(`📺 ${pname} will be back by morning. Probably. The village will talk about this for days.`);
