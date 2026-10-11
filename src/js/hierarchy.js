@@ -20,6 +20,7 @@
 //   - answerTradeCall(linkId, how)
 //   - drawLeaguePool(kcal)
 //   - leaguePool()
+//   - _leaguePoolRate()
 //   - refuseTheScale()
 //   - answerDemand(a, b)
 //   - payTribute(a, b)
@@ -92,6 +93,11 @@
 //   - the_world_watches: global = national + deed-reactive viewership >= 40, staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
 //   - national_routes_tribute: when national, subordinate tribute grain arrives at x1.25 via the System's logistics layer — and the arrival line says the true amount. Copy and engine agree. (code: hierarchy.js)
 //   - demand_honor_is_proportional: honoring a tribute demand with a thin pantry grants proportional trust and honest copy, never a free +8 on empty hands; an already-loaned representative extends instead of being clobbered. (code: hierarchy.js)
+//   - founding_pour_is_real_food: the Founding Council's pool choice debits Haven's pantry and each fire's own stores at the league's rate — the shared granary is filled, never minted; shortfalls are said aloud and counted. Sibling of their_fields_pay and league_pool_is_real_food's thin-air fixes. (code: hierarchy.js)
+//   - concession_halves_their_share: a conceded crisis halves the CONCEDING member's pool share for 4 weeks (per-link, per-member) — never Haven's. The copy and engine agree. (code: hierarchy.js)
+//   - counter_terms_are_league_wide: counter-accepted covenant terms (2,500 kcal/week — "every fire pours 2,500") apply to every fire's share — the engine's league rate is the max bond rate, never a hardcoded 2,000. (code: hierarchy.js)
+//   - binding_walk_refuses_the_scale: walking from the Binding breaks the link as a clean walk (opinion -10, not the gambit) AND refuses the scale permanently with it (docs/SCALE.md) — a walk that could re-court and hit national next season was a canon violation. (code: hierarchy.js)
+//   - grief_beats_feed_the_choke: the young-link renegotiation answers route trust through _trustGain — the mourning choke stays single and every fed gesture stamps lastKeptDay. (code: hierarchy.js)
 //   - the_table_is_weekly: renegotiateLink/bidForPrimacy are one hard conversation per week (lastTableWeek) — the climb is paced in weeks, not ground out in an afternoon. (code: hierarchy.js)
 //   - diplomacy_is_knowledge_gated: proposeLink/proposeAlliance refuse villages the player never heard of or visited (knowsVillage). (code: hierarchy.js)
 // consumes:
@@ -1015,7 +1021,12 @@
       var weAreSub = link.subordinate === HOME;
       var isPeer = (link.kind === 'covenant' || link.kind === 'trade');
       var ov = this._otherVillage(other);
-      var hit = how === 'gambit' ? 30 : 15;
+      // 'walked' (break-it regional r3 2026-10-11): a clean walk from a
+      // binding beat — not a betrayal, not a gambit. The relationship's own
+      // logic is a soft parting (opinion -10), not the vassal's-gambit
+      // -30 and "broke faith" copy. docs/SCALE.md: "No punishment beyond
+      // the relationship's own logic."
+      var hit = how === 'gambit' ? 30 : (how === 'walked' ? 10 : 15);
       if (isPeer && (how === 'released' || how === 'seceded')) hit = 5; // an honored parting, not a betrayal
       if (ov) ov.opinion = Math.max(-100, Math.min(100, (ov.opinion || 0) - hit));
       this._linkNote(link, 'broken', 'Link broken (' + (how || 'severed') + ').');
@@ -1036,6 +1047,8 @@
       }
       if (weAreSub && how === 'gambit') {
         this.say(`🗡️ The vassal's gambit: Haven breaks with ${this._ovName(other)}. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (${this._ovName(other)}'s opinion: ${ov ? ov.opinion : 'unknown'})`);
+      } else if (how === 'walked') {
+        this.say(`🚶 Haven walks from the table cleanly — no blades, no hard words. The bond ends where it stood, honestly.`);
       } else {
         this.say(`The link with ${this._ovName(other)} is broken (${how || 'severed'}). What was built over weeks comes apart in a sentence.`);
       }
@@ -1310,8 +1323,12 @@
       if (how === 'gift') {
         var paid = this._removePantryKcal(1500);
         var frac = Math.min(1, paid / 1500);
-        var tGain = Math.round(8 * frac);
-        link.trust = Math.min(100, link.trust + tGain);
+        // ROUTED (break-it regional r3 2026-10-11): the old code wrote
+        // link.trust directly, bypassing _trustGain's mourning choke and
+        // lastKeptDay stamping. Young links never mourn (the beat replaces
+        // mourning), so the numbers are unchanged — but the choke stays
+        // single and the link is fed by the gesture.
+        var tGain = this._trustGain(link, Math.round(8 * frac));
         this._linkNote(link, 'renegotiation', 'Met grief with grain (' + paid.toLocaleString() + ' kcal, trust +' + tGain + '); the tribute leverage never landed.');
         if (frac >= 1) this.say(`🕊️ Haven sends ${paid.toLocaleString()} kcal to ${onm}'s fire — grief met with grain. The new speaker eats with Haven's people and the tribute stays where it was. (Trust +${tGain}.)`);
         else this.say(`🕊️ Haven sends ${paid.toLocaleString()} of 1,500 kcal — all the pantry holds. ${onm} counts the gap, but counts the gesture too. (Trust +${tGain}.)`);
@@ -1321,14 +1338,17 @@
       if (how === 'visit') {
         var sent = this._musterAway(1, 'parley');
         if (!sent.length) {
-          link.trust = Math.min(100, link.trust + 2);
+          // ROUTED through _trustGain (break-it regional r3 2026-10-11) —
+          // the mourning choke stays single and the gesture stamps
+          // lastKeptDay like every other fed trust.
+          var _vg0 = this._trustGain(link, 2);
           this._linkNote(link, 'renegotiation', 'No speaker to send — word and promises; the tribute leverage never landed.');
-          this.say(`There's no one to send — Haven's bench is empty. Word and promises ride out instead. They note the difference, and the trying. (Trust +2.)`);
+          this.say(`There's no one to send — Haven's bench is empty. Word and promises ride out instead. They note the difference, and the trying. (Trust +${_vg0}.)`);
         } else {
           this._sendAwayParty(sent, 2, other, 'parley');
-          link.trust = Math.min(100, link.trust + 5);
+          var _vg4 = this._trustGain(link, 5);
           this._linkNote(link, 'renegotiation', 'Haven\'s speaker rode out for two days (trust +5); the tribute leverage never landed.');
-          this.say(`🚶 Haven's speaker rides to ${onm}'s fire for two days — a face for the grief, not a ledger. The tribute stays where it was. (Trust +5.)`);
+          this.say(`🚶 Haven's speaker rides to ${onm}'s fire for two days — a face for the grief, not a ledger. The tribute stays where it was. (Trust +${_vg4}.)`);
         }
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'renegotiated-visit:' + other); } catch (e) {}
         return 'visit';
@@ -1709,8 +1729,10 @@
         for (var li = 0; li < pn.villages.length; li++) {
           if (pn.villages[li] !== 'haven') lnames.push(this._ovName(pn.villages[li]));
         }
+        var _stageRate = 2000;
+        try { _stageRate = this._leaguePoolRate(); } catch (e) {}
         this.say(`◈ SYSTEM: "Four fires. NO head. Interesting. GOVERNANCE LAYER: online — the council calendar, the mutual-defense ledger, the shared granary. A league of equals. The audience has never seen one survive. Prove them wrong."`);
-        this.say(`🤝 The founding council: speakers from ${lnames.join(', ')} sit in a circle — no throne, no kneeling. This league needs its first act. Swear the war-PACT (mutual defense — any member's call is answered, or refused aloud), found the shared POOL (2,000 kcal a week from every fire into one granary, drawn in famine), or WALK from this table for now. ${refuseLine}`);
+        this.say(`🤝 The founding council: speakers from ${lnames.join(', ')} sit in a circle — no throne, no kneeling. This league needs its first act. Swear the war-PACT (mutual defense — any member's call is answered, or refused aloud), found the shared POOL (${_stageRate.toLocaleString()} kcal a week from every fire into one granary, drawn in famine), or WALK from this table for now. ${refuseLine}`);
       } else if (pn.shape === 'trade') {
         var tnames = [];
         for (var ti = 0; ti < pn.villages.length; ti++) {
@@ -1721,7 +1743,7 @@
       } else {
         var nm = this._ovName(pn.primary);
         this.say(`◈ SYSTEM: "You are not the head of this. That is the point. A realm of ${this.pluralize(polity.size, 'fire')} — and ${nm} wants Haven's oath. The audience LOVES a binding."`);
-        this.say(`📯 ${nm}'s court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire. Refusal is a choice, and it is remembered. ${refuseLine}`);
+        this.say(`📯 ${nm}'s court summons Haven's speaker. SWEAR the oath of the realm (a gift seals it), SERVE at their court (seven days of your speaker's life), or WALK — break the link and stay a free fire, refusing the scale itself with it (the offer does not return). ${refuseLine}`);
       }
       try { if (this.journalNote) this.journalNote('village', 'national', 'National beat staged: ' + pn.shape + ' (' + pn.villages.length + ' villages).'); } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-beat:' + pn.shape); } catch (e) {}
@@ -1876,13 +1898,21 @@
           this.say('The Binding never happens — the link came apart before the oath was sworn. The court moves on without Haven.');
           return null;
         }
-        this.state.pendingNational = null;
         var onm = this._ovName(pn.primary);
         if (how === 'walk') {
-          this.say(`🚶 Haven walks away from ${onm}'s table — a free fire, whatever that costs. The realm continues without you. The door is not shut forever. It is shut today.`);
-          this.breakLink(link.id, 'gambit');
+          // WALK refuses the scale WITH it (docs/SCALE.md, canon): break the
+          // link, stay a free fire — and the scale is refused permanently
+          // with it (national stays unachieved; the offer does not return).
+          // The old code broke the link as a 'gambit' (-30 opinion, "broke
+          // faith" copy) and never refused the scale — a clean walk could
+          // re-court and hit national again next season, and the beat's own
+          // copy ("The door is not shut forever") lied about the permanence.
+          this.breakLink(link.id, 'walked');
+          this.say(`🚶 Haven walks away from ${onm}'s table — a free fire, whatever that costs. The realm continues without you.`);
+          this.refuseTheScale(); // pendingNational still staged: the refusal records the 'belong' shape
           return 'walked';
         }
+        this.state.pendingNational = null;
         if (how === 'swear') {
           var oath = this._removePantryKcal(3000);
           // HONOR IS PROPORTIONAL (break-it regional r4 2026-10-10): a 0-kcal
@@ -1936,18 +1966,44 @@
             this._linkNote(covLinks[vsi], 'council', 'The war-pact sworn: mutual defense.');
           }
           var _gt5 = _gr5 ? ` — ${_gr5} grieving fire(s); theirs waits` : '';
-          this.say(`🤝 The war-pact is sworn — no throne, no kneeling, just hands on the table. When any member's treeline burns, the league answers: Haven sends hands (two villagers, three days) or refuses aloud and the whole league hears it. ${vnames.join(', ')} — equals, now, in war as in council. The shared granary opens beside it: 2,000 kcal a week from every fire. (Trust +8 each${_gt5}.)`);
+          var _pactRate = this._leaguePoolRate();
+          this.say(`🤝 The war-pact is sworn — no throne, no kneeling, just hands on the table. When any member's treeline burns, the league answers: Haven sends hands (two villagers, three days) or refuses aloud and the whole league hears it. ${vnames.join(', ')} — equals, now, in war as in council. The shared granary opens beside it: ${_pactRate.toLocaleString()} kcal a week from every fire. (Trust +8 each${_gt5}.)`);
         } else {
-          var opened = 0;
+          // THE FOUNDING POUR IS REAL FOOD (break-it regional r3 2026-10-11):
+          // the old code minted 2,000 kcal per fire from thin air — the copy
+          // said "each pour 2,000 kcal into one pool" while nobody's pantry
+          // moved, and the player could draw real famine food from a granary
+          // that was never filled. Same bug class as the thin-air tribute
+          // (their_fields_pay) and the thin-air covenant pours: every fire
+          // pours from its own stores, at the league's rate (2,500 on
+          // counter terms); shortfalls are said aloud and counted, never
+          // silently minted.
+          var _frate = this._leaguePoolRate();
+          var _havenPoured = this._removePantryKcal(_frate);
+          var _theirsPoured = 0;
           var _gr6 = 0;
           for (vsi = 0; vsi < covLinks.length; vsi++) {
             if (this._trustGain(covLinks[vsi], 6) < 6) _gr6++;
-            this._linkNote(covLinks[vsi], 'council', 'The shared pool founded.');
-            opened += 2000;
+            var _fother = covLinks[vsi].a === HOME ? covLinks[vsi].b : covLinks[vsi].a;
+            var _fov = _fother ? this._otherVillage(_fother) : null;
+            var _fgive = 0;
+            if (_fov) {
+              _fgive = Math.min(_frate, Math.max(0, Math.round(_fov.pantryKcal || 0)));
+              _fov.pantryKcal = Math.max(0, (_fov.pantryKcal || 0) - _fgive);
+            }
+            _theirsPoured += _fgive;
+            this._linkNote(covLinks[vsi], 'council', 'The shared pool founded (' + this._ovName(_fother) + ' poured ' + _fgive.toLocaleString() + ' of ' + _frate.toLocaleString() + ' kcal).');
+            if (_fgive < _frate) {
+              covLinks[vsi].trust = Math.max(0, (covLinks[vsi].trust || 0) - 2);
+              this._linkNote(covLinks[vsi], 'council', this._ovName(_fother) + ' poured short at the founding (' + _fgive.toLocaleString() + ' of ' + _frate.toLocaleString() + ' kcal) — the council counts it.');
+            }
           }
+          var opened = _havenPoured + _theirsPoured;
           this.state.leaguePoolKcal = (this.state.leaguePoolKcal || 0) + opened;
           var _gt6 = _gr6 ? ` — ${_gr6} grieving fire(s); theirs waits` : '';
-          this.say(`🌾 The shared granary is founded: ${vnames.join(', ')} each pour 2,000 kcal into one pool — ${opened.toLocaleString()} kcal under no one's roof and everyone's. Draw on it in famine; every draw is written in the council's book. The war-pact is sworn beside it: any member's call gets answered, or refused aloud. (Trust +6 each${_gt6}.)`);
+          var _hshort = _havenPoured < _frate ? ` Haven's own founding pour came up short — ${_havenPoured.toLocaleString()} of ${_frate.toLocaleString()} kcal, all the pantry held. The council counts it.` : '';
+          var _tshort = _theirsPoured < _frate * covLinks.length ? ` Some fires poured short — the council's book shows every grain, and every gap.` : '';
+          this.say(`🌾 The shared granary is founded: ${vnames.join(', ')} each pour ${_frate.toLocaleString()} kcal into one pool — ${opened.toLocaleString()} kcal under no one's roof and everyone's.${_hshort}${_tshort} Draw on it in famine; every draw is written in the council's book. The war-pact is sworn beside it: any member's call gets answered, or refused aloud. (Trust +6 each${_gt6}.)`);
         }
       } else if (pn.shape === 'trade') {
         // The Charter. The league must still hold >=3 trade bonds.
@@ -2259,6 +2315,22 @@
       return link;
     },
 
+    // _leaguePoolRate: the league pours at one rate — the highest terms any
+    // covenant bond carries. Counter-accepted terms (2,500) say "every fire
+    // pours 2,500", league-wide, so the engine pours every fire at the
+    // league's rate, not just the counter link.
+    _leaguePoolRate() {
+      try {
+        var covs = this._peerLinks('covenant');
+        var rate = 2000;
+        for (var i = 0; i < covs.length; i++) {
+          var r = (covs[i] && covs[i].poolKcalPerWeek) || 2000;
+          if (r > rate) rate = r;
+        }
+        return rate;
+      } catch (e) { return 2000; }
+    },
+
     // covenantTick: the league's weekly accounting. Haven's pool share
     // leaves the pantry as REAL food (league_pool_is_real_food); the other
     // fires' shares arrive abstractly, said aloud when they land. Defense
@@ -2267,9 +2339,20 @@
       try {
         var day = (this.state.scholar || {}).day || 0;
         var onm = this._ovName(this._linkOther(link, HOME));
-        if (link.poolLive && this.state._leaguePoolWeek !== this._week()) {
+        // LEAGUE-WIDE WEEKLY POUR (break-it regional r3 2026-10-11): the pool
+        // is one granary under no one's roof — every fire pours once a week,
+        // including fires that joined the league after the founding (they
+        // pour through the pour below even before their own link's first
+        // tick). The old guard keyed on the TICKING link's poolLive, so a
+        // post-founding link ticking first skipped the whole league's pour
+        // that week — order-dependent free rides.
+        var covs0 = this._peerLinks('covenant');
+        var anyPoolLive = false;
+        for (var pli = 0; pli < covs0.length; pli++) if (covs0[pli].poolLive) { anyPoolLive = true; break; }
+        if (anyPoolLive && this.state._leaguePoolWeek !== this._week()) {
           this.state._leaguePoolWeek = this._week();
-          var havenShare = (link.concessionUntil || 0) > day ? Math.round((link.poolKcalPerWeek || 2000) / 2) : (link.poolKcalPerWeek || 2000);
+          var leagueRate = this._leaguePoolRate();
+          var havenShare = leagueRate;
           var paid = this._removePantryKcal(havenShare);
           // DRIFTER BREAK-IT 2026-10-10: their 2,000 kcal/week per fire used
           // to appear from thin air — "real food in and out" held only for
@@ -2277,20 +2360,29 @@
           // that can't cover its share pours what it has, and the league
           // notices the shortfall (trust -2 on that link, said aloud in the
           // council's book).
+          // BREAK-IT regional r3 2026-10-11: three lies closed here —
+          // (1) the concede copy says "X's pool share halves for four
+          // weeks", but the engine halved HAVEN's share (concessionUntil sat
+          // on the ticking link and halved havenShare) and never touched the
+          // member's. The concession is per-member: their share halves.
+          // (2) counter-accepted terms (2,500 — "every fire pours 2,500")
+          // poured 2,000 in the engine: the member loop hardcoded 2000 and
+          // Haven's share used only the first-ticked link's rate.
           var theirs = 0;
           var covs = this._peerLinks('covenant');
           for (var pi = 0; pi < covs.length; pi++) {
             var pOther = this._linkOther(covs[pi], HOME);
             var pOv = pOther ? this._otherVillage(pOther) : null;
+            var pShare = (covs[pi].concessionUntil || 0) > day ? Math.round(leagueRate / 2) : leagueRate;
             var pGive = 0;
             if (pOv) {
-              pGive = Math.min(2000, Math.max(0, Math.round(pOv.pantryKcal || 0)));
+              pGive = Math.min(pShare, Math.max(0, Math.round(pOv.pantryKcal || 0)));
               pOv.pantryKcal = Math.max(0, (pOv.pantryKcal || 0) - pGive);
             }
             theirs += pGive;
-            if (pGive < 2000) {
+            if (pGive < pShare) {
               covs[pi].trust = Math.max(0, (covs[pi].trust || 0) - 2);
-              this._linkNote(covs[pi], 'pool', (pOv ? (pOv.name || 'They') : 'They') + ' poured short this week (' + pGive.toLocaleString() + ' of 2,000 kcal) — the council counts it.');
+              this._linkNote(covs[pi], 'pool', (pOv ? (pOv.name || 'They') : 'They') + ' poured short this week (' + pGive.toLocaleString() + ' of ' + pShare.toLocaleString() + ' kcal) — the council counts it.');
             }
           }
           this.state.leaguePoolKcal = (this.state.leaguePoolKcal || 0) + paid + theirs;
@@ -2303,7 +2395,7 @@
             this.say(`🌾 The league pool grows: ${(paid + theirs).toLocaleString()} kcal this week — Haven's share and the other fires'. The granary under no one's roof fills.`);
           }
           try { if (this.journalNote) this.journalNote('village', 'pool', 'League pool week: +' + (paid + theirs).toLocaleString() + ' kcal.'); } catch (e) {}
-        } else if (!link.poolLive) {
+        } else if (!anyPoolLive) {
           this._trustGain(link, 1);
         }
         if (link.warOath && !link.pendingDefense && R() < 0.15) {
