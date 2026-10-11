@@ -52,6 +52,19 @@ accusation that lands empty costs the accuser (rep dent, village gossip names
 them). Tentative questions — behavior doubts, gossip leads formed before you
 heard their story — clear neutrally: no accusation was made.
 
+A lead is **moot** when every story you heard from them on that field agrees
+with the village account (the truth): the intel checked out, the lie died of
+trust rather than interrogation, and there is nothing to press. A pure lead
+(nothing heard yet) stays tentative and playable; a heard story that
+contradicts the gossip stays confrontable. The windup says "You said" only
+for a cover they actually told you — otherwise the cover is attributed to
+village talk ("Word is..."), never put in their mouth.
+
+A second doubt about an already-confessed lie resolves as **already-confessed**
+even when its evidence never names the cover (e.g. you heard the truth from
+them at high trust, so the cover appears nowhere in the record). The engine
+never brands you a false accuser for a true accusation.
+
 **Gone closes the thread.** If they're dead, exiled, or fled, open doubts
 resolve as *unanswered* — the journal says so honestly. The dead can't
 confess, and the question outlives them. The codex never promises you can

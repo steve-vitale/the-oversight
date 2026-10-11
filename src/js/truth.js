@@ -41,6 +41,10 @@
 //   - slip_label_honest: the confrontation menu names a verbal slip as a slip — the old generic "I've been watching" label lied about where the doubt came from (code: convoChoices wrapper)
 //   - slip_crack_only: slip lines name the cover's crack, never the truth — origin/goal slips match the occupation discipline (code: truthLinePools slipOrigin/slipGoal)
 //   - stale_before_field_fallback: a confessed lie matching the doubt's evidence resolves as already-confessed before any fallback; the fallback matches the doubt's own field only, never a kind-guess (code: confrontDoubt)
+//   - stale_confessed_field_scoped: a confessed lie on the doubt's own field is stale even when the evidence never names the cover (trust-gated honesty heard the truth, not the cover) — no false-accuser machinery ever fires on a true accusation (code: confrontDoubt)
+//   - moot_lead: a gossip lead is moot when every story heard from the target on that field agrees with the gossip's account (the truth) — the intel is corroborated, resolve checked-out, neutrally. A pure lead (nothing heard) stays tentative and playable; a heard story that contradicts the gossip stays confrontable (code: confrontDoubt)
+//   - windup_attribution_heard_cover: the windup says "You said" only when a tracked claim equals the cover; otherwise the cover is attributed to village talk ("Word is...") — never puts unheard words in their mouth (code: confrontWindup)
+//   - descriptor_safe_cover_match: the pre-System whoTag descriptor embeds the claimed occupation — cover matching scrubs the target's name forms from the evidence first, so a name is never mistaken for evidence (code: confrontDoubt)
 //   - observe_wariness_bites: true (code: observePerson — 'observed' memories (14d, hit or miss) cut detectChance 0.08 each, floor 0.05; observer's own intellect drives the bonus, not the target's)
 // consumes:
 //   - village.gossip
@@ -170,6 +174,14 @@
         `"Wait, wait —" {first} holds up a hand, smiling. "I can see exactly why that sounded wrong. No — it's like this..." The pieces slot into place. Of course.`,
         `{first} blinks, then groans. "Oh, that's my fault, I worded that terribly. What I meant was..." The real version is boring, which is how you know it's true.`,
         `"You know what, fair." {first} nods slowly. "I can see how that looked. But here's the thing..." And the thing is mundane, and verifiable, and fine.`,
+      ],
+      // mootLead: the village talk didn't survive contact with their own
+      // story — you heard the truth straight from them, and the cover only
+      // ever lived in gossip. Nothing to press; the talk was stale.
+      mootLead: [
+        `"So you heard the talk." {first} doesn't flinch. "And you heard my story yourself. That's the whole of it." Nothing left to press; the talk was stale.`,
+        `{first} listens, then nods slowly. "Whatever's going around — you heard it from me straight. That's the true version." And it checks out. It always did.`,
+        `"Yeah, I've heard that one." {first} shrugs, unbothered. "Ask around all you like. You already know what I told you." The story holds. The talk doesn't.`,
       ],
       // confession motive lines: spoken inside the confession quote (first person)
       motiveShame: [
@@ -1053,15 +1065,23 @@
       // The theft path names the sighting; the lie paths name the cover and
       // the crack — never the truth behind it.
       let spoken;
-      // the cover claim is always fair game — they told it to you themselves
-      // (goal ids render as the human phrase, never the id). For a gossip
-      // LEAD they didn't tell it to you — village talk did — so the windup
-      // attributes it to talk, not to their mouth (detective 2026-10-09c).
-      const isLeadForClaim = this.doubtIsLead(doubt);
+      // ATTRIBUTION (detective 2026-10-11): "You said" is only true when a
+      // tracked claim on this field equals the cover. A lead expired by a
+      // truth-telling heard the TRUTH from them and the cover only via
+      // village gossip — "You said you were a paramedic" puts words in
+      // their mouth they never spoke to you. Attribute to talk instead.
+      // (Subsumes the old isLead check: a pure lead has no claims on file,
+      // so it always attributes to talk. Goal ids render as the human
+      // phrase, never the id.)
+      let saidCover = false;
+      try {
+        saidCover = !!lie && (this.getClaims(vid, lie.field) || [])
+          .some(c => String(c.claim) === String(lie.told));
+      } catch (e) {}
       const claimBit = (lie && lie.told)
         ? (lie.field === 'goal'
-          ? (isLeadForClaim ? ` Word is you wanted ${this.goalWantText(lie.told)}.` : ` You said you wanted ${this.goalWantText(lie.told)}.`)
-          : (isLeadForClaim ? ` Word is you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.` : ` You said you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.`))
+          ? (saidCover ? ` You said you wanted ${this.goalWantText(lie.told)}.` : ` Word is you wanted ${this.goalWantText(lie.told)}.`)
+          : (saidCover ? ` You said you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.` : ` Word is you were ${/^[aeiou]/i.test(String(lie.told)) ? 'an' : 'a'} ${lie.told}.`))
         : '';
       if (doubt.theft) {
         const t = doubt.theft;
@@ -1224,11 +1244,30 @@
       const name = this.displayName(vid);
       const first = this.firstRef(vid);
 
+      // DESCRIPTOR-SAFE MATCHING (detective 2026-10-11): the pre-System
+      // whoTag descriptor ("the man in his 30s, the paramedic") embeds the
+      // CLAIMED occupation — matching the cover through the NAME is not
+      // evidence. It masked the moot-lead case: the lie "matched" a lead
+      // whose evidence never really named the cover, so the fallback (and
+      // its heard-from-them check) never ran and the windup fabricated
+      // "You said you were a paramedic". It could also false-stale a doubt
+      // about one field off a confessed lie about another. Scrub the
+      // target's name forms from the evidence before any cover matching.
+      let scrubbedEvidence = [];
+      try {
+        const nameForms = [this.displayName(vid), this.firstRef(vid)].filter(Boolean).map(String);
+        scrubbedEvidence = (doubt.evidence || []).map(e => {
+          let s = String(e);
+          for (const nf of nameForms) if (nf) s = s.split(nf).join('');
+          return s;
+        });
+      } catch (e) { scrubbedEvidence = (doubt.evidence || []).map(String); }
+
       // find the lie behind this doubt
       const lies = this.npcLies(vid);
       let lie = null, lieField = null;
       if (lies) for (const [f, l] of Object.entries(lies)) {
-        if (!l.confessed && doubt.evidence.some(e => String(e).includes(l.told))) { lie = l; lieField = f; break; }
+        if (!l.confessed && scrubbedEvidence.some(e => e.includes(l.told))) { lie = l; lieField = f; break; }
       }
 
       let line, outcome;
@@ -1244,9 +1283,22 @@
       // confess a DIFFERENT live lie under a stale doubt's banner —
       // detective break-it 2026-10-09c C4.)
       if (!lie && lies) {
+        // FIELD-SCOPED (detective 2026-10-11): the old evidence-string match
+        // missed when the player's heard story was the TRUTH (trust>60
+        // honesty) — the evidence then never names the cover, so a second
+        // doubt about the confessed lie fell through to 'cleared' and
+        // branded the player a false accuser ("you called them a liar, and
+        // you were wrong") for a TRUE accusation. A confessed lie on the
+        // doubt's own field is stale by definition: no new doubt about that
+        // field can plant after a confession (claims stay truthful;
+        // slips/observations return early on confessed lies). The
+        // evidence-string match is kept for field-less doubts.
         let stale = null;
         for (const [f, l] of Object.entries(lies)) {
-          if (l.confessed && doubt.evidence.some(e => String(e).includes(l.told))) { stale = l; break; }
+          if (!l.confessed) continue;
+          const fieldMatch = !!(doubt.field && f === doubt.field);
+          const evidenceMatch = scrubbedEvidence.some(e => e.includes(l.told));
+          if (fieldMatch || evidenceMatch) { stale = l; break; }
         }
         if (stale) {
           line = this.drawTruthLine('staleConfessed', vid);
@@ -1263,7 +1315,37 @@
       // gone: it confessed unrelated lies (detective break-it 2026-10-09c C4).
       if (!lie && lies && doubt.field) {
         const lf = lies[doubt.field];
-        if (lf && !lf.confessed && lf.told) { lie = lf; lieField = doubt.field; }
+        if (lf && !lf.confessed && lf.told) {
+          // MOOT LEAD (detective 2026-10-11): the gossip named a cover and a
+          // truth, and every story the player actually heard from the target
+          // on this field agrees with the gossip's account (the truth) — the
+          // intel is corroborated, so there is no live contradiction to
+          // press. The old code fell through to the lie path and the windup
+          // spoke a fabrication ("You said you were a paramedic") for words
+          // that never left their mouth toward you — then let them deflect
+          // or counter-attack a story that checked out. The lie died of
+          // trust, not interrogation: resolve as checked-out, neutrally. A
+          // pure lead (no story heard yet) is NOT moot — it stays tentative
+          // and playable on village intel. A heard story that CONTRADICTS
+          // the gossip (even when it isn't the cover) is a real mismatch
+          // and stays confrontable.
+          let claimsOnField = [];
+          try {
+            claimsOnField = (this.getClaims(vid, doubt.field) || []).map(c => String(c.claim));
+          } catch (e) {}
+          const heardCover = claimsOnField.includes(String(lf.told));
+          const corroborated = claimsOnField.length > 0 &&
+            claimsOnField.every(c => c === String(lf.truth));
+          if (!heardCover && corroborated) {
+            line = this.drawTruthLine('mootLead', vid) ||
+              `"So you heard the talk." ${first} doesn't flinch. "And you heard my story yourself. That's the whole of it." Nothing left to press; the talk was stale.`;
+            outcome = 'moot';
+            this.resolveDoubt(doubtId, 'checked out — their story holds; the village talk was stale');
+            this.noteSocialLesson('moot');
+            return { ok: true, line, outcome };
+          }
+          lie = lf; lieField = doubt.field;
+        }
       }
 
       if (!lie) {

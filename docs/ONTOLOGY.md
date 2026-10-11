@@ -1059,6 +1059,10 @@ Truth/distortion. Claim-gossip corrects (tellers share the truth); action-gossip
 - slip_label_honest: the confrontation menu names a verbal slip as a slip — the old generic "I've been watching" label lied about where the doubt came from (code: convoChoices wrapper)
 - slip_crack_only: slip lines name the cover's crack, never the truth — origin/goal slips match the occupation discipline (code: truthLinePools slipOrigin/slipGoal)
 - stale_before_field_fallback: a confessed lie matching the doubt's evidence resolves as already-confessed before any fallback; the fallback matches the doubt's own field only, never a kind-guess (code: confrontDoubt)
+- stale_confessed_field_scoped: a confessed lie on the doubt's own field is stale even when the evidence never names the cover (trust-gated honesty heard the truth, not the cover) — no false-accuser machinery ever fires on a true accusation (code: confrontDoubt)
+- moot_lead: a gossip lead is moot when every story heard from the target on that field agrees with the gossip's account (the truth) — the intel is corroborated, resolve checked-out, neutrally. A pure lead (nothing heard) stays tentative and playable; a heard story that contradicts the gossip stays confrontable (code: confrontDoubt)
+- windup_attribution_heard_cover: the windup says "You said" only when a tracked claim equals the cover; otherwise the cover is attributed to village talk ("Word is...") — never puts unheard words in their mouth (code: confrontWindup)
+- descriptor_safe_cover_match: the pre-System whoTag descriptor embeds the claimed occupation — cover matching scrubs the target's name forms from the evidence first, so a name is never mistaken for evidence (code: confrontDoubt)
 - observe_wariness_bites: true (code: observePerson — 'observed' memories (14d, hit or miss) cut detectChance 0.08 each, floor 0.05; observer's own intellect drives the bonus, not the target's)
 
 **Consumes:** village.gossip
