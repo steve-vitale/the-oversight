@@ -34396,88 +34396,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (m && m.mdef && m.mdef.snake && (m.snakeRoot || m.snakeId)) return 'snake:' + (m.snakeRoot || m.snakeId);
       return 'body:' + (m && m.key);
     },
-    tbEnd(result) {
-      const f = this.tbfight;
-      if (!f || f.over) return;
-      try { this.tele('combat_end', { result: result }); } catch (e) {}
-      f.over = true; f.result = result;
-      // COMBAT CLEANUP GUARANTEE (Steve 2026-10-06): the victory/defeat
-      // narration below is long and calls many subsystems. If ANY of it
-      // throws, tbfight must still clear — a stuck tbfight softlocks movement
-      // (dpad/tap/tryNodeExit all check it) and renders fighters on every
-      // node's grid (no node scoping). try/finally, not hope.
-      try {
-      // WAVE TRACKING (Steve 2026-10-05, revised): kills by wave unlock the
-      // next wave (day-gated). The System watches — prove you can handle it.
-      this.state.combatWins = this.state.combatWins || 0;
-      this.state.combatLosses = this.state.combatLosses || 0;
-      if (result === 'won') {
-        this.state.combatWins++;
-        // Record kills by wave for unlock gates. ONE BODY = ONE KILL
-        // (break-it monsters r6 2026-10-10; lineage-hardened break-it combat
-        // 2026-10-10): snake segments are one creature — the loops below
-        // de-dupe by SNAKE LINEAGE (tbSnakeLineageKey), not bare snakeId.
-        // Counting each of the duck's 14 segments let a single snake clear
-        // the 4-kill wave-2 minimum alone; keying on snakeId alone let
-        // deliberate middle-kills re-open the same hole via splits (each
-        // fragment paying full rewards). Pack monsters are separate
-        // creatures and still count individually.
-        const _seenKills = new Set();
-        for (const m of f.fighters) {
-          if (m.kind === 'monster' && !m.alive && m.mdef) {
-            const _bk = this.tbSnakeLineageKey(m);
-            if (_seenKills.has(_bk)) continue;
-            _seenKills.add(_bk);
-            this.recordWaveKill(m.mdef.id);
-          }
-        }
-        // Leadership: force
-        this.leadShift('force', 1);
-      }
-      else if (result === 'lost') this.state.combatLosses++;
-      // Check for wave unlock (System escalation) — via the idempotent
-      // choke point: villager field fights and the engagement feed can earn
-      // unlocks outside player combat, and the beat must land there too.
-      try { this.checkWaveUnlockBeat(); } catch (e) {}
-      // AUDIO HYGIENE (Steve): killing the deer left the beam's hum playing.
-      // NOTHING outlives its encounter — stop every sustained loop on ANY
-      // ending (won, lost, fled, routed). combatEnd is idempotent.
-      this.audioEvent('combatEnd');
-      if (this.clearTelegraph) this.clearTelegraph();
+    // PER-KILL REWARDS (Steve 2026-10-08, break-it round 2; routed-wired
+    // break-it combat r12 2026-10-11): every body you drop pays out — one
+    // carcass + one loot roll per creature — on 'won' AND 'routed'. The old
+    // code paid only on 'won': a fight where you dropped bodies but the rest
+    // fled paid nothing and lied about it. 'fled' stays forfeit: you left the
+    // field. Snake segments share one body (per lineage — tbSnakeLineageKey,
+    // break-it combat 2026-10-10: split fragments keep the original spawn's
+    // snakeRoot, so one duck pays one carcass / one loot roll however many
+    // pieces it dies in). The _kills list is lineage-deduped by the caller.
+    tbKillRewards(_kills) {
       const s = this.state.scholar;
-      const p = this.tbFighter('p');
-      if (p) s.health = Math.max(0, p.hp);
-      for (const v of f.fighters) {
-        if (v.kind === 'villager' && v.alive && !v.fled) this.tbVillagerSyncPos(v);
-      }
-      if (result === 'won') {
-        try { this.combatWitnessReact('kill'); } catch (e) {}
-        // MONSTER REWARDS need a monster. A 'won' with no monster fighter
-        // (e.g. a human-only fight that didn't route through the betrayal
-        // end path) skips the carcass economy instead of crashing on
-        // undefined.mdef (2026-10-05).
-        // PER-KILL REWARDS (Steve 2026-10-08, break-it round 2): every body
-        // you drop pays out — one carcass + one loot roll per creature. The
-        // old code paid once per FIGHT on the first monster fighter: pack
-        // fights left the other corpses barren and never marked their species
-        // 'slain' in the codex. Snake segments share one body (per lineage —
-        // tbSnakeLineageKey, break-it combat 2026-10-10: split fragments keep
-        // the original spawn's snakeRoot, so one duck pays one carcass / one
-        // loot roll however many pieces it dies in).
-        const _dead = f.fighters.filter(x => x.kind === 'monster' && !x.alive && x.mdef);
-        const _seenBodies = new Set();
-        const _kills = [];
-        for (const _m of _dead) {
-          const _bk = this.tbSnakeLineageKey(_m);
-          if (_seenBodies.has(_bk)) continue;
-          _seenBodies.add(_bk);
-          _kills.push(_m);
-        }
-        const mf = _kills[0] || null;
-        if (mf) {
-        this.audioEvent('victory');
-        this.sysSay(`WINNER! Style score: ${f.style || 0}. The gamblers ${((f.style || 0) >= 40) ? 'are ecstatic!' : 'nod approvingly.'}`);
-        for (const _km of _kills) {
+      for (const _km of _kills) {
         const mdef = _km.mdef;
         this.state.codex.monsters = this.state.codex.monsters || {};
         const cur = this.state.codex.monsters[mdef.id] || {};
@@ -34523,7 +34453,102 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else s.inventory.push(trophy);
           this.say(`Grave robber: its ${g} is on the body. The dead don't need it — but you'll have to take it.`);
         }
-        } // end per-kill loop
+      }
+    },
+
+    tbEnd(result) {
+      const f = this.tbfight;
+      if (!f || f.over) return;
+      try { this.tele('combat_end', { result: result }); } catch (e) {}
+      f.over = true; f.result = result;
+      // COMBAT CLEANUP GUARANTEE (Steve 2026-10-06): the victory/defeat
+      // narration below is long and calls many subsystems. If ANY of it
+      // throws, tbfight must still clear — a stuck tbfight softlocks movement
+      // (dpad/tap/tryNodeExit all check it) and renders fighters on every
+      // node's grid (no node scoping). try/finally, not hope.
+      try {
+      // WAVE TRACKING (Steve 2026-10-05, revised): kills by wave unlock the
+      // next wave (day-gated). The System watches — prove you can handle it.
+      this.state.combatWins = this.state.combatWins || 0;
+      this.state.combatLosses = this.state.combatLosses || 0;
+      if (result === 'won') this.state.combatWins++;
+      // PER-KILL LEDGER (break-it combat r12 2026-10-11): one body = one
+      // kill on 'won' AND 'routed'. The old code only paid on 'won' — a fight
+      // where you dropped bodies but the rest fled ('routed') scored nothing:
+      // no ledger, no codex 'slain', no carcass, no loot, and the routed
+      // narration lied "No meat, no trophy" about bodies at your feet.
+      // 'fled' stays forfeit: you abandoned the field — the meat with it.
+      if (result === 'won' || result === 'routed') {
+        // Record kills by wave for unlock gates. ONE BODY = ONE KILL
+        // (break-it monsters r6 2026-10-10; lineage-hardened break-it combat
+        // 2026-10-10): snake segments are one creature — the loops below
+        // de-dupe by SNAKE LINEAGE (tbSnakeLineageKey), not bare snakeId.
+        // Counting each of the duck's 14 segments let a single snake clear
+        // the 4-kill wave-2 minimum alone; keying on snakeId alone let
+        // deliberate middle-kills re-open the same hole via splits (each
+        // fragment paying full rewards). Pack monsters are separate
+        // creatures and still count individually.
+        const _seenKills = new Set();
+        for (const m of f.fighters) {
+          if (m.kind === 'monster' && !m.alive && m.mdef) {
+            const _bk = this.tbSnakeLineageKey(m);
+            if (_seenKills.has(_bk)) continue;
+            _seenKills.add(_bk);
+            this.recordWaveKill(m.mdef.id);
+          }
+        }
+      }
+      // Leadership: force. A rout is not a victory — no force for the fled.
+      if (result === 'won') this.leadShift('force', 1);
+      else if (result === 'lost') this.state.combatLosses++;
+      // Check for wave unlock (System escalation) — via the idempotent
+      // choke point: villager field fights and the engagement feed can earn
+      // unlocks outside player combat, and the beat must land there too.
+      try { this.checkWaveUnlockBeat(); } catch (e) {}
+      // AUDIO HYGIENE (Steve): killing the deer left the beam's hum playing.
+      // NOTHING outlives its encounter — stop every sustained loop on ANY
+      // ending (won, lost, fled, routed). combatEnd is idempotent.
+      this.audioEvent('combatEnd');
+      if (this.clearTelegraph) this.clearTelegraph();
+      const s = this.state.scholar;
+      const p = this.tbFighter('p');
+      if (p) s.health = Math.max(0, p.hp);
+      for (const v of f.fighters) {
+        if (v.kind === 'villager' && v.alive && !v.fled) this.tbVillagerSyncPos(v);
+      }
+      // LINEAGE-DEDUPED KILL LIST (break-it combat r12 2026-10-11): shared by
+      // the 'won' and 'routed' reward paths below. One body = one kill —
+      // snake segments share one body (per lineage — tbSnakeLineageKey,
+      // break-it combat 2026-10-10: split fragments keep the original spawn's
+      // snakeRoot, so one duck pays one carcass / one loot roll however many
+      // pieces it dies in). Pack monsters are separate creatures.
+      const _kills = [];
+      if (result === 'won' || result === 'routed') {
+        const _dead = f.fighters.filter(x => x.kind === 'monster' && !x.alive && x.mdef);
+        const _seenBodies = new Set();
+        for (const _m of _dead) {
+          const _bk = this.tbSnakeLineageKey(_m);
+          if (_seenBodies.has(_bk)) continue;
+          _seenBodies.add(_bk);
+          _kills.push(_m);
+        }
+      }
+      if (result === 'won') {
+        try { this.combatWitnessReact('kill'); } catch (e) {}
+        // MONSTER REWARDS need a monster. A 'won' with no monster fighter
+        // (e.g. a human-only fight that didn't route through the betrayal
+        // end path) skips the carcass economy instead of crashing on
+        // undefined.mdef (2026-10-05).
+        // PER-KILL REWARDS (Steve 2026-10-08, break-it round 2): every body
+        // you drop pays out — one carcass + one loot roll per creature. The
+        // old code paid once per FIGHT on the first monster fighter: pack
+        // fights left the other corpses barren and never marked their species
+        // 'slain' in the codex.
+        const mf = _kills[0] || null;
+        if (mf) {
+        this.audioEvent('victory');
+        this.sysSay(`WINNER! Style score: ${f.style || 0}. The gamblers ${((f.style || 0) >= 40) ? 'are ecstatic!' : 'nod approvingly.'}`);
+        this.tbKillRewards(_kills);
         } // end monster-reward block
         this.notePlaystyle('bold');
         try { this.villageEvent('victory'); } catch (e) {}
@@ -34568,7 +34593,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (result === 'routed') {
         this.notePlaystyle('cautious');
         try { const mm = f.fighters.find(x => x.kind === 'monster'); if (mm) this.identifyMonster(mm.monsterId); } catch (e) {}
-        this.say('It got away. No meat, no trophy — but you\'re breathing, and now you know its moves.');
+        if (_kills.length) {
+          // ROUTED WITH KILLS (break-it combat r12 2026-10-11): the fled
+          // ones got away — the dead stay. One body = one kill: the carcasses
+          // pay out (meat, loot roll, codex 'slain'), the ledger scores, and
+          // witnesses react to the kill. Not a victory: no WINNER!, no force
+          // shift, no victory event. The old line lied "No meat, no trophy"
+          // about bodies at your feet.
+          try { this.combatWitnessReact('kill'); } catch (e) {}
+          this.say('It got away — but the dead don\'t run. You take what\'s theirs.');
+          this.tbKillRewards(_kills);
+        } else {
+          this.say('It got away. No meat, no trophy — but you\'re breathing, and now you know its moves.');
+        }
         this.sysSay(`It RAN! Style score: ${f.style || 0}. The gamblers wanted blood, but they'll settle for drama.`);
       } else if (result === 'fled') {
         this.notePlaystyle('cautious');
