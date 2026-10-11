@@ -4808,8 +4808,15 @@
             s.trauma = Math.min(100, (s.trauma || 0) + 5);
             this.sysSay(`📺 You go to ${this.displayName(pid)} anyway. There is nothing to say. You stay until the cameras leave.`);
           } else {
+            // PROGRESSIVE TRUST (break-it social r13 2026-10-11): the old
+            // flat +3 bypassed trustGainProgressive — at 90+ trust an
+            // ordinary act pays 0 by design ("only extraordinary acts move
+            // the needle"), but comfort paid +3 anyway, and trust.gain_mult
+            // debuffs were ignored. Comfort is real but ordinary: through the
+            // one progressive gate like every other gain.
             const cur = v.trust[pid] === undefined ? 10 : v.trust[pid];
-            v.trust[pid] = Math.max(0, Math.min(100, cur + 3));
+            const gain = (typeof this.trustGainProgressive === 'function') ? this.trustGainProgressive(pid, 3) : 3;
+            v.trust[pid] = Math.max(0, Math.min(100, cur + gain));
           }
         } catch (e) {}
       }

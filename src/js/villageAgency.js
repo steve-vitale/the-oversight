@@ -679,7 +679,9 @@
         this.say(`${cap(tag(agV.vid))} stands. ${aLine}`);
       }
       var need = Math.floor((present.length + 1) / 2) + 1;
-      pet.vote = { votes: votes, accept: accept, need: need, present: present.length, forId: forV && forV.vid, againstId: agV && agV.vid };
+      // playerVoted: the count must name only cast votes (break-it social r13
+      // 2026-10-11) — the exiled aren't at the fire, so their seat stays empty.
+      pet.vote = { votes: votes, accept: accept, need: need, present: present.length, forId: forV && forV.vid, againstId: agV && agV.vid, playerVoted: false };
       var playerVoter = !(this.state.scholar || {}).exiled;
       if (playerVoter) {
         this.say(`The moot turns to you. Your vote matters here — and everyone will remember it.`);
@@ -699,6 +701,7 @@
       }
       if (pet.awaitingPlayerVote && (how === 'accept' || how === 'reject')) {
         pet.awaitingPlayerVote = false;
+        if (pet.vote) pet.vote.playerVoted = true; // the seat counts: they voted (break-it social r13)
         // THE ROOM REMEMBERS: your vote lands socially, like every moot.
         try {
           var me = this.villagerId;
@@ -718,8 +721,14 @@
     // _vaFinishPetition: the count, said aloud. Then the consequence.
     _vaFinishPetition(pet, playerAccept) {
       var v = pet.vote || { accept: 0, present: 0 };
+      // HONEST COUNT (break-it social r13 2026-10-11): the old total counted
+      // the player even when they never voted (the exiled aren't at the fire)
+      // — the announced "Y against" included a vote that doesn't exist, and
+      // the threshold was computed against a phantom voter. Count only cast
+      // votes: the player's seat counts when they actually voted.
+      var playerVoted = !!(v.playerVoted || playerAccept);
       var acceptVotes = v.accept + (playerAccept ? 1 : 0);
-      var total = v.present + 1;
+      var total = v.present + (playerVoted ? 1 : 0);
       var need = Math.floor(total / 2) + 1;
       var accepted = acceptVotes >= need;
       var counter = 'Someone';
