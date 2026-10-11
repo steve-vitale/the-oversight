@@ -1,0 +1,50 @@
+# scripts/policies/ — the policy library (measurement 2026-10-11)
+
+One policy = one file = one way of playing. Every lever is measured with
+**multiple policies on identical seeds** so results show strategy-dependence,
+not just one competent player's luck.
+
+## Interface
+
+Each module exports a policy object:
+
+```js
+{
+  id: 'competent',          // stable id, used in sweep tables
+  desc: '...',              // one-line behavior summary
+  setup(Game, ctx) {},      // once per run (optional)
+  upkeep(Game, ctx) {},     // 3x per day, before fights/contests
+  daily(Game, ctx) {},      // once per day, before sleep
+  fight(Game, ctx) {},      // per player turn in combat; return true if handled
+  contest(Game, ctx) {},    // per step of an active contest; return true if handled
+}
+```
+
+Rules: deterministic (seeded PRNG only — the harness seeds Math.random BEFORE
+eval; never use Date.now()/unseeded randomness for decisions), try/catch-guard
+every Game call (a hostile API must never kill a run), never mutate shared
+policy objects (sweep-compare shallow-copies per run).
+
+## The six canonical policies
+
+| id | file | plays like | measures |
+|---|---|---|---|
+| `competent` | competent.js | aware experienced player: learns, cooks, avoids vectors, fights with advantage | the default baseline — keep behavior stable |
+| `risk-aware` | risk-aware.js | competent + reads contest billing: refuses high/extreme when hurt, hedges phases by declared harm, ejects at 45% HP | fear: participation/injury/win-rate deltas vs competent |
+| `larceny-leaning` | larceny-leaning.js | competent + steals when hungry (and on schedule), cold neighbor | justice system: moot firings, trust/gossip response |
+| `kind` | kind.js | competent + uniformly kind: never steals, shares surplus, comforts grieving | the warm pole; contrast with larceny-leaning |
+| `deed-seeking` | deed-seeking.js | competent + hunts notability deeds: patrols, channels, always takes cameras | deed-accumulation curves, table-bar pacing |
+| `winseek` | winseek.js | full table-gate pursuit (6 roads) | win-path reachability ceiling |
+
+Also present (legacy, not canonical): `idle.js` (zero/mvc/leader), `oracle.js`,
+`oracleV2.js` (systems-engaged), `socialite.js` (social-play), `weird-c.js`,
+`progress-*.js`. Use the six above for new measurement; the legacy set stays
+for reproducing old results.
+
+## Adding a policy
+
+1. Copy `kind.js` (smallest layering example).
+2. Build on `competent` via `Object.assign({}, competent, {...})` unless you
+   genuinely need a different base — say why in the header.
+3. Document the behavior AND what it measures in the header comment.
+4. One file, deterministic, guarded. Add a row to the table above.

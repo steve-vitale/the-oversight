@@ -160,6 +160,26 @@
       return n;
     },
 
+    // PACING STATS (measurement 2026-10-11): real minutes-per-day readout
+    // for the 40-hour-content question. Reads state.pacing (written by
+    // endDay); never affects gameplay. Returns null when no data yet.
+    pacingStats() {
+      try {
+        const p = (this.state || {}).pacing || {};
+        const arr = (p.dayMinutes || []).slice();
+        if (!arr.length) return null;
+        const sorted = arr.slice().sort((a, b) => a - b);
+        const mean = arr.reduce((t, x) => t + x, 0) / arr.length;
+        const median = sorted[Math.floor(sorted.length / 2)];
+        return {
+          days: arr.length,
+          meanMin: +mean.toFixed(1),
+          medianMin: +median.toFixed(1),
+          totalMin: +(p.totalMin || 0).toFixed(1),
+        };
+      } catch (e) { return null; }
+    },
+
     // ---------- SLOT MOMENTS ----------
     // Fired once per threshold crossing. Each unlock is a beat, not a number.
     slotMoment(t) {

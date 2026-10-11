@@ -154,9 +154,10 @@ async function setupGame(Game, place, rosterId) {
 // policy: { id, setup?(Game, ctx), upkeep?(Game, ctx), daily?(Game, ctx),
 //           fight?(Game, ctx), contest?(Game, ctx) }
 // opts: { days, manifest, sampleEvery }
-// Returns { days, endReason, telemetry, samples, ms, manifest, policyId }.
+// Returns { days, endReason, telemetry, samples, pacing, ms, manifest, policyId }.
 // Telemetry comes from Game.state.telemetry (full stream when
-// TELEMETRY_FULL=1); samples are daily [day, value] curves.
+// TELEMETRY_FULL=1); samples are daily [day, value] curves; pacing is the
+// always-on per-day player-verb proxy (see PACING PROXY block).
 async function runDays(Game, policy, opts) {
   opts = opts || {};
   const days = opts.days || 365;
@@ -212,6 +213,39 @@ async function runDays(Game, policy, opts) {
 
   if (policy.setup) { try { await policy.setup(Game, ctx); } catch (e) { ctx.notes.push('setup: ' + e.message); } }
 
+  // PACING PROXY (measurement 2026-10-11): headless sims can't measure wall
+  // clock, so we count what a live player spends time on: player-verb
+  // invocations per game-day. Cheap, always on. result.pacing.perDay rows:
+  // { day, verbs, policyCalls, dayTicks }.
+  //   verbs: calls to the documented player-verb list below. Caveat: a few
+  //     are also called internally by game code (notably eat), so this is an
+  //     UPPER bound on deliberate player decisions.
+  //   policyCalls: upkeep/daily/fight/contest hook firings — the STRICT lower
+  //     bound (every one is a player-side decision point).
+  //   dayTicks: scholar.dayTicks sampled pre-sleep — how much of the 512-tick
+  //     day budget got consumed.
+  // Neither touches RNG: determinism unaffected.
+  const PACING_VERBS = ['doAction', 'contestChoose', 'tbPlayerStrike', 'tbPlayerWait',
+    'talkTo', 'convoTurn', 'eat', 'takeFromPantry', 'donateToPantry', 'stealFrom', 'travelTo'];
+  const pacingDays = {};
+  const pacingDay = () => { try { return (Game.state.scholar || {}).day || 0; } catch (e) { return 0; } };
+  const pacingBump = (kind) => {
+    const d = pacingDay();
+    const row = pacingDays[d] || (pacingDays[d] = { day: d, verbs: 0, policyCalls: 0, dayTicks: 0 });
+    row[kind]++;
+  };
+  ctx._pacingBump = pacingBump;
+  for (const v of PACING_VERBS) {
+    try {
+      const orig = Game[v];
+      if (typeof orig === 'function' && !orig._pacingWrapped) {
+        const w = function (...a) { pacingBump('verbs'); return orig.apply(this, a); };
+        w._pacingWrapped = true;
+        Game[v] = w;
+      }
+    } catch (e) {}
+  }
+
   let day;
   // TIME-FREEZE WATCHDOG (crisis leg 2026-10-11): a fight that neither side
   // can advance freezes the day clock (tickAction no-ops mid-fight) — probed
@@ -223,7 +257,7 @@ async function runDays(Game, policy, opts) {
   await quietLog(async () => {
   for (day = 1; day <= days; day++) {
     for (let p = 0; p < 3; p++) {
-      if (policy.upkeep) { try { policy.upkeep(Game, ctx); } catch (e) {} }
+      if (policy.upkeep) { try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); policy.upkeep(Game, ctx); } catch (e) {} }
       driveFights(Game, policy, ctx);
       driveContests(Game, policy, ctx);
       if (Game.over) break;
@@ -240,7 +274,12 @@ async function runDays(Game, policy, opts) {
       if (Game.over) break;
     }
     if (Game.over) break;
-    if (policy.daily) { try { policy.daily(Game, ctx); } catch (e) {} }
+    if (policy.daily) { try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); policy.daily(Game, ctx); } catch (e) {} }
+    // PACING PROXY: sample the consumed tick budget before sleep rolls the day.
+    try {
+      const pd = pacingDay(), prow = pacingDays[pd];
+      if (prow) prow.dayTicks = (Game.state.scholar || {}).dayTicks || 0;
+    } catch (e) {}
     try { Game.sleep(); } catch (e) {}
     driveContests(Game, policy, ctx);
     if (Game.over) break;
@@ -293,6 +332,12 @@ async function runDays(Game, policy, opts) {
   let waveKills = {};
   try { waveKills = Object.assign({}, Game.state.waveKills || {}); } catch (e) {}
 
+  // PACING PROXY summary: per-day rows + means for the standard table.
+  const perDay = Object.keys(pacingDays).map(Number).sort((a, b) => a - b)
+    .map(d => pacingDays[d]);
+  const meanOf = (k) => perDay.length
+    ? +(perDay.reduce((t, r) => t + (r[k] || 0), 0) / perDay.length).toFixed(1) : 0;
+
   return {
     days: day > days ? days : day,
     gameDays,
@@ -301,6 +346,12 @@ async function runDays(Game, policy, opts) {
     telemetry: Game.state.telemetry || [],
     samples,
     learnedPlants, learnedSkills,
+    pacing: {
+      perDay,
+      meanVerbsPerDay: meanOf('verbs'),
+      meanPolicyCallsPerDay: meanOf('policyCalls'),
+      meanTicksPerDay: meanOf('dayTicks'),
+    },
     ms: Date.now() - t0,
     manifest: opts.manifest || manifest('?', policy.id),
     policyId: policy.id,
@@ -326,7 +377,7 @@ function driveFights(Game, policy, ctx) {
     if (Game.over) break;
     if (policy.fight) {
       let handled = false;
-      try { handled = policy.fight(Game, ctx); } catch (e) {}
+      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.fight(Game, ctx); } catch (e) {}
       if (handled) continue;
     }
     const tgt = Game.tbfight.fighters.find(x => x.kind === 'monster' && (x.hp || 0) > 0);
@@ -356,7 +407,7 @@ function driveContests(Game, policy, ctx) {
     if (Game.over) break;
     if (policy.contest) {
       let handled = false;
-      try { handled = policy.contest(Game, ctx); } catch (e) {}
+      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.contest(Game, ctx); } catch (e) {}
       if (handled) continue;
     }
     try {

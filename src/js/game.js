@@ -25764,6 +25764,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return this.status();
         }
       }
+      // PACING TELEMETRY (measurement 2026-10-11): real minutes-per-day for
+      // the 40-hour-content question. Cheap, local-only, never a network
+      // call, never read by game logic — pure observation. The elapsed wall
+      // time since the last endDay is attributed to the day just completed.
+      // Ring buffer (last 60 days) + running total; survives save/load.
+      try {
+        const _perf = (typeof performance !== 'undefined' && performance.now) ? performance : null;
+        const _now = _perf ? _perf.now() : Date.now();
+        const _st = this.state || {};
+        _st.pacing = _st.pacing || { lastTs: 0, dayMinutes: [], totalMin: 0 };
+        if (_st.pacing.lastTs) {
+          const _mins = (_now - _st.pacing.lastTs) / 60000;
+          // Sanity: ignore backgrounded-tab gaps over 12h (not play).
+          if (_mins >= 0 && _mins < 720) {
+            _st.pacing.dayMinutes.push(+_mins.toFixed(2));
+            if (_st.pacing.dayMinutes.length > 60) _st.pacing.dayMinutes.shift();
+            _st.pacing.totalMin = +((_st.pacing.totalMin || 0) + _mins).toFixed(2);
+          }
+        }
+        _st.pacing.lastTs = _now;
+      } catch (e) {}
       scholar.day += 1;
       // VILLAGE CLOCK (BUG 2026-10-07): the player village's day was frozen at
       // 1 forever — villageEats stamped villagers' shared surplus spoilDay =

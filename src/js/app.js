@@ -17016,6 +17016,11 @@
       ? `<p style="margin:8px 0 4px"><button id="dbg-retired-toggle" style="font-size:12px;opacity:.7">🗄️ Retired (${retiredList.length}) ▸</button></p><div id="dbg-retired" style="display:none">${retBtns}</div>`
       : '';
     el.innerHTML = `<b>🐞 DEBUG</b> <button id="dbg-x" style="float:right">✕</button>
+      ${(() => { try {
+        const ps = Game.pacingStats ? Game.pacingStats() : null;
+        if (!ps) return `<p style="opacity:.6;font-size:12px">PACE: no day data yet</p>`;
+        return `<p style="font-size:12px">⏱️ PACE: ${ps.medianMin} min/day median (${ps.meanMin} mean) over ${ps.days}d — ${ps.totalMin} min total</p>`;
+      } catch (e) { return ''; } })()}
       <p style="margin:8px 0 4px"><b>SCENARIOS</b> <span style="opacity:.6;font-size:11px">one tap, fresh run</span></p>
       ${scenHtml}
       ${loadoutSection}
