@@ -14178,6 +14178,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     // spreadGossip: each part, hearers tell non-hearers — preferring their own
     // circle. Gossips spread fast; private people don't. Stories mutate.
+    // LONGSIM social r1 2026-10-11: rates raised (warm 0.5->0.65, base
+    // 0.22->0.35, prickly/withdrawn 0.08->0.12). Measured on 16 identical-seed
+    // runs: stories averaged 0.3-0.5 hearers and distortion 0.2-0.3 — the
+    // distortion>=2 mutation path (the "story mutates as it travels" design)
+    // almost never engaged, and half the village rarely heard anything.
     spreadGossip() {
       const v = this.state.village;
       v.gossip = v.gossip || [];
@@ -14185,7 +14190,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const teller of [...g.heard]) {
           if (!(v.roster || []).includes(teller)) continue;
           const temp = this.npcTemper(teller);
-          const rate = temp === 'warm' ? 0.5 : (temp === 'prickly' || temp === 'withdrawn') ? 0.08 : 0.22;
+          const rate = temp === 'warm' ? 0.65 : (temp === 'prickly' || temp === 'withdrawn') ? 0.12 : 0.35;
           if (Math.random() > rate) continue;
           const candidates = (v.roster || []).filter(id =>
             id !== this.villagerId && id !== teller && !g.heard.includes(id));
@@ -14210,9 +14215,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // about the stash-skimmer isn't about the player), and when
               // the player was the teller it read "you telling X about you".
               // (subject is declared below; compute the attribution inline.)
+              // LONGSIM social r1 2026-10-11 [needs-eyes]: the single
+              // verbatim template repeated for every overheard retelling
+              // (sense-test: 8 identical lines in one 20-day run). The tail
+              // now scales with distortion — fresh stories grow, old stories
+              // detach — and cycles without immediate repeats.
               const fragSubject = dims.who || this.villagerId;
               const aboutWho = (fragSubject === this.villagerId) ? 'you' : this.displayName(fragSubject);
-              this.say(`You catch fragments by the fire — ${this.displayName(teller)} telling ${this.displayName(listener)} about ${aboutWho}. The story's getting bigger than what happened.`);
+              const fragTails = g.distortion >= 6
+                ? [`It's barely the same story now. That's what fires do.`,
+                   `Three retellings in, nobody remembers what actually happened — but everyone has opinions.`,
+                   `The truth left this story two fires ago. What's left is better theater.`]
+                : g.distortion >= 4
+                ? [`Half of it's true anymore. You're not sure which half.`,
+                   `The details have shifted. Nobody seems to mind.`,
+                   `It's picking up decorations as it travels.`]
+                : [`The story's getting bigger than what happened.`,
+                   `Someone's added a flourish that wasn't there this morning.`,
+                   `The retelling is already better than the event.`];
+              const fragTail = (typeof this.pickFresh === 'function')
+                ? this.pickFresh(fragTails, 'gossip_frag') : fragTails[0];
+              this.say(`You catch fragments by the fire — ${this.displayName(teller)} telling ${this.displayName(listener)} about ${aboutWho}. ${fragTail}`);
             }
           }
           // Apply reputation to the SUBJECT of the gossip, not the listener.
