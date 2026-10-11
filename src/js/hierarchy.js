@@ -1677,6 +1677,33 @@
             this.state.pendingGlobal = null;
             this.say('📡 The world feed goes quiet — the summons dies with the realm that earned it. The galaxy watched a fire that is out.');
           }
+          // THE MACHINERY DIES WITH THE REALM (break-it regional r4
+          // 2026-10-11): poolLive/chartered/warOath are NATIONAL unlocks —
+          // the Founding Council's granary, the Charter's tariff routes,
+          // the war-pact's calls. The old code cleared the rank but left
+          // the flags: a dissolved realm kept pouring 2,000 kcal/week into
+          // the pool, kept minting tariff, kept staging defense calls —
+          // the league without the polity. The bilateral bonds survive
+          // (trust, history); the national machinery doesn't. Pending calls
+          // die with it, said aloud. The pool's remaining balance stays
+          // drawable — real food, already poured.
+          var _peers = this._peerLinks('covenant').concat(this._peerLinks('trade'));
+          var _killed = 0;
+          for (var _mki = 0; _mki < _peers.length; _mki++) {
+            var _pl = _peers[_mki];
+            var _had = !!(_pl.poolLive || _pl.chartered || _pl.warOath || _pl.pendingDefense || _pl.pendingTradeCall);
+            _pl.poolLive = false; _pl.chartered = false; _pl.warOath = false;
+            _pl.pendingDefense = null; _pl.pendingTradeCall = null;
+            if (_had) {
+              _killed++;
+              this._linkNote(_pl, 'dissolve', 'The realm came apart — the league machinery dies; the bond remains.');
+            }
+          }
+          if (_killed) {
+            var _poolLeft = 0;
+            try { _poolLeft = this.leaguePool(); } catch (e) {}
+            this.say(`📜 The realm came apart — and the league's machinery dies with it: no more pool weeks, no more tariff routes, no more calls. The bonds remain, but the charter's ink is dry.${_poolLeft > 0 ? ` What the shared granary still holds (${_poolLeft.toLocaleString()} kcal) stays Haven's to draw — real food, already poured.` : ''}`);
+          }
           this.say('◈ The realm came apart — no polity answers to Haven now, and Haven is a free fire again. National' + (hadGlobal ? ' and global' : '') + ' no longer describe this village. The climb starts over.');
           try { if (this.journalNote) this.journalNote('village', 'national', 'The realm came apart — Haven is no longer national.'); } catch (e) {}
           try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-lost'); } catch (e) {}
@@ -2965,6 +2992,13 @@
   // loads BEFORE hierarchy.js, so G.proposeCovenant et al don't exist yet
   // when its wraps run (the guard silently no-ops). Same-object wraps must
   // run after the methods they wrap.
+  // BREAK-IT regional r4 2026-10-11: the list was missing half the council
+  // verbs — an exiled scholar could proposeLink (pledging Haven's tribute),
+  // answerCounter/sweeten (1,500 kcal of Haven's food), answerNationalChoice
+  // (feast 5,000 / oath 3,000), answerGlobalChoice (feast 5,000),
+  // bidForPrimacy, renegotiateLink, and refuseTheScale (permanent griefing)
+  // straight from the road. The UI gates all of these on canPledge; the
+  // engine does now too.
   function _blockIfNotHaven(G, fnName) {
     var _fn = G[fnName];
     if (!_fn) return;
@@ -2975,6 +3009,8 @@
       return _fn.apply(this, arguments);
     };
   }
+  _blockIfNotHaven(G, 'proposeLink');
+  _blockIfNotHaven(G, 'answerCounter');
   _blockIfNotHaven(G, 'proposeCovenant');
   _blockIfNotHaven(G, 'proposeTrade');
   _blockIfNotHaven(G, 'raidVillage');
@@ -2983,6 +3019,11 @@
   _blockIfNotHaven(G, 'answerTradeCall');
   _blockIfNotHaven(G, 'answerCovenantCrisis');
   _blockIfNotHaven(G, 'answerRenegotiation');
+  _blockIfNotHaven(G, 'bidForPrimacy');
+  _blockIfNotHaven(G, 'renegotiateLink');
+  _blockIfNotHaven(G, 'answerNationalChoice');
+  _blockIfNotHaven(G, 'answerGlobalChoice');
+  _blockIfNotHaven(G, 'refuseTheScale');
   _blockIfNotHaven(G, 'drawLeaguePool');
 
 })();
