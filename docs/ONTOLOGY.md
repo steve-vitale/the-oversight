@@ -564,7 +564,7 @@ Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build careful
 **Provides:** grantFeastBuff(feast), feastedActive(), feastedBuffState(), feastedMult(), feastedForm(abilityId, actionId), applyFeastedForm(abilityId, actionId, target, preHp), noteFeastedCombatUse(), clearFeastBuff(expired), feastedLine(), feastSurgeCfg()
 
 **Rules:**
-- devotion_gate: the buff grants ONLY when scholar.prog.feastSurge is armed (code: grantFeastBuff)
+- devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
 - timed_not_trigger: the buff is a window until next dawn, never an on-strike burn (code: grantFeastBuff, feastedActive)
 - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
 - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)

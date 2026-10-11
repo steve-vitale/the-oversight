@@ -15001,7 +15001,7 @@
           ${skippedBit ? `<p class="small"><b>Didn't make it:</b> ${skippedBit}</p>` : ''}
           ${beatsBit}
           ${r.buffGranted ? `<p class="small">◈ The System bottled the feeling of this feast.</p>` : ''}
-          ${r.surgeSpent ? `<p class="small">🔥 The channeled keepsake burned with the feast — the feast was the weapon. (×${r.surgeSpent})</p>` : ''}
+          ${r.surgeSpent ? `<p class="small">🔥 The channeled keepsake feeds the feast — the surge rides the fire until dawn, spent only when blades are warmed. (×${r.surgeSpent})</p>` : ''}
         </div></div>`;
       wireInlineX(slot);
       return;
@@ -15027,7 +15027,7 @@
         <p class="small"><b>The pantry offers:</b><br>${menuBit}${plan.menuShort ? '<br><span style="opacity:.6">(the pantry runs thin past this)</span>' : ''}</p>
         <p class="small"><b>Guest list</b> <span style="opacity:.6">(tap to invite / uninvite)</span><br>${chips}</p>
         ${awayBit}
-        ${plan.armed ? `<p class="small">◈ A channeled keepsake is ARMED — this feast will spend it, loudly. <span style="opacity:.6">(The feast was the weapon.)</span></p>` : ''}
+        ${plan.armed ? `<p class="small">◈ A channeled keepsake is ARMED — this feast will carry it into the fight. <span style="opacity:.6">(First real combat use spends it — a feast that warms no blades spends no devotion.)</span></p>` : ''}
         <div class="btnrow"><button class="btn"${afford ? '' : ' disabled'} data-ffeast-go>🔥 Light the fire (−${plan.cost.toLocaleString()} kcal)</button></div>
       </div></div>`;
     wireInlineX(slot);

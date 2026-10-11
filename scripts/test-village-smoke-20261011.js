@@ -117,6 +117,46 @@ async function main() {
     ok(old && old.spoilDay === day + 20, 'already-preserved untouched');
     ok(v.pantry.some(i => /Fish catch \(smoked\)/.test(i.name)), 'fresh fish still preserved');
   }
+  // --- CASE 5: racks-full — preserved stockpile above the cook's cap: no smoking
+  {
+    const { Game } = await loadGame({ seed: 4243, mode: 'village-smoke' });
+    await setupGame(Game);
+    const said = [];
+    const origSay = Game.say; Game.say = (m) => said.push(String(m));
+    const day = Game.state.scholar.day || 1;
+    const v = Game.state.village;
+    v.pantry = [];
+    // unskilled cap: 125 x roster x 13 — pre-stock ABOVE it
+    const rosterN = (v.roster || []).length || 10;
+    const cap = 125 * rosterN * 13;
+    v.pantry.push({ name: 'Pre-stocked dried meat', kcalEach: 500, units: Math.ceil((cap + 5000) / 500), spoilDay: day + 10, safe: true, foodState: 'preserved' });
+    const prePreserved = v.pantry.filter(i => i.foodState === 'preserved').length;
+    // fresh surplus that WOULD have been smoked
+    for (let i = 0; i < 40; i++) v.pantry.push({ name: 'Fish catch', kcalEach: 500, units: 1, spoilDay: day + 1, safe: true });
+    const vid = setCook(Game, 'accountant'); // unskilled: 0.80x/15d
+    Game.resolveOneAssignment(vid, { task: 'cook' });
+    Game.say = origSay;
+    const postPreserved = v.pantry.filter(i => i.foodState === 'preserved').length;
+    ok(postPreserved === prePreserved, `racks full -> nothing new smoked (${prePreserved} -> ${postPreserved})`);
+    ok(said.join(' ').indexOf('racks are already full') >= 0, 'the cook says the racks are full, honestly');
+    ok(v.pantry.some(i => i.name === 'Fish catch' && !i.foodState), 'the fresh pile stays fresh for dinner, not smoked onto the rot pile');
+  }
+  // --- CASE 6: the cap is skill-aware — a preserver's racks hold more
+  {
+    const { Game } = await loadGame({ seed: 4244, mode: 'village-smoke' });
+    await setupGame(Game);
+    const day = Game.state.scholar.day || 1;
+    const v = Game.state.village;
+    v.pantry = [];
+    const rosterN = (v.roster || []).length || 10;
+    const unskilledCap = 125 * rosterN * 13;
+    // stock above the UNSKILLED cap but below the skill-3 cap (125 x 12 x 43)
+    v.pantry.push({ name: 'Pre-stocked dried meat', kcalEach: 500, units: Math.ceil((unskilledCap + 5000) / 500), spoilDay: day + 10, safe: true, foodState: 'preserved' });
+    for (let i = 0; i < 40; i++) v.pantry.push({ name: 'Fish catch', kcalEach: 500, units: 1, spoilDay: day + 1, safe: true });
+    const vid = setCook(Game, 'fisherman'); // preserver 3: cap ~64.5k for 12
+    Game.resolveOneAssignment(vid, { task: 'cook' });
+    ok(v.pantry.some(i => /Fish catch \(smoked\)/.test(i.name)), 'skilled cook still preserves below their own higher cap');
+  }
   console.log(`village-smoke: ${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

@@ -5526,6 +5526,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             (((b.kcalEach || 0) * (b.units || 1)) - ((a.kcalEach || 0) * (a.units || 1))));
           let keepFresh = reserve;
           const toPreserve = [];
+          // RACKS-FULL (longsim food 2026-10-11): the village eats ~125 kcal
+          // per person per day from the pantry (measured ~1.5k/night for 12)
+          // and eats fresh-first — a preserved stockpile bigger than this
+          // cook's own shelf x the daily draw will rot on the racks. Smoking
+          // it anyway converts fresh rot into preserved rot (measured: ~28%
+          // of all waste was dried/smoked food the village never got to).
+          // When the racks hold more than the haven can eat before it turns,
+          // the racks stay shut and the cook says so honestly.
+          let preservedKcal = 0;
+          for (const it of (v.pantry || [])) {
+            if (it && (it.foodState === 'preserved' || it.foodState === 'rendered'))
+              preservedKcal += (it.kcalEach || 0) * (it.units || 1);
+          }
+          const ownShelf = skill > 0 ? 30 + 5 * skill : 15;
+          const rackCap = 125 * ((v.roster || []).length || 10) * Math.max(1, ownShelf - 2);
+          const racksFull = preservedKcal >= rackCap;
+          if (!racksFull) {
           for (const it of eligible) {
             const per = it.kcalEach || 1;
             const k = per * (it.units || 1);
@@ -5541,6 +5558,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               toPreserve.push(it);
             }
             // else the whole stack stays fresh
+          }
           }
           let budget = 4000, n = 0, keptKcal = 0;
           const convert = (it) => {
@@ -5579,6 +5597,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.villagerGainXP(vid, 'field', 1, 'preserving'); } catch (e) {}
+          } else if (racksFull && eligible.length) {
+            preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
           }
           try { this.bumpTrust(vid, 1, 'kept the haven fed'); } catch (e) {}
         } catch (e) {}
@@ -24674,10 +24694,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // arms by itself; arming stays earned through the keepsake channel. The
     // feast requires NO arming to host: it is the village's social engine
     // and stays live for a devotion-poor player. But when a surge IS armed,
-    // the feast becomes its payoff — the ritual consumes the arming
-    // (prog.feastSurge -> false, feastSurgeUsed = true) and the broadcast
-    // says so loudly: "the feast was the weapon." If the player never
-    // feasts, the old feastBurn path spends the arming as before.
+    // the feast becomes its payoff — the ritual CARRIES the arming into the
+    // buff (feast.surge -> grantFeastBuff) and the broadcast says so loudly:
+    // "the feast was the weapon." The arming stays armed until first real
+    // combat use spends it (feastBuff.js noteFeastedCombatUse); a feast that
+    // warms no blades spends no devotion.
     //
     // QUALITY FORMULA (documented per brief), 0 poor / 1 fine / 2 legendary:
     //   score starts at 1 — an honest feast is a fine feast.
@@ -24695,7 +24716,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // CONTRACT (Worker B owns the buff; do not drift): on completion calls
     // Game.grantFeastBuff(feast) with feast = {quality: 0..2, served:
     // [{itemId, kcal}], guests: [villagerIds who showed, host excluded],
-    // daypart}. Guarded — the ritual must not crash before B lands.
+    // daypart, surge: armed devotion value carried into the gate (0 when
+    // none)}. Guarded — the ritual must not crash before B lands.
     //
     // Cost: 400 kcal x heads (min 1,500), drawn as REAL pantry items via
     // pantryDraw — the pantry gets lighter, honestly. 1/day, at the haven,
@@ -24847,13 +24869,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { this.broadcastEnd(); } catch (e) {}
         } catch (e) {}
       }
-      // DEVOTION PAYOFF (design call, documented above): an armed surge is
-      // spent BY the feast — the ritual is what the devotion lane was for.
+      // DEVOTION PAYOFF (design call, documented above): an armed surge rides
+      // the feast — the ritual is what the devotion lane was for. The feast
+      // CARRIES the arming into grantFeastBuff (feast.surge) but never spends
+      // it: consumption happens on first real combat use (feastBuff.js
+      // noteFeastedCombatUse) — a feast that warms no blades spends no
+      // devotion. (Fixed 2026-10-11: clearing feastSurge BEFORE the grant
+      // made the devotion gate refuse every feast — the food→damage loop
+      // could never fire through the player path.)
       let surgeSpent = 0;
       try {
         if (s.prog && s.prog.feastSurge) {
           surgeSpent = typeof s.prog.feastSurge === 'number' ? s.prog.feastSurge : 1.5;
-          s.prog.feastSurge = false; s.prog.feastSurgeUsed = true;
         }
       } catch (e) {}
       const hostName = (() => { try { return this.displayName(this.villagerId).split(' ')[0]; } catch (e) { return 'you'; } })();
@@ -24871,27 +24898,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       try { this.seedGossip('feast', { host: this.villagerId }, showed); } catch (e) {}
-      // THE CONTRACT (Worker B): the feast completes -> the buff.
+      // THE CONTRACT (Worker B): the feast completes -> the buff. feast.surge
+      // carries the armed devotion value into grantFeastBuff's gate (0 when
+      // no surge is armed) — the feast must not clear the arming first, or
+      // the gate refuses every feast it was meant to empower.
       const feast = {
         quality: qualityGated,
         served,
         guests: showed.slice(),
         daypart: this.dayPart || 0,
+        surge: surgeSpent || 0,
       };
       let buffGranted = false;
-      try { if (typeof this.grantFeastBuff === 'function') { this.grantFeastBuff(feast); buffGranted = true; } } catch (e) {}
+      // HONESTY (longsim food 2026-10-11): buffGranted means the buff was
+      // GRANTED — the old code set it true whenever grantFeastBuff didn't
+      // throw, so an unarmed feast's honest refusal still told the UI "the
+      // System bottled the feeling of this feast." Read the grant's return.
+      try {
+        const _gr = (typeof this.grantFeastBuff === 'function') ? this.grantFeastBuff(feast) : null;
+        buffGranted = !!(_gr && _gr.granted);
+      } catch (e) {}
       try { if (this.tickAction) this.tickAction(48); } catch (e) {}
       const names = showed.slice(0, 4).map(first);
       const more = showed.length > 4 ? ` and ${showed.length - 4} more` : '';
       const menuBit = servedList.slice(0, 3).map(x => `${x.units}× ${x.name}`).join(', ');
       const skippedBit = skipped.length ? ` ${skipped.map(k => `${k.name} ${k.why}`).join('; ')}.` : '';
-      const surgeBit = surgeSpent ? ` The channeled keepsake burns with the feast — the feast was the weapon. (FEAST SURGE ×${surgeSpent} spent)` : '';
+      const surgeBit = surgeSpent ? ` The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until dawn, spent only when the blades are warmed. (FEAST SURGE ×${surgeSpent} armed)` : '';
       const tvBit = televised ? ' 📺' : '';
       this.say(`🍖 FEAST${tvBit} — ${hostName} opens the pantry wide: ${menuBit}. ${names.join(', ')}${more} eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−${spent.toLocaleString()} kcal from the pantry)${skippedBit}${surgeBit}`);
       try { this.save(); } catch (e) {}
       return {
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],
-        spent, served, servedList, showed, skipped, invited, star, surgeSpent,
+        spent, served, servedList, showed, skipped, invited, star, surgeSpent, // surgeSpent: armed devotion CARRIED by the feast (not spent at feast time)
         televised, beats: beatLines, buffGranted, daypart: this.dayPart || 0,
         // score + factors: the quality math, visible and auditable.
         score, factors: {

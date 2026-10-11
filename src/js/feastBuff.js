@@ -13,7 +13,7 @@
 //   - feastedLine()
 //   - feastSurgeCfg()
 // rules:
-//   - devotion_gate: the buff grants ONLY when scholar.prog.feastSurge is armed (code: grantFeastBuff)
+//   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
 //   - timed_not_trigger: the buff is a window until next dawn, never an on-strike burn (code: grantFeastBuff, feastedActive)
 //   - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
 //   - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
@@ -65,16 +65,21 @@
     },
 
     // grantFeastBuff(feast): Worker A's feast event calls this with
-    // { quality: 0..2, served: [{itemId, kcal}], guests: [ids], daypart }.
-    // Validates the devotion gate, sets buff state with absolute dawn expiry,
-    // returns the granted buff or an honest refusal. NEVER stacks: a live
-    // buff is refreshed (better quality wins, window extends to next dawn).
+    // { quality: 0..2, served: [{itemId, kcal}], guests: [ids], daypart,
+    //   surge: armed devotion value carried by the feast (0 when none) }.
+    // Validates the devotion gate — armed means scholar.prog.feastSurge OR
+    // the feast-carried surge (hostFeast must not disarm before the grant);
+    // sets buff state with absolute dawn expiry, returns the granted buff or
+    // an honest refusal. NEVER stacks: a live buff is refreshed (better
+    // quality wins, window extends to next dawn).
     grantFeastBuff(feast) {
       const cfg = this.feastSurgeCfg();
       const s = this.state.scholar || {};
       feast = feast || {};
       try {
-        const armed = (s.prog || {}).feastSurge;
+        // The arming may ride in on the feast (hostFeast carries
+        // scholar.prog.feastSurge in feast.surge) or sit on prog directly.
+        const armed = (s.prog || {}).feastSurge || feast.surge;
         if (!armed) {
           const why = 'The feast is warm and good — full bellies, loud laughter — but no keepsake was channeled. The surge must be armed before a feast can carry it: hold a keepsake and channel first. (Feast buff refused: devotion gate.)';
           this.say('🍖 ' + why);

@@ -380,6 +380,10 @@ function driveFights(Game, policy, ctx) {
       try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.fight(Game, ctx); } catch (e) {}
       if (handled) continue;
     }
+    // ABILITY-USING POLICIES (longsim food 2026-10-11): a policy's fight hook
+    // (e.g. useAbility) can END the fight — tbfight null or over — and return
+    // handled=false. The old code dereferenced tbfight right after.
+    if (!Game.tbfight || Game.tbfight.over) break;
     const tgt = Game.tbfight.fighters.find(x => x.kind === 'monster' && (x.hp || 0) > 0);
     if (tgt && Game.tbIsPlayerTurn()) {
       try { Game.tbPlayerStrike(tgt.key); } catch (e) {}

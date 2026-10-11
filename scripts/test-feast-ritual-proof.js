@@ -8,9 +8,10 @@
 //   is untelevised but still works
 // - no-food feast is refused honestly; unarmed feast is ALLOWED (design call:
 //   the feast is the social engine, arming is optional; an armed surge is
-//   CONSUMED as the devotion payoff)
+//   CARRIED by the feast into the buff and spent on first real combat use —
+//   a feast that warms no blades spends no devotion)
 // - devotion arming preserved: channelSentiment arming untouched; an armed
-//   surge is spent by the feast and marks feastSurgeUsed
+//   surge rides the feast (feast.surge) and marks feastSurgeUsed on combat use
 // - grantFeastBuff(feast) contract call: {quality 0..2, served [{itemId,kcal}],
 //   guests [ids], daypart}
 // Each scenario boots a FRESH game (the village sim kills villagers across
@@ -106,7 +107,8 @@ const richPantry = () => [
       assert.ok(Array.isArray(f.guests) && f.guests.length === pre.showed.length, 'guests mismatch');
       assert.ok(!f.guests.includes(me), 'host should not be in guests');
       assert.strictEqual(typeof f.daypart, 'number', 'daypart missing');
-      assert.deepStrictEqual(Object.keys(f).sort(), ['daypart', 'guests', 'quality', 'served'], 'contract drift: ' + Object.keys(f).join(','));
+      assert.strictEqual(typeof f.surge, 'number', 'surge missing (armed devotion must ride the feast)');
+      assert.deepStrictEqual(Object.keys(f).sort(), ['daypart', 'guests', 'quality', 'served', 'surge'], 'contract drift: ' + Object.keys(f).join(','));
     });
     check('no silent actions: the feast narrates with cost', () => {
       const t = said.join(' ');
@@ -206,20 +208,30 @@ const richPantry = () => [
     G.state.systemArrived = false;
   }
 
-  // ---- 5. devotion arming: preserved and consumed as payoff ----
+  // ---- 5. devotion arming: preserved, carried by the feast, spent on combat use ----
+  // (longsim food 2026-10-11: the old contract spent the arming AT feast time
+  // — but hostFeast disarmed BEFORE grantFeastBuff, so the devotion gate
+  // refused every armed feast and the food->damage loop could never fire.
+  // Canon (progression.js, feastBuff.js noteFeastedCombatUse): the feast
+  // CARRIES the arming into the buff; consumption happens on first real
+  // combat use. A feast that warms no blades spends no devotion.)
   {
     const { s, v } = freshGame();
     v.pantry = richPantry();
     s.prog = s.prog || {}; s.prog.feastSurge = 2.0;
     const armed = G.hostFeast();
-    check('armed surge is spent BY the feast (devotion payoff)', () => {
+    check('armed surge is carried by the feast (devotion payoff)', () => {
       assert.ok(armed.ok, 'refused: ' + armed.why);
       assert.strictEqual(armed.surgeSpent, 2.0, 'surgeSpent=' + armed.surgeSpent);
-      assert.strictEqual(s.prog.feastSurge, false, 'arming not consumed');
-      assert.strictEqual(s.prog.feastSurgeUsed, true, 'deed not marked');
+      assert.strictEqual(s.prog.feastSurge, 2.0, 'arming cleared at feast time — spend belongs to combat use');
+      assert.ok(s.prog.feastSurgeUsed !== true, 'deed marked without combat');
     });
     check('the payoff is narrated, not silent', () => {
       assert.ok(/the feast was the weapon/.test(said.join(' ')), 'no surge payoff narration');
+    });
+    check('the feast-carried arming reaches the buff', () => {
+      const grant = buffCalls[buffCalls.length - 1];
+      assert.ok(grant && grant.surge === 2.0, 'feast.surge not carried: ' + JSON.stringify(grant));
     });
   }
 
