@@ -279,7 +279,13 @@
       for (const rid of (v.roster || [])) {
         if (rid === this.villagerId) continue;
         if (fols.includes(rid) || this.inParty(rid)) continue;
-        if ((trust[rid] || 10) < 65) continue;
+        // FOLLOWER THRESHOLD (longsim trust 2026-10-11): was 65 — unreachable
+        // in the 6-day pre-System window through normal play (measured 0
+        // volunteers in 8x30d competent sims, max day-6 trust 56), so the
+        // "I'm coming with you" beat was dead in practice. 50 is the
+        // 'friendly' band floor and sits above the 40 words-cap: deeds, not
+        // just talk, earn a follower.
+        if ((trust[rid] || 10) < 50) continue;
         if (this.npcGoal(rid) === 'alone') continue;
         if (Math.random() < 0.12) {
           v.followers.push(rid);

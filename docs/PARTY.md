@@ -29,7 +29,7 @@ The most dangerous backstabber is the one you trust completely.
 - Refusals are contextual ("I work alone", "I don't know you well enough")
 
 ### Followers (pre-System)
-- Trust ≥ 65 + compatible goal → may volunteer ("I'm coming with you")
+- Trust ≥ 50 + compatible goal → may volunteer ("I'm coming with you")
 - Max 2, no UI. They drift off if trust craters or terror spikes
 
 ### Traveling
