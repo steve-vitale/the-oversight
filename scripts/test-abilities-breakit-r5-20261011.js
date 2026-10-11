@@ -120,7 +120,7 @@ if (!FIX) {
   // no cheats held -> the mantle passes (death is real, contest is lethal)
   said.length = 0;
   s.health = 0;
-  s.backgroundAbilities = []; // occupations can grant second_wind as background -- clear it too
+  s.backgroundAbilities = []; // (purify audit 2026-10-11: no occupation grants second_wind as background anymore — cleared for hygiene anyway)
   const vidBefore1b = Game.villagerId;
   try { Game._contestDie(mkContest(), 'The damage was too much.'); } catch (e) {}
   ok('C1b: contest death, no cheats -> succession happens (death sticks)',

@@ -29,6 +29,16 @@ twice in one day (2026-10-09).
 
 - **Two pools, never mix** (diseases): mundane = real diseases, alien = alien
   effects. See docs/DISEASES.md.
+- **Human skills ≠ alien abilities** (Steve 2026-10-11): human skills are
+  teachable earthly knowledge — occupations grant them as background, practice
+  and discovery earn them, and they never take System slots. Alien abilities
+  work like magic and come ONLY from the System (offers, trials, System
+  milestones) into the 6 slots. Never confuse the lanes: no occupation teaches
+  magic, no earthly skill is locked behind alien intervention. Canonical
+  example: **purify** is magic — the System offers it (including a reactive
+  offer when you're poisoned); no pharmacist teaches it. Canonical
+  counter-example: **herbal_remedy** is a human skill — occupations grant it,
+  the System doesn't need to.
 - **Monster tiers ≠ loot tiers** (Steve 2026-10-07): separate concepts, never
   conflated in code, comments, or rules.
 - **Monster encounters are fought, not rolled** (Steve 2026-10-08): blow-by-blow

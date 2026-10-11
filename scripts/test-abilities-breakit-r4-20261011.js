@@ -166,16 +166,19 @@ const SRC = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
   ok('HELD: 6-slot sustained strike ceiling is scary-good, finite (~x2.75)', ceil < 10, `ceiling x${ceil.toFixed(2)}`);
   ok('HELD: no unbounded (recursive/additive-loop) strike multiplier in data', sdMults.every(([id]) => !/loop|recursive/.test(id)));
 
-  // ============ HELD: dead-ability tripwire (r6 2026-10-11: purify left the
-  // set — the pharmacist now grants it, so the poison cure is earnable.
-  // 16 remain dead, documented, Steve's call.) ============
+  // ============ HELD: dead-ability tripwire (purify audit 2026-10-11: purify is
+  // now a System ability (system_offer, Steve's law); evidence_board and
+  // pathfinder earned occupation homes (programmer, truck_driver). 14 remain
+  // dead, documented, Steve's call.) ============
   const cg = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/characterGen.json'), 'utf8'));
   const occGranted = new Set(); (cg.occupations || []).forEach(o => (o.granted || []).forEach(g => occGranted.add(g)));
   const dead = ab.filter(a => { const t = (a.unlock || {}).type; return t !== 'system_offer' && !occGranted.has(a.id); }).map(a => a.id).sort();
-  const deadR6 = ['adrenaline_surge','ambush','blood_trail','brawler_instinct','evidence_board','gossip_network','haymaker','intimidating_presence','iron_stomach','lie_detector','pathfinder','peacemaker','silver_tongue','stalk','trade_of_blows','war_cry'].sort();
-  ok('HELD: dead-ability tripwire is the r6 16 (purify earned via pharmacist)', JSON.stringify(dead) === JSON.stringify(deadR6), `got ${dead.length}: ${dead.join(',')}`);
+  const deadR6 = ['adrenaline_surge','ambush','blood_trail','brawler_instinct','gossip_network','haymaker','intimidating_presence','iron_stomach','lie_detector','peacemaker','silver_tongue','stalk','trade_of_blows','war_cry'].sort();
+  ok('HELD: dead-ability tripwire is the 14 (purify via System; evidence_board/pathfinder homed)', JSON.stringify(dead) === JSON.stringify(deadR6), `got ${dead.length}: ${dead.join(',')}`);
 
-  // ============ HELD: undiscoverable-20 tripwire unchanged ============
+  // ============ HELD: undiscoverable-15 tripwire (purify audit 2026-10-11:
+  // pathfinder + evidence_board homed -> farsight, trails_end, string_wall,
+  // trailblazers_promise, green_highway now discoverable. 15 remain, Steve's call.) ============
   const kn = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/knowledge.json'), 'utf8'));
   const byid = {}; ab.forEach(a => byid[a.id] = a);
   const synids = new Set(syy.map(x => x.id)); const skillids = new Set(kn.map(k => k.id));
@@ -186,7 +189,7 @@ const SRC = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
     const okp = paths.some(p => p.every(leg => synids.has(leg) ? disc.has(leg) : leg.startsWith('skill:') ? skillids.has(leg.slice(6)) : leg.startsWith('tech:') ? true : abGrant(leg)));
     if (okp) { disc.add(x.id); ch = true; } } }
   const undisc = syy.filter(x => !disc.has(x.id)).map(x => x.id).sort();
-  ok('HELD: undiscoverable-synergy tripwire still exactly 20', undisc.length === 20, `got ${undisc.length}: ${undisc.join(',')}`);
+  ok('HELD: undiscoverable-synergy tripwire now exactly 15 (pathfinder/evidence_board homed)', undisc.length === 15, `got ${undisc.length}: ${undisc.join(',')}`);
 
   // ============ HELD: blood_tracker discoverable but void ============
   const bt = syy.find(x => x.id === 'blood_tracker');

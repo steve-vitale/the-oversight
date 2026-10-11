@@ -230,6 +230,14 @@
           this.tele('disease', { id: effectId, pool: def.pool, target: target, source: (opts && opts.source) || '?' });
         }
       } catch (e) {}
+      // PURIFY IS SYSTEM MAGIC (Steve 2026-10-11): the only poison cure comes
+      // from the System, never an occupation. A freshly poisoned scholar gets
+      // a reactive offer — friction inspires augmentation (translator rule).
+      // maybeOfferPurify is idempotent (pending offer / held / no slot / the
+      // System hasn't arrived all refuse quietly).
+      try {
+        if (target === 'scholar' && effectId === 'poison' && this.maybeOfferPurify) this.maybeOfferPurify();
+      } catch (e) {}
       return true;
     },
 

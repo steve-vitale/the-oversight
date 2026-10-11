@@ -11,10 +11,12 @@
 //   — the new body inherited the OLD body's active synergies (modifiers firing
 //   for legs never held) and missed newly-completed ones. Every other grant/
 //   XP/load path recomputes; succession didn't.
-// CATCH 3 (DEAD ABILITY, fixed): purify is the ONLY poison cure (poison ticks
-//   -3 HP/dayPart x6, stacks to 3) and had unlock type 'granted' with NO
-//   occupation listing it — unacquirable by any path. The pharmacist (antidote
-//   knowledge, teaches 'medicinal') now grants it.
+// CATCH 3 (STEVE 2026-10-11, overruling r6): purify is MAGIC — a System
+//   ability, never an occupation skill. r6's pharmacist grant is reverted:
+//   purify's unlock type is now 'system_offer' and the System offers it
+//   reactively when the scholar is poisoned (translator-precedent friction
+//   rule), plus a day-7 cond push. The human/alien lane audit (18 occupations)
+//   rides with it — see evidence/2026-10-11/break-purify-audit.md.
 // SIBLING SWEEP (same bug class): villager-agency.js npcRangingApt read the
 //   same stale this.data.occupations path — no occupation ever scored its +2
 //   teachTags ranging bonus. Fixed to characterGen.occupations.
@@ -160,26 +162,42 @@ function newGrantExpr(newChar) {
   }
 }
 
-// ============ CATCH 3: purify earnable (pharmacist grants it) ============
+// ============ CATCH 3: purify is System magic (Steve 2026-10-11) ============
 {
   const cg = Game.data.characterGen || {};
+  const abs = Game.data.abilities || [];
+  const pdef = abs.find(a => a.id === 'purify') || {};
   const pharm = ((cg.occupations) || []).find(o => o.id === 'pharmacist') || {};
-  if (!FIX) pharm.granted = (pharm.granted || []).filter(g => g !== 'purify'); // replay old data
-  const grants = pharm.granted || [];
+  if (!FIX) {
+    // replay the r6 misclassification: pharmacist teaches magic, unlock 'granted'
+    pdef.unlock = { type: 'granted' };
+    pharm.granted = (pharm.granted || []).concat(['purify']);
+  }
+  const anyOccGrantsPurify = ((cg.occupations) || []).some(o => (o.granted || []).includes('purify'));
   if (FIX) {
-    ok('C3: pharmacist grants purify (the poison cure is earnable)',
-      grants.includes('purify'), `grants=${JSON.stringify(grants)}`);
-    // functional: poison applied, purify held, the button path cures it
-    grant('purify');
+    ok('C3: purify unlock type is system_offer (alien ability, not a skill)',
+      (pdef.unlock || {}).type === 'system_offer', `type=${(pdef.unlock || {}).type}`);
+    ok('C3: no occupation grants purify (no human teaches magic)',
+      !anyOccGrantsPurify, 'pharmacist teaches herbal_remedy only');
+    // functional: poisoned post-day-7 -> the System offers purify reactively
     const sc = Game.state.scholar;
+    Game.state.systemArrived = true;
+    sc.abilities = []; sc.abilityChoices = null; sc.poisons = [];
+    try { if (Game.abilitySlots) { /* slots gate the offer */ } } catch (e) {}
     Game.applyStatus('scholar', 'poison', { name: 'throat sac toxin', source: 'the belltoad' });
+    const offered = (sc.abilityChoices || []).some(c => ((c && c.id) || c) === 'purify');
+    ok('C3: poisoned scholar gets a reactive System offer of purify', offered,
+      `choices=${JSON.stringify((sc.abilityChoices || []).map(c => (c && c.id) || c))}`);
+    // take the cure through the real path, then the button cures
+    if (offered) Game.chooseAbility('purify');
+    ok('C3: purify acquired via the System offer', Game.hasAbility('purify'));
     const poisonedBefore = (Game.seList ? Game.seList('scholar') : []).some(e => e.id === 'poison');
     const fired = Game._activateAbilityInner('purify');
     const poisonedAfter = (Game.seList ? Game.seList('scholar') : []).some(e => e.id === 'poison');
     ok('C3: purify cures applied poison (functional)', poisonedBefore && !poisonedAfter && fired !== false);
   } else {
-    ok('C3[old]: purify had no grant path (not in any occupation)',
-      !grants.includes('purify'), `grants=${JSON.stringify(grants)}`);
+    ok('C3[old]: r6 misclassification replayed (pharmacist grants purify as granted-skill)',
+      anyOccGrantsPurify && (pdef.unlock || {}).type === 'granted');
   }
 }
 
@@ -238,8 +256,9 @@ function newGrantExpr(newChar) {
     const t = (a.unlock || {}).type;
     return !(t === 'system_offer' || occG.has(a.id));
   }).map(a => a.id).sort();
-  ok('T-dead16: the documented dead set minus purify (fixed this round)',
-    dead.length === 16 && !dead.includes('purify'), `n=${dead.length} ${JSON.stringify(dead)}`);
+  ok('T-dead14: purify via System; evidence_board/pathfinder homed (programmer/truck_driver)',
+    dead.length === 14 && !dead.includes('purify') && !dead.includes('evidence_board') && !dead.includes('pathfinder'),
+    `n=${dead.length} ${JSON.stringify(dead)}`);
   // undiscoverable synergies: fixpoint over synergy legs
   const syns = Game.data.synergies || [];
   const synIds = new Set(syns.map(x => x.id));
@@ -262,8 +281,8 @@ function newGrantExpr(newChar) {
     }
   }
   const undis = syns.filter(s => !disc.has(s.id)).map(s => s.id).sort();
-  ok('T-undisc20: exactly the documented 20 undiscoverable synergies (unchanged)',
-    undis.length === 20, `n=${undis.length}`);
+  ok('T-undisc15: pathfinder/evidence_board homed -> farsight, trails_end, string_wall, trailblazers_promise, green_highway now discoverable',
+    undis.length === 15, `n=${undis.length} ${JSON.stringify(undis)}`);
   const bt = syns.find(s => s.id === 'blood_tracker');
   ok('T-blood_tracker: still discoverable but mechanically void (Steve\'s call)',
     !!bt && (bt.modifiers || []).length === 0, `modifiers=${JSON.stringify((bt || {}).modifiers)}`);

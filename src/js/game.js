@@ -19408,6 +19408,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // FRICTION INSPIRES AUGMENTATION: a week of miming and pointing
         // earns the System's translation-shaped fix.
         translator: (w.langStruggle || 0) >= 2,
+        // PURIFY IS SYSTEM MAGIC (Steve 2026-10-11): the only poison cure is
+        // an alien ability, never an occupation skill. A scholar poisoned in
+        // week 1 gets the cure pushed front and center — same friction rule.
+        purify: ((s.poisons || []).length || 0) > 0,
       };
       // first ability: prefer UTILITY tier (practical). Later abilities can be anything.
       const utility = all.filter(a => a.tier === 'utility' && cond[a.id]);
@@ -19439,7 +19443,54 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else choices[choices.length - 1] = tr; // bump the wild slot
         }
       }
+      // PURIFY: same friction rule, deadlier trigger. Poisoned in week 1 —
+      // the System leads with the cure, not the wild slot.
+      if (cond.purify) {
+        const pu = all.find(a => a.id === 'purify');
+        if (pu && !choices.some(c => c.id === 'purify')) {
+          if (choices.length < 3) choices.unshift(pu);
+          else choices[0] = pu; // lead with the cure
+        }
+      }
       return choices.slice(0, 3);
+    },
+    // poisonAidChoices / maybeOfferPurify: post-day-7 counterplay for poison.
+    // Purify is System magic (Steve 2026-10-11) — no occupation teaches it, so
+    // a scholar poisoned after the System's arrival gets a reactive offer:
+    // the System noticed the poison the way it noticed the mime show. Purify
+    // leads a 3-choice sheet (agency preserved — the sheet is never a forced
+    // single). Idempotent: no offer while one is pending, none when purify is
+    // held, none when the slots are full, none before the System arrives.
+    poisonAidChoices() {
+      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+      const owned = new Set((this.state.scholar.abilities || []).map(a => (a && a.id) || a));
+      const pu = all.find(a => a.id === 'purify');
+      const out = [];
+      if (pu && !owned.has('purify')) out.push({
+        id: pu.id, name: pu.name, description: pu.description,
+        flavor: 'POISON DETECTED IN A VIEWER FAVORITE. WE HAVE A FIX. IT IS OURS. THE FIRST ONE IS THE CURE — WE ARE NOT SUBTLE.',
+      });
+      const rest = all.filter(a => !owned.has(a.id) && a.id !== 'purify' && (a.tier === 'utility' || a.tier === 'wacky'));
+      for (let i = 0; i < 2 && rest.length; i++) {
+        const pick = rest.splice(Math.floor(Math.random() * rest.length), 1)[0];
+        out.push({ id: pick.id, name: pick.name, description: pick.description, flavor: pick.flavor });
+      }
+      return out;
+    },
+    maybeOfferPurify() {
+      try {
+        const s = this.state.scholar;
+        if (!s || !this.state.systemArrived) return false;
+        if ((s.poisons || []).length === 0) return false;
+        if (this.hasAbility('purify')) return false;
+        if ((s.abilities || []).length >= this.abilitySlots()) return false;
+        if ((s.abilityChoices || []).some(c => ((c && c.id) || c) === 'purify')) return false;
+        const choices = this.poisonAidChoices();
+        if (!choices.length) return false;
+        s.abilityChoices = choices;
+        this.sysSay('"WE SEE THE GREEN IN YOUR VEINS. RUDE. WE HAVE A FIX — OURS, NOT YOURS. CHOOSE."');
+        return true;
+      } catch (e) { return false; }
     },
     // ============ RELIC BOND ============
     // Your five are bonded relics. Bond accrues passively through normal play —
