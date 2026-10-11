@@ -1267,6 +1267,223 @@
       setTimeout(function () { Game.playSystemLine('claude-lastwords'); }, 500);
       setTimeout(function () { Game.playSystemLine('sys-the-sound'); }, 32000);
     },
+
+    // === SCALE (Steve 2026-10-11): transition beats + stage snapshots ===
+    // Transition beats drop you right BEFORE the moment — sleep/rest to let
+    // the day turn and the beat stages. Stage snapshots show what life IS at
+    // each rung. All links are real (formed through _formLink/_formPeerLink,
+    // then seasoned honestly: 30+ days old, trust 40+).
+    scaleDawn() {
+      freshGame();
+      const s = Game.state.scholar;
+      s.day = 0;
+      Game.state.systemArrived = true;
+      s.integration = 15;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      if (ovs[0]) {
+        try { Game._formLink(ovs[0].id, {}, null); } catch (e) { Game.say('🐞 link form failed: ' + e.message); }
+      }
+      // The gesture went out at formation; the Dawn waits for the bond to
+      // come of age (21+ days). Jump to the eve of it.
+      s.day = 21;
+      Game.say('');
+      Game.say('🐞 SCENARIO: 🌅 Regional Dawn — the eve. ' + (ovs[0] ? ovs[0].name : 'A fire') + ' has known Haven three weeks.');
+      Game.say('🐞 The gesture went out; the Dawn has not yet broken. Sleep (or wait out the day) and watch the System overlay grow into coordination.');
+      Game.say('🐞 Try: answer the pending gesture first (Game.answerAccord("gift"|"visit"|"cold")), then sleep.');
+    },
+
+    scaleCouncil() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 55;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 65;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 35; // regional a full season — the rung gate
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formPeerLink(ovs[i].id, { kind: 'covenant' });
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 30; link.trust = 45; } // seasoned: 35 days, trust 45
+        } catch (e) { Game.say('🐞 covenant link failed: ' + e.message); }
+      }
+      Game.say('');
+      Game.say('🐞 SCENARIO: 🕊️ Founding Council — the eve. Three seasoned covenant bonds; Haven has been regional a full season.');
+      Game.say('🐞 Sleep to let the day turn — the Council will be called. Then choose: pact, pool, walk, or REFUSE the scale itself.');
+      Game.say('🐞 Try: Game.answerNationalChoice("pact") / ("pool") / ("walk") / ("refuse").');
+    },
+
+    scaleCharter() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 55;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 65;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 35;
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formPeerLink(ovs[i].id, { kind: 'trade' });
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 30; link.trust = 45; }
+        } catch (e) { Game.say('🐞 trade link failed: ' + e.message); }
+      }
+      Game.say('');
+      Game.say('🐞 SCENARIO: 📜 The Charter — the eve. Three seasoned trade bonds; the charter waits to be sealed.');
+      Game.say('🐞 Sleep to let the day turn — the Charter will be laid on the table. Then: sign, bargain, walk, or REFUSE.');
+      Game.say('🐞 Try: Game.answerNationalChoice("sign") / ("bargain") / ("walk") / ("refuse").');
+    },
+
+    scaleCourt() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 55;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 65;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 35;
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formLink(ovs[i].id, {}, null);
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 30; link.trust = 20; link.conquered = true; } // taken by force: the season, not the trust
+        } catch (e) { Game.say('🐞 conquest link failed: ' + e.message); }
+      }
+      Game.say('');
+      Game.say('🐞 SCENARIO: ⚖️ Iron Court — the eve. Three fires taken by force, a season held. The realm answers for how it was built.');
+      Game.say('🐞 Sleep to let the day turn — the Iron Court will convene. Then: yoke, mercy, release, or REFUSE.');
+      Game.say('🐞 Try: Game.answerNationalChoice("yoke") / ("mercy") / ("release") / ("refuse").');
+    },
+
+    scaleWatchers() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 70;
+      Game.dayPart = 2; // dusk — the feed comes alive at dusk
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 95;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 60;
+      Game.state.nationalLive = true;
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formPeerLink(ovs[i].id, { kind: 'covenant' });
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 55; link.trust = 50; }
+        } catch (e) { Game.say('🐞 covenant link failed: ' + e.message); }
+      }
+      try { Game.state.village.viewership = 42; } catch (e) {}
+      Game.say('');
+      Game.say('🐞 SCENARIO: 📡 The Watchers — the eve. National, viewership 42, the planet is watching.');
+      Game.say('🐞 Sleep to let the day turn — the world feed will demand Haven. Then: champion, feast, or decline on camera.');
+      Game.say('🐞 Try: Game.answerGlobalChoice("champion") / ("feast") / ("decline").');
+    },
+
+    // --- Stage snapshots: what life IS at each rung ---
+    scaleVillage() {
+      freshGame();
+      const s = Game.state.scholar;
+      s.day = 20;
+      Game.state.systemArrived = true;
+      s.integration = 15;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      Game.say('');
+      Game.say('🐞 SCENARIO: 🏕️ Village — the fire, day 20. No links. The System has arrived but the overlay is still HUD and abilities.');
+      Game.say('🐞 This is the baseline: one fire, your people, the wild. Compare everything else to this.');
+      Game.say('🐞 Try: forage, talk to villagers, check what the System overlay shows (and what it does NOT show yet).');
+    },
+
+    scaleRegional() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 40;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 45;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 24;
+      for (let i = 0; i < 2 && ovs[i]; i++) {
+        try {
+          Game._formLink(ovs[i].id, {}, null);
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = i === 0 ? 15 : 30; link.trust = i === 0 ? 50 : 38; }
+        } catch (e) { Game.say('🐞 link form failed: ' + e.message); }
+      }
+      Game.say('');
+      Game.say('🐞 SCENARIO: 🤝 Regional — the network, day 45. Two active bonds, tribute flowing, the coordination layer live.');
+      Game.say('🐞 This is what regional LIFE is: the overlay tracks tribute and demands now. Talk still talks, but some of it is diplomacy.');
+      Game.say('🐞 Try: check the tribute panel, answer a demand, visit a linked fire, feel how the verbs changed without changing.');
+    },
+
+    scaleNational() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 65;
+      Game.dayPart = 1;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 75;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 40;
+      Game.state.nationalLive = true;
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formPeerLink(ovs[i].id, { kind: 'covenant' });
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 40; link.trust = 52; }
+        } catch (e) { Game.say('🐞 covenant link failed: ' + e.message); }
+      }
+      try { Game.state.village.viewership = 25; } catch (e) {}
+      Game.say('');
+      Game.say('🐞 SCENARIO: 🏛️ National — the realm, day 75. The Founding Council sat; the shared granary is open; the realm holds.');
+      Game.say('🐞 This is what national LIFE is: feeding a realm. Watch the pantry — the coalition eats exponentially.');
+      Game.say('🐞 Try: draw from the shared granary in famine, answer a defense call, check what the pact costs this week.');
+    },
+
+    scaleGlobal() {
+      freshGame();
+      const s = Game.state.scholar;
+      Game.state.systemArrived = true;
+      s.integration = 80;
+      Game.dayPart = 2;
+      const ovs = Game.state.otherVillages || [];
+      ovs.forEach(v => { v.generated = true; v.rumored = true; });
+      s.day = 100;
+      Game.state.networkLive = true;
+      Game.state.networkLiveDay = 60;
+      Game.state.nationalLive = true;
+      Game.state.globalLive = true;
+      for (let i = 0; i < 3 && ovs[i]; i++) {
+        try {
+          Game._formPeerLink(ovs[i].id, { kind: 'covenant' });
+          const link = Game.linkWith(ovs[i].id);
+          if (link) { link.day = 60; link.trust = 55; }
+        } catch (e) { Game.say('🐞 covenant link failed: ' + e.message); }
+      }
+      try { Game.state.village.viewership = 48; } catch (e) {}
+      Game.say('');
+      Game.say('🐞 SCENARIO: 📡 Global — the broadcast, day 100. Planetary tier. The audience picked its favorite fire and it is yours.');
+      Game.say('🐞 This is what global LIFE is: being watched by a planet. Every deed is television now.');
+      Game.say('🐞 Try: stage a show stunt, check the fan clubs, feel the weight of the favorite-fire pressure.');
+    },
   };
 
   // RETIRED: scenarios we're confident are solid. Never deleted — saved for
@@ -1362,6 +1579,15 @@
       ['audioVillager', '🔊 Sound check: villager voice'],
       ['audioPersona', '🔊 Sound check: alien persona voice'],
       ['audioClaude', '🔊 Sound check: the Claude scenes'],
+      ['scaleDawn', '🌅 Scale: Regional Dawn (eve)'],
+      ['scaleCouncil', '🕊️ Scale: Founding Council (eve)'],
+      ['scaleCharter', '📜 Scale: the Charter (eve)'],
+      ['scaleCourt', '⚖️ Scale: Iron Court (eve)'],
+      ['scaleWatchers', '📡 Scale: the Watchers (eve)'],
+      ['scaleVillage', '🏕️ Scale: village — the fire'],
+      ['scaleRegional', '🤝 Scale: regional — the network'],
+      ['scaleNational', '🏛️ National: the realm'],
+      ['scaleGlobal', '📡 Scale: global — the broadcast'],
     ];
   };
 
@@ -1380,6 +1606,7 @@
       '👤 Alien Players': ['alienEncounter'],
       '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude'],
       '💍 Items': ['keepsake'],
+      '🌍 Scale': ['scaleDawn', 'scaleCouncil', 'scaleCharter', 'scaleCourt', 'scaleWatchers', 'scaleVillage', 'scaleRegional', 'scaleNational', 'scaleGlobal'],
     };
     // Only include categories that have at least one existing scenario
     const result = {};
