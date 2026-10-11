@@ -412,12 +412,15 @@
     },
     t2gen_skills(vid) {
       const vp = this.vpOf(vid);
-      const taught = ((this.state.village.taught || {})[vid]) || [];
+      // REBUILD 2026-10-11: the union — knowledge is knowledge, however
+      // learned. The old line claimed "I taught N things", crediting the
+      // speaker with teaching they never did. Now it's what they KNOW.
+      const known = (typeof this.plantsKnownBy === 'function') ? this.plantsKnownBy(vid) : (((this.state.village.taught || {})[vid]) || []);
       const cands = [
         '"I was {an_occ}. Which means I\'m good at ' + this.t2intelTrait(vp) + '."',
         '"' + this.t2cap(this.t2intelTrait(vp)) + '. That\'s my thing. Everything else I\'m figuring out like everyone."',
       ];
-      if (taught.length) cands.push('"Ask around — I taught ' + taught.length + ' thing' + (taught.length > 1 ? 's' : '') + ' to this village. Knowledge is the one thing that multiplies when you give it away."');
+      if (known.length) cands.push('"Ask around — I know ' + known.length + ' thing' + (known.length > 1 ? 's' : '') + ' worth knowing out here. Knowledge is the one thing that multiplies when you give it away."');
       if (this.t2band(vid) === 'wary') cands.push('"Why — do I look useless to you?" A grin takes the sting out. "I was {an_occ}. I manage."');
       return cands;
     },

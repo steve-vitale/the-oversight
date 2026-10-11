@@ -1,14 +1,18 @@
 // @ontology
 // system: convo-dialogue
-// description: Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers and want post-turn processing.
+// description: Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers. REBUILD (2026-10-11, Steve): the handlers speak through the want defs (engage/deflect/commit beats), pool every hardcoded line via convoPickCycle (the verbatim "Anyway." loop is dead), compose beats before emission via convoComposeDlg, advance the want arc directly (convoWantEngage), and emit ONLY through sayLine — the single emission choke point. New handlers: dlg:commit (formal commitment), dlg:heed (heeding a warning), dlg:stay (keeping company).
 // provides:
-//   - convoTurn(vid, choiceId) -> dlg: beat handlers + want post-turn wrapper (menu building delegated to Game.buildMenu)
+//   - convoTurn(vid, choiceId) -> dlg: beat handlers (menu building delegated to Game.buildMenu)
+//   - convoComposeDlg(vid, line, choiceId) -> beat composition at selection time
+//   - convoMarkSubstantive(vid, choiceId) -> substance gate for early-return wrappers
 // rules:
 //   - beat_drives_menu: responses derive from the NPC's last utterance, not from state flags (code: buildMenu, Steve 2026-10-06; Phase 1 unified 2026-10-08)
 //   - no_feature_cut: every existing conversation feature remains reachable — mapped, not removed (code: DIALOGUE_FEATURE_MAP, Steve 2026-10-06)
 //   - subject_change_explicit: the topic grab-bag lives behind "talk about something else", never as the default (code: buildMenu, Steve 2026-10-06)
 //   - thread_dry_collapse: "tell me more" is offered only while the thread has beats — once dry, the option disappears and the menu winds down instead of looping the admission line (code: buildMenu + dlg:more/dlg:react, 2026-10-06)
 //   - substantive_light_set: bare acknowledgments (goon/leave/recap/dlg:react/dlg:more/agree/joke/silence/nv:nod/nv:smile/nv:pointself) never flip c.substantive — only real engagement earns endConvo's mood residue, talk-capped at 40 (code: convoTurn wrapper + convoMarkSubstantive, break-it 2026-10-09 r8)
+//   - want_arc_in_handlers: every dlg: handler advances the want via convoWantEngage (engage/deflect/commit) and speaks the want def's beats — the want is the spine, not a post-turn afterthought (code: dlg:help/dlg:commit/dlg:heed/dlg:stay/dlg:cant/dlg:comfort, rebuild 2026-10-11)
+//   - emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript, feed) (code: every handler, rebuild 2026-10-11)
 //   - soft_probe_mounts_evidence: "That doesn't add up" is a real verb, not flavor — it mounts 'prodded' evidence on the first open doubt and the NPC visibly rattles with repeated prods (code: dlg:doubt handler, Steve 2026-10-06)
 // consumes:
 //   - village.villagers
@@ -117,6 +121,21 @@
     } catch (e) {}
   };
 
+  // convoComposeDlg: beat composition for the dlg: handlers. The beat
+  // acknowledges what the player just said BEFORE emission — the
+  // transcript holds the composed line and the no-repeat ledger sees the
+  // final string. (convo rebuild 2026-10-11: composition moved to
+  // beat-selection time, in every path, not just the base turn.)
+  Game.convoComposeDlg = function (vid, line, choiceId) {
+    try {
+      if (line && typeof this.convoComposeBeat === 'function' && typeof this.convoPlayerSaid === 'function') {
+        const composed = this.convoComposeBeat(vid, line, this.convoPlayerSaid(vid, choiceId));
+        if (composed) return composed;
+      }
+    } catch (e) {}
+    return line;
+  };
+
   const origTurn = Game.convoTurn;
   Game.convoTurn = function (vid, choiceId) {
     const c = this.convoGet(vid);
@@ -146,8 +165,14 @@
         // Explicit subject change — open the topic menu.
         c.choosingSubject = true;
         c.transcript.push({ who: 'you', text: '"Can I ask you something else?"' });
-        const line = '"Sure — what\'s on your mind?"';
-        c.transcript.push({ who: 'them', text: line });
+        // sayLine is the single emission choke point: it pushes the
+        // transcript entry, feeds, and records the beat. No manual pushes.
+        const line = this.convoPickCycle(vid, 'dlg:subject:ack', [
+          '"Sure — what\'s on your mind?"',
+          '"Yeah? What\'s up?"',
+          '"Of course. Ask."',
+        ]) || '"Sure — what\'s on your mind?"';
+        this.sayLine(vid, line);
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -157,17 +182,24 @@
         const beat = this.convoThreadBeat(vid);
         if (beat) {
           c.threadDryFor = null; // thread is alive — clear any stale dry marker
-          c.transcript.push({ who: 'them', text: beat });
-          this.sayLine(vid, beat);
+          // Beat composition: the beat acknowledges what was just said.
+          const composed = this.convoComposeDlg(vid, beat, choiceId);
+          this.sayLine(vid, composed);
+          // Engaging with the thread engages the want behind it.
+          this.convoWantEngage(vid, 'engage');
           // Trust: engaging builds it. SCENE (Phase 2): through the resolver.
           try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
-          return { line: beat, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
         // Thread's dry — honest admission, once. Mark the thread dry so the
         // menu stops offering "tell me more" and winds down instead.
         c.threadDryFor = c.thread;
-        const line = '"That\'s... pretty much all of it, honestly."';
-        c.transcript.push({ who: 'them', text: line });
+        const line = this.convoPickCycle(vid, 'dlg:more:dry', [
+          '"That\'s... pretty much all of it, honestly."',
+          '"I wish there was more to tell. That\'s it."',
+          '"That\'s the whole of it. Sorry."',
+        ]) || '"That\'s... pretty much all of it, honestly."';
+        this.sayLine(vid, line);
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -192,13 +224,20 @@
         const beat = (!dry && Math.random() < 0.6) ? this.convoThreadBeat(vid) : null;
         if (beat) {
           c.threadDryFor = null;
-          c.transcript.push({ who: 'them', text: beat });
-          this.sayLine(vid, beat);
-          return { line: beat, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          const composed = this.convoComposeDlg(vid, beat, choiceId);
+          this.sayLine(vid, composed);
+          return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
         c.reactDryCount = (c.reactDryCount || 0) + 1;
-        const line = '"Anyway." A small smile.';
-        c.transcript.push({ who: 'them', text: line });
+        // REBUILD 2026-10-11: the hardcoded "Anyway." looped VERBATIM —
+        // the exact filler Steve called out. Pooled, cycled, never repeated.
+        const line = this.convoPickCycle(vid, 'dlg:react:dead', [
+          '"Anyway." A small smile.',
+          '"So." They look at the fire for a moment.',
+          '"Well." A breath. "That\'s where things stand."',
+          'They nod slowly, not quite done, not quite continuing.',
+        ]) || '"Anyway." A small smile.';
+        this.sayLine(vid, line);
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -209,14 +248,15 @@
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, mood: 1, temper: 'kind', name: 'dlg:' + dlg }); } catch (e) {}
         // They open up a little more, or accept the comfort.
-        const lines = [
+        const raw = this.convoPickCycle(vid, 'dlg:comfort:lines', [
           '"Thanks. ...Thanks for saying that."',
           '"I — yeah. It helps, hearing that."',
           '"You\'re kind. Don\'t let this place change that."',
-        ];
-        const line = this.voiceLine ? this.voiceLine(vid, lines[Math.floor(Math.random() * lines.length)]) : lines[0];
-        c.transcript.push({ who: 'them', text: line });
-        this.sayLine(vid, line);
+        ]) || '"Thanks. ...Thanks for saying that."';
+        const line = this.voiceLine ? this.voiceLine(vid, raw) : raw;
+        this.sayLine(vid, line, { tag: 'comfort' });
+        // Comforting them engages their want (seek_comfort -> comforted).
+        this.convoWantEngage(vid, 'engage');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -224,47 +264,92 @@
         // "What happened?" — they tell the story.
         c.transcript.push({ who: 'you', text: '"What happened?"' });
         const beat = this.convoThreadBeat(vid);
-        const line = beat || '"Long story. ...Maybe another time."';
-        c.transcript.push({ who: 'them', text: line });
-        this.sayLine(vid, line);
+        const raw = beat || this.convoPickCycle(vid, 'dlg:askwhy:dry', [
+          '"Long story. ...Maybe another time."',
+          '"Someday I\'ll tell it right. Not tonight."',
+        ]) || '"Long story. ...Maybe another time."';
+        const composed = this.convoComposeDlg(vid, raw, choiceId);
+        this.sayLine(vid, composed);
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:askwhy' }); } catch (e) {}
-        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        this.convoWantEngage(vid, 'engage');
+        return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
       if (dlg === 'help') {
         // "How can I help?" — engage with their want (Steve 2026-10-06).
-        // The NPC must STATE the favor concretely, not loop on "Here's the thing —".
+        // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
+        // the def owns the concrete ask (never "Here's the thing —" loops).
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, temper: 'kind', name: 'dlg:help' }); } catch (e) {}
-        // Get the specific favor from the want system, or generate one.
         let favorLine = null;
         try {
-          const want = c.want;
-          if (want && want.id === 'ask_favor') {
-            // State a concrete favor based on NPC needs (Steve 2026-10-06).
-            const n = this.npcNeeds ? this.npcNeeds(vid) : {};
-            if (n.hunger > 70) favorLine = '"Really? ...Okay. Food. Anything you can spare - I\'m running on empty."';
-            else if (n.fear > 70) favorLine = '"Really? ...Okay. Just - stay close tonight? I don\'t want to be alone when it gets dark."';
-            else if (n.energy < 30) favorLine = '"Really? ...Okay. Could you take my watch for a bit? I\'m running on empty."';
-            else favorLine = '"Really? ...Okay. I need an extra pair of hands tomorrow. Can you help?"';
-          } else {
-            favorLine = '"Really? ...Thank you. I\'ll let you know what I need."';
+          const w = c.want;
+          if (w && w.def && typeof w.def.engageBeat === 'function') {
+            // The def speaks: the concrete favor (ask_favor), the real news
+            // (share_news), the deepened feeling (seek_comfort).
+            favorLine = w.def.engageBeat.call(this, vid);
           }
-        } catch (e) {
-          favorLine = '"Really? ...Thank you for offering."';
-        }
-        const line = favorLine;
-        c.transcript.push({ who: 'them', text: line });
-        this.sayLine(vid, line);
-        // Resolve the want so we don't loop — the favor is now stated and the
-        // beat moves on. NOTE (socialite r11 2026-10-10): this does NOT set
-        // c.offeredHelp. That's the FORMAL vow's flag (offer_help ->
-        // promiseHelp, tracked, can rot). A casual "how can I help" must not
-        // lock the formal promise out of the menu for the rest of this
-        // conversation — asking, then committing, is the honest escalation.
-        if (c.want) c.want.stage = 1; // engaged, not looping
+        } catch (e) { favorLine = null; }
+        if (!favorLine) favorLine = '"Really? ...Thank you. I\'ll let you know what I need."';
+        const composed = this.convoComposeDlg(vid, favorLine, choiceId);
+        this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
+        // NOTE (socialite r11 2026-10-10): this does NOT set c.offeredHelp.
+        // That's the FORMAL vow's flag (offer_help -> promiseHelp, tracked,
+        // can rot). A casual "how can I help" must not lock the formal
+        // promise out of the menu — asking, then committing (dlg:commit), is
+        // the honest escalation.
+        this.convoWantEngage(vid, 'engage');
+        return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
+
+      if (dlg === 'commit') {
+        // "I'll do it." — the formal commitment. REBUILD 2026-10-11: new
+        // handler. The want def speaks the commit beat; the state moves to
+        // resolved with the def's resolution (promised/heeded/repaid).
+        c.transcript.push({ who: 'you', text: '"I\'ll do it."' });
+        try { this.resolveConsequence(vid, { trust: 3, mood: 1, temper: 'kind', name: 'dlg:commit' }); } catch (e) {}
+        let beat = null;
+        try {
+          const w = c.want;
+          if (w && w.def && typeof w.def.commitBeat === 'function') {
+            beat = w.def.commitBeat.call(this, vid);
+          }
+        } catch (e) { beat = null; }
+        if (!beat) beat = '"Thank you. Seriously — thank you."';
+        this.sayLine(vid, beat);
+        this.convoWantEngage(vid, 'commit');
+        return { line: beat, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
+
+      if (dlg === 'heed') {
+        // "I'll be careful." — heeding a warning. REBUILD 2026-10-11: new
+        // handler. Engagement, not deflection — they wanted you warned.
+        c.transcript.push({ who: 'you', text: '"I\'ll be careful."' });
+        try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:heed' }); } catch (e) {}
+        const line = this.convoPickCycle(vid, 'dlg:heed:lines', [
+          '"Good. I mean it — watch yourself out there."',
+          '"Promise me that. Please."',
+          '"Thank you. I needed to hear you say it."',
+        ]) || '"Good. I mean it — watch yourself out there."';
+        this.sayLine(vid, line, { tag: 'warning' });
+        this.convoWantEngage(vid, 'engage');
+        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
+
+      if (dlg === 'stay') {
+        // "I'll stay a while." — company kept. REBUILD 2026-10-11: new
+        // handler for the just_company want's honest engagement.
+        c.transcript.push({ who: 'you', text: '"I\'ll stay a while."' });
+        try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:stay' }); } catch (e) {}
+        const line = this.convoPickCycle(vid, 'dlg:stay:lines', [
+          '"Nice. Sit. The fire\'s warm."',
+          '"Good. Company\'s company."',
+          'They shift over, making room. "Stay as long as you like."',
+        ]) || '"Nice. Sit. The fire\'s warm."';
+        this.sayLine(vid, line, { tag: 'small' });
+        this.convoWantEngage(vid, 'engage');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -272,12 +357,23 @@
         // "Tell me more about it" — want details.
         c.transcript.push({ who: 'you', text: '"Tell me more about it."' });
         const beat = this.convoThreadBeat(vid);
-        const line = beat || '"It\'s... complicated. But thank you for asking."';
-        c.transcript.push({ who: 'them', text: line });
-        this.sayLine(vid, line);
+        let raw = beat;
+        if (!raw) {
+          try {
+            const w = c.want;
+            if (w && w.def && typeof w.def.engageBeat === 'function') raw = w.def.engageBeat.call(this, vid);
+          } catch (e) { raw = null; }
+        }
+        raw = raw || this.convoPickCycle(vid, 'dlg:details:dry', [
+          '"It\'s... complicated. But thank you for asking."',
+          '"I don\'t have the words for all of it. But thank you for asking."',
+        ]) || '"It\'s... complicated. But thank you for asking."';
+        const composed = this.convoComposeDlg(vid, raw, choiceId);
+        this.sayLine(vid, composed);
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
-        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        this.convoWantEngage(vid, 'engage');
+        return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
       if (dlg === 'cant') {
@@ -296,9 +392,20 @@
             name: 'dlg:cant',
           });
         } catch (e) {}
-        const line = '"Oh. ...No, I get it. Thanks for being straight with me."';
-        c.transcript.push({ who: 'them', text: line });
+        // REBUILD 2026-10-11: the deflection speaks the WANT DEF's
+        // deflectBeat (their actual reaction), and advances the want arc —
+        // deflected, not evaporated. The ending will name it.
+        let raw = null;
+        try {
+          const w = c.want;
+          if (w && w.def && typeof w.def.deflectBeat === 'function') raw = w.def.deflectBeat.call(this, vid);
+        } catch (e) { raw = null; }
+        const line = raw || this.convoPickCycle(vid, 'dlg:cant:lines', [
+          '"Oh. ...No, I get it. Thanks for being straight with me."',
+          '"No — it\'s fine. I shouldn\'t have asked."',
+        ]) || '"Oh. ...No, I get it. Thanks for being straight with me."';
         this.sayLine(vid, line);
+        this.convoWantEngage(vid, 'deflect');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -332,7 +439,6 @@
           : prods === 2
           ? '"What are you getting at?" A glance away, then back. They\'re choosing their words now.'
           : 'They\'re rattled — hands busy, eyes everywhere but on you. "I\'ve told you what I\'ve told you."';
-        c.transcript.push({ who: 'them', text: line });
         this.sayLine(vid, line);
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }

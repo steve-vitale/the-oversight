@@ -11942,7 +11942,9 @@
     // lives on the button itself. Every entry path funnels through here.
     const talkLabel = convo.active ? null : (convo.transcript && convo.transcript.length ? '\uD83D\uDCAC Talk again (10 kcal)' : '\uD83D\uDCAC Talk (10 kcal)');
     const youKnow = Object.keys(Game.state.codex.plants || {});
-    const theyKnow = (Game.state.village.taught && Game.state.village.taught[villagerId]) || [];
+    // REBUILD 2026-10-11: the union — background familiarity is knowledge
+    // too, not just player-taught plants.
+    const theyKnow = (typeof Game.plantsKnownBy === 'function') ? Game.plantsKnownBy(villagerId) : ((Game.state.village.taught && Game.state.village.taught[villagerId]) || []);
     const teachable = youKnow.filter(pid => !theyKnow.includes(pid));
 
     let btns = `${talkLabel ? `<button class="btn sm" data-act="talk">${talkLabel}</button>\n      ` : ''}<button class="btn sm ghost" data-act="give"${Game.edibleCount() ? '' : ' disabled'}>\uD83C\uDF81 Give food${Game.edibleCount() ? '' : ' (none)'}</button>

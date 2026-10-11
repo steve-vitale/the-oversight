@@ -19,7 +19,7 @@ global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(f
  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
  'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js',
  'src/js/convo-mood.js', 'src/js/convoTopics.js', 'src/js/convo-wants.js',
- 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
+ 'src/js/convo-dialogue.js', 'src/js/convo-beats.js', 'src/js/convo-scene.js',
  'src/js/journal.js', 'src/js/party.js', 'src/js/truth.js', 'src/js/storage.js',
  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js',
  'src/js/debug-scenarios.js'
@@ -63,8 +63,11 @@ function playConvo(vid, maxTurns) {
       woundDown: dry && (c.reactDryCount || 0) >= 2,
     });
     // Pick the first engaging response (not leave, not subject-change on turn 1).
+    // REBUILD 2026-10-11: the curious want hangs a real question — answer it
+    // honestly (ans:/gq:) instead of leaving.
     const choices = res.choices || [];
     let pick = choices.find(ch => ch.id && ch.id.indexOf('dlg:') === 0 && ch.id !== 'dlg:subject' && ch.id !== 'leave');
+    if (!pick) pick = choices.find(ch => ch.id && (ch.id.indexOf('ans:') === 0 || ch.id.indexOf('gq:') === 0) && ch.id.indexOf('honest_pass') === -1);
     if (!pick) pick = choices.find(ch => ch.id === 'dlg:subject');
     if (!pick) pick = choices.find(ch => ch.id === 'leave');
     if (!pick) break;

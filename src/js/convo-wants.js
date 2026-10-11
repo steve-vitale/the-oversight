@@ -1,36 +1,41 @@
 // @ontology
 // system: convo-wants
-// description: Want-driven conversation architecture. Every conversation has an NPC want that gives it direction; beats acknowledge what the player said; endings plant seeds for next time.
+// description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
 //   - convoWantOpener(vid, want) -> {line, thread}
-//   - convoComposeBeat(vid, rawBeat, playerSaid) -> composed beat that acknowledges the player
-//   - convoPlantSeed(vid, seed)
-//   - convoCheckSeeds(vid) -> pending seed or null
-//   - convoAdvanceWant(vid, playerChoiceKind)
+//   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
+//   - convoWantMenu(vid) -> menu options for the live want
+//   - convoWantCloseLine(vid) -> goodbye beat for the resolution
+//   - convoResolveWant(vid, how) -> plants seeds for unfinished business
+//   - convoPlantSeed(vid, seed) / convoCheckSeeds(vid)
+//   - convoWantNews(vid) / convoWantWarning(vid) -> real content beats
 // rules:
 //   - want_driven: every conversation selects one NPC want at start; the want shapes the opening and provides beats (code: convoSelectWant, Steve 2026-10-06)
+//   - no_polite_queue: the want surfaces in the opening beats, never queued behind a continuer (code: startConvo, Steve 2026-10-11)
+//   - strangers_want: trust tier never gates want depth — a stranger opens with something they want (code: convoSelectWant, Steve 2026-10-11, overrides Principle 12)
 //   - beat_acknowledgment: NPC beats must acknowledge the player's last utterance before delivering new content — no non-sequiturs (code: convoComposeBeat, Steve 2026-10-06)
 //   - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
-//   - arc: want stages 0 (unspoken) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoAdvanceWant, Steve 2026-10-06)
+//   - arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
 // consumes:
 //   - village.villagers
 //   - state.convos
 //   - npcNeeds (hunger/fear/social/energy)
 // ============ CONVERSATION WANTS ============
-// Structural rethink (Steve 2026-10-06): conversations were a reactive
-// choice-menu with no direction — the NPC had nothing they wanted, beats
-// didn't respond to what the player said, and endings evaporated.
+// Structural rebuild (Steve 2026-10-11): conversations were button-tapping
+// with nothing getting done — no meaning, just confusing options. The old
+// want system existed but was layered politely on the side (a heldBeats
+// queue behind the 'goon' continuer, wrapper hooks around the core flow),
+// so wants never surfaced and never drove.
 //
-// Now: every conversation has an NPC WANT. The want is selected from their
-// needs, personality, unresolved seeds, and recent events. It gives the
-// conversation a shape: the want surfaces, the player engages or deflects,
-// and the ending plants a seed for next time.
-//
-// Beats go through convoComposeBeat, which ensures the NPC's line
-// acknowledges what the player just said before delivering new content.
-// No more non-sequiturs: if you ask about their past, they don't answer
-// with a burdock lesson.
+// Now the want IS the spine, integrated into the core flow:
+//   - startConvo (conversation.js) selects the want and opens WITH it.
+//     The opening beats ARE the want — favor, question, news, comfort.
+//   - The menu (convoWantMenu, consulted by the beat matrix) always offers
+//     a way to engage or deflect the live want, plus honest exits.
+//   - endConvo (conversation.js) resolves the want: resolved, planted as a
+//     seed for next time, or owed (a debt that resurfaces).
+// No wrappers, no queues, no polite afterthoughts.
 
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
@@ -39,14 +44,14 @@
   // ============ WANT DEFINITIONS ============
   // Each want: what the NPC wants from this conversation.
   // - pick(vid): weight for selection (higher = more likely)
-  // - opener(vid): the opening line when this want drives the conversation
-  // - thread: the conversation thread this want lives in
-  // - engage(vid): beat when the player engages with the want
-  // - deflect(vid): beat when the player deflects/ignores it
-  // - resolve(vid, how): what happens at the end; returns a seed or null
+  // - opener(vid): the opening line — the want, surfaced immediately
+  // - engageBeat(vid): what they say when the player engages ("how can I help?" -> the concrete ask)
+  // - deflectBeat(vid): what they say when the player deflects
+  // - menuOptions(vid, stage): [{id, labels[], temper}] — engage/deflect/follow-through
+  // - closeLine(vid, resolution): the goodbye beat for how it ended
+  // - resolve(vid, resolution): seed or null
   const WANTS = {
     share_news: {
-      thread: 'small',
       pick(vid) {
         // They've seen something, heard something — bursting to tell.
         // More likely if they haven't talked in a while.
@@ -55,30 +60,33 @@
         return daysSince > 2 ? 3 : 1;
       },
       opener(vid) {
-        const news = [
+        return Game.convoPickCycle(vid, 'want:news:open', [
           '"You\'ll never guess what I saw by the treeline."',
           '"Okay, so — something happened this morning."',
           '"Have you heard? No? Good, I get to tell you first."',
-        ];
-        return Game.convoPickCycle(vid, 'want:news:open', news);
-      },
-      engage(vid) {
-        return Game.convoPickCycle(vid, 'want:news:engage', [
-          '"Right? I knew you\'d get it. Nobody else listens like that."',
-          '"See, this is why I tell you things."',
         ]);
       },
-      deflect(vid) {
+      engageBeat(vid) {
+        // "Tell me more." -> the actual news. REAL content, never a shrug.
+        return Game.convoWantNews(vid);
+      },
+      deflectBeat(vid) {
         return '"Oh. Right. Never mind — it\'s probably nothing." They look a little deflated.';
       },
-      resolve(vid, how) {
-        if (how === 'engaged') return null; // fully shared, no seed
+      menuOptions(vid, stage) {
+        return [
+          { id: 'dlg:more', labels: ['"Tell me more."', '"What happened?"', '"Go on."'], temper: 'neutral' },
+          { id: 'dlg:react', labels: ['"Huh."', '"No kidding."', '"I see."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) { return null; },
+      resolve(vid, resolution) {
+        if (resolution === 'engaged') return null; // fully shared, no seed
         // They didn't get to tell you — they'll try again.
         return { wantId: 'share_news', note: 'that news they were bursting to share' };
       },
     },
     ask_favor: {
-      thread: 'personal',
       pick(vid) {
         // High need drives favors: hungry, scared, tired.
         try {
@@ -88,6 +96,7 @@
         return 1;
       },
       opener(vid) {
+        // The opener NAMES the need — the want is visible from beat one.
         try {
           const n = Game.npcNeeds(vid);
           if (n.hunger > 70) return '"I hate to ask, but — do you have anything to eat? Anything at all?"';
@@ -99,25 +108,60 @@
           '"Could you do something for me? It\'s not big. Probably."',
         ]);
       },
-      engage(vid) {
-        return '"Thank you. Seriously — thank you. I wouldn\'t ask if it wasn\'t important."';
+      engageBeat(vid) {
+        // "How can I help?" -> the concrete ask. Never "Here's the thing —"
+        // looping: the favor is stated once, plainly.
+        try {
+          const n = Game.npcNeeds(vid);
+          if (n.hunger > 70) return '"Food. Anything you can spare — I\'m running on empty."';
+          if (n.fear > 70) return '"Just — stay close tonight? When it gets dark, I don\'t want to be alone."';
+          if (n.energy < 30) return '"Could you take my watch for a bit? An hour. That\'s all I need."';
+        } catch (e) {}
+        return '"I need an extra pair of hands tomorrow. Nothing dangerous — just an extra pair of hands. Can you help?"';
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
       },
-      resolve(vid, how) {
-        if (how === 'engaged') {
-          // They owe you now — that's a seed (Phase 1: real wantId).
+      commitBeat(vid) {
+        return Game.convoPickCycle(vid, 'want:favor:commit', [
+          '"Thank you. Seriously — thank you. I wouldn\'t ask if it wasn\'t important."',
+          '"You don\'t know what that means right now." They look away for a second. "Thank you."',
+        ]) || '"Thank you. Seriously."';
+      },
+      menuOptions(vid, stage) {
+        if ((stage || 0) >= 2) {
+          // Favor stated — commit or back out. Honest, both ways.
+          return [
+            { id: 'dlg:commit', labels: ['"I\'ll do it."', '"Count me in."'], temper: 'kind' },
+            { id: 'dlg:cant', labels: ['"Actually — I can\'t."', '"I\'m sorry, I can\'t."'], temper: 'neutral' },
+          ];
+        }
+        return [
+          { id: 'dlg:help', labels: ['"How can I help?"', '"What do you need?"', '"I\'m listening."'], temper: 'kind' },
+          { id: 'dlg:details', labels: ['"Tell me what\'s going on."', '"What\'s the situation?"'], temper: 'neutral' },
+          { id: 'dlg:cant', labels: ['"I can\'t right now."', '"Not right now, sorry."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) {
+        if (resolution === 'promised') return '"Thank you. Really — I won\'t forget this."';
+        if (resolution === 'deflected') return '"Forget I asked. I\'ll figure it out."';
+        return null;
+      },
+      resolve(vid, resolution) {
+        if (resolution === 'promised') {
+          // They owe you now — that's a seed (the dead 'repay' seed's real wantId).
           return { wantId: 'repay', note: 'the favor they still owe you for' };
+        }
+        if (resolution === 'engaged') {
+          // Favor stated, no commitment — still hanging.
+          return { wantId: 'ask_favor', note: 'the help they asked you for' };
         }
         return { wantId: 'ask_favor', note: 'the help they asked you for' };
       },
     },
     // repay: they owe you one. Seed-driven only — pick() returns 0 so it
-    // never surfaces spontaneously. Debts unpaid just sit there (Phase 1,
-    // Steve 2026-10-08: the dead 'repay' seed gets a real wantId).
+    // never surfaces spontaneously. Debts unpaid just sit there.
     repay: {
-      thread: 'personal',
       pick(vid) { return 0; },
       opener(vid) {
         return Game.convoPickCycle(vid, 'want:repay:open', [
@@ -125,25 +169,30 @@
           '"About last time — I haven\'t forgotten. I want to make it right."',
         ]);
       },
-      engage(vid) {
+      engageBeat(vid) {
         return '"Good. Then we\'re square." They look lighter for it.';
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.';
       },
-      resolve(vid, how) {
-        if (how === 'engaged') return null; // repaid, debt clear
+      menuOptions(vid, stage) {
+        return [
+          { id: 'dlg:react', labels: ['"We\'re square."', '"Don\'t mention it."'], temper: 'kind' },
+          { id: 'dlg:cant', labels: ['"Don\'t worry about it."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) { return null; },
+      resolve(vid, resolution) {
+        if (resolution === 'engaged') return null; // repaid, debt clear
         return { wantId: 'repay', note: 'the favor they still owe you for' };
       },
     },
     seek_comfort: {
-      thread: 'personal',
       pick(vid) {
         try {
           const n = Game.npcNeeds(vid);
           if (n.fear > 60) return 3;
         } catch (e) {}
-        // Grieving or scared mood also drives this.
         try {
           const m = Game.npcMood(vid);
           if (m === 'grieving' || m === 'scared') return 3;
@@ -156,19 +205,38 @@
           '"I\'m not okay. I\'m saying it out loud so it\'s real: I\'m not okay."',
         ]);
       },
-      engage(vid) {
-        return '"It helps. Just — saying it out loud to someone who\'s actually listening. It helps."';
+      engageBeat(vid) {
+        return Game.convoPickCycle(vid, 'want:comfort:engage', [
+          '"It helps. Just — saying it out loud to someone who\'s actually listening. It helps."',
+          '"I keep going over it. Having someone here... it slows the spiral."',
+        ]) || '"It helps. Just — saying it out loud. It helps."';
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"Right. Sorry. I\'m fine." They are very obviously not fine.';
       },
-      resolve(vid, how) {
-        if (how === 'engaged') return null;
+      menuOptions(vid, stage) {
+        if ((stage || 0) >= 2) {
+          return [
+            { id: 'dlg:stay', labels: ['"I\'ll stay a while."', '"I\'m not going anywhere."'], temper: 'kind' },
+            { id: 'dlg:empathize', labels: ['"I\'m here."'], temper: 'kind' },
+          ];
+        }
+        return [
+          { id: 'dlg:comfort', labels: ['"Hey — are you alright?"', '"Are you okay?"'], temper: 'kind' },
+          { id: 'dlg:empathize', labels: ['"That sounds really hard."', '"Yeah. I hear you."'], temper: 'kind' },
+          { id: 'dlg:cant', labels: ['"I can\'t — I\'m sorry."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) {
+        if (resolution === 'engaged' || resolution === 'comforted') return '"Thanks for... you know. Just listening."';
+        return null;
+      },
+      resolve(vid, resolution) {
+        if (resolution === 'engaged' || resolution === 'comforted') return null;
         return { wantId: 'seek_comfort', note: 'whatever\'s been weighing on them' };
       },
     },
     warn_you: {
-      thread: 'small',
       pick(vid) {
         // They know something dangerous. More likely after monster activity.
         try {
@@ -180,20 +248,36 @@
       opener(vid) {
         return '"Listen. I need you to hear this before you go back out there."';
       },
-      engage(vid) {
-        return '"Good. Just — be careful. I mean it."';
+      engageBeat(vid) {
+        // "What's going on?" -> the actual warning. Real content.
+        return Game.convoWantWarning(vid);
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"...Suit yourself. Don\'t say I didn\'t try."';
       },
-      resolve(vid, how) {
-        return null; // warning delivered or not, no seed
+      menuOptions(vid, stage) {
+        if ((stage || 0) >= 2) {
+          return [
+            { id: 'dlg:heed', labels: ['"I\'ll be careful."', '"I hear you. I\'ll watch myself."'], temper: 'kind' },
+            { id: 'dlg:react', labels: ['"Noted."'], temper: 'neutral' },
+          ];
+        }
+        return [
+          { id: 'dlg:details', labels: ['"What is it? What happened?"', '"Tell me."'], temper: 'neutral' },
+          { id: 'dlg:heed', labels: ['"I\'ll be careful."'], temper: 'kind' },
+          { id: 'dlg:react', labels: ['"I\'ll risk it."'], temper: 'neutral' },
+        ];
       },
+      closeLine(vid, resolution) {
+        if (resolution === 'heeded') return '"Good. Just — be careful. I mean it."';
+        return null;
+      },
+      resolve(vid, resolution) { return null; }, // warning delivered or not, no seed
     },
     curious: {
-      thread: 'personal',
       pick(vid) {
-        // They want to know about YOU. More likely at higher trust.
+        // They want to know about YOU. More likely at higher trust —
+        // but strangers get curious too (Principle 12 override).
         try {
           const t = (Game.state.village.trust || {})[vid] || 10;
           if (t >= 40) return 2;
@@ -201,26 +285,29 @@
         return 1;
       },
       opener(vid) {
-        return Game.convoPickCycle(vid, 'want:curious:open', [
-          '"Can I ask you something? Something real?"',
-          '"I realize I don\'t actually know much about you."',
-        ]);
+        // The question IS the beat: hang the real bespoke question and
+        // speak it in the same breath. One pick, one hang — the menu
+        // answers the same question they just asked. (convo rebuild
+        // 2026-10-11: the old flow hung a different question than the
+        // opener spoke.)
+        const q = (typeof Game.convoHangWantQuestion === 'function') ? Game.convoHangWantQuestion(vid) : null;
+        if (q && q.q) return q.q;
+        return null; // no unasked question left — the want can't open
       },
-      engage(vid) {
+      engageBeat(vid) {
         return '"Huh. I wouldn\'t have guessed that about you."';
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"Fair enough. Some things aren\'t for sharing."';
       },
-      resolve(vid, how) {
-        // Engaged: they know something real now. The closeness lives in
-        // the trust the engagement built — no seed needed (Phase 1: the
-        // dead 'closeness' seed is cut, not faked).
+      menuOptions(vid, stage) { return []; }, // the question's answers ARE the menu
+      closeLine(vid, resolution) {
+        if (resolution === 'engaged') return '"Good talk. I feel like I know you a little better now."';
         return null;
       },
+      resolve(vid, resolution) { return null; },
     },
     just_company: {
-      thread: 'small',
       pick(vid) {
         try {
           const n = Game.npcNeeds(vid);
@@ -234,39 +321,43 @@
           '"Mind if I just sit with you for a bit?"',
         ]);
       },
-      engage(vid) {
+      engageBeat(vid) {
         return '"This is nice. Just — being around people. I forget how much I need it."';
       },
-      deflect(vid) {
+      deflectBeat(vid) {
         return '"Oh. Yeah, of course. I\'ll — I\'ll go."';
       },
-      resolve() { return null; },
+      menuOptions(vid, stage) {
+        return [
+          { id: 'dlg:react', labels: ['"Yeah. Hey."', '"Sure. Sit."'], temper: 'kind' },
+          { id: 'dlg:more', labels: ['"What\'s on your mind?"'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) {
+        if (resolution === 'engaged') return '"Thanks for the company. Really."';
+        return null;
+      },
+      resolve(vid, resolution) { return null; },
     },
   };
 
   const methods = {
     // convoSelectWant: pick the NPC's want for this conversation.
     // Priority: unresolved seeds > high needs > personality > random.
+    // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): trust tier
+    // NEVER gates want depth. A stranger opens with something they want —
+    // a question, a favor, news with a point. Small talk is the greeting,
+    // never the whole conversation.
     convoSelectWant(vid) {
-      // 1. Seeds first — unfinished business takes priority.
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
         return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note };
       }
-      // STRANGERS GET SMALL TALK (dialog rethink Phase 1, Principle 12,
-      // Steve 2026-10-08): deep wants (favors, comfort, warnings, curiosity)
-      // are trust-tier gated. A stranger's unfinished business is small
-      // talk and news — never a deep want.
-      let tier = 'new';
-      try { tier = this.convoVoiceTier ? this.convoVoiceTier(vid) : 'new'; } catch (e) {}
-      const shallowOnly = tier === 'new';
-      // 2. Weight by needs and context.
       let best = null, bestW = -1;
-      for (const [id, def] of Object.entries(WANTS)) {
-        if (shallowOnly && ['ask_favor', 'seek_comfort', 'warn_you', 'curious', 'repay'].indexOf(id) !== -1) continue;
+      for (const id of Object.keys(WANTS)) {
+        const def = WANTS[id];
         let w = 0;
         try { w = def.pick.call(this, vid); } catch (e) { w = 0; }
-        // Small random factor so it's not deterministic.
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }
@@ -275,43 +366,209 @@
     },
 
     // convoWantOpener: the opening line when a want drives the conversation.
-    // Returns {line, thread}. Falls back to the normal opener if no want.
+    // Returns {line, thread}. The want surfaces in the opening beats — never
+    // queued, never polite-afterthought.
     convoWantOpener(vid, want) {
       if (!want || !want.def) return null;
       let line = null;
       try { line = want.def.opener.call(this, vid); } catch (e) { line = null; }
       if (!line) return null;
-      return { line, thread: want.def.thread || 'small', wantId: want.id };
+      return { line, thread: 'want', wantId: want.id };
+    },
+
+    // convoWantEngage: PURE state transition for the want arc — no speech.
+    // The turn handler speaks the beat (from the def); this moves the stage.
+    // kind: 'engage' -> stage 2 | 'deflect' -> stage 3 'deflected' |
+    //        'commit' -> stage 3 with the def's resolution ('promised' etc.)
+    convoWantEngage(vid, kind) {
+      const c = this.convoGet(vid);
+      if (!c || !c.want) return;
+      const want = c.want;
+      if ((want.stage || 0) >= 3) return;
+      if (kind === 'engage') {
+        if ((want.stage || 0) < 2) want.stage = 2;
+      } else if (kind === 'deflect') {
+        want.stage = 3;
+        want.resolution = 'deflected';
+      } else if (kind === 'commit') {
+        want.stage = 3;
+        // The resolution names what the commitment MEANS per want.
+        want.resolution = want.id === 'ask_favor' ? 'promised'
+          : want.id === 'seek_comfort' ? 'comforted'
+          : want.id === 'warn_you' ? 'heeded'
+          : want.id === 'repay' ? 'repaid' : 'engaged';
+      }
+    },
+
+    // convoWantMenu: the live want's options — engage or deflect it, plus
+    // honest follow-through once engaged. Consulted by the menu builder;
+    // the want's options lead whenever the conversation is on the want.
+    // Returns [] when no want is live, the want is resolved, a question
+    // hangs (answers come first), or the player moved to another thread.
+    convoWantMenu(vid) {
+      const c = this.convoGet(vid);
+      const w = c && c.want;
+      if (!w || !w.def || (w.stage || 0) === 0 || (w.stage || 0) >= 3) return [];
+      if (c.pendingQ || c.reactiveQ || c.genericQ) return [];
+      // Thread coherence: mid another topic thread, the want waits — it
+      // doesn't hijack the subject you chose. It'll resurface as a seed.
+      if (c.thread && c.thread !== 'want' && c.thread !== 'small') return [];
+      let opts = [];
+      try { opts = w.def.menuOptions.call(this, vid, w.stage || 1) || []; } catch (e) { opts = []; }
+      const out = [];
+      const seen = {};
+      for (const o of opts) {
+        if (!o || !o.id || seen[o.id]) continue;
+        seen[o.id] = true;
+        const labels = o.labels && o.labels.length ? o.labels : [o.id];
+        const label = (typeof this.convoPickCycle === 'function')
+          ? (this.convoPickCycle(vid, 'wantmenu:' + w.id + ':' + (w.stage || 1) + ':' + o.id, labels) || labels[0])
+          : labels[Math.floor(Math.random() * labels.length)];
+        out.push({ id: o.id, label, temper: o.temper || 'neutral' });
+      }
+      return out;
+    },
+
+    // convoWantCloseLine: the goodbye beat for how the want ended — the
+    // ending names the resolution, so conversations resolve/plant/owe
+    // instead of evaporating.
+    convoWantCloseLine(vid) {
+      const c = this.convoGet(vid);
+      const w = c && c.want;
+      if (!w || !w.def) return null;
+      try {
+        const l = w.def.closeLine.call(this, vid, w.resolution || (w.stage >= 2 ? 'engaged' : 'unresolved'));
+        return l || null;
+      } catch (e) { return null; }
+    },
+
+    // convoWantNews: the actual news behind a share_news want. REAL content —
+    // a fresh memory, real gossip, a live village event, or an honest
+    // observation. Never a shrug.
+    convoWantNews(vid) {
+      // 1. Fresh memories — things that happened between you.
+      try {
+        const mem = (((this.state.village || {}).memory || {})[vid]) || [];
+        const day = (this.state.scholar || {}).day || 0;
+        for (let i = mem.length - 1; i >= 0; i--) {
+          const m = mem[i];
+          if (!m || day - (m.day || 0) > 7) continue;
+          const about = this.convoMemoryAbout ? this.convoMemoryAbout(m.t) : null;
+          if (about) {
+            const line = this.convoPickCycle(vid, 'want:news:mem', [
+              `"So — ${about}. Did you hear? I can't stop thinking about it."`,
+              `"Have you been thinking about ${about}? Because I have. A lot."`,
+            ]);
+            if (line) return line;
+          }
+        }
+      } catch (e) {}
+      // 2. Real gossip — something they actually know about someone.
+      try {
+        const roster = ((this.state.village || {}).roster || []).filter(id => id !== vid && id !== this.villagerId);
+        for (let i = 0; i < 3 && roster.length; i++) {
+          const target = roster[Math.floor(Math.random() * roster.length)];
+          const g = this.npcGossipAbout ? this.npcGossipAbout(vid, target) : null;
+          if (g && g.truth) {
+            const nm = this.displayName ? this.displayName(target) : 'someone';
+            return `"Okay, so — ${nm}. ${g.field === 'occupation' ? `Turns out they weren't a ${g.lie || 'what they said'} — they're a ${g.truth}.` : `They're not from ${g.lie || 'where they said'} — they're from ${g.truth}.`} Don't say I told you."`;
+          }
+        }
+      } catch (e) {}
+      // 3. Live village events.
+      try {
+        const ev = this.t2LatelyEvent ? this.t2LatelyEvent(vid) : null;
+        if (ev && ev.kind) {
+          const EV_NEWS = {
+            naming: '"There\'s a real argument going about what to call that thing. People are heated."',
+            mourning: '"Nobody\'s saying it out loud, but everyone\'s thinking about them. The quiet ones worst."',
+            threat: '"Something\'s been moving out past the treeline. I\'m not the only one who\'s seen it."',
+            betrayal: '"Something happened between people. I don\'t have the whole of it yet."',
+            tension: '"You feel it too, right? The air around the fire. Something\'s building."',
+            hunger: '"People are going hungry and nobody wants to say it first. So I\'m saying it."',
+          };
+          if (EV_NEWS[ev.kind]) return EV_NEWS[ev.kind];
+        }
+      } catch (e) {}
+      // 4. Honest observation — the village as it stands right now.
+      try {
+        const vg = this.state.village || {};
+        const hungry = (vg.roster || []).filter(id => { try { return this.npcNeeds(id).hunger > 70; } catch (e) { return false; } }).length;
+        if (hungry >= 2) return `"${hungry} people are going hungry and acting like it's fine. It's not fine."`;
+        if ((vg.grief || 0) > 0) return '"It\'s too quiet. That\'s the news — it\'s too quiet and everyone knows why."';
+        if ((vg.cheer || 0) > 0) return '"People are smiling today. I wanted someone to notice it with me."';
+      } catch (e) {}
+      return '"The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."';
+    },
+
+    // convoWantWarning: the actual warning behind a warn_you want. Real
+    // content — recent attacks, monster knowledge, or an honest caution.
+    convoWantWarning(vid) {
+      try {
+        const vg = this.state.village || {};
+        if ((vg.recentAttacks || 0) > 0) {
+          return '"Whatever came through here last night — it\'ll come back. They always come back. Don\'t go out alone."';
+        }
+        const codex = this.state.codex || {};
+        const mids = Object.keys(codex.monsters || {});
+        if (mids.length) {
+          return '"You\'ve seen what\'s out there. I\'m just saying — the treeline at dusk. Don\'t."';
+        }
+      } catch (e) {}
+      return '"I don\'t know what\'s moving out there, but something is. Keep your eyes up past the treeline."';
+    },
+
+    // convoPickUnaskedQuestion: a bespoke question they can genuinely ask
+    // you — unanswered, time/trust/mood-gated. For the curious want.
+    convoPickUnaskedQuestion(vid) {
+      const cg = (this.data.characterGen || {}).convo || {};
+      const c = this.convoGet(vid);
+      const trust = ((this.state.village || {}).trust || {})[vid] || 10;
+      let moodNow = null;
+      try { moodNow = this.npcMood ? this.npcMood(vid) : null; } catch (e) {}
+      const qok = (q) => {
+        try { return this.convoQuestionOk ? this.convoQuestionOk(q, trust, moodNow) : true; }
+        catch (e) { return true; }
+      };
+      let askedAny = [];
+      try { askedAny = this.villageAskedQs ? this.villageAskedQs() : []; } catch (e) {}
+      const pool = (cg.questions || []).filter(q =>
+        (c.askedQs || []).indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok(q));
+      if (!pool.length) return null;
+      return pool[Math.floor(Math.random() * pool.length)];
+    },
+
+    // convoHangWantQuestion: the curious want hangs its bespoke question as
+    // pendingQ — the menu answers it; answers come first, pivots wait.
+    convoHangWantQuestion(vid) {
+      const c = this.convoGet(vid);
+      if (c.pendingQ || c.reactiveQ || c.genericQ) return null;
+      const qd = this.convoPickUnaskedQuestion(vid);
+      if (!qd) return null;
+      c.pendingQ = { id: qd.id, answers: qd.answers || [] };
+      c.pendingQDodges = 0;
+      c.qCount = (c.qCount || 0) + 1;
+      if ((c.askedQs || []).indexOf(qd.id) === -1) c.askedQs.push(qd.id);
+      try { if (this.noteAskedQ) this.noteAskedQ(qd.id); } catch (e) {}
+      return qd;
     },
 
     // convoComposeBeat: THE NON-SEQUITUR FIX.
-    // Every NPC beat goes through here. It takes the raw beat and the
-    // player's last utterance, and ensures the beat acknowledges what the
-    // player said before delivering new content.
-    //
-    // playerSaid: { kind, label, topic } — what the player just chose/said
-    // rawBeat: the beat the old system would have delivered
-    //
-    // The composition: if the raw beat already references the player's
-    // input (contains a response to their question/statement), pass through.
-    // Otherwise, prepend a brief acknowledgment that bridges to the beat.
+    // Every NPC beat goes through here BEFORE emission. It takes the raw
+    // beat and the player's last utterance, and ensures the beat
+    // acknowledges what the player said before delivering new content.
+    // (Now called at beat-selection time, not as a post-turn patch — the
+    // transcript holds the composed line and the no-repeat ledger sees it.)
     convoComposeBeat(vid, rawBeat, playerSaid) {
       if (!rawBeat) return rawBeat;
       if (!playerSaid || !playerSaid.label) return rawBeat;
-      // If the beat is already a direct answer (reactive/generic answers,
-      // question answers), it was composed as a response — pass through.
       if (playerSaid.isAnswer) return rawBeat;
-      // Acknowledgment bridges: short, natural, voice-aware.
-      // These acknowledge WITHOUT answering — the beat still delivers
-      // its content, but now it follows the player's line of thought.
       const label = String(playerSaid.label).toLowerCase();
       let ack = null;
       if (/tell me more|go on|more/i.test(playerSaid.label)) {
-        // They're asking for more — no ack needed, the beat IS more.
         return rawBeat;
       }
       if (playerSaid.topic) {
-        // Player asked about a topic — acknowledge the question.
         const topicAcks = [
           '"Good question." ',
           '"Huh. Let me think about that." ',
@@ -319,14 +576,9 @@
         ];
         ack = topicAcks[Math.floor(Math.random() * topicAcks.length)];
       } else if (/you|your/i.test(label) && label.length < 60) {
-        // Player asked about THEM — acknowledge being asked.
         ack = '"Me? Okay." ';
       }
       if (!ack) return rawBeat;
-      // Voice the acknowledgment through their voice, then the beat.
-      // QUOTE HYGIENE (dialogue rethink, Steve 2026-10-07): the old code
-      // stripped the beat's quotes and never re-added them, leaving the
-      // beat's closing quote dropped. The beat keeps its own quote layer.
       try {
         return String(this.voiceLine ? this.voiceLine(vid, ack) : ack).replace(/\s+$/, '') + ' ' + rawBeat;
       } catch (e) {
@@ -334,38 +586,7 @@
       }
     },
 
-    // convoAdvanceWant: track the want's progress based on player behavior.
-    // playerKind: 'engage' | 'deflect' | 'ignore'
-    // Moves stage 0->1 (surfaced) -> 2 (engaged) -> 3 (resolved).
-    convoAdvanceWant(vid, playerKind) {
-      const c = this.convoGet(vid);
-      if (!c.want) return;
-      const want = c.want;
-      if (playerKind === 'engage') {
-        if (want.stage < 2) want.stage = 2;
-        // Engaging delivers the want's engage beat.
-        try {
-          const beat = want.def.engage.call(this, vid);
-          if (beat) {
-            c.transcript.push({ who: 'them', text: beat });
-            this.sayLine(vid, beat);
-          }
-        } catch (e) {}
-      } else if (playerKind === 'deflect') {
-        try {
-          const beat = want.def.deflect.call(this, vid);
-          if (beat) {
-            c.transcript.push({ who: 'them', text: beat });
-            this.sayLine(vid, beat);
-          }
-        } catch (e) {}
-        want.stage = 3;
-        want.resolution = 'deflected';
-      }
-    },
-
     // convoPlantSeed: record unfinished business for next conversation.
-    // seed: { wantId, note, day }
     convoPlantSeed(vid, seed) {
       if (!seed || !seed.wantId) return;
       const v = this.state.village;
@@ -391,8 +612,8 @@
       return seed;
     },
 
-    // convoResolveWant: called at endConvo. Determines the resolution
-    // and plants a seed if the want is unresolved.
+    // convoResolveWant: called from base endConvo BEFORE state clears.
+    // The ending is resolved, planted, or owed — never evaporated.
     convoResolveWant(vid, how) {
       const c = this.convoGet(vid);
       if (!c.want || !c.want.def) return;
@@ -400,20 +621,15 @@
       // PHANTOM SEEDS (dialogue rethink, Steve 2026-10-07): a want that never
       // surfaced (stage 0) was never established — planting a seed for it
       // makes the next conversation reference unfinished business the player
-      // never heard ("About they still need help but stopped asking — ...").
-      // Unfinished business must be established to be unfinished.
+      // never heard. Unfinished business must be established to be unfinished.
       if ((want.stage || 0) < 1) {
         want.stage = 3;
         want.resolution = 'unestablished';
-        // Clear the consumed seed if this want came from one.
         if (want.fromSeed) {
           try { delete this.state.village.convoSeeds[vid]; } catch (e) {}
         }
         return;
       }
-      // If they never engaged (stage < 2), the want is unresolved.
-      // A deflect already recorded its resolution ('deflected') — never
-      // overwrite it with 'engaged' (Phase 1 fix, Steve 2026-10-08).
       const resolution = want.resolution ||
         (want.stage >= 2 ? 'engaged' : (how === 'left' ? 'abandoned' : 'unresolved'));
       want.stage = 3;
@@ -423,170 +639,31 @@
         seed = want.def.resolve.call(this, vid, resolution);
       } catch (e) {}
       if (seed) this.convoPlantSeed(vid, seed);
-      // Clear the consumed seed if this want came from one.
       if (want.fromSeed) {
         try { delete this.state.village.convoSeeds[vid]; } catch (e) {}
       }
     },
 
     // convoWant: the dialogue layer's read of the current want (id string).
-    // (The old dialogueBeatKind consumer was removed in the Phase 1 rethink;
-    // kept as the public read for want-aware dialogue tooling + tests.)
     convoWant(vid) {
       try { const c = this.convoGet(vid); return (c.want && c.want.id) || null; }
       catch (e) { return null; }
-    },
-
-    // convoWantPostTurn: the shared post-turn work for the want system —
-    // surfacing unspoken wants, composing beats, advancing the want arc.
-    // Extracted from the convoTurn wrapper below so the dialogue layer
-    // (convo-dialogue.js), which returns early for dlg: choices and used to
-    // bypass this whole system, can run the same post-turn (rethink
-    // 2026-10-07). Idempotent: safe to call once per turn from either path.
-    convoWantPostTurn(vid, choiceId, result) {
-      const c = this.convoGet(vid);
-      // Turn counter for surfacing: c.exchanges never advances on the
-      // dialogue path (dlg: handlers return before the base turn), so the
-      // want system tracks its own post-turns (rethink 2026-10-07).
-      const turns = (c.wantTurns = (c.wantTurns || 0) + 1);
-      if (c.want && c.want.stage === 0 && turns >= 1) {
-        // Time to surface the want. Queue it as a held beat so it lands
-        // on the continuer — natural, not interruptive.
-        const opener = this.convoWantOpener(vid, c.want);
-        if (opener && opener.line) {
-          c.heldBeats = c.heldBeats || [];
-          // Don't duplicate if already queued.
-          const already = c.heldBeats.some(h => h.wantSurface);
-          if (!already) {
-            c.heldBeats.push({ text: opener.line, wantSurface: true });
-            c.want.stage = 1; // surfaced
-            // The want's thread becomes the conversation thread if the
-            // player engages — but we don't force it yet.
-          }
-        }
-      }
-      // BEAT COMPOSITION: wrap the returned line through the composer
-      // so it acknowledges what the player just said.
-      // We track the player's choice from the choiceId.
-      if (result && result.line && choiceId && choiceId !== 'goon' && choiceId !== 'leave') {
-        const playerSaid = this.convoPlayerSaid(vid, choiceId);
-        if (playerSaid) {
-          const composed = this.convoComposeBeat(vid, result.line, playerSaid);
-          if (composed && composed !== result.line) {
-            result.line = composed;
-            // Update the transcript's last them-entry too.
-            const t = c.transcript;
-            for (let i = t.length - 1; i >= 0; i--) {
-              if (t[i].who === 'them') { t[i].text = composed; break; }
-            }
-          }
-        }
-      }
-      // WANT ARC: dialogue choices engage or deflect the want. Engaging
-      // moves it toward resolution; deflecting closes it honestly.
-      // (convoAdvanceWant previously had zero callers — rethink 2026-10-07.)
-      if (c.want && typeof this.convoAdvanceWant === 'function') {
-        if (/^dlg:(help|comfort|empathize)$/.test(choiceId || '')) {
-          try { this.convoAdvanceWant(vid, 'engage'); } catch (e) {}
-        } else if ((choiceId || '') === 'dlg:cant') {
-          try { this.convoAdvanceWant(vid, 'deflect'); } catch (e) {}
-        }
-      }
-      return result;
     },
   };
 
   Object.assign(Game, methods);
 
-  // ============ HOOKS ============
-  // Layer the want system onto the existing conversation flow.
-  // We wrap startConvo (want selection + opener) and endConvo (resolution + seeds).
-  // The beat composition hook integrates into convoTurn via convoBeatOf.
-
-  const _startConvo = Game.startConvo;
-  Game.startConvo = function (vid) {
-    // Select the want BEFORE the original startConvo runs, so we can
-    // override the opener if the want has one.
-    let want = null;
-    try { want = this.convoSelectWant(vid); } catch (e) {}
-    const result = _startConvo.call(this, vid);
-    if (!result || result.ended) return result;
-    // If the want has a bespoke opener and this isn't a seed-driven
-    // conversation that already set its tone, layer it in.
-    // (We don't replace the original opener — we let the want shape
-    // the SECOND beat, so the greeting stays natural and the want
-    // surfaces organically after hello.)
-    if (want && want.def) {
-      const c = this.convoGet(vid);
-      c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed };
-      // If this want came from a seed, surface it immediately —
-      // they have unfinished business and it shows.
-      if (want.fromSeed) {
-        try {
-          const opener = this.convoWantOpener(vid, want);
-          if (opener && opener.line) {
-            // QUOTE HYGIENE (dialogue rethink, Steve 2026-10-07): the old
-            // composition left a stray quote (`— " There...`), mangling the line.
-            const seedLine = `"About ${want.seedNote || 'last time'} — ` +
-              opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
-            c.transcript.push({ who: 'them', text: seedLine });
-            this.sayLine(vid, seedLine);
-            result.line = seedLine;
-            c.want.stage = 1; // surfaced
-            // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
-            // seed-driven conversations open one mood band cooler. Whatever
-            // was left hanging, it wasn't nothing — the air is heavier.
-            if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
-          }
-        } catch (e) {}
-      }
-    }
-    return result;
-  };
-
-  const _endConvo = Game.endConvo;
-  Game.endConvo = function (vid, how) {
-    // Resolve the want and plant seeds BEFORE the original endConvo
-    // clears the conversation state.
-    try { this.convoResolveWant(vid, how); } catch (e) {}
-    return _endConvo.call(this, vid, how);
-  };
-
-  // ============ WANT SURFACING ============
-  // The want surfaces organically after the greeting — not as the opener
-  // (that's abrupt), but as the second or third beat. We wrap convoTurn:
-  // after the normal turn completes, if the want is still unspoken (stage 0)
-  // and enough exchanges have passed, the NPC brings it up.
-  const _convoTurn = Game.convoTurn;
-  Game.convoTurn = function (vid, choiceId) {
-    const result = _convoTurn.call(this, vid, choiceId);
-    if (!result || result.ended) return result;
-    try {
-      // Shared post-turn (see convoWantPostTurn): the dialogue layer calls
-      // the same method for dlg: choices, which used to bypass this wrapper.
-      if (typeof this.convoWantPostTurn === 'function') {
-        return this.convoWantPostTurn(vid, choiceId, result) || result;
-      }
-    } catch (e) {}
-    return result;
-  };
-
   // convoPlayerSaid: reconstruct what the player just said from the choiceId.
-  // Returns { label, topic, isAnswer } for the beat composer.
   Game.convoPlayerSaid = function (vid, choiceId) {
     try {
-      const c = this.convoGet(vid);
-      // Ask-topic choices carry the topic.
       if (choiceId.indexOf('ask:') === 0) {
         const topic = choiceId.slice(4);
         return { label: 'ask:' + topic, topic, isAnswer: false };
       }
-      // Answers to their questions are already responses — pass through.
       if (choiceId.indexOf('ans:') === 0 || choiceId.indexOf('react:') === 0 ||
           choiceId.indexOf('gq:') === 0) {
         return { label: choiceId, isAnswer: true };
       }
-      // Follow-ups reference the topic.
       if (choiceId.indexOf('follow:') === 0) {
         const parts = choiceId.split(':');
         return { label: 'follow:' + parts[1], topic: parts[1], isAnswer: false };
@@ -596,4 +673,3 @@
   };
 
 })();
-

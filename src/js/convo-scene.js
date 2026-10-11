@@ -303,13 +303,21 @@
         const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
         for (const o of open) {
           if (!o || !o.tid || o.tid === scene.beat.thread) continue;
+          // LEDGER GATE (convo rebuild 2026-10-11, Steve: fix structurally):
+          // an option may only reference a ledger entry that actually exists.
+          // taughtref threads require a real teaching event — no entry, no
+          // option. This is the structural kill for the phantom
+          // "that lesson they offered (last time)".
+          if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) continue;
           const label = o.label || o.tid;
           const ago = Math.max(0, day - (o.day || day));
-          const when = ago > 7 ? `${ago} days back` : ago <= 1 ? 'last time' : `${ago} days ago`;
+          // Honest timeline: "N days back" for stale threads, no leaked
+          // internal "(last time)" note for recent ones.
+          const label2 = ago > 1 ? `"We never finished — ${label}, ${ago} days back."` : `"We never finished — ${label}."`;
           items.push({
             kind: 'thread', tid: o.tid,
             id: 'alive:thread:' + o.tid,
-            label: `"We never finished — ${label} (${when})."`,
+            label: label2,
             temper: 'neutral',
           });
           if (items.length >= 2) break;
@@ -334,6 +342,9 @@
         }
         // 3. WANT-DRIVEN QUESTIONS: the want surfaces as a question, not a
         // menu item — "Questions come from character" (Principle 9).
+        // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): the old
+        // rule barred tier-'new' strangers from deep wants. Strangers ask
+        // real questions too — no gate here.
         if (scene.want && (scene.want.stage || 0) < 2 && !scene.beat.questionHangs) {
           const WANT_Q = {
             ask_favor: '"Is there something you need? Really."',
@@ -344,7 +355,7 @@
             just_company: '"Want some company? No agenda."',
           };
           const wq = WANT_Q[scene.want.id];
-          if (wq && scene.bond.tier !== 'new') {
+          if (wq) {
             items.push({ kind: 'want', wantId: scene.want.id, id: 'alive:want:' + scene.want.id, label: wq, temper: 'kind' });
           }
         }

@@ -94,8 +94,8 @@
 
   if (Game.convoOpening) {
     const origOpening = Game.convoOpening;
-    Game.convoOpening = function (vid) {
-      return tagResult(vid, origOpening.call(this, vid));
+    Game.convoOpening = function (vid, want) {
+      return tagResult(vid, origOpening.call(this, vid, want));
     };
   }
 
@@ -255,11 +255,6 @@
       ],
     },
     offer: {
-      want: [
-        { id: 'dlg:help', v: ['"How can I help?"', '"What do you need?"', '"I\'m listening."]'] },
-        { id: 'dlg:details', v: ['"Tell me more about it."', '"What\'s the situation?"', '"Start from the beginning."]'] },
-        { id: 'dlg:cant', v: ['"Can\'t right now."', '"I wish I could, but not right now."', '"Not right now, sorry."'] },
-      ],
       _default: [
         { id: 'dlg:help', v: ['"How can I help?"', '"What do you need?"'] },
         { id: 'dlg:cant', v: ['"Can\'t right now."', '"Not right now, sorry."'] },
@@ -288,6 +283,24 @@
     if (c.thread === 'nonverbal' || c.thread === 'spread_rumor') return null;
 
     const out = [];
+    const seen = new Set();
+
+    // THE WANT LEADS (convo rebuild 2026-10-11, Steve): the live want's
+    // options come first — engage or deflect THAT want, not a grab-bag.
+    // convoWantMenu is the authority for want options (the old
+    // REPLY_POOLS.offer.want is deleted); dedupe by id so the pools below
+    // never double-offer the same verb.
+    try {
+      if (typeof this.convoWantMenu === 'function') {
+        const wantOpts = this.convoWantMenu(vid) || [];
+        for (const o of wantOpts) {
+          if (!o || !o.id || seen.has(o.id)) continue;
+          seen.add(o.id);
+          out.push(o);
+        }
+      }
+    } catch (e) {}
+
     const pools = REPLY_POOLS[tag] || REPLY_POOLS.small;
     const topicPool = pools[topic] || pools._default || REPLY_POOLS.small._default;
 
@@ -301,7 +314,7 @@
     try { hasDoubts = this.getDoubts && this.getDoubts(vid).length > 0; } catch (e) {}
 
     // Pick one label per reply id, rotating via convoPickCycle.
-    const seen = new Set();
+    // (seen already holds the want menu's ids — the pools dedupe against them.)
     for (const entry of topicPool) {
       if (seen.has(entry.id)) continue;
       // Skip "tell me more" if the thread is dry. Skip the bare react once
@@ -381,7 +394,9 @@
       if (!onThread && c.thread !== 'grief' && c.thread !== 'cheer') {
         const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
-        const theyKnow = (this.state.village.taught && this.state.village.taught[vid]) || [];
+        // REBUILD 2026-10-11: the union — background familiarity counts as
+        // known (nothing to teach), player-taught counts as known too.
+        const theyKnow = (typeof this.plantsKnownBy === 'function') ? this.plantsKnownBy(vid) : ((this.state.village.taught && this.state.village.taught[vid]) || []);
         if (youKnow.some(pid => theyKnow.indexOf(pid) === -1)) {
           out.push({ id: 'teach', label: this.convoActionLabel(vid, 'teach') });
         }
@@ -415,8 +430,9 @@
         const fromTopic = c.thread || (c.lastBeat && c.lastBeat.topic) || 'small';
         c.transcript.push({ who: 'you', text: '"Can I ask you something else?"' });
         const bridge = this.bridgeLine(vid, fromTopic);
-        c.transcript.push({ who: 'them', text: bridge, beat: 'small', topic: fromTopic });
-        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge);
+        // REBUILD 2026-10-11: sayLine is the single emission choke point —
+        // it pushes the transcript entry. The manual push above is gone.
+        if (typeof this.sayLine === 'function') this.sayLine(vid, bridge, { tag: 'small' });
         c.choosingSubject = true;
         return { line: bridge, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }

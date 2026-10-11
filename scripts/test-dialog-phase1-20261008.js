@@ -134,7 +134,9 @@ if (!hardQ) {
   c.want = { id: 'ask_favor', def: null, stage: 1, fromSeed: false };
   // Use the real ask_favor def for the resolve path.
   const seed = Game.convoCheckSeeds(vid);
-  Game.convoAdvanceWant(vid, 'deflect');
+  // REBUILD 2026-10-11: convoAdvanceWant (old wrapper API) is gone —
+  // convoWantEngage is the structural state transition.
+  Game.convoWantEngage(vid, 'deflect');
   ok('deflect sets resolution deflected', c.want.resolution === 'deflected', 'got ' + c.want.resolution);
   ok('deflect sets stage 3', c.want.stage === 3, 'got ' + c.want.stage);
   // Now resolve — must NOT become engaged.
@@ -233,10 +235,11 @@ for (const v of [vid, vid2]) {
   const hasDoubt = ids.indexOf('dlg:doubt') !== -1;
   ok('stranger menu has no confrontations', !hasConfront, 'menu: ' + ids.join(','));
   ok('stranger menu has no doubt probes', !hasDoubt, 'menu: ' + ids.join(','));
-  // Deep wants don't surface for strangers.
+  // PRINCIPLE 12 OVERRIDE (convo rebuild 2026-10-11, Steve): strangers get
+  // deep wants too — the old "strangers get small talk" rule was the
+  // emptiness Steve called out. A stranger opens with something they want.
   const want = Game.convoSelectWant(vid);
-  const deepWants = ['ask_favor', 'seek_comfort', 'warn_you', 'curious', 'repay'];
-  ok('stranger want is shallow', deepWants.indexOf(want.id) === -1, 'got ' + want.id);
+  ok('stranger want is a real want (Principle 12 overridden)', !!want.id, 'got ' + want.id);
 }
 
 console.log(`\n${pass} pass, ${fail} fail (seed ${SEED})`);

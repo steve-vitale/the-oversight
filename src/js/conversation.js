@@ -661,7 +661,14 @@
       return useOpen ? '"' + bit + inner + '"' : '"' + inner + ' ' + bit + '"';
     },
 
-    // sayLine: villager speech to the feed, exactly one quote layer.
+    // sayLine: THE single emission point for NPC speech (convo rebuild
+    // 2026-10-11, Steve: fix structurally). Every villager line in a
+    // conversation passes through here — no exceptions, no side channels.
+    // It does three things atomically: (1) enforces the NO-REPEAT invariant
+    // — a 'them' line already said in THIS conversation is never emitted
+    // again (returns null; the caller must pick another beat or end the
+    // thread honestly, never filler); (2) pushes the transcript entry;
+    // (3) says the feed line with exactly one quote layer.
     // Lines flowing through convo are pre-quoted speech (voiceLine's contract:
     // "only touches plain quoted speech"), so a blind `Name: "line"` wrap
     // produced `Name: ""line""`. A line that already opens with a quote
@@ -671,8 +678,24 @@
     // wrapping those produced `Name: "leans in. "Oh?""`. If the beat contains
     // a quoted segment anywhere, it keeps its own layer. (Socialite playtest
     // 2026-10-07; the cleanDialogue defense only covered edge doublings.)
-    sayLine(vid, line) {
+    sayLine(vid, line, opts) {
+      const c = this.convoGet(vid);
       const t = String(line == null ? '' : line);
+      if (!t) return null;
+      // NO-REPEAT INVARIANT: per-conversation ledger of emitted NPC lines.
+      // Checked on the final rendered string — what the player sees is what
+      // must not repeat. saidLines survives the transcript cap (old entries
+      // shift off the transcript but stay in the ledger).
+      const key = t.trim();
+      c.saidLines = c.saidLines || [];
+      if (c.saidLines.indexOf(key) !== -1) return null; // blocked: already said
+      c.saidLines.push(key);
+      const entry = { who: 'them', text: t };
+      if (opts && opts.foreign) entry.foreign = opts.foreign;
+      // (beat/topic tags are stamped by convo-beats' transcript-push wrapper
+      // from c.lastBeat when present — same as before.)
+      c.transcript.push(entry);
+      while (c.transcript.length > 200) c.transcript.shift();
       const ownQuotes = /^"/.test(t) || /"[^"]+"/.test(t);
       this.say(`${this.displayName(vid)}: ${ownQuotes ? t : `"${t}"`}`);
       // TOPIC LEDGER (Steve 2026-10-07): every spoken NPC line is a beat on
@@ -681,6 +704,7 @@
       // base turns and the dlg: turns — the ledger stays complete even
       // though the dialogue layer intercepts dlg: choices before convoTurn.
       try { this.convoNoteSpokenBeat(vid, t); } catch (e) {}
+      return t;
     },
 
     convoGet(vid) {
@@ -688,7 +712,7 @@
       v.conv = v.conv || {};
       if (!v.conv[vid]) v.conv[vid] = {
         active: false, exchanges: 0, budget: 4, thread: null, depth: 0,
-        said: {}, transcript: [], pendingQ: null, askedQs: [],
+        said: {}, saidLines: [], transcript: [], pendingQ: null, askedQs: [],
         answered: {}, recalled: {}, lastDay: -1, count: 0, over: false,
         offeredHelp: false, askedTopics: [], qCount: 0,
         theorized: [], heldBeats: [], heldAsk: false,
@@ -696,6 +720,7 @@
       const c = v.conv[vid];
       // Normalize older convo states (saves/scenarios predate the fields).
       if (!c.heldBeats) c.heldBeats = [];
+      if (!c.saidLines) c.saidLines = [];
       if (typeof c.heldAsk === 'undefined') c.heldAsk = false;
       if (typeof c.winddownQueued === 'undefined') c.winddownQueued = false;
       if (!c.followUsed) c.followUsed = {};
@@ -781,17 +806,39 @@
     // the ledger. Generated topics resolve through the topic2 labels.
     convoTopicLabel(vid, tid) {
       if (!tid) return 'something';
+      // REBUILD 2026-10-11: the 'want' thread is labeled by the actual want —
+      // "what they want" is a leaked internal note, not a human label.
+      // Neutral demonstratives ("that favor") — the label is spoken by the
+      // NPC (resume opener) AND offered as the player's menu option, so it
+      // can't be first- or third-person.
+      if (tid === 'want') {
+        try {
+          const w = this.convoGet(vid).want;
+          if (w && w.def && w.def.topicLabel) return String(w.def.topicLabel);
+          const wid = w && w.id;
+          const labels = {
+            ask_favor: 'that favor', share_news: 'that news',
+            seek_comfort: 'that hard time', warn_you: 'that warning',
+            curious: 'that question', just_company: 'that visit', repay: 'that debt',
+          };
+          if (wid && labels[wid]) return labels[wid];
+        } catch (e) {}
+        return 'what was on their mind';
+      }
       const base = {
         personal: 'themselves', goal: 'what they want', past: 'their past',
         village: 'the village', plans: 'their plans', gossip: 'the gossip',
         spread_rumor: 'that rumor', small: 'small talk', spooked: 'what spooked them',
-        secret: 'their secret', want: 'what they want', request: 'their request',
+        secret: 'their secret', request: 'their request',
         theorize: 'the big questions', trade: 'trading knowledge',
         situation: 'the situation', lately: "what's been happening",
         // SCENARIO THREADS (fix 2026-10-07): teach-offer and recall threads
         // can hang open via convoPlantOpenThread — without labels the
         // resume/recap lines leak the raw tid ("talking about taughtref").
-        taughtref: 'that lesson they offered', recall: 'what you told them',
+        // REBUILD 2026-10-11: 'that lesson they offered' was the phantom's
+        // label — the villager never offered a lesson. The honest label names
+        // what happened, in neutral voice (spoken by NPC and player alike).
+        taughtref: 'that plant lesson', recall: 'that personal stuff',
       };
       if (base[tid]) return base[tid];
       try {
@@ -833,10 +880,38 @@
       } catch (e) {}
     },
 
+    // convoThreadBacked: does this thread id have a REAL ledger entry behind
+    // it? (convo rebuild 2026-10-11, Steve: fix structurally.) Options may
+    // only reference ledger entries that actually exist — no ledger entry,
+    // no option. Event-backed threads (a lesson, a confidence) require the
+    // event; topic threads are backed by their beats.
+    // The phantom "that lesson they offered (last time)": the taughtref
+    // opener fired on background familiarity misread as teaching, planted a
+    // taughtref open thread, and the menu resurrected a lesson that never
+    // happened. Now the plant itself requires the teaching event.
+    convoThreadBacked(vid, tid) {
+      if (!tid) return false;
+      if (tid === 'taughtref') {
+        try {
+          const tbp = this.playerTaughtPlants ? this.playerTaughtPlants(vid) : [];
+          return tbp.length > 0;
+        } catch (e) { return false; }
+      }
+      if (tid === 'recall') {
+        try {
+          const c = this.convoGet(vid);
+          return !!(c && c.answered && Object.keys(c.answered).length);
+        } catch (e) { return false; }
+      }
+      return true;
+    },
+
     // convoThreadOpen: plant an unfinished thread. Cap 4 — people can only
     // hold so many loose ends; oldest lapses first.
     convoThreadOpen(vid, tid, label, why, snippet) {
       if (!tid || tid === 'small' || tid === 'nonverbal' || tid === 'request') return;
+      // LEDGER GATE (convo rebuild 2026-10-11): no backing event, no plant.
+      if (!this.convoThreadBacked(vid, tid)) return;
       try {
         const L = this.convoTopicLedger(vid);
         // Re-planting the same thread revokes its closing beat: leaving
@@ -942,6 +1017,9 @@
       if (!open.length) return null;
       if (Math.random() > 0.65) return null;
       const o = open[Math.floor(Math.random() * open.length)];
+      // LEDGER GATE (convo rebuild 2026-10-11): no backing event, no resume.
+      // (Old saves may hold taughtref threads planted before the gate.)
+      if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) return null;
       c._resumedOnce = true;
       const label = o.label || o.tid;
       // COHERENCE (Steve 2026-10-07): the resume must not contradict the
@@ -957,8 +1035,12 @@
       let inner;
       if (ago > 7) {
         inner = `We never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. Still on your mind?`;
+      } else if (ago > 1) {
+        inner = `We never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back.`;
       } else {
-        inner = `We never finished talking about ${label} — ${whyLine} last time.`;
+        // REBUILD 2026-10-11: the leaked internal "(last time)" note is
+        // gone — recent threads get honest phrasing, not a parenthetical.
+        inner = `We never finished talking about ${label} — ${whyLine}.`;
       }
       // MULTI-THREAD AWARENESS (Steve 2026-10-07): no orphaned threads — if
       // more than one thread is hanging, the other gets a brief nod so it
@@ -1645,7 +1727,7 @@
       return l;
     },
 
-    convoOpening(vid) {
+    convoOpening(vid, want) {
       const cg = (this.data.characterGen || {}).convo || {};
       const v = this.state.village;
       const c = this.convoGet(vid);
@@ -1668,11 +1750,28 @@
         return { line: this.renderTalkLine(String(treq.line).replace(/ \(Talk to .*?\.\)$/, ''), vid), thread: 'request' };
       }
 
-      // PROTOTYPE: Four Things (Steve 2026-10-05)
-      // Want/Know/Feel/Secret per villager. Want surfaces as a hook (30%).
-      // Secret surfaces at trust 40+ (20%).
-      // Villagers are randomly generated each game (12 random) — so we
-      // SYNTHESIZE from occupation/personality/backstory, not hand-author.
+      // 2. UNFINISHED BUSINESS — a seed from last time opens the conversation.
+      // The want was established before; now it resurfaces, named. The seed
+      // is consumed by the resolution at endConvo (or expiry after 7 days).
+      if (want && want.fromSeed && want.def) {
+        const opener = this.convoWantOpener(vid, want);
+        if (opener && opener.line) {
+          // QUOTE HYGIENE (dialogue rethink, Steve 2026-10-07): the old
+          // composition left a stray quote — the opener keeps its own layer.
+          const seedLine = `"About ${want.seedNote || 'last time'} — ` +
+            opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+          c.want.stage = 1; // surfaced
+          // UNFINISHED BUSINESS (dialog rethink Phase 1, Steve 2026-10-08):
+          // seed-driven conversations open one mood band cooler. Whatever
+          // was left hanging, it wasn't nothing — the air is heavier.
+          if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
+          return { line: this.voiceLine(vid, seedLine), thread: 'want', wantId: want.id };
+        }
+      }
+
+      // PROTOTYPE: Four Things (Steve 2026-10-05) — the SECRET survives.
+      // (The old 30% proto-want hook is retired: the real want system owns
+      // the opening now. The secret is a high-trust confidence, kept.)
       const villager = (this.data.villagers || []).find(x => x.id === vid);
       let proto = villager && villager.prototype;
       if (!proto && villager) {
@@ -1687,20 +1786,18 @@
           c.secretShared = true;
           return { line: this.voiceLine(vid, `"Can I tell you something? ${proto.secret}"`), thread: 'secret' };
         }
-        // Want as a hook (evolved if the world has moved)
-        if (proto.want && !c.wantHooked && Math.random() < 0.3) {
-          c.wantHooked = true;
-          // Use evolved want if enough days have passed (simplified Change)
-          const day = this.state.scholar.day || 1;
-          const wantText = (day > 7 && proto.want_evolved) ? proto.want_evolved : proto.want;
-          return { line: this.voiceLine(vid, `"${wantText}"`), thread: 'want' };
-        }
       }
 
       // TAUGHT PLANTS (Steve 2026-10-05): if you taught them something, they
       // remember. The one real conversation mechanic was invisible — now it's
       // visible. They reference what you taught them.
-      const taught = (v.taught || {})[vid] || [];
+      // FABRICATION FIX (convo rebuild 2026-10-11, Steve: fix structurally):
+      // this used to read v.taught — the KNOWLEDGE union, seeded at game
+      // start with home-region familiarity. Day-1 strangers "remembered"
+      // lessons that never happened. Now it reads taughtByPlayer ONLY:
+      // plants the player genuinely taught this villager this run. No
+      // teaching event, no opener — the invariant is structural, not gated.
+      const taught = this.playerTaughtPlants ? this.playerTaughtPlants(vid) : [];
       if (taught.length > 0 && !c.taughtMentioned && Math.random() < 0.4) {
         c.taughtMentioned = true;
         const pid = taught[Math.floor(Math.random() * taught.length)];
@@ -1729,7 +1826,23 @@
         c.recalled.q_trust = true;
         if (qd && qd.recall) return { line: qd.recall, thread: 'recall' };
       }
-      // 3. The village's weather is the elephant in the room.
+      // 3. THE WANT — the spine of the conversation (convo rebuild 2026-10-11,
+      // Steve). Every conversation opens with something the NPC wants: a
+      // favor, a question they need answered, news they must share, comfort
+      // they need. Strangers included (Principle 12 overridden) — a stranger
+      // with nothing on their mind is a stranger with nothing to say, and
+      // that's the emptiness Steve called out. Small talk is the fallback,
+      // never the default.
+      if (want && want.def && !want.fromSeed) {
+        const opener = this.convoWantOpener(vid, want);
+        if (opener && opener.line) {
+          c.want.stage = 1; // surfaced, in the opening beats
+          return { line: this.voiceLine(vid, opener.line), thread: 'want', wantId: want.id };
+        }
+      }
+      // 4. Fallbacks — the village's weather, their goal, small talk. These
+      // only run when no want was selected (shouldn't happen) or its opener
+      // failed. The want is the default; these are the safety net.
       if ((v.grief || 0) > 0) {
         const l = this.convoPick(vid, 'grief', [
           '"Have you — sorry. I keep thinking about them."',
@@ -1744,14 +1857,14 @@
         ]);
         if (l) return { line: this.voiceLine(vid, l), thread: 'cheer' };
       }
-      // 4. What they want — if they trust you enough to say it.
+      // 5. What they want, said plainly — if they trust you enough to say it.
       const shareAt = temp === 'withdrawn' ? 60 : temp === 'prickly' ? 50
         : (temp === 'warm' || temp === 'gentle') ? 25 : 35;
       if (goalDef && trust >= shareAt) {
         const l = this.convoPick(vid, 'goal', this.convoGoalLines(goal, goalDef));
         if (l) return { line: this.voiceLine(vid, this.fillTalkLine(l, vp)), thread: 'goal' };
       }
-      // 5. Contextual small talk — mood, temperament, reputation. Never repeated.
+      // 6. Contextual small talk — mood, temperament, reputation. Never repeated.
       const pool = [];
       const push = (arr, w) => { for (const x of (arr || [])) for (let i = 0; i < (w || 1); i++) pool.push(x); };
       // KNOWLEDGE GATE (dialog rebuild 2026-10-11): pre-day-7, nobody references
@@ -2585,9 +2698,11 @@
           out = content.concat(rest);
         }
       } catch (e) {}
-      // 3. Strangers get small talk (Principle 12): fresh conversations
-      // offer small talk + shared history only. Confrontations and doubt-
-      // probes are trust-tier gated — you don't interrogate a stranger.
+      // 3. Strangers aren't interrogated (NOT Principle 12): fresh
+      // conversations gate confrontations and doubt-probes — you don't
+      // interrogate a stranger. This is player-side hostility gating, NOT
+      // the old want-emptiness rule: strangers still get full want depth
+      // (Principle 12 overridden, convo rebuild 2026-10-11).
       try {
         const tier = this.convoVoiceTier ? this.convoVoiceTier(vid) : 'new';
         if (tier === 'new') {
@@ -2910,7 +3025,7 @@
         try {
           const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
-          const theyKnow = (this.state.village.taught && this.state.village.taught[vid]) || [];
+          const theyKnow = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
           if (!suppressPivot && youKnow.some(pid => theyKnow.indexOf(pid) === -1) &&
               !sub.some(s => s.id === 'teach')) {
             sub.push({ id: 'teach', label: this.convoActionLabel(vid, 'teach') });
@@ -3099,7 +3214,7 @@
         try {
           const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
-          const theyKnow = (this.state.village.taught && this.state.village.taught[vid]) || [];
+          const theyKnow = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
           if (youKnow.some(pid => theyKnow.indexOf(pid) === -1)) {
             teachChoice = { id: 'teach', label: this.convoActionLabel(vid, 'teach') };
           }
@@ -3252,15 +3367,27 @@
         // speak their actual tongue.
         return this.nvOpen(vid);
       }
+      // THE WANT (convo rebuild 2026-10-11, Steve): every conversation
+      // selects one NPC want HERE, in the core flow — not in a wrapper.
+      // The want shapes the opening beats (below), the menu answers it
+      // (convoWantMenu), and the ending resolves it (convoResolveWant).
+      // Nonverbal conversations have no want — no shared words, no asks.
+      let want = null;
+      try {
+        want = this.convoSelectWant(vid);
+        if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null };
+      } catch (e) { want = null; }
       const op = (() => {
         // RESUME (Steve 2026-10-07): an unfinished thread from a previous
         // conversation resurfaces — people remember what was left hanging.
         // Never ahead of a talk request (convoOpening owns that priority).
+        // When resume fires, the fresh want waits at stage 0 — the menu
+        // surfaces it once the old thread settles.
         try {
           const rs = this.convoResumeOpener(vid);
           if (rs) return rs;
         } catch (e) {}
-        return this.convoOpening(vid);
+        return this.convoOpening(vid, want);
       })();
       // DEFENSIVE (Steve 2026-10-05): convoOpening must return {line, thread}.
       // A bare-string return once rendered as `Name: "undefined"` — normalize
@@ -3285,7 +3412,6 @@
         this.convoGenericQ(vid, opLine);
       }
       this.convoNoteFlora(vid, opLine);
-      c.transcript.push({ who: 'them', text: opLine });
       this.sayLine(vid, opLine);
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
@@ -3293,9 +3419,7 @@
       try {
         const dn = this.convoDriftNote(vid);
         if (dn) {
-          c.transcript.push({ who: 'them', text: dn });
-          while (c.transcript.length > 200) c.transcript.shift();
-          this.say(`${this.displayName(vid)}: ${dn}`);
+          this.sayLine(vid, dn);
         }
       } catch (e) {}
       // SEEDING: knowledge traders mention their trade in conversation — the
@@ -3303,8 +3427,7 @@
       // learned the concept, you can bring it up with any trader yourself.
       if (this.isKnowledgeTrader && this.isKnowledgeTrader(vid) && !this.hasDiscovered('trade') && Math.random() < 0.5) {
         const seed = '"...I should say, I trade in what I know. My knowledge for yours. Or food, if you\'re short on secrets."';
-        c.transcript.push({ who: 'them', text: seed });
-        this.say(`${this.displayName(vid)}: ${seed}`);
+        this.sayLine(vid, seed);
         c.traderMentioned = true;
       }
       return { line: opLine, choices: this.convoChoices(vid), transcript: c.transcript.slice(), ended: false };
@@ -3482,9 +3605,7 @@
           }
           const gl = this.convoGoonLabel(vid);
           c.transcript.push({ who: 'you', text: gl });
-          c.transcript.push({ who: 'them', text: hb.text, foreign: hb.foreign });
-          while (c.transcript.length > 200) c.transcript.shift();
-          this.sayLine(vid, hb.text);
+          this.sayLine(vid, hb.text, { foreign: hb.foreign });
           done(hb.text, gl);
           if (hb.winddown) {
             // The goodbye lands: one last turn of choices, then it's over.
@@ -3903,7 +4024,7 @@
         // me" — never a random burdock drop mid-thought.
         const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
-        const theyKnow = (this.state.village.taught && this.state.village.taught[vid]) || [];
+        const theyKnow = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
         const teachable = youKnow.filter(pid => theyKnow.indexOf(pid) === -1);
         if (!teachable.length) {
           done('"Huh — looks like we\'re even on the green stuff."', '"Let me show you something."');
@@ -3925,8 +4046,20 @@
           }
           // (generic flora words matched: the green world IS the topic —
           // teaching any plant connects without a bridge.)
-          this.state.village.taught[vid] = this.state.village.taught[vid] || [];
-          this.state.village.taught[vid].push(pid);
+          // TEACHING-EVENT WRITE (convo rebuild 2026-10-11): the lesson lands
+          // in BOTH stores — v.taught (in-run knowledge, via the primitive so
+          // plantKnowledge stays synced) and v.taughtByPlayer (the player
+          // genuinely taught them — the ONLY thing the taughtref opener may
+          // read). Background familiarity is never written here.
+          try {
+            if (this.villagerLearnsPlant) this.villagerLearnsPlant(vid, pid, 'player-taught');
+            else { this.state.village.taught[vid] = this.state.village.taught[vid] || []; if (this.state.village.taught[vid].indexOf(pid) === -1) this.state.village.taught[vid].push(pid); }
+          } catch (e) {}
+          try {
+            const tbp = this.state.village.taughtByPlayer = this.state.village.taughtByPlayer || {};
+            const lst = tbp[vid] = tbp[vid] || [];
+            if (lst.indexOf(pid) === -1) lst.push(pid);
+          } catch (e) {}
           // WRONG-KNOWLEDGE HONESTY (break-it knowledge 2026-10-08): you teach
           // the name YOU believe (wrongAs), never the true name you never
           // learned — and the false name travels with the lesson, like the
@@ -4182,10 +4315,29 @@
       if (line && !answeredGeneric && !answeredReactive && !extraQ && !rumorPrompt) this.convoGenericQ(vid, line);
 
       if (youSaid) c.transcript.push({ who: 'you', text: youSaid });
-      c.transcript.push({ who: 'them', text: line });
-      while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
       c.exchanges++;
+      // BEAT COMPOSITION (convo rebuild 2026-10-11): the beat acknowledges
+      // what the player just said BEFORE emission — the transcript holds the
+      // composed line and the no-repeat ledger sees the final string.
+      try {
+        if (line && typeof this.convoComposeBeat === 'function' && typeof this.convoPlayerSaid === 'function') {
+          const composed = this.convoComposeBeat(vid, line, this.convoPlayerSaid(vid, choiceId));
+          if (composed) line = composed;
+        }
+      } catch (e) {}
       this.sayLine(vid, line);
+      // WANT ARC (convo rebuild 2026-10-11): answering their question engages
+      // the want; rudely changing the subject deflects it. The core flow
+      // advances the want — no wrapper needed.
+      try {
+        if (c.want && (c.want.stage || 0) < 3 && typeof this.convoWantEngage === 'function') {
+          if (/^(ans:|react:|gq:)/.test(choiceId || '') && choiceId.indexOf('honest_pass') === -1 && choiceId !== 'deflect_q') {
+            this.convoWantEngage(vid, 'engage');
+          } else if (choiceId === 'deflect_q') {
+            this.convoWantEngage(vid, 'deflect');
+          }
+        }
+      } catch (e) {}
       // ONE-BEAT TURNS (Steve 2026-10-05): everything after the line queues.
       // MOOD: a band-crossing or guard/grace beat queues behind the line —
       // the continuer reveals their reaction settling in. (convo-mood.js
@@ -4362,10 +4514,16 @@
       // topic ledger — the next conversation can resume it. Must run before
       // c.thread is cleared below.
       try { this.convoPlantOpenThread(vid, how); } catch (e) {}
+      // THE WANT RESOLVES (convo rebuild 2026-10-11, Steve): the ending is
+      // resolved, planted, or owed — never evaporated. Runs here, in the
+      // core flow (not a wrapper): the want's resolve() plants the seed for
+      // unfinished business, and the goodbye names the resolution.
+      try { this.convoResolveWant(vid, how); } catch (e) {}
+      let wantClose = null;
+      try { wantClose = this.convoWantCloseLine(vid); } catch (e) {}
       const cg = (this.data.characterGen || {}).convo || {};
       const temp = this.npcTemper(vid);
       const mood = this.npcMood(vid);
-      const first = this.displayName(vid);
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
       c.heldBeats = []; c.heldAsk = false; c.winddownQueued = false; c.windingDown = false;
@@ -4400,8 +4558,11 @@
         } catch (e) {}
         line = this.convoPickCycle(vid, 'exit', pool);
       }
-      c.transcript.push({ who: 'them', text: line });
-      while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
+      this.sayLine(vid, line);
+      // THE WANT'S CLOSING BEAT (convo rebuild 2026-10-11): the goodbye
+      // names the resolution — promised, deflected, comforted, heeded.
+      // Resolved/planted/owed, never evaporated.
+      if (wantClose) this.sayLine(vid, wantClose);
       // WORDS ONLY GO SO FAR: talk caps at 40. Beyond that, do something real.
       // MOOD LINGERS (convo-mood.js): how the conversation felt sticks to
       // the relationship — ending warm earns a little trust, ending tense
@@ -4454,19 +4615,16 @@
         const lapseBeat = closeBeat ? null : ((typeof this.convoLapseLine === 'function') ? this.convoLapseLine(vid) : null);
         const cbeat = closeBeat || lapseBeat;
         if (cbeat) {
-          c.transcript.push({ who: 'them', text: cbeat });
-          while (c.transcript.length > 200) c.transcript.shift();
           this.sayLine(vid, cbeat);
         }
       } catch (e) {}
-      this.say(`${first}: ${line}`);
+      // (exit line already emitted via sayLine above — single emission point,
+      // no second feed write.)
       // MOOD GOODBYE: the parting beat carries the temperature out the door.
       try {
         const mgb = this.convoMoodGoodbye(vid);
         if (mgb) {
-          c.transcript.push({ who: 'them', text: mgb });
-          while (c.transcript.length > 200) c.transcript.shift();
-          this.say(`${first}: ${mgb}`);
+          this.sayLine(vid, mgb);
         }
       } catch (e) {}
       return { line, choices: [], ended: true, transcript: c.transcript.slice() };
@@ -4909,9 +5067,10 @@
       let spoken = r ? r.text : 'They speak. You understand none of it.';
       const frag = this.maybeEnglishFragment(vid);
       if (frag) spoken += ` "${frag}" — they grin, proud of the one English they know.`;
-      // Transcript: your realization (narration), then their real speech.
+      // Transcript: your realization (narration), then their real speech —
+      // the speech goes through the single emission point (no-repeat ledger).
       c.transcript.push({ who: 'you', text: `(${barrier})` });
-      c.transcript.push({ who: 'them', text: spoken, foreign: lang });
+      this.sayLine(vid, spoken, { foreign: lang });
       // The returned opening line carries BOTH — the first thing the player
       // reads states the barrier plainly, then the foreign speech lands.
       const line = `${barrier}\n${spoken}`;
@@ -5029,10 +5188,8 @@
       const kind = choiceId.slice(3);
       const line = this.nvRespond(vid, kind);
       c.transcript.push({ who: 'you', text: '(gesture)' });
-      c.transcript.push({ who: 'them', text: line, foreign: c.nativeLang || this.npcNativeLang(vid) });
-      while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
+      this.sayLine(vid, line, { foreign: c.nativeLang || this.npcNativeLang(vid) });
       c.exchanges++;
-      this.say(`${this.displayName(vid)}: ${line}`);
       // No they-ask-you in nonverbal. Ever. (The leak Steve reported.)
       // Wind-down, not a chop: the budget landing gets a gesture beat first,
       // same as the verbal path. ONE-BEAT TURNS (Steve 2026-10-05): queued —
@@ -5068,6 +5225,13 @@
       const line = this.nvEndLine(vid);
       const tr = (r.transcript || []).slice();
       if (tr.length) tr[tr.length - 1] = { who: 'them', text: line, foreign: c.nativeLang || undefined };
+      // LEDGER SYNC (convo rebuild 2026-10-11): the transcript's last entry
+      // was swapped for the gesture line — the no-repeat ledger follows it,
+      // so the verbal exit it replaced can't leak back in as a "fresh" beat.
+      try {
+        const sl = c.saidLines || [];
+        if (sl.length) sl[sl.length - 1] = String(line).trim();
+      } catch (e) {}
       r.line = line;
       r.transcript = tr;
     }
