@@ -1202,6 +1202,20 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 
 **Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
 
+### voice-piper (`voice-piper.js`)
+Spoken villager dialogue via Piper TTS (open-source neural TTS, MIT voices). Piper runs in-browser through @mintplex-labs/piper-tts-web (ONNX Runtime Web + espeak-ng WASM); voice models are lazy-loaded packs cached in Origin Private File System, never in the base bundle. Each generated villager gets a deterministic voice profile from their person record (sex/age/temperament + id hash) so the same villager always sounds like themselves. Web Speech API is the fallback when packs aren't cached yet. Playback routes through the existing Game.audio graph (one unlock flow, one mute). Foreign-language lines are never voiced ("if you don't know, it doesn't show").
+
+**Provides:** Game.VOICE_PACKS, Game.voiceProfileFor(person), Game.voiceEnabled(), Game.setVoiceEnabled(b), Game.voicePackStatus(), Game.ensureVoicePack(packId, onProgress), Game.ensureVoicePacks(onProgress), Game.refreshVoiceCache(), Game.voiceVerifyIds(), Game.convoSpeakLine(vid, text, opts), Game.voiceStop(), Game.voiceCleanText(text)
+
+**Rules:**
+- Never auto-play before a user gesture (code: Game._voiceUnlocked flips on first pointerdown/keydown; convoSpeakLine returns 'locked' before).
+- Mute silences voice like every other audio (code: convoSpeakLine checks Game.audio.isMuted(); playVoice routes through the master gain).
+- Voice packs are lazy: per-speaker, on demand, cached in OPFS; the base PWA never ships them (code: ensureVoicePack + voicePackStatus; index.html ships no model files).
+- The 'system' voice is a reserved seam, never synthesized here (code: Game.SYSTEM_VOICE_SEAM; ElevenLabs build-time asset, Claptrap-like per Steve 2026-10-11).
+- voiceProfileFor is pure and deterministic: same person record -> identical profile, no audio needed (code: hashStr of id+name; no Math.random, no I/O).
+
+**Consumes:** —
+
 ### waves (`waveLedger.js`)
 The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
 

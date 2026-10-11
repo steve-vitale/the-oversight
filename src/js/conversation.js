@@ -785,6 +785,10 @@
       // though the dialogue layer intercepts dlg: choices before convoTurn.
       // Paginated chunks note each beat (the full line's beats, in order).
       try { for (const chunk of chunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
+      // VOICED DIALOGUE (Steve 2026-10-11): speak each NPC beat in the
+      // villager's own deterministic voice (voice-piper.js). Fire-and-forget;
+      // mute/unlock/setting/foreign gates live inside convoSpeakLine.
+      try { for (const chunk of chunks) this.convoSpeakLine(vid, chunk, opts); } catch (e) {}
       return first;
     },
 

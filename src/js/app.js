@@ -585,7 +585,7 @@
       </div>
       <p class="small" id="install-hint" style="display:none;opacity:.7"></p>
       <p class="small" style="margin-top:20px">slice 1: open expeditions. forage · eat · drink · bring it home.</p>
-      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span></p>
+      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span> <span id="b-voice" style="cursor:pointer;opacity:.25;font-size:11px" title="voiced dialogue">🗣️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
     document.getElementById('b-new').onclick = () => obColdOpen();
@@ -681,6 +681,26 @@
       const paintSnd = () => { bsnd.textContent = Game.audio.isMuted() ? '🔇' : '🔊'; };
       paintSnd();
       bsnd.onclick = () => { try { Game.audio.toggleMute(); } catch (e) {} paintSnd(); };
+    }
+    // 🗣️ voiced-dialogue toggle (Steve 2026-10-11): spoken NPC lines via
+    // Piper TTS packs (lazy-loaded, cached). Persists; default is on once
+    // packs are cached, off before. Enabling never bulk-downloads — the
+    // first speaker's pack fetches on first use.
+    const bvoice = document.getElementById('b-voice');
+    if (bvoice && Game.voiceEnabled) {
+      const paintVoice = () => {
+        const on = Game.voiceEnabled();
+        bvoice.style.opacity = on ? '0.9' : '0.25';
+        let n = 0;
+        try {
+          const st = Game.voicePackStatus ? Game.voicePackStatus() : {};
+          n = Object.keys(st).filter(k => st[k] === 'cached').length;
+        } catch (e) {}
+        bvoice.title = on ? ('voiced dialogue on (' + n + '/4 voice packs cached)') : 'voiced dialogue off — tap to enable';
+      };
+      Game.paintVoiceToggle = paintVoice;
+      paintVoice();
+      bvoice.onclick = () => { try { Game.setVoiceEnabled(!Game.voiceEnabled()); } catch (e) {} paintVoice(); };
     }
   }
   function about() {
@@ -8373,6 +8393,37 @@
       }
       return muted;
     }
+    // ============ VOICED DIALOGUE (Steve 2026-10-11) ============
+    // playVoice(blob, opts): speak a TTS WAV through the EXISTING audio
+    // graph — one unlock flow (ensure), one mute (master gain), one bus.
+    // A new line supersedes the last: never queue speech behind speech.
+    // pitch rides playbackRate (slight tempo coupling is acceptable for
+    // voice character; the 4 class models carry the identity).
+    let voiceSrc = null;
+    function stopVoice() {
+      try {
+        if (voiceSrc) { voiceSrc.onended = null; try { voiceSrc.stop(); } catch (e) {} }
+      } catch (e) {}
+      voiceSrc = null;
+    }
+    async function playVoice(blob, opts) {
+      opts = opts || {};
+      stopVoice();
+      if (!ensure()) return false;
+      if (muted) return false;
+      try {
+        const ab = await blob.arrayBuffer();
+        const buf = await ctx.decodeAudioData(ab);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.playbackRate.value = opts.pitch || 1;
+        src.connect(sfxBus);
+        voiceSrc = src;
+        src.onended = () => { if (voiceSrc === src) voiceSrc = null; };
+        src.start();
+        return true;
+      } catch (e) { return false; }
+    }
     // ============ PATTERN SYNTHS (Steve 2026-10-06) ============
     // Generic-per-pattern windup/resolve pairs, dispatched from telegraph()
     // and impact() by pattern type ('beam','burst','charge','direct','line',
@@ -11651,6 +11702,8 @@
       waveUnlock() { waveUnlock(); },
       toggleMute() { return toggleMute(); },
       isMuted() { return muted; },
+      playVoice(blob, opts) { return playVoice(blob, opts); },
+      stopVoice() { stopVoice(); },
       round(d) { roundTick(d); }, // the System is counting — it gets heavier each round
       // AUDIO COMPLETION (Steve 2026-10-06): these fired with no synth at all.
       crash(d) { crash(d); },
