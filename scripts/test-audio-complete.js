@@ -84,7 +84,6 @@ console.log(`\nFired events: ${eventList.length}`);
 // ---------- init mock audio ----------
 global.window = { AudioContext: MockAudioContext };
 global.localStorage = { _s: {}, getItem(k) { return this._s[k] || null; }, setItem(k, v) { this._s[k] = v; } };
-A.ensureAudio();
 
 // Snapshot counters helper
 function snap() { return { ...created }; }
@@ -94,8 +93,8 @@ function nodesCreated(before) {
 }
 
 // Events that are intentionally control/utility (no sound of their own)
-const CONTROL = new Set(['ensureAudio', 'toggleMute', 'isMuted', 'round', 'combatEnd',
-  'beamSweepStop', 'humStop']);
+const CONTROL = new Set(['toggleMute', 'isMuted', 'combatEnd',
+  'beamSweepStop', 'heartbeatStop', 'humBreak']); // stoppers/controls: no sound of their own by design
 
 // Events needing special setup before they'll sound (state-conditional by design)
 const NEEDS_SETUP = {
@@ -119,8 +118,8 @@ for (const name of eventList) {
   if (NEEDS_SETUP[name]) NEEDS_SETUP[name]();
   const beforeSound = snap(); // count nodes only after setup
   let threw = null;
-  // impact -> boom() defers via setTimeout ("silence, then impact" by design).
-  // Capture the deferred call by flushing a fake timer.
+  // impact -> impactWild() (the old boom() fallthrough was removed 2026-10-11).
+  // Kept: flush any deferred timer so deferred nodes still count.
   let deferredNodes = 0;
   const realSetTimeout = global.setTimeout;
   if (name === 'impact') {

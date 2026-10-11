@@ -2399,42 +2399,6 @@
         hbBus.gain.linearRampToValueAtTime(1.0, t + downTime + recoverTime);
       } catch (e) {}
     }
-    function boom() {
-      // UNPATTERNED IMPACT (Steve 2026-10-06): this is still the fallthrough
-      // for patterns nobody claimed — but it's not a boom anymore. It's a
-      // collapse: the air buckling inward, a sub drop with a partner a
-      // tritone away (the geometry is wrong), debris of pitches that don't
-      // resolve, and a silence after that's slightly too long.
-      if (!ensure()) return;
-      stopHeartbeat();
-      // SILENCE, then impact. The quiet is the scary part.
-      setTimeout(() => {
-        if (!ctx) return;
-        const t = ctx.currentTime;
-        // the buckling: sub drop + tritone partner — wrong geometry
-        [120, 169.7].forEach((fq, i) => { // tritone apart
-          const o = ctx.createOscillator(), g = ctx.createGain();
-          o.type = 'sine';
-          o.frequency.setValueAtTime(fq, t);
-          o.frequency.exponentialRampToValueAtTime(fq * 0.25, t + 0.45);
-          g.gain.setValueAtTime(i ? 0.4 : 0.7, t);
-          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
-          o.connect(g); g.connect(sfxBus);
-          o.start(t); o.stop(t + 0.7);
-        });
-        // debris that doesn't resolve: three pitches, none landing
-        [523, 587, 466].forEach((fq, i) => {
-          const dt = t + 0.05 + i * 0.06;
-          const d2 = ctx.createOscillator(), dg = ctx.createGain();
-          d2.type = 'triangle';
-          d2.frequency.setValueAtTime(fq, dt);
-          d2.frequency.exponentialRampToValueAtTime(fq * 1.13, dt + 0.3); // drifts UP, wrong
-          dg.gain.setValueAtTime(0.1, dt);
-          dg.gain.exponentialRampToValueAtTime(0.0001, dt + 0.35);
-          d2.connect(dg); dg.connect(sfxBus); d2.start(dt); d2.stop(dt + 0.4);
-        });
-      }, 280);
-    }
     function impactWild() {
       // UNPATTERNED IMPACT (Steve 2026-10-06): impact()'s fallthrough used
       // to be the stock boom() — every unrecognized pattern landed the same
