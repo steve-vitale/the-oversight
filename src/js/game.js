@@ -15214,11 +15214,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         const ed = p.edibility || 'safe';
         const verdict = ed === 'avoid' ? 'avoid' : ed === 'cook' ? 'cook' : ed === 'caution' ? 'caution' : 'safe';
-        const desc = (p.description || 'unfamiliar plant').toLowerCase();
+        const desc = (p.description || 'unfamiliar plant').toLowerCase().replace(/^(a|an)\s+/, '');
+        const tnameLc = tname.charAt(0).toLowerCase() + tname.slice(1);
         // the protocol, narrated honestly (true name never spoken pre-naming)
         if (verdict === 'avoid') {
           try { this.hurtVillager(tester, 10, 'experiment'); } catch (e) {}
-          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. By evening ${tname} is thoroughly, educationally sick. "NOT food," they announce to the fire, pale. "My body told me so." The lesson is learned the hard way — and now the whole village knows it.`);
+          this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. By evening ${tnameLc} is thoroughly, educationally sick. "NOT food," they announce to the fire, pale. "My body told me so." The lesson is learned the hard way — and now the whole village knows it.`);
         } else if (verdict === 'cook') {
           this.say(`${tname} spends the afternoon with the ${desc} — look, smell, the smallest taste, then waiting. Raw, it knots the stomach. Cooked... fine. The fire learns the rule before the name: cook it, or else.`);
         } else if (verdict === 'caution') {

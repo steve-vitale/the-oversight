@@ -80,7 +80,8 @@ function captureSay(Game) {
     if (proto) {
       ok('E2 no true-name leak in protocol line', proto.indexOf(p1.name) === -1,
         `leaked "${p1.name}" in: ${proto.slice(0, 160)}`);
-      ok('E2 descriptor used', proto.toLowerCase().indexOf((p1.description || 'unfamiliar plant').toLowerCase().slice(0, 12)) !== -1,
+      const descCore = (p1.description || 'unfamiliar plant').toLowerCase().replace(/^(a|an)\s+/, '').slice(0, 12);
+      ok('E2 descriptor used', proto.toLowerCase().indexOf(descCore) !== -1,
         proto.slice(0, 160));
     }
     // E3: same-day second call is a no-op — p2 stays unknown
