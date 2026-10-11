@@ -306,7 +306,10 @@
         // free levels — 35 taps of second_wind.refuse_death ("automatic",
         // impl refuses) took L1->L3 in one turn with no cost, no turn spent.
         // A fizzled action is not practice. (brawler loop 2026-10-08)
-        try { this.gainAbilityXP(abilityId, 1); } catch (e) {}
+        // XP RICHNESS (evolution build 2026-10-11, measured): real activations
+        // grant 2 XP (were 1) — they cost food/actions, they're investments.
+        // Related-action grants elsewhere stay at 1 (passive).
+        try { this.gainAbilityXP(abilityId, 2); } catch (e) {}
         // FEASTED (feast-surge rework, Worker B 2026-10-10): the feasted
         // form — the known ability, temporarily evolved. Generic framework:
         // uplift rode the damage funnels; here the data-driven twist runs.

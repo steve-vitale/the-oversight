@@ -239,9 +239,9 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'dramaEffects.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'dramaEffects.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions };
       // Scaffold #4 (Steve 2026-10-07): wire the drama effect registry — data-driven renderer.
       try {
         const D = globalThis.Scattering && globalThis.Scattering.Drama;
@@ -11102,7 +11102,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!rec) { this.say('They\'re not sick.'); return null; }
       const s = this.state.scholar;
       if ((s.kcal || 0) < 150) { this.say('Too hungry to give \u2014 healing burns food, and you\'re running on empty. Eat first. (Treating another costs 150 kcal.)'); return null; }
-      s.kcal -= 150;
+      // EVOLUTION (care__surgeon, 2026-10-11): perfect economy — treating others costs nothing.
+      if (!this.hasEvoFlag('treat_free')) s.kcal -= 150;
+      else this.say('(Your hands have learned perfect economy — no cost.)');
       this.tickAction(32);
       let first = 'They';
       try { const p = this.getPerson(vid); if (p && p.name) first = String(p.name).split(' ')[0]; } catch (e) {}
@@ -11121,6 +11123,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (def.cure.needsDiagnosis && !diagnosed && !(herbL3 || trueCure) && (eff === 'cure' || eff === 'support')) eff = 'ease';
         if (eff === 'cure') {
           delete v.sick[vid];
+          // EVOLUTION (care__warden, 2026-10-11): treatment hardens — 3 days of ward.
+          if (this.hasEvoFlag('treatment_ward')) { v.warded = v.warded || {}; v.warded[vid] = (s.day || 0) + 3; }
           this.markDiseaseKnown(did);
           try { if (this.remember) this.remember(vid, 'cured', 'cured of ' + def.name + ' by you'); } catch (e) {}
           try { if (this.nvTrust) this.nvTrust(vid, 4); } catch (e) {}
@@ -20552,7 +20556,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                  (s.abilities || []).find(a => a.id === abilityId);
       if (!ab || ab.level >= 3) return;
       ab.xp = (ab.xp || 0) + (amount || 1);
-      const need = ab.level === 1 ? 10 : 25;
+      // XP THRESHOLDS (evolution build 2026-10-11, measured): L1->L2: 6,
+      // L2->L3: 12 (was 10/25 — sims measured ~0.1 xp/day, making L3 need
+      // ~280 days). A focused ability now masters ~day 70-90.
+      const need = ab.level === 1 ? 6 : 12;
       if (ab.xp >= need) {
         ab.level++;
         ab.xp = 0;
@@ -20560,8 +20567,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const pg = (typeof this.progState === 'function') ? this.progState() : (s.prog = s.prog || {});
           pg.surgeResonance = (pg.surgeResonance || 0) + 5;
         } catch (e) {}
-        const bonus = this.abilityLevelBonus(ab.id, ab.level);
-        this.say(`⬆️ ${ab.name} deepened to L${ab.level}! ${bonus}`);
+        // EVOLUTION (2026-10-11): L3 is no longer a dead end. Mastery stages
+        // the evolution choice — the ability becomes something new.
+        if (ab.level >= 3 && !ab.evolution) {
+          this.stageEvolution(ab);
+        } else {
+          const bonus = this.abilityLevelBonus(ab.id, ab.level);
+          this.say(`⬆️ ${ab.name} deepened to L${ab.level}! ${bonus}`);
+        }
         // DRAMA (Steve 2026-10-07, Round C2): golden burst — the ability deepens visibly.
         try { this.drama('levelUp', s.mx, s.my, ab.name, ab.level); } catch (e) {}
         // The System finds your growing comprehension entertaining. The gamblers agree.
@@ -20575,6 +20588,100 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // SYNERGIES: a deepened ability might wake a new resonance.
         this.recomputeActiveSynergies();
       }
+    },
+    // ---- ABILITY EVOLUTION (Steve 2026-10-11) ----
+    // At L3 mastery, an ability EVOLVES: the player chooses what it becomes.
+    // Family-level (pool-level), 2 divergent paths per family. The evolved
+    // form keeps its root's modifiers (see modifiers.js lineage) and adds its
+    // own. Synergy legs resolve through evolvedFrom — the root is never lost.
+    evolutionFamilyFor(abilityId) {
+      const def = (this.data.abilities || []).find(a => a.id === abilityId);
+      if (!def) return 'system_utility';
+      const pool = def.pool || 'system';
+      if (pool !== 'system') return pool;
+      const tier = def.tier || '';
+      const fams = (this.data.evolutions && this.data.evolutions.families) || {};
+      for (const fid of Object.keys(fams)) {
+        if ((fams[fid].tiers || []).includes(tier)) return fid;
+      }
+      return 'system_strange';
+    },
+    evolutionChoicesFor(abilityId) {
+      const fam = this.evolutionFamilyFor(abilityId);
+      const all = (this.data.evolutions && this.data.evolutions.evolutions) || [];
+      return all.filter(e => e.family === fam);
+    },
+    stageEvolution(ab) {
+      const s = this.state.scholar;
+      const choices = this.evolutionChoicesFor(ab.id);
+      if (!choices.length) {
+        // No evolutions for this family — fall back to the L3 bonus line.
+        const bonus = this.abilityLevelBonus(ab.id, 3);
+        this.say(`⬆️ ${ab.name} deepened to L3! ${bonus}`);
+        return;
+      }
+      s.pendingEvolution = ab.id;
+      s.evolutionChoices = choices.map(c => ({
+        id: c.id, name: c.name, choiceText: c.choiceText, flavor: c.flavor,
+        verb: c.verb, lane: c.lane, family: c.family,
+      }));
+      const lane = choices[0].lane;
+      const aname = ab.name || ab.id;
+      if (lane === 'alien' || lane === 'alien-dark') {
+        this.say(`🌀 ${aname} is STRAINING at its edges. The gift wants to become something — and it wants YOU to choose what.`);
+        if (lane === 'alien-dark') this.say('"Oh no. OH NO. The dark one is BLOOMING. ...Ratings are UP though!"');
+        else this.say('"IT\u2019S MOLTING! We didn\u2019t program molting! This is YOUR doing! CHOOSE! Choose what it becomes!"');
+      } else if (lane === 'human-deep') {
+        this.say(`💭 ${aname} is deepening into something older. Your blood remembers further back than you do. Choose what it remembers.`);
+      } else {
+        this.say(`💭 ${aname} has become second nature. Now it's becoming FIRST nature — something no one taught you. Choose what it becomes.`);
+      }
+      this.say(`(Evolution awaits — choose one. Your power becomes something new.)`);
+    },
+    // chooseEvolution: player picks the evolution. The ability is REPLACED by
+    // its evolved form (new id, evolvedFrom lineage, level 3 capstone).
+    // Never auto-granted; "not yet" defers (choice re-staged on next XP gain).
+    chooseEvolution(evoId) {
+      const s = this.state.scholar;
+      if (evoId === 'defer') {
+        this.say(`Not yet. ${s.pendingEvolution || 'It'} waits — mastery is patient. (The choice will return.)`);
+        s.evolutionDeferred = true;
+        return null;
+      }
+      const choice = (s.evolutionChoices || []).find(c => c.id === evoId);
+      if (!choice) return null;
+      const all = (s.abilities || []).concat(s.backgroundAbilities || []);
+      const ab = all.find(a => (a.id || a) === s.pendingEvolution);
+      if (!ab) return null;
+      const full = ((this.data.evolutions || {}).evolutions || []).find(e => e.id === evoId);
+      const rootId = s.pendingEvolution;
+      ab.id = evoId;
+      ab.name = choice.name;
+      ab.evolvedFrom = rootId;
+      ab.evolution = { id: evoId, modifiers: (full && full.modifiers) || [], flags: (full && full.flags) || [] };
+      ab.level = 3; ab.xp = 0;
+      s.evolutionChoices = null;
+      s.pendingEvolution = null;
+      s.evolutionDeferred = false;
+      try { this.tele('ability_evolved', { from: rootId, to: evoId, who: 'player' }); } catch (e) {}
+      this.say(`🌀 ${choice.name}. ${choice.verb}`);
+      if (choice.flavor) this.say(`"${choice.flavor}"`);
+      // Evolution flags that need engine hooks are applied here (one-liners).
+      this.applyEvolutionFlags(ab);
+      this.recomputeActiveSynergies();
+      return null;
+    },
+    // applyEvolutionFlags: qualitative flags that the modifier pipeline can't
+    // express. Each flag gets exactly one honest hook — no theater.
+    applyEvolutionFlags(ab) {
+      const flags = (ab.evolution && ab.evolution.flags) || [];
+      const s = this.state.scholar;
+      s.evoFlags = s.evoFlags || {};
+      for (const f of flags) s.evoFlags[f] = ab.id;
+    },
+    hasEvoFlag(flag) {
+      const s = this.state.scholar;
+      return !!((s.evoFlags || {})[flag]);
     },
     // loseAbilityXP: unwind XP granted for a gift the player took back (miser
     // break-it 2026-10-08). Eats current-level XP first; excess drops levels
@@ -20816,6 +20923,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // caps at L3, so evolution copy was unreachable dead text. Re-add with
     // evolution if the cap ever lifts.)
     abilityLevelBonus(id, level) {
+      // DATA-DRIVEN (evolution build 2026-10-11): deepening text lives in
+      // abilities.json `deepening` (all 94). The table below is legacy
+      // override for the original 20 — data wins where both exist.
+      const def = (this.data.abilities || []).find(a => a.id === id);
+      if (def && def.deepening && def.deepening[String(level)]) return def.deepening[String(level)];
       const bonuses = {
         green_thumb: { 2: '+100% yield (was +50%).', 3: 'You sense rich ground. Forage spots glow.' },
         tracker: { 2: '+50% hunt success (was +30%).', 3: 'You see tracks from 2 tiles away.' },
@@ -25621,6 +25733,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { const pr = this.npcRangeProfile(vid); out = (pr === 'forager' || pr === 'explorer'); } catch (e) {}
           if (out && Math.random() < 0.03) { vector = 'tick fever'; severity = 1; }
         }
+        // EVOLUTION (care__warden, 2026-10-11): warded villagers resist new infection.
+        if (vector && (v.warded || {})[vid] > ((this.state.scholar || {}).day || 0)) { vector = null; }
         if (vector) {
           v.sick[vid] = { name: vector, daysLeft: 3 + Math.floor(Math.random() * 4), severity };
           // SYMPTOM-ONLY (disease rework 2026-10-09): the camp sees symptoms,
@@ -29431,6 +29545,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     tbDamage(targetKey, dmg, sourceLabel, sourceKey, opts) {
       const t = this.tbFighter(targetKey);
+      // EVOLUTION (combat__iron_warden, 2026-10-11): intercept — take an ally's hit, once per fight.
+      try {
+        if (t && t.kind === 'villager' && this.hasEvoFlag('intercept_ally') && !(opts && opts.noIntercept)) {
+          const f = this.tbfight;
+          if (f && !f.wardenInterceptUsed) {
+            f.wardenInterceptUsed = true;
+            this.say('Iron Warden: you step into the blow meant for your ally!');
+            return this.tbDamage('player', dmg, sourceLabel, sourceKey, Object.assign({}, opts, { noIntercept: true }));
+          }
+        }
+      } catch (e) {}
       // HONESTY (break-it combat 2026-10-09): returns the ACTUAL damage
       // applied, so callers state the number that landed — not the number
       // they asked for. Monster-state modifiers (turtle bunker x0.15, boar
@@ -29491,6 +29616,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.practice('agi', 1); // dodging is agility practice
           // DRAMA (Steve 2026-10-07, B1): the dodge READS — MISS + ghost.
           try { this.drama('dodgeMiss', t.mx, t.my); } catch (e) {}
+          // EVOLUTION (combat__red_mist, 2026-10-11): their miss opens them — free counter.
+          try {
+            if (this.hasEvoFlag('counter_on_miss') && sourceKey) {
+              const atk = this.tbFighter(sourceKey);
+              if (atk && atk.alive) {
+                const cDmg = Math.max(1, Math.round(this.modTarget('combat.strike_damage', 8) * 0.5));
+                this.say('Red Mist: their miss opens them up — you counter!');
+                this.tbDamage(sourceKey, cDmg, 'your counter', 'p', { quiet: true });
+              }
+            }
+          } catch (e) {}
           return 0;
         }
       }

@@ -677,7 +677,8 @@
       // same fiction as cookAll's batch path. Nothing burns on an empty
       // press; untracked map hearths stay free (established).
       const fuelDied = this.consumeCookFire(16) === 'died';
-      const solid = knows && !fuelDied;
+      // EVOLUTION (craft__smoke_prophet, 2026-10-11): the smoke obeys — always the solid job.
+      const solid = knows && (!fuelDied || this.hasEvoFlag('smoke_never_fails'));
       let n = 0;
       for (const i of targets) {
         const it = inv[i];

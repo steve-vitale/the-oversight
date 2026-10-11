@@ -17,6 +17,10 @@
     ],
     "unlock": {
       "type": "granted"
+    },
+    "deepening": {
+      "2": "You diagnose at a glance \u2014 examination always succeeds, and fast.",
+      "3": "BATTLEFIELD MASTER: your supportive care can turn even the severe cases, and you read any sickness at a touch \u2014 no diagnosis needed."
     }
   },
   {
@@ -34,6 +38,10 @@
     "pool": "care",
     "unlock": {
       "type": "granted"
+    },
+    "deepening": {
+      "2": "Your hands don't shake anymore \u2014 not ever. Delicate work is just work.",
+      "3": "MASTER: your fine work teaches itself \u2014 villagers watching you learn twice as fast."
     }
   },
   {
@@ -79,7 +87,11 @@
       "hunter",
       "explorer",
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "You read the land like a newspaper \u2014 yesterday and today.",
+      "3": "The wild tells you its plans: you know where game WILL be."
+    }
   },
   {
     "description": "One shot. You don't take the shot unless it's the shot.",
@@ -115,13 +127,17 @@
           "time_min": 20,
           "kcal": 15
         },
-        "effect": "Take extra time lining up the shot. Your next hunting strike lands more reliably — and when it lands, it's clean: the animal doesn't suffer."
+        "effect": "Take extra time lining up the shot. Your next hunting strike lands more reliably \u2014 and when it lands, it's clean: the animal doesn't suffer."
       }
     ],
     "paths": [
       "hunter",
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "The shot is always there. You just wait.",
+      "3": "One shot, one kill: your opening strike cannot miss."
+    }
   },
   {
     "description": "Break down game fast and clean. Less waste, more meat, usable parts.",
@@ -154,7 +170,11 @@
     "paths": [
       "hunter",
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "Clean cuts, no waste \u2014 the carcass gives everything.",
+      "3": "You read the animal in the dressing: its health, its range, its story."
+    }
   },
   {
     "description": "You think in shelf life. Smoking, drying, salting \u2014 food that lasts is food that saves.",
@@ -171,6 +191,10 @@
     "pool": "craft",
     "unlock": {
       "type": "granted"
+    },
+    "deepening": {
+      "2": "Your stores keep like stone.",
+      "3": "You taste spoilage before it starts \u2014 nothing goes bad on your watch."
     }
   },
   {
@@ -200,6 +224,10 @@
     "unlock": {
       "detail": "Trial of Hunger survived",
       "type": "trial"
+    },
+    "deepening": {
+      "2": "You can eat things that would hospitalize others. Mostly.",
+      "3": "Your gut is a laboratory: you can TASTE poison \u2014 one lick tells you if food is safe."
     }
   },
   {
@@ -218,10 +246,14 @@
     "unlock": {
       "detail": "Traverse 20 tiles undetected",
       "type": "discovery"
+    },
+    "deepening": {
+      "2": "You move like weather. Even twigs don't notice.",
+      "3": "You can walk a sleeping camp and no one dreams of you."
     }
   },
   {
-    "description": "Adrenaline hits and the world slows — you are harder to hit when it matters.",
+    "description": "Adrenaline hits and the world slows \u2014 you are harder to hit when it matters.",
     "id": "adrenaline_surge",
     "modifiers": [
       {
@@ -236,6 +268,10 @@
     "unlock": {
       "detail": "Trial of Blood survived",
       "type": "trial"
+    },
+    "deepening": {
+      "2": "The slow world is home now.",
+      "3": "Time stutters for you alone: once per fight, dodge the undodgeable."
     }
   },
   {
@@ -251,6 +287,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "+100% yield (was +50%).",
+      "3": "You sense rich ground. Forage spots glow."
     }
   },
   {
@@ -281,7 +321,11 @@
     "paths": [
       "hunter",
       "explorer"
-    ]
+    ],
+    "deepening": {
+      "2": "+50% hunt success (was +30%).",
+      "3": "You see tracks from 2 tiles away."
+    }
   },
   {
     "id": "diplomat",
@@ -296,6 +340,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "Trust builds 3x (was 2x).",
+      "3": "Villagers tell you secrets unprompted."
     }
   },
   {
@@ -311,6 +359,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "No water needed for cooking.",
+      "3": "+25% kcal (was +10%)."
     }
   },
   {
@@ -326,6 +378,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "Giving is your signature now.",
+      "3": "Your generosity is famous: donations return threefold in loyalty."
     }
   },
   {
@@ -341,6 +397,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "Ruins give up their secrets to you.",
+      "3": "You find what others missed: picked ruins still hide one more thing."
     }
   },
   {
@@ -362,6 +422,10 @@
     ],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "The squirrels have a network, and you're in it.",
+      "3": "The forest provides: gifts arrive when you need them most."
     }
   },
   {
@@ -383,6 +447,10 @@
     ],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "The sky knows your steps.",
+      "3": "You call the rain: dance, and water comes (once per week)."
     }
   },
   {
@@ -404,6 +472,10 @@
     ],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "Your joy is infectious \u2014 morale spreads.",
+      "3": "Your appetite is legend: the village eats better just watching you."
     }
   },
   {
@@ -425,6 +497,10 @@
     ],
     "metabolic": {
       "daily": 75
+    },
+    "deepening": {
+      "2": "Your stashes are everywhere. You remember all of them.",
+      "3": "You never lack: once per week, produce exactly what's needed from your hoard."
     }
   },
   {
@@ -455,7 +531,11 @@
     "paths": [
       "drifter",
       "miser"
-    ]
+    ],
+    "deepening": {
+      "2": "Hands like smoke.",
+      "3": "You can steal the truth itself: learn one secret per theft."
+    }
   },
   {
     "id": "photosynthesis",
@@ -470,6 +550,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 150
+    },
+    "deepening": {
+      "2": "Sunlight is a meal now.",
+      "3": "You bloom: in daylight, you barely need to eat."
     }
   },
   {
@@ -481,11 +565,11 @@
         "name": "Refuse",
         "cost": {},
         "automatic": true,
-        "effect": "Once per day, when you would die: you don't. Drop to 1 HP; brought up to at least 500 kcal from sheer spite when death came violently — starvation and sickness just leave you at 1 HP, still hungry. Automatic trigger."
+        "effect": "Once per day, when you would die: you don't. Drop to 1 HP; brought up to at least 500 kcal from sheer spite when death came violently \u2014 starvation and sickness just leave you at 1 HP, still hungry. Automatic trigger."
       }
     ],
     "name": "Second Wind",
-    "description": "Once per day, when you'd die, you don't. (1 HP — plus 500 kcal of sheer spite when death came violently. Starvation and sickness just leave you at 1 HP, still hungry.)",
+    "description": "Once per day, when you'd die, you don't. (1 HP \u2014 plus 500 kcal of sheer spite when death came violently. Starvation and sickness just leave you at 1 HP, still hungry.)",
     "flavor": "You were almost gone! Then you WEREN'T! How?! We want to know!",
     "pool": "system",
     "tier": "overpowered",
@@ -495,6 +579,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 200
+    },
+    "deepening": {
+      "2": "Death has to try harder.",
+      "3": "Twice per day, death is refused."
     }
   },
   {
@@ -516,6 +604,10 @@
     ],
     "metabolic": {
       "daily": 10
+    },
+    "deepening": {
+      "2": "The rock believes in you. That's enough.",
+      "3": "Luck is a skill now: once per day, reroll any failure."
     }
   },
   {
@@ -537,6 +629,10 @@
     ],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "The birds are your scouts.",
+      "3": "The sky watches for you: you'll always know what's coming."
     }
   },
   {
@@ -563,6 +659,10 @@
     ],
     "metabolic": {
       "daily": 150
+    },
+    "deepening": {
+      "2": "Your plates are armor and statement.",
+      "3": "Living fortress: your skin turns blades, and you feel nothing."
     }
   },
   {
@@ -584,6 +684,10 @@
     ],
     "metabolic": {
       "daily": 2200
+    },
+    "deepening": {
+      "2": "Two furnaces, one will.",
+      "3": "You can feast for the village: share your second stomach's bounty."
     }
   },
   {
@@ -605,6 +709,10 @@
     ],
     "metabolic": {
       "daily": 150
+    },
+    "deepening": {
+      "2": "The war chest deepens.",
+      "3": "You are the reserve: in famine, your body feeds others."
     }
   },
   {
@@ -620,6 +728,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 100
+    },
+    "deepening": {
+      "2": "Nothing surprises you anymore.",
+      "3": "You see everything: ambushes are impossible, and you see... more."
     }
   },
   {
@@ -650,7 +762,11 @@
     ],
     "paths": [
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "Shedding is renewal.",
+      "3": "You molt at will: heal to full once per week, keep your gear."
+    }
   },
   {
     "id": "blood_magic",
@@ -669,7 +785,11 @@
     "paths": [
       "survivalist",
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "The cut is cleaner, the return richer.",
+      "3": "Your blood is currency: convert HP to kcal at will, no wound."
+    }
   },
   {
     "id": "rage",
@@ -696,6 +816,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 150
+    },
+    "deepening": {
+      "2": "The red is a tool now.",
+      "3": "Perfect fury: your rage never misses and never fades mid-fight."
     }
   },
   {
@@ -715,7 +839,11 @@
     "paths": [
       "survivalist",
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "The hunger is honest.",
+      "3": "The hunger is wise: you gain their strength, not just their meat."
+    }
   },
   {
     "id": "pact",
@@ -730,6 +858,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 150
+    },
+    "deepening": {
+      "2": "The contract deepens.",
+      "3": "You renegotiate: choose which ability the pact takes."
     }
   },
   {
@@ -761,7 +893,11 @@
     "paths": [
       "brawler",
       "socialite"
-    ]
+    ],
+    "deepening": {
+      "2": "Your voice curdles more than milk.",
+      "3": "The scream is a weapon: shatter stone, not just nerves."
+    }
   },
   {
     "id": "pocket_sand",
@@ -791,7 +927,11 @@
     "paths": [
       "brawler",
       "drifter"
-    ]
+    ],
+    "deepening": {
+      "2": "You always have sand. Don't ask.",
+      "3": "Pocket everything: sand, yes, but also keys, knives, secrets."
+    }
   },
   {
     "id": "taste_vision",
@@ -813,6 +953,10 @@
     ],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "The world has flavor now.",
+      "3": "You taste truth: lies have a flavor, and it's unmistakable."
     }
   },
   {
@@ -834,6 +978,10 @@
     ],
     "metabolic": {
       "daily": 75
+    },
+    "deepening": {
+      "2": "Your poisons are art.",
+      "3": "Master of venoms: your poisons never harm the innocent."
     }
   },
   {
@@ -855,7 +1003,7 @@
         "cost": {
           "time_min": 10
         },
-        "effect": "Make your point without raising a hand. They'll remember the look on your face — and not fondly. (No mechanical edge yet — the weight is social.)"
+        "effect": "Make your point without raising a hand. They'll remember the look on your face \u2014 and not fondly. (No mechanical edge yet \u2014 the weight is social.)"
       }
     ],
     "name": "Dread",
@@ -875,6 +1023,10 @@
     ],
     "metabolic": {
       "daily": 100
+    },
+    "deepening": {
+      "2": "Your presence is weather.",
+      "3": "Terror is a tool: you can aim your fear like a weapon."
     }
   },
   {
@@ -905,7 +1057,11 @@
     "paths": [
       "drifter",
       "miser"
-    ]
+    ],
+    "deepening": {
+      "2": "The dead don't mind. Much.",
+      "3": "You speak with the dead: the looted tell you where they hid the rest."
+    }
   },
   {
     "id": "time_skip",
@@ -924,12 +1080,16 @@
     "paths": [
       "drifter",
       "explorer"
-    ]
+    ],
+    "deepening": {
+      "2": "Time is a suggestion.",
+      "3": "You skip with precision: arrive exactly when needed."
+    }
   },
   {
     "id": "hive_mind",
     "name": "Hive Mind",
-    "description": "The hive opens: every tile on the map lies revealed — terrain-sense, never detail; walk a tile to truly know it. They feel you watching. (-10 trust.)",
+    "description": "The hive opens: every tile on the map lies revealed \u2014 terrain-sense, never detail; walk a tile to truly know it. They feel you watching. (-10 trust.)",
     "flavor": "All the brains touch! It's cozy! It's invasive! It's... both! We love it!",
     "pool": "system",
     "tier": "overpowered",
@@ -939,6 +1099,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 200
+    },
+    "deepening": {
+      "2": "The hive hums for you.",
+      "3": "You are the hive: see through every allied eye."
     }
   },
   {
@@ -954,12 +1118,16 @@
     "modifiers": [],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "Winter is a rumor.",
+      "3": "Your blood is antifreeze: cold cannot touch you or yours."
     }
   },
   {
     "id": "echo_location",
     "name": "Echo Location",
-    "description": "Clap once: you sense the shape of the land — reveals the 3x3 world-map tiles around you. 1/day.",
+    "description": "Clap once: you sense the shape of the land \u2014 reveals the 3x3 world-map tiles around you. 1/day.",
     "flavor": "CLAP! The sound comes back with a MAP! You are the bat! (The bat is jealous!)",
     "pool": "system",
     "tier": "utility",
@@ -973,7 +1141,11 @@
     "paths": [
       "explorer",
       "hunter"
-    ]
+    ],
+    "deepening": {
+      "2": "The world has shape in sound.",
+      "3": "You see through walls: sound maps the unseen."
+    }
   },
   {
     "id": "compost_king",
@@ -988,6 +1160,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "Rot is just slow food.",
+      "3": "The cycle obeys: your compost grows miracles."
     }
   },
   {
@@ -1003,6 +1179,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "The moss is loyal.",
+      "3": "Living beard: your moss heals small wounds and hides you."
     }
   },
   {
@@ -1018,6 +1198,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 25
+    },
+    "deepening": {
+      "2": "Water calls to you.",
+      "3": "You find more than water: the stick points to what you need."
     }
   },
   {
@@ -1033,6 +1217,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 75
+    },
+    "deepening": {
+      "2": "Desperation is a weapon.",
+      "3": "The corner is your throne: surrounded, you are unstoppable."
     }
   },
   {
@@ -1063,7 +1251,11 @@
     ],
     "paths": [
       "hunter"
-    ]
+    ],
+    "deepening": {
+      "2": "The waiting is the weapon.",
+      "3": "Death waits with you: your held shot kills anything it hits."
+    }
   },
   {
     "id": "second_skin",
@@ -1084,6 +1276,10 @@
     ],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "Armor is clothing.",
+      "3": "You ARE the armor: your skin hardens under the plates."
     }
   },
   {
@@ -1099,6 +1295,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 50
+    },
+    "deepening": {
+      "2": "People are open letters.",
+      "3": "You read souls: one glance tells you who they are."
     }
   },
   {
@@ -1136,7 +1336,11 @@
     "paths": [
       "socialite",
       "caregiver"
-    ]
+    ],
+    "deepening": {
+      "2": "You can cool any temper. Anger listens to you.",
+      "3": "MASTER MEDIATOR: warring parties seek you out \u2014 you end feuds, not just fights."
+    }
   },
   {
     "id": "leech",
@@ -1166,7 +1370,11 @@
     "paths": [
       "caregiver",
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "Their pain is your purpose.",
+      "3": "You drink wounds: take their injuries as your strength."
+    }
   },
   {
     "id": "scarecrow",
@@ -1202,7 +1410,11 @@
     ],
     "paths": [
       "hunter"
-    ]
+    ],
+    "deepening": {
+      "2": "The ruse is perfect.",
+      "3": "You become the monster they fear: traps set themselves."
+    }
   },
   {
     "id": "hollow_bones",
@@ -1223,6 +1435,10 @@
     ],
     "metabolic": {
       "daily": 100
+    },
+    "deepening": {
+      "2": "Light as rumor.",
+      "3": "You could fly if you believed: falls can't hurt you."
     }
   },
   {
@@ -1244,6 +1460,10 @@
     ],
     "metabolic": {
       "daily": 100
+    },
+    "deepening": {
+      "2": "The eye never blinks.",
+      "3": "The eye sees all: danger has no secrets from you."
     }
   },
   {
@@ -1259,6 +1479,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 300
+    },
+    "deepening": {
+      "2": "The clause is patient.",
+      "3": "You choose who burns: the clause takes your chosen, not random."
     }
   },
   {
@@ -1274,6 +1498,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 200
+    },
+    "deepening": {
+      "2": "You and it are we.",
+      "3": "Perfect symbiosis: it wants what you want now."
     }
   },
   {
@@ -1295,6 +1523,10 @@
     ],
     "metabolic": {
       "daily": 0
+    },
+    "deepening": {
+      "2": "Endurance is identity.",
+      "3": "You cannot be outlasted: hunger and cold break first."
     }
   },
   {
@@ -1316,6 +1548,10 @@
     ],
     "metabolic": {
       "daily": 0
+    },
+    "deepening": {
+      "2": "Every road is home.",
+      "3": "The world provides: you never arrive empty-handed."
     }
   },
   {
@@ -1331,6 +1567,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 40
+    },
+    "deepening": {
+      "2": "Water is home.",
+      "3": "You are the river: currents carry you where you will."
     }
   },
   {
@@ -1346,6 +1586,10 @@
     "modifiers": [],
     "metabolic": {
       "daily": 30
+    },
+    "deepening": {
+      "2": "Darkness is an old friend.",
+      "3": "You see in perfect dark: night is your country."
     }
   },
   {
@@ -1358,7 +1602,11 @@
     "unlock": {
       "type": "system_offer"
     },
-    "modifiers": []
+    "modifiers": [],
+    "deepening": {
+      "2": "Every tongue is yours.",
+      "3": "You speak the unsaid: meaning beyond words."
+    }
   },
   {
     "id": "field_medicine",
@@ -1374,6 +1622,10 @@
       "amount": 20,
       "cooldown": "daypart",
       "target": "self"
+    },
+    "deepening": {
+      "2": "You can work on others now \u2014 treat sick villagers, not just yourself. (Costs you 150 kcal: food becomes healing.)",
+      "3": "Your hands know infection \u2014 bacterial sicknesses yield to you even unnamed."
     }
   },
   {
@@ -1388,6 +1640,10 @@
     "active": {
       "type": "cure_disease",
       "cooldown": "day"
+    },
+    "deepening": {
+      "2": "Your teas bite deeper \u2014 easing lasts 5 day-parts, not 3.",
+      "3": "MASTER HERBALIST: you read sickness like a book. Your cures no longer need a diagnosis first."
     }
   },
   {
@@ -1406,7 +1662,11 @@
     "paths": [
       "caregiver",
       "forager"
-    ]
+    ],
+    "deepening": {
+      "2": "Your purifications hold \u2014 treated water stays safe for days.",
+      "3": "MASTER: you purify at scale \u2014 a whole barrel in the time of a cup."
+    }
   },
   {
     "id": "brawler_instinct",
@@ -1430,7 +1690,11 @@
     },
     "synergyHints": [
       "With Adrenaline Control: act first, hit hard"
-    ]
+    ],
+    "deepening": {
+      "2": "You act first in every fight.",
+      "3": "You see the killing blow before they do."
+    }
   },
   {
     "id": "adrenaline_control",
@@ -1451,7 +1715,11 @@
     },
     "synergyHints": [
       "Brawler's Instinct: steady the surge first, then throw it all into one strike."
-    ]
+    ],
+    "deepening": {
+      "2": "+60% damage (was +30%).",
+      "3": "You fight through pain. Wounds don't slow you."
+    }
   },
   {
     "id": "intimidating_presence",
@@ -1489,6 +1757,10 @@
     "unlock": {
       "type": "trial",
       "trial": "intimidate_someone"
+    },
+    "deepening": {
+      "2": "Most back down. Some join you.",
+      "3": "Monsters hesitate. They feel you."
     }
   },
   {
@@ -1506,6 +1778,10 @@
     ],
     "unlock": {
       "type": "granted"
+    },
+    "deepening": {
+      "2": "You can talk your way out of anything.",
+      "3": "People believe you. Even when they shouldn't."
     }
   },
   {
@@ -1517,6 +1793,10 @@
     "unlock": {
       "type": "trial",
       "trial": "hear_10_rumors"
+    },
+    "deepening": {
+      "2": "You hear everything. Nothing is secret.",
+      "3": "Travelers seek you out with news."
     }
   },
   {
@@ -1552,7 +1832,11 @@
     "paths": [
       "socialite",
       "caregiver"
-    ]
+    ],
+    "deepening": {
+      "2": "You can stop any fight.",
+      "3": "Warring villages ask you to mediate."
+    }
   },
   {
     "id": "pathfinder",
@@ -1569,24 +1853,31 @@
     ],
     "unlock": {
       "type": "granted"
+    },
+    "deepening": {
+      "2": "Every step costs less. Distance shrinks.",
+      "3": "You never get lost. Ever."
     }
   },
   {
     "id": "eagle_eye",
     "name": "Eagle Eye",
     "pool": "exploration",
-    "description": "You see the ruin on the horizon. The smoke. The movement. Before anyone else.",
+    "description": "You see the ruin on the horizon. The smoke. The movement. Before anyone else. Distant finds come easier.",
     "modifiers": [
       {
-        "target": "forage.rare_find_chance",
+        "target": "ruin.find_mult",
         "op": "add",
-        "value": 0.05,
-        "scale": "level"
+        "value": 0.25
       }
     ],
     "unlock": {
       "type": "trial",
       "trial": "discover_5_locations"
+    },
+    "deepening": {
+      "2": "Rare finds catch your eye while foraging.",
+      "3": "The odd one out finds you more often now."
     }
   },
   {
@@ -1607,7 +1898,11 @@
     },
     "synergyHints": [
       "Open Book: catch the flicker, then read what the room does with it."
-    ]
+    ],
+    "deepening": {
+      "2": "You catch most lies. The hands always tell.",
+      "3": "You know WHY they're lying."
+    }
   },
   {
     "id": "evidence_board",
@@ -1618,6 +1913,10 @@
     "unlock": {
       "type": "trial",
       "trial": "catch_3_lies"
+    },
+    "deepening": {
+      "2": "Contradictions glow.",
+      "3": "You reconstruct events from fragments."
     }
   },
   {
@@ -1644,9 +1943,12 @@
     ],
     "metabolic": {
       "daily": 40
+    },
+    "deepening": {
+      "2": "Fire is a friend.",
+      "3": "You are the flame: fire obeys your mood."
     }
   },
-  
   {
     "id": "stalk",
     "name": "Stalk",
@@ -1680,7 +1982,11 @@
       "hunter",
       "drifter",
       "explorer"
-    ]
+    ],
+    "deepening": {
+      "2": "Distance closes without permission.",
+      "3": "You become landscape: watching eyes slide off you."
+    }
   },
   {
     "id": "blood_trail",
@@ -1708,7 +2014,11 @@
     "paths": [
       "hunter",
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "Old blood speaks as loud as fresh.",
+      "3": "You follow trails days cold \u2014 the land remembers, and so do you."
+    }
   },
   {
     "id": "ambush",
@@ -1751,7 +2061,11 @@
     "paths": [
       "hunter",
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "You don't set ambushes. You become them.",
+      "3": "Your ambushes are perfect: the enemy never gets a first turn."
+    }
   },
   {
     "id": "animal_ken",
@@ -1788,7 +2102,11 @@
       "hunter",
       "caregiver",
       "drifter"
-    ]
+    ],
+    "deepening": {
+      "2": "Their moods are weather \u2014 readable, predictable.",
+      "3": "You know what an animal will do before it does. All of them."
+    }
   },
   {
     "id": "water_breathing",
@@ -1815,7 +2133,11 @@
     "paths": [
       "explorer",
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "The deep is shallow.",
+      "3": "You belong below: the water hides and feeds you."
+    }
   },
   {
     "id": "trade_of_blows",
@@ -1858,7 +2180,11 @@
     ],
     "paths": [
       "brawler"
-    ]
+    ],
+    "deepening": {
+      "2": "Every exchange teaches. You learn faster than they hit.",
+      "3": "You turn their strength against them: their hits open your counters."
+    }
   },
   {
     "id": "unbreakable",
@@ -1895,7 +2221,11 @@
     "paths": [
       "brawler",
       "survivalist"
-    ]
+    ],
+    "deepening": {
+      "2": "Pain is information. You read it and keep going.",
+      "3": "You cannot be broken: once per fight, ignore what would drop you."
+    }
   },
   {
     "id": "war_cry",
@@ -1938,7 +2268,11 @@
     "paths": [
       "brawler",
       "socialite"
-    ]
+    ],
+    "deepening": {
+      "2": "Your voice is a weapon now.",
+      "3": "Your cry is legend: enemies break before the fighting starts."
+    }
   },
   {
     "id": "haymaker",
@@ -1971,8 +2305,12 @@
     ],
     "paths": [
       "brawler"
-    ]
-  }  ,
+    ],
+    "deepening": {
+      "2": "The big swing always lands where it hurts.",
+      "3": "One perfect blow: your haymaker can end a fight outright."
+    }
+  },
   {
     "description": "You can smell water. And fear. You've never told anyone \u2014 people look at you funny when you find things by smell.",
     "id": "bloodhound",
@@ -1992,6 +2330,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Scent is sight.",
+      "3": "You smell truth: fear, lies, and water, all distinct."
     }
   },
   {
@@ -2013,6 +2355,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Your calm is contagious.",
+      "3": "Beasts know you: predators stand down in your presence."
     }
   },
   {
@@ -2034,6 +2380,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Plants lean toward you.",
+      "3": "The green obeys: you can coax growth from bare ground."
     }
   },
   {
@@ -2056,6 +2406,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Your gut is iron.",
+      "3": "You can eat anything: poison is just spice to you now."
     }
   },
   {
@@ -2078,6 +2432,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Darkness is an old friend.",
+      "3": "You see in perfect dark: night is your country."
     }
   },
   {
@@ -2099,6 +2457,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Every step costs less. Distance shrinks.",
+      "3": "You never get lost. Ever."
     }
   },
   {
@@ -2121,6 +2483,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Stillness is strength.",
+      "3": "Your hands never fail: the delicate impossible is routine."
     }
   },
   {
@@ -2142,6 +2508,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "You hear weather coming.",
+      "3": "The sky speaks: you know storms days ahead, and their moods."
     }
   },
   {
@@ -2163,6 +2533,10 @@
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
+    },
+    "deepening": {
+      "2": "Your touch knows.",
+      "3": "Hands that heal and know: you feel sickness like a texture."
     }
   }
 ]

@@ -73,11 +73,21 @@
     const all = (scholar.abilities || []).concat(scholar.backgroundAbilities || []);
     all.forEach(entry => {
       const id = (entry && entry.id) || entry;
-      const a = byId[id];
+      // EVOLUTION: evolved forms keep their root's modifiers (look up by
+      // evolvedFrom), scaled at the entry's level (3, the capstone).
+      const a = byId[id] || (entry && entry.evolvedFrom ? byId[entry.evolvedFrom] : null);
       if (a && a.modifiers) {
         const lvl = levelOf(entry);
         for (const m of a.modifiers) {
           out.push(Object.assign({}, m, { value: scaledValue(m, lvl) }));
+        }
+      }
+      // EVOLUTION (2026-10-11): evolved forms carry their own modifiers on
+      // the scholar entry (entry.evolution.modifiers). The root's modifiers
+      // still apply via byId above — evolution ADDS, never replaces.
+      if (entry && entry.evolution && entry.evolution.modifiers) {
+        for (const m of entry.evolution.modifiers) {
+          out.push(Object.assign({ source: 'evolution:' + entry.evolution.id }, m));
         }
       }
     });
@@ -157,7 +167,14 @@
   // system abilities and background abilities. Returns the entry (or level via .level).
   function hasAbility(scholar, id) {
     const all = (scholar.abilities || []).concat(scholar.backgroundAbilities || []);
-    return all.find(entry => ((entry && entry.id) || entry) === id) || null;
+    return all.find(entry => {
+      const eid = ((entry && entry.id) || entry);
+      if (eid === id) return true;
+      // EVOLUTION LINEAGE (2026-10-11): an evolved ability counts as its root
+      // for synergy legs, hooks, and level checks. The root is never lost.
+      if (entry && entry.evolvedFrom === id) return true;
+      return false;
+    }) || null;
   }
 
   function abilityLevel(scholar, id) {

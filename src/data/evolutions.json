@@ -1,0 +1,661 @@
+{
+ "_comment": "ABILITY EVOLUTIONS \u2014 Steve 2026-10-11. At L3 mastery, an ability EVOLVES: the player chooses what it becomes. Family-level (pool-level), 2 divergent paths per family. Every evolution moves the needle (see needle{}) AND changes how the ability plays (see verb). Retune-first, never cut.",
+ "evolutions": [
+  {
+   "choiceText": "Your hands have learned perfect economy. Healing shouldn't cost the healer.",
+   "family": "care",
+   "flags": [
+    "treat_free"
+   ],
+   "flavor": "The knowledge in your fingers stops asking permission.",
+   "id": "care__surgeon",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "healing.amount",
+     "value": 1.25
+    }
+   ],
+   "name": "Combat Surgeon",
+   "needle": {
+    "metric": "kcal spent on treatments",
+    "delta": "0 kcal per treatment (was 150)",
+    "scenario": "heal"
+   },
+   "verb": "Treating others costs you nothing \u2014 your hands have learned perfect economy. (Was 150 kcal.)",
+   "lane": "human"
+  },
+  {
+   "choiceText": "You've seen what sickness does to a village. Your care wants to reach further \u2014 to stop it before it starts.",
+   "family": "care",
+   "flags": [
+    "treatment_ward"
+   ],
+   "flavor": "You don't just heal the sick anymore. You make the village uninviting to sickness itself.",
+   "id": "care__warden",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "healing.amount",
+     "value": 1.25
+    }
+   ],
+   "name": "Plague Warden",
+   "needle": {
+    "delta": "treated villagers resist new infection 3 days",
+    "metric": "village disease cases per season",
+    "scenario": "disease"
+   },
+   "verb": "Treating a villager also hardens them: -30% disease chance for 3 days.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "The trail has never lied to you. Now it never lets go \u2014 wounded prey cannot shake you.",
+   "family": "fieldcraft",
+   "flags": [],
+   "flavor": "You don't follow the blood. The blood follows you, begging to be found.",
+   "id": "fieldcraft__bloodline",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "hunt.success",
+     "value": 0.15
+    }
+   ],
+   "name": "Bloodline",
+   "needle": {
+    "metric": "hunt success rate",
+    "delta": "+15% hunt success",
+    "scenario": "hunt"
+   },
+   "verb": "Wounded prey cannot shake you: +15% hunt success as the blood tells you everything.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "You wake knowing where the herds will be. Not guessing \u2014 knowing, the way you know your own hands.",
+   "family": "fieldcraft",
+   "flags": [],
+   "flavor": "The animals dream, and lately, so do you. Same dream.",
+   "id": "fieldcraft__herd_dream",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "hunt.find_chance",
+     "value": 0.2
+    }
+   ],
+   "name": "Herd Dream",
+   "needle": {
+    "delta": "+1 hunt opportunity/day",
+    "metric": "hunt kcal per day",
+    "scenario": "hunt"
+   },
+   "verb": "You sense herds before you see them \u2014 the hunt comes to you.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "The first seconds of a fight have always been yours. Now they belong to you completely \u2014 and so do the seconds after.",
+   "family": "combat",
+   "flags": [
+    "counter_on_miss"
+   ],
+   "flavor": "Something old wakes up when the fighting starts. It is very good at this.",
+   "id": "combat__red_mist",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "combat.strike_damage",
+     "value": 1.3
+    }
+   ],
+   "name": "Red Mist",
+   "needle": {
+    "delta": "+1 counterattack on enemy miss",
+    "metric": "damage per round (first 3 rounds)",
+    "scenario": "combat"
+   },
+   "verb": "Strike first AND counterattack: +1 free strike when an enemy misses you.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "You've spent fights watching others bleed. Your body wants to be the wall between them and the teeth.",
+   "family": "combat",
+   "flags": [
+    "intercept_ally"
+   ],
+   "flavor": "You stop dodging. You start standing in the way. It works.",
+   "id": "combat__iron_warden",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "combat.damage_taken",
+     "value": 0.7
+    }
+   ],
+   "name": "Iron Warden",
+   "needle": {
+    "delta": "1 intercepted hit/fight",
+    "metric": "ally damage taken per fight",
+    "scenario": "combat"
+   },
+   "verb": "Intercept: take a hit meant for an ally once per fight.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Fire and smoke have stopped being tools. They're collaborators now \u2014 they want the food to last as much as you do.",
+   "family": "craft",
+   "flags": [
+    "smoke_never_fails"
+   ],
+   "flavor": "The smoke curls the way you ask it to. You've stopped finding that strange.",
+   "id": "craft__smoke_prophet",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "food.spoilage_days",
+     "value": 1.5
+    }
+   ],
+   "name": "Smoke Prophet",
+   "needle": {
+    "delta": "+50% yield, 0% failure",
+    "metric": "preserved kcal per smoking session",
+    "scenario": "food"
+   },
+   "verb": "Smoking never fails and yields +50%: the smoke obeys.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Every carcass you've dressed taught you something. Now nothing is wasted \u2014 bone, sinew, organ, all of it feeds someone.",
+   "family": "craft",
+   "flags": [],
+   "flavor": "The old ones had a word for people like you. It meant 'the one who feeds.'",
+   "id": "craft__waste_not",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "hunt.meat_yield",
+     "value": 1.6
+    }
+   ],
+   "name": "Waste Not",
+   "needle": {
+    "delta": "+60% butcher yield",
+    "metric": "kcal per carcass",
+    "scenario": "food"
+   },
+   "verb": "Butchering yields +60%: you use the whole animal.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "People listen when you speak now. Not politely \u2014 really. Your word can lift someone or end them.",
+   "family": "social",
+   "flags": [],
+   "flavor": "You never wanted power. That's exactly why they trust you with it.",
+   "id": "social__kingmaker",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "trust.gain_mult",
+     "value": 1.5
+    }
+   ],
+   "name": "Kingmaker",
+   "needle": {
+    "delta": "+50% trust on endorsed actions",
+    "metric": "trust gained per endorsement",
+    "scenario": "social"
+   },
+   "verb": "Your endorsement decides leadership challenges: +50% trust gain when backing someone.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Villagers tell you things they tell no one else. The weight of it is becoming a kind of sight.",
+   "family": "social",
+   "flags": [],
+   "flavor": "Every secret is a thread. You're starting to see the whole cloth.",
+   "id": "social__confessor",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "social.lie_detect",
+     "value": 0.3
+    }
+   ],
+   "name": "Confessor",
+   "needle": {
+    "delta": "+1 revealed secret/week",
+    "metric": "hidden plots detected per season",
+    "scenario": "social"
+   },
+   "verb": "Secrets surface around you: your lie sense (+0.3) turns whispers into warnings.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Distance has become a suggestion. The land between fires is yours now \u2014 walk it like you own it.",
+   "family": "exploration",
+   "flags": [],
+   "flavor": "You don't get lost. The land gets found.",
+   "id": "exploration__path_lord",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "travel.cost_mult",
+     "value": 0.5
+    }
+   ],
+   "name": "Path Lord",
+   "needle": {
+    "delta": "-50% travel kcal cost",
+    "metric": "kcal spent per expedition",
+    "scenario": "travel"
+   },
+   "verb": "Travel costs half: you walk the world like a road you built.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "You see further than your feet can take you. The next valley, the next fire \u2014 read them before you walk.",
+   "family": "exploration",
+   "flags": [],
+   "flavor": "The horizon leans in when you look at it.",
+   "id": "exploration__far_seer",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "ruin.find_mult",
+     "value": 0.3
+    }
+   ],
+   "name": "Far Seer",
+   "needle": {
+    "delta": "+1 free scouting/day",
+    "metric": "intel gathered without travel",
+    "scenario": "travel"
+   },
+   "verb": "You read distant land like a map: +30% ruin finds without the wasted trips.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Lies have textures now. You don't catch them \u2014 you see through them to the fear underneath.",
+   "family": "investigation",
+   "flags": [],
+   "flavor": "Everyone lies. Now you know what the lie is FOR.",
+   "id": "investigation__mind_reader",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "social.lie_detect",
+     "value": 0.4
+    }
+   ],
+   "name": "Mind Reader",
+   "needle": {
+    "delta": "+40% motive detection",
+    "metric": "betrayal plots detected early",
+    "scenario": "social"
+   },
+   "verb": "See MOTIVES, not just lies: know why they're lying, every time.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "Places remember. You've learned to ask them what they saw.",
+   "family": "investigation",
+   "flags": [],
+   "flavor": "The ground keeps receipts. You're learning to read them.",
+   "id": "investigation__cold_case",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "drama.resolve_bonus",
+     "value": 0.25
+    }
+   ],
+   "name": "Cold Case",
+   "needle": {
+    "delta": "+1 scene reconstruction/week",
+    "metric": "mysteries solved per season",
+    "scenario": "social"
+   },
+   "verb": "Scenes speak: +25% drama resolution as you reconstruct what happened.",
+   "lane": "human"
+  },
+  {
+   "choiceText": "The knack was never a trick. It was inheritance \u2014 something your bloodline carried and forgot. It's remembering now.",
+   "family": "latent_knack",
+   "flags": [],
+   "flavor": "Your grandmother had this. Hers was stronger. Yours is catching up.",
+   "id": "latent_knack__old_blood",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "luck.global",
+     "value": 1.2
+    }
+   ],
+   "name": "Old Blood",
+   "needle": {
+    "delta": "knack teachable to 1 villager",
+    "metric": "village capability (new knack holder)",
+    "scenario": "social"
+   },
+   "verb": "The knack deepens into ancestry: +20% luck as the old blood wakes.",
+   "lane": "human-deep"
+  },
+  {
+   "choiceText": "The knack is spreading \u2014 not stronger, wider. A second sense is waking up alongside the first.",
+   "family": "latent_knack",
+   "flags": [],
+   "flavor": "You were always more than one sense. You just never noticed.",
+   "id": "latent_knack__second_sight",
+   "modifiers": [
+    {
+     "op": "add",
+     "target": "monster.detect_chance",
+     "value": 0.25
+    }
+   ],
+   "name": "Second Sight",
+   "needle": {
+    "delta": "+25% danger detection",
+    "metric": "ambushes detected early",
+    "scenario": "stealth"
+   },
+   "verb": "A second sense wakes: +25% early danger detection, always on.",
+   "lane": "human-deep"
+  },
+  {
+   "choiceText": "The System's gift is germinating. It wants to grow beyond what was given \u2014 and the System is DELIGHTED.",
+   "family": "system_utility",
+   "flags": [],
+   "flavor": "\"OH! It's MOLTING! We didn't program molting! KEEP GOING!\"",
+   "id": "system_utility__sovereign",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "forage.yield",
+     "value": 1.6
+    }
+   ],
+   "name": "Green Sovereign",
+   "needle": {
+    "delta": "+60% forage yield",
+    "metric": "forage kcal per sweep",
+    "scenario": "forage"
+   },
+   "verb": "The gift overgrows its bounds: +60% forage yield, plants lean toward you.",
+   "lane": "alien"
+  },
+  {
+   "choiceText": "The System's gift is settling in \u2014 becoming hearth, not tool. Your camp is becoming something the System didn't design.",
+   "family": "system_utility",
+   "flags": [],
+   "flavor": "\"It's making a NEST?! The gift is making a NEST! The sponsors are crying!\"",
+   "id": "system_utility__hearth",
+   "modifiers": [
+    {
+     "op": "multiply",
+     "target": "food.eat_target_mult",
+     "value": 1.3
+    }
+   ],
+   "name": "Hearth King",
+   "needle": {
+    "delta": "+30% rest efficiency",
+    "metric": "kcal recovered per rest",
+    "scenario": "food"
+   },
+   "verb": "Your camp becomes a hearth: food goes +30% further when you rest.",
+   "lane": "alien"
+  },
+  {
+   "id": "system_strange__beautiful_chaos",
+   "family": "system_strange",
+   "name": "Beautiful Chaos",
+   "lane": "alien",
+   "choiceText": "The System's strangest gifts don't break. They BEND \u2014 and lately they've been bending toward you.",
+   "flavor": "\"The chaos has a FAVORITE! It's YOU! The statisticians are furious!\"",
+   "needle": {
+    "metric": "favorable RNG outcomes per session",
+    "delta": "+20% luck on all rolls",
+    "scenario": "luck"
+   },
+   "verb": "Randomness bends toward you: +20% luck on every roll the game makes.",
+   "modifiers": [
+    {
+     "target": "luck.global",
+     "op": "add",
+     "value": 0.2
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_strange__method_madness",
+   "family": "system_strange",
+   "name": "Method in Madness",
+   "lane": "alien",
+   "choiceText": "The madness has a method and you've found it. The wacky gifts are starting to rhyme with each other.",
+   "flavor": "\"It's COMPOSING! The nonsense is COMPOSING! Someone get this a RECORD DEAL!\"",
+   "needle": {
+    "metric": "synergies discovered per season",
+    "delta": "+50% synergy discovery rate",
+    "scenario": "synergy"
+   },
+   "verb": "Strange gifts resonate: +50% synergy discovery when combining odd abilities.",
+   "modifiers": [
+    {
+     "target": "drama.resolve_bonus",
+     "op": "multiply",
+     "value": 1.5
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_combat__apex",
+   "family": "system_combat",
+   "name": "Apex Predator",
+   "lane": "alien",
+   "choiceText": "The System's combat gift is done playing. It wants the red truth of the thing.",
+   "flavor": "\"THERE it is! The KILLING shape! We KNEW it was in there!\"",
+   "needle": {
+    "metric": "damage per round",
+    "delta": "+60% strike damage",
+    "scenario": "combat"
+   },
+   "verb": "The gift becomes the hunt itself: +60% strike damage, and prey knows it.",
+   "modifiers": [
+    {
+     "target": "combat.strike_damage",
+     "op": "multiply",
+     "value": 1.6
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_combat__untouchable",
+   "family": "system_combat",
+   "name": "Untouchable",
+   "lane": "alien",
+   "choiceText": "The System's combat gift has learned the other half of fighting: not being hit.",
+   "flavor": "\"It DODGES now! The gift DODGES! Teach it to do taxes next!\"",
+   "needle": {
+    "metric": "damage taken per fight",
+    "delta": "+25% dodge chance",
+    "scenario": "combat"
+   },
+   "verb": "The gift learns evasion: +25% dodge chance, and it looks effortless.",
+   "modifiers": [
+    {
+     "target": "combat.dodge_chance",
+     "op": "add",
+     "value": 0.25
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_social__beloved",
+   "family": "system_social",
+   "name": "Beloved Monster",
+   "lane": "alien",
+   "choiceText": "The System's social gift is flowering. The audience has a favorite, and it's you.",
+   "flavor": "\"The polls! THE POLLS! You're WINNING the polls! We don't even know what the polls ARE!\"",
+   "needle": {
+    "metric": "trust per social action",
+    "delta": "+60% trust gain",
+    "scenario": "social"
+   },
+   "verb": "The gift becomes charisma itself: +60% trust from every social action.",
+   "modifiers": [
+    {
+     "target": "trust.gain_mult",
+     "op": "multiply",
+     "value": 1.6
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_social__puppet",
+   "family": "system_social",
+   "name": "Puppet Master",
+   "lane": "alien",
+   "choiceText": "The System's social gift has learned the strings. You're not persuading anymore \u2014 you're conducting.",
+   "flavor": "\"It's playing them like an INSTRUMENT! A beautiful, ratings-friendly INSTRUMENT!\"",
+   "needle": {
+    "metric": "deals won per negotiation",
+    "delta": "+35% social leverage",
+    "scenario": "social"
+   },
+   "verb": "Social leverage becomes control: +35% intimidation, and crowds follow your lead.",
+   "modifiers": [
+    {
+     "target": "social.intimidate",
+     "op": "add",
+     "value": 0.35
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_dark__ascendant",
+   "family": "system_dark",
+   "name": "Ascendant Horror",
+   "lane": "alien-dark",
+   "choiceText": "The dark gift is done pretending to be a tool. It wants to be what it is.",
+   "flavor": "\"Oh no. OH NO. The dark one is BLOOMING. Ratings are UP though!\"",
+   "needle": {
+    "metric": "damage per round + enemy morale",
+    "delta": "+80% strike damage, fear aura",
+    "scenario": "combat"
+   },
+   "verb": "The dark gift ascends: +80% damage, and enemies feel dread before you strike.",
+   "modifiers": [
+    {
+     "target": "combat.strike_damage",
+     "op": "multiply",
+     "value": 1.8
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "system_dark__titan",
+   "family": "system_dark",
+   "name": "Titan",
+   "lane": "alien-dark",
+   "choiceText": "The dark gift has stopped whispering and started offering. Power, plainly, at a price you'll pretend not to see.",
+   "flavor": "\"The contract! It's writing its OWN contract! Legal is SCREAMING!\"",
+   "needle": {
+    "metric": "survivability (effective HP)",
+    "delta": "+50 max HP",
+    "scenario": "combat"
+   },
+   "verb": "The dark gift makes you vast: +50 max HP, and you feel every beat of it.",
+   "modifiers": [
+    {
+     "target": "health.max_add",
+     "op": "add",
+     "value": 50
+    }
+   ],
+   "flags": []
+  }
+ ],
+ "families": {
+  "care": {
+   "label": "Care",
+   "lane": "human"
+  },
+  "combat": {
+   "label": "Combat",
+   "lane": "human"
+  },
+  "craft": {
+   "label": "Craft",
+   "lane": "human"
+  },
+  "exploration": {
+   "label": "Exploration",
+   "lane": "human"
+  },
+  "fieldcraft": {
+   "label": "Fieldcraft",
+   "lane": "human"
+  },
+  "investigation": {
+   "label": "Investigation",
+   "lane": "human"
+  },
+  "latent_knack": {
+   "label": "Latent Knack",
+   "lane": "human-deep"
+  },
+  "social": {
+   "label": "Social",
+   "lane": "human"
+  },
+  "system_combat": {
+   "label": "System Combat",
+   "lane": "alien",
+   "tiers": [
+    "combat"
+   ]
+  },
+  "system_dark": {
+   "label": "System Dark",
+   "lane": "alien-dark",
+   "tiers": [
+    "vile",
+    "body_horror",
+    "overpowered"
+   ]
+  },
+  "system_social": {
+   "label": "System Social",
+   "lane": "alien",
+   "tiers": [
+    "social"
+   ]
+  },
+  "system_strange": {
+   "label": "System Strange",
+   "lane": "alien",
+   "tiers": [
+    "wacky",
+    "underpowered",
+    "rare",
+    "risky"
+   ]
+  },
+  "system_utility": {
+   "label": "System Utility",
+   "lane": "alien",
+   "tiers": [
+    "utility"
+   ]
+  }
+ }
+}
