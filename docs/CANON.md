@@ -25,6 +25,7 @@ twice in one day (2026-10-09).
 | docs/BALANCING.md | numbers, levers, targets | any balance change |
 | docs/TIME-ECONOMY.md | ticks, day-parts, pacing | action costs, durations |
 | docs/KIN.md | the Taking: half of adults taken at the Scattering, kids in stasis, return reserved for good table path | the taking, missing relatives, stasis kids, table kid-return |
+| docs/FANS.md | the audience gets faces: named alien fan personas with arcs | fans, audience, care packages, fan clubs, table testimony |
 
 ## Standing rules that keep getting violated (read twice)
 
