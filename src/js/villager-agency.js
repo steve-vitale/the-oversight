@@ -423,7 +423,12 @@
       if (what < 0.45) {
         a.know[vid].plants++;
         a.xp[vid].tracking += 1;
-        if (a.know[vid].plants % 3 === 0) {
+        // LONGSIM lever 3 (2026-10-11): a teachable plant-lesson entry every
+        // 2nd plant discovery (was every 3rd). Baseline: 7 entries / 20 runs
+        // x200d — the villager->player plant-teach path was nearly dead.
+        // Declining-by-construction is unchanged: one entry still spends one
+        // unique plant lesson (agencyTeachPlant).
+        if (a.know[vid].plants % 2 === 0) {
           st.teachable[vid] = st.teachable[vid] || [];
           st.teachable[vid].push({ topic: 'plants', day: this.state.scholar.day });
         }
