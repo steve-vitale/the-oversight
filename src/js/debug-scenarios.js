@@ -1225,6 +1225,47 @@
       Game.say('🐞 SCENARIO: aid-crisis. Hushwolf at the door, day 20, ' + (ovs[0] ? ovs[0].name : 'no village') + ' linked at trust 55.');
       Game.say('🐞 Try: Game.callForHelp("runner") / ("signal") / ("system") / ("cry", {abilityId:"war_cry"}). Office: Game.appointSwitchboard(<villagerId>) — see Game.switchboardCandidates().');
     },
+
+    // AUDIO SOUND CHECK (Steve 2026-10-11): debug scenarios so every
+    // audio surface can be verified on the phone. Two taps, in-fiction.
+    // Foreign-language voicing is intentionally untouched (voice-piper
+    // foreign-skip stays as is).
+    audioSystem() {
+      freshGame();
+      Game.state.systemArrived = true; // day-7 state, trivially set
+      Game.say('');
+      Game.say('🔊 SOUND CHECK: System voice. The System is calibrating its voice. Stand by.');
+      Game.say('🔊 Three lines, a few seconds apart: the day-7 cinematic, the compliment sandwich, then a dark one.');
+      // playVoice supersedes (never queues speech behind speech), so the
+      // lines are staggered — a sound board, not a pile-up.
+      ['sys-day7-01', 'sys-silly-11', 'sys-dark-10'].forEach(function (id, i) {
+        setTimeout(function () { Game.playSystemLine(id); }, i * 9000);
+      });
+    },
+
+    audioVillager() {
+      freshGame();
+      const placed = placeVillagers([[3, 3], [5, 5]]);
+      Game.say('');
+      Game.say('🔊 SOUND CHECK: villager voice. Two villagers stand beside you' + (placed.length ? ' (' + placed.map(npcName).join(', ') + ')' : '') + '.');
+      Game.say('🔊 Tap a villager, choose Talk — each spoken line should play in their own Piper voice. The 🗣️ toggle (title screen) must be on; your first tap unlocks audio.');
+    },
+
+    audioPersona() {
+      // Same real path as alienEncounter, plus the voice prompt.
+      SCENARIOS.alienEncounter();
+      Game.say('');
+      Game.say('🔊 SOUND CHECK: alien persona voice. Fight or threaten — the persona\'s combat banter should speak in their own voice.');
+    },
+
+    audioClaude() {
+      freshGame();
+      Game.say('');
+      Game.say('🔊 SOUND CHECK: the Claude scenes. Two separate events.');
+      Game.say('🔊 First, the last thing Claude said. Then — much later — what the System played for the village.');
+      setTimeout(function () { Game.playSystemLine('claude-lastwords'); }, 500);
+      setTimeout(function () { Game.playSystemLine('sys-the-sound'); }, 32000);
+    },
   };
 
   // RETIRED: scenarios we're confident are solid. Never deleted — saved for
@@ -1316,6 +1357,10 @@
       ['broadcastShow', '📺 Broadcast: full show end-to-end'],
       ['contestEligible', '📺 Contest eligibility check'],
       ['alienEncounter', '👤 Alien player encounter'],
+      ['audioSystem', '🔊 Sound check: System voice'],
+      ['audioVillager', '🔊 Sound check: villager voice'],
+      ['audioPersona', '🔊 Sound check: alien persona voice'],
+      ['audioClaude', '🔊 Sound check: the Claude scenes'],
     ];
   };
 
@@ -1332,6 +1377,7 @@
       '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving'],
       '📺 Contests & Shows': ['contestPit', 'contestHide', 'contestForage', 'contestWatch', 'showWhyEat', 'broadcastShow', 'contestEligible'],
       '👤 Alien Players': ['alienEncounter'],
+      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude'],
       '💍 Items': ['keepsake'],
     };
     // Only include categories that have at least one existing scenario
