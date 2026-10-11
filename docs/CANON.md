@@ -24,6 +24,7 @@ twice in one day (2026-10-09).
 | docs/SYSTEMS.md | abilities, slots, deepening | abilities, synergies |
 | docs/BALANCING.md | numbers, levers, targets | any balance change |
 | docs/TIME-ECONOMY.md | ticks, day-parts, pacing | action costs, durations |
+| docs/KIN.md | the Taking: half of adults taken at the Scattering, kids in stasis, return reserved for good table path | the taking, missing relatives, stasis kids, table kid-return |
 
 ## Standing rules that keep getting violated (read twice)
 
@@ -55,3 +56,7 @@ twice in one day (2026-10-09).
 - 2026-10-09: manifest created after the disease roster was reinvented from
   scratch twice in one day. docs/DISEASES.md, docs/BEAR.md, docs/PRESERVATION.md
   registered as the first canon docs.
+- 2026-10-11: docs/KIN.md — the Taking (Steve 2026-10-11): half of adults
+  taken at the Scattering day zero, not after week one; taken half's kids in
+  stasis; the System never confirms the taken dead or alive; kids' return
+  reserved for the good galactic table path.

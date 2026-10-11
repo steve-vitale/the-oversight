@@ -19621,7 +19621,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           id: 'watched', kicker: 'it watched you', button: 'fans?',
           lines: [
             { who: 'sys', text: 'We watched EVERYTHING! Every berry picked! Every fire lit! That was your SIGNATURE! You signed up by DOING THINGS! Consent via competence! Our lawyers LOVE it!' },
-            { who: 'sys', text: 'Some of you just... sat? All week? The audience got BORED. So we removed them. Poor sportsmanship! No hard feelings! (There were hard feelings. Briefly.)' },
+            { who: 'sys', text: 'FUN FACT! Half of humanity is GONE! We took them! Right at the START! The boring half — the sitters, the yawn-ers! The audience got BORED! Your relatives were probably in it! Statistics! Don\'t think about it! They\'re somewhere SAFE! Somewhere BORING! Like THEM! And their little ones are NAPPING! Very cozy! Very still! 🎉' },
             { who: 'sys', text: 'But YOU have FANS now! Twelve humans, each playing their own tiny games — and the audience has FAVORITES! (No, we won\'t say if it\'s you. Okay, it\'s you. Don\'t tell the others.)' },
           ],
         },
