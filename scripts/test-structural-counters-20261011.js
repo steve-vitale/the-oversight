@@ -178,8 +178,12 @@ function endCombat(Game) {
   unit('union_rep', { type: 'strike', target: {}, firstStrike: false }, false, 'strike_first needs first');
   unit('ducks_in_a_row', { type: 'strike', target: { segmentIndex: 2 } }, true, 'strike_nonhead fires');
   unit('ducks_in_a_row', { type: 'strike', target: { segmentIndex: 0 } }, false, 'strike_nonhead not the head');
-  unit('voice_mimic_radio', { type: 'move', windup: true, closer: true }, true, 'approach fires');
-  unit('voice_mimic_radio', { type: 'move', windup: true, closer: false }, false, 'approach needs closer');
+  // (break-it counters 2026-10-11: the approach prescription was INVERTED vs
+  // the engine — approaching feeds vmLure, the reveal needs 2 rounds of
+  // refusal. Rewired to keep_distance/3 with honest text.)
+  unit('voice_mimic_radio', { type: 'round_end', dist: 3 }, true, 'keep_distance fires at 3 (mimic: resist the lure)');
+  unit('voice_mimic_radio', { type: 'round_end', dist: 2 }, false, 'keep_distance not at 2');
+  unit('voice_mimic_radio', { type: 'move', windup: true, closer: true }, false, 'approach is no longer a live kind');
   unit('understudy', { type: 'strike', target: {}, freshWeapon: true }, true, 'fresh_weapon fires');
   unit('understudy', { type: 'strike', target: {}, freshWeapon: false }, false, 'fresh_weapon needs fresh');
   unit('lockpick_raccoon', { type: 'offer_food' }, true, 'offer_food fires');

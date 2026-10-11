@@ -26256,7 +26256,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           case 'offer_food': hit = ev.type === 'offer_food'; break;
           case 'wait': hit = ev.type === 'wait'; break;
           case 'move_windup': hit = ev.type === 'move' && !!ev.windup; break;
-          case 'move_x2': hit = ev.type === 'move_x2'; break;
+          case 'move_x2': hit = ev.type === 'move_x2'
+            && (!ctr.vary || !!ev.dirVaries)
+            && (ctr.tiles == null || (ev.movedTiles | 0) >= ctr.tiles); break;
           case 'approach': hit = ev.type === 'move' && !!ev.windup && !!ev.closer; break;
           case 'sidestep': hit = ev.type === 'move' && !!ev.wasInLane && !ev.inLane; break;
           case 'keep_distance': hit = ev.type === 'round_end' && ev.dist >= (ctr.tiles || 3); break;
@@ -27162,14 +27164,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               closer: d1 < d0, via: 'trick' });
           }
           // move_x2: moved on two consecutive rounds (review_drone, nightcourt,
-          // warranty_caller, landlord — never the same dodge twice).
+          // warranty_caller, landlord). review_drone's trick adds "never the
+          // same way" (ctr.vary) — enforced via the move direction; the
+          // warranty caller's "two or more tiles" (ctr.tiles) — enforced via
+          // the tiles actually moved this turn. (break-it counters 2026-10-11:
+          // both were copy-only before — any two consecutive shuffles counted.)
+          const _mDir = Math.sign(p1.mx - _ctrSnap.px) + ',' + Math.sign(p1.my - _ctrSnap.py);
+          const _mTiles = (path || []).length;
           if (f._counterLastMoveRound === f.round - 1) {
+            const _dirVaries = !!(f._counterLastMoveDir && f._counterLastMoveDir !== _mDir);
             for (const m of f.fighters) {
               if (m.kind !== 'monster' || !m.alive || m.fled) continue;
-              this.checkMonsterCounter((m.mdef || {}).id, { type: 'move_x2', via: 'trick' });
+              this.checkMonsterCounter((m.mdef || {}).id, {
+                type: 'move_x2', via: 'trick', dirVaries: _dirVaries, movedTiles: _mTiles });
             }
           }
           f._counterLastMoveRound = f.round;
+          f._counterLastMoveDir = _mDir;
         }
       } catch (e) {}
       const [lx, ly] = path[path.length - 1];
@@ -27763,12 +27774,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // wounding the lead, interrupting a windup, first blood on the rep,
       // hitting what it hasn't seen. Evaluated BEFORE the understudy's
       // usSeen recording below, so fresh_weapon reads honestly.
+      // (break-it counters 2026-10-11: fresh_weapon used to be free on the
+      // FIRST strike of the fight — no weapon had been seen yet, so every
+      // opening swing "discovered" the switch-weapons trick with zero
+      // behavior change. It now requires the understudy to have SEEN at
+      // least one weapon already: the trick is the SWITCH, mid-fight.)
       try {
         const wname = (w && w.name) || 'strike';
         const firstStrike = ((this.tbfight || {})._counterStrikes | 0) === 0;
+        const seenAny = t && t.usSeen && Object.keys(t.usSeen).length > 0;
         this.checkMonsterCounter((t.mdef || {}).id, {
           type: 'strike', target: t, windup: !!(t && t.telegraph),
-          firstStrike, freshWeapon: !(t.usSeen && t.usSeen[wname]), via: 'trick' });
+          firstStrike, freshWeapon: !!(seenAny && !(t.usSeen[wname])), via: 'trick' });
         this.tbfight._counterStrikes = (this.tbfight._counterStrikes | 0) + 1;
       } catch (e) {}
       // UNDERSTUDY (Steve 2026-10-06): it watches you fight and learns. Record

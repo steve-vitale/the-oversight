@@ -236,7 +236,15 @@ Discovery channels (all reachable):
    strike_windup, strike_recovery, strike_first, strike_nonhead,
    fresh_weapon). `checkMonsterCounter(mid, ev)` fires from the action
    handlers (strike/wait/move/shout/offer-food/round-end); doing the trick
-   mid-fight discovers it immediately, with a beat.
+   mid-fight discovers it immediately, with a beat. Refinements (break-it
+   2026-10-11): `move_x2` honors `counter.vary` (review_drone — consecutive
+   moves must change direction) and `counter.tiles` (warranty_caller — the
+   move must cover 2+ tiles); `fresh_weapon` (understudy) requires the
+   understudy to have already seen a weapon — the trick is the mid-fight
+   SWITCH, not the opener. The `approach` kind was retired 2026-10-11: its
+   only user (voice_mimic_radio) prescribed the exact behavior the engine
+   punishes (approaching feeds the lure; the reveal needs refusal) — rewired
+   to `keep_distance`/3 with honest text.
 2. **Told at Haven** — `recordWaveKill` tracks `state.villageSlain[type]`;
    2+ village slain of a type unlocks the askAbout 'beasttricks' topic —
    villager experiences count (Steve 2026-10-10).

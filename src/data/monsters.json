@@ -1110,10 +1110,11 @@
   {
     "id": "voice_mimic_radio",
     "counter": {
-      "kind": "approach",
-      "trick": "Walk toward the voice",
-      "hint": "The first cry is always someone you know. The second is static.",
-      "reveal": "The voice is bait \u2014 it wants you to come closer. So do it: move TOWARD the cry once and the mimic drops the voice, exposed. Call its bluff. It has nothing once you stop running from the sound."
+      "kind": "keep_distance",
+      "tiles": 3,
+      "trick": "Don't walk toward the voice",
+      "hint": "The cry is bait \u2014 it wants you to come closer. The act only breaks if you refuse it.",
+      "reveal": "Resist the lure: don't move toward the crying. Two rounds of refusal and the act breaks \u2014 it's a radio, exposed and furious, and it has to re-spool before it rushes. That's your window."
     },
     "wave": 2,
     "name": "Static",
@@ -1338,6 +1339,7 @@
     "id": "review_drone",
     "counter": {
       "kind": "move_x2",
+      "vary": true,
       "trick": "Dodge unpredictably",
       "hint": "It scores your dodges. Patterns are what it grades.",
       "reveal": "It grades your dodges aloud \u2014 so stop giving it the same dodge twice. Move two rounds running, never the same way, and its lock breaks. Unpredictability is the only passing grade."
@@ -1450,7 +1452,7 @@
       "tiles": 3,
       "trick": "Be three tiles out",
       "hint": "The bloom is the timer. Two beats, then white.",
-      "reveal": "The bloom is the timer: two beats of brightening, then white. Be three tiles out or behind cover when it flares. The ember beat after is safe \u2014 walk in and finish it while it glows itself out."
+      "reveal": "The bloom is the timer: two beats of brightening, then white. Be three tiles out when it flares. The ember beat after is safe \u2014 walk in and finish it while it glows itself out."
     },
     "wave": 2,
     "name": "Inspiration",
@@ -1547,7 +1549,7 @@
       },
       "comment": "Encounter framework client. THE BRIGHTENING: settle (drifts until a foe is within 4, then SETS \u2014 never moves once set) \u2192 brighten (2 beats, escalating, holds position) \u2192 bloom (burst radius 2, 22-34) \u2192 ember (2 turns spent, harmless). Daylight disperses it.",
       "knownCue": "It glows brighter before detonation. When it flares, RUN.",
-      "knownTactics": "The bloom is the timer: two beats of brightening, then white. Be three tiles out or behind cover when it flares. The ember beat after is safe \u2014 it is spent."
+      "knownTactics": "The bloom is the timer: two beats of brightening, then white. Be three tiles out when it flares. The ember beat after is safe \u2014 it is spent."
     },
     "loot": {
       "chance": 0.15,
@@ -1673,6 +1675,7 @@
     "id": "warranty_caller",
     "counter": {
       "kind": "move_x2",
+      "tiles": 2,
       "trick": "Never stand still",
       "hint": "It can only dial a stationary target. The RING is the telegraph.",
       "reveal": "The RING is the telegraph \u2014 the pitch itself gives no warning. Move two or more tiles from where you stood when it dialed and the call drops. It can only dial a stationary target. Never stand still."
@@ -4059,7 +4062,7 @@
     "attack": {
       "name": "Sponsored Pause",
       "damage": [
-        19,
+        20,
         33
       ],
       "telegraph": "A giant floating AD glyph with a PROGRESS BAR \u2014 the bar is the telegraph. During the pause it repositions and heals, and you watch. After the bar fills, a 'skip ad' beat appears: skip faster if the audience likes you. Or look away \u2014 the ad's power is that you WATCH.",
