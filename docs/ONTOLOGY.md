@@ -315,9 +315,9 @@ Beat-tagged conversation. Every NPC line is tagged at generation time with its b
 **Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool), playerVoice()
 
 ### convo-dialogue (`convo-dialogue.js`)
-Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers and want post-turn processing.
+Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers. REBUILD (2026-10-11, Steve): the handlers speak through the want defs (engage/deflect/commit beats), pool every hardcoded line via convoPickCycle (the verbatim "Anyway." loop is dead), compose beats before emission via convoComposeDlg, advance the want arc directly (convoWantEngage), and emit ONLY through sayLine — the single emission choke point. New handlers: dlg:commit (formal commitment), dlg:heed (heeding a warning), dlg:stay (keeping company).
 
-**Provides:** convoTurn(vid, choiceId) -> dlg: beat handlers + want post-turn wrapper (menu building delegated to Game.buildMenu)
+**Provides:** convoTurn(vid, choiceId) -> dlg: beat handlers (menu building delegated to Game.buildMenu), convoComposeDlg(vid, line, choiceId) -> beat composition at selection time, convoMarkSubstantive(vid, choiceId) -> substance gate for early-return wrappers
 
 **Rules:**
 - beat_drives_menu: responses derive from the NPC's last utterance, not from state flags (code: buildMenu, Steve 2026-10-06; Phase 1 unified 2026-10-08)
@@ -325,6 +325,8 @@ Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu 
 - subject_change_explicit: the topic grab-bag lives behind "talk about something else", never as the default (code: buildMenu, Steve 2026-10-06)
 - thread_dry_collapse: "tell me more" is offered only while the thread has beats — once dry, the option disappears and the menu winds down instead of looping the admission line (code: buildMenu + dlg:more/dlg:react, 2026-10-06)
 - substantive_light_set: bare acknowledgments (goon/leave/recap/dlg:react/dlg:more/agree/joke/silence/nv:nod/nv:smile/nv:pointself) never flip c.substantive — only real engagement earns endConvo's mood residue, talk-capped at 40 (code: convoTurn wrapper + convoMarkSubstantive, break-it 2026-10-09 r8)
+- want_arc_in_handlers: every dlg: handler advances the want via convoWantEngage (engage/deflect/commit) and speaks the want def's beats — the want is the spine, not a post-turn afterthought (code: dlg:help/dlg:commit/dlg:heed/dlg:stay/dlg:cant/dlg:comfort, rebuild 2026-10-11)
+- emission_choke_point: no dlg: handler pushes NPC transcript entries directly — all NPC lines pass through sayLine (no-repeat ledger, transcript, feed) (code: every handler, rebuild 2026-10-11)
 - soft_probe_mounts_evidence: "That doesn't add up" is a real verb, not flavor — it mounts 'prodded' evidence on the first open doubt and the NPC visibly rattles with repeated prods (code: dlg:doubt handler, Steve 2026-10-06)
 
 **Consumes:** village.villagers, state.convos, convoGet(vid), buildMenu(vid) / convoChoices(vid) (conversation.js — the single menu pipeline), playerVoice()
@@ -361,15 +363,17 @@ Dialogue rethink Phase 2 (Steve 2026-10-08) — the Scene pipeline. One scene st
 **Consumes:** convoGet(vid), convoVoiceTier(vid), relDays(vid), playerDisposition(), convoMoodBand(vid), convoMoodShift(vid, d), convoMoodReceptivity(vid), dispositionCostMult(vid, temper), shiftDisposition(d), markEscalated(vid), mediatedBySystem(vid), remember(vid, type, note), village.trust, village.memory, convoSeeds
 
 ### convo-wants (`convo-wants.js`)
-Want-driven conversation architecture. Every conversation has an NPC want that gives it direction; beats acknowledge what the player said; endings plant seeds for next time.
+Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 
-**Provides:** convoSelectWant(vid) -> want object, convoWantOpener(vid, want) -> {line, thread}, convoComposeBeat(vid, rawBeat, playerSaid) -> composed beat that acknowledges the player, convoPlantSeed(vid, seed), convoCheckSeeds(vid) -> pending seed or null, convoAdvanceWant(vid, playerChoiceKind)
+**Provides:** convoSelectWant(vid) -> want object, convoWantOpener(vid, want) -> {line, thread}, convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit'), convoWantMenu(vid) -> menu options for the live want, convoWantCloseLine(vid) -> goodbye beat for the resolution, convoResolveWant(vid, how) -> plants seeds for unfinished business, convoPlantSeed(vid, seed) / convoCheckSeeds(vid), convoWantNews(vid) / convoWantWarning(vid) -> real content beats
 
 **Rules:**
 - want_driven: every conversation selects one NPC want at start; the want shapes the opening and provides beats (code: convoSelectWant, Steve 2026-10-06)
+- no_polite_queue: the want surfaces in the opening beats, never queued behind a continuer (code: startConvo, Steve 2026-10-11)
+- strangers_want: trust tier never gates want depth — a stranger opens with something they want (code: convoSelectWant, Steve 2026-10-11, overrides Principle 12)
 - beat_acknowledgment: NPC beats must acknowledge the player's last utterance before delivering new content — no non-sequiturs (code: convoComposeBeat, Steve 2026-10-06)
 - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
-- arc: want stages 0 (unspoken) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoAdvanceWant, Steve 2026-10-06)
+- arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
 
 **Consumes:** village.villagers, state.convos, npcNeeds (hunger/fear/social/energy)
 
