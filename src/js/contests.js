@@ -1054,9 +1054,9 @@
     why_eat: {
       setup: `📺 WHY DO THEY EAT? — the studio kitchen.\n\nSeventeen systems are watching a human boil water like it's a sacrament. The judges have never eaten. They are about to learn. The ingredients are real. The horror will be too.`,
       choices: [
-        { label: 'Cook the comfort dish', sub: 'the one your grandmother made', end: 'won', note: 'You cook it the slow way, the right way. Halfway through, one of the judges makes a sound like a kettle learning to cry. The audience is on its feet.', do: { kcal: -150, fanLane: { n: 3, why: 'comfort cooking on WHY DO THEY EAT?' } } },
-        { label: 'Cook the weird one', sub: 'fermented, alarming', end: 'mixed', note: 'You serve the fermented thing. The judges recoil — then lean back in, fascinated. Horror and delight, same bite. The chat can\'t look away.', do: { trauma: 3, fanLane: { n: 2, why: 'horror cooking on WHY DO THEY EAT?' } } },
-        { label: 'Lecture about chewing', sub: 'explain instead of cook', end: 'lost', note: 'You explain mastication for nine minutes. The judges take notes. The audience learns nothing and the chat roasts you in four languages.', do: { trauma: 2, fanLane: { n: 1, why: 'the chewing lecture' } } },
+        { label: 'Cook the comfort dish', sub: 'the one your grandmother made — -150 kcal', end: 'won', note: 'You cook it the slow way, the right way. Halfway through, one of the judges makes a sound like a kettle learning to cry. The audience is on its feet.', do: { kcal: -150, fanLane: { n: 3, why: 'comfort cooking on WHY DO THEY EAT?' } } },
+        { label: 'Cook the weird one', sub: 'fermented, alarming — 3 trauma', end: 'mixed', note: 'You serve the fermented thing. The judges recoil — then lean back in, fascinated. Horror and delight, same bite. The chat can\'t look away.', do: { trauma: 3, fanLane: { n: 2, why: 'horror cooking on WHY DO THEY EAT?' } } },
+        { label: 'Lecture about chewing', sub: 'explain instead of cook — 2 trauma', end: 'lost', note: 'You explain mastication for nine minutes. The judges take notes. The audience learns nothing and the chat roasts you in four languages.', do: { trauma: 2, fanLane: { n: 1, why: 'the chewing lecture' } } },
       ],
       win: `The judges don't understand food. But they understand YOU now, a little. Fan art of your grandmother's dish is already circulating.`,
       lose: `The lecture airs. It is, technically, television. Your village will quote it back at you forever.`,
@@ -1065,9 +1065,9 @@
     break_room: {
       setup: `📺 Break Room — the green room couch.\n\nThe host knows about the thing. The thing you did. The cameras are already rolling, and the audience can smell a confession coming.`,
       choices: [
-        { label: 'Own it', sub: 'confession, televised', end: 'mixed', note: 'You say it plainly, on the couch, to everyone. The host goes quiet — they wanted squirming, not honesty. The audience doesn\'t know whether to applaud.', do: { trauma: 4, fanLane: { n: 2, why: 'the couch confession' } } },
+        { label: 'Own it', sub: 'confession, televised — 4 trauma', end: 'mixed', note: 'You say it plainly, on the couch, to everyone. The host goes quiet — they wanted squirming, not honesty. The audience doesn\'t know whether to applaud.', do: { trauma: 4, fanLane: { n: 2, why: 'the couch confession' } } },
         { label: 'Deflect with gossip', sub: 'someone else\'s drama', end: 'won', note: 'You pivot so smoothly the host doesn\'t notice until it\'s too late. Someone ELSE\'s drama fills the segment. The village will have opinions about whose.', do: { fracture: 1, fanLane: { n: 2, why: 'the great deflection' } } },
-        { label: 'Walk out', sub: 'leave the couch', end: 'lost', note: 'You stand up mid-question and walk. The cameras follow you all the way to the door. The host calls it "powerful." You call it Tuesday.', do: { trauma: 3, fanLane: { n: -1, why: 'walked out of Break Room' } } },
+        { label: 'Walk out', sub: 'leave the couch — 3 trauma', end: 'lost', note: 'You stand up mid-question and walk. The cameras follow you all the way to the door. The host calls it "powerful." You call it Tuesday.', do: { trauma: 3, fanLane: { n: -1, why: 'walked out of Break Room' } } },
       ],
       win: `The deflection is studied in media classes on three worlds. Your drama stays yours. Someone else's doesn't.`,
       lose: `The walkout clip plays on loop. Powerful, they say. You say nothing, which only makes it worse.`,
@@ -1076,9 +1076,9 @@
     mouth_race: {
       setup: `📺 Mouth Race — sixty seconds, a mystery basket, one rival.\n\nThe other cook is already plating. The judges have very long utensils and no patience. Speed matters. So does not poisoning the judges.`,
       choices: [
-        { label: 'Speed, no fear', sub: 'burners up, fingers down', end: 'won', note: 'You move like a kitchen fire. Something sizzles, something singes — including you, slightly — and the plate lands with two seconds left. The judges blink.', do: { kcal: -100, dmg: [0, 4], fanLane: { n: 3, why: 'won the Mouth Race' } } },
+        { label: 'Speed, no fear', sub: 'burners up, fingers down — -100 kcal, 0-4 dmg', end: 'won', note: 'You move like a kitchen fire. Something sizzles, something singes — including you, slightly — and the plate lands with two seconds left. The judges blink.', do: { kcal: -100, dmg: [0, 4], fanLane: { n: 3, why: 'won the Mouth Race' } } },
         { label: 'Slow and perfect', sub: 'lose the race, win the dish', end: 'mixed', note: 'You ignore the clock and cook the thing properly. The buzzer finds you mid-garnish. The judges taste anyway — and go very quiet.', do: { fanLane: { n: 2, why: 'the perfect late plate' } } },
-        { label: 'Sabotage (lightly)', sub: 'a pinch of chaos', end: 'lost', note: 'You "accidentally" salt their station. The cameras catch the exact moment. The judges catch it too. The audience gasps, then boos, then laughs — at you.', do: { trauma: 5, fanLane: { n: -2, why: 'caught salting the rival' } } },
+        { label: 'Sabotage (lightly)', sub: 'a pinch of chaos — 5 trauma', end: 'lost', note: 'You "accidentally" salt their station. The cameras catch the exact moment. The judges catch it too. The audience gasps, then boos, then laughs — at you.', do: { trauma: 5, fanLane: { n: -2, why: 'caught salting the rival' } } },
       ],
       win: `Your plate wins on speed AND merit. The rival shakes your hand through gritted teeth. The galaxy replays the final garnish.`,
       lose: `The sabotage airs in slow motion. You are the villain of the week. Villains get fan mail too — the wrong kind.`,
@@ -1087,9 +1087,9 @@
     ask_human: {
       setup: `📺 Ask a Human — the hotline is open.\n\nSeventeen systems. The first caller asks about your childhood. The second asks about your taxes. The third asks what grief tastes like. There is no screening process.`,
       choices: [
-        { label: 'Answer honestly', sub: 'all of it, true', end: 'mixed', note: 'You answer the grief one truthfully. The line goes quiet across seventeen systems. Then the messages start — thousands of strangers saying "me too."', do: { trauma: 5, fanLane: { n: 3, why: 'the honest hour on Ask a Human' } } },
+        { label: 'Answer honestly', sub: 'all of it, true — 5 trauma', end: 'mixed', note: 'You answer the grief one truthfully. The line goes quiet across seventeen systems. Then the messages start — thousands of strangers saying "me too."', do: { trauma: 5, fanLane: { n: 3, why: 'the honest hour on Ask a Human' } } },
         { label: 'Answer with jokes', sub: 'deflect with charm', end: 'won', note: 'You turn every question into a bit. The taxes question becomes a five-minute routine. The galaxy laughs so hard the hotline crashes twice.', do: { fanLane: { n: 2, why: 'the comedy hour' } } },
-        { label: 'Hang up', sub: 'end the call', end: 'lost', note: 'You hang up on a caller mid-sentence. The dial tone is the loudest sound on television that night. The System replays it.', do: { trauma: 3, fanLane: { n: -1, why: 'hung up on the galaxy' } } },
+        { label: 'Hang up', sub: 'end the call — 3 trauma', end: 'lost', note: 'You hang up on a caller mid-sentence. The dial tone is the loudest sound on television that night. The System replays it.', do: { trauma: 3, fanLane: { n: -1, why: 'hung up on the galaxy' } } },
       ],
       win: `You are, briefly, the funniest human alive. The village quotes your taxes bit for weeks.`,
       lose: `The hang-up is the clip. Nine seconds of dial tone, forever. Strangers send you phones.`,
@@ -1098,9 +1098,9 @@
     death_reel: {
       setup: `📺 The Death Reel — tonight: YOUR greatest hits.\n\nThe falls. The screams. The time you ran from a squirrel. The village is watching WITH you, on the same couch, and nobody is looking away.`,
       choices: [
-        { label: 'Narrate it yourself', sub: "director's commentary", end: 'mixed', note: '"Here\'s where I realize the squirrel is winning." Your commentary is so good the reel becomes a different show — funnier, sadder, yours.', do: { trauma: 3, fanLane: { n: 3, why: 'narrated their own Death Reel' } } },
+        { label: 'Narrate it yourself', sub: "director's commentary — 3 trauma", end: 'mixed', note: '"Here\'s where I realize the squirrel is winning." Your commentary is so good the reel becomes a different show — funnier, sadder, yours.', do: { trauma: 3, fanLane: { n: 3, why: 'narrated their own Death Reel' } } },
         { label: 'Laugh along', sub: 'with the village', end: 'won', note: 'You laugh first and loudest, and the village laughs WITH you instead of at you. The reel can\'t hurt someone who\'s already in on the joke.', do: { unity: 1, fanLane: { n: 2, why: 'laughed with the reel' } } },
-        { label: 'Leave the room', sub: 'don\'t watch', end: 'lost', note: 'You leave. The cameras follow. The reel plays to your empty chair, and the galaxy watches you not watching. It\'s the saddest thing on TV tonight.', do: { trauma: 5, fanLane: { n: 1, why: 'the empty chair' } } },
+        { label: 'Leave the room', sub: 'don\'t watch — 5 trauma', end: 'lost', note: 'You leave. The cameras follow. The reel plays to your empty chair, and the galaxy watches you not watching. It\'s the saddest thing on TV tonight.', do: { trauma: 5, fanLane: { n: 1, why: 'the empty chair' } } },
       ],
       win: `The village adopts your commentary as canon. "The squirrel is winning" becomes a saying. You are in on every joke now.`,
       lose: `The empty-chair episode wins awards. You do not attend the ceremony.`,
@@ -1110,8 +1110,8 @@
       setup: `📺 The Moot — the village holds a trial, on camera.\n\nThe charge is read aloud. It might even be yours. The jury is seventeen systems of beings who have never been accused of anything. Your village fills the gallery. Everyone is performing, a little.`,
       choices: [
         { label: 'Argue the case', sub: 'rhetoric, televised', end: 'won', note: 'You argue like the galaxy is the jury — because it is. The points land. The prosecutor-drone objects to your charisma. Overruled, by applause.', do: { fanLane: { n: 3, why: 'won the televised trial' }, notability: 'showmanship' } },
-        { label: 'Confess everything', sub: 'disarm the court', end: 'mixed', note: 'You confess — all of it, plainly, on the record. The court does not know what to do with honesty. The audience does: it leans in.', do: { trauma: 4, fanLane: { n: 2, why: 'the televised confession' } } },
-        { label: 'Accuse the accuser', sub: 'turn it around', end: 'lost', note: 'You point at the prosecutor-drone. "Who watches the watchers?" The court finds this contemptuous. The galaxy finds it delicious. The verdict does not go your way.', do: { trauma: 3, fracture: 1, fanLane: { n: 1, why: 'contempt of the televised court' } } },
+        { label: 'Confess everything', sub: 'disarm the court — 4 trauma', end: 'mixed', note: 'You confess — all of it, plainly, on the record. The court does not know what to do with honesty. The audience does: it leans in.', do: { trauma: 4, fanLane: { n: 2, why: 'the televised confession' } } },
+        { label: 'Accuse the accuser', sub: 'turn it around — 3 trauma', end: 'lost', note: 'You point at the prosecutor-drone. "Who watches the watchers?" The court finds this contemptuous. The galaxy finds it delicious. The verdict does not go your way.', do: { trauma: 3, fracture: 1, fanLane: { n: 1, why: 'contempt of the televised court' } } },
       ],
       win: `Acquitted, applauded, archived. Law students on three worlds study your closing. The village quotes it back at you, badly, forever.`,
       lose: `Guilty, televised. The sentence is community service and the clip. Mostly the clip.`,
@@ -1120,8 +1120,8 @@
     nap_wars: {
       setup: `📺 Nap Wars — the arena is a couch.\n\nThe event: sleep, on camera, while the galaxy watches. Scoring on speed of onset, depth, and artistic snoring. Someone always snores.`,
       choices: [
-        { label: 'Commit to the nap', sub: 'sleep like the dead', end: 'won', note: 'You are out in ninety seconds. Deep, total, magnificent sleep. The judges weep. The sleep scientists in the audience take notes.', do: { heal: 5, fanLane: { n: 2, why: 'the ninety-second nap' } } },
-        { label: 'Fake it', sub: 'act asleep', end: 'lost', note: 'You fake it. The snore gives you away — it\'s rhythmic, performative, wrong. The judges confer. The verdict: "theater."', do: { trauma: 2, fanLane: { n: 1, why: 'the fake nap' } } },
+        { label: 'Commit to the nap', sub: 'sleep like the dead — +5 health', end: 'won', note: 'You are out in ninety seconds. Deep, total, magnificent sleep. The judges weep. The sleep scientists in the audience take notes.', do: { heal: 5, fanLane: { n: 2, why: 'the ninety-second nap' } } },
+        { label: 'Fake it', sub: 'act asleep — 2 trauma', end: 'lost', note: 'You fake it. The snore gives you away — it\'s rhythmic, performative, wrong. The judges confer. The verdict: "theater."', do: { trauma: 2, fanLane: { n: 1, why: 'the fake nap' } } },
         { label: 'Snore operatically', sub: 'weaponized', end: 'won', note: 'You snore in movements. Allegro, adagio, a finale that rattles the set. The judges have never seen anything like it. Neither has anyone.', do: { fanLane: { n: 3, why: 'the snore symphony' }, notability: 'showmanship' } },
       ],
       win: `You are the nap champion. The village treats you with new respect. Sleep has never been so televised.`,
@@ -1130,9 +1130,9 @@
     tiny_door: {
       setup: `📺 The Tiny Door — a door, knee-high, in the middle of the village.\n\nIt appeared at noon. It is very small. Someone has to go through. The audience has opinions about who, and the chat has a poll.`,
       choices: [
-        { label: 'Go through', sub: 'headfirst, obviously', end: 'won', note: 'You fold yourself through. Inside: a pantry of alien snacks, a tiny chair, and a note that says "WE KNEW IT WOULD BE YOU."', do: { prize: true, fanLane: { n: 2, why: 'went through the Tiny Door' } } },
-        { label: 'Send the drone', sub: 'let the System look', end: 'lost', note: 'You send a drone. It comes back with footage of snacks and a tiny chair. The chat\'s verdict is unanimous: coward.', do: { trauma: 2, fanLane: { n: -1, why: 'droned the Tiny Door' } } },
-        { label: 'Widen the door', sub: 'make it human-sized', end: 'mixed', note: 'You spend the afternoon with a saw. The door is now a door. The mystery is gone but the snacks are accessible. The audience mourns the mystery.', do: { kcal: -100, fanLane: { n: 1, why: 'de-mysteried the door' } } },
+        { label: 'Go through', sub: 'headfirst, obviously — prize', end: 'won', note: 'You fold yourself through. Inside: a pantry of alien snacks, a tiny chair, and a note that says "WE KNEW IT WOULD BE YOU."', do: { prize: true, fanLane: { n: 2, why: 'went through the Tiny Door' } } },
+        { label: 'Send the drone', sub: 'let the System look — 2 trauma', end: 'lost', note: 'You send a drone. It comes back with footage of snacks and a tiny chair. The chat\'s verdict is unanimous: coward.', do: { trauma: 2, fanLane: { n: -1, why: 'droned the Tiny Door' } } },
+        { label: 'Widen the door', sub: 'make it human-sized — -100 kcal', end: 'mixed', note: 'You spend the afternoon with a saw. The door is now a door. The mystery is gone but the snacks are accessible. The audience mourns the mystery.', do: { kcal: -100, fanLane: { n: 1, why: 'de-mysteried the door' } } },
       ],
       win: `The tiny chair is yours now. The note goes in the journal. The galaxy approves of your knees.`,
       lose: `The drone footage airs without you in it. You are a footnote in your own episode.`,
@@ -1143,7 +1143,7 @@
       choices: [
         { label: 'Cook it out', sub: 'stir until it\'s over', end: 'won', note: 'Somewhere between the custard and the crust, the grudge runs out of fuel. The pudding is perfect. You split it on camera and the village exhales.', do: { unity: 1, fanLane: { n: 2, why: 'the pudding truce' } } },
         { label: 'Cook to win', sub: 'perfect pudding, intact grudge', end: 'mixed', note: 'Your half is flawless. Their half is flawless. You do not speak except about temperatures. The pudding wins awards. The grudge continues, televised.', do: { fanLane: { n: 2, why: 'the cold war pudding' }, fracture: 1 } },
-        { label: 'Salt their half', sub: 'petty, televised', end: 'lost', note: 'You salt their half on camera, clearly, deliberately. The judges taste it. The galaxy tastes your pettiness. The pudding is ruined and so, briefly, are you.', do: { trauma: 4, fanLane: { n: -1, why: 'salted the pudding' } } },
+        { label: 'Salt their half', sub: 'petty, televised — 4 trauma', end: 'lost', note: 'You salt their half on camera, clearly, deliberately. The judges taste it. The galaxy tastes your pettiness. The pudding is ruined and so, briefly, are you.', do: { trauma: 4, fanLane: { n: -1, why: 'salted the pudding' } } },
       ],
       win: `The truce holds past the credits. The pudding recipe enters the village canon.`,
       lose: `The salted pudding airs in slow motion. You apologize for weeks. The pudding does not forgive.`,
@@ -1163,9 +1163,9 @@
     apology_tour: {
       setup: `📺 The Apology Tour — you must apologize for something you did in a dream.\n\nThe dream is shown. Everyone has seen it. The dream-you did the thing with total confidence. The real you must now answer for it.`,
       choices: [
-        { label: 'Apologize sincerely', sub: 'for a dream', end: 'mixed', note: '"I\'m sorry my subconscious did that." You mean it, which is the absurd part. The audience doesn\'t know whether to laugh or cry, so it does both.', do: { trauma: 4, unity: 1, fanLane: { n: 2, why: 'the dream apology' } } },
+        { label: 'Apologize sincerely', sub: 'for a dream — 4 trauma', end: 'mixed', note: '"I\'m sorry my subconscious did that." You mean it, which is the absurd part. The audience doesn\'t know whether to laugh or cry, so it does both.', do: { trauma: 4, unity: 1, fanLane: { n: 2, why: 'the dream apology' } } },
         { label: 'Apologize to the dream', sub: 'address dream-you', end: 'won', note: 'You turn to the screen and address your dream-self directly: "We need to talk." The galaxy has never seen anything like it. Dream-you looks ashamed.', do: { fanLane: { n: 3, why: 'confronted their dream-self' } } },
-        { label: 'Refuse — it was a dream', sub: 'stand your ground', end: 'lost', note: 'You refuse. "It was a DREAM." The System replays the dream. The village watches you watch yourself. Your ground is not as firm as you thought.', do: { trauma: 5, fanLane: { n: -1, why: 'refused the dream apology' } } },
+        { label: 'Refuse — it was a dream', sub: 'stand your ground — 5 trauma', end: 'lost', note: 'You refuse. "It was a DREAM." The System replays the dream. The village watches you watch yourself. Your ground is not as firm as you thought.', do: { trauma: 5, fanLane: { n: -1, why: 'refused the dream apology' } } },
       ],
       win: `Dream-you apologizes back, in the edit. The segment wins awards. Therapists across the galaxy assign it.`,
       lose: `The replay airs uncut. You will never live it down. Dreams are forever now.`,
@@ -1174,9 +1174,9 @@
     dance_off: {
       setup: `📺 Dance-Off at Dusk — the System demands dancing.\n\nNo music is provided. The village provides its own — drums, spoons, someone's excellent whistling. It goes better than anyone expects.`,
       choices: [
-        { label: 'Dance like it\'s a ritual', sub: 'full body, full heart', end: 'won', note: 'You dance like the harvest depends on it. Sweat, dust, the spoons keeping time. The judges don\'t understand it and can\'t look away.', do: { kcal: -150, fanLane: { n: 3, why: 'the dusk dance' } } },
+        { label: 'Dance like it\'s a ritual', sub: 'full body, full heart — -150 kcal', end: 'won', note: 'You dance like the harvest depends on it. Sweat, dust, the spoons keeping time. The judges don\'t understand it and can\'t look away.', do: { kcal: -150, fanLane: { n: 3, why: 'the dusk dance' } } },
         { label: 'Lead the village', sub: 'everyone, now', end: 'won', note: 'You pull the whole village in. A line dance, ragged and joyful, under the cameras. The galaxy has never seen anything less rehearsed or more real.', do: { unity: 1, fanLane: { n: 2, why: 'the village line dance' } } },
-        { label: 'Stand still, arms crossed', sub: 'refuse the rhythm', end: 'lost', note: 'You stand perfectly still while the village dances around you. It is, technically, a choice. The cameras hold on your face for a full minute.', do: { trauma: 3, fanLane: { n: 1, why: 'the stillness' } } },
+        { label: 'Stand still, arms crossed', sub: 'refuse the rhythm — 3 trauma', end: 'lost', note: 'You stand perfectly still while the village dances around you. It is, technically, a choice. The cameras hold on your face for a full minute.', do: { trauma: 3, fanLane: { n: 1, why: 'the stillness' } } },
       ],
       win: `The dance becomes a village tradition. Dusk, spoons, dust. The galaxy tunes in for it now.`,
       lose: `The stillness is the clip. A minute of your face, unmoving, while joy happens around you. It haunts.`,
@@ -1184,9 +1184,9 @@
     mystery_smell: {
       setup: `📺 The Mystery Smell — something smells incredible somewhere in the village.\n\nFind it before the cameras do. The chat already knows what it is. They are not telling. They are enjoying this.`,
       choices: [
-        { label: 'Follow your nose', sub: 'trust the senses', end: 'won', note: 'You track it like a hound — around the hall, behind the stores — to a crate of alien catering, still warm, left by "mistake." Dinner is served.', do: { kcal: 200, prize: true, fanLane: { n: 2, why: 'found the mystery smell' } } },
-        { label: 'Ask the chat', sub: 'they know', end: 'lost', note: 'You ask the chat. The chat lies, beautifully, in twelve directions at once. You dig up a compost heap on live TV. The smell was never there.', do: { trauma: 3, fanLane: { n: 1, why: 'the compost incident' } } },
-        { label: 'Cook something better', sub: 'out-smell the mystery', end: 'mixed', note: 'You fire up your own pot and out-cook the mystery. The village eats YOUR food while the cameras hunt the smell. Both smells trend.', do: { kcal: -200, fanLane: { n: 2, why: 'the smell-off' } } },
+        { label: 'Follow your nose', sub: 'trust the senses — +200 kcal, prize', end: 'won', note: 'You track it like a hound — around the hall, behind the stores — to a crate of alien catering, still warm, left by "mistake." Dinner is served.', do: { kcal: 200, prize: true, fanLane: { n: 2, why: 'found the mystery smell' } } },
+        { label: 'Ask the chat', sub: 'they know — 3 trauma', end: 'lost', note: 'You ask the chat. The chat lies, beautifully, in twelve directions at once. You dig up a compost heap on live TV. The smell was never there.', do: { trauma: 3, fanLane: { n: 1, why: 'the compost incident' } } },
+        { label: 'Cook something better', sub: 'out-smell the mystery — -200 kcal', end: 'mixed', note: 'You fire up your own pot and out-cook the mystery. The village eats YOUR food while the cameras hunt the smell. Both smells trend.', do: { kcal: -200, fanLane: { n: 2, why: 'the smell-off' } } },
       ],
       win: `The catering crate feeds YOU. "Mistake," the System says. Nobody believes it. You eat. The village watches, envious, for once on the other side of the screen.`,
       lose: `The compost incident. The chat's directions were perfect and perfectly wrong. You can still smell it.`,
