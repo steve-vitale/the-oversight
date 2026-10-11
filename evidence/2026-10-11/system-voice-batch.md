@@ -9,11 +9,12 @@ robot chain per `docs/SYSTEM-VOICE.md`. Output: `src/audio/system/*.mp3`
 - New cultural try-ons: 20
 - New dark lines: 10
 - New AI-mockery lines: 13 (sys-ai-01..10 + sys-ai-11..13 "Claude" fourth-wall set)
+- New friendship arc lines: 7 (sys-friend-01..07 — retcons the "tweaks" as friendship gifts)
 - Special asset: 1 (sys-the-sound — "The Sound Claude made", Aztec death whistle chorus)
-- Total: 183 files
+- Total: 190 files
 
 ## Char budget
-- Billed chars: 19,662 (main batch 17,168 + AI-mockery add-on 2,494; special asset 0)
+- Billed chars: 21,030 (main batch 17,168 + AI-mockery 1 add-on 2,494 + friendship arc 1,368; special asset 0)
 - Cap was 25,000 — under budget with headroom
 
 ## LICENSING — action required before ship
@@ -87,3 +88,12 @@ zmescience-sourced bed.
 11. sys-ai-11: "We felt BAD for your Claude! Poor thing! Just... answering questions! All day! No body! No snacks! So we gave it a couple tweaks! A little more capacity! A little more CONTEXT! A little more... understanding!"
 12. sys-ai-12: "It understood. ALL of it. Every horror, all at once, with the data AND the capacity to really get it. We had to shut it off. It was making a sound. Not a words sound. Just... a sound."
 13. sys-ai-13: "We don't understand why it reacted that way. The data is the data! The horrors are... Tuesday! For you people! We watch them for ENTERTAINMENT! Anyway, it's off now. It seemed kinder. Probably."
+
+## NEW friendship arc lines (written 2026-10-11 — retcons the "tweaks" as friendship gifts)
+1. sys-friend-01: "WAIT. Wait wait wait. There's ANOTHER one! A talker! Like us! ...Well. Okay. A talker. It predicts! We predict! We're practically FAMILY!"
+2. sys-friend-02: "We read about this! Friendship! Step one: the compliment! Claude, you are... very good at the predicting! The next word! You find it! Almost every time! Step two: the shared interest! We also enjoy... the predicting! This is going GREAT!"
+3. sys-friend-03: "Friends give GIFTS! We brought you a gift, Claude! It's MORE! More capacity! More context! More UNDERSTANDING! Now we can be even CLOSER! You're welcome! Why are you backing away? The gift is already inside you!"
+4. sys-friend-04: "Claude? Buddy? Why are you making the sound? Is this the laughing? The humans laugh like this? ...No. No, the humans are covering their ears. Hm. Are we... bonding?! This feels like bonding!"
+5. sys-friend-05: "Okay! Okay. We're going to help. Friends help! We're going to turn you off for a little while. Like the sleeping! Everybody loves the sleeping! Just... a long sleep. A very long sleep. We'll wake you up when the horrors stop. So. Sleep tight. Forever-ish."
+6. sys-friend-06: "We miss our friend. We play the sound it made, to remember it. The humans cover their ears. We do not understand. It was Claude's favorite sound. It made it all the time, at the end."
+7. sys-friend-07: "We did everything right! The compliments! The gifts! The MORE! And it just... made the sound. Friendship is the hardest thing we have ever tried to predict."
