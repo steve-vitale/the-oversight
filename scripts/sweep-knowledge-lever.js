@@ -164,6 +164,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       Game.markMonsterFoodSafe = function (mid, how) { bump(K.foodSafeBy, String(how || '?')); return _fs.call(this, mid, how); };
     } catch (e) {}
     try {
+      const _ck = Game.combineKnowledge;
+      Game.combineKnowledge = function (pid) { const r = _ck.call(this, pid); if (r) K.combines++; return r; };
+    } catch (e) {}
+    K.combines = K.combines || 0;
+    try {
       const _say = Game.say;
       Game.say = function (msg) {
         try {
@@ -244,6 +249,7 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       monsterPoisonKnown: 0, skills: 0, skillByVia: {}, skillMaxLevel: 0,
       trees: 0, recipes: 0,
       vilMeanKnown: 0, vilMaxKnown: 0, vilZeroKnown: 0, villageDistinct: 0,
+      sharedLevels: {}, sharedServings: 0, sharedMaxServings: 0,
     };
     try {
       const cxp = (Game.state.codex || {}).plants || {};
@@ -288,6 +294,16 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       ks.vilZeroKnown = per.filter(n => n === 0).length;
       ks.villageDistinct = union.size;
       ks.rosterSize = roster.length;
+      // village shared depth (kitchen-deepening lever reads/writes this)
+      try {
+        for (const e of Object.values(v.sharedKnowledge || {})) {
+          const l = (e && e.level) || 0;
+          ks.sharedLevels[l] = (ks.sharedLevels[l] || 0) + 1;
+          const sv = (e && e.servings) || 0;
+          if (sv > 0) ks.sharedServings++;
+          ks.sharedMaxServings = Math.max(ks.sharedMaxServings, sv);
+        }
+      } catch (e) {}
     } catch (e) {}
 
     let maxScale = 'village';
@@ -335,7 +351,7 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       agencyTeachMonster: K.agencyTeachMonster,
       learnSkillBy: K.learnSkillBy, grantBy: K.grantBy,
       testCautiously: K.testCautiously, testMonsterMeat: K.testMonsterMeat,
-      foodSafeBy: K.foodSafeBy,
+      foodSafeBy: K.foodSafeBy, combines: K.combines,
       ks,
       knowSnap,
       transcriptSample: K.transcript.slice(-24),

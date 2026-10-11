@@ -24621,6 +24621,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // HANDLING DEEPENS (longsim knowledge r2 2026-10-11): a day working
+      // the land means hands on the local flora — not just the 0.06 learn
+      // above (breadth), but re-encountering the plants the village already
+      // knows. Record one handling event on a known plant for the deepening
+      // beat (villageHandlingDeepens, read in villageEats after this loop).
+      // Away villagers don't touch the home flora. The set dedupes across
+      // villagers: one entry per plant per day, however many hands.
+      // RNG-NEUTRAL: deterministic rotation via handlingCursor — the pick
+      // consumes no Math.random, so before/after sims on identical seeds
+      // isolate the lever instead of re-rolling the world's dice.
+      try {
+        const awayH = v.away && v.away[vid];
+        if (!awayH && !person.dead) {
+          v.sharedKnowledge = v.sharedKnowledge || {};
+          const knownIds = Object.keys(v.sharedKnowledge);
+          if (knownIds.length) {
+            v.handlingCursor = (v.handlingCursor || 0) + 1;
+            const hpid = knownIds[v.handlingCursor % knownIds.length];
+            v.todayHandled = v.todayHandled || {};
+            v.todayHandled[hpid] = true;
+          }
+        }
+      } catch (e) {}
       // LONGHOUSE HEARTH (haven growth 2026-10-10): a hot communal meal from
       // the longhouse hearth stretches every calorie — villagers eating at
       // haven need 10% less. Away villagers eat cold.
@@ -25165,6 +25188,58 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (freeloaders get warned, then voted out), and the mentored learn.
       try { this.freeloaderTick(v); } catch (e) {}
       try { this.mentorTick(v); } catch (e) {}
+      // HANDLING DEEPENS (longsim knowledge r2 2026-10-11): the village's
+      // hands learn, read from today's foraging ledger. Runs inside
+      // villageEats so it ticks exactly once per village day.
+      try { this.villageHandlingDeepens(v); } catch (e) {}
+    },
+
+    // villageHandlingDeepens(v): THE VILLAGE'S HANDS LEARN DEPTH.
+    // Steve's law: a name is only the start — deeper levels are tasting,
+    // cooking/processing, plant parts. The village was a great breadth
+    // organism (names) with binary villager knowledge; depth was the
+    // player's lonely grind and sharedKnowledge sat at L1 forever (the only
+    // L2s came from expert discoverers). The foragers handle the same local
+    // plants day after day — what the individual's eyes only recognized,
+    // the village's hands come to know. Every village-day a NAMED plant is
+    // handled by foragers, servings accrues; at 8 the village knows
+    // parts/prep (L2), at 20 it knows uses (L3). Caps at L3 — mastery is
+    // personal, never communal. This is the "others know deeper" half of
+    // combineKnowledge: the fireside overlap can finally fire for the local
+    // flora (before: shared was L1, combines never ran).
+    // (First attempt fed this from communal MEALS — dead on arrival: the
+    // village's food is species-less by design (abstract kcal, generic
+    // staples), so the ledger never recorded a plant. Foraging is where the
+    // village actually handles species, day after day.)
+    // Thresholds are a coordinator's call (Steve 2026-10-07): 8 days ≈ a
+    // week of handling before the parts are known (player: 5 personal
+    // harvests); 20 ≈ three weeks before the uses are read (player:
+    // tastings at L2). The beat narrates on level-up only, presence-gated
+    // and knowledge-gated (plantDisplayName) — the hands work while you're
+    // away, but you only hear about it at home. The combine beat carries
+    // the attribution when you're not there.
+    villageHandlingDeepens(v) {
+      const handled = (v && v.todayHandled) || {};
+      v.todayHandled = {};
+      const ids = Object.keys(handled);
+      if (!ids.length) return;
+      v.sharedKnowledge = v.sharedKnowledge || {};
+      const atHome = this.playerAtHaven();
+      for (const pid of ids) {
+        const sk = v.sharedKnowledge[pid];
+        if (!sk) continue; // unnamed: hands can't deepen what the village hasn't named
+        sk.servings = (sk.servings || 0) + 1;
+        const lvl = sk.level || 1;
+        if (lvl >= 3) continue; // mastery is personal
+        const pname = this.plantDisplayName(pid);
+        if (lvl < 2 && sk.servings >= 8) {
+          sk.level = 2;
+          if (atHome) this.say(`🌿 ${pname} — the foragers have handled it ${sk.servings} days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens.`);
+        } else if (lvl === 2 && sk.servings >= 20) {
+          sk.level = 3;
+          if (atHome) this.say(`🌿 ${pname}, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.`);
+        }
+      }
     },
 
     // villageDrinks: VILLAGERS DRINK LIKE PEOPLE (Steve 2026-10-08). Every
