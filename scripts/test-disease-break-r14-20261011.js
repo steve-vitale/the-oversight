@@ -10,7 +10,9 @@
 //   E5 EXPLOIT: save/load duplication — real save->load round trip, seq reseed,
 //       no duplicated entries, mirrors match engine.
 //   S1 SOFTLOCK: tick_attached never expires on its own — is removal always reachable?
-//   S2 SOFTLOCK: lockjaw (folk 'none') expires untreated — no permanent-debuff-without-exit.
+//   S2 LOCKJAW CERTAINTY (longsim disease 2026-10-11): untreated lockjaw kills
+//   at 16 day-parts (canon "lethal untreated"), warned at 8, cured-before-the-
+//   clock survives, eased-only still dies. Supersedes the old softlock reading.
 //   S3 SOFTLOCK: zero-medicine player — folk paths still move folk-'slow' diseases.
 //   H1 HONESTY: shellgut triple-risk meal (poison + fever + trichinosis) blocked; -25% kcal real.
 //   H2 HONESTY: witness_maw "night half as dark" — lightLevel math exact.
@@ -276,11 +278,47 @@ function stripMedical() {
   restore();
   ok('tick_attached is permanent until removed (documented), blind removal always offered',
     tickStuck === true && tickGone === true, `stuck=${tickStuck} removed=${tickGone}`);
-  // S2: lockjaw (folk 'none') expires untreated — no permanent-debuff-without-exit.
+  // S2: LOCKJAW CERTAINTY (longsim disease 2026-10-11 — supersedes the old
+  // "expires harmlessly" assertion): untreated lockjaw kills at 16 day-parts
+  // (canon: "lethal untreated"; diagnosedDesc "Without real treatment it
+  // kills"). Mirrors the trembles certainty: narrated, mantle passes, not
+  // silent. A real cure before the clock runs out prevents it.
   setup();
   Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });
-  for (let i = 0; i < 25; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
-  ok('untreated lockjaw expires on its own clock (no softlock)', !Game.hasStatus('scholar', 'lockjaw'));
+  Game.state.scholar.health = 100;
+  let lockDied = false, lockWarned = false;
+  const _pd2 = Game.playerDeath.bind(Game);
+  Game.playerDeath = (cause) => { lockDied = cause; Game.playerDeath = _pd2; };
+  const _say = Game.say.bind(Game);
+  Game.say = (msg) => { if (/lockjaw: ~2 days left/.test(String(msg))) lockWarned = true; };
+  for (let i = 0; i < 25 && !lockDied; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
+  Game.playerDeath = _pd2; Game.say = _say;
+  ok('untreated lockjaw kills at 16 day-parts (certain, narrated, cause lockjaw)', lockDied === 'lockjaw', `cause=${lockDied}`);
+  ok('lockjaw late warning fires at 8 parts left (~2 days)', lockWarned === true);
+  // Cured lockjaw does NOT kill: diagnosed + antibiotics before the clock.
+  setup();
+  Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });
+  Game.diagnoseDisease('scholar', 'lockjaw', { silent: true });
+  Game.state.scholar.inventory = [{ medType: 'antibiotics', doses: 3, name: 'antibiotics' }];
+  Game.useMedicine('antibiotics');
+  Game.state.scholar.health = 100;
+  let curedDied = false;
+  const _pd3 = Game.playerDeath.bind(Game);
+  Game.playerDeath = (cause) => { curedDied = true; Game.playerDeath = _pd3; };
+  for (let i = 0; i < 25 && !curedDied; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
+  Game.playerDeath = _pd3;
+  ok('diagnosed + antibiotics cures lockjaw before the clock (no death)', curedDied === false && !Game.hasStatus('scholar', 'lockjaw'));
+  // Eased-only lockjaw still kills: herbal_remedy eases suffering, never cures.
+  setup();
+  Game.applyStatus('scholar', 'lockjaw', { source: 'test', silent: true });
+  try { Game.easeDisease('scholar', 'lockjaw', 9999, null); } catch (e) {}
+  Game.state.scholar.health = 100;
+  let easedDied = false;
+  const _pd4 = Game.playerDeath.bind(Game);
+  Game.playerDeath = (cause) => { easedDied = true; Game.playerDeath = _pd4; };
+  for (let i = 0; i < 25 && !easedDied; i++) { Game.state.scholar.health = 100; Game.tickStatuses('scholar', 'dayPart'); }
+  Game.playerDeath = _pd4;
+  ok('eased-only lockjaw still kills at expiry (ease is not a cure)', easedDied === true);
   // S3: zero-medicine player — folk rest still moves folk-'slow' diseases; lockjaw is honest.
   setup();
   const rs2 = stripMedical();

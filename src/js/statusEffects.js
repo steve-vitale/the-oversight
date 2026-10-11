@@ -353,6 +353,11 @@
           if (isScholar && st.id === 'trembles' && st[key] === 8) {
             self.say('The tremor is moving inward now \u2014 hands, arms, the throat. Days, not weeks. Settle what matters. (the trembles: ~2 days left)');
           }
+          // LOCKJAW LATE WARNING (longsim disease 2026-10-11): same agency —
+          // the clock is real and the cure direction was named at diagnosis.
+          if (isScholar && st.id === 'lockjaw' && st[key] === 8) {
+            self.say('The spasms are locking the jaw shut \u2014 swallowing is work now, and the neck barely turns. Days, not weeks. Find real treatment (antibiotics, skilled wound care) or settle what matters. (lockjaw: ~2 days left)');
+          }
           if (st[key] <= 0) {
             // TREMBLES CERTAINTY (Steve 2026-10-09, break-it disease r10):
             // prion disease — no cure at any tier; slow (40 day-parts) and
@@ -369,6 +374,25 @@
                 // one -- second_wind's spite-ration (+500 kcal) must not fire.
                 if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath('the trembles');
                 else if (!self.maybeCheatDeath) self.playerDeath('the trembles');
+              } catch (e) {}
+              return;
+            }
+            // LOCKJAW CERTAINTY (longsim disease 2026-10-11, Steve's canon:
+            // docs/DISEASES.md "lethal untreated"; diagnosedDesc "Without
+            // real treatment it kills"). The old code expired it like a cold
+            // and the expireText ("the stiffness lets go") lied about the
+            // engine. Mirrors the trembles certainty: easing (herbal_remedy,
+            // healer tea) halves the suffering but does NOT stop the clock —
+            // only a real cure (triage/field_medicine/antibiotics, diagnosed)
+            // removes the entry. When the clock runs out the spasms lock
+            // everything shut; the mantle passes. Death-cheats hold at the
+            // threshold; a disease death is not violent (second_wind stays off).
+            if (isScholar && st.id === 'lockjaw') {
+              try {
+                self.seRemove(target, st);
+                self.say('The spasms lock everything shut at once \u2014 jaw, throat, back. The body starves behind a clenched jaw, breath coming in thinner and thinner. It never opens again. (lockjaw \u2014 without real treatment, it kills)');
+                if (self.maybeCheatDeath && !self.maybeCheatDeath('disease')) self.playerDeath('lockjaw');
+                else if (!self.maybeCheatDeath) self.playerDeath('lockjaw');
               } catch (e) {}
               return;
             }

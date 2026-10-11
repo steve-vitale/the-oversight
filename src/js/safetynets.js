@@ -140,7 +140,11 @@
     try { return _faceName(self.aidFaceFor(villageId)); } catch (e) { return 'Someone'; }
   }
   function _first(self, vid) {
-    try { return String(self.displayName(vid)).split(' ')[0]; } catch (e) { return 'Someone'; }
+    try {
+      // firstRef never collapses a stranger descriptor to bare "A" (game.js).
+      if (typeof self.firstRef === 'function') return self.firstRef(vid);
+      return String(self.displayName(vid)).split(' ')[0];
+    } catch (e) { return 'Someone'; }
   }
   function _links(self) {
     try { return self.villageLinks('haven'); } catch (e) { return []; }
