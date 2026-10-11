@@ -104,6 +104,9 @@
 //   - path_blockages_hold: travelTo at d>1 checks every tile on a shortest path for entry blockages from the approach side (travelBlockage fx/fy) — a fallen tree on the middle tile refuses the jump, honestly, as if walked into; force (swim/debug) still bypasses (code: travelTo, explorer break-it 2026-10-10)
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - dowsing_reveals_the_water: dowsing reveals exactly the nearest water tile — direction + distance is the knowledge, walking there is still yours. The old reveal() call lit a 13-tile diamond around possibly-distant ground: free fog knowledge (code: _activateAbilityInner, explorer break-it 2026-10-10)
+//   - sense_marks_shared: dowsing and echo_location markSeen their revealed tiles 'shared' — the world-map overlay agrees with the log ("water, south, 3 tiles" / "3x3 revealed"); never 'visited' until walked (code: _activateAbilityInner, playtest explorer 2026-10-11)
+//   - dead_dont_theorize: theorizeWith refuses when over — the dead advance nothing: no theory lines, no skill encounters, no trust/energy/cheer/goals (code: theorizeWith, playtest explorer 2026-10-11)
+//   - no_mid_fight_theorize: theorizeWith refuses inCombat — theorizing is time-only (2 ticks) and tickAction no-ops in combat, so a stale conversation card could farm encounters, trust and energy for free; same class as the examineCell guard (code: theorizeWith, playtest explorer 2026-10-11)
 //   - day_parts: 4 nested (code: TIME)
 //   - ticks_per_day: defined in TIME (code: tickAction)
 //   - sleep_heal_bunk: 35 (code: sleepPreview)
@@ -14319,6 +14322,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // in their intelligence voice; sharp minds advance your understanding for real.
     // topics: 'system' | 'monsters' | 'situation'
     theorizeWith(vid, topic) {
+      // POST-DEATH (playtest explorer 2026-10-11): the dead don't theorize.
+      // A stale conversation card could narrate full theory lines and grant
+      // skill progress, trust, energy, cheer and goals to a corpse — the
+      // world advancing for the dead. Same class as the examineCell /
+      // clearBlockage post-death guards.
+      if (this.over) return null;
+      // MID-FIGHT (playtest explorer 2026-10-11): theorizing is time-only (2
+      // ticks of thinking) and tickAction no-ops in combat — a stale card
+      // could farm encounters, trust and energy for free while the world
+      // stands still. Same class as the examineCell / beginPathWalk guards.
+      if (this.inCombat()) { this.say('Not mid-fight — think later.'); return null; }
       const cg = this.data.characterGen || {};
       const theories = cg.theories || {};
       const { primary, secondary } = this.npcIntel(vid);
@@ -19777,7 +19791,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // never walked; tiles in range unlock as travelTargets). The
           // promise is direction + distance; the tile itself is the find.
           // Walking there is still yours.
+          // MAP HONESTY (playtest explorer 2026-10-11): revealed is the
+          // TRAVEL flag — the world-map overlay the player actually reads is
+          // seenTiles-gated. Without a markSeen the log said "water, south,
+          // 3 tiles" while the map called the tile "Unexplored — you haven't
+          // been here." Same mismatch class as the scout r8 fix: the map
+          // must agree with the log. 'shared' never becomes 'visited' until
+          // you walk the ground.
           this.tileAt(best.x, best.y).revealed = true;
+          this.markSeen(best.x, best.y, 'shared', 'dowsing');
           const dir = best.y < this.map.py ? 'north' : best.y > this.map.py ? 'south' : best.x < this.map.px ? 'west' : 'east';
           this.say(`The stick twitches — water, ${dir}. ${bestD} tiles. (dowsing)`);
         } else this.say('The stick is still. Either no water near, or it\'s lying. (dowsing failed)');
@@ -19789,9 +19811,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // reveal() is a Manhattan<=2 diamond (13 tiles), so the union was 37
         // tiles while the copy promised "3x3 revealed". The copy is the
         // contract: mark exactly the 3x3.
+        // MAP HONESTY (playtest explorer 2026-10-11): "3x3 revealed" must be
+        // true on the map the player reads, not just the travel flag — same
+        // scout-r8 class as dowsing above. 'shared' until walked.
         for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
           const nx = this.map.px + dx, ny = this.map.py + dy;
-          if (nx >= 0 && nx < 9 && ny >= 0 && ny < 9) this.tileAt(nx, ny).revealed = true;
+          if (nx >= 0 && nx < 9 && ny >= 0 && ny < 9) {
+            this.tileAt(nx, ny).revealed = true;
+            this.markSeen(nx, ny, 'shared', 'echo_location');
+          }
         }
         this.say('You clap once. The echo comes back with the shape of the land — 3x3 revealed. (echo_location)');
       } else if (id === 'field_medicine') {
