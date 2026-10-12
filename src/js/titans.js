@@ -576,10 +576,13 @@
     var p = null;
     try { p = Game.tbFighter('p'); } catch (e) {}
     var px = p ? p.mx : 4, py = p ? p.my : 4;
+    // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 — spread allies across the full grid.
+    var _gmax = (Game.tbGridMax ? Game.tbGridMax() : 8);
+    var _gsize = _gmax + 1;
     muster.allies.forEach(function (a, i) {
-      var nx = Math.max(0, Math.min(8, px - 2 + (i % 3))), ny = Math.max(0, Math.min(8, py + 1 + Math.floor(i / 3)));
+      var nx = Math.max(0, Math.min(_gmax, px - 3 + (i % 4))), ny = Math.max(0, Math.min(_gmax, py + 1 + Math.floor(i / 4)));
       var k = 0;
-      while (taken[nx + ',' + ny] && k < 20) { nx = (nx + 1) % 9; k++; }
+      while (taken[nx + ',' + ny] && k < 40) { nx = (nx + 1) % _gsize; if (nx === 0) ny = (ny + 1) % _gsize; k++; }
       taken[nx + ',' + ny] = 1;
       fighters.push({
         key: 'a_' + a.vid, kind: 'ally', villagerId: a.vid, villageId: a.villageId,

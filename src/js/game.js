@@ -11279,7 +11279,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (x === tx && y === ty) return path.length ? path : [[tx, ty]]; // path already ends at target
         for (const [dx, dy] of DIRS) {
           const nx = x + dx, ny = y + dy;
-          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+          // GRID SIZE: combat uses fight's grid (9 or 12); world map is 9x9.
+          const _gmax = this.tbfight ? this.tbGridMax() : 8;
+          if (nx < 0 || nx > _gmax || ny < 0 || ny > _gmax) continue;
           if (visited.has(key(nx, ny))) continue;
           const cell = detail[ny] && detail[ny][nx];
           const props = this.cellProps(cell);
@@ -18737,7 +18739,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const steps = Math.abs(px - m.mx) >= Math.abs(py - m.my) ? [[dx, 0], [0, dy]] : [[0, dy], [dx, 0]];
         for (const [sx, sy] of steps) {
           const nx = m.mx + sx, ny = m.my + sy;
-          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+          if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
           const cell = detail[ny] && detail[ny][nx];
           if (cell && this.cellProps(cell).blocks) continue;
           m.mx = nx; m.my = ny;
@@ -18795,7 +18797,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const mIsFlyer = !!mdef.flight;
       const mv = (dx, dy) => {
         const nx = m.mx + dx, ny = m.my + dy;
-        if (nx < 0 || nx > 8 || ny < 0 || ny > 8) return false;
+        if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) return false;
         if (mIsFlyer) { m.mx = nx; m.my = ny; return true; }
         const cell = detail[ny] && detail[ny][nx];
         if (cell && !this.cellProps(cell).blocks) { m.mx = nx; m.my = ny; return true; }
@@ -26853,6 +26855,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         turnIdx: 0, round: 1,
         over: false, result: null,
         terraform: {}, // TERRAFORM (Steve 2026-10-06): monster-reshaped ground, "x,y" -> type
+        // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 (144 cells) for
+        // 10+ fighters; normal fights use 9x9. Per-fight, not global.
+        gridSize: (typeof this.isTitan === 'function' && this.isTitan(mid)) ? 12 : 9,
       };
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
@@ -27076,6 +27081,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbIsPlayerTurn() {
       const c = this.tbCurrent();
       return !!(c && c.kind === 'player');
+    },
+    // GRID SIZE (Steve 2026-10-11): per-fight grid dimensions. Titan fights
+    // use 12x12 (144 cells); normal fights use 9x9. World map is always 9x9.
+    tbGridSize() {
+      return (this.tbfight && this.tbfight.gridSize) || 9;
+    },
+    tbGridMax() {
+      return this.tbGridSize() - 1;
     },
     // inCombat(): the ONLY safe way to check for active combat.
     // A tbfight with over=true is a corpse — treat it as no combat.
@@ -27801,7 +27814,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
         if (!dx && !dy) continue;
         const nx = m.mx + dx, ny = m.my + dy;
-        if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+        if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
         const cell = detail[ny] && detail[ny][nx];
         if (!this.cellProps(cell).blocks) opts.push([nx, ny]);
       }
@@ -30276,7 +30289,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Monsters ignore terrain (it's their weapon); the player pays.
     tbTerraform(x, y, type) {
       const f = this.tbfight; if (!f) return;
-      if (x < 0 || x > 8 || y < 0 || y > 8) return;
+      if (x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax()) return;
       f.terraform || (f.terraform = {});
       const k = x + ',' + y;
       if (f.terraform[k]) return; // first layer wins; terrain doesn't stack
@@ -30371,7 +30384,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (let dy = 0; dy < s; dy++) {
         for (let dx = 0; dx < s; dx++) {
           const x = nx + dx, y = ny + dy;
-          if (x < 0 || x > 8 || y < 0 || y > 8) return false;
+          if (x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax()) return false;
           if (this.tbBlockedFor(f, x, y)) return false;
         }
       }
@@ -30757,7 +30770,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
         if (Math.max(Math.abs(dx), Math.abs(dy)) > r) continue;
         const nx = m.mx + dx, ny = m.my + dy;
-        if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+        if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
         const k = nx + ',' + ny;
         if (f.terraform[k]) continue; // first layer wins — never claim (or later clear) another layer's tile
         this.tbTerraform(nx, ny, type);
@@ -30855,7 +30868,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
             if (!dx && !dy) continue;
             const cx = m.mx + dx, cy = m.my + dy;
-            if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+            if (cx < 0 || cx > this.tbGridMax() || cy < 0 || cy > this.tbGridMax()) continue;
             ring.push({ x: cx, y: cy });
           }
           return { charge, monster: { x: m.mx, y: m.my }, ring };
@@ -31062,7 +31075,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const jx = Math.random() < 0.45 ? (Math.random() < 0.5 ? 1 : -1) : dx;
         const jy = Math.random() < 0.45 ? (Math.random() < 0.5 ? 1 : -1) : dy;
         const nx = m.mx + jx, ny = m.my + jy;
-        if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+        if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
         if (blocked(nx, ny)) continue;
         m.mx = nx; m.my = ny;
       }
@@ -31729,7 +31742,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const detail = this.genDetail(this.map.px, this.map.py);
         for (const step of [[dx, dy], [dx, 0], [0, dy], [-dy, dx], [dy, -dx], [-dx, -dy]]) {
           const nx = m.mx + step[0], ny = m.my + step[1];
-          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+          if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
           const cell = detail[ny] && detail[ny][nx];
           if (cell && this.cellProps(cell).blocks) continue;
           let occ = false;
@@ -31965,7 +31978,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const dx = Math.sign(aim.x - m.mx), dy = Math.sign(aim.y - m.my);
           for (let i = 1; i <= 3; i++) {
             const nx = m.mx + dx * i, ny = m.my + dy * i;
-            if (nx < 0 || nx > 8 || ny < 0 || ny > 8) break;
+            if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) break;
             set.add(nx + ',' + ny);
           }
         }
@@ -32020,7 +32033,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbAirStepToward(m, tx, ty, danger) {
       if (m && m.gravityHeld > 0) return null;
       return S.combat.stepToward(m.mx, m.my, tx, ty,
-        (x, y) => x < 0 || x > 8 || y < 0 || y > 8, danger);
+        (x, y) => x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax(), danger);
     },
     tbStepAway(m, tx, ty, blocked, danger) {
       if (m && m.gravityHeld > 0) return null;
@@ -32691,7 +32704,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const rc = [];
               for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
                 const cx = pt.mx + dx, cy = pt.my + dy;
-                if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+                if (cx < 0 || cx > this.tbGridMax() || cy < 0 || cy > this.tbGridMax()) continue;
                 rc.push({ cx, cy });
               }
               tg.cells = rc; resCells = rc;
@@ -32904,7 +32917,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 let nx = m.mx, ny = m.my;
                 for (let i = 0; i < 4; i++) {
                   const tx = nx + ux, ty = ny + uy;
-                  if (tx < 0 || tx > 8 || ty < 0 || ty > 8) break;
+                  if (tx < 0 || tx > this.tbGridMax() || ty < 0 || ty > this.tbGridMax()) break;
                   nx = tx; ny = ty;
                 }
                 const dd = Math.max(Math.abs(nx - vx), Math.abs(ny - vy));
@@ -33778,7 +33791,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               let nx = m.mx, ny = m.my;
               for (let i = 0; i < 2; i++) {
                 const gx2 = nx + ux, gy2 = ny + uy;
-                if (gx2 < 0 || gx2 > 8 || gy2 < 0 || gy2 > 8) break;
+                if (gx2 < 0 || gx2 > this.tbGridMax() || gy2 < 0 || gy2 > this.tbGridMax()) break;
                 nx = gx2; ny = gy2;
               }
               const gd = Math.max(Math.abs(nx - t.mx), Math.abs(ny - t.my));
@@ -33834,7 +33847,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.audioEvent('glasswingDive');
         } else if (!m.telegraph) {
           // CIRCLE: airborne — over terrain, closing on the target. Out of reach.
-          const airBlocked = (x, y) => x < 0 || x > 8 || y < 0 || y > 8;
+          const airBlocked = (x, y) => x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax();
           for (let i = 0; i < (m.speed || 5); i++) {
             const dd = Math.max(Math.abs(t.mx - m.mx), Math.abs(t.my - m.my));
             if (dd <= diveRange) break;
@@ -34867,7 +34880,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (let dy = -pr; dy <= pr; dy++) for (let dx = -pr; dx <= pr; dx++) {
             if (Math.max(Math.abs(dx), Math.abs(dy)) > pr) continue;
             const cx = t.mx + dx, cy = t.my + dy;
-            if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+            if (cx < 0 || cx > this.tbGridMax() || cy < 0 || cy > this.tbGridMax()) continue;
             cells.push({ cx, cy });
           }
           const pzDmg = (m.mdef.attack || {}).damage || [12, 18];
@@ -35363,7 +35376,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
               if (!dx && !dy) continue;
               const nx = m.mx + dx, ny = m.my + dy;
-              if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+              if (nx < 0 || nx > this.tbGridMax() || ny < 0 || ny > this.tbGridMax()) continue;
               if (this.tbBlocked(nx, ny)) continue;
               if (occupied.has(nx + ',' + ny)) continue;
               // Prefer tiles adjacent to player but not too close to packmates
