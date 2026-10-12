@@ -195,7 +195,29 @@ h1.title { color: var(--acc); font-size: 28px; letter-spacing: 2px; margin: 24px
   overflow-y: auto;
 }
 /* Person cards are the tallest tenant — they scroll inside the region. */
+/* MUSTER-DIALOG-FIX (2026-10-12): the card's action buttons ("Ask for help")
+   sit at the bottom of a ~400px card inside a 184px region — they were clipped
+   below the fold ("not_visible"/"obscured" in browser automation), blocking
+   titan mustering. The header (Close) and the action buttons are now sticky
+   within the card's scroll: Close is always tappable at the top, Ask-for-help
+   and the other actions are always tappable at the bottom, no matter how far
+   the card content scrolls. */
 .ord-narration .inlinecard { max-height: 100%; overflow-y: auto; }
+.ord-narration .inlinecard .inline-head {
+  position: sticky; top: 0; z-index: 2;
+  background: #14140f; /* match .inlinecard so content scrolls under, not through */
+  padding-top: 2px; padding-bottom: 6px;
+}
+.ord-narration .inlinecard .inline-btns {
+  position: sticky; bottom: 0; z-index: 2;
+  background: #14140f;
+  padding-top: 8px; padding-bottom: 4px;
+  margin-bottom: 0;
+}
+body.system-live .ord-narration .inlinecard .inline-head,
+body.system-live .ord-narration .inlinecard .inline-btns {
+  background: #10140f; /* keep the System-live tint consistent */
+}
 .ord-combathead { margin: 4px 0; }
 .ord-actions { margin: 8px 0; }
 /* .ord-bottombar removed (Steve 2026-10-05): D-pad lives in flow below grid */

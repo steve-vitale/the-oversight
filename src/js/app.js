@@ -15783,6 +15783,12 @@
     });
     wireCombatPanel();
     wireDialogueBox();
+    // PERSON CARD / CONTEST in narration box: wire choice buttons (Steve 2026-10-05)
+    // MUSTER-DIALOG-FIX (2026-10-12): narrBox was referenced in the contest
+    // block BEFORE its const declaration (temporal dead zone) — the ReferenceError
+    // was swallowed by try/catch, so contest choice buttons NEVER got wired.
+    // The declaration now precedes both uses.
+    const narrBox = document.querySelector('.ord-narration');
     // CONTEST in narration box: wire choice buttons (Steve 2026-10-05)
     try {
       const ac2 = Game.state && Game.state.activeContest;
@@ -15793,7 +15799,6 @@
       }
     } catch (e) {}
     // PERSON CARD in narration box: wire its buttons (Steve 2026-10-05)
-    const narrBox = document.querySelector('.ord-narration');
     if (narrBox && inlineView && inlineView.kind === 'person') {
       wireInlineX(narrBox);
       narrBox.querySelectorAll('[data-act]').forEach(b => {
