@@ -17118,9 +17118,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // nightWeather/fireLasts are captured below: the gate grades what you
       // went to bed with; the spiral keeps its midnight cut.
       const bedHydration = Math.round(s.hydration || 0);
-      // DIAGNOSTIC (Steve 2026-10-05): partner reports no healing from sleep.
-      // Log health before/after to console for debugging.
-      if (typeof console !== 'undefined') console.log(`[SLEEP] health before: ${healthBefore}, quality: ${prev.quality}, heal: ${prev.heal}, hydration: ${s.hydration}, kcal: ${s.kcal}`);
+      // DIAGNOSTIC (Steve 2026-10-05, removed 2026-10-12): the partner's
+      // no-heal report was diagnosed and the wake line now reports net health
+      // honestly ("NET HEALTH"); the console spam served its purpose.
+      // (Was: console.log('[SLEEP] health before/after ...'))
       // NIGHT WEATHER: capture now. endDay rolls the NEW day's weather at
       // midnight mid-sleep — the cold that bites is tonight's, not dawn's.
       const nightWeather = this.state.weather;
@@ -17265,8 +17266,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(`Dawn. You wake ${rested}. ${wakeAcct}${nightmareNote}`);
       // DISEASE (Steve 2026-10-09): real rest helps the slow-folk sicknesses.
       try { this.sickRestTick('sleep'); } catch (e) {}
-      // DIAGNOSTIC: log health after
-      if (typeof console !== 'undefined') console.log(`[SLEEP] health after: ${Math.round(s.health || 0)}, expected gain: ${prev.heal}`);
+      // DIAGNOSTIC removed 2026-10-12 (see comment above): was
+      // console.log('[SLEEP] health after: ...').
+      // net health is reported in the wake line, not the console.
       return this.status();
     },
     clearDialGlitch() { this.state.dialGlitch = false; },
@@ -24950,17 +24952,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const effort = totE > 0 ? totA / totE : 1;
         const takes = (vv.takes || {})[vid] || 0;
         const netDrain = takes - gave;
-        // freeloading = not trying (under half of own capacity) AND draining
-        // the commons meaningfully. Low capacity is not a crime — low EFFORT is.
         const draining = netDrain > 1500;
         // REACHABILITY (break-it food 2026-10-09): the pure production-ratio
-        // gate (effort < 0.5) can never fire for villagers — produced is
+        // gate (effort < 0.5) can never fire for live villagers — produced is
         // expected × grit by construction and grit ≥ 0.5 always. The live
         // signal for villagers is sustained net drain vs OWN capacity: a
         // healthy villager living off the pantry is a freeloader; an old
         // woman's modest shortfall is not (per-person, never a flat bar).
+        // PLAYER BLINDNESS (journey-scale r3 2026-10-12): the player's real
+        // foraging is never logged to contribLog (only the villager daily
+        // sim writes it), so produced is always 0 for the player and the
+        // effort gate measured DONATIONS, not effort — a player foraging
+        // daily but yielding little while learning the land (low knowledge)
+        // and eating from the pantry was exiled ~day 17-20, which blocked
+        // every scale-leg council verb ("Exile means exile") and made the
+        // whole scale leg unreachable. The effort gate therefore applies
+        // only where production is modeled (non-players — for whom it is
+        // dead by construction anyway); the player is judged by the same
+        // live drain-vs-capacity signal as everyone else. The design ("kick
+        // out drains", Steve 2026-10-09) is preserved: a true drain still
+        // trips drainBeyondCapacity on the capacity-relative timeline.
         const drainBeyondCapacity = netDrain > Math.max(1500, totE * 3);
-        if ((effort < 0.5 && draining) || drainBeyondCapacity) {
+        const isP = this.isPlayer ? this.isPlayer(vid) : (vid === this.villagerId);
+        if (((!isP && effort < 0.5 && draining) || drainBeyondCapacity)) {
           fl.days++;
           if (fl.days === 3 && fl.stage < 1) { fl.stage = 1; this.freeloadGossip(vid); }
           else if (fl.days === 7 && fl.stage < 2) { fl.stage = 2; this.freeloadWarning(vid); }
