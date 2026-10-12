@@ -3689,8 +3689,9 @@
       // DEFENSIVE (Steve 2026-10-05): convoOpening must return {line, thread}.
       // A bare-string return once rendered as `Name: "undefined"` — normalize
       // here so no future branch can leak that into the fiction.
-      const opLine = (op && typeof op === 'object' && op.line) ? op.line
+      const opLine0 = (op && typeof op === 'object' && op.line) ? op.line
         : (typeof op === 'string' && op) ? op : '"Hey."';
+      let opLine = opLine0;
       const opThread = (op && typeof op === 'object' && op.thread) ? op.thread : 'small';
       c.thread = opThread; c.depth = 1;
       // WANT-OWNED QUESTION (journey sociallife 2026-10-11): when the opener
@@ -3728,6 +3729,26 @@
         this.convoGenericQ(vid, opLine);
       }
       this.convoNoteFlora(vid, opLine);
+      // SPOKEN LURE (journey landing 2026-10-12): a pending invite used to
+      // surface ONLY as betrayal:accept/decline menu choices — the NPC never
+      // spoke the invitation, so the player was asked to accept or decline
+      // something they were never asked (and could walk blind into an armed
+      // plot). If they hold a pending invite, they speak it now as a second
+      // opener beat, so the accept/decline choices that follow make sense.
+      // Spoken once per pending (inv.spoken); the pending itself is still
+      // consumed by accept/decline, and plot invites still travel the normal
+      // channel (indistinguishable by design — tells are the warning cue).
+      try {
+        const inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
+        if (inv && !inv.spoken) {
+          const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
+          const idef = defs.find(d => d.id === inv.defId) || null;
+          if (idef && idef.label) {
+            opLine = opLine + ' ' + idef.label;
+            inv.spoken = true;
+          }
+        }
+      } catch (e) {}
       this.sayLine(vid, opLine);
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
