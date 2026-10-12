@@ -308,6 +308,23 @@
     // thread has beats. Once dry, drop it and let the thread wind down.
     // (This was in convo-dialogue.js but lost in the beats override.)
     const threadDry = !!(c.thread && c.threadDryFor && c.thread === c.threadDryFor);
+    // WANT-MORE-EXHAUSTION (journey deepening r4 2026-10-12): on the want
+    // thread, the want's moreAvailable governs — a spent want (share_news out
+    // of news, single-beat want engaged) is dry even without threadDryFor.
+    // Without this, the topic pool re-offers "tell me more" after the want
+    // menu retired it, and the dry pool cycles verbatim.
+    let wantMoreDry = false;
+    try {
+      if (c.thread === 'want' && c.want && c.want.def) {
+        const w = c.want;
+        if (typeof w.def.moreAvailable === 'function') {
+          wantMoreDry = !w.def.moreAvailable.call(this, vid);
+        } else {
+          wantMoreDry = (w.stage || 0) >= 2;
+        }
+      }
+    } catch (e) {}
+    const isDry = threadDry || wantMoreDry;
 
     // Doubts unlock confrontation — contextual, not menued.
     let hasDoubts = false;
@@ -340,7 +357,7 @@
       // instead of offering the same dead acknowledgment forever (rethink
       // 2026-10-07; 2026-10-08: threadless wind-downs count too — a thread
       // that merely ran out of beats is the same dead button).
-      if ((threadDry && entry.id === 'dlg:more') ||
+      if ((isDry && entry.id === 'dlg:more') ||
           (entry.id === 'dlg:react' && (c.reactDryCount || 0) >= 2)) continue;
       seen.add(entry.id);
       const label = (typeof this.convoPickCycle === 'function')

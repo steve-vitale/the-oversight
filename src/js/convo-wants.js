@@ -373,6 +373,12 @@
           { id: 'dlg:react', labels: ['"Huh."', '"No kidding."', '"I see."'], temper: 'neutral' },
         ];
       },
+      // MORE-EXHAUSTION (journey deepening r4 2026-10-12): "tell me more" stays
+      // available while news types remain undelivered; retires when spent.
+      moreAvailable(vid) {
+        const w = (this.convoGet(vid) || {}).want || {};
+        return !w.newsExhausted;
+      },
       closeLine(vid, resolution) { return null; },
       resolve(vid, resolution) {
         if (resolution === 'engaged') return null; // fully shared, no seed
@@ -1250,7 +1256,18 @@
           : labels[Math.floor(Math.random() * labels.length)];
         out.push({ id: o.id, label, temper: o.temper || 'neutral' });
       }
-      return out;
+      // MORE-EXHAUSTION (journey deepening r4 2026-10-12): "tell me more" is
+      // offered only while the want has more to say. Multi-beat wants (like
+      // share_news) define moreAvailable; single-beat wants default to
+      // "not yet engaged" — the fixed beat must not repeat verbatim. Without
+      // this, the menu loops the dry admission and the 3-line dry pool cycles.
+      let moreOpen = (w.stage || 0) < 2;
+      try {
+        if (w.def && typeof w.def.moreAvailable === 'function') {
+          moreOpen = !!w.def.moreAvailable.call(this, vid);
+        }
+      } catch (e) {}
+      return moreOpen ? out : out.filter(o => o && o.id !== 'dlg:more');
     },
 
     // convoWantCloseLine: the goodbye beat for how the want ended — the
@@ -1382,6 +1399,11 @@
         mark(t);
       }
       // Every type spent or dry: exhaust honestly instead of looping.
+      // MORE-EXHAUSTION (journey deepening r4 2026-10-12): mark it — the menu
+      // retires "tell me more" once the news is spent (convoWantMenu reads
+      // this via the want's moreAvailable). Without the mark, the menu keeps
+      // offering "more" and the dry pool cycles verbatim.
+      w.newsExhausted = true;
       return '"That\'s everything I\'ve got. You know as much as I do now."';
     },
 
