@@ -2071,7 +2071,21 @@
       }
       if (proto) {
         // Secret at high trust
-        if (trust >= 40 && proto.secret && !c.secretShared && Math.random() < 0.2) {
+        // ACUTE FIRST (crisis leg 2026-10-12): a villager doubled up with gut
+        // cramps doesn't open with secrets — an acute need (favor urgency 4:
+        // sickness, starving hunger, serious wounds) owns the opening. The
+        // secret keeps for a later conversation. (The want picker already
+        // treats acute needs as leading — "that's human" — but this hook
+        // didn't, so the sick opened with "Can I tell you something?" and
+        // never mentioned the fever.)
+        let acuteNeed = false;
+        try {
+          if (want && want.id === 'ask_favor' && typeof this.convoFindFavorNeed === 'function') {
+            const wneed = this.convoFindFavorNeed(vid);
+            acuteNeed = !!(wneed && (wneed.urgency || 0) >= 4);
+          }
+        } catch (e) {}
+        if (!acuteNeed && trust >= 40 && proto.secret && !c.secretShared && Math.random() < 0.2) {
           c.secretShared = true;
           return { line: this.voiceLine(vid, `"Can I tell you something? ${proto.secret}"`), thread: 'secret' };
         }

@@ -380,7 +380,13 @@
           if (w && w.id === 'ask_favor' && w.favor) {
             const fc = this.convoFavorCommit(vid, w.favor);
             if (fc && fc.ok) {
-              beat = w.favor.commitLine;
+              // OUTBREAK VOICES (crisis leg 2026-10-12): the thank-you beat
+              // routes through the def's commitBeat — favor defs may carry a
+              // commitLines pool (per-speaker cycling, run-ledger aware), so
+              // the second villager's "I'll do it" doesn't dry-line.
+              beat = (w.def && typeof w.def.commitBeat === 'function')
+                ? w.def.commitBeat.call(this, vid)
+                : w.favor.commitLine;
             } else {
               // Already carrying an open commitment — heard, not promised.
               const openTask = ((this.state.village.promises || {})[vid] || {}).favorTask;

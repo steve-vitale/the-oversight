@@ -269,12 +269,38 @@
           `I need help. Please.`,
         ];
         const line = '"' + openers[hh % 3] + ' ' + states[(hh >>> 2) % 3] + ' ' + asks[(hh >>> 4) % 3] + '"';
-        const whyLine = `"Rest and clean water aren't cutting it. If this turns, I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. I need someone who knows what they're doing."`;
+        // OUTBREAK VOICES (crisis leg 2026-10-12): one fixed whyLine meant
+        // the run ledger dry-lined every sick villager after the first
+        // ("...Sorry, lost my train of thought" \u2014 for their own fever).
+        // Per-symptom pools + per-speaker cycling keep each voice its own.
+        const whyPools = {
+          'gut rot': [
+            `"Rest and clean water aren't cutting it. If this turns, I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. I need someone who knows what they're doing."`,
+            `"I can't keep anything down and the cramps keep getting worse. Someone who knows guts, someone who knows fevers \u2014 before I'm no good to anyone."`,
+            `"Whatever this is, it's winning. I can barely stand up straight. Please \u2014 someone who knows what they're doing."`,
+          ],
+          'wound fever': [
+            `"The cut's gone hot and it's spreading \u2014 I can feel it moving. Clean it out, wrap it tight, please. Before it turns."`,
+            `"It's not just the cut anymore, it's in the blood, I can feel it climbing. I need someone who knows wounds."`,
+            `"Rest won't touch this. The heat's climbing and my head's full of cotton. Someone who knows what they're doing \u2014 please."`,
+          ],
+          _else: [
+            `"Rest and clean water aren't cutting it. If this turns, I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. I need someone who knows what they're doing."`,
+            `"The fever's not breaking and I'm barely keeping food down. I need help \u2014 real help, not just water."`,
+            `"I'm burning up and there's nothing left in me. Someone who knows sickness \u2014 please."`,
+          ],
+        };
+        const whyLines = whyPools[sickName] || whyPools._else;
+        const commitLines = [
+          `"Thank you. Whatever you can do \u2014 thank you."`,
+          `"Thank you. Just \u2014 thank you. I'll be here, resting."`,
+          `"You don't know what that means to me. Thank you."`,
+        ];
         return {
           task: `help ${ctx.name} with their sickness \u2014 they're ${sym}`,
           short: 'the sickness they\'re fighting',
-          line, whyLine,
-          commitLine: `"Thank you. Whatever you can do \u2014 thank you."`,
+          line, whyLine: whyLines[0], whyLines,
+          commitLine: commitLines[0], commitLines,
           goodbye: `"I'll be resting. Come find me."`,
           stakes: `${ctx.name} is ${sym} and worsening \u2014 an untreated sickness can kill.`,
         };
@@ -468,6 +494,12 @@
         // (The old pool re-stated the ask — the verbatim-repeat vector.)
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // OUTBREAK VOICES (crisis leg 2026-10-12): favor defs may carry a
+        // whyLines pool. Per-speaker cycling (convoPickCycle is run-ledger
+        // aware) so the second villager stating the same need in an outbreak
+        // gets their own words — never the dry line for their own suffering.
+        if (favor && favor.whyLines && favor.whyLines.length)
+          return this.convoPickCycle(vid, 'favor:why:' + (favor.kind || 'favor'), favor.whyLines);
         if (favor) return favor.whyLine;
         // DEFERRED OPENER (journey establishment 2026-10-12): the resume
         // opener can preempt the want's opener in startConvo — the want was
@@ -491,6 +523,11 @@
       commitBeat(vid) {
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // OUTBREAK VOICES (crisis leg 2026-10-12): same pool treatment as the
+        // why — the commit thank-you was ledger-blocked for the second
+        // villager in the same window.
+        if (favor && favor.commitLines && favor.commitLines.length)
+          return this.convoPickCycle(vid, 'favor:commit:' + (favor.kind || 'favor'), favor.commitLines);
         if (favor) return favor.commitLine;
         return '"Thank you. Seriously — thank you."';
       },
@@ -1002,6 +1039,7 @@
         task: parts.task, short: parts.short || parts.task,
         why: parts.stakes || '', stakes: parts.stakes || '',
         line: parts.line, whyLine: parts.whyLine || parts.line,
+        whyLines: parts.whyLines || null, commitLines: parts.commitLines || null,
         commitLine: parts.commitLine || '"Thank you. Seriously — thank you."',
         goodbye: parts.goodbye || '"Thank you."',
         deadline: day + (def.deadlineDays || 2),

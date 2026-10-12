@@ -10943,6 +10943,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let p = null;
           try { p = this.getPerson(id); } catch (e) {}
           if (!p || p.dead) return false;
+          // SICKNESS (crisis leg 2026-10-12): a medic down hard (severity 2+)
+          // is a patient, not a tender — they stay down. (villagerCareTick,
+          // villagerTreatTick, villagerDiagnosisTick share this gate.)
+          const msick = (v.sick || {})[id];
+          if (msick && (msick.severity || 1) >= 2) return false;
           const occ = String(p.formerOccupation || '').toLowerCase();
           return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ);
         });
@@ -17107,6 +17112,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         (cell === 'plant' || cell === 'bush' || cell === 'tree' || cell === 'bigtree') && !depleted(cx, cy);
       const RESTFUL = (cell) => cell === 'tent' || cell === 'bunk' || cell === 'fire';
       const greenName = (cell) => cell === 'plant' ? 'greens' : cell === 'bush' ? 'the bushes' : 'the trees';
+
+      // SICKNESS (crisis leg 2026-10-12): the sick stay down — adults and kids
+      // alike. A villager doubled up with gut cramps doesn't forage, haul,
+      // play, or work the haven — they rest
+      // by the fire or in their tent and wait it out. Outbreaks cost the
+      // village hands: that is how the village bends. (The dawn tick still
+      // runs the recover-or-die pipeline; medics still tend; the sick can
+      // still come ask for help via villagerInitiative — this only stops the
+      // turn engine working them like they're healthy.)
+      const srec = (v.sick || {})[rid];
+      if (srec) {
+        const spot = nearestCell((c, cx, cy) =>
+          RESTFUL(c) && Math.max(Math.abs(cx - pos.mx), Math.abs(cy - pos.my)) <= 1);
+        if (spot) {
+          n.energy = Math.min(100, (n.energy || 0) + 6);
+          n.hunger = Math.min(100, (n.hunger || 0) + 2);
+          if (Math.random() < 0.05) {
+            const where = spot.cell === 'fire' ? 'by the fire' : 'in the ' + spot.cell;
+            const how = (srec.severity || 1) >= 2 ? 'down with the fever' : 'resting, pale and quiet';
+            announce(`${name} is ${how} — ${where}.`);
+          }
+          return;
+        }
+        const rs = nearestCell(RESTFUL);
+        if (rs) { stepToward(rs.cx, rs.cy); return; }
+        n.energy = Math.min(100, (n.energy || 0) + 3);
+        return;
+      }
 
       // CHILDREN (Steve 2026-10-07): kids live the same turn — 1 action per
       // turn, same energy costs — but choose like kids: play, follow a
@@ -25798,6 +25831,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         : rec.name === 'wound fever' ? 'feverish, a cut gone hot and angry'
         : 'achy and wrung out, barely eating';
       // the sick get worse before they get better
+      v._reassuredTick = false; // OUTBREAK HONESTY: one reassurance per tick
       for (const vid of Object.keys(v.sick)) {
         const s = v.sick[vid];
         s.daysLeft -= 1;
@@ -25898,9 +25932,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           v.sick[vid] = { name: vector, daysLeft: 3 + Math.floor(Math.random() * 4), severity };
           // SYMPTOM-ONLY (disease rework 2026-10-09): the camp sees symptoms,
           // not names. A healer's presence changes the feeling of the news.
+          // OUTBREAK HONESTY (crisis leg 2026-10-12): the reassurance used to
+          // append after EVERY sick line — eight sick villagers meant eight
+          // identical "It's handled." One reassurance per tick is enough.
           const sym = sickSymptom(v.sick[vid]);
-          const healerNm = this.campHealerName();
-          const reassure = healerHere ? (healerNm === 'You' ? ` You're already boiling water. It's handled.` : ` ${healerNm} is already boiling water. It's handled.`) : '';
+          let reassure = '';
+          if (healerHere && !v._reassuredTick) {
+            v._reassuredTick = true;
+            const healerNm = this.campHealerName();
+            reassure = healerNm === 'You' ? ` You're already boiling water. It's handled.` : ` ${healerNm} is already boiling water. It's handled.`;
+          }
           this.say(`🤒 ${nm(vid)} is ${sym}. Rest and clean water — or it gets worse.${reassure}`);
         }
       }
@@ -25930,6 +25971,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         let p = null;
         try { p = this.getPerson(id); } catch (e) {}
         if (!p || p.dead) return false;
+        // SICKNESS (crisis leg 2026-10-12): a medic doubled up themselves
+        // (severity 2+) is a patient, not a tender — they stay down. A mildly
+        // sick medic (sev1, achy but up) pushes through: that's human.
+        const msick = (v.sick || {})[id];
+        if (msick && (msick.severity || 1) >= 2) return false;
         const occ = String(p.formerOccupation || '').toLowerCase();
         return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ);
       });
@@ -25964,6 +26010,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let p = null;
           try { p = this.getPerson(id); } catch (e) {}
           if (!p || p.dead) return false;
+          // SICKNESS (crisis leg 2026-10-12): a medic down hard (severity 2+)
+          // is a patient, not a tender — they stay down. (villagerCareTick,
+          // villagerTreatTick, villagerDiagnosisTick share this gate.)
+          const msick = (v.sick || {})[id];
+          if (msick && (msick.severity || 1) >= 2) return false;
           const occ = String(p.formerOccupation || '').toLowerCase();
           return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ);
         });

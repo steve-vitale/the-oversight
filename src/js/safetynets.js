@@ -153,21 +153,31 @@
     try { return link.primary === 'haven' ? link.subordinate : link.primary; } catch (e) { return null; }
   }
   // A named villager to carry the beat — never the player, never the dead.
-  function _speaker(self) {
+  // SICKNESS (crisis leg 2026-10-12): never someone doubled up themselves —
+  // a villager with severity-2+ sickness doesn't "stand up by the fire" to
+  // give the speech. The mildly sick (sev1) can still rally.
+  function _speakerVid(self) {
     try {
       var v = self.state.village || {};
       var roster = (v.roster || []).filter(function (id) {
-        return id !== self.villagerId && !(self.vpOf(id) || {}).dead;
+        if (id === self.villagerId || (self.vpOf(id) || {}).dead) return false;
+        var sr = (v.sick || {})[id];
+        if (sr && (sr.severity || 1) >= 2) return false;
+        return true;
       });
-      if (!roster.length) return 'Someone by the fire';
+      if (!roster.length) return null;
       // steadiest hands: highest health among the living
       var best = roster[0], bestH = -1;
       for (var i = 0; i < roster.length; i++) {
         var h = ((v.health || {})[roster[i]] !== undefined) ? v.health[roster[i]] : 100;
         if (h > bestH) { bestH = h; best = roster[i]; }
       }
-      return _first(self, best);
-    } catch (e) { return 'Someone by the fire'; }
+      return best;
+    } catch (e) { return null; }
+  }
+  function _speaker(self) {
+    var vid = _speakerVid(self);
+    return vid ? _first(self, vid) : 'Someone by the fire';
   }
 
   var methods = {
@@ -490,16 +500,59 @@
       var st = this.state;
       if (st.relief) return null;
       if (this.over) return null;
-      var speaker = _speaker(this);
-      var names = {
-        sickness: 'the fever in the tents', raid: 'what the raid left behind',
-        storm: 'what the storm took', hunger: 'the empty bins',
+      var speakerVid = _speakerVid(this);
+      var speaker = speakerVid ? _first(this, speakerVid) : 'Someone by the fire';
+      // OWN VOICE (crisis leg 2026-10-12): the proposal speech was one fixed
+      // string for every speaker — three different villagers said it
+      // word-for-word in one outbreak. Each speaker now gets their own
+      // phrasing, stable per person per crisis kind (hash of the speaker):
+      // Hattie always sounds like Hattie. The OPTIONS stay legible — only
+      // the phrasing varies, never the content.
+      var openers = {
+        sickness: [
+          "We can't just watch the fever in the tents happen.",
+          "People are going down and the tents are filling — we do something or we don't, but we decide.",
+          "The sick can't wait us out. Somebody has to say it, so: we need a plan, tonight.",
+        ],
+        hunger: [
+          "We can't just watch the empty bins happen.",
+          "The bins are echoing and nobody's saying it — so I will: we need a plan, tonight.",
+          "Another day like this and we're choosing who eats. Not yet — there's still moves to make.",
+        ],
+        _else: [
+          "We can't just watch this happen.",
+          "Nobody's saying it, so I will: we need a plan, tonight.",
+          "We take the hit and we answer it — standing here isn't an answer.",
+        ],
       };
+      var details = {
+        sickness: [
+          "The sick need tending — triage tents, broth, boiled water. Or we tighten our belts and wait it out. Or the hale hunt while the sick lie still.",
+          "Triage tents and broth for the sick, or half rations till it passes, or the healthy hunt hard to keep everyone fed. Pick — everything costs.",
+          "We can nurse them through it, or go lean and ride it out, or send the strong out hunting while the sick rest. Say which.",
+        ],
+        hunger: [
+          "The bins are echoing. We vote half rations — three days, everyone, no exceptions — or the hunters go out hungry and bring back more than hunger.",
+          "Half rations for three days, voted and held — or a hard hunt now, hungry, to fill the bins before it's choosing-who-eats.",
+          "We tighten our belts together, three days, no exceptions — or the hunters go out on empty stomachs and earn it back.",
+        ],
+        _else: [
+          "There's hurt to tend and bellies to fill. Triage for the hurt, rations to stretch what's left, or a hard hunt to replace what we lost.",
+          "Tend the hurt, stretch the food, or hunt it back — pick one, maybe two, but everything costs something.",
+          "We can bind the wounds, or go lean, or hunt hard to replace what we lost. Say which — standing here isn't an answer.",
+        ],
+      };
+      var hk = kind === 'sickness' ? 'sickness' : kind === 'hunger' ? 'hunger' : '_else';
+      var h = 0;
+      try {
+        var hs = String(speakerVid || speaker) + '|' + kind;
+        for (var hi = 0; hi < hs.length; hi++) h = (h * 31 + hs.charCodeAt(hi)) >>> 0;
+      } catch (e) {}
+      var opener = openers[hk][h % openers[hk].length];
+      var detail = details[hk][(h >>> 3) % details[hk].length];
       st.relief = { kind: kind, sinceDay: _day(this), partsLeft: 12, used: {}, speaker: speaker };
-      this.say('🛟 ' + speaker + ' stands up by the fire. "We can\'t just watch ' + (names[kind] || 'this') + ' happen. Here\'s what we CAN do — pick one, maybe two, but everything costs something."');
-      if (kind === 'sickness') this.say('"The sick need tending — triage tents, broth, boiled water. Or we tighten our belts and wait it out. Or the hale hunt while the sick lie still."');
-      else if (kind === 'hunger') this.say('"The bins are echoing. We vote half rations — three days, everyone, no exceptions — or the hunters go out hungry and bring back more than hunger."');
-      else this.say('"There\'s hurt to tend and bellies to fill. Triage for the hurt, rations to stretch what\'s left, or a hard hunt to replace what we lost."');
+      this.say('🛟 ' + speaker + ' stands up by the fire. "' + opener + ' Here\'s what we CAN do — pick one, maybe two, but everything costs something."');
+      this.say('"' + detail + '"');
       this.say('(Relief is open — answer from the beats row. Each option works once; the moment passes in ~3 days.)');
       try { if (this.journalNote) this.journalNote('village', 'relief', speaker + ' proposed relief (' + kind + '), day ' + _day(this) + '.'); } catch (e) {}
       return st.relief;
