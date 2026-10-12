@@ -17,6 +17,7 @@ const fs = require('fs');
 const { loadGame, setupGame, runDays, manifest } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 const { treatment_seeking } = require('./policies/treatment-seeking');
+const { seeker } = require('./policies/seeker');
 
 const DISEASE_IDS = ['gutrot', 'trichinosis', 'disease', 'lockjaw', 'wound_fever',
   'trembles', 'howlbelly', 'gristlefit', 'croakbelly', 'shellgut', 'witness_maw',
@@ -85,7 +86,18 @@ const careless = Object.assign({}, competent, {
   },
 });
 
-const POLICIES = { competent, careless, treatment_seeking };
+const POLICIES = { competent, careless, treatment_seeking, seeker };
+
+// Alien-ability narration markers (r4): the building-block half of the canon
+// narrates through say(), which sims silence — count the firings instead of
+// storing text.
+const ABILITY_MARKERS = [
+  ['eurikaSense', /eurika-sense: no ambush/],
+  ['crowWarn', /East Nile: the flock warns you/],
+  ['engorge', /Lemons engorge/],
+  ['bloodSense', /BLOOD-SENSE/],
+  ['gristlefit', /GRISTLEFIT:/],
+];
 
 function parseList(env, def) {
   return (process.env[env] || def).split(',').map(s => s.trim()).filter(Boolean);
@@ -151,10 +163,24 @@ function arcSnapshot(Game) {
       const t0 = Date.now();
       const { Game, manifest, loadFails } = await loadGame({ seed, mode: pid, fullTelemetry: true });
       await setupGame(Game);
+      // r4: count alien-ability narration firings (say is silenced in sims)
+      const abilityFirings = { eurikaSense: 0, crowWarn: 0, engorge: 0, bloodSense: 0, gristlefit: 0 };
+      try {
+        const origSay = Game.say.bind(Game);
+        Game.say = function (t, ...r) {
+          try {
+            const s = String(t || '');
+            for (const [k, re] of ABILITY_MARKERS) if (re.test(s)) { abilityFirings[k]++; break; }
+          } catch (e) {}
+          return origSay(t, ...r);
+        };
+      } catch (e) {}
       const policy = Object.assign({}, base);
       const playerIds = new Set();
+      let runCtx = null;
       const origDaily = base.daily;
       policy.daily = (G, ctx) => {
+        runCtx = ctx;
         try { if (G.villagerId) playerIds.add(G.villagerId); } catch (e) {}
         if (origDaily) { try { return origDaily(G, ctx); } catch (e) {} }
       };
@@ -227,6 +253,19 @@ function arcSnapshot(Game) {
         const wu = Game.unlockedWave ? Game.unlockedWave() : null;
         if (wu) maxWaveUnlocked = wu;
       } catch (e) {}
+      // r4: seeker policy stats from ctx (waits, walk-ins, drinks stood, meat eaten)
+      let seekerStats = null;
+      try {
+        if (runCtx) {
+          seekerStats = {
+            waits: runCtx.seekerWaits || 0,
+            walkIns: runCtx.seekerWalkIns || 0,
+            drinksStood: runCtx.seekerDrinksStood || 0,
+            steps: runCtx.seekerSteps || 0,
+            meatEaten: runCtx.seekerMeatEaten || {},
+          };
+        }
+      } catch (e) {}
       runs.push({
         policy: pid, seed, ms: Date.now() - t0,
         daysSurvived: end.day, over: !!Game.over, won: end.won,
@@ -236,6 +275,7 @@ function arcSnapshot(Game) {
         nDeathsP: Object.values(deathBucketsP).reduce((a, b) => a + b, 0),
         nDeathsV: Object.values(deathBucketsV).reduce((a, b) => a + b, 0),
         giantFights, giantWon, giantLost, giantPerId,
+        abilityFirings, seekerStats,
         loadFails: (loadFails || []).length,
       });
       console.log(`done ${pid} seed ${seed}: day ${end.day} cases=${Object.values(cases).reduce((a,b)=>a+b,0)} pool=${JSON.stringify(casesPool)} deathsP=${JSON.stringify(deathBucketsP)} giant=${giantFights} (${((Date.now()-t0)/1000)|0}s)`);
@@ -280,6 +320,14 @@ function arcSnapshot(Game) {
     ag.giantWon = sum(rs, r => r.giantWon); ag.giantLost = sum(rs, r => r.giantLost);
     ag.giantPerId = {};
     for (const r of rs) for (const [id, c] of Object.entries(r.giantPerId)) ag.giantPerId[id] = (ag.giantPerId[id] || 0) + c;
+    // r4: alien-ability firings + seeker behavior stats
+    ag.abilityFirings = { eurikaSense: 0, crowWarn: 0, engorge: 0, bloodSense: 0, gristlefit: 0 };
+    for (const r of rs) for (const k of Object.keys(ag.abilityFirings)) ag.abilityFirings[k] += (r.abilityFirings || {})[k] || 0;
+    ag.seekerWaits = sum(rs, r => (r.seekerStats || {}).waits || 0);
+    ag.seekerWalkIns = sum(rs, r => (r.seekerStats || {}).walkIns || 0);
+    ag.seekerDrinksStood = sum(rs, r => (r.seekerStats || {}).drinksStood || 0);
+    ag.seekerMeatEaten = {};
+    for (const r of rs) for (const [k, c] of Object.entries((r.seekerStats || {}).meatEaten || {})) ag.seekerMeatEaten[k] = (ag.seekerMeatEaten[k] || 0) + c;
     summary[pid] = ag;
   }
   const out = { manifest: manifest(0, 'disease-sweep'), days, seeds, summary, runs };

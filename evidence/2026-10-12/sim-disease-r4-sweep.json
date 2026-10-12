@@ -1,0 +1,883 @@
+{
+ "manifest": {
+  "seed": 0,
+  "commit": "794b96b67fff9c8f0ca5ffa28a6152c8b3ab2f32",
+  "mode": "disease-sweep",
+  "date": "2026-10-12",
+  "node": "v24.20.0"
+ },
+ "days": 200,
+ "seeds": [
+  7,
+  42,
+  99,
+  2026,
+  4242,
+  987654
+ ],
+ "summary": {
+  "competent": {
+   "n": 6,
+   "survived": [
+    65,
+    62,
+    135,
+    79,
+    77,
+    53
+   ],
+   "medianSurv": 77,
+   "maxSurv": 135,
+   "won": 0,
+   "arcMax": 3,
+   "arcReach": {
+    "arc1": 6,
+    "arc2": 6,
+    "arc3": 6,
+    "arc4": 0
+   },
+   "waveMax": 3,
+   "waveReach": {
+    "wave1": 6,
+    "wave2": 6,
+    "wave3": 6,
+    "wave4": 0,
+    "wave5": 0
+   },
+   "waveFights": 77,
+   "waveFightShare": {
+    "1": 38,
+    "2": 26,
+    "3": 13
+   },
+   "cases": {
+    "wound_fever": 9,
+    "disease": 1,
+    "lockjaw": 1
+   },
+   "casesPool": {
+    "mundane": 11,
+    "alien": 0
+   },
+   "totalCases": 11,
+   "cures": {},
+   "diagnosedPerRun": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "deathBucketsP": {
+    "combat": 15,
+    "starvation": 9
+   },
+   "deathBucketsV": {
+    "combat": 23,
+    "wound": 4,
+    "other": 2,
+    "contest": 2,
+    "murder": 1,
+    "starvation": 2
+   },
+   "diseaseDeaths": {},
+   "playerDeaths": 24,
+   "villagerDeaths": 34,
+   "giantFights": 3,
+   "giantWon": 0,
+   "giantLost": 3,
+   "giantPerId": {
+    "alien_tick": 2,
+    "giant_mosquito": 1
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerWaits": 0,
+   "seekerWalkIns": 0,
+   "seekerDrinksStood": 0,
+   "seekerMeatEaten": {}
+  },
+  "seeker": {
+   "n": 6,
+   "survived": [
+    65,
+    62,
+    135,
+    61,
+    80,
+    53
+   ],
+   "medianSurv": 65,
+   "maxSurv": 135,
+   "won": 0,
+   "arcMax": 3,
+   "arcReach": {
+    "arc1": 6,
+    "arc2": 6,
+    "arc3": 6,
+    "arc4": 0
+   },
+   "waveMax": 3,
+   "waveReach": {
+    "wave1": 6,
+    "wave2": 6,
+    "wave3": 6,
+    "wave4": 0,
+    "wave5": 0
+   },
+   "waveFights": 80,
+   "waveFightShare": {
+    "1": 39,
+    "2": 24,
+    "3": 17
+   },
+   "cases": {
+    "wound_fever": 5,
+    "disease": 1,
+    "lockjaw": 1,
+    "lemons": 1,
+    "eurika": 1
+   },
+   "casesPool": {
+    "mundane": 7,
+    "alien": 2
+   },
+   "totalCases": 9,
+   "cures": {},
+   "diagnosedPerRun": [
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "deathBucketsP": {
+    "combat": 14,
+    "starvation": 8
+   },
+   "deathBucketsV": {
+    "combat": 26,
+    "wound": 4,
+    "other": 1,
+    "contest": 2,
+    "murder": 1,
+    "starvation": 2
+   },
+   "diseaseDeaths": {},
+   "playerDeaths": 22,
+   "villagerDeaths": 36,
+   "giantFights": 3,
+   "giantWon": 0,
+   "giantLost": 3,
+   "giantPerId": {
+    "alien_tick": 2,
+    "giant_mosquito": 1
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 43,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerWaits": 4,
+   "seekerWalkIns": 2,
+   "seekerDrinksStood": 1,
+   "seekerMeatEaten": {}
+  }
+ },
+ "runs": [
+  {
+   "policy": "competent",
+   "seed": 7,
+   "ms": 4343,
+   "daysSurvived": 65,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 7,
+    "2": 3
+   },
+   "cases": {
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [
+    "wound_fever"
+   ],
+   "diagnosedCount": 1,
+   "deathBucketsP": {
+    "combat": 2,
+    "starvation": 2
+   },
+   "deathBucketsV": {
+    "combat": 5,
+    "wound": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 4,
+   "nDeathsV": 7,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "competent",
+   "seed": 42,
+   "ms": 4417,
+   "daysSurvived": 62,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 5,
+    "2": 1,
+    "3": 3
+   },
+   "cases": {
+    "wound_fever": 2,
+    "disease": 1,
+    "lockjaw": 1
+   },
+   "casesPool": {
+    "mundane": 4,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "starvation": 2,
+    "combat": 1
+   },
+   "deathBucketsV": {
+    "wound": 1,
+    "combat": 4
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 3,
+   "nDeathsV": 5,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "competent",
+   "seed": 99,
+   "ms": 8196,
+   "daysSurvived": 135,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 9,
+    "2": 7,
+    "3": 2
+   },
+   "cases": {},
+   "casesPool": {
+    "mundane": 0,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "combat": 3
+   },
+   "deathBucketsV": {
+    "combat": 3,
+    "other": 1,
+    "contest": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 3,
+   "nDeathsV": 6,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "competent",
+   "seed": 2026,
+   "ms": 3710,
+   "daysSurvived": 79,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 6,
+    "2": 7,
+    "3": 1
+   },
+   "cases": {
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "starvation": 1,
+    "combat": 4
+   },
+   "deathBucketsV": {
+    "murder": 1,
+    "combat": 3,
+    "wound": 1,
+    "other": 1
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 5,
+   "nDeathsV": 6,
+   "giantFights": 2,
+   "giantWon": 0,
+   "giantLost": 2,
+   "giantPerId": {
+    "alien_tick": 2
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "competent",
+   "seed": 4242,
+   "ms": 1921,
+   "daysSurvived": 77,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 8,
+    "2": 7,
+    "3": 4
+   },
+   "cases": {
+    "wound_fever": 4
+   },
+   "casesPool": {
+    "mundane": 4,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [
+    "wound_fever"
+   ],
+   "diagnosedCount": 1,
+   "deathBucketsP": {
+    "starvation": 4,
+    "combat": 3
+   },
+   "deathBucketsV": {
+    "combat": 4
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 7,
+   "nDeathsV": 4,
+   "giantFights": 1,
+   "giantWon": 0,
+   "giantLost": 1,
+   "giantPerId": {
+    "giant_mosquito": 1
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "competent",
+   "seed": 987654,
+   "ms": 1511,
+   "daysSurvived": 53,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 3,
+    "2": 1,
+    "3": 3
+   },
+   "cases": {
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "combat": 2
+   },
+   "deathBucketsV": {
+    "combat": 4,
+    "starvation": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 2,
+   "nDeathsV": 6,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 7,
+   "ms": 2898,
+   "daysSurvived": 65,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 7,
+    "2": 3
+   },
+   "cases": {
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [
+    "wound_fever"
+   ],
+   "diagnosedCount": 1,
+   "deathBucketsP": {
+    "combat": 2,
+    "starvation": 2
+   },
+   "deathBucketsV": {
+    "combat": 5,
+    "wound": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 4,
+   "nDeathsV": 7,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 42,
+   "ms": 4062,
+   "daysSurvived": 62,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 5,
+    "2": 1,
+    "3": 3
+   },
+   "cases": {
+    "wound_fever": 2,
+    "disease": 1,
+    "lockjaw": 1
+   },
+   "casesPool": {
+    "mundane": 4,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "starvation": 2,
+    "combat": 1
+   },
+   "deathBucketsV": {
+    "wound": 1,
+    "combat": 4
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 3,
+   "nDeathsV": 5,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 99,
+   "ms": 6984,
+   "daysSurvived": 135,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 9,
+    "2": 7,
+    "3": 2
+   },
+   "cases": {},
+   "casesPool": {
+    "mundane": 0,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "combat": 3
+   },
+   "deathBucketsV": {
+    "combat": 3,
+    "other": 1,
+    "contest": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 3,
+   "nDeathsV": 6,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 2026,
+   "ms": 1572,
+   "daysSurvived": 61,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 6,
+    "2": 7,
+    "3": 5
+   },
+   "cases": {
+    "lemons": 1,
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 1
+   },
+   "cures": {},
+   "diagnosed": [
+    "wound_fever"
+   ],
+   "diagnosedCount": 1,
+   "deathBucketsP": {
+    "combat": 4
+   },
+   "deathBucketsV": {
+    "murder": 1,
+    "combat": 5,
+    "wound": 1
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 4,
+   "nDeathsV": 7,
+   "giantFights": 2,
+   "giantWon": 0,
+   "giantLost": 2,
+   "giantPerId": {
+    "alien_tick": 2
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 43,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 2,
+    "drinksStood": 0,
+    "steps": 1,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 4242,
+   "ms": 1989,
+   "daysSurvived": 80,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 9,
+    "2": 5,
+    "3": 4
+   },
+   "cases": {
+    "eurika": 1
+   },
+   "casesPool": {
+    "mundane": 0,
+    "alien": 1
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "starvation": 4,
+    "combat": 2
+   },
+   "deathBucketsV": {
+    "combat": 5
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 6,
+   "nDeathsV": 5,
+   "giantFights": 1,
+   "giantWon": 0,
+   "giantLost": 1,
+   "giantPerId": {
+    "giant_mosquito": 1
+   },
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 4,
+    "walkIns": 0,
+    "drinksStood": 1,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  },
+  {
+   "policy": "seeker",
+   "seed": 987654,
+   "ms": 1909,
+   "daysSurvived": 53,
+   "over": true,
+   "won": false,
+   "arc": 3,
+   "tableWaiting": false,
+   "maxWaveUnlocked": 3,
+   "waveFights": {
+    "1": 3,
+    "2": 1,
+    "3": 3
+   },
+   "cases": {
+    "wound_fever": 1
+   },
+   "casesPool": {
+    "mundane": 1,
+    "alien": 0
+   },
+   "cures": {},
+   "diagnosed": [],
+   "diagnosedCount": 0,
+   "deathBucketsP": {
+    "combat": 2
+   },
+   "deathBucketsV": {
+    "combat": 4,
+    "starvation": 2
+   },
+   "diseaseDeaths": {},
+   "nDeathsP": 2,
+   "nDeathsV": 6,
+   "giantFights": 0,
+   "giantWon": 0,
+   "giantLost": 0,
+   "giantPerId": {},
+   "abilityFirings": {
+    "eurikaSense": 0,
+    "crowWarn": 0,
+    "engorge": 0,
+    "bloodSense": 0,
+    "gristlefit": 0
+   },
+   "seekerStats": {
+    "waits": 0,
+    "walkIns": 0,
+    "drinksStood": 0,
+    "steps": 0,
+    "meatEaten": {}
+   },
+   "loadFails": 0
+  }
+ ]
+}
