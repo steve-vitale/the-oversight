@@ -3741,6 +3741,13 @@
           const oc = (v.conv || {})[otherId];
           if (oc && oc.active) {
             oc.active = false; oc.over = true;
+            // INVITATION HONESTY (journey landing r8 2026-10-12): modal
+            // cutoff is a conversation end too — an undecided invite must
+            // be re-spoken next sitting (see endConvo).
+            try {
+              const _oinv = (this.pendingInvite && this.pendingInvite(otherId)) || null;
+              if (_oinv) _oinv.spoken = false;
+            } catch (e) {}
             try {
               const oname = this.displayName(otherId) || 'them';
               this.say(`You turn away from ${oname} mid-conversation.`);
@@ -5222,6 +5229,20 @@
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
       c.heldBeats = []; c.heldAsk = false; c.winddownQueued = false; c.windingDown = false;
+      // INVITATION HONESTY (journey landing r8 2026-10-12): an undecided
+      // invite is re-spoken next sitting. inv.spoken meant "the NPC said
+      // it" — but a sitting can end without the player deciding (walked
+      // away, modal cut, harness policy open/close), and the next sitting's
+      // menu then offered accept/decline for an invitation never spoken
+      // THERE. The menu quotes the invite label verbatim, so the spoken
+      // beat and the menu can never disagree (r7 principle): if the pending
+      // survives the sitting, the next sitting speaks it again.
+      // Accept/decline consume the pending, so decided invites never
+      // re-fire. Repetition reads as insistence, not parrot.
+      try {
+        const _inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
+        if (_inv) _inv.spoken = false;
+      } catch (e) {}
       // ENGAGEMENT ENDS (Steve 2026-10-07): the conversation is over — they're
       // free to live again immediately. Without this they stand frozen until
       // the batch-turn lapse (2 batches ≈ 64 ticks) instead of resuming their
