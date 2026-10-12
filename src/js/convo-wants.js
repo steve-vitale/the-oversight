@@ -377,7 +377,7 @@
       resolve(vid, resolution) {
         if (resolution === 'engaged') return null; // fully shared, no seed
         // They didn't get to tell you — they'll try again.
-        return { wantId: 'share_news', note: 'that news they were bursting to share' };
+        return { wantId: 'share_news', note: 'that news I was bursting to share' };
       },
     },
     // ask_favor: THE FAVOR OBLIGATION WANT (rebuilt 2026-10-11, Steve: "Fix
@@ -538,10 +538,10 @@
           // Heard, no commitment — still needs help. THE SAME favor, not a
           // reset: the follow-up names the prior ask.
           if (favor && favor.state === 'asked') {
-            return { wantId: 'ask_favor', note: 'the help they asked you for', favorId: favor.id };
+            return { wantId: 'ask_favor', note: 'the help I asked you for', favorId: favor.id };
           }
-          if (favor) return { wantId: 'ask_favor', note: 'the help they asked you for', favorId: favor.id };
-          return { wantId: 'ask_favor', note: 'the help they asked you for' };
+          if (favor) return { wantId: 'ask_favor', note: 'the help I asked you for', favorId: favor.id };
+          return { wantId: 'ask_favor', note: 'the help I asked you for' };
         }
         if (resolution === 'deflected') {
           // Refused outright — the deflected memory carries it (written by
@@ -679,7 +679,7 @@
       },
       resolve(vid, resolution) {
         if (resolution === 'engaged' || resolution === 'comforted') return null;
-        return { wantId: 'seek_comfort', note: 'whatever\'s been weighing on them' };
+        return { wantId: 'seek_comfort', note: 'whatever\'s been weighing on me' };
       },
     },
     warn_you: {
@@ -864,7 +864,7 @@
         // Promised: the promise is recorded; no nagging seed. Heard but not
         // promised, or deflected: they'll try again another day.
         if (resolution === 'promised') return null;
-        return { wantId: 'seek_taken', note: 'what happened to their taken kin' };
+        return { wantId: 'seek_taken', note: 'what happened to my taken kin' };
       },
     },
   };

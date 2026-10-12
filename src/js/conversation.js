@@ -656,7 +656,15 @@
       const isQ = /\?\s*$/.test(inner);
       // Openers don't lead questions ("I think are you okay?" is broken).
       const useOpen = opens.length && (!closes.length || (!isQ && Math.random() < 0.45));
-      const pool = useOpen ? opens : closes;
+      let pool = useOpen ? opens : closes;
+      // DISMISSAL CLOSERS (journey endgame 2026-10-11): " — anyway." /
+      // " — comedy." move PAST a topic — after a direct question they read
+      // as answering yourself ("Will you help me? — anyway."). Questions
+      // keep trailing/address closers ("…", ", name.", "Ha. Funny.") only.
+      if (!useOpen && isQ) {
+        const filtered = pool.filter(b => !/^ — /.test(String(b)));
+        if (filtered.length) pool = filtered;
+      }
       // Mannerisms cycle, never exhaust: real people repeat their tics.
       // convoPickCycle reshuffles when the pool runs dry.
       const bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
@@ -1980,10 +1988,24 @@
           // composition left a stray quote — the opener keeps its own layer.
           // FAVOR FOLLOW-UP (2026-10-11): the favor opener names the prior
           // ask itself ("About {short} — ...") — don't double-prefix it.
+          // SEED VOICE (journey endgame 2026-10-11): openers shaped
+          // "speech." + narration (seek_comfort) can't be dequoted blindly —
+          // stripping only the outer quotes leaves a dangling " after the
+          // speech and a stray " at the end. Close the quote after the
+          // spoken part; the narration stays outside it.
           const alreadyNamed = /^"About /.test(opener.line);
-          const seedLine = alreadyNamed ? opener.line :
-            `"About ${want.seedNote || 'last time'} — ` +
-            opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+          let seedLine;
+          if (alreadyNamed) {
+            seedLine = opener.line;
+          } else {
+            const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
+            if (spoken) {
+              seedLine = `"About ${want.seedNote || 'last time'} — ${spoken[1]}${spoken[2]}" ${spoken[3]}`;
+            } else {
+              seedLine = `"About ${want.seedNote || 'last time'} — ` +
+                opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+            }
+          }
           // FAVOR FOLLOW-UP (convo favor system 2026-10-11): the favor
           // opener may have already established the ask (stage 2, menu goes
           // straight to commit/deflect). Don't downgrade it.
