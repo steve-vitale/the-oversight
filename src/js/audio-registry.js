@@ -1,12 +1,13 @@
-// @ontology audio-registry.js — file-backed audio placeholder registry.
-// PLACEHOLDER WIRING (Steve 2026-10-12): the 32 judged synth monster
-// signatures "you can put in for now but you need to mark them with a note
-// that they are just a placeholder." Every signature entry carries
-// placeholder:true. Real animal field recordings (CC/Public Domain, see
-// src/audio/animals/ATTRIBUTION.md) carry placeholder:false. Weapon/item
-// sounds that never existed are synth placeholders, also flagged.
-// Pure data + DOM-free resolve — safe for the node harness.
-// Playback itself lives in Game.audioEvent (game.js), guarded on Audio.
+// @ontology
+// system: audio-registry
+// description: File-backed audio placeholder registry (Steve 2026-10-12). The 32 judged synth monster signatures ship as PLACEHOLDER-flagged MP3s (src/audio/signatures/); real animal field recordings back 8 animal pools (placeholder:false, see src/audio/animals/ATTRIBUTION.md); weapon/item sounds that never existed are synth placeholders (src/audio/weapons/). Single source of truth for placeholder:true tagging; Game.audioEvent (game.js) plays files first with synth fallback; the debug board reads tags from this data.
+// provides:
+//   - SIGNATURES: 32 hook-name -> {file, placeholder:true, label, monster} entries
+//   - MONSTER_SIG: 29 wave 3-5 monster ids -> their primary signature hook
+//   - ANIMALS: 10 pools incl. 2 documented gaps (raccoon, turtle)
+//   - WEAPONS: 9 weapon/item placeholder hooks
+//   - resolveHook: DOM-free hook resolver (name) -> {kind, file, placeholder, label} or null
+//   - AudioRegistry: public surface bundling the above
 var AudioRegistry = (function () {
   'use strict';
   var SIG_DIR = 'src/audio/signatures/';
