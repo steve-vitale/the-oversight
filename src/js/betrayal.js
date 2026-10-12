@@ -1379,6 +1379,24 @@
     if (this.isPlayer(byId)) this.say(`Done. Expensive, quiet. Secrets like this have a half-life.`);
     return true;
   },
+  // bribeDigMissLine: the dig came up empty — but the line must not.
+  // (journey-social 2026-10-12 r7): this was one template — "Nothing you
+  // can prove — yet. Dig again; the trail is still warm." — repeated
+  // verbatim 6-8× in a row, the exact filler-loop shape Steve called out.
+  // Now a per-case rotation: consecutive digs on the same case never parrot.
+  bribeDigMissLine(c) {
+    const pool = [
+      'You follow the food, the gifts, the sudden friendliness. Nothing you can prove — yet. Dig again; the trail is still warm.',
+      'You watch who eats with whom, who laughs a little too loud at whose jokes. Nothing solid. Keep looking.',
+      'You turn the gift-giving over, the favors, the timing. Innocent from every angle. It isn\'t — but you can\'t prove that yet.',
+      'Another pass over the same ground. Somebody\'s being careful. Careful people leave cleaner trails — and cleaner trails are still trails.',
+    ];
+    try {
+      const n = (c.digMisses || 0);
+      c.digMisses = n + 1;
+      return pool[n % pool.length];
+    } catch (e) { return pool[0]; }
+  },
   investigateBribery(caseId) {
     const c = this.getCase(caseId); if (!c) return null;
     const found = [];
@@ -1389,7 +1407,7 @@
       const p = b.trace === false ? 0.35 : 0.8;
       if (R() < p) found.push(b);
     }
-    if (!found.length) { this.say(`You follow the food, the gifts, the sudden friendliness. Nothing you can prove — yet. Dig again; the trail is still warm.`); return []; }
+    if (!found.length) { this.say(this.bribeDigMissLine(c)); return []; }
     for (const b of found) {
       this.say(`There it is: ${this.whoTag(b.by)} bought ${this.whoTag(b.voter)}. Follow the food — it always works.`);
     }
@@ -3747,7 +3765,7 @@
         cs2.foundBribes = cs2.foundBribes || [];
         for (const b of f) if (!cs2.foundBribes.some(y => y.voter === b.voter)) cs2.foundBribes.push(b);
       }
-      return finish(f.length ? 'Found something. Follow it to the moot.' : 'Nothing you can prove — yet. Dig again; the trail is still warm.', '(follow the food)');
+      return finish(f.length ? 'Found something. Follow it to the moot.' : this.bribeDigMissLine(cs2), '(follow the food)');
     }
     if (act === 'letlie') { this.letItLie(parts[2]); return finish('You say nothing. The silence sits at the fire with everyone else.', '(say nothing)'); }
     if (act === 'vote_guilty') { this.castPlayerVote(parts[2], true); return finish('Counted.', 'GUILTY.'); }
@@ -4406,6 +4424,51 @@
     if (actionId === 'flee') return this.fleeBeforeVerdict(caseId);
     return null;
   },
+  // NPC-MOOT TICK (journey-social 2026-10-12 r7): cases where an NPC stands
+  // accused (an ambush plot sprung on a villager) had NO natural path to a
+  // moot. The village gossiped forever, and caseDiscoveryTick promised
+  // "There's going to be a moot" that nothing ever convened. Villagers are
+  // full agents ("they are all other players too", Steve): the victim — or
+  // their closest, if the victim is dead — gathers voices for a few days and
+  // then calls the moot through the same conductTrial machinery as every
+  // other trial. The player is a juror: present, voting, remembered.
+  // Player-accused and player-targeted cases are NOT touched here — the
+  // justice ladder and the victim's own beats own those.
+  npcMootTick() {
+    const bs = this.betrayalState();
+    const day = this.state.scholar.day;
+    let npcs = [];
+    try { npcs = this.npcIds() || []; } catch (e) {}
+    for (const c of (bs.cases || [])) {
+      if (c.status !== 'open') continue;
+      if (c.trial) continue; // already in session — player-convened or earlier tick
+      const acc = c.accused || [];
+      if (!acc.length || acc.some(a => this.isPlayer(a))) continue;
+      if (this.isPlayer(c.target)) continue;
+      if (!acc.some(a => npcs.includes(a))) continue; // nobody left to try
+      // the caller: the victim if alive, else the living villager closest
+      // to the victim. Nobody close left -> no moot; the detective path stays.
+      let caller = (c.target && npcs.includes(c.target)) ? c.target : null;
+      if (!caller) {
+        let best = null, bestAff = -Infinity;
+        for (const vid of npcs) {
+          if (acc.includes(vid)) continue;
+          let aff = -Infinity;
+          try { aff = this.pairAffinity(vid, c.target); } catch (e) {}
+          if (aff > bestAff) { bestAff = aff; best = vid; }
+        }
+        caller = best;
+      }
+      if (!caller) continue;
+      // one extra day over the player-accused convention (mootIn || 2): the
+      // "people are choosing sides" phase, and the player's investigation window
+      if (day - (c.day || 0) < (c.mootIn || 3)) continue;
+      const cname = (() => { try { return this.whoTag(caller); } catch (e) { return 'Someone'; } })();
+      const aname = (() => { try { return this.whoTag(acc[0]); } catch (e) { return 'the accused'; } })();
+      this.say(`${this.capFirst(cname)} has been talking at the fires. Enough voices — tonight they call a moot. ${this.capFirst(aname)} answers for what happened to ${this.disp(c.target)}.`);
+      this.callMoot(c.id, caller);
+    }
+  },
   // the accuser's clock: they call the moot when they've gathered voices
   playerCaseTick() {
     const bs = this.betrayalState();
@@ -4448,6 +4511,7 @@
     try { this.simBriberyTick(); } catch (e) {}
     try { this.caseDiscoveryTick(); } catch (e) {}
     try { this.playerCaseTick(); } catch (e) {}
+    try { this.npcMootTick(); } catch (e) {}
     try { this.trialVoteTick(); } catch (e) {}
     try { this.driftTick(); } catch (e) {}
     try { this.probationTick(); } catch (e) {}

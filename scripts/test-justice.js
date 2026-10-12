@@ -1,13 +1,5 @@
 // Village justice + combat dialogue tests. Usage: node scripts/test-justice.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/party.js', 'src/js/justice.js',
- 'src/js/conversation.js', 'src/js/truth.js', 'src/js/betrayal.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const { loadGame, setupGame } = require('./sim-harness');
 
 let pass = 0, fail = 0;
 function eq(name, got, want) {
@@ -20,10 +12,17 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
+  // HARNESS (journey-social 2026-10-12 r7): was hand-copying a stale 13-module
+  // eval list — new systems (statusEffects etc.) made tbBeginTurn crash with
+  // "seTickFighter is not a function". The sim-harness derives the full
+  // index.html-order list; route through it instead of maintaining the copy.
+  let Game;
+  try {
+    const { Game: G, loadFails } = await loadGame({ seed: 42 });
+    Game = G;
+    if (loadFails && loadFails.length) console.log('LOAD FAILURES:\n' + loadFails.join('\n'));
+  } catch (e) { console.log('FATAL loadGame: ' + e.message); process.exit(2); }
+  await setupGame(Game);
 
   const v = Game.state.village;
   const others = () => v.roster.filter(id => id !== Game.villagerId);

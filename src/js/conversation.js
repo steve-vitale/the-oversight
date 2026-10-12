@@ -5143,6 +5143,12 @@
       const cg = (this.data.characterGen || {}).convo || {};
       const temp = this.npcTemper(vid);
       const mood = this.npcMood(vid);
+      // GOODBYE-ALREADY-SAID (journey-social 2026-10-12 r7): capture before
+      // the reset below. When the winddown beat was already spoken, the
+      // exit line here would be a SECOND goodbye — the stacked-farewell
+      // shape ("should get back to it" + "Right. Go on, then." + dry-line
+      // trail-offs). A person says goodbye once.
+      const goodbyeSaid = !!c.windingDown;
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
       c.heldBeats = []; c.heldAsk = false; c.winddownQueued = false; c.windingDown = false;
@@ -5152,7 +5158,11 @@
       // needs-driven life (fleeing, foraging, seeking people).
       try { if (this.state.village.engaged) delete this.state.village.engaged[vid]; } catch (e) {}
       let line;
-      if (how === 'left') {
+      if (goodbyeSaid) {
+        // the winddown beat WAS the goodbye — close quietly. The want's
+        // closing beat (below) still lands; bookkeeping is untouched.
+        line = null;
+      } else if (how === 'left') {
         line = this.convoPickCycle(vid, 'leftexit', [
           '"Oh — okay. Later, then."',
           '"Sure. I\'ll be around."',

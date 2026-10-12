@@ -74,6 +74,55 @@
     'succession-loser': 'succession-loser',
   };
 
+  // MOOT_SPEECHES (journey-social 2026-10-12 r7): petition-moot speeches used
+  // to be ONE template per cause — two cannibal moots back-to-back played the
+  // same lines verbatim. Now each cause×side is a no-repeat pool. The
+  // anchors are the original lines; the rest are plain human words in the
+  // same register. 'other' covers hardline/peaceful/succession-loser and any
+  // future cause.
+  var MOOT_SPEECHES = {
+    cannibal: {
+      'for': [
+        `"I'm not saying I trust them. I'm saying I remember being hungry."`,
+        `"Hunger makes monsters of anyone. The question is what they do now that they're fed."`,
+        `"If we turn away everyone who's done terrible things to survive, we turn away half the road. Maybe ourselves."`,
+        `"They walked away from it. That's the part I'm voting on."`,
+      ],
+      against: [
+        `"They EAT people. I don't care how hungry the road made them. No."`,
+        `"You don't un-eat a person. Some roads don't come back."`,
+        `"Let them in and every night we sleep wondering who's on the menu."`,
+        `"I buried people the road took. I won't break bread with the road."`,
+      ],
+    },
+    'famine-flight': {
+      'for': [
+        `"They're starving. That's the whole story. Feed them."`,
+        `"Hunger is the one thing every one of us understands. No translation needed."`,
+        `"We have food. They don't. That's not a hard question."`,
+      ],
+      against: [
+        `"Hungry mouths don't stop being hungry. They just become our hungry mouths."`,
+        `"Feel sorry all you want — the pantry counts, not the heart."`,
+        `"Take them in and we're all on short rations by winter."`,
+      ],
+    },
+    other: {
+      'for': [
+        `"A fire's for sharing. That's the whole point of it."`,
+        `"We were strangers once too. Somebody's fire took us in."`,
+        `"Strong hands. That's what I see. Strong hands."`,
+        `"Turn them away and we sleep warm knowing we could have helped. I don't want that sleep."`,
+      ],
+      against: [
+        `"More mouths. Less food. You do the math."`,
+        `"Every bowl we share is a bowl we don't have. Winter remembers."`,
+        `"Strangers bring trouble with them. Always have."`,
+        `"Our own go hungry some nights. Our own. First."`,
+      ],
+    },
+  };
+
   function firstOf(name) { return String(name || 'Ash').split(' ')[0]; }
 
   var methods = {
@@ -655,6 +704,22 @@
       return kcal / mouths / 2000;
     },
 
+    // _vaMootSpeech: rotate the petition-moot speech pool. Keyed on the
+    // village (the moot is one room, one rotation — not per speaker), so
+    // consecutive moots never parrot each other.
+    _vaMootSpeech(cause, side) {
+      var key = (cause === 'cannibal' || cause === 'famine-flight') ? cause : 'other';
+      var pool = ((MOOT_SPEECHES[key] || {})[side]) || MOOT_SPEECHES.other[side];
+      try {
+        var v = this.state.village || {};
+        v.mootSpeechRot = v.mootSpeechRot || {};
+        var rk = key + ':' + side;
+        var i = v.mootSpeechRot[rk] || 0;
+        v.mootSpeechRot[rk] = i + 1;
+        return pool[i % pool.length];
+      } catch (e) { return pool[0]; }
+    },
+
     // _vaPetitionScore: one voter's heart, honestly computed. Temperament,
     // food pressure, the cause, fear, what the interview revealed, the
     // room's weather, noise. Nobody is unbribable by hunger; nobody is safe.
@@ -718,15 +783,11 @@
       var tag = function (id) { try { return this.whoTag(id); } catch (e) { return 'Someone'; } }.bind(this);
       var cap = function (s) { try { return this.capFirst(s); } catch (e) { return s; } }.bind(this);
       if (forV) {
-        var fLine = pet.cause === 'cannibal'
-          ? `"I'm not saying I trust them. I'm saying I remember being hungry."`
-          : `"A fire's for sharing. That's the whole point of it."`;
+        var fLine = this._vaMootSpeech(pet.cause, 'for');
         this.say(`${cap(tag(forV.vid))} stands. ${fLine}`);
       }
       if (agV) {
-        var aLine = pet.cause === 'cannibal'
-          ? `"They EAT people. I don't care how hungry the road made them. No."`
-          : `"More mouths. Less food. You do the math."`;
+        var aLine = this._vaMootSpeech(pet.cause, 'against');
         this.say(`${cap(tag(agV.vid))} stands. ${aLine}`);
       }
       var need = Math.floor((present.length + 1) / 2) + 1;
