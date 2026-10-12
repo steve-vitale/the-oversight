@@ -159,6 +159,15 @@ h1.title { color: var(--acc); font-size: 28px; letter-spacing: 2px; margin: 24px
   overflow-x: hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+  /* TALK-CARD-CRUSH-FIX 2026-10-12: this region has a FIXED height by design
+     (layout stability — it must never push the grid). As a scroll container
+     its automatic flex minimum is 0, so inside the desktop side column
+     (max-height: calc(100vh - 32px), overflow-y: auto) flex-shrink crushed it
+     to ~0px whenever the column overflowed — the person card
+     (max-height: 100%) collapsed with it, painted zero pixels, and its Talk
+     button failed hit-testing as "obscured". flex-shrink: 0 holds the fixed
+     height; the column scrolls instead. */
 }
 /* The box fills its region exactly — swapping dialogue ↔ contest ↔ person
    card never changes the region's footprint. Speaker stays pinned; the
@@ -1180,6 +1189,17 @@ body.in-combat .ord-log { order: 5.3; }
      it. Everything BELOW the stack (status, haven panel, compass, minimap)
      still scrolls under it — that's info/management, not the thing you tap. */
   body:has(.game-cols) .ord-topstack {
+    /* TALK-CARD-CRUSH-FIX 2026-10-12: the 2026-10-11 talk-button-obscurer-fix
+       set position:sticky / z-index / background here but never overrode the
+       base `display: contents` — a display:contents element generates no box,
+       so the entire pinned-stack mechanism was inert (verified: scrolling the
+       side column never pinned the controls). display:block gives the stack a
+       real box so sticky/top/z-index/background take effect as intended.
+       flex-shrink:0 keeps the pinned stack at its natural height (controls +
+       the fixed 184px narration region); the column scrolls instead of
+       crushing it. */
+    display: block;
+    flex-shrink: 0;
     position: sticky;
     top: 0;
     z-index: 10;
