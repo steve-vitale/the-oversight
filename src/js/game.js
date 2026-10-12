@@ -4343,6 +4343,142 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return { ok: true };
     },
 
+    // ============ LEADERSHIP LINE POOLS & CONTENDER ESCALATION ARC ============
+    // (longsim trust r5 2026-10-12): r4 documented two blanks — leadership
+    // resolution lines were single templates (one stand-down line fired
+    // verbatim 14x in a 73-day run) and a repeatedly-stood-down contender
+    // never changed (never gave up, left, or respected — 14 identical
+    // confrontations). Both filled here.
+    //
+    // leadLine(key, cid, pool): pick a line from the pool with a
+    // no-immediate-repeat memory per (line-type, contender) — variety that
+    // stays in-character. Lines reference the rivalry itself (honest state),
+    // never fabricated shared history, never filler.
+    leadLine(key, cid, pool) {
+      const v = this.state.village;
+      v.leadLineLast = v.leadLineLast || {};
+      const k = key + ':' + (cid || '-');
+      const last = v.leadLineLast[k];
+      let opts = pool.filter((_, i) => i !== last);
+      if (!opts.length) opts = pool;
+      const line = opts[Math.floor(Math.random() * opts.length)];
+      v.leadLineLast[k] = pool.indexOf(line);
+      return line;
+    },
+    // leadPick(key, cid, pool): the STREAM-NEUTRAL sibling of leadLine — zero
+    // Math.random draws, so cosmetic line variety never perturbs the sim's
+    // random stream (before/after runs on identical seeds stay comparable).
+    // Deterministic rotation with a stable per-(type, contender) start offset
+    // (the conversation.js "cycle in varying order" discipline): never
+    // repeats back-to-back for pools of 2+, and a 1-line pool just works.
+    // Use leadPick wherever the OLD code consumed no random draw
+    // (challenge raises, stand-downs, yields, asks, takeovers, arc beats);
+    // use leadLine (1 draw) where the old code already drew (friction, rally).
+    leadPick(key, cid, pool) {
+      const v = this.state.village;
+      v.leadLineLast = v.leadLineLast || {};
+      const k = key + ':' + (cid || '-');
+      const last = v.leadLineLast[k];
+      let idx;
+      if (last === undefined || last === null) {
+        let h = 0;
+        try { h = this._hashStr ? this._hashStr(k) : 0; } catch (e) {}
+        idx = Math.abs(h) % pool.length;
+      } else {
+        idx = (last + 1) % pool.length;
+      }
+      v.leadLineLast[k] = idx;
+      return pool[idx];
+    },
+    // _contendArc(cid): the contender's rivalry ledger — stand-downs and
+    // yields accumulate here; a resolved state ('respect'/'refocus'/'leave')
+    // is terminal for that contender. Prunes dead ids (contender died/left).
+    _contendArc(cid) {
+      const v = this.state.village;
+      v.contendArc = v.contendArc || {};
+      for (const id of Object.keys(v.contendArc)) {
+        if (!(v.roster || []).includes(id)) delete v.contendArc[id];
+      }
+      return v.contendArc[cid] || (v.contendArc[cid] = { stoodDown: 0, yielded: 0, state: 'open' });
+    },
+    // _maybeResolveContendArc(cid, arc): a contender who keeps LOSING
+    // challenges eventually resolves — the rivalry has to go somewhere.
+    // From stand-down #4 on, each confrontation has a rising chance to close
+    // the arc (0.08 -> 0.45 by #9): grudging respect (stops challenging;
+    // heat stops building; a small trust bump settles the floor), refocus
+    // (drops the lead goal for their own work), or the rare splinter-leave
+    // (walks out — narrated honestly, gossip-seeded with real witnesses,
+    // never silent). Leave is the rare arc: only when never yielded to,
+    // holding no domain, and trust is low (<= 25). No violence — they walk.
+    _maybeResolveContendArc(cid, arc) {
+      try {
+        if (!arc || arc.state !== 'open') return null;
+        const n = arc.stoodDown || 0;
+        if (n < 4) return null; // a few losses are just rivalry
+        const p = Math.min(0.45, 0.08 * (n - 3));
+        if (Math.random() >= p) return null;
+        const v = this.state.village;
+        const d = this.displayName(cid);
+        const trust = (v.trust || {})[cid] === undefined ? 10 : (v.trust || {})[cid];
+        const holdsDomain = Object.values(v.taskLeads || {}).includes(cid);
+        const canLeave = arc.yielded === 0 && !holdsDomain && trust <= 25;
+        const roll = Math.random();
+        const day = this.state.scholar.day;
+        arc.resolvedDay = day;
+        if (canLeave && roll < 0.15) {
+          // THE SPLINTER: rare. They walk out — their own things, no theft.
+          arc.state = 'leave';
+          const lines = [
+            `${d} packs a bag at dusk — their own things, nothing else. "I won't work under you. But I won't fight you either. So I'm going." They walk past the fire line and don't look back.`,
+            `"This was never going to work," ${d} says, shouldering a pack. "You run your village. I'll run mine — somewhere else." Nobody stops them. Nobody should.`,
+          ];
+          this.say(this.leadPick('contendLeave', cid, lines));
+          // The village learns it like they learn everything — someone saw.
+          // Two witnesses so the rumor can actually travel (r2/r3 pattern).
+          const seen = (v.roster || []).filter(id => id !== cid && id !== this.villagerId);
+          const shuf = seen.slice();
+          for (let i = shuf.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = shuf[i]; shuf[i] = shuf[j]; shuf[j] = t; }
+          const witnesses = shuf.slice(0, 2);
+          for (const wid of witnesses) {
+            try { this.remember(wid, 'contender_left', d + ' walked out after losing the leadership fight'); } catch (e) {}
+          }
+          try { this.seedGossip('departure', { who: cid }, witnesses); } catch (e) {}
+          try { this.removeVillager(cid, 'splinter'); } catch (e) {}
+          return 'leave';
+        }
+        if ((!canLeave && roll < 0.35) || (canLeave && roll < 0.40)) {
+          // REFOCUS: they find their own work and drop the lead goal.
+          arc.state = 'refocus';
+          const temp = this.npcTemper(cid);
+          const newGoal = temp === 'intense' ? 'protect' : temp === 'prickly' ? 'survive' : 'prove';
+          const goalNoun = { prove: 'proving myself', protect: 'keeping the watch', survive: 'keeping us alive, day to day' }[newGoal] || 'my own work';
+          const vp = (this.data.villagers || []).find(x => x.id === cid);
+          if (vp) vp.goal = newGoal;
+          v.bgGoals = v.bgGoals || {}; v.bgGoals[cid] = newGoal;
+          const lines = [
+            `${d} stops cornering you. "I'm done with this. ${goalNoun} — that's mine now. You keep the rest." They mean it. The fire feels lighter.`,
+            `${d} comes to you at dusk. "I'm out of the running. I'd rather do real work." They turn back to what they were doing — and don't look up.`,
+          ];
+          this.say(this.leadPick('contendRefocus', cid, lines));
+          try { this.remember(cid, 'refocused', 'lost the leadership fight; found their own work'); } catch (e) {}
+          return 'refocus';
+        }
+        // GRUDGING RESPECT: the rivalry is over. They stop challenging —
+        // heat no longer builds for them (leadershipFriction skips resolved
+        // arcs) — and the trust floor settles with a small honest bump.
+        arc.state = 'respect';
+        this.bumpTrust(cid, 6, 'grudging respect');
+        const lines = [
+          `Later, by the fire, ${d} catches your eye and gives a single slow nod. No words. The rivalry is over — or at least, they've set it down.`,
+          `${d} works alongside the crews without a word about who runs them. When someone asks if they'll challenge you again, they shrug. "They won. Fair."`,
+          `You catch ${d} watching you organize the watch rotas. "Huh," they say. "Not bad." It's the closest thing to respect you'll get from them.`,
+        ];
+        this.say(this.leadPick('contendRespect', cid, lines));
+        try { this.remember(cid, 'grudging_respect', 'stood down ' + n + ' times; stopped challenging'); } catch (e) {}
+        return 'respect';
+      } catch (e) { return null; }
+    },
+
     // rally: the speech. Village-wide, once per day. Cools contender heat,
     // lifts morale, reminds everyone why you're worth following.
     rallyVillage() {
@@ -4376,8 +4512,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         `You stand up by the fire. "Listen. I don't have answers. But I have us — and that's more than we had yesterday." People look at each other. Someone nods. It's a start.`,
         `"We're still here," you say, simply. "Every one of us. That counts for something." Quiet. Then someone laughs — surprised, real. The fire feels warmer.`,
         `You talk about what you've built together. Not perfectly, not easily — together. A few people stand a little straighter.`,
+        `You talk about the ones who aren't at the fire. The wood pops. Nobody looks away. "We carry them," someone murmurs. You nod. You carry them.`,
+        `"I'm not asking you to follow me," you say. "I'm asking you to stand with each other." A long pause. Then nods, one by one. That's better than following.`,
       ];
-      this.say(lines[Math.floor(Math.random() * lines.length)]);
+      // TRUST r5: the rally lines are a pool now (leadLine: no immediate
+      // repeat) — the old uniform random could repeat the same speech twice
+      // running.
+      this.say(this.leadLine('rally', null, lines));
       this.observe('rally', { noTrust: true }); // trust moved via resolver (socialite r5)
       this.remember(this.villagerId, 'rally', 'gave a speech');
       this.notePlaystyle('leader'); this.notePlaystyle('social');
@@ -4415,7 +4556,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const t = v.trust || (v.trust = {});
         t[vid] = Math.min(100, (t[vid] || 10) + this.trustGainProgressive(vid, 5));
       }
-      this.say(`${first} considers it, then nods. "Yeah. ${tname} doesn't speak for me." You feel the ground firm up under you a little.`);
+      // TRUST r5: the ally line is a pool now (leadLine: no immediate repeat) —
+      // the old single template fired verbatim every askSupport.
+      const allyLines = [
+        `${first} considers it, then nods. "Yeah. ${tname} doesn't speak for me." You feel the ground firm up under you a little.`,
+        `"About time someone said it," ${first} mutters. "${tname} can want the fire — doesn't mean they get it." They move to stand nearer you.`,
+        `${first} glances toward ${tname}, then back at you. "I've got your back. Just don't make me regret it."`,
+        `A short laugh, humorless. "Picking sides already? Fine. Yours." ${first} means it — for now.`,
+      ];
+      this.say(this.leadPick('askSupport', vid, allyLines)); // 0 draws: old ask consumed none
       this.remember(vid, 'ally', 'backed you against ' + target);
       this.observe('coalition', { target: vid, noTrust: true });
       this.notePlaystyle('leader'); this.notePlaystyle('social');
@@ -4438,6 +4587,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const taskName = (this.delegateTasks()[task] || {}).name || task;
       v.taskLeads = v.taskLeads || {};
       v.taskLeads[task] = cid;
+      // TRUST r5 (escalation arc): ledger the yield — a contender you yield
+      // to is being co-opted, which rules out the splinter arc later (they
+      // got what they wanted).
+      try { const _arc = this._contendArc(cid); _arc.yielded = (_arc.yielded || 0) + 1; } catch (e) {}
       // BREAK-IT (social r10 2026-10-10): the old flat +10 bypassed
       // trustGainProgressive — every other gain in the game scales ("the math
       // should be one math", r5) — and (t[cid] || 10) resurrected a real-0
@@ -4468,7 +4621,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`${aname} stood with you against ${cname} — and you just handed them the fire. They won't forget it.`);
         }
       } catch (e) {}
-      this.say(`${this.displayName(cid)} nods slowly. "Good call." They start organizing the ${taskName} crews their way.`);
+      // TRUST r5: the yield line is a pool now (leadLine: no immediate repeat)
+      // — competent acceptance, in-character for the contender.
+      const yieldLines = [
+        `${this.displayName(cid)} nods slowly. "Good call." They start organizing the ${taskName} crews their way.`,
+        `"Finally," ${this.displayName(cid)} breathes. "I've been waiting for you to see sense." They roll up their sleeves and start reworking the ${taskName} rotas their way.`,
+        `A grin — the first real one you've seen. "Watch me work." ${this.displayName(cid)} takes the ${taskName} crews and runs them hard.`,
+        `${this.displayName(cid)} claps their hands once. "Alright. Mine now. You won't regret it — I'll make sure of that." The ${taskName} crews are reorganized by dusk.`,
+      ];
+      this.say(this.leadPick('yieldChallenge', cid, yieldLines)); // 0 draws: old yield consumed none
       this.save();
       return { ok: true, result: `You let them lead ${taskName}. They'll work it every part — and build their own base doing it.` };
     },
@@ -4499,7 +4660,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
-      this.say(`${this.displayName(cid)} holds your gaze, then looks away. "Fine. Your funeral." This isn't over — but it's quiet. For now.`);
+      // TRUST r5 (escalation arc): ledger the stand-down. The line comes from
+      // a tone tier that shifts as the rivalry grinds on — the 5th
+      // confrontation must not sound like the 1st (r4's 14x-verbatim blank).
+      // Then the rivalry may resolve (respect / refocus / splinter-leave).
+      const arc = this._contendArc(cid);
+      arc.stoodDown = (arc.stoodDown || 0) + 1;
+      const _d = this.displayName(cid);
+      const _n = arc.stoodDown;
+      const _tier = _n >= 6 ? 'late' : _n >= 3 ? 'mid' : 'early';
+      const _standPools = {
+        early: [
+          `${_d} holds your gaze, then looks away. "Fine. Your funeral." This isn't over — but it's quiet. For now.`,
+          `${_d} folds their arms. "Your crew, your mess. Don't come crying to me when it goes sideways."`,
+          `${_d} holds your gaze a beat longer than comfortable, then looks away. "Whatever. It's your call — until it isn't."`,
+          `"Careful," ${_d} says, low. "Leaders who don't listen don't last." Then they walk off.`,
+          `A long silence. Then: "You're wrong. But I've said my piece." ${_d} turns away — not done, just done for now.`,
+        ],
+        mid: [
+          `"Still?" ${_d} shakes their head — slower this time. Less heat in it. "Fine. Still."`,
+          `${_d} won't look at you. "One day you'll wish you'd handed me that job." The threat sounds tired even to them.`,
+          `"You keep winning these," ${_d} admits, almost quietly. "Doesn't mean you're right."`,
+          `${_d} exhales through their nose. "Not worth it. Not today. But I'm still here."`,
+        ],
+        late: [
+          `"I don't even know why I bother anymore." But ${_d} is still standing here. That says something.`,
+          `No argument left in ${_d} this time. "Fine. Again. Fine." Flat — resignation, not agreement.`,
+          `${_d} meets your eyes, and for once there's no challenge in it. "You'd better be right. Because I'm tired of this."`,
+        ],
+      };
+      this.say(this.leadPick('standGround:' + _tier, cid, _standPools[_tier])); // 0 draws: old stand-down consumed none
+      this._maybeResolveContendArc(cid, arc);
       this.save();
       return { ok: true, result: 'You held your ground.' };
     },
@@ -5163,7 +5354,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           v.taskLeads[ch.task || 'forage'] = ch.cid;
           v.challenge = null;
           const tname = (this.delegateTasks()[ch.task] || {}).name || 'work';
-          this.say(`${this.displayName(ch.cid)} stopped asking. They just started organizing the ${tname} crews. Nobody stopped them.`);
+          // TRUST r5: the takeover line is a pool now — rare, and each
+          // telling should read fresh.
+          const takeLines = [
+            `${this.displayName(ch.cid)} stopped asking. They just started organizing the ${tname} crews. Nobody stopped them.`,
+            `${this.displayName(ch.cid)} doesn't bother arguing anymore. By dusk the ${tname} crews are taking orders from them, and nobody quite remembers when it changed.`,
+          ];
+          this.say(this.leadPick('takeover', ch.cid, takeLines)); // 0 draws: old takeover consumed none
         }
       }
       // GOSSIP SPREADS: what happened this part travels along social lines,
@@ -14568,6 +14765,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         id !== this.villagerId && id !== vid && this.npcGoal(id) === 'lead');
       for (const cid of contenders) {
         const temp = this.npcTemper(cid);
+        // TRUST r5 (escalation arc): a contender who grudgingly respects you
+        // set the rivalry down — no more friction from them.
+        try { if ((v.contendArc || {})[cid] && v.contendArc[cid].state === 'respect') continue; } catch (e) {}
         if ((temp === 'bold' || temp === 'prickly' || temp === 'intense') && Math.random() < 0.4) {
           v.heat[cid] = (v.heat[cid] || 0) + 1;
           const d = this.displayName(cid);
@@ -14575,8 +14775,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             `${d} watches you give the order. "Interesting. Nobody asked me."`,
             `"Why are YOU giving orders?" ${d} doesn't raise their voice. That's worse.`,
             `${d} folds their arms. "Sure. Your call. For now."`,
+            `${d} doesn't say a word. They just stand there, arms crossed, until you finish giving the order. The silence does the talking.`,
+            `"Got it," ${d} says flatly. "Orders are orders. Whoever gives them."`,
+            `${d} mutters something under their breath. You catch only the last word: "again."`,
           ];
-          this.say(lines[Math.floor(Math.random() * lines.length)]);
+          this.say(this.leadLine('friction', cid, lines));
           // BREAK-IT (social r10 2026-10-10): (t[cid] || 10) resurrected a
           // real-0 trust to 8 — watching you give orders made a hater like
           // you. A penalty that pays. bumpTrust keeps a real 0 at 0 (same
@@ -14584,7 +14787,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.bumpTrust(cid, -2, 'gave orders over a contender');
           if (v.heat[cid] >= 3 && !v.challenge) {
             v.challenge = { cid, task, age: 0 };
-            this.say(`${d} steps closer. "We need to talk. About who's actually running things here."`);
+            // TRUST r5: the challenge raise is a pool now — in-character for
+            // a bold/prickly/intense lead-goal contender, no fabricated past.
+            const raiseLines = [
+              `${d} steps closer. "We need to talk. About who's actually running things here."`,
+              `${d} plants themself in front of you. "This isn't working. You know it, I know it. Say it out loud."`,
+              `"Enough," ${d} says. "I want a say in how this village runs. A real say."`,
+              `${d} waits until the fire's lit and people are watching. Then, loud enough for all of them: "Who put YOU in charge?"`,
+            ];
+            this.say(this.leadPick('challengeRaise', cid, raiseLines)); // 0 draws: old raise consumed none
           }
         }
       }
