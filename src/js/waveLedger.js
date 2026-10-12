@@ -110,7 +110,12 @@
       try { return ((this.ledgerState()[wave] || {}).points | 0); } catch (e) { return 0; }
     },
     // _ledgerAnnounce: idempotent System beats at 50% and 100% of each wave's
-    // bar. Televised, honest copy ("kills only — not near-misses").
+    // bar. Televised, honest copy ("kills only — not near-misses"). The 100%
+    // beat names the REAL next gate, per wave — the gates differ (day floor
+    // for waves 2-3, scale floor for 4-5, nothing for 5), and the old generic
+    // "the day and scale floors" line was wrong for every wave and an
+    // outright lie for wave 5 (there is no wave 6). (sense-fix, longsim wave
+    // lever r3 2026-10-11)
     _ledgerAnnounce(wave, points, cfg) {
       try {
         const st = this.state || {};
@@ -121,7 +126,15 @@
         if (points >= bar && !st._ledgerAnnFull[wave]) {
           st._ledgerAnnFull[wave] = true;
           st._ledgerAnn50[wave] = true;
-          this.sysSay(`📺 WAVE LEDGER — wave ${wave}'s bar is full (${bar}/${bar} — kills only, not near-misses). The next wave opens when the day and scale floors pass.`);
+          const d2 = cfg.wave2DayFloor != null ? cfg.wave2DayFloor : 8;
+          const dN = cfg.dayFloor != null ? cfg.dayFloor : 25;
+          const gate =
+            wave === 1 ? `Wave 2 opens once day ${d2} passes.` :
+            wave === 2 ? `Wave 3 opens once day ${dN} passes.` :
+            wave === 3 ? `Wave 4 opens when Haven goes regional.` :
+            wave === 4 ? `Wave 5 opens when Haven goes national.` :
+            `That's the whole ledger — the village has bloodied the Producers themselves. No further casting directives. You're the show now.`;
+          this.sysSay(`📺 WAVE LEDGER — wave ${wave}'s bar is full (${bar}/${bar} — kills only, not near-misses). ${gate}`);
         } else if (points >= bar / 2 && !st._ledgerAnn50[wave]) {
           st._ledgerAnn50[wave] = true;
           this.sysSay(`📺 WAVE LEDGER — wave ${wave} is halfway there (${points}/${bar} kills — the ledger counts kills only, not near-misses).`);
