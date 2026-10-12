@@ -67,6 +67,24 @@
   // godhoodCloseness(scholar, gh): how close to completion. Knowledge-gated
   // hints use `close` (4+ kit abilities) without naming the capstone.
   function godhoodCloseness(sch, gh) {
+    // RELAY (Steve 2026-10-11): the 11th godhood isn't a 6-kit — it's the
+    // office path. Complete when holding the relay office + all nine
+    // comm-field abilities unlocked through the Relay endgame path.
+    if (gh.id === 'voice_of_the_relay') {
+      let holdsOffice = false;
+      try {
+        const sw = (typeof Game !== 'undefined' && Game.state && Game.state.switchboard) || {};
+        holdsOffice = !!(sw.holderId && sch.villagerId && sw.holderId === sch.villagerId);
+      } catch (e) {}
+      const ra = (sch.relayAbils || {});
+      const abilCount = Object.keys(ra).filter(k => ra[k] && ra[k].unlocked).length;
+      const need = gh.requires.relayAbils || 9;
+      return {
+        kit: abilCount, needKit: need, synergy: holdsOffice, item: true,
+        complete: holdsOffice && abilCount >= need,
+        close: holdsOffice && abilCount >= 6,
+      };
+    }
     const abs = scholarAbilities(sch);
     const syns = scholarSynergies(sch);
     const items = scholarItems(sch);
@@ -352,6 +370,7 @@
     farstrider: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite"><path d="M16 8 Q6 10 2 16 Q8 14 14 14 Z" fill="#5a6e8a" opacity="0.85"/><circle cx="16" cy="10" r="3.6" fill="#e0ac82"/><path d="M12 13 L20 13 L19 27 L13 27 Z" fill="#4a5a7a"/><circle cx="16" cy="18" r="3" fill="none" stroke="#b8c8e8" stroke-width="1"/><path d="M16 15.5 L16 20.5 M13.5 18 L18.5 18 M16 15.5 L17.5 17 M16 20.5 L14.5 19" stroke="#b8c8e8" stroke-width="0.8"/><path d="M4 22 Q12 20 20 22 M2 26 Q12 24 22 26" stroke="#8a9ab8" stroke-width="0.9" fill="none" opacity="0.7"/><rect x="13.2" y="27" width="2.4" height="3.4" fill="#3a3f4a"/><rect x="16.4" y="27" width="2.4" height="3.4" fill="#3a3f4a"/></svg>`,
     the_between: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite"><g opacity="0.35"><circle cx="13" cy="10" r="3.6" fill="#6a5a9e"/><path d="M9 14 L17 14 L16 28 L10 28 Z" fill="#6a5a9e"/></g><g opacity="0.35"><circle cx="19" cy="10" r="3.6" fill="#4a3a7e"/><path d="M15 14 L23 14 L22 28 L16 28 Z" fill="#4a3a7e"/></g><circle cx="16" cy="10" r="3.6" fill="#8a7ab8" opacity="0.9"/><path d="M12 14 L20 14 L19 28 L13 28 Z" fill="#5a4a8e" opacity="0.9"/><circle cx="14.6" cy="9.6" r="0.45" fill="#e8e8ff"/><circle cx="17.4" cy="9.6" r="0.45" fill="#e8e8ff"/><path d="M8 6 L10 8 M24 6 L22 8 M6 16 L8 16 M26 16 L24 16" stroke="#b8a8ff" stroke-width="0.9" opacity="0.8"/></svg>`,
     undying_ward: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite"><ellipse cx="16" cy="8" rx="6" ry="2.4" fill="#fff8e8" opacity="0.85"/><circle cx="16" cy="10" r="3.6" fill="#f1c9a5"/><path d="M12 13.5 L20 13.5 L19 28 L13 28 Z" fill="#f5f0e0"/><path d="M12 13.5 L20 13.5 L19.5 16 L12.5 16 Z" fill="#e8d44a" opacity="0.5"/><path d="M7 12 Q3 18 5 26 Q9 20 11 14 Z" fill="#fff8e8" opacity="0.9"/><path d="M25 12 Q29 18 27 26 Q23 20 21 14 Z" fill="#fff8e8" opacity="0.9"/><circle cx="14.5" cy="9.6" r="0.45" fill="#1a1a1a"/><circle cx="17.5" cy="9.6" r="0.45" fill="#1a1a1a"/><path d="M14.5 19 L16 21 L17.5 19" stroke="#e8a13c" stroke-width="0.9" fill="none" opacity="0.8"/><circle cx="16" cy="24" r="1.2" fill="#ffb700" opacity="0.7"/></svg>`,
+    voice_of_the_relay: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite"><path d="M16 4 Q8 6 5 12 Q3 18 6 24 Q4 20 3 16 M16 4 Q24 6 27 12 Q29 18 26 24 Q28 20 29 16" stroke="#4ae8ff" stroke-width="1" fill="none" opacity="0.75"/><path d="M16 4 Q10 2 6 5 M16 4 Q22 2 26 5" stroke="#4ae8ff" stroke-width="0.8" fill="none" opacity="0.6"/><circle cx="16" cy="10" r="3.6" fill="#e0ac82"/><rect x="13.2" y="8.6" width="2.2" height="1.4" rx="0.4" fill="#0a1a2a"/><rect x="16.6" y="8.6" width="2.2" height="1.4" rx="0.4" fill="#0a1a2a"/><rect x="13.7" y="9" width="1.2" height="0.6" fill="#4ae8ff" opacity="0.95"/><rect x="17.1" y="9" width="1.2" height="0.6" fill="#4ae8ff" opacity="0.95"/><path d="M11 14 L21 14 L20 28 L12 28 Z" fill="#2a3a5a"/><path d="M11 14 L21 14 L20.5 17 L11.5 17 Z" fill="#4ae8ff" opacity="0.25"/><path d="M16 14 L16 28" stroke="#4ae8ff" stroke-width="0.7" opacity="0.5"/><circle cx="6" cy="8" r="1" fill="#4ae8ff" opacity="0.8"/><circle cx="26" cy="9" r="1" fill="#4ae8ff" opacity="0.8"/><circle cx="4" cy="18" r="0.8" fill="#4ae8ff" opacity="0.6"/><circle cx="28" cy="19" r="0.8" fill="#4ae8ff" opacity="0.6"/><circle cx="8" cy="27" r="0.7" fill="#4ae8ff" opacity="0.5"/><circle cx="24" cy="28" r="0.7" fill="#4ae8ff" opacity="0.5"/><path d="M13 22 L19 22 M14 24.5 L18 24.5" stroke="#4ae8ff" stroke-width="0.6" opacity="0.7"/></svg>`,
   };
 
   function mythicSprite(ghId) {
