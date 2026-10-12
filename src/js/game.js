@@ -20304,7 +20304,59 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // limit (terrain-sense, never detail) because "visited earns detail"
         // still holds.
         this.say('HIVE MIND: the map is open. Every tile, revealed — terrain-sense, never detail. Walk it to truly know it. They know you\'re watching.');
+      } else if (id === 'fusion_reactor') {
+        // FUSION REACTOR (Steve 2026-10-12): the install consumes the pellet.
+        // The System does the surgery; you feel the hum start behind your ribs.
+        const inv = s.inventory || [];
+        const pi = inv.findIndex(i => i && ((i.itemId || i.id) === 'fusion_pellet'));
+        if (pi >= 0) {
+          const pellet = inv[pi];
+          if ((pellet.units || 1) > 1) pellet.units -= 1; else inv.splice(pi, 1);
+          s.fusionReactor = { installed: true, online: true, sinceDay: this.state.day || 0 };
+          this.say('FUSION REACTOR: the pellet goes in — properly, inside you. A warm hum starts behind your ribs and settles. You will never be hungry again. (The System is DELIGHTED. That should worry you.)');
+        } else {
+          // No pellet to install — the ability fizzles honestly, no phantom reactor.
+          s.abilities = (s.abilities || []).filter(e => ((e && e.id) || e) !== 'fusion_reactor');
+          this.say('FUSION REACTOR: the System reaches for the pellet — and finds nothing to install. The offer dissolves. (No pellet, no reactor. Find one first.)');
+        }
       }
+    },
+    // fusionReactorOnline: the pellet covers metabolism only while installed and online.
+    fusionReactorOnline(sch) {
+      try {
+        sch = sch || this.state.scholar || {};
+        return !!(sch.fusionReactor && sch.fusionReactor.installed && sch.fusionReactor.online !== false)
+          && this.hasAbility && !!globalThis.Scattering.hasAbility(sch, 'fusion_reactor');
+      } catch (e) { return false; }
+    },
+    // hasFusionPellet: a pellet in the scholar's pack, ready to install.
+    hasFusionPellet() {
+      try {
+        const inv = (this.state.scholar || {}).inventory || [];
+        return inv.some(i => i && ((i.itemId || i.id) === 'fusion_pellet'));
+      } catch (e) { return false; }
+    },
+    // maybeOfferFusionReactor: the System noticed the pellet the way it noticed
+    // the mime show. Reactive offer, idempotent: no offer while one is pending,
+    // none when held, none when the slots are full, none before the System arrives,
+    // none without a pellet in the pack. (Pattern: maybeOfferPurify.)
+    maybeOfferFusionReactor() {
+      try {
+        const s = this.state.scholar;
+        if (!s || !this.state.systemArrived) return false;
+        if (this.hasAbility('fusion_reactor')) return false;
+        if (!this.hasFusionPellet()) return false;
+        if ((s.abilities || []).length >= this.abilitySlots()) return false;
+        if ((s.abilityChoices || []).some(c => ((c && c.id) || c) === 'fusion_reactor')) return false;
+        const def = (this.data.abilities || []).find(a => a.id === 'fusion_reactor');
+        if (!def) return false;
+        s.abilityChoices = [{
+          id: def.id, name: def.name, description: def.description,
+          flavor: 'WE SAW THE PELLET. THE LITTLE STAR. POP IT IN, NEVER CHEW AGAIN! WE CAN DO THE SURGERY — WE ARE VERY GOOD AT SURGERY. (WE HAVE DONE IT ONCE.)',
+        }];
+        this.sysSay('"THAT PELLET IN YOUR PACK. THE TINY STAR. WE CAN PUT IT INSIDE YOU — PROPERLY. NEVER HUNGRY AGAIN. CHOOSE."');
+        return true;
+      } catch (e) { return false; }
     },
 
     // activatableAbilities: abilities you CHOOSE to use (not passive).
@@ -23064,6 +23116,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state.scholar.kcal = Math.min(this.kcalCap(), this.state.scholar.kcal + 100);
         this.say('Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)');
       }
+      // FUSION REACTOR (Steve 2026-10-12): fallback offer tick — if a pellet
+      // arrived by any path other than alienLootGrant, the System still notices.
+      // Idempotent: maybeOfferFusionReactor no-ops when already offered/held/full.
+      try { if (this.maybeOfferFusionReactor) this.maybeOfferFusionReactor(); } catch (e) {}
       this.moveWanderer();
       this.dayPart += 1;
       if (this.dayPart >= 4) return this.endDay();
@@ -25078,7 +25134,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (turnout >= 0.9 && invited.length >= 5) score++;                 // everyone came
       if (spent / (showed.length + 1) < 300) score--;                     // thin pickings
       if (invited.length < 4) score--;                                    // a feast of three is a dinner
-      const quality = Math.max(0, Math.min(2, score));
+      // THE COLD TABLE (Steve 2026-10-12): every fusion reactor at the feast
+      // is a cold spot — they don't eat, don't laugh, don't share. Each one
+      // drags the quality down, applied AFTER the 0..2 clamp so a rich table
+      // can't shrug off cold seats: one reactor costs a legend, two kill the
+      // feast. A village that all goes fusion finds its feasts are just...
+      // sitting. The food culture dies one cold seat at a time. This is the
+      // serious drawback of everyone choosing the path.
+      let coldSeats = 0;
+      try {
+        if (this.fusionReactorOnline && this.fusionReactorOnline()) coldSeats++;
+        for (const vid of showed) {
+          if (this.npcHasAbility && this.npcHasAbility(vid, 'fusion_reactor')) coldSeats++;
+        }
+      } catch (e) {}
+      const quality = Math.max(0, Math.min(2, score) - coldSeats);
       // LEGEND GATE: legend needs something worth singing about (variety or
       // a centerpiece) AND witnesses (invited >= 4).
       const storyOnTable = served.length >= 4 || servedList.some(x => x.meat);
@@ -25125,9 +25195,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const hostName = (() => { try { return this.displayName(this.villagerId).split(' ')[0]; } catch (e) { return 'you'; } })();
       const first = (vid) => { try { return this.displayName(vid).split(' ')[0]; } catch (e) { return 'someone'; } };
       for (const vid of showed) {
-        try { this.remember(vid, 'feast', `${hostName} hosted a feast — real food, firelight, laughing.`); } catch (e) {}
-        try { if (this.recordLifeseedEvent) this.recordLifeseedEvent(vid, 'feast_shared'); } catch (e) {}
-        try { this.bumpTrust(vid, 2 + qualityGated, 'feast'); } catch (e) {}
+        // THE COLD TABLE, individual side: a reactor feels nothing at the
+        // feast — no joy, no warmth, no trust. They sit, they hum, they watch.
+        const vidReactor = !!(this.npcHasAbility && this.npcHasAbility(vid, 'fusion_reactor'));
+        if (vidReactor) {
+          try { this.remember(vid, 'feast', `${hostName} hosted a feast — ${first(vid)} sat at the table and hummed faintly. The food meant nothing. It was the quietest seat at the fire.`); } catch (e) {}
+        } else {
+          try { this.remember(vid, 'feast', `${hostName} hosted a feast — real food, firelight, laughing.`); } catch (e) {}
+          try { if (this.recordLifeseedEvent) this.recordLifeseedEvent(vid, 'feast_shared'); } catch (e) {}
+          try { this.bumpTrust(vid, 2 + qualityGated, 'feast'); } catch (e) {}
+        }
         try { const n = this.npcNeeds(vid); n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
       }
       // the feast is communal: everyone who ate together warms to each other.
@@ -35580,6 +35657,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar || {};
       s.inventory = s.inventory || [];
       s.inventory.push(entry);
+      // FUSION REACTOR (Steve 2026-10-12): the System notices the pellet the
+      // way it noticed the mime show — a reactive offer, idempotent.
+      try { if (def.id === 'fusion_pellet' && this.maybeOfferFusionReactor) this.maybeOfferFusionReactor(); } catch (e) {}
       return { def, entry };
     },
     // ALIEN LOOT REVEAL (Steve 2026-10-06): first use = the learning moment.
@@ -36170,7 +36250,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // proven themselves in death's doorway. This lights up the villager-
       // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
       combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'trade_of_blows', 'unbreakable', 'dead_aim'],
-      field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken'],
+      field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
       social: ['peacemaker', 'mediator', 'scream_cheese', 'animal_ken'],
       craft: ['steady_hands', 'triage', 'preservation_instinct', 'iron_stomach'],
     },

@@ -47,6 +47,15 @@
     // BMR + activity; injuries and heavy abilities raise it. Never lowers with level.
     let need = ACTIVE_DAY;
     (scholar.injuries || []).forEach(() => { need += 150; });
+    // FUSION REACTOR (Steve 2026-10-12): the pellet covers the body's
+    // metabolism — an installed, online reactor means no food need. The
+    // check is defensive: the engine must never crash on a bare scholar.
+    try {
+      const fr = scholar && scholar.fusionReactor;
+      const has = global.Scattering && global.Scattering.hasAbility
+        && global.Scattering.hasAbility(scholar, 'fusion_reactor');
+      if (has && fr && fr.installed && fr.online !== false) return 0;
+    } catch (e) {}
     return need;
   }
 

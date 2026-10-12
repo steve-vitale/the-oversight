@@ -77,6 +77,16 @@
       const s = this.state.scholar || {};
       feast = feast || {};
       try {
+        // FUSION REACTOR CEILING (Steve 2026-10-12): an online reactor crowds
+        // out the feast's fire — the steady hum leaves no room for the surge.
+        // The reactor's flat 1.25x (feastedMult) is all there is. Honest
+        // refusal, stated plainly: the engine that never hungers never feasts.
+        const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+        if (online) {
+          const why = 'The feast is warm and good — but your reactor hums its steady note underneath, and the fire never catches. 1.25x, always, is all there is. (Feast buff refused: the reactor is a ceiling as well as a floor.)';
+          this.say('🍖 ' + why);
+          return { granted: false, why };
+        }
         // The arming may ride in on the feast (hostFeast carries
         // scholar.prog.feastSurge in feast.surge) or sit on prog directly.
         const armed = (s.prog || {}).feastSurge || feast.surge;
@@ -169,7 +179,18 @@
       const b = this.feastedBuffState();
       const base = b ? (b.mult || 1) : 1;
       const g = (typeof this.groundingMult === 'function') ? this.groundingMult() : 1;
-      return base * g;
+      let out = base * g;
+      // FUSION REACTOR (Steve 2026-10-12): the free food boost — an online
+      // reactor burns with a steady 1.25x (proper-feast level), always on.
+      // It never stacks: a real feast buff, when higher, wins. The reactor is
+      // a floor AND a ceiling — food remains the path to PEAK power
+      // (legendary 1.5x, Arc IV hotter). The engine that never hungers also
+      // never feasts.
+      try {
+        const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+        if (online && out < 1.25) out = 1.25;
+      } catch (e) {}
+      return out;
     },
 
     // clearFeastBuff(expired): drop the buff. The fade line fires once, only
@@ -188,7 +209,13 @@
     feastedLine() {
       try {
         const b = this.feastedBuffState();
-        if (!b) return '';
+        // FUSION REACTOR (Steve 2026-10-12): the steady hum is visible — no
+        // silent buffs. When the reactor carries the multiplier, say so.
+        if (!b) {
+          const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+          if (online) return 'REACTOR ×1.25 — the pellet hums behind your ribs · strikes & abilities uplifted · always on';
+          return '';
+        }
         const cfg = this.feastSurgeCfg();
         const s = this.state.scholar || {};
         const parts = Math.max(0, ((b.untilDay || 0) - (s.day || 0)) * cfg.partsPerDay - this.dayPart);
