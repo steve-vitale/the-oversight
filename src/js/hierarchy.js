@@ -57,6 +57,7 @@
 //   - _checkNational()
 //   - stageNationalBeat(polity)
 //   - answerNationalChoice(how)
+//   - _repName(rep)
 //   - _checkGlobal()
 //   - stageGlobalBeat(v)
 //   - answerGlobalChoice(how)
@@ -87,6 +88,8 @@
 //   - national_is_a_polity: a polity is one primary with >=3 active subordinates (four fires is a realm; two is a pact). Haven reaches national SIX ways (docs/SCALE.md, Steve 2026-10-10): LEAD (primary of >=3), BELONG (valued subordinate: trust >=50, arrears 0, link >=14 days to a primary whose realm holds >=4 villages), COVENANT (league of >=4 fires with no primary — mutual defense + shared pool, council votes played), TRADE (trade league of >=4 fires — pooled routes, tariff income, no mutual defense), CONQUEST (a led realm where every subordinate was taken by force — raid-to-subjugate, tribute under duress), or REFUSE (a played, permanent refusal of the scale). All are deed-reactive and take seasons — no calendar path. (code: hierarchy.js)
 //   - the_court_is_played: national and global transitions stage played beats with real-cost choices (feast/host/cold; swear/serve/walk; champion/feast/decline; the founding council's pact/pool; the charter's sign/bargain; the iron court's yoke/mercy/release). Walking away from the Binding refuses the scale's shape; the court dies aloud if the realm dissolves mid-beat. Every national beat also offers REFUSE — the scale itself can be refused, permanently and aloud. (code: hierarchy.js)
 //   - national_is_a_live_state: national/global are live, not titles — when the realm dissolves (no qualifying polity, no pending beat) nationalLive and globalLive clear, the pending global summons dies, and every loss is said aloud. The oath's trust is proportional to the kcal sealed (like the feast-court and accord gift) — a 0-kcal oath buys token trust, never the full +12. (code: hierarchy.js)
+//   - exiled_answerer_kills_the_beat: a staged national/global beat whose answerer is exiled can never be answered (_blockIfNotHaven blocks every council verb from the road — a real sim sat a staged Binding 47 days, spamming the block line daily) — so it dies aloud at the next day boundary, like every other unanswerable beat, never a silent stall. The rung can re-stage once someone can answer it. (code: _checkNational, travel lever r3 2026-10-11)
+//   - rep_name_is_honest: beat copy names the representative via _repName — known people read as first names, a stranger descriptor ("A person, maybe 30s, with a limp") is used whole, never its first word ("A walks into the light" read broken). (code: hierarchy.js, travel lever r3 2026-10-11)
 //   - peers_have_no_primary: covenant/trade links are peer links (kind, a/b fields) — no primary, no subordinate. Primacy bids, tribute demands, and vassal succession don't apply; crises are covenant-style (concede/hold/release), and any member can trigger one. (code: hierarchy.js)
 //   - conquest_is_blood: raidVillage/answerRaid is the force path — casualties via registerDeath, wounds marked, loot as real food, subjugation at trust 15 / opinion -40 / 7,000 kcal duress tribute. Conquered links can sabotage or revolt while trust < 30; mercy converts them to courtship links. Distinct from bidForPrimacy's courtship climb. (code: hierarchy.js)
 //   - league_pool_is_real_food: covenant pool contributions leave the pantry weekly; draws move real kcal back; shorts are said aloud and cost trust. Trade tariff income arrives as real food; route upkeep is real food out. (code: hierarchy.js)
@@ -564,7 +567,7 @@
       var rep = (j && j.rep) ? j.rep : null;
       try { if (!rep) rep = this.representative(); } catch (e) {}
       var rn = 'Someone';
-      try { rn = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+      try { rn = this._repName(rep); } catch (e) {}
       this.say(`⛓️ ${rn} brings it home: ${opts.asSubordinate ? 'Haven bows to ' + nm + ' — one organization, them primary.' : nm + ' bows to Haven — one organization, us primary.'} Tribute: ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The relationship starts at trust 30. Everything from here is earned.`);
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'linked:' + targetId + ':' + (opts.asSubordinate ? 'sub' : 'prim')); } catch (e) {}
       // accordUnanswered: a first link that broke before its gesture restages
@@ -620,7 +623,7 @@
       var rep = null;
       try { rep = this.representative(); } catch (e) {}
       var rn = 'Someone';
-      try { rn = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+      try { rn = this._repName(rep); } catch (e) {}
       this.say(`The village feels it before they understand it: Haven isn't just Haven anymore. ${rn} speaks at ${this._ovName(other)}'s table now — earned, not appointed. And the other fire is watching what Haven does FIRST.`);
       // The Dawn waits for seasons, not handshakes — _checkRegional fires it
       // when a bond is 21+ days old. If this bond is already old enough
@@ -712,7 +715,7 @@
         var rep = null;
         try { rep = this._availableRepresentative(); } catch (e) {}
         var rnm = 'Someone';
-        try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+        try { rnm = this._repName(rep); } catch (e) {}
         if (rep && rep.id !== this.villagerId) {
           var m = this.mshipState();
           var day0 = (this.state.scholar || {}).day || 0;
@@ -1895,8 +1898,35 @@
           try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-lost'); } catch (e) {}
           return;
         }
+        // EXILED ANSWERER (travel lever r3 2026-10-11): a staged beat whose
+        // answerer is exiled can never be answered — _blockIfNotHaven blocks
+        // every council verb from the road, and a real sim sat a staged
+        // Binding pending 47 days, spamming the block line daily. A beat that
+        // cannot be answered dies aloud, like every other unanswerable beat
+        // (dissolved realm, dead link) — never a silent stall. The rung can
+        // re-stage once someone can answer it; the staging check below runs
+        // daily.
+        if (this.state.pendingNational && (this.state.scholar || {}).exiled) {
+          var _xp = this.state.pendingNational;
+          var _xbn = { lead: 'The First Court', conquest: 'The Iron Court', belong: 'The Binding', covenant: 'The Founding Council', trade: 'The Charter' }[_xp.shape] || 'The court';
+          var _xverb = { lead: 'never sits', conquest: 'never convenes', belong: 'never happens', covenant: 'never sits', trade: 'never seals' }[_xp.shape] || 'never happens';
+          this.state.pendingNational = null;
+          this.say(`📯 ${_xbn} ${_xverb} — Haven's voice walks the road in exile, and no court waits on an outcast. The offer dies unmade; the climb can begin again.`);
+          try { if (this.journalNote) this.journalNote('village', 'national', _xbn + ' died unanswered — the answerer is in exile.'); } catch (e) {}
+          try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-beat-died:exile'); } catch (e) {}
+        }
+        if (this.state.pendingGlobal && (this.state.scholar || {}).exiled) {
+          this.state.pendingGlobal = null;
+          this.say(`📡 The Watchers move on — Haven's voice walks the road in exile, and the planet will not wait on an outcast. The summons dies unanswered.`);
+          try { if (this.journalNote) this.journalNote('village', 'global', 'The Watchers died unanswered — the answerer is in exile.'); } catch (e) {}
+        }
         if (this.state.nationalLive || this.state.pendingNational) return;
         if (this.state.scaleRefused) return;
+        // EXILED ANSWERER (travel lever r3 2026-10-11): no beat stages for
+        // an exiled answerer — it would die unanswered at the next boundary
+        // (above). The rung waits; the staging check runs daily, so it
+        // resumes when someone can answer.
+        if ((this.state.scholar || {}).exiled) return;
         var day = (this.state.scholar || {}).day || 0;
         // ONE RUNG PER SEASON (scale-pacing 2026-10-11, Steve: 1 season =
         // 30 days; VILLAGE 1–30, REGIONAL 31–60, NATIONAL 61–90): national
@@ -1914,6 +1944,20 @@
       } catch (e) {}
     },
 
+    // _repName: the representative's name for beat copy. Known people read
+    // as first names ("Mara holds the room"); a stranger descriptor ("A
+    // person, maybe 30s, with a limp") is used whole — its first word ("A")
+    // is not a name, and "A walks into the light" reads broken. (travel
+    // lever r3 2026-10-11)
+    _repName(rep) {
+      try {
+        if (!rep) return 'Someone';
+        var dn = String(this.displayName(rep.id) || '');
+        if (!dn) return 'Someone';
+        if (/^a /i.test(dn) || dn.indexOf(',') >= 0) return dn; // stranger descriptor: use whole
+        return dn.split(' ')[0];
+      } catch (e) { return 'Someone'; }
+    },
     // stageNationalBeat: THE MOMENT Haven becomes national — five shapes
     // (docs/SCALE.md). LEAD — "The First Court" (feast/host/cold). CONQUEST —
     // "The Iron Court" (yoke/mercy/release). BELONG — "The Binding"
@@ -1982,7 +2026,7 @@
       // BREAK-IT travel r12: the host/serve branches below are 7-day loans —
       // they need an available body, not just the social speaker.
       try { rep = this._availableRepresentative(); } catch (e) {}
-      try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+      try { rnm = this._repName(rep); } catch (e) {}
 
       // REFUSE THE SCALE (2026-10-10): every national beat offers 'refuse' —
       // the scale itself, refused permanently and aloud. See refuseTheScale.
@@ -2299,6 +2343,9 @@
     _checkGlobal() {
       try {
         if (this.state.globalLive || this.state.pendingGlobal || !this.state.nationalLive) return;
+        // EXILED ANSWERER (travel lever r3 2026-10-11): no beat stages for
+        // an exiled answerer — it would die unanswered at the next boundary.
+        if ((this.state.scholar || {}).exiled) return;
         var v = (typeof this.havenViewership === 'function') ? this.havenViewership() : 0;
         if (v >= 40) this.stageGlobalBeat(v);
       } catch (e) {}
@@ -2331,7 +2378,7 @@
       // BREAK-IT travel r12: the champion is a 7-day loan — needs an
       // available body, not just the social speaker.
       try { rep = this._availableRepresentative(); } catch (e) {}
-      try { rnm = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+      try { rnm = this._repName(rep); } catch (e) {}
       if (how === 'champion') {
         var m = this.mshipState();
         if (rep && rep.id !== this.villagerId && !(m.loaned && day < (m.loaned.untilDay || 0))) {
@@ -2542,7 +2589,7 @@
       this._linkNote(link, 'formed', kind === 'covenant' ? 'Covenant sworn with ' + nm + ' — equals.' : 'Charter signed with ' + nm + '.');
       var rep = null, rn = 'Someone';
       try { rep = this.representative(); } catch (e) {}
-      try { rn = rep ? String(this.displayName(rep.id)).split(' ')[0] : 'Someone'; } catch (e) {}
+      try { rn = this._repName(rep); } catch (e) {}
       if (kind === 'covenant') {
         this.say(`🤝 ${rn} brings it home: a COVENANT with ${nm} — no primary, no kneeling. Mutual defense and a shared pool, decided by council vote. Equals. The relationship starts at trust 30.`);
       } else {

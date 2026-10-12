@@ -24,6 +24,9 @@
 //   - _vaPickSplinterCause(v)
 //   - _vaSplinterMembers(v, n)
 //   - _vaMakeSplinterVillage(v, remainers, cause, kcal, day)
+//   - _vaUniqueVillageName(base)
+//   - _vaNameAmbiguous(a, b)
+//   - _vaStripNameMark(s)
 //   - _vaPetitionScore(vid, pet, ppm, mood)
 //   - _vaFinishPetition(pet, playerAccept)
 //   - _vaAdmitPetitioners(pet)
@@ -44,6 +47,7 @@
 //   - petition_no_link_needed: splinter breakaways petition at your fire whether or not the parent village is linked — PROGRESSION.md §10; the interview beat is built for strangers. (code: fireSplinter, util audit 2026-10-10)
 //   - rumors_delayed_wrong: internal events arrive delayed, possibly wrong, never omniscience — only for known villages (code: villageAgency.js)
 //   - evil_is_legitimate: a cannibal splinter is content, not a bug; accepting them has real, lasting consequences (code: villageAgency.js)
+//   - names_are_unambiguous: a schism fire takes its cause's banner as a standalone name ("The Red Table", never "Emberhold the Red Table") and retries numbered ("The Red Table II") on exact or near-duplicate collisions — a rumor naming a fire points at exactly one fire; the lineage lives in the rumor copy ("A faction of X has split") (code: _vaMakeSplinterVillage, _vaUniqueVillageName, travel lever r3 2026-10-11)
 // consumes:
 //   - state.otherVillages[].faces, state.otherVillages[].inner, state.otherVillages[].famine
 //   - state.pendingPetition, state.petitionQueue, state.pendingBeg, state.pendingRaidDefense, state.pendingSuccession
@@ -411,15 +415,21 @@
     // _vaMakeSplinterVillage: the half that doesn't petition becomes a new
     // fire in the world — a live village, not a rumor. It keeps playing.
     _vaMakeSplinterVillage(v, remainers, cause, kcal, day) {
-      var suffix = {
-        cannibal: 'the Red Table', 'famine-flight': 'the Hungry Road',
-        hardline: 'the Bloodied', peaceful: 'the Quiet Ones',
-        'succession-loser': 'the Cast Out',
+      // The splinter takes the cause's banner as its own name — "The Red
+      // Table", never "Emberhold the Red Table". The parent keeps its name,
+      // and the schism rumor carries the lineage ("A faction of Emberhold has
+      // split — ... they call the new fire The Red Table"), so a rumor that
+      // names a fire always points at exactly one fire. (travel lever r3,
+      // 2026-10-11: unambiguous village names)
+      var banner = {
+        cannibal: 'The Red Table', 'famine-flight': 'The Hungry Road',
+        hardline: 'The Bloodied', peaceful: 'The Quiet Ones',
+        'succession-loser': 'The Cast Out',
       }[cause] || 'Splinter';
       var id = 'village_spl_' + day + '_' + Math.floor(R() * 100000);
       var nv = {
         id: id,
-        name: (v.name || 'Emberhold') + ' ' + suffix,
+        name: this._vaUniqueVillageName(banner),
         x: Math.min(8, (v.x || 4) + 1), y: v.y || 4,
         day: 0,
         population: Math.max(2, remainers.length),
@@ -432,6 +442,44 @@
       this.ensureFaces(nv);
       try { (this.state.otherVillages || []).push(nv); } catch (e) {}
       return nv;
+    },
+
+    // _vaUniqueVillageName: village names must be unambiguous in-world. A
+    // rumor that "Emberhold has bound Stonebridge" has to point at exactly
+    // one fire, so a new fire's name may be neither an exact duplicate nor a
+    // near-duplicate (one name containing the other, case-insensitive) of
+    // any name already in state.otherVillages. Collisions retry with a
+    // numbered mark — base, "base II", "base III" ... — so a second schism
+    // of the same cause is "The Red Table II", not a twin. (travel lever r3)
+    _vaStripNameMark(s) {
+      // the sanctioned ordinal mark: "The Red Table II" is kin of
+      // "The Red Table", not a near-duplicate of it.
+      return String(s || '').toLowerCase().trim()
+        .replace(/\s+(ii|iii|iv|ix|v|vi|vii|viii|x)$/, '')
+        .replace(/\s+#\d+$/, '');
+    },
+    _vaNameAmbiguous(a, b) {
+      var x = String(a || '').toLowerCase().trim(), y = String(b || '').toLowerCase().trim();
+      if (!x || !y) return false;
+      if (x === y) return true;
+      if (this._vaStripNameMark(x) === this._vaStripNameMark(y)) return false; // ordinal-marked kin: the sanctioned disambiguator
+      return x.indexOf(y) >= 0 || y.indexOf(x) >= 0;
+    },
+    _vaUniqueVillageName(base) {
+      var taken = [];
+      try { taken = (this.state.otherVillages || []).map(function (w) { return w && w.name; }).filter(Boolean); } catch (e) {}
+      var ROMAN = ['II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+      var cands = [base];
+      for (var r = 0; r < ROMAN.length; r++) cands.push(base + ' ' + ROMAN[r]);
+      for (var n = 11; n < 200; n++) cands.push(base + ' #' + n);
+      for (var i = 0; i < cands.length; i++) {
+        var bad = false;
+        for (var j = 0; j < taken.length; j++) {
+          if (this._vaNameAmbiguous(cands[i], taken[j])) { bad = true; break; }
+        }
+        if (!bad) return cands[i];
+      }
+      return base + ' #' + Math.floor(R() * 1000000); // unreachable
     },
 
     // fireSplinter: THE SCHISM. A faction breaks away from a linked village.

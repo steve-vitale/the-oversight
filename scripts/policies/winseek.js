@@ -292,8 +292,9 @@ function diplomacyRoad(Game, ctx) {
           : shape === 'belong' ? 'swear'
           : shape === 'covenant' ? 'pact'
           : shape === 'trade' ? 'sign' : 'feast';
-        Game.answerNationalChoice(pick);
-        ctx.nationalAnswered = (ctx.nationalAnswered || 0) + 1;
+        // count only real answers — a blocked/refused call (exiled scholar,
+        // dissolved realm) returns null and is not an answer.
+        if (Game.answerNationalChoice(pick)) ctx.nationalAnswered = (ctx.nationalAnswered || 0) + 1;
       } catch (e) {}
     }
     const ovs = Game.state.otherVillages || [];

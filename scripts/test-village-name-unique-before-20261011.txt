@@ -1,0 +1,65 @@
+seed 4242: villages=33 splinters-formed=30
+  names: ["Emberhold","Stonebridge","Thornfield","Emberhold the Red Table","Emberhold the Red Table","Emberhold the Hungry Road","Emberhold the Hungry Road","Emberhold the Bloodied","Emberhold the Bloodied","Emberhold the Quiet Ones","Emberhold the Quiet Ones","Emberhold the Cast Out","Emberhold the Cast Out","Stonebridge the Red Table","Stonebridge the Red Table","Stonebridge the Hungry Road","Stonebridge the Hungry Road","Stonebridge the Bloodied","Stonebridge the Bloodied","Stonebridge the Quiet Ones","Stonebridge the Quiet Ones","Stonebridge the Cast Out","Stonebridge the Cast Out","Thornfield the Red Table","Thornfield the Red Table","Thornfield the Hungry Road","Thornfield the Hungry Road","Thornfield the Bloodied","Thornfield the Bloodied","Thornfield the Quiet Ones","Thornfield the Quiet Ones","Thornfield the Cast Out","Thornfield the Cast Out"]
+  collision pairs: exact=15 near=30
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+  FAIL: no exact-duplicate village names — exact=15
+  FAIL: no near-duplicate village names — near=30
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+  FAIL: no splinter name contains its parent name — parentCarry=30
+  rumor: Emberhold has split — the eaters walked. They call the new fire Emberhold the Red Table. Half of them were headed this way, or so the traveler says.
+  rumor(wrong): A traveler says Emberhold burned — the whole fire, gone. (Wrong. It split: the eaters walked. Emberhold the Red Table is the new fire.)
+  FAIL: rumored new name is unambiguous vs parent — "Emberhold the Red Table" vs "Emberhold"
+seed 7: villages=44 splinters-formed=40
+  names: ["Emberhold","Stonebridge","Thornfield","Ashford","Emberhold the Red Table","Emberhold the Red Table","Emberhold the Hungry Road","Emberhold the Hungry Road","Emberhold the Bloodied","Emberhold the Bloodied","Emberhold the Quiet Ones","Emberhold the Quiet Ones","Emberhold the Cast Out","Emberhold the Cast Out","Stonebridge the Red Table","Stonebridge the Red Table","Stonebridge the Hungry Road","Stonebridge the Hungry Road","Stonebridge the Bloodied","Stonebridge the Bloodied","Stonebridge the Quiet Ones","Stonebridge the Quiet Ones","Stonebridge the Cast Out","Stonebridge the Cast Out","Thornfield the Red Table","Thornfield the Red Table","Thornfield the Hungry Road","Thornfield the Hungry Road","Thornfield the Bloodied","Thornfield the Bloodied","Thornfield the Quiet Ones","Thornfield the Quiet Ones","Thornfield the Cast Out","Thornfield the Cast Out","Ashford the Red Table","Ashford the Red Table","Ashford the Hungry Road","Ashford the Hungry Road","Ashford the Bloodied","Ashford the Bloodied","Ashford the Quiet Ones","Ashford the Quiet Ones","Ashford the Cast Out","Ashford the Cast Out"]
+  collision pairs: exact=20 near=40
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+  FAIL: no exact-duplicate village names — exact=20
+  FAIL: no near-duplicate village names — near=40
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+  FAIL: no splinter name contains its parent name — parentCarry=40
+  rumor: Emberhold has split — the eaters walked. They call the new fire Emberhold the Red Table. Half of them were headed this way, or so the traveler says.
+  rumor(wrong): A traveler says Emberhold burned — the whole fire, gone. (Wrong. It split: the eaters walked. Emberhold the Red Table is the new fire.)
+  FAIL: rumored new name is unambiguous vs parent — "Emberhold the Red Table" vs "Emberhold"
+seed 99: villages=33 splinters-formed=30
+  names: ["Emberhold","Stonebridge","Thornfield","Emberhold the Red Table","Emberhold the Red Table","Emberhold the Hungry Road","Emberhold the Hungry Road","Emberhold the Bloodied","Emberhold the Bloodied","Emberhold the Quiet Ones","Emberhold the Quiet Ones","Emberhold the Cast Out","Emberhold the Cast Out","Stonebridge the Red Table","Stonebridge the Red Table","Stonebridge the Hungry Road","Stonebridge the Hungry Road","Stonebridge the Bloodied","Stonebridge the Bloodied","Stonebridge the Quiet Ones","Stonebridge the Quiet Ones","Stonebridge the Cast Out","Stonebridge the Cast Out","Thornfield the Red Table","Thornfield the Red Table","Thornfield the Hungry Road","Thornfield the Hungry Road","Thornfield the Bloodied","Thornfield the Bloodied","Thornfield the Quiet Ones","Thornfield the Quiet Ones","Thornfield the Cast Out","Thornfield the Cast Out"]
+  collision pairs: exact=15 near=30
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Red Table"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Hungry Road"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Bloodied"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+    near: "Emberhold" ~ "Emberhold the Quiet Ones"
+  FAIL: no exact-duplicate village names — exact=15
+  FAIL: no near-duplicate village names — near=30
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Red Table" (cannibal)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+    parent-carry: parent="Emberhold" splinter="Emberhold the Hungry Road" (famine-flight)
+  FAIL: no splinter name contains its parent name — parentCarry=30
+  rumor: Emberhold has split — the eaters walked. They call the new fire Emberhold the Red Table. Half of them were headed this way, or so the traveler says.
+  rumor(wrong): A traveler says Emberhold burned — the whole fire, gone. (Wrong. It split: the eaters walked. Emberhold the Red Table is the new fire.)
+  FAIL: rumored new name is unambiguous vs parent — "Emberhold the Red Table" vs "Emberhold"
+
+RESULT: 12 pass, 12 fail (seeds 4242,7,99)
