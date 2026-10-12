@@ -1453,3 +1453,9 @@ body.broadcasting .ord-gridwrap.detail::before {
 .broadcast-ticker .ticker-voice { color: #ffd54a; font-weight: bold; }
 .broadcast-ticker .ticker-sep { color: #4df3ff; margin: 0 8px; }
 .broadcast-ticker .ticker-crowd { margin-left: 6px; }
+
+/* COMPACT PORTRAIT (Steve 2026-10-11): no sprite ever renders at the
+   browser's 300px default size. Any svg.sprite without an explicit
+   container size (grid cells, vportrait, etc.) gets a compact portrait
+   cap instead of a massive blob. Explicit sizes are unaffected. */
+svg.sprite { max-width: 72px; max-height: 72px; }
