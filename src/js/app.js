@@ -11899,8 +11899,11 @@
   // the System doesn't ask politely.
   let inlineView = null; // {kind:'person'|'assign'|'remote'|'pantry', vid, line, result, nvMode, via, mapKey}
   // chatView: the ONE acceptable interruption (Steve). When you're talking to
-  // someone, the screen becomes the conversation — full chat view, no
-  // scrolling to follow the dialogue. {vid, thinking, thinkingToken}.
+  // someone, the narration region becomes the conversation — the Pokémon-style
+  // dialogue box (one beat at a time, ▼ to advance, choices in the box). The
+  // map stays visible above it; there is no separate full-screen chat surface
+  // (the old .chat full-screen takeover was removed 2026-10-05; its CSS was
+  // dead until 2026-10-12). {vid, thinking, thinkingToken}.
   let chatView = null;
   // lastPersonTap: tapping a person's tile while already adjacent steps onto
   // their tile (explicit). Any movement elsewhere invalidates it.
