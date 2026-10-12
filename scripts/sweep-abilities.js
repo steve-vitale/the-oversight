@@ -140,6 +140,12 @@ function abilitySnapshot(Game) {
     out.integ = Math.round(s.integration || 0);
     out.resonance = ((s.prog || {}).surgeResonance) || 0;
     out.feastSurge = !!((s.prog || {}).feastSurgeUsed);
+    // LEVER 9 r5: deed ledgers — per-deed evidence (trial deeds r4, practice
+    // deeds r5) on identical seeds, god policy. Counters, not grants.
+    out.trialDeeds = Object.assign({}, s.trialDeeds || {});
+    out.practiceDeeds = Object.assign({}, s.practiceDeeds || {});
+    out.softStepStreak = s.softStepStreak || 0;
+    out.softStepPending = !!s.softStepPending;
     const pg = Game.progState ? Game.progState() : {};
     out.slotMoments = Object.keys(pg.slotMoments || {}).map(Number).sort((a, b) => a - b);
   } catch (e) {}
@@ -255,6 +261,7 @@ function abilitySnapshot(Game) {
       maxInteg: Math.max.apply(null, pr.map(r => r.ab.maxInteg)),
       slotMomentsEver: [...new Set(pr.flatMap(r => r.ab.slotMoments))].sort((a, b) => a - b),
       synergiesDiscovered: sum(r => r.ab.synergies.length),
+      synergiesUnique: [...new Set(pr.flatMap(r => r.ab.synergies || []))].length,
       runsWithSynergy: pr.filter(r => r.ab.synergies.length > 0).length,
       meanAttempts: +(sum(r => r.ab.attempts) / pr.length).toFixed(2),
       meanUseVol: +(sum(r => r.ab.useVol) / pr.length).toFixed(1),
@@ -263,6 +270,10 @@ function abilitySnapshot(Game) {
       maxResonance: Math.max.apply(null, pr.map(r => r.ab.resonance)),
       feastSurgeRuns: pr.filter(r => r.ab.feastSurge).length,
       resonance35Runs: pr.filter(r => r.ab.resonance >= 35).length,
+      // lever 9 r5: deed ledger aggregates — how often each deed fired
+      trialDeedRuns: (() => { const m = {}; for (const r of pr) for (const k of Object.keys(r.ab.trialDeeds || {})) if ((r.ab.trialDeeds[k] || 0) > 0) m[k] = (m[k] || 0) + 1; return m; })(),
+      practiceDeedRuns: (() => { const m = {}; for (const r of pr) for (const k of Object.keys(r.ab.practiceDeeds || {})) if ((r.ab.practiceDeeds[k] || 0) > 0) m[k] = (m[k] || 0) + 1; return m; })(),
+      grantIds: (() => { const m = {}; for (const r of pr) for (const a of (r.ab.abilities || [])) { const id = String(a).split(':')[0]; m[id] = (m[id] || 0) + 1; } return m; })(),
       villAbilities: sum(r => r.ab.villAbilities),
       villWithAb: sum(r => r.ab.villWithAb),
       villTracks: pr.reduce((m, r) => { for (const [k, v] of Object.entries(r.ab.villTracks)) m[k] = (m[k] || 0) + v; return m; }, {}),

@@ -19706,11 +19706,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.spawnWorldMonster(mdef, px, py, { mx: spot.mx, my: spot.my });
           // AMBIGUITY: you don't know what it is. The village name, or the descriptor — never the true name.
           this.say(`Something moves out there — ${this.monsterDisplayName(mdef.id)}.`);
+          // PRACTICE DEEDS (longsim abilities r5 2026-10-12): soft_step — the
+          // woods noticed you. Streak resets.
+          try { this.noteSoftStepTile(true); } catch (e) {}
         } else {
           scholar.spawnMisses = misses + 1; // rolled but nothing spawnable — pity keeps counting
+          try { this.noteSoftStepTile(false); } catch (e2) {} // nothing out there found you
         }
       } else if (!this.monsterAt(px, py)) {
         scholar.spawnMisses = misses + 1;
+        try { this.noteSoftStepTile(false); } catch (e3) {} // a quiet tile — the woods didn't notice
       }
       // slice 1: the Bulldozer wanders from day 3 — visible, patrols, encounter on contact
       // WANDERER RECURRENCE (Steve 2026-10-06): one-shot per run meant the
@@ -19781,6 +19786,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         this.spawnWorldMonster({ id: this.wanderer.monsterId, veteran: this.wanderer.veteran }, px, py, { mx, my });
         this.say('Something big is HERE. In the grid with you. You can see it. It can see you.');
+        // PRACTICE DEEDS (longsim abilities r5 2026-10-12): soft_step — the
+        // wanderer made contact. Detected.
+        try { this.noteSoftStepTile(true); } catch (e) {}
         this.encounterDone = true;
         this.state.wandererNextDay = scholar.day + 4; // it comes back. they always come back.
         this.wanderer = null;
@@ -19807,6 +19815,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state.wandererNextDay = this.state.scholar.day + 4; // it comes back. they always come back.
         const mid = w.monsterId;
         this.wanderer = null;
+        // PRACTICE DEEDS (longsim abilities r5 2026-10-12): soft_step — the
+        // wanderer walked into you. Detected.
+        try { this.noteSoftStepTile(true); } catch (e) {}
         // TENT-AWARE (Steve 2026-10-08): the tile entry is physical now.
         this.triggerEncounter(mid);
       }
@@ -20099,6 +20110,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
         // System starts granting now (the villager-mirror rule).
         try { this.checkPendingTrialDeeds(); } catch (e) {}
+        // PRACTICE DEEDS (longsim abilities r5): same rule for the
+        // practice/discovery deeds.
+        try { this.checkPendingPracticeDeeds(); } catch (eP) {}
         // the System names everything — meat in packs updates too
         try {
           for (const mid of Object.keys(this.state.codex.monsters || {})) this.refreshMeatNames(mid);
@@ -29578,6 +29592,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // alien weapon actually does. Knowledge is earned by doing.
       try { this.alienLootReveal((this.state.scholar.equipped || {}).weapon); } catch (e) {}
       const tAfter = this.tbFighter(t.key);
+      // PRACTICE DEEDS (longsim abilities r5 2026-10-12): haymaker — one
+      // blow for half or more of a REAL opponent's max HP (maxHp >= 30, so a
+      // lucky hummice tap doesn't count). Kill or not, that was the big swing
+      // landing where it hurts.
+      try {
+        const _hmMax = (t && t.maxHp) || 0;
+        if (!isHuman && tAfter && typeof shown === 'number' && _hmMax >= 30 && shown >= _hmMax * 0.5) {
+          this.notePracticeDeed('haymaker', 1);
+        }
+      } catch (e) {}
       // HIGHBEAM: hurting the deer moves you to the front of its list.
       try { if (tAfter && this.encUsesFifo(tAfter)) this.encNoticesPain(tAfter, 'p'); } catch (e) {}
       // HITS LANDED: hurting it teaches you its toughness.
@@ -32473,6 +32497,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         this.say(`${this.encSubject(m)} flinches — its note dies mid-croak. It hops back, throat fluttering.`);
       }
+      // PRACTICE DEEDS (longsim abilities r5 2026-10-12): war_cry — the shout
+      // actually moved something with teeth (n>0). Raw noise that lands is
+      // the practice; the wasted-breath kind teaches nothing.
+      try { if (n > 0) this.notePracticeDeed('war_cry', 1); } catch (e) {}
       if (!n) this.say('Nothing out there cares about noise. The dark swallows it.');
       else this.tbStyle(10, 'broke the chorus with raw noise');
       this.tbRefreshTelegraphUI();
@@ -36669,6 +36697,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (_taken >= 50) this.noteTrialDeed('take_50_damage_in_one_fight', 1);
           const _maxHp = Math.max(1, _p.maxHp || 100);
           if ((_p.hp || 0) <= _maxHp * 0.25) this.noteTrialDeed('blood_trial', 1);
+        }
+      } catch (e) {}
+      // PRACTICE DEEDS (longsim abilities r5 2026-10-12): ambush — the fight
+      // ended in round 1 with at least one monster dropped. You picked the
+      // ground and the moment; it never got going. Same player-alive guard as
+      // the trial deeds above; _kills is the lineage-deduped body list.
+      try {
+        const _pa = this.tbFighter('p');
+        if (_pa && _pa.alive !== false && (_pa.hp || 0) > 0 &&
+            (result === 'won' || result === 'routed') && ((f && f.round) || 1) <= 1 &&
+            _kills && _kills.length) {
+          this.notePracticeDeed('ambush', 1);
         }
       } catch (e) {}
       } finally {

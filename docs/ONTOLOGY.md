@@ -969,6 +969,16 @@ The stasis pods as a standing weight (KIN.md: "a weight, not a meter", Steve 202
 
 **Consumes:** —
 
+### practice-deeds (`practice-deeds.js`)
+Practice deed grants — unlock.type === 'practice' abilities
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 

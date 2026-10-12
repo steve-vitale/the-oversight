@@ -1987,6 +1987,10 @@
           for (const [ox, oy] of ring) { if (tryMove(a.mx + ox, a.my + oy)) break; }
         }
         a.aware = 1; a.pstate = 'bolt';
+        // PRACTICE DEEDS (longsim abilities r5 2026-10-12): it bolted — a
+        // later kill of this animal is a blood_trail deed ("it didn't get
+        // away").
+        a.boltedOnce = true;
         a.stamina = Math.max(0, (a.stamina || 1) - 1);
         if (a.stamina <= 0) {
           a.pstate = 'winded';

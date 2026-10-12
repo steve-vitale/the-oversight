@@ -1001,7 +1001,7 @@
     try { if (this.noteToolUse) this.noteToolUse(); } catch (e) {}
     if (Math.random() < 0.25) {
       // it wakes mid-swing — the trick already failed once, so now it runs
-      a.pstate = 'bolt'; a.aware = 1; a.floppedOnce = true;
+      a.pstate = 'bolt'; a.aware = 1; a.floppedOnce = true; a.boltedOnce = true;
       var dmg = 3 + Math.floor(Math.random() * 4);
       try { s.health = Math.max(0, (s.health == null ? 100 : s.health) - dmg); } catch (e) {}
       this.feedback('It SCREECHES awake mid-swing and sinks its teeth into your hand! (-' + dmg + ' HP) It bolts, heart hammering.');
@@ -1011,6 +1011,9 @@
       return true;
     }
     s.animal = null;
+    // PRACTICE DEEDS (longsim abilities r5 2026-10-12): the "dead" opossum
+    // never moved — the silent kill counts toward stalk.
+    try { this.notePracticeDeed('stalk', 1); } catch (e) {}
     // SPECIES-HONEST GROSS (hunter break-it 2026-10-10): the carcass keeps
     // the animal's real gross — skill is waste reduction at the cleaning
     // (butcherYieldFrac), never gross inflation.
@@ -1347,7 +1350,7 @@
         try { this.audioEvent('animalBolt'); } catch (e) {}
         var sdx = Math.sign(a.mx - px), sdy = Math.sign(a.my - py);
         tryMove(a.mx + sdx * 2, a.my + sdy * 2) || tryMove(a.mx + sdx, a.my + sdy);
-        a.pstate = 'bolt'; a.aware = 1;
+        a.pstate = 'bolt'; a.aware = 1; a.boltedOnce = true;
         if (a.mx === 0 || a.mx === 8 || a.my === 0 || a.my === 8) this.encReleaseAnimal(a);
         return;
       }
@@ -1564,7 +1567,7 @@
       // DEER: the white tail goes up early. Explodes into motion.
       // (cornered/regroup excluded: a trapped or regrouping deer doesn't
       // re-bolt — the panic branch and the regroup rhythm own those turns.)
-      a.pstate = 'bolt'; a.aware = 1;
+      a.pstate = 'bolt'; a.aware = 1; a.boltedOnce = true;
       this.say(this.encCap(label) + ' — white tail up — explodes into motion!');
       try { this.audioEvent('animalSnort'); } catch (e) {}
       try { this.audioEvent('animalBolt'); } catch (e) {}
@@ -1577,7 +1580,7 @@
     }
     if (a.pstate === 'taunt') {
       // FOX: holding at range, toying with you. Close in and it runs for real.
-      if (dist < 4) { a.pstate = 'bolt'; }
+      if (dist < 4) { a.pstate = 'bolt'; a.boltedOnce = true; }
       else {
         a.aware = Math.max(0.4, (a.aware || 0.6) - 0.1);
         // NO-SILENT-TURNS (Steve 2026-10-07): the toying turn narrates too —
@@ -1636,7 +1639,7 @@
     if (beh === 'camouflaged') {
       noticeRange = 1;
       if (dist <= 1 && (a.aware || 0) >= 0.75 && a.pstate !== 'bolt' && a.pstate !== 'winded') {
-        a.pstate = 'bolt'; a.aware = 1;
+        a.pstate = 'bolt'; a.aware = 1; a.boltedOnce = true;
         this.say(this.encFleeText(a, this.encCap(label) + ' EXPLODES from under your boots — a whir of wings, twisting away!'));
         try { this.audioEvent('animalFlush'); } catch (e) {}
         return; // the explosion IS this turn; it bolts next turn
@@ -1708,7 +1711,7 @@
     // cornered/regroup excluded: those states own their turns (panic branch,
     // regroup rhythm) — the threshold must not yank them back to 'bolt'.
     if (!this.encNeverBolt(beh) && a.aware >= boltAt && a.pstate !== 'bolt' && a.pstate !== 'winded' && a.pstate !== 'taunt' && a.pstate !== 'playing_dead' && a.pstate !== 'cornered' && a.pstate !== 'regroup') {
-      a.pstate = 'bolt';
+      a.pstate = 'bolt'; a.boltedOnce = true;
       // Flee narration is knowledge-gated (encFleeText): the vivid huntText
       // is earned; the ignorant get the generic version.
       this.say(this.encFleeText(a, this.encCap(label) + " decides you're trouble and bolts!"));
@@ -1760,7 +1763,7 @@
       var rdef = null;
       try { rdef = this.encAnimalDef(a.id); } catch (e) {}
       this.say(this.encCap(rdef ? this.encDescribeAnimal(rdef) : label) + ' gathers itself — wings half-folded, breast heaving. The window holds.');
-      a.pstate = 'bolt'; a.aware = Math.max(0.4, (a.aware || 0) - 0.3);
+      a.pstate = 'bolt'; a.aware = Math.max(0.4, (a.aware || 0) - 0.3); a.boltedOnce = true;
       return;
     }
     if (a.pstate === 'cornered') {
@@ -1813,7 +1816,7 @@
       }
       if (dashed > 0) {
         var shovedSaid = !!a.shovedOnce; // the shove-past-you line fired above
-        a.pstate = 'bolt'; // it broke the corner — back to the chase
+        a.pstate = 'bolt'; a.boltedOnce = true; // it broke the corner — back to the chase
         a.shovedOnce = false;
         // NO-SILENT-TURNS (Steve 2026-10-07): breaking the corner IS the
         // turn's story — the chase is back on. (Skipped when the shove line
@@ -1976,6 +1979,16 @@
       this.feedback('You stalk closer — but ' + label + ' was already gone.');
       return true;
     }
+    // PRACTICE DEEDS (longsim abilities r5 2026-10-12): stalk — a quiet step
+    // that left the animal unalerted (aware < 0.5, encounter continues). The
+    // step itself is the practice: closing distance without being noticed,
+    // one quiet beat at a time. A twitchy rabbit notices at 2 steps; a calm
+    // deer lets you bank several — the tracker ability stretches it further.
+    // (The threshold lives in PRACTICE_DEED_THRESHOLDS.)
+    try {
+      const _sa2 = s.animal;
+      if (_sa2 && ((_sa2.aware || 0) < 0.5)) this.notePracticeDeed('stalk', 1);
+    } catch (e) {}
     var now = this.encAnimalLabel(s.animal);
     // TRACKING (Steve): reading sign is a skill. The tracker knows what left
     // the prints and how fresh; the ignorant see disturbed earth. Button honest.
@@ -2085,7 +2098,7 @@
     // the bolt the old code set here contradicted the huntText ("doesn't
     // flee"). It stays; the miss verb above (encSlowMissVerb) owns the words.
     if (b === 'slow') { a.aware = 1; return false; }
-    a.aware = 1; a.pstate = 'bolt';
+    a.aware = 1; a.pstate = 'bolt'; a.boltedOnce = true;
     return false;
   };
 
@@ -2399,6 +2412,18 @@
     if (roll < chance) {
       s.animal = null;
       this.encHuntPracticed('kill'); // a clean kill teaches double
+      // PRACTICE DEEDS (longsim abilities r5 2026-10-12): stalk — the animal
+      // never knew (aware < 0.5 at the kill): close distance without being
+      // noticed, the copy's literal promise. blood_trail — it had already
+      // bolted this encounter (boltedOnce flag, chase pstate, or 3+ encounter
+      // beats) and still didn't get away.
+      try {
+        const _aw = (a && a.aware) || 0;
+        if (_aw < 0.5) this.notePracticeDeed('stalk', 1);
+        const _chase = a && (a.boltedOnce === true || (a.turns || 0) >= 3 ||
+          ['bolt', 'cornered', 'regroup', 'taunt'].indexOf(a.pstate) >= 0);
+        if (_chase) this.notePracticeDeed('blood_trail', 1);
+      } catch (e) {}
       // SPECIES-HONEST GROSS (hunter break-it 2026-10-10): the carcass keeps
       // the animal's real gross — skill is waste reduction at the cleaning
       // (butcherYieldFrac), never gross inflation.
