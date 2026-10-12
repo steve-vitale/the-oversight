@@ -95,7 +95,7 @@
 //   - arena_reentry_guard: while the contest modal is suspended for a real arena fight, contestChoose drops all input ({arena:true}) and _contestArena refuses a second start — a double-tap race used to re-fire startCombat (clobbering state.arenaContest mid-fight) and re-grant grantWeapon choices (code: contestChoose, _contestArena, break-it 2026-10-09)
 //   - winner_share_pantryadd: a villager's watched win puts the winner's share through pantryAdd — the pantry cap is real, pantryKcal stays in sync; a full pantry gets the honest "eaten on the spot" line, never a silent overfill (code: _contestEnd, break-it 2026-10-09)
 //   - prize_idempotent: the prize (villager share or player alien loot) fires once per (ac, participant) — ac._prizeGranted; a re-entrant _contestEnd on one ac re-granted the prize. Sibling: _contestResolveOthers resolves once per ac (ac._othersResolved) — no re-rolled fates, no re-granted co-winner shares (code: _contestEnd, _contestResolveOthers, break-it contests r14 2026-10-10)
-//   - hardened_real: the hardened variant is mechanically real, not a paper tiger. What was announced ("It's worse now") is what's played AND resolved: the scaled contest (not the pool base) is used at every end path (_cxScaledContest), so hardened risk reaches the engine in watched verdicts and the name resolves as "Hardened X"; phase damage is x1.25 at the contestChoose choke point; arena beasts run one wave hotter; hardened prize rolls are hotter (code: _cxScaledContest, contestChoose, _contestArena, _contestEnd, break-it 2026-10-09)
+//   - hardened_real: the hardened variant is mechanically real, not a paper tiger. What was announced ("It's worse now") is what's played AND resolved: the scaled contest (not the pool base) is used at every end path (_cxScaledContest), so hardened risk reaches the engine in watched verdicts and the name resolves as "Hardened X"; phase damage is x1.25 at the contestChoose choke point; arena beasts run one wave hotter; hardened prize rolls are hotter (code: _cxScaledContest, contestChoose, _contestArena, _contestEnd, break-it 2026-10-09). MAIN-EVENT BEAT (longsim contests r8 2026-10-12): EVERY hardened variant (heat>=1) now inserts a genuinely different beat phase at index 1 — measured 17/20 hardened runs phase-identical on pristine while the copy claimed "some of your old lines won't work" (the old byte-identical blank, plus a lie; the dishonest line is gone). Kind is honest: 'no_repeat' only when the dossier really banned moves, else the handicap beat (dmg [4+2h, 8+3h], trauma 1+h — a real entry cost for repeat winners; first-timers at heat 0 never reach this branch). Steve 2026-10-11: "win rate must drop for repeat winners; first-timers stay fair" (code: _cxApplyAdaptation)
 //   - prize_table: a player win rolls a real contest prize table, not a guaranteed drop — 60% chance of alien loot (75% hardened), loot tier capped at 3, tier 4 only at a low rate (25%) for extreme-risk wins at wave 4. The old {chance:1, tier:wave} mapped monster wave straight onto loot tier (the forbidden wave->tier conflation) and handed a guaranteed apex item per wave-4 win vs 12% off an actual apex kill (code: _contestEnd, break-it 2026-10-09)
 //   - watch_coaching_all: veteran watchers (codex level 2+) get a 📚 coaching line on the last watch beat for all 16 knowledge-gated contests — tithe/riddle first, siege/maw/oath/beastmaster/confession/honey/secrets added, then quiet/guest/vigil, then sorting/witness/cache/longodds (code: _contestWatchBeat, Steve 2026-10-06)
 //   - risk_rebalance_20261006: HIGH RISK rebalance — brave choices now usually kill (~50% death across full aggressive runs), smart choices live but cost heavily. Pit aggressive: 0.08/0.12 -> 0.20/0.30. Hide: 0.20/0.18/0.25 -> 0.32/0.25/0.38. Siege/hold: 0.20 -> 0.30. Rewards NOT nerfed — high risk justifies high reward (code: contestChoose die odds, Steve 2026-10-06)
@@ -660,28 +660,42 @@
 
   // Insert a phase at index k, shifting numeric nexts >= k by +1.
   // Terminal nexts ('WIN'/'LOSE'/'DIE'/'REFUSE') are untouched.
+  // TOLLBOOTH SEMANTICS (longsim contests r8 2026-10-12): the new phase
+  // sits AT k and intercepts — choices that pointed at old phase k
+  // (next === k) now address the new phase and are NOT shifted; choices
+  // pointing beyond k shift +1. The new phase's own nexts are given in
+  // POST-insert coordinates (the call site says where the beat forwards).
+  // The old code shifted everything >= k including the new phase itself,
+  // which left the stipulation beat unreachable (phase 0 -> old phase 1,
+  // skipping the beat) and its entry damage never applied.
   G._cxInsertPhase = function(phases, k, newPhase) {
     const out = phases.slice();
     out.splice(k, 0, newPhase);
-    for (const p of out) {
-      if (!p || !p.choices) continue;
+    for (let i = 0; i < out.length; i++) {
+      const p = out[i];
+      if (!p || !p.choices || i === k) continue;
       for (const ch of p.choices) {
-        if (typeof ch.next === 'number' && ch.next >= k) ch.next += 1;
+        if (typeof ch.next === 'number' && ch.next > k) ch.next += 1;
       }
     }
     return out;
   };
 
   // Build the stipulation beat phase. Its choices forward to nextIdx.
-  G._cxStipulationPhase = function(contest, kind, nextIdx, heat) {
+  // head/sub override the crowd-vote framing when the beat is hardened-driven
+  // (longsim contests r8 2026-10-12): a hardened handicap wasn't voted by
+  // any crowd — the phase must not claim one was.
+  G._cxStipulationPhase = function(contest, kind, nextIdx, heat, head, sub) {
     const dmg = kind === 'handicap' ? [4 + heat * 2, 8 + heat * 3] : [0, 0];
     const trauma = kind === 'handicap' ? 1 + heat : 0;
     const label = kind === 'handicap' ? 'Take the handicap' : kind === 'blind' ? 'Play it blind' : 'New material';
-    const sub = kind === 'handicap' ? 'the crowd insists' : kind === 'blind' ? 'no hints tonight' : 'the banned moves stay banned';
+    const subLine = sub || (kind === 'handicap' ? 'the crowd insists' : kind === 'blind' ? 'no hints tonight' : 'the banned moves stay banned');
+    const text = head ? `\uD83D\uDCFA ${head}`
+      : `\uD83D\uDCFA STIPULATION. ${this._cxStipulationLine(kind, contest).replace(/^\uD83D\uDCFA /, '')}`;
     return {
       beat: 'contestCall',
-      text: `\uD83D\uDCFA STIPULATION. ${this._cxStipulationLine(kind, contest).replace(/^\uD83D\uDCFA /, '')}`,
-      choices: [{ label: label, sub: sub, do: { dmg: dmg, trauma: trauma }, next: nextIdx }],
+      text: text,
+      choices: [{ label: label, sub: subLine, do: { dmg: dmg, trauma: trauma }, next: nextIdx }],
     };
   };
 
@@ -735,16 +749,30 @@
         return np;
       });
       this.sysSay(this._cxStipulationLine('blind', contest));
-    } else if (kind === 'handicap' || (isHardened && heat >= 2)) {
-      const sk = kind === 'handicap' ? 'handicap' : 'no_repeat';
-      const sp = this._cxStipulationPhase(contest, sk === 'handicap' ? 'handicap' : 'no_repeat', 2, heat);
+    } else if (kind === 'handicap' || kind === 'no_repeat' || isHardened) {
+      // MAIN EVENT (longsim contests r8 2026-10-12): EVERY hardened variant
+      // gets a genuinely different phase tree. Measured on pristine
+      // (32x200d identical seeds): 17 of 20 hardened runs were
+      // phase-identical while the copy below claimed "some of your old
+      // lines won't work" — the old byte-identical blank, plus a lie.
+      // Kind selection is honest: 'no_repeat' only when the dossier really
+      // banned moves (br.banned > 0); otherwise the handicap beat — a real
+      // entry cost (dmg [4+2h, 8+3h], trauma 1+h), said aloud. First-timers
+      // (heat 0, wins 0) never reach this branch.
+      const sk = (kind === 'handicap') ? 'handicap'
+        : (kind === 'no_repeat' || br.banned > 0) ? 'no_repeat' : 'handicap';
+      // Framing honesty: a crowd-voted beat says the crowd voted; a
+      // hardened-driven beat says MAIN EVENT (no phantom crowd vote).
+      const crowdVoted = (kind === 'handicap' || kind === 'no_repeat');
+      const head = crowdVoted ? null : (sk === 'handicap'
+        ? `MAIN EVENT rules: the arena runs hotter tonight. You start this one already hurt — the galaxy loves an underdog. Especially a bleeding one.`
+        : `MAIN EVENT rules: no greatest hits. Your winning moves stay banned — and the crowd wants NEW blood.`);
+      const sub = crowdVoted ? null : (sk === 'handicap' ? 'the show insists' : 'the banned moves stay banned');
+      const sp = this._cxStipulationPhase(contest, sk, 2, heat, head, sub);
       out = this._cxInsertPhase(out, 1, sp);
-      if (sk === 'handicap') this.sysSay(this._cxStipulationLine('handicap', contest));
-      else this.sysSay(`\uD83D\uDCFA MAIN EVENT rules: no greatest hits. Your winning moves stay banned — and the crowd wants NEW blood.`);
-    } else if (isHardened) {
-      // Hardened without heat-2 still changes the game: the ban pass
-      // above already altered the choice trees. Say so honestly.
-      this.sysSay(`\uD83D\uDCFA Hardened rules tonight — some of your old lines won't work. The tapes don't lie.`);
+      if (kind === 'handicap') this.sysSay(this._cxStipulationLine('handicap', contest));
+      else if (kind === 'no_repeat') this.sysSay(this._cxStipulationLine('no_repeat', contest));
+      else this.sysSay(`\uD83D\uDCFA ${head}`);
     }
     return out;
   };
@@ -4273,7 +4301,9 @@
           s2.inventory.push(entry);
           s2.equipped = s2.equipped || {};
           s2.equipped.weapon = { itemId: def.id, name: def.name };
-          this.sysSay(`📺 You take the ${def.name}. It feels honest. It's yours now.`);
+          // (longsim contests r8 2026-10-12: the bespoke do.note already
+          // announces the take — the generic line doubled it.)
+          if (!d.note) this.sysSay(`📺 You take the ${def.name}. It feels honest. It's yours now.`);
           log.push(`armed: ${def.name}`);
         }
       } catch (e) {}
