@@ -870,6 +870,7 @@ Village membership. Joining, leaving, exile status.
 - alliance_is_played: proposeAlliance is opinion-gated and feast-priced; the guest's meal (guestMeal) is the alliance made playable — once per village per day, real food from their pantry. (code: membership.js)
 - guest_meal_face_to_face: the guest's meal is eaten at their fire (dist<=1, like villageTalk) and costs tickAction(32) — no menu magic from afar, no free instant lunch. (code: membership.js)
 - the_loaned_come_home: m.loaned is surfaced in awayMembers and the return is said aloud by loanedReturnTick. (code: membership.js)
+- loaned_return_names_are_honest: the return line names the loaned via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("A walks back in" read broken). (code: membership.js, travel lever r4 2026-10-12)
 - guest_meal_wastes_nothing: a full player is not served — the ally's pantry is never charged for zero gain. (code: membership.js)
 
 **Consumes:** village.members
@@ -1337,6 +1338,7 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
+- return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 
 **Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
 

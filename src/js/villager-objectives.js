@@ -14,6 +14,7 @@
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
+//   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
@@ -774,7 +775,10 @@
         try {
           var o = this.objOf(vid);
           if (o.companion) { withLine = ' with ' + this.displayName(o.companion); withId = o.companion; }
-          else if (o.targetVid) { withLine = ' — found ' + this.displayName(o.targetVid).split(' ')[0]; withId = o.targetVid; }
+          // REP-NAME HONESTY (travel longsim r4 2026-10-12): a stranger
+          // descriptor's first word ("A person, maybe 40s…") is not a name —
+          // "found A" read broken. Descriptors are used whole via _repName.
+          else if (o.targetVid) { withLine = ' — found ' + this._repName({ id: o.targetVid }); withId = o.targetVid; }
         } catch (e) {}
         if (playerAtHaven) {
           this.say(`🚶 ${nm} is back${withLine}.`);

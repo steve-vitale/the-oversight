@@ -265,10 +265,39 @@ function courtshipClimb(Game, ctx) {
   } catch (e) {}
 }
 
+// Answer the first gesture (pendingAccord): the designed regional moment —
+// Haven's first impression on the other fire (gift 2,000 kcal / the
+// representative's three days / cold ink). A sim policy that never answers it
+// leaves the beat unplayed and the rep-loan path unmeasured. Gift when the
+// pantry can spare it, visit when a rep can walk, cold otherwise — a played
+// choice, never silence. (travel longsim r4 2026-10-12: the gesture was the
+// one regional beat the sims never played.)
+function accordRoad(Game, ctx) {
+  try {
+    const pa = Game.state.pendingAccord;
+    if (!pa || !Game.answerAccord) return;
+    let pan = 0;
+    try { pan = Game.pantryKcalLive ? Game.pantryKcalLive() : 0; } catch (e) {}
+    let how = 'cold';
+    if (pan > 8000) how = 'gift';
+    else {
+      let rep = null;
+      try { rep = Game._availableRepresentative ? Game._availableRepresentative() : null; } catch (e) {}
+      if (rep) how = 'visit';
+    }
+    try {
+      if (Game.answerAccord(how)) ctx.accordAnswered = (ctx.accordAnswered || 0) + 1;
+    } catch (e) {}
+  } catch (e) {}
+}
+
 // Propose links: as subordinate (legitimate road — valued subordinate) with
 // generous tribute. Accept counter-offers. Try peer roads too.
 function diplomacyRoad(Game, ctx) {
   try {
+    // Answer the first gesture FIRST — the other fire is watching what
+    // Haven does first, and the gesture stages at link formation.
+    accordRoad(Game, ctx);
     // Answer a pending counter-offer FIRST — the table is set.
     if (Game.state.pendingCounter && Game.answerCounter) {
       try {
@@ -634,4 +663,4 @@ const winseek = {
   },
 };
 
-module.exports = { winseek };
+module.exports = { winseek, accordRoad };

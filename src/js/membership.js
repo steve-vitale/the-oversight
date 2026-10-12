@@ -33,6 +33,7 @@
 //   - alliance_is_played: proposeAlliance is opinion-gated and feast-priced; the guest's meal (guestMeal) is the alliance made playable — once per village per day, real food from their pantry. (code: membership.js)
 //   - guest_meal_face_to_face: the guest's meal is eaten at their fire (dist<=1, like villageTalk) and costs tickAction(32) — no menu magic from afar, no free instant lunch. (code: membership.js)
 //   - the_loaned_come_home: m.loaned is surfaced in awayMembers and the return is said aloud by loanedReturnTick. (code: membership.js)
+//   - loaned_return_names_are_honest: the return line names the loaned via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("A walks back in" read broken). (code: membership.js, travel lever r4 2026-10-12)
 //   - guest_meal_wastes_nothing: a full player is not served — the ally's pantry is never charged for zero gain. (code: membership.js)
 // consumes:
 //   - village.members
@@ -783,7 +784,10 @@
         var day = (this.state.scholar || {}).day || 0;
         if (day < (m.loaned.untilDay || 0)) return;
         var nm = 'Someone';
-        try { nm = String(this.displayName(m.loaned.vid)).split(' ')[0]; } catch (e) {}
+        // REP-NAME HONESTY (travel longsim r4 2026-10-12): a stranger
+        // descriptor's first word is not a name — "A walks back in" read
+        // broken. Descriptors are used whole via _repName.
+        try { nm = this._repName({ id: m.loaned.vid }); } catch (e) {}
         var to = m.loaned.to;
         var lvid = m.loaned.vid;
         m.loaned = null;
