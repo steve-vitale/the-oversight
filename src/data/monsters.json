@@ -33,7 +33,7 @@
       },
       "damageType": "physical"
     },
-    "attacks": [
+        "attacks": [
       {
         "name": "China-Shop Charge",
         "damage": [
@@ -56,23 +56,11 @@
         "weight": 3
       },
       {
-        "name": "Enraged Charge",
-        "damage": [
-          24,
-          32
-        ],
-        "telegraph": "Blood in its eyes \u2014 it doesn't bother aiming anymore. It just COMES.",
-        "pattern": {
-          "type": "charge",
-          "length": 5,
-          "width": 1,
-          "windup": 2,
-          "chargeStyle": "bulldozer",
-          "chargeDesc": "Reckless. Heavier, wider, still telegraphed \u2014 bloodied, not blind."
-        },
+        "name": "Retreat",
+        "tactic": "withdraw",
+        "telegraph": "It stops. Blood on its snout, sides heaving. It has decided you are not worth dying for \u2014 it backs away, quills flat.",
         "condition": {
-          "minRange": 2,
-          "hpBelow": 0.35
+          "hpBelow": 0.25
         },
         "weight": 4
       }
@@ -1198,7 +1186,7 @@
       },
       "damageType": "physical"
     },
-    "attacks": [
+        "attacks": [
       {
         "name": "Snap Decision",
         "damage": [
@@ -1214,9 +1202,9 @@
         "weight": 3
       },
       {
-        "name": "Withdraw",
+        "name": "Bunker",
         "tactic": "bunker",
-        "telegraph": "Hurt, it pulls in \u2014 legs, head, tail. The shell seals like a door.",
+        "telegraph": "It seals itself. The shell clicks shut \u2014 nearly invulnerable. Wait it out, or flip it.",
         "condition": {
           "hpBelow": 0.6
         },
@@ -2192,17 +2180,19 @@
       "telegraph": "The line reaches you \u2014 beaks up, all down the row.",
       "damageType": "physical"
     },
-    "attacks": [
+        "attacks": [
       {
-        "name": "Coordinated Nip",
+        "name": "March",
         "damage": [
           6,
           9
         ],
         "pattern": {
-          "type": "direct"
+          "type": "direct",
+          "range": 2,
+          "windup": 1
         },
-        "telegraph": "The line reaches you \u2014 beaks up, all down the row.",
+        "telegraph": "The hissing stops. The line leans forward \u2014 it advances, and contact burns.",
         "damageType": "physical",
         "weight": 3
       },
@@ -2295,7 +2285,7 @@
       },
       "damageType": "physical"
     },
-    "attacks": [
+        "attacks": [
       {
         "name": "Skyfall Dive",
         "damage": [
@@ -2314,21 +2304,18 @@
         "weight": 3
       },
       {
-        "name": "Wing Buffet",
-        "damage": [
-          6,
-          10
-        ],
-        "telegraph": "Grounded and furious, it beats its wings \u2014 glass edges everywhere.",
+        "name": "Grounded",
+        "telegraph": "It missed. It hits the dirt hard \u2014 wings splayed, vulnerable. Kill it now.",
         "pattern": {
           "type": "single",
           "range": 1,
           "windup": 1
         },
         "condition": {
-          "forbidFlag": "altitudeHigh"
+          "requiresFlag": "glGrounded"
         },
-        "weight": 3
+        "weight": 3,
+        "tactic": "recover"
       }
     ],
     "weaknesses": [
@@ -2430,7 +2417,7 @@
       },
       "damageType": "fire"
     },
-    "attacks": [
+        "attacks": [
       {
         "name": "Sun-Charged Bite",
         "damage": [
@@ -2449,21 +2436,15 @@
         "weight": 3
       },
       {
-        "name": "Sluggish Nip",
-        "damage": [
-          5,
-          8
-        ],
-        "telegraph": "Cold-blooded and slow \u2014 a lazy snap, barely committed.",
+        "name": "Bask",
+        "telegraph": "It goes still in the sun. Gold spreads across its back \u2014 the charge is building.",
         "pattern": {
           "type": "single",
           "range": 1,
           "windup": 1
         },
-        "condition": {
-          "forbidFlag": "sbCharged"
-        },
-        "weight": 3
+        "weight": 3,
+        "tactic": "chargeup"
       }
     ],
     "weaknesses": [

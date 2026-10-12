@@ -32101,6 +32101,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         m.turtleBunker = 2;
         this.say(cue + ' (Sealed. Wait it out — or flip it.)');
         try { this.audioEvent('turtleBunker'); } catch (e) {}
+      } else if (tac === 'withdraw') {
+        // RETREAT: break contact, move away from the foe. Bloodied, not
+        // beaten — it may return. (Bulldozer below 25%: self-preservation.)
+        const fx = (foe && foe.f) ? foe.f : foe;
+        if (fx) {
+          for (let i = 0; i < (m.speed || 3); i++) {
+            const dx = Math.sign(m.mx - fx.mx), dy = Math.sign(m.my - fx.my);
+            const nx = Math.max(1, Math.min(7, m.mx + dx)), ny = Math.max(1, Math.min(7, m.my + dy));
+            if ((nx === m.mx && ny === m.my) || (this.tbCanOccupy && !this.tbCanOccupy(m, nx, ny))) break;
+            m.mx = nx; m.my = ny;
+          }
+        }
+        this.say(cue);
       } else {
         this.say(cue);
       }
