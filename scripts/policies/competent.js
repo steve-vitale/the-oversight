@@ -259,15 +259,24 @@ function forageTripSeedFirst(Game, ctx) {
     }
     cands.sort((a, b) => (a.blocked - b.blocked) || (a.d - b.d));
     if (!cands.length) return 0;
-    const pick = cands[0];
-    const bx = pick.x, by = pick.y;
     const hx = Game.map.px, hy = Game.map.py;
-    const res = Game.travelTo(bx, by, pick.blocked);
-    if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
-    if (Game.map.px !== bx || Game.map.py !== by) return 0;
-    try { Game.doAction('forage', {}); ctx.forageTrips = (ctx.forageTrips || 0) + 1; } catch (e) {}
+    // WORKED-OUT PATCH (longsim combat r2 2026-10-11): the nearest stocked
+    // tile is usually the one we picked clean yesterday (detail regrows in
+    // ~2 days) — the old code foraged it anyway and the trip failed every
+    // day, so the policy never gathered wild food OR crafting materials. A
+    // competent player steps to another green patch when the forage comes
+    // back empty, like the game's own failure line says. Try up to 3.
+    let foraged = 0;
+    for (const pick of cands.slice(0, 3)) {
+      const res = Game.travelTo(pick.x, pick.y, pick.blocked);
+      if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
+      if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
+      let ok = null;
+      try { ok = Game.doAction('forage', {}); ctx.forageTrips = (ctx.forageTrips || 0) + 1; } catch (e) {}
+      if (ok) { foraged = 1; break; }
+    }
     try { Game.travelTo(hx, hy); } catch (e) {}
-    return 1;
+    return foraged;
   } catch (e) { try { Game.travelTo(Game.map.px, Game.map.py); } catch (e2) {} return 0; }
 }
 
@@ -479,16 +488,51 @@ function counterPlay(Game, ctx) {
         }
       }
     } catch (e) {}
-    // traps: a held trap set on wild ground works while you sleep
+    // (trap setting now lives in workTrapline, called from daily)
+  } catch (e) {}
+}
+
+// WORK THE TRAPLINE (longsim combat r2 2026-10-11): traps sat at 0/0 across
+// every measured run — the policy "crafts nothing and invents nothing," so
+// the whole craft->set->dawn-check trapline (ecology, shyness, uses, rot,
+// carcasses) never ran in a 200-day sim. A competent player who knows the
+// snare keeps a small trapline: craft what they know (L2+ reliably; L1 blind
+// only when materials are plentiful — 35% odds, materials at real risk), set
+// it on wild ground, and the dawn check does the rest. Cap: 2 held traps —
+// traps are consumed on set and wear out, so this maintains a working line,
+// not a stockpile. The old every-3-days setter in counterPlay is folded in
+// here (one place, one cadence).
+const TRAPLINE_IDS = ['snare', 'deadfall', 'box_trap', 'spring_snare', 'minnow_trap', 'pit_trap'];
+function workTrapline(Game, ctx) {
+  try {
+    const s = Game.state.scholar; if (!s) return;
+    const day = s.day || 0;
+    if ((ctx._trapDay || 0) === day) return;
+    ctx._trapDay = day;
+    // CRAFT: restock the line (craft first — a human crafts and sets in one outing).
     try {
-      if ((ctx._trapDay || 0) + 3 <= day) {
-        const tools = (Game.state.scholar || {}).tools || [];
-        const trap = tools.find(t => t && t.recipeId && t.recipeId !== 'pit_trap');
-        const pt = Game.playerTile ? Game.playerTile() : null;
-        if (trap && pt && pt.type !== 'haven' && pt.type !== 'ruin') {
-          try { Game.setTrap(trap.recipeId); ctx._trapDay = day; ctx.trapsSet = (ctx.trapsSet || 0) + 1; }
-          catch (e) {}
+      const level = (((Game.state.codex || {}).recipes || {}).snare || {}).level || 0;
+      if (level >= 1) {
+        const tools = s.tools || [];
+        const held = tools.filter(t => t && TRAPLINE_IDS.includes(t.recipeId)).length;
+        if (held < 2) {
+          const inv = s.inventory || [];
+          const have = (m) => inv.filter(i => i && i.material === m).reduce((t, i) => t + (i.units || 0), 0);
+          const vine = have('vine'), stick = have('stick');
+          const matsOk = level >= 2 ? (vine >= 1 && stick >= 1) : (vine >= 3 && stick >= 3); // blind craft: gamble only what you can lose
+          if (matsOk) {
+            try { const r = Game.craft('snare'); if (r) ctx.trapsCrafted = (ctx.trapsCrafted || 0) + 1; } catch (e) {}
+          }
         }
+      }
+    } catch (e) {}
+    // SET: a held trap on wild ground works while you sleep.
+    try {
+      const tools = s.tools || [];
+      const trap = tools.find(t => t && TRAPLINE_IDS.includes(t.recipeId));
+      const pt = Game.playerTile ? Game.playerTile() : null;
+      if (trap && pt && pt.type !== 'haven' && pt.type !== 'ruin') {
+        try { Game.setTrap(trap.recipeId); ctx.trapsSet = (ctx.trapsSet || 0) + 1; } catch (e) {}
       }
     } catch (e) {}
   } catch (e) {}
@@ -561,6 +605,7 @@ const competent = {
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
     counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
+    workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
     // donate surplus beyond a 2-day personal buffer
     try {
       const s = Game.state.scholar;
@@ -709,4 +754,4 @@ const competent = {
   },
 };
 
-module.exports = { competent };
+module.exports = { competent, workTrapline };
