@@ -166,13 +166,20 @@
           st._ledgerAnn50[wave] = true;
           const d2 = cfg.wave2DayFloor != null ? cfg.wave2DayFloor : 8;
           const dN = cfg.dayFloor != null ? cfg.dayFloor : 25;
+          // SCALE-AWARE GATES (beats 4+5, SCALE-DISCOVERY.md 2026-10-12): when
+          // the scale floor is the binding constraint, the forward pointer
+          // (checkScalePointers, producer voice) carries the message — the
+          // ledger just reports the bar, no mechanics-voice gate sentence.
+          // When the floor is already met, say what's actually next.
+          const rankNow = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
+          const atLeast = (need) => { try { return this.scaleAtLeast(rankNow, need); } catch (e) { return false; } };
           const gate =
             wave === 1 ? `Wave 2 opens once day ${d2} passes.` :
             wave === 2 ? `Wave 3 opens once day ${dN} passes.` :
-            wave === 3 ? `Wave 4 opens when Haven goes regional.` :
-            wave === 4 ? `Wave 5 opens when Haven goes national.` :
+            wave === 3 ? (atLeast('regional') ? `Wave 4's talent is cleared for release — watch the treeline.` : null) :
+            wave === 4 ? (atLeast('national') ? `The Producers are cleared for release — watch the sky.` : null) :
             `That's the whole ledger — the village has bloodied the Producers themselves. No further casting directives. You're the show now.`;
-          this.sysSay(`📺 WAVE LEDGER — wave ${wave}'s bar is full (${bar}/${bar} — kills only, not near-misses). ${gate}`);
+          this.sysSay(`📺 WAVE LEDGER — wave ${wave}'s bar is full (${bar}/${bar} — kills only, not near-misses).` + (gate ? ` ${gate}` : ''));
         } else if (points >= bar / 2 && !st._ledgerAnn50[wave]) {
           st._ledgerAnn50[wave] = true;
           this.sysSay(`📺 WAVE LEDGER — wave ${wave} is halfway there (${points}/${bar} kills — the ledger counts kills only, not near-misses).`);

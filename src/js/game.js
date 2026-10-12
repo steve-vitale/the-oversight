@@ -33,6 +33,7 @@
 //   - tbTerrainCost(x, y) -> 1 | 2 (difficult terrain costs double)
 //   - modIs(m) (wave-2 apex id gate: the Moderator)
 //   - modVerbBlocked(verb) (mute enforcement at the player choke points)
+//   - checkScalePointers(), scalePointerW4(), scalePointerW5(), scalePointerEcho() (scale discoverability beats 4+5: forward pointers when wave kills are banked but the stage is too small)
 //   - modProjectField(m, r, type) (suppression field projection, follows the monster)
 //   - sleepQuality()
 //   - sleepPreview()
@@ -26703,6 +26704,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // use as day 1, so multi-day synergy streaks could never complete.
       // The village lives on the same clock as its scholar.
       if (this.state.village) this.state.village.day = scholar.day;
+      // SCALE POINTER ECHO (beat 4, SCALE-DISCOVERY.md 2026-10-12): the village
+      // chews on the wave-4 broadcast overnight — a living villager answers at
+      // dawn, once. Skipped if the stage grew overnight (premise resolved).
+      try {
+        const _st = this.state || {};
+        if (_st._scalePtrW4EchoDay && scholar.day >= _st._scalePtrW4EchoDay) {
+          _st._scalePtrW4EchoDay = 0;
+          this.scalePointerEcho();
+        }
+      } catch (e) {}
       // PODS WEIGHT (2026-10-11, KIN canon): the pods keep coming up.
       // Intrusion roll + the promise fuse (21 days unkept = broken, aloud).
       try {
@@ -27048,6 +27059,81 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
     },
+    // checkScalePointers: the reactive check for beats 4+5 (SCALE-DISCOVERY.md,
+    // Steve 2026-10-12). The wave gates are scale-gated (wave 4 needs regional,
+    // wave 5 needs national — unlockedWave), but nothing ever told the player.
+    // Fires each pointer ONCE, the first time the kills are banked and the
+    // stage is too small. Catches up old saves on the next kill (the once-only
+    // flags live on state, so a bar filled before this feature still points).
+    // Exception-guarded: pointers never break unlocks.
+    checkScalePointers() {
+      try {
+        const st = this.state || {};
+        const rank = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
+        const cfg = (typeof this.waveLedgerCfg === 'function') ? this.waveLedgerCfg() : null;
+        const bar = (w, dflt) => ((cfg && cfg.barsPerWave && cfg.barsPerWave[w]) || dflt);
+        const pts = (w) => ((typeof this.waveLedgerPoints === 'function') ? (this.waveLedgerPoints(w) | 0) : 0);
+        // Beat 4: wave-3's bar is banked but Haven is still one fire.
+        if (!st._scalePtrW4 && pts(3) >= bar(3, 4) && !this.scaleAtLeast(rank, 'regional') && this.unlockedWave() < 4) {
+          st._scalePtrW4 = true;
+          this.scalePointerW4();
+        }
+        // Beat 5: wave-4's bar is banked, a region held, but no nation yet.
+        if (!st._scalePtrW5 && pts(4) >= bar(4, 3) && this.scaleAtLeast(rank, 'regional') && !this.scaleAtLeast(rank, 'national') && this.unlockedWave() < 5) {
+          st._scalePtrW5 = true;
+          this.scalePointerW5();
+        }
+      } catch (e) {}
+    },
+    // scalePointerW4: the System as producer notices the cleared board. Never
+    // mechanics-voice ("the next act", never "Mirror Draft" — knowledge gate:
+    // the name isn't earned until wave 4 lands). The fiction justifies the
+    // gate: the next act is built out of the village's faiths and formats —
+    // one fire isn't enough material. Flag set before speaking: once-only
+    // even if a beat throws. The village chews on it overnight — the echo
+    // lands at dawn (endDay).
+    scalePointerW4() {
+      try {
+        this.say('\u{1F4FA} "CLEARED THE BOARD! Every last one of them — ON CAMERA! The audience is still chanting your name, you beautiful violent overachievers!"');
+        this.say('\u{1F4FA} "But real talk? The next act needs a BIGGER STAGE. I can\'t stage it with ONE fire — there\'s not enough of you to REFLECT, you feel me? Get me a NETWORK. More villages. More story. Make it worth escalating."');
+        const day = (this.state && this.state.scholar && this.state.scholar.day) || 1;
+        this.state._scalePtrW4EchoDay = day + 1;
+      } catch (e) {}
+    },
+    // scalePointerW5: escalation. A region held, a nation needed — three
+    // seasoned bonds under one head, or bend the knee. Producer-brain throughout.
+    scalePointerW5() {
+      try {
+        this.say('\u{1F4FA} "A REGION! Look at you! The ratings department is doing a little DANCE over here!"');
+        this.say('\u{1F4FA} "But finales — FINALES need a NATION, sweetheart. Three seasoned bonds under ONE head. Or bend the knee to somebody who already has one. The producers are WAITING."');
+      } catch (e) {}
+    },
+    // scalePointerEcho: the morning-after answer to the wave-4 pointer. One
+    // living villager, at the fire, in their own voice — the village carrying
+    // the broadcast, not the System repeating itself. Skipped if Haven went
+    // regional overnight (the pointer's premise resolved while they slept).
+    scalePointerEcho() {
+      try {
+        const rank = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
+        if (this.scaleAtLeast(rank, 'regional')) return;
+        const v = this.state && this.state.village;
+        if (!v) return;
+        const me = this.villagerId;
+        const ids = (v.roster || []).filter(id => {
+          if (!id || id === me) return false;
+          let p = null;
+          try { p = this.getPerson(id); } catch (e) { return false; }
+          return !!(p && !p.dead && p.name);
+        });
+        if (!ids.length) return;
+        const id = this.pickRandomVillager(ids);
+        let p = null;
+        try { p = this.getPerson(id); } catch (e) {}
+        if (!p) return;
+        const first = String(p.name).split(' ')[0];
+        this.say(`\u{1F525} ${first}, at the fire: "Whatever's out there... I don't think one fire faces it. Not alone."`);
+      } catch (e) {}
+    },
     // checkWaveUnlockBeat: the unlock-beat choke point (parity 2026-10-10).
     // The wave gates are fed by kills (player combat AND villager field
     // fights), both flowing through recordWaveKill — the ledger only scores
@@ -27060,6 +27146,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     checkWaveUnlockBeat() {
       let waveAfter = 1;
       try { waveAfter = this.unlockedWave(); } catch (e) { return; }
+      // SCALE POINTERS (beats 4+5, SCALE-DISCOVERY.md 2026-10-12): forward
+      // beats when the kills are banked but the stage is too small. Checked
+      // here — every kill, every unlock check — so the early returns below
+      // (no new unlock) never skip it. Reactive, never a timer.
+      try { this.checkScalePointers(); } catch (e) {}
       // ADOPT-ON-FIRST-SEEN (parity 2026-10-10): in-flight games may already
       // sit at wave 2+ with their beats played (wave 2's beat lives in
       // checkSystemArrival). Only NEW rises announce — never re-announce.
