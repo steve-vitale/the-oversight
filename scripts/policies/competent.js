@@ -325,7 +325,7 @@ function forageTripSeedFirst(Game, ctx) {
       if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
       let ok = null;
       try { ok = Game.doAction('forage', {}); ctx.forageTrips = (ctx.forageTrips || 0) + 1; } catch (e) {}
-      if (ok) { foraged = 1; break; }
+      if (ok) { foraged = 1; workTraplineSet(Game, ctx); break; }
     }
     try { Game.travelTo(hx, hy); } catch (e) {}
     return foraged;
@@ -555,13 +555,75 @@ function counterPlay(Game, ctx) {
 // not a stockpile. The old every-3-days setter in counterPlay is folded in
 // here (one place, one cadence).
 const TRAPLINE_IDS = ['snare', 'deadfall', 'box_trap', 'spring_snare', 'minnow_trap', 'pit_trap'];
+// CLEAN THE CATCH (longsim food r5 2026-10-12): trapped carcasses rot in
+// ~2 days ("clean it quickly (knife). It rots fast") and the policy never
+// cleaned them — seed 11: 31 catches, 0 cleaned, the meat lost (rotted or
+// dropped on player death). A competent player with a cutting tool cleans
+// the catch at camp (8 ticks each, first rung of the preservation ladder);
+// without a knife the carcass sits, honestly.
+function cleanCatch(Game, ctx) {
+  if (process.env.COMPETENT_CLEAN_CATCH === '0') return; // before/after harness gate
+  try {
+    const s = Game.state.scholar; if (!s) return;
+    const inv = s.inventory || [];
+    const n = inv.filter(i => i && i.foodState === 'carcass').length;
+    if (!n) return;
+    // KNAP FIRST: the dawn catch says "clean it quickly (knife)" and the
+    // knifeless message points at the universal stone-knife recipe (L3 for
+    // everyone) — a competent trapper holding stone + vine knaps the edge
+    // instead of watching dinner rot. Durable craft, lives in the pack.
+    if (!Game.hasCuttingTool || !Game.hasCuttingTool()) {
+      const have = (m) => inv.filter(i => i && i.material === m).reduce((t, i) => t + (i.units || 0), 0);
+      if (have('stone') >= 1 && have('vine') >= 1) {
+        try { if (Game.craft('stone_knife')) ctx.knappedKnife = (ctx.knappedKnife || 0) + 1; } catch (e) {}
+      }
+    }
+    if (!Game.hasCuttingTool || !Game.hasCuttingTool()) return; // still knifeless: the carcass sits, honestly
+    try { Game.cleanCarcass(); ctx.cleanedCarcasses = (ctx.cleanedCarcasses || 0) + n; } catch (e) {}
+  } catch (e) {}
+}
+
+// SET THE LINE WHERE YOU STAND (longsim food r5 2026-10-12): the SET half
+// of workTrapline never fired — it ran at day-end, when the player is back
+// at haven, and setTrap refuses haven tiles. The traps were crafted and
+// never set (2 crafts / 0 sets across 200-day sims). A real player sets the
+// trap while OUT on the wild tile, right after working it — the dawn check
+// visits every tile's traps, so the line works while you sleep elsewhere.
+// This is called from forageTripSeedFirst on the foraged tile, one trap per
+// outing (the 2-held cap keeps it a working line, not a stockpile).
+// Wire fallback: snare wire in hand sets an improvised 2-use snare with no
+// recipe knowledge needed (setTrap's honest-tackle path) — a competent
+// player finding wire sets it.
+function workTraplineSet(Game, ctx) {
+  if (process.env.COMPETENT_TRAPLINE_SET === '0') return; // before/after harness gate
+  try {
+    const s = Game.state.scholar; if (!s) return;
+    const pt = Game.playerTile ? Game.playerTile() : null;
+    if (!pt || pt.type === 'haven' || pt.type === 'ruin') return;
+    const tools = s.tools || [];
+    const trap = tools.find(t => t && TRAPLINE_IDS.includes(t.recipeId));
+    if (trap) {
+      try { const r = Game.setTrap(trap.recipeId); if (r) ctx.trapsSet = (ctx.trapsSet || 0) + 1; } catch (e) {}
+      return;
+    }
+    // no held trap, but wire in the pack? improvise.
+    try {
+      if (Game.hasItem && Game.hasItem('snare_wire')) {
+        const r = Game.setTrap('snare');
+        if (r) ctx.trapsWireSet = (ctx.trapsWireSet || 0) + 1;
+      }
+    } catch (e) {}
+  } catch (e) {}
+}
+
 function workTrapline(Game, ctx) {
   try {
     const s = Game.state.scholar; if (!s) return;
     const day = s.day || 0;
     if ((ctx._trapDay || 0) === day) return;
     ctx._trapDay = day;
-    // CRAFT: restock the line (craft first — a human crafts and sets in one outing).
+    // CRAFT: restock the line at day-end (in haven). Setting now happens
+    // out on the wild tile via workTraplineSet (food r5 fix — see above).
     try {
       const level = (((Game.state.codex || {}).recipes || {}).snare || {}).level || 0;
       if (level >= 1) {
@@ -576,15 +638,6 @@ function workTrapline(Game, ctx) {
             try { const r = Game.craft('snare'); if (r) ctx.trapsCrafted = (ctx.trapsCrafted || 0) + 1; } catch (e) {}
           }
         }
-      }
-    } catch (e) {}
-    // SET: a held trap on wild ground works while you sleep.
-    try {
-      const tools = s.tools || [];
-      const trap = tools.find(t => t && TRAPLINE_IDS.includes(t.recipeId));
-      const pt = Game.playerTile ? Game.playerTile() : null;
-      if (trap && pt && pt.type !== 'haven' && pt.type !== 'ruin') {
-        try { Game.setTrap(trap.recipeId); ctx.trapsSet = (ctx.trapsSet || 0) + 1; } catch (e) {}
       }
     } catch (e) {}
   } catch (e) {}
@@ -1008,6 +1061,7 @@ const competent = {
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
     if (needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
     sortHaul(Game, ctx); // identify the haul at camp — unknowns become food
+    cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
     counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
@@ -1167,4 +1221,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, forageTripSeedFirst, sortHaul, donateHaul, needTrip };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip };

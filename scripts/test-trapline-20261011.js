@@ -11,7 +11,7 @@
 // Usage: node scripts/test-trapline-20261011.js  (SEED env override)
 'use strict';
 const { loadGame } = require('./sim-harness');
-const { workTrapline } = require('./policies/competent');
+const { workTrapline, workTraplineSet } = require('./policies/competent');
 
 const SEED = parseInt(process.env.SEED || '20261011', 10);
 let pass = 0, fail = 0;
@@ -79,7 +79,11 @@ function wildTile(Game) {
     ok('E2 no third craft at cap', !ctx3.trapsCrafted);
   }
 
-  // ============ E3: policy sets on wild ground ============
+  // ============ E3: policy sets on wild ground (split 2026-10-12) ============
+  // food r5: the old single call crafted AND set — but daily runs at haven,
+  // so the set half never fired (2 crafts / 0 sets in 200-day sims). Now
+  // workTrapline crafts (day-end, haven) and workTraplineSet sets (on the
+  // wild tile, called from the forage trip).
   {
     const { Game } = await loadGame({ seed: SEED, mode: 'test' });
     hunterGame(Game);
@@ -87,12 +91,54 @@ function wildTile(Game) {
     const tile = wildTile(Game);
     ok('E3 found wild ground to stand on', !!tile);
     const ctx = {};
-    workTrapline(Game, ctx); // crafts AND sets in one day
+    workTrapline(Game, ctx); // day-end: crafts only now
+    const crafted = (Game.state.scholar.tools || []).find(t => t.recipeId === 'snare');
+    ok('E3 workTrapline crafts the snare', !!crafted);
+    ok('E3 workTrapline does NOT set on its own', !(tile.traps || []).length);
+    workTraplineSet(Game, ctx); // on the wild tile: sets
     const set = (tile.traps || []).find(t => t.recipeId === 'snare');
-    ok('E3 trap set on the wild tile', !!set && set.uses === 10, JSON.stringify(set && { uses: set.uses }));
+    ok('E3 workTraplineSet sets the trap on the wild tile', !!set && set.uses === 10, JSON.stringify(set && { uses: set.uses }));
     ok('E3 tool consumed from tools row on set',
       !(Game.state.scholar.tools || []).some(t => t.recipeId === 'snare'));
     ok('E3 ctx.trapsSet counted', ctx.trapsSet === 1, 'got ' + ctx.trapsSet);
+  }
+
+  // ============ E3b: haven refusal (the r5 bug, regression) ============
+  {
+    const { Game } = await loadGame({ seed: SEED, mode: 'test' });
+    hunterGame(Game);
+    giveMats(Game, { vine: 4, stick: 4 });
+    // stand on the haven tile (where the old daily call ran)
+    for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      const t = Game.tileAt(x, y);
+      if (t && t.type === 'haven') { Game.map.px = x; Game.map.py = y; }
+    }
+    const ctx = {};
+    workTrapline(Game, ctx);
+    const held = (Game.state.scholar.tools || []).filter(t => t.recipeId === 'snare').length;
+    workTraplineSet(Game, ctx); // must refuse at haven, like setTrap does
+    const setAnywhere = [];
+    for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      const t = Game.tileAt(x, y);
+      if (t && (t.traps || []).length) setAnywhere.push([x, y]);
+    }
+    ok('E3b no trap set while standing at haven', setAnywhere.length === 0,
+      'set at ' + JSON.stringify(setAnywhere));
+    ok('E3b the crafted trap stays held (not consumed)', held === 1, 'held=' + held);
+    ok('E3b ctx.trapsSet not counted at haven', !ctx.trapsSet);
+    // gate: COMPETENT_TRAPLINE_SET=0 disables the set entirely
+    process.env.COMPETENT_TRAPLINE_SET = '0';
+    for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      const t = Game.tileAt(x, y);
+      if (t && t.type !== 'haven' && t.type !== 'ruin') { Game.map.px = x; Game.map.py = y; break; }
+    }
+    const ctxG = {};
+    workTraplineSet(Game, ctxG);
+    ok('E3b gate=0: no set even on wild ground', !ctxG.trapsSet);
+    delete process.env.COMPETENT_TRAPLINE_SET;
+    const ctxG2 = {};
+    workTraplineSet(Game, ctxG2);
+    ok('E3b gate cleared: sets on wild ground', ctxG2.trapsSet === 1, 'got ' + ctxG2.trapsSet);
   }
 
   // ============ E4: dawn check catches ============
@@ -102,7 +148,8 @@ function wildTile(Game) {
     giveMats(Game, { vine: 4, stick: 4 });
     const tile = wildTile(Game);
     const ctx = {};
-    workTrapline(Game, ctx);
+    workTrapline(Game, ctx);       // day-end: craft
+    workTraplineSet(Game, ctx);    // on the wild tile: set (food r5 split)
     const trap = (tile.traps || [])[0];
     ok('E4 trap is set', !!trap);
     tile.wildlife = { cottontail_rabbit: 50 }; // stocked ground
