@@ -38,6 +38,46 @@ function competentEat(Game) {
   } catch (e) {}
 }
 
+// ANSWER THE FIRE NETWORK (longsim food r4 2026-10-12): the aid instrument
+// is the coalition's only non-national-gated food layer and it works
+// end-to-end (offer -> inbound -> pantry; beg -> their pantry + trust) — but
+// no competent-derived policy ever answered it, so every loop's sims measured
+// a coalition food economy with the pipes shut. A competent player:
+//   - ACCEPTS an aid offer. It only fires when Haven is genuinely struggling
+//     and a rich neighbor noticed; there is no cost to saying yes.
+//   - GIVES to a begging neighbor when the pantry can carry it (3x the ask,
+//     1.5x when they once fed Haven — refusing a creditor costs double trust
+//     and the ledger remembers). Refuses honestly otherwise.
+function answerAidBeats(Game, ctx) {
+  if (process.env.COMPETENT_AID === '0') return; // before/after harness gate
+  const st = Game.state || {};
+  const pantryKcal = () => {
+    try { return ((Game.state.village || {}).pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0); } catch (e) { return 0; }
+  };
+  try {
+    if (st.pendingAidOffer && Game.answerAidOffer) {
+      Game.answerAidOffer('accept');
+      ctx.aidOffersAccepted = (ctx.aidOffersAccepted || 0) + 1;
+    }
+  } catch (e) {}
+  try {
+    const beg = st.pendingAidBeg;
+    if (beg && Game.answerAidBeg) {
+      const ask = beg.amount || 1500;
+      const pk = pantryKcal();
+      let creditor = false;
+      try {
+        const led = Game.aidLedger ? Game.aidLedger(beg.villageId) : null;
+        creditor = led && (led.receivedKcal || 0) > (led.givenKcal || 0);
+      } catch (e) {}
+      const give = pk > ask * (creditor ? 1.5 : 3);
+      const r = Game.answerAidBeg(give ? 'give' : 'refuse');
+      if (r === 'gave') ctx.aidGivenKcal = (ctx.aidGivenKcal || 0) + ask;
+      else ctx.aidRefused = (ctx.aidRefused || 0) + 1;
+    }
+  } catch (e) {}
+}
+
 // Loot the dead: an experienced player strips corpses (take, don't leave
 // meat to rot — but never human meat). Range-checked inside corpseTakeItem.
 function lootCorpses(Game, ctx) {
@@ -688,6 +728,7 @@ const competent = {
     } catch (e) {}
     talkRound(Game, ctx);
     lootCorpses(Game, ctx); // strip the dead after fights
+    answerAidBeats(Game, ctx); // the fire network: accept offers, answer begs
     // ASK ABOUT BEAST TRICKS (longsim combat 2026-11): a curious player asks
     // when the village knows something. counterTeachable() gates the topic.
     try {
