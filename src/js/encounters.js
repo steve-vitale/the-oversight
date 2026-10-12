@@ -210,12 +210,10 @@
 
   // ================= 5. INLINE ACTION FEEDBACK =================
   // The no-scroll-up pattern. The app marks the stream at action start
-  // (feedbackMark); every say() after the mark is tagged 'feedback', which
-  // the UI renders in the feedback card directly under the action bars.
-  // ONE TEXT STREAM (Steve 2026-10-11): a marked say() lands on the
-  // feedback surface ONLY — it is NOT also written to narration. One
-  // emission, one surface: the green narration box no longer echoes the
-  // orange feedback card's text.
+  // (feedbackMark); every say() after the mark is tagged 'feedback'.
+  // ONE SURFACE (Steve 2026-10-12): feedback beats render in the single
+  // narration box (app.js narrationBoxHTML), latest beat wins — the
+  // separate feedback card is retired. One emission, one surface.
   // feedback(text) is the explicit path — use it for action results.
   G.say = function (msg) {
     // Mark check: the mark is the stream length at mark time; any emission
