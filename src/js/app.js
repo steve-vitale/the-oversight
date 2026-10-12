@@ -15189,7 +15189,7 @@
           ${skippedBit ? `<p class="small"><b>Didn't make it:</b> ${skippedBit}</p>` : ''}
           ${beatsBit}
           ${r.buffGranted ? `<p class="small">◈ The System bottled the feeling of this feast.</p>` : ''}
-          ${r.surgeSpent ? `<p class="small">🔥 The channeled keepsake feeds the feast — the surge rides the fire until dawn, spent only when blades are warmed. (×${r.surgeSpent})</p>` : ''}
+          ${r.surgeSpent ? `<p class="small">🔥 The channeled keepsake feeds the feast — the surge rides the fire until ${typeof Game.feastDawnWord === 'function' ? Game.feastDawnWord() : 'dawn'}, spent only when blades are warmed. (×${r.surgeSpent})</p>` : ''}
         </div></div>`;
       wireInlineX(slot);
       return;

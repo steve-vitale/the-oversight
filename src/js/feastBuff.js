@@ -12,6 +12,7 @@
 //   - clearFeastBuff(expired)
 //   - feastedLine()
 //   - feastSurgeCfg()
+//   - feastDawnWord()
 //   - drawFeastScavenger()
 //   - feastDrawPending()
 //   - faceFeastDraw()
@@ -24,7 +25,7 @@
 //   - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
 //   - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
 //   - generic_forms: feasted ability variants are data-driven (feast-surge.json twists) through generic handlers — never hand-written per-ability mechanics (code: applyFeastedForm)
-//   - telegraph_honesty: every buff label states the true effective multiplier (code: grantFeastBuff, feastedLine, tbDamage hook in game.js)
+//   - telegraph_honesty: every buff label states the true effective multiplier AND the true window ("dawn"/"tomorrow's dawn" via feastDawnWord, read from the same data lever as the grant — never a stale "until dawn") (code: grantFeastBuff, feastedLine, tbDamage hook in game.js; arm message in progression.js; feast broadcast + report panel)
 //   - arc4_hotter: Arc IV's arc4burn multiplies the granted buff and is stated in the grant line (code: grantFeastBuff)
 // consumes:
 //   - state.scholar (feastBuff, prog.feastSurge, prog.feastSurgeUsed, day, health, feastDraw)
@@ -40,6 +41,18 @@
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
   const methods = {
+    // feastDawnWord: the honest window word for the buff ("dawn" or
+    // "tomorrow's dawn"), read from the same data lever as grantFeastBuff.
+    // Every promise of the window — the channel arm message, the feast
+    // broadcast, the report panel, the buff labels — must use this. A stale
+    // "until dawn" understates a 2-dawn window (telegraph honesty).
+    feastDawnWord() {
+      try {
+        const cfg = (typeof this.feastSurgeCfg === 'function') ? this.feastSurgeCfg() : null;
+        const nights = Math.max(1, (cfg && cfg.durationNights) || 1);
+        return nights === 1 ? 'dawn' : "tomorrow's dawn";
+      } catch (e) { return 'dawn'; }
+    },
     // feastSurgeCfg: the levers, from src/data/feast-surge.json. Defensive —
     // the ship loop may run a tree without the file; defaults match the JSON.
     feastSurgeCfg() {
@@ -120,7 +133,7 @@
         // fight; the next day's hunt must count. Data lever in feast-surge.json.
         const nights = Math.max(1, cfg.durationNights || 1);
         const untilDay = day + nights, untilPart = 0; // the Nth dawn, always
-        const dawnWord = nights === 1 ? 'dawn' : "tomorrow's dawn";
+        const dawnWord = this.feastDawnWord();
         const existing = this.feastedBuffState();
         if (existing) {
           // REFEAST = REFRESH (design call 2026-10-10): the window extends to
@@ -256,8 +269,7 @@
         const s = this.state.scholar || {};
         const parts = Math.max(0, ((b.untilDay || 0) - (s.day || 0)) * cfg.partsPerDay - this.dayPart);
         const eff = this.feastedMult();
-        const nights = Math.max(1, cfg.durationNights || 1);
-        const dawnWord = nights === 1 ? 'dawn' : "tomorrow's dawn";
+        const dawnWord = this.feastDawnWord();
         const gnote = (eff < (b.mult || 1)) ? ` <i>(grounding ${((typeof this.groundingTier === 'function') ? this.groundingTier() : '')} — food conversions weaken)</i>` : '';
         return `FEASTED ×${Math.round(eff * 100) / 100} — strikes & abilities uplifted · until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left)${gnote}`;
       } catch (e) { return ''; }

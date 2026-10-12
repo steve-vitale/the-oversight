@@ -115,6 +115,12 @@ function winseekFight(Game, ctx) {
     if (!f || f.over || !Game.tbIsPlayerTurn()) return false;
     const p = Game.tbFighter('p');
     const hpPct = (p.hp || 0) / Math.max(1, p.maxHp || p.hp || 1);
+    // CAUTIOUS VARIANT (win-stats-deep 2026-10-12, ctx._cautious): engage
+    // up to 2x HP, avoid wave-2+ when hurt, flee at 40% HP. Declared at
+    // function scope — the old block-scoped declaration inside the
+    // fight-start if made the near-death check below throw ReferenceError,
+    // silently killing the whole handler (journey-endgame r6 2026-10-12).
+    const CAUT = !!ctx._cautious;
     const endTurn = () => {
       try {
         const q = Game.tbFighter('p');
@@ -156,10 +162,7 @@ function winseekFight(Game, ctx) {
       } catch (e) { ctx._facedBefore = {}; }
       // NEW-FIGHT ASSESSMENT (the deed records at startCombat even if we
       // flee on turn 1): don't bleed in fights we can't win. Win-seeking is
-      // BOLDER than competent: engage up to 3.5x HP.
-      // CAUTIOUS VARIANT (win-stats-deep 2026-10-12, ctx._cautious): engage
-      // up to 2x HP, avoid wave-2+ when hurt, flee at 40% HP.
-      const CAUT = !!ctx._cautious;
+      // BOLDER than competent: engage up to 3.5x HP (CAUT declared above).
       try {
         const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
         let totalMhp = 0, maxWave = 1;

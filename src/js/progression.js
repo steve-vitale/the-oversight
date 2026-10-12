@@ -267,7 +267,7 @@
         if (ready.length) {
           const item = (this.state.scholar.inventory || [])[ready[0]];
           const nm = (item && (item.name || '')) || 'it';
-          this.say(`SYSTEM: "DEMONSTRATION. Give me that — the ${nm}. WATCH."`);
+          this.say(`SYSTEM: "DEMONSTRATION. Give me that — ${nm}. WATCH."`);
           this.channelSentiment(ready[0]);
         }
       } catch (e) {}
@@ -367,17 +367,21 @@
           // the feasted buff applies it (true = legacy flat ×1.5).
           // REWORK (feast-surge 2026-10-10, Worker B): the arming no longer
           // feeds an on-strike burn. It GATES the feast buff: the next feast
-          // grants FEASTED until dawn (strikes & abilities uplifted by
-          // quality × this devotion multiplier). The arming is spent only by
-          // real combat use of the buff — a feast that warms no blades costs
-          // no devotion.
+          // grants FEASTED until the buff window's dawn (strikes & abilities
+          // uplifted by quality × this devotion multiplier). The arming is
+          // spent only by real combat use of the buff — a feast that warms no
+          // blades costs no devotion.
           s.prog.feastSurge = 1.5 * mult;
           return why;
         };
+        // WINDOW WORD (journey-endgame r6 2026-10-12): the arm message must
+        // promise the true buff window (2 dawns since 2026-10-12), read from
+        // the same data lever as the grant — never a stale "until dawn".
+        const dawnWord = (typeof this.feastDawnWord === 'function') ? this.feastDawnWord() : 'dawn';
         if (maxed >= 3) {
-          msg = armSurge(`You hold ${name}. The feast was the weapon — and they are with you. (The next feast grants FEASTED until dawn: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}. The feast was the weapon — and they are with you. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
         } else if (resonance >= RESONANCE_NEED) {
-          msg = armSurge(`You hold ${name}. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until dawn: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
         } else if (unmaxed.length) {
           // FOCUSED PRACTICE: the closest-to-complete gift gets the session.
           const needFor = (a) => ((a.level || 1) === 1 ? 10 : 25) - (a.xp || 0);

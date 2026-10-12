@@ -110,7 +110,10 @@ function arm(Game, surge) {
     arm(Game, 1.5);
     let r = Game.grantFeastBuff({ quality: 0, served: [], guests: ['a', 'b', 'c'], daypart: 1 });
     ok(r.granted && Math.abs(r.mult - 1.8) < 1e-9, 'q0: 1.2 x 1.5 = 1.8', 'got ' + r.mult);
-    ok(r.untilDay === (s.day || 0) + 1 && r.untilPart === 0, 'expiry = next dawn (absolute)', JSON.stringify({ untilDay: r.untilDay, untilPart: r.untilPart }));
+    // WINDOW (longsim winpath r3 2026-10-12): the lever is durationNights
+    // dawns (2), not one — read it like the grant does, never hardcode.
+    const _nights = Math.max(1, ((Game.feastSurgeCfg && Game.feastSurgeCfg().durationNights) || 1));
+    ok(r.untilDay === (s.day || 0) + _nights && r.untilPart === 0, 'expiry = durationNights-th dawn (absolute)', JSON.stringify({ untilDay: r.untilDay, untilPart: r.untilPart }));
     Game.clearFeastBuff(false);
     arm(Game, 1.5);
     r = Game.grantFeastBuff({ quality: 1, served: [], guests: [], daypart: 1 });

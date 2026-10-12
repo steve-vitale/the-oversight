@@ -25697,19 +25697,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // GRANTED — the old code set it true whenever grantFeastBuff didn't
       // throw, so an unarmed feast's honest refusal still told the UI "the
       // System bottled the feeling of this feast." Read the grant's return.
+      // NARRATION ORDER (journey-endgame r6 2026-10-12): the feast broadcast
+      // goes FIRST, then the grant. The old order announced "FEASTED x2.03"
+      // and the scavenger draw before "the feast is held" — the story ran
+      // backwards. The contract is "the feast completes -> the buff".
+      const names = showed.slice(0, 4).map(first);
+      const more = showed.length > 4 ? ` and ${showed.length - 4} more` : '';
+      const menuBit = servedList.slice(0, 3).map(x => `${x.units}× ${x.name}`).join(', ');
+      const skippedBit = skipped.length ? ` ${skipped.map(k => `${k.name} ${k.why}`).join('; ')}.` : '';
+      // WINDOW WORD (journey-endgame r6 2026-10-12): the surge bit promises
+      // the true buff window from the data lever — never a stale "until dawn".
+      const dawnWord = (typeof this.feastDawnWord === 'function') ? this.feastDawnWord() : 'dawn';
+      const surgeBit = surgeSpent ? ` The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until ${dawnWord}, spent only when the blades are warmed. (FEAST SURGE ×${surgeSpent} armed)` : '';
+      const tvBit = televised ? ' 📺' : '';
+      this.say(`🍖 FEAST${tvBit} — ${hostName} opens the pantry wide: ${menuBit}. ${names.join(', ')}${more} eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−${spent.toLocaleString()} kcal from the pantry)${skippedBit}${surgeBit}`);
       let _gr = null;
       try {
         _gr = (typeof this.grantFeastBuff === 'function') ? this.grantFeastBuff(feast) : null;
         buffGranted = !!(_gr && _gr.granted);
       } catch (e) {}
       try { if (this.tickAction) this.tickAction(48); } catch (e) {}
-      const names = showed.slice(0, 4).map(first);
-      const more = showed.length > 4 ? ` and ${showed.length - 4} more` : '';
-      const menuBit = servedList.slice(0, 3).map(x => `${x.units}× ${x.name}`).join(', ');
-      const skippedBit = skipped.length ? ` ${skipped.map(k => `${k.name} ${k.why}`).join('; ')}.` : '';
-      const surgeBit = surgeSpent ? ` The channeled keepsake feeds the feast — the feast was the weapon, and the surge rides the fire until dawn, spent only when the blades are warmed. (FEAST SURGE ×${surgeSpent} armed)` : '';
-      const tvBit = televised ? ' 📺' : '';
-      this.say(`🍖 FEAST${tvBit} — ${hostName} opens the pantry wide: ${menuBit}. ${names.join(', ')}${more} eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−${spent.toLocaleString()} kcal from the pantry)${skippedBit}${surgeBit}`);
       try { this.save(); } catch (e) {}
       return {
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],

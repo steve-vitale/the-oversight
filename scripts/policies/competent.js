@@ -1524,7 +1524,24 @@ const competent = {
             if (dd < bd) { bd = dd; bx = cx; by = cy; }
           }
           if (bx != null) {
-            try { Game.tbPlayerMove(bx, by); } catch (e) {}
+            // STEP, DON'T TELEPORT (journey-endgame r6 2026-10-12):
+            // tbPlayerMove refuses destinations beyond moveLeft ("Too far").
+            // Walking the full path to a far target no-ops forever — the
+            // ducks_in_a_row standoff ran 4975 rounds with nobody moving and
+            // nobody bleeding. Step as far toward the target as this turn
+            // allows instead.
+            try {
+              let dx = bx, dy = by;
+              const ml = (p.moveLeft || 0);
+              if (ml > 0 && typeof Game.findPath === 'function') {
+                const path = Game.findPath(px, py, bx, by);
+                if (path && path.length > ml) {
+                  const step = path[ml - 1];
+                  dx = step[0]; dy = step[1];
+                }
+              }
+              Game.tbPlayerMove(dx, dy);
+            } catch (e) {}
             ctx.closed = (ctx.closed || 0) + 1;
           }
           endTurn();

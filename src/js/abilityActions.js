@@ -727,6 +727,16 @@
       }
       return { ok: false, why: 'No one left to bellow at.' };
     },
+    'haymaker.throw_haymaker': function (game) {
+      // WIND-UP IS LOADED (journey-endgame r6 2026-10-12): re-tapping
+      // Haymaker while a wind-up is loaded silently overwrote it — the turn,
+      // the 40 kcal, and the loaded 2.5x all burned for nothing, and a
+      // policy that taps it every turn softlocked the fight (wind up
+      // forever, never swing). Refuse before payment: swing to release it.
+      if (game.state.scholar.haymakerReady)
+        return { ok: false, why: 'Already wound up — swing to release it.' };
+      return { ok: true };
+    },
     'animal_ken.calm_beast': function (game, target) {
       // The bar passes no target (self/none actions); the impl needs a live
       // non-monster fighter key. Refuse before the turn is spent, not after.

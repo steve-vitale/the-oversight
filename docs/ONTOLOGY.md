@@ -569,7 +569,7 @@ Examine action + observation memory + recognition. Looking closely at a plant is
 ### feastSurge (`feastBuff.js`)
 Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast buys the night plus the full next day). During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
 
-**Provides:** grantFeastBuff(feast), feastedActive(), feastedBuffState(), feastedMult(), feastedForm(abilityId, actionId), applyFeastedForm(abilityId, actionId, target, preHp), noteFeastedCombatUse(), clearFeastBuff(expired), feastedLine(), feastSurgeCfg(), drawFeastScavenger(), feastDrawPending(), faceFeastDraw(), driveOffFeastDraw()
+**Provides:** grantFeastBuff(feast), feastedActive(), feastedBuffState(), feastedMult(), feastedForm(abilityId, actionId), applyFeastedForm(abilityId, actionId, target, preHp), noteFeastedCombatUse(), clearFeastBuff(expired), feastedLine(), feastSurgeCfg(), feastDawnWord(), drawFeastScavenger(), feastDrawPending(), faceFeastDraw(), driveOffFeastDraw()
 
 **Rules:**
 - feast_draw: on a FRESH armed grant (never a refresh — one draw per buff), the feast's smoke draws a wave-appropriate scavenger to the haven's edge as a pending encounter the player faces (faceFeastDraw -> startCombat, blow-by-blow) or declines (driveOffFeastDraw — devotion unspent); the draw dies with the buff (code: drawFeastScavenger, clearFeastBuff).
@@ -579,7 +579,7 @@ Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build careful
 - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
 - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
 - generic_forms: feasted ability variants are data-driven (feast-surge.json twists) through generic handlers — never hand-written per-ability mechanics (code: applyFeastedForm)
-- telegraph_honesty: every buff label states the true effective multiplier (code: grantFeastBuff, feastedLine, tbDamage hook in game.js)
+- telegraph_honesty: every buff label states the true effective multiplier AND the true window ("dawn"/"tomorrow's dawn" via feastDawnWord, read from the same data lever as the grant — never a stale "until dawn") (code: grantFeastBuff, feastedLine, tbDamage hook in game.js; arm message in progression.js; feast broadcast + report panel)
 - arc4_hotter: Arc IV's arc4burn multiplies the granted buff and is stated in the grant line (code: grantFeastBuff)
 
 **Consumes:** state.scholar (feastBuff, prog.feastSurge, prog.feastSurgeUsed, day, health, feastDraw), dayPart, inCombat, tbFighter, addHealth, say, save, Game.data.feastSurge (src/data/feast-surge.json), castMonster, startCombat, pendingEncounter/pendingMonsterId, monsterDisplayName, seedGossip
