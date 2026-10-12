@@ -708,13 +708,32 @@ body.system-live .ord-narration .inlinecard .inline-btns {
 .sheet-body {
   padding: 12px 16px;
   overflow-y: auto;
+  /* SCROLL-FIX 2026-10-12 (Steve: bottom sheet item cut off on mobile):
+     the body must shrink inside the 82vh flex column and scroll internally.
+     min-height:0 is belt-and-suspenders — scroll containers already get an
+     automatic zero minimum, but this survives any future overflow change. */
+  flex: 0 1 auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   font-size: 14px; line-height: 1.55;
 }
 .sheet-body p { margin: 8px 0; }
 .sheet-btns {
   padding: 4px 16px 16px;
   display: flex; flex-wrap: wrap; gap: 8px;
-  flex-shrink: 0;
+  /* SCROLL-FIX 2026-10-12 (Steve: bottom sheet item cut off on mobile):
+     the old flex-shrink:0 DEFEATED overflow-y:auto — a shrink-proof box
+     never shrinks, so it never scrolled; it just overflowed the 82vh sheet
+     and the bottom buttons rendered cut off below the fold. flex:0 1 auto
+     lets the button area shrink and scroll internally instead; max-height
+     keeps a huge choice list from starving the head + body entirely. */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  max-height: 62vh;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 .sheet-btns .btn { flex: 1 1 auto; min-width: 120px; }
 /* non-modal sheets: no backdrop, game stays interactive */
@@ -858,23 +877,26 @@ body.in-combat .dangerbar {
 .chat-head b { font-size: 17px; }
 .chat-msgs { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
   padding: 14px; display: flex; flex-direction: column; gap: 12px; }
-.chat-msg { max-width: 88%; display: flex; flex-direction: column; }
+.chat-msg { max-width: 86%; display: flex; flex-direction: column; }
 .chat-msg.them { align-self: flex-start; align-items: flex-start; }
 .chat-msg.you { align-self: flex-end; align-items: flex-end; }
-.chat-name { font-size: 12px; opacity: .6; margin-bottom: 3px; }
+/* READABILITY 2026-10-12 (Steve: chat hard to read on mobile): names were
+   12px at 60% — tiny and dim. Bubbles get 17px/1.65 and a slightly narrower
+   measure; narration stops whispering at 62% opacity. */
+.chat-name { font-size: 13px; opacity: .78; margin-bottom: 3px; }
 .chat-bubble { background: #1b1b22; border: 1px solid #ffffff1a; border-radius: 14px;
-  padding: 10px 13px; font-size: 16px; line-height: 1.6; }
+  padding: 11px 14px; font-size: 17px; line-height: 1.65; }
 .chat-bubble .sp { color: #e8e8e8; }
 .chat-bubble .narr { font-style: italic; opacity: .72; }
 .chat-bubble .fsp { font-style: italic; color: #ffd98a; }
 .chat-bubble .flang { font-size: 0.75em; opacity: .6; margin-left: 5px; font-style: normal; white-space: nowrap; }
 .chat-msg.you .chat-bubble { background: #14291a; border-color: #7fd67f2e; }
 .chat-narr { align-self: center; max-width: 92%; text-align: center; }
-.chat-narr .narr { font-style: italic; opacity: .62; font-size: 14px; line-height: 1.5; }
+.chat-narr .narr { font-style: italic; opacity: .8; font-size: 15px; line-height: 1.55; }
 .chat-choices { flex: 0 0 auto; padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
   border-top: 1px solid #ffffff22; display: flex; flex-wrap: wrap; gap: 8px;
   max-height: 38dvh; overflow-y: auto; }
-.chat-choice { flex: 1 1 calc(50% - 4px); font-size: 15px; padding: 12px 8px; line-height: 1.35; }
+.chat-choice { flex: 1 1 calc(50% - 4px); font-size: 16px; padding: 13px 8px; line-height: 1.35; }
 .chat-choice:disabled { opacity: .45; }
 @keyframes tblink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
 /* person card buttons: 2-column compact grid, not full-width stack */
@@ -1038,11 +1060,15 @@ body.in-combat .ord-log { order: 5.3; }
    normal flow, map stays visible above. Speaker tab, one line at a time. */
 .ord-dialogue { order: 5.4; }
 .dialogue-box {
-  margin: 6px 4px 0; padding: 8px 10px 6px;
+  margin: 6px 4px 0; padding: 10px 12px 8px;
   border: 2px solid rgba(255, 255, 255, .35); border-radius: 10px;
   background: rgba(10, 12, 20, .92);
   box-shadow: 0 2px 12px rgba(0, 0, 0, .5);
-  font-size: 14px; line-height: 1.45; cursor: pointer;
+  /* READABILITY 2026-10-12 (Steve: chat hard to read on mobile):
+     14px/1.45 was cramped in the 184px region on a phone. 16px/1.6 matches
+     the narr-box precedent (Steve 2026-10-06: narration must land, not
+     whisper); beats are paginated at emission so the line always fits. */
+  font-size: 16px; line-height: 1.6; cursor: pointer;
   animation: combatArrive 0.2s ease-out;
 }
 /* NARRATION IMPACT (Steve 2026-10-06): narration must land, not whisper.
@@ -1056,8 +1082,8 @@ body.in-combat .ord-log { order: 5.3; }
 }
 .dlg-speaker {
   display: flex; justify-content: space-between; align-items: center;
-  font-weight: bold; font-size: 13px; margin: -8px -10px 6px;
-  padding: 4px 10px; border-bottom: 1px solid rgba(255, 255, 255, .15);
+  font-weight: bold; font-size: 14px; margin: -10px -12px 6px;
+  padding: 5px 12px; border-bottom: 1px solid rgba(255, 255, 255, .15);
   background: rgba(255, 255, 255, .06); border-radius: 8px 8px 0 0;
 }
 .dlg-x { background: none; border: none; color: inherit; opacity: .6; font-size: 14px; padding: 2px 6px; cursor: pointer; }
@@ -1077,10 +1103,10 @@ body.in-combat .ord-log { order: 5.3; }
 .dlg-choice { flex: 1 1 40%; }
 .dlg-next {
   display: block; margin: 2px auto 0; background: none; border: none;
-  color: inherit; font-size: 14px; opacity: .7; cursor: pointer;
+  color: inherit; font-size: 15px; opacity: .85; cursor: pointer;
   animation: dlgBlink 1.2s infinite;
 }
-@keyframes dlgBlink { 0%, 100% { opacity: .7; } 50% { opacity: .2; } }
+@keyframes dlgBlink { 0%, 100% { opacity: .85; } 50% { opacity: .3; } }
 .ord-ctx { order: 6; }
 /* SELF BAR: your persistent body-actions (Eat, Sleep, Pack, Wait). Personal
    actions FIRST — they sit at the top of the action area, right below the
@@ -1337,10 +1363,9 @@ body.is-night .cell.c-tent { box-shadow: 0 0 10px 3px rgba(255,190,90,.25); }
   .ord-controls .ord-actions { overflow: hidden; }
   .ord-controls .ord-actions .selfbar { flex-wrap: wrap; }
 }
-/* SHEET BUTTONS: choice-heavy sheets (gifts, relics) must contain their
-   content — the buttons area scrolls internally instead of clipping
-   cards below the fold. */
-.sheet-btns { overflow-y: auto; min-height: 0; }
+/* (sheet-btns scroll containment lives on the main .sheet-btns rule above —
+   flex:0 1 auto + min-height:0 + overflow-y:auto. A separate override rule
+   here used to fight flex-shrink:0; the single rule is the source of truth.) */
 
 /* FIRST-CONTACT MONSTER FLASH (Steve 2026-10-05): freaky pixelated horror.
    Fullscreen, brief, auto-dismisses. The canvas is low-res scaled up with
