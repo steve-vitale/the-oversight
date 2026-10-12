@@ -408,6 +408,70 @@
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): Steve's monster. Eats grid food each round, +15 damage per 1000 kcal. Poison the meal or starve the field; it snacks packs when adjacent.",
       "preTurnHooks": ["sigEater"],
       "preferredRange": 2
+    }    ,
+    "cancellation": {
+      "aggroRange": 6,
+      "archetype": "censor",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): the stamp descends 3 turns, then un-teaches System abilities and silences favor. Go off-script or spend favor.",
+      "preTurnHooks": ["cxStamp"],
+      "preferredRange": 5
+    },
+    "editor": {
+      "aggroRange": 6,
+      "archetype": "cutter",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): cuts every 3rd turn (turn/position/ally), telegraphed a round ahead. Cut things land on a floor tile; retrieve them or jam a cut with contradiction.",
+      "preTurnHooks": ["edCut"],
+      "preferredRange": 4
+    },
+    "rerun": {
+      "aggroRange": 6,
+      "archetype": "looper",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): resets positions and HP every 5 rounds, +10% adaptation. Margin messages persist; win fast or write in the margins.",
+      "preTurnHooks": ["rrTake"],
+      "preferredRange": 4
+    },
+    "spoiler": {
+      "aggroRange": 6,
+      "archetype": "prophet",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): truthful prophecies that gain weight; the Leaked Ending manifests through the hook. Fulfill cheaply or ask a binding question.",
+      "preTurnHooks": ["spAnnounce"],
+      "preferredRange": 5
+    },
+    "timeslot": {
+      "aggroRange": 6,
+      "archetype": "scheduler",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): 3-turn venues, strictly worsening, highlighted a round ahead. Own the venue or get bumped for being boring.",
+      "preTurnHooks": ["tsReschedule"],
+      "preferredRange": 4
+    },
+    "nielsen": {
+      "aggroRange": 6,
+      "archetype": "audience",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): ratings 0-100; the gaze scales with ratings and is undodgeable. At 0: 2-round sign-off. Fight boring to starve it.",
+      "preTurnHooks": ["niWatch"],
+      "preferredRange": 5
+    },
+    "finale": {
+      "aggroRange": 7,
+      "archetype": "closer",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): declares at 50% HP or round 4; 3-round countdown with visible growth to an unavoidable [150,200] title card. Sacrifice or end it first; deaths via maybeCheatDeath.",
+      "preTurnHooks": ["fiFinale"],
+      "preferredRange": 4
+    },
+    "network_note": {
+      "aggroRange": 6,
+      "archetype": "executive",
+      "fleeAt": 0,
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): announce-then-apply memos (fragile by design). Feed it bad notes: applied next turn, reverted the turn after. Kill it first or weaponize the notes.",
+      "preTurnHooks": ["nnNote"],
+      "preferredRange": 4
     }
   }
 }

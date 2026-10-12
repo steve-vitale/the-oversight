@@ -15563,6 +15563,7 @@
       <button class="self-btn" id="c-offer" ${p.acted ? 'disabled' : ''} title="Offer food — buy off the curious thief">🍖 Offer</button>
       ${Game.sigW3bCombatButtons ? Game.sigW3bCombatButtons() : ''}
       ${Game.sigW4CombatButtons ? Game.sigW4CombatButtons() : ''}
+      ${Game.sigW5CombatButtons ? Game.sigW5CombatButtons() : ''}
       <button class="self-btn" id="c-wait" title="Hold still — forfeit the rest of the turn">⏸ Wait</button>
     </div>
     <div class="actions" id="c-talkrow" style="display:none"></div>`;
@@ -15699,6 +15700,12 @@
     // contradict/rewrite, algorithm tank, eater poison. Buttons + wiring
     // live in src/js/sigW4.js.
     if (Game.sigW4WireCombat) Game.sigW4WireCombat(on, rerender);
+    // SIG W5 (wave 5 "The Producers", 2026-10-11): signature combat actions —
+    // cancellation off-script/favor, editor retrieve/contradict, rerun
+    // margin messages, spoiler cheap-fulfill/binding-question, timeslot
+    // own-venue, nielsen play-to-camera, finale sacrifice, network-note
+    // bad-note/read-memo. Buttons + wiring live in src/js/sigW5.js.
+    if (Game.sigW5WireCombat) Game.sigW5WireCombat(on, rerender);
     // TALK: words are actions too. Pick who, then how.
     const showTalkRow = (targetKey) => {
       const row = document.getElementById('c-talkrow');

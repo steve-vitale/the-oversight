@@ -375,6 +375,19 @@
                   if (typeof _sig4 === 'number') total = _sig4;
                 }
               } catch (e) {}
+              // SIGNATURE MECHANICS (sigW5, Steve 2026-10-11): wave-5
+              // "The Producers" signature layer (cancellation/editor/rerun/
+              // spoiler/timeslot/nielsen/finale/network_note) in villager
+              // field fights. The module owns all state on rec.sigW5.
+              try {
+                if (typeof this.sigW5FieldMonster === 'function') {
+                  var _sig5 = this.sigW5FieldMonster(mdef, rec, {
+                    total: total, round: round, rr: RR, lroll: lroll,
+                    vName: vName, mName: mName
+                  });
+                  if (typeof _sig5 === 'number') total = _sig5;
+                }
+              } catch (e) {}
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in is exposed (no armor) and draws some of the hits.
               var hittingAlly = allyIn && allyHp > 0 && RR() < 0.4;

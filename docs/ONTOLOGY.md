@@ -1062,6 +1062,20 @@ Wave-4 "The Mirror Draft" signature combat mechanics (Steve 2026-10-11): The Con
 
 **Consumes:** say, tbDamage, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, hasItem, consumeItem, hasStatus, applyStatus, audioEvent, havenViewership
 
+### sig-w5 (`sigW5.js`)
+Wave-5 signature combat mechanics (Steve 2026-10-11): The Producers — the show fights back. Cancellation (the stamp descends; un-teaches System abilities, deletes buffs, silences favor — go off-script or spend favor), Editor (cuts your last turn / position / ally to the cutting-room floor — retrieve them, or contradict yourself to jam the blades), Rerun (the fight resets every 5 rounds — leave mechanical messages in the margins, or win fast), Spoiler (truthful prophecies that gain weight — binding questions, cheap fulfillment, or make it a lie), Timeslot (reschedules the venue — own it or get bumped), Nielsen (ratings 0-100 — fight boring), Finale (once per fight, a 3-round countdown to an unavoidable [150,200] title card — sacrifice or end it first; doom deaths flow through maybeCheatDeath), Network Note (announce-then-apply notes — kill it first, or feed it bad notes). Hooks interleave with the generic encounter interpreter — each hook returns false unless its telegraph promises the turn.
+
+**Provides:** cxStamp(game, m), edCut(game, m), rrTake(game, m), spAnnounce(game, m), tsReschedule(game, m), niWatch(game, m), fiFinale(game, m), nnNote(game, m), tbCxOffScript(), tbCxSpendFavor(), tbEdRetrieve(), tbEdContradict(), tbRrLeaveMessage(kind), tbRrReadMessages(), tbSpAsk(), tbSpCheapFulfill(), tbTsOwnVenue(), tbNiPlayToCamera(), tbFiSacrifice(kind), tbNnBadNote(kind), tbNnReadMemo(), sigW5CombatButtons(), sigW5WireCombat(on, rerender), sigW5FieldMonster(mdef, rec, ctx)
+
+**Rules:**
+- telegraph_honesty: every cue describes what the mechanic actually does — the stamp's descend count, the film strips' shown target, the clapperboard's take number, the trailer-voice announcement, the TV guide highlight, the viewer counter, the growth + countdown, the visible memo text ARE the mechanics (code: cxStamp)
+- interleave: hooks add the signature layer around the generic interpreter — only the fall, the cut, the clap, the title card, the reschedule, the sign-off and the memo-meeting own their turns outright, and each telegraph promises exactly that (code: edCut)
+- no_silent: every signature event narrates via say() — nothing happens quietly (code: nnNote)
+- counterplay_real: off-script improv, favor spends, floor retrieval, contradiction jams, margin messages, cheap fulfillments, binding questions, venue ownership, boring fights, sacrifices and bad notes all resolve through real fight state, never flags that lie (code: tbFiSacrifice)
+- doom_choke: finale title-card deaths flow through tbDamage + tbEndCheck into maybeCheatDeath — the single death choke point, never bypassed (Steve 2026-10-10) (code: fiFinale)
+
+**Consumes:** say, tbDamage, addHealth, audioEvent, tbRefreshTelegraphUI, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, tbPlayerStrike, hasItem, consumeItem, seList, seDef, apTopLane, apFanLane, apAdjustFavor, apClubName, feastedActive, clearFeastBuff
+
 ### spawn-knack (`spawn-knack.js`)
 The spawn knack — a mysterious latent first ability chosen in the spawn sequence, pre-System. Backstory-rooted, unexplained.
 
