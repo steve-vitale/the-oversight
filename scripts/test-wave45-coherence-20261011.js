@@ -99,7 +99,14 @@ const ok = (name, cond, detail) => {
   ok('RATINGS line for wave 5', sysLines.some(l => /Wave 5 talent has been released/.test(l)));
 
   // ---- 5: ledger 100% beats name the real next gate (sense-fix)
+  // DAY-AWARE (longsim wave lever r6 2026-10-12): the day-floor sentence is
+  // only honest when the floor is still in the future — the unlock beat
+  // fires in the same stack once the floor has passed. Reset the scale
+  // flags too: section 4 leaves networkLive/nationalLive true, which made
+  // the w3/w4 beats say "cleared for release" instead of naming the gate.
   const beats = {};
+  Game.state.networkLive = false; Game.state.nationalLive = false;
+  Game.state.scholar.day = 1; // below both day floors: gates are future, name them
   for (const w of [1, 2, 3, 4, 5]) {
     resetLedger(); resetAnn(); sysLines.length = 0;
     const mids = { 1: ['hushwolf', 'hummice', 'sunbasker'], 2: ['voice_mimic_radio', 'mirror_stag'], 3: w3, 4: w4, 5: ['cancellation', 'editor'] }[w];
@@ -111,9 +118,30 @@ const ok = (name, cond, detail) => {
   }
   ok('w1 100% beat names the day-8 floor', /day 8/.test(beats[1]) && !/scale/i.test(beats[1]), beats[1].slice(0, 140));
   ok('w2 100% beat names the day-25 floor', /day 25/.test(beats[2]) && !/scale/i.test(beats[2]), beats[2].slice(0, 140));
-  ok('w3 100% beat names regional', /regional/i.test(beats[3]) && !/day \d/.test(beats[3]), beats[3].slice(0, 140));
-  ok('w4 100% beat names national', /national/i.test(beats[4]), beats[4].slice(0, 140));
+  // w3/w4 full beats are scale-gated: below the scale floor the ledger stays
+  // quiet about the gate (the scale-pointer beats carry it — naming a scale
+  // rank the village hasn't earned would be a spoiler); at/above the floor
+  // it says the talent is cleared. Never a day floor, never a wrong gate.
+  ok('w3 100% beat names no day floor and no wrong gate',
+    !/day \d/.test(beats[3]) && !/wave 5|producers/i.test(beats[3]), beats[3].slice(0, 140));
+  ok('w4 100% beat names no day floor and no wrong gate',
+    !/day \d/.test(beats[4]), beats[4].slice(0, 140));
   ok('w5 100% beat promises NO next wave', !/next wave opens/i.test(beats[5]) && /whole ledger|Producers themselves/i.test(beats[5]), beats[5].slice(0, 160));
+  // The fix: floors already passed -> no stale "opens once day N passes".
+  Game.state.scholar.day = 60;
+  const late = {};
+  for (const w of [1, 2]) {
+    resetLedger(); resetAnn(); sysLines.length = 0;
+    const mids = { 1: ['hushwolf', 'hummice', 'sunbasker'], 2: ['voice_mimic_radio', 'mirror_stag'] }[w];
+    const bar = Game.waveLedgerCfg().barsPerWave[w];
+    let need = bar;
+    for (const m of mids) { const n = Math.min(2, need); fill(m, n); need -= n; }
+    late[w] = sysLines.filter(l => /bar is full/.test(l)).join(' ');
+  }
+  ok('w1 full beat drops the stale day-8 sentence once the floor passed',
+    /bar is full/.test(late[1]) && !/day 8/.test(late[1]), late[1].slice(0, 140));
+  ok('w2 full beat drops the stale day-25 sentence once the floor passed',
+    /bar is full/.test(late[2]) && !/day 25/.test(late[2]), late[2].slice(0, 140));
 
   // ---- 6: the pool admits the new wave once unlocked
   resetLedger(); fill('redactor', 2); fill('gavel', 2);

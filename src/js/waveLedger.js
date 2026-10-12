@@ -171,11 +171,19 @@
           // (checkScalePointers, producer voice) carries the message — the
           // ledger just reports the bar, no mechanics-voice gate sentence.
           // When the floor is already met, say what's actually next.
+          // DAY-AWARE GATES (beats 1+2, longsim wave lever r6 2026-10-12):
+          // the day floors are usually ALREADY past when the bar fills
+          // (measured: w1-bar median fill day ~20 vs floor 8; w2-bar ~49
+          // vs floor 25) — and the unlock beat fires in the same call stack
+          // right after this line. Saying "Wave 3 opens once day 25 passes"
+          // in the same breath as the release is a contradiction. Name the
+          // day gate only when it's still in the future.
+          const day = ((this.state && this.state.scholar) || {}).day || 1;
           const rankNow = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
           const atLeast = (need) => { try { return this.scaleAtLeast(rankNow, need); } catch (e) { return false; } };
           const gate =
-            wave === 1 ? `Wave 2 opens once day ${d2} passes.` :
-            wave === 2 ? `Wave 3 opens once day ${dN} passes.` :
+            wave === 1 ? (day >= d2 ? null : `Wave 2 opens once day ${d2} passes.`) :
+            wave === 2 ? (day >= dN ? null : `Wave 3 opens once day ${dN} passes.`) :
             wave === 3 ? (atLeast('regional') ? `Wave 4's talent is cleared for release — watch the treeline.` : null) :
             wave === 4 ? (atLeast('national') ? `The Producers are cleared for release — watch the sky.` : null) :
             `That's the whole ledger — the village has bloodied the Producers themselves. No further casting directives. You're the show now.`;
