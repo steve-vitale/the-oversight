@@ -44,14 +44,17 @@ Game.wipe = function () { transcript.push(['sys', '(wipe — honest run end)']);
 Game.save = function () {};
 // No grid in the harness: the trial's startCombat is stubbed; the resume is
 // driven directly (the real fight path is the combat engine's tested domain).
+// The stub honors startCombat's contract — a started fight leaves tbfight set
+// (2026-10-12: the table's refusal net reads tbfight, so the stub must too).
 let trialStarted = null;
-Game.startCombat = function (mid) { trialStarted = mid; };
+Game.startCombat = function (mid) { trialStarted = mid; Game.tbfight = {}; };
 
 function resetAll() {
   const pg = Game.progState();
   pg.tableDone = false; pg.table = null;
   Game.state.scholar.tableChoices = null;
   Game.over = false; Game.won = false;
+  Game.tbfight = null;
   trialStarted = null;
 }
 function lesserSeat() {

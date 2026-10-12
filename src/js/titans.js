@@ -503,6 +503,17 @@
     if (!Game.startCombat || Game.startCombat.__titanWrapped) return;
     var orig = Game.startCombat;
     var wrapped = function (mid) {
+      // TABLE-TRIAL BYPASS (2026-10-12): when the galactic table summons the
+      // champion (table-feared's trial-by-combat), the open-world finale
+      // campaign gates — three-node march order, muster of 20 allied blades
+      // — do NOT apply. The table issues the challenge; the System brings the
+      // champion to the ring directly, as a single blow-by-blow fight. The
+      // flag is consumed here (never leaks into open-world combat): the
+      // campaign march, muster marking, and ally injection are all skipped.
+      if (mid === 'finale' && Game._tableTrialDirect) {
+        Game._tableTrialDirect = false;
+        return orig.apply(this, arguments);
+      }
       var mdef = null;
       try { mdef = (Game.data.monsters || []).find(function (m) { return m.id === mid; }); } catch (e) {}
       var titanId = mid && titanDefs()[mid] ? mid : null;

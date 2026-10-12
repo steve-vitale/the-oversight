@@ -83,11 +83,16 @@
       {
         say: ['BEAT TWO — CALIBRATION. A delegate leans too far over the light and flinches at its own reflection in your eyes. The System watches the flinch the way it watches ratings. "MORE?" it asks. "LESS?" Or — the oldest door — "PROVE IT?"'],
         meterLine,
-        choices: [
-          { id: 'lean', label: 'Lean in.', effects: curdleCheck({ terror: 2, horror: 2 }), say: ['You let them see it. All of it. The table recalculates. The fire back home burns a little lower.'] },
-          { id: 'hold', label: 'Hold back.', effects: { terror: 1, horror: -2 }, say: ['Restraint, from you, is the most frightening thing in the room. Your people notice the restraint too.'] },
-          { id: 'trial', label: 'Demand the champion. (TRIAL BY COMBAT — real fight, real death)', effects: { trial: true }, say: ['"Send your champion." The table goes quiet in eleven dimensions.'] },
-        ],
+        // A withdrawn trial stays withdrawn: after an honest refusal the
+        // door is not offered again on this walk. (2026-10-12)
+        choices: function (T) {
+          const list = [
+            { id: 'lean', label: 'Lean in.', effects: curdleCheck({ terror: 2, horror: 2 }), say: ['You let them see it. All of it. The table recalculates. The fire back home burns a little lower.'] },
+            { id: 'hold', label: 'Hold back.', effects: { terror: 1, horror: -2 }, say: ['Restraint, from you, is the most frightening thing in the room. Your people notice the restraint too.'] },
+          ];
+          if (!(T && T.trialRefused)) list.push({ id: 'trial', label: 'Demand the champion. (TRIAL BY COMBAT — real fight, real death)', effects: { trial: true }, say: ['"Send your champion." The table goes quiet in eleven dimensions.'] });
+          return list;
+        },
       },
       {
         say: function (T) {
@@ -138,12 +143,33 @@
       try { this.tableLiveWrap('the terror broadcast: TRIAL BY COMBAT'); } catch (e) {}
       try { this.state.scholar.tableChoices = null; } catch (e) {}
       try {
+        // The table summons the champion DIRECTLY: the finale campaign's
+        // open-world gates (three-node march, muster of 20 allied blades)
+        // do not apply at the table — the System brings the champion to the
+        // ring, right now, for a single blow-by-blow fight. (2026-10-12)
+        this._tableTrialDirect = true;
         this.startCombat('finale');
       } catch (e) {
         T.trialPending = false;
+        this._tableTrialDirect = false;
         this.say('The champion does not come. (The fight refused: ' + (e && e.message ? e.message : e) + '.) The table pretends it meant to do that.');
         this.tableRunBeat();
+      } finally {
+        this._tableTrialDirect = false;
       }
+      // A gate refusal is SILENT (says its line, returns null — no throw).
+      // Without this net, the challenge strands with no modal and no fight:
+      // trialPending stays true forever and the player has no options.
+      // If no fight began, say so honestly, withdraw the door, re-run the
+      // beat — the challenge continues, minus the trial. (2026-10-12)
+      try {
+        if (T.trialPending && !this.tbfight) {
+          T.trialPending = false;
+          T.trialRefused = true;
+          this.say('The champion does not come — the table withdraws the trial. It will not be offered again. The calibration continues without it.');
+          this.tableRunBeat();
+        }
+      } catch (e) {}
       try { this.save(); } catch (e) {}
     },
     tableTrialResume(result) {
