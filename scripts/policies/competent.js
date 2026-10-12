@@ -184,6 +184,28 @@ function teachRound(Game, ctx) {
   } catch (e) {}
 }
 
+// TRAUMA RELIEF (longsim combat r7 2026-10-12): keepsake channeling is the
+// fastest trauma relief in the game (−6/channel vs −2/night sleep), and the
+// button already renames itself "Hold it (steady yourself)" at trauma >= 8.
+// A competent player who feels the shaking steadies themselves at dawn —
+// the policy never did this before (baseline: 0 policy-driven channels in
+// 24 runs; the only channels were the System's one-time demo). Gate:
+// COMPETENT_TRAUMA_RELIEF=0 restores the legacy path for before/after
+// measurement.
+function sootheTrauma(Game, ctx) {
+  try {
+    if (process.env.COMPETENT_TRAUMA_RELIEF === '0') return;
+    const s = Game.state.scholar || {};
+    if ((s.trauma || 0) < 8) return; // below the game's own relief threshold
+    if (!Game.sentimentTaught || !Game.sentimentTaught()) return;
+    if (!Game.channelReadyKeepsakes || !Game.channelSentiment) return;
+    const ready = Game.channelReadyKeepsakes();
+    if (!ready || !ready.length) return;
+    Game.channelSentiment(ready[0]);
+    ctx.soothed = (ctx.soothed || 0) + 1;
+  } catch (e) {}
+}
+
 // Talk: one real conversation a day. Relationships are the other economy.
 function talkRound(Game, ctx) {
   try {
@@ -1350,6 +1372,9 @@ const competent = {
     gearUp(Game, ctx); // equip best weapon/armor owned (longsim combat 2026-10-11)
   },
   daily(Game, ctx) {
+    // steady yourself at dawn: channel a keepsake when the trauma is up
+    // (longsim combat r7 2026-10-12)
+    sootheTrauma(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
     stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
@@ -1516,4 +1541,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma };
