@@ -104,6 +104,16 @@ Renders all screens from game state. Mobile-first PWA UI. Grid, D-pad, action ba
 
 **Consumes:** Game.state, Game.status()
 
+### audio-registry (`audio-registry.js`)
+File-backed audio placeholder registry (Steve 2026-10-12). The 32 judged synth monster signatures ship as PLACEHOLDER-flagged MP3s (src/audio/signatures/); real animal field recordings back 8 animal pools (placeholder:false, see src/audio/animals/ATTRIBUTION.md); weapon/item sounds that never existed are synth placeholders (src/audio/weapons/). Single source of truth for placeholder:true tagging; Game.audioEvent (game.js) plays files first with synth fallback; the debug board reads tags from this data.
+
+**Provides:** SIGNATURES: 32 hook-name -> {file, placeholder:true, label, monster} entries, MONSTER_SIG: 29 wave 3-5 monster ids -> their primary signature hook, ANIMALS: 10 pools incl. 2 documented gaps (raccoon, turtle), WEAPONS: 9 weapon/item placeholder hooks, resolveHook: DOM-free hook resolver (name) -> {kind, file, placeholder, label} or null, AudioRegistry: public surface bundling the above
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### betrayal (`betrayal.js`)
 Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; aftermath is the game.
 
