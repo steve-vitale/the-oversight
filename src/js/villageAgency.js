@@ -790,6 +790,23 @@
       this.say(`The fire is built high. Nobody speaks while the count is taken.`);
       this.say(`${this.capFirst(counter)} counts on their fingers, twice. Then, to the fire: "${acceptVotes} for taking them in. ${total - acceptVotes} against."`);
       try { if (this.drama) this.drama('social', { type: 'vote', guilty: acceptVotes, total: total }); } catch (e) {}
+      // TRUST r6 (moot afterlife): the moot leaves a social trace. Every
+      // voter remembers how they voted and how it went — the justice moot
+      // has had moot_vote memories forever; the petition moot had none, so
+      // the village talked about nothing the day after. Telltale-theater:
+      // the read site is convoWhatsAlive via MEM_LABELS['petition_moot']
+      // (convo-scene.js). No trust moves here — the vote is the village's
+      // decision, not a deed of the player's (trust != rep, canon).
+      try {
+        var _outcome6 = accepted ? 'the moot took them in' : 'the moot turned them away';
+        var _votes6 = (v.votes || []);
+        for (var _mi6 = 0; _mi6 < _votes6.length; _mi6++) {
+          var _mv6 = _votes6[_mi6];
+          if (!_mv6 || !_mv6.vid) continue;
+          var _how6 = _mv6.vote === 'accept' ? 'voted to take them in' : 'voted to turn them away';
+          this.remember(_mv6.vid, 'petition_moot', _how6 + ' — ' + _outcome6);
+        }
+      } catch (e) {}
       // the loudest loser speaks — the drama doesn't end at the count
       try {
         var loserVotes = (v.votes || []).filter(function (x) { return (x.vote === 'accept') !== accepted; })
@@ -950,6 +967,23 @@
         if (accepted && pet.cause === 'cannibal' && this.seedGossip) {
           var hearers = (this.npcIds ? this.npcIds() : []).slice(0, 4);
           this.seedGossip('harbor_cannibals', { who: this.villagerId, honest: -10, trustworthy: -8 }, hearers);
+        }
+        // TRUST r6 (moot afterlife): the village talks about the moot, not
+        // just the cannibals — but ONLY when a moot actually happened
+        // (pet.vote exists). A petition that walked unanswered ('waited') or
+        // was turned away at the door was never the village's decision, and
+        // gossip about it would be fiction. Rep dims only — gossip moves
+        // REP, never trust (canon).
+        if (pet.vote && this.seedGossip) {
+          var hearers6 = (this.npcIds ? this.npcIds() : []).slice(0, 3);
+          var me6 = this.villagerId;
+          if (accepted && pet.cause === 'famine-flight') this.seedGossip('took_in_hungry', { who: me6, generous: 6 }, hearers6);
+          else if (accepted && pet.cause === 'peaceful') this.seedGossip('sheltered_peacemakers', { who: me6, generous: 4 }, hearers6);
+          else if (accepted && pet.cause === 'succession-loser') this.seedGossip('took_in_losers', { who: me6, generous: 3 }, hearers6);
+          else if (!accepted && pet.cause === 'famine-flight') this.seedGossip('turned_away_hungry', { who: me6, generous: -6 }, hearers6);
+          else if (!accepted && pet.cause === 'peaceful') this.seedGossip('turned_away_peacemakers', { who: me6, generous: -4 }, hearers6);
+          else if (!accepted && pet.cause === 'succession-loser') this.seedGossip('turned_away_losers', { who: me6, generous: -3 }, hearers6);
+          else if (!accepted && pet.cause === 'cannibal') this.seedGossip('refused_eaters', { who: me6, brave: 4 }, hearers6);
         }
       } catch (e) {}
     },

@@ -4349,9 +4349,11 @@
           // the new face. A broken promise died with its maker: explicitly
           // not the successor's to carry.
           let memResp = MEM_RESP[akey] || '"Yeah. I think about that too."';
+          // TRUST r6: hoisted for the petition_moot read below (was try-scoped).
+          let lastMem = null;
           try {
             const mems = (((this.state.village || {}).memory || {})[vid] || []).filter(m => m && m.t === akey);
-            const lastMem = mems[mems.length - 1];
+            lastMem = mems[mems.length - 1];
             const predM = (typeof this.inheritedName === 'function' && lastMem) ? this.inheritedName(lastMem) : null;
             if (predM) {
               const MEM_INH = {
@@ -4367,6 +4369,23 @@
               if (MEM_INH[akey]) memResp = MEM_INH[akey];
             }
           } catch (e) {}
+          // TRUST r6 (moot afterlife): petition_moot memories get a specific
+          // read, not the generic fallback — the response names THEIR vote
+          // and the outcome from the memory note itself. The loser lines
+          // carry the disagreement honestly (Telltale-theater: the write
+          // earns its read).
+          if (akey === 'petition_moot' && lastMem && lastMem.note) {
+            const _n6 = String(lastMem.note);
+            const _va6 = _n6.indexOf('voted to take them in') >= 0;
+            const _oa6 = _n6.indexOf('the moot took them in') >= 0;
+            memResp = _va6 && _oa6
+              ? "\u201cI voted to take them in. The moot agreed \u2014 glad we did.\u201d"
+              : _va6
+                ? "\u201cI voted to take them in. The moot said no. It still sits wrong with me.\u201d"
+                : _oa6
+                  ? "\u201cI voted to turn them away. The moot took them in anyway. We\u2019ll see.\u201d"
+                  : "\u201cI voted to turn them away, and the moot agreed. Hard call. Right one.\u201d";
+          }
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:memory' });
           const about = (typeof this.convoMemoryAbout === 'function' && this.convoMemoryAbout(akey)) || 'that';
           // SPENT (journey-succession 2026-10-12): the memory was named —

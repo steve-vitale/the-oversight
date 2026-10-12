@@ -269,6 +269,10 @@
         ally: 'who stood with you',
         betrayed_ally: 'the alliance you broke',
         stood_together: 'when you held the line together',
+        // TRUST r6 (moot afterlife): petition-moot voter memories. Read by
+        // convoWhatsAlive (fresh-memories path) — the day after the moot,
+        // "About the moot over the petitioners..." is a live topic.
+        petition_moot: 'the moot over the petitioners',
       };
       return MEM_LABELS[memType] || null;
     },
