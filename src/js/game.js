@@ -29909,8 +29909,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // shines, and it dies like anything else.
       const tPat = t.kind === 'monster' && t.mdef && t.mdef.attack && t.mdef.attack.pattern;
       const windingUp = t.telegraph && !t.hasFired;
-      if (tPat && tPat.sweep && windingUp && t.hp > 0 && t.hp - final <= 0) {
+      // ONE-TIME HOLD (matrix r2 2026-10-12): the gathered-light hold was
+      // permanent if the beam never fired (multi-move kits may choose a
+      // different move). Now it holds once; a second lethal hit drops it.
+      if (tPat && tPat.sweep && windingUp && !t._lightHeld && t.hp > 0 && t.hp - final <= 0) {
         final = t.hp - 1;
+        t._lightHeld = true;
         this.say(`It should drop — but the light behind ${t.name}'s eyes is already gathered. The body won't fall until it fires.`);
       }
       // ABILITY DEFENSE (Steve 2026-10-07): Brace (unbreakable) and other
@@ -32087,7 +32091,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const fx = (foe && foe.f) ? foe.f : foe;
       const d = (fx && m) ? Math.max(Math.abs(fx.mx - m.mx), Math.abs(fx.my - m.my)) : 99;
       const hpFrac = (m.maxHp && m.hp != null) ? m.hp / m.maxHp : 1;
-      const legal = kit.filter(a => this.tbMoveLegal(m, a, d, hpFrac));
+      let legal = kit.filter(a => this.tbMoveLegal(m, a, d, hpFrac));
+      // BLOCKED-LANE REPOSITIONING (matrix r2 2026-10-12): if the only legal
+      // moves are beam/line with fully-blocked lanes, the monster repositions
+      // instead of firing into trees. Check lane clarity for beam/line moves.
+      if (fx && m) {
+        const blockedLane = (a) => {
+          const pat = a.pattern || {};
+          if (pat.type !== 'beam' && pat.type !== 'line') return false;
+          try {
+            const S = globalThis.Scattering || {};
+            if (!S.combat || !S.combat.patternCells) return false;
+            let cells = S.combat.patternCells(pat, m.mx, m.my, fx.mx, fx.my);
+            const detail = this.genDetail(this.map.px, this.map.py);
+            for (const c of cells) {
+              const cell = detail[c.cy] && detail[c.cy][c.cx];
+              if (cell && this.cellProps(cell).blocks) return true; // blocked
+            }
+            return cells.length === 0; // no cells = blocked
+          } catch (e) { return false; }
+        };
+        const unblocked = legal.filter(a => !blockedLane(a));
+        // If some moves have clear lanes, prefer them. If ALL are blocked,
+        // the monster will reposition (handled by the tactic below).
+        if (unblocked.length) legal = unblocked;
+        else {
+          // All beam/line moves blocked: trigger reposition instead of attack.
+          // Set a flag that tbMonsterTurn checks to move the monster.
+          m._repositionForLane = true;
+        }
+      }
       const pool = legal.length ? legal : kit.slice(0, 1);
       let total = 0;
       for (const a of pool) total += (a.weight || 1);
@@ -32284,6 +32317,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // data-driven pre-turn hooks. Migrated species run their verbatim-extracted logic from the registry.
       // mbRunPreTurn returns true if a hook consumed the turn.
       if (this.mbRunPreTurn && this.mbRunPreTurn(m)) return;
+      // BLOCKED-LANE REPOSITION (matrix r2 2026-10-12): if tbChooseMove flagged
+      // that all beam/line lanes are blocked, step to an adjacent tile instead
+      // of firing into trees. One step toward the player; the lane check runs
+      // again next turn.
+      if (m._repositionForLane) {
+        m._repositionForLane = false;
+        try {
+          const p = this.tbFighter('p');
+          if (p && p.alive) {
+            const dx = Math.sign(p.mx - m.mx), dy = Math.sign(p.my - m.my);
+            const nx = Math.max(0, Math.min(8, m.mx + dx));
+            const ny = Math.max(0, Math.min(8, m.my + dy));
+            const detail = this.genDetail(this.map.px, this.map.py);
+            const cell = detail[ny] && detail[ny][nx];
+            if ((nx !== m.mx || ny !== m.my) && !(cell && this.cellProps(cell).blocks)) {
+              m.mx = nx; m.my = ny;
+              this.say(`${this.encSubject(m)} shifts, seeking a clear lane.`);
+            }
+          }
+        } catch (e) {}
+        if (this.tbEndCheck()) return;
+        return;
+      }
       // HIGHBEAM (Steve 2026-10-05; hook-migrated 2026-10-07): the antler
       // thrash runs exactly once via the preTurnHooks dispatch above
       // (monsterBehaviors.js) — the inline branch here double-fired it.
