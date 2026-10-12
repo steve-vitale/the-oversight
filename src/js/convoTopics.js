@@ -252,11 +252,36 @@
           if (mid) return { kind: 'naming', mid };
         }
         if ((v.grief || 0) > 0) {
-          const corpses = v.corpses || [];
+          // CORPSE STORE (journey crisis r4 2026-10-12): corpses live in
+          // state.corpses (corpses.js), never village.corpses — the old read
+          // always found [] and the acute mourning lines fell back to the
+          // nameless variants even with a fresh named corpse on the ground.
+          const corpses = (typeof this.corpses === 'function') ? this.corpses() : (this.state.corpses || []);
           const recent = corpses[corpses.length - 1];
-          const nm = recent ? String(recent.name || recent.vid || '').split(' ')[0] : null;
+          const nm = recent ? String(recent.name || recent.villagerId || '').split(' ')[0] : null;
           return { kind: 'mourning', name: nm };
         }
+        // MANTLE MEMORY (journey crisis r4 2026-10-12): the village talks
+        // about a dead bearer longer than the 3-day acute grief — the mantle
+        // passing is the run's central fiction ("the village remembers its
+        // own mantle-bearers", ledger.js). Without this, the successor's
+        // conversations went grief-silent 3 days after the leader died
+        // defending the haven (creek-concert small talk, transcript-verified).
+        // Ordinary villager deaths keep the 3-day window; only the lineage's
+        // last entry — a bearer death with a cause — gets the longer tail.
+        try {
+          if (typeof this.lineage === 'function') {
+            const lin = this.lineage() || [];
+            const last = lin[lin.length - 1];
+            if (last && last.cause && !last.outcome) {
+              const since = day - (last.day || 0);
+              if (since >= 0 && since <= 10) {
+                const nm = String(last.name || '').split(' ')[0] || null;
+                if (nm) return { kind: 'mourning', name: nm, bearer: true };
+              }
+            }
+          }
+        } catch (e) {}
         const mem = this.t2mem(vid).filter(m => day - (m.day || 0) <= 3);
         const threat = mem.find(m => /threat|attack|monster|treeline/i.test((m.t || '') + ' ' + (m.note || '')));
         if (threat) return { kind: 'threat', note: threat.note };

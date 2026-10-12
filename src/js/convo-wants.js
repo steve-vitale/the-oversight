@@ -1385,6 +1385,13 @@
         try {
           const ev = this.t2LatelyEvent ? this.t2LatelyEvent(vid) : null;
           if (ev && ev.kind) {
+            // MANTLE MEMORY (journey crisis r4 2026-10-12): name the dead —
+            // "everyone's thinking about them" with no name read as filler
+            // next to the lately-topic lines that do name them.
+            if (ev.kind === 'mourning' && ev.name) {
+              mark('event');
+              return `"Nobody's saying it out loud, but everyone's thinking about ${ev.name}. The quiet ones worst."`;
+            }
             const EV_NEWS = {
               naming: '"There\'s a real argument going about what to call that thing. People are heated."',
               mourning: '"Nobody\'s saying it out loud, but everyone\'s thinking about them. The quiet ones worst."',
