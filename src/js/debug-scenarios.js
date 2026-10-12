@@ -1777,7 +1777,20 @@
   Game.debugApplyLoadout = function (loadoutId) {
     const l = LOADOUTS[loadoutId];
     if (!l) { Game.say(`🐞 Unknown loadout: ${loadoutId}`); return; }
+    // COMBAT SAFETY (day7-softlock 2026-10-12): loadouts are equipment/stat
+    // presets — they must never move the player or disturb a live fight.
+    // Snapshot the combat-critical state around the apply and restore it, so
+    // no present or future loadout can teleport mid-combat or drop the fight.
+    const tf = Game.tbfight;
+    const map = Game.map || {};
+    const px = map.px, py = map.py;
+    const mx = Game.state.scholar.mx, my = Game.state.scholar.my;
     l.apply();
+    try {
+      if (Game.map) { Game.map.px = px; Game.map.py = py; }
+      Game.state.scholar.mx = mx; Game.state.scholar.my = my;
+      if (tf && Game.tbfight !== tf) Game.tbfight = tf;
+    } catch (e) {}
     Game.say(`🐞 LOADOUT: ${l.label} — ${l.desc}`);
   };
 

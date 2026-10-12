@@ -12916,13 +12916,22 @@
   function systemArrivalAnimation(callback) {
     const beats = Game.systemArrivalBeats();
     let i = 0, done = false;
+    // RE-ENTRY GUARD (day7 soft-lock 2026-10-12): expeditionScreen() runs on
+    // every refresh, and the call-site guard (!systemAnimationShown) only
+    // flips in the finish callback. Without this, each refresh while the
+    // cinematic played appended ANOTHER overlay — 3-5 stacked "…hello?"
+    // buttons, all sharing one id, so getElementById wired only the first
+    // (buried) button and the visible ones were dead. One cinematic at a time.
+    if (document.querySelector('.system-arrival-overlay')) return;
     const overlay = document.createElement('div');
     overlay.className = 'system-arrival-overlay';
     document.body.appendChild(overlay);
     function finish() {
       if (done) return;
       done = true;
-      try { overlay.remove(); } catch (e) {}
+      // Remove ALL arrival overlays, not just ours — a stray from an older
+      // build (or a re-entry that slipped through) must never trap the player.
+      try { document.querySelectorAll('.system-arrival-overlay').forEach(el => el.remove()); } catch (e) {}
       if (callback) callback();
     }
     function showBeat() {
@@ -12935,8 +12944,13 @@
           (l.who === 'sys' ? '&ldquo;' + esc(Game.quoteWrap(l.text).slice(1, -1)) + '&rdquo;' : esc(l.text)) +
           '</div></div>'
         ).join('') +
-        '<button class="btn" id="b-arrival-next" style="margin-top: 14px; z-index: 1001;">' + esc(b.button || '…') + '</button>';
-      document.getElementById('b-arrival-next').onclick = () => {
+        '<button class="btn arrival-next" style="margin-top: 14px; z-index: 1001;">' + esc(b.button || '…') + '</button>';
+      // SCOPED LOOKUP (day7 soft-lock 2026-10-12): the old code used
+      // document.getElementById('b-arrival-next') — a document-wide id. With
+      // more than one overlay alive, only the first button got a handler and
+      // the visible ones were dead. Query inside our own overlay; no id at all.
+      const btn = overlay.querySelector('.arrival-next');
+      if (btn) btn.onclick = () => {
         i++;
         if (i >= beats.length) finish();
         else showBeat();
@@ -17286,6 +17300,20 @@
         if ((m.kind === 'monster' || m.kind === 'hostile') && m.alive) {
           m.hp = 0; m.alive = false;
           Game.say(`🐞 DEBUG: ${m.name} smote.`);
+          // CORPSE PIPELINE (day7-softlock 2026-10-12): the old code just
+          // zeroed hp — the body never entered the death pipeline, so no
+          // corpse spawned (no carcass, no loot-as-action, no meat). Route
+          // through registerDeath exactly like a strike kill does, so the
+          // carcass lands where the monster fell.
+          if (m.kind === 'monster' && m.mdef) {
+            try {
+              m._deathCorpse = Game.registerDeath({
+                kind: 'monster', monsterId: m.mdef.id, monsterName: m.name, name: m.name,
+                mx: m.mx, my: m.my, cause: 'combat', killerId: Game.villagerId,
+                witnesses: Game.fightWitnesses ? Game.fightWitnesses() : [],
+              });
+            } catch (e) {}
+          }
         }
       }
       Game.tbEndCheck();
