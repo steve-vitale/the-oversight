@@ -54,6 +54,17 @@ self.addEventListener('fetch', e => {
       if (cached) return cached;
       return fetch(e.request).then(resp => {
         // Only cache successful same-origin basics; game data is versioned by CACHE.
+        // AUDIO RUNTIME CACHE (2026-10-12): voice lines are 14MB — too heavy to
+        // precache at install, but the fetch handler never stored them, so the
+        // offline PWA lost all voice after first install. Cache audio responses
+        // at runtime: play once online, then it works offline.
+        try {
+          const ct = resp.headers.get('content-type') || '';
+          if (resp.ok && (ct.indexOf('audio/') === 0 || e.request.url.indexOf('/src/audio/') !== -1)) {
+            const copy = resp.clone();
+            caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+          }
+        } catch (err) { /* cache failure must never break playback */ }
         return resp;
       }).catch(() => {
         if (e.request.mode === 'navigate') return caches.match('./index.html');
