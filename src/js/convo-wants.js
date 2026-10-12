@@ -403,7 +403,16 @@
         return Game.convoWantNews(vid);
       },
       deflectBeat(vid) {
-        return '"Oh. Right. Never mind — it\'s probably nothing." They look a little deflated.';
+        // DEFLECT POOL (journey landing 2026-10-12): was a single hardcoded
+        // line — verbatim identical every time a share_news want was
+        // deflected, across villagers and runs. Same pool treatment as the
+        // favor commit/close lines: cycles, per-conversation, and the
+        // no-repeat ledger still applies at sayLine.
+        return this.convoPickCycle(vid, 'deflect:share_news', [
+          '"Oh. Right. Never mind — it\'s probably nothing." They look a little deflated.',
+          '"...Okay. Forget I said anything." They clearly wish they hadn\'t started.',
+          '"Right. Probably wasn\'t important." It was, a little. You can tell.',
+        ]) || '"Oh. Right. Never mind — it\'s probably nothing." They look a little deflated.';
       },
       menuOptions(vid, stage) {
         return [
@@ -530,7 +539,20 @@
         return null; // no favor statable — the NO HOLLOW FALLBACK answers honestly
       },
       deflectBeat(vid) {
-        return '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
+        // DEFLECT POOL (journey landing 2026-10-12): was a single hardcoded
+        // line — observed verbatim-identical 3x in one run (Sofia, Emma,
+        // seed 444/666). Same pool treatment as this def's commitBeat and
+        // closeLine: cycles per conversation, keyed by favor kind; the
+        // no-repeat ledger still applies at sayLine. The plant survives —
+        // every variant keeps "they won't forget / won't ask twice".
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid));
+        const kind = (favor && favor.kind) || 'favor';
+        return this.convoPickCycle(vid, 'deflect:favor:' + kind, [
+          '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.',
+          '"Right. I get it." A beat — and then the subject is closed. They won\'t raise it again.',
+          '"...Okay. I\'ll figure it out." They won\'t ask twice. That much is clear.',
+        ]) || '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
       },
       commitBeat(vid) {
         const c = this.convoGet(vid);
@@ -685,7 +707,14 @@
         return '"Good. Then we\'re square." They look lighter for it.';
       },
       deflectBeat(vid) {
-        return '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.';
+        // DEFLECT POOL (journey landing 2026-10-12): same single-line class
+        // as the other want deflectBeats — pooled like the favor commit/
+        // close lines so the reaction isn't verbatim-identical every time.
+        return this.convoPickCycle(vid, 'deflect:repay', [
+          '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.',
+          '"...Fine. But I don\'t like owing." The debt stays on their face.',
+          '"Okay. Your call." They file it away — unpaid, and counted.',
+        ]) || '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.';
       },
       menuOptions(vid, stage) {
         const open = this.openFavorObligation(vid);
@@ -742,7 +771,14 @@
         ]) || '"It helps. Just — saying it out loud. It helps."';
       },
       deflectBeat(vid) {
-        return '"Right. Sorry. I\'m fine." They are very obviously not fine.';
+        // DEFLECT POOL (journey landing 2026-10-12): same single-line class
+        // as the other want deflectBeats — pooled like the favor commit/
+        // close lines so the reaction isn't verbatim-identical every time.
+        return this.convoPickCycle(vid, 'deflect:seek_comfort', [
+          '"Right. Sorry. I\'m fine." They are very obviously not fine.',
+          '"...Yeah. Forget it." They turn back to the fire a little too fast.',
+          '"It\'s nothing. Really." It isn\'t nothing. You both know it.',
+        ]) || '"Right. Sorry. I\'m fine." They are very obviously not fine.';
       },
       menuOptions(vid, stage) {
         if ((stage || 0) >= 2) {
@@ -784,7 +820,14 @@
         return Game.convoWantWarning(vid);
       },
       deflectBeat(vid) {
-        return '"...Suit yourself. Don\'t say I didn\'t try."';
+        // DEFLECT POOL (journey landing 2026-10-12): same single-line class
+        // as the other want deflectBeats — pooled like the favor commit/
+        // close lines so the reaction isn't verbatim-identical every time.
+        return this.convoPickCycle(vid, 'deflect:warn_you', [
+          '"...Suit yourself. Don\'t say I didn\'t try."',
+          '"Suit yourself — but I warned you. Don\'t say I didn\'t."',
+          '"Fine. But watch yourself." They mean it more than the shrug says.',
+        ]) || '"...Suit yourself. Don\'t say I didn\'t try."';
       },
       menuOptions(vid, stage) {
         if ((stage || 0) >= 2) {
@@ -831,7 +874,14 @@
         return '"Huh. I wouldn\'t have guessed that about you."';
       },
       deflectBeat(vid) {
-        return '"Fair enough. Some things aren\'t for sharing."';
+        // DEFLECT POOL (journey landing 2026-10-12): same single-line class
+        // as the other want deflectBeats — pooled like the favor commit/
+        // close lines so the reaction isn't verbatim-identical every time.
+        return this.convoPickCycle(vid, 'deflect:curious', [
+          '"Fair enough. Some things aren\'t for sharing."',
+          '"Okay. I won\'t pry." The curiosity doesn\'t leave their eyes, though.',
+          '"...Right. Your business." They let it drop — visibly, effortfully.',
+        ]) || '"Fair enough. Some things aren\'t for sharing."';
       },
       menuOptions(vid, stage) { return []; }, // the question's answers ARE the menu
       closeLine(vid, resolution) {
