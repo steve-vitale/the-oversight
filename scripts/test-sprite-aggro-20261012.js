@@ -87,7 +87,11 @@ check('size 2 = ensembles (+ bulldozer, moderator)', () => {
 
 // RED on old code: pre-sprite sprites.js must resolve null for wave 3-5.
 check('RED-verified: old sprites.js has no wave 3-5 sprites', () => {
-  const oldSrc = execSync(`git -C ${ROOT} show HEAD~1:src/js/sprites.js`, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+  // Find the commit that INTRODUCED finale_calm, then test its parent:
+  // the sprites must be absent there (RED) and present at HEAD (GREEN).
+  const intro = execSync(`git -C ${ROOT} log --format=%H -S 'finale_calm' -- src/js/sprites.js | tail -1`, { encoding: 'utf8' }).trim();
+  assert.ok(intro, 'could not find sprite-introducing commit');
+  const oldSrc = execSync(`git -C ${ROOT} show ${intro}~1:src/js/sprites.js`, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
   // oldSrc hardcodes (globalThis) at the IIFE call — instead of executing it
   // (which would clobber the live registry), assert on the source text:
   for (const id of ['finale', 'eater', 'redactor', 'nielsen', 'herald']) {
