@@ -15652,6 +15652,72 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return false;
     },
 
+    // traderPoolGrowth: the r5 lever gate. Traders learn from the village over
+    // time, growing their tradeable pool past the static 2-3 plants.
+    // Browser default: ON (the measured design). Node before/after:
+    // TRADE_POOL_GROWTH=0 reproduces the legacy static pool exactly
+    // (nothing is recorded, nothing is read); TRADE_POOL_GROWTH=1 or unset
+    // enables growth. Same pattern as the TELEMETRY_FULL gate.
+    traderPoolGrowth() {
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.TRADE_POOL_GROWTH === '0') return false;
+      } catch (e) {}
+      return true;
+    },
+
+    // traderLearnExposure(vid, pid, source, alreadyKnew): the pool-growth
+    // half of villagerLearnsPlant. Knowledge traders are village people
+    // (librarians, ESL teachers, hunting guides, journalists) — they sit at
+    // the same fires and hear the same rumors, and what the village learns,
+    // they learn. A trader who first hears of a plant and later handles it,
+    // works it, or hears it taught around again comes to know it DEEP —
+    // deep enough to teach, which is what the trade pool sells (L2/L3).
+    // Never instant or omniscient: depth needs a second, DIFFERENT channel
+    // at least 3 days after identity, and the 12-day cap keeps the pool
+    // growing at rumor speed, not firehose speed. Static-pool plants skip
+    // (already tradeable); the player's own id is never a trader.
+    traderLearnExposure(vid, pid, source, alreadyKnew) {
+      if (!this.traderPoolGrowth || !this.traderPoolGrowth()) return;
+      if (!vid || vid === this.villagerId) return;
+      if (!this.isKnowledgeTrader || !this.isKnowledgeTrader(vid)) return;
+      const v = this.state.village;
+      if (!v) return;
+      const day = (this.state.scholar || {}).day || 0;
+      const src = String(source || 'unknown');
+      v.traderDeep = v.traderDeep || {};
+      const rec = v.traderDeep[vid] = v.traderDeep[vid] || {};
+      const cur = rec[pid];
+      if (cur && cur.deep) return; // already tradeable
+      // static-pool plants are already tradeable — nothing to gain
+      try {
+        if ((this.traderKnowledge(vid, true) || []).includes(pid) && !(cur && cur.deep)) {
+          // (traderKnowledge includes deep plants when growth is on; the
+          // early return above handled those. Reaching here means static.)
+          return;
+        }
+      } catch (e) {}
+      if (!cur) {
+        // identity anchor: this exposure is the first recorded one (they may
+        // have known it from background — this is when the village's
+        // learning touched them observably).
+        rec[pid] = { day, via: src, deep: false };
+        return;
+      }
+      if (alreadyKnew && cur.via === src) return; // same channel twice teaches nothing new
+      if (!alreadyKnew && cur.via === src) return; // same event re-delivered
+      if (day - (cur.day || 0) < 3) return; // rumor speed, not instant
+      if (rec._lastDeepDay && day - rec._lastDeepDay < 12) return; // the 12-day cap
+      rec[pid] = { day, via: cur.via + '+' + src, deep: true };
+      rec._lastDeepDay = day;
+      // the village notices: a person getting good at something is news,
+      // and the trade offer will now include it. Player-gated phrasing —
+      // the name only if the player knows it, else the descriptor.
+      try {
+        const pname = this.plantDisplayName ? this.plantDisplayName(pid) : pid;
+        this.say(`${this.displayName(vid)} has been turning the ${pname} over — asking after it at fires, handling it on work days — and now knows it deep enough to teach. (Their trade grows: ask them what they know.)`);
+      } catch (e) {}
+    },
+
     // what does this trader know that you don't? Returns plant IDs they can teach.
     // unfiltered=true returns their FULL pool (for "what do they already know"
     // checks — the filtered list hides plants you know deeply, which they
@@ -15670,6 +15736,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const p = plants[(h + i * 7) % plants.length];
         if (p && !known.includes(p.id)) known.push(p.id);
       }
+      // POOL GROWTH (longsim knowledge r5 2026-10-12): plants the trader has
+      // learned DEEP from village life (traderLearnExposure, recorded in
+      // v.traderDeep) join the tradeable pool after the static core. The
+      // existing filter below still hides what you know at L3+, and the
+      // trade thread still offers descriptors-not-names — growth changes
+      // WHAT they can sell, never the knowledge-gating of HOW it's sold.
+      try {
+        if (this.traderPoolGrowth && this.traderPoolGrowth()) {
+          const deep = ((this.state.village || {}).traderDeep || {})[vid] || {};
+          for (const dpid of Object.keys(deep)) {
+            if (dpid.charAt(0) === '_') continue; // _lastDeepDay bookkeeping
+            if (deep[dpid] && deep[dpid].deep && !known.includes(dpid)) known.push(dpid);
+          }
+        }
+      } catch (e) {}
       if (unfiltered) return known;
       // filter to things YOU don't know yet (or know shallowly)
       return known.filter(pid => {
@@ -37826,7 +37907,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!v || !vid || !pid) return false;
       v.taught = v.taught || {};
       const list = v.taught[vid] = v.taught[vid] || [];
-      if (list.includes(pid)) return false;
+      const already = list.includes(pid);
+      // TRADER POOL GROWTH (longsim knowledge r5 2026-10-12): knowledge
+      // traders learn from the village over time — their tradeable pool
+      // grows past the 2-3 deterministic plants. Runs on the SAME learn
+      // events every other villager gets (fireside, word of mouth, taught,
+      // traded...): first exposure records identity, a second exposure
+      // through a DIFFERENT channel at least 3 days later deepens it to
+      // tradeable depth. Slow by canon (Steve 2026-10-05): at most one new
+      // deep plant per trader per 12 days. The binary store and the return
+      // contract below are untouched.
+      try { this.traderLearnExposure(vid, pid, source, already); } catch (e) {}
+      if (already) return false;
       list.push(pid);
       // keep the parallel food.js store in sync where it exists
       try {

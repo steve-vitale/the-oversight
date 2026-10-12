@@ -78,6 +78,26 @@ seeded by the trader's 50%-per-conversation mention until the first
 completed trade discovers the channel village-wide. No shared language, no
 trade — the language barrier gates it honestly.
 
+## Trader pool growth (longsim knowledge r5, 2026-10-12)
+
+Trader pools are not frozen: knowledge traders LEARN from the village over
+time, and what they learn deep joins their tradeable pool. `traderKnowledge`
+returns the static 2–3-plant deterministic core plus `v.traderDeep[vid]`
+(plants deepened in-run). Depth is earned, never granted:
+`traderLearnExposure` (hooked into `villagerLearnsPlant`, so it runs on the
+same legitimate learn events every villager gets — fireside, word of mouth,
+taught, traded...) records identity on first exposure; a second exposure
+through a DIFFERENT channel at least 3 days later deepens to tradeable (the
+L3 they sell at). Slow by canon (Steve 2026-10-05): at most one new deep
+plant per trader per 12 days. Static-pool plants never enter traderDeep.
+When a trader deepens, the village says so out loud (knowledge-gated
+phrasing — descriptor until the player knows the name). The trade thread's
+descriptor-not-name offer and the `tradeKnowledge` currency check
+(`theirPool` = full pool, so deep plants can't be spent back) both flow
+through the grown pool automatically. Env gate `TRADE_POOL_GROWTH=0`
+reproduces the legacy static pool exactly (nothing recorded, nothing read);
+browser default is growth ON.
+
 ## Word-of-mouth rules
 
 Slow by design (Steve 2026-10-05): at most one witness learns on the spot;

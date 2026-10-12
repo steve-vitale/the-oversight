@@ -29,6 +29,8 @@ function tradeRound(Game, K) {
     for (const vid of traders) {
       try {
         if (!((v.roster || []).includes(vid))) continue;
+        // r5: remember every trader ever met (end-state roster misses the dead)
+        try { k.traderIds = k.traderIds || {}; k.traderIds[vid] = true; } catch (e) {}
         const st = Game.startConvo(vid);
         if (!st) continue;
         bump(k, 'traderMeetings');

@@ -123,6 +123,10 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       traderMentions: 0,        // "I trade in what I know" seeded lines heard
       tradeOutcomes: {},        // tradeKnowledge return token -> count
       tradeTurns: 0,            // convoTurns taken by the trade hook
+      // r5: trader pool growth (TRADE_POOL_GROWTH=1) instrumentation
+      deepTrades: 0,            // tradeKnowledge 'ok' on a grown (deep-pool) plant
+      deepGains: 0,             // deep plants gained by traders this run
+      deepVia: {},              // 'fireside+taught' style channel pairs -> count
     };
     const bump = (o, k) => { o[k] = (o[k] || 0) + 1; };
     const me = () => Game.villagerId;
@@ -204,6 +208,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       Game.tradeKnowledge = function (vid, pid) {
         const r = _tk.call(this, vid, pid);
         bump(K.tradeOutcomes, String(r || '?'));
+        // r5: was this a grown-pool plant? (deep store, not the static core)
+        try {
+          const rec = (((this.state.village || {}).traderDeep || {})[vid] || {})[pid];
+          if (r === 'ok' && rec && rec.deep) K.deepTrades++;
+        } catch (e) {}
         return r;
       };
     } catch (e) {}
@@ -249,11 +258,27 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
         let mNamed = 0;
         for (const e of Object.values((G.state.codex || {}).monsters || {})) if (e && e.villageName) mNamed++;
         const d = (G.state.scholar || {}).day || 0;
+        // r5: trader pool sizes over time (static core vs grown deep pool)
+        let traderPools = [];
+        try {
+          const vG = G.state.village || {};
+          for (const rid of (vG.roster || [])) {
+            if (rid === G.villagerId) continue;
+            let isT = false;
+            try { isT = G.isKnowledgeTrader(rid); } catch (e) {}
+            if (!isT) continue;
+            const full = (G.traderKnowledge(rid, true) || []).length;
+            const deep = Object.keys(((vG.traderDeep || {})[rid] || {}))
+              .filter(k => k.charAt(0) !== '_' && ((((vG.traderDeep || {})[rid] || {})[k]) || {}).deep).length;
+            traderPools.push({ vid: rid, full, deep, tradeable: (G.traderKnowledge(rid) || []).length });
+          }
+        } catch (e) {}
         knowSnap[d] = {
           playerLevels: lv,
           vilMean: per.length ? +(per.reduce((a, b) => a + b, 0) / per.length).toFixed(1) : 0,
           vilDistinct: union.size, roster: per.length,
           mNamed, skills: Object.keys((G.state.codex || {}).skills || {}).length,
+          traderPools,
         };
       } catch (e) {}
     };
@@ -400,6 +425,44 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
     try { slots = Game.abilitySlots ? Game.abilitySlots() : 0; abilitiesHeld = ((Game.state.scholar || {}).abilities || []).length; } catch (e) {}
     try { tier = (Game.havenTier ? Game.havenTier() : 0) || 0; } catch (e) {}
 
+    // ---- r5: end-state trader pool growth summary ----
+    // (traders seen during the run, not just end-state roster — the dead
+    // leave traderDeep records behind, and their growth still counts)
+    const tr = { deepTotal: 0, deepByTrader: {}, deepVia: {}, poolFull: [], tradersAlive: 0, tradersEver: 0, traderNames: {} };
+    try {
+      const v = Game.state.village || {};
+      const td = v.traderDeep || {};
+      const seen = Object.assign({}, K.traderIds || {});
+      for (const rid of (v.roster || [])) {
+        if (rid === Game.villagerId) continue;
+        let isT = false;
+        try { isT = Game.isKnowledgeTrader(rid); } catch (e) {}
+        if (isT) seen[rid] = true;
+      }
+      for (const rid of Object.keys(seen)) {
+        tr.tradersEver++;
+        try { tr.traderNames[rid] = Game.displayName(rid); } catch (e) {}
+        if ((v.roster || []).includes(rid)) tr.tradersAlive++;
+        const rec = td[rid] || {};
+        let n = 0;
+        for (const [pid, e] of Object.entries(rec)) {
+          if (pid.charAt(0) === '_') continue;
+          if (e && e.deep) {
+            n++;
+            tr.deepTotal++;
+            const via = String(e.via || '?');
+            tr.deepVia[via] = (tr.deepVia[via] || 0) + 1;
+          }
+        }
+        if (n) tr.deepByTrader[rid] = n;
+        if ((v.roster || []).includes(rid)) {
+          let full = 0;
+          try { full = (Game.traderKnowledge(rid, true) || []).length; } catch (e) {}
+          tr.poolFull.push(full);
+        }
+      }
+    } catch (e) {}
+
     const rec = {
       seed, days: result.days, endReason: result.endReason,
       maxArc, maxWaveUnlocked: result.maxWaveUnlocked, won, tableWaiting,
@@ -420,6 +483,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       traderMentions: K.traderMentions, tradeOutcomes: K.tradeOutcomes,
       traderMeetings: K.traderMeetings || 0, tradeOffers: K.tradeOffers || 0,
       tradeTurns: K.tradeTurns,
+      // r5: pool growth
+      deepTrades: K.deepTrades || 0, trDeepTotal: tr.deepTotal,
+      trDeepByTrader: tr.deepByTrader, trDeepVia: tr.deepVia,
+      trPoolFull: tr.poolFull, trTradersAlive: tr.tradersAlive, trTradersEver: tr.tradersEver,
+      trTraderNames: tr.traderNames,
       tradeDeclined: Object.fromEntries(Object.entries(K).filter(([k]) => k.indexOf('tradeDeclined:') === 0)),
       tradeNoOffer: Object.fromEntries(Object.entries(K).filter(([k]) => k.indexOf('tradeNoOffer:') === 0)),
       ks,
