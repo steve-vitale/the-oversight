@@ -874,6 +874,26 @@
       }
       return null;
     },
+    // teachPlantLine — the spoken line for a villager->player plant lesson
+    // (longsim agency r6 2026-10-12). Varies off the player's READ NEED
+    // (wound/hunger/novice/general), parallel to r5's teachChoreLine for the
+    // villager->villager chore: a hurt player gets shown wound herbs, a
+    // hungry one gets shown food, a novice gets the beginner's tour. The
+    // wound/hunger frames only fire when the picked plant actually fits —
+    // a wound claim on a food plant would be a lie the player might act on —
+    // so the need is the conjunction of (player state) x (plant properties).
+    // Novice is about the teaching, not the plant, so it needs no fit.
+    // Pure string building, no RNG — narration-only, sim trajectories
+    // unchanged.
+    teachPlantLine(nm, plantName, need) {
+      var shown = plantName || 'a plant';
+      var codexName = plantName || 'plant';
+      var codexBit = `(Codex: ${codexName} identified.)`;
+      if (need === 'wound') return `📖 ${nm} shows you ${shown} — which leaves to press on a wound. You won't forget it now. ${codexBit}`;
+      if (need === 'hunger') return `📖 ${nm} shows you ${shown} — where it grows, what's safe to eat. You won't forget it now. ${codexBit}`;
+      if (need === 'novice') return `📖 ${nm} walks you through ${shown} — leaf, stem, smell, the beginner's tour. You won't forget it now. ${codexBit}`;
+      return `📖 ${nm} shows you ${shown} — leaf, stem, smell. You won't forget it now. ${codexBit}`;
+    },
     agencyTeachPlant(vid) {
       // an explorer teaches you one plant they actually learned. Concrete,
       // from the data pool, only if you don't know it yet. Each lesson
@@ -890,11 +910,46 @@
       var cands = plants.filter(function (p) { return p && p.id && !((cx.plants[p.id] || {}).level >= 1); });
       if (!cands.length) return false;
       var p = pick(cands);
+      // READ THE PLAYER (longsim agency r6 2026-10-12): the teacher sees
+      // who's in front of them — hurt, hungry, or green — and frames the
+      // lesson accordingly. Computed BEFORE the codex write so the novice
+      // read reflects pre-lesson teaching experience. Zero RNG draws, no
+      // state writes: narration-only by construction.
+      //
+      // NOVICE is "new to being taught the wild" (taught-source lessons < 3),
+      // not codex breadth: the player outgrows breadth<8 before the first
+      // ask (fireside/shared teach fast), but the first few direct lessons
+      // are still the beginner's tour. Wound/hunger frames only fire when
+      // the picked plant actually fits — a wound claim on a food plant
+      // would be a lie the player might act on.
+      var need = null;
+      try {
+        var _pid = this.villagerId;
+        var _h = ((this.state.village || {}).health || {})[_pid];
+        var _wounded = (_h !== undefined ? _h : 100) < 40; // open-wounds threshold (disease vector)
+        var _hungry = false;
+        try { _hungry = (this.npcNeeds(_pid).hunger || 0) >= 60; } catch (e2) {}
+        var _taughtCount = 0;
+        try {
+          var _cpl = (this.state.codex || {}).plants || {};
+          for (var _k in _cpl) if (_cpl[_k] && _cpl[_k].source === 'taught') _taughtCount++;
+        } catch (e2) {}
+        var _novice = _taughtCount < 3;
+        var _isMed = !!(p && p.medicinal);
+        var _isFood = false;
+        try {
+          if (p && (p.edibility === 'safe' || p.edibility === 'caution') && (p.caloriesPerUnit || 0) > 0) _isFood = true;
+          else if (p) for (var _ui = 0; _ui < (p.uses || []).length; _ui++) if (p.uses[_ui].kind === 'food') { _isFood = true; break; }
+        } catch (e2) {}
+        if (_wounded && _isMed) need = 'wound';
+        else if (_hungry && _isFood) need = 'hunger';
+        else if (_novice) need = 'novice';
+      } catch (e) {}
       cx.plants[p.id] = { level: 1, source: 'taught' };
       st.lastTaughtPlantName = p.name || p.id;
       var nm = '';
       try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; } // firstRef: never bare "A" for stranger descriptors
-      this.say(`📖 ${nm} shows you ${p.name || 'a plant'} — leaf, stem, smell. You won't forget it now. (Codex: ${p.name || 'plant'} identified.)`);
+      this.say(this.teachPlantLine(nm, p.name, need));
       return true;
     },
     // agencyTeachVillager: the HAVEN_CHORE 'teach' chore made real (longsim
