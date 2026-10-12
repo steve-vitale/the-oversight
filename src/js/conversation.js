@@ -875,6 +875,29 @@
       return DRY[used % DRY.length];
     },
 
+    // convoSelfRepeatLine: honest deflections for SELF-repeat blocks. The
+    // NPC already said the line in THIS conversation, so the caller has no
+    // fresh line and the beat must not go silent (no-silent-actions is
+    // standing law). A single hardcoded fallback parrots VERBATIM on
+    // consecutive blocks (observed 2026-10-12: "I just said — did you miss
+    // it?" x3 in one conversation) — the exact filler-loop Steve called
+    // out. Per-conversation cycling pool, never verbatim, like
+    // convoDryLine. Cap: past 9 uses in one conversation the player is
+    // spamming a choice and the canonical line returns (exempt, generic).
+    // Never ledgered (generic by design, same as sayLine's fallback rule).
+    convoSelfRepeatLine(vid) {
+      const c = this.convoGet(vid);
+      const POOL = [
+        '"I just said — did you miss it?"',
+        '"I just told you — what else is on your mind?"',
+        '"We\'ve covered this one. Ask me something else."',
+      ];
+      const used = c.selfRepeatLines || 0;
+      c.selfRepeatLines = used + 1;
+      if (used >= POOL.length * 3) return POOL[0];
+      return POOL[used % POOL.length];
+    },
+
     convoGet(vid) {
       const v = this.state.village;
       v.conv = v.conv || {};
@@ -4793,7 +4816,7 @@
           if (composed) line = composed;
         }
       } catch (e) {}
-      line = this.sayLine(vid, line, { fallback: '"I just said — did you miss it?"' }) || line;
+      line = this.sayLine(vid, line, { fallback: this.convoSelfRepeatLine(vid) }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.

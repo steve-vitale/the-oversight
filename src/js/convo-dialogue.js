@@ -330,14 +330,18 @@
         ]) || '"Honestly? I\'m alright right now."';
         const composed = this.convoComposeDlg(vid, favorLine, choiceId);
         const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
-        // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6): if sayLine's
-        // ledger blocked the line, do NOT return it as if spoken -- that
-        // desyncs the UI into "options refreshed, no reply." Name it honestly.
+        // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling
+        // journey-social 2026-10-12): if sayLine's ledger blocked the line,
+        // do NOT return it as if spoken -- that desyncs the UI into "options
+        // refreshed, no reply." Name it honestly. The self-repeat deflections
+        // cycle per-conversation (never the old verbatim x3 parrot), and the
+        // SAME line goes in as the fallback so re-fired cycles can't desync
+        // the claimed line from the transcript.
         if (!said) {
-          const dup = '"I just said -- did you miss it?"';
-          this.sayLine(vid, dup);
+          const dup = this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"';
+          const spoken = this.sayLine(vid, dup, { fallback: dup }) || dup;
           this.convoWantEngage(vid, 'engage');
-          return { line: dup, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
         // NOTE (socialite r11 2026-10-10): this does NOT set c.offeredHelp.
         // That's the FORMAL vow's flag (offer_help -> promiseHelp, tracked,
