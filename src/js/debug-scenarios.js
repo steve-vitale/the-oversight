@@ -453,6 +453,39 @@
       Game.say('Take food if you want. People notice what you take.');
     },
 
+    // WASHED-OUT GAP (false-positive fix 2026-10-12): a REAL blocked
+    // approach. The west trail out of this wild ground is washed out — the
+    // nearby panel offers "Cross the washed-out gap", scrambling through
+    // costs 80 kcal, and the path opens. Two taps, in-fiction. (Contrast
+    // with the old bug: haven approaches can no longer roll blockages, so
+    // the warning only ever appears for a genuinely blocked path.)
+    washedout() {
+      freshGame();
+      toWildNode(); // wild encounter: out in the wild, not the haven grounds (Steve 2026-10-04)
+      const s = Game.state.scholar;
+      s.insideHaven = false;
+      const px = Game.map.px, py = Game.map.py;
+      // Block the west exit: pick a valid orthogonal neighbor and guard the
+      // approach from the player's tile.
+      const cands = [[-1, 0, 1, 0], [1, 0, -1, 0], [0, -1, 0, 1], [0, 1, 0, -1]];
+      let placed = null;
+      for (const [ddx, ddy, bdx, bdy] of cands) {
+        const tx = px + ddx, ty = py + ddy;
+        if (tx < 0 || tx > 8 || ty < 0 || ty > 8) continue;
+        const t = Game.map.tiles[ty][tx];
+        if (!t || t.type === 'haven' || t.type === 'ruin' || t.type === 'creek') continue;
+        t.blockFrom = { dx: bdx, dy: bdy, type: 'washed_out' };
+        t.revealed = true; t.visited = true;
+        placed = { tx, ty };
+        break;
+      }
+      if (!placed) throw new Error('debug scenario: no room for a washed-out gap');
+      s.mx = 0; s.my = 4; // west edge of the grounds — the blocked exit is right there
+      s.kcal = Math.max(s.kcal || 0, 2500);
+      Game.say('');
+      Game.say('🐞 SCENARIO: washed-out gap. The trail out is washed out — the nearby panel offers the crossing. Scramble through (80 kcal) or go around.');
+    },
+
     // 9. Headlight Deer fight — the Highbeam Deer (gallowdeer, wave 1).
     // Per Steve's spec: night, deer unaware/grazing 4-5 tiles out, spear
     // equipped, a couple of villagers nearby (FIFO targeting: the deer goes
@@ -1567,6 +1600,7 @@
       ['butcher', '🔪 Butcher — carcass, no knife, rot clock'],
       ['liars', '🤥 Liar\'s den'],
       ['starving', '🔥 Starving village'],
+      ['washedout', '🌊 Washed-out gap (blocked path)'],
       ['contestPit', '📺 Contest: The Pit'],
       ['contestHide', '📺 Contest: Hide and Seek'],
       ['contestForage', '📺 Contest: Calorie Run'],
@@ -1601,7 +1635,7 @@
       '🦌 Monsters — Wave 1': ['headlight', 'flashbulb', 'choir', 'lockpick', 'hummice', 'glasswing', 'sunbasker', 'bulldozer', 'hushpuppy', 'whitenoise', 'nightlight', 'speedbump', 'ducksinarow', 'nevermore', 'nightcourt'],
       '👹 Monsters — Wave 2': ['static', 'griefcounselor', 'reviewdrone', 'influencer', 'motivationalspeaker', 'customerservice', 'termsconditions', 'middlemanager', 'inspiration', 'nostalgia', 'statickite'],
       '⚖️ Justice & Social': ['ambush', 'mootAccused', 'mootJuror', 'exile', 'uprising', 'liars'],
-      '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving'],
+      '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving', 'washedout'],
       '📺 Contests & Shows': ['contestPit', 'contestHide', 'contestForage', 'contestWatch', 'showWhyEat', 'broadcastShow', 'contestEligible'],
       '👤 Alien Players': ['alienEncounter'],
       '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude'],

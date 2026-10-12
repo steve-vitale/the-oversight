@@ -7368,6 +7368,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const ae0 = this.state && this.state.alienEncounter;
         if (ae0 && ae0.fighter) delete ae0.fighter;
       } catch (e) {}
+      // HAVEN-APPROACH BLOCKAGE SWEEP (false-positive fix 2026-10-12):
+      // world-gen used to check the wrong neighbor for its haven/ruin skip,
+      // so old saves can carry blockages guarding a haven or ruin approach
+      // ("false washed-out gap" warnings, most visibly the west node from
+      // haven). New worlds can no longer generate these; drop any the save
+      // carries. Idempotent — a clean save loses nothing.
+      try { this.sweepHavenApproachBlockages(); } catch (e) {}
       const r = s.run;
       this.map = r.map; this.dayPart = r.dayPart; this.location = r.location;
       this.departed = r.departed;
@@ -8626,11 +8633,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // never block haven, never block the ruin approach (scavengers need in).
         if (t.type !== 'haven' && t.type !== 'ruin' && R() < 0.12) {
           const [dx, dy] = DIRS[Math.floor(R() * 4)];
-          const nx = x + dx, ny = y + dy;
-          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
-          if (tiles[ny][nx].type === 'haven') continue;
+          // -dx,-dy: the direction you'd be coming FROM to enter this tile.
+          // travelBlockage() matches blockFrom against the coming-from side,
+          // so the guarded approach ORIGIN is (x-dx, y-dy) — the haven/ruin
+          // skip must check THAT tile, not the far side (x+dx, y+dy).
+          // (False-positive fix 2026-10-12: the old check guarded the wrong
+          // neighbor, so tiles next to haven could roll blockages against
+          // the haven approach — "false washed-out gap" warnings, most
+          // visibly the west node from haven.)
+          const ax = x - dx, ay = y - dy;
+          if (ax < 0 || ax > 8 || ay < 0 || ay > 8) continue;
+          if (tiles[ay][ax].type === 'haven' || tiles[ay][ax].type === 'ruin') continue;
           const roll = R();
-          // -dx,-dy: the direction you'd be coming FROM to enter this tile
           t.blockFrom = { dx: -dx, dy: -dy, type: roll < 0.4 ? 'fallen_tree' : roll < 0.7 ? 'rubble' : 'washed_out' };
         }
         // hard creek crossings: ~35% of creek tiles need a bridge or a swimmer.
@@ -9454,6 +9468,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!canSwim) return { kind: 'blockage', blockType: 'creek', x, y };
       }
       return null;
+    },
+    // sweepHavenApproachBlockages(): drop blockFrom entries whose guarded
+    // approach origin is haven or ruin. A blockage guards the approach FROM
+    // (x+bf.dx, y+bf.dy) — see travelBlockage above. World-gen can no longer
+    // create these (false-positive fix 2026-10-12); old saves may carry
+    // them. Returns the number dropped. Idempotent.
+    sweepHavenApproachBlockages() {
+      const mtiles = this.state && this.state.run && this.state.run.map && this.state.run.map.tiles;
+      if (!mtiles) return 0;
+      let dropped = 0;
+      for (let my = 0; my < 9; my++) for (let mx = 0; mx < 9; mx++) {
+        const mt = mtiles[my][mx];
+        const bf = mt && mt.blockFrom;
+        if (!bf) continue;
+        const ox = mx + (bf.dx || 0), oy = my + (bf.dy || 0);
+        const ot = (ox >= 0 && ox < 9 && oy >= 0 && oy < 9) ? mtiles[oy][ox] : null;
+        if (ot && (ot.type === 'haven' || ot.type === 'ruin')) { delete mt.blockFrom; dropped++; }
+      }
+      return dropped;
     },
     // clear a blockage by work. fallen_tree -> cut (yields wood!), rubble -> clear.
     // costs a day-part. the path stays clear.
