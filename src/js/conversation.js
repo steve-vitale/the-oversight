@@ -2051,7 +2051,14 @@
           // stripping only the outer quotes leaves a dangling " after the
           // speech and a stray " at the end. Close the quote after the
           // spoken part; the narration stays outside it.
-          const alreadyNamed = /^"About /.test(opener.line);
+          // NAMED-HEAD RECOGNITION (journey establishment r4 2026-10-12):
+          // every convoFavorFollowup head already names the favor — not just
+          // "About {short}". Without the wider match, the settled states
+          // ("Never mind {short}", "You came through on {short}", "You said
+          // you'd help with {short}") got the redundant seed prefix:
+          // "About the help I asked you for — Never mind the food they
+          // needed — ..." (caught live in r4 transcripts, 777-day25).
+          const alreadyNamed = /^"(About |Never mind |You came through on |You said you'd help with )/.test(opener.line);
           let seedLine;
           if (alreadyNamed) {
             seedLine = opener.line;

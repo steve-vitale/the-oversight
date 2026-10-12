@@ -96,7 +96,12 @@
         const whyLine = whyBits[(hh >>> 1) % 3] + ' ' + whyTails[(hh >>> 5) % 3];
         return {
           task: `share food with ${ctx.name} \u2014 they're ${hungerWord}`,
-          short: 'the food they needed',
+          // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):
+          // favor.short is spoken by the asker themselves in every follow-up
+          // ("About {short} — ...", "Never mind {short} — ...", the repay
+          // opener). 'the food they needed' is third person for their own
+          // hunger. The journal-facing `task` stays third-person (narrator).
+          short: 'the food I needed',
           line, whyLine,
           commitLine: `"Thank you. I won't forget who fed me when it mattered."`,
           goodbye: `"I'll be alright now. Thanks to you."`,
@@ -231,7 +236,11 @@
         const line = '"' + problems[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
         return {
           task: `help ${ctx.name} with their injury`,
-          short: 'their injury',
+          // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):
+          // the injured villager asks "About their injury — ..." about
+          // their own wound. The `task` (scholar's journal framing) keeps
+          // third-person; the spoken short must be first-person.
+          short: 'this wound',
           line,
           whyLine: `"It's getting worse, not better. If it festers I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."`,
           commitLine: `"Careful with it. And \u2014 thank you."`,
@@ -298,7 +307,10 @@
         ];
         return {
           task: `help ${ctx.name} with their sickness \u2014 they're ${sym}`,
-          short: 'the sickness they\'re fighting',
+          // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):
+          // the sick villager says "About the sickness they're fighting —
+          // ..." about their own fever. Same fix as heal_help/food_share.
+          short: 'the sickness I\'m fighting',
           line, whyLine: whyLines[0], whyLines,
           commitLine: commitLines[0], commitLines,
           goodbye: `"I'll be resting. Come find me."`,
