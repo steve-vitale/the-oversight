@@ -55,6 +55,15 @@
   }
     function villagerSpriteHtml(vp) {
     try {
+      // GODHOOD (Steve 2026-10-11): an ascended player renders their mythic
+      // form — no longer just a person. The sprite sits ON the grid per law.
+      try {
+        const G = (typeof Scattering !== 'undefined' && Scattering.Godhood) || null;
+        if (G && vp && Game && Game.villagerId && vp.id === Game.villagerId && Game.state && Game.state.scholar) {
+          const mid = G.playerMythicId(Game.state.scholar);
+          if (mid) { const ms = G.mythicSprite(mid); if (ms) return `<span class="vsprite mythic">${ms}</span>`; }
+        }
+      } catch (e) {}
       if (!vp || !S.Sprites || !S.Sprites.villagerSprite) return '';
       const svg = S.Sprites.villagerSprite(vp);
       return svg ? `<span class="vsprite">${svg}</span>` : '';
