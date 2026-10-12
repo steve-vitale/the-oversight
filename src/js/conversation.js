@@ -5592,9 +5592,32 @@
       // the speech goes through the single emission point (no-repeat ledger).
       c.transcript.push({ who: 'you', text: `(${barrier})` });
       this.sayLine(vid, spoken, { foreign: lang });
+      // SPOKEN LURE, NONVERBAL (journey landing r5 2026-10-12): the verbal
+      // path in startConvo speaks a pending invite as a second opener beat,
+      // but nonverbal conversations return early and never reach it — the
+      // invite surfaced only as English menu labels the NPC never "said",
+      // and accepting blind can spring an armed plot. They can't speak it
+      // (no English — not even a little), so they SHOW it: one
+      // stage-direction beat (narration, not quoted speech — the no-English
+      // rule holds), once per pending (inv.spoken), gesturing at the
+      // invite's spot. Same guarantee as the verbal path, kept inside the
+      // fiction of no shared words.
+      let gesture = '';
+      try {
+        const inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
+        if (inv && !inv.spoken) {
+          const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
+          const idef = defs.find(d => d.id === inv.defId) || null;
+          const spot = (idef && idef.spot) || 'the treeline';
+          gesture = '(They mime walking — pointing at themselves, then at you, then toward ' + spot + '. The meaning is unmistakable: come with me.)';
+          c.transcript.push({ who: 'you', text: gesture });
+          this.say(gesture);
+          inv.spoken = true;
+        }
+      } catch (e) {}
       // The returned opening line carries BOTH — the first thing the player
       // reads states the barrier plainly, then the foreign speech lands.
-      const line = `${barrier}\n${spoken}`;
+      const line = `${barrier}\n${spoken}` + (gesture ? '\n' + gesture : '');
       this.langExposureGain(vid, lang, 1);
       return { line, choices: this.convoChoices(vid), transcript: c.transcript.slice(), ended: false };
     },

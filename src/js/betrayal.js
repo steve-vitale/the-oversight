@@ -365,7 +365,33 @@
       // trust to 9 — declining their invitation PAID a hater. Penalties land
       // whole and 0 stays 0 (bumpTrust; same class as the leadership fixes).
       this.bumpTrust(vid, -1, 'declined their invitation');
-      return `"Another time, then." A small thing, pocketed.`;
+      return this.declineLine(vid);
+    },
+    // declineLine: DECLINE-LINE HONESTY (journey landing r5 2026-10-12). The
+    // run ledger blocks the verbatim decline line when another villager's
+    // decline was recently ledgered (defect-7 backstop) — and the generic dry
+    // fallback ("...Sorry, lost my train of thought.") is a non-sequitur
+    // after a direct "Not this time." (observed seed 222 day 11: David, after
+    // James's day-9 decline). Cycle decline-ACKNOWLEDGING alternates instead:
+    // the canonical line when fresh, the first un-ledgered alternate when it
+    // isn't. Same no-verbatim-parroting guarantee, kept in the fiction of
+    // being declined.
+    declineLine(vid) {
+      const pool = [
+        '"Another time, then." A small thing, pocketed.',
+        '"Right — another time."',
+        '"Fair enough. Rain check."',
+        '"Suit yourself."',
+      ];
+      try {
+        const rl = (typeof this.convoRunLedger === 'function') ? this.convoRunLedger() : [];
+        const key = (s) => {
+          const ch = (typeof this.convoSplitBeats === 'function') ? this.convoSplitBeats(s) : [s];
+          return String((ch && ch[0]) || s).trim();
+        };
+        for (const l of pool) { if (rl.indexOf(key(l)) === -1) return l; }
+      } catch (e) {}
+      return pool[0];
     },
     resolveInvite(vid, defId) {
       const def = this.INVITE_DEFS().find(d => d.id === defId) || this.INVITE_DEFS()[0];
