@@ -104,8 +104,11 @@ function wrapPolicy(policy) {
 // feast-surge chain instrumentation (longsim winpath r3 2026-10-12): count
 // arming -> grant -> combat-use transitions per run. Wraps Game methods after
 // loadGame/setupGame; no game-code change.
+// (longsim winpath r4 2026-10-12): plus the feast-DRAW chain — drawn ->
+// faced / driven-off — the cookfire's smoke draws the scavenger.
 function instrumentChain(Game, ctx) {
   const ch = { armed: 0, granted: 0, used: 0, prevArmed: false };
+  const dw = { drawn: 0, faced: 0, drivenOff: 0 };
   try {
     if (typeof Game.channelSentiment === 'function') {
       const orig = Game.channelSentiment.bind(Game);
@@ -145,7 +148,39 @@ function instrumentChain(Game, ctx) {
       };
     }
   } catch (e) {}
+  // r4: the feast-draw chain (drawn -> faced | driven-off).
+  try {
+    if (typeof Game.drawFeastScavenger === 'function') {
+      const orig = Game.drawFeastScavenger.bind(Game);
+      Game.drawFeastScavenger = function () {
+        const r = orig();
+        if (r && r.drawn) dw.drawn++;
+        return r;
+      };
+    }
+  } catch (e) {}
+  try {
+    if (typeof Game.faceFeastDraw === 'function') {
+      const orig = Game.faceFeastDraw.bind(Game);
+      Game.faceFeastDraw = function () {
+        const r = orig();
+        if (r && r.ok) dw.faced++;
+        return r;
+      };
+    }
+  } catch (e) {}
+  try {
+    if (typeof Game.driveOffFeastDraw === 'function') {
+      const orig = Game.driveOffFeastDraw.bind(Game);
+      Game.driveOffFeastDraw = function () {
+        const r = orig();
+        if (r && r.ok) dw.drivenOff++;
+        return r;
+      };
+    }
+  } catch (e) {}
   ctx._chain = ch;
+  ctx._draw = dw;
   return ch;
 }
 
@@ -198,6 +233,8 @@ function instrumentChain(Game, ctx) {
         sentiment: !!pg.sentimentTaught,
         feastUsed: !!((((Game.state || {}).scholar || {}).prog || {}).feastSurgeUsed),
         chainArmed: chain.armed, chainGranted: chain.granted, chainUsed: chain.used,
+        drawDrawn: (p._draw || {}).drawn || 0, drawFaced: (p._draw || {}).faced || 0,
+        drawDrivenOff: (p._draw || {}).drivenOff || 0,
         contestsSurvived: (Game.deedState ? (Game.deedState().contestsSurvived | 0) : 0),
       };
       rows.push(row);
@@ -219,6 +256,10 @@ function instrumentChain(Game, ctx) {
   const chG = rows.reduce((a, r) => a + (r.chainGranted || 0), 0);
   const chU = rows.reduce((a, r) => a + (r.chainUsed || 0), 0);
   console.log('feast chain: armed ' + chA + ' -> granted ' + chG + ' -> used ' + chU + ' (feastSurgeUsed flags: ' + F(r => r.feastUsed) + ')');
+  const dwD = rows.reduce((a, r) => a + (r.drawDrawn || 0), 0);
+  const dwF = rows.reduce((a, r) => a + (r.drawFaced || 0), 0);
+  const dwO = rows.reduce((a, r) => a + (r.drawDrivenOff || 0), 0);
+  console.log('feast draw: drawn ' + dwD + ' -> faced ' + dwF + ' | driven-off ' + dwO);
   console.log('medianDays ' + med + ' maxDays ' + daysArr[daysArr.length - 1]);
   const dc = {};
   for (const r of rows) for (const k of Object.keys(r.deathShare)) dc[k] = (dc[k] || 0) + r.deathShare[k];

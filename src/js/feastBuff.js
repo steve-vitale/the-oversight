@@ -12,7 +12,12 @@
 //   - clearFeastBuff(expired)
 //   - feastedLine()
 //   - feastSurgeCfg()
+//   - drawFeastScavenger()
+//   - feastDrawPending()
+//   - faceFeastDraw()
+//   - driveOffFeastDraw()
 // rules:
+//   - feast_draw: on a FRESH armed grant (never a refresh — one draw per buff), the feast's smoke draws a wave-appropriate scavenger to the haven's edge as a pending encounter the player faces (faceFeastDraw -> startCombat, blow-by-blow) or declines (driveOffFeastDraw — devotion unspent); the draw dies with the buff (code: drawFeastScavenger, clearFeastBuff).
 //   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
 //   - timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 //   - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
@@ -22,9 +27,10 @@
 //   - telegraph_honesty: every buff label states the true effective multiplier (code: grantFeastBuff, feastedLine, tbDamage hook in game.js)
 //   - arc4_hotter: Arc IV's arc4burn multiplies the granted buff and is stated in the grant line (code: grantFeastBuff)
 // consumes:
-//   - state.scholar (feastBuff, prog.feastSurge, prog.feastSurgeUsed, day, health)
+//   - state.scholar (feastBuff, prog.feastSurge, prog.feastSurgeUsed, day, health, feastDraw)
 //   - dayPart, inCombat, tbFighter, addHealth, say, save
 //   - Game.data.feastSurge (src/data/feast-surge.json)
+//   - castMonster, startCombat, pendingEncounter/pendingMonsterId, monsterDisplayName, seedGossip
 // NOTE: self-attaching module (Object.assign(Game, methods)). Load AFTER
 // game.js. The strike/ability uplift hooks live at their call sites
 // (game.js tbDamage player-source hook; abilityActions.js useAbility +
@@ -53,6 +59,7 @@
           feastMinimums: d.feastMinimums || { minFeastKcal: 1500, minGuests: 3 },
           refeast: d.refeast || { policy: 'refresh', quality: 'best' },
           twists: d.twists || {},
+          feastDraw: d.feastDraw || { chance: 1.0 },
         };
       } catch (e) {
         return {
@@ -61,6 +68,7 @@
           qualityUplift: { 0: 1.2, 1: 1.35, 2: 1.5 }, surgeDefault: 1.5,
           feastMinimums: { minFeastKcal: 1500, minGuests: 3 },
           refeast: { policy: 'refresh', quality: 'best' }, twists: {},
+          feastDraw: { chance: 1.0 },
         };
       }
     },
@@ -143,8 +151,14 @@
         const parts = Math.max(1, (untilDay - day) * cfg.partsPerDay - this.dayPart);
         const devNote = surge > 1 ? ` A channeled keepsake feeds the flames (devotion ×${surge}).` : '';
         this.say(`🍖 FEASTED ×${mult} until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left): ${cfg.qualityNames[q]}.${devNote}${arcNote} Strikes and abilities hit with the feast behind them.`);
+        // LONGSIM WINPATH R4 (2026-10-12): the cookfire's smoke draws
+        // scavengers — a FRESH armed grant leaves a beast circling the
+        // haven's edge. The deed's fight comes to the village; only the
+        // encounter lottery is removed, never the fight itself.
+        let draw = null;
+        try { draw = (typeof this.drawFeastScavenger === 'function') ? this.drawFeastScavenger() : null; } catch (e) {}
         try { this.save(); } catch (e) {}
-        return { granted: true, refreshed: false, mult, untilDay, untilPart, quality: q };
+        return { granted: true, refreshed: false, mult, untilDay, untilPart, quality: q, draw: (draw && draw.drawn) ? draw.monsterId : null };
       } catch (e) {
         return { granted: false, why: 'grant failed: ' + (e && e.message) };
       }
@@ -206,6 +220,22 @@
         const s = this.state.scholar || {};
         if (!s.feastBuff) return;
         delete s.feastBuff;
+        // LONGSIM WINPATH R4: the fire is cold, the smell fades — a still-
+        // circling drawn beast gets bored and moves on. Only OUR draw is
+        // cleared (matched by monsterId): a wanderer pending behind it is
+        // someone else's encounter. The devotion was never spent by waiting;
+        // only real combat spends it (noteFeastedCombatUse).
+        try {
+          const d = s.feastDraw;
+          if (d && d.monsterId) {
+            if (this.pendingEncounter && this.pendingMonsterId === d.monsterId) {
+              this.pendingEncounter = false;
+              this.pendingMonsterId = null;
+              if (expired) this.say('The thing at the edge of the light gives up and moves on. The fire is cold now.');
+            }
+            delete s.feastDraw;
+          }
+        } catch (e) {}
         if (expired) this.say("The feast's fire burns low — the buff fades with the night. (Feasted expired.)");
       } catch (e) {}
     },
@@ -365,6 +395,142 @@
         if (s.prog) { s.prog.feastSurge = false; s.prog.feastSurgeUsed = true; }
         try { this.save(); } catch (e) {}
       } catch (e) {}
+    },
+
+    // drawFeastScavenger: the cookfire's smoke draws something. A loud,
+    // smoky, bloody feast carried the armed devotion into the buff — the
+    // smell carries past the firelight too. Cast a wave-appropriate beast
+    // (castMonster: threat-rated, never a horror over a pointy stick) and
+    // leave it circling the haven's edge as a pending encounter, with the
+    // choice owned by the player: faceFeastDraw() or driveOffFeastDraw().
+    // Called ONLY on a fresh grant (never a refresh — one draw per buff)
+    // and only for armed-devotion feasts (grantFeastBuff gates: unarmed
+    // feasts return before this line). Deed-scoped: the village feast
+    // stays the social engine without a monster tax.
+    drawFeastScavenger() {
+      try {
+        const cfg = this.feastSurgeCfg();
+        const dc = (cfg && cfg.feastDraw) || {};
+        const chance = (dc.chance != null && !isNaN(dc.chance)) ? dc.chance : 1.0;
+        const s = this.state.scholar || {};
+        // NO SILENT CLOBBER (break-it combat 2026-10-09): a live pending
+        // encounter is someone else's beast (the wanderer's). Never stack
+        // into a phantom the panel can't render twice.
+        if (this.pendingEncounter) {
+          this.say('Something pads at the edge of the light — then thinks better of it. This ground is already claimed. (The feast drew a scavenger, but the way is already watched.)');
+          return { drawn: false, why: 'already pending' };
+        }
+        if (Math.random() >= chance) return { drawn: false, why: 'smoke carried clear' };
+        let cast = null;
+        try { cast = (typeof this.castMonster === 'function') ? this.castMonster() : null; } catch (e) { cast = null; }
+        let mid = null, veteran = false;
+        if (typeof cast === 'string') mid = cast;
+        else if (cast && typeof cast === 'object') { mid = cast.id || cast.monsterId || null; veteran = !!cast.veteran; }
+        if (!mid) return { drawn: false, why: 'no cast' };
+        let mdef = null;
+        try { mdef = ((this.data || {}).monsters || []).find(m => m.id === mid) || null; } catch (e) {}
+        if (!mdef) return { drawn: false, why: 'unknown id ' + mid };
+        s.feastDraw = { monsterId: mid, veteran, day: s.day || 0 };
+        this.pendingEncounter = true;
+        this.pendingMonsterId = mid;
+        let mname = 'something out there';
+        try { mname = (typeof this.monsterDisplayName === 'function' && this.monsterDisplayName(mid)) || mname; } catch (e) {}
+        const cap = String(mname); const shown = cap[0].toUpperCase() + cap.slice(1);
+        this.say(`🌙 The cookfire's smell carried further than the laughter did — smoke and grease on the night wind. ${shown} is circling the edge of the light. It followed the feast here. (A scavenger, drawn by the feast. Face it while the feast is in you — or let the watch drive it off.)`);
+        try { if (typeof this.seedGossip === 'function') this.seedGossip('feast-draw', { monster: mid }, []); } catch (e) {}
+        return { drawn: true, monsterId: mid, veteran };
+      } catch (e) {
+        return { drawn: false, why: 'draw failed: ' + (e && e.message) };
+      }
+    },
+
+    // feastDrawPending: the live draw, or null. Self-cleaning: if the
+    // pending encounter was resolved elsewhere (faced via the raw panel,
+    // the wanderer, a load), the stale marker is dropped rather than lied
+    // about. The draw also lives and dies with the BUFF — no buff, no
+    // beast (mantle pass deletes the buff with the old body; expiry
+    // clears explicitly). Never returns a beast that isn't actually
+    // waiting.
+    feastDrawPending() {
+      try {
+        const s = this.state.scholar || {};
+        const d = s.feastDraw;
+        if (!d || !d.monsterId) return null;
+        if (!(this.feastedActive && this.feastedActive())) {
+          try { delete s.feastDraw; } catch (e) {}
+          return null;
+        }
+        if (!this.pendingEncounter || this.pendingMonsterId !== d.monsterId) {
+          try { delete s.feastDraw; } catch (e) {}
+          return null;
+        }
+        return d;
+      } catch (e) { return null; }
+    },
+
+    // faceFeastDraw: meet the thing at the edge of the light. The marker is
+    // cleared AFTER startCombat reads it (startCombat reads s.feastDraw's
+    // veteran flag for the variant). The fight is real, blow-by-blow —
+    // startCombat's breach beat fires, the party joins, the deed feeds.
+    faceFeastDraw() {
+      try {
+        if (this.tbfight && !this.tbfight.over) {
+          this.say('Already in a fight — finish this one first. (faceFeastDraw refused: a fight is live.)');
+          return { ok: false, why: 'already in combat' };
+        }
+        if (this.over) return { ok: false, why: 'game over' };
+        const d = this.feastDrawPending();
+        if (!d) { this.say('Nothing is circling the firelight. (No feast draw pending.)'); return { ok: false }; }
+        const s = this.state.scholar || {};
+        const mid = d.monsterId;
+        try { this.startCombat(mid); } finally {
+          try { delete s.feastDraw; } catch (e) {}
+        }
+        return { ok: true, monsterId: mid };
+      } catch (e) { return { ok: false, why: (e && e.message) || 'face failed' }; }
+    },
+
+    // driveOffFeastDraw: the watch meets it with brands and noise. The
+    // beast was never brave. No fight, no devotion spent, the buff stays
+    // live until its dawn — declining the fight declines the deed, honestly.
+    // The watchers get the memory (they earned it).
+    driveOffFeastDraw() {
+      try {
+        const d = this.feastDrawPending();
+        if (!d) return { ok: false };
+        const s = this.state.scholar || {};
+        // SHORT-NAME (longsim winpath r4): strangers are descriptors, not
+        // names — "A person, maybe 20s", never "A". Dedupe: four strangers
+        // must not read as "A takes up a brand and A follows".
+        const disp = (id) => {
+          try {
+            const dn = String(this.displayName(id));
+            return /^an? /i.test(dn) ? dn : dn.split(' ')[0]; // the whole descriptor is the name
+          } catch (e) { return null; }
+        };
+        let names = [];
+        try {
+          const roster = (((this.state || {}).village || {}).roster || []).filter(id => id !== this.villagerId).slice(0, 2);
+          names = [...new Set(roster.map(disp).filter(Boolean))];
+        } catch (e) {}
+        const who = names.length >= 2 ? `${names[0]} takes up a brand and ${names[1]} follows`
+          : names.length === 1 ? `${names[0]} takes up a brand`
+          : 'The watch takes up brands';
+        let mname = 'it';
+        try { mname = (typeof this.monsterDisplayName === 'function' && this.monsterDisplayName(d.monsterId)) || mname; } catch (e) {}
+        const mshown = mname ? mname.charAt(0).toUpperCase() + mname.slice(1) : 'It';
+        try { delete s.feastDraw; } catch (e) {}
+        this.pendingEncounter = false;
+        this.pendingMonsterId = null;
+        try {
+          for (const nm of names) {
+            const vid = (((this.state || {}).village || {}).roster || []).find(id => disp(id) === nm);
+            if (vid && typeof this.remember === 'function') this.remember(vid, 'watch', `Drove off the feast's scavenger with a brand and a shout. It was never brave.`);
+          }
+        } catch (e) {}
+        this.say(`🔥 ${who} — they meet it at the edge of the light with noise and fire. ${mshown} was never brave. It melts back into the dark. (The watch drove off the feast's scavenger. The devotion stays armed; the feast's fire still burns in you.)`);
+        return { ok: true, drivenOff: true };
+      } catch (e) { return { ok: false }; }
     },
   };
   Object.assign(Game, methods);

@@ -25344,8 +25344,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const tOf = (vid) => { const t = trust[vid]; return t === undefined ? 10 : t; };
       const guests = [], away = [];
       for (const vid of roster) {
+        // Strangers are descriptors, not names — the whole descriptor is
+        // the honest short form ("A person, maybe 20s", never "A").
         let name = 'someone';
-        try { name = String(this.displayName(vid)).split(' ')[0]; } catch (e) {}
+        try {
+          const dn = String(this.displayName(vid));
+          name = /^an? /i.test(dn) ? dn : dn.split(' ')[0]; // the whole descriptor is the name
+        } catch (e) {}
         if (v.away && v.away[vid]) { away.push({ vid, name }); continue; }
         const health = (v.health && v.health[vid] != null) ? v.health[vid] : 100;
         const tr = tOf(vid);
@@ -25504,7 +25509,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       const hostName = (() => { try { return this.displayName(this.villagerId).split(' ')[0]; } catch (e) { return 'you'; } })();
-      const first = (vid) => { try { return this.displayName(vid).split(' ')[0]; } catch (e) { return 'someone'; } };
+      // SHORT-NAME (longsim winpath r4): strangers are descriptors, not
+      // names ("A person, maybe 20s") — split(' ')[0] rendered four
+      // strangers as "A, A, A, A". The whole descriptor is the honest
+      // short form until a name is learned.
+      const first = (vid) => {
+        try {
+          const dn = String(this.displayName(vid));
+          if (/^an? /i.test(dn)) return dn; // the whole descriptor is the name
+          return dn.split(' ')[0];
+        } catch (e) { return 'someone'; }
+      };
       for (const vid of showed) {
         // THE COLD TABLE, individual side: a reactor feels nothing at the
         // feast — no joy, no warmth, no trust. They sit, they hum, they watch.
@@ -25541,8 +25556,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // GRANTED — the old code set it true whenever grantFeastBuff didn't
       // throw, so an unarmed feast's honest refusal still told the UI "the
       // System bottled the feeling of this feast." Read the grant's return.
+      let _gr = null;
       try {
-        const _gr = (typeof this.grantFeastBuff === 'function') ? this.grantFeastBuff(feast) : null;
+        _gr = (typeof this.grantFeastBuff === 'function') ? this.grantFeastBuff(feast) : null;
         buffGranted = !!(_gr && _gr.granted);
       } catch (e) {}
       try { if (this.tickAction) this.tickAction(48); } catch (e) {}
@@ -25558,6 +25574,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],
         spent, served, servedList, showed, skipped, invited, star, surgeSpent, // surgeSpent: armed devotion CARRIED by the feast (not spent at feast time)
         televised, beats: beatLines, buffGranted, daypart: this.dayPart || 0,
+        // LONGSIM WINPATH R4: the grant's draw rides along — a fresh armed
+        // grant leaves a beast circling (monsterId) or null. The feast
+        // report says what happened; no silent arrivals.
+        draw: (_gr && _gr.draw) || null,
         // score + factors: the quality math, visible and auditable.
         score, factors: {
           variety: served.length, centerpiece: servedList.some(x => x.meat),
@@ -27045,7 +27065,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // VETERAN VARIANT (Steve 2026-10-05): old-wave monsters in a new wave
       // are hardened. +50% HP, +3 damage, +1 speed. They've survived too.
-      const isVeteran = (s.monster && s.monster.veteran) || false;
+      // LONGSIM WINPATH R4: the feast-draw carries its veteran flag on
+      // s.feastDraw (no world-monster alias exists for a circling beast —
+      // s.monster mirrors only player-tile monsters, so this second read).
+      // Scoped to the drawn monster's own id: a wanderer clobbering the
+      // pending slot must not inherit the feast draw's veteran flag.
+      const isVeteran = (s.monster && s.monster.veteran) ||
+        (s.feastDraw && s.feastDraw.veteran && s.feastDraw.monsterId === mid) || false;
       // VARIANT (Steve 2026-10-06): veterans aren't just stat bumps — each
       // has a variant with 1-2 new tricks. Scarred braces your opening.
       // Elder can't be stunned. Pack-leader brings friends.

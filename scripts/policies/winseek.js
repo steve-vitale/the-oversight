@@ -134,6 +134,16 @@ function winseekFight(Game, ctx) {
     // FIGHT-START (runs once per fight): snapshot faced-before (startCombat
     // records the deed immediately, so by handler time EVERYTHING looks
     // faced — we flee only if it was faced BEFORE this fight), then assess.
+    // LONGSIM WINPATH R4: while the feast buff is live and UNUSED, the buff
+    // is the point — the deed (feastSurgeUsed) needs a real combat use, and
+    // the ×2+ multiplier is the equalizer the outmatched math doesn't see.
+    // Don't flee for deed-value reasons (outmatched / wave-filled /
+    // already-faced). Near-death (below) still flees — dying is worse than
+    // missing the deed.
+    let feastedDeed = false;
+    try {
+      feastedDeed = !!(Game.feastedActive && Game.feastedActive() && !(((Game.state || {}).scholar || {}).feastBuff || {}).used);
+    } catch (e) {}
     if (ctx._fightObj !== f) {
       ctx._fightObj = f;
       ctx._fledThisFight = false;
@@ -159,7 +169,7 @@ function winseekFight(Game, ctx) {
         const outmatched = totalMhp > 3.5 * pmax ||
           (maxWave >= 2 && hpPct < 0.6) ||
           hpPct < 0.5;
-        if (outmatched && monsters.length) {
+        if (outmatched && monsters.length && !feastedDeed) {
           ctx.fledBad = (ctx.fledBad || 0) + 1;
           return flee();
         }
@@ -179,7 +189,7 @@ function winseekFight(Game, ctx) {
           const w = (md && md.wave) || 1;
           return (counts[w] || 0) >= (bars[w] || 99);
         });
-        if (allFilled) {
+        if (allFilled && !feastedDeed) {
           ctx.fledFilled = (ctx.fledFilled || 0) + 1;
           return flee();
         }
@@ -190,7 +200,7 @@ function winseekFight(Game, ctx) {
     try {
       const facedBefore = ctx._facedBefore || {};
       const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
-      if (monsters.length && monsters.every(m => facedBefore[m.monsterId])) {
+      if (monsters.length && monsters.every(m => facedBefore[m.monsterId]) && !feastedDeed) {
         ctx.fledKnown = (ctx.fledKnown || 0) + 1;
         return flee();
       }
@@ -512,6 +522,22 @@ function feastFight(Game, ctx) {
     else { ctx._feastFightDay = day; ctx._feastFightSweeps = sweeps; }
   } catch (e) {}
 }
+// LONGSIM WINPATH R4 (2026-10-12): the cookfire's smoke draws scavengers —
+// a feast that grants the surge may leave a beast circling the haven. The
+// policy is deed-seeking: face it WHILE FEASTED (the deed is the point).
+// Never drive it off — a real player might, but the policy wants the deed.
+function feastDrawRoad(Game, ctx) {
+  try {
+    const s = Game.state.scholar || {};
+    if (Game.over || Game.tbfight) return;
+    if (!(Game.feastDrawPending && Game.feastDrawPending())) return;
+    if (!(Game.feastedActive && Game.feastedActive())) return; // the deed needs the buff live
+    const b = s.feastBuff || null;
+    if (b && b.used) return; // already marked — nothing to gain
+    if (Game.faceFeastDraw) Game.faceFeastDraw();
+    ctx.facedDraw = (ctx.facedDraw || 0) + 1;
+  } catch (e) {}
+}
 // Play-weighted: system quests, trials, teaching, naming, books.
 
 // ---------- ROAD 6: INTEGRATION (stage ≥ 3 needs integ ≥ 80) ----------
@@ -643,7 +669,8 @@ const winseek = {
     crisisRoad(Game, ctx);       // road 4: weather
     sentimentRoad(Game, ctx);    // road 5a: channel keepsakes
     feastRoad(Game, ctx);        // road 5b: feast weekly (evening)
-    feastFight(Game, ctx);       // road 5c: fight while feasted (buff decays at dawn)
+    feastDrawRoad(Game, ctx);    // road 5c: face the feast's scavenger while feasted
+    feastFight(Game, ctx);       // road 5d: fight while feasted (buff decays at dawn)
     integrationRoad(Game, ctx);  // road 6: integ → 80
     tableRoad(Game, ctx);        // answer the table
     // road counters for the report

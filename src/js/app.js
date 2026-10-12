@@ -14926,13 +14926,20 @@
       // TENT BREACH (Steve 2026-10-08): it's IN the tent with you — different
       // panel, different stakes. Face it and the fight starts at arm's length.
       const inTent = !!Game.pendingInTent;
+      // LONGSIM WINPATH R4: the feast's smoke drew a scavenger — it's
+      // circling the cookfire's edge, not crashing from the thicket. The
+      // player chooses: face it while the feast is in them, or let the
+      // watch drive it off (devotion unspent).
+      const isFeastDraw = !inTent && !!(Game.feastDrawPending && Game.feastDrawPending());
       const sub = inTent
         ? 'It is INSIDE the tent with you. Eyes in the dark, breath on your face.'
-        : 'It crashes from the thicket. It is not going around.';
+        : isFeastDraw
+          ? 'It circles the cookfire\'s edge — drawn in by the feast\'s smoke. The buff is in you. Meet it, or let the watch drive it off.'
+          : 'It crashes from the thicket. It is not going around.';
       return `
       <div class="card warn"><h3>⚠ ${pname}</h3>
       <p class="small">${sub}</p>
-      <button class="btn sm" id="p-face">Face it</button></div>`;
+      <button class="btn sm" id="p-face">Face it</button>${isFeastDraw ? '<button class="btn sm" id="p-driveoff" style="margin-left:8px">Let the watch drive it off</button>' : ''}</div>`;
     }
     // COMBAT renders in the main column, directly under the grid
     // (ord-combatpanel) — never below the fold. This slot stays empty in combat.
@@ -15778,7 +15785,15 @@
       // TENT BREACH: the thing is IN your tent — facing it means bursting out
       // through the flap with it right behind you.
       if (Game.pendingInTent) Game.faceTentIntruder();
+      // LONGSIM WINPATH R4: the feast's scavenger — face it through the draw
+      // path so the marker is cleared with the fight's own semantics.
+      else if (Game.feastDrawPending && Game.feastDrawPending()) Game.faceFeastDraw();
       else Game.startCombat();
+      rerender();
+    });
+    // LONGSIM WINPATH R4: decline the feast draw — the watch drives it off.
+    on('p-driveoff', () => {
+      try { if (Game.driveOffFeastDraw) Game.driveOffFeastDraw(); } catch (e) {}
       rerender();
     });
     wireCombatPanel();

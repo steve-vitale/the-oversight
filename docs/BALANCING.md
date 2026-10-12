@@ -82,8 +82,9 @@ Steve's rule: NO second pool. The kcal bar IS the bank — one energy economy, c
   | q2 × chosen 2.25 | ×3.38 | 3.16–3.80× | 6.5 |
   | q2 × wedding ring 3.0 | ×4.5 | 4.24× | 6.0 |
 
-  Measured runs slightly under nominal (monster armor eats a flat amount after the mult — honest). The top end is intentionally explosive but triply gated: a legendary feast (pantry cost), a rare devotion multiplier, and a 2-dawn expiry. Levers: `src/data/feast-surge.json` (durationNights, qualityUplift, surgeDefault, refeast policy, twists, feastMinimums).
+  Measured runs slightly under nominal (monster armor eats a flat amount after the mult — honest). The top end is intentionally explosive but triply gated: a legendary feast (pantry cost), a rare devotion multiplier, and a 2-dawn expiry. Levers: `src/data/feast-surge.json` (durationNights, qualityUplift, surgeDefault, refeast policy, twists, feastMinimums, feastDraw).
 - **Decay**: −20%/night on the banked portion only. The body pool below "fed" is untouched. Use it or lose it.
+- **Feast draw** (longsim winpath r4, 2026-10-12): a fresh ARMED feast grant draws a wave-appropriate scavenger to the haven's edge (pending encounter — face it or drive it off). Levers: `src/data/feast-surge.json` (`feastDraw.chance`: 1.0 — guaranteed but fought).
 - **UI**: no RESERVE row. The FOOD bar shows `kcal/cap`, glows gold past the fed line, carries the GORGED tag. No Feast button — Eat is the ritual.
 - **Migration**: old `reserveKcal` folds into the bar once via `migrateReserve()` in `status()`.
 - **Headroom**: a deep-reserves + smoker + butcher + full pantry late game can plausibly become overwhelming. Endgame payoff: later.

@@ -777,6 +777,17 @@
       // the feast), and a mid-rage death must not hand the successor a live
       // rage (undying_fury reads rageActive.rounds). Both die with the body.
       try { delete s.feastBuff; } catch (e) {}
+      // LONGSIM WINPATH R4: the feast's fire was the old body's — a beast
+      // drawn by its smoke gives up and moves on with the mantle. Never
+      // strand a pending feast-draw panel on the successor.
+      try {
+        const fd = s.feastDraw;
+        if (fd && fd.monsterId && this.pendingEncounter && this.pendingMonsterId === fd.monsterId) {
+          this.pendingEncounter = false;
+          this.pendingMonsterId = null;
+        }
+        delete s.feastDraw;
+      } catch (e) {}
       try { delete s.rageActive; } catch (e2) {}
       s.kcal = 1500;
       try { s.health = this.maxHealth(); } catch (e) { s.health = 100; }

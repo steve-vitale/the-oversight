@@ -294,6 +294,19 @@ design:
   the next dawn and the better quality wins — never stacks, so no
   double-feast exploit. After combat use the arming is spent, so a post-use
   re-feast is refused until the keepsake is channeled again.
+- **THE COOKFIRE'S SMOKE DRAWS SCAVENGERS (longsim winpath r4, 2026-10-12).**
+  On a FRESH armed grant (never a refresh — one draw per buff), the feast's
+  smell carries past the firelight: a wave-appropriate beast (castMonster —
+  threat-rated, never a horror over a pointy stick) is left circling the
+  haven's edge as a pending encounter. The player chooses: face it
+  (startCombat, blow-by-blow — the breach beat fires, the party joins) or
+  let the watch drive it off (devotion unspent, the buff still live until
+  its dawn). The draw dies with the buff — the fire is cold, the beast
+  moves on. Deed-scoped: armed-devotion feasts only; unarmed feasts draw
+  nothing, and a live wanderer is never clobbered. The r3 blank was
+  granted(4)→used(0) — the buff expired before a random encounter was found.
+  The deed's fight comes to the village now; only the encounter lottery was
+  removed, never the bar's definition (real combat use of the surge).
 - **Persistence clean.** Expiry is an absolute (day, dawn) evaluated lazily —
   a mid-buff Continue resumes the buff; a post-dawn load has no phantom buff.
 
@@ -313,6 +326,7 @@ resonance / 300 bank numbers were picked, not calibrated):
 | `refeast.policy` | "refresh" | "refresh" (window extends, best quality wins) vs "refuse" |
 | `twists` | 4 entries | per-ability feasted twists (heal_bonus, status_extend); default = clean uplift |
 | `feastMinimums` | 1500 kcal / 3 guests | event-side: what counts as a feast (enforced by the feast event, not the grant) |
+| `feastDraw.chance` | 1.0 | the smoke always carries — the draw is guaranteed but FOUGHT; the player's choice (face / drive off) is the lever's other half |
 
 Measured uplift curve (feast→fight sims, docs/BALANCING.md): ×1.8 → ~1.77×,
 ×2.03 → ~1.96×, ×2.25 → ~2.4×, ×3.38 → ~3.5×, ×4.5 → ~4.24× (armor eats a
