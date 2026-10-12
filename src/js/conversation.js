@@ -714,6 +714,20 @@
           sep = '';
         }
       }
+      // PUNCTUATION FOLD (journey landing r7 2026-10-12): a bare-punctuation
+      // closer ('!', from the effusive mannerism pool) appended after the
+      // line's own terminal mark stutters ("...knows about? !", seed 999
+      // day 6) — same bug class as the comma-closer fold above. Fold it: a
+      // question keeps its mark and the closer is dropped (a question stays
+      // a question); any other terminal mark is swapped for the closer
+      // ("...ask anyone!" — never "...ask anyone. !").
+      if (!useOpen && /^[!?…]+$/.test(bit.trim())) {
+        const ptm = /([.!?…])\s*$/.exec(said);
+        if (ptm) {
+          if (ptm[1] === '?') return line;
+          return '"' + said.slice(0, ptm.index) + bit.trim() + '"';
+        }
+      }
       return useOpen ? '"' + bit + said + '"' : '"' + said + sep + bit + '"';
     },
 
@@ -799,8 +813,21 @@
       // choke point spans NPCs within a run — Lena and David must not speak
       // the same line verbatim. Per-conversation saidLines can't catch that.
       const runLedger = this.convoRunLedger();
-      const selfBlocked = c.saidLines.indexOf(key) !== -1;
-      const runBlocked = !selfBlocked && runLedger.indexOf(key) !== -1;
+      // INVITATION HONESTY (journey landing r7 2026-10-12): an invitation
+      // beat is a diegetic ACT, not flavor — the betrayal:accept/decline
+      // menu quotes the same invite label verbatim regardless of the
+      // ledgers. Blocking the spoken beat (a recent same-lure, or the same
+      // villager's own earlier invite) produced the dry non-sequitur
+      // "...Sorry, lost my train of thought." while the menu asked the
+      // player to accept an invitation that was never extended — the exact
+      // blind-accept failure (armed-plot invites travel the same channel)
+      // the spoken-lure fix exists to prevent. Invitation beats are exempt
+      // from both blocks; they still feed the ledgers below (honesty: they
+      // were said). A repeated invitation reads as insistence, not a
+      // parrot bug.
+      const inviteAct = !!(opts && opts.inviteBeat);
+      const selfBlocked = !inviteAct && c.saidLines.indexOf(key) !== -1;
+      const runBlocked = !inviteAct && !selfBlocked && runLedger.indexOf(key) !== -1;
       // FALLBACK (journey-social 2026-10-11): a blocked line must never go
       // silent — "no silent actions" is a standing rule, and a blocked beat
       // with fired consequences (trust/mood/evidence) but no words reads as
@@ -3883,7 +3910,12 @@
         }
       } catch (e) {}
       this.sayLine(vid, opLine);
-      if (inviteBeat) this.sayLine(vid, inviteBeat);
+      // INVITATION HONESTY (journey landing r7 2026-10-12): the lure is a
+      // diegetic act — sayLine's inviteBeat exemption keeps it spoken even
+      // when another villager used the same lure recently (or this one did
+      // in an earlier sitting). The menu quotes the label verbatim, so the
+      // spoken beat and the menu can never disagree.
+      if (inviteBeat) this.sayLine(vid, inviteBeat, { inviteBeat: true });
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
       // player SEES it — one short stage-direction beat, at most once a day.
