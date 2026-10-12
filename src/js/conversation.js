@@ -1263,6 +1263,23 @@
       return String(last.fromName || 'your predecessor').split(' ')[0];
     },
 
+    // COUNT HONESTY (journey-succession 2026-10-12): fills {people} with the
+    // living roster count in words ("we're twelve people" was hardcoded and
+    // lied once villagers died). Called at every point a player-facing line
+    // can carry the token.
+    convoFillPeople(line) {
+      if (!line || String(line).indexOf('{people}') === -1) return line;
+      const n = ((this.state.village || {}).roster || []).length;
+      const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six',
+        'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+      const w = n >= 0 && n < words.length ? words[n] : String(n);
+      // token usually reads "{people} people" — fold the noun in so the
+      // count stays grammatical ("one person", not "one people").
+      let s = String(line).split('{people} people').join(w + ((n === 1 || n === 0) ? ' person' : ' people'));
+      s = s.split('{people}').join(w);
+      return s;
+    },
+
     // convoResumeOpener: an unfinished thread resurfaces as the next
     // conversation's opening. Never ahead of a talk request, never twice
     // running, gated on a little trust — strangers don't pick up old threads.
@@ -5105,6 +5122,7 @@
         } catch (e) {}
         line = this.convoPickCycle(vid, 'exit', pool);
       }
+      try { line = this.convoFillPeople(line); } catch (e) {}
       this.sayLine(vid, line);
       // THE WANT'S CLOSING BEAT (convo rebuild 2026-10-11): the goodbye
       // names the resolution — promised, deflected, comforted, heeded.

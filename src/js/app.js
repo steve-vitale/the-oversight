@@ -1773,7 +1773,17 @@
           actions.push(['🚪 Step outside', () => { Game.exitBuilding(); refresh(); }]);
         }
         else if (cell === 'lodge') {
-          desc += ' The Haven hall. Warmth and twelve people inside.';
+          // COUNT HONESTY (journey-succession 2026-10-12): the headcount is
+          // stated as current fact — it must be the living roster, not the
+          // starting twelve.
+          try {
+            const nl = ((Game.state.village || {}).roster || []).length;
+            const nw = ['no', 'one', 'two', 'three', 'four', 'five', 'six',
+              'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+            const w = (nl >= 0 && nl < nw.length) ? nw[nl] : String(nl);
+            desc += ' The Haven hall. Warmth and ' + w +
+              ((nl === 1 || nl === 0) ? ' person' : ' people') + ' inside.';
+          } catch (e) { desc += ' The Haven hall. Warmth and twelve people inside.'; }
           actions.push(['🏠 Go inside', () => { Game.enterBuilding(); refresh(); }]);
         }
         else if (cell === 'bunk') {
