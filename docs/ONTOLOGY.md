@@ -566,13 +566,13 @@ Examine action + observation memory + recognition. Looking closely at a plant is
 **Consumes:** state.codex.observations, state.codex.plants (plantKnown), Game.data.plants (description, taxon, seasons, tileAffinity, lookalikeNote), state.map cell species (plantSpecies/bushSpecies/tree per tile)
 
 ### feastSurge (`feastBuff.js`)
-Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the next dawn. During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
+Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast buys the night plus the full next day). During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
 
 **Provides:** grantFeastBuff(feast), feastedActive(), feastedBuffState(), feastedMult(), feastedForm(abilityId, actionId), applyFeastedForm(abilityId, actionId, target, preHp), noteFeastedCombatUse(), clearFeastBuff(expired), feastedLine(), feastSurgeCfg()
 
 **Rules:**
 - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
-- timed_not_trigger: the buff is a window until next dawn, never an on-strike burn (code: grantFeastBuff, feastedActive)
+- timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
 - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
 - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)

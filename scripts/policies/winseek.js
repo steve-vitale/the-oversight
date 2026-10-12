@@ -21,7 +21,7 @@
 // Every road is best-effort and try/catch-guarded: a hostile Game API must
 // never kill a run.
 'use strict';
-const { competent } = require('./competent');
+const { competent, forageTripSeedFirst, sortHaul, donateHaul } = require('./competent');
 const idle = require('./idle');
 
 function rosterOf(Game) {
@@ -40,8 +40,14 @@ function huntPatrol(Game, ctx) {
   try {
     const s = Game.state.scholar;
     const day = s.day || 1;
-    if (![1, 3, 5].includes(day % 7)) return;
-    if (ctx._patrolDay === day) return; // once per day (upkeep runs 3x/day)
+    // FEASTED (longsim winpath r3 2026-10-12): while the feast buff is live
+    // and unused, hunt EVERY day — the buff is the point. Otherwise 3x/week.
+    let feasted = false;
+    try {
+      feasted = Game.feastedActive && Game.feastedActive() && !((s.feastBuff || {}).used);
+    } catch (e) {}
+    if (!feasted && ![1, 3, 5].includes(day % 7)) return;
+    if (ctx._patrolDay === day && !feasted) return; // once per day (upkeep runs 3x/day)
     ctx._patrolDay = day;
     if ((s.kcal || 0) < (Game.kcalCap ? Game.kcalCap() * 0.4 : 800)) return; // don't hunt starving
     // EAT FIRST, HUNT SECOND (journey-endgame r3 2026-10-11): a deed-seeker
@@ -56,10 +62,11 @@ function huntPatrol(Game, ctx) {
       if (drain > 3000) return; // in the red: forage, don't patrol
     } catch (e) {}
     // WAVE-TARGETED: only patrol if some unlocked wave's deed bar is unfilled.
-    // No deed value = no death risk.
+    // No deed value = no death risk. EXCEPT while FEASTED: the buff is the
+    // deed (feastSurgeUsed), and it expires. Hunt anyway.
     try {
       const g = Game.deedGateReady ? Game.deedGateReady() : null;
-      if (g) {
+      if (g && !feasted) {
         const bars = [g.w1 >= 5, g.w2 >= 5, g.w3 >= 4, g.w4 >= 3, g.w5 >= 2];
         const uw = Game.unlockedWave ? Game.unlockedWave() : 1;
         let need = false;
@@ -427,12 +434,21 @@ function feastRoad(Game, ctx) {
 // decays at dawn — the policy must warm the blades the same evening.
 // (Journey-endgame r3 2026-10-11: 5 granted buffs, 0 used — the policy
 // feasted then slept, and the buff expired untouched.)
+// (Longsim winpath r3 2026-10-12): patrol on ANY day the buff is live and
+// unused — not just the feast day. If the window ever lengthens past one
+// dawn (data lever), the next morning's hunt counts too. A real player who
+// feasts at night hunts at first light.
 function feastFight(Game, ctx) {
   try {
     const s = Game.state.scholar || {};
     const day = s.day || 1;
-    if (ctx._feastFightDay !== day) return;
-    if (!Game.feastedActive || !Game.feastedActive()) return;
+    if (!Game.feastedActive || !Game.feastedActive()) { ctx._feastFightDay = 0; return; }
+    // already used it in combat? nothing to do (noteFeastedCombatUse spent it)
+    try {
+      const b = (s.feastBuff) || null;
+      if (b && b.used) { ctx._feastFightDay = 0; return; }
+    } catch (e) {}
+    if (ctx._feastFightDay === day && ctx._feastFightSweeps >= 3) return; // tried today
     if (Game.over || Game.tbfight) return;
     // quick patrol: nearest tiles, seek an encounter
     const hx = Game.map.px, hy = Game.map.py;
@@ -463,7 +479,8 @@ function feastFight(Game, ctx) {
       }
     }
     if (!Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} }
-    ctx._feastFightDay = 0; // attempted
+    if (ctx._feastFightDay === day) ctx._feastFightSweeps = (ctx._feastFightSweeps || 0) + sweeps;
+    else { ctx._feastFightDay = day; ctx._feastFightSweeps = sweeps; }
   } catch (e) {}
 }
 // Play-weighted: system quests, trials, teaching, naming, books.
@@ -518,6 +535,53 @@ function integrationRoad(Game, ctx) {
   } catch (e) {}
 }
 
+// ---------- ROAD 0: CONTRIBUTE — the commons come first ----------
+// A deed-seeker who drains the pantry gets EXILED (freeload pipeline:
+// sustained net drain > max(1500, 3x expected) over 12 days), and the feast
+// road refuses a drained host (drain > 3000 gate). Fighting burns ~1.2k
+// kcal/day, and the base policy's every-3-days forage cadence can't cover a
+// fighter's appetite (measured longsim winpath r3 2026-10-12: 4/8 seeds
+// exiled or drain-blocked, armed 15 -> granted 1 -> used 0). So after the
+// base food run, top up: forage and donate until the village ledger is
+// non-negative. A real table-seeker feeds their village — the table prices
+// the moral ledger, not the kill count.
+function contributeRoad(Game, ctx) {
+  try {
+    const v = Game.state.village || {};
+    const me = Game.villagerId;
+    // DONATE THE DAY'S KILLS FIRST: competent.daily loots corpses AFTER its
+    // donateHaul, so meat sits in the pack until the player eats it. A hunter
+    // feeds the village — the table prices the moral ledger, not the pack.
+    try { donateHaul(Game, ctx); } catch (e) {}
+    const drainOf = () => (((v.takes || {})[me] || 0) - ((v.gives || {})[me] || 0));
+    // Not aggressive: the exile needs SUSTAINED drain, and a good stretch
+    // (effort>=0.7) resets its counter. Trigger at 2000 — below the 3000
+    // feast/hunt gate, above the 1500 exile-draining line. Forage trips are
+    // dangerous; don't die feeding the village. (Longsim winpath r3: a 500
+    // threshold sent the policy into the wild daily and it died earlier.)
+    if (drainOf() <= 2000) return;
+    if (Game.playerAtHaven && !Game.playerAtHaven()) return;
+    if (s_exiled(Game)) return;
+    // Only when healthy — a hurt player foraging is a dead player.
+    try {
+      const s = Game.state.scholar || {};
+      if ((s.health || 100) < 60) return;
+    } catch (e) {}
+    let guard = 0;
+    while (guard++ < 2 && drainOf() > 2000 && !Game.over) {
+      const got = forageTripSeedFirst(Game, ctx);
+      sortHaul(Game, ctx);
+      donateHaul(Game, ctx);
+      ctx._contribTrips = (ctx._contribTrips || 0) + 1;
+      if (!got) break; // the land is bare — nothing more honest to do today
+    }
+  } catch (e) {}
+}
+
+function s_exiled(Game) {
+  try { return !!(((Game.state || {}).scholar || {}).exiled); } catch (e) { return false; }
+}
+
 // ---------- TABLE ----------
 
 function tableRoad(Game, ctx) {
@@ -538,11 +602,13 @@ const winseek = {
   upkeep(Game, ctx) {
     if (competent.upkeep) competent.upkeep(Game, ctx);
     huntPatrol(Game, ctx); // road 1: seek encounters (upkeep, so the harness
-                           // drives any fights via driveFights/driveContests)
+                           // drives any fights via driveFights/driveContests).
+                           // While FEASTED, hunts every day — the buff is the point.
     contestRoad(Game, ctx);
   },
   daily(Game, ctx) {
     if (competent.daily) competent.daily(Game, ctx);
+    contributeRoad(Game, ctx);  // road 0: feed the village first — no exile, no drain-blocked feasts
     courtshipClimb(Game, ctx);   // road 3a: the climb
     diplomacyRoad(Game, ctx);    // road 3b: propose/answer
     crisisRoad(Game, ctx);       // road 4: weather

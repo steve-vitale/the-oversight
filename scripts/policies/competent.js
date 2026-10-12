@@ -814,4 +814,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline };
+module.exports = { competent, workTrapline, forageTripSeedFirst, sortHaul, donateHaul, needTrip };

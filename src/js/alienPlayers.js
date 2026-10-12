@@ -1778,9 +1778,29 @@
       try { vname = this.displayName(vid) || 'Someone'; } catch (e) {}
 
       var lines = [];
-      // General awareness (post-System, villagers know about the audience)
-      lines.push(vname + ' says: "Do you think they\'re watching right now? The... audience? I try not to think about it."');
-      lines.push(vname + ' whispers: "Mara swears she met a stranger who knew things. Things no one should know. I told her she\'s tired."');
+      // General awareness (post-System, villagers know about the audience).
+      // SENSE (longsim winpath r3 2026-10-12): four villagers said the single
+      // audience line VERBATIM in one run — a pool of one is a script, not
+      // people. Variants, each a different person's own words for the same
+      // unease. Per-villager dedup: don't repeat a villager's own line.
+      var apSeen = ap.seenLines || (ap.seenLines = {});
+      var general = [
+        vname + ' says: "Do you think they\'re watching right now? The... audience? I try not to think about it."',
+        vname + ' mutters: "Smile for the sky, they said. I hate how easy it was to start doing it."',
+        vname + ' says: "My kid asked if the watchers have favorites. I didn\'t know what to tell her."',
+        vname + ' whispers: "Mara swears she met a stranger who knew things. Things no one should know. I told her she\'s tired."',
+        vname + ' says: "If they\'re watching, let them watch me work. That\'s all I\'ve got."',
+        vname + ' says: "Do you ever feel it? Like the air leans in when something happens."',
+      ];
+      var fresh = general.filter(function (l) { return !apSeen[vname + '|' + l]; });
+      if (!fresh.length) {
+        // said them all — reset this villager's pool rather than go silent
+        for (var k in apSeen) if (k.indexOf(vname + '|') === 0) delete apSeen[k];
+        fresh = general;
+      }
+      var pick = fresh[Math.floor(Math.random() * fresh.length)];
+      apSeen[vname + '|' + pick] = 1;
+      lines.push(pick);
 
       // Specific pilot gossip (only if known)
       for (var pid in ap.known) {

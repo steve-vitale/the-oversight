@@ -101,6 +101,54 @@ function wrapPolicy(policy) {
   return { p, first };
 }
 
+// feast-surge chain instrumentation (longsim winpath r3 2026-10-12): count
+// arming -> grant -> combat-use transitions per run. Wraps Game methods after
+// loadGame/setupGame; no game-code change.
+function instrumentChain(Game, ctx) {
+  const ch = { armed: 0, granted: 0, used: 0, prevArmed: false };
+  try {
+    if (typeof Game.channelSentiment === 'function') {
+      const orig = Game.channelSentiment.bind(Game);
+      Game.channelSentiment = function (idx) {
+        const r = orig(idx);
+        try {
+          const nowArmed = !!(((Game.state || {}).scholar || {}).prog || {}).feastSurge;
+          if (nowArmed && !ch.prevArmed) ch.armed++;
+          ch.prevArmed = nowArmed;
+        } catch (e) {}
+        return r;
+      };
+    }
+  } catch (e) {}
+  try {
+    if (typeof Game.grantFeastBuff === 'function') {
+      const orig = Game.grantFeastBuff.bind(Game);
+      Game.grantFeastBuff = function (feast) {
+        const r = orig(feast);
+        if (r && r.granted) ch.granted++;
+        return r;
+      };
+    }
+  } catch (e) {}
+  try {
+    if (typeof Game.noteFeastedCombatUse === 'function') {
+      const orig = Game.noteFeastedCombatUse.bind(Game);
+      Game.noteFeastedCombatUse = function () {
+        let mark = false;
+        try {
+          const b = ((Game.state || {}).scholar || {}).feastBuff;
+          mark = !!(b && !b.used && Game.inCombat && Game.inCombat());
+        } catch (e) {}
+        const r = orig();
+        if (mark) ch.used++;
+        return r;
+      };
+    }
+  } catch (e) {}
+  ctx._chain = ch;
+  return ch;
+}
+
 (async () => {
   const seeds = parseSeeds(process.env.SEEDS || '1-8');
   const policyIds = String(process.env.POLICIES || 'competent,winseek').split(',').map(s => s.trim()).filter(Boolean);
@@ -117,6 +165,7 @@ function wrapPolicy(policy) {
       if (loadFails && loadFails.length) console.log(`seed ${seed}: LOAD FAILS: ${loadFails.join('; ')}`);
       await setupGame(Game);
       const { p, first } = wrapPolicy(base);
+      const chain = instrumentChain(Game, p);
       const result = await runDays(Game, p, { days });
       const day = ((Game.state || {}).scholar || {}).day || 0;
       const pg = (Game.progState ? Game.progState() : {}) || {};
@@ -148,6 +197,7 @@ function wrapPolicy(policy) {
         stage, breadth, integ,
         sentiment: !!pg.sentimentTaught,
         feastUsed: !!((((Game.state || {}).scholar || {}).prog || {}).feastSurgeUsed),
+        chainArmed: chain.armed, chainGranted: chain.granted, chainUsed: chain.used,
         contestsSurvived: (Game.deedState ? (Game.deedState().contestsSurvived | 0) : 0),
       };
       rows.push(row);
@@ -165,6 +215,10 @@ function wrapPolicy(policy) {
   console.log('wave>=3 ' + F(r => r.maxWave >= 3) + ' | wave>=4 ' + F(r => r.maxWave >= 4) + ' | wave>=5 ' + F(r => r.maxWave >= 5));
   console.log('regional ' + F(r => r.rankDay.regional) + ' | national ' + F(r => r.rankDay.national) + ' | global ' + F(r => r.rankDay.global));
   console.log('lesser seat ' + F(r => r.lesserDay > 0) + ' | full seat ' + F(r => r.fullDay > 0) + ' | table fired ' + F(r => r.tableFired) + ' | won ' + F(r => r.won));
+  const chA = rows.reduce((a, r) => a + (r.chainArmed || 0), 0);
+  const chG = rows.reduce((a, r) => a + (r.chainGranted || 0), 0);
+  const chU = rows.reduce((a, r) => a + (r.chainUsed || 0), 0);
+  console.log('feast chain: armed ' + chA + ' -> granted ' + chG + ' -> used ' + chU + ' (feastSurgeUsed flags: ' + F(r => r.feastUsed) + ')');
   console.log('medianDays ' + med + ' maxDays ' + daysArr[daysArr.length - 1]);
   const dc = {};
   for (const r of rows) for (const k of Object.keys(r.deathShare)) dc[k] = (dc[k] || 0) + r.deathShare[k];

@@ -274,8 +274,11 @@ combat multiplier with no actual feast behind it. The replacement, in Steve's
 design:
 
 - **TIMED BUFF, not a strike trigger.** The feast grants a buff window that
-  ends at the next dawn. During the window, strikes AND abilities benefit.
-  Visible countdown, honest copy ("feasted until dawn"), expires cleanly.
+  ends at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast
+  buys the night plus the full next day; longsim winpath r3 measured the
+  1-dawn window expiring before a fight could be found). During the window,
+  strikes AND abilities benefit. Visible countdown, honest copy
+  ("feasted until tomorrow's dawn"), expires cleanly.
 - **FEASTED ABILITY VARIANTS — almost evolved forms.** The known ability,
   temporarily evolved: a GENERIC feasted-form modifier framework (feastBuff.js)
   — uplift (damage/effect scaling) + one wacky twist where the fiction
@@ -303,6 +306,7 @@ resonance / 300 bank numbers were picked, not calibrated):
 
 | Lever | Default | What turning it does |
 |---|---|---|
+| `durationNights` | 2 | buff window in dawns — 1 was too tight (feast lands with no ticks left to find a fight); 2 buys the night + next day |
 | `qualityUplift` | {0: 1.2, 1: 1.35, 2: 1.5} | the quality lane — the feast's main dial |
 | `surgeDefault` | 1.5 | fallback for truthy non-numeric arming (old saves) |
 | effective mult | qualityUplift × devotion surge | devotion: 1.5 base, 2.25 chosen keepsake, 3.0 wedding ring |

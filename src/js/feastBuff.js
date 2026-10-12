@@ -1,6 +1,6 @@
 // @ontology
 // system: feastSurge
-// description: Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the next dawn. During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
+// description: Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build carefully"). Replaces the retired on-strike feastBurn trigger: a feast grants a buff window that decays at the durationNights-th dawn (2 dawns from 2026-10-12 — a dusk feast buys the night plus the full next day). During the window, strikes AND ability resolutions read the feasted multiplier. The devotion arming (scholar.prog.feastSurge) is the gate — the buff only grants when armed.
 // provides:
 //   - grantFeastBuff(feast)
 //   - feastedActive()
@@ -14,7 +14,7 @@
 //   - feastSurgeCfg()
 // rules:
 //   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
-//   - timed_not_trigger: the buff is a window until next dawn, never an on-strike burn (code: grantFeastBuff, feastedActive)
+//   - timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 //   - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
 //   - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
 //   - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
@@ -42,6 +42,7 @@
         const b = d.buff || {};
         return {
           duration: b.duration || 'until_next_dawn',
+          durationNights: b.durationNights || 2,
           partsPerDay: b.partsPerDay || 4,
           qualityNames: Object.assign(
             { 0: 'a simple feast', 1: 'a proper feast', 2: 'a legendary spread' },
@@ -55,7 +56,7 @@
         };
       } catch (e) {
         return {
-          duration: 'until_next_dawn', partsPerDay: 4,
+          duration: 'until_next_dawn', durationNights: 2, partsPerDay: 4,
           qualityNames: { 0: 'a simple feast', 1: 'a proper feast', 2: 'a legendary spread' },
           qualityUplift: { 0: 1.2, 1: 1.35, 2: 1.5 }, surgeDefault: 1.5,
           feastMinimums: { minFeastKcal: 1500, minGuests: 3 },
@@ -106,7 +107,12 @@
         const arcNote = arcBurn > 1 ? ' Arc IV burns hotter.' : '';
         const effMult = (uplift, sg) => Math.round(uplift * sg * arcBurn * 100) / 100;
         const day = s.day || 0;
-        const untilDay = day + 1, untilPart = 0; // next dawn, always
+        // LONGSIM WINPATH R3 (2026-10-12): the window is durationNights dawns,
+        // not one. A feast lands in the evening with no ticks left to find a
+        // fight; the next day's hunt must count. Data lever in feast-surge.json.
+        const nights = Math.max(1, cfg.durationNights || 1);
+        const untilDay = day + nights, untilPart = 0; // the Nth dawn, always
+        const dawnWord = nights === 1 ? 'dawn' : "tomorrow's dawn";
         const existing = this.feastedBuffState();
         if (existing) {
           // REFEAST = REFRESH (design call 2026-10-10): the window extends to
@@ -123,7 +129,7 @@
           existing.untilDay = untilDay;
           existing.untilPart = untilPart;
           const parts = Math.max(1, (untilDay - day) * cfg.partsPerDay - this.dayPart);
-          this.say(`🍖 The feast carries you on — the fire is stoked higher, not doubled. FEASTED ×${existing.mult} until dawn (${parts} ${parts === 1 ? 'part' : 'parts'} left): ${cfg.qualityNames[nq]}.${arcNote} (Re-feast refreshes; it never stacks.)`);
+          this.say(`🍖 The feast carries you on — the fire is stoked higher, not doubled. FEASTED ×${existing.mult} until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left): ${cfg.qualityNames[nq]}.${arcNote} (Re-feast refreshes; it never stacks.)`);
           try { this.save(); } catch (e) {}
           return { granted: true, refreshed: true, mult: existing.mult, untilDay, untilPart, quality: nq };
         }
@@ -136,7 +142,7 @@
         };
         const parts = Math.max(1, (untilDay - day) * cfg.partsPerDay - this.dayPart);
         const devNote = surge > 1 ? ` A channeled keepsake feeds the flames (devotion ×${surge}).` : '';
-        this.say(`🍖 FEASTED ×${mult} until dawn (${parts} ${parts === 1 ? 'part' : 'parts'} left): ${cfg.qualityNames[q]}.${devNote}${arcNote} Strikes and abilities hit with the feast behind them.`);
+        this.say(`🍖 FEASTED ×${mult} until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left): ${cfg.qualityNames[q]}.${devNote}${arcNote} Strikes and abilities hit with the feast behind them.`);
         try { this.save(); } catch (e) {}
         return { granted: true, refreshed: false, mult, untilDay, untilPart, quality: q };
       } catch (e) {
@@ -220,8 +226,10 @@
         const s = this.state.scholar || {};
         const parts = Math.max(0, ((b.untilDay || 0) - (s.day || 0)) * cfg.partsPerDay - this.dayPart);
         const eff = this.feastedMult();
+        const nights = Math.max(1, cfg.durationNights || 1);
+        const dawnWord = nights === 1 ? 'dawn' : "tomorrow's dawn";
         const gnote = (eff < (b.mult || 1)) ? ` <i>(grounding ${((typeof this.groundingTier === 'function') ? this.groundingTier() : '')} — food conversions weaken)</i>` : '';
-        return `FEASTED ×${Math.round(eff * 100) / 100} — strikes & abilities uplifted · until dawn (${parts} ${parts === 1 ? 'part' : 'parts'} left)${gnote}`;
+        return `FEASTED ×${Math.round(eff * 100) / 100} — strikes & abilities uplifted · until ${dawnWord} (${parts} ${parts === 1 ? 'part' : 'parts'} left)${gnote}`;
       } catch (e) { return ''; }
     },
 
