@@ -64,3 +64,30 @@ moment — the ledger states the fact, the System sells the story.
 
 ## Not built (per brief: beats 4+5 only)
 Beats 1/2/3/6 from SCALE-DISCOVERY.md remain future work. No UI changes.
+
+## Retiming 2026-10-12: fire at unlock, not at bar-banked
+**Finding** (evidence/2026-10-12/sim-completion-r1.md): both pointers fired 0
+times in 26 completion runs. The bar-banked trigger was a nearly unreachable
+window — scale-seekers are regional before banking 4 wave-3 points (pointer
+correctly silent), non-seekers die in wave-3 combat first. The stuck moment is
+at WAVE-3 UNLOCK, not after clearing it.
+
+**Change** (game.js `checkScalePointers`, same copy/flags/gates):
+- Beat 4: fires when wave 3 UNLOCKS (`unlockedWave() >= 3 && < 4`) and
+  scaleRank < regional. Was: wave-3 bar banked.
+- Beat 5: fires when wave 4 UNLOCKS (`>= 4 && < 5`) and regional but <
+  national. Was: wave-4 bar banked.
+- Rationale: the discoverability question ("what's next?") arises the moment
+  a new wave lands. Gates themselves unchanged.
+
+**Proof** (scripts/test-scale-pointers-20261012.js rewritten for unlock timing):
+19/19 — RED control, beat 4 fires at wave-3 unlock below regional, silent when
+already regional / when bar banked but wave not unlocked (day floor) / when
+wave 3 not close, once-only, echo fires at dawn with living speaker, echo
+skipped when regional overnight, beat 5 fires at wave-4 unlock below national,
+silent when already national / after wave 5 live, once-only, knowledge gates
+(no "Mirror Draft", no "meet the Producers"), no mechanics-voice, ledger
+scale-awareness unchanged.
+
+**Regressions:** dialog-coherence 37/37, gossip-norepeat 17/17,
+reach-wavebeat 8/8, ontology 84/84 (ONTOLOGY.md regenerated).

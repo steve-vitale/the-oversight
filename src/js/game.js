@@ -33,7 +33,7 @@
 //   - tbTerrainCost(x, y) -> 1 | 2 (difficult terrain costs double)
 //   - modIs(m) (wave-2 apex id gate: the Moderator)
 //   - modVerbBlocked(verb) (mute enforcement at the player choke points)
-//   - checkScalePointers(), scalePointerW4(), scalePointerW5(), scalePointerEcho() (scale discoverability beats 4+5: forward pointers when wave kills are banked but the stage is too small)
+//   - checkScalePointers(), scalePointerW4(), scalePointerW5(), scalePointerEcho() (scale discoverability beats 4+5: forward pointers when a new wave lands and the stage is too small)
 //   - modProjectField(m, r, type) (suppression field projection, follows the monster)
 //   - sleepQuality()
 //   - sleepPreview()
@@ -27062,24 +27062,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // checkScalePointers: the reactive check for beats 4+5 (SCALE-DISCOVERY.md,
     // Steve 2026-10-12). The wave gates are scale-gated (wave 4 needs regional,
     // wave 5 needs national — unlockedWave), but nothing ever told the player.
-    // Fires each pointer ONCE, the first time the kills are banked and the
-    // stage is too small. Catches up old saves on the next kill (the once-only
-    // flags live on state, so a bar filled before this feature still points).
+    // Fires each pointer ONCE, at the unlock — the discoverability question
+    // ("what's next?") arises the moment a new wave lands, not after its kill
+    // bar fills. (Retimed 2026-10-12: the bar-banked trigger was a nearly
+    // unreachable window — scale-seekers are regional before banking 4 wave-3
+    // points, non-seekers die in wave-3 combat first. 0 firings in 26
+    // completion sims — evidence/2026-10-12/sim-completion-r1.md.) Catches up
+    // old saves on the next unlock check (the once-only flags live on state).
     // Exception-guarded: pointers never break unlocks.
     checkScalePointers() {
       try {
         const st = this.state || {};
         const rank = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
-        const cfg = (typeof this.waveLedgerCfg === 'function') ? this.waveLedgerCfg() : null;
-        const bar = (w, dflt) => ((cfg && cfg.barsPerWave && cfg.barsPerWave[w]) || dflt);
-        const pts = (w) => ((typeof this.waveLedgerPoints === 'function') ? (this.waveLedgerPoints(w) | 0) : 0);
-        // Beat 4: wave-3's bar is banked but Haven is still one fire.
-        if (!st._scalePtrW4 && pts(3) >= bar(3, 4) && !this.scaleAtLeast(rank, 'regional') && this.unlockedWave() < 4) {
+        const uw = this.unlockedWave();
+        // Beat 4: wave 3 has landed but Haven is still one fire.
+        if (!st._scalePtrW4 && uw >= 3 && uw < 4 && !this.scaleAtLeast(rank, 'regional')) {
           st._scalePtrW4 = true;
           this.scalePointerW4();
         }
-        // Beat 5: wave-4's bar is banked, a region held, but no nation yet.
-        if (!st._scalePtrW5 && pts(4) >= bar(4, 3) && this.scaleAtLeast(rank, 'regional') && !this.scaleAtLeast(rank, 'national') && this.unlockedWave() < 5) {
+        // Beat 5: wave 4 has landed, a region held, but no nation yet.
+        if (!st._scalePtrW5 && uw >= 4 && uw < 5 && this.scaleAtLeast(rank, 'regional') && !this.scaleAtLeast(rank, 'national')) {
           st._scalePtrW5 = true;
           this.scalePointerW5();
         }
@@ -27147,7 +27149,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let waveAfter = 1;
       try { waveAfter = this.unlockedWave(); } catch (e) { return; }
       // SCALE POINTERS (beats 4+5, SCALE-DISCOVERY.md 2026-10-12): forward
-      // beats when the kills are banked but the stage is too small. Checked
+      // beats when a new wave lands and the stage is too small. Checked
       // here — every kill, every unlock check — so the early returns below
       // (no new unlock) never skip it. Reactive, never a timer.
       try { this.checkScalePointers(); } catch (e) {}
