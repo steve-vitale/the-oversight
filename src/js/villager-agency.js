@@ -796,9 +796,9 @@
         }
         var lineText = null;
         if (taughtMid) {
-          var mwhat = 'that thing';
-          try { mwhat = this.monsterDisplayName(taughtMid); } catch (e2) {}
-          lineText = `"The ${mwhat} — the tracks, the sound it makes before it moves, where not to stand. That's the one that matters. Ask me again sometime, there's more."`;
+          // PER-MONSTER LESSON (journey establishment r6 2026-10-12): the
+          // teacher's real tell, not the old generic template.
+          lineText = this.agencyMonsterLessonLine(taughtMid);
         } else if (taughtPlant) {
           lineText = `"This one — ${taughtPlant}. Leaf, stem, smell. You won't forget it now."`;
         } else if (taughtPlace) {
@@ -1061,6 +1061,75 @@
       try { this.recordDeed(teacherVid, 'taught', deedText, 1); } catch (e) {}
       return { taught: true, learner: learnerVid, plant: pid, plantName: pname, need: need };
     },
+    // agencyMonsterLessonLine: per-monster field lessons (journey
+    // establishment r6 2026-10-12). The old path spoke ONE generic template
+    // for every species ("the tracks, the sound it makes before it moves,
+    // where not to stand") — and agencyTeachMonster's narrator beat repeated
+    // the same template, so a single teach doubled it, and five teaches were
+    // five copies with a swapped name. Lessons now teach the monster's real
+    // tell: the first sentence of its primary-attack telegraph (data), plus
+    // when it hunts. Counter TRICKS stay knowledge-gated (discoverMonster-
+    // Counter / the beasttricks topic — slain types only): a field lesson
+    // teaches 'observed'-level knowledge — what it looks like right before
+    // it moves, and when it's out. Deterministic per species (hashed by mid)
+    // so the village's knowledge is consistent no matter who teaches it.
+    agencyMonsterLessonLine(mid) {
+      var mdef = null;
+      try { mdef = (this.data.monsters || []).find(function (m) { return m.id === mid; }); } catch (e) {}
+      var noun = 'something';
+      try { noun = (this.monsterNoun && this.monsterNoun(mid)) || 'something'; } catch (e2) {}
+      noun = String(noun);
+      // PROSE DESCRIPTORS aren't noun phrases (union_rep's "a clipboard. a
+      // bullhorn. a sense of grievance.", heckler's laughing-dark sentence):
+      // a terminator with more text after it means the descriptor is a
+      // sentence, not a name — the lesson falls back to 'something' rather
+      // than mangling prose into grammar. monsterNoun already returns
+      // 'something' for these; no monsterDisplayName fallback (its raw prose
+      // is exactly what breaks composition).
+      if (/[.!?…]\s*\S/.test(noun)) noun = 'something';
+      var Name = noun.charAt(0).toUpperCase() + noun.slice(1);
+      // sentence-safe tell: first sentence of the primary attack's telegraph
+      var tell = null;
+      try {
+        var at = ((mdef && (mdef.attacks || [])) || [])[0] || (mdef && mdef.attack) || null;
+        var tg = String((at && at.telegraph) || '').trim();
+        if (tg) {
+          tell = tg.split(/(?<=[.!?…])\s/)[0].trim();
+          // union_rep's first "sentence" is an unterminated shout
+          // ("'BROTHERS!") — drop a dangling leading quote so spoken
+          // dialogue stays clean.
+          var qn = (tell.match(/'/g) || []).length + (tell.match(/"/g) || []).length;
+          if (qn % 2 === 1) tell = tell.replace(/^['"]/, '');
+          // long tells (nevermore) get capped at a word boundary
+          if (tell.length > 110) {
+            var cut = tell.slice(0, 110);
+            var sp = cut.lastIndexOf(' ');
+            tell = (sp > 40 ? cut.slice(0, sp) : cut).replace(/[,.—–-]$/, '') + '…';
+          }
+          if (tell && !/[.!?…]$/.test(tell)) tell += '.';
+        }
+      } catch (e4) { tell = null; }
+      var act = (mdef && mdef.activity) || '';
+      var when = '';
+      if (act === 'nocturnal') when = 'It hunts at night — give the dark a wide berth.';
+      else if (act === 'diurnal') when = 'It hunts by day — watch the open ground.';
+      else if (act === 'crepuscular') when = 'Dawn and dusk, that\'s when it\'s out.';
+      var hh = 0, ms = String(mid);
+      for (var i = 0; i < ms.length; i++) hh = (hh * 31 + ms.charCodeAt(i)) >>> 0;
+      var tail = when || 'Give it room. That\'s the whole lesson.';
+      var line = null;
+      if (tell) {
+        var tellCap = tell.charAt(0).toUpperCase() + tell.slice(1);
+        var v = hh % 3;
+        if (v === 0) line = `"${Name} — ${tell} ${tail}"`;
+        else if (v === 1) line = `"${tellCap} That's the ${noun} telling you it's about to move. ${tail}"`;
+        else line = `"Watch for this: ${tell} ${Name}, every time. ${tail}"`;
+      }
+      // FALLBACK (no telegraph data): the old generic template, honestly
+      // framed as the teacher's own words, not data the village doesn't have.
+      if (!line) line = `"The ${Name} — the tracks, the sound it makes before it moves, where not to stand. That's the one that matters. Ask me again sometime, there's more."`;
+      return line;
+    },
     // agencyTeachMonster: one fought species, taught honestly. Lands as
     // 'observed' (never downgrades 'slain') — the village-name gate opens
     // the way talk opens it. Returns the species id or null.
@@ -1072,9 +1141,16 @@
       if (e.stage !== 'slain') e.stage = 'observed';
       var nm = '';
       try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; } // firstRef: never bare "A" for stranger descriptors
+      // FRAMING BEAT (journey establishment r6 2026-10-12): this used to
+      // repeat the lesson's generic template verbatim ("the tracks, the
+      // sound it makes before it moves, where not to stand") — the same
+      // words the villager then speaks. The narrator now only frames the
+      // moment and records the codex effect; the lesson itself is spoken
+      // once, per-monster, by the teacher.
       var what = '';
-      try { what = this.monsterDisplayName(mid); } catch (err) { what = 'that thing'; }
-      this.say(`📖 ${nm} walks you through it — the tracks, the sound it makes before it moves, where not to stand. "${what}" — you'll know it next time. (Monster codex: observed.)`);
+      try { what = (this.monsterNoun && this.monsterNoun(mid)) || 'that thing'; } catch (err) { what = 'that thing'; }
+      var art = /^[A-Z]/.test(what) ? '' : 'the ';
+      this.say(`📖 ${nm} walks you through ${art}${what}. (Monster codex: observed.)`);
       return mid;
     },
 

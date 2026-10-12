@@ -115,22 +115,27 @@
         const liters = Math.max(0, Math.round(need.water || 0));
         const hh = this.convoFavorHash(vid, ctx);
         const openers = [
-          `"The cistern's nearly dry \u2014 ${liters} liters left."`,
-          `"We're down to ${liters} liters of clean water."`,
-          `"Water's almost gone \u2014 ${liters} liters."`,
+          `The cistern's nearly dry \u2014 ${liters} liters left.`,
+          `We're down to ${liters} liters of clean water.`,
+          `Water's almost gone \u2014 ${liters} liters.`,
         ];
         const asks = [
           `I need someone to haul water with me at first light. Two of us, half the trips. Will you come?`,
           `Haul the creek with me at dawn? Two buckets each, there and back.`,
           `I can't carry enough alone. First light, the creek, you and me?`,
         ];
-        const line = openers[hh % 3] + ' ' + asks[(hh >>> 2) % 3];
+        // SPOKEN AS ONE (journey establishment r6 2026-10-12): the ask used
+        // to be glued on OUTSIDE the quotes ("..." I can't carry enough
+        // alone...) — the player couldn't tell what was spoken vs. narrated.
+        // The ask IS the favor; it's spoken, so it lives inside the quotes
+        // like every sibling favor's line.
+        const line = '"' + openers[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
         const whyBits = [
-          `"${liters} liters. That's today's drinking water, and then we're boiling creek water and hoping."`,
-          `"Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water."`,
-          `"I checked the cistern three times hoping I misread it. ${liters} liters."`,
+          `${liters} liters. That's today's drinking water, and then we're boiling creek water and hoping.`,
+          `Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water.`,
+          `I checked the cistern three times hoping I misread it. ${liters} liters.`,
         ];
-        const whyLine = whyBits[(hh >>> 1) % 3] + ` The creek's a twenty-minute walk \u2014 with two of us it's one trip, not three.`;
+        const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ` The creek's a twenty-minute walk \u2014 with two of us it's one trip, not three.` + '"';
         return {
           task: `haul water from the creek at first light with ${ctx.name}`,
           short: 'the creek water run',
