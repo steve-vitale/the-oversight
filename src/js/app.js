@@ -1461,7 +1461,9 @@
     const isMe = (cx === px && cy === py);
     const mon = (typeof Game.playerMonster === 'function') ? Game.playerMonster() : Game.state.scholar.monster;
     const ani = Game.state.scholar.animal;
-    const isMon = mon && cx === mon.mx && cy === mon.my;
+    // MULTI-TILE (Steve 2026-10-12): the popup belongs to the whole body.
+    let isMon = false;
+    try { isMon = !!(mon && Game.targetCovers({ cx: mon.mx, cy: mon.my, tiles: Game.fighterTiles(mon) }, cx, cy)); } catch (e) { isMon = !!(mon && cx === mon.mx && cy === mon.my); }
     const isAni = ani && cx === ani.mx && cy === ani.my;
     // VILLAGER AT THIS CELL: villagers wander the grid (see ensureVillagerPositions).
     let villagerId = null;
@@ -2079,12 +2081,30 @@
 
   function targetingCells() {
     if (!targeting) return new Set();
-    return new Set(targeting.targets.map(t => t.cx + ',' + t.cy));
+    // MULTI-TILE (Steve 2026-10-12): every occupied tile highlights.
+    const s = new Set();
+    for (const t of targeting.targets) {
+      const tiles = t.tiles || [[t.cx, t.cy]];
+      for (const [x, y] of tiles) s.add(x + ',' + y);
+    }
+    return s;
+  }
+
+  // MULTI-TILE (Steve 2026-10-12): target entries carry the fighter's whole
+  // footprint so every occupied tile is tappable and highlights.
+  function monsterTargets(list) {
+    return (list || []).map(m => {
+      let tiles = null;
+      try { tiles = Game.fighterTiles(m); } catch (e) {}
+      return { key: m.key, cx: m.mx, cy: m.my, label: m.name, tiles: tiles || [[m.mx, m.my]] };
+    });
   }
 
   function pickTarget(cx, cy) {
     if (!targeting) return false;
-    const t = targeting.targets.find(x => x.cx === cx && x.cy === cy);
+    // MULTI-TILE (Steve 2026-10-12): tapping ANY occupied tile picks the
+    // fighter — the matcher tests the whole footprint, not just the anchor.
+    const t = targeting.targets.find(x => { try { return Game.targetCovers(x, cx, cy); } catch (e) { return x.cx === cx && x.cy === cy; } });
     if (!t) return false; // tapped elsewhere — ignore, don't cancel (explicit ✕ cancels)
     const cb = targeting.onPick;
     targeting = null;
@@ -15408,7 +15428,11 @@
         // monster/animal? popup — you don't stroll through a boar.
         const mon = (typeof Game.playerMonster === 'function') ? Game.playerMonster() : Game.state.scholar.monster;
         const ani = Game.state.scholar.animal;
-        if ((mon && mon.mx === cx && mon.my === cy) || (ani && ani.mx === cx && ani.my === cy)) {
+        // MULTI-TILE (Steve 2026-10-12): tapping ANY tile of a big monster's
+        // body opens its popup — the whole body is the monster.
+        let monHit = false;
+        try { monHit = !!(mon && Game.targetCovers({ cx: mon.mx, cy: mon.my, tiles: Game.fighterTiles(mon) }, cx, cy)); } catch (e) { monHit = !!(mon && mon.mx === cx && mon.my === cy); }
+        if (monHit || (ani && ani.mx === cx && ani.my === cy)) {
           cellPopup(cx, cy); return;
         }
         // someone here? (villagers never block pathing — only terrain does.)
@@ -16485,12 +16509,12 @@
       if (!tf || !Game.turtleIs) return;
       const p = Game.tbFighter('p');
       const cands = tf.fighters.filter(x => Game.turtleIs(x) && x.alive && !x.fled
-        && Math.max(Math.abs(x.mx - p.mx), Math.abs(x.my - p.my)) <= 1);
+        && Game.fighterDistTo(x, p.mx, p.my) <= 1);
       if (!cands.length) return;
       if (cands.length === 1) { Game.tbPlayerFlip(cands[0].key); rerender(); return; }
       enterTargeting({
         prompt: '🐢 Flip which?',
-        targets: cands.map(m => ({ key: m.key, cx: m.mx, cy: m.my, label: m.name })),
+        targets: monsterTargets(cands),
         onPick: (t) => { Game.tbPlayerFlip(t.key); rerender(); },
       });
     });
@@ -16543,7 +16567,7 @@
       if (hostiles.length === 1) { showTalkRow(hostiles[0].key); return; }
       enterTargeting({
         prompt: '💬 Talk to whom?',
-        targets: hostiles.map(h => ({ key: h.key, cx: h.mx, cy: h.my, label: h.name })),
+        targets: monsterTargets(hostiles),
         onPick: (t) => { showTalkRow(t.key); },
       });
     });
@@ -16553,12 +16577,12 @@
       const p = Game.tbFighter('p');
       const wr = Game.equippedWeapon ? Game.equippedWeapon().range : 1;
       const adj = tf.fighters.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled
-        && Math.max(Math.abs(x.mx - p.mx), Math.abs(x.my - p.my)) <= wr);
+        && Game.fighterDistTo(x, p.mx, p.my) <= wr);
       if (!adj.length) return;
       if (adj.length === 1) { Game.tbPlayerStrike(adj[0].key); rerender(); return; }
       enterTargeting({
         prompt: '⚔ Strike which?',
-        targets: adj.map(m => ({ key: m.key, cx: m.mx, cy: m.my, label: m.name })),
+        targets: monsterTargets(adj),
         onPick: (t) => { Game.tbPlayerStrike(t.key); rerender(); },
       });
     });
@@ -17011,6 +17035,14 @@
                 for (let _dx = 0; _dx < _msz && !_onTile; _dx++)
                   if (mf.mx + _dx === cx && mf.my + _dy === cy) _onTile = true;
               if (!_onTile) continue;
+              // MULTI-TILE SPAN (Steve 2026-10-12): one body, one sprite. The
+              // sprite draws ONCE on the anchor (top-left) tile and spans the
+              // whole footprint via CSS (.csprite.multitile); the other
+              // occupied tiles stay empty so a 2x2 monster doesn't read as
+              // four copies. The data-ent key stays on the anchor so the move
+              // animator still glides the whole body.
+              const _isAnchor = (mf.mx === cx && mf.my === cy);
+              if (!_isAnchor) { drawn = true; break; }
               // data-ent: stable key so the move animator can glide fighters
               // tile-to-tile instead of teleporting them on re-render.
               // INDISTINCT (Steve 2026-10-05): creatures render the same whether
@@ -17034,7 +17066,12 @@
               // BUFFERING FAINTEST FRAME (r15 CATCH 3): the real present is the
               // faintest frame — dim the token so the bright echoes read as past.
               const _bufDim = (_mid === 'buffering') ? ' style="opacity:.45"' : '';
-              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}>${_hspr || _mspr || esc(mf.emoji || '👹')}</span>`;
+              // MULTI-TILE SPAN (Steve 2026-10-12): the winning sprite spans
+              // the footprint — the CSS scales it to the body size.
+              let _sprInner = _hspr || _mspr || esc(mf.emoji || '👹');
+              if (_msz > 1 && _sprInner.indexOf('csprite') !== -1)
+                _sprInner = _sprInner.replace('class="csprite"', 'class="csprite multitile mts' + _msz + '"');
+              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}>${_sprInner}</span>`;
               cls += ' creature';
               // TITAN FIGHT (Steve 2026-10-11): mark titan cells for ant-vs-titan scaling
               try {
@@ -17043,15 +17080,27 @@
               drawn = true; break;
             }
           }
-          if (!drawn && mon && !_inside && cx === mon.mx && cy === mon.my) {
+          if (!drawn && mon && !_inside && Game.targetCovers({ cx: mon.mx, cy: mon.my, tiles: Game.fighterTiles(mon) }, cx, cy)) {
             const mdef = (Game.data.monsters || []).find(m => m.id === mon.id) || {};
             // INDISTINCT (Steve 2026-10-05): same 'creature' class as animals
             // HUMANOID SPRITES (Steve 2026-10-06): human-like horrors show
             // their calm SVG on the field too.
             const _mhspr = humanoidSpriteHtml(mon.id || mdef.id);
             const _mmspr = monsterSpriteHtml(mon.id || mdef.id, false);
-            g = `<span data-ent="creature:${esc(mon.id || 'wild')}">${_mhspr || _mmspr || esc(mdef.emoji || '👹')}</span>`;
+            // MULTI-TILE SPAN (Steve 2026-10-12): anchor tile draws the one
+            // spanning sprite; the rest of the footprint stays empty.
+            const _fmsz = Game.fighterSize(mon);
+            const _isFAnchor = (mon.mx === cx && mon.my === cy);
+            if (!_isFAnchor) { drawn = true; }
+            else {
+            let _fSprInner = _mhspr || _mmspr || esc(mdef.emoji || '👹');
+            if (_fmsz > 1 && _fSprInner.indexOf('csprite') !== -1)
+              _fSprInner = _fSprInner.replace('class="csprite"', 'class="csprite multitile mts' + _fmsz + '"');
+            else if (_fmsz > 1 && _fSprInner.indexOf('msprite') !== -1)
+              _fSprInner = _fSprInner.replace('class="msprite"', 'class="msprite multitile mts' + _fmsz + '"');
+            g = `<span data-ent="creature:${esc(mon.id || 'wild')}">${_fSprInner}</span>`;
             cls += ' creature'; drawn = true;
+            }
           }
           if (!drawn && ani && cx === ani.mx && cy === ani.my) {
             // INDISTINCT (Steve 2026-10-05): show the correct species emoji —

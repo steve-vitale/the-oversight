@@ -14,6 +14,8 @@
 //   - tbFighter(id)
 //   - tbSnakeLineageKey(m) -> 'snake:<root>' | 'body:<key>' (reward de-dupe: one spawn = one body, split-proof)
 //   - fighterSize(f), fighterTiles(f) (multi-tile occupancy)
+//   - targetCovers(t, cx, cy), fighterDistTo(f, x, y) (multi-tile targeting)
+//   - fieldFitBlock(tx, ty, mx, my, size) (world-spawn footprint validation)
 //   - tbCanOccupy(f, nx, ny) (validated movement: whole-footprint occupancy)
 //   - tbAdvance()
 //   - tbRoundWrap(f) (shared round wrap: order re-sort, ROUND call, belltoad chorus arrivals — sync + stepped-async)
@@ -81,6 +83,7 @@
 //   - moderator_phases: observing -> muting -> shadowban (code: tbMonsterTurn)
 //   - multitile_occupancy: size 2 = 2x2 block, mx,my is top-left (code: fighterTiles)
 //   - multitile_validation: all tiles walkable before each move (code: tbCanOccupy)
+//   - multitile_targeting: every occupied tile is tappable/highlightable (code: targetCovers, monsterTargets in app.js); reach measured from the whole body (code: fighterDistTo); world spawn fits the block (code: fieldFitBlock)
 //   - map_is_seen_only: world map displays only visited + map-shared tiles; unvisited renders blank (code: mapSeen, Steve 2026-10-06)
 //   - map_shared_detail: 'shared' tiles render as biome color only, never full TileScenes/emoji detail (code: renderMap, Steve 2026-10-07; re-broken + restored break-it travel r4 2026-10-09)
 //   - map_depletion_fog: tile depletion styling requires seen (visited or shared); a fogged tile never renders picked-clean/barren (code: renderMap, break-it travel r4 2026-10-09)
@@ -16629,10 +16632,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ? ((this.data.monsters || []).find(m => m.id === id) || {})
         : (mdef || {});
       const baseHp = (full.hp && full.hp[0]) || 20;
+      let mx = (opts.mx !== undefined) ? opts.mx : Math.floor(Math.random() * 9);
+      let my = (opts.my !== undefined) ? opts.my : Math.floor(Math.random() * 9);
+      // MULTI-TILE (Steve 2026-10-12): a size-N world monster needs its whole
+      // N×N block walkable — never spawn overlapping walls, water, or Haven
+      // structures. Nearest fitting block to the requested anchor wins.
+      const msize = Math.max(1, Math.min(3, full.size || 1));
+      if (msize > 1) {
+        try {
+          const fit = this.fieldFitBlock(tx, ty, mx, my, msize);
+          if (fit) { mx = fit[0]; my = fit[1]; }
+        } catch (e) {}
+      }
       const mon = {
         id, tx, ty,
-        mx: (opts.mx !== undefined) ? opts.mx : Math.floor(Math.random() * 9),
-        my: (opts.my !== undefined) ? opts.my : Math.floor(Math.random() * 9),
+        mx, my,
+        size: msize, // MULTI-TILE (Steve 2026-10-12): fighterTiles reads f.size
         hp: (opts.hp !== undefined) ? opts.hp : baseHp,
         maxHp: (opts.maxHp !== undefined) ? opts.maxHp : baseHp,
         stance: opts.stance || null,
@@ -16649,6 +16664,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.touchTileScene(tx, ty);
       this.syncMonsterAlias();
       return mon;
+    },
+    // fieldFitBlock(tx, ty, mx, my, size): nearest size×size walkable block
+    // to (mx,my) on world tile (tx,ty), top-left coords — or null when no
+    // block fits. Pure w.r.t. the tile detail; node-testable.
+    fieldFitBlock(tx, ty, mx, my, size) {
+      const detail = this.genDetail(tx, ty);
+      const fits = (bx, by) => {
+        for (let dy = 0; dy < size; dy++) for (let dx = 0; dx < size; dx++) {
+          const x = bx + dx, y = by + dy;
+          if (x < 0 || x > 8 || y < 0 || y > 8) return false;
+          const cell = detail[y] && detail[y][x];
+          if (!cell || this.cellProps(cell).blocks) return false;
+        }
+        return true;
+      };
+      if (fits(mx, my)) return [mx, my];
+      let best = null, bestD = 1e9;
+      for (let by = 0; by <= 9 - size; by++) for (let bx = 0; bx <= 9 - size; bx++) {
+        if (!fits(bx, by)) continue;
+        const d = Math.abs(bx - mx) + Math.abs(by - my);
+        if (d < bestD) { bestD = d; best = [bx, by]; }
+      }
+      return best;
     },
     removeWorldMonster(m) {
       if (!m) { this.syncMonsterAlias(); return; }
@@ -29390,7 +29428,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return false;
       }
       const w = this.equippedWeapon();
-      const d0 = Math.max(Math.abs(t.mx - p.mx), Math.abs(t.my - p.my));
+      // MULTI-TILE (Steve 2026-10-12): reach is measured from the target's
+      // whole body — any tile of a big monster in range is a hittable monster.
+      const d0 = this.fighterDistTo(t, p.mx, p.my);
       if (d0 > w.range) {
         this.say(w.unarmed
           ? `Too far to reach. (unarmed: range 1)`
@@ -31301,6 +31341,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (let dx = 0; dx < s; dx++)
           tiles.push([f.mx + dx, f.my + dy]);
       return tiles;
+    },
+    // MULTI-TILE TARGETING (Steve 2026-10-12): every occupied tile of a
+    // fighter is a valid tap target for it. Target entries carry `tiles`
+    // (built via fighterTiles at construction); the tap matcher tests all
+    // of them, so tapping any part of a big monster targets the monster.
+    // Pure function — node-testable.
+    targetCovers(t, cx, cy) {
+      if (!t) return false;
+      const tiles = t.tiles || [[t.cx, t.cy]];
+      for (const [x, y] of tiles) if (x === cx && y === cy) return true;
+      return false;
+    },
+    // Minimum Chebyshev distance from fighter f's whole body to point (x,y).
+    // A big monster is in reach if ANY of its tiles is.
+    fighterDistTo(f, x, y) {
+      let best = Infinity;
+      try {
+        for (const [tx, ty] of this.fighterTiles(f)) {
+          const d = Math.max(Math.abs(tx - x), Math.abs(ty - y));
+          if (d < best) best = d;
+        }
+      } catch (e) { best = Math.max(Math.abs(f.mx - x), Math.abs(f.my - y)); }
+      return best;
     },
     // Can fighter f occupy the size×size block with top-left at (nx, ny)?
     // Validates ALL tiles are in-bounds and walkable — a 2x2 monster never
