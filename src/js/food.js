@@ -276,8 +276,42 @@
     },
 
     hasCuttingTool() {
-      const inv = (this.state.scholar.inventory || []).concat(this.state.scholar.tools || []);
-      return inv.some(i => /knife|machete|sharpened|blade/i.test(String(i.name || '') + ' ' + String(i.recipeId || '')));
+      const s = this.state.scholar || {};
+      const inv = (s.inventory || []).concat(s.tools || []);
+      const re = /knife|machete|sharpened|blade/i;
+      // BONDED RELICS (food r6 2026-10-12): the starting five are identity
+      // objects, not tools — a bonded "Knife roll" is a roll that HOLDS
+      // knives, not a blade. Seed-44 probe: the roll matched /knife/i and
+      // the game believed the scholar was armed for 105 days — zero knap,
+      // zero carcasses cleaned. Bonded items only count when their item def
+      // is a real blade (class weapon/tool): a bonded Chef's knife still
+      // cuts — it's a knife. A Knife roll doesn't.
+      const bladeDef = (id) => {
+        try {
+          const def = (this.data.items || []).find(d => d && d.id === id) || {};
+          return (def.class === 'weapon' || def.class === 'tool') &&
+            re.test(String(def.name || '') + ' ' + String(def.id || ''));
+        } catch (e) { return false; }
+      };
+      const hit = (i) => {
+        if (!i) return false;
+        if (!re.test(String(i.name || '') + ' ' + String(i.recipeId || '') + ' ' + String(i.itemId || ''))) return false;
+        if (i.bonded) return bladeDef(i.itemId);
+        return true;
+      };
+      if (inv.some(hit)) return true;
+      // EQUIPPED (food r6 2026-10-12): a knife worn as a weapon is still a
+      // held cutting tool. The old form only checked pack+tools, so knapping
+      // a knife and equipping it as melee (the competent policy gears up for
+      // the wild) made the game forget the scholar was holding it — sim
+      // seed 11: 27 trap catches, 0 cleaned, the Stone knife equipped the
+      // whole catch season. A held blade cuts meat whether it's in the pack
+      // or in the hand.
+      try {
+        const eq = s.equipped || {};
+        for (const k of Object.keys(eq)) { if (hit(eq[k])) return true; }
+      } catch (e) {}
+      return false;
     },
 
     // ---------- lumped unknowns ----------

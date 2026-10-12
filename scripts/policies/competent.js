@@ -295,21 +295,203 @@ function trySow(Game, ctx) {
   } catch (e) { return false; }
 }
 
+// THE KNIFE IN THE PACK (longsim food r6 2026-10-12): sim scholars start
+// knifeless and stone never meets vine in the pack — the trapline's catches
+// rot uncleaned (r5: 56 catches, ~1 cleaned). This is a materials-gathering
+// BEHAVIOR blank, not a game bug: a real player prioritizing the line
+// gathers the stone. The competent policy now does too:
+//
+//   - knifeNeeded: the trigger — uncleaned carcasses in the pack, trap
+//     materials held (with the snare known), or actively traplining.
+//   - keepKnife (camp ritual, before workTrapline): knap the universal
+//     stone knife FIRST (everyone's L3 — the game's own knifeless message
+//     points at it: stone + vine, 85%, durable), so the knife wins the
+//     pack's vine before snare crafts eat it. Once knapped the knife is
+//     held durably — this fires ~once per life.
+//   - the trip: when the knife is needed and stone is the missing half, a
+//     rubble-choked path is roadwork, not a detour — clear it (a day-part,
+//     40 kcal, 1-3 real stone), then walk in. When vine is the missing
+//     half, prefer revealed vine-rich ground (thickets).
+// Env gate COMPETENT_KEEP_KNIFE=0 restores the exact old behavior for
+// identical-seed before/after.
+function packMat(Game, m) {
+  try {
+    return ((Game.state.scholar || {}).inventory || [])
+      .filter(i => i && i.material === m).reduce((t, i) => t + (i.units || 0), 0);
+  } catch (e) { return 0; }
+}
+function knifeNeeded(Game, ctx) {
+  try {
+    if (Game.hasCuttingTool && Game.hasCuttingTool()) return false;
+    const inv = (Game.state.scholar || {}).inventory || [];
+    if (inv.some(i => i && i.foodState === 'carcass')) return true; // uncleaned carcasses
+    const snareKnown = (((Game.state.codex || {}).recipes || {}).snare || {}).level >= 1;
+    if (snareKnown && (packMat(Game, 'vine') >= 1 || packMat(Game, 'stick') >= 1)) return true; // holds trap materials
+    if ((ctx.trapsCrafted || 0) > 0 || (ctx.trapsSet || 0) > 0 || (ctx.trapsWireSet || 0) > 0) return true; // actively traplining
+    return false;
+  } catch (e) { return false; }
+}
+function knifeWantsStone(Game, ctx) {
+  return knifeNeeded(Game, ctx) && packMat(Game, 'stone') < 1;
+}
+function knifeWantsVine(Game, ctx) {
+  return knifeNeeded(Game, ctx) && packMat(Game, 'stone') >= 1 && packMat(Game, 'vine') < 1;
+}
+// hop-by-hop honest walk toward (hx,hy): one travelTo per hop, no force,
+// bounded. travelTargets only reaches d<=3, so a single travelTo can't
+// cross the map — walk it like a player would.
+function walkTo(Game, hx, hy) {
+  try {
+    let guard = 0;
+    while ((Game.map.px !== hx || Game.map.py !== hy) && guard++ < 10 && !Game.over && !Game.tbfight) {
+      let best = null, bd = 1e9;
+      for (const tt of (Game.travelTargets() || [])) {
+        const d = Math.abs(tt.x - hx) + Math.abs(tt.y - hy);
+        if (d < bd) { bd = d; best = tt; }
+      }
+      if (!best) break;
+      const px0 = Game.map.px, py0 = Game.map.py;
+      try { Game.travelTo(best.x, best.y); } catch (e) { break; }
+      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+    }
+  } catch (e) {}
+}
+// nearest rubble-choked path in travel reach (from the player's tile)
+function nearestRubble(Game) {
+  let best = null;
+  try {
+    for (const tt of (Game.travelTargets() || [])) {
+      let b = null;
+      try { b = Game.travelBlockage(tt.x, tt.y); } catch (e) {}
+      if (!b || b.blockType !== 'rubble') continue;
+      if (!best || tt.d < best.d) best = { x: tt.x, y: tt.y, d: tt.d };
+    }
+  } catch (e) {}
+  return best;
+}
+// nearest unrevealed tile on the map (the expedition's frontier)
+function nearestUnknown(Game) {
+  try {
+    const px = Game.map.px, py = Game.map.py;
+    let ux = -1, uy = -1, ud = 1e9;
+    for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+      if (x === px && y === py) continue;
+      const t = Game.tileAt(x, y);
+      if (!t || t.revealed) continue;
+      const d = Math.abs(x - px) + Math.abs(y - py);
+      if (d < ud) { ud = d; ux = x; uy = y; }
+    }
+    return ux < 0 ? null : { x: ux, y: uy };
+  } catch (e) { return null; }
+}
+// Walk to the rubble's guarded side and clear it — the blockage card's own
+// honest path (a day-part, 40 kcal, 1-3 stone into the pack). The guarded
+// side is (bx+bf.dx, by+bf.dy): blockFrom.dx/dy is the direction you'd be
+// coming FROM to enter the tile. Returns true when the rubble was cleared.
+function clearRubbleForStone(Game, ctx, bx, by) {
+  try {
+    const t = Game.tileAt(bx, by);
+    const bf = t && t.blockFrom;
+    if (!bf || bf.type !== 'rubble') return false;
+    const sx = bx + (bf.dx || 0), sy = by + (bf.dy || 0);
+    if (sx < 0 || sy < 0 || sx > 8 || sy > 8) return false;
+    if (Game.map.px !== sx || Game.map.py !== sy) {
+      try { Game.travelTo(sx, sy); } catch (e) { return false; } // honest walk, no force
+      if (Game.over || Game.tbfight) return false;
+      if (Game.map.px !== sx || Game.map.py !== sy) return false;
+    }
+    const before = packMat(Game, 'stone');
+    try { Game.clearBlockage(bx, by); } catch (e) { return false; }
+    const gained = packMat(Game, 'stone') - before;
+    ctx.rubbleCleared = (ctx.rubbleCleared || 0) + 1;
+    if (gained > 0) ctx.stoneFromRubble = (ctx.stoneFromRubble || 0) + gained;
+    return true;
+  } catch (e) { return false; }
+}
+function keepKnife(Game, ctx) {
+  if (process.env.COMPETENT_KEEP_KNIFE === '0') return; // before/after harness gate
+  try {
+    if (!knifeNeeded(Game, ctx)) return;
+    // KNAP FIRST: stone + vine → the universal stone knife. Runs before
+    // workTrapline's snare crafts in daily() so the durable knife wins the
+    // vine race. The 15% fail is real: materials already consumed by craft().
+    if (packMat(Game, 'stone') >= 1 && packMat(Game, 'vine') >= 1) {
+      try {
+        if (Game.craft('stone_knife')) ctx.knivesKnapped = (ctx.knivesKnapped || 0) + 1;
+        else ctx.knapFailed = (ctx.knapFailed || 0) + 1;
+      } catch (e) {}
+    }
+  } catch (e) {}
+}
+// STONE RUN (food r6): when the knife needs its stone half, a competent
+// trapper makes a DELIBERATE detour to the nearest rubble-choked path —
+// roadwork, not luck. (The forage trip's opportunistic clearing only fires
+// when a blocked tile surfaces in the trip rotation, which ~never happens:
+// 12-seed probe showed rubble=0 everywhere. A real player prioritizing the
+// line walks to the rubble on purpose.) Scans travel reach for rubble,
+// clears the nearest (a day-part, 40 kcal, 1-3 real stone), walks home.
+// Fires at most until stone≥1 — then knifeWantsStone goes false.
+function stoneRun(Game, ctx) {
+  if (process.env.COMPETENT_KEEP_KNIFE === '0') return; // before/after harness gate
+  try {
+    if (!knifeWantsStone(Game, ctx)) return;
+    const hx = Game.map.px, hy = Game.map.py;
+    // 1. known roads first
+    let best = nearestRubble(Game);
+    // 2. EXPEDITION (food r6): rubble is ~8% of wild tiles and the player
+    //    only knows the roads they've walked — the scan above is fog-honest
+    //    but blind on most seeds (seed 11: 2 rubble tiles, both far from
+    //    haven; the forage trips map the whole neighborhood by day 5). A
+    //    real player needing stone walks the unknown: push the frontier
+    //    (walkTo hops there honestly, real travel costs and encounter risk),
+    //    re-scan at each new ground. Up to 3 pushes/day.
+    let pushes = 0;
+    while (!best && pushes < 3 && !Game.over && !Game.tbfight) {
+      const U = nearestUnknown(Game);
+      if (!U) break;
+      walkTo(Game, U.x, U.y);
+      pushes++;
+      ctx.fogSteps = (ctx.fogSteps || 0) + 1;
+      if (!Game.over && !Game.tbfight) best = nearestRubble(Game);
+    }
+    if (Game.over || Game.tbfight) { walkTo(Game, hx, hy); return; }
+    if (best) {
+      if (clearRubbleForStone(Game, ctx, best.x, best.y))
+        ctx.stoneRuns = (ctx.stoneRuns || 0) + 1;
+    }
+    // walk home whether or not stone was found — never strand the expedition
+    walkTo(Game, hx, hy);
+  } catch (e) {}
+}
+
 // Forage trip that feeds the garden: travel out, forage, travel home. The
 // haul comes home as unidentified lumps (prepStash) — sorting, sowing, and
 // donating happen as separate honest steps in daily(), not hidden in the trip.
 function forageTripSeedFirst(Game, ctx) {
   const s = Game.state.scholar;
+  const keepKnifeOn = process.env.COMPETENT_KEEP_KNIFE !== '0';
   try {
     const cands = [];
     for (const tt of (Game.travelTargets() || [])) {
       const t = Game.tileAt(tt.x, tt.y);
       if (!t || t.type === 'haven' || t.type === 'ruin' || (t.stock || 0) <= 0) continue;
-      let blocked = false;
-      try { blocked = !!Game.travelBlockage(tt.x, tt.y); } catch (e) {}
-      cands.push({ x: tt.x, y: tt.y, d: tt.d, blocked });
+      let blocked = false, blockType = null;
+      try { const b = Game.travelBlockage(tt.x, tt.y); blocked = !!b; blockType = b && b.blockType; } catch (e) {}
+      cands.push({ x: tt.x, y: tt.y, d: tt.d, blocked, blockType, type: t.type, revealed: !!t.revealed });
     }
-    cands.sort((a, b) => (a.blocked - b.blocked) || (a.d - b.d));
+    // VINE-RICH GROUND (food r6): when vine is the knife's missing half, a
+    // competent player heads for the thickets — bushes grow in thickets, and
+    // that's player-visible world knowledge (revealed tiles only; the fog
+    // keeps its secrets). A vine-rich tile counts as one step nearer.
+    const wantVine = keepKnifeOn && knifeWantsVine(Game, ctx);
+    // STONE-FIRST SORT (food r6): when the knife needs its stone half, a
+    // rubble-choked tile IS the destination — route to it deliberately
+    // instead of sorting it last. The trip's clearing branch does the work.
+    const wantStone = keepKnifeOn && knifeWantsStone(Game, ctx);
+    const deff = (c) => c.d - ((wantVine && c.revealed && (c.type === 'thicket' || c.type === 'grove')) ? 1 : 0);
+    cands.sort((a, b) =>
+      ((wantStone && a.blockType === 'rubble' ? 0 : 1) - (wantStone && b.blockType === 'rubble' ? 0 : 1)) ||
+      (a.blocked - b.blocked) || (deff(a) - deff(b)));
     if (!cands.length) return 0;
     const hx = Game.map.px, hy = Game.map.py;
     // WORKED-OUT PATCH (longsim combat r2 2026-10-11): the nearest stocked
@@ -320,9 +502,27 @@ function forageTripSeedFirst(Game, ctx) {
     // back empty, like the game's own failure line says. Try up to 3.
     let foraged = 0;
     for (const pick of cands.slice(0, 3)) {
-      const res = Game.travelTo(pick.x, pick.y, pick.blocked);
+      // HONEST TRAVEL (food r6): the old form passed pick.blocked as
+      // travelTo's FORCE arg — a blocked path was crossed for free (no
+      // 40 kcal, no stone, no card). A real player goes around or does the
+      // roadwork. Never force.
+      const res = keepKnifeOn
+        ? Game.travelTo(pick.x, pick.y)
+        : Game.travelTo(pick.x, pick.y, pick.blocked); // legacy: gate-off behavior
       if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
-      if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
+      if (Game.map.px !== pick.x || Game.map.py !== pick.y) {
+        // STONE RUN (food r6): rubble on the path and the knife needs its
+        // stone half — do the roadwork (clearRubbleForStone: a day-part,
+        // 40 kcal, 1-3 real stone), then walk in. The rubble's stone is why
+        // a competent trapper clears paths.
+        if (keepKnifeOn && res && res.blockType === 'rubble' && knifeWantsStone(Game, ctx)) {
+          if (clearRubbleForStone(Game, ctx, res.x, res.y)) {
+            const res2 = Game.travelTo(pick.x, pick.y);
+            if (Game.over || Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} return 0; }
+            if (Game.map.px !== pick.x || Game.map.py !== pick.y) continue;
+          } else continue;
+        } else continue;
+      }
       let ok = null;
       try { ok = Game.doAction('forage', {}); ctx.forageTrips = (ctx.forageTrips || 0) + 1; } catch (e) {}
       if (ok) { foraged = 1; workTraplineSet(Game, ctx); break; }
@@ -566,8 +766,11 @@ function cleanCatch(Game, ctx) {
   try {
     const s = Game.state.scholar; if (!s) return;
     const inv = s.inventory || [];
-    const n = inv.filter(i => i && i.foodState === 'carcass').length;
-    if (!n) return;
+    let stash = [];
+    try { stash = (Game.prepStash && Game.prepStash()) || []; } catch (e) {}
+    const nInv = inv.filter(i => i && i.foodState === 'carcass').length;
+    const nStash = stash.filter(i => i && i.foodState === 'carcass').length;
+    if (!nInv && !nStash) return;
     // KNAP FIRST: the dawn catch says "clean it quickly (knife)" and the
     // knifeless message points at the universal stone-knife recipe (L3 for
     // everyone) — a competent trapper holding stone + vine knaps the edge
@@ -579,7 +782,20 @@ function cleanCatch(Game, ctx) {
       }
     }
     if (!Game.hasCuttingTool || !Game.hasCuttingTool()) return; // still knifeless: the carcass sits, honestly
-    try { Game.cleanCarcass(); ctx.cleanedCarcasses = (ctx.cleanedCarcasses || 0) + n; } catch (e) {}
+    // THE KITCHEN COUNTER (food r6 2026-10-12): the homecoming pooling moves
+    // unprocessed hauls — carcasses included — from the pack to the prep
+    // stash. The r5 policy only swept the pack, so trapped carcasses rotted
+    // on the counter untouched (53 catches, 0 cleaned on identical seeds).
+    // A competent trapper cleans the counter too — same action, same knife.
+    try { Game.cleanCarcass(); ctx.cleanedCarcasses = (ctx.cleanedCarcasses || 0) + nInv; } catch (e) {}
+    try {
+      const m = stash.filter(i => i && i.foodState === 'carcass').length;
+      if (m) {
+        Game.cleanCarcass(undefined, stash);
+        ctx.cleanedCarcasses = (ctx.cleanedCarcasses || 0) + m;
+        ctx.cleanedStash = (ctx.cleanedStash || 0) + m;
+      }
+    } catch (e) {}
   } catch (e) {}
 }
 
@@ -1136,8 +1352,10 @@ const competent = {
   daily(Game, ctx) {
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
+    stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
     if (needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
     sortHaul(Game, ctx); // identify the haul at camp — unknowns become food
+    keepKnife(Game, ctx); // knap the stone knife FIRST (food r6: wins the vine race)
     cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
@@ -1298,4 +1516,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone };
