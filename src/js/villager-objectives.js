@@ -144,8 +144,16 @@
       try { water = ((v.water || {}).clean == null) ? 99 : v.water.clean; } catch (e) {}
       var cands = [];
       // FORAGE — the village eats, or they do. Homebodies only go when hungry.
-      if (pantry < 4000 || (n.hunger || 0) > 50) {
+      // GOAL r7 (2026-10-12): the 'feed' goal lives here now — "Nobody goes
+      // hungry if I can help it. That's the whole thing." They feel the
+      // pantry dip before anyone else (forage gate at 6000 kcal, not 4000)
+      // and they go out first when food runs short (+1.5 weight). Measured
+      // 12x200d before: 'feed' foraged at the population rate (14.9% obj
+      // share vs 35.7% for 'belong' — noise) — the goal was a label.
+      var feedDrive = (goal === 'feed');
+      if (pantry < 4000 || (n.hunger || 0) > 50 || (feedDrive && pantry < 6000)) {
         var w = pantry < 2000 ? 4 : pantry < 4000 ? 2.5 : 1.5;
+        if (feedDrive) w += 1.5;
         if (prof === 'homebody' && pantry >= 2000 && (n.hunger || 0) <= 60) w = 0;
         if (w > 0) cands.push({ kind: 'FORAGE', w: w });
       }
