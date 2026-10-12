@@ -239,8 +239,12 @@
     // posthumousReveal: examining the body can teach you something they never
     // told you. Rare, weighty, never cheap: once per corpse, fresh/stiff only,
     // and only if you actually knew them (or found them yourself).
+    // REVEAL GATE (journey-succession r9 2026-10-12): the bare kind!=='person'
+    // check made this unreachable for villager corpses (all kind 'villager')
+    // — the one body you'd most want to learn from. Same bug class as the
+    // funeral gates in corpses.js.
     posthumousReveal(corpse) {
-      if (!corpse || corpse.kind !== 'person' || !corpse.villagerId) return false;
+      if (!corpse || !this.corpseIsPerson(corpse) || !corpse.villagerId) return false;
       if (corpse.posthumousRolled) return false;
       corpse.posthumousRolled = true;
       const vid = corpse.villagerId;
@@ -421,12 +425,16 @@
   }
 
   // registerDeath: dead is the end of their story. Close the book.
+  // BOOK GATE (journey-succession r9 2026-10-12): the bare kind==='person'
+  // check meant no villager's book ever closed (all deaths register kind
+  // 'villager'). Same bug class as the funeral gates. The dead bearer's own
+  // book stays open deliberately — the mantle continues their story.
   const _registerDeath = Game.registerDeath;
   if (_registerDeath) {
     Game.registerDeath = function (opts) {
       const r = _registerDeath.call(this, opts);
       try {
-        if (opts && opts.kind === 'person' && opts.villagerId && opts.villagerId !== this.villagerId) {
+        if (opts && (opts.kind === 'person' || opts.kind === 'villager') && opts.villagerId && opts.villagerId !== this.villagerId) {
           this.closePersonBook(opts.villagerId, { cause: opts.cause, place: 'out there' });
         }
       } catch (e) {}

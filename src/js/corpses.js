@@ -18,7 +18,9 @@
 //   - generatePossessions(vid)
 //   - payRespects(cid)
 //   - codexDeathSync()
+//   - recoverBearer(): overnight, the village recovers the dead bearer's body to the fire and digs the grave; burial stays the successor's act (journey-succession r9 2026-10-12)
 // rules:
+//   - the_village_brings_its_bearer_home: the death beat's "somebody else starts digging" is real — one day after the bearer's death the village recovers the body to the fire and digs the grave (v.pendingBurials, fired from endDay). The death pack rides home on the corpse; the filling of the grave is the successor's (code: recoverBearer, Steve's loot-as-action law untouched)
 //   - sapient_dead_carry_their_gear: villager corpses hold the dead person's actual carried + stashed gear as the lootable death pack — nothing auto-transfers (code: generatePossessions, Steve 2026-10-09)
 //   - sentimentals_die_with_them: sentimental items are buried with the body, never lootable, and grant no bond to non-owners (code: generatePossessions, Steve 2026-10-09)
 //   - ash_pile: a phoenix victim's corpse is flagged ash -- no body, no decay, no disease, no trauma (ashes aren't gross); carried gear ONLY (never stashed) as the lootable pack; pocketing it fires loot_ash (amplified theft; worse still when the bearer takes their own victim's gear); the ash description states the village norm (code: phoenixAshDeath/phoenixAshGearPack in game.js, Steve 2026-10-09)
@@ -211,7 +213,11 @@
       this.codexDeathSync(corpse);
 
       // GOSSIP: the village learns, distorted, along social lines.
-      if (corpse.kind === 'person' && corpse.witnesses.length) {
+      // GOSSIP GATE (journey-succession r9 2026-10-12): the bare
+      // kind==='person' check meant villager deaths (kind 'villager' — i.e.
+      // ALL of them) never seeded death gossip. Same class as the funeral
+      // gates fixed below; the grief branch beside it already had it right.
+      if (this.corpseIsPerson(corpse) && corpse.witnesses.length) {
         try {
           this.seedGossip('death:' + (corpse.villagerId || corpse.id),
             { victim: corpse.villagerId }, corpse.witnesses.filter(id => id !== this.villagerId));
@@ -675,9 +681,16 @@
 
     // payRespects: a small rite. Costs a little time, steadies you, and the
     // village notices the difference between this and looting.
+    // FUNERAL GATE (journey-succession r9 2026-10-12): the old bare
+    // `kind !== 'person'` check rejected kind 'villager' — and EVERY
+    // villager death registers kind 'villager' (starvation, wounds, player
+    // death, phoenix). The UI offered "Say a few words" via corpseIsPerson
+    // but the API answered "Nothing to honor here.": no villager corpse in
+    // the game could ever be honored. Same class as Steve's 2026-10-09
+    // corpseIsPerson fix — the gate now matches the button.
     payRespects(id) {
       const c = this.corpses().find(x => x.id === id);
-      if (!c || c.buried || c.kind !== 'person') { this.say('Nothing to honor here.'); return null; }
+      if (!c || c.buried || !this.corpseIsPerson(c)) { this.say('Nothing to honor here.'); return null; }
       if (c.respectsPaid) { this.say('You already said your words.'); return null; }
       c.respectsPaid = true;
       const s = this.state.scholar;
@@ -691,9 +704,12 @@
     },
 
     // buryCorpse: lay them to rest. Removes the corpse, ends the decay.
+    // FUNERAL GATE (journey-succession r9 2026-10-12): same fix as
+    // payRespects above — the bare kind==='person' gate made "Bury them" a
+    // dead button for every villager corpse (all register kind 'villager').
     buryCorpse(id) {
       const c = this.corpses().find(x => x.id === id);
-      if (!c || c.buried || c.kind !== 'person') return null;
+      if (!c || c.buried || !this.corpseIsPerson(c)) return null;
       const st = this.corpseStageInfo(c);
       c.buried = true;
       const known = this.nameKnown ? this.nameKnown(c.villagerId) : true;
@@ -710,6 +726,41 @@
       try { this.observe('bury_dead', { target: c.villagerId }); } catch (e) {}
       if (this.tickAction) this.tickAction(16);
       return true;
+    },
+
+    // recoverBearer: THE VILLAGE BRINGS ITS BEARER HOME (journey-succession
+    // r9 2026-10-12). The death beat says "somebody else starts digging" —
+    // now somebody does. Overnight (fired from endDay, one day after the
+    // death), the village recovers the dead bearer's body to the fire and
+    // digs the grave. The BURIAL stays the successor's act — payRespects /
+    // buryCorpse are still player-facing, and the death pack rides home on
+    // the corpse (loot-as-action: take, leave, or use per item — nothing
+    // auto-transfers). Plain data in v.pendingBurials, so save/load
+    // mid-grief is safe. List, not a slot: two deaths in one day each get
+    // their recovery. If the player already buried them, the entry clears
+    // silently — the work is done.
+    recoverBearer() {
+      const v = this.state.village, s = this.state.scholar;
+      const pend = v.pendingBurials || [];
+      if (!pend.length) return;
+      const day = (s || {}).day || 0;
+      const due = pend.filter(p => p && (day > (p.day || 0)));
+      if (!due.length) return;
+      v.pendingBurials = pend.filter(p => p && (day <= (p.day || 0)));
+      for (const p of due) {
+        try {
+          const c = (this.corpses() || []).find(x => x && x.id === p.corpseId);
+          if (!c || c.buried) continue;
+          const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
+          c.node = { x: hx, y: hy };
+          c.mx = 4; c.my = 4;
+          c.recovered = true;
+          c.deathKnown = true; // the village told the new Bearer <redacted> home
+          const first = String(p.name || 'them').split(' ')[0];
+          this.say(`That night, they bring ${first} home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours.`);
+          try { this.recordMoment(`${p.name || 'The bearer'} was brought home. The village dug the grave.`); } catch (e2) {}
+        } catch (e) {}
+      }
     },
 
     // ---------- death as knowledge ----------

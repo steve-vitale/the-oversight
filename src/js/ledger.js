@@ -625,8 +625,21 @@
         s.inventory = [];
         s.equipped = {};
       } catch (e) {}
+      // THE VILLAGE BRINGS ITS BEARER HOME (journey-succession r9
+      // 2026-10-12): "Somebody else starts digging" was a fiction lie —
+      // nobody ever dug: buried=true was reachable ONLY through the
+      // player's own Bury button, so the bearer's corpse rotted where it
+      // fell while eleven grieving villagers never lifted a spade. Now the
+      // village recovers the body overnight (see recoverBearer, fired from
+      // endDay): the grave is dug by the fire, the burial itself stays the
+      // successor's act. Loot-as-action is untouched — the death pack rides
+      // home ON the corpse, take/leave/use per item, nothing auto-transfers.
       try {
-        this.registerDeath({ kind: 'villager', villagerId: oldId, name: oldName, mx: s.mx, my: s.my, cause: cause || 'the wild', killerId: null, items: gearPack });
+        const rc = this.registerDeath({ kind: 'villager', villagerId: oldId, name: oldName, mx: s.mx, my: s.my, cause: cause || 'the wild', killerId: null, items: gearPack });
+        if (rc && rc.id) {
+          v.pendingBurials = v.pendingBurials || [];
+          v.pendingBurials.push({ corpseId: rc.id, villagerId: oldId, name: oldName, day: s.day || 0 });
+        }
       } catch (e) {}
       // MEMORIALIZED (Steve 2026-10-05): the death is narrated AND recorded.
       // registerDeath makes the corpse; village.fallen is the memorial roll —

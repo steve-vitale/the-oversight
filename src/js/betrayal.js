@@ -1180,6 +1180,16 @@
     if (!inc) {
       // EXHAUSTED PRESS (Steve 2026-10-06): rotate the fallback — never the
       // same line twice in a row. The story holding is still information.
+      // PRESSED DRY (journey-succession r9 2026-10-12): the press choice
+      // used to stay offered forever past this point, cycling into
+      // sayLine's repeat-filter deflections ("...Sorry, lost my train of
+      // thought.") — a dead choice, a filler loop, transcript-verified.
+      // Two dry presses of the designed "story holds" content, then
+      // silence here; betrayalTurn lands the terminal line and
+      // betrayalChoices stops offering the press.
+      c.pressDry = c.pressDry || {};
+      c.pressDry[vid] = (c.pressDry[vid] || 0) + 1;
+      if (c.pressDry[vid] >= 2) return 'dry';
       this.say(this.convoPickCycle(vid, 'pressheld', [
         'Their story holds — this time. The rehearsed parts are smooth.',
         'You walk it back again, slower. Nothing shifts. That, too, is an answer.',
@@ -1190,6 +1200,9 @@
       return null;
     }
     inc.found = true;
+    // a fresh crack re-arms the press — the dry count was about the old
+    // story, not this one (journey-succession r9 2026-10-12)
+    try { if (c.pressDry) delete c.pressDry[vid]; } catch (e) {}
     const other = c.accused.find(a => a !== vid && inc.claims[a]);
     let line;
     if (inc.selfContra) {
@@ -3599,7 +3612,15 @@
     for (const cs of cases) {
       const tag = cs.id + ':';
       if (cs.accused.includes(vid) && cs.status === 'open') {
-        out.push({ id: 'betrayal:press:' + tag + vid, label: `"Walk me through that night again. Slowly." (press ${this.whoTag(vid)})` });
+        // PRESSED DRY (journey-succession r9 2026-10-12): a press with no
+        // unfound inconsistencies stops being offered after two honest dry
+        // presses — no infinite dead choice, no filler loop. Fresh
+        // inconsistencies re-arm it.
+        const dryCount = ((cs.pressDry || {})[vid]) || 0;
+        const hasUnfound = (cs.inconsistencies || []).some(i => !i.found && i.claims && i.claims[vid]);
+        if (hasUnfound || dryCount < 2) {
+          out.push({ id: 'betrayal:press:' + tag + vid, label: `"Walk me through that night again. Slowly." (press ${this.whoTag(vid)})` });
+        }
       }
       if (cs.weakest === vid && !cs.flipped && cs.status === 'open') {
         out.push({ id: 'betrayal:approach:' + cs.id, label: `"Talk first. Leniency. The offer expires when I walk away."` });
@@ -3720,7 +3741,14 @@
     if (act === 'accept') { const r = this.acceptInvite(vid); return finish((r && r.line) || 'You go.', '"Sure."'); }
     if (act === 'decline') { const l = this.declineInvite(vid); return finish(l, '"Not this time."'); }
     if (act === 'press') {
-      const broke = !!this.pressAccomplice(parts[2], parts[3]);
+      const pres = this.pressAccomplice(parts[2], parts[3]);
+      // PRESSED DRY (journey-succession r9 2026-10-12): the terminal press.
+      // pressAccomplice already stayed silent on 'dry' — one clean line
+      // here, then the choice goes away (see betrayalChoices).
+      if (pres === 'dry') {
+        return finish('You\'ve walked them through it every way you know how. Their story holds — either it\'s true, or it\'s been rehearsed a lot. There\'s nothing more to press here.', '"Slowly."');
+      }
+      const broke = !!pres;
       // OUTCOME-AWARE (Steve 2026-10-06): the box must not claim a crack when
       // the story held. Rotate the held box line like the narration.
       return finish(

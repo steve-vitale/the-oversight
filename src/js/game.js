@@ -26425,6 +26425,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // PHOENIX FUSE (Steve 2026-10-09): unchosen links resolve at dawn --
       // the fire doesn't wait. Silence is consent.
       try { this.phoenixFuseCheck && this.phoenixFuseCheck(); } catch (e) {}
+      // THE VILLAGE BRINGS ITS BEARER HOME (journey-succession r9
+      // 2026-10-12): overnight recovery of the dead bearer's body — grave
+      // dug by the fire, burial left to the successor. See recoverBearer.
+      try { this.recoverBearer && this.recoverBearer(); } catch (e) {}
       // VILLAGE NAMING: the argument continues. Late proposers chime in, and
       // the village converges on a name for each unnamed beast.
       try {

@@ -404,9 +404,10 @@ Generated conversation topics. Every villager is a unique person
 ### corpses (`corpses.js`)
 Corpse system. Dead bodies persist, can be butchered, buried, or left.
 
-**Provides:** buryCorpse(cid), corpseAt(x, y), corpseDesc(c), examineCorpse(cid), lootCorpse(cid), corpseTakeItem(cid, idx), corpseUseItem(cid, idx), corpseEatItem(cid, idx), registerDeath(vid, cause), corpseStage(c), corpseIsPerson(c): 'person' + 'villager' kinds are sapient dead (Steve 2026-10-09), corpseGlyph(c), knowsDeath(vid), generatePossessions(vid), payRespects(cid), codexDeathSync()
+**Provides:** buryCorpse(cid), corpseAt(x, y), corpseDesc(c), examineCorpse(cid), lootCorpse(cid), corpseTakeItem(cid, idx), corpseUseItem(cid, idx), corpseEatItem(cid, idx), registerDeath(vid, cause), corpseStage(c), corpseIsPerson(c): 'person' + 'villager' kinds are sapient dead (Steve 2026-10-09), corpseGlyph(c), knowsDeath(vid), generatePossessions(vid), payRespects(cid), codexDeathSync(), recoverBearer(): overnight, the village recovers the dead bearer's body to the fire and digs the grave; burial stays the successor's act (journey-succession r9 2026-10-12)
 
 **Rules:**
+- the_village_brings_its_bearer_home: the death beat's "somebody else starts digging" is real — one day after the bearer's death the village recovers the body to the fire and digs the grave (v.pendingBurials, fired from endDay). The death pack rides home on the corpse; the filling of the grave is the successor's (code: recoverBearer, Steve's loot-as-action law untouched)
 - sapient_dead_carry_their_gear: villager corpses hold the dead person's actual carried + stashed gear as the lootable death pack — nothing auto-transfers (code: generatePossessions, Steve 2026-10-09)
 - sentimentals_die_with_them: sentimental items are buried with the body, never lootable, and grant no bond to non-owners (code: generatePossessions, Steve 2026-10-09)
 - ash_pile: a phoenix victim's corpse is flagged ash -- no body, no decay, no disease, no trauma (ashes aren't gross); carried gear ONLY (never stashed) as the lootable pack; pocketing it fires loot_ash (amplified theft; worse still when the bearer takes their own victim's gear); the ash description states the village norm (code: phoenixAshDeath/phoenixAshGearPack in game.js, Steve 2026-10-09)
