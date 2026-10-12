@@ -5493,6 +5493,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const aname = animal.name || 'game';
       return {
         kcal,
+        aid,
         msg: `🏹 ${first} brings down a ${aname} — clean kill, +${kcal} kcal to the pantry.`,
         note: isHunter ? 'Old hands. They\'ve done this before.' : null,
       };
@@ -5580,6 +5581,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const injuryRisk = temp === 'bold' ? 0.22 : temp === 'cautious' ? 0.08 : 0.15;
         const injuryRoll = Math.max(0.03, injuryRisk / Math.max(0.7, comp));
         if (kcal > 0) this.stockPantry(kcal, 'Game meat');
+        // VILLAGE LEARNS THE ANIMAL (longsim knowledge r6 2026-10-12): the
+        // hunt resolves a REAL species from REAL wildlife, but the identity
+        // was discarded — the pantry got anonymous 'Game meat' and nobody
+        // learned. The carcass comes home; the village sees it. The hunter
+        // knows what they killed; the village records L1 (the species was
+        // brought home, handled, talked about at the fire).
+        try {
+          if (hr.aid && kcal > 0) {
+            const v = this.state.village || {};
+            v.animals = v.animals || {};
+            if (!v.animals[hr.aid]) {
+              v.animals[hr.aid] = { level: 1, learnedDay: this.state.scholar.day || 0, learnedBy: vid };
+            }
+          }
+        } catch (e) {}
         if (Math.random() < injuryRoll) {
           const dmg = R(10, 30);
           this.hurtVillager(vid, dmg, 'hunting');
@@ -15408,6 +15424,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the Codex later; it FORMALIZES what the group already knows.
     firesideTeaching(isPresent) {
       const v = this.state.village;
+      // THE VILLAGE'S GAME (longsim knowledge r6 2026-10-12): the hunters
+      // bring home real animals, and the village learns them (see the hunt
+      // duty). At the fire, that knowledge travels — if the village knows a
+      // species you don't, someone tells you about it. The 'taught' channel
+      // for animals, mirroring the plant lesson below. Runs before the
+      // plant early-returns so animal teaching isn't gated on plants.
+      try {
+        const present0 = isPresent === undefined ? this.playerAtHaven() : isPresent;
+        const vAnim = (this.state.village || {}).animals || {};
+        const unknown = Object.keys(vAnim).filter(aid => {
+          try { return !this.encAnimalKnown(aid); } catch (e) { return false; }
+        });
+        if (present0 && unknown.length && Math.random() < 0.5) {
+          const aid = unknown[Math.floor(Math.random() * unknown.length)];
+          const adef = (this.data.animals || []).find(a => a.id === aid) || {};
+          const teacher = this.displayName(vAnim[aid].learnedBy || '');
+          if (this.grantKnowledge('animal', aid, 1, { type: 'taught', by: teacher })) {
+            this.say(`🐾 ${teacher} is telling hunting stories by the fire — the ${adef.name || aid}, how it moves, where it feeds. You listen. Now you know it too.`);
+          }
+        }
+      } catch (e) {}
       // FIRESIDE RETURN GUARANTEE (Steve 2026-10-07): the first fireside after a
       // real return home always teaches — returning with a new haul is the key
       // teaching moment. The flag is consumed regardless of outcome (even when

@@ -106,6 +106,23 @@ teaches the fire nor learns from it — knowledge travels home in their head
 (`awayLearned`, brokered at `returnToVillage`). An exposed liar's word
 carries no weight (`distrusted` excluded from teaching).
 
+## The village learns animals (longsim knowledge r6, 2026-10-12)
+
+The animal half of codex breadth was the untouched blank: villager hunts
+resolved REAL species from REAL wildlife (`villagerHuntResolve`) but the
+identity was discarded — the pantry got anonymous 'Game meat' and nobody
+learned. Now:
+- `villagerHuntResolve` returns `aid` (the species).
+- A successful hunt records the species village-side:
+  `state.village.animals[aid] = {level: 1, learnedDay, learnedBy}` — the
+  carcass comes home, the village sees it, the hunter knows what they killed.
+- At the fire, the village teaches the player: if the village knows a
+  species the player doesn't, a hunter tells hunting stories (presence-gated,
+  50%) — `grantKnowledge('animal', aid, 1, {type: 'taught'})`. The 'taught'
+  channel for animals, mirroring the plant fireside lesson.
+- The player's own tasting ladder (3/6/10) is unchanged — this fills the
+  L1 'taught' input the ladder was starved of.
+
 ## Files
 
 - `src/js/game.js` — `identifyPlant`, `plantKnown/plantLevel/plantUses`,
