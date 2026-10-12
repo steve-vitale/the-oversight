@@ -656,6 +656,8 @@
         try { this.drama('flash', '#4df3ff', 1200); } catch (e) {}
         try { this.drama('integration'); } catch (e) {}
         try { this.audioEvent('waveUnlock'); } catch (e) {}
+        // MUSIC (Steve 2026-10-12): scale transitions chime upward.
+        try { this.audioEvent('stingScale'); } catch (e) {}
         try { if (this.journalNote) this.journalNote('village', 'accord', 'The Regional Dawn: Haven is regional — the System tracks the network.'); } catch (e) {}
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'regional-dawn'); } catch (e) {}
         return true;
@@ -2340,6 +2342,8 @@
       try { this.drama('hero', 'NATIONAL', pn.led ? 'The realm bows to Haven. The first court sat.' : 'The oath was sworn. Haven kneels — and rises national.'); } catch (e) {}
       try { this.drama('flash', '#ffd54a', 1200); } catch (e) {}
       try { this.audioEvent('trialFanfare'); } catch (e) {}
+      // MUSIC (Steve 2026-10-12): scale transitions chime upward.
+      try { this.audioEvent('stingScale'); } catch (e) {}
       try { if (this.journalNote) this.journalNote('village', 'national', 'Haven is national — ' + (pn.led ? 'the realm bows to Haven.' : 'Haven swore to ' + this._ovName(pn.primary) + '.')); } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-live'); } catch (e) {}
       try { if (this.recordMoment) this.recordMoment('Haven became national — ' + (pn.led ? 'the first court sat.' : 'the oath was sworn.')); } catch (e) {}

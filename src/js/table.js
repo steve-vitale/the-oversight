@@ -363,6 +363,8 @@
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
       const d = seat.detail || {};
+      // MUSIC (Steve 2026-10-12): the table gets its ceremonial bed.
+      try { this.music('scenario', 'table'); } catch (e) {}
       this.say('◈ THE TABLE — it is not a table. It\'s a ring of pale light, and around it, things with too many angles to be faces. Above it all — the audience. Trillions of eyes, and every one of them knows your name. The System speaks, and for once it isn\'t performing: "HUMANITY PRESENTS ITS CASE."');
       // THE AUDIT — the table prices the run aloud.
       const seatLine = seat.seat === 'full'
@@ -684,6 +686,8 @@
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
       const outcome = typeof fin.outcome === 'function' ? fin.outcome.call(this, T) : fin.outcome;
       (Array.isArray(outcome) ? outcome : [outcome]).forEach(l => this.say(l));
+      // MUSIC (Steve 2026-10-12): endings get their bed — warm or cold.
+      try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) {}
       // Epilogue: hero, facilitator, or outshone — credited honestly.
       this.tableEpilogue(def, branch, fin);
       try { this.recordMoment(`Haven's table path: ${def.name} (${branch}), choice: ${fin.label}.`); } catch (e) {}

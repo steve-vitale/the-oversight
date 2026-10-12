@@ -841,6 +841,8 @@
       this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
       // DRAMA (Steve 2026-10-07, Round C2): bright emergence — a new scholar awakens.
       try { this.drama('newLife', newName); } catch (e) {}
+      // MUSIC (Steve 2026-10-12): the mantle passes — a somber bell.
+      try { this.audioEvent('stingSuccession'); } catch (e) {}
       this.say(`📖 The Codex turns a page: ${oldName}, ${this.pluralize(s.day || 0, 'day')}. The mantle passes to ${newName}.`);
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
       // the trust of the office transfers, discounted — the person must earn the rest

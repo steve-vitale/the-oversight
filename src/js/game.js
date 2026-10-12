@@ -1776,6 +1776,8 @@
       // SYSTEM VOICE (Steve 2026-10-12): warm the ElevenLabs manifest early
       // so the text->id index is ready before the System's first line.
       try { if (typeof this.preloadSystemVoice === 'function') this.preloadSystemVoice(); } catch (e) {}
+      // MUSIC (Steve 2026-10-12): the expedition starts on the ambient bed.
+      try { this.musicAmbient(); } catch (e) {}
       this.state.startLocation = loc.id || null;
       this.state.startLocationName = loc.name || null;
       this.state.spawnType = loc.spawnType || 'countryside';
@@ -10243,6 +10245,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Movement is baseline. Power doesn't tax walking.
       s.kcal = Math.max(0, s.kcal - this.walkStepKcal());
       s.mx = cx; s.my = cy;
+      try { this._footstep(); } catch (e) {}
       // MONSTERS MOVE WHEN YOU DO. A step can spook, warn, or trigger —
       // the stance machine runs on steps, not just on interacts. (It didn't.
       // Walking up to a deer did nothing until you touched something.)
@@ -11696,6 +11699,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SECOND SKIN / WANDERER: travel.cost_mult reduces the kcal cost.
       s.kcal = Math.max(0, (s.kcal || 0) - this.walkStepKcal());
       s.mx = tx; s.my = ty;
+      try { this._footstep(); } catch (e) {}
       // MONSTERS MOVE WHEN YOU DO — per square, same as microMove.
       this.monsterTurn(); this.animalTurn();
       this.ensureVillagerPositions();
@@ -17416,6 +17420,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           'You hear the sound again — the one they made. It follows you out of sleep.',
         ];
         nightmareNote = ' ' + dreams[Math.floor(Math.random() * dreams.length)] + ` (nightmare: healing halved)`;
+        // MUSIC (Steve 2026-10-12): nightmares sound like nightmares.
+        try { this.audioEvent('stingNightmare'); } catch (e) {}
         // trauma fades slowly, one bad night at a time
         s.trauma = Math.max(0, trauma - 5);
       } else if (trauma > 0) {
@@ -27083,6 +27089,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.drama('flash', '#7a1fa2', 900); } catch (e) {}
       try { this.drama('shake', 10); } catch (e) {}
       try { this.audioEvent('waveUnlock'); } catch (e) {}
+      // MUSIC (Steve 2026-10-12): the unlock gets a musical rise-and-hit.
+      try { this.audioEvent('stingWave'); } catch (e) {}
       if (wave === 3) {
         this.say('📺 "Oh, you survived the AUDIENCE NOTES? Cute. We\'ve stopped pretending these are animals now. That was the FINAL DRAFT, folks — what comes out of the treeline next was never alive the way you mean it."');
         this.say('(Something new is moving in the treeline. It was never an animal.)');
@@ -28925,6 +28933,63 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
+    // MUSIC (Steve 2026-10-12): menu / ambient / scenario layers, clean
+    // transitions, mute-safe. Headless-safe: without the audio backend this
+    // is a silent no-op. _musicMode tracks the layer so footsteps never
+    // clobber a scenario bed (refreshAmbientMusic only runs in ambient).
+    music(mode, theme) {
+      this._musicMode = mode;
+      try { if (this.audio && typeof this.audio.music === 'function') this.audio.music(mode, theme); } catch (e) {}
+    },
+    // back to the adaptive ambient bed (scenario over)
+    musicAmbient() {
+      this._musicKey = null;
+      this._musicMode = 'ambient';
+      try { this.refreshAmbientMusic(); } catch (e) {}
+    },
+    // FOOTSTEP FAMILY (pure — node-testable): world tile type -> sound family.
+    footstepFamily(tt) {
+      tt = tt || '';
+      if (tt === 'haven') return 'haven';
+      if (tt === 'wetland' || tt === 'creek' || tt === 'pond' || tt === 'water') return 'wet';
+      if (tt === 'ruin' || tt === 'trail_edge') return 'stone';
+      return 'soft';
+    },
+    // Every landed player square sounds, and the ambient bed adapts.
+    _footstep() {
+      try {
+        const t = this.playerTile(); const tt = (t && t.type) || '';
+        this.audioEvent('footstep', { family: this.footstepFamily(tt) });
+      } catch (e) {}
+      try { this.refreshAmbientMusic(); } catch (e) {}
+    },
+    // AMBIENT THEME: biome family + night + danger. Keyed so the bed only
+    // switches when something actually changed — no restarts mid-stride.
+    ambientTheme() {
+      const t = this.playerTile(); const tt = (t && t.type) || '';
+      let fam = 'wild';
+      if (tt === 'haven') fam = 'haven';
+      else if (tt === 'wetland' || tt === 'creek' || tt === 'pond' || tt === 'water') fam = 'wet';
+      else if (tt === 'ruin' || tt === 'trail_edge') fam = 'ruin';
+      const night = (this.dayPart === 3);
+      const sc = this.state.scholar || {};
+      let danger = false;
+      try { danger = !!this.inCombat(); } catch (e) {}
+      if (!danger && sc.monster) {
+        const dx = Math.abs((sc.monster.mx ?? 9) - (sc.mx ?? 4));
+        const dy = Math.abs((sc.monster.my ?? 9) - (sc.my ?? 4));
+        danger = Math.max(dx, dy) <= 4;
+      }
+      return fam + (night ? '/n' : '') + (danger ? '/d' : '');
+    },
+    refreshAmbientMusic() {
+      if (this._musicMode && this._musicMode !== 'ambient') return;
+      const key = this.ambientTheme();
+      if (this._musicKey === key) return;
+      this._musicKey = key;
+      this.music('ambient', key);
+    },
+
     // System commentary: after day 7, combat is TELEVISED. The System narrates,
     // the gamblers react, style points are tracked. Combat becomes a show.
     sysSay(text) {
@@ -29008,6 +29073,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         p.moveLeft -= this.tbTerrainCost(tx, ty);
         p.mx = tx; p.my = ty;
         this.state.scholar.mx = tx; this.state.scholar.my = ty;
+        try { this._footstep(); } catch (e) {}
         this.tbTerrainStep(tx, ty);
         this.tbBeamActionTick();
         if (!this.tbfight || this.tbfight.over) return true;

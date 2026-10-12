@@ -1087,6 +1087,8 @@
   // for non-contest events.
   G.fireShow = function(show) {
     const s = (show && show.id) ? show : this.pickShow();
+    // MUSIC (Steve 2026-10-12): the show gets its bed — tense, televised.
+    try { this.music('scenario', 'contest'); } catch (e) {}
     this.sysSay(`📺 TONIGHT: ${s.name}. ${s.desc}`);
     // GALACTIC CAST (2026-10-11, Steve: world-building scaffold): one sponsor
     // card or recurring-persona mention per show. Stage-0 domain match names
@@ -1308,6 +1310,8 @@
   // real even for a trainwreck: shame still moves the showbiz club +1, said
   // out loud. Gossip seeds so the village talks about it for days.
   G._showVillagerEnd = function(ac) {
+    // MUSIC (Steve 2026-10-12): the show is over — back to the world's bed.
+    try { this.musicAmbient(); } catch (e) {}
     const pid = ac.participant;
     const pname = this.displayName(pid);
     const showName = ac.showName || 'the show';
@@ -1379,6 +1383,8 @@
   // embarrassment (docs/CONTESTS.md). A prize, when earned, is a wacky
   // alien curio — never dinner (canon).
   G._showEnd = function(ac, outcome, prize) {
+    // MUSIC (Steve 2026-10-12): the show is over — back to the world's bed.
+    try { this.musicAmbient(); } catch (e) {}
     const beat = (this.SHOW_BEATS || {})[ac.showId] || {};
     const s = this.state.scholar;
     const who = ac.participant;
@@ -1936,6 +1942,8 @@
   // Simplified for now: contest fires, participant chosen, outcome rolled.
   // Full arena combat comes later.
   G.fireContest = function(contest) {
+    // MUSIC (Steve 2026-10-12): the contest bed starts at the grab.
+    try { this.music('scenario', 'contest'); } catch (e) {}
     const { eligible } = this.contestEligible();
     if (!eligible.length) return;
     try { this.tele('contest_fired', { id: (contest && contest.id) || '?' }); } catch (e) {}
@@ -4967,6 +4975,8 @@
   };
 
   G._contestEnd = function(ac, outcome, prize) {
+    // MUSIC (Steve 2026-10-12): the contest is over — back to the world's bed.
+    try { this.musicAmbient(); } catch (e) {}
     try { this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: outcome || '?' }); } catch (e) {}
     // ADAPTATION (Steve 2026-10-11): the dossier records every ending.
     try { this._cxRecordOutcome(ac, outcome); } catch (e) {}

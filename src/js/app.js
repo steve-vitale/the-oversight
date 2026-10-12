@@ -536,7 +536,7 @@
       // (kcal, ticks, monster turns for steps never authorized post-load),
       // even across saves (Continue a different expedition mid-walk). A load
       // is a fresh session for the feet: stop everything before rendering.
-      if (Game.load(b.dataset.load)) { try { S.MoveAnim.stopAll(); } catch (e) {} expeditionScreen(); }
+      if (Game.load(b.dataset.load)) { try { S.MoveAnim.stopAll(); } catch (e) {} try { Game.musicAmbient(); } catch (e) {} expeditionScreen(); }
       else {
         // LOAD HONESTY (break-it persistence 2026-10-08): a save that can't load
         // (corrupt, version-mismatched, or deleted in another tab) must say so —
@@ -589,6 +589,9 @@
     }).join('');
   }
   function title() {
+    // MUSIC (Steve 2026-10-12): the title screen gets its music-box theme.
+    // Pre-gesture this only records the request — the first tap unlocks it.
+    try { Game.music('menu'); } catch (e) {}
     screen.innerHTML = `
       ${bar('scattering://village', 'day 0')}
       <div class="ascii">      .-""-.
@@ -613,6 +616,13 @@
       <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span> <span id="b-voice" style="cursor:pointer;opacity:.25;font-size:11px" title="voiced dialogue">🗣️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
+    // UI SELECT (Steve 2026-10-12): the main menu answers every tap.
+    // Capture-phase: the blip fires before each button's own handler.
+    try {
+      screen.querySelectorAll('button, #b-notes, #b-debug, #b-sound, #b-voice, #build-tag').forEach(b => {
+        b.addEventListener('click', () => { try { Game.audioEvent('uiSelect'); } catch (e) {} }, true);
+      });
+    } catch (e) {}
     document.getElementById('b-new').onclick = () => obColdOpen();
     const savesDiv = document.getElementById('saves');
     if (savesDiv) renderSaves(savesDiv);
@@ -2343,7 +2353,7 @@
   //   files, not here — this section only owns the synths.
   const CombatAudio = (() => {
     let ctx = null, hbTimer = null;
-    let master = null, hbBus = null, sfxBus = null;
+    let master = null, hbBus = null, sfxBus = null, musicBus = null;
     let muted = false;
     try { muted = (typeof localStorage !== 'undefined') && localStorage.getItem('oversight_mute') === '1'; } catch (e) {}
     let charge = null;   // active beam-charge stopper
@@ -2365,7 +2375,8 @@
         try { if (charge) charge(); } catch (e) {}
         try { if (sweep) sweep.stop(); } catch (e) {}
         charge = null; sweep = null;
-        ctx = null; master = null; hbBus = null; sfxBus = null; noiseBuf = null;
+        try { if (muTimer) clearInterval(muTimer); } catch (e) {}
+        ctx = null; master = null; hbBus = null; sfxBus = null; musicBus = null; musicGain = null; muTimer = null; noiseBuf = null;
       }
       if (!ctx) {
         try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
@@ -2374,12 +2385,14 @@
         comp.attack.value = 0.003; comp.release.value = 0.25;
         master = ctx.createGain();
         master.gain.value = muted ? 0.0001 : 0.9;
-        hbBus = ctx.createGain(); sfxBus = ctx.createGain();
-        hbBus.connect(master); sfxBus.connect(master);
+        hbBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus = ctx.createGain();
+        musicBus.gain.value = 0.9;
+        hbBus.connect(master); sfxBus.connect(master); musicBus.connect(master);
         master.connect(comp);
         try { comp.connect(ctx.destination); } catch (e) {}
       }
       if (ctx && ctx.state === 'suspended') { try { ctx.resume(); } catch (e) {} }
+      try { maybeStartMusic(); } catch (e) {}
       return !!ctx;
     }
     function noise(seconds) {
@@ -12359,8 +12372,249 @@
       // AMBIENT STING (Steve 2026-10-06): the UI dread-beat's horrorSting was
       // referenced at the top of app.js but never defined. Now it is.
       horrorSting() { horrorSting(); },
+      // GENERATIVE MUSIC + FOOTSTEPS (Steve 2026-10-12)
+      footstep(data) { footstep(data); },
+      uiSelect() { uiSelect(); },
+      music(mode, theme) { return music(mode, theme); },
+      stingWave() { stingWave(); },
+      stingScale() { stingScale(); },
+      stingNightmare() { stingNightmare(); },
+      stingSuccession() { stingSuccession(); },
     };
   })();
+    // ============ GENERATIVE MUSIC (Steve 2026-10-12) ============
+    // Zero assets: everything synthesized. Sparse by design — a 40-hour
+    // session must never grate. One bus (musicBus -> master, so the mute
+    // toggle covers it), one lookahead scheduler, three layers:
+    //   menu     — music-box arpeggio, the title screen's theme
+    //   ambient  — slow detuned pad + rare pentatonic motif; theme key is
+    //              "<family>[/n][/d]" — haven warm / wild neutral / wet
+    //              droplets / ruin metallic; /n night darkens, /d danger
+    //              adds a low pulse under the calm
+    //   scenario — contest / table / ending-light / ending-dark beds
+    // One-shot stingers (stingWave/Scale/Nightmare/Succession) ride the
+    // same bus without disturbing the bed.
+    // AUTOPLAY: music() before the first user gesture only records the
+    // request; maybeStartMusic() (called at the end of ensure()) starts
+    // the scheduler once the context exists — every voice already calls
+    // ensure() on taps, so the first uiSelect/footstep unlocks audio.
+    // SILENT MODE: iOS's hardware silent switch does not mute Web Audio;
+    // the in-app 🔊 toggle (oversight_mute, master gain) is the control.
+    let musicGain = null;
+    let muMode = null, muTheme = null, muTimer = null;
+    let muNext = 0, muNextMotif = 0, muChordI = 0, muStepI = 0, muFoot = 0;
+    const MU_CHORDS = [
+      [0, 7, 12, 16, 21], [-4, 3, 7, 12, 19],
+      [3, 7, 12, 15, 22], [-2, 5, 9, 12, 17],
+    ];
+    const MU_PENTA = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17];
+    const MU_BOX = [0, 7, 12, 7, 3, 10, 12, 10, 0, 7, 12, 16, 12, 10, 7, 3];
+    function muSemi(n) { return 110 * Math.pow(2, n / 12); }
+    function muTone(freq, t, dur, o) {
+      o = o || {};
+      try {
+        const osc = ctx.createOscillator();
+        osc.type = o.type || 'sine'; osc.frequency.value = freq;
+        try { osc.detune.value = Math.random() * 10 - 5; } catch (e) {}
+        const g = ctx.createGain();
+        const peak = o.gain == null ? 0.05 : o.gain;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(peak, t + (o.attack || Math.min(2.5, dur * 0.35)));
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        if (o.lp) { const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; osc.connect(f); f.connect(g); }
+        else osc.connect(g);
+        g.connect(musicGain);
+        osc.start(t); osc.stop(t + dur + 0.2);
+      } catch (e) {}
+    }
+    function muPlink(freq, t, o) {
+      o = o || {};
+      muTone(freq, t, o.dur || 1.2, { gain: o.gain || 0.022, attack: 0.005 });
+      muTone(freq * 2.01, t, (o.dur || 1.2) * 0.5, { gain: (o.gain || 0.022) * 0.4, attack: 0.005 });
+    }
+    function muNoiseHit(t, dur, freq, gain, type) {
+      try {
+        const src = noise(dur + 0.1); if (!src) return;
+        const f = ctx.createBiquadFilter(); f.type = type || 'bandpass';
+        f.frequency.value = freq; f.Q.value = 1;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(gain, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        src.connect(f); f.connect(g); g.connect(musicGain);
+        src.start(t); src.stop(t + dur + 0.1);
+      } catch (e) {}
+    }
+    function muEnsureSched() {
+      if (!ctx || !musicGain) return;
+      if (muTimer || !muMode || muMode === 'off') return;
+      const t = ctx.currentTime;
+      muNext = t + 0.3; muNextMotif = t + 6 + Math.random() * 8;
+      muChordI = 0; muStepI = 0;
+      muTimer = setInterval(muTick, 1000);
+    }
+    function maybeStartMusic() { try { muEnsureSched(); } catch (e) {} }
+    function music(mode, theme) {
+      muMode = mode; muTheme = theme || null;  // recorded even pre-gesture
+      if (!ensure()) return false;
+      if (!musicGain) { musicGain = ctx.createGain(); musicGain.gain.value = 0; musicGain.connect(musicBus); }
+      try {
+        const t = ctx.currentTime;
+        musicGain.gain.cancelScheduledValues(t);
+        musicGain.gain.setValueAtTime(Math.max(0.0001, musicGain.gain.value), t);
+        musicGain.gain.linearRampToValueAtTime(mode === 'off' ? 0.0001 : 0.85, t + 2.5);
+      } catch (e) {}
+      muEnsureSched();
+      return true;
+    }
+    function muTick() {
+      if (!ctx || muted || !muMode || muMode === 'off') return;
+      const t = ctx.currentTime;
+      if (muNext < t) muNext = t + 0.2;
+      let guard = 0;
+      while (muNext < t + 2.5 && guard++ < 12) { muNext = muSchedule(muNext); }
+      if (t >= muNextMotif) { muMotif(t); muNextMotif = t + 25 + Math.random() * 30; }
+    }
+    function muSchedule(t) {
+      const th = muTheme || '';
+      if (muMode === 'menu') return muMenuStep(t);
+      if (muMode === 'scenario') return muScenarioStep(t, th);
+      return muAmbientStep(t, th);
+    }
+    function muMenuStep(t) {
+      const n = MU_BOX[muStepI % MU_BOX.length]; muStepI++;
+      muPlink(muSemi(n + 12), t, { dur: 2.2, gain: 0.05 });
+      if (muStepI % 16 === 1) {
+        const ch = MU_CHORDS[muChordI % MU_CHORDS.length]; muChordI++;
+        ch.forEach(s => muTone(muSemi(s - 12), t, 14, { gain: 0.028, lp: 900 }));
+      }
+      return t + 2.4;
+    }
+    function muAmbientStep(t, th) {
+      const night = th.indexOf('/n') >= 0, danger = th.indexOf('/d') >= 0;
+      const fam = th.split('/')[0];
+      const ch = MU_CHORDS[muChordI % MU_CHORDS.length]; muChordI++;
+      const lp = night ? 550 : (fam === 'haven' ? 1400 : 1000);
+      ch.forEach(s => muTone(muSemi(s - 12), t, 13, { gain: 0.04, lp: lp }));
+      if (fam === 'haven') muTone(muSemi(-5), t, 13, { gain: 0.03, lp: 700 });
+      if (fam === 'wet') {
+        const drops = 2 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < drops; i++) muPlink(1400 + Math.random() * 1200, t + Math.random() * 14, { dur: 0.7, gain: 0.012 });
+      }
+      if (danger) {
+        for (let i = 0; i < 6; i++) muTone(55, t + i * 2.2, 0.5, { gain: 0.07, attack: 0.02 });
+        return t + 13.5;
+      }
+      return t + (night ? 20 + Math.random() * 8 : 14 + Math.random() * 7);
+    }
+    function muMotif(t) {
+      if (muMode !== 'ambient') return;
+      if (Math.random() < 0.35) return;  // sparser than sparse — silence is the bed
+      const th = muTheme || '';
+      const fam = th.split('/')[0];
+      const n = MU_PENTA[Math.floor(Math.random() * MU_PENTA.length)];
+      muPlink(muSemi(n + 12), t, { dur: 3, gain: 0.03 });
+      if (fam === 'ruin' && Math.random() < 0.5) muTone(muSemi(n + 24), t, 2.5, { gain: 0.018, type: 'square', lp: 1800 });
+    }
+    function muScenarioStep(t, th) {
+      if (th === 'contest') {
+        muTone(65, t, 0.4, { gain: 0.08, attack: 0.01 });
+        muTone(65, t + 0.9, 0.4, { gain: 0.06, attack: 0.01 });
+        if (muStepI % 8 === 0) muNoiseHit(t, 3, 3000, 0.015, 'highpass');
+        muStepI++;
+        return t + 1.8;
+      }
+      if (th === 'table') {
+        muTone(55, t, 11, { gain: 0.06, attack: 3 });
+        muTone(110.5, t, 11, { gain: 0.03, attack: 3 });
+        if (muStepI % 2 === 0) muPlink(880, t + 1, { dur: 6, gain: 0.035 });
+        muStepI++;
+        return t + 10;
+      }
+      if (th === 'ending-light') {
+        [0, 4, 7, 12, 16].forEach(s => muTone(muSemi(s - 12), t, 16, { gain: 0.045, lp: 1600 }));
+        return t + 15;
+      }
+      // ending-dark: cold high drone, slowly thinning
+      muTone(muSemi(24), t, 14, { gain: 0.03, lp: 2400 });
+      muTone(muSemi(24) * 1.007, t, 14, { gain: 0.03, lp: 2400 });
+      return t + 13;
+    }
+    // ---- one-shot stingers: ride the bus, never disturb the bed ----
+    function stingWave() {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      try {
+        const o = ctx.createOscillator(); o.type = 'sawtooth';
+        o.frequency.setValueAtTime(180, t); o.frequency.exponentialRampToValueAtTime(720, t + 2.6);
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 900;
+        const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(0.05, t + 2.4); g.gain.exponentialRampToValueAtTime(0.0001, t + 2.8);
+        o.connect(f); f.connect(g); g.connect(musicGain); o.start(t); o.stop(t + 3);
+      } catch (e) {}
+      muTone(48, t + 2.7, 2.5, { gain: 0.14, attack: 0.01 });
+      muNoiseHit(t + 2.7, 1.8, 300, 0.06, 'lowpass');
+    }
+    function stingScale() {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      [0, 4, 7, 12, 16, 19].forEach((iv, i) => muPlink(muSemi(iv + 12), t + i * 0.38, { dur: 4, gain: 0.05 }));
+    }
+    function stingNightmare() {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      [0, 1, 6, 13].forEach(iv => muTone(muSemi(iv), t, 9, { gain: 0.035, attack: 3.5, lp: 480 }));
+    }
+    function stingSuccession() {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      muPlink(muSemi(-5), t, { dur: 7, gain: 0.06 });
+      muTone(muSemi(-12), t, 9, { gain: 0.05, attack: 2, lp: 400 });
+    }
+    // ---- footsteps + UI ----
+    // FOOTSTEPS (Steve 2026-10-12): every landed square sounds. Terrain
+    // family arrives from game.js (footstepFamily). Subtle by design —
+    // short filtered noise, alternating L/R, never louder than the world.
+    function footstep(d) {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      const fam = (d && d.family) || 'soft';
+      const cfg = { soft: [900, 0.035, 'bandpass', 0.09], wet: [1500, 0.045, 'bandpass', 0.13],
+                    stone: [2600, 0.028, 'highpass', 0.07], haven: [420, 0.032, 'lowpass', 0.1] }[fam]
+                || [900, 0.035, 'bandpass', 0.09];
+      muFoot++;
+      try {
+        const src = noise(cfg[3] + 0.05); if (!src) return;
+        const f = ctx.createBiquadFilter(); f.type = cfg[2];
+        f.frequency.value = cfg[0] * (0.9 + Math.random() * 0.2); f.Q.value = 0.9;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(cfg[1], t + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + cfg[3]);
+        src.connect(f); f.connect(g);
+        let out = g;
+        try { const p = ctx.createStereoPanner(); p.pan.value = (muFoot % 2 ? -0.18 : 0.18); g.connect(p); out = p; } catch (e) {}
+        out.connect(sfxBus);
+        src.start(t); src.stop(t + cfg[3] + 0.05);
+      } catch (e) {}
+    }
+    // UI SELECT (Steve 2026-10-12): the main menu answers every tap — soft
+    // two-tone blip, friendly, never clicky.
+    function uiSelect() {
+      if (!ensure()) return; if (muted) return;
+      const t = ctx.currentTime;
+      try {
+        [660, 990].forEach((fq, i) => {
+          const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fq;
+          const g = ctx.createGain(); const st = t + i * 0.055;
+          g.gain.setValueAtTime(0.0001, st);
+          g.gain.linearRampToValueAtTime(0.045, st + 0.012);
+          g.gain.exponentialRampToValueAtTime(0.0001, st + 0.12);
+          o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.15);
+        });
+      } catch (e) {}
+    }
+
   Game.audio = CombatAudio;
 
   // (beamFlash lives inside the CombatAudio IIFE — impact() resolves it there.)

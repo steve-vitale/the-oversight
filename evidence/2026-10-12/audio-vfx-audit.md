@@ -47,3 +47,38 @@ This file is the consolidated finding + what was built.
 
 - System voice wiring + 23 synths + aggroAudio + death audio + VFX fixes (this worktree, [needs-eyes]).
 - Debug scenarios + proof tests (this worktree, [needs-eyes]).
+
+---
+
+# PART 2 — General SFX + Music (Steve 2026-10-12, same day)
+
+Steve's words: "We need more general sound effects. Walking, background soundtracks. Selecting options in the main menu. Main menu soundtrack. Soundtracks for all special scenarios."
+
+## Architecture decision (documented per Steve's instruction)
+
+**Music is synthesized generative layers — zero static assets.** Three reasons:
+1. **PWA weight**: static tracks for menu/ambient/scenarios would add MBs on top of the 14MB of voice MP3s already shipped.
+2. **40+ hour sessions** (Steve's pacing law): a 3-minute loop becomes torture; generative ambient never repeats, never grates. Sparse by design — slow detuned pad (chord every 14–22s), rare pentatonic motif (every 25–55s, 35% skipped), silence is the bed.
+3. **Aesthetic fit**: the entire SFX system is already Web Audio synth.
+
+**Layers**: `menu` (music-box arpeggio) / `ambient` (adaptive bed) / `scenario` (contest, table, ending-light, ending-dark beds) / `off`. One bus (`musicBus → master`, so the existing 🔊 mute toggle covers music), one lookahead scheduler (1s interval, 2.5s lookahead), 2.5s crossfade ramps on switch.
+**Autoplay**: `Game.music()` before the first gesture only records the request; `maybeStartMusic()` at the end of `ensure()` starts the scheduler once the AudioContext exists — every tap already calls `ensure()` via voices, so the first uiSelect/footstep unlocks audio. No separate gesture listener needed.
+**Silent mode**: iOS's hardware silent switch does not mute Web Audio; the in-app 🔊 toggle (persisted `oversight_mute`) is the control. Documented in code.
+
+## What was built
+
+- **Footsteps**: `footstepFamily(tileType)` (pure, node-tested) — haven/wet/stone/soft; `_footstep()` hooked into all three movement choke points (`microMove`, `pathStep`, `tbPlayerMove` tile loop). Short filtered noise, alternating L/R pan, gain 0.03–0.045 — subtle by design.
+- **Ambient bed**: `ambientTheme()` keys `<family>[/n][/d]` — biome family (haven warm / wild / wet droplets / ruin metallic), night darkens (lowpass 550Hz, slower), danger (monster ≤4 tiles or combat) adds a low 55Hz pulse under the calm. `refreshAmbientMusic()` only switches on key change and **never clobbers a scenario bed** (`_musicMode` guard).
+- **Main menu**: `Game.music('menu')` on title; `uiSelect()` blip wired capture-phase to every title-screen tap target.
+- **Scenario music**: contest bed on `fireShow`/`fireContest`, released on `_showEnd`/`_showVillagerEnd`/`_contestEnd`; one-shot stingers (ride the bus, never disturb the bed) — `stingWave` (wave unlocks), `stingScale` (regional dawn + national), `stingNightmare` (sleep), `stingSuccession` (mantle); `table` bed on `tableScene`; `ending-light`/`ending-dark` beds on `tableResolveFinal`.
+- **Robustness**: context-death path clears the scheduler interval (no double timers) and resets music state; muted scheduler idles.
+
+## Proof tests
+
+- `scripts/test-music-system-20261012.js` — **68/68 green**: dispatcher headless-safe, all 16 tile-type family mappings, theme keys (biome/night/danger), switch-only-on-change, scenario-bed protection, musicAmbient reset, `_footstep` headless-safe, every fired scenario theme has a recipe, full API surface, mute/context-death/autoplay wiring.
+- All 5 new scenarios PLAYED in-harness (listed + categorized + no-throw); the footsteps scenario walks 3 real squares asserting terrain-family footsteps fire.
+- Regressions: ontology 85/85, system-voice 17/17, wave45 registry 26/26, audiovfx-scenarios 242/242, census zero-silent-hooks still green.
+
+## Debug scenarios (5 new, all played)
+
+`musicMenu`, `musicAmbience`, `musicStingers` (staggered 6s), `musicContest` (bed + 15s release), `footsteps` — all in the 🔊 Audio category.

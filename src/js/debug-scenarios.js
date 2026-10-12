@@ -1325,6 +1325,55 @@
       Game.say('🎬 Played: alienHeavyHit, flash, shake, heroCard, contestAnnounce. If any did not render, the dispatcher dropped it — fail loudly.');
     },
 
+    // MUSIC BOARDS (audio-vfx-audit, Steve 2026-10-12): the generative music
+    // layers — menu theme, adaptive ambient bed, scenario stingers/beds,
+    // terrain footsteps. Two taps: run, listen.
+    musicMenu() {
+      freshGame();
+      Game.say('');
+      Game.say('🎵 SCENARIO: the main-menu theme — a music box with a loose tooth. On the title screen every button answers with the select blip.');
+      try { Game.music('menu'); } catch (e) {}
+    },
+
+    musicAmbience() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      s.insideHaven = false;
+      s.mx = 2; s.my = 4;
+      Game.say('');
+      Game.say('🎵 SCENARIO: the ambient bed. Walk — meadow, wet, ruin, night, and danger each tint it. The motif is rare on purpose; silence is the bed.');
+      try { Game.musicAmbient(); } catch (e) {}
+    },
+
+    musicStingers() {
+      freshGame();
+      Game.say('');
+      Game.say('🎵 SOUND CHECK: wave unlock (rise-and-hit), scale chime, nightmare cluster, succession bell — a few seconds apart.');
+      ['stingWave', 'stingScale', 'stingNightmare', 'stingSuccession'].forEach(function (name, i) {
+        setTimeout(function () { try { Game.audioEvent(name); } catch (e) {} }, i * 6000);
+      });
+    },
+
+    musicContest() {
+      freshGame();
+      Game.say('');
+      Game.say('🎵 SCENARIO: the contest bed — tense, televised. It releases back to the world after 15 seconds.');
+      try { Game.music('scenario', 'contest'); } catch (e) {}
+      setTimeout(function () { try { Game.musicAmbient(); } catch (e) {} }, 15000);
+    },
+
+    footsteps() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      s.insideHaven = false;
+      s.mx = 2; s.my = 4;
+      Game.say('');
+      Game.say('🎵 SCENARIO: footsteps. Walk east — every landed square sounds its terrain. Soft, wet, stone, haven each land differently.');
+      try { Game._footstep(); } catch (e) {}
+    },
+
     // MILESTONE (audio-vfx-audit, Steve 2026-10-12): the wave-4 unlock beat,
     // played — Mirror Draft arrives with flash, shake, and sound.
     milestoneWave() {
@@ -2087,6 +2136,11 @@
       ['audioWaves', '🔊 Sound check: wave 4/5 voices'],
       ['vfxShowcase', '🎬 VFX check: moments board'],
       ['milestoneWave', '🌊 Milestone: wave unlock beat'],
+      ['musicMenu', '🎵 Music: main-menu theme'],
+      ['musicAmbience', '🎵 Music: ambient bed'],
+      ['musicStingers', '🎵 Music: scenario stingers'],
+      ['musicContest', '🎵 Music: contest bed'],
+      ['footsteps', '🎵 Footsteps across terrain'],
       ['ambush', '🔪 Ambush — the walk turns'],
       ['mootAccused', '⚖️ Moot — you stand accused'],
       ['mootJuror', '⚖️ Moot — you are the juror'],
@@ -2143,7 +2197,7 @@
       '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving', 'washedout'],
       '📺 Contests & Shows': ['contestPit', 'contestHide', 'contestForage', 'contestWatch', 'showWhyEat', 'broadcastShow', 'contestEligible'],
       '👤 Alien Players': ['alienEncounter'],
-      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves'],
+      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves', 'musicMenu', 'musicAmbience', 'musicStingers', 'musicContest', 'footsteps'],
       '🎬 VFX & Milestones': ['vfxShowcase', 'milestoneWave'],
       '💍 Items': ['keepsake'],
       '🌍 Scale': ['scaleDawn', 'scaleCouncil', 'scaleCharter', 'scaleCourt', 'scaleWatchers', 'scaleVillage', 'scaleRegional', 'scaleNational', 'scaleGlobal'],
