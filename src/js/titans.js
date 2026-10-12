@@ -24,6 +24,12 @@
 
 (function () {
   var R = Math.random;
+  // LOAD-TIME BINDING (fix 2026-10-12): bare `Game` here is a ReferenceError
+  // in every environment — game.js's `const Game` is IIFE-scoped, never a
+  // global. Every other late module binds it this way (pods.js etc.). Without
+  // this line the whole titan system (gate, omens, coalition) silently never
+  // loads: the IIFE throws at Object.assign(Game, ...) and nothing attaches.
+  const Game = (globalThis.Scattering || {}).Game;
 
   // ---------- data ----------
 

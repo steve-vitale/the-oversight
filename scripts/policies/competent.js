@@ -567,6 +567,20 @@ function gearUp(Game, ctx) {
       const def = (Game.data.items || []).find(d => d.id === (w.itemId || w.id));
       return ((def || {}).weapon || {}).bonus || 0;
     };
+    // WEAPON SLOT ROUTING (fix 2026-10-12): route exactly like the inventory
+    // UI (app.js data-equip-w) — isRangedWeapon (range > 1, which INCLUDES
+    // spears), not the def's flavor type. The old `w.type === 'ranged'` check
+    // sent every spear to 'melee', where equip() refuses it ("That goes on
+    // your ranged") — so the policy silently fought bare-fisted with spears
+    // in the pack, and ctx.geared counted the failed equip as success.
+    const weaponSlot = (def, w) => {
+      try {
+        const g = typeof globalThis !== 'undefined' ? globalThis : {};
+        const Seq = (g.Scattering && g.Scattering.equipment) || (g.S && g.S.equipment);
+        if (Seq && typeof Seq.isRangedWeapon === 'function' && Seq.isRangedWeapon(def)) return 'ranged';
+      } catch (e) {}
+      return (w && w.type === 'ranged') ? 'ranged' : 'melee';
+    };
     // WEAPON: best bonus among USABLE weapons in inventory -> melee or ranged slot
     let bestI = -1, bestB = -1, bestSlot = 'melee';
     let dryI = -1, dryB = -1, drySlot = 'ranged', dryW = null;
@@ -575,7 +589,7 @@ function gearUp(Game, ctx) {
       if (def && def.class === 'weapon') {
         const w = def.weapon || {};
         const b = w.bonus || 0;
-        const slot = w.type === 'ranged' ? 'ranged' : 'melee';
+        const slot = weaponSlot(def, w);
         if (ammoOk(w)) {
           if (b > bestB) { bestB = b; bestI = i; bestSlot = slot; }
         } else if (b > dryB) { dryB = b; dryI = i; drySlot = slot; dryW = w; }

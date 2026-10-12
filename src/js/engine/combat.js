@@ -83,6 +83,16 @@
         const cx = ax + dx, cy = ay + dy;
         if (inGrid(cx, cy)) cells.push({ cx, cy });
       }
+    } else if (type === 'single') {
+      // SINGLE-TARGET (fix 2026-10-12, combat matrix): one tile — the aim
+      // point. 'single' was missing here, so every monster with a 'single'
+      // pattern and no bespoke declare (strike, eulogy, cancellation,
+      // spoiler, suburb, terms_of_service, ad_break; nielsen is titan-gated)
+      // telegraphed forever against EMPTY cells and dealt zero damage — the
+      // wave-5 Cancellation was a 1800-HP punching bag that never stamped.
+      // encWantRange already treats 'single' like 'direct' (range 3); this
+      // completes the circuit through the generic declare/resolve path.
+      if (inGrid(tx, ty)) cells.push({ cx: tx, cy: ty });
     }
     // dedupe
     const seen = new Set(), out = [];

@@ -113,8 +113,11 @@ function endTurn(Game) {
   // pool follows the gate
   setState(90, { 4: 3 }, () => 'national');
   const pool = Game.monsterWavePool();
-  ok('wave-5 pool has 56', pool.length === 56, 'got ' + pool.length);
-  ok('pool includes eater + finale', pool.some(m => m.id === 'eater') && pool.some(m => m.id === 'finale'));
+  // TITAN CANON (2026-10-11): titans never wander — the pool excludes the 3
+  // titans (eater, nielsen, finale). 56 - 3 = 53.
+  ok('wave-5 pool has 53 (56 minus 3 titans)', pool.length === 53, 'got ' + pool.length);
+  ok('pool EXCLUDES titans (never wander)', !pool.some(m => Game.isTitan(m.id)),
+    'titans in pool: ' + pool.filter(m => Game.isTitan(m.id)).map(m => m.id).join(','));
   setState(1, {}, () => 'village');
   ok('fresh pool is wave-1 only (15)', Game.monsterWavePool().length === 15, 'got ' + Game.monsterWavePool().length);
   // spawnWaveTarget covers wave 5
@@ -129,6 +132,15 @@ function endTurn(Game) {
     try {
       s.health = 9000; s.mx = 4; s.my = 4;
       s.equipped = { melee: { itemId: 'fire_hardened_spear', name: 'spear' } };
+      // TITAN CANON (2026-10-11): solo titan starts are hard-refused, never
+      // fought. Expect the refusal, said aloud — not a fight.
+      if (Game.isTitan(id)) {
+        said.length = 0;
+        const r = Game.startCombat(id);
+        ok(id + ' solo combat hard-refused', r === null && !Game.tbfight);
+        ok(id + ' refusal said aloud', said.some(t => /cannot face this alone/i.test(t)));
+        continue;
+      }
       Game.startCombat(id);
       ok(id + ' combat starts', !!Game.tbfight);
       let guard = 0, crashed = false;
