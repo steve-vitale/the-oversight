@@ -159,14 +159,26 @@ function talkRound(Game, ctx) {
   } catch (e) {}
 }
 
-// Forage when it matters: pantry low or personal reserves low.
-// An experienced player doesn't wait for the ledger to scream.
-function needTrip(Game) {
+// Forage as a matter of course: a competent citizen works the land daily,
+// not just when the ledger screams. The old gate (pantry < 25000) meant the
+// player never foraged while the starting pantry looked fine — living off
+// the commons, giving nothing, and getting exiled for freeloading by day 17
+// (journey-scale r3 2026-10-11: 4/4 seeds exiled before the courtship began,
+// all scale verbs blocked). Contribution is daily, not emergency-only.
+function needTrip(Game, ctx) {
   try {
     const pantry = ((Game.state.village || {}).pantry || [])
       .reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
     const s = Game.state.scholar;
-    return pantry < 25000 || s.kcal < Game.kcalCap() * 0.5;
+    if (pantry < 25000 || s.kcal < Game.kcalCap() * 0.5) return true;
+    // CONTRIBUTION MAINTENANCE: if we haven't given to the pantry in 3 days,
+    // we're taking without giving — forage. The village notices.
+    if (ctx) {
+      const day = (s && s.day) || 0;
+      const lastGive = ctx._lastGiveDay || 0;
+      if (day - lastGive >= 3) return true;
+    }
+    return false;
   } catch (e) { return false; }
 }
 
@@ -294,7 +306,7 @@ function donateHaul(Game, ctx) {
       if (!it || (it.kcalEach || 0) <= 0 || it.edible === false) continue;
       const ik = it.kcalEach * (it.units || 1);
       if (packKcal - ik < keep) continue; // keep the buffer
-      try { Game.donateToPantry(i); packKcal -= ik; ctx.donated = (ctx.donated || 0) + 1; } catch (e) {}
+      try { Game.donateToPantry(i); packKcal -= ik; ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; } catch (e) {}
     }
   } catch (e) {}
 }
@@ -648,7 +660,7 @@ const competent = {
   daily(Game, ctx) {
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
-    if (needTrip(Game)) forageTripSeedFirst(Game, ctx);
+    if (needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
     sortHaul(Game, ctx); // identify the haul at camp — unknowns become food
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
@@ -662,7 +674,7 @@ const competent = {
         const inv = s.inventory || [];
         for (let i = inv.length - 1; i >= 0; i--) {
           if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
-            try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; break; } catch (e) {}
+            try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
           }
         }
       }
