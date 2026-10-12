@@ -50,7 +50,7 @@ function endTurn(Game) {
 
   // ---- 1. roster ----
   const byId = Object.fromEntries(Game.data.monsters.map(m => [m.id, m]));
-  ok('56 monsters total', Game.data.monsters.length === 56, 'got ' + Game.data.monsters.length);
+  ok('59 monsters total', Game.data.monsters.length === 59, 'got ' + Game.data.monsters.length);
   for (const id of [...W3, ...W4, ...W5]) ok(id + ' exists', !!byId[id]);
   ok('9 wave-3', W3.every(id => byId[id] && byId[id].wave === 3));
   ok('9 wave-4 (incl. eater)', W4.every(id => byId[id] && byId[id].wave === 4));
@@ -114,8 +114,11 @@ function endTurn(Game) {
   setState(90, { 4: 3 }, () => 'national');
   const pool = Game.monsterWavePool();
   // TITAN CANON (2026-10-11): titans never wander — the pool excludes the 3
-  // titans (eater, nielsen, finale). 56 - 3 = 53.
-  ok('wave-5 pool has 53 (56 minus 3 titans)', pool.length === 53, 'got ' + pool.length);
+  // titans (herald, nielsen, finale — titans.json, the flags moved 2026-10-12).
+  // CAMPAIGN NODES (finale-campaign.js): finale_crew/finale_opening are
+  // campaignOnly — they arrive by march, never the wild pool.
+  // 59 - 3 titans - 2 campaignOnly = 54.
+  ok('wave-5 pool has 54 (59 minus 3 titans minus 2 campaignOnly)', pool.length === 54, 'got ' + pool.length);
   ok('pool EXCLUDES titans (never wander)', !pool.some(m => Game.isTitan(m.id)),
     'titans in pool: ' + pool.filter(m => Game.isTitan(m.id)).map(m => m.id).join(','));
   setState(1, {}, () => 'village');

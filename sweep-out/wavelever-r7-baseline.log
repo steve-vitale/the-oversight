@@ -1,0 +1,291 @@
+done: seed=1 days=47 end=village-lost unlock={"2":22} barfill={"1":22} scale={"village":1} pfights={"1":4,"2":5} vfights={"1":28,"2":5}
+done: seed=2 days=18 end=village-lost unlock={} barfill={} scale={"village":1} pfights={"1":1} vfights={"1":32}
+done: seed=3 days=99 end=village-lost unlock={"2":33} barfill={"1":33} scale={"village":1} pfights={"1":10,"2":4} vfights={"1":42,"2":7}
+done: seed=4 days=57 end=village-lost unlock={"2":34} barfill={"1":34} scale={"village":1} pfights={"1":4,"2":1} vfights={"1":37,"2":9}
+done: seed=5 days=27 end=village-lost unlock={"2":18} barfill={"1":18} scale={"village":1} pfights={"1":4,"2":1} vfights={"1":19,"2":6}
+done: seed=6 days=20 end=village-lost unlock={"2":15} barfill={"1":15} scale={"village":1} pfights={"1":2} vfights={"1":32,"2":1}
+done: seed=7 days=67 end=village-lost unlock={"2":16,"3":55} barfill={"1":16,"2":55} scale={"village":1} pfights={"1":6,"2":5} vfights={"1":53,"2":10}
+done: seed=8 days=112 end=village-lost unlock={"2":22,"3":61} barfill={"1":22,"2":61} scale={"village":1} pfights={"1":11,"2":12,"3":2} vfights={"1":36,"2":24,"3":9}
+done: seed=9 days=143 end=village-lost unlock={"2":26,"3":79} barfill={"1":26,"2":79} scale={"village":1} pfights={"1":14,"2":5} vfights={"1":58,"2":32,"3":7}
+done: seed=10 days=46 end=village-lost unlock={"2":18} barfill={"1":18} scale={"village":1} pfights={"1":4,"2":2} vfights={"1":23,"2":7}
+done: seed=11 days=69 end=village-lost unlock={"2":18,"3":56} barfill={"1":18,"2":56} scale={"village":1} pfights={"1":6,"2":2} vfights={"1":49,"2":25}
+done: seed=12 days=88 end=village-lost unlock={"2":14,"3":54} barfill={"1":14,"2":54} scale={"village":1} pfights={"1":5,"2":4,"3":7} vfights={"1":64,"2":32,"3":18}
+done: seed=13 days=13 end=village-lost unlock={} barfill={} scale={"village":1} pfights={} vfights={"1":25}
+done: seed=14 days=96 end=village-lost unlock={"2":46,"3":83} barfill={"1":46,"2":83} scale={"village":1} pfights={"1":9,"2":3,"3":2} vfights={"1":60,"2":8,"3":1}
+done: seed=15 days=15 end=village-lost unlock={} barfill={} scale={"village":1} pfights={"1":3} vfights={"1":20}
+done: seed=16 days=107 end=village-lost unlock={"2":13,"3":38} barfill={"1":13,"2":38} scale={"village":1} pfights={"1":8,"2":4,"3":5} vfights={"1":51,"2":31,"3":10}
+done: seed=17 days=72 end=village-lost unlock={"2":19,"3":66} barfill={"1":19,"2":66} scale={"village":1} pfights={"1":10,"2":10,"3":2} vfights={"1":41,"2":11,"3":1}
+done: seed=18 days=29 end=village-lost unlock={"2":10} barfill={"1":10} scale={"village":1} pfights={"1":4,"2":1} vfights={"1":28,"2":4}
+done: seed=19 days=52 end=village-lost unlock={"2":15,"3":47} barfill={"1":15,"2":47} scale={"village":1} pfights={"1":3,"2":5} vfights={"1":30,"2":22,"3":1}
+done: seed=20 days=15 end=village-lost unlock={"2":12} barfill={"1":12} scale={"village":1} pfights={"1":3,"2":1} vfights={"1":19}
+
+=== AGGREGATE ===
+{
+  "competent": {
+    "n": 20,
+    "medianDays": 57,
+    "maxDays": 143,
+    "endReasons": {
+      "village-lost": 20
+    },
+    "won": 0,
+    "tableWaiting": 0,
+    "arcDist": {
+      "2": 1,
+      "3": 19
+    },
+    "waveUnlockDist": {
+      "1": 3,
+      "2": 8,
+      "3": 9
+    },
+    "reach": {
+      "w2": {
+        "unlockRuns": 17,
+        "unlockMedianDay": 18,
+        "unlockDays": [
+          22,
+          33,
+          34,
+          18,
+          15,
+          16,
+          22,
+          26,
+          18,
+          18,
+          14,
+          46,
+          13,
+          19,
+          10,
+          15,
+          12
+        ],
+        "barRuns": 17,
+        "barMedianDay": 18
+      },
+      "w3": {
+        "unlockRuns": 9,
+        "unlockMedianDay": 56,
+        "unlockDays": [
+          55,
+          61,
+          79,
+          56,
+          54,
+          83,
+          38,
+          66,
+          47
+        ],
+        "barRuns": 9,
+        "barMedianDay": 56
+      },
+      "w4": {
+        "unlockRuns": 0,
+        "unlockMedianDay": null,
+        "unlockDays": [],
+        "barRuns": 0,
+        "barMedianDay": null
+      },
+      "w5": {
+        "unlockRuns": 0,
+        "unlockMedianDay": null,
+        "unlockDays": [],
+        "barRuns": 0,
+        "barMedianDay": null
+      }
+    },
+    "scaleDist": {
+      "village": 20
+    },
+    "scaleFirst": {
+      "village": {
+        "runs": 20,
+        "medianDay": 1
+      }
+    },
+    "realmMaxMax": 0,
+    "ledAgg": {
+      "1": {
+        "medianPoints": 8,
+        "maxPoints": 15,
+        "capHits": 65,
+        "capTypes": {
+          "hushwolf": 13,
+          "lockpick_raccoon": 8,
+          "gallowdeer": 2,
+          "mirrormoth": 8,
+          "nightcourt": 7,
+          "sunbasker": 2,
+          "belltoad": 3,
+          "hummice": 8,
+          "nightlight_catfish": 3,
+          "nevermore": 3,
+          "white_noise_heron": 4,
+          "bulldozer": 1,
+          "glasswing": 1,
+          "ducks_in_a_row": 2
+        },
+        "counterExtras": 3,
+        "villagerKills": 158,
+        "totalKills": 241,
+        "villagerShare": 65.6,
+        "typesTouched": 15
+      },
+      "2": {
+        "medianPoints": 3,
+        "maxPoints": 11,
+        "capHits": 10,
+        "capTypes": {
+          "giant_mosquito": 1,
+          "paparazzo": 2,
+          "heckler": 2,
+          "landlord": 1,
+          "voice_mimic_radio": 1,
+          "bright_idea": 1,
+          "alien_tick": 1,
+          "statickite": 1
+        },
+        "counterExtras": 3,
+        "villagerKills": 37,
+        "totalKills": 70,
+        "villagerShare": 52.9,
+        "typesTouched": 14
+      },
+      "3": {
+        "medianPoints": 0,
+        "maxPoints": 2,
+        "capHits": 2,
+        "capTypes": {
+          "terms_of_service": 1,
+          "spool": 1
+        },
+        "counterExtras": 0,
+        "villagerKills": 0,
+        "totalKills": 4,
+        "villagerShare": 0,
+        "typesTouched": 2
+      },
+      "4": {
+        "medianPoints": 0,
+        "maxPoints": 0,
+        "capHits": 0,
+        "capTypes": {},
+        "counterExtras": 0,
+        "villagerKills": 0,
+        "totalKills": 0,
+        "villagerShare": null,
+        "typesTouched": 0
+      },
+      "5": {
+        "medianPoints": 0,
+        "maxPoints": 0,
+        "capHits": 0,
+        "capTypes": {},
+        "counterExtras": 0,
+        "villagerKills": 0,
+        "totalKills": 0,
+        "villagerShare": null,
+        "typesTouched": 0
+      }
+    },
+    "villOutcomes": {
+      "1": {
+        "n": 747,
+        "vKill": 158,
+        "vFlee": 316,
+        "vDie": 39,
+        "alreadyDead": 29,
+        "evade": 48,
+        "other": 157,
+        "o_mFlee": 157
+      },
+      "2": {
+        "n": 234,
+        "vKill": 37,
+        "vFlee": 124,
+        "vDie": 11,
+        "alreadyDead": 10,
+        "evade": 12,
+        "other": 40,
+        "o_mFlee": 40
+      },
+      "3": {
+        "n": 47,
+        "vKill": 0,
+        "vFlee": 40,
+        "vDie": 3,
+        "alreadyDead": 0,
+        "evade": 2,
+        "other": 2,
+        "o_mFlee": 2
+      }
+    },
+    "fightsPerDayMedian": {
+      "p1": 0.094,
+      "p2": 0.043,
+      "v1": 0.704,
+      "v2": 0.158,
+      "p3": 0.028,
+      "v3": 0.049
+    },
+    "countersKnown": 188,
+    "counterTele": 188,
+    "deaths": 163,
+    "deathCausesTop": [
+      [
+        "combat",
+        59
+      ],
+      [
+        "monster",
+        44
+      ],
+      [
+        "starvation",
+        23
+      ],
+      [
+        "sickness",
+        7
+      ],
+      [
+        "a wound that wouldn't close",
+        7
+      ],
+      [
+        "contest",
+        6
+      ],
+      [
+        "thirst",
+        5
+      ],
+      [
+        "ambush",
+        2
+      ]
+    ],
+    "deedDayMedian": {
+      "w1": {
+        "runs": 20,
+        "medianDay": 11
+      },
+      "w2": {
+        "runs": 12,
+        "medianDay": 54
+      },
+      "w3": {
+        "runs": 2,
+        "medianDay": 92
+      },
+      "w4": null,
+      "w5": null
+    },
+    "meanBreadth": 43.4,
+    "meanStage": 2.8
+  }
+}
+wrote sweep-out/wavelever-r7-baseline.json
