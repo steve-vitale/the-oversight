@@ -25795,7 +25795,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // sev2: 6->5, healer still -1). Sickness should degrade and threaten,
         // not finish off a villager who was merely unlucky on the water roll.
         const sickDmg = Math.max(1, 1 + (s.severity || 1) * 2 - (healerHere ? 1 : 0));
-        try { this.hurtVillager(vid, sickDmg, 'sickness'); } catch (e) {}
+        // DEATH-CAUSE HONESTY (longsim disease r3 2026-10-11): the engine
+        // KNOWS which disease this is (villagerDiseaseId) and the death
+        // narration below already says the true name when the village knows
+        // it (diagnosed or villageKnowsDisease — same gate as sickName).
+        // Route that same knowledge into the death cause so the corpse/fallen
+        // record and telemetry name the disease instead of a bare 'sickness'
+        // (the old '?' attribution gap). Unknown stays symptom-honest:
+        // diseases never announce their names — only symptoms.
+        let sickCause = 'sickness';
+        try {
+          const sdid = this.villagerDiseaseId ? this.villagerDiseaseId(s) : null;
+          if (sdid && sickName(s)) sickCause = sdid;
+          else if (s && s.name && /food poisoning|bad belly|spoiled gut|poisoned/i.test(s.name)) sickCause = s.name;
+        } catch (e) {}
+        try { this.hurtVillager(vid, sickDmg, sickCause); } catch (e) {}
         // DEAD IS DEAD (2026-10-08): hurtVillager now routes lethal sickness
         // through the real death pipeline. Clean up the sick record — no
         // "on the mend" for a corpse.

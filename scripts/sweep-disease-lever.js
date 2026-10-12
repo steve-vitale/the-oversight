@@ -91,7 +91,7 @@ function parseList(env, def) {
   return (process.env[env] || def).split(',').map(s => s.trim()).filter(Boolean);
 }
 
-const DISEASE_RE = /gutrot|trichinosis|lockjaw|wound_?fever|trembles|lemons|eurika|east_?nile|howlbelly|gristlefit|croakbelly|shellgut|witness_?maw|flockmind|disease|sick|plague|pox/;
+const DISEASE_RE = /gutrot|trichinosis|lockjaw|wound_?fever|trembles|lemons|eurika|east_?nile|howlbelly|gristlefit|croakbelly|shellgut|witness_?maw|flockmind|disease|sick|plague|pox|food poisoning|bad belly|spoiled gut|poisoned/;
 
 function bucket(c, monsterNames) {
   c = String(c || '').toLowerCase().trim();
@@ -117,6 +117,11 @@ function diseaseIdOf(c) {
   for (const id of DISEASE_IDS) {
     if (c.includes(id) || c.includes(id.replace(/_/g, ' '))) return id;
   }
+  // villager light-sim food-poisoning names (game passes s.name through now)
+  if (/food poisoning/.test(c)) return 'food_poisoning';
+  if (/bad belly/.test(c)) return 'bad_belly';
+  if (/spoiled gut/.test(c)) return 'spoiled_gut';
+  if (/poisoned/.test(c)) return 'poisoned';
   return '?';
 }
 
