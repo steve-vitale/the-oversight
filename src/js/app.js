@@ -16030,9 +16030,15 @@
     let _bufAfter = [];
     try { _bufAfter = (typeof Game.bufAfterimageCells === 'function') ? (Game.bufAfterimageCells() || []) : []; } catch (e) { _bufAfter = []; }
     let html = '';
-    for (let cy = 0; cy < 9; cy++) {
+    // TITAN FIGHT (Steve 2026-10-11): 12x12 grid, smaller cells, same screen space.
+    // More cells for 10+ fighters, but cells shrink so it fits mobile.
+    let _gridN = 9;
+    try {
+      if (document.body.classList.contains('titan-fight')) _gridN = 12;
+    } catch (e) {}
+    for (let cy = 0; cy < _gridN; cy++) {
       html += '<div class="drow">';
-      for (let cx = 0; cx < 9; cx++) {
+      for (let cx = 0; cx < _gridN; cx++) {
         const cell = cells[cy][cx];
         const isMe = (cx === pmx && cy === pmy);
         let g, cls = 'cell';

@@ -1495,3 +1495,13 @@ body.titan-fight .cell.player-spotlight {
   border-radius: 4px;
   z-index: 3;
 }
+
+/* TITAN FIGHT 12x12 (Steve 2026-10-11 correction): more cells, smaller cells,
+   same total pixels. The 12x12 grid fits 10+ fighters on mobile. */
+body.titan-fight .cell {
+  width: calc(100% / 12);
+  font-size: clamp(8px, 2.6vw, 20px);
+}
+body.titan-fight .detail {
+  gap: 1px;
+}
