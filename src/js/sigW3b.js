@@ -19,6 +19,7 @@
 //   - interleave: hooks add the signature layer around the generic interpreter — spool's replay and the chorus count own their turns outright (their telegraphs promise exactly that: harmless watching, then the replay; the count, then the kick); the ToS clause-writing alternates with the normal Clause attack (code: tosClauses)
 //   - no_silent: every signature event narrates via say() — nothing happens quietly (code: tosClauses)
 //   - counterplay_real: boring replays, dancing, gravel, reading, and the loophole all resolve through real fight state, never flags that lie (code: tbTosInvokeLoophole)
+//   - chorus_advance_full_grid: the chorus line's count-step uses the engine's stepToward over the full 0..8 grid — a 1..7 clamp stranded it when the player stood on the sealed arena's edge (barrier holds, monster can't follow, kick can't reach, fight never ends); monsters were sent to fight (code: chorusBeat)
 // consumes:
 //   - say, tbDamage, addHealth, audioEvent
 //   - hasStatus, applyStatus
@@ -347,14 +348,19 @@
         game.say('The music is gone — cotton quiet. But you can feel the floor thump. (Deaf: no beat count. The kick still comes.)');
       }
       // the line dances closer while it counts — positioning pressure, not
-      // damage. One tile toward you if the tile is free.
-      var sx = Math.sign(p.mx - m.mx), sy = Math.sign(p.my - m.my);
-      var tx2 = m.mx + sx, ty2 = m.my + sy;
-      var occupied = f.fighters.some(function (o) {
-        return o !== m && o.alive && !o.fled && o.mx === tx2 && o.my === ty2;
-      });
-      if ((sx || sy) && tx2 >= 1 && tx2 <= 7 && ty2 >= 1 && ty2 <= 7 && !occupied) {
-        m.mx = tx2; m.my = ty2;
+      // damage. One tile toward you if the tile is free. Uses the engine's
+      // stepToward (full 0..8 grid): the old hand-rolled 1..7 clamp stranded
+      // the monster when the player stood on the sealed arena's edge — the
+      // barrier holds ("no one leaves until this is decided"), the monster
+      // can't follow, the kick can't reach, and the fight never ends
+      // (longsim contests r5 2026-10-11). Monsters were sent to fight;
+      // purposeless disengagement is not (canon).
+      var stp = null;
+      try {
+        stp = game.tbStepToward(m, p.mx, p.my, function (x, y) { return !game.tbCanOccupy(m, x, y); }, null);
+      } catch (e) { stp = null; }
+      if (stp && (stp.x !== m.mx || stp.y !== m.my)) {
+        m.mx = stp.x; m.my = stp.y;
         if (!deaf) game.say('The line shuffles a step closer, keeping the count.');
       }
       m.clLastPx = p.mx; m.clLastPy = p.my;

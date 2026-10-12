@@ -9,6 +9,7 @@
 //   - _cxPrizeAbilityOffer(contest) -> sets s.abilityChoices (1-of-3 system_offer abilities, dark/OP tiers excluded, category-biased); false when slots full / offer pending / nothing to offer
 //   - _cxPrizeSynergyHint() -> +1 discovery attempt on an undiscovered synergy whose legs are held, through the real tease/unlock path; false when nothing qualifies
 //   - _cxPrizeKnowledgeDump() -> identifies one random unidentified plant via the real identifyPlant path; false when everything is named
+//   - _cxPrizeEvolutionAssist(contest) -> story-moment bond on a bonded relic (sentimental preferred, equipped preferred) through the REAL bond/threshold machinery (accrueRelicBond's offer path); false when no relic qualifies
 //   - _cxContestDeedTrack(contest) -> villager deed-XP track for a contest category (blood->combat, endurance/forage->field, else->social)
 //   - contestTick() -> event|null
 //   - contestPool()
@@ -71,6 +72,7 @@
 //   - unavoidable: true — contests interrupt, cannot be skipped (code: contestInterruption, Steve 2026-10-05)
 //   - recast_dead: countdown outlives contestant → each missing contestant recast from living eligible, or cancelled if no one is left (code: resolveContest, Steve 2026-10-06)
 //   - recast_eligibility: eligibility is re-checked at the GRAB against the same bar as the cast (code: resolveContest, break-it contests r14 2026-10-10) — the keep-path used to check isMember() only, so a contestant mauled overnight (gravely wounded) or gone from Haven kept their slot and got televised. The newly ineligible get the recast treatment with the honest r12 off-the-board reason said out loud. Player bar unchanged (battered scholar IS eligible)
+//   - recast_honesty: the recast never takes someone already in the cast — takenSet seeds with the whole original cast, not just the processed entries (a 3-take contest's first take once recast to its own third take: "Lena and Lena have been taken", double winner's share + double verdict; longsim contests r5 2026-10-11) (code: resolveContest)
 //   - multi_take: contest.participants count is REAL — the System takes that many people at once (more taken = more FEARED); pc.participants[] carried fire->resolve->interruption (code: fireContest, resolveContest, contestInterruption, Steve 2026-10-06)
 //   - others_fates: villagers taken alongside the player get their own off-screen contests — rolled at the player's sequence end, can win/lose/die (code: _contestResolveOthers, _contestEnd, _contestDie, _contestRefuse, Steve 2026-10-06)
 //   - bespoke_death_lines: every contest kills in its own voice — the generic fallback is placeholder text, not doctrine (code: _contestDeathLine, Steve 2026-10-05); price/impress/exchange/auction lines added 2026-10-06
@@ -124,7 +126,7 @@
 //   - summons_budget: ratings summons consume the shared 2/week TV budget like contests and shows (code: contestTick)
 //   - villager_prize_real: a watched villager win grants real pantry rations ("Winner's share"), not a placeholder line (code: _contestEnd, Steve 2026-10-08)
 //   - villager_prize_deed: a televised villager win is a DEED — +3 XP on the deed-XP track the contest belongs to (blood->combat, endurance/forage->field, else->social), so a win can light the first rung of the System's watching-grant path; the grant narrates its own "Earned, not given" when a threshold fires; applies to the watch-verdict path AND multi-take co-winners (code: _contestEnd, _contestResolveOthers, _cxContestDeedTrack, longsim abilities r2 2026-10-11)
-//   - prize_lanes: the contest prize table has two lanes — ITEM (the alien-loot roll) and SYSTEM (ability offer / synergy hint / knowledge dump, canon docs/CONTESTS.md "Prizes — every lane": item-evolution assists documented as the remaining blank, relic-system territory). System lane: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened, cap 0.90; a win should usually bring a System gift (canon "Prizes must be worth the fear" — wins are rare, so wins are the throttle); FIRST-WIN GIFT (Steve 2026-10-11): the player's first win of a run always grants a lane gift (flag cxFirstWinGift, set only on a real grant) — visible, not a fountain; weights ability 0.45 / synergy 0.30 / knowledge 0.25 with fall-through when a lane is impossible (slots full, nothing held, everything named). Ability offers are alien-abilities-only (no human skills, no vile/body_horror/OP tiers), category-biased (blood->combat, moot->social), never trample a pending offer; synergy hints grant a real +1 discovery attempt on a fully-held undiscovered pairing through the tease/unlock path; knowledge dumps identify one plant through identifyPlant (facts only, no earthly skill). Independent of the loot roll — a shy vault can still bring a System gift (code: _cxPrizeLane, _cxPrizeAbilityOffer, _cxPrizeSynergyHint, _cxPrizeKnowledgeDump, longsim abilities r2 2026-10-11)
+//   - prize_lanes: the contest prize table has two lanes — ITEM (the alien-loot roll) and SYSTEM (ability offer / synergy hint / knowledge dump / item-evolution assist, canon docs/CONTESTS.md "Prizes — every lane"). Item-evolution assists ride the EXISTING relic bond/threshold machinery (game.js accrueRelicBond/offerRelicEnhancement): a contest win is a story moment (+3 bond, +5 extreme), thresholds 10/25/50 offer enhancements exactly like daily accrual does (code: _cxPrizeEvolutionAssist, longsim contests r5 2026-10-11). System lane: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened, cap 0.90; a win should usually bring a System gift (canon "Prizes must be worth the fear" — wins are rare, so wins are the throttle); FIRST-WIN GIFT (Steve 2026-10-11): the player's first win of a run always grants a lane gift (flag cxFirstWinGift, set only on a real grant) — visible, not a fountain; lane weights (r5): ability 0.40 / synergy 0.25 / knowledge 0.20 / evolution 0.15, with fall-through when a lane is impossible (slots full, nothing held, everything named, no relics). Ability offers are alien-abilities-only (no human skills, no vile/body_horror/OP tiers), category-biased (blood->combat, moot->social), never trample a pending offer; synergy hints grant a real +1 discovery attempt on a fully-held undiscovered pairing through the tease/unlock path; knowledge dumps identify one plant through identifyPlant (facts only, no earthly skill). Independent of the loot roll — a shy vault can still bring a System gift (code: _cxPrizeLane, _cxPrizeAbilityOffer, _cxPrizeSynergyHint, _cxPrizeKnowledgeDump, _cxPrizeEvolutionAssist, longsim abilities r2 2026-10-11; evolution longsim contests r5 2026-10-11)
 //   - win_tax_announced: the -5 hp winner's mark is said out loud, never silent — a hidden HP tax is a lie (code: _contestEnd, Steve 2026-10-08)
 //   - aftermath_trauma: the contest end path applies aftermath trauma to the player, said out loud — win +4, lose +6 (canon docs/CONTESTS.md "Winners come home changed (prizes, trauma, fans)"); the old path applied none, so a merciful win landed trauma-free while refusing landed +5 (code: _contestEnd, break-it contests r15 2026-10-11)
 //   - bet_payout_honest: the watched-bet payout says the REAL kcal gained, not the promised 2x — at/near the kcal cap the grant clamps and the old "+400 kcal" line lied (at cap: wagered 200, won, gained nothing); a fully-capped win says the body is full instead of a phantom +400 (code: _contestVerdict, break-it contests r15 2026-10-11)
@@ -2178,7 +2180,14 @@
     // unchanged — a battered scholar IS eligible (contestEligible: health>0).
     const { eligible, ineligible } = this.contestEligible();
     const finalIds = [];
-    const takenSet = new Set();
+    // RECAST HONESTY (longsim contests r5 2026-10-11): the recast must never
+    // take someone who is ALREADY cast. The takenSet used to seed empty, so
+    // a 3-take contest whose first take went away could recast to its own
+    // third take — "Lena and Lena have been taken" — and the verdict then
+    // resolved her TWICE (double winner's share, double verdict, double
+    // death roll). The set seeds with the WHOLE original cast, not just the
+    // already-processed entries.
+    const takenSet = new Set(ids);
     for (const who of ids) {
       const stillCastable = who === 'player'
         ? playerAlive
@@ -4580,15 +4589,19 @@
     //   - KNOWLEDGE DUMP: the System reads the world for you — identifies
     //     one plant through the real identifyPlant path. Facts only; no
     //     earthly SKILL is granted (herbal_remedy stays taught, never gifted).
-    // Item-evolution assists (the fourth missing lane) live in the
-    // relic/item system — documented, not built here (lever-9 boundary).
+    //   - ITEM-EVOLUTION ASSIST (longsim contests r5 2026-10-11): the win is
+    //     a STORY MOMENT (+3 bond, +5 extreme) on a bonded relic — the System
+    //     watched you carry it. No new mechanics: bond accrues exactly like
+    //     daily accrual, and the 10/25/50 enhancement offers fire through the
+    //     same offerRelicEnhancement path (the System's 1-of-3 offer stands —
+    //     the assist nudges, it never grants an enhancement directly).
     // Numbers: base 0.60, +0.10 high, +0.20 extreme, +0.10 hardened (cap
     // 0.90) — the same risk-scaling grammar as the loot roll's fear-honesty
     // move. A win should usually bring a System gift (canon "Prizes must be
     // worth the fear"); wins are rare, so wins are the throttle, not this
-    // roll. Lane weights: ability 0.45 / synergy 0.30 / knowledge 0.25;
-    // each lane falls through to the next when impossible (slots full,
-    // nothing held, everything named).
+    // roll. Lane weights (r5): ability 0.40 / synergy 0.25 / knowledge 0.20 /
+    // evolution 0.15; each lane falls through to the next when impossible
+    // (slots full, nothing held, everything named, no relics).
     if (!this.state.systemArrived) return false;
     // FIRST-WIN GIFT (Steve 2026-10-11 "Address any gaps!"): wins are the
     // throttle (~1.2/run), so at 0.60 the lanes were calibrated but rarely
@@ -4607,17 +4620,74 @@
     if (firstWin) chance = 1.0;
     if (Math.random() >= chance) return false;
     const r = Math.random();
-    const order = r < 0.45 ? ['a', 's', 'k'] : (r < 0.75 ? ['s', 'a', 'k'] : ['k', 'a', 's']);
+    const order = r < 0.40 ? ['a', 's', 'k', 'e'] : (r < 0.65 ? ['s', 'a', 'k', 'e'] : (r < 0.85 ? ['k', 'a', 's', 'e'] : ['e', 'a', 's', 'k']));
     for (const lane of order) {
       try {
         let granted = false;
         if (lane === 'a' && this._cxPrizeAbilityOffer(contest)) granted = true;
         else if (lane === 's' && this._cxPrizeSynergyHint()) granted = true;
         else if (lane === 'k' && this._cxPrizeKnowledgeDump()) granted = true;
+        else if (lane === 'e' && this._cxPrizeEvolutionAssist(contest)) granted = true;
         if (granted) { this.state.cxFirstWinGift = true; return true; }
       } catch (e) {}
     }
     return false;
+  };
+
+  G._cxPrizeEvolutionAssist = function(contest) {
+    // ITEM-EVOLUTION ASSIST — the fourth System prize lane (longsim contests
+    // r5 2026-10-11). Canon docs/CONTESTS.md "Prizes — every lane": "Item
+    // evolution assists". No new mechanics: a contest win IS a story moment,
+    // and story moments are canonically +3 bond (game.js RELIC BOND header —
+    // the same +3 the relic system knows). The gain lands on a bonded relic
+    // through the EXISTING bond/threshold machinery: sentimental keepsakes
+    // preferred (the show's language is attachment), the relic you carried
+    // visibly (equipped) preferred over the pack, then anything bonded. The
+    // 10/25/50 enhancement offers and the keepsake reveal fire through the
+    // SAME checks accrueRelicBond runs daily — the assist nudges, the System
+    // still makes its 1-of-3 offer (nothing is granted directly, never silent).
+    // False when: no System, no bonded relics, or none are yours (sentimental
+    // owner-lock — a stranger's keepsake in your hands is just stuff).
+    const s = this.state.scholar || {};
+    if (!this.state.systemArrived) return false;
+    if (typeof this.relicItems !== 'function') return false;
+    const items = this.relicItems();
+    if (!items.length) return false;
+    const defOf = (r) => {
+      try { return (this.data.items || []).find(i => i.id === (r.itemId || r.id)) || {}; }
+      catch (e) { return {}; }
+    };
+    // Owner-lock grammar mirrors accrueRelicBond: only YOUR relics grow.
+    const mine = (r) => {
+      try {
+        const owner = r.owner || (((this.getPerson && this.getPerson(this.villagerId)) || {}).keepsakeOwner || {})[r.itemId || r.id];
+        return !owner || owner === this.villagerId;
+      } catch (e) { return true; }
+    };
+    const own = items.filter(mine);
+    if (!own.length) return false;
+    const sent = own.filter(r => defOf(r).class === 'sentimental');
+    const pool = sent.length ? sent : own;
+    const eqIds = new Set(Object.values(s.equipped || {}).map(e => e && (e.itemId || e.id)).filter(Boolean));
+    const carried = pool.filter(r => eqIds.has(r.itemId || r.id));
+    const cands = carried.length ? carried : pool;
+    const r = cands[Math.floor(Math.random() * cands.length)];
+    const risk = (contest && contest.risk) || '';
+    const gain = risk === 'extreme' ? 5 : 3;
+    r.bond = (r.bond || 0) + gain;
+    try { if (this.checkKeepsakeReveal) this.checkKeepsakeReveal(r); } catch (e) {}
+    try {
+      for (const t of [10, 25, 50]) {
+        if (r.bond >= t && !(r.bondOffered || []).includes(t) && !s.relicChoices && this.state.systemArrived) {
+          this.offerRelicEnhancement(r, t);
+          break;
+        }
+      }
+    } catch (e) {}
+    const nm = r.name || defOf(r).name || (r.itemId || r.id);
+    this.sysSay(`📺 SYSTEM: "UNIT ${String(nm).toUpperCase()} — the cameras kept finding it. It mattered to you on the floor, and that is... interesting. Meaning is fuel. We are curious what it becomes. (+${gain} bond on your ${nm})"`);
+    try { this.tele('prize_evolution_assist', { item: (r.itemId || r.id), gain: gain, bond: r.bond }); } catch (e2) {}
+    return true;
   };
 
   G._cxPrizeAbilityOffer = function(contest) {
@@ -4843,9 +4913,10 @@
               // never silently pocket the prize.
               this.sysSay('📺 Prize: the System\'s favor (and a story). The vault was feeling shy tonight.');
             }
-            // PRIZE LANES (longsim abilities r2 2026-10-11): the roll above
-            // is the ITEM lane. This is the System lane — ability offers,
-            // synergy hints, knowledge dumps (canon docs/CONTESTS.md
+            // PRIZE LANES (longsim abilities r2 2026-10-11; evolution assist
+            // longsim contests r5 2026-10-11): the roll above is the ITEM
+            // lane. This is the System lane — ability offers, synergy hints,
+            // knowledge dumps, item-evolution assists (canon docs/CONTESTS.md
             // "Prizes — every lane"). Independent of the loot roll: a shy
             // vault can still bring a System gift.
             try { this._cxPrizeLane(ac, contest); } catch (e2) {}
