@@ -33,6 +33,9 @@ function ok(name, cond, extra) {
 const WAVE1 = ['bulldozer','hushwolf','gallowdeer','mirrormoth','belltoad','lockpick_raccoon',
   'white_noise_heron','hummice','speedbump_turtle','nightlight_catfish','ducks_in_a_row',
   'glasswing','sunbasker','nevermore','nightcourt'];
+const WAVE2 = ['voice_mimic_radio','mirror_stag','review_drone','bright_idea','memory_projector',
+  'warranty_caller','understudy','landlord','heckler','paparazzo','union_rep','moderator',
+  'statickite','giant_mosquito','alien_tick'];
 const TILE = ['beam','burst','charge','line'];
 const sayLog = [];
 const _say = Game.say.bind(Game);
@@ -77,8 +80,39 @@ function synthFight(fighters, php) {
     }
   }
 
+  console.log('A2: wave-2 kits — >=2 attacks, codex moves covered');
+  // Wave-2: every CODE DOCUMENTED move must be in the kit; kits may add
+  // fiction-fitting second moves where the codex documents only one
+  // (marked EXT in evidence). >=2 total required.
+  const W2_CODEX_MOVES = {
+    voice_mimic_radio: ['Distress Call', 'Voice Drop Rush'],
+    mirror_stag: ['Confrontation', 'Wheel'],
+    review_drone: ['Scored Assessment'],
+    bright_idea: ['Eureka'],
+    memory_projector: ['Home Movies'],
+    warranty_caller: ['The Pitch'],
+    understudy: ['Mirror Strike', 'Opening Steal', 'Desperate Improv'],
+    landlord: ['Serve Notice', 'Collect Rent', 'Jurisdiction Spread'],
+    heckler: ['Vicious Mockery', 'Pile-On', 'Compulsion'],
+    paparazzo: ['Flash Photography', 'Prediction', 'Widening Shot'],
+    union_rep: ['Solidarity Speech', 'Call to Action', 'WALKOUT'],
+    moderator: ['Content Noted', 'Removal Notice', 'Deplatform'],
+    statickite: ['The Broadcast', 'the Dip'],
+    giant_mosquito: ['Circle', 'Dive', 'Drink', 'Heavy'],
+    alien_tick: ['Quest', 'Latch', 'Feed', 'Engorged'],
+  };
+  for (const id of WAVE2) {
+    const md = mdef(id);
+    const atks = md.attacks || [];
+    ok(`${id}: >=2 attacks`, atks.length >= 2, `got ${atks.length}`);
+    const names = atks.map(a => a.name);
+    for (const cm of (W2_CODEX_MOVES[id] || [])) {
+      ok(`${id}/${cm}: codex move in kit`, names.includes(cm), names.join(','));
+    }
+  }
+
   console.log('C: tile patterns windup>=2');
-  for (const id of WAVE1) {
+  for (const id of WAVE1.concat(WAVE2)) {
     for (const a of (mdef(id).attacks || [])) {
       const p = a.pattern || {};
       if (TILE.includes(p.type)) {
@@ -201,17 +235,41 @@ function synthFight(fighters, php) {
     ok('stage2: unrelated monster locked', Game.canShow('monster', 'bulldozer', 'mechanics', { pattern: 'China-Shop Charge' }) === false);
   }
 
-  console.log('F: tactics — turtle Withdraw available when bloodied');
+  console.log('F: tactics — turtle Bunker when bloodied');
   {
     const md = mdef('speedbump_turtle');
     const foeAt = (d) => ({ f: { mx: 4 + d, my: 4 }, d });
-    let sawWithdraw = false;
+    let sawBunker = false;
     for (let i = 0; i < 60; i++) {
       const m = { mdef: md, mx: 4, my: 4, hp: 20, maxHp: 100, moveCd: {} };
       Game.tbChooseMove(m, foeAt(1));
-      if (m.moveAtk.tactic === 'bunker') { sawWithdraw = true; break; }
+      if (m.moveAtk.tactic === 'bunker') { sawBunker = true; break; }
     }
-    ok('turtle bloodied: Withdraw chosen sometimes', sawWithdraw);
+    ok('turtle bloodied: Bunker chosen sometimes', sawBunker);
+  }
+
+  console.log('G: wave-2 signature tactics execute');
+  {
+    // mosquito Heavy -> tacticVuln
+    const md = mdef('giant_mosquito');
+    const m = { mdef: md, mx: 4, my: 4, hp: 50, maxHp: 100, moveCd: {} };
+    Game.tbMonsterTactic(m, { f: { mx: 5, my: 4 } }, { tactic: 'recover', telegraph: 'test' }, null);
+    ok('mosquito Heavy: tacticVuln set', m.tacticVuln === 2, `vuln=${m.tacticVuln}`);
+    // paparazzo Prediction -> prediction counter
+    const mp = { mdef: mdef('paparazzo'), mx: 4, my: 4, hp: 50, maxHp: 100, moveCd: {} };
+    Game.tbMonsterTactic(mp, { f: { mx: 5, my: 4 } }, { tactic: 'model', telegraph: 'test' }, null);
+    ok('paparazzo Prediction: counter++', mp.prediction === 1, `pred=${mp.prediction}`);
+    // moderator Deplatform: hpBelow 0.5 legal, 3-beat windup
+    const mmod = mdef('moderator');
+    const dep = mmod.attacks.find(a => a.name === 'Deplatform');
+    ok('moderator Deplatform: windup 3', dep.pattern.windup === 3, `windup=${dep.pattern.windup}`);
+    const mm = { mdef: mmod, mx: 4, my: 4, hp: 40, maxHp: 100, moveCd: {} };
+    ok('moderator bloodied: Deplatform legal', Game.tbMoveLegal(mm, dep, 3, 0.4) === true);
+    const mm2 = { mdef: mmod, mx: 4, my: 4, hp: 80, maxHp: 100, moveCd: {} };
+    ok('moderator healthy: Deplatform illegal', Game.tbMoveLegal(mm2, dep, 3, 0.8) === false);
+    // review_drone: 3-beat windup on the beam
+    const rd = mdef('review_drone').attacks.find(a => a.name === 'Scored Assessment');
+    ok('review_drone: 3-beat windup', rd.pattern.windup === 3, `windup=${rd.pattern.windup}`);
   }
 
   console.log(`\n${pass} pass, ${fail} fail (seed ${SEED})`);

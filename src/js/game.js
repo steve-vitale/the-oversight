@@ -29615,6 +29615,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // here, AFTER tbPlayerStrike composed its "You STRIKE for D" line.
       if (!t || !t.alive) return 0;
       const quiet = !!(opts && opts.quiet);
+      // WALKOUT (union_rep): untargetable while walked out. Break the strike
+      // by outlasting it — or don't let it organize in the first place.
+      if (t.kind === 'monster' && (t.walkout || 0) > 0) {
+        if (!quiet) this.say("It's walked out — picket line up, you can't reach it. Outlast the strike.");
+        return 0;
+      }
       // FOOTWORK (passive): agility lets you dodge. Not a guarantee — a chance.
       // Only vs direct attacks, not beams/AoE (you can't dodge a flood).
       // ADRENALINE CONTROL: +15% dodge chance from the ability (combat.dodge_chance).
@@ -29683,6 +29689,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       let final = Math.max(0, Math.round(dmg));
+      // MULTI-MOVE RALLY (2026-10-12): union_rep's Solidarity Speech — allied
+      // monsters +4 damage while the buff lasts. Source-keyed, honest.
+      try {
+        const src = sourceKey ? this.tbFighter(sourceKey) : null;
+        if (src && src.kind === 'monster' && (src.rallyBuff || 0) > 0 && final > 0) {
+          final += 4;
+        }
+      } catch (e) {}
       // FEASTED (feast-surge rework, Worker B 2026-10-10): the timed buff
       // uplifts player-sourced damage — strikes and ability damage alike.
       // Player-sourced = sourceKey 'p' (abilities: 'the naming') or the
@@ -29846,6 +29860,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!t.bunkerNoted) {
           t.bunkerNoted = true;
           this.say('The hit clangs off the sealed shell. Nearly invulnerable. Wait it out.');
+        }
+      }
+      // MULTI-MOVE VULN WINDOW (2026-10-12): tactic 'recover' (mosquito Heavy,
+      // tick Engorged) — exposed, takes +50%. The punish window is real.
+      if (t.kind === 'monster' && (t.tacticVuln || 0) > 0 && final > 0) {
+        final = Math.round(final * 1.5);
+        if (!t.vulnNoted) {
+          t.vulnNoted = true;
+          this.say('It is exposed — the hit lands clean, half again as hard.');
         }
       }
       if (ignoresArmor && t.kind === 'monster' && this.turtleIs(t) && (t.turtleBunker || 0) > 0 && final > 0) {
@@ -32114,6 +32137,63 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
         this.say(cue);
+      } else if (tac === 'recover') {
+        // EXPOSED RECOVERY (mosquito Heavy, tick Engorged): the punish window.
+        // It is vulnerable (+50% damage taken) for 2 turns.
+        m.tacticVuln = 2; m.vulnNoted = false;
+        this.say(cue + ' (EXPOSED — hit it now, it takes half again as much.)');
+      } else if (tac === 'model') {
+        // PREDICTION (paparazzo): every shot refines the model. At 4 the money
+        // shot is unavoidable; at 3 the Widening Shot unlocks.
+        m.prediction = (m.prediction || 0) + 1;
+        this.say(cue + ` (Prediction ${m.prediction}.)`);
+      } else if (tac === 'chargeup') {
+        // BASK (sunbasker): documented in the kit; the bespoke branch owns the
+        // charge. If reached generically, just mark the sun-focus.
+        m.sbCharge = Math.min(3, (m.sbCharge || 0) + 1);
+        this.say(cue);
+      } else if (tac === 'claim') {
+        // JURISDICTION SPREAD (landlord): the claim grows. Collect Rent fires
+        // when you end on claimed ground (flag set in tbChooseMove).
+        m.claimR = (m.claimR || 2) + 1;
+        m.claimC = { x: m.mx, y: m.my };
+        this.say(cue + ` (Claimed radius ${m.claimR}.)`);
+      } else if (tac === 'rally') {
+        // SOLIDARITY SPEECH (union_rep): allied monsters hit harder.
+        try {
+          const f = this.tbfight;
+          if (f) for (const o of f.fighters) {
+            if (o !== m && o.kind === 'monster' && o.alive && !o.fled) o.rallyBuff = 2;
+          }
+        } catch (e) {}
+        this.say(cue + ' (Allied monsters +4 damage, 2 turns.)');
+      } else if (tac === 'summon') {
+        // CALL TO ACTION (union_rep): help arrives. A picket joins the fight.
+        try {
+          const f = this.tbfight;
+          const md = (this.data.monsters || []).find(x => x.id === 'hushwolf');
+          if (f && md) {
+            const k = 'sum' + Math.floor(Math.random() * 1e6);
+            const nf = { key: k, kind: 'monster', monsterId: 'hushwolf', mdef: md,
+              name: 'Picket', emoji: md.emoji || '🐺', mx: m.mx, my: m.my,
+              hp: 30, maxHp: 30, alive: true, fled: false, speed: 3,
+              moveLeft: 3, acted: false, stunned: 0, telegraph: null };
+            f.fighters.push(nf); f.order.push(k);
+            this.say(cue + ' A picket lopes in, answering the call.');
+          } else this.say(cue);
+        } catch (e) { this.say(cue); }
+      } else if (tac === 'walkout') {
+        // WALKOUT (union_rep): untargetable, massive buffs to allies. The
+        // counter is union-busting: focus the rep before it organizes.
+        m.walkout = 3;
+        try {
+          const f = this.tbfight;
+          if (f) for (const o of f.fighters) {
+            if (o !== m && o.kind === 'monster' && o.alive && !o.fled) o.rallyBuff = 3;
+          }
+        } catch (e) {}
+        this.say(cue + ' (WALKOUT — untargetable 3 turns, allies +4 damage.)');
+        try { this.audioEvent('walkout'); } catch (e) {}
       } else {
         this.say(cue);
       }
@@ -32865,6 +32945,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 4. act by pattern
       let foe = S.combat.nearestEnemy(f.fighters, m);
       if (!foe) return;
+      // MULTI-MOVE (2026-10-12): tick down tactic buffs/debuffs.
+      if ((m.rallyBuff || 0) > 0) m.rallyBuff -= 1;
+      if ((m.tacticVuln || 0) > 0 && !m.telegraph) m.tacticVuln -= 1;
+      if ((m.walkout || 0) > 0) m.walkout -= 1;
+      // LANDLORD CLAIM (2026-10-12): Collect Rent is legal when the foe ends
+      // on claimed ground. Recompute the flag before choosing.
+      try {
+        const lm = f.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === 'landlord' && x.alive && x.claimC);
+        if (lm) {
+          const d = Math.max(Math.abs(foe.f.mx - lm.claimC.x), Math.abs(foe.f.my - lm.claimC.y));
+          m.onClaimedGround = d <= (lm.claimR || 2);
+        } else m.onClaimedGround = false;
+      } catch (e) {}
       // MULTI-MOVE (2026-10-12): choose this turn's move from the kit, fresh
       // every turn. Sets m.moveAtk/m.moveOdds; every declare below reads
       // encAtk. (Pending telegraphs returned above — never double-choose.)

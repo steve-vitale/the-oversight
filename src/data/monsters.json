@@ -1465,6 +1465,43 @@
       },
       "damageType": "sonic"
     },
+        "attacks": [
+      {
+        "condition": {
+          "minRange": 1
+        },
+        "damage": [
+          19,
+          30
+        ],
+        "damageType": "psychic",
+        "name": "Distress Call",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "It finds your voice in the static. It WEARS it. 'Help\u2014 help me\u2014' in YOUR voice. Moving won't help once it has you.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 2
+        },
+        "damage": [
+          14,
+          20
+        ],
+        "damageType": "physical",
+        "name": "Voice Drop Rush",
+        "pattern": {
+          "type": "rush",
+          "windup": 1
+        },
+        "telegraph": "It drops the voice. No static, no words \u2014 it RUSHES, no telegraph at all. Back off.",
+        "weight": 2
+      }
+    ],
     "behavior": "curious",
     "tactics": {
       "split": { "type": "allyLure", "minParty": 3 }
@@ -1579,6 +1616,47 @@
       },
       "damageType": "psychic"
     },
+        "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          24,
+          37
+        ],
+        "damageType": "psychic",
+        "name": "Confrontation",
+        "pattern": {
+          "length": 6,
+          "type": "charge",
+          "width": 1,
+          "windup": 2
+        },
+        "telegraph": "It turns. On its brow, like a mask: YOUR FACE. It lowers its head. It is going to show you yourself, at speed.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "minRange": 2,
+          "cooldownTurns": 2
+        },
+        "damage": [
+          20,
+          30
+        ],
+        "damageType": "psychic",
+        "name": "Wheel",
+        "pattern": {
+          "type": "charge",
+          "length": 6,
+          "width": 1,
+          "windup": 2
+        },
+        "telegraph": "You dodged \u2014 it WHEELS. A second charge, no windup, aimed at where you are NOW.",
+        "weight": 2
+      }
+    ],
     "behavior": "territorial",
     "aggression": "territorial",
     "follows": true,
@@ -1695,6 +1773,45 @@
       },
       "damageType": "electric"
     },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          22,
+          34
+        ],
+        "damageType": "energy",
+        "name": "Scored Assessment",
+        "pattern": {
+          "length": 6,
+          "type": "beam",
+          "width": 1,
+          "windup": 3
+        },
+        "telegraph": "A red line draws itself across the ground. 3.2 stars. 'ASSESSMENT IN PROGRESS.' Do not be on the line.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 2
+        },
+        "damage": [
+          8,
+          12
+        ],
+        "damageType": "psychic",
+        "name": "Desk Rejection",
+        "pattern": {
+          "range": 2,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "It stamps the air. REJECTED. The word has weight.",
+        "weight": 2
+      }
+    ],
     "behavior": "territorial",
     "aggression": "territorial",
     "follows": false,
@@ -1806,6 +1923,38 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "damage": [
+          26,
+          41
+        ],
+        "damageType": "energy",
+        "name": "Eureka",
+        "pattern": {
+          "radius": 2,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "It brightens. The light is too white, too certain. EUREKA \u2014 the biggest burst so far.",
+        "weight": 3
+      },
+      {
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "energy",
+        "name": "Half-Baked Notion",
+        "pattern": {
+          "radius": 1,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "It flickers \u2014 a smaller, meaner idea. Less certain, faster.",
+        "weight": 2
+      }
+    ],
     "behavior": "ambush",
     "tactics": {
       "aoePunish": { "type": "driftToCluster", "minParty": 3 }
@@ -1922,6 +2071,45 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          19,
+          31
+        ],
+        "damageType": "psychic",
+        "name": "Home Movies",
+        "pattern": {
+          "length": 5,
+          "type": "beam",
+          "width": 1,
+          "windup": 2
+        },
+        "telegraph": "The air fills with light \u2014 YOUR memories, projected huge. The beam follows your gaze. MOVE.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          10,
+          15
+        ],
+        "damageType": "psychic",
+        "name": "Blooper Reel",
+        "pattern": {
+          "range": 1,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "The reel stutters \u2014 outtakes. Embarrassing ones. Close up.",
+        "weight": 2
+      }
+    ],
     "behavior": "curious",
     "aggression": "curious",
     "follows": false,
@@ -2028,6 +2216,40 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "condition": {
+          "firstTurn": true
+        },
+        "damage": [
+          18,
+          28
+        ],
+        "damageType": "psychic",
+        "name": "The Pitch",
+        "pattern": {
+          "type": "rush",
+          "windup": 1
+        },
+        "telegraph": "RING. RING. The sound is inside your skull. 'We have been trying to REACH you about your\u2014'",
+        "weight": 3
+      },
+      {
+        "damage": [
+          8,
+          12
+        ],
+        "damageType": "psychic",
+        "name": "Robocall Barrage",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "It dials faster. More voices. All of them want to talk about your coverage.",
+        "weight": 2
+      }
+    ],
     "behavior": "curious",
     "aggression": "hungry",
     "follows": true,
@@ -2548,6 +2770,59 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "damage": [
+          18,
+          25
+        ],
+        "damageType": "physical",
+        "name": "Mirror Strike",
+        "pattern": {
+          "range": 2,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "It watches your weapon. It lifts its own \u2014 a perfect, insulting copy at half fidelity.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "cooldownTurns": 3
+        },
+        "damage": [
+          12,
+          18
+        ],
+        "damageType": "psychic",
+        "name": "Opening Steal",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 2
+        },
+        "telegraph": "It starts performing \u2014 and your most-used move is suddenly anticipated, halved, ANSWERED.",
+        "weight": 2
+      },
+      {
+        "condition": {
+          "hpBelow": 0.3
+        },
+        "damage": [
+          22,
+          30
+        ],
+        "damageType": "physical",
+        "name": "Desperate Improv",
+        "pattern": {
+          "radius": 1,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "Below 30% and it stops acting \u2014 it CHAINS your best moves, badly, frantically, all at once.",
+        "weight": 4
+      }
+    ],
     "behavior": "curious",
     "aggression": "curious",
     "follows": false,
@@ -2647,6 +2922,50 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "damage": [
+          22,
+          32
+        ],
+        "damageType": "physical",
+        "name": "Serve Notice",
+        "pattern": {
+          "radius": 2,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "It plants a sign in the ground around you. NOTICE SERVED. The ground is claimed.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "requiresFlag": "onClaimedGround"
+        },
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "physical",
+        "name": "Collect Rent",
+        "pattern": {
+          "range": 9,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "You ended your turn on claimed ground. The rent is due. It rises with every Addendum.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "cooldownTurns": 4
+        },
+        "name": "Jurisdiction Spread",
+        "tactic": "claim",
+        "telegraph": "It unrolls another Addendum. The claim GROWS \u2014 more ground, more rent.",
+        "weight": 2
+      }
+    ],
     "behavior": "territorial",
     "tactics": {
       "split": { "type": "evictionWall", "minParty": 3, "everyRounds": 4 }
@@ -2752,6 +3071,56 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "damage": [
+          15,
+          22
+        ],
+        "damageType": "psychic",
+        "name": "Vicious Mockery",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "'You call that a swing?' The words CUT. Shame stacks.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "requiresFlag": "shamed"
+        },
+        "damage": [
+          18,
+          26
+        ],
+        "damageType": "psychic",
+        "name": "Pile-On",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "'Oh, it's TRYING again!' Double shame \u2014 it smells blood.",
+        "weight": 3
+      },
+      {
+        "damage": [
+          8,
+          12
+        ],
+        "damageType": "psychic",
+        "name": "Compulsion",
+        "pattern": {
+          "range": 2,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "'Answer me!' Answer back or act \u2014 either way, it costs you.",
+        "weight": 2
+      }
+    ],
     "armor": 0,
     "resistances": {
       "psychic": 0.75
@@ -2857,6 +3226,50 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "damage": [
+          15,
+          22
+        ],
+        "damageType": "energy",
+        "name": "Flash Photography",
+        "pattern": {
+          "radius": 2,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "The flash charges \u2014 whine rising. When it fires, you freeze in place.",
+        "weight": 3
+      },
+      {
+        "name": "Prediction",
+        "tactic": "model",
+        "telegraph": "Every shot refines its model \u2014 hit or miss. At 4, the money shot is unavoidable.",
+        "weight": 2
+      },
+      {
+        "condition": {
+          "flagGte": {
+            "field": "prediction",
+            "value": 3
+          }
+        },
+        "damage": [
+          18,
+          26
+        ],
+        "damageType": "energy",
+        "name": "Widening Shot",
+        "pattern": {
+          "radius": 3,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "The lens widens. At high prediction, the burst GROWS.",
+        "weight": 2
+      }
+    ],
     "behavior": "curious",
     "aggression": "curious",
     "follows": true,
@@ -2956,6 +3369,38 @@
       },
       "damageType": "psychic"
     },
+        "attacks": [
+      {
+        "name": "Solidarity Speech",
+        "tactic": "rally",
+        "telegraph": "'BROTHERS! SISTERS!' Allied monsters hit harder. The speech is the weapon.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "cooldownTurns": 5
+        },
+        "name": "Call to Action",
+        "tactic": "summon",
+        "telegraph": "'WHO'S WITH ME?' Help is coming.",
+        "weight": 2
+      },
+      {
+        "damageType": "physical",
+        "name": "WALKOUT",
+        "pattern": {
+          "type": "single",
+          "range": 1,
+          "windup": 1
+        },
+        "telegraph": "It walks out. Untargetable \u2014 and every ally hits like a truck. Break the strike.",
+        "weight": 2,
+        "tactic": "walkout",
+        "condition": {
+          "hpBelow": 0.5
+        }
+      }
+    ],
     "behavior": "pack",
     "aggression": "pack",
     "follows": false,
@@ -3058,6 +3503,62 @@
       },
       "damageType": "electric"
     },
+    "attacks": [
+      {
+        "damage": [
+          6,
+          10
+        ],
+        "damageType": "psychic",
+        "name": "Content Noted",
+        "pattern": {
+          "range": 4,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "It reviews you. 'Content noted.' A weak ranging chip while it decides.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "flagGte": {
+            "field": "muteCount",
+            "value": 1
+          }
+        },
+        "damage": [
+          15,
+          22
+        ],
+        "damageType": "psychic",
+        "name": "Removal Notice",
+        "pattern": {
+          "range": 3,
+          "type": "direct",
+          "windup": 2
+        },
+        "telegraph": "'REMOVAL NOTICE.' Defiant or compliant \u2014 the hammer is coming down.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "hpBelow": 0.5
+        },
+        "damage": [
+          24,
+          34
+        ],
+        "damageType": "psychic",
+        "name": "Deplatform",
+        "pattern": {
+          "radius": 2,
+          "type": "burst",
+          "windup": 3
+        },
+        "telegraph": "At half HP the hammer RISES \u2014 a full round of windup before it falls. USE THE WINDUP.",
+        "weight": 4
+      }
+    ],
     "behavior": "territorial",
     "aggression": "territorial",
     "follows": false,
@@ -3450,6 +3951,41 @@
       },
       "damageType": "sonic"
     },
+        "attacks": [
+      {
+        "damage": [
+          15,
+          22
+        ],
+        "damageType": "energy",
+        "name": "The Broadcast",
+        "pattern": {
+          "radius": 1,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "The 3x3 scan-mark burns into the ground. The mark is the mercy \u2014 MOVE.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          20,
+          28
+        ],
+        "damageType": "energy",
+        "name": "the Dip",
+        "pattern": {
+          "range": 1,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "It descends to transmit \u2014 melee-vulnerable, +50% damage. The only window.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "the mark is the mercy \u2014 two beats to move",
       "it dips to transmit \u2014 that's when it's yours",
@@ -3561,6 +4097,55 @@
       },
       "damageType": "piercing"
     },
+    "attacks": [
+      {
+        "name": "Circle",
+        "tactic": "reposition",
+        "telegraph": "Whining, closing. It circles \u2014 the sound gets closer.",
+        "weight": 2
+      },
+      {
+        "damage": [
+          12,
+          19
+        ],
+        "damageType": "physical",
+        "name": "Dive",
+        "pattern": {
+          "type": "rush",
+          "windup": 2
+        },
+        "telegraph": "The whine steadies \u2014 DIVE. Telegraphed.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "physical",
+        "name": "Drink",
+        "pattern": {
+          "range": 1,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "It lands. The bite \u2014 it may carry Eurika or East Nile.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "requiresFlag": "engorged"
+        },
+        "name": "Heavy",
+        "tactic": "recover",
+        "telegraph": "Engorged, slow, fat with blood \u2014 the punish window. Hit it now.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "smoke and fire (it hunts by heat \u2014 a smoky fire blinds it)",
       "its own thirst (after it drinks it\u2019s heavy and slow \u2014 that\u2019s the window)"
@@ -3666,6 +4251,59 @@
       },
       "damageType": "piercing"
     },
+    "attacks": [
+      {
+        "name": "Quest",
+        "tactic": "reposition",
+        "telegraph": "It waits. The questing legs wave \u2014 the tell.",
+        "weight": 2
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          8,
+          14
+        ],
+        "damageType": "physical",
+        "name": "Latch",
+        "pattern": {
+          "range": 1,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "Adjacent = attached. No dodge. It's ON you.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "requiresFlag": "latched"
+        },
+        "damage": [
+          9,
+          15
+        ],
+        "damageType": "physical",
+        "name": "Feed",
+        "pattern": {
+          "range": 1,
+          "type": "single",
+          "windup": 1
+        },
+        "telegraph": "It feeds \u2014 3/turn drain. It may carry Lemons.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "requiresFlag": "fed"
+        },
+        "name": "Engorged",
+        "tactic": "recover",
+        "telegraph": "It drops off \u2014 fat, slow, engorged. The kill window.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "fire and heat (burn it and it lets go)",
       "distance (it can\u2019t chase \u2014 a slow thing with a patient plan)",
