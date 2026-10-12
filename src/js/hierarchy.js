@@ -99,7 +99,7 @@
 //   - region_moves_on_engagement: foreign-realm growth is engagement-driven, not clock-driven — waiting banks nothing; playing advances the arc. Haven-linked villages are NOT excluded from candidacy (the old exclusion punished courting: the more Haven courted, the slower the region climbed). Still earned: momentum is deed-gated, a 4-realm takes weeks of real beats, never a calendar path. (code: hierarchy.js)
 //   - grief_coalesces: one funeral doesn't become five — a link already grieving (young-link beat staged, or inside the mourning window) takes no new haircut, beat, or leverage grab from a further death; the first death keeps full force. The neglect snap still runs mid-grief. (code: hierarchy.js)
 //   - young_links_get_grace: succession on a link younger than 21 days costs -8 trust (not -15) and never snaps — instead a staged renegotiation beat (link.pendingRenegotiation, answered via answerRenegotiation: gift/visit/wait with real costs, expires aloud in 7 days). Older links still snap when trust craters — deaths hit hard. Grief delays the verdict because they're still deciding what Haven is. (code: hierarchy.js)
-//   - the_world_watches: global = national + deed-reactive viewership >= 40, staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
+//   - the_world_watches: global = national + deed-reactive viewership >= 32 (travel longsim r5 2026-10-12: recalibrated from provisional v1 40 — the 40 bar was set under the old pantry-frozen viewership economy; the earned economy's deed-rich seasons plateau at ~31-38), staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
 //   - national_routes_tribute: when national, subordinate tribute grain arrives at x1.25 via the System's logistics layer — and the arrival line says the true amount. Copy and engine agree. (code: hierarchy.js)
 //   - demand_honor_is_proportional: honoring a tribute demand with a thin pantry grants proportional trust and honest copy, never a free +8 on empty hands; an already-loaned representative extends instead of being clobbered. (code: hierarchy.js)
 //   - founding_pour_is_real_food: the Founding Council's pool choice debits Haven's pantry and each fire's own stores at the league's rate — the shared granary is filled, never minted; shortfalls are said aloud and counted. Sibling of their_fields_pay and league_pool_is_real_food's thin-air fixes. (code: hierarchy.js)
@@ -2337,9 +2337,19 @@
     },
 
     // _checkGlobal: the pre-table beat. The ladder is a ladder — global only
-    // after national. Deed-reactive: viewership climbs on recordMoment (big
-    // plays), show stunts, ledger showmanship — seasons of being watched,
-    // never a calendar flip. (Threshold 40 is provisional v1 — docs/SCALE.md.)
+    // ---------- GLOBAL ----------
+    // _checkGlobal: runs at the day boundary after national. Deed-reactive:
+    // viewership climbs on recordMoment (big plays), show stunts, ledger
+    // showmanship — seasons of being watched, never a calendar flip.
+    // THRESHOLD 32 (travel longsim r5 2026-10-12: recalibrated from the
+    // provisional v1 40 — the 40 bar was set under the OLD pantry-frozen
+    // viewership economy, where it was nearly free by day 2-7; the
+    // 2026-10-11 earned-economy fix (arc*5 + showmanship + codex, deed
+    // spikes) never recalibrated it. Measured on 12 fed 200d seeds: a full
+    // deed-rich season (national, 8 contests, waves 11/6/4, 3 crises,
+    // 79 days) plateaus viewership at ~31-38, so 40 was unreachable and the
+    // Watchers never staged. 32 = the season bar: roughly a season+ of
+    // being worth watching, per docs/SCALE.md.)
     _checkGlobal() {
       try {
         if (this.state.globalLive || this.state.pendingGlobal || !this.state.nationalLive) return;
@@ -2347,7 +2357,7 @@
         // an exiled answerer — it would die unanswered at the next boundary.
         if ((this.state.scholar || {}).exiled) return;
         var v = (typeof this.havenViewership === 'function') ? this.havenViewership() : 0;
-        if (v >= 40) this.stageGlobalBeat(v);
+        if (v >= 32) this.stageGlobalBeat(v);
       } catch (e) {}
     },
 
@@ -2359,7 +2369,7 @@
     stageGlobalBeat(v) {
       if (this.state.globalLive || this.state.pendingGlobal) return null;
       this.state.pendingGlobal = { viewership: Math.round(v || 0), day: (this.state.scholar || {}).day || 0 };
-      this.say(`◈ SYSTEM: "Forty. You see the number. THE WORLD IS WATCHING. Broadcast tier: planetary — the audience has picked its favorite fire and it is YOURS. This is not the table. The table comes later. Tonight, the galaxy wants a show."`);
+      this.say(`◈ SYSTEM: "${Math.round(v)}. You see the number. THE WORLD IS WATCHING. Broadcast tier: planetary — the audience has picked its favorite fire and it is YOURS. This is not the table. The table comes later. Tonight, the galaxy wants a show."`);
       this.say(`📡 The feed floods in — fan art, messages in languages nobody speaks, a countdown that isn't yours. The audience demands Haven for the world feed: SEND your speaker into the light, FEAST the cameras with a grand showing, or DECLINE and let the galaxy watch you say no.`);
       try { if (this.journalNote) this.journalNote('village', 'global', 'The Watchers: the world feed wants Haven.'); } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'global-beat'); } catch (e) {}

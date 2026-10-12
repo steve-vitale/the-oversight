@@ -275,6 +275,38 @@ function courtshipClimb(Game, ctx) {
   } catch (e) {}
 }
 
+// ---------- SIM INSTRUMENT ONLY (travel longsim r5 2026-10-12) ----------
+// FED SURVIVAL FLOOR. This is NOT game code and is NEVER shipped as such:
+// a controlled experimental instrument that removes the food wall so the
+// long-run sim can measure the UPPER ladder's honesty end to end. If the
+// ladder climbs when fed, travel's machinery is honest and the food wall is
+// confirmed THE binding constraint. If something still doesn't reach even
+// when fed — that's travel's real blank.
+// HOW IT WORKS: once a day, stock the pantry up to 3 days of village food
+// (real pieces via Game.stockPantry — eaten honestly through villageEats,
+// tribute paid from it is real food). Nothing else is touched: villagers
+// still forage, still hunt, still die in fights; disease, raids, tribute
+// demands, trust, gossip all run. The only thing removed is starvation.
+// The stocked food is MARKED in the item name so transcripts read honestly.
+function fedFloorRoad(Game, ctx) {
+  try {
+    const v = Game.state && Game.state.village;
+    if (!v) return;
+    const pop = (((v.roster || []).length || 1)) + 0;
+    const perDay = 2000;
+    let cur = 0;
+    try { cur = Game.pantryKcalLive ? Game.pantryKcalLive(v) : 0; } catch (e) {}
+    const target = pop * perDay * 3;
+    const add = target - cur;
+    if (add > 500 && Game.stockPantry) {
+      Game.stockPantry(add, 'fed-floor grain (SIM INSTRUMENT r5 — removes the food wall; not game food)');
+      ctx.fedKcal = (ctx.fedKcal || 0) + Math.round(add);
+      ctx.fedDays = (ctx.fedDays || 0) + 1;
+    }
+  } catch (e) {}
+}
+// -----------------------------------------------------------------------
+
 // Answer the first gesture (pendingAccord): the designed regional moment —
 // Haven's first impression on the other fire (gift 2,000 kcal / the
 // representative's three days / cold ink). A sim policy that never answers it
@@ -352,6 +384,16 @@ function diplomacyRoad(Game, ctx) {
         // count only real answers — a blocked/refused call (exiled scholar,
         // dissolved realm) returns null and is not an answer.
         if (Game.answerNationalChoice(pick)) ctx.nationalAnswered = (ctx.nationalAnswered || 0) + 1;
+      } catch (e) {}
+    }
+    // Answer the Watchers beat (pendingGlobal) — never decline. 'feast' is
+    // the played choice (5,000 kcal of theater); champion is a 7-day
+    // speaker absence the policy saves for real need. (r5: the beat never
+    // staged organically, so no policy had a reason to answer it — the fed
+    // instrument changes that.)
+    if (Game.state.pendingGlobal && Game.answerGlobalChoice) {
+      try {
+        if (Game.answerGlobalChoice('feast')) ctx.globalAnswered = (ctx.globalAnswered || 0) + 1;
       } catch (e) {}
     }
     const ovs = Game.state.otherVillages || [];
@@ -690,4 +732,20 @@ const winseek = {
   },
 };
 
-module.exports = { winseek, accordRoad };
+// ---------- FED ARM (travel longsim r5) ----------
+// fedseek = winseek + the fedFloorRoad sim instrument (see above). Same
+// policy, same choices, same beats answered — the ONLY difference is the
+// pantry never drops below 3 days of village food, so starvation deaths
+// can't bind. Before/after comparisons (fed vs unfed on identical seeds)
+// therefore measure exactly the food wall's contribution to reachability.
+// The stockPantry food is marked in the item name; ctx.fedKcal counts it.
+const fedseek = Object.assign({}, winseek, {
+  id: 'fedseek',
+  desc: 'win-seeking + fed survival floor (SIM INSTRUMENT r5): starvation removed, everything else identical',
+  daily(Game, ctx) {
+    fedFloorRoad(Game, ctx);
+    if (winseek.daily) winseek.daily(Game, ctx);
+  },
+});
+
+module.exports = { winseek, accordRoad, fedseek };

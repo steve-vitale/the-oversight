@@ -155,10 +155,16 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
 ### 4. GLOBAL — the pre-table beat
 - **Definition:** the world/audience scale — NOT the table scene (the table is the
   ending). The ladder is a ladder: global requires national first.
-- **Bar (provisional v1, tune in playtest):** `nationalLive` AND Haven viewership ≥ 40.
-  Viewership is deed-reactive (`recordMoment` +1 per notable event, show stunts +2,
-  ledger showmanship, codex breadth) — reaching 40 means roughly a season+ of being
-  worth watching. Never a calendar flip.
+- **Bar (recalibrated v2, travel longsim r5 2026-10-12):** `nationalLive` AND Haven viewership ≥ 32.
+  The v1 bar (40) was set under the old pantry-frozen viewership economy where
+  it was nearly free by day 2–7; the 2026-10-11 earned-economy fix (arc×5 +
+  showmanship + codex breadth, deed spikes) never recalibrated it. Measured on
+  12 fed 200d seeds: a full deed-rich season (national, 8 contests, waves
+  11/6/4, 3 crises, 79 days) plateaus viewership at ~31–38 — 40 was unreachable
+  and the Watchers never staged in 24 runs. 32 = the season bar: roughly a
+  season+ of being worth watching. Viewership is deed-reactive (`recordMoment`
+  +1 per notable event, show stunts +2, ledger showmanship, codex breadth) —
+  reaching 32 means roughly a season+ of being worth watching. Never a calendar flip.
 - **The beat — "The Watchers":** the System announces planetary broadcast tier; the
   audience has picked its favorite fire. Played choice:
   - **CHAMPION** — send your speaker into the light for seven days (real absence).
@@ -207,8 +213,9 @@ Haven alone. No mechanics change. `scaleRank()` → `'village'`.
   a realm.
 - Belong standing bar: trust ≥50 / arrears 0 / 14 days (ending eligibility is 70/0/21 —
   national is the doorway, the ending is the room).
-- Global viewership bar: 40. Other villages drift 2–60; Haven at 40 is plausibly
-  top-of-board without being endgame-only.
+- Global viewership bar: 32 (recalibrated r5 2026-10-12 from provisional v1 40;
+  measured: deed-rich fed seasons plateau at ~31-38). Other villages drift
+  2–60; Haven at ~32+ is plausibly top-of-board without being endgame-only.
 - Foreign polity cadence (structural-scale 2026-10-10; was 30%/wk flat):
   engagement-driven, not clock-driven. Background drift ~12%/wk SEEDS pacts
   (the region climbs without you, canon — a pair forms in ~2 months) but
