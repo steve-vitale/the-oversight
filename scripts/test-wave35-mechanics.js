@@ -250,14 +250,8 @@ function startFight(Game, mid, said) {
   }
 
   // ---------- 9. EATER: eats -> grows -> poison ----------
-  // TITAN GATE (titans.js now loads): the Eater is the Herald titan — it
-  // refuses solo fights. Muster 2 allies the way the game does.
+  // 2026-10-12: Eater is NOT a titan (wave-4 boss). No muster needed.
   {
-    try {
-      Game.state.titans = Game.state.titans || {};
-      Game.state.titans.musters = Game.state.titans.musters || {};
-      Game.state.titans.musters.eater = { allies: ['ally1', 'ally2'], haven: [], day: 0, outfitted: {} };
-    } catch (e) {}
     const m = startFight(Game, 'eater', said);
     // give it poison via the real inventory path (hasItem reads inventory)
     try { Game.state.scholar.inventory = Game.state.scholar.inventory || []; Game.state.scholar.inventory.push({ itemId: 'poison', units: 1 }); } catch (e) {}

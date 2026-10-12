@@ -1459,3 +1459,39 @@ body.broadcasting .ord-gridwrap.detail::before {
    container size (grid cells, vportrait, etc.) gets a compact portrait
    cap instead of a massive blob. Explicit sizes are unaffected. */
 svg.sprite { max-width: 72px; max-height: 72px; }
+
+/* TITAN FIGHT (Steve 2026-10-11): ants vs titan. Same 9x9 grid (mobile
+   constraint — never bigger). Cells pack denser, fighters shrink to
+   ant-size, the titan looms large, and the player gets a spotlight
+   square so they don't lose themselves in the swarm. */
+body.titan-fight .detail {
+  /* Denser packing: grid takes slightly less vertical space, cells tighter */
+  gap: 1px;
+}
+body.titan-fight .cell {
+  /* Smaller cells — the 9x9 still fits, but everything inside shrinks */
+  font-size: clamp(10px, 3.2vw, 26px);
+}
+body.titan-fight .cell .msprite svg.sprite,
+body.titan-fight .cell .vsprite svg.sprite {
+  /* Ants: allied/villager fighters render small */
+  max-width: 28px;
+  max-height: 28px;
+}
+body.titan-fight .cell.titan-cell {
+  /* The titan looms: its cell breaks the ant-scale */
+  font-size: clamp(28px, 9vw, 72px);
+  z-index: 2;
+}
+body.titan-fight .cell.titan-cell .msprite svg.sprite {
+  max-width: 72px;
+  max-height: 72px;
+}
+body.titan-fight .cell.player-spotlight {
+  /* Square lit up around the player — find yourself in the swarm */
+  outline: 3px solid #ffd54d;
+  outline-offset: -3px;
+  box-shadow: 0 0 12px rgba(255, 213, 77, 0.7), inset 0 0 8px rgba(255, 213, 77, 0.3);
+  border-radius: 4px;
+  z-index: 3;
+}

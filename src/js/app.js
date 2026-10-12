@@ -14398,6 +14398,19 @@
     // MODE SHIFT: combat gets its own visual skin — darkened edges,
     // claustrophobic grid. You FEEL the game change.
     try { document.body.classList.toggle('in-combat', !!st.inCombat); } catch (e) {}
+    // TITAN FIGHT (Steve 2026-10-11): ants vs titan. Same 9x9 grid (mobile),
+    // smaller cells, tiny fighters, huge titan, player spotlight.
+    try {
+      var _isTitanFight = false;
+      if (st.inCombat && Game.tbfight && Game.isTitan) {
+        var _tf = Game.tbfight.fighters || [];
+        for (var _i = 0; _i < _tf.length; _i++) {
+          var _m = _tf[_i];
+          if (_m.kind === 'monster' && _m.mdef && Game.isTitan(_m.mdef.id)) { _isTitanFight = true; break; }
+        }
+      }
+      document.body.classList.toggle('titan-fight', _isTitanFight);
+    } catch (e) {}
     // NIGHT: the world gets dark, continuously. --sky-light (0..1) drives the
     // grid dimming in CSS; is-night adds the moonlight tint and fire glow.
     try {
@@ -16043,6 +16056,10 @@
           const meName = meVp ? meVp.name.split(' ')[0] : 'You';
           g = `<span class="vent${_alert ? ' ' + _alert : ''}" data-ent="me"><span class="vtoken">${_mspr || '🧍'}</span>` + (meName ? `<span class="vname">${esc(meName)}</span>` : '') + `</span>`;
           cls += ' me';
+          // TITAN FIGHT (Steve 2026-10-11): spotlight the player among the ants
+          try {
+            if (document.body.classList.contains('titan-fight')) cls += ' player-spotlight';
+          } catch (e) {}
           entityHere = true;
         }
         // CELL GLYPH: what the ground itself looks like. Entities overlay after.
@@ -16148,6 +16165,10 @@
           const _mspr2 = villagerSpriteHtml(meVp2);
           const meName2 = meVp2 ? meVp2.name.split(' ')[0] : 'You';
           g = `<span class="vent${_alert2 ? ' ' + _alert2 : ''}" data-ent="me"><span class="vtoken">${_mspr2 || '🧍'}</span>` + (meName2 ? `<span class="vname">${esc(meName2)}</span>` : '') + `</span>`;
+          // TITAN FIGHT (Steve 2026-10-11): spotlight the player among the ants
+          try {
+            if (document.body.classList.contains('titan-fight')) cls += ' player-spotlight';
+          } catch (e) {}
         } else {
           // turn-based combat: fighters render from the fight, not scholar.monster
           // COMBAT-OVER GUARD (Steve 2026-10-06): if the fight is over but
@@ -16197,6 +16218,10 @@
               const _bufDim = (_mid === 'buffering') ? ' style="opacity:.45"' : '';
               g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}>${_hspr || _mspr || esc(mf.emoji || '👹')}</span>`;
               cls += ' creature';
+              // TITAN FIGHT (Steve 2026-10-11): mark titan cells for ant-vs-titan scaling
+              try {
+                if (_mid && Game.isTitan && Game.isTitan(_mid)) cls += ' titan-cell';
+              } catch (e) {}
               drawn = true; break;
             }
           }

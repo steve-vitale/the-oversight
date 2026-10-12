@@ -88,7 +88,7 @@ function musterForTitan(Game, id) {
   try {
     Game.state.titans = Game.state.titans || {};
     Game.state.titans.musters = Game.state.titans.musters || {};
-    const need = { nielsen: 3, finale: 4, eater: 2 }[id] || 0;
+    const need = { nielsen: 12, finale: 15 }[id] || 0; // 2026-10-12: 10+ allies (Steve); eater is not a titan
     if (need) {
       const allies = []; for (let i = 0; i < need; i++) allies.push('ally' + i);
       Game.state.titans.musters[id] = Game.state.titans.musters[id] || { allies, haven: [], day: 0, outfitted: {} };

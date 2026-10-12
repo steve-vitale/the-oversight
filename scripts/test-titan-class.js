@@ -81,14 +81,15 @@ function check(name, cond, extra) {
 // (a) titan flagged distinctly from HP
 console.log('(a) titan flag, not HP');
 check('finale is a titan (flag)', Game.isTitan('finale') === true);
-check('eater is a titan (herald, wave 4)', Game.isTitan('eater') === true);
+check('herald is a titan (herald, wave 4)', Game.isTitan('herald') === true);
+check('eater is NOT a titan (wave-4 boss)', Game.isTitan('eater') === false);
 check('nielsen is a titan (mid)', Game.isTitan('nielsen') === true);
 const cancellation = (Game.data.monsters || []).find(m => m.id === 'cancellation');
 check('cancellation exists in data', !!cancellation);
 check('cancellation is NOT a titan despite wave 5', Game.isTitan('cancellation') === false,
   'hp=' + JSON.stringify(cancellation && cancellation.hp));
 check('titans.json defines all three (doc keys ignored)',
-  ['eater', 'finale', 'nielsen'].every(id => Game.isTitan(id)) && !Game.isTitan('_comment'));
+  ['herald', 'finale', 'nielsen'].every(id => Game.isTitan(id)) && !Game.isTitan('_comment'));
 const pool = Game.monsterWavePool();
 check('monsterWavePool never contains titans', !pool.some(m => Game.isTitan(m.id)), 'pool=' + pool.map(m => m.id).join(','));
 
@@ -104,30 +105,38 @@ check('refusal names the muster requirement', said.some(t => /allied blades/i.te
 console.log('(c) allied faces in combat');
 Game.state.titans = null; // fresh
 Game.titanCast();
-Game.state.titans.musters['eater'] = {
+Game.state.titans.musters['herald'] = {
   allies: [
-    { villageId: 'ashford', vid: 'ash_speaker', name: 'Mara Voss', hp: 100, outfitted: [], gearValue: 0, wbonus: 8, varmor: 12 },
-    { villageId: 'ashford', vid: 'ash_fighter', name: 'Tomm Rill', hp: 100, outfitted: [], gearValue: 0, wbonus: 0, varmor: 0 },
+    { villageId: 'ashford', vid: 'ash_0', name: 'Fighter 0', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_1', name: 'Fighter 1', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_2', name: 'Fighter 2', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_3', name: 'Fighter 3', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_4', name: 'Fighter 4', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_5', name: 'Fighter 5', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_6', name: 'Fighter 6', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_7', name: 'Fighter 7', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_8', name: 'Fighter 8', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
+    { villageId: 'ashford', vid: 'ash_9', name: 'Fighter 9', hp: 100, outfitted: [], gearValue: 0, wbonus: 5, varmor: 10 },
   ],
   haven: [], day: 40, outfitted: {},
 };
-check('muster ready at minAllies (herald needs 2)', Game.titanMusterReady('eater') === true);
+check('muster ready at minAllies (herald needs 10)', Game.titanMusterReady('herald') === true);
 Game.tbfight = { fighters: [{ key: 'p', kind: 'player', name: 'You', hp: 200, mx: 4, my: 4, alive: true }] };
 Game.tbFighter = (k) => k === 'p' ? Game.tbfight.fighters[0] : null;
-Game._titanTest.titanInjectAllies('eater');
+Game._titanTest.titanInjectAllies('herald');
 const allies = Game.tbfight.fighters.filter(f => f.kind === 'ally');
-check('two allied fighters injected', allies.length === 2, 'got ' + allies.length);
+check('ten allied fighters injected', allies.length === 10, 'got ' + allies.length);
 check('they are FACES with real names', allies.every(f => f.name && f.villagerId && f.villageId));
 check('blow-by-blow stats: hp, brave AI, outfitted bonuses carried',
   allies.every(f => f.hp === 100 && f.ai === 'brave' && typeof f.wbonus === 'number' && typeof f.varmor === 'number'));
-check('outfitting bought real effectiveness', allies[0].wbonus === 8 && allies[0].varmor === 12);
+check('outfitting bought real effectiveness', allies[0].wbonus === 5 && allies[0].varmor === 10);
 
 // (d) allied deaths cost trust/grief
 console.log('(d) allied deaths cost');
 said.length = 0;
 const trustBefore = linkAsh.trust;
 Game._titanTest.titanResolveFight({
-  titan: 'eater', result: 'fled',
+  titan: 'herald', result: 'fled',
   allies: [
     { key: 'a_ash_speaker', name: 'Mara Voss', villageId: 'ashford', vid: 'ash_speaker', alive: false },
     { key: 'a_ash_fighter', name: 'Tomm Rill', villageId: 'ashford', vid: 'ash_fighter', alive: true },
@@ -137,7 +146,7 @@ check('dead ally marked dead in home roster',
   Game._otherVillage('ashford').roster.find(x => x.id === 'ash_speaker').alive === false);
 check('trust dropped 10 for the death', linkAsh.trust === trustBefore - 10, 'was ' + trustBefore + ' now ' + linkAsh.trust);
 check('grief said aloud', said.some(t => /did not get up|fell/i.test(t)), said.join(' | ').slice(0, 160));
-check('defeat breaks the muster', Game.state.titans.musters['eater'] === null);
+check('defeat breaks the muster', Game.state.titans.musters['herald'] === null);
 
 // (e) an ally can refuse and it matters
 console.log('(e) refusal is real');
@@ -147,7 +156,7 @@ Game.state.titans.musters = {};
 Game._otherVillage('ashford').roster.forEach(function (x) { x.alive = true; });
 said.length = 0;
 const cinTrustBefore = linkCin.trust;
-const muster = Game.soundTitanCall('eater');
+const muster = Game.soundTitanCall('herald');
 const cinFighters = (muster.allies || []).filter(a => a.villageId === 'cinder');
 check('low-trust ally refuses — sends nobody', cinFighters.length === 0);
 check('refusal costs trust (-8)', linkCin.trust === cinTrustBefore - 8, 'was ' + cinTrustBefore + ' now ' + linkCin.trust);
@@ -163,20 +172,20 @@ Game.state.scholar.day = 40;
 for (let d = 40; d < 80; d++) { Game.state.scholar.day = d; Game.titanDawnTick(); }
 check('no omens before wave 4 — you do not know', Object.keys(Game.state.titans.omens).length === 0);
 Game.unlockedWave = () => 5;
-Game.state.titans.omens['eater'] = { stage: 0, day: 80, warned: {} };
+Game.state.titans.omens['herald'] = { stage: 0, day: 80, warned: {} };
 Game.state.scholar.day = 82;
-Game._titanTest.titanEscalate('eater', 82);
+Game._titanTest.titanEscalate('herald', 82);
 check('stage 0 omen: titan not placed, name not spoken in escalation',
-  !Game.worldMonsters().some(m => m.id === 'eater') && !said.some(t => /The Eater/i.test(t) && /located|lair/i.test(t)));
+  !Game.worldMonsters().some(m => m.id === 'herald') && !said.some(t => /The Eater/i.test(t) && /located|lair/i.test(t)));
 // omen timing gate: too early stays stage 0
-Game.state.titans.omens['eater'] = { stage: 0, day: 80, warned: {} };
-Game.state.titans.omens['eater'].day = 79;
+Game.state.titans.omens['herald'] = { stage: 0, day: 80, warned: {} };
+Game.state.titans.omens['herald'].day = 79;
 Game.state.scholar.day = 82;
 let advanced = false;
 for (let d = 82; d < 100 && !advanced; d++) {
   Game.state.scholar.day = d;
   // call the internal advance directly (RNG-independent part)
-  const o = Game._titanTest.titanOmen('eater');
+  const o = Game._titanTest.titanOmen('herald');
   o.stage = 0; o.day = d - 3; // 3 days < 4-day minimum
   const before = o.stage;
   // emulate advance: only the timing gate, not the RNG
@@ -188,7 +197,7 @@ check('stage 0->1 requires 4+ days (timing gate, not instant)', !advanced);
 // THE TURN: temptation math
 console.log('(turn) temptation vs loyalty');
 Game.state.titans.musters = {};
-Game.state.titans.musters['eater'] = {
+Game.state.titans.musters['herald'] = {
   allies: [{ villageId: 'ashford', vid: 'ash_speaker', name: 'Mara Voss', hp: 100, outfitted: [], gearValue: 6000, wbonus: 0, varmor: 0 }],
   haven: [], day: 40, outfitted: {},
 };
@@ -200,9 +209,9 @@ const t2 = Game.titanTemptation('ashford');
 check('low trust + armed to the teeth: turn (never random)', t2.verdict === 'turn', JSON.stringify(t2));
 // telegraphed: warn first, then it turns
 said.length = 0;
-Game.state.titans.omens['eater'] = { stage: 2, day: 40, warned: { ashford: 1 } };
+Game.state.titans.omens['herald'] = { stage: 2, day: 40, warned: { ashford: 1 } };
 Game._titanTest.titanTurnTick(45);
-check('the turn removes the force (stolen gear is lost)', (Game.state.titans.musters['eater'].allies || []).length === 0);
+check('the turn removes the force (stolen gear is lost)', (Game.state.titans.musters['herald'].allies || []).length === 0);
 check('the turn craters trust', linkAsh.trust === 0);
 check('the turn is said aloud', said.some(t => /THE TURN/i.test(t)), said.join(' | ').slice(0, 200));
 

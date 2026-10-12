@@ -57,7 +57,7 @@
     var showmanship = 0;
     try { showmanship = (Game.state.ledger && Game.state.ledger.showmanship) || 0; } catch (e) {}
     var apocalypse = showmanship >= 20 ? 'nielsen' : 'finale';
-    st.cast = { herald: 'eater', apocalypse: apocalypse };
+    st.cast = { herald: 'herald', apocalypse: apocalypse }; // 2026-10-12: Herald is its own titan, not the Eater (Steve)
     return st.cast;
   }
 

@@ -8069,5 +8069,115 @@
       "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05)."
     },
     "armor": 12
+  },
+  {
+    "id": "herald",
+    "name": "The Herald",
+    "wave": 4,
+    "hp": [
+      700,
+      900
+    ],
+    "speed": 3,
+    "emoji": "📯",
+    "vibe": "it stands at the edge of the world, getting bigger. It is not attacking. It is ARRIVING. The sky behind it has a face in it.",
+    "unknown": "the sky, with a face in it",
+    "systemDesignation": "HERALD-1 (it comes first)",
+    "aggression": "heraldic",
+    "activity": "both",
+    "fear": "being unready",
+    "edible": {
+      "calories": 0,
+      "note": "You do not eat the Herald. The Herald eats the horizon. Leave it."
+    },
+    "biomes": [
+      "wastes",
+      "highlands"
+    ],
+    "encounter": "It does not ambush. It arrives. You see it coming for days.",
+    "behavior": "It announces. Every move is an omen first. The tutorial is: read, move, live.",
+    "follows": "it does not follow. It precedes.",
+    "attack": {
+      "name": "First Omen",
+      "damage": [
+        30,
+        50
+      ],
+      "telegraph": "It raises its trumpet. A line of sky goes WHITE — that's where the sound will land. MOVE.",
+      "pattern": {
+        "type": "line",
+        "length": 3,
+        "windup": 2
+      },
+      "damageType": "thunder"
+    },
+    "attacks": [
+      {
+        "name": "First Omen",
+        "damage": [
+          30,
+          50
+        ],
+        "telegraph": "It raises its trumpet. A line of sky goes WHITE — that's where the sound will land. MOVE.",
+        "pattern": {
+          "type": "line",
+          "length": 3,
+          "windup": 2
+        },
+        "damageType": "thunder",
+        "weight": 3
+      },
+      {
+        "name": "Second Omen",
+        "damage": [
+          25,
+          45
+        ],
+        "telegraph": "It turns, slowly, and TWO patches of sky go white. It is showing you where NOT to stand. Split up.",
+        "pattern": {
+          "type": "burst",
+          "windup": 2
+        },
+        "damageType": "thunder",
+        "condition": {
+          "cooldownTurns": 3
+        },
+        "weight": 2
+      },
+      {
+        "name": "The Naming",
+        "damage": [
+          80,
+          120
+        ],
+        "telegraph": "It inhales. The sky goes white ALL AROUND IT. It is about to SPEAK the apocalypse's name. You have three rounds. RUN or BURN IT DOWN.",
+        "pattern": {
+          "type": "burst",
+          "windup": 3
+        },
+        "damageType": "thunder",
+        "condition": {
+          "hpBelow": 0.5
+        },
+        "weight": 2
+      }
+    ],
+    "weaknesses": [
+      "it announces everything — read the omens",
+      "it is slow — reposition freely",
+      "it is a tutorial — the real test comes later"
+    ],
+    "loot": {
+      "tier": 4,
+      "note": "The Herald carries nothing. It IS the warning."
+    },
+    "parts": [],
+    "armor": 0,
+    "pierce": 0,
+    "cues": [
+      "the sky goes white where it will strike",
+      "a low trumpet note, felt in the teeth"
+    ],
+    "codexStages": {}
   }
 ]
