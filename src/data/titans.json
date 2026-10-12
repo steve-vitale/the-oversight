@@ -3,7 +3,7 @@
   "finale": {
     "counter_hint": "It ends in three rounds or it ends you. Feed it something you love, or end it first.",
     "epithet": "every season needs its climax",
-    "minAllies": 15,
+    "minAllies": 20,
     "monster": "finale",
     "omen0": "The sky, getting bigger. It starts sky-sized and gets bigger. The old ones stop talking when you ask.",
     "omen1": "The System whispers it, for once not delighted: the Finale. Every season needs its climax. This one is yours.",
@@ -15,7 +15,21 @@
     },
     "threat": "It grows every round and once per fight it ends one. The sky is getting bigger. This is the run's apocalypse — everything built was for this.",
     "title": "THE FINALE",
-    "wave": 5
+    "wave": 5,
+    "campaign": {
+      "nodes": [
+        "finale_crew",
+        "finale_opening",
+        "finale"
+      ],
+      "titles": {
+        "finale_crew": "THE COMMERCIAL BREAK",
+        "finale_opening": "THE OPENING CREDITS",
+        "finale": "THE HEART"
+      },
+      "heartMinSurvivors": 10,
+      "note": "Steve 2026-10-11: the finale is super special — a three-node march, not one fight. 20 blades to start (the largest army in the game); the heart demands 10 survivors or a re-muster."
+    }
   },
   "nielsen": {
     "counter_hint": "Boring is its armor and its leash. Be unwatchable.",

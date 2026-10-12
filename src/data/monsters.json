@@ -7934,6 +7934,215 @@
     "armor": 20
   },
   {
+    "id": "finale_crew",
+    "activity": "both",
+    "name": "The Commercial Break",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "hp": [
+      700,
+      900
+    ],
+    "attack": {
+      "name": "Ad Break",
+      "damage": [
+        30,
+        50
+      ],
+      "telegraph": "The screen cuts to black. \u2018WE\u2019LL BE RIGHT BACK.\u2019 You are not back. You are here \u2014 and the ads are armed.",
+      "pattern": {
+        "type": "burst",
+        "windup": 1
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Ad Break",
+        "damage": [
+          30,
+          50
+        ],
+        "telegraph": "The screen cuts to black. \u2018WE\u2019LL BE RIGHT BACK.\u2019 You are not back. You are here \u2014 and the ads are armed.",
+        "pattern": {
+          "type": "burst",
+          "windup": 1
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 3
+        },
+        "weight": 2
+      },
+      {
+        "name": "Sweeps Week",
+        "damage": [
+          25,
+          45
+        ],
+        "telegraph": "The music SWELLS \u2014 every dancer on the line leans in. Sweeps week. The downbeat will be enormous.",
+        "pattern": {
+          "type": "line",
+          "windup": 1
+        },
+        "damageType": "physical",
+        "weight": 3
+      }
+    ],
+    "weaknesses": [
+      "kill the crew \u2014 the finale fights part two without its production staff",
+      "it is the venue, not the show \u2014 end it fast, before the ratings climb"
+    ],
+    "edible": {
+      "calories": 0,
+      "note": "It is a commercial break. Do not eat the commercial break."
+    },
+    "parts": [
+      "a remote control (the batteries are dead, obviously)",
+      "thirty seconds of dead air"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "Static. Then \u2014 \u2018WE\u2019LL BE RIGHT BACK.\u2019",
+      "observed": "The show\u2019s crew: the break itself, fighting. Kill the production staff and the finale airs without a safety net \u2014 no one left to call \u2018cut.\u2019",
+      "slain": "Moves: Ad Break (burst [30,50], cooldown 3), Sweeps Week (line [25,45]). The crew is dead. The finale has no one to call."
+    },
+    "systemDesignation": "COMMERCIAL-BREAK (live)",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": null,
+    "speed": 2,
+    "emoji": "\ud83d\udcfa",
+    "unknown": "static, then \u2018we\u2019ll be right back\u2019",
+    "vibe": "the show\u2019s crew \u2014 the venue, fighting",
+    "wave": 5,
+    "pierce": 0.25,
+    "campaignOnly": true,
+    "campaignNode": "finale_crew",
+    "loot": {
+      "chance": 0.08,
+      "tier": 3,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05)."
+    },
+    "armor": 10
+  },
+  {
+    "id": "finale_opening",
+    "activity": "both",
+    "name": "The Opening Credits",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "hp": [
+      900,
+      1100
+    ],
+    "attack": {
+      "name": "Season Finale",
+      "damage": [
+        50,
+        70
+      ],
+      "telegraph": "It GROWS every round \u2014 visible escalation. The credits are still rolling; the show hasn\u2019t started. Once it finishes ARRIVING, it declares: a 5-round countdown to a [100,140] title card. You can see it coming the whole time.",
+      "pattern": {
+        "type": "beam",
+        "windup": 2
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Season Finale",
+        "damage": [
+          50,
+          70
+        ],
+        "telegraph": "It GROWS every round \u2014 visible escalation. The credits are still rolling; the show hasn\u2019t started.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Previously On",
+        "damage": [
+          35,
+          55
+        ],
+        "telegraph": "\u2018PREVIOUSLY ON\u2014\u2019 The recap montage plays across the grid \u2014 every hurt you ever took, replayed in order.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 2
+        },
+        "weight": 2
+      },
+      {
+        "name": "Cliffhanger",
+        "damage": [
+          55,
+          80
+        ],
+        "telegraph": "It stops \u2014 mid-swing, mid-roar \u2014 and the screen freezes. \u2018TO BE CONTINUED.\u2019 The freeze is a lie; the hit is already coming.",
+        "pattern": {
+          "type": "direct"
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 4
+        },
+        "weight": 2
+      }
+    ],
+    "weaknesses": [
+      "it is still ARRIVING \u2014 the Herald taught you: what arrives can be met",
+      "the sacrifice works here too \u2014 feed the credits, or end them first"
+    ],
+    "edible": {
+      "calories": 0,
+      "note": "It is the opening credits. Do not eat the opening credits."
+    },
+    "parts": [
+      "a theme song (it follows you for days)",
+      "the guest-star billing (it\u2019s you)"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "The sky, half-arrived. The credits roll over a world that isn\u2019t ready.",
+      "observed": "The finale, still ARRIVING \u2014 the Herald\u2019s lesson made flesh. Same hunger, smaller title card: 5 rounds to [100,140]. Kill the credits and the sky OPENS.",
+      "slain": "Moves: Season Finale [50,70]; declares once (5 rounds to [100,140]). Counter: feed it, or end it first. The sky opened."
+    },
+    "systemDesignation": "OPENING-CREDITS (arriving)",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": null,
+    "speed": 2,
+    "emoji": "\ud83d\udcfc",
+    "unknown": "the sky, half-arrived",
+    "vibe": "the finale, still arriving \u2014 the opening credits",
+    "wave": 5,
+    "pierce": 0.5,
+    "campaignOnly": true,
+    "campaignNode": "finale_opening",
+    "fiCardRange": [
+      100,
+      140
+    ],
+    "fiCountdownRounds": 5,
+    "loot": {
+      "chance": 0.08,
+      "tier": 3,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05)."
+    },
+    "armor": 14
+  },
+  {
     "id": "network_note",
     "activity": "diurnal",
     "name": "The Network Note",

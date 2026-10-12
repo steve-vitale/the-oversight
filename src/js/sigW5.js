@@ -129,6 +129,11 @@
     var ms = liveMonsters(game, id);
     return ms.length ? ms[0] : null;
   }
+  // finale-campaign (2026-10-12): the sacrifice / countdown buttons work in
+  // THE OPENING CREDITS too — same hunger, smaller card.
+  function fiMonster(game) {
+    return w5monster(game, 'finale') || w5monster(game, 'finale_opening');
+  }
   function fullMove(game, p) {
     try {
       var sp = p.speed || 3;
@@ -661,10 +666,17 @@
       m.fiGrowth++;
       m.fiDealt = (m.fiDealt || 0) + (f.sigW5PDmg || 0);
       // the declaration: once per fight
+      // (finale-campaign 2026-10-12: the opening credits declare with a
+      // longer fuse and a smaller card — overrides live on the fighter or
+      // its mdef as fiCountdownRounds / fiCardRange.)
       if (!m.fiDeclared && (m.hp <= (m.maxHp || m.hp) * 0.5 || (f.round || 1) >= 4)) {
-        m.fiDeclared = true; m.fiCountdown = 3;
+        m.fiDeclared = true;
+        var cdRounds = (m.fiCountdownRounds != null ? m.fiCountdownRounds : ((m.mdef && m.mdef.fiCountdownRounds) || 3));
+        m.fiCountdown = cdRounds;
+        var cardRange0 = m.fiCardRange || (m.mdef && m.mdef.fiCardRange) || [150, 200];
+        var cdWords = cdRounds === 3 ? 'THREE ROUNDS' : cdRounds + ' ROUNDS';
         try { game.audioEvent('fiDeclare', {}); } catch (err) {}
-        game.say('🌌 "PREVIOUSLY ON..." The sky replays your life. It has been watching. "THE FINALE. THREE ROUNDS." The title card rises, enormous. (Unavoidable [150,200] at zero. FEED IT something real — or FINISH IT.)');
+        game.say('🌌 "PREVIOUSLY ON..." The sky replays your life. It has been watching. "THE FINALE. ' + cdWords + '." The title card rises, enormous. (Unavoidable [' + cardRange0[0] + ',' + cardRange0[1] + '] at zero. FEED IT something real — or FINISH IT.)');
         try { game.tbRefreshTelegraphUI(); } catch (err) {}
         if (game.tbEndCheck()) return true;
         return false; // still fighting while it declares
@@ -675,7 +687,8 @@
         if (n <= 0) {
           // ---- THE TITLE CARD FALLS ----
           m.fiCountdown = null;
-          var dmg = roll([150, 200]);
+          var cardRange = m.fiCardRange || (m.mdef && m.mdef.fiCardRange) || [150, 200];
+          var dmg = roll(cardRange);
           try { game.audioEvent('fiTitleCard', {}); } catch (err) {}
           game.say('🎬 THE TITLE CARD FALLS. There is nowhere to be that it is not falling. (Unavoidable.)');
           var landed = game.tbDamage('p', dmg, 'the falling title card', m.key, { undodgeable: true, sigW5NoMult: true });
@@ -862,6 +875,8 @@
           if ((atk.nnBuffed || 0) > 0) mult *= 1.25;
           if ((atk.nnShrunk || 0) > 0) mult *= 0.75;
           if (atk.fiGrowth) mult *= (1 + 0.05 * atk.fiGrowth);
+          // finale-campaign (2026-10-12): the Bad Note — its strikes land softer
+          if ((atk.fiNoteVuln || 0) > 0) mult *= 0.7;
           if (atk.rrAdapt) mult *= (1 + 0.10 * atk.rrAdapt);
           // (spoiler weight is applied by the hook at manifestation time,
           // not here — the hook owns the Leaked Ending damage directly)
@@ -1175,7 +1190,7 @@
       if (!f || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
       if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
-      const m = w5monster(this, 'finale');
+      const m = fiMonster(this);
       if (!m) { this.say('Nothing here to feed.'); return false; }
       if ((m.fiCountdown || 0) <= 0) { this.say('No countdown running — nothing to feed. (It declares once per fight.)'); return false; }
       const s = this.state.scholar;
@@ -1279,7 +1294,7 @@
       }
       if (w5monster(this, 'timeslot')) out.push(btn('tbTsOwnVenue', '🏟️ Own venue', 'Declare this venue yours — its hazards skip you until reschedule'));
       if (w5monster(this, 'nielsen')) out.push(btn('tbNiPlayToCamera', '📸 Camera', 'Mug for the camera — +15 viewers, but the next gaze is just watching'));
-      const fi = w5monster(this, 'finale');
+      const fi = fiMonster(this);
       if (fi && (fi.fiCountdown || 0) > 0) {
         out.push(btn('tbFiSacrifice', '🎁 Feed: item', 'Feed the finale an item from your pack (real cost)', 'item'));
         out.push(btn('tbFiSacrifice', '🧠 Feed: memory', 'Feed the finale a food memory (−250 kcal)', 'memory'));

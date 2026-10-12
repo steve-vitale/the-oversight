@@ -72,7 +72,7 @@ function check(name, cond, extra) {
 
   // FINALE: countdown apocalypse
   console.log('-- finale --');
-  G.state.titans.musters.finale = { allies: Array.from({length:15}, (_,i)=>'c'+i), haven: [], day: 0, outfitted: {} };
+  G.state.titans.musters.finale = { allies: Array.from({length:20}, (_,i)=>'c'+i), haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('finale');
   const f = G.tbfight.fighters.find(f => f.kind === 'monster');
@@ -81,11 +81,11 @@ function check(name, cond, extra) {
   check('finale is apocalypse (highest HP)', f.maxHp > 1000);
   G.tbfight.over = true; G.tbfight = null;
 
-  // DISTINCTNESS: the three have different minAllies (10/12/15)
+  // DISTINCTNESS: the three have different minAllies (10/12/20)
   const t = G.data.titans;
   check('herald needs 10', t.herald.minAllies === 10);
   check('nielsen needs 12', t.nielsen.minAllies === 12);
-  check('finale needs 15', t.finale.minAllies === 15);
+  check('finale needs 20 (Steve 2026-10-11: even more people)', t.finale.minAllies === 20);
   check('all distinct', new Set([t.herald.minAllies, t.nielsen.minAllies, t.finale.minAllies]).size === 3);
 
   console.log(`\n${pass} passed, ${fail} failed (seed ${SEED})`);

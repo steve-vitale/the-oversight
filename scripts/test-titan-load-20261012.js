@@ -28,7 +28,7 @@ const check = (name, cond, detail) => {
   check('titans.js loads with zero failures', titanFail.length === 0, JSON.stringify(titanFail).slice(0, 160));
   check('Game.isTitan attached', typeof Game.isTitan === 'function');
   if (typeof Game.isTitan === 'function') {
-    check('eater/nielsen/finale are titans', Game.isTitan('eater') && Game.isTitan('nielsen') && Game.isTitan('finale'));
+    check('nielsen/finale are titans; eater is NOT (stripped 2026-10-12, wave-4 boss)', Game.isTitan('nielsen') && Game.isTitan('finale') && !Game.isTitan('eater'));
     check('ordinary monsters are not titans', !Game.isTitan('gallowdeer') && !Game.isTitan('hushwolf'));
   }
   await setupGame(Game);

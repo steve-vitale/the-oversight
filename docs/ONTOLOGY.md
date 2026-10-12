@@ -605,6 +605,23 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 
 **Consumes:** Scattering.combat.roll, village health, agency xp, equipment, monsters data
 
+### finale-campaign (`finale-campaign.js`)
+THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super special"). Node 1 THE COMMERCIAL BREAK (9x9 skirmish: the commercial break + spoiler + network_note trio — kill the production staff, take their tools). Node 2 THE OPENING CREDITS (12x12: the finale still ARRIVING, weaker card [100,140], 5-round fuse). Node 3 THE HEART (12x12: the full finale in two parts — part two at bloodied brings sky-fall zones, the credits rolling in from the edges, accelerated growth, and THE ENCORE). 20 blades to start the march (the largest army in the game); the heart demands 10 survivors or a re-muster at trust cost. Crew spoils become one-shot combat buttons in the heart. Dead allies stay dead across nodes; the coalition camps and partially heals between nodes.
+
+**Provides:** finaleCampaignPlace(titanId), titanEntryGate(titanId), finaleCampaign() / finaleReinforce() / finaleNodeReady(), fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale), tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons), finaleCampaignButtons() (heart-fight combat buttons), _finaleTest (test hooks)
+
+**Rules:**
+- campaign_is_a_march: three nodes in order; the opening refuses until the crew is cleared, the heart until the opening is cleared. (code: titanEntryGate)
+- twenty_blades: the march starts at 20 allied blades — the largest army in the game. (code: finale-campaign.js)
+- dead_stay_dead: allies slain in a node leave the muster; the next node marches with survivors. (code: finaleResolveNode)
+- camp_between: the coalition camps between nodes — player heals 50% of missing, allies 25%. Said aloud. (code: finaleInterlude)
+- heart_floor: the heart demands 10 surviving blades; below that, re-muster (finaleReinforce) at trust cost. (code: titanEntryGate)
+- encore_costs: the encore's sacrifice takes items only — memories no longer satisfy it. (code: tbFiSacrifice wrap)
+- spoils_are_earned: the crew's tools (Red Pen, Leaked Script, Bad Note) are one-shot buttons in the heart only. (code: finaleCampaignButtons)
+- part_two_is_different: bloodied (<50%) starts part two — sky-fall zones, the credits, faster growth, the encore. Never the same fight twice. (code: fiFinaleHeart)
+
+**Consumes:** —
+
 ### food (`food.js`)
 Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 

@@ -133,6 +133,11 @@
 
   function titanPlace(titanId) {
     try {
+      // FINALE CAMPAIGN (2026-10-12): the finale arrives as a three-node
+      // march, not one lair. The campaign module places its own nodes.
+      if (titanId === 'finale' && typeof Game.finaleCampaignPlace === 'function') {
+        return Game.finaleCampaignPlace(titanId);
+      }
       var def = titanDefs()[titanId];
       var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
       // lair: 3 tiles out, clamped to the region map (tiles are region coords)
@@ -502,8 +507,18 @@
       try { mdef = (Game.data.monsters || []).find(function (m) { return m.id === mid; }); } catch (e) {}
       var titanId = mid && titanDefs()[mid] ? mid : null;
       if (titanId) {
+        // ENTRY GATE OVERRIDE (finale-campaign 2026-10-12): the finale's
+        // three-node march has its own gate (campaign progression + surviving
+        // muster). When the override answers, it replaces the flat minAllies
+        // gate below — never both.
+        var gateAns = null;
+        try { gateAns = (typeof Game.titanEntryGate === 'function') ? Game.titanEntryGate(titanId) : null; } catch (e) {}
+        if (gateAns && !gateAns.ok) {
+          Game.say(gateAns.reason);
+          return null;
+        }
         // HARD GATE: no solo titans. Not a likely death — a refusal.
-        if (!titanMusterReady(titanId)) {
+        if (!gateAns && !titanMusterReady(titanId)) {
           var def = titanDefs()[titanId];
           var have = 0;
           try { have = (titanState().musters[titanId] || { allies: [] }).allies.length; } catch (e) {}
@@ -687,6 +702,8 @@
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
     titanMusterState: function (titanId) { return titanState().musters[titanId] || null; },
+    // exposed for the finale campaign (allied injection into campaign nodes)
+    titanInjectAllies: titanInjectAllies,
   };
 
   Object.assign(Game, methods);

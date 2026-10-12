@@ -88,7 +88,7 @@ function musterForTitan(Game, id) {
   try {
     Game.state.titans = Game.state.titans || {};
     Game.state.titans.musters = Game.state.titans.musters || {};
-    const need = { nielsen: 12, finale: 15 }[id] || 0; // 2026-10-12: 10+ allies (Steve); eater is not a titan
+    const need = { nielsen: 12, finale: 20 }[id] || 0; // 2026-10-12: finale needs 20 (Steve: even more people); eater is not a titan
     if (need) {
       const allies = []; for (let i = 0; i < need; i++) allies.push('ally' + i);
       Game.state.titans.musters[id] = Game.state.titans.musters[id] || { allies, haven: [], day: 0, outfitted: {} };
@@ -142,7 +142,7 @@ function startFight(Game, id, hp) {
   // Simulate the parent's monsterBehaviors.json wiring (shared file — the
   // parent owns it). The module only registers hooks; the data table maps
   // them. Without this, mbRunPreTurn never dispatches to our hooks.
-  const W5_HOOKS = { cancellation: ['cxStamp'], editor: ['edCut'], rerun: ['rrTake'], spoiler: ['spAnnounce'], timeslot: ['tsReschedule'], nielsen: ['niWatch'], finale: ['fiFinale'], network_note: ['nnNote'] };
+  const W5_HOOKS = { cancellation: ['cxStamp'], editor: ['edCut'], rerun: ['rrTake'], spoiler: ['spAnnounce'], timeslot: ['tsReschedule'], nielsen: ['niWatch'], finale: ['fiFinaleHeart'], network_note: ['nnNote'] };
   try {
     const beh = (Game.data.monsterBehaviors || {}).behaviors || {};
     for (const id of Object.keys(W5_HOOKS)) {

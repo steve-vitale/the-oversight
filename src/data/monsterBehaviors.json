@@ -461,7 +461,23 @@
       "aggroRange": 7,
       "archetype": "closer",
       "fleeAt": 0,
-      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): declares at 50% HP or round 4; 3-round countdown with visible growth to an unavoidable [150,200] title card. Sacrifice or end it first; deaths via maybeCheatDeath.",
+      "notes": "Wave-5 signature (sigW5, Steve 2026-10-11; campaign 2026-10-12): fiFinaleHeart wraps fiFinale \u2014 part two at bloodied (sky-fall zones, the credits, accelerated growth, THE ENCORE). Declares at 50% HP or round 4; 3-round countdown to an unavoidable [150,200] title card. Sacrifice or end it first; deaths via maybeCheatDeath.",
+      "preTurnHooks": ["fiFinaleHeart"],
+      "preferredRange": 4
+    },
+    "finale_crew": {
+      "aggroRange": 7,
+      "archetype": "brawler",
+      "fleeAt": 0,
+      "notes": "Finale campaign node 1 (2026-10-12): the commercial break + injected spoiler/network_note trio. Standard attacks; no signature hooks.",
+      "preTurnHooks": [],
+      "preferredRange": 3
+    },
+    "finale_opening": {
+      "aggroRange": 7,
+      "archetype": "closer",
+      "fleeAt": 0,
+      "notes": "Finale campaign node 2 (2026-10-12): the finale still ARRIVING \u2014 same fiFinale hook, mdef overrides fiCardRange [100,140] + fiCountdownRounds 5. Kill the credits and the sky opens.",
       "preTurnHooks": ["fiFinale"],
       "preferredRange": 4
     },
