@@ -551,23 +551,57 @@ function gearUp(Game, ctx) {
     const eq = s.equipped || {};
     const inv = s.inventory || [];
     const defOf = (it) => (Game.data.items || []).find(d => d.id === (it.itemId || it.id));
+    // AMMO AWARENESS (journey-scale r3 2026-10-11): a ranged weapon with no
+    // ammo is a stick you hold wrong — the scale harness watched a player
+    // strike a Highbeam Deer 34 rounds for 0 damage ("No arrow left" every
+    // round) and die. Never equip a dry ranged weapon while a usable one
+    // exists; craft arrows when the best weapon is dry; unequip a dry
+    // ranged weapon rather than posing with it.
+    const ammoOk = (w) => {
+      try { if (!w || !w.ammo) return true; return Game.ammoCount(w.ammo) > 0; }
+      catch (e) { return true; }
+    };
     const wbonus = (slot) => {
       const w = eq[slot];
       if (!w) return -1;
-      const def = (Game.data.items || []).find(d => d.id === w.itemId);
+      const def = (Game.data.items || []).find(d => d.id === (w.itemId || w.id));
       return ((def || {}).weapon || {}).bonus || 0;
     };
-    // WEAPON: best bonus in inventory -> melee or ranged slot
+    // WEAPON: best bonus among USABLE weapons in inventory -> melee or ranged slot
     let bestI = -1, bestB = -1, bestSlot = 'melee';
+    let dryI = -1, dryB = -1, drySlot = 'ranged', dryW = null;
     for (let i = 0; i < inv.length; i++) {
       const def = defOf(inv[i]);
       if (def && def.class === 'weapon') {
-        const b = ((def.weapon || {}).bonus || 0);
-        if (b > bestB) { bestB = b; bestI = i; bestSlot = (def.weapon || {}).type === 'ranged' ? 'ranged' : 'melee'; }
+        const w = def.weapon || {};
+        const b = w.bonus || 0;
+        const slot = w.type === 'ranged' ? 'ranged' : 'melee';
+        if (ammoOk(w)) {
+          if (b > bestB) { bestB = b; bestI = i; bestSlot = slot; }
+        } else if (b > dryB) { dryB = b; dryI = i; drySlot = slot; dryW = w; }
       }
+    }
+    if (bestI < 0 && dryI >= 0) {
+      // best weapon is dry: a competent player makes arrows (honest fail ok)
+      try { if (Game.craft) Game.craft('arrow'); } catch (e) {}
+      if (ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
+      else ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
     }
     if (bestI >= 0 && bestB > wbonus(bestSlot)) {
       try { Game.equip(bestI, bestSlot); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
+    }
+    if (bestI < 0) {
+      // nothing usable: unequip any dry ranged weapon rather than posing
+      try {
+        for (const slot of Object.keys(eq)) {
+          const cur = eq[slot]; if (!cur) continue;
+          const def = (Game.data.items || []).find(d => d.id === (cur.itemId || cur.id));
+          const w = def && def.weapon;
+          if (w && w.ammo && !ammoOk(w) && Game.unequip) {
+            try { Game.unequip(slot); ctx.unarmedDry = (ctx.unarmedDry || 0) + 1; } catch (e2) {}
+          }
+        }
+      } catch (e) {}
     }
     // ARMOR: any armor piece -> 'armor' slot when empty (equip() maps torso)
     const hasArmor = ['torso', 'armor', 'head', 'body'].some(sl => eq[sl]);

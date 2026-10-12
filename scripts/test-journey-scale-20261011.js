@@ -152,42 +152,15 @@ function goInside(Game) {
 }
 
 // ---- leg extensions to the competent policy ----
+// SPEAR CRAFT (journey-scale r3 2026-10-11): weapon/armor equipping now lives
+// in the shared competent policy's ammo-aware gearUp (runs 3x/day via
+// upkeep). This hook keeps the harness's one unique contribution: best-effort
+// spear crafting (knowledge-gated; honest fail is fine).
 function gearUp(Game, ctx) {
   try {
-    if ((ctx._gearDay || 0) === gday()) return;
-    ctx._gearDay = gday();
-    const inv = Game.state.scholar.inventory || [];
-    const defs = Game.data.items || [];
-    const defOf = (it) => defs.find(d => d.id === (it.itemId || it.id));
-    let best = -1, bestBonus = -999, bestSlot = 'melee';
-    inv.forEach((it, i) => {
-      const d = defOf(it); if (!d || d.class !== 'weapon') return;
-      const w = d.weapon || {};
-      const b = w.bonus || 0;
-      if (b > bestBonus) { bestBonus = b; best = i; bestSlot = (w.range > 1 || /bow|sling/i.test(w.type || '')) ? 'ranged' : 'melee'; }
-    });
-    if (best >= 0) {
-      const eq = Game.state.scholar.equipped || {};
-      const cur = eq[bestSlot];
-      const curId = cur && (cur.itemId || cur.id);
-      const it = inv[best];
-      const bestId = it.itemId || it.id;
-      if (curId !== bestId) {
-        try { Game.equip(best, bestSlot); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
-      }
-    }
-    // best-effort: learn to make a spear (knowledge-gated; honest fail is fine)
+    if ((ctx._spearDay || 0) === gday()) return;
+    ctx._spearDay = gday();
     try { Game.craft('fire_hardened_spear'); } catch (e) {}
-    // wear any un-worn armor piece
-    try {
-      const worn = new Set(Object.values(Game.state.scholar.equipped || {}).map(e => e && (e.itemId || e.id)));
-      for (let i = 0; i < inv.length; i++) {
-        const d = defOf(inv[i]); if (!d || !d.armor) continue;
-        const id = inv[i].itemId || inv[i].id;
-        if (worn.has(id)) continue;
-        try { Game.equip(i, 'armor'); ctx.armored = (ctx.armored || 0) + 1; break; } catch (e) {}
-      }
-    } catch (e) {}
   } catch (e) {}
 }
 
@@ -398,10 +371,12 @@ policy.daily = function (G, ctx) {
 // and still walks away from bad ones. Flee logic is relaxed vs competent:
 // flee only when truly outmatched or hurt.
 policy.fight = function (G, ctx) {
+  const TR = process.env.FIGHTTRACE ? (m) => { try { console.error('[FIGHTTRACE] ' + m); } catch (e) {} } : null;
+  if (TR) { try { const _f = G.tbfight; TR('enter: fight=' + (_f ? _f.id + ' round=' + _f.round : 'none') + ' turn=' + (G.tbIsPlayerTurn ? G.tbIsPlayerTurn() : '?')); } catch (e) {} }
   try {
     const f = G.tbfight;
     if (ctx._fr && (!f || f.id !== ctx._fr.id)) finalizeFight(ctx);
-    if (!f || f.over || !G.tbIsPlayerTurn()) return false;
+    if (!f || f.over || !G.tbIsPlayerTurn()) { if (TR) TR('early-false: no fight/over/not-turn'); return false; }
     if (!ctx._fr || ctx._fr.id !== f.id) {
       const mons = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
       ctx._fr = {
@@ -474,6 +449,56 @@ policy.fight = function (G, ctx) {
       } catch (e) {}
     }
     if (hpPct < 0.45) return flee();
+    // TELEGRAPH DODGE (journey-scale r3 2026-10-11): the grid IS the
+    // telegraph — Game.cellWarned reads the highlighted danger cells. The
+    // Highbeam Deer's whole counter is MOVE ("the freeze is the whole
+    // tell"); the old policy stood on warned cells for 34 rounds eating a
+    // full 6-tick beam. A competent player steps off the lit squares.
+    try {
+      const px0 = p.mx != null ? p.mx : 4, py0 = p.my != null ? p.my : 4;
+      if (G.cellWarned && G.cellWarned(px0, py0)) {
+        const occupied = new Set(f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
+        let bx = null, by = null;
+        for (let r = 1; r <= 2 && bx == null; r++) {
+          for (let dx = -r; dx <= r && bx == null; dx++) for (let dy = -r; dy <= r; dy++) {
+            if (!dx && !dy) continue;
+            const cx = px0 + dx, cy = py0 + dy;
+            if (cx < 1 || cx > 7 || cy < 1 || cy > 7) continue; // interior: edges are the flee barrier
+            if (occupied.has(cx + ',' + cy)) continue;
+            if (G.cellWarned(cx, cy)) continue;
+            bx = cx; by = cy;
+          }
+        }
+        if (bx != null) {
+          try { if (G.tbPlayerMove(bx, by)) ctx.dodged = (ctx.dodged || 0) + 1; } catch (e) {}
+          endTurn();
+          return true;
+        }
+      }
+    } catch (e) {}
+    // FUTILITY FLEE (journey-scale r3 2026-10-11): a competent player does
+    // not stand in a fight dealing nothing — the dry-bow deer (34 rounds,
+    // 0 damage, "No arrow left" every round) is the exhibit. Scan this
+    // fight's narration: the player's strike line is "You STRIKE ... for N".
+    // After 8 rounds with <10 damage dealt, or the first "No X left" dry
+    // line, walk to the edge. (Daily gearUp should prevent the dry case;
+    // this is the safety net for flyers/afterimages/immunities.)
+    try {
+      if (!ctx._fr.round0) ctx._fr.round0 = f.round || 1;
+      let dealt = 0, dryFire = false;
+      for (let i = ctx._fr.capStart; i < capture.length; i++) {
+        const l = capture[i] || '';
+        const m = /You STRIKE[^.]*?for (\d+)/.exec(l);
+        if (m) dealt += parseInt(m[1], 10);
+        if (/No \w+ left\. Your .* (stick|useless)/i.test(l)) dryFire = true;
+      }
+      if (dryFire || ((f.round || 1) - ctx._fr.round0 >= 8 && dealt < 10)) {
+        ctx.futilityFlees = (ctx.futilityFlees || 0) + 1;
+        if (TR) TR(`futility-flee round=${f.round} dealt=${dealt} dryFire=${dryFire}`);
+        return flee();
+      }
+      if (TR && (f.round % 5 === 0)) TR(`round=${f.round} dealt=${dealt} dryFire=${dryFire} hpPct=${hpPct.toFixed(2)}`);
+    } catch (e) { if (TR) TR('futility-block threw: ' + (e && e.message)); }
     // MODERATOR MUTE (journey-scale r2 2026-10-11): muted verbs spend the
     // turn as violations (+3/Notice each). The counter is WAIT — never
     // muted, and five quiet rounds clear the verb window so the mute LIFTS
@@ -504,7 +529,7 @@ policy.fight = function (G, ctx) {
         if (G.tbfight && !G.tbfight.over && G.tbIsPlayerTurn && G.tbIsPlayerTurn()) endTurn();
         return true;
       }
-    } catch (e) {} catch (e) {}
+    } catch (e) {}
     const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
     if (!alive.length) return false;
     alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
@@ -526,14 +551,15 @@ policy.fight = function (G, ctx) {
           if (dd < bd) { bd = dd; bx = cx; by = cy; }
         }
         if (bx != null) { try { G.tbPlayerMove(bx, by); } catch (e) {} ctx.closed = (ctx.closed || 0) + 1; }
+        if (TR) TR(`close-in round=${f.round} d0=${d0} range=${w.range || 1} px=${px},${py} tgt=${tmx},${tmy}`);
         endTurn();
         return true;
       }
     } catch (e) {}
-    try { G.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+    try { G.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; if (TR) TR(`strike round=${f.round} tgt=${tgt.key}`); } catch (e) { if (TR) TR('strike threw: ' + (e && e.message)); }
     endTurn();
     return true;
-  } catch (e) { return false; }
+  } catch (e) { if (TR) TR('OUTER threw: ' + (e && e.message) + ' ' + (e && e.stack || '').split('\n')[1]); return false; }
 };
 
 // ---- conversation driver (same as establishment, engage-first) ----
@@ -689,6 +715,15 @@ async function runSeed(seed) {
   const ctx = {};
   console.log(`\n########## SEED ${seed} ##########`);
   await Game.init();
+  // DEATH-CAUSE TELEMETRY (journey-scale r3 2026-10-11): playerDeath(cause)
+  // is the funnel for every player death; record the first cause so the
+  // census can say WHY the run ended. The census recorded everyone's death
+  // but the player's — the one that ends the journey.
+  ctx.deathCause = null;
+  if (typeof Game.playerDeath === 'function') {
+    const _pd = Game.playerDeath.bind(Game);
+    Game.playerDeath = function (cause) { if (!ctx.deathCause) ctx.deathCause = cause; return _pd(cause); };
+  }
   Game.genDetail = function () { return {}; };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -835,6 +870,7 @@ async function runSeed(seed) {
   const censusPath = `/tmp/journey-scale-census-${seed}.json`;
   fs.writeFileSync(censusPath, JSON.stringify({
     seed, maxGameDay, transcriptFiles, series, census, contestLog, waveLog, scaleLog, overAt,
+    deathCause: ctx.deathCause || null,
     regionalLog: ctx.regionalLog || [],
     fights: (ctx.fightsLog || []).map(f => ({
       day: f.day, rounds: f.rounds, result: f.result, over: f.over,
@@ -858,9 +894,11 @@ async function runSeed(seed) {
       choseAbility: ctx.choseAbility || 0, looted: ctx.looted || 0, donated: ctx.donated || 0,
       beasttricksAsked: ctx.beasttricksAsked || 0, beasttricksTaught: ctx.beasttricksTaught || 0,
       talked: ctx.talked || 0, taught: ctx.taught || 0,
+      dodged: ctx.dodged || 0, futilityFlees: ctx.futilityFlees || 0,
+      arrowCraft: ctx.arrowCraft || 0, dryWeaponDays: ctx.dryWeaponDays || 0,
     },
   }, null, 1));
-  console.log(`\nSEED ${seed} DONE: census -> ${censusPath} | maxDay=${maxGameDay} | over=${overAt || 'no'} | contests=${contestLog.length} | fights=${(ctx.fightsLog || []).length} | transcripts=${transcriptFiles.length} | scale=${scaleNow()} wave=${waveNow()} | scaleLog=${JSON.stringify(scaleLog)}`);
+  console.log(`\nSEED ${seed} DONE: census -> ${censusPath} | maxDay=${maxGameDay} | over=${overAt || 'no'}${ctx.deathCause ? ' cause=' + ctx.deathCause : ''} | contests=${contestLog.length} | fights=${(ctx.fightsLog || []).length} | transcripts=${transcriptFiles.length} | scale=${scaleNow()} wave=${waveNow()} | scaleLog=${JSON.stringify(scaleLog)}`);
   return { seed, censusPath, transcriptFiles, series, contestLog, overAt, maxGameDay };
 }
 

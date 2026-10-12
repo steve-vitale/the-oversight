@@ -362,7 +362,9 @@ async function runDays(Game, policy, opts) {
 // Default fight driver: strike nearest live monster on the player's turn.
 // Policies override via policy.fight(Game, ctx) returning true when handled.
 function driveFights(Game, policy, ctx) {
+  const TR = process.env.FIGHTTRACE ? (m) => { try { console.error('[DF] ' + m); } catch (e) {} } : null;
   let guard = 0, still = 0, lastSig = '';
+  let exitWhy = 'loop-end';
   // NO-PROGRESS BREAK (coverage 2026-10-09): a policy no-op that never
   // advances the fight (e.g. out-of-range strikes) used to spin 200× while
   // the game clock froze. Break when the fight state stops changing.
@@ -377,10 +379,10 @@ function driveFights(Game, policy, ctx) {
     } catch (e) { return 'err'; }
   };
   while (Game.tbfight && !Game.tbfight.over && guard++ < 200) {
-    if (Game.over) break;
+    if (Game.over) { exitWhy = 'game-over'; break; }
     if (policy.fight) {
       let handled = false;
-      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.fight(Game, ctx); } catch (e) {}
+      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.fight(Game, ctx); } catch (e) { if (TR) TR('policy.fight threw: ' + (e && e.message)); }
       if (handled) continue;
     }
     // ABILITY-USING POLICIES (longsim food 2026-10-11): a policy's fight hook
@@ -391,18 +393,19 @@ function driveFights(Game, policy, ctx) {
     if (tgt && Game.tbIsPlayerTurn()) {
       try { Game.tbPlayerStrike(tgt.key); } catch (e) {}
     }
-    if (!Game.tbfight || Game.tbfight.over) break;
+    if (!Game.tbfight || Game.tbfight.over) { exitWhy = 'fight-null-or-over'; break; }
     if (Game.tbIsPlayerTurn()) {
       try {
         const p = Game.tbFighter('p');
         p.moveLeft = 0; p.acted = true;
         Game.tbAfterPlayerAction();
-      } catch (e) { break; }
-    } else break;
+      } catch (e) { exitWhy = 'default-turn-threw'; break; }
+    } else { exitWhy = 'not-player-turn'; break; }
     const s = sig();
-    if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} break; } }
+    if (s === lastSig) { if (++still > 10) { try { (ctx.notes || (ctx.notes = [])).push('driveFights: no progress for 10 rounds, breaking'); } catch (e2) {} exitWhy = 'no-progress'; break; } }
     else { still = 0; lastSig = s; }
   }
+  if (TR) TR(`exit: ${exitWhy} guard=${guard} fight=${Game.tbfight ? Game.tbfight.id + ' round=' + Game.tbfight.round + ' over=' + Game.tbfight.over : 'none'}`);
 }
 
 // Default contest driver: pick choice 0 until the contest clears.
