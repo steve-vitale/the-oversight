@@ -560,6 +560,7 @@
         const char = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
         this.lineage().push({
           name: char.name || 'Someone',
+          villagerId: this.villagerId,
           epithet: this.leadershipEpithet(),
           frame: (info && info.frame) || this.endingFrame(),
           choice: (info && info.choice) || null,
@@ -635,7 +636,7 @@
         v.fallen.push({ villagerId: oldId, day: s.day || 0, cause: cause || 'the wild' });
       } catch (e) {}
       try { this.removeVillager(oldId, 'killed'); } catch (e) {}
-      this.lineage().push({ name: oldName, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild' });
+      this.lineage().push({ name: oldName, villagerId: oldId, epithet: this.leadershipEpithet(), day: s.day || 0, cause: cause || 'the wild' });
       this.say(`🕯️ ${oldName} is dead — ${cause || 'the wild'}. The village stops. Somebody screams. Somebody else starts digging.`);
       // DEATH ENDS THE CAMP (break-it camps-3 2026-10-08): the mantle passes
       // the office, not the claimed patch. A camp is its keeper's claim — the

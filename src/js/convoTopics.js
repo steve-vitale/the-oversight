@@ -258,7 +258,14 @@
           // nameless variants even with a fresh named corpse on the ground.
           const corpses = (typeof this.corpses === 'function') ? this.corpses() : (this.state.corpses || []);
           const recent = corpses[corpses.length - 1];
-          const nm = recent ? String(recent.name || recent.villagerId || '').split(' ')[0] : null;
+          // MOURNING NAME (journey crisis r8 2026-10-12): firstRef, never
+          // split(' ')[0] — the split truncated stranger descriptors
+          // ("A person, maybe 40s, with a scarred cheek") to the bare "A"
+          // (transcript-verified: "Since A died..."). firstRef is
+          // knowledge-gated per viewer and never collapses to "A".
+          let nm = null;
+          try { if (recent && recent.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(recent.villagerId) || null; } catch (e) {}
+          if (!nm && recent) nm = String(recent.name || recent.villagerId || 'someone');
           return { kind: 'mourning', name: nm };
         }
         // MANTLE MEMORY (journey crisis r4 2026-10-12): the village talks
@@ -276,8 +283,13 @@
             if (last && last.cause && !last.outcome) {
               const since = day - (last.day || 0);
               if (since >= 0 && since <= 10) {
-                const nm = String(last.name || '').split(' ')[0] || null;
-                if (nm) return { kind: 'mourning', name: nm, bearer: true };
+                // MOURNING NAME (journey crisis r8 2026-10-12): same
+                // firstRef-not-split fix as the corpse branch above —
+                // lineage entries now carry the dead bearer's villagerId.
+                let nm2 = null;
+                try { if (last.villagerId && typeof this.firstRef === 'function') nm2 = this.firstRef(last.villagerId) || null; } catch (e) {}
+                if (!nm2) nm2 = String(last.name || 'someone');
+                if (nm2) return { kind: 'mourning', name: nm2, bearer: true };
               }
             }
           }
