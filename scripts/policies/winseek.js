@@ -398,8 +398,14 @@ function diplomacyRoad(Game, ctx) {
     }
     const ovs = Game.state.otherVillages || [];
     let proposals = 0;
+    // POINTER-HEEDING (sim-completion r1): when the wave-4 pointer is live
+    // ("get me a network"), lower the courtship bar and knock more doors.
+    const courtship = !!ctx._pointerCourtship;
+    const subBar = courtship ? 25 : 35;
+    const peerBar = courtship ? 15 : 20;
+    const propCap = courtship ? 3 : 2;
     for (const ov of ovs) {
-      if (proposals >= 2) break; // don't spam; one or two a day
+      if (proposals >= propCap) break; // don't spam; one or two a day (three when the pointer says grow)
       if (!ov || ov.id === 'haven') continue;
       if (!Game.knowsVillage || !Game.knowsVillage(ov)) continue;
       if (Game.linkWith && Game.linkWith(ov.id)) continue;
@@ -407,12 +413,12 @@ function diplomacyRoad(Game, ctx) {
       if ((ov.opinion || 0) <= -20) continue; // closed door
       const score = (() => { try { return Game.judgeLink(ov.id, { asSubordinate: true, tributeKcalPerWeek: 4000 }).score; } catch (e) { return 0; } })();
       try {
-        if (score >= 35) {
+        if (score >= subBar) {
           // Propose as subordinate — the BELONG road. Generous tribute.
           Game.proposeLink(ov.id, { asSubordinate: true, tributeKcalPerWeek: 5000 });
           ctx.proposed = (ctx.proposed || 0) + 1;
           proposals++;
-        } else if (score >= 20 && Game.proposeCovenant) {
+        } else if (score >= peerBar && Game.proposeCovenant) {
           // Peer road fallback: covenant of equals.
           Game.proposeCovenant(ov.id);
           ctx.proposedPeer = (ctx.proposedPeer || 0) + 1;
@@ -431,6 +437,88 @@ function diplomacyRoad(Game, ctx) {
         }
       }
     } catch (e) {}
+  } catch (e) {}
+}
+
+// POINTER-GATED COURTSHIP (sim-completion r1 2026-10-12): when
+// POINTER_GATED=1, the policy does NOT court villages unconditionally —
+// diplomacyRoad and courtshipClimb are skipped until the wave-4 pointer
+// has been heard. This is the honest test of the scale discoverability
+// beats: can the pointer ALONE bootstrap the climb? (SCALE-DISCOVERY.md
+// verification plan: "a curiosity-following policy... should climb to
+// regional on the signals alone. If it can't, the signals failed.")
+const POINTER_GATED = String(process.env.POINTER_GATED || '') === '1';
+
+// ---------- ROAD 3c: POINTER-HEEDING — act on the scale discoverability beats ----------
+// (sim-completion r1 2026-10-12, Steve: "do more testing sims that try to
+// finish the game.") The game now TELLS a capped player to grow (beats 4+5,
+// commit 5e06dcc9: _scalePtrW4 when wave-3 bar banked but village-scale,
+// _scalePtrW5 when wave-4 bar banked but regional). A completion-attempt sim
+// must HEED them — not just court unconditionally, but respond to the
+// pointer: lower courtship standards when told to get a network, and climb
+// for primacy when told finales need a nation. Scripts-only; the game is
+// untouched. ctx.pointerHeard = {w4: day, w5: day} for the report.
+function pointerRoad(Game, ctx) {
+  try {
+    const st = Game.state || {};
+    const day = ((st.scholar || {}).day) || 1;
+    // Detect pointer firings (once-only flags on state).
+    if (st._scalePtrW4 && !ctx.pointerHeardW4) {
+      ctx.pointerHeardW4 = day;
+      ctx.pointerHeard = ctx.pointerHeard || {};
+      ctx.pointerHeard.w4 = day;
+    }
+    if (st._scalePtrW5 && !ctx.pointerHeardW5) {
+      ctx.pointerHeardW5 = day;
+      ctx.pointerHeard = ctx.pointerHeard || {};
+      ctx.pointerHeard.w5 = day;
+    }
+    const rank = (typeof Game.scaleRank === 'function' ? Game.scaleRank() : 'village');
+    const atLeast = (need) => {
+      try { return Game.scaleAtLeast ? Game.scaleAtLeast(rank, need) : rank === need; }
+      catch (e) { return false; }
+    };
+    // W4 pointer live (heard, still village-scale): GET A NETWORK. Lower the
+    // courtship bar and court harder — knock on doors we'd have waited on.
+    // diplomacyRoad reads ctx._pointerCourtship for lowered thresholds.
+    if (ctx.pointerHeardW4 && !atLeast('regional')) {
+      ctx._pointerCourtship = true;
+      ctx.pointerCourtDays = (ctx.pointerCourtDays || 0) + 1;
+      // Also climb opinion directly: study every known village's codex, not
+      // just the low-opinion ones (courtshipClimb caps at opinion<25).
+      try {
+        const ovs = Game.state.otherVillages || [];
+        for (const ov of ovs) {
+          if (!ov || ov.id === 'haven') continue;
+          if (!Game.knowsVillage || !Game.knowsVillage(ov)) continue;
+          if (Game.linkWith && Game.linkWith(ov.id)) continue;
+          try { if (Game.studyVillageCodex) { Game.studyVillageCodex(ov.id); ctx.pointerClimb = (ctx.pointerClimb || 0) + 1; } } catch (e) {}
+        }
+      } catch (e) {}
+    } else {
+      ctx._pointerCourtship = false;
+    }
+    // W5 pointer live (heard, regional but not national): FINALES NEED A
+    // NATION. Tend every link, and bid for primacy where the LEAD road is
+    // open (standing >= 90% of theirs, trust >= 60 — the played climb).
+    if (ctx.pointerHeardW5 && atLeast('regional') && !atLeast('national')) {
+      ctx.pointerNationDays = (ctx.pointerNationDays || 0) + 1;
+      try {
+        const links = Game.hierarchyState ? Game.hierarchyState() : [];
+        for (const l of links) {
+          if (!l || l.status !== 'active') continue;
+          // Bid for primacy on subordinate links we're strong in.
+          if (l.subordinate === 'haven' && Game.bidForPrimacy) {
+            const trust = l.trust || 0;
+            let standing = 0;
+            try { standing = Game.linkStanding ? Game.linkStanding(l.id) : 0; } catch (e) {}
+            if (trust >= 60 && standing >= 90) {
+              try { if (Game.bidForPrimacy(l.id)) ctx.primacyBids = (ctx.primacyBids || 0) + 1; } catch (e) {}
+            }
+          }
+        }
+      } catch (e) {}
+    }
   } catch (e) {}
 }
 
@@ -706,8 +794,13 @@ const winseek = {
   daily(Game, ctx) {
     if (competent.daily) competent.daily(Game, ctx);
     contributeRoad(Game, ctx);  // road 0: feed the village first — no exile, no drain-blocked feasts
-    courtshipClimb(Game, ctx);   // road 3a: the climb
-    diplomacyRoad(Game, ctx);    // road 3b: propose/answer
+    // POINTER-GATED (sim-completion r1): when POINTER_GATED=1, courtship is
+    // earned, not default — the policy only knocks after the System tells it
+    // to grow. pointerRoad detects the hearing; the gates below read it.
+    const mayCourt = !POINTER_GATED || !!ctx.pointerHeardW4;
+    if (mayCourt) courtshipClimb(Game, ctx);   // road 3a: the climb
+    if (mayCourt) diplomacyRoad(Game, ctx);    // road 3b: propose/answer
+    pointerRoad(Game, ctx);      // road 3c: heed the scale pointers (get a network / finales need a nation)
     crisisRoad(Game, ctx);       // road 4: weather
     sentimentRoad(Game, ctx);    // road 5a: channel keepsakes
     feastRoad(Game, ctx);        // road 5b: feast weekly (evening)
