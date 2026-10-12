@@ -1,0 +1,519 @@
+{
+ "seed": 30303,
+ "maxGameDay": 58,
+ "endReason": "village-lost",
+ "ms": 1993,
+ "knowledge": {
+  "snap40": {
+   "day": 40,
+   "villagers": [
+    {
+     "vid": "gen_km5314e",
+     "name": "Fritz",
+     "alive": true,
+     "occupation": "Beekeeper",
+     "plantsKnown": 19,
+     "familiar": 1,
+     "taughtInRun": 18,
+     "background": 18,
+     "taughtByPlayer": [],
+     "trust": 1
+    },
+    {
+     "vid": "emma_larsen",
+     "name": "Emma",
+     "alive": true,
+     "occupation": "Veterinarian",
+     "plantsKnown": 18,
+     "familiar": 1,
+     "taughtInRun": 17,
+     "background": 17,
+     "taughtByPlayer": [],
+     "trust": 77
+    },
+    {
+     "vid": "david_kim",
+     "name": "David",
+     "alive": true,
+     "occupation": "plumber",
+     "plantsKnown": 19,
+     "familiar": 1,
+     "taughtInRun": 18,
+     "background": 18,
+     "taughtByPlayer": [],
+     "trust": 65
+    }
+   ],
+   "playerCodexLevels": {
+    "1": 19
+   }
+  },
+  "snapEnd": {
+   "day": 59,
+   "villagers": [
+    {
+     "vid": "emma_larsen",
+     "name": "Emma",
+     "alive": true,
+     "occupation": "Veterinarian",
+     "plantsKnown": 20,
+     "familiar": 1,
+     "taughtInRun": 19,
+     "background": 19,
+     "taughtByPlayer": [],
+     "trust": 0
+    }
+   ],
+   "playerCodexLevels": {
+    "1": 21
+   }
+  },
+  "teachDiffs": [
+   {
+    "name": "Emma",
+    "vid": "emma_larsen",
+    "alive": true,
+    "plantsKnown": 20,
+    "familiar": 1,
+    "taughtInRun": 19,
+    "background": 19,
+    "trust": 0,
+    "taughtByPlayer": [],
+    "newTaughtByPlayerSince40": []
+   }
+  ],
+  "beast40": {
+   "asked": 2,
+   "taught": 0
+  }
+ },
+ "contests": {
+  "log": [
+   {
+    "dayStart": 14,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "windfall",
+     "name": "Windfall",
+     "variant": null,
+     "pilot": true,
+     "firesDay": 15,
+     "participants": [
+      "player",
+      "emma_larsen",
+      "gen_km5314e"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 16,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 15,
+    "grabParticipants": [
+     "player",
+     "gen_u84vl7u",
+     "gen_km5314e"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 25,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "echo",
+     "name": "The Echo",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 26,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 27,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 26,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 27,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "pit",
+     "name": "The Pit",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 28,
+     "participants": [
+      "david_kim",
+      "gen_u84vl7u"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 29,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 28,
+    "grabParticipants": [
+     "david_kim",
+     "gen_u84vl7u"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 29,
+    "via": "_contestDie-end-only",
+    "started": null,
+    "dayEnd": 29,
+    "outcome": "_contestDie(done)",
+    "played": true,
+    "orphanId": "pit"
+   },
+   {
+    "dayStart": 29,
+    "via": "fireRatingsSummons",
+    "started": {
+     "kind": "summons",
+     "id": "ratings_summons",
+     "name": "ratings summons",
+     "playerIn": true
+    },
+    "dayEnd": 30,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 30,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "price",
+     "name": "The Price",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 31,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 32,
+    "outcome": "_contestDie(done)",
+    "grabDay": 31,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 39,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "hide",
+     "name": "Hide and Seek",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 40,
+     "participants": [
+      "player",
+      "david_kim",
+      "emma_larsen"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 41,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 40,
+    "grabParticipants": [
+     "player",
+     "emma_larsen"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 42,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "vigil",
+     "name": "The Vigil",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 43,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 44,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 43,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 44,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "swear_jar",
+     "name": "The Swear Jar",
+     "participant": "player",
+     "playerIn": true
+    },
+    "dayEnd": 45,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 49,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "starve",
+     "name": "Hollow Belly",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 50,
+     "participants": [
+      "player",
+      "david_kim"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 51,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 50,
+    "grabParticipants": [
+     "player",
+     "david_kim"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 51,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "complaint_box",
+     "name": "The Complaint Box",
+     "participant": "player",
+     "playerIn": true
+    },
+    "dayEnd": 52,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 57,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "tithe",
+     "name": "The Blood Tithe",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 58,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 59,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 58,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   }
+  ],
+  "count": 12,
+  "counters40": {
+   "held": 4,
+   "seen": {
+    "windfall": 1,
+    "echo": 1,
+    "pit": 1,
+    "price": 1,
+    "hide": 1
+   }
+  },
+  "countersEnd": {
+   "held": 8,
+   "seen": {
+    "windfall": 1,
+    "echo": 1,
+    "pit": 1,
+    "price": 1,
+    "hide": 1,
+    "vigil": 1,
+    "starve": 1,
+    "tithe": 1
+   }
+  }
+ },
+ "favorAsks": [
+  {
+   "n": 0,
+   "day": 40,
+   "npc": "Emma",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-0.txt",
+   "texts": [
+    "\"About this wound — I still haven't found anyone. Any chance? ...yeah.\"",
+    "\"Careful with it. And — thank you.\"",
+    "\"There's more, but that's for another fire.\"",
+    "\"I should get back to it — but this was nice.\""
+   ]
+  },
+  {
+   "n": 1,
+   "day": 42,
+   "npc": "Emma",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-1.txt",
+   "texts": [
+    "\"I can't reach this properly. Could you take a look?  Simple as that.\"",
+    "\"I'm rooting for you. Whatever you're working on. Just so you know.\""
+   ]
+  },
+  {
+   "n": 2,
+   "day": 43,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-2.txt",
+   "texts": [
+    "\"Can we talk?\" David sits down near you. \"Just... talk. Like people used to.\"",
+    "\"Later.\""
+   ]
+  },
+  {
+   "n": 3,
+   "day": 44,
+   "npc": "Emma",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-3.txt",
+   "texts": [
+    "\"About the pantry run — the need hasn't gone anywhere. I'm still asking.  Not that it matters.\"",
+    "\"Good. The south slope below the meadow, morning, early. Two packs between us.\"",
+    "\"That's everything I brought back. The rest is just walking.\"",
+    "\"Anyway. I'm glad we talked. Really.\""
+   ]
+  },
+  {
+   "n": 4,
+   "day": 46,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-4.txt",
+   "texts": [
+    "\"We never finished talking about that question — we got cut off.\"",
+    "\"The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground.\"",
+    "\"Don't be a stranger.\""
+   ]
+  },
+  {
+   "n": 5,
+   "day": 47,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-5.txt",
+   "texts": [
+    "\"We never finished talking about that favor — we got cut off.\"",
+    "\"This wound — I can't clean it properly one-handed. Could you take a look?\"",
+    "\"Good talk.\""
+   ]
+  },
+  {
+   "n": 6,
+   "day": 48,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-6.txt",
+   "texts": [
+    "\"We never finished talking about that favor — we got cut off.\"",
+    "\"I can't reach this properly. Could you take a look?\"",
+    "\"Take care of yourself.\""
+   ]
+  },
+  {
+   "n": 7,
+   "day": 49,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-7.txt",
+   "texts": [
+    "\"We never finished talking about that favor — we got cut off.\"",
+    "\"My cut needs a second pair of hands. Will you help me clean it?\"",
+    "\"Okay. One step at a time, right?\""
+   ]
+  },
+  {
+   "n": 8,
+   "day": 50,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-8.txt",
+   "texts": [
+    "\"About the pantry run — still need hands. Are you in?\"",
+    "\"Good. The north treeline by the fallen oak, dawn. Two packs between us.\"",
+    "\"Later.\""
+   ]
+  },
+  {
+   "n": 9,
+   "day": 52,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-9.txt",
+   "texts": [
+    "\"We never finished talking about that debt — we got cut off.\"",
+    "\"This cut — I can't clean it properly one-handed. Will you help me clean it?\"",
+    "\"I should get back. Stay sharp out there.\""
+   ]
+  },
+  {
+   "n": 10,
+   "day": 53,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-10.txt",
+   "texts": [
+    "\"About this wound — the need hasn't gone anywhere. I'm still asking.\"",
+    "\"Careful with it. And — thank you.\"",
+    "\"I'll think about what you said. Carefully. That's how I do things.\""
+   ]
+  },
+  {
+   "n": 11,
+   "day": 54,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-30303-11.txt",
+   "texts": [
+    "\"We never finished talking about that debt — we got cut off.\"",
+    "\"This wound — I can't clean it properly one-handed. Could you clean it out for me? Please.\"",
+    "\"Well. We'll see how it goes.\""
+   ]
+  }
+ ],
+ "favorAskCount": 12,
+ "transcript45": "/tmp/journey-deep-r6-transcript-30303-45.txt"
+}

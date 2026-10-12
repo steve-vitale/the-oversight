@@ -1,0 +1,662 @@
+{
+ "seed": 20202,
+ "maxGameDay": 90,
+ "endReason": "village-lost",
+ "ms": 3803,
+ "knowledge": {
+  "snap40": {
+   "day": 40,
+   "villagers": [
+    {
+     "vid": "gen_sdcyvgl",
+     "name": "Malik",
+     "alive": true,
+     "occupation": "truck driver",
+     "plantsKnown": 20,
+     "familiar": 3,
+     "taughtInRun": 17,
+     "background": 17,
+     "taughtByPlayer": [],
+     "trust": 1
+    },
+    {
+     "vid": "gen_iy4r0af",
+     "name": "Guadalupe",
+     "alive": true,
+     "occupation": "Social worker",
+     "plantsKnown": 18,
+     "familiar": 3,
+     "taughtInRun": 16,
+     "background": 16,
+     "taughtByPlayer": [],
+     "trust": 90
+    },
+    {
+     "vid": "gen_ieqv8dr",
+     "name": "Awudu",
+     "alive": true,
+     "occupation": "fishing guide",
+     "plantsKnown": 17,
+     "familiar": 1,
+     "taughtInRun": 17,
+     "background": 17,
+     "taughtByPlayer": [],
+     "trust": 83
+    },
+    {
+     "vid": "lena_ruiz",
+     "name": "Lena",
+     "alive": true,
+     "occupation": "ER nurse",
+     "plantsKnown": 20,
+     "familiar": 1,
+     "taughtInRun": 19,
+     "background": 19,
+     "taughtByPlayer": [],
+     "trust": 86
+    },
+    {
+     "vid": "sofia_chen",
+     "name": "Sofia",
+     "alive": true,
+     "occupation": "community gardener",
+     "plantsKnown": 21,
+     "familiar": 1,
+     "taughtInRun": 18,
+     "background": 20,
+     "taughtByPlayer": [],
+     "trust": 90
+    },
+    {
+     "vid": "james_okonkwo",
+     "name": "James",
+     "alive": true,
+     "occupation": "carpenter",
+     "plantsKnown": 17,
+     "familiar": 1,
+     "taughtInRun": 16,
+     "background": 16,
+     "taughtByPlayer": [],
+     "trust": 58
+    },
+    {
+     "vid": "david_kim",
+     "name": "David",
+     "alive": true,
+     "occupation": "plumber",
+     "plantsKnown": 19,
+     "familiar": 1,
+     "taughtInRun": 19,
+     "background": 19,
+     "taughtByPlayer": [],
+     "trust": 55
+    }
+   ],
+   "playerCodexLevels": {
+    "1": 19,
+    "3": 1
+   }
+  },
+  "snapEnd": {
+   "day": 91,
+   "villagers": [
+    {
+     "vid": "james_okonkwo",
+     "name": "James",
+     "alive": true,
+     "occupation": "carpenter",
+     "plantsKnown": 28,
+     "familiar": 1,
+     "taughtInRun": 27,
+     "background": 27,
+     "taughtByPlayer": [],
+     "trust": 0
+    }
+   ],
+   "playerCodexLevels": {
+    "1": 26,
+    "3": 1,
+    "4": 1
+   }
+  },
+  "teachDiffs": [
+   {
+    "name": "James",
+    "vid": "james_okonkwo",
+    "alive": true,
+    "plantsKnown": 28,
+    "familiar": 1,
+    "taughtInRun": 27,
+    "background": 27,
+    "trust": 0,
+    "taughtByPlayer": [],
+    "newTaughtByPlayerSince40": []
+   }
+  ],
+  "beast40": {
+   "asked": 6,
+   "taught": 0
+  }
+ },
+ "contests": {
+  "log": [
+   {
+    "dayStart": 14,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "why_eat",
+     "name": "WHY DO THEY EAT?",
+     "participant": "player",
+     "playerIn": true
+    },
+    "dayEnd": 15,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 16,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "duel",
+     "name": "Duel",
+     "variant": null,
+     "pilot": true,
+     "firesDay": 17,
+     "participants": [
+      "player",
+      "lena_ruiz"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 18,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 17,
+    "grabParticipants": [
+     "player",
+     "sofia_chen"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 24,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "nap_wars",
+     "name": "Nap Wars",
+     "participant": "player",
+     "playerIn": true
+    },
+    "dayEnd": 25,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 28,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "tiny_door",
+     "name": "The Tiny Door",
+     "participant": "player",
+     "playerIn": true
+    },
+    "dayEnd": 29,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 35,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "honey",
+     "name": "Sweet Tooth",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 36,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 37,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 36,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 37,
+    "via": "fireRatingsSummons",
+    "started": {
+     "kind": "summons",
+     "id": "ratings_summons",
+     "name": "ratings summons",
+     "playerIn": true
+    },
+    "dayEnd": 38,
+    "outcome": "_showEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 42,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "box",
+     "name": "The Box",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 43,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 44,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 43,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 45,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "oath",
+     "name": "The Oath",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 46,
+     "participants": [
+      "player"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 47,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 46,
+    "grabParticipants": [
+     "player"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 51,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "whoate",
+     "name": "Who Ate It?",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 52,
+     "participants": [
+      "player",
+      "gen_iy4r0af",
+      "lena_ruiz"
+     ],
+     "playerIn": true
+    },
+    "dayEnd": 53,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 52,
+    "grabParticipants": [
+     "player",
+     "james_okonkwo",
+     "lena_ruiz"
+    ],
+    "grabPlayerIn": true,
+    "played": true
+   },
+   {
+    "dayStart": 53,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "the_leak",
+     "name": "The Leak",
+     "participant": "james_okonkwo",
+     "playerIn": false
+    },
+    "dayEnd": 54,
+    "outcome": "_showVillagerEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 58,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "informant",
+     "name": "The Informant",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 59,
+     "participants": [
+      "james_okonkwo",
+      "gen_iy4r0af",
+      "gen_ieqv8dr",
+      "david_kim"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 60,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 59,
+    "grabParticipants": [
+     "james_okonkwo",
+     "gen_ieqv8dr"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 60,
+    "via": "_contestEnd-end-only",
+    "started": null,
+    "dayEnd": 60,
+    "outcome": "_contestEnd(done)",
+    "played": true,
+    "orphanId": "informant"
+   },
+   {
+    "dayStart": 60,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "longodds",
+     "name": "The Long Odds",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 61,
+     "participants": [
+      "james_okonkwo"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 62,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 61,
+    "grabParticipants": [
+     "james_okonkwo"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 67,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "nap_wars",
+     "name": "Nap Wars",
+     "participant": "james_okonkwo",
+     "playerIn": false
+    },
+    "dayEnd": 68,
+    "outcome": "_showVillagerEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 68,
+    "via": "fireShow",
+    "started": {
+     "kind": "show",
+     "id": "crib_mine",
+     "name": "Cribs: Burrow Edition",
+     "participant": "gen_ieqv8dr",
+     "playerIn": false
+    },
+    "dayEnd": 69,
+    "outcome": "_showVillagerEnd(done)",
+    "played": true
+   },
+   {
+    "dayStart": 76,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "wrongmap",
+     "name": "The Wrong Map",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 77,
+     "participants": [
+      "gen_ieqv8dr",
+      "david_kim"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 78,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 77,
+    "grabParticipants": [
+     "gen_ieqv8dr",
+     "david_kim"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 78,
+    "via": "_contestEnd-end-only",
+    "started": null,
+    "dayEnd": 78,
+    "outcome": "_contestEnd(done)",
+    "played": true,
+    "orphanId": "wrongmap"
+   },
+   {
+    "dayStart": 79,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "moot",
+     "name": "The Moot",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 80,
+     "participants": [
+      "david_kim"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 81,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 80,
+    "grabParticipants": [
+     "david_kim"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 81,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "sorting",
+     "name": "The Sorting",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 82,
+     "participants": [
+      "david_kim"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 83,
+    "outcome": "_contestEnd(done)",
+    "grabDay": 82,
+    "grabParticipants": [
+     "david_kim"
+    ],
+    "grabPlayerIn": false,
+    "played": true
+   },
+   {
+    "dayStart": 84,
+    "via": "fireContest(announce)",
+    "started": {
+     "kind": "contest",
+     "id": "longodds",
+     "name": "The Long Odds",
+     "variant": null,
+     "pilot": false,
+     "firesDay": 85,
+     "participants": [
+      "david_kim"
+     ],
+     "playerIn": false
+    },
+    "dayEnd": 91,
+    "outcome": "run-ended-open",
+    "stranded": true
+   }
+  ],
+  "count": 20,
+  "counters40": {
+   "held": 2,
+   "seen": {
+    "duel": 1,
+    "honey": 1
+   }
+  },
+  "countersEnd": {
+   "held": 10,
+   "seen": {
+    "duel": 1,
+    "honey": 1,
+    "box": 1,
+    "oath": 1,
+    "whoate": 1,
+    "informant": 1,
+    "longodds": 2,
+    "wrongmap": 1,
+    "moot": 1,
+    "sorting": 1
+   }
+  }
+ },
+ "favorAsks": [
+  {
+   "n": 0,
+   "day": 40,
+   "npc": "Guadalupe",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-0.txt",
+   "texts": [
+    "\"About this wound — I still haven't found anyone. Any chance?\"",
+    "\"Careful with it. And — thank you.\"",
+    "\"See you at the fire.\""
+   ]
+  },
+  {
+   "n": 1,
+   "day": 45,
+   "npc": "David",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-1.txt",
+   "texts": [
+    "\"About the food I needed — still need hands. Are you in?  You'd know about that.\"",
+    "\"Thank you. I won't forget who fed me when it mattered.\"",
+    "\"Don't be a stranger.\""
+   ]
+  },
+  {
+   "n": 2,
+   "day": 46,
+   "npc": "Guadalupe",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-2.txt",
+   "texts": [
+    "\"Can I tell you something? I saw something in the woods I'm not telling anyone about.\"",
+    "\"Good talk.\""
+   ]
+  },
+  {
+   "n": 3,
+   "day": 50,
+   "npc": "James",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-3.txt",
+   "texts": [
+    "\"We never finished talking about their secret — we got cut off, 4 days back.\"",
+    "\"Pantry's thin and getting thinner. Will you forage with me tomorrow? Two pairs of eyes, twice the ground.\"",
+    "\"Steady as she goes. See you at dinner.\""
+   ]
+  },
+  {
+   "n": 4,
+   "day": 58,
+   "npc": "James",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-4.txt",
+   "texts": [
+    "\"We never finished talking about their secret — we got cut off, 4 days back. We still owe that question a proper ending, too.\"",
+    "\"I can't reach this properly. Will you help me clean it?\"",
+    "\"See you at the fire.\""
+   ]
+  },
+  {
+   "n": 5,
+   "day": 62,
+   "npc": "James",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-5.txt",
+   "texts": [
+    "\"I asked Malik about this wound — Malik's gone. Still need hands. Are you in?\"",
+    "\"Good. We've got a plan forming. I can feel it.\""
+   ]
+  },
+  {
+   "n": 6,
+   "day": 65,
+   "npc": "Sofia",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-6.txt",
+   "texts": [
+    "\"Malik and I never finished talking about that favor — we got cut off, 6 days back. You're wearing Malik's shoes now — want to pick it up? Just my read.\"",
+    "\"Okay. One step at a time, right?\""
+   ]
+  },
+  {
+   "n": 7,
+   "day": 66,
+   "npc": "James",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-7.txt",
+   "texts": [
+    "\"We never finished talking about their secret — we got cut off.\"",
+    "\"About this wound — still need hands. Are you in?\"",
+    "\"Don't be a stranger.\""
+   ]
+  },
+  {
+   "n": 8,
+   "day": 77,
+   "npc": "James",
+   "wantId": "ask_favor",
+   "file": "/tmp/journey-deep-r6-favor-20202-8.txt",
+   "texts": [
+    "\"About this wound — I still haven't found anyone. Any chance?\"",
+    "\"Alright. Back to it.\""
+   ]
+  }
+ ],
+ "favorAskCount": 9,
+ "transcript45": "/tmp/journey-deep-r6-transcript-20202-45.txt"
+}

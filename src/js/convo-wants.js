@@ -323,6 +323,20 @@
       build(vid, need, ctx) {
         const n = ctx.rosterN || 1;
         const hh = this.convoFavorHash(vid, ctx) + n;
+        // JOURNEY DEEPENING R6 (2026-10-12): the meeting direction was the
+        // fixed "Good. East treeline, first light. Bring a pack." — every
+        // villager's pantry run met at the same spot at the same hour. Now
+        // the spot is grounded in THIS villager's foraging knowledge and
+        // when/gear vary per instance (3x3x3x3x4 combos, instance-hashed).
+        const spot = this.convoForageSpot(vid, hh);
+        const capSpot = spot.charAt(0).toUpperCase() + spot.slice(1);
+        // Lead x spot x when x gear: 4x10x6x6 = 1440 combinations per
+        // instance hash — same-spot collisions across villagers are rare,
+        // not systematic (journey deepening r6: 128 combos still produced a
+        // byte-identical pair in the wild).
+        const leads = ['Good.', 'Good \u2014', 'Then it\u2019s set.', 'Done.'];
+        const whens = ['first light', 'dawn', 'before the heat sets in', 'morning, early', 'at sunup', 'before the dew dries'];
+        const gears = ['Bring a pack.', 'Bring your pack and your knife.', 'Two packs between us.', 'Pack light \u2014 we move fast.', 'Bring the big pack if you have it.', 'Pack and knife. We travel light.'];
         const states = [
           `The pantry's nearly bare.`,
           `We're eating through stores faster than we replace them.`,
@@ -330,16 +344,26 @@
         ];
         const asks = [
           `Will you forage with me tomorrow? Two pairs of eyes, twice the ground.`,
-          `Forage with me tomorrow? I know the east treeline.`,
+          `Forage with me tomorrow? I know ${spot}.`,
           `Come forage with me tomorrow \u2014 two of us can fill packs.`,
         ];
         const line = '"' + states[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        const whyBits = [
+          `Another day like today and we're choosing who eats.`,
+          `The stores won't stretch past tomorrow, and I'm not choosing who eats.`,
+          `I did the count twice. The count doesn't change.`,
+        ];
+        const whyTails = [
+          `I know ${spot} \u2014 come with me and we'll fill packs before dark.`,
+          `Meet me at ${spot} and we'll fill packs before dark.`,
+          `Nobody's worked ${spot} in days. We'll fill packs before dark.`,
+        ];
+        const whyLine = '"' + whyBits[hh % 3] + ' ' + whyTails[(hh >>> 3) % 3] + '"';
+        const commitLine = `"${leads[hh % 4]} ${capSpot}, ${whens[(hh >>> 4) % 6]}. ${gears[(hh >>> 7) % 6]}"`;
         return {
           task: `forage with ${ctx.name} tomorrow to rebuild the pantry`,
           short: 'the pantry run',
-          line,
-          whyLine: `"Another day like today and we're choosing who eats. I know the east treeline \u2014 come with me and we'll fill packs before dark."`,
-          commitLine: `"Good. East treeline, first light. Bring a pack."`,
+          line, whyLine, commitLine,
           goodbye: `"First light. The pantry's counting on us."`,
           stakes: `The village is ${n} hungry mouths from an empty pantry.`,
         };
@@ -1073,6 +1097,46 @@
         h = ((h << 5) - h + s.charCodeAt(i)) | 0;
       }
       return h >>> 0;
+    },
+
+    // convoForageSpot: the meeting place for a pantry-run favor, grounded in
+    // the ASKING villager's own foraging knowledge (journey deepening r6,
+    // 2026-10-12: the commit line was verbatim "East treeline, first light.
+    // Bring a pack." across every NPC — the same spot, the same hour, the
+    // same pack). If the villager knows an edible plant, they point at its
+    // patch by name; otherwise they fall back to treeline-relative spots.
+    // Selection is deterministic per instance hash — two NPCs the same day
+    // point different directions, and one NPC can move the meeting day to day.
+    convoForageSpot(vid, hh) {
+      const generics = [
+        'the east treeline',
+        'the north treeline by the fallen oak',
+        'the creek bend, past the treeline',
+        'the south slope below the meadow',
+        'the old burn east of camp',
+        'the meadow edge, west of the creek',
+        'the ridge above the creek',
+        'the far treeline, past the rocks',
+      ];
+      const spots = generics.slice();
+      try {
+        const known = (Game.plantsKnownBy ? Game.plantsKnownBy(vid) : []) || [];
+        const foodPlants = [];
+        const seen = {};
+        for (const pid of known) {
+          if (seen[pid]) continue; seen[pid] = 1;
+          const p = (Game.data.plants || []).find(x => x.id === pid);
+          if (p && (p.caloriesPerUnit || 0) > 0 && p.name) foodPlants.push(p);
+        }
+        foodPlants.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+        const fp = foodPlants.length ? foodPlants[hh % foodPlants.length] : null;
+        if (fp) {
+          const nm = String(fp.name).toLowerCase();
+          spots.push('where the ' + nm + ' grows thick');
+          spots.push('the ' + nm + ' patch past the treeline');
+        }
+      } catch (e) {}
+      return spots[hh % spots.length];
     },
 
     // convoBuildFavor: turn a need into a favor INSTANCE — WHO, concrete
