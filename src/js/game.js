@@ -4021,11 +4021,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (aboutOther.length) {
           const g = aboutOther[aboutOther.length - 1];
           const wname = this.displayName(g.dims.who);
-          if (g.action === 'stingy') this.say(`${first} lowers their voice. "Word is ${wname} has been holding back. Keeping the good stuff close."`);
-          else if (g.action === 'generous') this.say(`${first}: "People are saying ${wname} has been generous. Sharing around, no questions asked."`);
-          else if (g.action === 'departure') this.say(`${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
-          else if (g.action === 'return') this.say(`${first}: "${wname} is back. Walked in like they'd never left."`);
-          else this.say(`${first}: "People are talking about ${wname}. Take it for what it's worth."`);
+          // SELF-GOSSIP (journey deepening 2026-10-12): rumors travel — a
+          // villager may have heard the gossip about THEIR OWN departure and
+          // was rendering it third-person ("Did you hear? James just walked
+          // away...") spoken BY James. A person talks about themselves in
+          // first person. Never misattribute the rumor to the teller.
+          const self = g.dims.who === vid;
+          if (g.action === 'stingy') this.say(self
+            ? `${first} lowers their voice. "Word is I've been holding back. Keeping the good stuff close, yeah. I'll own that."`
+            : `${first} lowers their voice. "Word is ${wname} has been holding back. Keeping the good stuff close."`);
+          else if (g.action === 'generous') this.say(self
+            ? `${first}: "People are saying I've been generous. Sharing around, no questions asked."`
+            : `${first}: "People are saying ${wname} has been generous. Sharing around, no questions asked."`);
+          else if (g.action === 'departure') this.say(self
+            ? `${first}: "Yeah, that was me. I walked away from Haven once. Didn't look back."`
+            : `${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
+          else if (g.action === 'return') this.say(self
+            ? `${first}: "I left. Walked back in like I'd never left, apparently."`
+            : `${first}: "${wname} is back. Walked in like they'd never left."`);
+          else this.say(self
+            ? `${first}: "People are talking about me. Take it for what it's worth."`
+            : `${first}: "People are talking about ${wname}. Take it for what it's worth."`);
           try {
             if (this.journalNote) this.journalNote('people', g.dims.who,
               g.action === 'stingy' ? `Rumor: they've been holding back, keeping the good stuff close.`

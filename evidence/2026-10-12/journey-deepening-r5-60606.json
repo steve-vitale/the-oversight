@@ -1,0 +1,1099 @@
+{
+ "seed": 60606,
+ "probe": false,
+ "maxGameDay": 75,
+ "endReason": "village-lost",
+ "waveLog": [
+  {
+   "day": 2,
+   "wave": 1,
+   "w2points": 0,
+   "villageSlain": {},
+   "engaged": {
+    "w1": 0,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 23,
+   "wave": 2,
+   "w2points": 0,
+   "villageSlain": {
+    "lockpick_raccoon": 2,
+    "nightlight_catfish": 2,
+    "nightcourt": 1
+   },
+   "engaged": {
+    "w1": 7,
+    "w2": 0,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  },
+  {
+   "day": 54,
+   "wave": 3,
+   "w2points": 4,
+   "villageSlain": {
+    "lockpick_raccoon": 2,
+    "nightlight_catfish": 2,
+    "nightcourt": 1,
+    "hushwolf": 2,
+    "hummice": 1,
+    "understudy": 1,
+    "mirrormoth": 1,
+    "paparazzo": 1,
+    "voice_mimic_radio": 1,
+    "alien_tick": 1
+   },
+   "engaged": {
+    "w1": 8,
+    "w2": 7,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   }
+  }
+ ],
+ "deedLog": [
+  {
+   "day": 50,
+   "engaged": {
+    "w1": 8,
+    "w2": 4,
+    "w3": 0,
+    "w4": 0,
+    "w5": 0
+   },
+   "wave": 2,
+   "pop": 7,
+   "pantry": 35172,
+   "w3fights": 0
+  },
+  {
+   "day": 70,
+   "engaged": {
+    "w1": 8,
+    "w2": 7,
+    "w3": 3,
+    "w4": 0,
+    "w5": 0
+   },
+   "wave": 3,
+   "pop": 3,
+   "pantry": 7209,
+   "w3fights": 2
+  }
+ ],
+ "finalWave": 3,
+ "finalScale": "regional",
+ "probed": false,
+ "engaged": {
+  "w1": 8,
+  "w2": 7,
+  "w3": 3,
+  "w4": 0,
+  "w5": 0
+ },
+ "wavesFaced": {
+  "hushwolf": 1,
+  "nightcourt": 1,
+  "gallowdeer": 1,
+  "lockpick_raccoon": 1,
+  "speedbump_turtle": 1,
+  "nightlight_catfish": 1,
+  "hummice": 1,
+  "understudy": 2,
+  "mirrormoth": 1,
+  "bright_idea": 2,
+  "paparazzo": 2,
+  "voice_mimic_radio": 2,
+  "alien_tick": 2,
+  "moderator": 2,
+  "heckler": 2,
+  "ad_break": 3,
+  "callback": 3,
+  "redactor": 3
+ },
+ "w3fights": [
+  {
+   "day": 65,
+   "rounds": 9,
+   "result": "fled",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "ad_break",
+     "wave": 3,
+     "name": "Ad Break",
+     "hp0": 342
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 19,
+     "fled": true
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "ad_break",
+     "hp": 342,
+     "fled": false
+    },
+    {
+     "key": "ad_sponsor_1",
+     "kind": "monster",
+     "mid": null,
+     "hp": 27,
+     "fled": true
+    }
+   ],
+   "sigHits": {
+    "ad_break": [
+     "ad break",
+     "SKIP",
+     "sponsor"
+    ]
+   },
+   "sample": [
+    "You STRIKE the ad break for 11.",
+    "You STRIKE the ad break for 7.",
+    "Ad break's attack hits you for 35.",
+    "📖 Codex: Targeted Ad — locks onto one target — moving won't dodge it. You won't forget this.",
+    "You STRIKE the ad break for 6.",
+    "You STRIKE the Sponsor-creature for 13.",
+    "Ad break's Targeted Ad hits you for 24."
+   ]
+  },
+  {
+   "day": 65,
+   "rounds": 1,
+   "result": "fled",
+   "tileType": "grove",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "ad_break",
+     "wave": 3,
+     "name": "Ad Break",
+     "hp0": 363
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 19,
+     "fled": true
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "ad_break",
+     "hp": 363,
+     "fled": false
+    }
+   ],
+   "sigHits": {},
+   "sample": [
+    "You don't know what that was. A missing piece of the world. Someone at the haven should hear about this."
+   ]
+  },
+  {
+   "day": 68,
+   "rounds": 4,
+   "result": "lost",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "redactor",
+     "wave": 3,
+     "name": "The Redactor",
+     "hp0": 290
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": -3,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "redactor",
+     "hp": 283,
+     "fled": false
+    }
+   ],
+   "sigHits": {
+    "redactor": [
+     "REDACT",
+     "redact"
+    ]
+   },
+   "sample": [
+    "Redactor's Redact hits you for 46.",
+    "📖 Codex: Redact — locks onto one target — moving won't dodge it. You won't forget this.",
+    "The bar thins, flickers — nothing left loud enough to redact. It is STARVING. (Its attacks weaken; starve it one more turn and it flees.)",
+    "You STRIKE the redactor for 7.",
+    "Redactor's Redact hits you for 22.",
+    "Redactor's attack hits you for 34.",
+    "\"Don't suppose you've got food,\" Emma says, trying for casual and missing."
+   ]
+  },
+  {
+   "day": 74,
+   "rounds": 4,
+   "result": "routed",
+   "tileType": "haven",
+   "monsters": [
+    {
+     "key": "m_0",
+     "mid": "redactor",
+     "wave": 3,
+     "name": "The Redactor",
+     "hp0": 274
+    }
+   ],
+   "endHp": [
+    {
+     "key": "p",
+     "kind": "player",
+     "mid": null,
+     "hp": 69,
+     "fled": false
+    },
+    {
+     "key": "v_emma_larsen",
+     "kind": "villager",
+     "mid": null,
+     "hp": -1,
+     "fled": false
+    },
+    {
+     "key": "m_0",
+     "kind": "monster",
+     "mid": "redactor",
+     "hp": 270,
+     "fled": true
+    }
+   ],
+   "sigHits": {
+    "redactor": [
+     "REDACT",
+     "redact"
+    ]
+   },
+   "sample": [
+    "Emma hits redactor for 2.",
+    "Emma hits redactor for 2.",
+    "The handles close around your Crossbow — REDACTED. For two rounds it is just a shape in your hands. (Strikes are unarmed.)",
+    "Redactor's Redact hits Emma for 36.",
+    "The bar thins, flickers — nothing left loud enough to redact. It is STARVING. (Its attacks weaken; starve it one more turn and it flees.)",
+    "Redactor's attack hits you for 12.",
+    "📖 Codex: Return — locks onto one target — moving won't dodge it. You won't forget this."
+   ]
+  }
+ ],
+ "w3killsByType": {},
+ "sigFired": {
+  "ad_break": [
+   "ad break",
+   "SKIP",
+   "sponsor"
+  ],
+  "redactor": [
+   "REDACT",
+   "redact",
+   "REDACT",
+   "redact"
+  ]
+ },
+ "fightsByWave": {
+  "1": 11,
+  "2": 4,
+  "3": 4
+ },
+ "fightsTotal": 13,
+ "foughtWaves": [
+  {
+   "day": 8,
+   "waves": [
+    1
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 8,
+   "waves": [
+    1
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 8,
+   "waves": [
+    1
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 20,
+   "waves": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 20,
+   "waves": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 32,
+   "waves": [
+    2
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 44,
+   "waves": [
+    2
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 54,
+   "waves": [
+    2
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 65,
+   "waves": [
+    3
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 65,
+   "waves": [
+    3
+   ],
+   "result": "fled"
+  },
+  {
+   "day": 68,
+   "waves": [
+    3
+   ],
+   "result": "lost"
+  },
+  {
+   "day": 74,
+   "waves": [
+    3
+   ],
+   "result": "routed"
+  },
+  {
+   "day": 75,
+   "waves": [
+    2
+   ],
+   "result": "lost"
+  }
+ ],
+ "census": [],
+ "deaths": [
+  {
+   "day": 5,
+   "who": "marcus_webb",
+   "cause": "monster",
+   "kind": "villager"
+  },
+  {
+   "day": 7,
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 8,
+   "who": "gen_dtdemgd",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 8,
+   "who": "gen_r2ibu50",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 9,
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 16,
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 20,
+   "who": "hummice",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 20,
+   "who": "hummice",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 20,
+   "who": "hummice",
+   "cause": "combat",
+   "kind": "monster"
+  },
+  {
+   "day": 21,
+   "who": "gen_vg5n4xf",
+   "cause": "monster",
+   "kind": "villager"
+  },
+  {
+   "day": 23,
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 23,
+   "who": "nightlight_catfish",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 26,
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 31,
+   "who": "hummice",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 40,
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "understudy",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "paparazzo",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 43,
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 50,
+   "who": "rosa_mendez",
+   "cause": "monster",
+   "kind": "villager"
+  },
+  {
+   "day": 53,
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 58,
+   "who": "gen_nef6q1r",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 65,
+   "who": "lena_ruiz",
+   "cause": "monster",
+   "kind": "villager"
+  },
+  {
+   "day": 67,
+   "who": "gen_0q8p7sz",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 68,
+   "who": "gen_2yxfbhm",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 74,
+   "who": "emma_larsen",
+   "cause": "combat",
+   "kind": "person"
+  },
+  {
+   "day": 74,
+   "who": "david_kim",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 75,
+   "who": "james_okonkwo",
+   "cause": "combat",
+   "kind": "villager"
+  }
+ ],
+ "regionalLog": [
+  {
+   "day": 29,
+   "ev": "propose",
+   "target": "village_0",
+   "name": "Emberhold",
+   "result": "linked"
+  },
+  {
+   "day": 30,
+   "ev": "accord",
+   "how": "gift",
+   "scale": "village"
+  },
+  {
+   "day": 30,
+   "ev": "accord-text",
+   "lines": [
+    "🎁 Haven's first gesture: 2,000 kcal walks to Emberhold's fire — a gift, no strings. They count it, and they remember who sent it. (Trust +10.)"
+   ]
+  }
+ ],
+ "convoFiles": [
+  "/tmp/journey-deep-r5-transcript-60606-day55.txt"
+ ],
+ "contestStuck": 0,
+ "contestCalls": 25,
+ "contestNote": null,
+ "ctxSummary": {
+  "struck": 74,
+  "fled": 7,
+  "fledDeepening": 2,
+  "stalemateFled": 1,
+  "fightsStarted": 13,
+  "geared": 15,
+  "armored": 3,
+  "beasttricksAsked": 0,
+  "beasttricksTaught": 0
+ },
+ "pacing": {
+  "perDay": [
+   {
+    "day": 1,
+    "verbs": 3,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 2,
+    "verbs": 4,
+    "policyCalls": 0,
+    "dayTicks": 141
+   },
+   {
+    "day": 3,
+    "verbs": 28,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 4,
+    "verbs": 23,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 5,
+    "verbs": 23,
+    "policyCalls": 4,
+    "dayTicks": 417
+   },
+   {
+    "day": 6,
+    "verbs": 22,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 7,
+    "verbs": 21,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 8,
+    "verbs": 39,
+    "policyCalls": 21,
+    "dayTicks": 391
+   },
+   {
+    "day": 9,
+    "verbs": 18,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 10,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 11,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 12,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 13,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 14,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 15,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 16,
+    "verbs": 22,
+    "policyCalls": 5,
+    "dayTicks": 395
+   },
+   {
+    "day": 17,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 18,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 19,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 20,
+    "verbs": 183,
+    "policyCalls": 35,
+    "dayTicks": 393
+   },
+   {
+    "day": 21,
+    "verbs": 19,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 22,
+    "verbs": 17,
+    "policyCalls": 4,
+    "dayTicks": 395
+   },
+   {
+    "day": 23,
+    "verbs": 22,
+    "policyCalls": 7,
+    "dayTicks": 395
+   },
+   {
+    "day": 24,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 25,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 26,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 395
+   },
+   {
+    "day": 27,
+    "verbs": 13,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 28,
+    "verbs": 13,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 29,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 30,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 31,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 32,
+    "verbs": 56,
+    "policyCalls": 19637,
+    "dayTicks": 256
+   },
+   {
+    "day": 33,
+    "verbs": 10,
+    "policyCalls": 2,
+    "dayTicks": 135
+   },
+   {
+    "day": 34,
+    "verbs": 15,
+    "policyCalls": 7,
+    "dayTicks": 391
+   },
+   {
+    "day": 35,
+    "verbs": 13,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 36,
+    "verbs": 13,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 37,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 38,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 39,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 40,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 41,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 42,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 43,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 44,
+    "verbs": 13,
+    "policyCalls": 6,
+    "dayTicks": 403
+   },
+   {
+    "day": 45,
+    "verbs": 13,
+    "policyCalls": 5,
+    "dayTicks": 395
+   },
+   {
+    "day": 46,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 395
+   },
+   {
+    "day": 47,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 395
+   },
+   {
+    "day": 48,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 49,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 50,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 51,
+    "verbs": 13,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 52,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 53,
+    "verbs": 15,
+    "policyCalls": 7,
+    "dayTicks": 393
+   },
+   {
+    "day": 54,
+    "verbs": 51,
+    "policyCalls": 47,
+    "dayTicks": 449
+   },
+   {
+    "day": 55,
+    "verbs": 16,
+    "policyCalls": 3,
+    "dayTicks": 315
+   },
+   {
+    "day": 56,
+    "verbs": 7,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 57,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 58,
+    "verbs": 131,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 59,
+    "verbs": 174,
+    "policyCalls": 7,
+    "dayTicks": 433
+   },
+   {
+    "day": 60,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 61,
+    "verbs": 174,
+    "policyCalls": 7,
+    "dayTicks": 412
+   },
+   {
+    "day": 62,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 63,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 64,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 65,
+    "verbs": 183,
+    "policyCalls": 14,
+    "dayTicks": 393
+   },
+   {
+    "day": 66,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 67,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 68,
+    "verbs": 176,
+    "policyCalls": 8,
+    "dayTicks": 389
+   },
+   {
+    "day": 69,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 70,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 71,
+    "verbs": 15,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 72,
+    "verbs": 176,
+    "policyCalls": 5,
+    "dayTicks": 389
+   },
+   {
+    "day": 73,
+    "verbs": 171,
+    "policyCalls": 4,
+    "dayTicks": 406
+   },
+   {
+    "day": 74,
+    "verbs": 178,
+    "policyCalls": 8,
+    "dayTicks": 403
+   },
+   {
+    "day": 75,
+    "verbs": 12,
+    "policyCalls": 17,
+    "dayTicks": 0
+   }
+  ],
+  "meanVerbsPerDay": 51.8,
+  "meanPolicyCallsPerDay": 267.6,
+  "meanTicksPerDay": 374.9
+ },
+ "ms": 7631
+}
