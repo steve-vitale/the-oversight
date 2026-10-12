@@ -71,6 +71,13 @@ ask-path, declining). Villagers learn via: fireside, `word of mouth`
 `working` (day labor, caps at 12), `mentored` (party), player-taught
 (conversation + `teachPlant`).
 
+The `trade` offer is an earned verb: it rides after the capped topics like
+`teach` (longsim knowledge r4 2026-10-12 — it used to lose the MAXC slot
+lottery on full menus), appears once the opener question is engaged, and is
+seeded by the trader's 50%-per-conversation mention until the first
+completed trade discovers the channel village-wide. No shared language, no
+trade — the language barrier gates it honestly.
+
 ## Word-of-mouth rules
 
 Slow by design (Steve 2026-10-05): at most one witness learns on the spot;

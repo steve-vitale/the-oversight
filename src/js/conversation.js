@@ -3517,12 +3517,18 @@
       // KNOWLEDGE TRADING is discovered through conversation: traders seed it
       // by mentioning it; once learned, you can raise it with any trader.
       // (Thread coherence: off-thread — waits behind the subject-change.)
-      if (!onThread && choices.length < MAXC) {
+      // STARVATION FIX (longsim knowledge r4 2026-10-12): trade used to
+      // compete for the remaining MAXC slots and lost on full menus — the
+      // same starvation the teach verb was fixed for (2026-10-08). Earned
+      // knowledge-sharing rides after the capped topics instead of losing
+      // the slot lottery; the offer is computed here, pushed below.
+      let tradeChoice = null;
+      if (!onThread && !suppressPivot) {
         try {
           const isTrader = this.isKnowledgeTrader && this.isKnowledgeTrader(vid);
           const tradeable = isTrader ? (this.traderKnowledge(vid) || []) : [];
           if (isTrader && tradeable.length && (this.hasDiscovered('trade') || c.traderMentioned)) {
-            choices.push({ id: 'trade', label: '"You know things. I know things. Shall we trade?"' });
+            tradeChoice = { id: 'trade', label: '"You know things. I know things. Shall we trade?"' };
           }
         } catch (e) {}
       }
@@ -3590,6 +3596,7 @@
       }
       // Earned verbs ride after the capped topics (see TEACHING above).
       if (teachChoice) choices.push(teachChoice);
+      if (tradeChoice) choices.push(tradeChoice);
       // The subject-change is always available mid-thread (it's the explicit
       // pivot); on openers it rides the remaining slots as before.
       if (c.thread && c.thread !== 'small' && (onThread || choices.length < MAXC)) choices.push({ id: 'subject', label: '"Can I ask you something else?"' });

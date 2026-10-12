@@ -37,6 +37,9 @@
 const fs = require('fs');
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { competent } = require('./policies/competent');
+// r4: competent-player trade behavior (models a player who engages trader
+// offers). Game code untouched; enabled with TRADE_HOOK=1.
+const { tradeRound } = require('./trade-hook');
 
 function parseList(env, def) {
   return (process.env[env] || def).split(',').map(s => s.trim()).filter(Boolean);
@@ -115,6 +118,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       testMonsterMeat: 0,       // calls (monster experiment path)
       foodSafeBy: {},           // how -> count (markMonsterFoodSafe)
       transcript: [],           // teaching-related say() lines
+      // r4: trader-channel instrumentation (near-miss style: count the
+      // meetings/offers/declines, not just completed trades)
+      traderMentions: 0,        // "I trade in what I know" seeded lines heard
+      tradeOutcomes: {},        // tradeKnowledge return token -> count
+      tradeTurns: 0,            // convoTurns taken by the trade hook
     };
     const bump = (o, k) => { o[k] = (o[k] || 0) + 1; };
     const me = () => Game.villagerId;
@@ -192,7 +200,16 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
     K.nearMiss = K.nearMiss || 0;
     K.nearMissHist = K.nearMissHist || {};
     try {
+      const _tk = Game.tradeKnowledge;
+      Game.tradeKnowledge = function (vid, pid) {
+        const r = _tk.call(this, vid, pid);
+        bump(K.tradeOutcomes, String(r || '?'));
+        return r;
+      };
+    } catch (e) {}
+    try {
       const _say = Game.say;
+      const MENTION_RE = /I trade in what I know/i;
       Game.say = function (msg) {
         try {
           const m = String(msg || '');
@@ -200,6 +217,14 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
         } catch (e) {}
         return _say.call(this, msg);
       };
+      // the trader's seeding line goes through sayLine, not say — wrap both
+      try {
+        const _sayLine = Game.sayLine;
+        Game.sayLine = function (vid, msg) {
+          try { if (MENTION_RE.test(String(msg || ''))) K.traderMentions++; } catch (e) {}
+          return _sayLine.call(this, vid, msg);
+        };
+      } catch (e2) {}
     } catch (e) {}
 
     const policy = Object.assign({}, competent);
@@ -237,6 +262,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       try { if (G.scaleRank) scaleHist.push(G.scaleRank()); } catch (e) {}
       if (origDaily) { try { origDaily(G, ctx); } catch (e) {} }
       try { asks += askRound(G, ctx); } catch (e) {}
+      // r4 lever: the competent player engages trader offers. Off by default
+      // (TRADE_HOOK=1 enables) so the before-run reproduces r1-r3's zero.
+      try {
+        if (process.env.TRADE_HOOK === '1') K.tradeTurns += tradeRound(G, K) || 0;
+      } catch (e) {}
       try { const d = (G.state.scholar || {}).day || 0; if (d > 0 && d % 50 === 0) snapKnowledge(G); } catch (e) {}
     };
 
@@ -386,6 +416,12 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       testCautiously: K.testCautiously, testMonsterMeat: K.testMonsterMeat,
       foodSafeBy: K.foodSafeBy, combines: K.combines,
       nearMiss: K.nearMiss, nearMissHist: K.nearMissHist,
+      // r4: trader channel
+      traderMentions: K.traderMentions, tradeOutcomes: K.tradeOutcomes,
+      traderMeetings: K.traderMeetings || 0, tradeOffers: K.tradeOffers || 0,
+      tradeTurns: K.tradeTurns,
+      tradeDeclined: Object.fromEntries(Object.entries(K).filter(([k]) => k.indexOf('tradeDeclined:') === 0)),
+      tradeNoOffer: Object.fromEntries(Object.entries(K).filter(([k]) => k.indexOf('tradeNoOffer:') === 0)),
       ks,
       knowSnap,
       transcriptSample: K.transcript.slice(-24),
@@ -397,7 +433,8 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       `plantLvl=${JSON.stringify(pl)} prepKnown=${ks.prepKnown} exp=${ks.experiments} tested=${ks.testedVerdicts} ` +
       `mNamed=${ks.monsterNamed}/${ks.monsterEntries} mSafe=${ks.monsterFoodSafe} skills=${ks.skills} ` +
       `teachP=${K.teachPlant} agP=${K.agencyTeachPlant} agM=${K.agencyTeachMonster} testC=${K.testCautiously} testM=${K.testMonsterMeat} ` +
-      `vilMean=${ks.vilMeanKnown} vilDistinct=${ks.villageDistinct} pd=${playerDeaths} vd=${villagerDeaths}`);
+      `vilMean=${ks.vilMeanKnown} vilDistinct=${ks.villageDistinct} pd=${playerDeaths} vd=${villagerDeaths} ` +
+      `trMeet=${K.traderMeetings || 0} trOffer=${K.tradeOffers || 0} trOut=${JSON.stringify(K.tradeOutcomes)}`);
   }
 
   // ---- aggregate ----
