@@ -1,1 +1,55 @@
-{"_comment":"TITAN CLASS (Steve 2026-10-11). Three titans total, 1-2 per run: the Herald (wave 4, tutorial), one mid wave-5, the Finale (apocalypse). Titans are flagged HERE, not by HP — isTitan() reads this file. They never spawn in the wild pool; they arrive by omen and are faced by coalition only (hard gate).","eater":{"counter_hint":"It can't tell good food from bad. Ask the old ones about the last time something big came hungry.","epithet":"it eats the grid first","minAllies":2,"monster":"eater","omen0":"Scouts come back pale. Something is eating the fields — not the crops. The FIELD. Furrows gone like soup.","omen1":"The traders name it: the Eater. A vast maw the aliens made when they watched us eat and thought it looked like fun.","relic":{"desc":"A tooth like a shovel, still warm. When you eat from the pantry, the first bite of the day is doubled — the Eater's hunger, turned around.","effect":"first_bite_doubled","id":"titan_last_meal","name":"The Last Meal"},"role":"herald","threat":"It is eating the realm's food. Every dawn it feeds, a village goes hungry. The coalition musters or the harvest dies.","title":"THE HERALD","wave":4},"finale":{"counter_hint":"It ends in three rounds or it ends you. Feed it something you love, or end it first.","epithet":"every season needs its climax","minAllies":4,"monster":"finale","omen0":"The sky, getting bigger. It starts sky-sized and gets bigger. The old ones stop talking when you ask.","omen1":"The System whispers it, for once not delighted: the Finale. Every season needs its climax. This one is yours.","relic":{"desc":"It reads 'PREVIOUSLY ON...' and it's you. Once per run, declare a do-over on a single round — the round replays, everyone forgets except you.","effect":"one_round_replay","id":"titan_title_card","name":"The Falling Title Card"},"threat":"It grows every round and once per fight it ends one. The sky is getting bigger. This is the run's apocalypse — everything built was for this.","title":"THE FINALE","wave":5},"nielsen":{"counter_hint":"Boring is its armor and its leash. Be unwatchable.","epithet":"ratings embodied","minAllies":3,"monster":"nielsen","omen0":"The System's ratings spike at odd hours. Something is performing out there and the numbers are INSANE.","omen1":"The producers name it: the Nielsen. Ratings embodied. It fights boring — and the crowd adores it for that.","relic":{"desc":"A pocket of the broadcast that never aired. Once per fight, go utterly uninteresting for one round — nothing targets you.","effect":"one_round_untargetable","id":"titan_dead_air","name":"Dead Air"},"threat":"It feeds on being watched and it is ALWAYS being watched. Every eye on it makes it stronger. The realm must kill it fast, before the audience falls in love.","title":"THE NIELSEN","wave":5}}
+{
+  "_comment": "TITAN CLASS (Steve 2026-10-11). Three titans total, 1-2 per run: the Herald (wave 4, tutorial), one mid wave-5, the Finale (apocalypse). Titans are flagged HERE, not by HP — isTitan() reads this file. They never spawn in the wild pool; they arrive by omen and are faced by coalition only (hard gate).",
+  "eater": {
+    "counter_hint": "It can't tell good food from bad. Ask the old ones about the last time something big came hungry.",
+    "epithet": "it eats the grid first",
+    "minAllies": 2,
+    "monster": "eater",
+    "omen0": "Scouts come back pale. Something is eating the fields — not the crops. The FIELD. Furrows gone like soup.",
+    "omen1": "The traders name it: the Eater. A vast maw the aliens made when they watched us eat and thought it looked like fun.",
+    "relic": {
+      "desc": "A tooth like a shovel, still warm. When you eat from the pantry, the first bite of the day is doubled — the Eater's hunger, turned around.",
+      "effect": "first_bite_doubled",
+      "id": "titan_last_meal",
+      "name": "The Last Meal"
+    },
+    "role": "herald",
+    "threat": "It is eating the realm's food. Every dawn it feeds, a village goes hungry. The coalition musters or the harvest dies.",
+    "title": "THE HERALD",
+    "wave": 4
+  },
+  "finale": {
+    "counter_hint": "It ends in three rounds or it ends you. Feed it something you love, or end it first.",
+    "epithet": "every season needs its climax",
+    "minAllies": 4,
+    "monster": "finale",
+    "omen0": "The sky, getting bigger. It starts sky-sized and gets bigger. The old ones stop talking when you ask.",
+    "omen1": "The System whispers it, for once not delighted: the Finale. Every season needs its climax. This one is yours.",
+    "relic": {
+      "desc": "It reads 'PREVIOUSLY ON...' and it's you. Once per run, declare a do-over on a single round — the round replays, everyone forgets except you.",
+      "effect": "one_round_replay",
+      "id": "titan_title_card",
+      "name": "The Falling Title Card"
+    },
+    "threat": "It grows every round and once per fight it ends one. The sky is getting bigger. This is the run's apocalypse — everything built was for this.",
+    "title": "THE FINALE",
+    "wave": 5
+  },
+  "nielsen": {
+    "counter_hint": "Boring is its armor and its leash. Be unwatchable.",
+    "epithet": "ratings embodied",
+    "minAllies": 3,
+    "monster": "nielsen",
+    "omen0": "The System's ratings spike at odd hours. Something is performing out there and the numbers are INSANE.",
+    "omen1": "The producers name it: the Nielsen. Ratings embodied. It fights boring — and the crowd adores it for that.",
+    "relic": {
+      "desc": "A pocket of the broadcast that never aired. Once per fight, go utterly uninteresting for one round — nothing targets you.",
+      "effect": "one_round_untargetable",
+      "id": "titan_dead_air",
+      "name": "Dead Air"
+    },
+    "threat": "It feeds on being watched and it is ALWAYS being watched. Every eye on it makes it stronger. The realm must kill it fast, before the audience falls in love.",
+    "title": "THE NIELSEN",
+    "wave": 5
+  }
+}
