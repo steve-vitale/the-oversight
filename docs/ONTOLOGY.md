@@ -1261,6 +1261,16 @@ The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scal
 
 **Consumes:** —
 
+### trial-deeds (`trial-deeds.js`)
+Trial deed grants — unlock.type === 'trial' abilities are the
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### truth (`truth.js`)
 Truth/distortion. Claim-gossip corrects (tellers share the truth); action-gossip distorts per retelling (code: game.js seedGossip).
 

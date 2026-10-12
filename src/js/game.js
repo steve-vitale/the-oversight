@@ -3678,6 +3678,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (onlookers.length) this.seedGossip('drove_off', { honest: -20, generous: -15, brave: 2 }, onlookers);
           } catch (e) {}
           try { this.removeVillager(vid, 'fled'); } catch (e) {}
+          // TRIAL DEED (longsim abilities r4): they broke — intimidate_someone.
+          try { this.noteTrialDeed('intimidate_someone', 1); } catch (e2) {}
           return 'fled';
         }
         // They yield. Terrified. The village sees.
@@ -3695,6 +3697,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`😨 As they hand it over, ${dname} whispers: "Please. Not again. I'll tell — I'll tell everyone."`);
           try { this.seedGossip('bully', { honest: -12, generous: -10 }, [vid]); } catch (e) {}
         }
+        // TRIAL DEED (longsim abilities r4): they yielded — intimidate_someone.
+        try { this.noteTrialDeed('intimidate_someone', 1); } catch (e2) {}
         return 'yielded';
       }
       if (temp === 'bold' || temp === 'prickly' || temp === 'intense') {
@@ -4328,6 +4332,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         c.tension = Math.max(0, (c.tension || 50) - 35);
         if (c.tension <= 10) {
           c.resolved = true; c.tension = 0;
+          // TRIAL DEED (longsim abilities r4): a fight stopped with words.
+          try { this.noteTrialDeed('stop_a_fight', 1); } catch (e) {}
           this.say(`You sit them both down. It's awkward. It's hard. But ${first} and ${oname} actually talk — really talk — for the first time in longer than anyone admits. Something loosens.`);
         } else {
           this.say(`${first} listens. Doesn't agree to everything, but listens. "${oname} and I... we'll figure it out. Thanks for trying." The air is a little clearer.`);
@@ -9133,7 +9139,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.seenTiles = s.seenTiles || {};
         const k = x + ',' + y;
         const cur = s.seenTiles[k];
-        if (!cur || (cur.k === 's' && kind === 'visited')) s.seenTiles[k] = { k: kind === 'visited' ? 'v' : 's', by: by || null };
+        if (!cur || (cur.k === 's' && kind === 'visited')) {
+          s.seenTiles[k] = { k: kind === 'visited' ? 'v' : 's', by: by || null };
+          // TRIAL DEED (longsim abilities r4): a new tile under your boots.
+          if (kind === 'visited') { try { this.noteTrialDeed('discover_5_locations', 1); } catch (e2) {} }
+        }
       } catch (e) {}
     },
     // Backfill map knowledge for saves predating fog of war (Steve 2026-10-06).
@@ -14516,6 +14526,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const fragTail = (typeof this.pickFresh === 'function')
                 ? this.pickFresh(fragTails, 'gossip_frag') : fragTails[0];
               this.say(`You catch fragments by the fire — ${this.displayName(teller)} telling ${this.displayName(listener)} about ${aboutWho}. ${fragTail}`);
+              // TRIAL DEED (longsim abilities r4): you heard a rumor at the fire.
+              try { this.noteTrialDeed('hear_10_rumors', 1); } catch (e2) {}
             }
           }
           // Apply reputation to the SUBJECT of the gossip, not the listener.
@@ -20000,10 +20012,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       if (s.day >= 7 && !this.state.systemArrived) {
         this.state.systemArrived = true;
+        // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
+        // System starts granting now (the villager-mirror rule).
+        try { this.checkPendingTrialDeeds(); } catch (e) {}
         // the System names everything — meat in packs updates too
         try {
           for (const mid of Object.keys(this.state.codex.monsters || {})) this.refreshMeatNames(mid);
-        } catch (e) {}
+        } catch (e2) {}
         // The cinematic overlay (staged beats, tap to continue) carries the
         // script — see systemArrivalBeats(). The log gets a tight recap only.
         // No more firehose.
@@ -22939,11 +22954,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // settled, unsafe food can't poison you. The action does something.
           if ((scholar.pushThroughParts || 0) > 0) {
             this.say(`The ${it.name} is suspect — but your gut is settled. You push through. (Push Through)`);
+            // TRIAL DEED (longsim abilities r4): a suspect meal, no harm done.
+            try { this.noteTrialDeed('hunger_trial', 1); } catch (e2) {}
           } else {
             const pChance = this.modTarget('food.poison_chance', 0.2);
             if (Math.random() < pChance) {
               scholar.health = Math.max(0, scholar.health - 5);
               this.say(`The ${it.name} was off. Your stomach knots. (-5 health)`);
+            } else {
+              // TRIAL DEED (longsim abilities r4): a suspect meal, no harm done.
+              try { this.noteTrialDeed('hunger_trial', 1); } catch (e2) {}
             }
           }
         }
@@ -30404,6 +30424,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (t.kind === 'villager' && final > 0) t._taken = (t._taken || 0) + final;
       if (t.kind === 'player') {
         this.state.scholar.health = Math.max(0, t.hp);
+        // TRIAL DEED LEDGER (longsim abilities r4 2026-10-12): per-fight
+        // damage-taken, mirroring the villager _taken ledger above. Read by
+        // tbEnd for the take_50_damage_in_one_fight trial deed.
+        if (final > 0) t._taken = (t._taken || 0) + final;
         if (final > 0) this.noteAbilityUse('chitin_skin');
         // DRAMA (Steve 2026-10-07, B1): getting hit HURTS visibly — red
         // vignette + shake. Throttled to real hits (5+), not chip damage.
@@ -36330,6 +36354,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       }
+      // TRIAL DEEDS (longsim abilities r4 2026-10-12): the fight is over and
+      // the player lived. Win the fight -> adrenaline_control; take 50+
+      // damage in one fight and survive -> trade_of_blows; end at <=25% HP ->
+      // adrenaline_surge ("Trial of Blood survived"). Player must be in the
+      // fight (f has a 'p' fighter) and alive — villager field fights and
+      // defeats don't earn the scholar a trial.
+      try {
+        const _p = this.tbFighter('p');
+        if (_p && _p.alive !== false && (_p.hp || 0) > 0) {
+          if (result === 'won') this.noteTrialDeed('win_a_fight', 1);
+          const _taken = _p._taken || 0;
+          if (_taken >= 50) this.noteTrialDeed('take_50_damage_in_one_fight', 1);
+          const _maxHp = Math.max(1, _p.maxHp || 100);
+          if ((_p.hp || 0) <= _maxHp * 0.25) this.noteTrialDeed('blood_trial', 1);
+        }
+      } catch (e) {}
       } finally {
         this.tbfight = null;
         // Belt-and-suspenders: the wild encounter monster lives in the fight,

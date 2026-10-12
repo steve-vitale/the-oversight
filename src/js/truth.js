@@ -1449,6 +1449,8 @@
         };
         line = reactions[temp] || `"${truthWord}.${motiveSpeech}"`;
         this.resolveDoubt(doubtId, `confessed: ${lie.truth} (was claiming ${lie.told})`);
+// TRIAL DEED (longsim abilities r4): you caught a lie — they confessed.
+try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
         // correct the journal
         try {
           if (lieField === 'occupation') this.journalLearn(vid, 'occupation', lie.truth, { sure: true, via: 'confessed', quiet: true });
@@ -1554,6 +1556,8 @@
         line = this.drawTruthLine('theftConfess', vid, { first, what });
         if (!line) line = `"It was me. ${what} — I'm sorry."`;
         this.resolveDoubt(doubtId, `confessed: stole ${what} (day ${t.day})`);
+// TRIAL DEED (longsim abilities r4): you caught a lie — they confessed.
+try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
         try {
           this.journalLearn(vid, 'note', `Admitted: stole ${what} — buried at ${t.place}, day ${t.day}.`, { via: 'confessed', quiet: true });
           this.bumpTrust(vid, -4);
