@@ -3191,6 +3191,16 @@
     // override chain and stay).
     buildMenu(vid) {
       const c = this.convoGet(vid);
+      // STICKY OPENED-UP (trust r7 2026-10-12): once they've opened up about
+      // their goal (goal thread, depth 2+), that's a relationship fact, not
+      // menu flicker — persist it on the convo record (survives talkTo's
+      // per-conversation reset like answered/askedQs do). Set here at the
+      // top because beat-menu early returns below would skip it. The old
+      // code computed openedUp from live thread state inside the offer gate
+      // (which needs !onThread, while leaving the thread clears thread and
+      // depth) — a dead circular that made offer_help unreachable. Measured:
+      // 0 promises in 36 long runs.
+      if (c.thread === 'goal' && (c.depth || 0) >= 2) c.goalOpenedUp = true;
       const choices = [];
       // Answering their question comes first — it's rude to ignore it.
       if (c.pendingQ) {
@@ -3407,7 +3417,26 @@
       // fresh topics existed. Now it rides right behind gossip; the interview
       // verbs are 2nd and 3rd, never starved.
       if (asked.indexOf('past') === -1 && pastOpen) asks.push({ id: 'ask:past', label: this.convoLabel(vid, 'past') });
-      if (!this.goalKnown(vid) && asked.indexOf('goal') === -1 && goalOpen) asks.push({ id: 'ask:goal', label: this.convoLabel(vid, 'goal') });
+      // PROMISE DISCOVERY HOOK (trust r7 2026-10-12): the goal thread is the
+      // designed discovery path for promises ("the offer only surfaces when
+      // they've really opened up, deep in their goal thread") — but
+      // post-System goals are auto-known, so !goalKnown never held and the
+      // thread became unreachable from the menu: offer_help (needs
+      // hasDiscovered('promise') OR goal-thread depth 2, and the depth flag
+      // was computed from live thread state that clears on exit — a dead
+      // circular) could never be discovered. Measured: 0 goal-thread
+      // openings and 0 promises across 170 conversations in a 200d
+      // socialite run (seed 3) — the want system owns every opening, and
+      // the menu path was dead. While the promise concept is undiscovered,
+      // the goal stays askable and rides FIRST (a discovery action, not a
+      // topic — it must not starve behind the topic cap). After the first
+      // vow it behaves as before.
+      const promiseHook = !this.hasDiscovered('promise') && asked.indexOf('goal') === -1 && goalOpen;
+      if (promiseHook) {
+        asks.unshift({ id: 'ask:goal', label: this.convoLabel(vid, 'goal') });
+      } else if (!this.goalKnown(vid) && asked.indexOf('goal') === -1 && goalOpen) {
+        asks.push({ id: 'ask:goal', label: this.convoLabel(vid, 'goal') });
+      }
       if (asked.indexOf('village') === -1) asks.push({ id: 'ask:village', label: this.convoLabel(vid, 'village') });
       if (asked.indexOf('plans') === -1) asks.push({ id: 'ask:plans', label: this.convoLabel(vid, 'plans') });
       // TOPIC PACK (Steve 2026-10-06): fresh generated topics get first crack
@@ -3596,9 +3625,17 @@
       // The handler makes a FORMAL tracked promise — keep it or break it.
       // (Thread coherence: off-thread verbs wait for the thread to resolve.)
       const alreadyPromised = !!((this.state.village.promises || {})[vid]);
-      if (!onThread && this.goalKnown(vid) && !c.offeredHelp && !alreadyPromised && choices.length < MAXC) {
-        const openedUp = c.thread === 'goal' && (c.depth || 0) >= 2;
-        if (this.hasDiscovered('promise') || openedUp) choices.push({ id: 'offer_help', label: this.convoActionLabel(vid, 'offer_help') });
+      // (c.goalOpenedUp is set at the top of buildMenu — see STICKY note.)
+      // EARNED VERB (trust r7): rides after the capped topics like teach/
+      // trade — the old `choices.length < MAXC` check starved it behind the
+      // topic budget (measured: offer missing from a 10-item menu even with
+      // openedUp set). Computed here, pushed after the caps below.
+      let offerHelpChoice = null;
+      if (!onThread && this.goalKnown(vid) && !c.offeredHelp && !alreadyPromised) {
+        const openedUp = !!c.goalOpenedUp;
+        if (this.hasDiscovered('promise') || openedUp) {
+          offerHelpChoice = { id: 'offer_help', label: this.convoActionLabel(vid, 'offer_help') };
+        }
       }
       // KNOWLEDGE TRADING is discovered through conversation: traders seed it
       // by mentioning it; once learned, you can raise it with any trader.
@@ -3683,6 +3720,7 @@
       // Earned verbs ride after the capped topics (see TEACHING above).
       if (teachChoice) choices.push(teachChoice);
       if (tradeChoice) choices.push(tradeChoice);
+      if (offerHelpChoice) choices.push(offerHelpChoice);
       // The subject-change is always available mid-thread (it's the explicit
       // pivot); on openers it rides the remaining slots as before.
       if (c.thread && c.thread !== 'small' && (onThread || choices.length < MAXC)) choices.push({ id: 'subject', label: '"Can I ask you something else?"' });
