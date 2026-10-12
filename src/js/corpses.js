@@ -160,6 +160,12 @@
           vv.deathSeen[opts.villagerId] = (this.state.scholar || {}).day || 0;
         } catch (e) {}
       }
+      // AUDIO (Steve 2026-10-12): a person's death is a moment — the knock.
+      // Fires once per death (guarded above). Monster deaths already voice
+      // at the kill site (monsterDown/deathAudio); this is for people.
+      if (opts.kind === 'person' || opts.kind === 'villager') {
+        try { this.audioEvent('villagerDeath'); } catch (e) {}
+      }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis
       // across world runs. kind covers person/monster/animal; wave for monsters.
       try {

@@ -11492,6 +11492,462 @@
         nz.start(t + 0.22); nz.stop(t + 0.65);
       }
     }
+    // ============ WAVE-4/5 SIGNATURE (audio-vfx-audit, Steve 2026-10-12):
+    // sigW4.js fired 10 events, sigW5.js 30, finale-campaign.js 5 — all into
+    // a registry nobody extended. Every name below resolves now. Wave 4 is
+    // the uncanny neighbors (congregation, strike, suburb, eulogy, eater,
+    // herald, algorithm); wave 5 is the show turning on you (cancellation,
+    // editor, rerun, spoiler, timeslot, finale). One signature voice per
+    // monster, reused as its declare (aggroAudio) so late-game monsters stop
+    // bellowing like the Highbeam Deer on the pain-switch path.
+    function focusGroupMurmur() {
+      // THE ROOM TAKES NOTES: clipboard scribbles over a low murmur of many
+      // voices saying almost-words. You are the agenda item.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      for (let i = 0; i < 5; i++) {
+        const st = t + i * 0.16 + Math.random() * 0.05;
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'square'; o.frequency.setValueAtTime(2400, st);
+        o.frequency.exponentialRampToValueAtTime(900, st + 0.05);
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.05, st + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.07);
+        o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.09);
+      }
+      [110, 116.5, 123.5].forEach(fq => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = fq;
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 500;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.06, t + 0.4);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.1);
+        o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 1.15);
+      });
+    }
+    function congInvite() {
+      // THE INVITATION: a hymn swell — stacked saws rising, too warm, too
+      // many voices. Come and see.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [130.8, 164.8, 196, 261.6].forEach((fq, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = fq;
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 900;
+        const st = t + i * 0.12;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.08, st + 0.3);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 1.2);
+        o.connect(f); f.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 1.25);
+      });
+    }
+    function congGeas() {
+      // THE GEAS: a low bell tolls three times. Each toll is darker than
+      // the last. You owe.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [0, 0.9, 1.8].forEach((dt, i) => {
+        [98 - i * 6, 147 - i * 9].forEach(fq => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = 'sine'; o.frequency.value = fq;
+          g.gain.setValueAtTime(0.0001, t + dt);
+          g.gain.exponentialRampToValueAtTime(0.22 - i * 0.04, t + dt + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + dt + 0.8);
+          o.connect(g); g.connect(sfxBus); o.start(t + dt); o.stop(t + dt + 0.85);
+        });
+      });
+    }
+    function congAbsolve() {
+      // THE ABSOLUTION: a resolving major chord — but the top note sags
+      // flat as it lands. Forgiven, at a price.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [[130.8, 130.8], [164.8, 164.8], [196, 185]].forEach(([f0, f1]) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(f0, t);
+        o.frequency.exponentialRampToValueAtTime(f1, t + 0.9);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.1, t + 0.15);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.1);
+        o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 1.15);
+      });
+    }
+    function strikeShutdown() {
+      // THE SHUTDOWN: everything powers down — a descending sweep, a clunk,
+      // then the hum of nothing.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(600, t);
+      o.frequency.exponentialRampToValueAtTime(60, t + 0.7);
+      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 1200;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.14, t + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.75);
+      o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.8);
+      thump(t + 0.72, 0.5);
+    }
+    function suburbHum() {
+      // THE SUBURB: a distant mower drones, sprinklers tick — and underneath,
+      // something detuned keeping time with it.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sawtooth'; o.frequency.value = 82;
+      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 300;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.07, t + 0.5);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+      o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 1.65);
+      for (let i = 0; i < 6; i++) {
+        const st = t + 0.2 + i * 0.22;
+        const tp = ctx.createOscillator(), tg = ctx.createGain();
+        tp.type = 'sine'; tp.frequency.value = 2100;
+        tg.gain.setValueAtTime(0.0001, st);
+        tg.gain.exponentialRampToValueAtTime(0.05, st + 0.008);
+        tg.gain.exponentialRampToValueAtTime(0.0001, st + 0.05);
+        tp.connect(tg); tg.connect(sfxBus); tp.start(st); tp.stop(st + 0.06);
+      }
+      const w = ctx.createOscillator(), wg = ctx.createGain();
+      w.type = 'sine'; w.frequency.value = 86; // the wrong underneath
+      wg.gain.setValueAtTime(0.0001, t + 0.4);
+      wg.gain.exponentialRampToValueAtTime(0.05, t + 0.8);
+      wg.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+      w.connect(wg); wg.connect(sfxBus); w.start(t + 0.4); w.stop(t + 1.65);
+    }
+    function eulogyVerse() {
+      // THE VERSE: a mournful line descends, slow, with breath in it. It is
+      // reading YOUR verse.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const notes = [392, 370, 349.2, 311.1, 293.7];
+      notes.forEach((fq, i) => {
+        const st = t + i * 0.42;
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = fq;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.11, st + 0.1);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.5);
+        o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.55);
+      });
+      const nz = noise(1.8), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'bandpass'; nf.frequency.value = 800; nf.Q.value = 0.8;
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.04, t + 0.6);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 2.0);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 2.05);
+      }
+    }
+    function algorithmTick() {
+      // THE ALGORITHM: cold computation — short blips in an uneven rhythm
+      // over a low sub. It has already decided.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [0, 0.14, 0.21, 0.42, 0.5, 0.78].forEach((dt, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'square'; o.frequency.value = 1200 + (i % 3) * 400;
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 2400;
+        g.gain.setValueAtTime(0.0001, t + dt);
+        g.gain.exponentialRampToValueAtTime(0.06, t + dt + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dt + 0.06);
+        o.connect(f); f.connect(g); g.connect(sfxBus);
+        o.start(t + dt); o.stop(t + dt + 0.07);
+      });
+      const s = ctx.createOscillator(), sg = ctx.createGain();
+      s.type = 'sine'; s.frequency.value = 55;
+      sg.gain.setValueAtTime(0.0001, t);
+      sg.gain.exponentialRampToValueAtTime(0.1, t + 0.1);
+      sg.gain.exponentialRampToValueAtTime(0.0001, t + 1.0);
+      s.connect(sg); sg.connect(sfxBus); s.start(t); s.stop(t + 1.05);
+    }
+    function eaterGorge() {
+      // THE GORGE: a deep gulp, then the low churn of something being
+      // unmade. Do not be the meal.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(300, t);
+      o.frequency.exponentialRampToValueAtTime(70, t + 0.35);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.3, t + 0.08);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+      o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.5);
+      const nz = noise(1.2), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'lowpass';
+        nf.frequency.setValueAtTime(300, t + 0.4);
+        nf.frequency.exponentialRampToValueAtTime(90, t + 1.4);
+        ng.gain.setValueAtTime(0.0001, t + 0.4);
+        ng.gain.exponentialRampToValueAtTime(0.16, t + 0.6);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t + 0.4); nz.stop(t + 1.55);
+      }
+    }
+    function heraldTrumpet() {
+      // THE HERALD: a trumpet call that cracks halfway — the announcement
+      // is bigger than the announcer.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(523.25, t);
+      o.frequency.setValueAtTime(523.25, t + 0.35);
+      o.frequency.exponentialRampToValueAtTime(466, t + 0.42); // the crack
+      o.frequency.exponentialRampToValueAtTime(392, t + 0.9);
+      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 2200;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.12, t + 0.06);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.0);
+      o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 1.05);
+    }
+    function cxDescend() {
+      // THE DESCENT: the stamp comes down — air sucked out, paper slam, sub
+      // thump. CANCELLED.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const nz = noise(0.4), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'lowpass';
+        nf.frequency.setValueAtTime(3500, t);
+        nf.frequency.exponentialRampToValueAtTime(300, t + 0.35);
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.2, t + 0.3);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 0.45);
+      }
+      thump(t + 0.36, 0.6);
+      thump(t + 0.55, 0.35);
+    }
+    function cxOffScript() {
+      // OFF SCRIPT: the big scratch — the take is ruined, the tape tears,
+      // and the room hears it.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const nz = noise(0.7), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'bandpass'; nf.Q.value = 3;
+        nf.frequency.setValueAtTime(4000, t);
+        nf.frequency.exponentialRampToValueAtTime(300, t + 0.55);
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.2, t + 0.1);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.65);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 0.7);
+      }
+      [880, 830].forEach(fq => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(fq, t + 0.5);
+        o.frequency.exponentialRampToValueAtTime(fq * 0.5, t + 0.8);
+        g.gain.setValueAtTime(0.0001, t + 0.5);
+        g.gain.exponentialRampToValueAtTime(0.08, t + 0.55);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.85);
+        o.connect(g); g.connect(sfxBus); o.start(t + 0.5); o.stop(t + 0.9);
+      });
+    }
+    function cxRenewed() {
+      // RENEWED: glassy major shimmer — picked up for another season, and
+      // the light is wrong.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [1046.5, 1318.5, 1568].forEach((fq, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = fq * 1.003; // glassy, not clean
+        const st = t + i * 0.1;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.07, st + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.9);
+        o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.95);
+      });
+    }
+    function edCut() {
+      // THE CUT: tape splice — a snap, a tiny pitch jump where the edit
+      // is. You were saying something else a frame ago.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'square'; o.frequency.setValueAtTime(1500, t);
+      o.frequency.exponentialRampToValueAtTime(300, t + 0.05);
+      g.gain.setValueAtTime(0.2, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+      o.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.09);
+      const v = ctx.createOscillator(), vg = ctx.createGain();
+      v.type = 'sawtooth';
+      v.frequency.setValueAtTime(220, t + 0.06);
+      v.frequency.setValueAtTime(233, t + 0.08); // the jump
+      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 1000;
+      vg.gain.setValueAtTime(0.0001, t + 0.06);
+      vg.gain.exponentialRampToValueAtTime(0.08, t + 0.1);
+      vg.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+      v.connect(f); f.connect(vg); vg.connect(sfxBus);
+      v.start(t + 0.06); v.stop(t + 0.45);
+    }
+    function edJam() {
+      // THE JAM: the machine catches — grinding loop, a tooth skipping,
+      // then it lurches on.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const nz = noise(0.9), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'lowpass'; nf.frequency.value = 700;
+        const lfo = ctx.createOscillator(), lg = ctx.createGain();
+        lfo.type = 'square'; lfo.frequency.value = 7;
+        lg.gain.value = 0.08;
+        lfo.connect(lg); lg.connect(ng.gain);
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.14, t + 0.15);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.85);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 0.9);
+        lfo.start(t); lfo.stop(t + 0.9);
+      }
+    }
+    function edContradict() {
+      // THE CONTRADICTION: two tones arguing — a minor 2nd that will not
+      // resolve. The record disagrees with itself.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [440, 466.16].forEach(fq => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = fq;
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 1500;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.09, t + 0.08);
+        g.gain.setValueAtTime(0.09, t + 0.5);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.7);
+        o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.75);
+      });
+    }
+    function rrClap() {
+      // THE CLAPPER: two woody snaps — take number, and action.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [0, 0.28].forEach(dt => {
+        const nz = noise(0.06), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+        if (nz) {
+          nf.type = 'bandpass'; nf.frequency.value = 1800; nf.Q.value = 2;
+          ng.gain.setValueAtTime(0.3, t + dt);
+          ng.gain.exponentialRampToValueAtTime(0.0001, t + dt + 0.07);
+          nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+          nz.start(t + dt); nz.stop(t + dt + 0.09);
+        }
+      });
+    }
+    function spSpoil() {
+      // THE SPOILER: a triumphant sting played backwards — the swell comes
+      // first, then the wrong note it was hiding.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const nz = noise(0.5), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'highpass'; nf.frequency.value = 2500;
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.12, t + 0.4);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 0.55);
+      }
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(523.25, t + 0.45);
+      o.frequency.exponentialRampToValueAtTime(493.88, t + 0.8); // wrong
+      g.gain.setValueAtTime(0.14, t + 0.45);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
+      o.connect(g); g.connect(sfxBus); o.start(t + 0.45); o.stop(t + 0.95);
+    }
+    function tsTick() {
+      // THE TIMESLOT: clock ticks accelerating wrong — then a chime that
+      // misses the hour.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      let st = t;
+      for (let i = 0; i < 8; i++) {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = 1900;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.07, st + 0.006);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.04);
+        o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.05);
+        st += 0.22 - i * 0.02;
+      }
+      const c = ctx.createOscillator(), cg = ctx.createGain();
+      c.type = 'sine'; c.frequency.value = 1180; // not quite the hour
+      cg.gain.setValueAtTime(0.0001, st);
+      cg.gain.exponentialRampToValueAtTime(0.1, st + 0.02);
+      cg.gain.exponentialRampToValueAtTime(0.0001, st + 0.8);
+      c.connect(cg); cg.connect(sfxBus); c.start(st); c.stop(st + 0.85);
+    }
+    function fiTitleCard() {
+      // THE TITLE CARD: a big brass stab, slightly detuned — the show
+      // announcing itself.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [174.6, 220, 261.6, 349.2].forEach(fq => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = fq * 1.004;
+        const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 1600;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.1, t + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
+        o.connect(f); f.connect(g); g.connect(sfxBus); o.start(t); o.stop(t + 0.95);
+      });
+      thump(t, 0.4);
+    }
+    function fiSacrifice() {
+      // THE SACRIFICE: a low ritual pulse with breath in it. Something is
+      // being given. Not willingly.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      for (let i = 0; i < 4; i++) {
+        thump(t + i * 0.55, 0.4 - i * 0.05);
+      }
+      const nz = noise(2.0), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'bandpass'; nf.frequency.value = 500; nf.Q.value = 0.7;
+        ng.gain.setValueAtTime(0.0001, t);
+        ng.gain.exponentialRampToValueAtTime(0.05, t + 0.8);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 2.1);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 2.15);
+      }
+    }
+    function villagerDeath() {
+      // SOMEONE IS GONE: a hollow knock, breath out — and one low tone that
+      // doesn't resolve. Deaths hit hard; the village is the protagonist.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      const nz = noise(0.1), nf = ctx.createBiquadFilter(), ng = ctx.createGain();
+      if (nz) {
+        nf.type = 'bandpass'; nf.frequency.value = 900; nf.Q.value = 1.5;
+        ng.gain.setValueAtTime(0.35, t);
+        ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+        nz.connect(nf); nf.connect(ng); ng.connect(sfxBus);
+        nz.start(t); nz.stop(t + 0.14);
+      }
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = 110;
+      g.gain.setValueAtTime(0.0001, t + 0.15);
+      g.gain.exponentialRampToValueAtTime(0.14, t + 0.25);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+      o.connect(g); g.connect(sfxBus); o.start(t + 0.15); o.stop(t + 1.85);
+    }
+    function playerDeathSting() {
+      // THE STORY PAUSES: your heartbeat, slowing, stopping. Then nothing
+      // for one full beat — the village keeps going without you.
+      if (!ensure()) return;
+      const t = ctx.currentTime;
+      [0, 0.9, 2.0, 3.4].forEach(dt => {
+        thump(t + dt, 0.45 - dt * 0.06);
+        thump(t + dt + 0.22, 0.3 - dt * 0.04);
+      });
+    }
     return {
       combatStart() { combatStartHit(); heartbeat(72); }, // (Steve 2026-10-06): the opening now lands its own wrong-horn sting, then the heartbeat takes over
       telegraph(d) {
@@ -11613,6 +12069,63 @@
       callbackRing() { callbackRing(); },       // wrong ring into a murmur
       bufferStall() { bufferStall(); },         // the frame chop
       adbreakCut() { adbreakCut(); },           // jingle stab curdling to static
+      // WAVE-4/5 SIGNATURE (audio-vfx-audit, Steve 2026-10-12): the 45 fired
+      // names from sigW4.js / sigW5.js / finale-campaign.js now resolve.
+      // Where an existing voice is the honest fit, the entry aliases it
+      // (hecklerLaugh precedent) instead of composing a near-duplicate.
+      focusGroupMurmur() { focusGroupMurmur(); },
+      congregationInvite() { congInvite(); },
+      congregationGeas() { congGeas(); },
+      congregationAbsolve() { congAbsolve(); },
+      strikeDemands(d) { unionBullhorn(d); }, // the bullhorn — solidarity
+      strikeShutdown() { strikeShutdown(); },
+      influencerRecruit(d) { paparazzoExclusive(d); }, // the money shot — scouting
+      auditTax() { tosPenalty(); },           // the tax — harsh buzzer
+      reunionMirror() { mirrormothFlash(); }, // the light has a sound
+      eulogyVerse() { eulogyVerse(); },
+      eaterGorge() { eaterGorge(); },
+      suburbHum() { suburbHum(); },
+      algorithmTick() { algorithmTick(); },
+      heraldTrumpet() { heraldTrumpet(); },
+      cxDescend(d) { cxDescend(d); },
+      cxFall() { horrorSting(); },            // the fall deserves the sting
+      cxOffScript() { cxOffScript(); },
+      cxRenewed() { cxRenewed(); },
+      edStrip() { spoolReplay(); },           // tape strip
+      edJam() { edJam(); },
+      edCut(d) { edCut(d); },
+      edRetrieve() { spoolReplayStart(); },   // rewind whine — retrieving
+      edContradict() { edContradict(); },
+      rrClap(d) { rrClap(d); },
+      spSpoil() { spSpoil(); },
+      tsTick() { tsTick(); },
+      rrMessage() { paperRustle(); },         // the message, on paper
+      spAnnounce() { spSpoil(); },
+      spAsk() { spSpoil(); },
+      spCheap() { adbreakCut(); },            // the cheap ad
+      spFulfilled() { spSpoil(); },
+      spManifest() { spSpoil(); },
+      tsReschedule() { tsTick(); },
+      tsHighlight() { tsTick(); },
+      tsOwn() { tsTick(); },
+      niWatch() { paparazzoShutter(); },
+      niCamera() { paparazzoShutter(); },
+      fiDeclare() { fiTitleCard(); },
+      fiTitleCard() { fiTitleCard(); },
+      fiSacrifice() { fiSacrifice(); },
+      fiPartTwo() { fiTitleCard(); },         // second card
+      fiEncore() { trialFanfare(); },         // almost-right fanfare — encore
+      fiRedPen() { tosObject(); },            // tap + record scratch
+      fiScript() { paperRustle(); },
+      fiBadNote() { tosPenalty(); },
+      nnNote() { paperRustle(); },
+      nnRead() { tosRead(); },
+      nnApply() { tosAccept(); },             // the stamp
+      nnBadApply() { tosObject(); },
+      nnBadNote() { tosPenalty(); },
+      nnBadFed() { tosPenalty(); },
+      villagerDeath() { villagerDeath(); },
+      playerDeathSting() { playerDeathSting(); },
       // WAVE-2 FLYER VOICES (Steve 2026-10-06): the flyer redesign fired
       // these 12 hooks with no synth — every signature beat played mute.
       nevermoreCroak() { nevermoreCroak(); },       // first contact: the crow that has been watching

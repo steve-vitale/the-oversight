@@ -585,6 +585,10 @@
       // ends the walk, full stop. Guarded: the animator is UI-side and absent
       // in node harnesses.
       try { if (typeof Scattering !== 'undefined' && Scattering.MoveAnim) Scattering.MoveAnim.stopAll(); } catch (e) {}
+      // AUDIO (Steve 2026-10-12): the story pauses — your heartbeat, slowing,
+      // stopping. The choke point for every player death (combat, contest,
+      // expedition, pit trap, hunt), so non-combat deaths are no longer silent.
+      try { this.audioEvent('playerDeathSting'); } catch (e) {}
       const s = this.state.scholar, v = this.state.village;
       const oldId = this.villagerId;
       const oldChar = (this.data.villagers || []).find(x => x.id === oldId) || {};

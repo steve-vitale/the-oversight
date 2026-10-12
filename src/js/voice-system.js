@@ -37,12 +37,26 @@
       return r.json();
     }).then(function (m) {
       _manifest = Array.isArray(m) ? m : [];
+      buildTextIndex();
       return _manifest;
     }).catch(function (e) {
       _manifestPromise = null; // let a later call retry
       throw e;
     });
     return _manifestPromise;
+  }
+
+  // Exact game-text -> manifest id index. Built once the manifest loads.
+  // Only exact matches ever voice: templated lines (names/numbers baked in
+  // at runtime) have no twin and stay text-only, by design.
+  var _textToId = null;
+  function buildTextIndex() {
+    var map = {};
+    for (var i = 0; i < _manifest.length; i++) {
+      var e = _manifest[i];
+      if (e && e.id && e.text) map[e.text] = e.id;
+    }
+    _textToId = map;
   }
 
   function entryFor(id) {
@@ -90,4 +104,17 @@
     return (_manifest || []).map(function (e) { return e.id; });
   };
   Game.systemAudioManifest = loadManifest;
+  // systemVoiceIdFor(text): exact game text -> manifest id, or null. Kicks
+  // the manifest/index build on first call; returns null until it's ready.
+  // Callers never block: the text always shows, the voice catches up.
+  Game.systemVoiceIdFor = function (text) {
+    if (!_manifest) loadManifest().catch(function () {});
+    if (!_textToId || !text) return null;
+    return _textToId[text] || null;
+  };
+  // preloadSystemVoice(): start the manifest fetch early (newGame) so the
+  // text index is warm before the System's first line. Safe to call twice.
+  Game.preloadSystemVoice = function () {
+    loadManifest().catch(function () {});
+  };
 })();

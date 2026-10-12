@@ -1773,6 +1773,9 @@
         || locPool[Math.floor(Math.random() * locPool.length)]
         || {};
       this.state = S.state.newState();
+      // SYSTEM VOICE (Steve 2026-10-12): warm the ElevenLabs manifest early
+      // so the text->id index is ready before the System's first line.
+      try { if (typeof this.preloadSystemVoice === 'function') this.preloadSystemVoice(); } catch (e) {}
       this.state.startLocation = loc.id || null;
       this.state.startLocationName = loc.name || null;
       this.state.spawnType = loc.spawnType || 'countryside';
@@ -16829,6 +16832,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const vmeat = this.monsterMeatEntry(mdef);
           if (vcorpse && vmeat) vcorpse.items.push(vmeat);
         } catch (e) {}
+        // AUDIO (Steve 2026-10-12): a villager's kill is a real death — the
+        // death moment plays here too, same as the player's kill site.
+        try {
+          const tdCfg = (mdef.encounter) || {};
+          if (tdCfg.deathAudio) this.audioEvent(tdCfg.deathAudio);
+          else this.audioEvent('monsterDown');
+        } catch (e) {}
         this.removeWorldMonster(m);
         // KILL LOOT (Steve 2026-10-09): the killer loots the body — same
         // table as your kills. Re-equips on the spot.
@@ -21376,6 +21386,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         else if (kind === 'lootSparkle') D.lootSparkle(...args);
         else if (kind === 'critHit') D.critHit(...args);
         else if (kind === 'playerHurt') D.playerHurt(...args);
+        else if (kind === 'alienHeavyHit') D.alienHeavyHit(...args);
         else if (kind === 'dodgeMiss') D.dodgeMiss(...args);
         else if (kind === 'playerDeath') D.playerDeath(...args);
         else if (kind === 'newLife') D.newLife(...args);
@@ -21808,7 +21819,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.inventory.splice(idx, 1);
       // THE COST: the full unboxing ceremony. The fans demand it.
       this.tickAction(128);
-      try { this.drama('contestCheer'); } catch (e) {}
+      try { this.drama('contest', { type: 'cheer' }); } catch (e) {}
       this.say('📦 You open it on camera, because the fans DEMAND the full unboxing. Contents: one rubber duck, three hair ties, and a note reading "FOR LUCK."');
       this.say('📺 SYSTEM: "We have filed this under \'luck protocol.\' Is luck flammable? Asking for the fans."');
       // The duck: a bonded keepsake. Carry it and the relic pipeline notices.
@@ -21933,7 +21944,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.integrate(5, 'cooking lesson'); } catch (e) {}
         // The System replicates your meal for the village — badly, lovingly.
         try { this.stockPantry(400, 'System-replicated stew'); } catch (e) {}
-        try { this.drama('contestCheer'); } catch (e) {}
+        try { this.drama('contest', { type: 'cheer' }); } catch (e) {}
         this.say('🍲 It replicates your stew for the whole haven. It added a garnish of pocket lint. It\'s still 400 kcal. You eat around the lint. (+400 kcal to the pantry. The System is SO proud.)');
       } else if (rawKcal >= 300) {
         // COLD DEMO: you have the tubers, but no fire worth the name and no
@@ -22104,7 +22115,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`  ${i + 1}. ${o.label} — ${o.desc}`);
       });
       this.say('Each trial takes a FULL day-part and leaves you drained (−250 kcal). Pick one. The System waits — it has already run the simulations, and it is terrible at keeping secrets.');
-      try { this.drama('contestAnnounce'); } catch (e) {}
+      try { this.drama('contest', { type: 'announce', name: 'SYSTEM TRIAL' }); } catch (e) {}
       try { this.audioEvent('trialFanfare'); } catch (e) {}
     },
     // chooseTrialOption(id): run the chosen trial to completion.
@@ -22239,7 +22250,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.stormFront = null;
       let sheltered = false;
       try { sheltered = (this.playerAtHaven && this.playerAtHaven()) || (this.isSafeTile && this.isSafeTile(this.map.px, this.map.py)); } catch (e) {}
-      try { this.drama('weatherShift', 'rain'); } catch (e) {}
+      try { this.drama('weather', 'rain'); } catch (e) {}
       try { this.drama('shake'); } catch (e) {}
       try { this.audioEvent('horrorSting'); } catch (e) {}
       const elder = this._evElderName();
@@ -27067,6 +27078,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Each wave recontextualizes the last; the System says so, in its own
     // voice. (Wave 2's beat lives in checkSystemArrival.)
     waveUnlockBeat(wave) {
+      // VFX (Steve 2026-10-12): the escalation must be FELT, not just read —
+      // the wave drop lands with a flash and a shake, televised.
+      try { this.drama('flash', '#7a1fa2', 900); } catch (e) {}
+      try { this.drama('shake', 10); } catch (e) {}
+      try { this.audioEvent('waveUnlock'); } catch (e) {}
       if (wave === 3) {
         this.say('📺 "Oh, you survived the AUDIENCE NOTES? Cute. We\'ve stopped pretending these are animals now. That was the FINAL DRAFT, folks — what comes out of the treeline next was never alive the way you mean it."');
         this.say('(Something new is moving in the treeline. It was never an animal.)');
@@ -28912,7 +28928,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // System commentary: after day 7, combat is TELEVISED. The System narrates,
     // the gamblers react, style points are tracked. Combat becomes a show.
     sysSay(text) {
-      if (this.state.systemArrived) this.say(`📺 SYSTEM: "${text}"`);
+      if (!this.state.systemArrived) return;
+      this.say(`📺 SYSTEM: "${text}"`);
+      // SYSTEM VOICE (Steve 2026-10-12): the System's fixed ElevenLabs line
+      // plays when this exact text has a pre-generated MP3. Fire-and-forget:
+      // the text never waits on audio, and text without a twin stays silent.
+      try {
+        if (typeof this.systemVoiceIdFor === 'function') {
+          const vid = this.systemVoiceIdFor(text);
+          if (vid && typeof this.playSystemLine === 'function') this.playSystemLine(vid);
+        }
+      } catch (e) {}
     },
 
     tbStyle(points, why) {
@@ -33099,7 +33125,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         } catch (e) {}
         this.say(cue + ' (WALKOUT — untargetable 3 turns, allies +4 damage.)');
-        try { this.audioEvent('walkout'); } catch (e) {}
+        try { this.audioEvent('unionWalkout'); } catch (e) {}
       } else {
         this.say(cue);
       }
@@ -34137,6 +34163,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           ? `The line reforms — head to tail, perfect order. ${dkc}`
           : 'The ducks mill about, regrouping. For a moment the line is just ducks.');
         this.audioEvent('duckRegroup', {});
+        this.audioEvent('ducksQuack', {}); // the milling quacks — cut dead at line_up
         dSetPhase('line_up');
         this.tbRefreshTelegraphUI(); this.tbEndCheck(); return;
       }

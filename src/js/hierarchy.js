@@ -651,6 +651,11 @@
         var other = link ? this._linkOther(link, HOME) : null;
         this.say(`◈ SYSTEM: "One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast."`);
         if (other) this.say(`Three weeks of knowing ${this._ovName(other)} — and now it's real. Haven is regional.`);
+        // VFX (Steve 2026-10-12): the scale transition must be FELT — a
+        // moment, not a threshold. The Dawn lands with light and a pulse.
+        try { this.drama('flash', '#4df3ff', 1200); } catch (e) {}
+        try { this.drama('integration'); } catch (e) {}
+        try { this.audioEvent('waveUnlock'); } catch (e) {}
         try { if (this.journalNote) this.journalNote('village', 'accord', 'The Regional Dawn: Haven is regional — the System tracks the network.'); } catch (e) {}
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'regional-dawn'); } catch (e) {}
         return true;
@@ -2330,6 +2335,11 @@
       // THE COURT SAT (or the oath was sworn): Haven is national.
       this.state.nationalLive = true;
       this.state.nationalDay = day;
+      // VFX (Steve 2026-10-12): national must land like a coronation, not a
+      // ledger entry — the hero card, the flash, the fanfare almost-right.
+      try { this.drama('hero', 'NATIONAL', pn.led ? 'The realm bows to Haven. The first court sat.' : 'The oath was sworn. Haven kneels — and rises national.'); } catch (e) {}
+      try { this.drama('flash', '#ffd54a', 1200); } catch (e) {}
+      try { this.audioEvent('trialFanfare'); } catch (e) {}
       try { if (this.journalNote) this.journalNote('village', 'national', 'Haven is national — ' + (pn.led ? 'the realm bows to Haven.' : 'Haven swore to ' + this._ovName(pn.primary) + '.')); } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'national-live'); } catch (e) {}
       try { if (this.recordMoment) this.recordMoment('Haven became national — ' + (pn.led ? 'the first court sat.' : 'the oath was sworn.')); } catch (e) {}

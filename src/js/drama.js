@@ -309,6 +309,15 @@
     },
 
     // screen shake (on grid container)
+    // alienHeavyHit: a monster's heavy strike lands — bigger, redder starburst
+    // than the player's hit, plus the shake. (Steve 2026-10-12: encounters.js
+    // fired drama('alienHeavyHit') into a dispatcher with no such branch —
+    // every heavy strike played mute and still.)
+    alienHeavyHit(x, y) {
+      this.hit(x, y, { color: '#ff4d4d', size: 110 });
+      this.shake(12);
+      this.floatText(x, y, 'HEAVY', { color: '#ff4d4d' });
+    },
     shake(intensity) {
       intensity = intensity || 8;
       const grid = document.querySelector('.detail') || document.body;
