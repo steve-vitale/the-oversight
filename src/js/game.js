@@ -14400,8 +14400,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // watch openly, cautious ones flinch, rivals find something to say.
     // moment: 'start' | 'kill' | 'hurt' | 'flee'
     combatWitnessReact(moment) {
-      const wit = this.witnesses(6);
-      if (!wit || !wit.length) return;
+      const wit = this.witnesses(6) || [];
+      // PARTICIPANTS (longsim combat r8 2026-10-12): villagers fighting
+      // alongside you SAW the kill and the hurt — they were in it. The
+      // bystander pool (map-proximity) misses them, and a companion who
+      // says nothing when the beast drops is a mannequin. 'start'/'flee'
+      // stay bystander-only: a fighter doesn't "watch" their own fight.
+      if (moment === 'kill' || moment === 'hurt') {
+        try {
+          const f = this.tbfight;
+          if (f && f.fighters) {
+            for (const o of f.fighters) {
+              if (o && o.kind === 'villager' && o.alive && o.villagerId && !wit.includes(o.villagerId)) {
+                wit.push(o.villagerId);
+              }
+            }
+          }
+        } catch (e) {}
+      }
+      if (!wit.length) return;
       // One voice per fight moment — not a chorus.
       const rid = wit[Math.floor(Math.random() * wit.length)];
       const name = this.displayName(rid);
