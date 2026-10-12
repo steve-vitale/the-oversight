@@ -78,11 +78,11 @@
       } catch (e) {}
       const ra = (sch.relayAbils || {});
       const abilCount = Object.keys(ra).filter(k => ra[k] && ra[k].unlocked).length;
-      const need = gh.requires.relayAbils || 9;
+      const need = gh.requires.relayAbils || 6; // 3 shared + 3 branch (light OR dark — never all 9 in one run)
       return {
         kit: abilCount, needKit: need, synergy: holdsOffice, item: true,
         complete: holdsOffice && abilCount >= need,
-        close: holdsOffice && abilCount >= 6,
+        close: holdsOffice && abilCount >= 4,
       };
     }
     const abs = scholarAbilities(sch);
