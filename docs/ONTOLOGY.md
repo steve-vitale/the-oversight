@@ -702,6 +702,16 @@ Central game controller. Owns state, map, day loop, actions, encounters, combat,
 
 **Consumes:** state.scholar, state.village, state.codex (central game state roots)
 
+### godhood (`godhood.js`)
+Godhood capstones — Steve 2026-10-11. When a player completes
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
 
