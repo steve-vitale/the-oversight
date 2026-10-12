@@ -16396,14 +16396,14 @@
           _cfCls = ' cftell';
         }
         // BARRIER EDGE (Steve 2026-10-06): during combat, grid edges are exits —
-        // stepping off flees through the node barrier (CHASE, Steve 2026-10-09:
-        // no coin flip — stamina pursuit: chasers follow per chasePersistence,
-        // non-chasers can't follow; Haven's walls end any chase). The edge
-        // must READ as an exit, not a wall. Players were "teleporting"
-        // without understanding why.
+        // FLEE-BY-BARRIER (Steve 2026-10-11): fleeing by stepping off the edge
+        // is obvious — no visual needed. The edge is marked ONLY when fleeing
+        // is actually prevented (sealed fight): a red barrier. Otherwise the
+        // grid stays clean.
         const _inCombat = !!(Game.tbfight && !Game.tbfight.over);
         const _isEdge = (cx === 0 || cx === 8 || cy === 0 || cy === 8);
-        const _barrierCls = (_inCombat && _isEdge) ? ' barrierEdge' : '';
+        const _sealed = _inCombat && !!((Game.state || {}).arenaContest || ((Game.tbfight || {}).noFlee));
+        const _barrierCls = (_sealed && _isEdge) ? ' barrierSealed' : '';
         html += `<div class="${cls}${targetingCells().has(_k) ? ' targetable' : ''}${Game.cellScorched && Game.cellScorched(cx, cy) ? ' scorched' : ''}${_beamCls}${_srcCls}${_haloCls}${_tgCls}${_w2aCls}${_gwCls}${_cfCls}${_barrierCls}"${(_gwStyle || _cfStyle || _w2cStyle || _wbStyle) ? ` style="${[_gwStyle, _cfStyle, _w2cStyle, _wbStyle].filter(Boolean).join(';')}"` : ''} data-cx="${cx}" data-cy="${cy}">${g}</div>`;
       }
       html += '</div>';

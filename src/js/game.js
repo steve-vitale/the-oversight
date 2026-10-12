@@ -28239,6 +28239,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const onEdge = (dx < 0 && p.mx === 0) || (dx > 0 && p.mx === 8) ||
                      (dy < 0 && p.my === 0) || (dy > 0 && p.my === 8);
       if (!onEdge) return false;
+      // SEALED (Steve 2026-10-11): a sealed fight is sealed — the barrier
+      // holds, no edge-flee. The red barrierSealed outline says so visually;
+      // this makes it true mechanically.
+      if (((this.state || {}).arenaContest) || (f.noFlee)) {
+        this.say('🚪 You hurl yourself at the edge — the barrier holds. Sealed: no one leaves until this is decided.');
+        return true; // consumed the push attempt
+      }
       const mons = f.fighters.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled);
       if (!mons.length) {
         // No live monsters — just leave (shouldn't happen mid-fight, but safe).
