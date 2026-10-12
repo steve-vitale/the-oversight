@@ -463,7 +463,21 @@
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
         if (favor) return favor.whyLine;
-        return null; // no favor stated — the NO HOLLOW FALLBACK answers honestly
+        // DEFERRED OPENER (journey establishment 2026-10-12): the resume
+        // opener can preempt the want's opener in startConvo — the want was
+        // selected on a real need but its ask was never stated. Engaging the
+        // want now states the deferred ask (the opener builds the favor once;
+        // fromSeed/inherited paths are handled there) instead of the hollow
+        // "I'm alright right now." If no favor can be stated, the NO HOLLOW
+        // FALLBACK below answers honestly.
+        try {
+          const w = c && c.want;
+          if (w && w.def && typeof w.def.opener === 'function') {
+            const line = w.def.opener.call(this, vid);
+            if (line) return line;
+          }
+        } catch (e) {}
+        return null; // no favor statable — the NO HOLLOW FALLBACK answers honestly
       },
       deflectBeat(vid) {
         return '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
@@ -483,6 +497,18 @@
                       favor.state === 'broken' || favor.state === 'acknowledged' ||
                       favor.state === 'moot' || favor.state === 'declined')) {
           return [];
+        }
+        if ((stage || 0) >= 2 && !favor) {
+          // DEFERRED OPENER (journey establishment 2026-10-12): the want was
+          // engaged but its ask was never stated (resume preempted the
+          // opener and the need evaporated, or the opener couldn't build).
+          // Nothing committable exists — offer engagement, not commitment.
+          // Committing to an unstated ask is the phantom-promise bug.
+          return [
+            { id: 'dlg:help', labels: ['"How can I help?"', '"What do you need?"', '"I\'m listening."'], temper: 'kind' },
+            { id: 'dlg:details', labels: ['"Tell me what\'s going on."', '"What\'s the situation?"'], temper: 'neutral' },
+            { id: 'dlg:cant', labels: ['"I can\'t right now."', '"Not right now, sorry."'], temper: 'neutral' },
+          ];
         }
         if ((stage || 0) >= 2) {
           // Favor stated — commit or back out. Honest, both ways.
@@ -532,7 +558,10 @@
           // The obligation was created at commit time and is tracked. The
           // follow-up references it — a reminder, not a new ask.
           if (favor) return { wantId: 'repay', note: favor.short + ' you promised', favorId: favor.id };
-          return { wantId: 'repay', note: 'what you promised' };
+          // DEFERRED OPENER (journey establishment 2026-10-12): 'promised'
+          // with no favor is the phantom-obligation bug — nothing was asked,
+          // nothing is owed. Plant no contentless repay seed.
+          return null;
         }
         if (resolution === 'stated' || resolution === 'abandoned') {
           // Heard, no commitment — still needs help. THE SAME favor, not a
