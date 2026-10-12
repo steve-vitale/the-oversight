@@ -643,6 +643,16 @@
       if (crisis && crisis.attracted) opts.packBonus = crisis.attracted; // the smoke drew company
       var rec = null;
       try { rec = this.fieldFight(vid, mdef, m, opts); } catch (e) { return null; }
+      // VILLAGER XP LAW (longsim wave lever r4 2026-10-12): a real villager
+      // kill scores the ledger exactly like a wild kill. aidFight was the one
+      // fieldFight call path that never reached recordWaveKill (channel audit
+      // scripts/test-wave-kill-channels-20261012.js) — the ledger,
+      // villageSlain (beasttricks channel), and unlock beats never saw an
+      // aid-crisis kill. (aidFight is currently dormant — no production
+      // callers — so this is gap-closing, pacing-neutral by construction.)
+      if (rec && rec.outcome === 'vKill') {
+        try { this.recordWaveKill(mdef && mdef.id); } catch (e2) {}
+      }
       if (crisis && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
         this.say('The teeth break. The door holds — with ' + (present.length ? present.map(function (q) { return q.leader; }).join(' and ') + ' standing in Haven\'s dirt' : 'nobody\'s help but Haven\'s own') + '.');
         this.resolveAidCrisis('fought');

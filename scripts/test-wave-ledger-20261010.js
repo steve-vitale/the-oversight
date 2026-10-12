@@ -110,7 +110,11 @@ const ok = (name, cond, detail) => {
   const rng = (v) => () => v;
   const mk = (id, hp, dmg) => {
     const base = (Game.data.monsters || []).find(m => m.id === id) || {};
-    return Object.assign({}, base, { id, hp: [hp, hp], wave: base.wave || 2, attack: { damage: [dmg, dmg], name: 'lash' }, speed: 5, behavior: 'territorial', encounter: { noticeRange: 1 }, size: 3 });
+    // MULTI-MOVE (2026-10-12): base defs now carry real attack kits — strip
+    // them so the rig stays rigged: this test asserts LEDGER impact of fixed
+    // outcomes (vKill/vFlee with [6,6] damage), not kit combat. Kits are
+    // combat loop's territory (their own suites cover them).
+    return Object.assign({}, base, { id, hp: [hp, hp], wave: base.wave || 2, attacks: [], attack: { damage: [dmg, dmg], name: 'lash' }, speed: 5, behavior: 'territorial', encounter: { noticeRange: 1 }, size: 3 });
   };
   const setVhp = (n) => { Game.state.village.health = Game.state.village.health || {}; Game.state.village.health[vid] = n; };
   resetLedger(); resetDeeds(); setVhp(100);

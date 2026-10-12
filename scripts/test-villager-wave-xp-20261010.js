@@ -59,6 +59,9 @@ const ok = (name, cond, detail) => {
     const base = (Game.data.monsters || []).find(m => m.id === id) || {};
     return Object.assign({}, base, {
       id, hp: [hp, hp], wave: base.wave || 2,
+      // MULTI-MOVE (2026-10-12): base defs now carry real attack kits — strip
+      // them so the rig stays rigged (same fix as test-wave-ledger-20261010).
+      attacks: [],
       attack: { damage: [dmg, dmg], name: 'lash' }, speed: 5,
       behavior: 'territorial', encounter: { noticeRange: 1 }, size: 3,
     });

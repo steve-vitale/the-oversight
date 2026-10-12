@@ -645,8 +645,14 @@
         return vName + ' killed ' + the + ' alone — ' + rounds + ', ' + rec.vTaken + ' taken. Word travels fast.';
       if (rec.outcome === 'mFlee')
         return vName + ' stood down ' + the + ' and kept walking — ' + rounds + ', bloodied but breathing.';
-      if (rec.outcome === 'vFlee')
+      if (rec.outcome === 'vFlee') {
+        // HONEST (longsim wave lever r4 2026-10-12): a vFlee with no damage
+        // taken is not a mauling — "mauled (-0 health)" was a lie. The
+        // villager got clear unharmed.
+        if ((rec.vTaken | 0) <= 0)
+          return The + ' came for ' + vName + ' and missed — they got clear over ' + rounds + ', unharmed. They\'re lucky to be breathing.';
         return The + ' mauled ' + vName + ' (-' + rec.vTaken + ' health) over ' + rounds + '. They\'re lucky to be breathing.';
+      }
       if (rec.outcome === 'vDie')
         return The + ' killed ' + vName + ' in ' + rounds + '. The village mourns.';
       return vName + ' met ' + the + ' and walked away from it.';
