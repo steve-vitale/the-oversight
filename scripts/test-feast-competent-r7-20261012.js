@@ -70,6 +70,21 @@ function withGateOff(fn) {
   }
 }
 
+// Async variant: the policy reads COMPETENT_FEAST at call time (feastOn()),
+// so the env must stay off for the whole awaited run. The sync wrapper
+// restores it before the async body executes — silently running "pristine"
+// with the gate ON (coordinator fix 2026-10-12: Part B's red-checks were
+// failing 2/35 on the rebased tip because the /tmp "pristine" copy is
+// byte-identical to the fixed file and only the env makes it pristine).
+async function withGateOffAsync(fn) {
+  const prev = process.env.COMPETENT_FEAST;
+  process.env.COMPETENT_FEAST = '0';
+  try { return await fn(); } finally {
+    if (prev === undefined) delete process.env.COMPETENT_FEAST;
+    else process.env.COMPETENT_FEAST = prev;
+  }
+}
+
 function runUnit() {
   console.log('-- PART A: unit tests --');
   const pol = require(H + 'policies/competent');
@@ -264,7 +279,7 @@ async function runIntegration() {
   const DAYS = 80;
   for (const seed of SEEDS) {
     console.log(`-- seed ${seed} --`);
-    const before = await runOne(pristine, seed, 'BEFORE(pristine)', DAYS);
+    const before = await withGateOffAsync(() => runOne(pristine, seed, 'BEFORE(pristine)', DAYS));
     const after = await runOne(fixed, seed, 'AFTER (fixed)   ', DAYS);
     check(`B seed${seed}: pristine grants 0 (chain never starts)`, before.grants === 0 && before.uses === 0);
     check(`B seed${seed}: fixed hosts feasts`, after.feasts >= 1);

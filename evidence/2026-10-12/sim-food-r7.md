@@ -296,3 +296,21 @@ next wall, and it's not a food lever's wall.
 
 No `[needs-eyes]`: policy behavior only — no feel, combat, or UI
 changes. Nothing for Steve to playtest on his phone.
+
+## Coordinator addendum (2026-10-12, landing QA)
+
+**Proof-test Part B pristine-construction bug — fixed at landing.** The
+rebased-tip re-run of `test-feast-competent-r7-20261012.js` came back
+33/35 (real exit 1 — an earlier exit-0 reading was my pipeline masking
+node's code behind `tail`). The two failures were the red-checks
+"B seed11/66: pristine grants 0": the "pristine" policy is a /tmp copy of
+the FIXED competent.js, and the gate (`feastOn()`) is env-read at CALL
+time — so with no `COMPETENT_FEAST=0` during the before-run, the copy ran
+with the gate ON and honestly fired grants. The check was failing for the
+right reason: it was asserting on a policy that wasn't pristine. Fix:
+`withGateOffAsync` keeps the env off across the whole awaited run, used
+for the before-run. Re-run: **35/35, exit 0** — pristine now
+deterministically shows 0 grants/uses (the base policy never hosts
+feasts), fixed fires the chain on both seeds. No game-code change; the
+round's measured results (0/12 → 7/12 on the 12×200d sweep) stand — the
+sweep's before/after used the env gate correctly.
