@@ -484,7 +484,10 @@
       }
       try { game.tbRefreshTelegraphUI(); } catch (err) {}
       if (game.tbEndCheck()) return true;
-      return false;
+      // SPOILER CONSUMES (multi-move integration): the announcement IS the attack —
+      // the spoiler does not strike. Return true so the legacy attack fallback
+      // doesn't fire alongside the prophecy.
+      return true;
     },
 
     // TIMESLOT (Steve 2026-10-10): programming reschedules you to worse

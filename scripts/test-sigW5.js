@@ -82,6 +82,19 @@ function gearUp(Game) {
     s.inventory.push({ itemId: 'hunting_spear', name: 'Hunting spear', units: 1 });
   }
 }
+function musterForTitan(Game, id) {
+  // TITAN GATE (titans.js now loads): nielsen, finale, and eater are titans —
+  // they refuse solo fights. Muster allies the way the game does.
+  try {
+    Game.state.titans = Game.state.titans || {};
+    Game.state.titans.musters = Game.state.titans.musters || {};
+    const need = { nielsen: 3, finale: 4, eater: 2 }[id] || 0;
+    if (need) {
+      const allies = []; for (let i = 0; i < need; i++) allies.push('ally' + i);
+      Game.state.titans.musters[id] = Game.state.titans.musters[id] || { allies, haven: [], day: 0, outfitted: {} };
+    }
+  } catch (e) {}
+}
 function startFight(Game, id, hp) {
   // startCombat builds the fighter from scholar.health but caps maxHp at
   // maxHealth() — the editor's cut clamps to maxHp, so an inflated test
@@ -89,6 +102,7 @@ function startFight(Game, id, hp) {
   // chip damage. Keep maxHp consistent with the test pool.
   hp = hp || 9000;
   Game.state.scholar.health = hp;
+  musterForTitan(Game, id);
   Game.startCombat(id);
   const p = Game.tbFighter('p');
   if (p) { p.maxHp = Math.max(p.maxHp || 0, hp); p.hp = hp; }
