@@ -23,6 +23,13 @@
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
 
 (function () {
+  // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
+  // globalThis.Scattering.Game — a bare `Game` is a ReferenceError at load
+  // (browser and node alike), so NONE of this module's methods ever
+  // attached and the whole titan class was dead. Sanctioned pattern
+  // (betrayal.js, pods.js): read it from Scattering, bail if absent.
+  var Game = (globalThis.Scattering || {}).Game;
+  if (!Game) return;
   var R = Math.random;
   // LOAD-TIME BINDING (fix 2026-10-12): bare `Game` here is a ReferenceError
   // in every environment — game.js's `const Game` is IIFE-scoped, never a

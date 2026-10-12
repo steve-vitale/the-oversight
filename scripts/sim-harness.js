@@ -122,23 +122,36 @@ async function loadGame(opts) {
 
   global.window = global;
   const loadFails = [];
-  order.forEach(f => {
+  // TWO-PASS EVAL (crisis 2026-10-11): game.js first, then expose global.Game
+  // the way the browser's global lexical scope does — later modules' load-time
+  // code resolves bare `Game` against it. Before, the function-scope
+  // `const Game` below TDZ-shadowed every eval, and titans.js failed to load
+  // SILENTLY in every sim (loadFails was collected but never asserted).
+  const gameIdx = order.indexOf('src/js/game.js');
+  const evalFile = (f) => {
     try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
     catch (e) { loadFails.push(f + ': ' + e.message); }
-  });
+  };
+  // game.js in index.html position (after engine/*, which populate
+  // globalThis.Scattering): its IIFE captures `const S = global.Scattering`
+  // at load, so it must not run before them.
+  order.forEach((f, i) => { if (gameIdx < 0 || i < gameIdx) evalFile(f); });
+  if (gameIdx >= 0) evalFile(order[gameIdx]);
+  global.Game = globalThis.Scattering.Game;
+  order.forEach((f, i) => { if (i > gameIdx) evalFile(f); });
   delete global.window;
 
-  const Game = globalThis.Scattering.Game;
+  const G = globalThis.Scattering.Game;
   // Silence narration/audio/drama for sims — telemetry + state carry the signal.
-  Game.say = function () {};
-  Game.sysSay = function () {};
-  Game.audioEvent = function () {};
-  if (Game.drama === undefined) Game.drama = function () {};
+  G.say = function () {};
+  G.sysSay = function () {};
+  G.audioEvent = function () {};
+  if (G.drama === undefined) G.drama = function () {};
 
-  if (SIMOPT) applySimOpt(Game);
+  if (SIMOPT) applySimOpt(G);
 
-  await Game.init();
-  return { Game, manifest: manifest(seed, mode), loadFails };
+  await G.init();
+  return { Game: G, manifest: manifest(seed, mode), loadFails };
 }
 
 // Standard new-game setup shared by sims: generate roster, start, depart.

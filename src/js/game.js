@@ -24825,9 +24825,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // LONGHOUSE HEARTH (haven growth 2026-10-10): a hot communal meal from
       // the longhouse hearth stretches every calorie — villagers eating at
       // haven need 10% less. Away villagers eat cold.
+      // (crisis 2026-10-11: `away` was declared AFTER this line — TDZ
+      // ReferenceError, swallowed by the try/catch, so the hearth stretch
+      // silently never applied. Declared before first use now.)
+      const away = !!(v.away && v.away[vid]);
       let need = (person.kcalPerDay || 2000) * (0.7 + 0.3 * healthFactor);
       try { if (!away && this.hearthStretch) need = Math.round(need * this.hearthStretch()); } catch (e) {}
-      const away = !!(v.away && v.away[vid]);
       // THEY FEED THEMSELVES FIRST: what they catch never sees the pantry
       const ownEat = Math.min(produced, need);
       const dayWant = need - ownEat;
@@ -24881,14 +24884,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.takes[vid] = (v.takes[vid] || 0) + Math.round(pile.taken);
       v.gives[vid] = (v.gives[vid] || 0) + Math.round(gave);
       // starvation is slow, and it has a face: the unfed fade
-      if (ate < need * 0.6) {
+      // FASTING (crisis 2026-10-11): a voluntary gorge-fast is a rhythm
+      // choice, not deprivation — hunger carries to tomorrow. No health
+      // hit and no hungry-night line for a fast they chose.
+      if (ate < need * 0.6 && !fasting) {
         v.health[vid] = Math.max(0, health - 8);
         if (Math.random() < 0.3 && this.playerAtHaven()) {
           const first = String(person.name || 'Someone').split(' ')[0];
           this.say(`${first} went to sleep hungry. Nobody says anything.`);
         }
       }
-      return { ate, gave, drawn: pile.taken };
+      return { ate, gave, drawn: pile.taken, fasting };
     },
 
     // hostFeast(opts) + feastPlan(): the feast as a RITUAL (feast-surge
@@ -25269,6 +25275,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let totalEat = 0, totalGive = 0, totalDrawn = 0;
       const providers = [];
       let anyStarving = false;
+      // RATIONING (crisis 2026-10-11): the village's voted half-rations —
+      // same clock the safetynets rationing wrapper uses
+      // (v.rationing.until >= day). A kept half-ration is the plan working,
+      // not starvation.
+      const _dayNow = (this.state.scholar || {}).day || 0;
+      const rationNow = !!(v.rationing && v.rationing.until >= _dayNow);
       for (const id of (v.roster || [])) {
         // PARITY (2026-10-08): the player is never in the collective pot.
         // Your pantry draw is your trust-scaled villageMeal; your
@@ -25286,7 +25298,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const r = this.villagerMealDay(id, person, v, { cookId });
         totalEat += r.ate; totalGive += r.gave; totalDrawn += r.drawn || 0;
         if (r.gave > 0) providers.push(person);
-        if (r.ate < (person.kcalPerDay || 2000) * 0.6) anyStarving = true;
+        // STARVATION SIGNAL (crisis 2026-10-11): genuine hunger only. A voted
+        // half-ration is the plan, not starvation — measure against the
+        // rationed need. A voluntary gorge-fast is a rhythm choice, not
+        // hunger (see the hunger-winter design note below). Before, both
+        // fed anyStarving — the relief safety net's own rationing vote
+        // fired hunger-winter crises with full pantries.
+        const needBase = (person.kcalPerDay || 2000) * (rationNow ? 0.5 : 1);
+        if (!r.fasting && r.ate < needBase * 0.6) anyStarving = true;
       }
       // HONEST BURN (2026-10-08, refined r3): the player's trust-scaled meal
       // (villageMeal) burns the pantry but the player is not in this loop
