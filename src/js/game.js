@@ -14256,7 +14256,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // now scales with distortion — fresh stories grow, old stories
               // detach — and cycles without immediate repeats.
               const fragSubject = dims.who || this.villagerId;
-              const aboutWho = (fragSubject === this.villagerId) ? 'you' : this.displayName(fragSubject);
+              // LONGSIM trust r4 2026-10-12: when the story is ABOUT the
+              // listener ("Luz telling Lena about Lena"), naming them twice
+              // reads robotic — pronoun-aware rendering (reflexive).
+              let aboutWho;
+              if (fragSubject === this.villagerId) aboutWho = 'you';
+              else if (fragSubject === listener) {
+                const lv = (this.data.villagers || []).find(x => x.id === listener)
+                  || (this.data.background_survivors || []).find(x => x.id === listener) || {};
+                const pro = lv.pro || (['she', 'he', 'they'][this._hashStr(listener) % 3]);
+                aboutWho = pro === 'she' ? 'herself' : pro === 'he' ? 'himself' : 'themself';
+              } else aboutWho = this.displayName(fragSubject);
               const fragTails = g.distortion >= 6
                 ? [`It's barely the same story now. That's what fires do.`,
                    `Three retellings in, nobody remembers what actually happened — but everyone has opinions.`,

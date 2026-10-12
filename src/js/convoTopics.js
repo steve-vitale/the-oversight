@@ -393,7 +393,7 @@
     t2fol_oldworld(vid) {
       const vp = this.vpOf(vid);
       const f1 = [
-        '"What I miss most? ' + ['the food', 'the noise', 'the feeling that tomorrow would look like today'][Math.floor(Math.random() * 3)] + '. The small stuff. It\'s always the small stuff."',
+        '"What I miss most? ' + ['The food', 'The noise', 'The feeling that tomorrow would look like today'][Math.floor(Math.random() * 3)] + '. The small stuff. It\'s always the small stuff."',
         '"I miss {hope}. Funny — I still hope for it, just... translated."',
       ];
       const f2 = [
