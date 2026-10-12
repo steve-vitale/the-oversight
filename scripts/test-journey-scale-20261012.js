@@ -955,6 +955,12 @@ async function runSeed(seed) {
         scholarAlive: !!Game.state.scholar && !Game.over,
       });
     }
+    if (process.env.PANTRYTRACE && !Game.over) {
+      try {
+        const _sch = (Game.state && Game.state.scholar) || {};
+        console.log(`TRACE day ${gd}: pantry=${pantryKcal()} pop=${popAlive()} hungryDays=${((Game.state||{}).village||{}).hungryDays||0} scholarKcal=${Math.round(_sch.kcal||0)} scholarHp=${Math.round(_sch.health||0)}`);
+      } catch (e) {}
+    }
     if (Game.over) { overAt = gday(); console.log(`GAME OVER at day ${overAt}`); break; }
   }
 

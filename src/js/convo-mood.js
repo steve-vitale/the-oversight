@@ -161,6 +161,8 @@
       ],
       'up:neutral': [
         'The tension eases back to something ordinary.',
+        'They settle — not warm, not cold. Just two people talking.',
+        'A neutral quiet returns, the kind where words land normally.',
       ],
       'down:cool': [
         'A small chill settles between you. They\'re choosing words more carefully.',
@@ -172,9 +174,13 @@
       ],
       'down:friendly': [
         'The ease drains out of it, a little.',
+        'Their friendliness thins — still there, just held at arm\'s length.',
+        'The warmth pulls back a notch. They\'re weighing something.',
       ],
       'down:neutral': [
         'Whatever warmth was building cools to politeness.',
+        'Their tone levels out — courteous, careful, further away.',
+        'The conversation cools to something businesslike.',
       ],
     };
     const pool = pools[dir + ':' + to] || ['The mood shifts, subtly.'];
