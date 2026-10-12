@@ -89,7 +89,10 @@ const filled = fill("{name} says {ChargeWord} about {chargeWord}.", {name: "Ari"
 check('variable fill works', filled === "Ari says The thefts about the thefts.", `got: ${filled}`);
 
 // 5. No template contains unfilled {var} that isn't in our known set
-const knownVars = new Set(['name', 'chargeWord', 'ChargeWord']);
+// 'verb' added 2026-10-11 (journey-social): plural charges ('the thefts',
+// 'the threats') take 'get', singular take 'gets' — computed in
+// justiceDemandMoot, never in the JSON.
+const knownVars = new Set(['name', 'chargeWord', 'ChargeWord', 'verb']);
 let badVars = [];
 function scanTemplates(obj, path) {
   if (Array.isArray(obj)) {

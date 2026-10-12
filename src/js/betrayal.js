@@ -1737,6 +1737,10 @@
     // CRISIS (Steve 2026-10-09): the schism — the moot cast YOU out.
     try { if (how === 'moot' && this.fireCrisis) this.fireCrisis('schism', { name: 'You' }); } catch (e) {}
     this.say(`Exiled. You leave with what you carry — nothing more. Behind you, Haven keeps its fire. Ahead: the world, which just got much bigger.`);
+    // DEFIED-EXILE GRACE (journey-social 2026-10-11): the deadline is spoken
+    // aloud — defiance has to be a choice, not a surprise. justiceTick gives
+    // until dawn: still on Haven's ground after the sentence day = uprising.
+    this.say(`Be off Haven\u2019s ground by dawn. Still here when the sun\u2019s up, and they won\u2019t ask twice \u2014 they\u2019ll come.`);
     // AUDIO (Steve 2026-10-06): footsteps receding, the village hum thinning.
     try { this.audioEvent('exileWalk'); } catch (e) {}
     try { this.journalNote && this.journalNote('village', 'exile', 'Exiled (' + how + '). Walking.'); } catch (e) {}

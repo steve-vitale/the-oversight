@@ -171,7 +171,14 @@
       const vNode = this.state.village || {};
       const hx = vNode.px ?? 4, hy = vNode.py ?? 4;
       const atHaven = this.map && this.map.px === hx && this.map.py === hy;
-      if (j.stage === 3 && j.exiled && atHaven) {
+      // DEFIED-EXILE GRACE (journey-social 2026-10-11): the sentence says
+      // "take what you can carry and go" — the exile gets until dawn to walk.
+      // The moot is AT Haven, so same-day ticks must not read as defiance;
+      // the uprising fires only once the sentence day has passed with the
+      // exile still on Haven's ground. The deadline is spoken at sentencing
+      // (exilePlayer) — defiance has to be a choice, not a surprise.
+      const today = this.state.scholar.day;
+      if (j.stage === 3 && j.exiled && atHaven && today > (j.exileDay || 0)) {
         j.stage = 4;
         this.startVillageUprising('defied exile');
         return;
@@ -420,7 +427,12 @@
       // unjudged crimes reach the voice layer. Template selection by
       // reason/relationship/temperament/seriousType.
       const voiceCtx = { close, wary, bold, seriousType: serious ? serious.type : null, noSerious: !serious };
-      const voiceVars = { name, chargeWord, ChargeWord: cap(chargeWord) };
+      // VERB AGREEMENT (journey-social 2026-10-11): chargeWords are plural
+      // for theft ('the thefts') and intimidation ('the threats') — the
+      // summons templates say "{ChargeWord} {verb} a moot". Computed here,
+      // never in the JSON: "The thefts gets a moot" was ungrammatical.
+      const pluralCharge = !!serious && (serious.type === 'theft' || serious.type === 'intimidation');
+      const voiceVars = { name, chargeWord, ChargeWord: cap(chargeWord), verb: pluralCharge ? 'get' : 'gets' };
       let line = this.justiceVoicePick('summons', reason, voiceCtx, voiceVars);
       // last resort: never render "undefined" — a broken summons line is
       // worse than a plain one. Falls back to the JSON fallback, then hardcoded.
