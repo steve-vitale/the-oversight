@@ -444,7 +444,10 @@
     // rain." — the speaker answers themselves in the same line. Only when
     // the framing is rhetorical AND the line keeps talking after the "?".
     const rest = t.slice(m[0].length).replace(/[\s"'“”‘’.,;:—–-]+/g, '');
-    if (/^(you know what|guess what|know what|wanna know|want to know)\b/i.test(q) && rest.length > 6) return null;
+    // "Did you hear?" is gossip framing, never a genuine question — extracting
+    // it produced the broken follow-up '"Sorry — I asked you something
+    // there." Did you hear?' (journey-scale r3 2026-10-11).
+    if (/^(you know what|guess what|know what|wanna know|want to know|did you hear)\b/i.test(q) && rest.length > 6) return null;
     if (/isn'?t that (weird|strange|something)|rhetorical/i.test(q)) return null;
     // Rhetorical markers can trail the question ("...? Don't answer that.")
     if (/don'?t answer|never mind/i.test(t)) return null;
@@ -4393,7 +4396,12 @@
           if (fm && fm.pid && teachable.indexOf(fm.pid) !== -1) {
             // They named it, you teach it — the show connects to the talk.
             pid = fm.pid;
-            respLine = `You crouch down — the ${fm.name} you were just talking about. You show them where it grows, how to tell it apart, what it's good for. Their eyes widen. "I never knew that."`;
+            respLine = `You crouch down — the ${fm.name} you were just talking about. You show them where it grows, how to tell it apart, what it's good for. ` + (this.convoPickCycle(vid, 'teachreact', [
+              'Their eyes widen. "I never knew that."',
+              '"Huh." They turn it over in their mind. "I\'ll remember that one."',
+              'They nod slowly, committing it to memory. "Good to know. Really good to know."',
+              'A short laugh. "And I\'ve been walking past it for weeks."',
+            ]) || 'Their eyes widen. "I never knew that."');
           } else if (!fm || fm.pid) {
             // Nothing green came up — or they named a plant you can't teach
             // them — so the teach pivots: bridge it or it's a non sequitur.
@@ -4436,7 +4444,12 @@
           this.resolveConsequence(vid, { trust: 2, talk: false, temper: 'kind', name: 'teach' });
           try { this.socialTick(vid); } catch (e) {}
           try { this.convoDeepTick(vid); } catch (e) {}
-          done(respLine || `You show them ${pname} — where it grows, how to tell it apart. Their eyes widen. "I never knew that."`, youLine);
+          done(respLine || (`You show them ${pname} — where it grows, how to tell it apart. ` + (this.convoPickCycle(vid, 'teachreact', [
+            'Their eyes widen. "I never knew that."',
+            '"Huh." They turn it over in their mind. "I\'ll remember that one."',
+            'They nod slowly, committing it to memory. "Good to know. Really good to know."',
+            'A short laugh. "And I\'ve been walking past it for weeks."',
+          ]) || 'Their eyes widen. "I never knew that."')), youLine);
         }
       } else if (choiceId === 'speak_back') {
         // SPEAK IT BACK: the human path. One beat, trust is the currency.

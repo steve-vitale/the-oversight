@@ -29245,6 +29245,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!f || f.over) return;
       let guard = 0;
       while (guard++ < 60) {
+        // FIGHT-ENDED-MID-LOOP (journey-scale r3 2026-10-11): tbEnd nulls
+        // this.tbfight, but this loop holds the stale `f` — and the loop's
+        // exit check (tbEndCheck) reads this.tbfight (null → false), so a
+        // fight that ends mid-loop spins phantom rounds on the corpse: a
+        // player-death deer fight read 34 rounds instead of 5, the turn
+        // order walked on null fighters, and harness telemetry lied about
+        // fight length. Re-check liveness every iteration, not just entry.
+        if (!this.tbfight || this.tbfight !== f || f.over) return;
         f.turnIdx++;
         if (f.turnIdx >= f.order.length) {
           f.turnIdx = 0; f.round++;
