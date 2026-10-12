@@ -40,6 +40,15 @@ papered over.
    several in one village; ascensions stack bargaining power.
    Facilitation is a chosen play with an architect's payoff. Passive
    players get honestly outshone in the epilogue.
+9. **Sanctity of the table (Steve 2026-10-12).** When the table sits,
+   the world holds its breath: ambient monster pressure against
+   villagers is suspended for the whole sequence — no random field
+   fights, no wild encounters, no patrol contact. The System clears the
+   stage aloud ("EVERYONE. SIT. WATCH."). This is the contest-
+   interruption principle at its endpoint: when you're taken, you're
+   taken. ALL stakes during the finale are the table's own — pricing,
+   branches, trial by combat (the one opt-in existential risk). Deaths
+   during the finale must be meaningful, never background wolves.
 
 ## The seat: full / lesser / none
 

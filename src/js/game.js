@@ -6186,7 +6186,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // WORLD MONSTERS (Steve 2026-10-06): patrols hunt the nearest roaming
       // threat to Haven, not a single player-tethered monster.
       const hx = (this.state.village || {}).px ?? 4, hy = (this.state.village || {}).py ?? 4;
-      const m = this.nearestWorldMonster(hx, hy);
+      let m = this.nearestWorldMonster(hx, hy);
+      // TABLE SANCTITY (2026-10-12, Steve): while the table sits, nothing
+      // comes — the patrol walks an empty perimeter and the village sleeps
+      // easier. Falls into the uneventful-patrol branch below, honestly.
+      if (m && this.tableActive && this.tableActive()) m = null;
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
       if (!m || !m.id) {
@@ -16678,6 +16682,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     villagerMonsterTick() {
       const v = this.state.village;
       if (!v || !v.roster) return;
+      // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
+      // holds its breath — no wild encounters target villagers mid-finale.
+      // Every stake during the sequence is the table's own.
+      if (this.tableActive && this.tableActive()) return;
       for (const m of [...this.worldMonsters()]) {
         if (m.tx === this.map.px && m.ty === this.map.py) continue; // your fight is yours
         let npcIds = [];
