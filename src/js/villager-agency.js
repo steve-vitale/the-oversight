@@ -749,38 +749,49 @@
       if (choiceId === 'agency:ask_expedition' || choiceId === 'agency:ask_field') {
         var v = this.state.village;
         var k = st.know[vid] || { plants: 0, monsters: 0, places: [] };
-        var cands = [];
-        if ((k.places || []).length) cands.push(`"${k.places[k.places.length - 1]} — I'll show you on the map sometime. It's real."`);
+        // ONE ASK, ONE LESSON (journey-succession 2026-10-12): the old path
+        // fired agencyTeachMonster AND agencyTeachPlant in the same ask —
+        // each permanently spent a teachable entry — then shuffled and spoke
+        // only one line. Two lessons burned, one delivered. Now exactly one
+        // lesson per ask (monster > plant > place); each resource is spent
+        // once, including places, which used to be an infinite faucet (the
+        // same ridge "shown on the map" forever).
+        var taughtMid = null, taughtPlant = null, taughtPlace = null;
         // real teaching: monster lore from someone who fought it. One
         // species per ask; the lesson lands as 'observed' — you've learned
         // it the way the village learns things: through talk. The line names
         // the species: each lesson is specific, never a generic repeat.
-        var taughtMid = null;
         try { taughtMid = this.agencyTeachMonster(vid); } catch (e) {}
-        if (taughtMid) {
-          var mwhat = 'that thing';
-          try { mwhat = this.monsterDisplayName(taughtMid); } catch (e2) {}
-          cands.push(`"The ${mwhat} — the tracks, the sound it makes before it moves, where not to stand. That's the one that matters. Ask me again sometime, there's more."`);
-        }
-        else if ((k.monsters || 0) >= 2) cands.push(`"Saw things with too many joints. Give them room. That's the whole lesson."`);
         // real teaching: one plant identification per earned lesson entry.
         // The entry is SPENT — talk doesn't print knowledge (gap-breadth
         // 2026-10-10; the old path re-taught forever on k.plants>=3).
         // The line names the plant taught: specific beats repeat.
-        var taughtPlant = null;
-        if ((st.teachable[vid] || []).length) {
+        if (!taughtMid && (st.teachable[vid] || []).length) {
           try {
             if (this.agencyTeachPlant(vid)) taughtPlant = st.lastTaughtPlantName || 'a plant';
           } catch (e) {}
-          if (taughtPlant) cands.push(`"This one — ${taughtPlant}. Leaf, stem, smell. You won't forget it now."`);
         }
-        if (!cands.length) cands.push('"Weather. Mostly weather. Ask me again when I\'ve been farther."');
+        if (!taughtMid && !taughtPlant && (k.places || []).length) {
+          taughtPlace = k.places.pop();
+        }
+        var lineText = null;
+        if (taughtMid) {
+          var mwhat = 'that thing';
+          try { mwhat = this.monsterDisplayName(taughtMid); } catch (e2) {}
+          lineText = `"The ${mwhat} — the tracks, the sound it makes before it moves, where not to stand. That's the one that matters. Ask me again sometime, there's more."`;
+        } else if (taughtPlant) {
+          lineText = `"This one — ${taughtPlant}. Leaf, stem, smell. You won't forget it now."`;
+        } else if (taughtPlace) {
+          lineText = `"${taughtPlace} — I'll show you on the map sometime. It's real."`;
+        } else if ((k.monsters || 0) >= 2) {
+          lineText = `"Saw things with too many joints. Give them room. That's the whole lesson."`;
+        }
         if (v.explorerNews) delete v.explorerNews[vid];
         // HONESTY (longsim agency 2026-10-11): the 'taught' deed and the
         // teaching trust bump fire only when something was actually taught.
         // Baseline: 133 of 160 asks recorded the deed with no lesson behind
         // it — the village's book must not lie about its people.
-        var actuallyTaught = !!(taughtMid || taughtPlant);
+        var actuallyTaught = !!(taughtMid || taughtPlant || taughtPlace);
         if (actuallyTaught) {
           try { this.bumpTrust(vid, 2); } catch (e) {}
           try { this.recordDeed(vid, 'taught', `${nm} taught you something from the wild.`, 1); } catch (e) {}
@@ -790,32 +801,30 @@
         // dialogue transcript/history. Speak through sayLine — the single
         // emission choke point — which pushes the transcript entry and
         // enforces the no-repeat invariant (per-convo + run-wide ledgers).
-        // Each candidate is tried in turn; a blocked repeat falls through.
+        // The player line is pushed ONLY when the NPC has something to say —
+        // the old path pushed it first, so an exhausted ask left a naked
+        // player echo in the transcript (sense-caught 2026-10-12: "Teach me
+        // something from the wild." with no reply, repeated).
         var c = null;
         try { c = this.convoGet(vid); } catch (e) {}
         var youLabel = choiceId === 'agency:ask_expedition'
           ? '"What did you see out there?"' : '"Teach me something from the wild."';
-        if (c) c.transcript.push({ who: 'you', text: youLabel });
-        var order = cands.slice();
-        for (var oi = order.length - 1; oi > 0; oi--) {
-          var oj = Math.floor(R() * (oi + 1));
-          var ot = order[oi]; order[oi] = order[oj]; order[oj] = ot;
-        }
+        // The player line lands BEFORE the NPC answers (reading order), but
+        // is pulled back on the noop path — an exhausted ask leaves no
+        // naked player echo in the transcript.
+        var youEntry = { who: 'you', text: youLabel };
+        if (c) c.transcript.push(youEntry);
         var spokenText = null;
-        for (var si = 0; si < order.length; si++) {
-          var emitted = null;
-          try { emitted = this.sayLine(vid, order[si]); } catch (e) { emitted = null; }
-          if (emitted) { spokenText = order[si]; break; }
+        if (lineText) {
+          try { if (this.sayLine(vid, lineText)) spokenText = lineText; } catch (e) { spokenText = null; }
         }
+        var closedOut = false;
         if (!spokenText) {
-          // every candidate was a blocked repeat (or sayLine unavailable):
-          // honest closers, tried in order THROUGH the no-repeat ledger, so
-          // the view and the transcript can never disagree (sense-caught
-          // 2026-10-11: the old fallback returned a ledger-blocked line, so
-          // the view showed it while the transcript denied it). When even
-          // the closers are exhausted the exchange ends (noop) — the canon
-          // exhausted-thread behavior ("I've told you everything I know
-          // about that") instead of looping.
+          // nothing new (or the line was a blocked repeat): honest closers,
+          // tried in order THROUGH the no-repeat ledger, so the view and the
+          // transcript can never disagree (sense-caught 2026-10-11: the old
+          // fallback returned a ledger-blocked line, so the view showed it
+          // while the transcript denied it).
           var closers = [
             '"There\'s more, but that\'s for another fire."',
             '"That\'s everything I brought back. The rest is just walking."',
@@ -824,12 +833,27 @@
           for (var ci = 0; ci < closers.length; ci++) {
             var em2 = null;
             try { em2 = this.sayLine(vid, closers[ci]); } catch (e) { em2 = null; }
-            if (em2) { spokenText = closers[ci]; break; }
+            if (em2) { spokenText = closers[ci]; closedOut = true; break; }
           }
+        }
+        if (!spokenText) {
+          // even the closers are exhausted: honest noop — the player echo is
+          // pulled back out (object identity, robust against the 200-cap
+          // shift), no transcript void. The choice should never have been
+          // offered (agencyChoices gates on npcFieldLessons), but a silent
+          // player echo is worse than a silent no-op.
+          if (c) { var xi = c.transcript.indexOf(youEntry); if (xi !== -1) c.transcript.splice(xi, 1); }
+          var noChoices = [];
+          try { noChoices = this.convoChoices(vid); } catch (e) {}
+          return { ended: true, line: null, choices: [], noop: true, transcript: c ? c.transcript.slice() : [] };
+        }
+        // SPENT (journey-succession 2026-10-12): a closer means the pool is
+        // dry for this sitting — "I've told you everything" must not loop.
+        if (closedOut) {
+          try { this.convoSpendChoice(vid, choiceId); } catch (e) {}
         }
         var choices = [];
         try { choices = this.convoChoices(vid); } catch (e) {}
-        if (!spokenText) return { ended: true, line: null, choices: [], noop: true, transcript: c ? c.transcript.slice() : [] };
         return { line: spokenText, choices: choices, ended: false, transcript: c ? c.transcript.slice() : [] };
       }
       return null;

@@ -893,7 +893,24 @@
       if (typeof c.winddownQueued === 'undefined') c.winddownQueued = false;
       if (!c.followUsed) c.followUsed = {};
       if (!c.threadLog) c.threadLog = [];
+      // SPENT (journey-succession 2026-10-12): per-conversation ledger of
+      // single-use choice ids (resumed threads, named memories, asked
+      // events, invitations). finalizeMenu filters them; startConvo resets.
+      if (!c.spent) c.spent = {};
       return c;
+    },
+
+    // convoSpendChoice(vid, choiceId): this choice was used in this sitting —
+    // don't offer it again. People don't repeat themselves within one
+    // conversation. (The ledger across conversations is untouched: a thread
+    // resumed today can honestly resurface tomorrow.)
+    convoSpendChoice(vid, choiceId) {
+      if (!choiceId) return;
+      try {
+        const c = this.convoGet(vid);
+        if (!c.spent) c.spent = {};
+        c.spent[choiceId] = true;
+      } catch (e) {}
     },
 
     // ============ CONVERSATION DEPTH (Steve 2026-10-07) ============
@@ -2987,6 +3004,19 @@
           out.push({ id: 'silence', label: '"..."', temper: 'neutral' });
         }
       } catch (e) {}
+      // 5. SPENT CHOICES (journey-succession 2026-10-12): single-use
+      // conversation verbs — resumed threads, named memories, asked events,
+      // issued invitations — were re-offered forever in one sitting ("About
+      // that question — we never finished." x4, "Want to come with me?"
+      // pestering into a flip-flop). You don't repeat yourself within one
+      // sitting. Handlers mark ids spent via convoSpendChoice; the ledger
+      // stays honest across conversations (threads can resurface tomorrow).
+      try {
+        const spent = (c && c.spent) || {};
+        if (Object.keys(spent).length) {
+          out = out.filter(ch => !ch || !ch.id || !spent[ch.id]);
+        }
+      } catch (e) {}
       return out;
     },
 
@@ -3548,6 +3578,9 @@
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.followUsed = {};
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
+      // SPENT (journey-succession 2026-10-12): reset the per-conversation
+      // spent-choice ledger — a new sitting, fresh offers.
+      c.spent = {};
       // COHERENCE (Steve 2026-10-07): per-conversation teaching state resets
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.
@@ -4132,6 +4165,10 @@
           c.thread = akey; c.depth = 1;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:thread' });
           const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+          // SPENT (journey-succession 2026-10-12): resumed once — the
+          // thread is live now; the subject-change replant must not re-offer
+          // the identical "we never finished" line this sitting.
+          this.convoSpendChoice(vid, choiceId);
           // INHERITED THREAD (journey-succession 2026-10-11): name whose
           // thread it was — the new Bearer <redacted> resume it as their own.
           const predT = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
@@ -4177,6 +4214,10 @@
           } catch (e) {}
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:memory' });
           const about = (typeof this.convoMemoryAbout === 'function' && this.convoMemoryAbout(akey)) || 'that';
+          // SPENT (journey-succession 2026-10-12): the memory was named —
+          // re-offering "About what I asked before..." in the same sitting
+          // reads as amnesia.
+          this.convoSpendChoice(vid, choiceId);
           done(memResp, `"About ${about}..."`);
         } else if (akind === 'want') {
           // The want surfaces as a question (Principle 9): engage it.
@@ -4193,6 +4234,9 @@
           // World events cut the queue — route to the lately topic.
           this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'alive:event' });
           const evline = (typeof this.topic2Ask === 'function') ? this.topic2Ask(vid, 'lately') : null;
+          // SPENT (journey-succession 2026-10-12): "what's going on out
+          // there" asked once — the answer was given.
+          this.convoSpendChoice(vid, choiceId);
           done(evline || '"Yeah. Everyone\u2019s talking about it."', '"What\u2019s going on out there?"');
         } else {
           done('"..."', null);
@@ -4479,6 +4523,10 @@
         done(r.line, r.youSaid);
       } else if (choiceId === 'invite_party') {
         const r = (this.inviteToParty && this.inviteToParty(vid)) || { ok: false, msg: '...' };
+        // SPENT (journey-succession 2026-10-12): the invitation was issued
+        // and answered — accept or decline. Pestering it until they flip-flop
+        // ("I work alone... Fine.") reads as no memory of their own stance.
+        this.convoSpendChoice(vid, 'invite_party');
         done(r.msg || '...', '"Want to come with me?"');
       } else if (choiceId.indexOf('rumor:tgt:') === 0) {
         // RUMOR STEP 1: who are we talking about. The listener is in on
