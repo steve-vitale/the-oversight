@@ -728,6 +728,13 @@
           return '"' + said.slice(0, ptm.index) + bit.trim() + '"';
         }
       }
+      // SPACE-LED CLOSER JOIN (journey establishment r7 2026-10-12): most
+      // closers carry their own leading space (' Not that it matters.',
+      // ' Funny how that works.') and sep adds another — "Will you?  Funny
+      // how that works." (seed 424242 d30). A space-led closer needs no join
+      // space. (Comma-closers already fold with sep=''; punctuation closers
+      // return early above.)
+      if (!useOpen && /^\s/.test(bit)) sep = '';
       return useOpen ? '"' + bit + said + '"' : '"' + said + sep + bit + '"';
     },
 
@@ -4475,8 +4482,21 @@
           c.thread = 'want'; c.depth = 1;
           let wline = null;
           try {
-            const opener = this.convoWantOpener ? this.convoWantOpener(vid, c.want) : null;
-            wline = opener && opener.line;
+            // SETTLED FAVOR (journey establishment r7 2026-10-12): re-asking
+            // "Is there something you need? Really." after a settled favor
+            // must not dead-end into the "Okay. Here's the thing —" opener
+            // fallback (caught live, seed 999) — the favor is closed, so the
+            // NPC says so honestly.
+            const wf = (c.want && c.want.favor) ||
+              (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
+            if (c.want && c.want.id === 'ask_favor' && wf &&
+                (wf.state === 'moot' || wf.state === 'thanked' ||
+                 wf.state === 'acknowledged' || wf.state === 'fulfilled')) {
+              wline = '"No, really — it\'s handled. Thanks for asking, though."';
+            } else {
+              const opener = this.convoWantOpener ? this.convoWantOpener(vid, c.want) : null;
+              wline = opener && opener.line;
+            }
             if (c.want) c.want.stage = Math.max(c.want.stage || 0, 1);
           } catch (e) {}
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:want' });

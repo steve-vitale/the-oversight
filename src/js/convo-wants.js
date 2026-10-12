@@ -93,7 +93,7 @@
           `I'm slowing down — stupid, clumsy. Help me get back on my feet.`,
           `I need food before I can't work at all.`,
         ];
-        const whyLine = whyBits[(hh >>> 1) % 3] + ' ' + whyTails[(hh >>> 5) % 3];
+        const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
         return {
           task: `share food with ${ctx.name} \u2014 they're ${hungerWord}`,
           // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):
@@ -544,6 +544,22 @@
         // (The old pool re-stated the ask — the verbatim-repeat vector.)
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // SETTLED FAVOR (journey establishment r7 2026-10-12): the opener can
+        // declare the favor settled mid-conversation — "Never mind the wound,
+        // we got it handled" fires when the need died between the seed and
+        // the sitting (caught live, seed 777 d30). The favor's whyLine is the
+        // DEAD ask's stakes — speaking it after the settlement is a lie
+        // ("It's getting worse, not better" moments after "we got it
+        // handled"). A settled favor engaged gets an honest it's-handled
+        // acknowledgment, never the dead ask's why.
+        if (favor && (favor.state === 'moot' || favor.state === 'thanked' ||
+                      favor.state === 'acknowledged' || favor.state === 'fulfilled')) {
+          return this.convoPickCycle(vid, 'favor:handled:' + (favor.kind || 'favor'), [
+            '"It\'s handled. Really — it is. I appreciate you asking, though."',
+            '"No, really, it\'s fine. Forget I even asked."',
+            '"All sorted. Some things just work out."',
+          ]) || '"It\'s handled. Really — it is."';
+        }
         // OUTBREAK VOICES (crisis leg 2026-10-12): favor defs may carry a
         // whyLines pool. Per-speaker cycling (convoPickCycle is run-ledger
         // aware) so the second villager stating the same need in an outbreak
@@ -577,6 +593,14 @@
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid));
         const kind = (favor && favor.kind) || 'favor';
+        // SETTLED FAVOR (journey establishment r7 2026-10-12): declining a
+        // handled favor isn't a refusal — the guilt-framed beats ("They won't
+        // forget") lie about an ask that never existed in this sitting. A
+        // light acknowledgment instead.
+        if (favor && (favor.state === 'moot' || favor.state === 'thanked' ||
+                      favor.state === 'acknowledged' || favor.state === 'fulfilled')) {
+          return '"Oh — no, it\'s fine. Already handled. But thanks."';
+        }
         return this.convoPickCycle(vid, 'deflect:favor:' + kind, [
           '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.',
           '"Right. I get it." A beat — and then the subject is closed. They won\'t raise it again.',
@@ -636,6 +660,15 @@
         // 'stated' — the ask hangs, honestly. Not a fizzle: they name that
         // it's open.
         if (resolution === 'stated') return '"...Think about it? I\'ll be around."';
+        // SETTLED FAVOR (journey establishment r7 2026-10-12): a 'deflected'
+        // close after a handled favor must not speak the refusal beats
+        // ("Forget I asked. I'll figure it out") — nothing was asked, nothing
+        // needs figuring out. The close stays with the settlement.
+        if (resolution === 'deflected' && favor &&
+            (favor.state === 'moot' || favor.state === 'thanked' ||
+             favor.state === 'acknowledged' || favor.state === 'fulfilled')) {
+          return '"...It\'s fine, really. Already handled."';
+        }
         if (resolution === 'deflected') return this.convoPickCycle(vid, 'want:favor:close:deflected', [
           '"Forget I asked. I\'ll figure it out."',
           '"No — you\'re right, it\'s a lot. Forget it."',
