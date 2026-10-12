@@ -57,6 +57,23 @@
   if (!G) return;
   var R = Math.random;
   var pick = function (a) { return a[Math.floor(R() * a.length)]; };
+  // pickW: weighted pick (longsim agency r4 2026-10-11). wf maps each item
+  // to a non-negative weight; weight 0 items are excluded, all-zero falls
+  // back to uniform pick so the draw never fails.
+  var pickW = function (a, wf) {
+    var tot = 0, ws = [];
+    for (var i = 0; i < a.length; i++) {
+      var w = Math.max(0, wf(a[i]) || 0);
+      ws.push(w); tot += w;
+    }
+    if (tot <= 0) return pick(a);
+    var r = R() * tot;
+    for (var j = 0; j < a.length; j++) {
+      r -= ws[j];
+      if (r <= 0) return a[j];
+    }
+    return a[a.length - 1];
+  };
 
   // Occupations whose hands know the wild. Ranging aptitude, not a class.
   var RANGY_OCC = {
@@ -852,6 +869,19 @@
     // plant through plantDisplayName — knowledge-gated, so the player
     // reads a name or an honest descriptor, never a leak. Monster lore
     // stays the player channel: villagers keep no monster codex.
+    //
+    // NEED-DRIVEN, TEACHER-QUALITY TEACHING (longsim agency r4 2026-10-11):
+    // lessons used to pick a random plant for a random learner. Now the
+    // teacher reads the learner's state first, and the lesson quality
+    // depends on the teacher's own knowledge. Exact dial:
+    //   - learner WOUNDED (homeWounds[vid] > today): medicinal plants x4 weight
+    //   - else learner HUNGRY (npcNeeds.hunger >= 60) or NOVICE forager
+    //     (tracking xp < 8): food plants x3 weight
+    //   - teacher breadth <5 known: 60% lesson success; 5-11: 85%; 12+:
+    //     95% and the lesson grants +2 tracking xp instead of +1
+    // A failed lesson returns {taught:false} — the chore's honest "going
+    // over their finds" line covers it, never a lesson claim. The deed
+    // text varies by the need read, so the village's book records WHY.
     agencyTeachVillager(teacherVid, learnerVid) {
       var st = this.agencyState();
       var v = this.state.village || {};
@@ -864,17 +894,55 @@
       try { lKnown = this.plantsKnownBy ? this.plantsKnownBy(learnerVid) : []; } catch (e) {}
       var cands = tKnown.filter(function (pid) { return lKnown.indexOf(pid) === -1; });
       if (!cands.length) return { taught: false }; // theater check: nothing to show
-      var pid = pick(cands);
+      // READ THE LEARNER: is someone struggling in front of the teacher?
+      var today = 0;
+      try { today = this.state.scholar.day || 0; } catch (e) {}
+      var wounded = false, hungry = false, novice = false;
+      try { wounded = ((this.state.homeWounds || {})[learnerVid] || 0) > today; } catch (e) {}
+      try { hungry = (this.npcNeeds(learnerVid).hunger || 0) >= 60; } catch (e) {}
+      try {
+        var lag = this.agencyOf ? this.agencyOf(learnerVid) : null;
+        var lxp = lag && lag.xp ? lag.xp[learnerVid] : null;
+        novice = !lxp || (lxp.tracking || 0) < 8;
+      } catch (e) {}
+      var need = wounded ? 'wound' : (hungry ? 'hunger' : (novice ? 'novice' : null));
+      var plants = [];
+      try { plants = this.data.plants || []; } catch (e) {}
+      var isMedicinal = function (pid) {
+        var p = null;
+        for (var i = 0; i < plants.length; i++) if (plants[i].id === pid) { p = plants[i]; break; }
+        return !!(p && p.medicinal);
+      };
+      var isFood = function (pid) {
+        var p = null;
+        for (var i = 0; i < plants.length; i++) if (plants[i].id === pid) { p = plants[i]; break; }
+        if (!p) return false;
+        if ((p.edibility === 'safe' || p.edibility === 'caution') && (p.caloriesPerUnit || 0) > 0) return true;
+        try { for (var u = 0; u < (p.uses || []).length; u++) if (p.uses[u].kind === 'food') return true; } catch (e) {}
+        return false;
+      };
+      var pid;
+      if (need === 'wound') {
+        pid = pickW(cands, function (id) { return isMedicinal(id) ? 4 : 1; });
+      } else if (need === 'hunger' || need === 'novice') {
+        pid = pickW(cands, function (id) { return isFood(id) ? 3 : 1; });
+      } else {
+        pid = pick(cands);
+      }
+      // TEACHER QUALITY: does the teacher actually know the wild?
+      var breadth = tKnown.length;
+      var success = breadth >= 12 ? 0.95 : (breadth >= 5 ? 0.85 : 0.60);
+      if (R() >= success) return { taught: false, failed: true }; // didn't land; chore line stays honest
       var landed = false;
       try { landed = this.villagerLearnsPlant ? this.villagerLearnsPlant(learnerVid, pid, 'taught') : false; } catch (e) {}
       if (!landed) return { taught: false };
       var day = 0;
       try { day = this.state.scholar.day; } catch (e) {}
       st.lessons[learnerVid] = st.lessons[learnerVid] || [];
-      st.lessons[learnerVid].push({ from: teacherVid, topic: 'plants', pid: pid, day: day });
+      st.lessons[learnerVid].push({ from: teacherVid, topic: 'plants', pid: pid, day: day, need: need });
       try {
         var la = this.agencyOf(learnerVid);
-        la.xp[learnerVid].tracking += 1;
+        la.xp[learnerVid].tracking += (breadth >= 12 ? 2 : 1);
         this.agencyTierCheck(learnerVid, false);
       } catch (e) {}
       var pname = pid, pnameArt = pid;
@@ -887,8 +955,12 @@
       var tnm = 'Someone', lnm = 'someone';
       try { tnm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
       try { lnm = this.firstRef ? this.firstRef(learnerVid) : this.displayName(learnerVid); } catch (e) {}
-      try { this.recordDeed(teacherVid, 'taught', `${tnm} taught ${lnm} ${pnameArt}.`, 1); } catch (e) {}
-      return { taught: true, learner: learnerVid, plant: pid, plantName: pname };
+      var deedText = `${tnm} taught ${lnm} ${pnameArt}.`;
+      if (need === 'wound') deedText = `${tnm} taught ${lnm} ${pnameArt} — for the wound, which leaves to press on it.`;
+      else if (need === 'hunger') deedText = `${tnm} taught ${lnm} ${pnameArt} — where it grows, what's safe to eat.`;
+      else if (need === 'novice') deedText = `${tnm} showed ${lnm} ${pnameArt} — leaf, stem, smell, the beginner's tour.`;
+      try { this.recordDeed(teacherVid, 'taught', deedText, 1); } catch (e) {}
+      return { taught: true, learner: learnerVid, plant: pid, plantName: pname, need: need };
     },
     // agencyTeachMonster: one fought species, taught honestly. Lands as
     // 'observed' (never downgrades 'slain') — the village-name gate opens
