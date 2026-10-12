@@ -683,6 +683,312 @@ function gearUp(Game, ctx) {
   } catch (e) {}
 }
 
+// BEAST TRICKS (longsim combat r5 2026-10-12): the competent policy PLAYS
+// monster counters tactically — the Undertale half of the fight. Blank from
+// sim-combat-r2: "counters discovered 91–103; policy still doesn't play
+// them tactically."
+//
+// KNOWLEDGE-GATED (Steve: "If you don't know, it doesn't show"): a trick is
+// attempted only for a monster type the village has actually learned — fully
+// discovered (state.monsterCounters, via trick or beasttricks teaching), or
+// hint-revealed in the Monster Codex (slaying a type surfaces counter.hint;
+// the player read the carcass entry). Blind types get no tricks.
+//
+// One attempt per monster per fight; setup-dependent tricks (windup,
+// sidestep, recovery) wait for their setup while the policy fights normally
+// in between. After the trick fires or proves unavailable, normal fighting
+// resumes. Each kind maps to the tb* action checkMonsterCounter observes
+// (game.js) — shout / offer_food / wait / move / strike / round_end — so the
+// action actually fires the observation.
+function beastMidOf(m) { try { return m.monsterId || (m.mdef || {}).id || null; } catch (e) { return null; } }
+function beastCounterOf(Game, mid) {
+  try {
+    const def = ((Game.data || {}).monsters || []).find(d => d && d.id === mid);
+    return (def && def.counter) || null;
+  } catch (e) { return null; }
+}
+function beastTrickKnown(Game, mid) {
+  // Full discovery (trick performed or taught at haven): nothing to learn,
+  // so no trick is wasted.
+  try { return !!((Game.state.monsterCounters || {})[mid]); } catch (e) { return false; }
+}
+function beastHintKnown(Game, mid) {
+  // The codex hint IS knowledge: a slain type shows counter.hint (app.js
+  // renders it at codex stage 'slain'), and the player read it.
+  try {
+    if (beastTrickKnown(Game, mid)) return true;
+    const e = ((Game.state.codex || {}).monsters || {})[mid];
+    return !!(e && e.stage === 'slain');
+  } catch (e) { return false; }
+}
+// Interior free tiles (1..7): grid edges are the flee-by-barrier (by design)
+// — stepping on them can end the fight mid-trick.
+function beastFreeTiles(Game, f, px, py) {
+  const out = [];
+  try {
+    const occupied = new Set(
+      ((f.fighters || []).filter(x => x && x.alive && x.key !== 'p')).map(x => x.mx + ',' + x.my));
+    for (let tx = 1; tx <= 7; tx++) for (let ty = 1; ty <= 7; ty++) {
+      if (tx === px && ty === py) continue;
+      if (occupied.has(tx + ',' + ty)) continue;
+      out.push([tx, ty]);
+    }
+  } catch (e) {}
+  return out;
+}
+// Closest free tile avoiding a set of "x,y" cells (a telegraph lane).
+function beastDodgeTile(Game, f, px, py, avoid) {
+  const cands = beastFreeTiles(Game, f, px, py);
+  cands.sort((a, b) =>
+    (Math.max(Math.abs(a[0] - px), Math.abs(a[1] - py)) - Math.max(Math.abs(b[0] - px), Math.abs(b[1] - py))) ||
+    (a[0] - b[0]) || (a[1] - b[1]));
+  for (const c of cands) { if (!avoid || !avoid.has(c[0] + ',' + c[1])) return c; }
+  return cands[0] || null;
+}
+// Strike a chosen target: close the distance first (interior tiles only),
+// then strike. Returns 'moved', 'struck', or 'stuck'.
+function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
+  try {
+    const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
+    const tmx = tgt.mx != null ? tgt.mx : 4, tmy = tgt.my != null ? tgt.my : 4;
+    const d0 = Math.max(Math.abs(tmx - px), Math.abs(tmy - py));
+    if (d0 > (w.range || 1)) {
+      const occupied = new Set(
+        ((f.fighters || []).filter(x => x && x.alive && x.key !== 'p')).map(x => x.mx + ',' + x.my));
+      let bx = null, by = null, bd = 1e9;
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+        if (!dx && !dy) continue;
+        const cx = tmx + dx, cy = tmy + dy;
+        if (cx < 1 || cx > 7 || cy < 1 || cy > 7) continue;
+        if (occupied.has(cx + ',' + cy)) continue;
+        const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
+        if (dd < bd) { bd = dd; bx = cx; by = cy; }
+      }
+      if (bx != null) {
+        try { Game.tbPlayerMove(bx, by); } catch (e) {}
+        ctx.closed = (ctx.closed || 0) + 1;
+      }
+      endTurn();
+      return 'moved';
+    }
+  } catch (e) {}
+  try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+  endTurn();
+  return 'struck';
+}
+// Attempt one beast trick this turn. Returns true when the turn is consumed.
+function beastTrickPlay(Game, f, ctx, p, endTurn) {
+  try {
+    if (ctx._btFight !== f) { ctx._btFight = f; ctx._btTried = {}; ctx._btSeq = {}; }
+    const tried = ctx._btTried, seq = ctx._btSeq;
+    const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+    const live = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+    const markTypeTried = (mid) => { for (const x of live) { if (beastMidOf(x) === mid) tried[x.key] = 1; } };
+    for (const m of live) {
+      const mid = beastMidOf(m);
+      if (!mid || tried[m.key]) continue;
+      const ctr = beastCounterOf(Game, mid);
+      if (!ctr || !ctr.kind) { tried[m.key] = 1; continue; }
+      // Knowledge gate: the trick is attempted for KNOWN counters — fully
+      // discovered (state.monsterCounters) OR hint-revealed (codex 'slain':
+      // the player read the carcass entry). Fully-known tricks still pay
+      // mechanically (the shout scatters, the sidestep dodges) — a competent
+      // player USES a known trick, not just discovers it. Blind types get
+      // no tricks.
+      if (!beastHintKnown(Game, mid)) continue;
+      const kind = ctr.kind;
+      const trickDone = () => { ctx.beastTricks = (ctx.beastTricks || 0) + 1; };
+      // --- instant tricks: no setup, one action ---
+      if (kind === 'shout') {
+        // hummice / belltoad: the bellow IS the trick (scatters the choir).
+        tried[m.key] = 1;
+        try { Game.tbPlayerShout(); } catch (e) {}
+        trickDone();
+        return true;
+      }
+      if (kind === 'offer_food') {
+        // lockpick_raccoon: buy it off. One bribe per raccoon.
+        const inv = (((Game.state || {}).scholar || {}).inventory) || [];
+        const hasFood = inv.some(i => i && (i.units || 0) > 0 && (i.kcalEach || 0) > 0);
+        tried[m.key] = 1;
+        if (hasFood) { try { Game.tbPlayerOfferFood(); } catch (e) {} trickDone(); }
+        return true;
+      }
+      if (kind === 'wait') {
+        // heckler / moderator: silence is the verb it can't moderate.
+        // tbPlayerWait auto-advances — never endTurn after it.
+        tried[m.key] = 1;
+        try { Game.tbPlayerWait(); } catch (e) {}
+        trickDone();
+        return true;
+      }
+      // --- move tricks ---
+      if (kind === 'move_windup') {
+        // MOVE while it winds up, don't stare. The windup is the setup.
+        if (!m.telegraph) continue;
+        const cells = (m.telegraph && Array.isArray(m.telegraph.cells)) ? m.telegraph.cells : [];
+        const avoid = new Set(cells.map(c => c.cx + ',' + c.cy));
+        const spot = beastDodgeTile(Game, f, px, py, avoid);
+        if (!spot) { tried[m.key] = 1; continue; }
+        tried[m.key] = 1;
+        try { Game.tbPlayerMove(spot[0], spot[1]); } catch (e) {}
+        trickDone();
+        endTurn();
+        return true;
+      }
+      if (kind === 'move_x2') {
+        // Dodge on two consecutive rounds — the sequence IS the trick.
+        // ctr.vary (review_drone): never the same net direction twice.
+        // ctr.tiles (warranty_caller): cover N tiles this turn.
+        const need = (ctr.tiles | 0) || 1;
+        const st = seq[m.key] || (seq[m.key] = { n: 0, dir: null, round: -1 });
+        if (st.n > 0 && f.round !== st.round + 1) { st.n = 0; st.dir = null; } // sequence broken
+        const cands = beastFreeTiles(Game, f, px, py);
+        // deterministic: farthest from the beast first, then low coords
+        cands.sort((a, b) =>
+          (Math.max(Math.abs(b[0] - m.mx), Math.abs(b[1] - m.my)) -
+           Math.max(Math.abs(a[0] - m.mx), Math.abs(a[1] - m.my))) ||
+          (a[0] - b[0]) || (a[1] - b[1]));
+        let pick = null;
+        for (const c of cands) {
+          let path = null;
+          try { path = Game.findPath(px, py, c[0], c[1]) || []; } catch (e) { continue; }
+          if (path.length < need) continue;
+          let cost = 0;
+          try { cost = path.reduce((s, t) => s + Game.tbTerrainCost(t[0], t[1]), 0); } catch (e) { continue; }
+          if (cost <= 0 || cost > (p.moveLeft || 0)) continue;
+          const dir = Math.sign(c[0] - px) + ',' + Math.sign(c[1] - py);
+          if (ctr.vary && st.dir && dir === st.dir) continue;
+          pick = [c[0], c[1], dir]; break;
+        }
+        if (!pick) { tried[m.key] = 1; delete seq[m.key]; continue; }
+        try { Game.tbPlayerMove(pick[0], pick[1]); } catch (e) {}
+        st.n += 1; st.dir = pick[2]; st.round = f.round;
+        trickDone();
+        if (st.n >= 2) { tried[m.key] = 1; delete seq[m.key]; }
+        endTurn();
+        return true;
+      }
+      if (kind === 'sidestep') {
+        // Step OFF the lane: must be IN it to leave it. The telegraph is
+        // the setup; without one, fight normally and check again later.
+        const tg = m.telegraph;
+        const cells = tg && Array.isArray(tg.cells) ? tg.cells : null;
+        if (!cells || !cells.length) continue;
+        if (!cells.some(c => c.cx === px && c.cy === py)) continue;
+        const lane = new Set(cells.map(c => c.cx + ',' + c.cy));
+        const spot = beastDodgeTile(Game, f, px, py, lane);
+        if (!spot || lane.has(spot[0] + ',' + spot[1])) { tried[m.key] = 1; continue; }
+        tried[m.key] = 1;
+        try { Game.tbPlayerMove(spot[0], spot[1]); } catch (e) {}
+        trickDone();
+        endTurn();
+        return true;
+      }
+      if (kind === 'keep_distance') {
+        // End the turn AT the trick's distance — no farther. The DISENGAGE
+        // rule (game.js tbEndCheck) ends fights vs non-chasers beyond their
+        // reach, and it runs BEFORE the round_end counter observation: backing
+        // off to the far corner "works" but the trick never registers. The
+        // honest play is exactly `need` tiles out.
+        // (Engine tension, documented in evidence: bright_idea needs 3 but
+        // disengages past 2 — the trick is still the right survival play, it
+        // just can't discover via round_end while disengage fires first.)
+        const need = (ctr.tiles | 0) || 3;
+        const d = Math.max(Math.abs(m.mx - px), Math.abs(m.my - py));
+        tried[m.key] = 1;
+        if (d !== need) {
+          const cands = beastFreeTiles(Game, f, px, py);
+          // prefer exactly `need` tiles out; fall back to closest to it
+          cands.sort((a, b) => {
+            const da = Math.abs(Math.max(Math.abs(a[0] - m.mx), Math.abs(a[1] - m.my)) - need);
+            const db = Math.abs(Math.max(Math.abs(b[0] - m.mx), Math.abs(b[1] - m.my)) - need);
+            return (da - db) || (a[0] - b[0]) || (a[1] - b[1]);
+          });
+          for (const c of cands) {
+            let path = null;
+            try { path = Game.findPath(px, py, c[0], c[1]) || []; } catch (e) { continue; }
+            if (!path.length) continue;
+            let cost = 0;
+            try { cost = path.reduce((s, t) => s + Game.tbTerrainCost(t[0], t[1]), 0); } catch (e) { continue; }
+            if (cost <= 0 || cost > (p.moveLeft || 0)) continue;
+            try { Game.tbPlayerMove(c[0], c[1]); } catch (e) {}
+            break;
+          }
+        }
+        trickDone();
+        endTurn();
+        return true;
+      }
+      // --- strike tricks: the strike itself is the observation ---
+      if (kind === 'strike_lead' || kind === 'strike_windup' || kind === 'strike_recovery' ||
+          kind === 'strike_first' || kind === 'strike_nonhead' || kind === 'fresh_weapon') {
+        let tgt = m;
+        if (kind === 'strike_lead') {
+          // the lead is the first-spawned of its type (counterIsLead logic)
+          const same = live.filter(x => beastMidOf(x) === mid);
+          tgt = same[0];
+          let li = (f.fighters || []).indexOf(tgt);
+          for (const x of same) {
+            const xi = (f.fighters || []).indexOf(x);
+            if (xi < li) { tgt = x; li = xi; }
+          }
+        } else if (kind === 'strike_windup') {
+          if (!m.telegraph) continue; // hit it WHILE it folds
+        } else if (kind === 'strike_recovery') {
+          // the window: discharged and no new windup yet
+          if (!m._counterDischarged || m.telegraph) continue;
+        } else if (kind === 'strike_first') {
+          if (((f._counterStrikes | 0) !== 0)) { tried[m.key] = 1; continue; }
+          if (m.urWalkout) { tried[m.key] = 1; continue; } // behind the picket line: untargetable
+        } else if (kind === 'strike_nonhead') {
+          const same = live.filter(x => beastMidOf(x) === mid);
+          tgt = same.find(x => ((x.segmentIndex | 0) > 0)) || m;
+        } else if (kind === 'fresh_weapon') {
+          // the understudy must have SEEN a weapon already: the trick is
+          // the mid-fight SWITCH, not the opener. usSeen is keyed by the
+          // strike-time weapon name (def.name — equip() writes that).
+          const seen = (m.usSeen && Object.keys(m.usSeen)) || [];
+          if (!seen.length) { tried[m.key] = 1; continue; }
+          let cur = 'your hands';
+          try { cur = (Game.equippedWeapon() || {}).name || cur; } catch (e) {}
+          if (seen.indexOf(cur) >= 0) {
+            const inv = (((Game.state || {}).scholar || {}).inventory) || [];
+            const defs = ((Game.data || {}).items || []);
+            let sw = -1, swSlot = null, wantName = null;
+            for (let i = 0; i < inv.length; i++) {
+              const it = inv[i]; if (!it) continue;
+              const def = defs.find(d => d && d.id === (it.itemId || it.id));
+              if (!def || def.class !== 'weapon') continue;
+              const nm = def.name || 'weapon';
+              if (seen.indexOf(nm) >= 0) continue;
+              const wr = def.weapon || {};
+              // weapon_split (equipment.js): range > 1 -> ranged slot.
+              // equippedWeapon() reads melee first, so a ranged switch needs
+              // the melee slot cleared or the strike still uses the old one.
+              swSlot = (((wr.range || 1) > 1 || wr.type === 'ranged') ? 'ranged' : 'melee');
+              sw = i; wantName = nm; break;
+            }
+            if (sw < 0) { tried[m.key] = 1; continue; } // no fresh weapon: unavailable
+            try { if (swSlot === 'ranged') Game.unequip('melee'); } catch (e) {}
+            try { Game.equip(sw, swSlot); } catch (e) {}
+            let after = cur;
+            try { after = (Game.equippedWeapon() || {}).name || after; } catch (e) {}
+            if (after !== wantName) { tried[m.key] = 1; continue; } // switch failed: unavailable
+          }
+          // else: the current weapon is already fresh to it — strike as-is
+        }
+        const r = beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn);
+        if (r === 'struck') { markTypeTried(mid); trickDone(); }
+        return true;
+      }
+      // Unknown kind: never loop on it.
+      tried[m.key] = 1;
+    }
+  } catch (e) {}
+  return false;
+}
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -766,6 +1072,8 @@ const competent = {
   // Fight only with advantage: assess at fight START and walk away from bad
   // ones (an experienced player doesn't take 3:1 fights). Below 35% HP,
   // walk to the edge (flee-by-barrier). Otherwise strike the weakest.
+  // BEAST TRICKS (longsim combat r5 2026-10-12) play before the generic
+  // strike-the-weakest: the policy fights monster counters tactically.
   fight(Game, ctx) {
     try {
       const f = Game.tbfight;
@@ -813,6 +1121,10 @@ const competent = {
         // retreat toward the nearest edge — the barrier ends pursuit honestly
         return flee();
       }
+      // BEAST TRICKS (longsim combat r5 2026-10-12): play known monster
+      // counters tactically before the generic strike-the-weakest. Never
+      // overrides the walk-away assessment above.
+      try { if (beastTrickPlay(Game, f, ctx, p, endTurn)) return true; } catch (e) {}
       const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
       if (!alive.length) return false;
       alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));

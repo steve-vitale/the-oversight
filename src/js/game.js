@@ -4114,7 +4114,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the topic when there's actually a trick to learn.
         const teachable = this.counterTeachable ? this.counterTeachable() : null;
         if (!teachable) {
-          this.say(`${first} shrugs. "The beasts? We kill them or they kill us. Nobody's figured out anything clever yet."`);
+          // HONEST (longsim combat r5 2026-10-12): the old line claimed
+          // "nobody's figured out anything clever yet" even when the village
+          // knew every trick for every slain type — there was just nothing
+          // NEW to teach. Say what's true.
+          const anyKnown = Object.keys(this.state.monsterCounters || {}).length > 0;
+          this.say(anyKnown
+            ? `${first} shakes their head. "We've told you every trick we've figured out. The rest — we kill them or they kill us, and nobody's cracked those yet."`
+            : `${first} shrugs. "The beasts? We kill them or they kill us. Nobody's figured out anything clever yet."`);
           return { ok: true, none: true };
         }
         const tmdef = (this.data.monsters || []).find(m => m.id === teachable) || {};
