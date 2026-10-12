@@ -81,8 +81,16 @@ async function main() {
   const ids = (r0.choices || []).map(c => c && c.id);
   ok(ids.includes('betrayal:accept') && ids.includes('betrayal:decline'),
     'menu offers betrayal:accept/decline');
-  ok(!!lureText && String(r0.line || '').includes(lureText),
-    'opener SPEAKS the lure (' + (lureText || 'none') + ')');
+  // R5 (journey establishment 2026-10-12): the lure speaks as its OWN second
+  // opener beat (a THEM transcript entry), not space-glued onto the opener
+  // line ("...you and me?" "Come get air with me..." — three discourse moves
+  // in one breath). The guarantee stands: the NPC speaks the invite so the
+  // accept/decline choices make sense; the hygiene is new.
+  const themHas = (r, txt) => (r.transcript || []).some(e => e.who === 'them' && String(e.text || '').includes(txt));
+  ok(!!lureText && themHas(r0, lureText),
+    'opener SPEAKS the lure as its own beat (' + (lureText || 'none') + ')');
+  ok(!!lureText && !String(r0.line || '').includes(lureText),
+    'lure is NOT glued onto the opener line');
   console.log('  opener: ' + String(r0.line || '').slice(0, 220));
 
   // B: declining clears the pending and the NPC line is coherent
@@ -98,10 +106,10 @@ async function main() {
   const r1 = Game.startConvo(vid);
   const def2 = (Game.INVITE_DEFS() || []).find(d => d.id === (inv2 && inv2.defId));
   const lure2 = def2 ? def2.label.replace(/^"|"$/g, '') : null;
-  ok(!!lure2 && String(r1.line || '').includes(lure2), 'first sitting with new pending speaks the lure');
+  ok(!!lure2 && themHas(r1, lure2), 'first sitting with new pending speaks the lure');
   Game.endConvo(vid, 'done');
   const r2 = Game.startConvo(vid); // same pending still open, not accepted/declined
-  ok(!(lure2 && String(r2.line || '').includes(lure2)),
+  ok(!(lure2 && themHas(r2, lure2)),
     'second sitting does NOT re-speak the same lure');
   Game.endConvo(vid, 'done');
 

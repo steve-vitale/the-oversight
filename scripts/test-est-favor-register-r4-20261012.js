@@ -74,15 +74,23 @@ for (const f of files) {
 delete global.window;
 const Game = globalThis.Scattering.Game;
 
-// The alreadyNamed guard, read from conversation.js source — the coupling
-// this test pins down. (Under PRISTINE the swapped conversation.js supplies
-// the old narrow guard; eval'd modules still reference their own scope, so
-// read the regex from source and evaluate heads against it directly.)
+// The alreadyNamed guard, read from conversation.js — the coupling this test
+// pins down. (Under PRISTINE the swapped conversation.js supplies the old
+// narrow guard.) Since r5 the guard lives in Game.convoFavorHead (shared with
+// voiceLine); prefer the behavioral API and fall back to regex extraction
+// from source for pristine trees that predate it.
 const convoSrc = (PRISTINE
   ? execSync('git show HEAD:src/js/conversation.js', { cwd: ROOT }).toString('utf8')
   : fs.readFileSync(path.join(ROOT, 'src/js/conversation.js'), 'utf8'));
-const guardMatch = /const alreadyNamed = (\/.+?\/)\.test\(opener\.line\)/.exec(convoSrc);
-const ALREADY_NAMED = guardMatch ? eval(guardMatch[1]) : /^"(?!)/;
+let ALREADY_NAMED, guardDesc;
+if (!PRISTINE && typeof Game.convoFavorHead === 'function') {
+  ALREADY_NAMED = (line) => Game.convoFavorHead(line);
+  guardDesc = 'Game.convoFavorHead() (behavioral)';
+} else {
+  const guardMatch = /const alreadyNamed = (\/.+?\/)\.test\(opener\.line\)/.exec(convoSrc);
+  ALREADY_NAMED = guardMatch ? (line) => eval(guardMatch[1]).test(line) : () => false;
+  guardDesc = guardMatch ? guardMatch[1] : 'NOT FOUND';
+}
 
 let pass = 0, fail = 0;
 function ok(cond, name, detail) {
@@ -106,8 +114,8 @@ const KINDS = [
 
 async function main() {
   console.log((PRISTINE ? 'PRISTINE (expect RED)' : 'FIXED (expect GREEN)') + ' — favor follow-up voice');
-  console.log('  alreadyNamed guard from conversation.js: ' + (guardMatch ? guardMatch[1] : 'NOT FOUND'));
-  ok(!!guardMatch, 'alreadyNamed guard extracted from conversation.js source');
+  console.log('  alreadyNamed guard from conversation.js: ' + guardDesc);
+  ok(guardDesc !== 'NOT FOUND', 'alreadyNamed guard present in conversation.js');
 
   await Game.init();
   Game.genDetail = function () { return {}; };
@@ -155,7 +163,7 @@ async function main() {
     ok(all.indexOf(K.expect) !== -1, `${K.kind}: first-person short "${K.expect}" in heads`, all);
     for (const state of ['promised', 'fulfilled', 'broken', 'moot', 'asked']) {
       const line = heads[state];
-      ok(typeof line === 'string' && ALREADY_NAMED.test(line),
+      ok(typeof line === 'string' && ALREADY_NAMED(line),
         `${K.kind}/${state}: head recognized by alreadyNamed (no seed double-prefix)`, line);
     }
     // the repay opener for an open promise also speaks the short

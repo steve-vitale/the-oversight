@@ -654,8 +654,17 @@
       if ((!opens.length && !closes.length) || Math.random() >= p) return line;
       const inner = t.slice(1, -1);
       const isQ = /\?\s*$/.test(inner);
+      // FAVOR HEADS (journey establishment r5 2026-10-12): a self-naming head
+      // already opens its own discourse — a voice opener doubles it ("The way
+      // I read it — Never mind the food I needed — ...", caught live). Openers
+      // never lead heads; dash-led closers are filtered too (they stutter
+      // against the head's own beat — "Thanks anyway." + " — anyway.").
+      // Trailing/address closers ("…", ", friend.") stay — voice without the
+      // doubling.
+      const favorHead = (typeof this.convoFavorHead === 'function') && this.convoFavorHead(t);
       // Openers don't lead questions ("I think are you okay?" is broken).
-      const useOpen = opens.length && (!closes.length || (!isQ && Math.random() < 0.45));
+      let useOpen = opens.length && (!closes.length || (!isQ && Math.random() < 0.45));
+      if (favorHead) useOpen = false;
       let pool = useOpen ? opens : closes;
       // DISMISSAL CLOSERS (journey endgame 2026-10-11): " — anyway." /
       // " — comedy." move PAST a topic — after a direct question they read
@@ -664,6 +673,10 @@
       if (!useOpen && isQ) {
         const filtered = pool.filter(b => !/^ — /.test(String(b)));
         if (filtered.length) pool = filtered;
+      }
+      if (favorHead) {
+        const fc = pool.filter(b => !/^\s*—/.test(String(b)));
+        if (fc.length) pool = fc;
       }
       // Mannerisms cycle, never exhaust: real people repeat their tics.
       // convoPickCycle reshuffles when the pool runs dry.
@@ -2037,6 +2050,19 @@
       return l;
     },
 
+    // convoFavorHead: lines that already open their own discourse — the favor
+    // follow-up heads name the prior business outright ("About {short} — ...",
+    // "Never mind {short} — ...", "You came through on {short}",
+    // "You said you'd help with {short}...", the inherited "I asked X about
+    // {short} — ..."). Prepending a voice discourse-opener onto one doubles
+    // the discourse move ("The way I read it — Never mind the food I needed
+    // — ..." — caught live, journey establishment r5 2026-10-12). Shared by
+    // the unfinished-business seed guard and voiceLine.
+    convoFavorHead(line) {
+      const t = String(line == null ? '' : line);
+      return /^"(About |Never mind |You came through on |You said you'd help with |I asked )/.test(t);
+    },
+
     convoOpening(vid, want) {
       const cg = (this.data.characterGen || {}).convo || {};
       const v = this.state.village;
@@ -2082,7 +2108,9 @@
           // you'd help with {short}") got the redundant seed prefix:
           // "About the help I asked you for — Never mind the food they
           // needed — ..." (caught live in r4 transcripts, 777-day25).
-          const alreadyNamed = /^"(About |Never mind |You came through on |You said you'd help with )/.test(opener.line);
+          const alreadyNamed = (typeof this.convoFavorHead === 'function')
+            ? this.convoFavorHead(opener.line)
+            : /^"(About |Never mind |You came through on |You said you'd help with )/.test(opener.line);
           let seedLine;
           if (alreadyNamed) {
             seedLine = opener.line;
@@ -3836,18 +3864,26 @@
       // Spoken once per pending (inv.spoken); the pending itself is still
       // consumed by accept/decline, and plot invites still travel the normal
       // channel (indistinguishable by design — tells are the warning cue).
+      // SEPARATE BEAT (journey establishment r5 2026-10-12): the lure was
+      // space-glued onto the opener ("We're down to 0 liters of clean
+      // water." ... "you and me?" "Come get air with me. I need to think out
+      // loud.") — three discourse moves in one breath, no connective tissue.
+      // Two things on their mind get two beats: the want opener lands first,
+      // then the invitation as its own THEM line.
+      let inviteBeat = null;
       try {
         const inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
         if (inv && !inv.spoken) {
           const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
           const idef = defs.find(d => d.id === inv.defId) || null;
           if (idef && idef.label) {
-            opLine = opLine + ' ' + idef.label;
+            inviteBeat = idef.label;
             inv.spoken = true;
           }
         }
       } catch (e) {}
       this.sayLine(vid, opLine);
+      if (inviteBeat) this.sayLine(vid, inviteBeat);
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
       // player SEES it — one short stage-direction beat, at most once a day.
