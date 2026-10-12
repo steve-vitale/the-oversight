@@ -974,12 +974,59 @@
       const pick = fresh[Math.floor(Math.random() * fresh.length)];
       return { who: pick.id, why: 'fresh', note: 'a face the galaxy has never seen' };
     }
+    // RECENCY REPEL (longsim contests r6 2026-10-12): notability-weighted
+    // casting kept — canon (ratings_casting, Steve 2026-10-08/09; the ONE
+    // shared notabilityWeight, untouched). But the highest-weight villager
+    // was re-pulled every few days with the same copy: r5's sense-test
+    // found 16.4% of villager pulls were the same face as the previous
+    // show, median 67% of a run's villager pulls going to ONE villager.
+    // Recently-pulled notables get their weight discounted by
+    // days-since-last-pull — a repel, NOT a ban: Emma-as-regular is fine
+    // fiction, just not on a loop. Whim and fresh-face skip the repel
+    // (rare, and already announced as their own casting paths).
+    const _day = (this.state.scholar || {}).day || 1;
+    const pullDays = (v._showPullDays || {});
+    const repelOf = (id) => {
+      const days = pullDays[id] || [];
+      let last = -1;
+      for (const d of days) if (d > last) last = d;
+      if (last < 0) return 1;
+      const gap = _day - last;
+      if (gap <= 2) return 0.25;
+      if (gap <= 5) return 0.5;
+      if (gap <= 10) return 0.75;
+      return 1;
+    };
+    // The unrepelled star: the face the cameras "wanted" before the cut.
+    // Announced in fireShow when the repel flips the winner — the System
+    // is honest about its production choices.
+    let rawMaxW = -1;
+    for (const x of notable) if (x.w > rawMaxW) rawMaxW = x.w;
+    const rawStar = (notable.find(x => x.w === rawMaxW) || {}).c || null;
+    const repelled = notable.map(x => ({ x, rw: x.w * repelOf(x.c.id) }));
     let maxW = -1;
-    for (const x of notable) if (x.w > maxW) maxW = x.w;
-    const band = notable.filter(x => x.w === maxW);
+    for (const x of repelled) if (x.rw > maxW) maxW = x.rw;
+    const band = repelled.filter(x => x.rw === maxW);
     const pick = band[Math.floor(Math.random() * band.length)];
-    return { who: pick.c.id, why: band.length > 1 ? 'tie' : 'star',
-             note: (pick.c.notability || [])[0] || null, band: band.length };
+    const flipped = rawStar && pick.x.c.id !== rawStar.id && repelOf(rawStar.id) < 1;
+    return { who: pick.x.c.id, why: band.length > 1 ? 'tie' : 'star',
+             note: (pick.x.c.notability || [])[0] || null, band: band.length,
+             cutStar: flipped ? rawStar.id : null };
+  };
+
+  // CASTING-RECENCY CUT LINE (longsim contests r6 2026-10-12): honest
+  // announcement when the recency repel flipped the star pick. Said ~40%
+  // of flips — enough to be legible, not so often it becomes its own
+  // robot pattern. The tele() fires on every flip for telemetry; the
+  // line is the only randomness.
+  G._cxRepelCutLine = function(cast, who) {
+    if (!cast || !cast.cutStar) return null;
+    try { this.tele('show_cast_repel', { star: cast.cutStar, picked: who }); } catch (e) {}
+    if (Math.random() < 0.40) {
+      const name = cast.cutStar === 'player' ? 'you' : this.displayName(cast.cutStar);
+      return `📺 The cameras were going to call ${name} AGAIN. The producers cut it — somebody else gets a turn.`;
+    }
+    return null;
   };
 
   G.pickShow = function() {
@@ -1025,11 +1072,27 @@
     // FRESH-FACE LEDGER (longsim contests 2026-10-11): the never-pulled pool
     // for showCastPull's fresh-face path. Set here, at the one funnel every
     // pull passes through (player, villager, together).
+    // CASTING-RECENCY LEDGER (longsim contests r6 2026-10-12): _showPullDays
+    // keeps a bounded history of pull days per villager for the recency
+    // repel in showCastPull. _showPulled stays the never-pulled set.
     try {
       if (who && who !== 'player' && who !== 'together') {
         const vv = this.state.village || {};
         vv._showPulled = vv._showPulled || {};
         vv._showPulled[who] = (this.state.scholar || {}).day || 1;
+        vv._showPullDays = vv._showPullDays || {};
+        const arr = vv._showPullDays[who] || (vv._showPullDays[who] = []);
+        arr.push((this.state.scholar || {}).day || 1);
+        if (arr.length > 24) arr.splice(0, arr.length - 24);
+      } else if (who === 'player') {
+        // The repel covers the player too — the protagonist on every
+        // third show is as robotic as any villager. No _showPulled entry:
+        // fresh-face is villagers-only by design.
+        const vv = this.state.village || {};
+        vv._showPullDays = vv._showPullDays || {};
+        const arr = vv._showPullDays[who] || (vv._showPullDays[who] = []);
+        arr.push((this.state.scholar || {}).day || 1);
+        if (arr.length > 24) arr.splice(0, arr.length - 24);
       }
     } catch (e) {}
     let phases = null;
@@ -1041,6 +1104,7 @@
         else if (cast.why === 'tie') this.sysSay(`📺 The cameras couldn't decide — they chose you.`);
         this.sysSay(`📺 The cameras want YOU — ${cast.note || 'the galaxy knows your name'}.`);
       }
+      try { const _cl = this._cxRepelCutLine(cast, who); if (_cl) this.sysSay(_cl); } catch (e) {}
       this.sysSay(`📺 That's not an honor. It's just what the aliens like to see. You're going on television.`);
       try { this.audioEvent('contestTaken'); } catch (e) {}
       phases = this._cxShowTwist(s, this.showPhases(s, 'player'), 'player');
@@ -1068,6 +1132,7 @@
       } else if (cast.why === 'fresh') {
         this.sysSay(`📺 The cameras want a new face. ${pname} — the galaxy is about to learn your name.`);
       }
+      try { const _cl = this._cxRepelCutLine(cast, who); if (_cl) this.sysSay(_cl); } catch (e) {}
       this.sysSay(`📺 The cameras want ${pname} — ${cast.note || 'the galaxy knows their name'}. Not an honor. Just what the aliens like to see.`);
       this.sysSay(`📺 ${pname} will be back by morning. Probably. The village will talk about this for days.`);
       try { this.audioEvent('contestTaken'); } catch (e) {}
@@ -1224,13 +1289,32 @@
     this.state.activeContest = null;
     this.sysSay('📺 ───');
     if (outcome === 'fans' || outcome === 'both') {
-      this.sysSay(`📺 ${pname} was MADE for this. The chat is already making clips. ${pname} comes home with fans — messages, art, a following.`);
+      // CASTING-VARIETY COPY (longsim contests r6 2026-10-12): the fans
+      // landing used to be ONE identical line every time ("was MADE for
+      // this") — the r5 robot pattern: Emma alone got 13 identical lines
+      // in 16 runs. Same meaning, rotating voices; the signature line
+      // keeps a double weight so it stays the plurality voice.
+      const fansLines = [
+        `📺 ${pname} was MADE for this. The chat is already making clips. ${pname} comes home with fans — messages, art, a following.`,
+        `📺 ${pname} was MADE for this. The chat is already making clips. ${pname} comes home with fans — messages, art, a following.`,
+        `📺 ${pname} ate the camera and asked for seconds. Clips are already everywhere. ${pname} comes home with fans — messages, art, a following.`,
+        `📺 The galaxy has decided: ${pname} is THEIR favorite. Messages, art, a following — ${pname} comes home famous.`,
+        `📺 ${pname} didn't blink once. The chat is making clip compilations. ${pname} comes home with fans — messages, art, a following.`,
+        `📺 Somebody clip that. ${pname} owns the screen. ${pname} comes home with fans — messages, art, a following.`,
+        `📺 ${pname} was nervous and the galaxy fell in love anyway. The chat is already making clips. ${pname} comes home with fans.`,
+      ];
+      this.sysSay(fansLines[Math.floor(Math.random() * fansLines.length)]);
       this.addNotability(pid, 'showmanship');
       try { if (this.apAdjustFavor) this.apAdjustFavor(2, pname + ' shone on ' + showName, 'showbiz'); } catch (e) {}
       this._showGossip('fans', pid, showName);
     }
     if (outcome === 'shame' || outcome === 'both') {
-      this.sysSay(`📺 It went... badly. The clip of ${pname} will outlive all of you. ${pname} comes home with shame — and, somehow, fans anyway. The galaxy loves a trainwreck.`);
+      const shameLines = [
+        `📺 It went... badly. The clip of ${pname} will outlive all of you. ${pname} comes home with shame — and, somehow, fans anyway. The galaxy loves a trainwreck.`,
+        `📺 ${pname} tripped over the galaxy's heart and landed in the meme pile. The clip will outlive all of you. Shame — and, somehow, fans anyway.`,
+        `📺 Oh no. OH NO. The galaxy has that clip FOREVER. ${pname} comes home with shame — and, somehow, fans anyway.`,
+      ];
+      this.sysSay(shameLines[Math.floor(Math.random() * shameLines.length)]);
       try { if (this.apAdjustFavor) this.apAdjustFavor(1, pname + "'s beautiful disaster on " + showName, 'showbiz'); } catch (e) {}
       // SHAME BITES (contest-fear 2026-10-11): the galaxy forgives a
       // trainwreck (+1 favor above — Steve's design, kept). The VILLAGE
