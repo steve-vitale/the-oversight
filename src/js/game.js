@@ -15550,7 +15550,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // combination: if others know deeper, and you have experience (harvests),
       // the overlap unlocks the next level
       const harvests = mine.harvests || 0;
-      if (deepestOther > myLevel && harvests >= 3) {
+      // THE TOLL (longsim knowledge r3 2026-10-11): the overlap's power scales
+      // with the depth DIFFERENTIAL, not a flat 3. The combine is a joint
+      // computation — your hands plus their depth. One level deeper: your
+      // side does the heavy lifting, 3 harvests (Steve's gate, unchanged).
+      // Two deeper (the village works it daily): your experience only has to
+      // anchor theirs — 2. Three deeper: one handling session and it clicks
+      // — 1. NEVER 0: no free depth from the fire; your hands must have held
+      // the plant at least once. Coordinator's call (Steve 2026-10-07) — he
+      // can overrule.
+      const toll = Math.max(1, 4 - (deepestOther - myLevel));
+      if (deepestOther > myLevel && harvests >= toll) {
         const newLevel = Math.min(4, deepestOther);
         mine.level = newLevel;
         mine.combinedFrom = sources;
@@ -15563,11 +15573,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.jackpot('insight');
         }
         return true;
-      } else if (deepestOther > myLevel && harvests < 3) {
+      } else if (deepestOther > myLevel && harvests < toll) {
         // hint: you're close, but need more hands-on experience. The hint is
         // narrator-to-player: the believed name, never a leaked true one
         // (break-it knowledge 2026-10-09 r2).
-        this.say(`💡 ${this.plantCalledName(pid)}: ${sources.join(' and ')} know${sources.length > 1 ? '' : 's'} more than you do. Harvest it a few more times (${harvests}/3) and it'll click.`);
+        this.say(`💡 ${this.plantCalledName(pid)}: ${sources.join(' and ')} know${sources.length > 1 ? '' : 's'} more than you do. Harvest it a few more times (${harvests}/${toll}) and it'll click.`);
       }
       return false;
     },
@@ -25467,9 +25477,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (lvl < 2 && sk.servings >= 8) {
           sk.level = 2;
           if (atHome) this.say(`🌿 ${pname} — the foragers have handled it ${sk.servings} days running. They know it now — which parts are worth hauling, which bruise, how it wants to be carried. The village's knowledge deepens.`);
+          // THE COMBINE MOMENT (longsim knowledge r3 2026-10-11): the village's
+          // depth is NEW — and the old fireside lesson fired once, at the
+          // naming, before any depth existed (taughtAround), so the overlap
+          // never got a second chance (0 combines in 20x200d). If you knew the
+          // name but not the parts and you're home, the fireside talk clicks
+          // it into place for you too. Presence-gated: you weren't in the
+          // conversation if you weren't home. combineKnowledge no-ops unless
+          // the overlap is real (deeper other + your harvests meet the toll).
+          if (atHome) { try { this.combineKnowledge(pid); } catch (e) {} }
         } else if (lvl === 2 && sk.servings >= 20) {
           sk.level = 3;
           if (atHome) this.say(`🌿 ${pname}, weeks in the baskets. Handling it day after day, the village has learned what it's FOR — not just what it is. The village knows its uses now.`);
+          if (atHome) { try { this.combineKnowledge(pid); } catch (e) {} }
         }
       }
     },

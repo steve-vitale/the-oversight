@@ -165,9 +165,32 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
     } catch (e) {}
     try {
       const _ck = Game.combineKnowledge;
-      Game.combineKnowledge = function (pid) { const r = _ck.call(this, pid); if (r) K.combines++; return r; };
+      Game.combineKnowledge = function (pid) {
+        const r = _ck.call(this, pid);
+        if (r) { K.combines++; }
+        else {
+          // r3: near-miss instrumentation — village-shared source only, so the
+          // lever design sees how many fireside overlaps ALMOST fired.
+          try {
+            const mine = (this.state.codex.plants || {})[pid];
+            if (mine && (mine.level || 1) < 4) {
+              const sh = ((this.state.village || {}).sharedKnowledge || {})[pid];
+              const shL = (sh && sh.level) || 0;
+              if (shL > (mine.level || 1)) {
+                const hv = mine.harvests || 0;
+                K.nearMiss++;
+                K.nearMissHist[(mine.level || 1) + '->' + shL + '/h' + Math.min(4, hv)] =
+                  (K.nearMissHist[(mine.level || 1) + '->' + shL + '/h' + Math.min(4, hv)] || 0) + 1;
+              }
+            }
+          } catch (e2) {}
+        }
+        return r;
+      };
     } catch (e) {}
     K.combines = K.combines || 0;
+    K.nearMiss = K.nearMiss || 0;
+    K.nearMissHist = K.nearMissHist || {};
     try {
       const _say = Game.say;
       Game.say = function (msg) {
@@ -250,6 +273,7 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       trees: 0, recipes: 0,
       vilMeanKnown: 0, vilMaxKnown: 0, vilZeroKnown: 0, villageDistinct: 0,
       sharedLevels: {}, sharedServings: 0, sharedMaxServings: 0,
+      harvestHist: { 0: 0, 1: 0, 2: 0, 3: 0, '4+': 0 }, maxHarvests: 0,
     };
     try {
       const cxp = (Game.state.codex || {}).plants || {};
@@ -257,6 +281,15 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
         const lvl = (e && e.level) || 0;
         if (lvl >= 4) ks.plantLevels[4]++; else ks.plantLevels[lvl] = (ks.plantLevels[lvl] || 0) + 1;
         if (e && (e.prepKnown || lvl >= 2)) ks.prepKnown++;
+        // r3: harvest-depth instrumentation (the combine toll gate)
+        try {
+          if (lvl >= 1) {
+            const hv = (e && e.harvests) || 0;
+            const b = hv >= 4 ? '4+' : hv;
+            ks.harvestHist[b] = (ks.harvestHist[b] || 0) + 1;
+            if (hv > ks.maxHarvests) ks.maxHarvests = hv;
+          }
+        } catch (e2) {}
         ks.experiments += (e && e.experiments) || 0;
         if (e && e.tested) ks.testedVerdicts++;
         if (e && e.wrongAs) ks.wrongAsOpen++;
@@ -352,6 +385,7 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
       learnSkillBy: K.learnSkillBy, grantBy: K.grantBy,
       testCautiously: K.testCautiously, testMonsterMeat: K.testMonsterMeat,
       foodSafeBy: K.foodSafeBy, combines: K.combines,
+      nearMiss: K.nearMiss, nearMissHist: K.nearMissHist,
       ks,
       knowSnap,
       transcriptSample: K.transcript.slice(-24),
@@ -409,6 +443,11 @@ const TEACH_RE = /IDENTIFIED|Deeper knowledge|MASTERY|TRADED KNOWLEDGE|KNOWLEDGE
     testCautiously: sum(runs.map(r => r.testCautiously)),
     testMonsterMeat: sum(runs.map(r => r.testMonsterMeat)),
     foodSafeBy: mergeCounts('foodSafeBy'),
+    combines: sum(runs.map(r => r.combines || 0)),
+    nearMiss: sum(runs.map(r => r.nearMiss || 0)),
+    nearMissHist: (() => { const o = {}; for (const r of runs) for (const [k, v] of Object.entries(r.nearMissHist || {})) o[k] = (o[k] || 0) + v; return o; })(),
+    harvestHist: (() => { const o = { 0: 0, 1: 0, 2: 0, 3: 0, '4+': 0 }; for (const r of runs) for (const [k, v] of Object.entries((r.ks || {}).harvestHist || {})) o[k] = (o[k] || 0) + v; return o; })(),
+    maxHarvestsMax: Math.max.apply(null, runs.map(r => ((r.ks || {}).maxHarvests) || 0)),
     plantLevels: (() => { const o = {}; for (const r of runs) for (const [k, v] of Object.entries(r.ks.plantLevels)) o[k] = (o[k] || 0) + v; return o; })(),
     meanPrepKnown: meanPath('ks.prepKnown'),
     totalExperiments: sum(runs.map(r => r.ks.experiments)),

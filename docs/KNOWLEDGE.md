@@ -53,8 +53,11 @@ and with knowledge traders. `v.taught[]` is what `villageEats` reads.
   use; L3 all uses. `prepKnown` is a separate track — you can know HOW to
   prepare something without knowing WHAT it is (first bite teaches it).
 - **Animals**: L2/L3/L4 at 3/6/10 tastings of known meat.
-- **Combination**: `combineKnowledge` — if others know deeper and you have
-  3+ harvests, overlap unlocks the next level. Traders teach at L2/L3.
+- **Combination**: `combineKnowledge` — if others know deeper, overlap unlocks
+  the next level at a toll scaling with the depth differential: 3 personal
+  harvests when they're one level deeper, 2 when two deeper, 1 when three
+  deeper (never 0 — your hands must have held it at least once; longsim
+  knowledge r3 2026-10-11). Traders teach at L2/L3.
 
 ## Teaching channels (all observed live in sims)
 
