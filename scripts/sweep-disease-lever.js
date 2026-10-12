@@ -16,6 +16,7 @@
 const fs = require('fs');
 const { loadGame, setupGame, runDays, manifest } = require('./sim-harness');
 const { competent } = require('./policies/competent');
+const { treatment_seeking } = require('./policies/treatment-seeking');
 
 const DISEASE_IDS = ['gutrot', 'trichinosis', 'disease', 'lockjaw', 'wound_fever',
   'trembles', 'howlbelly', 'gristlefit', 'croakbelly', 'shellgut', 'witness_maw',
@@ -84,7 +85,7 @@ const careless = Object.assign({}, competent, {
   },
 });
 
-const POLICIES = { competent, careless };
+const POLICIES = { competent, careless, treatment_seeking };
 
 function parseList(env, def) {
   return (process.env[env] || def).split(',').map(s => s.trim()).filter(Boolean);

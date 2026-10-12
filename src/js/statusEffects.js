@@ -97,7 +97,25 @@
         var poss = (name === 'You') ? 'your' : name + "'s";
         out = out.split("{name}'s").join(poss);
         out = out.split("{name}\u2019s").join(poss);
-        out = out.split('{name}').join(name);
+        // SENTENCE-CASE (longsim disease r2 2026-10-11): a mid-sentence
+        // {name} renders as capital "You" for the player ("Spasms run through
+        // You like a struck wire"). Only a template-INITIAL {name} is
+        // sentence-initial; later occurrences get lowercase "you". Verbs stay
+        // in the You-form (seVerb('You') = 'are' = 'you are'). No def has two
+        // {name}s, so the first-occurrence branch covers the single case.
+        if (name === 'You') {
+          var lead = out.replace(/^[\s"'\(\[]*/, '');
+          if (lead.indexOf('{name}') === 0) {
+            var i0 = out.indexOf('{name}');
+            out = out.slice(0, i0) + '\u0000SE_YOU\u0000' + out.slice(i0 + 6);
+            out = out.split('{name}').join('you');
+            out = out.split('\u0000SE_YOU\u0000').join('You');
+          } else {
+            out = out.split('{name}').join('you');
+          }
+        } else {
+          out = out.split('{name}').join(name);
+        }
         out = out.split('{verb}').join(seVerb(name));
         if (vars) {
           for (var k in vars) out = out.split('{' + k + '}').join(String(vars[k]));
@@ -557,6 +575,30 @@
 
     // Diagnosis: unlock the true name. Narrates name + class + cure direction,
     // records in the codex. Never throws. Returns true.
+    // ruinDirection(): compass direction of the nearest ruin tile from the
+    // player, for the diagnosis->cure findability nudge (longsim disease r2
+    // 2026-10-11). Canon (DISEASES.md): specific ruin medicine
+    // (antibiotics/antiparasitic) is real — the nudge only names where to
+    // look; it adds no medicine and changes no rates. Returns 'north',
+    // 'south', 'east', 'west' per the line-19311 convention (dy<0 = north).
+    ruinDirection: function () {
+      try {
+        var m = this.map;
+        if (!m || !m.tiles) return null;
+        var px = m.px, py = m.py, bx = -1, by = -1, bd = 1e9;
+        for (var y = 0; y < 9; y++) for (var x = 0; x < 9; x++) {
+          if (x === px && y === py) continue;
+          var t = m.tiles[y] && m.tiles[y][x];
+          if (!t || t.type !== 'ruin') continue;
+          var d = Math.abs(x - px) + Math.abs(y - py);
+          if (d < bd) { bd = d; bx = x; by = y; }
+        }
+        if (bx < 0) return null;
+        var dx = bx - px, dy = by - py;
+        return Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'east' : 'west') : (dy >= 0 ? 'south' : 'north');
+      } catch (e) { return null; }
+    },
+
     diagnoseDisease: function (target, effectId, opts) {
       opts = opts || {};
       var def = this.seDef(effectId);
@@ -590,8 +632,18 @@
             : cls === 'viral' ? 'No pill touches it \u2014 rest, water, care.'
             : 'Folk care and time.';
           var who = (target === 'scholar' || (target && target.kind === 'player')) ? 'You' : seName(this, target);
+          // FINDABILITY NUDGE (longsim disease r2 2026-10-11): the cure for
+          // bacterial/parasitic classes lives in ruin medicine cabinets
+          // (canon, DISEASES.md) — but r1 showed no sim ever looted one in
+          // 12 runs. Naming a concrete direction turns the pills from rumor
+          // into a quest. Villager targets don't quest, so this is scholar-only.
+          var ruinHint = '';
+          if (target === 'scholar' && (cls === 'bacterial' || cls === 'parasitic')) {
+            var rd = this.ruinDirection ? this.ruinDirection() : null;
+            if (rd) ruinHint = ' The ruins to the ' + rd + ' sometimes still hold medicine cabinets — worth searching.';
+          }
           this.say(who + (who === 'You' ? ' have' : ' has') + ' ' + def.name + '. ' +
-            (def.diagnosedDesc || '') + ' (' + clsHint + ')' +
+            (def.diagnosedDesc || '') + ' (' + clsHint + ')' + ruinHint +
             (opts.by ? ' \u2014 diagnosed by ' + opts.by + '.' : ''));
           try { this.audioEvent('statusCured', { id: effectId }); } catch (e2) {}
         } catch (e) {}
