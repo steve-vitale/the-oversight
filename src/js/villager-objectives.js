@@ -663,12 +663,14 @@
             if (lesson && lesson.taught) {
               try { this.bumpTrust(rid, 1); this.bumpTrust(lesson.learner, 1); } catch (e) {}
               if (playerAtHaven) {
-                var lnm2 = 'someone';
-                try { lnm2 = this.displayName(lesson.learner); } catch (e) {}
-                var pname2 = lesson.plantName || 'something from the wild';
-                // descriptors already carry their article ("a tree with...")
-                var pnameArt = (/^(a|an)\s/i.test(pname2)) ? pname2 : 'the ' + pname2;
-                this.say(`📖 ${nm} is showing ${lnm2} ${pnameArt} — leaf, stem, smell.`);
+                // LONGSIM agency r5 (2026-10-12): the spoken line varies off
+                // the lesson's NEED (r4 recorded it on the lesson result;
+                // nothing read it) — see teachChoreLine. firstRef for the
+                // teacher ref too: displayName's bare "A person, maybe 60s"
+                // reads as stage directions ("A is showing A ...").
+                var tnm2 = nm;
+                try { tnm2 = this.firstRef ? this.firstRef(rid) : nm; } catch (e) {}
+                try { this.say(this.teachChoreLine(tnm2, lesson)); } catch (e) {}
               }
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
@@ -695,6 +697,31 @@
           }
         }
       }
+    },
+
+    // teachChoreLine — the spoken line for a landed teach lesson (longsim
+    // agency r5 2026-10-12). Varies off the lesson's NEED (r4 recorded the
+    // need on the lesson result; nothing read it): a wounded villager gets
+    // shown wound herbs, a hungry one gets shown food, a novice gets the
+    // beginner's tour — mirroring the deed text, which already records the
+    // same why. firstRef for the learner: displayName's bare "A person,
+    // maybe 60s" reads as stage directions ("A is showing A the ...");
+    // firstRef's "the woman in her 30s" is a voice. Pure string building,
+    // no RNG — narration-only, sim trajectories unchanged.
+    teachChoreLine(tnm, lesson) {
+      var lnm = 'someone';
+      try {
+        if (lesson && lesson.learner) lnm = this.firstRef ? this.firstRef(lesson.learner) : this.displayName(lesson.learner);
+      } catch (e) {}
+      var pname = (lesson && lesson.plantName) || 'something from the wild';
+      // descriptors already carry their article ("a tree with...")
+      var pnameArt = pname;
+      try { pnameArt = (/^(a|an)\s/i.test(pname)) ? pname : 'the ' + pname; } catch (e) {}
+      var need = lesson ? lesson.need : null;
+      if (need === 'wound') return `📖 ${tnm} is showing ${lnm} ${pnameArt} — which leaves to press on a wound.`;
+      if (need === 'hunger') return `📖 ${tnm} is showing ${lnm} ${pnameArt} — where it grows, what's safe to eat.`;
+      if (need === 'novice') return `📖 ${tnm} is walking ${lnm} through ${pnameArt} — leaf, stem, smell, the beginner's tour.`;
+      return `📖 ${tnm} is showing ${lnm} ${pnameArt} — leaf, stem, smell.`;
     },
 
     // ---------- 6. RETURN EFFECTS for the new purposes ----------
