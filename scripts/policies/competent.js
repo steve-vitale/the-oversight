@@ -206,6 +206,186 @@ function sootheTrauma(Game, ctx) {
   } catch (e) {}
 }
 
+// ---------- THE FEAST ROAD (food r7 2026-10-12) ----------
+// Env gate COMPETENT_FEAST=0 restores the exact old behavior for
+// identical-seed before/after. Default ON.
+//
+// The feast chain (the Arc-IV gate's feast deed): (1) the village hosts
+// real feasts — a real pantry cost, guests, the game's quality formula;
+// an unarmed feast is still the village's social engine (trust, bonds,
+// gossip); (2) the devotion lane arms via keepsake channeling
+// (channelSentiment: 3×L3 abilities OR surgeResonance>=35); (3) an armed
+// feast grants the FEASTED buff (2-dawn window); (4) real combat use
+// inside the window marks feastSurgeUsed (noteFeastedCombatUse). The base
+// policy never hosts feasts and its only channel is trauma-routed — the
+// chain never starts. Measured 12 seeds × 200d: 0 feast calls on 648
+// affordable days, 0 arms though surgeResonance crossed 35 on 9/12 runs.
+// A competent player who knows the conversion hosts the feast and warms
+// the blades.
+function feastOn() { return process.env.COMPETENT_FEAST !== '0'; }
+
+// DEVOTION CHANNEL (food r7): once a day, when the trauma is quiet, hold
+// a keepsake and practice — channelSentiment's focused-practice branch
+// feeds surgeResonance (+1 per gainAbilityXP call, +5 per level-up) until
+// the devotion lane arms (3×L3 OR resonance>=35). Trauma >= 8 stays the
+// soothe channel's business: sootheTrauma already ran today, and the
+// game's own branch order would soothe anyway. Never steals the soothe.
+function channelDevotion(Game, ctx) {
+  if (!feastOn()) return; // before/after harness gate
+  try {
+    const s = Game.state.scholar || {}, day = s.day || 0;
+    if (ctx._devChanDay === day) return; // one devotion channel a day
+    if ((s.trauma || 0) >= 8) return; // the soothe channel owns high-trauma days
+    if (!Game.sentimentTaught || !Game.sentimentTaught()) return;
+    if (!Game.channelReadyKeepsakes || !Game.channelSentiment) return;
+    const ready = Game.channelReadyKeepsakes();
+    if (!ready || !ready.length) return;
+    Game.channelSentiment(ready[0]);
+    ctx._devChanDay = day;
+    ctx.devotionChannels = (ctx.devotionChannels || 0) + 1;
+  } catch (e) {}
+}
+
+// THE EVENING FEAST (food r7): at dusk, at the haven, when the pantry can
+// honestly afford it. An ARMED feast is the conversion — the devotion
+// rides the fire and the 2-dawn window covers the night's fights. An
+// unarmed feast is the social engine (trust, bonds, gossip) — worth
+// doing, but less often. Cadence: armed every 7+ days (the buff window
+// is 2 dawns — re-feasting sooner just refreshes), unarmed every 14+
+// days. Affordability: have >= cost*1.5 — winseek's honest-buffer rule,
+// never feast the pantry into famine. EAT FIRST, FEAST SECOND: the feast
+// spends the commons' food — the scholar must have contributed this week
+// (recentGives, lifetime-metric bug in winseek's road fixed).
+function eveningFeast(Game, ctx) {
+  if (!feastOn()) return; // before/after harness gate
+  try {
+    if (Game.dayPart !== 2) return; // dusk — the buff rides into the night's fights
+    const s = Game.state.scholar || {}, day = s.day || 0;
+    if (s.feastDay === day) return; // the game allows one feast a day
+    if (!Game.playerAtHaven || !Game.playerAtHaven()) return;
+    const armed = !!(s.prog && s.prog.feastSurge);
+    // FUSION REACTOR CEILING (Steve 2026-10-12): an online reactor crowds
+    // out the feast's fire — the grant is honestly refused every time
+    // (measured seed 222: 6 refused armed feasts). A competent player who
+    // has heard the refusal doesn't waste the pantry on an armed feast;
+    // the social engine (unarmed cadence) still runs.
+    let armedForFeast = armed;
+    try {
+      if (armed && Game.fusionReactorOnline && Game.fusionReactorOnline()) armedForFeast = false;
+    } catch (e) {}
+    const cadence = armedForFeast ? 7 : 14;
+    if (ctx._lastFeastDay && (day - ctx._lastFeastDay) < cadence) return;
+    // EAT FIRST, FEAST SECOND (winseek's road, lifetime-metric BUG FIXED):
+    // winseek checked lifetime (takes - gives) > 3000 — but takes/gives
+    // are RUN-CUMULATIVE, so any scholar who ever eats from the pantry
+    // crosses 3000 by day ~3 and the check blocks feasting forever
+    // (measured seed 22: 86/141 armed days drain-blocked). The honest
+    // check is RECENT contribution: the scholar put food IN this week
+    // (>= 1500 kcal given in the last 7 days — about one real haul's
+    // donation). The feast spends the commons' food — contribute first.
+    if (recentGives(Game, ctx, 7) < 1500) return;
+    let plan = null;
+    try { plan = Game.feastPlan ? Game.feastPlan() : null; } catch (e) {}
+    if (!plan || !plan.ok) return;
+    if (plan.have < plan.cost * 1.5) return; // honest buffer — never feast into famine
+    let rep = null;
+    try { rep = Game.hostFeast(); } catch (e) {}
+    if (rep && rep.ok) {
+      ctx._lastFeastDay = day;
+      ctx.feasts = (ctx.feasts || 0) + 1;
+      if (armedForFeast) ctx.armedFeasts = (ctx.armedFeasts || 0) + 1;
+    } else if (rep && /Nobody came/.test(rep.why || '')) {
+      // the village is in no shape to feast (all abed or unwilling) — a
+      // competent host reads the room and doesn't re-light the fire
+      // tomorrow. (Seed 222: three straight empty-fire attempts.)
+      ctx._lastFeastDay = day;
+    }
+  } catch (e) {}
+}
+
+// FEAST-FIGHT COORDINATION (food r7): the buff is a window, not a trophy.
+// A fresh ARMED feast draws a scavenger to the haven's edge (feastDraw —
+// guaranteed, but fought): face it WHILE FEASTED so the deed marks.
+// Otherwise patrol while the window is live — a dusk feast buys the
+// night plus the full next day (2 dawns). Patrol budget 3 sweeps/day:
+// the buff is the point, a single sweep is a coin flip. (Pattern proven
+// in winseek's feastFight/feastDrawRoad.)
+function feastFightRoad(Game, ctx) {
+  if (!feastOn()) return; // before/after harness gate
+  try {
+    const s = Game.state.scholar || {}, day = s.day || 0;
+    if (Game.over || Game.tbfight) return;
+    if (!Game.feastedActive || !Game.feastedActive()) { ctx._feastFightDay = 0; return; }
+    const b = s.feastBuff || null;
+    if (b && b.used) { ctx._feastFightDay = 0; return; } // marked — nothing to gain
+    // THE DRAW: a beast circles the haven's edge. Face it while feasted.
+    try {
+      if (Game.feastDrawPending && Game.feastDrawPending()) {
+        if (Game.faceFeastDraw) Game.faceFeastDraw();
+        ctx.facedDraw = (ctx.facedDraw || 0) + 1;
+        return;
+      }
+    } catch (e) {}
+    // no draw — patrol while feasted (the night + next day are live)
+    if (ctx._feastFightDay === day && (ctx._feastFightSweeps || 0) >= 3) return;
+    const hx = Game.map.px, hy = Game.map.py;
+    const cands = [];
+    try {
+      for (const tt of (Game.travelTargets() || [])) {
+        const t = Game.tileAt(tt.x, tt.y);
+        if (!t || t.type === 'haven') continue;
+        let blocked = false;
+        try { blocked = !!Game.travelBlockage(tt.x, tt.y); } catch (e) {}
+        if (blocked) continue;
+        cands.push({ x: tt.x, y: tt.y, d: tt.d });
+      }
+    } catch (e) {}
+    cands.sort((a, b) => b.d - a.d); // far tiles — monsters live out there
+    let sweeps = 0;
+    while (!Game.over && !Game.tbfight && Game.feastedActive && Game.feastedActive() && sweeps < 3) {
+      sweeps++;
+      for (const c of cands.slice(0, 4)) {
+        if (Game.over || Game.tbfight) break;
+        if (!Game.feastedActive || !Game.feastedActive()) break;
+        try { Game.travelTo(c.x, c.y); } catch (e) { break; }
+        if (Game.over || Game.tbfight) break;
+        if (Game.map.px !== c.x || Game.map.py !== c.y) continue;
+        try { Game.doAction('forage', {}); } catch (e) {}
+        if (Game.over || Game.tbfight) break;
+      }
+    }
+    if (!Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} }
+    if (ctx._feastFightDay === day) ctx._feastFightSweeps = (ctx._feastFightSweeps || 0) + sweeps;
+    else { ctx._feastFightDay = day; ctx._feastFightSweeps = sweeps; }
+  } catch (e) {}
+}
+
+// RECENT GIVES (food r7): kcal the scholar donated to the pantry over the
+// last `days` days. takes/gives are lifetime counters — a lifetime net is
+// not a freeload test (every scholar who eats from the pantry crosses it
+// by day ~3; measured seed 22: 86/141 armed days drain-blocked). One
+// snapshot per day in ctx._givesHist (upkeep runs 3×/day; the day key
+// keeps it honest).
+function recentGives(Game, ctx, days) {
+  try {
+    const vv = Game.state.village || {};
+    const me = Game.villagerId;
+    const g = (vv.gives || {})[me] || 0;
+    const day = (Game.state.scholar || {}).day || 0;
+    ctx._givesHist = ctx._givesHist || [];
+    const last = ctx._givesHist[ctx._givesHist.length - 1];
+    if (!last || last.day !== day) ctx._givesHist.push({ day, g });
+    // AGE TRIM: the window is the last `days` days — drop the oldest
+    // snapshot only while the NEXT one is still at/before the window start,
+    // so the latest pre-window snapshot survives as the baseline. (Trimming
+    // on hist[0] alone ate the baseline and returned 0 — caught by A3b.)
+    while (ctx._givesHist.length > 1 && ctx._givesHist[1].day <= day - days) ctx._givesHist.shift();
+    while (ctx._givesHist.length > days + 1) ctx._givesHist.shift();
+    const old = ctx._givesHist[0];
+    return g - (old ? old.g : 0);
+  } catch (e) { return 0; }
+}
+
 // Talk: one real conversation a day. Relationships are the other economy.
 function talkRound(Game, ctx) {
   try {
@@ -1370,11 +1550,14 @@ const competent = {
     checkTicks(Game, ctx);
     workWater(Game, ctx);
     gearUp(Game, ctx); // equip best weapon/armor owned (longsim combat 2026-10-11)
+    eveningFeast(Game, ctx); // host the feast at dusk when honestly affordable (food r7)
+    feastFightRoad(Game, ctx); // face the feast's draw / fight while feasted (food r7)
   },
   daily(Game, ctx) {
     // steady yourself at dawn: channel a keepsake when the trauma is up
     // (longsim combat r7 2026-10-12)
     sootheTrauma(Game, ctx);
+    channelDevotion(Game, ctx); // calm days: practice a keepsake toward the devotion lane (food r7)
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
     stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
@@ -1558,4 +1741,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives };
