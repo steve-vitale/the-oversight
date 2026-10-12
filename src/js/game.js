@@ -26883,6 +26883,90 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('(The sky clears its throat. The show is defending itself.)');
       }
     },
+    // waveDropVillagerReactions: the village answers the drop (longsim wave
+    // lever r5, 2026-10-12). The documented blank: villagers never reacted
+    // when a wave dropped — the System's RATINGS beat was the only voice.
+    // One fire-side line per drop, spoken by 1-2 LIVING roster villagers
+    // (uniform pickRandomVillager — Steve's rule), temperament-keyed pools
+    // so the voice fits the person (fear/steady/bold/wry buckets; every
+    // speech reachable, nobody a fixed type). Present-tense only: these
+    // react to the broadcast itself, never to fabricated shared history.
+    // Ungated on playerAtHaven: the RATINGS beat is televised — the whole
+    // village hears it at once, and the reaction is reported in the same
+    // channel as fight summaries ("Word travels fast").
+    // Idempotent by construction: called only from checkWaveUnlockBeat after
+    // _waveAnnounced advances. Exception-guarded: beats never break unlocks.
+    waveDropVillagerReactions(wave) {
+      try {
+        const POOLS = {
+          3: {
+            fear: ['Don\'t go near the treeline alone anymore. Promise me.'],
+            steady: ['The treeline\'s different now. We mark it, we tell everyone, we don\'t go alone.'],
+            bold: ['Then we meet it with torches and steel. I\'m done being hunted.'],
+            wry: ['Great. The woods got an upgrade. Love that for us.'],
+          },
+          4: {
+            fear: ['It wears our faces? Then we don\'t trust faces after dark.'],
+            steady: ['We check each other now. Names, scars \u2014 the things only we know.'],
+            bold: ['Let it wear my face. I\'ll teach it what that costs.'],
+            wry: ['Of course it looks like us. Flattering. Still killing it.'],
+          },
+          5: {
+            fear: ['The sky\'s fighting back? Then we go quiet. We go small.'],
+            steady: ['Same work. Sharper eyes. The show doesn\'t eat unless we feed it.'],
+            bold: ['Good. Let it come down here and say that to my face.'],
+            wry: ['We\'re the main event now. Somebody tell my agent.'],
+          },
+        };
+        const pool = POOLS[wave];
+        if (!pool) return; // waves 1-2: no villager drop-beat (wave 2's beat lives in checkSystemArrival)
+        const v = this.state && this.state.village;
+        if (!v) return;
+        const me = this.villagerId;
+        const ids = (v.roster || []).filter(id => {
+          if (!id || id === me) return false;
+          let p = null;
+          try { p = this.getPerson(id); } catch (e) { return false; }
+          return !!(p && !p.dead && p.name);
+        });
+        if (!ids.length) return;
+        const bucket = t => {
+          if (['cautious', 'anxious', 'withdrawn', 'fidgety'].includes(t)) return 'fear';
+          if (['bold', 'intense', 'restless', 'prickly'].includes(t)) return 'bold';
+          if (['dry', 'sardonic', 'mischievous'].includes(t)) return 'wry';
+          return 'steady'; // steady, stoic, earnest, gentle, warm + unknown
+        };
+        const tOf = id => {
+          try {
+            const p = this.getPerson(id);
+            return String(((p && p.personality) || {}).temperament || 'steady');
+          } catch (e) { return 'steady'; }
+        };
+        // Wave 3 is the fear beat (the treeline) — two voices. 4/5: one.
+        const n = Math.min(ids.length, wave === 3 ? 2 : 1);
+        const bag = ids.slice();
+        let prevBucket = null;
+        for (let i = 0; i < n; i++) {
+          // Prefer a speaker from a different temperament bucket than the
+          // last — two villagers echoing the identical line back-to-back
+          // reads robotic (sense-caught 2026-10-12). Falls back to any
+          // living villager when the roster shares one bucket.
+          let cand = bag.filter(id => bucket(tOf(id)) !== prevBucket);
+          if (!cand.length) cand = bag;
+          const id = this.pickRandomVillager(cand);
+          bag.splice(bag.indexOf(id), 1);
+          let p = null;
+          try { p = this.getPerson(id); } catch (e) {}
+          if (!p) continue;
+          const first = String(p.name).split(' ')[0];
+          const t = tOf(id);
+          prevBucket = bucket(t);
+          const lines = pool[prevBucket] || pool.steady;
+          const line = lines[Math.floor(Math.random() * lines.length)];
+          this.say(`\u{1F525} ${first}, at the fire: "${line}"`);
+        }
+      } catch (e) {}
+    },
     // checkWaveUnlockBeat: the unlock-beat choke point (parity 2026-10-10).
     // The wave gates are fed by kills (player combat AND villager field
     // fights), both flowing through recordWaveKill — the ledger only scores
@@ -26912,6 +26996,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // timer), naming the wave's identity. Wave 2's beat lives in
       // checkSystemArrival; waves 3-5 land here, where the unlock happens.
       try { this.waveUnlockBeat(waveAfter); } catch (e) {}
+      // VILLAGER DROP REACTIONS (longsim wave lever r5, 2026-10-12): the
+      // village answers the drop — someone at the fire says a word.
+      try { this.waveDropVillagerReactions(waveAfter); } catch (e) {}
       this.audioEvent('waveUnlock');
     },
     // Track kills by wave for unlock gates

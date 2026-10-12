@@ -24,20 +24,33 @@
   const methods = {
     // waveLedgerCfg: the levers, from src/data/wave-ledger.json. Defensive —
     // the ship loop may run a tree without the file; defaults match the JSON.
+    // WAVE_EXTRA_CAP (env, default 0 = legacy): separate per-type allowance
+    // for counter-kill extras, OUTSIDE the shared perTypeCap. 0 keeps the
+    // canon breadth-not-throughput behavior (extras share the cap); >0 lets
+    // the mastery pat keep paying after a type's base cap fills.
+    // EXPERIMENT (longsim wave lever r5, 2026-10-12): unlanded unless pacing
+    // stays sane and breadth definitions hold — see evidence file.
     waveLedgerCfg() {
       try {
         const d = (this.data && this.data.waveLedger) || {};
+        let extraCap = 0;
+        try {
+          if (typeof process !== 'undefined' && process.env && process.env.WAVE_EXTRA_CAP != null) {
+            extraCap = Math.max(0, parseInt(process.env.WAVE_EXTRA_CAP, 10) || 0);
+          }
+        } catch (e) {}
         return {
           pointsPerKill: d.pointsPerKill != null ? d.pointsPerKill : 1,
           pointsPerCounterKill: d.pointsPerCounterKill != null ? d.pointsPerCounterKill : 2,
           perTypeCap: d.perTypeCap != null ? d.perTypeCap : 2,
+          extraPerTypeCap: extraCap,
           barsPerWave: Object.assign({ 1: 5, 2: 5, 3: 4, 4: 3, 5: 2 }, d.barsPerWave || {}),
           dayFloor: d.dayFloor != null ? d.dayFloor : 25,
           wave2DayFloor: d.wave2DayFloor != null ? d.wave2DayFloor : 8,
           counterBonusEnabled: Object.assign({ 1: true, 2: true, 3: true, 4: true, 5: true }, d.counterBonusEnabled || {}),
         };
       } catch (e) {
-        return { pointsPerKill: 1, pointsPerCounterKill: 2, perTypeCap: 2, barsPerWave: { 1: 5, 2: 5, 3: 4, 4: 3, 5: 2 }, dayFloor: 25, wave2DayFloor: 8, counterBonusEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true } };
+        return { pointsPerKill: 1, pointsPerCounterKill: 2, perTypeCap: 2, extraPerTypeCap: 0, barsPerWave: { 1: 5, 2: 5, 3: 4, 4: 3, 5: 2 }, dayFloor: 25, wave2DayFloor: 8, counterBonusEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true } };
       }
     },
     // ledgerState: defensive init of the ledger. Lives on this.state (the
@@ -49,10 +62,14 @@
         if (!st.waveLedger || typeof st.waveLedger !== 'object') st.waveLedger = {};
         for (let w = 1; w <= 5; w++) {
           const e = st.waveLedger[w];
-          if (!e || typeof e !== 'object') st.waveLedger[w] = { points: 0, perType: {} };
+          if (!e || typeof e !== 'object') st.waveLedger[w] = { points: 0, perType: {}, perTypeX: {} };
           else {
             if (typeof e.points !== 'number') e.points = 0;
             if (!e.perType || typeof e.perType !== 'object') e.perType = {};
+            // perTypeX: counter-kill extras scored OUTSIDE the shared cap
+            // (WAVE_EXTRA_CAP experiment, 2026-10-12). Legacy runs never
+            // write it; init defensively so old saves load clean.
+            if (!e.perTypeX || typeof e.perTypeX !== 'object') e.perTypeX = {};
           }
         }
         return st.waveLedger;
@@ -80,9 +97,14 @@
     // kills, villager field-fight kills) flows through recordWaveKill, so the
     // ledger sees them all. Engagements (faced/fled/evaded) never call
     // recordWaveKill and score NOTHING.
-    // points = counterKnown && counterBonusEnabled[wave] ? pointsPerCounterKill : pointsPerKill
-    // capped by perTypeCap per monster id. Exception-guarded: scoring never
-    // breaks a kill.
+    // Legacy: points = counterKnown && counterBonusEnabled[wave] ? pointsPerCounterKill : pointsPerKill
+    //   capped by perTypeCap per monster id (breadth, not throughput).
+    // WAVE_EXTRA_CAP experiment (2026-10-12): when cfg.extraPerTypeCap > 0,
+    // the counter extra (pointsPerCounterKill - pointsPerKill) scores into a
+    // SEPARATE per-type allowance (perTypeX), outside the shared cap — the
+    // mastery pat keeps paying after a type's base cap fills, while blind
+    // farming still caps at perTypeCap/type. Kill points never score below
+    // pointsPerKill; nothing is punished for not knowing.
     scoreLedgerKill(monsterId) {
       try {
         if (!monsterId) return 0;
@@ -94,11 +116,27 @@
         const entry = L[wave];
         const counterKnown = this.monsterCounterKnown(monsterId);
         const bonusOn = !!(cfg.counterBonusEnabled && cfg.counterBonusEnabled[wave]);
-        const points = (counterKnown && bonusOn) ? cfg.pointsPerCounterKill : cfg.pointsPerKill;
-        const room = Math.max(0, cfg.perTypeCap - ((entry.perType[monsterId] | 0)));
-        const add = Math.min(points, room);
+        const extra = (counterKnown && bonusOn) ? Math.max(0, (cfg.pointsPerCounterKill | 0) - (cfg.pointsPerKill | 0)) : 0;
+        const base = cfg.pointsPerKill | 0;
+        let add = 0;
+        if ((cfg.extraPerTypeCap | 0) > 0) {
+          // EXPERIMENT PATH: base and extras capped separately.
+          entry.perTypeX = entry.perTypeX || {};
+          const roomBase = Math.max(0, (cfg.perTypeCap | 0) - ((entry.perType[monsterId] | 0)));
+          const baseAdd = Math.min(base, roomBase);
+          const roomX = Math.max(0, (cfg.extraPerTypeCap | 0) - ((entry.perTypeX[monsterId] | 0)));
+          const extraAdd = Math.min(extra, roomX);
+          if (baseAdd > 0) entry.perType[monsterId] = (entry.perType[monsterId] | 0) + baseAdd;
+          if (extraAdd > 0) entry.perTypeX[monsterId] = (entry.perTypeX[monsterId] | 0) + extraAdd;
+          add = baseAdd + extraAdd;
+        } else {
+          // LEGACY PATH: everything shares the one per-type cap.
+          const points = extra > 0 ? (base + extra) : base;
+          const room = Math.max(0, cfg.perTypeCap - ((entry.perType[monsterId] | 0)));
+          add = Math.min(points, room);
+          if (add > 0) entry.perType[monsterId] = (entry.perType[monsterId] | 0) + add;
+        }
         if (add > 0) {
-          entry.perType[monsterId] = (entry.perType[monsterId] | 0) + add;
           entry.points += add;
           this._ledgerAnnounce(wave, entry.points, cfg);
         }

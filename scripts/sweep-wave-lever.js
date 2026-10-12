@@ -40,7 +40,9 @@ function scaleRankOrder(r) {
 
 const RANKS = ['village', 'local', 'regional', 'national', 'global'];
 
-const BEAT_RE = /wave ledger|wave \d.*(unlock|released)|📺.*wave|beasttrick|counter.*(discover|known)|the producers|mirror draft|final draft/i;
+const BEAT_RE = /wave ledger|wave \d.*(unlock|released)|📺.*wave|beasttrick|counter.*(discover|known)|the producers|mirror draft|final draft|at the fire/i;
+// (2026-10-12: added "at the fire" — the wave-drop villager reactions would
+// otherwise fire in sims but never be captured for the sense read.)
 
 (async () => {
   const seeds = parseList('SEEDS', Array.from({ length: 20 }, (_, i) => String(i + 1)).join(',')).map(Number);
