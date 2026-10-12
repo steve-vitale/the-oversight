@@ -1844,11 +1844,13 @@
   // refresh: full expedition screen re-render after an action.
   function refresh() { expeditionScreen(); }
 
-  // ACTION FEEDBACK: every action's result renders right under the action
-  // bars — never scroll to read what just happened. The engine marks the
-  // stream at action start (Game.feedbackMark); every say() after the mark
-  // is tagged 'feedback' and lands in the feedback card. Wrap every action
-  // invocation with actAndRefresh.
+  // ACTION FEEDBACK (ONE SURFACE, Steve 2026-10-12): every action's result
+  // renders in the narration box — never scroll to read what just happened.
+  // The engine marks the stream at action start (Game.feedbackMark); every
+  // say() after the mark is tagged 'feedback', and narrationBoxHTML shows
+  // the latest narration-or-feedback beat in the one box. The separate
+  // feedback card is retired. Wrap every action invocation with
+  // actAndRefresh.
   //
   // APP-SIDE FALLBACK (Steve 2026-10-07): the engine currently exposes no
   // feedbackMark/feedbackLines, which silently no-ops the feedback card and
@@ -1926,38 +1928,29 @@
     return /^Something wants to happen when you do/.test(l);
   }
 
-  function feedbackInner() {
-    let lines = [];
-    try { lines = (Game.feedbackLines && Game.feedbackLines()) || []; } catch (e) {}
-    if (!lines.length) return '';
-    const teases = _synTeaseSet();
-    // ONE TEXT STREAM (2026-10-11): entries carry {text, surface}; legacy
-    // bare strings still render.
-    const textOf = l => (l && typeof l === 'object') ? (l.text || '') : String(l == null ? '' : l);
-    return lines.map(l => {
-      const t = textOf(l);
-      if (_isSynTeaseLine(t, teases)) {
-        // IN-THE-MOMENT TEASE: distinct styled block, right under the action
-        // bars — the shiver you felt using those two abilities together.
-        return `<p class="fb-line fb-syntease" style="border-left:3px solid #b48cff;padding:6px 8px;background:rgba(150,100,255,.09);border-radius:6px;font-style:italic;margin:6px 0">🌀 ${esc(t)}</p>`;
-      }
-      return `<p class="fb-line">${esc(t)}</p>`;
-    }).join('');
-  }
-  // LAYOUT STABILITY (dialog-layout 2026-10-11): the feedback slot is ALWAYS
-  // rendered — empty or full — so its fixed CSS height never shifts the
-  // narration region when feedback appears or clears. refreshFeedback keeps
-  // the container and only swaps the inner card.
+  // ONE SURFACE (Steve 2026-10-12): the separate feedback card is retired —
+  // action feedback now renders in the narration box (narrationBoxHTML), one
+  // beat at a time. The old card builder (feedbackInner) is removed with it.
+  // Kept as a no-op so any lingering caller is harmless.
+  // refreshFeedback re-renders the narration region instead of a card.
   function feedbackHTML() {
-    const inner = feedbackInner();
-    return `<div id="actionfeedback" class="ord-feedback">${inner ? `<div class="feedbackcard">${inner}</div>` : ''}</div>`;
+    return '';
   }
   function refreshFeedback() {
-    const fb = document.getElementById('actionfeedback');
-    if (fb) {
-      const inner = feedbackInner();
-      fb.innerHTML = inner ? `<div class="feedbackcard">${inner}</div>` : '';
-    }
+    // Re-wire the region's buttons (dialogue + contest choices) like the
+    // full render, so a swapped-in contest box stays playable.
+    const narr = document.querySelector('.ord-narration');
+    if (!narr) return;
+    try {
+      narr.innerHTML = narrationBoxHTML(Game.state, chatView);
+      wireDialogueBox();
+      const ac2 = Game.state && Game.state.activeContest;
+      if (ac2 && ac2.phase !== 'done') {
+        narr.querySelectorAll('[data-contest-choice]').forEach(b => {
+          b.onclick = () => { try { Game.contestChoose(+b.dataset.contestChoice); } catch (e) {} rerender(); };
+        });
+      }
+    } catch (e) {}
   }
 
   // refreshTilePanel: re-render the inline panel after an action (stays in context)
@@ -12431,24 +12424,33 @@
         };
       }
     }
-    // ONE TEXT STREAM (2026-10-11): the narration box consumes ONLY the
-    // narration surface — never feedback lines. (The old `fb || lastNarr`
-    // echoed the orange feedback card's text in the green box: Steve
-    // 2026-10-11, same text in two stacked panels.)
+    // ONE SURFACE (Steve 2026-10-12): the narration box is the single text
+    // surface — action feedback beats render here, not in a separate card.
+    // Latest beat wins (narration or feedback, in log order): one message at
+    // a time, Pokémon-style, no scrolling for the current beat. (2026-10-11
+    // kept feedback out of this box because the same text echoed in two
+    // stacked panels — the separate card is gone now, so there is nothing
+    // left to echo.)
     const _stream = Game.log || [];
-    let lastNarr = '';
+    let lastBeat = '';
     for (let i = _stream.length - 1; i >= 0; i--) {
       const e = _stream[i];
       const s = (e && typeof e === 'object') ? (e.surface || 'narration') : 'narration';
-      if (s === 'narration') { lastNarr = (e && typeof e === 'object') ? (e.text || '') : String(e); break; }
+      if (s === 'narration' || s === 'feedback') { lastBeat = (e && typeof e === 'object') ? (e.text || '') : String(e); break; }
     }
-    const text = lastNarr;
+    const text = lastBeat;
     if (!text) return '';
     // Strip HTML, show as plain narration (</p> boundaries become spaces
     // so adjacent feedback lines don't glue: "slams through!A woman..." fix
-    const clean = String(text).replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    let clean = String(text).replace(/<\/p>/gi, ' ').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
     if (!clean) return '';
-    return `<div class="dialogue-box narr-box"><div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div></div>`;
+    // SYNERGY TEASE (unified surface): the in-the-moment shiver keeps its
+    // purple accent and mark inside the one box.
+    let beatCls = '';
+    try {
+      if (_isSynTeaseLine(clean, _synTeaseSet())) { beatCls = ' narr-syntease'; clean = '🌀 ' + clean; }
+    } catch (e) {}
+    return `<div class="dialogue-box narr-box${beatCls}"><div class="dlg-line narr"><span class="narr">${esc(clean)}</span></div></div>`;
   }
 
   function wireDialogueBox() {
@@ -14116,8 +14118,7 @@
         <div class="ord-ctx">${inCombat ? '' : contextBarHTML()}</div>
         <div class="ord-target">${targetBarHTML()}</div>
         <div class="ord-danger">${dangerBarHTML()}</div>
-        <div class="ord-ability">${abilityBarHTML()}</div>
-        ${feedbackHTML()}`;
+        <div class="ord-ability">${abilityBarHTML()}</div>`;
       // Re-wire the new buttons (each bar has its own wirer) — but only
       // when the HTML actually changed; re-wiring identical buttons is
       // pure main-thread cost during fast movement.
@@ -14366,7 +14367,6 @@
       <div class="ord-status">${statusBars(st)}</div>
       </div><div class="game-col-side">
         <div class="ord-narration">${narrationBoxHTML(st, null)}</div>
-        ${feedbackHTML()}
       </div></div>`;
     const wire = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = () => { fn(); refresh(); }; };
     wire('tr-light', () => Game.lightTentFire());
@@ -14465,7 +14465,6 @@
               <div class="ord-target">${targetBarHTML()}</div>
               <div class="ord-danger">${dangerBarHTML()}</div>
               <div class="ord-ability">${abilityBarHTML()}</div>
-              ${feedbackHTML()}
             </div>
           </div>
           <div class="ord-narration">${narrationBoxHTML(st, chatView)}</div>

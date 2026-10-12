@@ -9,9 +9,10 @@
 //      (content scrolls inside the region, never pushes grid/d-pad/status)
 //   2. .dialogue-box fills the region exactly (height:100%), flex column —
 //      speaker pinned, current line scrolls, choices/▼ stay visible
-//   3. .ord-feedback has a FIXED pixel height + internal overflow, and
-//      feedbackHTML() ALWAYS emits the slot (never ''), so the slot's
-//      appearance/disappearance can't shift anything
+//   3. (2026-10-12: the .ord-feedback slot is retired with the card — one
+//      surface now. Layout stability lives in .ord-narration's FIXED 184px
+//      height: feedback beats render inside it, so nothing can shift.)
+//      feedbackHTML() is a no-op; refreshFeedback re-renders .ord-narration.
 //   4. .toast-layer is position:fixed (out of flow — toasts never shift layout)
 //   5. .speech-bubble is position:absolute inside position:relative .cell
 //      with fixed cell sizing (flex:none + aspect-ratio) — bubbles cannot
@@ -77,20 +78,22 @@ const has = (block, prop, valRe) => {
   ok('person card scrolls inside region', !!card && /overflow-y\s*:\s*(auto|scroll)/.test(card));
 }
 
-// --- 3. .ord-feedback: fixed slot, always rendered ---
+// --- 3. one surface: feedback card retired, narration region is the slot ---
 {
   const b = rule('.ord-feedback');
-  ok('ord-feedback fixed px height', has(b, 'height', /^\d+px$/));
-  ok('ord-feedback overflow-y internal', has(b, 'overflow-y', /^(auto|scroll)$/));
-  // feedbackHTML must never return '' — the slot is always in the DOM.
+  ok('ord-feedback CSS gone (no second slot to shift layout)', !b);
+  // feedbackHTML is now a deliberate no-op — nothing renders a second card.
   const fn = APP.match(/function feedbackHTML\(\) \{[\s\S]*?\n  \}/);
-  ok('feedbackHTML defined', !!fn);
-  ok('feedbackHTML never returns empty string', !!fn && !/return\s+'';/.test(fn[0]));
-  ok('feedbackHTML always emits ord-feedback container',
-    !!fn && /class="ord-feedback"/.test(fn[0]));
+  ok('feedbackHTML defined (no-op for lingering callers)', !!fn);
+  ok('feedbackHTML returns empty string (no card markup)',
+    !!fn && /return\s+'';/.test(fn[0]) && !/feedbackcard|ord-feedback/.test(fn[0]));
   const rf = APP.match(/function refreshFeedback\(\) \{[\s\S]*?\n  \}/);
-  ok('refreshFeedback keeps container, swaps inner only',
-    !!rf && /fb\.innerHTML\s*=/.test(rf[0]) && !/remove\(\)|outerHTML\s*=/.test(rf[0]));
+  ok('refreshFeedback re-renders .ord-narration (fixed-height region, no shift)',
+    !!rf && /querySelector\('\.ord-narration'\)/.test(rf[0]) && /narrationBoxHTML\(Game\.state, chatView\)/.test(rf[0]));
+  // the region that now carries feedback beats is still fixed-height.
+  const nb = rule('.ord-narration');
+  ok('ord-narration still fixed px height (feedback beats cannot push layout)',
+    has(nb, 'height', /^\d+px$/));
 }
 
 // --- 4. toast layer: out of flow ---
@@ -124,7 +127,9 @@ const has = (block, prop, valRe) => {
 
 // --- 7. no unmeasured content injection in the text builders ---
 {
-  const builders = ['narrationBoxHTML', 'dialogueBoxHTML', 'contestBoxHTML', 'feedbackHTML', 'feedbackInner'];
+  // (2026-10-12: feedbackInner removed with the retired feedback card —
+  // one surface now. feedbackHTML remains as a no-op.)
+  const builders = ['narrationBoxHTML', 'dialogueBoxHTML', 'contestBoxHTML', 'feedbackHTML'];
   let bad = [];
   for (const name of builders) {
     const m = APP.match(new RegExp('function ' + name + '\\([\\s\\S]*?\\n  \\}', ''));

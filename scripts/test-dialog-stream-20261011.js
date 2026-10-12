@@ -263,14 +263,19 @@ console.log('\n== PART 3 — app.js renderer contracts (static) ==');
   const app = fs.readFileSync(path.join(ROOT, 'src/js/app.js'), 'utf8');
   check('narrationBoxHTML no longer echoes feedback (fb || lastNarr gone)',
     !/const fb = feedbackInner\(\);\s*\n?\s*const text = fb \|\| lastNarr/.test(app));
-  check('narrationBoxHTML consumes narration surface only',
-    /s === 'narration'/.test(app) && /lastNarr = \(e && typeof e === 'object'\) \? \(e\.text/.test(app));
+  // ONE SURFACE (Steve 2026-10-12, overrules the 2026-10-11 split): the
+  // narration box is the single text surface — it consumes the latest
+  // narration OR feedback beat. The separate feedback card is retired.
+  check('narrationBoxHTML consumes latest narration-or-feedback beat (one surface)',
+    /s === 'narration' \|\| s === 'feedback'/.test(app) && /let lastBeat = ''/.test(app));
+  check('feedbackInner retired with the card (no second surface builder)',
+    !/function feedbackInner\(\)/.test(app));
   check('Game.toast no longer bare-pushes into narration log',
     !/Also log it \(history\), but don.t show in narration box/.test(app));
   check('Game.toast routes through the tagged stream',
     /this\.emit\(msg, 'toast'\)/.test(app));
-  check('feedbackInner reads entry .text (tagged entries)',
-    /const textOf = l => \(l && typeof l === 'object'\) \? \(l\.text/.test(app));
+  // (2026-10-12: feedbackInner removed with the retired card — contract moved
+  // to the one-surface checks above.)
   check('fallback feedbackLines filters feedback surface only',
     /=== 'feedback'/.test(app));
   // contest/person-card/dialogue precedence untouched in narrationBoxHTML

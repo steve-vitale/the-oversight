@@ -18,8 +18,10 @@ function ok(cond, msg) {
 }
 
 // ---------- 1. static: functions exist ----------
+// (2026-10-12: feedbackInner removed with the retired feedback card — one
+// surface now. feedbackHTML remains as a no-op for lingering callers.)
 for (const fn of ['renderBuildIndicator', 'renderSynergyStirrings', 'renderIntegrationLevel',
-                  'feedbackInner', 'feedbackHTML', '_synTeaseSet', '_isSynTeaseLine']) {
+                  'feedbackHTML', '_synTeaseSet', '_isSynTeaseLine']) {
   ok(src.includes('function ' + fn + '('), fn + '() defined in app.js');
 }
 
@@ -30,9 +32,10 @@ const invBlock = invInline.slice(0, invInline.indexOf('function renderMap(') ===
 for (const fn of ['renderBuildIndicator()', 'renderSynergyStirrings()', 'renderIntegrationLevel()']) {
   ok(invInline.slice(0, 5000).includes('${' + fn + '}'), fn + ' rendered in renderInvInline (pack view)');
 }
-// feedback card must render under the action bars (expedition screen + movement sync)
+// one surface (2026-10-12): no second feedback card under the action bars —
+// feedback beats render in the narration box. Zero insertions survive.
 const fbCalls = (src.match(/\$\{feedbackHTML\(\)\}/g) || []).length;
-ok(fbCalls >= 2, 'feedbackHTML() rendered under action bars (' + fbCalls + ' call sites: expeditionScreen + syncAfterMove)');
+ok(fbCalls === 0, 'no feedbackHTML() insertions in render templates (' + fbCalls + ' found)');
 // app-side feedbackMark/feedbackLines fallback present (engine lacks them)
 ok(src.includes('APP-SIDE FALLBACK'), 'app-side Game.feedbackMark/feedbackLines fallback present');
 ok(src.includes("typeof Game.feedbackMark !== 'function'"), 'fallback does not clobber an engine definition');
