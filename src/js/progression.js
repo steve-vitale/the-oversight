@@ -744,14 +744,19 @@
       try { this.save(); } catch (e) {}
     },
     // AUDIENCE ENCORE (pacing build 2026-10-10): post-40 the audience keeps
-    // wanting trials. Recurring, cooldown-gated (completeTrial sets +7), so
+    // wanting trials. Recurring, cooldown-gated (completeTrial sets +4 —
+    // was +7, retuned longsim abilities r3 2026-10-11), so
     // the 60-milestone trial is the first of many, not a one-shot.
+    // CADENCE (longsim abilities r3 2026-10-11): trials were the main
+    // recurring System ability pipe but fired ~4.5/run with ~2 completions —
+    // synergies stayed acquisition-starved (50/51 unreachable in sims).
+    // 0.25 -> 0.40: the audience is keener, not the trials easier.
     checkAudienceEncore() {
       const s = this.state.scholar, pg = this.progState();
       if (!this.state.systemArrived) return;
       if ((s.integration || 0) < 40) return;
       if (pg.trial || (pg.trialCd || 0) > (s.day || 0)) return;
-      if (Math.random() < 0.25) this.offerAudienceTrial('audience');
+      if (Math.random() < 0.40) this.offerAudienceTrial('audience');
     },
     checkTrial(kind) {
       const s = this.state.scholar, pg = this.progState();
@@ -777,7 +782,17 @@
     },
     completeTrial() {
       const s = this.state.scholar, pg = this.progState();
-      pg.trial = null; pg.trialCd = (s.day || 0) + 7;
+      // SENSE-TESTING (longsim abilities r3 2026-10-11): the recordMoment
+      // below referenced `t.name` — `t` was never bound in this scope
+      // (pg.trial was just nulled), so the ReferenceError died in the
+      // try/catch and the moment + its viewership point never fired.
+      // Capture the trial first; record its player-facing text.
+      const t = pg.trial;
+      // CADENCE (longsim abilities r3 2026-10-11): +7 -> +4. A completed
+      // trial means a proven performer — the audience books the next one
+      // sooner. Expiry cooldown (checkTrial, +5) unchanged: failures keep
+      // the old rhythm — the audience's disappointment has a half-life.
+      pg.trial = null; pg.trialCd = (s.day || 0) + 4;
       this.integrate(15, 'audience trial');
       // the gift: a System ability, if there's room
       // (break-it abilities 2026-10-09: the old filter was `a.system` — a
@@ -808,7 +823,7 @@
         }
       } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('showmanship', 3); } catch (e) {}
-      try { if (this.recordMoment) this.recordMoment(`Survived the audience's trial: ${t.name}.`); } catch (e) {}
+      try { if (this.recordMoment && t) this.recordMoment(`Survived the audience's trial: ${t.text}.`); } catch (e) {}
       const luck = (pg.flags || {}).quiet_luck ? ' Quiet luck was with you.' : '';
       this.say(`◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration${gift ? `, gift: ${gift}` : ''})${luck}`);
       try { this.save(); } catch (e) {}
