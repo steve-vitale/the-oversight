@@ -108,6 +108,7 @@
       var atk = mdef.attack || {};
       var dmgRange = (atk.damage && atk.damage.length === 2) ? atk.damage : [6, 10];
       var atkName = atk.name || 'attack';
+      var roundAtkName = atkName; // this round's actual move (multi-move)
       var mSpeed = mdef.speed || 3;
       var wave = mdef.wave || 1;
       // AID (comms 2026-10-10): the signal fire's smoke draws company — the
@@ -313,7 +314,31 @@
               vHp = _sigCtx.vHp; wb = _sigCtx.wb;
               if (vHp <= 0) vAlive = false;
               if (_sigDone) continue;
-              var d = lroll(dmgRange);
+              // MULTI-MOVE (2026-10-12): the monster's real kit, not just the
+              // legacy slot — villagers face the same varied fight. Range
+              // conditions are abstracted off-screen; hp-gates are honored.
+              var rDmgRange = dmgRange, rAtkName = atkName;
+              try {
+                var _kit = (mdef.attacks && mdef.attacks.length ? mdef.attacks : []).filter(function(a){ return a && a.name && a.damage; });
+                if (_kit.length > 1) {
+                  var _mHpFrac = 1;
+                  try { _mHpFrac = members[mi].hp / members[mi].maxHp; } catch (e0) {}
+                  var _legal = _kit.filter(function(a){
+                    var c = a.condition || {};
+                    if (c.hpBelow != null && !(_mHpFrac < c.hpBelow)) return false;
+                    if (c.hpAbove != null && !(_mHpFrac > c.hpAbove)) return false;
+                    return true;
+                  });
+                  var _pool = _legal.length ? _legal : _kit.slice(0, 1), _tot = 0, _k;
+                  for (_k = 0; _k < _pool.length; _k++) _tot += (_pool[_k].weight || 1);
+                  var _r = RR() * _tot, _c = _pool[0];
+                  for (_k = 0; _k < _pool.length; _k++) { _r -= (_pool[_k].weight || 1); if (_r <= 0) { _c = _pool[_k]; break; } }
+                  rAtkName = _c.name;
+                  rDmgRange = (_c.damage && _c.damage.length === 2) ? _c.damage : dmgRange;
+                }
+              } catch (e) {}
+              roundAtkName = rAtkName;
+              var d = lroll(rDmgRange);
               // HIGHBEAM (verbatim behavior): the antlers thrash anyone
               // adjacent IN ADDITION to the beam. Closing in has a price.
               var thrash = 0;
@@ -355,7 +380,7 @@
               }
               if (hittingAlly) {
                 allyHp -= total;
-                rec.log.push('R' + round + ': ' + atkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
                 if (allyHp <= 0) {
                   allyIn = false;
                   rec.log.push(allyName + ' goes down!');
@@ -382,7 +407,7 @@
                   rec.log.push(vName + ' braces — takes it on the shoulder, rolling with it. ' + _pre + ' → ' + total + '. (Unbreakable)');
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
-                rec.log.push('R' + round + ': ' + atkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
+                rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
           } else {
@@ -447,6 +472,15 @@
           }
         }
         // ---- morale: situational, never a flat roll ----
+        // KNOWLEDGE AGGREGATOR (2026-10-12): the village learns together — a
+        // villager who lives through the round brings the monster's move home.
+        if (vAlive && vHp > 0 && roundAtkName && roundAtkName !== 'attack') {
+          try {
+            var _vp = this.state.villagePatterns || (this.state.villagePatterns = {});
+            var _ve = _vp[mdef.id] || (_vp[mdef.id] = {});
+            _ve[roundAtkName] = true;
+          } catch (e) {}
+        }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
         // SITUATIONAL MORALE (Steve 2026-10-09): after a couple of rounds the

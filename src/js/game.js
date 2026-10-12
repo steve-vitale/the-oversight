@@ -27149,14 +27149,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbLearnPattern(m) {
       const p = this.tbFighter('p');
       if (!p || !p.alive) return; // the dead learn nothing
-      const atk = m.mdef.attack || {};
-      if (!atk.name) return;
+      // MULTI-MOVE (2026-10-12): learn the move that actually discharged (the
+      // telegraph names it); fall back to the fighter's current move, then the
+      // legacy slot for pattern-less calls (heckler headliner etc.).
+      const tg = m.telegraph || {};
+      const atkName = tg.attackName || (m.moveAtk || {}).name || (m.mdef.attack || {}).name;
+      const pattern = tg.pattern || (m.moveAtk || {}).pattern || (m.mdef.attack || {}).pattern;
+      if (!atkName) return;
       this.state.codex.monsters = this.state.codex.monsters || {};
       const c = this.state.codex.monsters[m.mdef.id] || (this.state.codex.monsters[m.mdef.id] = {});
       c.patterns = c.patterns || {};
-      if (!c.patterns[atk.name]) {
-        c.patterns[atk.name] = this.tbPatternDesc(atk.pattern, m.mdef);
-        this.say(`📖 Codex: ${atk.name} — ${c.patterns[atk.name]}. You won't forget this.`);
+      if (!c.patterns[atkName]) {
+        c.patterns[atkName] = this.tbPatternDesc(pattern, m.mdef);
+        this.say(`📖 Codex: ${atkName} — ${c.patterns[atkName]}. You won't forget this.`);
       }
       // MONSTER COUNTERS (structural 2026-10-10, Worker C): the attack
       // discharged and you lived — the recovery window opens. strike_recovery
@@ -27953,7 +27958,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     tbTelegraphCue(m) {
       const tg = m.telegraph;
-      const atk = m.mdef.attack || {};
+      // MULTI-MOVE (2026-10-12): cue the committed move. The telegraph names
+      // it at declare time; encAtk supplies flavor text for the move.
+      const committed = this.encAtk(m) || {};
+      const atk = (tg && tg.attackName)
+        ? { name: tg.attackName, pattern: tg.pattern || committed.pattern, telegraph: committed.telegraph }
+        : committed;
       // BATCH 4 (corporate horrors): bespoke codex-gated cues.
       try {
         const b4 = this.tbBatch4Cue(m);
@@ -27995,7 +28005,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let cue = atk.telegraph || 'It shifts. Something is coming.';
       if (tg && tg.turnsLeft === 1) cue += " It's about to break loose!";
       else if (tg && tg.turnsLeft > 1) cue += ' It is still gathering itself…';
-      return cue + knownTail();
+      // MULTI-MOVE ODDS (2026-10-12): the System HUD estimates the kit when
+      // patterns are unlearned; exact once learned (via knownTail).
+      return cue + this.tbMoveOddsCue(m) + knownTail();
     },
 
     // BATCH 4 telegraph cues: diegetic always, tactical only when earned.
@@ -30939,6 +30951,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     encTelegraphKnown(m) {
       const id = (m.mdef || {}).id;
       if (!id) return false;
+      // MULTI-MOVE (2026-10-12): known if ANY of the kit's patterns is learned.
+      try {
+        const kit = this.tbMoveKit(m);
+        if (kit.some(a => a.name && a.damage && this.tbPatternKnown(id, a.name))) return true;
+      } catch (e) {}
       const atkName = (m.mdef.attack || {}).name;
       if (atkName && this.tbPatternKnown(id, atkName)) return true;
       try {
@@ -31742,7 +31759,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.audioEvent(aa);
     },
     encDeclareDirect(m, target, cueText) {
-      const atk = m.mdef.attack || {};
+      // MULTI-MOVE (2026-10-12): declare the chosen move, not the legacy slot.
+      const atk = this.tbEnsureMove(m, target) || {};
       const pat = atk.pattern || { type: 'direct', range: 3 };
       m.telegraph = { kind: 'direct', targetKey: target.key, dmg: atk.damage,
         attackName: atk.name, pattern: pat, turnsLeft: pat.windup || 1,
@@ -31754,7 +31772,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.tbRefreshTelegraphUI();
     },
     encDeclareBeam(m, foe, cueText) {
-      const atk = m.mdef.attack || {};
+      // MULTI-MOVE (2026-10-12): declare the chosen move, not the legacy slot.
+      const atk = this.tbEnsureMove(m, foe) || {};
       const pat = atk.pattern || { type: 'beam', length: 5, width: 1 };
       // BEAM: terrain blocks the shot at declare — break line of sight,
       // break the beam. (Fighters never block: it goes through them.)
@@ -31980,6 +31999,133 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         '"—told you the creek was—"',
         '"—still here? still here?—"',
       ], 'nmVoice');
+    },
+    // === MULTI-MOVE ENGINE (2026-10-12, Steve: "no two fights feel the same") ===
+    // Monsters carry an `attacks` kit (data: monsters.json); `attack` stays as
+    // attacks[0] for back-compat. Each turn the monster picks ONE legal move —
+    // range/condition-gated, weighted, honest. The telegraph always shows WHERE
+    // (the grid never lies); the cue shows WHAT with knowledge gating: dread
+    // when unlearned, System odds at integration 2+, the exact move once every
+    // pattern is learned. Tile-based patterns (beam/burst/charge/line) telegraph
+    // with windup >= 2 — one turn is not enough to read landing cells.
+    tbMoveKit(m) {
+      const mdef = (m && m.mdef) || {};
+      if (mdef.attacks && mdef.attacks.length) return mdef.attacks;
+      const a = mdef.attack;
+      return (a && a.name) ? [a] : [];
+    },
+    // The attack this fighter is currently committed to: the chosen move, else
+    // the legacy single attack. Declare helpers and cues read through here.
+    encAtk(m) {
+      return (m && m.moveAtk) || (m && m.mdef && m.mdef.attack) || {};
+    },
+    tbMoveLegal(m, a, d, hpFrac) {
+      const c = (a && a.condition) || {};
+      if (c.minRange != null && d < c.minRange) return false;
+      if (c.maxRange != null && d > c.maxRange) return false;
+      if (c.hpBelow != null && hpFrac >= c.hpBelow) return false;
+      if (c.hpAbove != null && hpFrac <= c.hpAbove) return false;
+      if (c.firstTurn && (m.moveTurnsUsed || 0) > 0) return false;
+      if (c.cooldownTurns && ((m.moveCd || {})[a.name] || 0) > 0) return false;
+      if (c.requiresFlag && !m[c.requiresFlag]) return false;
+      if (c.forbidFlag && m[c.forbidFlag]) return false;
+      if (c.flagGte && !((m[c.flagGte.field] || 0) >= c.flagGte.value)) return false;
+      if (c.flagLt && !((m[c.flagLt.field] || 0) < c.flagLt.value)) return false;
+      if (c.flagEq && (m[c.flagEq.field] || null) !== c.flagEq.value) return false;
+      return true;
+    },
+    tbChooseMove(m, foe) {
+      const kit = this.tbMoveKit(m);
+      if (!kit.length) { m.moveAtk = null; m.moveOdds = []; return null; }
+      // tick down per-move cooldowns
+      if (m.moveCd) for (const k of Object.keys(m.moveCd)) if (m.moveCd[k] > 0) m.moveCd[k] -= 1;
+      const fx = (foe && foe.f) ? foe.f : foe;
+      const d = (fx && m) ? Math.max(Math.abs(fx.mx - m.mx), Math.abs(fx.my - m.my)) : 99;
+      const hpFrac = (m.maxHp && m.hp != null) ? m.hp / m.maxHp : 1;
+      const legal = kit.filter(a => this.tbMoveLegal(m, a, d, hpFrac));
+      const pool = legal.length ? legal : kit.slice(0, 1);
+      let total = 0;
+      for (const a of pool) total += (a.weight || 1);
+      let r = Math.random() * total, chosen = pool[0];
+      for (const a of pool) { r -= (a.weight || 1); if (r <= 0) { chosen = a; break; } }
+      m.moveAtk = chosen;
+      m.moveOdds = pool.map(a => ({ name: a.name, pct: Math.round(100 * (a.weight || 1) / total) }));
+      m.moveTurnsUsed = (m.moveTurnsUsed || 0) + 1;
+      m.moveCd = m.moveCd || {};
+      const cd = (chosen.condition || {}).cooldownTurns;
+      if (cd) m.moveCd[chosen.name] = cd;
+      return chosen;
+    },
+    // Idempotent: a committed telegraph keeps its move; a bespoke branch that
+    // pre-named its move via tbDeclareAs keeps it too; otherwise choose fresh.
+    // The telegraph IS the commitment — no separate lifecycle to manage.
+    tbEnsureMove(m, foe) {
+      if (m.telegraph) return this.encAtk(m);
+      if (m.moveAtk && m.moveAtk.name) return m.moveAtk;
+      return this.tbChooseMove(m, foe) || this.encAtk(m);
+    },
+    // Name the move a bespoke branch is declaring, so cues, learning, odds and
+    // the HUD all agree with what the branch actually does.
+    tbDeclareAs(m, moveName) {
+      const kit = this.tbMoveKit(m);
+      const found = kit.find(a => a.name === moveName);
+      if (found) {
+        m.moveAtk = found;
+        m.moveOdds = [{ name: found.name, pct: 100 }];
+      }
+      return this.encAtk(m);
+    },
+    // Non-damaging moves: behaviors, not telegraphs.
+    tbMonsterTactic(m, foe, atk, blocked) {
+      const tac = (atk && atk.tactic) || '';
+      const cue = (atk && atk.telegraph) || 'It shifts. Something is coming.';
+      if (tac === 'reposition') {
+        // Drift/Stalk: slip 1-2 tiles in a random direction. Hard to predict.
+        // The moth's drift is bespoke (light-seeking) — the tactic names it.
+        if (this.mothIs && this.mothIs(m)) {
+          this.tbMothApproach(m, foe, blocked);
+          this.say(cue);
+          try { this.tbAggroAudio(m); } catch (e) {}
+          return;
+        }
+        const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+        for (let n = 0; n < 2; n++) {
+          const [dx, dy] = dirs[Math.floor(Math.random() * dirs.length)];
+          const nx = Math.max(1, Math.min(7, m.mx + dx)), ny = Math.max(1, Math.min(7, m.my + dy));
+          if (this.tbCanOccupy && !this.tbCanOccupy(m, nx, ny)) continue;
+          m.mx = nx; m.my = ny;
+        }
+        this.say(cue);
+      } else if (tac === 'bunker' && this.turtleIs(m)) {
+        // WITHDRAW: seal the shell. The existing bunker state does the work.
+        m.turtleBunker = 2;
+        this.say(cue + ' (Sealed. Wait it out — or flip it.)');
+        try { this.audioEvent('turtleBunker'); } catch (e) {}
+      } else {
+        this.say(cue);
+      }
+      try { this.tbAggroAudio(m); } catch (e) {}
+    },
+    // The odds cue: what the System HUD estimates the monster is planning.
+    // Move NAMES are System catalog (it designed these things — stage 2+
+    // shares the catalog); move EFFECTS stay earned via tbLearnPattern.
+    tbMoveOddsList(m) {
+      // "Ocular Discharge 60% / Antler Sweep 40%" — '' when N/A (single move,
+      // all patterns learned, or stage < 2).
+      const kit = this.tbMoveKit(m);
+      if (kit.length <= 1) return '';
+      const id = (m.mdef || {}).id;
+      const allLearned = kit.every(a => !a.name || !a.damage || this.tbPatternKnown(id, a.name));
+      if (allLearned) return '';
+      let stage = 0;
+      try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
+      if (stage < 2) return '';
+      const odds = (m.moveOdds && m.moveOdds.length ? m.moveOdds : kit.map(a => ({ name: a.name, pct: '?' })));
+      return odds.map(o => `${o.name} ${o.pct}%`).join(' / ');
+    },
+    tbMoveOddsCue(m) {
+      const list = this.tbMoveOddsList(m);
+      return list ? ` 📺 SYSTEM: "Reading intent… ${list}."` : '';
     },
     tbMonsterTurn(m) {
       const f = this.tbfight;
@@ -32706,7 +32852,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 4. act by pattern
       let foe = S.combat.nearestEnemy(f.fighters, m);
       if (!foe) return;
-      const pat = (m.mdef.attack && m.mdef.attack.pattern) || { type: 'burst', radius: 1 };
+      // MULTI-MOVE (2026-10-12): choose this turn's move from the kit, fresh
+      // every turn. Sets m.moveAtk/m.moveOdds; every declare below reads
+      // encAtk. (Pending telegraphs returned above — never double-choose.)
+      const atk = this.tbChooseMove(m, foe);
+      const pat = (atk && atk.pattern) || { type: 'burst', radius: 1 };
       // TRAMPLE (boar): a missed charge ends here — grinding hooves on
       // whatever is close. This is the price of the dodge.
       if (this.boarIs(m) && m.boarTrample) {
@@ -32739,7 +32889,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // breathes. But crowding it is still a mistake: it paws at anyone
       // adjacent. The recharge is a window at spear range (2) — one step out
       // of reach, where it can't touch you — not a free pass up close.
-      if (pat.sweep && (m.beamCooldown || 0) > 0) {
+      // MULTI-MOVE (2026-10-12): the cooldown is fighter state, not a function
+      // of this turn's chosen move — it ticks even on an Antler Sweep turn.
+      if ((m.beamCooldown || 0) > 0) {
         m.beamCooldown -= 1;
         if (useFifo) this.encSetPhase(m, 'cooldown');
         const bd = Math.max(Math.abs(foe.f.mx - m.mx), Math.abs(foe.f.my - m.my));
@@ -32809,7 +32961,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // E/S/SE (their own body "blocked" the step).
       const blocked = (x, y) => !this.tbCanOccupy(m, x, y);
       const danger = this.tbDangerCells(m.key);
-      const atk = m.mdef.attack;
+      // (atk/pat were chosen above at the section head. Bespoke branches below
+      // own their turns; tactics are handled in the generic fallthrough so a
+      // tactic roll never hijacks a bespoke monster.)
       // ============ BATCH 3 (the uncanny): bespoke encounters ============
       // Each branch is one monster's personality — its phases, its tell, its
       // counterplay. The generic engine still owns telegraph countdown,
@@ -33895,6 +34049,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               ? 'Fully gold — Sun-Charged Bite incoming. It tracks: hit it NOW and the charge dies before it lands.'
               : 'Its scales go molten gold. Heat shimmers off its back. Something is about to happen.';
             this.say(biteCue);
+            // MULTI-MOVE (2026-10-12): name the declared move so cues,
+            // learning, odds and HUD agree with the charge-gated bite.
+            this.tbDeclareAs(m, 'Sun-Charged Bite');
             this.encDeclareDirect(m, t, biteCue);
             m.telegraph.dmg = this.sbBiteDmg(m);
           } else {
@@ -34863,6 +35020,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.tbEndCheck();
           return;
         }
+      }
+      // MULTI-MOVE TACTICS (2026-10-12): non-damaging moves execute a behavior,
+      // not a telegraph. Generic path only — bespoke branches returned above.
+      if (atk.tactic) {
+        this.tbMonsterTactic(m, foe, atk, blocked);
+        this.tbRefreshTelegraphUI(); this.tbEndCheck(); return;
       }
       // MOTH: it doesn't advance — it drifts, erratically, toward light.
       let approachHandled = false;
@@ -36644,12 +36807,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           case 'monster': {
             const e = (s.codex.monsters || {})[id] || {};
             const pat = opts && opts.pattern;
+            // KNOWLEDGE AGGREGATOR (2026-10-12, Steve: the System is the
+            // village's gossip network, not an Earth expert — the aliens
+            // forgot). At integration 2+ the System shares what the VILLAGE
+            // learned: patterns any villager survived unlock your warnings,
+            // any villager's kill unlocks the stats. Earned, not given — just
+            // no longer only by your own hands.
+            let stage = 0;
+            try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (ee) {}
+            const vPat = (stage >= 2 && s.villagePatterns && s.villagePatterns[id]) || {};
+            const vSlain = stage >= 2 && !!((s.villageSlain || {})[id]);
+            const patKnown = (p) => !!((e.patterns && e.patterns[p]) || vPat[p]);
             switch (aspect) {
               case 'name': return !!(e.stage === 'observed' || e.stage === 'slain');
-              case 'stats': return e.stage === 'slain';
+              case 'stats': return e.stage === 'slain' || vSlain;
               case 'mechanics':
-                if (pat) return !!(e.patterns && e.patterns[pat]);
-                return !!(e.patterns && Object.keys(e.patterns).length);
+                if (pat) return patKnown(pat);
+                return !!((e.patterns && Object.keys(e.patterns).length) || Object.keys(vPat).length);
               case 'lore': return !!(e.villageName);
               default: return !!(e.stage === 'observed' || e.stage === 'slain');
             }

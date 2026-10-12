@@ -968,6 +968,11 @@ body.system-live .btn:not(.ghost) {
 .combat-strip .cs-actions .btn { flex: 1 1 0; min-width: 0; padding: 8px 4px; }
 .combat-strip .cc-hpbar { display: inline-block; width: 48px; height: 7px; border: 1px solid rgba(255,255,255,.35); border-radius: 4px; vertical-align: middle; margin-left: 6px; background: rgba(0,0,0,.4); }
 .combat-strip .cc-hpbar > span { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #e5484d, #f5a524); }
+/* MULTI-MOVE HUD STAGING (2026-10-12): stage 2 numbers, stage 3 previews. */
+.combat-strip .cs-hpnum { font-size: 11px; color: #ffd54d; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.combat-strip .cs-dmgprev { font-size: 11px; color: #ff8a80; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.combat-strip .cs-odds { font-size: 11px; color: #82b4ff; margin-left: 4px; }
+.combat-strip .cs-intel { font-size: 12px; color: #c8e6c9; margin: 4px 0 0 22px; line-height: 1.35; }
 /* PARTY PANEL (Steve 2026-10-09): the 👥 chip toggles a compact member-status
    popover — name, honest HP bar + number, condition icons from real tracked
    state. Toggle, never clutter: it only exists while open. */

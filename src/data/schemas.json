@@ -87,6 +87,16 @@
     "telegraph": "string",
     "pattern": "object?"
    },
+   "attacks": [{
+    "name": "string",
+    "damage": "number[2..2]?",
+    "damageType": "string?",
+    "telegraph": "string?",
+    "pattern": "object?",
+    "condition": "object?",
+    "weight": "number?",
+    "tactic": "string?"
+   }],
    "speed": "number?",
    "emoji": "string?",
    "fleeAt": "number?",

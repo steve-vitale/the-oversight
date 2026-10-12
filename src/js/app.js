@@ -15584,6 +15584,14 @@
     // identical rows. Targeting stays on the grid tiles.
     const monGroups = {};
     for (const m of mons) { const mid = m.mdef ? m.mdef.id : m.monsterId; (monGroups[mid] = monGroups[mid] || []).push(m); }
+    // MULTI-MOVE HUD STAGING (2026-10-12, Steve: horror story → video game).
+    // stage 0 = horror: descriptor + vague fraction bar. No numbers, no odds.
+    // stage 1 = named: the System's true name + ⚠ for learned patterns.
+    // stage 2 = overlay: exact HP numbers + the System's move-odds estimate.
+    // stage 3 = neural: telegraphed damage preview + the codex counter trick.
+    // Each stage must FEEL like a genre shift, not just more text.
+    let hudStage = 0;
+    try { hudStage = Game.integrationStage ? Game.integrationStage() : 0; } catch (e) {}
     const monRows = Object.values(monGroups).map(g => {
       const m = g[0];
       const mid = m.mdef ? m.mdef.id : m.monsterId;
@@ -15597,10 +15605,38 @@
       // INFO LEAK FIX (Steve): the ⚠ warning marker is gated behind codex
       // knowledge. First encounter: no warning symbols.
       const _mspr3 = monsterSpriteHtml(m.id || m.monsterId, true);
+      const hpNum = hudStage >= 2 ? ` <span class="cs-hpnum">${hp}/${maxHp}</span>` : '';
+      let telExtra = '';
+      const tgMon = g.find(x => x.telegraph);
+      if (tgMon && tgMon.telegraph) {
+        if (hudStage >= 3) {
+          const dmg = tgMon.telegraph.dmg;
+          const dr = Array.isArray(dmg) ? `${dmg[0]}–${dmg[1]}` : (dmg != null ? `~${dmg}` : '');
+          if (dr) telExtra += ` <span class="cs-dmgprev" title="Telegraphed damage">💥${esc(dr)}</span>`;
+        }
+        if (hudStage >= 2 && Game.tbMoveOddsList && known) {
+          // odds resolve to coaching once the patterns are learned (the cue
+          // says the exact move then); the card shows the estimate only while
+          // there is still something to learn.
+          const odds = Game.tbMoveOddsList(tgMon);
+          if (odds) telExtra += ` <span class="cs-odds" title="System intent estimate">🎯 ${esc(odds)}</span>`;
+        }
+      }
       return `<span class="cs-mon">${_mspr3 || m.emoji} <b>${esc(name)}</b>${count}` +
-        `<span class="cc-hpbar"><span style="width:${Math.round(frac * 100)}%"></span></span>` +
-        `${(g.some(x => x.telegraph) && known) ? ' ⚠' : ''}${badge}</span>`;
+        `<span class="cc-hpbar"><span style="width:${Math.round(frac * 100)}%"></span></span>${hpNum}` +
+        `${(g.some(x => x.telegraph) && known) ? ' ⚠' : ''}${badge}${telExtra}</span>`;
     }).join(' · ');
+    // STAGE 3 INTEL LINE: the codex counter trick, knowledge-gated — the
+    // System surfaces the village's earned strategy when the fight is live.
+    let intelLine = '';
+    if (hudStage >= 3 && mons.length) {
+      const intelMon = mons.find(x => x.telegraph) || mons[0];
+      const ctr = intelMon && intelMon.mdef && intelMon.mdef.counter;
+      const intelKnown = intelMon && Game.encTelegraphKnown ? Game.encTelegraphKnown(intelMon) : false;
+      if (ctr && intelKnown && ctr.trick) {
+        intelLine = `<div class="cs-intel">🧠 CODEX: <b>${esc(ctr.trick)}</b> — ${esc(ctr.hint || '')}</div>`;
+      }
+    }
     const adj = p ? mons.filter(m => Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= (Game.equippedWeapon ? Game.equippedWeapon().range : 1)) : [];
     const wrange = Game.equippedWeapon ? Game.equippedWeapon().range : 1;
     const wname = Game.equippedWeapon ? Game.equippedWeapon().name : '';
@@ -15619,7 +15655,7 @@
     // Narration lives in the unified narration box. Actions live in the
     // combined actions area. This is just the compact header.
     return `
-      <div class="combat-strip"><div class="cs-line"><span>⚔</span> ${monRows} <span class="cs-turn">${turnLine}</span></div>
+      <div class="combat-strip"><div class="cs-line"><span>⚔</span> ${monRows} <span class="cs-turn">${turnLine}</span></div>${intelLine}
       </div>`;
   }
 

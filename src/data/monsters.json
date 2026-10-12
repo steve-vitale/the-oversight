@@ -28,10 +28,55 @@
         "length": 5,
         "width": 1,
         "chargeStyle": "bulldozer",
-        "chargeDesc": "Straight-line demolition. Tramples through obstacles, never turns."
+        "chargeDesc": "Straight-line demolition. Tramples through obstacles, never turns.",
+        "windup": 2
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "China-Shop Charge",
+        "damage": [
+          18,
+          25
+        ],
+        "telegraph": "Lowers its head, paws the earth. Dust rises. It is not going around the tree. It has never gone around anything.",
+        "pattern": {
+          "type": "charge",
+          "length": 5,
+          "width": 1,
+          "chargeStyle": "bulldozer",
+          "chargeDesc": "Straight-line demolition. Tramples through obstacles, never turns.",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "condition": {
+          "minRange": 2
+        },
+        "weight": 3
+      },
+      {
+        "name": "Enraged Charge",
+        "damage": [
+          24,
+          32
+        ],
+        "telegraph": "Blood in its eyes \u2014 it doesn't bother aiming anymore. It just COMES.",
+        "pattern": {
+          "type": "charge",
+          "length": 5,
+          "width": 1,
+          "windup": 2,
+          "chargeStyle": "bulldozer",
+          "chargeDesc": "Reckless. Heavier, wider, still telegraphed \u2014 bloodied, not blind."
+        },
+        "condition": {
+          "minRange": 2,
+          "hpBelow": 0.35
+        },
+        "weight": 4
+      }
+    ],
     "weaknesses": [
       "dodge the charge - it ends winded, flanks soft; STRIKE then",
       "it never goes around \u2014 position accordingly"
@@ -150,6 +195,38 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Silent Rush",
+        "damage": [
+          12,
+          17
+        ],
+        "telegraph": "No telegraph you can hear. Watch the birds \u2014 when they go quiet, the pack is already moving.",
+        "pattern": {
+          "type": "rush"
+        },
+        "damageType": "physical",
+        "condition": {
+          "firstTurn": true
+        },
+        "weight": 3
+      },
+      {
+        "name": "Harass",
+        "damage": [
+          6,
+          10
+        ],
+        "telegraph": "The pack circles \u2014 nips from the edge, never committing.",
+        "pattern": {
+          "type": "direct",
+          "range": 2,
+          "windup": 1
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "fire (they remember being dogs \u2014 carry a flame when you track the quiet woods)",
       "broken coordination (wound the lead)"
@@ -260,7 +337,7 @@
         "type": "beam",
         "length": 9,
         "width": 1,
-        "windup": 1,
+        "windup": 2,
         "sweep": true,
         "fireTurns": 6,
         "sweepRate": 0.18,
@@ -268,6 +345,48 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "name": "Ocular Discharge",
+        "damage": [
+          20,
+          30
+        ],
+        "telegraph": "It freezes. Like a deer in headlights. Light gathers behind its eyes. It is not frozen. It is aiming.",
+        "pattern": {
+          "type": "beam",
+          "length": 9,
+          "width": 1,
+          "windup": 2,
+          "sweep": true,
+          "fireTurns": 6,
+          "sweepRate": 0.18,
+          "cooldownTurns": 2
+        },
+        "damageType": "psychic",
+        "condition": {
+          "minRange": 2
+        },
+        "weight": 3
+      },
+      {
+        "name": "Antler Sweep",
+        "damage": [
+          10,
+          16
+        ],
+        "telegraph": "It drops its head \u2014 the antlers come around in a short, vicious arc.",
+        "pattern": {
+          "type": "single",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 1
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "a solid strike while the beam burns can break its aim",
       "unaware while grazing \u2014 strike before it notices you"
@@ -371,10 +490,36 @@
         "type": "burst",
         "radius": 2,
         "burstStyle": "flash",
-        "burstDesc": "Blinding flash. Closes your eyes \u2014 you fight blind for a turn."
+        "burstDesc": "Blinding flash. Closes your eyes \u2014 you fight blind for a turn.",
+        "windup": 2
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "name": "Wing Flash",
+        "damage": [
+          8,
+          14
+        ],
+        "telegraph": "It lands. It folds its wings. The light in the clearing changes, like someone adjusting a lamp.",
+        "pattern": {
+          "type": "burst",
+          "radius": 2,
+          "burstStyle": "flash",
+          "burstDesc": "Blinding flash. Closes your eyes \u2014 you fight blind for a turn.",
+          "windup": 2
+        },
+        "damageType": "psychic",
+        "weight": 3
+      },
+      {
+        "name": "Drift",
+        "tactic": "reposition",
+        "telegraph": "It lets go of the air and simply... drifts. Somewhere else. Hard to predict.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "attack from behind (it must face you to flash)",
       "after the flash the wings hang dull and lightless - strike while it recovers"
@@ -481,10 +626,47 @@
         "type": "burst",
         "radius": 2,
         "burstStyle": "resonant",
-        "burstDesc": "Sound wave. The croak harmonizes with itself, building \u2014 cover your ears or get out."
+        "burstDesc": "Sound wave. The croak harmonizes with itself, building \u2014 cover your ears or get out.",
+        "windup": 2
       },
       "damageType": "sonic"
     },
+    "attacks": [
+      {
+        "name": "Resonant Croak",
+        "damage": [
+          12,
+          18
+        ],
+        "telegraph": "Its throat swells. The air goes thick. Every frog for a mile answers at once.",
+        "pattern": {
+          "type": "burst",
+          "radius": 2,
+          "burstStyle": "resonant",
+          "burstDesc": "Sound wave. The croak harmonizes with itself, building \u2014 cover your ears or get out.",
+          "windup": 2
+        },
+        "damageType": "sonic",
+        "weight": 3
+      },
+      {
+        "name": "Lunge",
+        "damage": [
+          8,
+          12
+        ],
+        "telegraph": "It crouches \u2014 clumsy, obvious, and faster than it looks.",
+        "pattern": {
+          "type": "single",
+          "range": 2,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 2
+        },
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "deafened by its own chorus - SHOUT breaks it for a round",
       "slow on land"
@@ -592,6 +774,40 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Disassemble",
+        "damage": [
+          11,
+          16
+        ],
+        "telegraph": "It sits up. Its hands move too fast to follow. Something you own is suddenly in its hands.",
+        "pattern": {
+          "type": "direct",
+          "range": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Bite",
+        "damage": [
+          10,
+          14
+        ],
+        "telegraph": "Cornered, it shows its teeth. It fights second \u2014 but it fights.",
+        "pattern": {
+          "type": "direct",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 1,
+          "hpBelow": 0.6
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "distract with food (it cannot resist)",
       "it steals before it fights \u2014 guard your pack"
@@ -699,6 +915,30 @@
       },
       "damageType": "psychic"
     },
+    "attacks": [
+      {
+        "name": "Spearfish Strike",
+        "damage": [
+          14,
+          22
+        ],
+        "telegraph": "The heron is gone. No \u2014 it's there. It was always there. You just couldn't see it until it moved.",
+        "pattern": {
+          "type": "line",
+          "length": 4,
+          "width": 1,
+          "windup": 2
+        },
+        "damageType": "psychic",
+        "weight": 3
+      },
+      {
+        "name": "Stalk",
+        "tactic": "reposition",
+        "telegraph": "You blink. It is somewhere else. You didn't see it move.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "it casts no shadow \u2014 watch the water, not the bird",
       "it commits to the strike (dodge sideways)"
@@ -808,10 +1048,47 @@
         "type": "burst",
         "radius": 2,
         "burstStyle": "swarm",
-        "burstDesc": "The hum stacks. Each mouse adds to it. Kill mice to reduce the hum, or SHOUT to break it."
+        "burstDesc": "The hum stacks. Each mouse adds to it. Kill mice to reduce the hum, or SHOUT to break it.",
+        "windup": 2
       },
       "damageType": "sonic"
     },
+    "attacks": [
+      {
+        "name": "Swarm Hum",
+        "damage": [
+          4,
+          8
+        ],
+        "telegraph": "A low hum rises from the grass. It harmonizes with itself. Your teeth ache.",
+        "pattern": {
+          "type": "burst",
+          "radius": 2,
+          "burstStyle": "swarm",
+          "burstDesc": "The hum stacks. Each mouse adds to it. Kill mice to reduce the hum, or SHOUT to break it.",
+          "windup": 2
+        },
+        "damageType": "sonic",
+        "weight": 3
+      },
+      {
+        "name": "Nibble Tide",
+        "damage": [
+          3,
+          6
+        ],
+        "telegraph": "Teeth in the grass, everywhere at once \u2014 a tide of small bites.",
+        "pattern": {
+          "type": "direct",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 1
+        },
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "the hum needs the swarm \u2014 scatter them",
       "loud noise breaks the chorus - SHOUT scatters the swarm for a round"
@@ -921,6 +1198,31 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Snap Decision",
+        "damage": [
+          18,
+          26
+        ],
+        "telegraph": "It doesn't move. It hasn't moved in an hour. Its head is suddenly somewhere else.",
+        "pattern": {
+          "type": "ambush",
+          "radius": 1
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Withdraw",
+        "tactic": "bunker",
+        "telegraph": "Hurt, it pulls in \u2014 legs, head, tail. The shell seals like a door.",
+        "condition": {
+          "hpBelow": 0.6
+        },
+        "weight": 4
+      }
+    ],
     "weaknesses": [
       "it cannot chase (it is a turtle)",
       "flip it (good luck)",
@@ -1031,6 +1333,42 @@
       },
       "damageType": "electric"
     },
+    "attacks": [
+      {
+        "name": "Lure and Grasp",
+        "damage": [
+          11,
+          18
+        ],
+        "telegraph": "A soft green glow under the water. Pretty. That's the problem \u2014 it's pretty.",
+        "pattern": {
+          "type": "direct",
+          "range": 3
+        },
+        "damageType": "electric",
+        "condition": {
+          "firstTurn": true
+        },
+        "weight": 3
+      },
+      {
+        "name": "Barb Lash",
+        "damage": [
+          8,
+          13
+        ],
+        "telegraph": "The whiskers go rigid \u2014 then lash.",
+        "pattern": {
+          "type": "direct",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 2
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "don't wade at night (obvious, ignored)",
       "the glow gives it away in dark water"
@@ -1854,6 +2192,38 @@
       "telegraph": "The line reaches you \u2014 beaks up, all down the row.",
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Coordinated Nip",
+        "damage": [
+          6,
+          9
+        ],
+        "pattern": {
+          "type": "direct"
+        },
+        "telegraph": "The line reaches you \u2014 beaks up, all down the row.",
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Nip",
+        "damage": [
+          4,
+          7
+        ],
+        "telegraph": "Every beak in the line, one coordinated bite.",
+        "pattern": {
+          "type": "direct",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "maxRange": 1
+        },
+        "weight": 3
+      }
+    ],
     "armor": 1,
     "resistances": {},
     "encounter": {
@@ -1925,6 +2295,42 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Skyfall Dive",
+        "damage": [
+          10,
+          16
+        ],
+        "telegraph": "A shadow crosses the ground \u2014 growing fast. Something is falling out of the sky, straight at you.",
+        "pattern": {
+          "type": "single",
+          "range": 3
+        },
+        "damageType": "physical",
+        "condition": {
+          "requiresFlag": "altitudeHigh"
+        },
+        "weight": 3
+      },
+      {
+        "name": "Wing Buffet",
+        "damage": [
+          6,
+          10
+        ],
+        "telegraph": "Grounded and furious, it beats its wings \u2014 glass edges everywhere.",
+        "pattern": {
+          "type": "single",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "forbidFlag": "altitudeHigh"
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "move when the shadow comes \u2014 it can't turn mid-dive",
       "after a miss it lands, vulnerable for a turn"
@@ -2024,6 +2430,42 @@
       },
       "damageType": "fire"
     },
+    "attacks": [
+      {
+        "name": "Sun-Charged Bite",
+        "damage": [
+          8,
+          14
+        ],
+        "telegraph": "Its scales go from dull brown to molten gold. Heat shimmers off its back. It's ready.",
+        "pattern": {
+          "type": "single",
+          "range": 1
+        },
+        "damageType": "fire",
+        "condition": {
+          "requiresFlag": "sbCharged"
+        },
+        "weight": 3
+      },
+      {
+        "name": "Sluggish Nip",
+        "damage": [
+          5,
+          8
+        ],
+        "telegraph": "Cold-blooded and slow \u2014 a lazy snap, barely committed.",
+        "pattern": {
+          "type": "single",
+          "range": 1,
+          "windup": 1
+        },
+        "condition": {
+          "forbidFlag": "sbCharged"
+        },
+        "weight": 3
+      }
+    ],
     "weaknesses": [
       "attack it while it basks \u2014 it loses the charge",
       "it won't fight in shade or at dusk"
@@ -2741,10 +3183,34 @@
         "type": "line",
         "length": 3,
         "width": 1,
-        "windup": 1
+        "windup": 2
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "The Unkind Cut",
+        "damage": [
+          13,
+          20
+        ],
+        "telegraph": "Its shadow detaches from the branch-shadow and slides across the ground toward you \u2014 a straight black lane, growing. The bird hasn't moved. The shadow has.",
+        "pattern": {
+          "type": "line",
+          "length": 3,
+          "width": 1,
+          "windup": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Perch",
+        "tactic": "perch",
+        "telegraph": "It climbs, laughing in a dead voice \u2014 out of spear reach, watching.",
+        "weight": 2
+      }
+    ],
     "weaknesses": [
       "the lane is the tell \u2014 step OFF it, not along it",
       "it always lands after a strafing run \u2014 that's the window",
@@ -2858,6 +3324,39 @@
       },
       "damageType": "physical"
     },
+    "attacks": [
+      {
+        "name": "Adjournment",
+        "damage": [
+          12,
+          18
+        ],
+        "telegraph": "No sound. That is the warning. The moon-shadow on the ground is growing \u2014 and there is no sound at all. Owls don't make sound when they hunt.",
+        "pattern": {
+          "type": "single",
+          "range": 4
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Second Hearing",
+        "damage": [
+          10,
+          16
+        ],
+        "telegraph": "It missed \u2014 and it is already turning. The second dive re-aims at where you moved.",
+        "pattern": {
+          "type": "single",
+          "range": 4,
+          "windup": 1
+        },
+        "condition": {
+          "requiresFlag": "ncSecondHearing"
+        },
+        "weight": 4
+      }
+    ],
     "weaknesses": [
       "the shadow is the only warning \u2014 watch the ground, not the sky",
       "it dives twice \u2014 dodge the second one too",
