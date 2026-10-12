@@ -1181,6 +1181,25 @@ Composes each world-map tile as a miniature auto-composed SVG scene: terrain bas
 
 **Consumes:** Game.tileAt, Game.genDetail (detail-grid generation), Game.map.px/py (player tile), Game.state.scholar (mx,my,animal), Game.state.worldMonsters (NOT rendered on map — geography only, Steve 2026-10-06), Game.state.village.positions (villager detail-grid positions)
 
+### titans (`titans.js`)
+The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scale ladder. Three titans total, 1-2 per run: the Herald (wave 4, tutorial), one mid wave-5, the Finale (apocalypse). A titan is a FLAG (src/data/titans.json), never just HP. No solo fights — hard gate, not a stat check. Coalition warfare: allied villages commit named faces who fight blow-by-blow; they can die, and it costs. The call to arms, the war council, outfitting (real gear, real costs), and THE TURN (outfitted allies can turn — driven by real trust/opinion vs temptation, telegraphed, never random). The player's contribution is LOGISTICS: an army marches on its stomach.
+
+**Provides:** isTitan(mid) / titanDef(mid) / titanCast(), titanDawnTick() -> omen staging, escalation, muster upkeep, turn tick (called guarded from game.js dawn), titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth), soundTitanCall(titanId) -> the call to arms; allies answer aloud, titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness, titanMusterState(titanId) / titanMusterReady(titanId), _titanTest (test hooks: internals exposed for proof tests), titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
+
+**Rules:**
+- titan_is_a_flag: src/data/titans.json, never HP alone. A 2200-HP non-titan is a stat check; a titan is a coalition event. (code: titans.js)
+- no_solo_titans: startCombat on a titan without a complete muster is HARD-REFUSED (said aloud), never a likely death. (code: titans.js)
+- titans_never_wander: monsterWavePool excludes titans. They arrive by omen only. (code: titans.js)
+- faces_not_units: allied fighters are named people from allied rosters. Never a management screen. (code: titans.js)
+- fights_are_real: coalition combat is blow-by-blow (kind:'ally' fighters), never RNG tables. (code: titans.js)
+- ally_death_costs: a dead ally marks their home roster, costs trust, and the alliance remembers. (code: titans.js)
+- the_turn_is_earned: temptation (gear value + visible resources) vs loyalty (trust + opinion). Telegraph via gossip + council. Never random. (code: titans.js)
+- stolen_gear_is_lost: the loot law holds. No refunds except by force. (code: titans.js)
+- odds_are_entertainment: the System's posted odds are wrong on purpose. That's the joke. (code: titans.js)
+- knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
+
+**Consumes:** —
+
 ### truth (`truth.js`)
 Truth/distortion. Claim-gossip corrects (tellers share the truth); action-gossip distorts per retelling (code: game.js seedGossip).
 
