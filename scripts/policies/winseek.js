@@ -768,15 +768,34 @@ function s_exiled(Game) {
 }
 
 // ---------- TABLE ----------
-
+// DRAIN THE PROMPT QUEUE (winpath r5 2026-10-12): the table is a synchronous
+// modal chain — every answer immediately presents the next beat. A human
+// player clicks through the whole sequence in one sitting; answering once
+// per game-day was a harness artifact that left the village exposed to
+// ambient death for ~4 extra days mid-finale (seed 1: finals pending,
+// bearer died that night, 0 wins). The drain answers until no choice is
+// pending, the game ends, a real fight starts (trial-by-combat pauses the
+// challenge — the harness drives the fight), or a safety cap. It never
+// picks the trial (options[0] is never the trial door), never invents
+// answers — it just doesn't sleep between beats.
 function tableRoad(Game, ctx) {
   try {
-    const s = Game.state.scholar || {};
-    const tc = s.tableChoices;
-    if (tc && tc.options && tc.options.length && Game.chooseTableOption) {
+    let n = 0, lastSig = null, stall = 0;
+    for (;;) {
+      if (Game.over) break;
+      if (n >= 30) break;
+      try { if (Game.tbfight && !Game.tbfight.over) break; } catch (e) {}
+      const s = Game.state.scholar || {};
+      const tc = s.tableChoices;
+      if (!tc || !tc.options || !tc.options.length || typeof Game.chooseTableOption !== 'function') break;
+      const sig = tc.frame + '|' + tc.options.map(o => o.id).join(',');
+      if (sig === lastSig && ++stall >= 2) break; // no progress — stop
+      lastSig = sig;
       Game.chooseTableOption(tc.options[0].id);
-      ctx.answeredTable = true;
+      n++;
+      ctx.tableAnswers = (ctx.tableAnswers | 0) + 1;
     }
+    if (n > 0) ctx.answeredTable = true;
   } catch (e) {}
 }
 
@@ -841,4 +860,4 @@ const fedseek = Object.assign({}, winseek, {
   },
 });
 
-module.exports = { winseek, accordRoad, fedseek };
+module.exports = { winseek, accordRoad, fedseek, tableRoad };
