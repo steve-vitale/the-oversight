@@ -2605,6 +2605,38 @@
       } else {
         this.say(`📜 ${rn} brings it home: a CHARTER with ${nm} — pooled trade routes, tariff income, and the clause in plain ink: no mutual defense. The relationship starts at trust 30.`);
       }
+      // BROKEN TABLES ARE REMEMBERED (journey-scale 2026-10-12): the
+      // primary/subordinate path remembers broken links ("debts survive the
+      // break"), but peer links formed with amnesia — a covenant walked back
+      // into a village 26 days after its subordinate link snapped, and nobody
+      // said a word about the break. The villagers lived through it; the new
+      // link says so aloud. No balance change — trust still starts at 30.
+      try {
+        var _now2 = (this.state.scholar || {}).day || 0;
+        var _latest2 = null, _latestBreakDay2 = 0;
+        var _all2 = this.hierarchyState();
+        for (var _bi2 = 0; _bi2 < _all2.length; _bi2++) {
+          var _bl2 = _all2[_bi2];
+          if (_bl2 === link || _bl2.status !== 'broken') continue;
+          var _q1 = _bl2.primary || _bl2.a, _q2 = _bl2.subordinate || _bl2.b;
+          var _samePair2 = (_q1 === HOME && _q2 === targetId) || (_q2 === HOME && _q1 === targetId);
+          if (!_samePair2) continue;
+          var _bd2 = 0;
+          try {
+            var _hist2 = _bl2.history || [];
+            for (var _hi2 = _hist2.length - 1; _hi2 >= 0; _hi2--) {
+              if (_hist2[_hi2] && _hist2[_hi2].kind === 'broken') { _bd2 = _hist2[_hi2].day || 0; break; }
+            }
+          } catch (e) {}
+          if (!_latest2 || _bd2 >= _latestBreakDay2) { _latest2 = _bl2; _latestBreakDay2 = _bd2; }
+        }
+        if (_latest2) {
+          var _ago2 = _now2 - _latestBreakDay2;
+          var _agoTxt2 = _ago2 <= 0 ? 'not long ago' : (_ago2 === 1 ? 'a day ago' : _ago2 + ' days ago');
+          this.say(`Nobody says the last table was nothing. It broke ${_agoTxt2} — ${rn} walks back in anyway. That's the thing about fires: they can be relit.`);
+          this._linkNote(link, 'formed', 'Rekindled ' + _agoTxt2 + ' after the last table with ' + nm + ' broke.');
+        }
+      } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'peer:' + kind + ':' + targetId); } catch (e) {}
       if (!this.state.networkLive || this.state.accordUnanswered) this.stageFirstAccord(link);
       try { this.stirRegion('court', kind + ':' + targetId); } catch (e) {}
