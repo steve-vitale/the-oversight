@@ -667,7 +667,7 @@
       }
       // Mannerisms cycle, never exhaust: real people repeat their tics.
       // convoPickCycle reshuffles when the pool runs dry.
-      const bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
+      let bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
       if (!bit) return line;
       // COMMA-OPENER CASE (journey deepening 2026-10-11): an opener that ends
       // in ", " ("Honestly, ", "Well, ") continues the clause — the composed
@@ -677,13 +677,31 @@
       // clause. Never touch the pronoun I, and never downcase a name — only
       // common sentence-starters survive the rule.
       let said = inner;
+      let sep = ' ';
       if (useOpen && /, $/.test(bit)) {
         const fw = (/^([A-Za-z']+)/.exec(said) || [])[1] || '';
         if (/^(we|you|they|he|she|it|that|this|these|those|there|then|the|a|an|my|our|your|their|his|her|its|no|yes|well|so|and|but|if|when|because|not|never|just|still|even|only)$/i.test(fw)) {
           said = said.charAt(0).toLowerCase() + said.slice(1);
         }
+      } else if (!useOpen && /^\s*,/.test(bit)) {
+        // COMMA-CLOSER FOLD (journey-succession 2026-10-12): a closer that
+        // begins with a comma (", friend.", ", as it were.", DNA ", kid.")
+        // attaches to the clause — appended after the line's terminal mark
+        // it stutters ("...say different. , friend.", seed 302). Fold it
+        // in: strip the line's terminal mark, tuck the address into the
+        // clause with no join space ("...say different, friend."); a
+        // question keeps its mark at the very end ("...coming with us,
+        // friend?"). Dash-led closers (" — or so they tell me.") stay
+        // trailing asides — untouched.
+        const tm = /([.!?])\s*$/.exec(said);
+        if (tm) {
+          said = said.slice(0, tm.index);
+          if (tm[1] === '?') bit = bit.replace(/\.\s*$/, '?');
+          bit = bit.replace(/^\s+/, '');
+          sep = '';
+        }
       }
-      return useOpen ? '"' + bit + said + '"' : '"' + inner + ' ' + bit + '"';
+      return useOpen ? '"' + bit + said + '"' : '"' + said + sep + bit + '"';
     },
 
     // sayLine: THE single emission point for NPC speech (convo rebuild
