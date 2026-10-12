@@ -87,7 +87,7 @@
 //   - arena_fights: Blood pit/gauntlet/siege send the player into REAL tactical fights — contest modal suspends (arenaSuspended), grid becomes arena, tbEnd resumes via _contestArenaAfter (won→next wave/WIN, lost→death processed, fled→LOSE with the crowd's disappointment said aloud + showmanship, no mechanical shame). Weapon choices grant real items (code: _contestArena, _contestArenaAfter, contestChoose d.arena/d.grantWeapon, tbEnd hook, Steve 2026-10-08); duel/tithe stay phase-engine (tb has no villager enemies; tithe is a ritual) — documented, not hidden
 //   - moot_standing: moot is argued not rolled — rhetorical standing (trust/10 + notability×2 base, sway per choice) vs System demand; deterministic judgment (code: _contestMoot, contestChoose MOOT_JUDGE, Steve 2026-10-08)
 //   - maw_pursuit: the Maw is a deterministic pursuit — distance 3, choices move it, 0 = caught (death). No rolls (code: _contestMaw, contestChoose MAW_JUDGE, Steve 2026-10-08)
-//   - ratings_casting: the System wants its stars — picks weighted by notabilityWeight (ONE shared weight: depth + impact, Steve 2026-10-09), 10% whim dark-horse path (uniform, announced). The lead pick is weighted too when the player isn't castable (break-it 2026-10-09: the old lead fallback was uniform and unannounced, so fame never mattered for a solo lead). Recast honors the bias (code: fireContest, resolveContest, Steve 2026-10-08)
+//   - ratings_casting: the System wants its stars — picks weighted by notabilityWeight (ONE shared weight: depth + impact, Steve 2026-10-09), 10% whim dark-horse path (uniform, announced). The lead pick is weighted too when the player isn't castable (break-it 2026-10-09: the old lead fallback was uniform and unannounced, so fame never mattered for a solo lead). Recast honors the bias (code: fireContest, resolveContest, Steve 2026-10-08). CASTING RECENCY (longsim contests r7 2026-10-12): contest co-star casting has a recency repel mirroring the r6 show-side repel — recently-cast notables get their weight discounted (<=2d x0.25, 3-5d x0.5, 6-10d x0.75, >10d x1), a repel NOT a ban, the shared notabilityWeight untouched; the whim and the player's surest-star first slot skip it; flips announced diegetically ~40% with tele('contest_cast_repel') on every announced flip; _contestPullDays ledger is separate from the show-side _showPullDays (code: fireContest, _cxContestRepelCutLine)
 //   - ratings_scheduling: scheduling driven by ratings/drama — base 0.25/day, +0.15 viewership declining, -0.10 ratings high/rising, +0.10 recent death/fracture; clamp 0.05–0.60; 2/week budget holds; 75% contest share when ratings dip (code: contestTick, Steve 2026-10-08; DIP-SIGNAL FIX audit-shows 2026-10-09: the dip was compared AFTER _lastWeekViewership was overwritten — always false, the 75% branch was dead; now computed once from the trend; DECAY FIX break-it r13 2026-10-10: viewership never declined in live play so the dip STILL never fired — attention now fades weekly (10%, floor 12), dip = falling week-over-week or low-and-not-rising (util audit 2026-10-10, rising-coast parity 2026-10-10))
 //   - contest_knowledge: repeats build codex.contests levels 1-3; level 2 unlocks coaching in the intro, level 3 (veteran) reads hits coming (code: contestLearn, _cxCoaching, contestChoose, Steve 2026-10-05)
 //   - social_costs: do.fracture/do.unity shift the leadership ledger — winning can cost the village (code: contestChoose, Steve 2026-10-06)
@@ -1029,6 +1029,20 @@
     return null;
   };
 
+  // CASTING-RECENCY CUT LINE, contest side (longsim contests r7
+  // 2026-10-12): the contest mirror of _cxRepelCutLine. tele fires on
+  // every announced flip; the diegetic line lands ~40% — the System is
+  // honest about its production choices, but not every single time.
+  G._cxContestRepelCutLine = function(cast, who) {
+    if (!cast || !cast.cutStar) return null;
+    try { this.tele('contest_cast_repel', { star: cast.cutStar, picked: who }); } catch (e) {}
+    if (Math.random() < 0.40) {
+      const name = cast.cutStar === 'player' ? 'you' : this.displayName(cast.cutStar);
+      return `📺 The System was going to take ${name} AGAIN. The producers cut it — somebody else takes the arena.`;
+    }
+    return null;
+  };
+
   G.pickShow = function() {
     const pool = this.showPool();
     return pool[Math.floor(Math.random() * pool.length)];
@@ -1922,16 +1936,50 @@
     // impact count, shared with show casting), not uniform. The 10% whim
     // below stays the documented dark-horse path: uniform random, announced
     // as the System's whim.
+    // CONTEST CASTING RECENCY (longsim contests r7 2026-10-12): the
+    // contest-side mirror of r6's show-side repel (showCastPull). The
+    // weighted path above used RAW weights, so the same villager took
+    // contest co-star slots every few days. The ONE shared
+    // notabilityWeight is untouched (canon: depth + impact) — the repel
+    // MULTIPLIES it, banded by days-since-last-contest-pull: <=2d x0.25,
+    // 3-5d x0.5, 6-10d x0.75, >10d x1.0. A repel, NOT a ban: the galaxy's
+    // favorite regular still shows up, just not on a loop. The 10% whim
+    // (uniform, announced) and the player's surest-star first slot skip
+    // the repel — only the concentration path (weighted co-star picks +
+    // the weighted lead fallback when the player isn't castable) gets it.
+    const _cday = (this.state.scholar || {}).day || 1;
+    const _cxPullDays = ((this.state.village || {})._contestPullDays || {});
+    const _cxRepelOf = (id) => {
+      const days = _cxPullDays[id] || [];
+      let last = -1;
+      for (const d of days) if (d > last) last = d;
+      if (last < 0) return 1;
+      const gap = _cday - last;
+      if (gap <= 2) return 0.25;
+      if (gap <= 5) return 0.5;
+      if (gap <= 10) return 0.75;
+      return 1;
+    };
+    // Flips: picks where the repel changed the winner. Announced once per
+    // contest below (diegetic, ~40%) with tele on every announced flip.
+    const _cxFlips = [];
     const weightedPick = () => {
-      let totalW = 0;
-      const weights = pool.map(e => {
+      let totalW = 0, rawMax = -1;
+      const entries = pool.map(e => {
         const w = this.notabilityWeight(e.id);
-        totalW += w;
-        return w;
+        const rw = w * _cxRepelOf(e.id);
+        if (w > rawMax) rawMax = w;
+        totalW += rw;
+        return { e, w, rw };
       });
+      const rawStar = (entries.find(x => x.w === rawMax) || {}).e;
       let r = Math.random() * totalW;
       let si = 0;
-      for (; si < pool.length - 1; si++) { r -= weights[si]; if (r <= 0) break; }
+      for (; si < entries.length - 1; si++) { r -= entries[si].rw; if (r <= 0) break; }
+      const picked = entries[si].e;
+      if (picked.id !== rawStar.id && _cxRepelOf(rawStar.id) < 1) {
+        _cxFlips.push({ star: rawStar.id, picked: picked.id });
+      }
       return pool.splice(si, 1)[0];
     };
     // First pick: prefer the player (the System's surest star). If the
@@ -1950,11 +1998,36 @@
     }
     while (picks.length < want && pool.length) picks.push(weightedPick());
     const ids = picks.map(p => p.id);
+    // CASTING-RECENCY LEDGER (longsim contests r7 2026-10-12): _contestPullDays
+    // keeps a bounded history of contest-cast days per participant, feeding
+    // the recency repel above. SEPARATE from r6's _showPullDays: shows and
+    // contests are different pools — a villager can do a show and then a
+    // contest, that's fine fiction. Recorded for every funnel (whim,
+    // stars, player-first): who was cast is who was cast.
+    try {
+      const vv = this.state.village || {};
+      vv._contestPullDays = vv._contestPullDays || {};
+      for (const pid of ids) {
+        const arr = vv._contestPullDays[pid] || (vv._contestPullDays[pid] = []);
+        arr.push(_cday);
+        if (arr.length > 24) arr.splice(0, arr.length - 24);
+      }
+    } catch (e) {}
     if (whim) {
       const wSubj = picks[0].id === 'player' ? 'You are' : picks[0].name + ' is';
       this.sysSay(`📺 The System's whim: ${wSubj} *interesting*.`);
     } else if (picks.length > 1 && picks.slice(1).every(p => (p.notability || []).length > 0)) {
       this.sysSay(`📺 The System wants its stars tonight.`);
+    }
+    // The repel flipped a pick: the System is honest about its production
+    // choices — once per contest, diegetic, ~40% (the tele fires on every
+    // announced flip). Mirrors the show-side _cxRepelCutLine discipline.
+    if (_cxFlips.length) {
+      try {
+        const f0 = _cxFlips[0];
+        const cl = this._cxContestRepelCutLine({ cutStar: f0.star }, f0.picked);
+        if (cl) this.sysSay(cl);
+      } catch (e) {}
     }
 
     this.sysSay(`📺 CONTEST: ${contest.name}. ${contest.desc}`);
