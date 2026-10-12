@@ -157,6 +157,9 @@ function winseekFight(Game, ctx) {
       // NEW-FIGHT ASSESSMENT (the deed records at startCombat even if we
       // flee on turn 1): don't bleed in fights we can't win. Win-seeking is
       // BOLDER than competent: engage up to 3.5x HP.
+      // CAUTIOUS VARIANT (win-stats-deep 2026-10-12, ctx._cautious): engage
+      // up to 2x HP, avoid wave-2+ when hurt, flee at 40% HP.
+      const CAUT = !!ctx._cautious;
       try {
         const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
         let totalMhp = 0, maxWave = 1;
@@ -166,8 +169,8 @@ function winseekFight(Game, ctx) {
           if (md && md.wave) maxWave = Math.max(maxWave, md.wave);
         }
         const pmax = p.maxHp || 100;
-        const outmatched = totalMhp > 3.5 * pmax ||
-          (maxWave >= 2 && hpPct < 0.6) ||
+        const outmatched = totalMhp > (CAUT ? 2.0 : 3.5) * pmax ||
+          (maxWave >= 2 && hpPct < (CAUT ? 0.7 : 0.6)) ||
           hpPct < 0.5;
         if (outmatched && monsters.length && !feastedDeed) {
           ctx.fledBad = (ctx.fledBad || 0) + 1;
@@ -207,7 +210,7 @@ function winseekFight(Game, ctx) {
     } catch (e) {}
     // Near-death: walk to the edge (flee-by-barrier). The deed recorded at
     // fight start; staying is just a death.
-    if (hpPct < 0.3) return flee();
+    if (hpPct < (CAUT ? 0.4 : 0.3)) { ctx.fledHurt = (ctx.fledHurt || 0) + 1; return flee(); }
     const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
     if (!alive.length) return false;
     alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
@@ -341,10 +344,21 @@ function diplomacyRoad(Game, ctx) {
     // Haven does first, and the gesture stages at link formation.
     accordRoad(Game, ctx);
     // Answer a pending counter-offer FIRST — the table is set.
+    // PRIMACY-FIRST (win-stats-deep 2026-10-12, ctx._primacyFirst): walk away
+    // from counters that put Haven subordinate; accept peer-kind counters.
+    const PRIM = !!ctx._primacyFirst;
+    if (PRIM) ctx.primacyFirst = true;
     if (Game.state.pendingCounter && Game.answerCounter) {
       try {
-        Game.answerCounter('accept');
-        ctx.counterAccepted = (ctx.counterAccepted || 0) + 1;
+        let how = 'accept';
+        if (PRIM) {
+          const c = Game.state.pendingCounter;
+          const subTerms = c && c.asSubordinate && c.kind !== 'covenant' && c.kind !== 'trade';
+          how = subTerms ? 'walk' : 'accept';
+          if (how === 'walk') ctx.counterWalked = (ctx.counterWalked || 0) + 1;
+        }
+        Game.answerCounter(how);
+        if (how === 'accept') ctx.counterAccepted = (ctx.counterAccepted || 0) + 1;
       } catch (e) {}
     }
     // Tend live links: answer young-link renegotiation beats and primary
@@ -415,7 +429,8 @@ function diplomacyRoad(Game, ctx) {
       try {
         if (score >= subBar) {
           // Propose as subordinate — the BELONG road. Generous tribute.
-          Game.proposeLink(ov.id, { asSubordinate: true, tributeKcalPerWeek: 5000 });
+          // PRIMACY-FIRST: propose as primary instead (the LEAD road).
+          Game.proposeLink(ov.id, { asSubordinate: !PRIM, tributeKcalPerWeek: 5000 });
           ctx.proposed = (ctx.proposed || 0) + 1;
           proposals++;
         } else if (score >= peerBar && Game.proposeCovenant) {
@@ -428,10 +443,19 @@ function diplomacyRoad(Game, ctx) {
     }
     // Pay tribute on subordinate links: +3 trust/week, no arrears. The
     // BELONG road needs trust >= 50, no arrears, 14+ days (r4 tuning).
+    // PRIMACY-FIRST: never pay tribute — primacy or nothing. Instead, bid
+    // for primacy aggressively on every link Haven doesn't head.
     try {
       const links = Game.hierarchyState ? Game.hierarchyState() : [];
       for (const l of links) {
-        if (!l || l.status !== 'active' || l.subordinate !== 'haven') continue;
+        if (!l || l.status !== 'active') continue;
+        if (PRIM) {
+          if (l.subordinate === 'haven' && Game.bidForPrimacy) {
+            try { if (Game.bidForPrimacy(l.id)) ctx.primacyBids = (ctx.primacyBids || 0) + 1; } catch (e) {}
+          }
+          continue;
+        }
+        if (l.subordinate !== 'haven') continue;
         if (Game.payTribute) {
           try { Game.payTribute(l.id); ctx.tributePaid = (ctx.tributePaid || 0) + 1; } catch (e) {}
         }
