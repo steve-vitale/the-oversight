@@ -44,6 +44,17 @@ function huntPatrol(Game, ctx) {
     if (ctx._patrolDay === day) return; // once per day (upkeep runs 3x/day)
     ctx._patrolDay = day;
     if ((s.kcal || 0) < (Game.kcalCap ? Game.kcalCap() * 0.4 : 800)) return; // don't hunt starving
+    // EAT FIRST, HUNT SECOND (journey-endgame r3 2026-10-11): a deed-seeker
+    // who lives off the pantry is a freeloader — the village exiles them
+    // (measured: 20k takes / 0 gives by day 22, exiled day 17, which blocks
+    // the feast road and the table). If we're a net drain on the commons,
+    // the day is for food, not patrols. The village is watching.
+    try {
+      const v = Game.state.village || {};
+      const me = Game.villagerId;
+      const drain = ((v.takes || {})[me] || 0) - ((v.gives || {})[me] || 0);
+      if (drain > 3000) return; // in the red: forage, don't patrol
+    } catch (e) {}
     // WAVE-TARGETED: only patrol if some unlocked wave's deed bar is unfilled.
     // No deed value = no death risk.
     try {
@@ -373,6 +384,16 @@ function feastRoad(Game, ctx) {
     if (pg.feastSurgeUsed) return; // deed done
     if ((day - (ctx._lastFeastDay || 0)) < 7) return;
     if (Game.playerAtHaven && !Game.playerAtHaven()) return;
+    // EAT FIRST, FEAST SECOND (journey-endgame r3 2026-10-11): a feast
+    // spends the COMMONS' food. Hosting from the pantry while a net drain
+    // is freeloading with extra steps — the village notices who throws
+    // parties with their food. Contribute first.
+    try {
+      const vv = Game.state.village || {};
+      const me = Game.villagerId;
+      const drain = ((vv.takes || {})[me] || 0) - ((vv.gives || {})[me] || 0);
+      if (drain > 3000) return;
+    } catch (e) {}
     const v = Game.state.village || {};
     const have = (() => {
       try { return Game.pantryKcalLive ? Game.pantryKcalLive(v) : 0; } catch (e) { return 0; }
@@ -382,13 +403,70 @@ function feastRoad(Game, ctx) {
     if (have < cost * 1.5) return; // keep a buffer — don't feast into famine
     try {
       const r = Game.hostFeast();
-      if (typeof r === 'string' && r.indexOf('held') >= 0) {
+      // hostFeast returns {ok, why:'The feast is held.', ...} — not a string.
+      // (The old string check never matched, so _lastFeastDay never set and
+      // the policy feasted DAILY, draining the pantry. Journey-endgame r3.)
+      if (r && r.ok) {
         ctx._lastFeastDay = day;
         ctx.feasts = (ctx.feasts || 0) + 1;
+        // THE FEAST WAS THE WEAPON: if the buff granted, fight while feasted.
+        // The window decays at dawn — a feast that warms no blades marks
+        // nothing. Seek a fight NOW, before sleep.
+        try {
+          if (r.buffGranted && Game.feastedActive && Game.feastedActive()) {
+            ctx._feastFightDay = day;
+          }
+        } catch (e) {}
       }
     } catch (e) {}
   } catch (e) {}
 }
+
+// ---------- FEAST-FIGHT COORDINATION ----------
+// After a feast grants the buff, seek a fight WHILE FEASTED. The window
+// decays at dawn — the policy must warm the blades the same evening.
+// (Journey-endgame r3 2026-10-11: 5 granted buffs, 0 used — the policy
+// feasted then slept, and the buff expired untouched.)
+function feastFight(Game, ctx) {
+  try {
+    const s = Game.state.scholar || {};
+    const day = s.day || 1;
+    if (ctx._feastFightDay !== day) return;
+    if (!Game.feastedActive || !Game.feastedActive()) return;
+    if (Game.over || Game.tbfight) return;
+    // quick patrol: nearest tiles, seek an encounter
+    const hx = Game.map.px, hy = Game.map.py;
+    const cands = [];
+    for (const tt of (Game.travelTargets() || [])) {
+      const t = Game.tileAt(tt.x, tt.y);
+      if (!t || t.type === 'haven') continue;
+      let blocked = false;
+      try { blocked = !!Game.travelBlockage(tt.x, tt.y); } catch (e) {}
+      if (blocked) continue;
+      cands.push({ x: tt.x, y: tt.y, d: tt.d });
+    }
+    cands.sort((a, b) => b.d - a.d); // far tiles, like huntPatrol — monsters live out there
+    // PERSIST: keep patrolling while feasted and no fight yet. The buff is
+    // the point — a single 4-tile sweep is a coin flip. (Journey-endgame r3.)
+    let sweeps = 0;
+    while (!Game.over && !Game.tbfight && Game.feastedActive && Game.feastedActive() && sweeps < 3) {
+      sweeps++;
+      for (const c of cands.slice(0, 4)) {
+        if (Game.over || Game.tbfight) break;
+        if (!Game.feastedActive || !Game.feastedActive()) break;
+        try { Game.travelTo(c.x, c.y); } catch (e) { break; }
+        if (Game.over || Game.tbfight) break;
+        if (Game.map.px !== c.x || Game.map.py !== c.y) continue;
+        // look around: perception may surface the monster; forage the patch too
+        try { Game.doAction('forage', {}); } catch (e) {}
+        if (Game.over || Game.tbfight) break;
+      }
+    }
+    if (!Game.tbfight) { try { Game.travelTo(hx, hy); } catch (e) {} }
+    ctx._feastFightDay = 0; // attempted
+  } catch (e) {}
+}
+// Play-weighted: system quests, trials, teaching, naming, books.
 
 // ---------- ROAD 6: INTEGRATION (stage ≥ 3 needs integ ≥ 80) ----------
 // Play-weighted: system quests, trials, teaching, naming, books.
@@ -469,7 +547,8 @@ const winseek = {
     diplomacyRoad(Game, ctx);    // road 3b: propose/answer
     crisisRoad(Game, ctx);       // road 4: weather
     sentimentRoad(Game, ctx);    // road 5a: channel keepsakes
-    feastRoad(Game, ctx);        // road 5b: feast weekly
+    feastRoad(Game, ctx);        // road 5b: feast weekly (evening)
+    feastFight(Game, ctx);       // road 5c: fight while feasted (buff decays at dawn)
     integrationRoad(Game, ctx);  // road 6: integ → 80
     tableRoad(Game, ctx);        // answer the table
     // road counters for the report

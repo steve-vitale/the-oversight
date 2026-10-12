@@ -240,6 +240,11 @@
     // watch" — the fiction said "I won't forget this" while the promise
     // system said "you kept your word. That meant everything." Incoherent.
     if (note !== 'stingy') { try { this.checkPromises('food', vid); } catch (e) {} }
+    // THE FOOD TRUTH, OUTWARD (journey-endgame r3 2026-10-11): a real gift
+    // shares the food outward — the moral ledger records it. Stolen-food
+    // returns aren't generosity (returned above); a bite the engine itself
+    // calls insulting ('stingy') doesn't count either.
+    if (note !== 'stingy') { try { if (typeof this.shareFood === 'function') this.shareFood(takenKcal, first); } catch (e) {} }
     this.socialTick(vid);
     this.tickAction(1); // a handoff is quick — the food is the real cost
     this.save();

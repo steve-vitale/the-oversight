@@ -3476,6 +3476,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // never was.)
       this.observe('give_food', { target: vid, trustMoved: true });
       try { this.checkPromises('food', vid); } catch (e) {}
+      // THE FOOD TRUTH, OUTWARD (journey-endgame r3 2026-10-11): a personal
+      // gift is sharing the food outward — the moral ledger records it.
+      // (The live path is carexplore.js's giveFood override; this base
+      // stays honest for partial-load harnesses.)
+      try { if (typeof this.shareFood === 'function') this.shareFood(giftKcal, this.displayName(vid)); } catch (e) {}
       // ACTION CLOCK: a handoff is 1 tick (time-only — the food is the real cost).
       this.tickAction(1);
       return true;
@@ -12897,6 +12902,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // PLAYSTYLE: the game notices generosity. Not the stat — the pattern.
       if (kcal >= 200) this.notePlaystyle('generous');
+      // THE FOOD TRUTH, OUTWARD (journey-endgame r3 2026-10-11): the
+      // ledger's shareFood was unwired — donations built trust but never
+      // the moral ledger the table prices on. A deliberate pantry gift is
+      // sharing the food outward. (shareFood gates crumbs itself.)
+      try { if (typeof this.shareFood === 'function') this.shareFood(kcal, "Haven's pantry"); } catch (e) {}
       return null;
     },
     // dropItem(idx): leave it for the woods. The pack is honest about space;

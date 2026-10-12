@@ -11,7 +11,7 @@
 //   - unityState()            (felt unified/fractured state machine)
 //   - foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded)
 //   - legendSurface()         (the story so far, as the world tells it)
-//   - shareFood(kcal, toName) (UNWIRED 2026-10-08: no callers — foodStance never updates)
+//   - shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design)
 //   - hoardFood(kcal)         (UNWIRED 2026-10-08: no callers — private stashing never tracked)
 //   - hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers)
 //   - exposeFallout(caseId, voterId) (named consequences when a truth goes public)
@@ -470,13 +470,25 @@
       } catch (e) {}
     },
     shareFood(kcal, toName) {
-      // UNWIRED (sibling-sweep 2026-10-08): nothing calls this — the outward
-      // half of food sharing was never connected. The inward half works:
-      // teaching writes foodShared via ledgerAdd (progression.js).
+      // WIRED 2026-10-11 (journey-endgame r3): deliberate gifts call this —
+      // donateToPantry (game.js), giveFood (game.js base + carexplore.js
+      // override). The automatic homecoming pool split is NOT wired: "We
+      // pool food here" is the standing custom, and norms don't move the
+      // moral ledger — otherwise 'sharer' would be automatic and the
+      // channel meaningless. The inward half works: teaching writes
+      // foodShared via ledgerAdd (progression.js).
       try {
-        const n = Math.max(1, Math.round((kcal || 500) / 1000));
+        kcal = kcal || 0;
+        if (kcal < 200) return null; // not a real gift (matches the generous-XP bar)
+        const n = Math.max(1, Math.round(kcal / 1000));
         this.ledgerAdd('foodShared', n);
-        try { this.recordMoment(`Shared food outward${toName ? ' — ' + toName : ''}.`); } catch (e) {}
+        // the village remembers feasts, not crumbs: moments cap at 30 and
+        // each one nudges viewership +1 — a moment per gift would flood the
+        // feed and inflate fame. Threshold beats (5/12/20) and the stance
+        // transitions carry the felt weight of smaller gifts.
+        if (kcal >= 1000) {
+          try { this.recordMoment(`Shared food outward${toName ? ' — ' + toName : ''}.`); } catch (e) {}
+        }
       } catch (e) {}
       return null;
     },
