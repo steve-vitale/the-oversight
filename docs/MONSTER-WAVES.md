@@ -246,8 +246,10 @@ Discovery channels (all reachable):
    punishes (approaching feeds the lure; the reveal needs refusal) — rewired
    to `keep_distance`/3 with honest text.
 2. **Told at Haven** — `recordWaveKill` tracks `state.villageSlain[type]`;
-   2+ village slain of a type unlocks the askAbout 'beasttricks' topic —
-   villager experiences count (Steve 2026-10-10).
+   1+ village slain of a type unlocks the askAbout 'beasttricks' topic —
+   villager experiences count (Steve 2026-10-10). (Retuned 1+ on 2026-10-11:
+   one kill is enough for the fire to have a theory; the player must still
+   ASK — nothing is automatic.)
 3. **Codex hint** — slaying a type surfaces `counter.hint` in the Monster
    Codex BEASTS section; the full `counter.reveal` stays gated on discovery.
 
