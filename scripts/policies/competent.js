@@ -722,17 +722,94 @@ function gearUp(Game, ctx) {
         }
       } catch (e) {}
     }
-    // ARMOR: any armor piece -> 'armor' slot when empty (equip() maps torso)
-    const hasArmor = ['torso', 'armor', 'head', 'body'].some(sl => eq[sl]);
-    if (!hasArmor) {
-      for (let i = 0; i < inv.length; i++) {
-        const def = defOf(inv[i]);
-        if (def && def.armor) {
-          try { Game.equip(i, 'armor'); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
-          break;
+    // ARMOR (longsim combat r6 2026-10-12): wear the BEST armor owned, and
+    // craft bark armor when the recipe is known. Two blanks closed:
+    // (1) the old code equipped the FIRST armor-def item in inventory order
+    // only when every armor slot was empty — sims showed a P=2 garment worn
+    // over a P=10 bark armor sitting in the pack, never upgrading;
+    // (2) the policy never crafted the universally-craftable bark armor
+    // (bark 3 + vine 2, no knowledge requirement on the recipe itself —
+    // craft() enforces the L1+ knowledge gate, blind L1 attempts are honest
+    // 35% fails with materials at risk), so 2/3 sampled seeds fought wave-3
+    // — which the design anchors at P=64 — with P~2.
+    // Env gate COMPETENT_CRAFT_ARMOR=0 restores the old first-found behavior
+    // for before/after measurement.
+    const armorCraftOn = process.env.COMPETENT_CRAFT_ARMOR !== '0';
+    const protOf = (it) => {
+      const def = defOf(it);
+      return (def && def.armor) ? (def.armor.protection || 0) : 0;
+    };
+    const armorSlotFor = (it) => {
+      try {
+        const def = defOf(it);
+        const g = typeof globalThis !== 'undefined' ? globalThis : {};
+        const Seq = (g.Scattering && g.Scattering.equipment) || (g.S && g.S.equipment);
+        if (Seq && typeof Seq.slotForItem === 'function') {
+          const want = Seq.slotForItem(def);
+          if (want) return want;
+        }
+      } catch (e) {}
+      return 'armor';
+    };
+    if (!armorCraftOn) {
+      // LEGACY PATH (pre-r6): first armor-def item in inventory order, only
+      // when every armor slot is empty. Preserved verbatim for before/after
+      // measurement via COMPETENT_CRAFT_ARMOR=0.
+      const hasArmor = ['torso', 'armor', 'head', 'body'].some(sl => eq[sl]);
+      if (!hasArmor) {
+        for (let i = 0; i < inv.length; i++) {
+          const def = defOf(inv[i]);
+          if (def && def.armor) {
+            try { Game.equip(i, 'armor'); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
+            break;
+          }
         }
       }
+    } else {
+    let wornMax = 0;
+    for (const sl of ['torso', 'armor', 'head', 'body']) {
+      const cur = eq[sl];
+      if (cur) wornMax = Math.max(wornMax, protOf(cur));
     }
+    let abestI = -1, abestP = -1;
+    for (let i = 0; i < inv.length; i++) {
+      const p = protOf(inv[i]);
+      if (p > 0 && p > abestP) { abestP = p; abestI = i; }
+    }
+    if (armorCraftOn && abestI < 0 && wornMax < 10) {
+      // Nothing owned and nothing decent worn: craft bark armor when the
+      // recipe is known (handling a villager's bark armor teaches L1) and
+      // the materials are on hand. craft() enforces every gate itself.
+      try {
+        const rk = ((Game.state.codex || {}).recipes || {}).bark_armor || {};
+        if ((rk.level || 0) >= 1) {
+          const have = (m) => inv.filter(it => it && it.material === m)
+            .reduce((t, it) => t + (it.units || 0), 0);
+          if (have('bark') >= 3 && have('vine') >= 2 && Game.craft) {
+            const made = Game.craft('bark_armor');
+            if (made) {
+              ctx.barkArmorCrafted = (ctx.barkArmorCrafted || 0) + 1;
+              // re-scan: craft() replaced scholar.inventory with a new
+              // filtered array — rebind the local before indexing into it.
+              inv.length = 0;
+              Array.prototype.push.apply(inv, Game.state.scholar.inventory || []);
+              abestI = -1; abestP = -1;
+              for (let i = 0; i < inv.length; i++) {
+                const p = protOf(inv[i]);
+                if (p > 0 && p > abestP) { abestP = p; abestI = i; }
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
+    if (abestI >= 0 && abestP > wornMax) {
+      try {
+        Game.equip(abestI, armorSlotFor(inv[abestI]));
+        ctx.geared = (ctx.geared || 0) + 1;
+      } catch (e) {}
+    }
+    } // end armorCraftOn branch
   } catch (e) {}
 }
 
