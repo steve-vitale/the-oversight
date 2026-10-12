@@ -810,7 +810,12 @@
           if (!dry) return null;
           useChunks = this.convoSplitBeats(dry);
         } else {
-          const fb = opts && opts.fallback;
+          let fb = opts && opts.fallback;
+          // LAZY FALLBACK (journey-social 2026-10-12 r6): a function fallback
+          // is only invoked when the block actually fires — eager evaluation
+          // burned a pool slot on every successful sayLine and phase-shifted
+          // the cycle. Plain strings still work.
+          if (typeof fb === 'function') { try { fb = fb(); } catch (e) { fb = null; } }
           if (!fb) return null; // blocked: already said
           useChunks = this.convoSplitBeats(String(fb));
         }
@@ -900,9 +905,12 @@
     // consecutive blocks (observed 2026-10-12: "I just said — did you miss
     // it?" x3 in one conversation) — the exact filler-loop Steve called
     // out. Per-conversation cycling pool, never verbatim, like
-    // convoDryLine. Cap: past 9 uses in one conversation the player is
-    // spamming a choice and the canonical line returns (exempt, generic).
-    // Never ledgered (generic by design, same as sayLine's fallback rule).
+    // convoDryLine. The pool cycles FOREVER (journey-social 2026-10-12 r6):
+    // the old "past 9 uses -> canonical" cap collapsed right back into the
+    // verbatim parrot it was built to kill — 78 identical lines in one
+    // run's evidence. A spamming player gets rotating honest brush-offs,
+    // which is what a real person does. Never ledgered (generic by design,
+    // same as sayLine's fallback rule). Counter resets in startConvo.
     convoSelfRepeatLine(vid) {
       const c = this.convoGet(vid);
       const POOL = [
@@ -912,7 +920,6 @@
       ];
       const used = c.selfRepeatLines || 0;
       c.selfRepeatLines = used + 1;
-      if (used >= POOL.length * 3) return POOL[0];
       return POOL[used % POOL.length];
     },
 
@@ -3650,6 +3657,11 @@
       // SPENT (journey-succession 2026-10-12): reset the per-conversation
       // spent-choice ledger — a new sitting, fresh offers.
       c.spent = {};
+      // SELF-REPEAT (journey-social 2026-10-12 r6): the deflection pool is
+      // per-conversation by design — reset the counter here like the other
+      // per-sitting ledgers, or the cycle never restarts and the old cap
+      // logic collapses to verbatim.
+      c.selfRepeatLines = 0;
       // COHERENCE (Steve 2026-10-07): per-conversation teaching state resets
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.
@@ -4862,7 +4874,7 @@
           if (composed) line = composed;
         }
       } catch (e) {}
-      line = this.sayLine(vid, line, { fallback: this.convoSelfRepeatLine(vid) }) || line;
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid) }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.

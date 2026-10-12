@@ -38,11 +38,18 @@ const themLines = (Game, vid) =>
   ok(cyc[0].indexOf('did you miss it') !== -1, 'first draw keeps the canonical line', cyc[0]);
   const cyc4 = Game.convoSelfRepeatLine(v1);
   ok(cyc4 === cyc[0], 'fourth draw cycles back (never ledgered)', cyc4);
-  // cap: 9 uses in one conversation -> canonical fallback (spamming player)
-  for (let i = 4; i < 10; i++) Game.convoSelfRepeatLine(v1);
-  ok(Game.convoSelfRepeatLine(v1) === cyc[0], 'past cap returns canonical (not silence/desync)', '');
+  // r6 2026-10-12: the old "past 9 -> canonical" cap collapsed right back
+  // into the verbatim parrot (78x in one run's evidence — the counter lived
+  // on the persistent conv object and startConvo never reset it). The pool
+  // now cycles FOREVER: a spamming player gets rotating honest brush-offs.
+  const cyc10 = Game.convoSelfRepeatLine(v1); // 5th draw
+  for (let i = 5; i < 13; i++) Game.convoSelfRepeatLine(v1); // draws 6..13
+  const cyc14 = Game.convoSelfRepeatLine(v1); // 14th draw: used=13 -> POOL[1]; old cap returned POOL[0]
+  ok(cyc14 === cyc[1], 'past old cap still cycles (no canonical collapse)', cyc14);
+  void cyc10;
   Game.endConvo(v1, 'left');
-  // per-conversation: a NEW conversation starts the cycle fresh
+  // per-conversation: a NEW conversation starts the cycle fresh (startConvo
+  // resets the counter — r6; previously this passed only via the cap)
   Game.startConvo(v1);
   ok(Game.convoSelfRepeatLine(v1) === cyc[0], 'cycle resets per conversation', '');
   Game.endConvo(v1, 'left');

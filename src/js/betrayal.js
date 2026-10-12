@@ -3681,7 +3681,7 @@
           // transcript writer — the old direct push PLUS sayLine printed
           // every betrayal beat twice. The fallback keeps a no-repeat-blocked
           // beat from going silent.
-          line = this.sayLine(vid, line, { fallback: this.convoSelfRepeatLine(vid) }) || line;
+          line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid) }) || line;
         }
         c.exchanges = (c.exchanges || 0) + 1;
       } catch (e) {}

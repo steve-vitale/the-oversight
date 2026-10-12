@@ -505,7 +505,10 @@
         // displayed the blocked line anyway — the transcript showed a repeat
         // the ledger had refused.
         if (!said) {
-          const dup = '"I just said — did you miss it?"';
+          // SELF-REPEAT CYCLE (journey-social 2026-10-12 r6): the old
+          // hardcoded line parroted verbatim here — this was the fourth
+          // call site the r5 fix missed. Same cycling pool as everywhere else.
+          const dup = this.convoSelfRepeatLine(vid);
           this.sayLine(vid, dup);
           return { line: dup, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
