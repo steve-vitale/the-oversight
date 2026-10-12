@@ -1230,7 +1230,7 @@ The Witness path — the trial of the judges. Three beats: opening charges (from
 ### table (`table.js`)
 The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 
-**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text)
+**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text)
 
 **Rules:**
 —

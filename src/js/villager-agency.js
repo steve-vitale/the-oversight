@@ -334,6 +334,10 @@
     // awareness check ("saw it, gave it room") stays — it decides contact,
     // not outcome. Once steel is crossed, the fight decides.
     expeditionMonster(vid, dist, playerAtHaven) {
+      // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
+      // holds its breath — expeditions meet nothing out there. The village
+      // is at the table or watching it; every stake is the table's own.
+      if (this.tableActive && this.tableActive()) return;
       var a = this.agencyOf(vid);
       var st = this.agencyState();
       var pool = [];

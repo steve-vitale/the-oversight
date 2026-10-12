@@ -209,6 +209,11 @@
         for (const m of ms) {
           if (!m || !m.lingering || (m.hp || 0) <= 0) continue;
           m.tx = hx; m.ty = hy;
+          // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the
+          // raiders hold the treeline but do not gorge — the teeth can wait.
+          // The crisis stays open; the player may still answer the call for
+          // help themselves. Nothing automatic harms the village mid-finale.
+          if (this.tableActive && this.tableActive()) continue;
           const take = 500 + Math.floor(R() * 1000);
           let got = 0;
           try { got = this.raidPillage(v, take); } catch (e) {}
@@ -334,6 +339,10 @@
     havenRaidTick() {
       const v = this.state.village;
       if (!v || this.over) return false;
+      // TABLE SANCTITY (2026-10-12, Steve): while the table sits, no new
+      // raids — the world holds its breath. Raiders already at the treeline
+      // hold (see havenGrowthDaily); nothing new comes.
+      if (this.tableActive && this.tableActive()) return false;
       const day = (this.state.scholar || {}).day || 1;
       if (day - (v.lastRaidDay || 0) < 7) return false;
       let monsters = [];

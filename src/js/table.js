@@ -7,6 +7,7 @@
 //   - tableBranch(pathId)
 //   - tableRegisterPath(def)
 //   - tableScene()
+//   - tableActive()
 //   - chooseTableOption(id)
 //   - tableStartPath(pathId)
 //   - tableChoose(choiceId)
@@ -296,6 +297,24 @@
       } catch (e) { return {}; }
     },
 
+    // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
+    // holds its breath. Ambient monster pressure against villagers is
+    // suspended — no random field fights, no wild encounters, no patrol
+    // contact, no new raids (lingering raiders hold the treeline without
+    // gorging). ALL stakes during the finale come from the table itself
+    // (pricing, light/dark branches, trial by combat — the one opt-in
+    // existential risk). Ambient routers gate on this flag; the table's
+    // own stakes never check it. Derived from run state (no new persisted
+    // fields): active from tableScene until any resolve sets phase 'done'.
+    tableActive() {
+      try {
+        const pg = this.progState ? this.progState() : null;
+        if (!pg || !pg.tableDone) return false;
+        const T = this.tableState();
+        return !!(T && T.phase && T.phase !== 'done');
+      } catch (e) { return false; }
+    },
+
     // tableLiveWrap: every path's finale is televised in its genre — but
     // only when the show is actually watching (viewership >= 12, the
     // ledger's own threshold-beat rule). Otherwise the beat plays
@@ -350,6 +369,11 @@
         ? `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.`
         : `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0}), ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
+      // TABLE SANCTITY (2026-10-12, Steve): the System clears the stage.
+      // One line, producer-unhinged — the world holds its breath while the
+      // table sits. Ambient monster pressure is suspended for the sequence
+      // (see the tableActive predicate); every stake from here is the table's own.
+      this.sysSay('EVERYONE. SIT. WATCH. The teeth and the weather can WAIT — nothing out there matters until this is done. ...Did I stutter? SIT.');
       try { this.recordMoment(`Haven reached the table (${seat.seat} seat).`); } catch (e) {}
       try { this.metaNoteTable && this.metaNoteTable('table'); } catch (e) {}
       this.tableOfferPaths('The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take.');
