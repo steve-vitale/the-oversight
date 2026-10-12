@@ -184,6 +184,30 @@ function mulberry(seed) {
     const src = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
     assert.ok(src.includes('this.fighterDistTo(t, p.mx, p.my)'), 'strike still anchor-based');
   });
+  check('fighterInCells: any body tile in the set matches; empty misses', () => {
+    const f = { mx: 2, my: 2, size: 2, mdef: { size: 2 } }; // tiles (2..3,2..3)
+    const set = new Set(['0,0', '3,3', '8,8']);
+    assert.ok(Game.fighterInCells(f, set), 'non-anchor body tile (3,3) should match');
+    assert.ok(!Game.fighterInCells(f, new Set(['0,0', '8,8'])), 'outside set should miss');
+    assert.ok(!Game.fighterInCells(f, null), 'null set should miss');
+  });
+  check('combat: beam lane through a non-anchor body tile hits the monster once', () => {
+    Game.startCombat('bulldozer'); // size 2
+    const f = Game.tbfight, m = f.fighters.find(x => x.kind === 'monster');
+    const tiles = Game.fighterTiles(m);
+    assert.strictEqual(tiles.length, 4, 'bulldozer should occupy 4 tiles');
+    // Fake a beam lane that crosses ONLY non-anchor tiles of the body.
+    const nonAnchor = tiles.filter(([x, y]) => !(x === m.mx && y === m.my));
+    const lane = new Set(nonAnchor.map(([x, y]) => x + ',' + y));
+    const hit = [];
+    for (const o of f.fighters) {
+      if (!o.alive || o.fled) continue;
+      if (Game.fighterInCells(o, lane)) hit.push(o.key);
+    }
+    assert.ok(hit.includes(m.key), 'beam through non-anchor tiles must hit the monster');
+    assert.strictEqual(hit.filter(k => k === m.key).length, 1, 'one fighter = one hit, never per tile');
+    Game.tbfight = null;
+  });
 
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);

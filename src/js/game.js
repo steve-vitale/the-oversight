@@ -28413,7 +28413,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const o of f.fighters) {
         if (!o.alive || o.fled || o.key === m.key) continue;
         if (!S.combat.isFoe(m, o)) continue;
-        if (!laneSet.has(o.mx + ',' + o.my)) continue;
+        // MULTI-TILE (Steve 2026-10-12): the beam hits the whole body.
+        if (!this.fighterInCells(o, laneSet)) continue;
         hitAnyone = true;
         // ON THE RAY: perpendicular distance from the fighter to the beam ray
         const pdx = o.mx - m.mx, pdy = o.my - m.my;
@@ -31365,6 +31366,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { best = Math.max(Math.abs(f.mx - x), Math.abs(f.my - y)); }
       return best;
     },
+    // fighterInCells(f, cellSet): is ANY of the fighter's body tiles in the
+    // 'cx,cy' set? AoE/beam/line hit-tests must treat the whole body as the
+    // monster (Steve 2026-10-12) — damage is still dealt once per fighter
+    // via tbDamage(key), never per tile.
+    fighterInCells(f, cellSet) {
+      if (!f || !cellSet) return false;
+      try {
+        for (const [tx, ty] of this.fighterTiles(f)) {
+          if (cellSet.has(tx + ',' + ty)) return true;
+        }
+      } catch (e) { return cellSet.has(f.mx + ',' + f.my); }
+      return false;
+    },
     // Can fighter f occupy the size×size block with top-left at (nx, ny)?
     // Validates ALL tiles are in-bounds and walkable — a 2x2 monster never
     // gets stuck half-in a wall or overlapping another fighter.
@@ -33754,7 +33768,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const o of f.fighters) {
             if (!o.alive || o.fled || o.key === m.key) continue;
             if (!S.combat.isFoe(m, o)) continue; // packmates aren't targets
-            if (hitKeys.has(o.mx + ',' + o.my)) {
+            // MULTI-TILE (Steve 2026-10-12): the swell catches the whole body.
+            if (this.fighterInCells(o, hitKeys)) {
               if (m.blind > 0 && Math.random() < 0.5) {
                 this.say(`${m.name} lashes at sand-ghosts near ${o.kind === 'player' ? 'you' : o.name}. Missed. (pocket_sand)`);
                 continue;
@@ -36138,7 +36153,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const o of f.fighters) {
             if (!o.alive || o.fled || o.key === m.key) continue;
             if (!S.combat.isFoe(m, o)) continue; // packmates aren't targets
-            if (hitKeys.has(o.mx + ',' + o.my)) this.tbDamage(o.key, S.combat.roll(atk.damage), m.name, m.key);
+            // MULTI-TILE (Steve 2026-10-12): the snap catches the whole body.
+            if (this.fighterInCells(o, hitKeys)) this.tbDamage(o.key, S.combat.roll(atk.damage), m.name, m.key);
           }
           this.tbLearnPattern(m);
         }
