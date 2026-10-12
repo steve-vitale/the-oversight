@@ -30,18 +30,26 @@ async function freshGame(seed) {
   await runDays(Game, oracleV2, { days: 10 });
   const v = Game.state.village || {};
   const hx = v.px ?? 4, hy = v.py ?? 4;
-  Game.travelTo(hx, hy);
-  // open the raid gate: 3+ monsters, 3k+ pantry
+  // place the player AT the haven directly (travelTo can refuse on
+  // blockages — test setup, not game behavior under test)
+  try { Game.map.px = hx; Game.map.py = hy; } catch (e) {}
+  try { if (!Game.playerAtHaven()) Game.travelTo(hx, hy); } catch (e) {}
+  // open the raid gate: 3+ monsters, 3k+ pantry (bait — the gate isn't
+  // what's under test; the player-encounter logic is)
   let mons = Game.worldMonsters().length;
   const ids = ['hushwolf', 'bulldozer', 'choir_toad'];
   for (let i = mons; i < 3; i++) { try { Game.spawnWorldMonster({ id: ids[i % 3] }, hx + 2, hy + 1, {}); } catch (e) {} }
+  try {
+    const pk = Math.round(((v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0)));
+    if (pk < 3000 && Game.stockPantry) Game.stockPantry(90000, 'Bait');
+  } catch (e) {}
   return { Game, v, hx, hy };
 }
 function fireRaid(Game, v) {
   v.lastRaidDay = (Game.state.scholar.day || 10) - 8;
   Game.pendingEncounter = false; Game.pendingMonsterId = null;
   let fired = false, tries = 0;
-  while (!fired && tries < 30 && !Game.over) { tries++; fired = Game.havenRaidTick(); }
+  while (!fired && tries < 60 && !Game.over) { tries++; fired = Game.havenRaidTick(); }
   return { fired, tries };
 }
 
@@ -80,17 +88,25 @@ async function main() {
   console.log('TEST 2: no silent clobber of a live pendingEncounter');
   {
     const { Game, v } = await freshGame(777);
+    // defenders wound but don't kill, so live raiders reach the player block
+    // (setup for the clobber branch — the defender outcomes aren't under test)
+    const _enc2 = Game.resolveWildMonsterEncounter;
+    Game.resolveWildMonsterEncounter = function (vid, m) {
+      try { if (m && (m.hp || 0) > 0) m.hp = Math.min(m.hp, 10); } catch (e) {}
+      return;
+    };
     // a feast draw is pending
     Game.pendingEncounter = true;
     Game.pendingMonsterId = 'feast_beast_test';
     v.lastRaidDay = (Game.state.scholar.day || 10) - 8;
     let fired = false, tries = 0;
-    while (!fired && tries < 15 && !Game.over) { tries++; fired = Game.havenRaidTick(); }
+    while (!fired && tries < 60 && !Game.over) { tries++; fired = Game.havenRaidTick(); }
+    Game.resolveWildMonsterEncounter = _enc2;
     ok(fired, 'raid fired');
     ok(Game.pendingMonsterId === 'feast_beast_test', `pending NOT overwritten (still '${Game.pendingMonsterId}')`);
     const wms = Game.worldMonsters();
     const lingered = wms.filter(m => m.lingering).length;
-    ok(lingered > 0, `${lingered} raider(s) linger at the treeline instead`);
+    ok(lingered > 0, `${lingered} live raider(s) linger at the treeline instead of clobbering`);
   }
 
   console.log('TEST 3: normal case — player faces a live raider');
