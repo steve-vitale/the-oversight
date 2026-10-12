@@ -868,6 +868,472 @@
       Game.say('🐞 SCENARIO: nostalgia. It is showing you home. Do not follow it there.');
     },
 
+    // WAVE 2 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    warranty() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'warranty_caller', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 2): Your warranty has expired. It is here to collect.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w2_fighter loadout for a fair fight.');
+    },
+    // WAVE 2 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    moderator() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'moderator', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 2): CONTENT UNDER REVIEW. The gavel is already raised.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w2_fighter loadout for a fair fight.');
+    },
+    // WAVE 2 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    mosquito() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'giant_mosquito', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 2): Too loud for anything that small. The whine is circling.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w2_fighter loadout for a fair fight.');
+    },
+    // WAVE 2 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    tick() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'alien_tick', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 2): Questing. Legs waving, fishing. Do not let it latch.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w2_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3redactor() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'redactor', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): Edge-handles, three tiles east. It is already pointing at something.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3gavel() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'gavel', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): The court is in session. You are the docket.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3focusgroup() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'focus_group', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): They are taking notes. You are the notes.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3spool() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'spool', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): The reels are turning. It is keeping everything.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3chorusline() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'chorus_line', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): One, two — one, two. Do not miss the beat.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3tos() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'terms_of_service', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): You agreed to this. Paragraph 12, subsection you.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3callback() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'callback', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): It wears a face you buried. It is calling you back.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3buffering() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 2;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'buffering', mx: 5, my: 4 };
+      Game.say("🐞 SCENARIO (wave 3): It hasn't finished loading. It never finishes loading.");
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 3 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w3adbreak() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('fire_hardened_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'ad_break', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 3): A word from our sponsors. You are the product.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w3_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4congregation() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'congregation', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): They are singing. The hymn has your name in it.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4strike() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'strike', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): The line is drawn. Cross it and find out.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4influencer() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'influencer', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): It has 4 million followers. You are about to be content.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4audit() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'audit', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): Your books are open. They were always open.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4reunion() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'reunion', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): Everyone you ever knew is here. That is the problem.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4suburb() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'suburb', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): The lawns are mowed. The sprinklers keep time. Something is wrong with the time.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4eulogy() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'eulogy', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): It is reading the verse. It is your verse.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4algorithm() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 2;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'algorithm', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): It has already decided. The blips are just courtesy.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4eater() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'eater', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): It is hungry in a way food does not fix.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 4 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w4herald() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'herald', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 4): It does not ambush. It arrives. You saw it coming for days.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w4_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5cancellation() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'cancellation', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): The stamp is coming down. Say your lines while you can.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5editor() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'editor', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): That take was unusable. It is cutting you out.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5rerun() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'rerun', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): Take two. And three. And — take two.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5spoiler() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'spoiler', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): It knows how this ends. It is going to tell you.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5timeslot() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 2;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'timeslot', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): You are on at eight. It is always eight. The clock is wrong.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5nielsen() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'nielsen', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): The ratings are in. You are the demo.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5finale() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 3;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'finale', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): Three rounds. Then the strike. This is the show defending itself.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5crew() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'finale_crew', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): A word from our sponsors — the long one.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5opening() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'finale_opening', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO (wave 5): Your name is in the credits. In the memoriam section.');
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // WAVE 5 (audio-vfx-audit, Steve 2026-10-12): signature audio + declare voice check.
+    w5note() {
+      freshGame();
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.insideHaven = false;
+      Game.dayPart = 1;
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'network_note', mx: 5, my: 4 };
+      Game.say("🐞 SCENARIO (wave 5): Notes from the network. More likable. Less dying.");
+      Game.say('🐞 Walk east into it: declare voice on approach, signature audio in the fight. Apply a w5_fighter loadout for a fair fight.');
+    },
+    // AUDIO BOARD (audio-vfx-audit, Steve 2026-10-12): the wave 4/5 signature
+    // voices, staggered — a sound board. Two taps: run, listen.
+    audioWaves() {
+      freshGame();
+      Game.state.systemArrived = true;
+      Game.say('');
+      Game.say('🔊 SOUND CHECK: wave 4/5 signature voices. Twelve stings, a few seconds apart.');
+      Game.say('🔊 Congregation, strike, suburb, eulogy, eater, herald — then cancellation, editor, rerun, spoiler, timeslot, finale.');
+      ['congregationInvite', 'strikeShutdown', 'suburbHum', 'eulogyVerse', 'eaterGorge', 'heraldTrumpet', 'cxDescend', 'edCut', 'rrClap', 'spSpoil', 'tsTick', 'fiTitleCard'].forEach(function (name, i) {
+        setTimeout(function () { try { Game.audioEvent(name); } catch (e) {} }, i * 4000);
+      });
+    },
+
+    // VFX BOARD (audio-vfx-audit, Steve 2026-10-12): the visual moments, one
+    // after another — watch the grid.
+    vfxShowcase() {
+      freshGame();
+      Game.state.systemArrived = true;
+      Game.say('');
+      Game.say('🎬 VFX CHECK: heavy hit, wave flash, national hero card, contest announce.');
+      try { Game.drama('alienHeavyHit', 4, 4); } catch (e) {}
+      try { Game.drama('flash', '#7a1fa2', 900); } catch (e) {}
+      try { Game.drama('shake', 10); } catch (e) {}
+      try { Game.drama('hero', 'NATIONAL', 'The first court sat.'); } catch (e) {}
+      try { Game.drama('contest', { type: 'announce', name: 'SHOWCASE' }); } catch (e) {}
+      Game.say('🎬 Played: alienHeavyHit, flash, shake, heroCard, contestAnnounce. If any did not render, the dispatcher dropped it — fail loudly.');
+    },
+
+    // MILESTONE (audio-vfx-audit, Steve 2026-10-12): the wave-4 unlock beat,
+    // played — Mirror Draft arrives with flash, shake, and sound.
+    milestoneWave() {
+      freshGame();
+      Game.state.systemArrived = true;
+      Game.say('');
+      Game.say('🐞 SCENARIO: the wave-4 unlock beat, played. Watch and listen.');
+      try { Game.waveUnlockBeat(4); } catch (e) { Game.say('🐞 waveUnlockBeat failed: ' + e.message); }
+    },
     // 10. Moot — YOU stand accused. Theft + assault on the books, the case
     // is open, the defense window is ticking. Speak, call witnesses, press
     // the accuser, investigate bribes, or flee before the count.
@@ -1585,6 +2051,42 @@
       ['termsconditions', '📜 Terms & Conditions fight'],
       ['middlemanager', '💼 Middle Manager fight'],
       ['nostalgia', '📼 Nostalgia fight'],
+      ['warranty', '📞 Warranty Caller fight'],
+      ['moderator', '🔨 Moderator fight'],
+      ['mosquito', '🦟 Giant Mosquito fight'],
+      ['tick', '🕷️ Alien Tick fight'],
+      ['w3redactor', '⬛ The Redactor fight'],
+      ['w3gavel', '🔨 Gavel fight'],
+      ['w3focusgroup', '📋 The Focus Group fight'],
+      ['w3spool', '🎞️ Spool fight'],
+      ['w3chorusline', '🎭 Chorus Line fight'],
+      ['w3tos', '📜 The Terms of Service fight'],
+      ['w3callback', '👤 The Callback fight'],
+      ['w3buffering', '⏳ Buffering fight'],
+      ['w3adbreak', '📺 Ad Break fight'],
+      ['w4congregation', '⛪ The Congregation fight'],
+      ['w4strike', '✊ The Strike fight'],
+      ['w4influencer', '🤳 The Influencer fight'],
+      ['w4audit', '🧾 The Audit fight'],
+      ['w4reunion', '🪞 The Reunion fight'],
+      ['w4suburb', '🏘️ The Suburb fight'],
+      ['w4eulogy', '🕯️ The Eulogy fight'],
+      ['w4algorithm', '🔢 The Algorithm fight'],
+      ['w4eater', '👹 The Eater fight'],
+      ['w4herald', '📯 The Herald fight'],
+      ['w5cancellation', '❌ The Cancellation fight'],
+      ['w5editor', '✂️ The Editor fight'],
+      ['w5rerun', '🔁 The Rerun fight'],
+      ['w5spoiler', '⚠️ The Spoiler fight'],
+      ['w5timeslot', '🕗 The Timeslot fight'],
+      ['w5nielsen', '📊 The Nielsen fight'],
+      ['w5finale', '🎬 The Finale fight'],
+      ['w5crew', '📺 The Commercial Break fight'],
+      ['w5opening', '🎞️ The Opening Credits fight'],
+      ['w5note', '📝 The Network Note fight'],
+      ['audioWaves', '🔊 Sound check: wave 4/5 voices'],
+      ['vfxShowcase', '🎬 VFX check: moments board'],
+      ['milestoneWave', '🌊 Milestone: wave unlock beat'],
       ['ambush', '🔪 Ambush — the walk turns'],
       ['mootAccused', '⚖️ Moot — you stand accused'],
       ['mootJuror', '⚖️ Moot — you are the juror'],
@@ -1633,12 +2135,16 @@
     const cats = {
       '🐾 Animals — Prey': ['deer', 'rabbit', 'squirrel', 'turkey', 'opossum', 'bullfrog', 'boxturtle', 'fox', 'crayfish', 'raccoon', 'snappingturtle', 'chub', 'hunt', 'butcher'],
       '🦌 Monsters — Wave 1': ['headlight', 'flashbulb', 'choir', 'lockpick', 'hummice', 'glasswing', 'sunbasker', 'bulldozer', 'hushpuppy', 'whitenoise', 'nightlight', 'speedbump', 'ducksinarow', 'nevermore', 'nightcourt'],
-      '👹 Monsters — Wave 2': ['static', 'griefcounselor', 'reviewdrone', 'influencer', 'motivationalspeaker', 'customerservice', 'termsconditions', 'middlemanager', 'inspiration', 'nostalgia', 'statickite'],
+      '👹 Monsters — Wave 2': ['static', 'griefcounselor', 'reviewdrone', 'influencer', 'motivationalspeaker', 'customerservice', 'termsconditions', 'middlemanager', 'inspiration', 'nostalgia', 'statickite', 'warranty', 'moderator', 'mosquito', 'tick'],
+      '👹 Monsters — Wave 3': ['w3redactor', 'w3gavel', 'w3focusgroup', 'w3spool', 'w3chorusline', 'w3tos', 'w3callback', 'w3buffering', 'w3adbreak'],
+      '👹 Monsters — Wave 4': ['w4congregation', 'w4strike', 'w4influencer', 'w4audit', 'w4reunion', 'w4suburb', 'w4eulogy', 'w4algorithm', 'w4eater', 'w4herald'],
+      '👹 Monsters — Wave 5': ['w5cancellation', 'w5editor', 'w5rerun', 'w5spoiler', 'w5timeslot', 'w5nielsen', 'w5finale', 'w5crew', 'w5opening', 'w5note'],
       '⚖️ Justice & Social': ['ambush', 'mootAccused', 'mootJuror', 'exile', 'uprising', 'liars'],
       '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving', 'washedout'],
       '📺 Contests & Shows': ['contestPit', 'contestHide', 'contestForage', 'contestWatch', 'showWhyEat', 'broadcastShow', 'contestEligible'],
       '👤 Alien Players': ['alienEncounter'],
-      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude'],
+      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves'],
+      '🎬 VFX & Milestones': ['vfxShowcase', 'milestoneWave'],
       '💍 Items': ['keepsake'],
       '🌍 Scale': ['scaleDawn', 'scaleCouncil', 'scaleCharter', 'scaleCourt', 'scaleWatchers', 'scaleVillage', 'scaleRegional', 'scaleNational', 'scaleGlobal'],
     };
