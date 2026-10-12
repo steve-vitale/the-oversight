@@ -253,8 +253,8 @@
       var r = orig.apply(this, arguments);
       if (r === null || r === undefined) return r;
       try {
-        if (mid === 'finale_crew') finaleCrewSetup();
-        else if (mid === 'finale_opening') finaleOpeningSetup();
+        if (mid === 'finale_crew') { finaleCrewSetup(); try { Game.audioEvent('fiCrewQuiet', {}); } catch (e2) {} }
+        else if (mid === 'finale_opening') { finaleOpeningSetup(); try { Game.audioEvent('fiOpeningSting', {}); } catch (e2) {} }
         else if (mid === 'finale') finaleHeartSetup();
       } catch (e) {}
       return r;

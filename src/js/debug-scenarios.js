@@ -1303,10 +1303,51 @@
       freshGame();
       Game.state.systemArrived = true;
       Game.say('');
-      Game.say('🔊 SOUND CHECK: wave 4/5 signature voices. Twelve stings, a few seconds apart.');
-      Game.say('🔊 Congregation, strike, suburb, eulogy, eater, herald — then cancellation, editor, rerun, spoiler, timeslot, finale.');
-      ['congregationInvite', 'strikeShutdown', 'suburbHum', 'eulogyVerse', 'eaterGorge', 'heraldTrumpet', 'cxDescend', 'edCut', 'rrClap', 'spSpoil', 'tsTick', 'fiTitleCard'].forEach(function (name, i) {
+      Game.say('🔊 SOUND CHECK: all 32 wave 3-5 signature voices, a few seconds apart.');
+      Game.say('🟡 [PLACEHOLDER] = judged synth stand-in, marked per Steve 2026-10-12. 🟢 [REAL] = final.');
+      Object.keys(AudioRegistry.signatures).forEach(function (name) {
+        const s = AudioRegistry.signatures[name];
+        Game.say((s.placeholder ? '🟡 [PLACEHOLDER] ' : '🟢 [REAL] ') + name + ' — ' + s.label);
+      });
+      Object.keys(AudioRegistry.signatures).forEach(function (name, i) {
+        setTimeout(function () { try { Game.audioEvent(name); } catch (e) {} }, i * 2500);
+      });
+    },
+
+    // ANIMAL BOARD (Steve 2026-10-12): real field recordings replace the
+    // synth animal voices. Tags show which pools are real vs gap placeholders.
+    audioAnimals() {
+      freshGame();
+      Game.say('');
+      Game.say('🐾 SOUND CHECK: animal voices. 🟢 [REAL] = field recording, 🟡 [PLACEHOLDER] = no recording found.');
+      Object.keys(AudioRegistry.animals).forEach(function (key) {
+        const a = AudioRegistry.animals[key];
+        Game.say((a.placeholder ? '🟡 [PLACEHOLDER] ' : '🟢 [REAL] ') + key +
+          ' (' + a.monsters.join(', ') + ') — ' + a.label +
+          (a.files.length ? ' [' + a.files.length + ' variant(s)]' : ' [synth fallback]'));
+      });
+      const hooks = [];
+      Object.keys(AudioRegistry.animals).forEach(function (key) {
+        const a = AudioRegistry.animals[key];
+        if (a.files.length && a.hooks.length) hooks.push(a.hooks[0]);
+      });
+      hooks.forEach(function (name, i) {
         setTimeout(function () { try { Game.audioEvent(name); } catch (e) {} }, i * 4000);
+      });
+    },
+
+    // WEAPON BOARD (Steve 2026-10-12): every weapon/item sound that never
+    // existed now has a synth placeholder, all flagged.
+    audioWeapons() {
+      freshGame();
+      Game.say('');
+      Game.say('⚔️ SOUND CHECK: weapon & item sounds. All 🟡 [PLACEHOLDER] — synth stand-ins.');
+      Object.keys(AudioRegistry.weapons).forEach(function (name) {
+        const w = AudioRegistry.weapons[name];
+        Game.say('🟡 [PLACEHOLDER] ' + name + ' — ' + w.label);
+      });
+      Object.keys(AudioRegistry.weapons).forEach(function (name, i) {
+        setTimeout(function () { try { Game.audioEvent(name); } catch (e) {} }, i * 2500);
       });
     },
 
@@ -2133,7 +2174,9 @@
       ['w5crew', '📺 The Commercial Break fight'],
       ['w5opening', '🎞️ The Opening Credits fight'],
       ['w5note', '📝 The Network Note fight'],
-      ['audioWaves', '🔊 Sound check: wave 4/5 voices'],
+      ['audioWaves', '🔊 Sound check: wave 3-5 voices (32, tagged)'],
+      ['audioAnimals', '🐾 Sound check: animal voices (real vs placeholder)'],
+      ['audioWeapons', '⚔️ Sound check: weapon & item placeholders'],
       ['vfxShowcase', '🎬 VFX check: moments board'],
       ['milestoneWave', '🌊 Milestone: wave unlock beat'],
       ['musicMenu', '🎵 Music: main-menu theme'],
@@ -2197,7 +2240,7 @@
       '📖 Story': ['mantle', 'day7', 'day1', 'night', 'language', 'starving', 'washedout'],
       '📺 Contests & Shows': ['contestPit', 'contestHide', 'contestForage', 'contestWatch', 'showWhyEat', 'broadcastShow', 'contestEligible'],
       '👤 Alien Players': ['alienEncounter'],
-      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves', 'musicMenu', 'musicAmbience', 'musicStingers', 'musicContest', 'footsteps'],
+      '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves', 'audioAnimals', 'audioWeapons', 'musicMenu', 'musicAmbience', 'musicStingers', 'musicContest', 'footsteps'],
       '🎬 VFX & Milestones': ['vfxShowcase', 'milestoneWave'],
       '💍 Items': ['keepsake'],
       '🌍 Scale': ['scaleDawn', 'scaleCouncil', 'scaleCharter', 'scaleCourt', 'scaleWatchers', 'scaleVillage', 'scaleRegional', 'scaleNational', 'scaleGlobal'],

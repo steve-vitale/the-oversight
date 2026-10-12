@@ -3133,6 +3133,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // vs rot. The 🪤 TRAP: prefix makes the catch visually scannable
             // even mid-list; the rot warning is explicit, not implied.
             this.say(`🪤 TRAP: Your ${recipe.name} ${dirPhrase(x, y)} caught a ${animal.name}! About ${catchKcal} kcal on the bone — clean it quickly (knife). It rots fast.`);
+            // ITEM AUDIO (Steve 2026-10-12): trap sprung — placeholder.
+            try { this.audioEvent('trapSpring', {}); } catch (e) {}
             // TRAP LEARNABILITY (pacing build 2026-10-10, Steve: "Continue all
             // proposed"): snares were never crafted in 240 audit runs — recipe
             // L0 means no button, and nothing teaches it. Watching the
@@ -12908,6 +12910,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         this.say(`Drank clean water.`);
       }
+      // ITEM AUDIO (Steve 2026-10-12): drinking — placeholder.
+      try { this.audioEvent('itemDrink', {}); } catch (e) { }
       s.hydration = Math.min(100, (s.hydration || 0) + 50);
       return null;
     },
@@ -23348,6 +23352,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       if (ate > 0) this.tele('eat', { ateKcal: ate, spoiled });
+      // ITEM AUDIO (Steve 2026-10-12): eating — placeholder.
+      if (ate > 0) { try { this.audioEvent('itemEat', {}); } catch (e) {} }
       // ACTION CLOCK: a meal is 1 tick (time-only — eating costs no effort).
       if (ate > 0) this.tickAction(1);
     },
@@ -28983,7 +28989,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // audioEvent: optional hook for the Web Audio terror system (app.js).
     // If no audio system is attached, this is a silent no-op.
+    // PLACEHOLDER WIRING (Steve 2026-10-12): file-backed sounds resolve
+    // FIRST via AudioRegistry (signatures/animals/weapons). The registry is
+    // the single source of truth for placeholder:true tagging. If the file
+    // can't play, fall through to the synth voice rather than silence.
     audioEvent(name, data) {
+      try {
+        if (typeof AudioRegistry !== 'undefined' && typeof Audio !== 'undefined') {
+          var reg = AudioRegistry.resolveHook(name);
+          if (reg && reg.file) {
+            var el = new Audio(reg.file);
+            el.volume = 0.9;
+            var played = el.play();
+            if (played && typeof played.catch === 'function') played.catch(function () {});
+            return;
+          }
+        }
+      } catch (e) { /* file failed — fall through to synth */ }
       if (this.audio && typeof this.audio[name] === 'function') {
         try { this.audio[name](data || {}); } catch (e) {}
       }
@@ -29505,6 +29527,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return false;
         }
         this.spendAmmo(w.ammo, 1);
+        // WEAPON AUDIO (Steve 2026-10-12): bow released — placeholder twang.
+        try { this.audioEvent('bowRelease', {}); } catch (e) {}
       }
       // HAYMAKER WHIFF (brawler loop 2026-10-07): the wind-up gamble is real.
       // throw_haymaker promises "-30% accuracy" — the strike engine had no
@@ -29523,6 +29547,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return true;
       }
       let d = S.combat.roll([10, 16]) + w.bonus;
+      // WEAPON AUDIO (Steve 2026-10-12): the swing commits here — whoosh placeholder.
+      try { this.audioEvent('weaponSwing', {}); } catch (e) {}
       // TRUE SWING (passive): your strikes land cleaner.
       const tsBonus = this.passiveBonus('true_swing');
       if (tsBonus > 0) d = Math.round(d * (1 + tsBonus));
@@ -29785,6 +29811,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!isHuman) {
         const wtxt2 = w.unarmed ? '' : ` (${w.name})`;
         this.say(`You STRIKE the ${this.encShortLabel(t) || this.encTheName(t)} for ${shown}${wtxt2}.`);
+        // WEAPON AUDIO (Steve 2026-10-12): the hit lands — impact placeholder.
+        try { this.audioEvent('weaponHit', {}); } catch (e) {}
         this.tbStyle(5, 'solid hit');
       }
       // DRAMA (Steve 2026-10-07, B1): the strike LANDS — starburst on the monster.

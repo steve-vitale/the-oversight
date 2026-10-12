@@ -12390,7 +12390,11 @@
       niCamera() { paparazzoShutter(); },
       fiDeclare() { fiTitleCard(); },
       fiTitleCard() { fiTitleCard(); },
-      fiSacrifice() { fiSacrifice(); },
+      // PLACEHOLDER WIRING (Steve 2026-10-12): file-backed via AudioRegistry
+      // in Game.audioEvent — these entries keep the hook contract; the MP3
+      // plays first and the synth is the fallback.
+      fiCrewQuiet() { /* file-backed via AudioRegistry; no synth voice */ },
+      fiOpeningSting() { /* file-backed via AudioRegistry; no synth voice */ },      fiSacrifice() { fiSacrifice(); },
       fiPartTwo() { fiTitleCard(); },         // second card
       fiEncore() { trialFanfare(); },         // almost-right fanfare — encore
       fiRedPen() { tosObject(); },            // tap + record scratch
