@@ -283,7 +283,16 @@
         ];
         this.say('🎒 ' + pick(lines));
       }
-      try { this.seedGossip('departure', { who: vid }, []); } catch (e) {}
+      // LONGSIM trust r2 (2026-10-11): departures are gossip-worthy news —
+      // seed two witnesses so the rumor can actually travel (was heard: [],
+      // born dead — the village never learned anyone had left). Same pattern
+      // as the objective-departure path in villager-objectives.js.
+      try {
+        var _seen = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
+        var _shuf = _seen.slice();
+        for (var _i = _shuf.length - 1; _i > 0; _i--) { var _j = Math.floor(R() * (_i + 1)); var _t = _shuf[_i]; _shuf[_i] = _shuf[_j]; _shuf[_j] = _t; }
+        this.seedGossip('departure', { who: vid }, _shuf.slice(0, 2));
+      } catch (e) {}
     },
     expeditionLeg(vid, hx, hy, playerAtHaven) {
       var st = this.agencyState();
@@ -526,7 +535,14 @@
       var v = this.state.village;
       v.explorerNews = v.explorerNews || {};
       v.explorerNews[vid] = { day: this.state.scholar.day, agency: true, dist: dist };
-      try { this.seedGossip('return', { who: vid }, []); } catch (e) {}
+      // LONGSIM trust r2 (2026-10-11): the return is news — seed two
+      // witnesses so the rumor can travel (was heard: [], born dead).
+      try {
+        var _seen2 = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
+        var _shuf2 = _seen2.slice();
+        for (var _i2 = _shuf2.length - 1; _i2 > 0; _i2--) { var _j2 = Math.floor(R() * (_i2 + 1)); var _t2 = _shuf2[_i2]; _shuf2[_i2] = _shuf2[_j2]; _shuf2[_j2] = _t2; }
+        this.seedGossip('return', { who: vid }, _shuf2.slice(0, 2));
+      } catch (e) {}
     },
 
     // ---------- 3. DEEDS & OUTSHINING ----------

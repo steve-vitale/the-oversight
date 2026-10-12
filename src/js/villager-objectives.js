@@ -756,7 +756,15 @@
         // miles walked together, stories traded. +4. Fires whether or not
         // the player was there to see them return.
         try { if (withId && this.bondAdd) this.bondAdd(vid, withId, 4, 'visit'); } catch (e) {}
-        try { this.seedGossip('return', { who: vid }, []); } catch (e) {}
+        // LONGSIM trust r2 (2026-10-11): the return is news — seed two
+        // witnesses so the rumor can travel (was heard: [], born dead).
+        // Same pattern as the objective-departure path above.
+        try {
+          var _seenR = (v.roster || []).filter(function (id) { return id !== vid && id !== this.villagerId; }, this);
+          var _shufR = _seenR.slice();
+          for (var _iR = _shufR.length - 1; _iR > 0; _iR--) { var _jR = Math.floor(R() * (_iR + 1)); var _tR = _shufR[_iR]; _shufR[_iR] = _shufR[_jR]; _shufR[_jR] = _tR; }
+          this.seedGossip('return', { who: vid }, _shufR.slice(0, 2));
+        } catch (e) {}
       }
       // objective complete
       var oo = this.objOf(vid);

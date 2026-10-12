@@ -4019,12 +4019,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (g.action === 'stingy') this.say(`${first} lowers their voice. "Word is ${wname} has been holding back. Keeping the good stuff close."`);
           else if (g.action === 'generous') this.say(`${first}: "People are saying ${wname} has been generous. Sharing around, no questions asked."`);
           else if (g.action === 'departure') this.say(`${first}: "Did you hear? ${wname} just walked away from Haven. Didn't look back."`);
+          else if (g.action === 'return') this.say(`${first}: "${wname} is back. Walked in like they'd never left."`);
           else this.say(`${first}: "People are talking about ${wname}. Take it for what it's worth."`);
           try {
             if (this.journalNote) this.journalNote('people', g.dims.who,
               g.action === 'stingy' ? `Rumor: they've been holding back, keeping the good stuff close.`
               : g.action === 'generous' ? `Rumor: they've been generous, sharing around.`
               : g.action === 'departure' ? `They walked away from Haven. Nobody knows where they went.`
+              : g.action === 'return' ? `They're back from wherever they went.`
               : `There's talk about them going around the fire.`);
           } catch (e2) {}
           return { ok: true, gossip: g, aboutOther: g.dims.who };
