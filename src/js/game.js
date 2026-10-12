@@ -37973,6 +37973,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         afflictions: this.afflictionChips ? this.afflictionChips() : [],
         px: this.map.px, py: this.map.py,
         over: this.over, won: this.won,
+        // ENDING SCREEN (journey-succession r10 2026-10-12): the end-of-run
+        // screen was fossilized from the 7-day slice-1 build ("SEVEN DAYS",
+        // "Days: X / 7") and couldn't tell a wipe from a win — on a
+        // village-lost it lied ("The village remembers", "Someone else will
+        // carry the journal next time"). The screen now renders the honest
+        // ending: frame + the lineage (the mantle chain) as the story's
+        // resolution (Steve: failure RESOLVES the story, never deletes it).
+        villageLost: !!this.villageLost,
+        lineage: (function (g) { try { return (typeof g.lineage === 'function' ? (g.lineage() || []) : []); } catch (e) { return []; } })(this),
+        endingFrame: (function (g) { try { return (typeof g.endingFrame === 'function' ? g.endingFrame() : null); } catch (e) { return null; } })(this),
         location: this.location, departed: this.departed,
         inCombat: !!this.tbfight,
         pendingEncounter: !!this.pendingEncounter,

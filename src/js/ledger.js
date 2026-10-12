@@ -614,8 +614,16 @@
         const seen = new Set();
         for (const it of carried.concat(worn)) {
           if (!it) continue;
+          // DEATH-PACK DUPE (journey-succession r10 2026-10-12): the old
+          // dedupe keyed on itemId, so carrying TWO of the same thing (a
+          // stone knife in hand, a stone knife in the pack) silently
+          // DESTROYED the second — the body didn't keep what it carried
+          // (Steve 2026-10-09 loot-as-action law). Dedupe by object
+          // identity instead: the same object listed twice (worn AND
+          // carried) still packs once; two distinct copies both ride home.
+          if (seen.has(it)) continue;
+          seen.add(it);
           const gid = it.itemId || it.id;
-          if (gid) { if (seen.has(gid)) continue; seen.add(gid); }
           const def = (gid && defs[gid]) || {};
           if (it.bonded || it.sentimental || def.class === 'sentimental') continue; // dies with them
           gearPack.push({

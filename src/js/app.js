@@ -18050,21 +18050,53 @@
 
   // ---------- ending ----------
   function ending() {
+    // ENDING (journey-succession r10 2026-10-12): the old screen was a
+    // slice-1 fossil ("SEVEN DAYS", "Days: X / 7", "New expedition") that
+    // lied on a wipe — "The village remembers" and "Someone else will carry
+    // the journal next time" when the village is DEAD and nobody will.
+    // Steve's law: failure RESOLVES the story, never deletes it. So the
+    // ending now shows the lineage — every bearer of the mantle, in order.
+    // The chain is the resolution: the village is the protagonist, and its
+    // story is the list of faces that carried it.
     const st = Game.status();
     const entries = Game.codexEntries().length;
+    const lin = st.lineage || [];
+    const last = lin[lin.length - 1] || {};
+    const chainHtml = lin.length
+      ? `<div class="card"><h3>The bearers</h3>` + lin.map(e => {
+        const nm = esc(e.name || 'Someone');
+        const days = e.day || 0;
+        const dstr = `${days} ${days === 1 ? 'day' : 'days'}`;
+        let tail = '';
+        if (e.outcome === 'village-lost') tail = ' — the last';
+        else if (e.outcome === 'haven-endures') tail = ` — ${esc(e.epithet || e.frame || 'the ending')}`;
+        else if (e.cause) tail = ` (${esc(e.cause)})`;
+        return `<p class="small">🕯️ ${nm} — ${dstr}${tail}</p>`;
+      }).join('') + `</div>`
+      : '';
+    let title, sub, record;
+    if (st.won) {
+      title = String(last.epithet || 'the ending').toUpperCase();
+      sub = 'The village endures. The Codex closes on a story the galaxy will retell.';
+      record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}`;
+    } else if (st.villageLost) {
+      title = 'THE VILLAGE DIES OUT';
+      sub = 'No one is left to pick up the Codex. The village dies out — quietly, the way villages do. The season ends here.';
+      record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}<br>The Codex closes. Nobody will carry it.`;
+    } else {
+      title = 'THE WOODS KEEP YOU';
+      sub = 'The story ends here. The Codex keeps what was brought home.';
+      record = `Days: ${st.day} · Plants learned: ${entries}`;
+    }
     screen.innerHTML = `
       ${bar('scattering://end', st.won ? 'survived' : 'fallen')}
-      <h1 class="title" style="font-size:26px">${st.won ? 'SEVEN DAYS' : 'THE WOODS KEEP YOU'}</h1>
-      <p class="small">${st.won
-        ? 'You ate. You drank. You came back. The village eats because of you.'
-        : 'You didn\'t make it. The village remembers. The Codex keeps what you brought home.'}</p>
+      <h1 class="title" style="font-size:26px">${esc(title)}</h1>
+      <p class="small">${esc(sub)}</p>
       <div class="card"><h3>Expedition record</h3>
-        <p class="small">Days: ${st.day} / 7 · Plants learned: ${entries}<br>
-        ${st.won ? 'The first week is the hardest. It gets no easier — but you get better.' : 'Someone else will carry the journal next time.'}</p></div>
-      <button class="btn" id="b-again">New expedition</button>
-      <button class="btn ghost" id="b-title">Title</button>`;
+        <p class="small">${record}</p></div>
+      ${chainHtml}
+      <button class="btn" id="b-again">Begin a new village</button>`;
     document.getElementById('b-again').onclick = () => title();
-    document.getElementById('b-title').onclick = () => title();
   }
 
   // ============ DEBUG MODE (dev only, subtle for players) ============
