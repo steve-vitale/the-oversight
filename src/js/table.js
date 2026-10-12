@@ -449,7 +449,13 @@
       this.say(`◈ ${def.name.toUpperCase()} — ${def.openLine}`);
       if (branch.notes.length) {
         const noteStr = branch.notes.join('; ');
-        this.say(`The table has read your ledger. ${noteStr.charAt(0).toUpperCase() + noteStr.slice(1)}. The ${branch.branch} road is open.`);
+        // GREY (journey-endgame r5 2026-10-12): the relay path resolves on
+        // the leaning band, not the binary ledger branch — a grey-band walker
+        // hearing "the light road is open" / "the dark road is open" is
+        // misvoiced. The middle gets its own road.
+        let road = branch.branch;
+        try { if (pathId === 'relay' && T.band === 'grey') road = 'middle'; } catch (e) {}
+        this.say(`The table has read your ledger. ${noteStr.charAt(0).toUpperCase() + noteStr.slice(1)}. The ${road} road is open.`);
       }
       try { this.metaNoteTable && this.metaNoteTable(pathId); } catch (e) {}
       // PODS WEIGHT — DARK CONSCRIPT (2026-10-11, KIN canon): feared-dark
@@ -840,7 +846,16 @@
           this.say(`◈ THE PANTHEON — ${names} ascended together, and gods, it turns out, have politics. They argue about you the way the living argue about weather. Mostly, they agree: the village comes first. Mostly.`);
         }
         if (!asc.length && !facIds.length) {
-          this.say(`◈ ${me} walks out of the light alone, which is how they walked in. The village endures. That was always the story.`);
+          // PRONOUN HONESTY (journey-endgame r5 2026-10-12): the coda names
+          // the Bearer, so it should use their pronouns — not default
+          // they/them. Villagers carry gender from nameGender ('m'/'f'/null;
+          // null = unfamiliar, strangers' pronouns aren't assumed).
+          let pro = 'they';
+          try {
+            const mv = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+            pro = mv.gender === 'm' ? 'he' : mv.gender === 'f' ? 'she' : 'they';
+          } catch (e) {}
+          this.say(`◈ ${me} walks out of the light alone, which is how ${pro} walked in. The village endures. That was always the story.`);
         }
         // Ascensions stack bargaining power — said aloud, priced in.
         if (asc.length) this.say(`The table notes ${asc.length} ascension${asc.length > 1 ? 's' : ''} from one village. Its terms improve accordingly. Nobody has ever seen that before.`);

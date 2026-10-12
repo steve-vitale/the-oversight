@@ -27,7 +27,12 @@ papered over.
 6. **Light/dark branches for every path, earned through play — never a
    menu choice.** Read from existing behavior: moral ledger, switchboard
    routed/delayed/edited/skimmed counts, food truth shared/hoarded,
-   promises kept/broken.
+   promises kept/broken. **Relay exception (GRADIENT law, Steve 2026-10-11):**
+   the relay path resolves on the *leaning meter*, not the ledger — the
+   band is tender/light (≥+40), total/dark (≤−40), or **grey** (the
+   pragmatist middle), earned through relay verbs and scenes in nudges of
+   ≤10. Grey is an honest third color, not a coin flip, with its own
+   finals.
 7. **Integration is two-way.** Deepening integration + dark ability use
    erodes grounding (humanity). Thematic core: food is humanity's
    superpower — the dark relay literally becomes what forgot food.
@@ -317,6 +322,34 @@ outcomes, and failure downgrades. For the six non-relay paths this build
 wires the axis + branch-voiced outcomes + one branch twist beat per
 challenge; full branch-unique ability sets are designed above and filed
 as follow-up content work where not yet implemented.
+
+### The grey band — relay only (GRADIENT law, Steve 2026-10-11)
+
+The relay path does NOT resolve on the ledger above. It resolves on the
+**leaning meter** (`relayLean()`, −100 total .. +100 tender, 0 neutral),
+accumulated through relay verbs (translate/sanctuary/advocate lean
+tender; rewrite/skim lean total, ±2–4 a use) and relay-dialogue scenes
+(±10 a choice, clamped — **no single choice can cross the 40 threshold**).
+Bands: **light** (tender, ≥+40) / **dark** (total, ≤−40) / **grey** (the
+pragmatist middle). The middle is honest, not a coin flip: grey takes
+neither side's ledger weight, and gets its own finals — **both-hands**
+(stay both-hands: no merge, no champion) and **the-contract** (write the
+contract, make it sign).
+
+- **Door gift (the pragmatist's gift):** a grey-band walker gets whichever
+  hand is forward — a gradient read at the door, not a lock: lean > 0
+  grants the tender hand, lean < 0 the total hand, lean exactly 0 grants
+  nothing branch-specific (only the shared gifts). Acts can still open
+  the other track through the gradient gates in `relayUnlockCheck`.
+- **Voicing:** the ledger-read line voices the band for relay — a grey
+  walker hears "The middle road is open," never the binary road.
+- **Live meter, never a hidden reveal:** `relayLeanNoticed` fires aloud
+  when the register crosses a band — the System comments on the shift
+  ("NOTICED. YOU ARE BACK IN THE MIDDLE — BOTH HANDS."). The meter is
+  never revealed at the end as a surprise.
+- **Dark conscript:** offered to relay walkers whose hand is forward dark
+  (band dark, or grey with negative lean) — refusable, and the refusal is
+  voiced ("The mourners exhale").
 
 ## NPC ascension, facilitation, epilogues
 

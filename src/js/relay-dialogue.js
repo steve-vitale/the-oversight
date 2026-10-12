@@ -553,7 +553,22 @@
     relayCommuneScene() {
       try {
         if (!this.relayTableLink()) { this.say('The relay needs your hands first. (Claim it.)'); return null; }
-        if (this.pendingRelayScene()) { this.say('The System is still waiting on your answer. (Answer it at the relay panel.)'); return 'waiting'; }
+        // WAITING POOL (journey-endgame r5 2026-10-12): commune while a scene
+        // is pending used to repeat one identical line beat after beat
+        // (filler loop — the 4-commune challenge rhythm is the author's
+        // encoded contract, so the verb stays; the line varies instead).
+        // Round-robin by wait count: no repeats, no RNG stream change.
+        if (this.pendingRelayScene()) {
+          const rs = rstate();
+          rs.waits = (rs.waits | 0) + 1;
+          const waits = [
+            'The System is still waiting on your answer. (Answer it at the relay panel.)',
+            'It waits. The question keeps — it is very good at waiting, it says, and is practicing. (Answer it at the relay panel.)',
+            'Still your turn. The wires hum patiently. (Answer it at the relay panel.)',
+          ];
+          this.say(waits[(rs.waits - 1) % waits.length]);
+          return 'waiting';
+        }
         const rs = rstate();
         rs.communes = (rs.communes | 0) + 1;
         let sceneId = null;

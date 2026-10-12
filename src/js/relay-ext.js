@@ -138,7 +138,13 @@
             'A dead channel, and behind it, a live one: the System talking to itself about *you*. "SUBJECT SHOWS CURIOSITY. CURIOSITY IS INEFFICIENT. CURIOSITY IS... NOTED."',
             'You find the message queue\'s edge — and push one message half a second early. It arrives *better*. The wires are teaching you back.',
           ];
-          this.say('◈ PROBE — ' + finds[(R() * finds.length) | 0]);
+          // NO-REPEAT (journey-endgame r5 2026-10-12): the pool exists but
+          // raw picks repeated the same find three beats running. Same RNG
+          // draw count — just never the same find twice in a row.
+          let pick = (R() * finds.length) | 0;
+          if (pick === rs.lastProbe && finds.length > 1) pick = (pick + 1) % finds.length;
+          rs.lastProbe = pick;
+          this.say('◈ PROBE — ' + finds[pick]);
           this.addSysBond(1, 'It noticed you noticing.');
           this.relayUnlockCheck();
         } else {
@@ -181,7 +187,17 @@
         try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
         if (stage < 1) { this.say('The System hasn\'t arrived yet. There\'s nothing to deepen into.'); return null; }
         const rs = rstate(); rs.deepens++;
-        this.say('◈ DEEPEN — you push one layer deeper into the wires. The overlay\'s weather changes. For a second you can feel the *size* of the thing you\'re inside — and it can feel you feeling it.');
+        // DEEPEN POOL (journey-endgame r5 2026-10-12): was a single hardcoded
+        // line — four deepens in one challenge read byte-identical (filler
+        // loop). Four variants, round-robin by deepen count: no repeats
+        // within a challenge, no RNG stream change.
+        const deepens = [
+          'you push one layer deeper into the wires. The overlay\'s weather changes. For a second you can feel the *size* of the thing you\'re inside — and it can feel you feeling it.',
+          'you go one level down. The hum gets personal — like it has been humming your name all along and you only just tuned in.',
+          'deeper. The wires stop feeling like machinery and start feeling like weather — a storm you have agreed to stand inside.',
+          'you sink another layer. Somewhere far above, the village keeps eating dinner. Down here the System shows you what messages look like from the inside: bright, frightened, fast.',
+        ];
+        this.say('◈ DEEPEN — ' + deepens[(rs.deepens - 1) % deepens.length]);
         this.addSysBond(1, 'Depth recognizes depth.');
         this.addGrounding(-3, 'deepening');
         if (R() < 0.25) this.relayBackfire();

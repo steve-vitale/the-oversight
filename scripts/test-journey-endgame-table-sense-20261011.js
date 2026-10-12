@@ -99,11 +99,15 @@ const T = () => Game.tableState();
   console.log('— 2. relay unlocks respect the table branch —');
   resetAll();
   lesserSeat({ might: 8, brokerage: 1, showmanship: 6, embrace: 1, defiance: 2, exposed: 5, unified: 0, fractured: 2, foodShared: 1, foodHoarded: 4, protected: 1, killed: 12, betrayed: 1 });
-  Game.state.scholar.relayAbils = { rewriteUses: 3, skimUses: 2 };
+  // GRADIENT (Steve 2026-10-11): the relay path resolves on the leaning
+  // meter, not the village ledger — the band is EARNED through relay play.
+  // Five clamped -10 nudges stand in for months of dark verb use (rewrite,
+  // skim); no single choice crosses the 40 threshold alone.
+  for (let i = 0; i < 5; i++) Game.addRelayLean(-10, 'test: dark relay play');
   Game.claimRelay();
   Game.tableScene();
   Game.chooseTableOption('path:relay');
-  ok(T().branch === 'dark', 'dark branch', 'branch=' + T().branch);
+  ok(T().branch === 'dark', 'dark branch (earned lean)', 'branch=' + T().branch);
   const before = Object.keys(Game.state.scholar.relayAbils || {}).filter(k => !/Uses$/.test(k));
   Game.chooseTableOption('beat:deepen'); // bond rises; must NOT grant sanctuary/advocate/translate
   const has = (id) => !!((Game.state.scholar.relayAbils || {})[id]);
@@ -142,6 +146,9 @@ const T = () => Game.tableState();
   resetAll();
   lesserSeat({ might: 4, brokerage: 2, showmanship: 0, embrace: 0, defiance: 0, exposed: 0, unified: 2, fractured: 0, foodShared: 3, foodHoarded: 0, protected: 5, killed: 1, betrayed: 0 });
   Game.state.scholar.integration = 85; // stage 3 -> relay earned by depth
+  // GRADIENT (Steve 2026-10-11): light band is earned through relay play —
+  // five clamped +10 nudges stand in for months of tender verb use.
+  for (let i = 0; i < 5; i++) Game.addRelayLean(10, 'test: tender relay play');
   Game.claimRelay();
   Game.relayGrant('relay-sight');
   transcript.length = 0;
