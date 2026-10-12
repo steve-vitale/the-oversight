@@ -21,7 +21,11 @@ eval(fs.readFileSync(path.join(ROOT, files[gameIdx]), 'utf8'));
 // node evals don't share the browser's global lexical scope: game.js's
 // `const Game` is invisible to later modules' load-time code. Expose it.
 global.Game = globalThis.Scattering.Game;
-files.forEach((f, i) => { if (i !== gameIdx) eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
+// table.js must load before table-*.js (they call Game.tableRegisterPath at load;
+// the shared harness list orders them after). Added 2026-10-12.
+const tableIdx = files.indexOf('src/js/table.js');
+if (tableIdx >= 0) eval(fs.readFileSync(path.join(ROOT, files[tableIdx]), 'utf8'));
+files.forEach((f, i) => { if (i !== gameIdx && i !== tableIdx) eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });
 delete global.window; // runtime: sync combat path
 Game.data = global.SCATTER_DATA;
 
