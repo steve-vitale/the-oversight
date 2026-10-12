@@ -1274,9 +1274,16 @@
       c.playerConvened = true;
     }
     // post-System: the moot is BROADCAST. Countdown energy, the galaxy watching.
+    // GRAMMAR (journey-social 2026-10-12 r8): whoTag returns 'you' for the
+    // player — "YOU stands accused" was wrong. The broadcast gets the right
+    // verb for the second person.
     if (this.state.systemArrived) {
+      const accusedTag = this.whoTag(c.accused[0]);
+      const standsLine = this.isPlayer(c.accused[0])
+        ? 'YOU stand accused'
+        : `${accusedTag.toUpperCase()} stands accused`;
       this.sysSay(`🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!`);
-      this.sysSay(`TONIGHT: ${this.whoTag(c.accused[0]).toUpperCase()} stands accused — ${this.chargeLine(c.charge).toUpperCase()}! The gamblers are FRENZIED! Place your bets, place your bets!`);
+      this.sysSay(`TONIGHT: ${standsLine} — ${this.chargeLine(c.charge).toUpperCase()}! The gamblers are FRENZIED! Place your bets, place your bets!`);
     }
     if (this.isPlayer(caller)) {
       // HONESTY (break-it social 2026-10-08): the engine seats ~88% of

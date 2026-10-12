@@ -1,0 +1,906 @@
+{
+ "seed": 222,
+ "manifest": {
+  "seed": 222,
+  "commit": "5eeae46f5cafb3e53bf5c9f31611f35b42ce6ef2",
+  "mode": "journey-social-life-r7",
+  "date": "2026-10-12",
+  "node": "v24.20.0"
+ },
+ "policy": "larceny",
+ "ms": "4s",
+ "days": 31,
+ "endReason": "village-lost",
+ "gameDay": 32,
+ "ladder": {
+  "plotsArmed": 0,
+  "casesOpened": [],
+  "playerCasesOpened": 4,
+  "mootsCalled": [
+   {
+    "day": 11,
+    "charge": "theft",
+    "accused": [
+     "Kieran"
+    ],
+    "accuser": "Minh"
+   },
+   {
+    "day": 16,
+    "charge": "theft",
+    "accused": [
+     "Kieran"
+    ],
+    "accuser": "Minh"
+   },
+   {
+    "day": 32,
+    "charge": "theft",
+    "accused": [
+     "Lena"
+    ],
+    "accuser": "Judith"
+   }
+  ],
+  "trials": [],
+  "verdicts": [
+   {
+    "day": 11,
+    "charge": "theft",
+    "resolution": "weregild",
+    "accused": [
+     "Kieran"
+    ]
+   },
+   {
+    "day": 16,
+    "charge": "theft",
+    "resolution": "exile",
+    "accused": [
+     "Kieran"
+    ]
+   },
+   {
+    "day": 32,
+    "charge": "theft",
+    "resolution": "weregild",
+    "accused": [
+     "Lena"
+    ]
+   }
+  ],
+  "votesCast": 0
+ },
+ "promises": {
+  "vows": [],
+  "deflected": 0,
+  "keptSeen": 0,
+  "brokenSeen": 0
+ },
+ "promiseLedger": [
+  {
+   "who": "Lena",
+   "goal": "prove",
+   "kept": true,
+   "day": 3
+  }
+ ],
+ "gossip": {
+  "n": 27,
+  "seeds": 404,
+  "actions": {
+   "hoard": 2,
+   "order": 7,
+   "departure": 4,
+   "talk": 3,
+   "haven_need": 1,
+   "return": 1,
+   "death": 3,
+   "raid": 2,
+   "deed": 1,
+   "share_knowledge": 1,
+   "loot_corpse": 1,
+   "changed": 1
+  },
+  "sample": [
+   {
+    "action": "talk",
+    "day": 32,
+    "distortion": 0,
+    "mutated": false,
+    "heard": [
+     "James"
+    ]
+   },
+   {
+    "action": "loot_corpse",
+    "day": 32,
+    "distortion": 0,
+    "mutated": false,
+    "heard": [
+     "James",
+     "DeShawn"
+    ]
+   },
+   {
+    "action": "changed",
+    "day": 32,
+    "distortion": 0,
+    "mutated": false,
+    "heard": []
+   },
+   {
+    "action": "death",
+    "day": 32,
+    "distortion": 0,
+    "mutated": false,
+    "heard": []
+   },
+   {
+    "action": "raid",
+    "day": 32,
+    "distortion": 0,
+    "mutated": false,
+    "heard": []
+   }
+  ]
+ },
+ "rumorStarts": 0,
+ "justiceSpans": [
+  {
+   "kind": "justice",
+   "meta": {
+    "charge": "theft",
+    "accused": [
+     "Kieran"
+    ],
+    "accuser": "Minh"
+   },
+   "day": 11,
+   "closed": "finishTrial",
+   "lines": [
+    "[SYSTEM] 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!",
+    "[SYSTEM] TONIGHT: YOU stands accused — THEFT — TAKING WHAT WASN'T THEIRS! The gamblers are FRENZIED! Place your bets, place your bets!",
+    "Minh calls the moot. The fire gets built up — word travels fast, and almost everyone comes.",
+    "[SYSTEM] 🔴 LIVE — THE VERDICT IS IN! The galaxy holds its breath!",
+    "The fire is built high. Nobody speaks while the count is taken — you can hear the wind past the edge of the light.",
+    "Minh counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"11 for guilty. 0 against.\"",
+    "A pause long enough to live in. Someone's breath catches. Then: \"Guilty.\" Nobody looks at anybody.",
+    "The sentence is spoken low, like something heavy set down. \"You pay. And stay — this time.\"",
+    "Food, work, public apology — You pay it in the open, where everyone can see. The price of staying.",
+    "Nobody says Minh was right. Nobody has to. The way the fire settles says it."
+   ]
+  },
+  {
+   "kind": "justice",
+   "meta": {
+    "charge": "theft",
+    "accused": [
+     "Kieran"
+    ],
+    "accuser": "Minh"
+   },
+   "day": 16,
+   "closed": "finishTrial",
+   "lines": [
+    "[SYSTEM] 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!",
+    "[SYSTEM] TONIGHT: YOU stands accused — THEFT — TAKING WHAT WASN'T THEIRS! The gamblers are FRENZIED! Place your bets, place your bets!",
+    "Minh calls the moot. The fire gets built up — word travels fast, and almost everyone comes.",
+    "[SYSTEM] 🔴 LIVE — THE VERDICT IS IN! The galaxy holds its breath!",
+    "The fire is built high. Nobody speaks while the count is taken — you can hear the wind past the edge of the light.",
+    "Deirdre counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"10 for guilty. 0 against.\"",
+    "A pause long enough to live in. Someone's breath catches. Then: \"Guilty.\" Nobody looks at anybody.",
+    "The oldest among them stands. The fire seems to lean in. \"You — take what you can carry and go.\"",
+    "◈ CRISIS — THE SCHISM. You are cast out. The village chose, and the choosing cut something that won’t heal clean. The fire keeps burning without you.",
+    "SYSTEM: \"Social unit ejected. The audience is divided. Half of them are furious. The other half is also furious, but differently.\"",
+    "Exiled. You leave with what you carry — nothing more. Behind you, Haven keeps its fire. Ahead: the world, which just got much bigger.",
+    "Be off Haven’s ground by dawn. Still here when the sun’s up, and they won’t ask twice — they’ll come.",
+    "📓 Codex: Exiled (moot). Walking.",
+    "Whatever Minh asked of you stays at the old fire. You're done running errands for people who walked you out.",
+    "The pantry is closed to you. The book stays behind. To Haven, you are not one of ours anymore. Membership asked nothing — no presence, no check-ins. Exile is the one way to lose it.",
+    "Nobody says Minh was right. Nobody has to. The way the fire settles says it."
+   ]
+  },
+  {
+   "kind": "justice",
+   "meta": {
+    "charge": "theft",
+    "accused": [
+     "Lena"
+    ],
+    "accuser": "Judith"
+   },
+   "day": 32,
+   "closed": "finishTrial",
+   "lines": [
+    "[SYSTEM] 🔴 LIVE! THE MOOT! The fire's built HIGH and the whole GALAXY is watching!",
+    "[SYSTEM] TONIGHT: YOU stands accused — THEFT — TAKING WHAT WASN'T THEIRS! The gamblers are FRENZIED! Place your bets, place your bets!",
+    "Judith calls the moot. The fire gets built up — word travels fast, and almost everyone comes.",
+    "[SYSTEM] 🔴 LIVE — THE VERDICT IS IN! The galaxy holds its breath!",
+    "The fire is built high. Nobody speaks while the count is taken — you can hear the wind past the edge of the light.",
+    "Deirdre counts on their fingers, twice, like they don't trust the first number. Then, to the fire: \"5 for guilty. 1 against.\"",
+    "A pause long enough to live in. Someone's breath catches. Then: \"Guilty.\" Nobody looks at anybody.",
+    "The sentence is spoken low, like something heavy set down. \"You pay. And stay — this time.\"",
+    "Food, work, public apology — You pay it in the open, where everyone can see. The price of staying.",
+    "Nobody says Judith was right. Nobody has to. The way the fire settles says it.",
+    "A rider says in Thornfield you're \"the one who makes deals hold.\" Nobody remembers when that started being true."
+   ]
+  }
+ ],
+ "promiseSpans": [],
+ "casesLedger": [
+  {
+   "id": "case_1",
+   "charge": "theft",
+   "status": "resolved",
+   "day": 8,
+   "accused": [
+    "Kieran"
+   ],
+   "accuser": "Minh",
+   "verdict": null,
+   "resolution": "weregild"
+  },
+  {
+   "id": "case_2",
+   "charge": "theft",
+   "status": "resolved",
+   "day": 13,
+   "accused": [
+    "Kieran"
+   ],
+   "accuser": "Minh",
+   "verdict": null,
+   "resolution": "exile"
+  },
+  {
+   "id": "case_3",
+   "charge": "theft",
+   "status": "resolved",
+   "day": 23,
+   "accused": [
+    "Marcus"
+   ],
+   "accuser": "Minh",
+   "verdict": null,
+   "resolution": "accused_died"
+  },
+  {
+   "id": "case_4",
+   "charge": "theft",
+   "status": "resolved",
+   "day": 29,
+   "accused": [
+    "Lena"
+   ],
+   "accuser": "Judith",
+   "verdict": null,
+   "resolution": "weregild"
+  }
+ ],
+ "crimesLedger": [
+  {
+   "type": "theft",
+   "day": 20,
+   "victim": "Minh"
+  },
+  {
+   "type": "theft",
+   "day": 21,
+   "victim": "Minh"
+  },
+  {
+   "type": "theft",
+   "day": 25,
+   "victim": "Deirdre"
+  }
+ ],
+ "fullConvs": 32,
+ "transcripts": [
+  {
+   "vid": "emma_larsen",
+   "tag": "warmup",
+   "turns": 12,
+   "naturalEnd": false,
+   "transcript": [
+    {
+     "who": "NPC",
+     "text": "\"Marcus and I never did finish talking about that favor — that was 8 days back. You're not Marcus. Still on your mind? Just... be straight with me.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What do you think?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"My take? We're not going to like the answer, whatever it is.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Do the math with me: 0 liters, 11 people. That's not tomorrow's water. The creek's a twenty-minute walk — with two of us it's one trip, not three.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Teach me something from the wild.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Watch for this: It turns. Grief Counselor, every time. It hunts by day — watch the open ground.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Teach me something from the wild.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"a cellar full of jars — I'll show you on the map sometime. It's real.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"You asked me that before. It's a different question now.\" \"Have you heard what they're calling Highbeam Deer? Deirdre is pushing 'Captain Bright-Eyes'. Everyone's got a name for it and nobody agrees.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What do you think?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Short version: I don't know. Long version: also that, but slower.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Yeah... where were we with that.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Tell me more.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"That's the whole of it. Sorry.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Anyway.\" A small smile."
+    },
+    {
+     "who": "YOU",
+     "text": "\"Go on.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I wish we had longer. Soon, yeah?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Well.\" A breath. \"That's where things stand.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"...Sorry, lost my train of thought.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"It's been a while since we left what's been happening hanging. Glad we circled back.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Hm. Never mind — go on.\""
+    }
+   ]
+  },
+  {
+   "vid": "james_okonkwo",
+   "tag": "D-talk-request",
+   "turns": 10,
+   "naturalEnd": true,
+   "transcript": [
+    {
+     "who": "NPC",
+     "text": "\"Hah. We never finished talking about that favor — we wandered off it, 3 days back.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Sure.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What have you heard?\""
+    },
+    {
+     "who": "NPC",
+     "text": "James glances around. \"James was close enough to see. Whether they'll SAY so at the fire is another matter.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Let me tell you what happened.\""
+    },
+    {
+     "who": "NPC",
+     "text": "Said. Now it's theirs to carry."
+    },
+    {
+     "who": "YOU",
+     "text": "(make an offer)"
+    },
+    {
+     "who": "NPC",
+     "text": "Done. Quiet. Expensive — 845 kcal changed hands; the pack wouldn't divide."
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"You asked me that before. It's a different question now.\" \"Have you heard what they're calling Night Court? Deirdre is pushing 'Old Gavel'. Everyone's got a name for it and nobody agrees.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What do you think?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I go back and forth. Ask me tomorrow, I'll say different.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    }
+   ]
+  },
+  {
+   "vid": "gen_486otrs",
+   "tag": "warmup",
+   "turns": 10,
+   "naturalEnd": true,
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What have you heard?\""
+    },
+    {
+     "who": "NPC",
+     "text": "DeShawn shrugs. \"I hear the fire crackle and people talking. That's all I know, and I know it well.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Let me tell you what happened.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"You asked me that before. It's a different question now.\" \"The whole fire was arguing about Night Court last night — what to even CALL it. 'The Bailiff' got shouted down. What's your vote?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What do you think?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I think the asking matters more than the answer, out here.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I should go. You know where to find me.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"What do you make of all this? Really.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"The world's ended. We're what's left.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Bleak. Probably true. I keep looking for the part where it's not.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"This was good.\" They mean it."
+    }
+   ]
+  },
+  {
+   "vid": "james_okonkwo",
+   "tag": "D-talk-request",
+   "turns": 10,
+   "naturalEnd": true,
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"Yes.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Good. Good to know I'm not the only one seeing it.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Go on.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"So what's your plan here? Just... get through it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"One day at a time.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Honest. I can work with honest.  Simple as that.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Plans change. But having one — even a bad one — beats drifting. That's the priority.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    }
+   ]
+  },
+  {
+   "vid": "james_okonkwo",
+   "tag": "D-talk-request",
+   "turns": 10,
+   "naturalEnd": true,
+   "transcript": [
+    {
+     "who": "NPC",
+     "text": "\"We never finished talking about that favor — we wandered off it.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"You asked me that before. It's a different question now.\" \"Sofia is gone and the world just... continues. That's the part I can't stand.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "Something eases in their shoulders. They're really talking to you now."
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Do you believe in anything? Now, I mean. After everything.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I believe we get through this. I have to. The alternative doesn't work.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"That's not naive. That's load-bearing. Hold onto it.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Well, Belief's personal. But thanks for saying yours out loud. That takes guts.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What happened next?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    }
+   ]
+  },
+  {
+   "vid": "david_kim",
+   "tag": "warmup",
+   "turns": 7,
+   "naturalEnd": true,
+   "transcript": [
+    {
+     "who": "NPC",
+     "text": "\"We never finished talking about that favor — we got cut off. Just my read.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"How can I help?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What have you heard?\""
+    },
+    {
+     "who": "NPC",
+     "text": "David won't quite look at you. \"Food's been moving. Quietly. Somebody's buying goodwill before the moot.\" They don't name names — but now you know to follow the food."
+    },
+    {
+     "who": "YOU",
+     "text": "\"Let me tell you what happened.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"You asked me that before. It's a different question now.\" \"Since Sofia died... I keep expecting to see Sofia at the fire. Stupid.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    }
+   ]
+  }
+ ],
+ "census": [
+  "seed 222, day 32, alive 6",
+  "- Deirdre (soldier) trust=84",
+  "- Judith (dispatcher_911) trust=55",
+  "- Petro (line_cook) trust=84",
+  "- Lena (er_nurse) trust=0",
+  "- James (carpenter) trust=37",
+  "- Emma (veterinarian) trust=33",
+  "fallen: 4",
+  "- Kieran d17: combat",
+  "- Marcus d24: combat",
+  "- DeShawn d31: sickness",
+  "- Sofia d32: monster",
+  "codex plants: 17",
+  "pantry kcal: 0"
+ ],
+ "trustTbl": [
+  {
+   "who": "Deirdre",
+   "trust": 84
+  },
+  {
+   "who": "Petro",
+   "trust": 84
+  },
+  {
+   "who": "Judith",
+   "trust": 55
+  },
+  {
+   "who": "James",
+   "trust": 37
+  },
+  {
+   "who": "Emma",
+   "trust": 33
+  },
+  {
+   "who": "Lena",
+   "trust": 0
+  }
+ ],
+ "deaths": 12,
+ "dailyLadder": [
+  {
+   "d": 2,
+   "plots": 0,
+   "openCases": 0,
+   "promisesOpen": 0,
+   "promisesSettled": 0,
+   "crimes": 0,
+   "mootDemanded": false
+  },
+  {
+   "d": 12,
+   "plots": 0,
+   "openCases": 0,
+   "promisesOpen": 0,
+   "promisesSettled": 1,
+   "crimes": 5,
+   "mootDemanded": false
+  },
+  {
+   "d": 22,
+   "plots": 0,
+   "openCases": 0,
+   "promisesOpen": 0,
+   "promisesSettled": 1,
+   "crimes": 2,
+   "mootDemanded": false
+  },
+  {
+   "d": 32,
+   "plots": 0,
+   "openCases": 1,
+   "promisesOpen": 0,
+   "promisesSettled": 1,
+   "crimes": 3,
+   "mootDemanded": false
+  }
+ ]
+}
