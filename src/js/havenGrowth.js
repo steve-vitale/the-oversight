@@ -418,10 +418,30 @@
       let playerAtHaven = false;
       try { playerAtHaven = this.playerAtHaven ? this.playerAtHaven() : false; } catch (e) {}
       if (playerAtHaven && !palisade && raiders.length) {
-        const m = raiders[0];
-        this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
-        this.pendingEncounter = true;
-        this.pendingMonsterId = m.id;
+        // DEAD RAIDERS DON'T WALK (crisis leg r5 2026-10-12): the defenders
+        // above may have already dropped raiders[0] — the player faces the
+        // first raider still standing, never a fresh copy of a corpse
+        // (pendingEncounter spawns by id; a dead raider's id is a phantom).
+        let live = [];
+        try {
+          const wms = this.worldMonsters ? this.worldMonsters() : [];
+          live = raiders.filter(rm => rm && (rm.hp || 0) > 0 && wms.indexOf(rm) !== -1);
+        } catch (e) {}
+        // NO SILENT CLOBBER (crisis leg r5 2026-10-12): a live pending
+        // encounter is someone else's beast (the feast draw's, the
+        // wanderer's). Never overwrite it — the raiders hold at the
+        // treeline with the rest instead.
+        if (this.pendingEncounter) {
+          for (const rm of live) { rm.lingering = true; }
+          if (live.length) this.say(`Another shape at the treeline — but the way is already watched. It'll wait out there with the rest.`);
+        } else if (live.length) {
+          const m = live[0];
+          this.say(`One of them is coming for YOU — ${mname(m)}, inside the haven, eyes on your bedroll.`);
+          this.pendingEncounter = true;
+          this.pendingMonsterId = m.id;
+        } else {
+          this.say(`The defenders met them at the treeline — nothing reached your bedroll.`);
+        }
       } else if (playerAtHaven && palisade) {
         this.say('The watch holds the wall. You sleep through the worst of it — or would have, if the shouting had let you.');
       }
