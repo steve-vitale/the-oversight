@@ -12970,7 +12970,7 @@
       }
     } catch (e) {}
     try {
-      if (Game.worstRepAxis(villagerId) && !(Game.state.village.challenge || {}).cid &&
+      if (Game.canMakeAmends(villagerId) && !(Game.state.village.challenge || {}).cid &&
           ((Game.state.village.amendsDay || {})[villagerId] !== Game.state.scholar.day)) {
         btns += ' <button class="btn sm ghost" data-act="amends">🙏 Make amends</button>';
       }

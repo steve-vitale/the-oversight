@@ -4305,8 +4305,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return worst && val <= -15 ? { axis: worst, val } : null;
     },
     makeAmends(vid) {
-      const w = this.worstRepAxis(vid);
-      if (!w) { this.say("They don't hold anything against you."); return null; }
       // CONTRITION TAKES TIME (break-it socialite r9 2026-10-09): eleven
       // back-to-back "I'm sorry"s repaired six caught thefts to the full 40
       // words-cap in one sitting (measured: trust 0->40, ~1350 kcal kept).
@@ -4319,6 +4317,41 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say("You've already said your piece today. Let it sit a while.");
         return null;
       }
+      // PROMISE DECAY (promisedecay 2026-10-13, Steve's "amends reopen
+      // immediately"): the broken-word lane. A broken promise only ever moved
+      // trust (-15), never rep dims — so the worst-rep-axis lane below never
+      // offered this, and the button (app.js) never showed. Owning the broken
+      // word writes an 'amends' memory; promiseHelp's last-word scan then
+      // reads amends as the new last word, so the promise path reopens the
+      // same day. Always accepted when offered — the one-per-day cap is the
+      // cost (no rejected-amends mechanic; the spec doesn't ask for one).
+      const lw = this.lastPromiseWord(vid);
+      const mine = !lw.mem || lw.mem.maker == null || lw.mem.maker === this.villagerId;
+      if (lw.word === 'promise_broken' && mine) {
+        vv.amendsDay[vid] = today;
+        const first = this.displayName(vid);
+        let what = (lw.mem && lw.mem.note) || '';
+        try {
+          const g = (this.data.characterGen.goals || []).find(x => x.id === what);
+          // want strings already carry the "to" ("to keep everyone fed")
+          if (g && g.want) what = String(g.want);
+        } catch (e) {}
+        if (typeof this.resolveConsequence === 'function') {
+          this.resolveConsequence(vid, { trust: 4, temper: 'kind', name: 'makeAmends:word' });
+        } else {
+          const t = this.state.village.trust || (this.state.village.trust = {});
+          t[vid] = Math.min(100, (t[vid] || 10) + this.trustGainProgressive(vid, 4));
+        }
+        this.say(`You find ${first}. "About ${what || 'my word'}. You had it — and I let it rot. That's on me. I'm sorry." A long silence. Then, slowly: "...All right. Words again. Don't make me regret hearing this."`);
+        this.remember(vid, 'amends', 'owned the broken word: ' + (what || 'promise'), { maker: this.villagerId });
+        this.observe('amends', { target: vid, noTrust: true });
+        this.notePlaystyle('social');
+        this.socialTick(vid);
+        this.save();
+        return { ok: true, axis: 'broken word' };
+      }
+      const w = this.worstRepAxis(vid);
+      if (!w) { this.say("They don't hold anything against you."); return null; }
       vv.amendsDay[vid] = today;
       const first = this.displayName(vid);
       const axisLines = {
@@ -4788,6 +4821,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const t = (trustAtBreak == null || isNaN(trustAtBreak)) ? 10 : trustAtBreak;
       return Math.max(7, Math.min(60, Math.round(20 * t / 50)));
     },
+    // lastPromiseWord: the most recent of promise_broken/promise_kept/amends
+    // in the villager's memory — the "last word" between them and the office.
+    // PROMISE DECAY (2026-10-13): amends and the decay refusal both read this
+    // scan instead of inlining it. mem.maker identifies whose word broke —
+    // the broken promise died with its maker (canon, conversation.js:
+    // "not yours to carry — but I remember").
+    lastPromiseWord(vid) {
+      const mems = ((this.state.village || {}).memory || {})[vid] || [];
+      for (let i = mems.length - 1; i >= 0; i--) {
+        const m = mems[i];
+        if (m && (m.t === 'promise_broken' || m.t === 'promise_kept' || m.t === 'amends')) return { word: m.t, mem: m };
+      }
+      return { word: null, mem: null };
+    },
+    // canMakeAmends: the amends gate — app.js's button and makeAmends itself.
+    // The worst-rep-axis lane is the old one; the new lane is a broken word
+    // from the CURRENT Bearer <redacted> breaking a promise only ever moved trust (-15),
+    // never rep dims, so the old lane never fired for it and Steve's
+    // "amends reopen immediately" was unreachable in real play.
+    canMakeAmends(vid) {
+      if (this.worstRepAxis(vid)) return true;
+      const lw = this.lastPromiseWord(vid);
+      return lw.word === 'promise_broken' && (lw.mem == null || lw.mem.maker == null || lw.mem.maker === this.villagerId);
+    },
     // promiseHelp: commit to their goal. Tracked. If you follow through
     // (via related actions), big trust. If you ignore it, they remember.
     promiseHelp(vid) {
@@ -4818,20 +4875,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // like people. Amends reopen the door: only a promise_broken with no
       // later amends/kept promise blocks.
       {
-        const mems = (v.memory || {})[vid] || [];
-        let lastWord = null, lastNote = '', lastMem = null;
-        for (let i = mems.length - 1; i >= 0; i--) {
-          const m = mems[i];
-          if (m && (m.t === 'promise_broken' || m.t === 'promise_kept' || m.t === 'amends')) {
-            lastWord = m.t; lastNote = m.note || ''; lastMem = m; break;
-          }
-        }
+        const { word: lastWord, mem: lastMem } = this.lastPromiseWord(vid);
         if (lastWord === 'promise_broken') {
+          // MAKER-BOUND REFUSAL (promisedecay 2026-10-13): a broken promise
+          // died with its maker (canon, conversation.js MEM_INH: "It's not
+          // yours to carry"). The refusal only binds the bearer who broke the
+          // word — a successor's door is already open. Legacy memories carry
+          // no maker stamp; the office owns them (old behavior preserved).
+          const mine = !lastMem || lastMem.maker == null || lastMem.maker === this.villagerId;
+          if (mine) {
           // humanize a bare goal id ("feed" → "to keep everyone fed"); a
           // favor task note is already human.
-          let what = lastNote;
+          let what = (lastMem && lastMem.note) || '';
           try {
-            const g = (this.data.characterGen.goals || []).find(x => x.id === lastNote);
+            const g = (this.data.characterGen.goals || []).find(x => x.id === what);
             if (g && g.want) what = String(g.want);
           } catch (e) {}
           const about = what ? ` You promised ${what} — it never happened.` : ` It never happened.`;
@@ -4850,6 +4907,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // Time did what amends would have: the door reopens. The memory
           // stays (bitterness, dialogue) — only the refusal decayed.
           this.say(`${first} studies you for a long moment. "You said that before — a long time back.${about}" A slow breath. "Words rot. People change, maybe. Talk."`);
+          }
         }
       }
       const promiseLines = {
@@ -4978,7 +5036,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } else {
             this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
           }
-          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak });
+          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak, maker: this.villagerId });
           }
         }
       }
