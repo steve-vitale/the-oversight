@@ -1,0 +1,1016 @@
+{
+ "seed": 71004,
+ "probe": false,
+ "maxGameDay": 107,
+ "endReason": "village-lost",
+ "probed": false,
+ "probeLog": null,
+ "dzEvents": [
+  {
+   "day": 93,
+   "scope": "scholar",
+   "target": "player",
+   "id": "wound_fever",
+   "pool": "mundane",
+   "source": "a cut gone wrong"
+  },
+  {
+   "day": 103,
+   "scope": "scholar",
+   "target": "player",
+   "id": "lockjaw",
+   "pool": "mundane",
+   "source": "a dirty cut"
+  }
+ ],
+ "diagEvents": [
+  {
+   "day": 104,
+   "id": "lockjaw",
+   "ret": "true"
+  }
+ ],
+ "cureEvents": [
+  {
+   "day": 93,
+   "kind": "ease",
+   "id": "wound_fever",
+   "ret": "true"
+  },
+  {
+   "day": 104,
+   "kind": "cure",
+   "id": "lockjaw",
+   "ret": "true"
+  }
+ ],
+ "contractEvents": [
+  {
+   "day": 93,
+   "id": "wound_fever",
+   "source": "a cut gone wrong"
+  },
+  {
+   "day": 103,
+   "id": "lockjaw",
+   "source": "a dirty cut"
+  }
+ ],
+ "dzChecks": [
+  {
+   "day": 40,
+   "pop": 9,
+   "pantry": 18565,
+   "scholar": [],
+   "villageSick": []
+  },
+  {
+   "day": 60,
+   "pop": 8,
+   "pantry": 8693,
+   "scholar": [],
+   "villageSick": [
+    {
+     "vid": "gen_r09t3lc",
+     "name": "Kevin",
+     "rec": "tick fever"
+    },
+    {
+     "vid": "gen_4fb5srt",
+     "name": "Ana",
+     "rec": "tick fever"
+    }
+   ]
+  },
+  {
+   "day": 80,
+   "pop": 6,
+   "pantry": 8873,
+   "scholar": [],
+   "villageSick": []
+  },
+  {
+   "day": 100,
+   "pop": 5,
+   "pantry": 1668,
+   "scholar": [],
+   "villageSick": []
+  }
+ ],
+ "dzCounts": {
+  "tick_attach": 34,
+  "mosquito_fight": 0,
+  "diagnosis": 1,
+  "treatment": 104,
+  "alien_symptom": 20,
+  "sickness_talk": 83
+ },
+ "alienLeaks": {},
+ "fightMonsters": [
+  {
+   "day": 13,
+   "monsters": [
+    "hushwolf"
+   ]
+  },
+  {
+   "day": 13,
+   "monsters": [
+    "hushwolf"
+   ]
+  },
+  {
+   "day": 24,
+   "monsters": [
+    "hushwolf"
+   ]
+  },
+  {
+   "day": 24,
+   "monsters": [
+    "hushwolf"
+   ]
+  },
+  {
+   "day": 47,
+   "monsters": [
+    "moderator"
+   ]
+  },
+  {
+   "day": 61,
+   "monsters": [
+    "lockpick_raccoon"
+   ]
+  },
+  {
+   "day": 68,
+   "monsters": [
+    "moderator"
+   ]
+  },
+  {
+   "day": 68,
+   "monsters": [
+    "moderator"
+   ]
+  },
+  {
+   "day": 76,
+   "monsters": [
+    "bright_idea"
+   ]
+  },
+  {
+   "day": 94,
+   "monsters": [
+    "alien_tick"
+   ]
+  },
+  {
+   "day": 102,
+   "monsters": [
+    "mirror_stag"
+   ]
+  }
+ ],
+ "vectorFights": [
+  {
+   "day": 94,
+   "monsters": [
+    "alien_tick"
+   ]
+  }
+ ],
+ "census": [
+  {
+   "id": "gen_r09t3lc",
+   "name": "Kevin",
+   "alive": true,
+   "occupation": "plumber",
+   "temperament": "prickly",
+   "trust": 88,
+   "mood": "lonely",
+   "plantsKnown": 33
+  },
+  {
+   "id": "james_okonkwo",
+   "name": "James",
+   "alive": true,
+   "occupation": "carpenter",
+   "temperament": "steady",
+   "trust": 90,
+   "mood": "lonely",
+   "plantsKnown": 32
+  },
+  {
+   "id": "emma_larsen",
+   "name": "Emma",
+   "alive": true,
+   "occupation": "Veterinarian",
+   "temperament": "warm",
+   "trust": 0,
+   "mood": "lonely",
+   "plantsKnown": 31
+  },
+  {
+   "id": "david_kim",
+   "name": "David",
+   "alive": true,
+   "occupation": "plumber",
+   "temperament": "cautious",
+   "trust": 72,
+   "mood": "steady",
+   "plantsKnown": 29
+  }
+ ],
+ "deaths": [
+  {
+   "day": 3,
+   "who": "hummice",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 8,
+   "who": "marcus_webb",
+   "cause": "monster",
+   "kind": "villager"
+  },
+  {
+   "day": 12,
+   "who": "gallowdeer",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 13,
+   "who": "gen_enxqv79",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 24,
+   "who": "gen_u6pc3pu",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 27,
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 32,
+   "who": "speedbump_turtle",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 35,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 46,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 47,
+   "who": "sofia_chen",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 60,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 67,
+   "who": "lockpick_raccoon",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 67,
+   "who": "hummice",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 68,
+   "who": "gen_zz3gc2u",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 75,
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 75,
+   "who": "warranty_caller",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 92,
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 93,
+   "who": "hummice",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 94,
+   "who": "gen_o2k2n3q",
+   "cause": "combat",
+   "kind": "villager"
+  },
+  {
+   "day": 101,
+   "who": "mirrormoth",
+   "cause": "villager combat",
+   "kind": "monster"
+  },
+  {
+   "day": 101,
+   "who": "lena_ruiz",
+   "cause": "starvation",
+   "kind": "villager"
+  },
+  {
+   "day": 102,
+   "who": "mirror_stag",
+   "cause": "combat",
+   "kind": "monster"
+  }
+ ],
+ "convoFiles": [
+  "/tmp/journey-deep-r8-transcript-71004-day45.txt",
+  "/tmp/journey-deep-r8-transcript-71004-day65.txt",
+  "/tmp/journey-deep-r8-transcript-71004-day85.txt"
+ ],
+ "pacing": {
+  "perDay": [
+   {
+    "day": 1,
+    "verbs": 3,
+    "policyCalls": 4,
+    "dayTicks": 0
+   },
+   {
+    "day": 2,
+    "verbs": 4,
+    "policyCalls": 0,
+    "dayTicks": 137
+   },
+   {
+    "day": 3,
+    "verbs": 22,
+    "policyCalls": 4,
+    "dayTicks": 443
+   },
+   {
+    "day": 4,
+    "verbs": 177,
+    "policyCalls": 4,
+    "dayTicks": 425
+   },
+   {
+    "day": 5,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 431
+   },
+   {
+    "day": 6,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 399
+   },
+   {
+    "day": 7,
+    "verbs": 176,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 8,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 424
+   },
+   {
+    "day": 9,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 10,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 11,
+    "verbs": 176,
+    "policyCalls": 4,
+    "dayTicks": 408
+   },
+   {
+    "day": 12,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 13,
+    "verbs": 104,
+    "policyCalls": 15,
+    "dayTicks": 411
+   },
+   {
+    "day": 14,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 412
+   },
+   {
+    "day": 15,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 16,
+    "verbs": 178,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 17,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 408
+   },
+   {
+    "day": 18,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 19,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 20,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 410
+   },
+   {
+    "day": 21,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 22,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 23,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 408
+   },
+   {
+    "day": 24,
+    "verbs": 103,
+    "policyCalls": 14,
+    "dayTicks": 391
+   },
+   {
+    "day": 25,
+    "verbs": 175,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 26,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 405
+   },
+   {
+    "day": 27,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 28,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 29,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 30,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 31,
+    "verbs": 15,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 32,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 33,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 34,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 35,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 36,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 37,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 38,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 39,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 40,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 41,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 42,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 43,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 44,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 45,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 390
+   },
+   {
+    "day": 46,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 389
+   },
+   {
+    "day": 47,
+    "verbs": 17,
+    "policyCalls": 9,
+    "dayTicks": 421
+   },
+   {
+    "day": 48,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 415
+   },
+   {
+    "day": 49,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 50,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 51,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 52,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 53,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 54,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 55,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 56,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 57,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 58,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 59,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 60,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 61,
+    "verbs": 11,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 62,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 63,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 64,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 65,
+    "verbs": 16,
+    "policyCalls": 4,
+    "dayTicks": 400
+   },
+   {
+    "day": 66,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 67,
+    "verbs": 15,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 68,
+    "verbs": 13,
+    "policyCalls": 12,
+    "dayTicks": 415
+   },
+   {
+    "day": 69,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 70,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 71,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 72,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 73,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 74,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 75,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 76,
+    "verbs": 11,
+    "policyCalls": 5,
+    "dayTicks": 393
+   },
+   {
+    "day": 77,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 78,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 79,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 80,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 81,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 82,
+    "verbs": 15,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 83,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 84,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 85,
+    "verbs": 21,
+    "policyCalls": 4,
+    "dayTicks": 402
+   },
+   {
+    "day": 86,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 87,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 88,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 89,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 90,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 91,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 92,
+    "verbs": 16,
+    "policyCalls": 4,
+    "dayTicks": 419
+   },
+   {
+    "day": 93,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 407
+   },
+   {
+    "day": 94,
+    "verbs": 16,
+    "policyCalls": 6,
+    "dayTicks": 399
+   },
+   {
+    "day": 95,
+    "verbs": 14,
+    "policyCalls": 4,
+    "dayTicks": 439
+   },
+   {
+    "day": 96,
+    "verbs": 12,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 97,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 393
+   },
+   {
+    "day": 98,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 99,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 100,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 101,
+    "verbs": 20,
+    "policyCalls": 4,
+    "dayTicks": 409
+   },
+   {
+    "day": 102,
+    "verbs": 18,
+    "policyCalls": 11,
+    "dayTicks": 393
+   },
+   {
+    "day": 103,
+    "verbs": 15,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 104,
+    "verbs": 7,
+    "policyCalls": 3,
+    "dayTicks": 0
+   },
+   {
+    "day": 105,
+    "verbs": 10,
+    "policyCalls": 1,
+    "dayTicks": 151
+   },
+   {
+    "day": 106,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   },
+   {
+    "day": 107,
+    "verbs": 11,
+    "policyCalls": 4,
+    "dayTicks": 391
+   }
+  ],
+  "meanVerbsPerDay": 44.2,
+  "meanPolicyCallsPerDay": 4.3,
+  "meanTicksPerDay": 387.3
+ },
+ "ms": 2297
+}

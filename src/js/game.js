@@ -19895,7 +19895,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.hasStatus && this.hasStatus('scholar', 'east_nile')) {
           const dx = s.x - this.map.px, dy = s.y - this.map.py;
           const dirWord = Math.abs(dx) >= Math.abs(dy) ? (dx >= 0 ? 'east' : 'west') : (dy >= 0 ? 'south' : 'north');
-          this.say(`The crows are screaming \u2014 not the usual racket. They're screaming ${dirWord}, and you understand: something's moving in the woods, that way. (East Nile: the flock warns you)`);
+          this.say(`The crows are screaming \u2014 not the usual racket. They're screaming ${dirWord}, and you understand: something's moving in the woods, that way.`);
         } else {
           this.say('Something big is moving in the woods. The birds went quiet.');
         }
@@ -19911,7 +19911,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // eyes do. Ambushes announce themselves first.
         if (this.hasStatus && this.hasStatus('scholar', 'eurika') && !this.wanderer.warned) {
           this.wanderer.warned = true;
-          this.say('Your skin prickles before your eyes catch up — warmth, moving, close. The sensory hairs know. Something is HERE. (eurika-sense: no ambush)');
+          this.say('Your skin prickles before your eyes catch up — warmth, moving, close. The sensory hairs know. Something is HERE. (no ambush — your skin knew first)');
           return;
         }
         // ONE MONSTER PER TILE (break-it travel r7 2026-10-09): if this
@@ -20070,7 +20070,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.tentSmoke = 0;
         this.pendingEncounter = true;
         this.pendingMonsterId = monsterId;
-        this.say(`Your skin prickles — warmth, moving, close, on the wrong side of the canvas. The sensory hairs knew before your eyes did. You're out the other side before it gets inside. (eurika-sense: no ambush)`);
+        this.say(`Your skin prickles — warmth, moving, close, on the wrong side of the canvas. The sensory hairs knew before your eyes did. You're out the other side before it gets inside. (no ambush — the hairs knew first)`);
         return;
       }
       if ((mdef.size || 1) >= 2) {
@@ -23287,7 +23287,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const bankNote = bankedNow > 0 ? ` Past full — the bank takes it. (+${bankedNow} banked. ${this.feastLine ? this.feastLine() : ''})` : '';
       if (shellgutLoss > 0) this.say(`Your armored gut takes its cut — food moves slow through shell. (-${shellgutLoss} kcal absorbed)`);
-      if (engorgeGain > 0) this.say(`Your occupied joints drink deeper — the food goes further. (+${engorgeGain} kcal, Lemons engorge)`);
+      if (engorgeGain > 0) this.say(`Your occupied joints drink deeper — the food goes further. (+${engorgeGain} kcal)`);
       // LEVEL 3: Uses. Eat it 3 times, you learn what it does to you.
       // Vitamin C, medicine, energy. "Have you tasted it?" Yes. Now you know.
       for (const [pid, count] of Object.entries(tasted)) {
@@ -29568,7 +29568,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('CORNERED RAT: surrounded — desperation is a weapon. (+100% damage, +50% dodge)');
       }
       // GRISTLEFIT (Steve 2026-10-08): the rage in your shoulders lands harder.
-      if (this.hasStatus && this.hasStatus('scholar', 'gristlefit')) { d = Math.round(d * 1.25); this.say('GRISTLEFIT: your knotted shoulders put everything behind it. (+25% damage)'); }
+      if (this.hasStatus && this.hasStatus('scholar', 'gristlefit')) { d = Math.round(d * 1.25); this.say('Your knotted shoulders put everything behind it. (+25% damage)'); }
       // LEMONS BLOOD-SENSE (Steve 2026-10-09): you feel heartbeats. A bleeding
       // enemy can't hide where its blood is — your strike finds it. (+2)
       try {
@@ -29894,7 +29894,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const lash = Math.max(1, Math.round(d * 0.5));
             let vName = v.name || 'it';
             try { vName = this.encShortLabel(v) || this.encTheName(v) || vName; } catch (e) {}
-            this.say(`GRISTLEFIT: your shoulders move on their own — a backhanded lash catches ${vName}!`);
+            this.say(`Your shoulders move on their own — a backhanded lash catches ${vName}!`);
             // FRIENDLY FIRE (brawler loop 2026-10-09): the lash doesn't aim, and it
             // doesn't care who it hits. Hurting a villager ally is narrated —
             // but the old code left zero record: no trauma, no trust, no memory.
