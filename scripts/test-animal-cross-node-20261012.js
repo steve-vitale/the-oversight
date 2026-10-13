@@ -131,6 +131,9 @@ function mkDeer(mx, my, extra) {
 }
 
 // ---------- 5. travelTo resumes the encounter ----------
+// (re-seed: sections 1-4 advance the shared RNG; travelTo must not depend
+// on how many random draws came before it)
+Math.random = mulberry32(20261012);
 {
   const s = freshGame();
   const px = Game.map.px, py = Game.map.py;
