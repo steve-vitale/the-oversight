@@ -145,3 +145,48 @@ Tuning converges; it doesn't just continue.
   document why, move on. Sunk cost is not a strategy.
 - Every run reports convergence state in one line:
   `converging | converged | parked | killed-at-pilot`.
+
+---
+
+## 13. Endgame distribution metrics (Steve 2026-10-12)
+
+Once villages reach national in sims, measure the SHAPE of the endgame, not
+just its reachability: are builds and strategies evenly distributed, or is
+one overrepresented? And per Steve's design law, every villager must have a
+potential path to godhood — the player is an advantage, not the only route.
+
+Recorded per run (sweep-winstats-deep.js extended 2026-10-12), for each
+national-reacher and winner:
+
+- **endgame path**: the 7 paths (feared, indispensable, beloved, witness,
+  defiant, assimilated, relay) x light/dark branch (14 endings).
+- **ability-build composition**: full 6-slot ability IDs, synergy IDs +
+  count, integration stage, codex breadth.
+- **strategy**: policy name, scale road (LEAD / BELONG / COVENANT / TRADE /
+  CONQUEST / none — see hierarchy.js:88), tribute vs primacy counts,
+  seasoned-link count.
+- **villager ascension**: Game.tableAscended() — which non-player villagers
+  cleared the ascension bar, what distinguished them (abilities, teaching,
+  notability, boldness, trust standing, relay held, facilitated acts), plus
+  maxAscScore (highest non-player score — the blank-detector).
+
+Analyzed by scripts/analyze-endgame-diversity.js. Verdict vocabulary:
+
+- **even** — no path/build/strategy above ~40% share at current confidence.
+- **skewed** — concentration on at least one axis (top category >=50%, or
+  top two >=80%) — worth a lever look, not yet a verdict.
+- **degenerate** — a single build/path/strategy owns the endgame (>=75%
+  share, or >=60% at n>=30, with the runner-up at most half) — fix the
+  balance; the endgame must admit many shapes.
+- **insufficient-data** — fewer than 10 national-reachers/winners: no
+  distribution claim possible. Never claim a pattern from n=3.
+
+Confidence labels: n<10 insufficient-data | 10-29 suggestive | 30+ measured.
+A **degenerate** verdict is a convergence blocker for the win-path axis.
+
+Steve's ascension law is checked separately: if villagers effectively never
+ascend across >=10 table-firing runs (0 ascensions, median maxAscScore far
+below the 45 bar), NPC ascension is decoration — a blank to fill, not a
+tuning problem.
+
+---

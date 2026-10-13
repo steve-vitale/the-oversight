@@ -215,6 +215,65 @@ function instrumentUtil(Game, ctx) {
           else linksPeer++;
         }
       } catch (e) {}
+      // ENDGAME DIVERSITY (2026-10-12, Steve): which scale road took the
+      // village to national — LEAD (haven primary of >=3 subordinates),
+      // BELONG (belong vest — valued subordinate), COVENANT (haven
+      // subordinate or covenant vest), TRADE (trade vest), CONQUEST (led
+      // realm taken by force — see note below), or none.
+      // Canon: hierarchy.js:88 — six ways to national (LEAD/BELONG/
+      // COVENANT/TRADE/CONQUEST/REFUSE). Seasoning: 30+ days old AND
+      // trust 40+ (hierarchy.js:69).
+      let scaleRoad = 'none', seasonedLinks = 0, conqueredLinks = 0;
+      try {
+        const links = Game.hierarchyState ? Game.hierarchyState() : [];
+        for (const l of links) {
+          if (!l || l.status !== 'active') continue;
+          const age = day - (l.day || 0);
+          if (age >= 30 && (l.trust | 0) >= 40) seasonedLinks++;
+          if (/raid|force|conquer/i.test(l.origin || l.how || '')) conqueredLinks++;
+        }
+        const shapes = vests.map(v => v.shape);
+        if (linksHead >= 3 && conqueredLinks >= 3) scaleRoad = 'conquest';
+        else if (linksHead >= 3) scaleRoad = 'lead';
+        else if (shapes.indexOf('belong') >= 0) scaleRoad = 'belong';
+        else if (linksSub >= 1 || shapes.indexOf('covenant') >= 0) scaleRoad = 'covenant';
+        else if (shapes.indexOf('trade') >= 0) scaleRoad = 'trade';
+        else if (linksHead > 0) scaleRoad = 'lead-partial';
+        else if (linksSub > 0) scaleRoad = 'covenant-partial';
+      } catch (e) {}
+      // VILLAGER ASCENSION (Steve 2026-10-12 design law): every villager
+      // must have a potential path to godhood — the player is an advantage,
+      // not the only route. Game.tableAscended() (table.js) returns
+      // villagers (non-player) whose ascension score clears the bar at the
+      // table. Record who ascended, what distinguished them (notes from
+      // villagerAscensionScore: abilities, teaching, notability, boldness,
+      // trust standing, relay held), and whether the player facilitated
+      // them (tableState().facilitated acts: teach/relay/shield).
+      // maxAscScore covers the blank case: villagers who never clear the
+      // bar — if it stays near 0 across many table-firing runs, the NPC
+      // ascension design is decoration and must be filled.
+      let ascended = [], maxAscScore = 0;
+      try {
+        const T2 = (typeof Game.tableState === 'function' ? Game.tableState() : {}) || {};
+        const fac = T2.facilitated || {};
+        const asc = (typeof Game.tableAscended === 'function' ? Game.tableAscended() : []) || [];
+        const vil = ((Game.data || {}).villagers) || [];
+        ascended = asc.map(a => {
+          let v = {};
+          try { v = vil.find(x => x.id === a.vid) || {}; } catch (e2) {}
+          const acts = fac[a.vid] ? (fac[a.vid].acts || []) : (fac[String(a.vid)] ? (fac[String(a.vid)].acts || []) : []);
+          return {
+            name: a.name, score: a.score, notes: a.notes || [],
+            abilities: ((v.abilities || []).map(x => x.id || x.name || x)),
+            knowledgeBreadth: (v.knowledgeBreadth | 0) || ((v.taughtPlants || []).length) || 0,
+            facilitated: acts,
+          };
+        });
+        try {
+          maxAscScore = vil.filter(v => v && v.id !== Game.villagerId)
+            .reduce((m, v) => { try { return Math.max(m, Game.villagerAscensionScore(v.id).score | 0); } catch (e2) { return m; } }, 0);
+        } catch (e2) {}
+      } catch (e) {}
       const row = {
         seed, policy: pid, days: day, endReason: result.endReason,
         maxArc: pg.arc || 1, arcDay: first.arc,
@@ -251,6 +310,8 @@ function instrumentUtil(Game, ctx) {
         pointerHeardW4: ctx.pointerHeardW4 || 0, pointerHeardW5: ctx.pointerHeardW5 || 0,
         primacyFirst: !!ctx.primacyFirst,
         linksHead, linksSub, linksPeer,
+        scaleRoad, seasonedLinks, conqueredLinks,
+        ascended, ascendedN: ascended.length, maxAscScore,
         fled: (ctx.fledBad || 0) + (ctx.fledFilled || 0) + (ctx.fledKnown || 0) + (ctx.fledHurt || 0) + (ctx.fled || 0),
         struck: ctx.struck || 0, passiveFled: ctx.passiveFled || 0, drank: ctx.drank || 0,
         trials: ctx.trials || 0, choseAbility: ctx.choseAbility || 0,
