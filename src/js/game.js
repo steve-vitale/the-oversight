@@ -4132,7 +4132,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const mdef = (this.data.monsters || []).find(m => m.id === mid) || {};
         e.knowers = e.knowers || [];
         if (!e.knowers.includes(vid)) e.knowers.push(vid);
-        this.say(`${first} goes still. "${mdef.unknown || 'That thing'}. You're sure." They'll tell the others — word travels fast around a fire.`);
+        // PUNCTUATION/PROSE (hunter playtest 2026-10-07): unknown descriptors
+        // open lowercase by design; sentence openers are capitalized on render
+        // (matches identifyMonster). Journey landing r9 2026-10-13: this
+        // branch used to render the raw lowercase opener mid-quote.
+        const tUnk = mdef.unknown || 'That thing';
+        const tUnkC = tUnk.charAt(0).toUpperCase() + tUnk.slice(1);
+        this.say(`${first} goes still. "${tUnkC}. You're sure." They'll tell the others — word travels fast around a fire.`);
         this.socialTick(vid);
         this.monsterNewsCheck(mid);
         return { ok: true };

@@ -2579,13 +2579,16 @@
         // person-card path (app.js), which renders them raw. This path
         // re-wraps via voiceLine/sayLine, which adds the name itself — strip
         // the attribution so it doesn't double
-        // (`Jamal: "Jamal: "Nothing new.""`). Journal toasts (📓) captured
+        // (`Jamal: "Jamal: "Nothing new.""`). Journal toasts (📓) and doubt
+        // beats (❓, e.g. checkGossipClaim's identity-doubt narration) captured
         // mid-ask are re-emitted outside the spoken line so they don't
-        // pollute it. Socialite playtest 2026-10-07.
+        // pollute it. Socialite playtest 2026-10-07. (Journey landing r9
+        // 2026-10-13: the ❓ beats used to leak INTO the spoken line — the
+        // NPC would "say" the player's own doubt narration.)
         let line;
         try {
-          const asides = said.filter(t => /^\s*📓/.test(t));
-          const beats = said.filter(t => !/^\s*📓/.test(t));
+          const asides = said.filter(t => /^\s*(📓|❓)/.test(t));
+          const beats = said.filter(t => !/^\s*(📓|❓)/.test(t));
           for (const a of asides) { try { this.say(a); } catch (e) {} }
           line = beats.join(' ');
           const nm = String(this.displayName(vid) || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
