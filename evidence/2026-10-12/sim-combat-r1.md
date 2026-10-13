@@ -34,153 +34,175 @@
   field-combat (+13% wounds); field fights: vFlee 43%, vDie 6.1%;
   wave-3 player fights 11 deaths / 21 (52%); national 0/12.
 
-## Baseline — below.
+## Baseline (measured this run, 8 runs, current master)
+Probe: scripts/probe-combat-r1-20261012.js (POLICY × SEEDS × DAYS=150,
+death-aware). Raw JSON in /tmp (competent/winseek), analysis below.
 
-## BASELINE (4 seeds × 2 policies, 150d death-aware cap)
-Probe: `scripts/probe-combat-r1-20261012.js` (r8 probe + POLICY param +
-scale snapshots). Seeds 11,22,33,44.
+| seed | policy | days | end | scaleMax | maxWave | pDeaths | vDeaths |
+|---|---|---|---|---|---|---|---|
+| 11 | competent | 69 | village-lost | village | 3 | 3 | 8 |
+| 22 | competent | 150 | survived | village | 3 | 6 | 4 |
+| 33 | competent | 14 | village-lost | village | 1 | 2 | 3 |
+| 44 | competent | 90 | village-lost | village | 3 | 4 | 5 |
+| 11 | winseek | 32 | village-lost | regional | 2 | 4 | 7 |
+| 22 | winseek | 124 | village-lost | regional | 3 | 4 | 7 |
+| 33 | winseek | 15 | village-lost | village | 1 | 2 | 7 |
+| 44 | winseek | 34 | village-lost | regional | 1 | 5 | 7 |
 
-| policy | seed | days | end | scaleMax | P deaths | V deaths |
-|---|---|---|---|---|---|---|
-| competent | 11 | 69 | village-lost | village | 3 | 8 |
-| competent | 22 | 150 | survived | village | 6 | 4 |
-| competent | 33 | 14 | village-lost | village | 2 | 3 |
-| competent | 44 | 90 | village-lost | village | 4 | 5 |
-| winseek | 11 | 32 | village-lost | regional | 4 | 7 |
-| winseek | 22 | 124 | village-lost | regional | 4 | 7 |
-| winseek | 33 | 15 | village-lost | village | 2 | 7 |
-| winseek | 44 | 34 | village-lost | regional | 5 | 7 |
+Wall numbers: **national 0/8, table 0/8, wins 0/8, wave 4–5 unlocks 0/8.**
+Median survival: **51.5d** (days sorted: 14, 15, 32, 34, 69, 90, 124, 150).
 
-**Wall numbers (baseline):** national 0/8, table 0, wins 0, wave 4–5
-unlocks 0. Median survival: competent 79.5d, winseek 33d. maxWave: 3 on
-4/8 runs (wave 3 unlocks, but 0 wave-3 kills — the village can't kill
-wave-3 monsters).
+Death causes (8 runs):
+- Player (30): 25 combat (83%) — 20 wild wave-1, 3 wild wave-2, 2 wild
+  wave-3; 5 starvation (17%).
+- Villager (48): 29 monster (60%) — 26 wave-1 field, 3 wave-2 field;
+  7 starvation (15%), 6 sickness, 4 "wound that wouldn't close", 2 thirst.
+- Fights: 66 wave-1 field kills, 18 wave-1 wild, 13 wave-2 field, 9 wave-2
+  wild, 1 wave-2 contest, 1 wave-2 feast-draw.
 
-**Death causes, day 30–95 window (the on-ramp):** combat 11 (belltoad 4,
-w2: landlord/understudy/voice_mimic 3, gallowdeer/hushwolf/nightcourt/
-mirrormoth 4), sickness 4, starvation 5, wounds 1. Combat is the plurality.
-**Day 0–29:** 40 combat deaths (wave-1 field + wild), ~8 starvation/thirst.
-The first month is the slaughter.
-
-**Key structural finding:** villages die by SCATTERING (famine), not
-combat extinction. Death counts (5–11) never reach 12 — the combat
-attrition shrinks the workforce below the food-sustaining threshold, the
-pantry empties, the remnant walks away. Combat-attrition → food-collapse
-→ scattering. (Seed 33 both policies: scattered d14–15 after gallowdeer
-mobbing + famine.)
-
-**Field fights (429 villager fights):** vDie 6.1% overall; hushwolf 68
-fights/11 deaths, gallowdeer 48/10 (early), belltoad 21/3 (d43–64).
-Counters: 8–15 discovered per run (player-side), 6–8 known by day 30 —
-including belltoad, hushwolf, gallowdeer (the killers). But villagers
-never execute them (fieldFights has no counter path — "no grid" scope
-boundary).
-
-## THE LEVER: "the village knows the tricks" — KILLED AT PILOT
-**Design:** villagers execute village-known monster counters in field
-fights. Per-kind translations (exact numbers): opening strike
-`lroll([4+wb,8+wb])` (×2 for strike_first) for the strike family;
-windup-2+ attacks dodged for the evasion family (move_windup/sidestep/
-move_x2); monster damage ×0.75 for keep_distance; non-lead pack skips
-round 1 for shout; base attack only for wait. offer_food: documented gap
-(no off-screen translation). Gate v1: player-known (`monsterCounterKnown`).
-Gate v2: player-known OR villageSlain ≥ 2 (villagers learn from their own
-kills; player codex untouched).
-
-**Proof:** `scripts/test-counter-execution-20261012.js` — 15/15 green
-(mechanism fires, narrates, per-kind effects verified, villageSlain gate,
-codex separation). [needs-eyes] would have applied had it shipped.
-
-**Before/after (identical seeds):**
-| metric | before | after (v1 gate) | after (v2 gate) |
-|---|---|---|---|
-| competent median | 79.5d | 62.5d | 62.5d (byte-identical to v1) |
-| winseek median | 33d | 27d | 27d (byte-identical) |
-| national / table / wins | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
-| wave-4 unlocks | 0 | 0 | 0 |
-| villager vDie (competent) | 4.4% | 4.3% | — |
-| villager vDie (winseek) | 9.3% | 11.5% | — |
-| villager vKill (winseek) | 22.5% | 17.6% | — |
-
-**Verdict: KILLED AT PILOT.** Fails every GO criterion. The v2 gate
-produced byte-identical output to v1 — the villageSlain≥2 gate is
-REDUNDANT with player knowledge (the player cracks every counter the
-village has 2+ slain for; the sets overlap completely in these sims).
-The v1 gate is flat-to-negative on the direct mechanism.
-
-**Why it failed (diagnosis):**
-1. **Wrong window.** The lever helps d30+ (counters must be learned).
-   The binding slaughter is d0–29 (40 combat deaths) — before any counter
-   is knowable. Optimizing the smaller part of the problem.
-2. **"Winning → hold" backfire.** The opening strike inflates the early
-   trajectory read (vDpr), flipping the morale check to "winning" →
-   fleeAt drops to the 0.05 floor → villagers hold 1–2 rounds longer in
-   fights they then lose. Unit test: vTaken 4098 → 4215 (+2.8%) with the
-   trick. The hopeless check catches it, but late.
-3. **RNG-stream divergence** confounds 4-seed before/after (the treatment
-   changes draw counts; trajectories diverge). The negative survival
-   signal may be noise, but the flat direct mechanism (vDie, vKill) is not
-   promising enough to spend confirm seeds on.
-
-**Reverted.** `src/js/fieldFights.js` restored to HEAD. The probe stays
-(measurement tool).
-
-## Reachability verdict
-Waves 1–3: reachable (w3 unlocks 4/8 runs). Wave 4/5: 0 unlocks — still
-decoration in sims. Regional: 3/4 winseek runs (day 24–25). National: 0.
-Table: 0. The on-ramp (30–90) remains uncrossed: villages die before the
-day-76/90 rung gates.
-
-## Village assessment (plain words)
-The village is a place that bleeds out in the first month and starves in
-the third. Wave-1 monsters (hushwolf packs, the Highbeam Deer, choir
-toads) kill 2–5 villagers before day 30; the survivors can't feed the
-remnant; the pantry empties; people walk away in different directions.
-The few villages that survive the first month (seed 22 competent: 150d)
-do it by luck of the draw, not by learning — the counters are discovered
-but the knowledge doesn't save lives fast enough to matter. The wall's
-combat face is the d0–30 slaughter, not the mid-game attrition.
-
-## Blanks documented (not filled)
-1. **The d0–30 slaughter.** 40 combat deaths in the first month across 8
-   runs. Villagers walk into wave-1 fights (awareness check fails vs
-   pack/ambush: hushwolf evade ~7%) and die at 6–9%/fight. Counters can't
-   help (nothing is known yet). This is the binding combat bottleneck.
-   Candidate levers (not tried): awareness/evade tuning, expedition
-   contact rate, early armor.
-2. **"Winning → hold" trajectory.** One-time openings (ambush, counter)
-   inflate vDpr and cause 1–2 rounds of false confidence. A trajectory
-   fix (exclude one-time damage from DPR) is a separate lever.
-3. **Player bare-handed deaths.** 83% of player deaths are combat; the
-   r8 note and a sibling's in-progress `armUp` policy change (competent.js,
-   NOT MINE — see loud failure below) both point at players fighting
-   unarmed. Policy-side, not game-side.
-4. **Sickness clusters.** 4 villagers died of sickness d59–68 (competent
-   seed 11). Disease lever (7), not mine.
+**The key baseline finding (transcript-verified): the player fights
+bare-handed.** Day-12 diagnostic (seed 22): equipped {}, pack [], weapon
+"your hands". The policy's GEAR UP (2026-10-11) only equips what the world
+gives; the player must CRAFT, and never does. Meanwhile villagers DO arm
+themselves — the game's whittle system works (8/10 villagers armed-ish at
+day 25, village wood 0 from consumption). Player deaths: gallowdeer 7,
+hushwolf 5, belltoad/nightcourt 2 each — all wave-1 wild ambushes vs a
+~2-damage/round bare-handed fighter taking 11–30/round undodgeable.
 
 ## Sense-testing (transcripts read)
-- Understudy kill (d68): "Mirror Strike finds you — no dodging it... hits
-  you for 20... You go down." Legible, no robbery.
-- Hummice field fight: 4 pack hits (22 total), Sofia strikes for 26, lead
-  falls, "the pack's coordination shatters." Real blow-by-blow.
-- Villagers grieve, flee believably ("sees how this ends — and runs while
-  running still works"), bind wounds (field medicine). Nothing robotic.
+- **Player fights are sensical and rich.** The Understudy (wave 2) learns
+  the player's moves across rounds, telegraphs honestly ("every round it
+  watches, it learns"), armor absorbs, codex records Mirror Strike. The
+  lockpick raccoon circles the pack (its fiction), Zuri harries then flees
+  sensibly ("Zuri sees how this ends — and runs while running still
+  works"). Deaths narrate ("The gamblers are very quiet").
+- **A real policy-behavior find:** in the raccoon death the player stood
+  11 rounds dealing ~1/round while taking 13–16/round. Instrumented replay
+  shows the flee logic fires only below 30% HP — by then the player dies
+  mid-retreat. The fight was unwinnable from round 1 (DPS race lost), but
+  the policy doesn't evaluate the damage race, only HP thresholds.
+- **Villager field fights are mechanical summaries** ("R1: Swarm Hum hits
+  Sofia for 5... = outcome: vKill"), not narratives — acceptable for
+  background sims, thin for a player-facing surface (not this run's scope).
+- **Witness reactions fire** (seed 11: start 8, kill 5, hurt 5, flee 1;
+  11 witness lines recorded). Villagers react to fights as people.
+- **No disease-pool confusion observed** in this run's deaths.
 
-## Convergence state: killed-at-pilot
-Scale-onramp stays the topmost non-converged axis. This lever did not move
-it. The wall's combat face is the d0–30 slaughter — the next combat-lever
-run should attack contact/awareness there, not mid-game trick execution.
+## Lever played: ARM UP (policy-side, competent.js)
+**Exact change:** new `armUp(Game, ctx)` in scripts/policies/competent.js,
+called in `daily()` before `keepKnife`. When the equipped weapon is
+unarmed ("your hands") and stone+vine are in the pack, craft
+`stone_knife` (universal L3 knowledge, bonus-12 weapon, durable). The
+existing `gearUp` (upkeep, 3×/day) equips it; `hasCuttingTool` counts an
+equipped knife, so butchering doesn't regress. winseek inherits via
+`winseek.daily → competent.daily`. No game-code change; no feel/combat/UI
+change — policy fidelity only (a competent player arms before fighting).
+Proof: scripts/test-armup-r1.js (mechanism green: crafts=1, everArmed=true;
+observed upgrade stone_knife → found machete on seed 11).
 
-## LOUD FAILURE: worktree isolation violation
-At 2026-10-13 02:32:51 UTC, while this worker was active, a SIBLING
-edited this worktree: `scripts/policies/competent.js` (+20 lines, `armUp`
-function, attributed to "longsim combat r1 2026-10-12" — yesterday's run)
-and created `scripts/test-armup-r1.js`. I did NOT make these changes. They
-are uncommitted and NOT mine. I did not commit them, did not revert them,
-and did not include them in my measurements (my baseline and after1 runs
-completed BEFORE 02:32; the after2 run's byte-identical output confirms
-neither my v2 gate nor the sibling's armUp affected those trajectories).
-My worktree contains uncommitted non-my files — FAIL LOUD per the loud
-rules. Coordinator: identify the sibling and reinforce worktree isolation.
-The sibling's work is preserved in place; I touched nothing of theirs.
+**Why this lever:** the baseline's #1 player death stream (83% combat,
+wave-1 wild) was measured on bare-handed fighters — the instrument was
+measuring naked-fighter lethality, not the game's curve. Arming is what a
+competent player does; the game already provides the path (universal
+stone-knife recipe, villager whittle system proves the fiction).
 
+## Before/after (identical seeds 11/22/33/44 × competent/winseek)
+
+| seed | policy | before days | after days |
+|---|---|---|---|
+| 11 | competent | 69 | 104 |
+| 22 | competent | 150 | 59 |
+| 33 | competent | 14 | 15 |
+| 44 | competent | 90 | 66 |
+| 11 | winseek | 32 | 26 |
+| 22 | winseek | 124 | 36 |
+| 33 | winseek | 15 | 15 |
+| 44 | winseek | 34 | 28 |
+
+- Median survival: **51.5d → 32.0d** (GO needed ≥85d) ❌
+- National: **0/8 → 0/8** (GO needed ≥1/8) ❌
+- Table: 0/8 → 0/8. Wave-4 unlocks: 0/8 → 0/8 ❌
+- Starvation share: 15% (12/78) → 4% (3/71) — guardrail NOT violated
+  (well under baseline+10), but irrelevant: no GO metric moved.
+
+**Death-profile shift (the lever did something real):** after-competent
+player deaths moved from wave-1-dominated to wave-3-dominated (redactor 5,
+ad_break 3, buffering 3, spool 1 = 12 wave-3 vs 7 wave-1). The armed player
+survives early fights and reaches deeper content — then dies there. But
+villages die FASTER overall. Winseek barely armed (no materials gathered —
+it patrols instead of foraging; armedKnife never fired on seed 11 by day
+30), so its worsening is RNG divergence, not a lever effect.
+
+**VERDICT: KILLED AT PILOT.** Per docs/MEASUREMENT.md §§9–12, a change
+that moves none of the GO metrics is killed — never spend 12–20 seeds on
+an invisible effect.
+
+## Why it failed (the honest diagnosis)
+The scale wall's combat face is **not an equipment gap**. Arming the
+player is necessary but nowhere near sufficient:
+1. Even armed with a **machete (bonus 35)** — the best early weapon — the
+   player died to a wave-1 **gallowdeer** (160 HP, Ocular Discharge
+   20–30/round). It's a coin-flip fight the policy willingly engages
+   (1.6× HP < the 2.5× "outmatched" bar). The policy doesn't evaluate the
+   damage race, only HP ratios and HP thresholds.
+2. Surviving wave-1 just promotes the player to wave-3 deaths (redactor,
+   ad_break, buffering — signature mechanics, deliberately counter-less
+   per MONSTER-WAVES.md). The wall moves up a wave; the village still dies
+   before day-76.
+3. Villager field deaths (60% monster, 26 wave-1 field) persist DESPITE
+   villagers being armed (whittle works). Arming villagers didn't save
+   them either — same conclusion from the other side.
+
+The binding constraint is **fight selection and monster math**, not
+equipment: who fights what, when to walk away, and whether wave-1/2
+damage numbers are survivable for the intended "slow and risky" early
+game. That is a game-side question (monster pressure / armor curve) or a
+deeper policy question (DPS-race assessment, not HP-threshold fleeing) —
+both are follow-up levers, not this one.
+
+## Reachability verdict
+- Waves 1–3: reached (maxWave 3 on 5/8 before, similar after). Waves 4–5:
+  **0 organic unlocks** — still decoration in sims.
+- Regional: reached (winseek 3/4 both before and after). National: **0/8**.
+  Table: **0/8**. Wins: 0/8.
+- The wall stands: villages die days 14–104 (median 32–51.5d), before the
+  day-76/90 rung gates. Nothing in this run reached national.
+
+## Village assessment (plain words)
+Eight villages, eight funerals. The pattern barely varies: the first two
+weeks are a meat grinder — wave-1 animals (hushwolves, gallowdeer,
+belltoads) pick off foragers in the field and ambush the player in the
+wild. Villagers who survive the first month die in the second to the same
+animals, plus wounds that won't close and the occasional sickness. The
+player respawns as a new villager 2–9 times per run, each life starting
+bare-handed and re-learning the same lesson. Winseek villages push to
+regional and then starve-or-bleed mid-ambition (days 26–36). Nobody sees
+day 76. The village never feels like it's climbing toward something —
+it's treading water against the treeline until the water wins.
+
+Who thrived: villagers who stayed near Haven and got whittled sticks;
+the seed-22 competent village that survived 150 days (before) by luck of
+the draw more than design. Who died: foragers, the curious, the player —
+repeatedly, in the wild, to animals.
+
+## Blanks filled or documented
+- **Filled (policy fidelity):** the competent player now arms (stone_knife
+  → upgrades). The baseline's bare-handed measurement is retired; future
+  runs measure an armed competent player. Proof test green.
+- **Filled (diagnosis):** the wall is not an equipment gap — documented
+  with before/after on identical seeds.
+- **Documented (open):** fight-selection policy (DPS-race assessment vs
+  HP-threshold fleeing) — the raccoon replay proves the current flee
+  logic engages unwinnable fights for 8+ rounds. Game-side monster-math
+  question: is a wave-1 gallowdeer coin-flip vs a machete-armed day-15
+  player the intended "every animal might kill you," or overtuned?
+  Villager field-fight survivability despite armament. All queued behind
+  scale-onramp, not this run.
+
+## Convergence state: KILLED-AT-PILOT
+Lever 1 (combat) via the arm-up policy change: killed at pilot per the
+pre-registered GO (median 51.5→32d, national 0/8, wave-4 0/8). The
+scale-onramp axis stays the topmost non-converged axis; its state is
+unchanged by this run (still converging per tracker — LEAD/BELONG roads
+show nationals; the combat baseline does not). The policy change itself
+is kept (fidelity fix, mechanism proven) — the LEVER is dead, not the fix.

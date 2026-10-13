@@ -625,6 +625,23 @@ function keepKnife(Game, ctx) {
     }
   } catch (e) {}
 }
+// ARM UP (longsim combat r1 2026-10-12): a competent player arms BEFORE
+// fighting. The r1 baseline measured bare-handed fighters: the day-12 player
+// had no weapon and an empty pack, and 83% of player deaths were combat —
+// mostly wave-1 wild ambushes they couldn't out-DPS (~2/round vs 11-30
+// incoming). stone_knife is universal L3 knowledge and a bonus-12 weapon;
+// knap one when stone+vine are on hand. gearUp (upkeep) equips it, and
+// hasCuttingTool counts an equipped knife — no butchering regression.
+function armUp(Game, ctx) {
+  try {
+    const w = (Game.equippedWeapon && Game.equippedWeapon()) || {};
+    if (!w.unarmed) return; // already holding a real weapon
+    if (packMat(Game, 'stone') >= 1 && packMat(Game, 'vine') >= 1) {
+      if (Game.craft('stone_knife')) ctx.armedKnife = (ctx.armedKnife || 0) + 1;
+      else ctx.armFailed = (ctx.armFailed || 0) + 1;
+    }
+  } catch (e) {}
+}
 // STONE RUN (food r6): when the knife needs its stone half, a competent
 // trapper makes a DELIBERATE detour to the nearest rubble-choked path —
 // roadwork, not luck. (The forage trip's opportunistic clearing only fires
@@ -1568,6 +1585,9 @@ const competent = {
     stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
     if (needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
     sortHaul(Game, ctx); // identify the haul at camp — unknowns become food
+    armUp(Game, ctx); // knap a weapon BEFORE any fighting (combat r1) — runs
+    // BEFORE keepKnife deliberately: the fighting knife and the butchering
+    // knife are the same object, and the weapon gets priority.
     keepKnife(Game, ctx); // knap the stone knife FIRST (food r6: wins the vine race)
     cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
