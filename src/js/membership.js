@@ -533,6 +533,9 @@
           if (v.roster.indexOf(nid) < 0) v.roster.push(nid);
           var t = v.trust || (v.trust = {});
           if (t[nid] == null) t[nid] = 20;
+          // PARTY-BOND (2026-10-12): arrival day — newcomers (<14d) get
+          // paired with veterans on outdoor work, not sent out first.
+          try { v.arrivedDay = v.arrivedDay || {}; v.arrivedDay[nid] = day; } catch (e2) {}
           this.say(`🚶 ${app.name} walks in — pack light, eyes wide. Haven grows by one. (${v.roster.length} souls.)`);
           try { if (this.journalNote) this.journalNote('village', 'arrival', app.name + ' arrived and joined.'); } catch (e) {}
           this.memberReactions(nid);

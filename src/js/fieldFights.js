@@ -173,7 +173,8 @@
       // one-shot ability state, reset per fight
       var abAim = false, abAimed = false, abWarCried = false, abScreamed = false,
           abBraced = false, abDebtSettled = false, abStun = 0, abRoundTaken = 0,
-          abLastRoundTaken = 0, abHaymakerRound = false, abMedicated = false;
+          abLastRoundTaken = 0, abHaymakerRound = false, abMedicated = false,
+          abDrewFire = false, abBodyguarded = false;
       var abNight = false;
       try { abNight = this.isNight ? this.isNight() : false; } catch (e) {}
 
@@ -369,6 +370,23 @@
       var allies = Math.max(0, opts.allies || 0);
       var allyVids = (opts.allyVids || []).slice(0, 2);
       holdBonus += Math.min(0.12, allies * 0.04);            // allies nearby steady them
+      // PARTY-BOND (2026-10-12): bond with the people beside you steadies
+      // further — earned, not given. Capped; the ward's village pool stacks.
+      try {
+        if (typeof this.bondCombatBonus === 'function' && vid && vid !== 'player') {
+          var _bb = this.bondCombatBonus(vid, allyVids);
+          if (_bb > 0.02) {
+            var _an = 'your people';
+            try {
+              var _fa0 = (opts.foreignAllies || {})[allyVids[0]];
+              _an = (_fa0 && _fa0.name) || (this.displayName ? this.displayName(allyVids[0]).split(' ')[0] : 'your people');
+            } catch (e2) {}
+            rec.log.push(vName + ' and ' + _an + ' have bled together — it steadies them.');
+          }
+          holdBonus += _bb;
+        }
+        if (typeof this.villageBondBonus === 'function') holdBonus += this.villageBondBonus();
+      } catch (e) {}
       var day = 0;
       try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
       if (day >= 7) holdBonus += 0.08;                       // post-System desperation
@@ -509,7 +527,23 @@
               } catch (e) {}
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in is exposed (no armor) and draws some of the hits.
-              var hittingAlly = allyIn && allyHp > 0 && RR() < 0.4;
+              // TANK — DRAW FIRE (2026-10-12): the taunter makes themselves
+              // the problem. The beast's eye stays on them: ally hit share
+              // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
+              var _allyShare = 0.4;
+              if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
+                abDrewFire = true;
+                _allyShare = 0.1;
+                rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
+              }
+              var hittingAlly = allyIn && allyHp > 0 && RR() < _allyShare;
+              // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
+              // on the ally lands on the guard instead. "Not them."
+              if (hittingAlly && vHasAb('bodyguard') && !abBodyguarded) {
+                abBodyguarded = true;
+                hittingAlly = false;
+                rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
+              }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09): diminishing-returns curve,
                 // mirroring the tactical engine — every point of protection
@@ -550,6 +584,15 @@
                   var _pre = total;
                   total = Math.round(total * 0.4);
                   rec.log.push(vName + ' braces — takes it on the shoulder, rolling with it. ' + _pre + ' → ' + total + '. (Unbreakable)');
+                }
+                // TANK — SHIELD WALL (2026-10-12): shoulder to shoulder, the
+                // line braces as one. While an ally stands with them, blows
+                // land softer (-25%, min 1). The wall holds together or not
+                // at all — no ally, no wall.
+                if (vHasAb('shield_wall') && allyIn && allyHp > 0 && total > 0) {
+                  var _pre2 = total;
+                  total = Math.max(1, Math.round(total * 0.75));
+                  if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
@@ -745,6 +788,23 @@
           if (rec.outcome === 'vKill') this.villagerGainXP(vid, 'combat', 2, 'monster kill');
           else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee') this.villagerGainXP(vid, 'combat', 1, 'survived a fight');
           else if (rec.outcome === 'evade') this.villagerGainXP(vid, 'field', 1, 'read the signs');
+        }
+      } catch (e) {}
+      // PARTY-BOND (2026-10-12): surviving together is the practice. The pair
+      // bond grows; the village pool grows when a ward anchors it. Death
+      // grieves proportionally — the pair is gone, the survivors' other
+      // bonds scale by survivors/party. Grief, not amnesia.
+      try {
+        if (vid && vid !== 'player') {
+          var _allyAlive = helpCalled && allyIn && allyHp > 0 && allyVid;
+          var _allyDied = helpCalled && !allyIn && allyHp <= 0 && allyVid;
+          if (rec.outcome === 'vKill' || rec.outcome === 'mFlee' || rec.outcome === 'vFlee') {
+            if (_allyAlive && this.noteSharedFight) this.noteSharedFight([vid, allyVid]);
+            if (this.noteVillageBondFight) this.noteVillageBondFight();
+          } else if (rec.outcome === 'vDie') {
+            if (this.noteBondGrief) this.noteBondGrief(vid, _allyAlive ? [allyVid] : []);
+          }
+          if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
         }
       } catch (e) {}
       return rec;

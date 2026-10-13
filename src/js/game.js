@@ -5387,7 +5387,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // cleared: they said yes (or the player moved on)
       if ((this.state.village.lastRefusal || {}).vid === vid) delete this.state.village.lastRefusal;
-      v.assignments[vid] = { task, assignedDay: this.state.scholar.day, assignedPart: this.dayPart, via };
+      // PARTY-BOND (2026-10-12): fitness gate. The wounded don't walk the
+      // treeline — a villager under 40 HP is refused outdoor work honestly,
+      // not silently. (Depth probe: wounded villagers went straight back out.)
+      try {
+        var _outdoor = (this.OUTDOOR_TASKS || ['patrol', 'scout', 'hunt', 'forage']);
+        if (_outdoor.indexOf(task) >= 0) {
+          var _hp = ((this.state.village.health || {})[vid] !== undefined)
+            ? this.state.village.health[vid] : 100;
+          if (_hp < 40) {
+            this.say(`${first} can barely stand (${Math.max(0, Math.round(_hp))} HP) — not the treeline. They'll rest at Haven.`);
+            this.save();
+            return { ok: false, refused: true, reason: 'wounded' };
+          }
+          // PARTY-BOND (2026-10-12): newcomers don't walk first. A newcomer
+          // (arrived <14d) on an outdoor task gets paired with a veteran on
+          // the same task when one exists — two birds: they live, and bond
+          // grows. No veteran on the crew: honest warning, assignment stands.
+          if (this.isNewcomer && this.isNewcomer(vid)) {
+            var _buddy = this.findVeteranBuddy ? this.findVeteranBuddy(vid, task) : null;
+            if (_buddy) {
+              opts = opts || {}; opts.buddy = _buddy;
+              var _bn = this.displayName(_buddy).split(' ')[0];
+              this.say(`${_bn} will watch ${first} out there — nobody walks the treeline alone their first weeks.`);
+            } else {
+              this.say(`No veteran on this crew — ${first} walks the treeline with green company.`);
+            }
+          }
+        }
+      } catch (e) {}
+      v.assignments[vid] = { task, assignedDay: this.state.scholar.day, assignedPart: this.dayPart, via, buddy: (opts && opts.buddy) || null };
       // THE GAME NOTICES: leadership is a playstyle axis.
       this.notePlaystyle('leader');
       this.notePlaystyle('social');
@@ -5470,10 +5499,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const asg = v.assignments || {};
       const ids = Object.keys(asg);
+      // PARTY-BOND (2026-10-12): the crew that walks out together bonds.
+      // +1 per pair per part on the same outdoor task — this is how
+      // newcomers earn their place beside veterans, not in front of them.
+      try { if (this.noteCrewTogether) this.noteCrewTogether(this._outdoorCrew || []); } catch (e) {}
       for (const vid of ids) {
         const a = asg[vid];
         // must be alive and still in roster
         if (!(v.roster || []).includes(vid)) { delete asg[vid]; continue; }
+        // PARTY-BOND (2026-10-12): fitness gate at resolution too — wounds
+        // happen mid-part, and task leads assign themselves. Under 40 HP,
+        // outdoor work becomes rest. Honest, narrated.
+        try {
+          var _outdoor2 = (this.OUTDOOR_TASKS || ['patrol', 'scout', 'hunt', 'forage']);
+          if (_outdoor2.indexOf(a.task) >= 0) {
+            var _hp2 = ((v.health || {})[vid] !== undefined) ? v.health[vid] : 100;
+            if (_hp2 < 40) {
+              this.say(`${this.displayName(vid)} is in no shape for the treeline (${Math.max(0, Math.round(_hp2))} HP) — they rest at Haven instead.`);
+              delete asg[vid]; continue;
+            }
+          }
+        } catch (e2) {}
         try { this.resolveOneAssignment(vid, a); } catch (e) { delete asg[vid]; }
         delete asg[vid]; // one part per assignment — reassign to continue
       }
@@ -37890,7 +37936,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // unlock type system_offer -- the System offers it to those who've
       // proven themselves in death's doorway. This lights up the villager-
       // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
-      combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'trade_of_blows', 'unbreakable', 'dead_aim'],
+      // PARTY-BOND (2026-10-12): tank abilities join the combat kit — villagers
+      // with tank kits become the party's front line. draw_fire sits by
+      // war_cry (loud abilities together); bodyguard/shield_wall later.
+      combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'draw_fire', 'trade_of_blows', 'bodyguard', 'unbreakable', 'dead_aim', 'shield_wall'],
       field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
       social: ['peacemaker', 'mediator', 'scream_cheese', 'animal_ken'],
       craft: ['steady_hands', 'triage', 'preservation_instinct', 'iron_stomach'],
