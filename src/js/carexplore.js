@@ -218,6 +218,17 @@
     // trust level. It scales by current trust AND applies trustGainMult.
     const appliedTrust = this.trustGainProgressive(vid, trustGain);
     setTrust.call(this, vid, trust + appliedTrust);
+    // FED THEM (2026-10-13): a real gift already moves trust — but the bond
+    // machinery never noticed, so the scholar could feed the village for a
+    // season and stay a stranger. Bonds scale with substance like trust
+    // does: a real meal/full earns +2, a solid bite +1, crumbs nothing.
+    // Stingy gifts and stolen returns never reach here.
+    try {
+      if (this.bondAdd && note !== 'stingy') {
+        const bdv = (amount === 'full' || (amount === 'meal' && substance >= 0.75)) ? 2 : (substance >= 0.5 ? 1 : 0);
+        if (bdv > 0) this.bondAdd(this.villagerId, vid, bdv, 'fed them');
+      }
+    } catch (e) {}
     // PUBLIC: the village watches. Generosity is visible — and it creates
     // expectation. Feed people publicly and the hungry will come asking.
     // trustMoved (socialite r5): the recipient's trust already moved through

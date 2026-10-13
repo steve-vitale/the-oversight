@@ -4942,6 +4942,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             this.say(`${this.displayName(pid)} catches your eye across the fire. You kept your word. That meant everything.`);
           }
           this.remember(pid, 'promise_kept', p.favorTask || p.goal);
+          // KEPT WORD BINDS (2026-10-13): a kept promise already pays +15
+          // trust — but the bond machinery never noticed, so the scholar
+          // could keep a hundred promises and stay a stranger. +4.
+          try { if (this.bondAdd) this.bondAdd(this.villagerId, pid, 4, 'promise kept'); } catch (e) {}
         } else {
           // FAVOR DEADLINES (convo favor system 2026-10-11): favor
           // obligations rot on their own deadline (1-3 days), not the 7-day
@@ -11204,6 +11208,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // care — it keeps 'heal' promises the way treatVillager does. Sitting
       // with the sick is doing something, not saying something.
       try { this.checkPromises('heal', vid); } catch (e) {}
+      // TENDED (2026-10-13): sitting with someone's fever is intimate —
+      // the village's bond machinery never noticed. +3, same as a deep talk.
+      try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'tended'); } catch (e) {}
       return null;
     },
 
@@ -11685,6 +11692,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // a kept promise could only be closed by words (comfort), never by
       // actual medicine.
       try { this.checkPromises('heal', vid); } catch (e) {}
+      // TREATED (2026-10-13): skilled hands on someone's sickness — the
+      // bond machinery never noticed. +3, same as tending.
+      try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'treated'); } catch (e) {}
       this.gainAbilityXP(abilityId, 2);
       return null;
     },
@@ -25136,6 +25146,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         this.say(`No food in the pantry. The village is hungry.${gotWater ? ' You still get your 1L water.' : ''}`);
       }
+      // THE SCHOLAR LINGERS TOO (2026-10-13): the player eats outside
+      // villageEats' collective loop (parity — the draw is recorded, not
+      // re-run), so logSitting never fires for the scholar and no meal bond
+      // ever formed. Mirror its logic honestly: eat at the haven fire,
+      // linger with whoever's there, warm a little. Same 50% roll, same +2.
+      try {
+        const me = this.villagerId;
+        if (taken > 0 && this.playerAtHaven && this.playerAtHaven()) {
+          const others = (v.mealLog || []).filter(e => e.vid !== me && e.part === (this.dayPart || 0) && e.place === 'haven');
+          if (others.length && Math.random() < 0.5) {
+            const o = others[Math.floor(Math.random() * others.length)];
+            if (this.bondAdd) this.bondAdd(me, o.vid, 2, 'lingering meal');
+          }
+          v.mealLog = v.mealLog || [];
+          v.mealLog.push({ vid: me, part: (this.dayPart || 0), place: 'haven' });
+        }
+      } catch (e) {}
     },
 
     // playerMealConsequences(items): the player's body faces what the
@@ -26210,6 +26237,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         for (let i = 0; i < showed.length; i++) for (let j = i + 1; j < showed.length; j++) {
           if (this.bondAdd) this.bondAdd(showed[i], showed[j], 1, 'feast');
+        }
+      } catch (e) {}
+      // THE HOST EATS TOO (2026-10-13): the scholar hosted this feast — the
+      // old loop bonded guests to each other while the host stood outside
+      // their own fire. Breaking bread with someone warms both ways.
+      try {
+        const host = this.villagerId;
+        for (const vid of showed) {
+          if (vid !== host && this.bondAdd) this.bondAdd(host, vid, 2, 'hosted feast');
         }
       } catch (e) {}
       try { this.seedGossip('feast', { host: this.villagerId }, showed); } catch (e) {}
@@ -37556,6 +37592,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           _kills.push(_m);
         }
       }
+      // FOUGHT ALONGSIDE (2026-10-13): the scholar's fights take villager
+      // allies (nearby villagers join tb combat) — but no bond ever formed,
+      // so the person who bled next to you stayed a stranger. Shared risk
+      // is the fastest honest bond there is. Won/routed: +3 for everyone who
+      // stood the line; lost: +2 — surviving something together still binds.
+      // Fled: nothing — you abandoned the field. Same +6/day cap as every
+      // other bond path; no farming a long fight.
+      try {
+        if ((result === 'won' || result === 'routed' || result === 'lost') && this.bondAdd) {
+          const me = this.villagerId;
+          const dv = result === 'lost' ? 2 : 3;
+          const reason = result === 'lost' ? 'stood with you' : 'fought alongside';
+          for (const w of (f.fighters || [])) {
+            if (w.kind === 'villager' && w.villagerId && !w.fled && w.villagerId !== me) {
+              this.bondAdd(me, w.villagerId, dv, reason);
+            }
+          }
+        }
+      } catch (e) {}
       if (result === 'won') {
         try { this.combatWitnessReact('kill'); } catch (e) {}
         // MONSTER REWARDS need a monster. A 'won' with no monster fighter

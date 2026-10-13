@@ -5390,6 +5390,16 @@
       // still costs.
       const stipend = c.exchanges >= 3 ? 3 : (c.exchanges >= 1 ? 1 : 0);
       if (stipend > 0) this.resolveConsequence(vid, { trust: stipend, temper: 'neutral', name: 'endConvo:talk' });
+      // TALKED FOR REAL (2026-10-13): a substantive conversation that ran
+      // its course is time spent as people — the bond machinery never
+      // noticed, so the scholar could talk all season and stay a stranger.
+      // Same bar as the mood residue (substantive, 3+ exchanges); walking
+      // away mid-thread ('left') earns nothing. +2, under the +6/day cap.
+      try {
+        if (c.substantive && (c.exchanges || 0) >= 3 && how !== 'left' && this.bondAdd) {
+          this.bondAdd(this.villagerId, vid, 2, 'deep talk');
+        }
+      } catch (e) {}
       // DIPLOMAT XP (socialite r11 2026-10-10): earned by the conversation,
       // not the opening — a hello-goodbye (0 exchanges) teaches nothing.
       // Moved here from startConvo (open/leave XP farm: 35 cycles to L3).
