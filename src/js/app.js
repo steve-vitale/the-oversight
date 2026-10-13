@@ -394,6 +394,10 @@
     return out.join('');
   }
 
+  // COMPACT STATUS (resurrected 2026-10-13 from Oct stash): stat chips instead
+  // of tall rows — same information at ~1/3 the height, vitals stay above the
+  // fold. All live features preserved: feast tags, bank, contest countdown,
+  // clickable pack, affliction chips.
   function statusBars(st) {
     const feastTag = st.feastState === 'gorged' ? ' ⚡⚡ GORGED' : st.feastState === 'feasting' ? ' ⚡ feasting' : '';
     // THE BANK: one pool. The FOOD bar IS the reserve — cap grows with bank
@@ -423,12 +427,19 @@
         contestRow = `<div class="statrow contest-pending">📺 CONTEST: ${esc(cname)} — ${who} in ${daysLeft}d</div>`;
       }
     } catch (e) {}
-    return statRow('HEALTH', st.health, st.health, st.health < 35) +
-      statRow('FOOD (you)', foodVal, st.kcal / cap * 100, st.kcal < 500, banked > 0 ? 'banked' : '') +
-      statRow('PACK 🎒', st.invKcal + ' kcal · ' + st.packKg + '/' + st.packCap + ' kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, '', 'pack') +
-      statRow('WATER', st.hydration + '% · ' + st.waterCleanL + 'L clean', st.hydration, st.hydration < 30) +
-      (Game.state && Game.state.systemArrived ? statRow('SYSTEM', st.integration + '% integrated', st.integration, false) : '') +
-      contestRow + beatsRowHTML() + afflictionRow(st);
+    function chip(icon, val, pct, low, title, click) {
+      const p = Math.max(0, Math.min(100, pct));
+      const clickAttr = click ? ` data-statclick="${click}" style="cursor:pointer"` : '';
+      return `<div class="statc${low ? ' low' : ''}"${clickAttr} title="${esc(title || '')}"><span>${icon} ${val}</span><div class="sbar"><i style="width:${p}%"></i></div></div>`;
+    }
+    const sys = Game.state && Game.state.systemArrived;
+    return `<div class="statgrid">` +
+      chip('❤', Math.round(st.health), st.health, st.health < 35, 'Health') +
+      chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : '')) +
+      chip('💧', st.hydration + '%' + (st.waterCleanL ? ' · ' + st.waterCleanL + 'L clean' : ''), st.hydration, st.hydration < 30, 'Hydration') +
+      chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried', 'pack') +
+      (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration') : '') +
+      `</div>` + contestRow + beatsRowHTML() + afflictionRow(st);
   }
 
   // DISEASE (Steve 2026-10-09): affliction chips — symptoms until diagnosed,
@@ -1208,9 +1219,36 @@
     return items;
   }
 
-  // perceiveHTML: the quiet perception line under the grid. What you notice
-  // by standing here — no popups, no flashing, peripheral vision only.
-  // Cycles as you move; each render is just still text. Ignorable by design.
+  // surroundHTML (resurrected 2026-10-13 from Oct stash): where you are +
+  // what's here, one compact strip. Merges the old epithet line and the
+  // perception line — surroundings are essential while exploring, so they get
+  // a visible home, not the fold's basement. Tap for the full node/haven
+  // details (planning = your call, your scroll). Hidden in combat.
+  let surroundOpen = false;
+  function surroundHTML(st, n) {
+    if (st.inCombat) return '';
+    const d = Game.nodeDetail();
+    const biome = (S.TILE_NAME && S.TILE_NAME[d.type]) || d.type;
+    const here = (d.here || []).join(' · ');
+    let hints = [];
+    try { hints = (Game.perceptionHints && Game.perceptionHints()) || []; }
+    catch (e) { hints = []; }
+    // Urgent encounters render in the action-zone slot, never here — no dup IDs.
+    const detail = (surroundOpen && !st.pendingEncounter) ? `<div class="surround-detail">${panelFor(st, n)}</div>` : '';
+    return `<div class="ord-surround">` +
+      `<button class="surround-strip" id="surround-toggle">` +
+      `<span class="ss-main">👁 ${esc(d.epithet)} <span class="ss-biome">· ${esc(biome)}</span></span>` +
+      (here ? `<span class="ss-here">${esc(here)}</span>` : '') +
+      (hints.length ? `<span class="perceiveline">${hints.map(h => esc(h)).join('<br>')}</span>` : '') +
+      `<span class="ss-expand">${surroundOpen ? '▴ hide' : '▾ details'}</span>` +
+      `</button>${detail}</div>`;
+  }
+  function wireSurround() {
+    const t = document.getElementById('surround-toggle');
+    if (t) t.onclick = () => { surroundOpen = !surroundOpen; refresh(); };
+  }
+
+  // perceiveHTML: kept as the quiet fallback (surroundHTML is the live path).
   function perceiveHTML() {
     // OVER-FLAG HONESTY (break-it travel r11 2026-10-10): phantom flag -> live Game.over.
     if (Game.over || Game.tbfight) return '';
@@ -15408,10 +15446,9 @@
         <div class="game-col-main">
           <div class="ord-gridwrap">
             <div class="detail">${renderDetail(st)}</div>
-            ${perceiveHTML()}
+            ${surroundHTML(st)}
             <div id="inlineslot"></div>
           </div>
-          <p class="small ord-epithet">👁 ${esc(Game.nodeDetail().epithet)} — this ground, up close</p>
           ${isTutorialDone() ? '' : '<p class="small ord-taphint" id="taphint">🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out <button class="linklike" id="taphint-x" style="font-size:12px">got it</button></p>'}
           <div class="ord-compass">${compassHTML(st)}</div>
           <div id="mapoverlay" class="mapoverlay hidden"></div>
@@ -15826,6 +15863,7 @@
     document.querySelectorAll('[data-pool-draw]').forEach(b => b.onclick = () => { Game.drawLeaguePool(parseInt(b.dataset.poolDraw, 10) || 0); refresh(); });
     wirePanel(st, n);
     wireContextBar();
+    try { wireSurround(); } catch (e) {}
     wireSelfBar();
     wireAbilityBar();
     wireTargetBar();
