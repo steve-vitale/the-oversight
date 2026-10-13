@@ -318,4 +318,4 @@ if (require.main === module) {
   })().catch(e => { console.error('FATAL', e); process.exit(1); });
 }
 
-module.exports = { runRecon, attachTable, tableRow, trackBest, namedGaps };
+module.exports = { runRecon, attachTable, tableRow, trackBest, namedGaps, finalizeTable };
