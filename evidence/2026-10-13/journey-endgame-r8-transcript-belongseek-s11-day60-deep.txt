@@ -1,0 +1,29 @@
+=== seed 11 policy belongseek day 60 — conversation with Chloe (chloe_dubois) ===
+occupation=interpreter temperament=dry trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "This wound — I can't clean it properly one-handed. Will you help me clean it?"
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time. — or so they tell me."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Careful with it. And — thank you."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening, I promise."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=ask_favor stage=3 resolution=promised
