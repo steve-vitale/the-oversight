@@ -40,6 +40,9 @@ function attachInstruments(Game) {
   const m = {
     kills: 0, killsByWave: {},
     carcasses: 0, carcassBy: {}, carcassKcal: 0, // kill->carcass funnel
+    carcassPlayerKcal: 0,   // r11: edible carcass kcal by killer (player =
+      // policy-addressable at death; villager kills die on other nodes)
+    carcassVillagerKcal: 0,
     meatPotential: 0,   // monster-meat harvest potential kcal (gross x 0.40)
     meatPotentialBy: {}, // mid -> kcal
     revealedKcal: 0, revealedBy: {}, // kcal the reveal granted (meat became food)
@@ -50,6 +53,9 @@ function attachInstruments(Game) {
     meatEatenKcal: 0,    // player-consumed monster-meat kcal
     meatRotKcal: 0,      // monster-meat kcal that rotted uneaten
     corpseRotKcal: 0,    // monster-meat kcal that rotted ON CORPSES unlooted
+    hauledKcal: 0,       // r11: monster-carcass gross kcal the policy hauled
+    hauledBy: {},        // mid -> gross kcal hauled
+    hauledGear: 0,       // r11: non-meat items taken from monster corpses
     sickness: [],        // {day, source}
     exiles: 0,
     transcript: [],       // sampled say-lines (cap 80/run)
@@ -120,7 +126,23 @@ function attachInstruments(Game) {
         if (r && mdef && mdef.id) {
           m.carcasses++;
           m.carcassBy[mdef.id] = (m.carcassBy[mdef.id] || 0) + 1;
-          m.carcassKcal += (mdef.edible && mdef.edible.calories) || 0;
+          const kcal = (mdef.edible && mdef.edible.calories) || 0;
+          m.carcassKcal += kcal;
+          // r11: killer split — the corpse was registered just before this
+          // call (registerDeath/corpseForKill), so the newest monster corpse
+          // is this kill's. Player-killed = same-node at death = the haul
+          // policy's addressable pool; villager kills die on other nodes.
+          try {
+            const list = Game.corpses ? Game.corpses() : [];
+            let c = null;
+            for (let i = list.length - 1; i >= 0; i--) {
+              if (list[i] && list[i].kind === 'monster') { c = list[i]; break; }
+            }
+            if (c && Game.villagerId && c.killerId === Game.villagerId)
+              m.carcassPlayerKcal += kcal;
+            else
+              m.carcassVillagerKcal += kcal;
+          } catch (e) {}
         }
       } catch (e) {}
       return r;
@@ -170,6 +192,34 @@ function attachInstruments(Game) {
         const e2 = ((Game.state.codex || {}).monsters || {})[mid] || {};
         m.tests.push({ day: day(), mid,
           outcome: after && !before ? 'safe' : (e2.foodTested === 'poison' ? 'poison' : 'none') });
+      } catch (e) {}
+      return r;
+    };
+  }
+  // r11: HAUL measurement — corpseTakeItem is the loot-as-action funnel the
+  // haul policy works. Counts monster-carcass gross hauled (policy effect)
+  // and non-meat gear taken off monster corpses (the HIGH RISK/HIGH REWARD
+  // side channel: alien loot rides the same corpses).
+  const origCTI = Game.corpseTakeItem;
+  if (typeof origCTI === 'function') {
+    Game.corpseTakeItem = function (cid, idx) {
+      let c = null, it = null;
+      try {
+        c = (Game.corpses ? Game.corpses() : []).find(x => x && x.id === cid);
+        it = c && (c.items || [])[idx];
+      } catch (e) {}
+      const r = origCTI.apply(this, arguments);
+      try {
+        if (r && c && c.kind === 'monster' && it) {
+          const mid = isMonsterMeatId(it.plantId);
+          if (mid && it.foodState === 'carcass') {
+            const g = Math.round(it.hiddenKcal || 0);
+            m.hauledKcal += g;
+            m.hauledBy[mid] = (m.hauledBy[mid] || 0) + g;
+          } else if (!mid && it.foodKind !== 'meat') {
+            m.hauledGear++;
+          }
+        }
       } catch (e) {}
       return r;
     };
@@ -242,9 +292,11 @@ function attachInstruments(Game) {
   if (typeof origSweep === 'function') {
     Game.sweepSpoiled = function (...a) {
       try {
+        const live = (it) => (it.units == null ? 1 : it.units) > 0; // r11: an
+          // emptied stack (hauled to zero by corpseTakeItem) is GONE, not rotting
         const scan = (cont) => {
           for (const it of (cont || [])) {
-            if (it && !it.bonded && Game.isSpoiled && Game.isSpoiled(it) && isMonsterMeatId(it.plantId))
+            if (it && live(it) && !it.bonded && Game.isSpoiled && Game.isSpoiled(it) && isMonsterMeatId(it.plantId))
               m.meatRotKcal += Math.round((it.kcalEach || 0) * (it.units || 1) + (it.hiddenKcal || 0) * 0.40);
           }
         };
@@ -257,7 +309,7 @@ function attachInstruments(Game) {
         try {
           for (const c of (Game.corpses ? Game.corpses() : [])) {
             for (const it of ((c && c.items) || [])) {
-              if (it && !it.bonded && Game.isSpoiled && Game.isSpoiled(it)) {
+              if (it && live(it) && !it.bonded && Game.isSpoiled && Game.isSpoiled(it)) {
                 const mid = isMonsterMeatId(it.plantId);
                 if (mid) m.corpseRotKcal += Math.round((it.hiddenKcal || 0));
                 else if (it.foodKind === 'meat') m.corpseRotKcal += Math.round((it.hiddenKcal || 0) * 0.4);
@@ -303,6 +355,8 @@ function finalize(Game, m, result) {
   const out = { days: result.days, endReason: result.endReason,
     kills: m.kills, killsByWave: m.killsByWave,
     carcasses: m.carcasses, carcassBy: m.carcassBy, carcassKcal: Math.round(m.carcassKcal),
+    carcassPlayerK: Math.round(m.carcassPlayerKcal),
+    carcassVillagerK: Math.round(m.carcassVillagerKcal),
     meatPotentialK: Math.round(m.meatPotential),
     meatPotentialBy: m.meatPotentialBy,
     revealedK: Math.round(m.revealedKcal), revealedBy: m.revealedBy,
@@ -310,6 +364,7 @@ function finalize(Game, m, result) {
     meatEatenK: Math.round(m.meatEatenKcal),
     meatRotK: Math.round(m.meatRotKcal),
     corpseRotK: Math.round(m.corpseRotKcal),
+    hauledK: Math.round(m.hauledKcal), hauledBy: m.hauledBy, hauledGear: m.hauledGear,
     influx: m.influx,
     discoveries: m.discoveries, discoveryCount: m.discoveries.filter(d => !d.already).length,
     tests: m.tests,
@@ -336,6 +391,9 @@ function finalize(Game, m, result) {
   try { const pg = Game.progState ? Game.progState() : {}; out.arc = pg.arc || 1; out.tableWaiting = !!pg.tableWaiting; } catch (e) {}
   try { out.rank = (Game.scaleRank ? Game.scaleRank() : 'village') || 'village'; } catch (e) { out.rank = 'village'; }
   out.won = !!Game.won;
+  out.wins = out.won ? 1 : 0; // numeric alias for the telemetry deviation check
+  out.exiled = m.exiles;      // numeric alias ditto
+  try { out.deaths = (result.samples && result.samples.deaths) || []; } catch (e) { out.deaths = []; }
   out.national = (RANK_ORDER[out.rank] || 0) >= 2 ? 1 : 0;
   out.table = out.tableWaiting ? 1 : 0;
   // wave 4-5 unlocks: any seed whose maxWave reached 4/5
@@ -345,12 +403,13 @@ function finalize(Game, m, result) {
 async function runMeatAudit(opts) {
   opts = opts || {};
   const label = opts.label || process.env.LEVER || 'meat-r1';
+  const reg = opts.registry || POLICY_REGISTRY; // r11: extended registries
   const seeds = opts.seeds || (process.env.SEEDS || '11,22,33,44').split(',').map(s => parseInt(s.trim(), 10)).filter(Number.isFinite);
   const policyIds = opts.policies || (process.env.POLICIES || 'competent,meatseek').split(',').map(s => s.trim()).filter(Boolean);
   const days = opts.days || parseInt(process.env.DAYS || '150', 10);
   const rows = [];
   for (const pid of policyIds) {
-    const base = POLICY_REGISTRY[pid];
+    const base = reg[pid];
     if (!base) throw new Error('unknown policy: ' + pid);
     for (const seed of seeds) {
       const { Game } = await loadGame({ seed, mode: 'meataudit-' + pid });
@@ -393,11 +452,15 @@ async function runMeatAudit(opts) {
       kills: rs.reduce((t, r) => t + r.kills, 0),
       carcasses: rs.reduce((t, r) => t + r.carcasses, 0),
       carcassKcal: rs.reduce((t, r) => t + r.carcassKcal, 0),
+      carcassPlayerK: rs.reduce((t, r) => t + (r.carcassPlayerK || 0), 0),
+      carcassVillagerK: rs.reduce((t, r) => t + (r.carcassVillagerK || 0), 0),
       meatPotentialK: rs.reduce((t, r) => t + r.meatPotentialK, 0),
       revealedK: rs.reduce((t, r) => t + r.revealedK, 0),
       meatEatenK: rs.reduce((t, r) => t + r.meatEatenK, 0),
       meatRotK: rs.reduce((t, r) => t + r.meatRotK, 0),
       corpseRotK: rs.reduce((t, r) => t + r.corpseRotK, 0),
+      hauledK: rs.reduce((t, r) => t + (r.hauledK || 0), 0),
+      hauledGear: rs.reduce((t, r) => t + (r.hauledGear || 0), 0),
       totalInfluxK: rs.reduce((t, r) => t + r.totalInfluxK, 0),
       discoveries: rs.reduce((t, r) => t + r.discoveryCount, 0),
       npcDiscoveries: rs.reduce((t, r) => t + r.npcDiscoveries, 0),
@@ -416,7 +479,8 @@ function printSummary(rep) {
   for (const pid of rep.policies) {
     const b = rep.byPolicy[pid];
     console.log(`[${pid}] n=${b.n} won=${b.won} medDays=${b.medianDays} national=${b.national}/${b.n} table=${b.table}/${b.n} exiled=${b.exiled} maxWave=${b.maxWave} wave45=${b.wave45}/${b.n}`);
-    console.log(`  meat: carcasses=${b.carcasses} (gross ${(b.carcassKcal/1000).toFixed(1)}k) potential=${(b.meatPotentialK/1000).toFixed(1)}k share=${b.meatSharePct}% revealed=${(b.revealedK/1000).toFixed(1)}k eaten=${(b.meatEatenK/1000).toFixed(1)}k eatenShare=${b.meatEatenSharePct}% rot=${(b.meatRotK/1000).toFixed(1)}k corpseRot=${(b.corpseRotK/1000).toFixed(1)}k influx=${(b.totalInfluxK/1000).toFixed(0)}k`);
+    console.log(`  meat: carcasses=${b.carcasses} (gross ${(b.carcassKcal/1000).toFixed(1)}k: playerK=${((b.carcassPlayerK||0)/1000).toFixed(1)}k villagerK=${((b.carcassVillagerK||0)/1000).toFixed(1)}k) potential=${(b.meatPotentialK/1000).toFixed(1)}k share=${b.meatSharePct}% revealed=${(b.revealedK/1000).toFixed(1)}k eaten=${(b.meatEatenK/1000).toFixed(1)}k eatenShare=${b.meatEatenSharePct}% rot=${(b.meatRotK/1000).toFixed(1)}k corpseRot=${(b.corpseRotK/1000).toFixed(1)}k influx=${(b.totalInfluxK/1000).toFixed(0)}k`);
+    console.log(`  haul: hauledGross=${((b.hauledK||0)/1000).toFixed(1)}k gear=${b.hauledGear||0} rotShare=${b.carcassKcal>0?((b.corpseRotK/b.carcassKcal)*100).toFixed(0):'-'}%`);
     console.log(`  discovery: total=${b.discoveries} npc=${b.npcDiscoveries} playerTests=${b.tests} sickness=${b.sickness} kills=${b.kills}`);
   }
   console.log('');
@@ -431,4 +495,4 @@ if (require.main === module) {
   })().catch(e => { console.error('FATAL', e); process.exit(1); });
 }
 
-module.exports = { runMeatAudit, attachInstruments };
+module.exports = { runMeatAudit, attachInstruments, printSummary };
