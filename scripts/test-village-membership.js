@@ -73,7 +73,10 @@ function saidHas(sub) { return said.some(t => t.indexOf(sub) >= 0); }
   ok('blocked says why', saidHas('not yours anymore'));
   said.length = 0;
   ok('villageMeal blocked when exiled', Game.villageMeal() === null);
-  ok('meal blocked says why', saidHas('not yours anymore'));
+  // EXILE-REFUSAL THROTTLE (journey-endgame r9, 2026-10-13): the pantry was
+  // already refused above, so the repeat refusal is the short line — still
+  // narrated, never silent.
+  ok('meal blocked says why (short on repeat)', saidHas('closed to you'));
   Game.state.scholar.exiled = false;
   said.length = 0;
   Game.takeFromPantry(0);

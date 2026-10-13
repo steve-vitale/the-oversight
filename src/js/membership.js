@@ -215,6 +215,9 @@
       try {
         s.codexCut = false;
         s.exiled = false; // you're somewhere new now — the exile is over for you
+        // EXILE-REFUSAL THROTTLE (journey-endgame r9): a future exile is a
+        // new episode — re-arm the full refusal line.
+        if (this.state) delete this.state._exileRefusalSaid;
       } catch (e) {}
       // NOTE: we do NOT delete v.severed[id]. The old village still considers
       // you cut off. That's their record, not yours. If you return, the trust
@@ -959,7 +962,21 @@
     var what = place || 'pantry';
     G[fnName] = function () {
       if (this.state.scholar && this.state.scholar.exiled) {
-        this.say('The ' + what + ' is not yours anymore. Exile means exile — membership had no check-ins, but it had exactly one way to lose it.');
+        // EXILE-REFUSAL THROTTLE (journey-endgame r9, 2026-10-13): the full
+        // dramatic line reads ONCE per exile episode per place; repeats get
+        // the short refusal. Measured: a policy retrying the pantry printed
+        // the same story beat ~81x/day for 20 days (~1,600 identical lines).
+        // Every refusal still narrates (no silent actions) — just briefly.
+        // The flag clears on rejoin (rejoinMembership) and on fresh exile
+        // (exilePlayer wrap below), so a new episode re-arms the full line.
+        var st = this.state || {};
+        st._exileRefusalSaid = st._exileRefusalSaid || {};
+        if (st._exileRefusalSaid[what]) {
+          this.say('The ' + what + ' is closed to you.');
+        } else {
+          st._exileRefusalSaid[what] = true;
+          this.say('The ' + what + ' is not yours anymore. Exile means exile — membership had no check-ins, but it had exactly one way to lose it.');
+        }
         return null;
       }
       return _fn.apply(this, arguments);
@@ -976,6 +993,9 @@
   G.exilePlayer = function (how) {
     var r = _exilePlayer ? _exilePlayer.call(this, how) : undefined;
     try {
+      // EXILE-REFUSAL THROTTLE (journey-endgame r9): fresh exile, fresh
+      // episode — the first pantry/stash refusal re-arms the full line.
+      if (this.state) delete this.state._exileRefusalSaid;
       this.severMembership(this.villagerId, how);
       this.say('The pantry is closed to you. The book stays behind. To Haven, you are not one of ours anymore. Membership asked nothing — no presence, no check-ins. Exile is the one way to lose it.');
       // DRIFTER BREAK-IT 2026-10-10: a mustered war party answers to its
