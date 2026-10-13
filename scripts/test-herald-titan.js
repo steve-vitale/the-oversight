@@ -57,7 +57,9 @@ check('herald wave is 4', hdef && hdef.wave === 4);
 const ndef = Game.titanDef('nielsen');
 check('nielsen minAllies is 12', ndef && ndef.minAllies === 12);
 const fdef = Game.titanDef('finale');
-check('finale minAllies is 15', fdef && fdef.minAllies === 15);
+// STALE-ASSERT FIX (2026-10-13): canon is 20 (titans.json: "20 blades to start
+// (the largest army in the game)"; test-finale-epic.js asserts 20). Was 15.
+check('finale minAllies is 20', fdef && fdef.minAllies === 20);
 
 // (c) Herald monster data
 const hmon = (Game.data.monsters || []).find(m => m.id === 'herald');

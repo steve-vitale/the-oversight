@@ -21,6 +21,8 @@
 //   - tbRoundWrap(f) (shared round wrap: order re-sort, ROUND call, belltoad chorus arrivals — sync + stepped-async)
 //   - tbAfterPlayerAction()
 //   - tbPlayerFlip(targetKey) (speedbump turtle: strength-check flip — 3 turns armor 0, no snap, no bunker; fail eats a snap)
+//   - tbPlayerRally() (coalition verb: regroup on the player, hold the line (rallied), focus-fire (coordKey); 1/fight)
+//   - tbPlayerWarCry() (coalition verb: shock foes (courage/stun), awe allies (rallyBuff +4); titans don't flinch but mark the shouter; 1/fight)
 //   - tbMonsterReach(m) -> tiles (honest striking distance of a monster's attack; disengage gate)
 //   - tbBarrierExit(dx, dy) (barrier flee, no coin flip — the chase plays out on the grid; per-monster persistence via chasePersistence, speed sets distance, the relentless hushwolf ends only at Haven or by kill)
 //   - chasePersistence(mdef) -> barriers a chaser crosses before giving up
@@ -16800,7 +16802,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     isEngaged(vid) {
       const v = this.state.village;
-      return v.engaged && (v.engaged[vid] || 0) > 0;
+      if (v.engaged && (v.engaged[vid] || 0) > 0) return true;
+      // TITAN-COMMITTED (2026-10-13): marched with the muster reads as
+      // engaged — out of the workforce, out of the loan/conversation pools,
+      // until the commitment releases (victory/defeat). One choke point.
+      return !!(v.titanCommitted && v.titanCommitted[vid]);
     },
     // socialTick: every substantive social move costs 2 ticks (a real conversation).
     // Marks the NPC engaged so batch turns don't wander them off mid-talk.
@@ -30741,7 +30747,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // WORLD TAKES ITS TURN (Steve 2026-10-05): monsters and villagers
         // get a visible turn banner. Things shouldn't spontaneously manifest —
         // you should FEEL the world acting.
-        if (c.kind === 'villager') {
+        // ALLIES ARE VILLAGERS (2026-10-13): kind 'ally' (titan coalition
+        // faces, party allies) takes the villager turn — they are people,
+        // not monsters. (Before: tbMonsterTurn read m.mdef.fleeAt on an
+        // ally with no mdef and threw, killing the whole turn loop the
+        // moment an ally acted.)
+        if (c.kind === 'villager' || c.kind === 'ally') {
           this.sysSay(`${c.name}'s turn`);
           this.tbVillagerTurn(c);
         } else {
@@ -30818,13 +30829,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         // Monster's turn: highlight, act, pause for drama
         f.actingKey = key;
+        // ALLIES ARE VILLAGERS (2026-10-13): kind 'ally'/'villager' take the
+        // villager turn here too. (Before: everything non-player fell into
+        // tbMonsterTurn, which read m.mdef.fleeAt on a mdef-less fighter and
+        // threw — the try/catch below swallowed it, so villager and ally
+        // turns were silently SKIPPED in browser combat. The node sync path
+        // never had this bug, which is why sims never caught it.)
+        const _isPeople = c.kind === 'villager' || c.kind === 'ally';
         try {
           // Record start position for movement trail
           c._turnStartMx = c.mx; c._turnStartMy = c.my;
           if (typeof window !== 'undefined')
             window.dispatchEvent(new CustomEvent('tb-turn', {
               detail: {
-                phase: 'monster', key,
+                phase: _isPeople ? 'villager' : 'monster', key,
                 name: c.name || 'Monster',
                 speed: c.speed || 3,
                 // Turn order position for "X acts next" display
@@ -30833,7 +30851,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               }
             }));
         } catch (e) {}
-        try { this.tbMonsterTurn(c); } catch (e) {}
+        try {
+          if (_isPeople) { this.sysSay(`${c.name}'s turn`); this.tbVillagerTurn(c); }
+          else this.tbMonsterTurn(c);
+        } catch (e) {}
         if (this.tbEndCheck()) { f.actingKey = null; f.asyncRunning = false; return; }
         setTimeout(() => { this.tbAdvanceOneAsync(gen); }, 550);
         return;
@@ -31134,9 +31155,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let final = Math.max(0, Math.round(dmg));
       // MULTI-MOVE RALLY (2026-10-12): union_rep's Solidarity Speech — allied
       // monsters +4 damage while the buff lasts. Source-keyed, honest.
+      // WAR CRY (2026-10-13): our side's emboldened get the same +4 — the
+      // rallyBuff convention now covers kind 'ally'/'villager' too. (The
+      // rep's speech still only SETS it on monsters; the war cry only sets
+      // it on our side. The hook just honors the flag wherever it lives.)
       try {
         const src = sourceKey ? this.tbFighter(sourceKey) : null;
-        if (src && src.kind === 'monster' && (src.rallyBuff || 0) > 0 && final > 0) {
+        if (src && (src.kind === 'monster' || src.kind === 'ally' || src.kind === 'villager') && (src.rallyBuff || 0) > 0 && final > 0) {
           final += 4;
         }
       } catch (e) {}
@@ -31260,7 +31285,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // EQUIPMENT (Steve 2026-10-06): villagers' worn armor absorbs too.
       // HONESTY (break-it combat r6 2026-10-09): same class as the player
       // block — state the post-modifier absorbed number, not the raw input.
-      if (t.kind === 'villager' && (t.varmor || 0) > 0) {
+      // ALLIES (2026-10-13): titan-outfitted forces carry real varmor —
+      // "what it bought is real" — so kind 'ally' absorbs here too.
+      if ((t.kind === 'villager' || t.kind === 'ally') && (t.varmor || 0) > 0) {
         const prot = t.varmor;
         // ARMOR (Steve 2026-10-09): same diminishing-returns curve as the
         // player block — no immunity cliff. Same pierce hook.
@@ -31280,7 +31307,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // combat brace like the player does — once per fight, the first hit
       // after they've been hurt is reduced 60% (same number as the
       // player's brace, reactive here because there's no turn to spend).
-      if (t.kind === 'villager' && t.villagerId && !t._unbreakableBraced && final > 0 && t.hp < t.maxHp) {
+      // ALLIES (2026-10-13): kind 'ally' included — npcHasAbility is safe
+      // for foreign ids (returns false); haven blades can hold the trait.
+      if ((t.kind === 'villager' || t.kind === 'ally') && t.villagerId && !t._unbreakableBraced && final > 0 && t.hp < t.maxHp) {
         try {
           if (this.npcHasAbility && this.npcHasAbility(t.villagerId, 'unbreakable')) {
             t._unbreakableBraced = true;
@@ -31413,7 +31442,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // HOPELESS-FLIGHT LEDGER (structural-combat 2026-10-10): per-fighter
       // damage-taken ledger for the tactical hopeless read
       // (tbVillagerHopeless). Post-armor, post-brace — what actually landed.
-      if (t.kind === 'villager' && final > 0) t._taken = (t._taken || 0) + final;
+      // ALLIES (2026-10-13): kind 'ally' tracks too — their hopeless read
+      // (and the rally that suppresses it) needs the same trajectory.
+      if ((t.kind === 'villager' || t.kind === 'ally') && final > 0) t._taken = (t._taken || 0) + final;
       if (t.kind === 'player') {
         this.state.scholar.health = Math.max(0, t.hp);
         // TRIAL DEED LEDGER (longsim abilities r4 2026-10-12): per-fight
@@ -31528,6 +31559,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (t.kind === 'player') this.say('You go down.');
         else if (t.kind === 'villager') { this.say(`☠ ${t.name} falls.`); this.tbVillagerFalls(t);
           try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {} }
+        else if (t.kind === 'ally') {
+          // ALLIED FACE FALLS (2026-10-13): person-honoring, never the
+          // monster branch's loot glint. Haven's own go through
+          // tbVillagerFalls (off Haven's roster, into the fallen); foreign
+          // faces are marked dead in their home roster by titanResolveFight
+          // at tbEnd (trust −10, grief aloud). registerDeath kind 'person'
+          // keeps them in the Callback's face pool — they were people.
+          this.say(`☠ ${t.name} falls.`);
+          if (t.villageId === 'haven' && t.villagerId) this.tbVillagerFalls(t);
+          try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
+        }
         else if (t.kind === 'hostile') {
           // KILLING A PERSON: the text depends on who they were and why.
           // Self-defense, a monster in human skin, an innocent — different deaths.
@@ -31892,6 +31934,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const f = this.tbfight;
       // STATUS EFFECTS (Steve 2026-10-07): per-turn ticks (bleed/burn), expiry.
       if (this.seTickFighter(v)) return;
+      // RALLY / WAR-CRY STATE (2026-10-13): the coalition verbs tick here,
+      // mirroring tbMonsterTurn's own buff ticks.
+      //   rallyBuff: emboldened (+4 damage while >0 — the union_rep
+      //     convention, honored for our side by tbDamage's hook).
+      //   rallied: holding the line — the hopeless-flee check is suppressed
+      //     while it lasts. The honest read resumes when it wears off.
+      //   coordKey/coordRounds: Rally's focus-fire mark (villagerDecide's
+      //     prefer param). Clears when the rounds run out.
+      if ((v.rallyBuff || 0) > 0) v.rallyBuff -= 1;
+      if ((v.rallied || 0) > 0) v.rallied -= 1;
+      if ((v.coordRounds || 0) > 0) { v.coordRounds -= 1; if (v.coordRounds <= 0) v.coordKey = null; }
       // LURED (party tactics 2026-10-10): the Static's call has them — they
       // walk toward the crying and do nothing else. Handled here, before the
       // normal AI. Returns true when the turn was consumed by the lure.
@@ -31916,7 +31969,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // starts) and the fight-level noFlee flag. A sealed fight is sealed
       // no matter which path sealed it.
       const sealed = !!((this.state || {}).arenaContest) || !!((this.tbfight || {}).noFlee);
-      if (!sealed && this.tbVillagerHopeless(v)) {
+      // RALLIED (2026-10-13): the speech holds — no fleeing while it lasts.
+      // The already-fled stay fled; a speech can't call back the gone.
+      if (!sealed && !(v.rallied > 0) && this.tbVillagerHopeless(v)) {
         const hpFrac = (v.hp || 0) / Math.max(1, v.maxHp || 1);
         const fleeLine = v.ai === 'brave' ? 0.4 : v.ai === 'helpful' ? 0.7 : 0.5;
         let holdForPlayer = false;
@@ -31937,9 +31992,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // body, not just the top-left tile — a 2x2 stepping E/S/SE used to be
       // "blocked" by its own body, paralyzing those directions.
       const blocked = (x, y) => !this.tbCanOccupy(v, x, y);
-      const dec = S.combat.villagerDecide(v, f.fighters, blocked, danger);
+      // COORDINATE (2026-10-13): Rally marks a focus target — the ally AI
+      // prefers it via villagerDecide's prefer param.
+      const prefer = (v.coordRounds > 0 && v.coordKey) ? v.coordKey : null;
+      const dec = S.combat.villagerDecide(v, f.fighters, blocked, danger, prefer);
       for (const [nx, ny] of dec.moves) { v.mx = nx; v.my = ny; }
-      if (dec.moves.length) this.tbVillagerSyncPos(v);
+      // kind 'ally' never syncs village positions: titan fights happen far
+      // from Haven, and foreign allies aren't on our positions map at all.
+      if (dec.moves.length && v.kind === 'villager') this.tbVillagerSyncPos(v);
       const a = dec.action;
       if (a.type === 'strike' || a.type === 'harry') {
         const t = this.tbFighter(a.target);
@@ -33207,6 +33267,128 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!n) this.say('Nothing out there cares about noise. The dark swallows it.');
       else this.tbStyle(10, 'broke the chorus with raw noise');
       this.tbRefreshTelegraphUI();
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
+    // RALLY THE COALITION (2026-10-13): the player-facing rally verb for
+    // fights you don't fight alone (titan musters, party fights — any fight
+    // with living allies). Once per fight, costs the action. Three real
+    // effects, said aloud — feel over math:
+    //   REGROUP — every living ally steps toward you (up to their speed),
+    //     forming on your position. Real pathing: blocked cells and
+    //     telegraph danger are respected, like the villager AI's own moves.
+    //   REGAIN MORALE — stun clears; rallied=3: they HOLD THE LINE (the
+    //     hopeless-flee check is suppressed) for a couple of rounds. The
+    //     already-fled stay fled — a speech can't call back the gone, and
+    //     the honest read resumes when it wears off.
+    //   COORDINATE — allies focus the foe nearest you for a couple of rounds
+    //     (coordKey, honored by villagerDecide's prefer param).
+    tbPlayerRally() {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      const allies = f.fighters.filter(x => (x.kind === 'ally' || x.kind === 'villager') && x.alive && !x.fled && x.key !== 'p');
+      if (!allies.length) { this.say('No one to rally — you fight alone.'); return false; }
+      if (f.rallyUsed) { this.say('Already rallied this fight — the speech is spent.'); return false; }
+      f.rallyUsed = true;
+      p.acted = true;
+      const SC = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+      let gathered = 0;
+      for (const a of allies) {
+        if ((a.stunned || 0) > 0) a.stunned = 0;
+        a.rallied = 3;
+        try {
+          const danger = this.tbDangerCells();
+          const blocked = (x, y) => !this.tbCanOccupy(a, x, y);
+          for (let i = 0; i < (a.speed || 3); i++) {
+            const s = SC.combat.stepToward(a.mx, a.my, p.mx, p.my, blocked, danger);
+            if (!s) break;
+            a.mx = s.x; a.my = s.y; gathered++;
+          }
+        } catch (e) {}
+      }
+      let foeName = null;
+      try {
+        const foe = SC.combat ? SC.combat.nearestEnemy(f.fighters, p) : null;
+        if (foe && foe.f) {
+          for (const a of allies) { a.coordKey = foe.f.key; a.coordRounds = 3; }
+          foeName = (foe.f.kind === 'monster' && foe.f.mdef && this.monsterDisplayName)
+            ? this.monsterDisplayName(foe.f.mdef.id) : foe.f.name;
+        }
+      } catch (e) {}
+      this.say(`You plant your feet and ROAR the line back together — "ON ME! ON ME!"` +
+        (gathered ? ` Boots pound — the line closes around you.` : ``) +
+        ` Fear drains out of their faces.` +
+        (foeName ? ` "${foeName.toUpperCase()} — TOGETHER!" They turn as one.` : ``) +
+        ` (Rally — regrouped, holding, coordinated.)`);
+      try { this.audioEvent('shout'); } catch (e) {}
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
+    // WAR CRY (2026-10-13): shock AND awe in one breath. Once per fight,
+    // costs the action. Available in any fight with allies beside you — it's
+    // a human verb (leadership), not a System ability; but if you HAVE the
+    // war_cry ability, the cry catches and they take it up (stronger).
+    //   SHOCK (enemies): courage check — failures hesitate (stun 1, the
+    //     bellow convention, worse for them when your reputation precedes
+    //     you). Titans don't flinch (fearless) — but they HEAR you.
+    //   AWE (allies): emboldened — rallyBuff=3 (+4 damage a couple rounds,
+    //     the union_rep convention honored for our side) and stun clears.
+    //   THE COST: leading the cry paints a target on you — the nearest foe
+    //     marks YOU next (encNoticeFighter). Said aloud. Feel over math.
+    tbPlayerWarCry() {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      const allies = f.fighters.filter(x => (x.kind === 'ally' || x.kind === 'villager') && x.alive && !x.fled && x.key !== 'p');
+      if (!allies.length) { this.say('No one beside you to cry with — the dark swallows it.'); return false; }
+      if (f.warCryUsed) { this.say('The cry is spent — your throat is raw.'); return false; }
+      f.warCryUsed = true;
+      p.acted = true;
+      const SC = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+      const gifted = !!(this.hasAbility && this.hasAbility('war_cry'));
+      let morale = 1;
+      try { morale = this.modTarget('combat.enemy_morale', 1, {}); } catch (e) {}
+      const failChance = Math.min(0.95, (gifted ? 0.75 : 0.6) / morale);
+      let staggered = 0, titanHeard = false;
+      for (const m of f.fighters) {
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        const mid = (m.mdef || {}).id;
+        const isT = !!(mid && this.isTitan && this.isTitan(mid));
+        if (isT) titanHeard = true;
+        const fearless = m.fearless || (m.mdef && m.mdef.fearless) || isT;
+        if (fearless) continue;
+        if (Math.random() < failChance) {
+          try {
+            if (this.applyStatus) this.applyStatus(m, 'stun', { turns: 1, source: 'War Cry' });
+            else m.stunned = (m.stunned || 0) + 1;
+          } catch (e) { try { m.stunned = (m.stunned || 0) + 1; } catch (e2) {} }
+          staggered++;
+        }
+      }
+      for (const a of allies) {
+        a.rallyBuff = 3;
+        if ((a.stunned || 0) > 0) a.stunned = 0;
+      }
+      // THEY HEARD YOU: the nearest foe marks the shouter. Leading the cry
+      // paints a target — the line in the say text is the honest price.
+      try {
+        const foe = SC.combat ? SC.combat.nearestEnemy(f.fighters, p) : null;
+        if (foe && foe.f && this.encNoticeFighter) this.encNoticeFighter(foe.f, 'p', true);
+      } catch (e) {}
+      this.say(`You throw your head back and CRY — not words, a promise with teeth.` +
+        (staggered ? ` ${staggered} of them flinch mid-step.` : ` Nothing flinches — but everything hears.`) +
+        (titanHeard ? ` The titan does not flinch. It turns its head. It heard YOU.` : ``) +
+        (gifted ? ` The cry catches — they take it up, and their blades come down harder.` : ` Behind you, the line straightens — their blades come down harder.`) +
+        ` (War cry — foes staggered, allies emboldened. They know where you stand now.)`);
+      try { this.audioEvent('shout'); } catch (e) {}
+      // PRACTICE DEEDS: same bar as the shout — the cry that moved something
+      // with teeth is the practice; the wasted-breath kind teaches nothing.
+      try { if (staggered > 0 && this.notePracticeDeed) this.notePracticeDeed('war_cry', 1); } catch (e) {}
       this.tbAfterPlayerAction();
       return true;
     },

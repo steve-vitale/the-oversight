@@ -1329,8 +1329,17 @@
       const acts = Game.phoenixLinkActions ? Game.phoenixLinkActions() : [];
       phoenixBtns = acts.map(a => `<button class="self-btn" data-self="${a.id}" title="${esc(a.hint || '')}">${esc(a.label)}</button>`).join('');
     } catch (e) {}
-    return (exileBtns || caseBtn || sysPantryBtn || phoenixBtns)
-      ? `<div class="selfbar"><span class="ctx-label">you:</span>${exileBtns}${caseBtn}${sysPantryBtn}${phoenixBtns}</div>`
+    // TITAN CLASS (2026-10-13): a located titan puts war council, the call,
+    // and Haven's own commitment here — camp verbs, always in reach. The
+    // titan system was fully built but unreachable from the UI; this is the
+    // player-facing surface (Game.titanSelfActions/titanSelfDo, titans.js).
+    let titanBtns = '';
+    try {
+      const acts = Game.titanSelfActions ? Game.titanSelfActions() : [];
+      titanBtns = acts.map(a => `<button class="self-btn" data-self="${a.id}" title="${esc(a.hint || '')}">${esc(a.label)}</button>`).join('');
+    } catch (e) {}
+    return (exileBtns || caseBtn || sysPantryBtn || phoenixBtns || titanBtns)
+      ? `<div class="selfbar"><span class="ctx-label">you:</span>${exileBtns}${caseBtn}${sysPantryBtn}${phoenixBtns}${titanBtns}</div>`
       : '';
   }
 
@@ -1347,6 +1356,7 @@
         else if (a === 'syspantry') { pantrySheet(); }
         else if (a.indexOf('exile:') === 0) { Game.exileSelfDo(a.slice(6)); rerender(); }
         else if (a.indexOf('phoenix:') === 0) { Game.phoenixLinkDo(a); rerender(); }
+        else if (a.indexOf('titan:') === 0) { Game.titanSelfDo(a); rerender(); }
       };
     });
   }
@@ -16518,6 +16528,10 @@
     const flippable = p ? mons.some(m => Game.turtleIs && Game.turtleIs(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1) : false;
     const yourTurn = Game.tbIsPlayerTurn();
     if (!yourTurn || !p) return '';
+    // COALITION VERBS (2026-10-13): rally + war cry surface only when living
+    // allies stand with you (titan musters, party fights). One use each per
+    // fight; both cost the action. (Game.tbPlayerRally/tbPlayerWarCry.)
+    const hasAllies = tf.fighters.some(x => (x.kind === 'ally' || x.kind === 'villager') && x.alive && !x.fled);
     // INTEGRATED (Steve 2026-10-05): combat actions use the SAME selfbar
     // styling as the normal you: bar. No separate combat UI block — the
     // actions live where actions always live.
@@ -16553,6 +16567,8 @@
       ${(Game.sigCombatButtonsHTML ? Game.sigCombatButtonsHTML(mons, p) : '')}
       ${Game.sigW3cCombatButtons ? Game.sigW3cCombatButtons(mons, p) : ''}
       <button class="self-btn" id="c-shout" ${p.acted ? 'disabled' : ''} title="Bellow — scatter noise-fearing monsters (2/fight)">📢 Shout</button>
+      ${hasAllies ? `<button class="self-btn" id="c-rally" ${(p.acted || tf.rallyUsed) ? 'disabled' : ''} title="Rally the coalition — regroup on you, hold the line, focus your target (1/fight)">📢 Rally</button>` : ''}
+      ${hasAllies ? `<button class="self-btn" id="c-warcry" ${(p.acted || tf.warCryUsed) ? 'disabled' : ''} title="War cry — stagger foes, embolden allies. They'll hear you. (1/fight)">🗣️ War cry</button>` : ''}
       <button class="self-btn" id="c-offer" ${p.acted ? 'disabled' : ''} title="Offer food — buy off the curious thief">🍖 Offer</button>
       ${Game.sigW3bCombatButtons ? Game.sigW3bCombatButtons() : ''}
       ${Game.sigW4CombatButtons ? Game.sigW4CombatButtons() : ''}
@@ -16660,6 +16676,8 @@
     on('c-study', () => { Game.tbPlayerStudy(); rerender(); });
     on('c-scream', () => { Game.useAbility('scream_cheese', 'scream'); rerender(); });
     on('c-shout', () => { Game.tbPlayerShout(); rerender(); });
+    on('c-rally', () => { Game.tbPlayerRally(); rerender(); });
+    on('c-warcry', () => { Game.tbPlayerWarCry(); rerender(); });
     on('c-well', () => { Game.tbPlayerGravityWell(); rerender(); });
     on('c-flip', () => {
       const tf = Game.tbfight;

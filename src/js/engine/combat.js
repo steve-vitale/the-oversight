@@ -31,7 +31,9 @@
 
   // turnOrder: speed desc. Ties: player first, then villagers, then monsters.
   function turnOrder(fighters) {
-    const rank = { player: 0, villager: 1, monster: 2 };
+    // ALLY RANK (2026-10-13): kind 'ally' (titan coalition faces) sorts with
+    // villagers. (Before: undefined rank -> NaN sort.)
+    const rank = { player: 0, villager: 1, ally: 1, monster: 2 };
     return fighters
       .filter(f => f.alive && !f.fled)
       .slice()
@@ -156,10 +158,17 @@
 
   // villager AI: personality -> behavior. Returns {moves:[[x,y]..], action}.
   // action: {type:'strike', target} | {type:'harry', target} | {type:'help', target} | {type:'flee'} | {type:'wait'}
-  function villagerDecide(f, fighters, blocked, dangerCells) {
+  // preferKey (2026-10-13): Rally's focus-fire mark — when set to a living
+  // foe's key, the brave AI closes on and strikes THAT foe instead of the
+  // nearest. Optional; null preserves the old behavior exactly.
+  function villagerDecide(f, fighters, blocked, dangerCells, preferKey) {
     const moves = [];
     let fx = f.mx, fy = f.my;
-    const foe = nearestEnemy(fighters, f);
+    let foe = nearestEnemy(fighters, f);
+    if (preferKey) {
+      const pf = fighters.find(o => o.key === preferKey && o.alive && !o.fled && isFoe(f, o));
+      if (pf) foe = { f: pf, d: cheb(fx, fy, pf.mx, pf.my) };
+    }
     const moveTo = (tx, ty, toward) => {
       for (let i = 0; i < f.speed; i++) {
         const s = toward ? stepToward(fx, fy, tx, ty, blocked, dangerCells)

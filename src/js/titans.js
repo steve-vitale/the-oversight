@@ -6,6 +6,14 @@
 //   - titanDawnTick() -> omen staging, escalation, muster upkeep, turn tick (called guarded from game.js dawn)
 //   - titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth)
 //   - soundTitanCall(titanId) -> the call to arms; allies answer aloud
+//   - titanCommitOwn(titanId) -> the player commits HAVEN ITSELF: up to 3 named
+//     villagers march with the muster (two-tap confirm). They leave the
+//     workforce (isEngaged covers titanCommitted), eat from the muster upkeep,
+//     count toward the hard gate, fight blow-by-blow as kind 'ally', and can
+//     die (tbVillagerFalls + grief). Released on victory/defeat.
+//   - titanVolunteers() -> available haven villagers by standing (commit pool)
+//   - titanSelfActions() / titanSelfDo(id) -> the player-facing surface: war
+//     council, call, and commit buttons in the camp self bar (app.js)
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
 //   - _titanTest (test hooks: internals exposed for proof tests)
@@ -18,6 +26,7 @@
 //   - fights_are_real: coalition combat is blow-by-blow (kind:'ally' fighters), never RNG tables. (code: titans.js)
 //   - ally_death_costs: a dead ally marks their home roster, costs trust, and the alliance remembers. (code: titans.js)
 //   - the_turn_is_earned: temptation (gear value + visible resources) vs loyalty (trust + opinion). Telegraph via gossip + council. Never random. (code: titans.js)
+//   - commit_own_is_explicit: Haven's blades join only via the player's two-tap titanCommitOwn (never auto-committed by the call). Up to 3, named, said aloud; they leave the workforce (titanCommitted reads as engaged), eat from muster upkeep, count toward the hard gate, and can die. (code: titans.js)
 //   - stolen_gear_is_lost: the loot law holds. No refunds except by force. (code: titans.js)
 //   - odds_are_entertainment: the System's posted odds are wrong on purpose. That's the joke. (code: titans.js)
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
@@ -283,18 +292,181 @@
       answered++;
       Game.say('— ' + nm + ' answers! ' + faces.map(function (f) { return f.name; }).join(' and ') + ' will march. (trust holds — they are counting on you.)');
     });
-    // Haven commits: representative + best-standing volunteer
-    try {
-      var rep = Game._availableRepresentative ? Game._availableRepresentative() : null;
-      if (rep && rep.id) {
-        muster.haven.push(rep.id);
-        var rn = 'Someone';
-        try { rn = String(Game.displayName(rep.id)).split(' ')[0]; } catch (e) {}
-        Game.say(rn + ' steps forward for Haven. The coalition has ' + muster.allies.length + ' allied blades.');
-      }
-    } catch (e) {}
+    // HAVEN'S OWN (2026-10-13): the call no longer auto-commits anyone from
+    // Haven. Committing your own people is the player's verb now —
+    // titanCommitOwn, two taps, said aloud, costly. The muster tracks
+    // muster.haven as [{vid}] (never bare ids).
     try { if (Game.recordMoment) Game.recordMoment('The call went out against ' + def.title + ': ' + answered + ' fires answered.'); } catch (e) {}
     return muster;
+  }
+
+  // ---------- titanCommitOwn: Haven sends its own ----------
+
+  // The commit pool: available Haven villagers, best standing first. Same
+  // availability bar as _availableRepresentative (hierarchy.js): not away,
+  // not traveling with the player, not engaged — and isEngaged covers
+  // titanCommitted, so the already-marched can't volunteer twice.
+  function titanVolunteers() {
+    var out = [];
+    try {
+      var v = Game.state.village || {};
+      var me = Game.villagerId;
+      var withYou = {};
+      try {
+        var tw = Game.travelingWith ? Game.travelingWith() : [];
+        for (var i = 0; i < tw.length; i++) withYou[tw[i]] = 1;
+      } catch (e) {}
+      var nodeAway = {};
+      try { var va = v.away || {}; for (var k in va) nodeAway[k] = 1; } catch (e2) {}
+      (v.roster || []).forEach(function (id) {
+        if (!id || id === me) return;
+        try { if (Game.isMember && !Game.isMember(id)) return; } catch (e) { return; }
+        try { if (Game._isAwayVid && Game._isAwayVid(id)) return; } catch (e) {}
+        if (nodeAway[id] || withYou[id]) return;
+        try { if (Game.isEngaged && Game.isEngaged(id)) return; } catch (e) {}
+        out.push(id);
+      });
+      out.sort(function (a, b) {
+        var sa = 0, sb = 0;
+        try { sa = Game.linkStanding ? Game.linkStanding(a) : 0; } catch (e) {}
+        try { sb = Game.linkStanding ? Game.linkStanding(b) : 0; } catch (e) {}
+        return sb - sa;
+      });
+    } catch (e) {}
+    return out;
+  }
+
+  function titanBladeName(vid) {
+    try {
+      var n = Game.displayName ? Game.displayName(vid) : null;
+      if (n) return String(n).split(' ')[0];
+    } catch (e) {}
+    return 'Someone';
+  }
+
+  function titanHavenBlades(muster) {
+    return (muster && muster.haven) || [];
+  }
+
+  // titanCommitOwn(titanId): the player commits Haven itself to the titan.
+  // Up to 3 named villagers march. Legible (two taps, names said aloud, cost
+  // stated up front), costly (they leave the workforce, eat 1000 kcal/day
+  // each from the muster upkeep, and can die — tbVillagerFalls removes them
+  // from Haven's roster), consequential (they count toward the hard gate and
+  // fight blow-by-blow via titanInjectAllies).
+  function titanCommitOwn(titanId) {
+    var def = titanDefs()[titanId];
+    if (!def) return null;
+    var st = titanState();
+    if (st.slain[titanId]) { Game.say('It is already dead. The committed have nothing left to march against.'); return null; }
+    var o = titanOmen(titanId);
+    if (!o || o.stage < 2) {
+      Game.say('There is nothing located to march against — the sky is quiet. You commit no one into the dark.');
+      return null;
+    }
+    var muster = st.musters[titanId] = st.musters[titanId] || { allies: [], haven: [], day: (Game.state.scholar || {}).day || 0, outfitted: {} };
+    var blades = titanHavenBlades(muster);
+    // hygiene: the dead don't march (roster already dropped them)
+    var v = Game.state.village || {};
+    var roster = v.roster || [];
+    muster.haven = blades = blades.filter(function (h) { return h && roster.indexOf(h.vid) >= 0; });
+    if (blades.length >= 3) {
+      Game.say('Haven\u2019s blades already march — ' + blades.map(function (h) { return titanBladeName(h.vid); }).join(', ') + '. Haven cannot empty itself; the coalition is the many, our part is the few.');
+      return muster;
+    }
+    var have = {};
+    blades.forEach(function (h) { have[h.vid] = 1; });
+    var cands = titanVolunteers().filter(function (id) { return !have[id]; }).slice(0, 3 - blades.length);
+    if (!cands.length) {
+      Game.say('No one is free to march — every able body is away, engaged, or already committed. ' + def.title + ' waits. The coalition will have to be enough.');
+      return null;
+    }
+    var names = cands.map(titanBladeName).join(', ');
+    // TWO TAPS (the attackConfirm idiom): the first tap names the volunteers
+    // and states the cost honestly. The second tap sends them.
+    var pendKey = titanId + ':' + cands.join(',');
+    if (st.pendingCommit !== pendKey) {
+      st.pendingCommit = pendKey;
+      Game.say('\uD83D\uDEE1\uFE0F ' + names + (cands.length === 1 ? ' steps' : ' step') + ' forward. ' +
+        (cands.length === 1 ? 'They will' : 'They will') + ' march with the muster, eat from your stores (1000 kcal/day each), and stand in front of ' + def.title + '. ' +
+        'They can die — Haven does not get them back, and the fire will be quieter. Tap again \u2014 Haven sends its own.');
+      return 'confirm';
+    }
+    st.pendingCommit = null;
+    cands.forEach(function (id) { muster.haven.push({ vid: id }); });
+    v.titanCommitted = v.titanCommitted || {};
+    cands.forEach(function (id) { v.titanCommitted[id] = titanId; });
+    Game.say('\uD83D\uDEE1\uFE0F Haven commits its own: ' + names + ' march' + (cands.length === 1 ? 'es' : '') + ' with the muster. Not loaned. Not asked-for. Ours. The coalition counts ' + (muster.allies.length + muster.haven.length) + ' blades against ' + def.title + ' — it needs ' + def.minAllies + '.');
+    try { if (Game.recordMoment) Game.recordMoment('Haven committed its own blades against ' + def.title + ': ' + names + '.'); } catch (e) {}
+    try { if (Game.ledgerAdd) Game.ledgerAdd('titan', 'commit-own:' + titanId + ':' + cands.length); } catch (e) {}
+    try { if (Game.save) Game.save(); } catch (e) {}
+    return muster;
+  }
+
+  // The player-facing surface (app.js self bar, phoenixLinkActions pattern):
+  // war council, the call, and the commit — camp verbs, never combat verbs.
+  function titanSelfActions() {
+    var acts = [];
+    try {
+      if (Game.tbfight) return acts;
+      var st = titanState();
+      var defs = titanDefs();
+      Object.keys(defs).forEach(function (tid) {
+        if (st.slain[tid]) return;
+        var o = st.omens[tid];
+        if (!o || o.stage < 2) return;
+        var def = defs[tid];
+        acts.push({
+          id: 'titan:council:' + tid,
+          label: '\u2694\uFE0F War council \u2014 ' + def.title,
+          hint: 'Sit the council. Faces, scout intel, the System\u2019s odds (entertainment, not truth).'
+        });
+        var muster = st.musters[tid];
+        var havenN = muster ? titanHavenBlades(muster).length : 0;
+        var alliedN = muster ? (muster.allies || []).length : 0;
+        if (havenN < 3) {
+          var pend = st.pendingCommit && st.pendingCommit.indexOf(tid + ':') === 0;
+          acts.push(pend ? {
+            id: 'titan:commit:' + tid,
+            label: '\uD83D\uDEE1\uFE0F Send them \u2014 tap again',
+            hint: 'Confirm: Haven\u2019s volunteers march. They eat, they bleed, they can die.'
+          } : {
+            id: 'titan:commit:' + tid,
+            label: '\uD83D\uDEE1\uFE0F Commit Haven\u2019s blades',
+            hint: 'Up to 3 of ours march with the muster (' + alliedN + ' allied + ' + havenN + ' ours so far). They eat, they bleed, they can die.'
+          });
+        }
+        if (!alliedN) {
+          acts.push({
+            id: 'titan:call:' + tid,
+            label: '\uD83D\uDCEF Sound the call',
+            hint: 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
+          });
+        }
+      });
+    } catch (e) {}
+    return acts;
+  }
+
+  function titanSelfDo(id) {
+    var m = /^titan:(council|call|commit):(.+)$/.exec(id || '');
+    if (!m) return null;
+    if (m[1] === 'council') return Game.titanWarCouncil(m[2]);
+    if (m[1] === 'call') return Game.soundTitanCall(m[2]);
+    if (m[1] === 'commit') return titanCommitOwn(m[2]);
+    return null;
+  }
+
+  // release the committed: victory, defeat, or the muster breaking. The
+  // survivors come home; the flag clears so the workforce returns.
+  function titanReleaseCommitted(titanId) {
+    try {
+      var v = Game.state.village || {};
+      if (!v.titanCommitted) return;
+      Object.keys(v.titanCommitted).forEach(function (vid) {
+        if (v.titanCommitted[vid] === titanId) delete v.titanCommitted[vid];
+      });
+    } catch (e) {}
   }
 
   // ---------- outfitting: real gear, real costs, real effectiveness ----------
@@ -469,8 +641,9 @@
       if (!muster || st.slain[titanId] || !muster.allies.length) return;
       if (muster.lastUpkeep === day) return;
       muster.lastUpkeep = day;
-      // An army marches on its stomach: 1000 kcal/day per allied blade.
-      var need = muster.allies.length * 1000;
+      // An army marches on its stomach: 1000 kcal/day per blade — allies AND
+      // Haven's committed (2026-10-13). Your own people eat from your stores too.
+      var need = ((muster.allies || []).length + titanHavenBlades(muster).length) * 1000;
       var got = 0;
       try { got = Game.playerPackSpend ? Game.playerPackSpend(need) : 0; } catch (e) {}
       if (got < need) {
@@ -493,7 +666,10 @@
     var def = titanDefs()[titanId];
     if (!muster || !def) return false;
     var turned = muster.turned ? Object.keys(muster.turned).length : 0;
-    var alive = (muster.allies || []).length;
+    // HAVEN COUNTS (2026-10-13): committed Haven blades are allied blades —
+    // the player's own commitment moves the hard gate. The coalition is
+    // still mostly the many (cap 3 ours), never a solo with extra steps.
+    var alive = (muster.allies || []).length + titanHavenBlades(muster).length;
     return alive >= def.minAllies;
   }
 
@@ -605,21 +781,44 @@
     // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 — spread allies across the full grid.
     var _gmax = (Game.tbGridMax ? Game.tbGridMax() : 8);
     var _gsize = _gmax + 1;
-    muster.allies.forEach(function (a, i) {
-      var nx = Math.max(0, Math.min(_gmax, px - 3 + (i % 4))), ny = Math.max(0, Math.min(_gmax, py + 1 + Math.floor(i / 4)));
+    var spot = 0;
+    function placeBlade(o) {
+      var nx = Math.max(0, Math.min(_gmax, px - 3 + (spot % 4))), ny = Math.max(0, Math.min(_gmax, py + 1 + Math.floor(spot / 4)));
       var k = 0;
       while (taken[nx + ',' + ny] && k < 40) { nx = (nx + 1) % _gsize; if (nx === 0) ny = (ny + 1) % _gsize; k++; }
       taken[nx + ',' + ny] = 1;
-      fighters.push({
+      o.mx = nx; o.my = ny;
+      fighters.push(o);
+      spot++;
+    }
+    muster.allies.forEach(function (a) {
+      placeBlade({
         key: 'a_' + a.vid, kind: 'ally', villagerId: a.vid, villageId: a.villageId,
         name: a.name, emoji: '🛡️',
-        hp: a.hp || 100, maxHp: 100, speed: (Game.villagerSpeed ? Game.villagerSpeed(a.vid) : 3), mx: nx, my: ny,
+        hp: a.hp || 100, maxHp: 100, speed: (Game.villagerSpeed ? Game.villagerSpeed(a.vid) : 3), mx: 4, my: 4,
         alive: true, fled: false, ai: 'brave',
         wbonus: a.wbonus || 0, varmor: a.varmor || 0,
       });
     });
+    // HAVEN'S OWN (2026-10-13): committed blades fight too — this was the
+    // vestige (muster.haven tracked, never injected). Villagers, not heroes:
+    // brave AI, modest swing. Their deaths go through tbVillagerFalls.
+    // SPEED NOTE: flat speed 3 (the villager tactical speed); real per-
+    // villager combat speed (blitz-combatstats) had not landed in this tree.
+    var havenNames = [];
+    titanHavenBlades(muster).forEach(function (h) {
+      var nm = titanBladeName(h.vid);
+      havenNames.push(nm);
+      placeBlade({
+        key: 'a_h_' + h.vid, kind: 'ally', villagerId: h.vid, villageId: 'haven',
+        name: nm, emoji: '🛡️',
+        hp: 100, maxHp: 100, speed: 3, mx: 4, my: 4,
+        alive: true, fled: false, ai: 'brave',
+        wbonus: 3, varmor: 0,
+      });
+    });
     var names = muster.allies.map(function (a) { return a.name; }).join(', ');
-    Game.say('🛡️ The coalition stands with you: ' + names + '. Faces, not units. Blow by blow.');
+    Game.say('🛡️ The coalition stands with you: ' + names + (havenNames.length ? ' — and Haven\u2019s own: ' + havenNames.join(', ') : '') + '. Faces, not units. Blow by blow.');
   }
 
   function titanResolveFight(snap) {
@@ -647,10 +846,22 @@
         }
         if (!seenVillages[a.villageId]) {
           seenVillages[a.villageId] = 1;
-          Game.say('🕯️ ' + a.name + ' of ' + ((ov && ov.name) || 'an allied fire') + ' did not get up. They were a face at your fire. The alliance remembers.');
+          var homeName = (ov && ov.name) || (a.villageId === 'haven' ? 'Haven' : 'an allied fire');
+          Game.say('🕯️ ' + a.name + ' of ' + homeName + ' did not get up. They were a face at your fire. The alliance remembers.');
         }
       } catch (e) {}
     });
+    // HAVEN'S OWN dead (2026-10-13): tbVillagerFalls already took them off
+    // Haven's roster mid-fight. The fire feels it: cheer drops, said aloud.
+    var havenDead = dead.filter(function (a) { return a.villageId === 'haven'; }).length;
+    if (havenDead > 0) {
+      try {
+        var vv = Game.state.village || {};
+        vv.cheer = Math.max(0, (vv.cheer || 0) - 2 * havenDead);
+        Game.say('🕯️ The fire is quieter tonight — Haven sent its own, and ' + (havenDead === 1 ? 'one is' : havenDead + ' are') + ' not coming home.');
+      } catch (e) {}
+    }
+    titanReleaseCommitted(snap.titan);
     if (snap.result === 'won') {
       titanVictory(snap.titan, def);
     } else {
@@ -709,6 +920,10 @@
     titanDawnTick: titanDawnTick,
     titanWarCouncil: titanWarCouncil,
     soundTitanCall: soundTitanCall,
+    titanCommitOwn: titanCommitOwn,
+    titanVolunteers: titanVolunteers,
+    titanSelfActions: titanSelfActions,
+    titanSelfDo: titanSelfDo,
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
@@ -732,6 +947,9 @@
     titanOmen: titanOmen,
     titanState: titanState,
     titanTemptation: titanTemptation,
+    titanCommitOwn: titanCommitOwn,
+    titanVolunteers: titanVolunteers,
+    titanReleaseCommitted: titanReleaseCommitted,
   };
 
   // wraps must apply after game.js defines the originals
