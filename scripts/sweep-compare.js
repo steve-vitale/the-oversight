@@ -199,6 +199,38 @@ function printTable(report) {
   console.log('');
 }
 
+// fleeExitSummary(fights, ctx) — flee EXIT telemetry (scale-wall r17 arm 3,
+// tooling only). The policy ctx.fled counter is per-TICK: every flee()
+// invocation increments it — edge walks, held ground, no-op barrier pushes,
+// real exits, all of them. It counts ATTEMPTS, not exits. This summarizes
+// actual fight EXITS from per-fight audit records (attachDmgAudit or any
+// records carrying `result`): a genuine disengage exit is a fight closed
+// with result 'fled' — door flee, barrier push with no chasers / into Haven
+// / all chasers gave up at the barrier, or the tbEndCheck p.fled path
+// (game.js). 'dissolved' (death mid-barrier-crossing, or a fight abandoned
+// without tbEnd) is NOT an exit: nobody walked out of it.
+//
+// Returns { attempts, exits, dissolved, nFights, byResult, exitRate }.
+// Read attempts vs exits together: 5410 attempts / 0 exits (leadcourt s22,
+// scale-wall r16) is the signature of a flee that never exits. Wall-suite
+// drivers with per-fight records should report both every run.
+function fleeExitSummary(fights, ctx) {
+  const arr = Array.isArray(fights) ? fights : [];
+  const byResult = {};
+  let exits = 0, dissolved = 0;
+  for (const f of arr) {
+    const r = String((f && f.result) || 'unknown');
+    byResult[r] = (byResult[r] || 0) + 1;
+    if (r === 'fled') exits += 1;
+    else if (r === 'dissolved') dissolved += 1;
+  }
+  const attempts = (ctx && Number.isFinite(ctx.fled)) ? ctx.fled : 0;
+  return {
+    attempts, exits, dissolved, nFights: arr.length, byResult,
+    exitRate: attempts > 0 ? +(exits / attempts).toFixed(4) : null,
+  };
+}
+
 if (require.main === module) {
   (async () => {
     const report = await runComparison({});
@@ -208,4 +240,4 @@ if (require.main === module) {
   })().catch(e => { console.error('FATAL', e); process.exit(1); });
 }
 
-module.exports = { runComparison, printTable, POLICY_REGISTRY, stdSnapshot };
+module.exports = { runComparison, printTable, POLICY_REGISTRY, stdSnapshot, fleeExitSummary };

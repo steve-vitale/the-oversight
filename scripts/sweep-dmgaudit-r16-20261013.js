@@ -16,7 +16,7 @@ const { belongseek } = require('./policies/belongseek');
 const { leadcourt } = require('./policies/leadcourt');
 const { attachScale, scaleRow, finalizeScale } = require('./scale-repro-20261013');
 const { attachDmgAudit } = require('./dmg-audit-20261013');
-const { stdSnapshot } = require('./sweep-compare');
+const { stdSnapshot, fleeExitSummary } = require('./sweep-compare');
 
 const POLICY_REGISTRY = { belongseek, leadcourt };
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
@@ -79,6 +79,10 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
       const c = ctxHolder.ctx || {};
       const fights = audit.fights;
       const w12 = fights.filter(f => f.wave === 1 || f.wave === 2);
+      // FLEE EXITS (scale-wall r17 arm 3, tooling): ctx.fled counts flee()
+      // ATTEMPT ticks; the per-fight records count genuine disengage EXITS
+      // (result 'fled'). Report both — attempts vs exits is the honest story.
+      const fleeSum = fleeExitSummary(fights, c);
       const r = {
         policy: pid, seed, commit,
         days: result.days, gameDays: result.gameDays, endReason: result.endReason,
@@ -96,12 +100,16 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
         // policy decline telemetry (both arms; gates keep the counters honest)
         faDeclined: c.faDeclined || 0, faSkipped: c.faSkipped || 0,
         fledBad: c.fledBad || 0, fled: c.fled || 0,
+        // flee EXITS vs attempts (r17 arm 3): fled = attempt ticks,
+        // fledExits = fights that genuinely ended 'fled'
+        fledExits: fleeSum.exits, fledDissolved: fleeSum.dissolved,
+        fleeSummary: fleeSum,
         w2dSkipped: c.w2dSkipped || 0, w2dForcedFights: c.w2dForcedFights || 0,
         beastTricks: c.beastTricks || 0, countersKnown,
       };
       runs.push(r);
       const died = w12.filter(f => f.playerDied).length;
-      console.log(`  [${pid} seed ${seed}] days=${r.days} end=${r.endReason} rank=${r.maxRank} nat=${r.national} fights=${r.nFights}(w12=${w12.length}) diedFights=${died} w2dSkip=${r.w2dSkipped} fled=${r.fled}`);
+      console.log(`  [${pid} seed ${seed}] days=${r.days} end=${r.endReason} rank=${r.maxRank} nat=${r.national} fights=${r.nFights}(w12=${w12.length}) diedFights=${died} w2dSkip=${r.w2dSkipped} fled=${r.fled}(exit=${r.fledExits})`);
     }
   }
   const byPolicy = {};
@@ -120,6 +128,7 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
       w2dSkipped: rs.reduce((t, r) => t + r.w2dSkipped, 0),
       faSkipped: rs.reduce((t, r) => t + r.faSkipped, 0),
       fled: rs.reduce((t, r) => t + r.fled, 0),
+      fledExits: rs.reduce((t, r) => t + (r.fledExits || 0), 0),
     };
   }
   const all = runs;
