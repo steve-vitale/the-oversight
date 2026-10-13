@@ -55,8 +55,13 @@ longer recordings trimmed to their loudest section for game use.
 - Note: chorus frog, not bullfrog — an honest frog chorus for the amplified toad.
 
 ## Gaps (no usable Commons recording found — placeholder synth used)
-- raccoon (Lockpick Raccoon): no vocalization recording found on Commons.
 - snapping turtle (Speedbump Turtle): no usable recording found on Commons.
 - luna moth (Mirrormoth), networked mice hum (Hummice), catfish (Nightlight Catfish),
   mosquito (Giant Mosquito), tick (Alien Tick): no meaningful real-world voice;
   synth/placeholder retained by design.
+
+## raccoon/1.mp3 — Raccoon voice (Lockpick Raccoon)
+- Source: https://commons.wikimedia.org/wiki/File%3ABaby_Raccoon_Chatter_2.flac
+- Description: Baby raccoon chatter (Procyon lotor)
+- License: CC BY 3.0
+
