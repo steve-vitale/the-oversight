@@ -390,6 +390,82 @@ function recentGives(Game, ctx, days) {
   } catch (e) { return 0; }
 }
 
+// ---------- THE SURPLUS FEAST (blitz simpolicy 2026-10-13) ----------
+// Env gate COMPETENT_SURPLUS_FEAST=1 enables; default OFF — the baseline
+// stays byte-identical for before/after on identical seeds.
+//
+// The parent's rule, distinct from the food-r7 contribution rule above
+// (eveningFeast: "the scholar must have given >=1500 kcal this week") and
+// the r13 tribute rule (feastscale.js: tribute/tend count as giving):
+// feast when the COMMONS can carry it — the pantry holds a surplus and
+// nobody is going hungry. A competent player who sees a fat pantry and
+// full bellies lights the fire. The feast is the village's social engine
+// (trust, bonds, gossip) and, when the devotion is armed, the feastburn
+// conversion the food-deed chain needs. All the honest gates stay: dusk,
+// at haven, one feast/day, affordability (have >= cost*1.5 — never feast
+// into famine), the fusion-reactor ceiling, cadence (armed 7d / unarmed
+// 14d — the buff window is 2 dawns, re-feasting sooner just refreshes).
+//
+// Design call (documented, Steve can overrule): "surplus" = after the
+// feast the pantry still holds a full day of village food
+// (mouths * 2000 kcal — BALANCING.md's 2,000 kcal/day target); "villagers
+// are fed" = the engine's own starvingVillage() is false (no starvation
+// death in a week, fewer than a third of the roster deep in hunger).
+// This is the "village can carry it" rule; the r7 "you carried it" rule
+// is untouched and still runs alongside (the engine caps at 1 feast/day).
+function surplusFeastOn() { return process.env.COMPETENT_SURPLUS_FEAST === '1'; }
+
+function surplusFeast(Game, ctx) {
+  if (!surplusFeastOn()) return; // before/after harness gate
+  try {
+    if (Game.dayPart !== 2) return; // dusk — the feast rides into the night
+    const s = Game.state.scholar || {}, day = s.day || 0;
+    if (s.feastDay === day) return; // the game allows one feast a day
+    if (!Game.playerAtHaven || !Game.playerAtHaven()) return;
+    const armed = !!((s.prog || {}).feastSurge);
+    // FUSION REACTOR CEILING (Steve 2026-10-12): an online reactor crowds
+    // out the feast's fire — the grant is honestly refused every time. A
+    // competent host doesn't waste the pantry on an armed feast; the
+    // social engine (unarmed cadence) still runs.
+    let armedForFeast = armed;
+    try {
+      if (armed && Game.fusionReactorOnline && Game.fusionReactorOnline()) armedForFeast = false;
+    } catch (e) {}
+    const cadence = armedForFeast ? 7 : 14;
+    if (ctx._sfLastFeastDay && (day - ctx._sfLastFeastDay) < cadence) return;
+    let plan = null;
+    try { plan = Game.feastPlan ? Game.feastPlan() : null; } catch (e) {}
+    if (!plan || !plan.ok) return;
+    if (plan.have < plan.cost * 1.5) return; // honest buffer — never feast into famine
+    // SURPLUS: after the feast, a full day of village food remains.
+    const vv = Game.state.village || {};
+    let mouths = 0;
+    try {
+      for (const id of (vv.roster || [])) {
+        if (!id || id === Game.villagerId) continue;
+        let dead = false;
+        try { const p = Game.getPerson(id); dead = !p || !!p.dead; } catch (e) {}
+        if (!dead) mouths++;
+      }
+    } catch (e) {}
+    if (mouths < 1) mouths = 1;
+    if (plan.have - plan.cost < mouths * 2000) return; // no surplus, no feast
+    // VILLAGERS FED: the engine's own starvation check.
+    try { if (Game.starvingVillage && Game.starvingVillage()) return; } catch (e) {}
+    let rep = null;
+    try { rep = Game.hostFeast(); } catch (e) {}
+    if (rep && rep.ok) {
+      ctx._sfLastFeastDay = day;
+      ctx.surplusFeasts = (ctx.surplusFeasts || 0) + 1;
+      if (armedForFeast) ctx.surplusArmedFeasts = (ctx.surplusArmedFeasts || 0) + 1;
+    } else if (rep && /Nobody came/.test(rep.why || '')) {
+      // the village is in no shape to feast — read the room, don't
+      // re-light the fire tomorrow
+      ctx._sfLastFeastDay = day;
+    }
+  } catch (e) {}
+}
+
 // Talk: one real conversation a day. Relationships are the other economy.
 function talkRound(Game, ctx) {
   try {
@@ -402,6 +478,144 @@ function talkRound(Game, ctx) {
       try { Game.endConvo(vid, 'left'); } catch (e2) {} // don't leave modal state open
       ctx.talked = (ctx.talked || 0) + 1;
     } catch (e) {}
+  } catch (e) {}
+}
+
+// ---------- HELD CONVERSATIONS (blitz simpolicy 2026-10-13) ----------
+// Env gate COMPETENT_TALK=1 enables; default OFF — baseline byte-identical.
+//
+// talkRound opens a conversation and walks straight out (endConvo 'left',
+// zero exchanges): the trust stipend without the talk. The driverless
+// player holds no real conversations — the whole dialogue engine (wants,
+// grief, teaching, gossip, the canon questions) is unreachable BY
+// CONSTRUCTION for it. A competent player who knows relationships are the
+// other economy SITS DOWN: up to two held conversations a day, a few real
+// turns each, then an honest goodbye.
+//
+// Target picking is meaning-first:
+//   1. someone with an unresolved want (they want something — engage it),
+//   2. the grieving or the scared (comfort is a competent kindness),
+//   3. the stranger (lowest bond with the player),
+//   4. the least-talked-to.
+// Choice picking mirrors the engine's own courtesy: answer their question
+// first (ans:* — the menu builder's rule: "it's rude to ignore it"), then
+// teach (knowledge is the food economy), then the canon questions (gq:*),
+// then ask on. Never 'leave'/'deflect' mid-conversation — the sitting ends
+// by its own winddown, the 5-turn cap, or the honest goodbye.
+//
+// Hang safety: this stays on the shipped open/close verbs (talkTo +
+// endConvo('left') in a finally — the talkRound-proven close path). The
+// journey-endgame r8 convo-in-daily wedge used a different driver shape
+// (a separate probe driver, endConvo 'done'); the pilot watches run timing
+// for any recurrence.
+function talkOn() { return process.env.COMPETENT_TALK === '1'; }
+
+// Structural menu ids: never picked mid-conversation. 'goon' ("go on") is
+// structural here too — the 5-turn cap owns continuation, not the menu.
+const TALK_STRUCTURAL = { leave: 1, goon: 1, subject: 1, 'dlg:subject': 1, deflect_q: 1, honest_pass: 1 };
+
+function pickTalkChoice(choices, seen) {
+  try {
+    // NO REPEATS (blitz simpolicy 2026-10-13): teaching three plants in a
+    // row reads as a lecture, not a conversation (pilot transcripts: the
+    // triple-teach + the engine's "lost my train of thought" stutter). A
+    // choice id fires once per sitting; the next turn picks the next-best.
+    const live = (choices || []).filter(c =>
+      c && c.id && !TALK_STRUCTURAL[String(c.id)] && !(seen && seen[String(c.id)]));
+    if (!live.length) return null;
+    const ans = live.find(c => String(c.id).indexOf('ans:') === 0);
+    if (ans) return ans; // answer their question first — it's rude to ignore it
+    const teach = live.find(c => String(c.id) === 'teach');
+    if (teach) return teach; // knowledge is the food economy
+    const gq = live.find(c => String(c.id).indexOf('gq') === 0);
+    if (gq) return gq; // the canon questions
+    const ask = live.find(c => String(c.id) === 'ask');
+    if (ask) return ask;
+    return live[0];
+  } catch (e) { return null; }
+}
+
+function talkScore(Game, ctx, vid) {
+  // higher = talk to them first. Deterministic — no RNG draws (the sort
+  // below is stable), so identical seeds stay identical.
+  let score = 0;
+  try {
+    const c = Game.convoGet ? Game.convoGet(vid) : null;
+    const want = c && c.want;
+    if (want && want.id && !want.resolution) score += 100; // they want something
+    const cnt = (c && c.count) || 0;
+    score += Math.max(0, 10 - cnt); // the least-talked-to
+  } catch (e) {}
+  try {
+    if (Game.npcMood) {
+      const m = Game.npcMood(vid);
+      if (m === 'grieving' || m === 'scared') score += 50; // comfort
+    }
+  } catch (e) {}
+  try {
+    if (Game.bondGet) {
+      const b = Game.bondGet(Game.villagerId, vid);
+      const v = b ? (b.v || 0) : 0;
+      score += Math.max(0, Math.min(30, 20 - v)); // the stranger first
+    }
+  } catch (e) {}
+  return score;
+}
+
+function pickTalkTargets(Game, ctx, alive) {
+  try {
+    return alive.slice().sort((a, b) => talkScore(Game, ctx, b) - talkScore(Game, ctx, a));
+  } catch (e) { return alive.slice(); }
+}
+
+// One held sitting: open, take up to 5 real turns, close honestly. The
+// engine may wind the conversation down sooner (natural end) — the loop
+// respects it. endConvo('left') always runs (finally) so modal state never
+// leaks into the day loop.
+function holdConversation(Game, ctx, vid) {
+  try {
+    Game.talkTo(vid);
+    ctx.deepConvos = (ctx.deepConvos || 0) + 1;
+    const seen = {}; // choice ids already taken this sitting — no repeats
+    try {
+      for (let turn = 0; turn < 5; turn++) {
+        let c = null;
+        try { c = Game.convoGet ? Game.convoGet(vid) : null; } catch (e) {}
+        if (!c || !c.active) break;
+        let choices = [];
+        try { choices = Game.convoChoices ? Game.convoChoices(vid) : []; } catch (e) {}
+        const pick = pickTalkChoice(choices || [], seen);
+        if (!pick) break;
+        seen[String(pick.id)] = 1;
+        try { Game.convoTurn(vid, pick.id); } catch (e) { break; }
+        ctx.deepTurns = (ctx.deepTurns || 0) + 1;
+        try {
+          const c2 = Game.convoGet ? Game.convoGet(vid) : null;
+          if (!c2 || !c2.active || c2.over) break;
+        } catch (e) { break; }
+      }
+    } finally {
+      try { if (Game.endConvo) Game.endConvo(vid, 'left'); } catch (e) {}
+    }
+  } catch (e) {}
+}
+
+function deepTalk(Game, ctx) {
+  if (!talkOn()) return; // before/after harness gate
+  try {
+    const vv = Game.state.village || {};
+    const me = Game.villagerId;
+    const alive = (vv.roster || []).filter(id => {
+      if (!id || id === me) return false;
+      try { const p = Game.getPerson(id); return p && !p.dead; } catch (e) { return true; }
+    });
+    if (!alive.length || !Game.talkTo) return;
+    // two held sittings a day — a social life, not a filibuster
+    const targets = pickTalkTargets(Game, ctx, alive).slice(0, 2);
+    for (const vid of targets) {
+      if (Game.over) break;
+      holdConversation(Game, ctx, vid);
+    }
   } catch (e) {}
 }
 
@@ -1950,6 +2164,7 @@ const competent = {
     gearUp(Game, ctx); // equip best weapon/armor owned (longsim combat 2026-10-11)
     eveningFeast(Game, ctx); // host the feast at dusk when honestly affordable (food r7)
     feastFightRoad(Game, ctx); // face the feast's draw / fight while feasted (food r7)
+    surplusFeast(Game, ctx); // feast on surplus when nobody starves (blitz simpolicy 2026-10-13, COMPETENT_SURPLUS_FEAST=1)
   },
   daily(Game, ctx) {
     // steady yourself at dawn: channel a keepsake when the trauma is up
@@ -1998,6 +2213,7 @@ const competent = {
       if (known < 5) { talkRound(Game, ctx); talkRound(Game, ctx); }
     } catch (e) {}
     talkRound(Game, ctx);
+    deepTalk(Game, ctx); // hold real conversations (blitz simpolicy 2026-10-13, COMPETENT_TALK=1)
     lootCorpses(Game, ctx); // strip the dead after fights
     answerAidBeats(Game, ctx); // the fire network: accept offers, answer begs
     // ASK ABOUT BEAST TRICKS (longsim combat 2026-11): a curious player asks
@@ -2252,4 +2468,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore };
