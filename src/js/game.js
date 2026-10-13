@@ -14170,9 +14170,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return v.needs[rid];
     },
     npcName(rid) {
-      const vp = (this.data.villagers || []).find(x => x.id === rid)
+      const vp = (typeof this.getPerson === 'function' ? this.getPerson(rid) : null)
+        || (this.data.villagers || []).find(x => x.id === rid)
         /* unified: getPerson */;
-      return vp ? vp.name.split(' ')[0] : 'Someone';
+      // NAMELESS (blitz-fightres 2026-10-13): a person record without a name
+      // (old save, corrupt seed) must not throw or render "undefined" — a
+      // villager is always at least "Someone".
+      return (vp && vp.name) ? String(vp.name).split(' ')[0] : 'Someone';
     },
 
     // ============ STRANGERS → PEOPLE ============
@@ -14190,9 +14194,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const village = this.state.village;
       village.knownNames = village.knownNames || {};
       if (village.knownNames[vid] || this.state.systemArrived) return false;
-      const v = (this.data.villagers || []).find(x => x.id === vid)
+      const v = (typeof this.getPerson === 'function' ? this.getPerson(vid) : null)
+        || (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */;
-      const first = v ? v.name.split(' ')[0] : 'Someone';
+      // NAMELESS (blitz-fightres 2026-10-13): v.name may be missing on old
+      // saves — guard the split (was: "Cannot read properties of undefined").
+      const first = (v && v.name) ? String(v.name).split(' ')[0] : 'Someone';
       village.knownNames[vid] = true;
       if (how === 'intro') this.say(`"${first}," they say, touching their chest. "I'm ${first}." You'll remember that.`);
       else if (how === 'overheard') this.say(`A name drifts over from the fire: ${first}. That's the ${this.descriptorBase(vid)} — now they have a name.`);
@@ -28252,6 +28259,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     tbBeginTurn() {
+      // EMPTY-FIELD RESOLUTION (blitz-fightres 2026-10-13): the end check
+      // ran after AI turns, player verbs, and damage sites — but never when
+      // the turn driver itself ARRIVED at the player's turn. A fight at zero
+      // monsters therefore sat forever waiting for a verb nobody issues (a
+      // turn-driving sim, an AFK player, a UI with no valid actions): no
+      // resolution path. A turn arriving at an empty field ends the fight
+      // instead of starting a turn. Single choke point — covers the sync
+      // tbAdvance, the async stepper, and direct callers (justice.js).
+      // Belltoad chorus is unaffected: pending reinforcements hold the fight
+      // open (tbEndCheck returns false) until they arrive.
+      if (this.tbEndCheck()) return;
       const c = this.tbCurrent();
       if (!c) return;
       if (c.kind === 'player') {
@@ -29546,8 +29564,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const mons = f.fighters.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled);
       if (!mons.length) {
-        // No live monsters — just leave (shouldn't happen mid-fight, but safe).
-        return false;
+        // EMPTY FIELD (blitz-fightres 2026-10-13): nothing left to fight.
+        // The old code returned false here ("shouldn't happen mid-fight, but
+        // safe") — the push did nothing AND the fight stayed live: no
+        // resolution path. Resolve honestly through the end check ('won' if
+        // they died, 'routed' if they fled) and let the player walk out of
+        // the empty field. The push is consumed.
+        this.say('Nothing left here to fight — the field is empty. You walk on.');
+        this.tbEndCheck();
+        return true;
       }
       const nx = this.map.px + dx, ny = this.map.py + dy;
       // World edge: can't leave the map.
@@ -30668,6 +30693,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // consumed, player status ticks skipped. The sync path does all
           // of this; the stepped path must too.
           this.tbBeginTurn();
+          // EMPTY-FIELD (blitz-fightres 2026-10-13): tbBeginTurn now ends a
+          // zero-monster fight at turn arrival — don't dispatch a player-turn
+          // event or refresh combat UI for a fight that just ended.
+          if (!this.tbfight || this.tbfight.over) { f.actingKey = null; f.asyncRunning = false; return; }
           f.actingKey = null;
           f.asyncRunning = false;
           try { this.tbRefreshTelegraphUI(); } catch (e) {}
