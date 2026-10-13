@@ -5813,8 +5813,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const day = (this.state.scholar || {}).day || 1;
           const v = this.state.village;
           // DINNER-FIRST (longsim food 2026-10-11): the village eats
-          // fresh-first at the nightly meal (pantryDraw: smallest pieces,
-          // spoilDay tiebreak) — and the cook resolves 3x/day while the
+          // fresh-first at the nightly meal (pantryDraw: soonest-spoiling
+          // first, slabs last) — and the cook resolves 3x/day while the
           // village eats once at night. Smoking tonight's dinner at 0.80x
           // destroys value in efficient villages (measured: they flip from
           // survived to lost). So: reserve ~2 nights of the village's ACTUAL
@@ -24926,7 +24926,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // eaten at full value — endDay's sweepSpoiled throws them out (its
       // voice, its job).
       // BEST-FIT draw, shared with the village's own meals (see pantryDraw):
-      // smallest pieces first, spoiled skipped, never a slab for a small need.
+      // what's expiring first, spoiled skipped, slabs ride last.
       // VILLAGE-COOKED (playtest forager 2026-10-10): the communal meal is
       // cooked by the village cook, not grabbed raw — the draw runs the same
       // cook:true abstraction the villagers' meals use (rawKcal staples
@@ -25025,8 +25025,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
-    // pantryDraw(v, want, opts): best-fit draw of REAL items from the pantry.
-    // Smallest pieces first (spoilDay tiebreak) — a 2000-kcal need takes four
+    // pantryDraw(v, want, opts): fresh-first draw of REAL items from the pantry.
+    // What's expiring goes first (spoilDay ascending), best-fit second
+    // (kcalEach ascending within a shelf class) — a 2000-kcal need takes four
     // 500s, never a 30000-kcal slab (Steve 2026-10-08). Spoiled stacks are
     // SKIPPED, never eaten at full value. Returns {taken, items} where items
     // is [{item, units, effectiveKcal, cooked}]. opts.cook: apply the village
@@ -25040,8 +25041,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.pantry = v.pantry || [];
       const cands = v.pantry.filter(item => item && (item.kcalEach || 0) > 0 &&
         (item.units || 0) > 0 && !(this.isSpoiled && this.isSpoiled(item)));
-      cands.sort((a, b) => ((a.kcalEach || 0) - (b.kcalEach || 0)) ||
-        ((a.spoilDay ?? 99999) - (b.spoilDay ?? 99999)));
+      // FRESH-FIRST (blitz-eatlast 2026-10-13 — design call, Steve can
+      // overrule): the old smallest-first sort ate 365-day beans before 2-day
+      // meat, so hauled/cooked meat rotted in a full pantry while the village
+      // ate staples (r12 measured 0% of revealed meat eaten). Urgency first,
+      // size second. Slabs (one piece > SLAB_KCAL — more than a day's food,
+      // indivisible) still ride last, so the anti-slab law holds; the village
+      // preservation layer's DINNER-FIRST reserve was built assuming the
+      // nightly meal eats fresh-first — now it actually does. Knowledge
+      // gating untouched: unknown flesh (kcalEach 0) never reaches this sort.
+      const SLAB_KCAL = 2000;
+      const isSlab = (it) => (it.kcalEach || 0) > SLAB_KCAL;
+      cands.sort((a, b) => (((isSlab(a) ? 1 : 0) - (isSlab(b) ? 1 : 0)) ||
+        ((a.spoilDay ?? 99999) - (b.spoilDay ?? 99999)) ||
+        ((a.kcalEach || 0) - (b.kcalEach || 0))));
       let need = want;
       let drewAny = false, stoppedForCrumbs = false;
       for (const item of cands) {
