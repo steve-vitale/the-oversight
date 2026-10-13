@@ -10,13 +10,17 @@ const idle = require('./idle');
 // never raw meat (trichinosis/gutrot). Re-scans each take since indices shift.
 function competentEat(Game) {
   const s = Game.state.scholar, vv = Game.state.village;
+  // EAT_FRAC (journey landing r10 2026-10-13): policy variants can lower the
+  // eat trigger (e.g. EAT_FRAC=0.10 for a distracted player who forgets to
+  // eat) to probe starvation pathways. Default 0.85 = unchanged behavior.
+  const trig = Math.min(0.95, Math.max(0.02, parseFloat(process.env.EAT_FRAC || '0.85') || 0.85));
   try {
-    if (s.kcal >= Game.kcalCap() * 0.85) return;
+    if (s.kcal >= Game.kcalCap() * trig) return;
     // HONEST EATING (bal-survival 2026-10-10): eat from the PACK first
     // (your foraged food), pantry second. The old code took from the pantry
     // even with a full pack — making the player a net drain.
     try { Game.eat(); } catch (e) {}
-    if (s.kcal >= Game.kcalCap() * 0.85) return;
+    if (s.kcal >= Game.kcalCap() * trig) return;
     let guard = 0;
     while (s.kcal < Game.kcalCap() * 0.95 && guard++ < 20) {
       const pantry = vv.pantry || [];
