@@ -1245,7 +1245,7 @@
       items.map((it, i) => {
         const arrow = dirArrow(it.cx, it.cy);
         const desc = abilityDescs[it.label];
-        return `<button class="ctx-btn" data-ctx="${i}"${desc ? ` title="${esc(desc)}"` : ''}>${esc(it.label)} ${arrow}${it.label === 'Talk' && wantTalk ? '<span class="dot"></span>' : ''}${desc ? `<span class="ctx-desc">${esc(desc)}</span>` : ''}</button>`;
+        return `<button class="ctx-btn" data-ctx="${i}"${desc ? ` title="${esc(desc)}"` : ''}>${esc(it.label)} ${arrow}${it.label === 'Talk' && wantTalk ? '<span class="dot"></span>' : ''}${desc ? `<span class="ctx-desc"> — ${esc(desc)}</span>` : ''}</button>`;
       }).join('') +
       `</div>`;
   }
@@ -1395,7 +1395,7 @@
       if (!acts.length) return '';
     }
     return `<div class="abilitybar"><span class="ctx-label">⚡</span>` +
-      acts.map(a => `<button class="ab-btn" data-ab="${a.id}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}<span class="ctx-desc">${esc(a.desc || '')}</span></button>`).join('') +
+      acts.map(a => `<button class="ab-btn" data-ab="${a.id}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`).join('') +
       `</div>`;
   }
 
@@ -14284,7 +14284,15 @@
           }).join('');
         }
         if (def.modifiers && def.modifiers.length) {
-          detail += `<p class="small" style="opacity:.6"><b>Passive:</b> ${def.modifiers.map(m => `${esc(m.target)} ${esc(m.op)} ${esc(m.value)}`).join('; ')}</p>`;
+          // PLAIN-ENGLISH MODIFIERS (Steve 2026-10-12): the old code printed
+          // raw engine data ("travel.cost_mult multiply 0.85"). The formatter
+          // lives in the node-safe engine module so proof tests can read it.
+          const M = (typeof Scattering !== 'undefined' && Scattering.modifiers) || null;
+          const parts = def.modifiers.map(m => {
+            try { return (M && M.describe) ? M.describe(m, level) : null; }
+            catch (e) { return null; }
+          }).filter(Boolean);
+          if (parts.length) detail += `<p class="small" style="opacity:.6"><b>Passive:</b> ${esc(parts.join('; '))}</p>`;
         }
         // (break-it abilities 2026-10-10: the old Swap button rendered here had
         // no click handler anywhere — a fake affordance. No swap mechanic

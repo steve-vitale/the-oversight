@@ -6,6 +6,7 @@
 //   - checkCondition(cond, ctx)
 //   - levelOf(entry)
 //   - scaledValue(m, level)
+//   - describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe)
 //   - collectModifiers(scholar, abilitiesData)
 //   - hasAbility(scholar, id)
 //   - abilityLevel(scholar, id)
@@ -287,8 +288,79 @@
     return false;
   }
 
+  // describeModifier: plain-English rendering of a modifier for ability cards
+  // (Steve 2026-10-12: cards printed raw engine data — "travel.cost_mult
+  // multiply 0.85" — which reads as dev jargon next to the flavor text).
+  // Every known (target, op) pair gets a template; unknown pairs fall back
+  // to a cleaned generic ("travel.cost_mult ×0.85") so the card never lies
+  // and never speaks engine. Level scaling mirrors scaledValue().
+  function describeModifier(m, level) {
+    if (!m || !m.target) return null;
+    var v = m.value;
+    if (m.scale === 'level' && level > 1) {
+      v = (m.op === 'multiply') ? Math.pow(m.value, level) : m.value * level;
+    }
+    var T = MOD_NOUNS[m.target];
+    if (!T) {
+      // cleaned generic fallback — better than "multiply 0.85"
+      var gv = (m.op === 'multiply') ? '×' + trimNum(v) : '+' + trimNum(v);
+      return m.target + ' ' + gv;
+    }
+    if (T.custom) return T.custom(m.op, v);
+    if (m.op === 'multiply') {
+      if (v > 1) return '+' + pct(v - 1) + ' ' + T.more;
+      if (v < 1) return pct(1 - v) + ' less ' + T.less;
+      return null; // ×1: no effect, say nothing
+    }
+    // add
+    if (T.chance) return '+' + pct(v) + ' ' + T.noun;
+    return '+' + trimNum(v) + ' ' + T.noun;
+  }
+  function pct(x) { return Math.round(x * 100) + '%'; }
+  function trimNum(x) {
+    if (!isFinite(x)) return '?';
+    return (Math.round(x * 100) / 100).toString();
+  }
+  // MOD_NOUNS: per-target plain nouns. `more`/`less` are the multiply
+  // phrasings (v>1 good-news / v<1 reduction); `noun` is the add phrasing
+  // with `chance:true` for probability-point adds (shown as %).
+  var MOD_NOUNS = {
+    'travel.cost_mult':        { more: 'travel cost', less: 'travel cost' },
+    'travel.encounter_chance': { more: 'run-ins while traveling', less: 'run-ins while traveling' },
+    'carry.weight_mult':       { more: 'pack weight', less: 'pack weight' },
+    'combat.strike_damage':    { more: 'strike damage', less: 'strike damage' },
+    'combat.first_strike_damage': { more: 'first-strike damage', less: 'first-strike damage' },
+    'combat.heavy_damage':     { more: 'heavy damage', less: 'heavy damage' },
+    'combat.dodge_chance':     { noun: 'dodge chance', chance: true },
+    'combat.trade_window':     { noun: 'attack when trading blows' },
+    'craft.success':           { more: 'crafting success', less: 'crafting success' },
+    'drama.resolve_bonus':     { noun: 'resolve when settling village drama' },
+    'fire.heat':               { noun: 'fire heat (each point: fires burn ~25% stronger)' },
+    'fire.success':            { noun: 'fire-starting success', chance: true },
+    'food.bank_mult':          { custom: function (op, v) { return (op === 'multiply' ? trimNum(v) + 'x calorie bank' : '+' + trimNum(v) + ' calorie bank'); } },
+    'food.eat_target_mult':    { custom: function (op, v) { return (op === 'multiply' ? trimNum(v) + 'x meal size' : '+' + trimNum(v) + ' meal size'); } },
+    'food.poison_chance':      { more: 'food-poisoning risk', less: 'food-poisoning risk' },
+    'food.spoilage_days':      { noun: 'days before food spoils' },
+    'forage.gift_chance':      { more: 'forage gift chance', less: 'forage gift chance', noun: 'forage gift chance', chance: true },
+    'healing.amount':          { more: 'healing', less: 'healing' },
+    'health.max_add':          { noun: 'max health' },
+    'hunt.find_chance':        { more: 'chance to find game', less: 'chance to find game' },
+    'hunt.meat_yield':         { more: 'meat from carcasses', less: 'meat from carcasses' },
+    'hunt.trap_catch':         { more: 'trap catches', less: 'trap catches' },
+    'luck.global':             { more: 'luck', less: 'luck' },
+    'monster.detect_chance':   { more: 'early warning of monsters', less: 'early warning of monsters', noun: 'early warning of monsters', chance: true },
+    'monster.hear_mult':       { custom: function (op, v) { return (op === 'multiply' && v > 1) ? 'monsters hear you ' + trimNum(v) + 'x as well' : (op === 'multiply' ? pct(1 - v) + ' less noticeable to monsters' : '+' + trimNum(v) + ' monster hearing'); } },
+    'ruin.find_mult':          { more: 'ruin finds', less: 'ruin finds', noun: 'ruin finds', chance: true },
+    'social.intimidate':       { noun: 'intimidation', chance: true },
+    'social.lie_detect':       { noun: 'lie detection', chance: true },
+    'stealth.move_silent':     { more: 'silent movement', less: 'silent movement', noun: 'silent movement', chance: true },
+    'trust.gain_mult':         { more: 'trust gained', less: 'trust gained', noun: 'trust gained', chance: true },
+    'water.rain_catch':        { more: 'rainwater caught', less: 'rainwater caught', noun: 'L rainwater caught' },
+    'armor.flat':              { noun: 'armor' },
+  };
+
   global.Scattering = global.Scattering || {};
-  global.Scattering.modifiers = { resolve, collectModifiers, checkCondition, collectKnowledgeModifiers, hasKnowledgeUnlock };
+  global.Scattering.modifiers = { resolve, collectModifiers, checkCondition, collectKnowledgeModifiers, hasKnowledgeUnlock, describe: describeModifier, MOD_NOUNS: MOD_NOUNS };
   global.Scattering.hasAbility = hasAbility;
   global.Scattering.abilityLevel = abilityLevel;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -588,7 +588,7 @@
   {
     "id": "lucky_rock",
     "name": "Lucky Rock",
-    "description": "Your lucky rock. +5% to everything. (It's not the rock. It's you believing in the rock. The System finds this adorable and helps a little.)",
+    "description": "Your lucky rock. The System finds your faith adorable and helps a little: +5% on the hunt. (It\u2019s not the rock. It\u2019s you believing in the rock.)",
     "flavor": "The rock! It is lucky! We checked! It's... a rock! But YOU believe! Belief is power! (We added 4%.)",
     "pool": "system",
     "tier": "underpowered",
@@ -961,9 +961,9 @@
   },
   {
     "id": "poisoner",
-    "name": "Poisoner",
-    "description": "You can poison food/water. (Useful against monsters. Or... others.)",
-    "flavor": "The food is spicy now! The spicy is... death! We are worried about you! But impressed!",
+    "name": "Tainted Bait",
+    "description": "Your bait is tainted \u2014 traps catch 50% more. (The poison\u2019s in the bait, not your hands. Mostly.)",
+    "flavor": "The bait is spicy now! The spicy is... death! For TRAPS! We are worried about you! But impressed!",
     "pool": "system",
     "tier": "vile",
     "unlock": {
@@ -980,8 +980,8 @@
       "daily": 75
     },
     "deepening": {
-      "2": "Your poisons are art.",
-      "3": "Master of venoms: your poisons never harm the innocent."
+      "2": "Your bait is legend.",
+      "3": "Master of the tainted trap: the bait takes only what you meant it to."
     }
   },
   {
@@ -1259,9 +1259,9 @@
   },
   {
     "id": "second_skin",
-    "name": "Second Skin",
-    "description": "Your armor never slows you. Move full speed in any armor. You wear it like weather.",
-    "flavor": "The metal is your SKIN now! Clank clank! Fashionable AND functional!",
+    "name": "Travel Light",
+    "description": "You wear the world like weather \u2014 armor, pack, all of it. Nothing you carry slows you down: every mile costs 15% less.",
+    "flavor": "You packed WHAT?! Where did it all GO?! So light! So fast! We can barely keep UP!",
     "pool": "system",
     "tier": "combat",
     "unlock": {
@@ -1278,8 +1278,8 @@
       "daily": 50
     },
     "deepening": {
-      "2": "Armor is clothing.",
-      "3": "You ARE the armor: your skin hardens under the plates."
+      "2": "You pack light and move lighter.",
+      "3": "You ARE the journey: distance shortens under your stride."
     }
   },
   {
@@ -1576,7 +1576,7 @@
   {
     "id": "night_eyes",
     "name": "Night Eyes",
-    "description": "Your eyes drink the dark. At night you spot trouble before it spots you, and nocturnal game can't hide from a patient hunter.",
+    "description": "The dark never bothered you. You see shapes in it that others miss \u2014 and it never hears you coming.",
     "flavor": "THE DARK IS JUST... SLOW LIGHT? You see it anyway. Rude. We were going to sell that.",
     "pool": "system",
     "tier": "utility",
@@ -1650,7 +1650,7 @@
     "id": "purify",
     "name": "Purify",
     "pool": "care",
-    "description": "Charcoal, clean water, time. Neutralize poison.",
+    "description": "The System\u2019s clean touch, borrowed: poison unravels at your gesture. Not charcoal and time \u2014 intention, from something that never needed to eat.",
     "modifiers": [],
     "unlock": {
       "type": "system_offer"
@@ -1700,7 +1700,7 @@
     "id": "adrenaline_control",
     "name": "Adrenaline Control",
     "pool": "combat",
-    "description": "Your hands don't shake. Your heart hammers, but your hands don't shake.",
+    "description": "Your heart hammers \u2014 and every hammering beat lands 30% harder. Fear is fuel.",
     "modifiers": [
       {
         "target": "combat.strike_damage",
@@ -1840,9 +1840,9 @@
   },
   {
     "id": "pathfinder",
-    "name": "Pathfinder",
+    "name": "Tireless Stride",
     "pool": "exploration",
-    "description": "You don't get lost. The land tells you where you are.",
+    "description": "You walk like water downhill \u2014 no wasted steps, no wasted breath. Every mile costs 15% less.",
     "modifiers": [
       {
         "target": "travel.cost_mult",
@@ -1856,7 +1856,7 @@
     },
     "deepening": {
       "2": "Every step costs less. Distance shrinks.",
-      "3": "You never get lost. Ever."
+      "3": "Distance is a rumor."
     }
   },
   {
@@ -2439,12 +2439,12 @@
     }
   },
   {
-    "description": "You've never been lost. Not once. Even in places you've never been, your feet know the way.",
+    "description": "You\u2019ve never wasted a step. Not once. Even in places you\u2019ve never been, your feet find the cheap miles on their own.",
     "id": "pathfinder",
     "knackOrigins": [
       "navigation"
     ],
-    "memory": "You walked {kin} home through {place} in the dark \u2014 no map, no light. \u2018How did you know the way?\u2019 You didn't. Your feet did.",
+    "memory": "You walked {kin} home through {place} in the dark \u2014 no map, no light, and arrived with breath to spare. \u2018How?\u2019 Your feet never waste a step.",
     "modifiers": [
       {
         "op": "multiply",
@@ -2453,14 +2453,14 @@
         "value": 0.85
       }
     ],
-    "name": "Pathfinder",
+    "name": "Waywise",
     "pool": "latent_knack",
     "unlock": {
       "type": "latent_knack"
     },
     "deepening": {
       "2": "Every step costs less. Distance shrinks.",
-      "3": "You never get lost. Ever."
+      "3": "The land is short under your feet."
     }
   },
   {
@@ -2490,7 +2490,7 @@
     }
   },
   {
-    "description": "You feel weather coming in your bones, a day out. It's never been wrong. Nobody taught you \u2014 the sky just tells you.",
+    "description": "You feel weather coming in your bones, a day out \u2014 and you\u2019re always ready, every vessel out. Catch 50% more rainwater.",
     "id": "storm_ear",
     "knackOrigins": [
       "forecast"

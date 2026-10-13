@@ -15,6 +15,7 @@
 //   - encKillLine(animal, kcal)
 //   - encButcherHonesty(kcal, animal)
 //   - encReleaseAnimal(a)
+//   - encAnimalCrossNode(a, hx, hy)
 //   - feedback(msg)
 //   - feedbackLines()
 //   - feedbackMark()
@@ -1119,6 +1120,53 @@
     } catch (e) {}
     try { this.state.scholar.animal = null; } catch (e2) {}
   };
+  // NODE CROSSING (Steve 2026-10-12): a bolting animal that reaches the grid
+  // edge does NOT dissolve — it runs onto the neighboring tile, LIVE, and the
+  // existing ANIMAL CONTINUITY pickup in game.js ("if you left an animal here,
+  // it's still here") hands it back when the player follows. The chase stays
+  // real: nothing vanishes off the map for no reason.
+  // Legitimate vanishes are untouched: burrow (alarmed), dive (aquatic),
+  // climb (arboreal), bobcat losing interest, crow sentinel — those still
+  // call encReleaseAnimal directly.
+  // Returns true when the animal was parked on the neighbor; false when there
+  // is no neighbor tile (world edge) — the caller then keeps the old release.
+  G.encAnimalCrossNode = function (a, hx, hy) {
+    try {
+      if (!a || !this.map || !this.map.tiles) return false;
+      var dx = 0, dy = 0;
+      if (hx || hy) {
+        // dash hint: cross along the dominant axis of the dash direction
+        if (Math.abs(hx) >= Math.abs(hy)) dx = hx > 0 ? 1 : -1;
+        else dy = hy > 0 ? 1 : -1;
+      } else {
+        if (a.mx === 0) dx = -1;
+        else if (a.mx === 8) dx = 1;
+        else if (a.my === 0) dy = -1;
+        else if (a.my === 8) dy = 1;
+        else return false; // not at an edge — nothing to cross
+      }
+      var nt = this.tileAt(this.map.px + dx, this.map.py + dy);
+      if (!nt) return false; // world edge — old behavior
+      var dirW = dx === 1 ? 'east' : dx === -1 ? 'west' : dy === 1 ? 'south' : 'north';
+      var tname = (S.TILE_NAME && nt.type && S.TILE_NAME[nt.type]) || 'the wilds';
+      // still bolting, fresh edge clock, parked at the neighbor's entry edge
+      a.pstate = 'bolt'; a.edgeTurns = 0; a.boltedOnce = true;
+      a.aware = Math.min(1, (a.aware || 0) + 0.2);
+      a.mx = dx === -1 ? 8 : dx === 1 ? 0 : Math.max(0, Math.min(8, a.mx == null ? 4 : a.mx));
+      a.my = dy === -1 ? 8 : dy === 1 ? 0 : Math.max(0, Math.min(8, a.my == null ? 4 : a.my));
+      if (nt.animal) {
+        // someone's already here — the crosser joins the abstract pool alive
+        nt.wildlife = nt.wildlife || {};
+        if (a.wild && a.id) nt.wildlife[a.id] = (nt.wildlife[a.id] || 0) + 1;
+      } else {
+        nt.animal = a; // the live handoff the continuity pickup collects
+      }
+      try { this.state.scholar.animal = null; } catch (e2) {}
+      var label = this.encCap(this.encAnimalLabel(a));
+      this.say(label + ' bolts ' + dirW + ' into the ' + tname + ' — follow?');
+      return true;
+    } catch (e) { return false; }
+  };
   G.animalTurn = function () {
     var s = this.state.scholar;
     var a = s.animal;
@@ -1349,7 +1397,10 @@
         var sdx = Math.sign(a.mx - px), sdy = Math.sign(a.my - py);
         tryMove(a.mx + sdx * 2, a.my + sdy * 2) || tryMove(a.mx + sdx, a.my + sdy);
         a.pstate = 'bolt'; a.aware = 1; a.boltedOnce = true;
-        if (a.mx === 0 || a.mx === 8 || a.my === 0 || a.my === 8) this.encReleaseAnimal(a);
+        if (a.mx === 0 || a.mx === 8 || a.my === 0 || a.my === 8) {
+          // raccoon at the edge with your food: it crosses live, not gone
+          if (!this.encAnimalCrossNode(a)) this.encReleaseAnimal(a);
+        }
         return;
       }
     }
@@ -1807,8 +1858,12 @@
         } else if (!(tryMove(a.mx + ddx, a.my) || tryMove(a.mx, a.my + ddy))) break;
       }
       if (a.mx === 0 || a.mx === 8 || a.my === 0 || a.my === 8) {
-        this.encReleaseAnimal(a);
-        this.say(this.encCap(label) + ' breaks past everything and is GONE — just torn grass and your hammering heart.');
+        // NODE CROSSING (Steve 2026-10-12): it broke past everything — onto
+        // the next tile, live, not gone. World edge keeps the old vanish.
+        if (!this.encAnimalCrossNode(a, ddx, ddy)) {
+          this.encReleaseAnimal(a);
+          this.say(this.encCap(label) + ' breaks past everything and is GONE — just torn grass and your hammering heart.');
+        }
         try { this.audioEvent('animalBolt'); } catch (e) {}
         return;
       }
@@ -1913,10 +1968,15 @@
         // GROUNDHOG: one edge turn is enough — the hole is right there.
         var edgeNeed = beh === 'alarmed' ? 1 : 2;
         if (a.edgeTurns >= edgeNeed) {
-          this.encReleaseAnimal(a);
-          this.say(beh === 'alarmed'
-            ? this.encCap(label) + ' pours itself down its burrow — a dark hole in the bank. Gone. The whistle echoes a little longer than the groundhog does.'
-            : this.encCap(label) + ' melts into the treeline. Gone.');
+          if (beh === 'alarmed') {
+            // burrow: a legitimate vanish, untouched
+            this.encReleaseAnimal(a);
+            this.say(this.encCap(label) + ' pours itself down its burrow — a dark hole in the bank. Gone. The whistle echoes a little longer than the groundhog does.');
+          } else if (!this.encAnimalCrossNode(a)) {
+            // world edge: nowhere to cross to — the old melt stands
+            this.encReleaseAnimal(a);
+            this.say(this.encCap(label) + ' melts into the treeline. Gone.');
+          }
           return;
         }
       } else {
