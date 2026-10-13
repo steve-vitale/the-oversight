@@ -5814,22 +5814,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           const ownShelf = skill > 0 ? 30 + 5 * skill : 15;
           const rackCap = 125 * ((v.roster || []).length || 10) * Math.max(1, ownShelf - 2);
-          // FAMINE-AWARE RACKS (longsim scale-wall r5 2026-10-13, opt-in gate
-          // FOODLEVER_R5=1): the racks-full guard blocked 35-50% of smoke
-          // resolutions while ~2.4k kcal/day rotted fresh (measured 8-run
-          // baseline). A full rack is a famine buffer, not waste — when the
-          // haven's measured buffer is thin (<7d via pantryDaysEstimate),
-          // the cook smokes the surplus anyway; the village will eat it.
-          // When the buffer is healthy the guard holds (the preserved-rot
-          // concern stands). Default OFF: pristine parity.
-          let _racksHungry = false;
+          // RACKS-FULL GUARD (longsim scale-wall r5 2026-10-13, opt-in gate
+          // FOODLEVER_R5=1): the guard blocked 35-50% of smoke resolutions
+          // while ~2.4k kcal/day rotted fresh (8-run baseline: 1,291k rot,
+          // 95%+ fresh; preserved rot only 44k = 3.4%). The guard solves a
+          // preserved-rot problem that doesn't exist in the current data
+          // while causing the fresh-rot problem. With the gate on, the
+          // guard stands down: the cook smokes eligible surplus up to
+          // budget whenever it's there. Default OFF: pristine parity.
+          // (The famine-aware variant was killed: pantryDays<7 never
+          // co-occurs with racks-full — the conditions are mutually
+          // exclusive. This simpler variant is the honest test.)
+          let _racksStandDown = false;
           try {
-            if (typeof process !== 'undefined' && process.env && process.env.FOODLEVER_R5 === '1'
-                && typeof this.pantryDaysEstimate === 'function') {
-              _racksHungry = this.pantryDaysEstimate() < 7;
+            if (typeof process !== 'undefined' && process.env && process.env.FOODLEVER_R5 === '1') {
+              _racksStandDown = true;
             }
           } catch (e) {}
-          const racksFull = preservedKcal >= rackCap && !_racksHungry;
+          const racksFull = preservedKcal >= rackCap && !_racksStandDown;
           if (!racksFull) {
           for (const it of eligible) {
             const per = it.kcalEach || 1;

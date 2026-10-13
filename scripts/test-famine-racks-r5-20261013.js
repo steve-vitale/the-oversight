@@ -5,16 +5,16 @@
 // Claims:
 //  1. Gate OFF (default): the cook's racks-full guard behaves exactly as
 //     before (pristine parity — no behavior change when the lever is off).
-//  2. Gate ON + thin buffer (pantry-days < 7): the cook smokes eligible
-//     surplus even when preservedKcal >= rackCap (the guard stands down).
-//  3. Gate ON + healthy buffer (pantry-days >= 7): the guard still holds
-//     (no smoke onto a genuinely full rack — the preserved-rot concern).
-//  4. Smoked items are honest: 0.80x blind / 0.95+ skilled, never create kcal.
-//  5. Deterministic on seeds 11, 22, 33 (SEED override).
+//  2. Gate ON: the guard stands down — the cook smokes eligible surplus up
+//     to budget even when preservedKcal >= rackCap.
+//  3. Smoked items are honest: 0.80x blind / 0.95+ skilled, never create kcal,
+//     budget-capped at 4000 input per resolution.
+//  4. Deterministic on seeds 11, 22, 33 (SEED override).
 //
-// RED-verification: the test drives a synthetic pantry (full racks +
-// eligible fresh). On pristine (gate code absent) T2 must FAIL — the guard
-// fires and nothing is smoked. With the lever, T2 passes.
+// RED-verification: run with FOODLEVER_R5=1 on pristine (gate code absent) —
+// T2 must FAIL (guard holds, smoked=0). With the lever, T2 passes.
+// (The famine-aware variant was killed: pantryDays<7 never co-occurs with
+// racks-full. This tests the simpler stand-down.)
 'use strict';
 const assert = require('assert');
 const { loadGame, setupGame } = require('./sim-harness');
@@ -77,27 +77,19 @@ function preservedKcal(Game) {
       // T1 (gate off): pristine parity — the guard fires, nothing smoked
       ok(`${tag} T1 gate-off guard holds`, smoked <= 0, `smoked=${smoked} (guard should hold when gate off)`);
     } else {
-      // T2 (gate on, thin buffer): the guard stands down, surplus smoked
-      ok(`${tag} T2 gate-on thin-buffer smokes`, smoked > 0, `smoked=${smoked} (guard should stand down when hungry)`);
+      // T2 (gate on): the guard stands down, surplus smoked
+      ok(`${tag} T2 gate-on smokes`, smoked > 0, `smoked=${smoked} (guard should stand down with gate on)`);
       // T4: honesty — the per-resolution budget caps INPUT at 4000 kcal;
       // smoked net must be <= 4000 (never create) and >= 4000*0.80 - rounding
       ok(`${tag} T4 honest conversion`, smoked <= 4000 && smoked >= 4000 * 0.80 - 600,
         `smoked=${smoked} (budget 4000 in, 0.80x blind)`);
-    }
-
-    // --- T3: healthy buffer -> guard still holds (gate on) ---
-    if (GATE) {
-      const { Game: G2 } = await loadGame({ seed: seed + 1000, mode: 'famine-racks-test2' });
-      await setupGame(G2);
-      const v2 = G2.state.village;
-      rigPantry(G2, 8000);
-      v2.burnHistory = [100, 100, 100, 100, 100, 100, 100]; // tiny draw -> fat buffer
-      const pd2 = G2.pantryDaysEstimate();
-      const vid2 = (v2.roster || []).find(id => id !== G2.villagerId && !(G2.getPerson(id) || {}).dead);
-      const q0 = preservedKcal(G2);
-      G2.resolveOneAssignment(vid2, { task: 'cook' });
-      const q1 = preservedKcal(G2);
-      ok(`${tag} T3 gate-on fat-buffer guard holds`, q1 - q0 <= 0 && pd2 >= 7, `smoked=${q1 - q0} pantryDays=${pd2}`);
+      // T3: idempotent — a second cook resolution with even fuller racks
+      // still smokes (no crash, no nonsense, still budget-capped)
+      const p1b = preservedKcal(Game);
+      Game.resolveOneAssignment(vid, { task: 'cook' });
+      const p2 = preservedKcal(Game);
+      ok(`${tag} T3 second resolution sane`, p2 - p1b >= 0 && p2 - p1b <= 4000,
+        `delta=${p2 - p1b}`);
     }
   }
   console.log(`\n${passed} assertions passed (GATE=${GATE})`);
