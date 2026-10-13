@@ -902,7 +902,7 @@
         // twice in a row.
         const closed = [];
         for (const c of ((bs && bs.cases) || [])) {
-          if ((c.status === 'open' || c.status === 'dormant') && (c.accused || []).includes(vid)) {
+          if ((c.status === 'open' || c.status === 'dormant' || c.status === 'advisory') && (c.accused || []).includes(vid)) {
             c.status = 'resolved'; c.resolution = 'accused_died';
             closed.push(c);
           }
@@ -1697,15 +1697,32 @@
     // resolved — a later quorate moot can still bind it (no double jeopardy:
     // nothing was decided). The formal demand clears so the ladder can
     // re-demand when the village is actually here.
+    //
+    // ADVISORY->BINDING UPGRADE PATH (sim-quorum 2026-10-13): for the later
+    // moot to actually happen, the case must be re-chargeable AND
+    // re-convenable. So the advisory verdict:
+    // (1) releases the charged crimes (caseId cleared) — nothing was
+    //     decided, so the no-double-jeopardy half-heat discount does NOT
+    //     apply and the ladder's charge filters see them again;
+    // (2) drops the trial tally — the re-convened moot re-draws attendance;
+    // (3) stamps advisoryDay — mootAdvisoryTick re-opens the case a few days
+    //     later, when the missing are (maybe) back at the fire.
     const q = this.mootQuorum(c);
     if (!q.quorum) {
       c.status = 'advisory';
       c.resolution = convicted ? 'advisory_guilty' : 'advisory_acquit';
+      c.advisoryDay = this.state.scholar.day;
+      c.trial = null;
+      try {
+        const j = this.justiceState();
+        for (const cr of (j.crimes || [])) if (cr.caseId === c.id) cr.caseId = null;
+      } catch (e) {}
       if (convicted) {
         this.say(`The count says guilty — ${guilty} for, ${total - guilty} against — but only ${q.present} of ${q.living} are here. The moot can't bind what it can't hold: this is the fire's ADVISORY sense, not a verdict. No exile. No sentence. The charge stands open until a quorate moot sits.`);
       } else {
         this.say(`The count falls short — ${guilty} for, ${total - guilty} against — but only ${q.present} of ${q.living} are here, so this isn't a clearing either. The moot's ADVISORY sense: not proven tonight. The charge stands open.`);
       }
+      this.say(`"Again," someone says, feeding the fire. "The whole village this time — no more half-fires."`);
       try { this.justiceState().mootDemanded = false; } catch (e) {}
       return { advisory: true, convicted, caseId: c.id, present: q.present, living: q.living };
     }
@@ -3991,7 +4008,10 @@
   playerCaseOpen() {
     let bs = null;
     try { bs = this.betrayalState(); } catch (e) { return false; }
-    return (bs.cases || []).some(c => (c.status === 'open' || c.status === 'dormant') && c.accused.includes(this.villagerId));
+    // MOOT QUORUM (sim-quorum 2026-10-13): an advisory moot decided nothing —
+    // the charge stands open, so the formal track still holds the ladder
+    // until a quorate moot binds it.
+    return (bs.cases || []).some(c => (c.status === 'open' || c.status === 'dormant' || c.status === 'advisory') && c.accused.includes(this.villagerId));
   },
   // The justice ladder demanded a moot (refused confrontation, or heat past
   // bearing). Deterministic — no RNG gate: the formal track is the ONLY formal
@@ -4000,7 +4020,10 @@
   forcePlayerAccusation() {
     const bs = this.betrayalState();
     const existing = (bs.cases || []).find(c =>
-      (c.status === 'open' || c.status === 'dormant') && c.accused.includes(this.villagerId));
+      // MOOT QUORUM (sim-quorum 2026-10-13): an advisory moot decided nothing —
+      // its charge stands open. Don't open a SECOND case on the same crimes
+      // while the advisory one waits for its re-convened moot.
+      (c.status === 'open' || c.status === 'dormant' || c.status === 'advisory') && c.accused.includes(this.villagerId));
     if (existing) return existing;
     let crimes = [];
     try { crimes = (this.justiceState().crimes || []).filter(c => !c.caseId); } catch (e) {}
@@ -4056,7 +4079,7 @@
       if (j && !j.mootDemanded && j.stage <= 2 && this.justiceHeat() >= 50) return;
     } catch (e) {}
     const bs = this.betrayalState();
-    if ((bs.cases || []).some(c => (c.status === 'open' || c.status === 'dormant') && c.accused.includes(this.villagerId))) return;
+    if ((bs.cases || []).some(c => (c.status === 'open' || c.status === 'dormant' || c.status === 'advisory') && c.accused.includes(this.villagerId))) return;
     let crimes = [];
     try { crimes = (this.justiceState().crimes || []).filter(c => !c.caseId); } catch (e) {}
     const heat = (() => { try { return this.justiceHeat(); } catch (e) { return 0; } })();
@@ -4532,6 +4555,33 @@
     if (actionId === 'flee') return this.fleeBeforeVerdict(caseId);
     return null;
   },
+  // MOOT QUORUM UPGRADE PATH (sim-quorum 2026-10-13): an advisory moot left
+  // the charge standing open — nothing was decided, so the village tries
+  // again. A few days after the half-fire, the case re-opens and the normal
+  // convening ticks (playerCaseTick / npcMootTick) call a fresh moot through
+  // the same conductTrial machinery, with attendance re-drawn. If the accused
+  // are gone (dead, exiled, fled) there's nobody left to try and the case
+  // goes quiet.
+  mootAdvisoryTick() {
+    const bs = this.betrayalState();
+    const day = this.state.scholar.day;
+    let npcs = [];
+    try { npcs = this.npcIds() || []; } catch (e) {}
+    for (const c of (bs.cases || [])) {
+      if (c.status !== 'advisory') continue;
+      if (day - (c.advisoryDay || 0) < 3) continue;
+      const acc = c.accused || [];
+      const accusedHere = acc.some(a => this.isPlayer(a)
+        ? !this.state.scholar.exiled
+        : npcs.includes(a));
+      if (!acc.length || !accusedHere) { c.status = 'dormant'; continue; }
+      c.status = 'open';
+      c.trial = null;
+      // "the accused" not whoTag(acc[0]): whoTag gives 'you' for the player
+      // ("You answers" is ungrammatical) — the role noun reads right for all.
+      this.say(`Word goes around the fires: the moot sits again tonight, and this time the village is HERE. The accused answers — properly, in front of everyone.`);
+    }
+  },
   // NPC-MOOT TICK (journey-social 2026-10-12 r7): cases where an NPC stands
   // accused (an ambush plot sprung on a villager) had NO natural path to a
   // moot. The village gossiped forever, and caseDiscoveryTick promised
@@ -4618,6 +4668,7 @@
     this.betrayalDaily();
     try { this.simBriberyTick(); } catch (e) {}
     try { this.caseDiscoveryTick(); } catch (e) {}
+    try { this.mootAdvisoryTick(); } catch (e) {}
     try { this.playerCaseTick(); } catch (e) {}
     try { this.npcMootTick(); } catch (e) {}
     try { this.trialVoteTick(); } catch (e) {}
