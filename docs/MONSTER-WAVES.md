@@ -160,16 +160,19 @@ actually does):
   valid strategy: wait for the skip beat.
 
 
-## Wave 4: The Mirror Draft (4 wave-3 LEDGER points + scaleRank >= 'regional') (wave3 batch A: evidence note, MONSTER-WAVES block, build-notes entry)
+## Wave 4: The Mirror Draft (Standing >= 100)
 
 Steve 2026-10-10: identity is "The Mirror Draft" (not "The Audience
 Draft"). The System has watched long enough to build monsters out of *us* —
 our fears, faiths, formats, institutions, weaponized. The horror: it's made
-of you. Gate is ledger points + scale, never pure calendar: 4 wave-3 ledger
-points (kills only, village-wide) AND scale rank >= 'regional'
-(`scaleAtLeast()` in game.js; reads `scaleRank()` defensively — works with
-and without hierarchy.js). (The 8730921c engagement lanes were reversed
-2026-10-10 — see Wave 3's history note.)
+of you. Gate is VILLAGE STANDING (2026-10-13, Steve's flexible-route call,
+replacing the old 4-wave-3-points + regional two-rung gate that 0/16 measured
+runs ever met both rungs of): standing >= 100, earned by blood (+25 per
+wave-3+ ledger kill point, per-type cap 2), bonds (+34 per seasoned link,
+30+ days and trust 40+), or bread (+20 per major feast, quality>=1) — pure
+or hybrid paths. Never pure calendar. The fiction: waves 4-5 are the
+System's *response* to your standing. You've been noticed. (The 8730921c
+engagement lanes were reversed 2026-10-10 — see Wave 3's history note.)
 
 9 monsters: The Congregation (faith as a weapon — genuine absolution at the
 price of obedience; heresy is the counter), The Strike (a house-sized
@@ -189,13 +192,14 @@ dark mirror of the food thesis).
 Bands (anchored): damage 35-95, HP 850-1500, pierce 0.2-0.5. A 4-6 round
 fight for a godhood build (~220 dmg/round).
 
-## Wave 5: The Producers (3 wave-4 LEDGER points + scaleRank >= 'national')
+## Wave 5: The Producers (Standing >= 200 AND wave-4 faced)
 
 Steve 2026-10-10: identity is "The Producers" (not "Oversight Fauna"). You
 are strong enough to threaten the narrative. The narrative sends its immune
 system: censors, editors, cancellers. The horror: the show is fighting back.
-Gate: 3 wave-4 ledger points (kills only, village-wide) AND scale rank >=
-'national'.
+Gate: village standing >= 200 AND wave 4 faced (2026-10-13, Steve's
+flexible-route call, replacing the old 3-wave-4-points + national two-rung
+gate that was unreachable by construction).
 
 8 monsters: The Cancellation (fights your existence in the show — un-teaches
 abilities; go off-script or spend favor), The Editor (cuts your last turn,

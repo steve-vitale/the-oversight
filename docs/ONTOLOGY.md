@@ -1218,6 +1218,19 @@ Custom SVG sprite registry for the visual identity law.
 
 **Consumes:** —
 
+### standing (`standing.js`)
+The village's Standing with the System — one bar, three sources (war, diplomacy, plenty). Waves 4-5 unlock on Standing, not on the old two-rung kill+scale gate: the System escalates its attention as the village proves itself. Steve 2026-10-13: the flexible route — several paths or hybrid paths to victory; no win before day 90; every wave must have an impact.
+
+**Provides:** standingCfg(), villageStanding(), villageStandingTotal(), standingLine()
+
+**Rules:**
+- standing_village_level: true (code: standing.js — computed from village state: the ledger, the link roll, the feast log. Never the scholar alone; a new adventurer inherits the village's standing, like the ledger.)
+- standing_no_new_tracking: true (code: standing.js — reads waveLedgerPoints(), _linkSeasoned(), state.feastLog (written by hostFeast). No parallel counters.)
+- standing_sim_tuning: true (code: standing.js — point values and thresholds are sim starting points per the 2026-10-13 spec, not canon; tune on measured evidence.)
+- standing_villager_kills_count: true (code: standing.js — the war source reads waveLedgerPoints, which scores player AND villager kills (recordWaveKill). A mayor whose villagers do the killing earns war standing.)
+
+**Consumes:** —
+
 ### statusEffects (`statusEffects.js`)
 Data-driven status effect engine. Statuses (poison, disease, bleed, stun, fear, slow, burn) are declared in statusEffects.json; this module provides Game.applyStatus() as the single application path, Game.tickStatuses() for per-turn/per-dayPart ticks, and Game.cureStatus(). Stun-family bridges legacy stunned/stunFull fighter fields; poison/disease mirror s.poisons/s.diseases so herbal_remedy/purify keep working. Replaces ad-hoc status handling.
 

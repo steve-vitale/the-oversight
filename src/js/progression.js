@@ -577,11 +577,14 @@
       const crises = crisesN >= 3;
       let rank = 'village';
       try { rank = (typeof this.scaleRank === 'function') ? this.scaleRank() : 'village'; } catch (e) {}
-      // National is the bar: the table judges a world power. Regional
-      // primacy is real standing (it feeds the wave-4 unlock gate) but it
-      // is a neighborhood — deliberate call, documented as insufficient.
+      // STANDING (2026-10-13, Steve): the separate scale rung is DROPPED —
+      // Standing (war/bonds/bread, standing.js) already measures what the
+      // scale rung measured, and the Feared path must be able to sit at the
+      // table without links. The experience/impact bars (waves fought,
+      // contests, crises) stay. `scale` is still reported honestly in the
+      // breakdown for beat text and tests.
       const scale = rank === 'national' || rank === 'global';
-      return { ok: !!(waves && contests && crises && scale), waves, contests, crises, scale, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
+      return { ok: !!(waves && contests && crises), waves, contests, crises, scale, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
     },
     checkArc() {
       const pg = this.progState(), s = this.state.scholar;

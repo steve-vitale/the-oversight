@@ -26285,6 +26285,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         buffGranted = !!(_gr && _gr.granted);
       } catch (e) {}
       try { if (this.tickAction) this.tickAction(48); } catch (e) {}
+      // STANDING (2026-10-13): the village remembers its feasts. The plenty
+      // source of Standing reads state.feastLog — bounded, village-level, no
+      // parallel tracking. quality>=1 (fine or legendary) counts as major; a
+      // thin quiet meal (0) does not.
+      try {
+        this.state.feastLog = this.state.feastLog || [];
+        this.state.feastLog.push({ day, quality: qualityGated | 0 });
+        if (this.state.feastLog.length > 60) this.state.feastLog.splice(0, this.state.feastLog.length - 60);
+      } catch (e) {}
       try { this.save(); } catch (e) {}
       return {
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],
@@ -27601,13 +27610,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return n;
       } catch (e) { return 0; }
     },
-    // SCALE-DEFENSIVE (2026-10-10): scaleRank() is being built in parallel in
-    // hierarchy.js. Read it defensively — works with AND without it. Absent
-    // (or unrecognized) rank defaults to 'regional': wave 4 gates on ledger
-    // points alone until the scale system ships; wave 5 still needs 'national'.
+    // STANDING GATE (2026-10-13, Steve): waves 4-5 unlock on village Standing
+    // (standing.js) — not the old two-rung kill+scale gate (0/16 measured
+    // runs met both rungs, r17 tablerecon). The System escalates its
+    // attention as the village proves itself: by blood, bonds, or bread.
+    // Waves 1-3 UNCHANGED.
     unlockedWave() {
       const day = this.state.scholar.day || 1;
-      const rank = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
       let bar = { 1: 5, 2: 5, 3: 4, 4: 3, 5: 2 }, d2 = 8, dN = 25;
       try {
         const cfg = (typeof this.waveLedgerCfg === 'function') ? this.waveLedgerCfg() : null;
@@ -27618,8 +27627,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       const pts = (w) => ((typeof this.waveLedgerPoints === 'function') ? (this.waveLedgerPoints(w) | 0) : 0);
-      if (pts(4) >= ((bar[4] | 0) || 3) && this.scaleAtLeast(rank, 'national')) return 5;
-      if (pts(3) >= ((bar[3] | 0) || 4) && this.scaleAtLeast(rank, 'regional')) return 4;
+      let standing = 0, t4 = 100, t5 = 200;
+      try {
+        standing = (typeof this.villageStandingTotal === 'function') ? this.villageStandingTotal() : 0;
+        const sc = (typeof this.standingCfg === 'function') ? this.standingCfg() : null;
+        if (sc) { t4 = (sc.t4 | 0) || 100; t5 = (sc.t5 | 0) || 200; }
+      } catch (e) {}
+      let w4faced = false;
+      try { w4faced = (typeof this.waveEngaged === 'function') ? this.waveEngaged(4) > 0 : false; } catch (e) {}
+      if (standing >= t5 && w4faced) return 5;
+      if (standing >= t4) return 4;
       if (day >= dN && pts(2) >= ((bar[2] | 0) || 5)) return 3;
       if (day >= d2 && pts(1) >= ((bar[1] | 0) || 5)) return 2;
       return 1;
@@ -27780,7 +27797,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     scalePointerW4() {
       try {
         this.say('\u{1F4FA} "CLEARED THE BOARD! Every last one of them — ON CAMERA! The audience is still chanting your name, you beautiful violent overachievers!"');
-        this.say('\u{1F4FA} "But real talk? The next act needs a BIGGER STAGE. I can\'t stage it with ONE fire — there\'s not enough of you to REFLECT, you feel me? Get me a NETWORK. More villages. More story. Make it worth escalating."');
+        this.say('\u{1F4FA} "But real talk? The next act needs a BIGGER STAGE. I can\'t stage it with ONE fire — there\'s not enough of you to REFLECT, you feel me? Get me STANDING — blood, bonds, or bread. Rack up the kills, season your alliances, or feast like legends. Make it worth escalating."');
         const day = (this.state && this.state.scholar && this.state.scholar.day) || 1;
         this.state._scalePtrW4EchoDay = day + 1;
       } catch (e) {}

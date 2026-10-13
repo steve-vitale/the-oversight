@@ -55,7 +55,11 @@ async function main() {
   // ============ 1. WAVE LEDGER GATES (Steve 2026-10-10 — REVERSAL of the
   // bal-waves engagement lanes, commit 8730921c). Unlocks are ledger-only:
   // kills score (player or villager), engagements score NOTHING toward
-  // unlocks. Bars: w1->2: 5 pts, w2->3: 5 pts, w3->4: 4 pts, w4->5: 3 pts.
+  // unlocks. Bars: w1->2: 5 pts, w2->3: 5 pts.
+  // STANDING (Steve 2026-10-13 — flexible route): waves 4-5 unlock on
+  // village Standing (>= 100 / >= 200 + wave-4 faced), not the old
+  // two-rung kill+scale gate. War = 25/kill pt, bonds = 34/seasoned link,
+  // bread = 20/major feast; pure or hybrid paths.
   // The endgame deed gate (5/5/4/3/2) is untouched.
   // w2: ledger lane — 5 w1 points, day 10
   setDay(10); setLedger({ 1: W1 }); setFaced([]);
@@ -83,25 +87,30 @@ async function main() {
   setDay(30); setLedger({ 2: W2.slice(0, 3) }); setFaced([]);
   check('w3 needs 4 points (3 is not enough)', Game.unlockedWave() < 3, 'uw=' + Game.unlockedWave());
 
-  // w4: ledger lane — 4 w3 points + regional
+  // w4: STANDING lane (2026-10-13, Steve: flexible route — the old two-rung
+  // kill+scale gate is replaced by village Standing >= 100). 4 w3 points =
+  // 100 standing -> wave 4 at ANY rank: the war path needs no links.
   setDay(60); setLedger({ 3: W3 }); setFaced([]); setRank('regional');
-  check('w4 ledger lane (4 w3 kills + regional) unlocks', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
-  // w4: engagements score nothing
+  check('w4 standing lane (4 w3 kills = 100) unlocks', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
+  // w4: engagements score nothing (unchanged)
   setDay(60); setLedger({}); setFaced(['redactor', 'gavel', 'spool']); setRank('regional');
   check('w4 engagement-only (3 faced + regional) stays locked', Game.unlockedWave() < 4, 'uw=' + Game.unlockedWave());
-  // w4: scale floor holds
+  // w4: no rank floor anymore — war path at village rank unlocks via standing
   setDay(60); setLedger({ 3: W3 }); setFaced([]); setRank('village');
-  check('w4 scale floor (ledger full but village) stays locked', Game.unlockedWave() < 4, 'uw=' + Game.unlockedWave());
+  check('w4 war path (ledger full, village rank) unlocks via standing', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
 
-  // w5: ledger lane — 3 w4 points + national
+  // w5: STANDING lane — 200 standing AND wave-4 faced. 3 w4 kills = 75 < 200.
   setDay(90); setLedger({ 4: W4 }); setFaced([]); setRank('national');
-  check('w5 ledger lane (3 w4 kills + national) unlocks', Game.unlockedWave() >= 5, 'uw=' + Game.unlockedWave());
-  // w5: engagements score nothing
+  check('w5 needs 200 standing (3 w4 kills = 75) stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
+  // w5: 200 standing via war (8 w3 pts, 2/type cap) + wave-4 faced -> unlocks
+  setDay(90); setLedger({ 3: W3.concat(W3) }); setFaced(['congregation']); setRank('village');
+  check('w5 standing lane (200 + w4 faced) unlocks', Game.unlockedWave() >= 5, 'uw=' + Game.unlockedWave());
+  // w5: 200 standing but wave-4 never faced -> stays locked
+  setDay(90); setLedger({ 3: W3.concat(W3) }); setFaced([]); setRank('national');
+  check('w5 without wave-4 faced stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
+  // w5: engagements score nothing (unchanged)
   setDay(90); setLedger({}); setFaced(['congregation', 'strike']); setRank('national');
   check('w5 engagement-only (2 faced + national) stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
-  // w5: scale floor holds
-  setDay(90); setLedger({ 4: W4 }); setFaced([]); setRank('regional');
-  check('w5 scale floor (ledger full but regional) stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
   setRank('village');
   if (realScaleRank) Game.scaleRank = realScaleRank;
 

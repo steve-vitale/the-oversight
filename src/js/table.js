@@ -304,6 +304,21 @@
       } catch (e) { return {}; }
     },
 
+    // WIN DAY FLOOR (2026-10-13, Steve): no win before day 90 — hard floor,
+    // engine-enforced in the win check (never in the seat logic). A table
+    // path that resolves early is DEFERRED, not denied: the table waits,
+    // the game continues, the win can land on/after day 90. Every wave must
+    // have had its impact before the win — the floor plus the full seat's
+    // distinct-fought bars enforce it.
+    winDayFloorOk() {
+      try { return ((this.state.scholar || {}).day || 0) >= 90; } catch (e) { return false; }
+    },
+    winDayFloorDefer(T) {
+      this.say('◈ THE TABLE WAITS — "Ninety days. We do not price a life half-lived. Come back when the village has seen ninety dawns — the table will still be here."');
+      T.phase = 'paths';
+      try { this.save(); } catch (e) {}
+    },
+
     // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the world
     // holds its breath. Ambient monster pressure against villagers is
     // suspended — no random field fights, no wild encounters, no patrol
@@ -619,6 +634,7 @@
           this.tableRunBeat();
         } else {
           this.say('You take the comfort. It is gentle. It is a trap. It is an ending — the story resolves, which is more than the void offered.');
+          if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
           T.phase = 'done';
           this.over = true; this.won = true;
           try { this.wipe(); } catch (e) {}
@@ -708,6 +724,7 @@
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: fin.label }); } catch (e) {}
       try { this.metaNoteTableChoice && this.metaNoteTableChoice(T.path, fin.id); } catch (e) {}
       s.tableChoices = null;
+      if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
       T.phase = 'done';
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
@@ -727,6 +744,7 @@
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}
       const s = this.state.scholar;
       s.tableChoices = null;
+      if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
       T.phase = 'done';
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
