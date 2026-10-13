@@ -48,7 +48,8 @@ function mulberry32(a) {
 Math.random = mulberry32(SEED); // seeded BEFORE eval
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
+// (fix-disease 2026-10-13: no head -80 — the old cap silently dropped safetynets.js from sims)
+const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html", { cwd: ROOT }).toString().split('\n')
   .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 global.window = global;
 order.forEach(f => {
