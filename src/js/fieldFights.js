@@ -78,6 +78,129 @@
   var MAX_ROUNDS = 15;
 
   var methods = {
+    // villagerTrickAction(vid, mdef, fctx) -> {type, why} or null
+    // COUNTER EXECUTION (2026-10-13): the village knows this beast's trick —
+    // perform it. Same beats the player gets, same costs, same caps (parity,
+    // Steve 2026-10-13 — no NPC advantage). fctx: {round, vHp, vHpMax, lead,
+    // rec, vp}. Returns null when the kind needs a grid/telegraph/segments
+    // the abstract model lacks — those are documented as un-actuatable,
+    // never faked.
+    // ACTUABLE: shout (belltoad, hummice), offer_food (lockpick_raccoon),
+    // spool feed-waits, chorus dance, buffering stand-still.
+    // UN-ACTUATABLE: move_windup/move_x2/sidestep/keep_distance (need grid),
+    // strike_windup/strike_recovery/strike_first (need telegraph state),
+    // strike_nonhead (needs segments), fresh_weapon (needs mid-fight swap),
+    // wait vs heckler/moderator (shame/mute not in field model),
+    // terms_of_service/gavel/callback/ad_break/focus_group/redactor
+    // (need reading/viewership/ritual/adds — documented in evidence).
+    villagerTrickAction: function (vid, mdef, fctx) {
+      try {
+        var mid = mdef.id;
+        var known12 = this.monsterCounterKnown ? this.monsterCounterKnown(mid) : false;
+        var knownSig = !!((this.state.villagerTricks || {})[mid]);
+        if (!known12 && !knownSig) return null;
+        var rec = fctx.rec || {};
+        // ---- waves 1-2: the counter field ----
+        if (known12 && mdef.counter) {
+          var kind = mdef.counter.kind;
+          if (kind === 'shout') {
+            var used = rec.trickShouts || 0;
+            // PARITY: 2/fight cap, costs the strike — exactly tbPlayerShout.
+            // A fighter's judgment: bellow when the sonic attack is hurting
+            // you and you need breathing room. Not an opening — a reaction.
+            // (Shouting twice then fleeing without striking is worse than
+            // just fighting; the strike is the default.)
+            if (used < 2 && fctx.vHp < fctx.vHpMax * 0.75) {
+              return { type: 'shout', why: mdef.counter.trick };
+            }
+          }
+          if (kind === 'offer_food') {
+            // PARITY: costs 1 real food unit + the action, monster bolts —
+            // exactly tbPlayerOfferFood. No food, no bribe.
+            if (this.villagerHasFood && this.villagerHasFood(vid)) {
+              return { type: 'offer_food', why: mdef.counter.trick };
+            }
+          }
+          // strike_lead: already the field-fight default (targets lead).
+        }
+        // ---- wave-3 signatures: village-learned counterplay ----
+        if (knownSig) {
+          if (mid === 'spool' && fctx.round <= 3) {
+            // Feed it nothing while it records — the replay is silence.
+            // (sigW3bFieldMonster records rec.mDealt delta; 0 dealt = 0 back.)
+            return { type: 'wait', why: 'spool-record' };
+          }
+          if (mid === 'chorus_line' && (fctx.round % 4 === 0)) {
+            // Dance on the downbeat — the kick catches air. (Beat tracks the
+            // round in the common case; a stunned round desyncs it — honest
+            // mistimed dance, documented.)
+            return { type: 'dance', why: 'chorus-downbeat' };
+          }
+          if (mid === 'buffering' && fctx.vHp < fctx.vHpMax * 0.6) {
+            // Stand still — it aims where you'll be. Whiff.
+            return { type: 'wait', why: 'buffering-still' };
+          }
+        }
+        return null;
+      } catch (e) { return null; }
+    },
+    // villagerHasFood(vid): honest food check for the offer_food trick —
+    // mirrors tbPlayerOfferFood's kcalEach>0 test against the villager's
+    // own items.
+    villagerHasFood: function (vid) {
+      try {
+        var S = _g.S || ((_g.Scattering || {}).S) || {};
+        var vp = ((this.data.villagers || []).find(function (x) { return x.id === vid; }) ||
+                  (this.data.background_survivors || []).find(function (x) { return x.id === vid; })) || {};
+        var items = vp.items || [];
+        for (var i = 0; i < items.length; i++) {
+          var ent = items[i], eid = null, u = 1;
+          if (typeof ent === 'string') { eid = ent; }
+          else if (ent) { eid = ent.itemId || ent.id; u = ent.units || 1;
+            if ((ent.kcalEach || 0) > 0 && u > 0) return true; }
+          if (eid) {
+            for (var d = 0; d < (this.data.items || []).length; d++) {
+              if (this.data.items[d].id === eid && (this.data.items[d].kcalEach || 0) > 0 && u > 0) return true;
+            }
+          }
+        }
+        return false;
+      } catch (e) { return false; }
+    },
+    // villagerSpendFood(vid): consume 1 unit of the first food found.
+    // Returns the food name or null.
+    villagerSpendFood: function (vid) {
+      try {
+        var vp = null;
+        var vl = this.data.villagers || [];
+        for (var vi = 0; vi < vl.length; vi++) if (vl[vi].id === vid) vp = vl[vi];
+        if (!vp) { var bs = this.data.background_survivors || []; for (var bi = 0; bi < bs.length; bi++) if (bs[bi].id === vid) vp = bs[bi]; }
+        if (!vp || !vp.items) return null;
+        for (var i = 0; i < vp.items.length; i++) {
+          var ent = vp.items[i], eid = null, u = 1, nm = 'food';
+          if (typeof ent === 'string') { eid = ent; }
+          else if (ent) {
+            eid = ent.itemId || ent.id; u = ent.units || 1; nm = ent.name || nm;
+            if ((ent.kcalEach || 0) > 0 && u > 0) {
+              ent.units = u - 1;
+              if (ent.units <= 0) vp.items.splice(i, 1);
+              return nm;
+            }
+            continue;
+          }
+          if (eid) {
+            for (var d = 0; d < (this.data.items || []).length; d++) {
+              var def = this.data.items[d];
+              if (def.id === eid && (def.kcalEach || 0) > 0 && u > 0) {
+                if (typeof ent === 'string') vp.items.splice(i, 1);
+                return def.name || nm;
+              }
+            }
+          }
+        }
+        return null;
+      } catch (e) { return null; }
+    },
     // fieldFight(vid, mdef, m, opts) -> record
     //   vid: villager id. mdef: monster definition (monsters.json).
     //   m: world-monster entity or null (ephemeral meeting). Wounds persist
@@ -103,6 +226,21 @@
         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
       };
+      // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
+      // It's much less risky to learn about a monster (observe, track,
+      // survive) than to go straight for the kill. The villager OVERRIDES
+      // the cautious default and engages when:
+      // - the trick is known (they know how to fight it), OR
+      // - they're in a party (opts.allies — combined strength they assess), OR
+      // - the first damage exchange shows good odds (checked in morale).
+      // Situational judgment, never automatic. The non-lethal observation
+      // path is HOW they learn; this is WHEN they choose learning over killing.
+      try {
+        var _trickKnown = this.villageKnowsTrick ? this.villageKnowsTrick(mdef.id) : false;
+        var _partySize = opts.allies || 0;
+        rec.intent = (_trickKnown || _partySize > 0) ? 'engage' : 'learn';
+        rec.intentWhy = _trickKnown ? 'trick-known' : (_partySize > 0 ? 'party' : 'learn-first');
+      } catch (e) { rec.intent = 'engage'; rec.intentWhy = 'fallback'; }
       // GEAR-UP (Steve 2026-10-09): re-equip only, never acquisition — a
       // fighter doesn't whittle a spear mid-fight. Deterministic (autoEquip
       // has no RNG), so seeded contest fights stay deterministic.
@@ -535,6 +673,32 @@
                   if (typeof _sig5 === 'number') total = _sig5;
                 }
               } catch (e) {}
+              // COUNTER EXECUTION (2026-10-13): the villager's trick disrupts.
+              // PARITY — these are defensive disruptions, never damage buffs.
+              // Shout: the bellow broke the sonic attack — halved.
+              // Stand-still (buffering): it struck where they were going to
+              // be — whiff, negated. Dance (chorus downbeat): the kick
+              // catches air — negated (the port returns ONLY the kick on
+              // downbeat rounds, so zeroing is exact, not approximate).
+              try {
+                if (rec.trickDisrupt && total > 0) {
+                  var _preT = total;
+                  total = Math.floor(total / 2);
+                  rec.trickDisrupt = 0;
+                  rec.log.push(vName + "'s bellow broke the chorus — the " + mName + "'s note dies mid-croak. " + _preT + ' → ' + total + '.');
+                }
+                if (rec.trickStill && total > 0) {
+                  var _preS = total;
+                  total = 0;
+                  rec.trickStill = 0;
+                  rec.log.push(vName + ' stands perfectly still — the ' + mName + ' strikes where they were going to be. Whiff. (' + _preS + ' avoided)');
+                }
+                if (rec.trickDance && mdef.id === 'chorus_line' && total > 0) {
+                  var _preD = total;
+                  total = 0;
+                  rec.log.push(vName + ' dances on the downbeat — the kick catches air. (' + _preD + ' avoided)');
+                }
+              } catch (e) {}
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in is exposed (no armor) and draws some of the hits.
               // TANK — DRAW FIRE (2026-10-12): the taunter makes themselves
@@ -613,14 +777,37 @@
             var lead = null;
             for (var li = 0; li < members.length; li++) { if (members[li].hp > 0) { lead = members[li]; break; } }
             if (!lead) break;
-            // ABILITY — FIELD MEDICINE (first aid): the medic's hands. Once
-            // per fight, when hurt (<60% of max), they stop and bind the
-            // wound INSTEAD of striking — the strike is spent, like the
-            // player's "Heal 20 HP, once per day part" costs their action.
-            // Off-screen a field fight is the honest unit of "per day part".
-            // +20 HP, narrated, never silent. (structural-combat 2026-10-10:
-            // wound-stabilization upstream of death.)
-            if (!abMedicated && vHasAb('field_medicine') && vHp > 0 && vHp < vHpMax * 0.6) {
+            // COUNTER EXECUTION (2026-10-13): the village knows the trick —
+            // perform it. Same costs as the player (the trick spends the
+            // action: no strike that round), same caps. Parity, no advantage.
+            var trickAct = null;
+            try {
+              trickAct = this.villagerTrickAction(vid, mdef, { round: round, vHp: vHp, vHpMax: vHpMax, lead: lead, rec: rec, vp: vp });
+            } catch (e) { trickAct = null; }
+            if (trickAct) {
+              if (trickAct.type === 'shout') {
+                rec.trickShouts = (rec.trickShouts || 0) + 1;
+                rec.trickDisrupt = 1; // the monster's next attack is halved — the note dies mid-croak
+                rec.log.push('R' + round + ': ' + vName + ' cups their hands and BELLOWS — raw noise, no words. (' + (trickAct.why || 'the trick') + ' — ' + rec.trickShouts + '/2)');
+              } else if (trickAct.type === 'offer_food') {
+                var _fname = (this.villagerSpendFood ? this.villagerSpendFood(vid) : null) || 'food';
+                rec.log.push('R' + round + ': ' + vName + ' tosses ' + _fname + ' — it CANNOT resist. Drops everything mid-scamper, stuffs its cheeks, bolts.');
+                rec.outcome = 'mFlee';
+                break;
+              } else if (trickAct.type === 'wait') {
+                if (trickAct.why === 'spool-record') {
+                  // The sigW3b port records rec.mDealt delta; 0 dealt = the
+                  // replay is silence. Feeding it nothing IS the trick.
+                  rec.log.push('R' + round + ': ' + vName + ' gives the spool nothing — waits, breathes, checks a strap. (Feeding it silence.)');
+                } else {
+                  rec.trickStill = 1; // buffering: it aims where you'll be — whiff
+                  rec.log.push('R' + round + ': ' + vName + ' stands perfectly still. Gives it nothing to predict.');
+                }
+              } else if (trickAct.type === 'dance') {
+                rec.trickDance = 1; // the downbeat kick catches air
+                rec.log.push('R' + round + ': ' + vName + ' dances on the downbeat.');
+              }
+            } else if (!abMedicated && vHasAb('field_medicine') && vHp > 0 && vHp < vHpMax * 0.6) {
               abMedicated = true;
               var _mh = Math.min(20, vHpMax - vHp);
               vHp += _mh;
@@ -681,6 +868,10 @@
         }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
+        // COUNTER EXECUTION (2026-10-13): the dance is a per-round flag — a
+        // mistimed dance (monster went first) must not leak into a later
+        // downbeat. Clear after the round's phases all ran.
+        rec.trickDance = 0;
         // SITUATIONAL MORALE (Steve 2026-10-09): after a couple of rounds the
         // trajectory is legible. Winning -> commit (only the floor breaks
         // them). Hopeless and alone -> believable flight. Hopeless with help
@@ -699,9 +890,22 @@
             if (hopeless) rec.everHopeless = true;
           }
         }
+        // LEARN-VS-FIGHT (Steve 2026-10-13): the situational override. A
+        // learning villager reads the first exchange — good odds → commit
+        // to the kill. Not winning after the opening → withdraw with the
+        // observation (you're here to learn, not to die).
+        if (rec.intent === 'learn' && round >= 2 && winning) {
+          rec.intent = 'engage'; rec.intentWhy = 'good-exchange';
+          rec.log.push(vName + ' reads the fight — the odds are good. Committing to the kill.');
+        }
+        if (rec.intent === 'learn' && round >= 3 && !winning && !rec.outcome) {
+          rec.outcome = 'vFlee'; rec.fleeLearn = true; rec.fleeHpFrac = vHp / vHpMax;
+          rec.log.push(vName + ' has seen enough — withdraws to report back. (Learn-first: not winnable, not worth the blood.)');
+          break;
+        }
         if (winning) {
           fleeAt = 0.05;
-        } else if (hopeless && !helpCalled && allies > 0 && allyVids.length) {
+        } else if (hopeless && !helpCalled && allies > 0 && allyVids.length && rec.intent !== 'learn') {
           helpCalled = true; allyIn = true; allyHp = allyMax;
           allyVid = allyVids.shift(); allies--;
           // AID (comms 2026-10-10): foreign allies carry their own names.
@@ -744,6 +948,7 @@
             if (!rec.gateShut) { rec.gateShut = true; rec.log.push(vName + ' sees how this ends — but the gate is shut. No running.'); }
           } else {
             rec.outcome = 'vFlee'; rec.fleeHopeless = true; rec.fleeHpFrac = vHp / vHpMax;
+            if (rec.intent === 'learn') rec.fleeLearn = true;
             rec.log.push(vName + ' sees how this ends — and runs while running still works.');
             break;
           }
@@ -762,7 +967,9 @@
           if (opts.noFlee) {
             if (!rec.pastSense) { rec.pastSense = true; rec.log.push(vName + ' is past the point of sense and still standing.'); }
           } else {
-            rec.outcome = 'vFlee'; rec.fleeHopeless = hopeless; rec.fleeHpFrac = vHp / vHpMax; break;
+            rec.outcome = 'vFlee'; rec.fleeHopeless = hopeless; rec.fleeHpFrac = vHp / vHpMax;
+            if (rec.intent === 'learn') rec.fleeLearn = true;
+            break;
           }
         }
         // THE LEAD FALLS: the pack coordinates through the lead animal —
@@ -807,6 +1014,17 @@
           if (rec.outcome === 'vKill') this.villagerGainXP(vid, 'combat', 2, 'monster kill');
           else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee') this.villagerGainXP(vid, 'combat', 1, 'survived a fight');
           else if (rec.outcome === 'evade') this.villagerGainXP(vid, 'field', 1, 'read the signs');
+        }
+      } catch (e) {}
+      // NON-LETHAL COUNTER LEARNING (Steve 2026-10-13): surviving teaches
+      // the trick. A villager who lives through an encounter with a
+      // trick-bearing beast brings home an observation — two observations
+      // and the village pieces together the counter, no kill required. The
+      // dead tell no tales (vDie excluded); kills teach via the slain path.
+      try {
+        if (vid && vid !== 'player' && this.noteVillagerTrickObservation &&
+            (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade')) {
+          this.noteVillagerTrickObservation(vid, mdef.id);
         }
       } catch (e) {}
       // PARTY-BOND (2026-10-12): surviving together is the practice. The pair

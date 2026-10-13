@@ -28767,12 +28767,75 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const slain = this.state.villageSlain || {};
         const known = this.state.monsterCounters || {};
+        const obs = this.state.villageCounterObs || {};
         for (const mdef of (this.data.monsters || [])) {
           if (!mdef.counter || known[mdef.id]) continue;
-          if ((slain[mdef.id] || 0) >= 1) return mdef.id;
+          // NON-LETHAL KNOWLEDGE (Steve 2026-10-13): the kill-gate was the
+          // gap. Two survived encounters is enough for the fire to have a
+          // theory — same fiction as the 1-slay retune, no blood required.
+          if ((slain[mdef.id] || 0) >= 1 || (obs[mdef.id] || 0) >= 2) return mdef.id;
         }
         return null;
       } catch (e) { return null; }
+    },
+    // villagerTrickDefs(): wave-3 signature counterplay as village-learnable
+    // tricks. The signature mechanics are engine-real (sigW3a/b/c); this is
+    // the FIGHT-AI knowledge only — wiring to the ledger convention
+    // (monsterCounters scoring) is the signature workers' call, not this
+    // module's. Only the actuable subset is listed; the rest is documented
+    // in the arm's evidence as un-actuatable in the abstract field model.
+    villagerTrickDefs() {
+      return {
+        spool: { trick: 'Feed it nothing', reveal: 'It records your strikes and plays them back. Give it waits and heals while it records and the replay is silence.' },
+        chorus_line: { trick: 'Dance on the downbeat', reveal: 'The kick only lands on beat 4 of the 4/4 count. Dance and it catches air — but dancing is your whole turn.' },
+        buffering: { trick: 'Stand still', reveal: 'It aims where you will be. Give it nothing to predict and it whiffs.' },
+      };
+    },
+    // villageKnowsTrick(mid): the unified "does the village know this
+    // beast's trick" gate for the field-fight AI. Waves 1-2 via the ledger
+    // convention (monsterCounterKnown); wave-3 signatures via villagerTricks
+    // (set by the non-lethal observation path below).
+    villageKnowsTrick(mid) {
+      try {
+        if (this.monsterCounterKnown && this.monsterCounterKnown(mid)) return true;
+        return !!((this.state.villagerTricks || {})[mid]);
+      } catch (e) { return false; }
+    },
+    // noteVillagerTrickObservation(vid, mid): NON-LETHAL KNOWLEDGE (Steve
+    // 2026-10-13). A villager who survives an encounter with a trick-bearing
+    // beast — fled, drove it off, or saw it in time — brings home an
+    // observation. Two observations and the village pieces together the
+    // trick: no kill required. The dead tell no tales (callers exclude vDie).
+    // Narrated via discoverMonsterCounter / the villagerTricks beat — never
+    // silent.
+    noteVillagerTrickObservation(vid, mid) {
+      try {
+        if (!mid || vid === 'player') return false;
+        const mdef = (this.data.monsters || []).find(m => m.id === mid);
+        if (!mdef) return false;
+        const defs = this.villagerTrickDefs();
+        if (!mdef.counter && !defs[mid]) return false; // no trick to learn
+        if (this.villageKnowsTrick(mid)) return false; // already known
+        const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
+        obs[mid] = (obs[mid] || 0) + 1;
+        try { this.tele('counter_observed', { id: mid, n: obs[mid] }); } catch (e) {}
+        if (obs[mid] < 2) return false;
+        // Two survived encounters: the fire has a theory.
+        if (mdef.counter) {
+          return this.discoverMonsterCounter(mid, 'observed');
+        }
+        // Wave-3 signature: knowledge lives on villagerTricks (NOT the
+        // ledger convention — scoring stays the signature workers' call).
+        const vt = this.state.villagerTricks || (this.state.villagerTricks = {});
+        if (vt[mid]) return false;
+        vt[mid] = true;
+        try { this.tele('counter_discovered', { id: mid, via: 'observed' }); } catch (e) {}
+        const t = defs[mid] || {};
+        const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
+        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
+        try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
     },
 
     // === SWEEPING BEAM (Highbeam Deer) ===
