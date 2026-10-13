@@ -2404,13 +2404,27 @@
   //   files, not here — this section only owns the synths.
   const CombatAudio = (() => {
     let ctx = null, hbTimer = null;
-    let master = null, hbBus = null, sfxBus = null, musicBus = null;
+    let master = null, hbBus = null, sfxBus = null, musicBus = null, voiceBus = null;
+    let sfxUser = null, musicUser = null, voiceUser = null;
     let muted = false;
     try { muted = (typeof localStorage !== 'undefined') && localStorage.getItem('oversight_mute') === '1'; } catch (e) {}
     // VOLUME (Steve 2026-10-12): player-facing volume setting, persisted.
     // The mute toggle remains the hard off; this scales the master gain.
     let vol = 0.9;
     try { const _v = parseFloat(localStorage.getItem('oversight_vol')); if (isFinite(_v)) vol = Math.min(1, Math.max(0, _v)); } catch (e) {}
+    // PER-TYPE VOLUMES (Steve 2026-10-13): separate Sound effects / Music /
+    // Voices sliders. Unity default — the master Volume remains the overall
+    // level. Persisted per bus.
+    const BUS_KEYS = { sfx: 'oversight_vol_sfx', music: 'oversight_vol_music', voice: 'oversight_vol_voice' };
+    let busVol = { sfx: 1, music: 1, voice: 1 };
+    try {
+      if (typeof localStorage !== 'undefined') {
+        for (const _b of Object.keys(BUS_KEYS)) {
+          const _bv = parseFloat(localStorage.getItem(BUS_KEYS[_b]));
+          if (isFinite(_bv)) busVol[_b] = Math.min(1, Math.max(0, _bv));
+        }
+      }
+    } catch (e) {}
     let charge = null;   // active beam-charge stopper
     let sweep = null;    // sustained beam hum {set, stop}
     let noiseBuf = null;
@@ -2431,7 +2445,8 @@
         try { if (sweep) sweep.stop(); } catch (e) {}
         charge = null; sweep = null;
         try { if (muTimer) clearInterval(muTimer); } catch (e) {}
-        ctx = null; master = null; hbBus = null; sfxBus = null; musicBus = null; musicGain = null; muTimer = null; noiseBuf = null;
+        ctx = null; master = null; hbBus = null; sfxBus = null; musicBus = null; voiceBus = null;
+        sfxUser = null; musicUser = null; voiceUser = null; musicGain = null; muTimer = null; noiseBuf = null;
       }
       if (!ctx) {
         try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
@@ -2441,8 +2456,19 @@
         master = ctx.createGain();
         master.gain.value = muted ? 0.0001 : vol;
         hbBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus = ctx.createGain();
+        voiceBus = ctx.createGain();
         musicBus.gain.value = 0.9;
-        hbBus.connect(master); sfxBus.connect(master); musicBus.connect(master);
+        // PER-TYPE USER GAINS (Steve 2026-10-13): in series with the mix
+        // buses — the existing mix automation (ducking, bed levels) writes the
+        // bus gains and is untouched; these compose multiplicatively.
+        sfxUser = ctx.createGain(); musicUser = ctx.createGain(); voiceUser = ctx.createGain();
+        sfxUser.gain.value = Math.max(0.0001, busVol.sfx);
+        musicUser.gain.value = Math.max(0.0001, busVol.music);
+        voiceUser.gain.value = Math.max(0.0001, busVol.voice);
+        hbBus.connect(master);
+        sfxBus.connect(sfxUser); sfxUser.connect(master);
+        musicBus.connect(musicUser); musicUser.connect(master);
+        voiceBus.connect(voiceUser); voiceUser.connect(master);
         master.connect(comp);
         try { comp.connect(ctx.destination); } catch (e) {}
       }
@@ -8533,6 +8559,25 @@
       return vol;
     }
     function getVolume() { return vol; }
+    // PER-TYPE VOLUMES (Steve 2026-10-13): bus is 'sfx' | 'music' | 'voice'.
+    // Unknown bus reads 1 and writes nothing — never throw on a bad caller.
+    function setBusVolume(bus, v) {
+      if (!BUS_KEYS[bus]) return 1;
+      v = Number(v); if (!isFinite(v)) return busVol[bus];
+      busVol[bus] = Math.min(1, Math.max(0, v));
+      try { if (typeof localStorage !== 'undefined') localStorage.setItem(BUS_KEYS[bus], String(busVol[bus])); } catch (e) {}
+      try {
+        const node = bus === 'sfx' ? sfxUser : bus === 'music' ? musicUser : voiceUser;
+        if (ctx && node) {
+          const t = ctx.currentTime;
+          node.gain.cancelScheduledValues(t);
+          node.gain.setValueAtTime(node.gain.value, t);
+          node.gain.linearRampToValueAtTime(Math.max(0.0001, busVol[bus]), t + 0.1);
+        }
+      } catch (e) {}
+      return busVol[bus];
+    }
+    function getBusVolume(bus) { return BUS_KEYS[bus] ? busVol[bus] : 1; }
     // ============ VOICED DIALOGUE (Steve 2026-10-11) ============
     // playVoice(blob, opts): speak a TTS WAV through the EXISTING audio
     // graph — one unlock flow (ensure), one mute (master gain), one bus.
@@ -8557,7 +8602,7 @@
         const src = ctx.createBufferSource();
         src.buffer = buf;
         src.playbackRate.value = opts.pitch || 1;
-        src.connect(sfxBus);
+        src.connect(voiceBus);
         voiceSrc = src;
         src.onended = () => { if (voiceSrc === src) voiceSrc = null; };
         src.start();
@@ -12647,6 +12692,8 @@
       isMuted() { return muted; },
       setVolume(v) { return setVolume(v); },
       getVolume() { return getVolume(); },
+      setBusVolume(bus, v) { return setBusVolume(bus, v); },
+      getBusVolume(bus) { return getBusVolume(bus); },
       playVoice(blob, opts) { return playVoice(blob, opts); },
       stopVoice() { stopVoice(); },
       round(d) { roundTick(d); }, // the System is counting — it gets heavier each round
@@ -14700,17 +14747,47 @@
     const muted = !!(Game.audio && Game.audio.isMuted && Game.audio.isMuted());
     let vol = 90;
     try { if (Game.audio && Game.audio.getVolume) vol = Math.round(Game.audio.getVolume() * 100); } catch (e) {}
+    // PER-TYPE VOLUMES (Steve 2026-10-13): separate Sound effects / Music /
+    // Voices sliders alongside the master Volume.
+    let sfxVol = 100, musicVol = 100, voiceVol = 100;
+    try {
+      if (Game.audio && Game.audio.getBusVolume) {
+        sfxVol = Math.round(Game.audio.getBusVolume('sfx') * 100);
+        musicVol = Math.round(Game.audio.getBusVolume('music') * 100);
+        voiceVol = Math.round(Game.audio.getBusVolume('voice') * 100);
+      }
+    } catch (e) {}
     const voiceOn = !!(Game.voiceEnabled && Game.voiceEnabled());
-    let packs = '';
+    let packs = '', packN = 0, missingMB = 0;
     try {
       const st = Game.voicePackStatus ? Game.voicePackStatus() : {};
-      const n = Object.keys(st).filter(k => st[k] === 'cached').length;
-      packs = n + '/4 voice packs cached';
+      packN = Object.keys(st).filter(k => st[k] === 'cached').length;
+      packs = packN + '/4 voice packs cached';
+      const VP = Game.VOICE_PACKS || {};
+      for (const k of Object.keys(st)) {
+        if (st[k] !== 'cached' && VP[k] && VP[k].approxMB) missingMB += VP[k].approxMB;
+      }
+      if (!missingMB && packN < 4) missingMB = (4 - packN) * 63;
     } catch (e) {}
     const ov = document.createElement('div');
     ov.id = 'settings-overlay';
     ov.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);'
       + 'display:flex;align-items:flex-end;justify-content:center;';
+    // volRow: one labeled slider row (border-bottom; the row after the last
+    // slider in a group is the toggle row, which closes the group).
+    const volRow = (id, label, val, aria) =>
+      `<div style="padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">`
+      + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
+      + `<span style="font-size:15px">${label}</span><span id="${id}num" style="font-size:13px;opacity:.6">${val}%</span></div>`
+      + `<input id="${id}" type="range" min="0" max="100" step="1" value="${val}" style="width:100%" aria-label="${aria}"></div>`;
+    // Download row: only when packs are missing. ~63 MB per Piper voice;
+    // they otherwise lazy-load one at a time on first voiced line.
+    const dlRowHtml = packN < 4
+      ? `<div id="set-dlrow" style="display:flex;align-items:center;justify-content:space-between;`
+        + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Download voice packs`
+        + `<span id="set-dlstatus" style="display:block;font-size:12px;opacity:.55;font-weight:normal">${packs}${missingMB ? ' · ≈' + missingMB + ' MB' : ''}</span></span>`
+        + `<span style="font-size:15px;color:#0a84ff">Download</span></div>`
+      : '';
     ov.innerHTML =
       `<div style="background:#1b1b1f;border-radius:16px 16px 0 0;width:100%;max-width:480px;`
       + `max-height:82vh;overflow:auto;padding-bottom:calc(20px + env(safe-area-inset-bottom))" role="dialog" aria-label="Settings">`
@@ -14719,19 +14796,21 @@
       + `<button class="btn sm" id="set-done">Done</button></div>`
       + `<div style="padding:8px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Sound</div>`
       + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
-      + `<div style="padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">`
-      + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
-      + `<span style="font-size:15px">Volume</span><span id="set-volnum" style="font-size:13px;opacity:.6">${vol}%</span></div>`
-      + `<input id="set-vol" type="range" min="0" max="100" step="1" value="${vol}" style="width:100%" aria-label="Volume"></div>`
+      + volRow('set-vol', 'Volume', vol, 'Master volume')
+      + volRow('set-vol-sfx', 'Sound effects', sfxVol, 'Sound effects volume')
+      + volRow('set-vol-music', 'Music', musicVol, 'Music volume')
       + `<div id="set-muterow" style="display:flex;align-items:center;justify-content:space-between;`
-      + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Sound</span>`
+      + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Mute all</span>`
       + `<span id="set-mutesw">${setSwitch(!muted)}</span></div></div>`
       + `<div style="padding:14px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Voice</div>`
       + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
+      + volRow('set-vol-voice', 'Voices', voiceVol, 'Voice volume')
       + `<div id="set-voicerow" style="display:flex;align-items:center;justify-content:space-between;`
-      + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Voiced dialogue`
-      + `<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">Spoken NPC lines${packs ? ' · ' + packs : ''}</span></span>`
-      + `<span id="set-voicesw">${setSwitch(voiceOn)}</span></div></div>`
+      + `padding:12px 16px;cursor:pointer${packN < 4 ? ';border-bottom:1px solid rgba(255,255,255,.07)' : ''}"><span style="font-size:15px">Voiced dialogue`
+      + `<span id="set-voicepacks" style="display:block;font-size:12px;opacity:.55;font-weight:normal">Spoken NPC lines${packs ? ' · ' + packs : ''}</span></span>`
+      + `<span id="set-voicesw">${setSwitch(voiceOn)}</span></div>`
+      + dlRowHtml
+      + `</div>`
       + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
       + `</div>`;
     document.body.appendChild(ov);
@@ -14744,6 +14823,13 @@
       const vw = document.getElementById('set-voicesw'); if (vw) vw.innerHTML = setSwitch(vo);
       const sl = document.getElementById('set-vol'); if (sl) sl.value = v;
       const sn = document.getElementById('set-volnum'); if (sn) sn.textContent = v + '%';
+      const paintBus = (id, bus) => {
+        let bv = 100;
+        try { if (Game.audio && Game.audio.getBusVolume) bv = Math.round(Game.audio.getBusVolume(bus) * 100); } catch (e) {}
+        const bs = document.getElementById(id); if (bs) bs.value = bv;
+        const bn = document.getElementById(id + 'num'); if (bn) bn.textContent = bv + '%';
+      };
+      paintBus('set-vol-sfx', 'sfx'); paintBus('set-vol-music', 'music'); paintBus('set-vol-voice', 'voice');
     };
     ov.addEventListener('click', (e) => { if (e.target === ov) closeSettings(); });
     document.getElementById('set-done').onclick = () => { try { Game.uiBlip(); } catch (e) {} closeSettings(); };
@@ -14754,6 +14840,45 @@
         if (Game.audio.isMuted() && slider.value > 0) Game.audio.toggleMute();
       } catch (e) {}
       paint();
+    };
+    // Per-type sliders (Steve 2026-10-13).
+    const busSlider = (id, bus) => {
+      const s = document.getElementById(id);
+      if (s) s.oninput = () => {
+        try { if (Game.audio && Game.audio.setBusVolume) Game.audio.setBusVolume(bus, s.value / 100); } catch (e) {}
+        paint();
+      };
+    };
+    busSlider('set-vol-sfx', 'sfx'); busSlider('set-vol-music', 'music'); busSlider('set-vol-voice', 'voice');
+    // Voice-pack bulk download (Steve 2026-10-13): the 4 Piper models are
+    // ~63 MB each and otherwise lazy-load one at a time on first voiced
+    // line. This is the manual "download all" the toggle's comment promised.
+    let dlActive = false;
+    const dlrow = document.getElementById('set-dlrow');
+    if (dlrow) dlrow.onclick = () => {
+      if (dlActive || !Game.ensureVoicePacks) return;
+      dlActive = true;
+      const stEl = document.getElementById('set-dlstatus');
+      const setSt = (t) => { if (stEl) stEl.textContent = t; };
+      const packLabels = { 'm-young': 'young man', 'm-old': 'older man', 'f-young': 'young woman', 'f-old': 'older woman' };
+      setSt('Starting download…');
+      Game.ensureVoicePacks((packId, p) => {
+        const pct = p && p.total ? Math.round((p.loaded / p.total) * 100) : 0;
+        setSt(`Downloading ${packLabels[packId] || packId}… ${pct}%`);
+      }).then(() => {
+        dlActive = false;
+        try {
+          const st2 = Game.voicePackStatus ? Game.voicePackStatus() : {};
+          const n2 = Object.keys(st2).filter(k => st2[k] === 'cached').length;
+          const vp = document.getElementById('set-voicepacks');
+          if (vp) vp.textContent = 'Spoken NPC lines · ' + n2 + '/4 voice packs cached';
+        } catch (e) {}
+        setSt('4/4 cached ✓');
+        try { Game.uiBlip(); } catch (e) {}
+      }).catch(() => {
+        dlActive = false;
+        setSt('Download failed — try again');
+      });
     };
     document.getElementById('set-muterow').onclick = () => {
       try { Game.audio.toggleMute(); } catch (e) {}
