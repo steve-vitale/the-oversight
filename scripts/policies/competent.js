@@ -1343,6 +1343,7 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
     }
   } catch (e) {}
   try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+  if (ctx._dpsRace) ctx._dpsRace.strikes++; // DPS-race assessment (scale-wall r1): count real strikes
   endTurn();
   return 'struck';
 }
@@ -1559,6 +1560,108 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
   return false;
 }
 
+// ---------- DPS-RACE FIGHT ASSESSMENT (longsim scale-wall r1 2026-10-13) ----------
+// A competent player gauges the DAMAGE RACE after a couple of exchanges —
+// not the HP pool, the race. The old logic fled only at HP thresholds (35%
+// mid-fight, 50% at fight start): the raccoon replay (sim-combat-r1) showed
+// 11 rounds at ~1 dealt/round vs 13–16 taken, flee firing at <30% HP = death
+// mid-retreat. The fight was unwinnable from round 1 but the policy never
+// evaluated the race.
+//
+// MEASURED, not card-read: every 2 player-turns (windows at turns 3,5,7,9)
+// the policy compares strike-normalized dealt damage against the player-HP
+// drop over the window and projects rounds-to-kill vs rounds-to-die. Two
+// consecutive lost-race windows = conviction = disengage WHILE HP IS HIGH,
+// walking to the edge (flee-by-barrier) while the walk is still survivable.
+// Strike-normalized so beast-trick turns don't dilute the offense read;
+// healing reads as less-taken (a deliberate stay-bias: a player with
+// answers stays). Skipped when the player isn't striking (flyers circling
+// overhead), when incoming damage is gentle, or when the fight is nearly
+// over — the assessment decides fights early, never mid-grind.
+// Env gate COMPETENT_DPS_RACE=1 opts IN (default OFF — killed at pilot
+// 2026-10-13, see evidence/2026-10-13/sim-scale-wall-r1.md). Kept as a
+// documented experiment: the assessment instrument is sound and the
+// barrier push is the engine-honest exit, but the combination is harmful
+// (median 69→28d) — fleeing must be DIRECTIONAL (toward haven/safety),
+// not just "nearest edge". Future work can re-arm this gate.
+function dpsRaceOn() { return process.env.COMPETENT_DPS_RACE === '1'; }
+function dpsRaceInit(ctx) {
+  ctx._dpsRace = { turn: 0, snapTurn: 0, strikes: 0, snapStrikes: 0, snapDealt: 0, snapPhp: 0, lostStreak: 0 };
+}
+// Cumulative damage dealt to fighters still in the fight (fled excluded).
+function dpsRaceDealt(Game, f) {
+  let dealt = 0;
+  try {
+    for (const x of (f.fighters || [])) {
+      if (!x || x.kind !== 'monster' || x.fled) continue;
+      dealt += Math.max(0, (x.maxHp || x.hp || 0) - (x.hp || 0));
+    }
+  } catch (e) {}
+  return dealt;
+}
+function dpsRaceRemaining(Game, f) {
+  let hp = 0;
+  try {
+    for (const x of (f.fighters || [])) {
+      if (!x || x.kind !== 'monster' || x.fled || (x.hp || 0) <= 0) continue;
+      hp += x.hp;
+    }
+  } catch (e) {}
+  return hp;
+}
+// Returns flee()'s value when the race is lost with conviction, null
+// otherwise. `flee` is the policy's own flee closure (edge walk + end turn).
+function dpsRaceAssess(Game, f, ctx, p, flee) {
+  if (!dpsRaceOn()) return null;
+  const st = ctx._dpsRace;
+  if (!st) return null;
+  st.turn += 1;
+  if (st.turn === 1) { // baseline snapshot at fight start
+    st.snapDealt = dpsRaceDealt(Game, f);
+    st.snapPhp = p.hp || 0;
+    st.snapStrikes = st.strikes;
+    st.snapTurn = 1;
+    return null;
+  }
+  if (st.turn !== 3 && st.turn !== 5 && st.turn !== 7 && st.turn !== 9) return null;
+  const dealtNow = dpsRaceDealt(Game, f);
+  const phpNow = p.hp || 0;
+  const dealtDelta = Math.max(0, dealtNow - st.snapDealt);
+  const strikesDelta = st.strikes - st.snapStrikes;
+  const takenDelta = Math.max(0, st.snapPhp - phpNow);
+  const turnsDelta = Math.max(1, st.turn - st.snapTurn);
+  st.snapDealt = dealtNow; st.snapPhp = phpNow;
+  st.snapStrikes = st.strikes; st.snapTurn = st.turn;
+  ctx.dpsWindows = (ctx.dpsWindows || 0) + 1;
+  if (strikesDelta < 1) return null; // not engaging (flyers overhead) — unmeasured
+  const takenPerTurn = takenDelta / turnsDelta;
+  if (takenPerTurn < 3) { st.lostStreak = 0; return null; } // gentle incoming — no conviction either way
+  const dealtPerStrike = dealtDelta / strikesDelta;
+  const remaining = dpsRaceRemaining(Game, f);
+  const roundsToKill = remaining / Math.max(0.5, dealtPerStrike);
+  const roundsToDie = phpNow / Math.max(0.5, takenPerTurn);
+  if (roundsToKill <= 4) return null; // nearly over — finish it
+  if (roundsToDie < roundsToKill * 1.3) {
+    st.lostStreak += 1;
+    if (st.lostStreak >= 2) {
+      ctx.dpsFled = (ctx.dpsFled || 0) + 1;
+      ctx.dpsFledDetail = {
+        turn: st.turn,
+        dealtPerStrike: +dealtPerStrike.toFixed(1),
+        takenPerTurn: +takenPerTurn.toFixed(1),
+        roundsToKill: +roundsToKill.toFixed(1),
+        roundsToDie: +roundsToDie.toFixed(1),
+        php: Math.round(phpNow),
+      };
+      if (!ctx.dpsFledFirstDetail) ctx.dpsFledFirstDetail = Object.assign({}, ctx.dpsFledDetail);
+      return flee();
+    }
+    return null;
+  }
+  st.lostStreak = 0;
+  return null;
+}
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -1669,11 +1772,44 @@ const competent = {
           Game.tbAfterPlayerAction();
         } catch (e) {}
       };
+      // FLEE = PUSH THROUGH THE BARRIER (longsim scale-wall r1 2026-10-13):
+      // the engine's exit is tbBarrierExit(dx,dy) — a deliberate push THROUGH
+      // the grid edge onto the next node. Walking to / along the edge does
+      // NOT exit (canon, game.js: "only a deliberate exit attempt"), and the
+      // old walk-to-edge-only flee stood at the edge pressing "flee" as a
+      // no-op while chasers killed the scholar — seed 44: a 21000-turn
+      // belltoad where dpsFled fired at turn 7 and the scholar still died at
+      // turn 20, ten no-op "flees" from the same edge tile. Chasers with
+      // pursuit stamina follow across (the chase plays out honestly; the
+      // relentless hushwolf only stops at Haven or death); non-chasers give
+      // up at the barrier. Sealed fights hold — the engine says so.
       const flee = () => {
         try {
           const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-          const tx = px <= 4 ? 0 : 8;
-          try { Game.tbPlayerMove(tx, py); ctx.fled = (ctx.fled || 0) + 1; } catch (e) {}
+          let pushed = false;
+          try {
+            const mpx = Game.map.px, mpy = Game.map.py;
+            const cands = [];
+            if (px === 0) cands.push([-1, 0]); else if (px === 8) cands.push([1, 0]);
+            if (py === 0) cands.push([0, -1]); else if (py === 8) cands.push([0, 1]);
+            // World bounds: pushing off the 9x9 world is a spent turn ("The
+            // known world ends here") — prefer an exit that leads somewhere.
+            const viable = cands.filter(([dx, dy]) =>
+              mpx + dx >= 0 && mpx + dx <= 8 && mpy + dy >= 0 && mpy + dy <= 8);
+            const pick = viable[0] || cands[0];
+            if (pick && dpsRaceOn()) {
+              Game.tbBarrierExit(pick[0], pick[1]);
+              pushed = true;
+              ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+            }
+          } catch (e) {}
+          if (!pushed) {
+            // Not on an edge yet (or lever gated off — legacy path): walk to
+            // the nearest x-edge; the push happens on a later turn.
+            const tx = px <= 4 ? 0 : 8;
+            try { Game.tbPlayerMove(tx, py); } catch (e) {}
+          }
+          ctx.fled = (ctx.fled || 0) + 1;
         } catch (e) {}
         endTurn();
         return true;
@@ -1681,6 +1817,7 @@ const competent = {
       // NEW-FIGHT ASSESSMENT: don't start fights you can't win.
       if (ctx._fightObj !== f) {
         ctx._fightObj = f;
+        dpsRaceInit(ctx); // DPS-race assessment (scale-wall r1): snapshot the race baseline
         try {
           const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
           let totalMhp = 0, maxWave = 1;
@@ -1703,6 +1840,14 @@ const competent = {
         // retreat toward the nearest edge — the barrier ends pursuit honestly
         return flee();
       }
+      // DPS-RACE ASSESSMENT (longsim scale-wall r1 2026-10-13): gauge the
+      // damage race after a couple of exchanges; disengage a lost race while
+      // HP is still high. Outranks trick play — a trick that isn't winning
+      // the race doesn't save the fight.
+      try {
+        const _dpsVerdict = dpsRaceAssess(Game, f, ctx, p, flee);
+        if (_dpsVerdict) return _dpsVerdict;
+      } catch (e) {}
       // BEAST TRICKS (longsim combat r5 2026-10-12): play known monster
       // counters tactically before the generic strike-the-weakest. Never
       // overrides the walk-away assessment above.
@@ -1760,10 +1905,11 @@ const competent = {
       // moveLeft > 0, so the turn never auto-advances — the policy spun on
       // "Already acted" forever, freezing the game clock. End explicitly.
       try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+      if (ctx._dpsRace) ctx._dpsRace.strikes++; // DPS-race assessment (scale-wall r1): count real strikes
       endTurn();
       return true;
     } catch (e) { return false; }
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn };

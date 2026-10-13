@@ -21,7 +21,7 @@
 // Every road is best-effort and try/catch-guarded: a hostile Game API must
 // never kill a run.
 'use strict';
-const { competent, forageTripSeedFirst, sortHaul, donateHaul } = require('./competent');
+const { competent, forageTripSeedFirst, sortHaul, donateHaul, dpsRaceAssess, dpsRaceInit, dpsRaceOn } = require('./competent');
 const idle = require('./idle');
 
 function rosterOf(Game) {
@@ -128,11 +128,35 @@ function winseekFight(Game, ctx) {
         Game.tbAfterPlayerAction();
       } catch (e) {}
     };
+    // FLEE = PUSH THROUGH THE BARRIER (longsim scale-wall r1 2026-10-13):
+    // the engine's exit is tbBarrierExit(dx,dy) — a deliberate push THROUGH
+    // the grid edge onto the next node. Walking to / along the edge does NOT
+    // exit (canon, game.js: "only a deliberate exit attempt"); the old
+    // walk-to-edge-only flee stood at the edge pressing "flee" as a no-op
+    // while chasers killed the scholar. Shared semantics with competent.js.
     const flee = () => {
       try {
         const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-        const tx = px <= 4 ? 0 : 8;
-        try { Game.tbPlayerMove(tx, py); ctx.fled = (ctx.fled || 0) + 1; } catch (e) {}
+        let pushed = false;
+        try {
+          const mpx = Game.map.px, mpy = Game.map.py;
+          const cands = [];
+          if (px === 0) cands.push([-1, 0]); else if (px === 8) cands.push([1, 0]);
+          if (py === 0) cands.push([0, -1]); else if (py === 8) cands.push([0, 1]);
+          const viable = cands.filter(([dx, dy]) =>
+            mpx + dx >= 0 && mpx + dx <= 8 && mpy + dy >= 0 && mpy + dy <= 8);
+          const pick = viable[0] || cands[0];
+          if (pick && dpsRaceOn()) {
+            Game.tbBarrierExit(pick[0], pick[1]);
+            pushed = true;
+            ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+          }
+        } catch (e) {}
+        if (!pushed) {
+          const tx = px <= 4 ? 0 : 8;
+          try { Game.tbPlayerMove(tx, py); } catch (e) {}
+        }
+        ctx.fled = (ctx.fled || 0) + 1;
       } catch (e) {}
       endTurn();
       return true;
@@ -153,6 +177,7 @@ function winseekFight(Game, ctx) {
     if (ctx._fightObj !== f) {
       ctx._fightObj = f;
       ctx._fledThisFight = false;
+      dpsRaceInit(ctx); // DPS-race assessment (scale-wall r1): snapshot the race baseline
       try {
         const faced = (Game.deedState ? Game.deedState().wavesFaced : {}) || {};
         const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
@@ -181,6 +206,17 @@ function winseekFight(Game, ctx) {
         }
       } catch (e) {}
     }
+    // DPS-RACE ASSESSMENT (longsim scale-wall r1 2026-10-13): gauge the
+    // damage race after a couple of exchanges; bail a lost race while HP is
+    // high. Shared helper in competent.js. The feast buff is the equalizer
+    // the math doesn't see — skip while feasted with the deed unmarked.
+    // (The facing deed records at startCombat, so an early flee keeps it.)
+    try {
+      if (!feastedDeed) {
+        const _dpsVerdict = dpsRaceAssess(Game, f, ctx, p, flee);
+        if (_dpsVerdict) return _dpsVerdict;
+      }
+    } catch (e) {}
     // WAVE-TARGETED: only risk death for waves with unfilled deed bars.
     // The bars are 5/5/4/3/2 — once a wave's bar is filled, its monsters are
     // just death risk with no deed value. Flee those.
@@ -242,6 +278,7 @@ function winseekFight(Game, ctx) {
       }
     } catch (e) {}
     try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+    if (ctx._dpsRace) ctx._dpsRace.strikes++; // DPS-race assessment (scale-wall r1): count real strikes
     endTurn();
     return true;
   } catch (e) { return false; }
