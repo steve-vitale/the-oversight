@@ -400,6 +400,12 @@
         id !== this.villagerId &&
         !(v.away && v.away[id]) &&
         ((v.health || {})[id] === undefined || (v.health || {})[id] > 40));
+      // FACILITATION (journey-endgame r7 2026-10-13): tableFacilitate('shield')
+      // promises "the village's fights will spend others first" — shielded
+      // villagers stand at the BACK of the defender line: they still fight
+      // when there is no one else, but everyone else is spent first.
+      const _sh = (v.shielded || {});
+      defenders.sort((a, b) => ((_sh[a] ? 1 : 0) - (_sh[b] ? 1 : 0)));
       let di = 0;
       for (const m of raiders) {
         if (di < defenders.length) {

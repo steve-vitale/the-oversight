@@ -366,18 +366,24 @@ contract, make it sign).
 ## NPC ascension, facilitation, epilogues
 
 `villagerAscensionScore(vid)` from real state: System abilities held
-(count), knowledge breadth (codex-people/teaching records), fights
+(count), knowledge breadth (in-run taught plants + background
+familiarity — 2026-10-13: was reading never-written fields; now the
+real villager knowledge model), fights
 survived (ledger deeds are player-side — use villager fight records
 where they exist; fallback: contests survived + notability), boldness
 (personality traits — check the person record's trait fields), trust
 standing. Documented honestly where proxies are used.
 
 Facilitation verbs (chosen play):
-- teach them (existing teaching — knowledge transfer is real)
+- teach them (existing teaching — knowledge transfer is real; 2026-10-13:
+  wired for real — the villager learns plants the Bearer <redacted> via
+  the conversation teach path's stores, so the lesson feeds their
+  ascension score)
 - hand them the relay (`appointSwitchboard` — exists; the office is the
   instrument)
 - shield them (a promise-flag: the village prioritizes their safety in
-  fight assignment — new, small)
+  fight assignment — 2026-10-13: wired — shielded villagers stand at the
+  back of the raid defender line, spent last)
 
 `pg.table.facilitated = {vid, acts[]}` tracks it. At the table, if a
 facilitated villager's ascension score clears the bar, the epilogue
@@ -385,8 +391,9 @@ credits the architect: "the god needed someone to build the door."
 If NO facilitation and an unbacked villager outscores the Bearer: the
 honest outshone epilogue — the village thrives, the god is someone
 else, the record notes you watched. Multiple ascensions stack: each
-ascended villager adds bargaining power (+path strength) and the
-pantheon's politics get one beat.
+ascended villager adds bargaining power (+10 path strength each, cap
+100 — 2026-10-13: priced in the audit's standing numbers and voiced
+there, not just the epilogue) and the pantheon's politics get one beat.
 
 ## UI reskin hooks
 

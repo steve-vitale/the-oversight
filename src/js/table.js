@@ -96,6 +96,13 @@
       const out = [];
       try {
         const seat = this.tableSeat();
+        // NPC ASCENSION PRICING (journey-endgame r7 2026-10-13): TABLE.md
+        // canon — "each ascended villager adds bargaining power (+path
+        // strength)". The epilogue used to only say it aloud; now the
+        // audit's standing numbers move too (+10 per ascension, cap 100),
+        // and the audit voices it (see tableScene).
+        let ascBonus = 0;
+        try { ascBonus = (this.tableAscended ? this.tableAscended().length : 0) * 10; } catch (e) {}
         for (const id of Object.keys(PATHS)) {
           const def = PATHS[id];
           let pr = { earned: false, strength: 0, why: 'The table has not priced this seat yet.' };
@@ -105,7 +112,7 @@
           if ((order[seat.seat] || 0) < (order[def.minSeat || 'lesser'] || 0)) {
             pr = { earned: false, strength: 0, why: def.seatWhy || 'This seat needs a stronger table.' };
           }
-          out.push({ id, name: def.name, earned: !!pr.earned, strength: pr.strength | 0, why: pr.why, showGenre: def.showGenre });
+          out.push({ id, name: def.name, earned: !!pr.earned, strength: Math.min(100, (pr.strength | 0) + ascBonus), why: pr.why, showGenre: def.showGenre });
         }
       } catch (e) {}
       return out;
@@ -371,6 +378,13 @@
         ? `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.`
         : `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0}), ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
       this.say(`◈ THE AUDIT — the System reads your run back to you, and the galaxy listens. ${seatLine}`);
+      // NPC ASCENSION PRICING (journey-endgame r7 2026-10-13): the audit
+      // voices the ascension bonus that tableEarnedPaths prices into each
+      // path's standing — TABLE.md canon, "said aloud, priced in".
+      try {
+        const _ascN = this.tableAscended ? this.tableAscended().length : 0;
+        if (_ascN) this.say(`The table notes ${_ascN} ascension${_ascN > 1 ? 's' : ''} from one village — its terms improve accordingly. Nobody has ever seen that before.`);
+      } catch (e) {}
       // TABLE SANCTITY (2026-10-12, Steve): the System clears the stage.
       // One line, producer-unhinged — the world holds its breath while the
       // table sits. Ambient monster pressure is suspended for the sequence
@@ -780,8 +794,17 @@
         // System abilities held (count of the 6-slot kits).
         const abils = (v.abilities || []).length;
         if (abils > 0) { score += abils * 8; notes.push(`${abils} System abilities`); }
-        // Knowledge breadth: teaching records on the person.
-        const kb = (v.knowledgeBreadth | 0) || ((v.taughtPlants || []).length) || 0;
+        // Knowledge breadth: the REAL villager knowledge model (convo rebuild
+        // 2026-10-11): in-run learning (v.taught — fireside, fieldwork,
+        // player-taught) + background familiarity. (journey-endgame r7
+        // 2026-10-13: this used to read v.knowledgeBreadth/v.taughtPlants,
+        // which no game system ever writes — the component was unreachable
+        // in real play. Legacy fields kept as fallback.)
+        const _vv = this.state.village || {};
+        const _taught = ((_vv.taught || {})[vid] || []).length;
+        const _fam = ((_vv.familiar || {})[vid] || []).length;
+        let kb = _taught + _fam;
+        if (!kb) kb = (v.knowledgeBreadth | 0) || (((v.taughtPlants || []).length) || 0);
         if (kb > 0) { score += Math.min(20, kb); notes.push('taught and teaching'); }
         // Fights survived / contests: notability as the honest proxy.
         const not = (typeof this.notabilityWeight === 'function') ? this.notabilityWeight(vid) : 0;
@@ -822,7 +845,26 @@
           this.say(`${sc.name} is shielded now — the village's fights will spend others first. Protection is a kind of authorship.`);
         }
         if (kind === 'teach') {
-          this.say(`You teach ${sc.name} everything the relay taught you. Knowledge is the one gift that multiplies in the giving.`);
+          // REAL knowledge transfer (journey-endgame r7 2026-10-13): the
+          // villager learns the plants the Bearer actually knows — the same
+          // stores the conversation teach path writes (taught + taughtByPlayer),
+          // so the lesson feeds their ascension score honestly.
+          let _taughtN = 0;
+          try {
+            const _vv = this.state.village || {};
+            for (const p of (this.data.plants || [])) {
+              if (_taughtN >= 12) break;
+              const pid = p.id;
+              if (!this.plantKnown || !this.plantKnown(pid)) continue;
+              if (this.plantKnownBy && this.plantKnownBy(vid, pid, _vv)) continue;
+              if (this.villagerLearnsPlant) this.villagerLearnsPlant(vid, pid, 'player-taught');
+              _vv.taughtByPlayer = _vv.taughtByPlayer || {};
+              const lst = _vv.taughtByPlayer[vid] = _vv.taughtByPlayer[vid] || [];
+              if (lst.indexOf(pid) === -1) lst.push(pid);
+              _taughtN++;
+            }
+          } catch (e) {}
+          this.say(`You teach ${sc.name} everything the relay taught you${_taughtN ? ` — ${_taughtN} green thing${_taughtN > 1 ? 's' : ''}, name by name` : ''}. Knowledge is the one gift that multiplies in the giving.`);
           this.addGrounding(2, 'teaching');
         }
         try { this.save(); } catch (e) {}
@@ -885,8 +927,10 @@
           } catch (e) {}
           this.say(`◈ ${me} walks out of the light alone, which is how ${pro} walked in. The village endures. That was always the story.`);
         }
-        // Ascensions stack bargaining power — said aloud, priced in.
-        if (asc.length) this.say(`The table notes ${asc.length} ascension${asc.length > 1 ? 's' : ''} from one village. Its terms improve accordingly. Nobody has ever seen that before.`);
+        // Ascensions stack bargaining power — said aloud in the audit, priced
+        // into every path's standing (tableEarnedPaths); the epilogue
+        // confirms the terms held through the challenge.
+        if (asc.length) this.say(`The terms held — the table had priced the village, ascension${asc.length > 1 ? 's' : ''} and all, and the village paid in full.`);
         // PODS WEIGHT (2026-10-11, KIN canon): the history is read here.
         // Shrugged runs curdle (the oversight); jackpot losses are carried.
         try {
