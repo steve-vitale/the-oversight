@@ -24,6 +24,7 @@
 //   - refuseTheScale()
 //   - answerDemand(a, b)
 //   - payTribute(a, b)
+//   - tendLink(linkId)
 //   - primaryDemand(linkId)
 //   - proveWorth(linkId, vid, mag)
 //   - successionCrisis(linkId)
@@ -830,6 +831,50 @@
       return (ov && ov.name) || 'them';
     },
 
+    // tendLink: "send grain" — the tending verb the LEAD road was missing
+    // (scale-wall fix 2026-10-12). Canon demands "tending required"
+    // (hierarchy.js:69) but no repeatable tending verb existed for
+    // primary-Haven links: every _trustGain caller was subordinate-only,
+    // peer-only, or one-shot. This is the verb: 1,500 kcal from Haven's
+    // pantry → +8 trust via _trustGain (mourning choke + lastKeptDay
+    // stamping, mirroring the renegotiation gift's pricing exactly).
+    // One tending per week per link (tendedWeek): trust is a relationship,
+    // not a meter — you can't buy a season in an afternoon. Refuses during
+    // their mourning (grief is not bought off; the grain waits).
+    tendLink(linkId) {
+      var links = this.hierarchyState();
+      var link = null;
+      for (var i = 0; i < links.length; i++) if (links[i].id === linkId) { link = links[i]; break; }
+      if (!link || link.status !== 'active' || link.primary !== HOME) {
+        this.say('There is no bond of ours to tend there.');
+        return 0;
+      }
+      var day = (this.state.scholar || {}).day || 0;
+      var week = this._week();
+      if (link.tendedWeek === week) {
+        this.say('Already tended this week — the grain is still on their tables. Tending is a rhythm, not a purchase.');
+        return 0;
+      }
+      if (link.mourningUntil && day < link.mourningUntil) {
+        this.say(`They're burying their speaker — grain can wait a week; grief can't. Tending resumes when the mourning lifts.`);
+        return 0;
+      }
+      var paid = this._removePantryKcal(1500);
+      if (!(paid > 0)) {
+        this.say(`The pantry is bare — there is no grain to send to ${this._ovName(link.subordinate)}. They'll hear we came empty-handed, and they'll hear why.`);
+        return 0;
+      }
+      var frac = Math.min(1, paid / 1500);
+      var tGain = this._trustGain(link, Math.round(8 * frac));
+      link.tendedWeek = week;
+      var onm = this._ovName(link.subordinate);
+      this._linkNote(link, 'tended', 'Haven sent grain (' + paid.toLocaleString() + ' kcal, trust +' + tGain + '); the bond is fed.');
+      if (frac >= 1) this.say(`🌾 Haven sends ${paid.toLocaleString()} kcal of grain to ${onm}'s fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +${tGain}.)`);
+      else this.say(`🌾 Haven sends ${paid.toLocaleString()} of 1,500 kcal to ${onm} — all the pantry holds. They count the gap, and they count the trying. (Trust +${tGain}.)`);
+      try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'tended:' + link.subordinate); } catch (e) {}
+      return paid;
+    },
+
     // _designateSpeaker: their speaker is a NAMED PERSON from the catch-up
     // sim's roster — not a title. When the sim's hunger takes them, the
     // mirror succession beat (theirLeaderDied) fires for real. Backfills
@@ -919,58 +964,77 @@
                     return;
                   }
                 }
-                if (R() < link.trust / 100) {
-                  self._trustGain(link, 1);
-                  // THE PANTRY GROWS (break-it regional 2026-10-10, third
-                  // pass): the old code said "the pantry grows" but added
-                  // nothing — a copy/engine lie. Tribute is real food (the
-                  // metabolism system makes it REAL): it arrives as grain,
-                  // spoil-dated, like any other haul.
-                  // NATIONAL ROUTES TRIBUTE (2026-10-10): the governance
-                  // layer's logistics route the harvest — x1.25, and the
-                  // arrival line says the true amount.
-                  // THEIR FIELDS PAY (break-it regional 2026-10-10): the old
-                  // code minted the full tribute from nothing — a starving
-                  // subordinate paid 4,000+ kcal/week forever while its own
-                  // pantry never moved. Same class as the covenant pool's
-                  // thin-air pour (fixed the same day): every fire pours
-                  // from its own stores. The sub's pantry is debited for
-                  // the owed amount; the System's logistics layer still
-                  // routes it at x1.25 national (the arrival line names the
-                  // true post-route amount). A shortfall is said aloud,
-                  // costs trust, and accrues arrears — like the pool's
-                  // short pours.
-                  try {
-                    var _v = self.state.village || {}; _v.pantry = _v.pantry || [];
-                    var _day = (self.state.scholar || {}).day || 0;
-                    var _mult = 1;
-                    try { if (self.state.nationalLive) _mult = 1.25; } catch (e) {}
-                    var _want = link.tributeKcalPerWeek;
-                    var _sov = self._otherVillage(link.subordinate);
-                    var _have = Math.max(0, Math.round((_sov && _sov.pantryKcal) || 0));
-                    var _give = Math.min(_want, _have);
-                    if (_sov) _sov.pantryKcal = _have - _give;
-                    var _amt = Math.round(_give * _mult);
-                    if (_amt > 0) {
-                      _v.pantry.push({ name: 'Tribute grain from ' + self._ovName(link.subordinate), kcalEach: _amt, units: 1, spoilDay: _day + 21 });
-                    }
-                    if (_give >= _want) {
-                      self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid. The pantry grows.');
-                      var _said = (typeof _amt === 'number' && isFinite(_amt)) ? _amt : _want;
-                      if (R() < 0.35) self.say(`🌾 Tribute from ${self._ovName(link.subordinate)} arrives — ${_said.toLocaleString()} kcal of grain into the pantry. Their fields, our fire.`);
-                    } else {
-                      var _short = _want - _give;
-                      link.arrears = (link.arrears || 0) + _short;
-                      link.trust = Math.max(0, link.trust - 4);
-                      self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid thin: ' + _give.toLocaleString() + ' of ' + _want.toLocaleString() + ' kcal. Arrears +' + _short.toLocaleString() + '.');
-                      self.say(`🌾 ${self._ovName(link.subordinate)}'s tribute comes up thin — ${_give.toLocaleString()} of ${_want.toLocaleString()} kcal. Their fields are as empty as the wagons look. The shortfall rides as arrears (+${_short.toLocaleString()} kcal), and they feel the shame. (Trust -4.)`);
-                    }
-                  } catch (e) {}
-                } else {
-                  link.arrears += link.tributeKcalPerWeek;
-                  link.trust = Math.max(0, link.trust - 4);
-                  if (R() < 0.35) self.say(`⚠️ ${self._ovName(link.subordinate)} is late with tribute. The air changes.`);
-                }
+                // THEIR FIELDS PAY, WEEKLY (scale-wall fix 2026-10-12): the
+                // subordinate lives a light week (production only) inside
+                // the weekly tick, so tribute reliability tracks a real
+                // economy instead of frozen arbitrary wealth. Same
+                // village.day watermark catchUpSim uses — never double-counts.
+                try { self._linkedVillageWeek(link.subordinate); } catch (e) {}
+                // TRIBUTE, ATTEMPTED EVERY WEEK (scale-wall fix 2026-10-12):
+                // the old code ran an arrival lottery (R() < trust/100) — a
+                // rich, willing subordinate still "missed" most weeks below
+                // trust 80, each miss charging FULL arrears and -4 trust, so
+                // expected drift was negative from birth and P(seasoning)
+                // was 0. Now the tribute is attempted every week and trust
+                // tracks what actually happened: full payment +1
+                // (faithfulness deepens the bond), a partial payment -1 with
+                // the true shortfall riding as arrears (they tried — the
+                // shame is real but small), nothing at all -2 with full
+                // arrears, said aloud (their fields are empty, not their
+                // hearts). A tended link drifts clearly positive; a
+                // struggling one decays slowly and audibly — never in a
+                // silent lottery death spiral.
+                // THE PANTRY GROWS (break-it regional 2026-10-10, third
+                // pass): the old code said "the pantry grows" but added
+                // nothing — a copy/engine lie. Tribute is real food (the
+                // metabolism system makes it REAL): it arrives as grain,
+                // spoil-dated, like any other haul.
+                // NATIONAL ROUTES TRIBUTE (2026-10-10): the governance
+                // layer's logistics route the harvest — x1.25, and the
+                // arrival line says the true amount.
+                // THEIR FIELDS PAY (break-it regional 2026-10-10): the old
+                // code minted the full tribute from nothing — a starving
+                // subordinate paid 4,000+ kcal/week forever while its own
+                // pantry never moved. Same class as the covenant pool's
+                // thin-air pour (fixed the same day): every fire pours
+                // from its own stores. The sub's pantry is debited for
+                // the owed amount; the System's logistics layer still
+                // routes it at x1.25 national (the arrival line names the
+                // true post-route amount). A shortfall is said aloud,
+                // costs trust, and accrues arrears — like the pool's
+                // short pours.
+                try {
+                  var _v = self.state.village || {}; _v.pantry = _v.pantry || [];
+                  var _day = (self.state.scholar || {}).day || 0;
+                  var _mult = 1;
+                  try { if (self.state.nationalLive) _mult = 1.25; } catch (e) {}
+                  var _want = link.tributeKcalPerWeek;
+                  var _sov = self._otherVillage(link.subordinate);
+                  var _have = Math.max(0, Math.round((_sov && _sov.pantryKcal) || 0));
+                  var _give = Math.min(_want, _have);
+                  if (_sov) _sov.pantryKcal = _have - _give;
+                  var _amt = Math.round(_give * _mult);
+                  if (_amt > 0) {
+                    _v.pantry.push({ name: 'Tribute grain from ' + self._ovName(link.subordinate), kcalEach: _amt, units: 1, spoilDay: _day + 21 });
+                  }
+                  if (_give >= _want) {
+                    self._trustGain(link, 1);
+                    self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid. The pantry grows.');
+                    var _said = (typeof _amt === 'number' && isFinite(_amt)) ? _amt : _want;
+                    if (R() < 0.35) self.say(`🌾 Tribute from ${self._ovName(link.subordinate)} arrives — ${_said.toLocaleString()} kcal of grain into the pantry. Their fields, our fire.`);
+                  } else if (_give > 0) {
+                    var _short = _want - _give;
+                    link.arrears = (link.arrears || 0) + _short;
+                    link.trust = Math.max(0, link.trust - 1);
+                    self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid thin: ' + _give.toLocaleString() + ' of ' + _want.toLocaleString() + ' kcal. Arrears +' + _short.toLocaleString() + '.');
+                    self.say(`🌾 ${self._ovName(link.subordinate)}'s tribute comes up thin — ${_give.toLocaleString()} of ${_want.toLocaleString()} kcal. They sent everything the wagons could carry, and it wasn't enough. The shortfall rides as arrears (+${_short.toLocaleString()} kcal). (Trust -1.)`);
+                  } else {
+                    link.arrears = (link.arrears || 0) + _want;
+                    link.trust = Math.max(0, link.trust - 2);
+                    self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid nothing — empty fields. Arrears +' + _want.toLocaleString() + '.');
+                    self.say(`🌾 Nothing comes from ${self._ovName(link.subordinate)} this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +${_want.toLocaleString()} kcal, trust -2.)`);
+                  }
+                } catch (e) {}
               }
               // THEIR SPEAKER LIVES OR DIES IN THE SIM (regional audit
               // 2026-10-09): the catch-up sim kills named people. If the
@@ -3352,5 +3416,6 @@
   _blockIfNotHaven(G, 'answerGlobalChoice');
   _blockIfNotHaven(G, 'refuseTheScale');
   _blockIfNotHaven(G, 'drawLeaguePool');
+  _blockIfNotHaven(G, 'tendLink');
 
 })();

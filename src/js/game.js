@@ -8141,6 +8141,59 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       village.day++;
     },
 
+    // _linkedVillageWeek: a light lived week for a LINKED village
+    // (scale-wall fix 2026-10-12). Subordinate pantries were frozen between
+    // player approaches (catchUpSim only runs on approach), so tribute
+    // reliability tracked arbitrary frozen wealth — a rich fire paid
+    // forever, a poor one spiraled into arrears. Linked villages now
+    // breathe weekly inside linkTick: production minus consumption, pantry
+    // capped, advancing the same village.day watermark catchUpSim uses, so
+    // the full sim never double-counts these days.
+    // Deliberately abstract: no tile depletion (the map can't survive
+    // weekly abstraction AND catch-up depletion), no roster deaths, no
+    // rumors, no regrow, no knowledge growth. Mortality still resolves in
+    // the full catch-up sim on approach and in the joined tick. This tick
+    // answers "can they pay tribute?", not "who died?" — the tribute lines
+    // say the rest aloud.
+    _linkedVillageWeek(villageId) {
+      try {
+        var v = this._otherVillage ? this._otherVillage(villageId) : null;
+        if (!v || !villageId || villageId === 'haven') return;
+        for (var d = 0; d < 7; d++) {
+          var mouths = Math.max(0, v.population || 0);
+          if (mouths <= 0) { v.day = (v.day || 0) + 1; continue; }
+          var need = mouths * 2000;
+          var prof = v.knowledgeProfile || {};
+          var plantCount = Object.keys(prof.plants || {}).length;
+          var effKnow = Math.max(v.knowledge || 0, plantCount / 3);
+          var perPerson = (1500 + Math.random() * 700) * Math.min(1.8, 1 + 0.12 * effKnow);
+          var focus = (v.knowledgeProfile || {}).focus || 'forager';
+          var turf = 0;
+          try { turf = this.turfKcal(v.x, v.y); } catch (e) { turf = 0; }
+          var strategyBonus = 1.0;
+          try {
+            var tileTypes = {};
+            for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) {
+              var tx = v.x + dx, ty = v.y + dy;
+              if (tx < 0 || tx > 8 || ty < 0 || ty > 8) continue;
+              var t = this.tileAt(tx, ty);
+              if (t) tileTypes[t.type] = (tileTypes[t.type] || 0) + 1;
+            }
+            if (focus === 'fisher' && ((tileTypes['creek'] || 0) + (tileTypes['wetland'] || 0) >= 2)) strategyBonus = 1.3;
+            else if (focus === 'farmer' && ((tileTypes['meadow'] || 0) >= 3)) strategyBonus = 1.3;
+            else if (focus === 'forager' && ((tileTypes['grove'] || 0) + (tileTypes['forest_floor'] || 0) >= 4)) strategyBonus = 1.25;
+            else if (focus === 'scavenger' && ((tileTypes['ruin'] || 0) >= 1)) strategyBonus = 1.2;
+          } catch (e) {}
+          var fromTurf = Math.min(v.population * perPerson * strategyBonus, turf);
+          var stillHungry = Math.max(0, need - fromTurf);
+          var ranged = Math.min(stillHungry, need * 0.6);
+          v.pantryKcal = Math.max(0, (v.pantryKcal || 0) + fromTurf + ranged - need);
+          v.pantryKcal = Math.min(v.pantryKcal, mouths * 8000);
+          v.day = (v.day || 0) + 1;
+        }
+      } catch (e) {}
+    },
+
     // maybeVillageRumor: travelers walk. Once per player day, each village
     // you've never approached can send word to your haven — this is how you
     // hear about the village 2 tiles north "pretty early", before stumbling

@@ -15614,6 +15614,8 @@
     document.querySelectorAll('[data-mship-build]').forEach(b => b.onclick = () => { Game.buildShelter(); refresh(); });
     // Hierarchy: tribute + demands (Haven panel).
     document.querySelectorAll('[data-link-pay]').forEach(b => b.onclick = () => { Game.payTribute(b.dataset.linkPay); refresh(); });
+    // SCALE-WALL FIX (2026-10-12): tendLink wiring — same pattern as payTribute.
+    document.querySelectorAll('[data-link-tend]').forEach(b => b.onclick = () => { Game.tendLink(b.dataset.linkTend); refresh(); });
     // AID DEBT (parity 2026-10-10): repayable aloud — was engine-only.
     document.querySelectorAll('[data-link-repay]').forEach(b => b.onclick = () => { Game.repayAidDebt(b.dataset.linkRepay); refresh(); });
     // SAFETY NETS (2026-10-10): request aid from a linked village.
@@ -16182,6 +16184,14 @@
                   const paid = (l.tributePaidWeek >= Math.floor(Game.state.scholar.day / 7));
                   let h = `<p class="small">⛓️ ${sub ? 'Bows to ' + nm : nm + ' bows to Haven'} · trust ${l.trust} · tribute ${l.tributeKcalPerWeek.toLocaleString()} kcal/wk${sub ? (paid ? ' (paid ✓)' : ' (DUE ⚠)') : ''}`;
                   if (sub && !paid) h += ` <button class="btn sm" data-link-pay="${l.id}">Pay tribute</button>`;
+                  // SCALE-WALL FIX (2026-10-12): "send grain" — the tending
+                  // verb for our subordinates. Canon demands tending; the
+                  // engine finally has the verb. 1,500 kcal → +8 trust,
+                  // once per week per link.
+                  if (!sub) {
+                    const tended = (l.tendedWeek >= Math.floor(Game.state.scholar.day / 7));
+                    h += ` <button class="btn sm ghost" data-link-tend="${l.id}"${tended ? ' disabled' : ''}>🌾 Send grain (1,500 kcal)${tended ? ' ✓' : ''}</button>`;
+                  }
                   // AID DEBT (parity 2026-10-10): their foragers left their
                   // fields — repayable aloud via repayAidDebt (was
                   // engine-only). Partial payment honored.
