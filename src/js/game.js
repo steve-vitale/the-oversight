@@ -4074,6 +4074,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           else if (g.action === 'return') this.say(self
             ? `${first}: "I left. Walked back in like I'd never left, apparently."`
             : `${first}: "${wname} is back. Walked in like they'd never left."`);
+          // PARTY WIRING (Steve 2026-10-12): the village hears who ran
+          // toward the screaming. dims: {who: rescuer, for: fighter}.
+          else if (g.action === 'rescue') {
+            let _fname = 'someone';
+            try { _fname = this.displayName(g.dims.for).split(' ')[0]; } catch (e) {}
+            this.say(self
+              ? `${first}: "Yeah, that was me. Ran into the treeline when I heard the screaming. Didn't think, just ran."`
+              : `${first}: "Did you hear? ${wname} ran into the treeline when they heard ${_fname} scream. Didn't hesitate."`);
+          }
           else this.say(self
             ? `${first}: "People are talking about me. Take it for what it's worth."`
             : `${first}: "People are talking about ${wname}. Take it for what it's worth."`);
@@ -4083,6 +4092,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               : g.action === 'generous' ? `Rumor: they've been generous, sharing around.`
               : g.action === 'departure' ? `They walked away from Haven. Nobody knows where they went.`
               : g.action === 'return' ? `They're back from wherever they went.`
+              : g.action === 'rescue' ? `They ran into the treeline when someone screamed. Didn't hesitate.`
               : `There's talk about them going around the fire.`);
           } catch (e2) {}
           return { ok: true, gossip: g, aboutOther: g.dims.who };
@@ -6343,13 +6353,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const mName = this.monsterNoun(mdef.id);
       // PARTY-UP (Steve 2026-10-09): the outdoor crew is out there together —
       // a jumped patroller can call for help instead of fleeing alone.
+      // PARTY WIRING (Steve 2026-10-12): the trusted answer first — a
+      // stranger doesn't sprint into the treeline for you; a friend does.
       let pAllies = 0; const pAllyVids = [];
       try {
+        const _pt = (this.state.village || {}).trust || {};
+        const _tOf = (rid) => (_pt[rid] === undefined ? 10 : _pt[rid]);
+        const _crew = [];
         for (const rid of (this._outdoorCrew || [])) {
-          if (rid !== vid && (this.state.village.roster || []).includes(rid)) {
-            pAllies++;
-            if (pAllyVids.length < 2) pAllyVids.push(rid);
-          }
+          if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
+        }
+        _crew.sort((a, b) => _tOf(b) - _tOf(a));
+        for (const rid of _crew) {
+          pAllies++;
+          if (pAllyVids.length < 2) pAllyVids.push(rid);
         }
       } catch (e) {}
       const rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids });
@@ -14739,6 +14756,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         'competent': { competent: 10 },
         'useless': { competent: -10 },
         'departure': {}, // not a rep effect, just news
+        'rescue': { brave: 10 }, // running toward screams is reputation (canon: gossip moves REP, never trust)
         'death': {}, // not a rep effect
         'deed': {}, // generic, dims should be provided
       };
@@ -17132,13 +17150,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { mdef = (this.data.monsters || []).find(x => x.id === m.id) || {}; } catch (e) {}
       // PARTY-UP (Steve 2026-10-09): same outdoor-crew rule as patrols — a
       // villager jumped in the wild can call to whoever's out there with them.
+      // PARTY WIRING (Steve 2026-10-12): trust-ordered — friends answer first.
       let wAllies = 0; const wAllyVids = [];
       try {
+        const _wt = (this.state.village || {}).trust || {};
+        const _tOf = (rid) => (_wt[rid] === undefined ? 10 : _wt[rid]);
+        const _crew = [];
         for (const rid of (this._outdoorCrew || [])) {
-          if (rid !== vid && (this.state.village.roster || []).includes(rid)) {
-            wAllies++;
-            if (wAllyVids.length < 2) wAllyVids.push(rid);
-          }
+          if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
+        }
+        _crew.sort((a, b) => _tOf(b) - _tOf(a));
+        for (const rid of _crew) {
+          wAllies++;
+          if (wAllyVids.length < 2) wAllyVids.push(rid);
         }
       } catch (e) {}
       const rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids });

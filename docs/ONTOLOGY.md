@@ -960,6 +960,16 @@ Formal party mechanics. Roles, formations.
 
 **Consumes:** state.party
 
+### party-wiring (`party-wiring.js`)
+Villagers answer each other's help calls. When a villager gets
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### party (`party.js`)
 Party system. Companions travel and fight with you.
 

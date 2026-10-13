@@ -349,7 +349,22 @@
       try { mName = this.encDescribeMonster ? this.encDescribeMonster(m) : (m.unknown || 'something'); } catch (e) {}
       var nm = '';
       try { nm = this.displayName(vid); } catch (e) { nm = 'Someone'; }
-      var rec = this.fieldFight(vid, m, null, { awareness: true });
+      // PARTY WIRING (Steve 2026-10-12): villagers fight together — nearby
+      // villagers (same outdoor crew, in earshot) arrive as allies through
+      // the fieldFight machinery. Trust-ordered: friends answer, strangers
+      // don't. The depth probe measured calledHelp 0/531 before this.
+      var allyVids = [];
+      try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
+      // The village hears about a rescue — gossip fodder, honestly sourced.
+      // "Mara ran into the treeline when she heard James scream."
+      if (rec.calledHelp && rec.allyVid) {
+        try {
+          var _rw = (this.state.village.roster || []).filter(function (id) { return id !== vid && id !== rec.allyVid; });
+          for (var _ri = _rw.length - 1; _ri > 0; _ri--) { var _rj = Math.floor(R() * (_ri + 1)); var _rt = _rw[_ri]; _rw[_ri] = _rj; _rw[_j] = _rt; }
+          this.seedGossip('rescue', { who: rec.allyVid, for: vid }, _rw.slice(0, 2));
+        } catch (e) {}
+      }
       var fightNote = rec.rounds + ' rounds' + (rec.vTaken ? ', ' + rec.vTaken + ' taken' : '');
       if (rec.outcome === 'evade') {
         // saw it, gave it room, lived. That's a kind of knowledge.
@@ -395,7 +410,13 @@
         // species per lesson, declining by construction.
         if (m.id && a.know[vid].fought.indexOf(m.id) === -1) a.know[vid].fought.push(m.id);
         st.exped[vid].encounters.push('killed ' + (m.id || 'it') + ' (' + fightNote + ')' + (lootNote ? ' —' + lootNote : ''));
-        this.recordDeed(vid, 'monster_kill', `${nm} killed ${mName} out past the ridge — alone — and walked home. ${fightNote}.`, 10);
+        // PARTY WIRING: the "alone" copy is a lie when someone answered the
+        // shout — name the rescuer honestly.
+        var aloneNote = ' — alone — ';
+        if (rec.calledHelp && rec.allyVid) {
+          try { aloneNote = ' — with ' + this.displayName(rec.allyVid).split(' ')[0] + ' charging in when it turned — '; } catch (e) {}
+        }
+        this.recordDeed(vid, 'monster_kill', `${nm} killed ${mName} out past the ridge${aloneNote}and walked home. ${fightNote}.`, 10);
         return;
       }
       if (rec.outcome === 'mFlee') {

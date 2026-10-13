@@ -100,7 +100,7 @@
       var rec = {
         outcome: null, rounds: 0, vTaken: 0, mDealt: 0,
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
-        allyDealt: 0, calledHelp: false, fleeHopeless: null, fleeHpFrac: null,
+        allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
       };
       // GEAR-UP (Steve 2026-10-09): re-equip only, never acquisition — a
@@ -389,6 +389,7 @@
           allyName = (_fa0 && _fa0.name) || opts.allyName || (this.displayName ? this.displayName(allyVid).split(' ')[0] : 'Someone');
         } catch (e) {}
         rec.calledHelp = true;
+        rec.allyVid = allyVid;
         rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
       }
@@ -656,6 +657,7 @@
             allyName = (_fa2 && _fa2.name) || opts.allyName || (this.displayName ? this.displayName(allyVid).split(' ')[0] : 'Someone');
           } catch (e) {}
           rec.calledHelp = true;
+          rec.allyVid = allyVid;
           rec.log.push(vName + ' is losing — shouts for help! ' + allyName + ' charges in!');
           try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
         } else if (hopeless) {
