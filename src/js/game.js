@@ -6325,6 +6325,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           });
           const meat = this.monsterMeatEntry(mdef);
           if (corpse && meat) corpse.items.push(meat);
+          // MAP MEMORY (villager-mapmem 2026-10-13): the killer saw it fall —
+          // remember the site. (Expedition kills go through mapmemNoteKill.)
+          try { if (corpse && this.mapmemRemember) this.mapmemRemember(vid, corpse); } catch (e) {}
         } catch (e) {}
       };
       if (rec.outcome === 'alreadyDead') {

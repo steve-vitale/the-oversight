@@ -1362,6 +1362,21 @@ Villager AI. Villagers act on their own with goals and routines.
 
 **Consumes:** village.villagers
 
+### villager-mapmem (`villager-mapmem.js`)
+Villager map memory + cross-node objectives. Villagers remember resource sites on other nodes (v1: corpses) and form haul objectives that carry past whatever node they're on — kills become the resources they are.
+
+**Provides:** mapmemOf(vid), mapmemRemember(vid, corpse), mapmemPurge(vid), mapmemNoticeNode(vid, nx, ny), mapmemNoteKill(vid, m, node), mapmemTell(tellerVid, listenerVid), mapmemBestHaul(vid, hx, hy), mapmemHaulAt(vid), mapmemFoodKnown(corpse), mapmemMeatItem(corpse)
+
+**Rules:**
+- memory_is_knowledge_gated: remembered sites store the descriptor the villager knows, never the true name pre-identification (code: villager-mapmem.js)
+- secondhand_is_fuzzed: gossip-passed memories carry estimation error and are marked secondhand (code: villager-mapmem.js)
+- objectives_carry_past_nodes: haul objectives target remembered nodes, not the current one (code: villager-mapmem.js)
+- no_haul_without_need: haul objectives only form when the village needs food (code: villager-mapmem.js)
+- known_food_only: villagers haul meat the village knows is food; unknown flesh stays for the player's cautious testing (code: villager-mapmem.js)
+- expedition_kills_leave_bodies: an expedition kill registers a real corpse — the body is really there, on the real rot clock (code: villager-mapmem.js)
+
+**Consumes:** state.corpses, state.scholar.day, village.roster, village.pantry, village.mapmem, npcNode, displayName, monsterDisplayName, monsterFoodSafe, stockPantry, seedGossip, registerDeath, monsterMeatEntry
+
 ### villager-objectives (`villager-objectives.js`)
 Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 

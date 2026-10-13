@@ -161,6 +161,14 @@
       if (water < 3) cands.push({ kind: 'WATER', w: 3.5 });
       // TRAPS — only hands that know the wire. (knowledge-gated)
       if (vp.knowsSnare) cands.push({ kind: 'TRAPS', w: 1.6 });
+      // HAUL — map memory (villager-mapmem 2026-10-13): a remembered corpse
+      // with known-safe meat, when the village needs food. Objectives that
+      // carry past whatever node they're on — kills as resources.
+      var haulSite = null;
+      try { haulSite = this.mapmemBestHaul ? this.mapmemBestHaul(vid, hx, hy) : null; } catch (e) {}
+      if (haulSite && (pantry < 5000 || (n.hunger || 0) > 50)) {
+        cands.push({ kind: 'HAUL', w: 1 + Math.min(3, haulSite.estKcal / 2000), site: haulSite });
+      }
       // VISIT — go find someone specific. Social, uses real familiarity.
       // Tight goals: don't cross the world for a chat — the target must be
       // within this villager's range (homebodies visit at home, not abroad).
@@ -210,6 +218,31 @@
       } else if (chosen.kind === 'EXPLORE') {
         o.purpose = 'explore'; dist = 1 + Math.floor(R() * Math.max(1, maxD));
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
+      } else if (chosen.kind === 'HAUL') {
+        // HAUL: go back for the remembered carcass. The target is a real
+        // remembered node, not a random direction — this is the cross-node
+        // objective. They tell the hall where they're going (gossip spread:
+        // listeners gain the memory secondhand).
+        var hs = chosen.site;
+        o.purpose = 'haul'; o.state = 'ready'; o.indoor = false;
+        o.tx = hs.nx; o.ty = hs.ny;
+        o.targetRef = hs.ref; o.haulLabel = hs.label; o.haulSite = hs;
+        var hdist = this.objDist(hx, hy, hs.nx, hs.ny);
+        o.tightness = Math.max(1, hdist);
+        o.partsLeft = 2 * hdist + 3;
+        o.targetVid = null; o.companion = null;
+        try {
+          var _mates = (v.roster || []).filter(function (id) {
+            if (id === vid) return false;
+            try { var _self = this.villagerId; if (id === _self) return false; } catch (e) {}
+            try { var nd = this.npcNode(id); return !!(nd && nd.nx === hx && nd.ny === hy); }
+            catch (e) { return false; }
+          }, this);
+          for (var _ti = 0; _ti < Math.min(2, _mates.length); _ti++) {
+            try { this.mapmemTell(vid, _mates[_ti]); } catch (e) {}
+          }
+        } catch (e) {}
+        return o;
       } else { // HAVEN_CHORE
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
         o.tx = hx; o.ty = hy; o.tightness = 0;
@@ -394,6 +427,7 @@
         explore: 'wanders off. "I want to see what\'s out there."',
         leave: 'walks away from Haven. They don\'t look back.',
         guard: 'walks out with ' + (function () { try { return this.displayName(obj.targetVid); } catch (e) { return 'someone'; } }.call(this)) + '. "Nobody walks alone today."',
+        haul: 'sets out for the ' + (obj.haulLabel || 'carcass') + '. "Meat\'s meat. Back with it or not at all."',
       }[obj.purpose] || 'heads out.';
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
       // leaving is gossip-worthy. Two witnesses so the rumor can travel.
@@ -550,6 +584,15 @@
           o.state = 'returning';
         }
       }
+      // HAUL arrival (villager-mapmem 2026-10-13): at the remembered node —
+      // butcher the carcass. mapmemHaulAt narrates honestly and flips the
+      // objective to returning (meat carried as objective state).
+      if (o && o.state === 'out' && o.kind === 'HAUL' && nx === o.tx && ny === o.ty) {
+        try { this.mapmemHaulAt(rid); } catch (e) { o.state = 'returning'; }
+      }
+      // MAP MEMORY (villager-mapmem 2026-10-13): they notice what's on the
+      // node they're standing on — fresh corpses become remembered sites.
+      try { if (this.mapmemNoticeNode) this.mapmemNoticeNode(rid, nx, ny); } catch (e) {}
       // co-location: run into someone out here. Sometimes the village hears.
       try {
         var others = this.npcsOnNode(nx, ny).filter(function (id) {
@@ -804,6 +847,24 @@
           for (var _iR = _shufR.length - 1; _iR > 0; _iR--) { var _jR = Math.floor(R() * (_iR + 1)); var _tR = _shufR[_iR]; _shufR[_iR] = _shufR[_jR]; _shufR[_jR] = _tR; }
           this.seedGossip('return', { who: vid }, _shufR.slice(0, 2));
         } catch (e) {}
+      } else if (purpose === 'haul') {
+        // HAUL return (villager-mapmem 2026-10-13): the carried meat lands
+        // in the pantry as safe food (only known-safe meat was hauled), and
+        // the village eats it through the normal meal system — closing the
+        // loop the r12 run showed rotting open.
+        var hk = 0, hn = 'Hauled meat';
+        try {
+          var ho = this.objOf(vid);
+          hk = ho.haulKcal || 0; hn = ho.haulName || hn;
+          ho.haulKcal = 0; // deposited — don't double-count on re-return
+        } catch (e) {}
+        if (hk > 0) {
+          try { this.stockPantry(hk, hn); } catch (e) {}
+          if (playerAtHaven) this.say(`🥩 ${nm} is back with meat: +${hk} kcal to the pantry.`);
+          try { this.bumpTrust(vid, 1); } catch (e) {}
+        } else if (playerAtHaven) {
+          this.say(`🥩 ${nm} is back empty-handed. "Nothing worth hauling out there."`);
+        }
       }
       // objective complete
       var oo = this.objOf(vid);

@@ -368,6 +368,14 @@
         // WAVE GATE (break-it 2026-10-09): village-wide kill minimums —
         // see resolveWildMonsterEncounter. The expedition's kill counts too.
         try { this.recordWaveKill(m.id); } catch (e) {}
+        // MAP MEMORY (villager-mapmem 2026-10-13): the kill used to leave no
+        // body at all — the meat vanished. Now the body is really there
+        // (registerDeath with node override, real rot clock, real meat
+        // entry), and the killer remembers where. Kills are resources.
+        try {
+          var _kn = this.npcNode ? this.npcNode(vid) : null;
+          if (this.mapmemNoteKill && _kn) this.mapmemNoteKill(vid, m, _kn);
+        } catch (e) {}
         // KILL LOOT (Steve 2026-10-09): the killer loots the body — the
         // System's gift goes in their pack and they re-equip on the spot.
         var lootNote = '';
