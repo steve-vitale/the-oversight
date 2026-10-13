@@ -55,10 +55,10 @@
   var R = Math.random;
 
   var MEM_CAP = 12;
-  // VILLAGER BUTCHER YIELD (design call 2026-10-13): villagers are competent
-  // butchers on average — between blind-messy 0.30 and known-clean 0.40.
-  // The player's technique knowledge doesn't transfer to NPC hands.
-  var HAUL_YIELD = 0.35;
+  // VILLAGER BUTCHER YIELD (Steve 2026-10-13, overruling the 0.35): food is
+  // the wall, so this is a wall lever, not a number to pre-nerf. Villagers
+  // are practiced hands — 0.50, above known-clean 0.40. Sim loops tune it.
+  var HAUL_YIELD = 0.50;
   // HAUL NEED GATE (design call 2026-10-13): don't walk miles for meat the
   // village doesn't need. FORAGE gates at 4000; haul is opportunistic, so
   // the bar is a little higher — but personal hunger always qualifies.
