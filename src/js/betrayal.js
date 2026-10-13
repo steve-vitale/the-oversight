@@ -1494,6 +1494,27 @@
   // counterfactual measurement (sim) and testing. rng defaults to Math.random.
   // POLARITY: belief is negative = guilty (evidence moves it down), so a
   // voter convicts when their final score s < 0.
+  // MOOT QUORUM (blitz-succession 2026-10-13 — Steve's exact spec): a binding
+  // moot requires a quorum of MORE THAN HALF of living villagers present.
+  // Below quorum the moot may still meet and talk, but it cannot render
+  // binding verdicts (exile/conviction) — any verdict is advisory only,
+  // clearly marked as such in the fiction. "Present" = the NPCs at the fire
+  // voting, plus the accused (they stand trial) and the player when they're
+  // there (voting, or standing accused themselves). Exiles aren't at the fire.
+  mootQuorum(c) {
+    const v = this.state.village;
+    const living = (v.roster || []).length;
+    const t = c.trial || {};
+    const accusedPresent = (c.accused || []).filter(id => !this.isPlayer(id)).length;
+    let playerPresent = 0;
+    try {
+      if (!this.state.scholar.exiled) {
+        playerPresent = (t.playerVoter || (c.accused || []).includes(this.villagerId)) ? 1 : 0;
+      }
+    } catch (e) { playerPresent = 0; }
+    const present = (t.present || []).length + accusedPresent + playerPresent;
+    return { living, present, quorum: living > 0 && present > living / 2 };
+  },
   tallyVotes(c, wildDay, rng) {
     const R = rng || Math.random;
     const v = this.state.village;
@@ -1576,6 +1597,13 @@
     const wildDay = Math.random() < rate;
     const t = this.tallyVotes(c, wildDay);
     c.trial = { present: t.present, votes: t.votes, guilty: t.guilty, day: this.state.scholar.day, playerVoter: t.playerVoter, wildDay: t.wildDay };
+    // MOOT QUORUM (Steve's spec): below quorum the moot talks but can't bind.
+    {
+      const q = this.mootQuorum(c);
+      if (!q.quorum) {
+        this.say(`Half the village is out — hunting, walking, gone. ${q.present} of ${q.living} here. Those at the fire can talk, but they can't bind anyone tonight: whatever the fire says is advisory only — no exile, no conviction, until the village is here.`);
+      }
+    }
     if (t.wildDay) {
       // narrate the weather honestly: the room is off today. If there's
       // fresh blood behind it, say so — otherwise it's just the village
@@ -1662,6 +1690,25 @@
           : `Your "not guilty" lands in the count, out loud. Across the fire, a jaw tightens. The accused breathe — and they'll remember who stood up.`);
       }
     } catch (e) {}
+    // MOOT QUORUM (blitz-succession 2026-10-13 — Steve's exact spec): below
+    // quorum NO binding verdict fires — exile/conviction need more than half
+    // the living village present. The moot still met and talked; its sense
+    // is advisory only, marked clearly in the fiction. The charge is NOT
+    // resolved — a later quorate moot can still bind it (no double jeopardy:
+    // nothing was decided). The formal demand clears so the ladder can
+    // re-demand when the village is actually here.
+    const q = this.mootQuorum(c);
+    if (!q.quorum) {
+      c.status = 'advisory';
+      c.resolution = convicted ? 'advisory_guilty' : 'advisory_acquit';
+      if (convicted) {
+        this.say(`The count says guilty — ${guilty} for, ${total - guilty} against — but only ${q.present} of ${q.living} are here. The moot can't bind what it can't hold: this is the fire's ADVISORY sense, not a verdict. No exile. No sentence. The charge stands open until a quorate moot sits.`);
+      } else {
+        this.say(`The count falls short — ${guilty} for, ${total - guilty} against — but only ${q.present} of ${q.living} are here, so this isn't a clearing either. The moot's ADVISORY sense: not proven tonight. The charge stands open.`);
+      }
+      try { this.justiceState().mootDemanded = false; } catch (e) {}
+      return { advisory: true, convicted, caseId: c.id, present: q.present, living: q.living };
+    }
     if (convicted) return this.sentenceCase(c);
     // acquitted: festering or vindication
     c.status = 'acquitted'; c.resolution = 'acquitted';

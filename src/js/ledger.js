@@ -868,13 +868,42 @@
       try { this.audioEvent('stingSuccession'); } catch (e) {}
       this.say(`📖 The Codex turns a page: ${oldName}, ${this.pluralize(s.day || 0, 'day')}. The mantle passes to ${newName}.`);
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
-      // the trust of the office transfers, discounted — the person must earn the rest
-      // (journey-succession 2026-10-11: `|| 20` conflated a DISTRUSTED office
-      // (explicit 0) with a missing entry — a 0-trust Bearer <redacted> 12 free
-      // trust to the successor. Only a missing entry gets the 20 default.)
+      // MANTLE TRUST INHERITANCE (blitz-succession 2026-10-13): the old rule
+      // (0.6x of the predecessor's single trust entry) compounded every
+      // death — late-chain bearers inherited ~zero and started socially
+      // bankrupt after a long line of successful successions. The village
+      // remembers the OFFICE now, through three channels — none of them free:
+      //   1. OFFICE RESIDUE (inherited trust fraction): 40% of the dead
+      //      bearer's trust entry — the office's standing, discounted.
+      //   2. ELDERS' VOUCHING: living villagers with trust >= 60 in the
+      //      office vouch for the successor at the funeral (+4 each, capped
+      //      +16). Vouching is EARNED — it exists only because the
+      //      predecessor built real trust with real people through deeds
+      //      (food, kept promises, fights). No allies, no vouching.
+      //   3. THE SUCCESSOR'S OWN RECORD (deeds-carry): the successor's own
+      //      trust entry as a villager — how they stood by the office —
+      //      carries 40%. A loyal villager steps up with a head start; a
+      //      hostile one starts behind.
+      // The office gets a floor of 10 (a hearing); the person earns the rest.
+      // (journey-succession 2026-10-11 fix preserved: only a MISSING entry
+      // gets the 20 default — an explicit 0 stays 0, no free trust.)
       try {
         v.trust = v.trust || {};
-        v.trust[newId] = Math.round((trust[oldId] == null ? 20 : trust[oldId]) * 0.6);
+        const office = (trust[oldId] == null ? 20 : trust[oldId]);
+        const own = (trust[newId] == null ? 0 : trust[newId]);
+        const vouchers = (v.roster || []).filter(id => id !== newId && liveRoster.has(id) && (trust[id] || 0) >= 60);
+        const vouchBonus = Math.min(16, vouchers.length * 4);
+        const inherit = Math.max(10, Math.min(100, Math.round(office * 0.4 + own * 0.4 + vouchBonus)));
+        v.trust[newId] = inherit;
+        if (vouchers.length) {
+          const vnames = vouchers.slice(0, 3).map(id => {
+            const ch = (this.data.villagers || []).find(x => x.id === id) || {};
+            return (ch.name || 'Someone').split(' ')[0];
+          });
+          const extra = vouchers.length > 3 ? ` and ${vouchers.length - 3} more` : '';
+          const verb = vouchers.length === 1 ? 'speaks' : 'speak';
+          this.say(`At the grave, ${vnames.join(', ')}${extra} ${verb} for ${newFirst} — "${oldFirst} trusted them. We saw it. Give them the fire's hearing." The village listens.`);
+        }
       } catch (e) {}
       // MANTLE HANDOFF RECORD (journey-succession 2026-10-11): the village is
       // the protagonist — conversational continuity must survive the bearer,

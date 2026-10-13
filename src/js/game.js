@@ -4754,6 +4754,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     promiseKeepKind(goal) {
       return ({ feed: 'food', protect: 'fight', heal: 'heal', prove: 'task', belong: 'social', family: 'travel', understand: 'social', survive: 'food' })[goal] || null;
     },
+    // promiseDecayDays: PROMISE DECAY (blitz-succession 2026-10-13 — Steve's
+    // exact spec). A broken promise's refusal never decayed; now it lifts
+    // after D days: D = clamp(round(20 * trustAtBreak / 50), 7, 60). Deeper
+    // trust broken = longer block. trustAtBreak = the trust level between
+    // the two villagers at the time the promise was broken. Amends still
+    // reopen the promise path immediately (promiseHelp's word-scan treats a
+    // later 'amends' as the last word — unchanged by this).
+    promiseDecayDays(trustAtBreak) {
+      const t = (trustAtBreak == null || isNaN(trustAtBreak)) ? 10 : trustAtBreak;
+      return Math.max(7, Math.min(60, Math.round(20 * t / 50)));
+    },
     // promiseHelp: commit to their goal. Tracked. If you follow through
     // (via related actions), big trust. If you ignore it, they remember.
     promiseHelp(vid) {
@@ -4785,11 +4796,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // later amends/kept promise blocks.
       {
         const mems = (v.memory || {})[vid] || [];
-        let lastWord = null, lastNote = '';
+        let lastWord = null, lastNote = '', lastMem = null;
         for (let i = mems.length - 1; i >= 0; i--) {
           const m = mems[i];
           if (m && (m.t === 'promise_broken' || m.t === 'promise_kept' || m.t === 'amends')) {
-            lastWord = m.t; lastNote = m.note || ''; break;
+            lastWord = m.t; lastNote = m.note || ''; lastMem = m; break;
           }
         }
         if (lastWord === 'promise_broken') {
@@ -4801,8 +4812,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (g && g.want) what = String(g.want);
           } catch (e) {}
           const about = what ? ` You promised ${what} — it never happened.` : ` It never happened.`;
-          this.say(`${first} doesn't look up. "You said that before." A beat.${about} "Not again. Not until that's answered."`);
-          return null;
+          // PROMISE DECAY (blitz-succession 2026-10-13 — Steve's exact
+          // spec): the refusal lifts D days after the break, where D comes
+          // from the trust level at the break (trustAtBreak, stamped on the
+          // memory when the promise rotted). Deeper trust broken = longer
+          // block. Amends still reopen immediately: a later 'amends' is the
+          // last word, so this block never fires — unchanged.
+          const D = this.promiseDecayDays(lastMem && lastMem.trustAtBreak);
+          const daysSince = this.state.scholar.day - ((lastMem && lastMem.day) || 0);
+          if (daysSince < D) {
+            this.say(`${first} doesn't look up. "You said that before." A beat.${about} "Not again. Not until that's answered."`);
+            return null;
+          }
+          // Time did what amends would have: the door reopens. The memory
+          // stays (bitterness, dialogue) — only the refusal decayed.
+          this.say(`${first} studies you for a long moment. "You said that before — a long time back.${about}" A slow breath. "Words rot. People change, maybe. Talk."`);
         }
       }
       const promiseLines = {
@@ -4907,6 +4931,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { favor = (p.favorId && typeof this.convoGetFavor === 'function') ? this.convoGetFavor(pid) : null; } catch (e) {}
           if (favor && favor.id === p.favorId) favor.state = 'broken';
           const t = v.trust || (v.trust = {});
+          // PROMISE DECAY (blitz-succession 2026-10-13, Steve's spec): stamp
+          // the trust level at the moment of the break — the refusal in
+          // promiseHelp lifts after D days computed from it. trustAtBreak is
+          // the pre-penalty standing: the relationship as it was when the
+          // word broke. Missing entry falls back to 10 (the engine default).
+          const trustAtBreak = (t[pid] == null ? 10 : t[pid]);
           t[pid] = Math.max(0, (t[pid] || 10) - 15);
           if (p.favorTask) {
             // Name the broken task in the NPC's own short form ("this wound",
@@ -4921,7 +4951,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } else {
             this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
           }
-          this.remember(pid, 'promise_broken', p.favorTask || p.goal);
+          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak });
           }
         }
       }
@@ -15167,10 +15197,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (n.energy < 20) return 'weary';
       return 'steady';
     },
-    remember(rid, type, note) {
+    remember(rid, type, note, extra) {
       const v = this.state.village;
       v.memory = v.memory || {}; v.memory[rid] = v.memory[rid] || [];
-      v.memory[rid].push({ t: type, day: this.state.scholar.day, note: note || '' });
+      // PROMISE DECAY (blitz-succession 2026-10-13): the optional extra
+      // object merges into the memory entry — used to stamp promise_broken
+      // with the trust level at the break (trustAtBreak), which the refusal
+      // decay reads later. Plain memories are untouched.
+      const entry = { t: type, day: this.state.scholar.day, note: note || '' };
+      if (extra && typeof extra === 'object') Object.assign(entry, extra);
+      v.memory[rid].push(entry);
       if (v.memory[rid].length > 20) v.memory[rid].shift();
     },
     // villageEvent: the village feels things together.
