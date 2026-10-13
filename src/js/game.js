@@ -26920,10 +26920,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const vid of candidates) {
         let vector = null, severity = 1;
         const hp = (v.health && v.health[vid] !== undefined) ? v.health[vid] : 100;
+        // TRIAGE HYGIENE (fix-disease 2026-10-13): while the triage tents
+        // stand, the camp boils its water and bandages wounds clean — the
+        // dirty-water vector is suppressed, wound infection halved. Ticks in
+        // the brush don't care about tents.
+        let hygiene = false;
+        try {
+          const dayNow = (this.state.scholar || {}).day || 0;
+          hygiene = !!(v.triageHygiene && v.triageHygiene.until >= dayNow);
+        } catch (e) {}
         // WOUNDS: open wounds infect (the player's wound vector)
-        if (hp < 40 && Math.random() < 0.15) { vector = 'wound fever'; severity = 2; }
+        if (hp < 40 && Math.random() < (hygiene ? 0.075 : 0.15)) { vector = 'wound fever'; severity = 2; }
         // DIRTY WATER: the cistern's all they have (the player's raw-water vector)
-        else if (drinksDirty && Math.random() < 0.10) { vector = 'gut rot'; severity = 2; }
+        else if (!hygiene && drinksDirty && Math.random() < 0.10) { vector = 'gut rot'; severity = 2; }
         // TICKS: foragers in the brush (the player's tick vector)
         else {
           let out = false;

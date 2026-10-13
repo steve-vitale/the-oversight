@@ -607,12 +607,33 @@
       if (paid < cost) { this.say('"The bins can\'t cover broth and bandages," says ' + rel.speaker + ', quietly. "We don\'t have ' + cost.toLocaleString() + ' kcal to burn on tending." (Triage needs ' + cost.toLocaleString() + ' kcal in the pantry — honest cost, honestly refused.)'); return 'short'; }
       rel.used.triage = true; rel.used['triage-worst'] = true; rel.used['triage-hale'] = true;
       var nurse = _speaker(this);
+      // TRIAGE HYGIENE (fix-disease 2026-10-13): the tents mean boiled water
+      // and clean bandages — the narration always promised it, the mechanics
+      // never delivered. While the tents stand (3 days), the dirty-water gut
+      // rot vector is suppressed and wound infection is halved. Ticks in the
+      // brush are untouched — tents don't follow foragers. This is what stops
+      // an outbreak from OUTRUNNING the triage: the care shortens the sick,
+      // the hygiene stops the well from joining them.
+      try {
+        var day = (this.state.scholar || {}).day || 0;
+        v.triageHygiene = { until: day + 3, by: nurse };
+      } catch (e) {}
       var worstNames = [];
       for (var s2 = 0; s2 < sickIds.length; s2++) {
         var rec = v.sick[sickIds[s2]];
         var sev = rec.severity || 1;
         var shift = 2;
-        if (mode === 'triage-worst') { shift = sev >= 2 ? 4 : 1; if (sev >= 2) worstNames.push(_first(this, sickIds[s2])); }
+        if (mode === 'triage-worst') {
+          shift = sev >= 2 ? 4 : 1;
+          if (sev >= 2) {
+            worstNames.push(_first(this, sickIds[s2]));
+            // Intensive tending doesn't just shorten the fever — it takes the
+            // edge off. Severe cases step down one severity (min 1). The
+            // player's personal treatment does this too (treatSickVillager);
+            // the tents do it slower and costlier, once per relief.
+            rec.severity = Math.max(1, sev - 1);
+          }
+        }
         else if (mode === 'triage-hale') { shift = sev <= 1 ? 4 : 1; }
         rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - shift);
       }
@@ -623,7 +644,7 @@
       }
       if (mode === 'triage-worst') {
         this.say('⛺ Triage tents go up — the worst first. ' + nurse + ' doesn\'t leave their side: broth by the spoonful, the watch in shifts, no sleep. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
-        this.say((worstNames.length ? worstNames.join(', ') : 'The worst') + ' get intensive tending: their fevers break four days sooner. The walking sick get broth and a blessing — one day sooner. We\'re betting the mild pull through on their own.');
+        this.say((worstNames.length ? worstNames.join(', ') : 'The worst') + ' get intensive tending: their fevers break four days sooner and the worst of it passes — they step back from the brink. The walking sick get broth and a blessing — one day sooner. We\'re betting the mild pull through on their own.');
       } else if (mode === 'triage-hale') {
         this.say('⛺ Triage tents go up — the walking sick first. ' + nurse + ' gets the mild cases back on their feet fast: back to the treeline in days, not weeks. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
         this.say('The mild mend four days sooner. The severe get broth and watching — one day sooner. We\'re betting the strong pull through on their own.');
@@ -631,6 +652,7 @@
         this.say('⛺ Triage tents go up. ' + nurse + ' runs them — broth, boiled water, clean bandages, no sleep. (-' + cost.toLocaleString() + ' kcal from the pantry, said aloud and spent.)');
         if (sickIds.length) this.say('The sick get real tending: every fever breaks two days sooner. The hurt get stitched and splinted.');
       }
+      this.say('And while the tents stand — three days — the water gets boiled and every wound gets cleaned. Nobody new should catch it from the cistern.');
       return mode;
     },
 

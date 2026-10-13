@@ -116,7 +116,12 @@ async function loadGame(opts) {
     json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
   });
 
-  const order = execSync(`grep -o 'src/js/[^"'"'"']*\\.js' index.html | head -80`, { cwd: ROOT })
+  // HEAD-80 BUG (fix-disease 2026-10-13): the old `head -80` silently dropped
+  // every script after position 80 in index.html — including safetynets.js
+  // (the entire crisis-relief system), villageAgency.js, and memdepth.js.
+  // Sims were measuring a game without its recovery mechanics. No cap: load
+  // the full list in index.html order.
+  const order = execSync(`grep -o 'src/js/[^"'"'"']*\\.js' index.html`, { cwd: ROOT })
     .toString().split('\n')
     .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 
