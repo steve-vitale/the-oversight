@@ -465,6 +465,7 @@
       `<button class="lm-btn" data-lm="sleep">😴 Sleep${sleepDot}</button>` +
       `<button class="lm-btn" data-lm="wait">⏳ Wait</button>` +
       `<button class="lm-btn" data-lm="map">🗺️ Map</button>` +
+      `<button class="lm-btn" data-lm="settings" aria-label="settings">⚙️</button>` +
       `</div>`;
   }
 
@@ -481,6 +482,7 @@
           const compass = document.getElementById('compass');
           if (compass) compass.click();
         }
+        else if (a === 'settings') { try { openSettings(); } catch (e) {} }
       };
     });
   }
@@ -613,13 +615,13 @@
       </div>
       <p class="small" id="install-hint" style="display:none;opacity:.7"></p>
       <p class="small" style="margin-top:20px">slice 1: open expeditions. forage · eat · drink · bring it home.</p>
-      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span> <input id="b-vol" type="range" min="0" max="100" step="1" value="90" style="width:64px;vertical-align:middle;opacity:.55" title="volume"> <span id="b-voice" style="cursor:pointer;opacity:.25;font-size:11px" title="voiced dialogue">🗣️</span></p>
+      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
     // UI SELECT (Steve 2026-10-12): the main menu answers every tap.
     // Capture-phase: the blip fires before each button's own handler.
     try {
-      screen.querySelectorAll('button, #b-notes, #b-debug, #b-sound, #b-voice, #build-tag').forEach(b => {
+      screen.querySelectorAll('button, #b-notes, #b-debug, #b-settings, #build-tag').forEach(b => {
         b.addEventListener('click', () => { try { Game.audioEvent('uiSelect'); } catch (e) {} }, true);
       });
     } catch (e) {}
@@ -710,45 +712,11 @@
       if (DEBUG) bdbg.style.opacity = '1';
       bdbg.onclick = () => { toggleDebug(); };
     }
-    // 🔊 sound toggle: mutes the Web Audio terror system. Persists.
-    // VOLUME SLIDER (Steve 2026-10-12): player-facing volume, persisted.
-    // Dragging it up from zero unmutes — the slider is the louder control.
-    const bsnd = document.getElementById('b-sound');
-    const bvol = document.getElementById('b-vol');
-    const paintSnd = () => { if (bsnd) bsnd.textContent = (Game.audio && Game.audio.isMuted()) ? '🔇' : '🔊'; };
-    if (bsnd && Game.audio) {
-      paintSnd();
-      bsnd.onclick = () => { try { Game.audio.toggleMute(); } catch (e) {} paintSnd(); };
-    }
-    if (bvol && Game.audio && Game.audio.setVolume) {
-      try { bvol.value = Math.round(Game.audio.getVolume() * 100); } catch (e) {}
-      bvol.oninput = () => {
-        try {
-          Game.audio.setVolume(bvol.value / 100);
-          if (Game.audio.isMuted() && bvol.value > 0) { Game.audio.toggleMute(); }
-        } catch (e) {}
-        paintSnd();
-      };
-    }
-    // 🗣️ voiced-dialogue toggle (Steve 2026-10-11): spoken NPC lines via
-    // Piper TTS packs (lazy-loaded, cached). Persists; default is on once
-    // packs are cached, off before. Enabling never bulk-downloads — the
-    // first speaker's pack fetches on first use.
-    const bvoice = document.getElementById('b-voice');
-    if (bvoice && Game.voiceEnabled) {
-      const paintVoice = () => {
-        const on = Game.voiceEnabled();
-        bvoice.style.opacity = on ? '0.9' : '0.25';
-        let n = 0;
-        try {
-          const st = Game.voicePackStatus ? Game.voicePackStatus() : {};
-          n = Object.keys(st).filter(k => st[k] === 'cached').length;
-        } catch (e) {}
-        bvoice.title = on ? ('voiced dialogue on (' + n + '/4 voice packs cached)') : 'voiced dialogue off — tap to enable';
-      };
-      Game.paintVoiceToggle = paintVoice;
-      paintVoice();
-      bvoice.onclick = () => { try { Game.setVoiceEnabled(!Game.voiceEnabled()); } catch (e) {} paintVoice(); };
+    // ⚙️ settings menu (Steve 2026-10-13): one traditional panel for sound,
+    // volume, and voiced dialogue — replaces the scattered footer icons.
+    const bset = document.getElementById('b-settings');
+    if (bset) {
+      bset.onclick = () => { try { openSettings(); } catch (e) {} };
     }
   }
   function about() {
@@ -14625,6 +14593,94 @@
   function invSheet() {
     inlineView = { kind: 'inv', result: null, mapKey: inlineMapKey() };
     refresh();
+  }
+
+  // SETTINGS MENU (Steve 2026-10-13): a traditional grouped settings panel,
+  // replacing the scattered title-footer icons (sound toggle, volume bar,
+  // voice toggle). Opens as a body-level overlay so it works both out of
+  // game (title screen) and in game (lower menu gear) — refresh() never
+  // touches it. All controls persist via the existing audio/voice APIs.
+  function closeSettings() {
+    try { const el = document.getElementById('settings-overlay'); if (el) el.remove(); } catch (e) {}
+  }
+  function setSwitch(on) {
+    return `<span style="display:inline-block;width:51px;height:31px;border-radius:16px;flex:none;`
+      + `background:${on ? '#34c759' : 'rgba(120,120,128,.32)'};position:relative;transition:background .2s">`
+      + `<span style="position:absolute;top:2px;left:${on ? '22px' : '2px'};width:27px;height:27px;`
+      + `border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></span></span>`;
+  }
+  function openSettings() {
+    closeSettings();
+    const muted = !!(Game.audio && Game.audio.isMuted && Game.audio.isMuted());
+    let vol = 90;
+    try { if (Game.audio && Game.audio.getVolume) vol = Math.round(Game.audio.getVolume() * 100); } catch (e) {}
+    const voiceOn = !!(Game.voiceEnabled && Game.voiceEnabled());
+    let packs = '';
+    try {
+      const st = Game.voicePackStatus ? Game.voicePackStatus() : {};
+      const n = Object.keys(st).filter(k => st[k] === 'cached').length;
+      packs = n + '/4 voice packs cached';
+    } catch (e) {}
+    const ov = document.createElement('div');
+    ov.id = 'settings-overlay';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);'
+      + 'display:flex;align-items:flex-end;justify-content:center;';
+    ov.innerHTML =
+      `<div style="background:#1b1b1f;border-radius:16px 16px 0 0;width:100%;max-width:480px;`
+      + `max-height:82vh;overflow:auto;padding-bottom:calc(20px + env(safe-area-inset-bottom))" role="dialog" aria-label="Settings">`
+      + `<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px">`
+      + `<span style="font-size:17px;font-weight:700">Settings</span>`
+      + `<button class="btn sm" id="set-done">Done</button></div>`
+      + `<div style="padding:8px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Sound</div>`
+      + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
+      + `<div style="padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)">`
+      + `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">`
+      + `<span style="font-size:15px">Volume</span><span id="set-volnum" style="font-size:13px;opacity:.6">${vol}%</span></div>`
+      + `<input id="set-vol" type="range" min="0" max="100" step="1" value="${vol}" style="width:100%" aria-label="Volume"></div>`
+      + `<div id="set-muterow" style="display:flex;align-items:center;justify-content:space-between;`
+      + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Sound</span>`
+      + `<span id="set-mutesw">${setSwitch(!muted)}</span></div></div>`
+      + `<div style="padding:14px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Voice</div>`
+      + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
+      + `<div id="set-voicerow" style="display:flex;align-items:center;justify-content:space-between;`
+      + `padding:12px 16px;cursor:pointer"><span style="font-size:15px">Voiced dialogue`
+      + `<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">Spoken NPC lines${packs ? ' · ' + packs : ''}</span></span>`
+      + `<span id="set-voicesw">${setSwitch(voiceOn)}</span></div></div>`
+      + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
+      + `</div>`;
+    document.body.appendChild(ov);
+    const paint = () => {
+      const m = !!(Game.audio && Game.audio.isMuted && Game.audio.isMuted());
+      let v = 90;
+      try { if (Game.audio && Game.audio.getVolume) v = Math.round(Game.audio.getVolume() * 100); } catch (e) {}
+      const vo = !!(Game.voiceEnabled && Game.voiceEnabled());
+      const sw = document.getElementById('set-mutesw'); if (sw) sw.innerHTML = setSwitch(!m);
+      const vw = document.getElementById('set-voicesw'); if (vw) vw.innerHTML = setSwitch(vo);
+      const sl = document.getElementById('set-vol'); if (sl) sl.value = v;
+      const sn = document.getElementById('set-volnum'); if (sn) sn.textContent = v + '%';
+    };
+    ov.addEventListener('click', (e) => { if (e.target === ov) closeSettings(); });
+    document.getElementById('set-done').onclick = () => { try { Game.audioEvent('uiSelect'); } catch (e) {} closeSettings(); };
+    const slider = document.getElementById('set-vol');
+    if (slider) slider.oninput = () => {
+      try {
+        Game.audio.setVolume(slider.value / 100);
+        if (Game.audio.isMuted() && slider.value > 0) Game.audio.toggleMute();
+      } catch (e) {}
+      paint();
+    };
+    document.getElementById('set-muterow').onclick = () => {
+      try { Game.audio.toggleMute(); } catch (e) {}
+      try { Game.audioEvent('uiSelect'); } catch (e) {}
+      paint();
+    };
+    const vrow = document.getElementById('set-voicerow');
+    if (vrow) vrow.onclick = () => {
+      try { Game.setVoiceEnabled(!Game.voiceEnabled()); } catch (e) {}
+      try { if (Game.paintVoiceToggle) Game.paintVoiceToggle(); } catch (e) {}
+      paint();
+    };
+    try { Game.audioEvent('uiSelect'); } catch (e) {}
   }
 
   // CHARACTER SHEET (Steve 2026-10-07): who you are — abilities, skills,
