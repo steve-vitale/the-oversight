@@ -28914,6 +28914,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbBeamEndFiring(m, tg) {
       const useFifo = this.encUsesFifo(m);
       const isDeer = this.deerIs(m);
+      // BEAM-FATIGUE (longsim r18 arm B, 2026-10-13): judge the completed
+      // beam STERILE or not — one judgment per beam, right here. Sterile =
+      // the beam drew no blood (m.beamDrewBlood, set in tbBeamSweepTick)
+      // AND the FIFO target neither closed distance nor changed since the
+      // declare (m.beamDeclD / m.beamDeclKey, recorded in tbChooseMove).
+      // 3 consecutive sterile beams arm the hunt (m.beamHuntArmed); anything
+      // else resets the streak. Disrupted beams never reach this function,
+      // so they neither count nor reset — the declare-time distance check
+      // on the next beam covers the closer.
+      if (isDeer && this.beamFatigueOn()) {
+        try {
+          const bfBlood = !!m.beamDrewBlood;
+          m.beamDrewBlood = false;
+          let bfTgt = null;
+          try { bfTgt = (useFifo && this.encCurrentTarget(m)) || null; } catch (e) { bfTgt = null; }
+          const bfD = bfTgt ? Math.max(Math.abs(bfTgt.mx - m.mx), Math.abs(bfTgt.my - m.my)) : 99;
+          const bfSame = !!(bfTgt && m.beamDeclKey != null && bfTgt.key === m.beamDeclKey);
+          const bfClosed = bfSame && m.beamDeclD != null && bfD < m.beamDeclD;
+          if (!bfBlood && !bfClosed && bfSame && m.beamDeclD != null) {
+            m.beamStreak = (m.beamStreak || 0) + 1;
+          } else {
+            m.beamStreak = 0;
+          }
+          m.beamStreakMax = Math.max(m.beamStreakMax || 0, m.beamStreak || 0);
+          m.beamHuntArmed = (m.beamStreak || 0) >= 3;
+        } catch (e) {}
+      }
       m.telegraph = null;
       // COOLDOWN: the deer is spent. It needs a breather before it can
       // gather the light again — your window to act.
@@ -29019,6 +29046,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // silently 0 and wave-3/4/5 armor design is inert. Same for every
         // monster-sourced tbDamage call below.
         const beamLanded = this.tbDamage(o.key, dmg, this.encDamageSource(m, tg.attackName), m.key);
+        // BEAM-FATIGUE (longsim r18 arm B, 2026-10-13): a beam that drew
+        // blood is a beam that worked — it resets the deer's sterile-beam
+        // streak (consumed by tbChooseMove's accounting).
+        if (beamLanded > 0) m.beamDrewBlood = true;
         this.say(`🔥 ${verb} ${who}! (${beamLanded})`);
         if (f.over) return;
       }
@@ -33901,6 +33932,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (c.flagEq && (m[c.flagEq.field] || null) !== c.flagEq.value) return false;
       return true;
     },
+    // HIGHBEAM BEAM-FATIGUE gate (longsim r18 arm B, 2026-10-13): default ON;
+    // BEAM_FATIGUE=0 disables for before/after measurement on identical seeds.
+    beamFatigueOn() {
+      try {
+        if (typeof process !== 'undefined' && process && process.env && process.env.BEAM_FATIGUE === '0') return false;
+      } catch (e) {}
+      return true;
+    },
     tbChooseMove(m, foe) {
       const kit = this.tbMoveKit(m);
       if (!kit.length) { m.moveAtk = null; m.moveOdds = []; return null; }
@@ -33944,6 +33983,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const a of pool) total += (a.weight || 1);
       let r = Math.random() * total, chosen = pool[0];
       for (const a of pool) { r -= (a.weight || 1); if (r <= 0) { chosen = a; break; } }
+      // HIGHBEAM BEAM-FATIGUE (longsim r18 arm B, 2026-10-13): the deer has
+      // no response to a non-closing dodger — it re-declares Ocular
+      // Discharge every cycle forever (r15b s11: ~2,263 declares, 9,051
+      // ticks, 2 landed; the fight eats the calendar while the village dies
+      // around the scholar; a real player doing this by hand hits the same
+      // loop). A real hunter whose beam keeps missing stops burning light
+      // and closes in on hoof and antler. Per completed beam,
+      // tbBeamEndFiring judges the cycle STERILE (no blood drawn,
+      // m.beamDrewBlood set in tbBeamSweepTick; the FIFO target never
+      // closed distance and never changed) or not; 3 consecutive sterile
+      // beams arm the beamFatigueHunt pre-turn hook, which starts the HUNT
+      // MODE (every deer turn advances at full speed, no beams, until
+      // antler range or the trail goes cold). Here just record the declare
+      // distance/target for that judgment, and break the streak on any
+      // non-beam move. Cooldown turns re-pick without declaring — skipped.
+      // Steve's rules: monsters were sent to fight — the deer HUNTS, it
+      // doesn't leave and it doesn't disengage.
+      if (this.deerIs(m) && this.beamFatigueOn() && !((m.beamCooldown || 0) > 0)) {
+        try {
+          m.beamDrewBlood = false; // judged per completed beam in endFiring; clear stale flags (disrupted beams never get there)
+          if (chosen && chosen.name === 'Ocular Discharge') {
+            const bfTgt = (this.encUsesFifo(m) && this.encCurrentTarget(m)) || (foe && foe.f) || null;
+            m.beamDeclD = bfTgt ? Math.max(Math.abs(bfTgt.mx - m.mx), Math.abs(bfTgt.my - m.my)) : d;
+            m.beamDeclKey = bfTgt ? bfTgt.key : null;
+          } else {
+            m.beamStreak = 0;
+            m.beamHuntArmed = false;
+          }
+        } catch (e) {}
+      }
       m.moveAtk = chosen;
       m.moveOdds = pool.map(a => ({ name: a.name, pct: Math.round(100 * (a.weight || 1) / total) }));
       m.moveTurnsUsed = (m.moveTurnsUsed || 0) + 1;

@@ -44,9 +44,10 @@
       "aggroRange": 8,
       "archetype": "beam_sniper",
       "fleeAt": 0,
-      "notes": "Highbeam Deer \u2014 the benchmark. Antlers thrash anyone adjacent every turn the beam isn't firing.",
+      "notes": "Highbeam Deer \u2014 the benchmark. Antlers thrash anyone adjacent every turn the beam isn't firing. BEAM-FATIGUE (2026-10-13): after 3 sterile beam declarations the deer HUNTS \u2014 a mode: every turn advances at full speed, no beams, until antler range or the trail goes cold.",
       "preTurnHooks": [
-        "antlerThrash"
+        "antlerThrash",
+        "beamFatigueHunt"
       ],
       "preferredRange": 4
     },
