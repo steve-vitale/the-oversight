@@ -141,6 +141,18 @@ async function loadGame(opts) {
   order.forEach((f, i) => { if (i > gameIdx) evalFile(f); });
   delete global.window;
 
+  // MACROTASK YIELD (journey-succession 2026-10-13): some modules install
+  // load-order-critical wraps on a deferred macrotask — journal.js's mantle
+  // wrap (writeEpitaph/welcomeBearer on playerDeath) uses setTimeout(0)
+  // because ledger.js loads after journal.js. In the browser each <script>
+  // tag is its own task so the timer fires after all scripts attach; in
+  // node the whole eval is one synchronous block and every subsequent
+  // await is a microtask, so the timer STARVED until the sim ended — every
+  // sim silently ran without the journal mantle feature (epitaphs never
+  // written, new-hand lines never recorded). Yield one macrotask here so
+  // deferred installers attach before init(), matching the browser.
+  await new Promise(r => setTimeout(r, 0));
+
   const G = globalThis.Scattering.Game;
   // Silence narration/audio/drama for sims — telemetry + state carry the signal.
   G.say = function () {};
