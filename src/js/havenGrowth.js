@@ -410,7 +410,10 @@
       for (const m of raiders) {
         if (di < defenders.length) {
           const d = defenders[di++];
-          try { if (this.resolveWildMonsterEncounter) this.resolveWildMonsterEncounter(d, m); } catch (e) {}
+          // CRISIS MEMORY (journey crisis r6 2026-10-13): the {raid:true}
+          // flag marks these fights as haven defense — resolveWildMonster-
+          // Encounter plants a 'defended' memory the lately-topic reads.
+          try { if (this.resolveWildMonsterEncounter) this.resolveWildMonsterEncounter(d, m, { raid: true }); } catch (e) {}
         } else {
           // nobody met this one — it doesn't gorge once and leave. It
           // LINGERS at the treeline and gorges at each dawn until driven

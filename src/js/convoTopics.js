@@ -294,6 +294,16 @@
             }
           }
         } catch (e) {}
+        // DEFENSE MEMORY (journey crisis r6 2026-10-13): a villager who bled
+        // at the treeline defending the haven talks about it — their own
+        // night, in their own words. A naming debate doesn't outrank your
+        // own wound: defense sits above the generic threat scan. Window 7
+        // days — the night lingers, then it becomes old news (the mantle
+        // keeps 10). The 'defended' memory is planted by
+        // resolveWildMonsterEncounter on the raid pathway only (opts.raid).
+        const defended = this.t2mem(vid).find(m => m.t === 'defended' &&
+          (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
+        if (defended) return { kind: 'defense', note: String(defended.note || '') };
         const mem = this.t2mem(vid).filter(m => day - (m.day || 0) <= 3);
         const threat = mem.find(m => /threat|attack|monster|treeline/i.test((m.t || '') + ' ' + (m.note || '')));
         if (threat) return { kind: 'threat', note: threat.note };
@@ -715,6 +725,16 @@
         case 'threat':
           return ['"That thing — ' + (ev.note || 'by the treeline') + '. I keep seeing it when I blink."',
             '"I don\'t scare easy. I\'m scared. There. I said it out loud."'];
+        case 'defense': {
+          // DEFENSE MEMORY (journey crisis r6 2026-10-13): the note is
+          // already first-person ("I put down a shaggy-furred beast at the
+          // treeline") and knowledge-gated (monsterNoun, never the true
+          // name). Wrap it in the defender's own voice — this is THEIR
+          // night, not a rumor.
+          const dnote = ev.note || '';
+          return ['"That night — ' + dnote + '. I keep hearing it when I try to sleep."',
+            '"You want to know what I did in the raid? ' + dnote + '. Don\'t call it brave. Call it awake."'];
+        }
         case 'betrayal': {
           const aboutPlayer = /promise_broken|caught_you_stealing|suspects_you/i.test((ev.mem && ev.mem.t) || '');
           return aboutPlayer
@@ -757,6 +777,7 @@
           '"I keep turning over the last thing {mname} said to me. I can\'t tell if I\'m remembering it right, and that\'s somehow the worst part."',
           '"Sleep\'s gone strange. I {habitI} at odd hours now. Whatever gets me to morning."'],
         threat: ['"I sleep with my boots on now. That\'s where we are."'],
+        defense: ['"I {habitI} when it gets loud in my head. The treeline gets loud in my head."'],
         betrayal: ['"I\'m watching. That\'s what I do now — I watch."'],
         tension: ['"I stay out of it. Mostly. It\'s getting harder."'],
         hunger: ['"Small meals. Slow. Pretend it\'s a choice."'],
@@ -770,6 +791,7 @@
           '"Nobody says {mname}\'s name right yet. We will. Give it a few days."',
           '"The fire feels smaller without {mname}. The rest of us will have to be bigger."'],
         threat: ['"We set a better watch. We always say that. This time we mean it."'],
+        defense: ['"Next time they come, somebody has to meet them. I\'d rather it be me than someone greener."'],
         betrayal: ['"Either it gets talked out or it festers. I know which one I\'d bet on."'],
         tension: ['"Someone has to say the thing nobody\'s saying. Probably won\'t be me."'],
         hunger: ['"We need food. Everything else is decoration until that\'s solved."'],
@@ -783,6 +805,7 @@
           '"I\'m picking up {mname}\'s share of the work. Someone should, and it might as well be me."',
           '"I {habitI} for {mname}, now. Feels right. Feels like the least I can do."'],
         threat: ['"I take the watch nobody wants. It\'s the least useless thing I can do."'],
+        defense: ['"My part? I was at the door. I\'ll be at the door again."'],
         betrayal: ['"I keep my word. Someone around here has to."'],
         tension: ['"I talk to both sides. It hasn\'t exploded yet."'],
         hunger: ['"I share what I have. It isn\'t much. It\'s something."'],

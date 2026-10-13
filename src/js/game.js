@@ -15204,10 +15204,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // object merges into the memory entry — used to stamp promise_broken
       // with the trust level at the break (trustAtBreak), which the refusal
       // decay reads later. Plain memories are untouched.
+      // STICKY MEMORIES (journey crisis r6 2026-10-13): trauma outlasts
+      // meals — an entry with extra.sticky set survives the cap: the
+      // 20-entry cap evicts the oldest NON-sticky entry first. promise_broken
+      // entries aren't sticky, so their eviction order is unchanged; with no
+      // sticky entries this loop is exactly the old shift(). Old saves carry
+      // no sticky flag — they evict first.
       const entry = { t: type, day: this.state.scholar.day, note: note || '' };
       if (extra && typeof extra === 'object') Object.assign(entry, extra);
       v.memory[rid].push(entry);
-      if (v.memory[rid].length > 20) v.memory[rid].shift();
+      while (v.memory[rid].length > 20) {
+        const i = v.memory[rid].findIndex(m => !m.sticky);
+        if (i < 0) break;
+        v.memory[rid].splice(i, 1);
+      }
     },
     // villageEvent: the village feels things together.
     villageEvent(type, opts) {
@@ -17085,7 +17095,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // blow-by-blow fight — real stats, the monster's real attack data —
     // never an outcome table. fieldFight() resolves rounds; this method
     // routes the honest record into the world's downstream systems.
-    resolveWildMonsterEncounter(vid, m) {
+    resolveWildMonsterEncounter(vid, m, opts) {
+      opts = opts || {};
       let person = null;
       try { person = this.getPerson ? this.getPerson(vid) : null; } catch (e) {}
       const name = person ? String(person.name).split(' ')[0] : 'Someone';
@@ -17188,6 +17199,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.hurtVillager(vid, 500, 'monster'); } catch (e) {}
         tell(`💀 ${summary}`);
         try { this.villageEvent('death'); } catch (e) {}
+      }
+      // CRISIS MEMORY (journey crisis r6 2026-10-13): the raid is the
+      // village's communal trauma — defenders remember the night they bled
+      // at the treeline. Planted on the RAID pathway only (opts.raid from
+      // havenRaidTick); wild fights are their own business. mName is the
+      // knowledge-gated descriptor (monsterNoun), never the true name.
+      // Feeds the 'defense' lately-kind in convoTopics.js. The dead get no
+      // line — mourning covers them.
+      if (opts.raid && rec && this.remember) {
+        // some descriptors already carry their own location ("dog-shaped
+        // silence at the treeline") — don't double it.
+        const atDoor = /treeline/i.test(mName) ? '' : ' at the treeline';
+        const how = rec.outcome === 'vKill' ? `I put down ${mName}${atDoor}`
+          : rec.outcome === 'mFlee' ? `I stood down ${mName}${atDoor} — it ran`
+          : rec.outcome === 'vFlee' ? `I met ${mName}${atDoor} and barely walked away`
+          : null;
+        if (how) { try { this.remember(vid, 'defended', how, { sticky: true }); } catch (e) {} }
       }
       this.syncMonsterAlias();
     },
