@@ -168,13 +168,18 @@
       }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis
       // across world runs. kind covers person/monster/animal; wave for monsters.
+      // PLAYER FLAG (scale-wall r17 2026-10-13): opts.player (set by
+      // ledger.js playerDeath) rides ONLY into this tele record — the corpse,
+      // grief, gossip, and funeral paths below key on kind, untouched. The
+      // sampler keys player deaths 'player:<cause>' so scholar successions
+      // become attributable. Telemetry-only: zero gameplay effect.
       try {
         let wave = null;
         if (opts.monsterId && this.data && this.data.monsters) {
           const md = this.data.monsters.find(m => m.id === opts.monsterId);
           if (md) wave = md.wave || null;
         }
-        this.tele('death', { kind: opts.kind || '?', who: opts.villagerId || opts.monsterId || opts.name || '?', cause: opts.cause || '?', wave: wave });
+        this.tele('death', { kind: opts.kind || '?', who: opts.villagerId || opts.monsterId || opts.name || '?', cause: opts.cause || '?', wave: wave, player: !!opts.player });
       } catch (e) {}
       const s = this.state.scholar;
       const corpse = {

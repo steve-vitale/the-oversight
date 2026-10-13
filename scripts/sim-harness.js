@@ -344,9 +344,13 @@ async function runDays(Game, policy, opts) {
   }); // end quietLog day loop
 
   // Deaths also come from the telemetry stream; keep a compact list here.
+  // player flag (scale-wall r17): tele 'death' events from the scholar's own
+  // death (ledger.js playerDeath -> corpses.js registerDeath) carry
+  // player:true — the sampler keys those as player-kind so scholar death
+  // causes are attributable. Backward-compatible: older runs just lack it.
   try {
     for (const ev of (Game.state.telemetry || [])) {
-      if (ev.type === 'death') samples.deaths.push({ day: ev.day, kind: ev.kind, who: ev.who, cause: ev.cause });
+      if (ev.type === 'death') samples.deaths.push({ day: ev.day, kind: ev.kind, who: ev.who, cause: ev.cause, player: !!ev.player });
     }
   } catch (e) {}
   // Final villager snapshot (coverage 2026-10-09): short runs never reach

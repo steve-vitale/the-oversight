@@ -646,8 +646,14 @@
       // endDay): the grave is dug by the fire, the burial itself stays the
       // successor's act. Loot-as-action is untouched — the death pack rides
       // home ON the corpse, take/leave/use per item, nothing auto-transfers.
+      // PLAYER-DEATH ATTRIBUTION (scale-wall r17 2026-10-13): this IS the
+      // scholar's death — mark it player:true so the death telemetry carries
+      // a player-kind record (the sampler keys 'player:<cause>'). Gameplay-
+      // identical by construction: kind stays 'villager', so every corpse /
+      // grief / gossip / funeral / audio gate in registerDeath behaves
+      // exactly as before — the flag rides ONLY into the tele() record.
       try {
-        const rc = this.registerDeath({ kind: 'villager', villagerId: oldId, name: oldName, mx: s.mx, my: s.my, cause: cause || 'the wild', killerId: null, items: gearPack });
+        const rc = this.registerDeath({ kind: 'villager', villagerId: oldId, name: oldName, mx: s.mx, my: s.my, cause: cause || 'the wild', killerId: null, items: gearPack, player: true });
         if (rc && rc.id) {
           v.pendingBurials = v.pendingBurials || [];
           v.pendingBurials.push({ corpseId: rc.id, villagerId: oldId, name: oldName, day: s.day || 0 });
