@@ -13343,6 +13343,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return cap;
     },
 
+    // FAIR-SHARE RATE LEDGER (longsim scale-wall r8 2026-10-13, lever 5).
+    // v.takes[vid] is cumulative GROSS with no time dimension — it cannot
+    // distinguish "ate their share for a week" from "drained the pantry."
+    // takeHist[vid] is the dated history: [{day, kcal}] per VOLUNTARY pantry
+    // take (takeFromPantry / takeFromPantryBulk). The village's served meal
+    // (villageMeal) is NOT a take and is never recorded here — the village
+    // feeding you is not evidence against you (r7 blank 2: "the village
+    // feeds you, then the ledger reads its own feeding as your hoarding").
+    // Entries older than 7 days are pruned on write.
+    recordTakeHist(vid, kcal) {
+      try {
+        const v = this.state.village; if (!v) return;
+        v.takeHist = v.takeHist || {};
+        const h = (v.takeHist[vid] = v.takeHist[vid] || []);
+        const day = (this.state.scholar || {}).day || 0;
+        h.push({ day, kcal: Math.round(kcal) || 0 });
+        while (h.length && h[0].day < day - 7) h.shift();
+      } catch (e) {}
+    },
+    // takeRate7: trailing-7-day voluntary take rate, kcal/day, for vid.
+    takeRate7(vid) {
+      try {
+        const v = this.state.village; if (!v) return 0;
+        const h = (v.takeHist || {})[vid] || [];
+        const day = (this.state.scholar || {}).day || 0;
+        let sum = 0;
+        for (const e of h) { if (e && e.day >= day - 6) sum += e.kcal || 0; }
+        return sum / 7;
+      } catch (e) { return 0; }
+    },
+
     // THEFT IS ALLOWED. Nothing stops your hand — but the village has eyes.
     // Take more than your fair share while witnesses are present and someone
     // may confront you directly. Take when no one's looking and it's just
@@ -13352,17 +13383,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const wit = (this.witnesses && this.witnesses(6)) || [];
       const present = wit.filter(id => id !== this.villagerId && (v.roster || []).includes(id));
       if (!present.length) return; // no one saw. the gossip may still find you.
-      // fair share norm: ~2000 kcal/day. Blatant theft = 2x+ in one take,
-      // OR half the pantry at once — whichever is smaller, so a near-empty
-      // pantry still notices being emptied (Steve 2026-10-06).
+      // fair share norm: ~2000 kcal/day (Steve 2026-10-06). Two honest bars —
+      // totalKcal is THIS take, never the lifetime ledger:
+      //   (1) SINGLE-TAKE: 2x+ the norm in ONE take, OR half the pantry at
+      //       once — whichever is smaller, so a near-empty pantry still
+      //       notices being emptied. (r7: the old code passed cumulative
+      //       lifetime takes, so ~2 days of the village's own communal
+      //       feeding tripped "blatant theft" — below-fair-share eating was
+      //       indistinguishable from hoarding.)
+      //   (2) RATE: trailing-7-day voluntary take rate >= 3000 kcal/day
+      //       (1.5x the norm) — catches small-take hoarders without punishing
+      //       communal eating. The design call said 2x (4000/day), but the
+      //       mandated RED test requires 3000/day to trip while 2000/day must
+      //       not — 1.5x threads that needle. Steve can overrule.
       let pantryKcal = 8000;
       try { pantryKcal = Math.max(1000, this.pantryKcalLive(this.state.village)); } catch (e) {}
-      if (totalKcal < Math.min(4000, pantryKcal / 2)) return;
+      const vid = this.state.scholar.villagerId;
+      const singleFire = totalKcal >= Math.min(4000, pantryKcal / 2);
+      const rateFire = this.takeRate7(vid) >= 3000;
+      if (!singleFire && !rateFire) return;
       // once per day — they said their piece, they won't nag
       const dayKey = 'theftConf' + this.state.scholar.day;
       v[dayKey] = v[dayKey] || {};
-      if (v[dayKey][this.state.scholar.villagerId]) return;
-      v[dayKey][this.state.scholar.villagerId] = true;
+      if (v[dayKey][vid]) return;
+      v[dayKey][vid] = true;
       // who confronts? boldest witness, or the one who trusts you least
       let confronter = null, best = -999;
       for (const id of present) {
@@ -13374,10 +13418,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (!confronter || Math.random() < 0.35) return; // they let it slide. this time.
       const first = this.displayName(confronter);
-      const lines = [
+      // the fiction matches the bar: one big grab reads as a grab; a week of
+      // heavy takes reads as a pattern someone finally names aloud.
+      const lines = singleFire ? [
         `"Hey." ${first} steps closer. "That's a lot you're taking. More than your share. People are counting."`,
         `"We all see the pantry, you know." ${first} doesn't look away. "Take what you need. But that's not need — that's hoarding."`,
         `${first} watches you load up, then says it loud enough for the fire to hear: "Must be nice, taking double while the rest of us count bites."`,
+      ] : [
+        `"Every day," ${first} says, not loud, not soft. "Your pack's full every time you leave the hall. Every day. We count too, you know."`,
+        `"It's not one take," ${first} says, loud enough for the fire to hear. "It's every take, day after day. That's not need — that's a second pantry in your pack."`,
+        `${first} doesn't raise their voice. "You've eaten for two all week. The rest of us count bites."`,
       ];
       this.say(lines[Math.floor(Math.random() * lines.length)]);
       const tr = v.trust || {};
@@ -13510,6 +13560,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // BLATANT THEFT with witnesses present: direct confrontation.
       // Nothing stops your hand — but someone may stop your nerve.
+      // totalKcal is THIS pack (one take); the rate check inside reads takeHist.
+      try { this.recordTakeHist(vid, totalKcal); } catch (e) {}
       try { this.theftConfrontation(totalKcal); } catch (e) {}
       // TAKE-BACK (miser break-it 2026-10-08): the single-take path penalizes
       // taking back what you gave; the bulk path never did — donate 5000 /
@@ -13587,6 +13639,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // track net: takes vs gives
       v.takes = v.takes || {}; v.gives = v.gives || {};
       v.takes[vid] = (v.takes[vid] || 0) + (item.kcalEach || 0);
+      try { this.recordTakeHist(vid, item.kcalEach || 0); } catch (e) {}
       const net = (v.gives[vid] || 0) - (v.takes[vid] || 0);
       // if you're taking way more than giving, trust drops
       if (net < -5000) {
@@ -13604,8 +13657,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (Math.random() < 0.3) this.say('Someone watches you take food. They say nothing, but you feel it.');
         }
       }
-      // Single takes add up: check the running total for blatant theft.
-      try { this.theftConfrontation((v.takes[vid] || 0)); } catch (e) {}
+      // BLATANT-THEFT CHECK on THIS take (r8): the old code passed the
+      // cumulative lifetime total, so ~2 days of ordinary communal eating
+      // tripped the "2x in one take" bar. Sustained small-take hoarding is
+      // caught by the trailing-7d rate check inside theftConfrontation.
+      try { this.theftConfrontation(item.kcalEach || 0); } catch (e) {}
       // EXPLOIT: donate-then-take-back. If net goes negative after donating, big penalty.
       // (They remember you gave. They remember you took it back. That's worse.)
       const gave = v.gives[vid] || 0;

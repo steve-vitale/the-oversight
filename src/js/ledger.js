@@ -782,6 +782,20 @@
       // Fingers' caught-stealing trust hit landed on a corpse. The save KEY
       // stays stable via state.runKey; this only fixes identity.
       s.villagerId = newId;
+      // FRESH SOCIAL LEDGER (longsim scale-wall r8 2026-10-13, lever 5): the
+      // takes/gives book is per-PERSON, and the successor's NPC-era communal
+      // meals sat in v.takes[newId] as "mystery takes" the new Bearer <redacted> write
+      // (r7) — the old cumulative bar read them as hoarding on day one. The
+      // new face starts their own book: takes, gives, and the dated takeHist
+      // all reset. (The office's trust transfers discounted just below — the
+      // village remembers the office, not the meals. The freeload clock
+      // v.freeload[newId] is intentionally untouched here: a known drain
+      // becoming Bearer <redacted> a design question for a future run, not this one.)
+      try {
+        if (v.takes) v.takes[newId] = 0;
+        if (v.gives) v.gives[newId] = 0;
+        if (v.takeHist) v.takeHist[newId] = [];
+      } catch (e) {}
       // the mantle passes: the PROGRESSION is the village's (slots, arc,
       // integration, ledger, Codex). The body is new.
       // BLOOD-PRICE WOUND (break-it food r3 2026-10-08): the wound is the old
