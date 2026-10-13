@@ -27871,6 +27871,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 'beasttricks' teaching channel (villager experiences count).
       this.state.villageSlain = this.state.villageSlain || {};
       this.state.villageSlain[monsterId] = (this.state.villageSlain[monsterId] || 0) + 1;
+      // MONSTER CODEX (journey-establishment r2, 2026-10-13): the village
+      // learns together — a villager's kill teaches the codex exactly like
+      // the player's. Before this, only the player's TB kill path
+      // (tbKillRewards) ever set stage 'slain', so the BEASTS section stayed
+      // thin no matter how hard the village fought (r1: ~14 kills, 1
+      // entry). Every real kill flows through recordWaveKill — player TB,
+      // villager field fights, contests — so this is the choke point.
+      // 'slain' surfaces the BEASTS entry, the earned telegraph-tell, and
+      // the counter hint ("slaying a monster surfaces its counter.hint" —
+      // docs/MONSTER-WAVES.md says slaying, not slaying-it-yourself); the
+      // full counter reveal stays gated on discovery (monsterCounterKnown),
+      // and the naming debate still waits on a report (identifyMonster /
+      // monsterNewsCheck — killing is news, but the argument is its own
+      // beat). Defensive: a codex bug never breaks the kill path.
+      try {
+        if (typeof this.ensureMonsterEntry === 'function') {
+          const _ce = this.ensureMonsterEntry(monsterId);
+          if (_ce) _ce.stage = 'slain';
+        }
+      } catch (e) {}
       // WAVE LEDGER (Steve 2026-10-10): kills also score the ledger — the
       // only thing that unlocks waves now. Defensive: scoring never breaks
       // the kill path (the deed feed and beats must survive a ledger bug).
