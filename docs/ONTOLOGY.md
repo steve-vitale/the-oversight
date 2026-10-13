@@ -949,6 +949,16 @@ God jealousy — the ascended have politics (Steve 2026-10-13).
 
 **Consumes:** —
 
+### party-bond (`party-bond.js`)
+Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER ability path (draw_fire/bodyguard/shield_wall/rally) carries the village-scale bond pool: the System offers its abilities to villagers who've bled beside others, and a completed path anchors the whole village.
+
+**Provides:** combatBondGet(a, b), combatBondAdd(a, b, n), noteSharedFight(vids), noteBondGrief(deadVid, partyVids), noteCrewTogether(crewVids), bondCombatBonus(vid, allyVids), pathAnchor(), villageBondBonus(), noteVillageBondFight(), noteVillageBondGrief(), noteShieldbearerOffer(vid), isNewcomer(vid), findVeteranBuddy(vid, task), OUTDOOR_TASKS, SHIELDBEARER_PATH
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### party-formal (`party-formal.js`)
 Formal party mechanics. Roles, formations.
 
