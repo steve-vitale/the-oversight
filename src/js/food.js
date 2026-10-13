@@ -739,10 +739,16 @@
           : fuelDied ? 'Smoked (rough job). The fire died halfway — uneven, damp in spots. Keeps ~two weeks.'
           : 'Smoked (rough job). Keeps ~two weeks — a real preserver could do better.';
         n++;
-        if (!knows) {
-          it._messyPreserves = (it._messyPreserves || 0) + 1;
-          if (it._messyPreserves >= 2) this.learnTechnique('preserve', 'trial');
-        }
+        // SELF-TRIAL TEACHES (2026-10-13, fleshout-a): the attempt teaches the
+        // technique; the sting is one-time (canon: docs/PRESERVATION.md). The
+        // old per-item counter (it._messyPreserves >= 2) was unreachable: an
+        // item becomes 'preserved' after ONE smoke and can never be smoked
+        // again, so the counter could never reach 2 — every self-trial smoke
+        // stayed 0.80x/15d forever. This attempt is itself the rough job
+        // (eff 0.80 above); the NEXT smoke goes solid. Same one-line-class
+        // pattern as renderFat below. learnTechnique is idempotent: the first
+        // item in a batch teaches, the rest no-op.
+        if (!knows) this.learnTechnique('preserve', 'trial');
       }
       // SMOKING PACE (Steve 2026-10-09): 16 ticks = 1/8 of a day-part.
       // "1/8 of a day seems about correct. That's all fine." A real job, not a spare moment.
