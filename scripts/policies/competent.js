@@ -1662,6 +1662,128 @@ function dpsRaceAssess(Game, f, ctx, p, flee) {
   return null;
 }
 
+//
+// DIRECTIONAL FLEE (longsim scale-wall r2 2026-10-13): fleeing must be
+// DIRECTIONAL — toward haven/safety, judging the destination — not "nearest
+// edge". r1's barrier push extracted scholars from fights (player combat
+// deaths 34→14) but pushed through the NEAREST edge, stranding hurt, hungry
+// scholars on unknown nodes (monster deaths 16→25, starvation 9→13; the
+// seed-44 trace: a day-25 scholar pushed (4,4)→(3,4)→(2,4) AWAY from haven
+// and starved the same day). Standing ground near haven beats pushing
+// outward.
+//
+// Env gate COMPETENT_DIRECTIONAL_FLEE=1 opts IN (default OFF). Orthogonal
+// to COMPETENT_DPS_RACE: with only this gate on, the disengage triggers are
+// the new-fight outmatched assessment and the legacy 35%-HP threshold —
+// both funnel through flee(), which now picks the havenward exit. The DPS
+// instrument stays inert unless its own gate is also set.
+//
+function dirFleeOn() { return process.env.COMPETENT_DIRECTIONAL_FLEE === '1'; }
+
+// Haven sits at the 9x9 center (game.js: hx=4, hy=4).
+const DIR_FLEE_HAVEN = { x: 4, y: 4 };
+
+// Score one exit direction from node (mpx,mpy). Returns null when the push
+// would leave the known world (the engine refuses those — "The known world
+// ends here" — and burns the turn). Higher is better:
+//   +10 push lands ON haven (engine: HAVEN IS SAFE — even the relentless
+//       give up at the gate; the chase ends, the fight ends)
+//   +4  havenward (destination strictly closer to haven)
+//   +1  lateral (same distance from haven)
+//   -2  away from haven (the r1 failure mode)
+//   +2  destination known (visited or shared — fog-of-war honest)
+//   -6  destination monster-active (don't trade one fight for another;
+//       a world monster is sitting on that node right now)
+function fleeDirScore(Game, mpx, mpy, dx, dy) {
+  const nx = mpx + dx, ny = mpy + dy;
+  if (nx < 0 || nx > 8 || ny < 0 || ny > 8) return null;
+  const dNow = Math.abs(mpx - DIR_FLEE_HAVEN.x) + Math.abs(mpy - DIR_FLEE_HAVEN.y);
+  const dNew = Math.abs(nx - DIR_FLEE_HAVEN.x) + Math.abs(ny - DIR_FLEE_HAVEN.y);
+  let haven = false;
+  try {
+    const t = Game.tileAt(nx, ny);
+    haven = !!(t && (t.type === 'haven' || t.isHaven));
+  } catch (e) {}
+  let known = false, danger = false;
+  try { known = !!Game.mapSeen(nx, ny); } catch (e) {}
+  try { danger = !!Game.monsterAt(nx, ny); } catch (e) {}
+  let score = 0;
+  if (haven) score += 10;
+  else if (dNew < dNow) score += 4;
+  else if (dNew === dNow) score += 1;
+  else score -= 2;
+  if (known) score += 2;
+  if (danger) score -= 6;
+  return { dx, dy, nx, ny, score, haven, known, danger, havenward: dNew < dNow };
+}
+
+// Pick the best exit direction, or null when the scholar should HOLD:
+// at the haven node there is no havenward push — every exit leads away
+// from safety, so standing ground (with the pantry and the village)
+// beats pushing outward (the r1 lesson, stated as code).
+//
+// Destination judgment: when a safe (non-monster-active) havenward exit
+// exists — haven is within reach — monster-active exits are off the table
+// entirely. Never trade one fight for another on the way home. When no
+// safe way home exists, take the least-bad scored exit.
+function chooseFleeDir(Game, mpx, mpy) {
+  if (mpx === DIR_FLEE_HAVEN.x && mpy === DIR_FLEE_HAVEN.y) return null; // at haven: hold
+  const cands = [];
+  for (const dd of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+    const s = fleeDirScore(Game, mpx, mpy, dd[0], dd[1]);
+    if (s) cands.push(s);
+  }
+  if (!cands.length) return null;
+  const safeHome = cands.filter(c => (c.haven || c.havenward) && !c.danger);
+  const pool = safeHome.length ? cands.filter(c => !c.danger) : cands;
+  pool.sort((a, b) => (b.score - a.score) ||
+    ((a.danger ? 1 : 0) - (b.danger ? 1 : 0)) ||
+    ((b.havenward ? 1 : 0) - (a.havenward ? 1 : 0)) ||
+    (a.dx - b.dx) || (a.dy - b.dy));
+  return pool[0];
+}
+
+// RECOVER-AND-RETURN (scale-wall r2): after a directional push the scholar
+// is hurt and displaced. For a bounded window they head back to haven to
+// eat/rest instead of resuming outward exploration — r1's pushed scholars
+// wandered on the new node and starved. Window: 2 days, or until fed and
+// healed at haven (whichever comes first).
+function markRecover(Game, ctx) {
+  try {
+    const day = (Game.state.scholar && Game.state.scholar.day) || 0;
+    ctx._recoverUntilDay = day + 2;
+    ctx.recoverMarks = (ctx.recoverMarks || 0) + 1;
+  } catch (e) {}
+}
+function recovering(Game, ctx) {
+  if (!dirFleeOn()) return false;
+  const until = ctx._recoverUntilDay || 0;
+  if (!until) return false;
+  const day = (Game.state.scholar && Game.state.scholar.day) || 0;
+  if (day > until) { ctx._recoverUntilDay = 0; return false; }
+  // early out: fed and healed at haven — back to work
+  try {
+    const s = Game.state.scholar;
+    const atHaven = Game.map.px === DIR_FLEE_HAVEN.x && Game.map.py === DIR_FLEE_HAVEN.y;
+    if (atHaven && s.kcal > Game.kcalCap() * 0.6 && (s.hp || 0) > (s.maxHp || 100) * 0.6) {
+      ctx._recoverUntilDay = 0; return false;
+    }
+  } catch (e) {}
+  return true;
+}
+// One haven-bound recovery day: walk home honestly, eat, drink. The caller
+// skips outward trips while recovering() is true.
+function recoverStep(Game, ctx) {
+  try {
+    ctx.recoverDays = (ctx.recoverDays || 0) + 1;
+    if (Game.map.px !== DIR_FLEE_HAVEN.x || Game.map.py !== DIR_FLEE_HAVEN.y) {
+      walkTo(Game, DIR_FLEE_HAVEN.x, DIR_FLEE_HAVEN.y);
+    }
+    competentEat(Game);
+    drinkSafe(Game, ctx);
+  } catch (e) {}
+}
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -1683,10 +1805,17 @@ const competent = {
     // (longsim combat r7 2026-10-12)
     sootheTrauma(Game, ctx);
     channelDevotion(Game, ctx); // calm days: practice a keepsake toward the devotion lane (food r7)
+    // RECOVER-AND-RETURN (longsim scale-wall r2): after a directional flee
+    // the scholar heads home to eat/rest — no outward exploration today.
+    // Outward legs (stoneRun's frontier pushes, forage trips, counterPlay,
+    // workTrapline) are skipped while recovering() is true; haven chores
+    // below (sort, donate, teach, talk) still run.
+    const rec = recovering(Game, ctx);
+    if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
     // donate the rest. (Foraging yields unknowns — an honest player sorts.)
-    stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
-    if (needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
+    if (!rec) stoneRun(Game, ctx); // deliberate rubble detour when the knife needs stone (food r6)
+    if (!rec && needTrip(Game, ctx)) forageTripSeedFirst(Game, ctx);
     sortHaul(Game, ctx); // identify the haul at camp — unknowns become food
     armUp(Game, ctx); // knap a weapon BEFORE any fighting (combat r1) — runs
     // BEFORE keepKnife deliberately: the fighting knife and the butchering
@@ -1695,8 +1824,8 @@ const competent = {
     cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
-    counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
-    workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
+    if (!rec) counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
+    if (!rec) workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
     // donate surplus beyond a 2-day personal buffer
     try {
       const s = Game.state.scholar;
@@ -1784,6 +1913,45 @@ const competent = {
       // relentless hushwolf only stops at Haven or death); non-chasers give
       // up at the barrier. Sealed fights hold — the engine says so.
       const flee = () => {
+        // DIRECTIONAL FLEE (longsim scale-wall r2, gate COMPETENT_DIRECTIONAL_FLEE=1):
+        // pick the havenward exit and judge the destination — never the
+        // nearest edge. At the haven node: HOLD (no push leads toward
+        // safety) — return false so fight() falls through to normal combat.
+        if (dirFleeOn()) {
+          try {
+            const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+            const mpx = Game.map.px, mpy = Game.map.py;
+            const dir = chooseFleeDir(Game, mpx, mpy);
+            if (!dir) { ctx.fledHeld = (ctx.fledHeld || 0) + 1; return false; } // hold ground
+            const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? 8 : px;
+            const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? 8 : py;
+            if (px === tx && py === ty) {
+              // On the chosen edge: push THROUGH toward the judged destination.
+              const bx = Game.map.px, by = Game.map.py;
+              Game.tbBarrierExit(dir.dx, dir.dy);
+              ctx.barrierPushes = (ctx.barrierPushes || 0) + 1;
+              ctx.dirPushes = (ctx.dirPushes || 0) + 1;
+              ctx.dirPushDetail = { from: [bx, by], to: [Game.map.px, Game.map.py], dir: [dir.dx, dir.dy], haven: dir.haven, known: dir.known, danger: dir.danger, score: dir.score };
+              if (!ctx.dirPushFirst) ctx.dirPushFirst = Object.assign({}, ctx.dirPushDetail);
+              // The push moved us or ended the fight: recover-and-return.
+              // (Sealed fights and blocked far sides consume the push without
+              // moving — no recovery window for a push that went nowhere.)
+              if (Game.map.px !== bx || Game.map.py !== by || !Game.tbfight || Game.tbfight.over) {
+                markRecover(Game, ctx);
+              }
+            } else {
+              // Not on the chosen edge yet: step toward it one tile (the
+              // full edge walk can exceed this turn's movement budget —
+              // tbPlayerMove refuses paths longer than moveLeft); the push
+              // lands on a later turn once the edge is reached.
+              try { Game.tbPlayerMove(px + dir.dx, py + dir.dy); } catch (e) {}
+              ctx.dirWalks = (ctx.dirWalks || 0) + 1;
+            }
+            ctx.fled = (ctx.fled || 0) + 1;
+          } catch (e) {}
+          endTurn();
+          return true;
+        }
         try {
           const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
           let pushed = false;
@@ -1794,8 +1962,8 @@ const competent = {
             if (py === 0) cands.push([0, -1]); else if (py === 8) cands.push([0, 1]);
             // World bounds: pushing off the 9x9 world is a spent turn ("The
             // known world ends here") — prefer an exit that leads somewhere.
-            const viable = cands.filter(([dx, dy]) =>
-              mpx + dx >= 0 && mpx + dx <= 8 && mpy + dy >= 0 && mpy + dy <= 8);
+            const viable = cands.filter((dd) =>
+              mpx + dd[0] >= 0 && mpx + dd[0] <= 8 && mpy + dd[1] >= 0 && mpy + dd[1] <= 8);
             const pick = viable[0] || cands[0];
             if (pick && dpsRaceOn()) {
               Game.tbBarrierExit(pick[0], pick[1]);
@@ -1832,13 +2000,18 @@ const competent = {
             hpPct < 0.5;
           if (outmatched && monsters.length) {
             ctx.fledBad = (ctx.fledBad || 0) + 1;
-            return flee();
+            const fr = flee();
+            if (fr) return true;
+            // directional-flee hold (at haven): no exit leads toward safety —
+            // fall through to tricks/strikes below instead of pushing outward
           }
         } catch (e) {}
       }
       if (hpPct < 0.35) {
-        // retreat toward the nearest edge — the barrier ends pursuit honestly
-        return flee();
+        // retreat toward the havenward edge — the barrier ends pursuit honestly
+        const fr = flee();
+        if (fr) return true;
+        // directional-flee hold (at haven): fall through to tricks/strikes
       }
       // DPS-RACE ASSESSMENT (longsim scale-wall r1 2026-10-13): gauge the
       // damage race after a couple of exchanges; disengage a lost race while
@@ -1912,4 +2085,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN };
