@@ -120,7 +120,7 @@ async function runConfirm(opts) {
     medianDays: med(rows.map(r => r.days)),
     maxDays: Math.max(0, ...rows.map(r => r.days)),
     // wall numbers
-    national: agg(r => (r.nationalFirstDay != null ? 1 : 0)),
+    national: agg(r => (r.national ? 1 : 0)),
     table: agg(r => r.table), won: agg(r => r.won),
     exiled: agg(r => r.exiledEver || 0),
     deathCauses: allCauses,

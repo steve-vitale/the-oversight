@@ -49,7 +49,7 @@ happening at all. All three are systems work, not weights work.
 
 ## Wall numbers (every run)
 
-- national 0/16, table 0/16, won 0/16, exiled 0/16
+- national 7/16, table 0/16, won 0/16, exiled 0/16
 - wave-4 unlocks: 7/16 (earliest d57, median d57, all diplomacy)
 - wave-5 unlocks: 0/16
 - median survival 78d, max 149d
