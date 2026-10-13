@@ -214,7 +214,13 @@ function seatUp() {
     })());
     ok('mantle passes: System abilities pass with the office', (s.abilities || []).some(a => a.id === 'test_ab'));
     ok('mantle passes: fresh body', s.kcal === 1500 && s.health > 0);
-    ok('mantle passes: trust discounted, not copied', Game.state.village.trust[heir] === Math.round(70 * 0.6));
+    ok('mantle passes: trust inherits via office+own+vouch, not copied (Steve 2026-10-13)', (function () {
+      const v = Game.state.village, trust = v.trust || {};
+      const live = new Set(v.roster || []);
+      const vouchers = (v.roster || []).filter(id => id !== heir && live.has(id) && (trust[id] || 0) >= 60);
+      const expected = Math.max(10, Math.min(100, Math.round(70 * 0.4 + 80 * 0.4 + Math.min(16, vouchers.length * 4))));
+      return trust[heir] === expected;
+    })(), 'got ' + Game.state.village.trust[heir]);
     ok('mantle passes: vector persists (village, not face)', Game.ledger().might >= 0);
   }
 

@@ -42,6 +42,9 @@ const DATA_FILES = [
   ['knowledge.json', 'knowledge'], ['nameCultures.json', 'nameCultures'],
   ['originPicker.json', 'originPicker'], ['foreignSpeech.json', 'foreignSpeech'],
   ['lifeseeds.json', 'lifeseeds'],
+  // journey-succession 2026-10-13: statusEffects.json feeds seDef(); without
+  // it the poison path applies nothing (no def -> silent no-op -> no mark).
+  ['statusEffects.json', 'statusEffects'],
 ];
 global.SCATTER_DATA = {};
 for (const [f, key] of DATA_FILES) {
@@ -70,6 +73,12 @@ const SCRIPTS = [
   'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
   'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js',
   'src/js/build.js',
+  // journey-succession 2026-10-13: statusEffects.js defines applyStatus,
+  // which the poison path (eatOne) calls. index.html loads it late; the
+  // test's curated list omitted it, so every poison assertion failed with
+  // "this.applyStatus is not a function". Runtime-called only, so the
+  // abbreviated list position is fine.
+  'src/js/statusEffects.js',
 ];
 global.window = global; // stub for eval phase (AGENTS.md: delete before playing)
 for (const s of SCRIPTS) {
@@ -111,29 +120,52 @@ function check(name, cond, extra) {
 }
 
 // ---------------- cast: 3 lives, pairwise-distinct registers ----------------
+// STALE-ASSUMPTION FIX (journey-succession 2026-10-13): the 2026-10-07
+// dialogue rethink moved voice derivation out of the lifeseed blob —
+// lifeseedVoice() derives the register from personality (+npcIntel
+// refinement), and ch.lifeseed.voice no longer exists. Select on the
+// POST-wire register: wire the candidate pool into Game.data.villagers
+// first (npcIntel only resolves for wired villagers), then pick 3 with
+// distinct derived registers — the same voice journal.js will use.
 const ORIGINS = ['Columbus, Ohio', 'coastal Maine', 'Atlanta, Georgia', 'Seattle, Washington', 'rural Texas', 'Miami, Florida', 'Portland, Oregon', 'Chicago, Illinois'];
 const usedNames = new Set(), usedOccs = new Set();
-const cast = [];
+const pool = [];
 for (const o of ORIGINS) {
-  if (cast.length >= 3) break;
   let ch = null;
   try { ch = Game.genCharacter({ origin: o, forceCultureMatch: false, candidate: true, usedNames, usedOccs }); } catch (e) { continue; }
-  if (!ch || !ch.lifeseed || !ch.lifeseed.voice) continue;
-  ch.id = ch.id || ('life' + (cast.length + 1));
-  const reg = ch.lifeseed.voice.register;
-  if (cast.some(c => c.lifeseed.voice.register === reg)) continue; // distinct voices only
+  if (!ch || !ch.lifeseed) continue;
+  ch.id = ch.id || ('cand' + (pool.length + 1));
+  pool.push(ch);
+}
+Game.data.villagers = pool.slice();
+const cast = [];
+for (const ch of pool) {
+  if (cast.length >= 3) break;
+  let reg = 'plainspoken';
+  try { reg = (Game.lifeseedVoice(ch) || {}).register || 'plainspoken'; } catch (e) {}
+  if (cast.some(c => c._reg === reg)) continue; // distinct voices only
+  ch._reg = reg;
+  ch.id = 'life' + (cast.length + 1); // stable test ids
   cast.push(ch);
 }
 check('cast of 3 lives with pairwise-distinct registers', cast.length === 3,
-  `got ${cast.length}: ${cast.map(c => (c.lifeseed.voice || {}).register).join(',')}`);
+  `got ${cast.length}: ${cast.map(c => c._reg).join(',')}`);
 if (cast.length < 3) { console.log(`RESULTS: ${pass} pass, ${fail} fail (seed ${SEED})`); process.exit(1); }
 const [L1, L2, L3] = cast;
 Game.data.villagers = cast.slice();
 Game.villagerId = L1.id;
+// Authoritative register derivation with the cast's final ids, wired as the
+// game's villagers — this is exactly what journal.js will derive at write
+// time. The pool-wire selection already picked distinct voices; confirm.
+for (const c of cast) {
+  try { c._reg = (Game.lifeseedVoice(c) || {}).register || 'plainspoken'; } catch (e) { c._reg = 'plainspoken'; }
+}
+check('registers pairwise-distinct (as journal.js derives them)',
+  new Set(cast.map(c => c._reg)).size === 3, cast.map(c => c._reg).join(','));
 Game.state.village.roster = cast.map(c => c.id);
 Game.state.village.trust = { [L2.id]: 80, [L3.id]: 40 };
 
-const regOf = (ch) => (ch.lifeseed.voice || {}).register || 'plainspoken';
+const regOf = (ch) => ch._reg || 'plainspoken';
 const firstOf = (ch) => String(ch.name || 'Someone').split(' ')[0];
 console.log(`\nCast (seed ${SEED}):`);
 for (const c of cast) console.log(`  ${firstOf(c)} — ${regOf(c)} — ${c.formerOccupation || 'unknown trade'}`);

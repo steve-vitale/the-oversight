@@ -94,7 +94,7 @@
       poison: c => `${c.pname} turned on me. ${c.note} Respect from here on — it earned it the hard way.`,
       hunger: () => `Went to bed hungry again. The journal doesn't fill bellies, but it remembers the nights the belly was empty.`,
       triumph: c => `${c.teacher} showed me ${c.pname} proper — hands in the dirt, the whole of it. Some days the world teaches back.`,
-      epitaph: c => `If someone's reading this in my handwriting — I didn't make it back. ${c.cause}. The notes are good. Keep writing.`,
+      epitaph: c => `If someone's reading this in my handwriting — I didn't make it back. ${c.cause}. ${c.days} ${c.dayword} I held it. The notes are good. Keep writing.`,
       newhand: c => `Picked up ${c.oldFirst}'s journal. Their handwriting, my hands now. I'll keep it honest.`,
     },
     laconic: {
@@ -109,7 +109,7 @@
       poison: c => `${c.pname} poisoned me. ${c.note} Noted in red.`,
       hunger: () => `Hungry. Again. Writing it down so I don't romanticize this later.`,
       triumph: c => `${c.teacher} taught me ${c.pname}. All of it. Good day.`,
-      epitaph: c => `${c.cause}. Journal's yours now. The notes hold.`,
+      epitaph: c => `${c.cause}. ${c.days}d. Journal's yours now. The notes hold.`,
       newhand: c => `${c.oldFirst}'s book. Mine now. Continuing.`,
     },
     effusive: {
@@ -124,7 +124,7 @@
       poison: c => `${c.pname} BIT me back! ${c.note} Oh, we're going to have words, you and I!`,
       hunger: () => `Another hungry night! You'd think I'd get used to it. I refuse to get used to it!`,
       triumph: c => `${c.teacher} showed me EVERYTHING about ${c.pname}! I could have hugged them. (I did not. Almost.)`,
-      epitaph: c => `Oh no. Oh no no. ${c.cause} — if you're reading this, it's yours now! The notes are good, I promise, keep going!`,
+      epitaph: c => `Oh no. Oh no no. ${c.cause} — ${c.days} ${c.dayword} of me, and if you're reading this, it's yours now! The notes are good, I promise, keep going!`,
       newhand: c => `I'm holding ${c.oldFirst}'s journal! Their notes, their handwriting — and now ME. I won't waste a page!`,
     },
     wry: {
@@ -139,7 +139,7 @@
       poison: c => `Note to self: ${c.pname} is not the friend I thought it was. ${c.note} The betrayal stings almost literally.`,
       hunger: () => `Dinner was a memory and a smell from someone else's fire. Luxury accommodations, as always.`,
       triumph: c => `${c.teacher} cracked ${c.pname} wide open for me. Free education. The System charges for less.`,
-      epitaph: c => `Well. ${c.cause}. Statistically, someone had to go first. The journal's yours — try to die less dramatically than me.`,
+      epitaph: c => `Well. ${c.cause}. ${c.days} ${c.dayword}. Statistically, someone had to go first. The journal's yours — try to die less dramatically than me.`,
       newhand: c => `Inherited: one journal, slightly bloodstained, previous owner deceased. ${c.oldFirst} wrote good notes. I'll try to be worthy of the margins.`,
     },
     formal: {
@@ -154,7 +154,7 @@
       poison: c => `${c.pname}: toxic event. ${c.note} The entry is amended with appropriate caution.`,
       hunger: () => `Caloric deficit continues. Morale: annotated. The record will show we endured.`,
       triumph: c => `${c.teacher} provided a complete demonstration of ${c.pname}. The debt is recorded.`,
-      epitaph: c => `Should this be my final entry: ${c.cause}. The record passes to my successor. Maintain it.`,
+      epitaph: c => `Should this be my final entry: ${c.cause}. ${c.days} ${c.dayword} of stewardship. The record passes to my successor. Maintain it.`,
       newhand: c => `I assume the record from ${c.oldFirst}. The hand changes; the standard does not.`,
     },
     halting: {
@@ -169,7 +169,7 @@
       poison: c => `${c.pname}… hurt me. ${c.note} I should have been more careful. I know that now.`,
       hunger: () => `Hungry… tried not to think about it. Thinking about it anyway.`,
       triumph: c => `${c.teacher}… showed me ${c.pname}. All of it. I didn't know how much I didn't know.`,
-      epitaph: c => `I… don't think I'm coming back. ${c.cause}. The journal — keep it. Please keep writing.`,
+      epitaph: c => `I… don't think I'm coming back. ${c.cause}. ${c.days} ${c.dayword}… The journal — keep it. Please keep writing.`,
       newhand: c => `${c.oldFirst}'s… journal. It's mine now. I'll… try to write as true as they did.`,
     },
   };
@@ -1028,9 +1028,16 @@
         vid: old.vid, name: old.name, first: v.first, register: v.register,
         startDay: m.currentStart || 0, endDay: day(), cause: causeText,
       });
+      // EPITAPH TENURE (journey-succession 2026-10-13): two bearers sharing a
+      // register wrote byte-identical epitaphs (\"Combat. Journal's yours now.
+      // The notes hold.\" twice in one chain). The dying life's tenure as
+      // bearer now rides in the context so each hand signs its own span.
+      const tenure = Math.max(0, day() - (m.currentStart || 0));
       m.marginalia.push({
         kind: 'epitaph', day: day(), life: old.vid, first: v.first, register: v.register,
-        text: this.journalVoiceLine('epitaph', v, { cause: causeCap }),
+        text: this.journalVoiceLine('epitaph', v, {
+          cause: causeCap, days: tenure, dayword: tenure === 1 ? 'day' : 'days',
+        }),
       });
       this.journalTouch('death');
     },
