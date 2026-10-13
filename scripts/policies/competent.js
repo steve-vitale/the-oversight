@@ -721,6 +721,10 @@ function forageTripSeedFirst(Game, ctx) {
     // back empty, like the game's own failure line says. Try up to 3.
     let foraged = 0;
     for (const pick of cands.slice(0, 3)) {
+      // FIGHT-ASSESS MAP DECLINE (longsim scale-wall r3): the scholar can
+      // SEE the monster on the tile (perception) — walk around an unwinnable
+      // fight instead of into it. Decline engagement at the map level.
+      if (fightAssessOn() && fightAssessSkipTile(Game, ctx, pick.x, pick.y)) continue;
       // HONEST TRAVEL (food r6): the old form passed pick.blocked as
       // travelTo's FORCE arg — a blocked path was crossed for free (no
       // 40 kcal, no stone, no card). A real player goes around or does the
@@ -1784,6 +1788,149 @@ function recoverStep(Game, ctx) {
   } catch (e) {}
 }
 
+// ---------- FIGHT-ASSESS: PRE-FIGHT DAMAGE-RACE ASSESSMENT (longsim scale-wall r3 2026-10-13) ----------
+// Policy-side fight SELECTION: assess the damage race BEFORE engaging — at
+// fight start (turn 1, full HP: proactive disengage) and at the map level
+// (forage trips decline monster-active tiles they can't beat) — instead of
+// the legacy mid-fight flee-on-HP-threshold. r1's DPS-race assessment was
+// inert in practice (0 fires in 50 windows: fights run 3–4 player turns,
+// conviction needs 5+); r2's directional flee fired 2× in 8 runs. Both were
+// mid-fight instruments. This one decides BEFORE the first strike.
+//
+// Knowledge gating (the policy only ever uses what its scholar learned):
+//   codex entry (stage observed/slain, or patterns) -> the species' real
+//       attack damage from the monster def
+//   own-fight lore (ctx._fightLore)                -> observed per-monster
+//       damage per player-turn, learned the hard way
+//   unknown species                                -> pessimistic prior 20/round
+// A known counter (beastHintKnown) discounts monster DPR ×0.7 — the policy
+// knows it has an answer. Player DPR = 13 + weapon bonus (tbPlayerStrike:
+// roll([10,16]) + w.bonus; the policy knows its own weapon).
+// Decline when roundsToDie < roundsToKill × 1.3 (lost race with margin), or
+// monsterDPR ≥ p.hp/2 (dead in ≤2 rounds). The disengage is the policy's
+// normal flee() — walk to the edge while survivable; the r1/r2 barrier-push
+// gates stay off, so no push, no abandon-the-node.
+//
+// Env gate COMPETENT_FIGHT_ASSESS=1 opts IN (default OFF). Orthogonal to
+// COMPETENT_DPS_RACE and COMPETENT_DIRECTIONAL_FLEE — both unset in the
+// before/after arms. Gate off = legacy HP-ratio block, byte-identical.
+function fightAssessOn() { return process.env.COMPETENT_FIGHT_ASSESS === '1'; }
+const FIGHT_ASSESS_UNKNOWN_DPR = 20; // pessimistic prior for unidentified species
+const FIGHT_ASSESS_COUNTER_DISC = 0.7; // known counter: the policy has an answer
+const FIGHT_ASSESS_RACE_MARGIN = 1.3;
+
+function fightAssessMidOf(m) {
+  try { return m.monsterId || (m.mdef || {}).id || m.id || null; } catch (e) { return null; }
+}
+function fightAssessCodexKnown(Game, mid) {
+  try {
+    const e = (((Game.state || {}).codex || {}).monsters || {})[mid];
+    return !!(e && (e.stage || (e.patterns && Object.keys(e.patterns).length)));
+  } catch (e) { return false; }
+}
+function fightAssessMonsterDef(Game, mid) {
+  try { return (((Game.data || {}).monsters || []).find(d => d && d.id === mid)) || null; } catch (e) { return null; }
+}
+// Per-monster expected damage/round from policy-legitimate knowledge.
+function fightAssessDPR(Game, ctx, mid) {
+  // 1. Codex knowledge: the scholar has examined/survived/slain this species.
+  if (mid && fightAssessCodexKnown(Game, mid)) {
+    const def = fightAssessMonsterDef(Game, mid);
+    const dmg = def && def.attack && def.attack.damage;
+    if (dmg && dmg.length >= 2) return (dmg[0] + dmg[1]) / 2;
+  }
+  // 2. Own-fight lore: observed per-monster damage per player-turn.
+  try {
+    const lore = (ctx._fightLore || {})[mid];
+    if (lore && lore.samples > 0) return lore.taken / lore.samples;
+  } catch (e) {}
+  // 3. Unknown: pessimistic prior — assume it hits hard until proven otherwise.
+  return FIGHT_ASSESS_UNKNOWN_DPR;
+}
+// The damage race for a monster list. Returns {decline, detail}.
+function fightAssessRace(Game, ctx, mons, p) {
+  let bonus = 0;
+  try { const w = Game.equippedWeapon && Game.equippedWeapon(); if (w && w.bonus) bonus += w.bonus; } catch (e) {}
+  const playerDPR = 13 + bonus; // roll([10,16]) avg + weapon bonus
+  let totalMhp = 0, monsterDPR = 0;
+  const per = [];
+  for (const m of mons) {
+    const mid = fightAssessMidOf(m);
+    const hp = Math.max(1, m.hp || m.maxHp || 100);
+    totalMhp += hp;
+    let dpr = fightAssessDPR(Game, ctx, mid);
+    let disc = 1;
+    if (mid && typeof beastHintKnown === 'function' && beastHintKnown(Game, mid)) disc = FIGHT_ASSESS_COUNTER_DISC;
+    monsterDPR += dpr * disc;
+    per.push({ mid, hp: Math.round(hp), dpr: +dpr.toFixed(1), disc });
+  }
+  const php = (p && (p.hp || p.health)) || 1;
+  const roundsToKill = totalMhp / Math.max(1, playerDPR);
+  const roundsToDie = php / Math.max(0.5, monsterDPR);
+  const lostRace = roundsToDie < roundsToKill * FIGHT_ASSESS_RACE_MARGIN;
+  const deadInTwo = monsterDPR >= php / 2;
+  return {
+    decline: (lostRace || deadInTwo) && mons.length > 0,
+    detail: {
+      n: mons.length, playerDPR, monsterDPR: +monsterDPR.toFixed(1),
+      totalMhp: Math.round(totalMhp), php: Math.round(php),
+      roundsToKill: +roundsToKill.toFixed(1), roundsToDie: +roundsToDie.toFixed(1),
+      lostRace, deadInTwo, per,
+    },
+  };
+}
+// Lore: attribute this fight() tick's scholar-HP drop across the monsters
+// present at the previous tick (per-head; crude but it converges on the
+// scholar's own experience). Bookkeeping only — the before arm never calls it.
+function fightAssessLore(Game, ctx, f, p, mons) {
+  try {
+    const prev = ctx._faLorePrev;
+    ctx._faLorePrev = { f, php: (p && (p.hp || p.health)) || 0, mids: mons.map(m => fightAssessMidOf(m)).filter(Boolean) };
+    if (!prev || prev.f !== f || !prev.mids.length) return;
+    const delta = (prev.php || 0) - (((p && (p.hp || p.health))) || 0);
+    if (!(delta > 0)) return;
+    ctx._fightLore = ctx._fightLore || {};
+    const per = delta / prev.mids.length;
+    for (const mid of prev.mids) {
+      const l = ctx._fightLore[mid] = ctx._fightLore[mid] || { taken: 0, samples: 0 };
+      l.taken += per; l.samples += 1;
+    }
+  } catch (e) {}
+}
+// Fight-start hook (replaces the legacy HP-ratio block under the gate):
+// assess the race at turn 1, full HP, and proactively disengage a lost race
+// through the policy's normal flee() — walk to the edge while survivable.
+// Returns true when it disengaged.
+function fightAssessHook(Game, f, ctx, p, flee) {
+  const mons = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+  const race = fightAssessRace(Game, ctx, mons, p);
+  ctx.faChecks = (ctx.faChecks || 0) + 1;
+  if (!race.decline) return false;
+  ctx.faDeclined = (ctx.faDeclined || 0) + 1;
+  ctx.faDeclineDetail = race.detail;
+  if (!ctx.faFirstDetail) { try { ctx.faFirstDetail = JSON.parse(JSON.stringify(race.detail)); } catch (e) {} }
+  return flee();
+}
+// Map-level decline (forage trips): the scholar can SEE the monster on the
+// tile (perception via Game.monsterAt) — walk around an unwinnable fight
+// instead of into it. Returns true when the destination should be skipped.
+function fightAssessSkipTile(Game, ctx, x, y) {
+  try {
+    const wm = Game.monsterAt && Game.monsterAt(x, y);
+    if (!wm) return false;
+    const s = (Game.state || {}).scholar || {};
+    let maxHp = 100;
+    try { maxHp = Game.maxHealth ? Game.maxHealth() : 100; } catch (e) {}
+    const p = { hp: s.hp || s.health || 100, maxHp };
+    const race = fightAssessRace(Game, ctx, [wm], p);
+    if (race.decline) {
+      ctx.faSkipped = (ctx.faSkipped || 0) + 1;
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -1982,11 +2129,27 @@ const competent = {
         endTurn();
         return true;
       };
+      // FIGHT-ASSESS LORE (longsim scale-wall r3): learn each species'
+      // damage from the scholar's own fights — bookkeeping only, gate on.
+      if (fightAssessOn()) {
+        try {
+          const _mons = f.fighters.filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
+          fightAssessLore(Game, ctx, f, p, _mons);
+        } catch (e) {}
+      }
       // NEW-FIGHT ASSESSMENT: don't start fights you can't win.
       if (ctx._fightObj !== f) {
         ctx._fightObj = f;
         dpsRaceInit(ctx); // DPS-race assessment (scale-wall r1): snapshot the race baseline
-        try {
+        // FIGHT-ASSESS (longsim scale-wall r3, gate COMPETENT_FIGHT_ASSESS=1):
+        // knowledge-gated damage-race assessment at turn 1, full HP —
+        // proactive disengage of a lost race, instead of the legacy
+        // HP-ratio heuristic below. Gate off = legacy block, byte-identical.
+        if (fightAssessOn()) {
+          try {
+            if (fightAssessHook(Game, f, ctx, p, flee)) return true;
+          } catch (e) {}
+        } else try {
           const monsters = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
           let totalMhp = 0, maxWave = 1;
           for (const m of monsters) {
@@ -2085,4 +2248,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore };
