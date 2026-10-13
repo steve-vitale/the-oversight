@@ -1061,6 +1061,21 @@ Earned early-game survival safety nets — three played systems, not flat relief
 
 **Consumes:** say(), sysSay(), stockPantry(), pantryKcalLive(), _removePantryKcal(), linkWith(), _otherVillage(), villageLinks(), aidPartsFor(), aidFaceFor(), journalNote(), leadShift(), hurtVillager(), displayName(), vpOf(), getPerson(), tickAction(), playerAtHaven(), pantryInReach(), hasAbility(), abilitySlots(), endDay(), advancePart(), villageSicknessTick(), resolveAidCrisis(), resolveStormFront(), fireCrisis(), villagerMealDay(), villageMeal(), aidCrisis(), state.pendingAidQuest, state.activeAidQuest, state.aidQuestLedger, state.relief, state.aidOut, state.aidInbound, state.aidLedger, state.aidKnown, state.pendingAidOffer, state.pendingAidBeg, state.aidHands
 
+### scaleDiscovery (`scaleDiscovery.js`)
+In-world discovery of the scale ladder — traveler word, villager mentions, System producer nudges, audience whispers, and the first-step moment. Discovery opens the door; walking through stays earned.
+
+**Provides:** scaleDiscovery(), scaleDiscoveryDaily()
+
+**Rules:**
+- discovery_is_reactive: every pointer fires on earned state (thriving fire, wave-ledger bars, known villages, viewership) — never a timer, never a checklist. (code: scaleDiscovery.js)
+- discovery_is_once_only: each beat fires once per run, then lives in villager mouths and the journal. Pointers never nag. (code: scaleDiscovery.js)
+- discovery_is_knowledge_gated: concepts ladder regional-before-national-before-table; day floors 10/15/20/30/35/40/55; thriving gate for travelers; System gate is integration stage 1+. (code: scaleDiscovery.js)
+- the_system_never_talks_mechanics: System lines are producer-brain ("the show needs", "the cameras") — never "the wave-4 gate requires scaleRank >= regional"; never names unearned waves. (code: scaleDiscovery.js)
+- the_world_does_not_care_about_refusal: traveler word keeps coming after REFUSE — the region climbs without Haven. Only the System's pitches stop. (code: scaleDiscovery.js)
+- the_moment_survives_accord: the first-accord moment restages with the next link if the first gesture dies unmade (mirrors hierarchy.js the_moment_survives). (code: scaleDiscovery.js)
+
+**Consumes:** state.otherVillages, state.scholar.day
+
 ### signature-wave3a (`sigW3a.js`)
 Wave-3 batch-A signature combat mechanics (Steve 2026-10-10): The Redactor (point-then-redact cycle with decoy/quiet counterplay), Gavel (trial with mid-trial motions + frontal sound-block shield), The Focus Group (audible visible ratings, damageable mouth-head parts, marking eye-heads, boredom walkout). Hooks register into MonsterBehaviorHooks; player verbs are tracked via light wraps; damage modifiers route through one tbDamage wrap. Telegraph honesty: every telegraph states the real next effect.
 

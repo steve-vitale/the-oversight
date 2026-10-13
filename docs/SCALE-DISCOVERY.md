@@ -1,6 +1,7 @@
 # The Ladder Discovers Itself — scale discoverability design (proposal)
 
-**Status:** proposal for Steve, 2026-10-12. Not built.
+**Status:** BUILT 2026-10-13 (blitz-scaledisc) — `src/js/scaleDiscovery.js`, proof `scripts/test-blitz-scaledisc.js` (RED-verified, ALL GREEN). The proposal below was the design sketch; the build follows it with adjustments noted inline. [needs-eyes] — pure feel work, Steve must see the lines.
+**Original status note:** proposal for Steve, 2026-10-12. Not built.
 **Problem:** the scale ladder exists (village → regional → national → global → table)
 but nothing tells the player to climb it. Wave 4 needs regional, wave 5 needs
 national — both gates are invisible. A player capped at wave 3 with max kills gets
