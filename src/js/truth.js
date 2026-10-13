@@ -2043,6 +2043,17 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
           this.doubtText(vid, 'behavior', { text: `${first} says they just want to survive, keep their head down. But they keep picking fights. Survival isn't what they're after.` }),
           [`claims goal: ${claimedGoal}`, 'observed: aggressive behavior']);
       }
+      // BROKEN WORDS (mem-wire 2026-10-13): memory[vid] records vid's
+      // experiences of the scholar — a 'promise_broken' entry is the
+      // SCHOLAR's rotted vow, not vid's deed, so the doubt is honest about
+      // whose word failed. It sits in the journal as a ❓ note; like other
+      // behavior doubts it resolves neutrally (no false-accuser cost).
+      if ((claimedGoal === 'belong' || claimedGoal === 'heal') && recent.some(m => m.t === 'promise_broken')) {
+        const first = this.nameFirst(vid);
+        this.addDoubt(vid, 'behavior',
+          this.doubtText(vid, 'behavior', { text: `${first} says they want ${claimedGoal === 'belong' ? 'to belong' : 'to help'} — and you broke your word to them. Promises rot. What does belonging mean, coming from you?` }),
+          [`claims goal: ${claimedGoal}`, 'your vow to them went unkept']);
+      }
     } catch (e) {}
   };
 

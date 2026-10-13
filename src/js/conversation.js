@@ -4454,6 +4454,10 @@
             you_threatened: "\u201cI haven\u2019t forgotten what you said. Just... careful.\u201d",
             confronted: "\u201cYou were wrong, you know. But I hear you.\u201d",
             shared_goal: "\u201cWe talked about wanting that. Still do.\u201d",
+            // MEM-WIRE (2026-10-13): the warning, cited. Knowledge-gated by
+            // construction — the memory is keyed under the confronter, and
+            // this line only surfaces in conversation with them.
+            confronted_theft: "\u201cI told you at the fire. Take what you need \u2014 not double. I meant it.\u201d",
           };
           // INHERITED MEMORY (journey-succession 2026-10-11): the memory is
           // the predecessor's deed — the NPC attributes it to them, never to

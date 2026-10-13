@@ -4080,11 +4080,28 @@
   // The accuser's story landed first — the village starts suspicious.
   initPlayerCaseBelief(c) {
     const tp = this.trustInPlayer();
+    // PRIOR WARNINGS WEIGH THE CASE (mem-wire 2026-10-13; Steve: "warned and
+    // still doing it" vs "never warned"): the village remembers who it called
+    // out. A theft case against someone already warned for theft hits harder;
+    // a theft case against someone never warned is harder to hold — the fire
+    // knows the difference. Knowledge-gated: confronted_theft memories are
+    // public (the confrontation does observe('hoard')), so the moot may cite
+    // what the whole fire heard.
+    let warnedTheft = false;
+    try {
+      const mem = (this.state.village || {}).memory || {};
+      outer: for (const ms of Object.values(mem)) {
+        for (const m of (ms || [])) {
+          if (m && m.t === 'confronted_theft') { warnedTheft = true; break outer; }
+        }
+      }
+    } catch (e) {}
     for (const vid of this.npcIds()) {
       let b = -20;
       b += (tp - 25) * 0.8;                              // they trust you → doubt it
       b -= this.pairAffinity(vid, c.accuser) * 0.5;      // they like the accuser → believe it
       b += this.pairAffinity(vid, this.villagerId) * 0.4; // personal bond with you
+      if (c.charge === 'theft') b += warnedTheft ? -15 : 12;
       c.belief[vid] = clamp(Math.round(b), -100, 100);
     }
   },

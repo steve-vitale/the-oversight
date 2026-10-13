@@ -263,6 +263,10 @@
         you_threatened: 'what you said to me',
         confronted: 'what you accused me of',
         shared_goal: 'what we talked about wanting',
+        // MEM-WIRE (2026-10-13): confronted_theft finally gets its read site.
+        // theftConfrontation writes it (game.js); nothing ever read it — a
+        // warning nobody could cite. Now the confronter can name it.
+        confronted_theft: 'when I called you out at the fire',
         // BREAK-IT (social r10 2026-10-10): askSupport/yieldChallenge/standGround
         // wrote 'ally'/'betrayed_ally'/'stood_together' memories with no read
         // site — Telltale-theater rule: every write needs a later read.

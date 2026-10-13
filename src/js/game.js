@@ -4779,6 +4779,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (oldP) delete v.promises[vid];
       const want = this.goalWant(vid);
       const first = this.displayName(vid);
+      // BROKEN WORDS ARE REMEMBERED (mem-wire 2026-10-13): a villager whose
+      // last vow from you rotted won't take a new one lightly — people act
+      // like people. Amends reopen the door: only a promise_broken with no
+      // later amends/kept promise blocks.
+      {
+        const mems = (v.memory || {})[vid] || [];
+        let lastWord = null, lastNote = '';
+        for (let i = mems.length - 1; i >= 0; i--) {
+          const m = mems[i];
+          if (m && (m.t === 'promise_broken' || m.t === 'promise_kept' || m.t === 'amends')) {
+            lastWord = m.t; lastNote = m.note || ''; break;
+          }
+        }
+        if (lastWord === 'promise_broken') {
+          // humanize a bare goal id ("feed" → "to keep everyone fed"); a
+          // favor task note is already human.
+          let what = lastNote;
+          try {
+            const g = (this.data.characterGen.goals || []).find(x => x.id === lastNote);
+            if (g && g.want) what = String(g.want);
+          } catch (e) {}
+          const about = what ? ` You promised ${what} — it never happened.` : ` It never happened.`;
+          this.say(`${first} doesn't look up. "You said that before." A beat.${about} "Not again. Not until that's answered."`);
+          return null;
+        }
+      }
       const promiseLines = {
         family: `"I'll watch the roads. If anyone comes through, you'll know."`,
         feed: `"Nobody goes hungry on my watch. That's a promise."`,
