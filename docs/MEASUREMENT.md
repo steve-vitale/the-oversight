@@ -87,10 +87,12 @@ Every lever runs in stages, cheapest first:
 - **Stage 0 — smoke (2–3 seeds, short horizon).** Does the lever's code path
   even fire? Does the primary metric move at all? If nothing fires, fix the
   wiring, not the tuning.
-- **Stage 1 — pilot (4 seeds, question-appropriate horizon, before/after on
+- **Stage 1 — pilot (8 seeds, question-appropriate horizon, before/after on
   identical seeds).** The GO/NO-GO gate. GO only if the effect is *obvious*
-  in 4 seeds — visible in the raw numbers without statistics.
-- **Stage 2 — confirm (12–20 seeds).** Only on a pilot GO. This is the
+  in 8 seeds — visible in the raw numbers without statistics. (Steve
+  2026-10-13: seeds are ~3s each — stop under-powering experiments; the old
+  4-seed pilot was sized for expensive sims that no longer exist.)
+- **Stage 2 — confirm (12–16 seeds).** Only on a pilot GO. This is the
   publishable measurement.
 
 **Kill rule:** pilot delta below the pre-registered threshold → document it,
