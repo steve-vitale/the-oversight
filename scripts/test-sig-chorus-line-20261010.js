@@ -79,10 +79,12 @@ function monsterPhase(Game, said) {
   // ---------- Fight 1: the count, the kick, dance ----------
   s.health = 9000; s.mx = 4; s.my = 4;
   s.inventory = [{ itemId: 'gravel', name: 'Handful of gravel', units: 2 }];
+  // capture from BEFORE startCombat: the opening monster turn (BEAT 1/4)
+  // fires inside startCombat, and resetting after would lose it.
+  said.length = 0; audio.length = 0;
   Game.startCombat('chorus_line');
   let m = monsterOf(Game);
   // stand still, wait through a full 4/4: beats must count, then the kick
-  said.length = 0; audio.length = 0;
   let kickDhp = 0, downbeatSeen = false;
   for (let b = 0; b < 4; b++) {
     let g2 = 0;
@@ -106,7 +108,7 @@ function monsterPhase(Game, said) {
   ok('downbeat kick announced', downbeatSeen);
   ok('standing still: the kick lands full', kickDhp > 0, 'dmg=' + kickDhp);
   // only the downbeat kicks: no kick damage on beats 1-3
-  ok('no kick on off-beats (telegraph honesty)', !/kick lands on you/.test(beatLines.split('DOWNBEAT')[0]));
+  ok('no kick on off-beats (telegraph honesty)', !/downbeat kick hits/.test(beatLines.split('DOWNBEAT')[0]));
 
   // dance through the next downbeat: untouchable
   said.length = 0;
@@ -119,12 +121,13 @@ function monsterPhase(Game, said) {
     else Game.tbAdvance();
   }
   ok('reached the pre-downbeat turn', guard < 30, 'guard=' + guard);
-  ok('dance action works', Game.tbChorusDance() === true);
-  // end the player turn -> the downbeat monster turn runs synchronously
-  let n0 = said.length;
+  // the dance ends the turn itself (tbAfterPlayerAction inside
+  // tbChorusDance): capture lines from BEFORE the call, and do NOT endTurn
+  // again — the downbeat already ran by the time dance() returns.
+  said.length = 0;
   const hb = Game.tbFighter('p').hp;
-  endTurn(Game);
-  const drLines = said.slice(n0).join(' ');
+  ok('dance action works', Game.tbChorusDance() === true);
+  const drLines = said.join(' ');
   const drDhp = Game.tbFighter('p').hp - hb;
   ok('dancing: untouchable on the downbeat', drDhp === 0, 'dhp=' + drDhp);
   ok('dance narrated honestly', /untouchable/.test(drLines), drLines.slice(0, 160));
@@ -147,12 +150,15 @@ function monsterPhase(Game, said) {
     const p = Game.tbFighter('p');
     const tx = p.mx < 7 ? p.mx + 1 : p.mx - 1;
     Game.tbPlayerMove(tx, p.my);
-    n0 = said.length;
+    const n2 = said.length;
     const b2 = Game.tbFighter('p').hp;
     endTurn(Game); // the monster turn runs here
-    const seg = said.slice(n0).join(' ');
-    if (/DOWNBEAT/.test(seg)) {
-      airSeen = /moving ON the beat/.test(seg);
+    const seg = said.slice(n2).join(' ');
+    // the 'moving ON the beat' narration is NOT deaf-gated — it is the
+    // honest signal. /DOWNBEAT/ is hidden by design while deaf, so the
+    // test must not key on it.
+    if (/moving ON the beat/.test(seg)) {
+      airSeen = true;
       airDmg = b2 - Game.tbFighter('p').hp;
     }
   }
@@ -216,8 +222,11 @@ function monsterPhase(Game, said) {
   s.inventory = [];
   Game.startCombat('chorus_line');
   m = monsterOf(Game);
-  Game.applyStatus('scholar', 'deaf', { turns: 20, source: 'test' });
-  ok('deaf status applied', Game.hasStatus('scholar', 'deaf'));
+  // deaf lives on the FIGHTER (engine convention — seTickFighter expires it
+  // per combat round). Scholar-scoped deaf never ticked; the test must apply
+  // where the engine reads.
+  Game.applyStatus(Game.tbFighter('p'), 'deaf', { turns: 20, source: 'test' });
+  ok('deaf status applied', Game.hasStatus(Game.tbFighter('p'), 'deaf'));
   said.length = 0;
   const hpD0 = Game.tbFighter('p').hp;
   guard = 0;

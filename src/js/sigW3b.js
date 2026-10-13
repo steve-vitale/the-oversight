@@ -265,8 +265,13 @@
       if (!f || f.over) return false;
       var p = game.tbFighter('p');
       if (!p || !p.alive) return false;
+      // DEAF (blitz-wave35 2026-10-13): deaf lives on the FIGHTER, not the
+      // scholar — engine convention (cf. stun_full on the fighter) so
+      // seTickFighter expires it per combat round. The old scholar-scoped
+      // deaf never ticked in combat: a 3-turn status that lasted all fight
+      // and into the next one.
       var deaf = false;
-      try { deaf = !!(game.hasStatus && game.hasStatus('scholar', 'deaf')); } catch (err) {}
+      try { deaf = !!(game.hasStatus && game.hasStatus(p, 'deaf')); } catch (err) {}
       if (!deaf) m.clDeafNoted = false;
       // arrhythmic disruption: the line stumbles, the count drops
       if ((m.clDisrupted || 0) > 0) {
@@ -323,12 +328,21 @@
             game.say('The kick passes ' + (isP ? 'under your feet' : 'wide of ' + t.name) + '. (' + why.join('; ') + ')');
             continue;
           }
-          var landed = game.tbDamage(t.key, kdmg, 'the downbeat kick', m.key);
-          game.say('The kick lands on ' + (isP ? 'you' : t.name) + ' for ' + landed + '.' + (why.length ? ' (' + why.join('; ') + ')' : ''));
+          // HONESTY (blitz-wave35 2026-10-13): tbDamage narrates its own
+          // "hits you for X" line — the hook must not narrate the same hit a
+          // second time ("hits you for 40" + "lands on you for 40" read as
+          // two hits). Quiet the engine line; the hook's single line carries
+          // the number AND the why. Dodge/armor narration inside tbDamage is
+          // not quiet-gated, so those still read; on a dodge landed is 0 and
+          // the slip-aside line already said it — stay silent.
+          var landed = game.tbDamage(t.key, kdmg, 'the downbeat kick', m.key, { quiet: true });
+          if (landed > 0) {
+            game.say('The downbeat kick hits ' + (isP ? 'you' : t.name) + ' for ' + landed + '.' + (why.length ? ' (' + why.join('; ') + ')' : ''));
+          }
           // the kick is LOUD — a full-force landing can deafen. The line
           // doesn't care that you can't hear it. That's the point.
           if (isP && dmult === 1 && !deaf && Math.random() < 0.25) {
-            try { game.applyStatus('scholar', 'deaf', { turns: 3, source: 'the downbeat kick' }); } catch (err) {}
+            try { game.applyStatus(p, 'deaf', { turns: 3, source: 'the downbeat kick' }); } catch (err) {}
             game.say('Your ears ring, then go cotton-quiet. (DEAFENED — the beat count is gone, but the beat isn\u2019t.)');
           }
         }
