@@ -390,14 +390,18 @@ function diplomacyRoad(Game, ctx) {
     } catch (e) {}
     // Answer the national beat — never refuse, never walk. Pick the
     // first non-refuse option the shape offers.
+    // FOOD DISCIPLINE (r8): 'belong' + already oath-bound elsewhere =
+    // 'walk'. Stacking subordinations is how villages end up paying
+    // 25,000 kcal/week in tribute. One oath at a time.
     if (Game.state.pendingNational && Game.answerNationalChoice) {
       try {
         const shape = Game.state.pendingNational.shape;
-        const pick = shape === 'lead' ? 'feast'
+        let pick = shape === 'lead' ? 'feast'
           : shape === 'conquest' ? 'mercy'
           : shape === 'belong' ? 'swear'
           : shape === 'covenant' ? 'pact'
           : shape === 'trade' ? 'sign' : 'feast';
+        if (r8on() && shape === 'belong' && r8HasSubLink(Game)) pick = 'walk';
         // count only real answers — a blocked/refused call (exiled scholar,
         // dissolved realm) returns null and is not an answer.
         if (Game.answerNationalChoice(pick)) ctx.nationalAnswered = (ctx.nationalAnswered || 0) + 1;
@@ -433,9 +437,21 @@ function diplomacyRoad(Game, ctx) {
         if (score >= subBar) {
           // Propose as subordinate — the BELONG road. Generous tribute.
           // PRIMACY-FIRST: propose as primary instead (the LEAD road).
-          Game.proposeLink(ov.id, { asSubordinate: !PRIM, tributeKcalPerWeek: 5000 });
-          ctx.proposed = (ctx.proposed || 0) + 1;
-          proposals++;
+          // FOOD DISCIPLINE (r8): one oath at a time, and only when the
+          // pantry can carry it — 4 weeks of tribute plus the seal. A
+          // village that can't afford 5,000 kcal/week doesn't swear it.
+          const subOk = !r8on() || (!r8HasSubLink(Game) && r8Pantry(Game) >= r8SubBuffer());
+          if (!PRIM && !subOk) {
+            // can't afford the subordinate road: try the peer road instead
+            if (Game.proposeCovenant) {
+              try { Game.proposeCovenant(ov.id); ctx.proposedPeer = (ctx.proposedPeer || 0) + 1; } catch (e2) {}
+              proposals++;
+            }
+          } else {
+            Game.proposeLink(ov.id, { asSubordinate: !PRIM, tributeKcalPerWeek: 5000 });
+            ctx.proposed = (ctx.proposed || 0) + 1;
+            proposals++;
+          }
         } else if (score >= peerBar && Game.proposeCovenant) {
           // Peer road fallback: covenant of equals.
           Game.proposeCovenant(ov.id);
@@ -475,6 +491,25 @@ function diplomacyRoad(Game, ctx) {
 // verification plan: "a curiosity-following policy... should climb to
 // regional on the signals alone. If it can't, the signals failed.")
 const POINTER_GATED = String(process.env.POINTER_GATED || '') === '1';
+
+// FOOD DISCIPLINE GATE (longsim food r8 2026-10-12): WINSEEK_R8=0 restores
+// byte-identical legacy diplomacy for before/after measurement.
+function r8on() { return process.env.WINSEEK_R8 !== '0'; }
+// An oath is a food commitment. One subordinate link costs ~5,000 kcal/week
+// plus the 3,000 seal; the pantry must hold the seal plus a week of tribute
+// before we take it on. (Tuned r8: 20k blocked every oath in the pilot —
+// a poor village can still swear one affordable oath; it just can't swear
+// four.)
+function r8SubBuffer() { return 8000; }
+function r8HasSubLink(Game) {
+  try {
+    return (Game.hierarchyState ? Game.hierarchyState() : [])
+      .some(l => l && l.status === 'active' && l.subordinate === 'haven');
+  } catch (e) { return false; }
+}
+function r8Pantry(Game) {
+  try { return Game.pantryKcalLive ? Game.pantryKcalLive() : 0; } catch (e) { return 0; }
+}
 
 // ---------- ROAD 3c: POINTER-HEEDING — act on the scale discoverability beats ----------
 // (sim-completion r1 2026-10-12, Steve: "do more testing sims that try to

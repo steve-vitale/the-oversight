@@ -915,6 +915,11 @@ function counterPlay(Game, ctx) {
     // (chef/fisherman/farmer/smoker) is preferred and does it properly.
     // Only free villagers: pulling a fisher off the creek to smoke is the
     // player's call, not the bot's.
+    // FOOD R8 (longsim food r8 2026-10-12): a second-cook scale-up was tried
+    // here (staff 2 when freshKcal > 12000) and KILLED at pilot — 54 cook
+    // assignments fired but trajectories were byte-identical (rot 98/76/91/
+    // 99% both arms). The bottleneck is game-side (cook 4,000 kcal/day
+    // budget + racksFull guard), not staffing. Single cook stands.
     try {
       const v = Game.state.village || {};
       const day = (Game.state.scholar || {}).day || 0;
