@@ -943,6 +943,9 @@ function forageTripSeedFirst(Game, ctx) {
       // SEE the monster on the tile (perception) — walk around an unwinnable
       // fight instead of into it. Decline engagement at the map level.
       if (fightAssessOn() && fightAssessSkipTile(Game, ctx, pick.x, pick.y)) continue;
+      // W2-DISENGAGE MAP DECLINE (longsim scale-wall r16 arm B, gate
+      // COMPETENT_W2DISENGAGE=1): skip visible unarmored top-4 tiles.
+      if (w2disengageOn() && w2disengageSkipTile(Game, ctx, pick.x, pick.y)) continue;
       // HONEST TRAVEL (food r6): the old form passed pick.blocked as
       // travelTo's FORCE arg — a blocked path was crossed for free (no
       // 40 kcal, no stone, no card). A real player goes around or does the
@@ -2149,6 +2152,58 @@ function fightAssessSkipTile(Game, ctx, x, y) {
   return false;
 }
 
+// ---------------------------------------------------------------------------
+// W2-DISENGAGE (longsim scale-wall r16 arm B): unarmored wave-2-top-end
+// disengage. The r14 static audit flagged review_drone / bright_idea /
+// mirror_stag / moderator as ~3-hit kills on an unarmored scholar; armor
+// P>=20 (craftable hide) takes them to ~6 hits — the "slow" in Steve's
+// "slow and risky". This lever declines THOSE FOUR matchups when the
+// scholar is unarmored (P<20) and the damage race is lost, at the MAP
+// level (walk around the tile — engine-honest, no fight ever starts).
+// Forced fights (a wanderer walked into the scholar) keep the legacy
+// behavior — the policy's legacy outmatched block already flees those.
+//
+// Knowledge: codex observed+ stage -> own-fight lore DPR -> pessimistic
+// prior — the same codex→lore→prior convention as fightAssessDPR.
+// Decline fires on race.decline (roundsToDie < roundsToKill*1.3 or
+// dead-in-two), same margin as r3. Never touches monster stats (Steve's
+// law: the Highbeam Deer benchmark is untouched; so is everything else).
+//
+// Env gate COMPETENT_W2DISENGAGE=1 opts IN (default OFF). Orthogonal to
+// COMPETENT_FIGHT_ASSESS (r3, killed at pilot — do not combine).
+function w2disengageOn() { return process.env.COMPETENT_W2DISENGAGE === '1'; }
+const W2_DISENGAGE_TOP4 = ['review_drone', 'bright_idea', 'mirror_stag', 'moderator'];
+const W2_DISENGAGE_ARMOR_GATE = 20; // P>=20 = the r14 "slow" answer; below it, decline
+
+function w2disengageArmorP(Game) {
+  try { return (typeof Game.armorBonus === 'function' ? Game.armorBonus() : 0) || 0; } catch (e) { return 0; }
+}
+
+// Map-level decline: the scholar can SEE the monster on the tile
+// (Game.monsterAt) — walk around an unarmored top-4 matchup instead of
+// into it. Returns true when the destination should be skipped.
+function w2disengageSkipTile(Game, ctx, x, y) {
+  try {
+    const wm = Game.monsterAt && Game.monsterAt(x, y);
+    if (!wm) return false;
+    const mid = fightAssessMidOf(wm);
+    if (!W2_DISENGAGE_TOP4.includes(mid)) return false;
+    if (w2disengageArmorP(Game) >= W2_DISENGAGE_ARMOR_GATE) return false; // armored: fight
+    const s = (Game.state || {}).scholar || {};
+    let maxHp = 100;
+    try { maxHp = Game.maxHealth ? Game.maxHealth() : 100; } catch (e) {}
+    const p = { hp: s.hp || s.health || 100, maxHp };
+    const race = fightAssessRace(Game, ctx, [wm], p);
+    if (race.decline) {
+      ctx.w2dSkipped = (ctx.w2dSkipped || 0) + 1;
+      if (!ctx.w2dFirst) { try { ctx.w2dFirst = JSON.parse(JSON.stringify(race.detail)); } catch (e) {} }
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+// ---------------------------------------------------------------------------
+
 const competent = {
   id: 'competent',
   desc: 'aware experienced player: learns, teaches, cooks, avoids vectors, fights with advantage',
@@ -2468,4 +2523,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
