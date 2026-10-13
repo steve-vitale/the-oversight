@@ -34,10 +34,13 @@ async function main() {
     console.log('fallen:');
     for (const d of fallen) console.log('  d' + (d.day ?? '?') + ' ' + name(d.villagerId || d.id || d) + ' — ' + (d.cause || '?'));
   }
-  const conf = v.conflicts || [];
-  if (conf.length) {
+  const conf = (v.conflicts || []);
+  const active = conf.filter(c => !c.resolved);
+  const laid = conf.length - active.length;
+  if (active.length) {
     console.log('active conflicts:');
-    for (const c of conf.slice(0, 6)) console.log(`  ${name(c.a)} x ${name(c.b)} [${c.kind}] tension:${c.tension ?? '?'}`);
+    for (const c of active.slice(0, 6)) console.log(`  ${name(c.a)} x ${name(c.b)} [${c.kind}] tension:${c.tension ?? '?'}`);
   }
+  if (laid) console.log(`laid to rest: ${laid} resolved conflict(s) (not active)`);
 }
 main().catch(e => { console.error('ERROR: ' + (e && e.stack || e)); process.exit(1); });

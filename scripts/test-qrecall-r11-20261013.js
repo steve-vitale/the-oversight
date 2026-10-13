@@ -57,8 +57,9 @@ const OPTOUTS = [
   ['q_quiet', 'a_leave'],
   ['q_first_week', 'a_blur'],
   ['q_night', 'honest_pass'],
-  // a no-recall question stays silent (not in r11's top tier)
-  ['q_useful', 'a_hunger'],
+  // RETIRED r12: q_useful/a_hunger was r11's "no-recall question stays silent"
+  // control; r12 added answer-specific recalls to q_useful, so the control no
+  // longer holds. Covered by test-qrecall-r12-20261013.js instead.
 ];
 
 async function main() {

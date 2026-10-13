@@ -159,8 +159,10 @@
       for (const gr of ((v.betrayal || {}).grievances || [])) {
         if (gr.by === a && gr.against === b) g += gr.severity || 15;
       }
-      // conflicts with tension
+      // conflicts with tension (resolved ones contribute nothing — tension is
+      // zeroed on resolve, and a dead-party conflict must not feed grievances)
       for (const c of (v.conflicts || [])) {
+        if (c.resolved) continue;
         if ((c.a === a && c.b === b) || (c.a === b && c.b === a)) g += (c.tension || 0) * 0.8;
       }
       // player-specific: crimes
