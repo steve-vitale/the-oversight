@@ -12,6 +12,26 @@
 'use strict';
 const { competent } = require('./competent');
 
+// hop-by-hop honest walk toward (hx,hy): one travelTo per hop, no force,
+// bounded. travelTargets only reaches d<=3, so a single travelTo can't
+// cross the map — walk it like a player would. (pattern from competent.js)
+function walkTo(Game, hx, hy) {
+  try {
+    let guard = 0;
+    while ((Game.map.px !== hx || Game.map.py !== hy) && guard++ < 10 && !Game.over && !Game.tbfight) {
+      let best = null, bd = 1e9;
+      for (const tt of (Game.travelTargets() || [])) {
+        const d = Math.abs(tt.x - hx) + Math.abs(tt.y - hy);
+        if (d < bd) { bd = d; best = tt; }
+      }
+      if (!best) break;
+      const px0 = Game.map.px, py0 = Game.map.py;
+      try { Game.travelTo(best.x, best.y); } catch (e) { break; }
+      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+    }
+  } catch (e) {}
+}
+
 function pantryKcal(Game) {
   try {
     return ((Game.state.village || {}).pantry || [])
@@ -98,9 +118,61 @@ function courtship(Game, ctx) {
         }
         return;
       }
-      // covenant first (the food-relevant road), then trade
+      // covenant first (the food-relevant road), then trade.
+      // THE CLIMB BEFORE THE KNOCK (journey-scale r5 2026-10-12): peer_binding_needs_courtship
+      // refuses proposals below opinion 10 DETERMINISTICALLY — "X barely know Haven's name".
+      // Re-proposing weekly to the same below-bar village is spam, not courtship: one run
+      // logged 59 identical prerequisite refusals and never climbed. A competent player
+      // hears the refusal's own directions ("walk to their fire and study their codex")
+      // and DOES the climb: one pilgrimage per unstudied village (studyVillageCodex, +3
+      // opinion, once), then lets broadcast wins (+2) and weeks do the rest. Proposals
+      // only go out at/above the bar the game itself enforces.
       if (covN < 3 || trN < 3) {
+        // continue an in-progress pilgrimage first — the trip is the day's courtship
+        if (ctx._pilgrim) {
+          const pg = ctx._pilgrim;
+          const tv = (st.otherVillages || []).find(v => v && v.id === pg.vid);
+          const px = (Game.map || {}).px, py = (Game.map || {}).py;
+          if (!tv || (Game.linkWith && Game.linkWith(pg.vid)) || day - pg.day > 14 || Game.over || Game.tbfight) {
+            ctx._pilgrim = null; // done, linked, stale, or interrupted — drop it
+          } else {
+            const dist = Math.abs((tv.x || 4) - px) + Math.abs((tv.y || 4) - py);
+            if (dist <= 2) {
+              try { if (Game.studyVillageCodex) Game.studyVillageCodex(pg.vid); } catch (e) {}
+              ctx.climbStudies = (ctx.climbStudies || 0) + 1;
+              ctx._pilgrim = null;
+              ctx._returning = true;
+              return;
+            }
+            walkTo(Game, tv.x || 4, tv.y || 4);
+            return;
+          }
+        }
+        // walk home after a study
+        if (ctx._returning) {
+          walkTo(Game, 4, 4); // haven at the center of the 9x9
+          if (Game.map.px === 4 && Game.map.py === 4) ctx._returning = false;
+          else return;
+        }
+        // start a pilgrimage: nearest below-bar, unstudied candidate we still want
+        if (!ctx._pilgrim) {
+          const needy = cands
+            .filter(v => (v.opinion || 0) < 10 && !v._codexOpinionGiven)
+            .sort((a, b) => (Math.abs((a.x || 4) - 4) + Math.abs((a.y || 4) - 4)) - (Math.abs((b.x || 4) - 4) + Math.abs((b.y || 4) - 4)));
+          const nt = needy[0];
+          if (nt) {
+            const s = Game.state.scholar || {};
+            const hpPct = (s.hp || 0) / Math.max(1, s.maxHp || s.hp || 1);
+            if (!s.exiled && hpPct > 0.7) {
+              ctx._pilgrim = { vid: nt.id, day };
+              ctx.pilgrimages = (ctx.pilgrimages || 0) + 1;
+              return; // trip starts tomorrow's courtship
+            }
+          }
+        }
+        // propose — but only at/above the opinion bar the game enforces
         for (const t of cands) {
+          if ((t.opinion || 0) < 10) continue; // below the bar: climb, don't knock
           const kind = covN < 3 && coolOk(t.id, 'covenant') ? 'covenant'
             : trN < 3 && coolOk(t.id, 'trade') ? 'trade' : null;
           if (!kind) continue;
