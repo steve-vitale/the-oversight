@@ -6515,7 +6515,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
-        try { this.recordWaveKill(m.id); } catch (e) {}
+        try { this.recordWaveKill(m.id, vid); } catch (e) {}
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
         try {
@@ -17306,7 +17306,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
-        try { this.recordWaveKill(m.id); } catch (e) {}
+        try { this.recordWaveKill(m.id, vid); } catch (e) {}
         // CORPSE PERSISTS (break-it 2026-10-09): a villager's kill is a real
         // death — the carcass stays on the tile (lootable, rottable), the
         // same carcass your kill leaves. The old path evaporated the body:
@@ -19298,6 +19298,115 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // monsterTellActive: you have an encounter the village hasn't heard about.
     monsterTellActive() {
       return Object.values(this.state.codex.monsters || {}).some(e => e.reported && !e.namingKicked);
+    },
+    // queueKillerTale: a villager slew a type nobody has reported yet. The
+    // killer will tell it at tonight's fire (killerTaleBeat). One untold
+    // tale per type — the first killer owns the telling; a second kill of
+    // the same type before nightfall doesn't book a second fireside.
+    queueKillerTale(mid, vid) {
+      if (!mid || !vid) return;
+      const e = (this.state.codex.monsters || {})[mid];
+      if (e && (e.reported || e.namingKicked || e.villageName)) return;
+      this.state.killerTales = this.state.killerTales || [];
+      if (this.state.killerTales.some(t => t.mid === mid && !t.told)) return;
+      this.state.killerTales.push({ mid, killer: vid, day: (this.state.scholar || {}).day || 0, told: false });
+    },
+    // killerTaleBeat: the night fireside beat (finding #28). Each untold
+    // tale is told, in the killer's words: the monster's knowledge-gated
+    // descriptor (never the true name — monsterDisplayName), what it
+    // actually did (attack telegraphs — what the killer saw), what it cost.
+    // A villager or two reacts; then the tale feeds the SAME machinery the
+    // scholar's report feeds — reported + knowers=[killer], monsterNewsCheck,
+    // gossip, kickMonsterNaming, proposals, majority. Same mechanics, same
+    // odds; the teller is the only difference. A killer who died before
+    // nightfall takes the tale with them: no tale, no report.
+    killerTaleBeat() {
+      // MEASUREMENT SWITCH (sim-taletell 2026-10-13): TALETELL_OFF=1 runs
+      // the baseline (old behavior) on identical seeds. Browser-safe:
+      // process is undefined in the browser, so the lever is always on.
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.TALETELL_OFF === '1') return;
+      } catch (e) {}
+      const tales = this.state.killerTales || [];
+      const pending = tales.filter(t => !t.told);
+      if (!pending.length) return;
+      const v = this.state.village || {};
+      const roster = v.roster || [];
+      const fallen = new Set((v.fallen || []).map(f => f.villagerId));
+      for (const t of pending) {
+        const alive = roster.includes(t.killer) && !fallen.has(t.killer);
+        const e = (this.state.codex.monsters || {})[t.mid];
+        if (!alive || !e || e.reported || e.namingKicked || e.villageName) {
+          t.told = true; // dead teller, or the news got out another way — moot
+          continue;
+        }
+        t.told = true;
+        t.played = true; // actually told (vs moot) — measurement reads this
+        this.tellKillerTale(t.mid, t.killer, e);
+      }
+    },
+    // tellKillerTale: one tale, told. Builds the fireside prose, logs the
+    // transcript (killerTaleLog, bounded — sense-testing evidence), then
+    // wires into the debate: reported, knowers=[killer], monsterNewsCheck.
+    tellKillerTale(mid, vid, e) {
+      const mdef = (this.data.monsters || []).find(m => m.id === mid) || {};
+      // firstRef, not displayName: villagers are stranger-descriptors until
+      // the scholar learns their names — the same voice the debate's own
+      // "X is calling it Y" line uses (seedMonsterNames).
+      const kName = this.firstRef(vid) || 'Someone';
+      const noun = this.monsterDisplayName(mid); // gated: descriptor or village name, never the true name
+      // What the killer saw: up to two attack telegraphs, rendered as their
+      // words. Telegraphs are the visual-mechanical coherence anchor — the
+      // tale describes the behaviors the engine actually runs.
+      const seen = (mdef.attacks || []).filter(a => a && a.telegraph).slice(0, 2);
+      // Quoted as the killer's own observed words — telegraphs are already
+      // in "you see this" voice, which is exactly how a survivor describes it.
+      const beats = seen.map(a => this._taleCap(String(a.telegraph || '').trim()));
+      // A listener or two at the fire, reacting to the telling — not the
+      // monster. The debate is a social event.
+      const others = ((this.state.village || {}).roster || [])
+        .filter(id => id !== vid && id !== ((this.state.scholar || {}).villagerId || 'player'));
+      // DEDICATED STREAM (sim-taletell): tale flavor (which listener reacts,
+      // which verb) must not consume the main Math.random stream — or the
+      // lever's cosmetics would perturb off/on seed comparisons downstream.
+      // Real gameplay consequences (the debate's own rolls) stay on the main
+      // stream, exactly like the scholar's tellbeast path.
+      let TR = Math.random;
+      try { TR = this.mulberry32(this._hashStr(mid + '|' + vid + '|' + ((this.state.scholar || {}).day || 0))); } catch (e) {}
+      const pick = (arr) => arr[Math.floor(TR() * arr.length)];
+      const r1 = others.length ? this.firstRef(pick(others)) : null;
+      const r2 = others.length > 1 ? this.firstRef(pick(others.filter(id => this.firstRef(id) !== r1))) : null;
+      const rverbs = ['mutters', 'says quietly', 'asks', 'breathes', 'says'];
+      const reactions = [
+        `"And you're still standing."`, `"So it bleeds."`, `"The fire feels smaller now."`,
+        `"Did it look at you? Before?"`, `"Say that again — slower."`,
+        `"We've been walking past those."`, `"Tell me you didn't go alone."`,
+      ];
+      let prose = `The fire settles. ${kName} has been quiet all evening, and now everyone knows why. "${this._taleCap(noun)} — I put it down today."`;
+      for (const b of beats) prose += ` "${b}"`;
+      prose += ` A beat of silence, then the questions come all at once.`;
+      if (r1) prose += ` ${r1} ${pick(rverbs)} ${pick(reactions)}`;
+      if (r2 && r2 !== r1) prose += ` ${r2} ${pick(rverbs)} ${pick(reactions)}`;
+      prose += ` Someone at the edge of the light says what everyone's thinking: "So — what are we calling it?"`;
+      this.say(`🔥 ${prose}`);
+      // TRANSCRIPT (sim-taletell): bounded log of told tales for
+      // sense-testing and the nightly debate audit.
+      this.state.killerTaleLog = this.state.killerTaleLog || [];
+      this.state.killerTaleLog.push(`[day ${(this.state.scholar || {}).day || 0}] ${kName}: ${prose}`);
+      if (this.state.killerTaleLog.length > 20) this.state.killerTaleLog.shift();
+      try { this.tele('killer_tale', { id: mid, killer: vid, day: (this.state.scholar || {}).day || 0 }); } catch (err) {}
+      // WIRE-IN, NOT BYPASS: the tale is the report. The debate machinery
+      // (monsterNewsCheck -> gossip spread -> kickMonsterNaming ->
+      // seedMonsterNames -> majority) runs untouched from here.
+      e.reported = true;
+      e.knowers = [vid];
+      this.monsterNewsCheck(mid);
+    },
+    // _taleCap: capitalize a sentence opener for tale prose (unknown
+    // descriptors open lowercase by design).
+    _taleCap(s) {
+      s = String(s || '');
+      return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
     },
     // kickMonsterNaming: the word is out — the argument starts.
     kickMonsterNaming(mid) {
@@ -24140,6 +24249,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // NIGHTFALL: the village reacts. Fear rises in everyone a little, people pull
       // toward the fire, watches get posted. The dark has its own animals —
       // everyone knows it. (Fear is per-NPC, in the existing needs system.)
+      // KILLER'S TALE (sim-taletell 2026-10-13, finding #28): around the
+      // fire, the day's killers tell their tales — the report the naming
+      // debate waits on. Defensive: a tale bug never breaks the night.
+      if (this.dayPart === 3) { try { this.killerTaleBeat(); } catch (e) {} }
       if (this.dayPart === 3) {
         try {
           const v = this.state.village;
@@ -27945,7 +28058,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.audioEvent('waveUnlock');
     },
     // Track kills by wave for unlock gates
-    recordWaveKill(monsterId) {
+    // killerVid (sim-taletell 2026-10-13): who landed it — a villager id, or
+    // the scholar's own id for player kills. Villager kills of an as-yet
+    // unreported type queue the killer's tale (finding #28): the tale is the
+    // report the naming debate waits on.
+    recordWaveKill(monsterId, killerVid) {
       const mdef = this.data.monsters.find(m => m.id === monsterId);
       if (!mdef) return;
       const wave = mdef.wave || 1;
@@ -27975,6 +28092,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (typeof this.ensureMonsterEntry === 'function') {
           const _ce = this.ensureMonsterEntry(monsterId);
           if (_ce) _ce.stage = 'slain';
+        }
+      } catch (e) {}
+      // KILLER'S TALE (sim-taletell 2026-10-13, finding #28): a villager's
+      // kill is news the debate machinery never receives — identifyMonster
+      // only fires for the scholar's encounters. Queue the tale for tonight's
+      // fire; the night beat tells it and flips the report. Defensive: a
+      // tale bug never breaks the kill path.
+      try {
+        const scholarId = (this.state.scholar || {}).villagerId || 'player';
+        if (killerVid && killerVid !== scholarId && killerVid !== 'player'
+          && typeof this.queueKillerTale === 'function') {
+          this.queueKillerTale(monsterId, killerVid);
         }
       } catch (e) {}
       // WAVE LEDGER (Steve 2026-10-10): kills also score the ledger — the
@@ -37800,7 +37929,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const _bk = this.tbSnakeLineageKey(m);
             if (_seenKills.has(_bk)) continue;
             _seenKills.add(_bk);
-            this.recordWaveKill(m.mdef.id);
+            this.recordWaveKill(m.mdef.id, this.villagerId);
           }
         }
       }

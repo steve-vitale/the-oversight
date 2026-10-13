@@ -382,7 +382,7 @@
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
         // WAVE GATE (break-it 2026-10-09): village-wide kill minimums —
         // see resolveWildMonsterEncounter. The expedition's kill counts too.
-        try { this.recordWaveKill(m.id); } catch (e) {}
+        try { this.recordWaveKill(m.id, vid); } catch (e) {}
         // MAP MEMORY (villager-mapmem 2026-10-13): the kill used to leave no
         // body at all — the meat vanished. Now the body is really there
         // (registerDeath with node override, real rot clock, real meat

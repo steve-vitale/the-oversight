@@ -366,7 +366,7 @@
         // recordWaveKill, so the ledger, villageSlain, and unlock beats
         // never saw them.)
         if (rec.outcome === 'vKill') {
-          try { this.recordWaveKill(beast.id); } catch (e) {}
+          try { this.recordWaveKill(beast.id, pid); } catch (e) {}
           lastOut = 'vKill';
         } else if (rec.outcome === 'mFlee') lastOut = 'mFlee';
         else if (rec.outcome === 'evade') lastOut = 'evade';
@@ -598,7 +598,7 @@
                   // seeker is a real wave-2 predator and this was a real
                   // kill — it scores the ledger (blank fixed), and the log
                   // says what happened instead of "walking".
-                  try { this.recordWaveKill(seeker.id); } catch (e2) {}
+                  try { this.recordWaveKill(seeker.id, pid); } catch (e2) {}
                   results[pid] = { outcome: 'lost', detail: 'found, slew the seeker', log: log.concat(['Found — and slew the seeker.']) };
                 }
                 else results[pid] = { outcome: 'lost', detail: 'found', log: log.concat(['Found — but walking.']) };
@@ -622,7 +622,7 @@
           else if (rec.outcome === 'vKill' || rec.outcome === 'mFlee') {
             // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): a real
             // kill scores the ledger exactly like a wild kill (blank fixed).
-            if (rec.outcome === 'vKill') { try { this.recordWaveKill(beast.id); } catch (e2) {} }
+            if (rec.outcome === 'vKill') { try { this.recordWaveKill(beast.id, pid); } catch (e2) {} }
             results[pid] = { outcome: 'won', detail: rec.outcome === 'mFlee' ? 'dominated' : 'slew', log: [`${st.name} masters the beast${rec.outcome === 'mFlee' ? ' — it yields' : ''}.`] };
           }
           else results[pid] = { outcome: 'lost', detail: rec.outcome, log: [] };
