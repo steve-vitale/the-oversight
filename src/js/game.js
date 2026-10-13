@@ -5083,7 +5083,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       this.state.questGiven = true;
       this.save();
-      return { from: first, lines };
+      return { from: first, giver: giverId, lines };
     },
 
     villageAction(kind) {

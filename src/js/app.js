@@ -978,6 +978,10 @@
           <p style="font-size:17px;line-height:1.6">"${q.lines[i]}"</p>
           <button class="btn" id="b-qnext">${i < q.lines.length - 1 ? '...' : 'Understood.'}</button>
         </div>`;
+      // The waker's lines are SPOKEN dialogue — voice them like every other
+      // NPC line (Steve 2026-10-12: the waker was silent). Fire-and-forget:
+      // mute/unlock/foreign gates live inside convoSpeakLine.
+      try { if (typeof Game.convoSpeakLine === 'function') Game.convoSpeakLine(q.giver, q.lines[i], {}); } catch (e) {}
       document.getElementById('b-qnext').onclick = () => {
         i++;
         if (i < q.lines.length) render(); else cb();
