@@ -69,7 +69,7 @@ const CATMAP = {
   answerAidOffer: 'social', answerDemand: 'social', answerCounter: 'social', answerAccord: 'social',
   answerNationalChoice: 'social', answerGlobalChoice: 'social', chooseTableOption: 'social',
   handInAidQuest: 'social', payTribute: 'social', rallyVillage: 'social', linkWith: 'social',
-  offerSystemQuest: 'social', corpseTakeItem: 'social', studyVillageCodex: 'social', proveWorth: 'social', agencyTurn: 'social',
+  offerSystemQuest: 'social', corpseTakeItem: 'food', studyVillageCodex: 'social', proveWorth: 'social', agencyTurn: 'social',
   travelTo: 'travel', pathStep: 'travel', beginPathWalk: 'travel', clearBlockage: 'travel',
   contestChoose: 'show', faceFeastDraw: 'show', yieldChallenge: 'show', hostFeast: 'show',
   switchboard: 'system',

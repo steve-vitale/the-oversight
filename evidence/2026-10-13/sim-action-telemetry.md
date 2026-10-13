@@ -2,6 +2,13 @@
 
 _evidence/2026-10-13/sim-action-telemetry.md — 2026-10-13_
 
+**CORRECTION 2026-10-13 (taxonomy):** `corpseTakeItem` (looting corpses) was filed
+under `social` in the harness/analyzer category map. It is now filed under `food`.
+All tables below are regenerated with the fix. Net effect: the "social-dominated
+stalls" framing was wrong — stalls are **loot-dominated** (see
+sim-stall-forensics.md). Top-3 categories moved from social/food/combat to
+food/social/combat; no run-level numbers changed, only category assignment.
+
 Suite: seeds 11/22/33/44/55/66/77/88 × competent/winseek/belongseek/leadcourt, 180-day horizon,
 harness sim-harness.js PLAYER-VERB TELEMETRY (origin-separated: deliberate = policy-hook
 invocations only; driver = harness stand-ins; internal = game-code calls, excluded).
@@ -17,7 +24,7 @@ actions, and late-game days dominated by social upkeep verbs.
 - Total deliberate actions to day 100: median **8362** (n=9, p10 6377, p90 12725)
 - Total deliberate actions to day 130: median **15075** (n=2, p10 13039, p90 15075)
 - Total deliberate actions to day 180: median **0** (n=0, p10 0, p90 0)
-- Top-3 action categories: **social (110,240), food (92,341), combat (44,401)**
+- Top-3 action categories: **food (145,024), social (57,557), combat (44,401)**
 - DayTicks utilization: median **0.766** of the 512-tick day (mean 0.762)
 - Curve bend: median actions/day halves vs day 7 (217) at **day 20**
 - Old upper-bound metric would have reported **158.1** verbs/day — the honest deliberate count is the number above.
@@ -38,24 +45,24 @@ actions, and late-game days dominated by social upkeep verbs.
 | 1 | 32 | 6 | 1 | 3 | 2 | 0 | 0 | 0 |
 | 2 | 32 | 37 | 1 | 34 | 2 | 0 | 0 | 0 |
 | 3 | 32 | 65 | 12 | 43 | 3 | 4 | 0 | 4 |
-| 4 | 32 | 213 | 165 | 43 | 4 | 4 | 0 | 2 |
+| 4 | 32 | 213 | 165 | 42 | 4 | 4 | 0 | 2 |
 | 5 | 32 | 217 | 165 | 42 | 3 | 4 | 0 | 2 |
-| 6 | 32 | 223 | 165 | 39 | 4 | 4 | 0 | 4 |
-| 7 | 32 | 217 | 165 | 40 | 4 | 5 | 0 | 3 |
+| 6 | 32 | 223 | 165 | 38 | 4 | 4 | 0 | 4 |
+| 7 | 32 | 217 | 168 | 39 | 4 | 5 | 0 | 3 |
 | 8 | 32 | 212 | 165 | 39 | 3 | 4 | 0 | 2 |
-| 9 | 32 | 217 | 165 | 43 | 4 | 4 | 0 | 4 |
-| 10 | 32 | 217 | 165 | 42 | 3 | 4 | 0 | 2 |
-| 20 | 31 | 74 | 6 | 41 | 3 | 5 | 0 | 2 |
-| 30 | 30 | 64 | 2 | 45 | 3 | 7 | 0 | 2 |
-| 40 | 28 | 54 | 2 | 39 | 3 | 4 | 0 | 2 |
-| 50 | 26 | 62 | 2 | 48 | 3 | 4 | 0 | 2 |
-| 60 | 23 | 66 | 2 | 52 | 3 | 4 | 0 | 2 |
-| 70 | 17 | 71 | 1 | 55 | 3 | 4 | 0 | 2 |
-| 80 | 14 | 71 | 1 | 57 | 3 | 4 | 0 | 2 |
-| 90 | 9 | 71 | 1 | 58 | 3 | 4 | 0 | 2 |
-| 100 | 7 | 59 | 1 | 52 | 2 | 2 | 0 | 2 |
-| 110 | 3 | 107 | 1 | 95 | 3 | 4 | 0 | 2 |
-| 120 | 2 | 119 | 2 | 109 | 3 | 4 | 1 | 2 |
+| 9 | 32 | 217 | 168 | 40 | 4 | 4 | 0 | 4 |
+| 10 | 32 | 217 | 168 | 39 | 3 | 4 | 0 | 2 |
+| 20 | 31 | 74 | 29 | 29 | 3 | 5 | 0 | 2 |
+| 30 | 30 | 64 | 18 | 29 | 3 | 7 | 0 | 2 |
+| 40 | 28 | 54 | 24 | 23 | 3 | 4 | 0 | 2 |
+| 50 | 26 | 62 | 28 | 22 | 3 | 4 | 0 | 2 |
+| 60 | 23 | 66 | 35 | 18 | 3 | 4 | 0 | 2 |
+| 70 | 17 | 71 | 38 | 18 | 3 | 4 | 0 | 2 |
+| 80 | 14 | 71 | 48 | 16 | 3 | 4 | 0 | 2 |
+| 90 | 9 | 71 | 39 | 13 | 3 | 4 | 0 | 2 |
+| 100 | 7 | 59 | 46 | 7 | 2 | 2 | 0 | 2 |
+| 110 | 3 | 107 | 82 | 1 | 3 | 4 | 0 | 2 |
+| 120 | 2 | 119 | 109 | 7 | 3 | 4 | 1 | 2 |
 
 ## Tedium hotspots (single day > 2× run median, no progress ±3 days)
 
@@ -63,13 +70,13 @@ None found.
 
 ## Stall stretches (≥7 days above-median actions, zero progress on ledger/scale/codex/standing)
 
-- competent/s11 days 78–84: 101.7/day (run median 101) — social:91, travel:4, field:3
-- winseek/s33 days 35–41: 90.9/day (run median 90) — social:44, food:30, travel:8
-- belongseek/s11 days 57–63: 71/day (run median 69) — social:58, field:6, travel:4
-- belongseek/s33 days 60–66: 98.9/day (run median 73) — social:84, travel:9, water:3
-- belongseek/s77 days 29–35: 45.9/day (run median 45) — social:33, travel:4, food:3
-- leadcourt/s11 days 86–92: 78.7/day (run median 66) — social:68, travel:4, field:3
-- leadcourt/s33 days 72–78: 74.4/day (run median 73) — social:55, travel:7, field:5
+- competent/s11 days 78–84: 101.7/day (run median 101) — food:78, social:15, travel:4
+- winseek/s33 days 35–41: 90.9/day (run median 90) — food:53, social:22, travel:8
+- belongseek/s11 days 57–63: 71/day (run median 69) — food:31, social:28, field:6
+- belongseek/s33 days 60–66: 98.9/day (run median 73) — food:59, social:27, travel:9
+- belongseek/s77 days 29–35: 45.9/day (run median 45) — social:25, food:12, travel:4
+- leadcourt/s11 days 86–92: 78.7/day (run median 66) — food:66, travel:4, social:3
+- leadcourt/s33 days 72–78: 74.4/day (run median 73) — food:46, social:12, travel:7
 
 ## What the game does on its own (internal verb traffic, excluded from deliberate)
 
