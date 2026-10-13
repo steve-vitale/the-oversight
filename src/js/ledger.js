@@ -795,6 +795,7 @@
         if (v.takes) v.takes[newId] = 0;
         if (v.gives) v.gives[newId] = 0;
         if (v.takeHist) v.takeHist[newId] = [];
+        if (v.giveHist) v.giveHist[newId] = []; // r9: the dated gives reset with the rest of the book
       } catch (e) {}
       // the mantle passes: the PROGRESSION is the village's (slots, arc,
       // integration, ledger, Codex). The body is new.

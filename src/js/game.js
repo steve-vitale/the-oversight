@@ -13290,6 +13290,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const genMult = genLvl >= 1 ? 2 : 1;
       v.trust = v.trust || {}; v.gives = v.gives || {};
       v.gives[vid] = (v.gives[vid] || 0) + kcal;
+      try { this.recordGiveHist(vid, kcal); } catch (e) {} // r9: dated gives for the fair-share net rate
       const trustGain = this.trustGainProgressive(vid, Math.min(10, Math.floor(kcal / 500)) * genMult);
       // NOTE (miser loop 2026-10-07): explicit undefined check — the old
       // `(v.trust[vid] || 15)` resurrected a zero-trust villager to 15+gain
@@ -13393,6 +13394,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const v = this.state.village; if (!v) return 0;
         const h = (v.takeHist || {})[vid] || [];
+        const day = (this.state.scholar || {}).day || 0;
+        let sum = 0;
+        for (const e of h) { if (e && e.day >= day - 6) sum += e.kcal || 0; }
+        return sum / 7;
+      } catch (e) { return 0; }
+    },
+    // giveHist: the dated history of GIVES (donations, shared surplus) —
+    // the mirror of takeHist. The freeloader's clock (freeloaderTick) judges
+    // the trailing-7-day NET rate (takes - gives): fair-share accounting.
+    // Recorded alongside every v.gives[vid] write (donateToPantry,
+    // villagerMealDay's shared surplus). Same 7-day window, same prune.
+    // (longsim scale-wall r9 2026-10-13, lever 5.)
+    recordGiveHist(vid, kcal) {
+      try {
+        const v = this.state.village; if (!v) return;
+        v.giveHist = v.giveHist || {};
+        const h = (v.giveHist[vid] = v.giveHist[vid] || []);
+        const day = (this.state.scholar || {}).day || 0;
+        h.push({ day, kcal: Math.round(kcal) || 0 });
+        while (h.length && h[0].day < day - 7) h.shift();
+      } catch (e) {}
+    },
+    // giveRate7: trailing-7-day give rate, kcal/day, for vid.
+    giveRate7(vid) {
+      try {
+        const v = this.state.village; if (!v) return 0;
+        const h = (v.giveHist || {})[vid] || [];
         const day = (this.state.scholar || {}).day || 0;
         let sum = 0;
         for (const e of h) { if (e && e.day >= day - 6) sum += e.kcal || 0; }
@@ -25377,9 +25405,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const totA = hist.reduce((t, h) => t + h.actual, 0);
         const totE = hist.reduce((t, h) => t + h.expected, 0);
         const effort = totE > 0 ? totA / totE : 1;
-        const takes = (vv.takes || {})[vid] || 0;
-        const netDrain = takes - gave;
-        const draining = netDrain > 1500;
+        // FAIR-SHARE RATE (longsim scale-wall r9 2026-10-13, lever 5): the
+        // old cumulative gross made the clock tenure- and meal-dependent —
+        // ~1 day of ordinary communal eating (~2000/day) cleared the old
+        // `draining > 1500` bar, and newcomers tripped the old
+        // drainBeyondCapacity in under a week on low totE (r7). The clock
+        // now judges the trailing-7-day NET rate (takes - gives, kcal/day)
+        // against the person's fair share: eating your own day's food is
+        // never evidence — taking MORE than you need, sustained, is. The
+        // 5-day warmup + staged 3/7/12-day ladder is the newcomer grace:
+        // ~17 days minimum before any vote. The old capacity-relative trip
+        // is retired — low expected production no longer turns an ordinary
+        // appetite into a charge (that was manufactured evidence, r7).
+        let fairShare = 2000;
+        try { fairShare = Math.max(2000, (person.kcalPerDay || 2000)); } catch (e) {}
+        const netRate7 = this.takeRate7(vid) - this.giveRate7(vid);
+        const draining = netRate7 > 2000;
         // REACHABILITY (break-it food 2026-10-09): the pure production-ratio
         // gate (effort < 0.5) can never fire for live villagers — produced is
         // expected × grit by construction and grit ≥ 0.5 always. The live
@@ -25396,10 +25437,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // whole scale leg unreachable. The effort gate therefore applies
         // only where production is modeled (non-players — for whom it is
         // dead by construction anyway); the player is judged by the same
-        // live drain-vs-capacity signal as everyone else. The design ("kick
-        // out drains", Steve 2026-10-09) is preserved: a true drain still
-        // trips drainBeyondCapacity on the capacity-relative timeline.
-        const drainBeyondCapacity = netDrain > Math.max(1500, totE * 3);
+        // live net-rate-vs-fair-share signal as everyone else. The design
+        // ("kick out drains", Steve 2026-10-09) is preserved: a sustained
+        // net take above your fair share still trips drainBeyondCapacity.
+        // (r9 retired the old capacity-relative trip: totE*3 on low expected
+        // production turned an ordinary appetite into a charge — manufactured
+        // evidence, not a drain.)
+        const drainBeyondCapacity = netRate7 > fairShare;
         const isP = this.isPlayer ? this.isPlayer(vid) : (vid === this.villagerId);
         if (((!isP && effort < 0.5 && draining) || drainBeyondCapacity)) {
           fl.days++;
@@ -25701,6 +25745,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       v.takes = v.takes || {}; v.gives = v.gives || {};
       v.takes[vid] = (v.takes[vid] || 0) + Math.round(pile.taken);
       v.gives[vid] = (v.gives[vid] || 0) + Math.round(gave);
+      // FAIR-SHARE RATE (longsim scale-wall r9 2026-10-13, lever 5): the
+      // freeloader's clock judges the trailing-7-day NET rate, so every
+      // villager — not just the player — needs dated histories. The daily
+      // meal draw IS recorded here (unlike the player's served meal, which
+      // r8 excluded from takeHist): with the clock's bar AT the fair-share
+      // norm (~2000 kcal/day), a communal meal can never trip it — the norm
+      // absorbs it. Only taking MORE than your share, sustained, is evidence.
+      try { if (pile.taken > 0) this.recordTakeHist(vid, Math.round(pile.taken)); } catch (e) {}
+      try { if (gave > 0) this.recordGiveHist(vid, Math.round(gave)); } catch (e) {}
       // starvation is slow, and it has a face: the unfed fade
       // FASTING (crisis 2026-10-11): a voluntary gorge-fast is a rhythm
       // choice, not deprivation — hunger carries to tomorrow. No health
