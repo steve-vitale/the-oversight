@@ -204,7 +204,8 @@ async function runDays(Game, policy, opts) {
   const ctx = { policyId: policy.id, notes: [] };
   const t0 = Date.now();
 
-  const samples = { pop: [], pantry: [], knowledge: [], trust: [], deaths: [], villagers: [] };
+  const samples = { pop: [], pantry: [], knowledge: [], trust: [], deaths: [], villagers: [],
+    scale: [], codexM: [], codexS: [], standing: [], ledger: [] };
   // VILLAGER SNAPSHOT (coverage 2026-10-09): per-villager differentiation —
   // are villagers becoming different people? Captured every 30 loop-days:
   // occupation/profile, held abilities, agency XP tracks, key life stats.
@@ -241,6 +242,26 @@ async function runDays(Game, policy, opts) {
     try { return Object.keys((Game.state.codex || {}).plants || {}).length; }
     catch (e) { return 0; }
   };
+  // PROGRESS AXES (telemetry 2026-10-13): stall detection needs per-day
+  // movement on leadership vector, scale stage, codex counts, Standing.
+  const codexCount = (k) => {
+    try { return Object.keys((Game.state.codex || {})[k] || {}).length; }
+    catch (e) { return 0; }
+  };
+  const scaleRankNow = () => {
+    try { return Game.scaleRank ? (Game.scaleRank() || 'village') : 'village'; }
+    catch (e) { return 'village'; }
+  };
+  const standingNow = () => {
+    try { return Game.villageStanding ? ((Game.villageStanding() || {}).total | 0) : null; }
+    catch (e) { return null; }
+  };
+  const ledgerMag = () => {
+    try {
+      const L = ((Game.progState ? Game.progState() : {}) || {}).ledger || {};
+      return Object.values(L).reduce((t, v) => t + Math.abs(v || 0), 0);
+    } catch (e) { return null; }
+  };
   const trustStats = () => {
     try {
       const tr = Object.values((Game.state.village || {}).trust || {});
@@ -250,40 +271,128 @@ async function runDays(Game, policy, opts) {
     } catch (e) { return null; }
   };
 
-  if (policy.setup) { try { await policy.setup(Game, ctx); } catch (e) { ctx.notes.push('setup: ' + e.message); } }
+  // Origin helper (defined before setup so the setup hook counts as player-origin).
+  const withOrigin = (origin, fn) => {
+    const prev = ctx._verbOrigin;
+    ctx._verbOrigin = origin;
+    try { return fn(); } finally { ctx._verbOrigin = prev; }
+  };
+  ctx._withOrigin = withOrigin;
 
-  // PACING PROXY (measurement 2026-10-11): headless sims can't measure wall
-  // clock, so we count what a live player spends time on: player-verb
-  // invocations per game-day. Cheap, always on. result.pacing.perDay rows:
-  // { day, verbs, policyCalls, dayTicks }.
-  //   verbs: calls to the documented player-verb list below. Caveat: a few
-  //     are also called internally by game code (notably eat), so this is an
-  //     UPPER bound on deliberate player decisions.
-  //   policyCalls: upkeep/daily/fight/contest hook firings — the STRICT lower
-  //     bound (every one is a player-side decision point).
-  //   dayTicks: scholar.dayTicks sampled pre-sleep — how much of the 512-tick
-  //     day budget got consumed.
+  if (policy.setup) { try { await withOrigin('policy', () => policy.setup(Game, ctx)); } catch (e) { ctx.notes.push('setup: ' + e.message); } }
+
+  // PLAYER-VERB TELEMETRY (measurement 2026-10-13: exhaustive rebuild of the
+  // 2026-10-11 PACING PROXY). Headless sims can't measure wall clock, so we
+  // count what a live player spends time on: player-verb invocations per
+  // game-day, audited against every Game.* call site in scripts/policies/
+  // (the policy IS the player in headless sims).
+  //
+  // ORIGIN SEPARATION (the old block's "UPPER bound" caveat, fixed
+  // honestly): a verb call is DELIBERATE iff it fires while a policy hook
+  // is executing (origin 'policy'). Harness drivers that stand in for
+  // default player behavior (driveFights strikes, driveContests picks, the
+  // day-loop waits) record origin 'driver'. Game-code-internal calls record
+  // 'internal' and are EXCLUDED from the deliberate-action budget — the
+  // internal bucket exists so contamination is visible, not hidden.
+  // doAction (the master field-action dispatch) records its kind, routed to
+  // a category via DOACTION_CAT. result.pacing.perDay rows:
+  // { day, acts, verbs, policyCalls, dayTicks } where acts keys are
+  // "origin:verb" (doAction: "origin:doAction:kind") and verbs is the legacy
+  // raw count (all origins) for comparison with the old metric.
   // Neither touches RNG: determinism unaffected.
-  const PACING_VERBS = ['doAction', 'contestChoose', 'tbPlayerStrike', 'tbPlayerWait',
-    'talkTo', 'convoTurn', 'eat', 'takeFromPantry', 'donateToPantry', 'stealFrom', 'travelTo'];
+  const VERB_CAT = {
+    // food
+    eat: 'food', eatOne: 'food', cookFood: 'food', takeFromPantry: 'food',
+    takeFromPantryBulk: 'food', donateToPantry: 'food', stockPantry: 'food',
+    stealFrom: 'food', villageMeal: 'food', testMonsterMeat: 'food', prepStash: 'food',
+    // water
+    fillWater: 'water', boilWater: 'water',
+    // health
+    treatDisease: 'health', treatVillager: 'health', useMedicine: 'health',
+    removeTick: 'health', tendVillager: 'health',
+    // field work
+    setTrap: 'field', craft: 'field', makePlot: 'field', sowPlot: 'field',
+    readBook: 'field', sortBag: 'field',
+    // combat
+    tbPlayerStrike: 'combat', tbPlayerWait: 'combat', tbPlayerMove: 'combat',
+    tbPlayerShout: 'combat', tbPlayerOfferFood: 'combat', tbBarrierExit: 'combat',
+    standGround: 'combat', answerDefenseCall: 'combat', useAbility: 'combat',
+    activateAbility: 'combat', feastBurn: 'combat',
+    // social
+    talkTo: 'social', convoTurn: 'social', endConvo: 'social', askAbout: 'social',
+    teachPlant: 'social', teachVillager: 'social', assignTask: 'social',
+    channelSentiment: 'social', tendLink: 'social', proposeLink: 'social',
+    proposeTrade: 'social', proposeCovenant: 'social', answerAidBeg: 'social',
+    answerAidOffer: 'social', answerDemand: 'social', answerCounter: 'social',
+    answerAccord: 'social', answerNationalChoice: 'social',
+    answerGlobalChoice: 'social', chooseTableOption: 'social',
+    handInAidQuest: 'social', payTribute: 'social', rallyVillage: 'social',
+    linkWith: 'social', offerSystemQuest: 'social', corpseTakeItem: 'social',
+    studyVillageCodex: 'social', proveWorth: 'social', agencyTurn: 'social',
+    // travel
+    travelTo: 'travel', pathStep: 'travel', beginPathWalk: 'travel', clearBlockage: 'travel',
+    // shows / contests
+    contestChoose: 'show', faceFeastDraw: 'show', yieldChallenge: 'show', hostFeast: 'show',
+    // system
+    switchboard: 'system',
+  };
+  const DOACTION_CAT = { forage: 'field', rest: 'rest', wait: 'wait', drink: 'water' };
+  // TELEMETRY_VERBS=0: skip all verb wrapping (no-behavior-change control).
+  const VERBS_ON = process.env.TELEMETRY_VERBS !== '0';
   const pacingDays = {};
   const pacingDay = () => { try { return (Game.state.scholar || {}).day || 0; } catch (e) { return 0; } };
-  const pacingBump = (kind) => {
+  const pacingRecord = (verb, sub, origin) => {
+    if (!VERBS_ON) return;
     const d = pacingDay();
-    const row = pacingDays[d] || (pacingDays[d] = { day: d, verbs: 0, policyCalls: 0, dayTicks: 0 });
-    row[kind]++;
+    const row = pacingDays[d] || (pacingDays[d] = { day: d, acts: {}, verbs: 0, policyCalls: 0, dayTicks: 0 });
+    const key = origin + ':' + verb + (sub ? ':' + sub : '');
+    row.acts[key] = (row.acts[key] || 0) + 1;
+    row.verbs++;
   };
-  ctx._pacingBump = pacingBump;
-  for (const v of PACING_VERBS) {
+  // Compat: the old ctx._pacingBump('policyCalls') call sites now bump through
+  // the origin-aware row; anything else records a policy-origin legacy bump.
+  ctx._pacingBump = (kind) => {
+    const d = pacingDay();
+    const row = pacingDays[d] || (pacingDays[d] = { day: d, acts: {}, verbs: 0, policyCalls: 0, dayTicks: 0 });
+    if (kind === 'policyCalls') row.policyCalls++;
+    else pacingRecord('legacyBump', null, 'policy');
+  };
+  for (const v of Object.keys(VERB_CAT)) {
+    if (!VERBS_ON) break;
     try {
       const orig = Game[v];
-      if (typeof orig === 'function' && !orig._pacingWrapped) {
-        const w = function (...a) { pacingBump('verbs'); return orig.apply(this, a); };
-        w._pacingWrapped = true;
+      if (typeof orig === 'function' && !orig._verbWrapped) {
+        const w = function (...a) {
+          // RE-ENTRANCY (telemetry 2026-10-13): a verb fired from INSIDE
+          // another verb's execution is game-code-internal by construction
+          // (e.g. foreignCrisisTick calling linkWith during a wait's part
+          // advance) — it inherits 'internal' regardless of the outer
+          // origin. Only the outermost verb call takes the ambient origin.
+          const depth = (ctx._verbDepth = (ctx._verbDepth || 0) + 1);
+          try {
+            pacingRecord(v, null, depth > 1 ? 'internal' : (ctx._verbOrigin || 'internal'));
+            return orig.apply(this, a);
+          } finally { ctx._verbDepth--; }
+        };
+        w._verbWrapped = true;
         Game[v] = w;
       }
     } catch (e) {}
   }
+  if (VERBS_ON) try {
+    const orig = Game.doAction;
+    if (typeof orig === 'function' && !orig._verbWrapped) {
+      const w = function (kind, ...rest) {
+        const depth = (ctx._verbDepth = (ctx._verbDepth || 0) + 1);
+        try {
+          pacingRecord('doAction', String(kind == null ? '?' : kind), depth > 1 ? 'internal' : (ctx._verbOrigin || 'internal'));
+          return orig.apply(this, [kind, ...rest]);
+        } finally { ctx._verbDepth--; }
+      };
+      w._verbWrapped = true;
+      Game.doAction = w;
+    }
+  } catch (e) {}
 
   let day;
   // TIME-FREEZE WATCHDOG (crisis leg 2026-10-11): a fight that neither side
@@ -296,7 +405,7 @@ async function runDays(Game, policy, opts) {
   await quietLog(async () => {
   for (day = 1; day <= days; day++) {
     for (let p = 0; p < 3; p++) {
-      if (policy.upkeep) { try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); policy.upkeep(Game, ctx); } catch (e) {} }
+      if (policy.upkeep) { try { withOrigin('policy', () => { ctx._pacingBump('policyCalls'); policy.upkeep(Game, ctx); }); } catch (e) {} }
       driveFights(Game, policy, ctx);
       driveContests(Game, policy, ctx);
       if (Game.over) break;
@@ -307,13 +416,13 @@ async function runDays(Game, policy, opts) {
       // day clock (~0.1 day/loop-day under a real policy: sleep() then
       // refused on the half-spent day). Pattern matches winrate-iter4's
       // proven runOne: wait, then drive fights+contests again after.
-      try { Game.doAction('wait'); } catch (e) {}
+      try { withOrigin('driver', () => Game.doAction('wait')); } catch (e) {}
       driveFights(Game, policy, ctx);
       driveContests(Game, policy, ctx);
       if (Game.over) break;
     }
     if (Game.over) break;
-    if (policy.daily) { try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); policy.daily(Game, ctx); } catch (e) {} }
+    if (policy.daily) { try { withOrigin('policy', () => { ctx._pacingBump('policyCalls'); policy.daily(Game, ctx); }); } catch (e) {} }
     // PACING PROXY: sample the consumed tick budget before sleep rolls the day.
     try {
       const pd = pacingDay(), prow = pacingDays[pd];
@@ -335,6 +444,11 @@ async function runDays(Game, policy, opts) {
       samples.pop.push([day, pop()]);
       samples.pantry.push([day, Math.round(pantryKcal())]);
       samples.knowledge.push([day, knownPlants()]);
+      samples.codexM.push([day, codexCount('monsters')]);
+      samples.codexS.push([day, codexCount('skills')]);
+      samples.scale.push([day, scaleRankNow()]);
+      samples.standing.push([day, standingNow()]);
+      samples.ledger.push([day, ledgerMag()]);
       const ts = trustStats();
       samples.trust.push([day, ts ? ts.mean : null]);
       if (day % 30 === 0) samples.villagers.push([day, villagerSnapshot()]);
@@ -375,11 +489,34 @@ async function runDays(Game, policy, opts) {
   let waveKills = {};
   try { waveKills = Object.assign({}, Game.state.waveKills || {}); } catch (e) {}
 
-  // PACING PROXY summary: per-day rows + means for the standard table.
+  // PLAYER-VERB TELEMETRY summary: per-day rows + origin-separated means.
   const perDay = Object.keys(pacingDays).map(Number).sort((a, b) => a - b)
     .map(d => pacingDays[d]);
   const meanOf = (k) => perDay.length
     ? +(perDay.reduce((t, r) => t + (r[k] || 0), 0) / perDay.length).toFixed(1) : 0;
+  // Origin accounting: deliberate (policy) vs driver vs internal.
+  const catOf = (verb, sub) => verb === 'doAction'
+    ? (DOACTION_CAT[sub] || ('doAction:' + sub)) : (VERB_CAT[verb] || verb);
+  const totals = { policy: 0, driver: 0, internal: 0 };
+  const byCat = {}, byCatDriver = {}, internalByVerb = {};
+  const deliberatePerDay = [];
+  for (const r of perDay) {
+    let d = 0;
+    for (const k of Object.keys(r.acts || {})) {
+      const n = r.acts[k];
+      const parts = k.split(':');
+      const o = parts[0], v = parts[1], s = parts.slice(2).join(':');
+      totals[o] = (totals[o] || 0) + n;
+      if (o === 'policy') { d += n; const c = catOf(v, s); byCat[c] = (byCat[c] || 0) + n; }
+      else if (o === 'driver') { const c = catOf(v, s); byCatDriver[c] = (byCatDriver[c] || 0) + n; }
+      else { const vk = v + (s ? ':' + s : ''); internalByVerb[vk] = (internalByVerb[vk] || 0) + n; }
+    }
+    deliberatePerDay.push(d);
+  }
+  deliberatePerDay.sort((a, b) => a - b);
+  const medianDeliberate = deliberatePerDay.length
+    ? deliberatePerDay[Math.floor(deliberatePerDay.length / 2)] : 0;
+  const meanTicks = meanOf('dayTicks');
 
   return {
     days: day > days ? days : day,
@@ -391,9 +528,19 @@ async function runDays(Game, policy, opts) {
     learnedPlants, learnedSkills,
     pacing: {
       perDay,
-      meanVerbsPerDay: meanOf('verbs'),
+      totalDeliberate: totals.policy,
+      totalDriver: totals.driver,
+      totalInternal: totals.internal,
+      meanDeliberatePerDay: perDay.length ? +(totals.policy / perDay.length).toFixed(1) : 0,
+      medianDeliberatePerDay: medianDeliberate,
+      meanDriverPerDay: perDay.length ? +(totals.driver / perDay.length).toFixed(1) : 0,
+      byCategory: byCat,
+      byCategoryDriver: byCatDriver,
+      internalByVerb,
+      meanVerbsPerDayLegacy: meanOf('verbs'),
       meanPolicyCallsPerDay: meanOf('policyCalls'),
-      meanTicksPerDay: meanOf('dayTicks'),
+      meanTicksPerDay: meanTicks,
+      tickUtilization: +(meanTicks / 512).toFixed(3),
     },
     ms: Date.now() - t0,
     manifest: opts.manifest || manifest('?', policy.id),
@@ -405,6 +552,10 @@ async function runDays(Game, policy, opts) {
 // Default fight driver: strike nearest live monster on the player's turn.
 // Policies override via policy.fight(Game, ctx) returning true when handled.
 function driveFights(Game, policy, ctx) {
+  const run = () => driveFightsImpl(Game, policy, ctx);
+  return (ctx && ctx._withOrigin) ? ctx._withOrigin('driver', run) : run();
+}
+function driveFightsImpl(Game, policy, ctx) {
   const TR = process.env.FIGHTTRACE ? (m) => { try { console.error('[DF] ' + m); } catch (e) {} } : null;
   let guard = 0, still = 0, lastSig = '';
   let exitWhy = 'loop-end';
@@ -425,7 +576,7 @@ function driveFights(Game, policy, ctx) {
     if (Game.over) { exitWhy = 'game-over'; break; }
     if (policy.fight) {
       let handled = false;
-      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.fight(Game, ctx); } catch (e) { if (TR) TR('policy.fight threw: ' + (e && e.message)); }
+      try { handled = (ctx && ctx._withOrigin) ? ctx._withOrigin('policy', () => { ctx._pacingBump('policyCalls'); return policy.fight(Game, ctx); }) : policy.fight(Game, ctx); } catch (e) { if (TR) TR('policy.fight threw: ' + (e && e.message)); }
       if (handled) continue;
     }
     // ABILITY-USING POLICIES (longsim food 2026-10-11): a policy's fight hook
@@ -454,13 +605,17 @@ function driveFights(Game, policy, ctx) {
 // Default contest driver: pick choice 0 until the contest clears.
 // Policies override via policy.contest(Game, ctx) returning true when handled.
 function driveContests(Game, policy, ctx) {
+  const run = () => driveContestsImpl(Game, policy, ctx);
+  return (ctx && ctx._withOrigin) ? ctx._withOrigin('driver', run) : run();
+}
+function driveContestsImpl(Game, policy, ctx) {
   let guard = 0;
   while (Game.state.activeContest && guard++ < 400) {
     driveFights(Game, policy, ctx);
     if (Game.over) break;
     if (policy.contest) {
       let handled = false;
-      try { if (ctx._pacingBump) ctx._pacingBump('policyCalls'); handled = policy.contest(Game, ctx); } catch (e) {}
+      try { handled = (ctx && ctx._withOrigin) ? ctx._withOrigin('policy', () => { ctx._pacingBump('policyCalls'); return policy.contest(Game, ctx); }) : policy.contest(Game, ctx); } catch (e) {}
       if (handled) continue;
     }
     try {
