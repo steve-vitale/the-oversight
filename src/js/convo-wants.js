@@ -1642,7 +1642,7 @@
       let moodNow = null;
       try { moodNow = this.npcMood ? this.npcMood(vid) : null; } catch (e) {}
       const qok = (q) => {
-        try { return this.convoQuestionOk ? this.convoQuestionOk(q, trust, moodNow) : true; }
+        try { return this.convoQuestionOk ? this.convoQuestionOk(q, trust, moodNow, vid) : true; }
         catch (e) { return true; }
       };
       let askedAny = [];

@@ -1849,12 +1849,30 @@
     // gate (Worker D 2026-10-11): "what got you through the first week?"
     // is nonsense on day 3, "did you sleep?" is nonsense on day 1. A
     // question whose time hasn't come is a precondition bug, not content.
-    convoQuestionOk(q, trust, moodNow) {
+    // CRISIS GATE (journey crisis r9 2026-10-13): a villager in physical
+    // crisis (severity>=2 sickness, starving) does not ask small-talk
+    // nostalgia questions — a gutrot sufferer asking "What did you do for
+    // fun? Before." is tonally senseless. The gate is narrow: only
+    // smallTalk-tagged questions are suppressed; everything else still
+    // passes, and callers without a vid behave exactly as before.
+    convoSpeakerInCrisis(vid) {
+      if (!vid) return false;
+      try {
+        const sick = (((this.state.village || {}).sick || {})[vid]) || null;
+        if (sick && (sick.severity || 0) >= 2) return true;
+      } catch (e) {}
+      try {
+        if (this.npcNeeds && ((this.npcNeeds(vid) || {}).hunger || 0) > 70) return true;
+      } catch (e) {}
+      return false;
+    },
+    convoQuestionOk(q, trust, moodNow, vid) {
       if (!q) return false;
       if (trust < (q.minTrust || 0)) return false;
       if (q.when && q.when !== moodNow) return false;
       const day = (this.state.scholar || {}).day || 1;
       if ((q.minDay || 0) > day) return false;
+      if (q.smallTalk && vid && this.convoSpeakerInCrisis(vid)) return false;
       return true;
     },
 
@@ -4369,7 +4387,7 @@
           // Time/trust gates apply here too (Worker D 2026-10-11): the
           // fallback pools used to draw ANY unasked question, including
           // "the first week?" on day 2.
-          const qok2 = (q) => this.convoQuestionOk(q, (this.state.village.trust || {})[vid] || 10, this.npcMood(vid));
+          const qok2 = (q) => this.convoQuestionOk(q, (this.state.village.trust || {})[vid] || 10, this.npcMood(vid), vid);
           let pool = (cg2.questions || []).filter(q => prefer.indexOf(q.id) !== -1 && c.askedQs.indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok2(q));
           if (!pool.length) pool = (cg2.questions || []).filter(q => prefer.indexOf(q.id) !== -1 && c.askedQs.indexOf(q.id) === -1 && qok2(q));
           if (!pool.length) pool = (cg2.questions || []).filter(q => c.askedQs.indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok2(q));
@@ -5163,7 +5181,7 @@
           const trust = (this.state.village.trust || {})[vid] || 10;
           const moodNow = this.npcMood(vid);
           const askedAny = this.villageAskedQs();
-          const qok = (q) => this.convoQuestionOk(q, trust, moodNow);
+          const qok = (q) => this.convoQuestionOk(q, trust, moodNow, vid);
           // prefer questions nobody has asked the player yet (unique-person
           // law) — fall back to per-villager-unasked when the pool runs dry.
           let cands = (cg.questions || []).filter(q =>
