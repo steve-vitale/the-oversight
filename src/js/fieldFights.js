@@ -845,8 +845,15 @@
         return The + ' was already dead when ' + vName + ' found it — old news, not a kill.';
       if (rec.outcome === 'vKill')
         return vName + ' killed ' + the + ' alone — ' + rounds + ', ' + rec.vTaken + ' taken. Word travels fast.';
-      if (rec.outcome === 'mFlee')
+      if (rec.outcome === 'mFlee') {
+        // HONEST (flesh-out r16 arm C 2026-10-13, SENSE-TESTING): an mFlee
+        // with no damage taken is not a mauling — 237/8-run "bloodied but
+        // breathing" beats fired on 0-round, 0-damage stand-downs. Same
+        // class as the r4 vFlee fix above.
+        if ((rec.vTaken | 0) <= 0)
+          return vName + ' stared down ' + the + ' and it backed off — ' + rounds + ', not a scratch on them.';
         return vName + ' stood down ' + the + ' and kept walking — ' + rounds + ', bloodied but breathing.';
+      }
       if (rec.outcome === 'vFlee') {
         // HONEST (longsim wave lever r4 2026-10-12): a vFlee with no damage
         // taken is not a mauling — "mauled (-0 health)" was a lie. The
