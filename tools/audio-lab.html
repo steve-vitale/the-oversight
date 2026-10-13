@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Audio Lab — The Oversight</title>
+<style>
+  :root { --bg:#0d0f14; --card:#161a23; --ink:#e8e4d8; --dim:#9a937f; --accent:#e0a458;
+          --real:#7fd08a; --synth:#8ab4e0; --gap:#e08a8a; --line:#2a2f3c; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+         max-width:560px; margin:0 auto; padding:12px 12px 80px; }
+  h1 { font-size:22px; margin:8px 0 2px; }
+  .sub { color:var(--dim); font-size:13px; margin:0 0 12px; }
+  .coverage { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px; }
+  .cov { font-size:12px; padding:4px 10px; border-radius:20px; border:1px solid var(--line); }
+  .cov.real { color:var(--real); border-color:var(--real); }
+  .cov.synth { color:var(--synth); border-color:var(--synth); }
+  .cov.gap { color:var(--gap); border-color:var(--gap); }
+  .filters { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; position:sticky; top:0;
+             background:var(--bg); padding:8px 0; z-index:5; }
+  .filters button { background:var(--card); color:var(--ink); border:1px solid var(--line);
+                    border-radius:18px; padding:6px 12px; font-size:13px; }
+  .filters button.on { border-color:var(--accent); color:var(--accent); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px;
+          padding:12px; margin-bottom:10px; }
+  .card.playing { border-color:var(--accent); }
+  .head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .name { font-size:16px; font-weight:700; }
+  .badge { font-size:11px; padding:2px 8px; border-radius:12px; border:1px solid var(--line); color:var(--dim); }
+  .badge.real { color:var(--real); border-color:var(--real); }
+  .badge.synth { color:var(--synth); border-color:var(--synth); }
+  .badge.gap { color:var(--gap); border-color:var(--gap); }
+  .why { font-size:13.5px; line-height:1.5; color:var(--ink); margin:8px 0; }
+  .asset { font-size:11.5px; color:var(--dim); font-family:ui-monospace,Menlo,monospace;
+           word-break:break-all; margin:6px 0; }
+  .src { font-size:11px; color:var(--dim); margin:6px 0 10px; }
+  .play { width:100%; padding:12px; font-size:15px; font-weight:700; border-radius:10px;
+          border:1px solid var(--accent); background:transparent; color:var(--accent); }
+  .card.playing .play { background:var(--accent); color:#111; }
+  .nowbar { position:fixed; bottom:0; left:0; right:0; background:#1a1f2b; border-top:1px solid var(--line);
+            padding:8px 14px; font-size:12px; color:var(--dim); display:none; }
+  .nowbar.show { display:block; }
+  .sec { font-size:15px; font-weight:700; margin:18px 0 8px; color:var(--accent); }
+  .note { font-size:12px; color:var(--dim); margin:0 0 14px; line-height:1.5; }
+</style>
+</head>
+<body>
+<h1>🎧 Audio Lab</h1>
+<p class="sub">One item, one sound, your ear, your verdict. Tap ▶ to hear a single item — nothing autoplays, nothing plays in groups.</p>
+
+<div class="coverage" id="coverage"></div>
+
+<p class="note"><b>Honest coverage.</b> REAL = real-world recording on disk (source + license shown).
+SYNTH = Web Audio synth kept by design — the thing has no meaningful real-world voice.
+GAP = documented gap: no usable recording was found, a synth stands in.
+Items marked "source unattributed" play fine but their origin is unverified — do not judge them as sourced recordings yet.</p>
+
+<div class="filters" id="waveFilters"></div>
+<div class="filters" id="originFilters"></div>
+
+<div id="list"></div>
+<div class="nowbar" id="nowbar"></div>
+
+<script src="audio-lab-data.js"></script>
+<script>
+(function(){
+  'use strict';
+  var D = window.AUDIO_LAB_DATA;
+  var wave = 'all', origin = 'all';
+  var player = new Audio();
+  var currentCard = null, currentBtn = null;
+  var list = document.getElementById('list');
+  var nowbar = document.getElementById('nowbar');
+
+  var ORIGIN_LABEL = { real:'REAL RECORDING', synth:'SYNTH (by design)', gap:'GAP — synth stand-in' };
+
+  // coverage summary
+  function coverage(){
+    var c = { real:0, synth:0, gap:0 }, s = { real:0, synth:0 };
+    D.monsters.forEach(function(e){ c[e.origin] = (c[e.origin]||0)+1; });
+    D.sfx.forEach(function(e){ s[e.origin] = (s[e.origin]||0)+1; });
+    document.getElementById('coverage').innerHTML =
+      '<span class="cov real">🎙 Monsters real: '+c.real+'/59</span>'+
+      '<span class="cov synth">🔊 Monsters synth: '+c.synth+'/59</span>'+
+      '<span class="cov gap">⚠ Monsters gap: '+c.gap+'/59</span>'+
+      '<span class="cov real">🎙 SFX real: '+s.real+'</span>'+
+      '<span class="cov synth">🔊 SFX synth: '+s.synth+'</span>';
+  }
+
+  function mkFilters(){
+    var wf = document.getElementById('waveFilters');
+    var waves = [['all','All'],['1','Wave 1'],['2','Wave 2'],['3','Wave 3'],['4','Wave 4'],['5','Wave 5'],['sfx','SFX']];
+    waves.forEach(function(w){
+      var b = document.createElement('button');
+      b.textContent = w[1]; b.dataset.v = w[0];
+      if (w[0]==='all') b.classList.add('on');
+      b.onclick = function(){ wave=w[0];
+        wf.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); render(); };
+      wf.appendChild(b);
+    });
+    var of = document.getElementById('originFilters');
+    [['all','Any origin'],['real','Real'],['synth','Synth'],['gap','Gap']].forEach(function(o){
+      var b = document.createElement('button');
+      b.textContent = o[1]; b.dataset.v = o[0];
+      if (o[0]==='all') b.classList.add('on');
+      b.onclick = function(){ origin=o[0];
+        of.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); render(); };
+      of.appendChild(b);
+    });
+  }
+
+  function stop(){
+    player.pause(); player.removeAttribute('src'); player.load();
+    if (currentCard) currentCard.classList.remove('playing');
+    if (currentBtn) currentBtn.textContent = '▶ Play';
+    nowbar.classList.remove('show');
+    currentCard = null; currentBtn = null;
+  }
+
+  function card(e, isSfx){
+    var div = document.createElement('div');
+    div.className = 'card';
+    var assetLine, canPlay;
+    if (e.files && e.files.length){
+      assetLine = '🎵 ' + e.files.join(' · ');
+      canPlay = true;
+    } else {
+      assetLine = '🔊 Web Audio synth — hook: <b>' + (e.synth || e.hook || '?') + '</b> (plays in-game only; nothing to preview here)';
+      canPlay = false;
+    }
+    div.innerHTML =
+      '<div class="head"><span class="name">'+esc(e.name || e.label)+'</span>'+
+      (isSfx ? '' : '<span class="badge">wave '+e.wave+'</span>')+
+      '<span class="badge '+e.origin+'">'+ORIGIN_LABEL[e.origin]+'</span></div>'+
+      '<div class="why">'+esc(e.why)+'</div>'+
+      '<div class="asset">'+assetLine+'</div>'+
+      '<div class="src">Source: '+esc(e.source)+' · License: '+esc(e.license)+
+      (e.hook ? ' · Game hook: <code>'+esc(e.hook)+'</code>' : '')+'</div>';
+    var btn = document.createElement('button');
+    btn.className = 'play';
+    if (canPlay){
+      btn.textContent = '▶ Play';
+      btn.onclick = function(){
+        if (currentBtn === btn){ stop(); return; }
+        stop();
+        player.src = '../' + e.files[0];
+        player.play().catch(function(){ btn.textContent = '⚠ could not play'; });
+        div.classList.add('playing'); btn.textContent = '⏸ Stop';
+        nowbar.textContent = '▶ ' + (e.name || e.label) + ' — ' + e.files[0].split('/').pop();
+        nowbar.classList.add('show');
+        currentCard = div; currentBtn = btn;
+      };
+    } else {
+      btn.textContent = '🔊 synth — in-game only';
+      btn.disabled = true; btn.style.opacity = 0.45;
+    }
+    div.appendChild(btn);
+    return div;
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(){
+    stop();
+    list.innerHTML = '';
+    var frag = document.createDocumentFragment();
+    if (wave === 'sfx' || wave === 'all'){
+      var sfx = D.sfx.filter(function(e){ return origin==='all' || e.origin===origin; });
+      if (sfx.length){
+        var h = document.createElement('div'); h.className='sec'; h.textContent='SFX ('+sfx.length+')'; frag.appendChild(h);
+        sfx.forEach(function(e){ frag.appendChild(card(e, true)); });
+      }
+    }
+    var waves = wave==='all' ? [1,2,3,4,5] : (wave==='sfx' ? [] : [parseInt(wave,10)]);
+    waves.forEach(function(w){
+      var ms = D.monsters.filter(function(e){ return e.wave===w && (origin==='all' || e.origin===origin); });
+      if (!ms.length) return;
+      var h = document.createElement('div'); h.className='sec'; h.textContent='Wave '+w+' — '+ms.length+' monsters'; frag.appendChild(h);
+      ms.forEach(function(e){ frag.appendChild(card(e, false)); });
+    });
+    list.appendChild(frag);
+  }
+
+  player.onended = function(){ stop(); };
+  coverage(); mkFilters(); render();
+})();
+</script>
+</body>
+</html>
