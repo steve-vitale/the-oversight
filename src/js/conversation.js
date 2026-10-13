@@ -4463,6 +4463,32 @@
             // construction — the memory is keyed under the confronter, and
             // this line only surfaces in conversation with them.
             confronted_theft: "\u201cI told you at the fire. Take what you need \u2014 not double. I meant it.\u201d",
+            // MEMDEPTH (2026-10-13): responses for previously write-only
+            // memories. Each line names the deed back — the NPC cites the
+            // ledger, not a vibe. Tone: Steve's law — conversations have
+            // meaning; the NPC wants something (acknowledgment, distance,
+            // leverage) and says so.
+            wrongly_accused: "\u201cYou called me a liar, and you were wrong. I don't forget that easily.\u201d",
+            confession: "\u201cI already told you the truth once. That cost me.\u201d",
+            hostile: "\u201cAsk your questions. Carefully.\u201d",
+            exposed_cannibal: "\u201c...You know. And you're saying it out loud. Fine. It was that or watch them rot, and I chose wrong.\u201d",
+            offered_meat: "\u201cIt was food. Out here that's all it ever is, until someone decides it isn't.\u201d",
+            shared_secret: "\u201cYou watched and didn't look away. That means something. I haven't decided what.\u201d",
+            saw_weakness: "\u201cI saw. I won't say it again. But I saw.\u201d",
+            warned: "\u201cI heard you. Pulling weight. You won't have to say it twice.\u201d",
+            feast: "\u201cThat feast \u2014 real food, firelight. I still think about it.\u201d",
+            moot_vote: "\u201cYou stood up at the moot. I remember which way.\u201d",
+            heckled: "\u201cEveryone saw. The cameras saw. Don't pretend it was nothing.\u201d",
+            appeal: "\u201cYou asked me to take the work. I'm still doing it.\u201d",
+            deal_refused: "\u201cYou took the food and walked. Next time the food stays until the work's done.\u201d",
+            grudging_respect: "\u201cI stopped coming at you. That doesn't mean I stopped watching.\u201d",
+            blame: "\u201cIt was the pot. I know it was the pot. I taste it in my sleep.\u201d",
+            moot_case_held: "\u201cI stood up at the moot and the fire agreed. I'd do it again.\u201d",
+            moot_weak_case: "\u201cThe fire wouldn't hold it. ...I overreached. I know.\u201d",
+            moot_split_fire: "\u201cThat moot split the fire and I called it. I carry that.\u201d",
+            duel_terms: "\u201cWitnessed, to yield. I remember the terms. Do you?\u201d",
+            duel_fought: "\u201cWe fought it out, witnessed. It's settled. It stays settled.\u201d",
+            lost_duel: "\u201cI yielded, witnessed. Don't make me say it again.\u201d",
           };
           // INHERITED MEMORY (journey-succession 2026-10-11): the memory is
           // the predecessor's deed — the NPC attributes it to them, never to

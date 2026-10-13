@@ -889,6 +889,19 @@ Village membership. Joining, leaving, exile status.
 
 **Consumes:** village.members
 
+### memdepth (`memdepth.js`)
+Social-memory readers (Steve 2026-10-13): previously write-only memory types get read sites; villager-to-villager deed/grievance recall; inter-village grievances as recallable events instead of bare opinion numbers.
+
+**Provides:** grievanceSay(kind), grievanceNoteFor(by, against), convoGrievanceLine(vid, oid), deedMemLine(vid, oid), stampKillWitnesses(vid, mName, allyVids), ovEvent(villageId, what, why, dir), ovGrievanceNote(why), ovGrievances(villageId), ovOpinionExplain(villageId)
+
+**Rules:**
+- names_at_read: memory notes never bake true names — displayName/firstRef resolve at read time (code: memdepth.js, grievanceSay/grievanceNoteFor/deedMemLine/ovOpinionExplain; Steve 2026-10-06 unique-person law)
+- grievance_is_event: recordGrievance kinds render as human phrases ("what happened on the trail"), not bare kind strings (code: memdepth.js, grievanceSay)
+- village_grievance_is_event: negative opinion moves stamp ov.events with a human why — "opinion -40" is never the whole story (code: memdepth.js, ovEvent/ovGrievanceNote; hierarchy.js, _nudgeOpinion hook)
+- witnesses_remember: villagers who fought beside a killer remember the kill with subject=doer, so "I was there when X killed it" is ledger-backed (code: memdepth.js, stampKillWitnesses)
+
+**Consumes:** remember(rid, type, note, extra), displayName(id), firstRef(id), state.village.memory, state.village.betrayal.grievances, state.otherVillages, _otherVillage(id), _ovName(id)
+
 ### metaProgression (`metaProgression.js`)
 Persistent cross-run achievement codex ("Records"). A per-device record of knowledge and content encountered across ALL runs — the meta incentive to replay until everything has been seen. New games start completely fresh; achievements NEVER grant power, knowledge, or items.
 

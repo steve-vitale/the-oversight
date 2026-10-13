@@ -276,6 +276,15 @@
           ov.courtshipDeclined != null && (day - ov.courtshipDeclined) <= 28;
         if (watching) delta += 1;
         ov.opinion = Math.max(-100, Math.min(100, (ov.opinion || 0) + delta));
+        // MEMDEPTH (2026-10-13): every opinion wound carries a recallable
+        // event. The number moves; the EVENTS are what a villager can name
+        // later ("they remember when Haven raided our stores"). Positive
+        // moves stay number-only — grievances are the read surface.
+        try {
+          if (delta < 0 && this.ovEvent && this.ovGrievanceNote) {
+            this.ovEvent(villageId, this.ovGrievanceNote(why), why, 'haven');
+          }
+        } catch (e2) {}
         return ov.opinion;
       } catch (e) { return 0; }
     },
@@ -426,7 +435,7 @@
       // no recovery path). Old slights fade with the weeks (linkTick), so
       // "not forever" is true in the engine now, not just in the line.
       if (opinion <= -20) {
-        this.say(`${nm} doesn't answer the knock at all — the door is shut. Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
+        this.say(`${nm} doesn't answer the knock at all — the door is shut.` + (this.ovOpinionExplain ? this.ovOpinionExplain(targetId) : '') + ` Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
         return null;
       }
       if (j.score >= 55) return this._formLink(targetId, opts, j);
@@ -443,8 +452,8 @@
       // 28 days ("they're watching"). The line names the single most
       // relevant unbanked verb, not the whole menu.
       try { ov.courtshipDeclined = (this.state.scholar || {}).day || 0; } catch (e) {}
-      this.say(`${nm} declines. ${j.reasons.join(' ')} The door isn't shut — just not today. They're watching now, and the climb lands harder while they watch: ${this._courtshipNextStep(ov)}. Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
-      try { if (this._nudgeOpinion) this._nudgeOpinion(targetId, -5); else ov.opinion = (ov.opinion || 0) - 5; } catch (e) {}
+      this.say(`${nm} declines. ${j.reasons.join(' ')}` + (this.ovOpinionExplain ? this.ovOpinionExplain(targetId) : '') + ` The door isn't shut — just not today. They're watching now, and the climb lands harder while they watch: ${this._courtshipNextStep(ov)}. Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
+      try { if (this._nudgeOpinion) this._nudgeOpinion(targetId, -5, 'cold-ask'); else ov.opinion = (ov.opinion || 0) - 5; } catch (e) {}
       return null;
     },
 
@@ -503,14 +512,14 @@
           if (c.kind === 'covenant' || c.kind === 'trade') return this._formPeerLink(c.targetId, { kind: c.kind });
           return this._formLink(c.targetId, c.opts, j2);
         }
-        this._nudgeOpinion(c.targetId, -5);
+        this._nudgeOpinion(c.targetId, -5, 'counter-refused');
         this.state.pendingCounter = null;
         this.say(`They take the food — all 1,500 kcal of it — and turn you away anyway. "${j2.reasons.join(' ')}" The gift is gone. That's what sweeteners risk.`);
         return null;
       }
       // walk away
       this.state.pendingCounter = null;
-      this._nudgeOpinion(c.targetId, -3);
+      this._nudgeOpinion(c.targetId, -3, 'sweetener-taken');
       this.say(`You walk away from ${nm}'s table. They'll remember you came — and what you wouldn't pay.`);
       return null;
     },
@@ -747,7 +756,7 @@
         return true;
       }
       // cold: send nothing. The ink dries on its own.
-      this._nudgeOpinion(other, -3);
+      this._nudgeOpinion(other, -3, 'cold-ink');
       this._linkNote(link, 'accord', 'First gesture: nothing. Cold ink.');
       this.say(`Haven sends nothing. The ink dries on its own. ${onm} notes the coldness — first gestures are remembered longest.`);
       return true;
@@ -949,7 +958,7 @@
                 if (link.conquered && link.trust < 30) {
                   if (R() < 0.05) {
                     self._linkNote(link, 'revolt', 'The yoke is thrown off.');
-                    try { if (self._nudgeOpinion) self._nudgeOpinion(link.subordinate, -20); } catch (e) {}
+                    try { if (self._nudgeOpinion) self._nudgeOpinion(link.subordinate, -20, 'revolt'); } catch (e) {}
                     self.say(`🔥 ${self._ovName(link.subordinate)} rises — the yoke is thrown off, loudly, in front of everyone. Tribute under duress was never tribute. It was a countdown.`);
                     try { if (self.ledgerAdd) self.ledgerAdd('hierarchy', 'revolt:' + link.subordinate); } catch (e) {}
                     self.breakLink(link.id, 'revolt');
@@ -960,6 +969,9 @@
                     link.arrears += _half;
                     link.trust = Math.max(0, link.trust - 4);
                     self._linkNote(link, 'sabotage', 'Tribute arrived light — grain "lost on the road." Arrears +' + _half.toLocaleString() + ' kcal.');
+                    // MEMDEPTH (2026-10-13): them→haven direction — a recallable
+                    // event of what THEY did to Haven, not just arrears math.
+                    try { if (self.ovEvent) self.ovEvent(link.subordinate, 'their tribute arrived light — grain "lost on the road"', 'sabotage', 'theirs'); } catch (e3) {}
                     if (R() < 0.5) self.say(`🌾 ${self._ovName(link.subordinate)}'s tribute arrives light — half the grain "lost on the road." Nobody believes it. Sabotage wears a thin mask. (Arrears +${_half.toLocaleString()} kcal.)`);
                     return;
                   }
@@ -1140,7 +1152,7 @@
           } else {
             link.arrears = (link.arrears || 0) + Math.round(want - paid);
             this.say(`You send ${paid.toLocaleString()} of ${want.toLocaleString()} kcal — all the pantry holds. They count the gap; the arrears grow teeth.`);
-            try { if (this._nudgeOpinion) this._nudgeOpinion(link.primary, -2); } catch (e) {}
+            try { if (this._nudgeOpinion) this._nudgeOpinion(link.primary, -2, 'tribute-short'); } catch (e) {}
           }
         } else if (d.kind === 'aid') {
           // BREAK-IT travel r12: the loan needs a body that can walk out —
@@ -1248,6 +1260,20 @@
       if (isPeer && (how === 'released' || how === 'seceded')) hit = 5; // an honored parting, not a betrayal
       if (ov) ov.opinion = Math.max(-100, Math.min(100, (ov.opinion || 0) - hit));
       this._linkNote(link, 'broken', 'Link broken (' + (how || 'severed') + ').');
+      // MEMDEPTH (2026-10-13): the break is a recallable event, not just a
+      // number. Direction matters: Haven breaking faith vs them walking out.
+      try {
+        if (this.ovEvent) {
+          var _bwhat, _bdir = 'haven';
+          if (isPeer && (how === 'released')) _bwhat = 'Haven let us walk out of the ' + (link.kind === 'covenant' ? 'covenant' : 'trade league') + ' with honor';
+          else if (isPeer && (how === 'seceded' || how === 'revolt')) { _bwhat = 'we tore out of the ' + (link.kind === 'covenant' ? 'covenant' : 'trade league'); _bdir = 'theirs'; }
+          else if (how === 'gambit') _bwhat = 'Haven broke faith';
+          else if (how === 'walked') _bwhat = 'Haven walked from the table cleanly';
+          else if (how === 'revolt') { _bwhat = 'we threw off Haven\'s yoke'; _bdir = 'theirs'; }
+          else _bwhat = 'Haven severed the link';
+          this.ovEvent(other, _bwhat, 'faith-broken', _bdir);
+        }
+      } catch (e2) {}
       try {
         this.seedGossip('broke_' + link.id, { loyal: -6 }, (this.npcIds ? this.npcIds().slice(0, 4) : []));
       } catch (e) {}
@@ -1264,7 +1290,7 @@
         return true;
       }
       if (weAreSub && how === 'gambit') {
-        this.say(`🗡️ The vassal's gambit: Haven breaks with ${this._ovName(other)}. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (${this._ovName(other)}'s opinion: ${ov ? ov.opinion : 'unknown'})`);
+        this.say(`🗡️ The vassal's gambit: Haven breaks with ${this._ovName(other)}. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith.${this.ovOpinionExplain ? this.ovOpinionExplain(other) : ''}`);
       } else if (how === 'walked') {
         this.say(`🚶 Haven walks from the table cleanly — no blades, no hard words. The bond ends where it stood, honestly.`);
       } else {
@@ -1816,7 +1842,7 @@
           try { if (!this.knowsVillage(v)) continue; } catch (e) { continue; }
           heard++;
           if (outcome === 'won') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, 2, 'broadcast'); } catch (e2) {} }
-          else if (outcome === 'died') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, -2); } catch (e2) {} }
+          else if (outcome === 'died') { try { if (this._nudgeOpinion) this._nudgeOpinion(v.id, -2, 'contest-death'); } catch (e2) {} }
         }
         if (heard > 0) this.stirRegion('contest', contestName || 'the show');
       } catch (e) {}
@@ -2172,7 +2198,7 @@
           for (si = 0; si < subs.length; si++) {
             subs[si].tributeKcalPerWeek = Math.round(subs[si].tributeKcalPerWeek * 1.1);
             subs[si].trust = Math.max(0, subs[si].trust - 12);
-            this._nudgeOpinion(subs[si].subordinate, -5);
+            this._nudgeOpinion(subs[si].subordinate, -5, 'yoke-tightened');
             this._linkNote(subs[si], 'court', 'First court: the law in cold ink. Tribute up 10%.');
           }
           this.say(`⚖️ Haven writes the law in cold ink: tribute up 10%, terms standard, no favorites. ${onames.join(', ')} bow — and do not love you for it. The realm holds. Fear is a kind of mortar. (Trust -12 with each.)`);
@@ -2201,7 +2227,7 @@
           for (csi = 0; csi < csubs.length; csi++) {
             csubs[csi].tributeKcalPerWeek = Math.round(csubs[csi].tributeKcalPerWeek * 1.1);
             csubs[csi].trust = Math.max(0, csubs[csi].trust - 12);
-            this._nudgeOpinion(csubs[csi].subordinate, -10);
+            this._nudgeOpinion(csubs[csi].subordinate, -10, 'yoke-tightened');
             this._linkNote(csubs[csi], 'iron-court', 'The yoke holds: tribute up 10%.');
           }
           this.say(`⚔️ The Iron Court's answer: the YOKE. Tribute up 10%, terms standard, garrisons doubled. ${csubNames.join(', ')} kneel lower — and hate you cleaner. The realm holds. Fear is a kind of mortar. (Trust -12 with each.)`);
@@ -2603,7 +2629,7 @@
       // proposeLink — a shut door knocked on is silence, not a fresh
       // insult, and old slights fade with the weeks (linkTick).
       if (opinion <= -20) {
-        this.say(`${nm} doesn't answer the knock at all — the ${kindName} is off the table. Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
+        this.say(`${nm} doesn't answer the knock at all — the ${kindName} is off the table.` + (this.ovOpinionExplain ? this.ovOpinionExplain(targetId) : '') + ` Old slights fade with the weeks, not the days: give it time, and come back with deeds instead of words.`);
         return null;
       }
       if (j.score >= 55) return this._formPeerLink(targetId, { kind: kind });
@@ -2615,7 +2641,7 @@
       // courtshipDeclined — climb verbs land +1 harder for 28 days.
       try { ov.courtshipDeclined = (this.state.scholar || {}).day || 0; } catch (e) {}
       this.say(`${nm} declines the ${kindName}. ${j.reasons.join(' ')} The door isn't shut — just not today. They're watching now, and the climb lands harder while they watch: ${this._courtshipNextStep(ov)}. Don't join their fire to be heard: that's leaving yours, and only Haven's own can propose. Asking again cold costs you (-5 each time); deeds don't.`);
-      try { this._nudgeOpinion(targetId, -5); } catch (e) {}
+      try { this._nudgeOpinion(targetId, -5, 'cold-ask'); } catch (e) {}
       return null;
     },
 
@@ -3153,7 +3179,7 @@
       var day = (this.state.scholar || {}).day || 0;
       if (how === 'withdraw') {
         this.state.pendingRaid = null;
-        try { this._nudgeOpinion(pr.target, -10); } catch (e) {}
+        try { this._nudgeOpinion(pr.target, -10, 'raid-withdrawn'); } catch (e) {}
         this.say(`The war party stands down. ${nm} heard it muster — they'll remember the almost. (Opinion -10.)`);
         return 'withdrawn';
       }
@@ -3164,7 +3190,7 @@
           this.state.pendingRaid = null;
           var ylink = this._formLink(pr.target, { asSubordinate: false, tributeKcalPerWeek: 5000 }, null);
           ylink.conquered = true; ylink.trust = 25;
-          try { this._nudgeOpinion(pr.target, -25); } catch (e) {}
+          try { this._nudgeOpinion(pr.target, -25, 'yield-terms'); } catch (e) {}
           this._linkNote(ylink, 'conquered', 'Yielded to the war party without blood. Tribute 5,000 kcal/week under duress.');
           this.say(`⚔️ ${nm} looks at the war party on their horizon — and chooses the tribute over the pyre. No blood today. The yoke is lighter for it, not light. (Trust 25, opinion -25, tribute 5,000 kcal/week.)`);
           try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'yielded:' + pr.target); } catch (e) {}
@@ -3198,7 +3224,7 @@
       }
       var slink = this._formLink(pr.target, { asSubordinate: false, tributeKcalPerWeek: 7000 }, null);
       slink.conquered = true; slink.trust = 15;
-      try { this._nudgeOpinion(pr.target, -40); } catch (e) {}
+      try { this._nudgeOpinion(pr.target, -40, 'raid'); } catch (e) {}
       this._linkNote(slink, 'conquered', 'Taken by force. Tribute 7,000 kcal/week under duress.');
       var loot = 3000 + Math.floor(R() * 3000);
       try {

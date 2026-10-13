@@ -3774,7 +3774,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // buys THIS ask; the permanent gain is a separate, progressive deed.
       const vt = this.state.village.trust || (this.state.village.trust = {});
       const cur0 = vt[vid] === undefined ? 10 : vt[vid]; // a real 0 stays 0
-      const trust = cur0 + 30;
+      // MEMDEPTH (2026-10-13): 'deal_refused' finally has a behavior read.
+      // You took the food and walked last time — this time the sweetener
+      // shrinks and they say so, out loud. Memory changes the deal.
+      let sweeten = 30;
+      try {
+        const mems = (((this.state.village || {}).memory || {})[vid]) || [];
+        if (mems.some(m => m && m.t === 'deal_refused')) {
+          sweeten = 10;
+          this.say(`${first} looks at the ${food.name} a long moment. "Last time you took the food and walked. This time I'm not sweet on the ask."`);
+        }
+      } catch (e) {}
+      const trust = cur0 + sweeten;
       const reluctant = trust < 40 && Math.random() < 0.25;
       if (reluctant) {
         this.say(`${first} takes the ${food.name}, weighs it in their hand. "Still no. But... ask me tomorrow." The food is gone. The answer isn't.`);
@@ -6383,6 +6394,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.villageEvent('victory');
         this.bumpTrust(vid, 5);
         this.remember(vid, 'hero', 'killed ' + mName);
+        // MEMDEPTH (2026-10-13): the allies who fought beside the killer
+        // get a subject-stamped witness memory — the ledger behind "I was
+        // there when Mira killed it." Villagers remember each other's deeds.
+        try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, pAllyVids); } catch (e) {}
         if (this.state.systemArrived) this.sysSay(`"OH! ${first.toUpperCase()} DID THE FIGHTING! Delegated violence! The audience is CHEERING! Style points!"`);
       } else if (rec.outcome === 'mFlee') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
@@ -17177,6 +17192,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         tell(`\u2694\uFE0F ${summary}${wloot} The village cheers.`);
         try { this.bumpTrust(vid, 4); } catch (e) {}
         try { if (this.remember) this.remember(vid, 'hero', 'killed ' + mName); } catch (e) {}
+        // MEMDEPTH (2026-10-13): same witness rule as patrol kills.
+        try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, wAllyVids); } catch (e) {}
       } else if (rec.outcome === 'mFlee') {
         // standing it down still cost whatever the record says it cost
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}

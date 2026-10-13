@@ -277,6 +277,30 @@
         // convoWhatsAlive (fresh-memories path) — the day after the moot,
         // "About the moot over the petitioners..." is a live topic.
         petition_moot: 'the moot over the petitioners',
+        // MEMDEPTH (2026-10-13): previously write-only types get their read
+        // sites. The label is the menu item; the response line lives in
+        // conversation.js MEM_RESP. Telltale-theater: every write earns a read.
+        wrongly_accused: 'what you accused me of, wrongly',
+        confession: 'the truth I told you',
+        hostile: 'when I turned on you',
+        exposed_cannibal: 'what I did to the dead',
+        offered_meat: 'the meat I offered you',
+        shared_secret: 'what you saw and kept',
+        saw_weakness: 'when I saw you break',
+        warned: 'the warning you gave me',
+        feast: 'the feast',
+        moot_vote: 'how you voted at the moot',
+        heckled: 'the heckling, on camera',
+        appeal: 'your appeal',
+        deal_refused: 'the deal you walked away from',
+        grudging_respect: 'when you stopped challenging',
+        blame: 'what my cooking did',
+        moot_case_held: 'the case you brought',
+        moot_weak_case: 'the case the fire wouldn\'t hold',
+        moot_split_fire: 'the moot that split the fire',
+        duel_terms: 'the duel',
+        duel_fought: 'the duel',
+        lost_duel: 'the duel',
       };
       return MEM_LABELS[memType] || null;
     },

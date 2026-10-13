@@ -111,6 +111,7 @@
         { id: 'you', minTrust: 30, deep: true },
         { id: 'fears', minTrust: 25, deep: true },
         { id: 'others', minTrust: 20 },
+        { id: 'neighbors', minTrust: 15 },
         { id: 'advice', minTrust: 20 },
         { id: 'oldworld', minTrust: 15 },
         { id: 'skills', minTrust: 0 },
@@ -510,6 +511,16 @@
           if (roster.indexOf(oid) !== -1) return { id: oid, why: 'grievance', hist: cf.history, ha: cf.a, hb: cf.b };
         }
       } catch (e) {}
+      // MEMDEPTH (2026-10-13): recorded grievances (betrayal plots, moot
+      // votes, false accusations) are a second grievance source — with the
+      // human phrase, so the read names the DEED, not just the tension.
+      try {
+        const grs = (((v.betrayal || {}).grievances) || []).filter(gr => gr && gr.by === vid && roster.indexOf(gr.against) !== -1);
+        if (grs.length) {
+          grs.sort((a, b) => (b.day || 0) - (a.day || 0));
+          return { id: grs[0].against, why: 'vgrievance' };
+        }
+      } catch (e) {}
       try {
         const groups = v.groups || [];
         for (const g of groups) {
@@ -531,6 +542,31 @@
       try { nm = this.firstRef(pick.id); } catch (e) {}
       const vp = this.vpOf(vid);
       const temp = this.npcTemper(vid);
+      // MEMDEPTH (2026-10-13): recorded-grievance read — "Mira still hasn't
+      // forgiven Tomas for ..." The phrase comes from the grievance ledger
+      // via convoGrievanceLine (memdepth.js); names gated at read.
+      if (pick.why === 'vgrievance') {
+        try {
+          const gl = this.convoGrievanceLine ? this.convoGrievanceLine(vid, pick.id) : null;
+          if (gl) return [gl];
+        } catch (e) {}
+      }
+      // MEMDEPTH (2026-10-13): villager-to-villager deed recall — before the
+      // generic branches, check whether vid remembers something oid DID.
+      // "Mira killed the highbeam deer" beats "Mira keeps to themselves."
+      try {
+        const dl = this.deedMemLine ? this.deedMemLine(vid, pick.id) : null;
+        if (dl && pick.why !== 'grievance' && pick.why !== 'vgrievance') {
+          const base = pick.why === 'close' ? [
+            '"' + nm + '? I\'d trust ' + nm + ' with my pack. That\'s the highest compliment I have."',
+            '"' + nm + ' keeps me sane. Everyone needs one person who\'d notice if they stopped showing up."',
+          ] : [
+            '"' + nm + ' keeps to themselves. Can\'t tell if that\'s wisdom or just tired."',
+            '"' + nm + '? Still figuring that one out. We\'re all still figuring each other out, aren\'t we?"',
+          ];
+          return [dl].concat(base);
+        }
+      } catch (e) {}
       if (pick.why === 'grievance') {
         // KNOWLEDGE GATE (dialog rebuild 2026-10-11): hist entries are {a}/{b}
         // templates — resolve via displayName, never baked true names.
@@ -572,6 +608,62 @@
       const f3 = [
         '"If you\'re going to deal with ' + nm + ' — be direct. Nothing sideways. ' + nm + ' smells sideways a mile off."',
         '"My advice? Give ' + nm + ' time. We\'re all still becoming whoever we are now."',
+      ];
+      return [f1, f2, f3];
+    },
+
+    // ---------- NEIGHBORS: what the other villages remember ----------
+    // MEMDEPTH (2026-10-13): inter-village grievances as recallable EVENTS.
+    // A villager names what the other village DID (or what Haven did to
+    // them) — never "trust is 34". Reads ov.events via ovGrievances/
+    // ovOpinionExplain (memdepth.js).
+    t2gen_neighbors(vid) {
+      try {
+        const ovs = (this.state.otherVillages || []).filter(ov => ov && this.knowsVillage && this.knowsVillage(ov));
+        if (!ovs.length) return [];
+        // prefer villages with fresh grievance events, then lowest opinion
+        const day = (this.state.scholar || {}).day || 0;
+        const scored = ovs.map(ov => {
+          const evs = (this.ovGrievances ? this.ovGrievances(ov.id) : []) || [];
+          const fresh = evs.filter(e => day - (e.day || 0) <= 28).length;
+          return { ov, evs, score: fresh * 100 - (ov.opinion || 0) };
+        });
+        scored.sort((a, b) => b.score - a.score);
+        const top = scored[0];
+        if (!top) return [];
+        const nm = this._ovName ? this._ovName(top.ov.id) : (top.ov.name || 'them');
+        const ev = top.evs[0];
+        const c = this.convoGet(vid);
+        c.t2neighbor = top.ov.id;
+        if (!ev) {
+          return ['"' + nm + '? We barely know them. That\'s the honest version — no stories yet."'];
+        }
+        const ago = Math.max(0, day - (ev.day || 0));
+        const when = ago <= 0 ? 'today' : ago === 1 ? 'yesterday' : ago + ' days back';
+        const temp = this.npcTemper(vid);
+        const lines = [
+          '"' + nm + '. ' + ev.what + ' — ' + when + '. They don\'t forget. Why would they?"',
+        ];
+        if (temp === 'bold') lines.push('"' + nm + ' still carries it: ' + ev.what.toLowerCase() + '. ' + when + '. You don\'t come back from that with words."');
+        else lines.push('"' + nm + '? ...' + ev.what + ' — ' + when + '. I try not to think about what that felt like on their side."');
+        return lines;
+      } catch (e) { return []; }
+    },
+    t2fol_neighbors(vid) {
+      const c = this.convoGet(vid);
+      const oid = c.t2neighbor;
+      let nm = 'them';
+      try { nm = this._ovName ? this._ovName(oid) : 'them'; } catch (e) {}
+      let expl = '';
+      try { expl = (this.ovOpinionExplain && oid) ? this.ovOpinionExplain(oid) : ''; } catch (e) {}
+      const f1 = [
+        '"' + nm + ' and us — it\'s complicated. Everything out here is complicated. That\'s not an excuse, it\'s just true."',
+      ];
+      const f2 = expl
+        ? ['"Where we stand with them, honestly?' + expl + '"']
+        : ['"I don\'t know where we stand with them. Ask me after the next hard week."'];
+      const f3 = [
+        '"Whatever happens with ' + nm + ' — it started with something someone did. It always does."',
       ];
       return [f1, f2, f3];
     },

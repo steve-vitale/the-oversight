@@ -1,6 +1,6 @@
 // Conversation topics test — generated identity/event topics (Steve 2026-10-06).
 // Usage: node scripts/test-conversation-topics.js
-// Proves: 9 topics registered; trust gates; personalization (two villagers differ);
+// Proves: 10 topics registered (neighbors added 2026-10-13); trust gates; personalization (two villagers differ);
 // event-driven 'lately'; 2-3 exchange depth; no repeats; change-over-run.
 const fs = require('fs');
 const path = require('path');
@@ -30,9 +30,9 @@ function noPlaceholders(s) { return !/\{[a-zA-Z_]+\}/.test(String(s)); }
 
   // ---- 1. registry ----
   const defs = Game.t2defs();
-  ok('9 topics registered', defs.length === 9, defs.length);
+  ok('10 topics registered', defs.length === 10, defs.length);
   const ids = defs.map(d => d.id).sort();
-  ok('expected topic ids', JSON.stringify(ids) === JSON.stringify(['advice','fears','lately','loved','oldworld','others','skills','systemtake','you'].sort()), ids.join(','));
+  ok('expected topic ids', JSON.stringify(ids) === JSON.stringify(['advice','fears','lately','loved','neighbors','oldworld','others','skills','systemtake','you'].sort()), ids.join(','));
 
   // ---- 2. gates ----
   const vid = vids[0];
