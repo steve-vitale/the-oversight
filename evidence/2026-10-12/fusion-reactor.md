@@ -72,3 +72,57 @@ Regressions:
 - `src/js/engine/calories.js`: dailyNeed → 0 for online reactor
 - `src/js/feastBuff.js`: feastedMult floor 1.25, grantFeastBuff ceiling, feastedLine
 - `scripts/test-fusion-reactor.js`: new proof
+
+## Addendum — FUSION SINGULARITY (2026-10-12)
+
+Steve's constraints (2026-10-12, his words): "it's supposed to be rare and only
+affect a single one of the villagers" + "it's a permanent ability that can't be
+swapped out" (the permanent option, keeping the 1.25× floor).
+
+### Design calls
+
+1. **One holder per run** — `state.fusionReactorHolder = { who, vid, day }`, set
+   on install (player via `abilityOnAcquire`, villager via `npcGrantAbility`).
+   Run-level (on `state`, not `scholar`): survives succession, wiped only by
+   `newGame` (new run = new world). While set:
+   - `maybeOfferFusionReactor` refuses silently (the day-part tick never nags).
+   - The loot hook says it out loud instead: "ONE REACTOR PER WORLD. <name>
+     HOLDS IT." — the pellet still grants (it burns 6×), but no offer follows.
+   - `rollAlienLoot` excludes `fusion_pellet` from the tier-1 alien pool — no
+     new pellets drop as installable loot. Pre-flag pellets in packs/corpses
+     remain burnable; keeping one is still a choice, just not a reactor choice.
+   - Villager field-track grant: the kit finder skips `fusion_reactor` while
+     taken (reads as kit exhaustion); `npcGrantAbility` refuses defensively.
+   - Contest gift bag and audience-trial gift exclude it while taken — offering
+     a reactor that must fizzle would be a taunt, not a gift.
+   - Pending-offer race (offer made pre-flag, accepted post-flag): the install
+     refuses honestly, the pellet is NOT consumed, no phantom reactor.
+2. **Permanent** — there is no player respec UI; the hostile removal path is
+   the wave-5 STAMP (sigW5.js), which now exempts the reactor: "The reactor
+   hums on, unbothered. It is inside you. It does not come out."
+   `npcRevokeAbility` only ever targets `phoenix_clause` (one-shot) — verified
+   by grep, no change needed.
+3. **Death** — the reactor goes with the body: a new scholar starts with
+   `abilities: []`, and `fusionReactorOnline` requires the held ability. The
+   flag stays set — no second reactor ever rises in that run. Documented as
+   the permanent cost (Steve's "can't be swapped out" extended to its logical
+   end).
+4. **Copy honesty** — description now names both: "One reactor per world, and
+   it never comes out: not unslotted, not un-taught, not surrendered. Death is
+   the only uninstall." Flavor keeps the System's voice + "no take-backsies."
+
+### Finding: the villager track could never reach it
+
+Probed 2026-10-12: `villagerTrackLevel` caps at 5 (thresholds [3,8,16,32,64])
+but `fusion_reactor` sits 10th in the field kit — `kit.find(first unheld)` can
+never select it. The original evidence's "village CAN go all-fusion" was wrong;
+no villager has ever earned it. The singularity machinery (flag, refusal,
+choke-point guard) is implemented and proof-tested at `npcGrantAbility` anyway,
+so IF the kit position is ever fixed, the one-per-world rule already holds.
+Kit reordering is a design call for Steve — not changed here.
+
+### Proof
+
+`scripts/test-fusion-singularity-20261012.js`: **32/32** (seed 20261012).
+RED-verified: 14 failures on pristine HEAD. Regression: the original
+`scripts/test-fusion-reactor.js` still **32/32**. Ontology: 86/86 validated.

@@ -808,7 +808,10 @@
       let gift = null;
       try {
         const owned = new Set((s.abilities || []).map(a => a.id));
-        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer');
+        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer'
+          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world —
+          // never gifted when it's taken.
+          && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
         if (cands.length && (s.abilities || []).length < this.abilitySlots()) {
           // SYNERGY-AWARE GIFT (util audit 2026-10-10): synergy discovery was
           // dead (1/120 runs) because grants never completed held legs — the

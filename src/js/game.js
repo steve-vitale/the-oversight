@@ -21422,13 +21422,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (id === 'fusion_reactor') {
         // FUSION REACTOR (Steve 2026-10-12): the install consumes the pellet.
         // The System does the surgery; you feel the hum start behind your ribs.
+        // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world, and it
+        // never comes out. The flag is set on install and NEVER cleared — not
+        // by respec (there is none), not by the STAMP (sigW5.js exempts it),
+        // not by death (the reactor goes with the body; the flag stays, so no
+        // second reactor ever rises).
+        const holder = this.state.fusionReactorHolder;
+        const isMine = !!(holder && holder.who === 'player' && holder.vid && holder.vid === this.villagerId);
+        if (holder && !isMine) {
+          // Race: a pending offer accepted after someone else took the world's
+          // reactor. Refuse honestly — the pellet stays in the pack (it burns).
+          s.abilities = (s.abilities || []).filter(e => ((e && e.id) || e) !== 'fusion_reactor');
+          let who = 'it is taken';
+          try { who = holder.who === 'villager' && holder.vid && this.displayName ? this.displayName(holder.vid) + ' holds it' : 'it is taken'; } catch (e) {}
+          this.say(`FUSION REACTOR: the System reaches for the pellet — and stops. One reactor per world, and ${who}. The offer dissolves. (The pellet stays in your pack. It still burns like a tiny star.)`);
+          return;
+        }
         const inv = s.inventory || [];
         const pi = inv.findIndex(i => i && ((i.itemId || i.id) === 'fusion_pellet'));
         if (pi >= 0) {
           const pellet = inv[pi];
           if ((pellet.units || 1) > 1) pellet.units -= 1; else inv.splice(pi, 1);
           s.fusionReactor = { installed: true, online: true, sinceDay: this.state.day || 0 };
-          this.say('FUSION REACTOR: the pellet goes in — properly, inside you. A warm hum starts behind your ribs and settles. You will never be hungry again. (The System is DELIGHTED. That should worry you.)');
+          this.state.fusionReactorHolder = { who: 'player', vid: this.villagerId || null, day: this.state.day || 0 };
+          this.say('FUSION REACTOR: the pellet goes in — properly, inside you. A warm hum starts behind your ribs and settles. You will never be hungry again. One reactor per world: yours. It does not come out. (The System is DELIGHTED. That should worry you.)');
         } else {
           // No pellet to install — the ability fizzles honestly, no phantom reactor.
           s.abilities = (s.abilities || []).filter(e => ((e && e.id) || e) !== 'fusion_reactor');
@@ -21459,6 +21476,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const s = this.state.scholar;
         if (!s || !this.state.systemArrived) return false;
+        // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. Taken
+        // means taken — no offer, no nag. (The loot hook says so out loud when
+        // a pellet actually arrives; the day-part tick stays silent.)
+        if (this.state.fusionReactorHolder) return false;
         if (this.hasAbility('fusion_reactor')) return false;
         if (!this.hasFusionPellet()) return false;
         if ((s.abilities || []).length >= this.abilitySlots()) return false;
@@ -37729,7 +37750,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let tier = Math.max(1, maxTier);
       let pool = [];
       while (tier >= 1 && !pool.length) {
-        pool = (this.data.items || []).filter(i => i.origin === 'alien' && (i.lootTier || 1) === tier);
+        pool = (this.data.items || []).filter(i => i.origin === 'alien' && (i.lootTier || 1) === tier
+          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. Once
+          // taken, pellets stop dropping as installable loot — existing ones
+          // still burn, but no new reactor can rise.
+          && !(i.id === 'fusion_pellet' && this.state.fusionReactorHolder));
         if (!pool.length) tier--;
       }
       if (!pool.length) return null;
@@ -37756,7 +37781,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.inventory.push(entry);
       // FUSION REACTOR (Steve 2026-10-12): the System notices the pellet the
       // way it noticed the mime show — a reactive offer, idempotent.
-      try { if (def.id === 'fusion_pellet' && this.maybeOfferFusionReactor) this.maybeOfferFusionReactor(); } catch (e) {}
+      // FUSION SINGULARITY: one reactor per world. If it's taken, the pellet
+      // still arrives (it burns), but the System says so out loud instead of
+      // offering — no phantom hope.
+      try {
+        if (def.id === 'fusion_pellet') {
+          const holder = this.state.fusionReactorHolder;
+          if (holder) {
+            let who = 'taken';
+            try { who = holder.who === 'villager' && holder.vid && this.displayName ? this.displayName(holder.vid) + ' HOLDS IT' : 'TAKEN'; } catch (e) {}
+            this.sysSay(`"ONE REACTOR PER WORLD. ${who}. THE PELLET IS JUST A PRETTY ROCK NOW. (IT STILL BURNS. EVERYTHING BURNS IF YOU LET IT.)"`);
+          } else if (this.maybeOfferFusionReactor) this.maybeOfferFusionReactor();
+        }
+      } catch (e) {}
       return { def, entry };
     },
     // ALIEN LOOT REVEAL (Steve 2026-10-06): first use = the learning moment.
@@ -38390,11 +38427,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     npcGrantAbility(vid, id) {
       try {
+        // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. If the
+        // world's reactor is taken by someone else, the grant is refused — the
+        // caller must not narrate it as granted. Returns false on refusal.
+        if (id === 'fusion_reactor' && this.state.fusionReactorHolder) return false;
         const v = this.state.village; v.npcAbilities = v.npcAbilities || {};
         v.npcAbilities[vid] = v.npcAbilities[vid] || [];
         if (!v.npcAbilities[vid].includes(id)) v.npcAbilities[vid].push(id);
+        if (id === 'fusion_reactor') this.state.fusionReactorHolder = { who: 'villager', vid: vid, day: this.state.day || 0 };
         try { this.tele('ability_granted', { id: id, who: 'villager:' + vid }); } catch (e) {}
-      } catch (e) {}
+        return true;
+      } catch (e) { return false; }
     },
     npcRevokeAbility(vid, id) {
       try {
@@ -38468,14 +38511,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         while (granted < level) {
           const held = ((this.state.village || {}).npcAbilities || {})[vid] || [];
           if (held.length >= (this.NPC_MAX_ABILITIES || 6)) break; // six slots, same as you
-          const next = kit.find(id => held.indexOf(id) < 0);
+          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. If
+          // it's taken, the capstone is simply not on the table — the kit
+          // reads as exhausted for this villager, XP keeps accruing.
+          const next = kit.find(id => held.indexOf(id) < 0 && !(id === 'fusion_reactor' && this.state.fusionReactorHolder));
           if (!next) break; // kit exhausted: natural saturation, XP keeps accruing
-          this.npcGrantAbility(vid, next);
+          if (this.npcGrantAbility(vid, next) === false) break; // refused (singularity) — never narrate a grant that didn't happen
           granted++;
           const aname = ((this.data.abilities || []).find(a => a.id === next) || {}).name || next;
           const vname = this.displayName ? this.displayName(vid) : 'Someone';
           const noun = (this.NPC_TRACK_NOUNS || {})[track] || track;
           this.say(`◈ THE SYSTEM has been watching ${vname} — ${x[track]} ${noun}. It offers ${aname}. Earned, not given. (${next}: villager System grant)`);
+          // FUSION SINGULARITY (Steve 2026-10-12): name it out loud — one
+          // reactor per world, and the village just watched it get claimed.
+          if (next === 'fusion_reactor') this.say(`"ONE REACTOR PER WORLD. ${vname.toUpperCase()} HOLDS IT NOW. IT DOES NOT COME OUT."`);
           try { this.journalNote && this.journalNote('system', 'grant', `The System granted ${vname} ${aname} (${next}) for ${x[track]} ${noun}.`); } catch (e2) {}
           try { this.tele && this.tele('villager_grant', { vid, ability: next, track, xp: x[track] }); } catch (e3) {}
         }

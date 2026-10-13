@@ -185,8 +185,13 @@
       m.cxDescend = 0; m.cxCool = 2;
       var s = game.state.scholar;
       var cancelled = [];
+      // FUSION SINGULARITY (Steve 2026-10-12): the reactor is inside you. The
+      // STAMP un-teaches System abilities — it cannot un-install surgery.
+      var reactorHeld = false;
       try {
         var abs = (s.abilities || []).slice();
+        reactorHeld = abs.some(function (e) { return abId(e) === 'fusion_reactor'; });
+        abs = abs.filter(function (e) { return abId(e) !== 'fusion_reactor'; });
         abs.sort(function (a, b) { return abLevel(b) - abLevel(a); });
         var take = Math.min(2, abs.length);
         for (var i = 0; i < take; i++) {
@@ -198,7 +203,7 @@
         }
       } catch (err) {}
       f.cxCancelled = (f.cxCancelled || []).concat(cancelled);
-      var cNames = cancelled.map(abName).join(', ') || 'nothing — the slots were already empty';
+      var cNames = cancelled.map(abName).join(', ') || (reactorHeld ? 'nothing it could take' : 'nothing — the slots were already empty');
       var buffLine = 'It looks for buffs to delete. You are running clean — it finds nothing. (Small mercies.)';
       try {
         if (typeof game.feastedActive === 'function' && game.feastedActive()) {
@@ -209,6 +214,7 @@
       f.cxSilence = 2;
       try { game.audioEvent('cxFall', {}); } catch (err) {}
       game.say('❌ THE STAMP FALLS. UNDER REVIEW — ' + cNames + ' ' + (cancelled.length === 1 ? 'is' : 'are') + ' un-taught, filed away until the fight ends. (Your human skills were never in the script — it cannot touch those.)');
+      if (reactorHeld) game.say('The reactor hums on, unbothered. It is inside you. It does not come out.');
       game.say(buffLine);
       game.say('System favor goes silent — the audience cannot hear you through the ringing. (Favor spends blocked, 2 rounds. Improvise.)');
       try { game.tbRefreshTelegraphUI(); } catch (err) {}

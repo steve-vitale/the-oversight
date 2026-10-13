@@ -4895,7 +4895,10 @@
     // The gift bag: practical + wacky + mid tiers. The dark tiers (vile,
     // body_horror) and the pact tier (overpowered) are NOT prizes — they
     // arrive through their own gates (the Static, not the show).
-    const bag = all.filter(a => !owned.has(a.id) && ['utility', 'wacky', 'underpowered', 'uncommon', 'rare', 'combat', 'social'].indexOf(a.tier) >= 0);
+    const bag = all.filter(a => !owned.has(a.id) && ['utility', 'wacky', 'underpowered', 'uncommon', 'rare', 'combat', 'social'].indexOf(a.tier) >= 0
+      // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world — never
+      // a prize when it's taken (offering it would be a taunt, not a gift).
+      && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
     if (!bag.length) return false;
     const pick = (arr) => arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
     const choices = [];
