@@ -145,3 +145,23 @@ Tuning converges; it doesn't just continue.
   document why, move on. Sunk cost is not a strategy.
 - Every run reports convergence state in one line:
   `converging | converged | parked | killed-at-pilot`.
+
+## 13. Playstyle balance (Steve 2026-10-13)
+
+"Playstyles relatively balanced" is a standing target alongside winnability.
+No degenerate single-build endgame: reaching national and winning must be
+possible through multiple roads (LEAD/BELONG), multiple table paths (the 7 ×
+light/dark), and multiple ability builds — not one solved route.
+
+- The sweep (`scripts/sweep-winstats-deep.js`) records tablePath/tableBranch,
+  abilities, synergies, road, and ascension per run. The analyzer
+  (`scripts/analyze-winstats-deep.js`) prints a BALANCE VERDICT.
+- Verdicts: `insufficient-data` (< 10 wins — distribution not judgeable yet) ·
+  `DEGENERATE` (one path ≥ 60% of wins, or one ability in ≥ 70% of wins) ·
+  `skewed` (one path ≥ 40%, or one ability in ≥ 55%) · `even` (otherwise).
+- Honest sequencing: with ~1 win per 145 runs, balance is unmeasurable today.
+  The verdict activates when wins exist. Levers keep working winnability
+  first; when the win-path axis unblocks, the first balance verdict gates
+  whether tuning continues or the design needs a real shake-up.
+- Steve's ascension law holds in sims: the ending follows the village's
+  story, and the analyzer's WINS DETAIL stays the audit trail.

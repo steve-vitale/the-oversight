@@ -67,3 +67,25 @@ console.log(`win rate: ${wins.length}/${rows.length} (${(100 * wins.length / row
 const paths = {};
 for (const r of wins) paths[(r.tablePath || '?') + '/' + (r.tableBranch || '?')] = (paths[(r.tablePath || '?') + '/' + (r.tableBranch || '?')] || 0) + 1;
 console.log('winning paths:', JSON.stringify(paths));
+
+// == PLAYSTYLE BALANCE VERDICT (Steve 2026-10-13: "playstyles relatively
+// balanced"). Judges whether wins concentrate in one path or one build.
+// See docs/MEASUREMENT.md §13 for the criterion.
+console.log('\n== BALANCE VERDICT ==');
+if (wins.length < 10) {
+  console.log('insufficient-data: ' + wins.length + ' wins (< 10) — distribution not judgeable yet');
+} else {
+  const pathShares = Object.values(paths).map(n => n / wins.length);
+  const topPath = Math.max(...pathShares);
+  // Build concentration: how often the most common ability appears across wins.
+  const abCount = {};
+  for (const r of wins) for (const a of (r.abilities || [])) abCount[a] = (abCount[a] || 0) + 1;
+  const topAbilityShare = wins.length ? Math.max(...Object.values(abCount), 0) / wins.length : 0;
+  const topAbility = Object.keys(abCount).find(a => abCount[a] / wins.length === topAbilityShare);
+  console.log(`top path share: ${(100 * topPath).toFixed(0)}% | top ability "${topAbility}": ${(100 * topAbilityShare).toFixed(0)}% of wins`);
+  let verdict;
+  if (topPath >= 0.60 || topAbilityShare >= 0.70) verdict = 'DEGENERATE';
+  else if (topPath >= 0.40 || topAbilityShare >= 0.55) verdict = 'skewed';
+  else verdict = 'even';
+  console.log('verdict: ' + verdict);
+}
