@@ -2238,7 +2238,13 @@
       if (c.answered.q_trust && !c.recalled.q_trust) {
         const qd = (cg.questions || []).find(q => q.id === 'q_trust');
         c.recalled.q_trust = true;
-        if (qd && qd.recall) return { line: qd.recall, thread: 'recall' };
+        // PLAYTEST social r9 2026-10-13: recall was answer-blind — an
+        // a_earn ("I hope to earn it") answer later heard "You told me to
+        // watch what you do", words the player never said (fabricated
+        // history). Answer-specific recalls; qd.recall kept as fallback.
+        const ans = c.answered.q_trust;
+        const rec = (qd && qd.recalls && qd.recalls[ans]) || (qd && qd.recall);
+        if (rec) return { line: rec, thread: 'recall' };
       }
       // 3. THE WANT — the spine of the conversation (convo rebuild 2026-10-11,
       // Steve). Every conversation opens with something the NPC wants: a

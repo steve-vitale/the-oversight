@@ -14642,12 +14642,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // LONGSIM trust r4 2026-10-12: when the story is ABOUT the
               // listener ("Luz telling Lena about Lena"), naming them twice
               // reads robotic — pronoun-aware rendering (reflexive).
+              // PLAYTEST social r9 2026-10-13: same class for the TELLER
+              // ("Nabila telling Gerald about Nabila") — reflexive too.
               let aboutWho;
               if (fragSubject === this.villagerId) aboutWho = 'you';
-              else if (fragSubject === listener) {
-                const lv = (this.data.villagers || []).find(x => x.id === listener)
-                  || (this.data.background_survivors || []).find(x => x.id === listener) || {};
-                const pro = lv.pro || (['she', 'he', 'they'][this._hashStr(listener) % 3]);
+              else if (fragSubject === listener || fragSubject === teller) {
+                const rv = (this.data.villagers || []).find(x => x.id === fragSubject)
+                  || (this.data.background_survivors || []).find(x => x.id === fragSubject) || {};
+                const pro = rv.pro || (['she', 'he', 'they'][this._hashStr(fragSubject) % 3]);
                 aboutWho = pro === 'she' ? 'herself' : pro === 'he' ? 'himself' : 'themself';
               } else aboutWho = this.displayName(fragSubject);
               const fragTails = g.distortion >= 6

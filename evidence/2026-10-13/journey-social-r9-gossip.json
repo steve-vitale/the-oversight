@@ -1,0 +1,111 @@
+{
+ "run": "journey-social-r9-gossip-20261013",
+ "seeds": [
+  101,
+  202,
+  303,
+  404
+ ],
+ "daycap": 100,
+ "summary": [
+  {
+   "seed": 101,
+   "days": 90,
+   "rumorCount": 360,
+   "maxDistortion": 10,
+   "d4": 302,
+   "d6": 280,
+   "frags": 464,
+   "thefts": 13,
+   "alive": 2,
+   "endReason": "village-lost"
+  },
+  {
+   "seed": 202,
+   "days": 54,
+   "rumorCount": 210,
+   "maxDistortion": 10,
+   "d4": 136,
+   "d6": 110,
+   "frags": 204,
+   "thefts": 7,
+   "alive": 2,
+   "endReason": "village-lost"
+  },
+  {
+   "seed": 303,
+   "days": 94,
+   "rumorCount": 353,
+   "maxDistortion": 10,
+   "d4": 251,
+   "d6": 204,
+   "frags": 349,
+   "thefts": 14,
+   "alive": 5,
+   "endReason": "survived"
+  },
+  {
+   "seed": 404,
+   "days": 94,
+   "rumorCount": 362,
+   "maxDistortion": 10,
+   "d4": 287,
+   "d6": 248,
+   "frags": 383,
+   "thefts": 14,
+   "alive": 3,
+   "endReason": "survived"
+  }
+ ],
+ "repAttribution": {
+  "method": "tagged applyRep (weight 0.4 + noTrust = gossip-hop path), sig-matched per spawned rumor, seed 303, 60d",
+  "results": [
+   {
+    "rumor": "untrustworthy about Vito d17",
+    "writes": 9,
+    "onSubject": 9,
+    "onPlayerSelf": 0
+   },
+   {
+    "rumor": "untrustworthy about Lena d31",
+    "writes": 8,
+    "onSubject": 8,
+    "onPlayerSelf": 0
+   },
+   {
+    "rumor": "untrustworthy about Sofia d45",
+    "writes": 8,
+    "onSubject": 8,
+    "onPlayerSelf": 0
+   },
+   {
+    "rumor": "stingy about Marcus d38",
+    "writes": 8,
+    "onSubject": 8,
+    "onPlayerSelf": 0
+   },
+   {
+    "rumor": "stingy about Muktar d24",
+    "writes": 31,
+    "onSubject": 9,
+    "onPlayerSelf": 0,
+    "note": "remainder from concurrent natural NPC stingy gossip, also subject-routed"
+   },
+   {
+    "rumor": "stingy about Isaac d10",
+    "writes": 0,
+    "note": "rumor never traveled (heard=1, distortion=0) -> no rep writes; sensible"
+   },
+   {
+    "theftBullyWrites": 34,
+    "theftBullyOnPlayerSelfSlot": 0
+   }
+  ],
+  "verdict": "subject-targeted rumors land on the subject; player-action gossip lands on hearers; zero writes to player self-slot. 2026-10-10 / DETECTIVE-r12 fixes hold."
+ },
+ "selfTalkGap": {
+  "finding": "fireside line renders teller==subject in third person (e.g. \"Nabila telling Gerald about Nabila\"), 11-22 per 100d run (~4% of frag lines)",
+  "location": "src/js/game.js spreadGossip() fragSubject/fragTails block (~line 14661): reflexive rendering covers fragSubject===listener and ===player, but not ===teller",
+  "class": "same class as 2026-10-12 self-gossip first-person fix (which covered the askAbout/conversation path, not this one)"
+ }
+}

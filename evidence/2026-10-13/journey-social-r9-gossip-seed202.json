@@ -1,0 +1,4308 @@
+{
+ "seed": 202,
+ "manifest": {
+  "seed": 202,
+  "commit": "b1936956d6afe8177c94041caeca739cb34b6b6f",
+  "mode": "journey-social-r9-gossip",
+  "date": "2026-10-13",
+  "node": "v24.20.0"
+ },
+ "policy": "journey-social-r9-gossip",
+ "ms": "4s",
+ "days": 53,
+ "endReason": "village-lost",
+ "gameDay": 54,
+ "playerRumorsSpawned": 6,
+ "spawnedDetails": [
+  {
+   "day": 10,
+   "action": "stingy",
+   "target": "gen_xftq6fp",
+   "targetName": "Samuel",
+   "firstHearer": "gen_33gruip",
+   "partKey": "10:3:rumor:gen_xftq6fp"
+  },
+  {
+   "day": 17,
+   "action": "untrustworthy",
+   "target": "gen_zldarh7",
+   "targetName": "Harold",
+   "firstHearer": "gen_gadi9zp",
+   "partKey": "17:3:rumor:gen_zldarh7"
+  },
+  {
+   "day": 24,
+   "action": "stingy",
+   "target": "gen_gadi9zp",
+   "targetName": "Cuc",
+   "firstHearer": "gen_8yl22cx",
+   "partKey": "24:3:rumor:gen_gadi9zp"
+  },
+  {
+   "day": 31,
+   "action": "untrustworthy",
+   "target": "marcus_webb",
+   "targetName": "Marcus",
+   "firstHearer": "sofia_chen",
+   "partKey": "31:3:rumor:marcus_webb"
+  },
+  {
+   "day": 38,
+   "action": "stingy",
+   "target": "lena_ruiz",
+   "targetName": "Lena",
+   "firstHearer": "marcus_webb",
+   "partKey": "38:3:rumor:lena_ruiz"
+  },
+  {
+   "day": 45,
+   "action": "untrustworthy",
+   "target": "marcus_webb",
+   "targetName": "Marcus",
+   "firstHearer": "sofia_chen",
+   "partKey": "45:3:rumor:marcus_webb"
+  }
+ ],
+ "thefts": 7,
+ "rumorNoTarget": 0,
+ "rumorCount": 210,
+ "playerRumorCount": 6,
+ "seedRumorCount": 204,
+ "maxDistortion": 10,
+ "rumorsHittingD4": 136,
+ "rumorsHittingD6": 110,
+ "bandHist": {
+  "lt4": 82,
+  "b45": 52,
+  "gte6": 70,
+  "unknown": 0
+ },
+ "fragLines": [
+  {
+   "d": 2,
+   "teller": "A woman, maybe 50s",
+   "listener": "A man, maybe 40s, with tattooed arms",
+   "about": "A person, maybe 30s",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 50s telling A man, maybe 40s, with tattooed arms about A person, maybe 30s. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 2,
+   "teller": "A man, maybe 40s, with a limp",
+   "listener": "A woman, maybe 50s",
+   "about": "Samuel",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — A man, maybe 40s, with a limp telling A woman, maybe 50s about Samuel. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 3,
+   "teller": "Samuel",
+   "listener": "A woman, maybe 50s",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Samuel telling A woman, maybe 50s about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 3,
+   "teller": "A woman, maybe 50s",
+   "listener": "A man, maybe 40s, with tattooed arms",
+   "about": "A person, maybe 30s",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 50s telling A man, maybe 40s, with tattooed arms about A person, maybe 30s. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 3,
+   "teller": "Lena",
+   "listener": "A man, maybe 40s, with tattooed arms",
+   "about": "Sofia",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling A man, maybe 40s, with tattooed arms about Sofia. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 3,
+   "teller": "A woman, maybe 50s",
+   "listener": "A man, maybe 40s, with tattooed arms",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 50s telling A man, maybe 40s, with tattooed arms about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 3,
+   "teller": "A woman, maybe 20s",
+   "listener": "A man, maybe 40s, with a limp",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 20s telling A man, maybe 40s, with a limp about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 3,
+   "teller": "Lena",
+   "listener": "Harold",
+   "about": "Sofia",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling Harold about Sofia. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 3,
+   "teller": "Marcus",
+   "listener": "A person, maybe 30s",
+   "about": "Sofia",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Marcus telling A person, maybe 30s about Sofia. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 3,
+   "teller": "A woman, maybe 50s",
+   "listener": "A woman, maybe 20s",
+   "about": "Sofia",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 50s telling A woman, maybe 20s about Sofia. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 4,
+   "teller": "A person, maybe 30s",
+   "listener": "James",
+   "about": "Sofia",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 30s telling James about Sofia. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 4,
+   "teller": "A woman, maybe 20s",
+   "listener": "Sofia",
+   "about": "Marcus",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 20s telling Sofia about Marcus. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 4,
+   "teller": "A person, maybe 50s",
+   "listener": "Lena",
+   "about": "Harold",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 50s telling Lena about Harold. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 4,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "Samuel",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about Samuel. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 4,
+   "teller": "James",
+   "listener": "A person, maybe 30s",
+   "about": "Marcus",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling A person, maybe 30s about Marcus. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 5,
+   "teller": "Samuel",
+   "listener": "Lena",
+   "about": "Marcus",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling Lena about Marcus. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 5,
+   "teller": "Samuel",
+   "listener": "Marcus",
+   "about": "A woman, maybe 20s",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling Marcus about A woman, maybe 20s. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 5,
+   "teller": "A woman, maybe 20s",
+   "listener": "Aisha",
+   "about": "herself",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — A woman, maybe 20s telling Aisha about herself. The retelling is already better than the event."
+  },
+  {
+   "d": 5,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 5,
+   "teller": "A person, maybe 30s",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 30s telling Sofia about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 5,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "Harold",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about Harold. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 6,
+   "teller": "A person, maybe 50s",
+   "listener": "Sofia",
+   "about": "A woman, maybe 20s",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 50s telling Sofia about A woman, maybe 20s. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 6,
+   "teller": "Samuel",
+   "listener": "A man, maybe 40s, with a limp",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling A man, maybe 40s, with a limp about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 6,
+   "teller": "A woman, maybe 20s",
+   "listener": "James",
+   "about": "A woman, maybe 20s",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A woman, maybe 20s telling James about A woman, maybe 20s. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 6,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "Aisha",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about Aisha. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 6,
+   "teller": "James",
+   "listener": "A person, maybe 50s",
+   "about": "Harold",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — James telling A person, maybe 50s about Harold. It's picking up decorations as it travels."
+  },
+  {
+   "d": 6,
+   "teller": "Aisha",
+   "listener": "A woman, maybe 20s",
+   "about": "herself",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling A woman, maybe 20s about herself. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 6,
+   "teller": "Lena",
+   "listener": "James",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Lena telling James about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 6,
+   "teller": "A person, maybe 30s",
+   "listener": "A woman, maybe 20s",
+   "about": "Harold",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 30s telling A woman, maybe 20s about Harold. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 6,
+   "teller": "Aisha",
+   "listener": "A woman, maybe 20s",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling A woman, maybe 20s about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 6,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about you. The retelling is already better than the event."
+  },
+  {
+   "d": 6,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "Sofia",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about Sofia. The story's getting bigger than what happened."
+  },
+  {
+   "d": 6,
+   "teller": "Cuc",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cuc telling Aisha about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 7,
+   "teller": "A person, maybe 50s",
+   "listener": "Cuc",
+   "about": "Sofia",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — A person, maybe 50s telling Cuc about Sofia. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 7,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "Marcus",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling James about Marcus. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 7,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "Marcus",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about Marcus. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 7,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 7,
+   "teller": "Aisha",
+   "listener": "Emma",
+   "about": "herself",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Emma about herself. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 7,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 7,
+   "teller": "Samuel",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling Marcus about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 7,
+   "teller": "Harold",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Harold telling Sofia about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 7,
+   "teller": "Lena",
+   "listener": "A man, maybe 40s, with a limp",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Lena telling A man, maybe 40s, with a limp about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 7,
+   "teller": "James",
+   "listener": "Samuel",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Samuel about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 7,
+   "teller": "James",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — James telling Aisha about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 7,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 8,
+   "teller": "Cuc",
+   "listener": "Cesar",
+   "about": "Harold",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling Cesar about Harold. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 9,
+   "teller": "Sofia",
+   "listener": "Aisha",
+   "about": "Marcus",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Aisha about Marcus. The retelling is already better than the event."
+  },
+  {
+   "d": 9,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "Harold",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling James about Harold. It's picking up decorations as it travels."
+  },
+  {
+   "d": 9,
+   "teller": "James",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — James telling Lena about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 9,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "Marcus",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling James about Marcus. It's picking up decorations as it travels."
+  },
+  {
+   "d": 10,
+   "teller": "Samuel",
+   "listener": "David",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling David about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 11,
+   "teller": "Marcus",
+   "listener": "Aisha",
+   "about": "herself",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Marcus telling Aisha about herself. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 11,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "Samuel",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about Samuel. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 11,
+   "teller": "Samuel",
+   "listener": "Marcus",
+   "about": "Samuel",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling Marcus about Samuel. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 11,
+   "teller": "Aisha",
+   "listener": "Emma",
+   "about": "Samuel",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Emma about Samuel. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 11,
+   "teller": "Aisha",
+   "listener": "Samuel",
+   "about": "David",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Samuel about David. The story's getting bigger than what happened."
+  },
+  {
+   "d": 11,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 11,
+   "teller": "Cesar",
+   "listener": "Cuc",
+   "about": "Samuel",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cesar telling Cuc about Samuel. It's picking up decorations as it travels."
+  },
+  {
+   "d": 11,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "David",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Lena about David. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 11,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 11,
+   "teller": "Cuc",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling Harold about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 11,
+   "teller": "Aisha",
+   "listener": "Lena",
+   "about": "David",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Lena about David. It's picking up decorations as it travels."
+  },
+  {
+   "d": 11,
+   "teller": "Emma",
+   "listener": "David",
+   "about": "himself",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Emma telling David about himself. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 11,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 12,
+   "teller": "Cuc",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Sofia about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 12,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 12,
+   "teller": "Emma",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Emma telling Sofia about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 12,
+   "teller": "Aisha",
+   "listener": "Samuel",
+   "about": "Aisha",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Samuel about Aisha. The retelling is already better than the event."
+  },
+  {
+   "d": 12,
+   "teller": "Samuel",
+   "listener": "Marcus",
+   "about": "Aisha",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Samuel telling Marcus about Aisha. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 12,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 12,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "Lena",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about Lena. It's picking up decorations as it travels."
+  },
+  {
+   "d": 12,
+   "teller": "James",
+   "listener": "Cuc",
+   "about": "Lena",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Cuc about Lena. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 13,
+   "teller": "Cesar",
+   "listener": "David",
+   "about": "Lena",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cesar telling David about Lena. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 13,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 13,
+   "teller": "James",
+   "listener": "Lena",
+   "about": "Cesar",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — James telling Lena about Cesar. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 13,
+   "teller": "Aisha",
+   "listener": "Samuel",
+   "about": "David",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Samuel about David. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 14,
+   "teller": "Harold",
+   "listener": "Sofia",
+   "about": "James",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Harold telling Sofia about James. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 14,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "Harold",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about Harold. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 14,
+   "teller": "James",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Aisha about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 14,
+   "teller": "Sofia",
+   "listener": "Harold",
+   "about": "Samuel",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Harold about Samuel. It's picking up decorations as it travels."
+  },
+  {
+   "d": 14,
+   "teller": "David",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — David telling Aisha about you. The retelling is already better than the event."
+  },
+  {
+   "d": 14,
+   "teller": "James",
+   "listener": "Harold",
+   "about": "Samuel",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Harold about Samuel. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 14,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 14,
+   "teller": "James",
+   "listener": "Cesar",
+   "about": "Cuc",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — James telling Cesar about Cuc. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 14,
+   "teller": "Marcus",
+   "listener": "David",
+   "about": "Aisha",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Marcus telling David about Aisha. The retelling is already better than the event."
+  },
+  {
+   "d": 14,
+   "teller": "James",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Cuc about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 15,
+   "teller": "Cuc",
+   "listener": "David",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling David about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 15,
+   "teller": "Cesar",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cesar telling Sofia about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 15,
+   "teller": "Cuc",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling Sofia about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 15,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 15,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "Cuc",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling James about Cuc. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 15,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 15,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "Lena",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about Lena. The retelling is already better than the event."
+  },
+  {
+   "d": 15,
+   "teller": "James",
+   "listener": "Harold",
+   "about": "David",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — James telling Harold about David. It's picking up decorations as it travels."
+  },
+  {
+   "d": 15,
+   "teller": "Cesar",
+   "listener": "Lena",
+   "about": "herself",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cesar telling Lena about herself. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 15,
+   "teller": "David",
+   "listener": "Lena",
+   "about": "Marcus",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — David telling Lena about Marcus. It's picking up decorations as it travels."
+  },
+  {
+   "d": 15,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 15,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "Lena",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about Lena. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 16,
+   "teller": "Harold",
+   "listener": "David",
+   "about": "Cuc",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Harold telling David about Cuc. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 16,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "themself",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about themself. The retelling is already better than the event."
+  },
+  {
+   "d": 16,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 16,
+   "teller": "Marcus",
+   "listener": "Cuc",
+   "about": "Marcus",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Marcus telling Cuc about Marcus. It's picking up decorations as it travels."
+  },
+  {
+   "d": 16,
+   "teller": "David",
+   "listener": "Sofia",
+   "about": "Marcus",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — David telling Sofia about Marcus. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 17,
+   "teller": "Cesar",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cesar telling Marcus about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 17,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "James",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about James. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 17,
+   "teller": "Sofia",
+   "listener": "David",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling David about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 18,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 18,
+   "teller": "Cesar",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cesar telling Cuc about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 18,
+   "teller": "Marcus",
+   "listener": "James",
+   "about": "David",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Marcus telling James about David. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 19,
+   "teller": "James",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — James telling Marcus about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 19,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 19,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "Harold",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about Harold. The retelling is already better than the event."
+  },
+  {
+   "d": 19,
+   "teller": "Cuc",
+   "listener": "Sofia",
+   "about": "Aisha",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Sofia about Aisha. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 19,
+   "teller": "Cesar",
+   "listener": "Harold",
+   "about": "Cesar",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cesar telling Harold about Cesar. The story's getting bigger than what happened."
+  },
+  {
+   "d": 19,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 19,
+   "teller": "Lena",
+   "listener": "James",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling James about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 19,
+   "teller": "Sofia",
+   "listener": "Aisha",
+   "about": "Harold",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Aisha about Harold. The retelling is already better than the event."
+  },
+  {
+   "d": 19,
+   "teller": "James",
+   "listener": "Cesar",
+   "about": "Aisha",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — James telling Cesar about Aisha. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 19,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "Aisha",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Lena about Aisha. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 19,
+   "teller": "Marcus",
+   "listener": "Harold",
+   "about": "Lena",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Marcus telling Harold about Lena. The story's getting bigger than what happened."
+  },
+  {
+   "d": 19,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 20,
+   "teller": "Aisha",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Lena about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 20,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "Aisha",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about Aisha. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 20,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 21,
+   "teller": "Harold",
+   "listener": "Cesar",
+   "about": "themself",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Cesar about themself. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 21,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "Aisha",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about Aisha. The retelling is already better than the event."
+  },
+  {
+   "d": 21,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 21,
+   "teller": "Cuc",
+   "listener": "Marcus",
+   "about": "himself",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling Marcus about himself. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 21,
+   "teller": "Harold",
+   "listener": "Marcus",
+   "about": "Harold",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Marcus about Harold. It's picking up decorations as it travels."
+  },
+  {
+   "d": 21,
+   "teller": "Marcus",
+   "listener": "Lena",
+   "about": "Cuc",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Marcus telling Lena about Cuc. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 21,
+   "teller": "Cesar",
+   "listener": "James",
+   "about": "Harold",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cesar telling James about Harold. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 21,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "Cuc",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about Cuc. The retelling is already better than the event."
+  },
+  {
+   "d": 21,
+   "teller": "James",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 22,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 22,
+   "teller": "Harold",
+   "listener": "Aisha",
+   "about": "Lena",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Harold telling Aisha about Lena. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 22,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 22,
+   "teller": "Sofia",
+   "listener": "Harold",
+   "about": "themself",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Harold about themself. It's picking up decorations as it travels."
+  },
+  {
+   "d": 22,
+   "teller": "Aisha",
+   "listener": "Lena",
+   "about": "Marcus",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Lena about Marcus. The retelling is already better than the event."
+  },
+  {
+   "d": 23,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "Marcus",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about Marcus. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 23,
+   "teller": "Cuc",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Aisha about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 23,
+   "teller": "Aisha",
+   "listener": "Harold",
+   "about": "Lena",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Harold about Lena. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 23,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 24,
+   "teller": "Cesar",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cesar telling Cuc about you. The retelling is already better than the event."
+  },
+  {
+   "d": 24,
+   "teller": "Aisha",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Aisha telling Lena about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 24,
+   "teller": "Cesar",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cesar telling Marcus about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 25,
+   "teller": "Aisha",
+   "listener": "Marcus",
+   "about": "Sofia",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Marcus about Sofia. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 25,
+   "teller": "James",
+   "listener": "Sofia",
+   "about": "Cuc",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Sofia about Cuc. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 25,
+   "teller": "Aisha",
+   "listener": "Cesar",
+   "about": "Cuc",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Cesar about Cuc. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 25,
+   "teller": "Cuc",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling Sofia about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 25,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 26,
+   "teller": "Cuc",
+   "listener": "Aisha",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Aisha about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 26,
+   "teller": "Sofia",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Harold about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 26,
+   "teller": "Aisha",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling Lena about you. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 26,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "Aisha",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about Aisha. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 26,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "Harold",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Lena about Harold. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 26,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "Aisha",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about Aisha. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 26,
+   "teller": "Lena",
+   "listener": "Harold",
+   "about": "Sofia",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling Harold about Sofia. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 27,
+   "teller": "Cuc",
+   "listener": "Aisha",
+   "about": "herself",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Aisha about herself. The retelling is already better than the event."
+  },
+  {
+   "d": 27,
+   "teller": "Aisha",
+   "listener": "Cuc",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Aisha telling Cuc about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 27,
+   "teller": "Harold",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Marcus about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 27,
+   "teller": "Cesar",
+   "listener": "Cuc",
+   "about": "Sofia",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cesar telling Cuc about Sofia. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 28,
+   "teller": "Aisha",
+   "listener": "James",
+   "about": "Sofia",
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Aisha telling James about Sofia. The truth left this story two fires ago. What's left is better theater."
+  },
+  {
+   "d": 28,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "Cuc",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about Cuc. The story's getting bigger than what happened."
+  },
+  {
+   "d": 28,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Lena about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 28,
+   "teller": "Harold",
+   "listener": "James",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Harold telling James about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 28,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "Sofia",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Cuc telling James about Sofia. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 29,
+   "teller": "Sofia",
+   "listener": "Aisha",
+   "about": "Cuc",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Aisha about Cuc. The retelling is already better than the event."
+  },
+  {
+   "d": 29,
+   "teller": "James",
+   "listener": "Harold",
+   "about": "Cuc",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — James telling Harold about Cuc. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 29,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Harold telling Lena about you. The retelling is already better than the event."
+  },
+  {
+   "d": 29,
+   "teller": "Cuc",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cuc telling Harold about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 30,
+   "teller": "Cuc",
+   "listener": "Harold",
+   "about": "Sofia",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling Harold about Sofia. The story's getting bigger than what happened."
+  },
+  {
+   "d": 30,
+   "teller": "Lena",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling Harold about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 31,
+   "teller": "Harold",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling Sofia about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 31,
+   "teller": "Lena",
+   "listener": "James",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling James about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 31,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Harold telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 31,
+   "teller": "Lena",
+   "listener": "James",
+   "about": "Cuc",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling James about Cuc. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 31,
+   "teller": "Harold",
+   "listener": "Lena",
+   "about": "Cuc",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Harold telling Lena about Cuc. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 31,
+   "teller": "Cuc",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Cuc telling Lena about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 31,
+   "teller": "Harold",
+   "listener": "James",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Harold telling James about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 32,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about you. The retelling is already better than the event."
+  },
+  {
+   "d": 32,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "himself",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling James about himself. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 32,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 32,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 33,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "Harold",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about Harold. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 33,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 33,
+   "teller": "Cuc",
+   "listener": "James",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Cuc telling James about you. The retelling is already better than the event."
+  },
+  {
+   "d": 34,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 34,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 37,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 37,
+   "teller": "Lena",
+   "listener": "James",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling James about you. The retelling is already better than the event."
+  },
+  {
+   "d": 37,
+   "teller": "James",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Marcus about you. The retelling is already better than the event."
+  },
+  {
+   "d": 38,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "Lena",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about Lena. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 38,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 39,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 40,
+   "teller": "James",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — James telling Marcus about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 43,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about you. The retelling is already better than the event."
+  },
+  {
+   "d": 43,
+   "teller": "Lena",
+   "listener": "Marcus",
+   "about": "himself",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Marcus about himself. The retelling is already better than the event."
+  },
+  {
+   "d": 43,
+   "teller": "Marcus",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Marcus telling Sofia about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 44,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "herself",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about herself. The story's getting bigger than what happened."
+  },
+  {
+   "d": 45,
+   "teller": "Marcus",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Marcus telling Sofia about you. The retelling is already better than the event."
+  },
+  {
+   "d": 46,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "Sofia",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about Sofia. The story's getting bigger than what happened."
+  },
+  {
+   "d": 46,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about you. Someone's added a flourish that wasn't there this morning."
+  },
+  {
+   "d": 46,
+   "teller": "Lena",
+   "listener": "Sofia",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Lena telling Sofia about you. The retelling is already better than the event."
+  },
+  {
+   "d": 47,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "himself",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about himself. The story's getting bigger than what happened."
+  }
+ ],
+ "fragCount": 204,
+ "distinctTails": 9,
+ "repeatedTails": [
+  {
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "n": 23
+  },
+  {
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "n": 19
+  },
+  {
+   "tail": "The story's getting bigger than what happened.",
+   "n": 29
+  },
+  {
+   "tail": "The truth left this story two fires ago. What's left is better theater.",
+   "n": 24
+  },
+  {
+   "tail": "Someone's added a flourish that wasn't there this morning.",
+   "n": 28
+  },
+  {
+   "tail": "It's barely the same story now. That's what fires do.",
+   "n": 23
+  },
+  {
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "n": 12
+  },
+  {
+   "tail": "The retelling is already better than the event.",
+   "n": 25
+  },
+  {
+   "tail": "It's picking up decorations as it travels.",
+   "n": 21
+  }
+ ],
+ "immediateTailRepeats": 7,
+ "aboutYouLines": 95,
+ "playerTellerAboutYouLines": [
+  {
+   "d": 6,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about you. The retelling is already better than the event."
+  },
+  {
+   "d": 7,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 11,
+   "teller": "Sofia",
+   "listener": "Samuel",
+   "about": "you",
+   "tail": "Half of it's true anymore. You're not sure which half.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Samuel about you. Half of it's true anymore. You're not sure which half."
+  },
+  {
+   "d": 12,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 17,
+   "teller": "Sofia",
+   "listener": "David",
+   "about": "you",
+   "tail": "Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling David about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+  },
+  {
+   "d": 22,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's barely the same story now. That's what fires do.",
+   "band": ">=6",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. It's barely the same story now. That's what fires do."
+  },
+  {
+   "d": 26,
+   "teller": "Sofia",
+   "listener": "Harold",
+   "about": "you",
+   "tail": "The details have shifted. Nobody seems to mind.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Harold about you. The details have shifted. Nobody seems to mind."
+  },
+  {
+   "d": 32,
+   "teller": "Sofia",
+   "listener": "James",
+   "about": "you",
+   "tail": "The retelling is already better than the event.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling James about you. The retelling is already better than the event."
+  },
+  {
+   "d": 32,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "It's picking up decorations as it travels.",
+   "band": "4-5",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. It's picking up decorations as it travels."
+  },
+  {
+   "d": 33,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 34,
+   "teller": "Sofia",
+   "listener": "Lena",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Lena about you. The story's getting bigger than what happened."
+  },
+  {
+   "d": 38,
+   "teller": "Sofia",
+   "listener": "Marcus",
+   "about": "you",
+   "tail": "The story's getting bigger than what happened.",
+   "band": "<4",
+   "raw": "You catch fragments by the fire — Sofia telling Marcus about you. The story's getting bigger than what happened."
+  }
+ ],
+ "listenerEqualsAboutRaw": [],
+ "rumorTable": [
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Cuc",
+   "day0": 1,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Samuel",
+   "day0": 2,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 2,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 2,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Marcus",
+   "day0": 3,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "Harold",
+   "day0": 3,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Samuel",
+   "day0": 4,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Aisha",
+   "day0": 4,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 4,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 5,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 5,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 5,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 5,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 6,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 6,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Marcus",
+   "day0": 6,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 6,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Samuel",
+   "day0": 7,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Harold",
+   "day0": 7,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 7,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 7,
+   "maxHeard": 11,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Aisha",
+   "day0": 8,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Aisha",
+   "day0": 8,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 8,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Cuc",
+   "day0": 8,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "ambush_cover_case_2",
+   "subject": "Sofia",
+   "day0": 8,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 9,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Emma",
+   "day0": 9,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 9,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Aisha",
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Samuel",
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "David",
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "stingy",
+   "subject": "Samuel",
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Lena",
+   "day0": 11,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "David",
+   "day0": 11,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 11,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "Aisha",
+   "day0": 11,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Aisha",
+   "day0": 12,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Cesar",
+   "day0": 12,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Harold",
+   "day0": 12,
+   "maxHeard": 11,
+   "maxDistortion": 9,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 12,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Samuel",
+   "day0": 13,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "theft",
+   "subject": null,
+   "day0": 13,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "David",
+   "day0": 13,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 13,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "death:gen_xftq6fp",
+   "subject": null,
+   "day0": 13,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 14,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 14,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 14,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 14,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "David",
+   "day0": 14,
+   "maxHeard": 9,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 15,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 15,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 15,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 16,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 16,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "deed",
+   "subject": null,
+   "day0": 16,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 16,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "Cesar",
+   "day0": 16,
+   "maxHeard": 9,
+   "maxDistortion": 8,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "James",
+   "day0": 16,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 17,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 17,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Marcus",
+   "day0": 17,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "death",
+   "subject": "David",
+   "day0": 17,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "untrustworthy",
+   "subject": "Harold",
+   "day0": 17,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 18,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Cesar",
+   "day0": 18,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 18,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_built",
+   "subject": null,
+   "day0": 18,
+   "maxHeard": 8,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Cuc",
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "James",
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "Harold",
+   "day0": 19,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 20,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 20,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Harold",
+   "day0": 20,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 20,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "accuse_case_5",
+   "subject": null,
+   "day0": 21,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Cesar",
+   "day0": 21,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Lena",
+   "day0": 21,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 21,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 21,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 22,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 22,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 22,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Lena",
+   "day0": 22,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 23,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Marcus",
+   "day0": 23,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 23,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 24,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 24,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 24,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "stingy",
+   "subject": "Cuc",
+   "day0": 24,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "Sofia",
+   "day0": 24,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 24,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 25,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 25,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "deed",
+   "subject": "Aisha",
+   "day0": 25,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 25,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "James",
+   "day0": 25,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 26,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 26,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 26,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "accuse_case_6",
+   "subject": null,
+   "day0": 26,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "hoard",
+   "subject": null,
+   "day0": 27,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 27,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 27,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 28,
+   "maxHeard": 8,
+   "maxDistortion": 7,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Harold",
+   "day0": 28,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "deed",
+   "subject": "Cuc",
+   "day0": 28,
+   "maxHeard": 7,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 28,
+   "maxHeard": 8,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 28,
+   "maxHeard": 8,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 29,
+   "maxHeard": 7,
+   "maxDistortion": 6,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Aisha",
+   "day0": 29,
+   "maxHeard": 6,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 29,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "exile_29",
+   "subject": null,
+   "day0": 29,
+   "maxHeard": 7,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 30,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Cuc",
+   "day0": 30,
+   "maxHeard": 6,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "feast",
+   "subject": null,
+   "day0": 30,
+   "maxHeard": 6,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 30,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "Sofia",
+   "day0": 30,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 30,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "untrustworthy",
+   "subject": "Marcus",
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "show_fans",
+   "subject": "Cuc",
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "show_shame",
+   "subject": "Cuc",
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "accuse_case_7",
+   "subject": null,
+   "day0": 31,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 32,
+   "maxHeard": 6,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 32,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 32,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "death",
+   "subject": "Harold",
+   "day0": 32,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 33,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Sofia",
+   "day0": 33,
+   "maxHeard": 5,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 33,
+   "maxHeard": 5,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 33,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 34,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 34,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 35,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 35,
+   "maxHeard": 5,
+   "maxDistortion": 4,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "Lena",
+   "day0": 35,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 36,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "theft",
+   "subject": null,
+   "day0": 36,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "freeload",
+   "subject": "Cuc",
+   "day0": 36,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 37,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 38,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 38,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "stingy",
+   "subject": "Lena",
+   "day0": 38,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 39,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 39,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "share_knowledge",
+   "subject": null,
+   "day0": 39,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "James",
+   "day0": 39,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 40,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 40,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 41,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 41,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 41,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 41,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 42,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 42,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 42,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 42,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 43,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "theft",
+   "subject": null,
+   "day0": 43,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 43,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 43,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "accuse_case_8",
+   "subject": null,
+   "day0": 43,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Lena",
+   "day0": 44,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 44,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 44,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 44,
+   "maxHeard": 4,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Lena",
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Marcus",
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "rumor",
+   "action": "untrustworthy",
+   "subject": "Marcus",
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "haven_need",
+   "subject": "Sofia",
+   "day0": 45,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 46,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 46,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Lena",
+   "day0": 46,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 46,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "moot_weak_case",
+   "subject": "Lena",
+   "day0": 46,
+   "maxHeard": 4,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 47,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Marcus",
+   "day0": 47,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 47,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 47,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 47,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Lena",
+   "day0": 48,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 48,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 48,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 48,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 49,
+   "maxHeard": 4,
+   "maxDistortion": 2,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "theft",
+   "subject": null,
+   "day0": 49,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 49,
+   "maxHeard": 4,
+   "maxDistortion": 3,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 50,
+   "maxHeard": 3,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "James",
+   "day0": 50,
+   "maxHeard": 3,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "death",
+   "subject": "James",
+   "day0": 50,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "accuse_case_9",
+   "subject": null,
+   "day0": 50,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 51,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 51,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 51,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "departure",
+   "subject": "Sofia",
+   "day0": 52,
+   "maxHeard": 1,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "order",
+   "subject": null,
+   "day0": 52,
+   "maxHeard": 1,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "contest_won",
+   "subject": "Sofia",
+   "day0": 52,
+   "maxHeard": 2,
+   "maxDistortion": 1,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "exile_52",
+   "subject": null,
+   "day0": 52,
+   "maxHeard": 2,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "return",
+   "subject": "Lena",
+   "day0": 53,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  },
+  {
+   "kind": "seed",
+   "action": "raid",
+   "subject": null,
+   "day0": 53,
+   "maxHeard": 0,
+   "maxDistortion": 0,
+   "playerSpawned": false
+  }
+ ],
+ "repAttributionChains": [
+  {
+   "kind": "rumor",
+   "action": "stingy",
+   "subject": "Samuel",
+   "day0": 10,
+   "maxHeard": 11,
+   "maxDistortion": 10,
+   "gossipPathWrites": 90,
+   "writesOnSubject": 16,
+   "writesOnPlayerSelfSlot": 6,
+   "repByTarget": {
+    "David": {
+     "n": 20,
+     "dims": {
+      "competent": 17,
+      "honest": -1,
+      "with": "0gen_8yl22cxgen_8yl22cxgen_8yl22cxNaNNaNgen_8yl22cxgen_8yl22cxNaNgen_8yl22cx",
+      "raiders": 8
+     }
+    },
+    "Sofia": {
+     "n": 6,
+     "dims": {
+      "trustworthy": 24,
+      "honest": 26,
+      "raiders": 3
+     }
+    },
+    "James": {
+     "n": 5,
+     "dims": {
+      "competent": 9,
+      "honest": -3,
+      "raiders": 5
+     }
+    },
+    "Samuel": {
+     "n": 16,
+     "dims": {
+      "competent": 9,
+      "honest": -13,
+      "generous": -120,
+      "trustworthy": -18,
+      "brave": 4
+     }
+    },
+    "Aisha": {
+     "n": 13,
+     "dims": {
+      "competent": 11,
+      "honest": -3,
+      "need": "0woodNaNwoodNaNNaNNaNwoodwoodwood"
+     }
+    },
+    "Cesar": {
+     "n": 7,
+     "dims": {
+      "honest": 1,
+      "competent": 6,
+      "raiders": 5
+     }
+    },
+    "Harold": {
+     "n": 4,
+     "dims": {
+      "competent": 9,
+      "honest": -3
+     }
+    },
+    "Cuc": {
+     "n": 4,
+     "dims": {
+      "competent": 9,
+      "honest": -6
+     }
+    },
+    "Lena": {
+     "n": 6,
+     "dims": {
+      "competent": 9,
+      "honest": -2,
+      "raiders": 5
+     }
+    },
+    "Emma": {
+     "n": 4,
+     "dims": {
+      "competent": 6,
+      "honest": -1,
+      "raiders": 8
+     }
+    },
+    "Marcus": {
+     "n": 5,
+     "dims": {
+      "competent": 11,
+      "honest": -1,
+      "raiders": 3
+     }
+    }
+   },
+   "playerSpawned": true
+  },
+  {
+   "kind": "rumor",
+   "action": "untrustworthy",
+   "subject": "Harold",
+   "day0": 17,
+   "maxHeard": 6,
+   "maxDistortion": 5,
+   "gossipPathWrites": 141,
+   "writesOnSubject": 26,
+   "writesOnPlayerSelfSlot": 10,
+   "repByTarget": {
+    "Marcus": {
+     "n": 14,
+     "dims": {
+      "competent": 38,
+      "honest": -37,
+      "which": "0The Longhouse",
+      "generous": -15,
+      "brave": -3
+     }
+    },
+    "David": {
+     "n": 9,
+     "dims": {
+      "competent": 11,
+      "honest": -3,
+      "with": "0gen_zldarh7NaNNaNgen_zldarh7gen_zldarh7NaN"
+     }
+    },
+    "Cuc": {
+     "n": 15,
+     "dims": {
+      "competent": 42,
+      "honest": -34,
+      "generous": -15,
+      "brave": -3
+     }
+    },
+    "Lena": {
+     "n": 21,
+     "dims": {
+      "competent": 37,
+      "honest": -28,
+      "which": "0The Longhouse",
+      "generous": -2,
+      "brave": -3
+     }
+    },
+    "Cesar": {
+     "n": 18,
+     "dims": {
+      "competent": 30,
+      "honest": -36,
+      "with": "0gen_gadi9zpgen_gadi9zpNaNNaNgen_gadi9zpgen_gadi9zp",
+      "generous": -15,
+      "brave": -3
+     }
+    },
+    "Sofia": {
+     "n": 10,
+     "dims": {
+      "competent": 18,
+      "honest": -27,
+      "which": null,
+      "generous": -19,
+      "brave": -3
+     }
+    },
+    "James": {
+     "n": 14,
+     "dims": {
+      "competent": 32,
+      "honest": -36,
+      "which": null,
+      "generous": -15,
+      "brave": -3
+     }
+    },
+    "Harold": {
+     "n": 26,
+     "dims": {
+      "competent": 30,
+      "honest": -147,
+      "trustworthy": -92,
+      "generous": -15,
+      "brave": -5,
+      "with": "0marcus_webbNaNmarcus_webbNaNNaNmarcus_webb"
+     }
+    },
+    "Aisha": {
+     "n": 14,
+     "dims": {
+      "competent": 9,
+      "honest": -24,
+      "generous": -15,
+      "brave": -3,
+      "with": "0marcus_webbmarcus_webbNaNNaNNaNNaN"
+     }
+    }
+   },
+   "playerSpawned": true
+  },
+  {
+   "kind": "seed",
+   "action": "theft",
+   "subject": "(player-action, no subject)",
+   "day0": 13,
+   "maxHeard": 10,
+   "maxDistortion": 8,
+   "gossipPathWrites": 129,
+   "writesOnSubject": 0,
+   "writesOnPlayerSelfSlot": 16,
+   "repByTarget": {
+    "Aisha": {
+     "n": 7,
+     "dims": {
+      "competent": 17,
+      "honest": 0,
+      "victim": null
+     }
+    },
+    "Cesar": {
+     "n": 14,
+     "dims": {
+      "competent": 38,
+      "honest": -11,
+      "victim": "0gen_xftq6fp"
+     }
+    },
+    "Lena": {
+     "n": 13,
+     "dims": {
+      "competent": 37,
+      "honest": -11,
+      "victim": "0gen_xftq6fp"
+     }
+    },
+    "David": {
+     "n": 20,
+     "dims": {
+      "honest": 0,
+      "competent": 26,
+      "host": "0gen_6ugrhu7",
+      "need": "0woodwoodNaNNaNNaNwoodNaN"
+     }
+    },
+    "Marcus": {
+     "n": 13,
+     "dims": {
+      "competent": 34,
+      "honest": -8,
+      "victim": null,
+      "host": "0gen_6ugrhu7"
+     }
+    },
+    "Cuc": {
+     "n": 13,
+     "dims": {
+      "competent": 30,
+      "honest": -5,
+      "host": null,
+      "victim": null
+     }
+    },
+    "Samuel": {
+     "n": 7,
+     "dims": {
+      "trustworthy": -76,
+      "brave": 30
+     }
+    },
+    "James": {
+     "n": 12,
+     "dims": {
+      "competent": 32,
+      "honest": -10,
+      "victim": null
+     }
+    },
+    "Harold": {
+     "n": 14,
+     "dims": {
+      "competent": 31,
+      "honest": -15,
+      "victim": "0gen_xftq6fp",
+      "host": "0gen_6ugrhu7"
+     }
+    },
+    "Sofia": {
+     "n": 16,
+     "dims": {
+      "with": "0gen_zldarh7gen_zldarh7gen_zldarh7NaNgen_zldarh7NaNgen_zldarh7",
+      "honest": -2,
+      "competent": 19,
+      "host": null,
+      "victim": null
+     }
+    }
+   },
+   "playerSpawned": false
+  }
+ ],
+ "dailyGossip": [
+  {
+   "d": 2,
+   "n": 3,
+   "maxDistortion": 5,
+   "totalHeard": 10
+  },
+  {
+   "d": 12,
+   "n": 21,
+   "maxDistortion": 10,
+   "totalHeard": 129
+  },
+  {
+   "d": 22,
+   "n": 20,
+   "maxDistortion": 7,
+   "totalHeard": 127
+  },
+  {
+   "d": 32,
+   "n": 29,
+   "maxDistortion": 5,
+   "totalHeard": 113
+  },
+  {
+   "d": 42,
+   "n": 12,
+   "maxDistortion": 3,
+   "totalHeard": 34
+  },
+  {
+   "d": 52,
+   "n": 15,
+   "maxDistortion": 1,
+   "totalHeard": 27
+  }
+ ],
+ "alive": 2
+}

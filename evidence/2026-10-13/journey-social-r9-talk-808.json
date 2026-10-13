@@ -1,0 +1,899 @@
+{
+ "seed": 808,
+ "manifest": {
+  "seed": 808,
+  "commit": "b1936956d6afe8177c94041caeca739cb34b6b6f",
+  "mode": "journey-social-life-r9",
+  "date": "2026-10-13",
+  "node": "v24.20.0"
+ },
+ "ms": "6s",
+ "days": 51,
+ "endReason": "village-lost",
+ "gameDay": 44,
+ "talk": {
+  "fired": [
+   {
+    "day": 11,
+    "vid": "Marcus",
+    "line": "\"Can we talk?\" <NAME> sits down near you. \"Just... talk. Like people used to.\""
+   },
+   {
+    "day": 18,
+    "vid": "Emma",
+    "line": "\"Can we talk?\" <NAME> sits down near you. \"Just... talk. Like people used to.\""
+   },
+   {
+    "day": 19,
+    "vid": "Fernando",
+    "line": "\"Can we talk?\" <NAME> sits down near you. \"Just... talk. Like people used to.\""
+   },
+   {
+    "day": 22,
+    "vid": "David",
+    "line": "\"Can we talk?\" <NAME> sits down near you. \"Just... talk. Like people used to.\""
+   }
+  ],
+  "expired": 5,
+  "answered": [
+   {
+    "day": 2,
+    "vid": "Marcus"
+   },
+   {
+    "day": 17,
+    "vid": "Fernando"
+   },
+   {
+    "day": 19,
+    "vid": "Emma"
+   },
+   {
+    "day": 20,
+    "vid": "Fernando"
+   },
+   {
+    "day": 22,
+    "vid": "David"
+   }
+  ],
+  "seededAtSetup": []
+ },
+ "dailyTalkScan": [
+  {
+   "d": 2,
+   "pending": 1,
+   "undelivered": 0
+  },
+  {
+   "d": 7,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 12,
+   "pending": 1,
+   "undelivered": 0
+  },
+  {
+   "d": 17,
+   "pending": 1,
+   "undelivered": 0
+  },
+  {
+   "d": 22,
+   "pending": 2,
+   "undelivered": 0
+  },
+  {
+   "d": 27,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 32,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 37,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 42,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 42,
+   "pending": 0,
+   "undelivered": 0
+  },
+  {
+   "d": 44,
+   "pending": 0,
+   "undelivered": 0
+  }
+ ],
+ "qa": {
+  "askedTotal": 21,
+  "answeredTotal": 21,
+  "perQid": {
+   "q_hands": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_hope": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_before_skill": {
+    "asked": 3,
+    "answered": 3,
+    "recalled": 0
+   },
+   "q_name_day": {
+    "asked": 2,
+    "answered": 2,
+    "recalled": 0
+   },
+   "q_song": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_skill": {
+    "asked": 2,
+    "answered": 2,
+    "recalled": 0
+   },
+   "q_quiet": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_night": {
+    "asked": 2,
+    "answered": 2,
+    "recalled": 0
+   },
+   "q_someone": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_left_behind": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_useful": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_system_fear": {
+    "asked": 2,
+    "answered": 2,
+    "recalled": 0
+   },
+   "q_stay": {
+    "asked": 1,
+    "answered": 1,
+    "recalled": 0
+   },
+   "q_fight": {
+    "asked": 2,
+    "answered": 2,
+    "recalled": 0
+   }
+  },
+  "recallHits": [],
+  "firstConvoQuestion": {
+   "gen_gxa6jvj": true,
+   "gen_hkrbaup": true,
+   "gen_2izgabr": true,
+   "gen_kfcq74q": true,
+   "gen_grfviyz": true,
+   "lena_ruiz": true,
+   "marcus_webb": false,
+   "sofia_chen": true,
+   "james_okonkwo": true,
+   "emma_larsen": true,
+   "david_kim": true
+  }
+ },
+ "arc": null,
+ "npcPairs": {
+  "bondEvents": 285,
+  "bondReasons": {
+   "lingering meal": 194,
+   "visit": 16,
+   "feast": 73,
+   "grievance": 2
+  },
+  "bondNeg": [
+   {
+    "day": 28,
+    "pair": "David | Vera",
+    "dv": -7,
+    "reason": "grievance"
+   },
+   {
+    "day": 37,
+    "pair": "James | Claudia",
+    "dv": -7,
+    "reason": "grievance"
+   }
+  ],
+  "nBondPairs": 47,
+  "mootTicks": 45,
+  "npcMoots": [],
+  "top5": [
+   {
+    "pair": "Lena | Sofia",
+    "v": 43,
+    "depth": 1,
+    "movement": {
+     "events": 23,
+     "gained": 43,
+     "lost": 0,
+     "reasons": {
+      "feast": 3,
+      "lingering meal": 20
+     }
+    }
+   },
+   {
+    "pair": "Fernando | Debbie",
+    "v": 42,
+    "depth": 1,
+    "movement": {
+     "events": 23,
+     "gained": 45,
+     "lost": 0,
+     "reasons": {
+      "lingering meal": 22,
+      "feast": 1
+     }
+    }
+   },
+   {
+    "pair": "Vera | Fernando",
+    "v": 38,
+    "depth": 1,
+    "movement": {
+     "events": 20,
+     "gained": 38,
+     "lost": 0,
+     "reasons": {
+      "lingering meal": 18,
+      "feast": 2
+     }
+    }
+   },
+   {
+    "pair": "Vera | Sofia",
+    "v": 31,
+    "depth": 1,
+    "movement": {
+     "events": 11,
+     "gained": 31,
+     "lost": 0,
+     "reasons": {
+      "lingering meal": 5,
+      "visit": 5,
+      "feast": 1
+     }
+    }
+   },
+   {
+    "pair": "James | Lena",
+    "v": 30,
+    "depth": 1,
+    "movement": {
+     "events": 16,
+     "gained": 30,
+     "lost": 0,
+     "reasons": {
+      "lingering meal": 11,
+      "feast": 4,
+      "visit": 1
+     }
+    }
+   }
+  ],
+  "conflicts": [
+   {
+    "a": "Fernando",
+    "b": "Lena",
+    "tension": 0
+   },
+   {
+    "a": "Sofia",
+    "b": "Debbie",
+    "tension": 0
+   }
+  ]
+ },
+ "bondsSnapCount": 6,
+ "convosDriven": 316,
+ "convos": [
+  {
+   "vid": "Sofia",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 9,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    }
+   ]
+  },
+  {
+   "vid": "James",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 7,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    }
+   ]
+  },
+  {
+   "vid": "Sofia",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 10,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    }
+   ]
+  },
+  {
+   "vid": "James",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 7,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    }
+   ]
+  },
+  {
+   "vid": "Sofia",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 9,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    }
+   ]
+  },
+  {
+   "vid": "James",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 7,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Still on what's been happening. You'd know about that.\""
+    }
+   ]
+  },
+  {
+   "vid": "Sofia",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 10,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Huh.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"I see.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    }
+   ]
+  },
+  {
+   "vid": "James",
+   "day": 42,
+   "tag": "warmup",
+   "turns": 7,
+   "naturalEnd": true,
+   "asked": [],
+   "answered": [],
+   "transcript": [
+    {
+     "who": "YOU",
+     "text": "\"About the moot over the petitioners...\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just said — did you miss it?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"What’s going on out there?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About that favor — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"I just told you — what else is on your mind?\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"About what's been happening — we never finished.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"We've covered this one. Ask me something else.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Yeah.\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Right. Back to it, then.\""
+    },
+    {
+     "who": "YOU",
+     "text": "\"Wait — what were we talking about?\""
+    },
+    {
+     "who": "NPC",
+     "text": "\"Hah. Still on what's been happening.\""
+    }
+   ]
+  }
+ ],
+ "roster": [
+  "James (carpenter)"
+ ],
+ "fallen": 11,
+ "deaths": 26
+}
