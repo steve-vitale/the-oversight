@@ -739,9 +739,23 @@
     t2fol_lately(vid) {
       const ev = this.t2LatelyEvent(vid);
       const kind = ev ? ev.kind : 'none';
+      // MOURNING POOLS (journey deepening r9 2026-10-13): three variants per
+      // follow-up level. Every grieving villager used to recite the identical
+      // single-line sequence (transcript-verified on two seeds: "It just keeps
+      // my hands from shaking." / "There's no step four." / "Someone has to do
+      // it properly." — verbatim, same order, two different villagers). The
+      // unique-person law (Steve 2026-10-06) means grief can't be a global
+      // script: variants use the villager's own habit ({habitI}, filled by
+      // t2fill) and the dead person's knowledge-gated name ({mname}, filled
+      // below — ev.name is firstRef, never a raw id or a truncated "A").
+      // convoPick's run-ledger preference then spreads variants across the
+      // village instead of echoing one line. Other kinds keep their single
+      // lines for now (same thinness exists there — documented, not fixed).
       const cope = {
         naming: ['"I\'m staying out of the naming fight. For now. Someone always gets precious about their pick."'],
-        mourning: ['"I {habitI}. It doesn\'t bring anyone back. It just keeps my hands from shaking."'],
+        mourning: ['"I {habitI}. It doesn\'t bring anyone back. It just keeps my hands from shaking."',
+          '"I keep turning over the last thing {mname} said to me. I can\'t tell if I\'m remembering it right, and that\'s somehow the worst part."',
+          '"Sleep\'s gone strange. I {habitI} at odd hours now. Whatever gets me to morning."'],
         threat: ['"I sleep with my boots on now. That\'s where we are."'],
         betrayal: ['"I\'m watching. That\'s what I do now — I watch."'],
         tension: ['"I stay out of it. Mostly. It\'s getting harder."'],
@@ -752,7 +766,9 @@
       };
       const next = {
         naming: ['"We\'ll land on something. We always do — usually the loudest person\'s idea."'],
-        mourning: ['"We bury, we grieve, we keep going. There\'s no step four."'],
+        mourning: ['"We bury, we grieve, we keep going. There\'s no step four."',
+          '"Nobody says {mname}\'s name right yet. We will. Give it a few days."',
+          '"The fire feels smaller without {mname}. The rest of us will have to be bigger."'],
         threat: ['"We set a better watch. We always say that. This time we mean it."'],
         betrayal: ['"Either it gets talked out or it festers. I know which one I\'d bet on."'],
         tension: ['"Someone has to say the thing nobody\'s saying. Probably won\'t be me."'],
@@ -763,7 +779,9 @@
       };
       const part = {
         naming: ['"My vote? I\'m keeping it to myself until the shouting stops."'],
-        mourning: ['"My part? I remember them. Someone has to do it properly."'],
+        mourning: ['"My part? I remember them. Someone has to do it properly."',
+          '"I\'m picking up {mname}\'s share of the work. Someone should, and it might as well be me."',
+          '"I {habitI} for {mname}, now. Feels right. Feels like the least I can do."'],
         threat: ['"I take the watch nobody wants. It\'s the least useless thing I can do."'],
         betrayal: ['"I keep my word. Someone around here has to."'],
         tension: ['"I talk to both sides. It hasn\'t exploded yet."'],
@@ -772,7 +790,9 @@
         cheer: ['"I laugh. Out loud. It startles people."'],
         none: ['"I show up. That\'s my part."'],
       };
-      return [cope[kind] || cope.none, next[kind] || next.none, part[kind] || part.none];
+      const mname = (ev && ev.name) || 'them';
+      const nm = (arr) => (arr || []).map(l => String(l).replaceAll('{mname}', mname));
+      return [nm(cope[kind] || cope.none), nm(next[kind] || next.none), nm(part[kind] || part.none)];
     },
   };
 
