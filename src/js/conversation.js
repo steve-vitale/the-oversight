@@ -2245,24 +2245,29 @@
       }
 
       // 2. They remember what you told them. Being remembered feels real.
-      if (c.answered.q_origin === 'a_tell' && !c.recalled.q_origin) {
-        const qd = (cg.questions || []).find(q => q.id === 'q_origin');
-        c.recalled.q_origin = true;
-        if (qd && qd.recall) {
-          const region = (this.homeRegion || (this.state.scholar || {}).homeRegion) || 'wherever you said';
-          return { line: qd.recall.replaceAll('{region}', region), thread: 'recall' };
-        }
-      }
-      if (c.answered.q_trust && !c.recalled.q_trust) {
-        const qd = (cg.questions || []).find(q => q.id === 'q_trust');
-        c.recalled.q_trust = true;
-        // PLAYTEST social r9 2026-10-13: recall was answer-blind — an
-        // a_earn ("I hope to earn it") answer later heard "You told me to
-        // watch what you do", words the player never said (fabricated
-        // history). Answer-specific recalls; qd.recall kept as fallback.
-        const ans = c.answered.q_trust;
-        const rec = (qd && qd.recalls && qd.recalls[ans]) || (qd && qd.recall);
-        if (rec) return { line: rec, thread: 'recall' };
+      // PLAYTEST social r10 2026-10-13: the old origin/trust-only hard-coded
+      // blocks became this generalized loop. Every bespoke question with a
+      // `recalls` map (answer-specific) or a legacy generic `recall` can fire
+      // a "they remembered" opener once per villager. Rules:
+      //   - only an answer WITH a recall entry fires: opt-out answers and
+      //     honest_pass never fire (no fabricated memory — the r9 q_trust
+      //     lesson: the recall must match the words the player actually said)
+      //   - a `recalls` map is STRICT: unmapped answers do NOT fall back to
+      //     the generic `recall` (this preserves q_origin's old a_tell-only
+      //     gating). The generic `recall` is the fallback only for questions
+      //     with no map at all. Each question fires at most once (c.recalled).
+      const regionRecall = (this.homeRegion || (this.state.scholar || {}).homeRegion) || 'wherever you said';
+      for (const qd of (cg.questions || [])) {
+        if (!(qd.recall || qd.recalls)) continue;
+        const qid = qd.id;
+        const ans = c.answered && c.answered[qid];
+        if (!ans || ans === 'honest_pass' || (c.recalled && c.recalled[qid])) continue;
+        c.recalled[qid] = true;
+        const answerDef = (qd.answers || []).find(a => a.id === ans);
+        if (answerDef && answerDef.honest_opt_out) continue;
+        const rec = (qd.recalls && qd.recalls[ans]) || (!qd.recalls ? qd.recall : null);
+        if (!rec) continue;
+        return { line: String(rec).replaceAll('{region}', regionRecall), thread: 'recall' };
       }
       // 3. THE WANT — the spine of the conversation (convo rebuild 2026-10-11,
       // Steve). Every conversation opens with something the NPC wants: a

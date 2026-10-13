@@ -20,7 +20,15 @@ async function main() {
   const npcs = (v.roster || []).filter(id => id !== player);
   if (npcs.length < 3) { fail('need 3+ NPCs, got ' + npcs.length); return; }
   const [A, B, C] = npcs;
-  const nameA = Game.displayName(A), nameC = Game.displayName(C);
+  // Control subject must sit OUTSIDE the teller's group: spreadGossip picks the
+  // listener group-mates-first, so with subject C (B's groupmate) the listener
+  // IS C and the r4 listener==subject reflexive ("about themself") correctly
+  // fires — the control then expects a name that can never appear (fragile
+  // test, failed at HEAD). D is outside B's group, keeping the control's
+  // premise (subject unrelated to teller and listener).
+  const D = npcs.find(id => id !== A && id !== B && id !== C);
+  if (!D) { fail('need 4+ NPCs for control subject, got ' + npcs.length); return; }
+  const nameA = Game.displayName(A), nameD = Game.displayName(D);
 
   const lines = [];
   Game.say = m => lines.push(String(m));
@@ -33,7 +41,7 @@ async function main() {
       // teller==subject: rumor about A, retold BY A
       { action: 'stingy', dims: { who: A }, heard: [A], distortion: 3, day: 1, partKey: 'pk-teller', noTrust: true },
       // control: subject C, told by B
-      { action: 'brave', dims: { who: C }, heard: [B], distortion: 3, day: 1, partKey: 'pk-control', noTrust: true },
+      { action: 'brave', dims: { who: D }, heard: [B], distortion: 3, day: 1, partKey: 'pk-control', noTrust: true },
     ];
     // NOTE: no player-as-teller case — the say gate (`teller !== this.villagerId`)
     // deliberately never renders fragments of the player telling their own
@@ -51,7 +59,7 @@ async function main() {
   else ok('teller==subject reflexive: ' + tellerLine.slice(0, 110));
 
   // 2. control: unrelated subject still named
-  const controlLine = frags.find(l => l.indexOf('about ' + nameC) !== -1);
+  const controlLine = frags.find(l => l.indexOf('about ' + nameD) !== -1);
   if (!controlLine) fail('control (unrelated subject) lost the name. Lines:\n' + frags.join('\n'));
   else ok('control names unrelated subject: ' + controlLine.slice(0, 110));
 
