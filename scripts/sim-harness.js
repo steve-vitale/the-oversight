@@ -129,6 +129,15 @@ async function loadGame(opts) {
   // SILENTLY in every sim (loadFails was collected but never asserted).
   const gameIdx = order.indexOf('src/js/game.js');
   const evalFile = (f) => {
+    // EXPORT SHIELD (journey establishment 2026-10-13): several game files
+    // end with `if (typeof module !== 'undefined' && module.exports)
+    // module.exports = ...` guards for direct node requires. Under this
+    // eval, `module` resolves to SIM-HARNESS's own module object — the last
+    // such file eval'd silently REPLACED our exports (driveFights etc.
+    // became undefined for any require after loadGame). Shadow it: the
+    // guards write to a throwaway, our exports survive.
+    const module = { exports: {} };
+    const exports = module.exports;
     try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
     catch (e) { loadFails.push(f + ': ' + e.message); }
   };

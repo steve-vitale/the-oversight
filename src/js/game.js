@@ -1843,16 +1843,23 @@
       // 4L/wood. Water duty feeds the pile; the pile feeds the hearth.
       this.state.village.wood = 10;
       // (Player's personal 2L is set when the scholar object is built below.)
-      // the roster: your pick + the 5 you didn't pick + 6 drawn from 36 background survivors.
+      // the roster: your pick + the 5 you didn't pick + 6 drawn from the background survivors.
       // twelve mouths, different every run. The unpicked generated characters live here too.
       const otherGen = this.generatedRoster.filter(c => c.id !== this.villagerId).map(c => c.id);
       const pool = [...this.data.background_survivors];
       const bg = [];
-      // avoid first-name collisions with the generated cast — "two Marias" breaks the fiction
+      // avoid first-name collisions with the generated cast — "two Marias" breaks the fiction.
+      // (journey establishment 2026-10-13: the collision guard used findIndex —
+      // first non-colliding entry in file order — so the SAME six survivors
+      // opened every run. The guard stays; the pick among candidates is random
+      // again, as the original splice-random draw was.)
       const usedFirsts = new Set([...(this._usedNames || [])].map(n => String(n).split(' ')[0]));
       for (let i = 0; i < 6 && pool.length; i++) {
-        let idx = pool.findIndex(s => !usedFirsts.has(String(s.name || '').split(' ')[0]));
-        if (idx < 0) idx = Math.floor(Math.random() * pool.length);
+        const cands = [];
+        for (let ci = 0; ci < pool.length; ci++) {
+          if (!usedFirsts.has(String(pool[ci].name || '').split(' ')[0])) cands.push(ci);
+        }
+        const idx = cands.length ? cands[Math.floor(Math.random() * cands.length)] : Math.floor(Math.random() * pool.length);
         const drawn = pool.splice(idx, 1)[0];
         usedFirsts.add(String(drawn.name || '').split(' ')[0]);
         if (this._usedNames) this._usedNames.add(drawn.name);
@@ -4876,7 +4883,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const t = v.trust || (v.trust = {});
           t[pid] = Math.max(0, (t[pid] || 10) - 15);
           if (p.favorTask) {
-            this.say(`${this.displayName(pid)} doesn't say anything. But about "${p.favorTask}" — silence. Promises rot. (-15 trust)`);
+            // Name the broken task in the NPC's own short form ("this wound",
+            // "the creek water run") — the ledger's third-person "help X with
+            // their injury" reads like a file label, not a memory. And a
+            // person you promised to help does NOT go silent — they remember.
+            // (journey establishment 2026-10-13: the old line said "doesn't
+            // say anything" AND "— silence" in one breath.)
+            const fshort = (favor && favor.id === p.favorId && favor.short) || null;
+            const what = fshort ? `You said you'd help with ${fshort}` : `About "${p.favorTask}"`;
+            this.say(`${this.displayName(pid)} won't meet your eye. ${what} — and it never happened. Promises rot. (-15 trust)`);
           } else {
             this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
           }

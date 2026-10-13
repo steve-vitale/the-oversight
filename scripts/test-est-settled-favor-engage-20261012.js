@@ -95,7 +95,12 @@ function ok(cond, name, extra) {
   const line1 = r.line || '';
   ok(!line1.includes(s.whyLine) && !/getting worse/i.test(line1),
      'dlg:help does not speak the dead whyLine', line1.slice(0, 140));
-  ok(/handled/i.test(line1), 'dlg:help answers honestly (handled)', line1.slice(0, 140));
+  // The settled pool cycles three honest variants; only one carries the
+  // word "handled". Assert the settlement answer, not the RNG's pick among
+  // honest variants (an RNG-stream shift from an unrelated change must not
+  // fail this — journey establishment 2026-10-13).
+  ok(/it.s handled|it.s fine\. forget i even asked|all sorted/i.test(line1),
+     'dlg:help answers honestly (handled)', line1.slice(0, 140));
 
   // --- 3. "Tell me more" likewise ---
   s = mootSitting();
