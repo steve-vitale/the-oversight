@@ -49,14 +49,17 @@ async function main() {
     const Game = await freshGame(424242);
     let defender = null, planted = null;
     // a few villagers, weak monster, real fights — take the first survivor
+    // whose fight ITSELF planted the memory (a natural raid during
+    // establish may have planted earlier ones — compare counts, not zeros)
     for (let i = 0; i < 4 && !planted; i++) {
       const vid = healthyVillager(Game);
       if (!vid) break;
+      const beforeN = memsOf(Game, vid).filter(x => x.t === 'defended').length;
       const m = spawnMonster(Game, 'hummice');
       try { Game.resolveWildMonsterEncounter(vid, m, { raid: true }); } catch (e) {}
       const alive = (Game.state.village.roster || []).map(String).includes(String(vid));
       const dm = memsOf(Game, vid).filter(x => x.t === 'defended');
-      if (alive && dm.length) { defender = vid; planted = dm[dm.length - 1]; }
+      if (alive && dm.length > beforeN) { defender = vid; planted = dm[dm.length - 1]; }
     }
     ok(!!planted, 'a raid defender who lived carries a defended memory');
     if (planted) {
@@ -75,17 +78,24 @@ async function main() {
   console.log('TEST 2: wild fight (no raid flag) plants no defended memory');
   {
     const Game = await freshGame(99);
-    let found = 0, fought = 0;
+    // causal assertion, not a global one: a natural raid during establish
+    // may already have planted defended memories — snapshot per-villager
+    // counts first, then assert the wild fights add none
+    const before = {};
+    for (const vid of ((Game.state.village || {}).roster || []).map(String))
+      before[vid] = memsOf(Game, vid).filter(x => x.t === 'defended').length;
+    let fought = 0;
     for (let i = 0; i < 4; i++) {
       const vid = healthyVillager(Game);
       if (!vid) break;
       const m = spawnMonster(Game, 'hummice');
       try { Game.resolveWildMonsterEncounter(vid, m); fought++; } catch (e) {}
-      const alive = (Game.state.village.roster || []).map(String).includes(String(vid));
-      if (alive) found += memsOf(Game, vid).filter(x => x.t === 'defended').length;
     }
+    let added = 0;
+    for (const vid of ((Game.state.village || {}).roster || []).map(String))
+      added += Math.max(0, memsOf(Game, vid).filter(x => x.t === 'defended').length - (before[vid] || 0));
     ok(fought > 0, fought + ' wild fights driven');
-    ok(found === 0, 'no defended memory from wild fights (' + found + ' found)');
+    ok(added === 0, 'wild fights planted no defended memories (' + added + ' added)');
   }
 
   console.log('TEST 3: fresh defended memory drives the defense lately-kind');
@@ -188,17 +198,18 @@ async function main() {
     const Game = await freshGame(99);
     const vid = healthyVillager(Game);
     if (vid) {
+      const before = memsOf(Game, vid).filter(x => x.t === 'defended').length;
       Game.remember(vid, 'defended', 'I put down a beast at the treeline', { sticky: true });
       for (let i = 0; i < 25; i++) Game.remember(vid, 'meal', 'ate');
       const mems = memsOf(Game, vid);
       const dm = mems.filter(x => x.t === 'defended');
-      ok(dm.length === 1, 'defended memory survives 25 meal pushes (' + dm.length + ' found, ' + mems.length + ' total)');
-      ok(mems.length <= 21, 'cap still bounds the ledger (' + mems.length + ' entries)');
+      ok(dm.length === before + 1, 'planted defended memory survives 25 meal pushes (' + before + '->' + dm.length + ' defended, ' + mems.length + ' total)');
+      ok(mems.length <= 21 + before, 'cap still bounds the ledger (' + mems.length + ' entries)');
       // and the pre-existing behavior is unchanged: non-sticky entries
       // still evict oldest-first
       Game.remember(vid, 'gift', 'answered their hunger');
       const mems2 = memsOf(Game, vid);
-      ok(mems2.filter(x => x.t === 'defended').length === 1, 'defended still pinned after a further push');
+      ok(mems2.filter(x => x.t === 'defended').length === before + 1, 'defended still pinned after a further push');
     } else ok(false, 'no villager — skipped');
   }
 
