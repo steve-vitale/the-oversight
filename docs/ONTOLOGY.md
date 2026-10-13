@@ -939,6 +939,16 @@ Movement animation. Step-by-step tile transitions.
 
 **Consumes:** (none documented)
 
+### pantheon (`pantheon.js`)
+God jealousy — the ascended have politics (Steve 2026-10-13).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### party-formal (`party-formal.js`)
 Formal party mechanics. Roles, formations.
 
@@ -1021,6 +1031,16 @@ Character progression. XP, levels, abilities.
 - audience_encore: true (code: progression.js — checkAudienceEncore, recurring post-40 trials)
 
 **Consumes:** scholar.xp, scholar.abilities
+
+### runRecords (`records.js`)
+Persistent Records — the village's story (Steve 2026-10-13).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
 
 ### relay-dialogue (`relay-dialogue.js`)
 The relay path's dialogue rework (Steve 2026-10-11) — the System as a real conversational presence. The leaning gradient (tender +100 .. total -100), the recurring check-in scenes, the light (humanize the System) and dark (conquest/domination THROUGH the System, pro-human) conversation chains, the grey-middle pragmatist band, and the pending-scene answer mechanism. No single choice may lock the branch — see the GRADIENT LAW below.
