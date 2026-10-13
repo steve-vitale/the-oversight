@@ -25462,9 +25462,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     villagerDayProduction(person, vid, v) {
       // the actual roll: expectation × today's grit. Mentorship compounds:
       // time spent learning at the player's side makes hands steadier.
+      // RALLY (crisis-recovery 2026-10-13): the second shift — everybody
+      // pushes, production half again while the rally holds. The exhaustion
+      // tick (safetyNetsDayTick) is the price.
       const temp = (person.personality && person.personality.temperament) || 'steady';
-      return this.villagerExpectedDaily(person, vid, v)
-        * this.gritRoll(temp) * (1 + (person.mentorBonus || 0));
+      let mult = this.gritRoll(temp) * (1 + (person.mentorBonus || 0));
+      try {
+        const vv = v || this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        if (vv.rally && vv.rally.until >= day) mult *= 1.5;
+      } catch (e) {}
+      return this.villagerExpectedDaily(person, vid, v) * mult;
     },
 
     // HAVEN ROLES (Steve 2026-10-09): "Haven contributions count." Cooking,

@@ -316,10 +316,14 @@ sec('NET 2 — crisis relief');
   Game.map = Game.map || {}; Game.map.px = 0; Game.map.py = 0; // far from haven (4,4): caught out
   Game.resolveStormFront();
   ok('storm aftermath raises relief when caught out', !!Game.state.relief && Game.state.relief.kind === 'storm');
-  // 2j. one relief at a time
+  // 2j. one relief at a time — but a DIFFERENT crisis updates the kind
+  // (blitz-crisis 2026-10-13: the old refuse-null blocked hunger relief while
+  // a sickness relief was open, and villages starved waiting. Compound crises
+  // now update the framing so both get addressed.)
   g = freshGame({ day: 18 });
   Game.raiseRelief('sickness', {});
-  ok('second relief refused while one is open', Game.raiseRelief('raid', {}) === null);
+  const upd = Game.raiseRelief('raid', {});
+  ok('second relief updates kind (compound crisis)', !!upd && upd.kind === 'raid');
   ok('dismiss closes it', Game.answerRelief('dismiss') === 'dismissed' && !Game.state.relief);
 }
 

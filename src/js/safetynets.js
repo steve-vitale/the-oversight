@@ -12,6 +12,7 @@
 //   - aidQuestCheckTreat()
 //   - aidQuestCheckLearn()
 //   - raiseRelief(kind, ctx)
+//   - _triageRun(mode, rel)
 //   - answerRelief(opt)
 //   - resolveRelief(why)
 //   - aidLedger(villageId)
@@ -28,6 +29,10 @@
 //   - wrong_help_canon: 1 in 4 quests is bizarrely wrong in method (rocks, hugs, shouting plant names) while the reward stays real — the System misunderstands, it doesn't shortchange (code: offerAidQuest)
 //   - relief_villager_driven: relief beats are proposed by named villagers, never the System — pre-day-7 relief is identical, because the System never speaks here (code: raiseRelief)
 //   - relief_honest_finite: every relief option names its cost and spends it; each option fires once per relief; the relief expires (code: answerRelief, safetyNetsPartTick)
+//   - relief_early_hunger: the hunger relief opens on the FIRST hungry day, not at the scatter tick — a beat that fires into game-over is not a path (code: safetyNetsDayTick, 2026-10-13)
+//   - rally_costs: the rally's second shift (+50% food yields, 3 days) is paid in bodies — speaker -12 health, workers -2/day (-4 hungry), blood price (unity -1) if anyone dies on the push; exhaustion weakens, never kills (code: answerRelief 'rally', safetyNetsDayTick, resolveOneAssignment wrap, 2026-10-13)
+//   - triage_choice: triage is a choice about who gets the care — tend everyone, the worst first (1200 kcal, severe -4d), or the walking sick first (800 kcal, mild -4d, back to work); one approach per relief (code: _triageRun, 2026-10-13)
+//   - hunt_scales: the emergency hunt feeds the village — two days of food for the living roster, honestly counted — still once per crisis, still real injury risk (code: answerRelief 'hunt', 2026-10-13)
 //   - aid_real_deliveries: requested/granted aid moves real kcal between real pantries (theirs abstract, ours physical); neighbors can run dry and say so (code: resolveAidOut, resolveAidInbound, answerAidBeg)
 //   - aid_knowledge_gated: the request-aid move is learned via gossip/travelers, an inbound offer, or a beg — never assumed known (code: aidKnownTick)
 //   - aid_standing_ge_ask: same bar as the call-for-help chain — trust >= 35, said aloud when refused (code: aidRequestable, resolveAidOut)
@@ -107,6 +112,15 @@
  *
  * Camera rule (from comms.js): everything arrives through named people.
  * Knowledge never gates a relief beat; it gates the request-aid move.
+ *
+ * CRISIS RECOVERY (2026-10-13): the relief paths existed but villages in
+ * crisis never recovered (0/3 villages across famine/disease/siege arcs) —
+ * the hunger relief fired on the same tick the village scattered, and the
+ * answers didn't add up to a bridge. This module now: fires hunger relief
+ * on the first hungry day; scales the emergency hunt to two days of food
+ * for the roster; adds the RALLY (second shift at a bodily cost); and makes
+ * triage a real choice (everyone / worst-first / hale-first). Played, costed,
+ * finite — still no bailouts.
  *
  * Self-attaching module. Load after comms.js. Chain-safe wraps.
  */
@@ -494,12 +508,24 @@
 
     // raiseRelief: a crisis hits; a NAMED VILLAGER proposes the relief path.
     // Villager-driven always — the System never speaks here, so pre-day-7
-    // villages get the identical path. One relief at a time.
+    // villages get the identical path. One relief at a time — but COMPOUND
+    // CRISES (crisis-recovery 2026-10-13): if a relief is already open for a
+    // different kind, the crisis escalated. Update the framing (the options
+    // stand, the spent stay spent) — a village that's sick AND starving
+    // doesn't get told "one crisis at a time".
     raiseRelief(kind, ctx) {
       ctx = ctx || {};
       var st = this.state;
-      if (st.relief) return null;
       if (this.over) return null;
+      if (st.relief && st.relief.kind !== kind) {
+        var kindLabel = kind === 'hunger' ? 'hunger' : kind === 'sickness' ? 'sickness' : 'this';
+        st.relief.kind = kind;
+        st.relief.partsLeft = Math.max(st.relief.partsLeft || 0, 6);
+        this.say('🛟 ' + st.relief.speaker + ' looks up from the fire. "And now ' + kindLabel + ', on top of it all. The options stand — pick, before we lose the chance."');
+        try { if (this.journalNote) this.journalNote('village', 'relief', 'Crisis compounded: ' + kind + ', day ' + _day(this) + '.'); } catch (e) {}
+        return st.relief;
+      }
+      if (st.relief) return null;
       var speakerVid = _speakerVid(this);
       var speaker = speakerVid ? _first(this, speakerVid) : 'Someone by the fire';
       // OWN VOICE (crisis leg 2026-10-12): the proposal speech was one fixed
@@ -553,47 +579,74 @@
       st.relief = { kind: kind, sinceDay: _day(this), partsLeft: 12, used: {}, speaker: speaker };
       this.say('🛟 ' + speaker + ' stands up by the fire. "' + opener + ' Here\'s what we CAN do — pick one, maybe two, but everything costs something."');
       this.say('"' + detail + '"');
-      this.say('(Relief is open — answer from the beats row. Each option works once; the moment passes in ~3 days.)');
+      this.say('"Or we rally," ' + speaker + ' adds. "Second shift, everybody. We work, we eat, we live — and we pay for it."');
+      this.say('(Relief is open — triage, rations, hunt, or rally, from the beats row. Each option works once; the moment passes in ~3 days.)');
       try { if (this.journalNote) this.journalNote('village', 'relief', speaker + ' proposed relief (' + kind + '), day ' + _day(this) + '.'); } catch (e) {}
       return st.relief;
     },
 
-    // answerRelief: the three options, each honest, each once per relief.
+    // _triageRun: the triage choice, played. mode 'triage' (tend everyone),
+    // 'triage-worst' (the severe cases get the care), 'triage-hale' (the
+    // walking sick mend fast and get back to work). The wounded are tended
+    // in every variant (+25) — the choice is about the SICK. One approach
+    // per relief: answering any variant spends all three.
+    _triageRun(mode, rel) {
+      var v = this.state.village || {};
+      var sickIds = Object.keys(v.sick || {});
+      var wounded = [];
+      try {
+        for (var i = 0; i < (v.roster || []).length; i++) {
+          var vid = v.roster[i];
+          if (vid !== this.villagerId && (v.health || {})[vid] !== undefined && (v.health[vid] || 100) < 70) wounded.push(vid);
+        }
+      } catch (e) {}
+      if (!sickIds.length && !wounded.length) { this.say('"Nobody\'s hurt enough to need the tents," says ' + rel.speaker + '. "Save it for when there is."'); return 'noneed'; }
+      var cost = mode === 'triage-worst' ? 1200 : 800;
+      var paid = 0;
+      try { paid = this._removePantryKcal(cost); } catch (e) {}
+      if (paid < cost) { this.say('"The bins can\'t cover broth and bandages," says ' + rel.speaker + ', quietly. "We don\'t have ' + cost.toLocaleString() + ' kcal to burn on tending." (Triage needs ' + cost.toLocaleString() + ' kcal in the pantry — honest cost, honestly refused.)'); return 'short'; }
+      rel.used.triage = true; rel.used['triage-worst'] = true; rel.used['triage-hale'] = true;
+      var nurse = _speaker(this);
+      var worstNames = [];
+      for (var s2 = 0; s2 < sickIds.length; s2++) {
+        var rec = v.sick[sickIds[s2]];
+        var sev = rec.severity || 1;
+        var shift = 2;
+        if (mode === 'triage-worst') { shift = sev >= 2 ? 4 : 1; if (sev >= 2) worstNames.push(_first(this, sickIds[s2])); }
+        else if (mode === 'triage-hale') { shift = sev <= 1 ? 4 : 1; }
+        rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - shift);
+      }
+      for (var w = 0; w < wounded.length; w++) {
+        var vid2 = wounded[w];
+        v.health = v.health || {};
+        v.health[vid2] = Math.min(100, ((v.health[vid2] !== undefined) ? v.health[vid2] : 100) + 25);
+      }
+      if (mode === 'triage-worst') {
+        this.say('⛺ Triage tents go up — the worst first. ' + nurse + ' doesn\'t leave their side: broth by the spoonful, the watch in shifts, no sleep. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
+        this.say((worstNames.length ? worstNames.join(', ') : 'The worst') + ' get intensive tending: their fevers break four days sooner. The walking sick get broth and a blessing — one day sooner. We\'re betting the mild pull through on their own.');
+      } else if (mode === 'triage-hale') {
+        this.say('⛺ Triage tents go up — the walking sick first. ' + nurse + ' gets the mild cases back on their feet fast: back to the treeline in days, not weeks. (-' + cost.toLocaleString() + ' kcal, said aloud and spent.)');
+        this.say('The mild mend four days sooner. The severe get broth and watching — one day sooner. We\'re betting the strong pull through on their own.');
+      } else {
+        this.say('⛺ Triage tents go up. ' + nurse + ' runs them — broth, boiled water, clean bandages, no sleep. (-' + cost.toLocaleString() + ' kcal from the pantry, said aloud and spent.)');
+        if (sickIds.length) this.say('The sick get real tending: every fever breaks two days sooner. The hurt get stitched and splinted.');
+      }
+      return mode;
+    },
+
+    // answerRelief: the options, each honest, each once per relief.
+    // TRIAGE CHOICE (crisis-recovery 2026-10-13): 'triage' tends everyone;
+    // 'triage-worst' puts the care on the severe cases; 'triage-hale' gets
+    // the walking sick back to the treeline fast. Choosing who gets the
+    // care IS the triage — one approach per relief, said aloud.
     answerRelief(opt) {
       var st = this.state;
       var rel = st.relief;
       if (!rel) { this.say('No relief on the table right now.'); return null; }
       if (rel.used[opt]) { this.say(rel.speaker + ' shakes their head. "Already done — we don\'t get to spend that twice."'); return 'used'; }
       var v = st.village || {};
-      if (opt === 'triage') {
-        var sickIds = Object.keys(v.sick || {});
-        var wounded = [];
-        try {
-          for (var i = 0; i < (v.roster || []).length; i++) {
-            var vid = v.roster[i];
-            if (vid === this.villagerId || ((v.health || {})[vid] !== undefined && (v.health[vid] || 100) < 70)) {
-              if (vid !== this.villagerId) wounded.push(vid);
-            }
-          }
-        } catch (e) {}
-        if (!sickIds.length && !wounded.length) { this.say('"Nobody\'s hurt enough to need the tents," says ' + rel.speaker + '. "Save it for when there is."'); return 'noneed'; }
-        var paid = 0;
-        try { paid = this._removePantryKcal(800); } catch (e) {}
-        if (paid < 800) { this.say('"The bins can\'t cover broth and bandages for everyone," says ' + rel.speaker + ', quietly. "We don\'t have 800 kcal to burn on tending." (Triage needs 800 kcal in the pantry — honest cost, honestly refused.)'); return 'short'; }
-        rel.used.triage = true;
-        var nurse = _speaker(this);
-        for (var s2 = 0; s2 < sickIds.length; s2++) {
-          var rec = v.sick[sickIds[s2]];
-          rec.daysLeft = Math.max(1, (rec.daysLeft || 3) - 2);
-        }
-        for (var w = 0; w < wounded.length; w++) {
-          var vid2 = wounded[w];
-          v.health = v.health || {};
-          v.health[vid2] = Math.min(100, ((v.health[vid2] !== undefined) ? v.health[vid2] : 100) + 25);
-        }
-        this.say('⛺ Triage tents go up. ' + nurse + ' runs them — broth, boiled water, clean bandages, no sleep. (-800 kcal from the pantry, said aloud and spent.)');
-        if (sickIds.length) this.say('The sick get real tending: every fever breaks two days sooner. The hurt get stitched and splinted.');
-        return 'triage';
+      if (opt === 'triage' || opt === 'triage-worst' || opt === 'triage-hale') {
+        return this._triageRun(opt, rel);
       }
       if (opt === 'rations') {
         rel.used.rations = true;
@@ -609,7 +662,11 @@
       }
       if (opt === 'hunt') {
         rel.used.hunt = true;
-        // two named hunters, real risk, real meat
+        // three best hunters, real risk, real meat
+        // THE HUNT FEEDS THE VILLAGE (crisis-recovery 2026-10-13): was a flat
+        // 1500-4000 kcal — hours of food for a 12-mouth village, a band-aid on
+        // a hemorrhage. Now it scales: two days of food for the living roster,
+        // honestly counted. Still once per crisis, still real injury risk.
         var hunters = [];
         try {
           var roster = (v.roster || []).filter(function (id) { return id !== this.villagerId && !(this.vpOf(id) || {}).dead; }, this);
@@ -618,10 +675,12 @@
             var hb = ((v.health || {})[b] !== undefined) ? v.health[b] : 100;
             return hb - ha;
           });
-          hunters = roster.slice(0, 2);
+          hunters = roster.slice(0, 3);
         } catch (e) {}
         if (!hunters.length) { this.say('No hale hunters to send — everyone\'s down or gone.'); return 'noneed'; }
-        var gain = 1500 + Math.floor(R() * 2500);
+        var livingN = hunters.length;
+        try { livingN = Math.max(1, (v.roster || []).filter(function (id) { return !(this.vpOf(id) || {}).dead; }, this).length); } catch (e) {}
+        var gain = Math.round(livingN * 2000 * 2 * (0.75 + R() * 0.5));
         var injuries = [];
         for (var h = 0; h < hunters.length; h++) {
           if (R() < 0.25) {
@@ -631,16 +690,42 @@
           }
         }
         try { this.stockPantry(gain, 'Emergency hunt meat', { pieceKcal: 500 }); } catch (e) {}
-        var hn = hunters.map(function (id) { return _first(this, id); }, this).join(' and ');
-        this.say('🏹 ' + hn + ' go out hungry and come back heavy: +' + gain.toLocaleString() + ' kcal of meat into the bins — real pieces, honestly counted.');
+        var hn = hunters.map(function (id) { return _first(this, id); }, this).join(', ');
+        this.say('🏹 ' + hn + ' go out hungry and come back heavy: +' + gain.toLocaleString() + ' kcal of meat into the bins — two days for the village, if we\'re careful. Real pieces, honestly counted.');
         if (injuries.length) this.say('The hunt took its price: ' + injuries.join(' and ') + ' came home hurt. (Emergency hunts are never free.)');
         else this.say('Nobody hurt this time. The village exhales.');
         return 'hunt';
       }
+      if (opt === 'rally') {
+        // RALLY (crisis-recovery 2026-10-13): the leader rallies the village
+        // at a cost. A NAMED villager (never the System, never the player)
+        // spends themselves going tent to tent; the village works a second
+        // shift for three days — food work yields half again. The cost is
+        // said now, not later: the speaker doesn't sleep (-12 health), every
+        // worker runs ragged (-2 health/day, -4 on empty stomachs), and if
+        // the crisis takes someone during the push, unity pays (the speech
+        // didn't save them). Once per relief.
+        rel.used.rally = true;
+        var rday = _day(this);
+        var spkVid = _speakerVid(this);
+        var spk = spkVid ? _first(this, spkVid) : 'Someone by the fire';
+        var fallenAtStart = 0;
+        try { fallenAtStart = (v.fallen || []).length; } catch (e) {}
+        v.rally = { until: rday + 2, speaker: spkVid, speakerName: spk, fallenAtStart: fallenAtStart };
+        if (spkVid) {
+          v.health = v.health || {};
+          var shp = (v.health[spkVid] !== undefined) ? v.health[spkVid] : 100;
+          v.health[spkVid] = Math.max(1, shp - 12);
+        }
+        this.say('🔥 ' + spk + ' doesn\'t sit down for three days. Tent to tent, fire to fire: "We work. We eat. We live. Second shift — everybody."');
+        this.say('For three days, food work — foraging, fishing, hunting — yields half again. The cost is said now, not later: everybody who works runs ragged (-2 health a day, -4 on empty stomachs), ' + spk + ' runs on fumes (-12 health, no sleep). And if the crisis takes someone while we\'re pushing, the village will remember the speech didn\'t save them.');
+        try { if (this.journalNote) this.journalNote('village', 'relief', spk + ' rallied the village (3d second shift), day ' + rday + '.'); } catch (e) {}
+        return 'rally';
+      }
       if (opt === 'dismiss') {
         return this.resolveRelief('dismissed');
       }
-      this.say('Triage tents, a rationing vote, or an emergency hunt — those are the options on the table.');
+      this.say('Triage (tend everyone, the worst first, or the walking sick first), a rationing vote, an emergency hunt, or a rally — those are the options on the table.');
       return null;
     },
 
@@ -926,6 +1011,54 @@
       if (this.over) return;
       var st = this.state;
       var day = _day(this);
+      // HUNGER RELIEF, EARLY (crisis-recovery 2026-10-13): the old wiring
+      // fired the hunger relief only via fireCrisis('hunger-winter') at
+      // hungryStreak>=3 — the same tick the village scatters (hungryDays>=3).
+      // The beat existed, but the game was over before anyone could answer
+      // it: 0 recoveries by construction. Now a named villager speaks up on
+      // the FIRST hungry day, while there's still time to act. Once per
+      // hunger episode (the flag clears when the village eats again).
+      try {
+        var vv = this.state.village || {};
+        if ((vv.hungryDays || 0) === 0) vv._hungerReliefEpisode = false;
+        if (!st.relief && (vv.hungryDays || 0) >= 1 && !vv._hungerReliefEpisode) {
+          var opened = this.raiseRelief('hunger', { early: true });
+          if (opened) vv._hungerReliefEpisode = true;
+        }
+      } catch (e) {}
+      // RALLY upkeep: exhaustion, expiry, blood price.
+      try {
+        var vr = this.state.village || {};
+        if (vr.rally) {
+          var hungryPush = (vr.hungryDays || 0) >= 1;
+          var exDmg = hungryPush ? 4 : 2;
+          var worked = vr._rallyWorked || {};
+          var ragged = 0;
+          for (var wid in worked) {
+            if (!worked.hasOwnProperty(wid)) continue;
+            if ((this.vpOf(wid) || {}).dead) continue;
+            vr.health = vr.health || {};
+            var wh = (vr.health[wid] !== undefined) ? vr.health[wid] : 100;
+            // the push weakens, never kills outright — exhaustion is honest,
+            // not a second crisis
+            vr.health[wid] = Math.max(1, wh - exDmg);
+            ragged++;
+          }
+          vr._rallyWorked = {};
+          if (day > vr.rally.until) {
+            var rl = vr.rally; vr.rally = null;
+            var bloodPrice = false;
+            try { bloodPrice = (vr.fallen || []).length > (rl.fallenAtStart || 0); } catch (e) {}
+            if (bloodPrice) {
+              try { if (this.leadShift) this.leadShift('unity', -1); } catch (e) {}
+              this.say('🔥 The rally ends. ' + ragged + ' worked themselves ragged — and the crisis took someone anyway. "' + (rl.speakerName || 'The speaker') + '\'s speech didn\'t save them," somebody says, quietly. The village remembers. (Unity -1.)');
+            } else {
+              this.say('🔥 The rally ends. ' + (ragged ? ragged + ' worked themselves ragged for three days — and nobody died on the push. ' : 'Nobody had the strength left to push — ') + (rl.speakerName || 'Someone') + ' finally sleeps.');
+            }
+            try { if (this.journalNote) this.journalNote('village', 'relief', 'Rally ended day ' + day + (bloodPrice ? ' (blood price).' : '.')); } catch (e) {}
+          }
+        }
+      } catch (e) {}
       // quest offer
       try { this.offerAidQuest(); } catch (e) {}
       // pending offer expires
@@ -1060,6 +1193,39 @@
   if (_advancePartS) G.advancePart = function () {
     var r = _advancePartS.apply(this, arguments);
     try { if (this.safetyNetsPartTick) this.safetyNetsPartTick(); } catch (e) {}
+    return r;
+  };
+
+  // RALLY (crisis-recovery 2026-10-13): while v.rally holds, food assignments
+  // yield half again — the second shift. Captures what the assignment stocks
+  // via a temporary stockPantry wrap, then adds the bonus as its own honest
+  // pantry line. Marks who worked for the exhaustion tick. Chain-safe.
+  var _roaRally = G.resolveOneAssignment;
+  if (_roaRally) G.resolveOneAssignment = function (vid, a) {
+    var v = this.state.village || {};
+    var day = 0;
+    try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+    var rally = v.rally && v.rally.until >= day ? v.rally : null;
+    var foodTask = rally && a && (a.task === 'forage' || a.task === 'hunt' || a.task === 'fish');
+    if (!foodTask) return _roaRally.apply(this, arguments);
+    var captured = 0;
+    var self = this;
+    var _sp = this.stockPantry;
+    this.stockPantry = function (kcal, name, opts) {
+      captured += (kcal || 0);
+      return _sp.call(self, kcal, name, opts);
+    };
+    var r;
+    try { r = _roaRally.apply(this, arguments); }
+    finally { this.stockPantry = _sp; }
+    if (captured > 0) {
+      var bonus = Math.round(captured * 0.5);
+      try { _sp.call(this, bonus, 'Rally second shift', { pieceKcal: 400 }); } catch (e) {}
+      try {
+        v._rallyWorked = v._rallyWorked || {};
+        v._rallyWorked[vid] = true;
+      } catch (e) {}
+    }
     return r;
   };
 
