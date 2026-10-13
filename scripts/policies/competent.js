@@ -2433,9 +2433,19 @@ const competent = {
             if (md && md.wave) maxWave = Math.max(maxWave, md.wave);
           }
           const pmax = p.maxHp || 100;
-          const outmatched = totalMhp > 2.5 * pmax ||
+          // COURTKILL (scale-wall r18 arm 1, via ctx._huntCommit — set only by
+          // the courtkill wrapper when COURTKILL=1, wave-3 unlocked, rung
+          // unmet): a committed wave-3 hunt overrides the start-of-fight
+          // walk-away. The ledger needs these kills and the r16 dmgmath
+          // finding says wave-3 fights are winnable attrition (4-6 rounds at
+          // mid build), not burst deaths. The <50% HP guard stays: starting
+          // a wave-3 fight badly hurt is suicide, not a hunt. Gate off =
+          // the block below, byte-identical.
+          const huntCommitted = !!(ctx._huntCommit && maxWave === 3 && hpPct >= 0.5);
+          const outmatched = !huntCommitted && (
+            totalMhp > 2.5 * pmax ||
             (maxWave >= 2 && hpPct < 0.7) ||
-            hpPct < 0.5;
+            hpPct < 0.5);
           if (outmatched && monsters.length) {
             ctx.fledBad = (ctx.fledBad || 0) + 1;
             const fr = flee();
@@ -2445,7 +2455,11 @@ const competent = {
           }
         } catch (e) {}
       }
-      if (hpPct < 0.35) {
+      // COURTKILL (scale-wall r18 arm 1, via ctx._huntCommit): committed wave-3
+      // hunts hold to 12% — the r16 finding says these are winnable
+      // attritions and cheat-death usually holds (103/104); fleeing at 35%
+      // abandons winnable ledger kills mid-race. Gate off = 0.35, unchanged.
+      if (hpPct < (ctx._huntCommit ? 0.12 : 0.35)) {
         // retreat toward the havenward edge — the barrier ends pursuit honestly
         const fr = flee();
         if (fr) return true;
