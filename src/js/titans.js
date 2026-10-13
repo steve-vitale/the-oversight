@@ -613,7 +613,7 @@
       fighters.push({
         key: 'a_' + a.vid, kind: 'ally', villagerId: a.vid, villageId: a.villageId,
         name: a.name, emoji: '🛡️',
-        hp: a.hp || 100, maxHp: 100, speed: 3, mx: nx, my: ny,
+        hp: a.hp || 100, maxHp: 100, speed: (Game.villagerSpeed ? Game.villagerSpeed(a.vid) : 3), mx: nx, my: ny,
         alive: true, fled: false, ai: 'brave',
         wbonus: a.wbonus || 0, varmor: a.varmor || 0,
       });

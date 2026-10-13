@@ -4,7 +4,8 @@
 // provides:
 //   - fieldFight(vid, mdef, m, opts)
 // rules:
-//   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). (code: fieldFight)
+//   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
+//   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
 //   - morale: flee is driven by wounds + bravery + temperament, never a flat roll. (code: fieldFight)
 //   - arena: opts.noFlee seals a contest arena — no mid-fight flight; hopeless/low-HP no longer auto-flee, the fight runs to vKill/vDie/mFlee, and the round cap becomes a judges' call for the less-bloodied. Wild fights keep the believable flight. (code: fieldFight, Gap 4 2026-10-10)
 //   - pack: the lead IS the world-monster entity (members[0]) — wound it and the pack breaks, kill it and the pack dies/scatters with it; members never promote. (code: fieldFight)
@@ -38,7 +39,8 @@
  * - The villager strikes with the TACTICAL formula, verbatim:
  *   roll([4+wb, 8+wb]), wb = round(wbonus/2) ("helpers, not heroes").
  * - Initiative is speed vs speed every round (monster mdef.speed vs the
- *   villager's tactical speed 3).
+ *   villager's villagerSpeed — age, wounds, temperament — 2..4, not the old
+ *   flat 3).
  * - Fleeing is morale, not dice: wounds taken vs bravery XP and
  *   temperament. Monsters break too — wound the lead and the pack's
  *   coordination breaks (their documented weakness).
@@ -120,6 +122,12 @@
       var vHpMax = 100;
       var vHp = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
       if (vHp > vHpMax) vHpMax = vHp;
+      // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
+      // a lie — villagers move at different paces. villagerSpeed derives
+      // initiative from age, wounds, and temperament (2..4), on the same
+      // scale as the monster speeds.
+      var vSpeed = 3;
+      try { if (this.villagerSpeed) vSpeed = this.villagerSpeed(vid) || 3; } catch (e) {}
       var bravery = 0, temper = 'steady', potential = false, wb = 0, varmor = 0;
       try { bravery = (((this.agencyOf(vid) || {}).xp || {})[vid] || {}).bravery || 0; } catch (e) {}
       // CONTESTS (Steve 2026-10-08): the crowd's roar steadies the arm —
@@ -131,11 +139,14 @@
         var S = _g.S || ((_g.Scattering || {}).S) || {};
         var vp = ((this.data.villagers || []).find(function (x) { return x.id === vid; }) ||
                   (this.data.background_survivors || []).find(function (x) { return x.id === vid; })) || {};
-        // RANGED COUNTS (2026-10-09): off-screen fights have no grid, so
-        // range is meaningless — a spear is a spear. Melee + ranged both
+        // RANGED COUNTS (2026-10-09, SUPERSEDED for the opening by the
+        // 2026-10-13 volley): off-screen fights have no grid, so mid-melee
+        // range was meaningless — a spear is a spear. Melee + ranged both
         // contribute, halved like the tactical engine's "helpers, not heroes"
         // rule (wb = round((melee+ranged)/2)). threatLevel sums the two
         // WITHOUT halving — that's a threat rating, not a damage formula.
+        // The volley above is the bow's distinct identity; this fold-in only
+        // governs the close-in rounds.
         if (S.equipment && S.equipment.weaponBonusOf)
           wb = Math.round(((S.equipment.weaponBonusOf(vp, this.data.items, 'melee') || 0) +
                            (S.equipment.weaponBonusOf(vp, this.data.items, 'ranged') || 0)) / 2);
@@ -238,6 +249,113 @@
         }
       }
 
+      // RANGED OPENING VOLLEY (blitz-combatstats 2026-10-13): supersedes the
+      // 2026-10-09 "RANGED COUNTS" rule ("off-screen fights have no grid, so
+      // range is meaningless — a spear is a spear"). That made a bow a bigger
+      // club: its whole contribution folded into melee damage. A bow is not
+      // a bigger club — it's distance. The fight now OPENS at range:
+      //
+      // - Before round 1, the archer looses while the monster closes. Shots =
+      //   min(arrows on hand, clamp(1 + floor(range / monster speed), 1, 4)):
+      //   a fast monster closes before the second arrow is nocked (hushwolf
+      //   speed 5 vs a range-5 bow: 2 shots); a slow one lets you rain
+      //   (bulldozer speed 2 vs a range-5 bow: 3 shots). The cap keeps the
+      //   volley an opening, not the fight.
+      // - Each shot costs 1 real ammo from the villager's own items — the
+      //   quiver empties, honestly. No arrows, no volley (narrated, never
+      //   silent).
+      // - Hit chance: 0.85 − 0.06×range (longer = riskier; range-5 bow ~55%),
+      //   +min(0.15, tracking XP ×0.005) — attention pays. A miss is narrated
+      //   and the arrow is still spent: wasted shots are the archer's risk.
+      // - A hit lands the tactical formula on the RANGED half only:
+      //   lroll([4+wbR, 8+wbR]), wbR = round(rangedBonus/2).
+      // - Volley damage hits the LEAD — so a good volley can drive the pack
+      //   off before contact (mBreak) or drop it outright (vKill). Softening
+      //   at range is the bow's identity. The melee fold-in stays (2026-10-09
+      //   rule kept) — the bow still helps up close, just not as a club.
+      // - Determinism: every draw goes through lroll/RR (contest engine's
+      //   seeded stream), so seeded contest fights stay deterministic.
+      rec.volley = null;
+      try {
+        var _rw = (S.equipment && S.equipment.rangedWeaponOf)
+          ? S.equipment.rangedWeaponOf(vp, this.data.items) : null;
+        var _rwId = _rw ? (_rw.itemId || _rw.id) : null;
+        var _rdef = null;
+        if (_rwId) {
+          for (var _di = 0; _di < (this.data.items || []).length; _di++) {
+            if (this.data.items[_di].id === _rwId) { _rdef = this.data.items[_di]; break; }
+          }
+        }
+        var _w = (_rdef && _rdef.weapon) || null;
+        var _ammoId = _w ? _w.ammo : null;
+        if (_w && _ammoId) {
+          var _range = _w.range || 3;
+          var _rBonus = (_w.bonus || 0);
+          var _wbR = Math.round(_rBonus / 2);
+          // count the villager's own ammo (entries carry {itemId, units})
+          var _ammoIdx = [];
+          var _ammoN = 0;
+          var _vitems = vp.items || [];
+          for (var _ai = 0; _ai < _vitems.length; _ai++) {
+            var _ent = _vitems[_ai], _eid = null, _mat = null, _u = 1;
+            if (typeof _ent === 'string') { _eid = _ent; }
+            else if (_ent) { _eid = _ent.itemId || _ent.id; _mat = _ent.material; _u = _ent.units || 1; }
+            if (_eid === _ammoId || _mat === _ammoId) { _ammoIdx.push(_ai); _ammoN += _u; }
+          }
+          var _maxShots = clamp(1 + Math.floor(_range / Math.max(1, mSpeed)), 1, 4);
+          var _shots = Math.min(_ammoN, _maxShots);
+          if (_shots < 1) {
+            rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no arrows — the string stays drawn, useless.');
+            rec.volley = { shots: 0, hits: 0, dmg: 0, ammoLeft: _ammoN };
+          } else {
+            var _hitP = clamp(0.85 - 0.06 * _range, 0.35, 0.85);
+            var _tracking = 0;
+            try { _tracking = (((this.agencyOf(vid) || {}).xp || {})[vid] || {}).tracking || 0; } catch (e) {}
+            _hitP += Math.min(0.15, _tracking * 0.005);
+            var _vh = 0, _vdmg = 0;
+            rec.log.push(vName + ' sees the ' + mName + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            for (var _s = 0; _s < _shots; _s++) {
+              // spend one ammo, honestly — the quiver empties
+              var _spent = false;
+              for (var _ki = _ammoIdx.length - 1; _ki >= 0 && !_spent; _ki--) {
+                var _ee = _vitems[_ammoIdx[_ki]];
+                if (typeof _ee === 'string') { _vitems.splice(_ammoIdx[_ki], 1); _spent = true; }
+                else if (_ee) {
+                  _ee.units = Math.max(0, (_ee.units || 1) - 1);
+                  if (_ee.units <= 0) _vitems.splice(_ammoIdx[_ki], 1);
+                  _spent = true;
+                }
+              }
+              _ammoN--;
+              if (RR() < _hitP) {
+                var _vd = lroll([4 + _wbR, 8 + _wbR]);
+                members[0].hp -= _vd; rec.mDealt += _vd; _vh++; _vdmg += _vd;
+                if (members[0].hp <= 0) members[0].alive = false;
+                rec.log.push('  loosed — it takes the ' + mName + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+              } else {
+                rec.log.push('  loosed wide — the arrow buries itself in the dirt. (spent)');
+              }
+              if (members[0].hp <= 0) break;
+            }
+            rec.volley = { shots: _shots, hits: _vh, dmg: _vdmg, ammoLeft: Math.max(0, _ammoN) };
+            rec.log.push(vName + ' lowers the bow — the ' + mName + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+          }
+        }
+      } catch (e) { /* no ranged kit, no volley — the fight starts as before */ }
+
+      // THE VOLLEY CAN END THE FIGHT (Steve 2026-10-13, drive-off at range):
+      // the volley hits the lead — if it drops below the pack's break line
+      // the pack scatters before contact; if the lead dies, the pack dies
+      // with it. A bow should feel like range, not like a club you hold.
+      if (members[0].hp <= 0) {
+        rec.outcome = 'vKill';
+        for (var _vj = 0; _vj < members.length; _vj++) { members[_vj].hp = 0; members[_vj].alive = false; }
+        rec.log.push('The lead never reached ' + vName + ' — it fell to the volley, and the pack\'s coordination shatters with it.');
+      } else if ((members[0].hp / members[0].maxHp) < mBreak) {
+        rec.outcome = 'mFlee';
+        rec.log.push(vName + ' drove the ' + mName + ' off with the bow — it broke before it ever closed.');
+      }
+
       // ---- rounds ----
       // RISK TOLERANCE (Steve 2026-10-09): flee is a SITUATIONAL decision, not
       // a flat HP line. "Maybe die today or definitely die tomorrow" — after
@@ -274,7 +392,7 @@
         rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
       }
-      for (var round = 1; round <= MAX_ROUNDS; round++) {
+      for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
         abRoundTaken = 0;
         // ABILITY — HAYMAKER (throw_haymaker): every 3rd round the villager
@@ -296,7 +414,7 @@
         var sigFx = { mSkip: false, vMiss: false, mDmgBonus: 0 };
         try { if (this.sigW3cFieldRound) this.sigW3cFieldRound(mdef, vid, round, rec, sigFx, { RR: RR, lroll: lroll, vName: vName, mName: mName, members: members }); } catch (e) {}
         if (sigFx.mSkip) mStunnedThisRound = true;
-        var mInit = mSpeed + RR() * 2, vInit = 3 + RR() * 2;
+        var mInit = mSpeed + RR() * 2, vInit = vSpeed + RR() * 2;
         var mFirst = mInit >= vInit;
         var acted = [mFirst ? 'm' : 'v', mFirst ? 'v' : 'm'];
         for (var ai = 0; ai < 2; ai++) {

@@ -630,7 +630,7 @@
       fighters.push({
         key: 'h_' + vid, kind: 'hostile', villagerId: vid,
         name: this.displayName(vid), emoji: '🔪',
-        hp: _bhp, maxHp: 40, speed: 3, mx: bspot.x, my: bspot.y,
+        hp: _bhp, maxHp: 40, speed: this.villagerSpeed(vid), mx: bspot.x, my: bspot.y,
         alive: true, fled: false, moveLeft: 0, acted: false,
         ai: temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'brave',
         betrayal: true,
@@ -644,7 +644,7 @@
         fighters.push({
           key: 'v_' + pid, kind: 'villager', villagerId: pid,
           name: this.displayName(pid), emoji: '🧍',
-          hp: 30, maxHp: 30, speed: 3, mx: pspot.x, my: pspot.y,
+          hp: 30, maxHp: 30, speed: this.villagerSpeed(pid), mx: pspot.x, my: pspot.y,
           alive: true, fled: false,
           ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',
           helped: false,
@@ -1151,7 +1151,7 @@
           f.fighters.push({
             key: 'v_' + pid, kind: 'villager', villagerId: pid,
             name: this.displayName(pid), emoji: '🧍',
-            hp: 30, maxHp: 30, speed: 3,
+            hp: 30, maxHp: 30, speed: this.villagerSpeed(pid),
             mx: pos ? pos.mx : px, my: pos ? pos.my : py,
             alive: true, fled: false,
             ai: ptemp === 'bold' ? 'brave' : ptemp === 'cautious' ? 'cautious' : 'helpful',

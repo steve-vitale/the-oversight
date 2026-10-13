@@ -611,7 +611,7 @@
         fighters.push({
           key: 'h_' + vid, kind: 'hostile', villagerId: vid,
           name: this.displayName(vid), emoji: '🔪',
-          hp: 30, maxHp: 30, speed: 3, mx: spot.x, my: spot.y,
+          hp: 30, maxHp: 30, speed: this.villagerSpeed(vid), mx: spot.x, my: spot.y,
           alive: true, fled: false, moveLeft: 0, acted: false,
           ai: temp === 'bold' ? 'brave' : 'cautious',
           uprising: true,
@@ -622,7 +622,7 @@
         fighters.push({
           key: 'v_' + vid, kind: 'villager', villagerId: vid,
           name: this.displayName(vid), emoji: '🧍',
-          hp: 30, maxHp: 30, speed: 3, mx: spot.x, my: spot.y,
+          hp: 30, maxHp: 30, speed: this.villagerSpeed(vid), mx: spot.x, my: spot.y,
           alive: true, fled: false,
           ai: 'helpful', helped: false,
         });

@@ -2631,7 +2631,7 @@
         fighters.push({
           key: 'v_' + rid, kind: 'villager', villagerId: rid,
           name: this.displayName ? this.displayName(rid) : rid, emoji: '🧍',
-          hp: 30, maxHp: 30, speed: 3, mx: vp.mx, my: vp.my,
+          hp: 30, maxHp: 30, speed: this.villagerSpeed(rid), mx: vp.mx, my: vp.my,
           alive: true, fled: false, ai: ai, helped: false,
         });
       }

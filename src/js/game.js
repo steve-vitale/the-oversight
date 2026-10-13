@@ -27248,6 +27248,35 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return Math.max(1, sp);
     },
 
+    // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat speed-3
+    // every non-player fighter carried was a lie — people move at different
+    // paces. Combat-initiative speed on the same integer scale as
+    // playerSpeed and the monster speeds. Derived from:
+    //   age:         under 30 → +1 (young is quick); over 55 → -1 (old joints)
+    //   wounds:      current health under half → -1 (bleeding drags)
+    //   temperament: bold/intense react first → +1; cautious/withdrawn
+    //                hang back → -1 (deliberate, not slow)
+    // Clamped 2..4: it matters (turn order sorts against monster speeds
+    // 1..6; it also sets tactical movement squares) but doesn't dominate —
+    // damage, bravery, gear, and the initiative roll still decide the fight.
+    // Feel over math: a young bold hunter moves first; an old wounded
+    // cautious villager moves last. Uses npcAge/npcTemper so unknown ids
+    // fall back to a sane 3.
+    villagerSpeed(vid) {
+      let s = 3;
+      try {
+        const age = this.npcAge ? this.npcAge(vid) : 30;
+        if (age < 30) s += 1;
+        else if (age > 55) s -= 1;
+        const hp = ((this.state.village || {}).health || {})[vid];
+        if (hp !== undefined && hp !== null && hp < 50) s -= 1;
+        const temp = this.npcTemper ? this.npcTemper(vid) : 'steady';
+        if (temp === 'bold' || temp === 'intense') s += 1;
+        else if (temp === 'cautious' || temp === 'withdrawn') s -= 1;
+      } catch (e) {}
+      return Math.max(2, Math.min(4, s));
+    },
+
     // LEADERSHIP VECTOR (Steve 2026-10-04, preserved 2026-10-05): the ending
     // is the sum of how you led. Tracked across the game, felt before arrival.
     // Dimensions: force vs diplomacy, showmanship, System stance, humanity's
@@ -27883,7 +27912,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         fighters.push({
           key: 'v_' + rid, kind: 'villager', villagerId: rid,
           name: this.displayName(rid), emoji: '🧍',
-          hp: vhp, maxHp: Math.max(vhp, 100), speed: 3, mx: pos.mx, my: pos.my,
+          hp: vhp, maxHp: Math.max(vhp, 100), speed: this.villagerSpeed(rid), mx: pos.mx, my: pos.my,
           alive: true, fled: false, ai, helped: false,
           wbonus: vwbonus, varmor: varmor,
         });
