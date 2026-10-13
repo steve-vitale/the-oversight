@@ -1,0 +1,982 @@
+{
+ "seed": 909,
+ "daycap": 60,
+ "ms": 4134,
+ "end": {
+  "day": 41,
+  "alive": 1,
+  "outcome": null
+ },
+ "stats": {
+  "askedTotal": 36,
+  "answeredTotal": 36,
+  "perQid": {
+   "q_name_day": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_laugh": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_plan": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_hope": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_fun": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_origin": {
+    "asked": 4,
+    "answered": 4
+   },
+   "q_quiet": {
+    "asked": 2,
+    "answered": 2
+   },
+   "q_skill": {
+    "asked": 2,
+    "answered": 2
+   },
+   "q_song": {
+    "asked": 3,
+    "answered": 3
+   },
+   "q_fight": {
+    "asked": 3,
+    "answered": 3
+   },
+   "q_teach_me": {
+    "asked": 2,
+    "answered": 2
+   },
+   "q_alone_time": {
+    "asked": 2,
+    "answered": 2
+   },
+   "q_left_behind": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_change": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_dream": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_before_skill": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_theory": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_laugh_memory": {
+    "asked": 2,
+    "answered": 2
+   },
+   "q_useful": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_angry": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_first_week": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_stay": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_kindness": {
+    "asked": 1,
+    "answered": 1
+   },
+   "q_think": {
+    "asked": 1,
+    "answered": 1
+   }
+  },
+  "moodCount": {
+   "steady": 204,
+   "lonely": 6,
+   "hungry": 20,
+   "grieving": 18,
+   "scared": 8
+  },
+  "askExamples": {
+   "q_name_day": [
+    {
+     "askLine": "\"What day is it? ...Do you still count? I lost track days ago.\"",
+     "offers": [
+      {
+       "id": "a_count",
+       "label": "\"I count. Someone has to.\""
+      },
+      {
+       "id": "a_lost",
+       "label": "\"Lost track too. Does it matter?\""
+      },
+      {
+       "id": "a_guess",
+       "label": "\"It's someday. Probably.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_count",
+     "mood": "steady"
+    }
+   ],
+   "q_laugh": [
+    {
+     "askLine": "\"Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it. Famous last words.\"",
+     "offers": [
+      {
+       "id": "a_story",
+       "label": "(tell them something funny)"
+      },
+      {
+       "id": "a_nothing",
+       "label": "\"Nothing's been funny.\""
+      },
+      {
+       "id": "a_dark",
+       "label": "\"The fact that we're alive is pretty funny.\""
+      }
+     ],
+     "answeredAid": "a_story",
+     "mood": "lonely"
+    }
+   ],
+   "q_hope": [
+    {
+     "askLine": "\"About that question — What are you hoping for? Not the big stuff. The small thing. I really think so.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Hope's a big word for small things.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"A full night's sleep. Just one. Where I don't wake up listening.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Something sweet. I can't remember the last sweet thing.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_fun": [
+    {
+     "askLine": "\"What did you do for fun? Before. The thing you'd do on a perfect Saturday.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Fun feels like another lifetime.\""
+      },
+      {
+       "id": "a_people",
+       "label": "\"Nothing fancy. Just — people. Being around my people.\""
+      },
+      {
+       "id": "a_hobby",
+       "label": "\"I had a whole thing. Hobbies, projects.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "lonely"
+    }
+   ],
+   "q_quiet": [
+    {
+     "askLine": "\"...Hi. Sorry. I'm not good at the talking-to-strangers part.\"",
+     "offers": [
+      {
+       "id": "a_kind",
+       "label": "\"Neither am I, honestly.\""
+      },
+      {
+       "id": "a_help",
+       "label": "\"What do you need?\""
+      },
+      {
+       "id": "a_leave",
+       "label": "\"It's okay. I'll leave you be.\""
+      }
+     ],
+     "answeredAid": "a_kind",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — ...Hi. Sorry. I'm not good at the talking-to-strangers part.\"",
+     "offers": [
+      {
+       "id": "a_kind",
+       "label": "\"Neither am I, honestly.\""
+      },
+      {
+       "id": "a_help",
+       "label": "\"What do you need?\""
+      },
+      {
+       "id": "a_leave",
+       "label": "\"It's okay. I'll leave you be.\""
+      }
+     ],
+     "answeredAid": "a_kind",
+     "mood": "steady"
+    }
+   ],
+   "q_skill": [
+    {
+     "askLine": "\"Walk with me? I want another pair of eyes on something.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Nothing worth mentioning.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"I'm better with my hands than people expect. You'll see.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"A few things. You'll find out. Or you won't.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "lonely"
+    },
+    {
+     "askLine": "\"About that question — What's something you're good at that nobody here knows about?\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Nothing worth mentioning.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"I'm better with my hands than people expect. You'll see.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"A few things. You'll find out. Or you won't.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_song": [
+    {
+     "askLine": "\"About that question — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Are you going to sing?\""
+      },
+      {
+       "id": "a_yes",
+       "label": "\"In the shower. Which is now the creek. So yes, badly.\""
+      },
+      {
+       "id": "a_no",
+       "label": "\"No. Feels wrong, somehow.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing. You'd know about that.\"",
+     "offers": [
+      {
+       "id": "a_yes",
+       "label": "\"In the shower. Which is now the creek. So yes, badly.\""
+      },
+      {
+       "id": "a_no",
+       "label": "\"No. Feels wrong, somehow.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_yes",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Are you going to sing?\""
+      },
+      {
+       "id": "a_yes",
+       "label": "\"In the shower. Which is now the creek. So yes, badly.\""
+      },
+      {
+       "id": "a_no",
+       "label": "\"No. Feels wrong, somehow.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_fight": [
+    {
+     "askLine": "\"Sure — Have you ever hurt someone? Since all this started.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"That's not a question you ask people.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Yes. I don't want to talk about the details. But yes.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Define 'hurt.' We're all hurting each other just by needing things.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — Have you ever hurt someone? Since all this started. You doing okay?\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"Yes. I don't want to talk about the details. But yes.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Define 'hurt.' We're all hurting each other just by needing things.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"Have you ever hurt someone? Since all this started.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"That's not a question you ask people.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Yes. I don't want to talk about the details. But yes.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Define 'hurt.' We're all hurting each other just by needing things.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_teach_me": [
+    {
+     "askLine": "\"Walk my trap line with me? Extra hands, extra eyes.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"I'm not much of a teacher.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Okay — here's one small useful thing I know. Watch.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I don't know what I know that you don't. We're all guessing out here.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"We need to — Teach me something. Anything you know that I don't.\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"Okay — here's one small useful thing I know. Watch.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I don't know what I know that you don't. We're all guessing out here.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "steady"
+    }
+   ],
+   "q_alone_time": [
+    {
+     "askLine": "\"About that question — Do you ever just need to be alone? Like, really alone?\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"Every day. I go for walks that don't need to happen. Just to breathe my own air.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Less than I thought I would. The quiet scares me more than the crowd.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — Do you ever just need to be alone? Like, really alone?\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Alone is how you get got.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Every day. I go for walks that don't need to happen. Just to breathe my own air.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Less than I thought I would. The quiet scares me more than the crowd.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_left_behind": [
+    {
+     "askLine": "\"Practical view: Did you leave someone behind? ...Sorry. You don't have to answer that.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Everyone did.\""
+      },
+      {
+       "id": "a_yes",
+       "label": "\"Yes.\""
+      },
+      {
+       "id": "a_unknown",
+       "label": "\"I don't know. I don't know where anyone is.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_change": [
+    {
+     "askLine": "\"About that question — Has this changed you? Like, fundamentally?\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"I don't recognize the person in my head anymore. I think that's good? I don't know.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Everyone says it has. I'm not sure I believe them.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "steady"
+    }
+   ],
+   "q_dream": [
+    {
+     "askLine": "\"About that question — Do you dream about before? Or is it all — this — now?\"",
+     "offers": [
+      {
+       "id": "a_before",
+       "label": "\"Before. Every night. It's the only place it still exists.\""
+      },
+      {
+       "id": "a_now",
+       "label": "\"This. Always this now.\""
+      },
+      {
+       "id": "a_none",
+       "label": "\"I don't dream anymore. Or I don't remember.\""
+      }
+     ],
+     "answeredAid": "a_before",
+     "mood": "steady"
+    }
+   ],
+   "q_before_skill": [
+    {
+     "askLine": "\"About that question — What's something from your old life that's actually useful here? You'd know about that.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"My old life feels like a TV show I watched once.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"Honestly? Nothing. I feel like I'm starting from zero.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_laugh_memory": [
+    {
+     "askLine": "\"About that question — When's the last time you really laughed? Not that it matters.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Laughing feels wrong now.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"Recently — someone tripped over nothing and we all lost it. It felt like stealing.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I can't remember. That's probably my answer.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    },
+    {
+     "askLine": "\"About that question — When's the last time you really laughed?\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"Recently — someone tripped over nothing and we all lost it. It felt like stealing.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I can't remember. That's probably my answer.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "steady"
+    }
+   ],
+   "q_useful": [
+    {
+     "askLine": "\"About that question — What's the most useful thing you've learned since we got here? Just... be straight with me.\"",
+     "offers": [
+      {
+       "id": "a_hunger",
+       "label": "\"How to be hungry and keep going anyway.\""
+      },
+      {
+       "id": "a_self",
+       "label": "\"That I can do more than I thought.\""
+      },
+      {
+       "id": "a_learning",
+       "label": "\"Nothing yet. Still learning.\""
+      }
+     ],
+     "answeredAid": "a_hunger",
+     "mood": "steady"
+    }
+   ],
+   "q_angry": [
+    {
+     "askLine": "\"Are you angry? At whoever did this. At the sky. At anything. — or so they tell me.\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Anger doesn't help.\""
+      },
+      {
+       "id": "a_yes",
+       "label": "\"Furious. Most days.\""
+      },
+      {
+       "id": "a_tired",
+       "label": "\"Too tired to be angry.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ],
+   "q_first_week": [
+    {
+     "askLine": "\"About that question — What got you through the first week? The very first days. Anyway.\"",
+     "offers": [
+      {
+       "id": "a_shock",
+       "label": "\"Honestly? Shock. Just kept moving.\""
+      },
+      {
+       "id": "a_person",
+       "label": "\"One person. They kept me going.\""
+      },
+      {
+       "id": "a_blur",
+       "label": "\"I don't remember. It's a blur.\""
+      }
+     ],
+     "answeredAid": "a_shock",
+     "mood": "grieving"
+    }
+   ],
+   "q_stay": [
+    {
+     "askLine": "\"About that question — Are you going to stay? With us. For real.\"",
+     "offers": [
+      {
+       "id": "a_tell",
+       "label": "\"Yeah. I am. I didn't expect to say that, but yeah.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I don't know yet. I'm still deciding what 'staying' means.\""
+      }
+     ],
+     "answeredAid": "a_tell",
+     "mood": "hungry"
+    }
+   ],
+   "q_kindness": [
+    {
+     "askLine": "\"What's the kindest thing someone's done for you out here?\"",
+     "offers": [
+      {
+       "id": "a_deflect",
+       "label": "\"Kindness feels like a setup now. I don't trust it.\""
+      },
+      {
+       "id": "a_tell",
+       "label": "\"I've watched people share food they couldn't spare. Quiet. No performance. Just... did it.\""
+      },
+      {
+       "id": "a_vague",
+       "label": "\"I can't pick one. Which probably means I've been luckier than I admit.\""
+      },
+      {
+       "id": "honest_pass",
+       "label": "\"I'd rather not say.\""
+      }
+     ],
+     "answeredAid": "a_deflect",
+     "mood": "steady"
+    }
+   ]
+  },
+  "qMeta": {
+   "q_origin": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_plan": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_scared": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": "scared",
+    "smallTalk": false
+   },
+   "q_miss": {
+    "minTrust": 20,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_trust": {
+    "minTrust": 45,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_think": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_hands": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_read": {
+    "minTrust": 15,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_theory": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_night": {
+    "minTrust": 0,
+    "minDay": 2,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_laugh": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": true
+   },
+   "q_quiet": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_first_memory": {
+    "minTrust": 15,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": true
+   },
+   "q_regret": {
+    "minTrust": 35,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_skill": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_believe": {
+    "minTrust": 25,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_someone": {
+    "minTrust": 20,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_change": {
+    "minTrust": 30,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_guilty": {
+    "minTrust": 40,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_hope": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_alone_time": {
+    "minTrust": 20,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_laugh_memory": {
+    "minTrust": 15,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": true
+   },
+   "q_teach_me": {
+    "minTrust": 25,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_stay": {
+    "minTrust": 45,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_system_fear": {
+    "minTrust": 30,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_kindness": {
+    "minTrust": 20,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_before_skill": {
+    "minTrust": 15,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_fight": {
+    "minTrust": 35,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_song": {
+    "minTrust": 15,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_first_week": {
+    "minTrust": 10,
+    "minDay": 8,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_angry": {
+    "minTrust": 25,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_dream": {
+    "minTrust": 20,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_left_behind": {
+    "minTrust": 35,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_name_day": {
+    "minTrust": 0,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_useful": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": false
+   },
+   "q_fun": {
+    "minTrust": 10,
+    "minDay": 0,
+    "when": null,
+    "smallTalk": true
+   }
+  }
+ }
+}
