@@ -613,7 +613,7 @@
       </div>
       <p class="small" id="install-hint" style="display:none;opacity:.7"></p>
       <p class="small" style="margin-top:20px">slice 1: open expeditions. forage · eat · drink · bring it home.</p>
-      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span> <span id="b-voice" style="cursor:pointer;opacity:.25;font-size:11px" title="voiced dialogue">🗣️</span></p>
+      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-sound" style="cursor:pointer;opacity:.5;font-size:11px" title="toggle sound">🔊</span> <input id="b-vol" type="range" min="0" max="100" step="1" value="90" style="width:64px;vertical-align:middle;opacity:.55" title="volume"> <span id="b-voice" style="cursor:pointer;opacity:.25;font-size:11px" title="voiced dialogue">🗣️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
     // UI SELECT (Steve 2026-10-12): the main menu answers every tap.
@@ -711,11 +711,24 @@
       bdbg.onclick = () => { toggleDebug(); };
     }
     // 🔊 sound toggle: mutes the Web Audio terror system. Persists.
+    // VOLUME SLIDER (Steve 2026-10-12): player-facing volume, persisted.
+    // Dragging it up from zero unmutes — the slider is the louder control.
     const bsnd = document.getElementById('b-sound');
+    const bvol = document.getElementById('b-vol');
+    const paintSnd = () => { if (bsnd) bsnd.textContent = (Game.audio && Game.audio.isMuted()) ? '🔇' : '🔊'; };
     if (bsnd && Game.audio) {
-      const paintSnd = () => { bsnd.textContent = Game.audio.isMuted() ? '🔇' : '🔊'; };
       paintSnd();
       bsnd.onclick = () => { try { Game.audio.toggleMute(); } catch (e) {} paintSnd(); };
+    }
+    if (bvol && Game.audio && Game.audio.setVolume) {
+      try { bvol.value = Math.round(Game.audio.getVolume() * 100); } catch (e) {}
+      bvol.oninput = () => {
+        try {
+          Game.audio.setVolume(bvol.value / 100);
+          if (Game.audio.isMuted() && bvol.value > 0) { Game.audio.toggleMute(); }
+        } catch (e) {}
+        paintSnd();
+      };
     }
     // 🗣️ voiced-dialogue toggle (Steve 2026-10-11): spoken NPC lines via
     // Piper TTS packs (lazy-loaded, cached). Persists; default is on once
@@ -2376,6 +2389,10 @@
     let master = null, hbBus = null, sfxBus = null, musicBus = null;
     let muted = false;
     try { muted = (typeof localStorage !== 'undefined') && localStorage.getItem('oversight_mute') === '1'; } catch (e) {}
+    // VOLUME (Steve 2026-10-12): player-facing volume setting, persisted.
+    // The mute toggle remains the hard off; this scales the master gain.
+    let vol = 0.9;
+    try { const _v = parseFloat(localStorage.getItem('oversight_vol')); if (isFinite(_v)) vol = Math.min(1, Math.max(0, _v)); } catch (e) {}
     let charge = null;   // active beam-charge stopper
     let sweep = null;    // sustained beam hum {set, stop}
     let noiseBuf = null;
@@ -2404,7 +2421,7 @@
         comp.threshold.value = -18; comp.knee.value = 22; comp.ratio.value = 12;
         comp.attack.value = 0.003; comp.release.value = 0.25;
         master = ctx.createGain();
-        master.gain.value = muted ? 0.0001 : 0.9;
+        master.gain.value = muted ? 0.0001 : vol;
         hbBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus = ctx.createGain();
         musicBus.gain.value = 0.9;
         hbBus.connect(master); sfxBus.connect(master); musicBus.connect(master);
@@ -8473,11 +8490,31 @@
         try {
           master.gain.cancelScheduledValues(t);
           master.gain.setValueAtTime(master.gain.value, t);
-          master.gain.linearRampToValueAtTime(muted ? 0.0001 : 0.9, t + 0.15);
+          master.gain.linearRampToValueAtTime(muted ? 0.0001 : vol, t + 0.15);
         } catch (e) {}
       }
       return muted;
     }
+    function applyVol() {
+      if (ctx && master) {
+        const t = ctx.currentTime;
+        try {
+          master.gain.cancelScheduledValues(t);
+          master.gain.setValueAtTime(master.gain.value, t);
+          master.gain.linearRampToValueAtTime(muted ? 0.0001 : vol, t + 0.1);
+        } catch (e) {}
+      }
+    }
+    // setVolume: the player-facing volume setting (Steve 2026-10-12).
+    // Persists to oversight_vol; 0 is quiet, not mute (the 🔊 toggle owns mute).
+    function setVolume(v) {
+      v = Number(v); if (!isFinite(v)) return vol;
+      vol = Math.min(1, Math.max(0, v));
+      try { if (typeof localStorage !== 'undefined') localStorage.setItem('oversight_vol', String(vol)); } catch (e) {}
+      applyVol();
+      return vol;
+    }
+    function getVolume() { return vol; }
     // ============ VOICED DIALOGUE (Steve 2026-10-11) ============
     // playVoice(blob, opts): speak a TTS WAV through the EXISTING audio
     // graph — one unlock flow (ensure), one mute (master gain), one bus.
@@ -12211,15 +12248,30 @@
     }
     // UI SELECT (Steve 2026-10-12): the main menu answers every tap — soft
     // two-tone blip, friendly, never clicky.
+    // SFX PRIORITY DUCK (Steve 2026-10-12): the generative music bed is
+    // continuous polyphony under an aggressive compressor — a 120ms blip at
+    // the same peak gets masked and taps sound dead. Dip the music bus
+    // briefly whenever the blip fires so it is always heard, then recover.
+    function duckMusic() {
+      if (!ctx || !musicBus) return;
+      try {
+        const t = ctx.currentTime;
+        musicBus.gain.cancelScheduledValues(t);
+        musicBus.gain.setValueAtTime(musicBus.gain.value, t);
+        musicBus.gain.linearRampToValueAtTime(0.45, t + 0.03);
+        musicBus.gain.linearRampToValueAtTime(0.9, t + 0.35);
+      } catch (e) {}
+    }
     function uiSelect() {
       if (!ensure()) return; if (muted) return;
+      duckMusic();
       const t = ctx.currentTime;
       try {
         [660, 990].forEach((fq, i) => {
           const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fq;
           const g = ctx.createGain(); const st = t + i * 0.055;
           g.gain.setValueAtTime(0.0001, st);
-          g.gain.linearRampToValueAtTime(0.045, st + 0.012);
+          g.gain.linearRampToValueAtTime(0.065, st + 0.012);
           g.gain.exponentialRampToValueAtTime(0.0001, st + 0.12);
           o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.15);
         });
@@ -12549,6 +12601,8 @@
       waveUnlock() { waveUnlock(); },
       toggleMute() { return toggleMute(); },
       isMuted() { return muted; },
+      setVolume(v) { return setVolume(v); },
+      getVolume() { return getVolume(); },
       playVoice(blob, opts) { return playVoice(blob, opts); },
       stopVoice() { stopVoice(); },
       round(d) { roundTick(d); }, // the System is counting — it gets heavier each round
