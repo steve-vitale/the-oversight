@@ -78,3 +78,70 @@ flag it: a false positive costs a tag, a false negative costs his trust.
 Measurement workers don't pull levers. If the harness spots a balance issue,
 document it in the evidence file for the loops — don't fix it in the tooling
 commit.
+
+## 9. Staged seeds: the pilot gate (Steve 2026-10-12)
+
+Never spend 12–20 seeds before knowing the lever does anything visible.
+Every lever runs in stages, cheapest first:
+
+- **Stage 0 — smoke (2–3 seeds, short horizon).** Does the lever's code path
+  even fire? Does the primary metric move at all? If nothing fires, fix the
+  wiring, not the tuning.
+- **Stage 1 — pilot (4 seeds, question-appropriate horizon, before/after on
+  identical seeds).** The GO/NO-GO gate. GO only if the effect is *obvious*
+  in 4 seeds — visible in the raw numbers without statistics.
+- **Stage 2 — confirm (12–20 seeds).** Only on a pilot GO. This is the
+  publishable measurement.
+
+**Kill rule:** pilot delta below the pre-registered threshold → document it,
+kill the lever, move on. No confirm spend on invisible effects.
+
+The gate is a sniff test, not a significance test. If you need 20 seeds and
+a p-value to see the lever's effect, the lever isn't pulling hard enough —
+redesign it or park it.
+
+Wall-clock budget (hourly loops): the pilot must fit in ~15 minutes. The
+confirm gets the rest of the run. If the pilot can't fit, shrink the horizon
+first (section 10), then the seed count — never skip the gate.
+
+## 10. Death-aware horizons (Steve 2026-10-12)
+
+A fixed 200-day horizon is waste when villages die at day 63. Set the horizon
+from the lever's question and the measured survival distribution:
+
+- **Early-game levers** (landing, food basics, wave 1): 60 days.
+- **Mid-game levers** (waves 2–3, knowledge, regional): 100 days.
+- **Reachability levers** (waves 4–5, national, table, wins): 150–200 days.
+- **Adaptive rule:** horizon = min(cap, p95 village-death day from the
+  baseline sweep + 15 days tail). The baseline sweep gives you the survival
+  distribution for free — use it.
+- **Stop rule:** a seed whose village is dead or scattered stops simulating.
+  Succession/epilogue behavior gets at most a 10-day tail, then the seed is
+  done. Never tick a dead village to fill a horizon.
+
+Quote the horizon choice and its reason in the evidence header (section 11).
+
+## 11. Pre-register the run (Steve 2026-10-12)
+
+The evidence file header states, BEFORE running:
+
+- primary metric (one — the thing this run is trying to move),
+- minimum meaningful effect (the GO threshold for the pilot gate),
+- horizon + why (section 10),
+- seeds (exact literals), policies.
+
+Judge the run against its header. If the data makes you move the goalposts,
+record the change in the evidence file as a correction — never a quiet edit.
+A run that pre-registered honestly and killed its lever is a good run.
+
+## 12. Convergence and lever budgets (Steve 2026-10-12)
+
+Tuning converges; it doesn't just continue.
+
+- A lever is **converged** when two consecutive tuning steps move the primary
+  metric less than the meaningful-effect threshold, or the metric hits its
+  design target. Say so in the evidence file and move to the next lever.
+- **Budget:** 3 rounds without passing the pilot gate → park the lever,
+  document why, move on. Sunk cost is not a strategy.
+- Every run reports convergence state in one line:
+  `converging | converged | parked | killed-at-pilot`.
