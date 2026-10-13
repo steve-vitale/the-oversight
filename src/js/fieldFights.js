@@ -193,7 +193,17 @@
       var mName = 'something';
       try { mName = this.monsterNoun ? this.monsterNoun(mdef.id) : (mdef.id || 'something'); } catch (e) {}
       var vName = 'Someone';
-      try { vName = this.displayName ? this.displayName(vid).split(' ')[0] : 'Someone'; } catch (e) {}
+      // NAME-AWARE (villager-depth 2026-10-12): displayName().split(' ')[0]
+      // collapses an unknown villager's "A woman, maybe 30s" to bare "A" in
+      // fight logs. firstRef never does — prefer it for non-player villagers.
+      var _G = this;
+      var refName = function (id) {
+        try {
+          if (_G.firstRef && id !== _G.villagerId) return _G.firstRef(id);
+          return _G.displayName ? _G.displayName(id).split(' ')[0] : 'Someone';
+        } catch (e) { return 'Someone'; }
+      };
+      try { vName = refName(vid); } catch (e) {}
 
       // ALREADY DEAD (break-it combat 2026-10-09): a world-monster entity
       // with hp<=0 is a corpse, not a fight. Reachable: a vFlee round can
@@ -404,7 +414,7 @@
         allyVid = allyVids.shift(); allies--;
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
-          allyName = (_fa0 && _fa0.name) || opts.allyName || (this.displayName ? this.displayName(allyVid).split(' ')[0] : 'Someone');
+          allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
         } catch (e) {}
         rec.calledHelp = true;
         rec.allyVid = allyVid;
@@ -697,7 +707,7 @@
           // AID (comms 2026-10-10): foreign allies carry their own names.
           try {
             var _fa2 = (opts.foreignAllies || {})[allyVid];
-            allyName = (_fa2 && _fa2.name) || opts.allyName || (this.displayName ? this.displayName(allyVid).split(' ')[0] : 'Someone');
+            allyName = (_fa2 && _fa2.name) || opts.allyName || refName(allyVid);
           } catch (e) {}
           rec.calledHelp = true;
           rec.allyVid = allyVid;
