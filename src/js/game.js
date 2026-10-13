@@ -6264,12 +6264,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // is at hand: the camp healer patches them up (+25, narrated). No healer —
     // they rest instead of departing (the +2/day passive still applies) and
     // try again tomorrow. Returns true when the villager sits this one out.
-    villagerHealCheck(vid, first) {
+    villagerHealCheck(vid, first, opts) {
       const v = this.state.village || {};
       v.health = v.health || {};
       const cur = (v.health[vid] !== undefined) ? v.health[vid] : 100;
       if (cur >= 70) return false;
       const nm = first || 'Someone';
+      const noSitOut = !!(opts && opts.noSitOut);
       // PHARMACY (Steve 2026-10-09): before bothering the healer, a hurt
       // villager uses deposited medicine when it's appropriate — the smallest
       // dose that covers the hurt, so nobody wastes a surgeon's kit on a
@@ -6315,6 +6316,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try {
           const who = healer === 'You' ? 'You patch them up' : `${healer} patches them up`;
           this.say(`🩹 ${nm} is hurting (${cur} HP) — ${who} before they head out. (${cur} → ${v.health[vid]} HP)`);
+        } catch (e) {}
+        return false;
+      }
+      if (noSitOut) {
+        // DEPARTURE HEAL GATE (2026-10-13): LEAVE is exempt from the
+        // sit-out — the desperate don't do sit-outs. They get patched when
+        // help is at hand (above), otherwise they walk out hurt. Narrated
+        // honestly: it's a decision, not an oversight.
+        try {
+          this.say(`🩹 ${nm} is hurting (${cur} HP) — nobody can help them, and they're leaving anyway. They walk out.`);
         } catch (e) {}
         return false;
       }

@@ -10,10 +10,12 @@
 //   - objAwayStep(rid, node, away, hx, hy)
 //   - objAskCompanion(vid, obj, hx, hy)
 //   - objTick()
+//   - objHealGate(vid, obj, hx, hy, playerAtHaven)
 // rules:
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
+//   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
@@ -404,7 +406,37 @@
       obj.companion = cid;
       return cid;
     },
+    // HEAL GATE (departure heal gate, lever 2026-10-13): objective
+    // departures get the expedition 70-HP heal check (villagerHealCheck in
+    // game.js: pharmacy -> healer -> sit-out). A hurt villager is patched
+    // before ranging out; with no help at hand they rest at haven for the
+    // day instead of walking out at 22 HP (r16 arm C census: 22/27 wave-1
+    // NPC monster deaths were non-expedition purposes, median entry hp 22).
+    // One verdict per villager per day (hurtGate): a patched villager isn't
+    // re-healed on a second departure, and a sat-out one isn't re-narrated.
+    // LEAVE is exempt from the sit-out — the desperate still walk out,
+    // patched first when help is at hand. Returns true when cleared.
+    objHealGate(vid, obj, hx, hy, playerAtHaven) {
+      var v = this.state.village || {};
+      var today = 0;
+      try { today = (this.state.scholar || {}).day || 0; } catch (e) {}
+      v.hurtGate = v.hurtGate || {};
+      var g = v.hurtGate[vid];
+      if (g && g.day === today) return !g.satOut; // already verdicts today — silent
+      if (!this.villagerHealCheck) return true;
+      var nm = 'Someone';
+      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) {}
+      var sat = false;
+      try { sat = !!this.villagerHealCheck(vid, nm, { noSitOut: !!(obj && obj.kind === 'LEAVE') }); } catch (e) {}
+      v.hurtGate[vid] = { day: today, satOut: sat };
+      return !sat;
+    },
     objDepart(vid, obj, hx, hy, playerAtHaven) {
+      // HEAL GATE (2026-10-13): hurt villagers are patched or sat out
+      // (objHealGate) BEFORE the move. Returns true when they departed.
+      try {
+        if (this.objHealGate && !this.objHealGate(vid, obj, hx, hy, playerAtHaven)) return false;
+      } catch (e) {}
       var v = this.state.village;
       var s = this.state.scholar;
       var node = null;
@@ -439,6 +471,7 @@
         if (obj.companion) dims.with = obj.companion;
         this.seedGossip('departure', dims, shuf.slice(0, 2));
       } catch (e) {}
+      return true;
     },
 
     // ---------- 3. THE DEPARTURE DECISION (replaces the dice triggers) ----------
@@ -455,6 +488,13 @@
       try { if (this.isEngaged(rid)) return; } catch (e) {}
       // SICK: the feverish stay home (parity 2026-10-08 — villagers get sick now)
       try { if ((v.sick || {})[rid]) return; } catch (e) {}
+      // HEAL GATE (departure heal gate, 2026-10-13): a villager who sat out
+      // hurt rests at haven the rest of the day instead of re-rolling
+      // departures every day-part. The +2/day passive still heals them.
+      try {
+        var _hg = ((this.state.village || {}).hurtGate || {})[rid];
+        if (_hg && _hg.day === ((this.state.scholar || {}).day || 0) && _hg.satOut) return;
+      } catch (e) {}
       var o = this.objOf(rid);
       // idle or done → pick fresh (dawn re-pick happens in objTick, but a
       // villager can finish mid-day and should decide again, not sit)
@@ -477,11 +517,22 @@
       } else if (dg.verdict === 'ask') {
         var cid = this.objAskCompanion(rid, o, hx, hy);
         if (cid) {
-          this.objDepart(rid, o, hx, hy, playerAtHaven);
-          // the companion walks out with them, same part
+          // HEAL GATE (2026-10-13): gate rid first — a sat-out rid must not
+          // strand a departed companion. Companion sat out -> rid tightens
+          // or defers, same as the no-companion case. (rid sat out: rests.)
           var co = this.objOf(cid);
-          this.objDepart(cid, co, hx, hy, playerAtHaven);
-          try { this.bumpTrust(rid, 1); this.bumpTrust(cid, 1); } catch (e) {}
+          var ridOk = this.objHealGate(rid, o, hx, hy, playerAtHaven);
+          var cidOk = ridOk && this.objHealGate(cid, co, hx, hy, playerAtHaven);
+          if (ridOk && cidOk) {
+            this.objDepart(rid, o, hx, hy, playerAtHaven);
+            // the companion walks out with them, same part
+            this.objDepart(cid, co, hx, hy, playerAtHaven);
+            try { this.bumpTrust(rid, 1); this.bumpTrust(cid, 1); } catch (e) {}
+          } else if (ridOk) {
+            // rid is fit but the companion sat out hurt -> rid tightens or
+            // defers, same as the no-companion case
+            this.objTightenOrDefer(rid, o, hx, hy, playerAtHaven);
+          }
         } else {
           // nobody to walk with → tighten or stay
           this.objTightenOrDefer(rid, o, hx, hy, playerAtHaven);
