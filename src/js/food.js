@@ -525,8 +525,9 @@
       // Weight is honest (kg always visible). Edibility and calories stay hidden
       // until you've learned this creature is food — via cautious testing,
       // a villager's word, or the Codex. No free knowledge from the UI.
+      // monsterMeatGated also covers part ids (belltoad legs).
       const meatId = (it.plantId || '').replace(/^meat_/, '');
-      const isMonsterMeat = (this.data.monsters || []).some(m => m.id === meatId);
+      const isMonsterMeat = this.monsterMeatGated(meatId);
       const foodSafe = !isMonsterMeat || this.monsterFoodSafe(meatId);
       it.foodKind = 'meat'; it.foodState = 'cleaned';
       it.edible = foodSafe;
@@ -1116,8 +1117,9 @@
         const per = Math.round(net2 / units2);
         // MONSTER FOOD SAFETY: the specialist's knife doesn't grant knowledge —
         // same gate as self-clean. Unknown flesh stays unknown until tested.
+        // monsterMeatGated also covers part ids (belltoad legs).
         const meatId = (it.plantId || '').replace(/^meat_/, '');
-        const isMonsterMeat = (this.data.monsters || []).some(m => m.id === meatId);
+        const isMonsterMeat = this.monsterMeatGated(meatId);
         const foodSafe = !isMonsterMeat || this.monsterFoodSafe(meatId);
         it.foodKind = 'meat'; it.foodState = 'cleaned'; it.edible = foodSafe;
         it.units = units2; it.unit = 'portion';
@@ -1208,7 +1210,7 @@
           // undercooked, worms dead), never phantom energy.
           // MONSTER FOOD SAFETY: the specialist's fire doesn't teach either.
           const sMeatId = (it.plantId || '').replace(/^meat_/, '');
-          const sIsMonster = (this.data.monsters || []).some(m => m.id === sMeatId);
+          const sIsMonster = this.monsterMeatGated(sMeatId);
           const sFoodSafe = !sIsMonster || this.monsterFoodSafe(sMeatId);
           const units = it.units || 1;
           const sR2 = this.cookTransform(it, { knows: true, outcome: { key: 'perfect', mult: 1.0 } });
@@ -2785,7 +2787,7 @@
     for (const item of (this.state.scholar.inventory || [])) {
       if (item.foodKind === 'meat' && (item.foodState === 'cleaned' || item.undercooked)) {
         const mId = (item.plantId || '').replace(/^meat_/, '');
-        const isMon = (this.data.monsters || []).some(m => m.id === mId);
+        const isMon = this.monsterMeatGated(mId);
         if (isMon && !this.monsterFoodSafe(mId)) { nUnknown++; continue; }
         // DIGESTIBILITY: batch uses the shared math \u2014 one honest outcome
         // for the batch (the fire doesn't roll per portion).
@@ -2854,7 +2856,7 @@
     if (!item) return null;
     if (item.foodKind === 'meat') {
       const mid = (item.plantId || '').replace(/^meat_/, '');
-      const isMon = (this.data.monsters || []).some(m => m.id === mid);
+      const isMon = this.monsterMeatGated(mid);
       return { key: isMon ? 'monster' : 'meat', ...(classes[isMon ? 'monster' : 'meat'] || {}) };
     }
     if (item.plantId && C.plantClasses && C.plantClasses[item.plantId]) {
@@ -2990,7 +2992,7 @@
       // MONSTER FOOD SAFETY: cooking doesn't teach. Unknown flesh stays
       // unknown — no kcal reveal, no "Safe." claim — until tested.
       const cMeatId = (item.plantId || '').replace(/^meat_/, '');
-      const cIsMonster = (this.data.monsters || []).some(m => m.id === cMeatId);
+      const cIsMonster = this.monsterMeatGated(cMeatId);
       const cFoodSafe = !cIsMonster || this.monsterFoodSafe(cMeatId);
       // DIGESTIBILITY (Steve 2026-10-08): the cleaned total is the honest
       // raw net; cooking unlocks more of the gross via the food's class \u2014

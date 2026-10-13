@@ -1562,6 +1562,10 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
           this.journalLearn(vid, 'note', `Admitted: stole ${what} — buried at ${t.place}, day ${t.day}.`, { via: 'confessed', quiet: true });
           this.bumpTrust(vid, -4);
           this.remember(vid, 'theft-confessed', `admitted stealing ${what}`);
+          // MEM-WIRE (blitz-deadchecks 2026-10-13): the deed itself, for
+          // behaviorCheck — a confession is the one theft record that is
+          // certain, on the record, and heard by the village.
+          this.remember(vid, 'stole', `stole ${what}`);
         } catch (e) {}
       } else if (roll < confessP + 0.35) {
         // DEFLECTION — the doubt stays open; the evidence grows.
@@ -2029,15 +2033,33 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       const mem = ((this.state.village.memory || {})[vid]) || [];
       const recent = mem.slice(-5);
       // claimed 'belong' (community) but hoarding/stealing → mismatch
+      // MEM-WIRE (blitz-deadchecks 2026-10-13): every type below is
+      // written by a real mechanic — 'stole' when a villager confesses
+      // to cache theft (confrontTheft, this file), 'hoard' when the
+      // village publicly warns them for freeloading (freeloadWarning,
+      // game.js), 'betrayed' when they ambush the scholar
+      // (ambushAftermath, betrayal.js). All three are observed deeds,
+      // so the doubt reads honestly. A betrayal is not "taking more
+      // than their share" — it gets its own text.
       if ((claimedGoal === 'belong' || claimedGoal === 'heal') &&
           recent.some(m => m.t === 'hoard' || m.t === 'stole' || m.t === 'betrayed')) {
         const first = this.nameFirst(vid);
+        const trig = recent.find(m => m.t === 'hoard' || m.t === 'stole' || m.t === 'betrayed');
+        const wasBetrayal = trig && trig.t === 'betrayed';
         this.addDoubt(vid, 'behavior',
-          this.doubtText(vid, 'behavior', { text: `${first} says they want ${claimedGoal === 'belong' ? 'to belong' : 'to help'} — but you've seen them take more than their share. Words and hands telling different stories.` }),
-          [`claims goal: ${claimedGoal}`, 'observed: selfish behavior']);
+          this.doubtText(vid, 'behavior', { text: wasBetrayal
+            ? `${first} says they want ${claimedGoal === 'belong' ? 'to belong' : 'to help'} — and then they came at you on the trail with steel drawn. Belonging means something different to them.`
+            : `${first} says they want ${claimedGoal === 'belong' ? 'to belong' : 'to help'} — but you've seen them take more than their share. Words and hands telling different stories.` }),
+          [`claims goal: ${claimedGoal}`, wasBetrayal ? 'observed: turned on you' : 'observed: selfish behavior']);
       }
       // claimed 'survive' (lay low) but picking fights → mismatch
-      if (claimedGoal === 'survive' && recent.some(m => m.t === 'fight' || m.t === 'confronted')) {
+      // MEM-WIRE (blitz-deadchecks 2026-10-13): 'fight' is written when a
+      // villager ambushes the scholar (ambushAftermath, betrayal.js).
+      // The old 'confronted' read was REMOVED — that memory is the
+      // SCHOLAR confronting the villager about gossip (confrontGossip,
+      // game.js), not the villager picking fights; reading it as
+      // aggression had the direction backwards.
+      if (claimedGoal === 'survive' && recent.some(m => m.t === 'fight')) {
         const first = this.nameFirst(vid);
         this.addDoubt(vid, 'behavior',
           this.doubtText(vid, 'behavior', { text: `${first} says they just want to survive, keep their head down. But they keep picking fights. Survival isn't what they're after.` }),

@@ -981,6 +981,15 @@
       this.say(`You walk back to Haven with all of them, at a distance, in silence. Alive — and nobody's hands are clean, least of all theirs.`);
       try { this.addTrauma(6); } catch (e) {}
     }
+    // MEM-WIRE (blitz-deadchecks 2026-10-13): a villager ambushing the
+    // scholar is the game's real betrayal and the real "picking fights."
+    // behaviorCheck reads both — 'betrayed' against a claimed
+    // belong/heal goal, 'fight' against a claimed survive goal.
+    // Outcome-independent: they lured you out regardless of how it ended.
+    try {
+      this.remember(plot.leader, 'betrayed', 'ambushed you on the trail');
+      this.remember(plot.leader, 'fight', 'came at you with steel drawn');
+    } catch (e2) {}
     const c = this.openCase(plot, 'ambush');
     if (outcome === 'talked_down') {
       c.talkedDown = true;

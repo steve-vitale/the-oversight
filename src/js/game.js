@@ -6323,8 +6323,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             node: { x: m.tx, y: m.ty }, mx: m.mx, my: m.my,
             cause: 'patrol combat', killerId: vid, witnesses: [vid],
           });
-          const meat = this.monsterMeatEntry(mdef);
-          if (corpse && meat) corpse.items.push(meat);
+          const meat = this.monsterCarcassEntries(mdef);
+          if (corpse && meat.length) for (const me of meat) corpse.items.push(me);
           // MAP MEMORY (villager-mapmem 2026-10-13): the killer saw it fall —
           // remember the site. (Expedition kills go through mapmemNoteKill.)
           try { if (corpse && this.mapmemRemember) this.mapmemRemember(vid, corpse); } catch (e) {}
@@ -17098,8 +17098,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             node: { x: m.tx, y: m.ty }, mx: m.mx, my: m.my,
             cause: 'villager combat', killerId: vid, witnesses: [vid],
           });
-          const vmeat = this.monsterMeatEntry(mdef);
-          if (vcorpse && vmeat) vcorpse.items.push(vmeat);
+          const vmeat = this.monsterCarcassEntries(mdef);
+          if (vcorpse && vmeat.length) for (const ve of vmeat) vcorpse.items.push(ve);
         } catch (e) {}
         // AUDIO (Steve 2026-10-12): a villager's kill is a real death — the
         // death moment plays here too, same as the player's kill site.
@@ -25521,6 +25521,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ? `${confronter} corners you by the fire. "We all eat from the same pot. You've been taking more than you bring for a while now. That can't continue — the village will decide." (Warning: pull weight or face a moot.)`
         : `${first} gets told straight: pull weight or the village will decide. The words hang in the air all evening. (Trust -10.)`);
       try { this.remember(vid, 'warned', 'freeloading warning'); } catch (e) {}
+      // MEM-WIRE (blitz-deadchecks 2026-10-13): the deed behind the
+      // warning, for behaviorCheck — a public freeloading warning is the
+      // village saying "you take more than your share," out loud, at the
+      // fire, where the scholar hears it.
+      try { this.remember(vid, 'hoard', 'warned for taking more than they bring'); } catch (e) {}
     },
     freeloadVote(vid) {
       // stage 3: the village decides. Simple majority of the roster (minus the
@@ -36939,6 +36944,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         prep: 'A carcass. Clean it with a knife — quickly. Spoils fast.'
       };
     },
+    // monsterCarcassEntries(mdef): the carcass item(s) for a monster kill.
+    // Usually one (monsterMeatEntry). BELLTOAD (Steve 2026-10-13): the legs
+    // drop as a SEPARATE item from the body meat — legs are safe, the body
+    // (throat-sac toxin) is poison. Both were right, about different parts.
+    // The 300 kcal split 200/100 — no energy created. Neither part is
+    // KNOWN until discovered: legs gate on codex 'belltoad_legs', the body
+    // on 'belltoad', through the normal cautious-test chain.
+    monsterCarcassEntries(mdef) {
+      const body = this.monsterMeatEntry(mdef);
+      if (!body) return [];
+      if (!mdef || mdef.id !== 'belltoad') return [body];
+      const total = body.hiddenKcal || 0;
+      const legsKcal = Math.round(total * 2 / 3);
+      body.hiddenKcal = total - legsKcal;
+      body.kg = Math.max(0.2, body.hiddenKcal / 1000);
+      const legs = {
+        plantId: 'meat_belltoad_legs', foodKind: 'meat', foodState: 'carcass',
+        edible: false, units: 1, kcalEach: 0, hiddenKcal: legsKcal,
+        spoilDay: body.spoilDay, name: this.monsterDisplayName(mdef.id) + ' legs (carcass)',
+        unit: 'carcass', kg: Math.max(0.2, legsKcal / 1000),
+        prep: 'Legs, jointed off the carcass. Clean them with a knife — quickly. Spoils fast.'
+      };
+      return [body, legs];
+    },
     // LOOT-AS-ACTION (Steve 2026-10-06): kills don't auto-loot. Drops go on
     // the corpse; the player opens the pack deliberately via the Loot action.
     // Finds the corpse registered when this monster died in tbDamage; falls
@@ -36998,12 +37027,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const cur = this.state.codex.monsters[mdef.id] || {};
         this.state.codex.monsters[mdef.id] = Object.assign(cur, { stage: 'slain' });
         if (mdef.edible) {
-          const meatEntry = this.monsterMeatEntry(mdef);
-          if (meatEntry) {
+          const meatEntries = this.monsterCarcassEntries(mdef);
+          if (meatEntries.length) {
             const meatCorpse = this.corpseForKill(mdef, _km);
-            if (meatCorpse) meatCorpse.items.push(meatEntry);
-            else s.inventory.push(meatEntry); // fallback: never lose the kill
-            this.say(`${mdef.edible.note || ''} It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies.`);
+            for (const me of meatEntries) {
+              if (meatCorpse) meatCorpse.items.push(me);
+              else s.inventory.push(me); // fallback: never lose the kill
+            }
+            // BELLTOAD (Steve 2026-10-13): "Legs are fine" is folk
+            // knowledge — it reads only once the legs' safety is
+            // discovered (tested / taught), never as starting knowledge.
+            const noteKnown = mdef.id !== 'belltoad' || this.monsterFoodSafe('belltoad_legs');
+            const note = noteKnown ? (mdef.edible.note || '') : '';
+            this.say(`${note}${note ? ' ' : ''}It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies.`);
           } else if (mdef.edible.note) {
             this.say(mdef.edible.note);
           }
@@ -38453,6 +38489,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     monsterFoodSafe(mid) {
       const e = (this.state.codex.monsters || {})[mid];
       return !!(e && e.foodSafe);
+    },
+    // BELLTOAD (Steve 2026-10-13): the legs are a separate item
+    // ('belltoad_legs') from the body meat. The part gates exactly like a
+    // monster id — every "is this monster flesh" check in the food chain
+    // must treat the part as gated, or the legs would read as known-safe
+    // the moment they were cleaned.
+    monsterMeatGated(mid) {
+      if (mid === 'belltoad_legs') return true;
+      return (this.data.monsters || []).some(m => m.id === mid);
     },
     markMonsterFoodSafe(mid, how) {
       if (!this.state.codex.monsters) this.state.codex.monsters = {};
