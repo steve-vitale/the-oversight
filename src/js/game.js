@@ -37936,10 +37936,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // unlock type system_offer -- the System offers it to those who've
       // proven themselves in death's doorway. This lights up the villager-
       // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
-      // PARTY-BOND (2026-10-12): tank abilities join the combat kit — villagers
-      // with tank kits become the party's front line. draw_fire sits by
-      // war_cry (loud abilities together); bodyguard/shield_wall later.
-      combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'draw_fire', 'trade_of_blows', 'bodyguard', 'unbreakable', 'dead_aim', 'shield_wall'],
+      // PARTY-BOND (2026-10-12, rework): the tank abilities left the combat
+      // kit — at 6th/8th/11th they were unreachable (grants cap at 5) and
+      // decorative. Their honest villager route is the SHIELDBEARER ability
+      // path: the System offers them for combat bond earned beside others
+      // (party-bond.js noteShieldbearerOffer). Pool/unlock stay for the
+      // player's system offers.
+      combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'trade_of_blows', 'unbreakable', 'dead_aim'],
       field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
       social: ['peacemaker', 'mediator', 'scream_cheese', 'animal_ken'],
       craft: ['steady_hands', 'triage', 'preservation_instinct', 'iron_stomach'],

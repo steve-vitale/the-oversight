@@ -14248,7 +14248,8 @@
       const pathColors = {
         hunter: '#7cfc9a', brawler: '#ff6b6b', forager: '#ffd166',
         survivalist: '#4df3ff', detective: '#c792ea', socialite: '#ff9ff3',
-        miser: '#feca57', explorer: '#54a0ff', drifter: '#a4b0be', caregiver: '#ff7979'
+        miser: '#feca57', explorer: '#54a0ff', drifter: '#a4b0be', caregiver: '#ff7979',
+        shieldbearer: '#9fb7ff'
       };
 
       const renderSlot = (ab, idx, isBg) => {

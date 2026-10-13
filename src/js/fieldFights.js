@@ -174,7 +174,7 @@
       var abAim = false, abAimed = false, abWarCried = false, abScreamed = false,
           abBraced = false, abDebtSettled = false, abStun = 0, abRoundTaken = 0,
           abLastRoundTaken = 0, abHaymakerRound = false, abMedicated = false,
-          abDrewFire = false, abBodyguarded = false;
+          abDrewFire = false, abBodyguarded = false, abRallied = false;
       var abNight = false;
       try { abNight = this.isNight ? this.isNight() : false; } catch (e) {}
 
@@ -709,15 +709,24 @@
           // help is coming — alone, or help already went down. Holding to
           // the bravery floor here doesn't turn it around; it turns a
           // survivable flight into a death. Believable flight: they run
-          // while running still works. (The war_cry rally below fires
-          // first, once — a held line, not a held delusion.)
+          // while running still works. (Rally fires first when an ally stands
+          // with them — held for someone, not for pride; war_cry next —
+          // a held line, not a held delusion.)
           // ABILITY — WAR CRY (bellow): once per fight, when the trajectory
           // turns hopeless, the cry steadies the arm and staggers the
           // monster — it hesitates (loses its next attack) and the flee
           // line drops: they hold longer. It's not the volume. It's the
           // promise. Fires instead of fleeing this round; the next round
           // decides again, honestly.
-          if (!abWarCried && vHasAb('war_cry') && !opts.noFlee) {
+          // ABILITY — RALLY (shieldbearer): once per fight, when the trajectory
+          // turns hopeless and an ally stands beside them, they do not run.
+          // Not volume like war_cry, no stun — they hold because someone is
+          // standing with them. Fires instead of fleeing this round; the
+          // next round decides again, honestly. "For them."
+          if (!abRallied && vHasAb('rally') && allyIn && allyHp > 0 && !opts.noFlee) {
+            abRallied = true;
+            rec.log.push(vName + ' looks at ' + allyName + ' standing with them — and does not run. For them. (Rally)');
+          } else if (!abWarCried && vHasAb('war_cry') && !opts.noFlee) {
             abWarCried = true; abStun = 1;
             fleeAt = Math.max(0.05, fleeAt - 0.15);
             rec.log.push(vName + ' BELLOWS — not volume, a promise. The ' + mName + ' falters. They hold the line a little longer. (War Cry)');
@@ -791,15 +800,18 @@
         }
       } catch (e) {}
       // PARTY-BOND (2026-10-12): surviving together is the practice. The pair
-      // bond grows; the village pool grows when a ward anchors it. Death
-      // grieves proportionally — the pair is gone, the survivors' other
+      // bond grows; the village pool grows when a shieldbearer anchors it.
+      // Death grieves proportionally — the pair is gone, the survivors' other
       // bonds scale by survivors/party. Grief, not amnesia.
+      // SHIELDBEARER PATH (2026-10-12 rework): the System watches who bleeds
+      // beside whom — bond thresholds earn the path's abilities.
       try {
         if (vid && vid !== 'player') {
           var _allyAlive = helpCalled && allyIn && allyHp > 0 && allyVid;
           var _allyDied = helpCalled && !allyIn && allyHp <= 0 && allyVid;
           if (rec.outcome === 'vKill' || rec.outcome === 'mFlee' || rec.outcome === 'vFlee') {
             if (_allyAlive && this.noteSharedFight) this.noteSharedFight([vid, allyVid]);
+            if (this.noteShieldbearerOffer) this.noteShieldbearerOffer(vid);
             if (this.noteVillageBondFight) this.noteVillageBondFight();
           } else if (rec.outcome === 'vDie') {
             if (this.noteBondGrief) this.noteBondGrief(vid, _allyAlive ? [allyVid] : []);

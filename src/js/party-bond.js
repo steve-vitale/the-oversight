@@ -1,6 +1,6 @@
 // @ontology
 // system: party-bond
-// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The undying_ward godhood anchors a village-scale bond pool.
+// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER ability path (draw_fire/bodyguard/shield_wall/rally) carries the village-scale bond pool: the System offers its abilities to villagers who've bled beside others, and a completed path anchors the whole village.
 // provides:
 //   - combatBondGet(a, b)
 //   - combatBondAdd(a, b, n)
@@ -8,13 +8,15 @@
 //   - noteBondGrief(deadVid, partyVids)
 //   - noteCrewTogether(crewVids)
 //   - bondCombatBonus(vid, allyVids)
-//   - wardAnchor()
+//   - pathAnchor()
 //   - villageBondBonus()
 //   - noteVillageBondFight()
 //   - noteVillageBondGrief()
+//   - noteShieldbearerOffer(vid)
 //   - isNewcomer(vid)
 //   - findVeteranBuddy(vid, task)
 //   - OUTDOOR_TASKS
+//   - SHIELDBEARER_PATH
 (function (global) {
   'use strict';
   const S = global.Scattering;
@@ -23,8 +25,15 @@
   // Mirrors the _outdoorCrew filter in game.js resolveAssignments.
   const OUTDOOR_TASKS = ['patrol', 'scout', 'hunt', 'forage'];
 
-  // Ward kit (post godhood-rework phase 1: herbal_remedy -> leech).
-  const WARD_KIT = ['triage', 'steady_hands', 'field_medicine', 'leech', 'purify', 'second_wind'];
+  // ---------- THE SHIELDBEARER PATH: the stand-together ability path ----------
+  // Steve 2026-10-12: the village-scale bond belongs to an ABILITY PATH, not
+  // a godhood. Four abilities, one identity: the villager who stands between
+  // the monsters and everyone else. The System offers them to villagers who
+  // have bled beside others — the party bond (feature 1, for everyone) is the
+  // on-ramp to this path (feature 2). Grant order is fixed; the bond
+  // threshold is the price. System_offer unlock stays for the player's route.
+  var SHIELDBEARER_PATH = ['draw_fire', 'bodyguard', 'shield_wall', 'rally'];
+  var SHIELDBEARER_BOND = { draw_fire: 25, bodyguard: 45, shield_wall: 65, rally: 85 };
 
   // ---------- 1. PARTY BOND: the bled-together dimension ----------
   // The village already has a SOCIAL bond store (betrayal.js —
@@ -143,41 +152,128 @@
     return Math.min(0.08, avg * 0.001);
   }
 
-  // wardAnchor: who holds the village-scale bond together.
-  // 1.0 — the Bearer ascended as undying_ward (persistent godhood state).
-  // 0.5 — a villager walks the ward path (3+ ward-kit abilities).
-  // 0   — no ward. The village fights as individuals.
-  function wardAnchor() {
+  // pathAbilityCount: how many of the path a set of held ability ids covers.
+  function pathAbilityCount(ids) {
+    var n = 0;
+    for (var i = 0; i < SHIELDBEARER_PATH.length; i++) {
+      if ((ids || []).indexOf(SHIELDBEARER_PATH[i]) >= 0) n++;
+    }
+    return n;
+  }
+
+  function livingVid(vid) {
+    try {
+      var g = global.Game;
+      if (g && g.vpOf) { var vp = g.vpOf(vid); if (vp && vp.dead) return false; }
+    } catch (e) {}
+    return true;
+  }
+
+  // pathAnchor: who holds the village-scale bond together. NO GODHOODS —
+  // Steve 2026-10-12: two separate features; the village bond is an ability
+  // path's identity.
+  // 1.0 — someone completed the path: a villager holds all four
+  //        shieldbearer abilities, or the player holds all four, or the
+  //        player discovered the stand_together capstone synergy.
+  // 0.5 — someone walks the path: a villager or the player holds 2+.
+  // 0   — no shieldbearer. The village fights as individuals.
+  function pathAnchor() {
     try {
       var g = global.Game;
       if (!g || !g.state) return 0;
-      var act = ((g.state.scholar || {}).godhood || {}).active || [];
-      if (act.indexOf('undying_ward') >= 0) return 1;
+      var sch = g.state.scholar || {};
+      var pAbs = (sch.abilities || []).map(function (a) { return (a && a.id) || a; });
+      var pCount = pathAbilityCount(pAbs);
+      if (pCount >= 4) return 1;
+      if ((sch.synergies || []).indexOf('stand_together') >= 0) return 1;
       var npcAbs = (g.state.village || {}).npcAbilities || {};
+      var walking = pCount >= 2;
       for (var vid in npcAbs) {
-        var held = npcAbs[vid] || [];
-        var n = 0;
-        for (var i = 0; i < WARD_KIT.length; i++) if (held.indexOf(WARD_KIT[i]) >= 0) n++;
-        if (n >= 3) return 0.5;
+        if (!livingVid(vid)) continue;
+        var n = pathAbilityCount(npcAbs[vid] || []);
+        if (n >= 4) return 1;
+        if (n >= 2) walking = true;
+      }
+      return walking ? 0.5 : 0;
+    } catch (e) { return 0; }
+  }
+
+  // noteShieldbearerOffer: the System's path grant. Called at fight end for
+  // villagers who fought. The System has been watching who bleeds beside
+  // whom — at bond thresholds it offers the next shieldbearer ability.
+  // Same honesty rules as the track grants: nothing before the System's
+  // arrival (day 7), the dead earn nothing, six slots like everyone.
+  function noteShieldbearerOffer(vid) {
+    try {
+      var g = global.Game;
+      if (!g || !g.state || !vid || vid === g.villagerId) return;
+      if (!g.state.systemArrived) return;
+      if (!livingVid(vid)) return;
+      var v = g.state.village || {};
+      var roster = v.roster || [];
+      var best = 0, who = null;
+      for (var i = 0; i < roster.length; i++) {
+        var o = roster[i];
+        if (!o || o === vid || !livingVid(o)) continue;
+        var b = combatBondGet(vid, o);
+        if (b > best) { best = b; who = o; }
+      }
+      if (!who) return;
+      var held = (v.npcAbilities || {})[vid] || [];
+      if (held.length >= 6) return; // six slots, same as you
+      for (var k = 0; k < SHIELDBEARER_PATH.length; k++) {
+        var id = SHIELDBEARER_PATH[k];
+        if (held.indexOf(id) >= 0) continue;
+        if (best < SHIELDBEARER_BOND[id]) return; // not yet — keep bleeding together
+        if (g.npcGrantAbility) g.npcGrantAbility(vid, id);
+        else {
+          v.npcAbilities = v.npcAbilities || {};
+          v.npcAbilities[vid] = held.concat([id]);
+        }
+        var aname = id;
+        try {
+          var def = (g.data && g.data.abilities || []).filter(function (a) { return a.id === id; })[0];
+          if (def && def.name) aname = def.name;
+        } catch (e2) {}
+        var vname = vnameOf(vid), wname = vnameOf(who);
+        if (g.say) g.say('◈ THE SYSTEM has been watching ' + vname + ' — stood beside ' + wname + ' through blood and back. It offers ' + aname + '. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
+        try { if (g.journalNote) g.journalNote('system', 'grant', 'The System granted ' + vname + ' ' + aname + ' (' + id + ') for a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        try { if (g.tele) g.tele('villager_grant', { vid: vid, ability: id, track: 'shieldbearer', bond: best }); } catch (e4) {}
+        return; // one offer per fight
       }
     } catch (e) {}
-    return 0;
+  }
+
+  function vnameOf(vid) {
+    try { var g = global.Game; if (g && g.displayName) return g.displayName(vid); } catch (e) {}
+    return 'Someone';
   }
 
   function villageBondBonus() {
     try {
-      var a = wardAnchor();
+      var a = pathAnchor();
       if (!a) return 0;
       var v = (global.Game.state || {}).village || {};
       return a * Math.max(0, Math.min(100, v.villageBond || 0)) * 0.0008;
     } catch (e) { return 0; }
   }
 
+  // The stand_together capstone synergy (draw_fire + shield_wall, player
+  // route): the village learns the shape of it — the pool grows twice as
+  // fast. The synergy's discovery copy says exactly this.
+  function villageBondGrowth() {
+    try {
+      var sch = (global.Game.state || {}).scholar || {};
+      if ((sch.synergies || []).indexOf('stand_together') >= 0) return 4;
+    } catch (e) {}
+    return 2;
+  }
+
   function noteVillageBondFight() {
     try {
-      if (!wardAnchor()) return;
+      if (!pathAnchor()) return;
       var v = global.Game.state.village;
-      v.villageBond = Math.max(0, Math.min(100, (v.villageBond || 0) + 2));
+      v.villageBond = Math.max(0, Math.min(100, (v.villageBond || 0) + villageBondGrowth()));
     } catch (e) {}
   }
 
@@ -240,10 +336,12 @@
     global.Game.noteBondGrief = noteBondGrief;
     global.Game.noteCrewTogether = noteCrewTogether;
     global.Game.bondCombatBonus = bondCombatBonus;
-    global.Game.wardAnchor = wardAnchor;
+    global.Game.pathAnchor = pathAnchor;
     global.Game.villageBondBonus = villageBondBonus;
+    global.Game.villageBondGrowth = villageBondGrowth;
     global.Game.noteVillageBondFight = noteVillageBondFight;
     global.Game.noteVillageBondGrief = noteVillageBondGrief;
+    global.Game.noteShieldbearerOffer = noteShieldbearerOffer;
     global.Game.isNewcomer = isNewcomer;
     global.Game.findVeteranBuddy = findVeteranBuddy;
     global.Game.OUTDOOR_TASKS = OUTDOOR_TASKS;
@@ -251,7 +349,8 @@
 
   S.PartyBond = {
     combatBondGet, combatBondAdd, noteSharedFight, noteBondGrief, noteCrewTogether,
-    bondCombatBonus, wardAnchor, villageBondBonus, noteVillageBondFight,
-    noteVillageBondGrief, isNewcomer, findVeteranBuddy, OUTDOOR_TASKS, WARD_KIT,
+    bondCombatBonus, pathAnchor, villageBondBonus, villageBondGrowth,
+    noteVillageBondFight, noteVillageBondGrief, noteShieldbearerOffer,
+    isNewcomer, findVeteranBuddy, OUTDOOR_TASKS, SHIELDBEARER_PATH,
   };
 })(typeof globalThis !== 'undefined' ? globalThis : this);

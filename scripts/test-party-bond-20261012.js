@@ -1,7 +1,9 @@
 // PROOF TEST: PARTY BOND (Steve 2026-10-12)
-// "Yes to all": (1) party bond mechanic, (2) tank role abilities,
-// (3) undying_ward as the village-scale home. Plus the depth-probe gaps:
-// fitness gate for the wounded, newcomer/veteran pairing.
+// "Yes to all": (1) party bond mechanic for everyone, (2) tank role
+// abilities, (3) the village-scale bond as a SEPARATE ability path
+// (shieldbearer — Steve's correction: godhoods stay out of it).
+// Plus the depth-probe gaps: fitness gate for the wounded,
+// newcomer/veteran pairing.
 //
 // Harness: sim-harness loadGame (seeded BEFORE eval). Game.save never stubbed.
 const SEED = parseInt(process.env.SEED || '20261012', 10);
@@ -140,21 +142,25 @@ function firstName(Game, vid) {
       'plain=' + plain.vTaken + ' walled=' + walled.vTaken);
   }
 
-  // ---------- 8. ward village-scale bond ----------
+  // ---------- 8. shieldbearer path anchors the village-scale bond ----------
+  // Steve 2026-10-12 rework: TWO separate features — godhoods stay out of it.
   {
     const Game = await freshGame(SEED + 7);
     const [a] = vids(Game, 1);
-    ok('no ward -> no anchor', Game.wardAnchor() === 0);
-    ok('no ward -> no village bonus', Game.villageBondBonus() === 0);
+    ok('no path -> no anchor', Game.pathAnchor() === 0);
+    ok('no path -> no village bonus', Game.villageBondBonus() === 0);
     Game.state.scholar.godhood = { active: ['undying_ward'] };
-    ok('ascended ward anchors at 1.0', Game.wardAnchor() === 1);
+    ok('ward ascension no longer anchors anything', Game.pathAnchor() === 0);
+    ok('ward ascension -> no village bonus', Game.villageBondBonus() === 0);
+    Game.state.scholar.godhood = { active: [] };
+    Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
+    Game.state.village.npcAbilities[a] = ['draw_fire', 'bodyguard'];
+    ok('villager walks the path (2/4) -> anchor 0.5', Game.pathAnchor() === 0.5);
+    Game.state.village.npcAbilities[a] = ['draw_fire', 'bodyguard', 'shield_wall', 'rally'];
+    ok('villager completes the path (4/4) -> anchor 1.0', Game.pathAnchor() === 1);
     Game.state.village.villageBond = 100;
     const vb = Game.villageBondBonus();
     ok('village bond 100 -> +0.08', Math.abs(vb - 0.08) < 1e-9, 'got ' + vb);
-    Game.state.scholar.godhood = { active: [] };
-    Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
-    Game.state.village.npcAbilities[a] = ['triage', 'steady_hands', 'field_medicine'];
-    ok('villager walks the ward path -> anchor 0.5', Game.wardAnchor() === 0.5);
   }
 
   // ---------- 9. fitness gate ----------
@@ -203,11 +209,12 @@ function firstName(Game, vid) {
       const d = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'abilities.json'), 'utf8'));
       const l = d.abilities || d; return Array.isArray(l) ? l : Object.values(l);
     }
-    for (const id of ['draw_fire', 'bodyguard', 'shield_wall']) {
+    for (const id of ['draw_fire', 'bodyguard', 'shield_wall', 'rally']) {
       const a = abs.find(x => x.id === id);
       ok(id + ' exists as a combat-lane System ability', !!a && a.pool === 'combat', 'pool=' + (a && a.pool));
       ok(id + ' description names the wild/party context', !!a && /wilds|beside|ally|people/.test(a.description));
       ok(id + ' has undying_ward resonance', !!a && (a.resonance || []).indexOf('undying_ward') >= 0);
+      ok(id + ' carries the shieldbearer path', !!a && (a.paths || []).indexOf('shieldbearer') >= 0);
     }
   }
 

@@ -2574,7 +2574,8 @@
     "modifiers": [],
     "actions": [],
     "paths": [
-      "brawler"
+      "brawler",
+      "shieldbearer"
     ],
     "resonance": [
       "undying_ward"
@@ -2598,7 +2599,8 @@
     "actions": [],
     "paths": [
       "brawler",
-      "caregiver"
+      "caregiver",
+      "shieldbearer"
     ],
     "resonance": [
       "undying_ward"
@@ -2621,7 +2623,8 @@
     "modifiers": [],
     "actions": [],
     "paths": [
-      "brawler"
+      "brawler",
+      "shieldbearer"
     ],
     "resonance": [
       "undying_ward"
@@ -2629,6 +2632,29 @@
     "deepening": {
       "2": "The line tightens. Less gets through.",
       "3": "You have been the wall so long you've forgotten what it was like to stand alone."
+    }
+  },
+  {
+    "id": "rally",
+    "name": "Rally",
+    "description": "In the wilds, when the fight is lost and running would be sane, you look at the people standing with you and you do not run. Once per fight, when the trajectory turns hopeless and an ally stands beside you, you hold the line instead of fleeing. Not volume \u2014 a promise kept.",
+    "flavor": "For them.",
+    "pool": "combat",
+    "tier": "uncommon",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [],
+    "paths": [
+      "shieldbearer"
+    ],
+    "resonance": [
+      "undying_ward"
+    ],
+    "deepening": {
+      "2": "Your voice finds them faster in the noise.",
+      "3": "They have heard you hold before. They believe it now."
     }
   }
 ]

@@ -1552,4 +1552,28 @@
       "tease2": "You reached for the herbs before the bandage was even tied. Your hands already knew the whole cure. One more, and it's not practice anymore — it's just what you do."
     }
   }
+  ,
+  {
+    "id": "stand_together",
+    "name": "Stand Together",
+    "flavor": "Draw the eye. Hold the line. The village learns the shape of it.",
+    "requires": [
+      "draw_fire",
+      "shield_wall"
+    ],
+    "minLevel": 1,
+    "modifiers": [],
+    "discovery": "\"OH. OH. You drew its eye AND held the line?! Do you SEE what your people just learned?! When one of you stands like THAT, the whole village stands taller. The bond doesn't just hold \u2014 it GROWS. Twice as fast! THAT'S what standing together means!\"",
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "draw_fire",
+        "shield_wall"
+      ],
+      "hint": "Make yourself the problem, then brace as one. The village is watching.",
+      "tease1": "For a heartbeat, the monster looked at you instead of them \u2014 and the line held. The village noticed.",
+      "tease2": "You drew the eye and the line held again. Someone in the back is standing straighter."
+    },
+    "flags": []
+  }
 ]
