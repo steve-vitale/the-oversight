@@ -618,13 +618,7 @@
       <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
-    // UI SELECT (Steve 2026-10-12): the main menu answers every tap.
-    // Capture-phase: the blip fires before each button's own handler.
-    try {
-      screen.querySelectorAll('button, #b-notes, #b-debug, #b-settings, #build-tag').forEach(b => {
-        b.addEventListener('click', () => { try { Game.audioEvent('uiSelect'); } catch (e) {} }, true);
-      });
-    } catch (e) {}
+    // UI taps are covered by the global Game.uiBlip() capture listener (boot).
     document.getElementById('b-new').onclick = () => obColdOpen();
     const savesDiv = document.getElementById('saves');
     if (savesDiv) renderSaves(savesDiv);
@@ -719,11 +713,15 @@
       bset.onclick = () => { try { openSettings(); } catch (e) {} };
     }
   }
+  // ABOUT (Steve 2026-10-13): rewritten — the old copy still described a
+  // seven-day game. The Oversight is a year-long village saga.
   function about() {
-    screen.innerHTML = `${bar('scattering://about', 'v0.1')}
+    screen.innerHTML = `${bar('oversight://about', window.BUILD_VERSION || 'dev')}
       <h1 class="title" style="font-size:22px">ABOUT</h1>
-      <p class="small">The sky changed. You woke up somewhere else. All wiring and combustibles are gone — the Burn took them.</p>
-      <p class="small">Keep yourself fed for seven days. The village is counting on you.</p>
+      <p class="small">The sky changed. Twelve strangers woke up in the ashes of the world — and something vast is watching. It calls this a show. You call it staying alive.</p>
+      <p class="small">Food is everything: healing, stamina, power. Learn what's edible, teach the village, and turn surplus into strength.</p>
+      <p class="small">You are not the hero — the <b>village</b> is. When your bearer falls, another picks up the mantle, carrying everything that was learned.</p>
+      <p class="small">Grow from a single fire to linked villages across the region, and earn a seat at the galactic table. Fourteen endings. One year.</p>
       <button class="btn ghost" id="b-back">Back</button>`;
     document.getElementById('b-back').onclick = title;
   }
@@ -10403,6 +10401,8 @@
       // (your ear can't tell which way is up). Static gated at 17.3Hz — the
       // System doesn't keep time like you do — then a sub drop: the flinch.
       if (!ensure()) return;
+      // MIX (Steve 2026-10-13): duck the bed under the sting.
+      duckMusic();
       const t = ctx.currentTime, dur = 1.8;
       [[110, 165], [155.56, 233]].forEach(([f0, f1]) => {
         const o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter();
@@ -12199,9 +12199,11 @@
       if (!ensure()) return; if (muted) return;
       const t = ctx.currentTime;
       const fam = (d && d.family) || 'soft';
-      const cfg = { soft: [900, 0.035, 'bandpass', 0.09], wet: [1500, 0.045, 'bandpass', 0.13],
-                    stone: [2600, 0.028, 'highpass', 0.07], haven: [420, 0.032, 'lowpass', 0.1] }[fam]
-                || [900, 0.035, 'bandpass', 0.09];
+      // MIX (Steve 2026-10-13): footsteps were 0.028–0.045 peak — inaudible
+      // on phone speakers against the generative bed. Audible, not loud.
+      const cfg = { soft: [900, 0.14, 'bandpass', 0.09], wet: [1500, 0.16, 'bandpass', 0.13],
+                    stone: [2600, 0.13, 'highpass', 0.07], haven: [420, 0.14, 'lowpass', 0.1] }[fam]
+                || [900, 0.14, 'bandpass', 0.09];
       muFoot++;
       try {
         const src = noise(cfg[3] + 0.05); if (!src) return;
@@ -12234,6 +12236,27 @@
         musicBus.gain.linearRampToValueAtTime(0.9, t + 0.35);
       } catch (e) {}
     }
+    // MIX (Steve 2026-10-13): registry MP3s used to play via bare HTMLAudio —
+    // bypassing volume, mute, and the master bus, and swallowing failures
+    // with no synth fallback. Now they route through sfxBus like everything
+    // else; the promise rejects when the file can't play so the caller can
+    // fall back to synth.
+    function playFile(file) {
+      if (!ensure()) return Promise.reject(new Error('no ctx'));
+      if (muted) return Promise.reject(new Error('muted'));
+      duckMusic();
+      return new Promise((resolve, reject) => {
+        try {
+          const el = new Audio(file);
+          const src = ctx.createMediaElementSource(el);
+          src.connect(sfxBus);
+          el.onended = () => { try { src.disconnect(); } catch (e) {} };
+          const p = el.play();
+          if (p && typeof p.then === 'function') p.then(resolve).catch(reject);
+          else resolve();
+        } catch (e) { reject(e); }
+      });
+    }
     function uiSelect() {
       if (!ensure()) return; if (muted) return;
       duckMusic();
@@ -12243,7 +12266,8 @@
           const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fq;
           const g = ctx.createGain(); const st = t + i * 0.055;
           g.gain.setValueAtTime(0.0001, st);
-          g.gain.linearRampToValueAtTime(0.065, st + 0.012);
+          // MIX (Steve 2026-10-13): was 0.065 — buried under the bed.
+          g.gain.linearRampToValueAtTime(0.14, st + 0.012);
           g.gain.exponentialRampToValueAtTime(0.0001, st + 0.12);
           o.connect(g); g.connect(sfxBus); o.start(st); o.stop(st + 0.15);
         });
@@ -12675,6 +12699,11 @@
       stingScale() { stingScale(); },
       stingNightmare() { stingNightmare(); },
       stingSuccession() { stingSuccession(); },
+      // MIX (Steve 2026-10-13): duck the music bed under loud SFX (monster
+      // MP3s via game.js audioEvent, stings). Footsteps deliberately excluded
+      // — ducking on every tile would pump the bed.
+      duck() { duckMusic(); },
+      playFile(file) { return playFile(file); },
     };
   })();
 
@@ -14660,7 +14689,7 @@
       const sn = document.getElementById('set-volnum'); if (sn) sn.textContent = v + '%';
     };
     ov.addEventListener('click', (e) => { if (e.target === ov) closeSettings(); });
-    document.getElementById('set-done').onclick = () => { try { Game.audioEvent('uiSelect'); } catch (e) {} closeSettings(); };
+    document.getElementById('set-done').onclick = () => { try { Game.uiBlip(); } catch (e) {} closeSettings(); };
     const slider = document.getElementById('set-vol');
     if (slider) slider.oninput = () => {
       try {
@@ -14671,7 +14700,7 @@
     };
     document.getElementById('set-muterow').onclick = () => {
       try { Game.audio.toggleMute(); } catch (e) {}
-      try { Game.audioEvent('uiSelect'); } catch (e) {}
+      try { Game.uiBlip(); } catch (e) {}
       paint();
     };
     const vrow = document.getElementById('set-voicerow');
@@ -14680,7 +14709,7 @@
       try { if (Game.paintVoiceToggle) Game.paintVoiceToggle(); } catch (e) {}
       paint();
     };
-    try { Game.audioEvent('uiSelect'); } catch (e) {}
+    try { Game.uiBlip(); } catch (e) {}
   }
 
   // CHARACTER SHEET (Steve 2026-10-07): who you are — abilities, skills,
@@ -18492,6 +18521,22 @@
   }
 
   // ---------- boot ----------
+  // UI TAP SOUND, GLOBAL (Steve 2026-10-13): every button answers, in game
+  // and out. One document-level capture listener survives refresh()
+  // re-renders (the old per-button wiring only covered the title screen,
+  // so in-game taps were silent). Game.uiBlip() is the shared entry —
+  // the 90ms guard keeps a tap's capture blip and its explicit call
+  // (settings Done, rows) from double-firing.
+  let lastUiBlip = 0;
+  Game.uiBlip = () => {
+    const now = Date.now();
+    if (now - lastUiBlip < 90) return;
+    lastUiBlip = now;
+    try { Game.audioEvent('uiSelect'); } catch (e) {}
+  };
+  document.addEventListener('click', (e) => {
+    try { if (e.target && e.target.closest && e.target.closest('button')) Game.uiBlip(); } catch (err) {}
+  }, true);
   Game.init().then(() => { maybeDebugButton(); title(); }).catch(e => {
     screen.innerHTML = `<p class="small">Failed to load game data: ${esc(e.message)}<br>Serve over http (not file://) for fetch() to work.</p>`;
   });

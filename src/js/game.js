@@ -29169,21 +29169,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the single source of truth for placeholder:true tagging. If the file
     // can't play, fall through to the synth voice rather than silence.
     audioEvent(name, data) {
+      var self = this;
+      var synth = function () {
+        if (self.audio && typeof self.audio[name] === 'function') {
+          try { self.audio[name](data || {}); } catch (e) {}
+        }
+      };
       try {
         if (typeof AudioRegistry !== 'undefined' && typeof Audio !== 'undefined') {
           var reg = AudioRegistry.resolveHook(name);
           if (reg && reg.file) {
+            // MIX (Steve 2026-10-13): route files through the mixer (volume,
+            // mute, ducking) with synth fallback when the file can't play.
+            // The old bare-Audio path bypassed the master bus and swallowed
+            // failures silently — a 404 or autoplay rejection meant silence.
+            if (self.audio && typeof self.audio.playFile === 'function') {
+              self.audio.playFile(reg.file).catch(synth);
+              return;
+            }
             var el = new Audio(reg.file);
             el.volume = 0.9;
             var played = el.play();
-            if (played && typeof played.catch === 'function') played.catch(function () {});
+            if (played && typeof played.catch === 'function') played.catch(synth);
             return;
           }
         }
       } catch (e) { /* file failed — fall through to synth */ }
-      if (this.audio && typeof this.audio[name] === 'function') {
-        try { this.audio[name](data || {}); } catch (e) {}
-      }
+      synth();
     },
 
     // MUSIC (Steve 2026-10-12): menu / ambient / scenario layers, clean
