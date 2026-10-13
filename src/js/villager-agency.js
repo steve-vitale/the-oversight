@@ -1017,6 +1017,60 @@
       var dead = false;
       try { var lvp = this.vpOf(learnerVid); if (lvp && lvp.dead) dead = true; } catch (e) {}
       if (dead) return { taught: false };
+      // SNARE APPRENTICESHIP (trapline 2026-10-13): a villager who knows the
+      // wire can hand it on to a fellow villager who doesn't. Before this,
+      // knowsSnare was occupation-sealed — no villager could ever learn it,
+      // so the whole NPC trapline lived or died on the starting cast. Word
+      // of mouth is the canon pre-codex channel; this is its trapping beat.
+      // Same regard gate as the player teach beat (trust 15+; strangers
+      // don't hand over their craft), once per learner, need-driven (the
+      // lesson lands for a hungry or novice learner — nobody studies wire
+      // on a full belly for fun), and recorded like every real lesson.
+      try {
+        var _tvp = this.vpOf ? this.vpOf(teacherVid) : null;
+        var _lvp = this.vpOf ? this.vpOf(learnerVid) : null;
+        if (_tvp && _tvp.knowsSnare && _lvp && !_lvp.knowsSnare && !_lvp.snareTaught) {
+          var _ttr = 10;
+          try { var __t = (this.state.village.trust || {})[teacherVid]; if (__t !== undefined) _ttr = __t; } catch (e) {}
+          if (_ttr >= 15) {
+            var _hungry = false, _novice = false;
+            try { _hungry = (this.npcNeeds(learnerVid).hunger || 0) >= 60; } catch (e) {}
+            try {
+              var _lag = this.agencyOf ? this.agencyOf(learnerVid) : null;
+              var _lxp = _lag && _lag.xp ? _lag.xp[learnerVid] : null;
+              _novice = !_lxp || (_lxp.tracking || 0) < 8;
+            } catch (e) {}
+            if (_hungry || _novice) {
+              // the teacher knows the wire cold — binary knowledge, no
+              // breadth tiers; the lesson lands or it doesn't.
+              if (R() < 0.85) {
+                _lvp.knowsSnare = true;
+                _lvp.snareTaught = true;
+                var _day = 0;
+                try { _day = this.state.scholar.day || 0; } catch (e) {}
+                var _need = _hungry ? 'hunger' : 'novice';
+                st.lessons[learnerVid] = st.lessons[learnerVid] || [];
+                st.lessons[learnerVid].push({ from: teacherVid, topic: 'snare', day: _day, need: _need });
+                try {
+                  var _la = this.agencyOf(learnerVid);
+                  _la.xp[learnerVid].tracking += 1;
+                  this.agencyTierCheck(learnerVid, false);
+                } catch (e) {}
+                var _tnm = 'Someone', _lnm = 'someone';
+                try { _tnm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
+                try { _lnm = this.firstRef ? this.firstRef(learnerVid) : this.displayName(learnerVid); } catch (e) {}
+                var _deed = _need === 'hunger'
+                  ? `${_tnm} taught ${_lnm} the snare — the loop, the trigger stick, where the run narrows. Meat for the hungry.`
+                  : `${_tnm} showed ${_lnm} the snare — the loop, the trigger stick, where the run narrows. The beginner's wire.`;
+                try { this.recordDeed(teacherVid, 'taught', _deed, 1); } catch (e) {}
+                try { this.tele('snare_lesson', { teacher: teacherVid, learner: learnerVid, need: _need }); } catch (e) {}
+                return { taught: true, learner: learnerVid, topic: 'snare', need: _need };
+              }
+              return { taught: false, failed: true };
+            }
+          }
+        }
+      } catch (e) {}
       var tKnown = [], lKnown = [];
       try { tKnown = this.plantsKnownBy ? this.plantsKnownBy(teacherVid) : []; } catch (e) {}
       try { lKnown = this.plantsKnownBy ? this.plantsKnownBy(learnerVid) : []; } catch (e) {}

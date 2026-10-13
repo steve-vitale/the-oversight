@@ -257,7 +257,12 @@
         var chores = ['fire', 'repair', 'cook', 'sweep'];
         try {
           var _pk = this.plantsKnownBy ? this.plantsKnownBy(vid) : [];
-          if (_pk.length) chores.push('teach');
+          // SNARE APPRENTICESHIP (trapline 2026-10-13): a wire-knowing
+          // villager can teach even with no plants to show — the lesson is
+          // the snare, not the flora.
+          var _ks = false;
+          try { _ks = !!(this.vpOf && this.vpOf(vid) && this.vpOf(vid).knowsSnare); } catch (e) {}
+          if (_pk.length || _ks) chores.push('teach');
         } catch (e) {}
         o.chore = pick(chores);
         return o;
@@ -774,6 +779,10 @@
                 var tnm2 = nm;
                 try { tnm2 = this.firstRef ? this.firstRef(rid) : nm; } catch (e) {}
                 try { this.say(this.teachChoreLine(tnm2, lesson)); } catch (e) {}
+                // SNARE OVERHEAR (trapline 2026-10-13): a player at haven
+                // watching the wire lesson learns its shape — recipe L1.
+                // Same regard gate as the TRAPS-return teach beat.
+                if (lesson.topic === 'snare') { try { this.snareLessonOverhear(rid, true); } catch (e) {} }
               }
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
@@ -816,6 +825,11 @@
       try {
         if (lesson && lesson.learner) lnm = this.firstRef ? this.firstRef(lesson.learner) : this.displayName(lesson.learner);
       } catch (e) {}
+      // SNARE APPRENTICESHIP (trapline 2026-10-13): the wire lesson gets its
+      // own line — the loop, the trigger stick, where the run narrows.
+      if (lesson && lesson.topic === 'snare') {
+        return `📖 ${tnm} is showing ${lnm} the snare — the loop, the trigger stick, where the run narrows between the roots. "Opossum trails. Check at dawn. Always."`;
+      }
       var pname = (lesson && lesson.plantName) || 'something from the wild';
       // descriptors already carry their article ("a tree with...")
       var pnameArt = pname;
@@ -825,6 +839,37 @@
       if (need === 'hunger') return `📖 ${tnm} is showing ${lnm} ${pnameArt} — where it grows, what's safe to eat.`;
       if (need === 'novice') return `📖 ${tnm} is walking ${lnm} through ${pnameArt} — leaf, stem, smell, the beginner's tour.`;
       return `📖 ${tnm} is showing ${lnm} ${pnameArt} — leaf, stem, smell.`;
+    },
+
+    // snareLessonOverhear — the player's cut of a witnessed snare lesson
+    // (trapline 2026-10-13). Watching real hands teach the wire teaches the
+    // shape of it: recipe L1 (seen — blind 35% craft, materials at risk).
+    // Same regard gate as the TRAPS-return teach beat (trust 15+; strangers
+    // don't hand over their craft), and only while L0 — a second viewing
+    // adds nothing. The overhear never teaches L2: your hands learn by
+    // doing (a successful blind craft), not by watching.
+    snareLessonOverhear(teacherVid, playerAtHaven) {
+      try {
+        var atHaven = playerAtHaven;
+        if (atHaven === undefined) {
+          var _v = this.state.village || {};
+          atHaven = (this.map.px === (_v.px ?? 4) && this.map.py === (_v.py ?? 4));
+        }
+        if (!atHaven) return false;
+        var tvp = this.vpOf ? this.vpOf(teacherVid) : null;
+        if (!tvp || !tvp.knowsSnare) return false;
+        var tr = 10;
+        try { var _t = (this.state.village.trust || {})[teacherVid]; if (_t !== undefined) tr = _t; } catch (e) {}
+        if (tr < 15) return false;
+        var rk = ((this.state.codex || {}).recipes || {})['snare'] || {};
+        if ((rk.level || 0) >= 1) return false;
+        var nm = 'Someone';
+        try { nm = this.firstRef ? this.firstRef(teacherVid) : this.displayName(teacherVid); } catch (e) {}
+        if (this.grantKnowledge) this.grantKnowledge('recipe', 'snare', 1, { type: 'witnessed', by: nm });
+        this.say(`🪤 You watch ${nm} walk someone through the snare — the loop, the trigger stick, where the run narrows between the roots. Your hands don't know it yet. Your eyes do.`);
+        try { this.tele('snare_overhear', { teacher: teacherVid }); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
     },
 
     // ---------- 6. RETURN EFFECTS for the new purposes ----------
@@ -843,13 +888,18 @@
         if (playerAtHaven) this.say(`💧 ${nm} returns with water: +${n} clean.`);
         try { this.bumpTrust(vid, 1); } catch (e) {}
       } else if (purpose === 'traps') {
+        var _caught = false, _kcal = 0;
         if (R() < 0.4) {
-          var kcal = 100 + Math.floor(R() * 300);
-          try { this.stockPantry(kcal, 'Snared meat'); } catch (e) {}
-          if (playerAtHaven) this.say(`🪤 ${nm} is back from the snares: +${kcal} kcal to the pantry.`);
+          _caught = true;
+          _kcal = 100 + Math.floor(R() * 300);
+          try { this.stockPantry(_kcal, 'Snared meat'); } catch (e) {}
+          if (playerAtHaven) this.say(`🪤 ${nm} is back from the snares: +${_kcal} kcal to the pantry.`);
         } else if (playerAtHaven) {
           this.say(`🪤 ${nm} is back. "Snares were empty. They'll keep."`);
         }
+        // SIM TELEMETRY (trapline 2026-10-13): NPC trapline activity per
+        // return — measurement infrastructure, zero gameplay effect.
+        try { this.tele('npc_trap', { vid: vid, caught: _caught, kcal: _kcal }); } catch (e) {}
         // TRAP TEACHING (structural 2026-10-10): a hunter who knows the wire
         // can SHOW you — once, and only if you've earned their regard (trust
         // 15+; strangers don't hand over their craft). Watching real hands
