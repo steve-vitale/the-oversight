@@ -116,6 +116,22 @@ function attachInstruments(Game) {
     const nm = String(name || 'unknown');
     m.influx[nm] = (m.influx[nm] || 0) + k;
   });
+  // donateToPantry pushes items straight into v.pantry (bypasses stockPantry)
+  // — the policy's own hauls arrive here. Count the donated kcal.
+  const origDonate = Game.donateToPantry;
+  if (typeof origDonate === 'function') {
+    Game.donateToPantry = function (idx) {
+      let k = 0;
+      try {
+        const inv = Game.state.scholar.inventory;
+        const it = inv && inv[idx];
+        if (it) k = (it.kcalEach || 0) * (it.units || 1);
+      } catch (e) {}
+      const r = origDonate.apply(this, arguments);
+      try { if (k > 0) m.influx['Player donation'] = (m.influx['Player donation'] || 0) + k; } catch (e) {}
+      return r;
+    };
+  }
 
   // rot loss: snapshot spoiled kcal just before the sweep runs
   const origSweep = Game.sweepSpoiled;
@@ -231,6 +247,8 @@ function finalize(Game, m, runResult) {
   const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
   out.national = (RANK_ORDER[out.rank] || 0) >= 2 ? 1 : 0;
   out.table = out.tableWaiting ? 1 : 0;
+  // sampled daily curve (every 5th row) for pantry/pantry-days/ate-share arcs
+  out.dailyCurve = (m.daily || []).filter((_, i) => i % 5 === 0);
   return out;
 }
 

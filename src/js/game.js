@@ -5814,7 +5814,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           const ownShelf = skill > 0 ? 30 + 5 * skill : 15;
           const rackCap = 125 * ((v.roster || []).length || 10) * Math.max(1, ownShelf - 2);
-          const racksFull = preservedKcal >= rackCap;
+          // FAMINE-AWARE RACKS (longsim scale-wall r5 2026-10-13, opt-in gate
+          // FOODLEVER_R5=1): the racks-full guard blocked 35-50% of smoke
+          // resolutions while ~2.4k kcal/day rotted fresh (measured 8-run
+          // baseline). A full rack is a famine buffer, not waste — when the
+          // haven's measured buffer is thin (<7d via pantryDaysEstimate),
+          // the cook smokes the surplus anyway; the village will eat it.
+          // When the buffer is healthy the guard holds (the preserved-rot
+          // concern stands). Default OFF: pristine parity.
+          let _racksHungry = false;
+          try {
+            if (typeof process !== 'undefined' && process.env && process.env.FOODLEVER_R5 === '1'
+                && typeof this.pantryDaysEstimate === 'function') {
+              _racksHungry = this.pantryDaysEstimate() < 7;
+            }
+          } catch (e) {}
+          const racksFull = preservedKcal >= rackCap && !_racksHungry;
           if (!racksFull) {
           for (const it of eligible) {
             const per = it.kcalEach || 1;
