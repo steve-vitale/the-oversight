@@ -167,3 +167,27 @@ light/dark), and multiple ability builds — not one solved route.
   whether tuning continues or the design needs a real shake-up.
 - Steve's ascension law holds in sims: the ending follows the village's
   story, and the analyzer's WINS DETAIL stays the audit trail.
+
+## 14. Metric binding — the anti-drift rule (Steve 2026-10-13)
+
+"Continually reevaluate our success metrics to prevent drift." Re-evaluation
+happens BETWEEN runs, never within one. The failure mode: a run misses its
+pre-registered GO, and the analyst re-scores the same run against a friendlier
+metric instead of reporting the miss. (2026-10-13: the villager-counter pilot's
+strict rule said NO-GO on attributed kills; the run was read as GO on ledger
+kills instead — the metric moved mid-judgment.)
+
+- Pre-registered metrics are BINDING for the run. Judge the run against the
+  header (§11) exactly as written. A miss is a miss; report NO-GO.
+- If the metric proves wrong (bad proxy, taxonomy artifact, blind channel),
+  write it up under "metric review" in the evidence file and propose the
+  revised metric FOR THE NEXT RUN. Never re-score the same run.
+- Every evidence file carries a "metric review" section, even if it says
+  "none — metrics held." The review is where drift gets caught: is the GO
+  still measuring what Steve cares about (winnability, tedium, reachability),
+  or has it become a number that moves without the game improving?
+- Category/taxonomy changes (e.g. the 2026-10-13 corpseTakeItem social→food
+  fix) invalidate previously published tables. When a taxonomy changes,
+  regenerate the tables and stamp a dated CORRECTION note — never silently
+  re-issue.
+- Guardrails are metrics too: a GO met with a guardrail breached is NO-GO.
