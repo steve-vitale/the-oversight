@@ -1,0 +1,67 @@
+{
+  "_doc": "ONE PROGRESSION SYSTEM for the player and villagers (Steve 2026-10-14: 'I think we need to sync the player and villager system. But the villager system sounds like the better model.'). Deeds feed track XP; crossing a threshold is a level-up. Villagers take the next unheld kit ability (fixed order, no RNG) and learn the next track skill. The player gets a level-up sheet: pick 1 of the next 3 unheld kit abilities. Kits are MAGIC ONLY (lane 'magic'); human competences are the 'skills' lists (villagers learn them as skills, never in a slot). Read by src/js/tracks.js.",
+  "tracks": ["combat", "field", "social", "craft", "strange"],
+  "labels": { "combat": "Combat", "field": "Field", "social": "Social", "craft": "Craft", "strange": "Strange" },
+  "icons": { "combat": "⚔️", "field": "🌲", "social": "🗣️", "craft": "🛠️", "strange": "👁️" },
+  "nouns": {
+    "combat": "fights",
+    "field": "days worked on the land",
+    "social": "words shared at the fire",
+    "craft": "careful work",
+    "strange": "brushes with the System"
+  },
+  "thresholds": [3, 8, 16, 32, 64],
+  "_playerScale": "The player does far more deeds per day than a villager (a villager's day is one or two chores). Same tracks, same events, same kits; the player's thresholds are thresholds x playerScale. Tuned 2026-10-14 so a median 150-day capable run gets ~8 level-ups (evidence/2026-10-14/unified-tracks.md).",
+  "playerScale": 6,
+  "offerSize": 3,
+  "maxAbilities": 6,
+  "_kits": "Power order, weakest first. Every magic ability sits in exactly one kit (fusion_reactor excluded: one per world, its own pellet offer). Villagers take kit[0], kit[1], ... at thresholds 1-5; the player is offered the next 3 unheld.",
+  "kits": {
+    "combat": ["adrenaline_surge", "rage", "war_cry", "adrenaline_control", "phoenix_clause", "survivor", "cornered_rat", "trade_of_blows", "unbreakable", "blood_frenzy", "retribution", "trophy_room", "blood_magic"],
+    "field": ["lucky_rock", "echo_location", "dowsing", "green_thumb", "bloodhound", "bird_whisperer", "night_eyes", "beast_calm", "rain_dancer", "cornucopia", "water_breathing", "squirrel_friend", "bird_strike", "cartographers_eye", "nowhere_man", "hollow_bones", "second_skin"],
+    "social": ["loud_chewer", "scream_cheese", "translator", "leech", "crowd_favorite", "turncoat", "fear_aura", "hoarder"],
+    "craft": ["beard_moss", "iron_stomach", "pyrokinesis", "the_touch", "purify", "green_whisper", "cold_blooded", "extra_stomach", "battlefield_grace", "photosynthesis", "hoarders_interest", "deep_reserves", "feast_engine"],
+    "strange": ["pocket_sand", "third_eye", "static_toss", "taste_vision", "symbiote", "eyes_in_back", "chitin_skin", "cheese_wheel", "freeze_tag", "second_wind", "molt", "time_skip", "cannibal_frenzy", "hive_mind", "pact"]
+  },
+  "_skills": "Human competences the track's work teaches a VILLAGER (lane 'skill' ability ids; stored by their codex skill id). One per threshold crossed, no slot, no System needed. The player learns skills through the codex/practice paths instead.",
+  "_skillLevels": "Villagers learn a track skill only at these levels (2 and 4): the old kits gave one thing per threshold, and merged skills carry several abilities (track_read = tracker + game_sense + blood_trail), so a skill at every level made villager godhood pools trivial. Order puts the godhood cores first (diplomat, triage/field_medicine) so shepherd_of_the_dead and undying_ward stay reachable.",
+  "skillLevels": [2, 4],
+  "skills": {
+    "combat": ["patient_aim", "haymaker", "ambush", "brawler_instinct", "dead_aim"],
+    "field": ["field_dressing", "stalk", "animal_ken", "soft_step", "game_sense"],
+    "social": ["diplomat", "peacemaker", "generous", "silver_tongue", "gossip_network"],
+    "craft": ["triage", "steady_hands", "preservation_instinct", "herbal_remedy", "camp_cook"],
+    "strange": []
+  },
+  "_deeds": "Player deed table: noteDeed(id) credits {track, n}, at most perDay times a day (chores are decisions, not grinding). Villager sites call villagerGainXP(vid, track, n, why) with the same tracks; when the doer is the bearer, that credits the player.",
+  "deeds": {
+    "foraging":        { "track": "field",   "n": 1, "perDay": 2 },
+    "hunting":         { "track": "field",   "n": 1, "perDay": 2 },
+    "fishing":         { "track": "field",   "n": 1, "perDay": 1 },
+    "trapping":        { "track": "field",   "n": 1, "perDay": 1 },
+    "preserving":      { "track": "field",   "n": 1, "perDay": 1 },
+    "discovery":       { "track": "field",   "n": 1, "perDay": 2 },
+    "cooking":         { "track": "craft",   "n": 1, "perDay": 1 },
+    "crafting":        { "track": "craft",   "n": 1, "perDay": 2 },
+    "healing":         { "track": "craft",   "n": 1, "perDay": 2 },
+    "conversation":    { "track": "social",  "n": 1, "perDay": 1 },
+    "teaching":        { "track": "social",  "n": 1, "perDay": 1 },
+    "contest":         { "track": "social",  "n": 1 },
+    "fight_won":       { "track": "combat",  "n": 2, "perDay": 3 },
+    "fight_survived":  { "track": "combat",  "n": 1, "perDay": 2 },
+    "contest_survived":{ "track": "strange", "n": 1 },
+    "alien_fight":     { "track": "strange", "n": 2 },
+    "audience_trial":  { "track": "strange", "n": 3 },
+    "integration":     { "track": "strange", "n": 2 },
+    "mantle":          { "track": "strange", "n": 2 },
+    "death_in_family": { "track": "strange", "n": 1, "perDay": 1 }
+  },
+  "_conversions": "Deeds that used to GRANT a magic ability directly (trial-deeds, practice-deeds) now credit track XP once instead: the power comes from the track's level-up sheet.",
+  "deedConversions": {
+    "win_a_fight": { "track": "combat", "n": 3 },
+    "take_50_damage_in_one_fight": { "track": "combat", "n": 3 },
+    "blood_trial": { "track": "combat", "n": 3 },
+    "hunger_trial": { "track": "craft", "n": 3 },
+    "war_cry": { "track": "combat", "n": 3 }
+  }
+}

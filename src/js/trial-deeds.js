@@ -21,7 +21,7 @@
 //   - game.hasAbility, game.abilitySlots, game.abilityOnAcquire,
 //     game.recomputeActiveSynergies, game.say, game.sysSay, game.tele
 // rules:
-//   - Six-slot law: full slots = honest refusal copy, never silent, never overflow.
+//   - Unified tracks (2026-10-14): a MAGIC trial credits its track once (tracks.js convertDeedToTrackXP) instead of granting the ability; the power comes from the track's level-up sheet.
 //   - Ability lanes (2026-10-14): trial abilities that are human
 //     competences (lane 'skill': intimidating_presence, gossip_network,
 //     peacemaker, eagle_eye, evidence_board) are TAUGHT as codex skills via
@@ -95,28 +95,18 @@
           }
           return null;
         }
-        if (!this.state.systemArrived) return 'pending';
-        s.abilities = s.abilities || [];
-        const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
-        if (s.abilities.length >= maxSlots) {
-          // FULL SLOTS: honest, not silent. The System saw the deed; the gift
-          // waits on room (same honesty as the day-7 gift and the purify offer).
-          try {
-            this.sysSay(`"WE SAW that — ${def.name} was yours. But your slots are full (${s.abilities.length}/${maxSlots}). Make room, or grow the interface, and ask again by DOING it again."`);
-          } catch (e) {}
-          return null;
+        // UNIFIED TRACKS (2026-10-14, Steve: "I intended abilities to be
+        // gained from a variety of related XP sources"): a magic trial no
+        // longer hands over the power. The deed credits its track ONCE
+        // (tracks.json deedConversions); the power comes from that track's
+        // level-up sheet. XP accrues from day one; the line waits for the watcher.
+        const track = this.convertDeedToTrackXP ? this.convertDeedToTrackXP(trialKey, def.id) : null;
+        if (!track) return null; // already credited
+        if (this.state.systemArrived) {
+          const label = (((this.trackData && this.trackData()) || {}).labels || {})[track] || track;
+          this.say(`◈ TRIAL RECOGNIZED — the System has been watching. ${this.trialDeedLine(trialKey)} (${label} track +)`);
         }
-        s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
-        try { this.tele('ability_granted', { id: def.id, who: 'player', via: 'trial_deed' }); } catch (e) {}
-        // Priced gifts pay their costs, like every other grant path
-        // (break-it abilities r5: trial gifts, pact, chooseAbility).
-        try { this.abilityOnAcquire(def.id); } catch (e2) {}
-        try { this.recomputeActiveSynergies(); } catch (e3) {}
-        const deedLine = this.trialDeedLine(trialKey);
-        this.say(`◈ TRIAL RECOGNIZED — the System has been watching. ${deedLine}`);
-        this.say(`✨ Ability gained: ${def.name} (L1). ${def.description || ''}`);
-        try { if (def.flavor) this.say(`"${def.flavor}"`); } catch (e) {}
-        return def.id;
+        return 'track:' + track;
       } catch (e) { return null; }
     },
 

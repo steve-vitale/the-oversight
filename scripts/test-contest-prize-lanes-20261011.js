@@ -182,8 +182,12 @@ async function main() {
   const xpAfter = ((Game.state.village.npcXp || {})[vid] || {}).combat || 0;
   ok(xpAfter === xpBefore + 3, 'contest win feeds the combat deed track (+3)', xpBefore + ' -> ' + xpAfter);
   const granted = ((Game.state.village.npcAbilities || {})[vid] || []);
-  ok(granted.includes('patient_aim') || xpBefore >= 3,
-    'first rung lights at threshold 3 (patient_aim) for a nobody', JSON.stringify(granted));
+  // UNIFIED TRACKS (2026-10-14, design change): kits are magic only and live
+  // in tracks.json — the first combat rung is the kit's first entry
+  // (patient_aim is a villager skill now, learned at level 2).
+  const rung1 = ((Game.trackData && Game.trackData().kits) || {}).combat[0];
+  ok(granted.includes(rung1) || xpBefore >= 3,
+    'first rung lights at threshold 3 (combat kit[0]: ' + rung1 + ') for a nobody', JSON.stringify(granted));
   ok(lines.some(t => /Earned, not given/.test(t)), 'grant narrates "Earned, not given"');
 
   // ---- G. wiring ----

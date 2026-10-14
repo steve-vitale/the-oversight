@@ -185,6 +185,9 @@
   // obtain godhood by sim run end, 5-15% of runs) ---
   function villagerAbilities(game, vid) {
     try {
+      // UNIFIED TRACKS (2026-10-14): pools hold skills too — count the
+      // villager's known skills (npcOwnedIds), like the player's ownedAbilityIds.
+      if (typeof game.npcOwnedIds === 'function') return new Set(game.npcOwnedIds(vid));
       const v = (game.state || {}).village || {};
       return new Set(((v.npcAbilities || {})[vid] || []));
     } catch (e) { return new Set(); }

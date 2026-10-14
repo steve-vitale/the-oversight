@@ -321,7 +321,8 @@
       var vAbs = [];
       try {
         if (typeof this.npcHasAbility === 'function')
-          vAbs = (((this.state.village || {}).npcAbilities || {})[vid] || []).slice();
+          vAbs = (typeof this.npcOwnedIds === 'function') ? this.npcOwnedIds(vid)
+            : (((this.state.village || {}).npcAbilities || {})[vid] || []).slice(); // unified tracks: skills count
       } catch (e) {}
       var vHasAb = function (id) { return vAbs.indexOf(id) >= 0; };
       // one-shot ability state, reset per fight
@@ -604,7 +605,9 @@
           if (acted[ai] === 'm' && !mStunnedThisRound) {
             // every live pack member acts — pack hunters hunt as a pack
             for (var mi = 0; mi < members.length; mi++) {
-              if (members[mi].hp <= 0 || !vAlive) continue;
+              // the lead fell earlier this round: the pack's coordination is
+              // gone — the rest scatter, they don't keep swinging (2026-10-14)
+              if (members[mi].hp <= 0 || !vAlive || members[0].hp <= 0) continue;
               // SIGNATURE MECHANICS (sigW3a.js, wave 3 batch A 2026-10-10):
               // the monster's real signature runs off-screen too — villagers
               // face the same fight. Consumes the member's action when it
@@ -902,6 +905,18 @@
         // mistimed dance (monster went first) must not leak into a later
         // downbeat. Clear after the round's phases all ran.
         rec.trickDance = 0;
+        // THE LEAD FELL THIS ROUND (unified tracks 2026-10-14): decide it
+        // before morale. Morale reads the first LIVE member, so a lead
+        // dropped by the villager's blow (haymaker x2) could still read as
+        // "hopeless" against the pack-mates and end in vFlee with the lead
+        // at 0 HP (a zombie entity). Surfaced once villagers learned track
+        // skills before the System's arrival.
+        if (members[0].hp <= 0) {
+          rec.outcome = 'vKill';
+          for (var mz = 0; mz < members.length; mz++) { members[mz].hp = 0; members[mz].alive = false; }
+          rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
+          break;
+        }
         // SITUATIONAL MORALE (Steve 2026-10-09): after a couple of rounds the
         // trajectory is legible. Winning -> commit (only the floor breaks
         // them). Hopeless and alone -> believable flight. Hopeless with help

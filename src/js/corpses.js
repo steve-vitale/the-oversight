@@ -166,6 +166,11 @@
       // at the kill site (monsterDown/deathAudio); this is for people.
       if (opts.kind === 'person' || opts.kind === 'villager') {
         try { this.audioEvent('villagerDeath'); } catch (e) {}
+        // UNIFIED TRACKS (2026-10-14): a death in the family (one of your
+        // village, not the bearer) is System contact for the bearer — strange.
+        try {
+          if (opts.villagerId && !opts.player && opts.villagerId !== this.villagerId && this.noteDeed) this.noteDeed('death_in_family');
+        } catch (eT) { console.warn('[tracks] death deed', eT); }
       }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis
       // across world runs. kind covers person/monster/animal; wave for monsters.

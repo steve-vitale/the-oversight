@@ -248,9 +248,9 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godhood.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood, tracks] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godhood.json', 'tracks.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood, tracks };
       // GODHOOD (Steve 2026-10-11): expose capstone data to the module.
       try {
         const S = globalThis.Scattering;
@@ -2899,6 +2899,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // THEY LEARN: a successful lesson sticks. Their foraging improves —
       // knowledge feeds, through the taught[] the village metabolism reads.
       try { this.villagerLearnsPlant(vid, plantId, 'taught'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): teaching is social, for you as for a villager.
+      try { if (this.noteDeed) this.noteDeed('teaching'); } catch (eT) { console.warn('[tracks] teach deed', eT); }
       // ACTION CLOCK: a real lesson takes 3 ticks (time-only — minds, not muscles).
       this.tickAction(3);
       this.setEngaged(vid, 2);
@@ -3007,6 +3009,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SIM TELEMETRY (2026-10-11, combat-lever): crafted-item acquisition
       // by source (traps vs other). Zero gameplay effect.
       try { this.tele('craft', { id: recipeId, name: recipe.name }); } catch (e) {}
+      try { if (this.noteDeed) this.noteDeed('crafting'); } catch (eT) { console.warn('[tracks] craft deed', eT); } // unified tracks: craft
       this.tickAction(32);
       return true;
     },
@@ -3224,6 +3227,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // waste" and "full yield", both bounded by the gross.
             const catchKcal = animal.calories;
             this.state.scholar.inventory.push(this.foodCarcass(animal, catchKcal, this.state.scholar.day, 'trapped'));
+            try { if (this.noteDeed) this.noteDeed('trapping'); } catch (eT) { console.warn('[tracks] trap deed', eT); } // unified tracks: field
             // a body in hand teaches you what it was — same as a kill.
             try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(catchId); } catch (e) {}
             // TRAP PRIORITY (Steve 2026-10-07): trap catches were getting buried
@@ -3423,6 +3427,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // still the skill channel — just an honest one.
               const kcal = adef.calories || 200;
               this.state.scholar.inventory.push(this.foodCarcass(adef, kcal, this.state.scholar.day, 'netted'));
+              try { if (this.noteDeed) this.noteDeed('fishing'); } catch (eT) { console.warn('[tracks] net deed', eT); } // unified tracks: field
               // a body in hand teaches you what it was — same as a trap catch.
               try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(fid); } catch (e) {}
               _names.push((adef.name || 'fish').toLowerCase());
@@ -5192,6 +5197,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             80: 'SYSTEM: Deep integration. You see the world through us now.',
           };
           this.say(msgs[t]);
+          // UNIFIED TRACKS (2026-10-14): an integration milestone is System
+          // contact — it feeds the strange track.
+          try { this.noteDeed && this.noteDeed('integration'); } catch (eT) { console.warn('[tracks] integration deed', eT); }
           // ABILITY CODEX (Steve 2026-10-13): deeper integration, deeper sight.
           // At 40/60/80 the System volunteers L1 knowledge of abilities in
           // your closest godhood pool — it has been watching your shape.
@@ -9643,7 +9651,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!cur || (cur.k === 's' && kind === 'visited')) {
           s.seenTiles[k] = { k: kind === 'visited' ? 'v' : 's', by: by || null };
           // TRIAL DEED (longsim abilities r4): a new tile under your boots.
-          if (kind === 'visited') { try { this.noteTrialDeed('discover_5_locations', 1); } catch (e2) {} }
+          if (kind === 'visited') {
+            try { this.noteTrialDeed('discover_5_locations', 1); } catch (e2) {}
+            // UNIFIED TRACKS (2026-10-14): a new place walked is field work, like a villager's expedition.
+            try { if (this.noteDeed) this.noteDeed('discovery'); } catch (eT) { console.warn('[tracks] discovery deed', eT); }
+          }
         }
       } catch (e) {}
     },
@@ -11917,6 +11929,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // TREATED (2026-10-13): skilled hands on someone's sickness — the
       // bond machinery never noticed. +3, same as tending.
       try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'treated'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): doctoring is craft work — yours as a villager's.
+      try { if (this.noteDeed) this.noteDeed('healing'); } catch (eT) { console.warn('[tracks] heal deed', eT); }
       this.gainAbilityXP(abilityId, 2);
       return null;
     },
@@ -12277,6 +12291,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       item.needsCooking = false; // cooked — the pack UI drops the "needs cooking" badge
       // (after the water spend above, which keys off needsCooking)
+      try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } // unified tracks: craft
       // ACTION CLOCK: cooking = 1 chunk (32 ticks, tending the fire).
       // A camp pot works faster — proper cookware.
       this.tickAction(hasPot ? 16 : 32);
@@ -13484,6 +13499,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         // a body in hand teaches you what it was — same as a trap/net catch.
         try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(fid); } catch (e) {}
+        // UNIFIED TRACKS (2026-10-14): same deed as a villager's fishing — field.
+        try { if (this.noteDeed) this.noteDeed('fishing'); } catch (eT) { console.warn('[tracks] fish deed', eT); }
         const fname = (adef.name || 'fish').toLowerCase();
         if (known) this.say(`You read the water — the deep cut by the bank, the shade line. A ${fname} takes it${bonusKcal ? ' — and another!' : ''}. About ${kcal + bonusKcal} kcal — clean them quickly (knife).`);
         else {
@@ -13574,6 +13591,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       this.say(n ? `Cooked ${n} item${n > 1 ? 's' : ''}${waterUsed ? ` (-${waterUsed}L water${wellUsed ? `, incl. ${wellUsed}L haven well` : ' from your bottles'})` : ''}.` : 'Nothing raw to cook.');
+      if (n) { try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } } // unified tracks: craft
       if (n > 0 && this.state.scholar.week1) this.state.scholar.week1.cook++;
       if (n > 0) this.noteToolUse(); // RELIC BOND: the knife, the pot, the fire kit.
       this.gainAbilityXP('camp_cook', 1);
@@ -14350,6 +14368,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // knowledge: encounters
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[animal.id] = (this.state.codex.animalEncounters[animal.id] || 0) + 1;
+        // UNIFIED TRACKS (2026-10-14): a clean kill — field, like a villager's hunt.
+        try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); }
         return true;
       } else {
         // KNOWLEDGE-GATED: the miss names only what you know — descriptor until
@@ -16456,7 +16476,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const tname = this.displayName(tester);
       v.lastExperimentDay = day;
-      try { this.villagerGainXP(tester, 'survival', 1, 'experimenting'); } catch (e) {}
+      try { this.villagerGainXP(tester, 'craft', 1, 'experimenting'); } catch (e) { console.warn('[tracks] experimenting', e); } // was 'survival' — not a track; the deed never counted (unified tracks 2026-10-14)
       if (pid) {
         const p = (this.data.plants || []).find(x => x.id === pid);
         if (!p) return;
@@ -21227,12 +21247,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       if (s.day >= 7 && !this.state.systemArrived) {
         this.state.systemArrived = true;
-        // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
-        // System starts granting now (the villager-mirror rule).
-        try { this.checkPendingTrialDeeds(); } catch (e) {}
-        // PRACTICE DEEDS (longsim abilities r5): same rule for the
-        // practice/discovery deeds.
-        try { this.checkPendingPracticeDeeds(); } catch (eP) {}
         // the System names everything — meat in packs updates too
         try {
           for (const mid of Object.keys(this.state.codex.monsters || {})) this.refreshMeatNames(mid);
@@ -21248,6 +21262,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // src tags the offer so chooseAbility's "watching you all week" line
         // only plays for the arrival gift (contest prizes / aid gifts reuse it).
         s.abilityChoices = this.firstAbilityChoices().map(c => Object.assign({}, c, { src: 'arrival' }));
+        // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
+        // System starts granting now (the villager-mirror rule).
+        // PRACTICE DEEDS (longsim abilities r5): same rule for the
+        // practice/discovery deeds. UNIFIED TRACKS (2026-10-14): run AFTER the
+        // arrival gift is set — a deed's track XP can queue a level-up, and
+        // the queue must wait behind the gift sheet, never be overwritten by it.
+        try { this.checkPendingTrialDeeds(); } catch (e) { console.warn('[tracks] checkPendingTrialDeeds', e); }
+        try { this.checkPendingPracticeDeeds(); } catch (eP) { console.warn('[tracks] checkPendingPracticeDeeds', eP); }
+        try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eL) { console.warn('[tracks] pumpLevelUps', eL); }
         const w1 = s.week1 || {};
         const didAnything = (w1.forage || 0) + (w1.hunt || 0) + (w1.talk || 0) + (w1.cook || 0) + (w1.donate || 0) + (w1.scavenge || 0) > 0;
         if (didAnything) {
@@ -21744,7 +21767,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     // chooseAbility: player picks from the System's offer.
-    chooseAbility(id) {
+    // UNIFIED TRACKS (2026-10-14): a level-up sheet (src 'level_up:<track>')
+    // with full slots asks which held ability the pick REPLACES (replaceId);
+    // keepAbilities() declines. Any other offer still waits for a free slot.
+    chooseAbility(id, replaceId) {
       const s = this.state.scholar;
       const choice = (s.abilityChoices || []).find(c => c.id === id);
       if (!choice) return null;
@@ -21755,13 +21781,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.isSkillLane(choice.id)) {
         s.abilityChoices = null;
         this.teachAbilitySkill(choice.id, 1, 'experience');
+        try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eP) { console.warn('[tracks] pumpLevelUps', eP); }
         return null;
       }
       // Ability slots: integration unlocks more. Start 1, max 6.
       const maxSlots = this.abilitySlots();
+      const isLevelUp = String(choice.src || '').indexOf('level_up:') === 0;
       if (s.abilities.length >= maxSlots) {
-        this.say(`No free ability slots (${s.abilities.length}/${maxSlots}). Increase System integration to unlock more.`);
-        return null;
+        if (!isLevelUp) {
+          this.say(`No free ability slots (${s.abilities.length}/${maxSlots}). Increase System integration to unlock more.`);
+          return null;
+        }
+        const ri = replaceId ? s.abilities.findIndex(e => ((e && e.id) || e) === replaceId) : -1;
+        if (ri < 0) {
+          this.say(`Your slots are full (${s.abilities.length}/${maxSlots}). Choose which ability ${choice.name} replaces — or keep what you have.`);
+          return null;
+        }
+        // FUSION SINGULARITY (Steve 2026-10-12): the reactor does not come out.
+        if (replaceId === 'fusion_reactor') {
+          this.say('The reactor does not come out. Choose something else to let go of.');
+          return null;
+        }
+        const gone = s.abilities.splice(ri, 1)[0];
+        const goneName = (gone && gone.name) || ((this.abilityDef && this.abilityDef(replaceId)) || {}).name || replaceId;
+        this.say(`You let ${goneName} go. Its place is empty for a breath — then it isn't.`);
+        try { this.tele('ability_replaced', { out: replaceId, in: choice.id, src: choice.src }); } catch (eR) { console.warn('[tracks] tele', eR); }
+        if (this.trackStat) this.trackStat('replaced');
       }
       s.abilities.push({ id: choice.id, name: choice.name, desc: choice.description || choice.desc, level: 1, xp: 0 });
       try { this.tele('ability_granted', { id: choice.id, who: 'player' }); } catch (e) {}
@@ -21777,7 +21822,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // The "all week" line is the arrival gift's; other offers (contest
       // prizes, aid gifts, poison/pellet offers) get a neutral line.
       if (choice.src === 'arrival') this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      else if (isLevelUp) {
+        this.say(`"Earned, not given. You did the work — we just wrote it down."`);
+        if (this.trackStat) this.trackStat('picked');
+      }
       else this.say(`"The REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      // the next queued level-up (if any) opens now that the sheet is clear
+      try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eP) { console.warn('[tracks] pumpLevelUps', eP); }
       return null;
     },
     // abilityOnAcquire: the price is paid up front, where the fiction demands it.
@@ -23878,6 +23929,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         this.tele('forage', { tile: t.type, epithet: this.nodeEpithet(this.map.px, this.map.py), plants: Object.keys(bySpecies), cells: harvested.length, kcal: totalKcalKnown, cost: S.calories.ACTION_COSTS.forage });
         if (scholar.week1) scholar.week1.forage++;
+        // UNIFIED TRACKS (2026-10-14): same deed as a villager's foraging — field.
+        if (harvested.length) { try { if (this.noteDeed) this.noteDeed('foraging'); } catch (eT) { console.warn('[tracks] forage deed', eT); } }
         this.gainAbilityXP('green_thumb', 1);
         // BETTER HUMAN: foraging is perception practice — reading the ground.
         this.practice('per', 1);
@@ -39437,6 +39490,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      // UNIFIED TRACKS (2026-10-14): snapshot before the narration clears it —
+      // facing an alien player is System contact (strange track).
+      let _alienFight = false;
+      try { _alienFight = !!(this.state.alienEncounter || (f.fighters || []).some(x => x && x.alienPid)); } catch (eA) { console.warn('[tracks] alien snapshot', eA); }
       // COMBAT CLEANUP GUARANTEE (Steve 2026-10-06): the victory/defeat
       // narration below is long and calls many subsystems. If ANY of it
       // throws, tbfight must still clear — a stuck tbfight softlocks movement
@@ -39663,6 +39720,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const _p = this.tbFighter('p');
         if (_p && _p.alive !== false && (_p.hp || 0) > 0) {
+          // UNIFIED TRACKS (2026-10-14): the same fight deeds that feed a
+          // villager's combat track (fieldFights: kill 2, survived 1) feed yours.
+          if (this.noteDeed) try {
+            if (result === 'won') this.noteDeed('fight_won');
+            else if (result === 'fled' || result === 'calmed') this.noteDeed('fight_survived');
+            if (_alienFight) this.noteDeed('alien_fight');
+          } catch (eT) { console.warn('[tracks] fight deed', eT); }
           if (result === 'won') this.noteTrialDeed('win_a_fight', 1);
           const _taken = _p._taken || 0;
           if (_taken >= 50) this.noteTrialDeed('take_50_damage_in_one_fight', 1);
@@ -39895,9 +39959,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // game; this is the smallest honest extension letting one hold the clause.
     // (Natural acquisition: the System grants villagers abilities via the
     // villager XP system -- villagerGainXP/NPC_ABILITY_KITS, Steve 2026-10-09.)
+    // UNIFIED TRACKS (2026-10-14): a skill-lane ability is theirs when they
+    // know its skill (v.npcSkills, tracks.js) — the villager twin of the
+    // player's skillLaneEntries. Every "does this villager have tracker?"
+    // check keeps working now that tracker is a skill.
     npcHasAbility(vid, id) {
-      try { return (((this.state.village || {}).npcAbilities || {})[vid] || []).includes(id); }
-      catch (e) { return false; }
+      try {
+        if ((((this.state.village || {}).npcAbilities || {})[vid] || []).includes(id)) return true;
+        const sid = this.abilitySkillId ? this.abilitySkillId(id) : null;
+        return !!(sid && this.npcKnowsSkill && this.npcKnowsSkill(vid, sid));
+      }
+      catch (e) { console.warn('[tracks] npcHasAbility', e); return false; }
     },
     // npcSynergyTick(v): GODHOOD REWORK (Steve 2026-10-13). Villagers discover
     // synergies by holding all legs day after day — the "practice" is their
@@ -39912,7 +39984,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.npcSynergyDays = v.npcSynergyDays || {};
         const roster = (v.roster || []).filter(id => id !== this.villagerId && !(this.vpOf && this.vpOf(id) || {}).dead);
         for (const vid of roster) {
-          const held = new Set(((v.npcAbilities || {})[vid] || []));
+          const held = new Set(this.npcOwnedIds ? this.npcOwnedIds(vid) : ((v.npcAbilities || {})[vid] || []));
           if (held.size < 2) continue;
           v.npcSynergies[vid] = v.npcSynergies[vid] || [];
           v.npcSynergyDays[vid] = v.npcSynergyDays[vid] || {};
@@ -39945,6 +40017,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // world's reactor is taken by someone else, the grant is refused — the
         // caller must not narrate it as granted. Returns false on refusal.
         if (id === 'fusion_reactor' && this.state.fusionReactorHolder) return false;
+        // KITS ARE MAGIC ONLY (unified tracks 2026-10-14): a human competence
+        // is a villager SKILL — learned, never slotted (no System chrome).
+        if (this.isSkillLane && this.isSkillLane(id) && this.npcLearnSkill) {
+          this.npcLearnSkill(vid, id);
+          return true;
+        }
         const v = this.state.village; v.npcAbilities = v.npcAbilities || {};
         v.npcAbilities[vid] = v.npcAbilities[vid] || [];
         if (!v.npcAbilities[vid].includes(id)) v.npcAbilities[vid].push(id);
@@ -40140,100 +40218,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // --- VILLAGER XP & SYSTEM GRANTS (Steve 2026-10-09) ---
     // "System abilities aren't RNG, they are earned by villagers acting like
-    // players." Villagers accrue XP per track from real deeds; at thresholds
-    // the System grants the next ability from the kit matching that track.
-    // Deterministic: same deeds -> same XP -> same grants. No RNG anywhere in
-    // the grant path. Kits fit the villager's situation (canon:
-    // people-not-classes, System-granted ability kits). Thresholds mirror the
-    // player's skill-practice shape (3/8/16, night_hunting). The System's
-    // six-slot rule applies to villagers too (same System, same slots).
-    // XP accrues from day one; GRANTS wait for the System's arrival (day 7) --
-    // nobody was watching before that. Pending grants fire on the next deed
-    // after arrival (the level loop grants all crossed thresholds).
-    NPC_XP_TRACKS: ['combat', 'field', 'social', 'craft'],
-    NPC_XP_THRESHOLDS: [3, 8, 16, 32, 64],
-    NPC_MAX_ABILITIES: 6,
-    NPC_ABILITY_KITS: {
-      // Fixed priority order = grant order. First unheld wins; ties impossible.
-      // phoenix_clause sits 5th in combat (64 XP): a real veteran's capstone,
-      // unlock type system_offer -- the System offers it to those who've
-      // proven themselves in death's doorway. This lights up the villager-
-      // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
-      // PARTY-BOND (2026-10-12, rework): the tank abilities left the combat
-      // kit — at 6th/8th/11th they were unreachable (grants cap at 5) and
-      // decorative. Their honest villager route is the SHIELDBEARER ability
-      // path: the System offers them for combat bond earned beside others
-      // (party-bond.js noteShieldbearerOffer). Pool/unlock stay for the
-      // player's system offers.
-      // GODHOOD REWORK (Steve 2026-10-13): kit order now carries the four
-      // villager-reachable godhoods. Each godhood's pool needs 4+ abilities
-      // (incl. a core) within the first 5 grants of its track(s):
-      //   combat -> one_person_army (rage/haymaker/ambush/patient_aim; core rage)
-      //   field -> apex_predator (tracker/echo_location/game_sense/stalk; core tracker|echo_location)
-      //   social -> shepherd_of_the_dead (peacemaker/mediator/diplomat/generous/silver_tongue; core diplomat|mediator)
-      //   craft -> undying_ward (steady_hands/triage/field_medicine/preservation_instinct/iron_stomach; core triage|field_medicine)
-      // The other six godhoods are player-primary (System offers + build-aware bias).
-      // phoenix_clause sits 5th in combat (32 XP): still a real veteran's
-      // capstone, still lights the villager-Bearer <redacted> phoenix path.
-      combat: ['patient_aim', 'haymaker', 'rage', 'ambush', 'phoenix_clause', 'war_cry', 'blood_magic', 'trade_of_blows', 'unbreakable', 'adrenaline_control', 'dead_aim'],
-      field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
-      social: ['peacemaker', 'mediator', 'diplomat', 'generous', 'silver_tongue', 'scream_cheese', 'gossip_network', 'animal_ken'],
-      craft: ['steady_hands', 'triage', 'field_medicine', 'preservation_instinct', 'iron_stomach', 'herbal_remedy', 'camp_cook', 'purify'],
-    },
-    NPC_TRACK_NOUNS: { combat: 'fights', field: 'days worked on the land', social: 'words shared at the fire', craft: 'careful work' },
-    npcXp(vid) {
-      try {
-        const v = this.state.village; v.npcXp = v.npcXp || {};
-        const x = v.npcXp[vid] = v.npcXp[vid] || { combat: 0, field: 0, social: 0, craft: 0, granted: { combat: 0, field: 0, social: 0, craft: 0 } };
-        x.granted = x.granted || { combat: 0, field: 0, social: 0, craft: 0 };
-        return x;
-      } catch (e) { return { combat: 0, field: 0, social: 0, craft: 0, granted: { combat: 0, field: 0, social: 0, craft: 0 } }; }
-    },
-    villagerTrackLevel(xp) {
-      let lvl = 0;
-      for (const t of (this.NPC_XP_THRESHOLDS || [3, 8, 16, 32, 64])) if (xp >= t) lvl++;
-      return lvl;
-    },
-    // villagerGainXP(vid, track, n, why): the deed happened; accrue and maybe
-    // grant. The grant path uses NO randomness: kit order is fixed, first
-    // unheld wins, six-slot cap is a count. Same history -> same abilities.
-    villagerGainXP(vid, track, n, why) {
-      try {
-        if (!vid || vid === this.villagerId) return 0;
-        if ((this.NPC_XP_TRACKS || []).indexOf(track) < 0) return 0;
-        const vp = this.vpOf ? this.vpOf(vid) : null;
-        if (vp && vp.dead) return 0; // the dead earn nothing
-        const x = this.npcXp(vid);
-        x[track] = (x[track] || 0) + (n || 0);
-        if (!this.state.systemArrived) return x[track]; // XP accrues; the System isn't watching yet
-        const kits = this.NPC_ABILITY_KITS || {};
-        const kit = kits[track] || [];
-        const level = this.villagerTrackLevel(x[track]);
-        let granted = (x.granted && x.granted[track]) || 0;
-        while (granted < level) {
-          const held = ((this.state.village || {}).npcAbilities || {})[vid] || [];
-          if (held.length >= (this.NPC_MAX_ABILITIES || 6)) break; // six slots, same as you
-          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. If
-          // it's taken, the capstone is simply not on the table — the kit
-          // reads as exhausted for this villager, XP keeps accruing.
-          const next = kit.find(id => held.indexOf(id) < 0 && !(id === 'fusion_reactor' && this.state.fusionReactorHolder));
-          if (!next) break; // kit exhausted: natural saturation, XP keeps accruing
-          if (this.npcGrantAbility(vid, next) === false) break; // refused (singularity) — never narrate a grant that didn't happen
-          granted++;
-          const aname = ((this.data.abilities || []).find(a => a.id === next) || {}).name || next;
-          const vname = this.displayName ? this.displayName(vid) : 'Someone';
-          const noun = (this.NPC_TRACK_NOUNS || {})[track] || track;
-          this.say(`◈ THE SYSTEM has been watching ${vname} — ${x[track]} ${noun}. It offers ${aname}. Earned, not given. (${next}: villager System grant)`);
-          // FUSION SINGULARITY (Steve 2026-10-12): name it out loud — one
-          // reactor per world, and the village just watched it get claimed.
-          if (next === 'fusion_reactor') this.say(`"ONE REACTOR PER WORLD. ${vname.toUpperCase()} HOLDS IT NOW. IT DOES NOT COME OUT."`);
-          try { this.journalNote && this.journalNote('system', 'grant', `The System granted ${vname} ${aname} (${next}) for ${x[track]} ${noun}.`); } catch (e2) {}
-          try { this.tele && this.tele('villager_grant', { vid, ability: next, track, xp: x[track] }); } catch (e3) {}
-        }
-        x.granted[track] = granted;
-        return x[track];
-      } catch (e) { return 0; }
-    },
+    // players." UNIFIED TRACKS (Steve 2026-10-14: "I think we need to sync the
+    // player and villager system. But the villager system sounds like the
+    // better model."): the engine moved to tracks.js (gainTrackXP — one engine
+    // for the player and villagers) and the tracks, thresholds and kits moved
+    // to src/data/tracks.json. These names stay as read-only views of the data
+    // for older callers. Kits are MAGIC ONLY now; the human competences the
+    // old kits held (tracker, triage, diplomat, haymaker...) are villager
+    // SKILLS learned at the same thresholds (tracks.json `skills`), so the
+    // four villager-reachable godhood pools stay reachable.
+    get NPC_XP_TRACKS() { return this.trackData ? this.trackData().tracks : []; },
+    get NPC_XP_THRESHOLDS() { return this.trackThresholds ? this.trackThresholds('villager') : []; },
+    get NPC_MAX_ABILITIES() { return (this.trackData && this.trackData().maxAbilities) || 6; },
+    get NPC_ABILITY_KITS() { return this.trackData ? this.trackData().kits : {}; },
+    get NPC_TRACK_NOUNS() { return this.trackData ? this.trackData().nouns : {}; },
 
     // phoenixPlayerTrigger: the scholar would die holding phoenix_clause.
     // Returns true if death was cheated or is being held (caller: don't set over).

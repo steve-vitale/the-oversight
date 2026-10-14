@@ -14055,6 +14055,9 @@
   function abilitySheet() {
     const choices = Game.state.scholar.abilityChoices;
     if (!choices || !choices.length) return;
+    // UNIFIED TRACKS (2026-10-14): a track level-up is its own sheet — pick 1
+    // of 3 from the track's kit; full slots = the pick replaces one you hold.
+    if (Game.isLevelUpSheet && Game.isLevelUpSheet()) return levelUpSheet(choices);
     openSheet({
       id: 'offer-ability',
       title: '\u{1F31F} The System Offers a Gift',
@@ -14069,6 +14072,56 @@
         onClick: () => { Game.chooseAbility(c.id); refresh(); },
       })),
       priority: 80, modal: true, dismissible: false,
+    });
+  }
+
+  // levelUpSheet: a track level-up (Steve 2026-10-14: "maybe 8 natural level
+  // ups ... that compete for those 6 slots"). Pick 1 of 3. When the slots
+  // are full, each pick names what it will replace (second step), and
+  // "Keep what I have" is always there.
+  function levelUpSheet(choices) {
+    const s = Game.state.scholar;
+    const track = String(choices[0].src || '').slice('level_up:'.length);
+    const td = Game.trackData ? Game.trackData() : {};
+    const label = ((td.labels || {})[track]) || track;
+    const icon = ((td.icons || {})[track]) || '';
+    const lvl = choices[0].level || '';
+    const full = (s.abilities || []).length >= Game.abilitySlots();
+    openSheet({
+      id: 'offer-ability',
+      title: `${icon} ${esc(label)} ${lvl} \u2014 Level up`,
+      html: `<p>"We've been counting your ${esc(((td.nouns || {})[track]) || 'deeds')}. Pick one."</p>` +
+        (full ? `<p class="small"><b>Your slots are full (${(s.abilities || []).length}/${Game.abilitySlots()}).</b> Whatever you take replaces something you hold \u2014 you'll choose what next.</p>` : ''),
+      buttons: choices.map(c => ({
+        label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.description || c.desc) + '</span>' +
+          (c.flavor ? '<br><i class="small">' + esc(Game.quoteWrap(c.flavor)) + '</i>' : ''),
+        primary: true,
+        onClick: () => {
+          if (full) { replaceSheet(c); return; }
+          Game.chooseAbility(c.id); refresh();
+        },
+      })).concat([{
+        label: 'Keep what I have',
+        onClick: () => { Game.keepAbilities(); refresh(); },
+      }]),
+      priority: 80, modal: true, dismissible: false,
+    });
+  }
+  function replaceSheet(choice) {
+    const s = Game.state.scholar;
+    const held = (s.abilities || []).filter(e => ((e && e.id) || e) !== 'fusion_reactor');
+    openSheet({
+      id: 'level-up-replace',
+      title: 'Make room for ' + esc(choice.name),
+      html: '<p>Which ability do you let go? It\u2019s gone for good.</p>',
+      buttons: held.map(e => ({
+        label: '<b>' + esc(e.name || e.id) + '</b> <span class="small">(L' + (e.level || 1) + ')</span>',
+        onClick: () => { Game.chooseAbility(choice.id, e.id); refresh(); },
+      })).concat([
+        { label: 'Keep what I have', onClick: () => { Game.keepAbilities(); refresh(); } },
+        { label: 'Back', onClick: () => { refresh(); } },
+      ]),
+      priority: 81, modal: true, dismissible: false,
     });
   }
 
@@ -15107,6 +15160,33 @@
     } catch (e) { return ''; }
   }
 
+  // UNIFIED TRACKS (2026-10-14): what your deeds have added up to — five
+  // tracks, level pips and a thin bar to the next level-up. Only after the
+  // System arrives ("If you don't know, it doesn't show": before day 7
+  // nobody is counting). Compact rows for a 390px screen.
+  function renderTracksSection() {
+    try {
+      if (!Game.state.systemArrived || !Game.trackSummary) return '';
+      const rows = Game.trackSummary();
+      if (!rows.length) return '';
+      const q = ((Game.state.scholar || {}).levelUpQueue || []).length;
+      let html = `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">📈 Tracks${q ? ` <span style="opacity:.7;font-weight:normal">(${q} level-up${q > 1 ? 's' : ''} waiting)</span>` : ''}</summary><div style="margin-top:6px">`;
+      for (const r of rows) {
+        const pips = '●'.repeat(r.level) + '○'.repeat(Math.max(0, r.max - r.level));
+        const span = r.next != null ? Math.max(1, r.next - r.prev) : 1;
+        const pct = r.next != null ? Math.max(0, Math.min(100, Math.round(100 * (r.xp - r.prev) / span))) : 100;
+        const tip = r.next != null ? `${r.xp}/${r.next} to the next level-up` : 'every level reached';
+        html += `<div class="small" style="display:flex;align-items:center;gap:6px;margin:3px 0" title="${esc(tip)}" aria-label="${esc(r.label + ' level ' + r.level + ', ' + tip)}">` +
+          `<span style="width:84px;white-space:nowrap">${esc(r.icon)} ${esc(r.label)}</span>` +
+          `<span style="letter-spacing:1px;white-space:nowrap;opacity:.85">${pips}</span>` +
+          `<span style="flex:1;min-width:40px;height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:${pct}%;background:currentColor;opacity:.6"></span></span>` +
+          `</div>`;
+      }
+      html += `</div></details>`;
+      return html;
+    } catch (e) { console.warn('[tracks] renderTracksSection', e); return ''; }
+  }
+
   function renderCharacterInline(slot, view) {
     const st = Game.status();
     const bodyHtml = `
@@ -15137,6 +15217,7 @@
           } catch (e) { return ''; }
         })()}
         ${renderAbilitiesSection()}
+        ${renderTracksSection()}
         ${renderSkillsSection()}
         ${renderSynergiesSection()}
         ${renderAbilityCodexSection()}
@@ -16180,7 +16261,8 @@
       // gift WAITS — announced once, held pending, never silently eaten.
       // The integrate() wrapper announces when the slot opens.
       const free = Game.abilitySlots() - ((s.abilities || []).length);
-      if (free > 0) {
+      // a level-up sheet opens even when full: it offers replace-or-keep
+      if (free > 0 || (Game.isLevelUpSheet && Game.isLevelUpSheet())) {
         abilitySheet();
       } else if (s._offerWaitFor !== s.abilityChoices) {
         s._offerWaitFor = s.abilityChoices;

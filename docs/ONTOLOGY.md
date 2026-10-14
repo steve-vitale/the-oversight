@@ -1116,7 +1116,7 @@ Practice deed grants — unlock.type === 'practice' abilities
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 
-**Provides:** integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
+**Provides:** integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), trialLessonSkill() -> the audience trial's lesson: an unknown skill (no magic gift; unified tracks 2026-10-14), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
 
 **Rules:**
 - crisis_once: true (code: progression.js — fireCrisis dedupes via pg.crises keys; one per kind per run)
@@ -1450,6 +1450,22 @@ The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scal
 —
 
 **Consumes:** —
+
+### tracks (`tracks.js`)
+ONE progression system for the player and villagers (Steve 2026-10-14: "I think we need to sync the player and villager system. But the villager system sounds like the better model."). Five tracks (combat, field, social, craft, strange) fed by real deeds; thresholds and kits are data (src/data/tracks.json). Crossing a threshold is a level-up: a villager takes the next unheld kit ability and learns the next track skill; the player gets a level-up sheet, pick 1 of the next 3 unheld kit abilities (src 'level_up:<track>'). Kits are magic only; skill-lane entries become villager SKILLS (no slot). Occupations seed a starting lean (characterGen trackLean), below the first threshold.
+
+**Provides:** trackData() -> the tracks.json record (tracks, thresholds, playerScale, kits, skills, deeds), trackThresholds(who) -> threshold list ('player' uses thresholds x playerScale), trackLevelFor(xp, who) -> thresholds crossed, gainTrackXP(who, track, n, why) -> new xp; who = 'player' or a villager id (the bearer's id = the player), villagerGainXP(vid, track, n, why) -> thin wrapper over gainTrackXP (kept for its callers), npcXp(vid) -> villager track record {combat, field, social, craft, strange, granted, skilled}, villagerTrackLevel(xp) -> villager level for an xp total, playerTracks() -> scholar.tracks {track: {xp, level}} (seeded with the occupation lean), occupationLean(occId) -> {track: xp} from characterGen trackLean, noteDeed(deedId, trackOverride) -> player track XP from the deed table (per-day caps), convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic, levelUpOffers(track) -> next unheld magic abilities of the track's kit (offerSize), pumpLevelUps() -> opens the next queued level-up sheet when none is pending, keepAbilities() -> declines a level-up sheet ("Keep what I have"), isLevelUpSheet() -> the pending ability sheet is a track level-up, trackStat(k) -> scholar.trackStats counters (offered/picked/replaced/kept), trackSummary() -> [{track, label, icon, level, xp, prev, next}] for the character sheet, npcLearnSkill(vid, abilityId) / npcKnowsSkill(vid, skillId) / npcOwnedIds(vid), migrateNpcLanes() -> moves skill-lane ids out of villager ability slots (idempotent)
+
+**Rules:**
+- same_events_feed_both: a deed credits whoever did it; villagerGainXP with the bearer's id credits the player (code: gainTrackXP)
+- shared_data: thresholds, tracks and kits come from tracks.json for both (code: trackData); the player's thresholds are x playerScale (more deeds per day)
+- kits_magic_only: kits hold lane 'magic' ids only; a villager's skill-lane grant becomes a villager skill, never a slot (code: npcGrantAbility, npcLearnSkill)
+- villager_deterministic: villagers take the next unheld kit ability, first wins, no RNG; six-slot cap (code: gainTrackXP)
+- player_pick_one_of_three: a player level-up offers the next 3 unheld kit abilities; full slots = each pick REPLACES a held ability, or keep what you have (code: pumpLevelUps, chooseAbility, keepAbilities)
+- queue_never_drop: level-ups wait in scholar.levelUpQueue behind any pending sheet and before the System's arrival (code: pumpLevelUps)
+- lean_below_first_threshold: occupation lean never grants a free level-up at spawn (code: playerTracks, npcXp)
+
+**Consumes:** Game.data.tracks, Game.data.abilities, Game.data.characterGen, state.village.npcXp, state.village.npcAbilities, state.village.npcSkills, state.scholar.tracks, state.scholar.levelUpQueue, state.scholar.abilityChoices, npcGrantAbility(vid, id), abilitySlots(), ownedAbilityIds(), isSkillLane(id), abilitySkillId(id)
 
 ### trial-deeds (`trial-deeds.js`)
 Trial deed grants — unlock.type === 'trial' abilities are the

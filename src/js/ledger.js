@@ -916,6 +916,10 @@
       // System abilities pass with the mantle — the System recognizes the
       // office, not the face. It's alien like that.
       this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
+      // UNIFIED TRACKS (2026-10-14): the tracks are the office's progression
+      // (scholar.tracks pass with the mantle, like slots and integration), and
+      // the mantle passing is System contact — the strange track.
+      try { if (this.noteDeed) this.noteDeed('mantle'); } catch (eT) { console.warn('[tracks] mantle deed', eT); }
       // DRAMA (Steve 2026-10-07, Round C2): bright emergence — a new scholar awakens.
       try { this.drama('newLife', newName); } catch (e) {}
       // MUSIC (Steve 2026-10-12): the mantle passes — a somber bell.

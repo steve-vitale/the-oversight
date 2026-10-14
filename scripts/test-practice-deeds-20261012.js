@@ -18,6 +18,11 @@
 // TEACHES the codex skill — immediately (no System needed), never a slot,
 // narrated by learnSkill. Only war_cry (magic) is a System grant that waits
 // on arrival and obeys the six-slot law. Sections 1, 3-9, 11, 12 updated.
+//
+// UNIFIED TRACKS (2026-10-14, design change): war_cry no longer grants
+// itself. Its practice credits the combat track once (+3, tracks.json
+// deedConversions); the power comes from the combat level-up sheet.
+// Sections 2, 3, 4, 6, 9, 11 assert the credit instead of the grant.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -42,6 +47,7 @@ function freshScholar(Game) {
   s.integration = 100; // 6 slots
   Game.state.systemArrived = true;
   Game.state.codex.skills = {}; // skill-lane abilities are owned via codex skills
+  s.tracks = null; s.deedConverted = {}; s.levelUpQueue = []; s.abilityChoices = null; // unified tracks
   return s;
 }
 const SKILL_LANE = new Set(['stalk', 'blood_trail', 'ambush', 'haymaker', 'soft_step']);
@@ -83,8 +89,10 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
     freshScholar(Game);
     Game.notePracticeDeed(key, th - 1);
     ok(!Game.hasAbility(EXPECTED[key]), `threshold: ${key} x${th - 1} -> no grant`);
+    const cBefore = Game.playerTracks().combat.xp;
     Game.notePracticeDeed(key, 1);
-    ok(Game.hasAbility(EXPECTED[key]), `threshold: ${key} x${th} -> granted`);
+    if (key === 'war_cry') ok(!Game.hasAbility('war_cry') && Game.playerTracks().combat.xp === cBefore + 3, `threshold: war_cry x${th} -> combat +3 (no direct grant)`);
+    else ok(Game.hasAbility(EXPECTED[key]), `threshold: ${key} x${th} -> granted`);
   }
 
   // ---------- 3. idempotent ----------
@@ -95,9 +103,10 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   const n2 = known(Game, 'stalk') ? 1 : 0;
   ok(n1 === 1 && n2 === 1 && Game.state.scholar.abilities.length === 0 && Game.state.codex.skills.stalk.level === 1,
     'idempotent: stalk taught once (skill L1, no slot)', `${n1}/${n2}`);
+  const c3 = Game.playerTracks().combat.xp;
   Game.notePracticeDeed('war_cry', 3);
   Game.notePracticeDeed('war_cry', 3);
-  ok(Game.state.scholar.abilities.filter(a => a.id === 'war_cry').length === 1, 'idempotent: war_cry (magic) granted once');
+  ok(Game.state.scholar.abilities.length === 0 && Game.playerTracks().combat.xp === c3 + 3, 'idempotent: war_cry (magic) credits combat once, never slots');
 
   // ---------- 4. pre-arrival counting, no grant; pending pass on arrival ----------
   freshScholar(Game);
@@ -107,11 +116,12 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   Game.notePracticeDeed('war_cry', 3);
   ok(known(Game, 'blood_trail') && known(Game, 'ambush') && !Game.hasAbility('war_cry'),
     'pre-arrival: human deeds taught as skills now, magic (war_cry) waits');
-  ok(Game.practiceDeedGrant('war_cry') === 'pending', 'pre-arrival: direct magic grant -> pending');
+  ok((Game.state.scholar.deedConverted || {}).war_cry && Game.practiceDeedGrant('war_cry') === null, 'pre-arrival: war_cry credited combat already (XP accrues from day one); a second grant call is a no-op');
+  const c4 = Game.playerTracks().combat.xp;
   Game.state.systemArrived = true;
   Game.checkPendingPracticeDeeds();
-  ok(Game.hasAbility('blood_trail') && Game.hasAbility('ambush') && Game.hasAbility('war_cry'),
-    'arrival: pending practice deeds fire');
+  ok(Game.hasAbility('blood_trail') && Game.hasAbility('ambush') && !Game.hasAbility('war_cry') && Game.playerTracks().combat.xp === c4,
+    'arrival: pending pass changes nothing (skills already taught, combat already credited)');
 
   // ---------- 5. soft_step streak ----------
   freshScholar(Game);
@@ -143,8 +153,8 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   ok(Game.state.scholar.abilities.length === 6, 'slots: full 6 stays 6/6, no overflow');
   ok(!Game.hasAbility('war_cry'), 'slots: no magic grant when full');
   const refusal = said.join('\n');
-  ok(/slots are full \(6\/6\)/.test(refusal), 'slots: refusal names the slots honestly');
-  ok(!/undefined/.test(refusal), 'slots: refusal has no undefined');
+  ok((Game.state.scholar.deedConverted || {}).war_cry, 'slots: full slots do not block the combat credit (track XP takes no slot)');
+  ok(!/undefined/.test(refusal), 'slots: narration has no undefined');
 
   // ---------- 7. background-held never duplicates ----------
   freshScholar(Game);
@@ -170,7 +180,7 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   ok(/PRACTICE RECOGNIZED/.test(text), 'narration: PRACTICE RECOGNIZED beat');
   ok(/System has been watching/.test(text), 'narration: System voice');
   ok(/voice moved something with teeth/.test(text), 'narration: names the deed');
-  ok(/War Cry/.test(text), 'narration: names the ability');
+  ok(/Combat track/.test(text), 'narration: names the track it fed');
   ok(!/undefined/.test(text), 'narration: no undefined');
   ok(!/\b(stalk|blood_trail|ambush|war_cry|haymaker|soft_step)\b/.test(text),
     'narration: no raw ids leak to the player');
@@ -203,9 +213,9 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   Game.notePracticeDeed('war_cry', 3);
   Game.notePracticeDeed('haymaker', 3);
   for (let i = 0; i < 20; i++) Game.noteSoftStepTile(false);
-  ok(Game.state.scholar.abilities.length === 1 && ['stalk', 'blood_trail', 'ambush', 'haymaker', 'soft_step'].every(id => known(Game, id)),
-    'slots: 6 practice deeds -> 5 skills + war_cry in 1 slot', String(Game.state.scholar.abilities.length));
-  Game.state.scholar.abilities = Game.state.scholar.abilities.concat(['a1', 'a2', 'a3', 'a4', 'a5'].map(id => ({ id, level: 1 })));
+  ok(Game.state.scholar.abilities.length === 0 && ['stalk', 'blood_trail', 'ambush', 'haymaker', 'soft_step'].every(id => known(Game, id)),
+    'slots: 6 practice deeds -> 5 skills, no slot (war_cry fed combat)', String(Game.state.scholar.abilities.length));
+  Game.state.scholar.abilities = Game.state.scholar.abilities.concat(['a1', 'a2', 'a3', 'a4', 'a5', 'a6'].map(id => ({ id, level: 1 })));
   Game.noteTrialDeed && Game.noteTrialDeed('win_a_fight', 1); // a 7th deed from another lane
   ok(Game.state.scholar.abilities.length === 6, 'slots: 7th deed refused, still 6');
 

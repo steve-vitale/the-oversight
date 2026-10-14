@@ -1019,6 +1019,7 @@
     // (butcherYieldFrac), never gross inflation.
     var kcal = animal.calories;
     try { s.inventory.push(this.foodCarcass(animal, kcal, s.day, 'hunted')); } catch (e) {}
+    try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); } // unified tracks: field
     this.encIdentifyAnimal(a.id); // a kill teaches you what it was — before the name is said
     try {
       this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
@@ -2495,6 +2496,8 @@
         var wdef = this.equippedWeapon().def;
         charsMeat = !!(wdef && wdef.weapon && wdef.weapon.charsMeat);
       } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): a kill is a hunt deed — field, like a villager's.
+      try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); }
       if (charsMeat) {
         var charredKcal = Math.round(kcal * 0.1);
         try { s.inventory.push(this.foodCarcass(animal, charredKcal, s.day, 'charred')); } catch (e) {}
