@@ -16583,13 +16583,13 @@
               }
               // THE TABLE SEAT (Steve 2026-10-14): an option at Haven once the
               // table is set — never a morning prompt. Priced live until you sit.
+              // Nonexistent before day 90: tablePreview() is null (no spoilers).
               try {
                 const tp = Game.tablePreview ? Game.tablePreview() : null;
                 if (tp) {
                   const doors = tp.doors.length ? tp.doors.map(esc).join(', ') : 'none yet';
                   html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.<br>` +
-                    (tp.ready ? `<button class="btn sm" data-table-seat>◈ Take your seat</button>`
-                              : `<button class="btn sm ghost" disabled title="The table will not sit before day 90">◈ Take your seat (opens day 90 · today: day ${tp.day})</button>`) +
+                    `<button class="btn sm" data-table-seat>◈ Take your seat</button>` +
                     `</p></div>`;
                 }
               } catch (e) { console.warn('table seat html', e); }

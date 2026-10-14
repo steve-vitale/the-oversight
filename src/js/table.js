@@ -428,6 +428,10 @@
         // announcement if the run qualifies again later
         if (seat.seat === 'none') { pg.tableAnnounced = false; this.tableScene(); return; }
         if (pg.tableAnnounced) return;
+        // NO SPOILERS (Steve 2026-10-14: "Not just greyed out before 90,
+        // nonexistent. Don't spoil the game for them."): before the seat can
+        // be taken, the table does not exist for the player.
+        if (!this.winDayFloorOk()) return;
         pg.tableAnnounced = true;
         this.say('◈ THE TABLE IS SET. A ring of pale light waits — take your seat from Haven when you are ready. Nothing is final until you sit.');
         try { this.save(); } catch (e) {}
@@ -443,15 +447,16 @@
         if (seat.seat === 'none') return null;
         const doors = this.tableEarnedPaths().filter(p => p.earned).map(p => p.name);
         const day = ((this.state || {}).scholar || {}).day || 0;
-        return { seat: seat.seat, doors, day, ready: this.winDayFloorOk() };
+        // nonexistent before day 90 — no preview, no button (no spoilers)
+        if (!this.winDayFloorOk()) return null;
+        return { seat: seat.seat, doors, day, ready: true };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // tableTakeSeat(): the player sits — this locks the seat (tableScene);
     // tableStartPath locks the branch.
     tableTakeSeat() {
       const pv = this.tablePreview();
-      if (!pv) return { ok: false, msg: 'The table is not set.' };
-      if (!pv.ready) return { ok: false, msg: `"Ninety dawns. We do not price a life half-lived." (day ${pv.day})` };
+      if (!pv) return { ok: false, msg: '' };
       this.tableScene();
       return { ok: true };
     },

@@ -647,9 +647,14 @@
       // aloud, never silently.
       if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && (seatNow === 'full' || seatNow === 'lesser')) {
         pg.tableWaiting = true;
-        // Same seat-honest text as arcBeat(4): a lesser seat is named as one.
-        if (seatNow === 'full') this.say('The table is being set. They are watching to see who comes to it.');
-        else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+        // NO SPOILERS (Steve 2026-10-14): the table is never named before the
+        // seat can be taken (day 90). From then, the same seat-honest text as
+        // arcBeat(4); tableAnnounce won't repeat it.
+        if (this.winDayFloorOk && this.winDayFloorOk()) {
+          pg.tableAnnounced = true;
+          if (seatNow === 'full') this.say('The table is being set. They are watching to see who comes to it.');
+          else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+        }
       }
       if (want > pg.arc) {
         pg.arc = want;
@@ -692,16 +697,21 @@
           // five waves; the lesser-seat text names only waves 1-3 (the ones
           // the run actually faced). Claiming the Mirror Draft and the
           // Producers on a lesser run would be a lie the audit would catch.
-          if (seat4 === 'full') {
-            this.say('The table is being set. They are watching to see who comes to it.');
-          } else {
-            this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+          // NO SPOILERS (Steve 2026-10-14): silent before day 90 — the
+          // table is announced by tableAnnounce once the seat can be taken.
+          if (this.winDayFloorOk && this.winDayFloorOk()) {
+            this.progState().tableAnnounced = true;
+            if (seat4 === 'full') {
+              this.say('The table is being set. They are watching to see who comes to it.');
+            } else {
+              this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+            }
           }
         } catch (e) {}
         if (seat4 === 'full') {
-          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
         } else {
-          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You stood up to the calibration fauna, the audience's notes, the Final Draft — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours, though unfinished, are undeniable. (Feasted buffs burn hotter from here.)`);
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You stood up to the calibration fauna, the audience's notes, the Final Draft — lived through their Show, weathered the worst together, and built something bigger than a village. One day humanity will need a case to make. The case is made of deeds, not words — and yours, though unfinished, are undeniable. (Feasted buffs burn hotter from here.)`);
         }
         try { this.state.scholar.arc4burn = 1.25; } catch (e) {}
       }
