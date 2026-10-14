@@ -18737,6 +18737,9 @@
   // combat, skip to day 7, grant abilities, teleport, heal. For testing
   // combat without wandering the woods hoping to get mauled.
   let DEBUG = /[?&]debug=1/.test(location.search);
+  // REGION OVERRIDE (docs/WORLD-REGIONS.md §11): ?region=<id> lands the next
+  // new game in that region (it must have landing variants). Testing only.
+  { const rm = location.search.match(/[?&]region=([a-z_]+)/); if (rm) Game.debugRegion = rm[1]; }
   function debugPanel() {
     let el = document.getElementById('debug-panel');
     if (el) { el.remove(); return; }

@@ -2115,7 +2115,7 @@
     // BEAR (Steve 2026-10-09): a missed strike doesn't rout a bear — it
     // answers. The fight continues on the bear's terms: mauling damage, and
     // it stays. This is the non-monster monster fight.
-    if (animal && animal.id === 'black_bear') {
+    if (animal && this.isRegionPredator(animal.id)) { // REGIONS: fauna.predators
       var bDmg = 6 + Math.floor(Math.random() * 8);
       try { s.health = Math.max(0, (s.health == null ? 100 : s.health) - bDmg); } catch (e) {}
       a.pstate = 'advancing'; a.aware = 1;
@@ -2405,7 +2405,7 @@
     // bite double-dipped: a dist-1 strike could bite (3-8, "Teeth in your
     // hand" — weak fiction for a bear) AND maul AND draw the roar-answer,
     // three damage events on one swing. The maul is the full answer.
-    if (dist <= 1 && a.id !== 'black_bear' && hBeh !== 'quilled' && hBeh !== 'bedding') {
+    if (dist <= 1 && !this.isRegionPredator(a.id) && hBeh !== 'quilled' && hBeh !== 'bedding') {
       var bBeh = animal.behavior || '';
       var biteP = bBeh === 'aggressive' ? 0.6 : bBeh === 'defensive' ? 0.6 : bBeh === 'constrictor' ? 0.5 : bBeh === 'plays_dead' ? 0.3 : 0.2;
       if (Math.random() < biteP) {
@@ -2454,7 +2454,7 @@
     // 8-17 maul per encounter, then free close-range knife strikes at FULL
     // kill chance (the x0.4 penalty lived inside the same one-shot block).
     // Canon (docs/BEAR.md) is present-tense: "at range <= 2 the bear mauls".
-    if (a.id === 'black_bear' && dist <= 2) {
+    if (this.isRegionPredator(a.id) && dist <= 2) { // REGIONS: the land's apex predator mauls
       var maulMethod = 'hands';
       try { maulMethod = this.encWeaponMethod(); } catch (e) {}
       var maulDmg = 8 + Math.floor(Math.random() * 10);

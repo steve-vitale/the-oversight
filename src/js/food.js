@@ -543,9 +543,9 @@
       // Only cooking through (foodState 'cooked') kills it — smoking won't.
       // `from` rides along so later transforms (pemmican) and the pack
       // marker can name the vector knowledge-gated (hunter break-it r3).
-      if (['black_bear', 'wild_boar', 'javelina'].includes(meatId)) {
-        it.parasiteRisk = { id: 'trichinosis', p: meatId === 'black_bear' ? 0.35 : 0.25, from: meatId };
-      }
+      // REGIONS: which meats carry it is the landing region's
+      // fauna.parasites (regions.json); eastern woodlands = bear/boar/javelina.
+      { const pr = this.regionParasiteRisk(meatId); if (pr) it.parasiteRisk = pr; }
       // TICKS (Steve 2026-10-09): deer carry them — but these are the tiny
       // ambient kind, not the alien monster. One may latch on (the attached-
       // tick system: narrated, removable, mild fever at worst). Lemons is
@@ -1140,9 +1140,7 @@
         // yields, no trichinosis). `meatId` (same value) is already in scope.
         // `from` rides along so later transforms (pemmican) and the pack
         // marker can name the vector knowledge-gated (hunter break-it r3).
-        if (['black_bear', 'wild_boar', 'javelina'].includes(meatId)) {
-          it.parasiteRisk = { id: 'trichinosis', p: meatId === 'black_bear' ? 0.35 : 0.25, from: meatId };
-        }
+        { const pr = this.regionParasiteRisk(meatId); if (pr) it.parasiteRisk = pr; } // REGIONS: fauna.parasites
         it.spoilDay = day + 2;
         it.name = it.name.replace(' (carcass)', '').replace(' (trapped)', '').replace(' (charred remains)', '') + ' (cleaned)';
         if (foodSafe) it.prep = '\u26A0\uFE0F Risky: raw meat. Cook it, or preserve it.';

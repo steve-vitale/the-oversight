@@ -164,7 +164,14 @@
     forest_floor: 'forest floor', grove: 'grove', meadow: 'meadow', thicket: 'thicket',
     wetland: 'wetland', creek: 'creek', trail_edge: 'trail edge', ruin: 'ruin', haven: 'Haven',
   };
+  // REGIONS (docs/WORLD-REGIONS.md): the region every old save and every
+  // region-less harness belongs to. Today's whole environment lives in
+  // src/data/regions.json under this id.
+  const DEFAULT_REGION_ID = 'na_eastern_woodlands';
   // scavenged goods (ruins) — finite. the houses feed you until they don't.
+  // REGIONS: the live pool is regions.json people.scavenge (regionScavenge);
+  // this copy is the fallback for harnesses that load no regions.json and
+  // for loot ids in old saves (scavengeItem).
   const SCAVENGED = [
     { id: 'can_beans', name: 'Canned beans', kcal: 650, kg: 0.4, text: 'Dusty can, intact seal. Someone\'s pantry, a lifetime ago.' },
     { id: 'can_corn', name: 'Canned corn', kcal: 550, kg: 0.4, text: 'The label is gone. The corn doesn\'t care.' },
@@ -270,7 +277,178 @@
       return this.data;
     },
 
-    biome() { return this.data.biomes.find(b => b.id === 'se_woodlands'); },
+    // ============ REGIONS (docs/WORLD-REGIONS.md §6-7) ============
+    // src/data/regions.json is the world list: 20 regions, each a biome
+    // profile + a people layer. state.region is the LANDING region (where the
+    // System dropped you); origin regions come from parseOrigin. Every
+    // environment read below goes through activeRegion(), so a new region is
+    // data, not code. Fallbacks only cover harnesses that load no regions.json.
+    regionDef(id) {
+      const rs = this.data && this.data.regions;
+      if (!Array.isArray(rs) || !id) return null;
+      return rs.find(r => r && r.id === id) || null;
+    },
+    activeRegion() {
+      const id = (this.state && this.state.region) || DEFAULT_REGION_ID;
+      return this.regionDef(id) || this.regionDef(DEFAULT_REGION_ID);
+    },
+    // playable = can be a random landing (status playable or rich).
+    playableRegions() {
+      const rs = (this.data && Array.isArray(this.data.regions)) ? this.data.regions : [];
+      return rs.filter(r => r && (r.status === 'playable' || r.status === 'rich'));
+    },
+    // pickLandingRegion: debug override first (Game.debugRegion, set by the
+    // ?region= URL hook or a test), else a random PLAYABLE region. With one
+    // playable region no RNG is drawn, so today's runs are unchanged.
+    pickLandingRegion() {
+      const dbg = this.debugRegion && this.regionDef(this.debugRegion);
+      if (dbg) {
+        if ((dbg.landingVariants || []).length) return dbg;
+        console.warn('[regions] debugRegion ' + this.debugRegion + ' has no landing variants (status ' + dbg.status + '); ignored');
+      }
+      const pool = this.playableRegions();
+      if (!pool.length) return this.regionDef(DEFAULT_REGION_ID);
+      if (pool.length === 1) return pool[0];
+      return pool[Math.floor(Math.random() * pool.length)];
+    },
+    // landingPool(region): the region's landing variants as locations.json
+    // entries (in the region's listed order). No region data -> every location.
+    landingPool(region) {
+      const all = this.data.locations || [];
+      const ids = region && region.landingVariants;
+      if (!ids || !ids.length) return all;
+      const out = ids.map(id => all.find(l => l.id === id)).filter(Boolean);
+      return out.length ? out : all;
+    },
+    regionFauna() { return (this.activeRegion() || {}).fauna || {}; },
+    regionFlora() { return (this.activeRegion() || {}).flora || {}; },
+    regionPeople() { return (this.activeRegion() || {}).people || {}; },
+    // regionFish: the fish species this water holds (nets, rods, fish duty).
+    regionFish() {
+      const f = this.regionFauna().fish;
+      return (f && f.length) ? f.slice() : ['creek_chub', 'bluegill'];
+    },
+    // regionAnimalPool: ids that can live here (fauna.animals + add - remove).
+    // null = no region list -> every animal (pre-region behaviour).
+    regionAnimalPool() {
+      const fa = this.regionFauna();
+      if (!fa.animals) return null;
+      const set = new Set(fa.animals);
+      for (const id of (fa.add || [])) set.add(id);
+      for (const id of (fa.remove || [])) set.delete(id);
+      return set;
+    },
+    // isRegionPredator: the land's apex predator — answers a missed strike
+    // and mauls at close range (encounters.js). Today: the black bear.
+    isRegionPredator(animalId) {
+      const p = this.regionFauna().predators;
+      return (p ? p : ['black_bear']).includes(animalId);
+    },
+    // regionParasiteRisk(meatId): {id, p, from} when this meat carries a
+    // parasite here (food.js trichinosis), else null.
+    regionParasiteRisk(meatId) {
+      const ps = this.regionFauna().parasites || { trichinosis: { black_bear: 0.35, wild_boar: 0.25, javelina: 0.25 } };
+      for (const pid of Object.keys(ps)) {
+        const p = ps[pid] && ps[pid][meatId];
+        if (p != null) return { id: pid, p, from: meatId };
+      }
+      return null;
+    },
+    // regionTreeRoll(rnd): one tree species. Each listed tree but the last
+    // takes its `roll` chance in order (one draw each); the last is the rest.
+    regionTreeRoll(rnd) {
+      const trees = this.regionFlora().trees;
+      if (!trees || !trees.length) return rnd() < 0.4 ? 'oak' : rnd() < 0.7 ? 'hickory' : 'pine';
+      for (let i = 0; i < trees.length - 1; i++) {
+        if (rnd() < (trees[i].roll ?? 0.5)) return trees[i].id;
+      }
+      return trees[trees.length - 1].id;
+    },
+    // regionTreeNut(species): the forageable nut a tree species drops, if any.
+    regionTreeNut(species) {
+      const trees = this.regionFlora().trees;
+      if (!trees) return species === 'oak' ? 'acorn_white_oak' : species === 'hickory' ? 'hickory_nut' : null;
+      const tr = trees.find(t => t.id === species);
+      if (tr) return tr.nut || null;
+      // a tree from another region's table (old save, debug): look it up anywhere
+      for (const r of (this.data.regions || [])) {
+        const t2 = ((r.flora || {}).trees || []).find(t => t.id === species);
+        if (t2) return t2.nut || null;
+      }
+      return null;
+    },
+    regionBushes() {
+      const b = this.regionFlora().bushes;
+      return (b && b.length) ? b : ['blackberry', 'muscadine'];
+    },
+    regionCommonTrees() {
+      const c = this.regionFlora().commonTrees;
+      return c ? c : ['oak', 'hickory'];
+    },
+    regionVillageNames() {
+      const n = this.regionPeople().villageNames;
+      return (n && n.length) ? n : ['Emberhold', 'Stonebridge', 'Thornfield', 'Ashford'];
+    },
+    regionRuinStories() {
+      const r = this.regionPeople().ruins;
+      return (r && r.length) ? r : ['A ruin. Pre-Burn. The walls kept standing out of spite.'];
+    },
+    // regionScavenge: the ruins' finite loot pool (common + rare medicine).
+    regionScavenge() {
+      const s = this.regionPeople().scavenge;
+      return (s && s.length) ? s : SCAVENGED;
+    },
+    // scavengeItem(id): any scavenge definition — this region first, then
+    // every region (old saves, a region change), then the legacy pool.
+    scavengeItem(id) {
+      const here = this.regionScavenge().find(s => s.id === id);
+      if (here) return here;
+      for (const r of (this.data.regions || [])) {
+        const it = (((r || {}).people || {}).scavenge || []).find(s => s.id === id);
+        if (it) return it;
+      }
+      return SCAVENGED.find(s => s.id === id) || null;
+    },
+    // season(day): the landing region's season on that day (default today).
+    // One world calendar: day 1 is world day-of-year climate.startDayOfYear
+    // (default 0 = the first listed season's first day); the southern
+    // hemisphere runs half a year offset. -> {id, temp, weather, dayOfSeason,
+    // seasonDays, dayOfYear, yearDays, hemisphere, region}
+    season(day) {
+      const r = this.activeRegion() || {};
+      const seasons = ((r.climate || {}).seasons) || [];
+      const d = day != null ? day : ((this.state && this.state.scholar && this.state.scholar.day) || 1);
+      if (!seasons.length) return { id: 'none', temp: null, weather: null, dayOfSeason: 0, seasonDays: 0, dayOfYear: 0, yearDays: 0, hemisphere: r.hemisphere || 'north', region: r.id || null };
+      const yearDays = seasons.reduce((t, s) => t + (s.days || 0), 0) || 1;
+      const offset = r.hemisphere === 'south' ? Math.floor(yearDays / 2) : 0;
+      const start = ((r.climate || {}).startDayOfYear) || 0;
+      let doy = (((start + d - 1 + offset) % yearDays) + yearDays) % yearDays;
+      let acc = 0;
+      for (const s of seasons) {
+        if (doy < acc + (s.days || 0)) {
+          return { id: s.id, temp: s.temp || null, weather: s.weather || null, dayOfSeason: doy - acc + 1, seasonDays: s.days, dayOfYear: doy, yearDays, hemisphere: r.hemisphere || 'north', region: r.id || null };
+        }
+        acc += s.days || 0;
+      }
+      const last = seasons[seasons.length - 1];
+      return { id: last.id, temp: last.temp || null, weather: last.weather || null, dayOfSeason: last.days, seasonDays: last.days, dayOfYear: doy, yearDays, hemisphere: r.hemisphere || 'north', region: r.id || null };
+    },
+    // rollWeather(wr): weather for a [0,1) draw from this season's table
+    // (cumulative, in listed order). No table -> today's clear/rain/cold.
+    rollWeather(wr, day) {
+      const tbl = this.season(day).weather;
+      const keys = tbl ? Object.keys(tbl) : [];
+      if (!keys.length) return wr < 0.7 ? 'clear' : wr < 0.9 ? 'rain' : 'cold';
+      let acc = 0;
+      for (const k of keys) { acc += tbl[k] || 0; if (wr < acc) return k; }
+      return keys[keys.length - 1];
+    },
+
+    biome() {
+      const r = this.activeRegion();
+      const id = (r && r.biome) || 'se_woodlands';
+      return this.data.biomes.find(b => b.id === id) || this.data.biomes.find(b => b.id === 'se_woodlands');
+    },
 
     // ============ EXPEDITION SETUP ============
     // Your origin is yours — you type it. The scattering is random.
@@ -341,7 +519,8 @@
     // locParams: genMap tuning for the chosen landing zone (with safe defaults).
     locParams() {
       const loc = (this.data.locations || []).find(l => l.id === (this.state && this.state.startLocation));
-      const g = (loc && loc.gen) || {};
+      // REGIONS: the region's gen numbers are the base; the landing variant's own gen wins.
+      const g = Object.assign({}, ((this.activeRegion && this.activeRegion()) || {}).gen || {}, (loc && loc.gen) || {});
       return {
         creeks: g.creeks ?? 1, wetlands: g.wetlands ?? 3,
         groveBlobs: g.groveBlobs ?? 2, groveSize: g.groveSize ?? 4,
@@ -1821,11 +2000,16 @@
       this.homeRegion = parsed.raw; this.villagerId = villagerId;
       // landing zone: the scattering is random. Your origin doesn't choose where you wake up.
       // locationId is only honored for legacy/test callers — live play always randomizes.
-      const locPool = (this.data.locations || []);
-      const loc = (locationId && locPool.find(l => l.id === locationId))
+      // REGIONS (docs/WORLD-REGIONS.md): region first (a random PLAYABLE
+      // region, or the Game.debugRegion override), then a landing variant
+      // from that region. One playable region draws no RNG.
+      const landRegion = this.pickLandingRegion();
+      const locPool = this.landingPool(landRegion);
+      const loc = (locationId && (this.data.locations || []).find(l => l.id === locationId))
         || locPool[Math.floor(Math.random() * locPool.length)]
         || {};
       this.state = S.state.newState();
+      this.state.region = (landRegion && landRegion.id) || DEFAULT_REGION_ID;
       // SYSTEM VOICE (Steve 2026-10-12): warm the ElevenLabs manifest early
       // so the text->id index is ready before the System's first line.
       try { if (typeof this.preloadSystemVoice === 'function') this.preloadSystemVoice(); } catch (e) {}
@@ -1874,13 +2058,16 @@
       // staples/cans keep ~a year, dried meat ~a month (PRESERVATION.md), the
       // quick snacks ~two months. The two-week design window is untouched.
       const d0 = (this.state.scholar && this.state.scholar.day) || 1;
-      const staples = [
-        { name: 'Dried beans', rawKcal: 150, cookedKcal: 300, kcalEach: 150, units: 80, spoilDay: d0 + 365, safe: false, kg: 0.5, needsCooking: true, unit: 'scoop' },
-        { name: 'Rice', rawKcal: 200, cookedKcal: 350, kcalEach: 200, units: 65, spoilDay: d0 + 365, safe: false, kg: 0.5, needsCooking: true, unit: 'scoop' },
-        { name: 'Canned soup', kcalEach: 250, units: 30, spoilDay: d0 + 365, safe: true, kg: 0.4, unit: 'can' },
-        { name: 'Dried meat', kcalEach: 400, units: 22, spoilDay: d0 + 30, safe: true, kg: 0.3, unit: 'strip' },
-        { name: 'Peanuts', kcalEach: 170, units: 35, spoilDay: d0 + 60, safe: true, kg: 0.1, unit: 'handful' },
-      ];
+      // REGIONS: what was in the bags is the landing region's people.pantry
+      // (spoilDays -> an absolute spoilDay, same key position).
+      const pantryDefs = this.regionPeople().pantry || [];
+      const staples = pantryDefs.map(def => {
+        const it = {};
+        for (const [k, v] of Object.entries(def)) {
+          if (k === 'spoilDays') it.spoilDay = d0 + v; else it[k] = v;
+        }
+        return it;
+      });
       let kcal = 0;
       for (const s of staples) {
         const item = { ...s };
@@ -2280,7 +2467,7 @@
       // TREE SPECIES: common trees start known at weak level (L1) — it's common
       // knowledge. Rare trees start unknown. (Steve 2026-10-05)
       this.state.codex.trees = this.state.codex.trees || {};
-      for (const sp of ['oak', 'hickory']) {
+      for (const sp of this.regionCommonTrees()) {
         this.state.codex.trees[sp] = { level: 1, learnedDay: 0, via: 'common knowledge' };
       }
       // KNOWLEDGE TAXONOMY: your occupation IS knowledge. Not flavor — mechanical.
@@ -3357,8 +3544,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return this.tickAction(16) || this.status();
     },
     checkNets() {
-      // the net fishes real fish: creek chub and bluegill, the tile's own stock.
-      const FISH_IDS = ['creek_chub', 'bluegill'];
+      // the net fishes real fish: the region's fish (creek chub and bluegill
+      // in the eastern woodlands), the tile's own stock.
+      const FISH_IDS = this.regionFish();
       for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
         const t = this.tileAt(x, y);
         if (!t.nets || !t.nets.length) continue;
@@ -6043,7 +6231,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // (creek_chub 200, bluegill 150), the ecology pays per fish (wildlife
         // decrement, like the player's line and the gill nets). A fished-out
         // creek says so honestly; the stock regrows at the ecology's pace.
-        const FISH_IDS = ['creek_chub', 'bluegill'];
+        const FISH_IDS = this.regionFish();
         let best = null;
         for (let fy = 0; fy < 9; fy++) for (let fx = 0; fx < 9; fx++) {
           const ft = this.tileAt(fx, fy);
@@ -7741,6 +7929,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // REGION MIGRATION (docs/WORLD-REGIONS.md): saves from before regions
+      // existed all landed in today's environment, the eastern woodlands.
+      if (!this.state.region) this.state.region = DEFAULT_REGION_ID;
+      try { if (this.migrateWorld) this.migrateWorld(); } catch (e) { console.warn('[regions] migrateWorld: ' + (e && e.message)); }
       // RECIPE KNOWLEDGE MIGRATION (2026-10-09): codex.recipes was briefly an
       // array — named props don't survive JSON.stringify, so old saves load
       // with recipe knowledge silently wiped. Copy any named props over and
@@ -8148,7 +8340,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!pick) pick = pool[Math.floor(Math.random() * pool.length)];
         const village = {
           id: `village_${i}`,
-          name: ['Emberhold', 'Stonebridge', 'Thornfield', 'Ashford'][i] || `Village ${i}`,
+          name: this.regionVillageNames()[i] || `Village ${i}`, // REGIONS: people.villageNames
           x: pick.x, y: pick.y,
           day: 0, // how many days they've been simulated
           population: 8 + Math.floor(Math.random() * 5), // 8-12
@@ -8845,7 +9037,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // build needs a real population to work.
     initTileWildlife(biomeType, rnd) {
       const wildlife = {};
-      const animals = (this.data.animals || []).filter(a => (a.biomes || []).includes(biomeType));
+      // REGIONS: only animals the landing region holds (fauna.animals +
+      // add - remove), in animals.json order; density scales the counts.
+      const pool = this.regionAnimalPool ? this.regionAnimalPool() : null;
+      const animals = (this.data.animals || []).filter(a => (a.biomes || []).includes(biomeType) && (!pool || pool.has(a.id)));
+      const density = (this.regionFauna ? this.regionFauna().density : 1) ?? 1;
       // 1-3 species per tile, 1-4 individuals each
       const nSpecies = 1 + Math.floor((rnd || Math.random)() * 3);
       for (let i = 0; i < nSpecies && i < animals.length; i++) {
@@ -8855,13 +9051,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           wildlife[a.id] = watery
             ? 4 + Math.floor((rnd || Math.random)() * 7)   // 4-10: a creek holds fish
             : 1 + Math.floor((rnd || Math.random)() * 4);  // 1-4: land game
+          if (density !== 1) wildlife[a.id] = Math.max(1, Math.round(wildlife[a.id] * density));
         }
       }
       // DEPLETION 2026-10-10: water holds fish, guaranteed. A creek that
       // rolls only mink is a dry hole with wet rocks — a fishing BUILD
       // can't depend on a coin flip per tile. One fish species always.
       if (['creek', 'wetland', 'pond'].includes(biomeType)) {
-        const FISH = ['creek_chub', 'bluegill'];
+        const FISH = this.regionFish ? this.regionFish() : ['creek_chub', 'bluegill'];
         if (!FISH.some(id => wildlife[id])) {
           const fid = FISH[Math.floor((rnd || Math.random)() * FISH.length)];
           const adef = (this.data.animals || []).find(a => a.id === fid);
@@ -9049,17 +9246,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       {
         const [rx3, ry3] = ruinXY;
         set(rx3, ry3, 'ruin');
-        tiles[ry3][rx3].ruinStory = ['A collapsed barn. Pre-Burn. The wiring is gone — everything is gone — but the stones remember the shape of work.',
-          'A farmhouse foundation. Someone\'s kitchen. The Burn took the wires from the walls; the walls kept standing out of spite.',
-          'A gas station. The pumps are sculptures now. Nothing combustible within miles — the Burn was thorough.'][Math.floor(R() * 3)];
+        // REGIONS: ruin stories and loot are the landing region's people layer.
+        const ruinStories = this.regionRuinStories();
+        tiles[ry3][rx3].ruinStory = ruinStories[Math.floor(R() * ruinStories.length)];
         // finite pantry: 3-5 cans, scaled by landing zone. the houses feed you until they don't.
         const nLoot = Math.max(1, Math.round((3 + Math.floor(R() * 3)) * P.lootMult));
         tiles[ry3][rx3].loot = [];
         // MEDICINE (disease rework 2026-10-09): rare, specific — never in the
         // common pool. 8% of ruins hide a medicine cabinet.
-        const commonLoot = SCAVENGED.filter(x => !x.rare);
+        const scav = this.regionScavenge();
+        const commonLoot = scav.filter(x => !x.rare);
+        const rareLoot = scav.filter(x => x.rare);
         for (let i = 0; i < nLoot; i++) tiles[ry3][rx3].loot.push(commonLoot[Math.floor(R() * commonLoot.length)].id);
-        if (R() < 0.08) tiles[ry3][rx3].loot.push(R() < 0.5 ? 'med_antibiotics' : 'med_antiparasitic');
+        if (R() < 0.08 && rareLoot.length) tiles[ry3][rx3].loot.push(rareLoot[Math.floor(R() * rareLoot.length)].id);
       }
       // stock: rich ground gives more pulls. number of times depends on the biome and landing zone.
       // (computed inline — this.map doesn't exist yet during gen)
@@ -9168,7 +9367,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const c = cells[cy] && cells[cy][cx];
         if (c === 'plant' && !t.plantSpecies[key]) t.plantSpecies[key] = pick();
         else if (c === 'bush' && !t.bushSpecies[key]) {
-          t.bushSpecies[key] = srnd() < 0.5 ? 'blackberry' : 'muscadine';
+          const bushes = this.regionBushes();
+          t.bushSpecies[key] = bushes[Math.floor(srnd() * bushes.length)];
         }
       }
     },
@@ -9178,7 +9378,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const key = cx + ',' + cy;
       if (cell === 'bush') {
         t.bushSpecies = t.bushSpecies || {};
-        if (!t.bushSpecies[key]) t.bushSpecies[key] = Math.random() < 0.5 ? 'blackberry' : 'muscadine';
+        if (!t.bushSpecies[key]) { const bushes = this.regionBushes(); t.bushSpecies[key] = bushes[Math.floor(Math.random() * bushes.length)]; }
         return t.bushSpecies[key];
       }
       if (cell === 'plant') {
@@ -9188,9 +9388,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (cell === 'tree' || cell === 'bigtree') {
         const mod = t.modifiers && t.modifiers[key];
-        if (mod && mod.species === 'oak') return 'acorn_white_oak';
-        if (mod && mod.species === 'hickory') return 'hickory_nut';
-        return null;
+        // REGIONS: the tree's nut comes from flora.trees[].nut.
+        return (mod && mod.species) ? this.regionTreeNut(mod.species) : null;
       }
       return null;
     },
@@ -9545,7 +9744,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const c = cells[cy][cx];
         if (t.modifiers[key]) continue;
         if (c === 'tree' || c === 'bigtree') {
-          const species = rnd2() < 0.4 ? 'oak' : rnd2() < 0.7 ? 'hickory' : 'pine';
+          const species = this.regionTreeRoll(rnd2); // REGIONS: flora.trees
           const health = rnd2() < 0.75 ? 'healthy' : 'diseased';
           const ivy = rnd2() < 0.3;
           t.modifiers[key] = { species, health, ivy, known: false };
@@ -13428,7 +13627,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return null;
       }
       const t = this.playerTile();
-      const FISH_IDS = ['creek_chub', 'bluegill']; // same stock the gill net fishes
+      const FISH_IDS = this.regionFish(); // same stock the gill net fishes
       const still = !(t.type === 'creek' || t.type === 'wetland');
       if (still) {
         // ponds and puddles hold small fish too — the tile check is for rivers.
@@ -18980,7 +19179,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const key = `${cx},${cy}`;
       if (t.bushSpecies[key]) return t.bushSpecies[key];
       // assign a species (berry bushes in this biome)
-      const species = ['blackberry', 'muscadine'][Math.floor(Math.random() * 2)];
+      const bushes = this.regionBushes();
+      const species = bushes[Math.floor(Math.random() * bushes.length)];
       t.bushSpecies[key] = species;
       // CHAIN: nearby bushes (within 2) of the same "type" also reveal.
       // You see one blackberry, you recognize the patch.
@@ -20628,23 +20828,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.tileAt(x, y).type === 'haven') return null;
       const t = this.tileAt(x, y);
       const epithet = this.nodeEpithet(x, y);
-      const FAVORED = {
-        'creekside grove': ['cattail', 'Riparian ground. Water means life, and lunch.'],
-        'drowned grove': ['cattail', 'Wet feet, full pantry.'],
-        'deep grove': ['hickory_nut', 'Mast country. The old trees feed everything.'],
-        'orchard ruin': ['persimmon', 'Someone planted food here once. The trees remember.'],
-        'old pasture': ['dandelion', 'Disturbed ground grows good weeds.'],
-        'creek meadow': ['wild_onion', 'Open ground by water — the onion beds.'],
-        'open meadow': ['wild_onion', null],
-        'creek bend': ['cattail', 'Slow water. The cattails stand thick.'],
-        'the shallows': ['cattail', null],
-        'creekmouth marsh': ['cattail', 'Where the creek spreads out, the starch grows.'],
-        'still marsh': ['cattail', null],
-        'edge thicket': ['blackberry', 'Edge habitat. Berries grow where the light gets in.'],
-        'heart thicket': ['muscadine', null],
-        'the old trail': ['chickweed', 'Trampled ground. The humble weeds win.'],
-        'forest floor': ['wood_sorrel', 'Deep shade. The floor keeps its secrets.'],
-      };
+      // REGIONS: the epithet -> favored plant table is the landing region's
+      // flora.bounty ({epithet: [plantId, why]}).
+      const FAVORED = this.regionFlora().bounty || {};
       const base = { grove: 1.5, wetland: 1.4, creek: 1.3, meadow: 1.3, thicket: 1.2, trail_edge: 1.0, forest_floor: 0.8 }[t.type] || 1.0;
       // water bonus: neighbors with creek/wetland
       let bonus = 0;
@@ -23595,7 +23781,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // SYNERGY passive: grave_robber works the same ruins.
           this.noteAbilityUse('grave_robber');
           this.noteToolUse(); // RELIC BOND: prying, cutting, carrying.
-          const item = SCAVENGED.find(s => s.id === lootId);
+          const item = this.scavengeItem(lootId);
           if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.say('Too heavy — your pack can\'t take it. Eat something or leave it.'); return null; }
           // MEDICINE (disease rework 2026-10-09): bottled, dosed, specific.
           const medPush = { plantId: lootId, units: 1, kcalEach: item.kcal, spoilDay: 9999, name: item.name, unit: item.medType ? 'bottle' : 'can', prep: item.medType ? 'Use from your pack when sick. Specific — read the label.' : 'No prep. The miracle of the can.', kg: item.kg };
@@ -23604,7 +23790,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // scrounger: the System's gift. You see what others miss — +1 item per visit.
           if (this.hasAbility('scrounger') && t.loot.length) {
             const lootId2 = t.loot.shift();
-            const item2 = SCAVENGED.find(s => s.id === lootId2);
+            const item2 = this.scavengeItem(lootId2);
             if (item2 && this.canCarry(item2.kg)) {
               scholar.inventory.push({ plantId: lootId2, units: 1, kcalEach: item2.kcal, spoilDay: 9999, name: item2.name, unit: 'can', prep: 'No prep. The miracle of the can.', kg: item2.kg });
               this.say(`Scrounger: you spot another — ${item2.name}.`);
@@ -23616,7 +23802,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const findMult = this.modTarget('ruin.find_mult', 1);
           if (findMult > 1 && t.loot.length && Math.random() < 0.3 * findMult) {
             const bonusId = t.loot.shift();
-            const bonus = SCAVENGED.find(x => x.id === bonusId);
+            const bonus = this.scavengeItem(bonusId);
             if (bonus && this.canCarry(bonus.kg)) {
               scholar.inventory.push({ plantId: bonusId, units: 1, kcalEach: bonus.kcal, spoilDay: 9999, name: bonus.name, unit: 'can', prep: 'No prep.', kg: bonus.kg });
               this.say(`Taste vision: behind the loose panel — ${bonus.name}. The walls were right.`);
@@ -28141,7 +28327,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // cold_blooded: on cold days your body budgets — 20% less food needed.
       const wr = Math.random();
       const prevWeather = this.state.weather;
-      this.state.weather = wr < 0.7 ? 'clear' : wr < 0.9 ? 'rain' : 'cold';
+      // REGIONS: the landing region's season table (Game.season()).
+      this.state.weather = this.rollWeather(wr);
       // DRAMA (Steve 2026-10-07): dramatic weather change — screen-wide effect
       try {
         if (this.state.weather !== prevWeather && (this.state.weather === 'rain' || this.state.weather === 'cold')) {
