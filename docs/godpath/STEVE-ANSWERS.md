@@ -9,6 +9,10 @@ verbatim.
 
 ## 2026-10-14 (latest)
 
+**On villager builds:** "Villagers can't just take the next ability, they
+need to seek knowledge about the abilities and go for a build that suits
+their technology."
+
 Answering the tracks/keepsake/roster round: "Good calls! Continue all."
 (The 10-path roster with 2 subclasses each is approved to build.)
 
