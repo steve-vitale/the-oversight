@@ -23,7 +23,7 @@
 //   - foodShared vs foodHoarded resolve to a felt stance; stance transitions are narrated with social consequences (code: foodStance, _checkFoodStance)
 //   - viewership is deed-reactive, never pantry-reactive (code: havenViewership): inits from arc*5 + showmanship + codex breadth capped at 15, floored at 12 (the drift's resting state); a fat pantry is prosperity, not fame; ledger showmanship feeds live via _viewShoMark; spikes (recordMoment/arena/stunts) and spends (OBJECT/declines) ride the sticky pool, nothing refills it
 //   - the player's own epithet is never shown until hearsAboutSelf() (code: ledgerBeat)
-//   - table_deed_recheck: true (code: ledger.js — tableScene re-verifies deedGateReady() at dawn; a stale tableWaiting is withdrawn aloud, never fired silently)
+//   - table_deed_recheck: true (code: ledger.js endDay wrap calls tableScene at dawn; table.js tableScene re-verifies tableSeat() — full via deedGateReady(), or lesser — and a seat of 'none' withdraws a stale tableWaiting aloud, never fired silently)
 // consumes:
 //   - state.leadership
 // ============ THE LEADERSHIP VECTOR ============
@@ -538,7 +538,7 @@
     // ---------- THE TABLE (2026-10-11: the scene moved to table.js) ----------
     // The old single-choice stub lived here; the integrated endgame (7 paths
     // × light/dark, pricing, deed-gate re-check at dawn) is now tableScene()
-    // in src/js/table.js, which this file's checkArc re-fire calls (line ~1236).
+    // in src/js/table.js, which this file's endDay wrap calls at dawn.
     // The deed-gate re-check (stale tableWaiting withdrawn aloud) lives there.
 
 

@@ -1,6 +1,6 @@
 // @ontology
 // system: waves
-// description: The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
+// description: The Wave Ledger — waves 2-3 unlock on KILLS ONLY (waves 4-5 add village Standing on top, standing.js). Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
 // provides:
 //   - waveLedgerCfg()
 //   - ledgerState()
@@ -14,7 +14,7 @@
 //   - ledger_per_type_cap: 2 (code: waveLedger.js — perTypeCap; breadth over farming)
 //   - ledger_announce_idempotent: true (code: waveLedger.js — 50%/full beats fire once per wave via state._ledgerAnn50/_ledgerAnnFull)
 //   - ledger_survives_scholar: true (code: waveLedger.js — ledgerState lives on this.state, not this.state.scholar)
-//   - ledger_reverses_8730921c: true (code: game.js — unlockedWave is ledger-only; engagement lanes removed 2026-10-10, Steve's call; the endgame deed gate is untouched)
+//   - ledger_reverses_8730921c: true (code: game.js — unlockedWave's wave 2-3 rungs are ledger-only; engagement lanes removed 2026-10-10, Steve's call; waves 4-5 add Standing (2026-10-13), not scale rank; the endgame deed gate is untouched)
 // NOTE: self-attaching module (Object.assign(Game, methods)). Load AFTER
 // game.js (recordWaveKill calls scoreLedgerKill) and progression.js (the deed
 // feed it is deliberately separate from). Index order: after progression.js.
@@ -166,11 +166,13 @@
           st._ledgerAnn50[wave] = true;
           const d2 = cfg.wave2DayFloor != null ? cfg.wave2DayFloor : 8;
           const dN = cfg.dayFloor != null ? cfg.dayFloor : 25;
-          // SCALE-AWARE GATES (beats 4+5, SCALE-DISCOVERY.md 2026-10-12): when
-          // the scale floor is the binding constraint, the forward pointer
-          // (checkScalePointers, producer voice) carries the message — the
-          // ledger just reports the bar, no mechanics-voice gate sentence.
-          // When the floor is already met, say what's actually next.
+          // WAVES 4-5 (2026-10-14): they unlock on village Standing
+          // (standing.js) on top of the wave-3 rung — NOT on scale rank, and
+          // not on the wave-3/4 ledger bars. The old regional/national checks
+          // here claimed a release that hadn't happened. Now the release line
+          // only plays once unlockedWave() actually shows the next wave; the
+          // forward pointers (checkScalePointers, producer voice) carry the
+          // "what's next" message otherwise.
           // DAY-AWARE GATES (beats 1+2, longsim wave lever r6 2026-10-12):
           // the day floors are usually ALREADY past when the bar fills
           // (measured: w1-bar median fill day ~20 vs floor 8; w2-bar ~49
@@ -179,13 +181,13 @@
           // in the same breath as the release is a contradiction. Name the
           // day gate only when it's still in the future.
           const day = ((this.state && this.state.scholar) || {}).day || 1;
-          const rankNow = (typeof this.scaleRank === 'function' ? this.scaleRank() : 'regional');
-          const atLeast = (need) => { try { return this.scaleAtLeast(rankNow, need); } catch (e) { return false; } };
+          let uwNow = 1;
+          try { uwNow = (typeof this.unlockedWave === 'function') ? (this.unlockedWave() | 0) : 1; } catch (e) { uwNow = 1; }
           const gate =
             wave === 1 ? (day >= d2 ? null : `Wave 2 opens once day ${d2} passes.`) :
             wave === 2 ? (day >= dN ? null : `Wave 3 opens once day ${dN} passes.`) :
-            wave === 3 ? (atLeast('regional') ? `Wave 4's talent is cleared for release — watch the treeline.` : null) :
-            wave === 4 ? (atLeast('national') ? `The Producers are cleared for release — watch the sky.` : null) :
+            wave === 3 ? (uwNow >= 4 ? `Wave 4's talent is cleared for release — watch the treeline.` : null) :
+            wave === 4 ? (uwNow >= 5 ? `The Producers are cleared for release — watch the sky.` : null) :
             `That's the whole ledger — the village has bloodied the Producers themselves. No further casting directives. You're the show now.`;
           this.sysSay(`📺 WAVE LEDGER — wave ${wave}'s bar is full (${bar}/${bar} — kills only, not near-misses).` + (gate ? ` ${gate}` : ''));
         } else if (points >= bar / 2 && !st._ledgerAnn50[wave]) {

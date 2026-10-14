@@ -646,7 +646,9 @@
       // aloud, never silently.
       if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && (seatNow === 'full' || seatNow === 'lesser')) {
         pg.tableWaiting = true;
-        this.say('The table is being set. They are watching to see who comes to it.');
+        // Same seat-honest text as arcBeat(4): a lesser seat is named as one.
+        if (seatNow === 'full') this.say('The table is being set. They are watching to see who comes to it.');
+        else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
       }
       if (want > pg.arc) {
         pg.arc = want;

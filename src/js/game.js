@@ -28496,8 +28496,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
     // checkScalePointers: the reactive check for beats 4+5 (SCALE-DISCOVERY.md,
-    // Steve 2026-10-12). The wave gates are scale-gated (wave 4 needs regional,
-    // wave 5 needs national — unlockedWave), but nothing ever told the player.
+    // Steve 2026-10-12). Waves 4-5 unlock on village Standing (standing.js,
+    // since 2026-10-13 — no longer regional/national rank); the pointer
+    // TRIGGERS below still read scale rank (unchanged, open design question),
+    // but the TEXT names the real lever: standing.
     // Fires each pointer ONCE, at the unlock — the discoverability question
     // ("what's next?") arises the moment a new wave lands, not after its kill
     // bar fills. (Retimed 2026-10-12: the bar-banked trigger was a nearly
@@ -28538,12 +28540,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state._scalePtrW4EchoDay = day + 1;
       } catch (e) {}
     },
-    // scalePointerW5: escalation. A region held, a nation needed — three
-    // seasoned bonds under one head, or bend the knee. Producer-brain throughout.
+    // scalePointerW5: escalation. A region held; the finale needs more
+    // Standing (t5) and the Mirror Draft faced (unlockedWave) — no nation
+    // required since 2026-10-13. Producer-brain throughout.
     scalePointerW5() {
       try {
         this.say('\u{1F4FA} "A REGION! Look at you! The ratings department is doing a little DANCE over here!"');
-        this.say('\u{1F4FA} "But finales — FINALES need a NATION, sweetheart. Three seasoned bonds under ONE head. Or bend the knee to somebody who already has one. The producers are WAITING."');
+        this.say('\u{1F4FA} "But finales — FINALES need a LEGEND, sweetheart. More STANDING — blood, bonds, or bread — and look the Mirror Draft in the eye. The producers are WAITING."');
       } catch (e) {}
     },
     // scalePointerEcho: the morning-after answer to the wave-4 pointer. One

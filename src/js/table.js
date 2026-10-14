@@ -29,7 +29,7 @@
 //   - tableLiveWrap(text)
 // consumes:
 //   - state.scholar, state.village, progState()
-//   - ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
+//   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
 //   - say, sysSay, recordMoment, recordLegend, wipe, save
 //   - metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides)
 //   - switchboard() (comms.js) for the light/dark axis
