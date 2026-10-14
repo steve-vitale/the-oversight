@@ -13,3 +13,4 @@ scripts/test-regrow-timing.js  # 2026-10-14 nondeterministic: passes alone, fail
 scripts/test-villager-personality.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
 scripts/test-wincensus-20261014.js  # 2026-10-14 seed-fragile: (4) needs seed 22 to reach the table; any RNG-shifting change (trial 1-of-3 sheet, ledger events) tips it under. Needs a multi-seed version.
 scripts/test-gorgedrive-20261014.js  # 2026-10-14 seed-fragile: 3b engagement depends on monster drift (gorgeVerifyFailed after RNG shift). GREEN section HP now pinned.
+scripts/test-brawler-descriptor-dedup.js  # 2026-10-14 flaky: exit 1 x3 then 0 with identical ALL PASS output; nondeterministic
