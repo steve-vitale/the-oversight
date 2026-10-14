@@ -13866,7 +13866,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return fk / burn;
     },
 
-    prodThrottleEngaged() { return this.pantryFreshDays() > 4; },
+    prodThrottleEngaged() {
+      // HUNGER EXEMPTION (2026-10-14): never leave food standing during a
+      // genuine hunger stretch. hungryStreak >= 3 is the game's own
+      // hunger-winter crisis threshold (villageEats). Narrow and targeted:
+      // only blocks during a real crisis, not on single hungry days.
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (pg && (pg.hungryStreak || 0) >= 3) return false;
+      } catch (e) {}
+      return this.pantryFreshDays() > 4;
+    },
 
     // round-robin wood/water/stone for redirected duties
     prodThrottleAltTask() {

@@ -58,12 +58,17 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
   Game.feedback = function () {};
   Game.nearFire = () => true;
   Game.state.scholar.day = 10;
+  // PROPORTIONAL (2026-10-14): redirect chance ramps 0->1 over 4-7 days.
+  // Force chance=1 for deterministic integration checks; the ramp is tested
+  // separately below. Restore is not needed (fresh Game per test file).
+  const _realChance = Game.prodThrottleChance;
+  Game.prodThrottleChance = () => 1;
   const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
   const v = Game.state.village;
-  v.burnHistory = [1500, 1500, 1500, 1500, 1500, 1500, 1500]; // measured draw ~1.5k
+  v.burnHistory = [24000, 23500, 24200, 23800, 24100, 23900, 24000]; // honest draw ~24k (12 villagers)
 
   console.log('== 1. GATE: above threshold (>4 fresh-days) redirects [RED] ==');
-  v.pantry = [freshItem('Foraged food', 15000, 3)]; // 10 days of fresh at 1.5k burn
+  v.pantry = [freshItem('Foraged food', 150000, 3)]; // 6.25 days of fresh at honest 24k burn
   v.throttleRedirects = 0;
   said.length = 0;
   check('gate engages above threshold', typeof Game.prodThrottleEngaged === 'function' && Game.prodThrottleEngaged() === true,
@@ -91,7 +96,7 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
   check('no redirect counted', (v.throttleRedirects || 0) === 0, 'redirects=' + (v.throttleRedirects || 0));
 
   console.log('== 3. GARDEN and FISH also throttle [RED] ==');
-  v.pantry = [freshItem('Foraged food', 15000, 3)];
+  v.pantry = [freshItem('Foraged food', 150000, 3)];
   v.throttleRedirects = 0;
   const g1 = pantryKcal();
   const ag = { task: 'garden' };
@@ -103,7 +108,7 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
   check('fish throttles above threshold', pantryKcal() === f1 && ['wood', 'water', 'stone'].includes(af.task), 'a.task=' + af.task);
 
   console.log('== 4. TRIBUTE obligations still flow when throttled [RED] ==');
-  v.pantry = [freshItem('Foraged food', 20000, 3)]; // engaged
+  v.pantry = [freshItem('Foraged food', 150000, 3)]; // engaged (6.25d at honest burn)
   check('still engaged', typeof Game.prodThrottleEngaged === 'function' && Game.prodThrottleEngaged() === true);
   const m = (Game.mshipState ? Game.mshipState() : null) || {};
   m.links = m.links || [];
@@ -120,7 +125,7 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
     'freshDays=' + (Game.pantryFreshDays ? Game.pantryFreshDays().toFixed(1) : 'n/a'));
   check('pantryFreshKcal counts only spoil-risk food', Math.abs((Game.pantryFreshKcal ? Game.pantryFreshKcal() : -1) - 3000) < 501,
     'freshKcal=' + (Game.pantryFreshKcal ? Game.pantryFreshKcal() : 'n/a'));
-  v.pantry = [freshItem('Foraged food', 15000, 3)];
+  v.pantry = [freshItem('Foraged food', 150000, 3)];
   const nItems = v.pantry.length;
   const a5 = { task: 'forage' };
   Game.resolveOneAssignment(vid, a5);
@@ -130,8 +135,8 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
   v.pantry = [];
   v.burnHistory = [];
   check('empty pantry never engages (falls back, no false gate)', typeof Game.prodThrottleEngaged === 'function' && Game.prodThrottleEngaged() === false);
-  v.burnHistory = [1500, 1500, 1500, 1500, 1500, 1500, 1500];
-  v.pantry = [freshItem('Foraged food', 15000, 3)];
+  v.burnHistory = [24000, 23500, 24200, 23800, 24100, 23900, 24000];
+  v.pantry = [freshItem('Foraged food', 150000, 3)];
   v.throttleAltRot = 0;
   const alts = new Set();
   for (let i = 0; i < 6; i++) alts.add(Game.prodThrottleAltTask());
