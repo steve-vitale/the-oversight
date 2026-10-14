@@ -112,6 +112,25 @@ async function loadGame(opts) {
 
   Math.random = mulberry32(seed);
 
+  // DETERMINISTIC CLOCK (entropy-hunt r27, 2026-10-14): game code embeds
+  // Date.now() in generated IDs (villager app_<ts>_<rand> in membership.js,
+  // fighter keys 'm_ur_'+Date.now()%100000, link/scam/visitor/fight IDs).
+  // Real wall-clock makes those IDs differ on every run, and at least one
+  // consumer is order-sensitive — s11/s22/s33/s88 diverged A/A on days
+  // 41-86 even after the r26 contest-seed fix, while freezing Date.now()
+  // flips all four to bit-identical. The sim clock is monotonic and
+  // deterministic: FIXED_BASE + per-loadGame call count. Uniqueness within
+  // a run is preserved (every call yields a fresh value, like wall-clock);
+  // reproducibility across runs holds (same seed → same call sequence →
+  // same IDs). No game logic branches on wall-clock VALUES — the
+  // expedition clock is game-time (abilityActions.js), pacing telemetry
+  // uses performance.now and is decision-free, everything else is ID
+  // generation or log timestamps — so this changes nothing but
+  // reproducibility. Reset per loadGame (closure counter); sweeps run
+  // seeds sequentially, so no interleaving.
+  let __clockCalls = 0;
+  Date.now = () => 1760400000000 + (__clockCalls++);
+
   global.fetch = (f) => Promise.resolve({
     json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
   });
