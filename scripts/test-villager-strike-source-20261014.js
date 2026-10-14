@@ -31,6 +31,10 @@ const K = require('./godpath/lib');
       telegraph: null, stunned: 0, hesitate: 0,
     };
     Game.tbfight = { id: 'vss', fighters: [v, m], order: ['v0', 'm0'], turnIdx: 0, round: 1, over: false };
+    // FOOD IS FUEL (godpath-buff 2026-10-14): a well-fed villager (hunger
+    // <= 25) carries the player's overcharge (x1.25). This test measures the
+    // role/flank sources, so the villager is fed but not topped up.
+    try { Game.npcNeeds(vid).hunger = 50; } catch (e) { console.warn('[test] hunger', e.message); }
     setup(v);
     const origRoll = S.roll;
     S.roll = () => 10;

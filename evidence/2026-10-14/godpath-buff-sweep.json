@@ -1,0 +1,6007 @@
+{
+"configs": {
+"before (base)": {
+"std16": {
+"n": 16,
+"won": 7,
+"sat": 7,
+"inv": 10,
+"lost": 8,
+"medD": 95.0,
+"subs": 6,
+"cls": 69,
+"ascP": 0,
+"ascPruns100": "0/6",
+"ascV": 0,
+"newVerbP": 17,
+"newVerbV": 0,
+"lostCause": {
+"famine": 3,
+"no-successor": 5
+}
+},
+"all": {
+"n": 64,
+"won": 31,
+"sat": 31,
+"inv": 37,
+"lost": 23,
+"medD": 95.5,
+"subs": 8,
+"cls": 52,
+"ascP": 0,
+"ascPruns100": "0/24",
+"ascV": 0,
+"newVerbP": 44,
+"newVerbV": 0,
+"lostCause": {
+"famine": 10,
+"no-successor": 11,
+"?": 2
+}
+}
+},
+"after (final)": {
+"std16": {
+"n": 16,
+"won": 7,
+"sat": 7,
+"inv": 8,
+"lost": 7,
+"medD": 99.0,
+"subs": 7,
+"cls": 56,
+"ascP": 6,
+"ascPruns100": "2/8",
+"ascV": 6,
+"newVerbP": 24,
+"newVerbV": 0,
+"lostCause": {
+"famine": 3,
+"no-successor": 4
+}
+},
+"all": {
+"n": 64,
+"won": 30,
+"sat": 30,
+"inv": 38,
+"lost": 25,
+"medD": 97.0,
+"subs": 8,
+"cls": 53,
+"ascP": 21,
+"ascPruns100": "12/28",
+"ascV": 24,
+"newVerbP": 62,
+"newVerbV": 0,
+"lostCause": {
+"famine": 12,
+"no-successor": 12,
+"?": 1
+}
+}
+},
+"exp: kits by path, payoffs last + buff + asc(3, any-track)": {
+"std16": {
+"n": 16,
+"won": 7,
+"sat": 7,
+"inv": 9,
+"lost": 9,
+"medD": 101.0,
+"subs": 7,
+"cls": 75,
+"ascP": 4,
+"ascPruns100": "3/9",
+"ascV": 3,
+"newVerbP": 13,
+"newVerbV": 0,
+"lostCause": {
+"?": 9
+}
+},
+"all": {
+"n": 32,
+"won": 11,
+"sat": 11,
+"inv": 18,
+"lost": 19,
+"medD": 93.5,
+"subs": 8,
+"cls": 62,
+"ascP": 7,
+"ascPruns100": "5/12",
+"ascV": 8,
+"newVerbP": 23,
+"newVerbV": 0,
+"lostCause": {
+"?": 19
+}
+}
+},
+"exp: kits by path, payoffs in place + buff + asc": {
+"std16": {
+"n": 16,
+"won": 5,
+"sat": 5,
+"inv": 10,
+"lost": 7,
+"medD": 94.0,
+"subs": 6,
+"cls": 81,
+"ascP": 6,
+"ascPruns100": "3/6",
+"ascV": 5,
+"newVerbP": 19,
+"newVerbV": 0,
+"lostCause": {
+"?": 1,
+"no-successor": 6
+}
+},
+"all": {
+"n": 32,
+"won": 14,
+"sat": 14,
+"inv": 22,
+"lost": 14,
+"medD": 94.0,
+"subs": 7,
+"cls": 69,
+"ascP": 9,
+"ascPruns100": "5/10",
+"ascV": 9,
+"newVerbP": 42,
+"newVerbV": 0,
+"lostCause": {
+"?": 1,
+"no-successor": 10,
+"famine": 3
+}
+}
+},
+"exp: same + held detection": {
+"std16": {
+"n": 16,
+"won": 2,
+"sat": 2,
+"inv": 9,
+"lost": 11,
+"medD": 94.5,
+"subs": 6,
+"cls": 75,
+"ascP": 8,
+"ascPruns100": "5/7",
+"ascV": 6,
+"newVerbP": 25,
+"newVerbV": 2,
+"lostCause": {
+"no-successor": 8,
+"famine": 2,
+"?": 1
+}
+},
+"all": {
+"n": 32,
+"won": 10,
+"sat": 10,
+"inv": 20,
+"lost": 19,
+"medD": 92.5,
+"subs": 8,
+"cls": 66,
+"ascP": 12,
+"ascPruns100": "8/11",
+"ascV": 12,
+"newVerbP": 52,
+"newVerbV": 2,
+"lostCause": {
+"no-successor": 12,
+"famine": 5,
+"?": 2
+}
+}
+},
+"exp: same + overcharge x1.5": {
+"std16": {
+"n": 16,
+"won": 5,
+"sat": 5,
+"inv": 9,
+"lost": 10,
+"medD": 97.0,
+"subs": 8,
+"cls": 75,
+"ascP": 2,
+"ascPruns100": "1/6",
+"ascV": 6,
+"newVerbP": 25,
+"newVerbV": 10,
+"lostCause": {
+"no-successor": 6,
+"?": 1,
+"famine": 3
+}
+},
+"all": {
+"n": 32,
+"won": 8,
+"sat": 8,
+"inv": 16,
+"lost": 21,
+"medD": 95.0,
+"subs": 8,
+"cls": 69,
+"ascP": 6,
+"ascPruns100": "5/12",
+"ascV": 10,
+"newVerbP": 52,
+"newVerbV": 10,
+"lostCause": {
+"no-successor": 9,
+"?": 2,
+"famine": 10
+}
+}
+},
+"exp: original kits + buff + asc(3)": {
+"std16": {
+"n": 16,
+"won": 7,
+"sat": 7,
+"inv": 10,
+"lost": 8,
+"medD": 99.5,
+"subs": 7,
+"cls": 62,
+"ascP": 5,
+"ascPruns100": "3/8",
+"ascV": 8,
+"newVerbP": 20,
+"newVerbV": 0,
+"lostCause": {
+"?": 8
+}
+},
+"all": {
+"n": 32,
+"won": 14,
+"sat": 14,
+"inv": 19,
+"lost": 16,
+"medD": 95.5,
+"subs": 7,
+"cls": 56,
+"ascP": 9,
+"ascPruns100": "5/14",
+"ascV": 14,
+"newVerbP": 28,
+"newVerbV": 0,
+"lostCause": {
+"?": 16
+}
+}
+},
+"exp: final, abilitiesNeeded 3": {
+"std16": {
+"n": 16,
+"won": 8,
+"sat": 8,
+"inv": 9,
+"lost": 6,
+"medD": 99.0,
+"subs": 7,
+"cls": 56,
+"ascP": 6,
+"ascPruns100": "2/8",
+"ascV": 7,
+"newVerbP": 24,
+"newVerbV": 0,
+"lostCause": {
+"famine": 4,
+"no-successor": 2
+}
+},
+"all": {
+"n": 64,
+"won": 31,
+"sat": 31,
+"inv": 39,
+"lost": 24,
+"medD": 97.0,
+"subs": 8,
+"cls": 53,
+"ascP": 21,
+"ascPruns100": "12/28",
+"ascV": 27,
+"newVerbP": 62,
+"newVerbV": 0,
+"lostCause": {
+"famine": 13,
+"no-successor": 10,
+"?": 1
+}
+}
+},
+"exp: final, abilitiesNeeded 3, overcharge x1.5": {
+"std16": {
+"n": 16,
+"won": 3,
+"sat": 3,
+"inv": 10,
+"lost": 12,
+"medD": 89.0,
+"subs": 6,
+"cls": 56,
+"ascP": 6,
+"ascPruns100": "5/7",
+"ascV": 5,
+"newVerbP": 27,
+"newVerbV": 0,
+"lostCause": {
+"no-successor": 6,
+"famine": 6
+}
+},
+"all": {
+"n": 64,
+"won": 25,
+"sat": 25,
+"inv": 41,
+"lost": 33,
+"medD": 95.0,
+"subs": 9,
+"cls": 59,
+"ascP": 17,
+"ascPruns100": "10/21",
+"ascV": 22,
+"newVerbP": 96,
+"newVerbV": 0,
+"lostCause": {
+"no-successor": 13,
+"famine": 19,
+"?": 1
+}
+}
+},
+"exp: kits rare-paths-first + buff + lived deed": {
+"std16": {
+"n": 16,
+"won": 5,
+"sat": 5,
+"inv": 9,
+"lost": 11,
+"medD": 100.0,
+"subs": 9,
+"cls": 94,
+"ascP": 2,
+"ascPruns100": "1/8",
+"ascV": 1,
+"newVerbP": 35,
+"newVerbV": 54,
+"lostCause": {
+"?": 11
+}
+},
+"all": {
+"n": 16,
+"won": 5,
+"sat": 5,
+"inv": 9,
+"lost": 11,
+"medD": 100.0,
+"subs": 9,
+"cls": 94,
+"ascP": 2,
+"ascPruns100": "1/8",
+"ascV": 1,
+"newVerbP": 35,
+"newVerbV": 54,
+"lostCause": {
+"?": 11
+}
+}
+}
+},
+"before_rows": [
+{
+"seed": 7,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 17,
+"vHolders": 9,
+"classPlayer": true,
+"classPlayerDay": 85,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 21,
+"monster:expedition": 4,
+"person:combat": 5,
+"player:combat": 6,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 42,
+"days": 136,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 28,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 56,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 2,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 19,
+"villager:The Moderator": 1,
+"player:contest": 2,
+"player:dehydration": 1,
+"villager:monster": 2,
+"person:combat": 2,
+"player:combat": 1,
+"villager:sickness": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true,
+"kit": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 99,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 16,
+"vHolders": 10,
+"classPlayer": true,
+"classPlayerDay": 36,
+"classVillagers": 1,
+"subclasses": {
+"drifter/phantom": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 13,
+"monster:expedition": 2,
+"monster:combat": 10,
+"villager:monster": 4,
+"player:combat": 7,
+"villager:Spool": 1,
+"player:contest": 1,
+"person:combat": 6
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 1234,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 36,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"forager/feaster": 4,
+"forager/gardener": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 9,
+"player:sickness": 2,
+"monster:expedition": 3,
+"monster:combat": 15,
+"villager:monster": 3,
+"player:combat": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 555,
+"days": 70,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 13,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 16,
+"villager:Choir Toad": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 3,
+"person:alien": 1,
+"villager:thirst": 3,
+"player:combat": 1,
+"person:combat": 2,
+"villager:monster": 1,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 777,
+"days": 137,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 29,
+"vHolders": 13,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 28,
+"villager:Nevermore": 1,
+"villager:sickness": 4,
+"villager:a wound that wouldn't close": 1,
+"player:lockjaw": 1,
+"person:combat": 4,
+"player:combat": 5,
+"villager:monster": 3
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 2026,
+"days": 79,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 20,
+"vHolders": 15,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 3,
+"verbVillager": 0,
+"verbs": {
+"p:switcheroo": 3
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"person:ambush": 1,
+"monster:expedition": 2,
+"monster:combat": 19,
+"player:combat": 4,
+"person:combat": 10,
+"player:sickness": 1,
+"villager:monster": 4
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 31337,
+"days": 63,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 15,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 10,
+"person:combat": 6,
+"player:combat": 3,
+"monster:combat": 12,
+"player:dehydration": 1,
+"villager:monster": 5,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 1,
+"days": 106,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 91,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/beastmaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"monster:combat": 12,
+"villager:monster": 6,
+"person:alien": 1,
+"player:combat": 5,
+"player:contest": 2,
+"person:combat": 6,
+"villager:The Spoiler": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 2,
+"days": 69,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 33,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 17,
+"monster:expedition": 1,
+"villager:sickness": 6,
+"player:starvation": 1,
+"villager:a wound that wouldn't close": 1,
+"player:contest": 2,
+"player:combat": 1,
+"person:combat": 5,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 3,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 16,
+"vHolders": 8,
+"classPlayer": true,
+"classPlayerDay": 51,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 19,
+"player:starvation": 1,
+"monster:expedition": 1,
+"player:sickness": 1,
+"player:combat": 6,
+"person:combat": 3,
+"villager:a wound that wouldn't close": 1,
+"villager:monster": 2,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 4,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 30,
+"vHolders": 20,
+"classPlayer": true,
+"classPlayerDay": 35,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"player:dehydration": 1,
+"monster:villager combat": 4,
+"monster:combat": 16,
+"monster:expedition": 2,
+"player:combat": 1,
+"villager:Buffering": 1,
+"person:combat": 3,
+"villager:monster": 10,
+"villager:a wound that wouldn't close": 1,
+"villager:thirst": 2,
+"player:the expedition": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 5,
+"days": 129,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 21,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 71,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"forager/feaster": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 1,
+"verbVillager": 0,
+"verbs": {
+"p:coin_guard": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 12,
+"player:combat": 8,
+"person:combat": 5,
+"villager:monster": 9,
+"villager:starvation": 1,
+"player:contest": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 6,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 20,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 25,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 2,
+"hunter/beastmaster": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"player:combat": 2,
+"villager:monster": 1,
+"monster:combat": 10,
+"monster:expedition": 2,
+"person:combat": 6,
+"player:contest": 2
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 8,
+"days": 89,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 37,
+"classVillagers": 0,
+"subclasses": {
+"explorer/cartographer": 1,
+"hunter/beastmaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"monster:combat": 15,
+"villager:monster": 4,
+"person:combat": 6,
+"player:combat": 1,
+"villager:sickness": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 9,
+"days": 104,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 22,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 43,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 13,
+"verbVillager": 0,
+"verbs": {
+"p:bribe": 12,
+"p:mending_hands": 1
+},
+"passives": {
+"p:bribe": 12
+},
+"deaths": {
+"monster:villager combat": 6,
+"player:combat": 5,
+"monster:expedition": 2,
+"villager:Night Court": 1,
+"monster:combat": 29,
+"person:combat": 8,
+"person:alien": 1,
+"villager:monster": 1,
+"villager:Buffering": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 10,
+"days": 102,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"villager:Sunbasker": 1,
+"monster:expedition": 2,
+"villager:Big Loud": 1,
+"monster:combat": 18,
+"player:lockjaw": 1,
+"player:dehydration": 1,
+"villager:monster": 6,
+"player:combat": 3,
+"person:combat": 2,
+"player:contest": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:starvation": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 11,
+"days": 94,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 31,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 55,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 2,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 15,
+"player:combat": 1,
+"player:contest": 1,
+"villager:monster": 2,
+"villager:The Callback": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 12,
+"days": 91,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 21,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"monster:expedition": 3,
+"monster:combat": 22,
+"player:starvation": 1,
+"player:combat": 3,
+"villager:monster": 8
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 13,
+"days": 50,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 18,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"player:combat": 3,
+"villager:monster": 1,
+"villager:sickness": 3,
+"monster:combat": 10,
+"monster:expedition": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:starvation": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 14,
+"days": 142,
+"end": "village-dead",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 18,
+"vHolders": 9,
+"classPlayer": true,
+"classPlayerDay": 22,
+"classVillagers": 2,
+"subclasses": {
+"hunter/beastmaster": 1,
+"hunter/stalker": 2,
+"forager/gardener": 2,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 4,
+"monster:villager combat": 6,
+"player:combat": 8,
+"monster:combat": 14,
+"villager:monster": 6,
+"person:combat": 3
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true
+},
+"v": {
+"cls": true,
+"kit": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 15,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 38,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"monster:expedition": 3,
+"monster:combat": 21,
+"player:combat": 3,
+"villager:monster": 6,
+"person:combat": 5,
+"person:alien": 2,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 16,
+"days": 91,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 20,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 32,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"monster:combat": 20,
+"player:combat": 4,
+"villager:a wound that wouldn't close": 3,
+"villager:sickness": 4,
+"player:sickness": 1,
+"monster:expedition": 1,
+"villager:monster": 1,
+"person:combat": 3,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 17,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 32,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 2,
+"villager:the thing with headlights for eyes, standing too still": 1,
+"monster:villager combat": 6,
+"monster:combat": 13,
+"villager:sickness": 3,
+"player:starvation": 1,
+"player:contest": 1,
+"villager:thirst": 4,
+"villager:monster": 5,
+"villager:contest": 2,
+"player:combat": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 18,
+"days": 64,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 17,
+"villager:monster": 1,
+"player:combat": 1,
+"villager:thirst": 3,
+"player:sickness": 1,
+"villager:starvation": 5,
+"person:combat": 1,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 19,
+"days": 114,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 33,
+"vHolders": 18,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"monster:combat": 13,
+"villager:sickness": 6,
+"villager:a wound that wouldn't close": 1,
+"player:lockjaw": 1,
+"monster:expedition": 2,
+"villager:The Focus Group": 1,
+"villager:monster": 6,
+"person:combat": 5,
+"player:contest": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 20,
+"days": 70,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 15,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"player:combat": 6,
+"villager:monster": 2,
+"monster:combat": 14,
+"person:combat": 8,
+"person:alien": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 21,
+"days": 94,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 32,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 65,
+"classVillagers": 3,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/feaster": 3,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 13,
+"monster:combat": 5,
+"player:combat": 2,
+"monster:expedition": 7,
+"person:combat": 1,
+"villager:monster": 7,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 22,
+"days": 53,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 16,
+"vHolders": 10,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"monster:combat": 10,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 1,
+"person:combat": 1,
+"person:alien": 4,
+"player:combat": 1,
+"villager:monster": 1,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 23,
+"days": 144,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 30,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 58,
+"classVillagers": 3,
+"subclasses": {
+"forager/gardener": 2,
+"hunter/stalker": 1,
+"forager/feaster": 2,
+"hunter/beastmaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"villager:monster": 11,
+"monster:combat": 8,
+"monster:expedition": 1,
+"player:lockjaw": 1,
+"player:combat": 1,
+"player:sickness": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true,
+"kit": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 24,
+"days": 91,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 9,
+"vHolders": 6,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 4,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/feaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 3,
+"monster:villager combat": 4,
+"player:combat": 7,
+"monster:combat": 9,
+"player:contest": 2,
+"person:combat": 3
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 25,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 34,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"player:combat": 3,
+"monster:combat": 30,
+"monster:expedition": 2,
+"person:combat": 1,
+"player:contest": 1,
+"villager:monster": 5
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 26,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 33,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/feaster": 2,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 2,
+"monster:combat": 22,
+"monster:villager combat": 8,
+"person:alien": 2,
+"player:the night": 1,
+"player:contest": 1,
+"person:combat": 6,
+"player:combat": 1,
+"villager:The Redactor": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 27,
+"days": 104,
+"end": "village-dead",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 29,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 6,
+"villager:monster": 5,
+"monster:villager combat": 4,
+"monster:combat": 35,
+"person:combat": 12,
+"player:combat": 4
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 28,
+"days": 91,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 14,
+"vHolders": 10,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"villager:monster": 1,
+"monster:combat": 43,
+"monster:villager combat": 3,
+"player:combat": 4,
+"person:combat": 6,
+"villager:Gavel": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 1,
+"player:contest": 1,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 29,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 50,
+"classVillagers": 3,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1,
+"forager/feaster": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 2,
+"monster:villager combat": 6,
+"villager:monster": 4,
+"monster:combat": 13,
+"player:combat": 7,
+"person:combat": 9,
+"player:contest": 2
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 30,
+"days": 98,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 21,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"monster:combat": 33,
+"person:combat": 2,
+"player:combat": 4,
+"person:alien": 1,
+"villager:monster": 6,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 31,
+"days": 89,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 16,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"monster:expedition": 1,
+"player:combat": 7,
+"player:sickness": 2,
+"monster:combat": 10,
+"person:combat": 6,
+"person:alien": 1,
+"villager:monster": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 32,
+"days": 101,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 26,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 64,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"player:starvation": 1,
+"villager:Big-Eyes": 1,
+"monster:combat": 13,
+"player:the night": 1,
+"player:combat": 4,
+"villager:monster": 7,
+"person:combat": 5
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 33,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 41,
+"vHolders": 19,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:combat": 19,
+"villager:sickness": 6,
+"monster:villager combat": 5,
+"villager:a wound that wouldn't close": 2,
+"person:alien": 1,
+"villager:thirst": 1,
+"villager:monster": 4,
+"person:combat": 3
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 34,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 20,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 28,
+"classVillagers": 0,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 2,
+"verbVillager": 0,
+"verbs": {
+"p:live_broadcast": 2
+},
+"passives": {},
+"deaths": {
+"monster:combat": 11,
+"monster:villager combat": 3,
+"villager:a wound that wouldn't close": 1,
+"player:starvation": 1,
+"player:combat": 4,
+"monster:expedition": 1,
+"player:lockjaw": 1,
+"person:combat": 7,
+"villager:monster": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 35,
+"days": 76,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 15,
+"vHolders": 10,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 9,
+"person:ambush": 1,
+"monster:combat": 10,
+"person:alien": 1,
+"monster:expedition": 3,
+"person:combat": 5,
+"player:combat": 4,
+"villager:monster": 2,
+"player:sickness": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 36,
+"days": 90,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 13,
+"person:combat": 5,
+"player:starvation": 1,
+"villager:The Loud Beast": 1,
+"person:alien": 1,
+"player:dehydration": 1,
+"player:contest": 1,
+"villager:monster": 7,
+"player:combat": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 37,
+"days": 109,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 24,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 3,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"player:combat": 2,
+"monster:combat": 16,
+"player:sickness": 1,
+"person:alien": 1,
+"player:dehydration": 1,
+"villager:monster": 3,
+"person:combat": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 38,
+"days": 96,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 18,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 30,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"monster:expedition": 6,
+"monster:combat": 27,
+"player:dehydration": 1,
+"villager:Big-Eyes": 1,
+"player:combat": 5,
+"player:contest": 1,
+"villager:monster": 6,
+"person:combat": 3
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 39,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 9,
+"monster:combat": 18,
+"player:combat": 2,
+"person:combat": 7,
+"villager:sickness": 2,
+"villager:a wound that wouldn't close": 2,
+"player:lockjaw": 1,
+"villager:monster": 1,
+"monster:expedition": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 40,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 14,
+"vHolders": 10,
+"classPlayer": true,
+"classPlayerDay": 66,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"person:ambush": 1,
+"monster:combat": 9,
+"monster:expedition": 2,
+"person:alien": 1,
+"person:combat": 6,
+"villager:monster": 1,
+"player:combat": 4
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 41,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 17,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 11,
+"verbVillager": 0,
+"verbs": {
+"p:bribe": 11
+},
+"passives": {
+"p:bribe": 11
+},
+"deaths": {
+"monster:villager combat": 6,
+"monster:expedition": 1,
+"player:dehydration": 1,
+"villager:monster": 6,
+"monster:combat": 8,
+"player:combat": 7,
+"person:combat": 4,
+"villager:contest": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 43,
+"days": 99,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 9,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"player:combat": 1,
+"monster:expedition": 2,
+"monster:villager combat": 6,
+"monster:combat": 16,
+"player:dehydration": 1,
+"villager:monster": 1,
+"villager:The Audit": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 44,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 41,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 2
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"villager:a crow that watches too long and blinks too little": 1,
+"monster:villager combat": 5,
+"monster:combat": 24,
+"monster:expedition": 1,
+"villager:The Paparazzo": 1,
+"villager:monster": 4,
+"person:combat": 6
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 45,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 32,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 34,
+"classVillagers": 3,
+"subclasses": {
+"forager/feaster": 2,
+"hunter/stalker": 3
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"villager:a crow that watches too long and blinks too little": 1,
+"person:ambush": 1,
+"villager:monster": 3,
+"monster:combat": 17,
+"player:combat": 2,
+"person:alien": 2,
+"player:dehydration": 1,
+"monster:expedition": 2
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 46,
+"days": 100,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 28,
+"classVillagers": 0,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 4,
+"person:ambush": 1,
+"player:combat": 2,
+"person:combat": 1,
+"monster:combat": 10,
+"player:contest": 1,
+"villager:The Redactor": 1,
+"person:alien": 1,
+"player:sickness": 1,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 47,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 33,
+"classVillagers": 3,
+"subclasses": {
+"forager/feaster": 1,
+"hunter/stalker": 3,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"player:combat": 3,
+"monster:combat": 6,
+"monster:villager combat": 8,
+"monster:expedition": 2,
+"person:alien": 1,
+"player:dehydration": 2,
+"villager:monster": 6,
+"villager:sickness": 4
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 48,
+"days": 37,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 15,
+"vHolders": 10,
+"classPlayer": true,
+"classPlayerDay": 31,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 2,
+"monster:combat": 10,
+"player:combat": 1,
+"villager:sickness": 5,
+"person:combat": 2,
+"villager:monster": 3,
+"villager:a wound that wouldn't close": 1,
+"player:sickness": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 49,
+"days": 75,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 21,
+"vHolders": 13,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 28,
+"villager:monster": 3,
+"villager:sickness": 3,
+"player:combat": 2,
+"villager:a wound that wouldn't close": 1,
+"person:combat": 8,
+"player:lockjaw": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 50,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 27,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 79,
+"classVillagers": 0,
+"subclasses": {
+"hunter/beastmaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 1,
+"verbVillager": 0,
+"verbs": {
+"p:pack_hunt": 1
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 7,
+"monster:combat": 18,
+"villager:monster": 3,
+"villager:a wound that wouldn't close": 2,
+"villager:sickness": 3,
+"person:combat": 7,
+"player:combat": 2,
+"person:alien": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 51,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 27,
+"vHolders": 16,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 27,
+"player:combat": 2,
+"person:alien": 7,
+"player:sickness": 2,
+"person:combat": 2,
+"player:lockjaw": 1,
+"villager:monster": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 52,
+"days": 89,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 19,
+"vHolders": 8,
+"classPlayer": true,
+"classPlayerDay": 26,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 13,
+"monster:combat": 5,
+"player:sickness": 1,
+"player:dehydration": 1,
+"player:combat": 3,
+"villager:monster": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 53,
+"days": 96,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 31,
+"vHolders": 16,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 7,
+"verbVillager": 0,
+"verbs": {
+"p:switcheroo": 7
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 17,
+"monster:expedition": 1,
+"villager:monster": 4,
+"villager:The Reunion": 1,
+"player:combat": 2,
+"person:combat": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 54,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 13,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 3,
+"monster:villager combat": 8,
+"player:combat": 1,
+"monster:combat": 8,
+"person:alien": 2,
+"player:lockjaw": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 55,
+"days": 94,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 19,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"monster:expedition": 2,
+"monster:combat": 11,
+"villager:Big-Bane": 1,
+"person:combat": 3,
+"villager:Gavel": 1,
+"player:combat": 4,
+"villager:monster": 6
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 56,
+"days": 94,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 30,
+"classVillagers": 1,
+"subclasses": {
+"explorer/cartographer": 2,
+"explorer/seer": 1,
+"forager/feaster": 1,
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 6,
+"verbVillager": 0,
+"verbs": {
+"p:foresight": 6
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"monster:expedition": 1,
+"villager:monster": 5,
+"monster:combat": 26,
+"person:alien": 1,
+"person:combat": 7,
+"player:combat": 4
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 57,
+"days": 128,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 10,
+"vHolders": 8,
+"classPlayer": true,
+"classPlayerDay": 54,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/gardener": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"person:ambush": 1,
+"monster:combat": 26,
+"player:combat": 6,
+"monster:expedition": 1,
+"villager:The Cancellation": 1,
+"villager:monster": 3,
+"person:combat": 1,
+"player:contest": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true
+},
+"v": {
+"cls": true,
+"kit": true
+}
+},
+"lostCause": "famine"
+},
+{
+"seed": 58,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 40,
+"classVillagers": 0,
+"subclasses": {
+"brawler/juggernaut": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 14,
+"person:combat": 3,
+"villager:monster": 6,
+"player:combat": 5,
+"player:lockjaw": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+}
+],
+"after_rows": [
+{
+"seed": 7,
+"days": 96,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 11,
+"vHolders": 7,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 17,
+"monster:expedition": 3,
+"person:combat": 4,
+"player:combat": 9,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 42,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 25,
+"vHolders": 15,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 18,
+"monster:combat": 19,
+"person:ambush": 1,
+"villager:monster": 7,
+"player:combat": 4,
+"person:combat": 2,
+"player:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 99,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 19,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 41,
+"classVillagers": 2,
+"subclasses": {
+"drifter/phantom": 1,
+"forager/feaster": 1,
+"hunter/stalker": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"monster:expedition": 2,
+"monster:combat": 10,
+"villager:monster": 3,
+"villager:The Algorithm": 1,
+"player:combat": 2,
+"villager:The Congregation": 1,
+"person:combat": 3
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 1234,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 36,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"forager/feaster": 3
+},
+"ascPlayer": 0,
+"ascVillager": 2,
+"ascPaths": [
+"v:living_garden",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 8,
+"verbs": {
+"v:rage": 8
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"player:sickness": 1,
+"monster:expedition": 1,
+"monster:combat": 25,
+"villager:monster": 3,
+"player:lockjaw": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 555,
+"days": 101,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 20,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 76,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 21,
+"villager:Choir Toad": 1,
+"villager:a wound that wouldn't close": 3,
+"villager:sickness": 2,
+"person:alien": 2,
+"villager:thirst": 2,
+"player:combat": 1,
+"person:combat": 2,
+"player:lockjaw": 1,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": "famine"
+},
+{
+"seed": 777,
+"days": 142,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 13,
+"classPlayer": true,
+"classPlayerDay": 64,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 1,
+"hunter/beastmaster": 1
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 1,
+"verbs": {
+"v:rage": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 33,
+"villager:Nevermore": 1,
+"villager:sickness": 5,
+"villager:a wound that wouldn't close": 1,
+"player:lockjaw": 2,
+"monster:expedition": 2,
+"player:combat": 3,
+"player:contest": 1,
+"villager:monster": 5,
+"player:dehydration": 1,
+"person:combat": 3
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 2026,
+"days": 106,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 18,
+"vHolders": 9,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 7,
+"verbVillager": 3,
+"verbs": {
+"p:switcheroo": 7,
+"v:rage": 3
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"person:ambush": 1,
+"monster:expedition": 1,
+"monster:combat": 16,
+"player:combat": 7,
+"villager:monster": 2,
+"person:combat": 6
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 31337,
+"days": 88,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 23,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 54,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/beastmaster": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:apex_predator"
+],
+"verbPlayer": 3,
+"verbVillager": 0,
+"verbs": {
+"p:pack_hunt": 3
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 11,
+"person:combat": 6,
+"player:combat": 2,
+"monster:combat": 11,
+"person:alien": 3,
+"player:dehydration": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": "famine"
+},
+{
+"seed": 1,
+"days": 142,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 27,
+"vHolders": 16,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 1,
+"verbVillager": 3,
+"verbs": {
+"v:static_toss": 3,
+"p:live_broadcast": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"monster:combat": 14,
+"player:combat": 6,
+"villager:monster": 8,
+"person:combat": 7,
+"player:dehydration": 1,
+"player:sickness": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true
+}
+},
+"lostCause": "famine"
+},
+{
+"seed": 2,
+"days": 59,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 13,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 33,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 14,
+"monster:expedition": 1,
+"villager:sickness": 5,
+"player:starvation": 2,
+"villager:a wound that wouldn't close": 1,
+"player:contest": 1,
+"person:combat": 5,
+"player:combat": 3
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 3,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 51,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 2
+},
+"ascPlayer": 0,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 23,
+"player:starvation": 1,
+"monster:expedition": 1,
+"player:sickness": 1,
+"player:combat": 3,
+"person:combat": 1,
+"villager:monster": 5,
+"player:lockjaw": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 4,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 35,
+"vHolders": 19,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 4,
+"subclasses": {
+"forager/gardener": 1,
+"forager/feaster": 3
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"player:dehydration": 1,
+"monster:villager combat": 9,
+"monster:combat": 26,
+"monster:expedition": 1,
+"villager:The Understudy": 1,
+"player:combat": 4,
+"player:lockjaw": 1,
+"person:combat": 4,
+"villager:The Congregation": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 3,
+"villager:monster": 4
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 5,
+"days": 116,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 27,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"forager/gardener": 1,
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 1,
+"verbVillager": 0,
+"verbs": {
+"p:coin_guard": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 6,
+"player:combat": 9,
+"villager:monster": 6,
+"person:combat": 9,
+"player:contest": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 6,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 20,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 25,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 3
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"player:combat": 5,
+"villager:monster": 2,
+"monster:combat": 8,
+"monster:expedition": 3,
+"villager:The Eater": 1,
+"person:combat": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 8,
+"days": 90,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 32,
+"vHolders": 18,
+"classPlayer": true,
+"classPlayerDay": 41,
+"classVillagers": 2,
+"subclasses": {
+"explorer/cartographer": 1,
+"survivalist/furnace": 1,
+"forager/feaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:unkillable"
+],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 8,
+"monster:combat": 13,
+"villager:monster": 6,
+"person:combat": 7,
+"player:combat": 2
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 9,
+"days": 142,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 27,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 40,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 2
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:living_garden",
+"v:apex_predator"
+],
+"verbPlayer": 12,
+"verbVillager": 1,
+"verbs": {
+"p:bribe": 12,
+"v:rage": 1
+},
+"passives": {
+"p:bribe": 12
+},
+"deaths": {
+"monster:villager combat": 11,
+"player:combat": 8,
+"monster:expedition": 3,
+"villager:Night Court": 1,
+"monster:combat": 13,
+"person:combat": 7,
+"person:alien": 1,
+"villager:monster": 5,
+"villager:The Rerun": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 10,
+"days": 102,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"villager:Sunbasker": 1,
+"monster:expedition": 2,
+"villager:Big Loud": 1,
+"monster:combat": 18,
+"player:lockjaw": 1,
+"player:dehydration": 1,
+"villager:monster": 6,
+"player:combat": 3,
+"person:combat": 2,
+"player:contest": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:starvation": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 11,
+"days": 116,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 55,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 15,
+"player:combat": 4,
+"player:contest": 2,
+"person:combat": 6,
+"villager:monster": 5
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 12,
+"days": 92,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 28,
+"vHolders": 16,
+"classPlayer": true,
+"classPlayerDay": 32,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 2,
+"explorer/cartographer": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:expedition": 2,
+"player:starvation": 1,
+"player:combat": 5,
+"monster:combat": 14,
+"villager:monster": 4,
+"person:alien": 1,
+"person:combat": 1,
+"villager:Old Stare": 1,
+"villager:The Congregation": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 13,
+"days": 50,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 18,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 6,
+"player:combat": 3,
+"villager:monster": 1,
+"villager:sickness": 3,
+"monster:combat": 10,
+"monster:expedition": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:starvation": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 14,
+"days": 90,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 19,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 22,
+"classVillagers": 1,
+"subclasses": {
+"hunter/beastmaster": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 8,
+"verbVillager": 0,
+"verbs": {
+"p:pack_hunt": 8
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 3,
+"monster:villager combat": 4,
+"player:combat": 8,
+"monster:combat": 14,
+"person:combat": 6,
+"villager:monster": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 15,
+"days": 98,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 23,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:expedition": 1,
+"monster:combat": 22,
+"player:combat": 3,
+"villager:monster": 4,
+"villager:Big Big": 1,
+"villager:The Redactor": 1,
+"player:lockjaw": 1,
+"person:alien": 1,
+"person:combat": 2,
+"player:dehydration": 1,
+"player:contest": 1,
+"player:sickness": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 16,
+"days": 33,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 17,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 32,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 4,
+"player:combat": 1,
+"villager:a wound that wouldn't close": 2,
+"villager:sickness": 2,
+"player:the expedition": 1,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 17,
+"days": 111,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 23,
+"vHolders": 15,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 2,
+"villager:the thing with headlights for eyes, standing too still": 1,
+"monster:villager combat": 6,
+"monster:combat": 10,
+"villager:sickness": 4,
+"player:starvation": 1,
+"player:contest": 1,
+"villager:thirst": 4,
+"villager:monster": 3,
+"villager:a wound that wouldn't close": 1,
+"player:combat": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 18,
+"days": 64,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 19,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 3,
+"monster:combat": 17,
+"villager:monster": 1,
+"player:combat": 1,
+"villager:thirst": 3,
+"player:sickness": 1,
+"villager:starvation": 5,
+"person:combat": 1,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 19,
+"days": 118,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 34,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 3,
+"verbs": {
+"v:rage": 3
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 37,
+"villager:sickness": 7,
+"villager:monster": 2,
+"villager:contest": 1,
+"player:sickness": 1,
+"person:combat": 4
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 20,
+"days": 101,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 22,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"player:combat": 4,
+"villager:monster": 6,
+"monster:combat": 14,
+"person:combat": 8,
+"monster:expedition": 1,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 21,
+"days": 91,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 36,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 67,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 2
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:apex_predator",
+"v:apex_predator"
+],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"monster:combat": 6,
+"person:combat": 4,
+"player:contest": 1,
+"monster:expedition": 1,
+"villager:monster": 3
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 22,
+"days": 70,
+"end": "village-dead",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 17,
+"vHolders": 10,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 30,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 1,
+"person:combat": 2,
+"person:alien": 2,
+"player:combat": 2,
+"villager:monster": 2,
+"player:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 23,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 45,
+"vHolders": 18,
+"classPlayer": true,
+"classPlayerDay": 73,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 2,
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 1,
+"ascVillager": 2,
+"ascPaths": [
+"v:living_garden",
+"v:living_garden",
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 8,
+"verbs": {
+"v:rage": 8
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 14,
+"villager:monster": 10,
+"monster:combat": 2,
+"monster:expedition": 1,
+"player:lockjaw": 1,
+"player:combat": 1,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 24,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 23,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 3,
+"subclasses": {
+"forager/feaster": 2,
+"forager/gardener": 1
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden",
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"person:combat": 4,
+"player:combat": 3,
+"monster:combat": 12,
+"monster:villager combat": 4,
+"person:alien": 1,
+"player:contest": 1,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 25,
+"days": 150,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 27,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 102,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 3,
+"verbs": {
+"v:pocket_sand": 2,
+"v:rage": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"player:combat": 4,
+"monster:combat": 20,
+"monster:expedition": 2,
+"person:combat": 9,
+"player:lockjaw": 1,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 26,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 42,
+"vHolders": 18,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 5,
+"subclasses": {
+"hunter/stalker": 3,
+"forager/feaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 1,
+"ascVillager": 2,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 1,
+"verbs": {
+"v:rage": 1
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:combat": 19,
+"monster:villager combat": 5,
+"person:combat": 3,
+"player:combat": 1,
+"villager:monster": 11,
+"person:alien": 1,
+"player:dehydration": 1,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 27,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 25,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 14,
+"monster:expedition": 2,
+"villager:monster": 2,
+"person:ambush": 1,
+"person:alien": 1,
+"person:combat": 4,
+"player:combat": 3
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 28,
+"days": 94,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 16,
+"vHolders": 10,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"villager:monster": 2,
+"monster:combat": 40,
+"monster:villager combat": 2,
+"player:combat": 1,
+"person:alien": 1,
+"villager:Ugly-Eyes": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:sickness": 1,
+"person:combat": 4,
+"player:contest": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 29,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 50,
+"classVillagers": 3,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1,
+"forager/feaster": 2
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 3,
+"verbs": {
+"v:rage": 3
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 2,
+"monster:villager combat": 10,
+"villager:monster": 4,
+"monster:combat": 12,
+"player:combat": 4,
+"person:combat": 7,
+"player:the expedition": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 30,
+"days": 84,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 21,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 4,
+"verbs": {
+"v:rage": 4
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:combat": 23,
+"person:combat": 10,
+"villager:contest": 1,
+"player:starvation": 2,
+"monster:expedition": 2,
+"villager:monster": 1,
+"player:combat": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 31,
+"days": 78,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 17,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 31,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 11,
+"monster:expedition": 1,
+"player:combat": 4,
+"player:sickness": 1,
+"person:combat": 7,
+"monster:combat": 10,
+"villager:monster": 5
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 32,
+"days": 117,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 28,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 22,
+"classVillagers": 2,
+"subclasses": {
+"forager/feaster": 2,
+"hunter/stalker": 2
+},
+"ascPlayer": 1,
+"ascVillager": 2,
+"ascPaths": [
+"p:apex_predator",
+"v:apex_predator",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 1,
+"verbs": {
+"v:pocket_sand": 1
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"player:starvation": 1,
+"villager:Big-Eyes": 1,
+"monster:combat": 12,
+"player:lockjaw": 1,
+"player:combat": 2,
+"person:combat": 4,
+"monster:expedition": 1,
+"person:alien": 2,
+"villager:monster": 5,
+"player:dehydration": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 33,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 41,
+"vHolders": 19,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:combat": 19,
+"villager:sickness": 6,
+"monster:villager combat": 5,
+"villager:a wound that wouldn't close": 2,
+"person:alien": 1,
+"villager:thirst": 1,
+"villager:monster": 4,
+"person:combat": 3
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 34,
+"days": 117,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 30,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 28,
+"classVillagers": 0,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:combat": 7,
+"monster:villager combat": 4,
+"villager:a wound that wouldn't close": 1,
+"player:starvation": 1,
+"player:combat": 2,
+"villager:monster": 7,
+"person:combat": 3
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 35,
+"days": 105,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 26,
+"vHolders": 15,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 9,
+"person:ambush": 1,
+"monster:combat": 12,
+"person:alien": 1,
+"monster:expedition": 2,
+"person:combat": 8,
+"player:combat": 4,
+"villager:monster": 3,
+"player:sickness": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 36,
+"days": 76,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 20,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 30,
+"classVillagers": 0,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 17,
+"villager:Speedbump": 1,
+"player:combat": 5,
+"monster:expedition": 2,
+"person:alien": 1,
+"person:combat": 8,
+"villager:monster": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 37,
+"days": 92,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 21,
+"classPlayer": true,
+"classPlayerDay": 24,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"player:combat": 3,
+"monster:combat": 20,
+"player:sickness": 2,
+"player:dehydration": 1,
+"person:combat": 16,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 38,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 16,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 46,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:apex_predator"
+],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 10,
+"monster:expedition": 6,
+"monster:combat": 19,
+"player:dehydration": 1,
+"player:combat": 3,
+"player:the night": 1,
+"person:combat": 7,
+"player:lockjaw": 1,
+"villager:monster": 2
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 39,
+"days": 95,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 26,
+"vHolders": 17,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 9,
+"monster:combat": 18,
+"player:combat": 2,
+"person:combat": 7,
+"villager:sickness": 2,
+"villager:a wound that wouldn't close": 2,
+"player:lockjaw": 1,
+"villager:monster": 1,
+"monster:expedition": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 40,
+"days": 111,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 39,
+"vHolders": 21,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"p:living_garden",
+"v:apex_predator"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"person:ambush": 1,
+"monster:combat": 7,
+"person:combat": 4,
+"player:the expedition": 1,
+"villager:monster": 10,
+"monster:expedition": 3,
+"person:alien": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 41,
+"days": 100,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 24,
+"vHolders": 10,
+"classPlayer": true,
+"classPlayerDay": 62,
+"classVillagers": 2,
+"subclasses": {
+"forager/gardener": 1,
+"hunter/beastmaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 1,
+"ascPaths": [
+"v:apex_predator"
+],
+"verbPlayer": 13,
+"verbVillager": 0,
+"verbs": {
+"p:bribe": 12,
+"p:pack_hunt": 1
+},
+"passives": {
+"p:bribe": 12
+},
+"deaths": {
+"monster:villager combat": 8,
+"monster:expedition": 1,
+"player:dehydration": 1,
+"villager:monster": 7,
+"monster:combat": 11,
+"player:combat": 4,
+"person:alien": 1
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 43,
+"days": 76,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 12,
+"vHolders": 7,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"player:combat": 8,
+"monster:expedition": 3,
+"monster:villager combat": 5,
+"monster:combat": 33,
+"player:dehydration": 1,
+"person:combat": 7
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 44,
+"days": 145,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 23,
+"vHolders": 12,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 1,
+"verbs": {
+"v:rage": 1
+},
+"passives": {},
+"deaths": {
+"villager:a crow that watches too long and blinks too little": 1,
+"monster:villager combat": 5,
+"monster:combat": 15,
+"monster:expedition": 2,
+"villager:The Paparazzo": 1,
+"villager:monster": 1,
+"villager:a wound that wouldn't close": 1,
+"person:combat": 7,
+"player:combat": 5
+},
+"gates": {
+"p": {},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 45,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 34,
+"classVillagers": 2,
+"subclasses": {
+"forager/feaster": 2,
+"hunter/stalker": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"villager:a crow that watches too long and blinks too little": 1,
+"person:ambush": 1,
+"villager:monster": 2,
+"monster:combat": 16,
+"player:combat": 4,
+"person:alien": 2,
+"person:combat": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 46,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 34,
+"vHolders": 20,
+"classPlayer": true,
+"classPlayerDay": 28,
+"classVillagers": 0,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 2,
+"verbs": {
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 6,
+"person:ambush": 1,
+"player:combat": 3,
+"person:combat": 1,
+"monster:combat": 9,
+"player:contest": 1,
+"villager:The Redactor": 1,
+"person:alien": 1,
+"player:sickness": 1,
+"player:dehydration": 1,
+"villager:monster": 12
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 47,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 9,
+"classPlayer": true,
+"classPlayerDay": 33,
+"classVillagers": 4,
+"subclasses": {
+"forager/feaster": 3,
+"hunter/stalker": 3
+},
+"ascPlayer": 1,
+"ascVillager": 2,
+"ascPaths": [
+"p:apex_predator",
+"v:living_garden",
+"v:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"player:combat": 2,
+"monster:combat": 15,
+"monster:villager combat": 7,
+"monster:expedition": 2,
+"player:sickness": 1,
+"villager:The Big Beast": 1,
+"villager:monster": 1,
+"player:contest": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 48,
+"days": 33,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 15,
+"vHolders": 11,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 2,
+"monster:combat": 12,
+"player:combat": 1,
+"villager:sickness": 2,
+"villager:monster": 5,
+"villager:experiment": 1,
+"villager:a wound that wouldn't close": 1,
+"villager:starvation": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 49,
+"days": 87,
+"end": "village-lost",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": true,
+"vAbil": 20,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 68,
+"classVillagers": 0,
+"subclasses": {
+"hunter/beastmaster": 1,
+"brawler/juggernaut": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 3,
+"verbVillager": 0,
+"verbs": {
+"p:pack_hunt": 3
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 30,
+"villager:monster": 2,
+"villager:sickness": 3,
+"player:combat": 2,
+"villager:a wound that wouldn't close": 2,
+"person:combat": 7,
+"villager:Big Ugly": 1,
+"player:dehydration": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "famine"
+},
+{
+"seed": 50,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 27,
+"vHolders": 15,
+"classPlayer": true,
+"classPlayerDay": 79,
+"classVillagers": 0,
+"subclasses": {
+"hunter/beastmaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 1,
+"verbVillager": 0,
+"verbs": {
+"p:pack_hunt": 1
+},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 7,
+"monster:combat": 18,
+"villager:monster": 3,
+"villager:a wound that wouldn't close": 2,
+"villager:sickness": 3,
+"person:combat": 7,
+"player:combat": 2,
+"person:alien": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 51,
+"days": 150,
+"end": "survived",
+"won": 0,
+"invited": 0,
+"sat": 0,
+"villageLost": false,
+"vAbil": 29,
+"vHolders": 14,
+"classPlayer": true,
+"classPlayerDay": 107,
+"classVillagers": 1,
+"subclasses": {
+"forager/feaster": 2
+},
+"ascPlayer": 1,
+"ascVillager": 1,
+"ascPaths": [
+"v:living_garden",
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 5,
+"monster:combat": 20,
+"player:combat": 1,
+"person:alien": 5,
+"player:dehydration": 1,
+"villager:monster": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 52,
+"days": 93,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 12,
+"classPlayer": true,
+"classPlayerDay": 26,
+"classVillagers": 0,
+"subclasses": {
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 11,
+"verbs": {
+"v:rage": 11
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 16,
+"monster:combat": 7,
+"player:sickness": 1,
+"villager:monster": 8,
+"player:combat": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 53,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 22,
+"vHolders": 9,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:living_garden"
+],
+"verbPlayer": 3,
+"verbVillager": 6,
+"verbs": {
+"p:switcheroo": 3,
+"v:rage": 6
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 17,
+"monster:expedition": 3,
+"villager:monster": 4,
+"player:combat": 2
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {
+"cls": true
+}
+},
+"lostCause": null
+},
+{
+"seed": 54,
+"days": 97,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 27,
+"vHolders": 14,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 1,
+"forager/feaster": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:expedition": 1,
+"monster:villager combat": 10,
+"monster:combat": 11,
+"person:ambush": 1,
+"villager:monster": 2,
+"player:sickness": 1,
+"person:combat": 4,
+"person:alien": 1,
+"player:the night": 1,
+"player:combat": 2
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 55,
+"days": 75,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 17,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 21,
+"classVillagers": 0,
+"subclasses": {
+"hunter/stalker": 1,
+"hunter/beastmaster": 1,
+"forager/gardener": 1
+},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 2,
+"verbVillager": 2,
+"verbs": {
+"p:coin_guard": 2,
+"v:rage": 2
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 13,
+"monster:expedition": 1,
+"player:combat": 8,
+"monster:combat": 12,
+"person:ambush": 1,
+"person:combat": 6,
+"person:alien": 1,
+"villager:monster": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 56,
+"days": 101,
+"end": "over-other",
+"won": 1,
+"invited": 1,
+"sat": 1,
+"villageLost": false,
+"vAbil": 28,
+"vHolders": 17,
+"classPlayer": true,
+"classPlayerDay": 30,
+"classVillagers": 1,
+"subclasses": {
+"explorer/cartographer": 1,
+"forager/feaster": 1,
+"hunter/stalker": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:apex_predator"
+],
+"verbPlayer": 3,
+"verbVillager": 3,
+"verbs": {
+"v:rage": 3,
+"p:foresight": 3
+},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"monster:expedition": 1,
+"villager:monster": 7,
+"monster:combat": 16,
+"player:combat": 2,
+"person:combat": 2,
+"villager:sickness": 1,
+"villager:a wound that wouldn't close": 1
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true
+},
+"v": {}
+},
+"lostCause": null
+},
+{
+"seed": 57,
+"days": 92,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 18,
+"vHolders": 11,
+"classPlayer": true,
+"classPlayerDay": 54,
+"classVillagers": 2,
+"subclasses": {
+"hunter/stalker": 2,
+"forager/gardener": 1
+},
+"ascPlayer": 1,
+"ascVillager": 0,
+"ascPaths": [
+"p:living_garden"
+],
+"verbPlayer": 0,
+"verbVillager": 0,
+"verbs": {},
+"passives": {},
+"deaths": {
+"monster:villager combat": 7,
+"person:ambush": 1,
+"monster:combat": 6,
+"player:combat": 4,
+"villager:monster": 2,
+"person:combat": 6
+},
+"gates": {
+"p": {
+"cls": true,
+"kit": true,
+"pay": true,
+"kitDeed": true
+},
+"v": {}
+},
+"lostCause": "no-successor"
+},
+{
+"seed": 58,
+"days": 72,
+"end": "village-lost",
+"won": 0,
+"invited": 1,
+"sat": 0,
+"villageLost": true,
+"vAbil": 12,
+"vHolders": 9,
+"classPlayer": false,
+"classPlayerDay": null,
+"classVillagers": 0,
+"subclasses": {},
+"ascPlayer": 0,
+"ascVillager": 0,
+"ascPaths": [],
+"verbPlayer": 5,
+"verbVillager": 0,
+"verbs": {
+"p:bribe": 5
+},
+"passives": {
+"p:bribe": 5
+},
+"deaths": {
+"monster:villager combat": 4,
+"monster:combat": 21,
+"person:combat": 9,
+"player:combat": 6,
+"player:contest": 1
+},
+"gates": {
+"p": {},
+"v": {}
+},
+"lostCause": "no-successor"
+}
+]
+}

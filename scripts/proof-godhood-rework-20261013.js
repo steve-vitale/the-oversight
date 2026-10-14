@@ -37,8 +37,13 @@ const T = K.reporter('proof-godhood-rework-20261013');
   const noPay = ['static_toss', 'bloodhound', 'lucky_rock', 'night_eyes'];
   const t3 = G.godhoodCloseness(build(noPay), apex, 85);
   T.ok('T3 payoff required: 4 stalker abilities without Trophy Room fail', t3.complete === false && t3.coreHit === false && t3.classOk === true);
-  const t4 = G.godhoodCloseness(build(['trophy_room', 'static_toss', 'bloodhound']), apex, 85);
-  T.ok('T4 three path abilities: close, not complete', t4.close === true && t4.complete === false);
+  // abilitiesNeeded is data (godpaths.json rules.capstone; 3 since
+  // godpath-buff 2026-10-14): exactly that many completes, one fewer doesn't.
+  const need = apex.requires.abilitiesNeeded;
+  const t4 = G.godhoodCloseness(build(stalker.slice(0, need)), apex, 85);
+  T.ok(`T4 ${need} path abilities (abilitiesNeeded) with payoff + deed: complete`, t4.close === true && t4.complete === true, JSON.stringify(t4));
+  const t4b = G.godhoodCloseness(build(stalker.slice(0, need - 1)), apex, 85);
+  T.ok(`T4b ${need - 1} path abilities: not complete`, t4b.complete === false);
   const split = stalker.concat(['rage', 'blood_frenzy', 'cannibal_frenzy', 'blood_magic']);
   const t5 = G.godhoodCloseness(build(split), apex, 85);
   T.ok('T5 class required: a 4/4 hunter-brawler tie names no class and does not ascend', t5.classOk === false && t5.complete === false);
