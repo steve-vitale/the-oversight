@@ -8638,7 +8638,9 @@
         src.playbackRate.value = opts.pitch || 1;
         src.connect(voiceBus);
         voiceSrc = src;
-        src.onended = () => { if (voiceSrc === src) voiceSrc = null; };
+        // opts.onended (presentation pass A): the day-7 cinematic chains the
+        // System's lines; a superseded line (stopVoice) never calls it.
+        src.onended = () => { if (voiceSrc === src) { voiceSrc = null; if (typeof opts.onended === 'function') { try { opts.onended(); } catch (e) { console.warn('voice onended', e && e.message); } } } };
         src.start();
         return true;
       } catch (e) { return false; }
@@ -12729,6 +12731,10 @@
       setBusVolume(bus, v) { return setBusVolume(bus, v); },
       getBusVolume(bus) { return getBusVolume(bus); },
       playVoice(blob, opts) { return playVoice(blob, opts); },
+      // FEEL PORT (presentation pass A, 2026-10-14): feel-audio.js registers
+      // its synth voices on this graph (same buses, mute, compressor) without
+      // growing this file. null when muted or no context: callers stay silent.
+      port() { if (!ensure() || muted) return null; return { ctx, sfx: sfxBus, music: musicBus, noise, duck: duckMusic }; },
       stopVoice() { stopVoice(); },
       round(d) { roundTick(d); }, // the System is counting — it gets heavier each round
       // AUDIO COMPLETION (Steve 2026-10-06): these fired with no synth at all.
@@ -13929,9 +13935,34 @@
     const overlay = document.createElement('div');
     overlay.className = 'system-arrival-overlay';
     document.body.appendChild(overlay);
+    // SOUND (presentation pass A, 2026-10-14): the cinematic used to play
+    // silent. Now: an arrival sting + haptic (feel.js systemArrival), a held
+    // bed whose root climbs with each tapped beat, and the System's recorded
+    // ElevenLabs lines (voice-system.js) chained per beat. Every piece
+    // degrades to silence — muted, no context, missing manifest or MP3.
+    let voiceTok = 0;
+    function arrivalAudio(fn, what) {
+      try { fn(); } catch (e) { console.warn('[arrival audio] ' + what, e && e.message); }
+    }
+    function speakBeat(b) {
+      const tok = ++voiceTok;
+      const ids = (Game.arrivalVoiceIds && Game.arrivalVoiceIds(b)) || [];
+      const next = (k) => {
+        if (tok !== voiceTok || done || k >= ids.length || !Game.playSystemLine) return;
+        Promise.resolve(Game.playSystemLine(ids[k], { onended: () => setTimeout(() => next(k + 1), 350) }))
+          .then(st => { if (st !== 'playing' && tok === voiceTok) next(k + 1); })
+          .catch(e => console.warn('[arrival voice]', e && e.message));
+      };
+      // a beat's voice starts after its first line has landed on screen
+      setTimeout(() => next(0), 700);
+    }
+    arrivalAudio(() => Game.feel && Game.feel('systemArrival', {}), 'sting');
     function finish() {
       if (done) return;
       done = true;
+      voiceTok++;
+      arrivalAudio(() => { if (Game.audio && Game.audio.stopVoice) Game.audio.stopVoice(); }, 'stopVoice');
+      arrivalAudio(() => { if (Game.audio && Game.audio.arrivalStop) Game.audio.arrivalStop(); }, 'bed stop');
       // Remove ALL arrival overlays, not just ours — a stray from an older
       // build (or a re-entry that slipped through) must never trap the player.
       try { document.querySelectorAll('.system-arrival-overlay').forEach(el => el.remove()); } catch (e) {}
@@ -13955,9 +13986,13 @@
       const btn = overlay.querySelector('.arrival-next');
       if (btn) btn.onclick = () => {
         i++;
+        arrivalAudio(() => { if (Game.audio && Game.audio.stopVoice) Game.audio.stopVoice(); }, 'stopVoice');
         if (i >= beats.length) finish();
         else showBeat();
       };
+      arrivalAudio(() => { if (Game.audio && Game.audio.arrivalBed) Game.audio.arrivalBed({ beat: i }); }, 'bed');
+      arrivalAudio(() => speakBeat(b), 'voice');
+      if (i > 0) arrivalAudio(() => Game.haptic && Game.haptic('soft'), 'haptic');
     }
     showBeat();
     // Backstop: never trap the player behind the overlay.
@@ -14962,6 +14997,15 @@
       + `<span id="set-voicesw">${setSwitch(voiceOn)}</span></div>`
       + dlRowHtml
       + `</div>`
+      // FEEL (presentation pass A, 2026-10-14): vibration (only where the
+      // device can) and reduced motion (also follows the OS setting).
+      + `<div style="padding:14px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Feel</div>`
+      + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
+      + (Game.hapticsSupported && Game.hapticsSupported()
+        ? `<div id="set-hapticrow" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.07)"><span style="font-size:15px">Vibration<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">Hits, deaths, level-ups, the big moments</span></span><span id="set-hapticsw">${setSwitch(!!(Game.hapticsEnabled && Game.hapticsEnabled()))}</span></div>`
+        : '')
+      + `<div id="set-motionrow" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer"><span style="font-size:15px">Reduce motion<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">No shaking or bursts — effects fade instead</span></span><span id="set-motionsw">${setSwitch(!!(Game.reducedMotion && Game.reducedMotion()))}</span></div>`
+      + `</div>`
       + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
       + `</div>`;
     document.body.appendChild(ov);
@@ -15030,6 +15074,19 @@
         dlActive = false;
         setSt('Download failed — try again');
       });
+    };
+    const hrow = document.getElementById('set-hapticrow');
+    if (hrow) hrow.onclick = () => {
+      const on = !(Game.hapticsEnabled && Game.hapticsEnabled());
+      if (Game.setHaptics) Game.setHaptics(on);
+      if (on && Game.haptic) Game.haptic('crit');
+      const sw = document.getElementById('set-hapticsw'); if (sw) sw.innerHTML = setSwitch(on);
+    };
+    const mrow = document.getElementById('set-motionrow');
+    if (mrow) mrow.onclick = () => {
+      const on = !(Game.reducedMotion && Game.reducedMotion());
+      if (Game.setReducedMotion) Game.setReducedMotion(on);
+      const sw = document.getElementById('set-motionsw'); if (sw) sw.innerHTML = setSwitch(!!(Game.reducedMotion && Game.reducedMotion()));
     };
     document.getElementById('set-muterow').onclick = () => {
       try { Game.audio.toggleMute(); } catch (e) {}
@@ -17514,6 +17571,11 @@
     try {
       if (document.body.classList.contains('titan-fight')) _gridN = 12;
     } catch (e) {}
+    // GUARD (presentation pass A, 2026-10-14): a titan summoned onto a 9x9
+    // node (the Table's trial by combat, _tableTrialDirect) set titan-fight
+    // with a 9-row cell array, and cells[9][0] threw — the whole screen
+    // stopped rendering. Never draw more rows than exist.
+    _gridN = Math.min(_gridN, (cells && cells.length) || 9);
     for (let cy = 0; cy < _gridN; cy++) {
       html += '<div class="drow">';
       for (let cx = 0; cx < _gridN; cx++) {
