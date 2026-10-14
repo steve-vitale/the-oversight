@@ -31,10 +31,20 @@ const fs = require('fs');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 
 const ARMED = process.env.OVERSTOCK === '1';
+let OVERLAYER = null;
+if (ARMED) {
+  try { OVERLAYER = require('./policies/overstock'); } catch (e) {
+    if (e.code === 'MODULE_NOT_FOUND') {
+      console.log('INFO-SKIP: overstock layer deleted per kill protocol (NO-GO at pilot); pilot data pre-kill in evidence/2026-10-14/sim-overstock2-b.md');
+      process.exit(0);
+    }
+    throw e;
+  }
+}
 const POLICY_REGISTRY = ARMED ? {
   // UNWRAP: overstock exports { overlead, overbelong } named objects.
-  leadcourt: require('./policies/overstock').overlead,
-  belongseek: require('./policies/overstock').overbelong,
+  leadcourt: OVERLAYER.overlead,
+  belongseek: OVERLAYER.overbelong,
 } : {
   leadcourt: require('./policies/leadcourt').leadcourt,
   belongseek: require('./policies/belongseek').belongseek,
