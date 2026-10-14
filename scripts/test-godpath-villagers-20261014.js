@@ -285,6 +285,50 @@ const T = K.reporter('test-godpath-villagers-20261014');
     T.ok('tb: a well-fed villager\'s strike carries the overcharge', Math.abs(GP.villagerStrikeMult(Game, A, m) - Game.overchargeMult()) < 1e-9);
   }
 
+  T.section('ascension: the lived-in deed (rules.capstone.deedClassDays)');
+  {
+    if (Game.tbfight) Game.tbfight = null;
+    const GH = S.Godhood;
+    const s = Game.state.scholar;
+    const rule = ((Game.data.godpaths || S.GODPATHS).rules || {}).capstone || {};
+    T.ok('data: deedClassDays is set and the payoff + deed gates stay on', rule.deedClassDays > 0 && rule.requirePayoff !== false && rule.requireDeed !== false, JSON.stringify(rule).slice(0, 120));
+    K.openSlots(Game, 6);
+    s.abilities = [];
+    for (const id of ['lucky_rock', 'bloodhound', 'static_toss', 'trophy_room']) K.giveAbility(Game, id, { force: true });
+    s.synergies = []; s.activeSynergies = [];
+    const rec = Game.recognizeClass('player');
+    T.ok('class named: Stalker of the Apex Predator', rec && rec.path === 'hunter' && rec.subclass === 'stalker', JSON.stringify(rec));
+    const gh = GH.godhoods().find(g => g.path === 'hunter');
+    const n = rule.deedClassDays;
+    rec.since = 80;
+    const early = GH.godhoodCloseness(s, gh, 80 + n - 1);
+    const late = GH.godhoodCloseness(s, gh, 80 + n);
+    T.ok(`held ${n - 1} days: the deed is not yet done (no synergy)`, !early.synergy && !early.complete, JSON.stringify(early));
+    T.ok(`held ${n} days: the lived-in deed completes the god (payoff + 4 + class + day 80+)`, late.synergy && late.complete, JSON.stringify(late));
+    s.abilities = s.abilities.filter(a => (a.id || a) !== 'trophy_room');
+    Game.recognizeClass('player');
+    const noPay = GH.godhoodCloseness(s, gh, 80 + n + 5);
+    T.ok('without the subclass payoff, no god (the payoff gate holds)', !noPay.complete);
+    // THE PAYOFF FROM ANY TRACK (rules.offers.payoffAnyTrack): a named
+    // Stalker levelling FIELD is offered Trophy Room (a combat-kit payoff)
+    s.abilities = [];
+    for (const id of ['lucky_rock', 'bloodhound', 'static_toss']) K.giveAbility(Game, id, { force: true });
+    const r2 = Game.recognizeClass('player');
+    const kits = Game.trackData().kits;
+    const offers = Game.levelUpOffers('field').map(o => o.id || o);
+    T.ok('setup: Stalker named, Trophy Room is not in the field kit', r2 && r2.subclass === 'stalker' && kits.field.indexOf('trophy_room') < 0 && kits.combat.indexOf('trophy_room') >= 0);
+    T.ok('a named class\'s payoff is offered on another track\'s sheet', offers.includes('trophy_room'), offers.join(','));
+    T.ok('...with the class still on the sheet\'s other offers (one swap)', offers.length === (Game.trackData().offerSize || 3));
+    // and for a villager: the same function
+    hold(vidB, ['lucky_rock', 'bloodhound', 'static_toss']);
+    Game.recognizeClass(vidB);
+    const vo = Game.villagerLevelUpOffers(vidB, 'field');
+    T.ok('villager: the same payoff lean (same function)', vo.includes('trophy_room'), vo.join(','));
+    hold(vidB, []);
+    s.abilities = [];
+    Game.recognizeClass('player');
+  }
+
   T.section('wiring');
   {
     const src = K.readSrc('src/js/fieldFights.js') + K.readSrc('src/js/game.js');

@@ -231,6 +231,18 @@
         if (pi >= 0) {
           const slot = out.findIndex(o => pathOf(o) !== rec.path);
           if (slot >= 0) { out[slot] = rest.splice(pi, 1)[0]; out._leaned = true; }
+        } else if (rec.subclass && (((data() || {}).rules || {}).offers || {}).payoffAnyTrack && holderMagicIds(who || 'player').indexOf(payoff) < 0) {
+          // THE PAYOFF FROM ANY TRACK (godpath-buff 2026-10-14): a named
+          // class's payoff often sits in another track's kit (the Stalker's
+          // Trophy Room is a combat ability; stalkers level field). Once the
+          // System has named the class, any level-up sheet may carry it —
+          // the class, not the track, is what the System is completing.
+          // Data: godpaths.json rules.offers.payoffAnyTrack.
+          const slot = out.findIndex(o => pathOf(o) !== rec.path);
+          const pd = defOf(payoff);
+          if (slot >= 0 && pd && pd.lane === 'magic') {
+            out[slot] = pd; out._leaned = true;
+          }
         }
       }
       if (rec && !rec.lapsed && out.length && !out.some(o => pathOf(o) === rec.path)) {
