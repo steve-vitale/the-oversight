@@ -169,9 +169,17 @@
           if (st) {
             st.graceHeals = st.graceHeals || {};
             st.graceHeals[targetId] = (st.graceHeals[targetId] || 0) + 1;
-            if (st.graceHeals[targetId] === 2) {
-              game.say('BATTLEFIELD GRACE: two touches — they\'re back on their feet with a free action! (You\'re winded — no action next turn.)');
+            // abilities.json: 3 heals trigger it; deepening L2: 2 heals.
+            let lvl = 1;
+            try { lvl = game.abilityLevel ? game.abilityLevel('battlefield_grace') : 1; } catch (e) { console.warn('[buildarounds] grace level:', e && e.message); }
+            const need = lvl >= 2 ? 2 : 3;
+            if (st.graceHeals[targetId] === need) {
+              game.say('BATTLEFIELD GRACE: ' + (need === 2 ? 'two' : 'three') + ' touches — they\'re back on their feet with a free action! (You\'re winded — no action next turn.)');
               try { game.audioEvent('buildaround', { path: 'caregiver', id: 'battlefield_grace' }); } catch (e) {}
+              // KNOWN GAP (audit 2026-10-14, needs Steve): game.grantFreeAction
+              // does not exist and nothing reads p.winded, so neither the free
+              // action nor the winded cost happens yet. addHealth also only
+              // ever reports targetId 'player' (self-heals), not allies.
               try { game.grantFreeAction(targetId); } catch (e) {}
               // Cost: the healer gives everything. Winded next turn.
               try {
