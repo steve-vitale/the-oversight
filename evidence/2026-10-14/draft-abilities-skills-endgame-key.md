@@ -170,3 +170,77 @@ be overturned**; each is isolated in data or one function.
 6. **Best ending: The Taken come home.** Half the adults were taken on day zero
    and the children sit in stasis pods (`docs/KIN.md`). The key adds that
    outcome to whichever Table path you play; it's still losable.
+
+---
+
+## The best ending for humanity — "THE HOSTS" (Steve 2026-10-14: "Think up of a good ending for humanity in this case relative to the other endings.")
+
+### Where it sits relative to the other seven
+
+Every existing ending is a **bargain inside the System's frame**. The Table
+prices humanity, and you choose the shape of the price:
+
+| Ending | The deal |
+|---|---|
+| Feared | priced as a threat |
+| Indispensable | priced as a supplier |
+| Beloved | priced as entertainment |
+| Witness | priced as a testimony |
+| Defiant | buys its freedom at a cost |
+| Assimilated | sells itself |
+| Relay | merges with the machinery |
+
+All seven accept that the Table judges humanity.
+
+The key ending is the only one where **nobody prices humanity**, because the
+thing doing the pricing is gone. The Network was the broadcast given a body.
+Kill it and the show is off the air: the audience can't watch, and the System
+has no ratings to price you by. You don't arrive at the Table as a contestant.
+**You arrive as the one who ended the show, and you set the table.**
+
+### What happens
+
+It pays off the game's spine, Table law 7: *food is humanity's superpower;
+the galaxy forgot food.*
+
+- **Humanity hosts.** The too-many-angled beings came to judge a species that
+  needs to eat. You cook for them. For the first time in their history, they
+  eat.
+- **The Taken come home to that dinner:**
+  - the half of the adults taken on day zero
+  - the children out of the stasis pods (`docs/KIN.md`)
+
+  The System's leverage was the show. With the show gone, there's nothing left
+  to hold them for.
+- **Title: THE HOSTS.** A double meaning: the show's hosts are replaced, and
+  humanity is the host at the meal.
+
+### Light and dark (still earned by how you played)
+
+- **Light: "An Open Table."** You feed them, and teach them that hunger is a
+  gift. The Taken walk home through a galaxy that has started to cook.
+  Humanity isn't on the menu or on the schedule; it's at the head of the table.
+- **Dark: "The New Network."** You take the broadcaster's chair. The Taken come
+  home, but the cameras turn around. The galaxy is now *your* audience,
+  dependent on what humans feed them. You became the thing you killed, and you
+  liked the view.
+
+### Each path flavors the dinner
+
+The key adds this outcome to whichever path you walk, so it's never a single
+universal cutscene:
+
+| Path | How the dinner plays |
+|---|---|
+| Feared | they eat because they don't dare refuse |
+| Indispensable | no contract, a recipe |
+| Beloved | the most-watched dinner never broadcast |
+| Witness | the judges are guests at your table |
+| Defiant | you paid nothing; they came anyway |
+| Assimilated | the absorbed absorb you back, through the stomach |
+| Relay | the switchboard goes silent; you speak in person |
+
+### Still losable
+
+The path's own challenge, and its fail rules, still run first. The key only
+adds the final outcome you're playing for.
