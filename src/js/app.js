@@ -453,18 +453,20 @@
         contestRow = `<div class="statrow contest-pending">📺 CONTEST: ${esc(cname)} — ${who} in ${daysLeft}d</div>`;
       }
     } catch (e) {}
-    function chip(icon, val, pct, low, title, click) {
+    function chip(icon, val, pct, low, title, click, extra) {
       const p = Math.max(0, Math.min(100, pct));
       const clickAttr = click ? ` data-statclick="${click}" style="cursor:pointer"` : '';
-      return `<div class="statc${low ? ' low' : ''}"${clickAttr} title="${esc(title || '')}"><span>${icon} ${val}</span><div class="sbar"><i style="width:${p}%"></i></div></div>`;
+      return `<div class="statc${low ? ' low' : ''}${extra ? ' ' + extra : ''}"${clickAttr} title="${esc(title || '')}"><span>${icon} ${val}</span><div class="sbar"><i style="width:${p}%"></i></div></div>`;
     }
     const sys = Game.state && Game.state.systemArrived;
     return `<div class="statgrid">` +
       chip('❤', Math.round(st.health), st.health, st.health < 35, 'Health') +
-      chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : '')) +
+      // THE HUNGER METER STAYS THE BIGGEST ELEMENT (DECISIONS.md 2026-10-03:
+      // "a visual joke about priorities"): full row, thickest bar, always.
+      chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : ''), null, 'statc-food') +
       chip('💧', st.hydration + '%' + (st.waterCleanL ? ' · ' + st.waterCleanL + 'L clean' : ''), st.hydration, st.hydration < 30, 'Hydration') +
       chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried', 'pack') +
-      (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration') : '') +
+      (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration', null, 'sys-ui') : '') +
       `</div>` + contestRow + beatsRowHTML() + afflictionRow(st);
   }
 
@@ -652,7 +654,7 @@
       </div>
       <p class="small" id="install-hint" style="display:none;opacity:.7"></p>
       <p class="small" style="margin-top:20px">slice 1: open expeditions. forage · eat · drink · bring it home.</p>
-      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
+      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:12px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
     // UI taps are covered by the global Game.uiBlip() capture listener (boot).
@@ -843,7 +845,7 @@
       <h1 class="title" style="font-size:22px">WHERE ARE YOU FROM?</h1>
       <p class="small">Tap where you're from. What you know grows there — it doesn't grow here.</p>
       <input id="ob-origin-search" type="text" placeholder="🔍 Search places..." autocomplete="off"
-        style="width:100%;padding:12px;margin:12px 0;background:#0a0f0a;color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+        style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
       <div id="origin-list"></div>
       <p class="small" style="opacity:.6;margin-top:12px">Don't see it? <a href="#" id="ob-origin-custom" style="color:#8a9a8a">Type it instead</a>.</p>`;
     render('');
@@ -934,7 +936,7 @@
       <h1 class="title" style="font-size:22px">NAME THIS EXPEDITION</h1>
       <p class="small">Every run gets a name. You'll see it in your saves.</p>
       <input id="ob-runname" type="text" maxlength="40" value="${esc(def)}" autocomplete="off" autocapitalize="words"
-        style="width:100%;padding:12px;margin:12px 0;background:#0a0f0a;color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+        style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
       <button class="btn" id="b-name-go">Begin</button>`;
     const input = document.getElementById('ob-runname');
     input.focus(); input.select();
@@ -2062,6 +2064,11 @@
       modal: !!opts.modal,
       dismissible: opts.dismissible !== false,
       onClose: opts.onClose || null,
+      // BESPOKE SHEETS (presentation B 2026-10-14): cls styles the sheet,
+      // and any [data-sheetpick=i] element in html fires buttons[i] (a
+      // button with hidden:true is not repeated in the button row).
+      cls: opts.cls || '',
+      onRender: opts.onRender || null,
     });
     sheetQueue.sort((a, b) => b.priority - a.priority);
     renderSheets();
@@ -2095,10 +2102,10 @@
     root.className = s.modal ? '' : 'nomodal';
     root.innerHTML = `
       <div class="sheet-backdrop"${s.dismissible && s.modal ? ' data-backdrop="1"' : ''}>
-        <div class="sheet" role="dialog">
+        <div class="sheet${s.cls ? ' ' + s.cls : ''}" role="dialog" aria-label="${esc(String(s.title).replace(/<[^>]*>/g, '').replace(/"/g, '&quot;'))}">
           <div class="sheet-head"><b>${s.title}</b>${s.dismissible ? '<button class="sheet-x" data-sheetx="1" aria-label="Close">\u2715</button>' : ''}</div>
           <div class="sheet-body">${s.html}</div>
-          ${s.buttons.length ? `<div class="sheet-btns">${s.buttons.map((b, i) =>
+          ${s.buttons.some(b => !b.hidden) ? `<div class="sheet-btns">${s.buttons.map((b, i) => b.hidden ? '' :
             `<button class="btn sm${b.primary ? '' : ' ghost'}" data-sheetbtn="${i}">${b.label}</button>`).join('')}</div>` : ''}
         </div>
       </div>`;
@@ -2106,9 +2113,9 @@
     if (x) x.onclick = () => closeSheet(s.id);
     const bd = root.querySelector('[data-backdrop]');
     if (bd) bd.onclick = (e) => { if (e.target === bd) closeSheet(s.id); };
-    root.querySelectorAll('[data-sheetbtn]').forEach(btn => {
+    root.querySelectorAll('[data-sheetbtn], [data-sheetpick]').forEach(btn => {
       btn.onclick = () => {
-        const b = s.buttons[+btn.dataset.sheetbtn];
+        const b = s.buttons[+(btn.dataset.sheetbtn != null ? btn.dataset.sheetbtn : btn.dataset.sheetpick)];
         if (!b) return;
         let keep = !!b.keepOpen;
         if (b.onClick) { try { const r = b.onClick(); if (r === 'keep') keep = true; } catch (e) {} }
@@ -13108,7 +13115,7 @@
     // === ATTACK: deliberate, two-tap. Violence against people is always a choice.
     // Not an accident, not a misclick. You tap once, it asks. You tap again, it's done.
     if (view.confirmAttack === villagerId) {
-      btns += ` <button class="btn sm" data-act="attackConfirm" style="border-color:#e05c5c;color:#e05c5c">⚔ Attack ${esc(titleName)}? Tap again — this can't be undone.</button>`;
+      btns += ` <button class="btn sm" data-act="attackConfirm" style="border-color:var(--bad-soft);color:var(--bad-soft)">⚔ Attack ${esc(titleName)}? Tap again — this can't be undone.</button>`;
     } else {
       btns += ` <button class="btn sm ghost" data-act="attackAsk" style="opacity:.55">⚔ Attack</button>`;
     }
@@ -13116,7 +13123,7 @@
     let challengeHtml = '';
     if (chal.cid === villagerId) {
       const taskName = (Game.delegateTasks()[chal.task] || {}).name || chal.task || 'work';
-      challengeHtml = `<div class="card" style="border-left:3px solid #e05c5c;margin:8px 0">
+      challengeHtml = `<div class="card" style="border-left:3px solid var(--bad-soft);margin:8px 0">
         <p class="small"><b>⚠ ${esc(titleName)} is challenging your lead.</b><br>
         "Let ME run the ${esc(taskName)}. People listen to me. You know they do."</p></div>`;
       btns = `<button class="btn sm" data-act="yield">Let them lead ${esc(taskName)}</button>
@@ -14032,18 +14039,36 @@
 
   // tableSheet: the galactic table. One final live choice, inside your earned frame.
   // Modal sheet - the galaxy waits.
+  // THE TABLE AS A TABLE (presentation B 2026-10-14): the run's climax is
+  // laid out as a place, not a popup — the ring of cold light above, a long
+  // warm table, your path at its head, and each option a place setting you
+  // sit down at. One screen: the prompt scrolls inside its own box; the
+  // settings stay big thumb targets.
   function tableSheet() {
     const tc = Game.state.scholar.tableChoices;
     if (!tc) return;
+    const prompt = tc.prompt ? tc.prompt :
+      '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
+      '<p>Your case is made. Now — the last choice is yours, and it\'s live:</p>';
+    let head = '';
+    try {
+      const line = Game.classLine ? Game.classLine('player') : null;
+      head = line ? `you sit as <b>${esc(line)}</b>` : 'your seat';
+    } catch (e) { console.warn('[table] classLine', e && e.message); head = 'your seat'; }
+    const plates = ['\u{1F37D}\uFE0F', '\u{1F944}', '\u{1F377}', '\u{1F56F}\uFE0F', '\u{1F35E}', '\u{1F9C2}', '\u{1FAD6}'];
+    const settings = tc.options.map((o, i) =>
+      `<button class="tbl-setting" data-sheetpick="${i}"><span class="tbl-plate" aria-hidden="true">${plates[i % plates.length]}</span><span class="tbl-label">${esc(o.label)}</span></button>`).join('');
     openSheet({
       id: 'the-table',
       title: '\u{1F30C} The Table',
-      html: tc.prompt ? tc.prompt :
-        '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
-        '<p>Your case is made. Now — the last choice is yours, and it\'s live:</p>',
+      cls: 'sheet-table',
+      html: `<div class="tbl"><div class="tbl-ring" aria-hidden="true"></div>` +
+        `<div class="tbl-prompt">${prompt}</div>` +
+        `<div class="tbl-board"><div class="tbl-head">${head}</div><div class="tbl-settings">${settings}</div></div>` +
+        `<div class="tbl-chair">the galaxy waits. pull out a chair.</div></div>`,
       buttons: tc.options.map(o => ({
         label: '<b>' + esc(o.label) + '</b>',
-        primary: true,
+        primary: true, hidden: true,
         onClick: () => { Game.chooseTableOption(o.id); refresh(); },
       })),
       priority: 100, modal: true, dismissible: false,
@@ -14087,15 +14112,21 @@
     const icon = ((td.icons || {})[track]) || '';
     const lvl = choices[0].level || '';
     const full = (s.abilities || []).length >= Game.abilitySlots();
+    // THREE CARDS (presentation B 2026-10-14): each pick shows what it IS at
+    // a glance — track icon, path/subclass (only once your class is
+    // recognised: if you don't know, it doesn't show), role, what it costs
+    // in food, and with full slots what it would push out.
+    const cards = choices.map((c, i) => levelUpCardHTML(c, i, icon, full)).join('');
     openSheet({
       id: 'offer-ability',
       title: `${icon} ${esc(label)} ${lvl} \u2014 Level up`,
-      html: `<p>"We've been counting your ${esc(((td.nouns || {})[track]) || 'deeds')}. Pick one."</p>` +
-        (full ? `<p class="small"><b>Your slots are full (${(s.abilities || []).length}/${Game.abilitySlots()}).</b> Whatever you take replaces something you hold \u2014 you'll choose what next.</p>` : ''),
+      cls: 'sheet-levelup',
+      html: `<div class="lu-wrap"><p class="lu-intro">"We've been counting your ${esc(((td.nouns || {})[track]) || 'deeds')}. Pick one."</p>` +
+        (full ? `<p class="lu-full"><b>Slots full (${(s.abilities || []).length}/${Game.abilitySlots()}).</b> A pick replaces one you hold \u2014 you choose which next.</p>` : '') +
+        `<div class="lu-cards">${cards}</div></div>`,
       buttons: choices.map(c => ({
-        label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.description || c.desc) + '</span>' +
-          (c.flavor ? '<br><i class="small">' + esc(Game.quoteWrap(c.flavor)) + '</i>' : ''),
-        primary: true,
+        label: '<b>' + esc(c.name) + '</b>',
+        primary: true, hidden: true,
         onClick: () => {
           if (full) { replaceSheet(c); return; }
           Game.chooseAbility(c.id); refresh();
@@ -14106,6 +14137,44 @@
       }]),
       priority: 80, modal: true, dismissible: false,
     });
+  }
+  // levelUpCardHTML: one level-up pick as a card. The button index matches
+  // the sheet's buttons[i] (data-sheetpick).
+  function levelUpCardHTML(c, i, icon, full) {
+    const def = ((Game.data && Game.data.abilities) || []).find(a => a.id === c.id) || {};
+    const tags = [];
+    try {
+      const cls = Game.godpathClass ? Game.godpathClass('player') : null;
+      if (cls && cls.path) {
+        const paths = Game.abilityPaths ? (Game.abilityPaths(def) || []) : [def.path].filter(Boolean);
+        const gp = (Game.data && Game.data.godpaths && Game.data.godpaths.paths) || {};
+        const p = paths[0];
+        if (p && gp[p]) {
+          const sub = def.subclass && gp[p].subclasses && gp[p].subclasses[def.subclass];
+          const onPath = paths.indexOf(cls.path) >= 0;
+          tags.push(`<span class="lu-tag path" style="--pathc:var(--path-${esc(p)})">${onPath ? '\u2605 ' : ''}${esc(gp[p].name || p)}${sub ? ' \u00b7 ' + esc(sub.name || def.subclass) : ''}</span>`);
+        }
+      }
+    } catch (e) { console.warn('[levelup] path tag', e && e.message); }
+    if (def.slotRole || def.role) tags.push(`<span class="lu-tag">${esc(def.slotRole || def.role)}</span>`);
+    const daily = def.metabolic && def.metabolic.daily;
+    const use = ((def.actions || []).find(a => a && a.cost && a.cost.kcal) || {}).cost;
+    if (daily) tags.push(`<span class="lu-tag cost">\u{1F525} ${daily} kcal/day</span>`);
+    if (use && use.kcal) tags.push(`<span class="lu-tag cost">\u26A1 ${use.kcal} kcal/use</span>`);
+    if (full) {
+      let like = null;
+      try {
+        const held = (Game.state.scholar.abilities || []).map(e => ((Game.data.abilities || []).find(a => a.id === ((e && e.id) || e))) || null).filter(Boolean);
+        like = held.find(h => h.slotRole && h.slotRole === def.slotRole) || null;
+      } catch (e) { console.warn('[levelup] swap hint', e && e.message); }
+      tags.push(`<span class="lu-tag swap">\u21C4 ${like ? 'same role as ' + esc(like.name) : 'replaces one you hold'}</span>`);
+    }
+    return `<button class="lu-card" data-sheetpick="${i}"><span class="lu-icon" aria-hidden="true">${icon || '\u2726'}</span>` +
+      `<span class="lu-name">${esc(c.name)}</span>` +
+      (tags.length ? `<span class="lu-tags">${tags.join('')}</span>` : '<span></span>') +
+      `<span class="lu-desc">${esc(c.description || c.desc || '')}</span>` +
+      (c.flavor ? `<span class="lu-flavor">${esc(Game.quoteWrap ? Game.quoteWrap(c.flavor) : c.flavor)}</span>` : '') +
+      `</button>`;
   }
   function replaceSheet(choice) {
     const s = Game.state.scholar;
@@ -14441,11 +14510,11 @@
         const xpPct = level >= 3 ? 100 : Math.min(100, Math.round((xp / xpNeed) * 100));
         const isActive = !!(def.actions && def.actions.length);
         const badge = isActive
-          ? `<span style="background:#4df3ff22;border:1px solid #4df3ff;border-radius:3px;padding:1px 5px;font-size:10px;color:#4df3ff">ACTIVE</span>`
-          : `<span style="background:#8882;border:1px solid #888;border-radius:3px;padding:1px 5px;font-size:10px;color:#aaa">PASSIVE</span>`;
+          ? `<span style="background:#4df3ff22;border:1px solid var(--sys-cyan);border-radius:3px;padding:1px 5px;font-size:12px;color:var(--sys-cyan)">ACTIVE</span>`
+          : `<span style="background:#8882;border:1px solid var(--muted-2);border-radius:3px;padding:1px 5px;font-size:12px;color:var(--muted)">PASSIVE</span>`;
         const paths = (Game.abilityPaths ? Game.abilityPaths(def) : []).map(p => {
           const c = pathColors[p] || '#aaa';
-          return `<span style="color:${c};font-size:11px">● ${esc(p)}</span>`;
+          return `<span style="color:${c};font-size:12px">● ${esc(p)}</span>`;
         }).join(' ');
         // Detail: description, actions, modifiers
         let detail = `<p class="small" style="opacity:.8">${esc(ab.desc || def.description || '')}</p>`;
@@ -14600,7 +14669,7 @@
         for (const s of active) {
           const triggers = (s.triggers || []).map(t => esc(t.name || t.id)).join(' + ');
           html += `<details style="margin:4px 0;border:1px solid #2a4d2a;border-radius:6px;padding:6px 8px">
-            <summary style="cursor:pointer"><b>${esc(s.name)}</b> ${triggers ? `<span style="opacity:.6;font-size:11px">${triggers}</span>` : ''}</summary>
+            <summary style="cursor:pointer"><b>${esc(s.name)}</b> ${triggers ? `<span style="opacity:.6;font-size:12px">${triggers}</span>` : ''}</summary>
             <p class="small" style="opacity:.8;margin-top:4px">${esc(s.flavor)}</p>
           </details>`;
         }
@@ -14665,7 +14734,7 @@
             if (links) body += `<p class="small" style="opacity:.75;margin-top:4px">Resonates with: ${esc(links)}</p>`;
           }
           const src = (entry.sources || [])[0];
-          const via = src ? ` <span style="opacity:.4;font-size:11px">via ${esc(String(src).split(':')[0])}</span>` : '';
+          const via = src ? ` <span style="opacity:.4;font-size:12px">via ${esc(String(src).split(':')[0])}</span>` : '';
           html += `<details style="margin:4px 0;border:1px solid #333;border-radius:6px;padding:6px 8px">
             <summary style="cursor:pointer"><b>${nm}</b> ${badge}${via}</summary>${body}
           </details>`;
@@ -15353,8 +15422,8 @@
     // SEASON LINE (Steve 2026-10-14): where/when you are, only once someone
     // told you (whereAreWe.js). Nothing known -> nothing shown.
     const wl = Game.whereLine ? Game.whereLine() : '';
-    const wlHTML = wl ? `<br><span class="whereline" style="font-size:11px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:58vw;vertical-align:bottom">${esc(wl)}</span>` : '';
-    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:11px;opacity:.7">${esc(st.dayPartHint)}</span>${wlHTML}</span>${Game.partyHud()}`);
+    const wlHTML = wl ? `<br><span class="whereline" style="font-size:12px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:58vw;vertical-align:bottom">${esc(wl)}</span>` : '';
+    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:12px;opacity:.7">${esc(st.dayPartHint)}</span>${wlHTML}</span>${Game.partyHud()}`);
   }
   // D-PAD: compact floating pad docked bottom-right of the grid — the thumb
   // zone on a one-handed phone. It overlays the grid (never pushes layout,
@@ -15798,6 +15867,7 @@
       <div class="game-cols">
         <div class="game-col-main">
           <div class="ord-gridwrap">
+            ${titanBarHTML(st)}
             <div class="detail">${renderDetail(st)}</div>
             ${surroundHTML(st)}
             <div id="inlineslot"></div>
@@ -15827,7 +15897,7 @@
           </div><!-- /ord-topstack -->
           <button class="dpshow hidden" id="dpshow" aria-label="show walk pad">🧭</button>
           <div class="toast-layer" id="toast-layer"></div>
-          ${st.activeQuest ? `<div class="ord-quest-top"><p class="small" style="border-left:3px solid #7fd67f;padding:6px 8px;margin:8px 0;background:rgba(127,214,127,0.08);border-radius:4px">📋 ${esc(st.activeQuest.text || (st.activeQuest.giverName + ' needs ' + st.activeQuest.qty + ' ' + st.activeQuest.plant + '.'))}</p></div>` : ''}
+          ${st.activeQuest ? `<div class="ord-quest-top"><p class="small" style="border-left:3px solid var(--ok);padding:6px 8px;margin:8px 0;background:rgba(127,214,127,0.08);border-radius:4px">📋 ${esc(st.activeQuest.text || (st.activeQuest.giverName + ' needs ' + st.activeQuest.qty + ' ' + st.activeQuest.plant + '.'))}</p></div>` : ''}
           <div class="ord-status">${statusBars(st)}</div>
           <div class="ord-lowermenu">${lowerMenuHTML(st)}</div>
           <div class="ord-panel">${panelFor(st, n)}</div>
@@ -16235,6 +16305,7 @@
     // THE SYSTEM INTEGRATING INTO YOUR PERCEPTION: post-day-7, the interface
     // gains System styling — glowing borders, overlay accents. You FEEL it.
     try { document.body.classList.toggle('system-live', !!Game.state.systemArrived); } catch (e) {}
+    applyPresentation();
     // Inline interaction slot: person panels, assignment, pantry — no overlays.
     renderInlineSlot(st);
     // Pending offers (ability/relic choices) queue as sheets — no screen takeover.
@@ -16340,7 +16411,7 @@
     const vWater = Game.state.village.water || { clean: 0, dirty: 0 };
     const carry = st.carryKg;
     const maxCarry = Game.carryCapacity();
-    const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid #4df3ff">
+    const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid var(--sys-cyan)">
         <p class="small"><b>\uD83D\uDCA7 Water (clean)</b> \u00D7${vWater.clean} L<br>
         <span style="opacity:.7">0 kcal/L \u00B7 1 kg/L \u00B7 from the Haven well</span></p>
         <div style="display:flex;align-items:center;gap:8px">
@@ -16419,7 +16490,7 @@
         return rows.length ? rows.join('') : '<p class="small">Empty.</p>';
       })()}
       </div>
-      <div class="card" id="packsummary" style="border-left:3px solid #7fd67f">
+      <div class="card" id="packsummary" style="border-left:3px solid var(--ok)">
         <p class="small"><b>Packing:</b> <span id="ps-items">nothing yet</span></p>
         <p class="small">\u2696\uFE0F <span id="ps-kg">0.0</span> kg \u00B7 \uD83D\uDD25 <span id="ps-kcal">0 kcal</span> \u00B7 \uD83D\uDCA7 <span id="ps-water">0 L</span></p>
       </div>`;
@@ -17096,7 +17167,7 @@
     // You get 3 moves AND 1 action. The line shows both distinctly.
     const turnLine = yourTurn && p
       ? (p.moveLeft <= 0 && !p.acted
-          ? `<b style="color:#ffd54d">ACT!</b> <span style="opacity:.8">strike, shout… or ⏸ hold</span>`
+          ? `<b style="color:var(--gold)">ACT!</b> <span style="opacity:.8">strike, shout… or ⏸ hold</span>`
           : `<span title="Movement — D-pad or tap to walk"><b>${p.moveLeft}</b> move</span>${p.acted ? '' : ' <span title="Action — strike, study, shout…" style="opacity:.8">· <b>1</b> act</span>'}`)
       : (cur ? `${esc(cur.kind === 'player' ? 'You' : (Game.monsterDisplayName && cur.mdef ? Game.monsterDisplayName(cur.mdef.id) : cur.name))} acting…` : '');
     // COMBAT STRIP (Steve 2026-10-05, revised): threat + turn status ONLY.
@@ -17517,7 +17588,12 @@
     for (let cy = 0; cy < _gridN; cy++) {
       html += '<div class="drow">';
       for (let cx = 0; cx < _gridN; cx++) {
-        const cell = cells[cy][cx];
+        // TITAN ARENA (presentation B 2026-10-14): the node detail is 9x9 but
+        // a titan fight runs 12x12 (tbGridSize). Cells past the node are open
+        // trodden ground — the same as game.js tbBlocked reads them (an
+        // undefined cell never blocks). Indexing cells[9] used to throw and
+        // blank the whole fight screen.
+        const cell = (cells[cy] && cells[cy][cx] !== undefined) ? cells[cy][cx] : 'dirt';
         const isMe = (cx === pmx && cy === pmy);
         let g, cls = 'cell';
         // INDISTINCT (Steve 2026-10-05): creatures show their species emoji —
@@ -17699,10 +17775,13 @@
               try {
                 if (_mid && S.Sprites && S.Sprites.monsterSprite) {
                   const _aggro = true; // combat = aggro form
-                  const _svg = S.Sprites.monsterSprite(_mid, _aggro);
+                  // TITAN BODIES (presentation B 2026-10-14): a titan fights
+                  // in its own sprite, not its scaled-up monster form.
+                  const _tsvg = (Game.isTitan && Game.isTitan(_mid) && S.Sprites.titanSprite) ? S.Sprites.titanSprite(_mid) : null;
+                  const _svg = _tsvg || S.Sprites.monsterSprite(_mid, _aggro);
                   if (_svg) _mspr = `<span class="csprite">${_svg}</span>`;
                 }
-              } catch (e) {}
+              } catch (e) { console.warn('[titan sprite]', e && e.message); }
               // Humanoids get the special ambiguous treatment; others get their SVG
               const _hspr = humanoidSpriteHtml(_mid);
               // BUFFERING FAINTEST FRAME (r15 CATCH 3): the real present is the
@@ -17713,7 +17792,11 @@
               let _sprInner = _hspr || _mspr || esc(mf.emoji || '👹');
               if (_msz > 1 && _sprInner.indexOf('csprite') !== -1)
                 _sprInner = _sprInner.replace('class="csprite"', 'class="csprite multitile mts' + _msz + '"');
-              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}>${_sprInner}</span>`;
+              // ent-multi: the entity wrapper fills the anchor cell, so the
+              // 200%/300% span sizes against the CELL. (The wrapper is a
+              // will-change:transform containing block; at 0 width the
+              // multi-tile sprite collapsed to 0x0 and the body vanished.)
+              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}${_msz > 1 ? ' class="ent-multi"' : ''}>${_sprInner}</span>`;
               cls += ' creature';
               // TITAN FIGHT (Steve 2026-10-11): mark titan cells for ant-vs-titan scaling
               try {
@@ -17740,7 +17823,7 @@
               _fSprInner = _fSprInner.replace('class="csprite"', 'class="csprite multitile mts' + _fmsz + '"');
             else if (_fmsz > 1 && _fSprInner.indexOf('msprite') !== -1)
               _fSprInner = _fSprInner.replace('class="msprite"', 'class="msprite multitile mts' + _fmsz + '"');
-            g = `<span data-ent="creature:${esc(mon.id || 'wild')}">${_fSprInner}</span>`;
+            g = `<span data-ent="creature:${esc(mon.id || 'wild')}"${_fmsz > 1 ? ' class="ent-multi"' : ''}>${_fSprInner}</span>`;
             cls += ' creature'; drawn = true;
             }
           }
@@ -17761,7 +17844,7 @@
               _pbadge = ({ wary: '⚠', bolt: '💨', winded: '😮‍💨', playing_dead: '💀', taunt: '👀' })[_pp] || '';
             } catch (e) {}
             const _aniSpr = monsterSpriteHtml(ani.id || ani.monsterId, false);
-            g = `<span data-ent="creature:${esc(ani.id || 'wild')}">${_aniSpr || esc(aemoji)}${_pbadge ? `<span class="preybadge" style="display:block;font-size:9px;line-height:1;margin-top:-3px">${esc(_pbadge)}</span>` : ''}</span>`;
+            g = `<span data-ent="creature:${esc(ani.id || 'wild')}">${_aniSpr || esc(aemoji)}${_pbadge ? `<span class="preybadge" style="display:block;font-size:12px;line-height:1;margin-top:-3px">${esc(_pbadge)}</span>` : ''}</span>`;
             cls += ' creature'; drawn = true;
           }
           if (!drawn) {
@@ -18030,7 +18113,7 @@
   background: linear-gradient(135deg, rgba(191,233,255,.30), rgba(191,233,255,.08) 50%, rgba(191,233,255,.30)) !important;
   animation: w2aShimmer 1.1s infinite alternate; }
 @keyframes w2aShimmer { from { filter: brightness(1.0); } to { filter: brightness(1.5); } }
-.cell.beamLane.w2aDrone { outline: 2px dotted #4df3ff !important; outline-offset: -2px;
+.cell.beamLane.w2aDrone { outline: 2px dotted var(--sys-cyan) !important; outline-offset: -2px;
   background-color: rgba(77,243,255,.16) !important; animation: w2aProject 0.7s infinite alternate; }
 @keyframes w2aProject { from { filter: brightness(1.0); } to { filter: brightness(1.35); } }
 .cell.w2aStatic { outline: 3px solid #d9a7ff !important; outline-offset: -3px;
@@ -18050,13 +18133,13 @@
   animation: w2bIdeaHeat 1.0s infinite alternate; }
 @keyframes w2bIdeaHeat { from { filter: brightness(1.0); } to { filter: brightness(1.6); } }
 .cell.w2bPz, .cell.pzFlash { background-color: rgba(8,8,10,.80) !important;
-  outline: 2px solid #ffffff !important; outline-offset: -2px;
+  outline: 2px solid var(--white) !important; outline-offset: -2px;
   animation: w2bPzFlash 0.5s steps(2) infinite; }
 @keyframes w2bPzFlash { 0%, 49% { filter: brightness(1.0); } 50%, 100% { filter: brightness(2.2); } }
 .cell.w2bPz::before, .cell.w2bPz::after, .cell.pzFlash::before, .cell.pzFlash::after { content: ''; position: absolute;
   width: 10px; height: 10px; pointer-events: none; }
-.cell.w2bPz::before, .cell.pzFlash::before { top: 3px; left: 3px; border-top: 3px solid #fff; border-left: 3px solid #fff; }
-.cell.w2bPz::after, .cell.pzFlash::after { bottom: 3px; right: 3px; border-bottom: 3px solid #fff; border-right: 3px solid #fff; }
+.cell.w2bPz::before, .cell.pzFlash::before { top: 3px; left: 3px; border-top: 3px solid var(--white); border-left: 3px solid var(--white); }
+.cell.w2bPz::after, .cell.pzFlash::after { bottom: 3px; right: 3px; border-bottom: 3px solid var(--white); border-right: 3px solid var(--white); }
 .cell.w2bKite { outline: 2px solid #a5f3fc !important; outline-offset: -2px;
   background: repeating-linear-gradient(115deg, rgba(165,243,252,.34) 0 4px, rgba(30,27,75,.55) 4px 9px) !important;
   animation: w2bKiteCrackle 0.4s steps(3) infinite; }
@@ -18113,7 +18196,7 @@
    the more urgent read; the gold tile fill still shows underneath). */
 .cell.me .vent.sbLockTarget::before {
   content: ''; position: absolute; inset: -2px;
-  border: 3px solid #ffd34d; border-radius: 50%;
+  border: 3px solid var(--gold); border-radius: 50%;
   box-shadow: 0 0 14px rgba(255,211,77,.95), inset 0 0 8px rgba(255,211,77,.55);
   animation: ppulse .7s ease-in-out infinite; pointer-events: none;
 }
@@ -18166,6 +18249,74 @@
 }
 </style>`;
     return html;
+  }
+
+  // applyPresentation (presentation B 2026-10-14): the ladder on <body>.
+  // stage-0..4 (presentation.js: Codex depth + days survived) lets main.css
+  // and the map grow richer as the run earns it; then, post-System, an
+  // occasional alien-script glitch under the overlay.
+  let _presStage = -1;
+  function applyPresentation() {
+    try {
+      const stage = Game.presentationStage ? Game.presentationStage() : 0;
+      if (stage !== _presStage) {
+        for (let i = 0; i <= 4; i++) document.body.classList.toggle('stage-' + i, i === stage);
+        _presStage = stage;
+      }
+    } catch (e) { console.warn('[presentation] stage', e && e.message); }
+    try { if (Game.state && Game.state.systemArrived) maybeAlienGlitch(); } catch (e) { console.warn('[presentation] glitch', e && e.message); }
+  }
+  // maybeAlienGlitch: "Occasional glitches reveal untranslated alien script
+  // underneath" (DECISIONS.md 2026-10-03). For half a second a strip of the
+  // System's real script shows through one System element, sliced, then the
+  // translation snaps back. Rate-limited by Game.glitchDue (presentation.json),
+  // decorative only (aria-hidden, pointer-events none), and never under
+  // prefers-reduced-motion.
+  function maybeAlienGlitch(force) {
+    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; } catch (e) { return false; }
+    if (!force && !(Game.glitchDue && Game.glitchDue(Date.now()))) return false;
+    const cands = Array.from(document.querySelectorAll('.sheet, .sys-ui, #log .sys, .sundial.post'))
+      .filter(el => { const r = el.getBoundingClientRect(); return r.width > 40 && r.height > 12 && r.bottom > 0 && r.top < window.innerHeight; });
+    if (!cands.length) return false;
+    const el = cands[Math.floor(Math.random() * cands.length)];
+    const r = el.getBoundingClientRect();
+    const g = document.createElement('div');
+    g.className = 'alien-glitch';
+    g.setAttribute('aria-hidden', 'true');
+    const h = Math.min(r.height, 120);
+    g.style.cssText = `left:${Math.round(r.left)}px;top:${Math.round(r.top + Math.max(0, (r.height - h) / 2))}px;width:${Math.round(r.width)}px;height:${Math.round(h)}px`;
+    const n = Math.max(12, Math.min(220, Math.round(r.width * h / 90)));
+    g.textContent = Game.alienScript ? Game.alienScript(n, Date.now()) : '';
+    document.body.appendChild(g);
+    const ms = ((Game.data && Game.data.presentation && Game.data.presentation.glitch) || {}).durationMs || 450;
+    setTimeout(() => { try { g.remove(); } catch (e) { console.warn('[glitch] remove', e && e.message); } }, ms);
+    return true;
+  }
+  Game.debugAlienGlitch = () => maybeAlienGlitch(true); // wired-exempt: debug/screenshot hook
+
+  // titanBarHTML (presentation B 2026-10-14): a titan fight gets a marquee
+  // over the arena — the titan's face, its title, and one long health bar cut
+  // into three acts (the show's language: every season needs its climax).
+  // The acts are HP thirds, nothing hidden: the combat strip already shows
+  // the same bar. Only while a titan is alive in the fight.
+  function titanBarHTML(st) {
+    try {
+      if (!st.inCombat || !Game.tbfight || !Game.isTitan) return '';
+      const f = (Game.tbfight.fighters || []).find(x => x.kind === 'monster' && x.alive && !x.fled && x.mdef && Game.isTitan(x.mdef.id));
+      if (!f) return '';
+      const mid = f.mdef.id;
+      const def = (Game.titanDef && Game.titanDef(mid)) || {};
+      const pct = Math.max(0, Math.min(100, Math.round((f.hp / Math.max(1, f.maxHp)) * 100)));
+      const act = pct > 66 ? 'I' : pct > 33 ? 'II' : 'III';
+      const spr = (S.Sprites && S.Sprites.titanSprite && S.Sprites.titanSprite(mid)) || '';
+      return `<div class="titanbar" role="status" aria-label="${esc((def.title || f.name) + ', act ' + act)}">` +
+        `<span class="titanbar-face">${spr}</span>` +
+        `<span class="titanbar-main"><span class="titanbar-name">${esc(def.title || f.name || 'THE TITAN')}` +
+        `<span class="titanbar-act">ACT ${act}</span></span>` +
+        `<span class="titanbar-track"><i style="width:${pct}%"></i><b class="tb-tick" style="left:33.3%"></b><b class="tb-tick" style="left:66.6%"></b></span>` +
+        (def.epithet ? `<span class="titanbar-epi">${esc(def.epithet)}</span>` : '') +
+        `</span></div>`;
+    } catch (e) { console.warn('[titanbar]', e && e.message); return ''; }
   }
 
   // compassHTML (Steve 2026-10-05): the minimap was 49 tiles for minor info.
@@ -18234,6 +18385,12 @@
     // SVG TILE SCENES (Steve 2026-10-06): tiles render as miniature scenes
     // when the module is loaded; glyph fallback otherwise.
     const TS = (typeof Scattering !== 'undefined' && Scattering.TileScenes) || null;
+    // PALETTE LADDER (presentation B 2026-10-14): every flat-colour fallback
+    // below takes its colour from the same earthy->rich ladder as the SVG
+    // scenes (tile-scenes.js palette), so a fallback tile never jumps out.
+    let _stage = 0;
+    try { _stage = Game.presentationStage ? Game.presentationStage() : 0; } catch (e) { console.warn('[map] stage', e && e.message); }
+    const _pal = (type) => { try { return (TS && TS.palette) ? TS.palette(type || 'meadow', _stage).base : null; } catch (e) { console.warn('[map] palette', e && e.message); return null; } };
     for (let y = 0; y < 9; y++) {
       html += '<div class="mrow">';
       for (let x = 0; x < 9; x++) {
@@ -18263,7 +18420,7 @@
           } catch (e) {}
           // Haven always shows 🏘️ (Steve 2026-10-06) — center of 9x9
           if (x === 4 && y === 4) {
-            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:#7cbd6b;width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">🏘️</div></div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal('haven') || '#7cbd6b'};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">🏘️</div></div>`;
             continue;
           }
           // Try TileScenes SVG for detailed terrain
@@ -18290,7 +18447,7 @@
               ruin: ['#9a9a9a', '🏚️'],
             };
             const _t = _terrain[_ttype] || _terrain['meadow'];
-            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div></div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal(_ttype) || _t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div></div>`;
           }
           continue;
         }
@@ -18374,8 +18531,11 @@
             // DIAGNOSTIC: show the failure color
             g = `<div style="background:${diagColor};width:100%;height:100%;border-radius:4px"></div>`;
         } else if (!seen && !_hive) {
-            g = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">` +
-              `<rect x="2" y="2" width="60" height="60" rx="8" fill="#0d120d" stroke="#1a2a1a" stroke-width="1"/></svg>`;
+            // FOG (presentation B 2026-10-14): the unknown has texture, not
+            // content — a faint hatch, varied per tile so the fog doesn't read
+            // as a grid of identical holes. Never derived from the tile:
+            // "If you don't know, it doesn't show."
+            g = `<div class="fogtile fog-v${(x * 7 + y * 13) % 4}" aria-label="unexplored"></div>`;
           } else if (seen === 'shared' || (_hive && !seen)) {
             // Steve 2026-10-07: shared tiles show as BIOME COLOR ONLY,
             // not detailed SVG. Fog of war for detail until visited personally
@@ -18386,7 +18546,7 @@
               wetland: '#4a8a8a', creek: '#5a9aba', thicket: '#2d5a2d', trail_edge: '#8a7a5a',
               forest_floor: '#3a5a3a'
             };
-            const bg = biomeColors[(tl && tl.type) || 'meadow'] || '#7cbd6b';
+            const bg = _pal((tl && tl.type) || 'meadow') || biomeColors[(tl && tl.type) || 'meadow'] || '#7cbd6b';
             g = `<div style="background:${bg};width:100%;height:100%;min-height:40px;border-radius:4px;opacity:0.7"></div>`;
           } else {
             try {
@@ -18416,7 +18576,7 @@
               // If no tile data, use bright meadow default (Steve 2026-10-06).
               // Explored tiles must NEVER be dark.
               const isUnknown = !tl || ttype === 'unknown';
-              const base = isUnknown ? '#7aaa4a' : (colors[ttype] || '#7aaa4a');
+              const base = (isUnknown ? _pal('meadow') : _pal(ttype)) || (isUnknown ? '#7aaa4a' : (colors[ttype] || '#7aaa4a'));
               // Simple DIV (not SVG) - must render (Steve 2026-10-06)
               g = `<div style="background:${base};width:100%;height:100%;min-height:40px;border-radius:4px"></div>`;
             }
@@ -18595,8 +18755,8 @@
     screen.innerHTML = `
       ${bar('scattering://codex', entries.length + ' entries')}
       <h1 class="title" style="font-size:22px">${Game.journalName().toUpperCase()}</h1>
-      <p class="small"><i>${Game.journalName() === 'Codex' ? 'the village keeps what you write. the System is watching.' : 'field journal — your handwriting. what you learned, so far just yours.'}</i></p>
-      ${(() => { try { const jo = Game.journalOpening ? Game.journalOpening() : null; return jo && jo.line ? `<p class="small" style="opacity:.7"><i>${esc(jo.line)}</i></p>` : ''; } catch (e) { return ''; } })()}
+      <p class="small">${Game.journalName() === 'Codex' ? '<i>the village keeps what you write. the System is watching.</i>' : '<span class="journal-hand">field journal — your handwriting. what you learned, so far just yours.</span>'}</p>
+      ${(() => { try { const jo = Game.journalOpening ? Game.journalOpening() : null; return jo && jo.line ? `<p class="hand note">${esc(jo.line)}</p>` : ''; } catch (e) { console.warn('[codex] journalOpening', e && e.message); return ''; } })()}
       ${villageMapSection()}
       ${entries.length ? entries.map(e => `
         <div class="card codex"><h3>${e.wrongAs ? esc(e.wrongAs) + ' <span class="small" style="opacity:.6">(as taught)</span>' : e.name} <span class="small">· ${e.kcalKnown ? `${e.kcal} kcal/${e.unit}` : `<i>kcal unknown — learn preparation</i>`}</span> <span class="small" style="opacity:.7">[${LVL[e.level] || 'L1'}]</span></h3>
@@ -18605,9 +18765,9 @@
         <p class="small"><b>Prep:</b> ${e.prepKnown ? (e.prep || '—') : '<i>unknown — eat it or reach L2 to learn</i>'}</p>
         <p class="small"><b>Uses:</b> ${e.uses ? esc(e.uses) : '<i>unknown — harvest and taste to learn</i>'}</p>
         ${(e.knowledgeGaps || []).length ? `<p class="small" style="opacity:.8">🔍 <i>still to learn:</i> ${esc(e.knowledgeGaps.join(' '))}</p>` : ''}
-        ${(e.journalMarks || []).length ? e.journalMarks.map(m => `<p class="small" style="color:#e8a13c">⚠ ${esc(m.kind)} — day ${m.day}${m.note ? ': ' + esc(m.note) : ''}</p>`).join('') : ''}
-        ${(e.journalEntries || []).length ? `<p class="small"><i>📓 ${esc(e.journalEntries[e.journalEntries.length - 1].text)}</i></p>` : ''}
-        ${(e.marginalia || []).length ? e.marginalia.slice(-2).map(m => `<p class="small" style="opacity:.7"><i>✒ ${esc(m.first || 'a former hand')}${m.register ? ' · ' + esc(m.register) : ''}, day ${m.day}: ${esc(m.text)}</i></p>`).join('') : ''}
+        ${(e.journalMarks || []).length ? e.journalMarks.map(m => `<p class="hand note" style="color:#e8a13c">⚠ ${esc(m.kind)} — day ${m.day}${m.note ? ': ' + esc(m.note) : ''}</p>`).join('') : ''}
+        ${(e.journalEntries || []).length ? `<p class="hand note">${esc(e.journalEntries[e.journalEntries.length - 1].text)}</p>` : ''}
+        ${(e.marginalia || []).length ? e.marginalia.slice(-2).map(m => `<p class="hand note"><span class="who">${esc(m.first || 'a former hand')}${m.register ? ' · ' + esc(m.register) : ''}, day ${m.day}:</span> ${esc(m.text)}</p>`).join('') : ''}
         <p class="small"><i>${esc(e.knowledge || '')}</i></p>${e.text ? `<p>${esc(e.text)}</p>` : ''}</div>`).join('')
         : '<div class="card"><h3>No entries yet.</h3><p>Forage something. Survive it. Write it down.</p></div>'}
       ${skills.length ? '<h1 class="title" style="font-size:18px">SKILLS</h1><p class="small"><i>knowledge about anything — not just plants. your old life, books, strangers, hard lessons.</i></p>' + skills.map(s => `
@@ -18750,6 +18910,13 @@
   // REGION OVERRIDE (docs/WORLD-REGIONS.md §11): ?region=<id> lands the next
   // new game in that region (it must have landing variants). Testing only.
   { const rm = location.search.match(/[?&]region=([a-z_]+)/); if (rm) Game.debugRegion = rm[1]; }
+  // SCREENSHOT HOOKS (?debug=1 only): headless proof runs (presentation
+  // evidence) re-render and open the climax sheets without tapping through.
+  if (DEBUG) {
+    Game.debugRefresh = () => refresh(); // wired-exempt: debug/screenshot hook
+    Game.debugOpenTable = () => tableSheet(); // wired-exempt: debug/screenshot hook
+    Game.debugOpenCodex = () => codexScreen(); // wired-exempt: debug/screenshot hook
+  }
   function debugPanel() {
     let el = document.getElementById('debug-panel');
     if (el) { el.remove(); return; }
@@ -18782,7 +18949,7 @@
     const loadoutBtns = (typeof Game.debugLoadoutList === 'function' ? Game.debugLoadoutList() : [])
       .map(([id, label]) => `<button class="dbg-loadout" data-loadout="${id}" style="display:block;width:100%;text-align:left;margin:3px 0;padding:8px;font-size:14px">${label}</button>`).join('');
     const loadoutSection = loadoutBtns
-      ? `<p style="margin:10px 0 4px"><b>LOADOUTS</b> <span style="opacity:.6;font-size:11px">apply to current run</span></p>
+      ? `<p style="margin:10px 0 4px"><b>LOADOUTS</b> <span style="opacity:.6;font-size:12px">apply to current run</span></p>
          <div id="dbg-loadouts">${loadoutBtns}</div>`
       : '';
     // RETIRED: never deleted, saved for later — collapsed behind a toggle.
@@ -18798,7 +18965,7 @@
         if (!ps) return `<p style="opacity:.6;font-size:12px">PACE: no day data yet</p>`;
         return `<p style="font-size:12px">⏱️ PACE: ${ps.medianMin} min/day median (${ps.meanMin} mean) over ${ps.days}d — ${ps.totalMin} min total</p>`;
       } catch (e) { return ''; } })()}
-      <p style="margin:8px 0 4px"><b>SCENARIOS</b> <span style="opacity:.6;font-size:11px">one tap, fresh run</span></p>
+      <p style="margin:8px 0 4px"><b>SCENARIOS</b> <span style="opacity:.6;font-size:12px">one tap, fresh run</span></p>
       ${scenHtml}
       ${loadoutSection}
       ${retSection}
@@ -18967,7 +19134,7 @@
       let qs = [];
       try { qs = Game.listQuarantines(); } catch (e) {}
       if (!qs.length) { qzBox.innerHTML = ''; return; }
-      qzBox.innerHTML = '<p style="margin:8px 0 4px"><b>QUARANTINED SAVES</b> <span style="opacity:.6;font-size:11px">corrupt, set aside — not deleted</span></p>' +
+      qzBox.innerHTML = '<p style="margin:8px 0 4px"><b>QUARANTINED SAVES</b> <span style="opacity:.6;font-size:12px">corrupt, set aside — not deleted</span></p>' +
         qs.map(x => {
           let when = '';
           try { when = new Date(x.at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); } catch (e) {}

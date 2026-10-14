@@ -11,6 +11,7 @@
 //   - Sprites.chainFor(pid) -> [root, category, specific]
 //   - Sprites.itemSprite(iid) -> svg for item (item worker)
 //   - Sprites.monsterSprite(mid, aggro) -> calm or aggro svg for monster
+//   - Sprites.titanSprite(id) -> bespoke titan svg by titan id or titan monster id (herald, nielsen, finale, the_network)
 // rules:
 //   - (none documented)
 // consumes:
@@ -922,6 +923,32 @@ L23.8 3.2 L25.5 1.5 Q26.5 2 26 3.2 L24.8 5.5 L27.5 5.2 Q28.5 5.8 27.8 6.8 L25.5 
     return SPRITES[root] || null;
   }
 
+  // TITAN SPRITES (presentation B 2026-10-14): the four titans get their own
+  // bodies, not a scaled-up monster. Same 32x32 viewBox and flat hand-picked
+  // fills as every sprite, drawn to read at 3x3 cells (~90px) in the 12x12
+  // titan arena. Keyed by TITAN id (src/data/titans.json); titanSprite()
+  // also accepts the titan's monster id.
+  const TITAN_SPRITES = {
+    // THE HERALD — "the sky, getting bigger": a storm front with a brass
+    // bell for a mouth. The announcement is the weather.
+    herald: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite titan-sprite"><g fill="#4a5466"><ellipse cx="8" cy="12" rx="7" ry="5"/><ellipse cx="16" cy="9" rx="8.5" ry="6"/><ellipse cx="24.5" cy="12" rx="7" ry="5"/></g><g fill="#6b778c"><ellipse cx="10" cy="10.5" rx="5" ry="3"/><ellipse cx="18" cy="7.5" rx="5.5" ry="3.2"/><ellipse cx="25" cy="10.5" rx="4" ry="2.6"/></g><ellipse cx="16" cy="15" rx="12" ry="4" fill="#3a4252"/><ellipse cx="11.5" cy="11.5" rx="1.6" ry="2.2" fill="#e8f4ff"/><ellipse cx="20.5" cy="11.5" rx="1.6" ry="2.2" fill="#e8f4ff"/><circle cx="11.5" cy="12" r=".8" fill="#0e1420"/><circle cx="20.5" cy="12" r=".8" fill="#0e1420"/><path d="M16 15 L13 22 L19 22 Z" fill="#b8892e"/><ellipse cx="16" cy="23.5" rx="6" ry="2.6" fill="#d9a441"/><ellipse cx="16" cy="23.5" rx="4" ry="1.5" fill="#2a1d0a"/><g fill="none" stroke="#ffd54d" stroke-width=".9" opacity=".75"><path d="M8 26.5 Q16 31 24 26.5"/><path d="M5 28 Q16 34 27 28" opacity=".5"/></g><g stroke="#e8f4ff" stroke-width=".7" opacity=".55"><path d="M4 17 L3 21"/><path d="M28 17 L29 21"/><path d="M7 18 L6.4 20.5"/></g></svg>`,
+    // THE NIELSEN — "ratings embodied": one enormous counting eye on a
+    // body of tally marks, a ratings dial for a crown.
+    nielsen: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite titan-sprite"><path d="M5 30 C5 19 9 11 16 11 C23 11 27 19 27 30 Z" fill="#2c2433"/><g stroke="#8b7fa3" stroke-width="1" stroke-linecap="round" opacity=".8"><path d="M9 21 L9 27"/><path d="M11 21 L11 27"/><path d="M13 21 L13 27"/><path d="M15 21 L15 27"/><path d="M8 26 L16 22"/><path d="M18 21 L18 27"/><path d="M20 21 L20 27"/><path d="M22 21 L22 27"/></g><ellipse cx="16" cy="15" rx="8" ry="5" fill="#f2efe6"/><circle cx="16" cy="15" r="3.6" fill="#7a2fd0"/><circle cx="16" cy="15" r="1.7" fill="#0b0710"/><circle cx="17.2" cy="13.9" r=".7" fill="#fff"/><path d="M8 15 Q16 8.5 24 15" fill="none" stroke="#2c2433" stroke-width="1.2"/><path d="M7 7 A9 9 0 0 1 25 7" fill="none" stroke="#3d3428" stroke-width="2.4" stroke-linecap="round"/><g fill="#ffd54d"><rect x="9" y="3.6" width="1.6" height="3" rx=".4"/><rect x="12.4" y="2.4" width="1.6" height="4.2" rx=".4"/><rect x="15.8" y="1.6" width="1.6" height="5" rx=".4"/><rect x="19.2" y="2.8" width="1.6" height="3.8" rx=".4"/></g><path d="M16 8 L22 3.4" stroke="#e5484d" stroke-width="1.1" stroke-linecap="round"/><circle cx="16" cy="8" r="1" fill="#e5484d"/></svg>`,
+    // THE FINALE — "every season needs its climax": the curtain parts and
+    // the thing behind it has been waiting. Spotlight, countdown, gold eyes.
+    finale: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite titan-sprite"><path d="M10 1 L22 1 L30 31 L2 31 Z" fill="#fff3c4" opacity=".14"/><path d="M1 1 L9 1 C8 10 7 20 3 31 L1 31 Z" fill="#7a1622"/><path d="M31 1 L23 1 C24 10 25 20 29 31 L31 31 Z" fill="#7a1622"/><g stroke="#4f0d16" stroke-width=".8" opacity=".9"><path d="M4 2 C4 12 3.5 22 2 30"/><path d="M28 2 C28 12 28.5 22 30 30"/></g><rect x="0" y="0" width="32" height="2.6" fill="#b8892e"/><path d="M7 31 C8 20 11 14 16 12.5 C21 14 24 20 25 31 Z" fill="#251b33"/><path d="M10 31 C11 22 13 17.5 16 16.4 C19 17.5 21 22 22 31 Z" fill="#3a2b4d"/><ellipse cx="13" cy="21" rx="1.6" ry="2.3" fill="#ffd54d"/><ellipse cx="19" cy="21" rx="1.6" ry="2.3" fill="#ffd54d"/><path d="M13 26 Q16 28.4 19 26" stroke="#0e0b18" stroke-width="1.5" fill="none"/><g fill="#fff"><circle cx="16" cy="13.6" r=".9"/><circle cx="12.5" cy="25.4" r=".7"/><circle cx="19.5" cy="25.4" r=".7"/></g><text x="16" y="8.6" font-size="4.6" text-anchor="middle" fill="#ffd54d" font-family="sans-serif" font-weight="bold">3…2…1</text></svg>`,
+    // THE NETWORK — "the broadcast, given a body": a lattice tower that is
+    // also a ribcage, every node a channel, a red heart that is ON AIR.
+    the_network: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="sprite titan-sprite"><g fill="none" stroke="#5d6b80" stroke-width="1.1"><path d="M16 3 L7 31"/><path d="M16 3 L25 31"/><path d="M12.6 13 L19.4 13"/><path d="M10.6 19 L21.4 19"/><path d="M8.7 25 L23.3 25"/><path d="M12.6 13 L21.4 19 L8.7 25"/><path d="M19.4 13 L10.6 19 L23.3 25"/></g><g fill="none" stroke="#9fd8ff" stroke-width=".8" opacity=".75"><path d="M10 6 A8 8 0 0 1 22 6"/><path d="M7 4 A12 12 0 0 1 25 4" opacity=".55"/><path d="M4.5 2 A15 15 0 0 1 27.5 2" opacity=".3"/></g><circle cx="16" cy="3" r="1.6" fill="#eef6ff"/><g fill="#4df3ff"><circle cx="12.6" cy="13" r="1.1"/><circle cx="19.4" cy="13" r="1.1"/><circle cx="10.6" cy="19" r="1.1"/><circle cx="21.4" cy="19" r="1.1"/><circle cx="8.7" cy="25" r="1.1"/><circle cx="23.3" cy="25" r="1.1"/></g><path d="M16 21.6 C13.4 19.4 12.6 17.6 14 16.4 C15 15.6 15.8 16.2 16 17 C16.2 16.2 17 15.6 18 16.4 C19.4 17.6 18.6 19.4 16 21.6 Z" fill="#e03131"/><rect x="12.4" y="27.4" width="7.2" height="3.2" rx=".6" fill="#e03131"/><text x="16" y="29.8" font-size="2.6" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="bold">ON AIR</text></svg>`,
+  };
+  // monster id -> titan id, for titans whose monster id differs.
+  const TITAN_BY_MONSTER = { network_heart: 'the_network' };
+  function titanSprite(id) {
+    if (!id) return null;
+    return TITAN_SPRITES[id] || TITAN_SPRITES[TITAN_BY_MONSTER[id]] || null;
+  }
+
   // monsterSprite(mid, aggro): calm = the real animal/mundane thing (Steve's law:
   // identical until aggro), aggro = the monster revealed. Falls back to calm.
   function monsterSprite(mid, aggro) {
@@ -1122,5 +1149,5 @@ L23.8 3.2 L25.5 1.5 Q26.5 2 26 3.2 L24.8 5.5 L27.5 5.2 Q28.5 5.8 27.8 6.8 L25.5 
     return '#' + [c(n >> 16), c((n >> 8) & 255), c(n & 255)].map(x => x.toString(16).padStart(2, '0')).join('');
   }
 
-  S.Sprites = { get, chainFor, plantSprite, itemSprite, monsterSprite, villagerSprite, villagerEcho, has: (id) => !!SPRITES[id] };
+  S.Sprites = { get, chainFor, plantSprite, itemSprite, monsterSprite, titanSprite, titanIds: () => Object.keys(TITAN_SPRITES), villagerSprite, villagerEcho, has: (id) => !!SPRITES[id] };
 })(globalThis);
