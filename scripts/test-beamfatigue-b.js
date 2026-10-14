@@ -36,7 +36,8 @@
 //      hunting, not an engine trick (asserts on the arrival/trigger lines).
 //
 // Usage: node scripts/test-beamfatigue-b.js
-//        BEAM_FATIGUE=0 node scripts/test-beamfatigue-b.js   (RED: B must show the stalemate, A/C/D must FAIL)
+//        BEAM_FATIGUE=0 node scripts/test-beamfatigue-b.js   (RED: B must show the stalemate, A/C/D must FAIL;
+//          the RED phase also sets WHIFFGUARD=0 internally — the class guard would otherwise resolve it honestly)
 'use strict';
 const { loadGame, setupGame, quietLog } = require('./sim-harness');
 
@@ -256,6 +257,10 @@ function huntLines(Game) {
 (async () => {
   const gateOff = process.env.BEAM_FATIGUE === '0';
   console.log(`beam-fatigue proof — lever ${gateOff ? 'OFF (RED phase)' : 'ON'}`);
+  // WHIFF-CLASS GUARD (2026-10-14): the general whiff-forever guard in
+  // tbRoundWrap now resolves the pristine sterile-beam stalemate honestly
+  // (see test-inffight-class-20261014.js). The pristine RED needs it off too.
+  if (gateOff) process.env.WHIFFGUARD = '0';
 
   // ---- A: the stalemate duel, gate ON ----
   {

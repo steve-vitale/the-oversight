@@ -18,7 +18,7 @@
 //   - fieldFitBlock(tx, ty, mx, my, size) (world-spawn footprint validation)
 //   - tbCanOccupy(f, nx, ny) (validated movement: whole-footprint occupancy)
 //   - tbAdvance()
-//   - tbRoundWrap(f) (shared round wrap: order re-sort, ROUND call, belltoad chorus arrivals — sync + stepped-async)
+//   - tbRoundWrap(f) (shared round wrap: order re-sort, ROUND call, belltoad chorus arrivals, whiff-forever guard — sync + stepped-async)
 //   - tbAfterPlayerAction()
 //   - tbPlayerFlip(targetKey) (speedbump turtle: strength-check flip — 3 turns armor 0, no snap, no bunker; fail eats a snap)
 //   - tbPlayerRally() (coalition verb: regroup on the player, hold the line (rallied), focus-fire (coordKey); 1/fight)
@@ -31622,6 +31622,55 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         }
       }
+      // WHIFF-FOREVER GUARD (longsim scale-wall r24 arm 2, 2026-10-14):
+      // finding #108 — a fight where NOBODY loses HP for WHIFF_ROUNDS
+      // consecutive rounds is not a fight, it's a softlock (Focus Group:
+      // eye-head interception ate every scholar strike for 0 damage while
+      // the anchor-centered Deliberation couldn't reach range 2 — 1M+
+      // rounds, over=false, HP/position churn defeating every signature
+      // check; the harness time-freeze watchdog never got its 8 loop-days
+      // because each loop-day ground ~240k rounds through driveContests'
+      // 400-iteration loop). Damage-only accounting: heals don't mask it,
+      // joiners seed at current HP, the departed are pruned. At the
+      // threshold the fight COMES APART via the existing honest-disengage
+      // idiom (tbEndCheck: "It comes apart — no one in reach, no one
+      // chasing..."), never a silent kill, never a free win. General: no
+      // monster ids, no telegraph names — the class is "both sides whiff",
+      // not the beast. WHIFFGUARD=0 disables (RED).
+      try {
+        if (!f.over && this.tbWhiffGuardOn()) {
+          const WHIFF_ROUNDS = 120;
+          const prev = f._whiffHp || (f._whiffHp = {});
+          let dmg = 0;
+          const seen = {};
+          for (const x of (f.fighters || [])) {
+            if (!x || x.key == null) continue;
+            seen[x.key] = true;
+            const cur = Math.max(0, Math.round(x.hp || 0));
+            if (prev[x.key] === undefined) { prev[x.key] = cur; continue; }
+            if (cur < prev[x.key]) dmg += (prev[x.key] - cur);
+            prev[x.key] = cur;
+          }
+          for (const k of Object.keys(prev)) if (!seen[k]) delete prev[k];
+          f._whiffRounds = dmg > 0 ? 0 : ((f._whiffRounds || 0) + 1);
+          if ((f._whiffRounds || 0) >= WHIFF_ROUNDS && !f._whiffFired) {
+            const liveMon = (f.fighters || []).some(x => x && x.kind === 'monster' && x.alive && !x.fled);
+            const liveUs = (f.fighters || []).some(x => x && (x.kind === 'player' || x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled);
+            // Don't fight the chorus: if reinforcements are incoming
+            // (belltoad _pendingPack), the fight has a future — let it arrive.
+            // The pack is finite; the guard fires once it's exhausted.
+            const packIncoming = this._pendingPack && this._pendingPack.count > 0;
+            if (liveMon && liveUs && !packIncoming) {
+              f._whiffFired = true;
+              this.say('It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds.');
+              for (const m of (f.fighters || [])) {
+                if (m && m.kind === 'monster' && m.alive && !m.fled) m.fled = true;
+              }
+              try { this.tbEndCheck(); } catch (e) {}
+            }
+          }
+        }
+      } catch (e) {}
     },
 
     // --- turn advancement: run AI turns until it's the player's turn ---
@@ -33585,6 +33634,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     focusGroupCloseOn() {
       try {
         if (typeof process !== 'undefined' && process && process.env && process.env.FOCUSGROUP_CLOSE === '0') return false;
+      } catch (e) {}
+      return true;
+    },
+    // WHIFF-FOREVER GUARD gate (longsim scale-wall r24 arm 2, 2026-10-14):
+    // default ON; WHIFFGUARD=0 disables for before/after measurement on
+    // identical seeds (RED). Follows the focusGroupCloseOn()/beamFatigueOn()
+    // precedent.
+    tbWhiffGuardOn() {
+      try {
+        if (typeof process !== 'undefined' && process && process.env && process.env.WHIFFGUARD === '0') return false;
       } catch (e) {}
       return true;
     },

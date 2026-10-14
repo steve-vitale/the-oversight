@@ -50,7 +50,8 @@
 //      honest fights are untouched).
 //
 // Usage: node scripts/test-inffight-20261014.js
-//        FOCUSGROUP_CLOSE=0 node scripts/test-inffight-20261014.js  (RED: R1 must STALL, G1/G2 must FAIL)
+//        FOCUSGROUP_CLOSE=0 node scripts/test-inffight-20261014.js  (RED: R1 must STALL (both gates off internally),
+//          G1 must resolve via the class guard, G2 unaffected)
 'use strict';
 const { loadGame, setupGame, quietLog } = require('./sim-harness');
 
@@ -192,9 +193,15 @@ async function newDuelGame(seed) {
   console.log(`inffight proof: FOCUSGROUP_CLOSE=${FIX_ON ? '1 (fix ON)' : '0 (RED)'}`);
 
   // R1: the stall reproduces on pristine (gate OFF).
+  // WHIFF-CLASS GUARD (2026-10-14): the general whiff-forever guard in
+  // tbRoundWrap now resolves this geometry honestly (see
+  // test-inffight-class-20261014.js). The pristine RED needs BOTH gates off.
   {
+    const savedWhiff = process.env.WHIFFGUARD;
+    if (!FIX_ON) process.env.WHIFFGUARD = '0';
     const Game = await newDuelGame(44);
     const t = await duel(Game, strikeWeakest, ROUND_CAP);
+    if (!FIX_ON) { if (savedWhiff === undefined) delete process.env.WHIFFGUARD; else process.env.WHIFFGUARD = savedWhiff; }
     console.log(`R1: maxRound=${t.maxRound} over=${t.over} leadHp=${t.leadHp} (was ${t.leadHp0}) scholarHp=${t.scholarHp}`);
     if (!FIX_ON) {
       ok('R1 stall: round cap hit', t.maxRound >= ROUND_CAP, 'maxRound=' + t.maxRound);
@@ -218,8 +225,12 @@ async function newDuelGame(seed) {
       ok('G1 fiction: the heads close in', t.leadMoved === true, 'leadPos=' + t.leadPos);
       ok('G1 fiction: Deliberation lands (the monster fights)', t.deliberationLanded > 0, 'landed=' + t.deliberationLanded);
     } else {
-      console.log('G1 expected to FAIL on RED (stall) — gate OFF');
-      ok('G1 RED check: stall present', t.over === false);
+      // RED (close-fix off) WITH the class guard on: the old geometry now
+      // resolves via the whiff-forever guard — the per-monster fix is
+      // subsumed for the stall class (the honest threat it adds is G2's).
+      console.log('G1 on RED: close-fix off, class guard on — must resolve via the guard');
+      ok('G1 RED: stall class resolved (no infinite fight)', t.over === true, 'over=' + t.over + ' maxRound=' + t.maxRound);
+      ok('G1 RED: resolved via the honest disengage', t.endResult === 'routed', 'result=' + t.endResult);
     }
   }
 
