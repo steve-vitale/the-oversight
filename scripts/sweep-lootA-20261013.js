@@ -32,7 +32,7 @@ const OUT = process.env.OUT || 'evidence/2026-10-13/sim-lootA-sweep.json';
 // loot verbs, so wrapper counts == deliberate (policy-origin) counts; the
 // sweep cross-checks wrapper verbs against pacing rows.
 function attachLootMetrics(Game) {
-  const m = { verbs: 0, kcal: 0, cleared: [] };
+  const m = { verbs: 0, kcal: 0, stacks: 0, cleared: [] };
   const clearedSet = new Set();
   const lootedNow = (cid) => {
     try { const c = Game.corpses().find(x => x.id === cid); return !!(c && c.looted); }
@@ -50,7 +50,7 @@ function attachLootMetrics(Game) {
       } catch (e) {}
       const r = inner.apply(this, arguments);
       if (r) {
-        m.kcal += kcal;
+        m.kcal += kcal; m.stacks++; // one successful take = one stack
         if (!was && lootedNow(cid) && !clearedSet.has(cid)) { clearedSet.add(cid); m.cleared.push(cid); }
       }
       return r;
@@ -66,6 +66,7 @@ function attachLootMetrics(Game) {
       const r = inner.apply(this, arguments);
       if (r) {
         for (const t of (r.taken || [])) m.kcal += (t.kcalEach || 0) * (t.units || 0);
+        m.stacks += (r.taken || []).length;
         if (!was && r.looted && !clearedSet.has(cid)) { clearedSet.add(cid); m.cleared.push(cid); }
       }
       return r;
@@ -100,7 +101,7 @@ async function oneRun(seed, policyId, lootAll) {
     seed, policy: policyId, arm: lootAll ? 'batch' : 'baseline',
     days: result.days, gameDays: result.gameDays, endReason: result.endReason,
     lootVerbsPacing: pacingVerbs, lootVerbsWrapped: lm.verbs,
-    corpsesCleared: cleared,
+    corpsesCleared: cleared, stacksHauled: lm.stacks,
     verbsPerCleared: cleared > 0 ? +(pacingVerbs / cleared).toFixed(2) : null,
     lootKcal: Math.round(lm.kcal),
     totalDeliberate: result.pacing.totalDeliberate,
@@ -136,21 +137,29 @@ async function main() {
   const vpcB = pairs.map(p => p.b.verbsPerCleared).filter(x => x != null);
   const vpcA = pairs.map(p => p.a.verbsPerCleared).filter(x => x != null);
   const kcalB = pairs.map(p => p.b.lootKcal), kcalA = pairs.map(p => p.a.lootKcal);
+  const stB = pairs.map(p => p.b.stacksHauled), stA = pairs.map(p => p.a.stacksHauled);
   const summary = {
     meta: { seeds: SEEDS, policies: POLICIES, days: DAYS, arms: ['baseline(LOOT_ALL=0)', 'batch(LOOT_ALL=1)'], n: pairs.length },
     verbsPerCleared: { baseline: mean(vpcB), batch: mean(vpcA),
       reduction: (mean(vpcB) && mean(vpcA)) ? +((1 - mean(vpcA) / mean(vpcB)) * 100).toFixed(1) : null },
     lootKcal: { baseline: mean(kcalB), batch: mean(kcalA),
-      ratio: (mean(kcalB) && mean(kcalA)) ? +(mean(kcalA) / mean(kcalB)).toFixed(3) : null },
+      ratio: (mean(kcalB) && mean(kcalA)) ? +(mean(kcalA) / mean(kcalB)).toFixed(3) : null,
+      note: 'STRUCTURALLY ZERO: monster corpse loot tables carry kcalEach 0 (meat comes from butchering); guardrail unevaluable — see metric review' },
+    stacksHauled: { baseline: mean(stB), batch: mean(stA),
+      ratio: (mean(stB) != null && mean(stA) != null && mean(stB) > 0) ? +(mean(stA) / mean(stB)).toFixed(3) : null,
+      note: 'REVISED GUARDRAIL (run 2): item stacks hauled from corpses, batch vs baseline' },
     go: null,
   };
-  if (summary.verbsPerCleared.reduction != null && summary.lootKcal.ratio != null) {
-    summary.go = (summary.verbsPerCleared.reduction >= 60 && summary.lootKcal.ratio >= 1.0)
+  // RUN 2 verdict (revised guardrail per anti-drift): primary = verbs/cleared
+  // reduction ≥60%; guardrail = stacks hauled ratio ≥1.0 (no loot loss).
+  // The kcal guardrail is recorded but unevaluable (structurally zero).
+  if (summary.verbsPerCleared.reduction != null && summary.stacksHauled.ratio != null) {
+    summary.go = (summary.verbsPerCleared.reduction >= 60 && summary.stacksHauled.ratio >= 1.0)
       ? 'GO' : 'NO-GO';
   }
   const out = { summary, pairs: pairs.map(p => ({ policy: p.policy, seed: p.seed,
-    b: { v: p.b.lootVerbsPacing, c: p.b.corpsesCleared, vpc: p.b.verbsPerCleared, kcal: p.b.lootKcal, days: p.b.days },
-    a: { v: p.a.lootVerbsPacing, c: p.a.corpsesCleared, vpc: p.a.verbsPerCleared, kcal: p.a.lootKcal, days: p.a.days } })) };
+    b: { v: p.b.lootVerbsPacing, c: p.b.corpsesCleared, vpc: p.b.verbsPerCleared, kcal: p.b.lootKcal, stacks: p.b.stacksHauled, days: p.b.days },
+    a: { v: p.a.lootVerbsPacing, c: p.a.corpsesCleared, vpc: p.a.verbsPerCleared, kcal: p.a.lootKcal, stacks: p.a.stacksHauled, days: p.a.days } })) };
   fs.mkdirSync(require('path').dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(out, null, 1));
   console.log('\n=== SUMMARY ===');
