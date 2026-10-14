@@ -54,7 +54,7 @@ for (const bid of buildarounds) {
 console.log('\n3. Buildaround module:');
 const baSrc = fs.readFileSync(path.join(ROOT, 'src/js/buildarounds.js'), 'utf8');
 const hooks = ['onStrikeHit','onStrikeMiss','frenzyMult','onBlocked','unleash','mark','trophyMult',
-  'onHeal','feastMult','onMove','onDamaged','dodgeBonus','cartographerMult','socialMult',
+  'onHeal','feastMult','onMove','onDamaged','dodgeBonus','cartographerDodge','socialMult',
   'onDayTick','onForage','forageMult','damageMult'];
 for (const h of hooks) {
   ok(baSrc.includes(h + ':'), `module exposes ${h}`);
@@ -97,13 +97,11 @@ const mockGame2 = {
   state: { scholar: { buildaround: {} } },
   say: () => {}, audioEvent: () => {},
 };
-BA.onBlocked(mockGame2, 40, false); // not for other — System doesn't record
-ok((mockGame2.state.scholar.buildaround.retribution || 0) === 0, 'no charge when not protecting');
-BA.onBlocked(mockGame2, 40, true); // for other — System records
-BA.onBlocked(mockGame2, 40, true);
-ok(mockGame2.state.scholar.buildaround.retribution === 80, `stored 80 (got ${mockGame2.state.scholar.buildaround.retribution})`);
+BA.onBlocked(mockGame2, 40);
+BA.onBlocked(mockGame2, 40);
+ok(mockGame2.state.scholar.buildaround.retribution === 40, `stored 40 (50% of 80, got ${mockGame2.state.scholar.buildaround.retribution})`);
 const unleashed = BA.unleash(mockGame2);
-ok(unleashed === 80, `unleash releases 80 (got ${unleashed})`);
+ok(unleashed === 40, `unleash releases 40 (got ${unleashed})`);
 ok(mockGame2.state.scholar.buildaround.retribution === 0, 'storage cleared after unleash');
 
 console.log('\n6. Nowhere Man logic:');

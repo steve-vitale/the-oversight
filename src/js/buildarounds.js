@@ -88,19 +88,16 @@
       } catch (e) { return 1; }
     },
 
-    // RETRIBUTION (shieldbearer): the System records pain you take FOR OTHERS.
-    // It doesn't understand self-sacrifice — so it studies it. When you
-    // bodyguard, draw fire, or intercept, the pain is stored as data.
-    // Unleash: the System returns the data as force.
-    onBlocked: function (game, amount, forOther) {
+    // RETRIBUTION (shieldbearer): absorb → release battery. Stores 50% of
+    // blocked damage; unleash as shockwave. Mechanical payoff for the tank.
+    onBlocked: function (game, amount) {
       try {
         if (!game.hasAbility || !game.hasAbility('retribution')) return;
-        if (!forOther) return; // The System only records protective pain.
         const st = dayState(game);
-        st.retribution = (st.retribution || 0) + Math.round(amount);
+        st.retribution = (st.retribution || 0) + Math.round(amount * 0.5);
         if (st.retribution >= 30 && !st.retributionTold) {
           st.retributionTold = true;
-          game.say(`RETRIBUTION: the System has recorded ${st.retribution} pain. "WE DON'T UNDERSTAND. DO YOU WANT IT BACK?" (Unleash: active ability)`);
+          game.say(`RETRIBUTION: ${st.retribution} stored. Unleash it. (active ability)`);
           try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e2) {}
         }
       } catch (e) {}
@@ -160,21 +157,19 @@
             }
           }
         }
-        // Feast Engine (survivalist)
-        if (game.hasAbility && game.hasAbility('feast_engine') && overheal > 0) {
-          const st = dayState(game);
-          st.feastCharge = Math.min((st.feastCharge || 0) + overheal * 2, 50);
-          if (st.feastCharge >= 10) {
-            game.say(`FEAST ENGINE: +${Math.round(st.feastCharge)}% damage from excess. The furnace burns.`);
-          }
-        }
+
       } catch (e) {}
     },
+    // FEAST ENGINE (survivalist): full HP → +25% damage. Simple, triggers.
     feastMult: function (game) {
       try {
         if (!game.hasAbility || !game.hasAbility('feast_engine')) return 1;
-        const st = dayState(game);
-        return 1 + ((st && st.feastCharge) || 0) / 100;
+        const s = game.state.scholar;
+        const p = game.inCombat() ? game.tbFighter('p') : null;
+        const hp = (p && p.alive) ? (p.hp || 0) : (s.health || 0);
+        const maxHp = (p && p.alive) ? (p.maxHp || 100) : game.maxHealth();
+        if (hp >= maxHp) return 1.25;
+        return 1;
       } catch (e) { return 1; }
     },
 
@@ -204,15 +199,15 @@
       } catch (e) { return 0; }
     },
 
-    // CARTOGRAPHER'S EYE (explorer): revealed tiles → damage.
-    cartographerMult: function (game) {
+    // CARTOGRAPHER'S EYE (explorer): terrain knowledge → dodge. You know
+    // where the ground is uneven, where the cover is. They don't.
+    cartographerDodge: function (game) {
       try {
-        if (!game.hasAbility || !game.hasAbility('cartographers_eye')) return 1;
+        if (!game.hasAbility || !game.hasAbility('cartographers_eye')) return 0;
         let revealed = 0;
         try { revealed = game.revealedTileCount ? game.revealedTileCount() : 0; } catch (e) {}
-        const bonus = Math.min(Math.floor(revealed / 10) * 0.02, 0.30);
-        return 1 + bonus;
-      } catch (e) { return 1; }
+        return Math.min(Math.floor(revealed / 10) * 0.01, 0.15);
+      } catch (e) { return 0; }
     },
 
     // CROWD FAVORITE (socialite): fans → social multiplier.
@@ -233,7 +228,7 @@
         let pantry = 0;
         try { pantry = game.pantryKcal ? game.pantryKcal() : 0; } catch (e) {}
         if (pantry < 1000) return;
-        const rate = baPathCount(game, 'miser') >= 2 ? 0.01 : 0.005;
+        const rate = baPathCount(game, 'miser') >= 2 ? 0.05 : 0.025;
         const interest = Math.round(pantry * rate);
         try { game.addPantryKcal(interest); } catch (e) {}
         game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
@@ -280,7 +275,6 @@
         m *= BA.frenzyMult(game);
         m *= BA.trophyMult(game, target);
         m *= BA.feastMult(game);
-        m *= BA.cartographerMult(game);
         return m;
       } catch (e) { return 1; }
     },

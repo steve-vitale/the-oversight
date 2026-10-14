@@ -32346,11 +32346,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // strike bonus in tbPlayerStrike: one condition, both halves.
         try { if (this.hasAbility && this.hasAbility('cornered_rat') && this.tbSurroundedBy && this.tbSurroundedBy(3)) dodgeCh += 0.5; } catch (e) {}
         // NOWHERE MAN (build-around 2026-10-14): +5% dodge per tile moved unhit.
+        // CARTOGRAPHER'S EYE (build-around 2026-10-14): terrain knowledge → dodge.
         try {
           const BA3 = (globalThis.Scattering || {}).buildarounds;
-          if (BA3 && typeof BA3.dodgeBonus === 'function') {
-            const _nb = BA3.dodgeBonus(this);
-            if (_nb > 0) dodgeCh += _nb;
+          if (BA3) {
+            if (typeof BA3.dodgeBonus === 'function') {
+              const _nb = BA3.dodgeBonus(this);
+              if (_nb > 0) dodgeCh += _nb;
+            }
+            if (typeof BA3.cartographerDodge === 'function') {
+              const _cd = BA3.cartographerDodge(this);
+              if (_cd > 0) dodgeCh += _cd;
+            }
           }
         } catch (e) {}
         // BURDEN (Steve 2026-10-06): a heavy pack slows your slip-aside.
@@ -32586,16 +32593,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // (chip hits vs real protection). The monster-hide block below
           // already gates on absorbed > 0; same rule here.
           if (absorb > 0) this.say(`Armor absorbs ${absorb}.`);
-          // RETRIBUTION (build-around 2026-10-14, fiction: the System records
-          // protective pain). Only charges when taking hits FOR OTHERS —
-          // bodyguard stance, draw_fire taunt, or intercepting.
+          // RETRIBUTION (build-around 2026-10-14): store 50% of blocked damage.
           try {
             const BA4 = (globalThis.Scattering || {}).buildarounds;
-            if (BA4 && typeof BA4.onBlocked === 'function') {
-              const _p = this.tbFighter('p');
-              const _forOther = !!(_p && (_p.bodyguardStance || _p.drawFireActive || _p.interceptedHit));
-              BA4.onBlocked(this, absorb, _forOther);
-            }
+            if (BA4 && typeof BA4.onBlocked === 'function') BA4.onBlocked(this, absorb);
           } catch (e) {}
         }
       }
