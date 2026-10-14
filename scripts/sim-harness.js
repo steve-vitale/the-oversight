@@ -334,6 +334,7 @@ async function runDays(Game, policy, opts) {
     answerGlobalChoice: 'social', chooseTableOption: 'social',
     handInAidQuest: 'social', payTribute: 'social', rallyVillage: 'social',
     offerSystemQuest: 'social', corpseTakeItem: 'food',
+    corpseLootAll: 'food', // batch-loot 2026-10-13: loot verbs file under food (taxonomy fix 1ab8a2bc)
     studyVillageCodex: 'field', proveWorth: 'social', agencyTurn: 'social',
     // travel
     travelTo: 'travel', pathStep: 'travel', beginPathWalk: 'travel', clearBlockage: 'travel',

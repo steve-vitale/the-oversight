@@ -418,16 +418,12 @@
       return true;
     },
 
-    // corpseTakeItem(cid, idx): take the whole stack of one item.
-    corpseTakeItem(cid, idx) {
-      const c = this.corpses().find(x => x.id === cid);
-      if (!c || c.buried) { this.say('Nothing there.'); return null; }
-      if (!this._corpseCheckRange(c)) return null;
-      const it = (c.items || [])[idx];
-      if (!it || (it.units == null ? 1 : it.units) <= 0) { this.say('Nothing left of that.'); return null; }
+    // _corpseTakeStack(c, it): move one item stack from a corpse into the
+    // scholar's pack. Shared by corpseTakeItem (one stack) and corpseLootAll
+    // (many). Assumes: range checked, units > 0, carry-weight gate passed.
+    // First-touch trauma/disease fires once per corpse (idempotent).
+    _corpseTakeStack(c, it) {
       const units = it.units || 1;
-      const kg = (it.kg || 0.3) * units;
-      if (this.canCarry && !this.canCarry(kg)) { this.say("Too heavy — your pack can't take it."); return null; }
       this._corpseFirstTouch(c);
       const s = this.state.scholar;
       const inv = s.inventory;
@@ -451,6 +447,20 @@
       // GEAR DISCOVERY (Steve 2026-10-09): looting a gear item teaches its
       // recipe L1 — you've held one. (Sapient dead carry their real gear.)
       try { if (it.itemId) this.noteGearHandled(it.itemId); } catch (e) {}
+      return it;
+    },
+
+    // corpseTakeItem(cid, idx): take the whole stack of one item.
+    corpseTakeItem(cid, idx) {
+      const c = this.corpses().find(x => x.id === cid);
+      if (!c || c.buried) { this.say('Nothing there.'); return null; }
+      if (!this._corpseCheckRange(c)) return null;
+      const it = (c.items || [])[idx];
+      if (!it || (it.units == null ? 1 : it.units) <= 0) { this.say('Nothing left of that.'); return null; }
+      const units = it.units || 1;
+      const kg = (it.kg || 0.3) * units;
+      if (this.canCarry && !this.canCarry(kg)) { this.say("Too heavy — your pack can't take it."); return null; }
+      this._corpseTakeStack(c, it);
       const nm = this.itemDisplayName ? this.itemDisplayName(it) : (it.name || 'it');
       this.say(`Taken: ${nm} x${units}.`);
       if (!c.items.some(i => (i.units == null ? 1 : i.units) > 0)) {
@@ -458,6 +468,46 @@
         this.say(c.ash ? 'The ashes are picked clean. Nothing left but grey.' : 'The body is stripped. What\'s left isn\'t worth taking.');
       }
       return it;
+    },
+
+    // corpseLootAll(cid, skipFn): ONE deliberate decision clears a corpse.
+    // Takes every remaining item stack that passes the per-item carry-weight
+    // gate (canCarry re-checked as the pack fills); overweight stacks stay on
+    // the corpse and are reported, never silently dropped. Items flagged
+    // _left (the player chose Leave) and items matching skipFn are skipped.
+    // Rotting rules unchanged: meat left on the corpse still rots. Human meat
+    // is NOT skipped by default — callers that want the trembles rule pass
+    // (it) => it.plantId === 'meat_human' (the loot UI and policies do).
+    // Returns { taken: [{name, units, kcalEach}], left: [...], skipped: n,
+    // looted: bool } or null when the verb fizzles (range/burial).
+    corpseLootAll(cid, skipFn) {
+      const c = this.corpses().find(x => x.id === cid);
+      if (!c || c.buried) { this.say('Nothing there.'); return null; }
+      if (!this._corpseCheckRange(c)) return null;
+      const nm = (it) => this.itemDisplayName ? this.itemDisplayName(it) : (it.name || 'it');
+      const taken = [], left = [];
+      let skipped = 0, humanSkipped = 0;
+      const items = c.items || [];
+      for (let idx = 0; idx < items.length; idx++) {
+        const it = items[idx];
+        if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
+        if (it._left) { skipped++; continue; }
+        if (skipFn && skipFn(it)) { skipped++; if (it.plantId === 'meat_human') humanSkipped++; continue; }
+        const units = it.units || 1;
+        const kg = (it.kg || 0.3) * units;
+        if (this.canCarry && !this.canCarry(kg)) { left.push({ name: nm(it), units }); continue; }
+        this._corpseTakeStack(c, it);
+        taken.push({ name: nm(it), units, kcalEach: it.kcalEach || 0 });
+      }
+      if (taken.length) this.say('Taken: ' + taken.map(t => `${t.name} x${t.units}`).join(', ') + '.');
+      if (left.length) this.say('Too heavy for the rest — left where it lies: ' + left.map(t => `${t.name} x${t.units}`).join(', ') + '.');
+      if (humanSkipped > 0) this.say('Left the human meat. Trembles has no cure.');
+      if (!taken.length && !left.length) this.say('Nothing worth taking.');
+      if (!c.items.some(i => (i.units == null ? 1 : i.units) > 0)) {
+        c.looted = true;
+        this.say(c.ash ? 'The ashes are picked clean. Nothing left but grey.' : 'The body is stripped. What\'s left isn\'t worth taking.');
+      }
+      return { taken, left, skipped, looted: !!c.looted };
     },
 
     // corpseUseItem(cid, idx): take one unit into your pack, then use it

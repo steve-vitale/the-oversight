@@ -82,27 +82,47 @@ function answerAidBeats(Game, ctx) {
   } catch (e) {}
 }
 
-// Loot the dead: an experienced player strips corpses (take, don't leave
-// meat to rot — but never human meat). Range-checked inside corpseTakeItem.
+// Loot the dead: an experienced player strips corpses — one decision per
+// corpse (corpseLootAll), not one per item stack. Never human meat
+// (trembles). Range-checked inside the verb. LOOT_ALL=0 restores the old
+// per-item path (sweep baseline control); default is batch.
 function lootCorpses(Game, ctx) {
   try {
     if (!Game.corpses) return 0;
-    let took = 0;
+    const batch = Game.corpseLootAll && process.env.LOOT_ALL !== '0';
+    const skipHuman = (it) => it.plantId === 'meat_human'; // trembles
+    let units = 0; // batch: corpses cleared; per-item fallback: items taken
     for (const c of Game.corpses()) {
       if (!c || c.looted || c.buried) continue;
       const items = c.items || [];
-      for (let i = items.length - 1; i >= 0; i--) {
-        const it = items[i];
+      // only fire a deliberate verb when something takeable remains
+      let takeable = 0;
+      for (const it of items) {
         if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
-        if (it.plantId === 'meat_human') continue; // trembles
-        try {
-          const r = Game.corpseTakeItem(c.id, i);
-          if (r) { took++; ctx.looted = (ctx.looted || 0) + 1; }
-        } catch (e) {}
+        if (it._left) continue;
+        if (skipHuman(it)) continue;
+        takeable++;
       }
-      if (took >= 12) break; // don't spend the whole day-part
+      if (!takeable) continue;
+      try {
+        if (batch) {
+          const r = Game.corpseLootAll(c.id, skipHuman);
+          if (r && r.taken && r.taken.length > 0) { units++; ctx.looted = (ctx.looted || 0) + r.taken.length; }
+        } else {
+          for (let i = items.length - 1; i >= 0; i--) {
+            const it = items[i];
+            if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
+            if (skipHuman(it)) continue; // trembles
+            try {
+              const r = Game.corpseTakeItem(c.id, i);
+              if (r) { units++; ctx.looted = (ctx.looted || 0) + 1; }
+            } catch (e) {}
+          }
+        }
+      } catch (e) {}
+      if (units >= 12) break; // don't spend the whole day-part
     }
-    return took;
+    return units;
   } catch (e) { return 0; }
 }
 

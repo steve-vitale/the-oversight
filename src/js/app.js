@@ -15089,10 +15089,15 @@
       ${c.ash
         ? `<p class="small" style="opacity:.7">What they carried belongs to the village now, not to whoever's standing here. Pocket it, or bring it home. The village will remember.</p>`
         : `<p class="small" style="opacity:.7">Take what you want. What's left stays — and meat rots where it lies.</p>`}
+      ${items.length ? `<p><button class="btn ghost sm" data-lootall="1">Take all</button></p>` : ''}
       ${bodyHtml}
     </div>`;
     wireInlineX(slot);
     const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
+    // TAKE-ALL (batch loot 2026-10-13): one decision clears the corpse.
+    // Skips human meat (trembles — no cure) with an honest narration; the
+    // per-item Take button still allows a deliberate human-meat take.
+    slot.querySelectorAll('[data-lootall]').forEach(b => b.onclick = rewire(() => Game.corpseLootAll(cid, (it) => it.plantId === 'meat_human'), 'Taken.'));
     slot.querySelectorAll('[data-loottake]').forEach(b => b.onclick = rewire(() => Game.corpseTakeItem(cid, +b.dataset.loottake), 'Taken.'));
     slot.querySelectorAll('[data-lootuse]').forEach(b => b.onclick = rewire(() => Game.corpseUseItem(cid, +b.dataset.lootuse), 'Used.'));
     slot.querySelectorAll('[data-looteat]').forEach(b => b.onclick = rewire(() => Game.corpseEatItem(cid, +b.dataset.looteat), 'Eaten.'));
