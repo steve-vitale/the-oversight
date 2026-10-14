@@ -542,6 +542,145 @@
           Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) <= 1) || null;
       } catch (e) { return null; }
     },
+    // ============ PSYCHO VIOLENCE (Steve 2026-10-13) ============
+    // Malicious psychos can escalate: theft -> intimidation -> attack.
+    // RARE by design — violence needs motives, not dice. Each stage requires
+    // triggers (hunger, opportunity, prior escalation) and has cooldowns.
+    // The justice ladder responds to each stage as a crime.
+    psychoViolenceTick() {
+      if (this.over || this.tbfight) return;
+      try {
+        var v = this.state.village || {};
+        var roster = (v.roster || []).filter(function (id) {
+          return !(this.vpOf(id) || {}).dead;
+        }, this);
+        if (!roster.length) return;
+
+        // Find malicious psychos in the village
+        var psychos = [];
+        for (var i = 0; i < roster.length; i++) {
+          var pid = roster[i];
+          var dark = this.npcDark ? this.npcDark(pid) : null;
+          if (dark && dark.kind === 'malicious') psychos.push(pid);
+        }
+        if (!psychos.length) return;
+
+        var day = (this.state.scholar || {}).day || 1;
+        var part = (this.state.scholar || {}).part || 0;
+        // Only check once per day (dawn part)
+        if (part !== 0) return;
+
+        v._psychoState = v._psychoState || {};
+        for (var p = 0; p < psychos.length; p++) {
+          var psychoId = psychos[p];
+          var ps = v._psychoState[psychoId] || { stage: 0, lastActDay: -999 };
+          var daysSinceAct = day - (ps.lastActDay || -999);
+
+          // Cooldown: at least 7 days between acts
+          if (daysSinceAct < 7) continue;
+
+          var psychoName = this.displayName ? this.displayName(psychoId) : 'Someone';
+          var corruption = (v.corruption || {})[psychoId] || 0;
+          var hungry = (v.hungryDays || 0) > 0;
+
+          // STAGE 0 -> 1: Theft. Trigger: hunger + opportunity + corruption.
+          // ~2% per day when conditions align (roughly once per 50 days).
+          if (ps.stage === 0) {
+            var theftChance = 0.02;
+            if (hungry) theftChance += 0.02;
+            if (corruption >= 40) theftChance += 0.01;
+            if (Math.random() < theftChance) {
+              // Steal from pantry
+              try {
+                if (this.recordCrime) this.recordCrime('theft', { villain: psychoId, witnessed: Math.random() < 0.6 });
+                this.say('🌙 Something went missing from the pantry in the night. ' + psychoName + ' was seen near the stores, but no one can prove anything.');
+                ps.stage = 1;
+                ps.lastActDay = day;
+                v._psychoState[psychoId] = ps;
+              } catch (e) {}
+            }
+          }
+          // STAGE 1 -> 2: Intimidation. Trigger: prior theft, victim vulnerable.
+          // ~10% per day after stage 1 (escalates within ~10 days if unchecked).
+          else if (ps.stage === 1) {
+            if (Math.random() < 0.10) {
+              // Pick a vulnerable victim (low status, not bold)
+              var candidates = roster.filter(function (id) {
+                return id !== psychoId && id !== this.villagerId;
+              }, this);
+              if (candidates.length) {
+                var victim = candidates[Math.floor(Math.random() * candidates.length)];
+                var vname = this.displayName ? this.displayName(victim) : 'a villager';
+                try {
+                  if (this.recordCrime) this.recordCrime('threat', { villain: psychoId, victim: victim, witnessed: Math.random() < 0.7 });
+                  this.say('👁️ ' + psychoName + ' cornered ' + vname + ' away from the fire. No one heard the words, but ' + vname + ' hasn\'t been the same since.');
+                  // Fear effect
+                  try {
+                    if (this.npcNeeds) {
+                      var needs = this.npcNeeds(victim);
+                      if (needs) needs.fear = Math.min(100, (needs.fear || 0) + 25);
+                    }
+                  } catch (e2) {}
+                  ps.stage = 2;
+                  ps.lastActDay = day;
+                  v._psychoState[psychoId] = ps;
+                } catch (e) {}
+              }
+            }
+          }
+          // STAGE 2 -> 3: Attack. Trigger: extreme stress or victim fought back.
+          // ~5% per day (roughly 1 in 20 escalations reach violence). RARE.
+          else if (ps.stage === 2) {
+            var attackChance = 0.05;
+            if (hungry && corruption >= 50) attackChance += 0.05; // desperate
+            if (Math.random() < attackChance) {
+              var targets = roster.filter(function (id) {
+                return id !== psychoId && id !== this.villagerId;
+              }, this);
+              if (targets.length) {
+                var target = targets[Math.floor(Math.random() * targets.length)];
+                var tname = this.displayName ? this.displayName(target) : 'a villager';
+                try {
+                  this.say('🔪 ' + psychoName + ' attacked ' + tname + '! The village erupts — this is beyond theft or threats.');
+                  // Use fieldFight: psycho vs victim (both villagers)
+                  // Build a minimal "monster def" for the psycho as attacker
+                  var psychoMdef = {
+                    id: 'psycho_' + psychoId,
+                    name: psychoName,
+                    attack: { name: 'vicious assault', damage: [8, 14] },
+                    speed: 3,
+                    wave: 1,
+                  };
+                  var rec = null;
+                  try {
+                    if (this.fieldFight) rec = this.fieldFight(target, psychoMdef, { name: psychoName }, {});
+                  } catch (e2) {}
+                  if (rec) {
+                    if (rec.outcome === 'victory') {
+                      // Victim survived/won — psycho is exposed
+                      this.say(tname + ' fought them off! ' + psychoName + ' is exposed as the attacker.');
+                      if (this.recordCrime) this.recordCrime('assault', { villain: psychoId, victim: target, witnessed: true });
+                    } else {
+                      // Psycho won — victim hurt or dead
+                      this.say('It was brutal. ' + tname + ' is hurt badly.');
+                      if (this.recordCrime) this.recordCrime('assault', { villain: psychoId, victim: target, witnessed: true });
+                    }
+                  } else {
+                    // Fallback if fieldFight not available
+                    if (this.recordCrime) this.recordCrime('assault', { villain: psychoId, victim: target, witnessed: true });
+                  }
+                  ps.stage = 3; // Attacked — now the village KNOWS
+                  ps.lastActDay = day;
+                  v._psychoState[psychoId] = ps;
+                } catch (e) {}
+              }
+            }
+          }
+          // STAGE 3: The village knows. The justice ladder takes over.
+          // No further automatic escalation — the moot/exile/uprising handles it.
+        }
+      } catch (e) {}
+    },
     // ============ PER-PART TICK ============
     corruptionTick() {
       if (this.over) return;
@@ -551,6 +690,7 @@
       try { this.npcCannibalTick(); } catch (e) {}
       try { this.temptTick(); } catch (e) {}
       try { this.darkCarePackageTick(); } catch (e) {}
+      try { this.psychoViolenceTick(); } catch (e) {}
       // fear decays without reinforcement — but slowly. Dread lingers.
       try {
         const d = (this.state.village || {}).dread || {};

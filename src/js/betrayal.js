@@ -2906,6 +2906,13 @@
     visitor.entrepreneurial = type === 'trader' ? true : R() < 0.25;
     visitor.shady = R() < (type === 'fleeing' ? 0.05 : 0.2);
     visitor.desperate = R() < 0.3;
+    // HOSTILE WANDERER (Steve 2026-10-13): rare dangerous visitors.
+    // Most wanderers are just people. ~3% are hostile — they may steal,
+    // threaten, or (very rarely) attack. The village can drive them off.
+    visitor.hostile = R() < 0.03;
+    if (visitor.hostile) {
+      visitor.shady = true; // hostile visitors are always shady
+    }
     // RETURNING SCAMMER (Steve 2026-10-06): if an unresolved discovered scam
     // is on the ledger, the same face may come back down the road — and then
     // there's a reckoning.
@@ -3620,6 +3627,68 @@
   },
 
   // ---------- 11. DAILY + WORLDGEN ----------
+  // HOSTILE VISITOR (Steve 2026-10-13): rare dangerous wanderers.
+  // Most visitors are just people. Hostile ones (~3%) may steal, threaten,
+  // or (very rarely) attack. The village can confront and drive them off.
+  hostileVisitorTick() {
+    if (this.over || this.tbfight) return;
+    try {
+      var v = this.state.village || {};
+      var visitors = v.visitors || [];
+      var day = (this.state.scholar || {}).day || 1;
+
+      for (var i = 0; i < visitors.length; i++) {
+        var vis = visitors[i];
+        if (!vis.hostile || vis._hostileActed) continue;
+
+        // Only act once per visit, and only with 30% chance
+        // (most hostile visitors just lurk menacingly and leave)
+        if (Math.random() > 0.30) continue;
+        vis._hostileActed = true;
+
+        var vname = vis.name || 'the stranger';
+        var roll = Math.random();
+
+        if (roll < 0.50) {
+          // Steal: take from pantry
+          this.say('🌙 ' + this.capFirst(vname) + ' was seen near the stores in the night. Something is missing.');
+          try {
+            if (this.recordCrime) this.recordCrime('theft', { villain: vis.id, witnessed: false });
+          } catch (e) {}
+        } else if (roll < 0.85) {
+          // Threaten: intimidate a villager
+          var roster = (v.roster || []).filter(function (id) {
+            return !(this.vpOf(id) || {}).dead;
+          }, this);
+          if (roster.length) {
+            var victim = roster[Math.floor(Math.random() * roster.length)];
+            var tname = this.displayName ? this.displayName(victim) : 'a villager';
+            this.say('👁️ ' + this.capFirst(vname) + ' cornered ' + tname + '. "Nice village. Be a shame if something happened to it."');
+            try {
+              if (this.recordCrime) this.recordCrime('threat', { villain: vis.id, victim: victim, witnessed: Math.random() < 0.5 });
+            } catch (e2) {}
+          }
+        } else {
+          // Attack: VERY RARE (5% of hostile visitors who act = ~0.45% of all visitors)
+          var targets = (v.roster || []).filter(function (id) {
+            return !(this.vpOf(id) || {}).dead;
+          }, this);
+          if (targets.length) {
+            var target = targets[Math.floor(Math.random() * targets.length)];
+            var tgtName = this.displayName ? this.displayName(target) : 'a villager';
+            this.say('🔪 ' + this.capFirst(vname) + ' attacked ' + tgtName + ' without warning!');
+            try {
+              if (this.recordCrime) this.recordCrime('assault', { villain: vis.id, victim: target, witnessed: true });
+            } catch (e3) {}
+            // The village drives them off (or they flee after the attack)
+            this.say('The village drives ' + vname + ' off at spearpoint. They won\'t be back.');
+            vis.leavesDay = day; // Leave immediately
+          }
+        }
+      }
+    } catch (e) {}
+  },
+
   // NPC-targeted plots spring on their own (the luring happens off-screen),
   // and stale armed plots expire so the single-plot slot never squats forever.
   npcPlotTick() {
@@ -3649,6 +3718,7 @@
     try { this.considerStrangers(); } catch (e) {}
     try { this.scamDaily(); } catch (e) {} // delayed scam discovery: sharp villagers remark
     try { this.visitorDaily(); } catch (e) {} // stale visitors move on; frees the stranger slot
+    try { this.hostileVisitorTick(); } catch (e) {} // hostile wanderers may act
     // simmer: conflicts gain a little tension; grievances fade very slowly
     try {
       for (const c of (this.state.village.conflicts || [])) {

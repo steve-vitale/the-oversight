@@ -2104,6 +2104,8 @@
         ap.lastVillagerKillDay = day;
         // Villagers react: fear, gossip
         try { this.apVillagerFear(pid, vname); } catch (e) {}
+        // Villagers may fight back (Steve 2026-10-13)
+        try { this.apVillagerRetaliate(pid, victim); } catch (e) {}
 
         // System feed reports it (if you have the feed)
         if (this.state.systemArrived && Math.random() < 0.7) {
@@ -2508,6 +2510,86 @@
       }
     },
 
+    // ============ VILLAGER RETALIATION (Steve 2026-10-13) ============
+    // When an alien kills a villager, the village doesn't just cower.
+    // Nearby villagers may engage the alien in combat via fieldFight.
+    // This makes alien predation risky, not free.
+    apVillagerRetaliate: function (pid, victimId) {
+      try {
+        var v = this.state.village || {};
+        var roster = (v.roster || []).filter(function (rid) {
+          return rid !== this.villagerId && rid !== victimId && !(this.vpOf(rid) || {}).dead;
+        }, this);
+        if (roster.length < 2) return; // Need at least 2 to even consider it
+
+        // Who's brave enough? Bold/intense temperaments, or those with high bravery.
+        // Groups are braver than individuals.
+        var brave = [];
+        for (var i = 0; i < roster.length; i++) {
+          var rid = roster[i];
+          var t = this.npcTemper ? this.npcTemper(rid) : 'steady';
+          var bravery = 0;
+          if (t === 'bold') bravery += 30;
+          else if (t === 'intense') bravery += 20;
+          else if (t === 'prickly') bravery += 10;
+          // Fear reduces bravery
+          try {
+            var needs = this.npcNeeds ? this.npcNeeds(rid) : null;
+            if (needs) bravery -= (needs.fear || 0) * 0.5;
+          } catch (e) {}
+          // Group courage: more villagers present = braver
+          bravery += Math.min(20, roster.length * 3);
+          if (bravery >= 25 && Math.random() < (bravery / 100)) brave.push(rid);
+        }
+
+        if (!brave.length) return;
+
+        var per = this.apPersona(pid);
+        var aname = per ? per.name : 'the stranger';
+        var bnames = brave.map(function (id) {
+          return this.displayName ? this.displayName(id) : 'a villager';
+        }, this).join(', ');
+
+        this.say('⚔️ ' + bnames + ' grab weapons and go after ' + aname + '! The village fights back!');
+
+        // Build the alien fighter and run fieldFight for the bravest villager
+        // (with others as allies)
+        var fighter = null;
+        try {
+          if (this.apBuildFighter) fighter = this.apBuildFighter(pid, 4, 4);
+        } catch (e) {}
+        if (!fighter) return;
+
+        var leader = brave[0];
+        var allies = brave.length - 1;
+        var rec = null;
+        try {
+          if (this.fieldFight) {
+            // Convert alien fighter to mdef format for fieldFight
+            var mdef = {
+              id: 'alien_' + pid,
+              name: aname,
+              attack: { name: 'alien strike', damage: [10, 16] },
+              speed: 4,
+              wave: 2,
+            };
+            rec = this.fieldFight(leader, mdef, { name: aname }, { allies: allies, allyVids: brave.slice(1) });
+          }
+        } catch (e2) {}
+
+        if (rec) {
+          if (rec.outcome === 'victory') {
+            this.say('🎉 They drove ' + aname + ' off! The village cheers — they fought back and won.');
+            // Alien retreats, doesn't die (backup bodies per canon)
+            try {
+              if (this.apDeactivate) this.apDeactivate(pid, 'driven off by villagers');
+            } catch (e3) {}
+          } else {
+            this.say('💔 ' + aname + ' fought them off. The village mourns — bravery wasn\'t enough this time.');
+          }
+        }
+      } catch (e) {}
+    },
 
     // ============ ALIEN ARMOR TRANSITION (Steve 2026-10-07) ============
     // Alien beam weapons vs human armor = nearly instant lethal.
