@@ -94,6 +94,14 @@ function lootCorpses(Game, ctx) {
     let units = 0; // batch: corpses cleared; per-item fallback: items taken
     for (const c of Game.corpses()) {
       if (!c || c.looted || c.buried) continue;
+      // RANGE PRE-CHECK (batch-loot 2026-10-13): the old loop fired the verb
+      // on every corpse on the map — 97% failed "Too far" (measured
+      // competent/s11/30d: 176/182). A human doesn't tap loot on a body
+      // three tiles away; skip out-of-range corpses before spending a
+      // deliberate verb. Quiet: no "Too far" narration spam.
+      try {
+        if (Game._corpseCheckRange && Game._corpseCheckRange(c, true) === false) continue;
+      } catch (e) {}
       const items = c.items || [];
       // only fire a deliberate verb when something takeable remains
       let takeable = 0;

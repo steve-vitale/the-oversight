@@ -408,11 +408,11 @@
       if (this.tickAction) this.tickAction(8);
     },
 
-    _corpseCheckRange(c) {
+    _corpseCheckRange(c, quiet) {
       const s = this.state.scholar;
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
           Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) > 1) {
-        this.say('Too far — get closer to the body.');
+        if (!quiet) this.say('Too far — get closer to the body.');
         return false;
       }
       return true;
