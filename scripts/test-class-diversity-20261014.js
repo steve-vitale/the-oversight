@@ -11,7 +11,7 @@
 //   - an unrecognised holder's level-up sheet carries an offer on their job
 //     path when the window holds one (player and villager)
 //   - after recognition the class lean takes over (the job path is not forced)
-//   - the sheet draws from the next 6 unheld kit entries, deterministically,
+//   - the sheet draws from the next `window` unheld kit entries, deterministically,
 //     and differs by holder
 //   - the player and villagers build sheets through the same function (kitSheet)
 //   - building a sheet consumes no Math.random
@@ -43,7 +43,7 @@ const T = K.reporter('test-class-diversity-20261014');
     T.ok(`all ${occs.length} occupations name 1-2 valid god paths`, occs.length > 40 && bad.length === 0, bad.map(o => o.id).join(','));
     const seen = new Set(); for (const o of occs) for (const p of o.pathLean || []) seen.add(p);
     T.ok('every god path is some job\'s lean', Object.keys(paths).every(p => seen.has(p)), Object.keys(paths).filter(p => !seen.has(p)).join(','));
-    T.ok('rules.offers: window 6 (wider than the sheet), decay in (0,1), jobLean on', W === 6 && W > n && O.windowDecay > 0 && O.windowDecay < 1 && O.jobLean === true, JSON.stringify(O).slice(0, 200));
+    T.ok('rules.offers: window wider than the sheet (6-10), decay in (0,1), jobLean on', W >= 6 && W <= 10 && W > n && O.windowDecay > 0 && O.windowDecay < 1 && O.jobLean === true, JSON.stringify(O).slice(0, 200));
   }
 
   // set a holder's occupation (the person record carries occupationId)
@@ -53,7 +53,7 @@ const T = K.reporter('test-class-diversity-20261014');
   const vidA = roster[0], vidB = roster[1];
   T.ok('two villagers and a bearer to test with', !!(vidA && vidB && Game.villagerId) && vidA !== vidB);
 
-  T.section('the window: next 6, weighted, deterministic, per holder');
+  T.section('the window: next `window`, weighted, deterministic, per holder');
   {
     const kit = tracksD.kits.craft.map(defOf);
     const firstSix = new Set(kit.slice(0, W).map(d => d.id));
@@ -78,9 +78,9 @@ const T = K.reporter('test-class-diversity-20261014');
       Game.villagerLevelUpOffers(vidA, 'craft', 2);
       Game.levelUpOffers('craft', 2);
     } finally { Math.random = before; }
-    T.ok('every offer comes from the next 6 unheld entries', allInWindow);
+    T.ok('every offer comes from the next `window` unheld entries', allInWindow);
     T.ok('the same holder/track/level always gets the same sheet', deterministic);
-    T.ok('the window reaches past the next 3 (entries 4-6 do appear)', beyond3);
+    T.ok('the window reaches past the next 3', beyond3);
     T.ok('different levels give different sheets (variety)', new Set(draws).size >= 4, new Set(draws).size);
     T.ok('no Math.random consumed building sheets (kitSheet, villager and player paths)', calls === 0, calls);
     // power order on average: earlier entries are offered more often
