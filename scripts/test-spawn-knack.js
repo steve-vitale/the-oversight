@@ -67,6 +67,11 @@ async function main() {
   ok(knacks.every(k => k.tier !== 'vile' && k.tier !== 'body_horror'), 'no vile/body_horror tiers');
   ok(knacks.every(k => (k.modifiers || []).length > 0), 'every knack has a real modifier');
   ok(knacks.every(k => k.memory && k.memory.includes('{kin}')), 'every knack has a lifeseed memory');
+  // Steve 2026-10-14: the knack is System-given, not innate — descriptions must
+  // frame it as ARRIVING recently, never as "always had" / lifelong
+  const innateRe = /always had|always been|born with|my whole life|lifelong|since I was/i;
+  ok(knacks.every(k => !innateRe.test(k.description || '')), 'no "always had" in descriptions');
+  ok(knacks.every(k => !innateRe.test(k.memory || '')), 'no "always had" in memories');
 
   // ---------- (a) spawn offers 3 lifeseed-tied choices ----------
   console.log('(a) spawn knack choices');
@@ -136,9 +141,12 @@ async function main() {
   const knackBeats = beats.filter(b => b.id === 'knack');
   ok(knackBeats.length === 1, 'exactly one knack beat', knackBeats.length);
   const beatText = knackBeats[0].lines.map(l => l.text).join(' ');
-  ok(/BEFORE we got here/.test(beatText), 'beat names the anomaly');
-  ok(/rounding error/.test(beatText), 'beat files it as rounding error');
-  ok(!/purify|trial|gift/i.test(beatText) || true, 'beat offers no explanation');
+  ok(/sent that ahead/i.test(beatText), 'beat claims the System sent it ahead');
+  ok(/WELCOME/i.test(beatText), 'beat welcomes the early gift');
+  ok(!/rounding error/i.test(beatText), 'no more "rounding error" fiction');
+  ok(!/BEFORE we got here/.test(beatText), 'no more "always had" fiction');
+  // the knack is GIVEN, not innate — the grant line says so
+  ok(!/was always there/i.test(said), 'no "always there" in grant copy');
   // no knack, no beat
   s.abilities = [];
   const beats2 = Game.systemArrivalBeats();

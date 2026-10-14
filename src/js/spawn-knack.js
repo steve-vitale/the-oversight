@@ -1,6 +1,6 @@
 // @ontology
 // system: spawn-knack
-// description: The spawn knack — a mysterious latent first ability chosen in the spawn sequence, pre-System. Backstory-rooted, unexplained.
+// description: The spawn knack — the System's early touch. Granted before the System's formal arrival (sent ahead), unexplained at grant time but GIVEN — never innate, never "always had" (Steve 2026-10-14). Backstory-rooted via lifeseed memories.
 // provides:
 //   - knackChoicesFor(char)
 //   - chooseKnack(id)
@@ -9,7 +9,7 @@
 //   - knackGossipLine(tellerVid, targetVid)
 //   - knackDef(id)
 // rules:
-//   - latent_knack_not_system: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer; zero System chrome in copy or UI)
+//   - knack_system_granted_early: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer at grant; zero System chrome in copy or UI because the System hasn't formally arrived — but the fiction is GIVEN, not innate)
 //   - latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
 //   - knack_fills_slot_1: true (code: spawn-knack.js — chooseKnack pushes to s.abilities; the day-7 gift waits honestly for slot 2)
 //   - knack_lifeseed_tied: true (code: spawn-knack.js — choices derive from char.lifeseed.skillOrigins; memories fill {kin}/{place} from the seed)
@@ -21,12 +21,15 @@
 // Steve 2026-10-11: "the player gets a mysterious first ability during the
 // spawn sequence — pre-System, no System overlay, framed as 'you feel capable
 // of something you can't quite explain — choose an ability'."
+// Steve 2026-10-14 (overrule): the ability is GIVEN by the System, not innate.
+// "It was always there" was wrong. New fiction: the System sent it ahead —
+// an early touch, unexplained at the time. The day-7 beat has the System
+// recognize its own early delivery (excited, slightly embarrassed).
 //
-// This is the level-up mechanic's first rung. It is NOT a System ability
-// (the System hasn't arrived) and NOT a teachable earthly skill (nobody can
-// teach it — it's unexplained). It's a LATENT knack: a trick you learned
-// long ago, backstory-rooted, that you never could explain so you never
-// mentioned it. It fills slot 1. The System will notice the anomaly on day 7.
+// This is the level-up mechanic's first rung. It is a System ability granted
+// BEFORE the System's formal arrival (the System hasn't arrived) and NOT a
+// teachable earthly skill (nobody can teach it — it's unexplained). It fills
+// slot 1. The System will recognize its own early delivery on day 7.
 //
 // Self-attaching module: Object.assign(Game, methods) + wraps newGame,
 // systemArrivalBeats, npcGossipAbout, integrate. Load after lifeseed.js
@@ -46,9 +49,10 @@
       return (this.data.abilities || []).find(a => a.id === id && a.unlock && a.unlock.type === 'latent_knack') || null;
     },
 
-    // knackChoicesFor: 3 latent choices tied to the character's lifeseed.
-    // Two draw from knacks matching the seed's skill origins (the "trick you
-    // learned long ago"); the third is wild (a real choice, not a menu).
+    // knackChoicesFor: 3 early-touch choices tied to the character's lifeseed.
+    // Two draw from knacks matching the seed's skill origins (the System
+    // aimed its early gift at what you'd reach for); the third is wild
+    // (a real choice, not a menu).
     knackChoicesFor(char) {
       const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'latent_knack');
       if (!all.length) return [];
@@ -90,8 +94,8 @@
     },
 
     // chooseKnack: the player names their knack. Fills slot 1. Quiet —
-    // no System chrome: no 🎁, no "PICK A TRICK", no flavor quote. This
-    // happened before the System existed.
+    // no System chrome: no 🎁, no "PICK A TRICK", no flavor quote. The System
+    // hasn't formally arrived — this was sent ahead, unexplained.
     chooseKnack(id) {
       const s = this.state.scholar;
       if (!s) return null;
@@ -108,7 +112,7 @@
       try { this.recomputeActiveSynergies(); } catch (e) {}
       s.knackChoices = null;
       s.knackChosen = true;
-      this.say(`💭 ${choice.name}. It was always there. Now you've named it, and naming it makes it yours on purpose. (Your first ability — it deepens with use.)`);
+      this.say(`💭 ${choice.name}. It wasn't there last week. Something gave it to you — something that's still on its way. Naming it makes it yours on purpose. (Your first ability — a gift from whatever's coming. It deepens with use.)`);
       return null;
     },
 
@@ -186,9 +190,9 @@
     return r;
   };
 
-  // systemArrivalBeats: the System NOTICES the anomaly — one beat, System
-  // voice, no explanation offered. "You had that BEFORE we got here."
-  // Fires once, only if the player holds a latent knack.
+  // systemArrivalBeats: the System RECOGNIZES its early delivery — one beat,
+  // System voice. It sent the knack ahead, got excited, jumped the schedule.
+  // Fires once, only if the player holds the early-touch knack.
   const _beats = Game.systemArrivalBeats;
   Game.systemArrivalBeats = function () {
     const beats = _beats.apply(this, arguments);
@@ -197,13 +201,13 @@
       const hasLatent = (s.abilities || []).some(a => a && a.latent);
       if (hasLatent && !beats.some(b => b.id === 'knack')) {
         const knackBeat = {
-          id: 'knack', kicker: 'before us?', button: '…me?',
+          id: 'knack', kicker: 'early delivery?', button: '…me?',
           lines: [
             { who: 'sys', text: 'WAIT. Hold on. [shuffling noises] There\'s a reading on YOU. A little glow, person-shaped, doing... whatever it is you DO.' },
-            { who: 'sys', text: 'We didn\'t put that there! We\'d REMEMBER! We remember EVERYTHING! (We remember the pellet. We remember the burying. We remember.)' },
-            { who: 'sys', text: 'You had that BEFORE we got here. That\'s BACKWARDS! First we arrive, THEN the glowing! That\'s the ORDER!' },
+            { who: 'sys', text: 'Oh. OH. That\'s... that\'s OURS. We sent that ahead! Early delivery! We got EXCITED. First impressions matter!' },
+            { who: 'sys', text: 'Don\'t tell the others we jumped the schedule. They get WEIRD about the schedule.' },
             { who: 'narr', text: 'It goes quiet for a moment. When it comes back, it\'s brighter. Too bright.' },
-            { who: 'sys', text: '...Probably a rounding error! Filed! Moving on! 🎉' },
+            { who: 'sys', text: 'Anyway! You\'re WELCOME! Enjoy the glow! 🎉' },
           ],
         };
         const idx = beats.findIndex(b => b.id === 'food');

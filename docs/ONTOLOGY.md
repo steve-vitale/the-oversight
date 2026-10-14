@@ -1200,12 +1200,12 @@ Wave-5 signature combat mechanics (Steve 2026-10-11): The Producers — the show
 **Consumes:** say, tbDamage, addHealth, audioEvent, tbRefreshTelegraphUI, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, tbPlayerStrike, hasItem, consumeItem, seList, seDef, apTopLane, apFanLane, apAdjustFavor, apClubName, feastedActive, clearFeastBuff
 
 ### spawn-knack (`spawn-knack.js`)
-The spawn knack — a mysterious latent first ability chosen in the spawn sequence, pre-System. Backstory-rooted, unexplained.
+The spawn knack — the System's early touch. Granted before the System's formal arrival (sent ahead), unexplained at grant time but GIVEN — never innate, never "always had" (Steve 2026-10-14). Backstory-rooted via lifeseed memories.
 
 **Provides:** knackChoicesFor(char), chooseKnack(id), grantVillagerKnacks(), npcKnack(vid), knackGossipLine(tellerVid, targetVid), knackDef(id)
 
 **Rules:**
-- latent_knack_not_system: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer; zero System chrome in copy or UI)
+- knack_system_granted_early: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer at grant; zero System chrome in copy or UI because the System hasn't formally arrived — but the fiction is GIVEN, not innate)
 - latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
 - knack_fills_slot_1: true (code: spawn-knack.js — chooseKnack pushes to s.abilities; the day-7 gift waits honestly for slot 2)
 - knack_lifeseed_tied: true (code: spawn-knack.js — choices derive from char.lifeseed.skillOrigins; memories fill {kin}/{place} from the seed)
