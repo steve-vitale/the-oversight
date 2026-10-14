@@ -65,6 +65,13 @@ const Game = globalThis.Scattering.Game;
   // Honest player path: open conversation, then "can I ask you something else?"
   Game.startConvo(vid);
   let ids = Game.convoUI(vid).choices.map(c => c.id);
+  // If the villager opened with a question, answer it first: the invite lives
+  // in the main menu, not the question-answer menu (seed-robust 2026-10-14).
+  const ans = ids.find(id => id.indexOf('ans:') === 0 && id.indexOf('honest_pass') === -1);
+  if (ans && !ids.includes('dlg:subject')) {
+    Game.convoTurn(vid, ans);
+    ids = Game.convoUI(vid).choices.map(c => c.id);
+  }
   if (ids.includes('dlg:subject')) {
     Game.convoTurn(vid, 'dlg:subject');
     ids = Game.convoUI(vid).choices.map(c => c.id);

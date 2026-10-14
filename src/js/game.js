@@ -2645,10 +2645,12 @@
           const plants = this.data.plants || [];
           if (theyKnow.length && plants.length > 1) {
             const rollWrong = malicious ? 0.3 : 0.12;
-            if (R() < rollWrong) {
-              const pid = theyKnow[Math.floor(R() * theyKnow.length)];
+            // (sim audit 2026-10-14: `R` was never defined here — this whole
+            // "villagers are wrong about plants" feature threw every time.)
+            if (Math.random() < rollWrong) {
+              const pid = theyKnow[Math.floor(Math.random() * theyKnow.length)];
               const others = plants.filter(p => p.id !== pid);
-              const wrong = others[Math.floor(R() * others.length)];
+              const wrong = others[Math.floor(Math.random() * others.length)];
               v.wrongAbout[vid][pid] = { wrongPid: wrong.id, deliberate: !!malicious };
             }
           }
@@ -8211,8 +8213,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           learnedCounts.animals++;
         }
       }
-      // costs time: studying is a day-part activity
-      try { this.spendDayPart(1); } catch (e) {}
+      // costs time: studying is a day-part activity. (sim audit 2026-10-14:
+      // spendDayPart never existed; the documented convention is
+      // tickAction(128) = one full day-part.)
+      try { this.tickAction(128); } catch (e) { console.warn('study time', e && e.message); }
       // LINK THE CODEX: studying links their codex to yours. The System integrates.
       // TWO INTEGRATION SCALES — not the same thing (Steve 2026-10-07):
       //   systemIntegrationLevel() 0-3: CODICES LINKED. How much of the WORLD the
@@ -22705,8 +22709,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 //
 // CONVENTIONS HONORED:
 //   - Day-part cost = this.tickAction(128) (128 ticks = one full day-part).
-//     (spendDayPart() does NOT exist — the one call site is dead code in a
-//     try/catch. Do not use it.)
+//     (spendDayPart() does NOT exist — do not use it.)
 //   - kcal costs via scholar.kcal / pantry item lists (see _ev helpers).
 //   - audioEvent() and drama() are safe no-ops headless; voice names used
 //     are real Game.audio voices (wolfSilence, wolfSnarl, horrorSting,

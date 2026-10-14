@@ -508,7 +508,7 @@ function talkRound(Game, ctx) {
     const vv = Game.state.village;
     const roster = (vv.roster || []).filter(id => id !== Game.villagerId);
     if (!roster.length || !Game.talkTo) return;
-    const vid = roster[Math.floor(Math.random() * roster.length)];
+    const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
     try {
       Game.talkTo(vid);
       try { Game.endConvo(vid, 'left'); } catch (e2) {} // don't leave modal state open
@@ -2316,7 +2316,7 @@ const competent = {
           const vv = Game.state.village || {};
           const roster = (vv.roster || []).filter(id => id !== Game.villagerId);
           if (roster.length) {
-            const vid = roster[Math.floor(Math.random() * roster.length)];
+            const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
             const r = Game.askAbout(vid, 'beasttricks');
             if (r && r.taught) ctx.beastTricks = (ctx.beastTricks || 0) + 1;
           }

@@ -119,6 +119,9 @@ async function main() {
       try {
         const v = Game.state.village || {};
         v.grief = 0;
+        // a live outbreak also outranks (by design) — clear it too, so the
+        // defense branch is measured regardless of the RNG path (2026-10-14)
+        v.sick = {};
         if (Array.isArray(Game.state.corpses)) Game.state.corpses.length = 0;
         const lin = (typeof Game.lineage === 'function') ? Game.lineage() : [];
         for (const e of lin) { if (e) e.outcome = 'mourned'; }

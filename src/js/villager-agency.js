@@ -361,7 +361,7 @@
       if (rec.calledHelp && rec.allyVid) {
         try {
           var _rw = (this.state.village.roster || []).filter(function (id) { return id !== vid && id !== rec.allyVid; });
-          for (var _ri = _rw.length - 1; _ri > 0; _ri--) { var _rj = Math.floor(R() * (_ri + 1)); var _rt = _rw[_ri]; _rw[_ri] = _rj; _rw[_j] = _rt; }
+          for (var _ri = _rw.length - 1; _ri > 0; _ri--) { var _rj = Math.floor(R() * (_ri + 1)); var _rt = _rw[_ri]; _rw[_ri] = _rw[_rj]; _rw[_rj] = _rt; /* sim audit 2026-10-14: was `_rw[_ri] = _rj; _rw[_j] = _rt` (ReferenceError — rescue gossip never spread) */ }
           this.seedGossip('rescue', { who: rec.allyVid, for: vid }, _rw.slice(0, 2));
         } catch (e) {}
       }

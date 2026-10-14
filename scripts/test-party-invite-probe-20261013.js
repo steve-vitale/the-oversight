@@ -77,7 +77,11 @@ async function main() {
     if (!found) { try { Game.endConvo(vid, 'done'); } catch (e) {} continue; }
     invited = vid;
     try {
-      const r = Game.convoTurn(vid, 'invite_party');
+      // The probe proves invite -> membership WIRING; acceptance is a dice
+      // roll (party.js chance). Pin the roll to "accept" for this one turn
+      // so the probe doesn't depend on the RNG sequence (2026-10-14).
+      const _mr = Math.random; Math.random = () => 0;
+      let r; try { r = Game.convoTurn(vid, 'invite_party'); } finally { Math.random = _mr; }
       resultLine = r.line || '';
     } catch (e) { resultLine = 'ERROR: ' + e.message; }
     try { Game.endConvo(vid, 'done'); } catch (e) {}

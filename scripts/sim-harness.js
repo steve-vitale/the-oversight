@@ -101,6 +101,30 @@ function manifest(seed, mode) {
   };
 }
 
+// instrumentCatches(src, file): rewrite empty catch blocks to report into
+// global.__simSwallowed[site] = {n, msg}. Line count is preserved.
+// Matches `catch (x) {}`, `catch (x) { /* note */ }` and `catch {}`.
+function instrumentCatches(src, file) {
+  if (!global.__simSwallow) {
+    global.__simSwallowed = global.__simSwallowed || {};
+    global.__simSwallow = function (e, site) {
+      const r = global.__simSwallowed[site] || (global.__simSwallowed[site] = { n: 0, msg: '' });
+      r.n++;
+      if (!r.msg) r.msg = String((e && (e.message || e)) || e).slice(0, 160);
+    };
+  }
+  return src.split('\n').map((ln, i) => ln
+    .replace(/catch\s*\(\s*([A-Za-z_$][\w$]*)\s*\)\s*\{\s*(?:\/\*[^*]*\*\/\s*)?\}/g,
+      (m, v) => `catch (${v}) { __simSwallow(${v}, '${file}:${i + 1}'); }`)
+    .replace(/catch\s*\{\s*\}/g, `catch (__se) { __simSwallow(__se, '${file}:${i + 1}'); }`)
+  ).join('\n');
+}
+// swallowReport(): sorted [{site, n, msg}] of everything swallowed so far.
+function swallowReport() {
+  const o = global.__simSwallowed || {};
+  return Object.keys(o).map(k => ({ site: k, n: o[k].n, msg: o[k].msg })).sort((a, b) => b.n - a.n);
+}
+
 // loadGame({seed, mode, fullTelemetry}) -> { Game, manifest }
 // fullTelemetry sets TELEMETRY_FULL=1 so Game.tele() keeps the whole stream
 // (production keeps the 300-event ring cap — memory).
@@ -108,7 +132,9 @@ async function loadGame(opts) {
   opts = opts || {};
   const seed = opts.seed != null ? opts.seed : 20261009;
   const mode = opts.mode || '?';
-  if (opts.fullTelemetry) process.env.TELEMETRY_FULL = '1';
+  // Per call, never sticky (audit 2026-10-14: a prior fullTelemetry load
+  // leaked TELEMETRY_FULL into later loads in the same process).
+  if (opts.fullTelemetry) process.env.TELEMETRY_FULL = '1'; else delete process.env.TELEMETRY_FULL;
 
   Math.random = mulberry32(seed);
 
@@ -162,7 +188,16 @@ async function loadGame(opts) {
     // guards write to a throwaway, our exports survive.
     const module = { exports: {} };
     const exports = module.exports;
-    try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
+    let __src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    // SWALLOW COUNTER (sim audit 2026-10-14): SIM_CATCH=1 rewrites every
+    // empty `catch (e) {}` into a counted report (same line, same flow —
+    // the error is still swallowed). Answers "which features silently
+    // throw?" — 4.5k empty catches hide failures from every sim otherwise.
+    if (process.env.SIM_CATCH === '1') __src = instrumentCatches(__src, f);
+    // sourceURL: names the eval'd file in stack traces and V8 coverage
+    // (NODE_V8_COVERAGE) without changing semantics or line numbers.
+    __src += '\n//# sourceURL=' + f;
+    try { eval(__src); }
     catch (e) { loadFails.push(f + ': ' + e.message); }
   };
   // game.js in index.html position (after engine/*, which populate
@@ -187,6 +222,7 @@ async function loadGame(opts) {
   await new Promise(r => setTimeout(r, 0));
 
   const G = globalThis.Scattering.Game;
+  G.__simSeed = seed; // per-run policy RNG derives from it (runDays)
   // Silence narration/audio/drama for sims — telemetry + state carry the signal.
   G.say = function () {};
   G.sysSay = function () {};
@@ -223,6 +259,24 @@ async function runDays(Game, policy, opts) {
   const ctx = { policyId: policy.id, notes: [] };
   const t0 = Date.now();
 
+  // LIVE EVENT CAPTURE (audit 2026-10-14): deaths used to be read from the
+  // telemetry ring AFTER the run — capped at 300 events, so long runs lost
+  // 55-67% of deaths. Capture them as they happen, independent of the cap.
+  // POLICY RNG (audit 2026-10-14): policies get their own seeded stream
+  // (global.__policyRandom) so a policy change no longer shifts the GAME's
+  // Math.random sequence (which confounded lever A/B comparisons).
+  const _liveDeaths = [];
+  const _origTele = Game.tele;
+  Game.tele = function (type, data) {
+    try {
+      if (type === 'death') {
+        const s0 = (this.state && this.state.scholar) || {};
+        _liveDeaths.push({ day: s0.day || 0, kind: data && data.kind, who: data && data.who, cause: data && data.cause, player: !!(data && data.player) });
+      }
+    } catch (e) {}
+    return _origTele.apply(this, arguments);
+  };
+  global.__policyRandom = mulberry32((((((opts.manifest && opts.manifest.seed) || Game.__simSeed || 1)) * 2654435761) ^ 0x5eed) >>> 0);
   const samples = { pop: [], pantry: [], knowledge: [], trust: [], deaths: [], villagers: [],
     scale: [], codexM: [], codexS: [], standing: [], ledger: [] };
   // VILLAGER SNAPSHOT (coverage 2026-10-09): per-villager differentiation —
@@ -524,11 +578,8 @@ async function runDays(Game, policy, opts) {
   // death (ledger.js playerDeath -> corpses.js registerDeath) carry
   // player:true — the sampler keys those as player-kind so scholar death
   // causes are attributable. Backward-compatible: older runs just lack it.
-  try {
-    for (const ev of (Game.state.telemetry || [])) {
-      if (ev.type === 'death') samples.deaths.push({ day: ev.day, kind: ev.kind, who: ev.who, cause: ev.cause, player: !!ev.player });
-    }
-  } catch (e) {}
+  samples.deaths = _liveDeaths.slice();
+  Game.tele = _origTele;
   // Final villager snapshot (coverage 2026-10-09): short runs never reach
   // the 30-day cadence — always capture the end state for differentiation.
   try { samples.villagers.push([day > days ? days : day, villagerSnapshot()]); } catch (e) {}
@@ -698,4 +749,4 @@ function driveContestsImpl(Game, policy, ctx) {
   }
 }
 
-module.exports = { mulberry32, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, ROOT };
+module.exports = { swallowReport, instrumentCatches, mulberry32, loadGame, setupGame, runDays, manifest, driveFights, driveContests, quietLog, ROOT };

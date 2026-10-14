@@ -1368,6 +1368,17 @@ The galactic table — integrated endgame. Prices the run (never gates on godhoo
 
 **Consumes:** state.scholar, state.village, progState(), ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
 
+### telemetry-hooks (`telemetry-hooks.js`)
+Telemetry for the run's milestone events, which had none (sim audit 2026-10-14): table entry/path/fail/win, ability use, arc changes, scale rank changes, synergy activation, godhood ascension, titan fight results, village lost. Wraps existing functions; never changes their behaviour or return values. Feeds the sim harness and sweeps; in the browser it only appends to the existing capped telemetry ring.
+
+**Provides:** teleMilestone(type, data)
+
+**Rules:**
+- observe_only: every wrap calls the original first and returns its result unchanged (code: telemetry-hooks.js)
+- no_rng: no Math.random and no state writes except the telemetry ring and its own _teleSeen bookkeeping (code: telemetry-hooks.js)
+
+**Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
+
 ### tile-scenes (`tile-scenes.js`)
 Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
 

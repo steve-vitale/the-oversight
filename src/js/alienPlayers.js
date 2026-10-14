@@ -2848,7 +2848,17 @@
           this.say('🔆 ' + who + ' ' + final + ' beam damage' + (n > 0 ? ' (' + n + ' resistant ' + (n === 1 ? 'piece' : 'pieces') + ' absorbing)' : ' (no resistance)') + ' — ' + sourceLabel + '.');
           if (t.hp <= 0) {
             t.alive = false;
-            try { this.tbKill(t, sourceLabel); } catch (e) {}
+            // DEATH PROCESSING (sim audit 2026-10-14): this called this.tbKill,
+            // which never existed — beam deaths skipped the fall + death record
+            // (swallowed in every run that had one). Mirror tbDamage's branches.
+            try {
+              if (t.kind === 'player') this.say('You go down.');
+              else if (t.kind === 'villager' || (t.kind === 'ally' && t.villageId === 'haven' && t.villagerId)) {
+                this.say('☠ ' + t.name + ' falls.');
+                this.tbVillagerFalls(t);
+                this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'alien_beam', witnesses: this.fightWitnesses ? this.fightWitnesses(t.villagerId) : [] });
+              }
+            } catch (e) { console.warn('apBeamHit death', e && e.message); }
           }
         }
       } catch (e) {}
