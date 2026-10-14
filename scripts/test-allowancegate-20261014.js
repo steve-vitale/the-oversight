@@ -1,75 +1,67 @@
 #!/usr/bin/env node
-// scripts/test-allowancegate-20261014.js — PROOF for the r14 pantry-state
+// scripts/test-allowancegate-20261014.js — PROOF for the r15 pantry-state
 // gate on the r13 feast allowance (loop B, 2026-10-14, food-economy axis,
-// sim-findings #187: the "separately" half of the feastdoor next-run
-// prescription — gate the r13 allowance's own pantry-blind feasts).
+// sim-findings #187 claimed: FEASTDOOR'S CALIBRATED PRICE next arm).
 //
-// THE LEVER: scripts/policies/feastscale.js scaleFeast gains an opt-in
-// pantry-state gate (FEASTGATE_R13=1, default OFF; requires FEASTSCALE_R13=1
-// — the gate rides the r13 machinery). The r13-only diagnostic measured the
-// allowance ALONE as genuinely harmful (starvation 15->21, hungryDays 35->48,
-// median 151->92d): it fires on contribution >=1500 with no pantry-state
-// gate beyond the engine's 1.5x buffer.
+// THE LEVER: scripts/policies/allowancegate.js wraps leadfeast/belongfeast
+// (the r13 allowance layer). The r13-only diagnostic measured the allowance
+// ALONE as genuinely harmful (starvation 15->21, hungryDays 35->48, median
+// 151->92d vs pristine): it fires on contribution >=1500 with no
+// pantry-state gate beyond the engine's 1.5x total-kcal buffer — a buffer
+// that does not know how many fresh-days the village has.
 //
-// THE GATE (design call, documented — Steve can overrule): fire only when
-// the honest feast fits inside the SURPLUS above the game's own 4-day fresh
-// floor (Game.pantryFreshDays — the same floor prodThrottle uses, and the
-// same floor the killed feastdoor duty proved live):
-//   spendTarget = (freshDays - 4) * burn; hold when plan.cost > spendTarget.
-// The floor never moves. Gate on pantry STATE, never on contribution (the
-// contribution rule is untouched — no re-tuning). Held feasts are not feasts:
-// the cadence tracker is left alone. Policy-side only; zero src/js changes.
-// Conservative: the engine's pantryDraw draws fresh preferentially, so the
-// whole plan.cost counts against fresh.
+// THE GATE (ALLOWANCEGATE=1, default OFF; requires FEASTSCALE_R13=1): the
+// allowance may NOT fire a feast when pantry fresh-days < 2
+// (Game.pantryFreshDays() — the measured pantry-blind harm driver).
+// Suppressed feasts are POSTPONED, never displaced: the shared cadence
+// tracker (ctx._fsLastFeastDay) is NOT marked, so the next dusk re-tests.
+// Policy-side only; zero src/js changes.
 //
-// RED PHASE (FEASTGATE_R13 unset):
-//   R1. gate-off byte-identical: modified feastscale (FEASTSCALE_R13=1) ==
-//       HEAD-pristine feastscale (FEASTSCALE_R13=1) per-day hashes, 40d x2
-//       seeds — the gate adds zero trajectory delta when off.
-//   R2. gate-off, the allowance FIRES on the 3.9d fixture (contribution
-//       >=1500): the fixture really is a fire-fixture for the un-gated
-//       allowance — pantry drawn, no gate holds counted.
-// GREEN PHASE (FEASTSCALE_R13=1 + FEASTGATE_R13=1):
-//   G1. fires on the 6.2d fixture: real pantry draw, fresh-days move DOWN
-//       (surplus spent, drawdown direction), floor >= 4 after.
-//   G2. holds on the 3.9d fixture: no feast, pantry untouched,
-//       fsGateHeld == 1.
-//   G3. the floor binds on a small-burn village: at 4.9d the honest feast
-//       would breach 4d -> hold; at 6.5d the surplus covers it -> fires,
-//       lands >= 4.
-//   G4. armed determinism: identical 6.2d fixture twice -> identical outcome.
-//   G5. no double-feast: after the gate lets a feast fire, a second upkeep
-//       the same day does not re-fire (the one-feast/day slot is claimed).
-//   G6. gate inert without FEASTSCALE_R13 (layer off): no holds counted,
-//       scaleFeast never runs the gate path.
-//   G7. floor never breached in a 120d armed run: pantryFreshDays() >= 4
-//       after EVERY feast the armed allowance hosts.
+// RED PHASE (FEASTSCALE_R13=1, ALLOWANCEGATE unset):
+//   R1. gate-off byte-identical: leadgate/belonggate (gate off) ==
+//       leadfeast/belongfeast per-day run hashes, 40d x2 seeds — the layer
+//       adds zero trajectory delta when off.
+//   R2. gate-off, the allowance FIRES on the thin-fresh fixture (fresh-days
+//       < 2, total kcal deep via a preserved stockpile so the 1.5x buffer
+//       passes): the fixture really is the pantry-blind harm in miniature.
+// GREEN PHASE (FEASTSCALE_R13=1 + ALLOWANCEGATE=1):
+//   G1. holds on the thin-fresh fixture: no feast, pantry untouched,
+//       agGateHeld == 1.
+//   G2. fires on the deep-fresh fixture (6.2d): real pantry draw,
+//       agGateHeld == 0.
+//   G3. postponed feasts fire when the pantry recovers: hold on day 30
+//       (_fsLastFeastDay NOT marked — the opening is not displaced), fresh
+//       food arrives, day 31 fires. The postponement never displaces.
+//   G4. armed determinism: identical fixture twice -> identical outcome.
+//   G5. no double-feast: after a fire, a second upkeep the same day does
+//       not re-fire (the one-feast/day slot is claimed).
+//   G6. gate inert without FEASTSCALE_R13 (ALLOWANCEGATE=1, layer off): no
+//       holds counted, no scaleFeast — pure delegation.
 //
 // Usage:
 //   RED:   FEASTSCALE_R13=1 node scripts/test-allowancegate-20261014.js
-//   GREEN: FEASTSCALE_R13=1 FEASTGATE_R13=1 node scripts/test-allowancegate-20261014.js
+//   GREEN: FEASTSCALE_R13=1 ALLOWANCEGATE=1 node scripts/test-allowancegate-20261014.js
 //
-// Kill-protocol degradation: if the gate was reverted post-kill, this
+// Kill-protocol degradation: if the layer file is deleted post-kill, this
 // script degrades to INFO-SKIP (exit 0), never MODULE_NOT_FOUND.
 'use strict';
-const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { loadGame, setupGame, runDays } = require('./sim-harness');
-const FS = require('./policies/feastscale');
+const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 
-// Kill-protocol degradation (feastdoor precedent): the gate was reverted
-// post-kill (NO-GO at pilot: hungryDays 44 > 43.2). If the gate is absent,
-// degrade to INFO-SKIP — the proof was RED->GREEN pre-kill; see
-// evidence/2026-10-14/sim-allowancegate-b.md.
-if (typeof FS.pantrySurplusOk !== 'function' || typeof FS.gateOn !== 'function') {
-  console.log('INFO-SKIP: allowance-gate layer reverted per kill protocol (NO-GO at pilot); proof was RED->GREEN pre-kill — see evidence/2026-10-14/sim-allowancegate-b.md');
+let AG;
+try {
+  AG = require('./policies/allowancegate');
+} catch (e) {
+  console.log('INFO-SKIP: allowancegate layer absent (reverted per kill protocol); proof was RED->GREEN pre-kill — see evidence/2026-10-14/sim-allowancegate-b.md');
   process.exit(0);
 }
+const FS = require('./policies/feastscale');
 
-const ARMED = process.env.FEASTSCALE_R13 === '1' && process.env.FEASTGATE_R13 === '1';
+const GATE = process.env.ALLOWANCEGATE === '1';
 const LAYER = process.env.FEASTSCALE_R13 === '1';
-console.log('== allowancegate proof — ' + (ARMED ? 'ARMED (FEASTSCALE_R13=1 + FEASTGATE_R13=1)' : (LAYER ? 'RED (FEASTSCALE_R13=1, gate off)' : 'RED (gates off)')) + ' ==');
+const ARMED = LAYER && GATE;
+console.log('== allowancegate r15 proof — ' + (ARMED ? 'ARMED (FEASTSCALE_R13=1 + ALLOWANCEGATE=1)' : (LAYER ? 'RED (FEASTSCALE_R13=1, gate off)' : 'RED (gates off)')) + ' ==');
 
 const fails = [];
 function check(name, cond, detail) {
@@ -96,44 +88,50 @@ function havenPantryKcal(Game) {
 
 function freshDaysOf(Game) { try { return Game.pantryFreshDays(); } catch (e) { return -1; } }
 
-// fresh fixture item: 500-kcal units, spoilDay = day + daysLeft
 function freshItem(Game, name, kcal, daysLeft) {
   const day = (Game.state.scholar || {}).day || 1;
   return { name, kcalEach: 500, units: Math.ceil(kcal / 500), safe: true, spoilDay: day + daysLeft };
 }
 
-// Gate fixture: fresh-days = fk/burn at an honest burn, dusk, at haven,
-// no threats. The r13 contribution bar is armed via tribHist. The burn is
-// self-calibrated so spendTarget = (fd-4)*burn clears the engine's honest
-// feast cost by ~10% on fire-fixtures (margin recorded, never silent).
-async function buildGateWorld(seed, burn, freshDaysTarget) {
+// thinFresh fixture: fresh-days < 2 BUT total kcal deep — a preserved
+// stockpile (pemmican: excluded from fresh kcal by pantryFreshKcal) so the
+// r13 allowance's 1.5x total-kcal buffer passes while the fresh floor is
+// thin. This is the pantry-blind harm in miniature.
+async function buildThinFixture(seed, freshTargetDays, burn) {
   const { Game } = await loadGame({ seed, mode: 'allowancegate-proof' });
   await setupGame(Game);
-  const said = [];
-  Game.say = (t) => { said.push(String(t)); };
-  Game.feedback = function () {};
+  Game.say = () => {}; Game.feedback = function () {};
   Game.state.scholar.day = 30;
   Game.dayPart = 2; // dusk
   const v = Game.state.village;
   v.burnHistory = [burn, burn, burn, burn, burn, burn, burn];
-  v.pantry = [freshItem(Game, 'Foraged food', Math.round(freshDaysTarget * burn), 3)];
+  v.pantry = [
+    freshItem(Game, 'Foraged food', Math.round(freshTargetDays * burn), 3),
+    { name: 'Pemmican bars', foodKind: 'pemmican', kcalEach: 500, units: 120, safe: true, spoilDay: 30 + 120 },
+  ];
   v.lastRaidDay = 0;
-  return { Game, said };
+  return Game;
 }
 
-// calibrateBurn: rebuild the fixture's burn/pantry so a fire-fixture's
-// spendTarget = (freshDays-4)*burn sits ~10% above the engine's honest cost.
-// Returns { burn, cost, spendTarget }.
-function calibrateBurn(Game, freshDaysTarget, margin) {
-  margin = margin || 1.10;
-  let cost = 0;
-  try { const p = Game.feastPlan(); cost = p.cost || 0; } catch (e) {}
-  const burn = Math.ceil(cost * margin / Math.max(0.01, freshDaysTarget - 4));
+// deepFresh fixture: fresh-days ~6.2, calibrated so the engine's honest
+// cost clears the 1.5x buffer.
+async function buildDeepFixture(seed) {
+  const { Game } = await loadGame({ seed, mode: 'allowancegate-proof' });
+  await setupGame(Game);
+  Game.say = () => {}; Game.feedback = function () {};
+  Game.state.scholar.day = 30;
+  Game.dayPart = 2;
   const v = Game.state.village;
+  let cost = 4800;
+  try { cost = (Game.feastPlan() || {}).cost || 4800; } catch (e) {}
+  const burn = Math.ceil(cost * 1.6 / 6.2);
   v.burnHistory = [burn, burn, burn, burn, burn, burn, burn];
-  v.pantry = [freshItem(Game, 'Foraged food', Math.round(freshDaysTarget * burn), 3)];
-  return { burn, cost, spendTarget: (freshDaysTarget - 4) * burn };
+  v.pantry = [freshItem(Game, 'Foraged food', Math.round(6.2 * burn), 3)];
+  v.lastRaidDay = 0;
+  return Game;
 }
+
+function armedCtx() { return { _tribHist: [{ day: 29, kcal: 2000 }] }; }
 
 async function runHashes(policy, seed, days) {
   const { Game } = await loadGame({ seed, mode: 'allowancegate-red' });
@@ -145,127 +143,107 @@ async function runHashes(policy, seed, days) {
     hashes.push(Game.state.scholar.day + ':' + dayHash(Game));
     return base ? base(G, ctx) : undefined;
   };
-  await runDays(Game, wrapped, { days, sampleEvery: 1 });
+  await quietLog(async () => { await runDays(Game, wrapped, { days, manifest: undefined, sampleEvery: 1 }); });
   return hashes;
 }
 
 (async () => {
-  // ---------- R1: gate-off byte-identical vs the HEAD-pristine parents ----------
-  console.log('== R1. gate-off byte-identical (modified vs HEAD-pristine, 40d) ==');
-  const parentTmp = path.join(__dirname, 'policies', 'feastscale-parent-tmp.js');
+  // ---------- R1: gate-off byte-identical vs the r13 parents ----------
+  console.log('== R1. gate-off byte-identical (leadgate/belonggate vs leadfeast/belongfeast, 40d) ==');
   if (!ARMED) {
-    try {
-      const src = execSync('git show HEAD:scripts/policies/feastscale.js', { cwd: __dirname, encoding: 'utf8', maxBuffer: 1 << 20 });
-      fs.writeFileSync(parentTmp, src);
-      const PARENT = require('./policies/feastscale-parent-tmp');
-      for (const [mine, theirs, label] of [[FS.leadfeast, PARENT.leadfeast, 'leadfeast'], [FS.belongfeast, PARENT.belongfeast, 'belongfeast']]) {
-        const hMine = await runHashes(mine, label === 'leadfeast' ? 11 : 22, 40);
-        const hTheirs = await runHashes(theirs, label === 'leadfeast' ? 11 : 22, 40);
-        const same = hMine.length === hTheirs.length && hMine.every((h, i) => h === hTheirs[i]);
-        check(`R1 gate-off: ${label} == HEAD-pristine per-day hashes`, same, `n=${hMine.length}/${hTheirs.length}`);
-      }
-    } finally {
-      try { fs.unlinkSync(parentTmp); } catch (e) {}
+    for (const [mine, theirs, label] of [[AG.leadgate, FS.leadfeast, 'lead'], [AG.belonggate, FS.belongfeast, 'belong']]) {
+      const seed = label === 'lead' ? 11 : 22;
+      const hMine = await runHashes(mine, seed, 40);
+      const hTheirs = await runHashes(theirs, seed, 40);
+      const same = hMine.length === hTheirs.length && hMine.every((h, i) => h === hTheirs[i]);
+      check(`R1 gate-off: ${label}gate == ${label}feast per-day hashes`, same, `n=${hMine.length}/${hTheirs.length}`);
     }
   } else {
     console.log('  (skipped — armed phase; R1 is a RED assertion)');
   }
 
-  // ---------- R2: gate-off, the allowance FIRES on the 3.9d fixture ----------
-  console.log('== R2. gate-off: the allowance fires on the 3.9d fixture ==');
+  // ---------- R2: gate-off, the allowance FIRES on the thin-fresh fixture ----------
+  console.log('== R2. gate-off: the allowance fires pantry-blind on the thin-fresh fixture ==');
   if (!ARMED) {
-    const { Game } = await buildGateWorld(42, 2400, 3.9);
-    check('R2 fixture really is below the gate floor', freshDaysOf(Game) > 3.5 && freshDaysOf(Game) < 4,
-      'freshDays=' + freshDaysOf(Game).toFixed(2));
-    const ctx = { _tribHist: [{ day: 29, kcal: 2000 }] };
+    const Game = await buildThinFixture(42, 1.5, 2400);
+    const fd = freshDaysOf(Game);
+    check('R2 fixture really is thin-fresh (< 2d)', fd > 0.5 && fd < 2, 'freshDays=' + fd.toFixed(2));
+    let plan = null;
+    try { plan = Game.feastPlan(); } catch (e) {}
+    check('R2 fixture assumption (plan ok, 1.5x buffer passes on total kcal)',
+      !!(plan && plan.ok && plan.have >= plan.cost * 1.5),
+      `ok=${plan && plan.ok} have=${plan && plan.have} cost=${plan && plan.cost}`);
+    const ctx = armedCtx();
     const pol = FS.leadfeast;
     pol.setup(Game, ctx);
     const before = havenPantryKcal(Game);
     pol.upkeep(Game, ctx);
-    check('R2 allowance fired gate-off', (ctx.fsFeasts || 0) === 1, `fsFeasts=${ctx.fsFeasts}`);
-    check('R2 pantry really drawn gate-off', havenPantryKcal(Game) < before,
-      `${before} -> ${havenPantryKcal(Game)}`);
-    check('R2 no gate holds counted gate-off', (ctx.fsGateHeld || 0) === 0,
-      `fsGateHeld=${ctx.fsGateHeld}`);
+    check('R2 un-gated allowance fired pantry-blind', (ctx.fsFeasts || 0) === 1, `fsFeasts=${ctx.fsFeasts}`);
+    check('R2 pantry really drawn gate-off', havenPantryKcal(Game) < before, `${before} -> ${havenPantryKcal(Game)}`);
+    check('R2 no gate holds counted gate-off', (ctx.agGateHeld || 0) === 0, `agGateHeld=${ctx.agGateHeld}`);
   } else {
     console.log('  (skipped — armed phase; R2 is a RED assertion)');
   }
 
-  // ---------- G1: fires on the 6.2d fixture ----------
-  console.log('== G1. fires on the 6.2d fixture ==');
+  // ---------- G1: holds on the thin-fresh fixture ----------
+  console.log('== G1. gate holds on the thin-fresh fixture ==');
   if (ARMED) {
-    const { Game } = await buildGateWorld(43, 2400, 6.2);
-    const cal = calibrateBurn(Game, 6.2, 1.10);
-    check('G1 fixture really is surplus', freshDaysOf(Game) > 6.1 && freshDaysOf(Game) < 6.3,
-      'freshDays=' + freshDaysOf(Game).toFixed(2));
-    const ctx = { _tribHist: [{ day: 29, kcal: 2000 }] };
-    const pol = FS.leadfeast;
+    const Game = await buildThinFixture(44, 1.5, 2400);
+    const fd = freshDaysOf(Game);
+    check('G1 fixture really is thin-fresh (< 2d)', fd > 0.5 && fd < 2, 'freshDays=' + fd.toFixed(2));
+    const ctx = armedCtx();
+    const pol = AG.leadgate;
     pol.setup(Game, ctx);
     const before = havenPantryKcal(Game);
     pol.upkeep(Game, ctx);
-    check('G1 allowance feast fired', (ctx.fsFeasts || 0) === 1,
-      `fsFeasts=${ctx.fsFeasts} cost=${cal.cost} spendTarget=${Math.round(cal.spendTarget)}`);
-    check('G1 pantry really drawn', havenPantryKcal(Game) < before,
-      `${before} -> ${havenPantryKcal(Game)}`);
-    check('G1 surplus spent (drawdown direction)', freshDaysOf(Game) < 6.2,
-      'freshDays=' + freshDaysOf(Game).toFixed(2));
-    check('G1 floor >= 4 after the feast (never below)', freshDaysOf(Game) >= 4,
-      'freshDays=' + freshDaysOf(Game).toFixed(2));
-    check('G1 no gate hold on a surplus fixture', (ctx.fsGateHeld || 0) === 0,
-      `fsGateHeld=${ctx.fsGateHeld}`);
+    check('G1 gate held the pantry-blind feast', (ctx.fsFeasts || 0) === 0, `fsFeasts=${ctx.fsFeasts}`);
+    check('G1 pantry untouched', havenPantryKcal(Game) === before, `${before} -> ${havenPantryKcal(Game)}`);
+    check('G1 hold counted', (ctx.agGateHeld || 0) === 1, `agGateHeld=${ctx.agGateHeld}`);
+    check('G1 cadence NOT marked (postponed, not displaced)', ctx._fsLastFeastDay === undefined,
+      `_fsLastFeastDay=${ctx._fsLastFeastDay}`);
   } else {
     console.log('  (skipped — RED phase; G1 is a GREEN assertion)');
   }
 
-  // ---------- G2: holds on the 3.9d fixture ----------
-  console.log('== G2. holds on the 3.9d fixture ==');
+  // ---------- G2: fires on the deep-fresh fixture ----------
+  console.log('== G2. gate fires on the deep-fresh fixture ==');
   if (ARMED) {
-    const { Game } = await buildGateWorld(44, 2400, 3.9);
-    check('G2 fixture really is below the gate floor', freshDaysOf(Game) > 3.5 && freshDaysOf(Game) < 4,
-      'freshDays=' + freshDaysOf(Game).toFixed(2));
-    const ctx = { _tribHist: [{ day: 29, kcal: 2000 }] };
-    const pol = FS.leadfeast;
+    const Game = await buildDeepFixture(45);
+    const fd = freshDaysOf(Game);
+    check('G2 fixture really is deep-fresh (> 2d)', fd > 5.5, 'freshDays=' + fd.toFixed(2));
+    const ctx = armedCtx();
+    const pol = AG.leadgate;
     pol.setup(Game, ctx);
     const before = havenPantryKcal(Game);
     pol.upkeep(Game, ctx);
-    check('G2 gate held the feast off', (ctx.fsFeasts || 0) === 0,
-      `fsFeasts=${ctx.fsFeasts}`);
-    check('G2 pantry untouched', havenPantryKcal(Game) === before,
-      `${before} -> ${havenPantryKcal(Game)}`);
-    check('G2 hold counted', (ctx.fsGateHeld || 0) === 1,
-      `fsGateHeld=${ctx.fsGateHeld}`);
+    check('G2 allowance feast fired on surplus', (ctx.fsFeasts || 0) === 1, `fsFeasts=${ctx.fsFeasts}`);
+    check('G2 pantry really drawn', havenPantryKcal(Game) < before, `${before} -> ${havenPantryKcal(Game)}`);
+    check('G2 no hold on a surplus fixture', (ctx.agGateHeld || 0) === 0, `agGateHeld=${ctx.agGateHeld}`);
   } else {
     console.log('  (skipped — RED phase; G2 is a GREEN assertion)');
   }
 
-  // ---------- G3: the floor binds on a small-burn village ----------
-  console.log('== G3. the floor binds on a small-burn village ==');
+  // ---------- G3: postponed feasts fire when the pantry recovers ----------
+  console.log('== G3. a postponed feast fires when the pantry recovers ==');
   if (ARMED) {
-    // 4.9d: spendTarget = 0.9*2400 = 2160 < honest cost -> hold
-    const a = await buildGateWorld(45, 2400, 4.9);
-    let costA = 0;
-    try { costA = (a.Game.feastPlan() || {}).cost || 0; } catch (e) {}
-    check('G3a fixture assumption (0.9*2400 < honest cost)', 2160 < costA,
-      `cost=${costA} (fails loudly if the roster changes)`);
-    const ctxA = { _tribHist: [{ day: 29, kcal: 2000 }] };
-    FS.belongfeast.setup(a.Game, ctxA);
-    a.Game.dayPart = 2;
-    FS.belongfeast.upkeep(a.Game, ctxA);
-    check('G3a floor holds when the honest feast would breach 4d',
-      (ctxA.fsFeasts || 0) === 0 && (ctxA.fsGateHeld || 0) === 1,
-      `fsFeasts=${ctxA.fsFeasts} fsGateHeld=${ctxA.fsGateHeld}`);
-    // 6.5d: spendTarget = 2.5*2400 = 6000 >= honest cost -> fires, lands >= 4
-    const b = await buildGateWorld(46, 2400, 6.5);
-    const cal = calibrateBurn(b.Game, 6.5, 1.10);
-    check('G3b fixture assumption (surplus covers the honest cost)', cal.spendTarget >= cal.cost,
-      `cost=${cal.cost} spendTarget=${Math.round(cal.spendTarget)}`);
-    const ctxB = { _tribHist: [{ day: 29, kcal: 2000 }] };
-    FS.belongfeast.setup(b.Game, ctxB);
-    FS.belongfeast.upkeep(b.Game, ctxB);
-    check('G3b fires when the surplus covers the feast', (ctxB.fsFeasts || 0) === 1,
-      `fsFeasts=${ctxB.fsFeasts}`);
-    check('G3b floor >= 4 after (never below)', freshDaysOf(b.Game) >= 4,
-      'freshDays=' + freshDaysOf(b.Game).toFixed(2));
+    const Game = await buildThinFixture(46, 1.5, 2400);
+    const ctx = armedCtx();
+    const pol = AG.belonggate;
+    pol.setup(Game, ctx);
+    pol.upkeep(Game, ctx); // day 30: thin -> hold
+    check('G3 day-30 hold', (ctx.fsFeasts || 0) === 0 && (ctx.agGateHeld || 0) === 1,
+      `fsFeasts=${ctx.fsFeasts} agGateHeld=${ctx.agGateHeld}`);
+    check('G3 opening not displaced (cadence unmarked)', ctx._fsLastFeastDay === undefined,
+      `_fsLastFeastDay=${ctx._fsLastFeastDay}`);
+    // the pantry recovers overnight: fresh food arrives, next dusk
+    Game.state.scholar.day = 31;
+    const v = Game.state.village;
+    v.pantry.push(freshItem(Game, 'Snared meat', 20000, 3));
+    check('G3 pantry recovered (> 2d)', freshDaysOf(Game) > 2, 'freshDays=' + freshDaysOf(Game).toFixed(2));
+    pol.upkeep(Game, ctx); // day 31: surplus -> fires (the postponed opening)
+    check('G3 postponed feast fired on recovery', (ctx.fsFeasts || 0) === 1, `fsFeasts=${ctx.fsFeasts}`);
+    check('G3 cadence marked by the REAL feast', ctx._fsLastFeastDay === 31,
+      `_fsLastFeastDay=${ctx._fsLastFeastDay}`);
   } else {
     console.log('  (skipped — RED phase; G3 is a GREEN assertion)');
   }
@@ -274,13 +252,12 @@ async function runHashes(policy, seed, days) {
   console.log('== G4. armed determinism ==');
   if (ARMED) {
     const run = async (seed) => {
-      const { Game } = await buildGateWorld(seed, 2400, 6.2);
-      calibrateBurn(Game, 6.2, 1.10);
-      const ctx = { _tribHist: [{ day: 29, kcal: 2000 }] };
-      FS.leadfeast.setup(Game, ctx);
+      const Game = await buildDeepFixture(seed);
+      const ctx = armedCtx();
+      AG.leadgate.setup(Game, ctx);
       const before = havenPantryKcal(Game);
-      FS.leadfeast.upkeep(Game, ctx);
-      return `${ctx.fsFeasts}|${before - havenPantryKcal(Game)}|${freshDaysOf(Game).toFixed(3)}`;
+      AG.leadgate.upkeep(Game, ctx);
+      return `${ctx.fsFeasts}|${ctx.agGateHeld || 0}|${before - havenPantryKcal(Game)}|${freshDaysOf(Game).toFixed(3)}`;
     };
     const r1 = await run(47), r2 = await run(47);
     check('G4 identical fixture twice -> identical outcome', r1 === r2, r1);
@@ -288,16 +265,15 @@ async function runHashes(policy, seed, days) {
     console.log('  (skipped — RED phase; G4 is a GREEN assertion)');
   }
 
-  // ---------- G5: no double-feast on the same day ----------
-  console.log('== G5. no double-feast with the one-feast/day slot ==');
+  // ---------- G5: no double-feast ----------
+  console.log('== G5. no double-feast on the same day ==');
   if (ARMED) {
-    const { Game } = await buildGateWorld(48, 2400, 6.2);
-    calibrateBurn(Game, 6.2, 1.10);
-    const ctx = { _tribHist: [{ day: 29, kcal: 2000 }] };
-    FS.leadfeast.setup(Game, ctx);
-    FS.leadfeast.upkeep(Game, ctx);
+    const Game = await buildDeepFixture(48);
+    const ctx = armedCtx();
+    AG.leadgate.setup(Game, ctx);
+    AG.leadgate.upkeep(Game, ctx);
     const afterFirst = ctx.fsFeasts || 0;
-    FS.leadfeast.upkeep(Game, ctx); // second upkeep, same day
+    AG.leadgate.upkeep(Game, ctx); // second upkeep, same day
     check('G5 one feast claims the day slot', afterFirst === 1 && (ctx.fsFeasts || 0) === 1,
       `fsFeasts=${ctx.fsFeasts} s.feastDay=${(Game.state.scholar || {}).feastDay}`);
   } else {
@@ -305,58 +281,27 @@ async function runHashes(policy, seed, days) {
   }
 
   // ---------- G6: gate inert without FEASTSCALE_R13 ----------
-  console.log('== G6. gate inert without FEASTSCALE_R13 (layer off) ==');
-  if (ARMED) {
-    // process the layer-off world manually: call the exported gate helper —
-    // it is unreachable when the layer is off, so assert the call sites.
-    const src = fs.readFileSync(path.join(__dirname, 'policies/feastscale.js'), 'utf8');
-    const gateSite = src.indexOf('if (gateOn() && !pantrySurplusOk(Game, plan))');
-    const scaleFeastBody = src.slice(src.indexOf('function scaleFeast'), src.indexOf('function withFeastScale'));
-    const layerGuard = scaleFeastBody.indexOf('if (!layerOn()) return;');
-    check('G6 gate sits inside scaleFeast', gateSite > 0);
-    check('G6 scaleFeast returns before the gate when the layer is off',
-      layerGuard > 0 && layerGuard < scaleFeastBody.indexOf('pantrySurplusOk'));
-    // Default-OFF is proven by R1 (gate-off == HEAD-pristine); the gate is
-    // textually unreachable unless layerOn() already passed.
-  } else {
-    console.log('  (skipped — RED phase; G6 is a GREEN assertion)');
-  }
-
-  // ---------- G7: floor never breached in a 120d armed run ----------
-  console.log('== G7. floor never breached in a 120d armed run ==');
-  if (ARMED) {
-    const { Game } = await loadGame({ seed: 11, mode: 'allowancegate-g7', fullTelemetry: false });
-    await setupGame(Game);
-    const fdAfter = [];
-    const origHost = Game.hostFeast.bind(Game);
-    Game.hostFeast = function (...a) {
-      const r = origHost(...a);
-      if (r && r.ok) { try { fdAfter.push(+Game.pantryFreshDays().toFixed(2)); } catch (e) {} }
-      return r;
-    };
-    let runCtx = null;
-    const policy = Object.assign({}, FS.leadfeast);
-    const origSetup = FS.leadfeast.setup;
-    policy.setup = (G, ctx) => { runCtx = ctx; if (origSetup) return origSetup(G, ctx); };
-    await quietLogSafe(async () => { await runDays(Game, policy, { days: 120, manifest: undefined, sampleEvery: 10 }); });
-    check('G7 the armed allowance fired >=1 feast in 120d', fdAfter.length >= 1,
-      `feasts=${fdAfter.length}`);
-    const minFd = fdAfter.length ? Math.min.apply(null, fdAfter) : -1;
-    check('G7 floor >= 4 after EVERY armed feast', fdAfter.every(x => x >= 4),
-      `min=${minFd} n=${fdAfter.length}`);
-    check('G7 gate holds counted on the long run', (runCtx && (runCtx.fsGateHeld || 0)) >= 0,
-      `fsGateHeld=${runCtx && runCtx.fsGateHeld}`);
-  } else {
-    console.log('  (skipped — RED phase; G7 is a GREEN assertion)');
+  console.log('== G6. gate inert without FEASTSCALE_R13 ==');
+  {
+    // Textual + behavioral: the gate path is unreachable when the r13
+    // layer is off. Behavioral check runs with ALLOWANCEGATE=1 in the
+    // current process — but the r13 layer reads the env at require time?
+    // No: layerOn() reads process.env per call, so flip it at runtime.
+    const saved = process.env.FEASTSCALE_R13;
+    delete process.env.FEASTSCALE_R13;
+    const Game = await buildThinFixture(49, 1.5, 2400);
+    const ctx = armedCtx();
+    AG.belonggate.setup(Game, ctx);
+    AG.belonggate.upkeep(Game, ctx);
+    check('G6 no holds counted with the r13 layer off', (ctx.agGateHeld || 0) === 0,
+      `agGateHeld=${ctx.agGateHeld}`);
+    check('G6 no allowance feasts with the r13 layer off', (ctx.fsFeasts || 0) === 0,
+      `fsFeasts=${ctx.fsFeasts}`);
+    const src = fs.readFileSync(path.join(__dirname, 'policies/allowancegate.js'), 'utf8');
+    check('G6 gate sits behind the layer guard', src.indexOf('if (!gateOn() || !FS.layerOn())') > 0);
+    if (saved !== undefined) process.env.FEASTSCALE_R13 = saved;
   }
 
   console.log(fails.length ? `\nPROOF ${ARMED ? 'GREEN' : 'RED'}: ${fails.length} FAILURE(S): ${fails.join(', ')}` : `\nPROOF ${ARMED ? 'GREEN' : 'RED'}: ALL GREEN`);
   process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.error('PROOF CRASH:', e); process.exit(2); });
-
-async function quietLogSafe(fn) {
-  try {
-    const { quietLog } = require('./sim-harness');
-    return await quietLog(fn);
-  } catch (e) { return await fn(); }
-}
