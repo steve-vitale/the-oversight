@@ -928,21 +928,30 @@
     // convoDryLine: honest dry lines for run-ledger blocks. The line was
     // swallowed because ANOTHER villager said it recently — the speaker
     // didn't, so "I just said" would be a lie. These admit the dropped
-    // thread without snapping at the player. Per-conversation cycling so
-    // they never parrot verbatim (the old bug). Capped: past 9 uses in one
+    // thread without snapping at the player. The pool covers the full
+    // 9-use cap with DISTINCT lines (journey-landing r14: a 3-line pool
+    // cycled to 9 uses parroted verbatim from use 4 — "...Actually, forget
+    // it." twice in one conversation, seed 43). Never ledgered (generic by
+    // design, like the old fallback). Capped: past 9 uses in one
     // conversation something else is broken and silence is the honest
-    // signal. Never ledgered (generic by design, like the old fallback).
+    // signal.
     convoDryLine(vid) {
       const c = this.convoGet(vid);
       const DRY = [
         '"...Sorry, lost my train of thought."',
         '"Hm. Never mind — go on."',
         '"...Actually, forget it."',
+        '"...Where was I? Gone. Ask me something else."',
+        '"Huh. That went clean out of my head."',
+        '"...No, it\'s not coming back. What were you saying?"',
+        '"Lost it. The thought, I mean. Go on."',
+        '"...Sorry — that one slipped away from me."',
+        '"Eh. Wasn\'t important. Probably."',
       ];
       const used = c.dryLines || 0;
-      if (used >= DRY.length * 3) return null;
+      if (used >= DRY.length) return null;
       c.dryLines = used + 1;
-      return DRY[used % DRY.length];
+      return DRY[used];
     },
 
     // convoSelfRepeatLine: honest deflections for SELF-repeat blocks. The
