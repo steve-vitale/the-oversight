@@ -50,22 +50,12 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 | **Sim bot.** `capable` flees, uses abilities, takes the seat, and sweeps | `scripts/policies/capable.js` | `docs/SIMULATING.md` |
 | **Sprites audited** (294; 28 redrawn, 19 plants added) | `sprites.js` | `sprite-audit.md` |
 
-**In progress (Claude, landing soon):**
-- **Presentation pass A (feedback, sound, haptics):**
-  - grounded effects and sound before the System arrives
-  - effects for the big moments: ascension, flashback, feast, god verbs, titans, the Table
-  - day-7 voice lines
-  - synthesized monster signatures
-  - reduced motion
-- **Presentation pass B (look and accessibility):**
-  - colour tokens and the earthy palette
-  - the presentation stage ladder
-  - the System overlay, alien-script glitch and handwritten marginalia
-  - titan sprites
-  - bespoke Table and level-up screens
-  - zoom, font size and contrast
-- **World origins:** at least 2 picker origins for every region, world lifeseeds, name cultures, a 5-step familiarity scale, and eastern fauna trimmed to real eastern species.
-- **Class diversity:** a job-to-path lean and a wider offer window, aiming for 14 or more of the 20 subclasses to appear.
+**Also built (2026-10-14, late):**
+- **Presentation A:** grounded pre-System feedback, payoff-moment effects + sound + haptics (`src/js/feel.js`), voiced day-7 arrival, live synth signatures, Settings → Feel (vibration, reduce motion). Proof: `evidence/2026-10-14/presentation/A-*`, `A-audio-map.md`.
+- **Presentation B:** colour tokens, presentation stage ladder (`presentation.js`/`presentation.json`), cold System glass, alien-script glitch, handwritten marginalia, titan sprites + bar, bespoke Table and level-up screens, zoom/contrast/≥12px. Proof: `evidence/2026-10-14/presentation/B-*`.
+- **World origins:** 69 picker origins covering all 20 regions, world lifeseeds, 6 new name cultures, 5-tier familiarity, eastern fauna trimmed. Proof: `evidence/2026-10-14/origins-world.md`.
+
+**In progress (Claude):** class diversity (job → path lean, wider offer window); fixes for 2 quarantined tests (pronoun mix in a new-culture bio; taletell roster seeding).
 
 ## 2. Muse's backlog, in order
 
@@ -151,6 +141,10 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+- Origins follow-ups (Muse content): São Paulo sits in pampas/patagonia (it's Atlantic forest — maybe a coastal-Brazil region later); Kathmandu/Ulaanbaatar need Nepali/Mongolian languages (the 25-language test pins the count); Florida panther and Burmese python need a Florida/Everglades landing variant; some cities borrow a neighbour's name culture (Dakar, Dar es Salaam, Quito, La Paz, Montevideo, Sydney, Melbourne).
+- Sounds need a human listen (synth cues can't be judged headless). The pods and knack beats of the day-7 cinematic have no recorded lines yet.
+- The handwriting font falls back to serif on Linux/headless Chromium (script faces on iOS/Windows/Android).
+- Load-order hazard: some old tests load only the first 80 scripts of index.html — add new script tags after position 80.
 - `scripts/validate-data.js` crashes (`spec.endsWith is not a function`).
 - Balance-check the new job → background skills (soldier, police officer,
   firefighter, rancher, mortician, locksmith, bartender, hunting guide,
