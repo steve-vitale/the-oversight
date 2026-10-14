@@ -111,7 +111,8 @@
     if (!torso || !torso.itemId) return [];
     let def = null;
     try {
-      const items = (typeof Game !== 'undefined' && Game.data && Game.data.items) || [];
+      const G = (globalThis.Scattering || {}).Game; // no global Game: it lives on Scattering
+      const items = (G && G.data && G.data.items) || [];
       for (let i = 0; i < items.length; i++) if (items[i].id === torso.itemId) { def = items[i]; break; }
     } catch (e) {}
     if (!isFullSet(torso.itemId, def)) return [];
@@ -454,7 +455,8 @@
       // Ranged weapons migrate to ranged; everything else to melee.
       let ranged = false;
       try {
-        const items = (typeof Game !== 'undefined' && Game.data && Game.data.items) || [];
+        const G = (globalThis.Scattering || {}).Game; // no global Game: it lives on Scattering
+        const items = (G && G.data && G.data.items) || [];
         const def = items.find(i => i.id === eq.weapon.itemId);
         if (def && ((def.weapon && def.weapon.range > 1) || /bow|sling/i.test(def.name || ''))) ranged = true;
       } catch (e) {}
