@@ -7,6 +7,30 @@ verbatim.
 
 ---
 
+## 2026-10-14 (later)
+
+**On the keepsake beam rule:** "Bonded vests blocks beams was never a rule,
+probably just a vague suggestion recorded. Look for evidence of a coherent
+system in each feature and correct where necessary as it contributes to the
+whole." (Rule removed; full coherence audit in
+`evidence/2026-10-14/coherence-audit.md`.)
+
+**Q: Should diplomacy, conquest, titan kills, kind/cruel conversation and detective work count toward the ending?**
+**A:** "Yes, all of them." (Implemented: ledger event mapping.)
+
+**Q: What is the one source of truth for "a build"?**
+**A:** "Redesign it." (Part of the god-path redesign.)
+
+**Q: Should ability gifts offer a choice?**
+**A:** "It's supposed to already pick 1 of 3 are you sure it doesn't do this
+already? The first ability is pick 1 of 3." (Verified: arrival, contest and
+aid offers were choices; the audience-trial gift was not, and is now 1 of 3.)
+
+**Q: What happens if the Table is reached early?**
+**A:** "The table should all be relative until actually entering it when it
+locks. Even if they qualify early, there's room for them to change or
+influence path until they get to the very end." (Implemented: tableInvite.)
+
 ## 2026-10-14
 
 Context: `evidence/2026-10-14/opus-assumption-review.md` §5.
