@@ -150,19 +150,82 @@ ones a region can't ship without.
   random region** at run start, with a fate: `scattered` (alive somewhere) or
   `taken` (KIN.md). Hidden until discovered.
 
-**[CONTENT, later]** Reaching another region:
-1. **Hear of it:** rumors at regional rank ("fires east" already exists in
-   `scaleDiscovery.js`), alien broadcasts, keepsake clues.
-2. **Reach it:** at the global stage, an **expedition** generates a 9×9 map of
-   that region with the same engine, for a set number of days. You take a
-   party, so muster and upkeep apply. Expeditions reuse the march rules of the
-   finale campaign.
-3. **What's there:** a foreign village (a rival or ally, possibly on the scale
-   ladder), regional food and knowledge you can't get at home, and **kin**.
-4. **The family arc:** find a kin's region → expedition → reunion event (they
-   join the village, or are already dead, or have become something). Late game
-   only: gated on global rank. "If you don't know, it doesn't show": the world
-   map doesn't exist in the UI until the first region is heard of.
+### The Long Way Home: the nomad ending (Steve 2026-10-14)
+
+> "Expedition is leaving your village as a nomad to find remaining family.
+> That should be another bonus ending. Seek out and find family according to
+> backstory and where they went." / "Yes both groups exist." — Steve
+
+**Who is where:**
+- **The Taken** are off-world (`region: null`). Only THE HOSTS brings them
+  home.
+- **The scattered** are somewhere on Earth. Only the nomad road finds them.
+
+**The choice: leave.** Late game only: available from the global rank, and
+only once you know at least one living kin's region. Before that it doesn't
+exist in the UI. It's a Haven option like the Table, never a prompt.
+- **You walk away.** The village stays and appoints a new leader from its own
+  people, by the same rules as the mantle passing. Its fate is played out
+  without you and told in the epilogue. Leaving a strong village is a quiet
+  goodbye; leaving a starving one is abandonment, and the ledger remembers.
+- **Who comes with you:** a small party of volunteers. Villagers with
+  scattered kin of their own volunteer first: parity, they want their
+  families too. The party uses finale-march rules: muster, upkeep, food
+  carried, the dead stay dead.
+- **Leaving gives up the Table** (`tableFail('left')` style), and the Table
+  can't be entered while you're on the road. The nomad road is its own ending,
+  not an add-on to a Table path.
+
+**The road: legs, one region each.**
+1. **Where to go comes from backstory.**
+   - Each kin's lifeseed (hometown, workplace, the fate line such as
+     "somewhere west, last anyone knew") plus their world region give a
+     *trail*.
+   - The first clue is vague: the continent or the neighbors.
+   - Clues sharpen with keepsake bond. A worn keepsake of that person at L2+
+     names the region.
+   - People met on the road sharpen them too: a foreign village, a survivor,
+     an alien broadcast.
+2. **Each leg** generates that region's 9×9 map with the region engine, where
+   you live as nomads for days or weeks:
+   - forage what you don't know, since you're a stranger here
+   - meet the local village (trade, fight, or join briefly)
+   - waves still come, because the System's show runs everywhere
+3. **Finding them:** a reunion scene. Fates come from the backstory and the
+   run:
+
+   | Fate | What happens |
+   |---|---|
+   | Alive | They join the party |
+   | Changed | They lead a village, ascended, or are hostile: a choice, sometimes a fight |
+   | Already dead | Their grave, and a keepsake you can now complete |
+   | They moved on | The trail continues |
+
+**The ending: "The Long Way Home."** It's reached when you find every living
+scattered kin you can, or choose to stop and settle where you are.
+- **Light (you found them and made a new home):** "We were never lost; we
+  were just far apart."
+- **Dark (you left a village to die to do it):** you have your family, and
+  you know what it cost.
+- Party members' found kin appear in the epilogue too.
+
+It's still losable: the party can starve or be wiped on the road. The mantle
+passes inside the party; if no one is left, the road ends.
+
+**How it connects to the rest:**
+- **Keepsakes:** they finally go somewhere. Bond sharpens the trail, and a
+  reunion completes or evolves them.
+- **Regions:** this is the reason to visit them. It's also the strongest test
+  of "a stranger in a strange land".
+- **Villager parity:** villagers seek their own kin too. One may ask leave to
+  go, or join you.
+- **Builds:** field, social and strange builds are best on the road; combat
+  builds keep the party alive.
+- **THE HOSTS:** brings home the Taken. Combining both (the key *and* the road)
+  is the open question in §10.
+
+**Needs content:** at least 2 more playable regions (wave 1). The engine can
+be built against fixture regions before then.
 
 ## 7. The data shape [ENGINE — done]
 
