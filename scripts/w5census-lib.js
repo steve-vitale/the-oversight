@@ -200,4 +200,158 @@ function aggregateRows(rows) {
   };
 }
 
-module.exports = { categorizeCause, buildCensusRows, pairFights, findChains, aggregateRows };
+module.exports = { categorizeCause, buildCensusRows, pairFights, findChains, aggregateRows,
+  buildVillagerRows, aggregateVillagerRows, classifyPersonFight, findCombatChains48,
+  buildVillageProfile };
+
+// ---------------------------------------------------------------------------
+// r27 EXTENSIONS (scale-onramp r27, HOLLOW UNLOCK #134 + 48h chains #90).
+// All instrument-only: pure functions, no Game reads. The r26 functions
+// above are untouched so their proof test keeps pinning behavior.
+
+// VILLAGER-LEVEL post-unlock rows (closes HOLLOW UNLOCK #134 — the r26 census
+// was scholar-centric and couldn't explain s88: village-lost d87 with the
+// scholar alive). One row per non-player villager/'person' death at day >= U:
+// the scholar's tenure context (who held the mantle on the death day, from
+// the driver's daily-hook tenure list) is attached so each row says who was
+// in charge when this villager died.
+//
+// opts: { unlockDayW5, villagerDeaths: [{day, who, cause, kind}],
+//         tenures, monsterNames }
+// Returns { rows, reconciliation } — rows.length must equal the post-unlock
+// non-player death count.
+function buildVillagerRows(opts) {
+  const { unlockDayW5, villagerDeaths, tenures, monsterNames } = opts;
+  const rows = [];
+  const reconciliation = { postUnlockVillagerDeaths: 0, rows: 0, preUnlockVillagerDeaths: 0, unmatchedTenure: 0 };
+  if (unlockDayW5 == null) {
+    reconciliation.postUnlockVillagerDeaths = 0;
+    return { rows, reconciliation };
+  }
+  const U = unlockDayW5;
+  for (const d of (villagerDeaths || [])) {
+    if (d.day < U) { reconciliation.preUnlockVillagerDeaths += 1; continue; }
+    reconciliation.postUnlockVillagerDeaths += 1;
+    // tenure: latest tenure whose startDay <= deathDay (the mantle at the time)
+    let tenure = null;
+    for (const t of (tenures || [])) { if (t.startDay <= d.day) tenure = t; }
+    if (!tenure) reconciliation.unmatchedTenure += 1;
+    rows.push({
+      who: d.who || '?',
+      deathDay: d.day,
+      daysPostUnlock: d.day - U,
+      kind: String(d.kind || '?'),
+      cause: String(d.cause || 'unknown'),
+      category: categorizeCause(d.cause, monsterNames),
+      mantleAtDeath: tenure ? tenure.vid : null,
+      mantleTenureStart: tenure ? tenure.startDay : null,
+    });
+  }
+  rows.sort((a, b) => a.deathDay - b.deathDay);
+  reconciliation.rows = rows.length;
+  return { rows, reconciliation };
+}
+
+function aggregateVillagerRows(rows) {
+  const n = rows.length;
+  const counts = {};
+  for (const r of rows) counts[r.category] = (counts[r.category] || 0) + 1;
+  const shares = Object.keys(counts).map(k => ({ cause: k, n: counts[k], share: n ? +(counts[k] / n).toFixed(3) : 0 }));
+  shares.sort((a, b) => b.n - a.n);
+  const dpu = rows.map(r => r.daysPostUnlock).sort((a, b) => a - b);
+  const med = dpu.length ? dpu[Math.floor(dpu.length / 2)] : null;
+  return {
+    n, top3: shares.slice(0, 3), all: shares,
+    medianDaysPostUnlock: med,
+    maxDaysPostUnlock: dpu.length ? dpu[dpu.length - 1] : null,
+    minDaysPostUnlock: dpu.length ? dpu[0] : null,
+  };
+}
+
+// PERSON-FIGHT SUBTYPE SPLITS (#133 stays OPEN: the engine still emits no
+// tele distinguishing alien-duel/uprising/betrayal — but the driver's tbEnd
+// instrument wrap snapshots the LIVE tbfight object (no game-code change),
+// so where the fight flags are readable the split IS determinable.
+//
+// snapshot (instrument-captured at tbEnd, before call-through):
+//   { uprising, betrayal, aggressor, hasMonster, hasAlienPid }
+// Returns 'alien-duel' | 'uprising' | 'betrayal' | 'other-person'.
+function classifyPersonFight(snap) {
+  const s = snap || {};
+  if (s.hasAlienPid) return 'alien-duel';
+  if (s.uprising) return 'uprising';
+  if (s.betrayal) return 'betrayal';
+  return 'other-person';
+}
+
+// 48h COMBAT-SUCCESSION chains (#90): the same-day multi-death metric misses
+// d91->d92->d93 and d75->d76 chains (same pathology, different clock). A
+// chain is a maximal run of COMBAT-category scholar deaths with gaps <= 2
+// days (48h). Non-combat rows neither start nor extend a chain (the
+// pathology under study is the succession combat feed, per #90).
+function findCombatChains48(rows) {
+  const combat = (rows || []).filter(r => r.category === 'combat')
+    .sort((a, b) => a.deathDay - b.deathDay);
+  const chains = [];
+  let cur = [];
+  for (const r of combat) {
+    if (cur.length && r.deathDay - cur[cur.length - 1].deathDay > 2) {
+      if (cur.length >= 2) chains.push(cur);
+      cur = [];
+    }
+    cur.push(r);
+  }
+  if (cur.length >= 2) chains.push(cur);
+  return chains
+    .map(c => ({ depth: c.length, from: c[0].deathDay, to: c[c.length - 1].deathDay,
+                 causes: c.map(x => x.category), who: c.map(x => x.who),
+                 w5Fought: c.map(x => !!x.w5Fought) }))
+    .sort((a, b) => b.depth - a.depth);
+}
+
+// VILLAGE PROFILE (the hollow-vs-combat story in numbers). From a
+// day-keyed village curve (driver daily hook, last-write-wins per
+// game-day): roster size, pantry kcal, trust mean/min + bands, standing.
+// Builds the last-30-post-unlock-days story plus unlock-day anchors.
+//
+// curve: [{day, roster, pantryKcal, trustMean, trustMin, trustN,
+//          low: n trust<30, mid: 30-60, high: 60+, standing}]
+// villagerRows: post-unlock villager rows (for death-cause counts in window)
+// unlockDay: wave-5 unlock day
+function buildVillageProfile(curve, villagerRows, unlockDay) {
+  const byDay = {};
+  for (const c of (curve || [])) byDay[c.day] = c; // last write per game-day wins
+  const at = (d) => byDay[d] || null;
+  const unlock = at(unlockDay) || {};
+  const winStart = unlockDay;
+  const win = (villagerRows || []).filter(r => r.deathDay >= winStart && r.deathDay < winStart + 30);
+  const counts = {};
+  for (const r of win) counts[r.category] = (counts[r.category] || 0) + 1;
+  const dayNums = Object.keys(byDay).map(Number);
+  const lastDay = dayNums.length ? Math.max.apply(null, dayNums.concat([unlockDay])) : unlockDay;
+  // curve in the window: min roster, min pantry, trust trajectory
+  let minRoster = null, minPantry = null, endRoster = null, endPantry = null,
+      endTrustMean = null, endTrustLow = null, endTrustN = null, endStanding = null;
+  for (let d = winStart; d <= Math.min(winStart + 30, lastDay); d++) {
+    const c = at(d);
+    if (!c) continue;
+    if (c.roster != null) { minRoster = minRoster == null ? c.roster : Math.min(minRoster, c.roster); endRoster = c.roster; }
+    if (c.pantryKcal != null) { minPantry = minPantry == null ? c.pantryKcal : Math.min(minPantry, c.pantryKcal); endPantry = c.pantryKcal; }
+    if (c.trustMean != null) endTrustMean = c.trustMean;
+    if (c.low != null) endTrustLow = c.low;
+    if (c.trustN != null) endTrustN = c.trustN;
+    if (c.standing != null) endStanding = c.standing;
+  }
+  return {
+    unlockDay,
+    atUnlock: { roster: unlock.roster != null ? unlock.roster : null,
+                pantryKcal: unlock.pantryKcal != null ? unlock.pantryKcal : null,
+                trustMean: unlock.trustMean != null ? unlock.trustMean : null,
+                trustN: unlock.trustN != null ? unlock.trustN : null },
+    window30: { minRoster, minPantry,
+                endRoster, endPantry, endTrustMean, endTrustLow, endTrustN,
+                endStanding, lastCurveDay: lastDay,
+                villagerDeaths: win.length,
+                deathsByCause: counts },
+  };
+}
