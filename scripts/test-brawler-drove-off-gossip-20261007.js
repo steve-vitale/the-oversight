@@ -5,19 +5,17 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/party.js',
- 'src/js/justice.js', 'src/js/conversation.js', 'src/js/truth.js', 'src/js/journal.js',
- 'src/js/betrayal.js', 'src/js/corpses.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 const ok = (cond, name) => { if (cond) { pass++; } else { fail++; console.log('FAIL:', name); } };
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261007), narration: true });
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -26,7 +24,13 @@ const ok = (cond, name) => { if (cond) { pass++; } else { fail++; console.log('F
   feed();
   const v = Game.state.village, me = Game.villagerId;
   const others = () => v.roster.filter(id => id !== me);
-  const vid = others().find(id => ['cautious', 'withdrawn'].includes(Game.npcTemper(id))) || others()[0];
+  // Pin the victim (flake fix 2026-10-14): the breaking-point path only
+  // exists for cautious/withdrawn tempers. The old `|| others()[0]` fallback
+  // handed a steady/bold villager to the test on seeds with no timid one, and
+  // every assertion failed. Make the fallback timid instead.
+  let vid = others().find(id => ['cautious', 'withdrawn'].includes(Game.npcTemper(id)));
+  if (!vid) { vid = others()[0]; const vp = Game.vpOf(vid); vp.personality = vp.personality || {}; vp.personality.temperament = 'cautious'; }
+  Game.npcNeeds(vid).fear = 0; // first two shakedowns must not start at the breaking point
 
   const r1 = Game.intimidate(vid); ok(r1 === 'yielded', 'first shakedown yields');
   const r2 = Game.intimidate(vid); ok(r2 === 'yielded', 'second shakedown yields (breaking-point warning)');

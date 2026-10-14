@@ -1,17 +1,4 @@
 # scripts/green-list-quarantine.txt — green-list tests temporarily skipped.
 # One per line: <path>  # <date> <reason>. Empty is the goal.
-scripts/test-brawler-drove-off-gossip-20261007.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-brawler-snap-fiction-20261007.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-drifter-journey.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-forage-rot.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-journal-pacing.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-npc-voice.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-worldedge-9x9-20261007.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
-scripts/test-explorer-worldedge-20261006.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
-scripts/test-knowledge-progression.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
-scripts/test-regrow-timing.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
-scripts/test-villager-personality.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
-scripts/test-wincensus-20261014.js  # 2026-10-14 seed-fragile: (4) needs seed 22 to reach the table; any RNG-shifting change (trial 1-of-3 sheet, ledger events) tips it under. Needs a multi-seed version.
-scripts/test-gorgedrive-20261014.js  # 2026-10-14 seed-fragile: 3b engagement depends on monster drift (gorgeVerifyFailed after RNG shift). GREEN section HP now pinned.
-scripts/test-brawler-descriptor-dedup.js  # 2026-10-14 flaky: exit 1 x3 then 0 with identical ALL PASS output; nondeterministic
-scripts/test-backgrounds-20261006.js  # 2026-10-14 flaky: unseeded (no Math.random seed); 'no second-person POV breaks' fails ~3/4 runs on generated backstory text, unrelated to abilities (seen during ability-lanes work)
+scripts/test-brawler-descriptor-dedup.js  # 2026-10-14 REAL BUG (deterministic now — seeded loader): game.js personVisibleTrait caches `look` on the shared data.villagers record and returns it unconditionally; a look cached in an earlier run (same session, new game) collides with another reused villager's cached look -> two "A man, maybe 40s, with a limp" in one village. Clearing looks between runs = 0 dupes. Un-quarantine when src fixes the cache.
+scripts/test-backgrounds-20261006.js  # 2026-10-14 REAL BUG (deterministic now — seeded loader; 7/10 seeds hit it): second-person POV in third-person bios — game.js stoic temperament line "You can't tell what ${first} is feeling" (two copies, ~L812/~L1095); also characterGen.json assessment "You find yourself checking your own hands", note "...{they} gave you two weeks ago", lifeseeds "{kin}'s rule: you eat after..." and a "Yours." heartbeat line. Needs src/data rewrite (or a Steve ruling that player-address is allowed in bios).

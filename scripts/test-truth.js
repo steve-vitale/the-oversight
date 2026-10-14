@@ -2,13 +2,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function eq(name, got, want) {
@@ -21,7 +19,7 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261006), narration: true });
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -135,12 +133,15 @@ function ok(name, cond) {
     occupation: { told: 'chef', truth: 'accountant', motive: 'shame', field: 'occupation' },
   };
   v.trust[C] = 10;
-  // Force detection by calling many times (25%+ base chance)
+  // Pin the detect roll (flake fix 2026-10-14): "call it 20 times at 25%+"
+  // stopped being near-certain when WARINESS (2026-10-08d) cut the chance to
+  // 0.06 after three watches (~15% miss over 20 tries). This checks that a
+  // successful look detects the lie and files a doubt — so make the one
+  // roll succeed instead of hoping.
   let found = false;
-  for (let i = 0; i < 20 && !found; i++) {
-    const r = Game.observePerson(C);
-    if (r.found) found = true;
-  }
+  const realRandom13 = Math.random;
+  Math.random = () => 0;
+  try { found = !!Game.observePerson(C).found; } finally { Math.random = realRandom13; }
   ok('observation can detect lies', found);
   const obsDoubts = Game.getDoubts(C).filter(x => x.kind === 'observation');
   ok('observation created doubt', obsDoubts.length > 0);
