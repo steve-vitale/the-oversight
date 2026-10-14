@@ -702,6 +702,16 @@ function runConversation(day, vid) {
     const nm = vname(vid);
     const p = person(vid);
     const r0 = _G.startConvo(vid);
+    if (!r0) {
+      // HARNESS GAP FIX (deepening r11 2026-10-13): startConvo legitimately
+      // returns null for an un-talkable roster id (phantom-talk guard). Log
+      // it as a finding, not a crash — a null here in a sim is exactly the
+      // recruit-ghost signal the game fix above addresses.
+      log(`THEM: (no line — startConvo returned null for ${vid}; un-talkable roster id)`);
+      log('want final: id=none stage=0 resolution=none (conversation never opened)');
+      fs.writeFileSync(fp, L.join('\n'));
+      return fp;
+    }
     const c = _G.convoGet(vid);
     const want = (c && c.want) || {};
     log(`=== seed ${_currentSeed} day ${day} — conversation with ${nm} (${vid}) ===`);

@@ -45,6 +45,7 @@
 //   - kcalCap() (delegates to food.js)
 //   - hydrateSeed(seed) -> full person (unified person system: seed -> genCharacter depth)
 //   - getPerson(id) -> person | null (unified lookup: villagers + hydrated seeds)
+//   - ensureRosterPerson(nid, hint) -> person (recruit-ghost fix: hydrate arrivals once so every roster id resolves)
 //   - markSeen(x, y, kind, by), mapSeen(x, y) -> 'visited'|'shared'|null (player map knowledge: fog of war display)
 //   - sharedTileNote(x, y) -> honest provenance parenthetical for 'shared' tiles (dowsing / echo_location / someone)
 //   - hiveSight() -> bool (hive_mind map reveal: overlay renders all tiles at 'shared' level, display-only, never writes seenTiles)
@@ -1191,6 +1192,45 @@
       // but keeps old saves working).
       const s = (this.data.background_survivors || []).find(x => x.id === id);
       return s ? this.hydrateSeed(s) : null;
+    },
+
+    // ensureRosterPerson(nid, hint): RECRUIT-GHOST FIX (journey deepening r11
+    // 2026-10-13). Every roster id must resolve to a full person. Arrival
+    // paths (application accept, auto-recruit, visitor invite) pushed bare
+    // ids — vpOf missed them, startConvo returned null, Talk dead-ended,
+    // and the census showed "Someone" with no occupation forever. A recruit
+    // nobody can talk to is not a villager. Hydrate ONCE here (never per
+    // lookup — hydrateSeed consumes the dedup registries, so repeated
+    // hydration would mint divergent people): background-survivor seeds via
+    // hydrateSeed (seed identity authoritative); everyone else gets a full
+    // genCharacter (unique-person law — a real name, never "a tired cook").
+    ensureRosterPerson(nid, hint) {
+      if (!nid) return null;
+      try {
+        const have = (this.data.villagers || []).find(x => x && x.id === nid);
+        if (have && have.id) return have;
+        let person = null;
+        const seed = ((this.data.background_survivors || []).find(s => s && s.id === nid)) || null;
+        if (seed && typeof this.hydrateSeed === 'function') {
+          person = this.hydrateSeed(seed);
+        } else if (typeof this.genCharacter === 'function') {
+          // genCharacter needs its dedup registries (unique-person law) —
+          // reuse the run's, or a throwaway that still dedups within the call.
+          person = this.genCharacter({ usedNames: this._usedNames || new Set() });
+          if (person) {
+            if (hint && hint.formerOccupation) person.formerOccupation = hint.formerOccupation;
+            // A drifter descriptor ("a tired cook") is not a name —
+            // genCharacter already minted a real one; keep it.
+          }
+        }
+        if (person) {
+          person.id = nid;
+          this.data.villagers = this.data.villagers || [];
+          if (!this.data.villagers.some(x => x && x.id === nid)) this.data.villagers.push(person);
+          return person;
+        }
+      } catch (e) {}
+      return null;
     },
 
     // genRoster(playerOrigin): the character-select cast.

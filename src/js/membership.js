@@ -610,6 +610,10 @@
           // ensure a character record exists
           var nid = app.charId || app.id;
           if (v.roster.indexOf(nid) < 0) v.roster.push(nid);
+          // RECRUIT-GHOST FIX (journey deepening r11 2026-10-13): a bare
+          // roster id is an un-talkable ghost (vpOf misses -> startConvo
+          // null). Hydrate the person once, here, at arrival.
+          try { if (this.ensureRosterPerson) this.ensureRosterPerson(nid, app); } catch (e2) {}
           var t = v.trust || (v.trust = {});
           if (t[nid] == null) t[nid] = 20;
           // PARTY-BOND (2026-10-12): arrival day — newcomers (<14d) get

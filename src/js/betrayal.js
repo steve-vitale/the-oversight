@@ -3007,6 +3007,10 @@
       const nid = 'visjoin_' + vis.day;
       v.roster = v.roster || []; v.roster.push(nid);
       const t = v.trust || {}; t[nid] = 20;
+      // RECRUIT-GHOST FIX (journey deepening r11 2026-10-13): a bare roster
+      // id is an un-talkable ghost. The visitor had a name and a past —
+      // keep them as a person.
+      try { if (this.ensureRosterPerson) this.ensureRosterPerson(nid, vis); } catch (e2) {}
     } else if (how === 'away') {
       this.say(`You turn them away. The road takes them. Word travels about that, too.`);
       bs.strangersHeard = (bs.strangersHeard || 0) + 1;
