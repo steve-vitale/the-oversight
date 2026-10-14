@@ -223,8 +223,11 @@
     cartographerDodge: function (game) {
       try {
         if (!game.hasAbility || !game.hasAbility('cartographers_eye')) return 0;
+        // Revealed tiles of the current region's map (tile.revealed, set by
+        // game.reveal). There was never a game.revealedTileCount.
         let revealed = 0;
-        try { revealed = game.revealedTileCount ? game.revealedTileCount() : 0; } catch (e) {}
+        const rows = (game.map && game.map.tiles) || [];
+        for (const row of rows) for (const tile of (row || [])) if (tile && tile.revealed) revealed++;
         return Math.min(Math.floor(revealed / 10) * 0.01, 0.15);
       } catch (e) { return 0; }
     },
