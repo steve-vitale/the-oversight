@@ -204,6 +204,14 @@ h1.title { color: var(--acc); font-size: 28px; letter-spacing: 2px; margin: 24px
   overflow-y: auto;
 }
 /* Person cards are the tallest tenant — they scroll inside the region. */
+/* PERSON-CARD CONTAINMENT (Steve phone 2026-10-14: card bottom "partially
+   covered" by the info bar): definite height, not max-height % — the scroll
+   container must always form inside the fixed 184px region. Drop the vertical
+   margin (it pushed the card past the region's bounds). Sticky header/buttons
+   keep Close and actions reachable while the middle scrolls. */
+.ord-narration .inlinecard {
+  height: 100%; margin: 0; overflow-y: auto; box-sizing: border-box;
+}
 /* MUSTER-DIALOG-FIX (2026-10-12): the card's action buttons ("Ask for help")
    sit at the bottom of a ~400px card inside a 184px region — they were clipped
    below the fold ("not_visible"/"obscured" in browser automation), blocking
@@ -211,7 +219,6 @@ h1.title { color: var(--acc); font-size: 28px; letter-spacing: 2px; margin: 24px
    within the card's scroll: Close is always tappable at the top, Ask-for-help
    and the other actions are always tappable at the bottom, no matter how far
    the card content scrolls. */
-.ord-narration .inlinecard { max-height: 100%; overflow-y: auto; }
 .ord-narration .inlinecard .inline-head {
   position: sticky; top: 0; z-index: 2;
   background: #14140f; /* match .inlinecard so content scrolls under, not through */
@@ -1316,6 +1323,18 @@ body.is-night .cell.c-tent { box-shadow: 0 0 10px 3px rgba(255,190,90,.25); }
   }
   /* COMPACT STATUS: 2x2 mini-bars instead of 4 full rows */
   .ord-status { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+  /* INFO-BAR CLASH FIX (Steve phone 2026-10-14): the 2-col grid squeezed the
+     stat grid and the beat rows (wave ledger) side-by-side — the ledger's
+     text collided with the chips and the chips crowded each other. Each child
+     takes full width; .statgrid keeps its own internal 2-col layout. */
+  .ord-status > .statgrid { grid-column: 1 / -1; }
+  .ord-status > .statrow { grid-column: 1 / -1; min-width: 0; }
+  /* Beat rows (wave ledger, contest, afflictions) had no styles at all —
+     unstyled text colliding in the grid. Full-width, quiet, readable. */
+  .ord-status > .statrow {
+    font-size: 12px; line-height: 1.45; color: #bbb;
+    padding: 4px 2px; border-top: 1px solid rgba(255,255,255,.06);
+  }
   .ord-status .stat { margin: 3px 0; }
   .ord-status .stat .lbl { font-size: 11px; }
   .ord-status .bar { height: 7px; margin-top: 2px; }
