@@ -55,6 +55,35 @@ async function runOne(seed, opts) {
     firstW5Fight: null,       // day of first combat_start with wave>=5
   };
   let lastVid = null;
+  // noteBearer: record a tenure when the mantle has moved. Called from the
+  // daily hook AND right after every playerDeath (the mantle pass) and every
+  // player death event — a successor who takes over and dies the same day
+  // is never seen by a once-per-day sample (seed 22, 2026-10-14).
+  const curDay = (G) => (((G.state || {}).scholar || {}).day || 0);
+  const noteBearer = (G, vid, day) => {
+    if (vid != null && vid !== lastVid) {
+      track.tenures.push({ vid, startDay: day });
+      lastVid = vid;
+    }
+  };
+  const bearerOf = (G) => (G.villagerId != null ? G.villagerId : ((G.state || {}).scholar || {}).villagerId);
+  if (typeof Game.playerDeath === 'function') {
+    const origPD = Game.playerDeath;
+    Game.playerDeath = function () {
+      const r = origPD.apply(this, arguments);
+      try { noteBearer(this, bearerOf(this), curDay(this)); } catch (e) { instrErrors.push('playerDeath hook: ' + e.message); }
+      return r;
+    };
+  }
+  if (typeof Game.tele === 'function') {
+    const origTele = Game.tele;
+    Game.tele = function (type, data) {
+      // the dying bearer must hold the mantle at death: record it first
+      try { if (type === 'death' && data && data.player && data.who && data.who !== '?') noteBearer(this, data.who, curDay(this)); }
+      catch (e) { instrErrors.push('death hook: ' + e.message); }
+      return origTele.apply(this, arguments);
+    };
+  }
   const origDaily = leadfeast.daily;
   const policy = Object.assign({}, leadfeast);
   policy.daily = (G, ctx) => {
@@ -72,13 +101,7 @@ async function runOne(seed, opts) {
         }
       }
       try { const pg = G.progState ? G.progState() : {}; if (pg.tableWaiting) track.tableDays.push(day); } catch (e) {}
-      try {
-        const vid = G.villagerId != null ? G.villagerId : ((G.state || {}).scholar || {}).villagerId;
-        if (vid != null && vid !== lastVid) {
-          track.tenures.push({ vid, startDay: day });
-          lastVid = vid;
-        }
-      } catch (e) {}
+      try { noteBearer(G, bearerOf(G), day); } catch (e) { instrErrors.push('tenure: ' + e.message); }
       try { const s2 = stdSnapshot(G); track.maxRank = Math.max(track.maxRank, RANK_ORDER[s2.rank] || 0); track.maxArc = Math.max(track.maxArc, s2.arc || 1); } catch (e) {}
       try { if (G.state && G.state.exiled) track.exiledEver = true; } catch (e) {}
     } catch (e) { instrErrors.push('daily: ' + e.message); }

@@ -14718,25 +14718,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { return false; }
     },
     // personVisibleTrait: stable per villager (id-hashed), unique within the
-    // village. Assigned lazily onto the record; hash-based so it's identical
-    // even if the record wasn't persisted.
+    // village. Cached PER RUN on state.personLooks (saved with the run), never
+    // on the shared data.villagers record: that record outlives newGame, so a
+    // look cached in an earlier run collided with this village's looks
+    // (two "with a limp" in one village, 2026-10-14).
     personVisibleTrait(vid) {
       try {
         const pool = this.visibleTraitPool();
-        const v = this.personRecord(vid);
-        if (v && v.look) return v.look;
+        const looks = this.state.personLooks = this.state.personLooks || {};
+        if (looks[vid]) return looks[vid];
         const taken = new Set();
         for (const id of this.villagePersonIds()) {
-          if (id === vid) continue;
-          const rec = this.personRecord(id);
-          if (rec && rec.look) taken.add(rec.look);
+          if (id !== vid && looks[id]) taken.add(looks[id]);
         }
         let idx = this._hashStr(String(vid)) % pool.length;
         for (let i = 0; i < pool.length && taken.has(pool[idx]); i++) idx = (idx + 1) % pool.length;
         const trait = pool[idx];
-        if (v) v.look = trait;
+        looks[vid] = trait;
         return trait;
-      } catch (e) { return 'with a tired face'; }
+      } catch (e) {
+        if (typeof console !== 'undefined') console.warn('personVisibleTrait', e);
+        return 'with a tired face';
+      }
     },
     // displayName: THE funnel. Names pre-System only if earned socially.
     displayName(vid) {

@@ -1,6 +1,6 @@
 // @ontology
 // system: party-bond
-// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER ability path (draw_fire/bodyguard/shield_wall/rally) carries the village-scale bond pool: the System offers its abilities to villagers who've bled beside others, and a completed path anchors the whole village.
+// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER path (draw_fire/bodyguard/shield_wall/rally, villager skills) carries the village-scale bond pool: villagers who've bled beside others learn it, and a completed path anchors the whole village.
 // provides:
 //   - combatBondGet(a, b)
 //   - combatBondAdd(a, b, n)
@@ -28,8 +28,8 @@
   // ---------- THE SHIELDBEARER PATH: the stand-together ability path ----------
   // Steve 2026-10-12: the village-scale bond belongs to an ABILITY PATH, not
   // a godhood. Four abilities, one identity: the villager who stands between
-  // the monsters and everyone else. The System offers them to villagers who
-  // have bled beside others — the party bond (feature 1, for everyone) is the
+  // the monsters and everyone else. Villagers who have bled beside others
+  // learn them (skill-lane since 2026-10-14: skills, not System offers) — the party bond (feature 1, for everyone) is the
   // on-ramp to this path (feature 2). Grant order is fixed; the bond
   // threshold is the price. System_offer unlock stays for the player's route.
   var SHIELDBEARER_PATH = ['draw_fire', 'bodyguard', 'shield_wall', 'rally'];
@@ -243,8 +243,17 @@
           if (def && def.name) aname = def.name;
         } catch (e2) {}
         var vname = vnameOf(vid), wname = vnameOf(who);
-        if (g.say) g.say('◈ THE SYSTEM has been watching ' + vname + ' — stood beside ' + wname + ' through blood and back. It offers ' + aname + '. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
-        try { if (g.journalNote) g.journalNote('system', 'grant', 'The System granted ' + vname + ' ' + aname + ' (' + id + ') for a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        // A skill-lane id is a villager SKILL (ability lanes 2026-10-14):
+        // learned beside someone, not offered by the System. Only magic
+        // keeps the System's voice.
+        var skill = !!(g.isSkillLane && g.isSkillLane(id));
+        if (skill) {
+          if (g.say) g.say(vname + ' has stood beside ' + wname + ' through blood and back — and learned ' + aname + ' from it. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
+          try { if (g.journalNote) g.journalNote('village', 'skill:' + vid + ':' + id, vname + ' learned ' + aname + ' (' + id + ') from a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        } else {
+          if (g.say) g.say('◈ THE SYSTEM has been watching ' + vname + ' — stood beside ' + wname + ' through blood and back. It offers ' + aname + '. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
+          try { if (g.journalNote) g.journalNote('system', 'grant', 'The System granted ' + vname + ' ' + aname + ' (' + id + ') for a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        }
         try { if (g.tele) g.tele('villager_grant', { vid: vid, ability: id, track: 'shieldbearer', bond: best }); } catch (e4) {}
         return; // one offer per fight
       }
