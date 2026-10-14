@@ -22,6 +22,7 @@ async function one() {
     classPlayer: 0, classPlayerDay: null, classVillagers: new Set(), subclasses: {},
     ascPlayer: 0, ascVillager: 0, ascPaths: [],
     verbPlayer: 0, verbVillager: 0, verbs: {}, passives: {}, villageLostDay: null,
+    gates: { p: {}, v: {} }, lostCause: null,
   };
   const _loadGame = harness.loadGame;
   harness.loadGame = async function () {
@@ -51,6 +52,41 @@ async function one() {
       } catch (e) { console.warn('[sweep-buff] count', e.message); }
       return _tele.apply(this, arguments);
     };
+    // how the village was lost: famine (the scattering) or no successor
+    const _say = G.say;
+    G.say = function (m) {
+      try {
+        const t = String(m || '');
+        if (!C.lostCause && /Haven couldn.t hold/.test(t)) C.lostCause = 'famine';
+        else if (!C.lostCause && /No one is left to pick up the Codex/.test(t)) C.lostCause = 'no-successor';
+      } catch (e) { console.warn('[sweep-buff] say', e.message); }
+      return _say.apply(this, arguments);
+    };
+    // ascension gates at day 80+: which ones the best build passes (per run)
+    const _ed = G.endDay;
+    G.endDay = function () {
+      try {
+        const day = ((G.state || {}).scholar || {}).day || 0;
+        const GH = (globalThis.Scattering || {}).Godhood;
+        if (day >= 80 && GH && GH.godhoods) {
+          const mark = (who, cl) => {
+            const g = C.gates[who];
+            if (cl.classOk) g.cls = true;
+            if (cl.classOk && cl.kit >= cl.needKit) g.kit = true;
+            if (cl.classOk && cl.kit >= cl.needKit && cl.coreHit) g.pay = true;
+            if (cl.classOk && cl.kit >= cl.needKit && cl.synergy) g.kitDeed = true;
+          };
+          for (const gh of GH.godhoods()) {
+            mark('p', GH.godhoodCloseness(G.state.scholar, gh, day));
+            for (const vid of ((G.state.village || {}).roster || [])) {
+              if ((((G.state.village.npcAbilities || {})[vid]) || []).length < 3) continue;
+              mark('v', GH.villagerGodhoodCloseness(G, vid, gh));
+            }
+          }
+        }
+      } catch (e) { console.warn('[sweep-buff] gates', e.message); }
+      return _ed.apply(this, arguments);
+    };
     return r;
   };
   const { runComparison } = require('../sweep-compare');
@@ -67,11 +103,11 @@ async function one() {
   const r = rep.runs[0];
   const out = {
     seed, days: r.days, end: r.endReason, won: r.won, invited: r.table, sat: r.entered,
-    villageLost: (r.extra || {}).villageLost || r.endReason === 'village-lost', vAbil: (r.extra || {}).vAbil, vHolders: (r.extra || {}).vHolders,
+    villageLost: (r.extra || {}).villageLost || r.endReason === 'village-lost' || r.endReason === 'village-dead', vAbil: (r.extra || {}).vAbil, vHolders: (r.extra || {}).vHolders,
     classPlayer: C.classPlayer > 0, classPlayerDay: C.classPlayerDay, classVillagers: C.classVillagers.size,
     subclasses: C.subclasses, ascPlayer: C.ascPlayer, ascVillager: C.ascVillager, ascPaths: C.ascPaths,
     verbPlayer: C.verbPlayer, verbVillager: C.verbVillager, verbs: C.verbs, passives: C.passives,
-    deaths: r.deaths,
+    deaths: r.deaths, gates: C.gates, lostCause: C.lostCause,
   };
   console.log('RESULT ' + JSON.stringify(out));
 }
@@ -104,6 +140,7 @@ function summarize(rows) {
     verbPlayer: rows.reduce((t, r) => t + (r.verbPlayer || 0), 0),
     verbVillager: rows.reduce((t, r) => t + (r.verbVillager || 0), 0),
     verbs, passives,
+    gates: ['p', 'v'].reduce((o, w) => { o[w] = {}; for (const k of ['cls', 'kit', 'pay', 'kitDeed']) o[w][k] = rows.filter(r => r.gates && r.gates[w] && r.gates[w][k]).length; return o; }, {}),
   };
 }
 
