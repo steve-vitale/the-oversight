@@ -1,0 +1,331 @@
+{
+  "side": "armed",
+  "fleedirect": "1",
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    77,
+    88
+  ],
+  "agg": {
+    "n": 8,
+    "medianDays": 100,
+    "maxDays": 151,
+    "days": [
+      60,
+      61,
+      86,
+      88,
+      100,
+      131,
+      149,
+      151
+    ],
+    "national": 5,
+    "table": 0,
+    "wins": 0,
+    "wave4": 5,
+    "wave5": 0,
+    "maxWave": 4,
+    "maxArc": 3,
+    "deaths": {
+      "combat": 43,
+      "contest": 3,
+      "villager combat": 8,
+      "monster": 16,
+      "a wound that wouldn't close": 7,
+      "starvation": 10,
+      "sickness": 9,
+      "thirst": 1,
+      "alien": 1,
+      "dehydration": 1,
+      "expedition": 1
+    },
+    "totalDeaths": 100,
+    "starveDeaths": 10,
+    "combatDeaths": 67,
+    "combatDeathShare": 0.67,
+    "villagerDays": 627,
+    "deathModes": [
+      "a wound that wouldn't close",
+      "alien",
+      "combat",
+      "contest",
+      "dehydration",
+      "expedition",
+      "monster",
+      "sickness",
+      "starvation",
+      "thirst",
+      "villager combat"
+    ],
+    "fleedirect": {
+      "checks": 141,
+      "pushes": 3,
+      "held": 118,
+      "walks": 20,
+      "byReason": {
+        "safe-home": 3
+      },
+      "holdReasons": {
+        "at-haven": 118
+      }
+    }
+  },
+  "runs": [
+    {
+      "policy": "leadfeast",
+      "seed": 11,
+      "days": 151,
+      "gameDays": 152,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 3,
+      "maxRank": "global",
+      "national": 1,
+      "table": 0,
+      "deaths": {
+        "combat": 7,
+        "contest": 1,
+        "villager combat": 1,
+        "monster": 2,
+        "a wound that wouldn't close": 1,
+        "starvation": 1
+      },
+      "villagerDays": 91,
+      "fd": {
+        "checks": 26,
+        "pushes": 0,
+        "held": 12,
+        "walks": 14,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 12
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 22,
+      "days": 131,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 3,
+      "maxArc": 3,
+      "maxRank": "regional",
+      "national": 0,
+      "table": 0,
+      "deaths": {
+        "villager combat": 3,
+        "monster": 1,
+        "sickness": 1,
+        "combat": 7,
+        "thirst": 1,
+        "starvation": 5,
+        "alien": 1,
+        "dehydration": 1
+      },
+      "villagerDays": 110,
+      "fd": {
+        "checks": 15,
+        "pushes": 1,
+        "held": 14,
+        "walks": 0,
+        "byReason": {
+          "safe-home": 1
+        },
+        "holdReasons": {
+          "at-haven": 14
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 33,
+      "days": 149,
+      "gameDays": 150,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 3,
+      "maxArc": 3,
+      "maxRank": "national",
+      "national": 1,
+      "table": 0,
+      "deaths": {
+        "monster": 3,
+        "combat": 5,
+        "a wound that wouldn't close": 1
+      },
+      "villagerDays": 109,
+      "fd": {
+        "checks": 34,
+        "pushes": 0,
+        "held": 32,
+        "walks": 2,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 32
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 44,
+      "days": 86,
+      "gameDays": 87,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 3,
+      "maxRank": "national",
+      "national": 1,
+      "table": 0,
+      "deaths": {
+        "combat": 6,
+        "monster": 4,
+        "a wound that wouldn't close": 1,
+        "contest": 1,
+        "starvation": 1
+      },
+      "villagerDays": 77,
+      "fd": {
+        "checks": 23,
+        "pushes": 0,
+        "held": 23,
+        "walks": 0,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 23
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 55,
+      "days": 100,
+      "gameDays": 101,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 3,
+      "maxRank": "national",
+      "national": 1,
+      "table": 0,
+      "deaths": {
+        "combat": 7,
+        "expedition": 1,
+        "monster": 3
+      },
+      "villagerDays": 75,
+      "fd": {
+        "checks": 13,
+        "pushes": 0,
+        "held": 9,
+        "walks": 4,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 9
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 66,
+      "days": 61,
+      "gameDays": 62,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 3,
+      "maxArc": 3,
+      "maxRank": "regional",
+      "national": 0,
+      "table": 0,
+      "deaths": {
+        "monster": 1,
+        "villager combat": 4,
+        "combat": 4,
+        "contest": 1,
+        "sickness": 1
+      },
+      "villagerDays": 58,
+      "fd": {
+        "checks": 10,
+        "pushes": 0,
+        "held": 10,
+        "walks": 0,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 10
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 77,
+      "days": 60,
+      "gameDays": 61,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 3,
+      "maxRank": "regional",
+      "national": 0,
+      "table": 0,
+      "deaths": {
+        "combat": 5,
+        "sickness": 4,
+        "a wound that wouldn't close": 3,
+        "starvation": 3,
+        "monster": 2
+      },
+      "villagerDays": 46,
+      "fd": {
+        "checks": 10,
+        "pushes": 0,
+        "held": 10,
+        "walks": 0,
+        "byReason": {},
+        "holdReasons": {
+          "at-haven": 10
+        }
+      }
+    },
+    {
+      "policy": "leadfeast",
+      "seed": 88,
+      "days": 88,
+      "gameDays": 89,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 3,
+      "maxRank": "global",
+      "national": 1,
+      "table": 0,
+      "deaths": {
+        "combat": 2,
+        "sickness": 3,
+        "a wound that wouldn't close": 1
+      },
+      "villagerDays": 61,
+      "fd": {
+        "checks": 10,
+        "pushes": 2,
+        "held": 8,
+        "walks": 0,
+        "byReason": {
+          "safe-home": 2
+        },
+        "holdReasons": {
+          "at-haven": 8
+        }
+      }
+    }
+  ]
+}
