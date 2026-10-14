@@ -754,7 +754,8 @@
   // player's.
   function villagerStrikeMult(game, v, target) {
     try {
-      let m = 1;
+      // FOOD IS FUEL (parity): a well-fed villager hits like a topped-up player.
+      let m = v.villagerId ? villagerPowerMult(game, v.villagerId) : 1;
       if (v._nextStrikes && v._nextStrikes.n > 0) {
         m *= v._nextStrikes.mult;
         v._nextStrikes.n--;
@@ -795,17 +796,54 @@
   // Guard = absorbed hits, Stoke = harder strikes, Bribe (+Sweetener) = it
   // backs off (its packmate takes the bite). Passives held: Misdirection,
   // Ember Heart, Back from the Brink, Rally Aura, Lifeline, Last Rites.
+  // FOOD IS FUEL, FOR EVERYONE (foodPower.js overcharge, parity): the
+  // player hits x1.25 when topped up (kcal >= 75% of the bank); a villager
+  // whose belly is as full (hunger <= 25) hits the same. A starving pantry
+  // feeds no one's power.
+  const V_FED_HUNGER = 25;
+  function villagerPowerMult(game, vid) {
+    try {
+      const tier = game.villageFoodTier ? game.villageFoodTier() : 'secure';
+      if (tier === 'starving') return 1;
+      const n = game.npcNeeds && game.npcNeeds(vid);
+      if (n && (n.hunger || 0) <= V_FED_HUNGER) return OVERCHARGE_PARITY();
+      return 1;
+    } catch (e) { warn('villagerPowerMult', e); return 1; }
+  }
+  function OVERCHARGE_PARITY() {
+    try { return (Game.overchargeMult ? Game.overchargeMult() : 1.25); } catch (e) { warn('overchargeMult', e); return 1.25; }
+  }
   const FIELD_IDS = ['raise_earth', 'gravity_well', 'landslide', 'pack_hunt', 'mending_hands', 'blink', 'switcheroo', 'foresight', 'live_broadcast', 'the_crowd_moves', 'stoke', 'coin_guard', 'bribe', 'aegis_link',
     'misdirection', 'prophecy', 'ember_heart', 'back_from_the_brink', 'rally_aura', 'lifeline', 'last_rites', 'sweetener'];
+  // THE WHOLE KIT OFF-SCREEN (buff-everyone 2026-10-14): the original
+  // combat abilities a villager holds also run here — the ones the field
+  // engine never read (static toss, cheese wheel, bird strike, rage, sand,
+  // dread, turncoat, retribution, second wind, and the data modifiers:
+  // adrenaline_control strikes x1.3, adrenaline_surge +15% dodge,
+  // chitin_skin +30 armor). Same numbers as the player's cards.
+  const FIELD_KIT = ['rage', 'pocket_sand', 'fear_aura', 'static_toss', 'cheese_wheel', 'bird_strike', 'turncoat', 'retribution', 'second_wind'];
+  function modSum(ids, target) {
+    try {
+      const M = S.modifiers;
+      const mods = [];
+      for (const id of ids) { const d = defOf(id); if (d && d.lane === 'magic') for (const m of (d.modifiers || [])) if (m && m.target === target && !m.condition) mods.push(m); }
+      if (!mods.length) return null;
+      return M && M.resolve ? M.resolve(target === 'combat.strike_damage' ? 1 : 0, target, mods, {}) : null;
+    } catch (e) { warn('modSum', e); return null; }
+  }
   function fieldBegin(game, vid, vAbs) {
     try {
       const held = {};
-      let any = false;
-      for (const id of FIELD_IDS) if ((vAbs || []).indexOf(id) >= 0) { held[id] = true; any = true; }
-      if (!any) return null;
+      for (const id of FIELD_IDS.concat(FIELD_KIT)) if ((vAbs || []).indexOf(id) >= 0) held[id] = true;
       let tier = 'secure';
       try { tier = game.villageFoodTier ? game.villageFoodTier() : 'secure'; } catch (e) { warn('tier', e); }
-      return { vid, held, used: {}, tier, nextMult: 0, nextN: 0, absorb: 0, absorbCap: 0, missUntil: 0, missP: 0, harry: 0, cheated: false, holdBonus: held.rally_aura ? 0.06 : 0 };
+      const strike = modSum(vAbs || [], 'combat.strike_damage');
+      const dodge = modSum(vAbs || [], 'combat.dodge_chance');
+      const armor = modSum(vAbs || [], 'armor.flat');
+      const power = villagerPowerMult(game, vid);
+      if (!Object.keys(held).length && !strike && !dodge && !armor && power <= 1) return null;
+      return { vid, held, used: {}, tier, nextMult: 0, nextN: 0, absorb: 0, absorbCap: 0, missUntil: 0, missP: 0, harry: 0, birds: 0, blindUntil: 0, cheated: false,
+        holdBonus: held.rally_aura ? 0.06 : 0, strikeMult: strike || 1, dodge: Math.min(0.5, dodge || 0), armorAdd: armor || 0, power };
     } catch (e) { warn('fieldBegin', e); return null; }
   }
   function fieldPay(G, id, actId) {
@@ -852,8 +890,49 @@
         L.push('R' + c.round + ': ' + c.vName + ' presses the wound and it knits: +' + (out.vHp - c.vHp) + ' HP. (Mending Hands)');
         out.consumed = true; return out;
       }
+      const pw = G.power || 1;
+      const dmgAct = (id, act, range, label, line) => {
+        if (!h[id] || u(id) || c.lead.hp <= 0 || !fieldPay(G, id, act)) return false;
+        const d = Math.round(c.lroll(range) * pw);
+        c.lead.hp -= d; out.dealt = (out.dealt || 0) + d; if (c.lead.hp <= 0) c.lead.alive = false;
+        L.push('R' + c.round + ': ' + c.vName + ' ' + line + ' — ' + d + ' (' + Math.max(0, c.lead.hp) + ' left). (' + label + ')');
+        out.consumed = true; return true;
+      };
+      if (c.lead.hp > 12 && dmgAct('cheese_wheel', 'hurl', [25, 35], 'Cheese Wheel', 'hurls a homing wheel of cheese at the ' + c.mName)) return out;
+      if (c.lead.hp > 12 && dmgAct('static_toss', 'toss', [20, 30], 'Static Toss', 'hurls a crackling ball of static at the ' + c.mName)) return out;
+      if (h.retribution && !u('retribution') && (c.taken || 0) >= 20 && fieldPay(G, 'retribution', 'unleash')) {
+        const d = Math.round(Math.max(8, (c.taken || 0) * 0.5) * pw);
+        c.lead.hp -= d; out.dealt = (out.dealt || 0) + d; if (c.lead.hp <= 0) c.lead.alive = false;
+        L.push('R' + c.round + ': the System returns ' + c.vName + '\'s pain as force — ' + d + ' into the ' + c.mName + '. (Retribution)');
+        out.consumed = true; return out;
+      }
+      if (h.rage && !u('rage') && !G.nextN && c.lead.hp > c.lead.maxHp * 0.4 && fieldPay(G, 'rage', 'unleash_rage')) {
+        G.nextMult = 2; G.nextN = 3;
+        L.push('R' + c.round + ': ' + c.vName + '\'s eyes go red. Next 3 strikes hit twice as hard. (Rage)');
+        out.consumed = true; return out;
+      }
+      if (h.bird_strike && !u('bird_strike') && fieldPay(G, 'bird_strike', 'call')) {
+        G.birds = 3;
+        L.push('R' + c.round + ': ' + c.vName + ' whistles up the birds — they harry the ' + c.mName + '. (Bird Strike)');
+        out.consumed = true; return out;
+      }
+      if (h.turncoat && !u('turncoat') && packN >= 2 && fieldPay(G, 'turncoat', 'persuade')) {
+        out.abStun = 2;
+        L.push('R' + c.round + ': ' + c.vName + ' whispers to the pack — two of them turn on each other. (Turncoat)');
+        out.consumed = true; return out;
+      }
+      if (h.pocket_sand && !u('pocket_sand') && (strong || hp < 0.7) && fieldPay(G, 'pocket_sand', 'throw_sand')) {
+        G.blindUntil = c.round + 2;
+        L.push('R' + c.round + ': ' + c.vName + ' flings grit into the ' + c.mName + '\'s eyes. (Pocket Sand: half-blind 2 rounds)');
+        out.consumed = true; return out;
+      }
+      if (h.fear_aura && !u('fear_aura') && strong && fieldPay(G, 'fear_aura', 'loom')) {
+        out.abStun = 1;
+        L.push('R' + c.round + ': ' + c.vName + ' goes very still and LOOMS. The ' + c.mName + ' hesitates. (Dread)');
+        out.consumed = true; return out;
+      }
       if (h.landslide && !u('landslide') && (strong || hp < 0.7) && fieldPay(G, 'landslide', 'quake')) {
-        const d = c.lroll([14, 22]);
+        const d = Math.round(c.lroll([14, 22]) * pw);
         c.lead.hp -= d; out.dealt = d; if (c.lead.hp <= 0) c.lead.alive = false;
         out.abStun = 1;
         L.push('R' + c.round + ': the ground heaves outward from ' + c.vName + ' — the ' + c.mName + ' slams into a trunk for ' + d + ', stunned. (Landslide)');
@@ -909,10 +988,11 @@
   function fieldStrike(G, vd, c) {
     try {
       if (!G) return vd;
-      let m = 1;
+      let m = (G.strikeMult || 1) * (G.power || 1);
       if (G.nextN > 0) { m *= G.nextMult; G.nextN--; }
       if (G.held.misdirection && c.mStunned) m *= 1.5;
       if (G.harry > 0 && c.lead && c.lead.hp > 0) { G.harry--; const hd = c.lroll([2, 4]); c.lead.hp -= hd; if (c.lead.hp <= 0) c.lead.alive = false; c.log.push('  the pack harries it for ' + hd + '.'); }
+      if (G.birds > 0 && c.lead && c.lead.hp > 0) { G.birds--; const bd = c.lroll([8, 12]); c.lead.hp -= bd; if (c.lead.hp <= 0) c.lead.alive = false; c.log.push('  the birds tear at it for ' + bd + '.'); }
       return Math.round(vd * m);
     } catch (e) { warn('fieldStrike', e); return vd; }
   }
@@ -920,7 +1000,10 @@
   function fieldIncoming(G, total, c) {
     try {
       if (!G || !(total > 0)) return total;
-      if (G.missUntil >= c.round && (c.RR ? c.RR() : Math.random()) < G.missP) { c.log.push('  ' + c.vName + ' saw it coming and isn\'t there. (' + (G.held.prophecy ? 'Prophecy' : 'Foresight') + ')'); return 0; }
+      const rr = () => (c.RR ? c.RR() : Math.random());
+      if (G.blindUntil >= c.round && rr() < 0.5) { c.log.push('  half-blind, it swings wide. (Pocket Sand)'); return 0; }
+      if (G.dodge > 0 && rr() < G.dodge) { c.log.push('  ' + c.vName + ' is already moving — it misses. (Adrenaline Surge)'); return 0; }
+      if (G.missUntil >= c.round && rr() < G.missP) { c.log.push('  ' + c.vName + ' saw it coming and isn\'t there. (' + (G.held.prophecy ? 'Prophecy' : 'Foresight') + ')'); return 0; }
       if (G.absorb > 0) { const took = Math.min(total, G.absorbCap); G.absorb--; c.log.push('  a coin turns the blow (' + took + ' absorbed).'); return total - took; }
       return total;
     } catch (e) { warn('fieldIncoming', e); return total; }
@@ -934,7 +1017,18 @@
   // (600 kcal: +24 hunger), then Back from the Brink. Returns new vHp or null.
   function fieldCheatDeath(G, c) {
     try {
-      if (!G || G.cheated || !G.held.ember_heart) return null;
+      if (!G || G.cheated) return null;
+      if (!G.held.ember_heart) {
+        // SECOND WIND (refuse_death, once a day): drop to 1 HP instead.
+        if (!G.held.second_wind) return null;
+        const vp = (Game.state.village.npcSecondWind = Game.state.village.npcSecondWind || {});
+        const day = (Game.state.scholar || {}).day || 0;
+        if (vp[G.vid] === day) return null;
+        vp[G.vid] = day; G.cheated = true;
+        c.log.push(c.vName + ' should be down — and refuses. Second wind: 1 HP. (Second Wind)');
+        try { Game.tele && Game.tele('godpath_verb', { ability: 'second_wind', verb: 'refuse_death', who: G.vid, field: true }); } catch (e) { warn('tele sw', e); }
+        return 1;
+      }
       if (!vCanPay(G.vid, 600 * 0.6)) return null; // the body must have something to burn
       G.cheated = true;
       vPay(G.vid, 600);
@@ -1212,7 +1306,7 @@
     pathLean, shapeOffers, VERBS, registerVerbs, wardenWallAt,
     allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
     villagerCast, villagerStrikeMult, absorbVillagerHit,
-    fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown,
+    fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, villagerPowerMult,
   };
   // VILLAGERS CAST (parity 2026-10-14): after the hand-written villager
   // abilities (tbVillagerAbility, pantry-tier gated in foodPower.js) find

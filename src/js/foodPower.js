@@ -6,6 +6,7 @@
 //   - foodPowerGate()
 //   - overcharged()
 //   - abilityPowerMult()
+//   - overchargeMult()
 //   - overchargeLine()
 //   - villageDailyNeed()
 //   - villageFoodDays()
@@ -71,6 +72,10 @@
         return { ok: true };
       } catch (e) { return { ok: true }; }
     },
+
+    // overchargeMult: the one number for a topped-up fighter (player or,
+    // through godpath.js villagerPowerMult, a well-fed villager).
+    overchargeMult() { return OVERCHARGE_MULT; },
 
     // overcharged: topped up — at least 75% of the kcal bank filled.
     overcharged() {

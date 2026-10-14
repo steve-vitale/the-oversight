@@ -330,6 +330,7 @@
       // fieldBegin/fieldAct/...). null when they hold none.
       var GPf = (_g.Scattering || {}).Godpath || null, gpF = null;
       try { if (GPf && GPf.fieldBegin) gpF = GPf.fieldBegin(this, vid, vAbs); } catch (e) { console.warn('[godpath] fieldBegin', e); }
+      if (gpF && gpF.armorAdd) varmor += gpF.armorAdd; // chitin_skin's armor.flat, held
       var gpC = function (extra) {
         var c = { round: rec.rounds, vHp: vHp, vHpMax: vHpMax, allyIn: allyIn, allyHp: allyHp, allyMax: allyMax, RR: RR, lroll: lroll, vName: vName, mName: mName, log: rec.log, members: members };
         for (var k in (extra || {})) c[k] = extra[k];
@@ -826,7 +827,7 @@
             var gpOut = null;
             if (!trickAct && gpF) {
               try {
-                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound }));
+                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken }));
                 if (gpOut.vHp != null) vHp = gpOut.vHp;
                 if (gpOut.abStun) abStun += gpOut.abStun;
                 if (gpOut.dealt) rec.mDealt += gpOut.dealt;

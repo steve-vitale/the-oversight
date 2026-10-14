@@ -15,6 +15,9 @@
 //     Brink), Last Rites, Rally Aura, Misdirection, Prophecy, Coin Guard
 //   - off-screen field fights: the verbs and passives run in that engine's
 //     terms and a held kit wins more fights than none
+//   - buff everyone (godpath-buff): the original combat kit a villager holds
+//     runs off-screen too, and a well-fed villager carries the player's
+//     food overcharge
 // Never writes into the repo.
 'use strict';
 const K = require('./godpath/lib');
@@ -105,7 +108,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
     const { m, A } = arena({ ax: 3, ay: 4, mx: 4, my: 4 });
     const r = cast(A);
     T.ok('Stoke: free (no turn) and arms the next 2 strikes', r === false && A._nextStrikes && A._nextStrikes.n === 2, JSON.stringify(A._nextStrikes));
-    T.ok('Stoke: villagerStrikeMult reads it (x1.6)', Math.abs(GP.villagerStrikeMult(Game, A, m) - 1.6) < 1e-9);
+    T.ok('Stoke: villagerStrikeMult reads it (x1.6, times the food overcharge)', Math.abs(GP.villagerStrikeMult(Game, A, m) - 1.6 * GP.villagerPowerMult(Game, vidA)) < 1e-9);
   }
   {
     hold(vidA, ['coin_guard']); needs(vidA);
@@ -205,9 +208,10 @@ const T = K.reporter('test-godpath-villagers-20261014');
     hold(vidA, ['misdirection']);
     const { m, A } = arena({});
     m.hesitate = 1;
-    T.ok('Misdirection held by a villager: +50% into a confused monster', Math.abs(GP.villagerStrikeMult(Game, A, m) - 1.5) < 1e-9);
+    const pw = GP.villagerPowerMult(Game, vidA);
+    T.ok('Misdirection held by a villager: +50% into a confused monster', Math.abs(GP.villagerStrikeMult(Game, A, m) - 1.5 * pw) < 1e-9);
     m.hesitate = 0;
-    T.ok('...and nothing into a clear-headed one', GP.villagerStrikeMult(Game, A, m) === 1);
+    T.ok('...and nothing into a clear-headed one', GP.villagerStrikeMult(Game, A, m) === pw);
   }
   {
     // Rally Aura: the start-of-fight hook reads every holder on our side
@@ -250,6 +254,35 @@ const T = K.reporter('test-godpath-villagers-20261014');
     T.ok('field: Landslide / Pack Hunt / Coin Guard / Stoke narrate in the fight log', /\(Landslide\)/.test(L) && /\(Pack Hunt\)/.test(L) && /\(Coin Guard\)/.test(L) && /\(Stoke/.test(L));
     T.ok('field: a held kit wins more and dies less than none', held.wins > none.wins && held.deaths <= none.deaths, `wins ${none.wins}->${held.wins} deaths ${none.deaths}->${held.deaths}`);
     T.ok('field: casts reach telemetry with the villager as caster', K.teleEvents(Game, 'godpath_verb').some(e => (e.data || e).field && (e.data || e).who === vidA));
+  }
+
+  T.section('the whole kit off-screen + food is fuel for villagers too');
+  {
+    const mdef = (Game.data.monsters || []).find(x => x.id === 'hushwolf');
+    const G0 = GP.fieldBegin(Game, vidA, ['adrenaline_control', 'adrenaline_surge', 'chitin_skin']);
+    T.ok('data modifiers held by a villager: strikes x1.3, dodge +15%, armor +30', G0 && Math.abs(G0.strikeMult - 1.3) < 1e-9 && Math.abs(G0.dodge - 0.15) < 1e-9 && G0.armorAdd === 30, G0 && JSON.stringify({ s: G0.strikeMult, d: G0.dodge, a: G0.armorAdd }));
+    let L = '';
+    for (const id of ['static_toss', 'cheese_wheel', 'rage', 'bird_strike', 'pocket_sand']) {
+      for (let i = 0; i < 6; i++) {
+        hold(vidA, [id]); needs(vidA);
+        v.health[vidA] = 100;
+        L += (Game.fieldFight(vidA, mdef, null, {}).log || []).join('\n') + '\n';
+      }
+    }
+    T.ok('field: Static Toss / Cheese Wheel / Rage / Bird Strike / Pocket Sand run off-screen', ['(Static Toss)', '(Cheese Wheel)', '(Rage)', '(Bird Strike)', '(Pocket Sand'].every(k => L.includes(k)), ['(Static Toss)', '(Cheese Wheel)', '(Rage)', '(Bird Strike)', '(Pocket Sand'].filter(k => !L.includes(k)).join(','));
+    // overcharge parity: hunger <= 25 is the villager's "topped up"
+    const n = Game.npcNeeds(vidA);
+    n.hunger = 10;
+    T.ok('a well-fed villager hits x' + Game.overchargeMult() + ' (the player\'s overcharge)', GP.villagerPowerMult(Game, vidA) === Game.overchargeMult());
+    n.hunger = 40;
+    T.ok('a hungry villager hits x1', GP.villagerPowerMult(Game, vidA) === 1);
+    n.hunger = 10;
+    Game.villageFoodTier.force('starving');
+    T.ok('a starving pantry feeds no one\'s power', GP.villagerPowerMult(Game, vidA) === 1);
+    Game.villageFoodTier.force('secure');
+    hold(vidA, []);
+    const { m, A } = arena({});
+    T.ok('tb: a well-fed villager\'s strike carries the overcharge', Math.abs(GP.villagerStrikeMult(Game, A, m) - Game.overchargeMult()) < 1e-9);
   }
 
   T.section('wiring');

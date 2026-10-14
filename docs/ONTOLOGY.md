@@ -666,7 +666,7 @@ Food reality system. Food must be known-edible AND in edible state. Processing c
 ### foodPower (`foodPower.js`)
 Food is fuel — every System ability burns kcal from the ONE economy (no mana pool); a topped-up user OVERCHARGES (+25% impact, max with the feast buff); village pantry tiers gate villager ability uses (starving: none, tight: only when outmatched, secure: normal, abundant: bonus uses). (Steve 2026-10-14: "Abilities should be stronger, and they were always meant to be powered by food.")
 
-**Provides:** abilityKcalCost(abilityId, actionId), foodPowerGate(), overcharged(), abilityPowerMult(), overchargeLine(), villageDailyNeed(), villageFoodDays(), villageFoodTier()
+**Provides:** abilityKcalCost(abilityId, actionId), foodPowerGate(), overcharged(), abilityPowerMult(), overchargeMult(), overchargeLine(), villageDailyNeed(), villageFoodDays(), villageFoodTier()
 
 **Rules:**
 - one_economy: true (code: foodPower.js — kcal only, deducted from scholar.kcal; no mana/ability-point pool anywhere)
