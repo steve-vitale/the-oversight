@@ -1070,7 +1070,7 @@ Practice deed grants — unlock.type === 'practice' abilities
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 
-**Provides:** abilitySlots(), accrueRelicBond(item), integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
+**Provides:** integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
 
 **Rules:**
 - crisis_once: true (code: progression.js — fireCrisis dedupes via pg.crises keys; one per kind per run)
@@ -1082,7 +1082,7 @@ Character progression. XP, levels, abilities.
 - sentiment_at_60: true (code: progression.js — slotMoment(60); was 80)
 - audience_encore: true (code: progression.js — checkAudienceEncore, recurring post-40 trials)
 
-**Consumes:** scholar.xp, scholar.abilities
+**Consumes:** scholar.xp, scholar.abilities, abilitySlots() (game.js), accrueRelicBond(item) (game.js)
 
 ### runRecords (`records.js`)
 Persistent Records — the village's story (Steve 2026-10-13).

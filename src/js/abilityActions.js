@@ -737,6 +737,24 @@
         return { ok: false, why: 'Already wound up — swing to release it.' };
       return { ok: true };
     },
+    'retribution.unleash': function (game) {
+      // REFUSED TAPS COST NOTHING (2026-10-14): BA.unleash empties the
+      // battery and takes the 25% self-hit, and the turn + 30 kcal are paid,
+      // all BEFORE the impl looked for an adjacent enemy. Check the battery,
+      // the fight and adjacency here, before anything is spent.
+      var bs = (game.state.scholar && game.state.scholar.buildaround) || {};
+      if ((bs.retribution || 0) < 10)
+        return { ok: false, why: 'Nothing stored yet — block damage first, then serve it back.' };
+      var f = game.tbfight;
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      if (!f || f.over || !p) return { ok: false, why: 'Retribution needs a fight to answer.' };
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        if (Math.abs((m.mx || 0) - (p.mx || 0)) + Math.abs((m.my || 0) - (p.my || 0)) <= 1) return { ok: true };
+      }
+      return { ok: false, why: 'No one adjacent to take it — the stored fury stays stored.' };
+    },
     'animal_ken.calm_beast': function (game, target) {
       // The bar passes no target (self/none actions); the impl needs a live
       // non-monster fighter key. Refuse before the turn is spent, not after.
@@ -1999,8 +2017,10 @@
     'trophy_room.mark': function (game, target) {
       var BA2 = (typeof globalThis !== 'undefined' && globalThis.Scattering || {}).buildarounds;
       if (!BA2) { game.say('Trophy Room: the engine is not loaded.'); return false; }
-      // Mark a monster type from recent kills.
-      var kills = ((game.state.codex || {}).monsterKills) || {};
+      // Mark a monster type from recent kills. state.villageSlain is the real
+      // per-type kill record (recordWaveKill, the choke point for every kill);
+      // state.codex.monsterKills was never written.
+      var kills = game.state.villageSlain || {};
       var types = Object.keys(kills).filter(function (k) { return kills[k] > 0; });
       if (!types.length) { game.say('Trophy Room: no kills recorded yet — hunt something first, then mark it.'); return false; }
       // If a target type was passed, use it; otherwise mark the most-killed.

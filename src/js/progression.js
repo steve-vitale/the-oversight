@@ -2,8 +2,6 @@
 // system: progression
 // description: Character progression. XP, levels, abilities.
 // provides:
-//   - abilitySlots()
-//   - accrueRelicBond(item)
 //   - integrationStage()
 //   - checkTrial(id)
 //   - completeTrial(id)
@@ -31,6 +29,8 @@
 // consumes:
 //   - scholar.xp
 //   - scholar.abilities
+//   - abilitySlots() (game.js)
+//   - accrueRelicBond(item) (game.js)
 // ============ PROGRESSION, ARCS & SENTIMENTAL ITEMS ============
 // Built on the lifeseed foundation (lifeseed.js). Steve's design (2026-10-04):
 //
@@ -807,7 +807,8 @@
       // dead from birth. System abilities are unlock.type === 'system_offer'.)
       let gift = null;
       try {
-        const owned = new Set((s.abilities || []).map(a => a.id));
+        // evolved abilities still own their root (evolvedFrom) — never re-gift it
+        const owned = new Set((s.abilities || []).flatMap(a => [a.id, a.evolvedFrom].filter(Boolean)));
         const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer'
           // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world —
           // never gifted when it's taken.

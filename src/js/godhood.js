@@ -50,8 +50,12 @@
   // --- state helpers (pure, testable) ---
   function scholarAbilities(sch) {
     const out = new Set();
-    for (const a of (sch.abilities || [])) out.add(typeof a === 'string' ? a : (a.id || a));
-    for (const a of (sch.backgroundAbilities || [])) out.add(typeof a === 'string' ? a : (a.id || a));
+    // An evolved ability counts as its root too (chooseEvolution replaces
+    // ab.id and keeps the root in evolvedFrom).
+    for (const a of (sch.abilities || []).concat(sch.backgroundAbilities || [])) {
+      out.add(typeof a === 'string' ? a : (a.id || a));
+      if (a && a.evolvedFrom) out.add(a.evolvedFrom);
+    }
     return out;
   }
   function scholarSynergies(sch) {

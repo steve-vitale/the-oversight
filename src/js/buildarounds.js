@@ -27,7 +27,8 @@
   // Count held abilities on a path (for assembly gating).
   function baPathCount(game, path) {
     try {
-      const held = (game.state.scholar.abilities || []).map(a => (a && a.id) || a);
+      // An evolved ability counts as its root (evolvedFrom keeps the lineage).
+      const held = (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
       const data = game.data.abilities || [];
       return held.filter(id => {
         const def = data.find(d => d.id === id);
@@ -54,11 +55,15 @@
   var BA = {
     // BLOOD FRENZY (brawler): 3rd consecutive hit = guaranteed crit.
     // Designed for 3-turn fights: one decisive moment, not a ramp.
+    // ORDER (2026-10-14): tbPlayerStrike calls damageMult (frenzyMult) BEFORE
+    // onStrikeHit. frenzyMult only reads the count; onStrikeHit advances it
+    // and spends the crit. Multipliers per consecutive hit: 1, 1, 2, 1, 1, 2…
     onStrikeHit: function (game, target) {
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return;
         const st = fightState(game);
         if (!st) return;
+        if ((st.frenzy || 0) >= 2) { st.frenzy = 0; return; } // this hit was the crit
         st.frenzy = (st.frenzy || 0) + 1;
         if (st.frenzy === 2) {
           game.say(`BLOOD FRENZY: two in a row — THIS ONE HURTS. (guaranteed crit)`);
@@ -79,15 +84,9 @@
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return 1;
         const st = fightState(game);
-        // If this is the 2nd consecutive hit (frenzy will become 2 after),
-        // this hit crits. Check pre-increment count.
-        const preCount = (st && st.frenzy) || 0;
-        if (preCount === 1) {
-          // This is the 2nd hit — crit!
-          if (st) st.frenzy = 0; // reset after crit
-          return 2.0;
-        }
-        return 1;
+        // Two consecutive hits already landed: this strike is the crit.
+        // Read-only — onStrikeHit (called after) resets the count.
+        return ((st && st.frenzy) || 0) >= 2 ? 2.0 : 1;
       } catch (e) { return 1; }
     },
 
@@ -138,7 +137,9 @@
       try {
         const st = dayState(game);
         st.trophyMark = monsterType;
-        game.say(`TROPHY ROOM: ${monsterType} marked. +50% damage against them today. The wall of heads grows.`);
+        let shown = monsterType;
+        try { if (game.monsterDisplayName) shown = game.monsterDisplayName(monsterType) || monsterType; } catch (e) { console.warn('[buildarounds] mark name:', e && e.message); }
+        game.say(`TROPHY ROOM: ${shown} marked. +50% damage against them today. The wall of heads grows.`);
         try { game.audioEvent('buildaround', { path: 'hunter', id: 'trophy_room' }); } catch (e) {}
       } catch (e) {}
     },
@@ -147,8 +148,11 @@
         if (!game.hasAbility || !game.hasAbility('trophy_room')) return 1;
         const st = dayState(game);
         if (!st.trophyMark || !target) return 1;
+        // Fighters carry monsterId (the mark is a monster id); the display
+        // name is a village name/descriptor that never contains the id.
+        const tId = target.monsterId || (target.mdef && target.mdef.id);
         const tType = (target.monsterType || target.name || '').toLowerCase();
-        if (tType.includes(st.trophyMark.toLowerCase())) {
+        if (tId ? tId === st.trophyMark : tType.includes(st.trophyMark.toLowerCase())) {
           const bonus = baPathCount(game, 'hunter') >= 2 ? 0.5 : 0.25;
           return 1 + bonus;
         }
@@ -165,9 +169,17 @@
           if (st) {
             st.graceHeals = st.graceHeals || {};
             st.graceHeals[targetId] = (st.graceHeals[targetId] || 0) + 1;
-            if (st.graceHeals[targetId] === 2) {
-              game.say('BATTLEFIELD GRACE: two touches — they\'re back on their feet with a free action! (You\'re winded — no action next turn.)');
+            // abilities.json: 3 heals trigger it; deepening L2: 2 heals.
+            let lvl = 1;
+            try { lvl = game.abilityLevel ? game.abilityLevel('battlefield_grace') : 1; } catch (e) { console.warn('[buildarounds] grace level:', e && e.message); }
+            const need = lvl >= 2 ? 2 : 3;
+            if (st.graceHeals[targetId] === need) {
+              game.say('BATTLEFIELD GRACE: ' + (need === 2 ? 'two' : 'three') + ' touches — they\'re back on their feet with a free action! (You\'re winded — no action next turn.)');
               try { game.audioEvent('buildaround', { path: 'caregiver', id: 'battlefield_grace' }); } catch (e) {}
+              // KNOWN GAP (audit 2026-10-14, needs Steve): game.grantFreeAction
+              // does not exist and nothing reads p.winded, so neither the free
+              // action nor the winded cost happens yet. addHealth also only
+              // ever reports targetId 'player' (self-heals), not allies.
               try { game.grantFreeAction(targetId); } catch (e) {}
               // Cost: the healer gives everything. Winded next turn.
               try {
@@ -224,8 +236,11 @@
     cartographerDodge: function (game) {
       try {
         if (!game.hasAbility || !game.hasAbility('cartographers_eye')) return 0;
+        // Revealed tiles of the current region's map (tile.revealed, set by
+        // game.reveal). There was never a game.revealedTileCount.
         let revealed = 0;
-        try { revealed = game.revealedTileCount ? game.revealedTileCount() : 0; } catch (e) {}
+        const rows = (game.map && game.map.tiles) || [];
+        for (const row of rows) for (const tile of (row || [])) if (tile && tile.revealed) revealed++;
         return Math.min(Math.floor(revealed / 10) * 0.01, 0.15);
       } catch (e) { return 0; }
     },
@@ -243,19 +258,27 @@
 
     // HOARDER'S INTEREST (miser): pantry generates interest.
     onDayTick: function (game) {
+      // Trophy Room mark resets daily — under its own guard, not only for
+      // Hoarder's Interest holders.
+      try {
+        const bs = game.state.scholar.buildaround;
+        if (bs && game.hasAbility && game.hasAbility('trophy_room')) bs.trophyMark = null;
+      } catch (e) { console.warn('[buildarounds] trophy reset:', e && e.message); }
       try {
         if (!game.hasAbility || !game.hasAbility('hoarders_interest')) return;
         let pantry = 0;
         try { pantry = game.pantryKcal ? game.pantryKcal() : 0; } catch (e) {}
         if (pantry < 1000) return;
         const rate = baPathCount(game, 'miser') >= 2 ? 0.05 : 0.025;
-        const interest = Math.round(pantry * rate);
-        try { game.addPantryKcal(interest); } catch (e) {}
+        // Real food into the real pantry (stockPantry), within the pantry cap.
+        const room = game.pantryCapKcal ? Math.max(0, game.pantryCapKcal() - pantry) : Infinity;
+        const interest = Math.min(Math.round(pantry * rate), room);
+        if (interest <= 0) {
+          game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
+          return;
+        }
+        game.stockPantry(interest, "Hoarder's interest");
         game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
-        // Trophy Room resets daily
-        const st = dayState(game);
-        st.trophyMark = null;
-        st.feastCharge = 0;
       } catch (e) {}
     },
 
@@ -301,14 +324,14 @@
     },
 
     // RED HARVEST: crits heal 50% of damage dealt
-    redHarvestHeal: function (game, damage) {
+    redHarvestHeal: function (game, damage) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('red_harvest')) return 0;
         return Math.round(damage * 0.5);
       } catch (e) { return 0; }
     },
     // CRIMSON GOD: every hit is a crit (2x)
-    crimsonGodMult: function (game) {
+    crimsonGodMult: function (game) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
         return 2.0;
@@ -319,7 +342,7 @@
     // God abilities scale: solo → party → titan → army → contest
     
     // CRIMSON GOD: allies inspired (+25% damage when you crit)
-    crimsonGodParty: function (game) {
+    crimsonGodParty: function (game) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
         return 1.25; // allies deal +25%
@@ -327,7 +350,7 @@
     },
     
     // DEADEYE: marked targets take +50% from allies
-    deadeyeMark: function (game, targetId) {
+    deadeyeMark: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('deadeye')) return;
         const st = fightState(game);
@@ -339,7 +362,7 @@
       } catch (e) {}
     },
     
-    deadeyeAllyMult: function (game, targetId) {
+    deadeyeAllyMult: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('deadeye')) return 1;
         const st = fightState(game);
@@ -351,7 +374,7 @@
     },
     
     // LIFEBRINGER: revive allies (once per fight per target)
-    lifebringerRevive: function (game, targetId) {
+    lifebringerRevive: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('lifebringer')) return false;
         const st = fightState(game);
@@ -370,94 +393,6 @@
         return false;
       } catch (e) { return false; }
     },
-    
-    // GOD PATH RECOGNITION (Steve 2026-10-14)
-    // The System watches how you LIVE, not what you own.
-    // Abilities exist for their own sake. Gear exists for its own sake.
-    // Sentimental gear exists for its story — NOT for points.
-    // Godhood EMERGES from consistently embodying a path. The System recognizes.
-    
-    pathBehavior: function (game, path) {
-      try {
-        const s = game.state.scholar;
-        s.pathLife = s.pathLife || {};
-        s.pathLife[path] = s.pathLife[path] || { uses: 0, recognized: false, hints: 0 };
-        return s.pathLife[path];
-      } catch (e) { return { uses: 0, recognized: false, hints: 0 }; }
-    },
-    
-    onPathLived: function (game, path) {
-      try {
-        const beh = this.pathBehavior(game, path);
-        if (beh.recognized) return;
-        beh.uses++;
-        const paths = game.data.godpaths ? game.data.godpaths.paths : {};
-        const pdef = paths[path];
-        if (!pdef) return;
-        if (beh.uses === 10 && beh.hints === 0) {
-          beh.hints = 1;
-          game.say('SYSTEM: "You ' + this.pathVerb(path) + '. Interesting. We are watching."');
-        } else if (beh.uses === 25 && beh.hints === 1) {
-          beh.hints = 2;
-          game.say('SYSTEM: "You remind us of the ' + pdef.name + 's from before. The ones who ascended."');
-        } else if (beh.uses >= 50 && !beh.recognized) {
-          beh.recognized = true;
-          game.say(pdef.name.toUpperCase() + ' ASCENSION!');
-          game.say('SYSTEM: "You don\'t use the ' + pdef.name + ' path. You ARE the ' + pdef.name + ' path."');
-          game.say('Unlocked: ' + pdef.godAbility + ' — ' + pdef.godDescription);
-          const scholar = game.state.scholar;
-          if (scholar.abilities.indexOf(pdef.godAbility) === -1) {
-            scholar.abilities.push(pdef.godAbility);
-          }
-          try { game.audioEvent('ascension', { path: path }); } catch (e) {}
-        }
-      } catch (e) {}
-    },
-    
-    pathVerb: function (path) {
-      const verbs = {
-        brawler: 'fight like a storm', shieldbearer: 'stand between harm and others',
-        hunter: 'hunt with patience', caregiver: 'heal without hesitation',
-        drifter: 'move like smoke', explorer: 'seek what is hidden',
-        socialite: 'command the crowd', survivalist: 'endure the unendurable',
-        miser: 'hoard with purpose', forager: 'find what feeds'
-      };
-      return verbs[path] || 'walk the path';
-    },
-    
-  // FUSION SYSTEM (Steve 2026-10-14): abilities combine into god abilities.
-  // Luck: finding the components. Cleverness: knowing what to fuse.
-  
-  availableFusions: function (game) {
-    try {
-      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
-      const has = (id) => game.hasAbility && game.hasAbility(id);
-      return fusions.filter(f => {
-        if (has(f.id)) return false;
-        return f.components.every(c => has(c));
-      });
-    } catch (e) { return []; }
-  },
-  
-  fuse: function (game, fusionId) {
-    try {
-      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
-      const f = fusions.find(x => x.id === fusionId);
-      if (!f) return false;
-      const has = (id) => game.hasAbility && game.hasAbility(id);
-      if (!f.components.every(c => has(c))) {
-        game.say(`Fusion failed: missing components for ${f.name}.`);
-        return false;
-      }
-      if (has(f.id)) return false;
-      const scholar = game.state.scholar;
-      scholar.abilities = scholar.abilities.filter(a => !f.components.includes(a));
-      scholar.abilities.push(f.id);
-      game.say(`${f.name.toUpperCase()}! ${f.flavor}`);
-      try { game.audioEvent('fusion', { id: f.id, tier: f.tier }); } catch (e) {}
-      return true;
-    } catch (e) { return false; }
-  },
   };
 
   // Export

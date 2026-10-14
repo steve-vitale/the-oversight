@@ -84,8 +84,11 @@ const mockGame = {
   tbfight: { buildaround: {} },
 };
 console.log('\n4. Blood Frenzy logic:');
-BA.onStrikeHit(mockGame, {}); // hit 1: frenzy=1
-ok(BA.frenzyMult(mockGame) === 2.0, `2nd hit crits x2.0 (got ${BA.frenzyMult(mockGame)})`);
+// Real order (game.js tbPlayerStrike): damageMult/frenzyMult BEFORE onStrikeHit.
+const _strike = () => { const m = BA.frenzyMult(mockGame); BA.onStrikeHit(mockGame, {}); return m; };
+const _mults = [_strike(), _strike(), _strike(), _strike(), _strike(), _strike()];
+ok(_mults.join(',') === '1,1,2,1,1,2', `3rd consecutive hit crits: [1,1,2,1,1,2] (got [${_mults}])`);
+_strike(); _strike(); // two hits banked
 BA.onStrikeMiss(mockGame);
 ok(BA.frenzyMult(mockGame) === 1, 'miss resets to ×1');
 
