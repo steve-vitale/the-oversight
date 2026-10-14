@@ -77,10 +77,13 @@
     try { return ((S.ITEM_TIER || {})[itemId]) || 0; } catch (e) { return 0; }
   }
 
-  // godhoodItemOk: Steve 2026-10-13 option (c) — flexibility in which items
-  // qualify. A named capstone item (the build's ideal) always qualifies; any
-  // item of a required tier also qualifies. The old exact-item model made
-  // godhood unobtainable (the named items had no acquisition path at all).
+  // capstoneItemFor(gh): the named capstone item id for the System's
+  // recognition gift (first of capstoneItems, else null).
+  function capstoneItemFor(gh) {
+    const req = gh.requires || {};
+    const named = req.capstoneItems || req.items || [];
+    return named.length ? named[0] : null;
+  }
   function godhoodItemOk(gh, itemIds) {
     const req = gh.requires || {};
     const named = req.capstoneItems || req.items || [];
@@ -102,6 +105,13 @@
     const coreHit = cores.length ? cores.some(c => abs.has(c)) : true;
     const need = req.abilitiesNeeded || pool.length;
     return { kit: kit.length, needKit: need, coreHit, needCore: cores.length > 0, pool };
+  }
+
+  // buildReadyForCapstone(cl): everything except the item is complete.
+  // The System recognizes a finished build with the capstone item — the work
+  // was the build; the item is the seal, not a lottery.
+  function buildReadyForCapstone(cl) {
+    return cl.kit >= cl.needKit && cl.coreHit && cl.synergy && cl.dayOk && !cl.item && !cl.complete;
   }
 
   // godhoodCloseness(scholar, gh, day): how close to completion. Knowledge-gated
@@ -136,7 +146,7 @@
     const synergy = (gh.requires.synergies || []).some(s => syns.has(s));
     const item = godhoodItemOk(gh, [...items]);
     const dayOk = (day || 0) >= ((gh.requires || {}).minDay || 0);
-    return {
+    const cl = {
       kit: pp.kit,
       needKit: pp.needKit,
       coreHit: pp.coreHit,
@@ -145,6 +155,8 @@
       complete: pp.kit >= pp.needKit && pp.coreHit && synergy && item && dayOk,
       close: pp.kit >= Math.min(3, Math.max(1, pp.needKit - 1)), // hint threshold: you feel it coming
     };
+    cl.readyForCapstone = buildReadyForCapstone(cl);
+    return cl;
   }
 
   // checkGodhood(scholar, day): returns ids of NEWLY completed godhoods (not yet
@@ -196,9 +208,9 @@
     const pp = poolProgress(abs, gh);
     const synergy = (gh.requires.synergies || []).some(s => syns.has(s));
     const item = godhoodItemOk(gh, [...items]);
-    const day = (game.state || {}).day || 0;
+    const day = ((game.state || {}).scholar || {}).day || (game.state || {}).day || 0;
     const dayOk = day >= ((gh.requires || {}).minDay || 0);
-    return {
+    const cl = {
       kit: pp.kit,
       needKit: pp.needKit,
       coreHit: pp.coreHit,
@@ -208,6 +220,8 @@
       close: pp.kit >= Math.min(3, Math.max(1, pp.needKit - 1)),
       vid,
     };
+    cl.readyForCapstone = buildReadyForCapstone(cl);
+    return cl;
   }
 
   // checkVillagerGodhood(game, vid): newly completed godhoods for a villager.
@@ -582,7 +596,7 @@
     godhoods, byId,
     godhoodCloseness, checkGodhood, playerMythicId, godhoodBargaining,
     villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
-    itemTier, godhoodItemOk, poolProgress,
+    itemTier, godhoodItemOk, poolProgress, buildReadyForCapstone, capstoneItemFor,
     raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
     turnPain, noLiesCheck, summonMarket, walkHorizon, phaseOut, takeWound,
     ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,

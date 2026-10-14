@@ -861,7 +861,7 @@
         try {
           const S = globalThis.Scattering || {};
           if (S.Godhood && S.Godhood.godhoods) {
-            const day = (this.state || {}).day || 0;
+            const day = ((this.state || {}).scholar || {}).day || (this.state || {}).day || 0;
             let bestClose = null, bestKit = 2;
             for (const gh of S.Godhood.godhoods()) {
               if (gh.id === 'voice_of_the_relay') continue;

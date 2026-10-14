@@ -241,6 +241,23 @@ for (const [gid, track] of villagerPaths) {
 }
 check('T15 four villager paths: first-5 kit grants satisfy pool+core', pathsOk, pathDetail.join('; ') || '4/4 ok');
 
+// T16: capstone gift — build ready except item flags readyForCapstone
+const readyBuild = {
+  abilities: [{ id: 'tracker' }, { id: 'echo_location' }, { id: 'game_sense' }, { id: 'stalk' }],
+  activeSynergies: ['apex_sense'],
+  inventory: [],
+};
+const t16 = G.godhoodCloseness(readyBuild, apex, 85);
+check('T16 readyForCapstone when only item missing', t16.readyForCapstone === true && t16.complete === false);
+const t16b = G.godhoodCloseness(hunterBuild, apex, 85);
+check('T16b not readyForCapstone when item held', t16b.readyForCapstone === false);
+check('T16c capstoneItemFor names the ideal', G.capstoneItemFor(apex) === 'apex_bow');
+
+// T17: villager readyForCapstone
+const vg3 = mockGame('v3', ['patient_aim', 'haymaker', 'rage', 'ambush'], ['blood_rage'], [], 90);
+const t17 = G.villagerGodhoodCloseness(vg3, 'v3', army);
+check('T17 villager readyForCapstone (item only missing)', t17.readyForCapstone === true);
+
 // ---- sense-read: print the player-facing copy ----
 console.log('\n--- SENSE-READ: apex hint + ceremony beats ---');
 console.log('HINT:', apex.hint);

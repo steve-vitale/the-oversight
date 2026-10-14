@@ -38807,10 +38807,53 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const S = globalThis.Scattering || {};
         if (!S.Godhood || !S.Godhood.checkVillagerGodhood) return;
+        // CAPSTONE GIFT: a finished build (minus item) earns the System's
+        // recognition — the named capstone item, granted with a beat. The
+        // work was the build; the item is the seal, not a lottery.
+        try { this.maybeGrantCapstoneItem(vid, false); } catch (e0) {}
         const fresh = S.Godhood.checkVillagerGodhood(this, vid);
         for (const ghId of fresh) {
           const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(vid, 3) : [];
           S.Godhood.villagerRecognitionCeremony(this, vid, ghId, witnesses);
+        }
+      } catch (e) {}
+    },
+    // maybeGrantCapstoneItem(vid, isPlayer): if a godhood build is complete
+    // except the item (and day >= 80), the System grants the named capstone
+    // item. Played beat, fires once per godhood (tracked on npcGodhood/scholar.godhood).
+    maybeGrantCapstoneItem(vid, isPlayer) {
+      try {
+        const S = globalThis.Scattering || {};
+        const G = S.Godhood;
+        if (!G) return;
+        for (const gh of G.godhoods()) {
+          if (gh.id === 'voice_of_the_relay') continue;
+          const cl = isPlayer
+            ? G.godhoodCloseness(this.state.scholar, gh, ((this.state || {}).scholar || {}).day || 0)
+            : G.villagerGodhoodCloseness(this, vid, gh);
+          if (!cl.readyForCapstone) continue;
+          // fires once per godhood
+          const store = isPlayer
+            ? (this.state.scholar.godhood || (this.state.scholar.godhood = { recognized: {}, active: [] }))
+            : (((this.state.village || {}).npcGodhood || {})[vid] || ((((this.state.village || {}).npcGodhood || (this.state.village.npcGodhood = {})))[vid] = { recognized: {}, active: [] }));
+          store.capstoneGifted = store.capstoneGifted || {};
+          if (store.capstoneGifted[gh.id]) continue;
+          const itemId = G.capstoneItemFor(gh);
+          if (!itemId) continue;
+          store.capstoneGifted[gh.id] = true;
+          const vname = isPlayer ? 'you' : (this.displayName ? this.displayName(vid) : 'Someone');
+          const idef = (this.data.items || []).find(i => i.id === itemId) || {};
+          this.say(`⬢ SYSTEM: "${vname === 'you' ? 'You have' : vname + ' has'} built the body. The crown is ours to give."`);
+          this.say(`✨ CAPSTONE: ${idef.name || itemId}. ${idef.flavor || ''} It was never going to drop from a monster. It was always going to be GIVEN — to someone who'd earned the shape of it.`);
+          if (isPlayer) {
+            const s = this.state.scholar;
+            s.inventory = s.inventory || [];
+            s.inventory.push({ itemId, name: idef.name || itemId, units: 1, kg: idef.kg || 0.3, alienLoot: true, alienEffectHidden: true });
+          } else {
+            const person = this.getPerson ? this.getPerson(vid) : null;
+            if (person) { person.items = person.items || []; person.items.push(itemId); }
+          }
+          try { this.journalNote && this.journalNote('system', 'capstone', `The System granted ${vname === 'you' ? 'you' : vname} the ${idef.name || itemId} — a finished ${gh.name} build recognized.`); } catch (e2) {}
         }
       } catch (e) {}
     },
@@ -38822,7 +38865,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!S.Godhood || !S.Godhood.checkGodhood) return;
         const sch = this.state.scholar;
         if (!sch) return;
-        const day = (this.state || {}).day || 0;
+        const day = (sch || {}).day || (this.state || {}).day || 0;
+        // CAPSTONE GIFT (player): finished build minus item -> System grants it.
+        try { this.maybeGrantCapstoneItem(null, true); } catch (e0) {}
         const fresh = S.Godhood.checkGodhood(sch, day);
         for (const ghId of fresh) {
           const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(null, 3) : [];
