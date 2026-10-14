@@ -242,19 +242,27 @@
 
     // HOARDER'S INTEREST (miser): pantry generates interest.
     onDayTick: function (game) {
+      // Trophy Room mark resets daily — under its own guard, not only for
+      // Hoarder's Interest holders.
+      try {
+        const bs = game.state.scholar.buildaround;
+        if (bs && game.hasAbility && game.hasAbility('trophy_room')) bs.trophyMark = null;
+      } catch (e) { console.warn('[buildarounds] trophy reset:', e && e.message); }
       try {
         if (!game.hasAbility || !game.hasAbility('hoarders_interest')) return;
         let pantry = 0;
         try { pantry = game.pantryKcal ? game.pantryKcal() : 0; } catch (e) {}
         if (pantry < 1000) return;
         const rate = baPathCount(game, 'miser') >= 2 ? 0.05 : 0.025;
-        const interest = Math.round(pantry * rate);
-        try { game.addPantryKcal(interest); } catch (e) {}
+        // Real food into the real pantry (stockPantry), within the pantry cap.
+        const room = game.pantryCapKcal ? Math.max(0, game.pantryCapKcal() - pantry) : Infinity;
+        const interest = Math.min(Math.round(pantry * rate), room);
+        if (interest <= 0) {
+          game.say(`HOARDER'S INTEREST: the bins are full — nowhere to put the interest.`);
+          return;
+        }
+        game.stockPantry(interest, "Hoarder's interest");
         game.say(`HOARDER'S INTEREST: your stores earned ${interest} kcal overnight. Patience pays.`);
-        // Trophy Room resets daily
-        const st = dayState(game);
-        st.trophyMark = null;
-        st.feastCharge = 0;
       } catch (e) {}
     },
 
