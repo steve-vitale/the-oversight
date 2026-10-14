@@ -371,39 +371,58 @@
       } catch (e) { return false; }
     },
     
-    // GOD PATH PROGRESSION (Steve 2026-10-14)
-    // All systems feed the god meter: abilities, synergies, gear, sentimental gear.
+    // GOD PATH RECOGNITION (Steve 2026-10-14)
+    // The System watches how you LIVE, not what you own.
+    // Abilities exist for their own sake. Gear exists for its own sake.
+    // Sentimental gear exists for its story — NOT for points.
+    // Godhood EMERGES from consistently embodying a path. The System recognizes.
     
-    godProgress: function (game, path) {
+    pathBehavior: function (game, path) {
       try {
         const s = game.state.scholar;
-        s.godPath = s.godPath || {};
-        s.godPath[path] = s.godPath[path] || { points: 0, unlocked: false };
-        return s.godPath[path];
-      } catch (e) { return { points: 0, unlocked: false }; }
+        s.pathLife = s.pathLife || {};
+        s.pathLife[path] = s.pathLife[path] || { uses: 0, recognized: false, hints: 0 };
+        return s.pathLife[path];
+      } catch (e) { return { uses: 0, recognized: false, hints: 0 }; }
     },
     
-    addGodPoints: function (game, path, points, reason) {
+    onPathLived: function (game, path) {
       try {
-        const prog = this.godProgress(game, path);
-        if (prog.unlocked) return prog;
-        prog.points = Math.min(100, prog.points + points);
-        if (prog.points >= 100 && !prog.unlocked) {
-          prog.unlocked = true;
-          const paths = game.data.godpaths ? game.data.godpaths.paths : {};
-          const pdef = paths[path];
-          if (pdef) {
-            game.say(pdef.name.toUpperCase() + ' GOD PATH COMPLETE!');
-            game.say('Unlocked: ' + pdef.godAbility + ' — ' + pdef.godDescription);
-            const scholar = game.state.scholar;
-            if (!scholar.abilities.includes(pdef.godAbility)) {
-              scholar.abilities.push(pdef.godAbility);
-            }
-            try { game.audioEvent('godpath', { path: path }); } catch (e) {}
+        const beh = this.pathBehavior(game, path);
+        if (beh.recognized) return;
+        beh.uses++;
+        const paths = game.data.godpaths ? game.data.godpaths.paths : {};
+        const pdef = paths[path];
+        if (!pdef) return;
+        if (beh.uses === 10 && beh.hints === 0) {
+          beh.hints = 1;
+          game.say('SYSTEM: "You ' + this.pathVerb(path) + '. Interesting. We are watching."');
+        } else if (beh.uses === 25 && beh.hints === 1) {
+          beh.hints = 2;
+          game.say('SYSTEM: "You remind us of the ' + pdef.name + 's from before. The ones who ascended."');
+        } else if (beh.uses >= 50 && !beh.recognized) {
+          beh.recognized = true;
+          game.say(pdef.name.toUpperCase() + ' ASCENSION!');
+          game.say('SYSTEM: "You don\'t use the ' + pdef.name + ' path. You ARE the ' + pdef.name + ' path."');
+          game.say('Unlocked: ' + pdef.godAbility + ' — ' + pdef.godDescription);
+          const scholar = game.state.scholar;
+          if (scholar.abilities.indexOf(pdef.godAbility) === -1) {
+            scholar.abilities.push(pdef.godAbility);
           }
+          try { game.audioEvent('ascension', { path: path }); } catch (e) {}
         }
-        return prog;
-      } catch (e) { return { points: 0, unlocked: false }; }
+      } catch (e) {}
+    },
+    
+    pathVerb: function (path) {
+      const verbs = {
+        brawler: 'fight like a storm', shieldbearer: 'stand between harm and others',
+        hunter: 'hunt with patience', caregiver: 'heal without hesitation',
+        drifter: 'move like smoke', explorer: 'seek what is hidden',
+        socialite: 'command the crowd', survivalist: 'endure the unendurable',
+        miser: 'hoard with purpose', forager: 'find what feeds'
+      };
+      return verbs[path] || 'walk the path';
     },
     
   // FUSION SYSTEM (Steve 2026-10-14): abilities combine into god abilities.
