@@ -914,7 +914,7 @@
             var vDpr = rec.mDealt / round, mDpr = rec.vTaken / round;
             var rtk = mlead.hp / Math.max(1, vDpr);  // rounds to drop the lead
             var rtd = vHp / Math.max(1, mDpr);       // rounds until the villager drops
-            hopeless = rtd < rtk * 0.6;              // drops long before the lead falls
+            hopeless = rtd < rtk * 0.85;              // losing before the lead falls — slow bleeds count (loosened 2026-10-13, was 0.6)
             winning = rtk <= rtd * 1.1;              // drops the lead first (or trades)
             if (winning) rec.everWinning = true;
             if (hopeless) rec.everHopeless = true;

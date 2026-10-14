@@ -210,13 +210,16 @@
       if (cheb(fx, fy, player.mx, player.my) <= 1) return { moves, action: { type: 'help', target: player.key } };
       return { moves, action: { type: 'wait' } };
     }
+    // HELPFUL STRIKE (combat-survival 2026-10-13): adjacent to the enemy,
+    // they strike — harrying for [2,4] forever read as a losing trajectory
+    // and fled at 70% having contributed nothing. A strike is [4,8].
     if (foe && cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) {
-      return { moves, action: { type: 'harry', target: foe.f.key } };
+      return { moves, action: { type: 'strike', target: foe.f.key } };
     }
     if (foe && foe.d <= 3) {
-      // close in to harry, but don't stand in telegraphs
+      // close in to strike, but don't stand in telegraphs
       moveTo(foe.f.mx, foe.f.my, true);
-      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) return { moves, action: { type: 'harry', target: foe.f.key } };
+      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
     } else if (player) {
       moveTo(player.mx, player.my, true);
     }

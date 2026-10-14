@@ -6482,7 +6482,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // HEALER ROUNDS (structural-combat 2026-10-10): wound-stabilization
     // upstream of death. Once per day, the camp healer treats the single
-    // most-hurt villager (<50 HP): +15 HP, narrated, nothing consumed.
+    // most-hurt villager (<70 HP): +15 HP, narrated, nothing consumed.
     // Runs in sleep() before villageLives — stabilization ahead of the
     // night's wound rolls, not after. No healer -> no treatment (never
     // phantom medicine). The healer never treats themselves; the dead are
@@ -6495,7 +6495,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!healer) return null;
       const v = this.state.village || {};
       v.health = v.health || {};
-      let worst = null, worstHp = 50;
+      let worst = null, worstHp = 70;
       for (const id of (v.roster || [])) {
         if (id === this.villagerId) continue;
         const hp = v.health[id];
@@ -32287,6 +32287,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // ALLIES (2026-10-13): kind 'ally' tracks too — their hopeless read
       // (and the rally that suppresses it) needs the same trajectory.
       if ((t.kind === 'villager' || t.kind === 'ally') && final > 0) t._taken = (t._taken || 0) + final;
+      // REACTIVE FLEE FLOOR (combat-survival 2026-10-13): resolve the flee
+      // read when the damage lands, not on the villager's next turn — the
+      // field engine's end-of-round check, ported to tactical. Closes the
+      // burst-death gap (63→12 with a 51-hit incoming next) and the
+      // initiative race (flee executes at damage time, before the monster's
+      // next turn). Player flee mechanics untouched (Steve's call).
+      if ((t.kind === 'villager' || t.kind === 'ally') && final > 0) {
+        try { this.tbVillagerReactiveFlee(t, final); } catch (e) {}
+      }
       if (t.kind === 'player') {
         this.state.scholar.health = Math.max(0, t.hp);
         // TRIAL DEED LEDGER (longsim abilities r4 2026-10-12): per-fight
@@ -32748,17 +32757,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Validated movement is enforced at the step callbacks (tbCanOccupy) —
     // multi-tile movers validate their whole footprint there. (tbMoveFighter
     // removed 2026-10-09: zero callers, contract now lives in the callbacks.)
-    // tbVillagerHopeless(v): is this villager's tactical fight hopeless?
-    // Same trajectory formula as fieldFight (rtd < rtk * 0.6), read from the
-    // fighter's real damage ledgers (_dealt in tbVillagerTurn, _taken in
-    // tbDamage). Needs round >= 2 — a trajectory needs two points. Pure
-    // read, no RNG, no side effects — safe to call from AI and tests.
-    tbVillagerHopeless(v) {
+    // tbFightTrajectory(v): the shared trajectory read for the tactical
+    // hopeless-flee system (predictive start-of-turn + reactive after-damage).
+    // Same trajectory formula as fieldFight (rtd < rtk * 0.85, loosened
+    // 2026-10-13 from 0.6 — slow bleeds at 0.65-0.95x the monster's kill
+    // rate now read as losing), read from the fighter's real damage ledgers
+    // (_dealt in tbVillagerTurn, _taken in tbDamage). Needs round >= 2 — a
+    // trajectory needs two points. Pure read, no RNG, no side effects — safe
+    // to call from AI and tests. Returns {rtd, rtk, hopeless, winning, legible}.
+    tbFightTrajectory(v) {
+      const out = { rtd: Infinity, rtk: Infinity, hopeless: false, winning: false, legible: false };
       const f = this.tbfight;
-      if (!f || (f.round || 1) < 2 || !v || !v.alive || v.fled) return false;
+      if (!f || (f.round || 1) < 2 || !v || !v.alive || v.fled) return out;
       const rounds = Math.max(1, (f.round || 2) - 1);
       const myDpr = (v._dealt || 0) / rounds, theirDpr = (v._taken || 0) / rounds;
-      if (theirDpr <= 0) return false;
+      if (theirDpr <= 0) return out;
       let mHp = 0;
       try {
         for (const o of (f.fighters || [])) {
@@ -32767,10 +32780,59 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
-      if (mHp <= 0) return false;
-      const rtk = mHp / Math.max(0.5, myDpr);   // rounds for the villager to drop the threat
-      const rtd = Math.max(0, v.hp || 0) / theirDpr; // rounds until the villager drops
-      return rtd < rtk * 0.6;
+      if (mHp <= 0) return out;
+      out.legible = true;
+      out.rtk = mHp / Math.max(0.5, myDpr);   // rounds for the villager to drop the threat
+      out.rtd = Math.max(0, v.hp || 0) / theirDpr; // rounds until the villager drops
+      out.hopeless = out.rtd < out.rtk * 0.85;
+      out.winning = out.rtk <= out.rtd * 1.1; // field-engine parity: drops the lead first (or trades)
+      return out;
+    },
+    // tbVillagerHopeless(v): is this villager's tactical fight hopeless?
+    // Thin wrapper over tbFightTrajectory — the start-of-turn predictive read.
+    tbVillagerHopeless(v) {
+      return this.tbFightTrajectory(v).hopeless;
+    },
+    // REACTIVE FLEE FLOOR (combat-survival 2026-10-13): the field engine
+    // resolves flee end-of-round, after damage — reactive. Tactical fled
+    // predictively (start-of-turn only), so a burst hit that left a villager
+    // killable-before-their-next-turn killed them first (the initiative
+    // race), and the predictive check could never see the hit coming.
+    // After ANY hit on a villager/ally, re-run the flee read: below their
+    // personality flee line and (hopeless trajectory OR one more hit of the
+    // same size would kill them) → they run NOW, mid-round. Mirrors the
+    // field engine's proven end-of-round check. Sealed arenas, rallied
+    // fighters, and the helpful hold-for-a-critical-player exception are all
+    // honored — this is the same decision, just resolved when the damage
+    // lands instead of on the next turn.
+    tbVillagerReactiveFlee(t, final) {
+      const f = this.tbfight;
+      if (!f || f.over || !t || !t.alive || t.fled || (t.hp || 0) <= 0) return false;
+      if (t.kind !== 'villager' && t.kind !== 'ally') return false;
+      const sealed = !!((this.state || {}).arenaContest) || !!(f.noFlee);
+      if (sealed || (t.rallied || 0) > 0) return false;
+      const hpFrac = (t.hp || 0) / Math.max(1, t.maxHp || 1);
+      const fleeLine = t.ai === 'brave' ? 0.4 : t.ai === 'helpful' ? 0.7 : 0.5;
+      if (hpFrac >= fleeLine) return false;
+      // HELPFUL EXCEPTION (mirrors the start-of-turn read): holding for a
+      // critical player is a purpose, not purposelessness.
+      if (t.ai === 'helpful' && hpFrac >= 0.25) {
+        try {
+          const p = this.tbFighter('p');
+          if (p && p.alive && (p.hp || 0) / Math.max(1, p.maxHp || 1) < 0.35) return false;
+        } catch (e) {}
+      }
+      const traj = this.tbFightTrajectory(t);
+      // WINNING FLOOR (field-engine parity): a winning fighter holds to 5% —
+      // the would-die-next-hit floor below doesn't break a winning line.
+      // (Round 1 has no trajectory — legible=false — so the burst read
+      // below is the only floor there, same as the field engine's HP line.)
+      if (traj.winning && hpFrac >= 0.05) return false;
+      const wouldDieNextHit = final > 0 && (t.hp || 0) <= final;
+      if (!traj.hopeless && !wouldDieNextHit) return false;
+      t.fled = true;
+      this.say(`${t.name} takes the hit and runs — while running still works.`);
+      return true;
     },
     tbVillagerTurn(v) {
       const f = this.tbfight;
@@ -32801,6 +32863,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`${v.name} is on the line — the voice won't stop, and they can't hang up. They lose the turn.`);
         return;
       }
+      // FIELD MEDICINE (tactical parity 2026-10-13): the field engine binds
+      // the wound instead of striking — once per fight, below 60% HP, +20.
+      // Ported verbatim: it spends the turn, and the hopeless read below
+      // sees the healed HP (field order: action first, morale at round end).
+      if (v.villagerId && !v._fieldMedicated && (v.hp || 0) > 0 && (v.hp || 0) < (v.maxHp || 1) * 0.6) {
+        try {
+          if (this.npcHasAbility && this.npcHasAbility(v.villagerId, 'field_medicine')) {
+            v._fieldMedicated = true;
+            const _fmHeal = Math.min(20, (v.maxHp || 0) - (v.hp || 0));
+            v.hp = Math.min(v.maxHp || 0, (v.hp || 0) + 20);
+            this.say(`${v.name} stops mid-fight and binds the wound — field medicine, +${_fmHeal} HP.`);
+            return;
+          }
+        } catch (e) {}
+      }
       // HOPELESS-FLIGHT (structural-combat 2026-10-10): a hopeless fight IS
       // a purposeful reason to flee (canon) — personality sets the depth,
       // not the whether. Sealed contest arenas hold everyone (the gate is
@@ -32824,6 +32901,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } catch (e) {}
         }
         if (!holdForPlayer && hpFrac < fleeLine) {
+          // WAR CRY (tactical parity 2026-10-13): the field engine fires this
+          // INSTEAD of fleeing when the trajectory turns hopeless — once per
+          // fight the cry staggers the monster (it hesitates: loses its next
+          // attack) and they hold the line this round. The next round
+          // decides again, honestly. Not in sealed arenas (field: noFlee).
+          if (!v._warCried && v.villagerId) {
+            try {
+              if (this.npcHasAbility && this.npcHasAbility(v.villagerId, 'war_cry')) {
+                v._warCried = true;
+                let _wcFoe = null;
+                try { _wcFoe = S.combat.nearestEnemy(f.fighters, v); } catch (e) {}
+                if (_wcFoe && _wcFoe.f) {
+                  _wcFoe.f.hesitate = (_wcFoe.f.hesitate || 0) + 1;
+                  this.say(`${v.name} BELLOWS — not volume, a promise. The ${this.encTheName(_wcFoe.f)} falters. They hold the line a little longer. (War Cry)`);
+                } else {
+                  this.say(`${v.name} BELLOWS — not volume, a promise. They hold the line a little longer. (War Cry)`);
+                }
+                return;
+              }
+            } catch (e) {}
+          }
           v.fled = true;
           this.say(`${v.name} sees how this ends — and runs while running still works.`);
           return;
@@ -35539,9 +35637,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.tbEndCheck()) return;
         return;
       }
-      // 3. flee check (codex: bulldozer retreats <25%, deer bolts <50%, etc.)
+      // 3. flee check (wired 2026-10-13: fleeAt migrated from the
+      // documentary monsterBehaviors.json values into monsters.json mdefs —
+      // lockpick_raccoon bolts <50%, hushwolf pack breaks <25%, belltoad
+      // chorus scatters <30%, etc. Ad-hoc mdefs with no monsters.json entry
+      // (the sigW3c sponsor-creature) read the behaviors table by id.)
       // A broken pack is a frightened pack — broken wolves bolt easier.
-      const fleeAt = (m.mdef.fleeAt || 0) + (this.wolfIs(m) && m.wolfBroken ? 0.2 : 0);
+      // NULL-SAFE (2026-10-13): hostile fighters carry no mdef — the old
+      // direct read threw on their turn.
+      let _fleeAt = (m.mdef && m.mdef.fleeAt) || 0;
+      if (!_fleeAt) {
+        try {
+          const _bt = (((this.data || {}).monsterBehaviors || {}).behaviors || {});
+          _fleeAt = (_bt[((m.mdef || {}).id || '')] || {}).fleeAt || 0;
+        } catch (e) {}
+      }
+      const fleeAt = _fleeAt + (this.wolfIs(m) && m.wolfBroken ? 0.2 : 0);
       if (fleeAt > 0 && m.hp / m.maxHp < fleeAt && Math.random() < 0.7) {
         m.fled = true;
         this.say(`${this.encSubject(m)} breaks and runs!`);
