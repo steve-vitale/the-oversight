@@ -144,3 +144,29 @@ The live seat price can also *drop* (deaths, lost links). So stalling for a bett
 4. **Overtime:** weekly tiers, or tied to something you do?
 5. **The key's trigger:** Overtime tier + all three titans slain? Something else?
 6. **The best ending:** what does humanity win that the other endings don't?
+
+---
+
+## Defaults adopted (2026-10-14, Steve: "Okay address all gaps.")
+
+Steve didn't pick answers, so these are Claude's defaults. **Any of them can
+be overturned**; each is isolated in data or one function.
+
+1. **Ambiguous → magic** (reality-bending, or a build-around payoff):
+   adrenaline_surge, adrenaline_control, iron_stomach (+ knack iron_gut as its
+   variant), unbreakable, trade_of_blows, cornered_rat, rage, war_cry, leech,
+   turncoat, trophy_room, survivor, second_skin, hoarder, loud_chewer,
+   night_eyes (System + knack, merged).
+   **Ambiguous → skill** (sharpened human competence): eagle_eye, open_book,
+   camp_cook, compost_king, wanderer, still_hands (→ steady_hands),
+   Waywise (→ pathfinder), storm_ear (→ weather_read).
+2. **Tracks:** Fight / Field / Bond / Craft / Strange, tuned to ~8 level-ups
+   per full run; each crossing is pick 1 of 3 magic abilities from the track's kit.
+3. **Audience trials** teach a skill (plus integration), never an ability.
+   **Trial/practice deeds** feed their track's XP; the human ones now teach the skill.
+4. **Overtime:** weekly tiers once the Table is set and unseated.
+5. **The key:** Overtime tier ≥ 3 AND all three titans slain → **The Network**
+   (map-spanning, every region node a piece of it).
+6. **Best ending: The Taken come home.** Half the adults were taken on day zero
+   and the children sit in stasis pods (`docs/KIN.md`). The key adds that
+   outcome to whichever Table path you play; it's still losable.
