@@ -1,6 +1,6 @@
 // @ontology
 // system: world
-// description: The world registry (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "people got randomized and split up across the world. The family arc has to be late game content at the global stage."). state.world = {regions:{id:{known,contact,visited,heardDay,heardWhy}}, kin:[{owner,name,relation,region,fate,found}]}. At run start every region of regions.json gets an entry (the landing region known+visited, every roster member's origin region known), and each roster member's lifeseed kin is placed in a seeded random region that is never the landing region, fate 'taken' when the lifeseed says Taken, else 'scattered' (kin who died before the sky changed are not placed). Hidden: no UI until the global-stage content reads it.
+// description: The world registry (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "people got randomized and split up across the world. The family arc has to be late game content at the global stage."). state.world = {regions:{id:{known,contact,visited,heardDay,heardWhy}}, kin:[{owner,name,relation,region,fate,found}]}. At run start every region of regions.json gets an entry (the landing region known+visited, every roster member's origin region known), and each roster member's lifeseed kin is placed in a seeded random region that is never the landing region (fate 'scattered'), or off-world with region null when the lifeseed says Taken (fate 'taken', docs/KIN.md) (kin who died before the sky changed are not placed). Hidden: no UI until the global-stage content reads it.
 // provides:
 //   - initWorld() -> builds state.world for a new run (called from newGame)
 //   - migrateWorld() -> old saves get a world; new regions get entries (called from load)
@@ -99,10 +99,14 @@
       for (const p of people) {
         if (KIN_DEAD.test(p.fate || '')) continue;
         const R = this.kinRand(vid, p);
+        const drawn = pool[Math.floor(R() * pool.length)];
+        const taken = KIN_TAKEN.test(p.fate || '');
         const entry = {
           owner: vid, name: p.name, relation: p.relation,
-          region: pool[Math.floor(R() * pool.length)],
-          fate: KIN_TAKEN.test(p.fate || '') ? 'taken' : 'scattered',
+          // The Taken are off-world (docs/KIN.md: their fate is never
+          // confirmed); region null until THE HOSTS brings them home.
+          region: taken ? null : drawn,
+          fate: taken ? 'taken' : 'scattered',
           found: false,
         };
         w.kin.push(entry);

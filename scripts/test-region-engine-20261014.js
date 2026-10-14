@@ -245,7 +245,8 @@ async function main() {
   const kin = Game.state.world.kin;
   ok(kin.length >= 3, 'kin placed for the roster', 'n=' + kin.length);
   ok(kin.every(k => k.region !== Game.state.region), 'no kin in the landing region');
-  ok(kin.every(k => Game.regionDef(k.region)), 'every kin region exists');
+  ok(kin.filter(k => k.fate === 'scattered').every(k => Game.regionDef(k.region)), 'every scattered kin region exists');
+  ok(kin.filter(k => k.fate === 'taken').every(k => k.region === null), 'the Taken are off-world (region null, KIN.md)');
   ok(kin.every(k => k.fate === 'scattered' || k.fate === 'taken'), 'fates are scattered|taken');
   const pk = Game.worldKin();
   ok(pk.length > 0 && pk.every(k => k.owner === Game.villagerId), 'worldKin() = the player\'s kin');
