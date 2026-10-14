@@ -14179,12 +14179,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return null;
     },
 
-    // weaponBonus: from EQUIPPED weapon. One slot.
+    // weaponBonus: from the EQUIPPED weapon (melee/ranged slots, via
+    // equippedWeapon — the legacy .weapon slot is migrated away on load).
     weaponBonus() {
-      const eq = (this.state.scholar.equipped || {}).weapon;
-      if (!eq) return 0;
-      const def = this.data.items.find(i => i.id === eq.itemId);
-      return (def && def.weapon) ? def.weapon.bonus : 0;
+      return this.equippedWeapon().bonus || 0;
     },
 
     // equippedWeapon: full weapon profile — range, type, ammo. Unarmed fallback.
@@ -14197,7 +14195,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // reader never followed, so every player strike since has been unarmed
       // (spear bonus silently zero). Read the modern slots, legacy fallback.
       const wslot = eq.melee || eq.ranged || eq.weapon;
-      if (!wslot) return { name: 'your hands', bonus: 0, type: 'melee', range: 1, ammo: null, unarmed: true };
+      if (!wslot) return { name: 'your hands', bonus: 0, type: 'melee', range: 1, ammo: null, unarmed: true, itemId: null, item: null, def: null };
       const def = this.data.items.find(i => i.id === wslot.itemId);
       const w = (def && def.weapon) || {};
       return {
@@ -14207,6 +14205,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         range: w.range || 1,
         ammo: w.ammo || null,
         unarmed: false,
+        itemId: wslot.itemId || null,
+        item: wslot, // the equipped instance (alien reveal flags live here)
+        def: def || null,
       };
     },
 
@@ -14310,8 +14311,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // ENERGY WEAPONS (Steve 2026-10-05): beam weapons and overkill elemental
         // abilities char the meat. You get charred remains — 10% calories, no
         // proper butchering. You can't hunt with a searcaster.
-        const eqW = (this.state.scholar.equipped || {}).weapon;
-        const wdef = eqW && this.data.items.find(i => i.id === eqW.itemId);
+        const wdef = this.equippedWeapon().def;
         const charsMeat = wdef && wdef.weapon && wdef.weapon.charsMeat;
         if (charsMeat) {
           const charredKcal = Math.round(kcal * 0.1);
@@ -31345,7 +31345,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       // ALIEN LOOT REVEAL (Steve 2026-10-06): first swing teaches you what the
       // alien weapon actually does. Knowledge is earned by doing.
-      try { this.alienLootReveal((this.state.scholar.equipped || {}).weapon); } catch (e) {}
+      try { this.alienLootReveal(this.equippedWeapon().item); } catch (e) {}
       const tAfter = this.tbFighter(t.key);
       // PRACTICE DEEDS (longsim abilities r5 2026-10-12): haymaker — one
       // blow for half or more of a REAL opponent's max HP (maxHp >= 30, so a
@@ -31669,8 +31669,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const str = ((this.state.scholar || {}).stats || {}).str || 5;
       let chance = 0.3 + str * 0.04;
       try {
-        const wid = String((((this.state.scholar || {}).equipped || {}).weapon || {}).itemId || '');
-        if (wid === 'crowbar') chance += 0.25;
+        if (this.equippedWeapon().itemId === 'crowbar') chance += 0.25;
       } catch (e) {}
       if (Math.random() < chance) {
         t.turtleFlipped = 3;
@@ -32674,7 +32673,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // well not be there. Checked the same way as the torch-vs-golem rule.
       let ignoresArmor = false;
       try {
-        const wdef = this.data.items.find(i => i.id === String((((this.state.scholar || {}).equipped || {}).weapon || {}).itemId || ''));
+        const wdef = this.equippedWeapon().def;
         ignoresArmor = !!(wdef && wdef.weapon && wdef.weapon.ignoresArmor);
       } catch (e) {}
       // BUNKER (speedbump): sealed shell — nearly invulnerable. Chip damage only.

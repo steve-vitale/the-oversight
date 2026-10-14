@@ -131,7 +131,7 @@ ok('bug3: map position unchanged', Game.map.px === px0 && Game.map.py === py0,
 ok('bug3: scholar grid pos unchanged', Game.state.scholar.mx === 4 && Game.state.scholar.my === 4);
 {
   const s = Game.state.scholar;
-  const w = (s.equipped && s.equipped.weapon) || {};
+  const w = (s.equipped && (s.equipped.melee || s.equipped.ranged)) || {};
   ok('bug3: loadout still applied (spear)', /spear/i.test(w.name || w.itemId || ''), JSON.stringify(w));
 }
 // all loadouts, mid-combat, none may move or drop the fight

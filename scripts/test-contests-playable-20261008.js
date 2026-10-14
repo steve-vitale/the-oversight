@@ -125,7 +125,7 @@ note('2. PLAYER BLOOD — pit plays as a real tactical fight');
   const r0 = Game.contestChoose(0);
   const hasSpear = (Game.state.scholar.inventory || []).some(i => i.itemId === 'hunting_spear');
   ok('weapon choice grants a real spear item', hasSpear);
-  ok('spear is equipped', (Game.state.scholar.equipped || {}).weapon?.itemId === 'hunting_spear');
+  ok('spear is equipped', Game.equippedWeapon().itemId === 'hunting_spear');
   // Choice 0 on phase 1: enter the pit (arena).
   const ac = Game.state.activeContest;
   ac.phaseIdx = 1;
