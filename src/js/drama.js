@@ -404,7 +404,7 @@
       const el = document.createElement('div');
       el.innerHTML = html;
       el.style.cssText = css;
-      el.setAttribute('data-anim', animClass || '');
+      if (el.setAttribute) el.setAttribute('data-anim', animClass || ''); // (minimal DOM stubs in old tests lack it)
       ov.appendChild(el);
       const dur = duration || 600;
       // REDUCED MOTION (presentation pass A): no scale, spin, bob or drift —
