@@ -8,6 +8,7 @@
 //   - npcKnack(vid)
 //   - knackGossipLine(tellerVid, targetVid)
 //   - knackDef(id)
+//   - liveKnackChoices()
 // rules:
 //   - knack_system_granted_early: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer at grant; zero System chrome in copy or UI because the System hasn't formally arrived — but the fiction is GIVEN, not innate)
 //   - latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
@@ -102,17 +103,34 @@
       return t.replaceAll('{kin}', kin).replaceAll('{place}', place);
     },
 
+    // liveKnackChoices: the pending first-ability sheet, honest to the lanes.
+    // Saves from before the ability-lanes change (2026-10-14) can hold
+    // choices that are now human skills (still_hands, storm_ear); drop them
+    // and refill to 3 from the magic pool so the sheet never offers a skill.
+    liveKnackChoices() {
+      const s = this.state.scholar;
+      if (!s || s.knackChosen || !(s.knackChoices || []).length) return [];
+      const kept = s.knackChoices.filter(c => c && this.knackDef(c.id));
+      if (kept.length < s.knackChoices.length) {
+        const me = this.vpOf ? this.vpOf(this.villagerId) : null;
+        const fresh = this.knackChoicesFor(me).filter(c => !kept.some(k => k.id === c.id));
+        while (kept.length < 3 && fresh.length) kept.push(fresh.shift());
+        s.knackChoices = kept;
+      }
+      return s.knackChoices;
+    },
+
     // chooseKnack: the player names their knack. Fills slot 1. Quiet —
     // no System chrome: no 🎁, no "PICK A TRICK", no flavor quote. The System
     // hasn't formally arrived — this was sent ahead, unexplained.
     chooseKnack(id) {
       const s = this.state.scholar;
       if (!s) return null;
-      const choice = (s.knackChoices || []).find(c => c.id === id);
+      const choice = this.liveKnackChoices().find(c => c.id === id);
       if (!choice) return null;
       s.abilities = s.abilities || [];
       if (s.abilities.length >= this.abilitySlots()) {
-        this.say('No free ability slots. (Your knack waits — it will return when a slot opens.)');
+        this.say('No free ability slots. (It waits. It will come back when a slot opens.)');
         return null;
       }
       s.abilities.push({ id: choice.id, name: choice.name, desc: choice.description, level: 1, xp: 0, latent: true });

@@ -14131,15 +14131,15 @@
   // Modal: the knack is the first rung of the level-up ladder — it must be
   // named. (spawn-knack 2026-10-11)
   function knackSheet() {
-    const choices = Game.state.scholar.knackChoices;
+    const choices = Game.liveKnackChoices ? Game.liveKnackChoices() : Game.state.scholar.knackChoices;
     if (!choices || !choices.length) return;
     openSheet({
       id: 'knack-choice',
-      title: '\u{1F4AD} Something you never told anyone',
+      title: '\u{1F4AD} Something changed in you',
       html:
         '<p>The fire crackles. Twelve strangers breathe in the dark around you.</p>' +
-        '<p>And under all of it \u2014 under the fear, under the wrong-colored sky \u2014 something in you is awake. It\u2019s always been there. A knack. A trick you learned long ago that you never could explain, so you never mentioned it.</p>' +
-        '<p>The world ended. It didn\u2019t take this. If anything, it\u2019s louder now.</p>' +
+        '<p>And under all of it \u2014 under the fear, under the wrong-colored sky \u2014 something in you is different. You didn\u2019t learn it. You\u2019d remember learning it. It started days ago, and it is getting stronger.</p>' +
+        '<p>Nobody has noticed yet. You\u2019re not sure you want them to.</p>' +
         '<p>Which one is it?</p>',
       buttons: choices.map(c => ({
         label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.description || c.desc) + '</span>' +
