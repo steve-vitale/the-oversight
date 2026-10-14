@@ -190,6 +190,14 @@ function gorgeCall(Game, ctx) {
     let pending = 0, arrived = 0;
     try { pending = ((Game.state || {}).pendingHelp || []).length; } catch (e) {}
     try { arrived = (((Game.aidCrisis && Game.aidCrisis()) || {}).helpAtDoor || []).length; } catch (e) {}
+    // The door is already answered: help marching or at the door. Calling
+    // again would stack parties (and favors owed) against one monster — the
+    // gorge continuing under an answered door is the engine's finding, not
+    // a reason to re-call.
+    if (mark.firstCallDay != null && (pending > 0 || arrived > 0)) {
+      ctx.gorgeCallHeldAnswered = (ctx.gorgeCallHeldAnswered || 0) + 1;
+      return;
+    }
     const escalate = mark.firstCallDay != null && day - mark.firstCallDay >= 2 &&
       !mark.escalated && pending === 0 && arrived === 0;
     if (escalate) {

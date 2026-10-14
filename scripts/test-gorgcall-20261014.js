@@ -191,6 +191,37 @@ function formHighTrustLink(Game) {
     console.log('  info: gorge nights during the 8d window: ' + gorgeNights + ' (help does not fight — measured, not presumed)');
   });
 
+  console.log('PART 5 — ESCALATION (gate on): unanswered call -> runner');
+  await withEnv('GORGCALL', '1', async () => {
+    const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
+    await setupGame(Game);
+    await quietLog(() => runDays(Game, gc.leadfeast, { days: 25 }));
+    const link = formHighTrustLink(Game);
+    ok(!!link, 'PART5 fixture: high-trust link formed');
+    const apex = injectLingering(Game, 'cancellation', 1200);
+    const day = gday(Game);
+    // backdate the marker: first call 3 days ago, bought nothing
+    apex._gorgcall = { firstCallDay: day - 3, lastCallDay: day - 3, escalated: false };
+    let cfhTiers = [];
+    const origCFH = Game.callForHelp.bind(Game);
+    Game.callForHelp = function (t, o) { cfhTiers.push(String(t)); return origCFH(t, o); };
+    const said = [];
+    const origSay = Game.say.bind(Game);
+    Game.say = function (msg) { try { said.push(String(msg || '')); } catch (e) {} return origSay(msg); };
+    const ctx = {};
+    gc.gorgeCall(Game, ctx);
+    ok(cfhTiers.length === 1 && cfhTiers[0] === 'runner', 'PART5: unanswered episode escalates to runner', cfhTiers.join(','));
+    ok(ctx.gorgeCalls && ctx.gorgeCalls[0] && ctx.gorgeCalls[0].tier === 'runner', 'PART5: runner call recorded');
+    ok(!!apex._gorgcall.escalated, 'PART5: entity marked escalated (no repeat escalation)');
+    const rl = said.find(t => /sends a runner/.test(t));
+    ok(!!rl && /second try/i.test(rl), 'PART5: escalation decision line names the price aloud');
+    // no second escalation the next day
+    cfhTiers = [];
+    gc.gorgeCall(Game, ctx);
+    ok(cfhTiers.length === 0, 'PART5: no repeat escalation (once per episode)');
+    Game.callForHelp = origCFH; Game.say = origSay;
+  });
+
   console.log('\n' + pass + ' passed, ' + fail + ' failed');
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('HARNESS ERROR:', e && e.stack || e); process.exit(2); });
