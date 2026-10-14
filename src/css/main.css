@@ -1116,8 +1116,24 @@ body.in-combat .ord-log { order: 5.3; }
 .dlg-line { min-height: 40px; overflow: hidden; }
 .dlg-line.narr { opacity: .85; font-style: italic; }
 .dlg-who { font-weight: bold; }
-.dlg-choices { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.dlg-choice { flex: 1 1 40%; }
+/* CHOICE LIST (rethought 2026-10-14, Steve: "unable to see all the chat
+   options and it isn't scrollable — rethink approach"): the old two-per-row
+   flex-wrap clipped long labels and stranded options past the fold with no
+   way to reach them. Choices are now a vertical list, full-width, text
+   wraps, and the list scrolls INSIDE the box (same discipline as
+   .dlg-history: the box stays one screen, only the list pane scrolls).
+   ~4 options visible, the rest one swipe away. */
+.dlg-choices {
+  display: flex; flex-direction: column; gap: 6px; margin-top: 8px;
+  max-height: 30vh; overflow-y: auto;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+.dlg-choice {
+  flex: 0 0 auto; width: 100%;
+  text-align: left; white-space: normal; overflow-wrap: break-word;
+  padding: 10px 12px; font-size: 15px; line-height: 1.4;
+  margin: 0;
+}
 .dlg-next {
   display: block; margin: 2px auto 0; background: none; border: none;
   color: inherit; font-size: 15px; opacity: .85; cursor: pointer;
