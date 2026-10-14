@@ -1,5 +1,14 @@
 # God-Path Build Plan
 
+> **⚠ ON HOLD (2026-10-14), pending Steve's answers in
+> `evidence/2026-10-14/opus-assumption-review.md` §5.** That review found:
+> - the brief this plan rests on is a paraphrase, not Steve's words
+> - Phase 1's gear makers don't exist (no shield item, no block action)
+> - sim bots never use abilities, so the sim targets can't measure anything
+> - the Table doesn't read the build at all
+>
+> **Safe to do now:** the codex bug fix (Phase 0). Everything else waits.
+
 **For:** the coding agent (Muse) building the god-path system.
 **Design source:** `evidence/2026-10-14/opus-godpath-proposal.md` (v2). Read §0–§9 once before starting.
 **Brief:** `evidence/2026-10-14/opus-brief-ability-system.md`.
