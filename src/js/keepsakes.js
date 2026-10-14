@@ -30,6 +30,7 @@
 // consumes:
 //   - relicItems, offerRelicEnhancement, playFlashback, isKeepsake, itemDef (game.js / progression.js)
 //   - takenKinOf, lifeseedKin, vpOf (lifeseed.js / conversation.js)
+//   - worldKinEntry, worldRegionName (world.js)
 //   - cureStatus, tbfight, tbFighter (statusEffects.js / game.js)
 //   - useAbility, _actionAvailable (abilityActions.js; impls registered on its published impl/precheck tables)
 (function () {
@@ -281,6 +282,12 @@
         if (!p) return false;
         const first = String(p.name || '').split(' ')[0] || 'them';
         r.takenKin = { name: p.name, relation: p.relation };
+        // WORLD (docs/WORLD-REGIONS.md §5): the kin has a place in the world
+        // registry. The region rides along hidden; keepsakeClues names it
+        // only once the village has heard of that region.
+        let kinRegion = null;
+        try { const wk = this.worldKinEntry ? this.worldKinEntry(this.villagerId, p) : null; kinRegion = wk ? wk.region : null; } catch (e) { warn('worldKinEntry: ' + e.message); }
+        if (kinRegion) r.takenKin.region = kinRegion;
         const def = this.itemDef(r);
         const rev = def.reveals || null;
         const st = this.state;
@@ -293,7 +300,7 @@
             let e = cx.places.find(x => x.id === rev.id);
             if (!e) { e = { id: rev.id, note: rev.note || '' }; cx.places.push(e); }
             e.clue = true; e.kin = p.name; e.relation = p.relation; e.itemId = def.id;
-            clues.push({ kind: 'place', itemId: def.id, placeId: rev.id, kinName: p.name, relation: p.relation,
+            clues.push({ kind: 'place', itemId: def.id, placeId: rev.id, kinName: p.name, relation: p.relation, region: kinRegion,
               text: `${first} was Taken. The ${r.name || def.name} remembers a place: ${rev.note || rev.id}` });
           } else {
             const pg = this.progState ? this.progState() : null;
@@ -303,7 +310,7 @@
               if (!e) { e = { id: rev.id, note: rev.note || '' }; pg.seeking.push(e); }
               e.name = p.name; e.relation = p.relation; e.taken = true; e.itemId = def.id;
             }
-            clues.push({ kind: 'name', itemId: def.id, kinName: p.name, relation: p.relation,
+            clues.push({ kind: 'name', itemId: def.id, kinName: p.name, relation: p.relation, region: kinRegion,
               text: `Seek ${p.name} — your ${p.relation}, Taken at the Scattering. The ${r.name || def.name} still says their name.` });
           }
           this.say(`🧵 THE THREAD HOME — ${clues[clues.length - 1].text}`);
@@ -335,8 +342,16 @@
       } catch (e) { warn('keepsakeTakenKin: ' + e.message); }
       return out;
     },
+    // keepsakeClues(): the thread-home clues. A clue's kin region (world
+    // registry) is named (regionName) only once that region is known.
     keepsakeClues() {
-      return (((this.state || {}).keepsakeThread || {}).clues || []).slice();
+      const clues = (((this.state || {}).keepsakeThread || {}).clues || []).slice();
+      const regs = (((this.state || {}).world || {}).regions) || {};
+      return clues.map(c => {
+        if (!c || !c.region || !(regs[c.region] && regs[c.region].known)) return c;
+        const name = this.worldRegionName ? this.worldRegionName(c.region) : c.region;
+        return Object.assign({}, c, { regionName: name, text: c.text + ` Last trace: ${name}.` });
+      });
     },
 
     // ---------- L1 passives (hooks) ----------

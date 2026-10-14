@@ -2596,6 +2596,14 @@
         if (this.journalNote) this.journalNote('haven', 'outward', 'Food won\'t come to Haven. Walk past the treeline — learn what grows out there, bring it back, and get it named at camp.');
       } catch (e) {}
 
+      // REGIONS: the world registry (world.js: regions known/visited, kin
+      // scattered across the world) and the run-start region telemetry.
+      try { if (this.initWorld) this.initWorld(); } catch (e) { console.warn('[regions] initWorld: ' + (e && e.message)); }
+      try {
+        const se = this.season();
+        this.tele('region_start', { region: this.state.region, landing: this.state.startLocation, season: se.id, hemisphere: se.hemisphere });
+      } catch (e) { console.warn('[regions] region_start telemetry: ' + (e && e.message)); }
+
       return this.status();
     },
 
