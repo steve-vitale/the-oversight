@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-14 (latest, round 5)
+
+On composing Table endings (path final + one build coda: ~70 codas — 10 gods,
+20 subclasses, 5 tracks, × light/dark — instead of 675 bespoke endings; ~6
+fully playable regions first): "Nope good idea that's kinda manageable."
+On the player starting with their own familiarity of the land: "Yeah I think
+that makes sense."
+
 ## 2026-10-14 (latest, round 4)
 
 "Get the important stuff built, leave the bulk of work once scaffolded to the
