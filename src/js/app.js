@@ -15350,7 +15350,11 @@
   // FULL path step-by-step instead of jumping.
   const MoveAnim = S.MoveAnim;
   function expHeadHTML(st) {
-    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:11px;opacity:.7">${esc(st.dayPartHint)}</span></span>${Game.partyHud()}`);
+    // SEASON LINE (Steve 2026-10-14): where/when you are, only once someone
+    // told you (whereAreWe.js). Nothing known -> nothing shown.
+    const wl = Game.whereLine ? Game.whereLine() : '';
+    const wlHTML = wl ? `<br><span class="whereline" style="font-size:11px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:58vw;vertical-align:bottom">${esc(wl)}</span>` : '';
+    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:11px;opacity:.7">${esc(st.dayPartHint)}</span>${wlHTML}</span>${Game.partyHud()}`);
   }
   // D-PAD: compact floating pad docked bottom-right of the grid — the thumb
   // zone on a one-handed phone. It overlays the grid (never pushes layout,

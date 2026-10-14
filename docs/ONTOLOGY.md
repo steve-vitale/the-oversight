@@ -1650,6 +1650,16 @@ The Wave Ledger — waves 2-3 unlock on KILLS ONLY (waves 4-5 add village Standi
 
 **Consumes:** —
 
+### where-are-we (`whereAreWe.js`)
+Place knowledge. The Scattering dropped the player somewhere
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### world (`world.js`)
 The world registry (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "people got randomized and split up across the world. The family arc has to be late game content at the global stage."). state.world = {regions:{id:{known,contact,visited,heardDay,heardWhy}}, kin:[{owner,name,relation,region,fate,found}]}. At run start every region of regions.json gets an entry (the landing region known+visited, every roster member's origin region known), and each roster member's lifeseed kin is placed in a seeded random region that is never the landing region (fate 'scattered'), or off-world with region null when the lifeseed says Taken (fate 'taken', docs/KIN.md) (kin who died before the sky changed are not placed). Hidden: no UI until the global-stage content reads it.
 
