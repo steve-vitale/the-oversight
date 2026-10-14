@@ -3,6 +3,11 @@
 *2026-10-14. Design for Muse to execute against. Engine pieces marked
 **[ENGINE]** are built by Claude now; pieces marked **[CONTENT]** are Muse's.*
 
+> **Engine status (2026-10-14): DONE.** §6 registry, §7 data shape, §8
+> validator, the seams in the inventory and the origin vocabulary are built.
+> Adding a region is now data only: see **§11**. Proof:
+> `scripts/test-region-engine-20261014.js`.
+
 > "Please provide muse scaffolding for establishing the rest of the nations as
 > starting regions and places that can be accessed. This also necessitates
 > other starting flora and fauna, and we can truly have the starting
@@ -138,7 +143,7 @@ ones a region can't ship without.
 
 ## 6. Places you can reach: the global stage
 
-**[ENGINE]** A world registry, `state.world`:
+**[ENGINE — done: `src/js/world.js`]** A world registry, `state.world`:
 - `regions`: all 20, each with `known` (heard of), `contact` (a link or relay),
   `visited`.
 - `kin`: the player's (and each villager's) kin, each placed in a **seeded
@@ -159,7 +164,7 @@ ones a region can't ship without.
    only: gated on global rank. "If you don't know, it doesn't show": the world
    map doesn't exist in the UI until the first region is heard of.
 
-## 7. The data shape [ENGINE]
+## 7. The data shape [ENGINE — done]
 
 `src/data/regions.json` becomes the world list. One entry per region:
 
@@ -196,7 +201,7 @@ lifeseeds.
 can't be landed in), then `playable` (passes the validator; can be a random
 landing), then `rich` (full content). Only `playable`+ regions are landings.
 
-## 8. Content validator [ENGINE]
+## 8. Content validator [ENGINE — done: `scripts/validate-regions.js`, smoke: `scripts/region-smoke.js`]
 
 `node scripts/validate-regions.js` checks every region:
 - Every referenced plant, animal, item, language and monster id exists.
@@ -260,3 +265,91 @@ Religious sites appear only as quiet ruins, never as loot pinatas.
    village)?
 4. **Does the region change the year?** A tropical wet/dry cycle instead of
    four seasons changes pacing. Is that OK?
+
+## 11. How to add a region (Muse checklist)
+
+Everything below is data. If you find yourself editing `game.js` to add a
+region, stop: the engine already reads every field listed here (the reader
+is named in brackets).
+
+**0. Pick the region** from §3. Its stub already exists in
+`src/data/regions.json` with `id, name, continent, climateFamily,
+hemisphere, originTags, neighbors` (and sometimes `lifeseedRegions`,
+`seedData`). Read `seedData` first: the old US regions' gen numbers,
+seasons, weather and challenge text are there for regions 1–4.
+
+**1. Plants** (`src/data/plants.json`). Add the region's plants; give each
+an `edibility` (safe / caution / cook / avoid), `lookalikeNote`,
+`confidence`, `sources`. Add the region's biome id to `biomes`.
+
+**2. Biome** (`src/data/biomes.json`). A new entry `{id, name,
+forageTable: {plantId: weight}, tileTypes, seasons, weather, hazards}`.
+Only `forageTable` is read today [`Game.biome()` → `assignCellSpecies`,
+`rollWildSpecies`].
+
+**3. Animals** (`src/data/animals.json`). New species get `biomes` = the
+tile types they live on (`meadow`, `creek`…), like the existing ones.
+
+**4. Landing variants** (`src/data/locations.json`). At least 3 entries
+`{id, name, description, tagline, gen{…}, spawnType, startMod{waterClean},
+hazard}` (same schema as today's 28).
+
+**5. Fill the region entry** in `regions.json` (shape: the
+`na_eastern_woodlands` entry is the worked example):
+
+| Field | What | Read by |
+|---|---|---|
+| `status` | `stub` → `playable` (only once the validator passes) → `rich` | `playableRegions`, `pickLandingRegion` |
+| `biome` | the biomes.json id from step 2 | `biome()` |
+| `gen` | base map numbers; a landing variant's own `gen` wins | `locParams` |
+| `climate.seasons[]` | `{id, days, temp, note, weather:{kind: p}}`; days add to 365; each weather table sums to 1. `clear/rain/cold` have effects today; other kinds (`heat`, `storm`…) are rolled and stored but have no effect yet | `season()`, `rollWeather()` (endDay) |
+| `climate.startDayOfYear` | optional; day 1's world day-of-year (default 0). Southern hemisphere is offset half a year automatically | `season()` |
+| `fauna.animals` | every animal id that can spawn here | `initTileWildlife` |
+| `fauna.add` / `fauna.remove` | ids added to / removed from that pool | `regionAnimalPool` |
+| `fauna.density` | multiplies spawn counts (1 = today) | `initTileWildlife` |
+| `fauna.fish` | ≥2 fish ids (creek/wetland animals) | `regionFish` (nets, rod, fish duty, water tiles) |
+| `fauna.predators` | the land's apex predator(s): answers a missed strike, mauls at range ≤2 | `isRegionPredator` (encounters.js) |
+| `fauna.parasites` | `{parasiteId: {meatId: chance}}` | `regionParasiteRisk` (food.js) |
+| `flora.trees` | `[{id, roll, nut?}]`: each tree but the last takes its `roll` chance in order; `nut` = the plant it drops | `regionTreeRoll`, `regionTreeNut` |
+| `flora.bushes` | ≥2 bush plant ids (equal odds) | `regionBushes` |
+| `flora.commonTrees` | tree ids everyone knows at start | `newGame` codex |
+| `flora.bounty` | `{epithet: [plantId, why]}` for tile epithets | `bountyFor` |
+| `people.language` | a `characterGen.languages` id | (validator; translator later) |
+| `people.ruins` | ≥2 ruin stories. Ordinary and specific (§9 Respect) | `genMap` |
+| `people.scavenge` | ≥6 `{id, name, kcal, kg, text, rare?, medType?, doses?}`; `rare` items are the medicine-cabinet roll | `regionScavenge`, `scavengeItem` |
+| `people.pantry` | starting bags `{name, kcalEach, units, spoilDays, safe, kg, unit, rawKcal?, cookedKcal?, needsCooking?}` | `newGame` |
+| `people.villageNames` | ≥4 names for the other fires | `genVillages` |
+| `landingVariants` | ≥3 locations.json ids (step 4) | `landingPool` |
+| `lifeseedRegions` | ≥1 `lifeseeds.json` region id (hometowns, workplaces) | (validator; lifeseed matching is by `matchTags`) |
+| `originTags` | the origin tags that mean "from here" | `originRegionsForTags`, `familiarityTier` |
+| `challenge`, `monsters` | the region boss and monster variants (ids must exist in monsters.json) | not read yet |
+
+**6. Origins.** If a city in `originPicker.json` should map here, make sure
+`characterGen.originKeywords[<keyword>]` emits a tag listed in this
+region's `originTags`. Familiarity follows automatically: same region =
+local, same `climateFamily` = visitor, else stranger.
+
+**7. Validate:**
+
+```bash
+node scripts/validate-regions.js
+```
+
+**8. Smoke sim** (3 seeds × 60 days, capable bot, lands in your region):
+
+```bash
+REGION=<id> node scripts/region-smoke.js
+# more: REGION=<id> SEEDS=7,42,99,1234,555,777,2026,31337 DAYS=60 ORIGIN="Lagos, Nigeria" node scripts/region-smoke.js
+```
+
+To play it in the browser: `index.html?region=<id>` (sets
+`Game.debugRegion` for the next new game).
+
+**9. Checks:** `node scripts/check.js --quick`, then write the wave's
+balance note in `evidence/<date>/`.
+
+**Not data-driven yet (engine follow-ups):** the bear's maul/roar text in
+`encounters.js` still says "bear" for any region predator; tile skins and new
+logical tile kinds (§4 #8); monster variants and spawn weights (§4 #20);
+weather kinds other than clear/rain/cold have no effects; water abundance
+(§4 #7); region `challenge`.
