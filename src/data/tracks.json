@@ -1,5 +1,5 @@
 {
-  "_doc": "ONE PROGRESSION SYSTEM for the player and villagers (Steve 2026-10-14: 'I think we need to sync the player and villager system. But the villager system sounds like the better model.'). Deeds feed track XP; crossing a threshold is a level-up. Villagers take the next unheld kit ability (fixed order, no RNG) and learn the next track skill. The player gets a level-up sheet: pick 1 of the next 3 unheld kit abilities. Kits are MAGIC ONLY (lane 'magic'); human competences are the 'skills' lists (villagers learn them as skills, never in a slot). Read by src/js/tracks.js.",
+  "_doc": "ONE PROGRESSION SYSTEM for the player and villagers (Steve 2026-10-14: 'I think we need to sync the player and villager system. But the villager system sounds like the better model.'). Deeds feed track XP; crossing a threshold is a level-up. Player and villagers alike get a level-up sheet: pick 1 of the next 3 unheld kit abilities (villagers pick by buildScore, src/js/villager-build.js; full slots = swap or keep). Villagers also learn the next track skill. Kits are MAGIC ONLY (lane 'magic'); human competences are the 'skills' lists (villagers learn them as skills, never in a slot). Read by src/js/tracks.js.",
   "tracks": ["combat", "field", "social", "craft", "strange"],
   "labels": { "combat": "Combat", "field": "Field", "social": "Social", "craft": "Craft", "strange": "Strange" },
   "icons": { "combat": "⚔️", "field": "🌲", "social": "🗣️", "craft": "🛠️", "strange": "👁️" },
@@ -10,12 +10,11 @@
     "craft": "careful work",
     "strange": "brushes with the System"
   },
-  "thresholds": [3, 8, 16, 32, 64],
-  "_playerScale": "The player does far more deeds per day than a villager (a villager's day is one or two chores). Same tracks, same events, same kits; the player's thresholds are thresholds x playerScale. Tuned 2026-10-14 so a median 150-day capable run gets ~8 level-ups (evidence/2026-10-14/unified-tracks.md).",
-  "playerScale": 6,
+  "_thresholds": "ONE XP SCALE for the player and every villager (Steve 2026-10-14: 'Villagers and players should get the same XP, when in doubt we treat them the same way.'). Same thresholds, same per-deed credit, same per-day caps; no player-only multiplier. Tuned so a median 150-day capable-bot run gives the player ~8 level-ups (evidence/2026-10-14/parity.md).",
+  "thresholds": [18, 48, 96, 192, 384],
   "offerSize": 3,
   "maxAbilities": 6,
-  "_kits": "Power order, weakest first; the god-path subclass abilities (2026-10-14) sit after the originals and surface through the path lean (godpath.js shapeOffers) — measured: mid-kit placement cost ~3 wins/16 seeds because villagers took verbs they cannot use (evidence/2026-10-14/godpath-unified.md). Every magic ability sits in exactly one kit (fusion_reactor excluded: one per world, its own pellet offer). Villagers take kit[0], kit[1], ... at thresholds 1-5; the player is offered the next 3 unheld.",
+  "_kits": "Power order, weakest first; the god-path subclass abilities (2026-10-14) sit after the originals and surface through the path lean (godpath.js shapeOffers): mid-kit placement measured fewer wins because villagers took verbs they cannot use (evidence/2026-10-14/godpath-unified.md). Every magic ability sits in exactly one kit (fusion_reactor excluded: one per world, its own pellet offer). Everyone is offered the next 3 unheld.",
   "kits": {
     "combat": ["adrenaline_surge", "rage", "war_cry", "adrenaline_control", "phoenix_clause", "survivor", "cornered_rat", "trade_of_blows", "unbreakable", "blood_frenzy", "retribution", "trophy_room", "blood_magic", "aegis_link", "gravity_well", "raise_earth", "landslide", "back_from_the_brink"],
     "field": ["lucky_rock", "echo_location", "dowsing", "green_thumb", "bloodhound", "bird_whisperer", "night_eyes", "beast_calm", "rain_dancer", "cornucopia", "water_breathing", "squirrel_friend", "bird_strike", "cartographers_eye", "nowhere_man", "hollow_bones", "second_skin", "blink", "pack_hunt"],
@@ -33,7 +32,7 @@
     "craft": ["triage", "steady_hands", "preservation_instinct", "herbal_remedy", "camp_cook"],
     "strange": []
   },
-  "_deeds": "Player deed table: noteDeed(id) credits {track, n}, at most perDay times a day (chores are decisions, not grinding). Villager sites call villagerGainXP(vid, track, n, why) with the same tracks; when the doer is the bearer, that credits the player.",
+  "_deeds": "ONE deed table for everyone: creditDeed(who, id) credits {track, n} to whoever did it (the player or a villager), at most perDay times a day per doer (chores are decisions, not grinding). Same deed, same XP. noteDeed(id) = creditDeed('player', id).",
   "deeds": {
     "foraging":        { "track": "field",   "n": 1, "perDay": 2 },
     "hunting":         { "track": "field",   "n": 1, "perDay": 2 },
@@ -46,7 +45,9 @@
     "healing":         { "track": "craft",   "n": 1, "perDay": 2 },
     "conversation":    { "track": "social",  "n": 1, "perDay": 1 },
     "teaching":        { "track": "social",  "n": 1, "perDay": 1 },
+    "gardening":       { "track": "field",   "n": 1, "perDay": 1 },
     "contest":         { "track": "social",  "n": 1 },
+    "contest_won":     { "track": "social",  "n": 3 },
     "fight_won":       { "track": "combat",  "n": 2, "perDay": 3 },
     "fight_survived":  { "track": "combat",  "n": 1, "perDay": 2 },
     "contest_survived":{ "track": "strange", "n": 1 },

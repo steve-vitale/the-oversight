@@ -1,6 +1,6 @@
 // @ontology
 // system: godpath
-// description: The god-path runtime (2026-10-14 redesign, Steve: "Gods are rough representatives of what starts out as jobs and classes, or playstyles." / "Each god path can have some intended subclasses though that fit the build."). ONE source of truth: src/data/godpaths.json (10 paths x 2 subclasses, each path's god) + the `path`/`subclass` tag on every magic ability. This module (1) names a holder's CLASS when their magic leans clearly to one path ("<Subclass> of <God>", player and villager through the same function), (2) leans level-up and gift offers toward a recognised path with distinct roles, (3) scores an ability for a holder's build (pathLean; Game.buildScore when no richer one exists), and (4) runs the small engine verbs the new subclass abilities declare in data (`do` on an action): walls, pulls, pushes, swaps, blinks, heals, pins, bribes, broadcasts, commands.
+// description: The god-path runtime (2026-10-14 redesign, Steve: "Gods are rough representatives of what starts out as jobs and classes, or playstyles." / "Each god path can have some intended subclasses though that fit the build."). ONE source of truth: src/data/godpaths.json (10 paths x 2 subclasses, each path's god) + the `path`/`subclass` tag on every magic ability. This module (1) names a holder's CLASS when their magic leans clearly to one path ("<Subclass> of <God>", player and villager through the same function), (2) leans level-up and gift offers toward a recognised path with distinct roles, (3) scores how far an ability pulls a holder toward a god (pathLean, read by villager-build.js buildPathLean, the one hook in Game.buildScore), and (4) runs the small engine verbs the new subclass abilities declare in data (`do` on an action): walls, pulls, pushes, swaps, blinks, heals, pins, bribes, broadcasts, commands.
 // provides:
 //   - godpathData() -> godpaths.json record
 //   - abilityPaths(idOrDef) -> [path, alsoPath?] (THE reader for an ability's path; replaces the old `paths` array)
@@ -11,7 +11,6 @@
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
 //   - shapeOffers(choices, pool, who) -> offers with >=1 on the recognised path and distinct roles where possible
-//   - buildScore(who, abilityId, opts) -> defined here only when no richer one exists (parity worker owns the real one)
 //   - registerVerbs() -> registers a generic impl + precheck for every data action with `do` (verbs: aegis, wall, pull, push, pack, heal, blink, swap, foresee, broadcast, command, empower, guard, bribe, feed_camp)
 //   - allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage)
 //   - absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage)
@@ -230,7 +229,11 @@
         if (!dup) continue;
         if (rec && pathOf(out[k]) === rec.path && out.filter(o => pathOf(o) === rec.path).length === 1) continue;
         const roles = new Set(out.map(roleOf));
-        const i = rest.findIndex(p => !roles.has(roleOf(p)) && (!rec || pathOf(p) === rec.path || pathOf(out[k]) !== rec.path));
+        // only a near look-ahead (the next few in kit order): role variety
+        // must not pull the kit's strongest entries forward
+        const near = rest.slice(0, out.length);
+        const j = near.findIndex(p => !roles.has(roleOf(p)) && (!rec || pathOf(p) === rec.path || pathOf(out[k]) !== rec.path));
+        const i = j >= 0 ? rest.indexOf(near[j]) : -1;
         if (i >= 0) out[k] = rest.splice(i, 1)[0];
       }
       return out;
@@ -672,19 +675,6 @@
     shapeOffers(choices, pool, who) { return shapeOffers(choices, pool, who); },
   };
   Object.assign(Game, methods);
-  // buildScore: the parity worker owns the rich version (knowledge, target
-  // build). This minimal one exists only when nothing else defined it, and
-  // its path lean is the separate pathLean helper so the merge is one line.
-  if (typeof Game.buildScore !== 'function') {
-    Game.buildScore = function (who, abilityId, opts) {
-      const d = defOf(abilityId);
-      if (!d) return 0;
-      if (opts && typeof opts.knows === 'function' && !opts.knows(abilityId)) return 0;
-      return pathLean(who, abilityId, opts);
-    };
-    Game.buildScore._minimal = true;
-  }
-
   // Recognition rides the existing acquisition wires: every grant, pick or
   // synergy already calls these two checks.
   const _cp = Game.checkPlayerGodhoodAscension;

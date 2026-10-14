@@ -268,8 +268,12 @@ const ABIL = K.readJSON('src/data/abilities.json');
     Game.state.village.npcAbilities[vid] = ['retribution', 'chitin_skin', 'leech'];
     Game.recognizeClass(vid);
     T.ok('the same function names a villager "Bulwark of the Undying Ward"', Game.classLine(vid) === 'Bulwark of the Undying Ward', String(Game.classLine(vid)));
-    T.ok('buildScore exists and leans on pathLean', typeof Game.buildScore === 'function' && Game.buildScore(vid, 'aegis_link') > Game.buildScore(vid, 'green_thumb'));
-    T.ok('buildScore never scores an unknown ability', Game.buildScore(vid, 'aegis_link', { knows: () => false }) === 0);
+    // villager-build.js buildPathLean is THE hook in buildScore (parity merge)
+    const vk = Game.state.village.npcKnow = Game.state.village.npcKnow || {};
+    vk[vid] = { aegis_link: 2, green_thumb: 2 };
+    T.ok('buildPathLean (the buildScore hook) leans on-path', Game.buildPathLean(vid, 'aegis_link') > Game.buildPathLean(vid, 'green_thumb'), `${Game.buildPathLean(vid, 'aegis_link')}`);
+    vk[vid] = {};
+    T.ok('buildScore (with the lean) never scores an ability they don\'t know', Game.buildScore(vid, 'aegis_link') === 0);
   }
 
   T.section('wiring');

@@ -1056,12 +1056,19 @@
       // VILLAGER XP (Steve 2026-10-09): fighting teaches. Kills teach double.
       // (vDie earns nothing -- the dead are done learning.)
       try {
-        if (vid && vid !== 'player' && this.villagerGainXP) {
-          if (rec.outcome === 'vKill') this.villagerGainXP(vid, 'combat', 2, 'monster kill');
-          else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee') this.villagerGainXP(vid, 'combat', 1, 'survived a fight');
-          else if (rec.outcome === 'evade') this.villagerGainXP(vid, 'field', 1, 'read the signs');
+        // PARITY (2026-10-14): the player's deed table, same n and caps —
+        // a kill is fight_won, a fight walked away from (fled, driven off,
+        // evaded) is fight_survived.
+        if (vid && vid !== 'player' && this.creditDeed) {
+          if (rec.outcome === 'vKill') this.creditDeed(vid, 'fight_won');
+          else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade') this.creditDeed(vid, 'fight_survived');
         }
-      } catch (e) {}
+        // VILLAGER KNOWLEDGE (parity 2026-10-14): whoever fought beside them
+        // watched their abilities work — what each does (L2).
+        if (vid && vid !== 'player' && this.npcWitnessAbility && (opts.allyVids || []).length) {
+          for (var _wi = 0; _wi < vAbs.length; _wi++) this.npcWitnessAbility(vAbs[_wi], opts.allyVids, vid);
+        }
+      } catch (e) { console.warn('[tracks] field fight deed', e); }
       // NON-LETHAL COUNTER LEARNING (Steve 2026-10-13): surviving teaches
       // the trick. A villager who lives through an encounter with a
       // trick-bearing beast brings home an observation — two observations

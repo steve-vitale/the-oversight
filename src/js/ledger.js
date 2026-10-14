@@ -811,26 +811,17 @@
       // SUCCESSOR'S OWN KIT (Steve 2026-10-09): the dead bearer's gear stays
       // on the corpse — the new bearer starts from their own belongings, not
       // an auto-transfer of the old inventory.
+      // YOU BECOME THAT VILLAGER (Steve 2026-10-14: "No I don't think you
+      // should take your XP or the abilities. You become that villager."):
+      // their own abilities, tracks, XP, skills, knowledge and gear; what
+      // they wore stays worn (villager-build.js mantleBecome lists each field).
       try {
-        const sdef = {}; (this.data.items || []).forEach(i => { sdef[i.id] = i; });
-        const kit = (newChar.items || []).slice(0, 5);
-        s.inventory = kit.map(id => {
-          const def = sdef[id] || {};
-          const personal = (newChar.itemPersonal || {})[id];
-          return {
-            itemId: id, units: 1, kcalEach: 0,
-            kg: def.kg != null ? def.kg : 0.2,
-            name: personal ? personal.name : (def.name || id),
-            flavor: personal ? personal.flavor : def.flavor, owner: newId,
-            bonded: true, bond: 0, bondOffered: [], enhancements: [],
-          };
-        });
-        s.equipped = {};
+        if (typeof this.mantleBecome === 'function') this.mantleBecome(oldId, newId);
         // KEEPSAKE GROWTH (Steve 2026-10-14): the successor's keepsakes start
         // worn in free accessory slots, like a new run's (keepsakes.js).
         delete s.ksGrowthV;
         if (typeof this.migrateKeepsakes === 'function') this.migrateKeepsakes();
-      } catch (e) {}
+      } catch (e) { console.warn('[mantle] successor kit', e); }
       // MANTLE IDENTITY SYNC (break-it persistence 2026-10-08): the scholar
       // record kept the DEAD bearer's id — the save index then listed the dead
       // villager as the expedition's scholar, saveKey drifted, and Light
@@ -852,7 +843,7 @@
         if (v.takeHist) v.takeHist[newId] = [];
         if (v.giveHist) v.giveHist[newId] = []; // r9: the dated gives reset with the rest of the book
       } catch (e) {}
-      // the mantle passes: the PROGRESSION is the village's (slots, arc,
+      // the mantle passes: the OFFICE is the village's (slots, arc,
       // integration, ledger, Codex). The body is new.
       // BLOOD-PRICE WOUND (break-it food r3 2026-10-08): the wound is the old
       // body's missing mass — a new body has no Price cuts. Without this the
@@ -913,12 +904,11 @@
         // (and misses newly-completed ones).
         try { this.recomputeActiveSynergies(); } catch (e2) {}
       } catch (e) {}
-      // System abilities pass with the mantle — the System recognizes the
-      // office, not the face. It's alien like that.
-      this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
-      // UNIFIED TRACKS (2026-10-14): the tracks are the office's progression
-      // (scholar.tracks pass with the mantle, like slots and integration), and
-      // the mantle passing is System contact — the strange track.
+      // The office passes (slots, integration, Codex); the build does not —
+      // the new face brings their own abilities and tracks (mantleBecome).
+      this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
+      // UNIFIED TRACKS (2026-10-14): the mantle passing is System contact —
+      // the strange track, on the successor's own record.
       try { if (this.noteDeed) this.noteDeed('mantle'); } catch (eT) { console.warn('[tracks] mantle deed', eT); }
       // DRAMA (Steve 2026-10-07, Round C2): bright emergence — a new scholar awakens.
       try { this.drama('newLife', newName); } catch (e) {}

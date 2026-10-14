@@ -32,8 +32,11 @@
 - **Gods are the icing.** Subclasses exist to give each god path two ways to
   get there. New ability classes are designed per god path, never
   free-floating.
-- **Villagers climb the same ladder** with the same tracks and kits; they take
-  the next kit ability instead of choosing.
+- **Villagers climb the same ladder** with the same tracks, kits, XP scale and
+  1-of-3 sheets; they choose with the build brain (`buildScore`, from what they
+  know and the gear they hold), swap or keep like the player, and when the
+  bearer dies the successor keeps their own build (parity 2026-10-14,
+  `evidence/2026-10-14/parity.md`).
 
 ---
 
@@ -88,3 +91,4 @@ becoming.
 | Keepsake growth | starting now | Accessory-slot keepsakes, worn-only bond, levels 0–3, pool actions, kin clues |
 | God-path redesign | after tracks | Every magic ability gets `path` and `subclass`; capstones; ascension; subclasses filled per path |
 | Table endings | after the redesign | Table path × class/god × light/dark |
+| World regions | engine now; content by Muse in waves | 20 world regions, random landing, origin vs landing knowledge, kin across the world, expeditions at the global stage (`docs/WORLD-REGIONS.md`) |

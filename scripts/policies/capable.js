@@ -452,10 +452,6 @@ function scoreOffer(Game, offer, heldIds) {
     const hd = abilityDef(Game, h);
     for (const pth of pathsOf(hd)) if (paths.indexOf(pth) >= 0) sc += 3;
   }
-  // GOD-PATH (2026-10-14): advance the recognised class. The engine's own
-  // pathLean (knowledge-gated; offers on the sheet are known by definition).
-  try { if (Game.pathLean) sc += 2 * (Game.pathLean('player', offer.id, { held: heldIds.filter(h => ((abilityDef(Game, h) || {}).lane === 'magic')) }) || 0); }
-  catch (e) { /* no god-path module: score without the lean */ }
   if ((def.actions || []).some(a => (a.context || 'explore') === 'combat' && !a.automatic)) sc += 4;
   if (def.role === 'payoff') sc += 1; else if (def.role === 'enabler') sc += 0.5;
   if (def.pool === 'combat') sc += 1;
@@ -473,14 +469,27 @@ function chooseOffers(Game, ctx) {
     // scholar.abilities: human abilities may move to skills and still answer.
     const held = heldAbilityIds(Game);
     if (ctx._capOfferSig === JSON.stringify(ch.map(c => c.id)) && ctx._capOfferDay === day(Game)) return; // refused today (no slot): don't spin
+    // ONE BRAIN (parity 2026-10-14): the game's build brain (villager-build.js
+    // buildScore / buildDecide) scores for the bot exactly as it does for
+    // villagers. The local scorer is the fallback for older code.
+    const brain = typeof Game.buildScore === 'function' && typeof Game.buildDecide === 'function';
     let best = null;
-    for (const o of ch) { const sc = scoreOffer(Game, o, held); if (!best || sc > best.sc) best = { o, sc }; }
+    for (const o of ch) {
+      const sc = brain ? Game.buildScore('player', o.id, { onSheet: true }) : scoreOffer(Game, o, held);
+      if (!best || sc > best.sc) best = { o, sc };
+    }
     // UNIFIED TRACKS (2026-10-14): a level-up sheet with full slots asks what
     // the pick replaces. Score the held abilities the same way (against the
     // rest of the build) and swap only when the offer beats the weakest;
     // otherwise keep what we have.
     const isLevelUp = String(ch[0].src || '').indexOf('level_up:') === 0;
     const slotsFull = ((Game.state.scholar || {}).abilities || []).length >= (Game.abilitySlots ? Game.abilitySlots() : 6);
+    if (isLevelUp && slotsFull && Game.keepAbilities && brain) {
+      const d = Game.buildDecide('player', ch.map(c => c.id));
+      if (d.pick && d.replace) { Game.chooseAbility(d.pick, d.replace); bump(ctx, 'capLevelUpReplaced'); bumpMap(ctx, 'capOfferPicks', d.pick); }
+      else { Game.keepAbilities(); bump(ctx, 'capLevelUpKept'); }
+      return;
+    }
     if (isLevelUp && slotsFull && Game.keepAbilities) {
       const mine = ((Game.state.scholar || {}).abilities || []).map(e => (e && e.id) || e).filter(id => id && id !== 'fusion_reactor');
       let worst = null;
