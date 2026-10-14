@@ -30915,9 +30915,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!f || f.over || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
       if (!p) return false;
-      // Must be on the edge you're pushing through.
-      const onEdge = (dx < 0 && p.mx === 0) || (dx > 0 && p.mx === 8) ||
-                     (dy < 0 && p.my === 0) || (dy > 0 && p.my === 8);
+      // Must be on the edge you're pushing through. GRID BOUND (capable bot
+      // 2026-10-14): the far edge is the fight's real grid max — titan fights
+      // run 12x12 (tbGridSize), where the old hard-coded 8 was an interior
+      // line and the real edge (11) never counted: no barrier exit, ever.
+      const gmax = this.tbGridMax();
+      const onEdge = (dx < 0 && p.mx === 0) || (dx > 0 && p.mx === gmax) ||
+                     (dy < 0 && p.my === 0) || (dy > 0 && p.my === gmax);
       if (!onEdge) return false;
       // SEALED (Steve 2026-10-11): a sealed fight is sealed — the barrier
       // holds, no edge-flee. The red barrierSealed outline says so visually;
@@ -31055,8 +31059,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const md = m.mdef || {};
         const mSpeed = m.speed || md.speed || 3;
         const shift = Math.max(-2, Math.min(2, mSpeed - pSpeed)); // +: gained on you
-        m.mx = Math.max(0, Math.min(8, 4 - dx * 3 + dx * shift + Math.floor(Math.random() * 3) - 1));
-        m.my = Math.max(0, Math.min(8, 4 - dy * 3 + dy * shift + Math.floor(Math.random() * 3) - 1));
+        const gc = Math.floor(gmax / 2); // grid centre (4 on the 9x9)
+        m.mx = Math.max(0, Math.min(gmax, gc - dx * 3 + dx * shift + Math.floor(Math.random() * 3) - 1));
+        m.my = Math.max(0, Math.min(gmax, gc - dy * 3 + dy * shift + Math.floor(Math.random() * 3) - 1));
         const subj = this.encSubject(m);
         if ((m._pursuit || 99) === 1) this.say(`${subj} is flagging — it won't follow much further.`);
         else if (shift > 0) this.say(`${subj} is gaining on you.`);
@@ -31065,8 +31070,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const m of gaveUp) this.say(`${this.encSubject(m)} gives up the chase, melting back into the treeline.`);
       if (stayers.length) this.say('The slow ones are left behind.');
       // Player enters from the opposite edge
-      p.mx = Math.max(0, Math.min(8, 4 + dx * 3));
-      p.my = Math.max(0, Math.min(8, 4 + dy * 3));
+      p.mx = Math.max(0, Math.min(gmax, Math.floor(gmax / 2) + dx * 3));
+      p.my = Math.max(0, Math.min(gmax, Math.floor(gmax / 2) + dy * 3));
       this.state.scholar.mx = p.mx; this.state.scholar.my = p.my;
       this.tbRefreshTelegraphUI();
       return true;

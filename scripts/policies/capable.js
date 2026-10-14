@@ -138,7 +138,8 @@ function stepToward(Game, p, tx, ty) {
 // ---------- per-fight state ----------
 function fightState(Game, ctx, f) {
   if (!ctx._cap || ctx._cap.f !== f) {
-    ctx._cap = { f, turn: 0, used: {}, refused: {}, sig: {}, fleeing: false, hpHist: [], escapeTried: false };
+    ctx._cap = { f, turn: 0, used: {}, refused: {}, sig: {}, fleeing: false, hpHist: [], escapeTried: false, feastCommit: !!ctx._capFeastCommit };
+    ctx._capFeastCommit = false;
     bump(ctx, 'capFights');
   }
   return ctx._cap;
@@ -165,6 +166,9 @@ function shouldFlee(Game, ctx, st, f, p, mons) {
   if (st.fleeing) return true;
   const pmax = p.maxHp || 100;
   const hp = (p.hp || 0) / Math.max(1, pmax);
+  // FEAST COMMIT (deed hunt): a fight picked to spend the feast buff holds
+  // until a blow lands (feastSurgeUsed) — unless HP drops under half.
+  if (st.feastCommit && feastPending(Game) && hp >= 0.5) return false;
   if (st.turn === 1) {
     let totalMhp = 0, maxWave = 1;
     for (const m of mons) { totalMhp += m.maxHp || m.hp || 0; maxWave = Math.max(maxWave, monWave(Game, m)); }
@@ -187,9 +191,11 @@ function realFlee(Game, ctx, st, f, p) {
   try { dir = C.chooseFleeDir(Game, Game.map.px, Game.map.py); } catch (e) { note(ctx, 'chooseFleeDir: ' + e.message); }
   if (!dir) { bump(ctx, 'capFleeHeld'); st.fleeing = false; return false; } // at haven: hold ground
   if (!st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); }
-  const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? 8 : p.mx;
-  const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? 8 : p.my;
-  const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === 8) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === 8)); };
+  let gmax = 8;
+  try { gmax = Game.tbGridMax ? Game.tbGridMax() : 8; } catch (e) { gmax = 8; } // titan fights are 12x12
+  const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? gmax : p.mx;
+  const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? gmax : p.my;
+  const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === gmax) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === gmax)); };
   if (!onEdge()) { if (stepToward(Game, p, tx, ty)) bump(ctx, 'capFleeSteps'); }
   if (!Game.tbfight || Game.tbfight.over) { bump(ctx, 'capFleeExits'); st.fleeing = false; return true; } // a door, mid-walk
   if (onEdge() && Game.tbIsPlayerTurn()) {
@@ -640,6 +646,172 @@ function relayRoad(Game, ctx) {
   } catch (e) { note(ctx, 'relayRoad: ' + e.message); }
 }
 
+// ---------- 6. DEED HUNT: the food deed + the wave bars ----------
+// Diagnosis (2026-10-14, 8-seed sweep): capable runs reach national rank,
+// stage 3, 6 contests, 4 crises — and stop at Arc III. The Table's seat bars
+// still missing: foodDeeds (sentimentTaught && feastSurgeUsed) and distinct
+// wave-3 monsters faced. sentimentTaught fires at integration 60 and the
+// devotion channel arms the surge (prog.feastSurge) by ~day 20; leadfeast
+// hosts armed feasts; but feastSurgeUsed only marks on a REAL combat use
+// while FEASTED (a player strike that lands, or an ability) — and the
+// player almost never fights (0–11 fights per 150 days). feastFightRoad's
+// forage-and-hope patrol rarely meets anything.
+//
+// So, deliberately: while FEASTED and the buff is unused, walk to the
+// nearest known world monster (weakest wave first) and start the fight
+// (the phone's "Fight" cell action calls startCombat the same way). The
+// fight is committed until a strike lands or HP < 50% (st.feastCommit).
+// And when a wave's lesser-seat bar (4/4/3 distinct) is short and that
+// wave is unlocked, engage a NOT-YET-FACED monster of that wave — the
+// engine counts the engagement (progression.js: "fleeing still counts —
+// you stood on the grid with it"), so the normal flee logic still guards
+// the scholar. Guards: HP >= 70%, kcal >= 40% cap, one sortie per day part,
+// at most HUNT_MAX_DIST nodes from where we stand. After a sortie the
+// scholar walks home on the next quiet upkeep.
+const HUNT_MAX_DIST = 4;
+const SEAT_BARS = { 1: 4, 2: 4, 3: 3 }; // tableSeat lesser bars (table.js)
+function feastPending(Game) {
+  try {
+    const s = Game.state.scholar || {};
+    if (s.prog && s.prog.feastSurgeUsed) return false;
+    if (!(Game.feastedActive && Game.feastedActive())) return false;
+    return !((s.feastBuff || {}).used);
+  } catch (e) { return false; }
+}
+function waveBarsShort(Game) {
+  // waves whose lesser-seat bar is unmet and which are unlocked
+  const out = {};
+  try {
+    const g = Game.deedGateReady();
+    const uw = Game.unlockedWave ? Game.unlockedWave() : 1;
+    const have = { 1: g.w1, 2: g.w2, 3: g.w3 };
+    for (const w of [1, 2, 3]) if (w <= uw && (have[w] | 0) < SEAT_BARS[w]) out[w] = true;
+  } catch (e) { /* no deed state yet */ }
+  return out;
+}
+function huntTargets(Game, pred) {
+  const faced = (() => { try { return Game.deedState().wavesFaced || {}; } catch (e) { return {}; } })();
+  const px = Game.map.px, py = Game.map.py;
+  const out = [];
+  let wm = [];
+  try { wm = Game.worldMonsters() || []; } catch (e) { wm = []; }
+  for (const m of wm) {
+    if (!m || !m.id || m.tx == null) continue;
+    const md = ((Game.data || {}).monsters || []).find(d => d && d.id === m.id);
+    if (!md) continue;
+    const t = (() => { try { return Game.tileAt(m.tx, m.ty); } catch (e) { return null; } })();
+    if (t && (t.type === 'haven' || t.isHaven)) continue;
+    const dist = Math.abs(m.tx - px) + Math.abs(m.ty - py);
+    if (dist > HUNT_MAX_DIST) continue;
+    const w = md.wave || 1;
+    if (!pred({ m, md, w, faced: !!faced[m.id] })) continue;
+    out.push({ m, w, dist, faced: !!faced[m.id] });
+  }
+  return out;
+}
+function deedHunt(Game, ctx) {
+  if (process.env.CAPABLE_HUNT === '0') return; // A/B gate: hunt layer off
+  try {
+    if (Game.over || (Game.tbfight && !Game.tbfight.over)) return;
+    if (Game.state.activeContest) return;
+    const s = Game.state.scholar || {};
+    const key = day(Game) + ':' + Game.dayPart;
+    // walk home after a sortie (quiet upkeep, no goal left)
+    const wantFeast = feastPending(Game);
+    const short = waveBarsShort(Game);
+    const wantWave = Object.keys(short).length > 0 && !!((Game.progState() || {}).sentimentTaught || day(Game) >= 30);
+    if (!wantFeast && !wantWave) {
+      if (ctx._capHuntAway && !ctx._capHuntAwayHome) { ctx._capHuntAwayHome = 1; C.walkTo(Game, 4, 4); ctx._capHuntAway = 0; ctx._capHuntAwayHome = 0; }
+      return;
+    }
+    if (ctx._capHuntKey === key) return; // one sortie per day part
+    ctx._capHuntKey = key;
+    if (hpFrac(Game) < 0.7) return;
+    const cap = Game.kcalCap ? Game.kcalCap() : 2000;
+    if ((s.kcal || 0) < cap * 0.4) return;
+    let cands = [];
+    if (wantFeast) {
+      cands = huntTargets(Game, (x) => x.w <= Math.max(1, Math.min(2, Game.unlockedWave ? Game.unlockedWave() : 1)));
+      cands.sort((a, b) => (a.w - b.w) || (a.dist - b.dist));
+    }
+    let goal = wantFeast && cands.length ? 'feast' : null;
+    if (!goal && wantWave) {
+      cands = huntTargets(Game, (x) => short[x.w] && !x.faced);
+      cands.sort((a, b) => (a.dist - b.dist) || (a.w - b.w));
+      if (cands.length) goal = 'wave';
+    }
+    if (!goal) { bump(ctx, 'capHuntNoTarget'); return; }
+    const tg = cands[0];
+    bump(ctx, 'capHuntSorties');
+    if (Game.map.px !== tg.m.tx || Game.map.py !== tg.m.ty) C.walkTo(Game, tg.m.tx, tg.m.ty);
+    if (Game.tbfight && !Game.tbfight.over) { ctx._capHuntAway = 1; bump(ctx, 'capHuntAmbushed'); return; } // something found us first
+    if (Game.map.px !== tg.m.tx || Game.map.py !== tg.m.ty) { bump(ctx, 'capHuntUnreached'); return; }
+    const here = Game.playerMonster ? Game.playerMonster() : Game.monsterAt(Game.map.px, Game.map.py);
+    if (!here) { bump(ctx, 'capHuntGone'); return; }
+    ctx._capHuntAway = 1;
+    ctx._capFeastCommit = goal === 'feast';
+    // WALK CLOSER, THEN FIGHT — the phone's flow (app.js walkCloser +
+    // the cell popup's "Fight", offered only within 1 square). A monster
+    // with no grid position is not approached (startCombat would stack
+    // everyone on one tile).
+    if (here.mx == null || here.my == null) { bump(ctx, 'capHuntNoPos'); ctx._capFeastCommit = false; return; }
+    const sx = () => (Game.state.scholar.mx != null ? Game.state.scholar.mx : 4), sy = () => (Game.state.scholar.my != null ? Game.state.scholar.my : 4);
+    const near = () => Math.max(Math.abs(here.mx - sx()), Math.abs(here.my - sy())) <= 1;
+    if (!near()) {
+      let best = null, bd = 1e9;
+      try {
+        const detail = Game.genDetail(Game.map.px, Game.map.py);
+        for (const [dx, dy] of [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+          const nx = here.mx + dx, ny = here.my + dy;
+          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+          if (Game.cellProps(detail[ny][nx]).blocks) continue;
+          const pth = Game.findPath(sx(), sy(), nx, ny);
+          if (pth && pth.length && pth.length < bd) { bd = pth.length; best = [nx, ny]; }
+        }
+      } catch (e) { note(ctx, 'hunt approach: ' + e.message); }
+      const path = best ? Game.beginPathWalk(best[0], best[1]) : null;
+      for (const st of (path || [])) {
+        if (Game.over || (Game.tbfight && !Game.tbfight.over)) break;
+        if (!Game.pathStep(st[0], st[1])) break;
+      }
+    }
+    if (Game.tbfight && !Game.tbfight.over) { bump(ctx, 'capHuntNoticed'); bump(ctx, goal === 'feast' ? 'capHuntFeastFights' : 'capHuntWaveFights'); return; } // it came to us
+    if (!near()) { bump(ctx, 'capHuntUnreached'); ctx._capFeastCommit = false; return; }
+    Game.startCombat(here.id);
+    if (Game.tbfight && !Game.tbfight.over) {
+      bump(ctx, goal === 'feast' ? 'capHuntFeastFights' : 'capHuntWaveFights');
+      bumpMap(ctx, 'capHuntById', here.id);
+    }
+  } catch (e) { note(ctx, 'deedHunt: ' + e.message); }
+}
+
+// FINISH THE FIGHT BEFORE BED: a fight that starts during the daily round
+// (a forage trip, the walk home after a flee, a hunt's return) used to sit
+// live until the harness's next upkeep — and Game.sleep refuses mid-fight
+// ("Not in the middle of a fight."), so the whole loop-day passed without a
+// game day: 150 loop-days measured as 69–133 game days on the 8-seed sweep
+// (competent: 152). A player finishes the fight; so does the bot. Same
+// default as the harness driver: our fight hook, else strike the nearest.
+function finishLiveFight(Game, ctx) {
+  let guard = 0, still = 0, last = '';
+  try {
+    while (Game.tbfight && !Game.tbfight.over && !Game.over && guard++ < 300) {
+      if (!Game.tbIsPlayerTurn()) { try { Game.tbAdvance(); } catch (e) { note(ctx, 'finish tbAdvance: ' + e.message); break; } if (!Game.tbfight || Game.tbfight.over || !Game.tbIsPlayerTurn()) break; }
+      let handled = false;
+      try { handled = capableFight(Game, ctx); } catch (e) { note(ctx, 'finish fight: ' + e.message); }
+      if (!handled && Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
+        const t = Game.tbfight.fighters.find(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled && (x.hp || 0) > 0);
+        if (t) { try { Game.tbPlayerStrike(t.key); } catch (e) { note(ctx, 'finish strike: ' + e.message); } }
+        endTurn(Game);
+      }
+      const f = Game.tbfight;
+      const sig = f ? f.round + ':' + f.fighters.map(x => Math.round(x.hp || 0) + '@' + x.mx + ',' + x.my).join(';') : 'none';
+      if (sig === last) { if (++still > 10) { bump(ctx, 'capFinishStalled'); break; } } else { still = 0; last = sig; }
+    }
+    if (guard > 1) bump(ctx, 'capFightsFinishedAtDusk');
+  } catch (e) { note(ctx, 'finishLiveFight: ' + e.message); }
+}
+
 // ---------- the policy ----------
 const capable = Object.assign({}, BASE, {
   id: 'capable',
@@ -650,6 +822,7 @@ const capable = Object.assign({}, BASE, {
   upkeep(Game, ctx) {
     chooseOffers(Game, ctx); // before competent's ch[0] pick in daily
     withEnv(() => BASE.upkeep(Game, ctx));
+    deedHunt(Game, ctx); // in upkeep: the harness drives the fight right after
   },
   daily(Game, ctx) {
     chooseOffers(Game, ctx);
@@ -658,6 +831,7 @@ const capable = Object.assign({}, BASE, {
     capableTalk(Game, ctx);
     relayRoad(Game, ctx);
     tableRoad(Game, ctx);
+    finishLiveFight(Game, ctx);
   },
   fight(Game, ctx) {
     try { return capableFight(Game, ctx); } catch (e) { note(ctx, 'capableFight: ' + e.message); return false; }
@@ -670,7 +844,7 @@ function capableSummary(ctx) {
   const k = ['capFights', 'capFleeDecisions', 'capFleeSteps', 'capFleePushes', 'capFleeExits', 'capFleeNodeExits', 'capFleeChased', 'capFleeHeld',
     'capAbilityUses', 'capAbilityRefused', 'capAbilityHungerSkips', 'capSigUses', 'capOffersChosen', 'capOffersNotFirst', 'capRelicChosen',
     'capContestChoices', 'capContestNotFirst', 'capContestRefusals', 'capTableAnswers', 'capTableNotFirst', 'capSeatTaken',
-    'capConvos', 'capConvosHeld', 'deepTurns', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes'];
+    'capConvos', 'capConvosHeld', 'deepTurns', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes'];
   const out = {};
   for (const x of k) out[x] = (ctx && ctx[x]) || 0;
   return out;

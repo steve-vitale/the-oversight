@@ -12,8 +12,9 @@
 //      strength, not position; contest phase by reward-vs-harm.
 //   4. CONVERSATION: a held sitting with real turns, target by need.
 //   5. competent.beastStrikeTarget: steps within moveLeft (was a "Too far" no-op).
-// Short sims (2 seeds x 40 days): contests answered, conversations held, no
-// policy-side errors.
+//   6. A fight started during the daily round is finished before bed.
+// Short sims (2 seeds x 40 days): contests answered, conversations held, game
+// days keep pace with loop days, the food deeds get earned, no policy errors.
 'use strict';
 const K = require('./godpath/lib');
 const H = K.H;
@@ -153,10 +154,21 @@ function drive(Game, ctx, maxIter) {
     T.ok('destination within this turn\'s 3 squares (was 5 away: "Too far" no-op)', moves[0] && Math.abs(moves[0][0] - 1) <= 3, JSON.stringify(moves));
   }
 
+  // ---------- 6. a fight that starts in the daily round is finished before bed ----------
+  T.section('6. no fight left live at bedtime (sleep would refuse: a lost game day)');
+  {
+    K.newRun(Game);
+    Game.map.px = 4; Game.map.py = 6;
+    K.fight(Game, 'hushwolf', { px: 3, py: 4, mx: 5, my: 4, hp: 100 });
+    const ctx = { notes: [] };
+    capable.daily(Game, ctx);
+    T.ok('fight resolved by the end of daily', !Game.tbfight || Game.tbfight.over, JSON.stringify(capableSummary(ctx)));
+  }
+
   // ---------- short sims ----------
   T.section('short sims: 2 seeds x 40 days');
   {
-    let contests = 0, held = 0, errs = [], days = 0;
+    let contests = 0, held = 0, errs = [], days = 0, gdays = 0, food = 0;
     for (const seed of [42, 1234]) {
       const { Game: G } = await H.quietLog(() => H.loadGame({ seed, mode: 'test-capable' }));
       await H.setupGame(G);
@@ -164,11 +176,15 @@ function drive(Game, ctx, maxIter) {
       const pol = Object.assign({}, capable, { setup(g, c) { cx = c; return capable.setup(g, c); } });
       const r = await H.runDays(G, pol, { days: 40 });
       days += r.days;
+      gdays += r.gameDays || 0;
+      try { const pg = G.progState(); if (pg.sentimentTaught && (G.state.scholar.prog || {}).feastSurgeUsed) food++; } catch (e) { /* run ended */ }
       contests += cx.capContestChoices || 0;
       held += cx.capConvosHeld || 0;
       errs = errs.concat(cx.capErrors || []);
     }
     T.ok('runs completed', days > 40, String(days));
+    T.ok('game days keep pace with loop days (no fight left live at sleep)', gdays >= days - 6, `loop ${days} game ${gdays}`);
+    T.ok('food deeds (sentimentTaught + feastSurgeUsed) earned in >= 1 run by day 40', food >= 1, String(food));
     T.ok('contest choices taken by scoring', contests > 0, String(contests));
     T.ok('conversations held in-sim', held > 0, String(held));
     T.ok('no policy-side errors', errs.length === 0, JSON.stringify(errs.slice(0, 5)));
