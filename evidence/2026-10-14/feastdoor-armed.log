@@ -1,0 +1,118 @@
+-- feastdoor-armed leadcourt seed 11 (180d) --
+   days=128 end=village-lost wave=5 arc=3 rank=global table=0 seat=none foodDeeds=0 attributed=0 fdFeasts=4 standing=287(w25/d102/p160)
+-- feastdoor-armed leadcourt seed 22 (180d) --
+   days=123 end=village-lost wave=5 arc=3 rank=regional table=0 seat=none foodDeeds=1 attributed=1 fdFeasts=4 standing=250(w50/d0/p200)
+-- feastdoor-armed leadcourt seed 33 (180d) --
+   days=32 end=village-lost wave=2 arc=3 rank=village table=0 seat=none foodDeeds=0 attributed=0 fdFeasts=0 standing=20(w0/d0/p20)
+-- feastdoor-armed leadcourt seed 44 (180d) --
+   days=68 end=village-lost wave=5 arc=3 rank=regional table=0 seat=none foodDeeds=1 attributed=0 fdFeasts=3 standing=247(w25/d102/p120)
+-- feastdoor-armed leadcourt seed 55 (180d) --
+   days=180 end=survived wave=5 arc=4 rank=global table=1 seat=full foodDeeds=1 attributed=0 fdFeasts=5 standing=322(w0/d102/p220)
+-- feastdoor-armed leadcourt seed 66 (180d) --
+   days=51 end=village-lost wave=2 arc=3 rank=regional table=0 seat=none foodDeeds=1 attributed=0 fdFeasts=1 standing=80(w0/d0/p80)
+-- feastdoor-armed leadcourt seed 77 (180d) --
+   days=79 end=village-lost wave=5 arc=3 rank=national table=0 seat=none foodDeeds=1 attributed=0 fdFeasts=3 standing=222(w0/d102/p120)
+-- feastdoor-armed leadcourt seed 88 (180d) --
+   days=69 end=village-lost wave=4 arc=3 rank=regional table=0 seat=none foodDeeds=0 attributed=0 fdFeasts=0 standing=187(w25/d102/p60)
+-- feastdoor-armed belongseek seed 11 (180d) --
+   days=148 end=village-lost wave=5 arc=3 rank=global table=0 seat=none foodDeeds=1 attributed=1 fdFeasts=4 standing=214(w0/d34/p180)
+-- feastdoor-armed belongseek seed 22 (180d) --
+   days=108 end=village-lost wave=5 arc=4 rank=regional table=1 seat=full foodDeeds=1 attributed=0 fdFeasts=6 standing=290(w50/d0/p240)
+-- feastdoor-armed belongseek seed 33 (180d) --
+   days=130 end=village-lost wave=4 arc=3 rank=national table=0 seat=none foodDeeds=0 attributed=0 fdFeasts=3 standing=100(w0/d0/p100)
+-- feastdoor-armed belongseek seed 44 (180d) --
+   days=119 end=village-lost wave=4 arc=3 rank=global table=0 seat=none foodDeeds=1 attributed=1 fdFeasts=4 standing=120(w0/d0/p120)
+-- feastdoor-armed belongseek seed 55 (180d) --
+   days=92 end=village-lost wave=4 arc=3 rank=global table=0 seat=none foodDeeds=1 attributed=0 fdFeasts=0 standing=140(w0/d0/p140)
+-- feastdoor-armed belongseek seed 66 (180d) --
+   days=135 end=village-lost wave=4 arc=3 rank=global table=0 seat=none foodDeeds=1 attributed=1 fdFeasts=3 standing=100(w0/d0/p100)
+-- feastdoor-armed belongseek seed 77 (180d) --
+   days=108 end=village-lost wave=4 arc=3 rank=national table=0 seat=none foodDeeds=0 attributed=0 fdFeasts=2 standing=120(w0/d0/p120)
+-- feastdoor-armed belongseek seed 88 (180d) --
+   days=41 end=village-lost wave=2 arc=3 rank=village table=0 seat=none foodDeeds=1 attributed=0 fdFeasts=0 standing=20(w0/d0/p20)
+
+===== AGGREGATE feastdoor-armed =====
+{
+ "n": 16,
+ "survivalDays": [
+  128,
+  123,
+  32,
+  68,
+  180,
+  51,
+  79,
+  69,
+  148,
+  108,
+  130,
+  119,
+  92,
+  135,
+  108,
+  41
+ ],
+ "medianSurvival": 108,
+ "maxSurvival": 180,
+ "national": 9,
+ "table": 2,
+ "wins": 0,
+ "exiled": 0,
+ "foodDeeds": 11,
+ "attributed": 4,
+ "seats": [
+  "leadcourt-s55:full",
+  "belongseek-s22:full"
+ ],
+ "wave4": 13,
+ "wave5": 7,
+ "maxWave": 5,
+ "maxArc": 4,
+ "starveDeaths": 11,
+ "hungryDays": 40,
+ "fdFeasts": 42,
+ "fdFeastKcal": 105400,
+ "fdGateHeld": 41,
+ "fdGateLinger": 3,
+ "fdGateGorge": 2,
+ "fdGateRaid": 36,
+ "standing": {
+  "total": 187,
+  "war": 0,
+  "diplomacy": 0,
+  "plenty": 120,
+  "maxTotal": 322
+ },
+ "deaths": {
+  "villager combat": 12,
+  "monster": 35,
+  "combat": 96,
+  "sickness": 21,
+  "a wound that wouldn't close": 15,
+  "ambush": 1,
+  "starvation": 11,
+  "expedition": 1,
+  "contest": 4,
+  "the expedition": 1
+ },
+ "perPid": [
+  {
+   "pid": "leadcourt",
+   "n": 8,
+   "national": 3,
+   "table": 1,
+   "foodDeeds": 5,
+   "attributed": 1,
+   "fdFeasts": 20
+  },
+  {
+   "pid": "belongseek",
+   "n": 8,
+   "national": 6,
+   "table": 1,
+   "foodDeeds": 6,
+   "attributed": 3,
+   "fdFeasts": 22
+  }
+ ]
+}
