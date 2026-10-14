@@ -23738,6 +23738,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // eat most-perishable first until the bar is full or food runs out
       scholar.inventory.sort((a, b) => (a.spoilDay ?? 99999) - (b.spoilDay ?? 99999));
       let ate = 0;
+      // MEALNAME (flesh-out 2026-10-13): what was eaten, in first-eaten
+      // order — displayed in the meal beat, knowledge-gated via
+      // itemDisplayName. Each stack contributes its units to one entry.
+      const ateItems = [];
       // SHELLGUT (Steve 2026-10-08): an armored gut absorbs less (-25%) but
       // nothing ingested — poison or food-borne disease — can touch you.
       const shellgut = this.hasStatus && this.hasStatus('scholar', 'shellgut');
@@ -23841,6 +23845,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         it.units -= 1;
         if (it.units <= 0) scholar.inventory.splice(foodIdx, 1);
+        // MEALNAME (flesh-out 2026-10-13): record what was eaten for the
+        // meal beat — the knowledge-gated display name, never the true name
+        // the player hasn't earned. `it` is still a valid reference even
+        // when the splice above removed it from the inventory.
+        try {
+          const _mealName = this.itemDisplayName ? this.itemDisplayName(it) : (it.name || 'something');
+          const _seen = ateItems.find(x => x.name === _mealName);
+          if (_seen) _seen.units += 1; else ateItems.push({ name: _mealName, units: 1 });
+        } catch (e) {}
       }
       // THE BANK: the bar is the reserve. Past "fed", every bite is war chest.
       if (scholar.kcal > cap) scholar.kcal = cap;
@@ -23911,7 +23924,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const inedibleNote = inedible.length
         ? ` (${[...new Set(inedible.map(i => i.name))].join(', ')} — not food yet: ${inedible[0].foodState === 'unknown' ? 'identify it first — test cautiously from your pack, or sort it at camp' : inedible[0].prep || 'process it'}.)`
         : '';
-      this.say(ate > 0 ? `You eat (${ate} kcal).${bankNote}` + spoilNote
+      // MEALNAME (flesh-out 2026-10-13): name the meal honestly — distinct
+      // items in first-eaten order, each wearing its knowledge-gated
+      // display name (unknown food shows its descriptor, never the true
+      // name). Cannibal-only / unnamed edge: fall back to the old beat.
+      const _mealNames = ateItems.map(e => e.name);
+      const _mealWhat = _mealNames.length <= 2 ? _mealNames.join(' and ')
+        : _mealNames.slice(0, -1).join(', ') + ', and ' + _mealNames[_mealNames.length - 1];
+      const _mealBeat = (ate > 0 && _mealNames.length) ? `You eat ${_mealWhat} (${ate} kcal).` : `You eat (${ate} kcal).`;
+      this.say(ate > 0 ? _mealBeat + bankNote + spoilNote
                        : (nothingEdible ? 'Nothing edible.' + inedibleNote + spoilNote
                        : (scholar.inventory.length ? 'You are full enough.' + spoilNote : 'Nothing to eat. The pantry of your pack is empty.' + spoilNote)));
       // loud_chewer: eating is 2x louder. Monsters hear you. But +5 energy — morale is real.
