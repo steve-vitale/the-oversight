@@ -5015,7 +5015,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         belong: `"You're one of us. That's not changing."`,
         survive: `"We make it. All of us. That's the deal."`,
       };
-      v.promises[vid] = { goal, day: this.state.scholar.day, kept: false };
+      v.promises[vid] = { goal, day: this.state.scholar.day, kept: false, maker: this.villagerId };
       this.discover('promise');
       this.say(`${first} looks at you for a long moment. ${promiseLines[goal] || `"I'll help. I mean it."`} Something in them settles — hope is a heavy thing to carry alone.`);
       this.remember(vid, 'promise', 'promised to help: ' + goal);
@@ -5131,7 +5131,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } else {
             this.say(`${this.displayName(pid)} doesn't say anything. But they stopped looking at you the way they used to. Promises rot. (-15 trust)`);
           }
-          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak, maker: this.villagerId });
+          this.remember(pid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak, maker: p.maker || this.villagerId });
           }
         }
       }

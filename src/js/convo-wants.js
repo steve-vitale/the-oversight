@@ -1262,7 +1262,7 @@
       if (oldP && !oldP.kept) return { ok: false, blocked: true };
       if (oldP) delete v.promises[vid];
       v.promises[vid] = {
-        goal: favor.goal, day: day, kept: false,
+        goal: favor.goal, day: day, kept: false, maker: this.villagerId,
         favorId: favor.id, favorTask: favor.task, favorDeadline: favor.deadline,
       };
       favor.state = 'promised';
@@ -1283,8 +1283,14 @@
       const favor = this.convoGetFavor(vid);
       if (favor && favor.id === p.favorId) favor.state = 'broken';
       const t = v.trust || (v.trust = {});
+      // RENOUNCE MAKER (journey-succession r11 2026-10-14): the broken word is
+      // the renouncer's — stamp maker like the rot path does (game.js), so a
+      // successor isn't refused amends for a promise they never made (canon:
+      // "it's not yours to carry"). trustAtBreak is the pre-penalty standing,
+      // matching the rot path — the decay refusal reads it later.
+      const trustAtBreakRen = (t[vid] == null ? 10 : t[vid]);
       t[vid] = Math.max(0, (t[vid] || 10) - 15);
-      try { this.remember(vid, 'promise_broken', p.favorTask || p.goal); } catch (e) {}
+      try { this.remember(vid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak: trustAtBreakRen, maker: p.maker || this.villagerId }); } catch (e) {}
       try { this.journalLearn(vid, 'promise', { text: p.favorTask || 'a promise', status: 'broken' }, {}); } catch (e) {}
       try { this.say(`${this.displayName(vid)} goes quiet. "...Okay." The air between you cools a degree.`); } catch (e) {}
       return true;
