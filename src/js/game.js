@@ -13820,7 +13820,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let _pk = 8000;
       try { _pk = Math.max(1000, this.pantryKcalLive(v)); } catch (e) {}
       if (net < -Math.min(5000, _pk)) {
-        v.trust[vid] = Math.max(0, (v.trust[vid] || 15) - 2);
+        // ZERO-TRUST STAYS ZERO (same doctrine as bumpTrust + the revoke
+        // path below): (v.trust[vid] || 15) resurrected a 0-trust villager
+        // to 13 on every take — a hated leader could never stay hated.
+        const curTake = v.trust[vid] === undefined ? 15 : v.trust[vid];
+        v.trust[vid] = Math.max(0, curTake - 2);
         if (Math.random() < 0.3) this.say('Someone watches you load up. They say nothing.');
         this.observe('hoard');
       }
@@ -13919,7 +13923,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             this.say('Caught red-handed! They saw you steal. Trust -20.');
           }
         } else {
-          v.trust[vid] = Math.max(0, (v.trust[vid] || 15) - 2);
+          // ZERO-TRUST STAYS ZERO (same doctrine as bumpTrust + the revoke
+          // path below): (v.trust[vid] || 15) resurrected a 0-trust villager
+          // to 13 on every take — a hated leader could never stay hated.
+          const curTake = v.trust[vid] === undefined ? 15 : v.trust[vid];
+          v.trust[vid] = Math.max(0, curTake - 2);
           if (Math.random() < 0.3) this.say('Someone watches you take food. They say nothing, but you feel it.');
         }
       }

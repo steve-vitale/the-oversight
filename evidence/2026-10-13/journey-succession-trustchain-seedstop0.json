@@ -1,0 +1,1064 @@
+[
+ {
+  "seed": 1101,
+  "startBearer": "Ananya",
+  "finalBearer": "Theo",
+  "villageLost": false,
+  "endReason": "survived",
+  "deaths": [
+   {
+    "day": 14,
+    "oldName": "Ananya",
+    "oldId": "gen_m46hlr8",
+    "oldTrust": 13,
+    "cause": "starvation",
+    "rosterSize": 12,
+    "candidateTop": [
+     "Ji(76)",
+     "Katarina(37)",
+     "Leo(30)",
+     "Larry(26)",
+     "Muriuki(26)",
+     "Nepia(25)"
+    ],
+    "candidateCount": 11,
+    "newId": "gen_pi42t16",
+    "newName": "Ji",
+    "actualNewTrust": 36,
+    "formula": {
+     "office": 13,
+     "own": 76,
+     "voucherCount": 0,
+     "expect": 36,
+     "match": true
+    }
+   },
+   {
+    "day": 59,
+    "oldName": "Ji",
+    "oldId": "gen_pi42t16",
+    "oldTrust": 7,
+    "cause": "combat",
+    "rosterSize": 9,
+    "candidateTop": [
+     "Earl(90)",
+     "Muriuki(90)",
+     "Nepia(90)",
+     "Vasyl(76)",
+     "Katarina(72)",
+     "Leo(71)"
+    ],
+    "candidateCount": 9,
+    "newId": "gen_gllsbty",
+    "newName": "Muriuki",
+    "actualNewTrust": 58,
+    "formula": {
+     "office": 7,
+     "own": 90,
+     "voucherCount": 6,
+     "expect": 55,
+     "match": false
+    }
+   },
+   {
+    "day": 67,
+    "oldName": "Muriuki",
+    "oldId": "gen_gllsbty",
+    "oldTrust": 51,
+    "cause": "contest",
+    "rosterSize": 9,
+    "candidateTop": [
+     "Earl(93)",
+     "Nepia(90)",
+     "Vasyl(90)",
+     "Leo(88)",
+     "Katarina(81)",
+     "Priya(77)"
+    ],
+    "candidateCount": 8,
+    "newId": "leo_martin",
+    "newName": "Leo",
+    "actualNewTrust": 76,
+    "formula": {
+     "office": 51,
+     "own": 88,
+     "voucherCount": 5,
+     "expect": 72,
+     "match": false
+    }
+   },
+   {
+    "day": 129,
+    "oldName": "Leo",
+    "oldId": "leo_martin",
+    "oldTrust": 79,
+    "cause": "combat",
+    "rosterSize": 7,
+    "candidateTop": [
+     "Earl(96)",
+     "Nepia(90)",
+     "Vasyl(90)",
+     "Priya(90)",
+     "Theo(90)",
+     "Ruth(88)"
+    ],
+    "candidateCount": 6,
+    "newId": "gen_r5t66lm",
+    "newName": "Earl",
+    "actualNewTrust": 88,
+    "formula": {
+     "office": 79,
+     "own": 96,
+     "voucherCount": 5,
+     "expect": 86,
+     "match": false
+    }
+   },
+   {
+    "day": 131,
+    "oldName": "Earl",
+    "oldId": "gen_r5t66lm",
+    "oldTrust": 88,
+    "cause": "contest",
+    "rosterSize": 6,
+    "candidateTop": [
+     "Theo(100)",
+     "Nepia(92)",
+     "Vasyl(90)",
+     "Priya(90)",
+     "Ruth(88)"
+    ],
+    "candidateCount": 5,
+    "newId": "theo_lindqvist",
+    "newName": "Theo",
+    "actualNewTrust": 91,
+    "formula": {
+     "office": 88,
+     "own": 100,
+     "voucherCount": 4,
+     "expect": 91,
+     "match": true
+    }
+   }
+  ],
+  "trustLegs": [
+   {
+    "bearer": "Ananya",
+    "days": "2-14",
+    "trust": "15->13",
+    "min": 1,
+    "max": 15,
+    "nChanges": 3,
+    "sampleChanges": [
+     {
+      "day": 11,
+      "from": 15,
+      "to": 1
+     },
+     {
+      "day": 12,
+      "from": 1,
+      "to": 11
+     },
+     {
+      "day": 13,
+      "from": 11,
+      "to": 13
+     }
+    ]
+   },
+   {
+    "bearer": "Ji",
+    "days": "15-58",
+    "trust": "36->7",
+    "min": 0,
+    "max": 36,
+    "nChanges": 39,
+    "sampleChanges": [
+     {
+      "day": 16,
+      "from": 36,
+      "to": 12
+     },
+     {
+      "day": 17,
+      "from": 12,
+      "to": 5
+     },
+     {
+      "day": 18,
+      "from": 5,
+      "to": 3
+     },
+     {
+      "day": 19,
+      "from": 3,
+      "to": 13
+     },
+     {
+      "day": 20,
+      "from": 13,
+      "to": 9
+     },
+     {
+      "day": 21,
+      "from": 9,
+      "to": 5
+     },
+     {
+      "day": 22,
+      "from": 5,
+      "to": 1
+     },
+     {
+      "day": 23,
+      "from": 1,
+      "to": 11
+     },
+     {
+      "day": 24,
+      "from": 11,
+      "to": 7
+     },
+     {
+      "day": 25,
+      "from": 7,
+      "to": 1
+     },
+     {
+      "day": 26,
+      "from": 1,
+      "to": 13
+     },
+     {
+      "day": 28,
+      "from": 13,
+      "to": 0
+     }
+    ]
+   },
+   {
+    "bearer": "Muriuki",
+    "days": "59-66",
+    "trust": "58->51",
+    "min": 51,
+    "max": 59,
+    "nChanges": 2,
+    "sampleChanges": [
+     {
+      "day": 61,
+      "from": 58,
+      "to": 59
+     },
+     {
+      "day": 65,
+      "from": 59,
+      "to": 51
+     }
+    ]
+   },
+   {
+    "bearer": "Leo",
+    "days": "67-128",
+    "trust": "76->79",
+    "min": 76,
+    "max": 79,
+    "nChanges": 3,
+    "sampleChanges": [
+     {
+      "day": 70,
+      "from": 76,
+      "to": 77
+     },
+     {
+      "day": 78,
+      "from": 77,
+      "to": 78
+     },
+     {
+      "day": 111,
+      "from": 78,
+      "to": 79
+     }
+    ]
+   },
+   {
+    "bearer": "Earl",
+    "days": "129-130",
+    "trust": "88->88",
+    "min": 88,
+    "max": 88,
+    "nChanges": 0,
+    "sampleChanges": []
+   },
+   {
+    "bearer": "Theo",
+    "days": "131-134",
+    "trust": "91->91",
+    "min": 91,
+    "max": 91,
+    "nChanges": 0,
+    "sampleChanges": []
+   }
+  ],
+  "peopleCheck": []
+ },
+ {
+  "seed": 1102,
+  "startBearer": "Harper",
+  "finalBearer": null,
+  "villageLost": true,
+  "endReason": "village-lost",
+  "deaths": [
+   {
+    "day": 26,
+    "oldName": "Harper",
+    "oldId": "gen_h7syofs",
+    "oldTrust": 15,
+    "cause": "combat",
+    "rosterSize": 9,
+    "candidateTop": [
+     "Scarlett(78)",
+     "Baher(52)",
+     "Elena(45)",
+     "Victor(41)",
+     "Valeria(32)",
+     "Aria(22)"
+    ],
+    "candidateCount": 8,
+    "newId": "gen_iuyunn7",
+    "newName": "Scarlett",
+    "actualNewTrust": 37,
+    "formula": {
+     "office": 15,
+     "own": 78,
+     "voucherCount": 0,
+     "expect": 37,
+     "match": true
+    }
+   },
+   {
+    "day": 33,
+    "oldName": "Scarlett",
+    "oldId": "gen_iuyunn7",
+    "oldTrust": 37,
+    "cause": "combat",
+    "rosterSize": 6,
+    "candidateTop": [
+     "Baher(79)",
+     "Elena(51)",
+     "Victor(47)",
+     "Valeria(34)",
+     "Aria(24)"
+    ],
+    "candidateCount": 5,
+    "newId": "gen_6aibxmz",
+    "newName": "Baher",
+    "actualNewTrust": 46,
+    "formula": {
+     "office": 37,
+     "own": 79,
+     "voucherCount": 0,
+     "expect": 46,
+     "match": true
+    }
+   },
+   {
+    "day": 33,
+    "oldName": "Baher",
+    "oldId": "gen_6aibxmz",
+    "oldTrust": 47,
+    "cause": "combat",
+    "rosterSize": 5,
+    "candidateTop": [
+     "Elena(52)",
+     "Victor(47)",
+     "Valeria(34)",
+     "Aria(24)"
+    ],
+    "candidateCount": 4,
+    "newId": "elena_petrova",
+    "newName": "Elena",
+    "actualNewTrust": 40,
+    "formula": {
+     "office": 47,
+     "own": 52,
+     "voucherCount": 0,
+     "expect": 40,
+     "match": true
+    }
+   }
+  ],
+  "trustLegs": [
+   {
+    "bearer": "Harper",
+    "days": "2-25",
+    "trust": "15->15",
+    "min": 15,
+    "max": 15,
+    "nChanges": 0,
+    "sampleChanges": []
+   },
+   {
+    "bearer": "Scarlett",
+    "days": "26-32",
+    "trust": "37->37",
+    "min": 37,
+    "max": 37,
+    "nChanges": 0,
+    "sampleChanges": []
+   },
+   {
+    "bearer": "Elena",
+    "days": "33-45",
+    "trust": "40->14",
+    "min": 14,
+    "max": 40,
+    "nChanges": 5,
+    "sampleChanges": [
+     {
+      "day": 37,
+      "from": 40,
+      "to": 38
+     },
+     {
+      "day": 38,
+      "from": 38,
+      "to": 36
+     },
+     {
+      "day": 40,
+      "from": 36,
+      "to": 34
+     },
+     {
+      "day": 41,
+      "from": 34,
+      "to": 24
+     },
+     {
+      "day": 42,
+      "from": 24,
+      "to": 14
+     }
+    ]
+   }
+  ],
+  "peopleCheck": []
+ },
+ {
+  "seed": 1103,
+  "startBearer": "Debbie",
+  "finalBearer": null,
+  "villageLost": true,
+  "endReason": "village-lost",
+  "deaths": [
+   {
+    "day": 22,
+    "oldName": "Debbie",
+    "oldId": "gen_cdfi1wh",
+    "oldTrust": 15,
+    "cause": "starvation",
+    "rosterSize": 11,
+    "candidateTop": [
+     "Charlotte(90)",
+     "Agus(68)",
+     "Lorenzo(52)",
+     "Francisco(42)",
+     "Devon(29)",
+     "Hassan(29)"
+    ],
+    "candidateCount": 10,
+    "newId": "gen_c50sgvh",
+    "newName": "Charlotte",
+    "actualNewTrust": 46,
+    "formula": {
+     "office": 15,
+     "own": 90,
+     "voucherCount": 1,
+     "expect": 46,
+     "match": true
+    }
+   },
+   {
+    "day": 100,
+    "oldName": "Charlotte",
+    "oldId": "gen_c50sgvh",
+    "oldTrust": 42,
+    "cause": "combat",
+    "rosterSize": 9,
+    "candidateTop": [
+     "Francisco(90)",
+     "Agus(90)",
+     "Hassan(70)",
+     "Devon(67)",
+     "Jovan(55)",
+     "Nikos(52)"
+    ],
+    "candidateCount": 8,
+    "newId": "gen_sgmeyjz",
+    "newName": "Francisco",
+    "actualNewTrust": 69,
+    "formula": {
+     "office": 42,
+     "own": 90,
+     "voucherCount": 3,
+     "expect": 65,
+     "match": false
+    }
+   },
+   {
+    "day": 100,
+    "oldName": "Francisco",
+    "oldId": "gen_sgmeyjz",
+    "oldTrust": 70,
+    "cause": "combat",
+    "rosterSize": 8,
+    "candidateTop": [
+     "Agus(90)",
+     "Hassan(71)",
+     "Devon(69)",
+     "Jovan(67)",
+     "Nikos(53)",
+     "Sam(51)"
+    ],
+    "candidateCount": 7,
+    "newId": "gen_zozc1w4",
+    "newName": "Agus",
+    "actualNewTrust": 76,
+    "formula": {
+     "office": 70,
+     "own": 90,
+     "voucherCount": 3,
+     "expect": 76,
+     "match": true
+    }
+   },
+   {
+    "day": 121,
+    "oldName": "Agus",
+    "oldId": "gen_zozc1w4",
+    "oldTrust": 82,
+    "cause": "the expedition",
+    "rosterSize": 6,
+    "candidateTop": [
+     "Devon(90)",
+     "Hassan(90)",
+     "Ingrid(61)",
+     "Nikos(60)",
+     "Sam(56)"
+    ],
+    "candidateCount": 5,
+    "newId": "devon_okafor",
+    "newName": "Devon",
+    "actualNewTrust": 81,
+    "formula": {
+     "office": 82,
+     "own": 90,
+     "voucherCount": 3,
+     "expect": 81,
+     "match": true
+    }
+   }
+  ],
+  "trustLegs": [
+   {
+    "bearer": "Debbie",
+    "days": "2-22",
+    "trust": "15->15",
+    "min": 15,
+    "max": 15,
+    "nChanges": 0,
+    "sampleChanges": []
+   },
+   {
+    "bearer": "Charlotte",
+    "days": "23-99",
+    "trust": "46->42",
+    "min": 42,
+    "max": 46,
+    "nChanges": 1,
+    "sampleChanges": [
+     {
+      "day": 99,
+      "from": 46,
+      "to": 42
+     }
+    ]
+   },
+   {
+    "bearer": "Agus",
+    "days": "100-120",
+    "trust": "76->82",
+    "min": 76,
+    "max": 82,
+    "nChanges": 6,
+    "sampleChanges": [
+     {
+      "day": 104,
+      "from": 76,
+      "to": 77
+     },
+     {
+      "day": 108,
+      "from": 77,
+      "to": 78
+     },
+     {
+      "day": 114,
+      "from": 78,
+      "to": 79
+     },
+     {
+      "day": 115,
+      "from": 79,
+      "to": 80
+     },
+     {
+      "day": 116,
+      "from": 80,
+      "to": 81
+     },
+     {
+      "day": 118,
+      "from": 81,
+      "to": 82
+     }
+    ]
+   },
+   {
+    "bearer": "Devon",
+    "days": "121-137",
+    "trust": "81->81",
+    "min": 81,
+    "max": 81,
+    "nChanges": 0,
+    "sampleChanges": []
+   }
+  ],
+  "peopleCheck": []
+ },
+ {
+  "seed": 1104,
+  "startBearer": "Kate",
+  "finalBearer": null,
+  "villageLost": true,
+  "endReason": "village-lost",
+  "deaths": [
+   {
+    "day": 34,
+    "oldName": "Kate",
+    "oldId": "gen_fru78ct",
+    "oldTrust": 5,
+    "cause": "combat",
+    "rosterSize": 11,
+    "candidateTop": [
+     "Vito(90)",
+     "Thao(90)",
+     "Maya(90)",
+     "Mili(55)",
+     "Thabo(52)",
+     "Andre(50)"
+    ],
+    "candidateCount": 10,
+    "newId": "gen_5fs2p26",
+    "newName": "Vito",
+    "actualNewTrust": 46,
+    "formula": {
+     "office": 5,
+     "own": 90,
+     "voucherCount": 2,
+     "expect": 46,
+     "match": true
+    }
+   },
+   {
+    "day": 53,
+    "oldName": "Vito",
+    "oldId": "gen_5fs2p26",
+    "oldTrust": 47,
+    "cause": "combat",
+    "rosterSize": 10,
+    "candidateTop": [
+     "Thao(90)",
+     "Andre(90)",
+     "Maya(90)",
+     "Mili(70)",
+     "Thabo(54)",
+     "Xavier(44)"
+    ],
+    "candidateCount": 9,
+    "newId": "gen_7q9faqj",
+    "newName": "Thao",
+    "actualNewTrust": 67,
+    "formula": {
+     "office": 47,
+     "own": 90,
+     "voucherCount": 3,
+     "expect": 67,
+     "match": true
+    }
+   },
+   {
+    "day": 58,
+    "oldName": "Thao",
+    "oldId": "gen_7q9faqj",
+    "oldTrust": 67,
+    "cause": "combat",
+    "rosterSize": 8,
+    "candidateTop": [
+     "Mili(90)",
+     "Maya(90)",
+     "Chloe(71)",
+     "Thabo(59)",
+     "Xavier(56)",
+     "Somchai(37)"
+    ],
+    "candidateCount": 7,
+    "newId": "gen_gum12ez",
+    "newName": "Mili",
+    "actualNewTrust": 75,
+    "formula": {
+     "office": 67,
+     "own": 90,
+     "voucherCount": 2,
+     "expect": 71,
+     "match": false
+    }
+   },
+   {
+    "day": 88,
+    "oldName": "Mili",
+    "oldId": "gen_gum12ez",
+    "oldTrust": 77,
+    "cause": "combat",
+    "rosterSize": 7,
+    "candidateTop": [
+     "Xavier(91)",
+     "Chloe(90)",
+     "Hassan(90)",
+     "Maya(90)",
+     "Thabo(78)",
+     "Somchai(47)"
+    ],
+    "candidateCount": 6,
+    "newId": "xavier_dubois",
+    "newName": "Xavier",
+    "actualNewTrust": 86,
+    "formula": {
+     "office": 77,
+     "own": 91,
+     "voucherCount": 4,
+     "expect": 83,
+     "match": false
+    }
+   },
+   {
+    "day": 91,
+    "oldName": "Xavier",
+    "oldId": "xavier_dubois",
+    "oldTrust": 88,
+    "cause": "starvation",
+    "rosterSize": 6,
+    "candidateTop": [
+     "Chloe(90)",
+     "Hassan(90)",
+     "Thabo(90)",
+     "Maya(90)",
+     "Somchai(47)"
+    ],
+    "candidateCount": 5,
+    "newId": "chloe_dubois",
+    "newName": "Chloe",
+    "actualNewTrust": 83,
+    "formula": {
+     "office": 88,
+     "own": 90,
+     "voucherCount": 3,
+     "expect": 83,
+     "match": true
+    }
+   },
+   {
+    "day": 98,
+    "oldName": "Chloe",
+    "oldId": "chloe_dubois",
+    "oldTrust": 87,
+    "cause": "lockjaw",
+    "rosterSize": 5,
+    "candidateTop": [
+     "Somchai(91)",
+     "Hassan(90)",
+     "Thabo(90)",
+     "Maya(90)"
+    ],
+    "candidateCount": 4,
+    "newId": "somchai_prasert",
+    "newName": "Somchai",
+    "actualNewTrust": 83,
+    "formula": {
+     "office": 87,
+     "own": 91,
+     "voucherCount": 3,
+     "expect": 83,
+     "match": true
+    }
+   },
+   {
+    "day": 115,
+    "oldName": "Somchai",
+    "oldId": "somchai_prasert",
+    "oldTrust": 91,
+    "cause": "combat",
+    "rosterSize": 3,
+    "candidateTop": [
+     "Hassan(90)",
+     "Thabo(90)"
+    ],
+    "candidateCount": 2,
+    "newId": "thabo_maseko",
+    "newName": "Thabo",
+    "actualNewTrust": 76,
+    "formula": {
+     "office": 91,
+     "own": 90,
+     "voucherCount": 1,
+     "expect": 76,
+     "match": true
+    }
+   }
+  ],
+  "trustLegs": [
+   {
+    "bearer": "Kate",
+    "days": "2-33",
+    "trust": "15->5",
+    "min": 1,
+    "max": 15,
+    "nChanges": 12,
+    "sampleChanges": [
+     {
+      "day": 16,
+      "from": 15,
+      "to": 1
+     },
+     {
+      "day": 17,
+      "from": 1,
+      "to": 11
+     },
+     {
+      "day": 19,
+      "from": 11,
+      "to": 1
+     },
+     {
+      "day": 20,
+      "from": 1,
+      "to": 13
+     },
+     {
+      "day": 22,
+      "from": 13,
+      "to": 7
+     },
+     {
+      "day": 24,
+      "from": 7,
+      "to": 5
+     },
+     {
+      "day": 25,
+      "from": 5,
+      "to": 1
+     },
+     {
+      "day": 26,
+      "from": 1,
+      "to": 13
+     },
+     {
+      "day": 29,
+      "from": 13,
+      "to": 9
+     },
+     {
+      "day": 31,
+      "from": 9,
+      "to": 5
+     },
+     {
+      "day": 32,
+      "from": 5,
+      "to": 9
+     },
+     {
+      "day": 33,
+      "from": 9,
+      "to": 5
+     }
+    ]
+   },
+   {
+    "bearer": "Vito",
+    "days": "34-52",
+    "trust": "46->47",
+    "min": 46,
+    "max": 47,
+    "nChanges": 1,
+    "sampleChanges": [
+     {
+      "day": 47,
+      "from": 46,
+      "to": 47
+     }
+    ]
+   },
+   {
+    "bearer": "Thao",
+    "days": "53-58",
+    "trust": "67->67",
+    "min": 67,
+    "max": 67,
+    "nChanges": 0,
+    "sampleChanges": []
+   },
+   {
+    "bearer": "Mili",
+    "days": "59-87",
+    "trust": "75->77",
+    "min": 72,
+    "max": 77,
+    "nChanges": 6,
+    "sampleChanges": [
+     {
+      "day": 64,
+      "from": 75,
+      "to": 72
+     },
+     {
+      "day": 68,
+      "from": 72,
+      "to": 73
+     },
+     {
+      "day": 71,
+      "from": 73,
+      "to": 74
+     },
+     {
+      "day": 73,
+      "from": 74,
+      "to": 75
+     },
+     {
+      "day": 74,
+      "from": 75,
+      "to": 76
+     },
+     {
+      "day": 79,
+      "from": 76,
+      "to": 77
+     }
+    ]
+   },
+   {
+    "bearer": "Xavier",
+    "days": "88-91",
+    "trust": "86->88",
+    "min": 86,
+    "max": 88,
+    "nChanges": 1,
+    "sampleChanges": [
+     {
+      "day": 89,
+      "from": 86,
+      "to": 88
+     }
+    ]
+   },
+   {
+    "bearer": "Chloe",
+    "days": "92-98",
+    "trust": "83->87",
+    "min": 83,
+    "max": 87,
+    "nChanges": 2,
+    "sampleChanges": [
+     {
+      "day": 94,
+      "from": 83,
+      "to": 85
+     },
+     {
+      "day": 97,
+      "from": 85,
+      "to": 87
+     }
+    ]
+   },
+   {
+    "bearer": "Somchai",
+    "days": "99-114",
+    "trust": "85->91",
+    "min": 85,
+    "max": 91,
+    "nChanges": 3,
+    "sampleChanges": [
+     {
+      "day": 103,
+      "from": 85,
+      "to": 87
+     },
+     {
+      "day": 107,
+      "from": 87,
+      "to": 89
+     },
+     {
+      "day": 108,
+      "from": 89,
+      "to": 91
+     }
+    ]
+   },
+   {
+    "bearer": "Thabo",
+    "days": "115-129",
+    "trust": "76->46",
+    "min": 46,
+    "max": 76,
+    "nChanges": 5,
+    "sampleChanges": [
+     {
+      "day": 119,
+      "from": 76,
+      "to": 72
+     },
+     {
+      "day": 121,
+      "from": 72,
+      "to": 68
+     },
+     {
+      "day": 122,
+      "from": 68,
+      "to": 70
+     },
+     {
+      "day": 125,
+      "from": 70,
+      "to": 66
+     },
+     {
+      "day": 127,
+      "from": 66,
+      "to": 46
+     }
+    ]
+   }
+  ],
+  "peopleCheck": []
+ }
+]
