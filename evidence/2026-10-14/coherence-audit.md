@@ -41,18 +41,85 @@ weapon slot, codex techniques, trust-in-player).
 
 ---
 
-## 2. Fixed (with proof tests)
+## 2. Fixed (with proof tests), all on `master`
 
-| Fix | Commit |
-|---|---|
-| Keepsake "bonded vest blocks beams" rule removed (Steve: "was never a rule") | `1944e073` |
-| 7 technique-leg synergies could never activate (codex store mismatch) | `7a005b4f` |
-| Combat: dead monster fields removed (aggroRange etc., telegraphGate); Tripwire L2 now bleeds as promised; dead functions deleted | `ff30b292` |
-| Items/food/gear, abilities, progression, social/village, aliens/contests batches | *in progress, see §4* |
+43 commits; each behavior fix has a test that fails before and passes after.
+Full check: 817/821 green list passing; the 4 left are the 2 known god-path
+checks plus 2 flaky tests.
 
----
+**Your direct answers, implemented**
+- **Table inputs count.** 51 dropped ledger writes now translate into real
+  dimensions:
+  - conquest → might
+  - defense sent → protected
+  - titan slain → might + protected
+  - links → brokerage
+  - beggars refused → food hoarded
+
+  Kind/cruel conversation moves protected/might (real movement only, no
+  farming). Exposed lies and thefts → exposed.
+- **Trial gifts are pick 1 of 3**, led by the System's build-aware pick.
+- **The Table stays live until you sit.** Qualifying sends an invitation
+  showing your seat and doors *as they stand today*; taking the seat locks it
+  (from day 90). The early-finish soft-lock can no longer happen.
+- **Keepsake "beam vest" rule removed.**
+
+**Things that were silently off and are now on** (these make the game easier, still to be measured)
+- Forage-yield bonuses: relics, synergies, knowledge and luck now affect real foraging.
+- 23 relic enhancements.
+- Weapon bonus for hunting and scavenging.
+- Crowbar flip, phase blade vs. armor, beam weapons charring meat.
+- Villager allies: flank ×1.5, Point +3, War Cry +4.
+- Help you call for now fights.
+- Hoarder's Interest, Cartographer's Eye, Trophy Room.
+- 7 technique synergies.
+- Tripwire bleed.
+- Full-body armor blocking slots.
+
+**Things that were wrong and are now right**
+- Evolving an ability no longer drops it from godhood and path counts.
+- Blood Frenzy crits every 3rd hit as written. It had been ×2 on every hit after the first, so this is a **nerf**.
+- Retribution no longer spends its charge when there's no one adjacent.
+- Wave 4 can't come before wave 3.
+- The full seat now requires the lesser seat's bars (except scale).
+- Strangers' crimes no longer go on your record.
+- Your trial uses the trust you earned.
+- Being convicted no longer earns ending points.
+- Betrayal and hoarding now register, so the dark branch can trigger.
+- Contest rigging is deterministic.
+- The galactic cast reaches stages 3–4 when you meet or fight a persona.
+- Shelters count for housing.
+- Raid news is no longer lost while you're away.
+- Bonded starting gear stays on your body.
+- Every slot unlock is announced.
+- 94/203 System voice lines now play (was 22).
+
+**Dead code and false text removed**
+- Dead monster fields, dead functions, the reverted drama renderer, fusion and use-count god code.
+- About 20 header and comment lies corrected.
+
+**Couldn't do**
+- `engine/day.js` is dead, but 834 test scripts load it by name.
+- Starting-item filter: it offers alien and tier-3/4 gear at spawn. Fixing it reshuffles seeded rosters and breaks about 20 seed-dependent tests. That's a question below.
+
+**Must measure next**
+- With this many effects switched on, the game is easier. And two single-seed tests that used to reach the Table now don't.
+- A multi-seed sweep of Table reach and death rates is owed before any balance call.
 
 ## 3. Questions for Steve (ranked by how much of the game they unblock)
+
+**Answered 2026-10-14:**
+- Q1 (Table inputs): yes.
+- Q2 (what is a build): redesign.
+- Q3 (choice vs gift): pick 1 of 3. Done for trial gifts; the pact stays random.
+- Q4 (day 90): the Table stays relative until you sit. Done.
+
+### New from the fixes
+- **forest_scent** ("monster detection −8%") would *hurt* if wired as written. Should it mean fewer encounters while travelling?
+- **Battlefield Grace:** what is its "free action", and should heals on allies count?
+- **Starting items:** should the "no high-tier gear at spawn" rule cover tools and clothing too? (Fixing it reshuffles seeds.)
+- **Static Edge's arc** fires on any damage to a monster, including villagers' hits. Should it be player-only?
+- **Deep Listen / Omnipresence** relay abilities: what should they do when used? (They now have buttons, but no effect yet.)
 
 ### Top tier: these decide how the pieces connect
 
