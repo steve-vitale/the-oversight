@@ -2,8 +2,6 @@
 // system: progression
 // description: Character progression. XP, levels, abilities.
 // provides:
-//   - abilitySlots()
-//   - accrueRelicBond(item)
 //   - integrationStage()
 //   - checkTrial(id)
 //   - completeTrial(id)
@@ -31,6 +29,8 @@
 // consumes:
 //   - scholar.xp
 //   - scholar.abilities
+//   - abilitySlots() (game.js)
+//   - accrueRelicBond(item) (game.js)
 // ============ PROGRESSION, ARCS & SENTIMENTAL ITEMS ============
 // Built on the lifeseed foundation (lifeseed.js). Steve's design (2026-10-04):
 //

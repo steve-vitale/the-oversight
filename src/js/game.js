@@ -21212,7 +21212,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('A voice behind your eyes — bright, delighted, utterly wrong. (The System has arrived.)');
         s.abilities = s.abilities || [];
         s.systemQuests = [];
-        s.abilityChoices = this.firstAbilityChoices();
+        // src tags the offer so chooseAbility's "watching you all week" line
+        // only plays for the arrival gift (contest prizes / aid gifts reuse it).
+        s.abilityChoices = this.firstAbilityChoices().map(c => Object.assign({}, c, { src: 'arrival' }));
         const w1 = s.week1 || {};
         const didAnything = (w1.forage || 0) + (w1.hunt || 0) + (w1.talk || 0) + (w1.cook || 0) + (w1.donate || 0) + (w1.scavenge || 0) > 0;
         if (didAnything) {
@@ -21715,7 +21717,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.abilityChoices = null;
       this.say(`✨ Ability gained: ${choice.name} (L1). ${choice.description || choice.desc}`);
       if (choice.flavor) this.say(`"${choice.flavor}"`);
-      this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      // The "all week" line is the arrival gift's; other offers (contest
+      // prizes, aid gifts, poison/pellet offers) get a neutral line.
+      if (choice.src === 'arrival') this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      else this.say(`"The REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
       return null;
     },
     // abilityOnAcquire: the price is paid up front, where the fiction demands it.
@@ -25475,8 +25480,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (held) active.push(syn.id);
       }
       // WITNESSED SYNERGIES (Steve 2026-10-14 ability coherency, diegetic
-      // discovery): newly-active synergies are recorded in the Codex with
-      // their path pair — the game is its own wiki.
+      // discovery): newly-active synergies are recorded with their path pair
+      // (sch.codex.witnessedSynergies). No Codex UI reads that record yet, so
+      // the line no longer claims "(Recorded in your Codex.)" (audit 2026-10-14).
       try {
         const _prev = new Set(sch.activeSynergies || []);
         const _newly = active.filter(id => !_prev.has(id));
@@ -25497,9 +25503,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 name: (_syn && _syn.name) || _sid,
               };
               if (_paths.length >= 2) {
-                this.say(`⚡ SYNERGY WITNESSED: ${_paths[0].toUpperCase()} × ${_paths[1].toUpperCase()} — ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+                this.say(`⚡ SYNERGY WITNESSED: ${_paths[0].toUpperCase()} × ${_paths[1].toUpperCase()} — ${(_syn && _syn.name) || _sid}!`);
               } else {
-                this.say(`⚡ SYNERGY WITNESSED: ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+                this.say(`⚡ SYNERGY WITNESSED: ${(_syn && _syn.name) || _sid}!`);
               }
               try { this.audioEvent('synergy', { paths: _paths }); } catch (e) {}
             }

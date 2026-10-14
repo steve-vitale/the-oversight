@@ -29,8 +29,8 @@
 //   - Longsim abilities r4 2026-10-12 (Steve: figure it out yourself): these
 //     9 trial-type abilities were data-declared but had NO player grant path —
 //     dead rungs on the unlock ladder. practice-type (stalk, blood_trail,
-//     ambush, war_cry, haymaker) and discovery-type (soft_step) remain
-//     documented-not-wired: their triggers are ambiguous, a bigger design call.
+//     ambush, war_cry, haymaker) and discovery-type (soft_step) grants are
+//     wired separately in practice-deeds.js (notePracticeDeed).
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
