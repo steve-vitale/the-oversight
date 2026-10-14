@@ -123,7 +123,14 @@
     _sdName(vid) {
       try {
         var n = this.displayName(vid);
-        if (n && n !== 'undefined') return String(n).split(' ')[0];
+        if (n && n !== 'undefined') {
+          n = String(n);
+          // stranger descriptor ("A person, maybe 30s, with a limp"): use it
+          // whole — its first word ("A") is not a name (hierarchy._repName
+          // precedent, travel lever r3 2026-10-11).
+          if (/^a /i.test(n) || n.indexOf(',') >= 0) return n;
+          return n.split(' ')[0];
+        }
       } catch (e) {}
       return 'Someone';
     },
@@ -263,6 +270,55 @@
       this.say(`${this._sdName(vid)}, at the fire, quiet: "Whatever's coming... I don't think one fire faces it. Not alone." Nobody argues.`);
     },
 
+    // The villager echo of the NATIONAL BEAT ITSELF (journey-scale-r2
+    // 2026-10-14): the court sat or the oath was sworn, and the village
+    // knows. The beat is the biggest political event in the village's life —
+    // speakers riding in, a feast, an oath — and no villager ever mentioned
+    // it. Fires once, a few days after nationalLive goes live (the System
+    // and the table-discovery speak first), shape-aware, once per run.
+    // Gossip, not broadcast — a villager at the fire, in their own voice.
+    _sdNationalBeatEcho() {
+      var d = this._sd();
+      if (d.natBeatEcho || this.state.scaleRefused) return;
+      if (!this.state.nationalLive) return;
+      var natDay = this.state.nationalDay || 0;
+      if (this._sdDay() < natDay + 2) return;
+      var shape = this.state.nationalShape || 'lead';
+      var vid = this._sdVillager();
+      if (!vid) return;
+      if (!this._sdFire('natBeatEcho', 'villager')) return;
+      var nm = this._sdName(vid);
+      var primaryNm = 'them';
+      try {
+        if (this.state.nationalPrimary) primaryNm = this._ovName(this.state.nationalPrimary);
+      } catch (e) {}
+      var lines = {
+        lead: [
+          `"Four fires. One head. And the head is US. ...Did that just happen? I was pouring cups."`,
+          `"Speakers rode in, ate our grain, and called us a realm. A REALM. I keep saying it to hear how it sounds."`,
+        ],
+        belong: [
+          `"We swore to ${primaryNm}. We're somebody's now. I keep waiting to feel different."`,
+          `"The oath's sworn. ${primaryNm} holds the high seat and we hold our fire. That's the deal. That's the whole deal."`,
+        ],
+        covenant: [
+          `"No thrones. A circle of speakers and a shared granary. The audience has never seen one survive — well. We'll show them."`,
+          `"Four fires, no head. The pool's open and the pact's sworn. Ask me in a season if leagues work."`,
+        ],
+        trade: [
+          `"Signed the charter. Tariffs, ledgers, routes. No swords — written plainly, so nobody can pretend otherwise."`,
+          `"We're a ledger now. Four fires on the same books. The traders are already acting like they own the road."`,
+        ],
+        conquest: [
+          `"They knelt because they lost. I watched it happen. I don't know what I'm supposed to feel."`,
+          `"The realm's ours and it cost blood. Don't let anyone tell you the quiet part out loud — we all heard the price."`,
+        ],
+      };
+      var pool = lines[shape] || lines.lead;
+      this.say(`${nm}, at the fire, not quite believing it: ${pick(pool)}`);
+      this._sdNote('scale', `The village is talking about the court — the ${shape} road. The realm is real to them now.`);
+    },
+
     // Table discovery: national is live. The System says the table aloud.
     _sdTable() {
       var d = this._sd();
@@ -387,6 +443,7 @@
       try { this._sdNextAct(); } catch (e) {}
       try { this._sdNation(); } catch (e) {}
       try { this._sdNationEcho(); } catch (e) {}
+      try { this._sdNationalBeatEcho(); } catch (e) {}
       try { this._sdTable(); } catch (e) {}
       try { this._sdFeltTime(); } catch (e) {}
       // THE MOMENT SURVIVES (accord): if the first gesture died unmade with

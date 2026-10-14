@@ -24820,7 +24820,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 this.say(`${first} brought you a sample. The ${this.journalName()} grows.`);
               }
             } else {
-              this.say(`${first}: "${person.line}"`);
+              // DISCOVERY ECHO (journey-scale-r2 2026-10-14): person.line is
+              // not a real field — the old line rendered `Name: "undefined"`.
+              // The villager found something worth mentioning: a known plant
+              // holding on the land (name knowledge-gated via
+              // plantDisplayName), or a read of the ground itself.
+              let dline = null;
+              try {
+                const known = (typeof this.plantsKnownBy === 'function') ? (this.plantsKnownBy(id) || []) : [];
+                if (known.length) {
+                  const kp = known[Math.floor(Math.random() * known.length)];
+                  const pn = this.plantDisplayName(kp);
+                  const holds = [
+                    `"${pn} is coming back thick on the damp slope. Not new — but it's holding."`,
+                    `"Walked past a good stand of ${String(pn).toLowerCase()}. Worth remembering where."`,
+                    `"The ${String(pn).toLowerCase()} patch is fruiting again. Somebody should get out there."`,
+                  ];
+                  dline = holds[Math.floor(Math.random() * holds.length)];
+                }
+              } catch (e) {}
+              if (!dline) dline = `"Walked the far treeline. Nothing new, but the ground's talking — the good stuff keeps to the damp hollows."`;
+              this.say(`${first}: ${dline}`);
             }
           }
         } else {

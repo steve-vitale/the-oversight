@@ -2427,6 +2427,10 @@
       // THE COURT SAT (or the oath was sworn): Haven is national.
       this.state.nationalLive = true;
       this.state.nationalDay = day;
+      // journey-scale-r2 2026-10-14: remember HOW it happened for the
+      // villager echo (scaleDiscovery._sdNationalBeatEcho) — non-behavioral.
+      if (pn && pn.shape) this.state.nationalShape = pn.shape;
+      this.state.nationalPrimary = (pn && pn.primary) || null;
       // VFX (Steve 2026-10-12): national must land like a coronation, not a
       // ledger entry — the hero card, the flash, the fanfare almost-right.
       try { this.drama('hero', 'NATIONAL', pn.led ? 'The realm bows to Haven. The first court sat.' : 'The oath was sworn. Haven kneels — and rises national.'); } catch (e) {}
