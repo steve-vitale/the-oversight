@@ -34,11 +34,20 @@
 //
 // Usage: node scripts/test-matbank2-20261014.js            (RED: gate off)
 //        MATBANK2=1 node scripts/test-matbank2-20261014.js  (GREEN: gate on)
+// NOTE (2026-10-14, coordinator repair): the layer was deleted per the kill
+// protocol, so on the killed tree the proof runs the RED branch only (GREEN
+// info-skips). The pre-kill RED 8/8 -> GREEN 14/14 is the measurement record.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 const comp = require('./policies/competent');
-const { keepKnife, workTrapline, forageTripSeedFirst, gearUp } = comp;
-const matbank2 = require('./policies/matbank2');
+const { keepKnife, workTrapline, forageTripSeedFirst } = comp;
+// gearUp was exported only for this proof's scenarios; the kill reverted the
+// export along with the hooks — degrade gracefully on the killed tree.
+const gearUp = comp.gearUp || null;
+// The layer was KILLED and deleted per kill protocol — require optionally so
+// the RED branch still runs on the killed tree as the arm's measurement record.
+let matbank2 = null;
+try { matbank2 = require('./policies/matbank2'); } catch (e) { matbank2 = null; }
 
 const SEED = parseInt(process.env.SEED || '20261014', 10);
 const GATE = process.env.MATBANK2 === '1';
@@ -71,6 +80,7 @@ function watchCraft(Game) {
 
 // ---- scenario 1: the arrow burn (stick:2) through gearUp's dry-bow path ----
 async function arrowScenario(seed, vine, stick, snareLvl) {
+  if (!gearUp) return null; // export reverted with the kill: untestable, skip
   const Game = await freshGame(seed);
   setRecipe(Game, 'arrow', 2); // known: reliable band, attempts deterministic
   setRecipe(Game, 'snare', snareLvl);
@@ -85,6 +95,7 @@ async function arrowScenario(seed, vine, stick, snareLvl) {
 
 // ---- scenario 2: the bark_armor burn (vine:2) through gearUp's armor path ----
 async function barkScenario(seed, vine, stick, snareLvl) {
+  if (!gearUp) return null; // export reverted with the kill: untestable, skip
   const Game = await freshGame(seed);
   setRecipe(Game, 'bark_armor', 2);
   setRecipe(Game, 'snare', snareLvl);
@@ -130,6 +141,7 @@ async function signalScenario(seed, vine, stick, snareLvl) {
   const inv = Game.state.scholar.inventory;
   if (vine) inv.push(MAT('vine', vine));
   if (stick) inv.push(MAT('stick', stick));
+  if (!matbank2) return false; // layer deleted (killed): no collection signal — the RED truth
   return matbank2.snareReserveWanted(Game);
 }
 
@@ -168,12 +180,20 @@ async function foragePrefScenario(seed, vine, stick, snareLvl) {
   if (!GATE) {
     // ---- 1. arrow: the stick burn fires below the band (the blank) ----
     const a = await arrowScenario(SEED, 2, 2, 1);
-    ok('RED: arrow crafted at stick=2 (burns below the 3+3 band)', a.attempts === 1 && a.stick === 0,
-      `attempts=${a.attempts} stick=${a.stick}`);
+    if (a === null) {
+      console.log('info  gearUp export reverted with the kill: arrow scenarios skipped');
+    } else {
+      ok('RED: arrow crafted at stick=2 (burns below the 3+3 band)', a.attempts === 1 && a.stick === 0,
+        `attempts=${a.attempts} stick=${a.stick}`);
+    }
     // ---- 2. bark_armor: the vine burn fires below the band ----
     const b = await barkScenario(SEED + 3, 2, 2, 1);
-    ok('RED: bark_armor crafted at vine=2 (burns the last vine)', b.attempts === 1 && b.vine === 0,
-      `attempts=${b.attempts} vine=${b.vine}`);
+    if (b === null) {
+      console.log('info  gearUp export reverted with the kill: bark_armor scenarios skipped');
+    } else {
+      ok('RED: bark_armor crafted at vine=2 (burns the last vine)', b.attempts === 1 && b.vine === 0,
+        `attempts=${b.attempts} vine=${b.vine}`);
+    }
     // ---- 3. knife priority ----
     const k = await knifeScenario(SEED + 6);
     ok('RED: knife knapping fires below the band (priority)', k.attempts === 1 && k.knapped === 1,
@@ -202,7 +222,10 @@ async function foragePrefScenario(seed, vine, stick, snareLvl) {
   }
 
   // ============================ GREEN ======================================
-  if (GATE) {
+  if (GATE && !matbank2) {
+    console.log('info  layer deleted (killed): armed scenarios skipped (GREEN needs the layer present)');
+  }
+  if (GATE && matbank2) {
     // ---- 1. arrow: blocked below the band, fires on surplus, band holds ----
     const aGate = await arrowScenario(SEED, 2, 2, 1);
     ok('armed: arrow NOT crafted at 2+2 (below the 3+3 band)', aGate.attempts === 0 && aGate.stick === 2,
