@@ -33041,6 +33041,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tickIs(m) { return !!(m && m.kind === 'monster' && ((m.mdef || {}).id === 'alien_tick')); },
     glasswingIs(m) { return !!(m && m.kind === 'monster' && ((m.mdef || {}).id === 'glasswing')); },
     sunbaskerIs(m) { return !!(m && m.kind === 'monster' && ((m.mdef || {}).id === 'sunbasker')); },
+    // FOCUS GROUP (wave 3, sigW3a.js): the deliberating heads. The lead's
+    // Deliberation is a self-centered burst — it must close to bring the
+    // murmur to bear (want-range calibration in encWantRange, below).
+    focusGroupIs(m) { return !!(m && m.kind === 'monster' && ((m.mdef || {}).id === 'focus_group')); },
     // FLYERS (Steve 2026-10-06): monsters with flight:true in monsters.json.
     // m.altitude: 'high' (airborne — out of melee/spear reach) | 'low'
     // (landed/descended — melee-vulnerable, +50% damage). Defaults to 'high'
@@ -33500,7 +33504,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // brawl around the hum, not a siege.
       if (pat.type === 'burst' && this.humiceIs(m)) return 2;
       if (pat.type === 'burst' && this.toadIs(m)) return (pat.radius || 2) + 1;
+      // FOCUS GROUP CLOSE (longsim scale-wall r19 arm 1, 2026-10-14): the
+      // lead's Deliberation is a SELF-CENTERED burst (radius 1 — patternCells
+      // centers burst on the attacker), but the default want-range for burst
+      // is 4, so the heads held at spear range (d2) forever while the burst
+      // washed over empty tiles: 10,786 declares, 0 landed, in a 12k-round
+      // probe. Combined with a strike-the-weakest driver swatting the
+      // 1-HP eye-heads (zero damage to the lead, every turn), the fight could
+      // never resolve — 500k+ rounds on fifthlink-armed s44 (finding #102).
+      // The murmur comes to you: the heads drift in until the Deliberation
+      // can actually land. Follows the hummice/toad calibration precedent.
+      // Steve's rule: monsters were sent to fight — the group closes; it
+      // never leaves, never disengages. FOCUSGROUP_CLOSE=0 disables (RED).
+      if (pat.type === 'burst' && this.focusGroupIs(m) && this.focusGroupCloseOn()) return pat.radius || 1;
       return 4;
+    },
+    // FOCUS-GROUP CLOSE gate (longsim scale-wall r19 arm 1, 2026-10-14):
+    // default ON; FOCUSGROUP_CLOSE=0 disables for before/after measurement
+    // on identical seeds. Follows the beamFatigueOn() precedent.
+    focusGroupCloseOn() {
+      try {
+        if (typeof process !== 'undefined' && process && process.env && process.env.FOCUSGROUP_CLOSE === '0') return false;
+      } catch (e) {}
+      return true;
     },
 
     // Declare-phase per monster (replaces the generic 'aim' for fifo clients).

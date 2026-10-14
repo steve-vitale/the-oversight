@@ -436,6 +436,13 @@
   var FG_EYE_MDEF = {
     id: 'focus_group_eye', name: 'Eye-head', emoji: '👁️',
     hp: [1, 1], speed: 3, behavior: 'swarm', wave: 3, pierce: 0,
+    // FLOATING WATCHERS (longsim scale-wall r19 arm 1, 2026-10-14): the
+    // eye-heads drift — they don't block tiles. Without this, the swarm
+    // bodies the lead's own approach (the 2x2 lead can't step through its
+    // own watchers to bring Deliberation to bear), re-creating the
+    // never-close half of finding #102's stall. They only watch; they
+    // don't impede. (blocks:false is honored by tbBlockedFor/tbCanOccupy.)
+    blocks: false,
     attack: { name: 'Watch', damage: [0, 0], telegraph: 'It watches.', pattern: { type: 'direct' }, damageType: 'psychic' },
   };
 
