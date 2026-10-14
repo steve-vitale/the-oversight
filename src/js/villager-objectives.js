@@ -17,6 +17,7 @@
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
 //   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
+//   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
@@ -974,6 +975,26 @@
           this.say(`🥩 ${nm} is back empty-handed. "Nothing worth hauling out there."`);
         }
       }
+      // BARK-ARMOR TEACH (armor discovery 2026-10-13): a villager who WEARS
+      // bark armor can SHOW you — once, and only if you've earned their
+      // regard (trust 15+; strangers don't hand over their craft). A worn
+      // cuirass, examined up close, teaches the shape of it: recipe L1
+      // (seen — blind 35% craft, materials at risk). The snare-lesson
+      // pattern, for the armor the occupation lottery puts into play.
+      // Fires on any return, never silently.
+      try {
+        var _vpB = this.vpOf ? this.vpOf(vid) : null;
+        var _rkB = ((this.state.codex || {}).recipes || {})['bark_armor'] || {};
+        var _trB = (this.state.village.trust || {})[vid];
+        if (_trB === undefined) _trB = 10;
+        var _wearsBark = false;
+        try { _wearsBark = !!(_vpB && _vpB.equipped && _vpB.equipped.torso && _vpB.equipped.torso.itemId === 'bark_armor'); } catch (e) {}
+        if (playerAtHaven && _wearsBark && ((_rkB.level || 0) < 1) && !_vpB.taughtBarkArmor && _trB >= 15) {
+          _vpB.taughtBarkArmor = true;
+          if (this.grantKnowledge) this.grantKnowledge('recipe', 'bark_armor', 1, { type: 'taught', by: nm });
+          this.say(`🛡️ ${nm} catches you eyeing the bark plates — claw-scored, vine-laced. "...Want to actually SEE one?" They talk you through it — wide strips dried flat, laced overlapping like shingles, snug but not tight. Your hands don't know it yet. Your eyes do.`);
+        }
+      } catch (e) {}
       // objective complete
       var oo = this.objOf(vid);
       oo.state = 'done'; oo.kind = 'idle'; oo.companion = null; oo.targetVid = null;

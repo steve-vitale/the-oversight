@@ -125,6 +125,7 @@ Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; afte
 - switchboard_talker_cost: appointing the village's best talker to the relay weakens moots — trial swing -8 while they hold the office (code: betrayal.js — tallyVotes, switchboardTalkerCost)
 - switchboard_resentment: timed mood modifiers (village.moodMods) model appointment resentment — e.g. honoring the weakest forager (code: betrayal.js — villageMood)
 - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
+- desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 
 **Consumes:** village.relationships, scholar.reputation
 
@@ -420,6 +421,7 @@ Corpse system. Dead bodies persist, can be butchered, buried, or left.
 - the_village_brings_its_bearer_home: the death beat's "somebody else starts digging" is real — one day after the bearer's death the village recovers the body to the fire and digs the grave (v.pendingBurials, fired from endDay). The death pack rides home on the corpse; the filling of the grave is the successor's (code: recoverBearer, Steve's loot-as-action law untouched)
 - sapient_dead_carry_their_gear: villager corpses hold the dead person's actual carried + stashed gear as the lootable death pack — nothing auto-transfers (code: generatePossessions, Steve 2026-10-09)
 - sentimentals_die_with_them: sentimental items are buried with the body, never lootable, and grant no bond to non-owners (code: generatePossessions, Steve 2026-10-09)
+- hide_handling_teaches: taking an animal hide (per-item or batch loot) teaches hide_armor L1 — handling the material teaches the shape, breaking the hide_armor circular dependency (code: noteHideHandled, 2026-10-13)
 - ash_pile: a phoenix victim's corpse is flagged ash -- no body, no decay, no disease, no trauma (ashes aren't gross); carried gear ONLY (never stashed) as the lootable pack; pocketing it fires loot_ash (amplified theft; worse still when the bearer takes their own victim's gear); the ash description states the village norm (code: phoenixAshDeath/phoenixAshGearPack in game.js, Steve 2026-10-09)
 
 **Consumes:** state.corpses
@@ -611,7 +613,7 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 - alreadyDead: a world-monster entity with hp<=0 is a corpse, not a fight — early exit, no rewards. (code: fieldFight)
 - awareness: the pre-fight evade check ("saw it, gave it room") decides contact, not outcome. (code: fieldFight)
 - determinism: opts.rng supplies every random draw (the contest engine's seeded resolution stream) — without it, Math.random/combat.roll exactly as before; the live path is untouched. (code: fieldFight, break-it 2026-10-08)
-- gear: the villager re-equips at fight entry (villagerGearUp, acquire=false — deterministic, no mid-fight crafting) and strikes with the tactical formula; equipped armor absorbs via diminishing returns (r = P/(P+20); absorb = round(hit*r), at least 1 gets through) — mirroring the tactical engine, never full immunity. (code: fieldFight, 2026-10-09)
+- gear: the villager re-equips at fight entry (villagerGearUp, acquire=false — deterministic, no mid-fight crafting) and strikes with the tactical formula; equipped armor absorbs via diminishing returns (r = P/(P+20); absorb = min(hit-1, round(hit*r)) — at least 1 always lands) — mirroring the tactical engine, never full immunity. (code: fieldFight, 2026-10-09)
 - aid_allies_from_start: allied aid parties already at the door (opts.allyFromStart) join from round 1 as real combatants — they came to fight, not to watch; foreign allies carry their own names via opts.foreignAllies. (code: fieldFight, comms 2026-10-10)
 - smoke_draws_company: the signal fire's attention arrives as real pack members (opts.packBonus) — blow by blow, never a modifier. (code: fieldFight, comms 2026-10-10)
 - foreign_ally_fall: a fallen foreign ally lands on the inter-village link via aidAllyDown (trust, gossip, debt forgiven in blood) — not on a villager record. (code: fieldFight, comms 2026-10-10)
@@ -731,6 +733,7 @@ Central game controller. Owns state, map, day loop, actions, encounters, combat,
 - npc_abilities_minimal: villagers hold no kits; v.npcAbilities is the minimal per-villager ability store (code: npcHasAbility/npcGrantAbility)
 - villager_xp_system: villagers earn XP per track (combat/field/social/craft) from real deeds; at thresholds (3/8/16/32/64, mirroring the player's skill-practice shape) the System grants the next ability from the track's fixed-priority kit -- deterministic, no RNG in the grant path; grants wait for systemArrived; six-slot rule same as the player (code: villagerGainXP, NPC_ABILITY_KITS, Steve 2026-10-09)
 - combat_action_economy: move + acted (code: tbAfterPlayerAction)
+- old_cuirass_teaches: every starting haven hangs an old bark cuirass by the fire — the first dawn you're home you really SEE it: bark_armor recipe L1 (seen), once ever, silent if already known. Breaks the bark_armor discovery lottery. (code: oldCuirassBeat, 2026-10-13)
 
 **Consumes:** state.scholar, state.village, state.codex (central game state roots)
 
@@ -877,7 +880,7 @@ Procedural foundation. Procedural depth before more systems.
 ### membership (`membership.js`)
 Village membership. Joining, leaving, exile status.
 
-**Provides:** isMember(vid), mshipState(), memberBenefits(vid), awayMembers(), acceptApplication(app), refuseApplication(app), genApplicant(), judgeApplication(app), considerApplications(), debateIntake(app), rejoinMembership(), severMembership(vid), housingCap(), buildShelter(), foodSupports(n), growthStatus(), regionalStanding(village), villageStandingOf(villageId), formAlliance(villageId), proposeAlliance(villageId), isAllied(aId, bId), recognizedAbroad(vid, otherVillage), memberReputationAbroad(vid), guestMeal(villageId), loanedReturnTick(), membershipDaily()
+**Provides:** isMember(vid), mshipState(), memberBenefits(vid), awayMembers(), acceptApplication(app), refuseApplication(app), genApplicant(), judgeApplication(app), considerApplications(), villageAutoRecruit(), debateIntake(app), rejoinMembership(), severMembership(vid), housingCap(), buildShelter(), foodSupports(n), growthStatus(), regionalStanding(village), villageStandingOf(villageId), formAlliance(villageId), proposeAlliance(villageId), isAllied(aId, bId), recognizedAbroad(vid, otherVillage), memberReputationAbroad(vid), guestMeal(villageId), loanedReturnTick(), membershipDaily()
 
 **Rules:**
 - membership_needs_no_presence: on the roster, alive, not severed = member, wherever they are; exile is the one severing. (code: membership.js)
@@ -886,6 +889,8 @@ Village membership. Joining, leaving, exile status.
 - the_loaned_come_home: m.loaned is surfaced in awayMembers and the return is said aloud by loanedReturnTick. (code: membership.js)
 - loaned_return_names_are_honest: the return line names the loaned via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("A walks back in" read broken). (code: membership.js, travel lever r4 2026-10-12)
 - guest_meal_wastes_nothing: a full player is not served — the ally's pantry is never charged for zero gain. (code: membership.js)
+- thin_village_recruits_itself: roster < 8 and housing room — the village debates (aloud) and auto-accepts the best application or takes in a waiting joinable visitor, no player action needed. Split room costs -1 trust (decided without you); hostile room waits for the player; shady/hostile visitors never auto-taken. (code: membership.js, 2026-10-13)
+- desperation_is_loud: a thin village's need travels — applications and strangers get a 0.08/day arrival floor even below the notability gate; low-notability thin villages draw the desperate (curious/fleeing), not traders. (code: membership.js/betrayal.js, 2026-10-13)
 
 **Consumes:** village.members
 
@@ -1466,6 +1471,7 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
 - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
+- bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 
 **Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
 

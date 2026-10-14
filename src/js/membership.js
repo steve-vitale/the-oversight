@@ -11,6 +11,7 @@
 //   - genApplicant()
 //   - judgeApplication(app)
 //   - considerApplications()
+//   - villageAutoRecruit()
 //   - debateIntake(app)
 //   - rejoinMembership()
 //   - severMembership(vid)
@@ -35,6 +36,8 @@
 //   - the_loaned_come_home: m.loaned is surfaced in awayMembers and the return is said aloud by loanedReturnTick. (code: membership.js)
 //   - loaned_return_names_are_honest: the return line names the loaned via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("A walks back in" read broken). (code: membership.js, travel lever r4 2026-10-12)
 //   - guest_meal_wastes_nothing: a full player is not served — the ally's pantry is never charged for zero gain. (code: membership.js)
+//   - thin_village_recruits_itself: roster < 8 and housing room — the village debates (aloud) and auto-accepts the best application or takes in a waiting joinable visitor, no player action needed. Split room costs -1 trust (decided without you); hostile room waits for the player; shady/hostile visitors never auto-taken. (code: membership.js, 2026-10-13)
+//   - desperation_is_loud: a thin village's need travels — applications and strangers get a 0.08/day arrival floor even below the notability gate; low-notability thin villages draw the desperate (curious/fleeing), not traders. (code: membership.js/betrayal.js, 2026-10-13)
 // consumes:
 //   - village.members
 /* VILLAGE MEMBERSHIP — src/js/membership.js
@@ -341,6 +344,12 @@
         var view = 0;
         try { view = this.havenViewership ? this.havenViewership() : 0; } catch (e) {}
         var p = Math.max(0, (notab - 40) / 100) + view / 200;
+        // DESPERATION (recruitment fix 2026-10-13): a thin village's need is
+        // loud — word of an empty fire travels even when the haven doesn't
+        // look successful. Without this floor the auto-recruit has nothing
+        // to work with: the notability gate binds first.
+        var thin = ((this.state.village || {}).roster || []).length < 8;
+        if (thin) p = Math.max(p, 0.08);
         if (R() > p) return;
         var app = this.genApplicant();
         if (!app) return;
@@ -479,6 +488,73 @@
         if (bs) bs.strangersHeard = (bs.strangersHeard || 0) + 1;
       } catch (e) {}
       return true;
+    },
+
+    // villageAutoRecruit: the village recruits WITHOUT the player
+    // (recruitment fix 2026-10-13). A thin village (roster < 8) doesn't wait
+    // on the leader forever — the debate still happens (debateIntake, aloud),
+    // but if the room isn't hostile the village acts: the best pending
+    // application is accepted, or a waiting joinable visitor is taken in.
+    // The player pays a small price for absence: -1 trust when the room was
+    // split (decisions made without you); a warm room costs nothing (the
+    // village did the obvious thing); a hostile room (>= 60 against) waits
+    // for the player — that tension is preserved. Shady/hostile visitors are
+    // never auto-taken: the village isn't stupid. Housing-gated (room > 0):
+    // the village won't crowd itself. One intake per day, max.
+    // Steve overrule invited: Option A (auto-accept when thin) + a
+    // desperation arrival floor (Option C-lite). Option B (UI visibility)
+    // moves nothing in sims, so it wasn't the pick.
+    villageAutoRecruit() {
+      try {
+        var v = this.state.village || {};
+        if (this.state.scholar.exiled) return;
+        var roster = v.roster || [];
+        if (roster.length >= 8) return; // healthy villages wait on the leader
+        var g = this.growthStatus();
+        if (g.room <= 0) return; // no roof — no auto-recruit into homelessness
+        var m = this.mshipState();
+        // Snapshot: the trust cost lands on villagers who were there for the
+        // decision — a newcomer taken in mid-call doesn't grumble about it.
+        var rosterIds = roster.slice();
+        // 1. APPLICATIONS: best judged first, each considered once.
+        var apps = m.applications || [];
+        var best = null, bestScore = -1;
+        for (var i = 0; i < apps.length; i++) {
+          if (apps[i].autoConsidered) continue;
+          var j = this.judgeApplication(apps[i]);
+          if (j.score > bestScore) { bestScore = j.score; best = apps[i]; }
+        }
+        if (best && bestScore >= 50) {
+          best.autoConsidered = true;
+          var against = this.debateIntake(best); // the village weighs in, aloud
+          if (against >= 60) return; // hostile room waits for the player
+          this.say(`📨 The village didn't wait for you. ${best.name} was vouched for around the fire — they're walking.`);
+          this.acceptApplication(best.id);
+          if (against >= 40) {
+            for (var k = 0; k < rosterIds.length; k++) {
+              if (rosterIds[k] === this.villagerId) continue;
+              this.bumpTrust(rosterIds[k], -1, 'the village decided without you');
+            }
+          }
+          try { if (this.journalNote) this.journalNote('village', 'application', 'Village auto-accepted ' + best.name + ' (thin roster).'); } catch (e) {}
+          return; // one intake per day
+        }
+        // 2. VISITORS: a waiting joinable stranger, taken in by the village.
+        var visitors = v.visitors || [];
+        for (var vi = 0; vi < visitors.length; vi++) {
+          var vis = visitors[vi];
+          if (vis.type !== 'curious' && vis.type !== 'fleeing') continue;
+          if (vis.hostile || vis.shady) continue; // never the dangerous ones
+          if (this.visitorInteract) this.visitorInteract(vis.id, 'invite');
+          for (var k2 = 0; k2 < rosterIds.length; k2++) {
+            if (rosterIds[k2] === this.villagerId) continue;
+            this.bumpTrust(rosterIds[k2], -1, 'a stranger taken in without your word');
+          }
+          this.say(`👋 The village didn't wait for you — ${vis.name} was taken in around the fire. Another pair of hands.`);
+          try { if (this.journalNote) this.journalNote('village', 'stranger', 'Village took in ' + vis.name + ' (thin roster).'); } catch (e) {}
+          return; // one intake per day
+        }
+      } catch (e) {}
     },
 
     // debateIntake: the village weighs a big intake. Weighted by trust —
@@ -904,6 +980,9 @@
 
     membershipDaily() {
       try { this.considerApplications(); } catch (e) {}
+      // AUTO-RECRUIT (recruitment fix 2026-10-13): a thin village doesn't
+      // wait on the leader forever. See villageAutoRecruit.
+      try { this.villageAutoRecruit(); } catch (e) {}
       try { this.arrivalTick(); } catch (e) {}
       try { this.crowdingTick(); } catch (e) {}
       try { this.loanedReturnTick(); } catch (e) {}

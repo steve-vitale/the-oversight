@@ -45,6 +45,7 @@
 //   - switchboard_talker_cost: appointing the village's best talker to the relay weakens moots — trial swing -8 while they hold the office (code: betrayal.js — tallyVotes, switchboardTalkerCost)
 //   - switchboard_resentment: timed mood modifiers (village.moodMods) model appointment resentment — e.g. honoring the weakest forager (code: betrayal.js — villageMood)
 //   - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
+//   - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 // consumes:
 //   - village.relationships
 //   - scholar.reputation
@@ -2881,9 +2882,18 @@
     if (this.state.scholar.exiled) return; // no visitors for the exiled
     if ((v.visitors || []).length) return; // one at a time
     const n = this.villageNotability();
-    if (n < 40) return;
-    if (R() > (n - 35) / 100) return;
-    const type = pick(['trader', 'trader', 'scout', 'curious', 'fleeing']);
+    // DESPERATION (recruitment fix 2026-10-13): a thin village draws the
+    // desperate, not traders — fleeing families and the curious come to any
+    // fire that's still lit, even one the broadcast forgot. Same 0.08 floor
+    // as applications, so the village auto-recruit has something to work with.
+    const thin = ((this.state.village || {}).roster || []).length < 8;
+    if (n < 40 && !thin) return;
+    let sp = Math.max(0, (n - 35) / 100);
+    if (thin) sp = Math.max(sp, 0.08);
+    if (R() > sp) return;
+    const type = (thin && n < 40)
+      ? pick(['curious', 'fleeing', 'curious', 'fleeing'])
+      : pick(['trader', 'trader', 'scout', 'curious', 'fleeing']);
     // VISITOR NAMES (Steve 2026-10-06): the old shared pool could name a
     // trader "a frightened family" — a family operating a trade cart breaks
     // the fiction. Names follow the type now.

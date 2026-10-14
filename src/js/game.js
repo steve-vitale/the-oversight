@@ -139,6 +139,7 @@
 //   - npc_abilities_minimal: villagers hold no kits; v.npcAbilities is the minimal per-villager ability store (code: npcHasAbility/npcGrantAbility)
 //   - villager_xp_system: villagers earn XP per track (combat/field/social/craft) from real deeds; at thresholds (3/8/16/32/64, mirroring the player's skill-practice shape) the System grants the next ability from the track's fixed-priority kit -- deterministic, no RNG in the grant path; grants wait for systemArrived; six-slot rule same as the player (code: villagerGainXP, NPC_ABILITY_KITS, Steve 2026-10-09)
 //   - combat_action_economy: move + acted (code: tbAfterPlayerAction)
+//   - old_cuirass_teaches: every starting haven hangs an old bark cuirass by the fire — the first dawn you're home you really SEE it: bark_armor recipe L1 (seen), once ever, silent if already known. Breaks the bark_armor discovery lottery. (code: oldCuirassBeat, 2026-10-13)
 // consumes:
 //   - state.scholar, state.village, state.codex (central game state roots)
 // Slice 1 game controller: "Seven Days".
@@ -1855,6 +1856,13 @@
       // VILLAGE WOODPILE (Steve 2026-10-08): the hearth boils creek water at
       // 4L/wood. Water duty feeds the pile; the pile feeds the hearth.
       this.state.village.wood = 10;
+      // OLD BARK CUIRASS (armor discovery 2026-10-13): every starting haven
+      // hangs one by the fire — split at the seam, unwearable, but the shape
+      // is clear. The guaranteed bark_armor L1 beat (oldCuirassBeat, at dawn):
+      // examining a real worn cuirass is the snare-lesson pattern, and this
+      // one is always there. Breaks the bark_armor discovery lottery — every
+      // run can reach L1 without a lucky spawn or a lucky corpse.
+      this.state.village.oldCuirass = true;
       // (Player's personal 2L is set when the scholar object is built below.)
       // the roster: your pick + the 5 you didn't pick + 6 drawn from the background survivors.
       // twelve mouths, different every run. The unpicked generated characters live here too.
@@ -2986,6 +2994,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const recipe = (this.data.recipes || []).find(r => r.id === itemId);
         if (!recipe || !recipe.durable) return; // gear only, not traps
         if (this.grantKnowledge) this.grantKnowledge('recipe', itemId, 1, { type: 'discovery' });
+      } catch (e) {}
+    },
+
+    // OLD CUIRASS BEAT (armor discovery 2026-10-13): the old bark cuirass by
+    // the fire is a real object in a real place — the first dawn you're home,
+    // you really SEE it: recipe L1 (seen — blind 35% craft, materials at
+    // risk). Same gates as every recipe: L1 is the shape, L2+ is earned by
+    // doing. Fires once ever (oldCuirassSeen); silent if you already know it.
+    // Old saves predate the founding flag — missing flag reads as present.
+    oldCuirassBeat() {
+      try {
+        const v = this.state.village || {};
+        if (v.oldCuirass === false || v.oldCuirassSeen) return;
+        const vpx = v.px != null ? v.px : 4, vpy = v.py != null ? v.py : 4;
+        if (this.map.px !== vpx || this.map.py !== vpy) return; // not home — the beat waits
+        v.oldCuirassSeen = true;
+        const rk = ((this.state.codex || {}).recipes || {})['bark_armor'] || {};
+        if ((rk.level || 0) >= 1) return; // already knows — no line, no double
+        if (this.grantKnowledge) this.grantKnowledge('recipe', 'bark_armor', 1, { type: 'witnessed' });
+        this.say(`🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do.`);
+        try { this.tele('old_cuirass_seen', {}); } catch (e) {}
       } catch (e) {}
     },
 
@@ -27616,6 +27645,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       // LEADER: morning briefing — village knowledge flows to you post-arrival.
       try { this.villageBriefing(); } catch (e) {}
+      // OLD CUIRASS (armor discovery 2026-10-13): the bark cuirass by the
+      // fire teaches its shape the first dawn you're home. See oldCuirassBeat.
+      try { this.oldCuirassBeat(); } catch (e) {}
       // CONTESTS (Steve 2026-10-05): the show runs on a schedule. 2/week max.
       try {
         // Resolve pending contest (countdown fired)
