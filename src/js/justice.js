@@ -18,8 +18,8 @@
 //   - summons_voice: the moot demand is generated from the confronter's identity + the strongest witnessed crime + why it's happening now; never names unwitnessed crimes (code: justiceDemandMoot)
 //   - accuser_aftermath: the verdict moves the accuser's standing too — weak cases cost them, held cases earn them respect (code: mootAccuserAftermath)
 // consumes:
-//   - village.laws
-//   - scholar.crimes
+//   - village.justice.crimes
+//   - village.trust
 /* VILLAGE JUSTICE + COMBAT DIALOGUE
  *
  * Two systems, one file:
@@ -58,6 +58,11 @@
     // Record a crime the PLAYER committed. Called via wrappers below.
     recordCrime(type, opts) {
       opts = opts || {};
+      // Someone ELSE's crime (hostile visitor, psycho arc pass `villain`) is
+      // not the player's: booking it here gave the player heat and provable
+      // charges for a stranger's theft. No NPC crime ledger exists yet, so
+      // those crimes simply aren't booked on the player.
+      if (opts.villain != null && opts.villain !== this.villagerId) return;
       const j = this.justiceState();
       // dedupe: same type+victim within the same day part isn't a new crime
       const key = type + ':' + (opts.victim || '') + ':' + this.state.scholar.day + ':' + this.dayPart;

@@ -768,7 +768,10 @@
   Game.tbDamage = function (targetKey, dmg, sourceLabel, sourceKey, opts) {
     try {
       const atk = sourceKey ? this.tbFighter(sourceKey) : null;
-      if (atk && atk.flanking && atk.kind === 'villager') {
+      // wasFlank: saved BEFORE the flag is consumed — the point bonus below
+      // must not stack on a flank (it used to read the already-cleared flag).
+      const wasFlank = !!(atk && atk.flanking && atk.kind === 'villager');
+      if (wasFlank) {
         atk.flanking = false;
         dmg = Math.round(dmg * 1.5);
         try { this.say(`🗡️ ${atk.name} strikes from behind — where it wasn't looking. (${dmg})`); } catch (e) {}
@@ -780,13 +783,13 @@
         dmg = Math.round(dmg * 0.6);
         try { this.say(`🛡️ ${tgt.name} takes it on braced arms. (${before}→${dmg})`); } catch (e) {}
       }
-      // point role: +3 on strikes they make themselves
+      // point role: +3 on strikes they make themselves. The villager turn
+      // passes opts.strike (the label is the villager's name, so the old
+      // /strike/ label test never matched).
       if (atk && atk.kind === 'villager' && atk.villagerId && this.roleOf &&
-          this.roleOf(atk.villagerId) === 'point' && !atk.flanking) {
+          this.roleOf(atk.villagerId) === 'point' && !wasFlank && opts && opts.strike) {
         // flanking already got its bonus; point adds to plain strikes
-        if (sourceLabel && /strike/i.test(sourceLabel)) {
-          dmg = dmg + 3;
-        }
+        dmg = dmg + 3;
       }
     } catch (e) {}
     return origTbDamage.call(this, targetKey, dmg, sourceLabel, sourceKey, opts);

@@ -35,7 +35,7 @@ const PAIRS = [
   ['foreignSpeech.json', 'foreignSpeech'], ['lifeseeds.json', 'lifeseeds'],
   ['arrivalText.json', 'arrivalText'], ['justiceVoice.json', 'justiceVoice'],
   ['alienPlayers.json', 'alienPlayers'], ['regions.json', 'regions'],
-  ['dramaEffects.json', 'dramaEffects'], ['monsterBehaviors.json', 'monsterBehaviors'],
+  ['monsterBehaviors.json', 'monsterBehaviors'],
   ['contests.json', 'contests'], ['events.json', 'events'],
   ['statusEffects.json', 'statusEffects'], ['cooking.json', 'cooking'],
 ];

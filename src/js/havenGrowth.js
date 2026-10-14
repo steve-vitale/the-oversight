@@ -19,7 +19,7 @@
 //   - resource_based: tiers unlock on stockpile thresholds only (code: havenGrowth.js — havenGrowthDaily checks havenStores() vs HAVEN_TIERS req; no deed, calendar, or knowledge reads anywhere in the tier path)
 //   - knowledge_never_gates: nothing here reads the codex (code: havenGrowth.js — havenTierUp/havenGrowthMeter reference stores only; announceHavenBar prints exact numbers)
 //   - discoverable: System announces each tier bar post-arrival, Haven panel shows the live meter, villagers gossip the shortfall (code: havenGrowth.js — announceHavenBar, havenGrowthMeter + app.js havenGrowthHTML, havenNeedGossip)
-//   - reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 +1 per 12k pantry over 3k, cap 5)
+//   - reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 raiders, +1 above 12k pantry kcal and +1 above 24k, cap 5)
 //   - raid_raises_crisis: a raid raises an aid crisis reactively (the village looks to you; four call-for-help options said aloud). Raiders nobody meets LINGER at the treeline and gorge nightly (havenGrowthDaily) until driven off — the persistent threat the comms chain exists for. (code: havenRaidTick, 2026-10-10)
 //   - cap_ceiling: havenPopCap is the ceiling; intake reads it via housingCap (code: havenGrowth.js — havenPopCap; membership.js — housingCap takes max(shelters, 12+4*havenTier()))
 //   - no_consumption: reaching a tier does not eat the stockpile (code: havenGrowth.js — havenTierUp sets v.havenTier only; stores untouched)
@@ -360,7 +360,7 @@
       const sorted = monsters.slice().sort((a, b) =>
         (Math.abs(a.tx - hx) + Math.abs(a.ty - hy)) - (Math.abs(b.tx - hx) + Math.abs(b.ty - hy)));
       // WEALTH DRAWS TEETH (util audit 2026-10-10): a rich pantry smells
-      // farther. 3 raiders base, +1 per 12k kcal above the 3k smell-line, cap 5.
+      // farther. 3 raiders base, +1 above 12k kcal and +1 above 24k, cap 5.
       // Reactive (world state), never scheduled.
       const raidN = Math.min(5, 3 + (pantry > 12000 ? 1 : 0) + (pantry > 24000 ? 1 : 0));
       const raiders = sorted.slice(0, raidN);
@@ -458,7 +458,7 @@
         try {
           const sch = this.state.scholar;
           sch.awayNews = sch.awayNews || [];
-          if (sch.awayNews.length < 8) sch.awayNews.push(`🐗 RAID at Haven last night — ${raiders.length} raiders hit the pantry.${pillaged > 0 ? ' ' + Math.round(pillaged).toLocaleString() + ' kcal lost.' : ''}${palisade ? ' The palisade held.' : ''}`);
+          if (sch.awayNews.length < 8) sch.awayNews.push(`🐗 RAID at Haven last night — ${raiders.length} raiders hit the pantry.${palisade ? ' The palisade held.' : ''}`);
         } catch (e) {}
       }
       try {

@@ -52,11 +52,11 @@ function ok(name, cond) {
   Game.state.systemArrived = true;
   ok('stage 0 without ability', Game.translatorStage() === 0);
   ok('translatorActive false at stage 0', Game.translatorActive() === false);
-  ok('memoryAidActive false at stage 0', Game.memoryAidActive() === false);
+  ok('memory aid off at stage 0', Game.translatorStage() < 1);
   s.abilities.push({ id: 'translator' });
   s.integration = 10;
   ok('stage 1 = memory aid (ability, integration < 60)', Game.translatorStage() === 1);
-  ok('memoryAidActive at stage 1', Game.memoryAidActive() === true);
+  ok('memory aid on at stage 1', Game.translatorStage() >= 1);
   ok('translatorActive false at stage 1 (aid is not live)', Game.translatorActive() === false);
   s.integration = 59;
   ok('stage 1 at integration 59', Game.translatorStage() === 1);

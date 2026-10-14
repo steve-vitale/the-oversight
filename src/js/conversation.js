@@ -1313,10 +1313,6 @@
     // new face never pretends they were in the room. (v.mantleOf is written
     // by playerDeath in ledger.js.)
     mantleOf() { try { return (this.state.village || {}).mantleOf || []; } catch (e) { return []; } },
-    bearerStartDay() {
-      const m = this.mantleOf();
-      return m.length ? (m[m.length - 1].day || 1) : 1;
-    },
     // inheritedName(rec): first name of the Bearer <redacted> held the office
     // when this conversational record (open thread, seed, favor, memory)
     // was made — or null when the current Bearer <redacted> it. Prefers the
@@ -5611,9 +5607,6 @@
     // not "active" in this sense — it helps you learn, never replaces it.
     translatorActive() {
       return this.translatorStage() === 2;
-    },
-    memoryAidActive() {
-      return this.translatorStage() >= 1;
     },
     // mediatedBySystem: live translate is on AND you share no tongue with
     // them. The System gives you the words — the human work doesn't happen.

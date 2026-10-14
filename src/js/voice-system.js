@@ -46,15 +46,32 @@
     return _manifestPromise;
   }
 
-  // Exact game-text -> manifest id index. Built once the manifest loads.
-  // Only exact matches ever voice: templated lines (names/numbers baked in
-  // at runtime) have no twin and stay text-only, by design.
+  // Game-text -> manifest id index. Built once the manifest loads.
+  // Keys are NORMALIZED on both sides (normVoiceText): game copy drifted
+  // from the recorded lines by emoji prefixes, quote styles, brackets,
+  // dashes and spacing, and exact matching silently voiced none of those.
+  // Templated lines (names/numbers baked in at runtime) still have no twin
+  // and stay text-only, by design.
+  function normVoiceText(t) {
+    return String(t)
+      .replace(/[\p{Extended_Pictographic}\p{So}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}\u{20E3}]/gu, '')
+      .replace(/[\u2018\u2019\u201A\u201B\u2032'`\u201C\u201D\u201E\u201F\u2033"\u00AB\u00BB]/g, '')
+      .replace(/[()[\]{}<>]/g, '')
+      .replace(/[\u2014\u2013]/g, '-')
+      .replace(/\u2026/g, '...')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
   var _textToId = null;
   function buildTextIndex() {
     var map = {};
     for (var i = 0; i < _manifest.length; i++) {
       var e = _manifest[i];
-      if (e && e.id && e.text) map[e.text] = e.id;
+      if (e && e.id && e.text) {
+        var k = normVoiceText(e.text);
+        if (k && !map[k]) map[k] = e.id;
+      }
     }
     _textToId = map;
   }
@@ -104,13 +121,13 @@
     return (_manifest || []).map(function (e) { return e.id; });
   };
   Game.systemAudioManifest = loadManifest;
-  // systemVoiceIdFor(text): exact game text -> manifest id, or null. Kicks
+  // systemVoiceIdFor(text): game text -> manifest id (normalized match), or null. Kicks
   // the manifest/index build on first call; returns null until it's ready.
   // Callers never block: the text always shows, the voice catches up.
   Game.systemVoiceIdFor = function (text) {
     if (!_manifest) loadManifest().catch(function () {});
     if (!_textToId || !text) return null;
-    return _textToId[text] || null;
+    return _textToId[normVoiceText(text)] || null;
   };
   // preloadSystemVoice(): start the manifest fetch early (newGame) so the
   // text index is warm before the System's first line. Safe to call twice.

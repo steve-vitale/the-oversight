@@ -1344,9 +1344,13 @@
     Game.resolveCase = function (caseId, path) {
       const r = _resolveCase ? _resolveCase.call(this, caseId, path) : undefined;
       try {
-        if (path === 'weregild') { this.ledgerAdd('brokerage', 2); this.ledgerAdd('unified', 1); }
+        // The player's OWN conviction isn't brokerage or exposure work they
+        // did: no exposed/unified/brokerage credit when they're the accused.
+        const c = this.getCase ? this.getCase(caseId) : null;
+        const accused = !!c && (c.playerRole === 'accused' || (c.accused || []).includes(this.villagerId));
+        if (path === 'weregild') { if (!accused) { this.ledgerAdd('brokerage', 2); this.ledgerAdd('unified', 1); } }
         else if (path === 'schism') { this.ledgerAdd('fractured', 2); }
-        else if (path === 'exile') { this.ledgerAdd('exposed', 1); this.ledgerAdd('unified', 1); }
+        else if (path === 'exile') { if (!accused) { this.ledgerAdd('exposed', 1); this.ledgerAdd('unified', 1); } }
         else if (path === 'cold_war') { this.ledgerAdd('fractured', 1); }
       } catch (e) {}
       return r;

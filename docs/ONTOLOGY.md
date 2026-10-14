@@ -127,7 +127,7 @@ Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; afte
 - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
 - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 
-**Consumes:** village.relationships, scholar.reputation
+**Consumes:** village.trust, village.bonds, village.betrayal, village.visitors, village.justice.crimes
 
 ### broadcast (`broadcast.js`)
 The television mechanism — BROADCAST MODE. When a show, contest watch-beat, ratings summons, or Death Reel moment airs, the game becomes a TV screen: entry title card, persistent LIVE bug, broadcast-treated grid (scanlines + vignette + screen frame), running alien commentary in a ticker, lower-third name cards, CUT TO transitions, crowd reactions. Entry and exit are ALWAYS explicit — the player never wonders whether they're playing or watching. TV never kills (canon).
@@ -349,7 +349,7 @@ Beat-tagged conversation. Every NPC line is tagged at generation time with its b
 - four_rules_kept: transcript_cap, one_beat_turns, tap_advance, history_view untouched (code: conversation.js ontology)
 - probe_on_news_and_small: the "That doesn't add up" soft probe is offered on news and small beats (wherever the hard confrontation is reachable); withheld on feeling/offer beats (code: beatMenuResponses, Steve 2026-10-06)
 
-**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool), playerVoice()
+**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool)
 
 ### convo-dialogue (`convo-dialogue.js`)
 Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers. REBUILD (2026-10-11, Steve): the handlers speak through the want defs (engage/deflect/commit beats), pool every hardcoded line via convoPickCycle (the verbatim "Anyway." loop is dead), compose beats before emission via convoComposeDlg, advance the want arc directly (convoWantEngage), and emit ONLY through sayLine — the single emission choke point. New handlers: dlg:commit (formal commitment), dlg:heed (heeding a warning), dlg:stay (keeping company).
@@ -783,7 +783,7 @@ Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, 
 - resource_based: tiers unlock on stockpile thresholds only (code: havenGrowth.js — havenGrowthDaily checks havenStores() vs HAVEN_TIERS req; no deed, calendar, or knowledge reads anywhere in the tier path)
 - knowledge_never_gates: nothing here reads the codex (code: havenGrowth.js — havenTierUp/havenGrowthMeter reference stores only; announceHavenBar prints exact numbers)
 - discoverable: System announces each tier bar post-arrival, Haven panel shows the live meter, villagers gossip the shortfall (code: havenGrowth.js — announceHavenBar, havenGrowthMeter + app.js havenGrowthHTML, havenNeedGossip)
-- reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 +1 per 12k pantry over 3k, cap 5)
+- reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 raiders, +1 above 12k pantry kcal and +1 above 24k, cap 5)
 - raid_raises_crisis: a raid raises an aid crisis reactively (the village looks to you; four call-for-help options said aloud). Raiders nobody meets LINGER at the treeline and gorge nightly (havenGrowthDaily) until driven off — the persistent threat the comms chain exists for. (code: havenRaidTick, 2026-10-10)
 - cap_ceiling: havenPopCap is the ceiling; intake reads it via housingCap (code: havenGrowth.js — havenPopCap; membership.js — housingCap takes max(shelters, 12+4*havenTier()))
 - no_consumption: reaching a tier does not eat the stockpile (code: havenGrowth.js — havenTierUp sets v.havenTier only; stores untouched)
@@ -876,7 +876,7 @@ Village justice + combat dialogue. Crimes have consequences.
 - summons_voice: the moot demand is generated from the confronter's identity + the strongest witnessed crime + why it's happening now; never names unwitnessed crimes (code: justiceDemandMoot)
 - accuser_aftermath: the verdict moves the accuser's standing too — weak cases cost them, held cases earn them respect (code: mootAccuserAftermath)
 
-**Consumes:** village.laws, scholar.crimes
+**Consumes:** village.justice.crimes, village.trust
 
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.
@@ -1446,12 +1446,12 @@ Truth/distortion. Claim-gossip corrects (tellers share the truth); action-gossip
 ### villageAgency (`villageAgency.js`)
 Foreign villages as players — inner life (famine, succession, schism), splinter events, petition-to-join beats, rumor-carried internal events.
 
-**Provides:** villageAgencyDaily(), ensureFaces(v), havenPopCap(), havenRoom(), openPetition(pet), petitionInterview(petitionId, qid), conductPetitionMoot(petitionId), answerPetition(petitionId, how), aidVillage(villageId, kcal), answerBeg(how), answerRaidDefense(how), answerSuccession(how), stageSuccessionBeat(villageId), queueVillageEventRumor(villageId, kind, opts), fireSplinter(villageId, cause), _vaInner(v), _vaSimInner(v), _vaStartSuccession(v), _vaResolveSuccession(v, backedIdx), _vaPickSplinterCause(v), _vaSplinterMembers(v, n), _vaMakeSplinterVillage(v, remainers, cause, kcal, day), _vaUniqueVillageName(base), _vaNameAmbiguous(a, b), _vaStripNameMark(s), _vaPetitionScore(vid, pet, ppm, mood), _vaFinishPetition(pet, playerAccept), _vaAdmitPetitioners(pet), _vaTurnAway(pet, why), _vaPetitionConsequences(pet, accepted), _vaFamineAct(v), _vaStageBeg(v), _vaStageRaidDefense(v), _vaRumorText(v, kind, wrong, opts), _vaPantryPerMouth()
+**Provides:** villageAgencyDaily(), ensureFaces(v), havenRoom(), openPetition(pet), petitionInterview(petitionId, qid), conductPetitionMoot(petitionId), answerPetition(petitionId, how), aidVillage(villageId, kcal), answerBeg(how), answerRaidDefense(how), answerSuccession(how), stageSuccessionBeat(villageId), queueVillageEventRumor(villageId, kind, opts), fireSplinter(villageId, cause), _vaInner(v), _vaSimInner(v), _vaStartSuccession(v), _vaResolveSuccession(v, backedIdx), _vaPickSplinterCause(v), _vaSplinterMembers(v, n), _vaMakeSplinterVillage(v, remainers, cause, kcal, day), _vaUniqueVillageName(base), _vaNameAmbiguous(a, b), _vaStripNameMark(s), _vaPetitionScore(vid, pet, ppm, mood), _vaFinishPetition(pet, playerAccept), _vaAdmitPetitioners(pet), _vaTurnAway(pet, why), _vaPetitionConsequences(pet, accepted), _vaFamineAct(v), _vaStageBeg(v), _vaStageRaidDefense(v), _vaRumorText(v, kind, wrong, opts), _vaPantryPerMouth()
 
 **Rules:**
 - camera_rule: max 3 named faces per village (speaker, leader, champion); every beat goes through them, everything else via rumors (code: villageAgency.js)
 - petition_never_silent: intake is always a played beat with a vote; never silent population ticks (code: villageAgency.js)
-- cap_is_ceiling: havenPopCap() is the haven workstream's hook — reads their growthTier when present, falls back to 12/16/20/24 (code: villageAgency.js)
+- cap_is_ceiling: havenRoom() admits up to housingCap() (membership.js: max of shelters and the havenGrowth.js tier ladder 12/16/20/24) — the number the Haven UI shows (code: villageAgency.js — havenRoom)
 - knowledge_never_gates: a starving stranger doesn't check your codex; no beat here is knowledge-gated (code: villageAgency.js)
 - reactive_not_calendar: schisms, succession, famine fire from conditions (hunger, tension, leader death), never timers (code: villageAgency.js)
 - they_eat_too: unapproached villages burn pantry daily (pop × 120 kcal net) — static pantries froze their inner lives (0/120 beg/raid answers). Approached villages run the catch-up sim instead. (code: _vaSimInner, util audit 2026-10-10)

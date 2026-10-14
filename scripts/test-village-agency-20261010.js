@@ -11,7 +11,8 @@
 //   3. consequences land: mouths (roster), reputation (other villages' opinion), corruption crosses
 //   4. rumor pipeline carries internal events — delayed, never omniscience
 //   5. beg / raid-defense / succession aid-or-exploit beats resolve with real costs
-//   6. havenPopCap hook: 12 default, 16/20/24 via growthTier; room:0 moot refuses honestly
+//   6. havenRoom reads housingCap (tier ladder 12/16/20/24 via havenGrowth.js, and shelters); room:0 moot refuses honestly
+//      (2026-10-14: was villageAgency's own havenPopCap via a legacy growthTier key, ignoring shelters)
 // Run: SEED=11 node scripts/test-village-agency-20261010.js (also 222, 3333)
 // Node harness: full src/js/*.js list in index.html order, minus DOM-only
 // (app.js/sprites.js/tile-scenes.js/move-anim.js/drama.js). Math.random is
@@ -48,7 +49,7 @@ global.window = global; // equipment.js needs window at LOAD; deleted before pla
   'src/js/corruption.js', 'src/js/lifeseed.js', 'src/js/progression.js',
   'src/js/ledger.js', 'src/js/abilityActions.js', 'src/js/monsterBehaviors.js',
   'src/js/statusEffects.js', 'src/js/villager-agency.js', 'src/js/fieldFights.js',
-  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js',
+  'src/js/villager-objectives.js', 'src/js/codex-people.js', 'src/js/membership.js', 'src/js/havenGrowth.js',
   'src/js/hierarchy.js', 'src/js/villageAgency.js', 'src/js/debug-scenarios.js', 'src/js/build.js',
 ].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window; // sync combat path, per harness lessons
@@ -78,8 +79,8 @@ function ok(cond, label) {
   // link vA to Haven (the splinter signature needs a linked village)
   const linkA = Game._formLink(vA.id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
   ok(!!linkA && !!Game.linkWith(vA.id), 'vA linked to Haven');
-  // room for petitioners: the haven workstream hook (growthTier) — longhouse => 16
-  Game.state.village.growthTier = 'longhouse';
+  // room for petitioners: the haven tier ladder (havenGrowth.js) — longhouse => 16
+  Game.state.village.havenTier = 1;
   const stock = (kcal) => { Game.state.village.pantry = Game.state.village.pantry || []; Game.state.village.pantry.push({ name: 'test grain', kcalEach: kcal, units: 1, spoilDay: 9999 }); };
   stock(40000);
   const pantryKcal = () => (Game.state.village.pantry || []).reduce((a, it) => a + (it.kcalEach || 0) * (it.units || 0), 0);
@@ -231,15 +232,23 @@ function ok(cond, label) {
   ok(saidHas(/They'll be back/), 'the teeth are named: they will be back');
 
   console.log(`[seed ${SEED}] --- 9. CAP HOOK ---`);
-  delete Game.state.village.growthTier;
-  ok(Game.havenPopCap() === 12, 'default cap is 12 (base Haven)');
-  Game.state.village.growthTier = 'longhouse';
-  ok(Game.havenPopCap() === 16, 'longhouse tier -> 16');
-  Game.state.village.growthTier = 'palisade';
-  ok(Game.havenPopCap() === 20, 'palisade tier -> 20');
-  Game.state.village.growthTier = 'granary';
-  ok(Game.havenPopCap() === 24, 'granary tier -> 24');
-  delete Game.state.village.growthTier;
+  const ms9 = Game.mshipState();
+  const saveHousing = ms9.housing;
+  ms9.housing = 12;
+  const pop9 = Game.state.village.roster.length;
+  Game.state.village.havenTier = 0;
+  ok(Game.havenRoom() === Math.max(0, 12 - pop9), 'default room: cap 12 (base Haven)');
+  Game.state.village.havenTier = 1;
+  ok(Game.havenRoom() === Math.max(0, 16 - pop9), 'longhouse tier -> cap 16');
+  Game.state.village.havenTier = 2;
+  ok(Game.havenRoom() === Math.max(0, 20 - pop9), 'palisade tier -> cap 20');
+  Game.state.village.havenTier = 3;
+  ok(Game.havenRoom() === Math.max(0, 24 - pop9), 'granary tier -> cap 24');
+  Game.state.village.havenTier = 0;
+  ms9.housing = 30;
+  ok(Game.havenRoom() === Math.max(0, 30 - pop9), 'shelters count: room follows housingCap, the number the UI shows');
+  ok(Game.havenRoom() === Math.max(0, Game.housingCap() - pop9), 'havenRoom === housingCap - roster');
+  ms9.housing = 12;
   // room:0 moot refuses honestly
   const saveRoster = Game.state.village.roster.slice();
   while (Game.state.village.roster.length < 12) Game.state.village.roster.push('dummy_' + Game.state.village.roster.length);
@@ -249,6 +258,7 @@ function ok(cond, label) {
   ok(saidHas(/no room/), 'the refusal names the reason');
   Game.state.pendingPetition = null;
   Game.state.village.roster = saveRoster;
+  ms9.housing = saveHousing;
 
   console.log(`[seed ${SEED}] --- 10. DAILY TICK + KNOWLEDGE NEVER GATES ---`);
   let tickOk = true;
