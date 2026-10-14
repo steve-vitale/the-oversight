@@ -1098,77 +1098,9 @@
         return `⏳ ${w.name}: ${n === 0 ? 'TODAY' : n + 'd'}`;
       } catch (e) { return ''; }
     },
-    // DEAD (sibling-sweep 2026-10-08): superseded by contests.js
-    // (fireContest/contestInterruption/resolveContest). Zero callers —
-    // the live contest system never routes through here. Kept, not
-    // deleted, until a --force-delete cleanup is approved.
-    declineChallenge() {
-      const s = this.state.scholar, w = s.challengeWarning;
-      if (!w) return null;
-      if (!w.canDecline) {
-        this.say('There is no decline. There never was, for this kind.');
-        return null;
-      }
-      s.challengeWarning = null; s.challengeInvites = null;
-      const pg = this.progState();
-      pg.showDebt = (pg.showDebt || 0) + 1; // whether you owe the show: a design lever
-      try { const v = this.state.village; v.viewership = Math.max(0, (v.viewership == null ? 0 : v.viewership) - 3); } catch (e) {}
-      this.say('You decline. The sky goes quiet in a way that feels personal. The audience boos — politely, the way trillions of beings boo. (Viewership −3. The show will remember that you owe it one.)');
-      try { this.recordMoment('Declined the show\u2019s invitation.'); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return null;
-    },
-    // DEAD (sibling-sweep 2026-10-08): superseded by contests.js
-    // contestInterruption. Zero callers — the mandatory teleport lives
-    // there now. Kept, not deleted, until a --force-delete cleanup is approved.
-    abduct(contestantIds, challengeId) {
-      // MANDATORY teleport. Interrupts ANYTHING — conversations end
-      // mid-sentence, fights stop mattering. The show doesn't care.
-      const s = this.state.scholar;
-      const ids = (contestantIds && contestantIds.length ? contestantIds : [this.villagerId]);
-      try {
-        for (const vid of (this.state.village.roster || [])) {
-          try { const c = this.convoGet(vid); if (c && c.active) this.endConvo(vid, 'abducted'); } catch (e) {}
-        }
-      } catch (e) {}
-      try { this.tbfight = null; this.fight = null; } catch (e) {}
-      s.rippedFrom = { mx: s.mx, my: s.my, day: s.day || 0 };
-      s.abducted = {
-        challengeId: challengeId || (s.challengeWarning && s.challengeWarning.id) || 'unknown',
-        at: s.day || 0,
-        contestants: [...ids],
-      };
-      s.challengeWarning = null;
-      const names = ids.map(id => { try { return this.displayName(id).split(' ')[0]; } catch (e) { return 'someone'; } }).join(', ');
-      this.say('⚡ The sky OPENS. Light like a held breath — and then you are NOT where you were. Mid-step, mid-word, mid-swing: GONE. The show doesn\u2019t care what you were doing.');
-      this.say(`Ripped from the world: ${names}. Back home, the village stares at the empty air where people used to be.`);
-      try { this.recordMoment(`${names} ${ids.length > 1 ? 'were' : 'was'} taken to the arena.`); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return s.abducted;
-    },
     // ---------- THE INVITATION LIST ----------
-    // DEAD (sibling-sweep 2026-10-08): the invitation-list flow was never
-    // wired — zero callers. Kept, not deleted, until a --force-delete
-    // cleanup is approved.
-    bringCompanion(vid) {
-      // the chosen can bring friends. Who you bring into a deadly televised
-      // game — and who you leave — is its own drama. Trust, guilt, politics.
-      const s = this.state.scholar, inv = s.challengeInvites;
-      if (!inv) return null;
-      if (inv.brought.length >= inv.canBring) {
-        this.say('The invitation list is full. The show is strict about headcounts.');
-        return null;
-      }
-      if (inv.brought.includes(vid) || inv.picked.includes(vid)) return null;
-      inv.brought.push(vid);
-      let nm = 'them';
-      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) {}
-      this.say(`You put ${nm} on the list. ${nm} goes pale, then nods. The ones you didn't pick look away.`);
-      try { const t = this.state.village.trust || {}; t[vid] = Math.min(100, (t[vid] || 10) + 8); } catch (e) {}
-      try { this.recordMoment(`${nm} was brought to the arena.`); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return null;
-    },
+    // declineChallenge / abduct / bringCompanion (DEAD since 2026-10-08,
+    // superseded by contests.js, zero callers) were deleted 2026-10-14.
     expectedButLeft() {
       // who expected to be brought and wasn't. Future drama reads this.
       try {

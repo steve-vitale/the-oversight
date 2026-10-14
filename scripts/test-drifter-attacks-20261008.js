@@ -2,7 +2,7 @@
 // HOSTILE PLAYTEST (drifter archetype, 2026-10-08): break distance.
 // Verbs: catch-up sim exploits, free travel, village-state corruption on return.
 //   A1 EXPLOIT: catchUpSim regrow multiplication (approach village B after A)
-//   A2 SOFTLOCK: contest abduct mid-combat / mid-travel + return integrity
+//   A2 (retired 2026-10-14: abduct() was dead code, deleted)
 //   A3 HONESTY: travel/blockage button labels vs engine costs
 // Run: SEED=1 node scripts/test-drifter-attacks-20261008.js
 const fs = require('fs');
@@ -95,31 +95,8 @@ function synthFight(monId) {
       perVillage.map(p => `${p.name}:${p.calls}`).join(', '));
   }
 
-  // ============ A2: abduct mid-combat + mid-travel, return integrity ============
-  {
-    const s = fresh();
-    // mid-travel: stand on a wild node after a travelTo
-    Game.map.px = 5; Game.map.py = 5; s.mx = 4; s.my = 4;
-    synthFight('hushwolf');
-    const hadFight = !!Game.tbfight;
-    const px0 = Game.map.px, py0 = Game.map.py, mx0 = s.mx, my0 = s.my;
-    let threw = null;
-    try {
-      Game.warnChallenge({ name: 'Test Game', firesDay: s.day });
-      Game.abduct([Game.villagerId], 'ch_test');
-      drain();
-    } catch (e) { threw = e; }
-    const fightCleared = !Game.tbfight && !Game.fight;
-    let ret = null, retThrew = null;
-    try { Game.returnFromArena(); drain(); } catch (e) { retThrew = e; }
-    const posOk = Game.map.px === px0 && Game.map.py === py0 && s.mx === mx0 && s.my === my0;
-    let canAct = false;
-    try { canAct = Game.microMove(4, 5) === true || Game.microMove(5, 4) === true; } catch (e) {}
-    const broke = !!threw || !!retThrew || !fightCleared || !posOk || !canAct || Game.over;
-    attack('A2 abduct mid-combat/mid-travel + return',
-      broke,
-      `fight existed=${hadFight}, cleared=${fightCleared}, pos intact=${posOk}, can step after=${canAct}, threw=${threw ? threw.message : 'no'}/${retThrew ? retThrew.message : 'no'}`);
-  }
+  // A2 RETIRED 2026-10-14: it drove ledger.js abduct(), dead code (superseded
+  // by contests.js contestInterruption, zero callers) that was deleted.
 
   // ============ A3: blockage button labels vs engine ============
   {
