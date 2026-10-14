@@ -3,7 +3,7 @@
 //  Bits of pseudo code interjected with frequency."
 // Generates 20 characters and asserts:
 // - no "reads as" (engine language leaking into fiction)
-// - no second-person POV breaks in third-person bios
+// - (info only) bios may address the player as "you" (Steve 2026-10-14)
 // - pronoun consistency (no he/they or she/they mixes)
 // - no repeated identical sentences across backgrounds
 // Usage: node scripts/test-backgrounds-20261006.js
@@ -44,7 +44,9 @@ function ok(name, cond, extra) {
   }
   ok('no "reads as" in backgrounds', readsAs === 0, `${readsAs} found`);
 
-  // 2. No second-person POV breaks (you/your/yours in third-person bio)
+  // 2. Second person is ALLOWED (Steve 2026-10-14: "Yes can address player
+  // as you."): bios and the System's assessment may speak to the player.
+  // Counted for information only; no longer a failure.
   // Quoted speech is character voice (e.g. a text message: 'call when you can')
   // and may use second person. Strip quotes carefully — don't let possessive
   // apostrophes (Petro's) pair with quote delimiters.
@@ -57,10 +59,10 @@ function ok(name, cond, extra) {
     const youMatch = unquoted.match(/\b(you|your|yours|yourself)\b/i);
     if (youMatch) {
       povBreaks++;
-      console.log(`  POV break in ${ch.name}: "...${unquoted.slice(Math.max(0, youMatch.index - 40), youMatch.index + 40)}..."`);
+      if (process.env.VERBOSE) console.log(`  second person in ${ch.name}: "...${unquoted.slice(Math.max(0, youMatch.index - 40), youMatch.index + 40)}..."`);
     }
   }
-  ok('no second-person POV breaks', povBreaks === 0, `${povBreaks} found`);
+  console.log(`  (info) ${povBreaks} bios address the player as "you" — allowed`);
 
   // 3. Pronoun consistency: if name is gendered (he/she), no they/them for that person
   let pronounMix = 0;

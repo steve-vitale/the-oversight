@@ -152,8 +152,10 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 
 ## 3. Known issues (small, logged)
 - `scripts/validate-data.js` crashes (`spec.endsWith is not a function`).
-- Two quarantined tests catch real bugs: second-person "you" in generated bios
-  (`test-backgrounds-20261006`); see `scripts/green-list-quarantine.txt`.
+- Balance-check the new job → background skills (soldier, police officer,
+  firefighter, rancher, mortician, locksmith, bartender, hunting guide,
+  exterminator get 1–2 extra skills): compare those jobs' runs in a 64-seed
+  sweep; Steve: "sounds right if it's balanced well."
 - The "where" topic takes the first fresh topic slot early in conversations
   (watch for crowding).
 - Villagers don't track their own "where are we" knowledge yet; locals simply
