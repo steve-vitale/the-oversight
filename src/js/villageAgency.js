@@ -4,7 +4,6 @@
 // provides:
 //   - villageAgencyDaily()
 //   - ensureFaces(v)
-//   - havenPopCap()
 //   - havenRoom()
 //   - openPetition(pet)
 //   - petitionInterview(petitionId, qid)
@@ -40,7 +39,7 @@
 // rules:
 //   - camera_rule: max 3 named faces per village (speaker, leader, champion); every beat goes through them, everything else via rumors (code: villageAgency.js)
 //   - petition_never_silent: intake is always a played beat with a vote; never silent population ticks (code: villageAgency.js)
-//   - cap_is_ceiling: havenPopCap() is the haven workstream's hook — reads their growthTier when present, falls back to 12/16/20/24 (code: villageAgency.js)
+//   - cap_is_ceiling: havenRoom() admits up to housingCap() (membership.js: max of shelters and the havenGrowth.js tier ladder 12/16/20/24) — the number the Haven UI shows (code: villageAgency.js — havenRoom)
 //   - knowledge_never_gates: a starving stranger doesn't check your codex; no beat here is knowledge-gated (code: villageAgency.js)
 //   - reactive_not_calendar: schisms, succession, famine fire from conditions (hunger, tension, leader death), never timers (code: villageAgency.js)
 //   - they_eat_too: unapproached villages burn pantry daily (pop × 120 kcal net) — static pantries froze their inner lives (0/120 beg/raid answers). Approached villages run the catch-up sim instead. (code: _vaSimInner, util audit 2026-10-10)
@@ -1049,37 +1048,15 @@
       } catch (e) {}
     },
 
-    // havenPopCap: THE CAP HOOK (clean hook for the haven workstream).
-    // The haven workstream owns the growth tiers (PROGRESSION.md: 12 base,
-    // 16 Longhouse, 20 Palisade, 24 Granary), exposed live as
-    // Game.havenTier() -> 0..3 (code: havenGrowth.js). This reads their
-    // state when present, keeps the legacy growthTier key as a fallback,
-    // and falls back to the canon mapping otherwise. They can also
-    // register Game._havenPopCapOverride = fn. The cap is the ceiling;
-    // the village decides who stands under it.
-    havenPopCap() {
-      try {
-        var tier = null;
-        if (typeof this.havenTier === 'function') tier = this.havenTier();
-        if (tier === null || tier === undefined) {
-          var v = this.state.village || {};
-          tier = v.growthTier || ((this.state.haven || {}).growthTier) || null;
-        }
-        if (tier === 3 || tier === 'granary') return 24;
-        if (tier === 2 || tier === 'palisade') return 20;
-        if (tier === 1 || tier === 'longhouse') return 16;
-        if (typeof this._havenPopCapOverride === 'function') {
-          var c = this._havenPopCapOverride();
-          if (c > 0) return Math.floor(c);
-        }
-      } catch (e) {}
-      return 12;
-    },
-
     // havenRoom: beds left. Never negative, never silent.
+    // The cap is housingCap() (membership.js): the higher of shelter-built
+    // housing and the haven tier ladder (havenGrowth.js havenPopCap) — the
+    // same number the Haven UI shows. (A duplicate havenPopCap used to live
+    // here, shadowing havenGrowth's and ignoring shelters.)
     havenRoom() {
       var cap = 12;
-      try { cap = this.havenPopCap(); } catch (e) {}
+      if (typeof this.housingCap === 'function') cap = this.housingCap();
+      else if (typeof this.havenPopCap === 'function') cap = this.havenPopCap();
       var pop = 0;
       try { pop = (this.state.village.roster || []).length; } catch (e) {}
       return Math.max(0, cap - pop);
