@@ -55,11 +55,15 @@
   var BA = {
     // BLOOD FRENZY (brawler): 3rd consecutive hit = guaranteed crit.
     // Designed for 3-turn fights: one decisive moment, not a ramp.
+    // ORDER (2026-10-14): tbPlayerStrike calls damageMult (frenzyMult) BEFORE
+    // onStrikeHit. frenzyMult only reads the count; onStrikeHit advances it
+    // and spends the crit. Multipliers per consecutive hit: 1, 1, 2, 1, 1, 2…
     onStrikeHit: function (game, target) {
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return;
         const st = fightState(game);
         if (!st) return;
+        if ((st.frenzy || 0) >= 2) { st.frenzy = 0; return; } // this hit was the crit
         st.frenzy = (st.frenzy || 0) + 1;
         if (st.frenzy === 2) {
           game.say(`BLOOD FRENZY: two in a row — THIS ONE HURTS. (guaranteed crit)`);
@@ -80,15 +84,9 @@
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return 1;
         const st = fightState(game);
-        // If this is the 2nd consecutive hit (frenzy will become 2 after),
-        // this hit crits. Check pre-increment count.
-        const preCount = (st && st.frenzy) || 0;
-        if (preCount === 1) {
-          // This is the 2nd hit — crit!
-          if (st) st.frenzy = 0; // reset after crit
-          return 2.0;
-        }
-        return 1;
+        // Two consecutive hits already landed: this strike is the crit.
+        // Read-only — onStrikeHit (called after) resets the count.
+        return ((st && st.frenzy) || 0) >= 2 ? 2.0 : 1;
       } catch (e) { return 1; }
     },
 
