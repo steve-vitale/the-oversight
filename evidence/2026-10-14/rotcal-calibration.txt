@@ -1,0 +1,36 @@
+=== ROT A/A CALIBRATION ===
+paired seeds: 16/16 across invocations A and B
+
+form               | mean |Δ|      | p90 |Δ|       | max |Δ|
+absolute kcal      |    11000.188 |       63051 |     102224
+per villager-day   |       97.304 |     563.647 |    969.578
+per day-alive      |      109.938 |         496 |     1125.7
+
+relative |Δ| (fraction of A value):
+absolute kcal      |        0.437 |       0.316 |      6.605
+per villager-day   |        0.161 |       0.335 |      2.222
+per day-alive      |        0.237 |       0.507 |      3.141
+
+day noise (survival): mean|Δ|=8d p90=35d max=82d
+
+per-seed |Δ| (bifurcated = rel|ΔrotPerVd| > p90 or |Δdays| > 10):
+  belongseek:11    dAbs= 102224 dVd=563.647 relVd=2.222 dDays=82 << BIFURCATED
+  belongseek:22    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  belongseek:33    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  belongseek:44    dAbs=    414 dVd=20.414 relVd=0.022 dDays=0 
+  belongseek:55    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  belongseek:66    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  belongseek:77    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  belongseek:88    dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:11     dAbs=  10314 dVd=3.218 relVd=0.002 dDays=11 << BIFURCATED
+  leadcourt:22     dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:33     dAbs=  63051 dVd=969.578 relVd=0.335 dDays=35 << BIFURCATED
+  leadcourt:44     dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:55     dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:66     dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:77     dAbs=      0 dVd=0 relVd=0 dDays=0 
+  leadcourt:88     dAbs=      0 dVd=0 relVd=0 dDays=0 
+
+recommended guardrail (calibrated multiplier):
+  armed_rot_per_vd <= control_rot_per_vd x 1.335   (p90 rel|Δ|=0.335)
+  (diagnostic GO: pairs=16>=14 ? YES)
