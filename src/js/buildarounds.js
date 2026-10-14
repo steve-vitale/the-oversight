@@ -324,14 +324,14 @@
     },
 
     // RED HARVEST: crits heal 50% of damage dealt
-    redHarvestHeal: function (game, damage) {
+    redHarvestHeal: function (game, damage) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('red_harvest')) return 0;
         return Math.round(damage * 0.5);
       } catch (e) { return 0; }
     },
     // CRIMSON GOD: every hit is a crit (2x)
-    crimsonGodMult: function (game) {
+    crimsonGodMult: function (game) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
         return 2.0;
@@ -342,7 +342,7 @@
     // God abilities scale: solo → party → titan → army → contest
     
     // CRIMSON GOD: allies inspired (+25% damage when you crit)
-    crimsonGodParty: function (game) {
+    crimsonGodParty: function (game) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
         return 1.25; // allies deal +25%
@@ -350,7 +350,7 @@
     },
     
     // DEADEYE: marked targets take +50% from allies
-    deadeyeMark: function (game, targetId) {
+    deadeyeMark: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('deadeye')) return;
         const st = fightState(game);
@@ -362,7 +362,7 @@
       } catch (e) {}
     },
     
-    deadeyeAllyMult: function (game, targetId) {
+    deadeyeAllyMult: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('deadeye')) return 1;
         const st = fightState(game);
@@ -374,7 +374,7 @@
     },
     
     // LIFEBRINGER: revive allies (once per fight per target)
-    lifebringerRevive: function (game, targetId) {
+    lifebringerRevive: function (game, targetId) { // wired-exempt: pending god-path design (docs/godpath/PLAN.md)
       try {
         if (!game.hasAbility || !game.hasAbility('lifebringer')) return false;
         const st = fightState(game);
@@ -393,94 +393,6 @@
         return false;
       } catch (e) { return false; }
     },
-    
-    // GOD PATH RECOGNITION (Steve 2026-10-14)
-    // The System watches how you LIVE, not what you own.
-    // Abilities exist for their own sake. Gear exists for its own sake.
-    // Sentimental gear exists for its story — NOT for points.
-    // Godhood EMERGES from consistently embodying a path. The System recognizes.
-    
-    pathBehavior: function (game, path) {
-      try {
-        const s = game.state.scholar;
-        s.pathLife = s.pathLife || {};
-        s.pathLife[path] = s.pathLife[path] || { uses: 0, recognized: false, hints: 0 };
-        return s.pathLife[path];
-      } catch (e) { return { uses: 0, recognized: false, hints: 0 }; }
-    },
-    
-    onPathLived: function (game, path) {
-      try {
-        const beh = this.pathBehavior(game, path);
-        if (beh.recognized) return;
-        beh.uses++;
-        const paths = game.data.godpaths ? game.data.godpaths.paths : {};
-        const pdef = paths[path];
-        if (!pdef) return;
-        if (beh.uses === 10 && beh.hints === 0) {
-          beh.hints = 1;
-          game.say('SYSTEM: "You ' + this.pathVerb(path) + '. Interesting. We are watching."');
-        } else if (beh.uses === 25 && beh.hints === 1) {
-          beh.hints = 2;
-          game.say('SYSTEM: "You remind us of the ' + pdef.name + 's from before. The ones who ascended."');
-        } else if (beh.uses >= 50 && !beh.recognized) {
-          beh.recognized = true;
-          game.say(pdef.name.toUpperCase() + ' ASCENSION!');
-          game.say('SYSTEM: "You don\'t use the ' + pdef.name + ' path. You ARE the ' + pdef.name + ' path."');
-          game.say('Unlocked: ' + pdef.godAbility + ' — ' + pdef.godDescription);
-          const scholar = game.state.scholar;
-          if (scholar.abilities.indexOf(pdef.godAbility) === -1) {
-            scholar.abilities.push(pdef.godAbility);
-          }
-          try { game.audioEvent('ascension', { path: path }); } catch (e) {}
-        }
-      } catch (e) {}
-    },
-    
-    pathVerb: function (path) {
-      const verbs = {
-        brawler: 'fight like a storm', shieldbearer: 'stand between harm and others',
-        hunter: 'hunt with patience', caregiver: 'heal without hesitation',
-        drifter: 'move like smoke', explorer: 'seek what is hidden',
-        socialite: 'command the crowd', survivalist: 'endure the unendurable',
-        miser: 'hoard with purpose', forager: 'find what feeds'
-      };
-      return verbs[path] || 'walk the path';
-    },
-    
-  // FUSION SYSTEM (Steve 2026-10-14): abilities combine into god abilities.
-  // Luck: finding the components. Cleverness: knowing what to fuse.
-  
-  availableFusions: function (game) {
-    try {
-      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
-      const has = (id) => game.hasAbility && game.hasAbility(id);
-      return fusions.filter(f => {
-        if (has(f.id)) return false;
-        return f.components.every(c => has(c));
-      });
-    } catch (e) { return []; }
-  },
-  
-  fuse: function (game, fusionId) {
-    try {
-      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
-      const f = fusions.find(x => x.id === fusionId);
-      if (!f) return false;
-      const has = (id) => game.hasAbility && game.hasAbility(id);
-      if (!f.components.every(c => has(c))) {
-        game.say(`Fusion failed: missing components for ${f.name}.`);
-        return false;
-      }
-      if (has(f.id)) return false;
-      const scholar = game.state.scholar;
-      scholar.abilities = scholar.abilities.filter(a => !f.components.includes(a));
-      scholar.abilities.push(f.id);
-      game.say(`${f.name.toUpperCase()}! ${f.flavor}`);
-      try { game.audioEvent('fusion', { id: f.id, tier: f.tier }); } catch (e) {}
-      return true;
-    } catch (e) { return false; }
-  },
   };
 
   // Export
