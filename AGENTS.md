@@ -16,7 +16,7 @@ dated `evidence/` notes.
 
 **God-path system.** Plan: `docs/godpath/PLAN.md` (the task list, contracts
 and phase gates). Design: `evidence/2026-10-14/opus-godpath-proposal.md`.
-Start every session by reading PLAN.md §1 and the current phase.
+Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everything), then PLAN.md.
 
 ## Commands
 
@@ -91,19 +91,35 @@ Start every session by reading PLAN.md §1 and the current phase.
   `drama.js`) are excluded.
 - Fighters are keyed by `key` (`'p'`, `'m_0'`, …), not `id`.
 
-## Design guardrails (from Steve; the checkers enforce some)
+## Design guardrails: Steve's own words only
 
-- **One economy:** kcal. No new currencies or meters, visible or hidden.
-  Power never removes the need to eat.
-- **System abilities (alien magic) ≠ human skills.** Never mix them.
-- **Gear grants actions; it doesn't rewrite abilities.** Fusion and
-  points-based god meters were tried and rejected.
-- **The Table decides victory.** No victory before day 90; no godhood before
-  day 80.
-- **Mobile:** 390×844, moment-to-moment play never scrolls; fights take
-  2–8 turns.
-- **"If you don't know, it doesn't show"**: UI reveals only earned knowledge.
-- **Death stays the leading failure:** no auto-wins, contests stay deadly.
+**Law** is what Steve said directly: `docs/godpath/STEVE-ANSWERS.md`, plus
+quotes attributed to him in quotation marks. Paraphrases ("Steve's canon:
+…", the 2026-10-14 brief) are **not** law. If a rule matters and you can
+only find a paraphrase, ask Steve.
+
+Verbatim, with sources:
+- "Paint a path towards functional godhood. If they learn and experiment
+  enough, people can get there and it's scary good. Most game wins look
+  like that, but not all." (`docs/ENDGAME-BUILDS.md:3`)
+- "I love the broken builds component of roguelites." (`docs/DECISIONS.md:104`)
+- "the table prices the run, never gates on godhood; reachable by
+  competent non-god play" (`docs/TABLE.md:62`)
+- "Gear changing abilities should be one of our least frequent levers.
+  Gear is more likely to grant another type of action in certain
+  scenarios." (`evidence/2026-10-14/design-methodology.md:3`)
+- "control must change the board, not the numbers" (`game.js`, grep it)
+- "Abilities should be stronger, and they were always meant to be powered
+  by food." (`evidence/2026-10-14/food-powered-abilities.md:3`)
+- "does this let you skip dinner?" (power-design test, `docs/DIRECTIVES.md:25`)
+- "Purify should be an ability not a skill. Thats magic. … let's not
+  confuse human skills and alien abilities" (`evidence/2026-10-11/break-purify-audit.md:3`)
+- "It should be a fight. A hard one." / "contests are to be played, not
+  as RNG." (`fieldFights.js`, `contestEngine.js` headers)
+- "Decisions, not chores." "If you don't know, it doesn't show." "I kinda
+  hate changing views … One mobile screen." (`docs/DIRECTIVES.md`)
+- "You shouldn't be able to beat the game without going through a
+  majority of game content." (`src/js/progression.js`, grep it)
 
 ## Deploy note
 
