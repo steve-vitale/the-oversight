@@ -35,6 +35,7 @@ policy objects (sweep-compare shallow-copies per run).
 | `kind` | kind.js | competent + uniformly kind: never steals, shares surplus, comforts grieving | the warm pole; contrast with larceny-leaning |
 | `deed-seeking` | deed-seeking.js | competent + hunts notability deeds: patrols, channels, always takes cameras | deed-accumulation curves, table-bar pacing |
 | `winseek` | winseek.js | full table-gate pursuit (6 roads) | win-path reachability ceiling |
+| `capable` | capable.js | leadfeast base + real flee (barrier push), combat abilities + signature verbs, scored offers/contests/Table/relics, held talks by need, relay | the game as a capable player plays it — the default bot for build/lever sims |
 
 Also present (legacy, not canonical): `idle.js` (zero/mvc/leader), `oracle.js`,
 `oracleV2.js` (systems-engaged), `socialite.js` (social-play), `weird-c.js`,
