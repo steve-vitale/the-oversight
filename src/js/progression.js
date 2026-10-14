@@ -2,7 +2,6 @@
 // system: progression
 // description: Character progression. XP, levels, abilities.
 // provides:
-//   - abilitySlots()
 //   - accrueRelicBond(item)
 //   - integrationStage()
 //   - checkTrial(id)
@@ -985,19 +984,9 @@
 
   // ============ WRAPS (chain-safe) ============
   (function attach() {
-    // abilitySlots: 20->2, 35->3, 50->4, 65->5, 80->6. (pacing build
-    // 2026-10-10: pure granularity — measured play sat at integ ~35-53 with 1
-    // ability and 3 slots, so synergies were 0/240. No cap lowered.)
-    const _abilitySlots = Game.abilitySlots;
-    Game.abilitySlots = function () {
-      const integ = this.state.scholar.integration || 5;
-      if (integ >= 80) return 6;
-      if (integ >= 65) return 5;
-      if (integ >= 50) return 4;
-      if (integ >= 35) return 3;
-      if (integ >= 20) return 2;
-      return _abilitySlots ? 1 : 1;
-    };
+    // abilitySlots: the ladder lives in game.js only (20->2, 35->3, 50->4,
+    // 65->5, 80->6). The identical duplicate wrap that stood here was
+    // deleted 2026-10-14 — one ladder, one place to tune it.
 
     // integrate: fire slot moments + stage beats on threshold crossing.
     // Pre-arrival moments queue — the System can't speak before it exists.

@@ -1071,7 +1071,7 @@ Practice deed grants — unlock.type === 'practice' abilities
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 
-**Provides:** abilitySlots(), accrueRelicBond(item), integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
+**Provides:** accrueRelicBond(item), integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
 
 **Rules:**
 - crisis_once: true (code: progression.js — fireCrisis dedupes via pg.crises keys; one per kind per run)

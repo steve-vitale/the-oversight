@@ -5198,11 +5198,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             80: 'SYSTEM: Deep integration. You see the world through us now.',
           };
           this.say(msgs[t]);
-          const slotsNow = this.abilitySlots();
-          if (slotsNow > slotsBefore) {
-            this.say(`⬢ SYSTEM: "Neural depth ${t}. I can hold more of you now — ability slots: ${slotsNow}."`);
-            this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
-          }
           // ABILITY CODEX (Steve 2026-10-13): deeper integration, deeper sight.
           // At 40/60/80 the System volunteers L1 knowledge of abilities in
           // your closest godhood pool — it has been watching your shape.
@@ -5211,6 +5206,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { this.systemRevealPoolAbilities(t); } catch (e2) {}
           }
         }
+      }
+      // SLOT LINE (audit 2026-10-14): announced on ANY slot gain, not only
+      // inside the 20/40/60/80 stage loop — abilitySlots() opens slots at
+      // 20/35/50/65/80, so the 3rd/4th/5th slots used to arrive in silence.
+      const slotsNow = this.abilitySlots();
+      if (slotsNow > slotsBefore && this.state.systemArrived) {
+        this.say(`⬢ SYSTEM: "Neural depth ${Math.floor(s.integration)}. I can hold more of you now — ability slots: ${slotsNow}."`);
+        this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
       }
       if (reason) this.tele('integrate', { amount, reason, total: Math.round(s.integration) });
     },
