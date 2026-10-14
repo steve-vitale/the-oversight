@@ -14,7 +14,7 @@ const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 let OVER = null;
 try { OVER = require('./policies/overdraw4'); } catch (e) {
   if (e.code === 'MODULE_NOT_FOUND') {
-    console.log('INFO-SKIP: overdraw4 layer deleted per kill protocol (NO-GO at pilot); det-gate status in evidence/2026-10-14/sim-overdraw4-b.md');
+    console.log('INFO-SKIP: overdraw4 layer deleted per kill protocol (KILLED AT CONFIRM); det-gate status in evidence/2026-10-14/sim-overdraw4-b.md');
     process.exit(0);
   }
   throw e;
