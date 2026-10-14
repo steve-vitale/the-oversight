@@ -897,7 +897,6 @@
             const day = ((this.state || {}).scholar || {}).day || (this.state || {}).day || 0;
             let bestClose = null, bestKit = 2;
             for (const gh of S.Godhood.godhoods()) {
-              if (gh.id === 'voice_of_the_relay') continue;
               if ((sch.godhood || {}).recognized && sch.godhood.recognized[gh.id]) continue;
               const cl = S.Godhood.godhoodCloseness(sch, gh, day);
               if (!cl.complete && cl.kit >= bestKit) { bestKit = cl.kit; bestClose = gh; }

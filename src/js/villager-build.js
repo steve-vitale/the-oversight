@@ -71,7 +71,10 @@
       _feat[a.id] = {
         track: trackOf[a.id] || null,
         lane: a.lane || 'magic',
-        paths: a.paths || [],
+        // build-around assembly only (buildarounds.js payoffs): the general
+        // god-path lean is buildPathLean. Every magic ability carries a path
+        // since the god-path redesign; counting them all here would double it.
+        paths: (a.unlock && a.unlock.buildaround) ? [a.path, a.alsoPath].filter(Boolean) : [],
         partners: partners[a.id] || [],
         role: a.role, slotRole: a.slotRole,
         combat: ctx.includes('combat') || mods.some(m => /^(combat|armor|health)\./.test(m)),
@@ -165,10 +168,20 @@
       } catch (e) { warn('npcLearnAbility', e); return false; }
     },
 
-    // buildPathLean(who, id): GOD-PATH HOOK. The god-path redesign adds the
-    // path/subclass lean (which god a build serves) HERE, and only here —
-    // every caller of buildScore picks it up. 0 until then.
-    buildPathLean(who, id) { return 0; },
+    // buildPathLean(who, id): GOD-PATH HOOK. The path/subclass lean (which
+    // god a build serves) lives HERE, and only here — every caller of
+    // buildScore picks it up. godpath.js pathLean. Knowledge: buildScore has
+    // already refused an ability they don't know (or that the sheet doesn't
+    // show) before it reaches this hook, and the lean counts only what they
+    // HOLD. Symmetric for the swap test: a held ability is scored as if it
+    // were not held, so keeping and taking compare on the same footing.
+    buildPathLean(who, id) {
+      try {
+        if (typeof this.pathLean !== 'function') return 0;
+        const held = this._buildHeld(who).filter(h => h !== id);
+        return this.pathLean(isPlayerWho(this, who) ? 'player' : who, id, { held }) || 0;
+      } catch (e) { warn('buildPathLean', e); return 0; }
+    },
 
     // buildScore(who, id, opts): THE build brain. Same function for the
     // player's bots and every villager. opts: {without: heldId} scores as if
@@ -289,13 +302,22 @@
       const T = this.trackData();
       const held = new Set(this._buildOwned(vid));
       const F = features(this);
-      const out = [];
+      const cands = [];
       for (const id of ((T.kits || {})[track] || [])) {
         if (held.has(id)) continue;
         if (id === 'fusion_reactor' && this.state.fusionReactorHolder) continue;
         if (!F[id] || F[id].lane === 'skill') continue;
-        out.push(id);
-        if (out.length >= (T.offerSize || 3)) break;
+        cands.push(id);
+      }
+      const n = T.offerSize || 3;
+      const out = cands.slice(0, n);
+      // GOD-PATH: the same shaping as the player's sheet (>=1 offer on their
+      // path, distinct roles) — godpath.js shapeOffers, if loaded.
+      if (typeof this.shapeOffers === 'function') {
+        try {
+          const d = (id) => (this.abilityDef && this.abilityDef(id)) || { id };
+          return this.shapeOffers(out.map(d), cands.slice(n).map(d), vid).map(x => x.id);
+        } catch (e) { warn('villager sheet lean', e); }
       }
       return out;
     },
@@ -531,6 +553,8 @@
         s.deedDay = Object.assign({}, ((v.npcDeedDay || {})[newId]) || {});
         // godhood: a person's build
         s.godhood = ((v.npcGodhood || {})[newId]) || { recognized: {}, active: [] };
+        // god-path class: a person's, like godhood (godpath.js recognizeClass)
+        s.godpath = ((v.npcGodpath || {})[newId]) || null;
         // knowledge into the Codex (never lowers what the Codex knew)
         const know = ((v.npcKnow || {})[newId]) || {};
         const cx = this.state.codex = this.state.codex || {};
@@ -570,7 +594,7 @@
         });
         if (person) { person.items = []; person.equipped = {}; } // the bearer's kit lives on scholar.* now — never counted twice
         // they are the bearer now: no villager records
-        for (const k of ['npcAbilities', 'npcXp', 'npcSkills', 'npcKnow', 'npcBuild', 'npcDeedDay']) { if (v[k]) delete v[k][newId]; }
+        for (const k of ['npcAbilities', 'npcXp', 'npcSkills', 'npcKnow', 'npcBuild', 'npcDeedDay', 'npcGodpath']) { if (v[k]) delete v[k][newId]; }
         try { if (this.recomputeActiveSynergies) this.recomputeActiveSynergies(); } catch (e) { warn('mantle synergies', e); }
         try { this.tele('mantle_become', { from: oldId, to: newId, abilities: s.abilities.length, gear: Object.keys(s.equipped).length }); } catch (e) { warn('tele', e); }
         return true;

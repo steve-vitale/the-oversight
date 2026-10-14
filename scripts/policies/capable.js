@@ -253,6 +253,22 @@ const ACTION_PLAN = {
   'keepsake.steady': (I) => (((I.p.stunned || 0) > 0 || ((I.p.statuses || []).some(x => x && x.id === 'fear'))) ? 8.5 : null),
   'keepsake.hold': (I) => (I.outmatched ? 8 : null),
   'keepsake.lucky_break': (I) => ((I.p.blindTurns || 0) > 0 || I.s.haymakerReady ? 6 : null),
+  // GOD-PATH SUBCLASS VERBS (2026-10-14, godpath.js): board control first,
+  // then the payoffs that cash it in.
+  'raise_earth.raise': (I) => (I.turn <= 3 && I.nearest && I.dist(I.nearest) >= 2 && I.dist(I.nearest) <= 4 ? 6 : null),
+  'gravity_well.pull': (I) => (I.mons.filter(m => I.dist(m) > 1 && I.dist(m) <= 4).length >= 1 && I.n('gravity_well.pull') < 1 && (I.s._nextStrikes || I.canLoad) ? 5 : (I.mons.length >= 2 && I.n('gravity_well.pull') < 1 ? 4.5 : null)),
+  'landslide.quake': (I) => (I.mons.filter(m => I.dist(m) <= 2).length >= 1 ? 7.5 : null),
+  'pack_hunt.sic': (I) => (I.n('pack_hunt.sic') < 1 ? { s: 7, t: I.strongest.key } : null),
+  'mending_hands.mend': (I) => { const a = (I.f.fighters || []).find(x => (x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled && x.hp < x.maxHp * 0.5 && I.dist(x) <= 1); if (a) return { s: 7, t: a.key }; return I.hp < 0.45 ? { s: 6.5, t: 'p' } : null; },
+  'aegis_link.link': (I) => { const a = (I.f.fighters || []).filter(x => (x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled).sort((x, y) => x.hp / x.maxHp - y.hp / y.maxHp)[0]; return (a && I.hp > 0.6 && a.hp < a.maxHp * 0.6 && I.n('aegis_link.link') < 1) ? { s: 6, t: a.key } : null; },
+  'blink.blink': (I) => (I.hp < 0.4 && I.adj.length ? 7 : null),
+  'switcheroo.swap': (I) => { const m = I.mons.find(x => x.telegraph && I.dist(x) <= 3); return m ? { s: 7.5, t: m.key } : null; },
+  'foresight.foresee': (I) => (I.n('foresight.foresee') < 1 && (I.turn <= 2 || I.telegraphed) ? 5.5 : null),
+  'live_broadcast.go_live': (I) => (I.n('live_broadcast.go_live') < 1 && I.turn <= 3 ? 5 : null),
+  'the_crowd_moves.command': (I) => ((I.f.fighters || []).filter(x => (x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled).length >= 2 ? 7 : null),
+  'stoke.stoke': (I) => (!I.s._nextStrikes && I.adj.some(m => (m.hp || 0) >= 25) ? 6 : null),
+  'coin_guard.coins': (I) => (!I.s._absorb && (I.telegraphed || I.hp < 0.6) ? 6.5 : null),
+  'bribe.pay_off': (I) => { const m = I.adj.find(x => !isControlled(x)); return (m && (I.hp < 0.5 || I.mons.length >= 2)) ? { s: 6.5, t: m.key } : null; },
   'animal_ken.calm_beast': (I) => { const m = (I.f.fighters || []).find(x => x && x.alive && !x.fled && x.kind !== 'monster' && x.kind !== 'player' && x.kind !== 'villager' && x.key !== 'p'); return m ? { s: 6, t: m.key } : null; },
 };
 
@@ -262,6 +278,7 @@ const ESCAPE_ACTIONS = {
   'peacemaker.walk_in': 1, 'animal_ken.calm_beast': 1, 'scream_cheese.scream': 1, 'war_cry.bellow': 1,
   'pocket_sand.throw_sand': 1, 'fear_aura.loom': 1, 'intimidating_presence.stare_down': 1,
   'keepsake.hold': 1, // anchor L2: the flee through the edge can't be cut off
+  'raise_earth.raise': 1, 'landslide.quake': 1, 'bribe.pay_off': 1, 'blink.blink': 1, 'switcheroo.swap': 1, 'pack_hunt.sic': 1, 'coin_guard.coins': 1,
 };
 function abilityTurn(Game, ctx, st, f, p, mons, extra) {
   const s = Game.state.scholar || {};
@@ -428,10 +445,12 @@ function scoreOffer(Game, offer, heldIds) {
       else sc += 6 * have; // a leg toward one we hold part of
     }
   } catch (e) { /* malformed synergy row: score without it */ }
-  const paths = def.paths || [];
+  // GOD-PATH (2026-10-14): one source — def.path (+ alsoPath).
+  const pathsOf = (d) => (d ? [d.path, d.alsoPath].filter(Boolean) : []);
+  const paths = pathsOf(def);
   for (const h of heldIds) {
     const hd = abilityDef(Game, h);
-    for (const pth of ((hd && hd.paths) || [])) if (paths.indexOf(pth) >= 0) sc += 3;
+    for (const pth of pathsOf(hd)) if (paths.indexOf(pth) >= 0) sc += 3;
   }
   if ((def.actions || []).some(a => (a.context || 'explore') === 'combat' && !a.automatic)) sc += 4;
   if (def.role === 'payoff') sc += 1; else if (def.role === 'enabler') sc += 0.5;

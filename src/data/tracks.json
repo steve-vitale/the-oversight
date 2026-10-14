@@ -14,13 +14,13 @@
   "thresholds": [18, 48, 96, 192, 384],
   "offerSize": 3,
   "maxAbilities": 6,
-  "_kits": "Power order, weakest first. Every magic ability sits in exactly one kit (fusion_reactor excluded: one per world, its own pellet offer). Everyone is offered the next 3 unheld.",
+  "_kits": "Power order, weakest first; the god-path subclass abilities (2026-10-14) sit after the originals and surface through the path lean (godpath.js shapeOffers): mid-kit placement measured fewer wins because villagers took verbs they cannot use (evidence/2026-10-14/godpath-unified.md). Every magic ability sits in exactly one kit (fusion_reactor excluded: one per world, its own pellet offer). Everyone is offered the next 3 unheld.",
   "kits": {
-    "combat": ["adrenaline_surge", "rage", "war_cry", "adrenaline_control", "phoenix_clause", "survivor", "cornered_rat", "trade_of_blows", "unbreakable", "blood_frenzy", "retribution", "trophy_room", "blood_magic"],
-    "field": ["lucky_rock", "echo_location", "dowsing", "green_thumb", "bloodhound", "bird_whisperer", "night_eyes", "beast_calm", "rain_dancer", "cornucopia", "water_breathing", "squirrel_friend", "bird_strike", "cartographers_eye", "nowhere_man", "hollow_bones", "second_skin"],
-    "social": ["loud_chewer", "scream_cheese", "translator", "leech", "crowd_favorite", "turncoat", "fear_aura", "hoarder"],
-    "craft": ["beard_moss", "iron_stomach", "pyrokinesis", "the_touch", "purify", "green_whisper", "cold_blooded", "extra_stomach", "battlefield_grace", "photosynthesis", "hoarders_interest", "deep_reserves", "feast_engine"],
-    "strange": ["pocket_sand", "third_eye", "static_toss", "taste_vision", "symbiote", "eyes_in_back", "chitin_skin", "cheese_wheel", "freeze_tag", "second_wind", "molt", "time_skip", "cannibal_frenzy", "hive_mind", "pact"]
+    "combat": ["adrenaline_surge", "rage", "war_cry", "adrenaline_control", "phoenix_clause", "survivor", "cornered_rat", "trade_of_blows", "unbreakable", "blood_frenzy", "retribution", "trophy_room", "blood_magic", "aegis_link", "gravity_well", "raise_earth", "landslide", "back_from_the_brink"],
+    "field": ["lucky_rock", "echo_location", "dowsing", "green_thumb", "bloodhound", "bird_whisperer", "night_eyes", "beast_calm", "rain_dancer", "cornucopia", "water_breathing", "squirrel_friend", "bird_strike", "cartographers_eye", "nowhere_man", "hollow_bones", "second_skin", "blink", "pack_hunt"],
+    "social": ["loud_chewer", "scream_cheese", "translator", "leech", "crowd_favorite", "turncoat", "fear_aura", "hoarder", "rally_aura", "haggle", "bribe", "misdirection", "live_broadcast", "the_crowd_moves", "sweetener"],
+    "craft": ["beard_moss", "iron_stomach", "pyrokinesis", "the_touch", "purify", "green_whisper", "cold_blooded", "extra_stomach", "battlefield_grace", "photosynthesis", "hoarders_interest", "deep_reserves", "feast_engine", "mending_hands", "long_table", "coin_guard", "stoke", "lifeline", "ember_heart", "harvest_table"],
+    "strange": ["pocket_sand", "third_eye", "static_toss", "taste_vision", "symbiote", "eyes_in_back", "chitin_skin", "cheese_wheel", "freeze_tag", "second_wind", "molt", "time_skip", "cannibal_frenzy", "hive_mind", "pact", "foresight", "mourners_bond", "switcheroo", "prophecy", "last_rites", "keepers_oath"]
   },
   "_skills": "Human competences the track's work teaches a VILLAGER (lane 'skill' ability ids; stored by their codex skill id). One per threshold crossed, no slot, no System needed. The player learns skills through the codex/practice paths instead.",
   "_skillLevels": "Villagers learn a track skill only at these levels (2 and 4): the old kits gave one thing per threshold, and merged skills carry several abilities (track_read = tracker + game_sense + blood_trail), so a skill at every level made villager godhood pools trivial. Order puts the godhood cores first (diplomat, triage/field_medicine) so shepherd_of_the_dead and undying_ward stay reachable.",

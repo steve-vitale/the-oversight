@@ -1,135 +1,107 @@
 #!/usr/bin/env node
-// scripts/godpath/ladder.js — the god-path acceptance ladder.
+// scripts/godpath/ladder.js — the god-path acceptance ladder (2026-10-14
+// redesign). Runtime contract checks: the ladder Job -> track -> CLASS ->
+// GOD -> Table works for the player and villagers through the same
+// functions, and the Table never reads godhood.
 //
-// One check list for the whole build, grouped by phase (docs/godpath/PLAN.md).
-// Checks at or below scripts/godpath/phase.json are enforced; later ones
-// print as TODO so you always see what's next. Finish a phase = every check
-// for it is green → bump phase.json in the same commit.
+//   node scripts/godpath/ladder.js
 //
-//   node scripts/godpath/ladder.js                  # enforce current phase
-//   GODPATH_PHASE=2 node scripts/godpath/ladder.js  # preview phase 2
-//
-// These are CONTRACT checks: they only use the API names in PLAN.md
-// ("Runtime contract"). Behaviour details belong in your own proof tests
-// (scripts/godpath/test-*.js), which scripts/check.js also runs.
+// Behaviour details of each new ability live in
+// scripts/test-godpath-unified-20261014.js.
 'use strict';
 const K = require('./lib');
 const T = K.reporter('godpath-ladder');
 
 (async () => {
   const GP = K.readJSON('src/data/godpaths.json');
-  const paths = GP.paths || {};
-  const PIDS = Object.keys(paths);
   const gameSrc = K.readSrc('src/js/game.js');
   const baSrc = K.readSrc('src/js/buildarounds.js');
-  const tableSrc = K.readSrc('src/js/table.js');
-  const fnOf = (Game, name) => typeof Game[name] === 'function';
+  const fs = require('fs');
+  const path = require('path');
+  const tableSrc = fs.readdirSync(path.join(K.ROOT, 'src/js')).filter(f => /^table.*\.js$/.test(f))
+    .map(f => K.readSrc('src/js/' + f)).join('\n');
 
-  // ── P0: foundations / cleanup ───────────────────────────────────────────
-  T.section('P0 · foundations');
+  T.section('foundations');
   T.ok('godpaths.json is in the data load list (game.js init)', /'godpaths\.json'/.test(gameSrc));
-  T.ok('fusion code removed (rejected approach)', !/availableFusions|\bfuse\s*:/.test(baSrc));
-  T.ok('use-count recognition removed (rejected: points/meter ascension)',
-    !/onPathLived|uses\s*>=\s*50/.test(baSrc));
-  T.ok('no god ability pushed into abilities without a slot check',
-    !/abilities\.push\(\s*pdef\.godAbility\s*\)/.test(baSrc));
-  T.ok('table.js never reads god-path state (victory is the Table, never gated on gods)',
-    !/godpath|godAbility|pathLife|crimson_god|martyrs_aegis|isGod\b/.test(tableSrc));
-  T.ok('synergy activation reads the real codex (state.codex, not scholar.codex)',
-    !/\(sch\.codex \|\| \{\}\)\.techniques/.test(gameSrc));
+  T.ok('godhood.json is not loaded (retired)', !/'godhood\.json'/.test(gameSrc));
+  T.ok('fusion code stays removed (rejected approach)', !/availableFusions|\bfuse\s*:/.test(baSrc));
+  T.ok('use-count recognition stays removed (rejected: points/meter ascension)', !/onPathLived|uses\s*>=\s*50/.test(baSrc));
+  T.ok('the Table never reads godhood or god-path state (prices the run, never gates on godhood)',
+    !/Godhood\b|\.godhood\b|npcGodhood|godpath|classLine|godhoodBargaining|recognizeClass/.test(tableSrc));
+  T.ok('godpath.js loads from index.html', /src\/js\/godpath\.js/.test(K.readSrc('index.html')));
 
   const Game = await K.load({ seed: 20261014 });
   T.ok('Game.data.godpaths is loaded at runtime', !!(Game.data && Game.data.godpaths && Game.data.godpaths.paths));
+  T.ok('the god-path API exists (recognizeClass, classLine, pathLean, shapeOffers, buildScore)',
+    ['recognizeClass', 'classLine', 'pathLean', 'shapeOffers', 'buildScore', 'abilityPaths'].every(n => typeof Game[n] === 'function'));
 
-  // ── P1: conditions runtime ──────────────────────────────────────────────
-  T.section('P1 · conditions');
-  const hasAPI = fnOf(Game, 'hasCondition') && fnOf(Game, 'setCondition');
-  T.ok('Game.hasCondition(fighterKey, cond) and Game.setCondition(fighterKey, cond, on) exist', hasAPI, '', 1);
-  if (hasAPI) {
-    K.newRun(Game);
-    const c0 = (paths.hunter || {}).condition;
-    let mf = K.fight(Game, 'hushwolf', { hp: 500 });
-    let setOk = false, resetOk = false;
-    try {
-      Game.setCondition(mf.key, c0, true);
-      setOk = Game.hasCondition(mf.key, c0) === true;
-      K.fight(Game, 'hushwolf', { hp: 500 });
-      mf = Game.tbfight.fighters.find(f => f.kind === 'monster');
-      resetOk = Game.hasCondition(mf.key, c0) === false;
-    } catch (e) { T.ok('condition API does not throw', false, e.message, 1); }
-    T.ok('setCondition → hasCondition round-trips', setOk, '', 1);
-    T.ok('fight-scoped conditions reset when a new fight starts', resetOk, '', 1);
-    // fightStart-scoped: Survivalist's well-fed must read the kcal line at fight start.
-    const sc = (paths.survivalist || {}).condition;
-    const s = Game.state.scholar;
-    const cap = Game.kcalCap ? Game.kcalCap() : 2400;
-    s.kcal = cap; K.fight(Game, 'hushwolf', { hp: 500 });
-    const fedOn = Game.hasCondition('p', sc);
-    s.kcal = Math.round(cap * 0.3); K.fight(Game, 'hushwolf', { hp: 500 });
-    const fedOff = Game.hasCondition('p', sc);
-    T.ok(`fightStart condition "${sc}" follows the kcal line (on at full, off at 30%)`, fedOn === true && fedOff === false,
-      `full=${fedOn} low=${fedOff}`, 1);
-  }
+  T.section('class recognition: player');
+  K.newRun(Game);
+  const s = Game.state.scholar;
+  Game.state.systemArrived = true;
+  K.openSlots(Game, 6);
+  K.giveAbility(Game, 'rage'); K.giveAbility(Game, 'blood_frenzy');
+  Game.checkPlayerGodhoodAscension();
+  T.ok('two brawler abilities: no class, no line ("If you don\'t know, it doesn\'t show")', Game.classLine('player') === null && !s.godpath);
+  K.giveAbility(Game, 'cannibal_frenzy');
+  Game.checkPlayerGodhoodAscension();
+  T.ok('three: "Berserker of the One-Person Army", stored with path/subclass/since',
+    Game.classLine('player') === 'Berserker of the One-Person Army' && s.godpath && s.godpath.path === 'brawler' && s.godpath.subclass === 'berserker' && s.godpath.since != null,
+    Game.classLine('player'));
+  T.ok('telemetry class_recognized fired', K.teleEvents(Game, 'class_recognized').some(e => (e.data || e).who === 'player' || e.who === 'player'));
+  s.abilities = [];
+  for (const id of ['trophy_room', 'static_toss', 'bloodhound', 'rage']) K.giveAbility(Game, id);
+  Game.checkPlayerGodhoodAscension();
+  T.ok('the build shifts: the class changes to Stalker of the Apex Predator', Game.classLine('player') === 'Stalker of the Apex Predator', Game.classLine('player'));
 
-  // ── P2: payoffs cash in ─────────────────────────────────────────────────
-  T.section('P2 · payoffs');
-  for (const pid of PIDS) {
-    const p = paths[pid];
-    const def = (Game.data.abilities || []).find(a => a.id === p.payoff);
-    const act = def && (def.actions || [])[0];
-    if (!def || !act || !hasAPI) { T.ok(`${pid}: payoff emits godpath_payoff with cashed true/false`, false, 'payoff/action/API missing', 2); continue; }
-    K.newRun(Game); K.openSlots(Game, 6); K.giveAbility(Game, p.payoff, { force: true });
-    const res = {};
-    for (const on of [false, true]) {
-      Game.state.scholar.kcal = 2000;
-      const mf = K.fight(Game, 'hushwolf', { hp: 500 });
-      Game.setCondition('p', p.condition, on); Game.setCondition(mf.key, p.condition, on);
-      const before = K.teleEvents(Game, 'godpath_payoff').length;
-      try { Game.useAbility(p.payoff, act.id, mf.key); } catch (e) {}
-      const ev = K.teleEvents(Game, 'godpath_payoff').slice(before)[0];
-      res[on] = ev ? ev.cashed : undefined;
-    }
-    T.ok(`${pid}: ${p.payoff} emits godpath_payoff — cashed:false without "${p.condition}", cashed:true with it`,
-      res[false] === false && res[true] === true, JSON.stringify(res), 2);
-  }
+  T.section('offers lean to your path');
+  s.abilities = [];
+  for (const id of ['static_toss', 'bloodhound', 'lucky_rock']) K.giveAbility(Game, id); // stalker, none in the combat kit
+  Game.checkPlayerGodhoodAscension();
+  const lu = Game.levelUpOffers('combat').map(d => d.id);
+  T.ok('a level-up sheet holds >=1 hunter ability when the kit has one', lu.some(id => (Game.abilityDef(id) || {}).path === 'hunter'), lu.join(','));
+  const roles = lu.map(id => (Game.abilityDef(id) || {}).role);
+  T.ok('the sheet\'s roles are distinct where the kit allows', new Set(roles).size === roles.length, roles.join(','));
+  const lean = Game.pathLean('player', 'night_eyes');
+  T.ok('pathLean scores an on-path ability above an off-path one', lean > Game.pathLean('player', 'green_thumb'), `${lean}`);
+  T.ok('pathLean is knowledge-gated: an unknown ability scores 0', Game.pathLean('player', 'night_eyes', { knows: () => false }) === 0);
+  s.abilityChoices = null;
+  s.abilities = s.abilities.slice(0, 3);
+  try { Game._cxPrizeAbilityOffer({ id: 'test', cat: 'moot' }); } catch (e) { T.ok('gift offer runs', false, e.message); }
+  const gift = (s.abilityChoices || []).map(c => c.id);
+  T.ok('a contest gift sheet holds >=1 hunter ability', gift.some(id => (Game.abilityDef(id) || {}).path === 'hunter'), gift.join(','));
+  s.abilityChoices = null;
 
-  // ── P3: Trials + ascension ──────────────────────────────────────────────
-  T.section('P3 · trial and ascension');
-  const trialAPI = ['godpathTrialEligible', 'godpathStartTrial', 'godpathAscend'].every(n => fnOf(Game, n));
-  T.ok('Game.godpathTrialEligible(pid) / godpathStartTrial(pid) / godpathAscend(pid) exist', trialAPI, '', 3);
-  if (trialAPI) {
-    const pid = 'hunter', p = paths[pid];
-    K.newRun(Game); K.openSlots(Game, 6);
-    const s = Game.state.scholar;
-    K.giveAbility(Game, p.payoff, { force: true, level: 3 });
-    s.day = 40;
-    T.ok('not eligible before day 80 (no mid-game godhood)', Game.godpathTrialEligible(pid) === false, '', 3);
-    s.day = 85;
-    s.godpath = Object.assign({}, s.godpath, { cashedAtL3: { [pid]: true } });
-    T.ok('eligible at day 85 with payoff L3 + cashed at L3', Game.godpathTrialEligible(pid) === true, '', 3);
-    const idxBefore = K.abilityIds(Game).indexOf(p.payoff);
-    const countBefore = s.abilities.length;
-    let asc = false; try { asc = Game.godpathAscend(pid); } catch (e) {}
-    const ids = K.abilityIds(Game);
-    T.ok('ascension transforms the payoff IN ITS SLOT (same index, same ability count)',
-      asc && ids[idxBefore] === p.godAbility && s.abilities.length === countBefore && !ids.includes(p.payoff),
-      `idx ${idxBefore} → ${ids[idxBefore]}`, 3);
-    T.ok('emits godpath_ascended telemetry', K.teleEvents(Game, 'godpath_ascended').length > 0, '', 3);
-    // One god per life.
-    const q = paths.brawler;
-    K.giveAbility(Game, q.payoff, { force: true, level: 3 });
-    s.godpath.cashedAtL3.brawler = true;
-    T.ok('one god per life: second path is never eligible', Game.godpathTrialEligible('brawler') === false, '', 3);
-  }
+  T.section('class recognition: villagers (the same function)');
+  const vid = (Game.state.village.roster || []).find(id => id !== Game.villagerId);
+  Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
+  Game.state.village.npcAbilities[vid] = [];
+  for (const id of ['bird_strike', 'bird_whisperer']) Game.npcGrantAbility(vid, id);
+  T.ok('two beastmaster abilities: no villager class', !Game.classLine(vid));
+  Game.npcGrantAbility(vid, 'beast_calm');
+  T.ok('three: the villager is named "Beastmaster of the Apex Predator"', Game.classLine(vid) === 'Beastmaster of the Apex Predator', String(Game.classLine(vid)));
+  T.ok('stored on village.npcGodpath[vid]', ((Game.state.village.npcGodpath || {})[vid] || {}).subclass === 'beastmaster');
 
-  // ── P4: scale ───────────────────────────────────────────────────────────
-  T.section('P4 · scale');
-  T.ok('Game.godpathBladeValue(who) exists (a god counts as titanBlades toward the coalition gate)',
-    fnOf(Game, 'godpathBladeValue'), '', 4);
-  if (fnOf(Game, 'godpathBladeValue')) {
-    K.newRun(Game);
-    T.ok('a non-god counts as 1 blade', Game.godpathBladeValue('p') === 1, '', 4);
-  }
+  T.section('capstone: reachable in a scripted build, same ceremony for both');
+  const G = globalThis.Scattering.Godhood;
+  s.abilities = [];
+  for (const id of ['trophy_room', 'static_toss', 'bloodhound', 'lucky_rock']) K.giveAbility(Game, id);
+  const apex = G.byId('apex_predator');
+  s.activeSynergies = [apex.requires.synergies[0]];
+  s.day = 85; Game.state.day = 85;
+  s.godhood = { recognized: {}, active: [] };
+  const tAsc = K.teleEvents(Game, 'ascension').length;
+  Game.checkPlayerGodhoodAscension();
+  T.ok('player ascends as the Apex Predator (class + payoff + 4 + deed, day 85)', (s.godhood.active || []).includes('apex_predator'), JSON.stringify(s.godhood));
+  T.ok('the System gifts the capstone item at the ceremony', (s.inventory || []).some(i => (i.itemId || i.id) === 'apex_bow'));
+  T.ok('ascension telemetry fires', K.teleEvents(Game, 'ascension').length > tAsc);
+  const army = G.byId('one_person_army');
+  Game.state.village.npcAbilities[vid] = [];
+  for (const id of ['rage', 'blood_frenzy', 'cannibal_frenzy', 'blood_magic']) Game.npcGrantAbility(vid, id);
+  Game.state.village.npcSynergies = Game.state.village.npcSynergies || {};
+  Game.state.village.npcSynergies[vid] = [army.requires.synergies[0]];
+  Game.checkVillagerGodhoodAscension(vid);
+  T.ok('a villager ascends through the same requirement model', (((Game.state.village.npcGodhood || {})[vid] || {}).active || []).includes('one_person_army'));
 
   T.done();
 })().catch(e => { console.error('LADDER HARNESS ERROR', e); process.exitCode = 2; });

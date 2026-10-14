@@ -92,17 +92,14 @@
         "effect": "Once per fight: study the monster's stance. Reveals its likely next move (knowledge-gated)."
       }
     ],
-    "paths": [
-      "hunter",
-      "explorer",
-      "survivalist"
-    ],
     "deepening": {
       "2": "You read the land like a newspaper \u2014 yesterday and today.",
       "3": "The wild tells you its plans: you know where game WILL be."
     },
     "lane": "skill",
-    "skillId": "track_read"
+    "skillId": "track_read",
+    "path": "hunter",
+    "alsoPath": "explorer"
   },
   {
     "description": "One shot. You don't take the shot unless it's the shot.",
@@ -143,15 +140,13 @@
         "effect": "Take extra time lining up the shot. Your next hunting strike lands more reliably \u2014 and when it lands, it's clean: the animal doesn't suffer."
       }
     ],
-    "paths": [
-      "hunter",
-      "brawler"
-    ],
     "deepening": {
       "2": "The shot is always there. You just wait.",
       "3": "One shot, one kill: your opening strike cannot miss."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter",
+    "alsoPath": "brawler"
   },
   {
     "description": "Break down game fast and clean. Less waste, more meat, usable parts.",
@@ -183,15 +178,13 @@
         "effect": "Break down a carcass into usable meat plus hide, sinew, bone. Your Field Dressing skill wastes less of the carcass \u2014 this is the deliberate work of breaking it down."
       }
     ],
-    "paths": [
-      "hunter",
-      "survivalist"
-    ],
     "deepening": {
       "2": "Clean cuts, no waste \u2014 the carcass gives everything.",
       "3": "You read the animal in the dressing: its health, its range, its story."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter",
+    "alsoPath": "survivalist"
   },
   {
     "description": "You think in shelf life. Smoking, drying, salting \u2014 food that lasts is food that saves.",
@@ -263,7 +256,9 @@
     "knackDescription": "Your stomach changed this week. Things that should lay you flat barely slow you down now. You noticed. You haven\u2019t told anyone.",
     "knackName": "Iron Gut",
     "alsoKnack": true,
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "description": "Move through woods like weather. Less noise, fewer surprises.",
@@ -313,7 +308,9 @@
       "2": "The slow world is home now.",
       "3": "Time stutters for you alone: once per fight, dodge the undodgeable."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "juggernaut"
   },
   {
     "id": "green_thumb",
@@ -351,7 +348,9 @@
         "desc": "Ask what's growing here. Once/day: reveals this tile's forage table."
       }
     ],
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "gardener"
   },
   {
     "id": "tracker",
@@ -380,16 +379,14 @@
         "effect": "Follow tracks. Find where an animal went, how many, how long ago."
       }
     ],
-    "paths": [
-      "hunter",
-      "explorer"
-    ],
     "deepening": {
       "2": "+50% hunt success (was +30%).",
       "3": "You see tracks from 2 tiles away."
     },
     "lane": "skill",
-    "skillId": "track_read"
+    "skillId": "track_read",
+    "path": "hunter",
+    "alsoPath": "explorer"
   },
   {
     "id": "diplomat",
@@ -506,7 +503,9 @@
       "2": "The squirrels have a network, and you're in it.",
       "3": "The forest provides: gifts arrive when you need them most."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "miser",
+    "subclass": "hoarder"
   },
   {
     "id": "rain_dancer",
@@ -534,7 +533,9 @@
       "2": "The sky knows your steps.",
       "3": "You call the rain: dance, and water comes (once per week)."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "gardener"
   },
   {
     "id": "loud_chewer",
@@ -567,7 +568,9 @@
       "2": "Your joy is infectious \u2014 morale spreads.",
       "3": "Your appetite is legend: the village eats better just watching you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "feaster"
   },
   {
     "id": "hoarder",
@@ -595,7 +598,9 @@
       "2": "Your stashes are everywhere. You remember all of them.",
       "3": "You never lack: once per week, produce exactly what's needed from your hoard."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "miser",
+    "subclass": "hoarder"
   },
   {
     "id": "thief",
@@ -624,15 +629,13 @@
         "effect": "Steal from the pantry. 50% chance of no trust loss. If caught: -20 trust."
       }
     ],
-    "paths": [
-      "drifter",
-      "miser"
-    ],
     "deepening": {
       "2": "Hands like smoke.",
       "3": "You can steal the truth itself: learn one secret per theft."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "drifter",
+    "alsoPath": "miser"
   },
   {
     "id": "photosynthesis",
@@ -654,7 +657,9 @@
       "2": "Sunlight is a meal now.",
       "3": "You bloom: in daylight, you barely need to eat."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "gardener"
   },
   {
     "id": "second_wind",
@@ -686,7 +691,9 @@
       "2": "Death has to try harder.",
       "3": "Twice per day, death is refused."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "undying"
   },
   {
     "id": "lucky_rock",
@@ -714,7 +721,9 @@
       "2": "The rock believes in you. That's enough.",
       "3": "Luck is a skill now: once per day, reroll any failure."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "stalker"
   },
   {
     "id": "bird_whisperer",
@@ -742,7 +751,9 @@
       "2": "The birds are your scouts.",
       "3": "The sky watches for you: you'll always know what's coming."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "beastmaster"
   },
   {
     "id": "chitin_skin",
@@ -775,7 +786,9 @@
       "2": "Your plates are armor and statement.",
       "3": "Living fortress: your skin turns blades, and you feel nothing."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "shieldbearer",
+    "subclass": "bulwark"
   },
   {
     "id": "extra_stomach",
@@ -803,7 +816,9 @@
       "2": "Two furnaces, one will.",
       "3": "You can feast for the village: share your second stomach's bounty."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "id": "deep_reserves",
@@ -831,7 +846,9 @@
       "2": "The war chest deepens.",
       "3": "You are the reserve: in famine, your body feeds others."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "id": "eyes_in_back",
@@ -853,7 +870,9 @@
       "2": "Nothing surprises you anymore.",
       "3": "You see everything: ambushes are impossible, and you see... more."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "seer"
   },
   {
     "id": "molt",
@@ -883,14 +902,13 @@
         "effect": "Shed your skin. Heal to full HP. Lose all equipped gear (stuck in old skin). Once per week."
       }
     ],
-    "paths": [
-      "survivalist"
-    ],
     "deepening": {
       "2": "Shedding is renewal.",
       "3": "You molt at will: heal to full once per week, keep your gear."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "undying"
   },
   {
     "id": "blood_magic",
@@ -912,15 +930,14 @@
     "metabolic": {
       "daily": 100
     },
-    "paths": [
-      "survivalist",
-      "brawler"
-    ],
     "deepening": {
       "2": "The cut is cleaner, the return richer.",
       "3": "Your blood is currency: convert HP to kcal at will, no wound."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "berserker",
+    "alsoPath": "survivalist"
   },
   {
     "id": "rage",
@@ -959,7 +976,9 @@
       "2": "The red is a tool now.",
       "3": "Perfect fury: your rage never misses and never fades mid-fight."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "berserker"
   },
   {
     "id": "cannibal_frenzy",
@@ -977,15 +996,14 @@
     "metabolic": {
       "daily": 100
     },
-    "paths": [
-      "survivalist",
-      "brawler"
-    ],
     "deepening": {
       "2": "The hunger is honest.",
       "3": "The hunger is wise: you gain their strength, not just their meat."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "berserker",
+    "alsoPath": "survivalist"
   },
   {
     "id": "pact",
@@ -1007,7 +1025,9 @@
       "2": "The contract deepens.",
       "3": "You renegotiate: choose which ability the pact takes."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "miser",
+    "subclass": "dealer"
   },
   {
     "id": "scream_cheese",
@@ -1042,15 +1062,13 @@
         "effect": "Scream so loud it curdles milk. Stuns all monsters for 1 round. Once per day."
       }
     ],
-    "paths": [
-      "brawler",
-      "socialite"
-    ],
     "deepening": {
       "2": "Your voice curdles more than milk.",
       "3": "The scream is a weapon: shatter stone, not just nerves."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "socialite",
+    "subclass": "showrunner"
   },
   {
     "id": "pocket_sand",
@@ -1084,15 +1102,14 @@
         "effect": "Throw sand in eyes. Blinds target for 2 rounds (attacks have disadvantage). You always have sand."
       }
     ],
-    "paths": [
-      "brawler",
-      "drifter"
-    ],
     "deepening": {
       "2": "You always have sand. Don't ask.",
       "3": "Pocket everything: sand, yes, but also keys, knives, secrets."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "trickster",
+    "alsoPath": "brawler"
   },
   {
     "id": "taste_vision",
@@ -1121,7 +1138,9 @@
       "2": "The world has flavor now.",
       "3": "You taste truth: lies have a flavor, and it's unmistakable."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "miser",
+    "subclass": "hoarder"
   },
   {
     "id": "poisoner",
@@ -1197,7 +1216,9 @@
       "2": "Your presence is weather.",
       "3": "Terror is a tool: you can aim your fear like a weapon."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "socialite",
+    "subclass": "demagogue"
   },
   {
     "id": "grave_robber",
@@ -1226,15 +1247,13 @@
         "effect": "Loot a corpse thoroughly. Better gear than normal looting. -15 trust if seen doing it."
       }
     ],
-    "paths": [
-      "drifter",
-      "miser"
-    ],
     "deepening": {
       "2": "The dead don't mind. Much.",
       "3": "You speak with the dead: the looted tell you where they hid the rest."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "drifter",
+    "alsoPath": "miser"
   },
   {
     "id": "time_skip",
@@ -1252,15 +1271,13 @@
     "metabolic": {
       "daily": 250
     },
-    "paths": [
-      "drifter",
-      "explorer"
-    ],
     "deepening": {
       "2": "Time is a suggestion.",
       "3": "You skip with precision: arrive exactly when needed."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "phantom"
   },
   {
     "id": "hive_mind",
@@ -1282,7 +1299,9 @@
       "2": "The hive hums for you.",
       "3": "You are the hive: see through every allied eye."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "cartographer"
   },
   {
     "id": "cold_blooded",
@@ -1304,7 +1323,9 @@
       "2": "Winter is a rumor.",
       "3": "Your blood is antifreeze: cold cannot touch you or yours."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "id": "echo_location",
@@ -1322,15 +1343,14 @@
     "metabolic": {
       "daily": 50
     },
-    "paths": [
-      "explorer",
-      "hunter"
-    ],
     "deepening": {
       "2": "The world has shape in sound.",
       "3": "You see through walls: sound maps the unseen."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "cartographer",
+    "alsoPath": "hunter"
   },
   {
     "id": "compost_king",
@@ -1375,7 +1395,9 @@
       "2": "The moss is loyal.",
       "3": "Living beard: your moss heals small wounds and hides you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "feaster"
   },
   {
     "id": "dowsing",
@@ -1397,7 +1419,9 @@
       "2": "Water calls to you.",
       "3": "You find more than water: the stick points to what you need."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "cartographer"
   },
   {
     "id": "cornered_rat",
@@ -1419,7 +1443,9 @@
       "2": "Desperation is a weapon.",
       "3": "The corner is your throne: surrounded, you are unstoppable."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "juggernaut"
   },
   {
     "id": "dead_aim",
@@ -1454,14 +1480,12 @@
         "effect": "One perfect shot. 3x damage, ignores armor. You cannot move this turn."
       }
     ],
-    "paths": [
-      "hunter"
-    ],
     "deepening": {
       "2": "The waiting is the weapon.",
       "3": "Death waits with you: your held shot kills anything it hits."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter"
   },
   {
     "id": "second_skin",
@@ -1489,7 +1513,9 @@
       "2": "You pack light and move lighter.",
       "3": "You ARE the journey: distance shortens under your stride."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "phantom"
   },
   {
     "id": "open_book",
@@ -1548,16 +1574,14 @@
         "effect": "Resolve a villager dispute with a talk check. Peace is a skill. Bonus from drama.resolve_bonus."
       }
     ],
-    "paths": [
-      "socialite",
-      "caregiver"
-    ],
     "deepening": {
       "2": "You can cool any temper. Anger listens to you.",
       "3": "MASTER MEDIATOR: warring parties seek you out \u2014 you end feuds, not just fights."
     },
     "lane": "skill",
-    "skillId": "mediate"
+    "skillId": "mediate",
+    "path": "socialite",
+    "alsoPath": "caregiver"
   },
   {
     "id": "leech",
@@ -1586,15 +1610,14 @@
         "effect": "Enter leech stance: when an ally takes damage near you this round, you take half of it. They owe you. (They know it.)"
       }
     ],
-    "paths": [
-      "caregiver",
-      "brawler"
-    ],
     "deepening": {
       "2": "Their pain is your purpose.",
       "3": "You drink wounds: take their injuries as your strength."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "shieldbearer",
+    "subclass": "bulwark",
+    "alsoPath": "caregiver"
   },
   {
     "id": "scarecrow",
@@ -1612,7 +1635,7 @@
       {
         "target": "hunt.trap_catch",
         "op": "multiply",
-        "value": 2.0
+        "value": 2
       }
     ],
     "metabolic": {
@@ -1630,14 +1653,12 @@
         "effect": "Stage a fake injury to lure monsters into your traps. They fall for it. Every time. Next trap is guaranteed to trigger."
       }
     ],
-    "paths": [
-      "hunter"
-    ],
     "deepening": {
       "2": "The ruse is perfect.",
       "3": "You become the monster they fear: traps set themselves."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter"
   },
   {
     "id": "hollow_bones",
@@ -1665,7 +1686,9 @@
       "2": "Light as rumor.",
       "3": "You could fly if you believed: falls can't hurt you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "phantom"
   },
   {
     "id": "third_eye",
@@ -1693,7 +1716,9 @@
       "2": "The eye never blinks.",
       "3": "The eye sees all: danger has no secrets from you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "seer"
   },
   {
     "id": "phoenix_clause",
@@ -1715,7 +1740,9 @@
       "2": "The clause is patient.",
       "3": "You choose who burns: the clause takes your chosen, not random."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "undying"
   },
   {
     "id": "symbiote",
@@ -1737,7 +1764,9 @@
       "2": "You and it are we.",
       "3": "Perfect symbiosis: it wants what you want now."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "undying"
   },
   {
     "id": "survivor",
@@ -1765,7 +1794,9 @@
       "2": "Endurance is identity.",
       "3": "You cannot be outlasted: hunger and cold break first."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "undying"
   },
   {
     "id": "wanderer",
@@ -1852,7 +1883,9 @@
     "memory": "You sat up at {place} watching the dark. {kin} asked what you were looking at. \u2018Everything,\u2019 you said. A month ago you couldn\u2019t see your own hand.",
     "knackDescription": "The dark stopped bothering you days ago. You see shapes in it that others miss \u2014 movement, mostly. You\u2019re always watching the movement now.",
     "alsoKnack": true,
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "stalker"
   },
   {
     "id": "translator",
@@ -1871,7 +1904,9 @@
       "2": "Every tongue is yours.",
       "3": "You speak the unsaid: meaning beyond words."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "caregiver",
+    "subclass": "keeper"
   },
   {
     "id": "field_medicine",
@@ -1934,15 +1969,14 @@
       "type": "cure_poison",
       "cooldown": "day"
     },
-    "paths": [
-      "caregiver",
-      "forager"
-    ],
     "deepening": {
       "2": "Your purifications hold \u2014 treated water stays safe for days.",
       "3": "MASTER: you purify at scale \u2014 a whole barrel in the time of a cup."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "caregiver",
+    "subclass": "healer",
+    "alsoPath": "forager"
   },
   {
     "id": "brawler_instinct",
@@ -2001,7 +2035,9 @@
       "2": "+60% damage (was +30%).",
       "3": "You fight through pain. Wounds don't slow you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "berserker"
   },
   {
     "id": "intimidating_presence",
@@ -2122,16 +2158,14 @@
         "effect": "Turn a tense social situation friendly. You walk in, you walk out with friends. It is a gift."
       }
     ],
-    "paths": [
-      "socialite",
-      "caregiver"
-    ],
     "deepening": {
       "2": "You can stop any fight.",
       "3": "Warring villages ask you to mediate."
     },
     "lane": "skill",
-    "skillId": "mediate"
+    "skillId": "mediate",
+    "path": "socialite",
+    "alsoPath": "caregiver"
   },
   {
     "id": "pathfinder",
@@ -2261,7 +2295,9 @@
       "2": "Fire is a friend.",
       "3": "You are the flame: fire obeys your mood."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "feaster"
   },
   {
     "id": "stalk",
@@ -2299,16 +2335,13 @@
         "effect": "Move to adjacent tile unseen. Animals don't flee. Once per approach."
       }
     ],
-    "paths": [
-      "hunter",
-      "drifter",
-      "explorer"
-    ],
     "deepening": {
       "2": "Distance closes without permission.",
       "3": "You become landscape: watching eyes slide off you."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter",
+    "alsoPath": "drifter"
   },
   {
     "id": "blood_trail",
@@ -2340,16 +2373,14 @@
         "effect": "Track a wounded animal to its location. Reveals direction and distance."
       }
     ],
-    "paths": [
-      "hunter",
-      "survivalist"
-    ],
     "deepening": {
       "2": "Old blood speaks as loud as fresh.",
       "3": "You follow trails days cold \u2014 the land remembers, and so do you."
     },
     "lane": "skill",
-    "skillId": "track_read"
+    "skillId": "track_read",
+    "path": "hunter",
+    "alsoPath": "survivalist"
   },
   {
     "id": "ambush",
@@ -2396,15 +2427,13 @@
         "effect": "Set an ambush at your location. Next animal encounter starts with you hidden."
       }
     ],
-    "paths": [
-      "hunter",
-      "brawler"
-    ],
     "deepening": {
       "2": "You don't set ambushes. You become them.",
       "3": "Your ambushes are perfect: the enemy never gets a first turn."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "hunter",
+    "alsoPath": "brawler"
   },
   {
     "id": "animal_ken",
@@ -2439,17 +2468,14 @@
         "effect": "Attempt to calm a non-predatory animal. May end the fight peacefully."
       }
     ],
-    "paths": [
-      "hunter",
-      "caregiver",
-      "drifter"
-    ],
     "deepening": {
       "2": "Their moods are weather \u2014 readable, predictable.",
       "3": "You know what an animal will do before it does. All of them."
     },
     "lane": "skill",
-    "skillId": "animal_behavior"
+    "skillId": "animal_behavior",
+    "path": "hunter",
+    "alsoPath": "caregiver"
   },
   {
     "id": "water_breathing",
@@ -2475,15 +2501,13 @@
         "effect": "Explore underwater areas. Find things others can't reach."
       }
     ],
-    "paths": [
-      "explorer",
-      "survivalist"
-    ],
     "deepening": {
       "2": "The deep is shallow.",
       "3": "You belong below: the water hides and feeds you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "cartographer"
   },
   {
     "id": "trade_of_blows",
@@ -2526,14 +2550,13 @@
         "effect": "Cash in: deal bonus damage equal to 50% of damage taken this fight. Once per fight."
       }
     ],
-    "paths": [
-      "brawler"
-    ],
     "deepening": {
       "2": "Every exchange teaches. You learn faster than they hit.",
       "3": "You turn their strength against them: their hits open your counters."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "juggernaut"
   },
   {
     "id": "unbreakable",
@@ -2569,15 +2592,13 @@
         "effect": "Clear stun, slow, and bleed. Once per fight. Costs 50 kcal \u2014 your body burns fuel to keep going."
       }
     ],
-    "paths": [
-      "brawler",
-      "survivalist"
-    ],
     "deepening": {
       "2": "Pain is information. You read it and keep going.",
       "3": "You cannot be broken: once per fight, ignore what would drop you."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "juggernaut"
   },
   {
     "id": "war_cry",
@@ -2624,15 +2645,14 @@
         "effect": "Issue a public dare to a villager: a non-lethal bout, witnessed. The dare stands until hands are thrown \u2014 and when they are, the village holds you both to the terms: to yield, winner takes respect, loser takes humility. Break the terms (a killing) and the village names you oathbreaker. Once a day."
       }
     ],
-    "paths": [
-      "brawler",
-      "socialite"
-    ],
     "deepening": {
       "2": "Your voice is a weapon now.",
       "3": "Your cry is legend: enemies break before the fighting starts."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "socialite",
+    "subclass": "demagogue",
+    "alsoPath": "brawler"
   },
   {
     "id": "haymaker",
@@ -2670,14 +2690,12 @@
         "effect": "A massive swing: 2.5x damage, but -30% accuracy. If it misses, you're off-balance (enemies get +hit next turn)."
       }
     ],
-    "paths": [
-      "brawler"
-    ],
     "deepening": {
       "2": "The big swing always lands where it hurts.",
       "3": "One perfect blow: your haymaker can end a fight outright."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "brawler"
   },
   {
     "description": "Your nose changed days ago. Water has a smell now \u2014 and so does fear. You haven\u2019t told anyone. People look at you funny when you find things by smell.",
@@ -2705,7 +2723,9 @@
       "2": "Scent is sight.",
       "3": "You smell truth: fear, lies, and water, all distinct."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "stalker"
   },
   {
     "description": "Animals started going quiet around you this week. Not tame \u2014 listening. Like they\u2019re waiting to see what you\u2019ll do.",
@@ -2733,7 +2753,9 @@
       "2": "Your calm is contagious.",
       "3": "Beasts know you: predators stand down in your presence."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "beastmaster"
   },
   {
     "description": "Days ago the plants started leaning toward you. You know which ones are thirsty, which are sick, which are hiding something good. You don\u2019t know how you know.",
@@ -2761,7 +2783,9 @@
       "2": "Plants lean toward you.",
       "3": "The green obeys: you can coax growth from bare ground."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "gardener"
   },
   {
     "description": "Your hands stopped shaking this week. Not when you\u2019re scared, not when it matters. They just do the work now.",
@@ -2848,7 +2872,9 @@
       "2": "Your touch knows.",
       "3": "Hands that heal and know: you feel sickness like a texture."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "caregiver",
+    "subclass": "healer"
   },
   {
     "description": "The System installs your fusion pellet \u2014 properly, inside you. You never need to eat again: the pellet covers your metabolism, and your strikes and abilities burn with a steady reactor fire (1.25x, always on). One reactor per world, and it never comes out: not unslotted, not un-taught, not surrendered. Death is the only uninstall. But the hunger is gone, and with it the joy: food gives you no morale, feasts give you no comfort, and your fire never burns hotter than this. A cold spot at every table.",
@@ -2861,9 +2887,6 @@
     },
     "modifiers": [],
     "name": "Fusion Reactor",
-    "paths": [
-      "survivalist"
-    ],
     "pool": "system",
     "tier": "rare",
     "unlock": {
@@ -2873,7 +2896,9 @@
       "2": "The reactor runs cleaner: the fire steadies, the hum fades into background.",
       "3": "You forget what hunger felt like. You are not sure what else you forgot."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "id": "draw_fire",
@@ -2894,10 +2919,6 @@
     },
     "modifiers": [],
     "actions": [],
-    "paths": [
-      "brawler",
-      "shieldbearer"
-    ],
     "resonance": [
       "undying_ward"
     ],
@@ -2905,7 +2926,9 @@
       "2": "Your challenge carries further. Beasts hear it first.",
       "3": "You are the wall it breaks on. Everyone knows it, especially the wall."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer",
+    "alsoPath": "brawler"
   },
   {
     "id": "bodyguard",
@@ -2926,11 +2949,6 @@
     },
     "modifiers": [],
     "actions": [],
-    "paths": [
-      "brawler",
-      "caregiver",
-      "shieldbearer"
-    ],
     "resonance": [
       "undying_ward"
     ],
@@ -2938,7 +2956,9 @@
       "2": "You read the blow a breath earlier.",
       "3": "Your people stop flinching when things fall. They know where you'll be."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer",
+    "alsoPath": "caregiver"
   },
   {
     "id": "shield_wall",
@@ -2959,10 +2979,6 @@
     },
     "modifiers": [],
     "actions": [],
-    "paths": [
-      "brawler",
-      "shieldbearer"
-    ],
     "resonance": [
       "undying_ward"
     ],
@@ -2970,7 +2986,9 @@
       "2": "The line tightens. Less gets through.",
       "3": "You have been the wall so long you've forgotten what it was like to stand alone."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer",
+    "alsoPath": "brawler"
   },
   {
     "id": "rally",
@@ -2986,9 +3004,6 @@
     },
     "modifiers": [],
     "actions": [],
-    "paths": [
-      "shieldbearer"
-    ],
     "resonance": [
       "undying_ward"
     ],
@@ -2996,7 +3011,8 @@
       "2": "Your voice finds them faster in the noise.",
       "3": "They have heard you hold before. They believe it now."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer"
   },
   {
     "id": "static_toss",
@@ -3027,7 +3043,9 @@
       "2": "The static sticks \u2014 the struck monster is slowed (moves 1 less) for 2 rounds.",
       "3": "CHAIN LIGHTNING: arcs to a second monster for half damage."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "stalker"
   },
   {
     "id": "cheese_wheel",
@@ -3058,7 +3076,9 @@
       "2": "The wheel is aged \u2014 it stuns for 1 round on impact (the smell).",
       "3": "The wheel multiplies mid-flight. Two wheels. Twice the screaming."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "socialite",
+    "subclass": "showrunner"
   },
   {
     "id": "bird_strike",
@@ -3089,7 +3109,9 @@
       "2": "Murder: more birds. [12,18]/round.",
       "3": "The birds learn to aim for eyes. 40% blind chance."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "beastmaster"
   },
   {
     "id": "tripwire",
@@ -3150,7 +3172,9 @@
       "2": "Your reasoning is impeccable. 3 rounds.",
       "3": "They hold a grudge. The feud persists after the fight (they'll remember)."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "trickster"
   },
   {
     "id": "freeze_tag",
@@ -3181,7 +3205,9 @@
       "2": "No tag-backs: also silences its special for 1 round.",
       "3": "Everyone's it: root all adjacent monsters."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "shieldbearer",
+    "subclass": "warden"
   },
   {
     "id": "shoulder_check",
@@ -3216,14 +3242,12 @@
         "effect": "Shove a controlled (stunned/rooted/bound/blinded/hesitating) size-1 monster 2 tiles directly away from you. Slamming it into another fighter deals collision to both."
       }
     ],
-    "paths": [
-      "shieldbearer"
-    ],
     "deepening": {
       "2": "The shoulder knows.",
       "3": "You can shoulder-check a door off its hinges. You've done it. Twice."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer"
   },
   {
     "id": "hogtie",
@@ -3258,14 +3282,12 @@
         "effect": "Spend 1 rope + the action on a controlled monster: rooted 3 rounds (3\u21922\u21921 per previous bind), cannot start telegraphs while bound. Uninterruptible monsters still attack \u2014 the rope holds the body, not the promise."
       }
     ],
-    "paths": [
-      "shieldbearer"
-    ],
     "deepening": {
       "2": "Your knots have knots.",
       "3": "You once hogtied a rumor. It stayed tied."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer"
   },
   {
     "id": "come_get_some",
@@ -3300,24 +3322,19 @@
         "effect": "Target a blinded monster within 3 tiles: it lurches toward your position on its next move. Reposition the threat without touching it."
       }
     ],
-    "paths": [
-      "shieldbearer",
-      "socialite"
-    ],
     "deepening": {
       "2": "You can goad a statue into flinching.",
       "3": "Your taunts have a return address."
     },
-    "lane": "skill"
+    "lane": "skill",
+    "path": "shieldbearer",
+    "alsoPath": "socialite"
   },
   {
     "id": "blood_frenzy",
     "name": "Blood Frenzy",
     "description": "Each consecutive successful strike in a fight: Land 2 consecutive hits and the next is a guaranteed crit (double damage, costs 50 kcal). Miss and the count resets. The red doesn't come down \u2014 it builds.",
     "flavor": "OH. OH NO. THE AUDIENCE IS COUNTING. THREE! FOUR! DON'T YOU DARE MISS!",
-    "paths": [
-      "brawler"
-    ],
     "role": "payoff",
     "slotRole": "nuke",
     "tier": "overpowered",
@@ -3335,16 +3352,15 @@
       "2": "Stacks to +100%.",
       "3": "Missing no longer fully breaks it \u2014 halves instead."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "brawler",
+    "subclass": "berserker"
   },
   {
     "id": "retribution",
     "name": "Retribution",
     "description": "Store blocked damage. UNLEASH (active): release it as a shockwave hitting all adjacent enemies \u2014 but you keep 25% of the pain. The wall hits back, and it hits you too.",
     "flavor": "YOU ATE THEIR BEST SHOT. NOW SERVE IT BACK.",
-    "paths": [
-      "shieldbearer"
-    ],
     "role": "payoff",
     "slotRole": "nuke",
     "tier": "overpowered",
@@ -3374,16 +3390,15 @@
       "2": "Stores 75%.",
       "3": "Unleash also staggers."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "shieldbearer",
+    "subclass": "bulwark"
   },
   {
     "id": "trophy_room",
     "name": "Trophy Room",
     "description": "Once per day, mark a monster type you have killed. +50% damage against the marked type. The hunter's memory is a weapon.",
     "flavor": "THE WALL OF HEADS GROWS. EACH ONE TEACHES THE NEXT ONE HOW TO DIE.",
-    "paths": [
-      "hunter"
-    ],
     "role": "payoff",
     "slotRole": "nuke",
     "tier": "overpowered",
@@ -3412,16 +3427,15 @@
       "2": "+75% vs marked.",
       "3": "Two marks per day."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "hunter",
+    "subclass": "stalker"
   },
   {
     "id": "feast_engine",
     "name": "Feast Engine",
     "description": "While at full health: +25% damage. The body is a furnace at full burn. Stay topped up, hit harder.",
     "flavor": "FULL? FULL IS A STARTING POINT. THE EXCESS HAS TO GO SOMEWHERE. WE SUGGEST: OUTWARD.",
-    "paths": [
-      "survivalist"
-    ],
     "role": "payoff",
     "slotRole": "nuke",
     "tier": "overpowered",
@@ -3439,16 +3453,15 @@
       "2": "+3% per HP.",
       "3": "Cap +75%."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "survivalist",
+    "subclass": "furnace"
   },
   {
     "id": "battlefield_grace",
     "name": "Battlefield Grace",
     "description": "Heal the same ally 3 times in one fight: they gain an immediately usable free action. Care is tempo.",
     "flavor": "THREE TOUCHES AND THEY'RE BACK ON THEIR FEET MID-SWING. THE AUDIENCE IS CRYING. WE'RE CRYING.",
-    "paths": [
-      "caregiver"
-    ],
     "role": "payoff",
     "slotRole": "sustain",
     "tier": "overpowered",
@@ -3466,16 +3479,15 @@
       "2": "2 heals trigger it.",
       "3": "Also grants +1 round of courage."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "caregiver",
+    "subclass": "healer"
   },
   {
     "id": "nowhere_man",
     "name": "Nowhere Man",
     "description": "+5% dodge per tile moved without taking damage, stacking to +40%. Getting hit resets it. You were never there.",
     "flavor": "THE CAMERAS CAN'T TRACK YOU. WE CHECKED. THE REPLAY IS JUST WIND.",
-    "paths": [
-      "drifter"
-    ],
     "role": "payoff",
     "slotRole": "mobility",
     "tier": "overpowered",
@@ -3493,16 +3505,15 @@
       "2": "+7% per tile.",
       "3": "Cap +60%."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "drifter",
+    "subclass": "phantom"
   },
   {
     "id": "cartographers_eye",
     "name": "Cartographer's Eye",
     "description": "+1% dodge per 10 revealed map tiles in your current region, up to +15%. You know where the ground is uneven, where the cover is. They don't.",
     "flavor": "YOU'VE WALKED EVERY MILE OF THIS. THE LAND FIGHTS WITH YOU NOW.",
-    "paths": [
-      "explorer"
-    ],
     "role": "payoff",
     "slotRole": "nuke",
     "tier": "overpowered",
@@ -3520,16 +3531,15 @@
       "2": "+3% per 10 tiles.",
       "3": "Cap +45%."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "explorer",
+    "subclass": "cartographer"
   },
   {
     "id": "crowd_favorite",
     "name": "Crowd Favorite",
     "description": "Your social abilities scale with your audience: effects \u00d7(1 + fans/10). The crowd is a resource. Work it.",
     "flavor": "THEY'RE CHANTING YOUR NAME. WE TAUGHT THEM. YOU'RE WELCOME. NOW USE IT.",
-    "paths": [
-      "socialite"
-    ],
     "role": "payoff",
     "slotRole": "wildcard",
     "tier": "overpowered",
@@ -3547,16 +3557,15 @@
       "2": "\u00d7(1 + fans/8).",
       "3": "\u00d7(1 + fans/6)."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "socialite",
+    "subclass": "showrunner"
   },
   {
     "id": "hoarders_interest",
     "name": "Hoarder's Interest",
     "description": "Your stored pantry resources generate 5% per day as bonus calories, compounding. Patience is an engine.",
     "flavor": "INTEREST! ON GRAIN! THE ECONOMY IS REAL AND IT IS HUNGRY FOR YOUR PATIENCE.",
-    "paths": [
-      "miser"
-    ],
     "role": "payoff",
     "slotRole": "sustain",
     "tier": "overpowered",
@@ -3574,16 +3583,15 @@
       "2": "1.5% per day.",
       "3": "2% per day."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "miser",
+    "subclass": "hoarder"
   },
   {
     "id": "cornucopia",
     "name": "Cornucopia",
     "description": "Consecutive successful forages: +15% yield each, stacking to +150%. Fail, or do anything else, and the streak breaks. The land rewards devotion.",
     "flavor": "THE BASKET OVERFLOWS. THE BASKET HAS ALWAYS OVERFLOWED. YOU JUST FINALLY NOTICED.",
-    "paths": [
-      "forager"
-    ],
     "role": "payoff",
     "slotRole": "wildcard",
     "tier": "overpowered",
@@ -3601,6 +3609,960 @@
       "2": "+20% per streak.",
       "3": "Cap +200%."
     },
-    "lane": "magic"
+    "lane": "magic",
+    "path": "forager",
+    "subclass": "gardener"
+  },
+  {
+    "lane": "magic",
+    "id": "aegis_link",
+    "name": "Aegis Link",
+    "path": "shieldbearer",
+    "subclass": "bulwark",
+    "role": "enabler",
+    "slotRole": "sustain",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Bind one ally to you for 3 rounds: every hit meant for them lands on you instead. (Your armor applies. Theirs doesn't matter.)",
+    "flavor": "A thread of light between two chests. One of them is about to have a very bad day, and it volunteered.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 60
+    },
+    "actions": [
+      {
+        "id": "link",
+        "context": "combat",
+        "name": "Link",
+        "cost": {
+          "turn": true,
+          "kcal": 40
+        },
+        "target": "ally",
+        "do": "aegis",
+        "rounds": 3,
+        "effect": "Pick an ally: for 3 rounds every hit on them lands on you instead."
+      }
+    ],
+    "deepening": {
+      "2": "4 rounds.",
+      "3": "The link holds two allies at once."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "raise_earth",
+    "name": "Raise Earth",
+    "path": "shieldbearer",
+    "subclass": "warden",
+    "role": "enabler",
+    "slotRole": "control",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Slam your palm down: a 3-tile wall of packed earth rises between you and the nearest monster. It blocks everyone, monsters included, for 3 rounds. Once per fight.",
+    "flavor": "The ground was always on your side. Now it's standing up to say so.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 60
+    },
+    "actions": [
+      {
+        "id": "raise",
+        "context": "combat",
+        "name": "Raise Wall",
+        "cost": {
+          "turn": true,
+          "kcal": 60
+        },
+        "do": "wall",
+        "len": 3,
+        "rounds": 3,
+        "perFight": 1,
+        "effect": "A 3-tile wall rises one step toward the nearest monster, across its path. Blocks movement for everyone for 3 rounds."
+      }
+    ],
+    "deepening": {
+      "2": "5 tiles wide.",
+      "3": "Twice per fight."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "gravity_well",
+    "name": "Gravity Well",
+    "path": "shieldbearer",
+    "subclass": "warden",
+    "role": "enabler",
+    "slotRole": "control",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "You become the low point of the world. Every monster within 4 tiles is dragged up to 2 tiles toward you; the ones that end beside you stagger (hesitate 1 round).",
+    "flavor": "Everything rolls downhill. You have decided to be downhill.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "pull",
+        "context": "combat",
+        "name": "Pull",
+        "cost": {
+          "turn": true,
+          "kcal": 50
+        },
+        "do": "pull",
+        "radius": 4,
+        "tiles": 2,
+        "effect": "Drag every monster within 4 tiles up to 2 tiles toward you. Those that end adjacent hesitate 1 round."
+      }
+    ],
+    "deepening": {
+      "2": "Radius 5.",
+      "3": "Adjacent arrivals are also rooted 1 round."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "landslide",
+    "name": "Landslide",
+    "path": "shieldbearer",
+    "subclass": "warden",
+    "role": "payoff",
+    "slotRole": "control",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "Every monster within 2 tiles is hurled 2 tiles away from you. Whatever slams into a wall, a raised wall, the edge, or another body takes 14-22 and is stunned 1 round. Once per fight. The board is the weapon.",
+    "flavor": "YOU MOVED THE FLOOR. THE FLOOR TOOK SIDES.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "actions": [
+      {
+        "id": "quake",
+        "context": "combat",
+        "name": "Landslide",
+        "cost": {
+          "turn": true,
+          "kcal": 80
+        },
+        "do": "push",
+        "radius": 2,
+        "tiles": 2,
+        "slam": [
+          14,
+          22
+        ],
+        "perFight": 1,
+        "effect": "Hurl every monster within 2 tiles 2 tiles away. Slamming into anything: 14-22 damage and stunned 1 round."
+      }
+    ],
+    "synergyHints": [
+      "Raise Earth: build the anvil first.",
+      "Gravity Well: pull them in, then throw them out."
+    ],
+    "deepening": {
+      "2": "Radius 3.",
+      "3": "Slams deal 22-30."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "pack_hunt",
+    "name": "Pack Hunt",
+    "path": "hunter",
+    "subclass": "beastmaster",
+    "role": "payoff",
+    "slotRole": "control",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "Whistle once. The animals that have been listening to you come for one monster: they pin it (rooted 2 rounds) and harry it for 3 rounds (8-12 a round, 20% blind). If the birds are already on it, the harrying lasts twice as long.",
+    "flavor": "YOU DON'T HUNT ALONE. YOU NEVER DID. THEY WERE WAITING FOR THE WHISTLE.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 70
+    },
+    "actions": [
+      {
+        "id": "sic",
+        "context": "combat",
+        "name": "Sic 'Em",
+        "cost": {
+          "turn": true,
+          "kcal": 70
+        },
+        "target": "monster",
+        "do": "pack",
+        "rounds": 3,
+        "pin": 2,
+        "effect": "Your animals pin a monster (rooted 2 rounds) and harry it 3 rounds; 6 rounds if birds are already on it."
+      }
+    ],
+    "synergyHints": [
+      "Bird Strike: the birds open, the pack closes.",
+      "Beast Calm: they listen first, then they come."
+    ],
+    "deepening": {
+      "2": "Pinned 3 rounds.",
+      "3": "The pack can be called twice per fight."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "mending_hands",
+    "name": "Mending Hands",
+    "path": "caregiver",
+    "subclass": "healer",
+    "role": "enabler",
+    "slotRole": "sustain",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Lay your hands on yourself or an adjacent ally: the System knits 12-18 HP back, paid in your own calories. Counts as a heal for everything that counts heals.",
+    "flavor": "Not medicine. Magic with a receipt. The receipt is lunch.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "mend",
+        "context": "combat",
+        "name": "Mend",
+        "cost": {
+          "turn": true,
+          "kcal": 60
+        },
+        "target": "ally",
+        "do": "heal",
+        "amount": [
+          12,
+          18
+        ],
+        "effect": "Heal yourself or an adjacent ally 12-18 HP (more with healing bonuses)."
+      }
+    ],
+    "deepening": {
+      "2": "16-24 HP.",
+      "3": "Reach 2 tiles."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "lifeline",
+    "name": "Lifeline",
+    "path": "caregiver",
+    "subclass": "healer",
+    "role": "support",
+    "slotRole": "sustain",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Once per fight, when an ally fighting beside you would fall, they don't: they hold at 1 HP, and you feel the thread pull taut.",
+    "flavor": "The first time it holds, they thank you. The second time, they ask what you are.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 100
+    },
+    "deepening": {
+      "2": "They hold at 10 HP.",
+      "3": "Twice per fight."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "keepers_oath",
+    "name": "Keeper's Oath",
+    "path": "caregiver",
+    "subclass": "keeper",
+    "role": "payoff",
+    "slotRole": "sustain",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "The things you carry for the people you lost answer you first. Every keepsake you wear acts one level higher than its bond (a level 1 keepsake gives its level 2 action).",
+    "flavor": "YOU KEPT THEIR THINGS. NOW THEIR THINGS KEEP YOU.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "synergyHints": [
+      "Mourner's Bond: grow them faster, then let them speak louder.",
+      "Last Rites: the dead stand guard."
+    ],
+    "deepening": {
+      "2": "A level 2 keepsake counts as level 3 for its powers.",
+      "3": "Keepsakes in your pack still grow at half rate."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "mourners_bond",
+    "name": "Mourner's Bond",
+    "path": "caregiver",
+    "subclass": "keeper",
+    "role": "enabler",
+    "slotRole": "sustain",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Grief is a kind of attention. Worn keepsakes grow twice as fast.",
+    "flavor": "You hold the drawing a little longer each night. It holds you back.",
+    "modifiers": [
+      {
+        "target": "keepsake.bond_mult",
+        "op": "multiply",
+        "value": 2
+      }
+    ],
+    "metabolic": {
+      "daily": 40
+    },
+    "deepening": {
+      "2": "Story moments give +5 bond instead of +3.",
+      "3": "x3 growth."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "last_rites",
+    "name": "Last Rites",
+    "path": "caregiver",
+    "subclass": "keeper",
+    "role": "support",
+    "slotRole": "sustain",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "When an ally falls in a fight you are in, they don't leave right away: their echo stands guard and turns the next 2 hits on you aside, and every keepsake you wear gains +2 bond.",
+    "flavor": "They died between you and it. For a moment, they keep doing that.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 60
+    },
+    "deepening": {
+      "2": "3 hits.",
+      "3": "The echo also staggers whatever killed them (hesitate 1 round)."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "blink",
+    "name": "Blink",
+    "path": "drifter",
+    "subclass": "phantom",
+    "role": "enabler",
+    "slotRole": "mobility",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "You are somewhere else. Teleport up to 3 tiles (to the free tile farthest from danger, or where you point). Not a turn; twice per fight. Counts as moving.",
+    "flavor": "The cameras lost you for eleven frames. Legal is looking into it.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 60
+    },
+    "actions": [
+      {
+        "id": "blink",
+        "context": "combat",
+        "name": "Blink",
+        "cost": {
+          "kcal": 40
+        },
+        "do": "blink",
+        "range": 3,
+        "perFight": 2,
+        "effect": "Teleport up to 3 tiles. No turn spent. Twice per fight."
+      }
+    ],
+    "synergyHints": [
+      "Nowhere Man: three tiles you were never on."
+    ],
+    "deepening": {
+      "2": "Range 4.",
+      "3": "Three times per fight."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "switcheroo",
+    "name": "Switcheroo",
+    "path": "drifter",
+    "subclass": "trickster",
+    "role": "enabler",
+    "slotRole": "control",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Trade places with a monster within 3 tiles. Whatever it was winding up, it was aiming at where you used to be: the wind-up fizzles and it hesitates 1 round.",
+    "flavor": "It swung at you. You were it. It was you. Everyone is very confused, mostly it.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "swap",
+        "context": "combat",
+        "name": "Swap",
+        "cost": {
+          "turn": true,
+          "kcal": 50
+        },
+        "target": "monster",
+        "do": "swap",
+        "range": 3,
+        "effect": "Swap places with a monster within 3 tiles (size 1). Its wind-up fizzles; it hesitates 1 round."
+      }
+    ],
+    "deepening": {
+      "2": "Range 4.",
+      "3": "Swap two monsters with each other instead, if you like."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "misdirection",
+    "name": "Misdirection",
+    "path": "drifter",
+    "subclass": "trickster",
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "Confusion is an opening. Your strikes deal +50% to any monster that is blinded, turned against its own, hesitating or rooted.",
+    "flavor": "THEY NEVER KNEW WHICH WAY TO LOOK. THE ANSWER WAS ALWAYS \"AT THE KNIFE\".",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "synergyHints": [
+      "Pocket Sand: blind, then cash it.",
+      "Turncoat: while they argue, you collect.",
+      "Switcheroo: it hesitates; you don't."
+    ],
+    "deepening": {
+      "2": "+75%.",
+      "3": "Also ignores half its armor."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "foresight",
+    "name": "Foresight",
+    "path": "explorer",
+    "subclass": "seer",
+    "role": "enabler",
+    "slotRole": "opener",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "For 3 rounds you see a breath ahead: the System reads you every monster's intent each round. Not a turn; once per fight.",
+    "flavor": "The future is a rerun. You've just seen the episode.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "foresee",
+        "context": "combat",
+        "name": "Foresee",
+        "cost": {
+          "kcal": 40
+        },
+        "do": "foresee",
+        "rounds": 3,
+        "perFight": 1,
+        "effect": "For 3 rounds, every monster's intent is read aloud at the top of the round. No turn spent."
+      }
+    ],
+    "deepening": {
+      "2": "4 rounds.",
+      "3": "Allies hear it too: they dodge telegraphs as if they knew them."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "prophecy",
+    "name": "Prophecy",
+    "path": "explorer",
+    "subclass": "seer",
+    "role": "payoff",
+    "slotRole": "sustain",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "What you foresee, you step around. While Foresight (or any read of the fight) is live, you gain +35% dodge.",
+    "flavor": "IT SWUNG WHERE YOU WERE GOING TO BE. YOU WERE NOT GOING TO BE THERE.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "synergyHints": [
+      "Foresight: see it, then don't be there.",
+      "Third Eye: the eye weeps before the blow."
+    ],
+    "deepening": {
+      "2": "+45% dodge.",
+      "3": "Your first dodge each fight also staggers the attacker (hesitate 1)."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "live_broadcast",
+    "name": "Live Broadcast",
+    "path": "socialite",
+    "subclass": "showrunner",
+    "role": "enabler",
+    "slotRole": "wildcard",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Go live. The System puts your fight on the air: you gain fans, and every ally in the fight hears your voice and is emboldened for 2 rounds. Once per fight.",
+    "flavor": "\"WE'RE LIVE! WAVE TO THE GALAXY! NO, THE OTHER HAND, THAT ONE'S BLEEDING.\"",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "go_live",
+        "context": "combat",
+        "name": "Go Live",
+        "cost": {
+          "turn": true,
+          "kcal": 50
+        },
+        "do": "broadcast",
+        "fans": 2,
+        "rally": 2,
+        "perFight": 1,
+        "effect": "+2 fans; every ally in the fight is emboldened (+4 damage) for 2 rounds."
+      }
+    ],
+    "deepening": {
+      "2": "+3 fans, 3 rounds.",
+      "3": "Monsters watching the broadcast hesitate 1 round."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "rally_aura",
+    "name": "Rally Aura",
+    "path": "socialite",
+    "subclass": "demagogue",
+    "role": "enabler",
+    "slotRole": "wildcard",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "People stand straighter near you. Allies who start a fight within 3 tiles of you start it emboldened (+4 damage for 2 rounds) and holding the line.",
+    "flavor": "You don't give speeches. You just stand there and people decide to be braver.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 60
+    },
+    "deepening": {
+      "2": "3 rounds.",
+      "3": "Radius 5."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "the_crowd_moves",
+    "name": "The Crowd Moves",
+    "path": "socialite",
+    "subclass": "demagogue",
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "One word, and everyone moves. Every ally in the fight takes an immediate extra turn. Once per fight.",
+    "flavor": "YOU SAID \"NOW.\" THE WHOLE VILLAGE HEARD \"NOW.\" THE MONSTER HEARD IT TOO, TOO LATE.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "actions": [
+      {
+        "id": "command",
+        "context": "combat",
+        "name": "Command",
+        "cost": {
+          "turn": true,
+          "kcal": 80
+        },
+        "do": "command",
+        "perFight": 1,
+        "effect": "Every living ally in the fight takes an extra turn right now."
+      }
+    ],
+    "synergyHints": [
+      "Rally Aura: emboldened hands strike harder on the extra turn.",
+      "War Cry: shout first, command second."
+    ],
+    "deepening": {
+      "2": "Allies who act are also healed 5.",
+      "3": "Twice per fight."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "stoke",
+    "name": "Stoke",
+    "path": "survivalist",
+    "subclass": "furnace",
+    "role": "enabler",
+    "slotRole": "nuke",
+    "tier": "risky",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Throw calories on the fire. Burn 150 kcal: your next 2 strikes deal +60%. Not a turn. Twice per fight.",
+    "flavor": "Breakfast, converted to violence at a very poor exchange rate.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 0
+    },
+    "actions": [
+      {
+        "id": "stoke",
+        "context": "combat",
+        "name": "Stoke",
+        "cost": {
+          "kcal": 150
+        },
+        "do": "empower",
+        "mult": 1.6,
+        "strikes": 2,
+        "perFight": 2,
+        "effect": "Burn 150 kcal: next 2 strikes +60%. No turn spent."
+      }
+    ],
+    "synergyHints": [
+      "Deep Reserves: a bigger fire to feed.",
+      "Feast Engine: full and furious."
+    ],
+    "deepening": {
+      "2": "+80%.",
+      "3": "Three strikes."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "ember_heart",
+    "name": "Ember Heart",
+    "path": "survivalist",
+    "subclass": "furnace",
+    "role": "support",
+    "slotRole": "sustain",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Once per fight, when a blow would kill you and you have 600 kcal banked, the furnace eats it instead: 600 kcal burn and you stand back up at 20% HP.",
+    "flavor": "You were fuel all along. Tonight you were the kind that doesn't go out.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 100
+    },
+    "deepening": {
+      "2": "Stand at 30% HP.",
+      "3": "Costs 450 kcal."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "back_from_the_brink",
+    "name": "Back from the Brink",
+    "path": "survivalist",
+    "subclass": "undying",
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "Every time you cheat death (Second Wind, Molt, the Phoenix, Ember Heart), you come back angry: your next 3 strikes deal +50%.",
+    "flavor": "DEATH KEEPS SHOWING UP. YOU KEEP SENDING IT HOME WITH A BLACK EYE.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "synergyHints": [
+      "Second Wind: die, refuse, return.",
+      "Ember Heart: the furnace refuses for you."
+    ],
+    "deepening": {
+      "2": "+75%.",
+      "3": "5 strikes."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "coin_guard",
+    "name": "Coin Guard",
+    "path": "miser",
+    "subclass": "hoarder",
+    "role": "support",
+    "slotRole": "sustain",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Spend stored wealth as armor: 3 coins of hard light orbit you, each absorbing one hit (up to 15 damage each). Not a turn; once per fight.",
+    "flavor": "Money can't buy happiness. It can, it turns out, stop a claw.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 40
+    },
+    "actions": [
+      {
+        "id": "coins",
+        "context": "combat",
+        "name": "Coin Guard",
+        "cost": {
+          "kcal": 80
+        },
+        "do": "guard",
+        "hits": 3,
+        "cap": 15,
+        "perFight": 1,
+        "effect": "3 orbiting coins: each absorbs one hit, up to 15 damage. No turn spent."
+      }
+    ],
+    "deepening": {
+      "2": "4 coins.",
+      "3": "Each coin absorbs up to 25."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "haggle",
+    "name": "Haggle",
+    "path": "miser",
+    "subclass": "dealer",
+    "role": "enabler",
+    "slotRole": "wildcard",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Every price looks negotiable to you, and you are usually right. Traders charge you 25% less; trade routes pay Haven 25% more.",
+    "flavor": "\"That's my final offer.\" It was not their final offer.",
+    "modifiers": [
+      {
+        "target": "trade.price_mult",
+        "op": "multiply",
+        "value": 0.75
+      },
+      {
+        "target": "trade.tariff_mult",
+        "op": "multiply",
+        "value": 1.25
+      }
+    ],
+    "metabolic": {
+      "daily": 30
+    },
+    "deepening": {
+      "2": "35% off.",
+      "3": "Routes pay +40%."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "bribe",
+    "name": "Bribe",
+    "path": "miser",
+    "subclass": "dealer",
+    "role": "enabler",
+    "slotRole": "control",
+    "tier": "rare",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Everything has a price, even teeth. Pay 150 kcal: one monster takes the offer, backs off 2 tiles and hesitates 2 rounds. Not titans: the big ones don't haggle.",
+    "flavor": "You hold out the jerky. It considers its life choices.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 50
+    },
+    "actions": [
+      {
+        "id": "pay_off",
+        "context": "combat",
+        "name": "Pay Off",
+        "cost": {
+          "turn": true,
+          "kcal": 150
+        },
+        "target": "monster",
+        "do": "bribe",
+        "back": 2,
+        "hesitate": 2,
+        "effect": "A monster backs off 2 tiles and hesitates 2 rounds."
+      }
+    ],
+    "deepening": {
+      "2": "Costs 100 kcal.",
+      "3": "Hesitates 3 rounds."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "sweetener",
+    "name": "Sweetener",
+    "path": "miser",
+    "subclass": "dealer",
+    "role": "payoff",
+    "slotRole": "control",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "A bribe that keeps paying. Any monster you pay off also changes sides for 2 rounds: it attacks the nearest other monster.",
+    "flavor": "YOU DIDN'T JUST BUY A RETREAT. YOU BOUGHT A MERCENARY. WITH JERKY.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 80
+    },
+    "synergyHints": [
+      "Bribe: buy it, then use it.",
+      "Turncoat: two arguments are better than one."
+    ],
+    "deepening": {
+      "2": "3 rounds.",
+      "3": "Bribes cost half."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "harvest_table",
+    "name": "Harvest Table",
+    "path": "forager",
+    "subclass": "feaster",
+    "role": "payoff",
+    "slotRole": "sustain",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer",
+      "buildaround": true
+    },
+    "description": "Your feasts are rituals. Every feast you host arms the feast surge even without devotion (x1.3 at least), and each guest leaves trusting you a little more.",
+    "flavor": "THE TABLE IS SET. THE VILLAGE IS ONE ANIMAL. IT IS VERY WELL FED AND IT WOULD LIKE TO HIT SOMETHING.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 120
+    },
+    "synergyHints": [
+      "Loud Chewer: they love eating beside you.",
+      "Long Table: feed them all."
+    ],
+    "deepening": {
+      "2": "x1.5 at least.",
+      "3": "Guests +2 trust each."
+    }
+  },
+  {
+    "lane": "magic",
+    "id": "long_table",
+    "name": "Long Table",
+    "path": "forager",
+    "subclass": "feaster",
+    "role": "enabler",
+    "slotRole": "sustain",
+    "tier": "uncommon",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "description": "Once a day at camp, share the pot: 300 kcal of your own food fills the bellies of everyone in camp (their hunger eases a lot). Your dinner, their strength.",
+    "flavor": "There was enough. There is always enough when you're the one carrying it.",
+    "modifiers": [],
+    "metabolic": {
+      "daily": 30
+    },
+    "actions": [
+      {
+        "id": "share_pot",
+        "context": "camp",
+        "name": "Share the Pot",
+        "cost": {
+          "kcal": 300,
+          "time_min": 30
+        },
+        "do": "feed_camp",
+        "hunger": 40,
+        "perDay": 1,
+        "effect": "Spend 300 kcal of your food: every villager in camp loses 40 hunger."
+      }
+    ],
+    "deepening": {
+      "2": "Costs 220 kcal.",
+      "3": "Also +1 trust with each."
+    }
   }
 ]

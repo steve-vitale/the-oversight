@@ -61,7 +61,7 @@ const richPantry = () => [
   // ---- (1) ability data ----
   const def = (G.data.abilities || []).find(a => a.id === 'fusion_reactor');
   check('fusion_reactor exists in abilities.json', !!def);
-  check('survivalist path (the metabolic/body tree)', !!(def && (def.paths || []).includes('survivalist')));
+  check('survivalist path (the metabolic/body tree)', !!(def && def.path === 'survivalist' /* god-path 2026-10-14: paths -> path */));
   check('system_offer unlock', !!(def && def.unlock && def.unlock.type === 'system_offer'));
   check('pool=system (alien ability, NOT earthly skill)', !!(def && def.pool === 'system'));
 

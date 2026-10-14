@@ -14,7 +14,7 @@
 //   - creditDeed(who, deedId, trackOverride) -> track XP from the deed table for whoever did it ('player' or a villager id); the same n and the same per-day cap per doer
 //   - noteDeed(deedId, trackOverride) -> creditDeed('player', ...)
 //   - convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic
-//   - levelUpOffers(track) -> next unheld magic abilities of the track's kit (offerSize)
+//   - levelUpOffers(track) -> next unheld magic abilities of the track's kit (offerSize), leaned to a recognised god path (godpath.js shapeOffers)
 //   - pumpLevelUps() -> opens the next queued level-up sheet when none is pending
 //   - keepAbilities() -> declines a level-up sheet ("Keep what I have")
 //   - isLevelUpSheet() -> the pending ability sheet is a track level-up
@@ -354,14 +354,23 @@
       const T = this.trackData();
       const owned = new Set(this.ownedAbilityIds ? this.ownedAbilityIds() : []);
       const all = this.data.abilities || [];
-      const out = [];
+      const cands = [];
       for (const id of ((T.kits || {})[track] || [])) {
         if (owned.has(id)) continue;
         if (id === 'fusion_reactor' && this.state.fusionReactorHolder) continue;
         const def = all.find(a => a.id === id);
         if (!def || def.lane === 'skill') continue;
-        out.push(def);
-        if (out.length >= (T.offerSize || 3)) break;
+        cands.push(def);
+      }
+      const n = T.offerSize || 3;
+      const out = cands.slice(0, n);
+      // GOD-PATH LEAN (2026-10-14): a recognised class gets at least one offer
+      // from its path when the kit has one, and the sheet prefers distinct
+      // roles (godpath.js shapeOffers). No class: the kit order stands.
+      if (typeof this.shapeOffers === 'function') {
+        const shaped = this.shapeOffers(out, cands.slice(n), 'player');
+        if (shaped._leaned) this.trackStat('leaned');
+        return shaped;
       }
       return out;
     },

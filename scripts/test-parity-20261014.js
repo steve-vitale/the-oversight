@@ -125,9 +125,10 @@ function freshVillager(Game, vid) {
     const offers = Game.villagerLevelUpOffers(va, 'strange');
     T.ok('offers = the next 3 unheld strange kit abilities', JSON.stringify(offers) === JSON.stringify(DATA.kits.strange.slice(0, 3)), offers.join(','));
     const X = 'static_toss'; // "THROW it" — a ranged ability
-    // a field build (echo_location, bloodhound: no path shared with the
-    // offers), an understood X, and a bow
-    const BUILD = ['echo_location', 'bloodhound'];
+    // a field build sharing no god path with the offers (god-path 2026-10-14:
+    // echo_location/bloodhound are hunter-leaning now, and static_toss is
+    // hunter/stalker, so they'd lean to X on their own), an understood X, a bow
+    const BUILD = ['green_thumb', 'rain_dancer'];
     v.npcAbilities[va] = BUILD.slice();
     Game.npcLearnAbility(va, X, 3, 'test');
     const p = Game.getPerson(va);
@@ -198,7 +199,11 @@ function freshVillager(Game, vid) {
     const dR = Game.buildDecide(vb, Game.villagerLevelUpOffers(vb, 'strange'));
     Game.gainTrackXP(vb, 'strange', DATA.thresholds[0], 'test');
     T.ok('buildDecide replaces when the offer beats the weakest by > 1', !!(dR.pick && dR.replace), JSON.stringify(dR));
-    T.ok('...and the villager swapped: 6 held, the pick in, the weakest out', v.npcAbilities[vb].length === 6 && v.npcAbilities[vb].includes(dR.pick) && !v.npcAbilities[vb].includes(dR.replace), v.npcAbilities[vb].join(','));
+    // GOD-PATH MERGE (2026-10-14): the sheet's decision is re-made at
+    // resolution (knowledge and the target build update first), so read the
+    // swap the villager actually made.
+    const evR = K.teleEvents(Game, 'villager_level_up').filter(e => e.vid === vb).slice(-1)[0] || {};
+    T.ok('...and the villager swapped: 6 held, the pick in, the weakest out', v.npcAbilities[vb].length === 6 && !!evR.replaced && v.npcAbilities[vb].includes(evR.pick) && !v.npcAbilities[vb].includes(evR.replaced), v.npcAbilities[vb].join(',') + ' ' + JSON.stringify({ pick: evR.pick, replaced: evR.replaced }));
     T.ok('kept + swapped both happen (one of each across the two setups)', !!dK.keep || !!dK.replace);
   }
 
