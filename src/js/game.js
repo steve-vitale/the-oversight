@@ -248,14 +248,15 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood, tracks] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godhood.json', 'tracks.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood, tracks };
-      // GODHOOD (Steve 2026-10-11): expose capstone data to the module.
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks };
+      // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
+      // godhood.js derives its capstones from it (godhood.json retired).
       try {
         const S = globalThis.Scattering;
-        if (S) S.GODHOODS = godhood;
-      } catch (e) {}
+        if (S) S.GODPATHS = godpaths;
+      } catch (e) { console.warn('[godpath] expose godpaths', e); }
       // GODHOOD REWORK (Steve 2026-10-13): item tier map for the flexible
       // item gate (any tier-4 qualifies — option (c)). Built once at load.
       try {
@@ -14862,7 +14863,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const day = (this.state || {}).day || 0;
         let bestGh = null, bestKit = 1;
         for (const gh of S.Godhood.godhoods()) {
-          if (gh.id === 'voice_of_the_relay') continue;
           const cl = S.Godhood.godhoodCloseness(sch, gh, day);
           if (!cl.complete && cl.kit > bestKit) { bestKit = cl.kit; bestGh = gh; }
         }
@@ -23176,6 +23176,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         { id: 'salt', label: 'Downriver salt (a whole pouch)', price: 350, blurb: 'Salt. For preserving. The System asks if it is "angry sugar."' },
         { id: 'rope', label: 'River rope, twenty strides', price: 250, blurb: 'Good river rope. Twenty strides of it.' },
       ];
+      // HAGGLE (god-path 2026-10-14, dealer): trade.price_mult lowers prices.
+      try { for (const g of goods) g.price = Math.round(this.modTarget('trade.price_mult', g.price, {})); }
+      catch (e) { console.warn('[godpath] haggle', e); }
       let pick = goods.find(g => g.id === goodId);
       if (!pick) {
         // No pick: the trader sizes Haven up. No blade in your pack? Knife.
@@ -25742,7 +25745,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const _paths = [];
               for (const _req of ((_syn && _syn.requires) || [])) {
                 const _ad = (this.data.abilities || []).find(a => a.id === _req);
-                for (const _p of ((_ad && _ad.paths) || [])) if (!_paths.includes(_p)) _paths.push(_p);
+                for (const _p of (this.abilityPaths ? this.abilityPaths(_ad) : [])) if (!_paths.includes(_p)) _paths.push(_p);
               }
               sch.codex.witnessedSynergies[_sid] = {
                 day: (this.state.scholar || {}).day || 0,
@@ -27172,6 +27175,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           surgeSpent = typeof s.prog.feastSurge === 'number' ? s.prog.feastSurge : 1.5;
         }
       } catch (e) {}
+      // HARVEST TABLE (god-path 2026-10-14, feaster payoff): the host's
+      // feasts are rituals — they arm the surge without devotion (x1.3, x1.5
+      // at L2). Devotion still wins when it's higher.
+      try {
+        if (this.hasAbility && this.hasAbility('harvest_table')) {
+          const _ht = (this.abilityLevel('harvest_table') >= 2) ? 1.5 : 1.3;
+          if ((surgeSpent || 0) < _ht) surgeSpent = _ht;
+        }
+      } catch (e) { console.warn('[godpath] harvest table', e); }
       const hostName = (() => { try { return this.displayName(this.villagerId).split(' ')[0]; } catch (e) { return 'you'; } })();
       // SHORT-NAME (longsim winpath r4): strangers are descriptors, not
       // names ("A person, maybe 20s") — split(' ')[0] rendered four
@@ -27193,7 +27205,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } else {
           try { this.remember(vid, 'feast', `${hostName} hosted a feast — real food, firelight, laughing.`); } catch (e) {}
           try { if (this.recordLifeseedEvent) this.recordLifeseedEvent(vid, 'feast_shared'); } catch (e) {}
-          try { this.bumpTrust(vid, 2 + qualityGated, 'feast'); } catch (e) {}
+          try { this.bumpTrust(vid, 2 + qualityGated + ((this.hasAbility && this.hasAbility('harvest_table')) ? (this.abilityLevel('harvest_table') >= 3 ? 2 : 1) : 0), 'feast'); } catch (e) {}
         }
         try { const n = this.npcNeeds(vid); n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
       }
@@ -33002,6 +33014,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
         } catch (e) {}
       }
+      // AEGIS LINK (god-path 2026-10-14, bulwark): a linked ally's hit lands
+      // on the player in full (godpath.js aegisRedirect). Before leech, so a
+      // redirected hit isn't drunk twice.
+      if ((t.kind === 'villager' || t.kind === 'ally') && final > 0 && this.tbfight) {
+        try { const GPa = (globalThis.Scattering || {}).Godpath; if (GPa) final = GPa.aegisRedirect(this, t, final, sourceKey); }
+        catch (e) { console.warn('[godpath] aegis', e); }
+      }
       // LEECH STANCE (break-it abilities 2026-10-10): the data action
       // leech.leech_stance plants the flag on the player fighter for the
       // round. When an ally fighter takes damage while the stance is up and
@@ -33059,6 +33078,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           }
         } catch (e) {}
+      }
+      // COIN GUARD / LAST RITES (god-path 2026-10-14): per-hit absorbs on
+      // the player (godpath.js absorbPlayerHit), before the godhood coins.
+      if (t && t.kind === 'player' && final > 0) {
+        try { const GPg = (globalThis.Scattering || {}).Godpath; if (GPg) final = GPg.absorbPlayerHit(this, final); }
+        catch (e) { console.warn('[godpath] absorb', e); }
       }
       // GILDED GUARD (Market God 2.0, 2026-10-14): orbiting coins intercept
       // damage before HP. The mythic sprite shows the coins; the mechanic
@@ -33208,8 +33233,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.drama('enrage', t.mx, t.my, t.encWound || 'enraged');
         } catch (e) {}
       }
+      // LIFELINE (god-path 2026-10-14, healer): once per fight an ally that
+      // would fall holds instead (godpath.js allyWouldFall).
+      if (t.hp <= 0 && (t.kind === 'villager' || t.kind === 'ally')) {
+        try { const GPl = (globalThis.Scattering || {}).Godpath; if (GPl) GPl.allyWouldFall(this, t); }
+        catch (e) { console.warn('[godpath] lifeline', e); }
+      }
       if (t.hp <= 0) {
         t.alive = false;
+        // LAST RITES (god-path 2026-10-14, keeper): the fallen stand guard.
+        if (t.kind === 'villager' || t.kind === 'ally') {
+          try { const GPr = (globalThis.Scattering || {}).Godpath; if (GPr) GPr.onAllyFell(this, t); }
+          catch (e) { console.warn('[godpath] last rites', e); }
+        }
         // SNAKE SPLIT (Steve 2026-10-05): kill a middle segment and the snake
         // splits at the break. The tail-side becomes a new snake with its own
         // head. Kill sequentially (tail first) to avoid this.
@@ -40072,7 +40108,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const G = S.Godhood;
         if (!G) return;
         for (const gh of G.godhoods()) {
-          if (gh.id === 'voice_of_the_relay') continue;
           const cl = isPlayer
             ? G.godhoodCloseness(this.state.scholar, gh, ((this.state || {}).scholar || {}).day || 0)
             : G.villagerGodhoodCloseness(this, vid, gh);

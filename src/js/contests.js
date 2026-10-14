@@ -4919,17 +4919,18 @@
       const _pathCount = {};
       for (const _hid of _held) {
         const _hd = all.find(a => a.id === _hid);
-        for (const _p of ((_hd && _hd.paths) || [])) _pathCount[_p] = (_pathCount[_p] || 0) + 1;
+        // GOD-PATH REDESIGN (2026-10-14): one source — def.path (+ alsoPath).
+        for (const _p of (this.abilityPaths ? this.abilityPaths(_hd) : [])) _pathCount[_p] = (_pathCount[_p] || 0) + 1;
       }
       for (const _c of bag) {
         _c._steerW = 1;
-        for (const _p of (_c.paths || [])) {
+        for (const _p of (this.abilityPaths ? this.abilityPaths(_c) : [])) {
           if ((_pathCount[_p] || 0) >= 2) _c._steerW += 2;
           else if ((_pathCount[_p] || 0) >= 1) _c._steerW += 0.5;
         }
         // Build-arounds: only when committed, then heavily weighted.
         if (_c.unlock && _c.unlock.buildaround) {
-          const _bp = (_c.paths || [])[0];
+          const _bp = _c.path;
           _c._steerW = (_pathCount[_bp] || 0) >= 2 ? 5 : 0.1;
         }
       }
@@ -4949,6 +4950,11 @@
       }
     }
     while (choices.length < 3 && bag.length) choices.push(pick(bag));
+    // GOD-PATH LEAN (2026-10-14): >=1 offer on a recognised path, distinct roles.
+    let _shaped = choices;
+    try { if (this.shapeOffers) _shaped = this.shapeOffers(choices, bag, 'player'); } catch (eS) { console.warn('[godpath] gift lean', eS); }
+    _shaped = _shaped.slice();
+    choices.length = 0; for (const _c of _shaped) choices.push(_c);
     s.abilityChoices = choices.map(e => ({ id: e.id, name: e.name, description: e.description, flavor: e.flavor }));
     try { this.tele('prize_ability_offer', { contest: (contest && contest.id) || '?', ids: choices.map(c => c.id) }); } catch (e2) {}
     this.sysSay(`📺 The System LIKED that. "YOU. WINNER. PICK A TRICK — ON US. Choose." (The System offers you an ability — choose one.)`);

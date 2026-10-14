@@ -49,7 +49,9 @@ try {
   const items = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/items.json'), 'utf8'));
   S.ITEM_TIER = {};
   for (const it of items) if (it && it.id && it.lootTier) S.ITEM_TIER[it.id] = it.lootTier;
-  S.GODHOODS = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/godhood.json'), 'utf8'));
+  // GOD-PATH REDESIGN (2026-10-14): godhood.json retired; capstones derive
+  // from godpaths.json + the path tags on abilities.json.
+  S.GODPATHS = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/godpaths.json'), 'utf8'));
 } catch (e) {}
 
 let failures = 0;
@@ -124,7 +126,8 @@ check('D5 mentor can teach L2 (observed within 40 ticks)', taught);
 
 // D6: System revelation at integration threshold (L1 for noticed build's pool)
 Game.state.codex.abilities = {};
-Game.state.scholar.abilities = [{ id: 'tracker' }, { id: 'echo_location' }, { id: 'game_sense' }];
+// GOD-PATH (2026-10-14): pools are magic only; a hunter build is magic.
+Game.state.scholar.abilities = [{ id: 'static_toss' }, { id: 'bloodhound' }, { id: 'lucky_rock' }];
 Game.state.scholar.day = 50;
 Game.state.day = 50;
 said.length = 0;
@@ -136,8 +139,10 @@ check('D6 revelation is L1 only (no free L2)', revealed.every(aid => Game.codexA
 
 // D7: hintBeat build guide — names L1+ missing cores, teases unknown
 const S = globalThis.Scattering;
-Game.state.codex.abilities = { echo_location: { level: 1, sources: ['gossip'] } };
-Game.state.scholar.abilities = [{ id: 'tracker' }, { id: 'game_sense' }, { id: 'stalk' }]; // 3 pool, close
+// GOD-PATH (2026-10-14): 3 stalker abilities = class recognised (close);
+// the missing core is the stalker payoff, Trophy Room.
+Game.state.codex.abilities = { trophy_room: { level: 1, sources: ['gossip'] } };
+Game.state.scholar.abilities = [{ id: 'static_toss' }, { id: 'bloodhound' }, { id: 'lucky_rock' }]; // 3 pool, close
 Game.state.scholar.activeSynergies = [];
 Game.state.scholar.inventory = [];
 Game.state.scholar.godhood = { recognized: {}, active: [] };
@@ -145,13 +150,13 @@ Game.data.abilities = Game.data.abilities; // for abilName lookup
 said.length = 0;
 const hint = S.Godhood.hintBeat(Game, 'apex_predator');
 check('D7 hintBeat fires when close', typeof hint === 'string' && hint.length > 0);
-check('D7 hint names heard-of core (echo_location)', /Echo Location/i.test(hint), hint.slice(0, 300));
+check('D7 hint names heard-of core (trophy_room)', /Trophy Room/i.test(hint), (hint || '').slice(0, 300));
 // D7b: unknown core stays teased, not named
 Game.state.codex.abilities = {}; // heard of nothing
 Game.state.scholar.godhood = { recognized: {}, active: [], hinted: {} };
 said.length = 0;
 const hintB = S.Godhood.hintBeat(Game, 'apex_predator');
-check('D7b hint teases unheard cores (no free names)', /never even heard of/.test(hintB) && !/Echo Location/i.test(hintB), hintB.slice(0, 200));
+check('D7b hint teases unheard cores (no free names)', /never even heard of/.test(hintB || '') && !/Trophy Room/i.test(hintB || ''), (hintB || '').slice(0, 200));
 const hint2 = S.Godhood.hintBeat(Game, 'apex_predator');
 check('D7 hint fires once', hint2 === null);
 

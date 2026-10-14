@@ -1464,7 +1464,7 @@
     return `<div class="abilitybar"><span class="ctx-label">⚡</span>` +
       acts.map(a => {
         const _def = _abDef(a.id);
-        const _path = (_def.paths || [])[0] || '';
+        const _path = _def.path || '';
         const _role = _def.slotRole || '';
         return `<button class="ab-btn" data-ab="${a.id}" data-path="${_path}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${_role ? `<span class="ab-role">${esc(_role)}</span>` : ''}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`;
       }).join('') +
@@ -14443,7 +14443,7 @@
         const badge = isActive
           ? `<span style="background:#4df3ff22;border:1px solid #4df3ff;border-radius:3px;padding:1px 5px;font-size:10px;color:#4df3ff">ACTIVE</span>`
           : `<span style="background:#8882;border:1px solid #888;border-radius:3px;padding:1px 5px;font-size:10px;color:#aaa">PASSIVE</span>`;
-        const paths = (def.paths || []).map(p => {
+        const paths = (Game.abilityPaths ? Game.abilityPaths(def) : []).map(p => {
           const c = pathColors[p] || '#aaa';
           return `<span style="color:${c};font-size:11px">● ${esc(p)}</span>`;
         }).join(' ');
@@ -15171,6 +15171,12 @@
       if (!rows.length) return '';
       const q = ((Game.state.scholar || {}).levelUpQueue || []).length;
       let html = `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">📈 Tracks${q ? ` <span style="opacity:.7;font-weight:normal">(${q} level-up${q > 1 ? 's' : ''} waiting)</span>` : ''}</summary><div style="margin-top:6px">`;
+      // GOD-PATH CLASS (2026-10-14): one line, only once the System has named
+      // it ("If you don't know, it doesn't show").
+      try {
+        const cl = Game.classLine ? Game.classLine('player') : null;
+        if (cl) html += `<div class="small" style="margin:0 0 6px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(cl)}">◈ ${esc(cl)}</div>`;
+      } catch (eC) { console.warn('[godpath] class line', eC); }
       for (const r of rows) {
         const pips = '●'.repeat(r.level) + '○'.repeat(Math.max(0, r.max - r.level));
         const span = r.next != null ? Math.max(1, r.next - r.prev) : 1;

@@ -214,7 +214,7 @@ function firstName(Game, vid) {
       ok(id + ' exists as a combat-lane System ability', !!a && a.pool === 'combat', 'pool=' + (a && a.pool));
       ok(id + ' description names the wild/party context', !!a && /wilds|beside|ally|people/.test(a.description));
       ok(id + ' has undying_ward resonance', !!a && (a.resonance || []).indexOf('undying_ward') >= 0);
-      ok(id + ' carries the shieldbearer path', !!a && (a.paths || []).indexOf('shieldbearer') >= 0);
+      ok(id + ' carries the shieldbearer path', !!a && (a.path === 'shieldbearer' || a.alsoPath === 'shieldbearer') /* god-path 2026-10-14: paths -> path/alsoPath */);
     }
   }
 

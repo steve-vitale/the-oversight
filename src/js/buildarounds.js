@@ -35,7 +35,8 @@
       const data = game.data.abilities || [];
       return held.filter(id => {
         const def = data.find(d => d.id === id);
-        return def && (def.paths || []).includes(path);
+        // GOD-PATH REDESIGN (2026-10-14): one source — def.path (+ alsoPath).
+        return def && (def.path === path || def.alsoPath === path);
       }).length;
     } catch (e) { return 0; }
   }
@@ -225,6 +226,13 @@
       } catch (e) {}
     },
     dodgeBonus: function (game) {
+      // GOD-PATH (2026-10-14): Prophecy (seer payoff) dodge while Foresight runs.
+      let gp = 0;
+      try { const GP = (global.Scattering || {}).Godpath; if (GP && GP.dodgeBonus) gp = GP.dodgeBonus(game) || 0; }
+      catch (e) { console.warn('[buildarounds] godpath dodge', e); }
+      return gp + BA.nowhereDodge(game);
+    },
+    nowhereDodge: function (game) {
       try {
         if (!game.hasAbility || !game.hasAbility('nowhere_man')) return 0;
         const st = fightState(game);
@@ -322,6 +330,9 @@
         m *= BA.trophyMult(game, target);
         m *= BA.feastMult(game);
         m *= BA.crimsonGodMult(game);
+        // GOD-PATH subclass payoffs (misdirection) live in godpath.js.
+        try { const GP = (global.Scattering || {}).Godpath; if (GP && GP.damageMult) m *= GP.damageMult(game, target); }
+        catch (e) { console.warn('[buildarounds] godpath damageMult', e); }
         return m;
       } catch (e) { return 1; }
     },

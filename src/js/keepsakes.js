@@ -4,6 +4,7 @@
 // provides:
 //   - keepsakeLane(item) -> 'resolve' | 'anchor' | 'quiet_luck'
 //   - keepsakeLevel(item) -> 0..3 (by bond; 3 = evolution unlocked)
+//   - keepsakePowerLevel(item) -> level its powers answer at (+1 with Keeper's Oath, god-path keeper)
 //   - keepsakeLevelText(item) -> short honest line for the item card
 //   - keepsakeIsWorn(item) -> boolean (in acc1-acc4)
 //   - wornKeepsakes() -> own keepsakes worn in accessory slots
@@ -117,6 +118,17 @@
       for (let i = 1; i < KS_LEVELS.length; i++) if (b >= KS_LEVELS[i]) lv = i;
       return lv;
     },
+    // keepsakePowerLevel(item): the level its POWERS answer at. Keeper's
+    // Oath (caregiver/keeper payoff, god-path 2026-10-14) lifts every worn
+    // keepsake one level (cap 3); growth, beats and offers still read the
+    // true bond level (keepsakeLevel).
+    keepsakePowerLevel(item) {
+      const lv = this.keepsakeLevel(item);
+      try {
+        if (item && this.hasAbility && this.hasAbility('keepers_oath')) return Math.min(3, lv + 1);
+      } catch (e) { warn('keepsakePowerLevel: ' + e.message); }
+      return lv;
+    },
     keepsakeLevelText(item) {
       try {
         const lv = this.keepsakeLevel(item);
@@ -157,7 +169,7 @@
     },
     keepsakePassive(lane) {
       try {
-        return this.wornKeepsakes().some(it => this.keepsakeLevel(it) >= 1 && this.keepsakeLane(it) === lane);
+        return this.wornKeepsakes().some(it => this.keepsakePowerLevel(it) >= 1 && this.keepsakeLane(it) === lane);
       } catch (e) { warn('keepsakePassive: ' + e.message); return false; }
     },
 
@@ -209,6 +221,9 @@
         if (!this.keepsakeIsWorn(r)) return 0;
         if (!this.keepsakeMine(r)) return 0;
         const before = this.keepsakeLevel(r);
+        // MOURNER'S BOND (caregiver/keeper, god-path 2026-10-14): grief is
+        // attention — keepsake.bond_mult scales the growth.
+        try { gain = Math.max(1, Math.round(this.modTarget('keepsake.bond_mult', gain, {}))); } catch (e) { warn('bond_mult: ' + e.message); }
         r.bond = (r.bond || 0) + gain;
         const after = this.keepsakeLevel(r);
         try { if (this.checkKeepsakeReveal) this.checkKeepsakeReveal(r); } catch (e) { warn('reveal: ' + e.message); }
@@ -384,7 +399,7 @@
     keepsakeActionReady(actionId) {
       const a = ACTIONS[actionId];
       if (!a) return null;
-      return this.wornKeepsakes().find(it => this.keepsakeLevel(it) >= 2 && this.keepsakeLane(it) === a.lane) || null;
+      return this.wornKeepsakes().find(it => this.keepsakePowerLevel(it) >= 2 && this.keepsakeLane(it) === a.lane) || null;
     },
     keepsakeActivatables() {
       const out = [];
@@ -393,7 +408,7 @@
         if (!inCombat) return out;
         const seen = {};
         for (const it of this.wornKeepsakes()) {
-          if (this.keepsakeLevel(it) < 2) continue;
+          if (this.keepsakePowerLevel(it) < 2) continue;
           const a = ACTIONS[LANES[this.keepsakeLane(it)].action];
           if (seen[a.id]) continue;
           seen[a.id] = 1;

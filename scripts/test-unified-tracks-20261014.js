@@ -120,13 +120,19 @@ function resetPlayer(Game) {
     Game.gainTrackXP('player', 'combat', first, 'test');
     const ch = s.abilityChoices || [];
     T.ok('crossing the first threshold opens a sheet', ch.length === 3, ids(ch).join(','));
-    T.ok('the sheet is the next 3 of the combat kit', JSON.stringify(ids(ch)) === JSON.stringify(DATA.kits.combat.slice(0, 3)), ids(ch).join(','));
+    // GOD-PATH (2026-10-14, by design): the sheet is the next 3 of the kit,
+    // except a duplicate role is swapped for the next kit entry with a new
+    // role (spec: "the 3 offers should be different roles where possible").
+    const roleOf = (id) => (ABIL.find(a => a.id === id) || {}).role;
+    T.ok('the sheet opens with the kit\'s next ability and draws only from the combat kit',
+      ids(ch)[0] === DATA.kits.combat[0] && ids(ch).every(id => DATA.kits.combat.includes(id)), ids(ch).join(','));
+    T.ok('the sheet\'s roles are distinct', new Set(ids(ch).map(roleOf)).size === ch.length, ids(ch).map(roleOf).join(','));
     T.ok('src names the track', ch.every(c => c.src === 'level_up:combat'));
     T.ok('tele track_level {who, track, level}', K.teleEvents(Game, 'track_level').length === t0 + 1);
     Game.chooseAbility(DATA.kits.combat[1]);
     T.ok('the pick lands in a slot', K.abilityIds(Game).includes(DATA.kits.combat[1]));
     Game.gainTrackXP('player', 'combat', Game.trackThresholds('player')[1] - Game.playerTracks().combat.xp, 'test');
-    T.ok('the next sheet skips what you hold', JSON.stringify(ids(s.abilityChoices)) === JSON.stringify([DATA.kits.combat[0], DATA.kits.combat[2], DATA.kits.combat[3]]), ids(s.abilityChoices).join(','));
+    T.ok('the next sheet skips what you hold', ids(s.abilityChoices).length === 3 && !ids(s.abilityChoices).includes(DATA.kits.combat[1]) && ids(s.abilityChoices)[0] === DATA.kits.combat[0], ids(s.abilityChoices).join(','));
     Game.chooseAbility(DATA.kits.combat[0]);
   }
 

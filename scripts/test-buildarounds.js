@@ -29,7 +29,8 @@ console.log('1. Role classification:');
 const abilities = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8'));
 // 118 -> 115 (ability lanes 2026-10-14): duplicate ids night_eyes/pathfinder
 // merged, iron_gut knack merged into iron_stomach (Steve's exec call).
-ok(abilities.length === 115, `115 abilities (got ${abilities.length})`);
+// 115 -> 142 (god-path redesign 2026-10-14): 27 new subclass abilities.
+ok(abilities.length === 142, `142 abilities (got ${abilities.length})`);
 ok(abilities.every(a => a.role), 'all have role');
 ok(abilities.every(a => a.slotRole), 'all have slotRole');
 const payoffs = abilities.filter(a => a.role === 'payoff');

@@ -536,6 +536,14 @@
           this.say('The rage burns out. You\'re yourself again — shaking, but yourself.');
         }
       }
+      // NEXT STRIKES (god-path 2026-10-14): Stoke (furnace) and Back from the
+      // Brink (undying) load a multiplier for the next N strikes (godpath.js).
+      if (s._nextStrikes && s._nextStrikes.n > 0) {
+        d = Math.round(d * s._nextStrikes.mult);
+        s._nextStrikes.n--;
+        this.say(s._nextStrikes.label + ': ×' + s._nextStrikes.mult + (s._nextStrikes.n > 0 ? ' (' + s._nextStrikes.n + ' left).' : '.'));
+        if (s._nextStrikes.n <= 0) delete s._nextStrikes;
+      }
       // ONE PERSON ARMY (wired 2026-10-07): the synergy's modifiers fire here.
       // Outnumbered (2+ living foes): bonus scales the strike. Alone with a
       // single foe and no allies standing: solo damage. Needs a live fight.
@@ -1770,6 +1778,10 @@
       if (!m) { game.say('Nothing left to scream at.'); return false; }
       s._cheeseWheelDay = day;
       var dmg = 25 + Math.floor(Math.random() * 11);
+      // CROWD FAVORITE (showrunner payoff, god-path 2026-10-14): the
+      // audience scales your social tricks — the wheel flies on fan noise.
+      try { var _BAc = (_g.Scattering || {}).buildarounds; if (_BAc && _BAc.socialMult) dmg = Math.round(dmg * _BAc.socialMult(game)); }
+      catch (eC) { console.warn('[godpath] crowd favorite', eC); }
       var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
       game.say('You hurl the wheel — it SCREAMS the whole way there, homing in on ' + label + '! It cannot miss. (Cheese Wheel: ' + dmg + '.)');
       game.tbDamage(m.key, dmg, 'cheese wheel', 'p');

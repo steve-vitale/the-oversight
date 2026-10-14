@@ -410,6 +410,10 @@
     'trust.gain_mult':         { more: 'trust gained', less: 'trust gained', noun: 'trust gained', chance: true },
     'water.rain_catch':        { more: 'rainwater caught', less: 'rainwater caught', noun: 'L rainwater caught' },
     'armor.flat':              { noun: 'armor' },
+    // GOD-PATH (2026-10-14): keeper and dealer modifiers.
+    'keepsake.bond_mult':      { custom: function (op, v) { return (op === 'multiply' ? trimNum(v) + 'x keepsake growth while worn' : '+' + trimNum(v) + ' keepsake bond'); } },
+    'trade.price_mult':        { more: 'trader prices', less: 'trader prices' },
+    'trade.tariff_mult':       { more: 'trade-route income', less: 'trade-route income' },
   };
 
   global.Scattering = global.Scattering || {};
