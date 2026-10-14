@@ -25169,6 +25169,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const skid = rid.slice(6);
             return (((this.state.codex || {}).skills || {})[skid] || {}).level >= minLvl;
           }
+          // ITEM LEG (ability-gaps 2026-10-14): item:<id> counts when
+          // equipped. Weapon+ability synergies discover through use.
+          if (rid.startsWith('item:')) {
+            try {
+              const iid = rid.slice(5);
+              const eq = (sch.equipped || {});
+              const slots = [eq.melee, eq.ranged, eq.weapon, eq.armor, eq.torso, eq.head, eq.hands, eq.legs, eq.feet];
+              return slots.some(s => s && (s.itemId === iid || s.id === iid));
+            } catch (e) { return false; }
+          }
           // ability (default)
           return this.abilityLevel(rid) >= minLvl;
         };
@@ -25284,6 +25294,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             } else if (leg.startsWith('skill:')) {
               bare = leg.slice(6);
               held = ((((this.state.codex || {}).skills || {})[bare] || {}).level || 0) >= minLvl2;
+            } else if (leg.startsWith('item:')) {
+              // ITEM LEG (ability-gaps 2026-10-14): wielding the item while
+              // using the paired ability counts as bringing it to bear.
+              bare = leg;
+              try {
+                const iid = leg.slice(5);
+                const eq = (sch.equipped || {});
+                const slots = [eq.melee, eq.ranged, eq.weapon, eq.armor, eq.torso, eq.head, eq.hands, eq.legs, eq.feet];
+                held = slots.some(s => s && (s.itemId === iid || s.id === iid));
+              } catch (e) { held = false; }
             }
             if (bare && held) synthIds.add(bare);
           }
@@ -25336,6 +25356,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const minLvl = 1;
         if (rid.startsWith('tech:')) return !!(((sch.codex || {}).techniques || {})[rid.slice(5)]);
         if (rid.startsWith('skill:')) return ((((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level || 0) >= minLvl;
+        // ITEM LEG (ability-gaps 2026-10-14): an equipped item is pure-passive
+        // (no button) — wielding it counts as bringing it to bear.
+        if (rid.startsWith('item:')) {
+          const iid = rid.slice(5);
+          const eq = (sch.equipped || {});
+          const slots = [eq.melee, eq.ranged, eq.weapon, eq.armor, eq.torso, eq.head, eq.hands, eq.legs, eq.feet];
+          return slots.some(s => s && (s.itemId === iid || s.id === iid));
+        }
         const synIds = new Set(((this.data && this.data.synergies) || []).map(x => x.id));
         if (synIds.has(rid)) return (sch.synergies || []).includes(rid);
         const def = ((this.data && this.data.abilities) || []).find(a => a.id === rid);
@@ -25396,6 +25424,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (rid.startsWith('skill:')) {
             return (((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level >= minLvl;
+          }
+          // ITEM LEG (ability-gaps 2026-10-14, Steve: "weapons and abilities
+          // should have synergies too"): item:<id> is held when the item is
+          // equipped (weapon/armor slots). Enables weapon+ability synergies.
+          if (rid.startsWith('item:')) {
+            try {
+              const iid = rid.slice(5);
+              const eq = (sch.equipped || {});
+              const slots = [eq.melee, eq.ranged, eq.weapon, eq.armor, eq.torso, eq.head, eq.hands, eq.legs, eq.feet];
+              return slots.some(s => s && (s.itemId === iid || s.id === iid));
+            } catch (e) { return false; }
           }
           return this.abilityLevel(rid) >= minLvl;
         };
@@ -31000,7 +31039,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (flippedTurtle && wType === 'physical' && (mdef.armor > 0 || ((mdef.resistances || {}).physical || 0) !== 0)) {
           this.say(`(Upside down — the shell isn't in the way. No armor, no resistance.)`);
         } else if (wType === 'physical' && mdef.armor > 0 && !ignoreArmor) {
-          const absorbed = Math.min(d, mdef.armor);
+          // SHATTERING BLOW (ability-gaps 2026-10-14): pocket_sand + machete
+          // synergy — a blinded monster can't guard its seams. Halve armor.
+          let _effArmor = mdef.armor;
+          try {
+            if (this.hasSynergy && this.hasSynergy('shattering_blow') && (t.blind || 0) > 0) {
+              _effArmor = Math.ceil(mdef.armor / 2);
+              this.say(`(${tName} is blind — the machete finds the seams. (Shattering Blow: armor halved.))`);
+            }
+          } catch (e) {}
+          const absorbed = Math.min(d, _effArmor);
           d -= absorbed;
           if (absorbed > 0) this.say(`(${tName}'s hide absorbs ${absorbed}.)`);
         } else if (ignoreArmor && wType === 'physical' && mdef.armor > 0) {
@@ -32229,6 +32277,57 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             : 'Wings tangled — it takes the hit badly. (+50% while grounded)');
         }
       }
+      // OPENINGS (ability-gaps 2026-10-14, Steve: "making a monster stop
+      // should do something when in a party"): a controlled monster
+      // (stunned/blinded/hesitating) is exposed. When the attacker has
+      // allies in the fight (party of 2+), the party piles onto the opening
+      // for +50%. Solo, control just buys time — the party makes it hurt.
+      if (t.kind === 'monster' && final > 0 && ((t.stunned || 0) > 0 || (t.blind || 0) > 0 || (t.hesitate || 0) > 0)) {
+        try {
+          const _f = this.tbfight;
+          const _allies = ((_f || {}).fighters || []).filter(x => x && x.alive && !x.fled && (x.kind === 'player' || x.kind === 'villager' || x.kind === 'ally'));
+          if (_allies.length >= 2 && !t._openingNoted) {
+            t._openingNoted = true;
+            this.say("It's reeling — the party sees the opening and piles on! (+50% vs controlled)");
+          }
+          if (_allies.length >= 2) final = Math.round(final * 1.5);
+        } catch (e) {}
+      }
+      // IMPALING SCREAM (ability-gaps 2026-10-14): scream_cheese + hunting_spear
+      // synergy — a stunned monster is a still target. The spear finds the heart.
+      if (t.kind === 'monster' && final > 0 && (t.stunned || 0) > 0) {
+        try {
+          if (this.hasSynergy && this.hasSynergy('impaling_scream') && !t._impaleNoted) {
+            t._impaleNoted = true;
+            this.say('Frozen mid-breath — the spear finds the still heart. (Impaling Scream: +100% vs stunned)');
+          }
+          if (this.hasSynergy && this.hasSynergy('impaling_scream')) final = Math.round(final * 2);
+        } catch (e) {}
+      }
+      // STATIC EDGE (ability-gaps 2026-10-14): pact + hardlight_knife synergy —
+      // the strike arcs static to an adjacent monster for 50%. The static has
+      // to go somewhere.
+      if (t.kind === 'monster' && final > 0) {
+        try {
+          if (this.hasSynergy && this.hasSynergy('static_edge')) {
+            const _f2 = this.tbfight;
+            const _foes = ((_f2 || {}).fighters || []).filter(x => x && x.kind === 'monster' && x.alive && !x.fled && x.key !== t.key);
+            if (_foes.length) {
+              // nearest other monster to the struck one
+              let _best = null, _bd = 1e9;
+              for (const _m of _foes) {
+                const _d = Math.abs((_m.mx || 0) - (t.mx || 0)) + Math.abs((_m.my || 0) - (t.my || 0));
+                if (_d < _bd) { _bd = _d; _best = _m; }
+              }
+              if (_best) {
+                const _arc = Math.max(1, Math.round(final * 0.5));
+                this.say(`Static arcs from the hardlight — ${_arc} jumps to ${this.encSubject ? this.encSubject(_best) : (_best.name || 'another')}! (Static Edge)`);
+                this.tbDamage(_best.key, _arc, 'static arc', sourceKey, { quiet: true });
+              }
+            }
+          }
+        } catch (e) {}
+      }
       // SUNBASKER: a solid hit knocks the solar charge out of its scales —
       // the counterplay is pressure. A hit also startles it out of a flatten.
       if (t.kind === 'monster' && this.sunbaskerIs(t) && final > 0) {
@@ -32451,6 +32550,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       t.hp -= final;
+      // SCAR TISSUE (ability-gaps 2026-10-14): once per fight, when the player
+      // would drop below 25% HP, the scars remember and hold them at 25%.
+      if (t.kind === 'player' && final > 0) {
+        try {
+          const _f = this.tbfight;
+          const _max = t.maxHp || 100;
+          if (!_f._scarTissueUsed && t.hp > 0 && t.hp < Math.ceil(_max * 0.25) && this.hasAbility && this.hasAbility('survivor')) {
+            _f._scarTissueUsed = true;
+            t.hp = Math.ceil(_max * 0.25);
+            this.say('Your scars ITCH — and hold. You should be down, but the scars remember every almost-death and refuse a new one. (Scar Tissue: held at 25% HP.)');
+          }
+        } catch (e) {}
+      }
       // HOPELESS-FLIGHT LEDGER (structural-combat 2026-10-10): per-fighter
       // damage-taken ledger for the tactical hopeless read
       // (tbVillagerHopeless). Post-armor, post-brace — what actually landed.
@@ -33004,6 +33116,97 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(`${t.name} takes the hit and runs — while running still works.`);
       return true;
     },
+    // tbVillagerAbility(v): villagers USE their combat abilities — the 2026-10-14
+    // audit found 0.00 uses across 240 runs because villagerDecide never
+    // considers abilities (only strike/harry/help/flee/wait). This checks the
+    // combat-usable abilities with competent-player triggers. Returns true
+    // when an ability was used (turn spent). Each ability has its own
+    // cooldown; all narration is honest (never silent).
+    // VILLAGER COUNTER PARITY (Steve 2026-10-13): no NPC advantage — these
+    // are the same effects the player gets, with the same limits.
+    tbVillagerAbility(v) {
+      const f = this.tbfight;
+      if (!f || !v.villagerId || !this.npcHasAbility) return false;
+      const vid = v.villagerId;
+      const day = (this.state.scholar || {}).day || 0;
+      const liveMonsters = (f.fighters || []).filter(m => m.kind === 'monster' && m.alive && !m.fled);
+      if (!liveMonsters.length) return false;
+      const nearest = (fx, fy) => {
+        let best = null, bestD = 1e9;
+        for (const m of liveMonsters) {
+          const d = Math.abs((m.mx || 0) - (fx || 0)) + Math.abs((m.my || 0) - (fy || 0));
+          if (d < bestD) { bestD = d; best = m; }
+        }
+        return { m: best, d: bestD };
+      };
+      const mname = (m) => { try { return this.encSubject ? this.encSubject(m) : (m.name || 'it'); } catch (e) { return m.name || 'it'; } };
+      try { if (this.tele) this.tele('ability_granted', { id: 'villager_use', who: vid }); } catch (e) {}
+
+      // SCREAM CHEESE: 1/day. Stuns all non-elder monsters. Trigger: any live
+      // monster, and the fight isn't already won. Mirrors tbPlayerScream.
+      if (!v._vScreamedDay || v._vScreamedDay !== day) {
+        if (this.npcHasAbility(vid, 'scream_cheese')) {
+          const targets = liveMonsters.filter(m => !m.elderCalm);
+          if (targets.length) {
+            v._vScreamedDay = day;
+            let n = 0;
+            for (const m of targets) {
+              try { this.applyStatus(m, 'stun', { turns: 1, source: v.name + "'s scream", silent: true }); } catch (e) { m.stunned = (m.stunned || 0) + 1; }
+              if (m.telegraph) { m.telegraph = null; n++; }
+            }
+            this.say(`${v.name} SCREAMS — a sound like milk curdling in fast-forward.${n ? ' Its focus shatters.' : ''} The ${targets.length > 1 ? 'monsters freeze' : mname(targets[0]) + ' freezes'}. (stunned)`);
+            try { this.tbRefreshTelegraphUI(); } catch (e) {}
+            return true;
+          }
+        }
+      }
+
+      // POCKET SAND: blind nearest monster 2 rounds. Trigger: a monster within
+      // 3 tiles that isn't already blind. Once per fight (sand runs out).
+      if (!v._vSandThrown) {
+        if (this.npcHasAbility(vid, 'pocket_sand')) {
+          const { m, d } = nearest(v.mx, v.my);
+          if (m && d <= 3 && !(m.blind > 0)) {
+            v._vSandThrown = true;
+            m.blind = 2;
+            this.say(`${v.name} flings grit into ${mname(m)}'s eyes — it reels, half-blind for 2 rounds. (Pocket Sand: attacks at disadvantage.)`);
+            return true;
+          }
+        }
+      }
+
+      // FEAR AURA (dread): hesitate the nearest monster. Trigger: outnumbered
+      // (2+ live monsters) or facing something 3× their max HP. Once per fight.
+      if (!v._vLoomed) {
+        if (this.npcHasAbility(vid, 'fear_aura')) {
+          const { m } = nearest(v.mx, v.my);
+          const outmatched = liveMonsters.length >= 2 || (m && (m.hp || 0) > (v.maxHp || 1) * 3);
+          if (m && outmatched) {
+            v._vLoomed = true;
+            m.hesitate = (m.hesitate || 0) + 1;
+            this.say(`${v.name} goes very still and LOOMS. ${mname(m)} hesitates — something about the eyes. (Dread: loses its next attack.)`);
+            return true;
+          }
+        }
+      }
+
+      // RAGE: +100% damage for next 3 strikes. Trigger: adjacent to a monster
+      // and not yet raged this fight. The strike calc honors v._vRageRounds.
+      if (!v._vRaged) {
+        if (this.npcHasAbility(vid, 'rage')) {
+          const { d } = nearest(v.mx, v.my);
+          if (d <= 1) {
+            v._vRaged = true;
+            v._vRageRounds = 3;
+            this.say(`${v.name}'s eyes go red — the rage takes hold. Next 3 strikes hit twice as hard.`);
+            return true;
+          }
+        }
+      }
+
+      return false;
+    },
+
     tbVillagerTurn(v) {
       const f = this.tbfight;
       // STATUS EFFECTS (Steve 2026-10-07): per-turn ticks (bleed/burn), expiry.
@@ -33048,6 +33251,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         } catch (e) {}
       }
+      // VILLAGER ABILITIES (ability-gaps 2026-10-14, Steve: "address all gaps"):
+      // villagers with combat abilities actually USE them — the audit found
+      // 0.00 uses across 240 runs. Same triggers as a competent player would
+      // use: control when outmatched, rage when in melee. One ability per
+      // turn; each has its own cooldown. Narrated honestly, never silent.
+      if (v.villagerId && this.tbVillagerAbility(v)) return;
       // HOPELESS-FLIGHT (structural-combat 2026-10-10): a hopeless fight IS
       // a purposeful reason to flee (canon) — personality sets the depth,
       // not the whether. Sealed contest arenas hold everyone (the gate is
@@ -33118,6 +33327,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // Half bonus — they're helpers, not heroes. A spear still matters (+15).
           const wb = Math.round((v.wbonus || 0) / 2);
           let dmg = a.type === 'strike' ? S.combat.roll([4 + wb, 8 + wb]) : S.combat.roll([2, 4]);
+          // VILLAGER RAGE (ability-gaps 2026-10-14): tbVillagerAbility sets
+          // v._vRageRounds — the next 3 strikes hit twice as hard, mirroring
+          // the player's rage (+100%, 3 strikes).
+          let _vRaged = false;
+          if (a.type === 'strike' && (v._vRageRounds || 0) > 0) {
+            v._vRageRounds -= 1;
+            dmg = Math.round(dmg * 2);
+            _vRaged = true;
+          }
           // HAYMAKER (parity audit 2026-10-10): a villager ally with haymaker
           // puts their whole body into every third swing — same rhythm as
           // the player's haymaker (round-counted, telegraphed, honestly
@@ -33142,6 +33360,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // the trajectory from these.
           v._dealt = (v._dealt || 0) + _landed;
           if (_hmSwung) this.say(`${v.name} puts everything into the swing — HAYMAKER! (${_landed})`);
+          if (_vRaged) this.say(`${v.name} strikes through the red haze — RAGE! (${_landed})${v._vRageRounds > 0 ? ` (${v._vRageRounds} raging strikes left)` : ' (rage spent)'}`);
           // HIGHBEAM: hurting the deer moves them to the front of its list.
           try { const tt = this.tbFighter(t.key); if (tt && this.encUsesFifo(tt)) this.encNoticesPain(tt, v.key); } catch (e) {}
         }
@@ -34802,6 +35021,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // but doesn't move — the well holds its position, not its malice.
     tbStepToward(m, tx, ty, blocked, danger) {
       if (m && m.gravityHeld > 0) return null;
+      // FREEZE TAG (ability-gaps 2026-10-14): rooted — it cannot step.
+      if (m && (m._frozen || 0) > 0) return null;
+      // TRIPWIRE (ability-gaps 2026-10-14): the next step eats dirt.
+      const _f = this.tbfight;
+      if (m && _f && _f._tripwireSet) {
+        _f._tripwireSet = false;
+        this.say(`${this.encSubject(m)} steps — and hits the tripwire! It eats dirt, prone and stunned! (Tripwire!)`);
+        try { this.applyStatus(m, 'stun', { rounds: 1 }); } catch (e) { m.stunned = Math.max(m.stunned || 0, 1); }
+        return null;
+      }
       return S.combat.stepToward(m.mx, m.my, tx, ty, blocked, danger);
     },
     // tbAirStepToward (Steve 2026-10-06): FLIGHT. Flyers ignore terrain
@@ -35114,6 +35343,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         me.roundsSeen = (me.roundsSeen || 0) + 1;
         if (me.roundsSeen >= 3 && me.stage === 'encountered') me.stage = 'observed';
       } catch (e) {}
+      // ABILITY-GAPS 2026-10-14: new control ability ticks.
+      // BIRD STRIKE: the birds dive each round before it acts.
+      if ((m._birdStrike || 0) > 0 && m.alive) {
+        m._birdStrike -= 1;
+        const _bd = 8 + Math.floor(Math.random() * 5);
+        this.say(`The birds dive — talons rake ${this.encSubject(m)}! (${_bd}, Bird Strike${m._birdStrike ? ' — ' + m._birdStrike + ' rounds left' : ''})`);
+        this.tbDamage(m.key, _bd, 'bird strike', 'p', { quiet: true });
+        if (Math.random() < 0.2) { m.blind = Math.max(m.blind || 0, 1); this.say('(The birds go for the eyes — it\'s blinded!)'); }
+        if (!m.alive) { if (this.tbEndCheck()) return; return; }
+      }
+      // FREEZE TAG: rooted — it can still act at range, but it cannot move.
+      // (tbStepToward checks _frozen and refuses the step.)
+      if ((m._frozen || 0) > 0) {
+        m._frozen -= 1;
+        if (m._frozen <= 0) this.say(`${this.encSubject(m)} shakes off the tag — it can move again. (Freeze Tag worn off.)`);
+        else this.say(`${this.encSubject(m)} strains against the tag — rooted! (Freeze Tag: ${m._frozen} rounds left)`);
+      }
+      // TURNCOAT: it attacks its fellow monster instead of the party. Resolve
+      // as a direct strike here — the argument is too convincing for tactics.
+      if ((m._turncoatRounds || 0) > 0) {
+        m._turncoatRounds -= 1;
+        const _foe = this.tbFighter ? this.tbFighter(m._turncoatTarget) : null;
+        if (_foe && _foe.alive) {
+          const _td = 10 + Math.floor(Math.random() * 11);
+          this.say(`${this.encSubject(m)} glares at ${this.encSubject(_foe)} — YOUR argument made sense! It lays into its fellow monster! (Turncoat: ${_td})`);
+          this.tbDamage(_foe.key, _td, 'turncoat', m.key, { quiet: true });
+        } else {
+          this.say(`${this.encSubject(m)} looks around for its nemesis, confused. (Turncoat: no foe left.)`);
+        }
+        if (this.tbEndCheck()) return;
+        return;
+      }
       // stunned: no move, no new attack. (Pending telegraph was canceled by the scream.)
       if (m.stunned > 0) {
         m.stunned -= 1;

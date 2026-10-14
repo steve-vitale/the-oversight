@@ -526,7 +526,6 @@
     },
     "flags": []
   },
-  
   {
     "id": "wildreader",
     "name": "Wildreader",
@@ -769,7 +768,6 @@
     },
     "flags": []
   },
-  
   {
     "id": "trailblazers_promise",
     "name": "Trailblazer's Promise",
@@ -1040,7 +1038,6 @@
     },
     "flags": []
   },
-  
   {
     "id": "green_highway",
     "name": "Green Highway",
@@ -1359,174 +1356,174 @@
       "brawler"
     ]
   },
-{
-  "id": "war_chest",
-  "name": "War Chest",
-  "requires": [
-    "deep_reserves",
-    "blood_magic"
-  ],
-  "minLevel": 1,
-  "flavor": "Bank the calories. Spend the blood. The furnace never empties.",
-  "discovery": "\"WAIT. You're banking FIVE TIMES the calories AND burning blood for power?! The furnace is ALWAYS lit! That's not a body, that's a WAR CHEST!\"",
-  "modifiers": [
-    {
-      "op": "multiply",
-      "target": "food.bank_mult",
-      "value": 1.5
-    }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
-      "blood_magic",
-      "deep_reserves"
+  {
+    "id": "war_chest",
+    "name": "War Chest",
+    "requires": [
+      "deep_reserves",
+      "blood_magic"
     ],
-    "hint": "Burn blood. Then bank. The body learns.",
-    "tease1": "You spent blood for energy, and your body... remembered. It wants to keep more.",
-    "tease2": "The reserves are deeper than they should be. The blood remembers the hunger."
-  }
-},
-{
-  "id": "iron_gut",
-  "name": "Iron Gut",
-  "requires": [
-    "extra_stomach",
-    "iron_stomach"
-  ],
-  "minLevel": 1,
-  "flavor": "Two stomachs, both iron. Eat anything. Eat everything.",
-  "discovery": "\"TWO stomachs?! And they can handle ANYTHING?! You're not eating, you're... processing! The System is taking notes and also feeling a little sick!\"",
-  "modifiers": [
-    {
-      "op": "multiply",
-      "target": "food.poison_chance",
-      "value": 0.5
-    }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
-      "iron_stomach",
-      "extra_stomach"
+    "minLevel": 1,
+    "flavor": "Bank the calories. Spend the blood. The furnace never empties.",
+    "discovery": "\"WAIT. You're banking FIVE TIMES the calories AND burning blood for power?! The furnace is ALWAYS lit! That's not a body, that's a WAR CHEST!\"",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "food.bank_mult",
+        "value": 1.5
+      }
     ],
-    "hint": "Eat the questionable thing. Then eat more of it.",
-    "tease1": "Your stomach handled something it shouldn't have. It's... proud?",
-    "tease2": "Two stomachs now, and neither one is picky. The System is concerned."
-  }
-},
-{
-  "id": "loud_and_proud",
-  "name": "Loud and Proud",
-  "requires": [
-    "loud_chewer",
-    "scream_cheese"
-  ],
-  "minLevel": 1,
-  "flavor": "Noise is a weapon. You are the weapon.",
-  "discovery": "\"You chew LOUD and you SCREAM louder?! The monsters don't know whether to eat you or run! It's... it's a STRATEGY! A LOUD strategy!\"",
-  "modifiers": [
-    {
-      "op": "multiply",
-      "target": "combat.strike_damage",
-      "value": 1.2
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "blood_magic",
+        "deep_reserves"
+      ],
+      "hint": "Burn blood. Then bank. The body learns.",
+      "tease1": "You spent blood for energy, and your body... remembered. It wants to keep more.",
+      "tease2": "The reserves are deeper than they should be. The blood remembers the hunger."
     }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
+  },
+  {
+    "id": "iron_gut",
+    "name": "Iron Gut",
+    "requires": [
+      "extra_stomach",
+      "iron_stomach"
+    ],
+    "minLevel": 1,
+    "flavor": "Two stomachs, both iron. Eat anything. Eat everything.",
+    "discovery": "\"TWO stomachs?! And they can handle ANYTHING?! You're not eating, you're... processing! The System is taking notes and also feeling a little sick!\"",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "food.poison_chance",
+        "value": 0.5
+      }
+    ],
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "iron_stomach",
+        "extra_stomach"
+      ],
+      "hint": "Eat the questionable thing. Then eat more of it.",
+      "tease1": "Your stomach handled something it shouldn't have. It's... proud?",
+      "tease2": "Two stomachs now, and neither one is picky. The System is concerned."
+    }
+  },
+  {
+    "id": "loud_and_proud",
+    "name": "Loud and Proud",
+    "requires": [
       "loud_chewer",
       "scream_cheese"
     ],
-    "hint": "Eat loud. Then scream louder.",
-    "tease1": "Your chewing echoed. Something in the woods paused.",
-    "tease2": "The scream came easier this time. Louder. The woods went quiet."
-  }
-},
-{
-  "id": "master_of_flame",
-  "name": "Master of Flame",
-  "requires": [
-    "pyrokinesis",
-    "camp_cook"
-  ],
-  "minLevel": 1,
-  "flavor": "The fire obeys. The food remembers.",
-  "discovery": "\"You coax flame from NOTHING and then COOK with it?! The fire respects you! The food tastes the difference! The System wants your recipe!\"",
-  "modifiers": [
-    {
-      "op": "multiply",
-      "target": "cook.kcal",
-      "value": 1.25
+    "minLevel": 1,
+    "flavor": "Noise is a weapon. You are the weapon.",
+    "discovery": "\"You chew LOUD and you SCREAM louder?! The monsters don't know whether to eat you or run! It's... it's a STRATEGY! A LOUD strategy!\"",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "combat.strike_damage",
+        "value": 1.2
+      }
+    ],
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "loud_chewer",
+        "scream_cheese"
+      ],
+      "hint": "Eat loud. Then scream louder.",
+      "tease1": "Your chewing echoed. Something in the woods paused.",
+      "tease2": "The scream came easier this time. Louder. The woods went quiet."
     }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
+  },
+  {
+    "id": "master_of_flame",
+    "name": "Master of Flame",
+    "requires": [
       "pyrokinesis",
       "camp_cook"
     ],
-    "hint": "Tend the fire. Then cook over it.",
-    "tease1": "The fire burned hotter than it should have. The pot noticed.",
-    "tease2": "You didn't just cook \u2014 you conducted. The flames danced."
-  }
-},
-{
-  "id": "the_long_con",
-  "name": "The Long Con",
-  "requires": [
-    "scarecrow",
-    "ambush"
-  ],
-  "minLevel": 1,
-  "flavor": "Lure them in. They never see it coming.",
-  "discovery": "\"You FAKED an injury to lure them into a trap, THEN ambushed them?! That's... that's two lies and a truth! The monsters are filing a complaint!\"",
-  "modifiers": [
-    {
-      "op": "multiply",
-      "target": "hunt.trap_catch",
-      "value": 1.5
+    "minLevel": 1,
+    "flavor": "The fire obeys. The food remembers.",
+    "discovery": "\"You coax flame from NOTHING and then COOK with it?! The fire respects you! The food tastes the difference! The System wants your recipe!\"",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "cook.kcal",
+        "value": 1.25
+      }
+    ],
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "pyrokinesis",
+        "camp_cook"
+      ],
+      "hint": "Tend the fire. Then cook over it.",
+      "tease1": "The fire burned hotter than it should have. The pot noticed.",
+      "tease2": "You didn't just cook \u2014 you conducted. The flames danced."
     }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
+  },
+  {
+    "id": "the_long_con",
+    "name": "The Long Con",
+    "requires": [
       "scarecrow",
       "ambush"
     ],
-    "hint": "Lure first. Strike second.",
-    "tease1": "The trap caught something. You were already waiting.",
-    "tease2": "They fell for the limp. They always fall for the limp."
-  }
-},
-{
-  "id": "living_armor",
-  "name": "Living Armor",
-  "requires": [
-    "second_skin",
-    "chitin_skin"
-  ],
-  "minLevel": 1,
-  "flavor": "The armor is not worn. It is grown.",
-  "discovery": "\"Your armor doesn't slow you AND it's part of your SKIN?! You're not wearing armor, you ARE armor! The System is reclassifying you as 'fortified'!\"",
-  "modifiers": [
-    {
-      "op": "add",
-      "target": "armor.flat",
-      "value": 15
-    }
-  ],
-  "discovery_method": {
-    "type": "sequential",
-    "order": [
-      "chitin_skin",
-      "second_skin"
+    "minLevel": 1,
+    "flavor": "Lure them in. They never see it coming.",
+    "discovery": "\"You FAKED an injury to lure them into a trap, THEN ambushed them?! That's... that's two lies and a truth! The monsters are filing a complaint!\"",
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "hunt.trap_catch",
+        "value": 1.5
+      }
     ],
-    "hint": "Grow the skin. Then move in it.",
-    "tease1": "Your skin itched. Then it... hardened?",
-    "tease2": "You moved fast, and the armor moved with you. Like weather."
-  }
-},
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "scarecrow",
+        "ambush"
+      ],
+      "hint": "Lure first. Strike second.",
+      "tease1": "The trap caught something. You were already waiting.",
+      "tease2": "They fell for the limp. They always fall for the limp."
+    }
+  },
+  {
+    "id": "living_armor",
+    "name": "Living Armor",
+    "requires": [
+      "second_skin",
+      "chitin_skin"
+    ],
+    "minLevel": 1,
+    "flavor": "The armor is not worn. It is grown.",
+    "discovery": "\"Your armor doesn't slow you AND it's part of your SKIN?! You're not wearing armor, you ARE armor! The System is reclassifying you as 'fortified'!\"",
+    "modifiers": [
+      {
+        "op": "add",
+        "target": "armor.flat",
+        "value": 15
+      }
+    ],
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "chitin_skin",
+        "second_skin"
+      ],
+      "hint": "Grow the skin. Then move in it.",
+      "tease1": "Your skin itched. Then it... hardened?",
+      "tease2": "You moved fast, and the armor moved with you. Like weather."
+    }
+  },
   {
     "id": "fevers_end",
     "name": "Fever's End",
@@ -1547,12 +1544,11 @@
         "field_medicine",
         "herbal_remedy"
       ],
-      "hint": "Treat the wound first, then brew the tea. Both must be truly mastered — dabblers need not apply.",
+      "hint": "Treat the wound first, then brew the tea. Both must be truly mastered \u2014 dabblers need not apply.",
       "tease1": "The poultice and the tea stopped feeling like two treatments. They felt like one long motion.",
-      "tease2": "You reached for the herbs before the bandage was even tied. Your hands already knew the whole cure. One more, and it's not practice anymore — it's just what you do."
+      "tease2": "You reached for the herbs before the bandage was even tied. Your hands already knew the whole cure. One more, and it's not practice anymore \u2014 it's just what you do."
     }
-  }
-  ,
+  },
   {
     "id": "stand_together",
     "name": "Stand Together",
@@ -1575,8 +1571,7 @@
       "tease2": "You drew the eye and the line held again. Someone in the back is standing straighter."
     },
     "flags": []
-  }
-  ,
+  },
   {
     "id": "blood_rage",
     "name": "Blood Rage",
@@ -1603,6 +1598,96 @@
       "hint": "Swing the hammer angry. Mean it both times.",
       "tease1": "The hammer felt lighter when you were furious. That should not work. It worked.",
       "tease2": "You stopped deciding to swing hard. The rage decided, and the hammer agreed. One more, and it is not a mood anymore \u2014 it is a technique."
+    },
+    "flags": []
+  },
+  {
+    "id": "shattering_blow",
+    "name": "Shattering Blow",
+    "flavor": "Sand in the eyes, steel in the gaps. A blinded monster can't guard its seams.",
+    "requires": [
+      "pocket_sand",
+      "item:machete"
+    ],
+    "minLevel": 1,
+    "modifiers": [],
+    "discovery": "\"SAND! And the MACHETE! TOGETHER?! You blind it and then you find EVERY seam in the armor! The audience is wincing in SYMPATHY! SHATTERING BLOW!\"",
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "pocket_sand",
+        "item:machete"
+      ],
+      "hint": "Blind it first. Then let the machete find the seams.",
+      "tease1": "The machete felt heavier in your hand after the sand flew. Like it knew something.",
+      "tease2": "You stopped aiming for the monster and started aiming for the gaps in it. The blind ones have more gaps. One more, and it is not luck anymore."
+    },
+    "flags": []
+  },
+  {
+    "id": "impaling_scream",
+    "name": "Impaling Scream",
+    "flavor": "Freeze it with a scream, pin it with a spear. The still heart is an easy target.",
+    "requires": [
+      "scream_cheese",
+      "item:hunting_spear"
+    ],
+    "minLevel": 1,
+    "modifiers": [],
+    "discovery": "\"The SCREAM! And the SPEAR! TOGETHER?! You freeze it mid-breath and the spear just... FINDS the heart! The drama division is taking notes! IMPALING SCREAM!\"",
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "scream_cheese",
+        "item:hunting_spear"
+      ],
+      "hint": "Scream it still. Then put the spear where the heart is.",
+      "tease1": "The spear seemed to pull toward the frozen monster, like a compass needle.",
+      "tease2": "You stopped throwing the spear and started placing it. The stunned ones don't dodge. One more, and placement becomes certainty."
+    },
+    "flags": []
+  },
+  {
+    "id": "blood_iron",
+    "name": "Blood Iron",
+    "flavor": "The blade drinks what you spend. Blood price, blood edge.",
+    "requires": [
+      "blood_magic",
+      "item:phase_blade"
+    ],
+    "minLevel": 1,
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "combat.strike_damage",
+        "value": 1.25
+      }
+    ],
+    "discovery": "\"BLOOD MAGIC! And the PHASE BLADE! TOGETHER?! You pay in blood and the blade REMEMBERS the price! It cuts deeper for the debt! BLOOD IRON!\"",
+    "discovery_method": {
+      "type": "sustained",
+      "hint": "Spend blood holding the phase blade. Let it taste what you pay.",
+      "tease1": "The phase blade hummed after the blood price, a note you felt in your teeth.",
+      "tease2": "The blade doesn't just cut anymore \u2014 it collects. Every blood price makes the edge angrier. Keep paying. It keeps cutting."
+    },
+    "flags": []
+  },
+  {
+    "id": "static_edge",
+    "name": "Static Edge",
+    "flavor": "The pact hums in the hardlight. Your strikes arc to the nearest other monster.",
+    "requires": [
+      "pact",
+      "item:hardlight_knife"
+    ],
+    "minLevel": 1,
+    "modifiers": [],
+    "discovery": "\"The PACT! And the HARDLIGHT KNIFE! TOGETHER?! The static has to go SOMEWHERE and the knife is a lightning rod! It ARCS! STATIC EDGE!\"",
+    "discovery_method": {
+      "type": "sustained",
+      "hint": "Fight with the pact humming and the hardlight drawn. Let the static find its path.",
+      "tease1": "Sparks jumped from the hardlight to your other hand. Then to the wall. It wants out.",
+      "tease2": "The knife crackles before you even swing now. The static is looking for a second target. Give it one."
     },
     "flags": []
   }

@@ -794,6 +794,47 @@
       }
       return { ok: false, why: 'Nothing left to blind.' };
     },
+    // ---- ABILITY-GAPS 2026-10-14 ----
+    'static_toss.toss': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to throw static in.' };
+      if (game.state.scholar._staticTossed) return { ok: false, why: 'Static spent this fight.' };
+      return { ok: true };
+    },
+    'cheese_wheel.hurl': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to hurl cheese in.' };
+      if (game.state.scholar._cheeseWheelDay === (game.state.scholar.day || 0)) return { ok: false, why: 'Cheese wheel spent today.' };
+      return { ok: true };
+    },
+    'bird_strike.call': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight for the birds.' };
+      return { ok: true };
+    },
+    'tripwire.string': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to wire.' };
+      if (f._tripwireSet) return { ok: false, why: 'Wire already strung.' };
+      return { ok: true };
+    },
+    'turncoat.persuade': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to mediate.' };
+      var n = f.fighters.filter(function (m) { return m.kind === 'monster' && m.alive && !m.fled; }).length;
+      if (n < 2) return { ok: false, why: 'Needs 2+ monsters.' };
+      return { ok: true };
+    },
+    'freeze_tag.tag': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to play tag in.' };
+      return { ok: true };
+    },
+    'green_thumb.ask': function (game) {
+      var day = game.state.scholar.day || 0;
+      if (game.state.scholar._askPlantsDay === day) return { ok: false, why: 'The plants have told you enough today.' };
+      return { ok: true };
+    },
     'grave_robber.rob_grave': function (game) {
       if (!_graveRobberCorpse(game)) return { ok: false, why: 'No body in reach to rob.' };
       return { ok: true };
@@ -1596,6 +1637,144 @@
       best.blind = 2;
       var label = game.encSubject ? game.encSubject(best) : (best.name || 'it');
       game.say('You fling a handful of grit into ' + label + '\'s eyes. It reels, clawing at its face — half-blind for 2 rounds. (Pocket Sand: attacks at disadvantage.)');
+      return true;
+    },
+
+    // ---- ABILITY-GAPS 2026-10-14 (Steve: "address all gaps") ----
+    // 3 ranged + 3 control-with-teeth. All alien magic, System-granted.
+
+    'static_toss.toss': function (game, target) {
+      var f = game.tbfight;
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      var s = game.state.scholar;
+      if (s._staticTossed) { game.say('The static needs to build up again. (Static Toss: once per fight.)'); return false; }
+      var m = target ? game.tbFighter(target) : null;
+      if (!m || m.kind !== 'monster' || !m.alive) {
+        // nearest live monster within 3
+        var best = null, bestD = 1e9;
+        for (var i = 0; i < f.fighters.length; i++) {
+          var c = f.fighters[i];
+          if (c.kind !== 'monster' || !c.alive || c.fled) continue;
+          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my || 0) - (p.my || 0)) : 0;
+          if (d <= 3 && d < bestD) { bestD = d; best = c; }
+        }
+        m = best;
+      }
+      if (!m) { game.say('Nothing in static range (3 tiles).'); return false; }
+      s._staticTossed = true;
+      var dmg = 20 + Math.floor(Math.random() * 11);
+      var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
+      game.say('You ball up the static and THROW it — crackling blue-white, straight into ' + label + '! (Static Toss: ' + dmg + ' energy.)');
+      game.tbDamage(m.key, dmg, 'static toss', 'p');
+      return true;
+    },
+
+    'cheese_wheel.hurl': function (game, target) {
+      var f = game.tbfight;
+      var s = game.state.scholar;
+      var day = s.day || 0;
+      if (s._cheeseWheelDay === day) { game.say('The cheese needs a day to re-form. (Screaming Cheese Wheel: 1/day.)'); return false; }
+      var m = target ? game.tbFighter(target) : null;
+      if (!m || m.kind !== 'monster' || !m.alive) {
+        // homing: loudest = highest HP live monster
+        var best = null, bestHp = -1;
+        for (var i = 0; i < f.fighters.length; i++) {
+          var c = f.fighters[i];
+          if (c.kind !== 'monster' || !c.alive || c.fled) continue;
+          if ((c.hp || 0) > bestHp) { bestHp = c.hp; best = c; }
+        }
+        m = best;
+      }
+      if (!m) { game.say('Nothing left to scream at.'); return false; }
+      s._cheeseWheelDay = day;
+      var dmg = 25 + Math.floor(Math.random() * 11);
+      var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
+      game.say('You hurl the wheel — it SCREAMS the whole way there, homing in on ' + label + '! It cannot miss. (Cheese Wheel: ' + dmg + '.)');
+      game.tbDamage(m.key, dmg, 'cheese wheel', 'p');
+      return true;
+    },
+
+    'bird_strike.call': function (game, target) {
+      var f = game.tbfight;
+      var m = target ? game.tbFighter(target) : null;
+      if (!m || m.kind !== 'monster' || !m.alive) {
+        for (var i = 0; i < f.fighters.length; i++) {
+          var c = f.fighters[i];
+          if (c.kind === 'monster' && c.alive && !c.fled) { m = c; break; }
+        }
+      }
+      if (!m) { game.say('No monster for the birds.'); return false; }
+      m._birdStrike = 3;
+      var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
+      game.say('You point at the sky. The birds have been waiting for this — they dive on ' + label + ', 3 rounds of feathers and fury! (Bird Strike: [8,12]/round, 20% blind.)');
+      return true;
+    },
+
+    'tripwire.string': function (game, target) {
+      var f = game.tbfight;
+      if (f._tripwireSet) { game.say('The wire is already strung. (Tripwire: one at a time.)'); return false; }
+      f._tripwireSet = true;
+      game.say('You string a wire at ankle height, almost invisible. The next monster that moves eats dirt. (Tripwire: set.)');
+      return true;
+    },
+
+    'turncoat.persuade': function (game, target) {
+      var f = game.tbfight;
+      var live = f.fighters.filter(function (m) { return m.kind === 'monster' && m.alive && !m.fled; });
+      if (live.length < 2) { game.say('You need at least two monsters to turn against each other. (Turncoat: needs 2+.)'); return false; }
+      var a = live[0], b = live[1];
+      a._turncoatTarget = b.key; a._turncoatRounds = 2;
+      b._turncoatTarget = a.key; b._turncoatRounds = 2;
+      var la = game.encSubject ? game.encSubject(a) : (a.name || 'it');
+      var lb = game.encSubject ? game.encSubject(b) : (b.name || 'it');
+      game.say('You explain to them, very reasonably, why the OTHER one is the real problem. ' + la + ' and ' + lb + ' believe you — for 2 rounds, anyway. (Turncoat: they fight each other.)');
+      return true;
+    },
+
+    'freeze_tag.tag': function (game, target) {
+      var f = game.tbfight;
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      var m = target ? game.tbFighter(target) : null;
+      if (!m || m.kind !== 'monster' || !m.alive) {
+        var best = null, bestD = 1e9;
+        for (var i = 0; i < f.fighters.length; i++) {
+          var c = f.fighters[i];
+          if (c.kind !== 'monster' || !c.alive || c.fled) continue;
+          var d = p ? Math.abs((c.mx || 0) - (p.mx || 0)) + Math.abs((c.my || 0) - (p.my || 0)) : 0;
+          if (d <= 1 && d < bestD) { bestD = d; best = c; }
+        }
+        m = best;
+      }
+      if (!m) { game.say('Nothing adjacent to tag. (Freeze Tag: touch range.)'); return false; }
+      m._frozen = 2;
+      var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
+      game.say('You touch ' + label + ' and yell "YOU\'RE IT!" It freezes — rooted for 2 rounds. Nobody\'s coming to tag it back. (Freeze Tag: cannot move.)');
+      return true;
+    },
+
+    'green_thumb.ask': function (game, target) {
+      var s = game.state.scholar;
+      var day = s.day || 0;
+      s._askPlantsDay = day;
+      // Reveal this tile's forage table — what the plants say is growing here.
+      var px = game.map ? game.map.px : 0, py = game.map ? game.map.py : 0;
+      var found = [];
+      try {
+        var detail = game.genDetail ? game.genDetail(px, py) : null;
+        // genDetail is 9x9; the center is the player's tile. Scan for forageables.
+        for (var y = 0; y < 9 && detail; y++) {
+          for (var x = 0; x < 9; x++) {
+            var cell = detail[y] && detail[y][x];
+            if (cell && cell.forage) found.push(cell.forage);
+          }
+        }
+      } catch (e) {}
+      found = found.filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 5);
+      if (found.length) {
+        game.say('You crouch and listen. The plants gossip: ' + found.join(', ') + ' growing here. (Ask the Plants.)');
+      } else {
+        game.say('You crouch and listen. The plants say: nothing worth eating here. They\'re blunt. (Ask the Plants.)');
+      }
       return true;
     },
 

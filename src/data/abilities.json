@@ -276,9 +276,9 @@
   },
   {
     "id": "green_thumb",
-    "name": "Green Thumb",
-    "description": "Foraging yields +50%. You know where to look.",
-    "flavor": "PLANTS LIKE YOU! We asked them!",
+    "name": "Green Thumb, Literally",
+    "description": "Your thumb is green. Not metaphorically. Foraging yields +50%, AND you can ask a plant what's nearby (once/day: reveals this tile's forage table).",
+    "flavor": "The plants lean toward you. They're gossiping. You're learning to listen.",
     "pool": "system",
     "tier": "utility",
     "unlock": {
@@ -291,7 +291,18 @@
     "deepening": {
       "2": "+100% yield (was +50%).",
       "3": "You sense rich ground. Forage spots glow."
-    }
+    },
+    "actions": [
+      {
+        "id": "ask",
+        "name": "Ask the Plants",
+        "cost": {
+          "kcal": 20
+        },
+        "context": "field",
+        "desc": "Ask what's growing here. Once/day: reveals this tile's forage table."
+      }
+    ]
   },
   {
     "id": "tracker",
@@ -329,9 +340,9 @@
   },
   {
     "id": "diplomat",
-    "name": "Diplomat",
-    "description": "Trust builds 2x faster. People open up to you.",
-    "flavor": "You make the sad faces go away! Teach us?",
+    "name": "Diplomatic Incident",
+    "description": "Trust builds 2x faster. You're TOO good though \u2014 once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+    "flavor": "Peace is just war with better catering. You cater beautifully.",
     "pool": "system",
     "tier": "utility",
     "unlock": {
@@ -348,9 +359,9 @@
   },
   {
     "id": "camp_cook",
-    "name": "Camp Cook",
-    "description": "Cooking uses half the water. +10% kcal.",
-    "flavor": "The food sings! We hear it! Do you hear it?",
+    "name": "Secret Ingredient",
+    "description": "Cooking uses half the water, +10% kcal. Once per day: add a Secret Ingredient (a random inventory item) \u2014 50% delicious (+morale), 50% educational.",
+    "flavor": "The System has filed seventeen complaints about your cooking. It keeps eating anyway.",
     "pool": "system",
     "tier": "utility",
     "unlock": {
@@ -1506,11 +1517,11 @@
   },
   {
     "id": "survivor",
-    "name": "Survivor",
+    "name": "Scar Tissue",
     "tier": "utility",
     "pool": "fallback",
-    "description": "You endured. +10 max health.",
-    "flavor": "You lived! We are SO proud!",
+    "description": "You endured. +10 max health. And your scars itch before danger \u2014 once per fight, when you'd drop below 25% HP, the scars remember and hold you at 25% instead.",
+    "flavor": "The scars are a map of everywhere you almost died. They refuse to add a new pin.",
     "unlock": {
       "type": "fallback"
     },
@@ -1531,11 +1542,11 @@
   },
   {
     "id": "wanderer",
-    "name": "Wanderer",
+    "name": "Wanderlust",
     "tier": "utility",
     "pool": "fallback",
-    "description": "You kept moving. -10% travel cost.",
-    "flavor": "You go places! FAR places! We sent a camera crew! (They got lost. It's fine.)",
+    "description": "You kept moving. -10% travel cost. But you can't sit still \u2014 resting in one place more than 2 day parts gives you the itch (-5 morale); arriving somewhere new: +5 morale.",
+    "flavor": "The horizon is a personal insult you intend to answer.",
     "unlock": {
       "type": "fallback"
     },
@@ -2655,6 +2666,173 @@
     "deepening": {
       "2": "Your voice finds them faster in the noise.",
       "3": "They have heard you hold before. They believe it now."
+    }
+  },
+  {
+    "id": "static_toss",
+    "name": "Static Toss",
+    "description": "You ball up the static in your palm and THROW it. It was going to go somewhere anyway. (Ranged: 3 tiles, energy damage, once per fight.)",
+    "flavor": "The System applauds your commitment to throwing problems at other problems.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "toss",
+        "name": "Toss Static",
+        "cost": {
+          "turn": true,
+          "kcal": 50
+        },
+        "context": "combat",
+        "target": "monster",
+        "desc": "Hurl static 3 tiles for [20,30] energy damage."
+      }
+    ],
+    "deepening": {
+      "2": "The static sticks \u2014 the struck monster is slowed (moves 1 less) for 2 rounds.",
+      "3": "CHAIN LIGHTNING: arcs to a second monster for half damage."
+    }
+  },
+  {
+    "id": "cheese_wheel",
+    "name": "Screaming Cheese Wheel",
+    "description": "You hurl a wheel of screaming cheese. It homes in on the loudest thing in the fight \u2014 usually the monster. (Ranged: can't miss, 1/day.)",
+    "flavor": "The cheese screams the whole way there. It has range anxiety.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "hurl",
+        "name": "Hurl Cheese Wheel",
+        "cost": {
+          "turn": true,
+          "kcal": 80
+        },
+        "context": "combat",
+        "target": "monster",
+        "desc": "Homing cheese wheel: [25,35] damage, can't miss, 1/day."
+      }
+    ],
+    "deepening": {
+      "2": "The wheel is aged \u2014 it stuns for 1 round on impact (the smell).",
+      "3": "The wheel multiplies mid-flight. Two wheels. Twice the screaming."
+    }
+  },
+  {
+    "id": "bird_strike",
+    "name": "Bird Strike",
+    "description": "You point at the sky. The birds have been waiting for this. (Ranged: birds dive-bomb a monster for 3 rounds.)",
+    "flavor": "The birds were already circling. They just needed permission.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "call",
+        "name": "Call the Birds",
+        "cost": {
+          "turn": true,
+          "kcal": 60
+        },
+        "context": "combat",
+        "target": "monster",
+        "desc": "Birds harry a monster for 3 rounds: [8,12]/round, 20% blind chance."
+      }
+    ],
+    "deepening": {
+      "2": "Murder: more birds. [12,18]/round.",
+      "3": "The birds learn to aim for eyes. 40% blind chance."
+    }
+  },
+  {
+    "id": "tripwire",
+    "name": "Tripwire",
+    "description": "You string a wire at ankle height. The next monster that moves eats dirt \u2014 prone, stunned, and embarrassed. (Sets up the party.)",
+    "flavor": "The wire is almost invisible. The monster's dignity is not.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "string",
+        "name": "String Tripwire",
+        "cost": {
+          "turn": true,
+          "kcal": 40
+        },
+        "context": "combat",
+        "desc": "Next monster that moves: prone (stun 1 + no move next turn)."
+      }
+    ],
+    "deepening": {
+      "2": "Barbed wire. The prone monster also bleeds.",
+      "3": "Two wires. Two monsters. Twice the embarrassment."
+    }
+  },
+  {
+    "id": "turncoat",
+    "name": "Turncoat",
+    "description": "You explain to them, very reasonably, why the OTHER monster is the real problem. For 2 rounds, they believe you. (Monsters fight each other.)",
+    "flavor": "Your argument is airtight. It helps that they're monsters.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "persuade",
+        "name": "Turn Them",
+        "cost": {
+          "turn": true,
+          "kcal": 100
+        },
+        "context": "combat",
+        "target": "monster",
+        "desc": "Two monsters fight each other for 2 rounds. Needs 2+ monsters."
+      }
+    ],
+    "deepening": {
+      "2": "Your reasoning is impeccable. 3 rounds.",
+      "3": "They hold a grudge. The feud persists after the fight (they'll remember)."
+    }
+  },
+  {
+    "id": "freeze_tag",
+    "name": "Freeze Tag",
+    "description": "You touch it and yell 'YOU'RE IT!' It can't move until someone tags it back \u2014 and nobody's playing. (Root 2 rounds.)",
+    "flavor": "The rules are clear. The monster didn't agree to them, but the rules are clear.",
+    "pool": "system",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "actions": [
+      {
+        "id": "tag",
+        "name": "Tag It",
+        "cost": {
+          "turn": true,
+          "kcal": 40
+        },
+        "context": "combat",
+        "target": "monster",
+        "desc": "Root a monster in place for 2 rounds. It can still attack adjacent."
+      }
+    ],
+    "deepening": {
+      "2": "No tag-backs: also silences its special for 1 round.",
+      "3": "Everyone's it: root all adjacent monsters."
     }
   }
 ]
