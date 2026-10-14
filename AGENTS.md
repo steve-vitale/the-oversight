@@ -16,7 +16,7 @@ dated `evidence/` notes.
 
 **God-path system.** Plan: `docs/godpath/PLAN.md` (the task list, contracts
 and phase gates). Design: `evidence/2026-10-14/opus-godpath-proposal.md`.
-Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everything), then PLAN.md.
+Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everything), then `docs/COHERENCE-SPINE.md` (how every progression feature fits), then PLAN.md.
 
 ## Commands
 

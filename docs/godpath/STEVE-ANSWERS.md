@@ -7,6 +7,20 @@ verbatim.
 
 ---
 
+## 2026-10-14 (late night)
+
+**On coherence:** "We need all these features coherent. Gods are rough
+representatives of what starts out as jobs and classes, or playstyles."
+
+**On sentimental items:** "Sentimental items need to compete with accessory
+gear for the extra slots available. The gear must both contribute to some
+bigger structure in the game kinda like you mention but each must grow into
+evolving levels of what act like skills or abilities. They start off doing
+nothing, they start doing a little, but they displace gear or accessories that
+would typically give other actions or boosts."
+
+(Design: `docs/COHERENCE-SPINE.md`.)
+
 ## 2026-10-14 (night)
 
 **On ability classes:** "The classes are supposed to be oriented around the god
