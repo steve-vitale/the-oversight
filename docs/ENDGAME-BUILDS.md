@@ -146,6 +146,5 @@ Steve's directive (2026-10-07): *"Paint a path towards functional godhood. If th
 ## Cross-build notes
 
 - **Hybrid builds are real.** Brawler + Caregiver = the unkillable frontline. Detective + Socialite = the puppetmaster. The 6-slot cap forces choices — that's the game.
-- **Sentimental gear** can substitute for any build's armor pieces once bonded (bond ≥25, must be equipped). Love is a valid build path.
 - **Alien armor** (5 pieces, tier 4) is the combat builds' end-game armor — but forager/socialite/detective builds have their own tier-4 torso options. No build is forced into alien tech.
 - **Most wins look like godhood** — a player who's assembled any of these (or their own invention) by day 60+ is winning. But weird wins exist: the miser who never fights, the drifter who never stays, the detective who wins without drawing a weapon.

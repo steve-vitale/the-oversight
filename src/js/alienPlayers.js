@@ -2593,7 +2593,9 @@
 
     // ============ ALIEN ARMOR TRANSITION (Steve 2026-10-07) ============
     // Alien beam weapons vs human armor = nearly instant lethal.
-    // Alien armor OR sufficiently bonded sentimental gear = resistant.
+    // Alien armor = resistant. (2026-10-14, Steve: the old 'bonded sentimental
+    // vest blocks beams' line "was never a rule" — removed; no keepsake has
+    // armor in data, so it never fired.)
     // Until you have a full set, every alien encounter is tremendous risk.
     //
     // The three concepts stay separate:
@@ -2603,17 +2605,11 @@
     // Beam resistance is its own axis. It doesn't care about waves or tiers.
 
     // apBeamResistPieces: count beam-resistant pieces the player is wearing.
-    // GEAR SLOTS (Steve 2026-10-07): sentimental gear must be EQUIPPED in an
-    // armor slot to count. Sitting in inventory does nothing — out of sight,
-    // out of mind. Weapons and accessories never count (a knife doesn't block
-    // beams — but a bonded sentimental VEST does).
-    // Two sources:
-    // 1. Alien armor (armor.beamResist:true in items.json) — grown, not made.
-    // 2. Sentimental armor with bond >= 25, EQUIPPED in head/torso/legs/hands/shoes.
-    //    Your love for it creates resonance that deflects beam weapons.
-    //    (Bond 10 reveals the keepsake; 25 is deep.)
+    // One source: alien armor (armor.beamResist:true in items.json) — grown,
+    // not made — EQUIPPED in head/torso/legs/hands/shoes. Weapons and
+    // accessories never count.
     // Full-body sets count per covered slot (head+torso+legs+shoes = 4).
-    // Returns array of {slot, itemId, source:'alien'|'bonded'}.
+    // Returns array of {slot, itemId, source:'alien'}.
     apBeamResistPieces: function () {
       var pieces = [];
       try {
@@ -2652,12 +2648,6 @@
               pieces.push({ slot: slot, itemId: itemId, source: 'alien' });
             }
             continue;
-          }
-          // Source 2: sufficiently bonded sentimental ARMOR, equipped.
-          // Weapons don't block beams. Accessories don't block beams.
-          // A bonded vest does. (Steve 2026-10-07: knife is a bad example.)
-          if (def.class === 'sentimental' && def.armor && (item.bond || 0) >= 25) {
-            pieces.push({ slot: slot, itemId: itemId, source: 'bonded' });
           }
         }
       } catch (e) {}
@@ -2793,21 +2783,6 @@
           if (t.hp <= 0) {
             t.alive = false;
             try { this.tbKill(t, sourceLabel); } catch (e) {}
-          }
-        }
-      } catch (e) {}
-      // SENTIMENTAL BOND (Steve 2026-10-07): surviving a beam hit while wearing
-      // bonded sentimental armor is a meaningful moment — the bond deepens.
-      // HONEST (break-it 2026-10-09): this.bumpBond never existed — the
-      // guarded call was dead and the bond never moved. Bump inline, on the
-      // actual equipped piece (same +3 the victory path uses in game.js).
-      try {
-        if (targetKey === 'player' && n > 0) {
-          var eq2 = (this.state.scholar || {}).equipped || {};
-          for (var bi = 0; bi < pieces.length; bi++) {
-            if (pieces[bi].source !== 'bonded') continue;
-            var bitem = eq2[pieces[bi].slot];
-            if (bitem) bitem.bond = (bitem.bond || 0) + 3;
           }
         }
       } catch (e) {}
@@ -3085,7 +3060,7 @@
     };
 
     // 2. BEAM DAMAGE INTERCEPT: alien_beam damage type bypasses normal armor.
-    // Only beam-resistant gear (alien armor, bonded sentimental) reduces it.
+    // Only beam-resistant gear (alien armor) reduces it.
     // VETERAN PLATE (break-it 2026-10-08): Sarge's tech "reduces all damage
     // by 2" was pure copy — no reduction existed in the damage path. Applied
     // here, on the target fighter's alien tech (base or upgraded id).
