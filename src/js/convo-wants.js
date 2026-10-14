@@ -10,6 +10,8 @@
 //   - convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now())
 //   - convoResolveWant(vid, how) -> plants seeds for unfinished business
 //   - convoPlantSeed(vid, seed) / convoCheckSeeds(vid)
+//   - convoQuestionTopic(qid) -> noun phrase for a bespoke question ("About <phrase> — <question>")
+//   - convoQuestionDef(qid) -> the bespoke question def by id (characterGen convo questions)
 //   - convoWantNews(vid) / convoWantWarning(vid) -> real content beats
 // rules:
 //   - want_driven: every conversation selects one NPC want at start; the want shapes the opening and provides beats (code: convoSelectWant, Steve 2026-10-06)
@@ -401,6 +403,52 @@
   // - menuOptions(vid, stage): [{id, labels[], temper}] — engage/deflect/follow-through
   // - closeLine(vid, resolution): the goodbye beat for how it ended
   // - resolve(vid, resolution): seed or null
+  // QUESTION_TOPIC: the noun phrase an NPC uses to refer back to a bespoke
+  // question they asked (curious-seed resume: "About <phrase> — <question>").
+  // Plain voice, never the menu-question text — same register as the t2speech
+  // map (journey social r13 2026-10-14). Falls back to 'that question' for
+  // unknown ids (convoQuestionTopic). (journey social r14 2026-10-14: the
+  // curious seed stored only the generic note 'that question', and the resume
+  // hung a DIFFERENT question — the original evaporated. The seed now records
+  // the question id and names it like a person.)
+  const QUESTION_TOPIC = {
+    q_origin: 'where you\'re from',
+    q_plan: 'your plan here',
+    q_scared: 'whether you\'re scared',
+    q_miss: 'what you miss most',
+    q_trust: 'whether they can trust you',
+    q_think: 'what you make of all this',
+    q_hands: 'what you did with your hands',
+    q_read: 'your read on people here',
+    q_theory: 'what you think happened to us',
+    q_night: 'how you slept',
+    q_laugh: 'the funniest thing you\'ve seen',
+    q_quiet: 'the talking-to-strangers part',
+    q_first_memory: 'your first memory',
+    q_regret: 'your regrets',
+    q_skill: 'what you\'re good at',
+    q_believe: 'what you believe in',
+    q_someone: 'who you don\'t trust',
+    q_change: 'how this changed you',
+    q_guilty: 'the worst thing you\'ve done',
+    q_hope: 'what you\'re hoping for',
+    q_alone_time: 'needing to be alone',
+    q_laugh_memory: 'the last time you laughed',
+    q_teach_me: 'teaching them something',
+    q_stay: 'whether you\'re staying',
+    q_system_fear: 'what scares you most',
+    q_kindness: 'the kindest thing someone\'s done for you',
+    q_before_skill: 'your useful old-life skills',
+    q_fight: 'whether you\'ve hurt someone',
+    q_song: 'whether you still sing',
+    q_first_week: 'what got you through the first week',
+    q_angry: 'whether you\'re angry',
+    q_dream: 'what you dream about',
+    q_left_behind: 'who you left behind',
+    q_name_day: 'what day it is',
+    q_useful: 'the most useful thing you\'ve learned',
+    q_fun: 'what you did for fun',
+  };
   const WANTS = {
     share_news: {
       // A reaction ("huh", "no kidding") engages news — that's the point.
@@ -929,6 +977,32 @@
         // answers the same question they just asked. (convo rebuild
         // 2026-10-11: the old flow hung a different question than the
         // opener spoke.)
+        // SEED RESUME (journey social r14 2026-10-14): a seed for an
+        // unanswered question re-hangs THE SAME question. convoResolveWant
+        // runs before endConvo clears pendingQ, so resolve() recorded the
+        // hanging question's id in the seed (seedQid). Pre-fix the opener
+        // hung a fresh pick here (the seed claimed "About that question"
+        // while asking a different question) and the original evaporated —
+        // the seed is a promise to resume, not a fresh ask.
+        const c0 = (typeof Game.convoGet === 'function') ? Game.convoGet(vid) : null;
+        const resumeQid = (c0 && c0.want && c0.want.fromSeed) ? (c0.want.seedQid || null) : null;
+        if (resumeQid) {
+          const qd = (typeof Game.convoQuestionDef === 'function') ? Game.convoQuestionDef(resumeQid) : null;
+          if (qd && qd.q) {
+            // A resume, not a new ask: askedQs/askedAny already record it
+            // (it was hung before the walkaway) — don't double-count, don't
+            // re-gate on trust/mood. The NPC is picking the thread back up.
+            c0.pendingQ = { id: qd.id, answers: qd.answers || [] };
+            c0.pendingQDodges = 0;
+            // WANT-QUESTION IDENTITY (journey social r14): the want's
+            // question, for thread labels even after it's answered (the
+            // open-thread ledger names the question, not 'that question').
+            if (c0.want) c0.want.qid = qd.id;
+            return qd.q;
+          }
+          // Question def gone (data changed since the seed) — fall through
+          // to a fresh ask rather than stranding the want.
+        }
         const q = (typeof Game.convoHangWantQuestion === 'function') ? Game.convoHangWantQuestion(vid) : null;
         if (q && q.q) return q.q;
         return null; // no unasked question left — the want can't open
@@ -955,9 +1029,18 @@
       // the next conversation resumes it instead of evaporating. A natural
       // close after answering plants nothing — the question was answered.
       // (convo rebuild 2026-10-11: trust proof caught curious never seeding.)
+      // SEED NAMES THE QUESTION (journey social r14 2026-10-14): the seed
+      // records the hanging question's id — convoResolveWant runs BEFORE
+      // endConvo clears pendingQ, so the unanswered question is still live
+      // here. Pre-fix the seed stored only the generic note 'that question'
+      // and the resume hung a different question, so the original evaporated
+      // and "About that question" referenced a question never asked.
       resolve(vid, resolution, how) {
-        if (how === 'left' && resolution !== 'deflected' && resolution !== 'unestablished')
-          return { wantId: 'curious', note: 'that question' };
+        if (how === 'left' && resolution !== 'deflected' && resolution !== 'unestablished') {
+          let qid = null;
+          try { const c = this.convoGet(vid); qid = (c && c.pendingQ && c.pendingQ.id) || null; } catch (e) {}
+          return { wantId: 'curious', note: this.convoQuestionTopic(qid), qid: qid };
+        }
         return null;
       },
     },
@@ -1397,7 +1480,7 @@
     convoSelectWant(vid) {
       const seed = this.convoCheckSeeds(vid);
       if (seed && WANTS[seed.wantId]) {
-        return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null };
+        return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null, seedQid: seed.qid || null };
       }
       const c0 = this.convoGet(vid);
       const firstMeeting = (c0.count || 0) <= 1;
@@ -1702,6 +1785,10 @@
       c.qCount = (c.qCount || 0) + 1;
       if ((c.askedQs || []).indexOf(qd.id) === -1) c.askedQs.push(qd.id);
       try { if (this.noteAskedQ) this.noteAskedQ(qd.id); } catch (e) {}
+      // WANT-QUESTION IDENTITY (journey social r14): the want's question id,
+      // so thread labels can name the actual question even after it's
+      // answered (open-thread ledger, recap lines) — never 'that question'.
+      try { if (c.want) c.want.qid = qd.id; } catch (e) {}
       return qd;
     },
 
@@ -1748,6 +1835,10 @@
         note: seed.note || '',
         day: this.state.scholar.day || 0,
         favorId: seed.favorId || null,
+        // CURIOUS QUESTION RESUME (journey social r14 2026-10-14): the
+        // hanging bespoke question's id, so the next conversation re-hangs
+        // THE SAME question instead of a fresh pick.
+        qid: seed.qid || null,
       };
     },
 
@@ -1763,6 +1854,26 @@
         return null;
       }
       return seed;
+    },
+
+    // convoQuestionTopic(qid): the noun phrase an NPC uses to refer back to
+    // a bespoke question they asked ("About <phrase> — <question>"). Plain
+    // voice, never the menu-question text — same register as the t2speech
+    // map (journey social r13). Unknown/null ids fall back to the old
+    // generic 'that question' rather than inventing a label.
+    // (journey social r14 2026-10-14)
+    convoQuestionTopic(qid) {
+      return (qid && QUESTION_TOPIC[qid]) || 'that question';
+    },
+
+    // convoQuestionDef(qid): the bespoke question def by id (characterGen
+    // convo questions), for re-hanging a seed-resumed question.
+    // (journey social r14 2026-10-14)
+    convoQuestionDef(qid) {
+      try {
+        const cg = (this.data.characterGen || {}).convo || {};
+        return (cg.questions || []).find(q => q && q.id === qid) || null;
+      } catch (e) { return null; }
     },
 
     // convoResolveWant: called from base endConvo BEFORE state clears.

@@ -1105,6 +1105,24 @@
           const w = this.convoGet(vid).want;
           if (w && w.def && w.def.topicLabel) return String(w.def.topicLabel);
           const wid = w && w.id;
+          // CURIOUS NAMES ITS QUESTION (journey social r14 2026-10-14): the
+          // open-thread ledger and recap/resume lines labeled the thread the
+          // generic 'that question' ("About that question — we never
+          // finished."). When the want is curious and its question is known
+          // (hanging now, or resumed from a seed), name the actual question —
+          // same noun-phrase map as the seed note (convoQuestionTopic).
+          if (wid === 'curious') {
+            const c = this.convoGet(vid);
+            // The want's own question first (recorded at hang time, so it
+            // names correctly even after the question was answered), then
+            // the seed resume id, then a live hanging question.
+            const pqid = (c && c.want && (c.want.qid || c.want.seedQid)) ||
+              (c && c.pendingQ && c.pendingQ.id) || null;
+            if (pqid && typeof this.convoQuestionTopic === 'function') {
+              const named = this.convoQuestionTopic(pqid);
+              if (named && named !== 'that question') return named;
+            }
+          }
           const labels = {
             ask_favor: 'that favor', share_news: 'that news',
             seek_comfort: 'that hard time', warn_you: 'that warning',
@@ -3943,7 +3961,7 @@
       let want = null;
       try {
         want = this.convoSelectWant(vid);
-        if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null, seedFavorId: want.seedFavorId || null };
+        if (want && want.def) c.want = { id: want.id, def: want.def, stage: 0, fromSeed: !!want.fromSeed, seedNote: want.seedNote || null, seedFavorId: want.seedFavorId || null, seedQid: want.seedQid || null };
       } catch (e) { want = null; }
       const op = (() => {
         // RESUME (Steve 2026-10-07): an unfinished thread from a previous
