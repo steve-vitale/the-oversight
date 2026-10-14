@@ -423,8 +423,18 @@
     // This is worldbuilding, not flavor text.
     playFlashback(item, def) {
       const s = this.state.scholar;
-      const char = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
-      const holder = char.lifeseed ? char : { name: char.name || 'you', lifeseed: null };
+      // The holder is whose memory it is: the keepsake's owner (the player's
+      // own for their own keepsakes), else the player. Hydrated survivors
+      // (successors) are born without a seed and may carry only a { lived }
+      // stub — ensurePersonLifeseed gives them a real one, so the memory
+      // resolves against THEIR people and places.
+      const holderId = item.owner || this.villagerId;
+      const char = (this.data.villagers || []).find(v => v.id === holderId) || {};
+      const ls0 = char.lifeseed;
+      if (char.id && !(ls0 && Array.isArray(ls0.people) && Array.isArray(ls0.places)) && this.ensurePersonLifeseed) {
+        this.ensurePersonLifeseed(char.id);
+      }
+      const holder = (char.lifeseed && Array.isArray(char.lifeseed.people)) ? char : { name: char.name || 'you', lifeseed: null };
       // keepsakes of the dead carry their own provenance — resolved against
       // THEIR lifeseed at the moment of taking, not the player's. Grief as fuel.
       const memory = (item.memoryOf && item.keepsakeMemory)
