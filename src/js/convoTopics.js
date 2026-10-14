@@ -239,12 +239,49 @@
     t2LatelyEvent(vid) {
       const v = this.state.village;
       const day = (this.state.scholar || {}).day || 0;
+      // OUTBREAK SCAN (journey crisis r8 2026-10-14): computed first because
+      // severity gates the naming debate below. Sense-tested on 4 seeds: 5
+      // villagers down with gut rot and the healthy talked monster names,
+      // the sick talked hunger. A SEVERE outbreak (weight>=5: sev2+ counts
+      // double — 2 severe or 5 mild sick) displaces the naming debate; a
+      // mild one doesn't. Symptom-gated: the description is symptoms, never
+      // the true disease name (docs/DISEASES.md). Threshold 2 sick: one sick
+      // villager is personal (their own want/opener covers it); two is the
+      // village's business.
+      let outbreak = null;
+      try {
+        const sickIds = (v.roster || []).filter(id => {
+          try {
+            const s = (v.sick || {})[id];
+            const svp = this.vpOf(id);
+            return s && (s.daysLeft || 0) > 0 && svp && !svp.dead;
+          } catch (e) { return false; }
+        });
+        if (sickIds.length >= 2) {
+          let weight = 0;
+          const counts = {};
+          for (const id of sickIds) {
+            const rec = (v.sick || {})[id] || {};
+            weight += ((rec.severity || 1) >= 2) ? 2 : 1;
+            const s = !rec ? 'a bad gut sickness'
+              : rec.name === 'gut rot' ? 'gut cramps'
+              : rec.name === 'wound fever' ? 'a hot angry fever'
+              : 'a wringing-out sickness';
+            counts[s] = (counts[s] || 0) + 1;
+          }
+          const desc = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || 'a bad gut sickness';
+          outbreak = { kind: 'outbreak', n: sickIds.length, self: sickIds.indexOf(vid) >= 0, desc, severe: weight >= 5 };
+        }
+      } catch (e) {}
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
         // proposals the NPC actually heard. Names stay knowledge-gated: the
         // descriptor until the village agrees, never the true name.
-        if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive()) {
+        // YIELDS to a severe outbreak (r8): the debate doesn't outshout the
+        // sick row.
+        if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
+            !(outbreak && outbreak.severe)) {
           const entries = this.state.codex.monsters || {};
           const mid = Object.keys(entries).find(k => {
             const e = entries[k];
@@ -267,7 +304,17 @@
           let nm = null;
           try { if (recent && recent.villagerId && typeof this.firstRef === 'function') nm = this.firstRef(recent.villagerId) || null; } catch (e) {}
           if (!nm && recent) nm = String(recent.name || recent.villagerId || 'someone');
-          return { kind: 'mourning', name: nm };
+          // SICKNESS DEATH (journey crisis r8 2026-10-14): when the fresh
+          // corpse died of disease, the mourning lines name the sickness —
+          // sense-tested, the village grieved its outbreak dead generically
+          // while the sick row filled, never connecting the two. Symptom-
+          // honest ("the sickness"), never the disease true name.
+          let sickDeath = false;
+          try {
+            const cause = String((recent && recent.cause) || '');
+            sickDeath = /sick|gutrot|wound_fever|trembles|trichinosis|lockjaw|tick fever|gut rot/i.test(cause) || cause === 'disease';
+          } catch (e) {}
+          return { kind: 'mourning', name: nm, sickDeath };
         }
         // MANTLE MEMORY (journey crisis r4 2026-10-12): the village talks
         // about a dead bearer longer than the 3-day acute grief — the mantle
@@ -302,6 +349,10 @@
         // days — the night lingers, then it becomes old news (the mantle
         // keeps 10). The 'defended' memory is planted by
         // resolveWildMonsterEncounter on the raid pathway only (opts.raid).
+        // OUTBREAK RETURN (r8): the scan ran before the naming check; the kind
+        // surfaces here — below fresh grief and the mantle (the dead are
+        // still named first), above defense and the debate.
+        if (outbreak) return outbreak;
         const defended = this.t2mem(vid).find(m => m.t === 'defended' &&
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
         if (defended) return { kind: 'defense', note: String(defended.note || '') };
@@ -808,12 +859,18 @@
               (p1 ? '\'' + p1[1] + '\' got shouted down. ' : '') + 'What\'s your vote?"',
           ];
         }
-        case 'mourning':
-          return ev.name
+        case 'mourning': {
+          const lines = ev.name
             ? ['"Since ' + ev.name + ' died... I keep expecting to see ' + ev.name + ' at the fire. Stupid."',
                '"' + ev.name + ' is gone and the world just... continues. That\'s the part I can\'t stand."']
             : ['"We lost someone. I keep setting out an extra portion. Stupid."',
                '"Grief doesn\'t schedule itself. It just shows up at dinner."'];
+          // SICKNESS DEATH (journey crisis r8 2026-10-14): the village names
+          // what took them — the outbreak and the grief are one story.
+          if (ev.sickDeath && ev.name) lines.push(
+            '"The sickness took ' + ev.name + '. I keep washing my hands like it\'ll bring them back. Stupid."');
+          return lines;
+        }
         case 'threat':
           return ['"That thing — ' + (ev.note || 'by the treeline') + '. I keep seeing it when I blink."',
             '"I don\'t scare easy. I\'m scared. There. I said it out loud."'];
@@ -833,6 +890,20 @@
             ? ['"Someone broke a promise to me. I\'m looking at them." A pointed pause. "You know what you did."',
                '"Trust is a currency, and I\'m feeling poor right now. Your move."']
             : ['"Someone here broke their word. I won\'t say who. But the fire feels colder."'];
+        }
+        case 'outbreak': {
+          // OUTBREAK (journey crisis r8 2026-10-14): the sick row is the
+          // news. Symptom-gated (ev.desc), never the disease name. The sick
+          // villager themself gets the first-person variant.
+          const n = ev.n || 2, desc = ev.desc || 'a bad gut sickness';
+          if (ev.self) return [
+            '"I\'m down with it too — ' + desc + '. Wash your hands after, seriously."',
+            '"It\'s got me as well. ' + desc + ', can barely keep water down. Half the fire\'s got it."',
+          ];
+          return [
+            '"' + n + ' of us are down with ' + desc + '. Boil everything. I mean everything."',
+            '"Have you seen the sick row? ' + n + ' down with ' + desc + '. Nobody says it out loud but everyone\'s counting."',
+          ];
         }
         case 'tension':
           return ['"Everyone\'s choosing sides and pretending they aren\'t. I hate it."',
@@ -890,6 +961,9 @@
         defense: ['"I {habitI} when it gets loud in my head. The treeline gets loud in my head."',
           '"My hands stopped shaking two days ago. I\'m calling that healed."',
           '"I keep touching the spot where it grazed me. Like it\'ll explain itself."'],
+        outbreak: ['"I {habitI} between tending rounds. Someone has to keep the water boiled."',
+          '"I don\'t sleep much when the sick row\'s full. I {habitI} instead."',
+          '"Wash your hands. I say it ten times a day now. Wash your hands."'],
         betrayal: ['"I\'m watching. That\'s what I do now — I watch."',
           '"I {habitI} and count who shows up on time. Lists help."',
           '"Trust got re-priced. I\'m just reading the new numbers."'],
@@ -922,6 +996,9 @@
         defense: ['"Next time they come, somebody has to meet them. I\'d rather it be me than someone greener."',
           '"We lost the illusion that the treeline holds itself. That\'s a kind of progress."',
           '"Next time I go out there, I {habitI} first. Calms the aim."'],
+        outbreak: ['"We need whoever knows sickness tending full-time. That\'s the whole plan."',
+          '"Boiled water, clean hands, rest. It\'s not much of a plan but it\'s the plan."',
+          '"If it takes anyone else we bury them properly. That\'s the deal we made."'],
         betrayal: ['"Either it gets talked out or it festers. I know which one I\'d bet on."',
           '"A moot could clear it. If anyone has the stomach to call one."',
           '"It\'ll surface. Things like that always surface — usually at the worst hour."'],
@@ -954,6 +1031,9 @@
         defense: ['"My part? I was at the door. I\'ll be at the door again."',
           '"I stand where I stood. That\'s the whole of my plan."',
           '"Someone has to show the new folks where the door IS. That\'s me now, I guess."'],
+        outbreak: ['"My part? I carry water to the sick row. Someone has to."',
+          '"I {habitI} and check on them at every bell. It\'s not nothing."',
+          '"I sit with them when the fever\'s bad. Company counts as medicine. Almost."'],
         betrayal: ['"I keep my word. Someone around here has to."',
           '"My part? I don\'t gossip about it. That\'s harder than it sounds."',
           '"I give them exactly what they give me. No more loans."'],

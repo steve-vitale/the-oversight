@@ -1088,17 +1088,27 @@
       try {
         const n = this.npcNeeds(vid) || {};
         const health = (v.health || {})[vid];
+        const sickRec = ((v.sick || {})[vid] || {});
+        const sickActive = (sickRec.daysLeft || 0) > 0;
+        const sickSev = sickRec.severity || 0;
         // Acute personal needs first — the body doesn't wait.
-        if ((n.hunger || 0) > 70) need = { kind: 'food_share', urgency: 4, hunger: n.hunger };
+        // SICKNESS OUTRANKS HUNGER (journey crisis r8 2026-10-14): sev2+
+        // sickness is the emergency — sense-tested, hungry+sick villagers
+        // asked for food and never mentioned the gut rot doubling them over
+        // (the sick rest by the fire, so hunger climbs past 70 and the old
+        // order buried sick_help every time). Mild (sev1) sickness still
+        // waits behind real hunger — that's human too.
+        // Mundane v.sick records only — alien quirks are never cured by
+        // earthly help, so no promise the engine can't keep (canon:
+        // docs/DISEASES.md, two pools never mix).
+        if (sickActive && sickSev >= 2) need = { kind: 'sick_help', urgency: 4, sickName: sickRec.name || 'sick' };
+        else if ((n.hunger || 0) > 70) need = { kind: 'food_share', urgency: 4, hunger: n.hunger };
         else if (health != null && health < 60) need = { kind: 'heal_help', urgency: 4, health };
         // SICKNESS (crisis leg 2026-10-11): a sick villager's body is the
         // emergency — the want system had no disease need, so the sick
         // talked about anything BUT being sick (sense-tested: a gutrot
         // sufferer opened with small talk and never mentioned it).
-        // Mundane v.sick records only — alien quirks are never cured by
-        // earthly help, so no promise the engine can't keep (canon:
-        // docs/DISEASES.md, two pools never mix).
-        else if ((((v.sick || {})[vid] || {}).daysLeft || 0) > 0) need = { kind: 'sick_help', urgency: 4, sickName: ((v.sick || {})[vid] || {}).name || 'sick' };
+        else if (sickActive) need = { kind: 'sick_help', urgency: 4, sickName: sickRec.name || 'sick' };
         else if ((n.energy || 0) < 30) need = { kind: 'watch_shift', urgency: 3, energy: n.energy };
         else if ((n.fear || 0) > 70) need = { kind: 'stay_close', urgency: 3, fear: n.fear };
       } catch (e) {}
@@ -1548,6 +1558,12 @@
             if (ev.kind === 'mourning' && ev.name) {
               mark('event');
               return `"Nobody's saying it out loud, but everyone's thinking about ${ev.name}. The quiet ones worst."`;
+            }
+            // OUTBREAK (journey crisis r8 2026-10-14): the sick row is news —
+            // symptom-gated (ev.desc), never the disease name.
+            if (ev.kind === 'outbreak' && ev.desc) {
+              mark('event');
+              return `"${ev.n || 'Several'} of us are down with ${ev.desc}. Boil the water twice — I'm telling everyone."`;
             }
             const EV_NEWS = {
               naming: '"There\'s a real argument going about what to call that thing. People are heated."',

@@ -4580,6 +4580,17 @@
                 (wf.state === 'moot' || wf.state === 'thanked' ||
                  wf.state === 'acknowledged' || wf.state === 'fulfilled')) {
               wline = '"No, really — it\'s handled. Thanks for asking, though."';
+            } else if (c.want && c.want.def && (c.want.stage || 0) >= 1 && (c.want.stage || 0) < 3 &&
+                       typeof c.want.def.engageBeat === 'function') {
+              // WANT RESUME (journey crisis r8 2026-10-14): the want is already
+              // stated (stage 1-2) — re-asking ENGAGES its beat (the news, the
+              // favor's stakes) instead of re-running the opener. Transcript-
+              // verified: three "you'll never guess" hooks, zero news
+              // delivered, the hook promise violated. Matches the want arc
+              // (0 selected -> 1 surfaced -> 2 engaged, code: convoWantEngage)
+              // and the t==='want' thread continuation, which already routes
+              // to engageBeat.
+              wline = c.want.def.engageBeat.call(this, vid);
             } else {
               const opener = this.convoWantOpener ? this.convoWantOpener(vid, c.want) : null;
               wline = opener && opener.line;
