@@ -88,3 +88,4 @@ becoming.
 | Keepsake growth | starting now | Accessory-slot keepsakes, worn-only bond, levels 0–3, pool actions, kin clues |
 | God-path redesign | after tracks | Every magic ability gets `path` and `subclass`; capstones; ascension; subclasses filled per path |
 | Table endings | after the redesign | Table path × class/god × light/dark |
+| World regions | engine now; content by Muse in waves | 20 world regions, random landing, origin vs landing knowledge, kin across the world, expeditions at the global stage (`docs/WORLD-REGIONS.md`) |
