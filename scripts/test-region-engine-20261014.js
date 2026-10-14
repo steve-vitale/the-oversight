@@ -114,7 +114,22 @@ async function main() {
   const shipped = validateRegions(data);
   ok(shipped.errors.length === 0, 'shipped regions.json validates', shipped.errors.slice(0, 3).join(' | '));
   ok(data.regions.length === 20 && data.regions.filter(r => r.status === 'playable').length === 1, '20 regions, 1 playable');
-  const withFx = Object.assign({}, data, { regions: [...data.regions, fixtureRegion()], biomes: [...data.biomes, fixtureBiome()] });
+  // origins-world 2026-10-14: a region now also needs >=2 picker origins, a
+  // lifeseed sub-area and a name culture (validate-regions origin coverage),
+  // so the fixture brings its own — injected into copies, never shipped.
+  const fxLabels = ['Fixtureville North, Fixtureland', 'Fixtureville South, Fixtureland'];
+  const withFx = Object.assign({}, data, {
+    regions: [...data.regions, fixtureRegion()], biomes: [...data.biomes, fixtureBiome()],
+    originPicker: Object.assign({}, data.originPicker, { regions: [...data.originPicker.regions,
+      { name: 'Fixture', origins: fxLabels.map(label => ({ flag: 'x', label })) }] }),
+    characterGen: Object.assign({}, data.characterGen, { originKeywords: Object.assign({}, data.characterGen.originKeywords,
+      { fixtureland: ['fixtureland', FX] }) }),
+    lifeseeds: Object.assign({}, data.lifeseeds, { regions: [...data.lifeseeds.regions,
+      { id: 'fx_home', worldRegion: FX, label: 'the fixture', land: 'scrub', matchTags: ['fixtureland'], origins: fxLabels,
+        towns: ['Fxa', 'Fxb', 'Fxc', 'Fxd'], workplaces: ['the mill', 'the shop', 'the depot'] }] }),
+    nameCultures: Object.assign({}, data.nameCultures, { originToCulture: Object.assign({}, data.nameCultures.originToCulture,
+      { [fxLabels[0]]: 'american', [fxLabels[1]]: 'american' }) }),
+  });
   const fxRes = validateRegions(withFx);
   ok(fxRes.errors.length === 0, 'fixture region validates as playable', fxRes.errors.slice(0, 3).join(' | '));
   const broken = fixtureRegion();
@@ -130,11 +145,12 @@ async function main() {
   console.log('\n[R3] every originPicker label resolves to a region');
   const labels = [];
   Game.data.originPicker.regions.forEach(c => c.origins.forEach(o => labels.push(o.label)));
-  ok(labels.length === 47, '47 picker labels', 'got ' + labels.length);
+  // 47 -> 69 (origins-world 2026-10-14: every world region has >=2 picker origins)
+  ok(labels.length === 69, '69 picker labels', 'got ' + labels.length);
   const unmapped = labels.filter(l => !(Game.parseOrigin(l).regions || []).length);
-  ok(unmapped.length === 0, 'all 47 labels map to a region', unmapped.join(', '));
+  ok(unmapped.length === 0, 'all 69 labels map to a region', unmapped.join(', '));
   const untagged = labels.filter(l => !Game.parseOrigin(l).tags.length);
-  ok(untagged.length === 0, 'all 47 labels carry tags', untagged.join(', '));
+  ok(untagged.length === 0, 'all 69 labels carry tags', untagged.join(', '));
   const expect = {
     'Chicago, Illinois': 'na_eastern_woodlands', 'Portland, Oregon': 'na_boreal_pacific', 'Tucson, Arizona': 'na_arid',
     'Caracas, Venezuela': 'mesoamerica_caribbean', 'La Paz, Bolivia': 'sa_andes', 'Montevideo, Uruguay': 'sa_pampas_patagonia',
@@ -150,7 +166,9 @@ async function main() {
   const tier = (l, land) => Game.familiarityTier(Game.parseOrigin(l).tags, land);
   ok(tier('Columbus, Ohio', 'na_eastern_woodlands') === 'local', 'Columbus in the eastern woodlands: local');
   ok(tier('rural Vermont', 'na_eastern_woodlands') === 'local', 'Vermont in the eastern woodlands: local');
-  ok(tier('Portland, Oregon', 'na_eastern_woodlands') === 'visitor', 'Portland in the eastern woodlands: visitor (same climate family)');
+  // origins-world 2026-10-14: the finer ladder puts bordering regions (regions.json
+  // neighbors) above same-climate visitors. Portland's region borders the woodlands.
+  ok(tier('Portland, Oregon', 'na_eastern_woodlands') === 'neighbor', 'Portland in the eastern woodlands: neighbor (bordering region)');
   ok(tier('Berlin, Germany', 'na_eastern_woodlands') === 'visitor', 'Berlin in the eastern woodlands: visitor');
   ok(tier('Lagos, Nigeria', 'na_eastern_woodlands') === 'stranger', 'Lagos in the eastern woodlands: stranger');
   ok(tier('Berlin, Germany', 'eu_temperate') === 'local', 'Berlin in temperate Europe: local');

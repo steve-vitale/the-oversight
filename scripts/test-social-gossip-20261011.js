@@ -52,12 +52,22 @@ const { loadGame, setupGame } = require('./sim-harness');
   // Drive spread until we collect fragment lines, then check tail variety.
   lines.length = 0;
   v.gossip = [];
+  // Pin talkative tellers: prickly/withdrawn villagers pass stories on at
+  // 12%, so whether 40 passes yield overheard fragments was roster luck
+  // (origins-world 2026-10-14 rerolled the cast). Background survivors
+  // read 'steady' by default; generated ones carry a drawn temperament.
+  for (const id of roster.slice(0, 4)) { const rec = (Game.data.villagers || []).find(x => x.id === id); if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'warm'; } }
   v.gossip.push({
     action: 'theft', dims: { honest: -15, generous: -10, who: roster[4] },
     heard: roster.slice(0, 4), distortion: 5, day: Game.state.scholar.day,
     partKey: 'proof2', noTrust: true,
   });
   for (let p = 0; p < 40 && lines.filter(l => l.includes('fragments by the fire')).length < 6; p++) {
+    // a story the whole roster has heard can't be overheard again; retell it
+    // from the first four (fragments fire ~13% per retelling, so one pass of
+    // 7 listeners often yields none — roster luck decided it before).
+    const g0 = v.gossip[0];
+    if (g0 && g0.heard.length >= roster.length) g0.heard = roster.slice(0, 4);
     try { Game.spreadGossip(); } catch (e) {}
   }
   const frags = lines.filter(l => l.includes('fragments by the fire'));

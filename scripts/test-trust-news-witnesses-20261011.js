@@ -98,7 +98,11 @@ const { loadGame, setupGame } = require('./sim-harness');
   ok('departure news distorts as it travels', g0 && g0.distortion >= 1, 'distortion=' + (g0 && g0.distortion));
 
   v.gossip = [];
-  try { Game.startExpedition(roster[5], 4, 4, true); Game.expeditionReturn(roster[5], true); } catch (e) {}
+  // a homebody (range 0) never leaves; which roster slot holds one is luck
+  // (origins-world 2026-10-14 rerolled the cast). Take the first traveller
+  // after the ones used above.
+  const rv5 = roster.slice(5).find(id => Game.npcMaxDist(id) >= 1) || roster[5];
+  try { Game.startExpedition(rv5, 4, 4, true); Game.expeditionReturn(rv5, true); } catch (e) {}
   const g1 = v.gossip.find(g => g.action === 'return');
   for (let p = 0; p < 12; p++) { try { Game.spreadGossip(); } catch (e) {} }
   ok('return news spreads (4+ hearers in 12 parts)', g1 && g1.heard.length >= 4, 'heard=' + (g1 && g1.heard.length));

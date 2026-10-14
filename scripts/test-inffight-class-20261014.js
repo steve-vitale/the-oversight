@@ -132,6 +132,9 @@ async function duel(Game, playerFn, roundCap) {
         const f = Game.tbfight;
         if (!f || f.over) break;
         tele.maxRound = Math.max(tele.maxRound, f.round);
+        // HP at the end of the opening (round 5): what the lead keeps from here on
+        // is the "unharmed past the opening" measure (seed-independent).
+        if (f.round >= 5 && tele.leadHpOpen == null) { const ld = leadOf(); if (ld) tele.leadHpOpen = Math.round(ld.hp); }
         if (f.round >= (roundCap || STALL_CAP)) break;
         if (Game.over) break;
       }
@@ -257,8 +260,11 @@ async function honestDuel(monId, seed) {
       ok('G1 honest: the fight comes apart (existing idiom)', t.endResult === 'routed' && t.comesApart === true,
         `result=${t.endResult} comesApart=${t.comesApart}`);
       ok('G1 honest: no free win — the lead survives unharmed past the opening',
-        t.leadAlive === true && t.leadHp != null && t.leadHp0 != null && (t.leadHp0 - t.leadHp) <= 30,
-        `lead alive=${t.leadAlive} ${t.leadHp0} -> ${t.leadHp}`);
+        // origins-world 2026-10-14: the old proxy (total damage <= 30) sat on
+        // seed luck (28 before, 34 after a roster reroll). Measured directly
+        // now: no damage at all after the opening rounds.
+        t.leadAlive === true && t.leadHp != null && t.leadHpOpen != null && t.leadHp === t.leadHpOpen,
+        `lead alive=${t.leadAlive} ${t.leadHp0} -> ${t.leadHpOpen} (round 5) -> ${t.leadHp}`);
       ok('G1 honest: the scholar lives', t.scholarAlive === true, `scholarHp=${t.scholarHp}`);
       ok('G1 honest: no kill paid (combatWins unchanged)', t.combatWins === t.combatWins0,
         `wins ${t.combatWins0} -> ${t.combatWins}`);

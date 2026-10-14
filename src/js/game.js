@@ -168,6 +168,16 @@
   // region-less harness belongs to. Today's whole environment lives in
   // src/data/regions.json under this id.
   const DEFAULT_REGION_ID = 'na_eastern_woodlands';
+  // Familiarity ladder (origins-world 2026-10-14). Effects are data:
+  // characterGen.familiarity.tiers; these defaults cover harnesses without it.
+  const FAMILIARITY_ORDER = ['native', 'local', 'neighbor', 'visitor', 'stranger'];
+  const FAMILIARITY_DEFAULTS = {
+    native: { plants: 4, plantLevel: 1, animals: 'pool', animalLevel: 0, say: '' },
+    local: { plants: 3, plantLevel: 1, animals: 'pool', animalLevel: 0, say: '' },
+    neighbor: { plants: 2, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+    visitor: { plants: 2, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+    stranger: { plants: 1, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+  };
   // scavenged goods (ruins) — finite. the houses feed you until they don't.
   // REGIONS: the live pool is regions.json people.scavenge (regionScavenge);
   // this copy is the fallback for harnesses that load no regions.json and
@@ -341,6 +351,14 @@
       const set = new Set(fa.animals);
       for (const id of (fa.add || [])) set.add(id);
       for (const id of (fa.remove || [])) set.delete(id);
+      // LANDING VARIANT FAUNA (origins-world 2026-10-14): fauna.variants[<landing
+      // id>] adds/removes animals for that landing only (the cypress slough has
+      // alligators; the eastern woodlands at large do not).
+      const vr = (fa.variants || {})[(this.state && this.state.startLocation) || ''];
+      if (vr) {
+        for (const id of (vr.add || [])) set.add(id);
+        for (const id of (vr.remove || [])) set.delete(id);
+      }
       return set;
     },
     // isRegionPredator: the land's apex predator — answers a missed strike
@@ -352,7 +370,9 @@
     // regionParasiteRisk(meatId): {id, p, from} when this meat carries a
     // parasite here (food.js trichinosis), else null.
     regionParasiteRisk(meatId) {
-      const ps = this.regionFauna().parasites || { trichinosis: { black_bear: 0.35, wild_boar: 0.25, javelina: 0.25 } };
+      // Data-driven (regions.json fauna.parasites). The literal table is only
+      // for harnesses that load no regions.json.
+      const ps = this.regionFauna().parasites || (this.activeRegion() ? {} : { trichinosis: { black_bear: 0.35, wild_boar: 0.25 } });
       for (const pid of Object.keys(ps)) {
         const p = ps[pid] && ps[pid][meatId];
         if (p != null) return { id: pid, p, from: meatId };
@@ -481,26 +501,49 @@
       const tl = new Set((tags || []).map(t => String(t).toLowerCase()));
       const scored = [];
       rs.forEach((r, i) => {
-        const n = (r.originTags || []).filter(t => tl.has(String(t).toLowerCase())).length;
+        let n = (r.originTags || []).filter(t => tl.has(String(t).toLowerCase())).length;
+        // An origin can name its region outright: every picker city's
+        // originKeywords carry its region id (origins-world 2026-10-14), so
+        // Houston is the Gulf Coast woodlands, not a plains/desert tie.
+        if (tl.has(String(r.id).toLowerCase())) n += 100;
         if (n) scored.push({ id: r.id, n, i });
       });
       scored.sort((a, b) => (b.n - a.n) || (a.i - b.i));
       return scored.map(x => x.id);
     },
 
-    // familiarityTier(tags[, landingId]): origin region vs landing region
-    // (docs/WORLD-REGIONS.md §4 #13). Same region = local; same climateFamily
-    // = visitor; anything else (or an origin no region claims) = stranger.
-    // Sets how many plants each roster member knows at the start (3/2/1).
+    // familiarityTier(tags[, landingId[, originLabel]]): origin vs landing
+    // (docs/WORLD-REGIONS.md §4 #13; origins-world 2026-10-14). Best first:
+    //   native   = your lifeseed sub-area lists this landing variant as home
+    //              ground (lifeseeds.json regions[].landings; New Orleans ->
+    //              the cypress slough). Needs the active landing.
+    //   local    = same world region
+    //   neighbor = the two regions border (regions.json neighbors, either side)
+    //   visitor  = same climateFamily
+    //   stranger = anything else, or an origin no region claims
+    // What each tier knows lives in characterGen.familiarity (familiarityTierDef).
     // Without regions.json it falls back to the old plant-tag overlap rule.
-    familiarityTier(tags, landingId) {
+    familiarityTier(tags, landingId, originLabel) {
       const land = landingId ? this.regionDef(landingId) : this.activeRegion();
+      const order = ((((this.data || {}).characterGen || {}).familiarity || {}).order) || FAMILIARITY_ORDER;
+      const pickTier = (want) => {
+        // a tier the data leaves out falls to the next one down
+        for (let i = FAMILIARITY_ORDER.indexOf(want); i < FAMILIARITY_ORDER.length; i++) {
+          if (order.includes(FAMILIARITY_ORDER[i])) return FAMILIARITY_ORDER[i];
+        }
+        return 'stranger';
+      };
       if (land) {
         const home = this.originRegionsForTags(tags)[0];
-        if (!home) return 'stranger';
-        if (home === land.id) return 'local';
+        if (!home) return pickTier('stranger');
+        if (home === land.id) {
+          // native needs THIS landing (an explicit landingId asks about the
+          // region in general, so it stops at local).
+          return pickTier(!landingId && this.isNativeLanding(tags, originLabel, land.id) ? 'native' : 'local');
+        }
         const hd = this.regionDef(home);
-        return (hd && hd.climateFamily && hd.climateFamily === land.climateFamily) ? 'visitor' : 'stranger';
+        if ((land.neighbors || []).includes(home) || (hd && (hd.neighbors || []).includes(land.id))) return pickTier('neighbor');
+        return pickTier((hd && hd.climateFamily && hd.climateFamily === land.climateFamily) ? 'visitor' : 'stranger');
       }
       const plants = this.data.plants || [];
       const tl = (tags || []).map(t => String(t).toLowerCase());
@@ -512,6 +555,27 @@
       }
       const frac = known / plants.length;
       return frac > 0.4 ? 'local' : frac >= 0.15 ? 'visitor' : 'stranger';
+    },
+    // isNativeLanding: the origin's lifeseed sub-area (lifeseed.js) belongs to
+    // this world region AND lists the current landing variant as home ground.
+    isNativeLanding(tags, originLabel, regionId) {
+      try {
+        if (typeof this.lifeseedRegion !== 'function') return false;
+        const loc = this.state && this.state.startLocation;
+        if (!loc) return false;
+        const ls = this.lifeseedRegion({ originTags: tags || [], homeRegion: originLabel || '' });
+        return !!(ls && ls.worldRegion === regionId && (ls.landings || []).includes(loc));
+      } catch (e) {
+        console.warn('[familiarity] native check failed: ' + (e && e.message));
+        return false;
+      }
+    },
+    // familiarityTierDef(tier): what that tier knows at the start, from
+    // characterGen.familiarity.tiers (defaults = the old 3/2/1 plant counts).
+    familiarityTierDef(tier) {
+      const tiers = ((((this.data || {}).characterGen || {}).familiarity || {}).tiers) || {};
+      const dflt = FAMILIARITY_DEFAULTS[tier] || FAMILIARITY_DEFAULTS.stranger;
+      return Object.assign({}, dflt, tiers[tier] || {});
     },
 
     // heritageFor: which fictionalized people-group does this origin read as?
@@ -610,10 +674,22 @@
       }
       const culture = cultures[cultureId];
       if (culture && culture.first && culture.last) {
-        return { name: pick(culture.first) + ' ' + pick(culture.last), cultureId };
+        const first = pick(culture.first);
+        let last = pick(culture.last);
+        // nameCultures femSurname 'slavic': Anna Ivanova, not Anna Ivanov.
+        if (culture.femSurname === 'slavic' && (culture.fem || []).includes(first)) last = this.feminineSurname(last);
+        return { name: first + ' ' + last, cultureId };
       }
       // fallback: legacy flat lists
       return { name: pick(cg.firstNames || ['Sam']) + ' ' + pick(cg.lastNames || ['Reyes']), cultureId };
+    },
+
+    // feminineSurname: the Slavic feminine form (-ov/-ev/-in -> +a, -sky -> -skaya).
+    feminineSurname(last) {
+      const l = String(last || '');
+      if (/(ov|ev|in|yn)$/.test(l)) return l + 'a';
+      if (/sky$/.test(l)) return l.slice(0, -1) + 'aya';
+      return l;
     },
 
     // NAME_GENDER: first names we're confident about. Curated, not guessed —
@@ -673,6 +749,10 @@
     guessNameGender(first, cultureId) {
       const key = String(first || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (this.NAME_GENDER[key]) return this.NAME_GENDER[key];
+      // Cultures that list their female first names (nameCultures fem): those
+      // read f, the culture's other first names read m. No guessing.
+      const fg = this.cultureNameGender(key, cultureId);
+      if (fg) return fg;
       const n = key;
       const ROMANCE = ['mexican', 'argentine', 'colombian', 'peruvian', 'venezuelan', 'brazilian', 'filipino'];
       const SLAVIC = ['polish', 'ukrainian'];
@@ -699,6 +779,31 @@
         if (n.endsWith('a')) return 'f';
         if (/(jun|hoon|woo|seok|hyun)$/.test(n)) return 'm';
         return null;
+      }
+      return null;
+    },
+
+    // cultureNameGender(key, cultureId): 'f'|'m' from a culture's fem list
+    // (normalized key), searching every such culture when cultureId is null.
+    cultureNameGender(key, cultureId) {
+      const cultures = ((this.data || {}).nameCultures || {}).cultures || {};
+      if (!this._cultureGenderIdx || this._cultureGenderSrc !== cultures) {
+        const norm = n => String(n).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        this._cultureGenderIdx = {};
+        for (const [cid, c] of Object.entries(cultures)) {
+          if (!c || !Array.isArray(c.fem)) continue;
+          this._cultureGenderIdx[cid] = { fem: new Set(c.fem.map(norm)), all: new Set((c.first || []).map(norm)) };
+        }
+        this._cultureGenderSrc = cultures;
+      }
+      const look = (ix) => ix.fem.has(key) ? 'f' : ix.all.has(key) ? 'm' : null;
+      if (cultureId) {
+        const ix = this._cultureGenderIdx[cultureId];
+        return ix ? look(ix) : null;
+      }
+      for (const ix of Object.values(this._cultureGenderIdx)) {
+        const g = look(ix);
+        if (g) return g;
       }
       return null;
     },
@@ -809,6 +914,31 @@
         }
       }
       return { native, levels, reasons };
+    },
+
+    // npcOriginPick: where a starting NPC is from. Region first (every world
+    // region with a listed origin equally likely), then a city in it, so a
+    // village is plausibly global instead of weighted to whichever region
+    // lists the most cities (origins-world 2026-10-14). Pool: sampleOrigins
+    // (every picker city). ONE draw, the old uniform pick's RNG budget: the
+    // integer part picks the region, the fraction the city inside it.
+    npcOriginPick() {
+      const list = ((this.data.characterGen || {}).sampleOrigins) || [];
+      if (!list.length) return 'somewhere';
+      if (!this._npcOriginGroups || this._npcOriginGroupsSrc !== list) {
+        const groups = {};
+        for (const o of list) {
+          const r = this.originRegionsForTags(this.parseOrigin(o).tags)[0] || '_unclaimed';
+          (groups[r] = groups[r] || []).push(o);
+        }
+        this._npcOriginGroups = Object.keys(groups).map(k => groups[k]);
+        this._npcOriginGroupsSrc = list;
+      }
+      const n = this._npcOriginGroups.length;
+      const x = Math.random() * n;
+      const gi = Math.min(n - 1, Math.floor(x));
+      const g = this._npcOriginGroups[gi];
+      return g[Math.min(g.length - 1, Math.floor((x - gi) * g.length))];
     },
 
     // genCharacter: one full person. The origin is authoritative — name, native
@@ -1459,7 +1589,7 @@
       // is a new cast — the dead stay buried in their own run.
       for (const v of (this.data.villagers || [])) { if (v.dead) delete v.dead; }
       for (const v of (this.data.background_survivors || [])) { if (v.dead) delete v.dead; }
-      const origin = playerOrigin || pick(cg.sampleOrigins || ['somewhere']);
+      const origin = playerOrigin || this.npcOriginPick();
       const usedNames = new Set();
       const usedOccs = new Set();
       // game-level dedup registries: names + backstory variants shouldn't repeat
@@ -1489,7 +1619,7 @@
         c0.languages.levels.english = 2;
       }
       for (let i = 0; i < 2; i++) {
-        const npcOrigin = pick(cg.sampleOrigins || ['somewhere']);
+        const npcOrigin = this.npcOriginPick();
         chars.push(this.genCharacter({ origin: npcOrigin, forceCultureMatch: false, candidate: false, usedNames, usedOccs }));
       }
       for (const c of chars) this.data.villagers.push(c);
@@ -2161,11 +2291,21 @@
           const person = (this.data.background_survivors || []).find(s => s.id === id) || {};
           const lastName = String(person.name || '').split(' ').slice(-1)[0].toLowerCase();
           const matches = (lastToCultures[lastName] || []).filter(c => c !== 'american');
-          const bHome = matches.length
-            ? matches[Math.floor(Math.random() * matches.length)]
-            : ((lastToCultures[lastName] || [])[0] || 'american');
-          const bHeritage = (bHome !== 'american' && Math.random() < 0.25 && cids.length)
-            ? cids[Math.floor(Math.random() * cids.length)] : null;
+          // HOME FIRST (origins-world 2026-10-14): a survivor from Shanghai
+          // grew up speaking Mandarin whatever the surname; a surname from
+          // elsewhere is the family's heritage. Unknown home -> surname rule.
+          const homeCult = this.cultureForOrigin(person.homeRegion || person.origin);
+          let bHome, bHeritage;
+          if (homeCult) {
+            bHome = homeCult;
+            bHeritage = matches.includes(homeCult) ? null : (matches[0] || null);
+          } else {
+            bHome = matches.length
+              ? matches[Math.floor(Math.random() * matches.length)]
+              : ((lastToCultures[lastName] || [])[0] || 'american');
+            bHeritage = (bHome !== 'american' && Math.random() < 0.25 && cids.length)
+              ? cids[Math.floor(Math.random() * cids.length)] : null;
+          }
           const bOcc = (cg.occupations || []).find(o => o.name === String(person.formerOccupation || '').toLowerCase()) || null;
           this.state.village.bgLangs[id] = this.genCultureLanguages(bHome, bOcc, {
             heritageCultureId: bHeritage === bHome ? null : bHeritage, age: person.age || 35,
@@ -2177,17 +2317,8 @@
       // an Okonkwo from Nigeria. Coherent people, coherent origins.
       this.state.village.bgHome = {};
       {
-        const culturePlaces = {
-          american: 'America', argentine: 'Argentina', bangladeshi: 'Bangladesh',
-          brazilian: 'Brazil', colombian: 'Colombia', egyptian: 'Egypt',
-          ethiopian: 'Ethiopia', filipino: 'the Philippines', german: 'Germany',
-          ghanaian: 'Ghana', indian: 'India', indonesian: 'Indonesia',
-          irish: 'Ireland', japanese: 'Japan', kenyan: 'Kenya', korean: 'Korea',
-          mexican: 'Mexico', moroccan: 'Morocco', newzealander: 'New Zealand',
-          nigerian: 'Nigeria', norwegian: 'Norway', peruvian: 'Peru',
-          polish: 'Poland', thai: 'Thailand', turkish: 'Turkey',
-          ukrainian: 'Ukraine', venezuelan: 'Venezuela', vietnamese: 'Vietnam',
-        };
+        // nameCultures.culturePlaces (data since origins-world 2026-10-14).
+        const culturePlaces = (this.data.nameCultures || {}).culturePlaces || {};
         const nc2 = this.data.nameCultures || {};
         const cultures2 = nc2.cultures || {};
         const lastToCultures2 = {};
@@ -2395,12 +2526,13 @@
         }
         return [...shuf(local), ...shuf(other)];
       };
-      const tierCount = { local: 3, visitor: 2, stranger: 1 };
+      // How many: the familiarity tier (native/local/neighbor/visitor/stranger,
+      // characterGen.familiarity.tiers[].plants).
       for (const rid of this.state.village.roster) {
         const rc = (this.state.village.rosterChars || {})[rid];
         const tags = rc ? (rc.originTags || []) : [];
-        const tier = this.familiarityTier(tags);
-        this.state.village.familiar[rid] = plantsByFamiliarity(tags).slice(0, tierCount[tier] || 1);
+        const tier = this.familiarityTier(tags, null, rc ? rc.homeRegion : null);
+        this.state.village.familiar[rid] = plantsByFamiliarity(tags).slice(0, this.familiarityTierDef(tier).plants || 1);
       }
       const scholar = S.state.newScholar(this.villagerId);
       // REGION KNOWLEDGE (Steve 2026-10-07): the scholar carries the player's
@@ -2511,14 +2643,23 @@
       }
       // YOUR starting knowledge: what your old life taught you — if this land resembles it.
       // Arizona -> Georgia creek: you start knowing almost nothing. That's the point.
+      // How well: the tier's plantLevel (a native knows home plants past the name).
+      const famTier = this.familiarityTier(parsed.tags, null, parsed.raw);
+      const famDef = this.familiarityTierDef(famTier);
+      this.state.scholar.famTier = famTier; // canShow('animal') reads it
       for (const pid of this.plantsKnownBy(this.villagerId)) {
-        this.state.codex.plants[pid] = { identifiedDay: 0, level: 1, harvests: 0, tastings: 0 };
+        this.state.codex.plants[pid] = { identifiedDay: 0, level: famDef.plantLevel || 1, harvests: 0, tastings: 0 };
         this.state.codex.encounters = this.state.codex.encounters || {};
         this.state.codex.encounters[pid] = 99;
       }
-      const famTier = this.familiarityTier(parsed.tags);
-      if (famTier === 'stranger') this.say('Nothing here looks like home. You know none of these plants. Learn fast.');
-      else if (famTier === 'visitor') this.say('Some of this country feels familiar. Not enough.');
+      // Home animals: a native has hunted and eaten this land's common game.
+      if ((famDef.animalLevel || 0) > 0) {
+        const pool = this.regionAnimalPool();
+        for (const a of (this.data.animals || [])) {
+          if (a.common && (!pool || pool.has(a.id))) this._noteAnimalDepth(a.id, famDef.animalLevel, { type: 'home', day: 0 });
+        }
+      }
+      if (famDef.say) this.say(famDef.say);
       // Hunters start knowing the snare. Others must learn.
       if (occ.knowsSnare) {
         this.state.codex.recipes['snare'] = { level: 3 };
@@ -4853,7 +4994,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           arc.state = 'leave';
           const lines = [
             `${d} packs a bag at dusk — their own things, nothing else. "I won't work under you. But I won't fight you either. So I'm going." They walk past the fire line and don't look back.`,
-            `"This was never going to work," ${d} says, shouldering a pack. "You run your village. I'll run mine — somewhere else." Nobody stops them. Nobody should.`,
+            `"This was never going to work," ${d} says, shouldering a pack — their own things, nothing else. "You run your village. I'll run mine — somewhere else." Nobody stops them. Nobody should.`,
           ];
           this.say(this.leadPick('contendLeave', cid, lines));
           // The village learns it like they learn everything — someone saw.
@@ -9004,8 +9145,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const r of recipes) {
         village.codex.recipes[r] = { known: true, learnedDay: 0 };
       }
-      // ANIMAL LORE: they know the animals in their territory
+      // ANIMAL LORE: they know the animals in their territory (this land's
+      // fauna, regions.json — origins-world 2026-10-14)
+      const lorePool = this.regionAnimalPool ? this.regionAnimalPool() : null;
       const animals = (this.data.animals || []).filter(a => {
+        if (lorePool && !lorePool.has(a.id)) return false;
         const biomes = (a.biomes || []).join(' ').toLowerCase();
         if (profile.focus === 'fisher') return biomes.includes('water') || biomes.includes('creek');
         if (profile.focus === 'farmer') return biomes.includes('meadow') || biomes.includes('field');
@@ -9180,8 +9324,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // empty while you're on it.
         if (!(x === this.map.px && y === this.map.py)) {
           const present = t.wildlife || {};
+          // only animals this land holds (regions.json fauna; origins-world
+          // 2026-10-14: before the eastern trim this let bison wander in).
+          const rpool = this.regionAnimalPool ? this.regionAnimalPool() : null;
           const cands = (this.data.animals || []).filter(ad =>
-            (ad.biomes || []).includes(t.type) && !(present[ad.id] > 0));
+            (ad.biomes || []).includes(t.type) && !(present[ad.id] > 0) && (!rpool || rpool.has(ad.id)));
           for (const cand of cands) {
             if (Math.random() < 0.03) {
               t.wildlife = t.wildlife || {};
@@ -36540,7 +36687,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // SUNBASKER: the bite lands with whatever charge SURVIVED the
             // windup — a mid-declare hit weakens it honestly.
             if (this.sunbaskerIs(m)) tg.dmg = this.sbBiteDmg(m);
-            let dmg = S.combat.roll(tg.dmg), missed = false;
+            // a tactic-only move (landlord's Jurisdiction Spread: no damage
+            // range) rolled undefined[0] and threw mid-turn; it deals none.
+            let dmg = Array.isArray(tg.dmg) ? S.combat.roll(tg.dmg) : (tg.dmg || 0), missed = false;
             // FLANK (party tactics 2026-10-10): packmates beside the target
             // hit harder. Computed at resolve — never stale. 0 for duels.
             const flankD = this.tbFlankBonus ? this.tbFlankBonus(m, t) : 0;
@@ -40098,7 +40247,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         (this._freshScratch = this._freshScratch || {});
       let used = store[key] || (store[key] = []);
       let avail = pool.filter(l => !used.includes(l));
-      if (!avail.length) { used = store[key] = []; avail = pool.slice(); }
+      if (!avail.length) {
+        // cycle reset: never open the new cycle with the line that closed
+        // the last one (an immediate verbatim repeat; test-social-gossip).
+        const last = used[used.length - 1];
+        used = store[key] = [];
+        avail = pool.length > 1 ? pool.filter(l => l !== last) : pool.slice();
+      }
       const pick = avail[Math.floor(Math.random() * avail.length)];
       used.push(pick);
       return pick;
@@ -41264,12 +41419,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try {
               const adef = (this.data.animals || []).find(a => a.id === id);
               if (adef && adef.common) {
+                // FAMILIARITY (origins-world 2026-10-14): the tier's animals
+                // mode (characterGen.familiarity): pool = every common animal
+                // of this land; continent = your continent's or your tags';
+                // overlap = your tags' only. Old saves (no famTier) = continent.
+                const ft = (s.scholar || {}).famTier;
+                const mode = ft ? this.familiarityTierDef(ft).animals : 'continent';
+                if (mode === 'pool') {
+                  const pool = this.regionAnimalPool();
+                  if (!pool || pool.has(id)) return true;
+                }
                 const tags = ((s.scholar || {}).originTags || []).map(t => String(t).toLowerCase());
                 const aregions = (adef.regions || ['north_america']).map(r => String(r).toLowerCase());
                 const overlap = tags.some(t => aregions.includes(t));
                 const isNorthAmerican = tags.includes('north_america') || tags.some(t =>
                   ['united states', 'usa', 'america', 'canada'].includes(t));
-                if (overlap || (isNorthAmerican && aregions.includes('north_america'))) return true;
+                if (overlap || (mode !== 'overlap' && isNorthAmerican && aregions.includes('north_america'))) return true;
               }
             } catch (e) {}
             return (((s.codex || {}).animalEncounters || {})[id] || 0) >= 3;

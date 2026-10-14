@@ -100,7 +100,7 @@
       "stockMult": 1
     },
     "fauna": {
-      "_note": "animals = every animals.json id, because today's initTileWildlife spawns all of them (bison, javelina and alligator included). Trimming the list is a CONTENT call and changes behaviour.",
+      "_note": "Real eastern-US species only (Steve 2026-10-14: trim approved). Western and plains animals live in their own regions (bison/pronghorn/prairie dog -> na_plains; javelina/roadrunner/gila monster -> na_arid; elk/spotted owl/moose/snowshoe hare -> na_boreal_pacific). variants: a landing variant (locations.json id) adds its own animals: alligator and nutria in the southern swamps, moose and snowshoe hare in the northern marsh and beaver country. Florida panther and Burmese python wait for a Florida (Everglades) landing.",
       "animals": [
         "cottontail_rabbit",
         "gray_squirrel",
@@ -128,22 +128,8 @@
         "american_crow",
         "bluegill",
         "gray_rat_snake",
-        "javelina",
-        "roadrunner",
-        "gila_monster",
-        "roosevelt_elk",
         "black_bear",
-        "spotted_owl",
-        "american_alligator",
-        "nutria",
         "cottonmouth",
-        "bison",
-        "pronghorn",
-        "prairie_dog",
-        "moose",
-        "snowshoe_hare",
-        "florida_panther",
-        "burmese_python",
         "american_mink",
         "big_brown_bat",
         "great_horned_owl",
@@ -161,13 +147,38 @@
       "parasites": {
         "trichinosis": {
           "black_bear": 0.35,
-          "wild_boar": 0.25,
-          "javelina": 0.25
+          "wild_boar": 0.25
         }
       },
       "density": 1,
       "add": [],
-      "remove": []
+      "remove": [],
+      "variants": {
+        "cypress_slough": {
+          "add": [
+            "american_alligator",
+            "nutria"
+          ]
+        },
+        "swamp_hummock": {
+          "add": [
+            "american_alligator",
+            "nutria"
+          ]
+        },
+        "alder_marsh": {
+          "add": [
+            "moose",
+            "snowshoe_hare"
+          ]
+        },
+        "beaver_pond": {
+          "add": [
+            "moose",
+            "snowshoe_hare"
+          ]
+        }
+      }
     },
     "flora": {
       "trees": [
@@ -994,13 +1005,53 @@
       "montana",
       "nebraska",
       "oklahoma",
-      "texas"
+      "texas",
+      "manitoba",
+      "saskatchewan",
+      "prairies"
     ],
     "neighbors": [
       "na_eastern_woodlands",
       "na_arid",
       "na_boreal_pacific"
     ],
+    "fauna": {
+      "_note": "Stub fauna (moved from the eastern woodlands 2026-10-14 plus shared plains species). Not playable yet.",
+      "animals": [
+        "bison",
+        "pronghorn",
+        "prairie_dog",
+        "cottontail_rabbit",
+        "white_tailed_deer",
+        "eastern_coyote",
+        "striped_skunk",
+        "wild_turkey",
+        "canada_goose",
+        "bobcat",
+        "raccoon",
+        "nine_banded_armadillo",
+        "wild_boar",
+        "muskrat",
+        "north_american_beaver",
+        "american_crow",
+        "great_horned_owl",
+        "box_turtle",
+        "snapping_turtle",
+        "bullfrog",
+        "crayfish",
+        "creek_chub",
+        "bluegill"
+      ],
+      "fish": [
+        "creek_chub",
+        "bluegill"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "wild_boar": 0.25
+        }
+      }
+    },
     "covers": "Great Plains, Prairies",
     "lifeseedRegions": [
       "great_plains",
@@ -1137,13 +1188,40 @@
       "new mexico",
       "southwest",
       "southwest_desert",
-      "utah"
+      "utah",
+      "nuevo leon",
+      "sonora",
+      "chihuahua"
     ],
     "neighbors": [
       "na_plains",
       "na_boreal_pacific",
       "mesoamerica_caribbean"
     ],
+    "fauna": {
+      "_note": "Stub fauna (moved from the eastern woodlands 2026-10-14 plus shared Southwest species). Not playable yet.",
+      "animals": [
+        "javelina",
+        "roadrunner",
+        "gila_monster",
+        "cottontail_rabbit",
+        "white_tailed_deer",
+        "gray_fox",
+        "striped_skunk",
+        "bobcat",
+        "raccoon",
+        "wild_turkey",
+        "black_bear",
+        "great_horned_owl",
+        "big_brown_bat"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "javelina": 0.25,
+          "black_bear": 0.35
+        }
+      }
+    },
     "covers": "US Southwest, N. Mexico",
     "lifeseedRegions": [
       "southwest",
@@ -1289,7 +1367,9 @@
       "oregon",
       "pacific_northwest",
       "pacific_nw",
-      "washington"
+      "washington",
+      "british columbia",
+      "yukon"
     ],
     "neighbors": [
       "na_plains",
@@ -1297,6 +1377,32 @@
       "na_eastern_woodlands",
       "eurasia_taiga"
     ],
+    "fauna": {
+      "_note": "Stub fauna (moved from the eastern woodlands 2026-10-14 plus shared northern species). Not playable yet.",
+      "animals": [
+        "roosevelt_elk",
+        "spotted_owl",
+        "moose",
+        "snowshoe_hare",
+        "black_bear",
+        "north_american_beaver",
+        "american_mink",
+        "muskrat",
+        "north_american_porcupine",
+        "canada_goose",
+        "great_horned_owl",
+        "raccoon",
+        "bobcat",
+        "big_brown_bat",
+        "crayfish",
+        "bullfrog"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "black_bear": 0.35
+        }
+      }
+    },
     "covers": "Pacific NW, Canada, Alaska",
     "lifeseedRegions": [
       "pacific_northwest",
@@ -1427,7 +1533,8 @@
       "cuba",
       "guatemala",
       "jamaica",
-      "haiti"
+      "haiti",
+      "caracas"
     ],
     "neighbors": [
       "na_arid",
@@ -1445,7 +1552,10 @@
     "hemisphere": "south",
     "status": "stub",
     "originTags": [
-      "brazil"
+      "brazil",
+      "amazonas",
+      "loreto",
+      "para"
     ],
     "neighbors": [
       "mesoamerica_caribbean",
@@ -1466,7 +1576,9 @@
       "colombia",
       "ecuador",
       "bolivia",
-      "chile"
+      "chile",
+      "quito",
+      "la paz"
     ],
     "neighbors": [
       "sa_amazon",
@@ -1547,7 +1659,9 @@
       "russia",
       "sweden",
       "norway",
-      "finland"
+      "finland",
+      "siberia",
+      "taiga"
     ],
     "neighbors": [
       "eu_temperate",
@@ -1571,7 +1685,8 @@
       "israel",
       "palestine",
       "saudi arabia",
-      "middle east"
+      "middle east",
+      "jordan"
     ],
     "neighbors": [
       "eu_mediterranean",
@@ -1616,7 +1731,8 @@
     "originTags": [
       "congo",
       "cameroon",
-      "gabon"
+      "gabon",
+      "kinshasa"
     ],
     "neighbors": [
       "africa_sahel_savanna",
@@ -1635,7 +1751,8 @@
       "south africa",
       "zimbabwe",
       "botswana",
-      "namibia"
+      "namibia",
+      "cape town"
     ],
     "neighbors": [
       "africa_congo",
@@ -1674,7 +1791,9 @@
       "mongolia",
       "tibet",
       "nepal",
-      "kazakhstan"
+      "kazakhstan",
+      "kyrgyzstan",
+      "steppe"
     ],
     "neighbors": [
       "eurasia_taiga",
@@ -1694,7 +1813,8 @@
     "originTags": [
       "china",
       "japan",
-      "korea"
+      "korea",
+      "sichuan"
     ],
     "neighbors": [
       "central_asia_highlands",

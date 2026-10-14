@@ -181,10 +181,17 @@ async function main() {
   console.log(`\n--- OPENER AFTER TEACHING (${vname(vidA)}) ---`);
   let sawTaughtRef = false, taughtRefLine = null, tries = 0;
   const openerThreads = {};
+  // Pin calm needs: a hungry student opens with ask_favor (a want outranks
+  // the taughtref opener by design). How hungry this seed's student is was
+  // roster luck (origins-world 2026-10-14 rerolled the cast).
+  Object.assign(Game.npcNeeds(vidA), { hunger: 0, fear: 0 });
   while (!sawTaughtRef && tries < 12) {
     tries++;
     const c = Game.convoGet(vidA);
     c.taughtMentioned = false; // allow re-roll for the proof loop
+    // an unresolved want from the previous try is planted as a seed and
+    // resurfaces first (by design); clear it so each try is a fresh opener.
+    if (Game.state.village.convoSeeds) delete Game.state.village.convoSeeds[vidA];
     const rr = Game.startConvo(vidA);
     openerThreads[rr && Game.convoGet(vidA).thread] = (openerThreads[rr && Game.convoGet(vidA).thread] || 0) + 1;
     if (Game.convoGet(vidA).thread === 'taughtref') {

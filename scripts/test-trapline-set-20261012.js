@@ -131,7 +131,10 @@ function stripKnives(Game) {
     const tile = wildTile(Game);
     giveMats(Game, { vine: 4, stick: 4, stone: 2 });
     const ctx = {};
-    workTrapline(Game, ctx);
+    // the craft itself can fail (a roll); T5 is about the catch chain, so the
+    // craft roll is pinned to succeed (which roll this seed drew changed with
+    // origins-world 2026-10-14's RNG shift).
+    { const rr = Math.random; Math.random = () => 0.01; try { workTrapline(Game, ctx); } finally { Math.random = rr; } }
     workTraplineSet(Game, ctx);
     ok('T5 trap set', (tile.traps || []).length === 1);
     tile.wildlife = { gray_squirrel: 50 };

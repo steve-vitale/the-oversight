@@ -22,6 +22,18 @@
 //   >=3 landing variants (locations.json), >=1 lifeseed region
 //   monsters (variants), if listed, exist in monsters.json
 // Also: every originPicker label resolves to a region (one origin vocabulary).
+// ORIGIN COVERAGE (origins-world 2026-10-14), every region:
+//   >=2 originPicker labels that resolve to it, a lifeseed sub-area
+//   (lifeseeds.json regions[].worldRegion), and a name culture (one of its
+//   picker labels maps through nameCultures.originToCulture).
+//   Every picker label maps to exactly ONE region: its tags carry exactly one
+//   region id (originKeywords), that region scores best with no tie, and
+//   exactly one lifeseed sub-area of that region lists the label (origins[]).
+//   Lifeseed sub-areas: worldRegion exists; landings are that region's
+//   landing variants; regions[].lifeseedRegions disagreeing with worldRegion
+//   is a warning.
+//   fauna.variants keys are landing variants; their animals exist.
+//   characterGen.familiarity lists the five tiers with plants counts.
 //
 // As a module: require('./validate-regions').validateRegions(data) -> {errors, warnings, checked}
 // where data = {regions, biomes, plants, animals, locations, lifeseeds, characterGen, originPicker, monsters}.
@@ -41,24 +53,35 @@ function loadData() {
   return {
     regions: D('regions.json'), biomes: D('biomes.json'), plants: D('plants.json'), animals: D('animals.json'),
     locations: D('locations.json'), lifeseeds: D('lifeseeds.json'), characterGen: D('characterGen.json'),
-    originPicker: D('originPicker.json'), monsters: D('monsters.json'),
+    originPicker: D('originPicker.json'), monsters: D('monsters.json'), nameCultures: D('nameCultures.json'),
   };
 }
 
-// Same matching as game.js parseOrigin + originRegionsForTags.
-function originRegion(label, data) {
+// Same matching as game.js parseOrigin + originRegionsForTags (a tag equal
+// to a region id claims that region outright: +100).
+function originTags(label, data) {
   const kw = (data.characterGen || {}).originKeywords || {};
   const lower = String(label).toLowerCase();
   const tags = new Set();
   for (const k of Object.keys(kw).sort((a, b) => b.length - a.length)) {
     if (lower.includes(k)) kw[k].forEach(t => tags.add(String(t).toLowerCase()));
   }
-  let best = null;
+  return tags;
+}
+function originScores(label, data) {
+  const tags = originTags(label, data);
+  const out = [];
   (data.regions || []).forEach((r, i) => {
-    const n = (r.originTags || []).filter(t => tags.has(String(t).toLowerCase())).length;
-    if (n && (!best || n > best.n)) best = { id: r.id, n, i };
+    let n = (r.originTags || []).filter(t => tags.has(String(t).toLowerCase())).length;
+    if (tags.has(String(r.id).toLowerCase())) n += 100;
+    if (n) out.push({ id: r.id, n, i });
   });
-  return best ? best.id : null;
+  out.sort((a, b) => (b.n - a.n) || (a.i - b.i));
+  return out;
+}
+function originRegion(label, data) {
+  const s = originScores(label, data);
+  return s.length ? s[0].id : null;
 }
 
 function validateRegions(data) {
@@ -192,11 +215,79 @@ function validateRegions(data) {
       if (!originRegion(o.label, data)) err('originPicker', `"${o.label}" resolves to no region`);
     }
   }
+  checkOriginCoverage(data, regions, ids, locIds, animalById, err, (rid, msg) => warnings.push(`${rid}: ${msg}`));
   if (!regions.some(r => r && (r.status === 'playable' || r.status === 'rich'))) warnings.push('no playable region: every landing falls back to the default');
   return { errors, warnings, checked: regions.length };
 }
 
-module.exports = { validateRegions, loadData, originRegion, MIN, YEAR_DAYS };
+// ORIGIN COVERAGE (origins-world 2026-10-14): see the header.
+const FAMILIARITY_TIERS = ['native', 'local', 'neighbor', 'visitor', 'stranger'];
+function checkOriginCoverage(data, regions, ids, locIds, animalById, err, warn) {
+  const picker = ((data.originPicker || {}).regions) || [];
+  const labels = [];
+  for (const c of picker) for (const o of (c.origins || [])) labels.push(o.label);
+  const seen = new Set();
+  for (const l of labels) { if (seen.has(l)) err('originPicker', `"${l}" listed twice`); seen.add(l); }
+  const ls = (((data.lifeseeds || {}).regions) || []);
+  const o2c = ((data.nameCultures || {}).originToCulture) || {};
+  const cultures = ((data.nameCultures || {}).cultures) || {};
+  const regionOf = {};
+  for (const l of labels) {
+    const tags = originTags(l, data);
+    const named = [...tags].filter(t => ids.has(t));
+    if (named.length !== 1) err('originPicker', `"${l}" names ${named.length} region ids in its tags (need exactly 1: ${named.join(', ') || 'none'})`);
+    const sc = originScores(l, data);
+    if (sc.length > 1 && sc[0].n === sc[1].n) err('originPicker', `"${l}" ties ${sc[0].id} and ${sc[1].id}`);
+    const rid = sc.length ? sc[0].id : null;
+    if (named.length === 1 && rid !== named[0]) err('originPicker', `"${l}" names ${named[0]} but resolves to ${rid}`);
+    regionOf[l] = rid;
+    const subs = ls.filter(r => (r.origins || []).includes(l));
+    if (subs.length !== 1) err('lifeseeds', `"${l}" is listed by ${subs.length} lifeseed sub-areas (need exactly 1)`);
+    else if (subs[0].worldRegion !== rid) err('lifeseeds', `"${l}" lifeseed ${subs[0].id} is in ${subs[0].worldRegion}, the label resolves to ${rid}`);
+    const cid = o2c[l];
+    if (!cid || !cultures[cid]) err('nameCultures', `"${l}" has no name culture (originToCulture)`);
+  }
+  for (const r of regions) {
+    if (!r || !r.id) continue;
+    const mine = labels.filter(l => regionOf[l] === r.id);
+    if (mine.length < 2) err(r.id, `${mine.length} picker origins (need 2): ${mine.join(', ')}`);
+    if (!ls.some(x => x.worldRegion === r.id)) err(r.id, 'no lifeseed sub-area (lifeseeds.json worldRegion)');
+    if (!mine.some(l => cultures[o2c[l]])) err(r.id, 'no name culture (no picker origin maps through originToCulture)');
+    for (const l of (r.lifeseedRegions || [])) {
+      const x = ls.find(y => y.id === l);
+      if (x && x.worldRegion !== r.id) warn(r.id, `lifeseedRegions lists ${l}, whose worldRegion is ${x.worldRegion}`);
+    }
+    const vars = ((r.fauna || {}).variants) || {};
+    for (const [vid, v] of Object.entries(vars)) {
+      if (!(r.landingVariants || []).includes(vid)) err(r.id, `fauna.variants.${vid} is not one of its landing variants`);
+      for (const a of [...((v || {}).add || []), ...((v || {}).remove || [])]) if (!animalById.has(a)) err(r.id, `fauna.variants.${vid}: animal ${a} not in animals.json`);
+    }
+    for (const a of (((r.fauna || {}).animals) || [])) if (!animalById.has(a)) err(r.id, `fauna animal ${a} not in animals.json`);
+  }
+  for (const x of ls) {
+    if (x.id === 'far_away') continue;
+    if (!ids.has(x.worldRegion)) { err('lifeseeds', `${x.id}: worldRegion ${x.worldRegion} is not a region`); continue; }
+    const wr = regions.find(r => r.id === x.worldRegion) || {};
+    for (const lid of (x.landings || [])) {
+      if (!locIds.has(lid)) err('lifeseeds', `${x.id}: landing ${lid} not in locations.json`);
+      else if (!(wr.landingVariants || []).includes(lid)) err('lifeseeds', `${x.id}: landing ${lid} is not a ${x.worldRegion} landing variant`);
+    }
+    if ((x.towns || []).length < 4) err('lifeseeds', `${x.id}: ${(x.towns || []).length} towns (need 4)`);
+    if ((x.workplaces || []).length < 3) err('lifeseeds', `${x.id}: ${(x.workplaces || []).length} workplaces (need 3)`);
+  }
+  const fam = ((data.characterGen || {}).familiarity) || null;
+  if (!fam) err('characterGen', 'no familiarity block');
+  else {
+    for (const t of FAMILIARITY_TIERS) {
+      if (!(fam.order || []).includes(t)) err('characterGen', `familiarity.order is missing ${t}`);
+      const d = (fam.tiers || {})[t];
+      if (!d || !(d.plants >= 0)) err('characterGen', `familiarity.tiers.${t} needs plants >= 0`);
+      if (d && !['pool', 'continent', 'overlap'].includes(d.animals)) err('characterGen', `familiarity.tiers.${t}.animals must be pool|continent|overlap`);
+    }
+  }
+}
+
+module.exports = { validateRegions, loadData, originRegion, originScores, MIN, YEAR_DAYS };
 
 if (require.main === module) {
   const quiet = process.argv.includes('--quiet');

@@ -82,6 +82,9 @@ function freshGame() {
 function startFreshConvo(vid) {
   const c = Game.convoGet(vid);
   c.active = true; c.over = false; c.pendingQ = null; c.thread = null;
+  // fresh means fresh: earlier sections spent this villager's exchanges, and a
+  // short-budget temperament (roster luck; origins-world 2026-10-14) ran out.
+  c.exchanges = 0;
   c.reactiveQ = null; c.genericQ = null; c.heldBeats = [];
   c.mood = Game.convoMoodInit(vid);
   return c;

@@ -198,7 +198,17 @@ function freshVillager(Game, vid) {
     const dR = Game.buildDecide(vb, Game.villagerLevelUpOffers(vb, 'strange'));
     Game.gainTrackXP(vb, 'strange', DATA.thresholds[0], 'test');
     T.ok('buildDecide replaces when the offer beats the weakest by > 1', !!(dR.pick && dR.replace), JSON.stringify(dR));
-    T.ok('...and the villager swapped: 6 held, the pick in, the weakest out', v.npcAbilities[vb].length === 6 && v.npcAbilities[vb].includes(dR.pick) && !v.npcAbilities[vb].includes(dR.replace), v.npcAbilities[vb].join(','));
+    // "the weakest" is judged when the sheet resolves: the level-up first
+    // teaches the offers (npcLearnAbility), which can reorder near-tied junk
+    // (translator vs beard_moss both ~1.25 depend on the roster's languages,
+    // which origins-world 2026-10-14 changed). So: exactly one of the six
+    // left, and it scores no better than any of the six right now.
+    const six = ['lucky_rock', 'dowsing', 'rain_dancer', 'squirrel_friend', 'beard_moss', 'translator'];
+    const gone = six.filter(id => !v.npcAbilities[vb].includes(id));
+    const techB = Game.buildTechnology(vb);
+    const scB = id => Game.buildScore(vb, id, { without: id, tech: techB });
+    const weakestOut = gone.length === 1 && six.every(id => scB(gone[0]) <= scB(id) + 1e-9);
+    T.ok('...and the villager swapped: 6 held, the pick in, the weakest out', v.npcAbilities[vb].length === 6 && v.npcAbilities[vb].includes(dR.pick) && weakestOut, v.npcAbilities[vb].join(',') + ' gone=' + gone.join(',') + ' ' + six.map(id => id + ':' + scB(id)).join(' '));
     T.ok('kept + swapped both happen (one of each across the two setups)', !!dK.keep || !!dK.replace);
   }
 
