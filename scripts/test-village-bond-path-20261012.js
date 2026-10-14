@@ -111,18 +111,21 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
     Game.noteShieldbearerOffer(a);
     ok('bond 50 -> bodyguard follows', Game.npcHasAbility(a, 'bodyguard'), 'held=' + owned().join(','));
     ok('skill-lane shieldbearer abilities take no villager slot', ((Game.state.village.npcAbilities || {})[a] || []).indexOf('draw_fire') < 0);
-    // nothing before the System's arrival
+    // before the System's arrival
+    // DESIGN CHANGE (Steve 2026-10-14: "Human skills should be learnable
+    // before the system shows up"): the shieldbearer entries are skill-lane,
+    // so a villager learns them pre-System too — as a skill, never a slot.
+    // Only a magic path entry would wait for the arrival.
     const Game2 = await freshGame(SEED + 40);
     const [c, d] = vids(Game2, 2);
     Game2.state.systemArrived = false;
     Game2.combatBondAdd(c, d, 90);
     Game2.noteShieldbearerOffer(c);
     // PARITY (2026-10-14, design change): a villager's first ability (their
-    // knack, like the player's) is held from day 1 — only the shieldbearer
-    // offers wait for the System.
+    // knack, like the player's) is held from day 1.
     const knack3 = ((Game2.state.village.npcKnacks || {})[c]);
     const held3 = ((Game2.state.village.npcAbilities || {})[c] || []).filter(id => id !== knack3);
-    ok('no offers before day-7 arrival', held3.length === 0 && !Game2.npcHasAbility(c, 'draw_fire'), 'held=' + held3.join(','));
+    ok('pre-arrival: the skill is learned (draw_fire), no slot taken', held3.length === 0 && Game2.npcHasAbility(c, 'draw_fire'), 'held=' + held3.join(','));
   }
 
   // ---------- 6. rally: hold for them, once per fight ----------

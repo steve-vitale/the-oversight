@@ -14514,7 +14514,7 @@
       }
 
       let html = `<details style="margin:10px 0;border-top:1px solid #333;padding-top:8px">
-        <summary style="cursor:pointer;font-size:15px;font-weight:bold">📖 Skills <span style="opacity:.6;font-weight:normal">(Codex)</span></summary>
+        <summary style="cursor:pointer;font-size:15px;font-weight:bold">📖 Skills <span style="opacity:.6;font-weight:normal">(${Game.state.systemArrived ? 'Codex' : 'Journal'})</span></summary>
         <div style="margin-top:6px">`;
 
       for (const [domain, skills] of Object.entries(byDomain)) {
