@@ -6,6 +6,8 @@
 //   SEED=7 DAYS=150 node scripts/godpath/sweep-buff.js        -> one RESULT line
 // Driver (forks one process per seed, PAR at a time, prints the summary):
 //   SEEDS=7,42,... DAYS=150 PAR=4 node scripts/godpath/sweep-buff.js --all [--out file.json]
+// FORCE_OCC=soldier forces the starting bearer's job (same seed, same cast
+// otherwise); each RESULT row carries `occ`, the starting bearer's job.
 // Counts telemetry live (the phone ring is capped). Writes nothing into the
 // repo unless --out names a file.
 'use strict';
@@ -28,6 +30,28 @@ async function one() {
   harness.loadGame = async function () {
     const r = await _loadGame.apply(this, arguments);
     const G = r.Game;
+    // FORCE_OCC=<occupation id>: the starting bearer (roster slot 0) gets this
+    // job. Only the occupation pool of the FIRST genCharacter call is swapped,
+    // so the RNG stream (one draw either way) and the rest of the cast match
+    // the unforced seed — a controlled per-job comparison.
+    if (process.env.FORCE_OCC) {
+      const _gr = G.genRoster;
+      G.genRoster = function () {
+        const cg = G.data.characterGen || {};
+        const all = cg.occupations || [];
+        const want = all.find(o => o.id === process.env.FORCE_OCC);
+        if (!want) throw new Error('FORCE_OCC: unknown occupation ' + process.env.FORCE_OCC);
+        const _gc = G.genCharacter;
+        let first = true;
+        G.genCharacter = function () {
+          if (!first) return _gc.apply(this, arguments);
+          first = false;
+          cg.occupations = [want];
+          try { return _gc.apply(this, arguments); } finally { cg.occupations = all; }
+        };
+        try { return _gr.apply(this, arguments); } finally { G.genCharacter = _gc; }
+      };
+    }
     const _tele = G.tele;
     G.tele = function (type, data) {
       try {
@@ -66,6 +90,7 @@ async function one() {
     const _ed = G.endDay;
     G.endDay = function () {
       try {
+        if (C.occ === undefined) { const p = G.getPerson && G.getPerson(G.villagerId); C.occ = (p && p.occupationId) || null; }
         const day = ((G.state || {}).scholar || {}).day || 0;
         const GH = (globalThis.Scattering || {}).Godhood;
         if (day >= 80 && GH && GH.godhoods) {
@@ -97,7 +122,9 @@ async function one() {
     extraMetrics: (Game) => {
       let vAbil = 0, vHolders = 0;
       try { const na = (Game.state.village || {}).npcAbilities || {}; for (const k of Object.keys(na)) { vAbil += (na[k] || []).length; if ((na[k] || []).length) vHolders++; } } catch (e) { console.warn('[sweep-buff] abil', e.message); }
-      return { villageLost: !!Game.villageLost, vAbil, vHolders };
+      let occ = null;
+      try { occ = C.occ; } catch (e) { console.warn('[sweep-buff] occ', e.message); }
+      return { villageLost: !!Game.villageLost, vAbil, vHolders, occ };
     },
   });
   const r = rep.runs[0];
@@ -107,7 +134,7 @@ async function one() {
     classPlayer: C.classPlayer > 0, classPlayerDay: C.classPlayerDay, classVillagers: C.classVillagers.size,
     subclasses: C.subclasses, ascPlayer: C.ascPlayer, ascVillager: C.ascVillager, ascPaths: C.ascPaths,
     verbPlayer: C.verbPlayer, verbVillager: C.verbVillager, verbs: C.verbs, passives: C.passives,
-    deaths: r.deaths, gates: C.gates, lostCause: C.lostCause,
+    deaths: r.deaths, gates: C.gates, lostCause: C.lostCause, occ: (r.extra || {}).occ || null,
   };
   console.log('RESULT ' + JSON.stringify(out));
 }
