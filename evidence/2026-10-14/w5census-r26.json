@@ -1,0 +1,968 @@
+{
+ "label": "w5census-r26",
+ "policy": "leadfeast",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "commit": "23e8c399",
+ "generated": "2026-10-14T07:01:55.061Z",
+ "note": "DIAGNOSTIC ARM — measurement only. No before/after: per-run nondeterminism (r25) makes identical-seed before/after unmeasurable for this question.",
+ "runs": [
+  {
+   "seed": 11,
+   "days": 137,
+   "gameDays": 138,
+   "endReason": "village-lost",
+   "wave5Unlocked": false,
+   "unlockDayW5": null,
+   "unlockDay": {
+    "1": 1,
+    "2": 37,
+    "3": 70,
+    "4": 70
+   },
+   "w5Standing": null,
+   "w5Rank": null,
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "global",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 7,
+   "playerDeaths": 7,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 0,
+    "rows": 0,
+    "preUnlockDeaths": 0,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [],
+   "chains": []
+  },
+  {
+   "seed": 22,
+   "days": 158,
+   "gameDays": 159,
+   "endReason": "village-lost",
+   "wave5Unlocked": true,
+   "unlockDayW5": 57,
+   "unlockDay": {
+    "1": 1,
+    "2": 24,
+    "3": 34,
+    "4": 48,
+    "5": 57
+   },
+   "w5Standing": 252,
+   "w5Rank": "regional",
+   "firstW5Fight": 95,
+   "maxArc": 4,
+   "maxRank": "global",
+   "tableDays": 95,
+   "firstTableDay": 65,
+   "exiled": false,
+   "tenures": 12,
+   "playerDeaths": 11,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 9,
+    "rows": 9,
+    "preUnlockDeaths": 2,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [
+    {
+     "who": "gen_pmsl060",
+     "tenureStartDay": 48,
+     "deathDay": 64,
+     "daysPostUnlock": 7,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Callback (w3) d64",
+     "pairedFight": {
+      "vs": "The Callback",
+      "wave": 3,
+      "pack": 1,
+      "startDay": 64,
+      "endDay": 64,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      3
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "gen_9kx4323",
+     "tenureStartDay": 64,
+     "deathDay": 72,
+     "daysPostUnlock": 15,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "The Eulogy (w4) d72",
+     "pairedFight": {
+      "vs": "The Eulogy",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 72,
+      "endDay": 72,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "theo_lindqvist",
+     "tenureStartDay": 72,
+     "deathDay": 80,
+     "daysPostUnlock": 23,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "The Suburb (w4) d80",
+     "pairedFight": {
+      "vs": "The Suburb",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 80,
+      "endDay": 80,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "jorge_silva",
+     "tenureStartDay": 80,
+     "deathDay": 95,
+     "daysPostUnlock": 38,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "The Timeslot (w5) d95",
+     "pairedFight": {
+      "vs": "The Timeslot",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 95,
+      "endDay": 95,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "gen_d5ke4mq",
+     "tenureStartDay": 95,
+     "deathDay": 103,
+     "daysPostUnlock": 46,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "The Network Note (w5) d103",
+     "pairedFight": {
+      "vs": "The Network Note",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 103,
+      "endDay": 103,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "sigrun_eiriksdottir",
+     "tenureStartDay": 103,
+     "deathDay": 128,
+     "daysPostUnlock": 71,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "Grief Counselor (w2) d127 -> Hummice (w1, pack 4) d127 -> The Network Note (w5) d128",
+     "pairedFight": {
+      "vs": "The Network Note",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 128,
+      "endDay": 128,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      1,
+      2,
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "ingrid_vik",
+     "tenureStartDay": 128,
+     "deathDay": 144,
+     "daysPostUnlock": 87,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": null,
+     "pairedFight": {
+      "vs": null,
+      "wave": null,
+      "pack": null,
+      "startDay": null,
+      "endDay": 144,
+      "result": "lost",
+      "personFight": true,
+      "note": "no combat_start — non-monster person-fight path (uprising/betrayal/alien-duel bypass startCombat)"
+     },
+     "fightWaves": [],
+     "w5Fought": false
+    },
+    {
+     "who": "visjoin_65",
+     "tenureStartDay": 145,
+     "deathDay": 146,
+     "daysPostUnlock": 89,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "The Cancellation (w5) d146",
+     "pairedFight": {
+      "vs": "The Cancellation",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 146,
+      "endDay": 146,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "visjoin_86",
+     "tenureStartDay": 146,
+     "deathDay": 150,
+     "daysPostUnlock": 93,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": true,
+     "fightCtx": "Speedbump (w1) d148 -> The Moderator (w2) d150",
+     "pairedFight": {
+      "vs": "The Moderator",
+      "wave": 2,
+      "pack": 1,
+      "startDay": 150,
+      "endDay": 150,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      1,
+      2
+     ],
+     "w5Fought": false
+    }
+   ],
+   "chains": [
+    {
+     "depth": 3,
+     "from": 64,
+     "to": 80,
+     "causes": [
+      "combat",
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      false,
+      false,
+      false
+     ]
+    },
+    {
+     "depth": 3,
+     "from": 144,
+     "to": 150,
+     "causes": [
+      "combat",
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      false,
+      true,
+      false
+     ]
+    },
+    {
+     "depth": 2,
+     "from": 95,
+     "to": 103,
+     "causes": [
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      true,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 33,
+   "days": 117,
+   "gameDays": 118,
+   "endReason": "village-lost",
+   "wave5Unlocked": false,
+   "unlockDayW5": null,
+   "unlockDay": {
+    "1": 1,
+    "2": 37,
+    "3": 59,
+    "4": 59
+   },
+   "w5Standing": null,
+   "w5Rank": null,
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "national",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 7,
+   "playerDeaths": 9,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 0,
+    "rows": 0,
+    "preUnlockDeaths": 0,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [],
+   "chains": []
+  },
+  {
+   "seed": 44,
+   "days": 114,
+   "gameDays": 115,
+   "endReason": "village-lost",
+   "wave5Unlocked": true,
+   "unlockDayW5": 70,
+   "unlockDay": {
+    "1": 1,
+    "2": 34,
+    "3": 55,
+    "4": 55,
+    "5": 70
+   },
+   "w5Standing": 222,
+   "w5Rank": "regional",
+   "firstW5Fight": 87,
+   "maxArc": 3,
+   "maxRank": "global",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 11,
+   "playerDeaths": 13,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 9,
+    "rows": 9,
+    "preUnlockDeaths": 4,
+    "unmatchedTenure": 3,
+    "reconciled": true
+   },
+   "census": [
+    {
+     "who": "gen_vdwdu0v",
+     "tenureStartDay": 62,
+     "deathDay": 70,
+     "daysPostUnlock": 0,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d70",
+     "pairedFight": {
+      "vs": "The Audit",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 70,
+      "endDay": 70,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "gen_wqy7nn6",
+     "tenureStartDay": 70,
+     "deathDay": 71,
+     "daysPostUnlock": 1,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d70 -> The Reunion (w4) d71 -> The Suburb (w4) d71",
+     "pairedFight": {
+      "vs": "The Suburb",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 71,
+      "endDay": 71,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "devon_okafor",
+     "tenureStartDay": 71,
+     "deathDay": 71,
+     "daysPostUnlock": 1,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d70 -> The Reunion (w4) d71 -> The Suburb (w4) d71",
+     "pairedFight": {
+      "vs": "The Suburb",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 71,
+      "endDay": 71,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "zoe_adams",
+     "tenureStartDay": 71,
+     "deathDay": 87,
+     "daysPostUnlock": 17,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Rerun (w5) d87",
+     "pairedFight": {
+      "vs": "The Rerun",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 87,
+      "endDay": 87,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "ivy_wang",
+     "tenureStartDay": 87,
+     "deathDay": 89,
+     "daysPostUnlock": 19,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Rerun (w5) d89 -> The Moderator (w2) d89 -> The Rerun (w5) d89",
+     "pairedFight": {
+      "vs": "The Rerun",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 89,
+      "endDay": 89,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      2,
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "fatima_hassan",
+     "tenureStartDay": 89,
+     "deathDay": 89,
+     "daysPostUnlock": 19,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Rerun (w5) d89 -> The Moderator (w2) d89 -> The Rerun (w5) d89",
+     "pairedFight": {
+      "vs": "The Rerun",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 89,
+      "endDay": 89,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      2,
+      5
+     ],
+     "w5Fought": true
+    },
+    {
+     "who": "app_mv7rhiea966",
+     "tenureStartDay": 89,
+     "deathDay": 110,
+     "daysPostUnlock": 40,
+     "cause": "contest",
+     "category": "contest",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d110",
+     "pairedFight": {
+      "vs": "The Audit",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 110,
+      "endDay": 110,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "visjoin_80",
+     "tenureStartDay": 110,
+     "deathDay": 110,
+     "daysPostUnlock": 40,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d110",
+     "pairedFight": {
+      "vs": "The Audit",
+      "wave": 4,
+      "pack": 1,
+      "startDay": 110,
+      "endDay": 110,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4
+     ],
+     "w5Fought": false
+    },
+    {
+     "who": "visjoin_74",
+     "tenureStartDay": 110,
+     "deathDay": 111,
+     "daysPostUnlock": 41,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Audit (w4) d110 -> The Network Note (w5) d111",
+     "pairedFight": {
+      "vs": "The Network Note",
+      "wave": 5,
+      "pack": 1,
+      "startDay": 111,
+      "endDay": 111,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      4,
+      5
+     ],
+     "w5Fought": true
+    }
+   ],
+   "chains": [
+    {
+     "depth": 3,
+     "from": 70,
+     "to": 71,
+     "causes": [
+      "combat",
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      false,
+      false,
+      false
+     ]
+    },
+    {
+     "depth": 3,
+     "from": 87,
+     "to": 89,
+     "causes": [
+      "combat",
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "depth": 3,
+     "from": 110,
+     "to": 111,
+     "causes": [
+      "contest",
+      "combat",
+      "combat"
+     ],
+     "w5Fought": [
+      false,
+      false,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 55,
+   "days": 171,
+   "gameDays": 172,
+   "endReason": "village-lost",
+   "wave5Unlocked": false,
+   "unlockDayW5": null,
+   "unlockDay": {
+    "1": 1,
+    "2": 24,
+    "3": 57,
+    "4": 57
+   },
+   "w5Standing": null,
+   "w5Rank": null,
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "global",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 9,
+   "playerDeaths": 10,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 0,
+    "rows": 0,
+    "preUnlockDeaths": 0,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [],
+   "chains": []
+  },
+  {
+   "seed": 66,
+   "days": 95,
+   "gameDays": 96,
+   "endReason": "village-lost",
+   "wave5Unlocked": false,
+   "unlockDayW5": null,
+   "unlockDay": {
+    "1": 1,
+    "2": 18,
+    "3": 39
+   },
+   "w5Standing": null,
+   "w5Rank": null,
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "regional",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 6,
+   "playerDeaths": 6,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 0,
+    "rows": 0,
+    "preUnlockDeaths": 0,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [],
+   "chains": []
+  },
+  {
+   "seed": 77,
+   "days": 66,
+   "gameDays": 67,
+   "endReason": "village-lost",
+   "wave5Unlocked": false,
+   "unlockDayW5": null,
+   "unlockDay": {
+    "1": 1,
+    "2": 32,
+    "3": 57,
+    "4": 57
+   },
+   "w5Standing": null,
+   "w5Rank": null,
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "regional",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 2,
+   "playerDeaths": 1,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 0,
+    "rows": 0,
+    "preUnlockDeaths": 0,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [],
+   "chains": []
+  },
+  {
+   "seed": 88,
+   "days": 87,
+   "gameDays": 88,
+   "endReason": "village-lost",
+   "wave5Unlocked": true,
+   "unlockDayW5": 68,
+   "unlockDay": {
+    "1": 1,
+    "2": 25,
+    "3": 57,
+    "4": 57,
+    "5": 68
+   },
+   "w5Standing": 277,
+   "w5Rank": "regional",
+   "firstW5Fight": null,
+   "maxArc": 3,
+   "maxRank": "national",
+   "tableDays": 0,
+   "firstTableDay": null,
+   "exiled": false,
+   "tenures": 4,
+   "playerDeaths": 3,
+   "instrErrors": 0,
+   "reconciliation": {
+    "postUnlockDeaths": 1,
+    "rows": 1,
+    "preUnlockDeaths": 2,
+    "unmatchedTenure": 0,
+    "reconciled": true
+   },
+   "census": [
+    {
+     "who": "rosa_mendez",
+     "tenureStartDay": 55,
+     "deathDay": 84,
+     "daysPostUnlock": 16,
+     "cause": "combat",
+     "category": "combat",
+     "tableReached": false,
+     "fightCtx": "The Redactor (w3, pack 2) d84",
+     "pairedFight": {
+      "vs": "The Redactor",
+      "wave": 3,
+      "pack": 2,
+      "startDay": 84,
+      "endDay": 84,
+      "result": "lost",
+      "personFight": false
+     },
+     "fightWaves": [
+      3
+     ],
+     "w5Fought": false
+    }
+   ],
+   "chains": []
+  }
+ ],
+ "censusAggregate": {
+  "n": 19,
+  "top3": [
+   {
+    "cause": "combat",
+    "n": 18,
+    "share": 0.947
+   },
+   {
+    "cause": "contest",
+    "n": 1,
+    "share": 0.053
+   }
+  ],
+  "all": [
+   {
+    "cause": "combat",
+    "n": 18,
+    "share": 0.947
+   },
+   {
+    "cause": "contest",
+    "n": 1,
+    "share": 0.053
+   }
+  ],
+  "medianDaysPostUnlock": 23,
+  "maxDaysPostUnlock": 93,
+  "minDaysPostUnlock": 0,
+  "tableReached": 8,
+  "tableRate": 0.421,
+  "w5FoughtInWindow": 8,
+  "w5FoughtShare": 0.421,
+  "pairedFights": 19,
+  "personFights": 1,
+  "chains": [
+   {
+    "seed": 22,
+    "chains": [
+     {
+      "depth": 3,
+      "from": 64,
+      "to": 80,
+      "causes": [
+       "combat",
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "depth": 3,
+      "from": 144,
+      "to": 150,
+      "causes": [
+       "combat",
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       false,
+       true,
+       false
+      ]
+     },
+     {
+      "depth": 2,
+      "from": 95,
+      "to": 103,
+      "causes": [
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       true,
+       true
+      ]
+     }
+    ]
+   },
+   {
+    "seed": 44,
+    "chains": [
+     {
+      "depth": 3,
+      "from": 70,
+      "to": 71,
+      "causes": [
+       "combat",
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "depth": 3,
+      "from": 87,
+      "to": 89,
+      "causes": [
+       "combat",
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       true,
+       true,
+       true
+      ]
+     },
+     {
+      "depth": 3,
+      "from": 110,
+      "to": 111,
+      "causes": [
+       "contest",
+       "combat",
+       "combat"
+      ],
+      "w5Fought": [
+       false,
+       false,
+       true
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "unlockers": 3,
+ "censusRows": 19,
+ "reconFailures": []
+}
