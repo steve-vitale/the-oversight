@@ -163,6 +163,8 @@
         s.levelUpQueue.push({ track, level: t.level, xp: t.xp });
         try { this.tele('track_level', { who: 'player', track, level: t.level, why: why || null }); } catch (e) { warn('tele track_level', e); }
       }
+      // PARITY (skill-teaching.js): the track skill a villager learns at this level, for the player too.
+      if (this.playerTrackSkills) this.playerTrackSkills(track, t);
       this.pumpLevelUps();
       return t.xp;
     },
@@ -395,7 +397,7 @@
           this.trackStat('offered');
           const full = (s.abilities || []).length >= this.abilitySlots();
           const noun = (T.nouns || {})[lu.track] || lu.track;
-          this.sysSay(`◈ LEVEL UP — ${label.toUpperCase()} ${lu.level}. "We've been counting: ${lu.xp || ''} ${noun}. Pick one.${full ? ' You\'re full — whatever you take REPLACES something you hold. Or keep what you have.' : ''}"`);
+          this.sysSay(`◈ LEVEL UP — ${label.toUpperCase()} ${lu.level}.${lu.skill ? ` (The work taught you ${lu.skill}.)` : ''} "We've been counting: ${lu.xp || ''} ${noun}. Pick one.${full ? ' You\'re full — whatever you take REPLACES something you hold. Or keep what you have.' : ''}"`);
           return true;
         }
         return false;
