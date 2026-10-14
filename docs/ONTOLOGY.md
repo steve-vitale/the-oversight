@@ -893,7 +893,7 @@ Keepsake growth (docs/COHERENCE-SPINE.md "Keepsakes: the growth model", Steve 20
 - thread_home: a keepsake whose kin relative (player lifeseed) was Taken records the link; its place/name reveal becomes a clue (code: keepsakeThreadCheck, keepsakeTakenKin)
 - old_saves: chosen enhancements survive; old 10/25 offers stay chosen; up to four keepsakes are auto-worn into free accessory slots so nothing goes dormant on load (code: migrateKeepsakes)
 
-**Consumes:** relicItems, offerRelicEnhancement, playFlashback, isKeepsake, itemDef (game.js / progression.js), takenKinOf, lifeseedKin, vpOf (lifeseed.js / conversation.js), cureStatus, tbfight, tbFighter (statusEffects.js / game.js), useAbility, _actionAvailable (abilityActions.js; impls registered on its published impl/precheck tables)
+**Consumes:** relicItems, offerRelicEnhancement, playFlashback, isKeepsake, itemDef (game.js / progression.js), takenKinOf, lifeseedKin, vpOf (lifeseed.js / conversation.js), worldKinEntry, worldRegionName (world.js), cureStatus, tbfight, tbFighter (statusEffects.js / game.js), useAbility, _actionAvailable (abilityActions.js; impls registered on its published impl/precheck tables)
 
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.
@@ -1633,4 +1633,17 @@ The Wave Ledger — waves 2-3 unlock on KILLS ONLY (waves 4-5 add village Standi
 - ledger_reverses_8730921c: true (code: game.js — unlockedWave's wave 2-3 rungs are ledger-only; engagement lanes removed 2026-10-10, Steve's call; waves 4-5 add Standing (2026-10-13), not scale rank; the endgame deed gate is untouched)
 
 **Consumes:** —
+
+### world (`world.js`)
+The world registry (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "people got randomized and split up across the world. The family arc has to be late game content at the global stage."). state.world = {regions:{id:{known,contact,visited,heardDay,heardWhy}}, kin:[{owner,name,relation,region,fate,found}]}. At run start every region of regions.json gets an entry (the landing region known+visited, every roster member's origin region known), and each roster member's lifeseed kin is placed in a seeded random region that is never the landing region, fate 'taken' when the lifeseed says Taken, else 'scattered' (kin who died before the sky changed are not placed). Hidden: no UI until the global-stage content reads it.
+
+**Provides:** initWorld() -> builds state.world for a new run (called from newGame), migrateWorld() -> old saves get a world; new regions get entries (called from load), worldRegions() -> [{id, name, continent, status, known, contact, visited}], worldKin(owner) -> that owner's kin entries (default: the player); places them lazily for late joiners, worldKinEntry(owner, person) -> the kin entry for one lifeseed person, or null, hearOfRegion(id, why) -> true when the region was newly heard of, worldRegionName(id) -> the region's display name
+
+**Rules:**
+- kin_never_local: kin are never placed in the landing region (code: placeKinFor)
+- kin_deterministic: placement is a pure function of map.worldSeed + owner + person, drawing no Math.random (code: kinRand)
+- taken_matches_lifeseed: fate 'taken' uses the same test as lifeseed.js takenKinOf (code: KIN_TAKEN)
+- hidden_until_known: nothing here is shown; keepsake clues name a kin's region only once world.regions[id].known (code: keepsakes.js keepsakeClues)
+
+**Consumes:** regionDef, activeRegion, originRegionsForTags, mulberry32 (game.js), vpOf (conversation.js), state.world, state.region, state.village.roster, state.village.rosterChars
 

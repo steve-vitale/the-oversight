@@ -56,7 +56,10 @@ const DATA_FILES = ['plants.json', 'biomes.json', 'monsters.json', 'villagers.js
   'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json',
   'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json',
   'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json',
-  'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json'];
+  'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json',
+  // REGIONS (2026-10-14): the environment (pantry, ruins, bounty, fauna…)
+  // is regions.json data now — core data like plants.json.
+  'regions.json'];
 global.SCATTER_DATA = {};
 for (const f of DATA_FILES) global.SCATTER_DATA[f.replace('.json', '')] = JSON.parse(show('src/data/' + f));
 
