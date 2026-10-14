@@ -7,6 +7,32 @@ verbatim.
 
 ---
 
+## 2026-10-14 (evening)
+
+**On abilities vs skills:** "We have a slot for skills. I intended abilities
+to be gained from a variety of related XP sources. Things acquired from
+events and other meaningful experiences, knowledge learned etc should be
+typically ending up in skills, unless it fits the magic power theme. There
+should be maybe 8 natural level ups plus a few other gifts or events etc that
+compete for those 6 slots. I just want everything in its logical
+categorization."
+
+**On waiting at the Table:** "waiting should have a cost- but also an
+opportunity for the truly powerful. Waves get truly ridiculous and maybe we
+can throw an Easter egg monster in at a certain milestone and enough crazy
+punishment. Something else on the scale of titan class but even bigger.
+Something that has to be fought across the entire map etc. all working as a
+key to unlock the best ending for humans at the table. Should be almost
+impossible to get. This will present a final target for our game breaking
+builds to conquer."
+
+**On the Table prompt:** "It will get annoying if we ask them about the table
+every morning after it's available. Make it an option in haven once
+unlocked." (Implemented: Haven panel "Take your seat", 116a8b9d.)
+
+**On the Table method:** "The table method we chose is kinda low drama and it
+lets the ending be kinda farmed."
+
 ## 2026-10-14 (later)
 
 **On the keepsake beam rule:** "Bonded vests blocks beams was never a rule,
