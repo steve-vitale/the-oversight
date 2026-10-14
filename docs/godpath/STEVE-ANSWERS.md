@@ -7,6 +7,32 @@ verbatim.
 
 ---
 
+## 2026-10-14 (latest)
+
+Answering the tracks/keepsake/roster round: "Good calls! Continue all."
+(The 10-path roster with 2 subclasses each is approved to build.)
+
+**On parity:** "Villagers and players should get the same XP, when in doubt
+we treat them the same way. You should get to swap on level up or keep
+existing. No I don't think you should take your XP or the abilities. You
+become that villager. That's why you have to treat villagers and players as
+similarly as possible, and villagers need to act in smart ways, including
+towards getting good gear and builds. They want to win as well."
+
+**On the strange track and family:** "Yes any death for strange path,
+eventually we will add more family content but canon is that people got
+randomized and split up across the world. The family arc has to be late game
+content at the global stage."
+
+**On the world:** "Please provide muse scaffolding for establishing the rest
+of the nations as starting regions and places that can be accessed. This also
+necessitates other starting flora and fauna, and we can truly have the
+starting characters be thrown into a random enviroment. What else needs to be
+adapted to the new environments? We don't need every country but take a shot
+at like all continents/subcontinents roughly. Your job is inclusive and
+synergistic design that muse agent will execute against. Build the rest
+though, just not the massive content expansion."
+
 ## 2026-10-14 (late night)
 
 **On coherence:** "We need all these features coherent. Gods are rough
