@@ -181,3 +181,43 @@ Each class added in a small batch (4–6 abilities), playtested, then the next:
 6. **Format-breaking**
 
 Run §3's cleanup alongside each batch.
+
+---
+
+## 5. Reoriented: classes are god-path subclasses (Steve 2026-10-14)
+
+> "The classes are supposed to be oriented around the god paths as icing on
+> the cake. Each god path can have some intended subclasses though that fit
+> the build."
+
+The missing classes above aren't free-floating categories. Each becomes a
+**subclass of the god path it fits**. A god path is the build's identity and
+destination; a subclass is one flavor of reaching it.
+
+**Draft roster.** It uses the 10 paths already tagged in the data
+(`godpaths.json` / ability `paths`); confirm with Steve.
+
+| God path | Track(s) | Subclass A | Subclass B |
+|---|---|---|---|
+| Brawler | combat | Berserker (rage, blood) | Juggernaut (trade blows, unbreakable) |
+| Shieldbearer | combat, social | Bulwark (guard, redirect) | **Warden (board-shaping: walls, pits)** |
+| Hunter | field, combat | Stalker (marks, precision) | **Beastmaster (companions)** |
+| Caregiver | craft, social | **Healer (magic healing)** | **Keeper (legacy: keepsakes, the dead, the mantle)** |
+| Drifter | field, strange | **Phantom (blink, evasion)** | Trickster (swap, turncoat) |
+| Explorer | field, strange | **Seer (foresight)** | Cartographer (map, terrain) |
+| Socialite | social, strange | **Showrunner (broadcast, format-breaking)** | **Demagogue (party auras)** |
+| Survivalist | craft, combat | **Furnace (feast magic: spend kcal)** | Undying (cheat death) |
+| Miser | craft, social | Hoarder (stockpile engine) | Dealer (Market God trades) |
+| Forager | field, craft | Gardener (yield) | **Feaster (village ritual feasts)** |
+
+**Bold** = the missing classes from §2, now placed where they serve a build.
+
+**Consequences:**
+- New abilities are designed **per god path**, to complete that path's subclasses.
+- Every subclass needs:
+  - one payoff
+  - two or three enablers
+  - one tie-in to the path's god capstone
+- The queued Feast/Board batch is **re-scoped**: Furnace (Survivalist),
+  Feaster (Forager) and Warden (Shieldbearer) are built *as those subclasses*,
+  alongside the god-path redesign. They are not built standalone.
