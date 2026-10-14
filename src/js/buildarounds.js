@@ -115,7 +115,19 @@
         }
         st.retribution = 0;
         st.retributionTold = false;
-        game.say(`RETRIBUTION: the System returns your pain — ${stored} recorded hurt erupts outward! "THANK YOU FOR THE DATA."`);
+        // The pain has to go somewhere. You keep 25% of what you give.
+        const selfHit = Math.round(stored * 0.25);
+        try {
+          const p = game.tbFighter('p');
+          if (p && p.alive && selfHit > 0) {
+            p.hp = Math.max(1, p.hp - selfHit);
+            game.say(`RETRIBUTION: ${stored} erupts outward — and ${selfHit} stays with you. Pain has to go somewhere.`);
+          } else {
+            game.say(`RETRIBUTION: ${stored} erupts outward!`);
+          }
+        } catch (e2) {
+          game.say(`RETRIBUTION: ${stored} erupts outward!`);
+        }
         try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e) {}
         return stored;
       } catch (e) { return 0; }
@@ -154,9 +166,14 @@
             st.graceHeals = st.graceHeals || {};
             st.graceHeals[targetId] = (st.graceHeals[targetId] || 0) + 1;
             if (st.graceHeals[targetId] === 2) {
-              game.say('BATTLEFIELD GRACE: three touches — they\'re back on their feet with a free action!');
+              game.say('BATTLEFIELD GRACE: two touches — they\'re back on their feet with a free action! (You\'re winded — no action next turn.)');
               try { game.audioEvent('buildaround', { path: 'caregiver', id: 'battlefield_grace' }); } catch (e) {}
               try { game.grantFreeAction(targetId); } catch (e) {}
+              // Cost: the healer gives everything. Winded next turn.
+              try {
+                const p = game.tbFighter('p');
+                if (p) p.winded = 1;
+              } catch (e2) {}
             }
           }
         }
