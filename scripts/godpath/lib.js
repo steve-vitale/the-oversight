@@ -61,10 +61,11 @@ function reporter(name) {
   };
 }
 
-// load({seed}) -> Game. Quiet by default (game logs are noise in tests).
+// load({seed, narration}) -> Game. Quiet by default (game logs are noise in tests).
+// narration:true keeps Game.say/sysSay writing to Game.log.
 async function load(opts) {
   opts = opts || {};
-  const { Game } = await H.quietLog(() => H.loadGame({ seed: opts.seed != null ? opts.seed : 20261014, mode: 'godpath' }));
+  const { Game } = await H.quietLog(() => H.loadGame({ seed: opts.seed != null ? opts.seed : 20261014, mode: 'godpath', narration: !!opts.narration }));
   return Game;
 }
 

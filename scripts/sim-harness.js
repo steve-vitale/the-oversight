@@ -227,8 +227,12 @@ async function loadGame(opts) {
   const G = globalThis.Scattering.Game;
   G.__simSeed = seed; // per-run policy RNG derives from it (runDays)
   // Silence narration/audio/drama for sims — telemetry + state carry the signal.
-  G.say = function () {};
-  G.sysSay = function () {};
+  // opts.narration: true keeps say/sysSay live (tests that assert on
+  // Game.log fiction text need it; sims leave it off).
+  if (!opts.narration) {
+    G.say = function () {};
+    G.sysSay = function () {};
+  }
   G.audioEvent = function () {};
   if (G.drama === undefined) G.drama = function () {};
 
