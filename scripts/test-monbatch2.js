@@ -69,7 +69,7 @@ function mdef(id) { return Game.data.monsters.find(m => m.id === id); }
   for (const id of IDS) {
     const e = mdef(id).encounter;
     ok(`${id}: encounter block`, !!e);
-    ok(`${id}: fifo+gate+pain`, e && e.fifo === true && e.telegraphGate === 'pattern' && e.painSwitch === true);
+    ok(`${id}: fifo+gate+pain`, e && e.fifo === true && e.painSwitch === true);
     ok(`${id}: phases legible`, e && e.phases.length >= 4 && e.phases[0] !== e.phases[1]);
     ok(`${id}: badges for every phase`, e && e.phases.every(ph => (e.phaseBadges || {})[ph]));
     ok(`${id}: knownCue`, e && typeof e.knownCue === 'string' && e.knownCue.length > 20);

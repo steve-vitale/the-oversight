@@ -56,7 +56,8 @@
  *  6. CODEX-GATED TELEGRAPH — telegraph generosity scales with codex
  *     knowledge: diegetic cues only pre-knowledge (freezing, sounds),
  *     tactical warnings after earned. Implemented in game.js as
- *     encTelegraphKnown(m) (gate: "pattern" — survive a full Discharge);
+ *     encTelegraphKnown(m) (gate: any move of its kit learned, or codex
+ *     stage slain — hardcoded, not config);
  *     encPickCue() below picks the cue text by knowledge.
  *
  * REGISTRATION CHECKLIST for a new animal or monster:
@@ -65,7 +66,7 @@
  *  2. Prey: add a Game.ENC_PREY entry {notice, awareRate, stamina} — the
  *     stalk/strike/flee loop is free.
  *  3. Threats: add an "encounter" config block to monsters.json
- *     {fifo, noticeRange, phases, telegraphGate, painSwitch,
+ *     {fifo, noticeRange, phases, painSwitch,
  *     adjacencyOverride} and use the game.js enc* interface
  *     (encThreatQueue/encNoticeFighter/encCurrentTarget/encNoticesPain/
  *     encScanThreats/encTelegraphKnown/encSetPhase/encPhaseBadge).
@@ -148,7 +149,7 @@
   //   encCurrentTarget(m)            — first live, non-fled entry wins
   //   encNoticesPain(m, attackerKey) — pain jumps the line (config: painSwitch)
   //   encScanThreats(m)              — notice range + adjacency override
-  //   encTelegraphKnown(m)           — codex gate (config: telegraphGate)
+  //   encTelegraphKnown(m)           — codex gate (kit move learned, or slain)
   //   encSetPhase(m, phase) / encPhaseBadge(m)
   // Anyone can be targeted — player, villager, party member. The queue
   // switches ONLY on damage taken or adjacency override. Future threats:

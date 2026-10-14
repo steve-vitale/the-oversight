@@ -139,7 +139,7 @@ const IDS = ['voice_mimic_radio', 'bright_idea', 'memory_projector', 'service_mi
     const e = d && d.encounter;
     ok(id + ' has encounter config', !!e);
     if (e) {
-      ok(id + ' config: fifo+phases+gate', e.fifo === true && Array.isArray(e.phases) && e.phases.length >= 3 && e.telegraphGate === 'pattern', JSON.stringify(e.phases));
+      ok(id + ' config: fifo+phases+gate', e.fifo === true && Array.isArray(e.phases) && e.phases.length >= 3, JSON.stringify(e.phases));
       ok(id + ' config: queue text', !!e.noticeText && !!e.adjText && !!e.painText && !!e.phaseBadges);
       // badges resolve for every phase
       setup(id, 3, 4, 4, 4, 0);

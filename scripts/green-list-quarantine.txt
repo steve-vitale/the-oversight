@@ -7,3 +7,7 @@ scripts/test-forage-rot.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census 
 scripts/test-journal-pacing.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
 scripts/test-npc-voice.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
 scripts/test-worldedge-9x9-20261007.js  # 2026-10-14 flaky: failed in 1-2 of 3 runs (census + 2 full checks); unseeded RNG or load-sensitive
+scripts/test-explorer-worldedge-20261006.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
+scripts/test-knowledge-progression.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
+scripts/test-regrow-timing.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test
+scripts/test-villager-personality.js  # 2026-10-14 nondeterministic: passes alone, failed in full run; unseeded Math.random in test

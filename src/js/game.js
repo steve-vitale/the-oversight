@@ -35344,6 +35344,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         _f._tripwireSet = false;
         this.say(`${this.encSubject(m)} steps — and hits the tripwire! It eats dirt, prone and stunned! (Tripwire!)`);
         try { this.applyStatus(m, 'stun', { rounds: 1 }); } catch (e) { m.stunned = Math.max(m.stunned || 0, 1); }
+        // Deepening 2 ("Barbed wire. The prone monster also bleeds.") —
+        // coherence audit 2026-10-14: the text promised it, nothing applied it.
+        try { if (this.abilityLevel('tripwire') >= 2) this.applyStatus(m, 'bleed', { source: 'barbed wire' }); } catch (e) {}
         return null;
       }
       return S.combat.stepToward(m.mx, m.my, tx, ty, blocked, danger);
@@ -39514,11 +39517,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
-    combatRound(cmd) {
-      // OLD menu combat retired — the grid is the combat now.
-      // Kept as a no-op shim so any stale caller doesn't crash.
-      return null;
-    },
     // ONE TEXT STREAM (Steve 2026-10-11): Game.log is the single text
     // stream. Every emitted line is pushed EXACTLY ONCE and carries a
     // surface tag — narration | feedback | toast | bubble | dialogue |

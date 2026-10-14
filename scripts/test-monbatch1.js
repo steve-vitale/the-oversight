@@ -63,7 +63,7 @@ function rig(v) { const o = Math.random; Math.random = () => v; return () => { M
     ['mirror_stag', ['mirror', 'confront', 'charge']],
   ]) {
     const e = mdef(id).encounter;
-    ok(`${id} encounter block`, !!e && e.fifo === true && e.telegraphGate === 'pattern' && e.painSwitch === true);
+    ok(`${id} encounter block`, !!e && e.fifo === true && e.painSwitch === true);
     ok(`${id} phases`, JSON.stringify(e.phases) === JSON.stringify(phases), JSON.stringify(e.phases));
     ok(`${id} phaseBadges cover phases`, phases.every(p => e.phaseBadges && e.phaseBadges[p]));
     ok(`${id} phaseMap moments`, ['declare', 'windup', 'resolve', 'idle'].every(k => e.phaseMap && e.phaseMap[k]));

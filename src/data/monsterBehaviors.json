@@ -1,494 +1,311 @@
 {
-  "_docs": "Data-driven monster behavior tables (Steve 2026-10-07, scaffold audit). Each monster gets a behavior entry: archetype (tactical style), aggroRange/preferredRange (numeric tuning, currently documentary \u2014 the interpreter reads preTurnHooks for behavior), fleeAt (LIVE since 2026-10-13: tbMonsterTurn honors it \u2014 values migrated into monsters.json mdefs; this table is the fallback for ad-hoc mdefs like the sigW3c sponsor-creature), and preTurnHooks (ordered list of registered hook names run at the top of tbMonsterTurn; a hook returning true consumes the turn). To migrate a species: (1) add its hook names here, (2) register the hook functions in src/js/monsterBehaviors.js (verbatim extraction from tbMonsterTurn), (3) remove the inline branch. Behavior must be IDENTICAL \u2014 this is relocation, not redesign.",
+  "_docs": "Data-driven monster behavior tables (Steve 2026-10-07, scaffold audit). Each monster gets a behavior entry: fleeAt (LIVE since 2026-10-13: tbMonsterTurn honors it \u2014 values migrated into monsters.json mdefs; this table is the fallback for ad-hoc mdefs like the sigW3c sponsor-creature), and preTurnHooks (ordered list of registered hook names run at the top of tbMonsterTurn; a hook returning true consumes the turn). To migrate a species: (1) add its hook names here, (2) register the hook functions in src/js/monsterBehaviors.js (verbatim extraction from tbMonsterTurn), (3) remove the inline branch. Behavior must be IDENTICAL \u2014 this is relocation, not redesign.",
   "_schema": "monsterBehaviors/v1",
   "behaviors": {
     "belltoad": {
-      "aggroRange": 5,
-      "archetype": "pack_singer",
       "fleeAt": 0.3,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "bright_idea": {
-      "aggroRange": 6,
-      "archetype": "bloomer",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "bulldozer": {
-      "aggroRange": 6,
-      "archetype": "charger",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "chorus_line": {
-      "aggroRange": 6,
-      "archetype": "dancer",
       "fleeAt": 0,
       "notes": "Wave-3 signature (sigW3b, Steve 2026-10-10): visible 4/4 beat; the downbeat kicks where the line is facing. Dance, move on the beat, flank it, or break the count with gravel.",
       "preTurnHooks": [
         "chorusBeat"
-      ],
-      "preferredRange": 3
+      ]
     },
     "ducks_in_a_row": {
-      "aggroRange": 5,
-      "archetype": "snake",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "gallowdeer": {
-      "aggroRange": 8,
-      "archetype": "beam_sniper",
       "fleeAt": 0,
       "notes": "Highbeam Deer \u2014 the benchmark. Antlers thrash anyone adjacent every turn the beam isn't firing. BEAM-FATIGUE (2026-10-13): after 3 sterile beam declarations the deer HUNTS \u2014 a mode: every turn advances at full speed, no beams, until antler range or the trail goes cold.",
       "preTurnHooks": [
         "antlerThrash",
         "beamFatigueHunt"
-      ],
-      "preferredRange": 4
+      ]
     },
     "glasswing": {
-      "aggroRange": 8,
-      "archetype": "diver",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "heckler": {
-      "aggroRange": 6,
-      "archetype": "hype",
       "fleeAt": 0.3,
       "notes": "Renamed from hype_horn; the old hornIs crowd-deflate branch was dead code; removed 2026-10-08. Pack tactics (party-aware 2026-10-10): the set piles onto one target.",
       "preTurnHooks": [
         "packTactics"
-      ],
-      "preferredRange": 3
+      ]
     },
     "hummice": {
-      "aggroRange": 6,
-      "archetype": "swarm",
       "fleeAt": 0.3,
       "notes": "Swarm self-check every turn \u2014 deaths drop voices, distance thins the hum.",
       "preTurnHooks": [
         "humSwarmCheck"
-      ],
-      "preferredRange": 3
+      ]
     },
     "hushwolf": {
-      "aggroRange": 7,
-      "archetype": "pack_hunter",
       "fleeAt": 0.25,
       "notes": "Pack tactics (party-aware 2026-10-10): flanks (+2 per wolf beside the target), runs down the isolated. Spawn scales with your party.",
       "preTurnHooks": [
         "packTactics"
-      ],
-      "preferredRange": 2
+      ]
     },
     "landlord": {
-      "aggroRange": 6,
-      "archetype": "territorial",
       "fleeAt": 0,
       "notes": "Eviction Wall (party-splitter 2026-10-10): against 3+ fighters it rezones the ground \u2014 a telegraphed wall through the cluster, service entrance left open.",
       "preTurnHooks": [
         "landlordEviction"
-      ],
-      "preferredRange": 3
+      ]
     },
     "lockpick_raccoon": {
-      "aggroRange": 4,
-      "archetype": "trickster",
       "fleeAt": 0.5,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "memory_projector": {
-      "aggroRange": 6,
-      "archetype": "projector",
       "fleeAt": 0.2,
-      "preTurnHooks": [],
-      "preferredRange": 4
+      "preTurnHooks": []
     },
     "mirror_stag": {
-      "aggroRange": 7,
-      "archetype": "charger",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "mirrormoth": {
-      "aggroRange": 5,
-      "archetype": "drifter",
       "fleeAt": 0.4,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "moderator": {
-      "aggroRange": 7,
-      "archetype": "censor",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 4
+      "preTurnHooks": []
     },
     "nevermore": {
-      "aggroRange": 8,
-      "archetype": "strafer",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 4
+      "preTurnHooks": []
     },
     "nightcourt": {
-      "aggroRange": 7,
-      "archetype": "ambusher",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "nightlight_catfish": {
-      "aggroRange": 5,
-      "archetype": "ambusher",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "paparazzo": {
-      "aggroRange": 8,
-      "archetype": "swarmer",
       "fleeAt": 0,
       "notes": "Renamed from camera_swarm; the old swarmIs fire-scatter branch was dead code; removed 2026-10-08.",
-      "preTurnHooks": [],
-      "preferredRange": 5
+      "preTurnHooks": []
     },
     "review_drone": {
-      "aggroRange": 7,
-      "archetype": "evaluator",
       "fleeAt": 0,
       "notes": "Can't grade a crowd \u2014 more live targets than crowdLimit stalls the evaluation.",
       "preTurnHooks": [
         "droneCrowdOverload"
-      ],
-      "preferredRange": 4
+      ]
     },
     "reunion": {
-      "aggroRange": 7,
-      "archetype": "pack_hunter",
       "fleeAt": 0,
       "notes": "The village you failed, given teeth. Brings as many as you brought (mirror spawn, max 3); the faces flank and run down stragglers.",
       "preTurnHooks": [
         "packTactics"
-      ],
-      "preferredRange": 2
+      ]
     },
     "speedbump_turtle": {
-      "aggroRange": 2,
-      "archetype": "bunker",
       "fleeAt": 0,
       "notes": "Seals in its shell and waits you out. Nearly invulnerable; the answer is patience.",
       "preTurnHooks": [
         "turtleBunker"
-      ],
-      "preferredRange": 1
+      ]
     },
     "spool": {
-      "aggroRange": 5,
-      "archetype": "mimic",
       "fleeAt": 0,
       "notes": "Wave-3 signature (sigW3b, Steve 2026-10-10): RECORDS the player\u2019s first 3 turns (harmless), then REPLAYS them back. Feed it heals and waits.",
       "preTurnHooks": [
         "spoolWatch"
-      ],
-      "preferredRange": 3
+      ]
     },
     "statickite": {
-      "aggroRange": 8,
-      "archetype": "kite",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 5
+      "preTurnHooks": []
     },
     "sunbasker": {
-      "aggroRange": 5,
-      "archetype": "basker",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "terms_of_service": {
-      "aggroRange": 6,
-      "archetype": "bureaucrat",
       "fleeAt": 0,
       "notes": "Wave-3 signature (sigW3b, Steve 2026-10-10): adds legible clauses mid-fight; object now, accept later, or read 3 and invoke the \u00a70 loophole.",
       "preTurnHooks": [
         "tosClauses"
-      ],
-      "preferredRange": 3
+      ]
     },
     "understudy": {
-      "aggroRange": 6,
-      "archetype": "mimic",
       "fleeAt": 0.2,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "union_rep": {
-      "aggroRange": 6,
-      "archetype": "organizer",
       "fleeAt": 0.2,
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "voice_mimic_radio": {
-      "aggroRange": 6,
-      "archetype": "mimic",
       "fleeAt": 0.2,
       "notes": "The Call Goes Out (party-splitter 2026-10-10): against 3+ fighters it lures one ally off alone, once per fight. A hand on their shoulder breaks it.",
       "preTurnHooks": [
         "staticCallOut"
-      ],
-      "preferredRange": 4
+      ]
     },
     "warranty_caller": {
-      "aggroRange": 6,
-      "archetype": "caller",
       "fleeAt": 0.1,
-      "preTurnHooks": [],
-      "preferredRange": 4
+      "preTurnHooks": []
     },
     "white_noise_heron": {
-      "aggroRange": 7,
-      "archetype": "striker",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 4
+      "preTurnHooks": []
     },
     "giant_mosquito": {
-      "aggroRange": 6,
-      "archetype": "diver",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 2
+      "preTurnHooks": []
     },
     "alien_tick": {
-      "aggroRange": 3,
-      "archetype": "ambusher",
       "fleeAt": 0,
-      "preTurnHooks": [],
-      "preferredRange": 1
+      "preTurnHooks": []
     },
     "redactor": {
-      "aggroRange": 5,
-      "archetype": "censor",
       "fleeAt": 0.2,
       "notes": "Point-then-redact: the handles point at a named target a full round before the redaction lands (sigW3a.js). Redacts the loudest thing first \u2014 a carried decoy absorbs it. Two quiet turns starve it.",
-      "preTurnHooks": ["sigRedactor"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigRedactor"]
     },
     "gavel": {
-      "aggroRange": 6,
-      "archetype": "judge",
       "fleeAt": 0,
       "notes": "Trial procedure: accuses from the player's logged moments (a full round of warning), then the verdict falls (sigW3a.js). Object/recess/confess are real motions. Frontal strikes hit the sound-block.",
-      "preTurnHooks": ["sigGavel"],
-      "preferredRange": 3
+      "preTurnHooks": ["sigGavel"]
     },
     "focus_group": {
-      "aggroRange": 6,
-      "archetype": "audience",
       "fleeAt": 0,
       "notes": "Audible ratings every round: loved is buffed-and-answered, hated is safe-but-suppressed (sigW3a.js). Mouth-head parts pop; eye-heads mark. Three boring rounds and it leaves.",
-      "preTurnHooks": ["sigFocusGroup"],
-      "preferredRange": 3
+      "preTurnHooks": ["sigFocusGroup"]
     },
     "focus_group_eye": {
-      "aggroRange": 6,
-      "archetype": "watcher",
       "fleeAt": 0,
       "notes": "Synthetic sub-fighter spawned by the focus group lead (sigW3a.js). Marks the player's most-used rated verb; consumes its turn. Cannot be struck down.",
-      "preTurnHooks": ["sigFocusEye"],
-      "preferredRange": 3
+      "preTurnHooks": ["sigFocusEye"]
     },
     "callback": {
-      "aggroRange": 5,
-      "archetype": "mimic",
       "fleeAt": 0,
-      "preTurnHooks": ["cbFace"],
-      "preferredRange": 2
+      "preTurnHooks": ["cbFace"]
     },
     "buffering": {
-      "aggroRange": 6,
-      "archetype": "drifter",
       "fleeAt": 0,
-      "preTurnHooks": ["bufMirage"],
-      "preferredRange": 3
+      "preTurnHooks": ["bufMirage"]
     },
     "ad_break": {
-      "aggroRange": 5,
-      "archetype": "stager",
       "fleeAt": 0,
-      "preTurnHooks": ["adBreak"],
-      "preferredRange": 3
+      "preTurnHooks": ["adBreak"]
     },
     "ad_sponsor": {
-      "aggroRange": 0,
-      "archetype": "rider",
       "fleeAt": 1,
-      "preTurnHooks": ["sponsorCling"],
-      "preferredRange": 0
+      "preTurnHooks": ["sponsorCling"]
     }    ,
     "congregation": {
-      "aggroRange": 6,
-      "archetype": "liturgist",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): invite-then-absolve liturgy. Bell rings, absolution offered (heal 40 + cleanse for a 2-round geas); it cannot compel without inviting. Heresy breaks the geas.",
-      "preTurnHooks": ["sigCongregation"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigCongregation"]
     },
     "strike": {
-      "aggroRange": 6,
-      "archetype": "organizer",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): posts readable demands, then 2-round shutdowns where nothing works. Meet a demand (it leaves) or scab at half strength.",
-      "preTurnHooks": ["sigStrike"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigStrike"]
     },
     "influencer": {
-      "aggroRange": 6,
-      "archetype": "broadcaster",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): recruits literal follower adds that sharpen Ratio and drain favor. Kill followers or out-entertain it to steal them.",
-      "preTurnHooks": ["sigInfluencer"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigInfluencer"]
     },
     "audit": {
-      "aggroRange": 6,
-      "archetype": "examiner",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): scheduled audit every 3 rounds taxes the most-used verb for 2 rounds. Deliberate jank or read the clipboard.",
-      "preTurnHooks": ["sigAudit"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigAudit"]
     },
     "reunion": {
-      "aggroRange": 6,
-      "archetype": "mirror",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): mirrors your most-used verb; repeats weaken (it knows the move). Novelty is the weapon.",
-      "preTurnHooks": ["sigReunion"],
-      "preferredRange": 3
+      "preTurnHooks": ["sigReunion"]
     },
     "suburb": {
-      "aggroRange": 5,
-      "archetype": "trap",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): comfort trap. Rest heals 30 but stacks complacency (5 = you move in, routed). Escape by walking out or bring something alive inside.",
-      "preTurnHooks": ["sigSuburb"],
-      "preferredRange": 3
+      "preTurnHooks": ["sigSuburb"]
     },
     "eulogy": {
-      "aggroRange": 6,
-      "archetype": "narrator",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): 5-verse doom narration, each verse weighted. Contradict verses to strike them; 3 contradictions unlock the kind rewrite (dismissed).",
-      "preTurnHooks": ["sigEulogy"],
-      "preferredRange": 5
+      "preTurnHooks": ["sigEulogy"]
     },
     "algorithm": {
-      "aggroRange": 6,
-      "archetype": "predictor",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): thumbnail previews of its moves; repeats get countered (x1.5). Be unpredictable or tank on purpose to poison its data.",
-      "preTurnHooks": ["sigAlgorithm"],
-      "preferredRange": 4
+      "preTurnHooks": ["sigAlgorithm"]
     },
     "eater": {
-      "aggroRange": 7,
-      "archetype": "gorger",
       "fleeAt": 0,
       "notes": "Wave-4 signature (sigW4, Steve 2026-10-11): Steve's monster. Eats grid food each round, +15 damage per 1000 kcal. Poison the meal or starve the field; it snacks packs when adjacent.",
-      "preTurnHooks": ["sigEater"],
-      "preferredRange": 2
+      "preTurnHooks": ["sigEater"]
     }    ,
     "cancellation": {
-      "aggroRange": 6,
-      "archetype": "censor",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): the stamp descends 3 turns, then un-teaches System abilities and silences favor. Go off-script or spend favor.",
-      "preTurnHooks": ["cxStamp"],
-      "preferredRange": 5
+      "preTurnHooks": ["cxStamp"]
     },
     "editor": {
-      "aggroRange": 6,
-      "archetype": "cutter",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): cuts every 3rd turn (turn/position/ally), telegraphed a round ahead. Cut things land on a floor tile; retrieve them or jam a cut with contradiction.",
-      "preTurnHooks": ["edCut"],
-      "preferredRange": 4
+      "preTurnHooks": ["edCut"]
     },
     "rerun": {
-      "aggroRange": 6,
-      "archetype": "looper",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): resets positions and HP every 5 rounds, +10% adaptation. Margin messages persist; win fast or write in the margins.",
-      "preTurnHooks": ["rrTake"],
-      "preferredRange": 4
+      "preTurnHooks": ["rrTake"]
     },
     "spoiler": {
-      "aggroRange": 6,
-      "archetype": "prophet",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): truthful prophecies that gain weight; the Leaked Ending manifests through the hook. Fulfill cheaply or ask a binding question.",
-      "preTurnHooks": ["spAnnounce"],
-      "preferredRange": 5
+      "preTurnHooks": ["spAnnounce"]
     },
     "timeslot": {
-      "aggroRange": 6,
-      "archetype": "scheduler",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): 3-turn venues, strictly worsening, highlighted a round ahead. Own the venue or get bumped for being boring.",
-      "preTurnHooks": ["tsReschedule"],
-      "preferredRange": 4
+      "preTurnHooks": ["tsReschedule"]
     },
     "nielsen": {
-      "aggroRange": 6,
-      "archetype": "audience",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): ratings 0-100; the gaze scales with ratings and is undodgeable. At 0: 2-round sign-off. Fight boring to starve it.",
-      "preTurnHooks": ["niWatch"],
-      "preferredRange": 5
+      "preTurnHooks": ["niWatch"]
     },
     "finale": {
-      "aggroRange": 7,
-      "archetype": "closer",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11; campaign 2026-10-12): fiFinaleHeart wraps fiFinale \u2014 part two at bloodied (sky-fall zones, the credits, accelerated growth, THE ENCORE). Declares at 50% HP or round 4; 3-round countdown to an unavoidable [150,200] title card. Sacrifice or end it first; deaths via maybeCheatDeath.",
-      "preTurnHooks": ["fiFinaleHeart"],
-      "preferredRange": 4
+      "preTurnHooks": ["fiFinaleHeart"]
     },
     "finale_crew": {
-      "aggroRange": 7,
-      "archetype": "brawler",
       "fleeAt": 0,
       "notes": "Finale campaign node 1 (2026-10-12): the commercial break + injected spoiler/network_note trio. Standard attacks; no signature hooks.",
-      "preTurnHooks": [],
-      "preferredRange": 3
+      "preTurnHooks": []
     },
     "finale_opening": {
-      "aggroRange": 7,
-      "archetype": "closer",
       "fleeAt": 0,
       "notes": "Finale campaign node 2 (2026-10-12): the finale still ARRIVING \u2014 same fiFinale hook, mdef overrides fiCardRange [100,140] + fiCountdownRounds 5. Kill the credits and the sky opens.",
-      "preTurnHooks": ["fiFinale"],
-      "preferredRange": 4
+      "preTurnHooks": ["fiFinale"]
     },
     "network_note": {
-      "aggroRange": 6,
-      "archetype": "executive",
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): announce-then-apply memos (fragile by design). Feed it bad notes: applied next turn, reverted the turn after. Kill it first or weaponize the notes.",
-      "preTurnHooks": ["nnNote"],
-      "preferredRange": 4
+      "preTurnHooks": ["nnNote"]
     }
   }
 }
