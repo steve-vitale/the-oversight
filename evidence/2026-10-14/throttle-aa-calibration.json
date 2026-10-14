@@ -1,0 +1,47 @@
+{
+ "nPairs": 16,
+ "dayNoise": {
+  "p50": 0,
+  "p90": 3,
+  "p95": 13,
+  "max": 13,
+  "meanAbs": 1.1875
+ },
+ "starveNoise": {
+  "countPerSeed": {
+   "p50": 0,
+   "p90": 2
+  },
+  "per100days": {
+   "p50": 0,
+   "p90": 1.1299435028248588,
+   "max": 3.515981735159817
+  },
+  "per100vd": {
+   "p50": 0,
+   "p90": 0.144,
+   "max": 0.5070000000000001
+  }
+ },
+ "guardrails": {
+  "G1_median_survival_days": {
+   "rule": "armed_median >= before_median - MEDIAN_BOUND_DAYS",
+   "MEDIAN_BOUND_DAYS": 3,
+   "derivation": "ceil(p90 of |per-seed A/A day deltas|)"
+  },
+  "G2_starvation_per100days": {
+   "rule": "armed_rate <= before_rate + STARVE_RATE_BOUND",
+   "STARVE_RATE_BOUND": 1.13,
+   "derivation": "p90 of |per-seed A/A starve-per-100-village-days deltas|"
+  },
+  "note_vd": "per-100-villager-day noise measured for future runs; confirm re-adjudication uses the village-day denominator (confirm rows lack villager-days)",
+  "G2vd_p90_per100vd": 0.144
+ },
+ "honesty": {
+  "limitation": "master moved since the confirm (loop-A r24 landings + ship-loop commits); this A/A ran on the current tip, so the noise floor is an estimate of the confirm suite’s, not identical to it. Do not over-claim.",
+  "aMedian": 98,
+  "bMedian": 98,
+  "aTotalStarve": 24,
+  "bTotalStarve": 24
+ }
+}
