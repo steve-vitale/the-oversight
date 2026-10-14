@@ -7,6 +7,21 @@ verbatim.
 
 ---
 
+## 2026-10-14 (latest, round 3)
+
+On trimming the eastern woodlands' 48 animals to real eastern species:
+"Sure aren't they eastern already?" (They weren't: bison, javelina,
+alligator and python spawned on every map. Trim approved.)
+
+On local/visitor/stranger: "Yes the local visitor map looks okay just maybe
+not granular enough or synced to our available starting options. Flesh out
+where it needs to be to make sense, either with starting characters or new
+locations to originate. I did answer a few of your repeated questions
+already."
+
+(Note to agents: check this file before asking Steve anything. Don't
+re-ask.)
+
 ## 2026-10-14 (latest, round 2)
 
 "Human skills should be learnable before the system shows up. Do a quick
