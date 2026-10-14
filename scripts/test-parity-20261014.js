@@ -126,9 +126,12 @@ function freshVillager(Game, vid) {
     // first three, X third) instead of reading whatever the kit leads with.
     const KITS = Game.trackData().kits;
     const savedStrange = KITS.strange;
-    KITS.strange = ['pocket_sand', 'third_eye', 'static_toss'].concat(savedStrange.filter(id => !['pocket_sand', 'third_eye', 'static_toss'].includes(id)));
+    // CLASS DIVERSITY (2026-10-14, on purpose): a sheet now draws 3 of the
+    // next 6 unheld entries per holder, so the pinned kit holds exactly the
+    // three this test is about (window = the whole kit, order kept).
+    KITS.strange = ['pocket_sand', 'third_eye', 'static_toss'];
     const offers = Game.villagerLevelUpOffers(va, 'strange');
-    T.ok('offers = the next 3 unheld strange kit abilities', JSON.stringify(offers) === JSON.stringify(KITS.strange.slice(0, 3)), offers.join(','));
+    T.ok('offers = the 3 unheld entries of the (pinned) strange kit, in kit order', JSON.stringify(offers) === JSON.stringify(KITS.strange.slice(0, 3)), offers.join(','));
     const X = 'static_toss'; // "THROW it" — a ranged ability
     // a field build sharing no god path with the offers (god-path 2026-10-14:
     // echo_location/bloodhound are hunter-leaning now, and static_toss is

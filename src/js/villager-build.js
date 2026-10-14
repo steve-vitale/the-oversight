@@ -9,7 +9,7 @@
 //   - npcLearnAbility(vid, abilityId, level, source) -> true if knowledge rose
 //   - villagerTargetBuild(vid) -> up to 6 ability ids they are building toward (from what they know)
 //   - buildDecide(who, offerIds, opts) -> {pick, replace} | {keep: true}; the swap-or-keep rule for both
-//   - villagerLevelUpOffers(vid, track) -> next 3 unheld kit abilities (the player's levelUpOffers, for them)
+//   - villagerLevelUpOffers(vid, track, level) -> the player's sheet for them: 3 of the next 6 unheld kit abilities (godpath.js kitSheet, the same function)
 //   - villagerResolveLevelUps(vid) -> resolves queued sheets: pick by buildScore, swap or keep; defers to seek knowledge when they know too little
 //   - villagerWantsKnowledge(vid) -> 'sheet' | 'build' | null
 //   - villagerSeekKnowledge(vid) -> {teacher, abilityId, level} | null (the agency action)
@@ -298,7 +298,7 @@
 
     // villagerLevelUpOffers(vid, track): the player's sheet, for a villager:
     // the next 3 unheld magic abilities of the track's kit.
-    villagerLevelUpOffers(vid, track) {
+    villagerLevelUpOffers(vid, track, level) {
       const T = this.trackData();
       const held = new Set(this._buildOwned(vid));
       const F = features(this);
@@ -311,11 +311,18 @@
       }
       const n = T.offerSize || 3;
       const out = cands.slice(0, n);
-      // GOD-PATH: the same shaping as the player's sheet (>=1 offer on their
-      // path, distinct roles) — godpath.js shapeOffers, if loaded.
+      const d = (id) => (this.abilityDef && this.abilityDef(id)) || { id };
+      // ONE SHEET: the player's own function (godpath.js kitSheet): drawn from
+      // the next 6 unheld entries per holder/level, leaned to their class or,
+      // before one, their job path, distinct roles.
+      if (typeof this.kitSheet === 'function') {
+        try {
+          if (level == null) level = this.trackLevelFor ? this.trackLevelFor(this.npcXp(vid)[track] || 0, 'villager') : 0;
+          return this.kitSheet(cands.map(d), vid, track, level).map(x => x.id);
+        } catch (e) { warn('villager kit sheet', e); }
+      }
       if (typeof this.shapeOffers === 'function') {
         try {
-          const d = (id) => (this.abilityDef && this.abilityDef(id)) || { id };
           return this.shapeOffers(out.map(d), cands.slice(n).map(d), vid).map(x => x.id);
         } catch (e) { warn('villager sheet lean', e); }
       }
@@ -348,7 +355,7 @@
         while (q.length) {
           const sh = q[0];
           if (sh.day == null) sh.day = day;
-          const offers = this.villagerLevelUpOffers(vid, sh.track);
+          const offers = this.villagerLevelUpOffers(vid, sh.track, sh.level);
           if (!offers.length) { q.shift(); last = 'empty'; continue; } // the shelf is bare: the XP still counts
           for (const id of offers) this.npcLearnAbility(vid, id, 2, 'system-sheet'); // the System shows what each does
           if (this._knowsTooLittle(vid, offers) && day - sh.day < 3) {

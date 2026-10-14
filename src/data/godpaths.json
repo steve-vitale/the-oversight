@@ -19,7 +19,11 @@
       "_doc": "A level-up or gift sheet leans to a recognised path: at least one offer is from it when the kit has one; offers prefer distinct roles.",
       "lean": true,
     "_payoffAnyTrack": "A named class's payoff may appear on any level-up or gift sheet, not only its own track's (godpath-buff 2026-10-14): the payoff is what makes a god a build, and it often sits in another track's kit.",
-    "payoffAnyTrack": true
+    "payoffAnyTrack": true,
+    "_window": "Class diversity (2026-10-14): a level-up sheet draws offerSize offers from the next `window` unheld kit entries, weight windowDecay^i for the i-th entry (earlier = likelier, so power order holds on average), deterministic per holder/track/level (a private hash stream, never Math.random). Before a class is recognised, jobLean puts >=1 offer on the holder's job path (characterGen occupations[].pathLean) when the window holds one. evidence/2026-10-14/class-diversity.md",
+    "window": 6,
+    "windowDecay": 0.7,
+    "jobLean": true
     }
   },
   "paths": {

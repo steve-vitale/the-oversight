@@ -373,6 +373,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12, "social": 6},
+      "pathLean": ["caregiver"],
       "id": "er_nurse",
       "itemBias": {
         "clothing": [
@@ -415,6 +416,7 @@
         "preservation_instinct"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["forager", "survivalist"],
       "id": "line_cook",
       "itemBias": {
         "sentimental": [
@@ -455,6 +457,7 @@
         "patient_aim"
       ],
       "trackLean": {"field": 12, "combat": 6},
+      "pathLean": ["hunter"],
       "id": "hunting_guide",
       "itemBias": {
         "clothing": [
@@ -500,6 +503,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12, "strange": 6},
+      "pathLean": ["survivalist", "hunter"],
       "id": "electrician",
       "itemBias": {
         "clothing": [
@@ -537,6 +541,7 @@
         "diplomat"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["socialite", "caregiver"],
       "id": "esl_teacher",
       "itemBias": {
         "sentimental": [
@@ -578,6 +583,7 @@
         "diplomat"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["caregiver", "socialite"],
       "id": "interpreter",
       "itemBias": {
         "sentimental": [
@@ -618,6 +624,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["survivalist", "miser"],
       "id": "mechanic",
       "itemBias": {
         "clothing": [
@@ -655,6 +662,7 @@
         "triage"
       ],
       "trackLean": {"craft": 12, "combat": 6},
+      "pathLean": ["caregiver", "survivalist"],
       "id": "paramedic",
       "itemBias": {
         "clothing": [
@@ -693,6 +701,7 @@
         "preservation_instinct"
       ],
       "trackLean": {"field": 12, "craft": 6},
+      "pathLean": ["forager"],
       "id": "farmer",
       "itemBias": {
         "clothing": [
@@ -734,6 +743,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["shieldbearer", "miser"],
       "id": "carpenter",
       "itemBias": {
         "clothing": [
@@ -772,6 +782,7 @@
         "diplomat"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["explorer", "caregiver"],
       "id": "librarian",
       "itemBias": {
         "sentimental": [
@@ -808,6 +819,7 @@
         "patient_aim"
       ],
       "trackLean": {"field": 12},
+      "pathLean": ["explorer", "drifter"],
       "id": "trail_crew",
       "itemBias": {
         "clothing": [
@@ -854,6 +866,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12, "combat": 6},
+      "pathLean": ["caregiver", "shieldbearer"],
       "id": "army_medic",
       "itemBias": {
         "clothing": [
@@ -896,6 +909,7 @@
         "patient_aim"
       ],
       "trackLean": {"field": 12},
+      "pathLean": ["explorer", "hunter"],
       "id": "fishing_guide",
       "itemBias": {
         "clothing": [
@@ -938,6 +952,7 @@
         "preservation_instinct"
       ],
       "trackLean": {"field": 12, "craft": 6},
+      "pathLean": ["forager"],
       "id": "gardener",
       "itemBias": {
         "clothing": [
@@ -971,6 +986,7 @@
     },
     {
       "trackLean": {"craft": 12, "social": 6},
+      "pathLean": ["caregiver"],
       "id": "midwife",
       "name": "Midwife",
       "teachTags": [
@@ -1014,6 +1030,7 @@
     },
     {
       "trackLean": {"craft": 12},
+      "pathLean": ["caregiver", "miser"],
       "id": "dentist",
       "name": "Dentist",
       "teachTags": [
@@ -1057,6 +1074,7 @@
     },
     {
       "trackLean": {"craft": 12},
+      "pathLean": ["caregiver", "survivalist"],
       "id": "pharmacist",
       "name": "Pharmacist",
       "teachTags": [
@@ -1099,6 +1117,7 @@
     },
     {
       "trackLean": {"craft": 12, "field": 6},
+      "pathLean": ["hunter", "caregiver"],
       "id": "veterinarian",
       "name": "Veterinarian",
       "teachTags": [
@@ -1142,6 +1161,7 @@
     },
     {
       "trackLean": {"craft": 12, "social": 6},
+      "pathLean": ["caregiver", "brawler"],
       "id": "physical_therapist",
       "name": "physical therapy aide",
       "teachTags": [
@@ -1184,6 +1204,7 @@
     },
     {
       "trackLean": {"combat": 12, "craft": 6},
+      "pathLean": ["survivalist", "shieldbearer"],
       "id": "firefighter",
       "name": "Firefighter",
       "teachTags": [],
@@ -1224,6 +1245,7 @@
     },
     {
       "trackLean": {"combat": 12, "social": 6},
+      "pathLean": ["shieldbearer", "socialite"],
       "id": "police_officer",
       "name": "Police officer",
       "teachTags": [],
@@ -1265,6 +1287,7 @@
     },
     {
       "trackLean": {"social": 12},
+      "pathLean": ["socialite", "explorer"],
       "id": "dispatcher_911",
       "name": "emergency dispatcher",
       "teachTags": [],
@@ -1305,6 +1328,7 @@
     },
     {
       "trackLean": {"social": 12},
+      "pathLean": ["caregiver", "socialite"],
       "id": "social_worker",
       "name": "Social worker",
       "teachTags": [],
@@ -1346,6 +1370,7 @@
     },
     {
       "trackLean": {"strange": 12, "craft": 6},
+      "pathLean": ["caregiver", "survivalist"],
       "id": "mortician",
       "name": "Mortician",
       "teachTags": [],
@@ -1401,6 +1426,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["survivalist", "drifter"],
       "id": "plumber",
       "itemBias": {
         "clothing": [
@@ -1442,6 +1468,7 @@
         "eagle_eye"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["drifter", "miser"],
       "id": "locksmith",
       "itemBias": {
         "clothing": [
@@ -1483,6 +1510,7 @@
         "adrenaline_control"
       ],
       "trackLean": {"combat": 12, "craft": 6},
+      "pathLean": ["brawler", "survivalist"],
       "id": "welder",
       "itemBias": {
         "clothing": [
@@ -1524,6 +1552,7 @@
         "survivor"
       ],
       "trackLean": {"combat": 12, "field": 6},
+      "pathLean": ["brawler", "explorer"],
       "id": "roofer",
       "itemBias": {
         "clothing": [
@@ -1564,6 +1593,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["shieldbearer"],
       "id": "mason",
       "itemBias": {
         "clothing": [
@@ -1605,6 +1635,7 @@
         "scrounger"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["survivalist"],
       "id": "hvac_tech",
       "itemBias": {
         "clothing": [
@@ -1646,6 +1677,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["miser", "survivalist"],
       "id": "appliance_repair",
       "itemBias": {
         "clothing": [
@@ -1687,6 +1719,7 @@
         "adrenaline_control"
       ],
       "trackLean": {"combat": 12, "craft": 6},
+      "pathLean": ["brawler", "shieldbearer"],
       "id": "blacksmith",
       "itemBias": {
         "clothing": [
@@ -1728,6 +1761,7 @@
         "tracker"
       ],
       "trackLean": {"field": 12, "combat": 6},
+      "pathLean": ["hunter", "drifter"],
       "id": "exterminator",
       "itemBias": {
         "clothing": [
@@ -1771,6 +1805,7 @@
         "soft_step"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["explorer", "shieldbearer"],
       "id": "glazier",
       "itemBias": {
         "clothing": [
@@ -1796,6 +1831,7 @@
     },
     {
       "trackLean": {"field": 12},
+      "pathLean": ["forager", "hunter"],
       "id": "beekeeper",
       "name": "Beekeeper",
       "teachTags": [
@@ -1839,6 +1875,7 @@
     },
     {
       "trackLean": {"field": 6, "combat": 6, "craft": 6},
+      "pathLean": ["brawler", "forager"],
       "id": "butcher",
       "name": "Butcher",
       "teachTags": [
@@ -1882,6 +1919,7 @@
     },
     {
       "trackLean": {"craft": 12},
+      "pathLean": ["forager", "survivalist"],
       "id": "baker",
       "name": "Baker",
       "teachTags": [
@@ -1925,6 +1963,7 @@
     },
     {
       "trackLean": {"field": 12},
+      "pathLean": ["hunter", "survivalist"],
       "id": "fisherman",
       "name": "Fisherman",
       "teachTags": [
@@ -1968,6 +2007,7 @@
     },
     {
       "trackLean": {"field": 12, "combat": 6},
+      "pathLean": ["hunter", "brawler"],
       "id": "rancher",
       "name": "Rancher",
       "teachTags": [
@@ -2013,6 +2053,7 @@
     },
     {
       "trackLean": {"craft": 12, "social": 6},
+      "pathLean": ["forager", "socialite"],
       "id": "chef",
       "name": "Chef",
       "teachTags": [
@@ -2055,6 +2096,7 @@
     },
     {
       "trackLean": {"field": 12},
+      "pathLean": ["forager", "explorer"],
       "id": "forager",
       "name": "Wild food forager",
       "teachTags": [
@@ -2100,6 +2142,7 @@
     },
     {
       "trackLean": {"craft": 12},
+      "pathLean": ["miser", "forager"],
       "id": "vintner",
       "name": "Vintner",
       "teachTags": [
@@ -2142,6 +2185,7 @@
     },
     {
       "trackLean": {"field": 12, "strange": 6},
+      "pathLean": ["forager", "explorer"],
       "id": "mushroom_grower",
       "name": "Mushroom grower",
       "teachTags": [
@@ -2185,6 +2229,7 @@
     },
     {
       "trackLean": {"field": 12},
+      "pathLean": ["explorer", "survivalist"],
       "id": "sailor",
       "name": "Sailor",
       "teachTags": [
@@ -2245,6 +2290,7 @@
         "evidence_board"
       ],
       "trackLean": {"strange": 12},
+      "pathLean": ["explorer", "drifter"],
       "id": "programmer",
       "itemBias": {
         "clothing": [
@@ -2288,6 +2334,7 @@
         "pathfinder"
       ],
       "trackLean": {"field": 12},
+      "pathLean": ["drifter", "explorer"],
       "id": "truck_driver",
       "itemBias": {
         "clothing": [
@@ -2328,6 +2375,7 @@
         "scrounger"
       ],
       "trackLean": {"social": 6, "strange": 12},
+      "pathLean": ["socialite", "drifter"],
       "id": "artist",
       "itemBias": {
         "clothing": [
@@ -2368,6 +2416,7 @@
         "diplomat"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["socialite"],
       "id": "musician",
       "itemBias": {
         "clothing": [
@@ -2408,6 +2457,7 @@
         "diplomat"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["socialite", "explorer"],
       "id": "journalist",
       "itemBias": {
         "clothing": [
@@ -2451,6 +2501,7 @@
         "mediator"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["miser", "socialite"],
       "id": "lawyer",
       "itemBias": {
         "clothing": [
@@ -2492,6 +2543,7 @@
         "steady_hands"
       ],
       "trackLean": {"craft": 12},
+      "pathLean": ["miser", "caregiver"],
       "id": "tailor",
       "itemBias": {
         "clothing": [
@@ -2533,6 +2585,7 @@
         "cornered_rat"
       ],
       "trackLean": {"combat": 12},
+      "pathLean": ["shieldbearer", "brawler"],
       "id": "soldier",
       "itemBias": {
         "clothing": [
@@ -2575,6 +2628,7 @@
         "wanderer"
       ],
       "trackLean": {"field": 6, "strange": 6},
+      "pathLean": ["explorer", "drifter"],
       "id": "pilot",
       "itemBias": {
         "clothing": [
@@ -2620,6 +2674,7 @@
         "generous"
       ],
       "trackLean": {"social": 12},
+      "pathLean": ["socialite", "miser"],
       "id": "bartender",
       "itemBias": {
         "clothing": [

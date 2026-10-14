@@ -14,7 +14,7 @@
 //   - creditDeed(who, deedId, trackOverride) -> track XP from the deed table for whoever did it ('player' or a villager id); the same n and the same per-day cap per doer
 //   - noteDeed(deedId, trackOverride) -> creditDeed('player', ...)
 //   - convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic
-//   - levelUpOffers(track) -> next unheld magic abilities of the track's kit (offerSize), leaned to a recognised god path (godpath.js shapeOffers)
+//   - levelUpOffers(track, level) -> offerSize of the next 6 unheld magic abilities of the track's kit, drawn per holder/level and leaned to a recognised god path or, before one, the job path (godpath.js kitSheet, the same function villagers use)
 //   - pumpLevelUps() -> opens the next queued level-up sheet when none is pending
 //   - keepAbilities() -> declines a level-up sheet ("Keep what I have")
 //   - isLevelUpSheet() -> the pending ability sheet is a track level-up
@@ -352,7 +352,7 @@
     },
 
     // --- the player's level-up sheet ---
-    levelUpOffers(track) {
+    levelUpOffers(track, level) {
       const T = this.trackData();
       const owned = new Set(this.ownedAbilityIds ? this.ownedAbilityIds() : []);
       const all = this.data.abilities || [];
@@ -366,9 +366,18 @@
       }
       const n = T.offerSize || 3;
       const out = cands.slice(0, n);
-      // GOD-PATH LEAN (2026-10-14): a recognised class gets at least one offer
-      // from its path when the kit has one, and the sheet prefers distinct
-      // roles (godpath.js shapeOffers). No class: the kit order stands.
+      // ONE SHEET (class-diversity 2026-10-14): godpath.js kitSheet draws the
+      // offers from the next 6 unheld entries (weighted to earlier ones,
+      // deterministic per holder/track/level) and leans them: a recognised
+      // class first, before that the bearer's job path. Villagers use the
+      // same function (villager-build.js villagerLevelUpOffers).
+      if (typeof this.kitSheet === 'function') {
+        if (level == null) { try { level = (this.playerTracks()[track] || {}).level || 0; } catch (e) { warn('levelUpOffers level', e); level = 0; } }
+        const shaped = this.kitSheet(cands, 'player', track, level);
+        if (shaped._leaned) this.trackStat('leaned');
+        if (shaped._jobLeaned) this.trackStat('jobLeaned');
+        return shaped;
+      }
       if (typeof this.shapeOffers === 'function') {
         const shaped = this.shapeOffers(out, cands.slice(n), 'player');
         if (shaped._leaned) this.trackStat('leaned');
@@ -387,7 +396,7 @@
         while (q.length) {
           const lu = q.shift();
           const label = (T.labels || {})[lu.track] || lu.track;
-          const offers = this.levelUpOffers(lu.track);
+          const offers = this.levelUpOffers(lu.track, lu.level);
           if (!offers.length) {
             this.sysSay(`◈ ${label.toUpperCase()} ${lu.level}. "We have nothing left on that shelf for you. You've taken it all. Impressive. Greedy, but impressive."`);
             try { this.tele('track_level_empty', { track: lu.track, level: lu.level }); } catch (e) { warn('tele', e); }

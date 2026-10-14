@@ -10,7 +10,9 @@
 //   - godpathClass(who) -> stored class record {path, subclass, since, god} or null
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
-//   - shapeOffers(choices, pool, who) -> offers with >=1 on the recognised path and distinct roles where possible
+//   - shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible
+//   - kitSheet(cands, who, track, level) -> THE level-up sheet for player and villagers: offerSize offers drawn from the next rules.offers.window unheld kit entries, weighted to earlier ones, deterministic per holder/track/level (private hash stream), then shapeOffers
+//   - holderJobPaths(who) -> god paths the holder's occupation leans to (characterGen occupations[].pathLean)
 //   - registerVerbs() -> registers a generic impl + precheck for every data action with `do` (verbs: aegis, wall, pull, push, pack, heal, blink, swap, foresee, broadcast, command, empower, guard, bribe, feed_camp)
 //   - allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage)
 //   - absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage)
@@ -25,6 +27,9 @@
 //   - one_source: an ability's path is `def.path` (+ `def.alsoPath`); nothing reads the retired `paths` array (code: abilityPaths)
 //   - same_function: recognition runs the same classify() for the player and every villager (code: recognizeClass)
 //   - if_you_dont_know_it_doesnt_show: classLine is null until the class is recognised (code: classLine)
+//   - one_sheet: player and villager level-up sheets both come from kitSheet (code: kitSheet)
+//   - sheet_rng_private: the sheet window draw never consumes Math.random (code: sheetRng)
+//   - job_lean_before_class: before a class is named, a sheet carries >=1 offer on the holder's job path when the window has one; after, the class lean rules (code: shapeOffers)
 //   - knowledge_gated_lean: pathLean scores only abilities the caller says the holder knows; an unknown ability scores 0 (code: pathLean)
 //   - control_changes_the_board: warden/trickster/dealer verbs move fighters or raise terrain on the real grid (code: VERBS.wall, push, pull, swap, bribe)
 //   - food_powered: every verb's cost is in the action's data (kcal), paid by useAbility before dispatch (code: registerVerbs)
@@ -206,14 +211,91 @@
     } catch (e) { warn('pathLean', e); return 0; }
   }
 
-  // shapeOffers(choices, pool, who): choices are ability defs (or {id}) in
+  function offerRules() { return (((data() || {}).rules || {}).offers) || {}; }
+
+  // holderJobPaths(who): the god paths the holder's old job plausibly grows
+  // into (characterGen occupations[].pathLean). Steve 2026-10-14: "Gods are
+  // rough representatives of what starts out as jobs and classes, or
+  // playstyles." The player is the bearer's own person.
+  function holderJobPaths(who) {
+    try {
+      const pid = isPlayer(who) ? Game.villagerId : who;
+      const p = (pid && Game.getPerson) ? Game.getPerson(pid) : null;
+      const occId = p && p.occupationId;
+      if (!occId) return [];
+      const occ = ((((Game.data || {}).characterGen || {}).occupations) || []).find(o => o.id === occId);
+      const paths = (data() || {}).paths || {};
+      return ((occ && occ.pathLean) || []).filter(x => paths[x]);
+    } catch (e) { warn('holderJobPaths', e); return []; }
+  }
+
+  // sheetRng(who, track, level): a PRIVATE deterministic stream per holder,
+  // track and level (FNV-1a hash -> mulberry32). Never touches Math.random:
+  // modules and sims share that stream (the parity worker learned it).
+  function sheetRng(who, track, level) {
+    const holder = isPlayer(who) ? (Game.villagerId || 'player') : who;
+    const key = String(holder) + '|' + String(track) + '|' + String(level == null ? 0 : level);
+    let h = 0x811c9dc5;
+    for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    let a = h || 1;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // kitSheet(cands, who, track, level): THE level-up sheet for the player and
+  // every villager (tracks.js levelUpOffers, villager-build.js
+  // villagerLevelUpOffers). cands = the track's unheld magic kit entries in
+  // power order (defs). Draws offerSize offers from the next `window` entries
+  // (rules.offers.window, 6), weighted toward earlier ones (windowDecay per
+  // step), deterministic per holder/track/level, shown in kit order; then
+  // shapeOffers leans it (recognised class, else job path, distinct roles).
+  function kitSheet(cands, who, track, level) {
+    try {
+      cands = cands || [];
+      const O = offerRules();
+      const n = (((Game.trackData && Game.trackData()) || {}).offerSize) || 3;
+      const W = Math.max(n, O.window || n);
+      const decay = O.windowDecay != null ? O.windowDecay : 0.7;
+      const win = cands.slice(0, W);
+      let picked;
+      if (win.length <= n) picked = win.slice();
+      else {
+        const rng = sheetRng(who, track, level);
+        const idx = win.map((_, i) => i);
+        const chosen = [];
+        while (chosen.length < n) {
+          let tot = 0;
+          for (const i of idx) tot += Math.pow(decay, i);
+          let r = rng() * tot, k = 0;
+          for (; k < idx.length - 1; k++) { r -= Math.pow(decay, idx[k]); if (r < 0) break; }
+          chosen.push(idx.splice(k, 1)[0]);
+        }
+        chosen.sort((a, b) => a - b);
+        picked = chosen.map(i => win[i]);
+      }
+      const unpicked = win.filter(d => picked.indexOf(d) < 0);
+      const rest = unpicked.concat(cands.slice(W));
+      return shapeOffers(picked, rest, who, { jobWindow: unpicked.length });
+    } catch (e) { warn('kitSheet', e); return (cands || []).slice(0, 3); }
+  }
+
+  // shapeOffers(choices, pool, who, opts): choices are ability defs (or {id}) in
   // the offer's own order; pool is the remaining candidates (defs), in
   // preference order. Guarantees >=1 offer on the recognised path when the
-  // pool has one, then swaps duplicate roles for distinct ones where it can.
-  function shapeOffers(choices, pool, who) {
+  // pool has one; before a class is recognised, >=1 offer on the holder's
+  // JOB path when the first opts.jobWindow pool entries hold one (all of the
+  // pool when unset); then swaps duplicate roles for distinct ones where it can.
+  function shapeOffers(choices, pool, who, opts) {
+    opts = opts || {};
     try {
       const out = choices.slice();
       const rest = (pool || []).filter(p => !out.some(o => o.id === p.id));
+      const named = godpathClass(who || 'player');
       // The lean follows the recognised class; before recognition it
       // follows an EMERGING lean (2+ magic abilities of one path, strictly
       // leading) so a class can actually form.
@@ -249,6 +331,30 @@
         const i = rest.findIndex(p => pathOf(p) === rec.path);
         if (i >= 0) { out[out.length - 1] = rest.splice(i, 1)[0]; out._leaned = true; }
       }
+      // JOB -> PATH LEAN (class-diversity 2026-10-14): no class named yet, so
+      // the holder's old job speaks. At least one offer on a job path when
+      // the window has one; it replaces the deepest slot that isn't the
+      // emerging-path pick. After recognition the class lean above rules.
+      let jobPick = null;
+      if ((!named || named.lapsed) && out.length && offerRules().jobLean !== false) {
+        const jp = holderJobPaths(who || 'player');
+        const have = out.find(o => jp.indexOf(pathOf(o)) >= 0);
+        if (have) jobPick = have;
+        else if (jp.length) {
+          const lim = opts.jobWindow != null ? opts.jobWindow : rest.length;
+          const near = rest.slice(0, lim);
+          let i = -1;
+          for (const p of jp) { i = near.findIndex(x => pathOf(x) === p); if (i >= 0) break; }
+          if (i >= 0) {
+            let slot = -1;
+            for (let k = out.length - 1; k >= 0; k--) {
+              if (rec && pathOf(out[k]) === rec.path && out.filter(o => pathOf(o) === rec.path).length === 1) continue;
+              slot = k; break;
+            }
+            if (slot >= 0) { jobPick = out[slot] = rest.splice(i, 1)[0]; out._jobLeaned = true; }
+          }
+        }
+      }
       // distinct roles: replace a duplicate (never the on-path pick) with the
       // first candidate whose role is new to the sheet.
       for (let k = out.length - 1; k >= 0; k--) {
@@ -256,6 +362,7 @@
         const dup = out.some((o, j) => j !== k && roleOf(o) === r);
         if (!dup) continue;
         if (rec && pathOf(out[k]) === rec.path && out.filter(o => pathOf(o) === rec.path).length === 1) continue;
+        if (jobPick && out[k] === jobPick) continue;
         const roles = new Set(out.map(roleOf));
         // only a near look-ahead (the next few in kit order): role variety
         // must not pull the kit's strongest entries forward
@@ -1271,7 +1378,9 @@
     godpathClass(who) { return godpathClass(who); },
     classLine(who) { return classLine(who); },
     pathLean(who, abilityId, opts) { return pathLean(who, abilityId, opts); },
-    shapeOffers(choices, pool, who) { return shapeOffers(choices, pool, who); },
+    shapeOffers(choices, pool, who, opts) { return shapeOffers(choices, pool, who, opts); },
+    kitSheet(cands, who, track, level) { return kitSheet(cands, who, track, level); },
+    holderJobPaths(who) { return holderJobPaths(who); },
   };
   Object.assign(Game, methods);
   // Recognition rides the existing acquisition wires: every grant, pick or
@@ -1390,7 +1499,7 @@
 
   S.Godpath = {
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
-    pathLean, shapeOffers, VERBS, registerVerbs, wardenWallAt,
+    pathLean, shapeOffers, kitSheet, holderJobPaths, sheetRng, VERBS, registerVerbs, wardenWallAt,
     allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
     villagerCast, villagerStrikeMult, absorbVillagerHit,
     fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade, villagerPowerMult,
