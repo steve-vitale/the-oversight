@@ -328,7 +328,7 @@ async function runDays(Game, policy, opts) {
     answerGlobalChoice: 'social', chooseTableOption: 'social',
     handInAidQuest: 'social', payTribute: 'social', rallyVillage: 'social',
     linkWith: 'social', offerSystemQuest: 'social', corpseTakeItem: 'food',
-    studyVillageCodex: 'social', proveWorth: 'social', agencyTurn: 'social',
+    studyVillageCodex: 'field', proveWorth: 'social', agencyTurn: 'social',
     // travel
     travelTo: 'travel', pathStep: 'travel', beginPathWalk: 'travel', clearBlockage: 'travel',
     // shows / contests
