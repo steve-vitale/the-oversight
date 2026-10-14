@@ -2260,15 +2260,11 @@
         { name: 'Trail mix', kcalEach: 400, units: 2, spoilDay: d0p + 60, safe: true, kg: 0.3, unit: 'bag' },
         { name: 'Dried meat', kcalEach: 300, units: 2, spoilDay: d0p + 30, safe: true, kg: 0.2, unit: 'strip' },
       );
-      // granted abilities from villager data (2 each, defined here for slice 1)
-      // BACKGROUND ABILITIES: separate from System slots. This is YOU — your past.
-      // Your occupation decides what you brought with you. Some people are just lucky.
-      // These level with use, like System abilities.
-      const grantedIds = (occ.granted || []).filter(id => this.data.abilities.find(a => a.id === id));
-      scholar.backgroundAbilities = grantedIds.map(id => {
-        const def = this.data.abilities.find(a => a.id === id);
-        return { id, name: def ? def.name : id, desc: def ? def.description : '', level: 1, xp: 0, background: true };
-      });
+      // BACKGROUND (ABILITY LANES 2026-10-14): "Occupations grant skills
+      // only." occ.granted names human competences; each is TAUGHT as its
+      // codex skill below (after the codex exists). Magic ids in a granted
+      // list are not taught — a past life gives know-how, not System powers.
+      scholar.backgroundAbilities = [];
       scholar.abilities = []; // System abilities (slot-limited) start empty.
       // WATER BOTTLES: 1L each, 1kg each. Assume you have bottles.
       // Quality matters: clean vs risky. Source is retained.
@@ -2290,7 +2286,8 @@
       // KNOWLEDGE TAXONOMY: your occupation IS knowledge. Not flavor — mechanical.
       // An electrician knows circuits. A nurse knows wound care. Day 1, real Codex entries.
       // This is the "background = starting knowledge" principle.
-      const bgCount = this.grantBackgroundKnowledge(villager);
+      let bgCount = this.grantBackgroundKnowledge(villager);
+      bgCount += this.grantOccupationSkills(occ);
       if (bgCount > 0) {
         this.say(`📖 Your old life taught you things. ${bgCount} skill${bgCount > 1 ? 's' : ''} from your past — check your Journal.`);
       }
@@ -7853,6 +7850,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // ABILITY LANES (2026-10-14): human abilities held in slots by older
+      // saves move into codex.skills (level kept) and free their slot.
+      try {
+        const movedLanes = this.migrateAbilityLanes();
+        if (movedLanes > 0) this.say(`(Your human know-how now lives in Skills, not ability slots — ${this.pluralize(movedLanes, 'ability', 'abilities')} moved; nothing was lost.)`);
+      } catch (e) { console.warn('[lanes] migrateAbilityLanes', e); }
       // SYNERGIES: recompute on load (saves predate the resonance system).
       // Discovered ones stay discovered; no re-announcement (checkSynergies only says on new).
       this.recomputeActiveSynergies();
@@ -9926,8 +9929,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // hard creek crossing: bridge it, swim it, or go around
       if (dest.type === 'creek' && dest.needsBridge && !dest.bridged) {
-        const canSwim = (this.state.scholar.abilities || []).some(a => (a.id || a) === 'swimmer') ||
-                        (this.state.scholar.backgroundAbilities || []).some(a => (a.id || a) === 'swimmer');
+        // ABILITY LANES: swimmer is a skill now — hasAbility covers all lanes.
+        const canSwim = this.hasAbility('swimmer');
         if (!canSwim) return { kind: 'blockage', blockType: 'creek', x, y };
       }
       return null;
@@ -13698,7 +13701,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let cap = 20;
       const s = this.state.scholar;
       // Abilities
-      const has = (id) => (s.abilities || []).some(a => a.id === id) || (s.backgroundAbilities || []).some(a => a.id === id);
+      const has = (id) => this.hasAbility(id);
       if (has('pack_rat')) cap += 5;
       if (has('hoarder')) cap += 10;
       // Items: backpacks, etc. (equipped or in inventory)
@@ -17070,6 +17073,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       else if (xp >= 8 && !this.skillKnown('night_hunting', 2)) this.learnSkill('night_hunting', 2, 'hunting by dark');
       else if (xp >= 3 && !this.skillKnown('night_hunting', 1)) this.learnSkill('night_hunting', 1, 'hunting by dark');
       return xp;
+    },
+
+    // grantOccupationSkills: occ.granted (characterGen.json) lists the human
+    // competences a past life brings. ABILITY LANES (2026-10-14): they are
+    // skills — taught at L1 via learnSkill, never slotted. Magic ids in the
+    // list are skipped (occupations grant skills only). Returns count taught.
+    grantOccupationSkills(occ) {
+      let n = 0;
+      for (const id of ((occ && occ.granted) || [])) {
+        const sid = this.abilitySkillId(id);
+        if (sid && this.learnSkill(sid, 1, 'background')) n++;
+      }
+      return n;
     },
 
     // backgroundKnowledge: your occupation IS knowledge. Not flavor — mechanical.
@@ -21392,7 +21408,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     firstAbilityChoices() {
       const s = this.state.scholar;
       const w = s.week1 || {};
-      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+      // ABILITY LANES: System gifts are magic only (human competences are skills).
+      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
       // action thresholds
       const cond = {
         green_thumb: (w.forage || 0) >= 3,
@@ -21421,7 +21438,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // did nothing all week: the System improvises — 3 honest options, no random vile pick.
         choices.push(
           { id: 'survivor', name: 'Survivor', description: 'You endured. +10 max health.', flavor: 'You lived! Marginally interesting! We are SO proud!', tier: 'utility' },
-          { id: 'wanderer', name: 'Wanderer', description: 'You kept moving. -10% travel cost.', flavor: 'You go places! The audience almost watched!', tier: 'utility' },
+          // ABILITY LANES: Wanderlust is a human skill now (-> pathfinder);
+          // the improvised magic pick is Cold-Blooded (same utility tier).
+          { id: 'cold_blooded', name: 'Cold-Blooded', description: 'You need 20% less food in cold weather. Your body budgets like an accountant.', flavor: 'You lived through the cold! We tuned you a little. You are welcome!', tier: 'utility' },
           { id: 'lucky_rock', name: 'Lucky Rock', description: 'You have a lucky rock. (+1% to everything.)', flavor: 'The rock! It is lucky! It carried you, honestly.', tier: 'underpowered' },
         );
       } else {
@@ -21463,7 +21482,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // single). Idempotent: no offer while one is pending, none when purify is
     // held, none when the slots are full, none before the System arrives.
     poisonAidChoices() {
-      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
       const owned = new Set((this.state.scholar.abilities || []).map(a => (a && a.id) || a));
       const pu = all.find(a => a.id === 'purify');
       const out = [];
@@ -21717,6 +21736,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const choice = (s.abilityChoices || []).find(c => c.id === id);
       if (!choice) return null;
       s.abilities = s.abilities || [];
+      // ABILITY LANES (2026-10-14): a human competence never takes a slot.
+      // Every offer path filters them out; if one slips through (old save
+      // with a pending sheet), the choice teaches the skill instead.
+      if (this.isSkillLane(choice.id)) {
+        s.abilityChoices = null;
+        this.teachAbilitySkill(choice.id, 1, 'experience');
+        return null;
+      }
       // Ability slots: integration unlocks more. Start 1, max 6.
       const maxSlots = this.abilitySlots();
       if (s.abilities.length >= maxSlots) {
@@ -21758,7 +21785,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
       if (id === 'pact') {
         // The Static gives. The Static takes.
-        const ops = (this.data.abilities || []).filter(a => a.tier === 'overpowered' && a.id !== 'pact' && !this.hasAbility(a.id));
+        const ops = (this.data.abilities || []).filter(a => a.tier === 'overpowered' && a.lane !== 'skill' && a.id !== 'pact' && !this.hasAbility(a.id));
         const utils = (s.abilities || []).filter(e => {
           const a = this.data.abilities.find(x => x.id === ((e && e.id) || e));
           return a && a.tier === 'utility';
@@ -22159,6 +22186,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Check both background and System abilities.
       const ab = (s.backgroundAbilities || []).find(a => a.id === abilityId) ||
                  (s.abilities || []).find(a => a.id === abilityId);
+      // ABILITY LANES (2026-10-14): a skill-lane ability deepens its SKILL
+      // (learnSkill at the same 6/12 thresholds), never a slot entry.
+      if (!ab && this.isSkillLane(abilityId)) { this.gainSkillLaneXP(abilityId, amount); return; }
       if (!ab || ab.level >= 3) return;
       ab.xp = (ab.xp || 0) + (amount || 1);
       // XP THRESHOLDS (evolution build 2026-10-11, measured): L1->L2: 6,
@@ -24986,6 +25016,137 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     abilityLevel(id) {
       return (globalThis.Scattering && globalThis.Scattering.abilityLevel(this.state.scholar, id)) || 0;
+    },
+
+    // ============ ABILITY LANES (2026-10-14) ============
+    // Steve: "Things acquired from events and other meaningful experiences,
+    // knowledge learned etc should be typically ending up in skills, unless
+    // it fits the magic power theme." abilities.json tags every entry with
+    // lane 'magic' (System powers: the 6 slots) or lane 'skill' (a human
+    // competence). A skill-lane entry keeps its modifiers/actions as the
+    // mechanics source, but it is OWNED by knowing its codex skill
+    // (def.skillId || def.id): level = that skill's level (1-3). It never
+    // occupies a slot and is never offered as a System gift.
+    // Design: evidence/2026-10-14/draft-abilities-skills-endgame-key.md.
+    abilityDef(id) {
+      const list = (this.data && this.data.abilities) || [];
+      if (this._abDefSrc !== list) {
+        this._abDefSrc = list;
+        this._abDefMap = {};
+        this._abSkillLane = [];
+        for (const a of list) {
+          if (!a || !a.id || this._abDefMap[a.id]) continue;
+          this._abDefMap[a.id] = a;
+          if (a.lane === 'skill') this._abSkillLane.push(a);
+        }
+        // aliases: a merged id (iron_gut -> iron_stomach) resolves to its home.
+        for (const a of list) for (const al of ((a && a.aliases) || [])) if (!this._abDefMap[al]) this._abDefMap[al] = a;
+      }
+      return this._abDefMap[id] || null;
+    },
+    isSkillLane(id) {
+      const d = this.abilityDef(id);
+      return !!(d && d.lane === 'skill');
+    },
+    // abilitySkillId: the codex skill that carries a skill-lane ability.
+    abilitySkillId(id) {
+      const d = this.abilityDef(id);
+      return (d && d.lane === 'skill') ? (d.skillId || d.id) : null;
+    },
+    // skillLaneEntries: the skill-lane abilities you know, as ability-shaped
+    // entries {id, name, level, lane:'skill'} — read by the modifier
+    // pipeline and hasAbility (engine/modifiers.js) so every mechanic that
+    // asked "do you have tracker?" keeps working when tracker is a skill.
+    skillLaneEntries() {
+      this.abilityDef('');
+      const skills = ((this.state && this.state.codex) || {}).skills || {};
+      const out = [];
+      for (const a of (this._abSkillLane || [])) {
+        const e = skills[a.skillId || a.id];
+        const lvl = e ? (e.level || 0) : 0;
+        if (lvl >= 1) out.push({ id: a.id, name: a.name, level: Math.min(3, lvl), lane: 'skill', skillId: a.skillId || a.id });
+      }
+      return out;
+    },
+    // ownedAbilityIds: every ability that is mechanically yours — magic in
+    // the slots (an evolved form counts as its root), legacy background
+    // entries, and skill-lane abilities known through skills. THE one
+    // ownership list for counting (build-around paths, party anchors);
+    // generic on purpose so player and villager progression can share it.
+    ownedAbilityIds() {
+      const s = (this.state && this.state.scholar) || {};
+      const ids = new Set();
+      for (const e of (s.abilities || []).concat(s.backgroundAbilities || [])) {
+        const id = (e && (e.evolvedFrom || e.id)) || e;
+        if (id) ids.add(id);
+      }
+      for (const e of this.skillLaneEntries()) ids.add(e.id);
+      return Array.from(ids);
+    },
+    // teachAbilitySkill: a path that used to GRANT a human ability now
+    // TEACHES its skill — honest narration, no System chrome, no slot.
+    teachAbilitySkill(id, level, via) {
+      const sid = this.abilitySkillId(id);
+      if (!sid) return false;
+      const k = (this.data.knowledge || []).find(x => x.id === sid);
+      if (!k) return false;
+      const ok = this.learnSkill(sid, level || 1, via || 'experience');
+      if (ok) {
+        const d = this.abilityDef(id) || {};
+        if (d.name && d.name !== k.name) this.say(`You've learned ${k.name} — it carries ${d.name}.`);
+        try { this.recomputeActiveSynergies(); } catch (e) { console.warn('[lanes] teachAbilitySkill synergy recompute', e); }
+        try { this.tele('skill_taught', { id: sid, ability: id, via: via || 'experience' }); } catch (e) { console.warn('[lanes] tele', e); }
+      }
+      return ok;
+    },
+    // gainSkillLaneXP: a use of a skill-lane ability deepens its SKILL
+    // (same 6/12 use thresholds as slot abilities), never a slot entry.
+    gainSkillLaneXP(id, amount) {
+      const sid = this.abilitySkillId(id);
+      const skills = ((this.state.codex || {}).skills) || {};
+      const e = sid && skills[sid];
+      if (!e || (e.level || 0) < 1 || e.level >= 3) return false;
+      e.xp = (e.xp || 0) + (amount || 1);
+      const need = e.level === 1 ? 6 : 12;
+      if (e.xp < need) return false;
+      const ok = this.learnSkill(sid, e.level + 1, 'practice');
+      if (ok) { try { this.recomputeActiveSynergies(); } catch (e2) { console.warn('[lanes] gainSkillLaneXP synergy recompute', e2); } }
+      return ok;
+    },
+    // migrateAbilityLanes: saves from before the lanes held human abilities
+    // in s.abilities / s.backgroundAbilities. Move them into codex.skills
+    // (keeping the level) so they free their slot and show in Skills.
+    // Idempotent. Evolved entries (evolvedFrom) stay where they are.
+    migrateAbilityLanes() {
+      const s = this.state && this.state.scholar;
+      if (!s) return 0;
+      this.state.codex = this.state.codex || {};
+      const skills = this.state.codex.skills = this.state.codex.skills || {};
+      let moved = 0;
+      for (const key of ['abilities', 'backgroundAbilities']) {
+        const arr = s[key];
+        if (!Array.isArray(arr)) continue;
+        // aliases first: a slot holding a merged id (iron_gut) becomes its home id.
+        for (const e of arr) {
+          if (!e || typeof e !== 'object' || !e.id) continue;
+          const d = this.abilityDef(e.id);
+          if (d && d.id !== e.id && !arr.some(o => o && o.id === d.id)) { e.id = d.id; e.name = d.name; moved++; }
+        }
+        s[key] = arr.filter(e => {
+          const id = (e && e.id) || e;
+          if (!id || (e && e.evolvedFrom) || !this.isSkillLane(id)) return true;
+          const sid = this.abilitySkillId(id);
+          if (!(this.data.knowledge || []).some(k => k.id === sid)) return true;
+          const lvl = Math.min(3, Math.max(1, (e && e.level) || 1));
+          const cur = skills[sid];
+          if (!cur || (cur.level || 0) < lvl) {
+            skills[sid] = { level: lvl, learnedDay: (cur && cur.learnedDay) || s.day || 0, via: 'carried over', xp: (e && e.xp) || 0 };
+          }
+          moved++;
+          return false;
+        });
+      }
+      return moved;
     },
     // trustGainMult: applies trust.gain_mult modifier (Hoarder, Chitin Skin,
     // Fear Aura reduce trust gains). Use for ALL trust increases.

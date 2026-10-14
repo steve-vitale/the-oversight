@@ -4889,7 +4889,8 @@
     if ((s.abilityChoices || []).length) return false; // don't trample a pending offer
     const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
     if ((s.abilities || []).length >= maxSlots) return false;
-    const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+    // ABILITY LANES (2026-10-14): prizes are magic only.
+    const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
     const owned = new Set((s.abilities || []).map(a => (a && a.id) || a));
     // The gift bag: practical + wacky + mid tiers. The dark tiers (vile,
     // body_horror) and the pact tier (overpowered) are NOT prizes — they

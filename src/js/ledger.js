@@ -899,11 +899,10 @@
       // their hands" was a lie for every body after the first.
       try {
         const occ = (((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {};
-        const granted = (occ.granted || []).filter(id => (this.data.abilities || []).find(a => a.id === id));
-        s.backgroundAbilities = granted.map(id => {
-          const d = (this.data.abilities || []).find(a => a.id === id) || {};
-          return { id, name: d.name || id, desc: d.description || '', level: 1, xp: 0, background: true };
-        });
+        // ABILITY LANES (2026-10-14): occupations grant SKILLS only — the
+        // new body's past is taught into the codex, never a slot.
+        s.backgroundAbilities = [];
+        if (typeof this.grantOccupationSkills === 'function') this.grantOccupationSkills(occ);
         // BREAK-IT abilities r6: a new body's background legs change --
         // activeSynergies was computed for the OLD body's legs. Recompute
         // or the successor keeps firing synergies for legs they never held

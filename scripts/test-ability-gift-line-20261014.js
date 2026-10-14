@@ -13,8 +13,10 @@ const T = K.reporter('ability-gift-line');
   K.newRun(Game);
   K.openSlots(Game, 6);
   const s = Game.state.scholar;
-  const def = Game.data.abilities.find(a => a.unlock && a.unlock.type === 'system_offer');
-  const def2 = Game.data.abilities.find(a => a.unlock && a.unlock.type === 'system_offer' && a.id !== def.id);
+  // ABILITY LANES (2026-10-14): System gifts are magic; skill-lane ids
+  // (tracker, diplomat...) are taught as skills and never reach this line.
+  const def = Game.data.abilities.find(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
+  const def2 = Game.data.abilities.find(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill' && a.id !== def.id);
   const week = (l) => /all week/.test(l);
 
   let says = K.captureSays(Game);

@@ -52,7 +52,12 @@
     const out = new Set();
     // An evolved ability counts as its root too (chooseEvolution replaces
     // ab.id and keeps the root in evolvedFrom).
-    for (const a of (sch.abilities || []).concat(sch.backgroundAbilities || [])) {
+    // ABILITY LANES (2026-10-14): skill-lane abilities known via codex
+    // skills count as held (one ownership helper, engine/modifiers.js).
+    const S_ = global.Scattering || {};
+    const owned = (typeof S_.ownedAbilityEntries === 'function') ? S_.ownedAbilityEntries(sch)
+      : (sch.abilities || []).concat(sch.backgroundAbilities || []);
+    for (const a of owned) {
       out.add(typeof a === 'string' ? a : (a.id || a));
       if (a && a.evolvedFrom) out.add(a.evolvedFrom);
     }

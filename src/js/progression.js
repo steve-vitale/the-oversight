@@ -820,7 +820,8 @@
       try {
         // evolved abilities still own their root (evolvedFrom) — never re-gift it
         const owned = new Set((s.abilities || []).flatMap(a => [a.id, a.evolvedFrom].filter(Boolean)));
-        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer'
+        // ABILITY LANES (2026-10-14): the trial gift is magic only.
+        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill'
           // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world —
           // never gifted when it's taken.
           && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));

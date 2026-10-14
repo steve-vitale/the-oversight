@@ -10,6 +10,7 @@
 //   - collectModifiers(scholar, abilitiesData)
 //   - hasAbility(scholar, id)
 //   - abilityLevel(scholar, id)
+//   - ownedEntries(scholar)        (slots + background + skill-lane abilities known via codex skills)
 //   - collectKnowledgeModifiers(codexSkills, knowledgeData)
 //   - hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
 // rules:
@@ -65,13 +66,33 @@
     return m.value * level; // add
   }
 
+  // ABILITY LANES (2026-10-14): skill-lane abilities (human competences)
+  // are owned by knowing their codex skill, not by a slot. The game
+  // registers itself as Scattering.Game; for ITS scholar we append the
+  // known skill-lane entries ({id, level}) after the slot/background ones.
+  // Any other scholar-shaped object (villagers, fixtures) gets none.
+  function laneEntries(scholar) {
+    const G = global.Scattering && global.Scattering.Game;
+    if (!G || !G.state || G.state.scholar !== scholar || typeof G.skillLaneEntries !== 'function') return [];
+    return G.skillLaneEntries();
+  }
+  function ownedEntries(scholar) {
+    const base = (scholar.abilities || []).concat(scholar.backgroundAbilities || []);
+    const lane = laneEntries(scholar);
+    if (!lane.length) return base;
+    const have = new Set(base.map(e => (e && e.id) || e));
+    return base.concat(lane.filter(e => !have.has(e.id)));
+  }
+
   function collectModifiers(scholar, abilitiesData, synergiesData) {
     const out = [];
     const byId = {};
-    (abilitiesData || []).forEach(a => { byId[a.id] = a; });
+    // first entry per id wins (matches every .find lookup in the game)
+    (abilitiesData || []).forEach(a => { if (!byId[a.id]) byId[a.id] = a; });
     // abilities may be string IDs (legacy) or objects {id, level, xp} (slice 2+).
-    // background abilities count too — they're still abilities.
-    const all = (scholar.abilities || []).concat(scholar.backgroundAbilities || []);
+    // background abilities count too — they're still abilities. Skill-lane
+    // abilities count at their skill's level (ownedEntries).
+    const all = ownedEntries(scholar);
     all.forEach(entry => {
       const id = (entry && entry.id) || entry;
       // EVOLUTION: evolved forms keep their root's modifiers (look up by
@@ -199,7 +220,7 @@
   // hasAbility: does this scholar hold the ability? Works for string IDs and objects,
   // system abilities and background abilities. Returns the entry (or level via .level).
   function hasAbility(scholar, id) {
-    const all = (scholar.abilities || []).concat(scholar.backgroundAbilities || []);
+    const all = ownedEntries(scholar);
     return all.find(entry => {
       const eid = ((entry && entry.id) || entry);
       if (eid === id) return true;
@@ -395,4 +416,5 @@
   global.Scattering.modifiers = { resolve, collectModifiers, checkCondition, collectKnowledgeModifiers, hasKnowledgeUnlock, describe: describeModifier, MOD_NOUNS: MOD_NOUNS };
   global.Scattering.hasAbility = hasAbility;
   global.Scattering.abilityLevel = abilityLevel;
+  global.Scattering.ownedAbilityEntries = ownedEntries;
 })(typeof window !== 'undefined' ? window : globalThis);

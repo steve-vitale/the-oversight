@@ -23,7 +23,9 @@
     "deepening": {
       "2": "You diagnose at a glance \u2014 examination always succeeds, and fast.",
       "3": "BATTLEFIELD MASTER: your supportive care can turn even the severe cases, and you read any sickness at a touch \u2014 no diagnosis needed."
-    }
+    },
+    "lane": "skill",
+    "skillId": "wound_care"
   },
   {
     "description": "Fine work under pressure. Dressing game, stitching wounds, tying snares \u2014 no shake.",
@@ -46,7 +48,8 @@
     "deepening": {
       "2": "Your hands don't shake anymore \u2014 not ever. Delicate work is just work.",
       "3": "MASTER: your fine work teaches itself \u2014 villagers watching you learn twice as fast."
-    }
+    },
+    "lane": "skill"
   },
   {
     "description": "Read sign: tracks, scat, browse lines. You know what's been here and how long ago.",
@@ -97,7 +100,9 @@
     "deepening": {
       "2": "You read the land like a newspaper \u2014 yesterday and today.",
       "3": "The wild tells you its plans: you know where game WILL be."
-    }
+    },
+    "lane": "skill",
+    "skillId": "track_read"
   },
   {
     "description": "One shot. You don't take the shot unless it's the shot.",
@@ -145,7 +150,8 @@
     "deepening": {
       "2": "The shot is always there. You just wait.",
       "3": "One shot, one kill: your opening strike cannot miss."
-    }
+    },
+    "lane": "skill"
   },
   {
     "description": "Break down game fast and clean. Less waste, more meat, usable parts.",
@@ -184,7 +190,8 @@
     "deepening": {
       "2": "Clean cuts, no waste \u2014 the carcass gives everything.",
       "3": "You read the animal in the dressing: its health, its range, its story."
-    }
+    },
+    "lane": "skill"
   },
   {
     "description": "You think in shelf life. Smoking, drying, salting \u2014 food that lasts is food that saves.",
@@ -207,7 +214,9 @@
     "deepening": {
       "2": "Your stores keep like stone.",
       "3": "You taste spoilage before it starts \u2014 nothing goes bad on your watch."
-    }
+    },
+    "lane": "skill",
+    "skillId": "preserve_food"
   },
   {
     "description": "Your gut handles what it shouldn't. A useful lie your body tells itself.",
@@ -242,7 +251,19 @@
     "deepening": {
       "2": "You can eat things that would hospitalize others. Mostly.",
       "3": "Your gut is a laboratory: you can TASTE poison \u2014 one lick tells you if food is safe."
-    }
+    },
+    "aliases": [
+      "iron_gut"
+    ],
+    "knackOrigins": [
+      "butchery",
+      "canning"
+    ],
+    "memory": "At {place}, {kin} watched you eat something that should have put you in the ground. You were fine by morning. The story\u2019s already getting bigger. Your stomach stayed the same.",
+    "knackDescription": "Your stomach changed this week. Things that should lay you flat barely slow you down now. You noticed. You haven\u2019t told anyone.",
+    "knackName": "Iron Gut",
+    "alsoKnack": true,
+    "lane": "magic"
   },
   {
     "description": "Move through woods like weather. Less noise, fewer surprises.",
@@ -266,7 +287,8 @@
     "deepening": {
       "2": "You move like weather. Even twigs don't notice.",
       "3": "You can walk a sleeping camp and no one dreams of you."
-    }
+    },
+    "lane": "skill"
   },
   {
     "description": "Adrenaline hits and the world slows \u2014 you are harder to hit when it matters.",
@@ -290,7 +312,8 @@
     "deepening": {
       "2": "The slow world is home now.",
       "3": "Time stutters for you alone: once per fight, dodge the undodgeable."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "green_thumb",
@@ -327,7 +350,8 @@
         "context": "field",
         "desc": "Ask what's growing here. Once/day: reveals this tile's forage table."
       }
-    ]
+    ],
+    "lane": "magic"
   },
   {
     "id": "tracker",
@@ -363,7 +387,9 @@
     "deepening": {
       "2": "+50% hunt success (was +30%).",
       "3": "You see tracks from 2 tiles away."
-    }
+    },
+    "lane": "skill",
+    "skillId": "track_read"
   },
   {
     "id": "diplomat",
@@ -384,7 +410,8 @@
     "deepening": {
       "2": "Trust builds 3x (was 2x).",
       "3": "Villagers tell you secrets unprompted."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "camp_cook",
@@ -405,7 +432,9 @@
     "deepening": {
       "2": "No water needed for cooking.",
       "3": "+25% kcal (was +10%)."
-    }
+    },
+    "lane": "skill",
+    "skillId": "camp_cooking"
   },
   {
     "id": "generous",
@@ -426,7 +455,8 @@
     "deepening": {
       "2": "Giving is your signature now.",
       "3": "Your generosity is famous: donations return threefold in loyalty."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "scrounger",
@@ -447,7 +477,8 @@
     "deepening": {
       "2": "Ruins give up their secrets to you.",
       "3": "You find what others missed: picked ruins still hide one more thing."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "squirrel_friend",
@@ -474,7 +505,8 @@
     "deepening": {
       "2": "The squirrels have a network, and you're in it.",
       "3": "The forest provides: gifts arrive when you need them most."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "rain_dancer",
@@ -501,14 +533,15 @@
     "deepening": {
       "2": "The sky knows your steps.",
       "3": "You call the rain: dance, and water comes (once per week)."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "loud_chewer",
     "role": "support",
     "slotRole": "wildcard",
     "name": "Loud Chewer",
-    "description": "Eating is 2x louder (monsters hear you). But +5 morale.",
+    "description": "Eating is 2x louder (monsters hear you). But villagers love eating beside you: trust builds 10% faster.",
     "flavor": "CRONCH CRONCH! We love the cronch! The monsters love it too! Oops!",
     "pool": "system",
     "tier": "wacky",
@@ -520,6 +553,11 @@
         "target": "monster.hear_mult",
         "op": "multiply",
         "value": 2
+      },
+      {
+        "target": "trust.gain_mult",
+        "op": "multiply",
+        "value": 1.1
       }
     ],
     "metabolic": {
@@ -528,7 +566,8 @@
     "deepening": {
       "2": "Your joy is infectious \u2014 morale spreads.",
       "3": "Your appetite is legend: the village eats better just watching you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "hoarder",
@@ -555,7 +594,8 @@
     "deepening": {
       "2": "Your stashes are everywhere. You remember all of them.",
       "3": "You never lack: once per week, produce exactly what's needed from your hoard."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "thief",
@@ -591,7 +631,8 @@
     "deepening": {
       "2": "Hands like smoke.",
       "3": "You can steal the truth itself: learn one secret per theft."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "photosynthesis",
@@ -612,7 +653,8 @@
     "deepening": {
       "2": "Sunlight is a meal now.",
       "3": "You bloom: in daylight, you barely need to eat."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "second_wind",
@@ -643,7 +685,8 @@
     "deepening": {
       "2": "Death has to try harder.",
       "3": "Twice per day, death is refused."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "lucky_rock",
@@ -670,7 +713,8 @@
     "deepening": {
       "2": "The rock believes in you. That's enough.",
       "3": "Luck is a skill now: once per day, reroll any failure."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "bird_whisperer",
@@ -697,7 +741,8 @@
     "deepening": {
       "2": "The birds are your scouts.",
       "3": "The sky watches for you: you'll always know what's coming."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "chitin_skin",
@@ -729,7 +774,8 @@
     "deepening": {
       "2": "Your plates are armor and statement.",
       "3": "Living fortress: your skin turns blades, and you feel nothing."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "extra_stomach",
@@ -756,7 +802,8 @@
     "deepening": {
       "2": "Two furnaces, one will.",
       "3": "You can feast for the village: share your second stomach's bounty."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "deep_reserves",
@@ -783,7 +830,8 @@
     "deepening": {
       "2": "The war chest deepens.",
       "3": "You are the reserve: in famine, your body feeds others."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "eyes_in_back",
@@ -804,7 +852,8 @@
     "deepening": {
       "2": "Nothing surprises you anymore.",
       "3": "You see everything: ambushes are impossible, and you see... more."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "molt",
@@ -840,7 +889,8 @@
     "deepening": {
       "2": "Shedding is renewal.",
       "3": "You molt at will: heal to full once per week, keep your gear."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "blood_magic",
@@ -869,7 +919,8 @@
     "deepening": {
       "2": "The cut is cleaner, the return richer.",
       "3": "Your blood is currency: convert HP to kcal at will, no wound."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "rage",
@@ -907,7 +958,8 @@
     "deepening": {
       "2": "The red is a tool now.",
       "3": "Perfect fury: your rage never misses and never fades mid-fight."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cannibal_frenzy",
@@ -932,7 +984,8 @@
     "deepening": {
       "2": "The hunger is honest.",
       "3": "The hunger is wise: you gain their strength, not just their meat."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "pact",
@@ -953,7 +1006,8 @@
     "deepening": {
       "2": "The contract deepens.",
       "3": "You renegotiate: choose which ability the pact takes."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "scream_cheese",
@@ -995,7 +1049,8 @@
     "deepening": {
       "2": "Your voice curdles more than milk.",
       "3": "The scream is a weapon: shatter stone, not just nerves."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "pocket_sand",
@@ -1036,7 +1091,8 @@
     "deepening": {
       "2": "You always have sand. Don't ask.",
       "3": "Pocket everything: sand, yes, but also keys, knives, secrets."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "taste_vision",
@@ -1064,7 +1120,8 @@
     "deepening": {
       "2": "The world has flavor now.",
       "3": "You taste truth: lies have a flavor, and it's unmistakable."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "poisoner",
@@ -1091,7 +1148,8 @@
     "deepening": {
       "2": "Your bait is legend.",
       "3": "Master of the tainted trap: the bait takes only what you meant it to."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "fear_aura",
@@ -1138,7 +1196,8 @@
     "deepening": {
       "2": "Your presence is weather.",
       "3": "Terror is a tool: you can aim your fear like a weapon."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "grave_robber",
@@ -1174,7 +1233,8 @@
     "deepening": {
       "2": "The dead don't mind. Much.",
       "3": "You speak with the dead: the looted tell you where they hid the rest."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "time_skip",
@@ -1199,7 +1259,8 @@
     "deepening": {
       "2": "Time is a suggestion.",
       "3": "You skip with precision: arrive exactly when needed."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "hive_mind",
@@ -1220,7 +1281,8 @@
     "deepening": {
       "2": "The hive hums for you.",
       "3": "You are the hive: see through every allied eye."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cold_blooded",
@@ -1241,7 +1303,8 @@
     "deepening": {
       "2": "Winter is a rumor.",
       "3": "Your blood is antifreeze: cold cannot touch you or yours."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "echo_location",
@@ -1266,7 +1329,8 @@
     "deepening": {
       "2": "The world has shape in sound.",
       "3": "You see through walls: sound maps the unseen."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "compost_king",
@@ -1287,7 +1351,9 @@
     "deepening": {
       "2": "Rot is just slow food.",
       "3": "The cycle obeys: your compost grows miracles."
-    }
+    },
+    "lane": "skill",
+    "skillId": "foraging"
   },
   {
     "id": "beard_moss",
@@ -1308,7 +1374,8 @@
     "deepening": {
       "2": "The moss is loyal.",
       "3": "Living beard: your moss heals small wounds and hides you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "dowsing",
@@ -1329,7 +1396,8 @@
     "deepening": {
       "2": "Water calls to you.",
       "3": "You find more than water: the stick points to what you need."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cornered_rat",
@@ -1350,7 +1418,8 @@
     "deepening": {
       "2": "Desperation is a weapon.",
       "3": "The corner is your throne: surrounded, you are unstoppable."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "dead_aim",
@@ -1391,7 +1460,8 @@
     "deepening": {
       "2": "The waiting is the weapon.",
       "3": "Death waits with you: your held shot kills anything it hits."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "second_skin",
@@ -1418,7 +1488,8 @@
     "deepening": {
       "2": "You pack light and move lighter.",
       "3": "You ARE the journey: distance shortens under your stride."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "open_book",
@@ -1439,7 +1510,9 @@
     "deepening": {
       "2": "People are open letters.",
       "3": "You read souls: one glance tells you who they are."
-    }
+    },
+    "lane": "skill",
+    "skillId": "read_people"
   },
   {
     "id": "mediator",
@@ -1482,7 +1555,9 @@
     "deepening": {
       "2": "You can cool any temper. Anger listens to you.",
       "3": "MASTER MEDIATOR: warring parties seek you out \u2014 you end feuds, not just fights."
-    }
+    },
+    "lane": "skill",
+    "skillId": "mediate"
   },
   {
     "id": "leech",
@@ -1518,7 +1593,8 @@
     "deepening": {
       "2": "Their pain is your purpose.",
       "3": "You drink wounds: take their injuries as your strength."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "scarecrow",
@@ -1560,7 +1636,8 @@
     "deepening": {
       "2": "The ruse is perfect.",
       "3": "You become the monster they fear: traps set themselves."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "hollow_bones",
@@ -1587,7 +1664,8 @@
     "deepening": {
       "2": "Light as rumor.",
       "3": "You could fly if you believed: falls can't hurt you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "third_eye",
@@ -1614,7 +1692,8 @@
     "deepening": {
       "2": "The eye never blinks.",
       "3": "The eye sees all: danger has no secrets from you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "phoenix_clause",
@@ -1635,7 +1714,8 @@
     "deepening": {
       "2": "The clause is patient.",
       "3": "You choose who burns: the clause takes your chosen, not random."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "symbiote",
@@ -1656,7 +1736,8 @@
     "deepening": {
       "2": "You and it are we.",
       "3": "Perfect symbiosis: it wants what you want now."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "survivor",
@@ -1683,7 +1764,8 @@
     "deepening": {
       "2": "Endurance is identity.",
       "3": "You cannot be outlasted: hunger and cold break first."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "wanderer",
@@ -1710,7 +1792,9 @@
     "deepening": {
       "2": "Every road is home.",
       "3": "The world provides: you never arrive empty-handed."
-    }
+    },
+    "lane": "skill",
+    "skillId": "pathfinder"
   },
   {
     "id": "swimmer",
@@ -1731,7 +1815,8 @@
     "deepening": {
       "2": "Water is home.",
       "3": "You are the river: currents carry you where you will."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "night_eyes",
@@ -1745,14 +1830,29 @@
     "unlock": {
       "type": "system_offer"
     },
-    "modifiers": [],
+    "modifiers": [
+      {
+        "op": "multiply",
+        "scale": "level",
+        "target": "stealth.move_silent",
+        "value": 1.3
+      }
+    ],
     "metabolic": {
       "daily": 30
     },
     "deepening": {
       "2": "Darkness is an old friend.",
       "3": "You see in perfect dark: night is your country."
-    }
+    },
+    "knackOrigins": [
+      "trapping",
+      "fishing"
+    ],
+    "memory": "You sat up at {place} watching the dark. {kin} asked what you were looking at. \u2018Everything,\u2019 you said. A month ago you couldn\u2019t see your own hand.",
+    "knackDescription": "The dark stopped bothering you days ago. You see shapes in it that others miss \u2014 movement, mostly. You\u2019re always watching the movement now.",
+    "alsoKnack": true,
+    "lane": "magic"
   },
   {
     "id": "translator",
@@ -1770,7 +1870,8 @@
     "deepening": {
       "2": "Every tongue is yours.",
       "3": "You speak the unsaid: meaning beyond words."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "field_medicine",
@@ -1792,7 +1893,9 @@
     "deepening": {
       "2": "You can work on others now \u2014 treat sick villagers, not just yourself. (Costs you 150 kcal: food becomes healing.)",
       "3": "Your hands know infection \u2014 bacterial sicknesses yield to you even unnamed."
-    }
+    },
+    "lane": "skill",
+    "skillId": "wound_care"
   },
   {
     "id": "herbal_remedy",
@@ -1812,7 +1915,9 @@
     "deepening": {
       "2": "Your teas bite deeper \u2014 easing lasts 5 day-parts, not 3.",
       "3": "MASTER HERBALIST: you read sickness like a book. Your cures no longer need a diagnosis first."
-    }
+    },
+    "lane": "skill",
+    "skillId": "herbal_medicine"
   },
   {
     "id": "purify",
@@ -1836,7 +1941,8 @@
     "deepening": {
       "2": "Your purifications hold \u2014 treated water stays safe for days.",
       "3": "MASTER: you purify at scale \u2014 a whole barrel in the time of a cup."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "brawler_instinct",
@@ -1866,7 +1972,8 @@
     "deepening": {
       "2": "You act first in every fight.",
       "3": "You see the killing blow before they do."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "adrenaline_control",
@@ -1893,7 +2000,8 @@
     "deepening": {
       "2": "+60% damage (was +30%).",
       "3": "You fight through pain. Wounds don't slow you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "intimidating_presence",
@@ -1937,7 +2045,8 @@
     "deepening": {
       "2": "Most back down. Some join you.",
       "3": "Monsters hesitate. They feel you."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "silver_tongue",
@@ -1960,7 +2069,8 @@
     "deepening": {
       "2": "You can talk your way out of anything.",
       "3": "People believe you. Even when they shouldn't."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "gossip_network",
@@ -1977,7 +2087,8 @@
     "deepening": {
       "2": "You hear everything. Nothing is secret.",
       "3": "Travelers seek you out with news."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "peacemaker",
@@ -2018,7 +2129,9 @@
     "deepening": {
       "2": "You can stop any fight.",
       "3": "Warring villages ask you to mediate."
-    }
+    },
+    "lane": "skill",
+    "skillId": "mediate"
   },
   {
     "id": "pathfinder",
@@ -2041,7 +2154,9 @@
     "deepening": {
       "2": "Every step costs less. Distance shrinks.",
       "3": "Distance is a rumor."
-    }
+    },
+    "knackName": "Waywise",
+    "lane": "skill"
   },
   {
     "id": "eagle_eye",
@@ -2064,7 +2179,9 @@
     "deepening": {
       "2": "Rare finds catch your eye while foraging.",
       "3": "The odd one out finds you more often now."
-    }
+    },
+    "lane": "skill",
+    "skillId": "old_world_cache"
   },
   {
     "id": "lie_detector",
@@ -2090,7 +2207,9 @@
     "deepening": {
       "2": "You catch most lies. The hands always tell.",
       "3": "You know WHY they're lying."
-    }
+    },
+    "lane": "skill",
+    "skillId": "read_people"
   },
   {
     "id": "evidence_board",
@@ -2107,7 +2226,9 @@
     "deepening": {
       "2": "Contradictions glow.",
       "3": "You reconstruct events from fragments."
-    }
+    },
+    "lane": "skill",
+    "skillId": "read_people"
   },
   {
     "id": "pyrokinesis",
@@ -2139,7 +2260,8 @@
     "deepening": {
       "2": "Fire is a friend.",
       "3": "You are the flame: fire obeys your mood."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "stalk",
@@ -2185,7 +2307,8 @@
     "deepening": {
       "2": "Distance closes without permission.",
       "3": "You become landscape: watching eyes slide off you."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "blood_trail",
@@ -2224,7 +2347,9 @@
     "deepening": {
       "2": "Old blood speaks as loud as fresh.",
       "3": "You follow trails days cold \u2014 the land remembers, and so do you."
-    }
+    },
+    "lane": "skill",
+    "skillId": "track_read"
   },
   {
     "id": "ambush",
@@ -2278,7 +2403,8 @@
     "deepening": {
       "2": "You don't set ambushes. You become them.",
       "3": "Your ambushes are perfect: the enemy never gets a first turn."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "animal_ken",
@@ -2321,7 +2447,9 @@
     "deepening": {
       "2": "Their moods are weather \u2014 readable, predictable.",
       "3": "You know what an animal will do before it does. All of them."
-    }
+    },
+    "lane": "skill",
+    "skillId": "animal_behavior"
   },
   {
     "id": "water_breathing",
@@ -2354,7 +2482,8 @@
     "deepening": {
       "2": "The deep is shallow.",
       "3": "You belong below: the water hides and feeds you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "trade_of_blows",
@@ -2403,7 +2532,8 @@
     "deepening": {
       "2": "Every exchange teaches. You learn faster than they hit.",
       "3": "You turn their strength against them: their hits open your counters."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "unbreakable",
@@ -2446,7 +2576,8 @@
     "deepening": {
       "2": "Pain is information. You read it and keep going.",
       "3": "You cannot be broken: once per fight, ignore what would drop you."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "war_cry",
@@ -2500,7 +2631,8 @@
     "deepening": {
       "2": "Your voice is a weapon now.",
       "3": "Your cry is legend: enemies break before the fighting starts."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "haymaker",
@@ -2544,7 +2676,8 @@
     "deepening": {
       "2": "The big swing always lands where it hurts.",
       "3": "One perfect blow: your haymaker can end a fight outright."
-    }
+    },
+    "lane": "skill"
   },
   {
     "description": "Your nose changed days ago. Water has a smell now \u2014 and so does fear. You haven\u2019t told anyone. People look at you funny when you find things by smell.",
@@ -2571,7 +2704,8 @@
     "deepening": {
       "2": "Scent is sight.",
       "3": "You smell truth: fear, lies, and water, all distinct."
-    }
+    },
+    "lane": "magic"
   },
   {
     "description": "Animals started going quiet around you this week. Not tame \u2014 listening. Like they\u2019re waiting to see what you\u2019ll do.",
@@ -2598,7 +2732,8 @@
     "deepening": {
       "2": "Your calm is contagious.",
       "3": "Beasts know you: predators stand down in your presence."
-    }
+    },
+    "lane": "magic"
   },
   {
     "description": "Days ago the plants started leaning toward you. You know which ones are thirsty, which are sick, which are hiding something good. You don\u2019t know how you know.",
@@ -2625,90 +2760,8 @@
     "deepening": {
       "2": "Plants lean toward you.",
       "3": "The green obeys: you can coax growth from bare ground."
-    }
-  },
-  {
-    "description": "Your stomach changed this week. Things that should lay you flat barely slow you down now. You noticed. You haven\u2019t told anyone.",
-    "id": "iron_gut",
-    "role": "support",
-    "slotRole": "sustain",
-    "knackOrigins": [
-      "butchery",
-      "canning"
-    ],
-    "memory": "At {place}, {kin} watched you eat something that should have put you in the ground. You were fine by morning. The story\u2019s already getting bigger. Your stomach stayed the same.",
-    "modifiers": [
-      {
-        "op": "multiply",
-        "scale": "level",
-        "target": "food.poison_chance",
-        "value": 0.6
-      }
-    ],
-    "name": "Iron Gut",
-    "pool": "latent_knack",
-    "unlock": {
-      "type": "latent_knack"
     },
-    "deepening": {
-      "2": "Your gut is iron.",
-      "3": "You can eat anything: poison is just spice to you now."
-    }
-  },
-  {
-    "description": "The dark stopped bothering you days ago. You see shapes in it that others miss \u2014 movement, mostly. You\u2019re always watching the movement now.",
-    "id": "night_eyes",
-    "role": "support",
-    "slotRole": "opener",
-    "knackOrigins": [
-      "trapping",
-      "fishing"
-    ],
-    "memory": "You sat up at {place} watching the dark. {kin} asked what you were looking at. \u2018Everything,\u2019 you said. A month ago you couldn\u2019t see your own hand.",
-    "modifiers": [
-      {
-        "op": "multiply",
-        "scale": "level",
-        "target": "stealth.move_silent",
-        "value": 1.3
-      }
-    ],
-    "name": "Night Eyes",
-    "pool": "latent_knack",
-    "unlock": {
-      "type": "latent_knack"
-    },
-    "deepening": {
-      "2": "Darkness is an old friend.",
-      "3": "You see in perfect dark: night is your country."
-    }
-  },
-  {
-    "description": "Your feet learned something this week. Even in places you\u2019ve never been, they find the cheap miles on their own. You don\u2019t think about it. You don\u2019t have to.",
-    "id": "pathfinder",
-    "role": "support",
-    "slotRole": "mobility",
-    "knackOrigins": [
-      "navigation"
-    ],
-    "memory": "You walked {kin} home through {place} in the dark \u2014 no map, no light, and arrived with breath to spare. \u2018How?\u2019 Your feet didn\u2019t answer. Neither did you.",
-    "modifiers": [
-      {
-        "op": "multiply",
-        "scale": "level",
-        "target": "travel.cost_mult",
-        "value": 0.85
-      }
-    ],
-    "name": "Waywise",
-    "pool": "latent_knack",
-    "unlock": {
-      "type": "latent_knack"
-    },
-    "deepening": {
-      "2": "Every step costs less. Distance shrinks.",
-      "3": "The land is short under your feet."
-    }
+    "lane": "magic"
   },
   {
     "description": "Your hands stopped shaking this week. Not when you\u2019re scared, not when it matters. They just do the work now.",
@@ -2736,7 +2789,9 @@
     "deepening": {
       "2": "Stillness is strength.",
       "3": "Your hands never fail: the delicate impossible is routine."
-    }
+    },
+    "lane": "skill",
+    "skillId": "steady_hands"
   },
   {
     "description": "You feel weather coming in your bones now \u2014 a day out. It started this week. You\u2019re always ready, every vessel out. Catch 50% more rainwater.",
@@ -2763,7 +2818,9 @@
     "deepening": {
       "2": "You hear weather coming.",
       "3": "The sky speaks: you know storms days ahead, and their moods."
-    }
+    },
+    "lane": "skill",
+    "skillId": "weather_read"
   },
   {
     "description": "Wounds close a little faster when your hands are on them now. Not miracles \u2014 just faster. It started days ago. You don\u2019t know why. You\u2019ve stopped asking.",
@@ -2790,7 +2847,8 @@
     "deepening": {
       "2": "Your touch knows.",
       "3": "Hands that heal and know: you feel sickness like a texture."
-    }
+    },
+    "lane": "magic"
   },
   {
     "description": "The System installs your fusion pellet \u2014 properly, inside you. You never need to eat again: the pellet covers your metabolism, and your strikes and abilities burn with a steady reactor fire (1.25x, always on). One reactor per world, and it never comes out: not unslotted, not un-taught, not surrendered. Death is the only uninstall. But the hunger is gone, and with it the joy: food gives you no morale, feasts give you no comfort, and your fire never burns hotter than this. A cold spot at every table.",
@@ -2814,7 +2872,8 @@
     "deepening": {
       "2": "The reactor runs cleaner: the fire steadies, the hum fades into background.",
       "3": "You forget what hunger felt like. You are not sure what else you forgot."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "draw_fire",
@@ -2845,7 +2904,8 @@
     "deepening": {
       "2": "Your challenge carries further. Beasts hear it first.",
       "3": "You are the wall it breaks on. Everyone knows it, especially the wall."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "bodyguard",
@@ -2877,7 +2937,8 @@
     "deepening": {
       "2": "You read the blow a breath earlier.",
       "3": "Your people stop flinching when things fall. They know where you'll be."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "shield_wall",
@@ -2908,7 +2969,8 @@
     "deepening": {
       "2": "The line tightens. Less gets through.",
       "3": "You have been the wall so long you've forgotten what it was like to stand alone."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "rally",
@@ -2933,7 +2995,8 @@
     "deepening": {
       "2": "Your voice finds them faster in the noise.",
       "3": "They have heard you hold before. They believe it now."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "static_toss",
@@ -2963,7 +3026,8 @@
     "deepening": {
       "2": "The static sticks \u2014 the struck monster is slowed (moves 1 less) for 2 rounds.",
       "3": "CHAIN LIGHTNING: arcs to a second monster for half damage."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cheese_wheel",
@@ -2993,7 +3057,8 @@
     "deepening": {
       "2": "The wheel is aged \u2014 it stuns for 1 round on impact (the smell).",
       "3": "The wheel multiplies mid-flight. Two wheels. Twice the screaming."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "bird_strike",
@@ -3023,7 +3088,8 @@
     "deepening": {
       "2": "Murder: more birds. [12,18]/round.",
       "3": "The birds learn to aim for eyes. 40% blind chance."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "tripwire",
@@ -3052,7 +3118,8 @@
     "deepening": {
       "2": "Barbed wire. The prone monster also bleeds.",
       "3": "Two wires. Two monsters. Twice the embarrassment."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "turncoat",
@@ -3082,7 +3149,8 @@
     "deepening": {
       "2": "Your reasoning is impeccable. 3 rounds.",
       "3": "They hold a grudge. The feud persists after the fight (they'll remember)."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "freeze_tag",
@@ -3112,7 +3180,8 @@
     "deepening": {
       "2": "No tag-backs: also silences its special for 1 round.",
       "3": "Everyone's it: root all adjacent monsters."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "shoulder_check",
@@ -3153,7 +3222,8 @@
     "deepening": {
       "2": "The shoulder knows.",
       "3": "You can shoulder-check a door off its hinges. You've done it. Twice."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "hogtie",
@@ -3194,7 +3264,8 @@
     "deepening": {
       "2": "Your knots have knots.",
       "3": "You once hogtied a rumor. It stayed tied."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "come_get_some",
@@ -3236,7 +3307,8 @@
     "deepening": {
       "2": "You can goad a statue into flinching.",
       "3": "Your taunts have a return address."
-    }
+    },
+    "lane": "skill"
   },
   {
     "id": "blood_frenzy",
@@ -3262,7 +3334,8 @@
     "deepening": {
       "2": "Stacks to +100%.",
       "3": "Missing no longer fully breaks it \u2014 halves instead."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "retribution",
@@ -3300,7 +3373,8 @@
     "deepening": {
       "2": "Stores 75%.",
       "3": "Unleash also staggers."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "trophy_room",
@@ -3337,7 +3411,8 @@
     "deepening": {
       "2": "+75% vs marked.",
       "3": "Two marks per day."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "feast_engine",
@@ -3363,7 +3438,8 @@
     "deepening": {
       "2": "+3% per HP.",
       "3": "Cap +75%."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "battlefield_grace",
@@ -3389,7 +3465,8 @@
     "deepening": {
       "2": "2 heals trigger it.",
       "3": "Also grants +1 round of courage."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "nowhere_man",
@@ -3415,7 +3492,8 @@
     "deepening": {
       "2": "+7% per tile.",
       "3": "Cap +60%."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cartographers_eye",
@@ -3441,7 +3519,8 @@
     "deepening": {
       "2": "+3% per 10 tiles.",
       "3": "Cap +45%."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "crowd_favorite",
@@ -3467,7 +3546,8 @@
     "deepening": {
       "2": "\u00d7(1 + fans/8).",
       "3": "\u00d7(1 + fans/6)."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "hoarders_interest",
@@ -3493,7 +3573,8 @@
     "deepening": {
       "2": "1.5% per day.",
       "3": "2% per day."
-    }
+    },
+    "lane": "magic"
   },
   {
     "id": "cornucopia",
@@ -3519,6 +3600,7 @@
     "deepening": {
       "2": "+20% per streak.",
       "3": "Cap +200%."
-    }
+    },
+    "lane": "magic"
   }
 ]

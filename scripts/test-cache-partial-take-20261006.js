@@ -114,6 +114,10 @@ function buryPemmican(units) {
 
   // ---------- 5. spoilage: rotted portion goes to the worms ----------
   freshGame();
+  // ABILITY LANES (2026-10-14): a random background that knows preserve_food
+  // now carries preservation_instinct (+2 spoilage days/level) — the rot
+  // test needs a scholar without it.
+  Game.state.codex.skills = {};
   const today = Game.state.scholar.day;
   s().inventory = [{ itemId: 'berries', name: 'Berries', units: 6, kcalEach: 40, kg: 0.1, spoilDay: today }]; // rots today
   Game.log.length = 0;

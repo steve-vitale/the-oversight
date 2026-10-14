@@ -463,6 +463,21 @@
       // slot check first: an ability with nowhere to land becomes supply
       if (rewardKind === 'ability') {
         var s = st.scholar || {};
+        // ABILITY LANES (2026-10-14): fetch/treat rewards are human
+        // competences (scrounger, tracker, swimmer / triage, field_medicine)
+        // — those are SKILLS now, TAUGHT (no slot, no sheet). Teach the
+        // first one not yet known; magic pools still go to the sheet below.
+        var teachPool = q.kind === 'fetch' ? ['scrounger', 'tracker', 'swimmer']
+          : q.kind === 'treat' ? ['triage', 'field_medicine'] : [];
+        for (var tp = 0; tp < teachPool.length; tp++) {
+          var tid = teachPool[tp];
+          if (!(this.isSkillLane && this.isSkillLane(tid))) continue;
+          if (this.hasAbility && this.hasAbility(tid)) continue;
+          if (this.teachAbilitySkill(tid, 1, 'aid quest')) {
+            this.say('The work taught you something. Nobody handed it to you — you did it, and now you know how.');
+            return 'reward-skill';
+          }
+        }
         var maxSlots = 6;
         try { maxSlots = this.abilitySlots(); } catch (e) {}
         if ((s.abilities || []).length < maxSlots) {
@@ -475,7 +490,7 @@
           for (var j = 0; j < pool.length; j++) {
             var def = null;
             try { def = (this.data.abilities || []).find(function (a) { return a.id === pool[j]; }); } catch (e) {}
-            if (def && !owned[def.id] && !(this.hasAbility && this.hasAbility(def.id))) {
+            if (def && def.lane !== 'skill' && !owned[def.id] && !(this.hasAbility && this.hasAbility(def.id))) {
               cands.push({ id: def.id, name: def.name, description: def.description || def.desc || '', flavor: q.weird ? 'It hums faintly. The System refuses to explain the humming.' : 'The System is extremely proud of this one.' });
             }
           }

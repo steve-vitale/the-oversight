@@ -1003,8 +1003,7 @@
     if (!info) return;
     const { x, y, blockType } = block;
     const wood = Game.woodCount();
-    const canSwim = (Game.state.scholar.abilities || []).some(a => (a.id || a) === 'swimmer') ||
-                    (Game.state.scholar.backgroundAbilities || []).some(a => (a.id || a) === 'swimmer');
+    const canSwim = Game.hasAbility('swimmer'); // ABILITY LANES: swimmer is a skill now
     let html = '';
     const goAround = `<button class="btn sm ghost" data-act="around">Go around</button>`;
     if (blockType === 'fallen_tree') {
@@ -14481,10 +14480,12 @@
           }
           const entry = codexSkills[sk.id] || {};
           const lvl = entry.level || 0;
-          const pips = '\u25CF'.repeat(lvl) + '\u25CB'.repeat(Math.max(0, 4 - lvl));
           const levels = sk.levels || {};
+          // PIPS: the data has 3 levels (the old 4th pip was never fillable).
+          const maxL = Math.max(1, Object.keys(levels).length || 3);
+          const pips = '\u25CF'.repeat(Math.min(lvl, maxL)) + '\u25CB'.repeat(Math.max(0, maxL - lvl));
           let levelDetail = '';
-          for (let l = 1; l <= 4; l++) {
+          for (let l = 1; l <= maxL; l++) {
             if (levels[String(l)]) {
               const unlocked = lvl >= l;
               levelDetail += `<p class="small" style="margin:2px 0 2px 12px;${unlocked ? '' : 'opacity:.4'}"><b>L${l}:</b> ${unlocked ? esc(levels[String(l)]) : '???'}</p>`;
@@ -14499,9 +14500,26 @@
               return `<p class="small" style="margin-left:12px;${tKnown ? '' : 'opacity:.4'}">🔧 <b>${tKnown ? esc(t.technique || t.ability) : '???'}</b>${tKnown && t.effect ? ` — ${esc(t.effect)}` : ''}</p>`;
             }).join('');
           }
+          // ABILITY LANES (2026-10-14): human competences are skills. A known
+          // skill shows the ability mechanics it carries (actions + passives
+          // at the skill's level) — the Abilities slots show magic only.
+          let mechHtml = '';
+          const carries = (lvl >= 1) ? (sk.abilityMechanics || []) : [];
+          if (carries.length) {
+            const M = (typeof Scattering !== 'undefined' && Scattering.modifiers) || null;
+            const abDefs = Game.data.abilities || [];
+            mechHtml = carries.map(aid => {
+              const ad = abDefs.find(a => a.id === aid);
+              if (!ad) return '';
+              const acts = (ad.actions || []).map(a => `⚡ ${esc(a.name)}`).join(', ');
+              const pas = (ad.modifiers || []).map(m => { try { return (M && M.describe) ? M.describe(m, Math.min(lvl, 3)) : null; } catch (e) { return null; } }).filter(Boolean).join('; ');
+              return `<p class="small" style="margin:2px 0 2px 12px"><b>${esc(ad.name)}</b>${acts ? ` — ${acts}` : ''}${pas ? ` <span style="opacity:.7">(${esc(pas)})</span>` : ''}</p>`;
+            }).join('');
+            if (mechHtml) mechHtml = `<p class="small" style="margin-top:4px"><b>In practice:</b></p>` + mechHtml;
+          }
           html += `<details style="margin:4px 0">
             <summary style="cursor:pointer"><b>${esc(sk.name)}</b> <span style="color:#ffd166">${pips}</span></summary>
-            <div style="margin-top:4px">${levelDetail}${techHtml}</div>
+            <div style="margin-top:4px">${levelDetail}${mechHtml}${techHtml}</div>
           </details>`;
         }
         html += `</div></details>`;
@@ -18748,7 +18766,9 @@
       const id = q('#dbg-ab').value;
       const s = Game.state.scholar;
       s.abilities = s.abilities || [];
-      if (!s.abilities.includes(id)) s.abilities.push(id);
+      // ABILITY LANES: a human competence is taught as its skill, never slotted.
+      if (Game.isSkillLane && Game.isSkillLane(id)) Game.teachAbilitySkill(id, 1, 'debug');
+      else if (!s.abilities.includes(id)) s.abilities.push(id);
       Game.say(`🐞 DEBUG: granted ${id}.`);
       refresh();
     };

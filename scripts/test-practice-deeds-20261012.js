@@ -12,6 +12,12 @@
 // recomputed, grant narration sense-read (no 'undefined', System voice),
 // REAL hunt loop: stalk/blood_trail deeds fire through huntAnimal/stalkAnimal.
 // Must RED on pristine HEAD (no practice-deeds.js, no hooks).
+//
+// ABILITY LANES (2026-10-14, design change): stalk, blood_trail, ambush,
+// haymaker and soft_step are human competences (lane 'skill'). The deed now
+// TEACHES the codex skill — immediately (no System needed), never a slot,
+// narrated by learnSkill. Only war_cry (magic) is a System grant that waits
+// on arrival and obeys the six-slot law. Sections 1, 3-9, 11, 12 updated.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -35,8 +41,11 @@ function freshScholar(Game) {
   s.softStepPending = false;
   s.integration = 100; // 6 slots
   Game.state.systemArrived = true;
+  Game.state.codex.skills = {}; // skill-lane abilities are owned via codex skills
   return s;
 }
+const SKILL_LANE = new Set(['stalk', 'blood_trail', 'ambush', 'haymaker', 'soft_step']);
+const known = (Game, id) => !!(Game.state.codex.skills[Game.abilitySkillId(id)] || {}).level;
 
 const EXPECTED = {
   stalk: 'stalk', blood_trail: 'blood_trail', ambush: 'ambush',
@@ -63,7 +72,8 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
     const def = Game.practiceGrantFor(key);
     ok(def && def.id === id, `mapping: ${key} -> ${id}`, def ? def.id : 'null');
     ok(def && def.unlock && (def.unlock.type === 'practice' || def.unlock.type === 'discovery'),
-      `lane: ${id} is practice/discovery (alien ability, never a human skill)`);
+      `unlock: ${id} is practice/discovery`);
+    ok(def && def.lane === (SKILL_LANE.has(id) ? 'skill' : 'magic'), `lane: ${id} is ${SKILL_LANE.has(id) ? 'a human skill' : 'magic'}`, def && def.lane);
   }
   ok(!Game.practiceGrantFor('no_such_deed'), 'mapping: unknown practice key -> null');
 
@@ -80,10 +90,14 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   // ---------- 3. idempotent ----------
   freshScholar(Game);
   Game.notePracticeDeed('stalk', 10);
-  const n1 = Game.state.scholar.abilities.filter(a => a.id === 'stalk').length;
+  const n1 = known(Game, 'stalk') ? 1 : 0;
   Game.notePracticeDeed('stalk', 10);
-  const n2 = Game.state.scholar.abilities.filter(a => a.id === 'stalk').length;
-  ok(n1 === 1 && n2 === 1, 'idempotent: stalk granted once', `${n1}/${n2}`);
+  const n2 = known(Game, 'stalk') ? 1 : 0;
+  ok(n1 === 1 && n2 === 1 && Game.state.scholar.abilities.length === 0 && Game.state.codex.skills.stalk.level === 1,
+    'idempotent: stalk taught once (skill L1, no slot)', `${n1}/${n2}`);
+  Game.notePracticeDeed('war_cry', 3);
+  Game.notePracticeDeed('war_cry', 3);
+  ok(Game.state.scholar.abilities.filter(a => a.id === 'war_cry').length === 1, 'idempotent: war_cry (magic) granted once');
 
   // ---------- 4. pre-arrival counting, no grant; pending pass on arrival ----------
   freshScholar(Game);
@@ -91,9 +105,9 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   Game.notePracticeDeed('blood_trail', 3);
   Game.notePracticeDeed('ambush', 2);
   Game.notePracticeDeed('war_cry', 3);
-  ok(!Game.hasAbility('blood_trail') && !Game.hasAbility('ambush') && !Game.hasAbility('war_cry'),
-    'pre-arrival: deeds counted, nothing granted');
-  ok(Game.practiceDeedGrant('blood_trail') === 'pending', 'pre-arrival: direct grant -> pending');
+  ok(known(Game, 'blood_trail') && known(Game, 'ambush') && !Game.hasAbility('war_cry'),
+    'pre-arrival: human deeds taught as skills now, magic (war_cry) waits');
+  ok(Game.practiceDeedGrant('war_cry') === 'pending', 'pre-arrival: direct magic grant -> pending');
   Game.state.systemArrived = true;
   Game.checkPendingPracticeDeeds();
   ok(Game.hasAbility('blood_trail') && Game.hasAbility('ambush') && Game.hasAbility('war_cry'),
@@ -112,8 +126,8 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   freshScholar(Game);
   Game.state.systemArrived = false;
   for (let i = 0; i < 20; i++) Game.noteSoftStepTile(false);
-  ok(Game.state.scholar.softStepPending === true && !Game.hasAbility('soft_step'),
-    'soft_step: pre-arrival 20-streak banked, not lost');
+  ok(known(Game, 'soft_step') && Game.state.scholar.abilities.length === 0,
+    'soft_step: pre-arrival 20-streak teaches the skill (no System needed)');
   Game.state.systemArrived = true;
   Game.checkPendingPracticeDeeds();
   ok(Game.hasAbility('soft_step'), 'soft_step: banked streak fires on arrival');
@@ -123,18 +137,21 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   Game.state.scholar.abilities = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'].map(id => ({ id, level: 1 }));
   said.length = 0;
   Game.notePracticeDeed('haymaker', 3);
+  ok(known(Game, 'haymaker') && Game.state.scholar.abilities.length === 6, 'slots: a human deed is taught even with full slots (skills take no slot)');
+  said.length = 0;
+  Game.notePracticeDeed('war_cry', 3);
   ok(Game.state.scholar.abilities.length === 6, 'slots: full 6 stays 6/6, no overflow');
-  ok(!Game.hasAbility('haymaker'), 'slots: no grant when full');
+  ok(!Game.hasAbility('war_cry'), 'slots: no magic grant when full');
   const refusal = said.join('\n');
   ok(/slots are full \(6\/6\)/.test(refusal), 'slots: refusal names the slots honestly');
   ok(!/undefined/.test(refusal), 'slots: refusal has no undefined');
 
   // ---------- 7. background-held never duplicates ----------
   freshScholar(Game);
-  Game.state.scholar.backgroundAbilities = [{ id: 'stalk', level: 1 }];
-  Game.notePracticeDeed('stalk', 3);
-  ok(Game.state.scholar.abilities.filter(a => a.id === 'stalk').length === 0,
-    'background: stalk already held via background -> no duplicate');
+  Game.state.codex.skills.stalk = { level: 2, via: 'background' };
+  Game.notePracticeDeed('stalk', 10);
+  ok(Game.state.scholar.abilities.filter(a => a.id === 'stalk').length === 0 && Game.state.codex.skills.stalk.level === 2,
+    'background: stalk already known -> no duplicate, no downgrade');
 
   // ---------- 8. synergies recomputed on grant ----------
   freshScholar(Game);
@@ -186,8 +203,9 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
   Game.notePracticeDeed('war_cry', 3);
   Game.notePracticeDeed('haymaker', 3);
   for (let i = 0; i < 20; i++) Game.noteSoftStepTile(false);
-  ok(Game.state.scholar.abilities.length === 6, 'slots: 6 practice deeds fill exactly 6 slots',
-    String(Game.state.scholar.abilities.length));
+  ok(Game.state.scholar.abilities.length === 1 && ['stalk', 'blood_trail', 'ambush', 'haymaker', 'soft_step'].every(id => known(Game, id)),
+    'slots: 6 practice deeds -> 5 skills + war_cry in 1 slot', String(Game.state.scholar.abilities.length));
+  Game.state.scholar.abilities = Game.state.scholar.abilities.concat(['a1', 'a2', 'a3', 'a4', 'a5'].map(id => ({ id, level: 1 })));
   Game.noteTrialDeed && Game.noteTrialDeed('win_a_fight', 1); // a 7th deed from another lane
   ok(Game.state.scholar.abilities.length === 6, 'slots: 7th deed refused, still 6');
 
@@ -232,7 +250,9 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
       s2.animal = null;
       if (G2.over) break;
     }
-    return { kills, deeds: s2.practiceDeeds || {}, abilities: (s2.abilities || []).map(a => a.id) };
+    // skill-lane deeds land in codex.skills (ability lanes 2026-10-14)
+    return { kills, deeds: s2.practiceDeeds || {}, abilities: (s2.abilities || []).map(a => a.id)
+      .concat(['stalk', 'blood_trail'].filter(id => G2.hasAbility(id))) };
   }
   const hp11 = await huntProbe(11);
   const hp42 = await huntProbe(42);
