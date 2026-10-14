@@ -33263,6 +33263,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((t.kind === 'villager' || t.kind === 'ally') && final > 0 && this.tbfight) {
         try { const GPa = (globalThis.Scattering || {}).Godpath; if (GPa) final = GPa.aegisRedirect(this, t, final, sourceKey); }
         catch (e) { console.warn('[godpath] aegis', e); }
+        // COIN GUARD / LAST RITES / PROPHECY on a villager (parity 2026-10-14)
+        if (final > 0) {
+          try { const GPv = (globalThis.Scattering || {}).Godpath; if (GPv && GPv.absorbVillagerHit) final = GPv.absorbVillagerHit(this, t, final); }
+          catch (e) { console.warn('[godpath] villager absorb', e); }
+        }
       }
       // LEECH STANCE (break-it abilities 2026-10-10): the data action
       // leech.leech_stance plants the flag on the player fighter for the
@@ -34205,6 +34210,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               if (v._haymakerSwings % 3 === 0) { dmg = Math.round(dmg * 2); _hmSwung = true; }
             }
           } catch (e) {}
+          // GOD-PATH (parity 2026-10-14): Stoke / Back from the Brink /
+          // Misdirection on a villager's strike, same numbers as the player's.
+          if (a.type === 'strike') {
+            try { const GPs = (globalThis.Scattering || {}).Godpath; if (GPs && GPs.villagerStrikeMult) dmg = Math.round(dmg * GPs.villagerStrikeMult(this, v, t)); }
+            catch (e) { console.warn('[godpath] villager strike', e); }
+          }
           this.say(`${v.name} ${a.type === 'strike' ? 'strikes' : 'harries'} the ${this.encTheName(t)}.`);
           // sourceKey (2026-10-14): pass the striker's key so source-keyed
           // hooks see who hit — party-formal flank/point, War Cry rallyBuff.

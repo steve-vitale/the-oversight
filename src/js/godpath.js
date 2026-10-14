@@ -15,6 +15,9 @@
 //   - allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage)
 //   - absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage)
 //   - damageMult(game, target) / dodgeBonus(game) -> Misdirection / Prophecy (buildarounds damageMult / dodgeBonus)
+//   - villagerCast(game, v) -> a villager fighter casts a held subclass verb through the SAME VERBS (actor = their fighter), paying the data kcal from their belly (hunger kcal/25); true / 'free' / false (wraps tbVillagerAbility)
+//   - villagerStrikeMult(game, v, target) / absorbVillagerHit(game, t, final) -> Stoke, Back from the Brink, Misdirection / Coin Guard, Last Rites, Prophecy on villagers (game.js tbVillagerTurn, tbDamage)
+//   - fieldBegin(game, vid, vAbs) -> per-fight state for the verbs and passives in off-screen field fights (fieldFights.js), with fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown
 // consumes:
 //   - Game.data.godpaths, Game.data.abilities, state.scholar.abilities, state.village.npcAbilities
 //   - useAbility, tbFighter, tbCanOccupy, tbBlocked, tbDamage, tbVillagerTurn, addHealth, npcNeeds, keepsakeGrow, wornKeepsakes
@@ -25,6 +28,7 @@
 //   - knowledge_gated_lean: pathLean scores only abilities the caller says the holder knows; an unknown ability scores 0 (code: pathLean)
 //   - control_changes_the_board: warden/trickster/dealer verbs move fighters or raise terrain on the real grid (code: VERBS.wall, push, pull, swap, bribe)
 //   - food_powered: every verb's cost is in the action's data (kcal), paid by useAbility before dispatch (code: registerVerbs)
+//   - same_verbs_for_villagers: a villager casts the same VERBS with the same data kcal (their hunger pays; hunger >= 80 or a starving pantry refuses), and held passives apply to whoever holds them (code: villagerCast, sideHolders, fieldBegin)
 //   - never_silent: every verb narrates, success or refusal; errors are reported via warn (code: warn)
 (function () {
   'use strict';
@@ -283,26 +287,51 @@
     refresh();
   }
 
+  // ACTOR (parity 2026-10-14, Steve: "when in doubt we treat them the same
+  // way"): every verb runs for whoever casts it — the player or a villager
+  // fighter. C = actorCtx(actor): p (the caster's fighter), isP, vid, hold
+  // (where per-fight buffs live: the scholar for the player, the fighter for
+  // a villager), name. One engine path; only the narration differs.
+  function actorCtx(actor) {
+    const isP = !actor || actor.key === 'p' || actor.kind === 'player';
+    const p = isP ? Game.tbFighter('p') : actor;
+    return { p, isP, vid: isP ? null : (actor.villagerId || actor.key), hold: isP ? Game.state.scholar : actor, name: isP ? 'You' : (actor.name || 'Someone') };
+  }
+  function lvlC(C, id) { return C.isP ? lvl(id) : 1; }
+  function hasC(C, id) {
+    try { return C.isP ? !!(Game.hasAbility && Game.hasAbility(id)) : !!(Game.npcHasAbility && Game.npcHasAbility(C.vid, id)); }
+    catch (e) { warn('hasC', e); return false; }
+  }
+  function alliesOf(f, C) { return liveAllies(f).filter(x => x !== C.p); }
+  function say(C, pl, vl) { Game.say(C.isP ? pl : vl); }
+  function syncPos(C) {
+    try {
+      if (C.isP) { Game.state.scholar.mx = C.p.mx; Game.state.scholar.my = C.p.my; }
+      else if (C.p.kind === 'villager' && Game.tbVillagerSyncPos) Game.tbVillagerSyncPos(C.p);
+    } catch (e) { warn('sync pos', e); }
+  }
+
   const VERBS = {
-    aegis(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
+    aegis(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       let t = target ? Game.tbFighter(target) : null;
-      const allies = liveAllies(f);
+      const allies = alliesOf(f, C);
       if (!t || allies.indexOf(t) < 0) t = allies.slice().sort((x, y) => (x.hp / (x.maxHp || 1)) - (y.hp / (y.maxHp || 1)))[0];
-      if (!t) { Game.say('No ally to link to. (Aegis Link needs someone beside you in the fight.)'); return false; }
-      const rounds = (a.rounds || 3) + (lvl(ab.id) >= 2 ? 1 : 0);
+      if (!t) { if (C.isP) Game.say('No ally to link to. (Aegis Link needs someone beside you in the fight.)'); return false; }
+      const rounds = (a.rounds || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       p._aegis = { key: t.key, until: (f.round || 1) + rounds };
-      Game.say(`A thread of light runs from your chest to ${t.name}'s. For ${rounds} rounds, what is meant for them comes to you. (Aegis Link)`);
+      say(C, `A thread of light runs from your chest to ${t.name}'s. For ${rounds} rounds, what is meant for them comes to you. (Aegis Link)`,
+        `A thread of light runs from ${C.name} to ${t.name}. For ${rounds} rounds, what is meant for ${t.name} lands on ${C.name}. (Aegis Link)`);
       return true;
     },
-    wall(a, ab) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
+    wall(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       const m = nearest(f, p);
-      if (!m) { Game.say('Nothing to wall off.'); return false; }
+      if (!m) { if (C.isP) Game.say('Nothing to wall off.'); return false; }
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
       const px = -dy, py = dx; // perpendicular
-      const len = lvl(ab.id) >= 2 ? 5 : (a.len || 3);
+      const len = lvlC(C, ab.id) >= 2 ? 5 : (a.len || 3);
       const half = Math.floor(len / 2);
       const cx = p.mx + dx, cy = p.my + dy;
       const cells = [];
@@ -316,18 +345,19 @@
         f.terraform[x + ',' + y] = 'warden_wall';
         cells.push(x + ',' + y);
       }
-      if (!cells.length) { Game.say('There\'s no open ground to raise. (Raise Earth: every tile that way is taken.)'); return false; }
+      if (!cells.length) { if (C.isP) Game.say('There\'s no open ground to raise. (Raise Earth: every tile that way is taken.)'); return false; }
       if (f._wardenWall) clearWardenWall(f);
       f._wardenWall = { cells, expires: (f.round || 1) + (a.rounds || 3) };
-      Game.say(`You slam your palm down and the earth STANDS UP: a wall of ${cells.length} tile${cells.length > 1 ? 's' : ''} between you and ${nm(m)}. Nothing walks through it for ${a.rounds || 3} rounds. (Raise Earth)`);
+      say(C, `You slam your palm down and the earth STANDS UP: a wall of ${cells.length} tile${cells.length > 1 ? 's' : ''} between you and ${nm(m)}. Nothing walks through it for ${a.rounds || 3} rounds. (Raise Earth)`,
+        `${C.name} slams a palm down and the earth STANDS UP: a wall of ${cells.length} tile${cells.length > 1 ? 's' : ''} between them and ${nm(m)}. (Raise Earth)`);
       refresh();
       return true;
     },
-    pull(a, ab) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
-      const radius = (a.radius || 4) + (lvl(ab.id) >= 2 ? 1 : 0);
+    pull(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
+      const radius = (a.radius || 4) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       const mons = liveMons(f).filter(m => cheb(m, p) <= radius && cheb(m, p) > 1).sort((x, y) => cheb(x, p) - cheb(y, p));
-      if (!mons.length) { Game.say('Nothing in reach to pull. (Gravity Well: radius ' + radius + '.)'); return false; }
+      if (!mons.length) { if (C.isP) Game.say('Nothing in reach to pull. (Gravity Well: radius ' + radius + '.)'); return false; }
       let moved = 0, arrived = 0;
       for (const m of mons) {
         let steps = 0;
@@ -338,18 +368,19 @@
           m.mx = nx; m.my = ny; steps++;
         }
         if (steps) moved++;
-        if (cheb(m, p) <= 1) { m.hesitate = Math.max(m.hesitate || 0, 1); if (lvl(ab.id) >= 3) m._frozen = Math.max(m._frozen || 0, 1); arrived++; }
+        if (cheb(m, p) <= 1) { m.hesitate = Math.max(m.hesitate || 0, 1); if (lvlC(C, ab.id) >= 3) m._frozen = Math.max(m._frozen || 0, 1); arrived++; }
       }
-      Game.say(`You become the low point of the world. ${moved} monster${moved === 1 ? '' : 's'} slide toward you${arrived ? `; ${arrived} land${arrived === 1 ? 's' : ''} at your feet, staggered` : ''}. (Gravity Well)`);
+      say(C, `You become the low point of the world. ${moved} monster${moved === 1 ? '' : 's'} slide toward you${arrived ? `; ${arrived} land${arrived === 1 ? 's' : ''} at your feet, staggered` : ''}. (Gravity Well)`,
+        `${C.name} becomes the low point of the world: ${moved} monster${moved === 1 ? '' : 's'} slide toward them${arrived ? `, ${arrived} staggered at their feet` : ''}. (Gravity Well)`);
       refresh();
       return moved > 0 || arrived > 0;
     },
-    push(a, ab) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
-      const radius = (a.radius || 2) + (lvl(ab.id) >= 2 ? 1 : 0);
+    push(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
+      const radius = (a.radius || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       const mons = liveMons(f).filter(m => cheb(m, p) <= radius).sort((x, y) => cheb(x, p) - cheb(y, p));
-      if (!mons.length) { Game.say('Nothing close enough to throw. (Landslide: radius ' + radius + '.)'); return false; }
-      const slam = lvl(ab.id) >= 3 ? [22, 30] : (a.slam || [14, 22]);
+      if (!mons.length) { if (C.isP) Game.say('Nothing close enough to throw. (Landslide: radius ' + radius + '.)'); return false; }
+      const slam = lvlC(C, ab.id) >= 3 ? [22, 30] : (a.slam || [14, 22]);
       let slams = 0;
       for (const m of mons) {
         let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
@@ -363,57 +394,64 @@
         if (hit && m.alive) {
           const dmg = rint(slam[0], slam[1]);
           Game.say(`${nm(m)} SLAMS into something that doesn't move. (${dmg}, stunned.)`);
-          Game.tbDamage(m.key, dmg, 'landslide', 'p', { quiet: true });
+          Game.tbDamage(m.key, dmg, 'landslide', p.key, { quiet: true });
           m.stunned = Math.max(m.stunned || 0, 1);
           slams++;
           if (Game.tbEndCheck && Game.tbEndCheck()) return true;
         }
       }
-      Game.say(`The ground heaves outward from you. ${mons.length} thrown${slams ? `, ${slams} slammed` : ''}. (Landslide)`);
+      say(C, `The ground heaves outward from you. ${mons.length} thrown${slams ? `, ${slams} slammed` : ''}. (Landslide)`,
+        `The ground heaves outward from ${C.name}. ${mons.length} thrown${slams ? `, ${slams} slammed` : ''}. (Landslide)`);
       refresh();
       return true;
     },
-    pack(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
+    pack(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       const m = pickMonster(f, p, target);
-      if (!m) { Game.say('No prey for the pack.'); return false; }
-      const pin = (a.pin || 2) + (lvl(ab.id) >= 2 ? 1 : 0);
+      if (!m) { if (C.isP) Game.say('No prey for the pack.'); return false; }
+      const pin = (a.pin || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       const birds = (m._birdStrike || 0) > 0;
       const rounds = birds ? (a.rounds || 3) * 2 : (a.rounds || 3);
       m._frozen = Math.max(m._frozen || 0, pin);
       m._birdStrike = (m._birdStrike || 0) + rounds;
-      Game.say(`You whistle once. They were listening: wings, teeth, claws, all on ${nm(m)}. It's pinned for ${pin} rounds and harried for ${rounds}${birds ? ' (the birds were already on it: twice as long)' : ''}. (Pack Hunt)`);
+      say(C, `You whistle once. They were listening: wings, teeth, claws, all on ${nm(m)}. It's pinned for ${pin} rounds and harried for ${rounds}${birds ? ' (the birds were already on it: twice as long)' : ''}. (Pack Hunt)`,
+        `${C.name} whistles once. Wings, teeth, claws, all on ${nm(m)}: pinned ${pin} rounds, harried ${rounds}. (Pack Hunt)`);
       return true;
     },
-    heal(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
-      const reach = lvl(ab.id) >= 3 ? 2 : 1;
-      const amt = lvl(ab.id) >= 2 ? [16, 24] : (a.amount || [12, 18]);
+    heal(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
+      const reach = lvlC(C, ab.id) >= 3 ? 2 : 1;
+      const amt = lvlC(C, ab.id) >= 2 ? [16, 24] : (a.amount || [12, 18]);
       let base = rint(amt[0], amt[1]);
-      try { base = Math.round(Game.modTarget('healing.amount', base, {})); } catch (e) { warn('heal mod', e); }
+      try { if (C.isP) base = Math.round(Game.modTarget('healing.amount', base, {})); } catch (e) { warn('heal mod', e); }
       let t = target ? Game.tbFighter(target) : null;
-      const allies = liveAllies(f).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
-      if (!t || (t !== p && allies.indexOf(t) < 0)) {
+      const cands = alliesOf(f, C).filter(x => cheb(x, p) <= reach && x.hp < x.maxHp);
+      if (!C.isP) { const pp = Game.tbFighter('p'); if (pp && pp.alive && cheb(pp, p) <= reach && pp.hp < pp.maxHp) cands.push(pp); }
+      if (!t || (t !== p && cands.indexOf(t) < 0)) {
         const pFrac = p.hp / (p.maxHp || 100);
-        const worst = allies.slice().sort((x, y) => (x.hp / x.maxHp) - (y.hp / y.maxHp))[0];
+        const worst = cands.slice().sort((x, y) => (x.hp / x.maxHp) - (y.hp / y.maxHp))[0];
         t = (worst && worst.hp / worst.maxHp < pFrac) ? worst : p;
       }
-      if (t === p) {
+      if (t === p && C.isP) {
         if (p.hp >= p.maxHp) { Game.say('Nothing to mend. (Mending Hands)'); return false; }
         Game.addHealth(base); // counts as a heal (build-around hooks)
         Game.say(`You press your own wound and the System knits it: +${base} HP. (Mending Hands)`);
         return true;
       }
+      if (t.hp >= t.maxHp) return false;
       const before = t.hp;
       t.hp = Math.min(t.maxHp, t.hp + base);
+      if (t.kind === 'player') { try { Game.state.scholar.health = Math.max(0, t.hp); } catch (e) { warn('heal sync', e); } }
       const healed = t.hp - before;
-      try { const BA = S.buildarounds; if (BA && BA.onHeal) BA.onHeal(Game, t.key, healed, Math.max(0, base - healed)); } catch (e) { warn('onHeal', e); }
-      Game.say(`Your hands find ${t.name}'s wound and it closes under them: +${healed} HP. (Mending Hands)`);
+      if (C.isP) { try { const BA = S.buildarounds; if (BA && BA.onHeal) BA.onHeal(Game, t.key, healed, Math.max(0, base - healed)); } catch (e) { warn('onHeal', e); } }
+      const tn = t.kind === 'player' ? 'your' : (t === p ? 'their own' : `${t.name}'s`);
+      say(C, `Your hands find ${t.name}'s wound and it closes under them: +${healed} HP. (Mending Hands)`,
+        `${C.name}'s hands find ${tn} wound and it closes under them: +${healed} HP. (Mending Hands)`);
       return true;
     },
-    blink(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
-      const range = (a.range || 3) + (lvl(ab.id) >= 2 ? 1 : 0);
+    blink(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
+      const range = (a.range || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       const mons = liveMons(f);
       let dest = null;
       if (typeof target === 'string' && /^\d+,\d+$/.test(target)) {
@@ -432,88 +470,97 @@
           }
         }
       }
-      if (!dest) { Game.say('Nowhere to go. (Blink: no open tile in range.)'); return false; }
+      if (!dest) { if (C.isP) Game.say('Nowhere to go. (Blink: no open tile in range.)'); return false; }
       const dist = cheb(p, { mx: dest.x, my: dest.y });
       p.mx = dest.x; p.my = dest.y;
-      try { Game.state.scholar.mx = dest.x; Game.state.scholar.my = dest.y; } catch (e) { warn('blink sync', e); }
-      try { const BA = S.buildarounds; if (BA && BA.onMove) BA.onMove(Game, dist); } catch (e) { warn('onMove', e); }
-      Game.say(`You are somewhere else: ${dist} tile${dist === 1 ? '' : 's'} away, between one heartbeat and the next. (Blink)`);
+      syncPos(C);
+      if (C.isP) { try { const BA = S.buildarounds; if (BA && BA.onMove) BA.onMove(Game, dist); } catch (e) { warn('onMove', e); } }
+      say(C, `You are somewhere else: ${dist} tile${dist === 1 ? '' : 's'} away, between one heartbeat and the next. (Blink)`,
+        `${C.name} is somewhere else: ${dist} tile${dist === 1 ? '' : 's'} away, between one heartbeat and the next. (Blink)`);
       refresh();
       return true;
     },
-    swap(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
-      const range = (a.range || 3) + (lvl(ab.id) >= 2 ? 1 : 0);
+    swap(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
+      const range = (a.range || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
       const m = pickMonster(f, p, target, range);
-      if (!m) { Game.say('Nothing in reach to trade places with. (Switcheroo: ' + range + ' tiles.)'); return false; }
-      if ((Game.fighterSize ? Game.fighterSize(m) : 1) > 1) { Game.say(`${nm(m)} is too big to swap with. (Switcheroo: size-1 only.)`); return false; }
+      if (!m) { if (C.isP) Game.say('Nothing in reach to trade places with. (Switcheroo: ' + range + ' tiles.)'); return false; }
+      if ((Game.fighterSize ? Game.fighterSize(m) : 1) > 1) { if (C.isP) Game.say(`${nm(m)} is too big to swap with. (Switcheroo: size-1 only.)`); return false; }
       const px = p.mx, py = p.my;
       p.mx = m.mx; p.my = m.my; m.mx = px; m.my = py;
-      try { Game.state.scholar.mx = p.mx; Game.state.scholar.my = p.my; } catch (e) { warn('swap sync', e); }
+      syncPos(C);
       const fizzled = !!m.telegraph;
       m.telegraph = null;
       m.hesitate = Math.max(m.hesitate || 0, 1);
-      Game.say(`Snap: you're where ${nm(m)} was, and it's where you were.${fizzled ? ' Its wind-up was aimed at you. It just hit empty air.' : ''} It hesitates. (Switcheroo)`);
+      say(C, `Snap: you're where ${nm(m)} was, and it's where you were.${fizzled ? ' Its wind-up was aimed at you. It just hit empty air.' : ''} It hesitates. (Switcheroo)`,
+        `Snap: ${C.name} is where ${nm(m)} was, and it's where they were.${fizzled ? ' Its wind-up hits empty air.' : ''} It hesitates. (Switcheroo)`);
       refresh();
       return true;
     },
-    foresee(a, ab) {
-      const f = Game.tbfight;
-      const rounds = (a.rounds || 3) + (lvl(ab.id) >= 2 ? 1 : 0);
-      f._foresightUntil = (f.round || 1) + rounds - 1;
-      Game.say(`The fight goes thin, like a rerun. For ${rounds} rounds you see a breath ahead. (Foresight)`);
+    foresee(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight;
+      const rounds = (a.rounds || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
+      const until = (f.round || 1) + rounds - 1;
+      f._foresightUntil = Math.max(f._foresightUntil || 0, until);
+      if (!C.isP) C.p._foresightUntil = until;
+      say(C, `The fight goes thin, like a rerun. For ${rounds} rounds you see a breath ahead. (Foresight)`,
+        `${C.name}'s eyes go distant. "Left. Now it lunges." For ${rounds} rounds they call every move before it comes. (Foresight)`);
       readIntents(f);
       return true;
     },
-    broadcast(a, ab) {
-      const f = Game.tbfight, s = Game.state.scholar;
+    broadcast(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, s = Game.state.scholar;
       const BA = S.buildarounds;
       let mult = 1;
-      try { if (BA && BA.socialMult) mult = BA.socialMult(Game) || 1; } catch (e) { warn('socialMult', e); }
-      const fans = (a.fans || 2) + (lvl(ab.id) >= 2 ? 1 : 0);
-      s.fans = Math.min(50, (s.fans || 0) + fans);
-      const rounds = Math.min(5, Math.round(((a.rally || 2) + (lvl(ab.id) >= 2 ? 1 : 0)) * mult));
-      const allies = liveAllies(f);
+      try { if (C.isP && BA && BA.socialMult) mult = BA.socialMult(Game) || 1; } catch (e) { warn('socialMult', e); }
+      const fans = (a.fans || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
+      if (C.isP) s.fans = Math.min(50, (s.fans || 0) + fans);
+      const rounds = Math.min(5, Math.round(((a.rally || 2) + (lvlC(C, ab.id) >= 2 ? 1 : 0)) * mult));
+      const allies = alliesOf(f, C);
       for (const v of allies) v.rallyBuff = Math.max(v.rallyBuff || 0, rounds);
-      if (lvl(ab.id) >= 3) for (const m of liveMons(f)) m.hesitate = Math.max(m.hesitate || 0, 1);
-      Game.sysSay && Game.sysSay(`📺 "WE'RE LIVE!" +${fans} fans (${s.fans} watching).${allies.length ? ` ${allies.length} all${allies.length === 1 ? 'y hears' : 'ies hear'} your voice: emboldened for ${rounds} rounds.` : ''}${mult > 1 ? ` (Crowd Favorite: x${mult.toFixed(1)})` : ''} (Live Broadcast)`);
+      if (lvlC(C, ab.id) >= 3) for (const m of liveMons(f)) m.hesitate = Math.max(m.hesitate || 0, 1);
+      if (C.isP) Game.sysSay && Game.sysSay(`📺 "WE'RE LIVE!" +${fans} fans (${s.fans} watching).${allies.length ? ` ${allies.length} all${allies.length === 1 ? 'y hears' : 'ies hear'} your voice: emboldened for ${rounds} rounds.` : ''}${mult > 1 ? ` (Crowd Favorite: x${mult.toFixed(1)})` : ''} (Live Broadcast)`);
+      else Game.say(`📺 ${C.name} goes LIVE. ${allies.length} all${allies.length === 1 ? 'y hears' : 'ies hear'} them: emboldened for ${rounds} rounds. (Live Broadcast)`);
       return true;
     },
-    command(a, ab) {
-      const f = Game.tbfight;
-      const allies = liveAllies(f);
-      if (!allies.length) { Game.say('No one to command. (The Crowd Moves needs allies in the fight.)'); return false; }
-      Game.say(`You say one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`);
+    command(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight;
+      const allies = alliesOf(f, C);
+      if (!allies.length) { if (C.isP) Game.say('No one to command. (The Crowd Moves needs allies in the fight.)'); return false; }
+      say(C, `You say one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`,
+        `${C.name} says one word. Everyone hears "NOW." (The Crowd Moves: ${allies.length} extra turn${allies.length === 1 ? '' : 's'}.)`);
       for (const v of allies) {
         if (!v.alive || v.fled) continue;
-        try { Game.tbVillagerTurn(v); } catch (e) { warn('command turn', e); }
-        if (lvl(ab.id) >= 2 && v.alive) v.hp = Math.min(v.maxHp, v.hp + 5);
+        try { v._gpCommanded = true; Game.tbVillagerTurn(v); } catch (e) { warn('command turn', e); } finally { delete v._gpCommanded; }
+        if (lvlC(C, ab.id) >= 2 && v.alive) v.hp = Math.min(v.maxHp, v.hp + 5);
         if (Game.tbEndCheck && Game.tbEndCheck()) return true;
       }
       return true;
     },
-    empower(a, ab) {
-      const s = Game.state.scholar;
-      const mult = lvl(ab.id) >= 2 ? 1.8 : (a.mult || 1.6);
-      const n = lvl(ab.id) >= 3 ? 3 : (a.strikes || 2);
-      s._nextStrikes = { mult, n, label: (ab.name || 'Stoke').toUpperCase() };
-      Game.say(`You throw calories on the fire. The next ${n} strikes hit ${Math.round((mult - 1) * 100)}% harder. (${ab.name})`);
+    empower(a, ab, target, actor) {
+      const C = actorCtx(actor);
+      const mult = lvlC(C, ab.id) >= 2 ? 1.8 : (a.mult || 1.6);
+      const n = lvlC(C, ab.id) >= 3 ? 3 : (a.strikes || 2);
+      C.hold._nextStrikes = { mult, n, label: (ab.name || 'Stoke').toUpperCase() };
+      say(C, `You throw calories on the fire. The next ${n} strikes hit ${Math.round((mult - 1) * 100)}% harder. (${ab.name})`,
+        `${C.name} throws calories on the fire. Their next ${n} strikes hit ${Math.round((mult - 1) * 100)}% harder. (${ab.name})`);
       return true;
     },
-    guard(a, ab) {
-      const s = Game.state.scholar;
-      const hits = (a.hits || 3) + (lvl(ab.id) >= 2 ? 1 : 0);
-      const cap = lvl(ab.id) >= 3 ? 25 : (a.cap || 15);
-      s._absorb = { hits, cap, label: ab.name || 'Coin Guard' };
-      Game.say(`${hits} coins of hard light lift from your pack and orbit you. Each one will stop a blow (up to ${cap}). (${ab.name})`);
+    guard(a, ab, target, actor) {
+      const C = actorCtx(actor);
+      const hits = (a.hits || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
+      const cap = lvlC(C, ab.id) >= 3 ? 25 : (a.cap || 15);
+      C.hold._absorb = { hits, cap, label: ab.name || 'Coin Guard' };
+      say(C, `${hits} coins of hard light lift from your pack and orbit you. Each one will stop a blow (up to ${cap}). (${ab.name})`,
+        `${hits} coins of hard light lift from ${C.name}'s pack and orbit them. Each will stop a blow (up to ${cap}). (${ab.name})`);
       return true;
     },
-    bribe(a, ab, target) {
-      const f = Game.tbfight, p = Game.tbFighter('p');
+    bribe(a, ab, target, actor) {
+      const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       const m = pickMonster(f, p, target);
-      if (!m) { Game.say('No one to pay off.'); return false; }
-      if (isTitanish(m)) { Game.say(`${nm(m)} looks at the food and then at you. The big ones don't haggle. (Bribe: not titans.)`); return false; }
-      const hes = (a.hesitate || 2) + (lvl(ab.id) >= 3 ? 1 : 0);
+      if (!m) { if (C.isP) Game.say('No one to pay off.'); return false; }
+      if (isTitanish(m)) { if (C.isP) Game.say(`${nm(m)} looks at the food and then at you. The big ones don't haggle. (Bribe: not titans.)`); return false; }
+      const hes = (a.hesitate || 2) + (lvlC(C, ab.id) >= 3 ? 1 : 0);
       m.hesitate = Math.max(m.hesitate || 0, hes);
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
@@ -523,16 +570,17 @@
         m.mx += dx; m.my += dy; back++;
       }
       let turned = '';
-      if (Game.hasAbility('sweetener')) {
+      if (hasC(C, 'sweetener')) {
         const other = liveMons(f).filter(o => o !== m).sort((x, y) => cheb(x, m) - cheb(y, m))[0];
         if (other) {
-          const r = lvl('sweetener') >= 2 ? 3 : 2;
+          const r = lvlC(C, 'sweetener') >= 2 ? 3 : 2;
           m._turncoatTarget = other.key; m._turncoatRounds = r;
-          turned = ` And it's on your side now: for ${r} rounds it goes for ${nm(other)}. (Sweetener)`;
+          turned = ` And it's on ${C.isP ? 'your' : 'their'} side now: for ${r} rounds it goes for ${nm(other)}. (Sweetener)`;
         }
       }
-      Game.say(`You hold out the food. ${nm(m)} takes it, backs off ${back} tile${back === 1 ? '' : 's'}, and reconsiders its life for ${hes} rounds.${turned} (Bribe)`);
-      try { Game.tele && Game.tele('godpath_bribe', { monster: (m.mdef || {}).id || m.monsterId, turned: !!turned }); } catch (e) { warn('tele bribe', e); }
+      say(C, `You hold out the food. ${nm(m)} takes it, backs off ${back} tile${back === 1 ? '' : 's'}, and reconsiders its life for ${hes} rounds.${turned} (Bribe)`,
+        `${C.name} holds out the food. ${nm(m)} takes it, backs off ${back} tile${back === 1 ? '' : 's'}, and reconsiders for ${hes} rounds.${turned} (Bribe)`);
+      try { Game.tele && Game.tele('godpath_bribe', { monster: (m.mdef || {}).id || m.monsterId, turned: !!turned, who: C.isP ? 'player' : C.vid }); } catch (e) { warn('tele bribe', e); }
       refresh();
       return true;
     },
@@ -603,30 +651,380 @@
     return n;
   }
 
+  // ===================== VILLAGERS CAST THE SAME VERBS =====================
+  // Parity (2026-10-14, Steve: "when in doubt we treat them the same way"):
+  // a villager holding a subclass active casts it through the SAME VERBS
+  // implementation (actor = their fighter), pays the SAME data kcal (from
+  // their own belly: kcal/25 hunger, the scale villager meals use), and is
+  // refused the same way when the body has nothing to burn (hunger >= 80,
+  // the player's eat-first gate in villager terms). The village pantry tier
+  // gates casts like every other villager ability (foodPower.js rules:
+  // starving = none, tight = only when outmatched).
+  const V_HUNGER_GATE = 80;
+  function combatVerbActs() {
+    const out = [];
+    for (const ab of ((Game.data && Game.data.abilities) || [])) {
+      for (const act of (ab.actions || [])) if (act.do && act.context === 'combat' && VERBS[act.do]) out.push({ ab, act });
+    }
+    return out;
+  }
+  let _cva = null;
+  function verbActs() { if (!_cva) _cva = combatVerbActs(); return _cva; }
+  function vKcal(act, ab) {
+    try { return (act.cost && act.cost.kcal) || (Game.abilityKcalCost ? Game.abilityKcalCost(ab.id, act.id) : 40); }
+    catch (e) { warn('vKcal', e); return 40; }
+  }
+  function vCanPay(vid, kcal) {
+    try { const n = Game.npcNeeds && Game.npcNeeds(vid); return !n || ((n.hunger || 0) + kcal / 25) < V_HUNGER_GATE; }
+    catch (e) { warn('vCanPay', e); return false; }
+  }
+  function vPay(vid, kcal) {
+    try { const n = Game.npcNeeds && Game.npcNeeds(vid); if (n) n.hunger = Math.min(100, (n.hunger || 0) + Math.round(kcal / 25)); }
+    catch (e) { warn('vPay', e); }
+  }
+  function vUses(f, v) { f._gpVUses = f._gpVUses || {}; const k = v.key; f._gpVUses[k] = f._gpVUses[k] || {}; return f._gpVUses[k]; }
+  // The villager's read of the turn: when is each verb the smart play?
+  // Same spirit as the capable bot's ACTION_PLAN for the player.
+  const V_PLAN = {
+    wall: (I) => (I.n < 1 && I.near && I.d >= 2 && I.d <= 4 && (I.hp < 0.6 || I.mons.length >= 2) ? 6 : null),
+    pull: (I) => (I.n < 1 && I.hp > 0.6 && I.mons.some(m => cheb(m, I.v) > 1 && cheb(m, I.v) <= 4) && (I.v._nextStrikes || I.mons.length >= 2) ? 5 : null),
+    push: (I) => (I.mons.filter(m => cheb(m, I.v) <= 2).length >= 1 && (I.hp < 0.7 || I.mons.length >= 2) ? 7.5 : null),
+    pack: (I) => (I.n < 1 && I.strong ? 6.5 : null),
+    heal: (I) => (I.hp < 0.5 || I.allies.some(a => cheb(a, I.v) <= 1 && a.hp / (a.maxHp || 1) < 0.4) ? 7 : null),
+    blink: (I) => (I.hp < 0.35 && I.d <= 1 ? 8 : null),
+    swap: (I) => (I.n < 1 && I.mons.some(m => m.telegraph && cheb(m, I.v) <= 3 && (Game.fighterSize ? Game.fighterSize(m) : 1) <= 1) ? 7 : null),
+    foresee: (I) => (I.n < 1 && (I.hasProphecy || I.mons.some(m => m.telegraph)) ? 5.5 : null),
+    broadcast: (I) => (I.n < 1 && I.allies.length >= 1 ? 5 : null),
+    command: (I) => (I.n < 1 && I.allies.length >= 2 ? 7 : null),
+    empower: (I) => (!I.v._nextStrikes && I.d <= 1 ? 6 : null),
+    guard: (I) => (I.n < 1 && !I.v._absorb && I.d <= 2 && I.hp < 0.8 ? 6 : null),
+    bribe: (I) => (I.n < 1 && I.near && I.d <= 2 && !isTitanish(I.near) && (I.hp < 0.6 || I.mons.length >= 2) ? 6.5 : null),
+    aegis: (I) => (I.n < 1 && I.hp > 0.6 && I.allies.some(a => a.hp / (a.maxHp || 1) < 0.5) ? 5.5 : null),
+  };
+  // villagerCast(game, v): one subclass verb for this villager's turn, or
+  // false. "No turn" verbs (cost.turn absent) return 'free' so the villager
+  // still acts this turn.
+  function villagerCast(game, v) {
+    try {
+      const f = game.tbfight;
+      if (!f || f.over || !v || !v.villagerId || v._gpCommanded || !game.npcHasAbility) return false;
+      const vid = v.villagerId;
+      const mons = liveMons(f);
+      if (!mons.length) return false;
+      let tier = 'secure';
+      try { tier = game.villageFoodTier ? game.villageFoodTier() : 'secure'; } catch (e) { warn('tier', e); }
+      if (tier === 'starving') return false;
+      if (tier === 'tight' && mons.length < 2) return false;
+      const near = nearest(f, v);
+      const allies = liveAllies(f).filter(a => a !== v);
+      const I = {
+        v, mons, allies, near, d: near ? cheb(near, v) : 99, hp: (v.hp || 0) / Math.max(1, v.maxHp || 1),
+        strong: mons.slice().sort((a, b) => (b.maxHp || 0) - (a.maxHp || 0))[0], n: 0,
+        hasProphecy: game.npcHasAbility(vid, 'prophecy'),
+      };
+      const uses = vUses(f, v);
+      let best = null;
+      for (const { ab, act } of verbActs()) {
+        if (!game.npcHasAbility(vid, ab.id)) continue;
+        const key = ab.id + '.' + act.id;
+        const used = uses[key] || 0;
+        if (act.perFight && used >= act.perFight) continue;
+        const plan = V_PLAN[act.do];
+        if (!plan) continue;
+        I.n = used;
+        const sc = plan(I);
+        if (sc == null) continue;
+        const kcal = vKcal(act, ab);
+        if (!vCanPay(vid, kcal)) continue;
+        if (!best || sc > best.sc) best = { sc, ab, act, key, kcal };
+      }
+      if (!best) return false;
+      const ok = VERBS[best.act.do](best.act, best.ab, null, v);
+      if (ok === false) { uses[best.key] = (uses[best.key] || 0) + 1; return false; } // tried and found no use: don't loop on it
+      uses[best.key] = (uses[best.key] || 0) + 1;
+      vPay(vid, best.kcal);
+      try { game.tele && game.tele('godpath_verb', { ability: best.ab.id, verb: best.act.do, who: vid }); } catch (e) { warn('tele vverb', e); }
+      try { if (game.npcWitnessAbility) game.npcWitnessAbility(best.ab.id, allies.map(a => a.villagerId).filter(Boolean), vid); } catch (e) { warn('witness', e); }
+      return (best.act.cost && best.act.cost.turn) ? true : 'free';
+    } catch (e) { warn('villagerCast', e); return false; }
+  }
+  // villagerStrikeMult(game, v, target): the villager's strike multipliers
+  // from held subclass effects — Stoke / Back from the Brink (_nextStrikes on
+  // the fighter) and Misdirection (confused targets), same numbers as the
+  // player's.
+  function villagerStrikeMult(game, v, target) {
+    try {
+      let m = 1;
+      if (v._nextStrikes && v._nextStrikes.n > 0) {
+        m *= v._nextStrikes.mult;
+        v._nextStrikes.n--;
+        if (v._nextStrikes.n <= 0) delete v._nextStrikes;
+      }
+      if (target && v.villagerId && game.npcHasAbility && game.npcHasAbility(v.villagerId, 'misdirection')) {
+        const confused = (target.blind || 0) > 0 || (target._turncoatRounds || 0) > 0 || (target.hesitate || 0) > 0 || (target._frozen || 0) > 0 || (target._bound || 0) > 0 || (target.stunned || 0) > 0;
+        if (confused) m *= 1.5;
+      }
+      return m;
+    } catch (e) { warn('villagerStrikeMult', e); return 1; }
+  }
+  // absorbVillagerHit(game, t, final): Coin Guard / Last Rites absorbs on a
+  // villager fighter, and Prophecy's dodge while their Foresight runs.
+  function absorbVillagerHit(game, t, final) {
+    try {
+      if (!(final > 0) || !t) return final;
+      const f = game.tbfight;
+      if (f && t.villagerId && (t._foresightUntil || f._foresightUntil || 0) >= (f.round || 1) && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'prophecy')) {
+        if (Math.random() < 0.35) { game.say(`${t.name} saw it coming a breath ago and simply isn't there. (Prophecy)`); return 0; }
+      }
+      const ab = t._absorb;
+      if (!ab || !(ab.hits > 0)) return final;
+      const took = Math.min(final, ab.cap || final);
+      ab.hits -= 1;
+      if (ab.hits <= 0) delete t._absorb;
+      game.say(`${ab.label} turns the blow on ${t.name} aside (${took} absorbed${ab.hits > 0 ? `, ${ab.hits} left` : ''}).`);
+      return final - took;
+    } catch (e) { warn('absorbVillagerHit', e); return final; }
+  }
+
+  // ===================== OFF-SCREEN FIELD FIGHTS =====================
+  // fieldFights.js runs villager-vs-monster meetings as abstract rounds (no
+  // grid). The verbs translate into its terms, each once per fight, paid
+  // from the villager's belly the same way: board control = the monster
+  // loses rounds (abStun), Landslide = slam + stun, Pack Hunt = pin + harry,
+  // Mending Hands = a heal, Foresight (+Prophecy) = blows that miss, Coin
+  // Guard = absorbed hits, Stoke = harder strikes, Bribe (+Sweetener) = it
+  // backs off (its packmate takes the bite). Passives held: Misdirection,
+  // Ember Heart, Back from the Brink, Rally Aura, Lifeline, Last Rites.
+  const FIELD_IDS = ['raise_earth', 'gravity_well', 'landslide', 'pack_hunt', 'mending_hands', 'blink', 'switcheroo', 'foresight', 'live_broadcast', 'the_crowd_moves', 'stoke', 'coin_guard', 'bribe', 'aegis_link',
+    'misdirection', 'prophecy', 'ember_heart', 'back_from_the_brink', 'rally_aura', 'lifeline', 'last_rites', 'sweetener'];
+  function fieldBegin(game, vid, vAbs) {
+    try {
+      const held = {};
+      let any = false;
+      for (const id of FIELD_IDS) if ((vAbs || []).indexOf(id) >= 0) { held[id] = true; any = true; }
+      if (!any) return null;
+      let tier = 'secure';
+      try { tier = game.villageFoodTier ? game.villageFoodTier() : 'secure'; } catch (e) { warn('tier', e); }
+      return { vid, held, used: {}, tier, nextMult: 0, nextN: 0, absorb: 0, absorbCap: 0, missUntil: 0, missP: 0, harry: 0, cheated: false, holdBonus: held.rally_aura ? 0.06 : 0 };
+    } catch (e) { warn('fieldBegin', e); return null; }
+  }
+  function fieldPay(G, id, actId) {
+    const ab = defOf(id) || {};
+    const act = (ab.actions || []).find(a => a.id === actId) || (ab.actions || [])[0] || {};
+    const kcal = vKcal(act, ab);
+    if (!vCanPay(G.vid, kcal)) return false;
+    vPay(G.vid, kcal);
+    G.used[id] = (G.used[id] || 0) + 1;
+    try { Game.tele && Game.tele('godpath_verb', { ability: id, verb: act.do || id, who: G.vid, field: true }); } catch (e) { warn('tele field', e); }
+    return true;
+  }
+  // fieldAct(G, c): the villager's action phase. c = {round, vHp, vHpMax,
+  // lead, members, allyIn, allyHp, allyMax, mStunned, lroll, vName, mName,
+  // log}. Returns {consumed, abStun, vHp, allyHp, extraAlly} (all optional).
+  function fieldAct(G, c) {
+    const out = { consumed: false, abStun: 0 };
+    try {
+      if (!G || !c.lead || c.lead.hp <= 0) return out;
+      if (G.tier === 'starving') return out;
+      const packN = (c.members || []).filter(m => m.hp > 0).length;
+      if (G.tier === 'tight' && packN < 2 && c.vHp > c.vHpMax * 0.4) return out;
+      const h = G.held, u = (id) => G.used[id] || 0;
+      const hp = c.vHp / Math.max(1, c.vHpMax);
+      const L = c.log;
+      const strong = c.lead.maxHp >= c.vHpMax * 0.8 || packN >= 2;
+      // free actions first (no turn): Foresight, Coin Guard, Stoke
+      if (h.foresight && !u('foresight') && (strong || h.prophecy) && fieldPay(G, 'foresight', 'foresee')) {
+        G.missUntil = c.round + 2; G.missP = h.prophecy ? 0.35 : 0.1;
+        L.push('R' + c.round + ': ' + c.vName + '\'s eyes go distant — they call the ' + c.mName + '\'s moves a breath early. (Foresight' + (h.prophecy ? ' + Prophecy' : '') + ')');
+      }
+      if (h.coin_guard && !u('coin_guard') && hp < 0.8 && fieldPay(G, 'coin_guard', 'coins')) {
+        G.absorb = 3; G.absorbCap = 15;
+        L.push('R' + c.round + ': three coins of hard light orbit ' + c.vName + '. (Coin Guard)');
+      }
+      if (h.stoke && u('stoke') < 2 && !G.nextN && fieldPay(G, 'stoke', 'stoke')) {
+        G.nextMult = 1.6; G.nextN = 2;
+        L.push('R' + c.round + ': ' + c.vName + ' throws calories on the fire. (Stoke: next 2 strikes +60%)');
+      }
+      // turn actions: the best one, if any
+      if (h.mending_hands && hp < 0.5 && u('mending_hands') < 2 && fieldPay(G, 'mending_hands', 'mend')) {
+        const amt = c.lroll([12, 18]);
+        out.vHp = Math.min(c.vHpMax, c.vHp + amt);
+        L.push('R' + c.round + ': ' + c.vName + ' presses the wound and it knits: +' + (out.vHp - c.vHp) + ' HP. (Mending Hands)');
+        out.consumed = true; return out;
+      }
+      if (h.landslide && !u('landslide') && (strong || hp < 0.7) && fieldPay(G, 'landslide', 'quake')) {
+        const d = c.lroll([14, 22]);
+        c.lead.hp -= d; out.dealt = d; if (c.lead.hp <= 0) c.lead.alive = false;
+        out.abStun = 1;
+        L.push('R' + c.round + ': the ground heaves outward from ' + c.vName + ' — the ' + c.mName + ' slams into a trunk for ' + d + ', stunned. (Landslide)');
+        out.consumed = true; return out;
+      }
+      if (h.pack_hunt && !u('pack_hunt') && fieldPay(G, 'pack_hunt', 'sic')) {
+        out.abStun = 2; G.harry = 3;
+        L.push('R' + c.round + ': ' + c.vName + ' whistles once — wings, teeth, claws on the ' + c.mName + '. Pinned. (Pack Hunt)');
+        out.consumed = true; return out;
+      }
+      if (h.bribe && !u('bribe') && (hp < 0.6 || packN >= 2) && fieldPay(G, 'bribe', 'pay_off')) {
+        out.abStun = 2;
+        let extra = '';
+        if (h.sweetener && packN >= 2) { const d = c.lroll([6, 12]); c.lead.hp -= d; out.dealt = d; if (c.lead.hp <= 0) c.lead.alive = false; extra = ' Its packmate takes the bite instead: ' + d + '. (Sweetener)'; }
+        L.push('R' + c.round + ': ' + c.vName + ' holds out the food. The ' + c.mName + ' takes it and backs off, reconsidering. (Bribe)' + extra);
+        out.consumed = true; return out;
+      }
+      if (h.raise_earth && !u('raise_earth') && (hp < 0.6 || packN >= 2) && fieldPay(G, 'raise_earth', 'raise')) {
+        out.abStun = 2;
+        L.push('R' + c.round + ': ' + c.vName + ' slams a palm down and the earth STANDS UP between them. (Raise Earth)');
+        out.consumed = true; return out;
+      }
+      if (h.switcheroo && !u('switcheroo') && strong && fieldPay(G, 'switcheroo', 'swap')) {
+        out.abStun = 1;
+        L.push('R' + c.round + ': snap — ' + c.vName + ' is where the ' + c.mName + ' was. Its wind-up hits empty air. (Switcheroo)');
+        out.consumed = true; return out;
+      }
+      if (h.gravity_well && !u('gravity_well') && G.nextN && fieldPay(G, 'gravity_well', 'pull')) {
+        out.abStun = 1;
+        L.push('R' + c.round + ': the ' + c.mName + ' slides toward ' + c.vName + ' and lands staggered. (Gravity Well)');
+        // a pull sets up the strike: not a whole turn off-screen
+      }
+      if (h.blink && u('blink') < 2 && hp < 0.3 && fieldPay(G, 'blink', 'blink')) {
+        out.abStun = Math.max(out.abStun || 0, 1);
+        L.push('R' + c.round + ': ' + c.vName + ' is somewhere else, between one heartbeat and the next. (Blink)');
+      }
+      if (c.allyIn && c.allyHp > 0) {
+        if (h.the_crowd_moves && !u('the_crowd_moves') && fieldPay(G, 'the_crowd_moves', 'command')) {
+          out.extraAlly = 2;
+          L.push('R' + c.round + ': ' + c.vName + ' says one word. "NOW." (The Crowd Moves)');
+        } else if (h.live_broadcast && !u('live_broadcast') && fieldPay(G, 'live_broadcast', 'go_live')) {
+          out.extraAlly = 1;
+          L.push('R' + c.round + ': ' + c.vName + ' goes LIVE — the ally fights louder. (Live Broadcast)');
+        } else if (h.aegis_link && !u('aegis_link') && c.allyHp < (c.allyMax || 70) * 0.5 && fieldPay(G, 'aegis_link', 'link')) {
+          G.aegis = 3;
+          L.push('R' + c.round + ': a thread of light runs from ' + c.vName + ' to their ally. (Aegis Link)');
+        }
+      }
+      return out;
+    } catch (e) { warn('fieldAct', e); return out; }
+  }
+  // fieldStrike(G, vd, c): the villager's strike after held effects.
+  function fieldStrike(G, vd, c) {
+    try {
+      if (!G) return vd;
+      let m = 1;
+      if (G.nextN > 0) { m *= G.nextMult; G.nextN--; }
+      if (G.held.misdirection && c.mStunned) m *= 1.5;
+      if (G.harry > 0 && c.lead && c.lead.hp > 0) { G.harry--; const hd = c.lroll([2, 4]); c.lead.hp -= hd; if (c.lead.hp <= 0) c.lead.alive = false; c.log.push('  the pack harries it for ' + hd + '.'); }
+      return Math.round(vd * m);
+    } catch (e) { warn('fieldStrike', e); return vd; }
+  }
+  // fieldIncoming(G, total, c): a blow on the villager after held effects.
+  function fieldIncoming(G, total, c) {
+    try {
+      if (!G || !(total > 0)) return total;
+      if (G.missUntil >= c.round && (c.RR ? c.RR() : Math.random()) < G.missP) { c.log.push('  ' + c.vName + ' saw it coming and isn\'t there. (' + (G.held.prophecy ? 'Prophecy' : 'Foresight') + ')'); return 0; }
+      if (G.absorb > 0) { const took = Math.min(total, G.absorbCap); G.absorb--; c.log.push('  a coin turns the blow (' + took + ' absorbed).'); return total - took; }
+      return total;
+    } catch (e) { warn('fieldIncoming', e); return total; }
+  }
+  // fieldAllyShare(G, share): Aegis Link pulls the ally's hits onto the caster.
+  function fieldAllyShare(G, share) {
+    if (G && G.aegis > 0) { G.aegis--; return 0; }
+    return share;
+  }
+  // fieldCheatDeath(G, c): Ember Heart — the furnace eats the killing blow
+  // (600 kcal: +24 hunger), then Back from the Brink. Returns new vHp or null.
+  function fieldCheatDeath(G, c) {
+    try {
+      if (!G || G.cheated || !G.held.ember_heart) return null;
+      if (!vCanPay(G.vid, 600 * 0.6)) return null; // the body must have something to burn
+      G.cheated = true;
+      vPay(G.vid, 600);
+      const hp = Math.max(1, Math.ceil(c.vHpMax * 0.2));
+      c.log.push(c.vName + ' should be down — the furnace eats the blow and they stand back up at ' + hp + '. (Ember Heart)');
+      try { Game.tele && Game.tele('godpath_ember', { kcal: 600, who: G.vid }); } catch (e) { warn('tele ember v', e); }
+      if (G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
+      return hp;
+    } catch (e) { warn('fieldCheatDeath', e); return null; }
+  }
+  // fieldAllyDown(G, c): Lifeline holds a falling ally at 1; Last Rites
+  // turns a fallen ally into two absorbed blows. Returns new ally HP or null.
+  function fieldAllyDown(G, c) {
+    try {
+      if (!G) return null;
+      if (G.held.lifeline && !G.used.lifeline_hold) {
+        G.used.lifeline_hold = 1;
+        c.log.push('The thread between ' + c.vName + ' and their ally pulls taut, and holds. (Lifeline)');
+        try { Game.tele && Game.tele('godpath_lifeline', { who: G.vid, field: true }); } catch (e) { warn('tele lifeline v', e); }
+        return 1;
+      }
+      if (G.held.last_rites) { G.absorb += 2; G.absorbCap = Math.max(G.absorbCap || 0, 999); c.log.push('Their ally\'s echo stands between ' + c.vName + ' and the next two blows. (Last Rites)'); }
+      return null;
+    } catch (e) { warn('fieldAllyDown', e); return null; }
+  }
+
   // ===================== COMBAT HOOKS (called from game.js / buildarounds) =====================
+  // Holders of a passive among the fighters on our side: the player (when
+  // they hold it) and every living villager fighter that holds it.
+  function sideHolders(game, f, id, except) {
+    const out = [];
+    try {
+      const p = game.tbFighter && game.tbFighter('p');
+      if (p && p.alive && p !== except && game.hasAbility && game.hasAbility(id)) out.push({ f: p, isP: true });
+      for (const x of liveAllies(f)) {
+        if (x === except || !x.villagerId) continue;
+        if (game.npcHasAbility && game.npcHasAbility(x.villagerId, id)) out.push({ f: x, isP: false });
+      }
+    } catch (e) { warn('sideHolders', e); }
+    return out;
+  }
   function allyWouldFall(game, t) {
     try {
-      if (!game.hasAbility || !game.hasAbility('lifeline')) return false;
       const f = game.tbfight; if (!f) return false;
-      const max = game.abilityLevel('lifeline') >= 3 ? 2 : 1;
-      if ((f._lifelineUsed || 0) >= max) return false;
-      f._lifelineUsed = (f._lifelineUsed || 0) + 1;
-      t.hp = game.abilityLevel('lifeline') >= 2 ? Math.min(10, t.maxHp || 10) : 1;
-      game.say(`${t.name} should be down. The thread between you pulls taut, and holds: ${t.name} stays standing at ${t.hp} HP. (Lifeline)`);
-      try { game.tele && game.tele('godpath_lifeline', { who: t.villagerId || t.key }); } catch (e) { warn('tele lifeline', e); }
-      return true;
+      // EMBER HEART on a villager (parity): their own furnace eats the blow.
+      if (t.villagerId && !t._emberUsed && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'ember_heart') && vCanPay(t.villagerId, 360)) {
+        t._emberUsed = true;
+        vPay(t.villagerId, 600);
+        t.hp = Math.max(1, Math.ceil((t.maxHp || 10) * 0.2));
+        game.say(`${t.name} should be down. The furnace eats the blow and they stand back up at ${t.hp} HP. (Ember Heart)`);
+        try { game.tele && game.tele('godpath_ember', { kcal: 600, who: t.villagerId }); } catch (e) { warn('tele ember v', e); }
+        if (game.npcHasAbility(t.villagerId, 'back_from_the_brink')) { t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' }; game.say(`${t.name} comes back ANGRY. (Back from the Brink)`); }
+        return true;
+      }
+      const hs = sideHolders(game, f, 'lifeline', t);
+      if (!hs.length) return false;
+      f._lifelineUsedBy = f._lifelineUsedBy || {};
+      for (const h of hs) {
+        const L = h.isP ? game.abilityLevel('lifeline') : 1;
+        const max = L >= 3 ? 2 : 1;
+        const k = h.f.key;
+        if ((f._lifelineUsedBy[k] || 0) >= max) continue;
+        f._lifelineUsedBy[k] = (f._lifelineUsedBy[k] || 0) + 1;
+        f._lifelineUsed = (f._lifelineUsed || 0) + 1;
+        t.hp = L >= 2 ? Math.min(10, t.maxHp || 10) : 1;
+        game.say(`${t.name} should be down. The thread between ${h.isP ? 'you' : h.f.name} and ${t.name} pulls taut, and holds: ${t.name} stays standing at ${t.hp} HP. (Lifeline)`);
+        try { game.tele && game.tele('godpath_lifeline', { who: h.isP ? 'player' : h.f.villagerId, saved: t.villagerId || t.key }); } catch (e) { warn('tele lifeline', e); }
+        return true;
+      }
+      return false;
     } catch (e) { warn('allyWouldFall', e); return false; }
   }
   function onAllyFell(game, t) {
     try {
-      if (!game.hasAbility || !game.hasAbility('last_rites')) return;
-      const s = game.state.scholar;
-      const hits = game.abilityLevel('last_rites') >= 2 ? 3 : 2;
-      s._absorb = { hits: ((s._absorb && s._absorb.hits) || 0) + hits, cap: 999, label: 'Last Rites' };
-      let grown = 0;
-      try { for (const it of (game.wornKeepsakes ? game.wornKeepsakes() : [])) { if (game.keepsakeGrow(it, 2, 'last rites')) grown++; } } catch (e) { warn('last rites grow', e); }
-      if (game.abilityLevel('last_rites') >= 3 && t._lastHitBy) { const k = game.tbFighter(t._lastHitBy); if (k) k.hesitate = Math.max(k.hesitate || 0, 1); }
-      game.say(`${t.name} falls, but doesn't leave all at once. Their echo stands between you and the next ${hits} blows.${grown ? ` (${grown} keepsake${grown === 1 ? '' : 's'} +2 bond.)` : ''} (Last Rites)`);
+      const f = game.tbfight; if (!f) return;
+      for (const h of sideHolders(game, f, 'last_rites', t)) {
+        if (h.isP) {
+          const s = game.state.scholar;
+          const hits = game.abilityLevel('last_rites') >= 2 ? 3 : 2;
+          s._absorb = { hits: ((s._absorb && s._absorb.hits) || 0) + hits, cap: 999, label: 'Last Rites' };
+          let grown = 0;
+          try { for (const it of (game.wornKeepsakes ? game.wornKeepsakes() : [])) { if (game.keepsakeGrow(it, 2, 'last rites')) grown++; } } catch (e) { warn('last rites grow', e); }
+          if (game.abilityLevel('last_rites') >= 3 && t._lastHitBy) { const k = game.tbFighter(t._lastHitBy); if (k) k.hesitate = Math.max(k.hesitate || 0, 1); }
+          game.say(`${t.name} falls, but doesn't leave all at once. Their echo stands between you and the next ${hits} blows.${grown ? ` (${grown} keepsake${grown === 1 ? '' : 's'} +2 bond.)` : ''} (Last Rites)`);
+        } else {
+          const v = h.f;
+          v._absorb = { hits: ((v._absorb && v._absorb.hits) || 0) + 2, cap: 999, label: 'Last Rites' };
+          game.say(`${t.name} falls, but doesn't leave all at once. Their echo stands between ${v.name} and the next 2 blows. (Last Rites)`);
+        }
+      }
     } catch (e) { warn('onAllyFell', e); }
   }
   // absorbPlayerHit(game, final): returns the damage that still lands.
@@ -646,14 +1044,22 @@
   // Returns the damage the ally still takes.
   function aegisRedirect(game, t, final, sourceKey) {
     try {
-      const f = game.tbfight, p = game.tbFighter && game.tbFighter('p');
-      if (!f || !p || !p.alive || !p._aegis || !(final > 0) || sourceKey === 'p') return final;
-      if (p._aegis.until < (f.round || 1)) { p._aegis = null; return final; }
-      if (p._aegis.key !== t.key) return final;
-      game.say(`The light-thread snaps tight: the blow meant for ${t.name} lands on you. (Aegis Link)`);
-      game.tbDamage('p', final, 'aegis link', sourceKey || null, { quiet: true, undodgeable: true });
-      game.state.scholar.fightDamageTaken = (game.state.scholar.fightDamageTaken || 0);
-      return 0;
+      const f = game.tbfight;
+      if (!f || !(final > 0) || sourceKey === 'p' || f._aegisBusy) return final;
+      // the linker: the player, or any villager fighter (parity)
+      const cands = [game.tbFighter && game.tbFighter('p')].concat(liveAllies(f));
+      for (const p of cands) {
+        if (!p || !p.alive || p === t || !p._aegis) continue;
+        if (p._aegis.until < (f.round || 1)) { p._aegis = null; continue; }
+        if (p._aegis.key !== t.key) continue;
+        if (p.key === sourceKey) continue;
+        const isP = p.key === 'p';
+        game.say(`The light-thread snaps tight: the blow meant for ${t.name} lands on ${isP ? 'you' : p.name}. (Aegis Link)`);
+        f._aegisBusy = true; // one redirect per blow: links never ping-pong
+        try { game.tbDamage(p.key, final, 'aegis link', sourceKey || null, { quiet: true, undodgeable: true }); } finally { f._aegisBusy = false; }
+        return 0;
+      }
+      return final;
     } catch (e) { warn('aegisRedirect', e); return final; }
   }
   // damageMult(game, target): godpath strike multipliers (read by BA.damageMult).
@@ -732,13 +1138,14 @@
       const r = _sc.apply(this, arguments);
       try {
         const f = this.tbfight;
-        if (f && this.hasAbility('rally_aura')) {
-          const p = this.tbFighter('p');
-          const rad = this.abilityLevel('rally_aura') >= 3 ? 5 : 3;
-          const rounds = this.abilityLevel('rally_aura') >= 2 ? 3 : 2;
-          const near = liveAllies(f).filter(v => p && cheb(v, p) <= rad);
+        // RALLY AURA: whoever holds it, player or villager (parity).
+        for (const h of (f ? sideHolders(this, f, 'rally_aura', null) : [])) {
+          const L = h.isP ? this.abilityLevel('rally_aura') : 1;
+          const rad = L >= 3 ? 5 : 3;
+          const rounds = L >= 2 ? 3 : 2;
+          const near = liveAllies(f).filter(v => v !== h.f && cheb(v, h.f) <= rad);
           for (const v of near) { v.rallyBuff = Math.max(v.rallyBuff || 0, rounds); v.rallied = Math.max(v.rallied || 0, rounds); }
-          if (near.length) this.say(`People stand straighter near you: ${near.length} all${near.length === 1 ? 'y starts' : 'ies start'} this fight emboldened. (Rally Aura)`);
+          if (near.length) this.say(`People stand straighter near ${h.isP ? 'you' : h.f.name}: ${near.length} all${near.length === 1 ? 'y starts' : 'ies start'} this fight emboldened. (Rally Aura)`);
         }
       } catch (e) { warn('rally aura', e); }
       return r;
@@ -804,7 +1211,23 @@
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
     pathLean, shapeOffers, VERBS, registerVerbs, wardenWallAt,
     allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
+    villagerCast, villagerStrikeMult, absorbVillagerHit,
+    fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown,
   };
+  // VILLAGERS CAST (parity 2026-10-14): after the hand-written villager
+  // abilities (tbVillagerAbility, pantry-tier gated in foodPower.js) find
+  // nothing to do, the subclass verbs get their turn. A free verb (no turn
+  // cost) lets the villager still act.
+  const _tva = Game.tbVillagerAbility;
+  if (typeof _tva === 'function') {
+    Game.tbVillagerAbility = function (v) {
+      const r = _tva.apply(this, arguments);
+      if (r) return r;
+      const c = villagerCast(this, v);
+      if (c === 'free') { const c2 = villagerCast(this, v); return c2 === true; }
+      return c === true;
+    };
+  }
   // The data loads after the scripts (Game.init): register once it's there.
   const _init = Game.init;
   if (typeof _init === 'function') {
