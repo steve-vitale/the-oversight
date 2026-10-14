@@ -12,7 +12,7 @@
 //   - foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded)
 //   - legendSurface()         (the story so far, as the world tells it)
 //   - shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design)
-//   - hoardFood(kcal)         (UNWIRED 2026-10-08: no callers — private stashing never tracked)
+//   - hoardFood(kcal)         (wired 2026-10-14: takeFromPantryBulk hoard detector, game.js)
 //   - hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers)
 //   - exposeFallout(caseId, voterId) (named consequences when a truth goes public)
 //   - flushLedgerBeats()      (fires queued beats whose knowledge gates now pass)
@@ -493,9 +493,9 @@
       return null;
     },
     hoardFood(kcal) {
-      // UNWIRED (sibling-sweep 2026-10-08): nothing calls this — private
-      // stashing is never tracked, so foodStance never sees the hoarder half.
-      // Deliberately quiet by design — no broadcast, no moment — IF wired.
+      // WIRED 2026-10-14: takeFromPantryBulk's net-taker hoard detector
+      // (game.js) calls this. The one-unit takeFromPantry path does not. Deliberately quiet —
+      // no broadcast, no moment.
       try {
         const n = Math.max(1, Math.round((kcal || 500) / 1000));
         this.ledgerAdd('foodHoarded', n);

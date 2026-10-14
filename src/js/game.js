@@ -14024,6 +14024,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.trust[vid] = Math.max(0, curTake - 2);
         if (Math.random() < 0.3) this.say('Someone watches you load up. They say nothing.');
         this.observe('hoard');
+        // THE LEDGER (audit 2026-10-14): the food truth's hoarder half —
+        // hoardFood (ledger.js) had no caller, so foodStance/the Table never
+        // saw a net-taker. Same kcal/1000 scale as shareFood.
+        try { if (this.hoardFood) this.hoardFood(totalKcal); } catch (e) { console.warn('hoardFood failed', e); }
       }
       // BLATANT THEFT with witnesses present: direct confrontation.
       // Nothing stops your hand — but someone may stop your nerve.
