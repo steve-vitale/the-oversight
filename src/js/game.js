@@ -31399,7 +31399,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         // STUN (statusEffects engine, Steve 2026-10-07): data-driven.
         this.applyStatus(m, 'stun', { turns: 1, source: 'your scream', silent: true });
-        if (m.telegraph) { m.telegraph = null; n++; }
+        // UNINTERRUPTIBLE (Steve 2026-10-14): the bulldozer's charge and the
+        // highbeam deer's beam can't be fizzled — the body freezes but the
+        // attack still comes. Shove still moves them; stun still lands.
+        if (m.telegraph && !(m.mdef && m.mdef.uninterruptible)) { m.telegraph = null; n++; }
+        else if (m.telegraph) { this.say(`The ${this.monsterDisplayName(m.monsterId)} shudders — but the attack comes anyway. (Uninterruptible.)`); }
       }
       this.say(`You SCREAM. Milk curdles somewhere.${n ? ' Its focus shatters — the attack fizzles.' : ''} It freezes. (stunned)`);
       this.tbRefreshTelegraphUI();
@@ -33270,7 +33274,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             let n = 0;
             for (const m of targets) {
               try { this.applyStatus(m, 'stun', { turns: 1, source: v.name + "'s scream", silent: true }); } catch (e) { m.stunned = (m.stunned || 0) + 1; }
-              if (m.telegraph) { m.telegraph = null; n++; }
+              // UNINTERRUPTIBLE (Steve 2026-10-14): see player scream above.
+              if (m.telegraph && !(m.mdef && m.mdef.uninterruptible)) { m.telegraph = null; n++; }
             }
             this.say(`${v.name} SCREAMS — a sound like milk curdling in fast-forward.${n ? ' Its focus shatters.' : ''} The ${targets.length > 1 ? 'monsters freeze' : mname(targets[0]) + ' freezes'}. (stunned)`);
             try { this.tbRefreshTelegraphUI(); } catch (e) {}
@@ -35539,10 +35544,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // room to move, and the rope doesn't give it. Any telegraph fizzles.
       if ((m._bound || 0) > 0) {
         m._bound -= 1;
-        if (m.telegraph) {
+        // UNINTERRUPTIBLE (Steve 2026-10-14): hogtied but the signature
+        // attack still comes — the bulldozer charges through, the beam fires
+        // anyway. The rope holds the body, not the promise.
+        if (m.telegraph && !(m.mdef && m.mdef.uninterruptible)) {
           m.telegraph = null;
           this.say(`${this.encSubject(m)} tries to wind up — the rope bites! The attack fizzles. (Bind: no telegraphs while hogtied.)`);
           try { this.tbRefreshTelegraphUI(); } catch (e) {}
+        } else if (m.telegraph) {
+          this.say(`${this.encSubject(m)} strains against the rope — and the attack comes anyway. (Uninterruptible: the rope holds the body, not the promise.)`);
         }
         if (m._bound <= 0) this.say(`${this.encSubject(m)} works a claw under the rope — it snaps! It can move again. (Bind worn off.)`);
         else this.say(`${this.encSubject(m)} strains against the rope — hogtied! (Bind: ${m._bound} rounds left)`);

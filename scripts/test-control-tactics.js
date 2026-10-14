@@ -236,13 +236,21 @@ async function main() {
   }
 
   // ---------- codex interruptible ----------
+  // Steve 2026-10-14: bulldozer + gallowdeer are UNinterruptible (the charge
+  // and the beam still come). sunbasker + memory_projector are the
+  // interruptible ones — their fiction supports breaking concentration.
   console.log('(9) codex documents interruptible counters');
   {
     const mons = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/monsters.json'), 'utf8'));
     const gal = mons.find(x => x.id === 'gallowdeer');
     const bul = mons.find(x => x.id === 'bulldozer');
-    ok(/interruptible/i.test(gal.counter.reveal), 'gallowdeer counter notes interruptible');
-    ok(/interruptible/i.test(bul.counter.reveal), 'bulldozer counter notes interruptible');
+    const sun = mons.find(x => x.id === 'sunbasker');
+    const mem = mons.find(x => x.id === 'memory_projector');
+    ok(!/interruptible/i.test(gal.counter.reveal), 'gallowdeer counter drops interruptible');
+    ok(!/interruptible/i.test(bul.counter.reveal), 'bulldozer counter drops interruptible');
+    ok(gal.uninterruptible === true && bul.uninterruptible === true, 'both flagged uninterruptible');
+    ok(/interruptible/i.test(sun.counter.reveal), 'sunbasker counter notes interruptible');
+    ok(/interruptible/i.test(mem.counter.reveal), 'memory_projector counter notes interruptible');
   }
 
   // ---------- _bound blocks movement ----------
