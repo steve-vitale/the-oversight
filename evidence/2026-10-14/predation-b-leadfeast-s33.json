@@ -1,0 +1,919 @@
+{
+ "seed": 33,
+ "policy": "leadfeast",
+ "days": 115,
+ "gameDays": 117,
+ "endReason": "village-lost",
+ "maxWaveUnlocked": 3,
+ "wave5Unlocked": false,
+ "maxRank": "regional",
+ "reachedNational": false,
+ "tableDays": 0,
+ "won": false,
+ "winDay": null,
+ "predation": {
+  "gorgeNights": 3,
+  "totalEvents": 3,
+  "totalGorged": 3583,
+  "w5Gorged": 0,
+  "meanPerEvent": 1194,
+  "meanPerNight": 1194,
+  "episodes": [
+   {
+    "key": "gallowdeer@4,4",
+    "id": "gallowdeer",
+    "wave": 1,
+    "firstDay": 35,
+    "lastDay": 35,
+    "lastHp": 150,
+    "gorgeNights": 1,
+    "gorgeKcal": 1272,
+    "resolution": "killed",
+    "killer": "scholar"
+   },
+   {
+    "key": "sunbasker@d35:scholar",
+    "id": "sunbasker",
+    "wave": 1,
+    "firstDay": 35,
+    "lastDay": 35,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "drive-failed",
+    "killer": null,
+    "subDay": true
+   },
+   {
+    "key": "gallowdeer@d36:scholar",
+    "id": "gallowdeer",
+    "wave": 1,
+    "firstDay": 36,
+    "lastDay": 36,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "killed",
+    "killer": "scholar",
+    "subDay": true
+   },
+   {
+    "key": "heckler@d58:scholar",
+    "id": "heckler",
+    "wave": 2,
+    "firstDay": 58,
+    "lastDay": 58,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "drive-failed",
+    "killer": null,
+    "subDay": true
+   },
+   {
+    "key": "warranty_caller@4,4",
+    "id": "warranty_caller",
+    "wave": 2,
+    "firstDay": 83,
+    "lastDay": 83,
+    "lastHp": 80,
+    "gorgeNights": 1,
+    "gorgeKcal": 929,
+    "resolution": "killed",
+    "killer": "scholar"
+   },
+   {
+    "key": "moderator@d83:scholar",
+    "id": "moderator",
+    "wave": 2,
+    "firstDay": 83,
+    "lastDay": 83,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "drive-failed",
+    "killer": null,
+    "subDay": true
+   },
+   {
+    "key": "mirror_stag@d83:scholar",
+    "id": "mirror_stag",
+    "wave": 2,
+    "firstDay": 83,
+    "lastDay": 83,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "killed",
+    "killer": "scholar",
+    "subDay": true
+   },
+   {
+    "key": "warranty_caller@d84:scholar",
+    "id": "warranty_caller",
+    "wave": 2,
+    "firstDay": 84,
+    "lastDay": 84,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "killed",
+    "killer": "scholar",
+    "subDay": true
+   },
+   {
+    "key": "callback@4,4",
+    "id": "callback",
+    "wave": 3,
+    "firstDay": 112,
+    "lastDay": 112,
+    "lastHp": 260,
+    "gorgeNights": 1,
+    "gorgeKcal": 1382,
+    "resolution": "moved-on",
+    "killer": null
+   }
+  ],
+  "driveOffs": [
+   {
+    "day": 35,
+    "id": "sunbasker",
+    "by": "scholar",
+    "outcome": "scholar-failed",
+    "rawOutcome": "fight-routed"
+   },
+   {
+    "day": 36,
+    "id": "gallowdeer",
+    "by": "scholar",
+    "outcome": "killed-by-scholar",
+    "rawOutcome": "killed"
+   },
+   {
+    "day": 58,
+    "id": "heckler",
+    "by": "scholar",
+    "outcome": "scholar-failed",
+    "rawOutcome": "fight-routed"
+   },
+   {
+    "day": 83,
+    "id": "moderator",
+    "by": "scholar",
+    "outcome": "scholar-failed",
+    "rawOutcome": "fight-lost"
+   },
+   {
+    "day": 83,
+    "id": "mirror_stag",
+    "by": "scholar",
+    "outcome": "killed-by-scholar",
+    "rawOutcome": "killed"
+   },
+   {
+    "day": 83,
+    "id": "moderator",
+    "by": "scholar",
+    "outcome": "scholar-failed",
+    "rawOutcome": "fight-lost"
+   },
+   {
+    "day": 84,
+    "id": "warranty_caller",
+    "by": "scholar",
+    "outcome": "killed-by-scholar",
+    "rawOutcome": "killed"
+   },
+   {
+    "day": 35,
+    "id": "gallowdeer",
+    "by": "villager:greta_hansen",
+    "outcome": "villager-failed",
+    "rawOutcome": null
+   }
+  ],
+  "collapseWindows": [
+   {
+    "day": 35,
+    "gorged": 1272,
+    "pantryBefore": 15518,
+    "pantryAfter": 14246,
+    "pantryZeroWithin5d": false
+   },
+   {
+    "day": 83,
+    "gorged": 929,
+    "pantryBefore": 15267,
+    "pantryAfter": 14338,
+    "pantryZeroWithin5d": true
+   },
+   {
+    "day": 112,
+    "gorged": 1382,
+    "pantryBefore": 10581,
+    "pantryAfter": 9199,
+    "pantryZeroWithin5d": false
+   }
+  ],
+  "fieldFightsVsLingering": 1,
+  "scholarEngagesVsLingering": 7,
+  "scholarKillsVsLingering": 3,
+  "villagerKillsVsLingering": 0,
+  "helpCalls": [],
+  "aidResolutions": [
+   {
+    "day": 14,
+    "type": "fought"
+   },
+   {
+    "day": 23,
+    "type": "fought"
+   },
+   {
+    "day": 36,
+    "type": "fought"
+   },
+   {
+    "day": 46,
+    "type": "fought"
+   },
+   {
+    "day": 58,
+    "type": "fought"
+   },
+   {
+    "day": 67,
+    "type": "fought"
+   },
+   {
+    "day": 84,
+    "type": "fought"
+   },
+   {
+    "day": 113,
+    "type": "fought"
+   }
+  ],
+  "sayBeats": [
+   {
+    "day": 34,
+    "text": "Nobody met the Flashbulb Moth — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 34,
+    "text": "Nobody met the Sunbasker — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 34,
+    "text": "Nobody met the Captain Bright-Eyes — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 35,
+    "text": "🌙 Night. The lingering Captain Bright-Eyes gorges at the treeline — 1,272 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 57,
+    "text": "Nobody met the Ugly-Eyes — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 57,
+    "text": "Nobody met the The Heckler — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 66,
+    "text": "Nobody met the Don't-Look — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 82,
+    "text": "Nobody met the The Moderator — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 82,
+    "text": "Nobody met the Grief Counselor — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 82,
+    "text": "Nobody met the Extended Warranty — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 82,
+    "text": "Nobody met the Don't-Look — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 83,
+    "text": "🌙 Night. The lingering Extended Warranty gorges at the treeline — 929 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 111,
+    "text": "Nobody met the The Callback — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 111,
+    "text": "Nobody met the The Understudy — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 112,
+    "text": "🌙 Night. The lingering The Callback gorges at the treeline — 1,382 kcal gone from the stores. Drive it off, or call for help."
+   }
+  ],
+  "instrErrors": []
+ },
+ "samples": [
+  {
+   "day": 1,
+   "pantry": 47250,
+   "lingering": []
+  },
+  {
+   "day": 3,
+   "pantry": 35769,
+   "lingering": []
+  },
+  {
+   "day": 4,
+   "pantry": 32425,
+   "lingering": []
+  },
+  {
+   "day": 5,
+   "pantry": 31700,
+   "lingering": []
+  },
+  {
+   "day": 6,
+   "pantry": 32452,
+   "lingering": []
+  },
+  {
+   "day": 7,
+   "pantry": 38018,
+   "lingering": []
+  },
+  {
+   "day": 8,
+   "pantry": 39211,
+   "lingering": []
+  },
+  {
+   "day": 9,
+   "pantry": 37411,
+   "lingering": []
+  },
+  {
+   "day": 10,
+   "pantry": 39000,
+   "lingering": []
+  },
+  {
+   "day": 11,
+   "pantry": 40272,
+   "lingering": []
+  },
+  {
+   "day": 12,
+   "pantry": 40522,
+   "lingering": []
+  },
+  {
+   "day": 13,
+   "pantry": 36422,
+   "lingering": []
+  },
+  {
+   "day": 14,
+   "pantry": 33324,
+   "lingering": []
+  },
+  {
+   "day": 15,
+   "pantry": 32724,
+   "lingering": []
+  },
+  {
+   "day": 16,
+   "pantry": 34108,
+   "lingering": []
+  },
+  {
+   "day": 17,
+   "pantry": 33722,
+   "lingering": []
+  },
+  {
+   "day": 18,
+   "pantry": 33864,
+   "lingering": []
+  },
+  {
+   "day": 19,
+   "pantry": 35970,
+   "lingering": []
+  },
+  {
+   "day": 20,
+   "pantry": 33360,
+   "lingering": []
+  },
+  {
+   "day": 21,
+   "pantry": 31698,
+   "lingering": []
+  },
+  {
+   "day": 22,
+   "pantry": 29950,
+   "lingering": []
+  },
+  {
+   "day": 23,
+   "pantry": 30800,
+   "lingering": []
+  },
+  {
+   "day": 24,
+   "pantry": 28250,
+   "lingering": []
+  },
+  {
+   "day": 25,
+   "pantry": 26900,
+   "lingering": []
+  },
+  {
+   "day": 26,
+   "pantry": 25250,
+   "lingering": []
+  },
+  {
+   "day": 27,
+   "pantry": 16000,
+   "lingering": []
+  },
+  {
+   "day": 28,
+   "pantry": 11000,
+   "lingering": []
+  },
+  {
+   "day": 29,
+   "pantry": 15200,
+   "lingering": []
+  },
+  {
+   "day": 30,
+   "pantry": 13600,
+   "lingering": []
+  },
+  {
+   "day": 31,
+   "pantry": 10600,
+   "lingering": []
+  },
+  {
+   "day": 32,
+   "pantry": 4000,
+   "lingering": []
+  },
+  {
+   "day": 33,
+   "pantry": 7570,
+   "lingering": []
+  },
+  {
+   "day": 34,
+   "pantry": 10127,
+   "lingering": []
+  },
+  {
+   "day": 35,
+   "pantry": 7801,
+   "lingering": [
+    {
+     "key": "gallowdeer@4,4",
+     "id": "gallowdeer",
+     "hp": 150,
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "day": 36,
+   "pantry": 6600,
+   "lingering": []
+  },
+  {
+   "day": 37,
+   "pantry": 5993,
+   "lingering": []
+  },
+  {
+   "day": 38,
+   "pantry": 9145,
+   "lingering": []
+  },
+  {
+   "day": 39,
+   "pantry": 5956,
+   "lingering": []
+  },
+  {
+   "day": 40,
+   "pantry": 5600,
+   "lingering": []
+  },
+  {
+   "day": 41,
+   "pantry": 4800,
+   "lingering": []
+  },
+  {
+   "day": 42,
+   "pantry": 6330,
+   "lingering": []
+  },
+  {
+   "day": 43,
+   "pantry": 7500,
+   "lingering": []
+  },
+  {
+   "day": 44,
+   "pantry": 6650,
+   "lingering": []
+  },
+  {
+   "day": 45,
+   "pantry": 5460,
+   "lingering": []
+  },
+  {
+   "day": 46,
+   "pantry": 14038,
+   "lingering": []
+  },
+  {
+   "day": 47,
+   "pantry": 10908,
+   "lingering": []
+  },
+  {
+   "day": 48,
+   "pantry": 11858,
+   "lingering": []
+  },
+  {
+   "day": 49,
+   "pantry": 12360,
+   "lingering": []
+  },
+  {
+   "day": 50,
+   "pantry": 11891,
+   "lingering": []
+  },
+  {
+   "day": 51,
+   "pantry": 10648,
+   "lingering": []
+  },
+  {
+   "day": 52,
+   "pantry": 14132,
+   "lingering": []
+  },
+  {
+   "day": 53,
+   "pantry": 16048,
+   "lingering": []
+  },
+  {
+   "day": 54,
+   "pantry": 15998,
+   "lingering": []
+  },
+  {
+   "day": 55,
+   "pantry": 21194,
+   "lingering": []
+  },
+  {
+   "day": 56,
+   "pantry": 16511,
+   "lingering": []
+  },
+  {
+   "day": 57,
+   "pantry": 15365,
+   "lingering": []
+  },
+  {
+   "day": 58,
+   "pantry": 13649,
+   "lingering": []
+  },
+  {
+   "day": 59,
+   "pantry": 16790,
+   "lingering": []
+  },
+  {
+   "day": 60,
+   "pantry": 16593,
+   "lingering": []
+  },
+  {
+   "day": 61,
+   "pantry": 11283,
+   "lingering": []
+  },
+  {
+   "day": 62,
+   "pantry": 9123,
+   "lingering": []
+  },
+  {
+   "day": 63,
+   "pantry": 10641,
+   "lingering": []
+  },
+  {
+   "day": 64,
+   "pantry": 12303,
+   "lingering": []
+  },
+  {
+   "day": 65,
+   "pantry": 14664,
+   "lingering": []
+  },
+  {
+   "day": 66,
+   "pantry": 18421,
+   "lingering": []
+  },
+  {
+   "day": 67,
+   "pantry": 15675,
+   "lingering": []
+  },
+  {
+   "day": 68,
+   "pantry": 17264,
+   "lingering": []
+  },
+  {
+   "day": 69,
+   "pantry": 15204,
+   "lingering": []
+  },
+  {
+   "day": 70,
+   "pantry": 12600,
+   "lingering": []
+  },
+  {
+   "day": 71,
+   "pantry": 12588,
+   "lingering": []
+  },
+  {
+   "day": 72,
+   "pantry": 16364,
+   "lingering": []
+  },
+  {
+   "day": 73,
+   "pantry": 16379,
+   "lingering": []
+  },
+  {
+   "day": 74,
+   "pantry": 10733,
+   "lingering": []
+  },
+  {
+   "day": 75,
+   "pantry": 11177,
+   "lingering": []
+  },
+  {
+   "day": 76,
+   "pantry": 12407,
+   "lingering": []
+  },
+  {
+   "day": 77,
+   "pantry": 7976,
+   "lingering": []
+  },
+  {
+   "day": 78,
+   "pantry": 12584,
+   "lingering": []
+  },
+  {
+   "day": 79,
+   "pantry": 17652,
+   "lingering": []
+  },
+  {
+   "day": 80,
+   "pantry": 14258,
+   "lingering": []
+  },
+  {
+   "day": 81,
+   "pantry": 12344,
+   "lingering": []
+  },
+  {
+   "day": 82,
+   "pantry": 18825,
+   "lingering": []
+  },
+  {
+   "day": 83,
+   "pantry": 15267,
+   "lingering": [
+    {
+     "key": "warranty_caller@4,4",
+     "id": "warranty_caller",
+     "hp": 80,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 84,
+   "pantry": 4681,
+   "lingering": []
+  },
+  {
+   "day": 85,
+   "pantry": 1655,
+   "lingering": []
+  },
+  {
+   "day": 86,
+   "pantry": 620,
+   "lingering": []
+  },
+  {
+   "day": 87,
+   "pantry": 0,
+   "lingering": []
+  },
+  {
+   "day": 88,
+   "pantry": 1530,
+   "lingering": []
+  },
+  {
+   "day": 89,
+   "pantry": 2970,
+   "lingering": []
+  },
+  {
+   "day": 90,
+   "pantry": 2790,
+   "lingering": []
+  },
+  {
+   "day": 91,
+   "pantry": 2700,
+   "lingering": []
+  },
+  {
+   "day": 92,
+   "pantry": 3139,
+   "lingering": []
+  },
+  {
+   "day": 93,
+   "pantry": 500,
+   "lingering": []
+  },
+  {
+   "day": 94,
+   "pantry": 317,
+   "lingering": []
+  },
+  {
+   "day": 95,
+   "pantry": 1170,
+   "lingering": []
+  },
+  {
+   "day": 96,
+   "pantry": 1260,
+   "lingering": []
+  },
+  {
+   "day": 97,
+   "pantry": 1530,
+   "lingering": []
+  },
+  {
+   "day": 98,
+   "pantry": 3420,
+   "lingering": []
+  },
+  {
+   "day": 99,
+   "pantry": 2340,
+   "lingering": []
+  },
+  {
+   "day": 100,
+   "pantry": 1710,
+   "lingering": []
+  },
+  {
+   "day": 101,
+   "pantry": 5130,
+   "lingering": []
+  },
+  {
+   "day": 102,
+   "pantry": 3420,
+   "lingering": []
+  },
+  {
+   "day": 103,
+   "pantry": 4041,
+   "lingering": []
+  },
+  {
+   "day": 104,
+   "pantry": 4817,
+   "lingering": []
+  },
+  {
+   "day": 105,
+   "pantry": 4800,
+   "lingering": []
+  },
+  {
+   "day": 106,
+   "pantry": 6582,
+   "lingering": []
+  },
+  {
+   "day": 107,
+   "pantry": 5081,
+   "lingering": []
+  },
+  {
+   "day": 108,
+   "pantry": 4149,
+   "lingering": []
+  },
+  {
+   "day": 109,
+   "pantry": 3826,
+   "lingering": []
+  },
+  {
+   "day": 110,
+   "pantry": 5606,
+   "lingering": []
+  },
+  {
+   "day": 111,
+   "pantry": 6912,
+   "lingering": []
+  },
+  {
+   "day": 112,
+   "pantry": 6351,
+   "lingering": [
+    {
+     "key": "callback@4,4",
+     "id": "callback",
+     "hp": 260,
+     "wave": 3
+    }
+   ]
+  },
+  {
+   "day": 113,
+   "pantry": 4430,
+   "lingering": []
+  },
+  {
+   "day": 114,
+   "pantry": 4140,
+   "lingering": []
+  },
+  {
+   "day": 115,
+   "pantry": 3870,
+   "lingering": []
+  },
+  {
+   "day": 116,
+   "pantry": 4950,
+   "lingering": []
+  }
+ ]
+}

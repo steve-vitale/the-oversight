@@ -1,0 +1,980 @@
+{
+ "seed": 202,
+ "policy": "fifthlink",
+ "days": 130,
+ "gameDays": 132,
+ "endReason": "village-dead",
+ "maxWaveUnlocked": 4,
+ "wave5Unlocked": false,
+ "maxRank": "regional",
+ "reachedNational": false,
+ "tableDays": 0,
+ "won": false,
+ "winDay": null,
+ "predation": {
+  "gorgeNights": 7,
+  "totalEvents": 7,
+  "totalGorged": 9146,
+  "w5Gorged": 0,
+  "meanPerEvent": 1307,
+  "meanPerNight": 1307,
+  "episodes": [
+   {
+    "key": "eulogy@4,4",
+    "id": "eulogy",
+    "wave": 4,
+    "firstDay": 80,
+    "lastDay": 80,
+    "lastHp": 872,
+    "gorgeNights": 1,
+    "gorgeKcal": 956,
+    "resolution": "moved-on",
+    "killer": null
+   },
+   {
+    "key": "eulogy@d81:scholar",
+    "id": "eulogy",
+    "wave": 4,
+    "firstDay": 81,
+    "lastDay": 81,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "drive-failed",
+    "killer": null,
+    "subDay": true
+   },
+   {
+    "key": "bright_idea@4,4",
+    "id": "bright_idea",
+    "wave": 2,
+    "firstDay": 87,
+    "lastDay": 92,
+    "lastHp": 4,
+    "gorgeNights": 6,
+    "gorgeKcal": 8190,
+    "resolution": "killed",
+    "killer": "villager:katarina_novak"
+   },
+   {
+    "key": "heckler@d103:scholar",
+    "id": "heckler",
+    "wave": 2,
+    "firstDay": 103,
+    "lastDay": 103,
+    "lastHp": null,
+    "gorgeNights": 0,
+    "gorgeKcal": 0,
+    "resolution": "killed",
+    "killer": "scholar",
+    "subDay": true
+   }
+  ],
+  "driveOffs": [
+   {
+    "day": 81,
+    "id": "eulogy",
+    "by": "scholar",
+    "outcome": "scholar-failed",
+    "rawOutcome": "fight-lost"
+   },
+   {
+    "day": 103,
+    "id": "heckler",
+    "by": "scholar",
+    "outcome": "killed-by-scholar",
+    "rawOutcome": "killed"
+   },
+   {
+    "day": 80,
+    "id": "eulogy",
+    "by": "villager:quinn_murphy",
+    "outcome": "villager-failed",
+    "rawOutcome": null
+   },
+   {
+    "day": 87,
+    "id": "bright_idea",
+    "by": "villager:katarina_novak",
+    "outcome": "killed-by-villager",
+    "rawOutcome": null
+   },
+   {
+    "day": 90,
+    "id": "bright_idea",
+    "by": "villager:katarina_novak",
+    "outcome": "killed-by-villager",
+    "rawOutcome": null
+   },
+   {
+    "day": 91,
+    "id": "bright_idea",
+    "by": "villager:sanne_bakker",
+    "outcome": "killed-by-villager",
+    "rawOutcome": null
+   }
+  ],
+  "collapseWindows": [
+   {
+    "day": 80,
+    "gorged": 956,
+    "pantryBefore": 25716,
+    "pantryAfter": 24760,
+    "pantryZeroWithin5d": false
+   },
+   {
+    "day": 87,
+    "gorged": 1415,
+    "pantryBefore": 19543,
+    "pantryAfter": 18128,
+    "pantryZeroWithin5d": false
+   },
+   {
+    "day": 88,
+    "gorged": 1555,
+    "pantryBefore": 19981,
+    "pantryAfter": 18426,
+    "pantryZeroWithin5d": false
+   },
+   {
+    "day": 89,
+    "gorged": 615,
+    "pantryBefore": 17380,
+    "pantryAfter": 16765,
+    "pantryZeroWithin5d": false
+   },
+   {
+    "day": 90,
+    "gorged": 1526,
+    "pantryBefore": 13965,
+    "pantryAfter": 12439,
+    "pantryZeroWithin5d": true
+   },
+   {
+    "day": 91,
+    "gorged": 1399,
+    "pantryBefore": 12639,
+    "pantryAfter": 11240,
+    "pantryZeroWithin5d": true
+   },
+   {
+    "day": 92,
+    "gorged": 1680,
+    "pantryBefore": 10680,
+    "pantryAfter": 9000,
+    "pantryZeroWithin5d": true
+   }
+  ],
+  "fieldFightsVsLingering": 4,
+  "scholarEngagesVsLingering": 2,
+  "scholarKillsVsLingering": 1,
+  "villagerKillsVsLingering": 3,
+  "helpCalls": [],
+  "aidResolutions": [
+   {
+    "day": 10,
+    "type": "fought"
+   },
+   {
+    "day": 22,
+    "type": "fought"
+   },
+   {
+    "day": 30,
+    "type": "fought"
+   },
+   {
+    "day": 37,
+    "type": "fought"
+   },
+   {
+    "day": 44,
+    "type": "fought"
+   },
+   {
+    "day": 51,
+    "type": "fought"
+   },
+   {
+    "day": 63,
+    "type": "fought"
+   },
+   {
+    "day": 81,
+    "type": "fought"
+   },
+   {
+    "day": 93,
+    "type": "moved-on"
+   },
+   {
+    "day": 95,
+    "type": "fought"
+   },
+   {
+    "day": 103,
+    "type": "fought"
+   }
+  ],
+  "sayBeats": [
+   {
+    "day": 79,
+    "text": "Nobody met the Sunbasker — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 79,
+    "text": "Nobody met the The Eulogy — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 80,
+    "text": "🌙 Night. The lingering The Eulogy gorges at the treeline — 956 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 86,
+    "text": "Nobody met the Inspiration — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 86,
+    "text": "Nobody met the Judge Hoot — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 87,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 1,415 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 88,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 1,555 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 89,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 615 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 90,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 1,526 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 91,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 1,399 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 92,
+    "text": "🌙 Night. The lingering Inspiration gorges at the treeline — 1,680 kcal gone from the stores. Drive it off, or call for help."
+   },
+   {
+    "day": 94,
+    "text": "Nobody met the Ugly-Eyes — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 102,
+    "text": "Nobody met the Big Ugly — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   },
+   {
+    "day": 102,
+    "text": "Nobody met the The Heckler — it's still out there at the treeline. It'll gorge every night until it's driven off."
+   }
+  ],
+  "instrErrors": []
+ },
+ "samples": [
+  {
+   "day": 1,
+   "pantry": 47250,
+   "lingering": []
+  },
+  {
+   "day": 3,
+   "pantry": 37910,
+   "lingering": []
+  },
+  {
+   "day": 4,
+   "pantry": 35175,
+   "lingering": []
+  },
+  {
+   "day": 5,
+   "pantry": 32750,
+   "lingering": []
+  },
+  {
+   "day": 6,
+   "pantry": 30100,
+   "lingering": []
+  },
+  {
+   "day": 7,
+   "pantry": 32662,
+   "lingering": []
+  },
+  {
+   "day": 8,
+   "pantry": 34400,
+   "lingering": []
+  },
+  {
+   "day": 9,
+   "pantry": 34390,
+   "lingering": []
+  },
+  {
+   "day": 10,
+   "pantry": 32598,
+   "lingering": []
+  },
+  {
+   "day": 11,
+   "pantry": 28600,
+   "lingering": []
+  },
+  {
+   "day": 12,
+   "pantry": 26800,
+   "lingering": []
+  },
+  {
+   "day": 13,
+   "pantry": 29480,
+   "lingering": []
+  },
+  {
+   "day": 14,
+   "pantry": 33720,
+   "lingering": []
+  },
+  {
+   "day": 15,
+   "pantry": 34607,
+   "lingering": []
+  },
+  {
+   "day": 16,
+   "pantry": 38374,
+   "lingering": []
+  },
+  {
+   "day": 17,
+   "pantry": 36572,
+   "lingering": []
+  },
+  {
+   "day": 18,
+   "pantry": 32806,
+   "lingering": []
+  },
+  {
+   "day": 19,
+   "pantry": 36584,
+   "lingering": []
+  },
+  {
+   "day": 20,
+   "pantry": 37333,
+   "lingering": []
+  },
+  {
+   "day": 21,
+   "pantry": 38743,
+   "lingering": []
+  },
+  {
+   "day": 22,
+   "pantry": 35497,
+   "lingering": []
+  },
+  {
+   "day": 23,
+   "pantry": 31697,
+   "lingering": []
+  },
+  {
+   "day": 24,
+   "pantry": 30000,
+   "lingering": []
+  },
+  {
+   "day": 25,
+   "pantry": 35825,
+   "lingering": []
+  },
+  {
+   "day": 26,
+   "pantry": 33950,
+   "lingering": []
+  },
+  {
+   "day": 27,
+   "pantry": 31486,
+   "lingering": []
+  },
+  {
+   "day": 28,
+   "pantry": 26445,
+   "lingering": []
+  },
+  {
+   "day": 29,
+   "pantry": 18585,
+   "lingering": []
+  },
+  {
+   "day": 30,
+   "pantry": 22911,
+   "lingering": []
+  },
+  {
+   "day": 31,
+   "pantry": 20606,
+   "lingering": []
+  },
+  {
+   "day": 32,
+   "pantry": 22379,
+   "lingering": []
+  },
+  {
+   "day": 33,
+   "pantry": 25550,
+   "lingering": []
+  },
+  {
+   "day": 34,
+   "pantry": 25879,
+   "lingering": []
+  },
+  {
+   "day": 35,
+   "pantry": 28713,
+   "lingering": []
+  },
+  {
+   "day": 36,
+   "pantry": 30820,
+   "lingering": []
+  },
+  {
+   "day": 37,
+   "pantry": 26493,
+   "lingering": []
+  },
+  {
+   "day": 38,
+   "pantry": 24896,
+   "lingering": []
+  },
+  {
+   "day": 39,
+   "pantry": 30723,
+   "lingering": []
+  },
+  {
+   "day": 40,
+   "pantry": 36678,
+   "lingering": []
+  },
+  {
+   "day": 41,
+   "pantry": 38433,
+   "lingering": []
+  },
+  {
+   "day": 42,
+   "pantry": 46323,
+   "lingering": []
+  },
+  {
+   "day": 43,
+   "pantry": 61829,
+   "lingering": []
+  },
+  {
+   "day": 44,
+   "pantry": 60636,
+   "lingering": []
+  },
+  {
+   "day": 45,
+   "pantry": 57215,
+   "lingering": []
+  },
+  {
+   "day": 46,
+   "pantry": 60985,
+   "lingering": []
+  },
+  {
+   "day": 47,
+   "pantry": 56744,
+   "lingering": []
+  },
+  {
+   "day": 48,
+   "pantry": 55998,
+   "lingering": []
+  },
+  {
+   "day": 49,
+   "pantry": 46874,
+   "lingering": []
+  },
+  {
+   "day": 50,
+   "pantry": 47674,
+   "lingering": []
+  },
+  {
+   "day": 51,
+   "pantry": 46674,
+   "lingering": []
+  },
+  {
+   "day": 52,
+   "pantry": 46310,
+   "lingering": []
+  },
+  {
+   "day": 53,
+   "pantry": 50401,
+   "lingering": []
+  },
+  {
+   "day": 54,
+   "pantry": 47149,
+   "lingering": []
+  },
+  {
+   "day": 55,
+   "pantry": 44797,
+   "lingering": []
+  },
+  {
+   "day": 56,
+   "pantry": 39569,
+   "lingering": []
+  },
+  {
+   "day": 57,
+   "pantry": 43114,
+   "lingering": []
+  },
+  {
+   "day": 58,
+   "pantry": 46547,
+   "lingering": []
+  },
+  {
+   "day": 59,
+   "pantry": 51872,
+   "lingering": []
+  },
+  {
+   "day": 60,
+   "pantry": 54072,
+   "lingering": []
+  },
+  {
+   "day": 61,
+   "pantry": 52108,
+   "lingering": []
+  },
+  {
+   "day": 62,
+   "pantry": 49332,
+   "lingering": []
+  },
+  {
+   "day": 63,
+   "pantry": 36860,
+   "lingering": []
+  },
+  {
+   "day": 64,
+   "pantry": 44002,
+   "lingering": []
+  },
+  {
+   "day": 65,
+   "pantry": 39278,
+   "lingering": []
+  },
+  {
+   "day": 66,
+   "pantry": 38159,
+   "lingering": []
+  },
+  {
+   "day": 67,
+   "pantry": 35313,
+   "lingering": []
+  },
+  {
+   "day": 68,
+   "pantry": 34509,
+   "lingering": []
+  },
+  {
+   "day": 69,
+   "pantry": 30493,
+   "lingering": []
+  },
+  {
+   "day": 70,
+   "pantry": 21663,
+   "lingering": []
+  },
+  {
+   "day": 71,
+   "pantry": 31076,
+   "lingering": []
+  },
+  {
+   "day": 72,
+   "pantry": 32332,
+   "lingering": []
+  },
+  {
+   "day": 73,
+   "pantry": 31281,
+   "lingering": []
+  },
+  {
+   "day": 74,
+   "pantry": 29583,
+   "lingering": []
+  },
+  {
+   "day": 75,
+   "pantry": 29116,
+   "lingering": []
+  },
+  {
+   "day": 76,
+   "pantry": 28485,
+   "lingering": []
+  },
+  {
+   "day": 77,
+   "pantry": 26924,
+   "lingering": []
+  },
+  {
+   "day": 78,
+   "pantry": 31262,
+   "lingering": []
+  },
+  {
+   "day": 79,
+   "pantry": 33262,
+   "lingering": []
+  },
+  {
+   "day": 80,
+   "pantry": 29652,
+   "lingering": [
+    {
+     "key": "eulogy@4,4",
+     "id": "eulogy",
+     "hp": 872,
+     "wave": 4
+    }
+   ]
+  },
+  {
+   "day": 81,
+   "pantry": 23118,
+   "lingering": []
+  },
+  {
+   "day": 82,
+   "pantry": 23963,
+   "lingering": []
+  },
+  {
+   "day": 83,
+   "pantry": 25235,
+   "lingering": []
+  },
+  {
+   "day": 84,
+   "pantry": 16148,
+   "lingering": []
+  },
+  {
+   "day": 85,
+   "pantry": 20008,
+   "lingering": []
+  },
+  {
+   "day": 86,
+   "pantry": 20188,
+   "lingering": []
+  },
+  {
+   "day": 87,
+   "pantry": 19543,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 55,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 88,
+   "pantry": 19981,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 4,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "pantry": 17380,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 4,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "pantry": 13965,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 4,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 91,
+   "pantry": 8139,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 4,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 92,
+   "pantry": 10680,
+   "lingering": [
+    {
+     "key": "bright_idea@4,4",
+     "id": "bright_idea",
+     "hp": 4,
+     "wave": 2
+    }
+   ]
+  },
+  {
+   "day": 93,
+   "pantry": 9409,
+   "lingering": []
+  },
+  {
+   "day": 94,
+   "pantry": 7357,
+   "lingering": []
+  },
+  {
+   "day": 95,
+   "pantry": 0,
+   "lingering": []
+  },
+  {
+   "day": 96,
+   "pantry": 2460,
+   "lingering": []
+  },
+  {
+   "day": 97,
+   "pantry": 4296,
+   "lingering": []
+  },
+  {
+   "day": 98,
+   "pantry": 4096,
+   "lingering": []
+  },
+  {
+   "day": 99,
+   "pantry": 8573,
+   "lingering": []
+  },
+  {
+   "day": 100,
+   "pantry": 8163,
+   "lingering": []
+  },
+  {
+   "day": 101,
+   "pantry": 5250,
+   "lingering": []
+  },
+  {
+   "day": 102,
+   "pantry": 5550,
+   "lingering": []
+  },
+  {
+   "day": 103,
+   "pantry": 5100,
+   "lingering": []
+  },
+  {
+   "day": 104,
+   "pantry": 4078,
+   "lingering": []
+  },
+  {
+   "day": 105,
+   "pantry": 2600,
+   "lingering": []
+  },
+  {
+   "day": 106,
+   "pantry": 9568,
+   "lingering": []
+  },
+  {
+   "day": 107,
+   "pantry": 8748,
+   "lingering": []
+  },
+  {
+   "day": 108,
+   "pantry": 7828,
+   "lingering": []
+  },
+  {
+   "day": 109,
+   "pantry": 5900,
+   "lingering": []
+  },
+  {
+   "day": 110,
+   "pantry": 3450,
+   "lingering": []
+  },
+  {
+   "day": 111,
+   "pantry": 1920,
+   "lingering": []
+  },
+  {
+   "day": 112,
+   "pantry": 4063,
+   "lingering": []
+  },
+  {
+   "day": 113,
+   "pantry": 9700,
+   "lingering": []
+  },
+  {
+   "day": 114,
+   "pantry": 6800,
+   "lingering": []
+  },
+  {
+   "day": 115,
+   "pantry": 5100,
+   "lingering": []
+  },
+  {
+   "day": 116,
+   "pantry": 7027,
+   "lingering": []
+  },
+  {
+   "day": 117,
+   "pantry": 6127,
+   "lingering": []
+  },
+  {
+   "day": 118,
+   "pantry": 8100,
+   "lingering": []
+  },
+  {
+   "day": 119,
+   "pantry": 3850,
+   "lingering": []
+  },
+  {
+   "day": 120,
+   "pantry": 7550,
+   "lingering": []
+  },
+  {
+   "day": 121,
+   "pantry": 5000,
+   "lingering": []
+  },
+  {
+   "day": 122,
+   "pantry": 3250,
+   "lingering": []
+  },
+  {
+   "day": 123,
+   "pantry": 4392,
+   "lingering": []
+  },
+  {
+   "day": 124,
+   "pantry": 3170,
+   "lingering": []
+  },
+  {
+   "day": 125,
+   "pantry": 2091,
+   "lingering": []
+  },
+  {
+   "day": 126,
+   "pantry": 500,
+   "lingering": []
+  },
+  {
+   "day": 127,
+   "pantry": 2188,
+   "lingering": []
+  },
+  {
+   "day": 128,
+   "pantry": 1688,
+   "lingering": []
+  },
+  {
+   "day": 129,
+   "pantry": 1688,
+   "lingering": []
+  },
+  {
+   "day": 130,
+   "pantry": 0,
+   "lingering": []
+  },
+  {
+   "day": 131,
+   "pantry": 0,
+   "lingering": []
+  }
+ ]
+}
