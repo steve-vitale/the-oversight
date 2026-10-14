@@ -193,8 +193,29 @@ function realFlee(Game, ctx, st, f, p) {
   if (!st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); }
   let gmax = 8;
   try { gmax = Game.tbGridMax ? Game.tbGridMax() : 8; } catch (e) { gmax = 8; } // titan fights are 12x12
-  const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? gmax : p.mx;
-  const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? gmax : p.my;
+  let tx = dir.dx < 0 ? 0 : dir.dx > 0 ? gmax : p.mx;
+  let ty = dir.dy < 0 ? 0 : dir.dy > 0 ? gmax : p.my;
+  // BLOCKED EDGE TILE (2026-10-14, seed 1234 day 9): the straight-line edge
+  // tile can be a tree. findPath then fails every turn, the bot never reaches
+  // the edge, and a betrayer who won't close (a "stalling" human hostile)
+  // leaves the fight live forever — a lost game day per loop-day. Head for
+  // the nearest REACHABLE tile on the chosen edge instead.
+  try {
+    const direct = Game.findPath(p.mx, p.my, tx, ty);
+    if (!(p.mx === tx && p.my === ty) && (!direct || !direct.length)) {
+      const cands = [];
+      for (let i = 0; i <= gmax; i++) {
+        if (dir.dx) cands.push([dir.dx < 0 ? 0 : gmax, i]);
+        if (dir.dy) cands.push([i, dir.dy < 0 ? 0 : gmax]);
+      }
+      let best = null;
+      for (const [cx, cy] of cands) {
+        const pth = Game.findPath(p.mx, p.my, cx, cy);
+        if (pth && pth.length && (!best || pth.length < best.n)) best = { x: cx, y: cy, n: pth.length };
+      }
+      if (best) { tx = best.x; ty = best.y; }
+    }
+  } catch (e) { note(ctx, 'flee edge pick: ' + e.message); }
   const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === gmax) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === gmax)); };
   if (!onEdge()) { if (stepToward(Game, p, tx, ty)) bump(ctx, 'capFleeSteps'); }
   if (!Game.tbfight || Game.tbfight.over) { bump(ctx, 'capFleeExits'); st.fleeing = false; return true; } // a door, mid-walk
