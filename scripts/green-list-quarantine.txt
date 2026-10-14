@@ -14,3 +14,4 @@ scripts/test-villager-personality.js  # 2026-10-14 nondeterministic: passes alon
 scripts/test-wincensus-20261014.js  # 2026-10-14 seed-fragile: (4) needs seed 22 to reach the table; any RNG-shifting change (trial 1-of-3 sheet, ledger events) tips it under. Needs a multi-seed version.
 scripts/test-gorgedrive-20261014.js  # 2026-10-14 seed-fragile: 3b engagement depends on monster drift (gorgeVerifyFailed after RNG shift). GREEN section HP now pinned.
 scripts/test-brawler-descriptor-dedup.js  # 2026-10-14 flaky: exit 1 x3 then 0 with identical ALL PASS output; nondeterministic
+scripts/test-backgrounds-20261006.js  # 2026-10-14 flaky: unseeded (no Math.random seed); 'no second-person POV breaks' fails ~3/4 runs on generated backstory text, unrelated to abilities (seen during ability-lanes work)
