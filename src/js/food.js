@@ -750,6 +750,8 @@
         // item in a batch teaches, the rest no-op.
         if (!knows) this.learnTechnique('preserve', 'trial');
       }
+      // UNIFIED TRACKS (2026-10-14): same deed as a villager's preserving (field).
+      try { if (this.noteDeed) this.noteDeed('preserving'); } catch (eT) { console.warn('[tracks] preserve deed', eT); }
       // SMOKING PACE (Steve 2026-10-09): 16 ticks = 1/8 of a day-part.
       // "1/8 of a day seems about correct. That's all fine." A real job, not a spare moment.
       this.tickAction(16);

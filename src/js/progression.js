@@ -6,6 +6,7 @@
 //   - checkTrial(id)
 //   - completeTrial(id)
 //   - _synergyGiftPick(cands, owned)
+//   - trialLessonSkill() -> the audience trial's lesson: an unknown skill (no magic gift; unified tracks 2026-10-14)
 //   - progState()
 //   - fireCrisis(kind, ctx)
 //   - progDaily()
@@ -785,7 +786,7 @@
         : reason === 'audience'
           ? 'SYSTEM: "The audience wants an encore. A trial, then — smaller this time, but televised."'
           : 'SYSTEM: "A trial, broadcast live. The audience loves a trial."';
-      this.say(`◈ AUDIENCE TRIAL — ${why} ${t.text} Reward: integration, and a gift.`);
+      this.say(`◈ AUDIENCE TRIAL — ${why} ${t.text} Reward: integration, and a lesson.`);
       try { this.save(); } catch (e) {}
     },
     // AUDIENCE ENCORE (pacing build 2026-10-10): post-40 the audience keeps
@@ -839,44 +840,38 @@
       // the old rhythm — the audience's disappointment has a half-life.
       pg.trial = null; pg.trialCd = (s.day || 0) + 4;
       this.integrate(15, 'audience trial');
-      // the gift: a System ability, if there's room
-      // (break-it abilities 2026-10-09: the old filter was `a.system` — a
-      // schema flag that exists on ZERO abilities, so the promised gift was
-      // dead from birth. System abilities are unlock.type === 'system_offer'.)
+      // THE LESSON (unified tracks 2026-10-14, Steve: "Things acquired from
+      // events and other meaningful experiences, knowledge learned etc should
+      // be typically ending up in skills"): the trial no longer gifts a magic
+      // ability — powers come from track level-ups. It TEACHES one skill you
+      // don't know (preferring one that carries an ability), and the trial
+      // itself is System contact: the strange track.
       let gift = null;
       try {
-        // evolved abilities still own their root (evolvedFrom) — never re-gift it
-        const owned = new Set((s.abilities || []).flatMap(a => [a.id, a.evolvedFrom].filter(Boolean)));
-        // ABILITY LANES (2026-10-14): the trial gift is magic only.
-        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill'
-          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world —
-          // never gifted when it's taken.
-          && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
-        if (cands.length && (s.abilities || []).length < this.abilitySlots()) {
-          // SYNERGY-AWARE GIFT (util audit 2026-10-10): synergy discovery was
-          // dead (1/120 runs) because grants never completed held legs — the
-          // pairs were never held. If a candidate completes a synergy with a
-          // leg the scholar holds (or has teased), the System notices the
-          // shape of the build and leads with that one.
-          // PICK 1 OF 3 (Steve 2026-10-14: "It's supposed to already pick 1
-          // of 3"). The System's build-aware pick is one of the three; the
-          // other two are random. chooseAbility pays acquisition costs,
-          // recomputes synergies and checks godhood, like every choice sheet.
-          const lead = this._synergyGiftPick(cands, owned) || pick(cands);
-          const rest = cands.filter(a => a.id !== lead.id);
-          const opts = [lead];
-          while (opts.length < 3 && rest.length) opts.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]);
-          if (!(s.abilityChoices && s.abilityChoices.length)) {
-            s.abilityChoices = opts.map(d => ({ id: d.id, name: d.name, description: d.description, flavor: d.flavor, src: 'trial' }));
-            gift = 'choose 1 of ' + opts.length;
-          }
+        const lesson = this.trialLessonSkill();
+        if (lesson && this.learnSkill(lesson.id, 1, 'trial')) {
+          gift = 'a lesson: ' + lesson.name;
+          try { this.tele('skill_taught', { id: lesson.id, via: 'audience_trial' }); } catch (eT) { console.warn('[tracks] tele', eT); }
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[tracks] trial lesson', e); }
+      try { this.noteDeed && this.noteDeed('audience_trial'); } catch (e) { console.warn('[tracks] trial deed', e); }
       try { if (this.ledgerAdd) this.ledgerAdd('showmanship', 3); } catch (e) {}
       try { if (this.recordMoment && t) this.recordMoment(`Survived the audience's trial: ${t.text}.`); } catch (e) {}
       const luck = (pg.flags || {}).quiet_luck ? ' Quiet luck was with you.' : '';
       this.say(`◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration${gift ? `, gift: ${gift}` : ''})${luck}`);
       try { this.save(); } catch (e) {}
+    },
+
+    // trialLessonSkill(): the audience trial's lesson — an unknown skill,
+    // preferring one that carries an ability (lane 'skill' in abilities.json).
+    trialLessonSkill() {
+      const known = ((this.state.codex || {}).skills) || {};
+      const all = (this.data.knowledge || []).filter(k => k && k.id && !((known[k.id] || {}).level >= 1));
+      if (!all.length) return null;
+      const carriers = new Set((this.data.abilities || []).filter(a => a && a.lane === 'skill').map(a => a.skillId || a.id));
+      const pool = all.filter(k => carriers.has(k.id));
+      const from = pool.length ? pool : all;
+      return from[Math.floor(Math.random() * from.length)];
     },
 
     // _synergyGiftPick(cands, owned): prefer a trial gift that completes a

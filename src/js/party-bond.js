@@ -193,7 +193,8 @@
       var walking = pCount >= 2;
       for (var vid in npcAbs) {
         if (!livingVid(vid)) continue;
-        var n = pathAbilityCount(npcAbs[vid] || []);
+        // UNIFIED TRACKS (2026-10-14): villager skills count too (npcOwnedIds).
+        var n = pathAbilityCount((typeof g.npcOwnedIds === 'function') ? g.npcOwnedIds(vid) : (npcAbs[vid] || []));
         if (n >= 4) return 1;
         if (n >= 2) walking = true;
       }
@@ -226,7 +227,10 @@
       if (held.length >= 6) return; // six slots, same as you
       for (var k = 0; k < SHIELDBEARER_PATH.length; k++) {
         var id = SHIELDBEARER_PATH[k];
-        if (held.indexOf(id) >= 0) continue;
+        // UNIFIED TRACKS (2026-10-14): the shieldbearer abilities are skill-lane
+        // (villager skills, not slots) — ask npcHasAbility, or this re-offered
+        // the same one every fight.
+        if (held.indexOf(id) >= 0 || (g.npcHasAbility && g.npcHasAbility(vid, id))) continue;
         if (best < SHIELDBEARER_BOND[id]) return; // not yet — keep bleeding together
         if (g.npcGrantAbility) g.npcGrantAbility(vid, id);
         else {

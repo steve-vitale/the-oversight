@@ -20,7 +20,7 @@
 //   - game.hasAbility, game.abilitySlots, game.abilityOnAcquire,
 //     game.recomputeActiveSynergies, game.say, game.sysSay, game.tele
 // rules:
-//   - Six-slot law: full slots = honest refusal copy, never silent, never overflow.
+//   - Unified tracks (2026-10-14): magic practice (war_cry) credits its track once (tracks.js convertDeedToTrackXP) instead of granting; the power comes from the level-up sheet.
 //   - Ability lanes (2026-10-14): human competences (lane 'skill': stalk,
 //     blood_trail, ambush, haymaker, soft_step) are TAUGHT as codex skills
 //     via teachAbilitySkill — no slot, no System voice. Only magic
@@ -104,27 +104,16 @@
           }
           return null;
         }
-        if (!this.state.systemArrived) return 'pending';
-        s.abilities = s.abilities || [];
-        const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
-        if (s.abilities.length >= maxSlots) {
-          // FULL SLOTS: honest, not silent. The System saw the practice; the
-          // gift waits on room (same honesty as the trial deed grants).
-          try {
-            this.sysSay(`"WE SAW that — ${def.name} was yours. But your slots are full (${s.abilities.length}/${maxSlots}). Make room, or grow the interface, and earn it again."`);
-          } catch (e) {}
-          return null;
+        // UNIFIED TRACKS (2026-10-14): magic practice (war_cry) credits its
+        // track ONCE instead of granting; the power comes from the track's
+        // level-up sheet (tracks.json deedConversions).
+        const track = this.convertDeedToTrackXP ? this.convertDeedToTrackXP(practiceKey, def.id) : null;
+        if (!track) return null; // already credited
+        if (this.state.systemArrived) {
+          const label = (((this.trackData && this.trackData()) || {}).labels || {})[track] || track;
+          this.say(`◈ PRACTICE RECOGNIZED — the System has been watching. ${this.practiceDeedLine(practiceKey)} (${label} track +)`);
         }
-        s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
-        try { this.tele('ability_granted', { id: def.id, who: 'player', via: 'practice_deed' }); } catch (e) {}
-        // Priced gifts pay their costs, like every other grant path.
-        try { this.abilityOnAcquire(def.id); } catch (e2) {}
-        try { this.recomputeActiveSynergies(); } catch (e3) {}
-        const deedLine = this.practiceDeedLine(practiceKey);
-        this.say(`◈ PRACTICE RECOGNIZED — the System has been watching. ${deedLine}`);
-        this.say(`✨ Ability gained: ${def.name} (L1). ${def.description || ''}`);
-        try { if (def.flavor) this.say(`"${def.flavor}"`); } catch (e) {}
-        return def.id;
+        return 'track:' + track;
       } catch (e) { return null; }
     },
 

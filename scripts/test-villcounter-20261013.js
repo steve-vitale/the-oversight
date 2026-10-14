@@ -38,7 +38,7 @@ Math.random = mulberry32(SEED);
 
 // ---------- boot the full engine (index.html order, DOM-only excluded) ----------
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\"]*\\.js' index.html | head -60", { cwd: ROOT }).toString().split('\n')
+const order = execSync("grep -o 'src/js/[^\"]*\\.js' index.html", { cwd: ROOT }).toString().split('\n') // was `| head -60`: tracks.js (2026-10-14) shifted the window and dropped fieldFights.js
   .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 global.window = global;
 order.forEach(f => { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); });

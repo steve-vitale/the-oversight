@@ -84,7 +84,7 @@ becoming.
 | Batch | Status | What |
 |---|---|---|
 | Ability lanes | in progress | Human abilities → skills; magic abilities tagged |
-| Unified tracks | queued | Player and villagers share one track system; **occupations seed the starting lean** |
+| Unified tracks | done (2026-10-14, `evidence/2026-10-14/unified-tracks.md`) | Player and villagers share one track system; **occupations seed the starting lean** |
 | Keepsake growth | starting now | Accessory-slot keepsakes, worn-only bond, levels 0–3, pool actions, kin clues |
 | God-path redesign | after tracks | Every magic ability gets `path` and `subclass`; capstones; ascension; subclasses filled per path |
 | Table endings | after the redesign | Table path × class/god × light/dark |

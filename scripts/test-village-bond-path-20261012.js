@@ -99,14 +99,18 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
       ok(id + ' not a decorative kit entry', kit.indexOf(id) < 0);
     }
     // the real route: bleed beside someone, the System offers the path
+    // UNIFIED TRACKS (2026-10-14, design change): the shieldbearer abilities
+    // are skill-lane, so a villager LEARNS them as villager skills (no slot).
+    // "Held" = npcHasAbility (slots + known skills), the villager twin of
+    // the player's hasAbility.
     Game.combatBondAdd(a, b, 30);
     Game.noteShieldbearerOffer(a);
-    const held = (Game.state.village.npcAbilities || {})[a] || [];
-    ok('bond 30 -> System offers draw_fire', held.indexOf('draw_fire') >= 0, 'held=' + held.join(','));
+    const owned = () => (Game.npcOwnedIds ? Game.npcOwnedIds(a) : ((Game.state.village.npcAbilities || {})[a] || []));
+    ok('bond 30 -> System offers draw_fire', Game.npcHasAbility(a, 'draw_fire'), 'held=' + owned().join(','));
     Game.combatBondAdd(a, b, 20); // 50 total
     Game.noteShieldbearerOffer(a);
-    const held2 = (Game.state.village.npcAbilities || {})[a] || [];
-    ok('bond 50 -> bodyguard follows', held2.indexOf('bodyguard') >= 0, 'held=' + held2.join(','));
+    ok('bond 50 -> bodyguard follows', Game.npcHasAbility(a, 'bodyguard'), 'held=' + owned().join(','));
+    ok('skill-lane shieldbearer abilities take no villager slot', ((Game.state.village.npcAbilities || {})[a] || []).indexOf('draw_fire') < 0);
     // nothing before the System's arrival
     const Game2 = await freshGame(SEED + 40);
     const [c, d] = vids(Game2, 2);

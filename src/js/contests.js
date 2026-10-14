@@ -5023,6 +5023,14 @@
     const isWatch = ac.participant && ac.participant !== 'player';
     const pname = isWatch ? this.displayName(ac.participant) : 'You';
     ac.phase = 'done';
+    // UNIFIED TRACKS (2026-10-14): surviving the System's cameras is System
+    // contact — the strange track, for whoever stood under the lights.
+    try {
+      if (this.gainTrackXP && (outcome === 'won' || outcome === 'lost')) {
+        if (isWatch) this.gainTrackXP(ac.participant, 'strange', 1, 'survived ' + ((contest && contest.name) || 'a contest'));
+        else this.noteDeed('contest_survived');
+      }
+    } catch (eT) { console.warn('[tracks] contest survived', eT); }
     // RESOLVE AUDIO (Steve 2026-10-08): the contest's resolution beat lands
     // whether it was won, lost, died, or refused.
     try { this._cxBeat(this._cxB(ac.contestId, 'Resolve')); } catch (e) {}
@@ -5094,6 +5102,9 @@
       } else {
         this.sysSay(`📺 ${contest.name} — YOU WIN. The crowd is a weather system.`);
         this.addNotability('player', 'contestWin');
+        // UNIFIED TRACKS (2026-10-14): the villager prize deed, for you — a
+        // televised win feeds the contest's track (+3), same as theirs.
+        try { if (this.gainTrackXP) this.gainTrackXP('player', this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (eT) { console.warn('[tracks] contest win', eT); }
         try { this.leadShift('showmanship', 2); } catch (e) {}
         // ALIEN PLAYERS (Steve 2026-10-08; lanes audit-shows 2026-10-09):
         // winning on camera moves the fan club that watched it — the crowd
@@ -5853,7 +5864,14 @@
       fates.push({ pid, outcome });
       // VILLAGER XP (Steve 2026-10-09): surviving the cameras teaches.
       // (The dead earn nothing -- same rule as fights.)
-      try { if (pid !== 'player' && outcome !== 'died' && this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'contest'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): the same deed credits the player when
+      // the player was the one under the lights.
+      try {
+        if (outcome !== 'died') {
+          if (pid === 'player') { if (this.noteDeed) this.noteDeed('contest'); }
+          else if (this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'contest');
+        }
+      } catch (e) { console.warn('[tracks] contest deed', e); }
       // The bet rides on the first taken. The System honors wagers: 2x.
       if (i === 0 && ac.bet) {
         const amt = ac.bet.amount;

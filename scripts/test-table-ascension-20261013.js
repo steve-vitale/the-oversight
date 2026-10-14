@@ -30,7 +30,9 @@ function mulberry32(a) {
 Math.random = mulberry32(parseInt(process.env.SEED || '1313', 10));
 
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html | head -80", { cwd: ROOT }).toString().split('\n')
+// Full script list (was `| head -80`: tracks.js, 2026-10-14, shifted the
+// window and silently dropped table-beloved.js — the sim-harness HEAD-80 bug).
+const order = execSync("grep -o 'src/js/[^\\\"]*\\.js' index.html", { cwd: ROOT }).toString().split('\n')
   .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 global.window = global;
 global.document = { getElementById: () => null, createElement: () => ({ textContent: '', innerHTML: '', style: {}, setAttribute() {}, appendChild() {} }), head: { appendChild() {} }, body: {} };
