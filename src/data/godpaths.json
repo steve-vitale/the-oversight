@@ -4,118 +4,128 @@
       "name": "Brawler",
       "core": "momentum",
       "godAbility": "crimson_god",
-      "godDescription": "Every hit crits (2x). Must attack each turn or take 20 damage.",
+      "godDescription": "Every hit crits (2x). Must attack each turn or take 20 damage. PARTY: allies gain +25% damage when you crit (inspired). TITAN: can solo titans \u2014 each crit cracks armor. CONTEST: the crowd chants your name; +50% fan gain.",
       "relevantGear": [
         "machete",
         "hunting_spear",
         "hardlight_knife",
         "stone_knife"
       ],
-      "victoryPath": "unstoppable force"
+      "victoryPath": "unstoppable force",
+      "scale": "solo titan-killer, party inspiration"
     },
     "shieldbearer": {
       "name": "Shieldbearer",
       "core": "sacrifice",
       "godAbility": "martyrs_aegis",
-      "godDescription": "Redirect all ally damage to you. Store 300%. Unleash as massive AoE. Over 500 stored kills you too.",
+      "godDescription": "Redirect ALL ally damage to you. Store 300%. Unleash as army-wide AoE. Over 500 stored kills you too. PARTY: the wall that never breaks. TITAN: can block titan hits (store massive damage). CONTEST: the audience weeps; +100% reputation.",
       "relevantGear": [
         "shield",
         "armor",
         "hide_armor"
       ],
-      "victoryPath": "sacrifice"
+      "victoryPath": "sacrifice",
+      "scale": "party protector, titan blocker"
     },
     "hunter": {
       "name": "Hunter",
       "core": "focus",
       "godAbility": "deadeye",
-      "godDescription": "All attacks hit. Crits on marked targets deal 3x.",
+      "godDescription": "All attacks hit. Marked targets take 3x crits. PARTY: mark targets for allies (+50% their damage vs marked). TITAN: mark weak points (eyes, joints) for 5x. CONTEST: the perfect shot \u2014 instant win on accuracy challenges.",
       "relevantGear": [
         "bow",
         "trap",
         "snare"
       ],
-      "victoryPath": "precision"
+      "victoryPath": "precision",
+      "scale": "party spotter, titan weak-point exploiter"
     },
     "caregiver": {
       "name": "Caregiver",
       "core": "tempo",
       "godAbility": "lifebringer",
-      "godDescription": "Healing revives (once per fight per target).",
+      "godDescription": "Healing revives (once per fight per target). PARTY: the reason everyone survives. TITAN: keep the army alive through titan AoE. CONTEST: the mercy moment \u2014 sparing a foe wins the crowd.",
       "relevantGear": [
         "medkit",
         "herbs",
         "bandage"
       ],
-      "victoryPath": "no one dies"
+      "victoryPath": "no one dies",
+      "scale": "party lifeline, army sustain"
     },
     "drifter": {
       "name": "Drifter",
       "core": "evasion",
       "godAbility": "ghost",
-      "godDescription": "Cannot be hit for 3 turns after moving 3+ tiles.",
+      "godDescription": "Cannot be hit for 3 turns after moving 3+ tiles. PARTY: scout ahead, draw fire, reposition allies. TITAN: untouchable \u2014 can plant bombs on titan weak points. CONTEST: the ghost \u2014 win races/chases automatically.",
       "relevantGear": [
         "boots",
         "cloak"
       ],
-      "victoryPath": "untouchable"
+      "victoryPath": "untouchable",
+      "scale": "party scout, titan saboteur"
     },
     "explorer": {
       "name": "Explorer",
       "core": "knowledge",
       "godAbility": "omniscient",
-      "godDescription": "See all monster intents. Map fully revealed.",
+      "godDescription": "See all monster intents. Map fully revealed. PARTY: share intents (allies dodge +25%). TITAN: see the titan's next 3 moves. CONTEST: the knower \u2014 win trivia/strategy challenges.",
       "relevantGear": [
         "map",
         "compass",
         "spyglass"
       ],
-      "victoryPath": "knowledge"
+      "victoryPath": "knowledge",
+      "scale": "party tactician, titan predictor"
     },
     "socialite": {
       "name": "Socialite",
       "core": "scale",
       "godAbility": "icon",
-      "godDescription": "All social actions crit. Crowd fights for you.",
+      "godDescription": "All social actions crit. Crowd fights for you (summon 2d4 fans as allies). PARTY: inspire (+50% all stats for 3 turns). TITAN: turn the army's morale \u2014 they fight harder. CONTEST: you ARE the show \u2014 auto-win performance challenges.",
       "relevantGear": [
         "instrument",
         "clothes"
       ],
-      "victoryPath": "beloved"
+      "victoryPath": "beloved",
+      "scale": "party morale, army inspiration, contest winner"
     },
     "survivalist": {
       "name": "Survivalist",
       "core": "endurance",
       "godAbility": "apex",
-      "godDescription": "Never need food/water. All stats +50%.",
+      "godDescription": "Never need food/water. All stats +50%. PARTY: share the bounty (allies also don't need food). TITAN: outlast the titan \u2014 it tires, you don't. CONTEST: the endurance \u2014 win survival challenges.",
       "relevantGear": [
         "pack",
         "filter",
         "firekit"
       ],
-      "victoryPath": "endurance"
+      "victoryPath": "endurance",
+      "scale": "party provider, titan outlaster"
     },
     "miser": {
       "name": "Miser",
       "core": "compound",
       "godAbility": "kingmidas",
-      "godDescription": "All resources double. Can buy anything.",
+      "godDescription": "All resources double. Can buy anything (even victory?). PARTY: equip everyone with the best. TITAN: buy titan-slaying weapons. CONTEST: the sponsor \u2014 bribe judges (risky but effective).",
       "relevantGear": [
         "pack",
         "ledger"
       ],
-      "victoryPath": "wealth"
+      "victoryPath": "wealth",
+      "scale": "party quartermaster, titan arms dealer"
     },
     "forager": {
       "name": "Forager",
       "core": "streak",
       "godAbility": "cornucopia_god",
-      "godDescription": "All foraging yields 5x. Never fail.",
+      "godDescription": "All foraging yields 5x. Never fail. PARTY: feed the army. TITAN: find the titan's food source \u2014 poison it. CONTEST: the provider \u2014 win feast challenges.",
       "relevantGear": [
         "basket",
         "sickle"
       ],
-      "victoryPath": "plenty"
+      "victoryPath": "plenty",
+      "scale": "party sustenance, titan poisoner"
     }
   }
 }

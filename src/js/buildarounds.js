@@ -314,6 +314,63 @@
         return 2.0;
       } catch (e) { return 1; }
     },
+
+    // GOD ABILITY PARTY EFFECTS (Steve 2026-10-14)
+    // God abilities scale: solo → party → titan → army → contest
+    
+    // CRIMSON GOD: allies inspired (+25% damage when you crit)
+    crimsonGodParty: function (game) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
+        return 1.25; // allies deal +25%
+      } catch (e) { return 1; }
+    },
+    
+    // DEADEYE: marked targets take +50% from allies
+    deadeyeMark: function (game, targetId) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('deadeye')) return;
+        const st = fightState(game);
+        if (st) {
+          st.deadeyeMarks = st.deadeyeMarks || {};
+          st.deadeyeMarks[targetId] = true;
+          game.say('DEADEYE: marked. The party sees the weak point.');
+        }
+      } catch (e) {}
+    },
+    
+    deadeyeAllyMult: function (game, targetId) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('deadeye')) return 1;
+        const st = fightState(game);
+        if (st && st.deadeyeMarks && st.deadeyeMarks[targetId]) {
+          return 1.5; // allies deal +50% vs marked
+        }
+        return 1;
+      } catch (e) { return 1; }
+    },
+    
+    // LIFEBRINGER: revive allies (once per fight per target)
+    lifebringerRevive: function (game, targetId) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('lifebringer')) return false;
+        const st = fightState(game);
+        if (!st) return false;
+        st.lifebringerUsed = st.lifebringerUsed || {};
+        if (st.lifebringerUsed[targetId]) return false; // once per fight
+        
+        const t = game.tbFighter(targetId);
+        if (t && !t.alive) {
+          t.alive = true;
+          t.hp = Math.round((t.maxHp || 50) * 0.5);
+          st.lifebringerUsed[targetId] = true;
+          game.say('LIFEBRINGER: ' + (t.name || 'ally') + ' gasps back to life!');
+          return true;
+        }
+        return false;
+      } catch (e) { return false; }
+    },
+    
     // GOD PATH PROGRESSION (Steve 2026-10-14)
     // All systems feed the god meter: abilities, synergies, gear, sentimental gear.
     
