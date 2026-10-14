@@ -753,7 +753,9 @@
         else if (game.say) game.say(b.text);
       } catch (e) {}
     }
-    const day = (game.state && game.state.day) || 0;
+    // The scholar's day (state.day is unset in play): a 0 here read as
+    // "not recognized" and re-fired the ceremony every dawn (fixed 2026-10-14).
+    const day = ((game.state && game.state.scholar) || {}).day || (game.state && game.state.day) || 1;
     g.recognized[ghId] = day;
     if (!g.active.includes(ghId)) g.active.push(ghId);
     return beats;
@@ -790,7 +792,9 @@
         else if (game.say) game.say(b.text);
       } catch (e) {}
     }
-    const day = (game.state && game.state.day) || 0;
+    // The scholar's day (state.day is unset in play): a 0 here read as
+    // "not recognized" and re-fired the ceremony every dawn (fixed 2026-10-14).
+    const day = ((game.state && game.state.scholar) || {}).day || (game.state && game.state.day) || 1;
     g.recognized[ghId] = day;
     if (!g.active.includes(ghId)) g.active.push(ghId);
     // PANTHEON: a villager god is a god. Register the ascension.
@@ -815,7 +819,7 @@
     const g = sch.godhood || (sch.godhood = { recognized: {}, active: [] });
     g.hinted = g.hinted || {};
     if (g.hinted[ghId] || g.recognized[ghId]) return null;
-    const day = (game.state || {}).day || 0;
+    const day = sch.day || (game.state || {}).day || 0;
     const close = godhoodCloseness(sch, gh, day);
     if (!close.close || close.complete) return null;
     g.hinted[ghId] = true;

@@ -701,6 +701,26 @@
       return _cv.apply(this, arguments);
     };
   }
+  // DAWN CHECK: the day-80 gate opens on a day, not on an acquisition. Without
+  // this a finished build waited for the next pick to be recognised.
+  const _ed = Game.endDay;
+  if (typeof _ed === 'function') {
+    Game.endDay = function () {
+      const r = _ed.apply(this, arguments);
+      try {
+        if (!this.over && this.state && this.state.systemArrived) {
+          this.checkPlayerGodhoodAscension();
+          const v = this.state.village || {};
+          for (const vid of (v.roster || [])) {
+            if (vid === this.villagerId) continue;
+            if ((((v.npcAbilities || {})[vid]) || []).length < 3) continue;
+            this.checkVillagerGodhoodAscension(vid);
+          }
+        }
+      } catch (e) { warn('dawn check', e); }
+      return r;
+    };
+  }
   // Fight lifecycle: per-fight state cleared; Rally Aura at the start.
   const _sc = Game.startCombat;
   if (typeof _sc === 'function') {
