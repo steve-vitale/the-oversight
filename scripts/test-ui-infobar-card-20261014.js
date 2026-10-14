@@ -45,6 +45,12 @@ ok(/\.ord-status\s*>\s*\.statrow\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/.test(mobil
 ok(/\.ord-status\s*>\s*\.statrow\s*\{[^}]*font-size:\s*12px/.test(mobile),
    'statrow has readable styling');
 
+// (1d) WAVE LEDGER internal (Steve 2026-10-14): no persistent ledger line
+// in the info bar — the System keeps its books, milestones announced.
+const appJs = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'app.js'), 'utf8');
+ok(!/ledgerProgressLine\(\)/.test(appJs.split('beatsRowHTML')[1].split('function afflictionRow')[0].replace(/\/\/.*/g, '')),
+   'no ledgerProgressLine call in beatsRowHTML (code, not comments)');
+
 // (2a) person card: definite height + no vertical margin + border-box
 const cardRule = css.match(/\.ord-narration\s+\.inlinecard\s*\{([^}]*)\}/);
 ok(!!cardRule, 'person card containment rule exists');

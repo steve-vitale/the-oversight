@@ -253,14 +253,13 @@
     const out = [];
     try {
       const st = Game.state;
-      // WAVE LEDGER (Steve 2026-10-10): persistent progress line — the System
-      // televises the ledger. ledgerProgressLine() names the first unfilled
-      // bar with honest labels ("kills only"); returns '' when every bar is
-      // full, so the line disappears at mastery.
-      try {
-        const lpl = (typeof Game.ledgerProgressLine === 'function') ? Game.ledgerProgressLine() : '';
-        if (lpl) out.push(`<div class="statrow beat-open" style="opacity:.9">${esc(lpl)}</div>`);
-      } catch (e) {}
+      // WAVE LEDGER (Steve 2026-10-14: "should be internal not external"):
+      // the persistent ledger line is GONE from the info bar. The System
+      // keeps its kill-books internally; the player hears about it at
+      // milestones (waveLedger.js sysSay on bar-full/halfway), not as a
+      // constant HUD element. ledgerProgressLine() is kept for a possible
+      // future "ask the System" beat — Steve questioned the need, so no
+      // viewer UI was built.
       // FEASTED (feast-surge rework, Worker B 2026-10-10): the visible
       // countdown — honest label: true mult, parts remaining, what it does.
       try {
