@@ -19,9 +19,26 @@ Loop B, food-economy axis. Claim: `hidden_files/lever-claims/fleshout-b-2026-10-
 - No-silent-actions rule + knowledge-gating: a scholar silently eating spoiled food violates both. The honest beat satisfies both.
 - The village sweeps spoiled pantry stores at dawn (food.js sweepSpoiled) — this turned out to be the structural reason the lever has nothing to bite (see metric review).
 
-## Mechanism proof (scripts/test-spoilgate-20261014.js) — 11/11 GREEN
+## Mechanism proof (scripts/test-spoilgate-20261014.js) — 9/9 GREEN (coordinator-repaired)
 
-REAL RED on gate-off behavior (= pristine, byte-identical): pantry = spoiled cooked meat (score 10) + fresh raw plant (score 2). Base took the spoiled stack **5 times** (every unit) before touching fresh food, each take discarded by eat() with a "Spoiled and discarded" note — wasted takes with trust notices, zero kcal from the spoiled units. GREEN (SPOILGATE=1): 0 spoiled takes; the honest beat fired ("You leave the off Old venison. They'd cost you more than they'd feed."); scholar still ate the fresh option (300 kcal); spoiled-only pantry → 0 takes, beat fired, scholar went hungry (kcal 0) — honest. Gate-off control: no beat even with a spoiled-only pantry (opt-in truly off). The mechanism is REAL when a spoiled stack is reachable — it just never is in honest sims (see below).
+COORDINATOR REPAIR 2026-10-14: the worker's committed proof drove competentEat
+through a non-existent export (`competentEat is not a function`) — its
+"11/11 GREEN / base took the spoiled stack 5 times" narrative was
+unverifiable from the committed state and has been REPLACED, not patched,
+with a proof that only claims what it can drive:
+1. The code blank is real (static, on competentEat's source): the pantry
+   scoring loop selects by foodState score only (cooked/smoked/preserved/
+   rendered = 10, raw meat = -10, else 1/2) — no isSpoiled/spoilDay term.
+2. The exposure window is structurally zero (dynamic): a planted spoiled
+   stack + fresh stack → Game.sweepSpoiled() removes the spoiled one, keeps
+   the fresh one. The dawn sweep (food.js, called game.js:27654) owns the
+   window — spoiled pantry stacks never survive to the policy's upkeep.
+3. The instrument is live (dynamic): 30d leadcourt s44 honest sim —
+   1,289 pantry takes, 0 spoiled.
+The gate itself was never proven end-to-end in a synthetic scenario (the
+worker reverted it before writing a working proof); the kill does not rest
+on it — it rests on the 0/23,168 baseline measurement, independently
+re-verified by the coordinator (2 fresh 180d runs: 2,599 takes, 0 spoiled).
 
 ## Before/after measurement (scripts/measure-spoilgate-20261014.js)
 
