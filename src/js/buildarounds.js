@@ -27,7 +27,8 @@
   // Count held abilities on a path (for assembly gating).
   function baPathCount(game, path) {
     try {
-      const held = (game.state.scholar.abilities || []).map(a => (a && a.id) || a);
+      // An evolved ability counts as its root (evolvedFrom keeps the lineage).
+      const held = (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
       const data = game.data.abilities || [];
       return held.filter(id => {
         const def = data.find(d => d.id === id);

@@ -182,7 +182,8 @@
       var g = global.Game;
       if (!g || !g.state) return 0;
       var sch = g.state.scholar || {};
-      var pAbs = (sch.abilities || []).map(function (a) { return (a && a.id) || a; });
+      // An evolved ability counts as its root (evolvedFrom keeps the lineage).
+      var pAbs = (sch.abilities || []).map(function (a) { return (a && (a.evolvedFrom || a.id)) || a; });
       var pCount = pathAbilityCount(pAbs);
       if (pCount >= 4) return 1;
       if ((sch.synergies || []).indexOf('stand_together') >= 0) return 1;
