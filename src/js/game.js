@@ -28361,9 +28361,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       let w4faced = false;
       try { w4faced = (typeof this.waveEngaged === 'function') ? this.waveEngaged(4) > 0 : false; } catch (e) {}
-      if (standing >= t5 && w4faced) return 5;
-      if (standing >= t4) return 4;
-      if (day >= dN && pts(2) >= ((bar[2] | 0) || 5)) return 3;
+      // The standing rungs sit ON TOP of the wave-3 rung (audit 2026-10-14):
+      // without this, high standing unlocked wave 4 before wave 3 ever had.
+      const w3 = day >= dN && pts(2) >= ((bar[2] | 0) || 5);
+      if (w3 && standing >= t5 && w4faced) return 5;
+      if (w3 && standing >= t4) return 4;
+      if (w3) return 3;
       if (day >= d2 && pts(1) >= ((bar[1] | 0) || 5)) return 2;
       return 1;
     },
