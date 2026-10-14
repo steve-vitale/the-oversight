@@ -86,6 +86,9 @@
           deedAlt: g.deedAlt || null,
           itemTiers: [], minDay: rules.minDay != null ? rules.minDay : 80,
           closeAt: rules.closeAt || 3,
+          // data levers (godpaths.json rules.capstone): Steve to tune
+          requirePayoff: rules.requirePayoff !== false,
+          requireDeed: rules.requireDeed !== false,
           capstoneItems: g.capstoneItems || [],
         },
       });
@@ -228,7 +231,7 @@
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
       classOk: pp.classOk, synergy, item: true, dayOk,
-      complete: pp.classOk && pp.kit >= pp.needKit && pp.coreHit && synergy && dayOk,
+      complete: pp.classOk && pp.kit >= pp.needKit && (pp.coreHit || req.requirePayoff === false) && (synergy || req.requireDeed === false) && dayOk,
       // knowledge-gated: the god is felt only once the class is named and the
       // build is most of the way there
       close: pp.classOk && pp.kit >= (req.closeAt || 3),
@@ -291,7 +294,7 @@
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
       classOk: pp.classOk, synergy, item: true, dayOk,
-      complete: pp.classOk && pp.kit >= pp.needKit && pp.coreHit && synergy && dayOk,
+      complete: pp.classOk && pp.kit >= pp.needKit && (pp.coreHit || req.requirePayoff === false) && (synergy || req.requireDeed === false) && dayOk,
       close: pp.classOk && pp.kit >= (req.closeAt || 3),
       vid,
     };

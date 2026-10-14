@@ -217,6 +217,18 @@
       if (!rec || rec.lapsed) rec = emergingPath(holderMagicIds(who || 'player'));
       const pathOf = (o) => (defOf(o.id) || {}).path;
       const roleOf = (o) => (defOf(o.id) || {}).role;
+      // A recognised subclass whose payoff is still missing: the payoff is
+      // the on-path offer (it completes the class); otherwise the first
+      // on-path entry in kit order.
+      let payoff = null;
+      try { if (rec && rec.subclass) payoff = ((((data() || {}).paths || {})[rec.path] || {}).subclasses || {})[rec.subclass].payoff; } catch (e) { payoff = null; }
+      if (rec && !rec.lapsed && out.length && payoff && !out.some(o => o.id === payoff)) {
+        const pi = rest.findIndex(p => p.id === payoff);
+        if (pi >= 0) {
+          const slot = out.findIndex(o => pathOf(o) !== rec.path);
+          if (slot >= 0) { out[slot] = rest.splice(pi, 1)[0]; out._leaned = true; }
+        }
+      }
       if (rec && !rec.lapsed && out.length && !out.some(o => pathOf(o) === rec.path)) {
         const i = rest.findIndex(p => pathOf(p) === rec.path);
         if (i >= 0) { out[out.length - 1] = rest.splice(i, 1)[0]; out._leaned = true; }
