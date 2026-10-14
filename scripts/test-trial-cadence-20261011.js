@@ -93,8 +93,13 @@ function makeEligible(Game) {
   ok(pg.trial == null, 'trial completes when the haul is met');
   ok(pg.trialCd === (s.day || 0) + 4, 'cooldown is day+4', `trialCd=${pg.trialCd} day=${s.day}`);
   ok(Math.round(s.integration) === Math.round(Math.min(100, integBefore + 15)), '+15 integration', `${integBefore} -> ${s.integration}`);
+  // PICK 1 OF 3 (Steve 2026-10-14): the trial now offers a choice sheet led
+  // by the synergy-aware pick, instead of granting it directly.
+  const sheet = (s.abilityChoices || []).map(c => c.id);
+  ok(sheet.length === 3 && sheet[0] === 'diplomat', 'trial offers 1 of 3, led by the synergy-aware pick (diplomat)', sheet.join(','));
+  Game.chooseAbility('diplomat');
   const got = (s.abilities || []).map(a => a.id);
-  ok(got.includes('diplomat'), 'synergy-aware gift: mediator held -> diplomat gifted', got.join(','));
+  ok(got.includes('diplomat'), 'choosing the lead pick grants diplomat', got.join(','));
   // discovery itself needs uses (checkSynergyDiscovery attempt windows) —
   // the gift's job is completing the legs. Assert the pairing is co-held.
   ok(got.includes('mediator') && got.includes('diplomat'),
@@ -122,8 +127,9 @@ function makeEligible(Game) {
     pg.trial = { id: 'haul_small', text: 'Haul 1,000 kcal to the pantry within 3 days.', need: 1000, have: 0, kind: 'pantry', start: (Game.pantryKcal ? Game.pantryKcal() : 0) - 1000, expires: (s.day || 0) + 3 };
     said.length = 0;
     Game.checkTrial('daily');
+    if (s.abilityChoices && s.abilityChoices[0]) Game.chooseAbility(s.abilityChoices[0].id);
     ok(s.abilities.length === slots + 1 && s.abilities.length === Game.abilitySlots(),
-      'trial opens a slot and the gift fills it (never exceeds slots)',
+      'trial opens a slot and the chosen gift fills it (never exceeds slots)',
       `${slots} -> ${s.abilities.length} (slots now ${Game.abilitySlots()})`);
   }
   // True-full: integ 100 (6 slots), 6 held -> the gift is refused honestly.

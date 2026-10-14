@@ -829,21 +829,19 @@
           // dead (1/120 runs) because grants never completed held legs — the
           // pairs were never held. If a candidate completes a synergy with a
           // leg the scholar holds (or has teased), the System notices the
-          // shape of the build and offers that one. Still a gift, not a menu.
-          const def = this._synergyGiftPick(cands, owned) || pick(cands);
-          s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
-          gift = def.name;
-          // BREAK-IT abilities r5: a System gift is still an acquisition --
-          // priced abilities pay their documented costs (chitin_skin /
-          // fear_aura trust, hive_mind's map reveal), whichever path grants
-          // them. The trial used to skip abilityOnAcquire entirely.
-          try { this.abilityOnAcquire(def.id); } catch (e3) {}
-          // BREAK-IT abilities 2026-10-10 (sibling sweep): a granted ability
-          // can complete a synergy's legs — recompute, like every other
-          // grant path (chooseAbility, pact, gainAbilityXP level-up).
-          try { this.recomputeActiveSynergies(); } catch (e) {}
-          // GODHOOD REWORK (Steve 2026-10-13): a gift can complete a build.
-          try { this.checkPlayerGodhoodAscension(); } catch (e2) {}
+          // shape of the build and leads with that one.
+          // PICK 1 OF 3 (Steve 2026-10-14: "It's supposed to already pick 1
+          // of 3"). The System's build-aware pick is one of the three; the
+          // other two are random. chooseAbility pays acquisition costs,
+          // recomputes synergies and checks godhood, like every choice sheet.
+          const lead = this._synergyGiftPick(cands, owned) || pick(cands);
+          const rest = cands.filter(a => a.id !== lead.id);
+          const opts = [lead];
+          while (opts.length < 3 && rest.length) opts.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]);
+          if (!(s.abilityChoices && s.abilityChoices.length)) {
+            s.abilityChoices = opts.map(d => ({ id: d.id, name: d.name, description: d.description, flavor: d.flavor, src: 'trial' }));
+            gift = 'choose 1 of ' + opts.length;
+          }
         }
       } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('showmanship', 3); } catch (e) {}

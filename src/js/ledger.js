@@ -208,9 +208,51 @@
       if (pg.ledger.foodHoarded === undefined) pg.ledger.foodHoarded = 0;
       return pg.ledger;
     },
+    // LEDGER EVENTS (coherence audit 2026-10-14; Steve: "Yes, all of them"
+    // count toward the ending). Hierarchy, titans, comms, village agency,
+    // membership and pods call ledgerAdd(system, 'kind:detail') with a STRING
+    // payload — 51 such writes were silently dropped because `system` isn't a
+    // dimension. Now each event is logged (pg.ledgerEvents, capped) and its
+    // kind is translated into the real dimensions below. Kinds with no clear
+    // meaning stay log-only ({}), never guessed.
+    LEDGER_EVENT_DIMS: {
+      hierarchy: {
+        'counter': { brokerage: 1 }, 'linked': { brokerage: 1, unified: 1 },
+        'regional-dawn': { unified: 1 }, 'tended': { protected: 1 },
+        'revolt': { fractured: 1 }, 'broke': { fractured: 1 },
+        'primacy': { brokerage: 1 }, 'succession-grace': { unified: 1 },
+        'renegotiated-gift': { brokerage: 1 }, 'renegotiated-visit': { brokerage: 1 },
+        'renegotiation-lapsed': { fractured: 1 }, 'national-lost': { fractured: 1 },
+        'national-beat-died': { fractured: 1 }, 'national-live': { unified: 1 },
+        'global-declined': { defiance: 1 }, 'scale-refused': { defiance: 1 },
+        'peer-counter': { brokerage: 1 }, 'peer': { brokerage: 1 },
+        'trade-call': { brokerage: 1 }, 'favor-sent': { brokerage: 1 },
+        'defense-sent': { protected: 2 }, 'defense-refused': { fractured: 1 },
+        'crisis-conceded': { fractured: 1 }, 'raid-mustered': { might: 1 },
+        'yielded': { might: 1 }, 'conquered': { might: 2 },
+      },
+      titan: { 'commit-own': { might: 1 }, 'turned': { fractured: 1 }, 'slew': { might: 3, protected: 2 } },
+      comms: { 'aid-arrived': { brokerage: 1 } },
+      villageAgency: {
+        'petition-accepted': { protected: 1, unified: 1 }, 'aid': { foodShared: 1, brokerage: 1 },
+        'beg-gave': { foodShared: 1 }, 'beg-refused': { foodHoarded: 1 },
+        'raid-fought': { might: 1, protected: 1 },
+      },
+    },
     ledgerAdd(dim, n) {
       try {
         const L = this.ledger();
+        if (typeof n === 'string') {
+          const pg = this.progState();
+          pg.ledgerEvents = pg.ledgerEvents || [];
+          const day = ((this.state && this.state.scholar) || {}).day || 0;
+          pg.ledgerEvents.push({ sys: dim, ev: n, day });
+          if (pg.ledgerEvents.length > 400) pg.ledgerEvents.splice(0, pg.ledgerEvents.length - 400);
+          const kind = n.split(':')[0];
+          const map = (this.LEDGER_EVENT_DIMS[dim] || {})[kind];
+          if (map) for (const d of Object.keys(map)) this.ledgerAdd(d, map[d]);
+          return;
+        }
         if (dim in L) {
           const before = L[dim] || 0;
           L[dim] = before + n;

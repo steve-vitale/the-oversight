@@ -3146,6 +3146,11 @@
       const s = this.state.scholar || {};
       const cur = this.playerDisposition();
       s.disposition = Math.max(-3, Math.min(3, cur + delta));
+      // TABLE INPUT (coherence audit 2026-10-14; Steve: conversation style
+      // counts toward the ending): only REAL movement on the axis counts, so
+      // the clamp stops farming. Cruel → might (Feared), kind → protected (Beloved).
+      const moved = s.disposition - cur;
+      if (moved && this.ledgerAdd) this.ledgerAdd(moved < 0 ? 'might' : 'protected', Math.abs(moved));
     },
 
     // relDays: relationship age in days (for trust gating — the count
