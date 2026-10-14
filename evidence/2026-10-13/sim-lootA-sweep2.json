@@ -1,0 +1,366 @@
+{
+ "summary": {
+  "meta": {
+   "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    77,
+    88
+   ],
+   "policies": [
+    "competent",
+    "belongseek"
+   ],
+   "days": 180,
+   "arms": [
+    "baseline(LOOT_ALL=0)",
+    "batch(LOOT_ALL=1)"
+   ],
+   "n": 16
+  },
+  "verbsPerCleared": {
+   "baseline": 6.828125000000001,
+   "batch": 1.334375,
+   "reduction": 80.5
+  },
+  "lootKcal": {
+   "baseline": 0,
+   "batch": 0,
+   "ratio": null,
+   "note": "STRUCTURALLY ZERO: monster corpse loot tables carry kcalEach 0 (meat comes from butchering); guardrail unevaluable — see metric review"
+  },
+  "stacksHauled": {
+   "baseline": 63.9375,
+   "batch": 73.625,
+   "ratio": 1.152,
+   "note": "REVISED GUARDRAIL (run 2): item stacks hauled from corpses, batch vs baseline"
+  },
+  "go": "GO"
+ },
+ "pairs": [
+  {
+   "policy": "competent",
+   "seed": 11,
+   "b": {
+    "v": 140,
+    "c": 18,
+    "vpc": 7.78,
+    "kcal": 0,
+    "stacks": 140,
+    "days": 180
+   },
+   "a": {
+    "v": 18,
+    "c": 18,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 140,
+    "days": 180
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 22,
+   "b": {
+    "v": 83,
+    "c": 14,
+    "vpc": 5.93,
+    "kcal": 0,
+    "stacks": 83,
+    "days": 87
+   },
+   "a": {
+    "v": 11,
+    "c": 11,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 127,
+    "days": 99
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 33,
+   "b": {
+    "v": 155,
+    "c": 15,
+    "vpc": 10.33,
+    "kcal": 0,
+    "stacks": 154,
+    "days": 115
+   },
+   "a": {
+    "v": 17,
+    "c": 15,
+    "vpc": 1.13,
+    "kcal": 0,
+    "stacks": 154,
+    "days": 115
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 44,
+   "b": {
+    "v": 14,
+    "c": 4,
+    "vpc": 3.5,
+    "kcal": 0,
+    "stacks": 14,
+    "days": 60
+   },
+   "a": {
+    "v": 6,
+    "c": 6,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 22,
+    "days": 73
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 55,
+   "b": {
+    "v": 106,
+    "c": 7,
+    "vpc": 15.14,
+    "kcal": 0,
+    "stacks": 32,
+    "days": 109
+   },
+   "a": {
+    "v": 34,
+    "c": 7,
+    "vpc": 4.86,
+    "kcal": 0,
+    "stacks": 31,
+    "days": 109
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 66,
+   "b": {
+    "v": 53,
+    "c": 10,
+    "vpc": 5.3,
+    "kcal": 0,
+    "stacks": 53,
+    "days": 63
+   },
+   "a": {
+    "v": 14,
+    "c": 14,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 110,
+    "days": 63
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 77,
+   "b": {
+    "v": 76,
+    "c": 17,
+    "vpc": 4.47,
+    "kcal": 0,
+    "stacks": 76,
+    "days": 122
+   },
+   "a": {
+    "v": 33,
+    "c": 16,
+    "vpc": 2.06,
+    "kcal": 0,
+    "stacks": 60,
+    "days": 99
+   }
+  },
+  {
+   "policy": "competent",
+   "seed": 88,
+   "b": {
+    "v": 60,
+    "c": 11,
+    "vpc": 5.45,
+    "kcal": 0,
+    "stacks": 53,
+    "days": 103
+   },
+   "a": {
+    "v": 12,
+    "c": 11,
+    "vpc": 1.09,
+    "kcal": 0,
+    "stacks": 53,
+    "days": 103
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 11,
+   "b": {
+    "v": 26,
+    "c": 6,
+    "vpc": 4.33,
+    "kcal": 0,
+    "stacks": 26,
+    "days": 67
+   },
+   "a": {
+    "v": 6,
+    "c": 6,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 26,
+    "days": 67
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "b": {
+    "v": 31,
+    "c": 10,
+    "vpc": 3.1,
+    "kcal": 0,
+    "stacks": 31,
+    "days": 53
+   },
+   "a": {
+    "v": 10,
+    "c": 10,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 31,
+    "days": 53
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 33,
+   "b": {
+    "v": 121,
+    "c": 11,
+    "vpc": 11,
+    "kcal": 0,
+    "stacks": 121,
+    "days": 95
+   },
+   "a": {
+    "v": 17,
+    "c": 14,
+    "vpc": 1.21,
+    "kcal": 0,
+    "stacks": 134,
+    "days": 85
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "b": {
+    "v": 68,
+    "c": 9,
+    "vpc": 7.56,
+    "kcal": 0,
+    "stacks": 68,
+    "days": 72
+   },
+   "a": {
+    "v": 10,
+    "c": 10,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 40,
+    "days": 66
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 55,
+   "b": {
+    "v": 22,
+    "c": 6,
+    "vpc": 3.67,
+    "kcal": 0,
+    "stacks": 22,
+    "days": 57
+   },
+   "a": {
+    "v": 6,
+    "c": 6,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 22,
+    "days": 57
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 66,
+   "b": {
+    "v": 81,
+    "c": 6,
+    "vpc": 13.5,
+    "kcal": 0,
+    "stacks": 81,
+    "days": 116
+   },
+   "a": {
+    "v": 6,
+    "c": 6,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 81,
+    "days": 116
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "b": {
+    "v": 39,
+    "c": 10,
+    "vpc": 3.9,
+    "kcal": 0,
+    "stacks": 39,
+    "days": 86
+   },
+   "a": {
+    "v": 10,
+    "c": 10,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 39,
+    "days": 86
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 88,
+   "b": {
+    "v": 30,
+    "c": 7,
+    "vpc": 4.29,
+    "kcal": 0,
+    "stacks": 30,
+    "days": 68
+   },
+   "a": {
+    "v": 11,
+    "c": 11,
+    "vpc": 1,
+    "kcal": 0,
+    "stacks": 108,
+    "days": 150
+   }
+  }
+ ]
+}
