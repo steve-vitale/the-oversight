@@ -1,0 +1,91 @@
+{
+ "label": "raidtrigger",
+ "policy": "belongseek",
+ "seed": 22,
+ "days": 180,
+ "endReason": "survived",
+ "national": 0,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 3,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 17,
+ "gorgeNights": 0,
+ "gorgeKcal": 0,
+ "rateCurve": {
+  "<3k": {
+   "nights": 8,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 8,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 66,
+   "raidNights": 7,
+   "ratePer100": 10.6,
+   "ripeNights": 22,
+   "rngBlocked": 15,
+   "blockedThin": 0,
+   "blockedGap": 44,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 24,
+   "raidNights": 4,
+   "ratePer100": 16.7,
+   "ripeNights": 9,
+   "rngBlocked": 5,
+   "blockedThin": 0,
+   "blockedGap": 15,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 83,
+   "raidNights": 6,
+   "ratePer100": 7.2,
+   "ripeNights": 37,
+   "rngBlocked": 31,
+   "blockedThin": 0,
+   "blockedGap": 46,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 6,
+  "12-24k:4": 4,
+  "3-12k:3": 7
+ },
+ "sizedNights": 17,
+ "matchedRule": 17,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 0,
+  "askedKcal": 0,
+  "takenKcal": 0,
+  "topItems": []
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "terms_of_service",
+   "wave": 3,
+   "days": "89-89",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}

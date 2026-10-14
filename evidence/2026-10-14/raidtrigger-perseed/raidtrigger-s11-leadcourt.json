@@ -1,0 +1,185 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 11,
+ "days": 144,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 10,
+ "gorgeNights": 4,
+ "gorgeKcal": 3606,
+ "rateCurve": {
+  "<3k": {
+   "nights": 3,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 3,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 19,
+   "raidNights": 2,
+   "ratePer100": 10.5,
+   "ripeNights": 8,
+   "rngBlocked": 6,
+   "blockedThin": 0,
+   "blockedGap": 11,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 50,
+   "raidNights": 4,
+   "ratePer100": 8,
+   "ripeNights": 30,
+   "rngBlocked": 26,
+   "blockedThin": 0,
+   "blockedGap": 20,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 72,
+   "raidNights": 4,
+   "ratePer100": 5.6,
+   "ripeNights": 44,
+   "rngBlocked": 40,
+   "blockedThin": 0,
+   "blockedGap": 28,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  "12-24k:4": 4,
+  ">24k:5": 4,
+  "3-12k:3": 2
+ },
+ "sizedNights": 10,
+ "matchedRule": 10,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 4,
+  "askedKcal": 2971,
+  "takenKcal": 3606,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 1988
+   },
+   {
+    "item": "Foraged food (dried)|preserved",
+    "kcal": 1118
+   },
+   {
+    "item": "Fish catch|?",
+    "kcal": 500
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "lockpick_raccoon",
+   "wave": 1,
+   "days": "55-55",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "belltoad",
+   "wave": 1,
+   "days": "64-64",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "gallowdeer",
+   "wave": 1,
+   "days": "64-64",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "nightcourt",
+   "wave": 1,
+   "days": "98-100",
+   "gorgeNights": 3,
+   "gorgeKcal": 2606,
+   "resolution": "killed",
+   "killer": "villager:sofia_chen"
+  },
+  {
+   "id": "nightcourt",
+   "wave": 1,
+   "days": "101-101",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "mirrormoth",
+   "wave": 1,
+   "days": "118-118",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "algorithm",
+   "wave": 4,
+   "days": "144-144",
+   "gorgeNights": 1,
+   "gorgeKcal": 1000,
+   "resolution": "lingering-at-end",
+   "killer": null
+  },
+  {
+   "id": "hushwolf",
+   "wave": 1,
+   "days": "144-144",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "speedbump_turtle",
+   "wave": 1,
+   "days": "144-144",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "algorithm",
+   "wave": 4,
+   "days": "145-145",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}

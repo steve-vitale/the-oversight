@@ -1,0 +1,126 @@
+{
+ "label": "raidtrigger",
+ "policy": "belongseek",
+ "seed": 11,
+ "days": 172,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 3,
+ "collapseClass": "mixed",
+ "collapseConfidence": "medium",
+ "raidNightsTotal": 17,
+ "gorgeNights": 3,
+ "gorgeKcal": 3776,
+ "rateCurve": {
+  "<3k": {
+   "nights": 8,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 8,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 32,
+   "raidNights": 4,
+   "ratePer100": 12.5,
+   "ripeNights": 18,
+   "rngBlocked": 14,
+   "blockedThin": 0,
+   "blockedGap": 14,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 32,
+   "raidNights": 3,
+   "ratePer100": 9.4,
+   "ripeNights": 8,
+   "rngBlocked": 5,
+   "blockedThin": 0,
+   "blockedGap": 24,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 101,
+   "raidNights": 10,
+   "ratePer100": 9.9,
+   "ripeNights": 35,
+   "rngBlocked": 25,
+   "blockedThin": 0,
+   "blockedGap": 66,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  "12-24k:4": 3,
+  ">24k:5": 10,
+  "3-12k:3": 4
+ },
+ "sizedNights": 17,
+ "matchedRule": 17,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 3,
+  "askedKcal": 3267,
+  "takenKcal": 3776,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 2011
+   },
+   {
+    "item": "Purslane|ready",
+    "kcal": 600
+   },
+   {
+    "item": "Blackberry|ready",
+    "kcal": 585
+   },
+   {
+    "item": "Fish catch|?",
+    "kcal": 580
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "gallowdeer",
+   "wave": 1,
+   "days": "53-53",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "moderator",
+   "wave": 2,
+   "days": "154-156",
+   "gorgeNights": 3,
+   "gorgeKcal": 3776,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "moderator",
+   "wave": 2,
+   "days": "157-157",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}

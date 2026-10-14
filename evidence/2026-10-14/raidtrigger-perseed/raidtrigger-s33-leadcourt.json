@@ -1,0 +1,121 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 33,
+ "days": 34,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 2,
+ "collapseClass": "predation",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 3,
+ "gorgeNights": 5,
+ "gorgeKcal": 14240,
+ "rateCurve": {
+  "<3k": {
+   "nights": 1,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 1,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 4,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 4,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 5,
+   "raidNights": 1,
+   "ratePer100": 20,
+   "ripeNights": 2,
+   "rngBlocked": 1,
+   "blockedThin": 0,
+   "blockedGap": 3,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 25,
+   "raidNights": 2,
+   "ratePer100": 8,
+   "ripeNights": 10,
+   "rngBlocked": 8,
+   "blockedThin": 0,
+   "blockedGap": 15,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 2,
+  "12-24k:4": 1
+ },
+ "sizedNights": 3,
+ "matchedRule": 3,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 9,
+  "askedKcal": 11294,
+  "takenKcal": 14240,
+  "topItems": [
+   {
+    "item": "Fish catch|?",
+    "kcal": 8040
+   },
+   {
+    "item": "Tribute grain from Stonebridge|?",
+    "kcal": 4000
+   },
+   {
+    "item": "Rice|?",
+    "kcal": 2200
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "mirrormoth",
+   "wave": 1,
+   "days": "31-34",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "villager:david_kim"
+  },
+  {
+   "id": "white_noise_heron",
+   "wave": 1,
+   "days": "31-31",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "alien_tick",
+   "wave": 2,
+   "days": "31-35",
+   "gorgeNights": 4,
+   "gorgeKcal": 6305,
+   "resolution": "lingering-at-end",
+   "killer": null
+  }
+ ]
+}

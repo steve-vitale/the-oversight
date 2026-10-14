@@ -1,0 +1,207 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 22,
+ "days": 155,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 3,
+ "collapseClass": "predation",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 14,
+ "gorgeNights": 8,
+ "gorgeKcal": 9477,
+ "rateCurve": {
+  "<3k": {
+   "nights": 13,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 13,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 23,
+   "raidNights": 2,
+   "ratePer100": 8.7,
+   "ripeNights": 7,
+   "rngBlocked": 5,
+   "blockedThin": 0,
+   "blockedGap": 16,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 15,
+   "raidNights": 3,
+   "ratePer100": 20,
+   "ripeNights": 5,
+   "rngBlocked": 2,
+   "blockedThin": 0,
+   "blockedGap": 10,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 105,
+   "raidNights": 9,
+   "ratePer100": 8.6,
+   "ripeNights": 49,
+   "rngBlocked": 40,
+   "blockedThin": 0,
+   "blockedGap": 56,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 9,
+  "3-12k:3": 2,
+  "12-24k:4": 3
+ },
+ "sizedNights": 14,
+ "matchedRule": 14,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 9,
+  "askedKcal": 8759,
+  "takenKcal": 9477,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 4350
+   },
+   {
+    "item": "Fish catch|?",
+    "kcal": 3085
+   },
+   {
+    "item": "Muscadine Grapes|ready",
+    "kcal": 1890
+   },
+   {
+    "item": "Snared meat|?",
+    "kcal": 152
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "lockpick_raccoon",
+   "wave": 1,
+   "days": "44-44",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "villager:theo_lindqvist"
+  },
+  {
+   "id": "moderator",
+   "wave": 2,
+   "days": "44-44",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "moderator",
+   "wave": 2,
+   "days": "45-45",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "white_noise_heron",
+   "wave": 1,
+   "days": "129-130",
+   "gorgeNights": 2,
+   "gorgeKcal": 2000,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "white_noise_heron",
+   "wave": 1,
+   "days": "131-131",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "voice_mimic_radio",
+   "wave": 2,
+   "days": "136-136",
+   "gorgeNights": 1,
+   "gorgeKcal": 1340,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "nightcourt",
+   "wave": 1,
+   "days": "136-136",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "terms_of_service",
+   "wave": 3,
+   "days": "136-136",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "voice_mimic_radio",
+   "wave": 2,
+   "days": "137-137",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "mirrormoth",
+   "wave": 1,
+   "days": "148-148",
+   "gorgeNights": 1,
+   "gorgeKcal": 1615,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "alien_tick",
+   "wave": 2,
+   "days": "148-151",
+   "gorgeNights": 4,
+   "gorgeKcal": 3170,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "alien_tick",
+   "wave": 2,
+   "days": "152-152",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  }
+ ]
+}

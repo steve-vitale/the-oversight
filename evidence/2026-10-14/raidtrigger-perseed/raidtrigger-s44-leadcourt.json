@@ -1,0 +1,117 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 44,
+ "days": 180,
+ "endReason": "survived",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "income",
+ "collapseConfidence": "medium",
+ "raidNightsTotal": 13,
+ "gorgeNights": 2,
+ "gorgeKcal": 1352,
+ "rateCurve": {
+  "<3k": {
+   "nights": 4,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 4,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 22,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 18,
+   "rngBlocked": 18,
+   "blockedThin": 0,
+   "blockedGap": 4,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 25,
+   "raidNights": 3,
+   "ratePer100": 12,
+   "ripeNights": 8,
+   "rngBlocked": 5,
+   "blockedThin": 0,
+   "blockedGap": 17,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 130,
+   "raidNights": 10,
+   "ratePer100": 7.7,
+   "ripeNights": 67,
+   "rngBlocked": 57,
+   "blockedThin": 0,
+   "blockedGap": 63,
+   "blockedMonsters": 2,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 10,
+  "12-24k:4": 3
+ },
+ "sizedNights": 13,
+ "matchedRule": 13,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 2,
+  "askedKcal": 1037,
+  "takenKcal": 1352,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 1032
+   },
+   {
+    "item": "Foraged food (dried)|preserved",
+    "kcal": 320
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "spool",
+   "wave": 3,
+   "days": "132-132",
+   "gorgeNights": 1,
+   "gorgeKcal": 520,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "spool",
+   "wave": 3,
+   "days": "133-133",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  },
+  {
+   "id": "suburb",
+   "wave": 4,
+   "days": "154-154",
+   "gorgeNights": 1,
+   "gorgeKcal": 832,
+   "resolution": "moved-on",
+   "killer": null
+  }
+ ]
+}

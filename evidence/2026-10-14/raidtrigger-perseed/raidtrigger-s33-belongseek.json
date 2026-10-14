@@ -1,0 +1,130 @@
+{
+ "label": "raidtrigger",
+ "policy": "belongseek",
+ "seed": 33,
+ "days": 165,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 3,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 13,
+ "gorgeNights": 7,
+ "gorgeKcal": 8150,
+ "rateCurve": {
+  "<3k": {
+   "nights": 19,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 19,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 71,
+   "raidNights": 9,
+   "ratePer100": 12.7,
+   "ripeNights": 33,
+   "rngBlocked": 24,
+   "blockedThin": 0,
+   "blockedGap": 38,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 45,
+   "raidNights": 2,
+   "ratePer100": 4.4,
+   "ripeNights": 28,
+   "rngBlocked": 26,
+   "blockedThin": 0,
+   "blockedGap": 17,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 30,
+   "raidNights": 2,
+   "ratePer100": 6.7,
+   "ripeNights": 15,
+   "rngBlocked": 13,
+   "blockedThin": 0,
+   "blockedGap": 15,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 2,
+  "3-12k:3": 9,
+  "12-24k:4": 2
+ },
+ "sizedNights": 13,
+ "matchedRule": 13,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 7,
+  "askedKcal": 7377,
+  "takenKcal": 8150,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 4462
+   },
+   {
+    "item": "Muscadine Grapes|ready",
+    "kcal": 2070
+   },
+   {
+    "item": "Fish catch|?",
+    "kcal": 932
+   },
+   {
+    "item": "Snared meat|?",
+    "kcal": 398
+   },
+   {
+    "item": "Muscadine Grapes (dried)|preserved",
+    "kcal": 288
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "callback",
+   "wave": 3,
+   "days": "102-107",
+   "gorgeNights": 6,
+   "gorgeKcal": 7366,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "mirrormoth",
+   "wave": 1,
+   "days": "157-157",
+   "gorgeNights": 1,
+   "gorgeKcal": 784,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "belltoad",
+   "wave": 1,
+   "days": "166-166",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}

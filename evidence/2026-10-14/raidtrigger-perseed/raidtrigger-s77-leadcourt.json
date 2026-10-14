@@ -1,0 +1,151 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 77,
+ "days": 107,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "no-spiral",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 10,
+ "gorgeNights": 2,
+ "gorgeKcal": 8340,
+ "rateCurve": {
+  "<3k": {
+   "nights": 0,
+   "raidNights": 0,
+   "ratePer100": null,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 1,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 1,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 1,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 1,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 105,
+   "raidNights": 10,
+   "ratePer100": 9.5,
+   "ripeNights": 45,
+   "rngBlocked": 35,
+   "blockedThin": 0,
+   "blockedGap": 60,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 10
+ },
+ "sizedNights": 10,
+ "matchedRule": 10,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 8,
+  "askedKcal": 7380,
+  "takenKcal": 8340,
+  "topItems": [
+   {
+    "item": "Foraged food (dried)|preserved",
+    "kcal": 6169
+   },
+   {
+    "item": "Burdock|ready",
+    "kcal": 1440
+   },
+   {
+    "item": "Blackberry|ready",
+    "kcal": 715
+   },
+   {
+    "item": "Aid from Emberhold|?",
+    "kcal": 16
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "reunion",
+   "wave": 4,
+   "days": "99-99",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "gallowdeer",
+   "wave": 1,
+   "days": "106-107",
+   "gorgeNights": 1,
+   "gorgeKcal": 719,
+   "resolution": "lingering-at-end",
+   "killer": null
+  },
+  {
+   "id": "white_noise_heron",
+   "wave": 1,
+   "days": "106-107",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "lingering-at-end",
+   "killer": null
+  },
+  {
+   "id": "eulogy",
+   "wave": 4,
+   "days": "106-107",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "lingering-at-end",
+   "killer": null
+  },
+  {
+   "id": "influencer",
+   "wave": 4,
+   "days": "106-107",
+   "gorgeNights": 1,
+   "gorgeKcal": 810,
+   "resolution": "lingering-at-end",
+   "killer": null
+  },
+  {
+   "id": "gallowdeer",
+   "wave": 1,
+   "days": "108-108",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}

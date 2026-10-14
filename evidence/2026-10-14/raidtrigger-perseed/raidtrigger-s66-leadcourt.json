@@ -1,0 +1,80 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 66,
+ "days": 94,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 9,
+ "gorgeNights": 0,
+ "gorgeKcal": 0,
+ "rateCurve": {
+  "<3k": {
+   "nights": 3,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 3,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 6,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 6,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 8,
+   "raidNights": 1,
+   "ratePer100": 12.5,
+   "ripeNights": 2,
+   "rngBlocked": 1,
+   "blockedThin": 0,
+   "blockedGap": 6,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 78,
+   "raidNights": 8,
+   "ratePer100": 10.3,
+   "ripeNights": 30,
+   "rngBlocked": 22,
+   "blockedThin": 0,
+   "blockedGap": 48,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 8,
+  "12-24k:4": 1
+ },
+ "sizedNights": 9,
+ "matchedRule": 9,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 0,
+  "askedKcal": 0,
+  "takenKcal": 0,
+  "topItems": []
+ },
+ "instrErrors": 0,
+ "episodes": []
+}

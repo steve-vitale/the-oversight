@@ -1,0 +1,104 @@
+{
+ "label": "raidtrigger",
+ "policy": "leadcourt",
+ "seed": 55,
+ "days": 112,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 10,
+ "gorgeNights": 1,
+ "gorgeKcal": 1552,
+ "rateCurve": {
+  "<3k": {
+   "nights": 2,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 2,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 3,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 0,
+   "blockedGap": 3,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 10,
+   "raidNights": 1,
+   "ratePer100": 10,
+   "ripeNights": 4,
+   "rngBlocked": 3,
+   "blockedThin": 0,
+   "blockedGap": 6,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 98,
+   "raidNights": 9,
+   "ratePer100": 9.2,
+   "ripeNights": 42,
+   "rngBlocked": 33,
+   "blockedThin": 0,
+   "blockedGap": 56,
+   "blockedMonsters": 2,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 9,
+  "12-24k:4": 1
+ },
+ "sizedNights": 10,
+ "matchedRule": 10,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 1,
+  "askedKcal": 1351,
+  "takenKcal": 1552,
+  "topItems": [
+   {
+    "item": "Foraged food|?",
+    "kcal": 1552
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "lockpick_raccoon",
+   "wave": 1,
+   "days": "35-35",
+   "gorgeNights": 1,
+   "gorgeKcal": 1552,
+   "resolution": "killed",
+   "killer": "villager:gen_zh3y1ey"
+  },
+  {
+   "id": "mirrormoth",
+   "wave": 1,
+   "days": "35-35",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  }
+ ]
+}

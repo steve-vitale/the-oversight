@@ -1,0 +1,118 @@
+{
+ "label": "raidtrigger",
+ "policy": "belongseek",
+ "seed": 66,
+ "days": 156,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "vests": 0,
+ "maxArc": 3,
+ "maxWave": 4,
+ "collapseClass": "income",
+ "collapseConfidence": "high",
+ "raidNightsTotal": 10,
+ "gorgeNights": 1,
+ "gorgeKcal": 1831,
+ "rateCurve": {
+  "<3k": {
+   "nights": 13,
+   "raidNights": 0,
+   "ratePer100": 0,
+   "ripeNights": 0,
+   "rngBlocked": 0,
+   "blockedThin": 13,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "3-12k": {
+   "nights": 34,
+   "raidNights": 3,
+   "ratePer100": 8.8,
+   "ripeNights": 15,
+   "rngBlocked": 12,
+   "blockedThin": 0,
+   "blockedGap": 19,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  "12-24k": {
+   "nights": 4,
+   "raidNights": 1,
+   "ratePer100": 25,
+   "ripeNights": 4,
+   "rngBlocked": 3,
+   "blockedThin": 0,
+   "blockedGap": 0,
+   "blockedMonsters": 0,
+   "blockedTable": 0
+  },
+  ">24k": {
+   "nights": 106,
+   "raidNights": 6,
+   "ratePer100": 5.7,
+   "ripeNights": 64,
+   "rngBlocked": 58,
+   "blockedThin": 0,
+   "blockedGap": 42,
+   "blockedMonsters": 3,
+   "blockedTable": 0
+  }
+ },
+ "sizeDist": {
+  ">24k:5": 6,
+  "3-12k:3": 3,
+  "12-24k:4": 1
+ },
+ "sizedNights": 10,
+ "matchedRule": 10,
+ "mismatchedRule": 0,
+ "pantryPath": {
+  "draws": 1,
+  "askedKcal": 1443,
+  "takenKcal": 1831,
+  "topItems": [
+   {
+    "item": "Blackberry|ready",
+    "kcal": 975
+   },
+   {
+    "item": "Foraged food|?",
+    "kcal": 856
+   }
+  ]
+ },
+ "instrErrors": 0,
+ "episodes": [
+  {
+   "id": "warranty_caller",
+   "wave": 2,
+   "days": "43-43",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "killed",
+   "killer": "scholar"
+  },
+  {
+   "id": "landlord",
+   "wave": 2,
+   "days": "62-62",
+   "gorgeNights": 1,
+   "gorgeKcal": 1831,
+   "resolution": "moved-on",
+   "killer": null
+  },
+  {
+   "id": "landlord",
+   "wave": 2,
+   "days": "63-63",
+   "gorgeNights": 0,
+   "gorgeKcal": 0,
+   "resolution": "drive-failed",
+   "killer": null
+  }
+ ]
+}
