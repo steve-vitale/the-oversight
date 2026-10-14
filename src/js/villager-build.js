@@ -743,6 +743,8 @@
           const x = (v.npcXp || {})[rid];
           if (x && (x.sheets || []).length) this.villagerResolveLevelUps(rid);
         }
+        // SKILL LESSONS (skill-teaching.js): villagers teach each other human skills that fit their builds.
+        if (this.villagerSkillLessonsDay) this.villagerSkillLessonsDay();
       } catch (e) { warn('villagerBuildDay', e); }
     },
   };

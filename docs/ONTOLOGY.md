@@ -1272,6 +1272,22 @@ Wave-5 signature combat mechanics (Steve 2026-10-11): The Producers — the show
 
 **Consumes:** say, tbDamage, addHealth, audioEvent, tbRefreshTelegraphUI, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, tbPlayerStrike, hasItem, consumeItem, seList, seDef, apTopLane, apFanLane, apAdjustFavor, apClubName, feastedActive, clearFeastBuff
 
+### skill-teaching (`skill-teaching.js`)
+ONE teaching mechanic for human skills, the same for everyone (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way." / "Human skills should be learnable before the system shows up."). A person who knows a skill can teach it to a person who doesn't: villager to player, player to villager, villager to villager. The learner gets the skill at L1 (it levels by use as before). It costs a held conversation (the player) or the day's lesson (a villager pair), works before the System, and credits the teacher's 'teaching' deed. Villagers know their past trade from day one (occupation 'granted' plus knowledge backgrounds, the player's own two background routes). Villagers choose lessons that fit their target build (villager-build.js). The player also learns the track skill a villager learns at the same track levels (tracks.json skillLevels).
+
+**Provides:** skillTeachable(skillId) -> true unless knowledge.json flags the skill teachable:false, skillsKnownBy(who) -> skill ids; who = 'player' or a villager id (the bearer's id = the player), personKnowsSkill(who, skillId) -> boolean, npcSeedSkills(vid) -> villager's background skills from their old life (idempotent), teachableSkills(teacher, learner) -> skill ids the teacher can teach the learner now, canTeachSkill(teacher, learner, skillId) -> {ok, why}, teachSkill(teacher, learner, skillId, opts) -> true if the learner learned it (L1), skillFit(vid, skillId) -> how well a skill fits a villager's target build and tracks, villagerSkillLessonsDay() -> count of villager-to-villager lessons today (daily tick), convoSkillChoices(vid) -> conversation menu choices ("Teach me X?" / "I could show you X."), convoSkillLesson(vid, choiceId) -> {line, you} for a skill_learn:/skill_teach: choice, playerTrackSkills(track, rec) -> name of the track skill the player just learned, or null
+
+**Rules:**
+- one_mechanic: villager->player, player->villager and villager->villager lessons all go through teachSkill (code: teachSkill)
+- pre_system: no systemArrived check anywhere in teaching (code: canTeachSkill)
+- learner_starts_at_l1: a lesson teaches L1; use deepens it (code: teachSkill, game.js gainSkillLaneXP)
+- lesson_costs_time: one lesson per learner per day and one per conversation; the player's lesson spends 3 action ticks like teachPlant (code: canTeachSkill, convoSkillLesson)
+- same_gates_both_ways: trust 15+ and a shared language, whichever side teaches (code: canTeachSkill)
+- data_first: every knowledge skill is teachable unless flagged teachable:false (code: skillTeachable)
+- track_skill_parity: the player learns the next unknown track skill at tracks.json skillLevels, like a villager (code: playerTrackSkills, tracks.js _playerTrackXP)
+
+**Consumes:** Game.data.knowledge, Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.characterGen, state.codex.skills, state.village.npcSkills, state.village.trust, state.village.away, learnSkill(skillId, level, via), npcLearnSkill(vid, id), npcKnowsSkill(vid, sid), creditDeed(who, deedId), villagerTargetBuild(vid), villagerNeedTrack(vid)
+
 ### spawn-knack (`spawn-knack.js`)
 The spawn knack — the System's early touch. Granted before the System's formal arrival (sent ahead), unexplained at grant time but GIVEN — never innate, never "always had" (Steve 2026-10-14). Backstory-rooted via lifeseed memories.
 
