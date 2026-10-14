@@ -151,6 +151,10 @@ async function main() {
       try { said.push(String((msg && (msg.text || msg.msg || msg.message)) || msg || '')); } catch (e) {}
       return origSay(msg);
     };
+    // HP is the JUDGMENT section's subject (below), not this one: pin a
+    // healthy scholar so the fight branch doesn't depend on the 20-day
+    // run's incidental HP (2026-10-14: an upstream RNG shift left 47.6% < 50%).
+    try { const _s = Game.state.scholar; _s.health = Math.max(_s.health || 0, (Game.maxHealth ? Game.maxHealth() : 100) || 100); } catch (e) {}
     // the layer directly (deterministic: no base.daily runs between the
     // injection and the engagement, so the entity cannot drift first)
     gd.gorgeDrive(Game, ctx);
@@ -199,6 +203,8 @@ async function main() {
     const ctx = {};
     let it = 0;
     for (; it < 3 && !(ctx.gorgeEngagements > 0); it++) {
+      // HP judgment is tested in PART 4; pin a healthy scholar here (seed-robust)
+      try { const _s = Game.state.scholar; _s.health = Math.max(_s.health || 0, (Game.maxHealth ? Game.maxHealth() : 100) || 100); } catch (e) {}
       await quietLog(() => gd.policyForRun().daily(Game, ctx));
       if (Game.over) break;
     }
