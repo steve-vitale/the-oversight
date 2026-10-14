@@ -1674,9 +1674,22 @@
         if (d < bestD) { bestD = d; best = m; }
       }
       if (!best) { game.say('Nothing left to throw sand at.'); return false; }
-      best.blind = 2;
+      // GEAR REWRITE (hardlight_knife 2026-10-14): hardlight refracts through
+      // the dust — blind 3 rounds instead of 2.
+      var _blindDur = 2;
+      try {
+        var _eq = (game.state.scholar.equipped || {});
+        var _ws = _eq.melee || _eq.ranged || _eq.weapon;
+        var _wd = _ws ? (game.data.items || []).find(function (i) { return i.id === _ws.itemId; }) : null;
+        var _hk = (_wd && _wd.abilityHooks) || [];
+        if (_hk.some(function (h) { return h.type === 'rewrite' && h.ability === 'pocket_sand'; })) {
+          _blindDur = 3;
+          game.say('(Hardlight refracts through the dust — longer dark.)');
+        }
+      } catch (e) {}
+      best.blind = _blindDur;
       var label = game.encSubject ? game.encSubject(best) : (best.name || 'it');
-      game.say('You fling a handful of grit into ' + label + '\'s eyes. It reels, clawing at its face — half-blind for 2 rounds. (Pocket Sand: attacks at disadvantage.)');
+      game.say('You fling a handful of grit into ' + label + '\'s eyes. It reels, clawing at its face — half-blind for ' + _blindDur + ' rounds. (Pocket Sand: attacks at disadvantage.)');
       return true;
     },
 

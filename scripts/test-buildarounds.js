@@ -55,7 +55,7 @@ console.log('\n3. Buildaround module:');
 const baSrc = fs.readFileSync(path.join(ROOT, 'src/js/buildarounds.js'), 'utf8');
 const hooks = ['onStrikeHit','onStrikeMiss','frenzyMult','onBlocked','unleash','mark','trophyMult',
   'onHeal','feastMult','onMove','onDamaged','dodgeBonus','cartographerMult','socialMult',
-  'onDayTick','onForage','forageMult','damageMult','checkSpearTrigger','checkKnifeTrigger'];
+  'onDayTick','onForage','forageMult','damageMult'];
 for (const h of hooks) {
   ok(baSrc.includes(h + ':'), `module exposes ${h}`);
 }
@@ -123,9 +123,20 @@ console.log('\n7. Gear abilityHooks:');
 const items = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/items.json'), 'utf8'));
 const withHooks = items.filter(i => i.abilityHooks);
 ok(withHooks.length >= 4, `${withHooks.length} items with abilityHooks`);
-for (const iid of ['machete','hunting_spear','phase_blade','hardlight_knife']) {
+const expectedHooks = {
+  machete: ['rewrite','shoulder_check'],
+  hunting_spear: ['rewrite','dead_aim'],
+  phase_blade: ['rewrite','hogtie'],
+  hardlight_knife: ['rewrite','pocket_sand'],
+};
+for (const iid of Object.keys(expectedHooks)) {
   const item = items.find(i => i.id === iid);
-  ok(!!(item && item.abilityHooks), `${iid} has abilityHooks`);
+  const h = item && item.abilityHooks && item.abilityHooks[0];
+  ok(!!h, `${iid} has abilityHooks`);
+  if (h) {
+    ok(h.type === expectedHooks[iid][0] && h.ability === expectedHooks[iid][1],
+       `  ${iid}: ${h.type}/${h.ability} (semantically coherent)`);
+  }
 }
 
 // 8. Synergy hints coverage

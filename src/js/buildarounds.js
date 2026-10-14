@@ -68,8 +68,7 @@
           game.say(`BLOOD FRENZY: ${st.frenzy} consecutive hits — +${st.frenzy * 10}% damage. Don't you dare miss.`);
           try { game.audioEvent('buildaround', { path: 'brawler', id: 'blood_frenzy' }); } catch (e) {}
         }
-        // GEAR: hunting_spear triggers War Cry at 3 hits.
-        try { BA.checkSpearTrigger(game); } catch (e) {}
+
       } catch (e) {}
     },
     onStrikeMiss: function (game) {
@@ -264,40 +263,10 @@
       } catch (e) { return 1; }
     },
 
-    // GEAR TRIGGERS (2026-10-14): items that auto-cast abilities.
-    // hunting_spear: 3 consecutive hits → auto War Cry (free).
-    checkSpearTrigger: function (game) {
-      try {
-        const st = fightState(game);
-        if (!st || (st.frenzy || 0) < 3 || st.spearTriggered) return;
-        const eq = (game.state.scholar.equipped || {});
-        const wslot = eq.melee || eq.ranged || eq.weapon;
-        const wdef = wslot ? (game.data.items || []).find(i => i.id === wslot.itemId) : null;
-        const hooks = (wdef && wdef.abilityHooks) || [];
-        if (hooks.some(h => h.type === 'trigger' && h.ability === 'war_cry')) {
-          st.spearTriggered = true;
-          game.say('(The hunting spear sings — WAR CRY, free.)');
-          try { game.useAbility('war_cry', 'war_cry_shout'); } catch (e) {}
-        }
-      } catch (e) {}
-    },
-    // hardlight_knife: hit for 20+ → auto Pocket Sand (free, once per fight).
-    checkKnifeTrigger: function (game, damage) {
-      try {
-        if (damage < 20) return;
-        const st = fightState(game);
-        if (!st || st.knifeTriggered) return;
-        const eq = (game.state.scholar.equipped || {});
-        const wslot = eq.melee || eq.ranged || eq.weapon;
-        const wdef = wslot ? (game.data.items || []).find(i => i.id === wslot.itemId) : null;
-        const hooks = (wdef && wdef.abilityHooks) || [];
-        if (hooks.some(h => h.type === 'trigger' && h.ability === 'pocket_sand')) {
-          st.knifeTriggered = true;
-          game.say('(The hardlight knife throws its own sand — free Pocket Sand.)');
-          try { game.useAbility('pocket_sand', 'pocket_sand_throw'); } catch (e) {}
-        }
-      } catch (e) {}
-    },
+    // GEAR REWRITES (2026-10-14): item hooks are checked at their ability's
+    // execution point (spear pin in the dead_aim crit path, knife blind in
+    // pocket_sand, machete bleed in shove). No central trigger dispatcher —
+    // each rewrite lives where its verb lives.
 
     // Combined damage multiplier (called from strike path).
     damageMult: function (game, target) {

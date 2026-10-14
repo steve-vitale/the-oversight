@@ -31006,7 +31006,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       let wasCrit = false; // DRAMA B1: crits get the full spectacle
-      if (p.aimed) { d = Math.round(d * 2.5); p.aimed = false; wasCrit = true; this.say('DEAD AIM: patience, then thunder. Critical ×2.5.'); }
+      if (p.aimed) { d = Math.round(d * 2.5); p.aimed = false; wasCrit = true; this.say('DEAD AIM: patience, then thunder. Critical ×2.5.');
+        // GEAR REWRITE (hunting_spear 2026-10-14): the crit pins — spear impales, rooted 1 round.
+        try {
+          const _eq3 = (this.state.scholar.equipped || {});
+          const _ws3 = _eq3.melee || _eq3.ranged || _eq3.weapon;
+          const _wd3 = _ws3 ? (this.data.items || []).find(i => i.id === _ws3.itemId) : null;
+          const _hk3 = (_wd3 && _wd3.abilityHooks) || [];
+          if (_hk3.some(h => h.type === 'rewrite' && h.ability === 'dead_aim') && t && t.alive) {
+            t.rooted = Math.max(t.rooted || 0, 1);
+            this.say('(The spear pins it — rooted 1 round.)');
+          }
+        } catch (e) {} }
       // ABILITY ACTIONS (Steve 2026-10-07): consume take_aim, ambush, haymaker,
       // trade_of_blows, rage, etc. flags set by Game.useAbility(). Each flag
       // is single-use unless noted; the hook narrates and clears.
@@ -31505,15 +31516,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((this.fighterSize(m) || 1) > 1) { this.say(`It's too big to shove — you'd bounce off. (Shove: size-1 monsters only.)`); return false; }
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
-      // GEAR REWRITE (machete 2026-10-14): the machete pulls instead of pushes.
+      // GEAR REWRITE (machete 2026-10-14): the shove carves — bleed on the way past.
       try {
         const _eq = (this.state.scholar.equipped || {});
         const _wslot = _eq.melee || _eq.ranged || _eq.weapon;
         const _wdef = _wslot ? (this.data.items || []).find(i => i.id === _wslot.itemId) : null;
         const _hooks = (_wdef && _wdef.abilityHooks) || [];
         if (_hooks.some(h => h.type === 'rewrite' && h.ability === 'shoulder_check')) {
-          dx = -dx; dy = -dy;
-          this.say('(The machete pulls — drag them into your blade.)');
+          if (m && !m.fled && m.alive) {
+            m.bleed = (m.bleed || 0) + 5;
+            this.say('(The machete carves on the way past — 5 bleed.)');
+          }
         }
       } catch (e) {}
       if (!opts.viaAbility) p.acted = true;
@@ -32717,8 +32730,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try {
           const BA5 = (globalThis.Scattering || {}).buildarounds;
           if (BA5 && typeof BA5.onDamaged === 'function') BA5.onDamaged(this);
-          // GEAR: hardlight_knife triggers Pocket Sand on 20+ hits.
-          if (BA5 && typeof BA5.checkKnifeTrigger === 'function') BA5.checkKnifeTrigger(this, final);
+
         } catch (e) {}
       }
       // LEECH STANCE (break-it abilities 2026-10-10): the data action
