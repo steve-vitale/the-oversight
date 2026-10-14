@@ -260,6 +260,9 @@
       this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
+      // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
+      // own so a missing file only costs the real-date season start.
+      try { this.data.climates = await get('climates.json'); } catch (e) { console.warn('[regions] climates.json: ' + (e && e.message)); this.data.climates = null; }
       try {
         const S = globalThis.Scattering;
         if (S) S.GODPATHS = godpaths;
@@ -303,16 +306,26 @@
       const rs = (this.data && Array.isArray(this.data.regions)) ? this.data.regions : [];
       return rs.filter(r => r && (r.status === 'playable' || r.status === 'rich'));
     },
-    // pickLandingRegion: debug override first (Game.debugRegion, set by the
-    // ?region= URL hook or a test), else a random PLAYABLE region. With one
-    // playable region no RNG is drawn, so today's runs are unchanged.
-    pickLandingRegion() {
+    // pickLandingRegion(originRegionId): debug override first
+    // (Game.debugRegion, set by the ?region= URL hook or a test); then, on a
+    // device's FIRST run, the player's origin region or the nearest playable
+    // one (world.js firstRunLanding; Steve 2026-10-14: "Maybe first run let
+    // them land in the origin they choose a character from. Random after.");
+    // else a random PLAYABLE region. With one playable region no RNG is
+    // drawn, so today's runs are unchanged. Sets this._landingWhy =
+    // {why: 'debug'|'first_run_origin'|'random', via?} for region_start.
+    pickLandingRegion(originRegionId) {
       const dbg = this.debugRegion && this.regionDef(this.debugRegion);
       if (dbg) {
-        if ((dbg.landingVariants || []).length) return dbg;
+        if ((dbg.landingVariants || []).length) { this._landingWhy = { why: 'debug' }; return dbg; }
         console.warn('[regions] debugRegion ' + this.debugRegion + ' has no landing variants (status ' + dbg.status + '); ignored');
       }
       const pool = this.playableRegions();
+      if (pool.length && this.isFirstRun && this.isFirstRun()) {
+        const fr = this.firstRunLanding(originRegionId, pool);
+        if (fr) { this._landingWhy = { why: 'first_run_origin', via: fr.via }; return fr.region; }
+      }
+      this._landingWhy = { why: 'random' };
       if (!pool.length) return this.regionDef(DEFAULT_REGION_ID);
       if (pool.length === 1) return pool[0];
       return pool[Math.floor(Math.random() * pool.length)];
@@ -416,18 +429,24 @@
       return SCAVENGED.find(s => s.id === id) || null;
     },
     // season(day): the landing region's season on that day (default today).
-    // One world calendar: day 1 is world day-of-year climate.startDayOfYear
-    // (default 0 = the first listed season's first day); the southern
-    // hemisphere runs half a year offset. -> {id, temp, weather, dayOfSeason,
-    // seasonDays, dayOfYear, yearDays, hemisphere, region}
+    // Day 1 is state.calendarStart.doy: the real-world season when the run
+    // started (world.js calendarStartFor; Steve 2026-10-14: "Whenever the
+    // player starts, should be the season the game starts in."). Saves from
+    // before that (no calendarStart) keep the old rule: day 1 is world
+    // day-of-year climate.startDayOfYear (default 0 = the first listed
+    // season's first day), the southern hemisphere half a year offset.
+    // Seasons are the region's own, else its climates.json template's.
+    // -> {id, temp, weather, dayOfSeason, seasonDays, dayOfYear, yearDays,
+    // hemisphere, region}
     season(day) {
       const r = this.activeRegion() || {};
-      const seasons = ((r.climate || {}).seasons) || [];
+      const seasons = ((r.climate || {}).seasons) || (this.regionCalendar ? this.regionCalendar(r).seasons : null) || [];
       const d = day != null ? day : ((this.state && this.state.scholar && this.state.scholar.day) || 1);
       if (!seasons.length) return { id: 'none', temp: null, weather: null, dayOfSeason: 0, seasonDays: 0, dayOfYear: 0, yearDays: 0, hemisphere: r.hemisphere || 'north', region: r.id || null };
       const yearDays = seasons.reduce((t, s) => t + (s.days || 0), 0) || 1;
+      const cs = this.state && this.state.calendarStart;
       const offset = r.hemisphere === 'south' ? Math.floor(yearDays / 2) : 0;
-      const start = ((r.climate || {}).startDayOfYear) || 0;
+      const start = (cs && typeof cs.doy === 'number' && cs.region === r.id) ? cs.doy - offset : (((r.climate || {}).startDayOfYear) || 0);
       let doy = (((start + d - 1 + offset) % yearDays) + yearDays) % yearDays;
       let acc = 0;
       for (const s of seasons) {
@@ -2035,7 +2054,9 @@
       // REGIONS (docs/WORLD-REGIONS.md): region first (a random PLAYABLE
       // region, or the Game.debugRegion override), then a landing variant
       // from that region. One playable region draws no RNG.
-      const landRegion = this.pickLandingRegion();
+      const landRegion = this.pickLandingRegion((parsed.regions || [])[0]);
+      const landingWhy = this._landingWhy || { why: 'random' };
+      try { if (this.noteRunStart) this.noteRunStart(); } catch (e) { console.warn('[regions] noteRunStart: ' + (e && e.message)); }
       const locPool = this.landingPool(landRegion);
       const loc = (locationId && (this.data.locations || []).find(l => l.id === locationId))
         || locPool[Math.floor(Math.random() * locPool.length)]
@@ -2605,9 +2626,17 @@
       // REGIONS: the world registry (world.js: regions known/visited, kin
       // scattered across the world) and the run-start region telemetry.
       try { if (this.initWorld) this.initWorld(); } catch (e) { console.warn('[regions] initWorld: ' + (e && e.message)); }
+      // REAL-DATE SEASON: day 1 is the real-world season right now in the
+      // landing region (saved as state.calendarStart). One Date.now() call,
+      // reused as the telemetry timestamp, so the sim harness's counting
+      // clock ticks exactly as before.
       try {
+        const now = Date.now();
+        try { this.state.calendarStart = this.calendarStartFor ? this.calendarStartFor(this.activeRegion(), now) : null; }
+        catch (e) { this.state.calendarStart = null; console.warn('[regions] calendarStart: ' + (e && e.message)); }
         const se = this.season();
-        this.tele('region_start', { region: this.state.region, landing: this.state.startLocation, season: se.id, hemisphere: se.hemisphere });
+        this.tele('region_start', { t: now, region: this.state.region, landing: this.state.startLocation, season: se.id, hemisphere: se.hemisphere,
+          why: landingWhy.why, via: landingWhy.via || null, calendarDate: (this.state.calendarStart || {}).date || null });
       } catch (e) { console.warn('[regions] region_start telemetry: ' + (e && e.message)); }
 
       return this.status();
@@ -41139,7 +41168,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.state.telemetry = this.state.telemetry || [];
       const s = this.state.scholar || {};
       this.state.telemetry.push(Object.assign({
-        t: Date.now(), day: s.day || 0, part: DAY_PARTS[this.dayPart] || '?', type,
+        t: (data && typeof data.t === 'number') ? data.t : Date.now(), day: s.day || 0, part: DAY_PARTS[this.dayPart] || '?', type,
         kcal: Math.round(s.kcal || 0), hp: Math.round(s.health || 0),
         packKcal: (this.state.scholar ? this.state.scholar.inventory.reduce((t, i) => t + (i.units || 0) * (i.kcalEach || 0), 0) : 0),
         pantry: Math.round(this.state.village ? this.state.village.pantryKcal : 0),

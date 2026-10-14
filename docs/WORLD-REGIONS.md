@@ -7,6 +7,11 @@
 > validator, the seams in the inventory and the origin vocabulary are built.
 > Adding a region is now data only: see **§11**. Proof:
 > `scripts/test-region-engine-20261014.js`.
+>
+> **Follow-ups (2026-10-14): DONE.** First-run landing (Q1), real-date
+> season and climate calendars (Q4): `src/data/climates.json`,
+> `world.js` (`firstRunLanding`, `regionCalendar`, `calendarStartFor`).
+> Proof: `scripts/test-region-start-20261014.js`.
 
 > "Please provide muse scaffolding for establishing the rest of the nations as
 > starting regions and places that can be accessed. This also necessitates
@@ -316,18 +321,42 @@ the existing `confidence` and `sources` fields, and mark anything uncertain.
 specific (a market, a school, a clinic, a bus depot); no stereotype props.
 Religious sites appear only as quiet ruins, never as loot pinatas.
 
-## 10. Open questions for Steve
+## 10. Questions for Steve
 
-1. **Random landing everywhere from run 1,** or does a new player land
-   somewhere familiar first (e.g. their origin's region) and later runs go
-   random? A random landing from run 1 is the canon; familiar-first is gentler.
-2. **The Taken vs the scattered:** both exist (KIN.md's Taken plus your
-   "split up across the world")? This design keeps both: scattered kin can be
-   found on expeditions; the Taken come home only in THE HOSTS.
-3. **Expeditions:** a temporary trip (go, come back) or relocation (move your
-   village)?
-4. **Does the region change the year?** A tropical wet/dry cycle instead of
-   four seasons changes pacing. Is that OK?
+1. **ANSWERED.** Random landing everywhere from run 1, or familiar first?
+   Steve: "Maybe first run let them land in the origin they choose a
+   character from. Random after."
+   **Built:** a device's first run lands in the player's origin region when
+   it is playable; otherwise the nearest playable region (same
+   `climateFamily`, then same continent, the origin's neighbors first, then
+   `na_eastern_woodlands`). Later runs are random among playable regions.
+   `Game.debugRegion` / `?region=` still wins. "First run" = no run counted
+   under localStorage `oversight.runs.v1` and no save or tombstone on the
+   device (so people who already played aren't treated as new). The meta
+   store (`oversight.meta.v1`) is not used: it promises newGame never reads
+   it. Telemetry `region_start.why` = `first_run_origin` (with `via`:
+   `origin`/`climate`/`continent`/`default`/`no_origin`) | `random` |
+   `debug`. Today only the eastern woodlands is playable, so every first run
+   still lands there.
+2. **ANSWERED.** The Taken vs the scattered: Steve: "Yes both groups exist."
+3. **ANSWERED (not built here).** Expeditions: Steve: "Expedition is leaving
+   your village as a nomad to find remaining family. That should be another
+   bonus ending. Seek out and find family according to backstory and where
+   they went."
+4. **ANSWERED.** Does the region change the year? Steve: "Yes that's okay to
+   run a wet/dry year. Whenever the player starts, should be the season the
+   game starts in. Like it happened right when they started playing, for
+   immersion."
+   **Built:** climate calendars per `climateFamily` in
+   `src/data/climates.json` (four-season, continental, Mediterranean,
+   boreal long winter, arid hot/cool, savanna wet/dry, tropical wet/dry,
+   monsoon hot/wet/cool, highland wet/dry, summer-rain wet/dry). Day 1's
+   season is the real-world season (UTC date) at run start for the landing
+   region, saved as `state.calendarStart`. Seasons then advance with game
+   days. Saves from before this keep the old rule (day 1 = the first day of
+   spring). The eastern woodlands' weather tables are unchanged, so only
+   the season label moves. Same 16 seeds × 60 days, capable bot: identical
+   runs (`evidence/2026-10-14/region-start.md`).
 
 ## 11. How to add a region (Muse checklist)
 
@@ -365,8 +394,10 @@ hazard}` (same schema as today's 28).
 | `status` | `stub` → `playable` (only once the validator passes) → `rich` | `playableRegions`, `pickLandingRegion` |
 | `biome` | the biomes.json id from step 2 | `biome()` |
 | `gen` | base map numbers; a landing variant's own `gen` wins | `locParams` |
-| `climate.seasons[]` | `{id, days, temp, note, weather:{kind: p}}`; days add to 365; each weather table sums to 1. `clear/rain/cold` have effects today; other kinds (`heat`, `storm`…) are rolled and stored but have no effect yet | `season()`, `rollWeather()` (endDay) |
-| `climate.startDayOfYear` | optional; day 1's world day-of-year (default 0). Southern hemisphere is offset half a year automatically | `season()` |
+| `climate.calendar` | a `src/data/climates.json` calendar id (default: `familyCalendar[climateFamily]`). Gives the month map (real month → season) and, if the region lists no seasons, the seasons too. Every stub already names one | `regionCalendar`, `calendarStartFor` |
+| `climate.seasons[]` | optional override of the calendar's seasons: `{id, days, temp, note, weather:{kind: p}}`, in year order; days add to 365; each weather table sums to 1; ids must match the calendar's month map. `clear/rain/cold` have effects today; other kinds (`heat`, `storm`…) are rolled and stored but have no effect yet | `season()`, `rollWeather()` (endDay) |
+| `climate.months` | optional: 12 season ids, Jan..Dec, in this region's own (local) frame. Overrides the calendar's month map. Calendar month maps are written for the north; a southern region reads them six months on | `regionCalendar` |
+| `climate.startDayOfYear` | legacy: day 1's day-of-year for saves from before the real-date start (and regions with no month map). New runs start on the real-world season | `season()` |
 | `fauna.animals` | every animal id that can spawn here | `initTileWildlife` |
 | `fauna.add` / `fauna.remove` | ids added to / removed from that pool | `regionAnimalPool` |
 | `fauna.density` | multiplies spawn counts (1 = today) | `initTileWildlife` |
@@ -391,6 +422,12 @@ hazard}` (same schema as today's 28).
 `characterGen.originKeywords[<keyword>]` emits a tag listed in this
 region's `originTags`. Familiarity follows automatically: same region =
 local, same `climateFamily` = visitor, else stranger.
+
+**6b. Climate calendar.** Most regions only need `climate.calendar` (already
+set on every stub). To write a new calendar, add it to
+`src/data/climates.json`: seasons in year order (days add to 365, weather
+sums to 1) and a 12-month `months` map (northern frame) where each season is
+one unbroken run of months, in season order. The validator checks all of it.
 
 **7. Validate:**
 
