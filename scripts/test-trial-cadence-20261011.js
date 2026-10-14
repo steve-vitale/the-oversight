@@ -81,7 +81,10 @@ function makeEligible(Game) {
   // ---------- 4. completion: cooldown, integ, gift, synergy ----------
   makeEligible(Game);
   const s = Game.state.scholar;
-  s.abilities = [{ id: 'mediator', name: 'Mediator', level: 1, xp: 0 }]; // one synergy leg held
+  // ABILITY LANES (2026-10-14): mediator/diplomat are human skills now and
+  // never System gifts; the synergy-aware lead is shown on a magic pair
+  // (cornered_fury: adrenaline_control + cornered_rat).
+  s.abilities = [{ id: 'adrenaline_control', name: 'Adrenaline Control', level: 1, xp: 0 }]; // one synergy leg held
   s.synergies = [];
   const integBefore = s.integration;
   const vRawBefore = (Game.state.village || {}).viewership; // may be null
@@ -96,13 +99,13 @@ function makeEligible(Game) {
   // PICK 1 OF 3 (Steve 2026-10-14): the trial now offers a choice sheet led
   // by the synergy-aware pick, instead of granting it directly.
   const sheet = (s.abilityChoices || []).map(c => c.id);
-  ok(sheet.length === 3 && sheet[0] === 'diplomat', 'trial offers 1 of 3, led by the synergy-aware pick (diplomat)', sheet.join(','));
-  Game.chooseAbility('diplomat');
+  ok(sheet.length === 3 && sheet[0] === 'cornered_rat', 'trial offers 1 of 3, led by the synergy-aware pick (cornered_rat)', sheet.join(','));
+  Game.chooseAbility('cornered_rat');
   const got = (s.abilities || []).map(a => a.id);
-  ok(got.includes('diplomat'), 'choosing the lead pick grants diplomat', got.join(','));
+  ok(got.includes('cornered_rat'), 'choosing the lead pick grants cornered_rat', got.join(','));
   // discovery itself needs uses (checkSynergyDiscovery attempt windows) —
   // the gift's job is completing the legs. Assert the pairing is co-held.
-  ok(got.includes('mediator') && got.includes('diplomat'),
+  ok(got.includes('adrenaline_control') && got.includes('cornered_rat'),
     'synergy legs co-held after gift (discovery follows from play)', got.join(','));
   // the moment: recorded with real text, not undefined
   const moments = pg.moments || [];

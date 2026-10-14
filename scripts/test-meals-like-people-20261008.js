@@ -149,7 +149,10 @@ const memNotes = (Game, v, id, rx) => ((v.memory || {})[id] || []).filter(m => r
     const v = freshGame(Game);
     const all = ids(Game, v);
     // pantry: ONLY spoiled food
-    v.pantry = [{ name: 'Gray mush', kcalEach: 300, units: 80, spoilDay: day() - 1, safe: true, kg: 0.3, foodKind: 'plant', foodState: 'raw' }];
+    // spoilDay well past: ABILITY LANES (2026-10-14) — a player who knows
+    // preserve_food now carries preservation_instinct (+2 spoilage days per
+    // level), so 1-day-old stores can legitimately still keep.
+    v.pantry = [{ name: 'Gray mush', kcalEach: 300, units: 80, spoilDay: day() - 20, safe: true, kg: 0.3, foodKind: 'plant', foodState: 'raw' }];
     for (const id of all) Game.npcNeeds(id).hunger = 95;
     Math.random = () => 0.4; // < 0.5: spoiled-gut roll lands
     Game.villageEats();

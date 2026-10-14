@@ -93,6 +93,11 @@ const check = (name, cond, detail) => {
   });
   Game.state.scholar.abilities = stripMed(Game.state.scholar.abilities);
   Game.state.scholar.backgroundAbilities = stripMed(Game.state.scholar.backgroundAbilities);
+  // ABILITY LANES (2026-10-14): triage/field_medicine/herbal_remedy are now
+  // owned by knowing wound_care / herbal_medicine — strip those skills too.
+  const cxSkills = (Game.state.codex && Game.state.codex.skills) || {};
+  const savedMedSkills = { wound_care: cxSkills.wound_care, herbal_medicine: cxSkills.herbal_medicine };
+  delete cxSkills.wound_care; delete cxSkills.herbal_medicine;
   const benched = [];
   const v = Game.state.village;
   for (const id of (v.roster || [])) {
@@ -113,6 +118,7 @@ const check = (name, cond, detail) => {
   // restore
   Game.state.scholar.abilities = savedAbilities;
   Game.state.scholar.backgroundAbilities = savedBgAbilities;
+  for (const k of Object.keys(savedMedSkills)) if (savedMedSkills[k]) cxSkills[k] = savedMedSkills[k];
   for (const [p, wasDead] of benched) p.dead = wasDead;
 
   console.log(`\nwounds proof: ${pass} passed, ${fail} failed`);

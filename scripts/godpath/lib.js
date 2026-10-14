@@ -85,10 +85,21 @@ function abilityIds(Game) {
 
 // giveAbility: test-only grant that BYPASSES offers but RESPECTS slot count
 // unless {force:true}. Returns true if granted.
+// ABILITY LANES (2026-10-14): a skill-lane id (human competence) is taught
+// as its codex skill at o.level (never slotted), the way the game owns it.
 function giveAbility(Game, id, o) {
   o = o || {};
   const s = Game.state.scholar;
   s.abilities = s.abilities || [];
+  if (Game.isSkillLane && Game.isSkillLane(id)) {
+    const sid = Game.abilitySkillId(id);
+    Game.state.codex.skills = Game.state.codex.skills || {};
+    const cur = Game.state.codex.skills[sid];
+    const lvl = Math.min(3, o.level || 1);
+    if (!cur || (cur.level || 0) < lvl) Game.state.codex.skills[sid] = { level: lvl, learnedDay: s.day || 0, via: 'test' };
+    try { Game.recomputeActiveSynergies(); } catch (e) { console.warn('giveAbility synergy recompute', e); }
+    return true;
+  }
   if (abilityIds(Game).includes(id)) return true;
   const cap = Game.abilitySlots ? Game.abilitySlots() : 6;
   if (!o.force && s.abilities.length >= cap) return false;

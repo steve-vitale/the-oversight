@@ -28,7 +28,10 @@
   function baPathCount(game, path) {
     try {
       // An evolved ability counts as its root (evolvedFrom keeps the lineage).
-      const held = (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
+      // ABILITY LANES (2026-10-14): known skill-lane abilities (a human
+      // haymaker, ambush...) still count toward their path — one helper.
+      const held = (typeof game.ownedAbilityIds === 'function') ? game.ownedAbilityIds()
+        : (game.state.scholar.abilities || []).map(a => (a && (a.evolvedFrom || a.id)) || a);
       const data = game.data.abilities || [];
       return held.filter(id => {
         const def = data.find(d => d.id === id);

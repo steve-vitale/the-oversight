@@ -22,8 +22,10 @@
 //     game.recomputeActiveSynergies, game.say, game.sysSay, game.tele
 // rules:
 //   - Six-slot law: full slots = honest refusal copy, never silent, never overflow.
-//   - Human skills are never granted — the pool is unlock.type === 'trial',
-//     which is alien-ability-only (same lane as the villager kit grants).
+//   - Ability lanes (2026-10-14): trial abilities that are human
+//     competences (lane 'skill': intimidating_presence, gossip_network,
+//     peacemaker, eagle_eye, evidence_board) are TAUGHT as codex skills via
+//     teachAbilitySkill; only magic trials are System grants (slot law).
 //   - Deterministic: same deeds -> same grants. The data picks the ability;
 //     this code never picks randomly.
 //   - Longsim abilities r4 2026-10-12 (Steve: figure it out yourself): these
@@ -83,6 +85,16 @@
         const def = this.trialGrantFor(trialKey);
         if (!def) return null;
         if (this.hasAbility && this.hasAbility(def.id)) return null; // already held
+        // ABILITY LANES (2026-10-14): a human competence earned by doing is
+        // a SKILL — taught now (no System needed, no slot), honestly
+        // narrated by learnSkill. Only magic waits on the System and slots.
+        if (this.isSkillLane && this.isSkillLane(def.id)) {
+          if (this.teachAbilitySkill(def.id, 1, 'trial')) {
+            try { this.tele('skill_taught_deed', { id: def.id, via: 'trial_deed' }); } catch (eT) { console.warn('[lanes] tele', eT); }
+            return def.id;
+          }
+          return null;
+        }
         if (!this.state.systemArrived) return 'pending';
         s.abilities = s.abilities || [];
         const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;

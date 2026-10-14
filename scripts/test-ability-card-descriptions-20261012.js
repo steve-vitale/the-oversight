@@ -70,7 +70,9 @@ ok('unknown target fallback', MOD.describe({ target: 'zzz.foo', op: 'multiply', 
 // ---- 3. renamed abilities: names/flavor match mechanics ----
 const pf = byId['pathfinder'];
 ok('pathfinder renamed (exploration)', pf[0].name === 'Tireless Stride', pf[0].name);
-ok('pathfinder renamed (latent_knack)', pf[1].name === 'Waywise', pf[1].name);
+// ABILITY LANES 2026-10-14: the Waywise knack merged into the one
+// pathfinder entry (a skill); its name survives as knackName.
+ok('pathfinder Waywise name kept as knackName', pf[0].knackName === 'Waywise', pf[0].knackName);
 for (const p of pf) {
   ok(`no lost-flavor in ${p.pool}`, !/never been lost|don't get lost|know the way/i.test(p.description), p.description.slice(0, 60));
 }

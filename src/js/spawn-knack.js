@@ -46,7 +46,16 @@
 
     // knackDef: the data definition for a knack id.
     knackDef(id) {
-      return (this.data.abilities || []).find(a => a.id === id && a.unlock && a.unlock.type === 'latent_knack') || null;
+      return this.knackPool().find(a => a.id === id) || null;
+    },
+
+    // knackPool: the latent-knack abilities. ABILITY LANES (2026-10-14):
+    // knacks are magic — skill-lane entries (Waywise/Still Hands/Storm-ear
+    // merged into human skills) are out; System abilities that merged a
+    // knack (night_eyes, iron_stomach <- iron_gut) are in via alsoKnack.
+    knackPool() {
+      return (this.data.abilities || []).filter(a => a && a.lane !== 'skill'
+        && ((a.unlock && a.unlock.type === 'latent_knack') || a.alsoKnack));
     },
 
     // knackChoicesFor: 3 early-touch choices tied to the character's lifeseed.
@@ -54,7 +63,7 @@
     // aimed its early gift at what you'd reach for); the third is wild
     // (a real choice, not a menu).
     knackChoicesFor(char) {
-      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'latent_knack');
+      const all = this.knackPool();
       if (!all.length) return [];
       const ls = (char && char.lifeseed) || {};
       const origins = Object.keys(ls.skillOrigins || {});
@@ -77,8 +86,8 @@
       }
       return choices.slice(0, 3).map(k => ({
         id: k.id,
-        name: k.name,
-        description: k.description,
+        name: k.knackName || k.name,
+        description: k.knackDescription || k.description,
         memory: this.fillKnackMemory(k, ls),
       }));
     },
@@ -127,7 +136,7 @@
         for (const vid of roster) {
           if (v.npcKnacks[vid]) continue;
           const vp = this.vpOf ? this.vpOf(vid) : null;
-          const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'latent_knack');
+          const all = this.knackPool();
           if (!all.length) continue;
           const ls = (vp && vp.lifeseed) || {};
           const origins = Object.keys(ls.skillOrigins || {});
@@ -161,7 +170,7 @@
         still_hands: `watched ${first} stitch a wound in the dark. Hands didn't shake once.`,
         pathfinder: `${first} never gets lost. Walks like the ground tells them where to go.`,
         beast_calm: `that stray dog — the one that bit two people — lets ${first} touch it.`,
-        iron_gut: `${first} ate something last month that should've killed them. They're fine.`,
+        iron_stomach: `${first} ate something last month that should've killed them. They're fine.`,
         night_eyes: `${first} sees in the dark. Not well — but better than you. Better than me.`,
       };
       const line = seen[knackId];

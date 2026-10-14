@@ -27,7 +27,9 @@ console.log('=== Build-around Coherency Proof ===\n');
 // 1. Role classification
 console.log('1. Role classification:');
 const abilities = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8'));
-ok(abilities.length === 118, `118 abilities (got ${abilities.length})`);
+// 118 -> 115 (ability lanes 2026-10-14): duplicate ids night_eyes/pathfinder
+// merged, iron_gut knack merged into iron_stomach (Steve's exec call).
+ok(abilities.length === 115, `115 abilities (got ${abilities.length})`);
 ok(abilities.every(a => a.role), 'all have role');
 ok(abilities.every(a => a.slotRole), 'all have slotRole');
 const payoffs = abilities.filter(a => a.role === 'payoff');

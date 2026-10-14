@@ -532,7 +532,7 @@ Foraging resolver. Tile + biome + day yields plant yield from plants.json + biom
 ### modifier-pipeline (`engine/modifiers.js`)
 The scalability core. Every computed value resolves base -> collect modifiers -> apply adds, then multiplies -> final.
 
-**Provides:** resolve(base, target, modifiers, context), checkCondition(cond, ctx), levelOf(entry), scaledValue(m, level), describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe), collectModifiers(scholar, abilitiesData), hasAbility(scholar, id), abilityLevel(scholar, id), collectKnowledgeModifiers(codexSkills, knowledgeData), hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
+**Provides:** resolve(base, target, modifiers, context), checkCondition(cond, ctx), levelOf(entry), scaledValue(m, level), describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe), collectModifiers(scholar, abilitiesData), hasAbility(scholar, id), abilityLevel(scholar, id), ownedEntries(scholar)        (slots + background + skill-lane abilities known via codex skills), collectKnowledgeModifiers(codexSkills, knowledgeData), hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
 
 **Rules:**
 - wildcard_target_all: modifiers with target 'all' apply to every resolution target (code: resolve)
