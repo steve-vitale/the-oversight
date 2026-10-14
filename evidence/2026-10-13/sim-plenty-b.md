@@ -45,3 +45,9 @@ With feasts working, the village *feels* more like a village: Lamar opens the pa
 
 ## Wall numbers
 national 9/16 (5 base, 4 armed) · table 2/16 (0 base, 2 armed — first table appearances on this road) · wins 0/16 · wave-4 unlocks 14/16 · wave-5 unlocks 5/16 (all armed) · median survival 87d baseline / 78d armed · vests 0.
+
+## Audit correction (2026-10-13, main-agent review)
+The GO judgment above mishandled the wall-metric guardrail two ways:
+1. **Wrong baseline number.** The results table reports baseline national as 5/8; the raw sweep JSON (`plentyb-sweep.json`) shows 6/8 leadcourt rows with national=1. The armed side is correctly 4/8. The regression is **two runs (6→4), not one**.
+2. **Improper dismissal.** "1-run delta is noise" is a post-hoc re-scoring of a pre-registered guardrail ("national/table/wins/vests not worse than baseline"), which MEASUREMENT.md §14 prohibits. A guardrail miss is a miss; doubts about the metric belong in metric review, not in a parenthetical.
+**Corrected record:** guardrail VIOLATED on national (6/8 → 4/8); PASSED on table (0→2), wins (0/0), vests (0/0), wave-4 unlock (7/7). The arm is not reverted — the primary metric (plenty path, first wave-5 unlocks, first table appearances) is real and the wall's deepest metrics improved — but the national cost is now an open measurement question, not a dismissed one. Open: does the feast layer trade national reach for table reach, or is 6→4 seed noise? Needs a larger-seed follow-up with national as a primary-tracked metric. Filed to sim-findings.md.
