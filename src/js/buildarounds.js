@@ -295,9 +295,93 @@
         m *= BA.frenzyMult(game);
         m *= BA.trophyMult(game, target);
         m *= BA.feastMult(game);
+        m *= BA.crimsonGodMult(game);
         return m;
       } catch (e) { return 1; }
     },
+
+    // RED HARVEST: crits heal 50% of damage dealt
+    redHarvestHeal: function (game, damage) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('red_harvest')) return 0;
+        return Math.round(damage * 0.5);
+      } catch (e) { return 0; }
+    },
+    // CRIMSON GOD: every hit is a crit (2x)
+    crimsonGodMult: function (game) {
+      try {
+        if (!game.hasAbility || !game.hasAbility('crimson_god')) return 1;
+        return 2.0;
+      } catch (e) { return 1; }
+    },
+    // GOD PATH PROGRESSION (Steve 2026-10-14)
+    // All systems feed the god meter: abilities, synergies, gear, sentimental gear.
+    
+    godProgress: function (game, path) {
+      try {
+        const s = game.state.scholar;
+        s.godPath = s.godPath || {};
+        s.godPath[path] = s.godPath[path] || { points: 0, unlocked: false };
+        return s.godPath[path];
+      } catch (e) { return { points: 0, unlocked: false }; }
+    },
+    
+    addGodPoints: function (game, path, points, reason) {
+      try {
+        const prog = this.godProgress(game, path);
+        if (prog.unlocked) return prog;
+        prog.points = Math.min(100, prog.points + points);
+        if (prog.points >= 100 && !prog.unlocked) {
+          prog.unlocked = true;
+          const paths = game.data.godpaths ? game.data.godpaths.paths : {};
+          const pdef = paths[path];
+          if (pdef) {
+            game.say(pdef.name.toUpperCase() + ' GOD PATH COMPLETE!');
+            game.say('Unlocked: ' + pdef.godAbility + ' — ' + pdef.godDescription);
+            const scholar = game.state.scholar;
+            if (!scholar.abilities.includes(pdef.godAbility)) {
+              scholar.abilities.push(pdef.godAbility);
+            }
+            try { game.audioEvent('godpath', { path: path }); } catch (e) {}
+          }
+        }
+        return prog;
+      } catch (e) { return { points: 0, unlocked: false }; }
+    },
+    
+  // FUSION SYSTEM (Steve 2026-10-14): abilities combine into god abilities.
+  // Luck: finding the components. Cleverness: knowing what to fuse.
+  
+  availableFusions: function (game) {
+    try {
+      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
+      const has = (id) => game.hasAbility && game.hasAbility(id);
+      return fusions.filter(f => {
+        if (has(f.id)) return false;
+        return f.components.every(c => has(c));
+      });
+    } catch (e) { return []; }
+  },
+  
+  fuse: function (game, fusionId) {
+    try {
+      const fusions = game.data.fusions ? game.data.fusions.fusions : [];
+      const f = fusions.find(x => x.id === fusionId);
+      if (!f) return false;
+      const has = (id) => game.hasAbility && game.hasAbility(id);
+      if (!f.components.every(c => has(c))) {
+        game.say(`Fusion failed: missing components for ${f.name}.`);
+        return false;
+      }
+      if (has(f.id)) return false;
+      const scholar = game.state.scholar;
+      scholar.abilities = scholar.abilities.filter(a => !f.components.includes(a));
+      scholar.abilities.push(f.id);
+      game.say(`${f.name.toUpperCase()}! ${f.flavor}`);
+      try { game.audioEvent('fusion', { id: f.id, tier: f.tier }); } catch (e) {}
+      return true;
+    } catch (e) { return false; }
+  },
   };
 
   // Export
