@@ -134,6 +134,31 @@
   // "Pilot" = the alien wearing the human sleeve. They are PEOPLE, not monsters.
   var COMBAT_PILOTS = ['vex_marlowe', 'countess_sable', 'rax_dentist', 'pip_quindle', 'sarge', 'dr_fenwick', 'old_tam'];
 
+  // GALACTIC CAST STAGES 3-4 (audit 2026-10-14; handoff in
+  // evidence/2026-10-11/galactic-cast.md): the encounter system drives the
+  // cross-layer cast registry past stage 2. Only the five cast personae
+  // (CAST_PERSONAS) are tracked. KNOWLEDGE GATE: a stage-0 persona is never
+  // advanced by a fight with a stranger — castKnows() would then render a
+  // name the player never learned. They reach 3 when the player knows who
+  // they are (heard on the show, or the alien reveal).
+  function _castAdvance(self, pid, stage, why) {
+    try {
+      if (!self.advanceCastStage || !self.CAST_PERSONAS || self.CAST_PERSONAS.indexOf(pid) < 0) return;
+      var knows = (self.castKnows && self.castKnows(pid)) || (self.apKnowsAlien && self.apKnowsAlien(pid));
+      if (!knows) return;
+      self.advanceCastStage(pid, stage, why);
+    } catch (e) {
+      try { console.warn('[galactic-cast] advance failed', pid, stage, e && e.message); } catch (e2) { /* no console */ }
+    }
+  }
+  function _castFlag(self, pid, flag, val) {
+    try {
+      if (self.castFlag && self.CAST_PERSONAS && self.CAST_PERSONAS.indexOf(pid) >= 0) self.castFlag(pid, flag, val);
+    } catch (e) {
+      try { console.warn('[galactic-cast] flag failed', pid, flag, e && e.message); } catch (e2) { /* no console */ }
+    }
+  }
+
   var methods = {
     // ---------- state ----------
     apState: function () {
@@ -193,6 +218,8 @@
       }
       // CODEX (Steve 2026-10-08): the book catches up to the truth.
       try { this.apCodexEntry(pid); } catch (e) {}
+      // GALACTIC CAST: a revealed persona has been faced (stage 3).
+      _castAdvance(this, pid, 3, 'persona revealed');
     },
 
     // ---------- EXCLUSIVE POOL: human-impersonator encounters ----------
@@ -467,6 +494,8 @@
             try { delete this.state.alienEncounter; } catch (e2b) {}
             return false;
           }
+          // GALACTIC CAST: the fight began — the player FACES them (stage 3).
+          _castAdvance(this, pid, 3, 'alien encounter');
         } else {
           // Fallback: use the standard combat flow
           this.say('(The stranger raises their hands. This is going to hurt.)');
@@ -955,6 +984,8 @@
       // time, so a refused start wasted it. Record on success only — and the
       // banter plays for a fight that actually begins, not a phantom one.
       try { this.apState().lastGroupDay = (this.state.scholar || {}).day || 1; } catch (e4) {}
+      // GALACTIC CAST: the whole circle is faced, not just the first in.
+      for (var gi = 0; gi < pids.length; gi++) _castAdvance(this, pids[gi], 3, 'alien encounter');
       this.apGroupBanter(pids);
       this.say('(The others are circling. They\'ll join the fight in turn.)');
       return true;
@@ -1088,6 +1119,19 @@
       }
 
       ap.met[pid] = rec;
+
+      // GALACTIC CAST history flags + stage 4 (handoff vocabulary): fought
+      // always; killed / spared (won, persona broke and left alive) /
+      // beat_player. A decisive end (won or lost — not fled) makes them
+      // KNOWN (stage 4), knowledge-gated like stage 3.
+      _castFlag(this, pid, 'fought', day);
+      if (killed) _castFlag(this, pid, 'killed', day);
+      else if (outcome === 'won') _castFlag(this, pid, 'spared', day);
+      if (outcome === 'lost') _castFlag(this, pid, 'beat_player', day);
+      if (outcome === 'won' || outcome === 'lost') {
+        _castAdvance(this, pid, 3, 'alien encounter');
+        _castAdvance(this, pid, 4, outcome === 'won' ? 'faced and survived' : 'faced and fell');
+      }
 
       // CODEX (Steve 2026-10-08): every encounter is discoverable truth.
       // Knowledge-gated inside apCodexEntry — pre-reveal the entry reads
