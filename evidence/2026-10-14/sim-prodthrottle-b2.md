@@ -122,7 +122,7 @@ different fate.
   instrument-honesty gate; per-seed JSON (telemetry-check schema); exiled metric.
 - Extended scripts/test-prodthrottle-20261013.js §7: unwrap RED (broken shape detected) / GREEN
   (named export yields runnable daily, both policies; measure script uses corrected form).
-- Re-applied the lever to src/js/game.js from the 2026-10-13 spec (proof test 25/25 GREEN).
+- Re-applied the lever to src/js/game.js from the 2026-10-13 spec (proof test 22/22 GREEN).
   FILLED: the lever lands — first GO on the village-scale fresh-rot bind.
 - Sense-tested the redirect beat (§7 of the proof + verbatim samples): the forage/fish
   variants read as honest village decisions ("leaves the forage standing… The pantry can't
