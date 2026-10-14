@@ -1121,6 +1121,21 @@
         taughtref: 'that plant lesson', recall: 'that personal stuff',
       };
       if (base[tid]) return base[tid];
+      // T2 SPEECH LABELS (journey-social r13 2026-10-14): t2 ask-labels are
+      // menu-choice QUESTIONS ("Who's on your mind around here?") — the
+      // player-facing choice text. Quoted as the topic noun in NPC speech
+      // they leak the internal title ("We started on Who's on your mind
+      // around here?..."). The topic label used by resume / recap / close /
+      // lapse lines needs a plain noun phrase instead. Neutral voice (same
+      // register as the base map: 'that favor', 'their skills') — labels are
+      // spoken by the NPC, never re-offered as player menu choices.
+      const t2speech = {
+        you: 'each other', fears: 'what scares them', others: 'the others',
+        neighbors: 'the neighbors', advice: 'advice',
+        oldworld: 'the old world', skills: 'their skills',
+        systemtake: 'the Taking', loved: 'someone they loved',
+      };
+      if (t2speech[tid]) return t2speech[tid];
       try {
         if (this.topic2Label && this.topic2Has && this.topic2Has(tid)) {
           const l = String(this.topic2Label(vid, tid) || '').replace(/^"+|"+$/g, '').replace(/^Ask about /i, '');
