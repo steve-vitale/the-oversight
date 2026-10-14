@@ -55,7 +55,7 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 - **Presentation B:** colour tokens, presentation stage ladder (`presentation.js`/`presentation.json`), cold System glass, alien-script glitch, handwritten marginalia, titan sprites + bar, bespoke Table and level-up screens, zoom/contrast/≥12px. Proof: `evidence/2026-10-14/presentation/B-*`.
 - **World origins:** 69 picker origins covering all 20 regions, world lifeseeds, 6 new name cultures, 5-tier familiarity, eastern fauna trimmed. Proof: `evidence/2026-10-14/origins-world.md`.
 
-**In progress (Claude):** class diversity (job → path lean, wider offer window); 
+**Class diversity (built):** job → path lean (`characterGen` `pathLean` on every occupation — any new occupation needs one) and a 6-wide level-up window (`godpaths.json rules.offers`). Subclasses seen 6 → 10 of 20; ascensions up. Evidence: `class-diversity.md`. 
 
 ## 2. Muse's backlog, in order
 
@@ -129,6 +129,11 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
   alien gear).
 - **Spec:** draw them in the audited style (`evidence/2026-10-14/sprite-audit.md`);
   the sprite test checks validity.
+
+### 7b. The 10 subclasses that never form
+- brawler, shieldbearer, miser, seer, undying, phantom (and others) never appear in sims: their abilities sit 7–20 deep in the track kits.
+- Claude's recommendation: add a job-path term to `buildPathLean` (villager-build.js) so villagers build toward their job's god, and move ONE entry per never-seen subclass into the first 6 of a track whose deeds fit it. Measure 64 seeds; target ≥14/20 without deaths rising >10%. (A full kit interleave was tried and reverted — it raised deaths.)
+- Job balance watch: exterminator looked weak, locksmith and mortician strong at 16 seeds — confirm with 32 seeds `FORCE_OCC=<job>` (scripts/sweep-buff.js) before retuning.
 
 ### 8. Keep the sims honest
 - After every content wave or balance change, run the standard sweep
