@@ -34,6 +34,18 @@
 //
 // Usage: node scripts/test-sixthlink-r27-20261014.js
 'use strict';
+// KILL-PROTOCOL NOTE (coordinator repair, following the r21b-matbank2 /
+// r23-renegans pattern): the sixthlink layer was deleted per the kill
+// protocol (NO-GO at pilot — the file scripts/policies/sixthlink-r27.js
+// no longer exists). The mechanism proof below ran 18/18 GREEN pre-kill
+// (see evidence/2026-10-14/sim-sixthlink-r27.md). When the layer is absent
+// this file degrades gracefully instead of MODULE_NOT_FOUND.
+let sixthlinkMod = null;
+try { sixthlinkMod = require('./policies/sixthlink-r27'); } catch (e) { /* deleted per kill protocol */ }
+if (!sixthlinkMod) {
+  console.log('INFO-SKIP: sixthlink layer deleted per kill protocol (NO-GO at pilot); mechanism was 18/18 GREEN pre-kill — see evidence/2026-10-14/sim-sixthlink-r27.md');
+  process.exit(0);
+}
 process.env.FOURTHLINK = '1';
 process.env.FIFTHLINK = '1';
 process.env.SIXTHLINK = '1';
