@@ -38821,6 +38821,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // maybeGrantCapstoneItem(vid, isPlayer): if a godhood build is complete
     // except the item (and day >= 80), the System grants the named capstone
     // item. Played beat, fires once per godhood (tracked on npcGodhood/scholar.godhood).
+    // NOTE: a 10-day holding period was tried (round 3 pilot) and killed the
+    // rate to 0% — villages die at 75-132d, so any delay interacts brutally
+    // with mortality. The gift is immediate; the build itself is the work.
     maybeGrantCapstoneItem(vid, isPlayer) {
       try {
         const S = globalThis.Scattering || {};
