@@ -385,7 +385,34 @@
                   sc.choices.map(c => `<button class="btn sm" data-beat="sw:answer:${esc(c.id)}">${esc(c.label)}</button>`).join(' ') + `</div>`;
               }
             } catch (e) {}
-            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b>${leanHtml} <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button></div>${pendingHtml}`);
+            // RELAY ABILITIES (audit 2026-10-14): unlocked relay abilities
+            // had no button anywhere — granted, announced, unusable. One
+            // button per HELD ability with a use verb (relay-ext.js).
+            // Deep Listen / Omnipresence have no use verb yet: not shown.
+            let abilHtml = '';
+            try {
+              const has = (id) => !!(Game.relayHas && Game.relayHas(id));
+              const ab = [];
+              if (has('translate')) {
+                const taught = (((Game.state.scholar || {}).relay || {}).translated) || [];
+                for (const c of ['grief', 'food', 'joy']) if (taught.indexOf(c) < 0) ab.push(`<button class="btn sm ghost" data-beat="sw:use:translate:${c}">Translate: ${c}</button>`);
+              }
+              if (has('sanctuary')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:sanctuary">Sanctuary</button>`);
+              if (has('advocate')) {
+                const ros = ((Game.state.village || {}).roster || []).filter(id => id !== Game.villagerId).slice(0, 3);
+                for (const id of ros) {
+                  let an = id;
+                  try { an = Game.displayName ? String(Game.displayName(id)).split(' ')[0] : id; } catch (e) {}
+                  ab.push(`<button class="btn sm ghost" data-beat="sw:use:advocate:${esc(id)}">Advocate: ${esc(an)}</button>`);
+                }
+              }
+              if (has('relay-sight')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:relay-sight">Relay-sight</button>`);
+              if (has('faithful-carry')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:faithful-carry">Faithful Carry</button>`);
+              if (has('rewrite')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:rewrite" title="Dark: erodes grounding">Rewrite</button>`);
+              if (has('skim')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:skim" title="Dark: erodes grounding">Skim</button>`);
+              if (ab.length) abilHtml = `<br><span class="small">Relay abilities:</span> ` + ab.join(' ');
+            } catch (e) {}
+            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b>${leanHtml} <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button>${abilHtml}</div>${pendingHtml}`);
           }
         }
       } catch (e) {}
@@ -15984,6 +16011,12 @@
         else if (spec[1] === 'deepen') Game.relayDeepen();
         else if (spec[1] === 'commune') Game.relayCommune();
         else if (spec[1] === 'answer') Game.relayAnswer(spec[2]);
+        // RELAY ABILITIES (audit 2026-10-14): sw:use:<abilityId>[:arg]
+        else if (spec[1] === 'use') {
+          const fn = { 'translate': 'relayTranslate', 'sanctuary': 'relaySanctuary', 'advocate': 'relayAdvocate',
+            'rewrite': 'relayRewrite', 'skim': 'relaySkim', 'relay-sight': 'relaySight', 'faithful-carry': 'relayCarry' }[spec[2]];
+          if (fn && typeof Game[fn] === 'function') Game[fn](spec[3]);
+        }
       }
       refresh();
     });
