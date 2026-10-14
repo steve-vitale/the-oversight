@@ -1619,6 +1619,16 @@
         // mourning), so the numbers are unchanged — but the choke stays
         // single and the link is fed by the gesture.
         var tGain = this._trustGain(link, Math.round(8 * frac));
+        // GRIEFGRAIN-AID-CREDIT (2026-10-14): the grief grain is real food,
+        // not narrative — it arrives in the subordinate's pantry, where their
+        // own weekly tick (_linkedVillageWeek) eats it against their need.
+        // Same pattern as SUBAID-AID-CREDIT on tendLink: credited at the
+        // ACTUAL paid amount (proportional pantries aid proportionally),
+        // trust math and the verb's beats untouched.
+        try {
+          var _gsov = this._otherVillage(link.subordinate);
+          if (_gsov && paid > 0) _gsov.pantryKcal = Math.max(0, (_gsov.pantryKcal || 0)) + paid;
+        } catch (e) {}
         this._linkNote(link, 'renegotiation', 'Met grief with grain (' + paid.toLocaleString() + ' kcal, trust +' + tGain + '); the tribute leverage never landed.');
         if (frac >= 1) this.say(`🕊️ Haven sends ${paid.toLocaleString()} kcal to ${onm}'s fire — grief met with grain. The new speaker eats with Haven's people and the tribute stays where it was. (Trust +${tGain}.)`);
         else this.say(`🕊️ Haven sends ${paid.toLocaleString()} of 1,500 kcal — all the pantry holds. ${onm} counts the gap, but counts the gesture too. (Trust +${tGain}.)`);
