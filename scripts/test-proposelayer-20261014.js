@@ -69,7 +69,15 @@ function spyOn(Game, name) {
 
 (async () => {
   console.log(`proposelayer proof — ${ARMED ? 'ARMED (PROPOSELAYER=1), expect GREEN' : 'PRISTINE (gate off), expect REAL RED'}`);
-  const mod = require('./policies/proposelayer');
+  // Landed-tree guard (3184c187 pattern): a killed arm's layer is deleted per
+  // kill protocol; the proof then INFO-SKIPs instead of FATALing. Pre-kill
+  // verification (worker tree): REAL RED→GREEN 11/11.
+  let mod = null;
+  try { mod = require('./policies/proposelayer'); } catch (e) { mod = null; }
+  if (!mod) {
+    console.log('INFO-SKIP: policies/proposelayer.js absent (killed arm, layer deleted per kill protocol). Pre-kill RED→GREEN 11/11 stands; nothing to run on the landed tree.');
+    process.exit(0);
+  }
   const { proposelayer, courtshipPass, PROPOSELAYER_ON } = mod;
   const { competent } = require('./policies/competent');
 

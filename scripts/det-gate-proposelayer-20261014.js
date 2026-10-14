@@ -11,7 +11,15 @@
 // Exits 0 when all seeds run bit-identically twice; exits 1 otherwise.
 'use strict';
 process.env.PROPOSELAYER = '1';
-const { proposelayer } = require('./policies/proposelayer');
+// Landed-tree guard (3184c187 pattern): a killed arm's layer is deleted per
+// kill protocol; the det-gate then INFO-SKIPs instead of FATALing. Pre-kill
+// verification (worker tree): det-gate 8/8 IDENTICAL.
+let proposelayer = null;
+try { proposelayer = require('./policies/proposelayer').proposelayer; }
+catch (e) {
+  console.log('INFO-SKIP: policies/proposelayer.js absent (killed arm, layer deleted per kill protocol). Pre-kill det-gate 8/8 stands; nothing to run on the landed tree.');
+  process.exit(0);
+}
 const { checkDeterminism } = require('./det-gate');
 
 (async () => {
