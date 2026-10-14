@@ -762,7 +762,8 @@
               titan: tf.titan,
               result: result,
               allies: this.tbfight.fighters.filter(function (f) { return f.kind === 'ally'; })
-                .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid, alive: !!f.alive }; })
+                // injected ally fighters carry their id as villagerId (titanInjectAllies), not vid
+                .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid || f.villagerId, alive: !!f.alive }; })
             };
           }
         } catch (e) {}
