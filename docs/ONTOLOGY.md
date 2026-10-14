@@ -1143,6 +1143,19 @@ Practice deed grants — unlock.type === 'practice' abilities
 
 **Consumes:** —
 
+### presentation (`presentation.js`)
+The presentation ladder (DECISIONS.md 2026-10-03, Steve: "Start simple, but it would be cool if as you progress, the game graphics and interface keep getting better and better."). Stage 0 terminal -> 1 annotated -> 2 pixel entities -> 3 arrival vignettes -> 4 full tileset. A stage is earned on Codex depth AND days survived (src/data/presentation.json), never on a timer, and is never taken back within a run. app.js renders it as body.stage-N; tile-scenes.js blends the map palette from earthy (stage 0) to rich (stage 4). Also owns the alien-script glyph generator and the glitch rate limit for the System overlay (no DOM here: app.js applies them).
+
+**Provides:** presentationStage() -> 0..4, the current ladder stage (monotonic per run), presentationInfo() -> {stage, id, label, codexDepth, days, next} for debug and tests, codexDepth() -> knowledge depth across every codex section (plant/tree/skill/animal/ability levels; one per beast, recipe, terrain), alienScript(n, seed) -> n glyphs of untranslated System script (generated, zero assets), glitchDue(now) -> true when an alien-script glitch may play now (rate-limited by presentation.json glitch)
+
+**Rules:**
+- earned_not_timed: a stage needs BOTH its codexDepth and its days; days alone never advance it (code: presentationStage)
+- never_taken_back: the reached stage is kept on state.presentation.maxStage; the interface is a reward (code: presentationStage)
+- glitch_is_occasional: at most one glitch per glitch.minGapMs, and only on a chance roll (code: glitchDue)
+- zero_assets: the alien script is generated from fixed unicode ranges, no font or image (code: alienScript)
+
+**Consumes:** Game.data.presentation (src/data/presentation.json), state.codex, state.scholar.day, state.presentation
+
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 
@@ -1472,9 +1485,9 @@ Telemetry for the run's milestone events, which had none (sim audit 2026-10-14):
 **Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
 
 ### tile-scenes (`tile-scenes.js`)
-Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
+Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terrain palette climbs the presentation ladder: earthy at stage 0, rich at stage 4 (Game.presentationStage). String building only (no DOM), ~64x64 viewBox readable at 40px.
 
-**Provides:** svgFor(x, y, opts) -> SVG string for the tile (opts.seen decides fog), invalidate(x, y) -> drop the cached scene for one tile, invalidateAll() -> drop cached scenes for all tiles, touch(x, y) -> bump the tile's scene version so the next svgFor re-renders
+**Provides:** svgFor(x, y, opts) -> SVG string for the tile (opts.seen decides fog), invalidate(x, y) -> drop the cached scene for one tile, invalidateAll() -> drop cached scenes for all tiles, touch(x, y) -> bump the tile's scene version so the next svgFor re-renders, palette(type, stage) -> {base, tex, dot} terrain colours for a presentation stage (0 earthy .. 4 rich)
 
 **Rules:**
 - fog_is_blank: svgFor with opts.seen falsy returns a blank dark square and never generates detail (code: svgFor, Steve 2026-10-06)
@@ -1483,6 +1496,7 @@ Composes each world-map tile as a miniature auto-composed SVG scene: terrain bas
 - miniature_not_sprite: detail cells render as simple shapes, never full sprites — this is a 40px-readable miniature (code: markerFor, Steve 2026-10-06)
 - entities_are_local: player/villager/animal markers only render on the player's tile, from detail-grid mx/my coords (code: entityMarkers, Steve 2026-10-06)
 - no_monster_markers: the map shows geography only, never live monster positions (code: entityMarkers, Steve 2026-10-06)
+- palette_follows_ladder: terrain colours blend earthy (stage 0) -> rich (stage 4) by Game.presentationStage(); the stage is in the cache key (code: palette, fingerprint)
 - no_dom: composition is pure string building; safe to call from hot paths and off-thread tests (code: compose, Steve 2026-10-06)
 
 **Consumes:** Game.tileAt, Game.genDetail (detail-grid generation), Game.map.px/py (player tile), Game.state.scholar (mx,my,animal), Game.state.worldMonsters (NOT rendered on map — geography only, Steve 2026-10-06), Game.state.village.positions (villager detail-grid positions)

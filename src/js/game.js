@@ -262,6 +262,10 @@
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
       // own so a missing file only costs the real-date season start.
+      // PRESENTATION LADDER (presentation B 2026-10-14): stage thresholds +
+      // glitch rate (presentation.js). Own load: a missing file keeps the
+      // module's built-in ladder.
+      try { this.data.presentation = await get('presentation.json'); } catch (e) { console.warn('[presentation] presentation.json: ' + (e && e.message)); this.data.presentation = null; }
       try { this.data.climates = await get('climates.json'); } catch (e) { console.warn('[regions] climates.json: ' + (e && e.message)); this.data.climates = null; }
       // ENDINGS BY BUILD (2026-10-14): the Table's build-aware beats and the
       // ending texts by key (endingKey.js). Loaded on their own so a missing
