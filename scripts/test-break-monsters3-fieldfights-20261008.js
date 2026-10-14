@@ -76,6 +76,10 @@ function cannedRec(outcome, vTaken) {
   const v = Game.state.village;
   const npcIds = (v.roster || []).filter(id => id !== Game.villagerId);
   const vid = npcIds[0];
+  // PARITY (2026-10-14): villagers now hold their first ability (knack) from
+  // day 1, like the player. This test rigs fights for a plain villager; give
+  // it the plain loadout it was written against.
+  if (v.npcAbilities) v.npcAbilities[vid] = [];
   v.health = v.health || {};
   const origSay = Game.say; Game.say = () => {};
   const byId = {}; for (const m of (Game.data.monsters || [])) byId[m.id] = m;
@@ -163,6 +167,12 @@ function cannedRec(outcome, vTaken) {
     // just kills an unarmed villager before that (see section 8).
     const mdef = Object.assign({}, byId['hushwolf'],
       { attack: { name: 'nip', damage: [2, 3] }, hp: [30, 30], speed: 1 });
+    // PARITY (2026-10-14): this battery used to work because the villager
+    // banked ~345 uncapped combat XP inside it and learned patient_aim and
+    // haymaker mid-run. Deeds are capped per day now (same as the player),
+    // so the villager is given those two skills up front — the same fighter
+    // the battery always ended up exercising.
+    Game.npcLearnSkill(vid, 'patient_aim'); Game.npcLearnSkill(vid, 'haymaker');
     let zombie = 0, checked = 0, mFleeSaw = 0;
     for (let i = 0; i < 300; i++) {
       const m = { id: 'hushwolf', tx: 2, ty: 2, hp: 30, maxHp: 35 };

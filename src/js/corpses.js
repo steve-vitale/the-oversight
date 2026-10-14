@@ -166,10 +166,20 @@
       // at the kill site (monsterDown/deathAudio); this is for people.
       if (opts.kind === 'person' || opts.kind === 'villager') {
         try { this.audioEvent('villagerDeath'); } catch (e) {}
-        // UNIFIED TRACKS (2026-10-14): a death in the family (one of your
-        // village, not the bearer) is System contact for the bearer — strange.
+        // UNIFIED TRACKS (2026-10-14): a death in the family is System
+        // contact — the strange track. PARITY (Steve 2026-10-14: "Yes any
+        // death for strange path"): every living member of the village gets
+        // the same deed, the player and each villager alike (per-day cap per
+        // doer). The bearer's own death credits the villagers; the successor
+        // also gets the mantle deed.
         try {
-          if (opts.villagerId && !opts.player && opts.villagerId !== this.villagerId && this.noteDeed) this.noteDeed('death_in_family');
+          if (opts.villagerId && this.creditDeed) {
+            if (!opts.player && opts.villagerId !== this.villagerId) this.creditDeed('player', 'death_in_family');
+            for (const rid of (((this.state.village || {}).roster) || []).slice()) {
+              if (rid === opts.villagerId || rid === this.villagerId) continue;
+              this.creditDeed(rid, 'death_in_family');
+            }
+          }
         } catch (eT) { console.warn('[tracks] death deed', eT); }
       }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis

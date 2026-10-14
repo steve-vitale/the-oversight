@@ -1371,7 +1371,7 @@
     else this.sysSay(`📺 The village will talk about this for days.`);
     try { this.leadShift('showmanship', 1); } catch (e) {}
     // VILLAGER XP (Steve 2026-10-09): being on television teaches.
-    try { if (this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'show'); } catch (e) {}
+    try { if (this.creditDeed) this.creditDeed(pid, 'contest'); } catch (e) { console.warn('[tracks] show deed', e); }
     return { done: true, outcome: 'show_' + outcome };
   };
 
@@ -5027,8 +5027,7 @@
     // contact — the strange track, for whoever stood under the lights.
     try {
       if (this.gainTrackXP && (outcome === 'won' || outcome === 'lost')) {
-        if (isWatch) this.gainTrackXP(ac.participant, 'strange', 1, 'survived ' + ((contest && contest.name) || 'a contest'));
-        else this.noteDeed('contest_survived');
+        this.creditDeed && this.creditDeed(isWatch ? ac.participant : 'player', 'contest_survived');
       }
     } catch (eT) { console.warn('[tracks] contest survived', eT); }
     // RESOLVE AUDIO (Steve 2026-10-08): the contest's resolution beat lands
@@ -5097,7 +5096,7 @@
           // belongs to (+3 XP: a full first rung for a nobody, a nudge for a
           // veteran). The System was watching; the watching pays. The grant
           // path narrates its own "Earned, not given" when a threshold fires.
-          try { this.villagerGainXP(ac.participant, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e2) {}
+          try { this.creditDeed && this.creditDeed(ac.participant, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e2) { console.warn('[tracks] contest win deed', e2); }
         }
       } else {
         this.sysSay(`📺 ${contest.name} — YOU WIN. The crowd is a weather system.`);
@@ -5869,7 +5868,7 @@
       try {
         if (outcome !== 'died') {
           if (pid === 'player') { if (this.noteDeed) this.noteDeed('contest'); }
-          else if (this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'contest');
+          else if (this.creditDeed) this.creditDeed(pid, 'contest');
         }
       } catch (e) { console.warn('[tracks] contest deed', e); }
       // The bet rides on the first taken. The System honors wagers: 2x.
@@ -6061,7 +6060,7 @@
         // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): same
         // win-deed as the watch path — the televised win feeds the
         // contest's deed-XP track.
-        try { this.villagerGainXP(pid, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e3) {}
+        try { this.creditDeed && this.creditDeed(pid, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e3) { console.warn('[tracks] contest win deed', e3); }
       } else {
         const survived = [
           `📺 ${pname} survived. Barely, by the look of them when the lights came up.`,
