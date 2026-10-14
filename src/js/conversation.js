@@ -2096,7 +2096,17 @@
     convoPickCycle(vid, key, pool) {
       let l = this.convoPick(vid, key, pool);
       if (l == null) {
-        this.convoGet(vid).said[key] = [];
+        const c = this.convoGet(vid);
+        // ANTI-REPEAT (journey-endgame r10 2026-10-14): the reset used to
+        // clear the key's said-list outright, so the random re-pick drew
+        // from the full pool — including the exact line just spoken
+        // (comfort pool: verbatim '"Thanks. ...Thanks for saying that."'
+        // back-to-back, caught live; ~1/3 per exhaustion). Seed the fresh
+        // list with the last line so the cycle never opens with an
+        // immediate repeat. Cross-key memory is untouched — one thread
+        // still never resurfaces in another.
+        const last = (c.said[key] || []).slice(-1);
+        c.said[key] = last;
         l = this.convoPick(vid, key, pool);
       }
       return l;

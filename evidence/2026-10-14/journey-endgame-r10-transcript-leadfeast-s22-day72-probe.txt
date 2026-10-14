@@ -1,0 +1,28 @@
+=== seed 22 policy leadfeast day 72 — conversation with Cole (visjoin_65) ===
+occupation=musician temperament=prickly trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "Small hopes are the load-bearing kind. Keep collecting them. You know?"
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "You want to know about that? Okay." "Theo? A trail crew lead, back before. Solid person. ."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested. Anyway, that's me."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: "Okay, that's my quota of socializing."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

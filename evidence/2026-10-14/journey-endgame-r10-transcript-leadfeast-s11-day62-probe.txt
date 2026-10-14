@@ -1,0 +1,31 @@
+=== seed 11 policy leadfeast day 62 — conversation with Dmitri (app_mv7r2brf468) ===
+occupation=nurse temperament=dry trust=30 dead=false mood=grieving
+want: seek_comfort (stage 1)
+
+THEM: "Do you ever — no. Never mind." They don't look away, though. They want you to ask.
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Nice. Sit. The fire's warm."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Good. Company's company."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: They shift over, making room. "Stay as long as you like."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "...I keep thinking about them. About — everyone. Sorry. It just comes out, sitting here."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=3)
+closing line: "Sorry. I need a minute."
+want final: id=seek_comfort stage=3 resolution=comforted
