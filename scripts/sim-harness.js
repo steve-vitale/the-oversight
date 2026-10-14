@@ -134,7 +134,10 @@ async function loadGame(opts) {
   const mode = opts.mode || '?';
   // Per call, never sticky (audit 2026-10-14: a prior fullTelemetry load
   // leaked TELEMETRY_FULL into later loads in the same process).
-  if (opts.fullTelemetry) process.env.TELEMETRY_FULL = '1'; else delete process.env.TELEMETRY_FULL;
+  // Default FULL in sims (audit 2026-10-14: ~15 analysis scripts read the
+  // stream without asking and silently saw only the last 300 events). The
+  // 300-event ring is a phone-memory guard; pass fullTelemetry:false to keep it.
+  if (opts.fullTelemetry !== false) process.env.TELEMETRY_FULL = '1'; else delete process.env.TELEMETRY_FULL;
 
   Math.random = mulberry32(seed);
 

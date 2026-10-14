@@ -1,5 +1,8 @@
 # Scale-wall r18 arm 1 — COURTKILL: deliberate wave-3 hunting on the courtship road
 
+> **⚠ CORRECTION 2026-10-14** (`evidence/2026-10-14/simulator-audit.md` §3): the dmg-audit instrument read HP *after* `tbEnd`, when a lost fight had already replaced the dead bearer, and never counted the player's strikes. Re-run corrected: **25/91 fights (27%) killed the bearer**, not 1/104; player damage was 9,491, not 0. Conclusions here that rest on "103/104 survive" are void.
+
+
 Run: oversight-flesh-out-loop-b 2026-10-13T20:45:42Z, arm 1 (courtkill). Worktree: ~/workspace/worktrees/sim-wavekill-b.
 Axis: scale-onramp (blocking). Canon: docs/CANON.md, docs/MONSTER-WAVES.md read first. No game-code changes — policy-side lever + tooling only. Highbeam Deer untouched; no monster stats touched.
 
