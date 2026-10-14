@@ -407,6 +407,10 @@
         if (vHasAb('game_sense')) evade += 0.10;
         if (vHasAb('tracker')) evade += 0.05;
         if (vHasAb('echo_location') && abNight) evade += 0.10;
+        // DETECTION, HELD (godpath-buff 2026-10-14): the monster.detect_chance
+        // modifiers a villager holds (bird_whisperer, third_eye, beast_calm)
+        // read here the way they read for the player: seen first, given room.
+        if (gpF) { try { evade = GPf.fieldEvade(gpF, evade); } catch (e) { console.warn('[godpath] fieldEvade', e); } }
         evade = clamp(evade, 0.05, 0.90);
         if (RR() < evade) {
           rec.outcome = 'evade';

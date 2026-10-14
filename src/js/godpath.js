@@ -17,7 +17,7 @@
 //   - damageMult(game, target) / dodgeBonus(game) -> Misdirection / Prophecy (buildarounds damageMult / dodgeBonus)
 //   - villagerCast(game, v) -> a villager fighter casts a held subclass verb through the SAME VERBS (actor = their fighter), paying the data kcal from their belly (hunger kcal/25); true / 'free' / false (wraps tbVillagerAbility)
 //   - villagerStrikeMult(game, v, target) / absorbVillagerHit(game, t, final) -> Stoke, Back from the Brink, Misdirection / Coin Guard, Last Rites, Prophecy on villagers (game.js tbVillagerTurn, tbDamage)
-//   - fieldBegin(game, vid, vAbs) -> per-fight state for the verbs and passives in off-screen field fights (fieldFights.js), with fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown
+//   - fieldBegin(game, vid, vAbs) -> per-fight state for the verbs and passives in off-screen field fights (fieldFights.js), with fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade
 // consumes:
 //   - Game.data.godpaths, Game.data.abilities, state.scholar.abilities, state.village.npcAbilities
 //   - useAbility, tbFighter, tbCanOccupy, tbBlocked, tbDamage, tbVillagerTurn, addHealth, npcNeeds, keepsakeGrow, wornKeepsakes
@@ -673,10 +673,56 @@
   // gates casts like every other villager ability (foodPower.js rules:
   // starving = none, tight = only when outmatched).
   const V_HUNGER_GATE = 80;
+  // THE ORIGINAL KIT, CAST BY VILLAGERS (godpath-buff 2026-10-14): the
+  // older combat actions have player-only impls in abilityActions.js; for a
+  // villager caster they run here with the card's numbers (Static Toss
+  // 20-30 within 3, Cheese Wheel 25-35 homing, Bird Strike 3 rounds,
+  // Turncoat 2 rounds, Freeze Tag root 2, Retribution = half the pain taken
+  // this fight into everything adjacent), x their food power.
+  const KIT_TB = {
+    'static_toss.toss': { do: 'kit_static', plan: (I) => (I.n < 1 && I.near && I.d <= 3 ? 7 : null) },
+    'cheese_wheel.hurl': { do: 'kit_cheese', plan: (I) => (I.n < 1 && I.strong && !I.cheeseToday ? 7.5 : null) },
+    'bird_strike.call': { do: 'kit_birds', plan: (I) => (I.n < 1 && I.strong && !(I.strong._birdStrike > 0) ? 5 : null) },
+    'turncoat.persuade': { do: 'kit_turncoat', plan: (I) => (I.n < 1 && I.mons.length >= 2 ? 7 : null) },
+    'freeze_tag.tag': { do: 'kit_freeze', plan: (I) => (I.n < 1 && I.near && I.d <= 1 && I.hp < 0.6 ? 5.5 : null) },
+    'retribution.unleash': { do: 'kit_retribution', plan: (I) => (I.n < 1 && (I.v._taken || 0) >= 20 && I.d <= 1 ? 8 : null) },
+  };
+  const KIT_IMPL = {
+    kit_static(v, I) {
+      const m = I.near; const d = Math.round(rint(20, 30) * villagerPowerMult(Game, v.villagerId));
+      Game.say(`${v.name} balls up the static and THROWS it into ${nm(m)}! (Static Toss)`);
+      Game.tbDamage(m.key, d, 'static toss', v.key); return true;
+    },
+    kit_cheese(v, I) {
+      const m = I.mons.slice().sort((a, b) => (b.hp || 0) - (a.hp || 0))[0];
+      const d = Math.round(rint(25, 35) * villagerPowerMult(Game, v.villagerId));
+      const vd = (Game.state.village.npcCheeseDay = Game.state.village.npcCheeseDay || {});
+      vd[v.villagerId] = (Game.state.scholar || {}).day || 0;
+      Game.say(`${v.name} hurls a wheel of cheese that SCREAMS the whole way into ${nm(m)}. (Cheese Wheel)`);
+      Game.tbDamage(m.key, d, 'cheese wheel', v.key); return true;
+    },
+    kit_birds(v, I) { I.strong._birdStrike = 3; Game.say(`${v.name} points at the sky. The birds dive on ${nm(I.strong)}. (Bird Strike: 3 rounds)`); return true; },
+    kit_turncoat(v, I) {
+      const [a, b] = I.mons;
+      a._turncoatTarget = b.key; a._turncoatRounds = 2; b._turncoatTarget = a.key; b._turncoatRounds = 2;
+      Game.say(`${v.name} explains, very reasonably, why the OTHER one is the problem. ${nm(a)} and ${nm(b)} turn on each other. (Turncoat)`); return true;
+    },
+    kit_freeze(v, I) { I.near._frozen = Math.max(I.near._frozen || 0, 2); Game.say(`${v.name} touches ${nm(I.near)}: "YOU'RE IT!" It's rooted. (Freeze Tag)`); return true; },
+    kit_retribution(v, I) {
+      const f = Game.tbfight; let hit = 0;
+      const d = Math.round(Math.max(8, (v._taken || 0) * 0.5) * villagerPowerMult(Game, v.villagerId));
+      for (const m of liveMons(f)) if (cheb(m, v) <= 1) { Game.tbDamage(m.key, d, 'retribution', v.key); hit++; if (Game.tbEndCheck && Game.tbEndCheck()) break; }
+      Game.say(`The System returns ${v.name}'s pain as force: ${d} into ${hit} adjacent. (Retribution)`);
+      return hit > 0;
+    },
+  };
   function combatVerbActs() {
     const out = [];
     for (const ab of ((Game.data && Game.data.abilities) || [])) {
-      for (const act of (ab.actions || [])) if (act.do && act.context === 'combat' && VERBS[act.do]) out.push({ ab, act });
+      for (const act of (ab.actions || [])) {
+        if (act.do && act.context === 'combat' && VERBS[act.do]) out.push({ ab, act });
+        else if (KIT_TB[ab.id + '.' + act.id]) out.push({ ab, act, kit: KIT_TB[ab.id + '.' + act.id] });
+      }
     }
     return out;
   }
@@ -736,28 +782,29 @@
       };
       const uses = vUses(f, v);
       let best = null;
-      for (const { ab, act } of verbActs()) {
+      I.cheeseToday = (((game.state.village || {}).npcCheeseDay || {})[vid]) === ((game.state.scholar || {}).day || 0);
+      for (const { ab, act, kit } of verbActs()) {
         if (!game.npcHasAbility(vid, ab.id)) continue;
         const key = ab.id + '.' + act.id;
         const used = uses[key] || 0;
         if (act.perFight && used >= act.perFight) continue;
-        const plan = V_PLAN[act.do];
+        const plan = kit ? kit.plan : V_PLAN[act.do];
         if (!plan) continue;
         I.n = used;
         const sc = plan(I);
         if (sc == null) continue;
         const kcal = vKcal(act, ab);
         if (!vCanPay(vid, kcal)) continue;
-        if (!best || sc > best.sc) best = { sc, ab, act, key, kcal };
+        if (!best || sc > best.sc) best = { sc, ab, act, key, kcal, kit };
       }
       if (!best) return false;
-      const ok = VERBS[best.act.do](best.act, best.ab, null, v);
+      const ok = best.kit ? KIT_IMPL[best.kit.do](v, I) : VERBS[best.act.do](best.act, best.ab, null, v);
       if (ok === false) { uses[best.key] = (uses[best.key] || 0) + 1; return false; } // tried and found no use: don't loop on it
       uses[best.key] = (uses[best.key] || 0) + 1;
       vPay(vid, best.kcal);
-      try { game.tele && game.tele('godpath_verb', { ability: best.ab.id, verb: best.act.do, who: vid }); } catch (e) { warn('tele vverb', e); }
+      try { game.tele && game.tele('godpath_verb', { ability: best.ab.id, verb: best.kit ? best.kit.do : best.act.do, who: vid }); } catch (e) { warn('tele vverb', e); }
       try { if (game.npcWitnessAbility) game.npcWitnessAbility(best.ab.id, allies.map(a => a.villagerId).filter(Boolean), vid); } catch (e) { warn('witness', e); }
-      return (best.act.cost && best.act.cost.turn) ? true : 'free';
+      return (best.kit || (best.act.cost && best.act.cost.turn)) ? true : 'free';
     } catch (e) { warn('villagerCast', e); return false; }
   }
   // villagerStrikeMult(game, v, target): the villager's strike multipliers
@@ -773,6 +820,8 @@
         v._nextStrikes.n--;
         if (v._nextStrikes.n <= 0) delete v._nextStrikes;
       }
+      // data modifiers held (adrenaline_control: combat.strike_damage x1.3)
+      if (v.villagerId) { const sm = modSum((game.state.village.npcAbilities || {})[v.villagerId] || [], 'combat.strike_damage'); if (sm) m *= sm; }
       if (target && v.villagerId && game.npcHasAbility && game.npcHasAbility(v.villagerId, 'misdirection')) {
         const confused = (target.blind || 0) > 0 || (target._turncoatRounds || 0) > 0 || (target.hesitate || 0) > 0 || (target._frozen || 0) > 0 || (target._bound || 0) > 0 || (target.stunned || 0) > 0;
         if (confused) m *= 1.5;
@@ -788,6 +837,11 @@
       const f = game.tbfight;
       if (f && t.villagerId && (t._foresightUntil || f._foresightUntil || 0) >= (f.round || 1) && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'prophecy')) {
         if (Math.random() < 0.35) { game.say(`${t.name} saw it coming a breath ago and simply isn't there. (Prophecy)`); return 0; }
+      }
+      // combat.dodge_chance held (adrenaline_surge +15%)
+      if (t.villagerId) {
+        const dg = modSum((game.state.village.npcAbilities || {})[t.villagerId] || [], 'combat.dodge_chance');
+        if (dg && Math.random() < Math.min(0.5, dg)) { game.say(`${t.name} is already moving: it misses. (Adrenaline Surge)`); return 0; }
       }
       const ab = t._absorb;
       if (!ab || !(ab.hits > 0)) return final;
@@ -853,9 +907,22 @@
       const dodge = modSum(vAbs || [], 'combat.dodge_chance');
       const armor = modSum(vAbs || [], 'armor.flat');
       const power = villagerPowerMult(game, vid);
-      if (!Object.keys(held).length && !strike && !dodge && !armor && power <= 1) return null;
+      // monster.detect_chance: adds are the holder's own eyes (bird_whisperer
+      // +0.2, third_eye +0.3); a multiply under 1 is the world not noticing
+      // them (beast_calm x0.75).
+      let detAdd = 0, detMul = 1;
+      for (const id of (vAbs || [])) {
+        const d = defOf(id);
+        if (!d || d.lane !== 'magic') continue;
+        for (const m of (d.modifiers || [])) {
+          if (!m || m.target !== 'monster.detect_chance' || m.condition) continue;
+          if (m.op === 'add') detAdd += m.value || 0;
+          else if (m.op === 'multiply' && m.value < 1) detMul *= m.value;
+        }
+      }
+      if (!Object.keys(held).length && !strike && !dodge && !armor && power <= 1 && !detAdd && detMul >= 1) return null;
       return { vid, held, used: {}, tier, nextMult: 0, nextN: 0, absorb: 0, absorbCap: 0, missUntil: 0, missP: 0, harry: 0, birds: 0, blindUntil: 0, cheated: false,
-        holdBonus: held.rally_aura ? 0.06 : 0, strikeMult: strike || 1, dodge: Math.min(0.5, dodge || 0), armorAdd: armor || 0, power };
+        holdBonus: held.rally_aura ? 0.06 : 0, strikeMult: strike || 1, dodge: Math.min(0.5, dodge || 0), armorAdd: armor || 0, power, detAdd, detMul };
     } catch (e) { warn('fieldBegin', e); return null; }
   }
   function fieldPay(G, id, actId) {
@@ -995,6 +1062,14 @@
       }
       return out;
     } catch (e) { warn('fieldAct', e); return out; }
+  }
+  // fieldEvade(G, evade): the awareness roll (seen in time, gave it room)
+  // after held detection modifiers.
+  function fieldEvade(G, evade) {
+    if (!G) return evade;
+    let e = evade + (G.detAdd || 0);
+    if ((G.detMul || 1) < 1) e = 1 - (1 - e) * G.detMul;
+    return e;
   }
   // fieldStrike(G, vd, c): the villager's strike after held effects.
   function fieldStrike(G, vd, c) {
@@ -1318,7 +1393,7 @@
     pathLean, shapeOffers, VERBS, registerVerbs, wardenWallAt,
     allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
     villagerCast, villagerStrikeMult, absorbVillagerHit,
-    fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, villagerPowerMult,
+    fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade, villagerPowerMult,
   };
   // VILLAGERS CAST (parity 2026-10-14): after the hand-written villager
   // abilities (tbVillagerAbility, pantry-tier gated in foodPower.js) find

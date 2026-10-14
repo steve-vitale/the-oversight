@@ -270,6 +270,9 @@ const T = K.reporter('test-godpath-villagers-20261014');
       }
     }
     T.ok('field: Static Toss / Cheese Wheel / Rage / Bird Strike / Pocket Sand run off-screen', ['(Static Toss)', '(Cheese Wheel)', '(Rage)', '(Bird Strike)', '(Pocket Sand'].every(k => L.includes(k)), ['(Static Toss)', '(Cheese Wheel)', '(Rage)', '(Bird Strike)', '(Pocket Sand'].filter(k => !L.includes(k)).join(','));
+    // detection modifiers held: bird_whisperer +0.2, beast_calm x0.75
+    const Gd = GP.fieldBegin(Game, vidA, ['bird_whisperer', 'beast_calm']);
+    T.ok('detection held by a villager: the awareness roll reads bird_whisperer (+0.2) and beast_calm (x0.75 noticed)', Gd && Math.abs(GP.fieldEvade(Gd, 0.3) - (1 - (1 - 0.5) * 0.75)) < 1e-9, Gd && GP.fieldEvade(Gd, 0.3));
     // overcharge parity: hunger <= 25 is the villager's "topped up"
     const n = Game.npcNeeds(vidA);
     n.hunger = 10;
@@ -283,6 +286,17 @@ const T = K.reporter('test-godpath-villagers-20261014');
     hold(vidA, []);
     const { m, A } = arena({});
     T.ok('tb: a well-fed villager\'s strike carries the overcharge', Math.abs(GP.villagerStrikeMult(Game, A, m) - Game.overchargeMult()) < 1e-9);
+    // the original kit in tb fights, cast by a villager
+    hold(vidA, ['static_toss']); needs(vidA);
+    const t1 = arena({ ax: 3, ay: 4, mx: 5, my: 4 });
+    const hp0 = t1.m.hp;
+    T.ok('tb: Static Toss cast by a villager hits a monster within 3', cast(t1.A) === true && t1.m.hp < hp0 && verbs(vidA).includes('static_toss'), `${hp0}->${t1.m.hp}`);
+    hold(vidA, ['turncoat']); needs(vidA);
+    const t2 = arena({ more: [[6, 6]] });
+    T.ok('tb: Turncoat turns two monsters on each other', cast(t2.A) === true && !!t2.m._turncoatTarget);
+    hold(vidA, ['adrenaline_control']); Game.npcNeeds(vidA).hunger = 50;
+    const t3 = arena({});
+    T.ok('tb: adrenaline_control (combat.strike_damage x1.3) on a villager\'s strike', Math.abs(GP.villagerStrikeMult(Game, t3.A, t3.m) - 1.3) < 1e-9);
   }
 
   T.section('ascension: the lived-in deed (rules.capstone.deedClassDays)');
