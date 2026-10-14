@@ -65,7 +65,6 @@
 //   - unlock_day: 14 (code: contestTick, contestEligible)
 //   - eligible_villagers: alive + member in good standing + fighting age 15-72 + health > 20 (gravely wounded out per docs/CONTESTS.md; break-it 2026-10-09); player alive/health>0/not exiled (code: contestEligible, Steve 2026-10-06)
 //   - weekly_budget: 2 combined contests+shows (code: contestTick)
-//   - daily_chance: 0.3 (code: contestTick)
 //   - contest_vs_show_ratio: 0.6 (code: contestTick)
 //   - system_whim_chance: 0.1 random participant override (code: fireContest)
 //   - countdown_days: 1 (code: fireContest)
@@ -611,13 +610,6 @@
         rv.winsVs = wins;
         const NAMES = ['Manglejaw', 'The Quiet One', 'Second Dinner', 'Audience Favorite', 'The Rematch'];
         rv.name = NAMES[wins % NAMES.length];
-      }
-    } else {
-      // Villager dossier: their wins heat THEIR file — the System casts
-      // hotter against proven villagers via the hardened variant path.
-      if (outcome === 'won') {
-        const r = this._cxRecord(id);
-        if ((r.wins || 0) >= 2) { try { ac._villagerHeat = true; } catch (e) {} }
       }
     }
   };

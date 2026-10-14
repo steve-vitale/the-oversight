@@ -131,7 +131,7 @@
       } catch (e) {}
       const ra = (sch.relayAbils || {});
       const abilCount = Object.keys(ra).filter(k => ra[k] && ra[k].unlocked).length;
-      const need = gh.requires.relayAbils || 6; // 3 shared + 3 branch (light OR dark — never all 9 in one run)
+      const need = gh.requires.relayAbils || 6; // any 6 of the 9 (e.g. 3 shared + 3 light or dark). Light/dark unlocks are gradient-gated on the lean meter (relayUnlockCheck), so a middling lean can open both tracks — all 9 in one run is possible
       const dayOk = (day || 0) >= ((gh.requires || {}).minDay || 0);
       return {
         kit: abilCount, needKit: need, coreHit: true, needCore: false,
