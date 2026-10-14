@@ -28970,6 +28970,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.tele('counter_discovered', { id: mid, via: via }); } catch (e) {}
         const c = mdef.counter;
         const viaLine = via === 'taught' ? 'Someone at the haven knew the trick.'
+          : via === 'scholar-observed' ? 'You lived to tell it — twice — and now you see the pattern.'
           : 'You did the thing — and it worked.';
         this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${c.trick}. ${c.reveal} (${viaLine})`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${c.trick} — ${c.reveal}`); } catch (e) {}
@@ -29078,10 +29079,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // observation. Two observations and the village pieces together the
     // trick: no kill required. The dead tell no tales (callers exclude vDie).
     // Narrated via discoverMonsterCounter / the villagerTricks beat — never
-    // silent.
+    // silent. The scholar has his own channel (noteScholarTrickObservation);
+    // this wrapper keeps the 'player' exclusion so villager behavior is
+    // byte-identical.
     noteVillagerTrickObservation(vid, mid) {
+      if (vid === 'player') return false;
+      return this._trickObservation(vid, mid, false);
+    },
+    // noteScholarTrickObservation(mid): SCHOLAR PARITY (lever scholartrick,
+    // Steve's VILLAGER COUNTER PARITY 2026-10-13, symmetric half). The
+    // scholar's own survived encounters with trick-bearing (waves 1-2
+    // counters) or signature-bearing (wave-3) beasts taught NOTHING — only
+    // villagers' eyes fed the bar. Now they do: same villageCounterObs bar,
+    // same 2-encounter threshold, same discoverMonsterCounter/villagerTricks
+    // mechanics, same odds. First-person narration — never silent.
+    // DESIGN CALL for Steve's overrule: the scholar learns through the
+    // village's SHARED observation bar (his notes go to the same fire),
+    // not a private track.
+    noteScholarTrickObservation(mid) {
+      return this._trickObservation('player', mid, true);
+    },
+    // _trickObservation(vid, mid, firstPerson): the shared observation core.
+    // firstPerson=false reproduces the villager path exactly (same strings,
+    // same events); firstPerson=true narrates the scholar's own telling.
+    _trickObservation(vid, mid, firstPerson) {
       try {
-        if (!mid || vid === 'player') return false;
+        if (!mid) return false;
         const mdef = (this.data.monsters || []).find(m => m.id === mid);
         if (!mdef) return false;
         const defs = this.villagerTrickDefs();
@@ -29089,21 +29112,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.villageKnowsTrick(mid)) return false; // already known
         const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
         obs[mid] = (obs[mid] || 0) + 1;
-        try { this.tele('counter_observed', { id: mid, n: obs[mid] }); } catch (e) {}
+        try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid }); } catch (e) {}
+        if (firstPerson && obs[mid] < 2) {
+          // The scholar's own notebook: a first sighting is never silent.
+          this.say(`You lived to tell it — the ${this.monsterDisplayName(mid)}'s moves are burned into your memory. (${obs[mid]}/2 — one more survived encounter and you'll have its trick.)`);
+          try { if (this.journalNote) this.journalNote('monsters', mid, `Sighting ${obs[mid]}/2: survived an encounter.`); } catch (e) {}
+        }
         if (obs[mid] < 2) return false;
         // Two survived encounters: the fire has a theory.
         if (mdef.counter) {
-          return this.discoverMonsterCounter(mid, 'observed');
+          return this.discoverMonsterCounter(mid, firstPerson ? 'scholar-observed' : 'observed');
         }
         // Wave-3 signature: knowledge lives on villagerTricks (NOT the
         // ledger convention — scoring stays the signature workers' call).
         const vt = this.state.villagerTricks || (this.state.villagerTricks = {});
         if (vt[mid]) return false;
         vt[mid] = true;
-        try { this.tele('counter_discovered', { id: mid, via: 'observed' }); } catch (e) {}
+        try { this.tele('counter_discovered', { id: mid, via: firstPerson ? 'scholar-observed' : 'observed' }); } catch (e) {}
         const t = defs[mid] || {};
-        const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
-        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
+        if (firstPerson) {
+          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (You lived to tell it, twice — and now you see the pattern.)`);
+        } else {
+          const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
+          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
+        }
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
       } catch (e) { return false; }
@@ -38237,6 +38269,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             (result === 'won' || result === 'routed') && ((f && f.round) || 1) <= 1 &&
             _kills && _kills.length) {
           this.notePracticeDeed('ambush', 1);
+        }
+      } catch (e) {}
+      // SCHOLAR TRICK OBSERVATION (lever scholartrick 2026-10-14; Steve's
+      // VILLAGER COUNTER PARITY, symmetric half): the scholar's own survived
+      // encounters with trick-bearing (waves 1-2 counters) or
+      // signature-bearing (wave-3) beasts teach too — the same
+      // state.villageCounterObs bar, same 2-encounter threshold, same
+      // discoverMonsterCounter/villagerTricks mechanics, same odds. The
+      // scholar must be in the fight and alive. Outcomes: 'fled' (fled),
+      // 'routed' (drove it off), 'calmed' (saw it in time — peaceful end).
+      // Kills teach via the slain path (recordWaveKill -> codex hint;
+      // parity with the villager vKill exclusion — only beasts ALIVE at
+      // fight end count). 'lost' is the dead-tell-no-tales exclusion
+      // (vDie parity). One observation per distinct beast type per fight.
+      // First-person narration — never silent. Villager field-fight paths
+      // untouched (byte-identical).
+      try {
+        if ((result === 'fled' || result === 'routed' || result === 'calmed') &&
+            this.noteScholarTrickObservation) {
+          const _po = this.tbFighter('p');
+          if (_po && _po.alive !== false && (_po.hp || 0) > 0 && f && f.fighters) {
+            const _seenT = new Set();
+            for (const _m of f.fighters) {
+              if (_m.kind !== 'monster' || !_m.alive || !_m.mdef) continue;
+              const _tmid = _m.mdef.id;
+              if (_seenT.has(_tmid)) continue;
+              _seenT.add(_tmid);
+              this.noteScholarTrickObservation(_tmid);
+            }
+          }
         }
       } catch (e) {}
       } finally {
