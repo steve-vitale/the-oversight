@@ -7,8 +7,8 @@ const fs = require('fs');
 const path = require('path');
 
 const GREEN = process.argv.includes('--green');
-const REPO = '/home/hatch/workspace/the-scattering';
-const STAGE = '/home/hatch/workspace/godhood-staging';
+const REPO = path.join(__dirname, '..');
+const STAGE = path.join(__dirname, '..', 'src');
 
 let pass = 0, fail = 0;
 function ok(cond, name) {
@@ -28,9 +28,9 @@ if (!GREEN) {
 // ---- GREEN: load staged module + data ----
 const S = {};
 global.Scattering = S;
-const godhoodJson = JSON.parse(fs.readFileSync(path.join(STAGE, 'godhood.json'), 'utf8'));
+const godhoodJson = JSON.parse(fs.readFileSync(path.join(STAGE, 'data', 'godhood.json'), 'utf8'));
 S.GODHOODS = godhoodJson;
-const src = fs.readFileSync(path.join(STAGE, 'godhood.js'), 'utf8');
+const src = fs.readFileSync(path.join(STAGE, 'js', 'godhood.js'), 'utf8');
 // stub browser globals the module doesn't need, then eval
 eval(src);
 const G = S.Godhood;
@@ -44,12 +44,21 @@ let items = JSON.parse(fs.readFileSync(path.join(REPO, 'src/data/items.json'), '
 items = items.items || items;
 const itemIds = new Set(items.map(i => i.id || i.itemId));
 
-// (a) all 10 godhoods defined, requirements reference REAL ids
-ok(godhoodJson.godhoods.length === 10, '10 godhoods defined');
+// (a) all 11 godhoods defined, requirements reference REAL ids
+// (updated 2026-10-14: 11 godhoods; requires.abilityPool per 2026-10-13 rework)
+ok(godhoodJson.godhoods.length === 11, '11 godhoods defined');
 for (const gh of godhoodJson.godhoods) {
-  for (const a of gh.requires.abilities) ok(abIds.has(a), `${gh.id}: ability ${a} exists`);
-  ok(gh.requires.synergies.some(s => synIds.has(s)), `${gh.id}: at least one synergy exists`);
-  ok(gh.requires.items.some(i => itemIds.has(i)), `${gh.id}: at least one item exists`);
+  if (gh.id === 'voice_of_the_relay') {
+    ok(gh.requires.office === 'relay_holder', 'relay: office-gated (special structure)');
+    ok(gh.capstone.verb && gh.capstone.mechanic, 'relay: capstone present');
+    continue; // relay uses office+comm-field abilities, not the pool format
+  }
+  const pool = gh.requires.abilityPool || gh.requires.abilities || [];
+  for (const a of pool) ok(abIds.has(a), `${gh.id}: ability ${a} exists`);
+  ok((gh.requires.synergies || []).some(s => synIds.has(s)), `${gh.id}: at least one synergy exists`);
+  const namedItems = gh.requires.capstoneItems || gh.requires.items || [];
+  const tiers = gh.requires.itemTiers || [];
+  ok(namedItems.some(i => itemIds.has(i)) || tiers.length > 0, `${gh.id}: item gate exists`);
   ok(gh.capstone.verb && gh.capstone.mechanic && gh.capstone.cost && gh.capstone.weakness,
     `${gh.id}: capstone has verb+mechanic+cost+weakness`);
   ok(gh.recognition.systemLine && gh.recognition.systemLine.length > 40, `${gh.id}: recognition line`);
@@ -58,22 +67,30 @@ for (const gh of godhoodJson.godhoods) {
 }
 
 // (a2) completion detected from real state
+// (updated 2026-10-14: pool format per rework; relay skipped — office-gated)
 function fullScholar(gh) {
+  const pool = gh.requires.abilityPool || gh.requires.abilities || [];
+  const syns = gh.requires.synergies || [];
+  const named = gh.requires.capstoneItems || gh.requires.items || [];
+  // tier-gated godhoods: use a real tier-4 item from the catalog
+  const t4 = items.find(i => (i.tier || (S.ITEM_TIER || {})[i.id || i.itemId]) === 4);
   return {
-    abilities: gh.requires.abilities.map(id => ({ id })),
-    activeSynergies: [gh.requires.synergies[0]],
-    inventory: [{ itemId: gh.requires.items[0] }],
+    abilities: pool.map(id => ({ id })),
+    activeSynergies: syns.length ? [syns[0]] : [],
+    inventory: named.length ? [{ itemId: named[0] }] : (t4 ? [{ itemId: t4.id || t4.itemId }] : []),
     kcal: 5000, health: 100,
   };
 }
 for (const gh of godhoodJson.godhoods) {
+  if (gh.id === 'voice_of_the_relay') continue; // office-gated, not pool-gated
   const sch = fullScholar(gh);
   // only the first synergy listed is guaranteed real; use a real one
   const realSyn = gh.requires.synergies.find(s => synIds.has(s));
   sch.activeSynergies = [realSyn];
-  const c = G.godhoodCloseness(sch, gh);
+  const c = G.godhoodCloseness(sch, gh, 90); // rework: day-80 floor
   ok(c.complete, `${gh.id}: completion detected from real state`);
-  ok(G.checkGodhood(sch).includes(gh.id), `${gh.id}: checkGodhood flags it`);
+  sch.day = 90;
+  ok(G.checkGodhood(sch, 90).includes(gh.id), `${gh.id}: checkGodhood flags it`);
 }
 
 // (b) recognition fires once, played (5 beats, say/sysSay, broadcast)
@@ -140,13 +157,20 @@ for (const gh of godhoodJson.godhoods.slice(0, 3)) { // sample 3 for beat struct
   ok(G.noLiesCheck(sch) === true, 'seer: lies fail');
   ok(G.noLiesCheck({ godhood: { active: [] } }) === false, 'seer: non-god can be lied to');
 
-  // Market: summon market, audit taxes
-  sch = { godhood: { active: ['market_god'], capstoneUsed: {} } };
-  const m1 = G.summonMarket(sch, false);
-  ok(m1 && m1.ok && !m1.taxed, 'market: trader comes, untaxed');
+  // Market: name your price + buy them off (rework 2026-10-14)
+  // (old summonMarket was unwired dead code — replaced, not kept)
+  // NOTE: this legacy test loads godhood.js with S as the Scattering object.
+  try { S.ITEM_TIER = Object.assign({}, S.ITEM_TIER, { probe_t1: 1 }); } catch (e) {}
+  sch = { kcal: 5000, inventory: [], godhood: { active: ['market_god'], capstoneUsed: {} } };
+  const m1 = G.namePrice(sch, 'probe_t1');
+  ok(m1 && m1.ok && m1.paidKcal === 800, 'market: namePrice delivers t1 for 800 kcal');
+  ok(sch.inventory.some(i => i.itemId === 'probe_t1'), 'market: item lands in inventory');
+  ok(G.namePrice(sch, 'probe_t1') === null, 'market: namePrice once per day');
   sch.godhood.capstoneUsed = {};
-  const m2 = G.summonMarket(sch, true);
-  ok(m2 && m2.taxed, 'market: audit takes its cut (existing counter)');
+  const m2 = G.buyOff(sch, 2);
+  ok(m2 && m2.ok && m2.hesitateTurns === 2, 'market: buyOff buys 2 turns hesitation');
+  ok(m2.paidKcal === 2500, 'market: w2 buyOff costs 2500 kcal');
+  ok(G.buyOff(sch, 2) === null, 'market: buyOff once per fight');
 
   // Farstrider: walk horizon
   sch = { godhood: { active: ['farstrider'], capstoneUsed: {} }, kcal: 1000 };

@@ -39229,6 +39229,58 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { return []; }
     },
 
+    // --- MARKET GOD CAPSTONE (rework 2026-10-14) ---
+    // The verbs in S.Godhood are pure; these are the played wrappers:
+    // narration, item-name lookup, and applying hesitate to a live fighter.
+    // marketNamePrice(itemId): "Name Your Price" — once per day. The trader
+    // arrives with exactly the named item. marketBuyOff(fighter): "Buy Them
+    // Off" — once per fight, one monster hesitates 2 turns (fighter.hesitate).
+    marketItemName(itemId) {
+      try {
+        const items = (this.data || {}).items || [];
+        const it = items.find(x => x && x.id === itemId);
+        return (it && (it.name || it.id)) || itemId;
+      } catch (e) { return itemId; }
+    },
+    marketNamePrice(itemId) {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.namePrice) { this.say('The market is silent. (godhood system missing)'); return null; }
+        const r = S.Godhood.namePrice(this.state.scholar, itemId);
+        if (!r) { this.say('The market does not answer. (Once per day — or the godhood is not yours.)'); return null; }
+        if (!r.ok) { this.say(r.why || 'The market has never heard of that.'); return r; }
+        const nm = this.marketItemName(itemId);
+        if (r.marker && r.auditDue) {
+          this.say(`A trader steps out of the treeline carrying ${nm} — exactly what you named. Their smile doesn't reach their eyes. "The Audit will call on you. Soon." (MARKER ${r.markers} — the AUDIT IS DUE. Wealth has auditors.)`);
+        } else if (r.marker) {
+          this.say(`A trader steps out of the treeline carrying ${nm} — exactly what you named. You couldn't pay. They wave it off: "The market remembers." (MARKER ${r.markers}/3. Three markers and the Audit comes to collect.)`);
+        } else {
+          this.say(`A trader steps out of the treeline carrying ${nm} — exactly what you named, ${r.paidKcal} kcal of food changing hands. Distance is no obstacle to commerce.`);
+        }
+        return r;
+      } catch (e) { return null; }
+    },
+    marketBuyOff(fighter) {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.buyOff) return null;
+        const wave = (fighter && (fighter.wave || fighter.tier)) || 1;
+        const r = S.Godhood.buyOff(this.state.scholar, wave);
+        if (!r) { this.say('The market does not answer. (Once per fight — or the godhood is not yours.)'); return null; }
+        if (!r.ok) return r;
+        try { fighter.hesitate = (fighter.hesitate || 0) + (r.hesitateTurns || 2); } catch (e2) {}
+        const mname = (fighter && (fighter.name || fighter.monsterId)) || 'the monster';
+        if (r.marker && r.auditDue) {
+          this.say(`Coin rains on the field. ${mname} STOPS — counting. "The Audit will call on you. Soon." (MARKER ${r.markers} — the AUDIT IS DUE.)`);
+        } else if (r.marker) {
+          this.say(`You flash wealth you don't have. ${mname} hesitates, doing the math — two turns, weighing your offer. "The market remembers." (MARKER ${r.markers}/3.)`);
+        } else {
+          this.say(`You name a number mid-battle — ${r.paidKcal} kcal of food, weighed against your life. ${mname} STOPS. It chooses the food. Two turns bought.`);
+        }
+        return r;
+      } catch (e) { return null; }
+    },
+
     // --- VILLAGER XP & SYSTEM GRANTS (Steve 2026-10-09) ---
     // "System abilities aren't RNG, they are earned by villagers acting like
     // players." Villagers accrue XP per track from real deeds; at thresholds

@@ -320,14 +320,14 @@
   {
    "build": 7,
    "capstone": {
-    "cost": "Once per day. And the audit can tax it — if the audit monster is active or near, it takes its cut first. Wealth has auditors.",
-    "desc": "Once per day, call the market to you: a trader arrives wherever you are, with what you need, at your price. Distance is no obstacle to commerce.",
-    "mechanic": "once per day: summon a trader to your location with favorable prices",
-    "verb": "Summon the Market",
-    "weakness": "Wealth doesn't stop a beam. You still need guards or armor."
+    "cost": "Name Your Price is once per day; Buy Them Off is once per fight. Every transaction is taxed \u2014 the Audit takes its cut, in goods or in kind. Short on payment, or buying what can\u2019t be bought, and the market takes a MARKER instead of refusing. Three markers and the Audit comes to collect in person.",
+    "desc": "Once per day, NAME any item in the world\u2019s catalog: a trader arrives at your location carrying exactly that item \u2014 not random stock, the thing you named. Once per fight, BUY THEM OFF: offer wealth on the field of battle and one monster hesitates, spending its next two turns weighing your offer instead of attacking. Everything has a price. Even hunger pauses to count coin.",
+    "mechanic": "daily: name any item id \u2014 delivered to your location, paid in food-kcal barter (t1 800 / t2 2000 / t3 5000). tier-4 relics are lent, never sold: always a debt marker. per fight: buy one monster\u2019s hesitation (2 turns), price scales by wave (w1 1000 / w2 2500 / w3 5000 / w4 10000 / w5 marker-only)",
+    "verb": "Name Your Price",
+    "weakness": "Wealth doesn\u2019t stop a beam. A bought monster still bleeds \u2014 and bought time runs out. Debts don\u2019t die when you do: the market remembers every marker, and the Audit collects from whoever wears your face next."
    },
    "fantasy": "Infinite resources. The market bends to you. You don't find what you need — it finds you.",
-   "hint": "\"Things find you, little miser. The right thing, the right time — statistically IMPOSSIBLE, and yet. The gamblers have stopped calling it luck. I have a word for it. Soon.\"",
+   "hint": "\"The traders have stopped haggling with you. They just... agree. Too fast. Like they\u2019re afraid of what happens if they don\u2019t. You haven\u2019t named a price in weeks, and yet the right things keep arriving. Someone is keeping a ledger. You can feel the columns. Soon you\u2019ll be allowed to read it.\"",
    "id": "market_god",
    "mythic": {
     "desc": "A figure in gold, coins orbiting slowly, a balance-scale motif worked into the silhouette. Wealth, given a body and a smile.",
@@ -335,7 +335,7 @@
    },
    "name": "The Market God",
    "recognition": {
-    "beat": "Coins you didn't spend are warm in your pocket. Someone, somewhere, just decided to trade with you.",
+    "beat": "Coins you didn\u2019t spend are warm in your pocket. Somewhere, a ledger opens to a page with your name on it \u2014 and the ink is still wet. You understand, all at once, that you have never ONCE paid full price for anything in your life. The market was fattening you.",
     "systemLine": "\"BREAKING FINANCIAL NEWS! A market just APPEARED in the middle of NOWHERE! Economists are FURIOUS! The invisible hand just got a VISIBLE BODY! We have a MARKET GOD!\""
    },
    "requires": {

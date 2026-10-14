@@ -21,7 +21,8 @@
 //   - playerMythicId(scholar) -> godhood id or null (for sprite hook)
 //   - godhoodBargaining(scholar) -> leverage bonus for the table
 //   - capstone verbs: raiseEcho, chooseTerms, feedMultitude, turnPain,
-//     noLiesCheck, summonMarket, walkHorizon, phaseOut, takeWound
+//     noLiesCheck, namePrice, buyOff, walkHorizon, phaseOut, takeWound
+//   - market debt: marketMarkers(sch), auditDue(sch) — 3 markers → the Audit
 // consumes:
 //   - scholar.abilities, scholar.activeSynergies, scholar.inventory
 //   - village.npcAbilities, village.npcSynergies, person.items (villagers)
@@ -325,7 +326,7 @@
     // call at dawn: once-per-day verbs refresh
     if (!sch.godhood || !sch.godhood.capstoneUsed) return;
     delete sch.godhood.capstoneUsed.feedMultitude;
-    delete sch.godhood.capstoneUsed.summonMarket;
+    delete sch.godhood.capstoneUsed.namePrice;
     delete sch.godhood.capstoneUsed.walkHorizon;
   }
 
@@ -351,20 +352,107 @@
     return (g.active || []).includes('all_seeing');
   }
 
-  // Market: summonMarket — once per day, trader comes to you.
-  function summonMarket(sch, auditActive) {
+  // Market: namePrice — once per day, NAME any item; the market delivers it
+  // to your location. Food is money (the apocalypse runs on kcal): tiered
+  // barter prices, paid from the scholar's kcal. Tier-4 relics are LENT,
+  // never sold — always a debt marker. Short payment → marker, never refusal:
+  // the market always delivers; the debt always accrues. 3 markers → auditDue.
+  // (MARKET GOD REWORK 2026-10-14: the old summonMarket was unwired dead code
+  // and the weakest of the 11 capstones — a shopping trip, not godhood.)
+  var MARKET_PRICES = { 1: 800, 2: 2000, 3: 5000 }; // kcal barter; tier 4 = marker-only
+  var MARKET_AUDIT_AT = 3;
+  function marketMarkers(sch) {
+    const g = sch.godhood || {};
+    return (g.marketDebt || 0);
+  }
+  function auditDue(sch) {
+    return marketMarkers(sch) >= MARKET_AUDIT_AT;
+  }
+  function namePrice(sch, itemId) {
+    const g = sch.godhood || {};
+    if (!(g.active || []).includes('market_god')) return null;
+    if (!itemId) return null;
+    const used = (g.capstoneUsed || {});
+    if (used.namePrice) return null; // once per day (reset on dawn)
+    const tier = itemTier(itemId);
+    if (!tier) return { verb: 'namePrice', ok: false, why: 'The market has never heard of that. Name something real.' };
+    used.namePrice = true;
+    sch.godhood.capstoneUsed = used;
+    let paidKcal = 0, marker = false;
+    if (tier >= 4) {
+      // Relics are lent, never sold.
+      marker = true;
+    } else {
+      const price = MARKET_PRICES[tier] || 800;
+      const kcal = sch.kcal || 0;
+      if (kcal >= price) {
+        sch.kcal = kcal - price;
+        paidKcal = price;
+      } else {
+        marker = true; // the market delivers anyway; the debt accrues
+      }
+    }
+    if (marker) {
+      g.marketDebt = (g.marketDebt || 0) + 1;
+      sch.godhood = g;
+    }
+    // Deliver: the trader arrives with exactly what was named.
+    sch.inventory = sch.inventory || [];
+    sch.inventory.push({ itemId: itemId, units: 1, marketBought: true });
+    const due = auditDue(sch);
+    return {
+      verb: 'namePrice', ok: true, itemId: itemId, tier: tier,
+      paidKcal: paidKcal, marker: marker,
+      markers: marketMarkers(sch), auditDue: due,
+      note: marker
+        ? (due
+          ? `The trader's smile doesn't reach their eyes. "The Audit will call on you. Soon." MARKER ${marketMarkers(sch)} — the Audit is DUE.`
+          : `You couldn't pay. The trader waves it off — "The market remembers." MARKER ${marketMarkers(sch)}/${MARKET_AUDIT_AT}.`)
+        : `Named, priced, delivered: ${itemId} for ${paidKcal} kcal of food. The market bends.`,
+    };
+  }
+
+  // Market: buyOff — once per fight, buy a monster's hesitation. The monster
+  // spends its next 2 turns weighing your offer instead of attacking (uses
+  // the existing fighter.hesitate mechanic). Price scales with wave; wave-5
+  // hungers can't be bought, only rented (marker). Caller applies hesitate.
+  var BUYOFF_PRICES = { 1: 1000, 2: 2500, 3: 5000, 4: 10000 }; // wave 5 = marker-only
+  function buyOff(sch, wave) {
     const g = sch.godhood || {};
     if (!(g.active || []).includes('market_god')) return null;
     const used = (g.capstoneUsed || {});
-    if (used.summonMarket) return null;
-    used.summonMarket = true;
+    if (used.buyOff) return null; // once per fight (reset on fight start)
+    const w = Math.max(1, Math.min(5, wave || 1));
+    used.buyOff = true;
     sch.godhood.capstoneUsed = used;
+    let paidKcal = 0, marker = false;
+    if (w >= 5) {
+      marker = true; // some hungers can't be bought, only rented
+    } else {
+      const price = BUYOFF_PRICES[w] || 1000;
+      const kcal = sch.kcal || 0;
+      if (kcal >= price) {
+        sch.kcal = kcal - price;
+        paidKcal = price;
+      } else {
+        marker = true;
+      }
+    }
+    if (marker) {
+      g.marketDebt = (g.marketDebt || 0) + 1;
+      sch.godhood = g;
+    }
+    const due = auditDue(sch);
     return {
-      verb: 'summonMarket', ok: true,
-      taxed: !!auditActive, // the audit monster takes its cut — existing counter
-      note: auditActive
-        ? 'The trader comes. The audit was watching — it takes its cut first. Wealth has auditors.'
-        : 'The trader comes to you, wherever you are, at your price.',
+      verb: 'buyOff', ok: true, wave: w,
+      hesitateTurns: 2, // caller: fighter.hesitate = (fighter.hesitate||0) + 2
+      paidKcal: paidKcal, marker: marker,
+      markers: marketMarkers(sch), auditDue: due,
+      note: marker
+        ? (due
+          ? `Coin rains on the field. The monster STOPS — counting. "The Audit will call on you. Soon." MARKER ${marketMarkers(sch)} — the Audit is DUE.`
+          : `You flash wealth you don't have. The monster hesitates, doing the math. "The market remembers." MARKER ${marketMarkers(sch)}/${MARKET_AUDIT_AT}.`)
+        : `You name a number mid-battle. The monster STOPS — ${paidKcal} kcal of food, weighed against your life. It chooses the food. Two turns bought.`,
     };
   }
 
@@ -598,7 +686,8 @@
     villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
     itemTier, godhoodItemOk, poolProgress, buildReadyForCapstone, capstoneItemFor,
     raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
-    turnPain, noLiesCheck, summonMarket, walkHorizon, phaseOut, takeWound,
+    turnPain, noLiesCheck, namePrice, buyOff, marketMarkers, auditDue,
+    walkHorizon, phaseOut, takeWound,
     ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,
     mythicSprite, MYTHIC_SPRITES,
   };
