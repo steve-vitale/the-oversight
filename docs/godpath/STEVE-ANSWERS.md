@@ -7,6 +7,20 @@ verbatim.
 
 ---
 
+## 2026-10-14 (night)
+
+**On ability classes:** "The classes are supposed to be oriented around the god
+paths as icing on the cake. Each god path can have some intended subclasses
+though that fit the build. Let's keep thinking this way."
+
+**On the ending:** "Good call on the ending." (THE HOSTS approved.)
+
+**On progression:** "I think we need to sync the player and villager system.
+But the villager system sounds like the better model." / Key trigger: "Yes
+that trigger sounds good with n being determined and tuned later." /
+Ambiguous abilities: "I want your executive judgement. Reuse what you can but
+things need to be useful and make sense."
+
 ## 2026-10-14 (evening)
 
 **On abilities vs skills:** "We have a slot for skills. I intended abilities
