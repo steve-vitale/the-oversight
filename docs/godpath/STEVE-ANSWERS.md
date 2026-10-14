@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-14 (latest, round 6)
+
+"Those calls are fine for now." (Claude's calls: job → path lean plus a wider
+offer window for class diversity; a named class's payoff may appear on any
+track; "held the class 10 days" as a placeholder god deed; no XP raise beyond
+~8 player level-ups; first run counted per device; endings written gods →
+classes → tracks.)
+
 ## 2026-10-14 (latest, round 5)
 
 On composing Table endings (path final + one build coda: ~70 codas — 10 gods,
