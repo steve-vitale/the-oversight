@@ -6012,6 +6012,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (this.isKeepsake && this.isKeepsake(it)) continue;
             const sd = it.spoilDay;
             if (sd === undefined || sd === null || sd >= 9999) continue;
+            // CANON (PRESERVATION.md): rot can't be smoked back into food.
+            // Spoiled stacks (spoilDay <= today) are discarded honestly —
+            // never laundered onto the racks with a fresh spoilDay. Raw day
+            // boundary (bonus=0): the player's preservation bonus must not
+            // shrink the 0..2-day about-to-rot window below.
+            if (this.isSpoiled && this.isSpoiled(it, 0)) continue;
             if (sd - day > 2) continue; // only the about-to-rot surplus
             eligible.push(it);
           }
