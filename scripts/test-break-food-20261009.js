@@ -267,6 +267,15 @@ function freshGame() {
     const s = freshGame();
     // measure the live bonus (seed-dependent: backgrounds can grant it)
     s.abilities = (s.abilities || []).filter(a => (a.id || a) !== 'preservation_instinct');
+    // A background-granted preservation_instinct (backgroundAbilities, level
+    // from the occupation) is the same ability: one copy counts, so a level-1
+    // grant would REPLACE it, not add. Strip it too so +1 level = +2 days is
+    // measurable on any roster (origins-world 2026-10-14 rerolled this one).
+    s.backgroundAbilities = (s.backgroundAbilities || []).filter(a => (a.id || a) !== 'preservation_instinct');
+    // ...and the human skill behind it (codex.skills.preserve_food, from the
+    // occupation): the skill lane carries the same modifier plus a x1.5
+    // knowledge multiplier, so +2 days would not read as +2.
+    if (Game.state.codex && Game.state.codex.skills) delete Game.state.codex.skills.preserve_food;
     const baseBonus = Game.spoilBonusDays();
     for (const extra of [0, 1]) {
       s.abilities = (s.abilities || []).filter(a => (a.id || a) !== 'preservation_instinct');

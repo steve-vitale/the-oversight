@@ -66,6 +66,11 @@ function ok(cond, name, extra) {
   const vid = (Game.state.village.roster || []).filter(id => id !== Game.villagerId)[0];
   const v = Game.state.village;
   v.health = v.health || {};
+  // Pin the voice: a warm villager's voice adds "How are you holding up,
+  // though?" to the opener, which becomes a reactive question that owns the
+  // menu. Which temperament roster[0] draws is luck (origins-world 2026-10-14
+  // rerolled the cast); this test is about the settled-favor menu.
+  { const rec = (Game.data.villagers || []).find(x => x.id === vid); if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'steady'; } }
 
   // A sitting whose ask died between the seed and the open: hurt them, build
   // + seed the favor, then heal them. Returns { favor, whyLine, opener }.

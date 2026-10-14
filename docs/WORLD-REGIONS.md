@@ -113,7 +113,7 @@ ones a region can't ship without.
 | 10 | **Ruins & scavenge** | Building types and their loot (canned beans → rice sacks, tinned fish, local medicines) | `SCAVENGED`, ruinStories |
 | 11 | Starting pantry | What was in the bags | `newGame` pantry |
 | 12 | Food culture | Regional staples and recipes become knowledge you can bring or learn | `recipes.json`, `cooking.json` |
-| 13 | **Knowledge & familiarity** | Origin vs landing: same region = local, same climate family = visitor, else stranger. Sets starting plant/animal knowledge | `familiarityTier`, `plantsByFamiliarity`, `canShow('animal')` |
+| 13 | **Knowledge & familiarity** | Origin vs landing, five tiers (2026-10-14): native (your lifeseed sub-area lists this landing variant) > local (same region) > neighbor (`neighbors`, either side) > visitor (same climate family) > stranger. Each tier's starting plants, plant level, animal naming and home-game depth are data (`characterGen.familiarity`) | `familiarityTier`, `familiarityTierDef`, `plantsByFamiliarity`, `canShow('animal')` |
 | 14 | Books | Regional field guides; ruins hold local-language books | `books.json` (US titles) |
 | 15 | Language of the land | Signage, books, ruins text in the land's language; ties into the translator ability | `foreignSpeech.json`, `translator` |
 | 16 | **Lifeseeds (backstories)** | Hometowns and workplaces for every world region, not just the US | `lifeseeds.json` (18 US + fallback) |

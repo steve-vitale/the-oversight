@@ -73,6 +73,13 @@ const roster = () => (Game.state.village.roster || []).filter(id => id !== Game.
 
   // ================= A. INTIMIDATION SHAKEDOWN LOOP =================
   console.log('\n== A. intimidation shakedown loop ==');
+  // Pin one yielder: only cautious/withdrawn temperaments hand food over, and
+  // whether the seeded roster holds one is luck (origins-world 2026-10-14
+  // rerolled the cast and this seed's had none). A1 tests the verb.
+  {
+    const rec = (Game.data.villagers || []).find(x => x.id === roster()[0]);
+    if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'cautious'; }
+  }
   for (const vid of roster()) {
     try {
       const p = Game.getPerson ? Game.getPerson(vid) : null;

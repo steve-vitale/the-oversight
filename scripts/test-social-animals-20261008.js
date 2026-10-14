@@ -55,6 +55,12 @@ function freshGame() {
   s.health = 500; s.kcal = 2400; s.hydration = 100;
   s.mx = 4; s.my = 4;
   s.originTags = ['mars']; // defeat region-overlap knowledge: nothing is "common" here
+  // ...and the familiarity ladder (origins-world 2026-10-14): a native/local
+  // names every common animal of the land and a native starts with home-game
+  // codex depth. Make this scholar a stranger with no home depth.
+  s.famTier = 'stranger';
+  const ca = Game.state.codex.animals || {};
+  for (const id of Object.keys(ca)) if (ca[id] && ca[id].via === 'home') delete ca[id];
   Game.state.codex.animalEncounters = {};
   say();
   return s;
@@ -167,6 +173,17 @@ function unknowAll() { Game.state.codex.animalEncounters = {}; }
   // can't flee anyway. chance for the turtle (easy, hands, calm) ~= 0.7, so
   // roll 0.72 = near-miss band, 0.99 = clean-miss band.
   freshGame();
+  // The miss bands below assume the plain ~0.7 chance: no tracker, no hunter
+  // background, no skills that wake tracker mid-strike. Which background the
+  // seeded player draws is roster luck (origins-world 2026-10-14 drew one
+  // whose skills grant Tracker on the strike), so start from none.
+  {
+    const sc = Game.state.scholar;
+    sc.abilities = []; sc.backgroundAbilities = [];
+    Game.state.codex.skills = {};
+    const me = (Game.data.villagers || []).find(x => x.id === Game.villagerId);
+    if (me && /hunter/i.test(me.formerOccupation || '')) me.formerOccupation = 'bookkeeper';
+  }
   const realRng = Math.random;
   let nearTxt = '', cleanTxt = '';
   for (const [forced, slot] of [[0.72, 'near'], [0.99, 'clean']]) {

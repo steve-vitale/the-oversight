@@ -105,6 +105,12 @@ const trustOf = (v, vid) => { const t = (v.trust || {})[vid]; return t === undef
     const { S, v, me, npcs } = await freshWorld();
     const C = npcs[2];
     v.trust[C] = 40;
+    // Pin a victim who can catch you: daylight and a cautious temperament
+    // (55% per steal). Night and an easygoing victim (20%) could let all ten
+    // go unseen, leaving nothing to apologize for; which one this seed drew
+    // was roster luck (origins-world 2026-10-14 rerolled the cast).
+    Game.dayPart = 1;
+    { const rec = (Game.data.villagers || []).find(x => x.id === C); if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'cautious'; } }
     // make sure C has a pack worth stealing
     Game.packKcal(C);
     const kcal0 = S.scholar.kcal || 0;

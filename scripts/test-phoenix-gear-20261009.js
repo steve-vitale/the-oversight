@@ -258,6 +258,11 @@ sec('(g) taking from the ashes: worst when you burned them');
     } else {
       giveGear(v1, [{ itemId: 'multitool', name: 'Multitool', units: 1, kg: 0.4 }]);
       const vp = Game.vpOf(v1) || {}; vp.mx = 4; vp.my = 4;
+      // Pin the victim: the burn picks a RANDOM living villager, and the
+      // looter w must not be it. An unspent clause makes w ineligible
+      // (phoenix_no_burn_phoenix). Seed luck picked v1 until origins-world
+      // 2026-10-14 changed the roster's draws.
+      v.npcAbilities[w] = ['phoenix_clause'];
       triggerLethal(); // player burned v1
       c = ashCorpseFor(v1);
       if (mode === 'ash-stranger') c.ashBearer = 'someone-else';

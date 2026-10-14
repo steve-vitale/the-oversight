@@ -11,6 +11,10 @@ const T = K.reporter('test-barrier-grid-bound-20261014');
 function setup(Game, grid, px) {
   K.newRun(Game);
   Game.map.px = 4; Game.map.py = 6; // off-haven, room to cross east
+  // Pin the destination: the crossing target (5,6) must be open country, not
+  // another village's camp (seed-dependent placement; origins-world
+  // 2026-10-14 changed the roster's RNG draws and seed 11 put Thornfield there).
+  for (const v of (Game.state.otherVillages || [])) if (v.x === 5 && v.y === 6) { v.x = 0; v.y = 8; }
   K.fight(Game, 'belltoad', { px, py: 4, mx: 2, my: 4, hp: 100 });
   if (grid) Game.tbfight.gridSize = grid;
   const pf = Game.tbFighter('p'); pf.mx = px; pf.my = 4; pf.moveLeft = 3; pf.acted = false;
