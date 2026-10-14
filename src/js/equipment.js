@@ -1,6 +1,6 @@
 // @ontology
 // system: equipment
-// description: Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, legs, hands, shoes (1 each). Accessories: 4 non-exclusive slots for anything that doesn't fit a body part. Full-body sets (riot gear) equip to torso and block head/legs/shoes (greyed out in UI); hands and accessories stay usable. Sentimental gear has assigned slots like everything else and only accrues bond while EQUIPPED. AI equips intelligently with personality flavor. Equipped gear renders on sprites and affects combat. Threat is readable at grid distance from the gear itself.
+// description: Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, legs, hands, shoes (1 each). Accessories: 4 non-exclusive slots for anything that doesn't fit a body part. Full-body sets (riot gear) equip to torso and block head/legs/shoes (greyed out in UI); hands and accessories stay usable. Sentimental gear has assigned slots like everything else; its bond accrues while carried or equipped (player only). AI equips intelligently with personality flavor. Equipped gear renders on sprites and affects combat. Threat is readable at grid distance from the gear itself.
 // provides:
 //   - autoEquip(v, itemDefs) -> equip best gear (set-vs-pieces decision + personality)
 //   - slotForItem(def) -> main slot for an item, or null
@@ -27,7 +27,7 @@
 //   - explicit_slots: melee, ranged, head, torso, legs, hands, shoes (1 each) + acc1-4 (non-exclusive). Every equipable item has exactly one assigned slot (code: slotForItem, Steve 2026-10-07)
 //   - weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07)
 //   - full_body_blocks: full-body sets (def.fullBody or FULL_SETS) equip to torso and block head/legs/shoes only — hands and accessories stay usable. Blocked slots grey out in UI (code: blockedSlots, Steve 2026-10-07)
-//   - sentimental_slots: sentimental gear has assigned slots like all other gear; bond accrues ONLY while equipped (code: SENTIMENTAL_SLOTS, Steve 2026-10-07)
+//   - sentimental_slots: sentimental gear has assigned slots like all other gear (code: SENTIMENTAL_SLOTS, Steve 2026-10-07); bond accrues while carried in the pack OR equipped, for the player only (code: game.js accrueRelicBond over relicItems)
 //   - one_per_slot: each main slot holds exactly one item (code: autoEquip, Steve 2026-10-06)
 //   - set_vs_pieces_arc: riot set (30) beats early junk (~17) but loses to optimized pieces (~57); coordination bonus (+2/piece) rewards fitted gear (code: coordinationBonus, compareSetVsPieces, Steve 2026-10-06)
 //   - equip_from_inventory: equipment comes from the person's own items, never conjured (code: autoEquip, Steve 2026-10-06)
