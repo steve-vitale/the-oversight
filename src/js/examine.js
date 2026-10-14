@@ -7,7 +7,7 @@
 //   - observedPlant(pid) -> boolean: any observation exists
 //   - examineQuality() -> 1-3 based on perception skill
 //   - examineDescription(pid, quality) -> vague description, never leaks the name
-//   - examinePlantCell(cx, cy) -> the Examine action (cheap look, no harvest)
+//   - examinePlantCell(cx, cy) -> SUPERSEDED: the live Examine verb is carexplore.js examineCell (it shadows game.js examineCell, the only caller); kept as a library entry point
 //   - recognitionBeat(pid, teacherName) -> revelation narration on identify
 //   - plantVisualDepth(pid) -> 0 unknown, 1 examined, 2 known
 // rules:
@@ -183,6 +183,9 @@
   }
 
   // examinePlantCell(cx, cy): the EXAMINE action. Cheap look, no harvest.
+  // SUPERSEDED (audit 2026-10-14): not reached in play. carexplore.js's
+  // examineCell overrides game.js's (this function's only caller) and calls
+  // observePlant/examineDescription itself.
   // Time + tiny kcal. Yields a vague description + observation memory.
   function examinePlantCell(cx, cy) {
     const g = G(); if (!g) return null;

@@ -4305,7 +4305,9 @@
           const entry = { itemId: def.id, name: def.name, units: 1, unit: 'piece', kg: def.kg || 1 };
           s2.inventory.push(entry);
           s2.equipped = s2.equipped || {};
-          s2.equipped.weapon = { itemId: def.id, name: def.name };
+          // modern slots (the legacy .weapon slot is read by nothing live)
+          const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
+          s2.equipped[wslot] = { itemId: def.id, name: def.name };
           // (longsim contests r8 2026-10-12: the bespoke do.note already
           // announces the take — the generic line doubled it.)
           if (!d.note) this.sysSay(`📺 You take the ${def.name}. It feels honest. It's yours now.`);

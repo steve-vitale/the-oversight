@@ -54,7 +54,8 @@
     s.inventory = s.inventory || [];
     s.inventory.push({ itemId, units: 1, kcalEach: 0, kg: 0.5, name: def.name || itemId, bonded: true, bond: 0, bondOffered: [], enhancements: [] });
     s.equipped = s.equipped || {};
-    s.equipped.weapon = { itemId, name: def.name || itemId };
+    const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
+    s.equipped[wslot] = { itemId, name: def.name || itemId };
     if (ammoId && ammoN) {
       const adef = (Game.data.items || []).find(i => i.id === ammoId) || {};
       s.inventory.push({ itemId: ammoId, material: ammoId, units: ammoN, kcalEach: 0, kg: 0.05, name: adef.name || ammoId });

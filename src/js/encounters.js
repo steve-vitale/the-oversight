@@ -2492,8 +2492,7 @@
       // charred remains, no hide/bones. You can't hunt with a searcaster.
       var charsMeat = false;
       try {
-        var eqW = (s.equipped || {}).weapon;
-        var wdef = eqW && (this.data.items || []).find(function (i) { return i.id === eqW.itemId; });
+        var wdef = this.equippedWeapon().def;
         charsMeat = !!(wdef && wdef.weapon && wdef.weapon.charsMeat);
       } catch (e) {}
       if (charsMeat) {

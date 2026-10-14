@@ -160,6 +160,38 @@
     last_message: [{ target: 'rest.energy', op: 'multiply', value: 1.5 }],
     inheritance: [{ target: 'trust.gain_mult', op: 'multiply', value: 1.5 }],
     old_ghost: [{ target: 'hunt.success', op: 'add', value: 0.2 }],
+    // RELIC HONESTY (audit 2026-10-14): these ids were offerable but had no
+    // line here, so their cards lied. Each is copied 1:1 from its effect in
+    // relicEnhancements.json; every target below has a live modTarget reader.
+    many_pockets: [{ target: 'carry.weight_mult', op: 'multiply', value: 1.15 }],
+    warm_bones: [{ target: 'travel.cost_mult', op: 'multiply', value: 0.9 }],
+    stay_put: [{ target: 'healing.amount', op: 'add', value: 4 }],
+    rain_funnel: [{ target: 'water.rain_catch', op: 'add', value: 1 }],
+    light_feet: [{ target: 'combat.dodge_chance', op: 'add', value: 0.05 }],
+    smoke_keeper: [{ target: 'food.spoilage_days', op: 'add', value: 1 }],
+    calm_stone: [{ target: 'drama.resolve_bonus', op: 'add', value: 4 }],
+    true_measure: [{ target: 'craft.success', op: 'multiply', value: 1.15 }],
+    patient_wire: [{ target: 'hunt.trap_catch', op: 'add', value: 0.08 }],
+    glass_eye: [{ target: 'hunt.find_chance', op: 'add', value: 0.1 }],
+    hot_stone: [{ target: 'cook.kcal', op: 'multiply', value: 1.1 }],
+    field_guide: [{ target: 'forage.learn_threshold', op: 'multiply', value: 0.9 }],
+    tasters_spoon: [{ target: 'food.poison_chance', op: 'multiply', value: 0.7 }],
+    grey_cloak: [{ target: 'travel.encounter_chance', op: 'multiply', value: 0.75 }],
+    winter_lining: [{ target: 'travel.cost_mult', op: 'multiply', value: 0.92 }],
+    quiet_soles: [{ target: 'monster.hear_mult', op: 'multiply', value: 0.85 }],
+    spare_plating: [{ target: 'armor.flat', op: 'add', value: 2 }],
+    lucky_coin: [{ target: 'luck.global', op: 'multiply', value: 1.15 }],
+    come_home: [{ target: 'health.max_add', op: 'add', value: 10 }],
+    ledger_of_debts: [{ target: 'drama.resolve_bonus', op: 'add', value: 5 }],
+    hearth_song: [{ target: 'rest.energy', op: 'multiply', value: 1.2 }],
+    mothers_compass: [{ target: 'trust.gain_mult', op: 'multiply', value: 1.3 }],
+    harvest_memory: [{ target: 'forage.gift_chance', op: 'add', value: 0.05 }],
+    // NOT WIRED (needs Steve; see scripts/test-relic-mod-map-20261014.js):
+    //   forest_scent  — "monster detection -8%", but monster.detect_chance is
+    //                   the PLAYER spotting monsters; copying it would hurt.
+    //   blood_bonded  — abilityHook grant; no hook reads it.
+    //   path_attuned  — ability.kcal_cost; nothing reads that target.
+    //   veterans_edge — buildaround.charge_rate; nothing reads that target.
     // resolve (morale.break_immunity): once/day ignore starvation health damage — game.js
     // anchor (despair.anchor): hold at 1 HP once/30 days — game.js
   };

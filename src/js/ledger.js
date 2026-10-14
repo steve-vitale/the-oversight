@@ -639,8 +639,8 @@
       // DEATH PACK (Steve 2026-10-09): the body keeps what it carried.
       // Non-sentimental inventory + equipped gear goes on the corpse as the
       // lootable death pack (take, leave, or use per item — nothing
-      // auto-transfers). SENTIMENTALS DIE WITH THE OWNER: bonded keepsakes
-      // are buried with the body — never placed on the corpse, never lootable.
+      // auto-transfers). SENTIMENTALS DIE WITH THE OWNER: keepsakes are
+      // buried with the body — never placed on the corpse, never lootable.
       let gearPack = [];
       try {
         const defs = {}; (this.data.items || []).forEach(i => { defs[i.id] = i; });
@@ -667,7 +667,10 @@
           seen.add(it);
           const gid = it.itemId || it.id;
           const def = (gid && defs[gid]) || {};
-          if (it.bonded || it.sentimental || def.class === 'sentimental') continue; // dies with them
+          // Only SENTIMENTALS die with them (corpses.js rule). A bonded tool is
+          // still stuff: the bond doesn't transfer (this entry carries none),
+          // the object does (audit 2026-10-14).
+          if (it.sentimental || def.class === 'sentimental') continue; // dies with them
           gearPack.push({
             itemId: gid || it.name, name: it.name || def.name || gid || 'something',
             units: it.units || 1,
