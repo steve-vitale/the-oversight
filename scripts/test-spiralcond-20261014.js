@@ -36,6 +36,18 @@
 //   G6: latch evaluation — markers from pre-unlock history engage at the
 //       unlock day itself.
 'use strict';
+// KILL-PROTOCOL NOTE (coordinator repair, following the r21b-matbank2 /
+// r23-renegans / r27-sixthlink pattern): the spiralcond layer was deleted
+// per the kill protocol (NO-GO at pilot — scripts/policies/spiralcond.js
+// no longer exists). The mechanism proof below ran 14/14 GREEN pre-kill
+// (see evidence/2026-10-14/sim-spiralcond.md). When the layer is absent
+// this file degrades gracefully instead of MODULE_NOT_FOUND.
+let spiralcondMod = null;
+try { spiralcondMod = require('./policies/spiralcond'); } catch (e) { /* deleted per kill protocol */ }
+if (!spiralcondMod) {
+  console.log('INFO-SKIP: spiralcond layer deleted per kill protocol (NO-GO at pilot); mechanism was 14/14 GREEN pre-kill — see evidence/2026-10-14/sim-spiralcond.md');
+  process.exit(0);
+}
 const assert = require('assert');
 
 let pass = 0, fail = 0;
@@ -88,7 +100,7 @@ const fakeParent = {
 };
 
 delete process.env.SPIRALCOND;
-const W = require('./policies/spiralcond');
+const W = spiralcondMod;
 const layered = W.withSpiralCond(fakeParent, 'testlayer');
 
 // R1 (RED): gate off -> pure delegation, verb-for-verb identical, no tracking
