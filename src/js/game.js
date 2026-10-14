@@ -27556,6 +27556,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // GODHOOD REWORK (Steve 2026-10-13): villagers discover synergies by
       // holding all legs day after day — practice abstracted into daily deeds.
       try { this.npcSynergyTick(v); } catch (e) {}
+      // PARITY (2026-10-14): villagers gear up and settle pending level-up sheets (villager-build.js).
+      try { if (this.villagerBuildDay) this.villagerBuildDay(); } catch (e) { console.warn('[villager-build] day', e); }
       // HANDLING DEEPENS (longsim knowledge r2 2026-10-11): the village's
       // hands learn, read from today's foraging ledger. Runs inside
       // villageEats so it ticks exactly once per village day.

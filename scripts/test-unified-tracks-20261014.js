@@ -197,10 +197,14 @@ function resetPlayer(Game) {
     v.npcAbilities = v.npcAbilities || {}; v.npcAbilities[vb] = [];
     v.npcSkills = v.npcSkills || {}; v.npcSkills[vb] = [];
     const x = Game.npcXp(vb); x.combat = 0;
+    // PARITY (2026-10-14): villagers get the player's 1-of-3 sheet and choose
+    // by buildScore (test-parity-20261014.js). Give them enough knowledge to
+    // choose now rather than go and seek it first.
+    v.npcKnow = v.npcKnow || {}; v.npcKnow[vb] = { pocket_sand: 2, third_eye: 2 };
     Game.villagerGainXP(vb, 'combat', DATA.thresholds[0], 'test');
-    T.ok('threshold 1 -> kit[0]', JSON.stringify(v.npcAbilities[vb]) === JSON.stringify([DATA.kits.combat[0]]), (v.npcAbilities[vb] || []).join(','));
+    T.ok('threshold 1 -> one of the first 3 kit abilities (chosen)', v.npcAbilities[vb].length === 1 && DATA.kits.combat.slice(0, 3).includes(v.npcAbilities[vb][0]), (v.npcAbilities[vb] || []).join(','));
     Game.villagerGainXP(vb, 'combat', DATA.thresholds[1] - x.combat, 'test');
-    T.ok('threshold 2 -> kit[1] (fixed order, deterministic)', JSON.stringify(v.npcAbilities[vb]) === JSON.stringify(DATA.kits.combat.slice(0, 2)));
+    T.ok('threshold 2 -> a second, from the next 3 unheld', v.npcAbilities[vb].length === 2 && DATA.kits.combat.slice(0, 4).includes(v.npcAbilities[vb][1]), (v.npcAbilities[vb] || []).join(','));
     const sk0 = DATA.skills.combat[0];
     T.ok('level ' + DATA.skillLevels[0] + ' teaches the track skill (' + sk0 + ') as a SKILL', Game.npcKnowsSkill(vb, Game.abilitySkillId(sk0)) && !v.npcAbilities[vb].includes(sk0));
     T.ok('the skill answers npcHasAbility', Game.npcHasAbility(vb, sk0));
@@ -221,8 +225,9 @@ function resetPlayer(Game) {
     Game.villagerGainXP(vc, 'field', DATA.thresholds[0], 'test');
     T.ok('pre-arrival: XP accrues, no grant', xc.field === DATA.thresholds[0] && v.npcAbilities[vc].length === 0);
     Game.state.systemArrived = true;
+    v.npcKnow[vc] = { pocket_sand: 2, third_eye: 2 };
     Game.villagerGainXP(vc, 'field', 0, 'test');
-    T.ok('post-arrival: the pending grant fires', v.npcAbilities[vc][0] === DATA.kits.field[0]);
+    T.ok('post-arrival: the pending sheet fires (one of the first 3 field abilities)', v.npcAbilities[vc].length === 1 && DATA.kits.field.slice(0, 3).includes(v.npcAbilities[vc][0]), (v.npcAbilities[vc] || []).join(','));
     T.ok('the dead earn nothing', (() => { const vp = Game.vpOf(vc); vp.dead = true; const r = Game.villagerGainXP(vc, 'field', 5, 'test'); vp.dead = false; return r === 0; })());
   }
 

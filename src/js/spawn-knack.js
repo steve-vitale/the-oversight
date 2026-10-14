@@ -14,7 +14,7 @@
 //   - latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
 //   - knack_fills_slot_1: true (code: spawn-knack.js — chooseKnack pushes to s.abilities; the day-7 gift waits honestly for slot 2)
 //   - knack_lifeseed_tied: true (code: spawn-knack.js — choices derive from char.lifeseed.skillOrigins; memories fill {kin}/{place} from the seed)
-//   - villager_knacks_quiet: true (code: spawn-knack.js — villagers get knacks via lifeseed; gossip-visible, never UI)
+//   - villager_knack_like_player: true (code: spawn-knack.js grantVillagerKnacks — a villager's first ability comes from the same 3 lifeseed-tied choices, picked by buildScore, held in slot 1 of npcAbilities and counted in their build; the player learns of it through gossip, never UI; old-save skill ids are re-chosen from the magic pool)
 // consumes:
 //   - Game.data.abilities (latent_knack pool)
 //   - village.rosterChars.lifeseed (skillOrigins, people, places)
@@ -144,31 +144,55 @@
     },
 
     // grantVillagerKnacks: villagers are all other players too — they get
-    // latent knacks via their lifeseeds. Quiet: stored, gossip-visible, never UI.
+    // the player's first ability the player's way (PARITY 2026-10-14, Steve:
+    // "treat villagers and players as similarly as possible"): the same 3
+    // lifeseed-tied choices (knackChoicesFor), the pick made by the build
+    // brain (buildScore), and it lands in slot 1 of their abilities, counting
+    // toward their build. v.npcKnacks keeps the record gossip reads — the
+    // player learns of it through what the village has seen, never UI.
     grantVillagerKnacks() {
       try {
         const v = this.state.village;
         if (!v) return;
         v.npcKnacks = v.npcKnacks || {};
+        v.npcAbilities = v.npcAbilities || {};
         const roster = (v.roster || []).filter(id => id !== this.villagerId);
         for (const vid of roster) {
-          if (v.npcKnacks[vid]) continue;
           const vp = this.vpOf ? this.vpOf(vid) : null;
-          const all = this.knackPool();
-          if (!all.length) continue;
-          const ls = (vp && vp.lifeseed) || {};
-          const origins = Object.keys(ls.skillOrigins || {});
-          const matched = all.filter(k => (k.knackOrigins || []).some(o => origins.includes(o)));
-          const pool = matched.length ? matched : all;
-          v.npcKnacks[vid] = pick(pool).id;
+          if (vp && vp.dead) continue;
+          let id = v.npcKnacks[vid];
+          // OLD SAVES: knacks stored before the lanes change can be human
+          // skills now (still_hands, storm_ear, pathfinder) — re-choose from
+          // the live magic pool, like liveKnackChoices does for the player.
+          if (id && !this.knackDef(id)) id = null;
+          if (!id) {
+            const choices = this.knackChoicesFor(vp);
+            if (!choices.length) continue;
+            id = (this.pickVillagerKnack && this.pickVillagerKnack(vid, choices)) || choices[0].id;
+            v.npcKnacks[vid] = id;
+          }
+          // slot 1: their first ability, held like any other (one per
+          // villager; never re-granted once it has been swapped away)
+          const held = v.npcAbilities[vid] = v.npcAbilities[vid] || [];
+          v.npcKnackSlotted = v.npcKnackSlotted || {};
+          if (!v.npcKnackSlotted[vid] && held.indexOf(id) < 0 && held.length < 6) {
+            held.unshift(id);
+            try { this.tele('ability_granted', { id, who: 'villager:' + vid, latent: true }); } catch (e) { console.warn('[spawn-knack] tele', e); }
+            try { if (this.npcLearnAbility) this.npcLearnAbility(vid, id, 3, 'held'); } catch (e) { console.warn('[spawn-knack] know', e); }
+          }
+          v.npcKnackSlotted[vid] = true;
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[spawn-knack] grantVillagerKnacks', e); }
     },
 
-    // npcKnack: a villager's latent knack id (or null).
+    // npcKnack: a villager's first-ability id (or null). Only a live magic
+    // knack counts — an old save's skill id reads as none.
     npcKnack(vid) {
-      try { return ((this.state.village || {}).npcKnacks || {})[vid] || null; }
-      catch (e) { return null; }
+      try {
+        const id = ((this.state.village || {}).npcKnacks || {})[vid] || null;
+        return id && this.knackDef(id) ? id : null;
+      }
+      catch (e) { console.warn('[spawn-knack] npcKnack', e); return null; }
     },
 
     // knackGossipLine: gossip-visible, not UI. The teller describes what
@@ -181,18 +205,18 @@
       if (Math.random() > 0.35) return null; // quiet — not everyone mentions it
       const first = this.firstRef ? this.firstRef(targetVid) : targetVid;
       const seen = {
-        storm_ear: `swear ${first} can smell rain coming. Never wrong about it, either.`,
         bloodhound: `${first} found a lost knife by smell last week. By SMELL.`,
         the_touch: `cuts close faster when ${first} wraps them. Don't ask me how.`,
         green_whisper: `${first} talks to the garden. The garden listens. I've seen it.`,
-        still_hands: `watched ${first} stitch a wound in the dark. Hands didn't shake once.`,
-        pathfinder: `${first} never gets lost. Walks like the ground tells them where to go.`,
         beast_calm: `that stray dog — the one that bit two people — lets ${first} touch it.`,
         iron_stomach: `${first} ate something last month that should've killed them. They're fine.`,
         night_eyes: `${first} sees in the dark. Not well — but better than you. Better than me.`,
       };
       const line = seen[knackId];
       if (!line) return null;
+      // VILLAGER KNOWLEDGE (parity 2026-10-14): the teller has seen it work —
+      // they know what it does (L2), the same way the player hears of it.
+      try { if (this.npcLearnAbility) this.npcLearnAbility(tellerVid, knackId, 2, 'gossip:' + targetVid); } catch (e) { console.warn('[spawn-knack] gossip know', e); }
       return { line: `"${line}"`, target: targetVid, field: 'knack', truth: knackId, contradictsLie: false };
     },
   };
@@ -253,6 +277,18 @@
       const r = _gossip.apply(this, arguments);
       if (r && r.line) return r;
       try { return this.knackGossipLine(tellerVid, targetVid); } catch (e) { return null; }
+    };
+  }
+
+  // load: old saves held villager knacks outside their slots (and some are
+  // skills now). Re-run the grant: it re-chooses dead skill ids and slots
+  // the knack once (idempotent).
+  const _loadK = Game.load;
+  if (typeof _loadK === 'function') {
+    Game.load = function () {
+      const r = _loadK.apply(this, arguments);
+      try { if (r !== false && this.state && this.state.village) this.grantVillagerKnacks(); } catch (e) { console.warn('[spawn-knack] load migrate', e); }
+      return r;
     };
   }
 

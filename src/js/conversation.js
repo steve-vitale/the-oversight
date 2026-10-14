@@ -5359,7 +5359,16 @@
       // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,
       // not a hello) is social work — the deed that feeds a villager's social
       // track feeds yours. Per-day capped in the deed table.
-      try { if ((c.transcript || []).length >= 4 && this.noteDeed) this.noteDeed('conversation'); } catch (eT) { console.warn('[tracks] convo deed', eT); }
+      // PARITY (2026-10-14): it was a conversation for both of them — the
+      // villager gets the same social deed, and learns of one ability the
+      // bearer holds (villager ability knowledge, villager-build.js).
+      try {
+        if ((c.transcript || []).length >= 4) {
+          if (this.noteDeed) this.noteDeed('conversation');
+          if (this.creditDeed && vid && vid !== this.villagerId) this.creditDeed(vid, 'conversation');
+          if (this.npcLearnFromTalk && vid && vid !== this.villagerId) this.npcLearnFromTalk(vid, 'player');
+        }
+      } catch (eT) { console.warn('[tracks] convo deed', eT); }
       c.heldBeats = []; c.heldAsk = false; c.winddownQueued = false; c.windingDown = false;
       // INVITATION HONESTY (journey landing r8 2026-10-12): an undecided
       // invite is re-spoken next sitting. inv.spoken meant "the NPC said

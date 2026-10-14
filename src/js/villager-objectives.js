@@ -143,9 +143,35 @@
         o.partsLeft = 1 + Math.floor(R() * 2);
         return o;
       }
+      // THEY WANT TO WIN (parity 2026-10-14, Steve: "villagers need to act
+      // in smart ways, including towards getting good gear and builds. They
+      // want to win as well." / "they need to seek knowledge about the
+      // abilities and go for a build that suits their technology"). A
+      // level-up waiting on what they know comes first: they go and ask
+      // someone who holds or knows abilities (villager-build.js).
+      var wantKnow = null;
+      try { wantKnow = this.villagerWantsKnowledge ? this.villagerWantsKnowledge(vid) : null; } catch (e) { console.warn('[objectives] wantKnow', e); }
+      if (wantKnow === 'sheet' || (wantKnow === 'build' && R() < 0.5)) {
+        var sought = null;
+        try { sought = this.villagerSeekKnowledge(vid); } catch (e) { console.warn('[objectives] seek', e); }
+        if (sought) {
+          o.kind = 'SEEK'; o.purpose = 'seek'; o.state = 'indoor'; o.indoor = true;
+          o.targetVid = (sought.teacher && sought.teacher !== 'player' && sought.teacher !== 'system') ? sought.teacher : null;
+          o.companion = null; o.tx = hx; o.ty = hy; o.tightness = 0;
+          o.partsLeft = 2;
+          return o;
+        }
+      }
+      // the deeds their build needs: the track whose next level-up brings
+      // the ability they're building toward weights the matching errand.
+      var needTrack = null;
+      try { needTrack = this.villagerNeedTrack ? this.villagerNeedTrack(vid) : null; } catch (e) { console.warn('[objectives] needTrack', e); }
       var water = 99;
       try { water = ((v.water || {}).clean == null) ? 99 : v.water.clean; } catch (e) {}
       var cands = [];
+      if (needTrack === 'field' && maxD > 0) cands.push({ kind: 'FORAGE', w: 1.5 });
+      if (needTrack === 'social') cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'teach' });
+      if ((needTrack === 'combat' || needTrack === 'strange') && (prof === 'wanderer' || prof === 'explorer')) cands.push({ kind: 'EXPLORE', w: 1.5 });
       // FORAGE — the village eats, or they do. Homebodies only go when hungry.
       // GOAL r7 (2026-10-12): the 'feed' goal lives here now — "Nobody goes
       // hungry if I can help it. That's the whole thing." They feel the
@@ -265,7 +291,7 @@
           try { _ks = !!(this.vpOf && this.vpOf(vid) && this.vpOf(vid).knowsSnare); } catch (e) {}
           if (_pk.length || _ks) chores.push('teach');
         } catch (e) {}
-        o.chore = pick(chores);
+        o.chore = (chosen.chore && chores.indexOf(chosen.chore) >= 0) ? chosen.chore : pick(chores);
         return o;
       }
       // outdoor target: a real direction, clamped to the 9x9 world

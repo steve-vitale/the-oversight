@@ -1,9 +1,9 @@
 // @ontology
 // system: tracks
-// description: ONE progression system for the player and villagers (Steve 2026-10-14: "I think we need to sync the player and villager system. But the villager system sounds like the better model."). Five tracks (combat, field, social, craft, strange) fed by real deeds; thresholds and kits are data (src/data/tracks.json). Crossing a threshold is a level-up: a villager takes the next unheld kit ability and learns the next track skill; the player gets a level-up sheet, pick 1 of the next 3 unheld kit abilities (src 'level_up:<track>'). Kits are magic only; skill-lane entries become villager SKILLS (no slot). Occupations seed a starting lean (characterGen trackLean), below the first threshold.
+// description: ONE progression system for the player and villagers (Steve 2026-10-14: "I think we need to sync the player and villager system. But the villager system sounds like the better model."). Five tracks (combat, field, social, craft, strange) fed by real deeds; thresholds and kits are data (src/data/tracks.json). Crossing a threshold is a level-up: a villager gets the same 1-of-3 sheet and picks by buildScore (villager-build.js), and learns the next track skill; the player gets a level-up sheet, pick 1 of the next 3 unheld kit abilities (src 'level_up:<track>'). Kits are magic only; skill-lane entries become villager SKILLS (no slot). Occupations seed a starting lean (characterGen trackLean), below the first threshold.
 // provides:
-//   - trackData() -> the tracks.json record (tracks, thresholds, playerScale, kits, skills, deeds)
-//   - trackThresholds(who) -> threshold list ('player' uses thresholds x playerScale)
+//   - trackData() -> the tracks.json record (tracks, thresholds, kits, skills, deeds)
+//   - trackThresholds(who) -> threshold list: ONE scale, the same for the player and every villager (who is ignored; kept for callers)
 //   - trackLevelFor(xp, who) -> thresholds crossed
 //   - gainTrackXP(who, track, n, why) -> new xp; who = 'player' or a villager id (the bearer's id = the player)
 //   - villagerGainXP(vid, track, n, why) -> thin wrapper over gainTrackXP (kept for its callers)
@@ -30,9 +30,10 @@
 //   - npcGrantAbility(vid, id), abilitySlots(), ownedAbilityIds(), isSkillLane(id), abilitySkillId(id)
 // rules:
 //   - same_events_feed_both: a deed credits whoever did it; villagerGainXP with the bearer's id credits the player (code: gainTrackXP)
-//   - shared_data: thresholds, tracks and kits come from tracks.json for both (code: trackData); the player's thresholds are x playerScale (more deeds per day)
+//   - shared_data: thresholds, tracks and kits come from tracks.json for both (code: trackData)
+//   - one_xp_scale: the player and villagers use the same thresholds, the same per-deed credit and the same per-day caps — no player-only multiplier (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way.") (code: trackThresholds, creditDeed)
 //   - kits_magic_only: kits hold lane 'magic' ids only; a villager's skill-lane grant becomes a villager skill, never a slot (code: npcGrantAbility, npcLearnSkill)
-//   - villager_deterministic: villagers take the next unheld kit ability, first wins, no RNG; six-slot cap (code: gainTrackXP)
+//   - villager_chooses_like_player: a villager crossing a threshold gets the player's sheet (next 3 unheld kit abilities), queued on npcXp.sheets and chosen by buildScore; full slots = swap or keep, same rule (code: _villagerTrackXP, villager-build.js villagerResolveLevelUps)
 //   - player_pick_one_of_three: a player level-up offers the next 3 unheld kit abilities; full slots = each pick REPLACES a held ability, or keep what you have (code: pumpLevelUps, chooseAbility, keepAbilities)
 //   - queue_never_drop: level-ups wait in scholar.levelUpQueue behind any pending sheet and before the System's arrival (code: pumpLevelUps)
 //   - lean_below_first_threshold: occupation lean never grants a free level-up at spawn (code: playerTracks, npcXp)
@@ -194,24 +195,21 @@
         try { this.journalNote && this.journalNote('village', 'skill', `${vname()} got good at ${nm} — ${x[track]} ${(T.nouns || {})[track] || track}.`); } catch (e) { warn('journalNote skill', e); }
       }
       if (!this.state.systemArrived) return x[track]; // XP accrues; the System isn't watching yet
-      const kit = (T.kits || {})[track] || [];
+      // PARITY (Steve 2026-10-14: "You should get to swap on level up or keep
+      // existing ... treat villagers and players as similarly as possible"):
+      // each crossing is the player's sheet — the next 3 unheld kit
+      // abilities — queued on x.sheets and chosen by the build brain
+      // (villager-build.js: buildScore, swap or keep when full). x.granted
+      // counts sheets queued, so a sheet is never dropped or doubled.
       let granted = x.granted[track] || 0;
+      const day = (this.state.scholar || {}).day || 0;
+      x.sheets = x.sheets || [];
       while (granted < level) {
-        const held = ((this.state.village || {}).npcAbilities || {})[vid] || [];
-        if (held.length >= (T.maxAbilities || 6)) break; // six slots, same as you
-        // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world.
-        const next = kit.find(id => held.indexOf(id) < 0 && !(id === 'fusion_reactor' && this.state.fusionReactorHolder));
-        if (!next) break; // kit exhausted: natural saturation, XP keeps accruing
-        if (this.npcGrantAbility(vid, next) === false) break; // refused — never narrate a grant that didn't happen
         granted++;
-        const aname = ((this.data.abilities || []).find(a => a.id === next) || {}).name || next;
-        const noun = (T.nouns || {})[track] || track;
-        const label = (T.labels || {})[track] || track;
-        this.say(`◈ THE SYSTEM has been watching ${vname()} — ${x[track]} ${noun}. ${label} ${granted}: it offers ${aname}. Earned, not given. (${next}: villager System grant)`);
-        try { this.journalNote && this.journalNote('system', 'grant', `The System granted ${vname()} ${aname} (${next}) for ${x[track]} ${noun}.`); } catch (e2) { warn('journalNote grant', e2); }
-        try { this.tele('villager_grant', { vid, ability: next, track, xp: x[track] }); } catch (e3) { warn('tele villager_grant', e3); }
+        x.sheets.push({ track, level: granted, day });
       }
       x.granted[track] = granted;
+      if (x.sheets.length && this.villagerResolveLevelUps) this.villagerResolveLevelUps(vid);
       return x[track];
     },
 
