@@ -14,7 +14,7 @@
 //   - moot: caseScore = notability*2 + trust/10 + bravery/10 + temperament; p1 vs risk demand, p2 head-to-head with trust/notability tiebreaks. (code: mootResolve)
 //   - endurance: ordeals with honest costs — starve (health/day), drop (legs/speed/stamina), maw (nerve vs demand), vigil (bravery vs fear), exchange (team relay). (code: enduranceResolve)
 //   - other: stat-driven structured resolution, documented per category; chance is rigged theater (ratings-driven, deterministic). (code: otherResolve)
-//   - deterministic: same villager + same contest + same state = same fate — ENFORCED, not aspirational. Every top-level resolution reseeds a private stream from (day, contest id, participants, stat snapshot) via _cxSeed/_cxWithSeed; roll() bypasses Scattering.combat.roll while _det is set; fieldFight draws from opts.rng. No Math.random anywhere in the resolution path — no hidden rolls, no save-scum (reloading replays the identical fate). The process is real; the player can't see the stats anyway (knowledge-gating). (code: _cxSeed, _cxWithSeed, Steve 2026-10-08; break-it 2026-10-08)
+//   - deterministic: same villager + same contest + same state = same fate — ENFORCED, not aspirational. Every top-level resolution reseeds a private stream from (day, contest id, participants, stat snapshot) via _cxSeed/_cxWithSeed; roll() bypasses Scattering.combat.roll while _det is set; fieldFight draws from opts.rng. No Math.random anywhere in the resolution path — no hidden rolls, no save-scum (reloading replays the identical fate). The process is real; the player can't see the stats anyway (knowledge-gating). (code: _cxSeed, _cxWithSeed, _cxSortIds, Steve 2026-10-08; break-it 2026-10-08; entropy-hunt r26 2026-10-14)
 //   - cheer: watcher's cheer is a real performance modifier (braveryBonus in blood incl. duelFight, case lift in moot); the cheer input is capped at 0.15 as before (alien winMod applies after, as its own meddling). (code: contestResolveGroup, Steve 2026-10-08; break-it 2026-10-08)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
@@ -105,11 +105,37 @@
     // The seed is day + contest + participants + their stat snapshot. Same
     // state in, same fate out — across reloads, which is what closes the
     // save-scum vector (re-resolving after a reload replays the same fate).
+    // Participant ORDER is roster-index, not ID-string (entropy-hunt r26):
+    // villager IDs embed Date.now() (membership.js), so ID-string sorting
+    // gave the same participants a different order on every run of the
+    // same seed, changing _cxSeed and _cxDuelPartner outcomes. Non-roster
+    // ids keep their caller input order (also stable across runs).
+    _cxSortIds: function(ids) {
+      var order = {}, pos = {}, i;
+      try {
+        const roster = (this.state.village || {}).roster || [];
+        for (i = 0; i < roster.length; i++) {
+          if (!Object.prototype.hasOwnProperty.call(order, roster[i])) order[roster[i]] = i;
+        }
+      } catch (e) {}
+      for (i = 0; i < ids.length; i++) {
+        if (!Object.prototype.hasOwnProperty.call(pos, ids[i])) pos[ids[i]] = i;
+      }
+      return ids.slice().sort(function(a, b) {
+        var ah = Object.prototype.hasOwnProperty.call(order, a);
+        var bh = Object.prototype.hasOwnProperty.call(order, b);
+        if (ah && bh) return order[a] - order[b];
+        if (ah) return -1;
+        if (bh) return 1;
+        return pos[a] - pos[b];
+      });
+    },
     _cxSeed: function(pids, contest) {
       var day = 1;
       try { day = (this.state.scholar || {}).day || 1; } catch (e) {}
-      var parts = [day, (contest && contest.id) || '?', pids.slice().sort().join('+')];
-      for (const pid of pids.slice().sort()) {
+      var ordered = this._cxSortIds(pids);
+      var parts = [day, (contest && contest.id) || '?', ordered.join('+')];
+      for (const pid of ordered) {
         try {
           const s = this._cxStats(pid);
           parts.push([pid, s.hp, s.bravery, s.tracking, s.survival, s.trust, s.nota, s.temper, s.wb, s.clever ? 1 : 0].join(':'));
@@ -252,7 +278,7 @@
         }
       } catch (e) {}
       if (!cands.length) return null;
-      cands.sort(); // stable order before the seeded pick
+      cands = this._cxSortIds(cands); // roster-index order: ID strings embed Date.now (entropy-hunt r26)
       return cands[Math.floor(R() * cands.length)];
     },
 
