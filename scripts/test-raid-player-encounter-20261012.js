@@ -74,7 +74,11 @@ async function main() {
     ok(fired, 'raid fired');
     const mid = Game.pendingMonsterId;
     const wms = Game.worldMonsters();
-    const phantom = Game.pendingEncounter && deadIds.includes(mid);
+    // A phantom is an encounter with a dead raider's id and NO live monster
+    // of that id. Raids can carry two of a kind (godpath-buff 2026-10-14:
+    // seed 424242 now raids with two nightcourts); facing the live twin is
+    // the honest outcome, not a phantom.
+    const phantom = Game.pendingEncounter && deadIds.includes(mid) && !wms.some(m => m.id === mid && (m.hp || 0) > 0);
     ok(!phantom, `no phantom: pendingEncounter=${!!Game.pendingEncounter} mid=${mid} (dead: ${deadIds.join(',')})`);
     if (Game.pendingEncounter) {
       const live = wms.some(m => m.id === mid && (m.hp || 0) > 0);
