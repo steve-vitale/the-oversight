@@ -2790,6 +2790,23 @@
     if (fuelDied) meatOutcome = this.downgradeOutcome(meatOutcome);
     let plantOutcome = this.cookOutcome(knowsCook);
     if (fuelDied) plantOutcome = this.downgradeOutcome(plantOutcome);
+    // SPOILAGE (smoke-siblings 2026-10-14): the batch path cooked spoiled
+    // cleaned meat back into 'safe' cooked food (spoilDay = day+5) — the
+    // same laundering class as the duty drive's. Rot can't be cooked back
+    // into food. Same voice as the per-item guard above; bonus-aware
+    // boundary like every other player-side guard (cookFood, preserveFood,
+    // askSpecialist). Discard honestly — "leave it for the flies".
+    {
+      const binv = this.state.scholar.inventory || [];
+      for (let ri = binv.length - 1; ri >= 0; ri--) {
+        const rit = binv[ri];
+        if (rit && rit.foodKind === 'meat' && (rit.foodState === 'cleaned' || rit.undercooked)
+            && this.isSpoiled && this.isSpoiled(rit)) {
+          captured.push(`The ${rit.name} went bad — cooking won't save it. You leave it for the flies.`);
+          binv.splice(ri, 1);
+        }
+      }
+    }
     for (const item of (this.state.scholar.inventory || [])) {
       if (item.foodKind === 'meat' && (item.foodState === 'cleaned' || item.undercooked)) {
         const mId = (item.plantId || '').replace(/^meat_/, '');
