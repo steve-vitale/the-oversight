@@ -1,0 +1,6936 @@
+{
+ "policy": "leadcourt",
+ "seed": 11,
+ "invocation": 1,
+ "days": 86,
+ "gameDays": 87,
+ "endReason": "village-lost",
+ "waveReach": 4,
+ "maxArc": 3,
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "villageDays": 653,
+ "scholarTrustEnd": 48,
+ "successions": 3,
+ "deltas": [
+  {
+   "channel": "gain:assignment-deed",
+   "fires": 303,
+   "pos": 308,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 47.17,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:rep-drift+",
+   "fires": 117,
+   "pos": 121,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 18.53,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:social-away",
+   "fires": 51,
+   "pos": 56,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 8.58,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:objective-tick",
+   "fires": 54,
+   "pos": 54,
+   "neg": 0,
+   "sPos": 1,
+   "sNeg": 0,
+   "sFires": 1,
+   "combos": 0,
+   "per100vd_pos": 8.27,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0.15,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:work-deed",
+   "fires": 48,
+   "pos": 48,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 7.35,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:monster-deed",
+   "fires": 21,
+   "pos": 39,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 5.97,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "set:newcomer-trust",
+   "fires": 3,
+   "pos": 30,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 4.59,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:forage-deed",
+   "fires": 12,
+   "pos": 12,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 1.84,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:npc-initiative",
+   "fires": 4,
+   "pos": 8,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 1.23,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "set:succession-inherit",
+   "fires": 9,
+   "pos": 4,
+   "neg": -131,
+   "sPos": 2,
+   "sNeg": -53,
+   "sFires": 4,
+   "combos": 0,
+   "per100vd_pos": 0.61,
+   "per100vd_neg": -20.06,
+   "per100vd_sPos": 0.31,
+   "per100vd_sNeg": -8.12
+  },
+  {
+   "channel": "gain:mentor-slot",
+   "fires": 1,
+   "pos": 4,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0.61,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:expedition-return",
+   "fires": 1,
+   "pos": 1,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0.15,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:fireside-conflict+",
+   "fires": 1,
+   "pos": 1,
+   "neg": 0,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0.15,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:donate-unload",
+   "fires": 1,
+   "pos": 1,
+   "neg": 0,
+   "sPos": 1,
+   "sNeg": 0,
+   "sFires": 1,
+   "combos": 0,
+   "per100vd_pos": 0.15,
+   "per100vd_neg": 0,
+   "per100vd_sPos": 0.15,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "drain:lead-friction",
+   "fires": 59,
+   "pos": 0,
+   "neg": -118,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -18.07,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "drain:pantry-take-sting",
+   "fires": 7,
+   "pos": 0,
+   "neg": -14,
+   "sPos": 0,
+   "sNeg": -14,
+   "sFires": 7,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -2.14,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": -2.14
+  },
+  {
+   "channel": "drain:auto-recruit",
+   "fires": 12,
+   "pos": 0,
+   "neg": -12,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -1.84,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "drain:ignored-ask",
+   "fires": 3,
+   "pos": 0,
+   "neg": -6,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -0.92,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "drain:convo-fallout",
+   "fires": 3,
+   "pos": 0,
+   "neg": -6,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -0.92,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:fireside-conflict-",
+   "fires": 1,
+   "pos": 0,
+   "neg": -3,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -0.46,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  },
+  {
+   "channel": "gain:rep-drift-",
+   "fires": 2,
+   "pos": 0,
+   "neg": -2,
+   "sPos": 0,
+   "sNeg": 0,
+   "sFires": 0,
+   "combos": 0,
+   "per100vd_pos": 0,
+   "per100vd_neg": -0.31,
+   "per100vd_sPos": 0,
+   "per100vd_sNeg": 0
+  }
+ ],
+ "periodic": [
+  {
+   "channel": "set:succession-inherit",
+   "fires": 2,
+   "total": -53,
+   "medianGapDays": 22,
+   "regular": false
+  },
+  {
+   "channel": "drain:pantry-take-sting",
+   "fires": 7,
+   "total": -14,
+   "medianGapDays": 0,
+   "regular": true
+  }
+ ],
+ "progThresh": {
+  "<30": {
+   "calls": 3,
+   "base": 2,
+   "scaled": 2,
+   "eff": 1
+  },
+  "30-49": {
+   "calls": 0,
+   "base": 0,
+   "scaled": 0,
+   "eff": null
+  },
+  "50+": {
+   "calls": 0,
+   "base": 0,
+   "scaled": 0,
+   "eff": null
+  }
+ },
+ "ablations": [
+  {
+   "vid": "gen_dkjljvy",
+   "days": 58,
+   "startTrust": 15,
+   "endTrust": 2,
+   "belowClass": "born-below",
+   "daysBelow30": 58,
+   "inherit": null,
+   "actualDaysAbove": 0,
+   "ablatedDaysAbove": 0,
+   "gained": 0,
+   "stingRemoved": -14,
+   "replayError": 0
+  },
+  {
+   "vid": "carlos_diaz",
+   "days": 5,
+   "startTrust": 37,
+   "endTrust": 37,
+   "belowClass": "held-above",
+   "daysBelow30": 0,
+   "inherit": {
+    "day": 60,
+    "oldId": "gen_dkjljvy",
+    "newId": "carlos_diaz",
+    "neu": 37,
+    "office": 2,
+    "own": 90,
+    "raw": 36.8,
+    "vouch": 0,
+    "clamped": false,
+    "check": "ok"
+   },
+   "actualDaysAbove": 5,
+   "ablatedDaysAbove": 5,
+   "gained": 0,
+   "stingRemoved": 0,
+   "replayError": 0
+  },
+  {
+   "vid": "priya_nair",
+   "days": 22,
+   "startTrust": 28,
+   "endTrust": 29,
+   "belowClass": "born-below",
+   "daysBelow30": 22,
+   "inherit": {
+    "day": 65,
+    "oldId": "carlos_diaz",
+    "newId": "priya_nair",
+    "neu": 28,
+    "office": 37,
+    "own": 39,
+    "raw": 30.4,
+    "vouch": -2,
+    "clamped": false,
+    "check": "UNEXPECTED"
+   },
+   "actualDaysAbove": 0,
+   "ablatedDaysAbove": 0,
+   "gained": 0,
+   "stingRemoved": 0,
+   "replayError": 0
+  },
+  {
+   "vid": "app_mgpsphei468",
+   "days": 2,
+   "startTrust": 48,
+   "endTrust": 48,
+   "belowClass": "held-above",
+   "daysBelow30": 0,
+   "inherit": {
+    "day": 87,
+    "oldId": "priya_nair",
+    "newId": "app_mgpsphei468",
+    "neu": 48,
+    "office": 29,
+    "own": 90,
+    "raw": 47.6,
+    "vouch": 0,
+    "clamped": false,
+    "check": "ok"
+   },
+   "actualDaysAbove": 2,
+   "ablatedDaysAbove": 2,
+   "gained": 0,
+   "stingRemoved": 0,
+   "replayError": 0
+  }
+ ],
+ "successionsDetail": [
+  {
+   "day": 60,
+   "oldId": "gen_dkjljvy",
+   "newId": "carlos_diaz",
+   "neu": 37,
+   "office": 2,
+   "own": 90,
+   "raw": 36.8,
+   "vouch": 0,
+   "clamped": false,
+   "check": "ok"
+  },
+  {
+   "day": 65,
+   "oldId": "carlos_diaz",
+   "newId": "priya_nair",
+   "neu": 28,
+   "office": 37,
+   "own": 39,
+   "raw": 30.4,
+   "vouch": -2,
+   "clamped": false,
+   "check": "UNEXPECTED"
+  },
+  {
+   "day": 87,
+   "oldId": "priya_nair",
+   "newId": "app_mgpsphei468",
+   "neu": 48,
+   "office": 29,
+   "own": 90,
+   "raw": 47.6,
+   "vouch": 0,
+   "clamped": false,
+   "check": "ok"
+  }
+ ],
+ "tenures": [
+  {
+   "vid": "gen_dkjljvy",
+   "days": 58,
+   "startTrust": 15,
+   "endTrust": 2,
+   "maxTrust": 15,
+   "minTrust": 1,
+   "daysBelow30": 58,
+   "daysAtOrAbove30": 0,
+   "belowClass": "born-below",
+   "drainTotal": -14,
+   "gainTotal": 1,
+   "setTotal": 0,
+   "drainByChannel": {
+    "drain:pantry-take-sting": -14
+   },
+   "gainByChannel": {
+    "gain:donate-unload": 1
+   },
+   "inherit": null
+  },
+  {
+   "vid": "carlos_diaz",
+   "days": 5,
+   "startTrust": 37,
+   "endTrust": 37,
+   "maxTrust": 37,
+   "minTrust": 37,
+   "daysBelow30": 0,
+   "daysAtOrAbove30": 5,
+   "belowClass": "held-above",
+   "drainTotal": 0,
+   "gainTotal": 0,
+   "setTotal": 0,
+   "drainByChannel": {},
+   "gainByChannel": {},
+   "inherit": {
+    "day": 60,
+    "oldId": "gen_dkjljvy",
+    "newId": "carlos_diaz",
+    "neu": 37,
+    "office": 2,
+    "own": 90,
+    "raw": 36.8,
+    "vouch": 0,
+    "clamped": false,
+    "check": "ok"
+   }
+  },
+  {
+   "vid": "priya_nair",
+   "days": 22,
+   "startTrust": 28,
+   "endTrust": 29,
+   "maxTrust": 29,
+   "minTrust": 28,
+   "daysBelow30": 22,
+   "daysAtOrAbove30": 0,
+   "belowClass": "born-below",
+   "drainTotal": 0,
+   "gainTotal": 1,
+   "setTotal": -9,
+   "drainByChannel": {},
+   "gainByChannel": {
+    "gain:objective-tick": 1
+   },
+   "inherit": {
+    "day": 65,
+    "oldId": "carlos_diaz",
+    "newId": "priya_nair",
+    "neu": 28,
+    "office": 37,
+    "own": 39,
+    "raw": 30.4,
+    "vouch": -2,
+    "clamped": false,
+    "check": "UNEXPECTED"
+   }
+  },
+  {
+   "vid": "app_mgpsphei468",
+   "days": 2,
+   "startTrust": 48,
+   "endTrust": 48,
+   "maxTrust": 48,
+   "minTrust": 48,
+   "daysBelow30": 0,
+   "daysAtOrAbove30": 2,
+   "belowClass": "held-above",
+   "drainTotal": 0,
+   "gainTotal": 0,
+   "setTotal": -42,
+   "drainByChannel": {},
+   "gainByChannel": {},
+   "inherit": {
+    "day": 87,
+    "oldId": "priya_nair",
+    "newId": "app_mgpsphei468",
+    "neu": 48,
+    "office": 29,
+    "own": 90,
+    "raw": 47.6,
+    "vouch": 0,
+    "clamped": false,
+    "check": "ok"
+   }
+  }
+ ],
+ "senseBeats": [
+  {
+   "channel": "set:succession-inherit",
+   "scope": "sitting-scholar",
+   "beats": [
+    "d65: — DAY 65 DAWN — The world wakes. Animals are active.",
+    "d65: The door is quiet. Haven breathes.",
+    "d65: OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "d65: You STRIKE the Highbeam Deer for 14.",
+    "d87: 📻 The old ones point at the horizon and don't speak. The System, for once, is quiet too. Then: the Herald. It heralds the apocalypse the way dawn her",
+    "d87: — DAY 87 DAWN — The world wakes. Animals are active.",
+    "d87: Overnight, Lamb's Quarters went bad — beyond saving. You leave it for the flies.",
+    "d87: Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+   ]
+  },
+  {
+   "channel": "set:succession-inherit",
+   "scope": "sitting-scholar",
+   "beats": [
+    "d65: — DAY 65 DAWN — The world wakes. Animals are active.",
+    "d65: The door is quiet. Haven breathes.",
+    "d65: OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "d65: You STRIKE the Highbeam Deer for 14.",
+    "d87: 📻 The old ones point at the horizon and don't speak. The System, for once, is quiet too. Then: the Herald. It heralds the apocalypse the way dawn her",
+    "d87: — DAY 87 DAWN — The world wakes. Animals are active.",
+    "d87: Overnight, Lamb's Quarters went bad — beyond saving. You leave it for the flies.",
+    "d87: Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+   ]
+  }
+ ],
+ "unclassified": [],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "3:3|105|2390|12|4|4|1|307",
+  "4:4|110|1526|12|4|4|1|265",
+  "5:5|110|1271|12|4|4|1|238",
+  "6:6|110|1190|12|4|4|1|222",
+  "7:7|110|1200|12|4|4|1|221",
+  "8:8|110|1129|12|4|4|1|235",
+  "9:9|82|1000|12|4|4|1|233",
+  "10:10|106|1400|12|4|4|1|216",
+  "11:11|110|1293|11|4|4|1|197",
+  "12:12|110|1219|11|4|4|1|191",
+  "13:13|110|1329|11|4|4|1|179",
+  "14:14|110|1316|10|4|4|1|159",
+  "15:15|110|1259|10|4|4|1|194",
+  "16:16|99|1300|10|4|4|1|259",
+  "17:17|110|1585|10|4|4|1|311",
+  "18:18|110|1595|10|4|4|1|272",
+  "19:19|110|1787|10|4|4|1|241",
+  "20:20|110|2400|10|4|4|1|257",
+  "21:21|110|2400|10|4|4|1|267",
+  "22:22|110|2400|10|4|4|1|247",
+  "23:23|110|2400|10|4|4|1|237",
+  "24:24|109|2400|10|4|4|1|273",
+  "25:25|109|2400|10|4|4|1|297",
+  "26:26|110|2400|10|4|4|1|375",
+  "27:27|110|2400|10|4|4|1|365",
+  "28:28|110|2400|10|4|4|1|363",
+  "29:29|110|2400|9|4|4|1|397",
+  "30:30|110|2400|9|4|4|1|392",
+  "31:31|110|2400|9|4|4|1|378",
+  "32:32|110|2400|9|4|4|1|335",
+  "33:33|110|2400|9|4|4|1|344",
+  "34:34|110|2400|9|4|4|1|374",
+  "35:35|110|2400|9|4|4|1|390",
+  "36:36|110|2400|9|4|4|1|448",
+  "37:37|110|2400|9|4|4|1|473",
+  "38:38|105|2400|9|4|4|1|445",
+  "39:39|110|2400|9|4|4|1|428",
+  "40:40|110|2400|9|4|4|1|400",
+  "41:41|110|2400|9|4|4|1|406",
+  "42:42|110|2400|9|4|4|1|415",
+  "43:43|105|2391|9|4|4|1|490",
+  "44:44|110|2400|9|4|4|1|537",
+  "45:45|110|2400|9|4|4|1|584",
+  "46:46|110|2400|9|4|4|1|617",
+  "47:47|110|2400|9|4|4|1|649",
+  "48:48|110|2400|9|4|4|1|686",
+  "49:49|110|2400|9|4|4|1|703",
+  "50:50|110|2400|9|4|4|1|818",
+  "51:51|110|2400|9|4|4|1|829",
+  "52:52|110|2400|8|4|4|1|861",
+  "53:53|110|2400|7|4|4|1|866",
+  "54:54|110|2400|7|4|4|1|893",
+  "55:55|80|2400|6|4|4|2|864",
+  "56:56|57|2382|7|4|3|2|745",
+  "57:57|73|2400|7|4|3|2|769",
+  "58:58|89|2400|7|4|3|2|742",
+  "59:59|93|2400|9|4|3|2|674",
+  "60:60|110|2400|8|4|4|2|628",
+  "61:61|100|2400|8|4|4|2|610",
+  "62:62|100|2400|8|4|4|4|599",
+  "63:63|95|2400|8|4|4|4|462",
+  "64:64|86|2400|7|4|4|4|457",
+  "65:65|100|2400|4|4|4|4|429",
+  "66:66|100|2400|4|4|4|4|388",
+  "67:67|100|2400|4|4|4|4|341",
+  "68:68|100|2400|4|4|4|4|291",
+  "69:69|100|2400|4|4|4|4|286",
+  "70:70|100|2400|4|4|4|4|174",
+  "71:71|96|2400|3|4|4|4|244",
+  "72:72|96|2400|2|4|4|4|230",
+  "73:73|100|2400|2|4|4|4|124",
+  "74:74|95|2400|2|4|4|4|105",
+  "75:75|100|2400|2|4|4|4|0",
+  "76:76|100|2400|2|4|4|4|5",
+  "77:77|100|2400|2|4|4|4|7",
+  "78:78|100|2400|2|4|4|4|66",
+  "79:79|100|2400|2|4|4|4|38",
+  "80:80|100|2400|2|4|4|4|0",
+  "81:81|100|2400|2|4|4|4|4",
+  "82:82|100|2400|2|4|4|4|5",
+  "83:83|100|2400|2|4|4|4|31",
+  "84:84|100|2400|2|4|4|4|35",
+  "85:85|100|2400|2|4|4|4|133",
+  "86:86|100|2400|2|4|4|4|131",
+  "87:87|100|1500|1|4|4|4|125"
+ ],
+ "writes": [
+  {
+   "day": 1,
+   "vid": "gen_1fo0vsd",
+   "old": 5,
+   "neu": 6,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 1,
+   "vid": "gen_4u3grun",
+   "old": 6,
+   "neu": 7,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 2,
+   "vid": "carlos_diaz",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 2,
+   "vid": "gen_8mgbopq",
+   "old": 9,
+   "neu": 10,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 2,
+   "vid": "gen_w5ozrfy",
+   "old": 8,
+   "neu": 10,
+   "delta": 2,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 2,
+   "vid": "gen_1fo0vsd",
+   "old": 6,
+   "neu": 7,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 2,
+   "vid": "gen_4u3grun",
+   "old": 7,
+   "neu": 8,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 3,
+   "vid": "katarina_novak",
+   "old": 7,
+   "neu": 8,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 3,
+   "vid": "gen_8mgbopq",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 3,
+   "vid": "gen_4u3grun",
+   "old": 8,
+   "neu": 9,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 3,
+   "vid": "zoltan_nagy",
+   "old": 8,
+   "neu": 9,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 3,
+   "vid": "carlos_diaz",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 3,
+   "vid": "gen_on6rk2z",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 3,
+   "vid": "carlos_diaz",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 3,
+   "vid": "zoe_adams",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 4,
+   "vid": "priya_nair",
+   "old": 5,
+   "neu": 6,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 4,
+   "vid": "gen_on6rk2z",
+   "old": 18,
+   "neu": 20,
+   "delta": 2,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 4,
+   "vid": "zoltan_nagy",
+   "old": 9,
+   "neu": 10,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 4,
+   "vid": "zoe_adams",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 4,
+   "vid": "gen_on6rk2z",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 4,
+   "vid": "zoe_adams",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 4,
+   "vid": "carlos_diaz",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 4,
+   "vid": "gen_1fo0vsd",
+   "old": 7,
+   "neu": 8,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 4,
+   "vid": "gen_on6rk2z",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 4,
+   "vid": "zoe_adams",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 5,
+   "vid": "gen_on6rk2z",
+   "old": 22,
+   "neu": 24,
+   "delta": 2,
+   "caller": "villagerInitiative"
+  },
+  {
+   "day": 5,
+   "vid": "gen_4u3grun",
+   "old": 9,
+   "neu": 10,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 5,
+   "vid": "gen_w5ozrfy",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 5,
+   "vid": "ingrid_vik",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 5,
+   "vid": "katarina_novak",
+   "old": 8,
+   "neu": 9,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 5,
+   "vid": "carlos_diaz",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 5,
+   "vid": "gen_1fo0vsd",
+   "old": 8,
+   "neu": 9,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 5,
+   "vid": "gen_8mgbopq",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 5,
+   "vid": "priya_nair",
+   "old": 6,
+   "neu": 7,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 5,
+   "vid": "ingrid_vik",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 6,
+   "vid": "gen_4u3grun",
+   "old": 10,
+   "neu": 12,
+   "delta": 2,
+   "caller": "villagerInitiative"
+  },
+  {
+   "day": 6,
+   "vid": "carlos_diaz",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 6,
+   "vid": "gen_w5ozrfy",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 6,
+   "vid": "zoltan_nagy",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 6,
+   "vid": "gen_w5ozrfy",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 6,
+   "vid": "gen_on6rk2z",
+   "old": 24,
+   "neu": 26,
+   "delta": 2,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 6,
+   "vid": "zoltan_nagy",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 6,
+   "vid": "zoltan_nagy",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 6,
+   "vid": "carlos_diaz",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 6,
+   "vid": "gen_8mgbopq",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 7,
+   "vid": "gen_4u3grun",
+   "old": 12,
+   "neu": 10,
+   "delta": -2,
+   "caller": "tickNeeds"
+  },
+  {
+   "day": 7,
+   "vid": "carlos_diaz",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 7,
+   "vid": "zoltan_nagy",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 7,
+   "vid": "gen_4u3grun",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 7,
+   "vid": "priya_nair",
+   "old": 7,
+   "neu": 8,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 7,
+   "vid": "katarina_novak",
+   "old": 9,
+   "neu": 12,
+   "delta": 3,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 7,
+   "vid": "carlos_diaz",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 7,
+   "vid": "gen_8mgbopq",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 7,
+   "vid": "gen_w5ozrfy",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 7,
+   "vid": "zoe_adams",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 8,
+   "vid": "gen_4u3grun",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 8,
+   "vid": "ingrid_vik",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 8,
+   "vid": "gen_w5ozrfy",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 8,
+   "vid": "gen_on6rk2z",
+   "old": 26,
+   "neu": 28,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 8,
+   "vid": "carlos_diaz",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 8,
+   "vid": "gen_1fo0vsd",
+   "old": 9,
+   "neu": 10,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 8,
+   "vid": "gen_8mgbopq",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 8,
+   "vid": "carlos_diaz",
+   "old": 29,
+   "neu": 31,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 8,
+   "vid": "zoltan_nagy",
+   "old": 14,
+   "neu": 17,
+   "delta": 3,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 9,
+   "vid": "gen_4u3grun",
+   "old": 12,
+   "neu": 14,
+   "delta": 2,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 9,
+   "vid": "gen_1fo0vsd",
+   "old": 10,
+   "neu": 12,
+   "delta": 2,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 9,
+   "vid": "gen_8mgbopq",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 9,
+   "vid": "priya_nair",
+   "old": 8,
+   "neu": 9,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 9,
+   "vid": "gen_4u3grun",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 9,
+   "vid": "katarina_novak",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 9,
+   "vid": "ingrid_vik",
+   "old": 13,
+   "neu": 15,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 9,
+   "vid": "gen_1fo0vsd",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 9,
+   "vid": "gen_4u3grun",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 9,
+   "vid": "carlos_diaz",
+   "old": 31,
+   "neu": 29,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 9,
+   "vid": "gen_1fo0vsd",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 9,
+   "vid": "carlos_diaz",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 9,
+   "vid": "gen_4u3grun",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 9,
+   "vid": "zoltan_nagy",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 9,
+   "vid": "gen_8mgbopq",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 9,
+   "vid": "gen_w5ozrfy",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 9,
+   "vid": "priya_nair",
+   "old": 9,
+   "neu": 10,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "gen_w5ozrfy",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "zoe_adams",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "ingrid_vik",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "gen_4u3grun",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "zoltan_nagy",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "gen_w5ozrfy",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "zoltan_nagy",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "gen_4u3grun",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 10,
+   "vid": "priya_nair",
+   "old": 10,
+   "neu": 11,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "gen_4u3grun",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "carlos_diaz",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "zoltan_nagy",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "gen_1fo0vsd",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 10,
+   "vid": "gen_4u3grun",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 10,
+   "vid": "carlos_diaz",
+   "old": 31,
+   "neu": 29,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 10,
+   "vid": "gen_1fo0vsd",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 10,
+   "vid": "carlos_diaz",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 10,
+   "vid": "gen_4u3grun",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 10,
+   "vid": "gen_8mgbopq",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 10,
+   "vid": "carlos_diaz",
+   "old": 30,
+   "neu": 34,
+   "delta": 4,
+   "caller": "slotMoment"
+  },
+  {
+   "day": 11,
+   "vid": "zoe_adams",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 11,
+   "vid": "priya_nair",
+   "old": 11,
+   "neu": 12,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 11,
+   "vid": "gen_1fo0vsd",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 11,
+   "vid": "zoe_adams",
+   "old": 24,
+   "neu": 26,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 11,
+   "vid": "gen_1fo0vsd",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 11,
+   "vid": "gen_4u3grun",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 11,
+   "vid": "carlos_diaz",
+   "old": 34,
+   "neu": 32,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 11,
+   "vid": "gen_1fo0vsd",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 11,
+   "vid": "carlos_diaz",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 11,
+   "vid": "gen_4u3grun",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 12,
+   "vid": "katarina_novak",
+   "old": 13,
+   "neu": 15,
+   "delta": 2,
+   "caller": "villagerInitiative"
+  },
+  {
+   "day": 12,
+   "vid": "gen_8mgbopq",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 12,
+   "vid": "zoe_adams",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 12,
+   "vid": "gen_8mgbopq",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 12,
+   "vid": "carlos_diaz",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 12,
+   "vid": "gen_w5ozrfy",
+   "old": 18,
+   "neu": 20,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 12,
+   "vid": "gen_1fo0vsd",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 12,
+   "vid": "gen_4u3grun",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 12,
+   "vid": "gen_1fo0vsd",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 12,
+   "vid": "carlos_diaz",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 12,
+   "vid": "gen_4u3grun",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 12,
+   "vid": "zoltan_nagy",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 12,
+   "vid": "priya_nair",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 12,
+   "vid": "gen_4u3grun",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "expeditionReturn"
+  },
+  {
+   "day": 13,
+   "vid": "gen_w5ozrfy",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 13,
+   "vid": "gen_1fo0vsd",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 13,
+   "vid": "gen_4u3grun",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 13,
+   "vid": "gen_1fo0vsd",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 13,
+   "vid": "carlos_diaz",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 13,
+   "vid": "gen_4u3grun",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 13,
+   "vid": "gen_4u3grun",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 13,
+   "vid": "priya_nair",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 14,
+   "vid": "gen_1fo0vsd",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 14,
+   "vid": "carlos_diaz",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "gen_1fo0vsd",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "gen_8mgbopq",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 14,
+   "vid": "gen_w5ozrfy",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 14,
+   "vid": "carlos_diaz",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "zoltan_nagy",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 14,
+   "vid": "gen_1fo0vsd",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 14,
+   "vid": "gen_4u3grun",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 14,
+   "vid": "gen_1fo0vsd",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 14,
+   "vid": "gen_4u3grun",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 40,
+   "neu": 38,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "priya_nair",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 15,
+   "vid": "gen_8mgbopq",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 37,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 37,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 15,
+   "vid": "gen_4u3grun",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "carlos_diaz",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_4u3grun",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 15,
+   "vid": "gen_1fo0vsd",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "incidents"
+  },
+  {
+   "day": 15,
+   "vid": "gen_8mgbopq",
+   "old": 22,
+   "neu": 19,
+   "delta": -3,
+   "caller": "incidents"
+  },
+  {
+   "day": 16,
+   "vid": "ingrid_vik",
+   "old": 16,
+   "neu": 18,
+   "delta": 2,
+   "caller": "villagerInitiative"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "ingrid_vik",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "ingrid_vik",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 40,
+   "neu": 38,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 40,
+   "neu": 41,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "gen_4u3grun",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 37,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 16,
+   "vid": "gen_1fo0vsd",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "carlos_diaz",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 16,
+   "vid": "gen_4u3grun",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "gen_1fo0vsd",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "gen_1fo0vsd",
+   "old": 43,
+   "neu": 44,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 40,
+   "neu": 41,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 43,
+   "neu": 44,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "gen_1fo0vsd",
+   "old": 44,
+   "neu": 45,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 44,
+   "neu": 42,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 17,
+   "vid": "gen_4u3grun",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 17,
+   "vid": "gen_1fo0vsd",
+   "old": 45,
+   "neu": 46,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "carlos_diaz",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "gen_4u3grun",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "gen_4u3grun",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 17,
+   "vid": "ingrid_vik",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 46,
+   "neu": 47,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 43,
+   "neu": 41,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 47,
+   "neu": 48,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 43,
+   "neu": 44,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 44,
+   "neu": 45,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_8mgbopq",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 18,
+   "vid": "gen_w5ozrfy",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 48,
+   "neu": 49,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 45,
+   "neu": 46,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 46,
+   "neu": 47,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 49,
+   "neu": 50,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 50,
+   "neu": 51,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 18,
+   "vid": "gen_4u3grun",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 18,
+   "vid": "gen_8mgbopq",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 18,
+   "vid": "gen_1fo0vsd",
+   "old": 51,
+   "neu": 52,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "carlos_diaz",
+   "old": 47,
+   "neu": 48,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_4u3grun",
+   "old": 40,
+   "neu": 41,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_8mgbopq",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 18,
+   "vid": "gen_8mgbopq",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 52,
+   "neu": 53,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 48,
+   "neu": 49,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 49,
+   "neu": 50,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 53,
+   "neu": 54,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "gen_4u3grun",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 54,
+   "neu": 55,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 19,
+   "vid": "ingrid_vik",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 55,
+   "neu": 56,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 50,
+   "neu": 51,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 51,
+   "neu": 52,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 52,
+   "neu": 53,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 53,
+   "neu": 54,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 56,
+   "neu": 57,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 19,
+   "vid": "gen_4u3grun",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 19,
+   "vid": "gen_1fo0vsd",
+   "old": 57,
+   "neu": 58,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "carlos_diaz",
+   "old": 54,
+   "neu": 55,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 19,
+   "vid": "gen_4u3grun",
+   "old": 43,
+   "neu": 44,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_1fo0vsd",
+   "old": 58,
+   "neu": 59,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 55,
+   "neu": 56,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 56,
+   "neu": 57,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 57,
+   "neu": 58,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_1fo0vsd",
+   "old": 59,
+   "neu": 60,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_dkjljvy",
+   "old": 15,
+   "neu": 13,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 20,
+   "vid": "gen_dkjljvy",
+   "old": 13,
+   "neu": 11,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 20,
+   "vid": "gen_dkjljvy",
+   "old": 11,
+   "neu": 9,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 58,
+   "neu": 59,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 59,
+   "neu": 60,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 60,
+   "neu": 61,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 61,
+   "neu": 62,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 62,
+   "neu": 63,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_1fo0vsd",
+   "old": 60,
+   "neu": 61,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 20,
+   "vid": "gen_4u3grun",
+   "old": 44,
+   "neu": 45,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 20,
+   "vid": "gen_8mgbopq",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 64,
+   "neu": 62,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 20,
+   "vid": "gen_1fo0vsd",
+   "old": 61,
+   "neu": 62,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "carlos_diaz",
+   "old": 62,
+   "neu": 63,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_4u3grun",
+   "old": 45,
+   "neu": 46,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_8mgbopq",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 20,
+   "vid": "gen_8mgbopq",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 62,
+   "neu": 63,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 64,
+   "neu": 65,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 65,
+   "neu": 66,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 66,
+   "neu": 67,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 67,
+   "neu": 68,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "priya_nair",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 21,
+   "vid": "gen_8mgbopq",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 64,
+   "neu": 65,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 69,
+   "neu": 67,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 67,
+   "neu": 68,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 69,
+   "neu": 70,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 65,
+   "neu": 66,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 66,
+   "neu": 67,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 70,
+   "neu": 68,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 21,
+   "vid": "gen_4u3grun",
+   "old": 46,
+   "neu": 47,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 21,
+   "vid": "gen_8mgbopq",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 21,
+   "vid": "gen_1fo0vsd",
+   "old": 67,
+   "neu": 68,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "carlos_diaz",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_4u3grun",
+   "old": 47,
+   "neu": 48,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_8mgbopq",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 21,
+   "vid": "gen_8mgbopq",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "gen_1fo0vsd",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 69,
+   "neu": 70,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 70,
+   "neu": 71,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 71,
+   "neu": 72,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "gen_1fo0vsd",
+   "old": 69,
+   "neu": 70,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "zoe_adams",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 22,
+   "vid": "gen_1fo0vsd",
+   "old": 70,
+   "neu": 71,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 72,
+   "neu": 73,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 73,
+   "neu": 74,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 74,
+   "neu": 75,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "priya_nair",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 22,
+   "vid": "zoe_adams",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 75,
+   "neu": 76,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 76,
+   "neu": 77,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 77,
+   "neu": 78,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "gen_1fo0vsd",
+   "old": 71,
+   "neu": 72,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 22,
+   "vid": "gen_4u3grun",
+   "old": 48,
+   "neu": 49,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 78,
+   "neu": 76,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 22,
+   "vid": "gen_1fo0vsd",
+   "old": 72,
+   "neu": 73,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "carlos_diaz",
+   "old": 76,
+   "neu": 77,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 22,
+   "vid": "gen_4u3grun",
+   "old": 49,
+   "neu": 50,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_dkjljvy",
+   "old": 9,
+   "neu": 7,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 23,
+   "vid": "gen_dkjljvy",
+   "old": 7,
+   "neu": 5,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 23,
+   "vid": "gen_1fo0vsd",
+   "old": 73,
+   "neu": 74,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 77,
+   "neu": 75,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 75,
+   "neu": 76,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 76,
+   "neu": 77,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 77,
+   "neu": 78,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 78,
+   "neu": 79,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 79,
+   "neu": 80,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_1fo0vsd",
+   "old": 74,
+   "neu": 75,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 80,
+   "neu": 81,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 23,
+   "vid": "zoltan_nagy",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 23,
+   "vid": "zoltan_nagy",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 81,
+   "neu": 82,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 82,
+   "neu": 83,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 83,
+   "neu": 84,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 84,
+   "neu": 85,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 85,
+   "neu": 86,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_1fo0vsd",
+   "old": 75,
+   "neu": 76,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 23,
+   "vid": "gen_4u3grun",
+   "old": 50,
+   "neu": 51,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 86,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 23,
+   "vid": "carlos_diaz",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_1fo0vsd",
+   "old": 76,
+   "neu": 77,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_4u3grun",
+   "old": 51,
+   "neu": 52,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 23,
+   "vid": "gen_4u3grun",
+   "old": 52,
+   "neu": 53,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "gen_dkjljvy",
+   "old": 5,
+   "neu": 3,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 24,
+   "vid": "gen_dkjljvy",
+   "old": 3,
+   "neu": 1,
+   "delta": -2,
+   "caller": "takeFromPantry"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 77,
+   "neu": 78,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 85,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 85,
+   "neu": 86,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 78,
+   "neu": 79,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "zoe_adams",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 79,
+   "neu": 80,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 80,
+   "neu": 81,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 81,
+   "neu": 82,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 24,
+   "vid": "gen_4u3grun",
+   "old": 53,
+   "neu": 54,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 24,
+   "vid": "gen_8mgbopq",
+   "old": 30,
+   "neu": 28,
+   "delta": -2,
+   "caller": "convoConflictFallout"
+  },
+  {
+   "day": 24,
+   "vid": "gen_1fo0vsd",
+   "old": 82,
+   "neu": 83,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "gen_4u3grun",
+   "old": 54,
+   "neu": 55,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 24,
+   "vid": "gen_4u3grun",
+   "old": 55,
+   "neu": 56,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 25,
+   "vid": "gen_1fo0vsd",
+   "old": 83,
+   "neu": 84,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 25,
+   "vid": "gen_1fo0vsd",
+   "old": 84,
+   "neu": 85,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 25,
+   "vid": "zoltan_nagy",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 25,
+   "vid": "gen_1fo0vsd",
+   "old": 85,
+   "neu": 86,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 25,
+   "vid": "gen_4u3grun",
+   "old": 56,
+   "neu": 57,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 25,
+   "vid": "gen_1fo0vsd",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 25,
+   "vid": "gen_4u3grun",
+   "old": 57,
+   "neu": 58,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 25,
+   "vid": "gen_4u3grun",
+   "old": 58,
+   "neu": 59,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 26,
+   "vid": "gen_1fo0vsd",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 26,
+   "vid": "gen_1fo0vsd",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 26,
+   "vid": "gen_8mgbopq",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 26,
+   "vid": "gen_w5ozrfy",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 26,
+   "vid": "priya_nair",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 26,
+   "vid": "gen_1fo0vsd",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 26,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 26,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 27,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 27,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 27,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 27,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 27,
+   "vid": "gen_4u3grun",
+   "old": 59,
+   "neu": 60,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 27,
+   "vid": "gen_4u3grun",
+   "old": 60,
+   "neu": 61,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 27,
+   "vid": "gen_8mgbopq",
+   "old": 29,
+   "neu": 27,
+   "delta": -2,
+   "caller": "convoConflictFallout"
+  },
+  {
+   "day": 27,
+   "vid": "zoltan_nagy",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 27,
+   "vid": "priya_nair",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 28,
+   "vid": "gen_4u3grun",
+   "old": 61,
+   "neu": 64,
+   "delta": 3,
+   "caller": "applyRep"
+  },
+  {
+   "day": 28,
+   "vid": "gen_4u3grun",
+   "old": 64,
+   "neu": 65,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 28,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 28,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 28,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 28,
+   "vid": "zoe_adams",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 28,
+   "vid": "zoe_adams",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 29,
+   "vid": "gen_4u3grun",
+   "old": 65,
+   "neu": 63,
+   "delta": -2,
+   "caller": "tickNeeds"
+  },
+  {
+   "day": 29,
+   "vid": "ingrid_vik",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 30,
+   "vid": "gen_4u3grun",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 30,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 30,
+   "vid": "gen_4u3grun",
+   "old": 64,
+   "neu": 62,
+   "delta": -2,
+   "caller": "tickNeeds"
+  },
+  {
+   "day": 30,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 30,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 31,
+   "vid": "zoltan_nagy",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 31,
+   "vid": "priya_nair",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 31,
+   "vid": "gen_8mgbopq",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 89,
+   "delta": -1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 32,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 87,
+   "delta": -1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 85,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 85,
+   "neu": 86,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 33,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 34,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 34,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 34,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 35,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 35,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 35,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 35,
+   "vid": "gen_4u3grun",
+   "old": 62,
+   "neu": 63,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 35,
+   "vid": "gen_4u3grun",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 35,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 35,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 36,
+   "vid": "gen_4u3grun",
+   "old": 64,
+   "neu": 65,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 36,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 36,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 36,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 37,
+   "vid": "zoe_adams",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 37,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 38,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 38,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 38,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 38,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 38,
+   "vid": "ingrid_vik",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 39,
+   "vid": "gen_4u3grun",
+   "old": 65,
+   "neu": 66,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 40,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 40,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 40,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 40,
+   "vid": "gen_4u3grun",
+   "old": 66,
+   "neu": 67,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 42,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 42,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 42,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 42,
+   "vid": "ingrid_vik",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 42,
+   "vid": "zoe_adams",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 42,
+   "vid": "zoe_adams",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 42,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 42,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 43,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 44,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 44,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 44,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 44,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 44,
+   "vid": "priya_nair",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 44,
+   "vid": "gen_8mgbopq",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 44,
+   "vid": "ingrid_vik",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 45,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 45,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 45,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 45,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 45,
+   "vid": "gen_8mgbopq",
+   "old": 29,
+   "neu": 27,
+   "delta": -2,
+   "caller": "convoConflictFallout"
+  },
+  {
+   "day": 45,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 46,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 47,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 47,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 48,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 48,
+   "vid": "priya_nair",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 48,
+   "vid": "ingrid_vik",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 48,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 48,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 49,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 49,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 49,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 49,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 49,
+   "vid": "zoe_adams",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 49,
+   "vid": "ingrid_vik",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 49,
+   "vid": "gen_4u3grun",
+   "old": 67,
+   "neu": 68,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 49,
+   "vid": "gen_4u3grun",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 50,
+   "vid": "gen_4u3grun",
+   "old": 69,
+   "neu": 70,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 50,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 50,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 50,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 50,
+   "vid": "ingrid_vik",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 50,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 50,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 51,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 51,
+   "vid": "zoe_adams",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 51,
+   "vid": "zoe_adams",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 51,
+   "vid": "zoe_adams",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 51,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 51,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 52,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 53,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 53,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 87,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 88,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 54,
+   "vid": "gen_1fo0vsd",
+   "old": 90,
+   "neu": 89,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "gen_8mgbopq",
+   "old": 27,
+   "neu": 26,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 88,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "priya_nair",
+   "old": 22,
+   "neu": 21,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "ingrid_vik",
+   "old": 29,
+   "neu": 28,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "zoe_adams",
+   "old": 39,
+   "neu": 38,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 54,
+   "vid": "zoe_adams",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 55,
+   "vid": "carlos_diaz",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 55,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 55,
+   "vid": "gen_dkjljvy",
+   "old": 1,
+   "neu": 2,
+   "delta": 1,
+   "caller": "donateToPantry"
+  },
+  {
+   "day": 55,
+   "vid": "app_mgpsphei468",
+   "old": 10,
+   "neu": 20,
+   "delta": 10,
+   "caller": "arrivalTick"
+  },
+  {
+   "day": 56,
+   "vid": "gen_8mgbopq",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "objMaybeDepart"
+  },
+  {
+   "day": 56,
+   "vid": "gen_8mgbopq",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 56,
+   "vid": "gen_8mgbopq",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 56,
+   "vid": "gen_8mgbopq",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 56,
+   "vid": "ingrid_vik",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 56,
+   "vid": "gen_1fo0vsd",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 57,
+   "vid": "app_mgpsphei468",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 57,
+   "vid": "ingrid_vik",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 58,
+   "vid": "zoe_adams",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 58,
+   "vid": "visjoin_57",
+   "old": 10,
+   "neu": 20,
+   "delta": 10,
+   "caller": "visitorInteract"
+  },
+  {
+   "day": 58,
+   "vid": "gen_8mgbopq",
+   "old": 30,
+   "neu": 29,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 89,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "priya_nair",
+   "old": 21,
+   "neu": 20,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "ingrid_vik",
+   "old": 30,
+   "neu": 29,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "zoe_adams",
+   "old": 40,
+   "neu": 39,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "app_mgpsphei468",
+   "old": 21,
+   "neu": 20,
+   "delta": -1,
+   "caller": "villageAutoRecruit"
+  },
+  {
+   "day": 58,
+   "vid": "app_mgpsphco218",
+   "old": 10,
+   "neu": 20,
+   "delta": 10,
+   "caller": "arrivalTick"
+  },
+  {
+   "day": 59,
+   "vid": "carlos_diaz",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 59,
+   "vid": "zoe_adams",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 59,
+   "vid": "priya_nair",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 59,
+   "vid": "carlos_diaz",
+   "old": 90,
+   "neu": 37,
+   "delta": -53,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 59,
+   "vid": "ingrid_vik",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 59,
+   "vid": "zoe_adams",
+   "old": 40,
+   "neu": 41,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 59,
+   "vid": "app_mgpsphco218",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 59,
+   "vid": "priya_nair",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 59,
+   "vid": "visjoin_57",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 60,
+   "vid": "gen_8mgbopq",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "gen_8mgbopq",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 60,
+   "vid": "app_mgpsphco218",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 60,
+   "vid": "zoe_adams",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "objAwayStep"
+  },
+  {
+   "day": 60,
+   "vid": "gen_8mgbopq",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "visjoin_57",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "priya_nair",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "visjoin_57",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "ingrid_vik",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "visjoin_57",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 60,
+   "vid": "gen_8mgbopq",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 60,
+   "vid": "priya_nair",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 60,
+   "vid": "ingrid_vik",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 60,
+   "vid": "ingrid_vik",
+   "old": 32,
+   "neu": 34,
+   "delta": 2,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 61,
+   "vid": "ingrid_vik",
+   "old": 34,
+   "neu": 36,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 61,
+   "vid": "ingrid_vik",
+   "old": 36,
+   "neu": 38,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 61,
+   "vid": "gen_8mgbopq",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 61,
+   "vid": "priya_nair",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 61,
+   "vid": "gen_8mgbopq",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 61,
+   "vid": "priya_nair",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 61,
+   "vid": "priya_nair",
+   "old": 26,
+   "neu": 28,
+   "delta": 2,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 62,
+   "vid": "ingrid_vik",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 62,
+   "vid": "app_mgpsphco218",
+   "old": 22,
+   "neu": 20,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 62,
+   "vid": "priya_nair",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 62,
+   "vid": "app_mgpsphco218",
+   "old": 20,
+   "neu": 18,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 62,
+   "vid": "gen_8mgbopq",
+   "old": 40,
+   "neu": 41,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 62,
+   "vid": "priya_nair",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 62,
+   "vid": "priya_nair",
+   "old": 30,
+   "neu": 32,
+   "delta": 2,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 63,
+   "vid": "gen_8mgbopq",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 63,
+   "vid": "app_mgpsphco218",
+   "old": 18,
+   "neu": 16,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 63,
+   "vid": "gen_8mgbopq",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 63,
+   "vid": "visjoin_57",
+   "old": 24,
+   "neu": 26,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 63,
+   "vid": "gen_8mgbopq",
+   "old": 43,
+   "neu": 44,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 63,
+   "vid": "priya_nair",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 63,
+   "vid": "app_mgpsphco218",
+   "old": 16,
+   "neu": 14,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 63,
+   "vid": "gen_8mgbopq",
+   "old": 44,
+   "neu": 45,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 63,
+   "vid": "priya_nair",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 63,
+   "vid": "app_mgpsphei468",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 63,
+   "vid": "priya_nair",
+   "old": 34,
+   "neu": 36,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 64,
+   "vid": "gen_8mgbopq",
+   "old": 45,
+   "neu": 46,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 64,
+   "vid": "app_mgpsphco218",
+   "old": 14,
+   "neu": 12,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 64,
+   "vid": "gen_8mgbopq",
+   "old": 46,
+   "neu": 47,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 64,
+   "vid": "visjoin_57",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 64,
+   "vid": "gen_8mgbopq",
+   "old": 47,
+   "neu": 48,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 64,
+   "vid": "priya_nair",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 64,
+   "vid": "gen_8mgbopq",
+   "old": 48,
+   "neu": 34,
+   "delta": -14,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 64,
+   "vid": "gen_8mgbopq",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 65,
+   "vid": "priya_nair",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 65,
+   "vid": "zoe_adams",
+   "old": 42,
+   "neu": 31,
+   "delta": -11,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphco218",
+   "old": 12,
+   "neu": 13,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 65,
+   "vid": "priya_nair",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 65,
+   "vid": "priya_nair",
+   "old": 39,
+   "neu": 28,
+   "delta": -11,
+   "caller": "playerDeath"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphco218",
+   "old": 13,
+   "neu": 14,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphei468",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphco218",
+   "old": 14,
+   "neu": 15,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphei468",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 65,
+   "vid": "app_mgpsphco218",
+   "old": 15,
+   "neu": 16,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphco218",
+   "old": 16,
+   "neu": 17,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphco218",
+   "old": 17,
+   "neu": 18,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphco218",
+   "old": 18,
+   "neu": 19,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphei468",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphco218",
+   "old": 19,
+   "neu": 20,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 66,
+   "vid": "app_mgpsphei468",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphco218",
+   "old": 20,
+   "neu": 21,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphco218",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphco218",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphei468",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphco218",
+   "old": 23,
+   "neu": 21,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphco218",
+   "old": 21,
+   "neu": 22,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphei468",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 67,
+   "vid": "app_mgpsphei468",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 22,
+   "neu": 23,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 25,
+   "neu": 27,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphei468",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 27,
+   "neu": 25,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 68,
+   "vid": "visjoin_57",
+   "old": 27,
+   "neu": 28,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 25,
+   "neu": 23,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphco218",
+   "old": 23,
+   "neu": 24,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "app_mgpsphei468",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "visjoin_57",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 68,
+   "vid": "visjoin_57",
+   "old": 29,
+   "neu": 31,
+   "delta": 2,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 24,
+   "neu": 25,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 26,
+   "neu": 27,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphei468",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 69,
+   "vid": "visjoin_57",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 27,
+   "neu": 25,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphei468",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "visjoin_57",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 25,
+   "neu": 26,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 69,
+   "vid": "app_mgpsphco218",
+   "old": 26,
+   "neu": 28,
+   "delta": 2,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 29,
+   "neu": 30,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 30,
+   "neu": 31,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 31,
+   "neu": 32,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphei468",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 70,
+   "vid": "visjoin_57",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 34,
+   "neu": 32,
+   "delta": -2,
+   "caller": "leadershipFriction"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 32,
+   "neu": 33,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphco218",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "app_mgpsphei468",
+   "old": 33,
+   "neu": 34,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 70,
+   "vid": "visjoin_57",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphco218",
+   "old": 39,
+   "neu": 40,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphei468",
+   "old": 34,
+   "neu": 35,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphei468",
+   "old": 35,
+   "neu": 36,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 71,
+   "vid": "app_mgpsphei468",
+   "old": 36,
+   "neu": 37,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 72,
+   "vid": "app_mgpsphei468",
+   "old": 37,
+   "neu": 38,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 72,
+   "vid": "app_mgpsphei468",
+   "old": 38,
+   "neu": 39,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 73,
+   "vid": "app_mgpsphei468",
+   "old": 39,
+   "neu": 41,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 73,
+   "vid": "app_mgpsphei468",
+   "old": 41,
+   "neu": 42,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 73,
+   "vid": "app_mgpsphei468",
+   "old": 42,
+   "neu": 43,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 74,
+   "vid": "app_mgpsphei468",
+   "old": 43,
+   "neu": 45,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 74,
+   "vid": "app_mgpsphei468",
+   "old": 45,
+   "neu": 47,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 74,
+   "vid": "app_mgpsphei468",
+   "old": 47,
+   "neu": 48,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 74,
+   "vid": "app_mgpsphei468",
+   "old": 48,
+   "neu": 49,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 75,
+   "vid": "app_mgpsphei468",
+   "old": 49,
+   "neu": 51,
+   "delta": 2,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 75,
+   "vid": "app_mgpsphei468",
+   "old": 51,
+   "neu": 52,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 75,
+   "vid": "app_mgpsphei468",
+   "old": 52,
+   "neu": 53,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 76,
+   "vid": "app_mgpsphei468",
+   "old": 53,
+   "neu": 54,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 76,
+   "vid": "app_mgpsphei468",
+   "old": 54,
+   "neu": 55,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 76,
+   "vid": "app_mgpsphei468",
+   "old": 55,
+   "neu": 56,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 77,
+   "vid": "app_mgpsphei468",
+   "old": 56,
+   "neu": 59,
+   "delta": 3,
+   "caller": "applyRep"
+  },
+  {
+   "day": 77,
+   "vid": "app_mgpsphei468",
+   "old": 59,
+   "neu": 60,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 77,
+   "vid": "app_mgpsphei468",
+   "old": 60,
+   "neu": 61,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 77,
+   "vid": "app_mgpsphei468",
+   "old": 61,
+   "neu": 62,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 78,
+   "vid": "app_mgpsphei468",
+   "old": 62,
+   "neu": 63,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 78,
+   "vid": "app_mgpsphei468",
+   "old": 63,
+   "neu": 64,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 78,
+   "vid": "app_mgpsphei468",
+   "old": 64,
+   "neu": 65,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 79,
+   "vid": "app_mgpsphei468",
+   "old": 65,
+   "neu": 66,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 79,
+   "vid": "app_mgpsphei468",
+   "old": 66,
+   "neu": 67,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 80,
+   "vid": "app_mgpsphei468",
+   "old": 67,
+   "neu": 68,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 80,
+   "vid": "app_mgpsphei468",
+   "old": 68,
+   "neu": 69,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 80,
+   "vid": "app_mgpsphei468",
+   "old": 69,
+   "neu": 70,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 81,
+   "vid": "app_mgpsphei468",
+   "old": 70,
+   "neu": 71,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 81,
+   "vid": "app_mgpsphei468",
+   "old": 71,
+   "neu": 72,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 81,
+   "vid": "app_mgpsphei468",
+   "old": 72,
+   "neu": 73,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 82,
+   "vid": "app_mgpsphei468",
+   "old": 73,
+   "neu": 74,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 82,
+   "vid": "app_mgpsphei468",
+   "old": 74,
+   "neu": 75,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 82,
+   "vid": "app_mgpsphei468",
+   "old": 75,
+   "neu": 76,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 82,
+   "vid": "app_mgpsphei468",
+   "old": 76,
+   "neu": 77,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 82,
+   "vid": "app_mgpsphei468",
+   "old": 77,
+   "neu": 78,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 83,
+   "vid": "app_mgpsphei468",
+   "old": 78,
+   "neu": 79,
+   "delta": 1,
+   "caller": "objReturnEffect"
+  },
+  {
+   "day": 83,
+   "vid": "app_mgpsphei468",
+   "old": 79,
+   "neu": 80,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 83,
+   "vid": "app_mgpsphei468",
+   "old": 80,
+   "neu": 81,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 84,
+   "vid": "app_mgpsphei468",
+   "old": 81,
+   "neu": 82,
+   "delta": 1,
+   "caller": "npcNodeTravel"
+  },
+  {
+   "day": 84,
+   "vid": "app_mgpsphei468",
+   "old": 82,
+   "neu": 83,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 84,
+   "vid": "app_mgpsphei468",
+   "old": 83,
+   "neu": 84,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 85,
+   "vid": "app_mgpsphei468",
+   "old": 84,
+   "neu": 85,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 85,
+   "vid": "app_mgpsphei468",
+   "old": 85,
+   "neu": 86,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 86,
+   "vid": "app_mgpsphei468",
+   "old": 86,
+   "neu": 87,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 86,
+   "vid": "priya_nair",
+   "old": 28,
+   "neu": 29,
+   "delta": 1,
+   "caller": "objTick"
+  },
+  {
+   "day": 86,
+   "vid": "app_mgpsphei468",
+   "old": 87,
+   "neu": 88,
+   "delta": 1,
+   "caller": "applyRep"
+  },
+  {
+   "day": 86,
+   "vid": "app_mgpsphei468",
+   "old": 88,
+   "neu": 89,
+   "delta": 1,
+   "caller": "resolveOneAssignment"
+  },
+  {
+   "day": 86,
+   "vid": "app_mgpsphei468",
+   "old": 89,
+   "neu": 90,
+   "delta": 1,
+   "caller": "resolveWildMonsterEncounter"
+  },
+  {
+   "day": 87,
+   "vid": "app_mgpsphei468",
+   "old": 90,
+   "neu": 48,
+   "delta": -42,
+   "caller": "playerDeath"
+  }
+ ],
+ "trajectory": [
+  {
+   "day": 1,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 3,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 4,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 5,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 6,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 7,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 8,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 9,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 10,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 11,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 12,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 13,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 14,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 15,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 16,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 17,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 18,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 19,
+   "vid": "gen_dkjljvy",
+   "trust": 15,
+   "roster": 10
+  },
+  {
+   "day": 20,
+   "vid": "gen_dkjljvy",
+   "trust": 9,
+   "roster": 10
+  },
+  {
+   "day": 21,
+   "vid": "gen_dkjljvy",
+   "trust": 9,
+   "roster": 10
+  },
+  {
+   "day": 22,
+   "vid": "gen_dkjljvy",
+   "trust": 9,
+   "roster": 10
+  },
+  {
+   "day": 23,
+   "vid": "gen_dkjljvy",
+   "trust": 5,
+   "roster": 10
+  },
+  {
+   "day": 24,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 10
+  },
+  {
+   "day": 25,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 10
+  },
+  {
+   "day": 26,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 10
+  },
+  {
+   "day": 27,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 10
+  },
+  {
+   "day": 28,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 10
+  },
+  {
+   "day": 29,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 30,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 31,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 32,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 33,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 34,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 35,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 36,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 37,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 38,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 39,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 40,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 41,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 42,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 43,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 44,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 45,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 46,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 47,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 48,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 49,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 50,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 51,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 9
+  },
+  {
+   "day": 52,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 8
+  },
+  {
+   "day": 53,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 7
+  },
+  {
+   "day": 54,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 7
+  },
+  {
+   "day": 55,
+   "vid": "gen_dkjljvy",
+   "trust": 1,
+   "roster": 6
+  },
+  {
+   "day": 56,
+   "vid": "gen_dkjljvy",
+   "trust": 2,
+   "roster": 7
+  },
+  {
+   "day": 57,
+   "vid": "gen_dkjljvy",
+   "trust": 2,
+   "roster": 7
+  },
+  {
+   "day": 58,
+   "vid": "gen_dkjljvy",
+   "trust": 2,
+   "roster": 7
+  },
+  {
+   "day": 59,
+   "vid": "gen_dkjljvy",
+   "trust": 2,
+   "roster": 9
+  },
+  {
+   "day": 60,
+   "vid": "carlos_diaz",
+   "trust": 37,
+   "roster": 8
+  },
+  {
+   "day": 61,
+   "vid": "carlos_diaz",
+   "trust": 37,
+   "roster": 8
+  },
+  {
+   "day": 62,
+   "vid": "carlos_diaz",
+   "trust": 37,
+   "roster": 8
+  },
+  {
+   "day": 63,
+   "vid": "carlos_diaz",
+   "trust": 37,
+   "roster": 8
+  },
+  {
+   "day": 64,
+   "vid": "carlos_diaz",
+   "trust": 37,
+   "roster": 7
+  },
+  {
+   "day": 65,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 66,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 67,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 68,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 69,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 70,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 4
+  },
+  {
+   "day": 71,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 3
+  },
+  {
+   "day": 72,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 73,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 74,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 75,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 76,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 77,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 78,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 79,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 80,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 81,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 82,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 83,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 84,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 85,
+   "vid": "priya_nair",
+   "trust": 28,
+   "roster": 2
+  },
+  {
+   "day": 86,
+   "vid": "priya_nair",
+   "trust": 29,
+   "roster": 2
+  },
+  {
+   "day": 87,
+   "vid": "app_mgpsphei468",
+   "trust": 48,
+   "roster": 1
+  },
+  {
+   "day": 87,
+   "vid": "app_mgpsphei468",
+   "trust": 48,
+   "roster": 0
+  }
+ ]
+}
