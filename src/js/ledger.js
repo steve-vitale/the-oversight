@@ -1399,7 +1399,12 @@
         this._checkUnityTransition();
         this._checkFoodStance();
         const pg = this.progState();
-        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableScene();
+        // RELATIVE UNTIL ENTERED (Steve 2026-10-14: "The table should all be
+        // relative until actually entering it when it locks. Even if they
+        // qualify early, there's room for them to change or influence path
+        // until they get to the very end."). Qualifying sends an invitation;
+        // the player takes the seat when ready (table.js tableInvite).
+        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableInvite();
       } catch (e) {}
       return r;
     };

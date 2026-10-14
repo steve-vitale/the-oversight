@@ -7,6 +7,7 @@
 //   - tableBranch(pathId)
 //   - tableRegisterPath(def)
 //   - tableScene()
+//   - tableInvite(force) — the table stays relative until the player sits (Steve 2026-10-14)
 //   - tableActive()
 //   - chooseTableOption(id)
 //   - tableStartPath(pathId)
@@ -412,6 +413,38 @@
       this.tableOfferPaths('The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take.');
     },
 
+    // tableInvite (Steve 2026-10-14, see ledger.js endDay): the table is
+    // RELATIVE until the player sits. At most once a day (every 3rd dawn
+    // after a "not yet"), the System shows the run as priced TODAY — seat and
+    // doors recomputed live — and offers the seat. Before the win-day floor
+    // the preview shows but the table will not sit. Entering calls
+    // tableScene(), which locks the seat; tableStartPath locks the branch.
+    tableInvite(force) {
+      try {
+        const s = this.state.scholar || {}, pg = this.progState();
+        if (pg.tableDone) return;
+        const T = this.tableState();
+        if (s.tableChoices) return; // another table sheet is up
+        const day = s.day || 0;
+        if (!force && pg.tableInviteNext != null && day < pg.tableInviteNext) return;
+        pg.tableInviteNext = day + 1;
+        const seat = this.tableSeat();
+        if (seat.seat === 'none') { this.tableScene(); return; } // existing withdrawal beat
+        const paths = this.tableEarnedPaths();
+        const doors = paths.filter(p => p.earned).map(p => this.escHtml(p.name)).join(', ') || 'none yet';
+        const ready = this.winDayFloorOk();
+        T.phase = 'invite';
+        const prompt = `<p>◈ THE TABLE IS SET. A ring of pale light, waiting.</p>` +
+          `<p>As your run stands <b>today</b>: a <b>${seat.seat}</b> seat. Open doors: ${doors}.</p>` +
+          `<p>Nothing is final until you sit. What you do before then still counts.</p>` +
+          (ready ? '' : `<p><i>"Ninety dawns. We do not price a life half-lived." — the table will not sit before day 90 (day ${day}).</i></p>`);
+        const options = ready
+          ? [{ id: 'invite:enter', label: 'Take your seat' }, { id: 'invite:later', label: 'Not yet' }]
+          : [{ id: 'invite:later', label: 'Understood' }];
+        this.tablePrompt(prompt, options, 'the Table');
+      } catch (e) { console.warn('tableInvite', e); }
+    },
+
     // tableOfferPaths: path selection modal. Earned paths are choices;
     // unearned paths are shown priced (never hidden).
     tableOfferPaths(promptLine) {
@@ -438,6 +471,16 @@
       const T = this.tableState();
       try {
         if (!id) return null;
+        if (T.phase === 'invite' && id.indexOf('invite:') === 0) {
+          const s = this.state.scholar || {}, pg = this.progState();
+          s.tableChoices = null;
+          T.phase = null;
+          if (id === 'invite:enter' && this.winDayFloorOk()) { this.tableScene(); return null; }
+          pg.tableInviteNext = (s.day || 0) + 3;
+          this.say('◈ The ring of pale light dims, but does not go out. The table will ask again.');
+          try { this.save(); } catch (e) {}
+          return null;
+        }
         if (id.indexOf('path:') === 0 && T.phase === 'paths') { this.tableStartPath(id.slice(5)); return null; }
         if (id.indexOf('downgrade:') === 0 && T.phase === 'downgrade') { this.tableDowngradePick(id.slice(10)); return null; }
         if (T.phase === 'challenge') { this.tableChoose(id); return null; }
