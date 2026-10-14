@@ -1,0 +1,160 @@
+{
+ "when": "2026-10-14T13:01:00.808Z",
+ "combo": "leadfeast",
+ "flags": {
+  "FEASTSCALE_R13": "1"
+ },
+ "days": 180,
+ "screen": [
+  {
+   "seed": 11,
+   "days": 180,
+   "end": "survived",
+   "table": true,
+   "chain": "ARC4 WAIT SCENE(full) -path -finals -choice -won"
+  },
+  {
+   "seed": 22,
+   "days": 167,
+   "end": "village-lost",
+   "table": true,
+   "chain": "ARC4 WAIT SCENE(lesser) -path -finals -choice -won"
+  },
+  {
+   "seed": 33,
+   "days": 32,
+   "end": "village-lost",
+   "table": false,
+   "chain": "-arc4 -wait -scene -path -finals -choice -won"
+  },
+  {
+   "seed": 44,
+   "days": 101,
+   "end": "village-lost",
+   "table": false,
+   "chain": "-arc4 -wait -scene -path -finals -choice -won"
+  },
+  {
+   "seed": 55,
+   "days": 180,
+   "end": "survived",
+   "table": true,
+   "chain": "ARC4 WAIT SCENE(lesser) -path -finals -choice -won"
+  },
+  {
+   "seed": 66,
+   "days": 51,
+   "end": "village-lost",
+   "table": false,
+   "chain": "-arc4 -wait -scene -path -finals -choice -won"
+  },
+  {
+   "seed": 77,
+   "days": 79,
+   "end": "village-lost",
+   "table": false,
+   "chain": "-arc4 -wait -scene -path -finals -choice -won"
+  },
+  {
+   "seed": 88,
+   "days": 69,
+   "end": "village-lost",
+   "table": false,
+   "chain": "-arc4 -wait -scene -path -finals -choice -won"
+  }
+ ],
+ "tableSeeds": [
+  11,
+  22,
+  55
+ ],
+ "results": [
+  {
+   "seed": 11,
+   "arm": "origin",
+   "identical": true,
+   "days": [
+    180,
+    180
+   ],
+   "end": [
+    "survived",
+    "survived"
+   ],
+   "chain": "ARC4 WAIT SCENE(full) -path -finals -choice -won"
+  },
+  {
+   "seed": 11,
+   "arm": "walked",
+   "identical": true,
+   "days": [
+    174,
+    174
+   ],
+   "end": [
+    "over-other",
+    "over-other"
+   ],
+   "chain": "ARC4 WAIT SCENE(full) PATH(feared) FINALS FINAL(floor-ok) -won"
+  },
+  {
+   "seed": 22,
+   "arm": "origin",
+   "identical": true,
+   "days": [
+    167,
+    167
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "chain": "ARC4 WAIT SCENE(lesser) -path -finals -choice -won"
+  },
+  {
+   "seed": 22,
+   "arm": "walked",
+   "identical": true,
+   "days": [
+    167,
+    167
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "chain": "ARC4 WAIT SCENE(lesser) PATH(feared) FINALS FINAL(DEFERRED) -won"
+  },
+  {
+   "seed": 55,
+   "arm": "origin",
+   "identical": true,
+   "days": [
+    180,
+    180
+   ],
+   "end": [
+    "survived",
+    "survived"
+   ],
+   "chain": "ARC4 WAIT SCENE(lesser) -path -finals -choice -won"
+  },
+  {
+   "seed": 55,
+   "arm": "walked",
+   "identical": true,
+   "days": [
+    180,
+    180
+   ],
+   "end": [
+    "survived",
+    "survived"
+   ],
+   "chain": "ARC4 WAIT SCENE(lesser) PATH(feared) FINALS FINAL(DEFERRED) -won"
+  }
+ ],
+ "infoSkip": [
+  "overstock: overlead/overbelong table seeds (5) not reproducible on this base — policy exists only on unlanded branch sim-overstock2"
+ ]
+}
