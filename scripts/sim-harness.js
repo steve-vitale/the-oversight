@@ -300,6 +300,12 @@ async function runDays(Game, policy, opts) {
   // "origin:verb" (doAction: "origin:doAction:kind") and verbs is the legacy
   // raw count (all origins) for comparison with the old metric.
   // Neither touches RNG: determinism unaffected.
+  // READ-NOT-VERB (quiet-links 2026-10-13): linkWith (hierarchy.js:184) and
+  // switchboard (comms.js:827) are pure state reads — zero ticks, zero
+  // mutation. Instrumenting them counted policy read-checks as deliberate
+  // decisions and game-code lookups (foreignCrisisTick, link maintenance)
+  // as internal traffic, inflating the verb stream with ~2k noise verbs/run.
+  // They are deliberately NOT wrapped: reads are not player verbs.
   const VERB_CAT = {
     // food
     eat: 'food', eatOne: 'food', cookFood: 'food', takeFromPantry: 'food',
@@ -327,14 +333,12 @@ async function runDays(Game, policy, opts) {
     answerAccord: 'social', answerNationalChoice: 'social',
     answerGlobalChoice: 'social', chooseTableOption: 'social',
     handInAidQuest: 'social', payTribute: 'social', rallyVillage: 'social',
-    linkWith: 'social', offerSystemQuest: 'social', corpseTakeItem: 'food',
+    offerSystemQuest: 'social', corpseTakeItem: 'food',
     studyVillageCodex: 'field', proveWorth: 'social', agencyTurn: 'social',
     // travel
     travelTo: 'travel', pathStep: 'travel', beginPathWalk: 'travel', clearBlockage: 'travel',
     // shows / contests
     contestChoose: 'show', faceFeastDraw: 'show', yieldChallenge: 'show', hostFeast: 'show',
-    // system
-    switchboard: 'system',
   };
   const DOACTION_CAT = { forage: 'field', rest: 'rest', wait: 'wait', drink: 'water' };
   // TELEMETRY_VERBS=0: skip all verb wrapping (no-behavior-change control).
