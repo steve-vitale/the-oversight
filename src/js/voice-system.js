@@ -87,7 +87,7 @@
   // playSystemLine(id): statuses 'muted' | 'locked' | 'no-audio' |
   // 'unknown' | 'error' | 'playing'. Fire-and-forget like convoSpeakLine;
   // the returned promise resolves to the status for tests and debug tools.
-  async function playSystemLine(id) {
+  async function playSystemLine(id, opts) {
     try {
       if (Game.audio && typeof Game.audio.isMuted === 'function' && Game.audio.isMuted()) return 'muted';
       if (!Game._voiceUnlocked) return 'locked';
@@ -108,7 +108,8 @@
         blob = await resp.blob();
         _blobCache[id] = blob;
       }
-      var ok = await Game.audio.playVoice(blob);
+      // opts.onended: the day-7 cinematic chains lines (presentation pass A).
+      var ok = await Game.audio.playVoice(blob, opts || {});
       return ok ? 'playing' : 'error';
     } catch (e) {
       return 'error';

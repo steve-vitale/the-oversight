@@ -22721,11 +22721,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     drama(kind, ...args) {
       try {
         const D = globalThis.Scattering && globalThis.Scattering.Drama;
+        const F = globalThis.Scattering && globalThis.Scattering.Feel;
+        // PRESENTATION PASS A (2026-10-14, Steve: "Address all graphic and
+        // sound survey gaps."): payoff moments and god-path verbs come from
+        // feel.js, which already applied the System gate per moment
+        // (system-styled moments wait for day 7; keepsakes, feasts, flee are
+        // human and play any day).
+        if (kind === 'moment' || kind === 'verb') {
+          if (D && kind === 'moment' && D.moment) D.moment(args[0], args[1] || {});
+          else if (D && kind === 'verb' && D.verbFx) D.verbFx(args[0] || {});
+          return;
+        }
+        // HAPTICS: the body feels the big hits (feel.js: setting-gated,
+        // feature-detected, throttled; a no-op in node).
+        if (F && F.hapticFor(kind)) F.haptic(F.hapticFor(kind));
+        // Steve 2026-10-07: ALL System drama is OFF before the System arrives
+        // (day 7). The game starts simple and quiet. Then the System
+        // integrates and the world comes alive. PRESENTATION PASS A: "quiet"
+        // no longer means "still" — days 1-6 get GROUNDED feedback for the
+        // human things (hit, miss, crit, hurt, kill, weather, death): earthy,
+        // no System chrome, no cyan, no System voice (drama.js grounded).
+        // Every System-flavoured kind stays gated.
+        if (!this.state.systemArrived) {
+          const gk = F ? F.groundedKind(kind) : null;
+          if (!gk) return;
+          if (D && D.grounded) D.grounded(gk, ...args);
+          const ga = F.groundedAudio(kind, args[0]);
+          if (ga) this.audioEvent(ga, { drama: kind, grounded: true });
+          return;
+        }
         if (!D) return;
-        // Steve 2026-10-07: ALL drama is OFF before the System arrives (day 7).
-        // The game starts simple and quiet. Then the System integrates and the
-        // world comes alive — it's really happening to your character.
-        if (!this.state.systemArrived) return;
         // Steve 2026-10-07: all drama scales with system integration.
         // Higher integration = more elaborate effects. The System watches more closely.
         let integ = 0;
@@ -22854,8 +22879,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // wild->animalRustle, levelUp(ability)->levelup,
         // synergyShimmer->synergyDiscovered, phaseShift->patternWindup,
         // codexLinked->paperRustle, plantIdentified->knowledgeReveal.
-        // The day-7 systemArrived gate above covers audio too: pre-System the
-        // game is quiet as well as still.
+        // The day-7 systemArrived gate above covers audio too: pre-System only
+        // the grounded mates (feel.js groundedAudio) sound.
         const syncName = D.audioFor(kind, args[0]);
         if (syncName) this.audioEvent(syncName, { drama: kind });
       } catch (e) {}
@@ -30988,6 +31013,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         if (typeof AudioRegistry !== 'undefined' && typeof Audio !== 'undefined') {
           var reg = AudioRegistry.resolveHook(name);
+          // PLACEHOLDER FILES (presentation pass A, 2026-10-14): a file
+          // flagged placeholder is a rendered synth — the live synth voice is
+          // better (varies per play, rides the mixer), so it wins when one is
+          // registered. Real recordings (placeholder:false) still play first.
+          if (reg && reg.file && reg.placeholder && self.audio && typeof self.audio[name] === 'function') { synth(); return; }
           if (reg && reg.file) {
             // MIX (Steve 2026-10-13): route files through the mixer (volume,
             // mute, ducking) with synth fallback when the file can't play.

@@ -53,11 +53,22 @@
 //   - skillGained: rising light beam + skill name (Steve 2026-10-07, Drama D2)
 //   - teaseFaint: 1st-tease whisper shimmer (Steve 2026-10-07, Drama D2)
 //   - ahaMoment: lightbulb + radiating lines on knowledge unlocks (Steve 2026-10-07, Drama D2)
+//   - grounded: pre-System (days 1-6) variants — hit/crit/miss/hurt/heavy/kill/weather/shake/death/text — earthy, no System chrome (presentation pass A, 2026-10-14)
+//   - moment: payoff painters — ascension, classRecognized, levelUpOpen, flashback, keepsakeLevel, feast, flee, titanEntry/Phase/Fall, tableEnter/Lock/Beat/Win/Lose (feel.js FEEL_MOMENTS)
+//   - verbFx: one grid effect per god-path ability fx (feel.js FEEL_VERBS)
+//   - calm: reduced motion (OS or in-game toggle) — shakes skipped, every effect a calm fade
+//   - ensureScreen: fixed full-screen pointer-events:none layer above sheets for the big moments
+//   - fxAt: painter helper — element centred on a grid cell
+//   - fxRing: painter helper — ring on a grid cell
+//   - fxLine: painter helper — line between two grid cells
+//   - fxScreenCard: painter helper — centred card on the screen layer
 // rules:
 //   - Overlay is pointer-events:none — never blocks input (code: drama.js).
 //   - All animations use transform/opacity only — GPU-composited, no layout/paint (code: drama.js).
 //   - Elements self-remove after animation — no DOM bloat (code: drama.js).
 //   - Coordinates are loosely bound: tile centers for anchored effects, screen-relative for full moments (code: drama.js).
+//   - Reduced motion: when calm(), spawn() swaps every animation class for a plain opacity fade and shake() is a no-op (code: spawn, shake).
+//   - Grounded variants never use cyan or System words (code: grounded, GROUNDED_PALETTE).
 // consumes: (none)
 (function (global) {
   'use strict';
@@ -78,22 +89,269 @@
     plantIdentified: 'knowledgeReveal', // identification is a SEEING moment
   };
 
+  // GROUNDED PALETTE (presentation pass A): the pre-System look, DECISIONS.md
+  // "grounded terminal (earthy greens/ambers, monospace grit)". No cyan here.
+  const GROUNDED_PALETTE = {
+    bark: '#6b4a2b', ochre: '#c8913a', amber: '#e0a84a', blood: '#9c2a1e',
+    ash: '#b8ad9a', bone: '#efe6d2', moss: '#6f8a4a', ember: '#ff8a3a',
+  };
+  function esc(t) {
+    return String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  }
+  // warm human card: serif italic on paper-dark — memory, not broadcast
+  // (DECISIONS.md:380 "warm human handwriting-style notes").
+  const warmCard = (title, sub) =>
+    `<div style="text-align:center;padding:16px 18px;background:rgba(36,24,14,0.9);border:1px solid rgba(224,168,74,0.55);border-radius:6px;font-family:Georgia,'Times New Roman',serif;">
+       <div style="font-style:italic;color:#f3e6c8;font-size:17px;line-height:1.35;">${title}</div>
+       ${sub ? `<div style="color:#c9b48c;font-size:13px;margin-top:6px;font-style:italic;">${sub}</div>` : ''}
+     </div>`;
+  // System card: cold blue-white, too-clean geometry, rounded corners that
+  // feel wrong (DECISIONS.md:110).
+  const sysCard = (kicker, title, sub) =>
+    `<div style="text-align:center;padding:14px 16px;background:rgba(14,20,30,0.92);border:1px solid rgba(190,215,240,0.7);border-radius:18px;box-shadow:0 0 0 3px rgba(190,215,240,0.12);">
+       <div style="font-size:11px;letter-spacing:2px;color:#9fc4e8;">${kicker}</div>
+       <div style="font-size:18px;font-weight:bold;color:#eef4fb;margin-top:4px;letter-spacing:1px;">${title}</div>
+       ${sub ? `<div style="font-size:13px;color:#b8c8d8;margin-top:4px;">${sub}</div>` : ''}
+     </div>`;
+  const sparks = function (n, color, cls, layer, spread, top) {
+    for (let i = 0; i < n; i++) {
+      const left = 50 + (i - (n - 1) / 2) * (spread || 7);
+      this.spawn(`<div style="width:6px;height:6px;border-radius:50%;background:${color};"></div>`,
+        `position:absolute;left:${left}%;top:${top || '78%'};--d:${(i % 3) * 120}ms;--dx:${(i - n / 2) * 4}px;animation-delay:${(i % 4) * 110}ms;`, cls, 1600, layer);
+    }
+  };
+
+  // MOMENT PAINTERS — called with this = Drama, d = feel.js data.
+  const MOMENT_PAINTERS = {
+    // ASCENSION (godhood.js ceremony): staged like theater, in step with the
+    // 5 log beats — stillness, witnesses, the System, the change, the price.
+    ascension(d) {
+      const name = esc(d.name || 'You'), title = esc(d.title || '');
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(10,8,4,0.35) 0%, rgba(4,3,2,0.88) 75%);', 'dfx-hold', 6800, 'screen');
+      setTimeout(() => sparks.call(this, 9, 'rgba(255,236,190,0.9)', 'dfx-rise-slow', 'screen', 9, '70%'), 900);
+      setTimeout(() => this.spawn('<div style="width:70px;height:100vh;background:linear-gradient(to bottom, rgba(255,250,230,0) 0%, rgba(255,246,214,0.55) 45%, rgba(255,250,230,0) 100%);"></div>',
+        'position:absolute;left:50%;top:0;margin-left:-35px;transform-origin:50% 0;', 'dfx-beam', 4600, 'screen'), 1700);
+      setTimeout(() => {
+        const sprite = d.sprite ? String(d.sprite).replace('class="sprite"', 'width="132" height="132"') : '<div style="font-size:90px">✶</div>';
+        this.spawn(`<div style="text-align:center;">
+            <div style="display:inline-block;filter:drop-shadow(0 0 18px rgba(255,236,170,0.85));">${sprite}</div>
+            <div style="font-size:24px;font-weight:bold;color:#fff3cf;letter-spacing:2px;margin-top:6px;text-shadow:0 2px 10px #000;">${name}</div>
+            ${title ? `<div style="font-size:14px;color:#e8d7a8;letter-spacing:3px;margin-top:2px;">${title.toUpperCase()}</div>` : ''}
+          </div>`, 'position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);', 'dfx-reveal', 4400, 'screen');
+      }, 2500);
+      setTimeout(() => this.spawn('<div style="width:200px;height:2px;background:linear-gradient(90deg,transparent,#c0392b,transparent);"></div><div style="font-size:12px;color:#e8a89a;letter-spacing:4px;text-align:center;margin-top:6px;">THE PRICE</div>',
+        'position:absolute;left:50%;top:63%;transform:translate(-50%,-50%);', 'dfx-fadeinout', 2100, 'screen'), 4400);
+      this.shake(3);
+    },
+    classRecognized(d) {
+      this.fxScreenCard(sysCard('◈ THE SYSTEM HAS A WORD FOR YOU', esc(d.line || ((d.subclass || '') + ' of ' + (d.path || ''))), 'Not a god. Not yet.'), 'dfx-drop', 2800, '16%');
+    },
+    levelUpOpen(d) {
+      // above the sheet (it rises from the bottom): the flourish never sits on its text
+      this.spawn('<svg width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#ffd54a" stroke-width="2.5"/><circle cx="50" cy="50" r="32" fill="none" stroke="#fff2b0" stroke-width="1.2" opacity=".7"/></svg>',
+        'position:absolute;left:50%;top:9%;margin-left:-75px;margin-top:-75px;', 'dfx-ring-out', 1100, 'screen');
+      sparks.call(this, 7, '#ffd54a', 'dfx-rise', 'screen', 6, '13%');
+      this.spawn(`<div style="font-size:13px;letter-spacing:5px;color:#ffe9a0;text-shadow:0 2px 6px #000;">LEVEL ${esc(d.level || '')}</div>`,
+        'position:absolute;left:50%;top:9%;transform:translate(-50%,-50%);', 'dfx-fadeinout', 1300, 'screen');
+    },
+    // KEEPSAKE FLASHBACK: warm, soft, human — never System.
+    flashback(d) {
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(120,80,40,0.10) 30%, rgba(60,36,16,0.55) 100%);', 'dfx-hold', 3400, 'screen');
+      for (let i = 0; i < 6; i++) {
+        this.spawn('<div style="width:4px;height:4px;border-radius:50%;background:rgba(255,226,170,0.8);"></div>',
+          `position:absolute;left:${18 + i * 13}%;top:${30 + (i % 3) * 14}%;animation-delay:${i * 180}ms;`, 'dfx-mote', 3200, 'screen');
+      }
+      this.fxScreenCard(warmCard('◈ ' + esc(d.name || 'a keepsake'), 'a memory opens'), 'dfx-soft', 3200, '40%');
+    },
+    keepsakeLevel(d) {
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, rgba(242,196,107,0.22) 0%, transparent 60%);', 'dfx-fadeinout', 1600, 'screen');
+      this.fxScreenCard(warmCard(esc(d.name || 'your keepsake') + (d.level ? ' — ' + esc(d.level) : ''), 'it is starting to do something'), 'dfx-soft', 2200, '30%');
+    },
+    feast(d) {
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%, rgba(255,140,50,0.38) 0%, rgba(160,60,20,0.16) 40%, transparent 70%);', 'dfx-fire', 2800, 'screen');
+      sparks.call(this, 11, '#ff9a3a', 'dfx-ember', 'screen', 8, '88%');
+      this.fxScreenCard(warmCard('the fire, the table, all of them', esc(d.qualityName || 'a feast') + (d.showed ? ' · ' + esc(d.showed) + ' came' : '')), 'dfx-soft', 2600, '34%');
+    },
+    flee(d) {
+      const p = this.tileCenter(d.px != null ? d.px : 4, d.py != null ? d.py : 4);
+      this.spawn('<svg width="60" height="24" viewBox="0 0 60 24"><ellipse cx="30" cy="14" rx="28" ry="8" fill="#6b4a2b" opacity=".55"/></svg>',
+        `position:absolute;left:${p.x - 30}px;top:${p.y}px;`, 'dfx-g-dust', 800);
+      this.spawn('<div style="color:#b8ad9a;font-size:14px;font-style:italic;">you break away</div>',
+        'position:absolute;left:50%;top:30%;transform:translate(-50%,-50%);', 'dfx-fadeinout', 1100);
+    },
+    titanEntry(d) {
+      this.spawn('<div style="height:11vh;background:#000;"></div>', 'position:absolute;left:0;right:0;top:0;', 'dfx-bar-top', 2600, 'screen');
+      this.spawn('<div style="height:11vh;background:#000;"></div>', 'position:absolute;left:0;right:0;bottom:0;', 'dfx-bar-bot', 2600, 'screen');
+      this.spawn(`<div style="text-align:center;"><div style="font-size:12px;letter-spacing:6px;color:#e8a89a;">TITAN</div><div style="font-size:30px;font-weight:bold;color:#ffe2c8;letter-spacing:3px;text-shadow:0 0 18px rgba(200,40,20,0.8);">${esc(d.name || 'IT')}</div></div>`,
+        'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);', 'dfx-reveal', 2400, 'screen');
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(120,10,0,0.35) 100%);', 'dfx-fadeinout', 1800, 'screen');
+      this.shake(8);
+    },
+    titanPhase(d) {
+      this.spawn('', 'position:absolute;inset:0;box-shadow:inset 0 0 60px 20px rgba(200,40,20,0.55);', 'dfx-fadeinout', 900);
+      if (typeof d.x === 'number') {
+        this.fxAt(d.x, d.y, '<svg width="90" height="90" viewBox="0 0 90 90"><path d="M45 4 L40 30 L52 38 L36 60 L48 66 L42 86" stroke="#ffd0b0" stroke-width="3" fill="none"/></svg>', 90, 'dfx-crack', 900);
+        this.floatText(d.x, d.y, d.phase >= 2 ? 'IT IS DESPERATE' : 'IT CHANGES', { color: '#ffb08a', size: 16, dy: -40 });
+      }
+      this.shake(6);
+    },
+    titanFall(d) {
+      this.spawn('', 'position:absolute;inset:0;background:rgba(255,246,220,0.6);', 'dfx-flash-slow', 1600, 'screen');
+      this.spawn(`<div style="text-align:center;font-size:24px;font-weight:bold;color:#fff3cf;letter-spacing:3px;text-shadow:0 2px 12px #000;">${esc((d.name || d.id || 'IT')).toUpperCase()} FALLS</div>`,
+        'position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);', 'dfx-reveal', 2600, 'screen');
+      this.shake(10);
+    },
+    // THE TABLE: "a ring of pale light ... trillions of eyes".
+    tableEnter() {
+      this.spawn('', 'position:absolute;inset:0;background:rgba(2,4,10,0.72);', 'dfx-hold', 3200, 'screen');
+      this.spawn('<svg width="300" height="120" viewBox="0 0 300 120"><ellipse cx="150" cy="60" rx="140" ry="44" fill="none" stroke="rgba(230,240,255,0.85)" stroke-width="3"/><ellipse cx="150" cy="60" rx="140" ry="44" fill="none" stroke="rgba(230,240,255,0.25)" stroke-width="12"/></svg>',
+        'position:absolute;left:50%;top:52%;margin-left:-150px;margin-top:-60px;', 'dfx-ring-in', 3000, 'screen');
+      for (let i = 0; i < 18; i++) {
+        this.spawn('<div style="width:3px;height:3px;border-radius:50%;background:rgba(235,240,255,0.9);"></div>',
+          `position:absolute;left:${6 + (i * 37) % 88}%;top:${6 + (i * 13) % 26}%;animation-delay:${400 + i * 70}ms;`, 'dfx-eye', 2800, 'screen');
+      }
+      this.fxScreenCard(sysCard('THE TABLE', 'HUMANITY PRESENTS ITS CASE', ''), 'dfx-soft', 2800, '76%');
+    },
+    tableLock(d) {
+      this.spawn('<svg width="240" height="96" viewBox="0 0 300 120"><ellipse cx="150" cy="60" rx="140" ry="44" fill="none" stroke="rgba(255,236,190,0.9)" stroke-width="4"/></svg>',
+        'position:absolute;left:50%;top:50%;margin-left:-120px;margin-top:-48px;', 'dfx-ring-close', 900, 'screen');
+      this.fxScreenCard(sysCard('THE DOOR IS CHOSEN', esc(String(d.path || '').toUpperCase()), d.branch ? esc(d.branch) : ''), 'dfx-drop', 1800, '18%');
+    },
+    tableBeat() {
+      this.spawn('<svg width="240" height="96" viewBox="0 0 300 120"><ellipse cx="150" cy="60" rx="140" ry="44" fill="none" stroke="rgba(230,240,255,0.6)" stroke-width="2"/></svg>',
+        'position:absolute;left:50%;top:50%;margin-left:-120px;margin-top:-48px;', 'dfx-ring-out', 900, 'screen');
+    },
+    tableWin() {
+      this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%, rgba(255,226,160,0.55) 0%, rgba(255,240,210,0.2) 45%, transparent 75%);', 'dfx-fire', 3400, 'screen');
+      this.spawn('<svg width="300" height="120" viewBox="0 0 300 120"><ellipse cx="150" cy="60" rx="140" ry="44" fill="none" stroke="rgba(255,240,200,0.9)" stroke-width="3"/></svg>',
+        'position:absolute;left:50%;top:50%;margin-left:-150px;margin-top:-60px;', 'dfx-ring-out', 2400, 'screen');
+      sparks.call(this, 13, '#ffe6a0', 'dfx-rise-slow', 'screen', 7, '80%');
+    },
+    tableLose() {
+      this.spawn('', 'position:absolute;inset:0;background:rgba(6,4,6,0.7);', 'dfx-hold', 2600, 'screen');
+      for (let i = 0; i < 8; i++) {
+        const a = i * 45;
+        this.spawn('<div style="width:26px;height:3px;background:rgba(230,240,255,0.85);"></div>',
+          `position:absolute;left:50%;top:50%;--a:${a}deg;`, 'dfx-shard', 1400, 'screen');
+      }
+    },
+  };
+
+  // VERB PAINTERS — one small distinct grid effect per fx (feel.js FEEL_VERBS).
+  const VERB_PAINTERS = {
+    wall(d) { // Raise Earth: three blocks shoulder up between you and it
+      const mx = Math.round((d.px + d.tx) / 2), my = Math.round((d.py + d.ty) / 2);
+      for (let i = -1; i <= 1; i++) {
+        const horiz = Math.abs(d.tx - d.px) >= Math.abs(d.ty - d.py);
+        const x = horiz ? mx : mx + i, y = horiz ? my + i : my;
+        this.fxAt(x, y, `<div style="width:30px;height:30px;background:${d.color};border:2px solid #5a3e22;border-radius:3px;"></div>`, 34, 'dfx-rise-block', 1100);
+      }
+    },
+    pull(d) { // Gravity Well: rings fall inward on the target
+      for (let i = 0; i < 3; i++) setTimeout(() => this.fxRing(d.tx, d.ty, d.color, 96, 'dfx-ring-in', 700, 4), i * 140);
+      this.fxAt(d.tx, d.ty, `<div style="font-size:22px;color:${d.color};">${d.glyph}</div>`, 30, 'dfx-pop', 800);
+    },
+    push(d) { // Landslide: the ground heaves outward from you
+      this.fxRing(d.px, d.py, d.color, 150, 'dfx-ring-out', 800, 6);
+      this.fxAt(d.px, d.py, `<div style="font-size:24px;color:${d.color};">${d.glyph}</div>`, 30, 'dfx-pop', 700);
+      this.shake(4);
+    },
+    pack(d) { // Pack Hunt: paw prints run from you to it
+      for (let i = 1; i <= 3; i++) {
+        const x = Math.round(d.px + (d.tx - d.px) * i / 4), y = Math.round(d.py + (d.ty - d.py) * i / 4);
+        setTimeout(() => this.fxAt(x, y, `<div style="font-size:18px;">${d.glyph}</div>`, 26, 'dfx-pop', 700), i * 110);
+      }
+    },
+    heal(d) { // Mending Hands: green motes rise off the mended
+      const x = d.ax != null ? d.ax : d.px, y = d.ay != null ? d.ay : d.py;
+      for (let i = 0; i < 5; i++) this.fxAt(x, y, `<div style="color:${d.color};font-size:14px;font-weight:bold;">${d.glyph}</div>`, 18, 'dfx-rise', 1000, (i - 2) * 8, 6);
+      this.fxRing(x, y, d.color, 60, 'dfx-ring-out', 700, 3);
+    },
+    blink(d) { // Blink: a fold of light where you were, and where you are
+      this.fxRing(d.px, d.py, d.color, 70, 'dfx-ring-in', 500, 4);
+      this.fxAt(d.px, d.py, `<div style="font-size:22px;color:${d.color};">${d.glyph}</div>`, 30, 'dfx-pop', 600);
+    },
+    swap(d) { // Switcheroo: two arcs cross
+      this.fxLine(d.px, d.py, d.tx, d.ty, d.color, 700, true);
+      this.fxAt(d.px, d.py, `<div style="font-size:18px;color:${d.color};">${d.glyph}</div>`, 26, 'dfx-pop', 700);
+      this.fxAt(d.tx, d.ty, `<div style="font-size:18px;color:${d.color};">${d.glyph}</div>`, 26, 'dfx-pop', 700);
+    },
+    foresee(d) { // Foresight / Prophecy: an eye opens over what it will do
+      this.fxAt(d.tx, d.ty, `<div style="font-size:22px;">${d.glyph}</div>`, 30, 'dfx-pop', 1100, 0, -30);
+      this.fxRing(d.tx, d.ty, d.color, 54, 'dfx-fadeinout', 1000, 2);
+    },
+    broadcast(d) { // Live Broadcast: the red light is on
+      this.fxAt(d.px, d.py, `<div style="font-size:11px;font-weight:bold;color:#fff;background:${d.color};padding:2px 5px;border-radius:3px;white-space:nowrap;">${d.glyph}</div>`, 50, 'dfx-pop', 1300, 0, -30);
+      this.fxRing(d.px, d.py, d.color, 110, 'dfx-ring-out', 900, 3);
+    },
+    command(d) { // The Crowd Moves: chevrons run out to your people
+      const x = d.ax != null ? d.ax : d.tx, y = d.ay != null ? d.ay : d.ty;
+      this.fxLine(d.px, d.py, x, y, d.color, 700, false);
+      this.fxAt(x, y, `<div style="font-size:22px;color:${d.color};font-weight:bold;">${d.glyph}</div>`, 30, 'dfx-pop', 700);
+    },
+    stoke(d) { // Stoke / Ember Heart: the furnace flares, embers lift
+      for (let i = 0; i < 6; i++) this.fxAt(d.px, d.py, `<div style="width:5px;height:5px;border-radius:50%;background:${d.color};"></div>`, 8, 'dfx-ember', 1100, (i - 2.5) * 6, 8);
+      this.fxAt(d.px, d.py, `<div style="font-size:20px;">${d.glyph}</div>`, 28, 'dfx-pop', 800, 0, -24);
+    },
+    coins(d) { // Coin Guard / Haggle: coins orbit you
+      for (let i = 0; i < 3; i++) setTimeout(() => this.fxAt(d.px, d.py, `<div style="font-size:16px;color:${d.color};font-weight:bold;transform:translateX(18px);">${d.glyph}</div>`, 40, 'dfx-orbit', 1100), i * 180);
+    },
+    bribe(d) { // Bribe / Sweetener: a coin arcs to the beast
+      this.fxLine(d.px, d.py, d.tx, d.ty, d.color, 600, true);
+      this.fxAt(d.tx, d.ty, `<div style="font-size:20px;color:${d.color};font-weight:bold;">${d.glyph}</div>`, 28, 'dfx-pop', 900, 0, -22);
+    },
+    feed(d) { // Long Table / Harvest Table: a bowl, and steam
+      this.fxAt(d.px, d.py, `<div style="font-size:22px;">${d.glyph}</div>`, 30, 'dfx-pop', 1100, 0, -26);
+      for (let i = 0; i < 3; i++) this.fxAt(d.px, d.py, '<div style="width:3px;height:14px;border-radius:2px;background:rgba(240,230,210,0.7);"></div>', 10, 'dfx-rise', 1100, (i - 1) * 8, -30);
+    },
+    thread(d) { // Aegis Link / Lifeline: a thread of light between you
+      const x = d.ax != null ? d.ax : d.tx, y = d.ay != null ? d.ay : d.ty;
+      this.fxLine(d.px, d.py, x, y, d.color, 1000, false);
+      this.fxAt(x, y, `<div style="font-size:16px;color:${d.color};">${d.glyph}</div>`, 24, 'dfx-pop', 900);
+    },
+    keepsake(d) { // Keeper's Oath / Mourner's Bond: the keepsake glows
+      this.fxRing(d.px, d.py, d.color, 64, 'dfx-fadeinout', 1100, 3);
+      this.fxAt(d.px, d.py, `<div style="font-size:16px;color:${d.color};">${d.glyph}</div>`, 24, 'dfx-pop', 900, 0, -24);
+    },
+    echo(d) { // Last Rites: the fallen's echo stands
+      const x = d.ax != null ? d.ax : d.px, y = d.ay != null ? d.ay : d.py;
+      this.fxAt(x, y, `<svg width="28" height="38" viewBox="0 0 28 38"><ellipse cx="14" cy="19" rx="10" ry="16" fill="${d.color}" opacity=".6"/></svg>`, 40, 'dfx-rise-slow', 1400);
+    },
+    ghost(d) { // Misdirection: it hit the you that wasn't there
+      this.fxAt(d.px, d.py, `<div style="font-size:22px;color:${d.color};opacity:.6;">${d.glyph}</div>`, 30, 'dfx-drift', 800, 12, 0);
+    },
+    aura(d) { // Rally Aura / Back from the Brink: a ring of resolve
+      this.fxRing(d.px, d.py, d.color, 130, 'dfx-ring-out', 1000, 3);
+      this.fxAt(d.px, d.py, `<div style="font-size:18px;color:${d.color};">${d.glyph}</div>`, 26, 'dfx-pop', 800, 0, -24);
+    },
+    burst(d) {
+      this.fxRing(d.px, d.py, d.color, 110, 'dfx-ring-out', 800, 6);
+      this.fxAt(d.px, d.py, `<div style="font-size:22px;color:${d.color};font-weight:bold;">${d.glyph}</div>`, 30, 'dfx-pop', 900, 0, -26);
+    },
+  };
+
   const Drama = {
     overlay: null,
 
     // ensure the overlay exists, positioned over the grid
     ensureOverlay() {
-      if (this.overlay && document.contains(this.overlay)) return this.overlay;
-      // find the grid container
+      // SURVIVES THE RE-RENDER (presentation pass A, 2026-10-14): the overlay
+      // used to live INSIDE .detail — and every action ends in app.js
+      // refresh(), which replaces the whole screen's innerHTML. Every effect
+      // fired during an action (hits, crits, hurt, signatures) was destroyed
+      // in the same tick it was spawned. Now it is a body-level fixed layer,
+      // laid over the grid's rect at each spawn; the grid can re-render
+      // underneath without taking the effects with it.
       const grid = document.querySelector('.detail') || document.querySelector('#grid') || document.body;
-      const ov = document.createElement('div');
-      ov.className = 'drama-overlay';
-      ov.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:50;';
-      // position relative to grid
-      const gridPos = getComputedStyle(grid).position;
-      if (gridPos === 'static') grid.style.position = 'relative';
-      grid.appendChild(ov);
-      this.overlay = ov;
+      let ov = this.overlay;
+      if (!ov || !document.contains(ov)) {
+        ov = document.createElement('div');
+        ov.className = 'drama-overlay';
+        document.body.appendChild(ov);
+        this.overlay = ov;
+      }
+      const r = grid.getBoundingClientRect();
+      ov.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;pointer-events:none;overflow:hidden;z-index:50;`;
       return ov;
     },
 
@@ -101,26 +359,68 @@
     // DOM rect, but the effect itself is free-floating)
     tileCenter(x, y) {
       const grid = document.querySelector('.detail') || document.body;
-      const tiles = grid.querySelectorAll('.tile');
-      // 9x9 grid: index = y*9 + x
-      const idx = y * 9 + x;
-      const tile = tiles[idx];
-      if (!tile) return { x: '50%', y: '50%' };
-      const r = tile.getBoundingClientRect();
+      // FIGHT GRID FIRST (presentation pass A, 2026-10-14): the detail grid's
+      // cells are .cell[data-cx][data-cy] (9x9, or 12x12 in titan fights).
+      // The old lookup only knew the world map's .tile — on the fight grid it
+      // returned '50%' strings, and every anchored effect computed NaN and
+      // landed in the top-left corner. Fallbacks: .tile index, then centre.
+      let tile = null;
+      try { tile = grid.querySelector('[data-cx="' + x + '"][data-cy="' + y + '"]'); } catch (e) { tile = null; }
+      if (!tile) {
+        const tiles = grid.querySelectorAll('.tile');
+        tile = tiles && tiles[y * 9 + x];
+      }
       const gr = grid.getBoundingClientRect();
+      if (!tile) return { x: (gr.width || 390) / 2, y: (gr.height || 400) / 2 };
+      const r = tile.getBoundingClientRect();
       return { x: r.left - gr.left + r.width / 2, y: r.top - gr.top + r.height / 2 };
     },
 
+    // calm(): reduced motion — the OS setting or the in-game toggle (feel.js).
+    // Every shake is skipped, every starburst/particle becomes a calm fade.
+    calm() {
+      const F = S.Feel;
+      if (F && typeof F.reducedMotion === 'function') return !!F.reducedMotion();
+      try { return typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+      catch (e) { return false; }
+    },
+
+    // ensureScreen(): a fixed, full-screen, pointer-events:none layer above
+    // the sheets — for the big moments (ascension, the Table, titans, the
+    // level-up flourish) that must read even while a sheet is open.
+    ensureScreen() {
+      if (this.screen && document.contains(this.screen)) return this.screen;
+      const sc = document.createElement('div');
+      sc.className = 'drama-screen drama-overlay';
+      sc.style.cssText = 'position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10040;';
+      document.body.appendChild(sc);
+      this.screen = sc;
+      return sc;
+    },
+
     // spawn an element, animate, remove
-    spawn(html, css, animClass, duration) {
-      const ov = this.ensureOverlay();
+    spawn(html, css, animClass, duration, layer) {
+      const ov = layer === 'screen' ? this.ensureScreen() : this.ensureOverlay();
       const el = document.createElement('div');
       el.innerHTML = html;
       el.style.cssText = css;
+      if (el.setAttribute) el.setAttribute('data-anim', animClass || ''); // (minimal DOM stubs in old tests lack it)
       ov.appendChild(el);
+      const dur = duration || 600;
+      // REDUCED MOTION (presentation pass A): no scale, spin, bob or drift —
+      // the element simply fades in and out where it stands.
+      if (this.calm()) {
+        el.classList.add('drama-calm');
+        requestAnimationFrame(() => el.classList.add('drama-calm-in'));
+        setTimeout(() => el.classList.remove('drama-calm-in'), Math.max(200, dur - 320));
+        setTimeout(() => el.remove(), dur + 100);
+        return el;
+      }
+      // dfx-* (presentation pass A) keyframes span the element's whole life.
+      if (animClass && animClass.indexOf('dfx-') === 0 && !el.style.animationDelay) el.style.animationDuration = dur + 'ms';
       // trigger animation
       requestAnimationFrame(() => el.classList.add(animClass));
-      setTimeout(() => el.remove(), (duration || 600) + 100);
+      setTimeout(() => el.remove(), dur + 100);
       return el;
     },
 
@@ -230,14 +530,21 @@
       this.floatText(x, y, 'HEAVY', { color: '#ff4d4d' });
     },
     shake(intensity) {
+      if (this.calm()) return; // reduced motion: the board never moves
       intensity = intensity || 8;
-      const grid = document.querySelector('.detail') || document.body;
-      grid.classList.remove('drama-shake');
-      grid.style.setProperty('--shake-intensity', intensity + 'px');
-      // force reflow
-      void grid.offsetWidth;
-      grid.classList.add('drama-shake');
-      setTimeout(() => grid.classList.remove('drama-shake'), 400);
+      const apply = () => {
+        const grid = document.querySelector('.detail') || document.body;
+        grid.classList.remove('drama-shake');
+        grid.style.setProperty('--shake-intensity', intensity + 'px');
+        // force reflow
+        void grid.offsetWidth;
+        grid.classList.add('drama-shake');
+        setTimeout(() => grid.classList.remove('drama-shake'), 400);
+        return grid;
+      };
+      const g0 = apply();
+      // the refresh that ends every action replaces .detail — shake the new one
+      setTimeout(() => { const g1 = document.querySelector('.detail'); if (g1 && g1 !== g0) apply(); }, 0);
     },
 
     // hero card: centered high-res moment (synergy discovery, integration up)
@@ -1700,12 +2007,125 @@
       if (integration >= 2) this.systemCommentary('"Oh. OH. That\'s how it works."', { integration });
     },
 
+    // ===================== PRESENTATION PASS A (2026-10-14) =====================
+    // Steve: "Address all graphic and sound survey gaps."
+    // (1) GROUNDED: days 1-6 feedback. Earthy, human, no System chrome — no
+    //     cyan, no glow, no System words. Dust, bark, ochre, blood, ash.
+    // (2) MOMENTS: the payoffs that were log-only (feel.js FEEL_MOMENTS).
+    // (3) VERB FX: one small distinct grid effect per god-path ability
+    //     (feel.js FEEL_VERBS, data-driven fx -> painter).
+    // Every element: transform/opacity only, pointer-events none, self-removing.
+
+    // grounded(kind, ...args): the pre-System variant of a drama kind.
+    grounded(kind, ...args) {
+      const P = GROUNDED_PALETTE;
+      const splat = (size, color) =>
+        `<svg width="${size}" height="${size}" viewBox="0 0 40 40"><path d="M20 6 C25 8 31 6 32 12 C38 15 34 21 36 25 C33 31 27 30 24 35 C19 34 15 37 11 32 C5 30 7 24 4 20 C6 15 5 10 11 9 C14 5 17 8 20 6 Z" fill="${color}" opacity="0.85"/><circle cx="36" cy="9" r="1.8" fill="${color}" opacity="0.7"/><circle cx="6" cy="33" r="1.4" fill="${color}" opacity="0.6"/></svg>`;
+      const at = (x, y, html, size, cls, dur) => {
+        const c = this.tileCenter(x, y);
+        return this.spawn(html, `position:absolute;left:${c.x - size / 2}px;top:${c.y - size / 2}px;`, cls, dur);
+      };
+      const label = (x, y, text, color, size, dy) => {
+        const c = this.tileCenter(x, y);
+        return this.spawn(text, `position:absolute;left:${c.x}px;top:${c.y + (dy || 0)}px;transform:translate(-50%,-50%);color:${color};font-size:${size}px;font-weight:bold;text-shadow:0 1px 2px #000;white-space:nowrap;`, 'dfx-g-float', 900);
+      };
+      if (kind === 'hit') {
+        const [x, y] = args;
+        at(x, y, splat(46, P.ochre), 46, 'dfx-g-thud', 420);
+      } else if (kind === 'crit') {
+        const [x, y, dmg] = args;
+        at(x, y, splat(70, P.blood), 70, 'dfx-g-thud', 520);
+        at(x, y, `<svg width="60" height="60" viewBox="0 0 60 60"><path d="M8 50 L52 10" stroke="${P.bone}" stroke-width="4" stroke-linecap="round"/></svg>`, 60, 'dfx-g-slash', 380);
+        if (dmg != null) label(x, y, String(dmg), P.bone, 20, -26);
+        this.shake(3);
+      } else if (kind === 'miss') {
+        const [x, y] = args;
+        at(x, y, `<svg width="50" height="30" viewBox="0 0 50 30"><path d="M4 22 Q25 2 46 20" stroke="${P.ash}" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="4 5"/></svg>`, 50, 'dfx-g-dust', 520);
+        label(x, y, 'miss', P.ash, 14, -22);
+      } else if (kind === 'hurt' || kind === 'heavy') {
+        const dmg = kind === 'hurt' ? (args[0] || 5) : 14;
+        if (kind === 'heavy') at(args[0], args[1], splat(90, P.blood), 90, 'dfx-g-thud', 560);
+        const a = Math.min(0.5, 0.18 + dmg / 80);
+        this.spawn('', `position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 45%, rgba(90,26,16,${a}) 100%);`, 'drama-vignette', 520);
+        this.shake(Math.min(6, 2 + Math.floor(dmg / 6)));
+      } else if (kind === 'kill') {
+        const [x, y] = args;
+        const c = this.tileCenter(x, y);
+        for (let i = 0; i < 6; i++) {
+          const dx = (i - 2.5) * 7;
+          this.spawn(`<div style="width:5px;height:5px;border-radius:50%;background:${P.ash};"></div>`,
+            `position:absolute;left:${c.x + dx}px;top:${c.y - 8}px;--dx:${dx * 0.6}px;`, 'dfx-g-settle', 1100);
+        }
+        at(x, y, `<svg width="56" height="20" viewBox="0 0 56 20"><ellipse cx="28" cy="12" rx="26" ry="6" fill="${P.bark}" opacity="0.55"/></svg>`, 56, 'dfx-g-dust', 1000);
+      } else if (kind === 'weather') {
+        const w = args[0];
+        if (w === 'rain') {
+          this.spawn(`<svg width="100%" height="100%" viewBox="0 0 390 844" preserveAspectRatio="none">${Array.from({ length: 26 }, (_, i) => {
+            const x = (i * 53) % 390, y = (i * 37) % 844;
+            return `<line x1="${x}" y1="${y}" x2="${x - 4}" y2="${y + 18}" stroke="rgba(150,160,150,0.35)" stroke-width="1.5"/>`;
+          }).join('')}</svg>`, 'position:absolute;inset:0;', 'dfx-g-rain', 2200);
+        } else if (w === 'cold') {
+          this.spawn('', 'position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 35%, rgba(200,200,190,0.22) 100%);', 'drama-vignette', 1500);
+        } else if (w === 'clear') {
+          this.spawn('', 'position:absolute;inset:0;background:rgba(240,200,120,0.07);', 'drama-flash', 800);
+        }
+      } else if (kind === 'shake') {
+        this.shake(Math.min(6, args[0] || 4));
+      } else if (kind === 'death') {
+        const name = args[2];
+        this.spawn('', 'position:absolute;inset:0;background:#120c08;', 'drama-deathfade', 4200);
+        setTimeout(() => {
+          this.spawn(`<div style="text-align:center;font-family:Georgia,serif;font-style:italic;color:${P.bone};font-size:18px;">${esc(name || 'You')}<div style="font-size:13px;color:${P.ash};margin-top:6px;">the fire is lit anyway.</div></div>`,
+            'position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);', 'drama-deathtext', 2600);
+        }, 1300);
+      } else if (kind === 'text') {
+        const [x, y, text] = args;
+        if (typeof x === 'number') label(x, y, esc(String(text || '')), P.bone, 15, -16);
+      }
+    },
+
+    // moment(name, d): the payoff moments (feel.js FEEL_MOMENTS).
+    moment(name, d) {
+      const fn = MOMENT_PAINTERS[name];
+      if (fn) fn.call(this, d || {});
+    },
+
+    // verbFx(d): a god-path ability's grid effect. d: {fx, color, glyph,
+    // px, py (player), tx, ty (target), ax, ay (ally or null)}.
+    verbFx(d) {
+      d = d || {};
+      const fn = VERB_PAINTERS[d.fx];
+      if (fn) fn.call(this, d);
+    },
+    // helpers for the painters
+    fxAt(x, y, html, size, cls, dur, dx, dy) {
+      const c = this.tileCenter(x, y);
+      return this.spawn(html, `position:absolute;left:${c.x - size / 2 + (dx || 0)}px;top:${c.y - size / 2 + (dy || 0)}px;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;`, cls, dur);
+    },
+    fxRing(x, y, color, size, cls, dur, width) {
+      return this.fxAt(x, y, `<svg width="${size}" height="${size}" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="${color}" stroke-width="${width || 5}"/></svg>`, size, cls, dur);
+    },
+    fxLine(x1, y1, x2, y2, color, dur, dash) {
+      const a = this.tileCenter(x1, y1), b = this.tileCenter(x2, y2);
+      const len = Math.max(4, Math.hypot(b.x - a.x, b.y - a.y));
+      const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+      return this.spawn(`<div style="width:${len}px;height:0;border-top:3px ${dash ? 'dashed' : 'solid'} ${color};opacity:.9;"></div>`,
+        `position:absolute;left:${a.x}px;top:${a.y}px;transform-origin:0 50%;transform:rotate(${ang}deg);`, 'dfx-line', dur);
+    },
+    fxScreenCard(html, cls, dur, top) {
+      return this.spawn(html, `position:absolute;left:50%;top:${top || '38%'};transform:translate(-50%,-50%);max-width:320px;width:86%;`, cls, dur, 'screen');
+    },
+
     // audioFor(kind, arg): AUDIO-VISUAL SYNC mate lookup (Steve 2026-10-07,
     // Drama E1). Returns the Game.audio voice for a drama kind, or null when
     // the moment stays quiet. game.js calls this once per drama visual so
     // audio mates fire centrally — call sites never fire both. (arg is the
     // drama's first arg, reserved for per-instance mates; unused for now.)
     audioFor(kind, arg) {
+      // weather is natural: the sky has a voice either side of day 7
+      // (presentation pass A). Pre-System, game.js asks feel.js
+      // groundedAudio instead — the same two voices.
+      if (kind === 'weather') return ({ rain: 'weatherRain', cold: 'weatherCold' })[arg] || null;
       return DRAMA_AUDIO_MATES[kind] || null;
     },
   };
@@ -1882,6 +2302,70 @@
     .drama-aha { opacity: 0; transform: scale(0.4); transition: all 0.5s cubic-bezier(0.2, 1.6, 0.4, 1); }
     .drama-aha.drama-aha { opacity: 1; transform: scale(1.1); animation: drama-aha-glow 0.8s ease-in-out infinite; }
     @keyframes drama-aha-glow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.35); } }
+    /* PRESENTATION PASS A (2026-10-14): grounded, moments, verb fx, calm.
+       transform/opacity only; every element self-removes. */
+    .drama-screen { pointer-events: none !important; }
+    .drama-calm { opacity: 0; transition: opacity 0.3s ease-out; }
+    .drama-calm.drama-calm-in { opacity: 0.9; }
+    .drama-calm, .drama-calm * { animation: none !important; }
+    .dfx-g-thud { animation: dfx-g-thud 0.45s ease-out forwards; }
+    @keyframes dfx-g-thud { 0% { opacity: 0; transform: scale(0.5); } 25% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; transform: scale(1.15); } }
+    .dfx-g-slash { animation: dfx-g-slash 0.38s ease-out forwards; }
+    @keyframes dfx-g-slash { 0% { opacity: 0; transform: scaleX(0.2); } 30% { opacity: 1; transform: scaleX(1); } 100% { opacity: 0; transform: scaleX(1); } }
+    .dfx-g-float { animation: dfx-g-float 0.9s ease-out forwards; }
+    @keyframes dfx-g-float { 0% { opacity: 0; transform: translate(-50%, -50%); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -110%); } }
+    .dfx-g-dust { animation: dfx-g-dust 0.8s ease-out forwards; }
+    @keyframes dfx-g-dust { 0% { opacity: 0; transform: scale(0.7); } 30% { opacity: 0.9; } 100% { opacity: 0; transform: scale(1.25) translateY(-4px); } }
+    .dfx-g-settle { animation: dfx-g-settle 1.1s ease-in forwards; }
+    @keyframes dfx-g-settle { 0% { opacity: 0.9; transform: translate(0, -6px); } 100% { opacity: 0; transform: translate(var(--dx, 0px), 14px); } }
+    .dfx-g-rain { animation: dfx-g-rain 2.2s linear forwards; }
+    @keyframes dfx-g-rain { 0% { opacity: 0; transform: translateY(-12px); } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+    .dfx-hold { animation: dfx-hold var(--dur, 3s) ease-in-out forwards; }
+    @keyframes dfx-hold { 0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+    .dfx-fadeinout { animation: dfx-hold 1.2s ease-in-out forwards; }
+    .dfx-soft { animation: dfx-soft 3s ease-out forwards; }
+    @keyframes dfx-soft { 0% { opacity: 0; transform: translate(-50%, -46%); } 15% { opacity: 1; transform: translate(-50%, -50%); } 82% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -52%); } }
+    .dfx-drop { animation: dfx-drop 2.6s cubic-bezier(0.2, 1.1, 0.4, 1) forwards; }
+    @keyframes dfx-drop { 0% { opacity: 0; transform: translate(-50%, -90%); } 14% { opacity: 1; transform: translate(-50%, -50%); } 85% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -60%); } }
+    .dfx-reveal { animation: dfx-reveal 4.2s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+    @keyframes dfx-reveal { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); } 22% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 85% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.04); } }
+    .dfx-beam { animation: dfx-beam 4.4s ease-out forwards; }
+    @keyframes dfx-beam { 0% { opacity: 0; transform: scaleY(0); } 20% { opacity: 1; transform: scaleY(1); } 80% { opacity: 0.8; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1); } }
+    .dfx-rise { animation: dfx-rise 1s ease-out forwards; }
+    @keyframes dfx-rise { 0% { opacity: 0; transform: translateY(6px); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx, 0px), -46px); } }
+    .dfx-rise-slow { animation: dfx-rise 1.8s ease-out forwards; }
+    .dfx-ember { animation: dfx-ember 1.5s ease-out forwards; }
+    @keyframes dfx-ember { 0% { opacity: 0; transform: translateY(0) scale(1); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx, 0px), -120px) scale(0.4); } }
+    .dfx-mote { animation: dfx-mote 3.2s ease-in-out forwards; }
+    @keyframes dfx-mote { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 0.9; } 100% { opacity: 0; transform: translate(14px, -40px); } }
+    .dfx-fire { animation: dfx-fire 2.8s ease-in-out forwards; }
+    @keyframes dfx-fire { 0% { opacity: 0; } 20% { opacity: 1; } 35% { opacity: 0.8; } 50% { opacity: 1; } 65% { opacity: 0.85; } 100% { opacity: 0; } }
+    .dfx-ring-out { animation: dfx-ring-out 0.9s ease-out forwards; }
+    @keyframes dfx-ring-out { 0% { opacity: 0.95; transform: scale(0.3); } 100% { opacity: 0; transform: scale(1.3); } }
+    .dfx-ring-in { animation: dfx-ring-in 0.8s ease-in forwards; }
+    @keyframes dfx-ring-in { 0% { opacity: 0; transform: scale(1.5); } 30% { opacity: 0.95; } 100% { opacity: 0.6; transform: scale(0.35); } }
+    .dfx-ring-close { animation: dfx-ring-close 0.9s cubic-bezier(0.3, 1.4, 0.4, 1) forwards; }
+    @keyframes dfx-ring-close { 0% { opacity: 0; transform: scale(1.5); } 40% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+    .dfx-eye { animation: dfx-eye 2.6s ease-in-out forwards; }
+    @keyframes dfx-eye { 0% { opacity: 0; transform: scale(0.2); } 30% { opacity: 1; transform: scale(1); } 85% { opacity: 1; } 100% { opacity: 0; } }
+    .dfx-bar-top { animation: dfx-bar-top 2.6s ease-in-out forwards; }
+    @keyframes dfx-bar-top { 0% { transform: translateY(-100%); } 18% { transform: translateY(0); } 82% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
+    .dfx-bar-bot { animation: dfx-bar-bot 2.6s ease-in-out forwards; }
+    @keyframes dfx-bar-bot { 0% { transform: translateY(100%); } 18% { transform: translateY(0); } 82% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+    .dfx-crack { animation: dfx-crack 0.9s ease-out forwards; }
+    @keyframes dfx-crack { 0% { opacity: 0; transform: scaleY(0.2); } 25% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1); } }
+    .dfx-flash-slow { animation: dfx-hold 1.6s ease-out forwards; }
+    .dfx-shard { animation: dfx-shard 1.4s cubic-bezier(0.2, 0.8, 0.4, 1) forwards; }
+    @keyframes dfx-shard { 0% { opacity: 1; transform: rotate(var(--a)) translateX(60px); } 100% { opacity: 0; transform: rotate(var(--a)) translateX(200px); } }
+    .dfx-rise-block { animation: dfx-rise-block 1.1s cubic-bezier(0.2, 1.3, 0.4, 1) forwards; }
+    @keyframes dfx-rise-block { 0% { opacity: 0; transform: translateY(18px) scaleY(0.2); } 30% { opacity: 1; transform: translateY(0) scaleY(1); } 80% { opacity: 1; } 100% { opacity: 0; } }
+    .dfx-pop { animation: dfx-pop 0.8s cubic-bezier(0.2, 1.4, 0.4, 1) forwards; }
+    @keyframes dfx-pop { 0% { opacity: 0; transform: scale(0.3); } 30% { opacity: 1; transform: scale(1.15); } 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+    .dfx-orbit { animation: dfx-orbit 1.1s linear forwards; }
+    @keyframes dfx-orbit { 0% { opacity: 0; transform: rotate(0deg); } 20% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: rotate(360deg); } }
+    .dfx-line { animation: dfx-hold 0.9s ease-in-out forwards; }
+    .dfx-drift { animation: dfx-drift 0.8s ease-out forwards; }
+    @keyframes dfx-drift { 0% { opacity: 0.7; transform: translateX(0); } 100% { opacity: 0; transform: translateX(18px); } }
     .drama-shake { animation: drama-shake-anim 0.4s ease-out; }
     @keyframes drama-shake-anim {
       0%, 100% { transform: translate(0, 0); }
