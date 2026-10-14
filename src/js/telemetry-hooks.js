@@ -40,7 +40,7 @@
   wrap('tableFail', (g, a) => { const T = tstate(g); g.teleMilestone('table_failed', { path: T.path, branch: T.branch, reason: String(a[0] || '').slice(0, 80) }); });
   wrap('tableResolveFinal', (g) => {
     const T = tstate(g);
-    if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; g.teleMilestone('table_won', { path: T.path, branch: T.branch, seat: T.seat }); }
+    if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; const pg0 = g.progState ? g.progState() : {}; g.teleMilestone('table_won', { path: T.path, branch: T.branch, seat: T.seat, key: !!pg0.networkFallen, hosts: T.final === 'hosts', overtime: pg0.overtime | 0 }); }
   });
   wrap('useAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: a[1], ok: r !== false && r != null }));
   wrap('activateAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: 'activate', ok: r !== false && r != null }));

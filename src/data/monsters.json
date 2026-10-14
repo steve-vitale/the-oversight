@@ -8440,5 +8440,315 @@
       "a low trumpet note, felt in the teeth"
     ],
     "codexStages": {}
+  },
+  {
+    "id": "network_tower",
+    "size": 2,
+    "encounter": {
+      "aggroAudio": "trialFanfare"
+    },
+    "activity": "both",
+    "name": "Network Mast",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "hp": [
+      2400,
+      2800
+    ],
+    "attack": {
+      "name": "Signal Sweep",
+      "damage": [
+        45,
+        65
+      ],
+      "telegraph": "The mast swings its beam across the grid. A full round of warning.",
+      "pattern": {
+        "type": "beam",
+        "windup": 2
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Signal Sweep",
+        "damage": [
+          45,
+          65
+        ],
+        "telegraph": "The mast swings its beam across the grid. A full round of warning.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Dead Air",
+        "damage": [
+          55,
+          75
+        ],
+        "telegraph": "Every sound stops. Then the mast falls on whoever is closest.",
+        "pattern": {
+          "type": "direct"
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 3
+        },
+        "weight": 2
+      }
+    ],
+    "weaknesses": [
+      "it is one body across the whole map — every piece you take is gone for good",
+      "its escorts are the season's own monsters; their counters still work"
+    ],
+    "edible": {
+      "calories": 0,
+      "note": "It is the broadcast. You cannot eat the broadcast. (Yet.)"
+    },
+    "parts": [
+      "a length of signal (it hums in your hand)"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "A mast taller than the trees. It hums your name.",
+      "observed": "A Network mast. One of four at the corners of the world. It brings one of the season's monsters with it.",
+      "slain": "Moves: Signal Sweep [45,65] beam; Dead Air [55,75] direct. One corner of the world is quiet."
+    },
+    "systemDesignation": "NETWORK MAST",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": null,
+    "speed": 2,
+    "emoji": "📡",
+    "unknown": "a mast taller than the trees, and it is humming",
+    "vibe": "a piece of the Network: a broadcast mast",
+    "wave": 6,
+    "pierce": 0.5,
+    "campaignOnly": true,
+    "campaignNode": "the_network",
+    "loot": {
+      "chance": 0,
+      "tier": 3,
+      "note": "The Network drops nothing. The key is the prize."
+    },
+    "armor": 16
+  },
+  {
+    "id": "network_limb",
+    "size": 2,
+    "encounter": {
+      "aggroAudio": "trialFanfare"
+    },
+    "activity": "both",
+    "name": "Network Limb",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "hp": [
+      3000,
+      3400
+    ],
+    "attack": {
+      "name": "Carrier Wave",
+      "damage": [
+        55,
+        80
+      ],
+      "telegraph": "The limb drags itself across the field. The ground ripples a round ahead.",
+      "pattern": {
+        "type": "beam",
+        "windup": 2
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Carrier Wave",
+        "damage": [
+          55,
+          80
+        ],
+        "telegraph": "The limb drags itself across the field. The ground ripples a round ahead.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Station Ident",
+        "damage": [
+          65,
+          90
+        ],
+        "telegraph": "It flashes its call sign. Then it hits, hard.",
+        "pattern": {
+          "type": "direct"
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 3
+        },
+        "weight": 2
+      }
+    ],
+    "weaknesses": [
+      "it is one body across the whole map — every piece you take is gone for good",
+      "its escorts are the season's own monsters; their counters still work"
+    ],
+    "edible": {
+      "calories": 0,
+      "note": "It is the broadcast. You cannot eat the broadcast. (Yet.)"
+    },
+    "parts": [
+      "a length of signal (it hums in your hand)"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "Something long and segmented, made of cable. It is holding the map.",
+      "observed": "A Network limb. Four hold the edges of the world. Each drags one of the season's monsters along.",
+      "slain": "Moves: Carrier Wave [55,80] beam; Station Ident [65,90] direct. One edge of the world is let go."
+    },
+    "systemDesignation": "NETWORK LIMB",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": null,
+    "speed": 2,
+    "emoji": "🦾",
+    "unknown": "something long, segmented, made of cable",
+    "vibe": "a piece of the Network: a limb along the edge of the world",
+    "wave": 6,
+    "pierce": 0.5,
+    "campaignOnly": true,
+    "campaignNode": "the_network",
+    "loot": {
+      "chance": 0,
+      "tier": 3,
+      "note": "The Network drops nothing. The key is the prize."
+    },
+    "armor": 18
+  },
+  {
+    "id": "network_heart",
+    "size": 3,
+    "encounter": {
+      "aggroAudio": "trialFanfare"
+    },
+    "activity": "both",
+    "name": "The Heart of the Network",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "hp": [
+      6000,
+      7000
+    ],
+    "attack": {
+      "name": "Prime Time",
+      "damage": [
+        70,
+        100
+      ],
+      "telegraph": "It GROWS every round. It will declare: 3 rounds to a title card you cannot dodge.",
+      "pattern": {
+        "type": "beam",
+        "windup": 2
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Prime Time",
+        "damage": [
+          70,
+          100
+        ],
+        "telegraph": "It GROWS every round. It will declare: 3 rounds to a title card you cannot dodge.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "weight": 3
+      },
+      {
+        "name": "Syndication",
+        "damage": [
+          60,
+          85
+        ],
+        "telegraph": "Every rerun you ever watched, at once.",
+        "pattern": {
+          "type": "beam",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 2
+        },
+        "weight": 2
+      },
+      {
+        "name": "Sign-Off",
+        "damage": [
+          80,
+          110
+        ],
+        "telegraph": "The test pattern. Then silence. Then the hit.",
+        "pattern": {
+          "type": "direct"
+        },
+        "damageType": "physical",
+        "condition": {
+          "cooldownTurns": 4
+        },
+        "weight": 2
+      }
+    ],
+    "weaknesses": [
+      "it is one body across the whole map — every piece you take is gone for good",
+      "its escorts are the season's own monsters; their counters still work"
+    ],
+    "edible": {
+      "calories": 0,
+      "note": "It is the broadcast. You cannot eat the broadcast. (Yet.)"
+    },
+    "parts": [
+      "a length of signal (it hums in your hand)"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "The sky, with a picture in it. The picture is you.",
+      "observed": "The heart of the Network. It hungers like the Finale: feed it (the sacrifice works here), or end it first. 3 rounds to [180,240].",
+      "slain": "The broadcast is over. There is no one left to price you by."
+    },
+    "systemDesignation": "THE HEART OF THE NETWORK",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": null,
+    "speed": 2,
+    "emoji": "📺",
+    "unknown": "the sky, with a picture in it",
+    "vibe": "the Network itself: the broadcast, given a body",
+    "wave": 6,
+    "pierce": 0.5,
+    "campaignOnly": true,
+    "campaignNode": "the_network",
+    "loot": {
+      "chance": 0,
+      "tier": 3,
+      "note": "The Network drops nothing. The key is the prize."
+    },
+    "armor": 22,
+    "fiCardRange": [
+      180,
+      240
+    ],
+    "fiCountdownRounds": 3
   }
 ]

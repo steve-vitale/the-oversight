@@ -132,7 +132,9 @@
   // finale-campaign (2026-10-12): the sacrifice / countdown buttons work in
   // THE OPENING CREDITS too — same hunger, smaller card.
   function fiMonster(game) {
-    return w5monster(game, 'finale') || w5monster(game, 'finale_opening');
+    // THE NETWORK (2026-10-14): its heart hungers the same way — the
+    // sacrifice counter must find it too.
+    return w5monster(game, 'finale') || w5monster(game, 'finale_opening') || w5monster(game, 'network_heart');
   }
   function fullMove(game, p) {
     try {

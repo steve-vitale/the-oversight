@@ -306,6 +306,23 @@
       "fleeAt": 0,
       "notes": "Wave-5 signature (sigW5, Steve 2026-10-11): announce-then-apply memos (fragile by design). Feed it bad notes: applied next turn, reverted the turn after. Kill it first or weaponize the notes.",
       "preTurnHooks": ["nnNote"]
+    },
+    "network_tower": {
+      "fleeAt": 0,
+      "notes": "THE NETWORK node piece (2026-10-14): standard attacks; the signature layer comes from its injected wave-5 escort (real ids, so their counters work).",
+      "preTurnHooks": []
+    },
+    "network_limb": {
+      "fleeAt": 0,
+      "notes": "THE NETWORK node piece (2026-10-14): standard attacks; signature layer from its injected wave-5 escort.",
+      "preTurnHooks": []
+    },
+    "network_heart": {
+      "fleeAt": 0,
+      "notes": "THE NETWORK heart (2026-10-14): the Finale's hunger (fiFinale) with mdef card [180,240], 3-round countdown; sigW5 fiMonster finds it so the sacrifice counter works.",
+      "preTurnHooks": [
+        "fiFinale"
+      ]
     }
   }
 }

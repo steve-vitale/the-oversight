@@ -1,5 +1,5 @@
 window.AUDIO_LAB_DATA = {
- "generated": "2026-10-13T17:50:48.151Z",
+ "generated": "2026-10-14T16:17:39.173Z",
  "monsters": [
   {
    "id": "bulldozer",
@@ -803,6 +803,48 @@ window.AUDIO_LAB_DATA = {
    "source": "1930s fanfare, bombastic (Designer’s Choice)",
    "license": "CC0",
    "why": "It stands at the edge of the world, getting bigger. It is not attacking — it is ARRIVING. A bombastic fanfare: the sky has a face in it."
+  },
+  {
+   "id": "network_tower",
+   "name": "Network Mast",
+   "wave": 6,
+   "hook": "fiCrewQuiet",
+   "files": [
+    "src/audio/signatures/sfx-finale_crew-quiet.mp3"
+   ],
+   "synth": null,
+   "origin": "real",
+   "source": "REUSED from finale_crew (placeholder until THE NETWORK gets its own)",
+   "license": "unknown",
+   "why": "A Network mast: the broadcast given a body, one corner of the map. Reuses the commercial-break quiet for now."
+  },
+  {
+   "id": "network_limb",
+   "name": "Network Limb",
+   "wave": 6,
+   "hook": "fiOpeningSting",
+   "files": [
+    "src/audio/signatures/sfx-finale_opening-sting.mp3"
+   ],
+   "synth": null,
+   "origin": "real",
+   "source": "REUSED from finale_opening (placeholder until THE NETWORK gets its own)",
+   "license": "unknown",
+   "why": "A Network limb holding one edge of the map. Reuses the opening-credits sting for now."
+  },
+  {
+   "id": "network_heart",
+   "name": "The Heart of the Network",
+   "wave": 6,
+   "hook": "fiTitleCard",
+   "files": [
+    "src/audio/signatures/sfx-finale-titlecard.mp3"
+   ],
+   "synth": null,
+   "origin": "real",
+   "source": "REUSED from finale (placeholder until THE NETWORK gets its own)",
+   "license": "unknown",
+   "why": "The heart of the Network: the show itself, hungering like the Finale. Reuses the title-card timer for now."
   }
  ],
  "sfx": [

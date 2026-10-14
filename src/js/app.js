@@ -16588,7 +16588,12 @@
                 const tp = Game.tablePreview ? Game.tablePreview() : null;
                 if (tp) {
                   const doors = tp.doors.length ? tp.doors.map(esc).join(', ') : 'none yet';
-                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.<br>` +
+                  // OVERTIME (2026-10-14): the waiting cost, shown where the seat is.
+                  let otLine = '';
+                  if (tp.overtime) otLine += `<br>⏱ <b>OVERTIME ×${tp.overtime}</b> — reruns hit harder, raids come sooner. Standing −${tp.standingCost}${tp.losses ? ` (${tp.losses} lost)` : ''}.`;
+                  try { const ns = Game.networkStatus ? Game.networkStatus() : null; if (ns) otLine += `<br>${esc(ns)}`; } catch (e) { console.warn('network status html', e); }
+                  if (tp.key) otLine += `<br>🍽️ <b>The key is yours:</b> every door now ends with THE HOSTS.`;
+                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}<br>` +
                     `<button class="btn sm" data-table-seat>◈ Take your seat</button>` +
                     `</p></div>`;
                 }
