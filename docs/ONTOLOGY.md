@@ -651,6 +651,21 @@ Food reality system. Food must be known-edible AND in edible state. Processing c
 
 **Consumes:** scholar.inventory, state.codex.plants
 
+### foodPower (`foodPower.js`)
+Food is fuel — every System ability burns kcal from the ONE economy (no mana pool); a topped-up user OVERCHARGES (+25% impact, max with the feast buff); village pantry tiers gate villager ability uses (starving: none, tight: only when outmatched, secure: normal, abundant: bonus uses). (Steve 2026-10-14: "Abilities should be stronger, and they were always meant to be powered by food.")
+
+**Provides:** abilityKcalCost(abilityId, actionId), foodPowerGate(), overcharged(), abilityPowerMult(), overchargeLine(), villageDailyNeed(), villageFoodDays(), villageFoodTier()
+
+**Rules:**
+- one_economy: true (code: foodPower.js — kcal only, deducted from scholar.kcal; no mana/ability-point pool anywhere)
+- data_cost_wins: true (code: foodPower.js — actions declaring cost.kcal keep their tuned number; the tier table only fills gaps)
+- hunger_gate: true (code: foodPower.js — scholar.kcal < 500 refuses every ability with an "eat first" line; nothing is deducted on refusal)
+- overcharge: true (code: foodPower.js — kcal >= 75% of kcalCap → ×1.25 on player-sourced damage; takes the max with feastedMult, never stacks)
+- village_tiers: true (code: foodPower.js — pantry days of food → starving/tight/secure/abundant; gates tbVillagerAbility uses, never the player's)
+- honest_costs: true (code: foodPower.js — kcal cost shown on every ability button before use; the burn narrated after every real activation)
+
+**Consumes:** state.scholar.kcal, kcalCap(), feastedActive(), feastedMult(), noteFeastedCombatUse(), pantryKcalLive(), state.village.burnHistory / roster, Game.useAbility, Game.payActionCost, Game._actionAvailable, Game.activatableAbilities, Game.activateAbility, Game.tbVillagerAbility, tbDamage player-source hook
+
 ### galactic-cast (`galactic-cast.js`)
 Per-run registry of the five galactic personae (Vex Marlowe, Countess Sable, Sarge, Dr. Fenwick, Pip Quindle) as the SAME characters recur across show, contest, alien-encounter, and table layers — Steve's world-building scaffold (2026-10-11). Arc stages: 0 unknown, 1 heard (show exposure), 2 seen (contest/producer contact), 3 faced, 4 known. Stages 1-2 advance here via sponsor cards and signed producer notes; stages 3-4 belong to the encounter/table systems via advanceCastStage. Knowledge-gated: stage 0 never renders a persona name.
 

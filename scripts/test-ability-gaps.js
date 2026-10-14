@@ -4,7 +4,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const ROOT = '/home/hatch/workspace/worktrees/sim-abilitygap';
+const ROOT = path.join(__dirname, '..');
 
 // --- deterministic RNG BEFORE eval ---
 let _seed = parseInt(process.env.SEED || '7', 10);

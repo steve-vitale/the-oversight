@@ -32327,16 +32327,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // never a villager ally (the gristlefit lash is excluded by the target
       // check). The strike's "You STRIKE for N" line is composed from
       // tbDamage's return, so it states the true uplifted number.
+      // FOOD POWER (Steve 2026-10-14): the same hook carries OVERCHARGE —
+      // a topped-up fighter (kcal >= 75% cap) hits ×1.25 without a feast.
+      // abilityPowerMult() takes the max with feastedMult — one true number,
+      // never stacked. Only the feast marks devotion use.
       try {
         const _fk = t && t.kind;
         const _ps = sourceKey === 'p' || (sourceLabel === 'you' && (sourceKey == null));
         if (_ps && (_fk === 'monster' || _fk === 'hostile') && final > 0 &&
-            typeof this.feastedActive === 'function' && this.feastedActive()) {
-          const _fm = typeof this.feastedMult === 'function' ? this.feastedMult() : 1;
-          if (_fm > 1) {
-            final = Math.round(final * _fm);
-            this.say(`FEASTED ×${_fm}: the feast was the weapon.`);
-            if (typeof this.noteFeastedCombatUse === 'function') this.noteFeastedCombatUse();
+            typeof this.abilityPowerMult === 'function') {
+          const _pm = this.abilityPowerMult();
+          const _feasted = (typeof this.feastedActive === 'function' && this.feastedActive());
+          if (_pm > 1) {
+            final = Math.round(final * _pm);
+            this.say(_feasted ? `FEASTED ×${_pm}: the feast was the weapon.` : `OVERCHARGED ×${_pm} (well-fed): food is fuel.`);
+            if (_feasted && typeof this.noteFeastedCombatUse === 'function') this.noteFeastedCombatUse();
           }
         }
       } catch (e) {}
