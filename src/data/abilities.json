@@ -2834,5 +2834,108 @@
       "2": "No tag-backs: also silences its special for 1 round.",
       "3": "Everyone's it: root all adjacent monsters."
     }
+  },
+  {
+    "id": "shoulder_check",
+    "name": "Shoulder Check",
+    "description": "You know exactly where to hit something with your shoulder so it goes where YOU want. Shove a controlled monster 2 tiles \u2014 into its friends, away from yours.",
+    "flavor": "It's all in the shoulder. The System watched a bouncer once and took NOTES.",
+    "pool": "system",
+    "tier": "combat",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "metabolic": {
+      "daily": 30
+    },
+    "actions": [
+      {
+        "id": "shove",
+        "context": "combat",
+        "name": "Shoulder Check",
+        "cost": {
+          "turn": true,
+          "kcal": 30
+        },
+        "effect": "Shove a controlled (stunned/rooted/bound/blinded/hesitating) size-1 monster 2 tiles directly away from you. Slamming it into another fighter deals collision to both."
+      }
+    ],
+    "paths": [
+      "brawler"
+    ],
+    "deepening": {
+      "2": "The shoulder knows.",
+      "3": "You can shoulder-check a door off its hinges. You've done it. Twice."
+    }
+  },
+  {
+    "id": "hogtie",
+    "name": "Hogtie",
+    "description": "Rope, a dazed monster, and thirty seconds of not being eaten. Hogtie a controlled monster: rooted 3 rounds (diminishing), and it can't wind up telegraphs. It can still lash out \u2014 the rope holds position, not malice.",
+    "flavor": "The System is VERY proud of this one. It watched a rodeo. It has opinions about knots now.",
+    "pool": "system",
+    "tier": "combat",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "metabolic": {
+      "daily": 40
+    },
+    "actions": [
+      {
+        "id": "bind",
+        "context": "combat",
+        "name": "Hogtie",
+        "cost": {
+          "turn": true,
+          "kcal": 40
+        },
+        "effect": "Spend 1 rope + the action on a controlled monster: rooted 3 rounds (3\u21922\u21921 per previous bind), cannot start telegraphs while bound. Uninterruptible monsters still attack \u2014 the rope holds the body, not the promise."
+      }
+    ],
+    "paths": [
+      "brawler"
+    ],
+    "deepening": {
+      "2": "Your knots have knots.",
+      "3": "You once hogtied a rumor. It stayed tied."
+    }
+  },
+  {
+    "id": "come_get_some",
+    "name": "Come Get Some",
+    "description": "Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it.",
+    "flavor": "It's not the words. It's the TONE. The System has been practicing.",
+    "pool": "system",
+    "tier": "combat",
+    "unlock": {
+      "type": "system_offer"
+    },
+    "modifiers": [],
+    "metabolic": {
+      "daily": 20
+    },
+    "actions": [
+      {
+        "id": "goad",
+        "context": "combat",
+        "name": "Come Get Some",
+        "cost": {
+          "turn": true,
+          "kcal": 20
+        },
+        "effect": "Target a blinded monster within 3 tiles: it lurches toward your position on its next move. Reposition the threat without touching it."
+      }
+    ],
+    "paths": [
+      "brawler",
+      "socialite"
+    ],
+    "deepening": {
+      "2": "You can goad a statue into flinching.",
+      "3": "Your taunts have a return address."
+    }
   }
 ]

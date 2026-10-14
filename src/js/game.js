@@ -31425,11 +31425,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the path hits another fighter, both take [5,10] collision and the
     // shove stops. The tactic is positioning: YOU decide which way is "away".
     // Size-1 monsters only — you can't shoulder-check a bulldozer.
-    tbPlayerShove(targetKey) {
+    tbPlayerShove(targetKey, opts) {
+      opts = opts || {};
       const f = this.tbfight;
       if (!f || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
       if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      // CONTROL-ABILITIES 2026-10-14 (Steve): shove is an ABILITY
+      // (shoulder_check), not a basic action. viaAbility: the framework owns
+      // the turn + kcal; direct calls spend the turn here on success only.
       const m = targetKey ? this.tbFighter(targetKey) : null;
       if (!m || (m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) { this.say('Shove what?'); return false; }
       if (!((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0)) {
@@ -31441,7 +31445,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((this.fighterSize(m) || 1) > 1) { this.say(`It's too big to shove — you'd bounce off. (Shove: size-1 monsters only.)`); return false; }
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
-      p.acted = true;
+      if (!opts.viaAbility) p.acted = true;
       let moved = 0;
       for (let i = 0; i < 2; i++) {
         const nx = m.mx + dx, ny = m.my + dy;
@@ -31466,7 +31470,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (moved > 0) this.say(`You shoulder-check ${this.encSubject(m)} — it staggers ${moved} tile${moved > 1 ? 's' : ''}! (Shove)`);
       else this.say(`${this.encSubject(m)} doesn't budge — something's in the way. (Shove: blocked.)`);
-      this.tbAfterPlayerAction();
+      if (!opts.viaAbility) this.tbAfterPlayerAction();
       return true;
     },
 
@@ -31478,7 +31482,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // or work the objective while it strains.
     // (Accepts any control — stunned, rooted, blinded, hesitating — so the
     // verbs compose: blind it, then tie it while it can't see you coming.)
-    tbPlayerBind(targetKey) {
+    tbPlayerBind(targetKey, opts) {
+      opts = opts || {};
       const f = this.tbfight;
       if (!f || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
@@ -31498,10 +31503,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const rounds = Math.max(1, 3 - prevBinds);
       m._bindCount = prevBinds + 1;
       m._bound = rounds;
-      p.acted = true;
+      if (!opts.viaAbility) p.acted = true;
       this.say(`You hogtie ${this.encSubject(m)} while it can't fight back — ${rounds} round${rounds > 1 ? 's' : ''}, it isn't going anywhere and can't wind up for anything big. (Bind: rooted, no telegraphs.${prevBinds ? ' Diminishing — it\'s learning the rope.' : ''})`);
       this.tbRefreshTelegraphUI();
-      this.tbAfterPlayerAction();
+      if (!opts.viaAbility) this.tbAfterPlayerAction();
       return true;
     },
 
@@ -31510,7 +31515,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // then the trick's spent). Costs the action. The tactic: stand where you
     // want it — near your tripwire, away from the downed villager, into the
     // open where the party can see it.
-    tbPlayerGoad(targetKey) {
+    tbPlayerGoad(targetKey, opts) {
+      opts = opts || {};
       const f = this.tbfight;
       if (!f || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
@@ -31524,9 +31530,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
       if (d > 3) { this.say('Too far — it can\'t hear you. Get within 3 tiles.'); return false; }
       m._goadedBy = 'p';
-      p.acted = true;
+      if (!opts.viaAbility) p.acted = true;
       this.say(`You whistle, sharp — ${this.encSubject(m)} cocks its head and lurches toward the sound! (Goaded: its next move comes to you.)`);
-      this.tbAfterPlayerAction();
+      if (!opts.viaAbility) this.tbAfterPlayerAction();
       return true;
     },
 
@@ -33327,15 +33333,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
 
-      // SHOVE (control-tactics 2026-10-14): villagers shove CONTROLLED
-      // monsters away from the most vulnerable ally. Trigger: adjacent to a
-      // controlled size-1 monster. Protective — the shove goes away from the
-      // lowest-HP ally (or away from the villager if no ally is threatened).
+      // SHOVE (control-tactics 2026-10-14, abilities 2026-10-14 Steve):
+      // villagers shove CONTROLLED monsters away from the most vulnerable
+      // ally — but only if they HAVE the Shoulder Check ability. Trigger:
+      // adjacent to a controlled size-1 monster. Protective — the shove goes
+      // away from the lowest-HP ally (or away from the villager if no ally
+      // is threatened).
       {
-        const controlled = liveMonsters.filter(m =>
+        const controlled = (this.npcHasAbility && this.npcHasAbility(v.villagerId, 'shoulder_check')) ? liveMonsters.filter(m =>
           ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0) &&
           Math.max(Math.abs(m.mx - v.mx), Math.abs(m.my - v.my)) <= 1 &&
-          (this.fighterSize(m) || 1) <= 1);
+          (this.fighterSize(m) || 1) <= 1) : [];
         if (controlled.length && !v._vShoved) {
           // most vulnerable ally (lowest HP fraction), else the villager
           let protect = v, worstFrac = 2;

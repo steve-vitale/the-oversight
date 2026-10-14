@@ -291,6 +291,58 @@ async function main() {
     Game.tbFighter = origFighter;
   }
 
+  // ---------- control verbs are ABILITIES (Steve 2026-10-14) ----------
+  console.log('(12) control verbs are abilities, not basic actions');
+  {
+    lines.length = 0;
+    const mons = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8'));
+    const abs = Array.isArray(mons) ? mons : (mons.abilities || []);
+    const find = (id) => abs.find(a => a.id === id);
+    for (const [aid, act] of [['shoulder_check', 'shove'], ['hogtie', 'bind'], ['come_get_some', 'goad']]) {
+      const a = find(aid);
+      ok(!!a, `${aid} ability exists`);
+      ok(a && a.pool === 'system', `${aid} is a System ability`);
+      const action = a && (a.actions || []).find(x => x.id === act);
+      ok(!!action && action.context === 'combat', `${aid}.${act} is a combat action`);
+      ok(!!(action && action.cost && action.cost.kcal > 0), `${aid}.${act} costs kcal (food-powered)`);
+    }
+    // useAbility refuses without the ability
+    Game.state = Game.state || {};
+    Game.state.scholar = { abilities: [], day: 1, kcal: 2000 };
+    Game.hasAbility = (id) => (Game.state.scholar.abilities || []).some(a => (a.id || a) === id);
+    const m = { key: 'm1', kind: 'monster', alive: true, mx: 4, my: 4, stunned: 1, hp: 50, maxHp: 50, mdef: { id: 'x' }, name: 'Testbeast' };
+    const p = { key: 'p', kind: 'player', alive: true, mx: 4, my: 5, acted: false, hp: 100, maxHp: 100 };
+    Game.tbfight = { fighters: [p, m], over: false };
+    const origFighter = Game.tbFighter;
+    Game.tbFighter = (k) => k === 'p' ? p : m;
+    Game.tbIsPlayerTurn = () => true;
+    Game.tbCanOccupy = () => true;
+    Game.fighterTiles = (o) => [[o.mx, o.my]];
+    Game.fighterSize = () => 1;
+    Game.encSubject = (o) => o.name || 'it';
+    Game.tbEndCheck = () => false;
+    Game.tbAfterPlayerAction = () => {};
+    Game.tbRefreshTelegraphUI = () => {};
+    Game.inCombat = () => true;
+    Game.actionContextValid = () => ({ ok: true });
+    Game.payActionCost = () => ({ ok: true });
+    Game.abilityActionDef = (aid, act) => {
+      const a = find(aid);
+      const action = a && (a.actions || []).find(x => x.id === act);
+      return action ? { ability: a, action } : null;
+    };
+    const r1 = Game.useAbility('shoulder_check', 'shove', 'm1');
+    ok(r1 === false, 'useAbility refuses shove without the ability');
+    ok(/don't have that ability/.test(lines.join(' ')), 'refusal names the missing ability');
+    // grant it — now it fires through the framework
+    Game.state.scholar.abilities = [{ id: 'shoulder_check' }];
+    lines.length = 0;
+    const r2 = Game.useAbility('shoulder_check', 'shove', 'm1');
+    ok(r2 === true, 'useAbility fires shove with the ability');
+    ok(m.mx === 4 && m.my === 2, 'shove moved the monster via ability', `${m.mx},${m.my}`);
+    Game.tbFighter = origFighter;
+  }
+
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

@@ -794,6 +794,46 @@
       }
       return { ok: false, why: 'Nothing left to blind.' };
     },
+    // ---- CONTROL-ABILITIES 2026-10-14 (Steve: control verbs are ABILITIES,
+    // not basic actions) ----
+    'shoulder_check.shove': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to shove in.' };
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      var isC = function (m) { return ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0); };
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        if (!isC(m)) continue;
+        if (p && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (game.fighterSize(m) || 1) <= 1) return { ok: true };
+      }
+      return { ok: false, why: 'No controlled monster in reach. (Needs: stunned/rooted/bound/blinded/hesitating, adjacent, size-1.)' };
+    },
+    'hogtie.bind': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to tie up in.' };
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      var isC = function (m) { return ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0); };
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        if (!isC(m)) continue;
+        if (p && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (game.fighterSize(m) || 1) <= 1) return { ok: true };
+      }
+      return { ok: false, why: 'No controlled monster in reach. (Needs: stunned/rooted/blinded/hesitating, adjacent, size-1, and rope.)' };
+    },
+    'come_get_some.goad': function (game) {
+      var f = game.tbfight;
+      if (!f || f.over) return { ok: false, why: 'No fight to goad in.' };
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        if ((m.blind || 0) <= 0) continue;
+        if (p && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 3) return { ok: true };
+      }
+      return { ok: false, why: 'No blinded monster within earshot (3 tiles).' };
+    },
     // ---- ABILITY-GAPS 2026-10-14 ----
     'static_toss.toss': function (game) {
       var f = game.tbfight;
@@ -1638,6 +1678,21 @@
       var label = game.encSubject ? game.encSubject(best) : (best.name || 'it');
       game.say('You fling a handful of grit into ' + label + '\'s eyes. It reels, clawing at its face — half-blind for 2 rounds. (Pocket Sand: attacks at disadvantage.)');
       return true;
+    },
+
+    // ---- CONTROL-ABILITIES 2026-10-14 (Steve: control verbs are ABILITIES,
+    // not basic actions). The engine lives in game.tbPlayerShove/Bind/Goad;
+    // viaAbility tells them the framework owns the turn + kcal cost.
+    'shoulder_check.shove': function (game, target) {
+      return game.tbPlayerShove(target, { viaAbility: true });
+    },
+
+    'hogtie.bind': function (game, target) {
+      return game.tbPlayerBind(target, { viaAbility: true });
+    },
+
+    'come_get_some.goad': function (game, target) {
+      return game.tbPlayerGoad(target, { viaAbility: true });
     },
 
     // ---- ABILITY-GAPS 2026-10-14 (Steve: "address all gaps") ----

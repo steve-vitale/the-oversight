@@ -16793,9 +16793,9 @@
       ${canScream ? `<button class="self-btn" id="c-scream" ${p.acted ? 'disabled' : ''}>🧀 Scream</button>` : ''}
       ${hasWell ? `<button class="self-btn" id="c-well" ${p.acted ? 'disabled' : ''} title="Gravity well — hold monsters within 3 tiles for 2 turns (one use)">🕳 Well</button>` : ''}
       ${flippable ? `<button class="self-btn" id="c-flip" ${p.acted ? 'disabled' : ''} title="Flip the turtle — strength check. Upside down: no armor, can't snap, 3 turns. Fail and it snaps you.">🐢 Flip</button>` : ''}
-      ${shoveable.length ? `<button class="self-btn" id="c-shove" ${p.acted ? 'disabled' : ''} title="Shove a controlled monster 2 tiles away from you — into its friends, away from yours. (Needs: stunned/rooted/blinded/hesitating, adjacent, size-1.)">🤚 Shove${shoveable.length > 1 ? '…' : ''}</button>` : ''}
-      ${(bindable.length && hasRope) ? `<button class="self-btn" id="c-bind" ${p.acted ? 'disabled' : ''} title="Hogtie a controlled monster — 1 rope, rooted 3 rounds (diminishing), can't wind up telegraphs. It can still lash out, but it isn't going anywhere.">🪢 Bind${bindable.length > 1 ? '…' : ''}</button>` : ''}
-      ${goadable.length ? `<button class="self-btn" id="c-goad" ${p.acted ? 'disabled' : ''} title="Make a noise — the blinded monster lurches toward the sound on its next move. Stand where you want it.">📣 Goad${goadable.length > 1 ? '…' : ''}</button>` : ''}
+      ${(shoveable.length && Game.hasAbility('shoulder_check')) ? `<button class="self-btn" id="c-shove" ${p.acted ? 'disabled' : ''} title="Shoulder Check (30 kcal) — shove a controlled monster 2 tiles away from you — into its friends, away from yours. (Needs: stunned/rooted/blinded/hesitating, adjacent, size-1.)">🤚 Shove${shoveable.length > 1 ? '…' : ''}</button>` : ''}
+      ${(bindable.length && hasRope && Game.hasAbility('hogtie')) ? `<button class="self-btn" id="c-bind" ${p.acted ? 'disabled' : ''} title="Hogtie (40 kcal + 1 rope) — hogtie a controlled monster: rooted 3 rounds (diminishing), can't wind up telegraphs. It can still lash out, but it isn't going anywhere.">🪢 Bind${bindable.length > 1 ? '…' : ''}</button>` : ''}
+      ${(goadable.length && Game.hasAbility('come_get_some')) ? `<button class="self-btn" id="c-goad" ${p.acted ? 'disabled' : ''} title="Come Get Some (20 kcal) — make a noise; the blinded monster lurches toward the sound on its next move. Stand where you want it.">📣 Goad${goadable.length > 1 ? '…' : ''}</button>` : ''}
       ${(Game.sigCombatButtonsHTML ? Game.sigCombatButtonsHTML(mons, p) : '')}
       ${Game.sigW3cCombatButtons ? Game.sigW3cCombatButtons(mons, p) : ''}
       <button class="self-btn" id="c-shout" ${p.acted ? 'disabled' : ''} title="Bellow — scatter noise-fearing monsters (2/fight)">📢 Shout</button>
@@ -16907,8 +16907,9 @@
     on('c-wait', () => { Game.tbPlayerWait(); rerender(); });
     on('c-study', () => { Game.tbPlayerStudy(); rerender(); });
     on('c-scream', () => { Game.useAbility('scream_cheese', 'scream'); rerender(); });
-    // CONTROL VERBS (control-tactics 2026-10-14): Shove/Bind/Goad with the
-    // same target-picker pattern as Strike.
+    // CONTROL ABILITIES (2026-10-14, Steve: verbs are ABILITIES not basic
+    // actions): Shoulder Check / Hogtie / Come Get Some route through the
+    // ability framework (hasAbility + kcal + turn owned there).
     const ctrlTargets = (list) => list.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled);
     on('c-shove', () => {
       const tf = Game.tbfight; if (!tf) return;
@@ -16916,8 +16917,8 @@
       const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
       const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
       if (!list.length) return;
-      if (list.length === 1) { Game.tbPlayerShove(list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '🤚 Shove which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerShove(t.key); rerender(); } });
+      if (list.length === 1) { Game.useAbility('shoulder_check', 'shove', list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '🤚 Shove which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('shoulder_check', 'shove', t.key); rerender(); } });
     });
     on('c-bind', () => {
       const tf = Game.tbfight; if (!tf) return;
@@ -16925,16 +16926,16 @@
       const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
       const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
       if (!list.length) return;
-      if (list.length === 1) { Game.tbPlayerBind(list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '🪢 Bind which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerBind(t.key); rerender(); } });
+      if (list.length === 1) { Game.useAbility('hogtie', 'bind', list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '🪢 Bind which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('hogtie', 'bind', t.key); rerender(); } });
     });
     on('c-goad', () => {
       const tf = Game.tbfight; if (!tf) return;
       const p = Game.tbFighter('p');
       const list = ctrlTargets(tf.fighters).filter(m => (m.blind || 0) > 0 && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 3);
       if (!list.length) return;
-      if (list.length === 1) { Game.tbPlayerGoad(list[0].key); rerender(); return; }
-      enterTargeting({ prompt: '📣 Goad which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerGoad(t.key); rerender(); } });
+      if (list.length === 1) { Game.useAbility('come_get_some', 'goad', list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '📣 Goad which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility('come_get_some', 'goad', t.key); rerender(); } });
     });
     on('c-shout', () => { Game.tbPlayerShout(); rerender(); });
     on('c-rally', () => { Game.tbPlayerRally(); rerender(); });
