@@ -5830,6 +5830,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const temp = (vp.personality && vp.personality.temperament) || 'steady';
       const R = (lo, hi) => lo + Math.floor(Math.random() * (hi - lo + 1));
 
+      // THROTTLEBEAT (2026-10-14): the hunger-depth exemption stand-down,
+      // made visible. The throttle's redirect is silent when the village
+      // is in genuine hunger (hungryStreak >= 3); this beat narrates the
+      // decision honestly and the village ledger counts it
+      // (v.throttleExemptDepth) so the shipped exemption is measurable.
+      // Narration + counter ONLY: no branch change, no RNG, no state
+      // change beyond the log line and the ledger — the duty below
+      // resolves exactly as it did before (production continues).
+      if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleHungerExempt()) {
+        const days = this.pantryFreshDays();
+        const fromName = a.task === 'garden' ? 'harvest' : a.task === 'fish' ? 'fish nets' : 'forage';
+        this.say(`🍽️ ${first} checks the pantry before heading out — ~${Math.round(days)} days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the ${fromName} instead of turning to other work.`);
+        v.throttleExemptDepth = (v.throttleExemptDepth || 0) + 1;
+      }
+
       // PRODTHROTTLE (2026-10-13): when the pantry holds >4 fresh days,
       // duty forage/garden/fish stops routing fresh surplus into stockPantry
       // and the villager takes up non-perishable work instead (real work —
@@ -13876,6 +13891,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (pg && (pg.hungryStreak || 0) >= 3) return false;
       } catch (e) {}
       return this.pantryFreshDays() > 4;
+    },
+
+    // THROTTLEBEAT (2026-10-14): true exactly when the production throttle
+    // WOULD engage on pantry fullness but the hunger-depth exemption stands
+    // it down (hungryStreak >= 3). Read-only: no state, no RNG, no behavior
+    // change — it only names the stand-down so the beat below can narrate
+    // it and the village ledger can count it (v.throttleExemptDepth).
+    prodThrottleHungerExempt() {
+      if (this.pantryFreshDays() <= 4) return false;
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (pg && (pg.hungryStreak || 0) >= 3) return true;
+      } catch (e) {}
+      return false;
     },
 
     // round-robin wood/water/stone for redirected duties
