@@ -47,8 +47,11 @@
 //   - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
 //   - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 // consumes:
-//   - village.relationships
-//   - scholar.reputation
+//   - village.trust
+//   - village.bonds
+//   - village.betrayal
+//   - village.visitors
+//   - village.justice.crimes
 // ============ BETRAYAL, ACCUSATION, TRIAL & EXILE ============
 // Steve's design: micro-quests disguise later betrayals; the aftermath is the
 // real game. SYMMETRY RULE: this is NOT player-centric. Any villager can be

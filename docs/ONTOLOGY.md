@@ -127,7 +127,7 @@ Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; afte
 - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
 - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 
-**Consumes:** village.relationships, scholar.reputation
+**Consumes:** village.trust, village.bonds, village.betrayal, village.visitors, village.justice.crimes
 
 ### broadcast (`broadcast.js`)
 The television mechanism — BROADCAST MODE. When a show, contest watch-beat, ratings summons, or Death Reel moment airs, the game becomes a TV screen: entry title card, persistent LIVE bug, broadcast-treated grid (scanlines + vignette + screen frame), running alien commentary in a ticker, lower-third name cards, CUT TO transitions, crowd reactions. Entry and exit are ALWAYS explicit — the player never wonders whether they're playing or watching. TV never kills (canon).
@@ -350,7 +350,7 @@ Beat-tagged conversation. Every NPC line is tagged at generation time with its b
 - four_rules_kept: transcript_cap, one_beat_turns, tap_advance, history_view untouched (code: conversation.js ontology)
 - probe_on_news_and_small: the "That doesn't add up" soft probe is offered on news and small beats (wherever the hard confrontation is reachable); withheld on feeling/offer beats (code: beatMenuResponses, Steve 2026-10-06)
 
-**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool), playerVoice()
+**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool)
 
 ### convo-dialogue (`convo-dialogue.js`)
 Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers. REBUILD (2026-10-11, Steve): the handlers speak through the want defs (engage/deflect/commit beats), pool every hardcoded line via convoPickCycle (the verbatim "Anyway." loop is dead), compose beats before emission via convoComposeDlg, advance the want arc directly (convoWantEngage), and emit ONLY through sayLine — the single emission choke point. New handlers: dlg:commit (formal commitment), dlg:heed (heeding a warning), dlg:stay (keeping company).
@@ -877,7 +877,7 @@ Village justice + combat dialogue. Crimes have consequences.
 - summons_voice: the moot demand is generated from the confronter's identity + the strongest witnessed crime + why it's happening now; never names unwitnessed crimes (code: justiceDemandMoot)
 - accuser_aftermath: the verdict moves the accuser's standing too — weak cases cost them, held cases earn them respect (code: mootAccuserAftermath)
 
-**Consumes:** village.laws, scholar.crimes
+**Consumes:** village.justice.crimes, village.trust
 
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.

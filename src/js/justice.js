@@ -18,8 +18,8 @@
 //   - summons_voice: the moot demand is generated from the confronter's identity + the strongest witnessed crime + why it's happening now; never names unwitnessed crimes (code: justiceDemandMoot)
 //   - accuser_aftermath: the verdict moves the accuser's standing too — weak cases cost them, held cases earn them respect (code: mootAccuserAftermath)
 // consumes:
-//   - village.laws
-//   - scholar.crimes
+//   - village.justice.crimes
+//   - village.trust
 /* VILLAGE JUSTICE + COMBAT DIALOGUE
  *
  * Two systems, one file:
