@@ -58,6 +58,11 @@ function check(name, cond, detail) {
   const target = ovs[0];
   if (!target) { console.log('FAIL: no other villages generated'); process.exit(1); }
   for (const v of ovs) { v.rumored = false; v.generated = false; }
+  // "exactly one known village": a village sitting in tiles the scholar has
+  // already seen counts as known (knowsVillage) whatever its rumor flag, and
+  // where villages land is map luck (origins-world 2026-10-14 put one at
+  // (4,1), in sight of Haven). Keep only the target and the linked village.
+  st.otherVillages = (st.otherVillages || []).filter(v => !v || v.id === 'haven' || v.id === target.id || v.id === otherId);
   target.rumored = true;
   target.opinion = 5;
   target._codexOpinionGiven = false;

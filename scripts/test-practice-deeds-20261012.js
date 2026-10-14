@@ -239,6 +239,10 @@ const THRESH = { stalk: 10, blood_trail: 3, ambush: 2, war_cry: 3, haymaker: 3, 
     const s2 = G2.state.scholar;
     G2.state.systemArrived = true;
     s2.abilities = []; s2.backgroundAbilities = []; s2.practiceDeeds = {};
+    // skill-lane abilities also live in codex.skills: an occupation that
+    // starts with stalk / track_read (seed luck; origins-world 2026-10-14
+    // rerolled the draws) would read as a deed grant. Start from none.
+    for (const k of ['stalk', 'blood_trail', 'track_read']) { if (G2.state.codex.skills) delete G2.state.codex.skills[k]; }
     s2.softStepStreak = 0; s2.integration = 100;
     try { G2.travelTo(4, 3); } catch (e) {}
     let kills = 0;

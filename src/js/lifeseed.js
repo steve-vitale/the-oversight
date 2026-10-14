@@ -42,23 +42,41 @@
   const methods = {
 
     // ---------- 1. REGION ANCHOR ----------
-    // The origin is authoritative: match its tags to a region. No tag match
-    // (foreign origins, free text) -> "far from here", still coherent.
+    // The origin is authoritative. In order (origins-world 2026-10-14):
+    //  1. a lifeseed sub-area that lists this exact origin label (origins[]),
+    //  2. the origin's WORLD region (originRegionsForTags): its sub-areas
+    //     (worldRegion) by matchTags, else its first sub-area,
+    //  3. matchTags over every sub-area (free text no world region claims),
+    //  4. far_away, the last resort ("far from here", still coherent).
+    // So a hometown always comes from the character's own world region.
     lifeseedRegion(char) {
       const LS = this.data.lifeseeds || {};
       const regions = LS.regions || [];
-      const tags = (char.originTags || []).map(t => String(t).toLowerCase());
+      const label = String(char.homeRegion || '').trim();
+      if (label) {
+        const byLabel = regions.find(r => (r.origins || []).includes(label));
+        if (byLabel) return byLabel;
+      }
+      const rawTags = (char.originTags || []).map(t => String(t).toLowerCase());
+      // region-id tags (na_plains...) name the world region; their words
+      // ("plains") must not match a sub-area's matchTags.
+      const regionIds = new Set(((this.data.regions) || []).map(r => String(r.id).toLowerCase()));
+      const tags = rawTags.filter(t => !regionIds.has(t));
       const tagWords = tags.map(t => new Set(t.split(/[^a-z]+/).filter(Boolean)));
+      // word-set match: every word of the matchTag must appear in some tag's
+      // words. ("coast" must NOT match "west coast" — that was a real bug.)
+      const hits = (r) => (r.matchTags || []).map(m => String(m).toLowerCase()).some(mt => {
+        const mw = mt.split(/[^a-z]+/).filter(Boolean);
+        return tagWords.some(tw => mw.every(w => tw.has(w)));
+      });
+      const home = (typeof this.originRegionsForTags === 'function') ? this.originRegionsForTags(rawTags)[0] : null;
+      if (home) {
+        const mine = regions.filter(r => r.id !== 'far_away' && r.worldRegion === home);
+        if (mine.length) return mine.find(hits) || mine[0];
+      }
       for (const r of regions) {
         if (r.id === 'far_away') continue;
-        const mts = (r.matchTags || []).map(m => String(m).toLowerCase());
-        // word-set match: every word of the matchTag must appear in some tag's
-        // words. ("coast" must NOT match "west coast" — that was a real bug.)
-        const hit = mts.some(mt => {
-          const mw = mt.split(/[^a-z]+/).filter(Boolean);
-          return tagWords.some(tw => mw.every(w => tw.has(w)));
-        });
-        if (hit) return r;
+        if (hits(r)) return r;
       }
       return regions.find(r => r.id === 'far_away') || {
         id: 'far_away', label: 'far from here', land: 'streets you still dream about',

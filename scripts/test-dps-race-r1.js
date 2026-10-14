@@ -71,7 +71,10 @@ async function scenario(monsterHp, gateOn, seed) {
   };
 
   // A: lost race — bare-handed vs 200-HP hushwolf.
-  const A = await scenario(200, true, 11);
+  // SEEDS re-derived after origins-world 2026-10-14 rerolled the starting
+  // roster's RNG draws (different landing + map per seed). Same scenarios,
+  // same assertions: 11->13 (A/C), 22->23 (B), 44->46 (D replay).
+  const A = await scenario(200, true, 13);
   console.log('A detail:', JSON.stringify(A.firstDetail), 'monsterHp=' + A.monsterHp, 'gameOver=' + A.gameOver);
   check('A: dpsFled fires on the lost race', A.dpsFled >= 1, 'dpsFled=' + A.dpsFled);
   check('A: first flee happens while the player is clearly alive (>35% HP)',
@@ -82,14 +85,14 @@ async function scenario(monsterHp, gateOn, seed) {
   check('A: the player survives the disengagement', !A.gameOver, 'gameOver=' + A.gameOver);
 
   // B: won race — 20-HP hushwolf. Policy should finish it, not flee.
-  const B = await scenario(20, true, 22);
+  const B = await scenario(20, true, 23);
   console.log('B: dpsFled=' + B.dpsFled, 'monsterHp=' + B.monsterHp, 'gameOver=' + B.gameOver);
   check('B: no dpsFled on the won race', B.dpsFled === 0, 'dpsFled=' + B.dpsFled);
   check('B: the monster dies', B.monsterHp <= 0, 'monsterHp=' + B.monsterHp);
   check('B: the player lives', !B.gameOver, 'gameOver=' + B.gameOver);
 
   // C: gate off — legacy behavior, lever inert.
-  const C = await scenario(200, false, 11);
+  const C = await scenario(200, false, 13);
   console.log('C: dpsFled=' + C.dpsFled, 'dpsWindows=' + C.dpsWindows, 'gameOver=' + C.gameOver);
   check('C: gate off => no dpsFled', C.dpsFled === 0, 'dpsFled=' + C.dpsFled);
   check('C: gate off => no assessment windows ran', C.dpsWindows === 0, 'dpsWindows=' + C.dpsWindows);
@@ -99,7 +102,7 @@ async function scenario(monsterHp, gateOn, seed) {
   // THROUGH the edge (tbBarrierExit) and live, not stand at the edge dying.
   process.env.COMPETENT_DPS_RACE = '1';
   {
-    const { Game } = await loadGame({ seed: 44, mode: 'dpsrace-proof-D' });
+    const { Game } = await loadGame({ seed: 46, mode: 'dpsrace-proof-D' });
     await setupGame(Game);
     const ctx = {};
     const s = Game.state.scholar;

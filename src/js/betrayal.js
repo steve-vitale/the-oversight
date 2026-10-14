@@ -2834,8 +2834,8 @@
     // the founder teaches what they knew from their old life — like newGame
     try {
       const tags = (playerChar && playerChar.originTags) || [];
-      const tier = (this.familiarityTier ? this.familiarityTier(tags) : 'stranger');
-      const tierCount = { local: 3, visitor: 2, stranger: 1 };
+      const tier = (this.familiarityTier ? this.familiarityTier(tags, null, playerChar && playerChar.homeRegion) : 'stranger');
+      const tierPlants = (this.familiarityTierDef ? this.familiarityTierDef(tier).plants : ({ local: 3, visitor: 2, stranger: 1 })[tier]) || 1;
       const tl = (tags || []).map(t => String(t).toLowerCase());
       const local = [], other = [];
       for (const p of (this.data.plants || [])) {
@@ -2844,7 +2844,7 @@
       }
       for (let i = local.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[local[i], local[j]] = [local[j], local[i]]; }
       for (let i = other.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[other[i], other[j]] = [other[j], other[i]]; }
-      v.familiar[pid] = [...local, ...other].slice(0, tierCount[tier] || 1);
+      v.familiar[pid] = [...local, ...other].slice(0, tierPlants);
     } catch (e) { v.familiar[pid] = []; }
     this.state.village = v;
     // social groups regenerate honestly on the new roster (solo → none)

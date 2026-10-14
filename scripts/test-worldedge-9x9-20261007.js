@@ -36,6 +36,10 @@ function hopTo(x, y) { // adjacent force-hops (bypass blockages) to reposition f
 
   // 1. THE bug: rim-walk east from node (7,4) must enter (8,4), not "world ends here"
   while (Game.map.px !== 7 || Game.map.py !== 4) hopTo(7, 4);
+  // Pin open ground at (8,4): a creek needing a bridge or a fallen tree on
+  // that approach is map luck (origins-world 2026-10-14 rerolled this seed's
+  // map) and is a different refusal from the world edge being tested.
+  { const t84 = Game.map.tiles[4][8]; delete t84.blockFrom; delete t84.needsBridge; }
   says.length = 0;
   Game.state.scholar.mx = 8; Game.state.scholar.my = 4;
   const r1 = Game.tryNodeExit(1, 0);

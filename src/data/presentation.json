@@ -1,0 +1,16 @@
+{
+  "_comment": "Presentation ladder (docs/DECISIONS.md 2026-10-03 'Visual progression', Steve: \"Start simple, but it would be cool if as you progress, the game graphics and interface keep getting better and better.\"). A stage is reached when BOTH codex depth AND days survived meet its row: stages advance on Codex depth + days survived, never on timers. Read by src/js/presentation.js; app.js puts stage-N on <body>; tile-scenes.js blends the map palette from earthy (stage 0) to rich (stage 4). Thresholds are v1, provisional: tune here, not in code.",
+  "stages": [
+    { "stage": 0, "id": "terminal", "label": "Terminal", "codexDepth": 0, "days": 0 },
+    { "stage": 1, "id": "annotated", "label": "Annotated", "codexDepth": 4, "days": 3 },
+    { "stage": 2, "id": "pixel", "label": "Pixel entities", "codexDepth": 12, "days": 7 },
+    { "stage": 3, "id": "vignettes", "label": "Arrival vignettes", "codexDepth": 25, "days": 14 },
+    { "stage": 4, "id": "tileset", "label": "Full tileset", "codexDepth": 45, "days": 28 }
+  ],
+  "glitch": {
+    "_comment": "Untranslated alien script under the System overlay (DECISIONS.md: \"Occasional glitches reveal untranslated alien script underneath.\"). Occasional: at most one glitch per minGapMs, rolled on each System UI render. Off under prefers-reduced-motion.",
+    "minGapMs": 40000,
+    "chance": 0.3,
+    "durationMs": 450
+  }
+}

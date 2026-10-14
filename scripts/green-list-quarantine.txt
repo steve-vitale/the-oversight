@@ -1,3 +1,4 @@
 # scripts/green-list-quarantine.txt — green-list tests temporarily skipped.
 # One per line: <path>  # <date> <reason>. Empty is the goal.
-scripts/test-backgrounds-20261006.js  # 2026-10-14 REAL BUG (deterministic now — seeded loader; 7/10 seeds hit it): second-person POV in third-person bios — game.js stoic temperament line "You can't tell what ${first} is feeling" (two copies, ~L812/~L1095); also characterGen.json assessment "You find yourself checking your own hands", note "...{they} gave you two weeks ago", lifeseeds "{kin}'s rule: you eat after..." and a "Yours." heartbeat line. Needs src/data rewrite (or a Steve ruling that player-address is allowed in bios).
+scripts/test-backgrounds-20261006.js  # 2026-10-14 REAL BUG after origins-world merge: a male-named character (e.g. Svyatoslav) gets they/them in a bio — new name-culture gender data. Fix in progress; un-quarantine when fixed.
+scripts/test-taletell-behavior.js  # 2026-10-14 fails only on the combined origins+feel merge ("proposals seeded from roster"); root-cause in progress; un-quarantine when fixed.

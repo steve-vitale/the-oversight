@@ -1,11 +1,12 @@
 // @ontology
 // system: tile-scenes
-// description: Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
+// description: Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terrain palette climbs the presentation ladder: earthy at stage 0, rich at stage 4 (Game.presentationStage). String building only (no DOM), ~64x64 viewBox readable at 40px.
 // provides:
 //   - svgFor(x, y, opts) -> SVG string for the tile (opts.seen decides fog)
 //   - invalidate(x, y) -> drop the cached scene for one tile
 //   - invalidateAll() -> drop cached scenes for all tiles
 //   - touch(x, y) -> bump the tile's scene version so the next svgFor re-renders
+//   - palette(type, stage) -> {base, tex, dot} terrain colours for a presentation stage (0 earthy .. 4 rich)
 // rules:
 //   - fog_is_blank: svgFor with opts.seen falsy returns a blank dark square and never generates detail (code: svgFor, Steve 2026-10-06)
 //   - cache_is_keyed: cache entries live on tile._sceneCache as {key, svg}; the key fingerprints tile type + quantized stock + scene version + entity signature (code: fingerprint, Steve 2026-10-06)
@@ -13,6 +14,7 @@
 //   - miniature_not_sprite: detail cells render as simple shapes, never full sprites — this is a 40px-readable miniature (code: markerFor, Steve 2026-10-06)
 //   - entities_are_local: player/villager/animal markers only render on the player's tile, from detail-grid mx/my coords (code: entityMarkers, Steve 2026-10-06)
 //   - no_monster_markers: the map shows geography only, never live monster positions (code: entityMarkers, Steve 2026-10-06)
+//   - palette_follows_ladder: terrain colours blend earthy (stage 0) -> rich (stage 4) by Game.presentationStage(); the stage is in the cache key (code: palette, fingerprint)
 //   - no_dom: composition is pure string building; safe to call from hot paths and off-thread tests (code: compose, Steve 2026-10-06)
 // consumes:
 //   - Game.tileAt, Game.genDetail (detail-grid generation)
@@ -32,10 +34,18 @@
   const SIZE = 64;
   const CELL = SIZE / 9; // detail cells are a 9x9 grid
 
-  // Terrain base colors per tile type - MINECRAFT STYLE (Steve 2026-10-06).
-  // Bright, saturated, readable geography. Not dark terminal.
-  const TILE_BASE = {
-    // TRUE MINECRAFT PALETTE (Steve 2026-10-06) - unmistakably bright, saturated.
+  // TERRAIN PALETTE LADDER (presentation B 2026-10-14). Two ends:
+  //  EARTHY (stage 0) — the decided pre-System look (DECISIONS.md 2026-10-03:
+  //    "grounded terminal (earthy greens/ambers, monospace grit)"): muted
+  //    moss, loam, slate water, dry-grass amber. Each biome keeps its own
+  //    hue so geography still reads at a glance on a phone.
+  //  RICH (stage 4) — the bright, saturated geography Steve asked for on
+  //    2026-10-06 ("TRUE MINECRAFT PALETTE ... unmistakably bright"), now the
+  //    END of the ladder rather than the start.
+  // The map blends between them by Game.presentationStage() (Codex depth +
+  // days survived): "as you progress, the game graphics and interface keep
+  // getting better and better."
+  const TILE_RICH = {
     forest_floor: { base: '#8a5a3a', tex: '#9a6a45', dot: '#7a4a2a' },
     forest:       { base: '#5a8a3a', tex: '#6a9a45', dot: '#4a7a2a' },
     grove:        { base: '#7cbd6b', tex: '#8acd7b', dot: '#6cad5b' },
@@ -53,7 +63,43 @@
     ruin:         { base: '#9a9a9a', tex: '#aaaaaa', dot: '#8a8a8a' },
     haven:        { base: '#7cbd6b', tex: '#8acd7b', dot: '#6cad5b' },
   };
-  const FALLBACK_BASE = { base: '#7aaa4a', tex: '#8aba5a', dot: '#5a8a3a' }; // bright meadow, never dark
+  const TILE_EARTHY = {
+    forest_floor: { base: '#4a3a28', tex: '#5a4632', dot: '#3a2c1e' },
+    forest:       { base: '#33482a', tex: '#3e5532', dot: '#283a21' },
+    grove:        { base: '#3f5a33', tex: '#4b683c', dot: '#334a2a' },
+    meadow:       { base: '#4a6036', tex: '#566d3f', dot: '#3c4f2c' },
+    field:        { base: '#6a6a3a', tex: '#7a7844', dot: '#5a5a30' },
+    thicket:      { base: '#2c4226', tex: '#365030', dot: '#22361e' },
+    wetland:      { base: '#34504c', tex: '#3e5e59', dot: '#2a423f' },
+    swamp:        { base: '#34504c', tex: '#3e5e59', dot: '#2a423f' },
+    creek:        { base: '#2f4f60', tex: '#3a5d70', dot: '#26404f' },
+    water:        { base: '#2f4f60', tex: '#3a5d70', dot: '#26404f' },
+    river:        { base: '#2f4f60', tex: '#3a5d70', dot: '#26404f' },
+    trail_edge:   { base: '#6e5a3a', tex: '#7c6844', dot: '#5e4c30' },
+    trail:        { base: '#6e5a3a', tex: '#7c6844', dot: '#5e4c30' },
+    path:         { base: '#6e5a3a', tex: '#7c6844', dot: '#5e4c30' },
+    ruin:         { base: '#4e4e48', tex: '#5c5c55', dot: '#40403b' },
+    haven:        { base: '#4f6a38', tex: '#5c7842', dot: '#41582e' },
+  };
+  function hexMix(a, b, t) {
+    const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+    const ch = (sh) => Math.round(((pa >> sh) & 255) * (1 - t) + ((pb >> sh) & 255) * t);
+    return '#' + [ch(16), ch(8), ch(0)].map(v => v.toString(16).padStart(2, '0')).join('');
+  }
+  function stageOf(g) {
+    try { return (g && typeof g.presentationStage === 'function') ? g.presentationStage() : 0; }
+    catch (e) { console.warn('[tile-scenes] presentationStage', e && e.message); return 0; }
+  }
+  // palette(type, stage): stage 0 = earthy, 4 = rich, linear between.
+  function palette(type, stage) {
+    const rich = TILE_RICH[type] || FALLBACK_RICH, earthy = TILE_EARTHY[type] || FALLBACK_EARTHY;
+    const t = Math.max(0, Math.min(4, stage | 0)) / 4;
+    if (t <= 0) return earthy;
+    if (t >= 1) return rich;
+    return { base: hexMix(earthy.base, rich.base, t), tex: hexMix(earthy.tex, rich.tex, t), dot: hexMix(earthy.dot, rich.dot, t) };
+  }
+  const FALLBACK_RICH = { base: '#7aaa4a', tex: '#8aba5a', dot: '#5a8a3a' }; // bright meadow, never dark
+  const FALLBACK_EARTHY = { base: '#4a6036', tex: '#566d3f', dot: '#3c4f2c' }; // muted meadow, never fog-dark
 
   // Structure cell -> mini-shape fill.
   const STRUCT_FILL = {
@@ -213,7 +259,7 @@
     // ROBUST (Steve 2026-10-06): the generator must not fail. If detail
     // isn't available, show the base terrain — never blank, never throw.
     try {
-      const pal = TILE_BASE[t.type] || FALLBACK_BASE;
+      const pal = palette(t.type, stageOf(g));
       let detail = null;
       try {
         detail = t.detail;
@@ -230,7 +276,7 @@
       return svg;
     } catch (e) {
       // Absolute last resort: solid terrain color, never blank.
-      const pal = FALLBACK_BASE;
+      const pal = palette('meadow', stageOf(g));
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">' +
         '<rect x="0.5" y="0.5" width="63" height="63" rx="7" fill="' + pal.base + '"/></svg>';
     }
@@ -257,7 +303,7 @@
         sch.animal ? (Math.round(sch.animal.mx) + ',' + Math.round(sch.animal.my)) : '-',
         vps].join('|');
     }
-    return [t.type, stock, ver, wms, ent].join('|');
+    return [t.type, stock, ver, wms, ent, 's' + stageOf(g)].join('|');
   }
 
   function safeTile(g, x, y) {
@@ -309,6 +355,6 @@
     if (t) t._sceneVer = (t._sceneVer || 0) + 1;
   }
 
-  S.TileScenes = { svgFor, invalidate, invalidateAll, touch, FOG_FILL };
+  S.TileScenes = { svgFor, invalidate, invalidateAll, touch, FOG_FILL, palette };
 })(globalThis);
 // Force deploy 2026-10-07

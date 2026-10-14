@@ -67,6 +67,15 @@ function answerGQ(vid) {
   if (gq) Game.convoTurn(vid, gq.id);
 }
 function forceFavorWant(vid) {
+  // Pin a shared language: a villager with no English opens nonverbally and
+  // has no wants to voice. Who speaks English is seed luck (origins-world
+  // 2026-10-14 rerolled the cast and gave survivors their home's language).
+  if (Game.commLevel(vid).level !== 'full') {
+    const p = Game.getPerson(vid) || {};
+    const L = p.languages || (Game.state.village.bgLangs || {})[vid];
+    if (L && L.levels) L.levels.english = 2;
+    else if (p) p.languages = { native: 'english', levels: { english: 2 } };
+  }
   // Make a favor want highly likely: acute hunger.
   Game.npcNeeds(vid).hunger = 85;
   Game.state.village.trust[vid] = 30;

@@ -14,9 +14,8 @@ dated `evidence/` notes.
 
 ## Current project
 
-**God-path system.** Plan: `docs/godpath/PLAN.md` (the task list, contracts
-and phase gates). Design: `evidence/2026-10-14/opus-godpath-proposal.md`.
-Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everything), then `docs/COHERENCE-SPINE.md` (how every progression feature fits), then PLAN.md.
+**What to build next:** `docs/ROADMAP.md` (what's built, Muse's ordered backlog with specs and done-when, known issues).
+Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everything; never re-ask what it answers), then `docs/COHERENCE-SPINE.md` (how every progression feature fits), then `docs/ROADMAP.md`. Questions for Steve go in `docs/OPEN-QUESTIONS.md`.
 
 ## Commands
 

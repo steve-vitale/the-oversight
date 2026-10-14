@@ -207,6 +207,11 @@ function testStayDeepens(Game, seed) {
   const tag = `[seed ${seed}]`;
   const roster = (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
   const vid = roster[0];
+  // Pin a temperament that sits through six stays: a prickly villager walks
+  // off before the fourth (their goodbye line lands in lines[3]). Which
+  // temperament roster[0] draws is seed luck (origins-world 2026-10-14
+  // rerolled the cast). D5 tests the deepening, not patience.
+  { const rec = (Game.data.villagers || []).find(x => x.id === vid); if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'warm'; } }
   // Plant an unresolved seek_comfort seed so the want is the conversation's.
   Game.state.village.convoSeeds = Game.state.village.convoSeeds || {};
   Game.state.village.convoSeeds[vid] = { wantId: 'seek_comfort', note: 'test', day: Game.state.scholar.day || 0 };

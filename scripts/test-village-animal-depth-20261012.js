@@ -32,6 +32,14 @@ function ok(cond, name) {
   ok(roster.length > 0, 'T0 roster non-empty');
   const hunter = roster[0];
 
+  // Pin the hunting ground: the first prey tile found decides the quarry,
+  // and a tile holding only hard game (chipmunk, crow) can fail 20 stalks
+  // running. What that tile holds is map luck (origins-world 2026-10-14
+  // rerolled this seed's map). Rabbits everywhere.
+  for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+    const t = Game.tileAt(x, y);
+    if (t && t.type !== 'haven') t.wildlife = { cottontail_rabbit: 6 };
+  }
   // T1: villagerHuntResolve returns aid
   let hr = null;
   try { hr = Game.villagerHuntResolve(hunter, 1.0); } catch (e) { hr = null; }
