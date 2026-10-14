@@ -1,7 +1,7 @@
 # sim-sharcensus-b — per-villager meal census instrument (2026-10-14)
 
 ARM 3, instrument-only. **No game-code changes, no policy files.**
-Worktree: sim-sharcensus-b. Commit: TBD (see footer).
+Worktree: sim-sharcensus-b. Commit: a6f9acb20be3f72f34e168adca461028ddca6a1a.
 
 ## Pre-registration (MEASUREMENT.md §§9–12, 14)
 
