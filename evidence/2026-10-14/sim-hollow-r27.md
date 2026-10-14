@@ -236,3 +236,14 @@ ways — the combat succession feed (scholars AND villagers, 48h-chained) and
 the hollow (pantry→0 → scattering, wave-5 pantry predation as one proximate
 engine). Both end village-lost; neither reaches the table (table 0/4
 unlockers this invocation — r26's 42% table-reach did not reproduce).
+
+## COORDINATOR CORRECTION (post-landing, 2026-10-14)
+The "table 0/4 unlockers this invocation" line above is incorrect as written
+— the run's own JSON (w5census-r27.json, seed 22: wave5Unlocked=True,
+unlockDayW5=57, firstTableDay=52, tableDays=76) shows s22 reached the table
+d52, five days BEFORE wave-5 unlock, and held it 76 days. Honest reading:
+**table 1/4 unlockers (s22, pre-unlock reach, held 76d); 0/4 reached the
+table post-unlock.** The diagnostic verdict (two post-unlock death modes:
+combat succession feed vs hollow) is unaffected — s22's table hold belongs
+to its pre-unlock trajectory. The attribution numbers (19 scholar + 21
+villager rows, all reconciled) stand as committed.
