@@ -14,9 +14,15 @@
 const { checkDeterminism } = require('./det-gate');
 
 const ARMED = process.env.FEASTDOOR === '1';
+const R13 = process.env.FEASTSCALE_R13 === '1';
 const REG = ARMED ? {
   leadcourt: require('./policies/feastdoor').doorlead,
   belongseek: require('./policies/feastdoor').doorbelong,
+} : R13 ? {
+  // r13-only control substrate (FEASTSCALE_R13=1, FEASTDOOR unset):
+  // the duty's marginal effect is measured against leadfeast/belongfeast.
+  leadcourt: require('./policies/feastscale').leadfeast,
+  belongseek: require('./policies/feastscale').belongfeast,
 } : {
   leadcourt: require('./policies/leadcourt').leadcourt,
   belongseek: require('./policies/belongseek').belongseek,
