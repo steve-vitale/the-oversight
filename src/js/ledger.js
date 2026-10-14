@@ -826,6 +826,10 @@
           };
         });
         s.equipped = {};
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the successor's keepsakes start
+        // worn in free accessory slots, like a new run's (keepsakes.js).
+        delete s.ksGrowthV;
+        if (typeof this.migrateKeepsakes === 'function') this.migrateKeepsakes();
       } catch (e) {}
       // MANTLE IDENTITY SYNC (break-it persistence 2026-10-08): the scholar
       // record kept the DEAD bearer's id — the save index then listed the dead

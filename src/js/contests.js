@@ -4860,14 +4860,23 @@
     };
     const own = items.filter(mine);
     if (!own.length) return false;
-    const sent = own.filter(r => defOf(r).class === 'sentimental');
-    const pool = sent.length ? sent : own;
+    // KEEPSAKE GROWTH (Steve 2026-10-14): a keepsake grows only while WORN
+    // (acc1-acc4); pack keepsakes are dormant and never take the assist.
+    const isWorn = (r) => (typeof this.keepsakeIsWorn === 'function') ? this.keepsakeIsWorn(r) : true;
+    const sent = own.filter(r => defOf(r).class === 'sentimental' && isWorn(r));
+    const nonSent = own.filter(r => defOf(r).class !== 'sentimental');
+    const pool = sent.length ? sent : nonSent;
+    if (!pool.length) return false;
     const eqIds = new Set(Object.values(s.equipped || {}).map(e => e && (e.itemId || e.id)).filter(Boolean));
     const carried = pool.filter(r => eqIds.has(r.itemId || r.id));
     const cands = carried.length ? carried : pool;
     const r = cands[Math.floor(Math.random() * cands.length)];
     const risk = (contest && contest.risk) || '';
     const gain = risk === 'extreme' ? 5 : 3;
+    if (defOf(r).class === 'sentimental' && typeof this.keepsakeGrow === 'function') {
+      // keepsakes.js: bond + level beats + the L3 (bond 50) offer.
+      this.keepsakeGrow(r, gain, 'contest');
+    } else {
     r.bond = (r.bond || 0) + gain;
     try { if (this.checkKeepsakeReveal) this.checkKeepsakeReveal(r); } catch (e) {}
     try {
@@ -4878,6 +4887,7 @@
         }
       }
     } catch (e) {}
+    }
     const nm = r.name || defOf(r).name || (r.itemId || r.id);
     this.sysSay(`📺 SYSTEM: "UNIT ${String(nm).toUpperCase()} — the cameras kept finding it. It mattered to you on the floor, and that is... interesting. Meaning is fuel. We are curious what it becomes. (+${gain} bond on your ${nm})"`);
     try { this.tele('prize_evolution_assist', { item: (r.itemId || r.id), gain: gain, bond: r.bond }); } catch (e2) {}

@@ -16,6 +16,11 @@
 //      sets cxFirstWinGift, teles prize_evolution_assist
 //   H. pending relicChoices is not trampled by a threshold-crossing assist
 //   I. SENSE-TEST: the copy reads like the System, not a database
+// UPDATED 2026-10-14 (keepsake growth, Steve: "Sentimental items need to
+// compete with accessory gear"): keepsakes grow ONLY while worn in acc1-acc4,
+// and their enhancement offer moved to L3 (bond 50). The isolated keepsake is
+// now worn; C crosses 50 instead of 10; G/J wear the keepsake. A pack
+// keepsake is dormant and never takes the assist (design change, on purpose).
 // Harness: full src/js list in index.html order (minus DOM-only), mulberry32
 // seeded BEFORE eval. Never stub Game.save.
 'use strict';
@@ -43,7 +48,7 @@ async function main() {
   global.fetch = (f) => Promise.resolve({
     json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')))
   });
-  const order = execSync(`grep -o 'src/js/[^\"'"'"']*\\.js' index.html | head -80`, { cwd: ROOT })
+  const order = execSync(`grep -o 'src/js/[^\"'"'"']*\\.js' index.html`, { cwd: ROOT })
     .toString().split('\n')
     .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
   global.window = global;
@@ -85,7 +90,7 @@ async function main() {
   const CONTEST = { id: 'blood_pit', cat: 'blood', risk: 'high', name: 'The Blood Pit' };
   const teleCount = (t) => teleEvents.filter(e => e.type === t).length;
   // isolate: the bond tests address exactly one relic so the random pick is deterministic
-  const isolateKeep = () => { s.inventory = [keep]; s.equipped = {}; };
+  const isolateKeep = () => { s.inventory = []; s.equipped = { acc1: keep }; };
 
   // ---- A. the assist fires: +3 bond, announced, tele'd ----
   console.log('A. assist fires (+3 story moment)');
@@ -106,13 +111,13 @@ async function main() {
   ok(keep.bond === b1 + 5, '+5 bond on extreme', keep.bond);
 
   // ---- C. threshold offer through the real path ----
-  console.log('C. bond 10 threshold -> System 1-of-3 offer');
+  console.log('C. bond 50 (keepsake L3) threshold -> System 1-of-3 offer');
   isolateKeep();
   s.relicChoices = null;
-  keep.bond = 8; keep.bondOffered = [];
+  keep.bond = 48; keep.bondOffered = [];
   lines.length = 0;
   ok(Game._cxPrizeEvolutionAssist(CONTEST) === true, 'threshold-crossing assist fires');
-  ok(keep.bond === 11, 'bond crossed 10', keep.bond);
+  ok(keep.bond === 51, 'bond crossed 50', keep.bond);
   ok(!!s.relicChoices, 'offerRelicEnhancement fired (relicChoices set)');
   ok((s.relicChoices.options || []).length >= 3, 'offer is 1-of-3 (or +secret)', (s.relicChoices.options || []).length);
   ok(lines.some(t => /elevated attachment|UNIT/i.test(t)), 'offer narrated, never silent');
@@ -161,7 +166,7 @@ async function main() {
     units: 1, kcalEach: 0, kg: 0.3, name: 'Knife', owner: Game.villagerId,
     bonded: true, bond: 0, bondOffered: [], enhancements: [] };
   if (!((Game.data.items || []).find(i => i.id === tool.itemId))) tool.itemId = relics().find(r => r !== keep).itemId;
-  s.inventory = [tool, keep]; s.equipped = {};
+  s.inventory = [tool]; s.equipped = { acc1: keep };
   lines.length = 0; teleEvents.length = 0;
   Math.random = mulberry32(777);
   let sentPicks = 0, toolPicks = 0;
@@ -229,7 +234,7 @@ async function main() {
   // ---- J. SENSE read of the copy ----
   console.log('J. sense read');
   lines.length = 0; teleEvents.length = 0;
-  s.inventory = [keep]; s.equipped = {};
+  s.inventory = []; s.equipped = { acc1: keep };
   Game._cxPrizeEvolutionAssist({ id: 'blood_pit', cat: 'blood', risk: 'high' });
   const said = lines.filter(t => /cameras kept finding it/.test(t)).join(' ');
   ok(said.indexOf(String(keep.name).toUpperCase()) >= 0, 'copy names YOUR relic, in the System\'s register');

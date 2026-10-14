@@ -265,7 +265,7 @@
       try {
         const ready = this.channelReadyKeepsakes ? this.channelReadyKeepsakes() : [];
         if (ready.length) {
-          const item = (this.state.scholar.inventory || [])[ready[0]];
+          const item = this.keepsakeAtRef(ready[0]);
           const nm = (item && (item.name || '')) || 'it';
           this.say(`SYSTEM: "DEMONSTRATION. Give me that — ${nm}. WATCH."`);
           this.channelSentiment(ready[0]);
@@ -274,8 +274,12 @@
     },
     sentimentTaught() { return !!(this.progState && this.progState().sentimentTaught); },
 
-    // channelReadyKeepsakes: inventory indices of keepsakes not yet channeled
-    // today. One source for the demo, the trauma nudge, and the button state.
+    // channelReadyKeepsakes: refs of keepsakes not yet channeled today —
+    // pack inventory indices first, then worn accessory slot keys
+    // ('acc1'..'acc4'). One source for the demo, the trauma nudge, and the
+    // button state. KEEPSAKE GROWTH (Steve 2026-10-14): channeling reads
+    // worn OR pack — spending a keepsake's day is about holding it, not
+    // where it sits; growth is what needs it worn.
     channelReadyKeepsakes() {
       try {
         const s = this.state.scholar, pg = this.progState();
@@ -286,8 +290,21 @@
           const key = it.itemId || it.id;
           if (!((pg.chanDay[key] || {})[day])) out.push(idx);
         });
+        for (const sl of ['acc1', 'acc2', 'acc3', 'acc4']) {
+          const it = (s.equipped || {})[sl];
+          if (!it || !this.isKeepsake(it)) continue;
+          const key = it.itemId || it.id;
+          if (!((pg.chanDay[key] || {})[day])) out.push(sl);
+        }
         return out;
       } catch (e) { return []; }
+    },
+    // keepsakeAtRef(ref): a channel ref -> the keepsake instance. A number
+    // is a pack index; 'acc1'..'acc4' is a worn accessory slot.
+    keepsakeAtRef(ref) {
+      const s = this.state.scholar || {};
+      if (typeof ref === 'string' && /^acc[1-4]$/.test(ref)) return (s.equipped || {})[ref] || null;
+      return (s.inventory || [])[ref] || null;
     },
 
     // channelLabel: honest button copy. Mirrors channelSentiment's branch
@@ -323,7 +340,7 @@
     // feast. Once per item per day. Chosen keepsakes and deep grief hit harder.
     channelSentiment(idx) {
       const s = this.state.scholar, pg = this.progState();
-      const item = (s.inventory || [])[idx];
+      const item = this.keepsakeAtRef(idx);
       if (!item || !this.isKeepsake(item)) return 'Not a keepsake.';
       if (!pg.sentimentTaught) return 'You hold it. Nothing happens. Not yet.';
       const day = s.day;
@@ -1039,7 +1056,12 @@
     Game.offerRelicEnhancement = function (item, threshold) {
       try {
         const def = this.itemDef ? this.itemDef(item) : ((this.data.items || []).find(i => i.id === (item.itemId || item.id)) || {});
-        if (def.class === 'sentimental' && def.memory) this.playFlashback(item, def);
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the memory opens once (at L1,
+        // keepsakes.js); the L3 offer only replays it if it never played.
+        if (def.class === 'sentimental' && def.memory && !item.flashbackPlayed) {
+          item.flashbackPlayed = true;
+          this.playFlashback(item, def);
+        }
       } catch (e) {}
       return _offer ? _offer.call(this, item, threshold) : undefined;
     };
@@ -1050,8 +1072,10 @@
     Game.accrueRelicBond = function () {
       const r = _accrue ? _accrue.call(this) : undefined;
       try {
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the chosen bonus also needs
+        // the keepsake worn (keepsakeGrow is the worn-only gate).
         for (const it of this.relicItems()) {
-          if (it.chosen && this.isKeepsake(it)) it.bond = (it.bond || 0) + 1;
+          if (it.chosen && this.isKeepsake(it) && this.keepsakeGrow) this.keepsakeGrow(it, 1, 'chosen');
         }
       } catch (e) {}
       return r;

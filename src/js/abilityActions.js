@@ -123,6 +123,11 @@
     // abilityActionDef: look up an action definition from abilities.json.
     // Returns {ability, action} or null.
     abilityActionDef: function (abilityId, actionId) {
+      // KEEPSAKE ACTIONS (Steve 2026-10-14, COHERENCE-SPINE.md): a worn L2
+      // keepsake grants a combat action; its data lives in keepsakes.js.
+      if (abilityId === 'keepsake' && typeof this.keepsakeActionDef === 'function') {
+        return this.keepsakeActionDef(actionId);
+      }
       var abilities = (this.data && this.data.abilities) || [];
       var ability = null;
       for (var i = 0; i < abilities.length; i++) {
@@ -206,7 +211,10 @@
         this.say('That action doesn\'t exist. (Unknown: ' + abilityId + '.' + actionId + ')');
         return false;
       }
-      if (!this.hasAbility(abilityId)) {
+      var _held = (abilityId === 'keepsake')
+        ? !!(typeof this.keepsakeActionReady === 'function' && this.keepsakeActionReady(actionId))
+        : this.hasAbility(abilityId);
+      if (!_held) {
         this.say('You don\'t have that ability. (' + (def.ability.name || abilityId) + ')');
         return false;
       }
@@ -309,7 +317,8 @@
         // XP RICHNESS (evolution build 2026-10-11, measured): real activations
         // grant 2 XP (were 1) — they cost food/actions, they're investments.
         // Related-action grants elsewhere stay at 1 (passive).
-        try { this.gainAbilityXP(abilityId, 2); } catch (e) {}
+        // Keepsake actions grow by being WORN (bond), not by ability XP.
+        if (abilityId !== 'keepsake') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
         // FEASTED (feast-surge rework, Worker B 2026-10-10): the feasted
         // form — the known ability, temporarily evolved. Generic framework:
         // uplift rode the damage funnels; here the data-driven twist runs.

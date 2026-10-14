@@ -14682,7 +14682,7 @@
               if (isPlant && !Game.canShow('plant', i.plantId, 'kcal')) return "?";
             }
             return (i.kcalEach || 0) * i.units;
-          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ' <span class="small" style="opacity:.6">keepsake</span>' : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</p>`;
+          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ` <span class="small" style="opacity:.6">keepsake</span>${ksPips(i)}` : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${ksWearable(i) ? ` <button class="btn ghost sm" data-wear-acc="${idx}" title="Accessory slot — keepsakes and accessories share the same four">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</p>`;
         }).join('') : '<p class="small">Empty. The world provides.</p>'}
         ${stashSectionHtml()}
         ${tools.length ? `<h3 style="margin-top:12px">🔧 Tools</h3>${tools.map(t => `<p class="small"><b>${t.name}</b> (${t.uses} uses left) <button class="btn ghost sm" data-settrap="${t.recipeId}">Set</button></p>`).join('')}` : ''}
@@ -14784,6 +14784,8 @@
       Game.equip(+b.dataset.equipA, tgt);
     }, 'Worn.'));
     slot.querySelectorAll('[data-unequip-slot]').forEach(b => b.onclick = rewire(() => Game.unequip(b.dataset.unequipSlot), 'Taken off.'));
+    // KEEPSAKE GROWTH (Steve 2026-10-14): keepsakes and accessories wear in acc1-acc4.
+    slot.querySelectorAll('[data-wear-acc]').forEach(b => b.onclick = rewire(() => Game.equipAccessory(+b.dataset.wearAcc), 'Worn.'));
     slot.querySelectorAll('[data-donate]').forEach(b => b.onclick = rewire(() => Game.donateToPantry(+b.dataset.donate), 'Donated to the pantry.'));
     // FORAGER LOOP: "leave it for the woods" — the pack-full message promises
     // this, so it exists. Anything not bonded or keepsake can be left behind.
@@ -15057,6 +15059,36 @@
     } catch (e) { return ''; }
   }
 
+  // KEEPSAKE GROWTH (Steve 2026-10-14, COHERENCE-SPINE.md): level pips 0-3
+  // on the item card; the title carries the honest detail (passive, action,
+  // worn = growing / pack = dormant). Compact for 390px.
+  function ksPips(item) {
+    try {
+      if (!Game.keepsakeLevel) return '';
+      const lv = Game.keepsakeLevel(item);
+      const pips = '●'.repeat(lv) + '○'.repeat(3 - lv);
+      const t = Game.keepsakeLevelText ? Game.keepsakeLevelText(item) : '';
+      const ta = esc(t).replace(/"/g, '&quot;');
+      return ` <span class="small" style="opacity:.8;letter-spacing:1px;white-space:nowrap" title="${ta}" aria-label="${ta}">${pips}</span>`;
+    } catch (e) { return ''; }
+  }
+  function ksWearable(item) {
+    try {
+      if (Game.isKeepsake && Game.isKeepsake(item)) return true;
+      const def = (Game.data.items || []).find(d => d.id === (item.itemId || item.id));
+      return !!(def && /^acc[1-4]?$/.test(def.slot || ''));
+    } catch (e) { return false; }
+  }
+  // The thread home: keepsake clues (a Taken relative's place or name).
+  function ksThreadHtml() {
+    try {
+      const clues = Game.keepsakeClues ? Game.keepsakeClues() : [];
+      if (!clues.length) return '';
+      return `<div style="margin-top:6px"><p class="small"><b>🧵 The thread home</b></p>` +
+        clues.map(c => `<p class="small" style="opacity:.85;overflow-wrap:anywhere">${c.kind === 'place' ? '📍' : '🔎'} ${esc(c.text)}</p>`).join('') + `</div>`;
+    } catch (e) { return ''; }
+  }
+
   function renderCharacterInline(slot, view) {
     const st = Game.status();
     const bodyHtml = `
@@ -15079,9 +15111,11 @@
               }
               if (!item) return `<p class="small" style="opacity:.5"><b>${lbl}:</b> —</p>`;
               const bond = item.bonded ? ` <span class="small" style="opacity:.75">bond ${item.bond||0}${item.heirloom ? ' \u00B7 heirloom' : ''}</span>` : '';
-              return `<p class="small"><b>${lbl}:</b> ${itemSpriteHtml(item)}${esc(item.name)}${bond} <button class="btn ghost sm" data-unequip-slot="${slot}">Take off</button></p>`;
+              const isKs = !!(Game.isKeepsake && Game.isKeepsake(item));
+              const chan = (isKs && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel-slot="${slot}">${esc(Game.channelLabel ? Game.channelLabel() : '💛 Channel')}</button>` : '';
+              return `<p class="small"><b>${lbl}:</b> ${itemSpriteHtml(item)}${isKs ? '💛 ' : ''}${esc(item.name)}${bond}${isKs ? ksPips(item) : ''} <button class="btn ghost sm" data-unequip-slot="${slot}">Take off</button>${chan}</p>`;
             }).join('');
-            return `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">🛡️ Equipped <span style="opacity:.6;font-weight:normal">(${eqCount} worn)</span></summary><div style="margin-top:6px">${rows}</div></details>`;
+            return `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">🛡️ Equipped <span style="opacity:.6;font-weight:normal">(${eqCount} worn)</span></summary><div style="margin-top:6px">${rows}${ksThreadHtml()}</div></details>`;
           } catch (e) { return ''; }
         })()}
         ${renderAbilitiesSection()}
@@ -15101,6 +15135,7 @@
     wireInlineX(slot);
     const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
     slot.querySelectorAll('[data-unequip-slot]').forEach(b => b.onclick = rewire(() => Game.unequip(b.dataset.unequipSlot), 'Taken off.'));
+    slot.querySelectorAll('[data-channel-slot]').forEach(b => b.onclick = rewire(() => Game.channelSentiment(b.dataset.channelSlot), 'Channeled.'));
     // DISEASE (Steve 2026-10-09): affliction buttons — examine, treat, folk
     // remedies, medicine, villager care.
     slot.querySelectorAll('[data-aff]').forEach(b => b.onclick = rewire(() => {
