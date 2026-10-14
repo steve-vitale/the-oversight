@@ -55,7 +55,7 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 - **Presentation B:** colour tokens, presentation stage ladder (`presentation.js`/`presentation.json`), cold System glass, alien-script glitch, handwritten marginalia, titan sprites + bar, bespoke Table and level-up screens, zoom/contrast/≥12px. Proof: `evidence/2026-10-14/presentation/B-*`.
 - **World origins:** 69 picker origins covering all 20 regions, world lifeseeds, 6 new name cultures, 5-tier familiarity, eastern fauna trimmed. Proof: `evidence/2026-10-14/origins-world.md`.
 
-**In progress (Claude):** class diversity (job → path lean, wider offer window); fixes for 2 quarantined tests (pronoun mix in a new-culture bio; taletell roster seeding).
+**In progress (Claude):** class diversity (job → path lean, wider offer window); 
 
 ## 2. Muse's backlog, in order
 
@@ -141,6 +141,9 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+- Name cultures without a `fem` list fall back to they/them for some names (german, vietnamese, moroccan, and others): add fem lists (data only). A broader code fallback was tried and dropped — it shifts seeded RNG.
+- Lifeseed grammar: "X's grandchildren Yarina" (one name for a plural relation), first-person lines inside third-person bios ("He taught me to swim"), "still understand more than he can say" (agreement).
+- Monster-naming vote: if the scholar dies, a vote they cast earlier as a villager counts double as the player's backing.
 - Origins follow-ups (Muse content): São Paulo sits in pampas/patagonia (it's Atlantic forest — maybe a coastal-Brazil region later); Kathmandu/Ulaanbaatar need Nepali/Mongolian languages (the 25-language test pins the count); Florida panther and Burmese python need a Florida/Everglades landing variant; some cities borrow a neighbour's name culture (Dakar, Dar es Salaam, Quito, La Paz, Montevideo, Sydney, Melbourne).
 - Sounds need a human listen (synth cues can't be judged headless). The pods and knack beats of the day-7 cinematic have no recorded lines yet.
 - The handwriting font falls back to serif on Linux/headless Chromium (script faces on iOS/Windows/Android).
