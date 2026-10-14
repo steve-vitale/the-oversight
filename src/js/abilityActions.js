@@ -1999,8 +1999,10 @@
     'trophy_room.mark': function (game, target) {
       var BA2 = (typeof globalThis !== 'undefined' && globalThis.Scattering || {}).buildarounds;
       if (!BA2) { game.say('Trophy Room: the engine is not loaded.'); return false; }
-      // Mark a monster type from recent kills.
-      var kills = ((game.state.codex || {}).monsterKills) || {};
+      // Mark a monster type from recent kills. state.villageSlain is the real
+      // per-type kill record (recordWaveKill, the choke point for every kill);
+      // state.codex.monsterKills was never written.
+      var kills = game.state.villageSlain || {};
       var types = Object.keys(kills).filter(function (k) { return kills[k] > 0; });
       if (!types.length) { game.say('Trophy Room: no kills recorded yet — hunt something first, then mark it.'); return false; }
       // If a target type was passed, use it; otherwise mark the most-killed.

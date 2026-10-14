@@ -137,7 +137,9 @@
       try {
         const st = dayState(game);
         st.trophyMark = monsterType;
-        game.say(`TROPHY ROOM: ${monsterType} marked. +50% damage against them today. The wall of heads grows.`);
+        let shown = monsterType;
+        try { if (game.monsterDisplayName) shown = game.monsterDisplayName(monsterType) || monsterType; } catch (e) { console.warn('[buildarounds] mark name:', e && e.message); }
+        game.say(`TROPHY ROOM: ${shown} marked. +50% damage against them today. The wall of heads grows.`);
         try { game.audioEvent('buildaround', { path: 'hunter', id: 'trophy_room' }); } catch (e) {}
       } catch (e) {}
     },
@@ -146,8 +148,11 @@
         if (!game.hasAbility || !game.hasAbility('trophy_room')) return 1;
         const st = dayState(game);
         if (!st.trophyMark || !target) return 1;
+        // Fighters carry monsterId (the mark is a monster id); the display
+        // name is a village name/descriptor that never contains the id.
+        const tId = target.monsterId || (target.mdef && target.mdef.id);
         const tType = (target.monsterType || target.name || '').toLowerCase();
-        if (tType.includes(st.trophyMark.toLowerCase())) {
+        if (tId ? tId === st.trophyMark : tType.includes(st.trophyMark.toLowerCase())) {
           const bonus = baPathCount(game, 'hunter') >= 2 ? 0.5 : 0.25;
           return 1 + bonus;
         }
