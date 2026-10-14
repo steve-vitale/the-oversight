@@ -211,7 +211,13 @@
       if (this.over) return null;
       const c = (this.corpses ? this.corpses() : []).find(x => x.id === cid);
       if (!c || c.buried) { this.say('Nothing there.'); return null; }
-      if (c.kind !== 'person') { this.say('Field-dressing handles animals. This is different. This is a person.'); return null; }
+      // PERSON-GATE (crisis leg r7 2026-10-13): every villager death registers
+      // kind 'villager' (starvation, thirst, wounds — corpses.js:110), not
+      // 'person'. The old bare kind!=='person' check refused ALL villager
+      // corpses, so the slope could never start on famine deaths. corpseIsPerson
+      // covers both sapient-dead kinds; animals/monsters stay refused, honestly.
+      const isPerson = this.corpseIsPerson ? this.corpseIsPerson(c) : c.kind === 'person';
+      if (!isPerson) { this.say('Field-dressing handles animals. This is the other kind of butchery — and it is only for the dead who were people.'); return null; }
       if (c.butchered) { this.say('There\'s nothing left to take that way.'); return null; }
       const s = this.state.scholar;
       if (c.node.x !== this.map.px || c.node.y !== this.map.py ||
@@ -378,7 +384,9 @@
         if (!this.starvingVillage()) return;
         if (R() > 0.12) return;
         const v = this.state.village || {};
-        const corpses = (this.corpses ? this.corpses() : []).filter(c => c.kind === 'person' && !c.buried && !c.butchered && !c.npcFed);
+        // PERSON-GATE (crisis leg r7 2026-10-13): corpseIsPerson, not bare
+        // kind==='person' — villager-kind famine dead count (see corpseButcher).
+        const corpses = (this.corpses ? this.corpses() : []).filter(c => (this.corpseIsPerson ? this.corpseIsPerson(c) : c.kind === 'person') && !c.buried && !c.butchered && !c.npcFed);
         if (!corpses.length) return;
         const cands = (v.roster || []).filter(id => {
           if (id === this.villagerId) return false;
@@ -528,7 +536,8 @@
       try {
         const s = this.state.scholar;
         return (this.corpses ? this.corpses() : []).find(c =>
-          c.kind === 'person' && !c.buried && !c.butchered &&
+          // PERSON-GATE (crisis leg r7 2026-10-13): corpseIsPerson — see corpseButcher.
+          (this.corpseIsPerson ? this.corpseIsPerson(c) : c.kind === 'person') && !c.buried && !c.butchered &&
           c.node.x === this.map.px && c.node.y === this.map.py &&
           Math.max(Math.abs(c.mx - (s.mx || 4)), Math.abs(c.my - (s.my || 4))) <= 1) || null;
       } catch (e) { return null; }
