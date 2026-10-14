@@ -316,6 +316,16 @@
     winDayFloorDefer(T) {
       this.say('◈ THE TABLE WAITS — "Ninety days. We do not price a life half-lived. Come back when the village has seen ninety dawns — the table will still be here."');
       T.phase = 'paths';
+      // DEFERRAL RE-OFFER (2026-10-14, sim-findings #131-T2): the beat promises
+      // the table will still be here — so it must be. Record the pending
+      // re-offer and re-arm the dawn driver: tableScene re-fires via
+      // tableWaiting (tableDone is cleared so the ledger gate lets it through;
+      // sanctity is preserved — tableActive() treats winDeferred as sitting).
+      // tableScene re-opens the 7-door modal via tableOfferPaths once
+      // winDayFloorOk() passes — exactly once (the flag clears on fire).
+      T.winDeferred = true;
+      try { this.progState().tableWaiting = true; } catch (e) {}
+      try { this.progState().tableDone = false; } catch (e) {}
       try { this.save(); } catch (e) {}
     },
 
@@ -331,8 +341,14 @@
     tableActive() {
       try {
         const pg = this.progState ? this.progState() : null;
-        if (!pg || !pg.tableDone) return false;
         const T = this.tableState();
+        // WIN-DAY-FLOOR DEFERRAL (2026-10-14, sim-findings #131-T2): the table
+        // is still sitting during the deferral window — the beat promised it
+        // would still be here — so sanctity holds even though tableDone was
+        // cleared to re-arm the dawn driver. The flag clears when the modal
+        // re-opens (the sequence sits again, tableDone true).
+        if (T && T.winDeferred) return true;
+        if (!pg || !pg.tableDone) return false;
         return !!(T && T.phase && T.phase !== 'done');
       } catch (e) { return false; }
     },
@@ -373,6 +389,22 @@
     tableScene() {
       const s = this.state.scholar, pg = this.progState();
       const T = this.tableState();
+      // WIN-DAY-FLOOR DEFERRAL RE-OFFER (2026-10-14, sim-findings #131-T2): a
+      // win deferred before day 90 kept the table's promise — "the table will
+      // still be here". While the floor is unmet the table waits silently
+      // (the deferral beat already spoke); once winDayFloorOk() passes, the
+      // 7-door modal re-opens via tableOfferPaths — exactly once. The sequence
+      // sits again (tableDone), so sanctity holds and the driver does not
+      // re-fire. Paths re-price live at re-offer time (tableEarnedPaths).
+      if (T.winDeferred) {
+        if (!this.winDayFloorOk()) return;
+        T.winDeferred = false;
+        pg.tableDone = true;
+        pg.tableWaiting = false;
+        this.say('◈ THE TABLE RETURNS — "Ninety dawns. The life you priced is lived now — not half-lived. The table kept its word. It is still here. Choose your door."');
+        this.tableOfferPaths('The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take.');
+        return;
+      }
       if (pg.tableDone || T.phase === 'done') return;
       // No seat: withdraw aloud, never silently (ledger.js's law).
       const seat = this.tableSeat();
