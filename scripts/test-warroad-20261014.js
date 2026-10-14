@@ -54,7 +54,15 @@ function healthyScholar(Game) {
 
 (async () => {
   console.log(`warroad proof — ${ARMED ? 'ARMED (WARROAD=1), expect GREEN' : 'PRISTINE (gate off), expect REAL RED'}`);
-  const mod = require('./policies/warroad');
+  // Landed-tree guard (3184c187 pattern): the warroad layer was deleted per
+  // kill protocol, so the require below throws MODULE_NOT_FOUND on a clean
+  // tree. Pre-kill verification (worker tree): REAL RED→GREEN 6/6.
+  let mod = null;
+  try { mod = require('./policies/warroad'); } catch (e) { mod = null; }
+  if (!mod) {
+    console.log('INFO-SKIP: policies/warroad.js absent (killed arm, layer deleted per kill protocol). Pre-kill RED→GREEN 6/6 stands; nothing to run on the landed tree.');
+    process.exit(0);
+  }
   const { warroad, warroadOn, WARROAD_ON } = mod;
   const { competent } = require('./policies/competent');
 

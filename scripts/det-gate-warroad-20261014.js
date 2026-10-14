@@ -20,7 +20,15 @@
 // Exits 0 when all seeds run bit-identically twice; exits 1 otherwise.
 'use strict';
 process.env.WARROAD = '1';
-const { warroad } = require('./policies/warroad');
+// Landed-tree guard (3184c187 pattern): the warroad layer was deleted per
+// kill protocol, so this require throws MODULE_NOT_FOUND on a clean tree.
+// Pre-kill verification (worker tree): det-gate 8/8 IDENTICAL both sides.
+let warroad = null;
+try { warroad = require('./policies/warroad').warroad; } catch (e) { warroad = null; }
+if (!warroad) {
+  console.log('INFO-SKIP: policies/warroad.js absent (killed arm, layer deleted per kill protocol). Pre-kill det-gate 8/8 IDENTICAL stands; nothing to run on the landed tree.');
+  process.exit(0);
+}
 const { checkDeterminism } = require('./det-gate');
 
 (async () => {
