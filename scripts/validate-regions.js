@@ -22,9 +22,15 @@
 //   >=3 landing variants (locations.json), >=1 lifeseed region
 //   monsters (variants), if listed, exist in monsters.json
 // Also: every originPicker label resolves to a region (one origin vocabulary).
+// Calendars (src/data/climates.json): every template's seasons cover the
+// year (days add to 365), weather sums to 1, the month map covers 12
+// months, every season holds one unbroken run of months in season order;
+// every climateFamily maps to a template; every region's calendar exists and
+// its month map names only its own seasons (stubs included).
 //
 // As a module: require('./validate-regions').validateRegions(data) -> {errors, warnings, checked}
-// where data = {regions, biomes, plants, animals, locations, lifeseeds, characterGen, originPicker, monsters}.
+// where data = {regions, biomes, plants, animals, locations, lifeseeds, characterGen, originPicker, monsters, climates?}.
+// Without data.climates the calendar checks are skipped (warning).
 // Writes nothing.
 'use strict';
 const fs = require('fs');
@@ -41,7 +47,7 @@ function loadData() {
   return {
     regions: D('regions.json'), biomes: D('biomes.json'), plants: D('plants.json'), animals: D('animals.json'),
     locations: D('locations.json'), lifeseeds: D('lifeseeds.json'), characterGen: D('characterGen.json'),
-    originPicker: D('originPicker.json'), monsters: D('monsters.json'),
+    originPicker: D('originPicker.json'), monsters: D('monsters.json'), climates: D('climates.json'),
   };
 }
 
@@ -59,6 +65,57 @@ function originRegion(label, data) {
     if (n && (!best || n > best.n)) best = { id: r.id, n, i };
   });
   return best ? best.id : null;
+}
+
+// checkSeasons(where, seasons, err): ids, days > 0, weather sums to 1, year length.
+function checkSeasons(where, seasons, err) {
+  let days = 0;
+  for (const s of seasons) {
+    days += s.days || 0;
+    if (!s.id) err(where, 'a season has no id');
+    if (!(s.days > 0)) err(where, `season ${s.id} needs days > 0`);
+    const w = s.weather || {};
+    const sum = Object.values(w).reduce((t, x) => t + (x || 0), 0);
+    if (Math.abs(sum - 1) > 1e-9) err(where, `season ${s.id} weather sums to ${sum} (need 1)`);
+  }
+  if (seasons.length && days !== YEAR_DAYS) err(where, `season days add up to ${days} (need ${YEAR_DAYS})`);
+}
+// checkMonths(where, months, seasons, err): 12 entries, each a season; each
+// season one unbroken (cyclic) run of months; runs in the seasons' order.
+function checkMonths(where, months, seasons, err) {
+  if (!Array.isArray(months) || months.length !== 12) { err(where, `month map must list 12 months (got ${Array.isArray(months) ? months.length : 'none'})`); return; }
+  const ids = seasons.map(s => s.id);
+  const bad = months.filter(m => !ids.includes(m));
+  if (bad.length) { err(where, `month map names unknown season(s) ${[...new Set(bad)].join(',')}`); return; }
+  for (const id of ids) if (!months.includes(id)) err(where, `season ${id} has no month`);
+  // cyclic runs
+  let a = 0;
+  while (a < 12 && months[(a + 11) % 12] === months[a]) a++;
+  if (a === 12) return; // one season all year
+  const runs = [];
+  for (let g = 0; g < 12; g++) {
+    const m = months[(a + g) % 12];
+    if (!runs.length || runs[runs.length - 1] !== m) runs.push(m);
+  }
+  if (new Set(runs).size !== runs.length) { err(where, `a season's months are not one unbroken run (${runs.join(' > ')})`); return; }
+  const present = ids.filter(id => runs.includes(id));
+  const k = present.indexOf(runs[0]);
+  const rot = present.slice(k).concat(present.slice(0, k));
+  if (rot.join() !== runs.join()) err(where, `month order ${runs.join(' > ')} does not follow season order ${ids.join(' > ')}`);
+}
+// regionCalendarOf: same resolution as world.js regionCalendar.
+function regionCalendarOf(r, climates) {
+  const c = r.climate || {};
+  const calId = c.calendar || ((climates || {}).familyCalendar || {})[r.climateFamily] || null;
+  const tpl = calId ? ((climates || {}).calendars || {})[calId] : null;
+  const own = Array.isArray(c.seasons) && c.seasons.length ? c.seasons : null;
+  const seasons = own || (tpl && tpl.seasons) || [];
+  let months = null;
+  if (Array.isArray(c.months)) months = c.months;
+  else if (tpl && Array.isArray(tpl.months) && tpl.months.length === 12 && (!own || c.calendar)) {
+    months = r.hemisphere === 'south' ? tpl.months.map((_, m) => tpl.months[(m + 6) % 12]) : tpl.months;
+  }
+  return { calId, tpl, seasons, months };
 }
 
 function validateRegions(data) {
@@ -91,6 +148,15 @@ function validateRegions(data) {
     for (const n of (r.neighbors || [])) if (!ids.has(n)) err(rid, `neighbor ${n} is not a region`);
     for (const l of (r.lifeseedRegions || [])) if (!lsIds.has(l)) err(rid, `lifeseedRegions: ${l} not in lifeseeds.json regions`);
     for (const l of (r.landingVariants || [])) if (!locIds.has(l)) err(rid, `landingVariants: ${l} not in locations.json`);
+    // ---- calendar (every region, stubs included) ----
+    if (data.climates) {
+      const cal = regionCalendarOf(r, data.climates);
+      const cid = (r.climate || {}).calendar;
+      if (cid && !cal.tpl) err(rid, `climate.calendar ${cid} not in climates.json`);
+      if (!cal.calId) err(rid, `no calendar: set climate.calendar or map climateFamily ${r.climateFamily} in climates.json familyCalendar`);
+      if (cal.months) checkMonths(rid, cal.months, cal.seasons, err);
+      else if (r.status !== 'stub') warnings.push(`${rid}: no month map, so day 1 can't follow the real date (set climate.calendar or climate.months)`);
+    }
     if (r.status === 'stub') continue;
 
     // ---- playable minimums ----
@@ -150,18 +216,9 @@ function validateRegions(data) {
       if (!Array.isArray(v) || !plantById.has(v[0])) err(rid, `bounty '${ep}' plant ${v && v[0]} not in plants.json`);
     }
 
-    const seasons = ((r.climate || {}).seasons) || [];
+    const seasons = ((r.climate || {}).seasons) || (data.climates ? regionCalendarOf(r, data.climates).seasons : []);
     if (!seasons.length) err(rid, 'climate.seasons is empty');
-    let days = 0;
-    for (const s of seasons) {
-      days += s.days || 0;
-      if (!s.id) err(rid, 'a season has no id');
-      if (!(s.days > 0)) err(rid, `season ${s.id} needs days > 0`);
-      const w = s.weather || {};
-      const sum = Object.values(w).reduce((t, x) => t + (x || 0), 0);
-      if (Math.abs(sum - 1) > 1e-9) err(rid, `season ${s.id} weather sums to ${sum} (need 1)`);
-    }
-    if (seasons.length && days !== YEAR_DAYS) err(rid, `season days add up to ${days} (need ${YEAR_DAYS})`);
+    checkSeasons(rid, seasons, err);
 
     const pe = r.people || {};
     if (!langIds.has(pe.language)) err(rid, `language ${pe.language} not in characterGen.languages`);
@@ -192,11 +249,24 @@ function validateRegions(data) {
       if (!originRegion(o.label, data)) err('originPicker', `"${o.label}" resolves to no region`);
     }
   }
+  // Calendar templates.
+  if (data.climates) {
+    const C = data.climates;
+    for (const [cid, cal] of Object.entries(C.calendars || {})) {
+      const where = 'calendar ' + cid;
+      if (!Array.isArray(cal.seasons) || !cal.seasons.length) { err(where, 'no seasons'); continue; }
+      checkSeasons(where, cal.seasons, err);
+      checkMonths(where, cal.months, cal.seasons, err);
+    }
+    for (const [fam, cid] of Object.entries(C.familyCalendar || {})) {
+      if (!(C.calendars || {})[cid]) err('familyCalendar', `${fam} -> ${cid} is not a calendar`);
+    }
+  } else warnings.push('climates.json not loaded: calendar checks skipped');
   if (!regions.some(r => r && (r.status === 'playable' || r.status === 'rich'))) warnings.push('no playable region: every landing falls back to the default');
   return { errors, warnings, checked: regions.length };
 }
 
-module.exports = { validateRegions, loadData, originRegion, MIN, YEAR_DAYS };
+module.exports = { validateRegions, loadData, originRegion, regionCalendarOf, MIN, YEAR_DAYS };
 
 if (require.main === module) {
   const quiet = process.argv.includes('--quiet');

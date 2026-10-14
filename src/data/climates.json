@@ -1,0 +1,108 @@
+{
+  "_note": "Climate calendars (docs/WORLD-REGIONS.md §7, §11). One template per climate family. seasons[]: in year order from world day-of-year 0; days add to 365; each weather table sums to 1 (clear/rain/cold have effects today; heat/storm are rolled and stored only). months[12]: the season for each real month Jan..Dec, NORTHERN-hemisphere frame; a southern region reads it six months on (its July is the template's January). Each season must be one unbroken run of months, in the same order as seasons[]. A region uses climate.calendar (or familyCalendar[climateFamily]); its own climate.seasons, if any, replace the template's seasons; its own climate.months, if any, is literal (no hemisphere shift). Steve 2026-10-14: 'Yes that's okay to run a wet/dry year. Whenever the player starts, should be the season the game starts in.'",
+  "familyCalendar": {
+    "temperate_humid": "temperate_4",
+    "grassland": "continental_4",
+    "mediterranean": "mediterranean_4",
+    "boreal": "boreal_long_winter",
+    "arid": "arid_2",
+    "dry_tropical": "dry_tropical_wet_dry",
+    "tropical_wet": "tropical_wet_2",
+    "tropical_monsoon": "monsoon_3",
+    "highland": "highland_2",
+    "subtropical_dry": "subtropical_wet_dry"
+  },
+  "calendars": {
+    "temperate_4": {
+      "name": "Four seasons, a long winter",
+      "seasons": [
+        { "id": "spring", "days": 80, "temp": "mild", "note": "Greens return. Hungry season ends, if you make it.", "weather": { "clear": 0.65, "rain": 0.3, "cold": 0.05 } },
+        { "id": "summer", "days": 95, "temp": "hot", "note": "Berries, heat, storms.", "weather": { "clear": 0.7, "rain": 0.25, "storm": 0.05 } },
+        { "id": "fall", "days": 75, "temp": "cool", "note": "Harvest. Nuts, last greens. Fatten up.", "weather": { "clear": 0.7, "rain": 0.2, "cold": 0.1 } },
+        { "id": "winter", "days": 115, "temp": "cold", "note": "The boss. Stored food or nothing.", "weather": { "clear": 0.55, "rain": 0.15, "cold": 0.3 } }
+      ],
+      "months": ["winter", "winter", "spring", "spring", "spring", "summer", "summer", "summer", "fall", "fall", "fall", "winter"]
+    },
+    "continental_4": {
+      "name": "Four seasons, big sky",
+      "seasons": [
+        { "id": "spring", "days": 75, "temp": "mild", "note": "Thaw and mud. Storms build.", "weather": { "clear": 0.6, "rain": 0.25, "storm": 0.1, "cold": 0.05 } },
+        { "id": "summer", "days": 100, "temp": "hot", "note": "Long days, hail, grass fire.", "weather": { "clear": 0.7, "rain": 0.12, "storm": 0.1, "heat": 0.08 } },
+        { "id": "fall", "days": 70, "temp": "cool", "note": "Wind. Herds move.", "weather": { "clear": 0.75, "rain": 0.15, "cold": 0.1 } },
+        { "id": "winter", "days": 120, "temp": "cold", "note": "Blizzards with nothing to stop them.", "weather": { "clear": 0.5, "rain": 0.05, "cold": 0.4, "storm": 0.05 } }
+      ],
+      "months": ["winter", "winter", "spring", "spring", "spring", "summer", "summer", "summer", "fall", "fall", "winter", "winter"]
+    },
+    "mediterranean_4": {
+      "name": "Wet winter, dry summer",
+      "seasons": [
+        { "id": "spring", "days": 92, "temp": "mild", "note": "Everything flowers at once, then dries.", "weather": { "clear": 0.75, "rain": 0.25 } },
+        { "id": "summer", "days": 122, "temp": "hot", "note": "Drought and fire season.", "weather": { "clear": 0.85, "heat": 0.13, "rain": 0.02 } },
+        { "id": "fall", "days": 61, "temp": "warm", "note": "First rains. Olives, figs, grapes.", "weather": { "clear": 0.7, "rain": 0.25, "storm": 0.05 } },
+        { "id": "winter", "days": 90, "temp": "cool", "note": "Rain, mild cold, green hills.", "weather": { "clear": 0.5, "rain": 0.4, "cold": 0.1 } }
+      ],
+      "months": ["winter", "winter", "spring", "spring", "spring", "summer", "summer", "summer", "summer", "fall", "fall", "winter"]
+    },
+    "boreal_long_winter": {
+      "name": "A short summer, then the dark",
+      "seasons": [
+        { "id": "spring", "days": 31, "temp": "cool", "note": "Breakup. Rivers run high.", "weather": { "clear": 0.55, "rain": 0.3, "cold": 0.15 } },
+        { "id": "summer", "days": 92, "temp": "mild", "note": "Midnight sun, mosquitoes, berries.", "weather": { "clear": 0.65, "rain": 0.35 } },
+        { "id": "fall", "days": 30, "temp": "cool", "note": "First snow. Last berries, the rut.", "weather": { "clear": 0.5, "rain": 0.25, "cold": 0.25 } },
+        { "id": "winter", "days": 212, "temp": "frozen", "note": "Seven months. Short days, deep cold.", "weather": { "clear": 0.4, "cold": 0.55, "storm": 0.05 } }
+      ],
+      "months": ["winter", "winter", "winter", "winter", "spring", "summer", "summer", "summer", "fall", "winter", "winter", "winter"]
+    },
+    "arid_2": {
+      "name": "Hot and cool",
+      "seasons": [
+        { "id": "cool", "days": 151, "temp": "mild", "note": "Cold nights, rare winter rain.", "weather": { "clear": 0.85, "rain": 0.05, "cold": 0.1 } },
+        { "id": "hot", "days": 214, "temp": "hot", "note": "Water is the whole game.", "weather": { "clear": 0.84, "heat": 0.14, "rain": 0.02 } }
+      ],
+      "months": ["cool", "cool", "cool", "hot", "hot", "hot", "hot", "hot", "hot", "hot", "cool", "cool"]
+    },
+    "dry_tropical_wet_dry": {
+      "name": "The long dry and the rains",
+      "seasons": [
+        { "id": "dry", "days": 151, "temp": "hot", "note": "The long dry. Grass burns, herds walk to water.", "weather": { "clear": 0.85, "heat": 0.13, "rain": 0.02 } },
+        { "id": "wet", "days": 122, "temp": "warm", "note": "The rains. Planting, mud, mosquitoes.", "weather": { "clear": 0.45, "rain": 0.45, "storm": 0.1 } },
+        { "id": "dry_cool", "days": 92, "temp": "warm", "note": "Harvest, then the dusty wind.", "weather": { "clear": 0.9, "rain": 0.05, "heat": 0.05 } }
+      ],
+      "months": ["dry", "dry", "dry", "dry", "dry", "wet", "wet", "wet", "wet", "dry_cool", "dry_cool", "dry_cool"]
+    },
+    "tropical_wet_2": {
+      "name": "Wet and less wet",
+      "seasons": [
+        { "id": "dry", "days": 120, "temp": "hot", "note": "Rivers drop. Fish crowd the pools.", "weather": { "clear": 0.65, "rain": 0.3, "heat": 0.05 } },
+        { "id": "wet", "days": 245, "temp": "hot", "note": "Rain most afternoons. Rivers flood the forest.", "weather": { "clear": 0.35, "rain": 0.55, "storm": 0.1 } }
+      ],
+      "months": ["dry", "dry", "dry", "dry", "wet", "wet", "wet", "wet", "wet", "wet", "wet", "wet"]
+    },
+    "monsoon_3": {
+      "name": "Hot, monsoon, cool",
+      "seasons": [
+        { "id": "hot", "days": 92, "temp": "hot", "note": "Heat builds. Wells drop.", "weather": { "clear": 0.8, "heat": 0.17, "storm": 0.03 } },
+        { "id": "wet", "days": 122, "temp": "hot", "note": "The monsoon. Floods, rice, fever.", "weather": { "clear": 0.25, "rain": 0.6, "storm": 0.15 } },
+        { "id": "cool", "days": 151, "temp": "mild", "note": "Dry and cool. Harvest and festivals.", "weather": { "clear": 0.85, "rain": 0.05, "cold": 0.1 } }
+      ],
+      "months": ["cool", "cool", "hot", "hot", "hot", "wet", "wet", "wet", "wet", "cool", "cool", "cool"]
+    },
+    "highland_2": {
+      "name": "High wet and high dry",
+      "seasons": [
+        { "id": "dry", "days": 243, "temp": "cold", "note": "Clear sky, hard frost every night.", "weather": { "clear": 0.75, "cold": 0.22, "rain": 0.03 } },
+        { "id": "wet", "days": 122, "temp": "cool", "note": "Rain, hail, snow on the passes. Grass for the herds.", "weather": { "clear": 0.4, "rain": 0.4, "cold": 0.1, "storm": 0.1 } }
+      ],
+      "months": ["dry", "dry", "dry", "dry", "dry", "wet", "wet", "wet", "wet", "dry", "dry", "dry"]
+    },
+    "subtropical_wet_dry": {
+      "name": "Summer rain, winter dry",
+      "seasons": [
+        { "id": "dry", "days": 151, "temp": "mild", "note": "Dry and cool. Veld fires, thin game.", "weather": { "clear": 0.85, "cold": 0.1, "rain": 0.05 } },
+        { "id": "wet", "days": 153, "temp": "hot", "note": "Summer storms. Grass and calves.", "weather": { "clear": 0.5, "rain": 0.35, "storm": 0.1, "heat": 0.05 } },
+        { "id": "dry_hot", "days": 61, "temp": "hot", "note": "Before the rains break. Hot and dry.", "weather": { "clear": 0.85, "heat": 0.15 } }
+      ],
+      "months": ["dry", "dry", "dry", "dry", "wet", "wet", "wet", "wet", "wet", "dry_hot", "dry_hot", "dry"]
+    }
+  }
+}

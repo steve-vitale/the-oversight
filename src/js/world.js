@@ -9,15 +9,23 @@
 //   - worldKinEntry(owner, person) -> the kin entry for one lifeseed person, or null
 //   - hearOfRegion(id, why) -> true when the region was newly heard of
 //   - worldRegionName(id) -> the region's display name
+//   - runsStarted() / noteRunStart() / isFirstRun() -> the cross-run run counter (localStorage oversight.runs.v1); first run = none counted and no save on the device
+//   - firstRunLanding(originId, pool) -> {region, via}: the origin region when playable, else the nearest playable (climateFamily, continent, default)
+//   - regionCalendar(region) -> {id, seasons, months}: the region's climate calendar (src/data/climates.json template + region overrides)
+//   - calendarStartFor(region, ms) -> {doy, region, calendar, season, date}: day 1's world day-of-year for a run started at real time ms
 // rules:
 //   - kin_never_local: kin are never placed in the landing region (code: placeKinFor)
 //   - kin_deterministic: placement is a pure function of map.worldSeed + owner + person, drawing no Math.random (code: kinRand)
 //   - taken_matches_lifeseed: fate 'taken' uses the same test as lifeseed.js takenKinOf (code: KIN_TAKEN)
+//   - first_run_origin: a device's first run lands in the player's origin region (or the nearest playable); later runs are random; Game.debugRegion wins (code: game.js pickLandingRegion, firstRunLanding; Steve 2026-10-14 "first run let them land in the origin they choose a character from. Random after.")
+//   - real_date_season: day 1's season is the real-world season at run start for the landing region's calendar and hemisphere, stored as state.calendarStart (code: calendarStartFor, game.js season; Steve 2026-10-14 "Whenever the player starts, should be the season the game starts in.")
+//   - runs_not_meta: the run counter is its own key; newGame never touches oversight.meta.v1 (code: RUNS_KEY)
 //   - hidden_until_known: nothing here is shown; keepsake clues name a kin's region only once world.regions[id].known (code: keepsakes.js keepsakeClues)
 // consumes:
 //   - regionDef, activeRegion, originRegionsForTags, mulberry32 (game.js)
 //   - vpOf (conversation.js)
 //   - state.world, state.region, state.village.roster, state.village.rosterChars
+//   - playableRegions (game.js), data.climates (src/data/climates.json)
 (function () {
   'use strict';
   const Game = (globalThis.Scattering || {}).Game;
@@ -29,6 +37,23 @@
   const KIN_DEAD = /\bburied\b|\bdied\b/i;
 
   function warn(msg) { console.warn('[world] ' + msg); }
+
+  // ---- cross-run run counter (first-run landing, Steve 2026-10-14) ----
+  // Its own localStorage key: the meta store (oversight.meta.v1) promises
+  // newGame never reads it (metaProgression.js read_only_power), so the run
+  // count lives beside it, not in it. Node harnesses get an in-memory store.
+  const RUNS_KEY = 'oversight.runs.v1';
+  const SAVE_PREFIX = 'scattering-save-';
+  const _mem = {};
+  const memStore = {
+    getItem: k => (k in _mem ? _mem[k] : null),
+    setItem: (k, v) => { _mem[k] = String(v); },
+  };
+  function store() {
+    try { if (typeof localStorage !== 'undefined' && localStorage) return localStorage; } catch (e) { warn('localStorage unavailable: ' + e.message); }
+    return memStore;
+  }
+  const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   function hashStr(s) {
     let h = 2166136261 >>> 0;
     for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
@@ -36,6 +61,118 @@
   }
 
   const methods = {
+    // ============ FIRST-RUN LANDING ============
+    // Steve 2026-10-14: "Maybe first run let them land in the origin they
+    // choose a character from. Random after."
+    runsStarted() {
+      let n = 0;
+      try {
+        const raw = store().getItem(RUNS_KEY);
+        const s = raw ? JSON.parse(raw) : null;
+        n = (s && typeof s.started === 'number') ? s.started : 0;
+      } catch (e) { warn('runs store unreadable: ' + e.message); }
+      return n;
+    },
+    // isFirstRun(): no run counted on this device AND no save or tombstone
+    // from before the counter existed (players who already played are not
+    // new). Key names are scanned; no save blob is read.
+    isFirstRun() {
+      if (this.runsStarted() > 0) return false;
+      try {
+        const ls = store();
+        if (typeof ls.key === 'function' && typeof ls.length === 'number') {
+          for (let i = 0; i < ls.length; i++) {
+            const k = ls.key(i);
+            if (k && k.indexOf(SAVE_PREFIX) === 0) return false;
+          }
+        }
+      } catch (e) { warn('save scan: ' + e.message); }
+      return true;
+    },
+    noteRunStart() {
+      const n = this.runsStarted() + 1;
+      try { store().setItem(RUNS_KEY, JSON.stringify({ v: 1, started: n })); } catch (e) { warn('runs store write: ' + e.message); }
+      return n;
+    },
+    // firstRunLanding(originId, pool): the origin's region when playable,
+    // else the nearest playable: same climateFamily, then same continent
+    // (origin's neighbors first, then regions.json order), then the default
+    // region. -> {region, via: 'origin'|'climate'|'continent'|'default'}
+    firstRunLanding(originId, pool) {
+      pool = pool || this.playableRegions();
+      if (!pool.length) return null;
+      const o = this.regionDef(originId);
+      if (o) {
+        if (pool.some(r => r.id === o.id)) return { region: o, via: 'origin' };
+        const near = (list) => {
+          if (!list.length) return null;
+          return list.find(r => (o.neighbors || []).includes(r.id)) || list[0];
+        };
+        const byClimate = near(pool.filter(r => o.climateFamily && r.climateFamily === o.climateFamily));
+        if (byClimate) return { region: byClimate, via: 'climate' };
+        const byContinent = near(pool.filter(r => o.continent && r.continent === o.continent));
+        if (byContinent) return { region: byContinent, via: 'continent' };
+      }
+      const def = pool.find(r => r.id === 'na_eastern_woodlands') || pool[0];
+      return { region: def, via: o ? 'default' : 'no_origin' };
+    },
+
+    // ============ CLIMATE CALENDARS (src/data/climates.json) ============
+    // regionCalendar(region): {id, seasons, months} where months[0..11] is
+    // the season id for each real month (Jan..Dec) in THIS region's local
+    // frame, or null when the region has no month map.
+    regionCalendar(region) {
+      const r = region || this.activeRegion() || {};
+      const C = (this.data && this.data.climates) || {};
+      const c = r.climate || {};
+      const calId = c.calendar || (C.familyCalendar || {})[r.climateFamily] || null;
+      const tpl = calId ? (C.calendars || {})[calId] : null;
+      const own = Array.isArray(c.seasons) && c.seasons.length ? c.seasons : null;
+      const seasons = own || (tpl && tpl.seasons) || [];
+      let months = null;
+      if (Array.isArray(c.months) && c.months.length === 12) months = c.months.slice();
+      else if (tpl && Array.isArray(tpl.months) && tpl.months.length === 12 && (!own || c.calendar)) {
+        // template months are the northern frame; the south reads them six months on
+        months = r.hemisphere === 'south' ? tpl.months.map((_, m) => tpl.months[(m + 6) % 12]) : tpl.months.slice();
+      }
+      if (months && !months.every(id => seasons.some(s => s.id === id))) {
+        warn('region ' + r.id + ' calendar ' + calId + ': month map names a season the region lacks; no real-date start');
+        months = null;
+      }
+      return { id: calId, seasons, months };
+    },
+    // calendarStartFor(region, ms): the world day-of-year of day 1 when a run
+    // starts at real time ms (UTC date). Steve 2026-10-14: "Whenever the
+    // player starts, should be the season the game starts in." The real
+    // date's month picks the season; how far through that season's months
+    // the date is places day 1 that far through the season's days.
+    // -> {doy, region, calendar, season, date} or null (no month map).
+    calendarStartFor(region, ms) {
+      const r = region || this.activeRegion();
+      if (!r) return null;
+      const cal = this.regionCalendar(r);
+      if (!cal.months || !cal.seasons.length) return null;
+      const dt = new Date(ms);
+      if (isNaN(dt.getTime())) { warn('calendarStartFor: bad time ' + ms); return null; }
+      const m = dt.getUTCMonth();
+      const dom = Math.min(dt.getUTCDate(), MONTH_DAYS[m]);
+      const sid = cal.months[m];
+      let a = m;
+      for (let g = 0; g < 11 && cal.months[(a + 11) % 12] === sid; g++) a = (a + 11) % 12;
+      // walk the unbroken run of months holding this season, from its first
+      let into = 0, total = 0;
+      for (let g = 0, j = a; g < 12 && cal.months[j] === sid; g++, j = (j + 1) % 12) {
+        if (j === m) into = total + dom - 1;
+        total += MONTH_DAYS[j];
+      }
+      let start = 0, s = null;
+      for (const x of cal.seasons) { if (x.id === sid) { s = x; break; } start += x.days || 0; }
+      if (!s) return null;
+      const frac = total > 0 ? Math.min(0.999999, into / total) : 0;
+      const doy = start + Math.min((s.days || 1) - 1, Math.floor(frac * (s.days || 1)));
+      return { doy, region: r.id, calendar: cal.id, season: sid, date: dt.toISOString().slice(0, 10) };
+    },
+
     // kinRand(owner, person): a seeded stream per kin, independent of order.
     kinRand(owner, person) {
       const ws = ((this.map && this.map.worldSeed) || (this.state && this.state.run && this.state.run.map && this.state.run.map.worldSeed) || 1) >>> 0;
