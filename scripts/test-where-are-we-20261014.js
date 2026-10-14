@@ -5,7 +5,8 @@
 // line but that's a small knowledge unlock as you speak to people. Where we
 // are in the world becomes part of conversation."
 //
-//   W1 a new game knows nothing: placeKnown 0/0, the header line is absent,
+//   W1 a new game starts at the player's own familiarity (local = known);
+//      a stranger knows nothing: placeKnown 0/0, the header line is absent,
 //      the 'where' topic is offered in conversation
 //   W2 a local villager (same region) -> known 2/2; their line names the
 //      region and the true season; header "Autumn · Eastern Woodlands"
@@ -58,7 +59,13 @@ async function main() {
     1: Game.parseOrigin('Kyiv, Ukraine').tags,
     0: Game.parseOrigin('Hanoi, Vietnam').tags,
   };
-  const start = async () => {
+  // start(): a fresh run. The sections after W1 play a STRANGER player who
+  // has to ask, so they reset what the (local, Columbus) player starts with.
+  const start = async (keepStart) => {
+    await start0();
+    if (!keepStart) Game.state.scholar.placeKnown = { region: 0, season: 0 };
+  };
+  const start0 = async () => {
     await quietLog(async () => {
       Game.genRoster('Columbus, Ohio');
       Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -98,11 +105,17 @@ async function main() {
 
   // ============ W1 new game ============
   console.log('\n[W1] a new game knows nothing');
-  await start();
+  await start(true);
   ok(Game.state.region === 'na_eastern_woodlands', 'landed in the eastern woodlands', Game.state.region);
+  // Parity (2026-10-14): the player starts knowing what a villager from
+  // their origin would. Columbus landing in the eastern woodlands is local.
   const pk0 = Game.state.scholar.placeKnown;
-  ok(pk0 && pk0.region === 0 && pk0.season === 0, 'placeKnown starts 0/0', JSON.stringify(pk0));
-  ok(Game.whereLine() === '', 'header season line is absent', JSON.stringify(Game.whereLine()));
+  const myTier = Game.placeTellTier(Game.villagerId);
+  ok(pk0 && pk0.region === myTier && pk0.season === myTier, 'placeKnown starts at the player\'s own familiarity tier', JSON.stringify(pk0) + ' tier ' + myTier);
+  ok(myTier === 2 && Game.whereLine() !== '', 'a local player recognises home: header line shows', JSON.stringify(Game.whereLine()));
+  // The rest of the test plays a stranger who has to ask.
+  Game.state.scholar.placeKnown = { region: 0, season: 0 };
+  ok(Game.whereLine() === '', 'a stranger player: header season line is absent', JSON.stringify(Game.whereLine()));
   const locals = byTier(2), visitors = byTier(1), strangers = byTier(0);
   ok(locals.length && visitors.length && strangers.length, `roster has local/visitor/stranger (${locals.length}/${visitors.length}/${strangers.length})`);
   ok(Game.topic2Asks(locals[0]).some(a => a.id === 'ask:where'), "the 'where' topic is in the generated topic list");

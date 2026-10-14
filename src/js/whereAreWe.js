@@ -11,7 +11,7 @@
 //   - placeLearnFrom(vid) -> {tier, line}: their answer; raises placeKnown (never lowers)
 //   - whereLine() -> string: the day-header season line ('' when nothing is known)
 // rules:
-//   - unknown_at_start: newGame sets state.scholar.placeKnown = {region:0, season:0} (code: whereAreWe.js newGame wrap)
+//   - start_by_familiarity: newGame sets state.scholar.placeKnown from the player's own familiarity with the landing (placeTellTier: local 2, visitor 1, stranger 0), same rule as villagers (code: whereAreWe.js newGame wrap)
 //   - old_saves_known: a save without placeKnown reads as 2/2, nobody loses information mid-run (code: placeKnown)
 //   - doesnt_show: nothing known -> whereLine is '' (Steve: "If you don't know, it doesn't show.")
 //   - told_by_familiarity: local -> 2 (names region + season), visitor -> 1 (rough, may be one season off near a boundary), stranger -> no change (code: placeTellTier, placeLearnFrom)
@@ -231,7 +231,14 @@
     Game.newGame = function () {
       const r = _newGame.apply(this, arguments);
       try {
-        if (this.state && this.state.scholar) this.state.scholar.placeKnown = { region: 0, season: 0 };
+        // Parity (Steve: "treat them the same way"): the player knows the
+        // land as a villager from their origin would. Landing at home (local
+        // or native) you recognise it; a visitor has a rough idea; a stranger
+        // knows nothing and has to ask.
+        if (this.state && this.state.scholar) {
+          const t = this.placeTellTier(this.villagerId);
+          this.state.scholar.placeKnown = { region: t, season: t };
+        }
       } catch (e) { warn('newGame placeKnown', e); }
       return r;
     };
