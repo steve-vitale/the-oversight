@@ -586,11 +586,6 @@
     ];
     return T.filter(t => p >= t.min).map(t => t.text);
   },
-  plotAwareness(plot) {
-    // how many tells the target noticed → escape tuning
-    if (!this.isPlayer(plot.target)) return R() < 0.35 ? 2 : 0;
-    return plot.tells.length;
-  },
 
   // ---------- 5. THE AMBUSH ----------
   // Player target: interactive beat via conversation. NPC target: sim.
