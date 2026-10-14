@@ -6630,7 +6630,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (pAllyVids.length < 2) pAllyVids.push(rid);
         }
       } catch (e) {}
-      const rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids });
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): a lingering raider at
+      // Haven during an aid crisis is the crisis fight — route through
+      // aidFight so allies at the door join as real combatants (it scores
+      // the kill itself, channel 'aid-crisis', and resolves the crisis).
+      let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
+      if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought the ${mName}`;
       const killCorpse = () => {
         // the carcass stays where it died — same as your kills, same as the
@@ -6657,7 +6663,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
-        try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
+        if (!pViaAid) { try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
         try {
@@ -17665,7 +17671,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (wAllyVids.length < 2) wAllyVids.push(rid);
         }
       } catch (e) {}
-      const rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids });
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
+      // resolvePatrol — a lingering raider during an aid crisis is fought
+      // through aidFight, allies at the door in the fight from round one.
+      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
       const summary = this.fieldFightSummary(rec, name, mName);
       if (rec.outcome === 'alreadyDead') {
         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
@@ -17681,7 +17692,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
-        try { this.recordWaveKill(m.id, vid, 'wild', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
+        if (!wViaAid) { try { this.recordWaveKill(m.id, vid, 'wild', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // CORPSE PERSISTS (break-it 2026-10-09): a villager's kill is a real
         // death — the carcass stays on the tile (lootable, rottable), the
         // same carcass your kill leaves. The old path evaporated the body:

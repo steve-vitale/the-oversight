@@ -648,8 +648,9 @@
       // fieldFight call path that never reached recordWaveKill (channel audit
       // scripts/test-wave-kill-channels-20261012.js) — the ledger,
       // villageSlain (beasttricks channel), and unlock beats never saw an
-      // aid-crisis kill. (aidFight is currently dormant — no production
-      // callers — so this is gap-closing, pacing-neutral by construction.)
+      // aid-crisis kill. (Callers: resolvePatrol / resolveWildMonsterEncounter
+      // in game.js route a LINGERING raider fight here while a crisis is
+      // open, and skip their own patrol/wild scoring — one kill, one score.)
       if (rec && rec.outcome === 'vKill') {
         try { this.recordWaveKill(mdef && mdef.id, vid, 'aid-crisis', this.trickSummary ? this.trickSummary(rec) : null); } catch (e2) {}
       }
