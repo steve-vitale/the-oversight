@@ -187,9 +187,11 @@ function realFlee(Game, ctx, st, f, p) {
   try { dir = C.chooseFleeDir(Game, Game.map.px, Game.map.py); } catch (e) { note(ctx, 'chooseFleeDir: ' + e.message); }
   if (!dir) { bump(ctx, 'capFleeHeld'); st.fleeing = false; return false; } // at haven: hold ground
   if (!st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); }
-  const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? 8 : p.mx;
-  const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? 8 : p.my;
-  const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === 8) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === 8)); };
+  let gmax = 8;
+  try { gmax = Game.tbGridMax ? Game.tbGridMax() : 8; } catch (e) { gmax = 8; } // titan fights are 12x12
+  const tx = dir.dx < 0 ? 0 : dir.dx > 0 ? gmax : p.mx;
+  const ty = dir.dy < 0 ? 0 : dir.dy > 0 ? gmax : p.my;
+  const onEdge = () => { const q = Game.tbFighter('p'); return q && ((dir.dx < 0 && q.mx === 0) || (dir.dx > 0 && q.mx === gmax) || (dir.dy < 0 && q.my === 0) || (dir.dy > 0 && q.my === gmax)); };
   if (!onEdge()) { if (stepToward(Game, p, tx, ty)) bump(ctx, 'capFleeSteps'); }
   if (!Game.tbfight || Game.tbfight.over) { bump(ctx, 'capFleeExits'); st.fleeing = false; return true; } // a door, mid-walk
   if (onEdge() && Game.tbIsPlayerTurn()) {
