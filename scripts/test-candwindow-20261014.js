@@ -67,12 +67,14 @@ async function rig(seed) {
 
 (async () => {
   console.log(`candwindow proof — ${ARMED ? 'ARMED (CANDWINDOW=1), expect GREEN' : 'PRISTINE (gate off), expect REAL RED'}`);
-  const mod = require('./policies/candwindow');
-  const { candwindow, _prePass } = mod;
+  let mod = null;
+  try { mod = require('./policies/candwindow'); } catch (e) { /* pristine: the layer is absent — real RED below */ }
+  const candwindow = (mod && mod.candwindow) || null;
+  const _prePass = (mod && mod._prePass) || null;
 
   // R1/R2 — the armed identity assertions. On pristine they FAIL (REAL RED:
   // the layer and its mechanism are absent); on armed they pass.
-  ok('R1-layer-present', candwindow.id === 'candwindow', 'id=' + candwindow.id);
+  ok('R1-layer-present', candwindow !== null && candwindow.id === 'candwindow', 'id=' + (candwindow && candwindow.id));
   ok('R2-prepass-present', typeof _prePass === 'function', 'typeof=' + typeof _prePass);
 
   if (!ARMED) {
