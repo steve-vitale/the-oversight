@@ -2,6 +2,8 @@
   {
     "description": "Stop bleeding, set bones, treat infection. Your hands remember the ER. Diagnose the sick at a glance; deepened, your care turns even the severe cases.",
     "id": "triage",
+    "role": "support",
+    "slotRole": "sustain",
     "modifiers": [
       {
         "target": "healing.amount",
@@ -26,6 +28,8 @@
   {
     "description": "Fine work under pressure. Dressing game, stitching wounds, tying snares \u2014 no shake.",
     "id": "steady_hands",
+    "role": "support",
+    "slotRole": "sustain",
     "modifiers": [
       {
         "target": "craft.success",
@@ -47,6 +51,8 @@
   {
     "description": "Read sign: tracks, scat, browse lines. You know what's been here and how long ago.",
     "id": "game_sense",
+    "role": "enabler",
+    "slotRole": "opener",
     "modifiers": [
       {
         "target": "hunt.find_chance",
@@ -96,6 +102,8 @@
   {
     "description": "One shot. You don't take the shot unless it's the shot.",
     "id": "patient_aim",
+    "role": "enabler",
+    "slotRole": "nuke",
     "modifiers": [
       {
         "target": "combat.strike_damage",
@@ -142,6 +150,8 @@
   {
     "description": "Break down game fast and clean. Less waste, more meat, usable parts.",
     "id": "field_dressing",
+    "role": "support",
+    "slotRole": "sustain",
     "modifiers": [
       {
         "target": "hunt.meat_yield",
@@ -179,6 +189,8 @@
   {
     "description": "You think in shelf life. Smoking, drying, salting \u2014 food that lasts is food that saves.",
     "id": "preservation_instinct",
+    "role": "support",
+    "slotRole": "sustain",
     "modifiers": [
       {
         "target": "food.spoilage_days",
@@ -200,6 +212,8 @@
   {
     "description": "Your gut handles what it shouldn't. A useful lie your body tells itself.",
     "id": "iron_stomach",
+    "role": "support",
+    "slotRole": "sustain",
     "actions": [
       {
         "context": "explore",
@@ -233,6 +247,8 @@
   {
     "description": "Move through woods like weather. Less noise, fewer surprises.",
     "id": "soft_step",
+    "role": "enabler",
+    "slotRole": "mobility",
     "modifiers": [
       {
         "target": "travel.encounter_chance",
@@ -255,6 +271,8 @@
   {
     "description": "Adrenaline hits and the world slows \u2014 you are harder to hit when it matters.",
     "id": "adrenaline_surge",
+    "role": "support",
+    "slotRole": "sustain",
     "modifiers": [
       {
         "target": "combat.dodge_chance",
@@ -276,6 +294,9 @@
   },
   {
     "id": "green_thumb",
+    "role": "enabler",
+    "slotRole": "wildcard",
+    "synergyHints": ["Cornucopia: the streak rewards the devoted.", "Green Whisper: they lean toward you. Lean back.", "Feast Engine: the harvest becomes the weapon."],
     "name": "Green Thumb, Literally",
     "description": "Your thumb is green. Not metaphorically. Foraging yields +50%, AND you can ask a plant what's nearby (once/day: reveals this tile's forage table).",
     "flavor": "The plants lean toward you. They're gossiping. You're learning to listen.",
@@ -306,6 +327,8 @@
   },
   {
     "id": "tracker",
+    "role": "enabler",
+    "slotRole": "opener",
     "name": "Tracker",
     "description": "Hunting success +30%. You read the ground.",
     "flavor": "You see the footprints! We only see feet!",
@@ -340,6 +363,8 @@
   },
   {
     "id": "diplomat",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Diplomatic Incident",
     "description": "Trust builds 2x faster. You're TOO good though \u2014 once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
     "flavor": "Peace is just war with better catering. You cater beautifully.",
@@ -359,6 +384,8 @@
   },
   {
     "id": "camp_cook",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Secret Ingredient",
     "description": "Cooking uses half the water, +10% kcal. Once per day: add a Secret Ingredient (a random inventory item) \u2014 50% delicious (+morale), 50% educational.",
     "flavor": "The System has filed seventeen complaints about your cooking. It keeps eating anyway.",
@@ -378,6 +405,8 @@
   },
   {
     "id": "generous",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Generous Heart",
     "description": "Donating gives 2x trust.",
     "flavor": "Sharing! We love sharing! Have our moon!",
@@ -397,6 +426,8 @@
   },
   {
     "id": "scrounger",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Scrounger",
     "description": "Ruin looting finds +1 item.",
     "flavor": "You find the shiny things in the broken places!",
@@ -416,6 +447,8 @@
   },
   {
     "id": "squirrel_friend",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Squirrel Friend",
     "description": "Squirrels sometimes leave you nuts. (Random gifts.)",
     "flavor": "The tiny tree-people like you! They pay rent in acorns!",
@@ -441,6 +474,8 @@
   },
   {
     "id": "rain_dancer",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Rain Dancer",
     "description": "When it rains, +1L water free. (You dance. It works.)",
     "flavor": "You wiggle and the sky cries! We tried wiggling! Nothing happened!",
@@ -466,6 +501,8 @@
   },
   {
     "id": "loud_chewer",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Loud Chewer",
     "description": "Eating is 2x louder (monsters hear you). But +5 morale.",
     "flavor": "CRONCH CRONCH! We love the cronch! The monsters love it too! Oops!",
@@ -491,6 +528,8 @@
   },
   {
     "id": "hoarder",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Hoarder",
     "description": "+10kg carry, but villagers trust you 20% less. (They notice.)",
     "flavor": "You keep the things! ALL the things! We... are concerned! But impressed!",
@@ -516,6 +555,8 @@
   },
   {
     "id": "thief",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Light Fingers",
     "description": "Steal from pantry without trust loss (50%). If caught, -20 trust.",
     "flavor": "The food disappears! Magic! (It's not magic. We saw you.)",
@@ -550,6 +591,8 @@
   },
   {
     "id": "photosynthesis",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Photosynthesis",
     "description": "Gain 100 kcal per daylight day part. (You're becoming a plant.)",
     "flavor": "YOU EAT THE SUN! We eat... we don't eat! But WOW!",
@@ -569,6 +612,8 @@
   },
   {
     "id": "second_wind",
+    "role": "support",
+    "slotRole": "sustain",
     "actions": [
       {
         "id": "refuse_death",
@@ -598,6 +643,8 @@
   },
   {
     "id": "lucky_rock",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Lucky Rock",
     "description": "Your lucky rock. The System finds your faith adorable and helps a little: +5% on the hunt. (It\u2019s not the rock. It\u2019s you believing in the rock.)",
     "flavor": "The rock! It is lucky! We checked! It's... a rock! But YOU believe! Belief is power! (We added 4%.)",
@@ -623,6 +670,8 @@
   },
   {
     "id": "bird_whisperer",
+    "role": "support",
+    "slotRole": "opener",
     "name": "Bird Whisperer",
     "description": "Birds land on you. They also warn you: +20% chance to detect monsters before they detect you. (The birds see everything.)",
     "flavor": "The sky-flappers are your spies! They tell you secrets! Mostly about breadcrumbs! But sometimes about TEETH!",
@@ -648,6 +697,8 @@
   },
   {
     "id": "chitin_skin",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Chitin Skin",
     "description": "Your skin hardens into plates. +30 armor, but -5 trust (you look wrong).",
     "flavor": "You are becoming the beetle! The beetle is strong! The beetle is... lonely! But strong!",
@@ -678,6 +729,8 @@
   },
   {
     "id": "extra_stomach",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Extra Stomach",
     "description": "You grow a second stomach. Bank twice the calories \u2014 but the hunger doubles too. (It's always hungry.)",
     "flavor": "Two tummies! Twice the hunger! Twice the... we didn't think this through! But WOW!",
@@ -703,6 +756,8 @@
   },
   {
     "id": "deep_reserves",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Deep Reserves",
     "description": "Your body learns to bank calories like a war chest. Bank 5\u00d7 the energy. The furnace is always lit \u2014 but it must be FED.",
     "flavor": "FIVE stomachs?! We lost count! The furnace DEMANDS tribute! FEED IT! (It's worth it. Probably.)",
@@ -728,6 +783,8 @@
   },
   {
     "id": "eyes_in_back",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Eyes in the Back",
     "description": "You see behind you. Can't be ambushed. But you see... things. (-5 morale when alone.)",
     "flavor": "You see the behind! We see the... we don't want to see the behind! Too many teeth!",
@@ -747,6 +804,8 @@
   },
   {
     "id": "molt",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Molt",
     "description": "Once per week, shed your skin. Heal to full, but lose all equipped gear (it's stuck in the old skin).",
     "flavor": "You peel! Like the fruit! The new you is shiny! The old you is... leave it! Run!",
@@ -781,6 +840,9 @@
   },
   {
     "id": "blood_magic",
+    "role": "enabler",
+    "slotRole": "nuke",
+    "synergyHints": ["Feast Engine: eat yourself to feed the furnace.", "Iron Gut: waste nothing. Not even yourself."],
     "name": "Blood Price",
     "description": "Spend 10 HP to gain 500 kcal. Your body eats itself. Twice per day part. The cut is missing mass \u2014 max HP drops while it\u2019s open, knits ~10 a night, and the body refuses past 50.",
     "flavor": "You burn the red! The red becomes... lunch?! We are CONCERNED! (We checked the math twice. The math is as confused as we are.)",
@@ -804,6 +866,9 @@
   },
   {
     "id": "rage",
+    "role": "enabler",
+    "slotRole": "nuke",
+    "synergyHints": ["Blood Frenzy: the red builds.", "Haymaker: spend it all.", "Trade of Blows: currency of pain."],
     "actions": [
       {
         "id": "unleash_rage",
@@ -835,6 +900,8 @@
   },
   {
     "id": "cannibal_frenzy",
+    "role": "enabler",
+    "slotRole": "sustain",
     "name": "Red Hunger",
     "description": "Red Hunger: near a person-corpse, butcher and feed on the spot \u2014 through the real pipeline. Trauma, corruption, witnesses, prions: all the usual costs apply.",
     "flavor": "The hunger is LOUD! It doesn't conjure food anymore \u2014 it just knows what the dead are for, and it isn't patient about it.",
@@ -858,6 +925,8 @@
   },
   {
     "id": "pact",
+    "role": "wildcard",
+    "slotRole": "wildcard",
     "name": "Pact with Static",
     "description": "Gain a random overpowered ability, but lose a random utility ability. (The Static gives. The Static takes.)",
     "flavor": "You whisper to the between! It answers! It ALWAYS answers! That's the problem!",
@@ -877,6 +946,9 @@
   },
   {
     "id": "scream_cheese",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Impaling Scream: stun them, then the spear finds the opening.", "Haymaker: they can't dodge what they can't hear coming.", "Shoulder Check: shove the stunned."],
     "name": "Scream Cheese",
     "description": "You can scream so loud it curdles milk (and stuns monsters for 1 round). 1/day.",
     "flavor": "AAAAA! The milk is cheese now! The monsters are dizzy! Your throat hurts! Worth it!",
@@ -912,6 +984,9 @@
   },
   {
     "id": "pocket_sand",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Shattering Blow: blind them, then the machete finds the seams.", "Come Get Some: blind it, then call it to you.", "Ambush: they can't see the ground you picked."],
     "name": "Pocket Sand",
     "description": "Throw sand in eyes. Blinds for 2 rounds. (You always have sand. Don't ask where.)",
     "flavor": "SAND! In the eyes! It's in YOUR pocket! How?! We don't know! But it's there!",
@@ -946,6 +1021,8 @@
   },
   {
     "id": "taste_vision",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Taste Vision",
     "description": "You can taste colors. (Reveals hidden loot: +30% find chance in ruins. The walls taste like secrets.)",
     "flavor": "The red tastes like... copper! The blue tastes like... hiding places! Lick the walls!",
@@ -972,6 +1049,8 @@
   },
   {
     "id": "poisoner",
+    "role": "enabler",
+    "slotRole": "opener",
     "name": "Tainted Bait",
     "description": "Your bait is tainted \u2014 traps catch 50% more. (The poison\u2019s in the bait, not your hands. Mostly.)",
     "flavor": "The bait is spicy now! The spicy is... death! For TRAPS! We are worried about you! But impressed!",
@@ -997,6 +1076,8 @@
   },
   {
     "id": "fear_aura",
+    "role": "enabler",
+    "slotRole": "control",
     "actions": [
       {
         "context": "combat",
@@ -1042,6 +1123,8 @@
   },
   {
     "id": "grave_robber",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Grave Robber",
     "description": "You can loot the dead (villagers, monsters). Good gear. -15 trust if seen.",
     "flavor": "The dead don't need the shiny! You need the shiny! The living... disagree!",
@@ -1076,6 +1159,8 @@
   },
   {
     "id": "time_skip",
+    "role": "enabler",
+    "slotRole": "mobility",
     "name": "Time Skip",
     "description": "Skip to the next day part instantly. Time passes \u2014 food spoils forward, calories burn, the world moves without you. 1/day.",
     "flavor": "You JUMP the time! Hours go missing! Your food is OLDER! Your belly is EMPTIER! The time had to come from SOMEWHERE! We took notes! The notes make SENSE this time!",
@@ -1099,6 +1184,8 @@
   },
   {
     "id": "hive_mind",
+    "role": "enabler",
+    "slotRole": "opener",
     "name": "Hive Mind",
     "description": "The hive opens: every tile on the map lies revealed \u2014 terrain-sense, never detail; walk a tile to truly know it. They feel you watching. (-10 trust.)",
     "flavor": "All the brains touch! It's cozy! It's invasive! It's... both! We love it!",
@@ -1118,6 +1205,8 @@
   },
   {
     "id": "cold_blooded",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Cold-Blooded",
     "description": "You need 20% less food in cold weather. Your body budgets like an accountant.",
     "flavor": "You are the lizard! Slow! Efficient! We envy your heating bill! (You don't have one!)",
@@ -1137,6 +1226,8 @@
   },
   {
     "id": "echo_location",
+    "role": "enabler",
+    "slotRole": "opener",
     "name": "Echo Location",
     "description": "Clap once: you sense the shape of the land \u2014 reveals the 3x3 world-map tiles around you. 1/day.",
     "flavor": "CLAP! The sound comes back with a MAP! You are the bat! (The bat is jealous!)",
@@ -1160,6 +1251,8 @@
   },
   {
     "id": "compost_king",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Compost King",
     "description": "Spoiled food becomes fertilizer: bury it, and forage yields +10% on that tile next season.",
     "flavor": "The rot becomes the GROWTH! Nothing is wasted! We love this one! (We eat... nothing! But still!)",
@@ -1179,6 +1272,8 @@
   },
   {
     "id": "beard_moss",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Beard Moss",
     "description": "Moss grows in your beard/hair. You always have tinder. (Looks great, honestly.)",
     "flavor": "You are the WALKING FOREST! The moss chose YOU! Fashion AND function!",
@@ -1198,6 +1293,8 @@
   },
   {
     "id": "dowsing",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Dowsing",
     "description": "A forked stick twitches toward water. Works 70% of the time. Nobody knows why. Including us.",
     "flavor": "The stick KNOWS! We tested it! We don't understand it! Science is hard!",
@@ -1217,6 +1314,8 @@
   },
   {
     "id": "cornered_rat",
+    "role": "payoff",
+    "slotRole": "nuke",
     "name": "Cornered Rat",
     "description": "When surrounded (3+ enemies), +100% damage and +50% dodge. Desperation is a weapon.",
     "flavor": "BACK AGAINST THE WALL! Teeth BARE! We are cheering SO loud right now!",
@@ -1236,6 +1335,9 @@
   },
   {
     "id": "dead_aim",
+    "role": "payoff",
+    "slotRole": "nuke",
+    "synergyHints": ["Patient Aim: the shot you don't take... then take.", "Trophy Room: mark them, then the first shot is a promise.", "Blood Trail: they don't get away. Not from this."],
     "name": "Dead Aim",
     "description": "First attack in any combat is a guaranteed critical if you waited 1 round. Patience, then thunder.",
     "flavor": "You WAIT! You BREATHE! Then \u2014 BOOM! The audience gasps! We gasped!",
@@ -1270,6 +1372,8 @@
   },
   {
     "id": "second_skin",
+    "role": "support",
+    "slotRole": "mobility",
     "name": "Travel Light",
     "description": "You wear the world like weather \u2014 armor, pack, all of it. Nothing you carry slows you down: every mile costs 15% less.",
     "flavor": "You packed WHAT?! Where did it all GO?! So light! So fast! We can barely keep UP!",
@@ -1295,6 +1399,8 @@
   },
   {
     "id": "open_book",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Open Book",
     "description": "Villagers tell you their real trust level and one secret fear. You just... know how to ask.",
     "flavor": "You ASK and they TELL! What is this power?! We want to learn it! (We can't. We tried.)",
@@ -1314,6 +1420,8 @@
   },
   {
     "id": "mediator",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Mediator",
     "description": "You can resolve villager disputes (drama events) with a talk check. Peace is a skill.",
     "flavor": "You make the angry people UN-angry! With WORDS! We don't understand! But WOW!",
@@ -1355,6 +1463,8 @@
   },
   {
     "id": "leech",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Leech",
     "description": "When an ally takes damage near you, you can take half of it. They owe you. (They know it.)",
     "flavor": "You DRINK their pain! Not literally! (Unless you want to! We won't judge!)",
@@ -1389,6 +1499,8 @@
   },
   {
     "id": "scarecrow",
+    "role": "enabler",
+    "slotRole": "opener",
     "name": "Scarecrow",
     "description": "You can stage a fake injury to lure monsters into traps. They fall for it. Every time.",
     "flavor": "You PRETEND to be hurt! They come! TRAPPED! Devious! We LOVE it! (We're a little scared of you!)",
@@ -1429,6 +1541,8 @@
   },
   {
     "id": "hollow_bones",
+    "role": "support",
+    "slotRole": "mobility",
     "name": "Hollow Bones",
     "description": "You weigh 30% less for carry calculations. Your bones are birdlike. (Don't think about it.)",
     "flavor": "Your bones are HOLLOW! Like the bird! You are light! Do NOT think about why!",
@@ -1454,6 +1568,8 @@
   },
   {
     "id": "third_eye",
+    "role": "support",
+    "slotRole": "opener",
     "name": "Third Eye",
     "description": "A small eye opens on your forehead when danger is near. +30% ambush detection. It weeps when you lie.",
     "flavor": "ANOTHER EYE! It sees the danger! It also sees your LIES! (We see them too! We don't mind!)",
@@ -1479,6 +1595,8 @@
   },
   {
     "id": "phoenix_clause",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Phoenix Clause",
     "description": "When you would die: the clause burns a RANDOM living villager of yours \u2014 body and all, no corpse, only ash \u2014 and you emerge from their ashes wherever they were, at 1 HP. The fire cannot take another bearer: only bearers left, and your death sticks. No villagers left, or no village, and your death sticks. Their gear survives the fire where they fell \u2014 it belongs to the village now, not to you. Pocket it and the village will judge you; bring it home to Haven and they will honor you. The devoted may offer themselves willingly; the resentful may fight the pull. Use it twice and the village will judge you: earn their love or be exiled. The cost is plain. The horror is knowing and doing it anyway.",
     "flavor": "You DIE! Then \u2014 KABOOM! \u2014 you're BACK! ...in someone else's ashes. The audience LOVED it! The ratings! THE RATINGS! (Someone's family is screaming. The ratings don't cover that.)",
@@ -1498,6 +1616,8 @@
   },
   {
     "id": "symbiote",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Symbiote",
     "description": "A small alien organism lives in your gut. It eats 200 kcal/day. Passively: warns you of poisoned food before you eat, purifies 1L of risky water per day on its own.",
     "flavor": "You have a FRIEND inside! It eats your food! It cleans your water! It's... rent! Symbiosis! (Don't think about what happens if you starve it!)",
@@ -1517,6 +1637,8 @@
   },
   {
     "id": "survivor",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Scar Tissue",
     "tier": "utility",
     "pool": "fallback",
@@ -1542,6 +1664,8 @@
   },
   {
     "id": "wanderer",
+    "role": "support",
+    "slotRole": "mobility",
     "name": "Wanderlust",
     "tier": "utility",
     "pool": "fallback",
@@ -1567,6 +1691,8 @@
   },
   {
     "id": "swimmer",
+    "role": "enabler",
+    "slotRole": "mobility",
     "name": "Swimmer",
     "description": "Cross water freely. Rivers are roads to you.",
     "flavor": "WE NEVER THOUGHT OF SWIMMING. The water is just... there? And you go IN it?",
@@ -1586,6 +1712,8 @@
   },
   {
     "id": "night_eyes",
+    "role": "support",
+    "slotRole": "opener",
     "name": "Night Eyes",
     "description": "The dark never bothered you. You see shapes in it that others miss \u2014 and it never hears you coming.",
     "flavor": "THE DARK IS JUST... SLOW LIGHT? You see it anyway. Rude. We were going to sell that.",
@@ -1605,6 +1733,8 @@
   },
   {
     "id": "translator",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Translator",
     "description": "The System logs every foreign word you hear and replays them on demand \u2014 a memory aid, not a shortcut. Novel speech stays novel until YOU learn it. (Deep integration may wake it up further.)",
     "flavor": "OH WE LOVE THIS ONE! Every word! Logged! Replayable! Like a little notebook! In your HEAD! The full translating part comes later. Probably. We're working on it!",
@@ -1621,6 +1751,8 @@
   },
   {
     "id": "field_medicine",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Field Medicine",
     "pool": "care",
     "description": "Clean wounds, poultice infections, set bones in the field. Heal 20 HP (once per day part). Treat wound sickness; deepened, you can work on others and read infection unnamed. Real wounds only \u2014 Blood Price cuts are missing mass and knit ~10 a night.",
@@ -1641,6 +1773,8 @@
   },
   {
     "id": "herbal_remedy",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Herbal Remedy",
     "pool": "care",
     "description": "You know which plants draw fever out. Treat the sick \u2014 cure some sicknesses outright, ease others; the proud ones need a name first. Master it and they won't.",
@@ -1659,6 +1793,8 @@
   },
   {
     "id": "purify",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Purify",
     "pool": "care",
     "description": "The System\u2019s clean touch, borrowed: poison unravels at your gesture. Not charcoal and time \u2014 intention, from something that never needed to eat.",
@@ -1681,6 +1817,8 @@
   },
   {
     "id": "brawler_instinct",
+    "role": "enabler",
+    "slotRole": "opener",
     "actions": [
       {
         "context": "combat",
@@ -1709,6 +1847,8 @@
   },
   {
     "id": "adrenaline_control",
+    "role": "payoff",
+    "slotRole": "nuke",
     "name": "Adrenaline Control",
     "pool": "combat",
     "description": "Your heart hammers \u2014 and every hammering beat lands 30% harder. Fear is fuel.",
@@ -1734,6 +1874,8 @@
   },
   {
     "id": "intimidating_presence",
+    "role": "enabler",
+    "slotRole": "control",
     "actions": [
       {
         "context": "combat",
@@ -1776,6 +1918,8 @@
   },
   {
     "id": "silver_tongue",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Silver Tongue",
     "pool": "social",
     "description": "Words are tools. You've got a whole workshop.",
@@ -1797,6 +1941,8 @@
   },
   {
     "id": "gossip_network",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Gossip Network",
     "pool": "social",
     "description": "You hear things. People tell you things. You remember who told you what.",
@@ -1812,6 +1958,8 @@
   },
   {
     "id": "peacemaker",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Peacemaker",
     "pool": "social",
     "description": "You can walk into a fight and walk out with friends. It's a gift.",
@@ -1851,6 +1999,8 @@
   },
   {
     "id": "pathfinder",
+    "role": "support",
+    "slotRole": "mobility",
     "name": "Tireless Stride",
     "pool": "exploration",
     "description": "You walk like water downhill \u2014 no wasted steps, no wasted breath. Every mile costs 15% less.",
@@ -1872,6 +2022,8 @@
   },
   {
     "id": "eagle_eye",
+    "role": "support",
+    "slotRole": "opener",
     "name": "Eagle Eye",
     "pool": "exploration",
     "description": "You see the ruin on the horizon. The smoke. The movement. Before anyone else. Distant finds come easier.",
@@ -1893,6 +2045,8 @@
   },
   {
     "id": "lie_detector",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Lie Detector",
     "pool": "investigation",
     "description": "The mouth says one thing. The hands say another. You watch the hands.",
@@ -1917,6 +2071,8 @@
   },
   {
     "id": "evidence_board",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Evidence Board",
     "pool": "investigation",
     "description": "You keep track. Who said what, when. The contradictions surface.",
@@ -1932,6 +2088,8 @@
   },
   {
     "id": "pyrokinesis",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Pyrokinesis",
     "description": "You coax flame from stubborn fuel. Fires you tend burn hotter and catch easier.",
     "flavor": "The System filed this under 'thermodynamic enthusiasm.' You just call it warm hands.",
@@ -1962,6 +2120,9 @@
   },
   {
     "id": "stalk",
+    "role": "enabler",
+    "slotRole": "opener",
+    "synergyHints": ["Ambush: the ground is picked. Now wait.", "Nowhere Man: move unseen, build the streak.", "Soft Step: weather doesn't get hit."],
     "name": "Stalk",
     "description": "Move unseen. Close distance without being noticed.",
     "flavor": "You're not invisible. You're just not interesting enough to look at twice.",
@@ -2001,6 +2162,9 @@
   },
   {
     "id": "blood_trail",
+    "role": "enabler",
+    "slotRole": "opener",
+    "synergyHints": ["Trophy Room: the marked don't get away.", "Game Sense: read the sign, follow the blood.", "Dead Aim: the first shot is a promise kept."],
     "name": "Blood Trail",
     "description": "You can follow a wounded animal through anything. It doesn't get away.",
     "flavor": "The blood tells you everything: how deep, how fast, how long it has.",
@@ -2033,6 +2197,9 @@
   },
   {
     "id": "ambush",
+    "role": "enabler",
+    "slotRole": "opener",
+    "synergyHints": ["Stalk: unseen to the ground you picked.", "Scarecrow: lure them to your ground.", "Dead Aim: wait, then end it."],
     "name": "Ambush",
     "description": "Pick your ground. Wait. Strike when it's too late for them.",
     "flavor": "Patience is a weapon. The best trap is the one they walk into.",
@@ -2080,6 +2247,8 @@
   },
   {
     "id": "animal_ken",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "name": "Animal Ken",
     "description": "You understand animals. Not talk to them \u2014 understand them.",
     "flavor": "It's not magic. It's just paying attention for ten thousand hours.",
@@ -2121,6 +2290,8 @@
   },
   {
     "id": "water_breathing",
+    "role": "enabler",
+    "slotRole": "mobility",
     "name": "Water Breathing",
     "description": "You can breathe underwater. Gills, magic, or just really good lungs \u2014 the System doesn't explain.",
     "flavor": "The System filed this under 'respiratory flexibility.' You just call it not drowning.",
@@ -2152,6 +2323,8 @@
   },
   {
     "id": "trade_of_blows",
+    "role": "payoff",
+    "slotRole": "nuke",
     "name": "Trade of Blows",
     "description": "Trade damage like currency. You can afford the exchange rate.",
     "flavor": "Every hit you take is a hit you're about to give back with interest.",
@@ -2199,6 +2372,8 @@
   },
   {
     "id": "unbreakable",
+    "role": "support",
+    "slotRole": "sustain",
     "name": "Unbreakable",
     "description": "You don't go down. Not today. Not ever, if you have anything to say about it.",
     "flavor": "The System filed a complaint about your pain receptors. You filed it under 'suggestions.'",
@@ -2240,6 +2415,9 @@
   },
   {
     "id": "war_cry",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Hunting Spear: three hits sings the cry free.", "Intimidating Presence: some reconsider. Some run.", "Crowd Favorite: the audience chants with you."],
     "name": "War Cry",
     "description": "A sound from somewhere older than language. Things that hear it reconsider.",
     "flavor": "It's not the volume. It's the promise.",
@@ -2287,6 +2465,9 @@
   },
   {
     "id": "haymaker",
+    "role": "enabler",
+    "slotRole": "nuke",
+    "synergyHints": ["Rage: start angry, end everything.", "Blood Frenzy: the chain's finale.", "Dead Aim: patience, then thunder, then THIS."],
     "name": "Haymaker",
     "description": "One big swing. Everything you have, all at once. Subtlety is for people with time.",
     "flavor": "The windup is the telegraph. The landing is the punctuation.",
@@ -2325,6 +2506,8 @@
   {
     "description": "Your nose changed days ago. Water has a smell now \u2014 and so does fear. You haven\u2019t told anyone. People look at you funny when you find things by smell.",
     "id": "bloodhound",
+    "role": "support",
+    "slotRole": "opener",
     "knackOrigins": [
       "tracking"
     ],
@@ -2350,6 +2533,8 @@
   {
     "description": "Animals started going quiet around you this week. Not tame \u2014 listening. Like they\u2019re waiting to see what you\u2019ll do.",
     "id": "beast_calm",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "knackOrigins": [
       "husbandry"
     ],
@@ -2375,6 +2560,8 @@
   {
     "description": "Days ago the plants started leaning toward you. You know which ones are thirsty, which are sick, which are hiding something good. You don\u2019t know how you know.",
     "id": "green_whisper",
+    "role": "enabler",
+    "slotRole": "wildcard",
     "knackOrigins": [
       "food"
     ],
@@ -2400,6 +2587,8 @@
   {
     "description": "Your stomach changed this week. Things that should lay you flat barely slow you down now. You noticed. You haven\u2019t told anyone.",
     "id": "iron_gut",
+    "role": "support",
+    "slotRole": "sustain",
     "knackOrigins": [
       "butchery",
       "canning"
@@ -2426,6 +2615,8 @@
   {
     "description": "The dark stopped bothering you days ago. You see shapes in it that others miss \u2014 movement, mostly. You\u2019re always watching the movement now.",
     "id": "night_eyes",
+    "role": "support",
+    "slotRole": "opener",
     "knackOrigins": [
       "trapping",
       "fishing"
@@ -2452,6 +2643,8 @@
   {
     "description": "Your feet learned something this week. Even in places you\u2019ve never been, they find the cheap miles on their own. You don\u2019t think about it. You don\u2019t have to.",
     "id": "pathfinder",
+    "role": "support",
+    "slotRole": "mobility",
     "knackOrigins": [
       "navigation"
     ],
@@ -2477,6 +2670,8 @@
   {
     "description": "Your hands stopped shaking this week. Not when you\u2019re scared, not when it matters. They just do the work now.",
     "id": "still_hands",
+    "role": "support",
+    "slotRole": "wildcard",
     "knackOrigins": [
       "mending",
       "sewing"
@@ -2503,6 +2698,8 @@
   {
     "description": "You feel weather coming in your bones now \u2014 a day out. It started this week. You\u2019re always ready, every vessel out. Catch 50% more rainwater.",
     "id": "storm_ear",
+    "role": "support",
+    "slotRole": "opener",
     "knackOrigins": [
       "forecast"
     ],
@@ -2528,6 +2725,8 @@
   {
     "description": "Wounds close a little faster when your hands are on them now. Not miracles \u2014 just faster. It started days ago. You don\u2019t know why. You\u2019ve stopped asking.",
     "id": "the_touch",
+    "role": "support",
+    "slotRole": "sustain",
     "knackOrigins": [
       "medicinal"
     ],
@@ -2554,6 +2753,8 @@
     "description": "The System installs your fusion pellet \u2014 properly, inside you. You never need to eat again: the pellet covers your metabolism, and your strikes and abilities burn with a steady reactor fire (1.25x, always on). One reactor per world, and it never comes out: not unslotted, not un-taught, not surrendered. Death is the only uninstall. But the hunger is gone, and with it the joy: food gives you no morale, feasts give you no comfort, and your fire never burns hotter than this. A cold spot at every table.",
     "flavor": "Pop it in, never chew again! We FIXED eating! One per world, first come first served, no take-backsies! ...Why are you looking at us like that? We FIXED it!",
     "id": "fusion_reactor",
+    "role": "support",
+    "slotRole": "sustain",
     "metabolic": {
       "daily": 0
     },
@@ -2574,6 +2775,9 @@
   },
   {
     "id": "draw_fire",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Retribution: their hits charge YOUR weapon.", "Bodyguard: step into it. Store it. Return it.", "Rally: when it's lost, be the wall."],
     "name": "Draw Fire",
     "description": "In the wilds, beside your people, you make yourself the problem. Shout, wave, bleed loudly \u2014 the beast's eye stays on you and off them. Monsters focus you instead of your allies.",
     "flavor": "Me. I'm the problem. Come and take.",
@@ -2598,6 +2802,9 @@
   },
   {
     "id": "bodyguard",
+    "role": "support",
+    "slotRole": "sustain",
+    "synergyHints": ["Leech: take half. They owe you.", "Retribution: their blow is your ammunition.", "Battlefield Grace: three touches and they're back."],
     "name": "Bodyguard",
     "description": "In the wilds, when a blow is falling on someone beside you, you step into it. Once per fight, an attack meant for your ally lands on you instead. It hurts. That's the job.",
     "flavor": "Not them.",
@@ -2623,6 +2830,9 @@
   },
   {
     "id": "shield_wall",
+    "role": "support",
+    "slotRole": "sustain",
+    "synergyHints": ["Retribution: brace as one, charge as one.", "Bodyguard: the wall has a door.", "Draw Fire: the wall IS the problem."],
     "name": "Shield Wall",
     "description": "Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer \u2014 the line holds together or not at all.",
     "flavor": "Hold the line.",
@@ -2647,6 +2857,8 @@
   },
   {
     "id": "rally",
+    "role": "support",
+    "slotRole": "wildcard",
     "name": "Rally",
     "description": "In the wilds, when the fight is lost and running would be sane, you look at the people standing with you and you do not run. Once per fight, when the trajectory turns hopeless and an ally stands beside you, you hold the line instead of fleeing. Not volume \u2014 a promise kept.",
     "flavor": "For them.",
@@ -2670,6 +2882,8 @@
   },
   {
     "id": "static_toss",
+    "role": "enabler",
+    "slotRole": "nuke",
     "name": "Static Toss",
     "description": "You ball up the static in your palm and THROW it. It was going to go somewhere anyway. (Ranged: 3 tiles, energy damage, once per fight.)",
     "flavor": "The System applauds your commitment to throwing problems at other problems.",
@@ -2698,6 +2912,8 @@
   },
   {
     "id": "cheese_wheel",
+    "role": "enabler",
+    "slotRole": "nuke",
     "name": "Screaming Cheese Wheel",
     "description": "You hurl a wheel of screaming cheese. It homes in on the loudest thing in the fight \u2014 usually the monster. (Ranged: can't miss, 1/day.)",
     "flavor": "The cheese screams the whole way there. It has range anxiety.",
@@ -2726,6 +2942,8 @@
   },
   {
     "id": "bird_strike",
+    "role": "enabler",
+    "slotRole": "nuke",
     "name": "Bird Strike",
     "description": "You point at the sky. The birds have been waiting for this. (Ranged: birds dive-bomb a monster for 3 rounds.)",
     "flavor": "The birds were already circling. They just needed permission.",
@@ -2754,6 +2972,8 @@
   },
   {
     "id": "tripwire",
+    "role": "enabler",
+    "slotRole": "control",
     "name": "Tripwire",
     "description": "You string a wire at ankle height. The next monster that moves eats dirt \u2014 prone, stunned, and embarrassed. (Sets up the party.)",
     "flavor": "The wire is almost invisible. The monster's dignity is not.",
@@ -2781,6 +3001,8 @@
   },
   {
     "id": "turncoat",
+    "role": "enabler",
+    "slotRole": "control",
     "name": "Turncoat",
     "description": "You explain to them, very reasonably, why the OTHER monster is the real problem. For 2 rounds, they believe you. (Monsters fight each other.)",
     "flavor": "Your argument is airtight. It helps that they're monsters.",
@@ -2809,6 +3031,8 @@
   },
   {
     "id": "freeze_tag",
+    "role": "enabler",
+    "slotRole": "control",
     "name": "Freeze Tag",
     "description": "You touch it and yell 'YOU'RE IT!' It can't move until someone tags it back \u2014 and nobody's playing. (Root 2 rounds.)",
     "flavor": "The rules are clear. The monster didn't agree to them, but the rules are clear.",
@@ -2837,6 +3061,9 @@
   },
   {
     "id": "shoulder_check",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Machete: with the blade, your shove PULLS.", "Hogtie: shove them prone, then tie them.", "Blood Frenzy: the hit counts. Keep hitting."],
     "name": "Shoulder Check",
     "description": "You know exactly where to hit something with your shoulder so it goes where YOU want. Shove a controlled monster 2 tiles \u2014 into its friends, away from yours.",
     "flavor": "It's all in the shoulder. The System watched a bouncer once and took NOTES.",
@@ -2871,6 +3098,9 @@
   },
   {
     "id": "hogtie",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Phase Blade: bind without rope.", "Turncoat: tie one, convince the other.", "Retribution: buy time to charge."],
     "name": "Hogtie",
     "description": "Rope, a dazed monster, and thirty seconds of not being eaten. Hogtie a controlled monster: rooted 3 rounds (diminishing), and it can't wind up telegraphs. It can still lash out \u2014 the rope holds position, not malice.",
     "flavor": "The System is VERY proud of this one. It watched a rodeo. It has opinions about knots now.",
@@ -2905,6 +3135,9 @@
   },
   {
     "id": "come_get_some",
+    "role": "enabler",
+    "slotRole": "control",
+    "synergyHints": ["Pocket Sand: blind it first, then call it.", "Tripwire: call them into the wire.", "Draw Fire: you're already the problem."],
     "name": "Come Get Some",
     "description": "Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it.",
     "flavor": "It's not the words. It's the TONE. The System has been practicing.",
@@ -2936,6 +3169,259 @@
     "deepening": {
       "2": "You can goad a statue into flinching.",
       "3": "Your taunts have a return address."
+    }
+  },
+  {
+    "id": "blood_frenzy",
+    "name": "Blood Frenzy",
+    "description": "Each consecutive successful strike in a fight: +10% damage, stacking to +80%. Miss, or take a non-attack turn, and the frenzy breaks. The red doesn't come down \u2014 it builds.",
+    "flavor": "OH. OH NO. THE AUDIENCE IS COUNTING. THREE! FOUR! DON'T YOU DARE MISS!",
+    "paths": [
+      "brawler"
+    ],
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Rage: start the chain angry.",
+      "Haymaker: end the chain with everything.",
+      "Pocket Sand: they can't dodge what they can't see."
+    ],
+    "deepening": {
+      "2": "Stacks to +100%.",
+      "3": "Missing no longer fully breaks it \u2014 halves instead."
+    }
+  },
+  {
+    "id": "retribution",
+    "name": "Retribution",
+    "description": "Store 50% of all damage you block or absorb. UNLEASH (active): release it as a shockwave dealing stored damage to all adjacent enemies. The tank's answer to 'why hit the wall?'",
+    "flavor": "YOU ATE THEIR BEST SHOT. NOW SERVE IT BACK. THE AUDIENCE DEMANDS RECIPROCITY.",
+    "paths": [
+      "shieldbearer"
+    ],
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "actions": [
+      {
+        "id": "unleash",
+        "context": "combat",
+        "name": "Unleash Retribution",
+        "cost": {
+          "turn": true,
+          "kcal": 30
+        },
+        "effect": "Release stored damage as a shockwave to all adjacent enemies."
+      }
+    ],
+    "synergyHints": [
+      "Shield Wall: brace as one, charge as one.",
+      "Bodyguard: their hits charge YOUR weapon.",
+      "Draw Fire: make yourself the problem, then answer it."
+    ],
+    "deepening": {
+      "2": "Stores 75%.",
+      "3": "Unleash also staggers."
+    }
+  },
+  {
+    "id": "trophy_room",
+    "name": "Trophy Room",
+    "description": "Once per day, mark a monster type you have killed. +50% damage against the marked type. The hunter's memory is a weapon.",
+    "flavor": "THE WALL OF HEADS GROWS. EACH ONE TEACHES THE NEXT ONE HOW TO DIE.",
+    "paths": [
+      "hunter"
+    ],
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "actions": [
+      {
+        "id": "mark",
+        "context": "camp",
+        "name": "Mark Trophy",
+        "cost": {
+          "time_min": 10
+        },
+        "effect": "Choose a slain monster type to mark for +50% damage today."
+      }
+    ],
+    "synergyHints": [
+      "Game Sense: know what's been here, then hunt it.",
+      "Blood Trail: the wounded don't get away. The marked don't either.",
+      "Dead Aim: the first shot is a promise."
+    ],
+    "deepening": {
+      "2": "+75% vs marked.",
+      "3": "Two marks per day."
+    }
+  },
+  {
+    "id": "feast_engine",
+    "name": "Feast Engine",
+    "description": "When at full health, excess healing converts to power: +2% damage per 1 HP of overheal, up to +50%. The body is a furnace. Feed it.",
+    "flavor": "FULL? FULL IS A STARTING POINT. THE EXCESS HAS TO GO SOMEWHERE. WE SUGGEST: OUTWARD.",
+    "paths": [
+      "survivalist"
+    ],
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Blood Magic: eat yourself to feed the engine. (We said it was a furnace.)",
+      "Iron Gut: waste nothing.",
+      "Molt: shed, heal full, ignite."
+    ],
+    "deepening": {
+      "2": "+3% per HP.",
+      "3": "Cap +75%."
+    }
+  },
+  {
+    "id": "battlefield_grace",
+    "name": "Battlefield Grace",
+    "description": "Heal the same ally 3 times in one fight: they gain an immediately usable free action. Care is tempo.",
+    "flavor": "THREE TOUCHES AND THEY'RE BACK ON THEIR FEET MID-SWING. THE AUDIENCE IS CRYING. WE'RE CRYING.",
+    "paths": [
+      "caregiver"
+    ],
+    "role": "payoff",
+    "slotRole": "sustain",
+    "tier": "overpowered",
+    "pool": "care",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "The Touch: faster hands, faster grace.",
+      "Leech: take their pain, then give them the turn.",
+      "Field Medicine: the basics, perfected."
+    ],
+    "deepening": {
+      "2": "2 heals trigger it.",
+      "3": "Also grants +1 round of courage."
+    }
+  },
+  {
+    "id": "nowhere_man",
+    "name": "Nowhere Man",
+    "description": "+5% dodge per tile moved without taking damage, stacking to +40%. Getting hit resets it. You were never there.",
+    "flavor": "THE CAMERAS CAN'T TRACK YOU. WE CHECKED. THE REPLAY IS JUST WIND.",
+    "paths": [
+      "drifter"
+    ],
+    "role": "payoff",
+    "slotRole": "mobility",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Soft Step: weather doesn't get hit.",
+      "Stalk: close distance, keep the streak.",
+      "Time Skip: reposition, keep moving."
+    ],
+    "deepening": {
+      "2": "+7% per tile.",
+      "3": "Cap +60%."
+    }
+  },
+  {
+    "id": "cartographers_eye",
+    "name": "Cartographer's Eye",
+    "description": "+2% damage per 10 revealed map tiles in your current region, up to +30%. Knowledge is a weapon you draw by walking.",
+    "flavor": "YOU'VE WALKED EVERY MILE OF THIS. THE LAND FIGHTS WITH YOU NOW.",
+    "paths": [
+      "explorer"
+    ],
+    "role": "payoff",
+    "slotRole": "nuke",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Echo Location: sense the land, then weaponize it.",
+      "Hive Mind: the map is the territory is the arsenal.",
+      "Eagle Eye: see it first, own it first."
+    ],
+    "deepening": {
+      "2": "+3% per 10 tiles.",
+      "3": "Cap +45%."
+    }
+  },
+  {
+    "id": "crowd_favorite",
+    "name": "Crowd Favorite",
+    "description": "Your social abilities scale with your audience: effects \u00d7(1 + fans/10). The crowd is a resource. Work it.",
+    "flavor": "THEY'RE CHANTING YOUR NAME. WE TAUGHT THEM. YOU'RE WELCOME. NOW USE IT.",
+    "paths": [
+      "socialite"
+    ],
+    "role": "payoff",
+    "slotRole": "wildcard",
+    "tier": "overpowered",
+    "pool": "social",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Silver Tongue: the workshop, with an audience.",
+      "War Cry: they hear it. They ALWAYS hear it now.",
+      "Gossip Network: the crowd talks. You listen."
+    ],
+    "deepening": {
+      "2": "\u00d7(1 + fans/8).",
+      "3": "\u00d7(1 + fans/6)."
+    }
+  },
+  {
+    "id": "hoarders_interest",
+    "name": "Hoarder's Interest",
+    "description": "Your stored pantry resources generate 1% per day as bonus calories, compounding. Patience is an engine.",
+    "flavor": "INTEREST! ON GRAIN! THE ECONOMY IS REAL AND IT IS HUNGRY FOR YOUR PATIENCE.",
+    "paths": [
+      "miser"
+    ],
+    "role": "payoff",
+    "slotRole": "sustain",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Hoarder: carry it all. Store it all. Earn on it all.",
+      "Deep Reserves: the war chest pays dividends.",
+      "Thief: acquire capital by any means."
+    ],
+    "deepening": {
+      "2": "1.5% per day.",
+      "3": "2% per day."
+    }
+  },
+  {
+    "id": "cornucopia",
+    "name": "Cornucopia",
+    "description": "Consecutive successful forages: +15% yield each, stacking to +150%. Fail, or do anything else, and the streak breaks. The land rewards devotion.",
+    "flavor": "THE BASKET OVERFLOWS. THE BASKET HAS ALWAYS OVERFLOWED. YOU JUST FINALLY NOTICED.",
+    "paths": [
+      "forager"
+    ],
+    "role": "payoff",
+    "slotRole": "wildcard",
+    "tier": "overpowered",
+    "pool": "system",
+    "unlock": {"type": "system_offer", "buildaround": true},
+    "synergyHints": [
+      "Green Thumb: ask the plant, then take 15% more.",
+      "Green Whisper: they lean toward you. Lean back harder.",
+      "Dowsing: water finds the devoted."
+    ],
+    "deepening": {
+      "2": "+20% per streak.",
+      "3": "Cap +200%."
     }
   }
 ]

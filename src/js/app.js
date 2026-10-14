@@ -1431,8 +1431,17 @@
       acts = acts.filter(a => a.combat);
       if (!acts.length) return '';
     }
+    // PATH COLORS + SLOT ROLES (Steve 2026-10-14 ability coherency):
+    // buttons carry their primary path color and slot-role tag.
+    const _abData = (Game.data && Game.data.abilities) || [];
+    const _abDef = (id) => _abData.find(d => d.id === id) || {};
     return `<div class="abilitybar"><span class="ctx-label">⚡</span>` +
-      acts.map(a => `<button class="ab-btn" data-ab="${a.id}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`).join('') +
+      acts.map(a => {
+        const _def = _abDef(a.id);
+        const _path = (_def.paths || [])[0] || '';
+        const _role = _def.slotRole || '';
+        return `<button class="ab-btn" data-ab="${a.id}" data-path="${_path}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${_role ? `<span class="ab-role">${esc(_role)}</span>` : ''}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`;
+      }).join('') +
       `</div>`;
   }
 

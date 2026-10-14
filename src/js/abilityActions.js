@@ -1967,6 +1967,47 @@
       game.say('You go down into the cold dark and feel along the bottom. Your lungs don\'t burn — they never do, down here. You come up with ' + (def.name || pickId).toLowerCase() + ', lost by someone, kept by the water, yours now. (Dive Deep)');
       return true;
     },
+
+    // ---- BUILD-AROUNDS 2026-10-14 (Steve: ability coherency rework) ----
+    // The 10 path build-arounds — weak alone, run-defining with 2+ same-path.
+
+    'retribution.unleash': function (game, target) {
+      var BA = (typeof globalThis !== 'undefined' && globalThis.Scattering || {}).buildarounds;
+      if (!BA) { game.say('Retribution: the engine is not loaded.'); return false; }
+      var stored = BA.unleash(game);
+      if (stored <= 0) return false;
+      // Shockwave: damage all adjacent enemies.
+      var f = game.tbfight;
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      if (!f || !p) { game.say('Retribution needs a fight to answer.'); return false; }
+      var hit = 0;
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        var d = Math.abs((m.mx || 0) - (p.mx || 0)) + Math.abs((m.my || 0) - (p.my || 0));
+        if (d <= 1) {
+          game.tbDamage(m.key, stored, 'your retribution', 'p', { quiet: true });
+          hit++;
+        }
+      }
+      if (!hit) game.say('The shockwave finds no one adjacent — the stored fury dissipates into the air.');
+      else game.say(`RETRIBUTION: ${stored} damage erupts outward — ${hit} ${hit === 1 ? 'enemy' : 'enemies'} caught in it.`);
+      try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e) {}
+      return true;
+    },
+
+    'trophy_room.mark': function (game, target) {
+      var BA2 = (typeof globalThis !== 'undefined' && globalThis.Scattering || {}).buildarounds;
+      if (!BA2) { game.say('Trophy Room: the engine is not loaded.'); return false; }
+      // Mark a monster type from recent kills.
+      var kills = ((game.state.codex || {}).monsterKills) || {};
+      var types = Object.keys(kills).filter(function (k) { return kills[k] > 0; });
+      if (!types.length) { game.say('Trophy Room: no kills recorded yet — hunt something first, then mark it.'); return false; }
+      // If a target type was passed, use it; otherwise mark the most-killed.
+      var markType = target || types.sort(function (a, b) { return kills[b] - kills[a]; })[0];
+      BA2.mark(game, markType);
+      return true;
+    },
   };
 
   Object.assign(G, methods);

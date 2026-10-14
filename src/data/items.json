@@ -528,6 +528,15 @@
  },
  {
   "id": "hunting_spear",
+  "abilityHooks":   [
+    {
+      "type": "trigger",
+      "ability": "war_cry",
+      "condition": "3 consecutive hits",
+      "effect": "After 3 consecutive hits, auto-cast War Cry (free).",
+      "flavor": "The spear sings when it tastes blood three times."
+    }
+  ],
   "name": "Hunting spear",
   "weapon": {
    "bonus": 30,
@@ -694,6 +703,14 @@
  },
  {
   "id": "machete",
+  "abilityHooks":   [
+    {
+      "type": "rewrite",
+      "ability": "shoulder_check",
+      "effect": "Your Shove PULLS instead of pushes.",
+      "flavor": "The machete remembers every shove. Now it pulls."
+    }
+  ],
   "name": "Machete",
   "class": "weapon",
   "flavor": "Clears brush. Clears problems. Still has the price sticker.",
@@ -1311,6 +1328,15 @@
  },
  {
   "id": "hardlight_knife",
+  "abilityHooks":   [
+    {
+      "type": "trigger",
+      "ability": "pocket_sand",
+      "condition": "take 20+ damage in one hit",
+      "effect": "When hit for 20+, auto-throw Pocket Sand (free, once per fight).",
+      "flavor": "The knife throws its own sand. Rude. Effective."
+    }
+  ],
   "name": "Hardlight knife",
   "class": "weapon",
   "origin": "alien",
@@ -1755,6 +1781,14 @@
  },
  {
   "id": "phase_blade",
+  "abilityHooks":   [
+    {
+      "type": "rewrite",
+      "ability": "hogtie",
+      "effect": "Hogtie costs no rope.",
+      "flavor": "Rope is for people who can't cut space."
+    }
+  ],
   "name": "Phase blade",
   "class": "weapon",
   "origin": "alien",

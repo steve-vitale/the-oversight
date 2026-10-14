@@ -832,6 +832,22 @@ body.system-live .ord-narration .inlinecard .inline-btns {
 }
 .ab-btn:disabled { opacity: .4; border-color: #444; color: #888; background: #1a1a1a; }
 .ab-btn:active:not(:disabled) { background: #2a2415; }
+/* PATH COLORS (Steve 2026-10-14 ability coherency): Dead Cells pattern —
+   one color per path, on buttons, synergy banners, codex. Feel the build
+   before understanding it. */
+.ab-btn[data-path="brawler"] { border-color: #e5484d; }
+.ab-btn[data-path="shieldbearer"] { border-color: #4d7cfe; }
+.ab-btn[data-path="hunter"] { border-color: #46a758; }
+.ab-btn[data-path="survivalist"] { border-color: #f5a524; }
+.ab-btn[data-path="caregiver"] { border-color: #e93d82; }
+.ab-btn[data-path="drifter"] { border-color: #8e4ec6; }
+.ab-btn[data-path="explorer"] { border-color: #12a594; }
+.ab-btn[data-path="socialite"] { border-color: #ffd60a; }
+.ab-btn[data-path="miser"] { border-color: #8b8d98; }
+.ab-btn[data-path="forager"] { border-color: #ad5700; }
+.ab-btn .ab-role { font-size: 10px; opacity: .7; margin-left: 4px; }
+.synergy-banner { border-left: 4px solid; padding: 8px 12px; margin: 8px 0;
+  background: #1a1a1a; border-radius: 0 8px 8px 0; font-weight: bold; }
 
 /* ============ TELEGRAPHED DANGER: combat is dodge-first ============ */
 .cell.danger {

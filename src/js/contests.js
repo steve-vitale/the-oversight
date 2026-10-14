@@ -4906,6 +4906,30 @@
       && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
     if (!bag.length) return false;
     const pick = (arr) => arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
+    // PATH STEERING (Steve 2026-10-14 ability coherency, Spire pattern):
+    // weight offers toward held paths — the path of least resistance is a
+    // build, not a pile. Build-arounds surface when you've committed (2+).
+    try {
+      const _held = (s.abilities || []).map(a => (a && a.id) || a);
+      const _pathCount = {};
+      for (const _hid of _held) {
+        const _hd = all.find(a => a.id === _hid);
+        for (const _p of ((_hd && _hd.paths) || [])) _pathCount[_p] = (_pathCount[_p] || 0) + 1;
+      }
+      for (const _c of bag) {
+        _c._steerW = 1;
+        for (const _p of (_c.paths || [])) {
+          if ((_pathCount[_p] || 0) >= 2) _c._steerW += 2;
+          else if ((_pathCount[_p] || 0) >= 1) _c._steerW += 0.5;
+        }
+        // Build-arounds: only when committed, then heavily weighted.
+        if (_c.unlock && _c.unlock.buildaround) {
+          const _bp = (_c.paths || [])[0];
+          _c._steerW = (_pathCount[_bp] || 0) >= 2 ? 5 : 0.1;
+        }
+      }
+      bag.sort((x, y) => (y._steerW || 1) - (x._steerW || 1));
+    } catch (e) {}
     const choices = [];
     // The contest you won shapes the gift: blood->combat, moot->social.
     const cat = (contest && contest.cat) || '';

@@ -635,5 +635,42 @@
    "target": "forage.gift_chance",
    "value": 0.05
   }
- }
+ },
+ {
+  "id": "blood_bonded",
+  "name": "Blood-Bonded",
+  "class": "weapon",
+  "description": "The weapon has tasted enough blood to learn your style. On critical hits, it echoes your most-used combat ability (free, once per fight).",
+  "effect": {
+    "op": "grant",
+    "target": "abilityHook",
+    "value": "blood_bonded_trigger"
+  },
+  "systemCommentary": "THE WEAPON REMEMBERS. IT HAS OPINIONS NOW. WE FIND THIS DELIGHTFUL AND SLIGHTLY CONCERNING."
+},
+ {
+  "id": "path_attuned",
+  "name": "Path-Attuned",
+  "class": "tool",
+  "description": "The item resonates with your dominant path. Abilities of that path cost 15% less kcal.",
+  "effect": {
+    "op": "multiply",
+    "target": "ability.kcal_cost",
+    "value": 0.85,
+    "condition": "path:attuned"
+  },
+  "systemCommentary": "RESONANCE DETECTED. THE ITEM HUMS IN YOUR PATH'S KEY. EFFICIENT. MUSICAL. WE APPROVE."
+},
+ {
+  "id": "veterans_edge",
+  "name": "Veteran's Edge",
+  "class": "weapon",
+  "description": "Fifty kills with this weapon. It knows the work. Your build-around abilities charge 25% faster.",
+  "effect": {
+    "op": "multiply",
+    "target": "buildaround.charge_rate",
+    "value": 1.25
+  },
+  "systemCommentary": "FIFTY. THE WEAPON COUNTS. IT IS PROUD. IT SHOULD BE."
+}
 ]

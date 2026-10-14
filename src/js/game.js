@@ -25445,6 +25445,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const held = paths.some(p => p.every(hasReq));
         if (held) active.push(syn.id);
       }
+      // WITNESSED SYNERGIES (Steve 2026-10-14 ability coherency, diegetic
+      // discovery): newly-active synergies are recorded in the Codex with
+      // their path pair — the game is its own wiki.
+      try {
+        const _prev = new Set(sch.activeSynergies || []);
+        const _newly = active.filter(id => !_prev.has(id));
+        if (_newly.length) {
+          sch.codex = sch.codex || {};
+          sch.codex.witnessedSynergies = sch.codex.witnessedSynergies || {};
+          for (const _sid of _newly) {
+            if (!sch.codex.witnessedSynergies[_sid]) {
+              const _syn = syns.find(x => x.id === _sid);
+              const _paths = [];
+              for (const _req of ((_syn && _syn.requires) || [])) {
+                const _ad = (this.data.abilities || []).find(a => a.id === _req);
+                for (const _p of ((_ad && _ad.paths) || [])) if (!_paths.includes(_p)) _paths.push(_p);
+              }
+              sch.codex.witnessedSynergies[_sid] = {
+                day: (this.state.scholar || {}).day || 0,
+                paths: _paths.slice(0, 2),
+                name: (_syn && _syn.name) || _sid,
+              };
+              if (_paths.length >= 2) {
+                this.say(`⚡ SYNERGY WITNESSED: ${_paths[0].toUpperCase()} × ${_paths[1].toUpperCase()} — ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+              } else {
+                this.say(`⚡ SYNERGY WITNESSED: ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+              }
+              try { this.audioEvent('synergy', { paths: _paths }); } catch (e) {}
+            }
+          }
+        }
+      } catch (e) {}
       sch.activeSynergies = active;
     },
 
@@ -28012,6 +28044,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         _st.pacing.lastTs = _now;
       } catch (e) {}
       scholar.day += 1;
+      // BUILD-AROUND DAY TICK (2026-10-14): hoarders_interest accrues,
+      // trophy_room mark and feast_engine charge reset daily.
+      try {
+        const BA8 = (globalThis.Scattering || {}).buildarounds;
+        if (BA8 && typeof BA8.onDayTick === 'function') BA8.onDayTick(this);
+      } catch (e) {}
       // VILLAGE CLOCK (BUG 2026-10-07): the player village's day was frozen at
       // 1 forever — villageEats stamped villagers' shared surplus spoilDay =
       // v.day+3 = 4, so from day 4 on fresh surplus was deposited already
@@ -30525,6 +30563,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (Array.isArray(cells)) _ctrSnap.lanes[m.key] = new Set(cells.map(c => c.cx + ',' + c.cy));
         }
       } catch (e) {}
+      // NOWHERE MAN (build-around 2026-10-14): track tiles moved unhit.
+      try {
+        const BA7 = (globalThis.Scattering || {}).buildarounds;
+        if (BA7 && typeof BA7.onMove === 'function') BA7.onMove(this, path.length);
+      } catch (e) {}
       for (const [tx, ty] of path) {
         p.moveLeft -= this.tbTerrainCost(tx, ty);
         p.mx = tx; p.my = ty;
@@ -31196,7 +31239,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // BUILD-AROUNDS (Steve 2026-10-14 ability coherency): blood_frenzy,
+      // trophy_room, feast_engine, cartographers_eye multiply strike damage.
+      try {
+        const BA = (globalThis.Scattering || {}).buildarounds;
+        if (BA && typeof BA.damageMult === 'function') {
+          const _bam = BA.damageMult(this, t);
+          if (_bam > 1) { d = Math.round(d * _bam); this.say(`(Build-around ×${_bam.toFixed(2)}.)`); }
+        }
+      } catch (e) {}
       const dealt = this.tbDamage(t.key, d, 'you', null, { quiet: true });
+      // BUILD-AROUND HOOKS: blood_frenzy tracks consecutive hits/misses.
+      try {
+        const BA2 = (globalThis.Scattering || {}).buildarounds;
+        if (BA2) {
+          if (dealt > 0 && typeof BA2.onStrikeHit === 'function') BA2.onStrikeHit(this, t);
+          else if (dealt === 0 && typeof BA2.onStrikeMiss === 'function') BA2.onStrikeMiss(this);
+        }
+      } catch (e) {}
       // HONESTY (break-it combat 2026-10-09): tbDamage applies monster-state
       // modifiers AFTER this line was composed (turtle bunker x0.15, boar
       // winded x1.5, voice-mimic reveal x1.5, flyer grounded x1.5). The line
@@ -31445,6 +31505,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((this.fighterSize(m) || 1) > 1) { this.say(`It's too big to shove — you'd bounce off. (Shove: size-1 monsters only.)`); return false; }
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
+      // GEAR REWRITE (machete 2026-10-14): the machete pulls instead of pushes.
+      try {
+        const _eq = (this.state.scholar.equipped || {});
+        const _wslot = _eq.melee || _eq.ranged || _eq.weapon;
+        const _wdef = _wslot ? (this.data.items || []).find(i => i.id === _wslot.itemId) : null;
+        const _hooks = (_wdef && _wdef.abilityHooks) || [];
+        if (_hooks.some(h => h.type === 'rewrite' && h.ability === 'shoulder_check')) {
+          dx = -dx; dy = -dy;
+          this.say('(The machete pulls — drag them into your blade.)');
+        }
+      } catch (e) {}
       if (!opts.viaAbility) p.acted = true;
       let moved = 0;
       for (let i = 0; i < 2; i++) {
@@ -31497,8 +31568,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
       if (d > 1) { this.say('Too far to bind. Get adjacent.'); return false; }
       if ((this.fighterSize(m) || 1) > 1) { this.say(`Too big to hogtie with one rope. (Bind: size-1 monsters only.)`); return false; }
-      if (!this.hasItem || !this.hasItem('rope_50ft')) { this.say('No rope. (Bind needs rope — 1 coil per bind.)'); return false; }
-      if (!this.consumeItem('rope_50ft', 1)) { this.say('The rope slips through your hands. (Bind failed.)'); return false; }
+      // GEAR REWRITE (phase_blade 2026-10-14): the blade phases through and binds — no rope needed.
+      let _noRope = false;
+      try {
+        const _eq2 = (this.state.scholar.equipped || {});
+        const _wslot2 = _eq2.melee || _eq2.ranged || _eq2.weapon;
+        const _wdef2 = _wslot2 ? (this.data.items || []).find(i => i.id === _wslot2.itemId) : null;
+        const _hooks2 = (_wdef2 && _wdef2.abilityHooks) || [];
+        if (_hooks2.some(h => h.type === 'rewrite' && h.ability === 'hogtie')) {
+          _noRope = true;
+          this.say('(The phase blade binds without rope — it cuts space, not cord.)');
+        }
+      } catch (e) {}
+      if (!_noRope) {
+        if (!this.hasItem || !this.hasItem('rope_50ft')) { this.say('No rope. (Bind needs rope — 1 coil per bind.)'); return false; }
+        if (!this.consumeItem('rope_50ft', 1)) { this.say('The rope slips through your hands. (Bind failed.)'); return false; }
+      }
       const prevBinds = m._bindCount || 0;
       const rounds = Math.max(1, 3 - prevBinds);
       m._bindCount = prevBinds + 1;
@@ -31639,6 +31724,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     addHealth(n) {
       const s = this.state.scholar;
       const p = this.inCombat() ? this.tbFighter('p') : null;
+      // BUILD-AROUND HEAL HOOKS (2026-10-14): battlefield_grace counts heals
+      // per target per fight; feast_engine converts overheal to damage.
+      if (n > 0) {
+        try {
+          const BA6 = (globalThis.Scattering || {}).buildarounds;
+          if (BA6 && typeof BA6.onHeal === 'function') {
+            const _maxHp = (p && p.alive) ? (p.maxHp || 100) : this.maxHealth();
+            const _curHp = (p && p.alive) ? (p.hp || 0) : (s.health || 0);
+            const _overheal = Math.max(0, (_curHp + n) - _maxHp);
+            BA6.onHeal(this, 'player', n, _overheal);
+          }
+        } catch (e) {}
+      }
       if (p && p.alive) {
         p.hp = Math.max(0, Math.min(p.maxHp, (p.hp || 0) + n));
         s.health = Math.max(0, p.hp);
@@ -32270,6 +32368,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // while surrounded — the card's second half. Same trigger as the
         // strike bonus in tbPlayerStrike: one condition, both halves.
         try { if (this.hasAbility && this.hasAbility('cornered_rat') && this.tbSurroundedBy && this.tbSurroundedBy(3)) dodgeCh += 0.5; } catch (e) {}
+        // NOWHERE MAN (build-around 2026-10-14): +5% dodge per tile moved unhit.
+        try {
+          const BA3 = (globalThis.Scattering || {}).buildarounds;
+          if (BA3 && typeof BA3.dodgeBonus === 'function') {
+            const _nb = BA3.dodgeBonus(this);
+            if (_nb > 0) dodgeCh += _nb;
+          }
+        } catch (e) {}
         // BURDEN (Steve 2026-10-06): a heavy pack slows your slip-aside.
         // Laden -3%, heavy -8%, straining -15% dodge chance.
         try {
@@ -32503,6 +32609,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // (chip hits vs real protection). The monster-hide block below
           // already gates on absorbed > 0; same rule here.
           if (absorb > 0) this.say(`Armor absorbs ${absorb}.`);
+          // RETRIBUTION (build-around 2026-10-14): store blocked damage.
+          try {
+            const BA4 = (globalThis.Scattering || {}).buildarounds;
+            if (BA4 && typeof BA4.onBlocked === 'function') BA4.onBlocked(this, absorb);
+          } catch (e) {}
         }
       }
       // EQUIPMENT (Steve 2026-10-06): villagers' worn armor absorbs too.
@@ -32602,6 +32713,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // this fight (post-armor, post-brace). Reset in startCombat.
       if (t.kind === 'player' && final > 0) {
         this.state.scholar.fightDamageTaken = (this.state.scholar.fightDamageTaken || 0) + final;
+        // NOWHERE MAN (build-around 2026-10-14): getting hit resets the streak.
+        try {
+          const BA5 = (globalThis.Scattering || {}).buildarounds;
+          if (BA5 && typeof BA5.onDamaged === 'function') BA5.onDamaged(this);
+          // GEAR: hardlight_knife triggers Pocket Sand on 20+ hits.
+          if (BA5 && typeof BA5.checkKnifeTrigger === 'function') BA5.checkKnifeTrigger(this, final);
+        } catch (e) {}
       }
       // LEECH STANCE (break-it abilities 2026-10-10): the data action
       // leech.leech_stance plants the flag on the player fighter for the
