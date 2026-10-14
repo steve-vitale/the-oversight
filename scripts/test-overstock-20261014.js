@@ -40,7 +40,14 @@
 //   GREEN: OVERSTOCK=1 node scripts/test-overstock-20261014.js
 'use strict';
 const { loadGame, setupGame, runDays } = require('./sim-harness');
-const OVER = require('./policies/overstock');
+let OVER = null;
+try { OVER = require('./policies/overstock'); } catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: overstock layer deleted per kill protocol (NO-GO at pilot); proof was RED->GREEN pre-kill — see evidence/2026-10-14/sim-overstock-b.md');
+    process.exit(0);
+  }
+  throw e;
+}
 const { leadcourt } = require('./policies/leadcourt');
 const { belongseek } = require('./policies/belongseek');
 
