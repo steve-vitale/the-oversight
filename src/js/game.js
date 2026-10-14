@@ -263,6 +263,11 @@
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
       // own so a missing file only costs the real-date season start.
       try { this.data.climates = await get('climates.json'); } catch (e) { console.warn('[regions] climates.json: ' + (e && e.message)); this.data.climates = null; }
+      // ENDINGS BY BUILD (2026-10-14): the Table's build-aware beats and the
+      // ending texts by key (endingKey.js). Loaded on their own so a missing
+      // file only costs the build beats and bespoke endings, never the Table.
+      try { this.data.tableBeats = await get('table-beats.json'); } catch (e) { console.warn('[ending-key] table-beats.json: ' + (e && e.message)); this.data.tableBeats = null; }
+      try { this.data.tableEndings = await get('table-endings.json'); } catch (e) { console.warn('[ending-key] table-endings.json: ' + (e && e.message)); this.data.tableEndings = null; }
       try {
         const S = globalThis.Scattering;
         if (S) S.GODPATHS = godpaths;

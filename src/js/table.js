@@ -29,6 +29,8 @@
 //   - tableEpilogue(frame, branch, choiceId)
 //   - tableLiveWrap(text)
 //   - tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
+//   - tableBeatChoices(beat, T) -> a beat's own choices plus the build-aware option on the beat that plays the build
+//   - tableEndingLines(fid, outcome) -> ending text by the locked key with the path's own finals as fallback
 // consumes:
 //   - state.scholar, state.village, progState()
 //   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
@@ -393,6 +395,10 @@
       }
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
+      // ENDINGS BY BUILD (Steve 2026-10-14): "The ending you can win is set
+      // as you enter the table." The build half of the ending key locks
+      // here; each door entered fills the path and its moral.
+      try { if (this.endingKeyLock) this.endingKeyLock(); } catch (e) { console.warn('table ending key lock', e); }
       const d = seat.detail || {};
       // MUSIC (Steve 2026-10-12): the table gets its ceremonial bed.
       try { this.music('scenario', 'table'); } catch (e) {}
@@ -533,6 +539,7 @@
       // light / grey / dark — instead of the binary signals.branch. The
       // grey middle is an honest ending color, not a coin flip.
       if (pathId === 'relay' && branch.band) { T.branch = branch.band; T.band = branch.band; }
+      try { if (this.endingKeyEnter) this.endingKeyEnter(pathId, T.branch); } catch (e) { console.warn('table ending key door', e); }
       // Path abilities: mostly shared + several branch-unique. Granted
       // aloud at the door; grant effects are immediate and honest.
       const ab = def.abilities || {};
@@ -615,11 +622,28 @@
       const beat = def.beats[T.beat];
       let lines = [];
       try { lines = (typeof beat.say === 'function' ? beat.say.call(this, T) : beat.say) || []; } catch (e) {}
+      // THE TABLE PLAYS THE BUILD (Steve 2026-10-14, "Both, linked"): one
+      // beat per path reads the ending key — its line names what you are.
+      let build = null;
+      try { build = this.tableBuildBeat ? this.tableBuildBeat(T) : null; } catch (e) { console.warn('table build line', e); }
       const prompt = lines.map(l => `<p>${this.escHtml(l)}</p>`).join('') +
+        (build && build.line ? `<p><b>◈ YOUR BUILD</b> — ${this.escHtml(build.line)}</p>` : '') +
         (beat.meterLine ? `<p><i>${this.escHtml(typeof beat.meterLine === 'function' ? beat.meterLine.call(this, T) : beat.meterLine)}</i></p>` : '');
-      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const chList = this.tableBeatChoices(beat, T);
       const options = chList.map(c => ({ id: 'beat:' + c.id, label: c.label }));
       this.tablePrompt(prompt, options, def.name);
+    },
+    // tableBeatChoices: the beat's own choices, plus the build-aware option
+    // on the beat that plays the build (data: src/data/table-beats.json).
+    // The build option always carries the path's stake: losable for every
+    // build, light or dark (Steve 2026-10-14).
+    tableBeatChoices(beat, T) {
+      let list = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      try {
+        const b = this.tableBuildBeat ? this.tableBuildBeat(T) : null;
+        if (b && b.choices && b.choices.length) list = list.concat(b.choices);
+      } catch (e) { console.warn('table build choices', e); }
+      return list;
     },
 
     tableChoose(id) {
@@ -629,7 +653,7 @@
       const beatId = (id.indexOf('beat:') === 0) ? id.slice(5) : id;
       const beat = (def.beats || [])[T.beat];
       if (!beat) return;
-      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const chList = this.tableBeatChoices(beat, T);
       const choice = chList.find(c => c.id === beatId);
       if (!choice) return;
       // Apply meter/effect deltas. Ability mods (e.g. oathbound halves
@@ -692,9 +716,13 @@
         // assimilated def means the test rig is thin — end plainly rather
         // than stranding the challenge.)
         this.say('No doors remain open. The table makes its final offer: comfort, on its terms — or the long walk with empty hands.');
-        const ad = pathDef('assimilated');
+        // A failed Assimilated walk is already the rock bottom (losable since
+        // 2026-10-14, Steve: "they can't lose their scenario no matter what
+        // path" was a defect): it ends plainly instead of looping back in.
+        const ad = T.path === 'assimilated' ? null : pathDef('assimilated');
         if (ad) {
           T.path = 'assimilated'; T.phase = 'challenge'; T.beat = 0; T.meters = {};
+          try { if (this.endingKeyEnter) this.endingKeyEnter('assimilated', T.branch); } catch (e) { console.warn('table ending key rock-bottom', e); }
           this.say(`◈ ${ad.name.toUpperCase()} — ${ad.openLine}`);
           this.tableRunBeat();
         } else {
@@ -787,7 +815,7 @@
       const s = this.state.scholar, pg = this.progState();
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
       const outcome = typeof fin.outcome === 'function' ? fin.outcome.call(this, T) : fin.outcome;
-      (Array.isArray(outcome) ? outcome : [outcome]).forEach(l => this.say(l));
+      this.tableEndingLines(fin.id, outcome).forEach(l => this.say(l));
       // MUSIC (Steve 2026-10-12): endings get their bed — warm or cold.
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) {}
       // Epilogue: hero, facilitator, or outshone — credited honestly.
@@ -801,6 +829,27 @@
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
       try { this.save(); } catch (e) {}
+    },
+
+    // tableEndingLines(fid, outcome): ENDINGS BY BUILD (Steve 2026-10-14:
+    // "Each playstyle and godhood path, moral choice version should have its
+    // own ending."). The most specific authored ending for the locked key
+    // (src/data/table-endings.json) may replace this final's outcome and adds
+    // its closing lines; with nothing authored, the path's own light/dark
+    // outcome stands. Which text resolved is noted for telemetry.
+    tableEndingLines(fid, outcome) {
+      const T = this.tableState();
+      let lines = Array.isArray(outcome) ? outcome.slice() : (outcome ? [outcome] : []);
+      try {
+        const end = this.tableEndingFor ? this.tableEndingFor(T.path, T.branch || 'light', fid) : null;
+        if (this.tableEndingNote) this.tableEndingNote(end);
+        if (end) {
+          if (end.outcome && end.outcome.length) lines = end.outcome.slice();
+          if (end.title) lines.push(`◈ ${end.title}`);
+          lines = lines.concat(end.lines || []);
+        }
+      } catch (e) { console.warn('table ending lines', e); }
+      return lines;
     },
 
     // ============ THE HOSTS — the key's ending (2026-10-14) ============
@@ -842,6 +891,7 @@
       const T = this.tableState();
       const s = this.state.scholar;
       this.tableHostsLines(T.path, branch).forEach(l => this.say(l));
+      this.tableEndingLines('hosts', []).forEach(l => this.say(l));
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) { console.warn('hosts music', e); }
       try { const v = this.state.village || {}; v.kidsReturned = true; v.takenReturned = true; } catch (e) { console.warn('hosts village', e); }
       try { if (this.podRemember) this.podRemember('taken-home', { via: 'network' }); } catch (e) { console.warn('hosts pods', e); }
@@ -867,6 +917,7 @@
       this.say(`◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`);
       const lines = (typeof this.podDemandCost === 'function') ? this.podDemandCost(price) : [];
       (Array.isArray(lines) ? lines : [lines]).forEach(l => this.say(l));
+      this.tableEndingLines('poddemand', []).forEach(l => this.say(l));
       if (def) this.tableEpilogue(def, T.branch || 'light', { id: 'poddemand', label: 'Demanded the pods opened.' });
       try { this.recordMoment(`Haven's table path: ${(def || {}).name} (${T.branch}), choice: demanded the pods opened (paid ${price}).`); } catch (e) {}
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}

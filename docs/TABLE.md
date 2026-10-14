@@ -469,6 +469,89 @@ path). The path's own challenge and fail rules still run first. Choosing it
 brings the Taken home (adults taken on day zero + pod children), records the
 legend with `key: 'network'`, and `table_won` carries `key`/`hosts`.
 
+## Endings by build (2026-10-14)
+
+Steve, verbatim: "The ending you can win is set as you enter the table, but
+that doesn't mean they play the same table scenario or that they can't lose
+their scenario no matter what path, light or dark. Each playstyle and godhood
+path, moral choice version should have its own ending." / "The table should
+all be relative until actually entering it when it locks." / "Both, linked"
+(the titan finale feeds the Table, and the Table plays your build).
+
+Engine: `src/js/endingKey.js`. Data: `src/data/table-beats.json`,
+`src/data/table-endings.json`. The Table files (`table*.js`) still never read
+god-path state: they read only the key that `endingKey.js` hands them, and
+neither the key nor the beats touch `tableSeat` or `tableEarnedPaths`. A run
+with no class and no god walks every door it earned and can win every one.
+
+### The key
+
+| Field | Source | When |
+|---|---|---|
+| `track` | the dominant of the 5 playstyle tracks (`playerTracks()` xp; ties by tracks.json order) | locked at the seat |
+| `godpath`, `subclass` | the class the System has *named* (`godpathClass('player')`, not lapsed), else null | locked at the seat |
+| `god` | the first ascended god (`scholar.godhood.active`), else null | locked at the seat |
+| `titanFinale` | `network` (the key) > `apocalypse` (finale/nielsen slain) > `herald` > `none` | locked at the seat |
+| `key` | `'network'` when the Network fell (THE HOSTS), else null | locked at the seat |
+| `tablePath`, `moral` | the door entered and the branch the Table already earns from the ledger (`tableBranch`; the relay's light/grey/dark band) | each door; a downgrade re-fills them (`doors` keeps the history) |
+
+Before the seat, `endingKeyLive()` recomputes on every call (relative);
+`endingKey()` is null. `tableScene` (via `tableTakeSeat` from Haven) locks it
+onto `pg.table.endingKey`. Telemetry: `table_entered` and `table_won` carry
+`track`, `godpath`, `subclass`, `god`, `moral`, `titanFinale`, `endingKey`;
+`table_won` adds `ending` (the selector that resolved, or `path`) and
+`buildPlayed`.
+
+### Lookup order
+
+Selectors, most specific first: `god:<godId>` → `class:<path>/<subclass>` →
+`class:<path>` → `track:<track>` → the path's own light/dark finals (the
+existing `table-<path>.js` text). A slot is *(table path, selector, moral)*;
+an empty slot falls through to the next. Morals are `light` / `dark`, plus
+`grey` on the relay.
+
+**The build beat** (`table-beats.json`): one beat per path (`beat`, 0-based)
+adds ONE option from the key. Candidate order: god (bespoke, then
+`templates.god`, so every god's verb is an option on every path) → class and
+class/subclass (bespoke) → `templates.subclass` (every named class gets an
+option in its own name) → track → `default` (exists for every path and
+moral). The prompt gains a "YOUR BUILD" line, plus a line for what the titan
+finale contributed.
+- **Odds:** an entry's own `effects[moral]` apply exactly; an entry without
+  them gets the path's `gain[moral]` plus `levelBonus` (god +2, class +1). The
+  titan finale adds its `bonus` to the path's meter either way.
+- **Stakes (always losable):** the option plays only if `stake[moral]` holds
+  when chosen (e.g. Beloved light needs audience 4+, shown on the label); short
+  of it, the path fails with `stakeFail` and the usual downgrade. The path's
+  `limits` (its own fail rules) still apply after. A light walk can now lose
+  every path; Assimilated, losable for the first time, ends plainly when it is
+  already the rock bottom.
+
+**The ending text** (`table-endings.json`): `paths.<path>.<selector>.<moral>`
+= `{title?, lines: [...], finals?: {<finalId>: [...]}}`. `finals` replaces
+that final's outcome; `title` and `lines` play after it as the coda. THE HOSTS
+(`hosts`) and the pod demand (`poddemand`) take coda lines only. Tokens:
+`{name}` `{class}` `{god}` `{verb}`.
+
+### Authoring a slice (Muse)
+
+1. Pick a slot from the to-do list: `node scripts/validate-table-endings.js --todo`.
+2. Endings: add `paths.<path>["class:<path>/<sub>"].light|dark` with the
+   path's final ids (`table-<path>.js` finals). Write each final in the game's
+   voice (second person, present tense, the System in caps quotes), then 1–2
+   coda lines.
+3. Beats: add `paths.<path>.options["<selector>"]` with `label`, `line`, `say`
+   per moral (both label and say, or neither) and optional `effects`. Never
+   add `fail`, `goto` or `trial`: the stake is the engine's.
+4. Run `node scripts/validate-table-endings.js` (errors on bad ids, morals,
+   final ids, meters, a missing default or stake) and
+   `node scripts/test-table-endings-20261014.js`.
+
+Exemplar slices (2026-10-14): Beloved × Socialite/Showrunner × light/dark
+(beat + ending), Defiant × Brawler × light/dark (beat + ending). Coverage at
+build time: beats 4/675 bespoke (+448 by template, the rest on the path
+default); endings 4/675 bespoke (the rest on the path's own finals).
+
 ## File map
 
 - `src/js/table.js` (new): seat pricing, earned paths, branch axis,

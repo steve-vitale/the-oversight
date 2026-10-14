@@ -30,17 +30,26 @@
   }
 
   const tstate = (g) => { try { return g.tableState ? g.tableState() : {}; } catch (e) { return {}; } };
+  // keyFields: the locked ending key, flattened (endingKey.js). `key` stays
+  // the existing boolean on table_won; the HOSTS key is endingKey 'network'.
+  const keyFields = (g) => {
+    try {
+      const k = g.endingKey ? g.endingKey() : null;
+      if (!k) return {};
+      return { track: k.track, godpath: k.godpath, subclass: k.subclass, god: k.god, moral: k.moral, titanFinale: k.titanFinale, endingKey: k.key };
+    } catch (e) { console.warn('telemetry-hooks keyFields', e && e.message); return {}; }
+  };
   const seen = (g) => { const pg = g.progState ? g.progState() : {}; return (pg._teleSeen = pg._teleSeen || {}); };
 
   wrap('tableScene', (g) => {
     const pg = g.progState(); const T = tstate(g);
-    if (pg.tableDone && !seen(g).tableEntered) { seen(g).tableEntered = true; g.teleMilestone('table_entered', { seat: T.seat }); }
+    if (pg.tableDone && !seen(g).tableEntered) { seen(g).tableEntered = true; g.teleMilestone('table_entered', Object.assign({ seat: T.seat }, keyFields(g))); }
   });
   wrap('tableStartPath', (g, a) => { const T = tstate(g); g.teleMilestone('table_path', { path: a[0], branch: T.branch }); });
   wrap('tableFail', (g, a) => { const T = tstate(g); g.teleMilestone('table_failed', { path: T.path, branch: T.branch, reason: String(a[0] || '').slice(0, 80) }); });
   wrap('tableResolveFinal', (g) => {
     const T = tstate(g);
-    if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; const pg0 = g.progState ? g.progState() : {}; g.teleMilestone('table_won', { path: T.path, branch: T.branch, seat: T.seat, key: !!pg0.networkFallen, hosts: T.final === 'hosts', overtime: pg0.overtime | 0 }); }
+    if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; const pg0 = g.progState ? g.progState() : {}; g.teleMilestone('table_won', Object.assign(keyFields(g), { path: T.path, branch: T.branch, seat: T.seat, key: !!pg0.networkFallen, hosts: T.final === 'hosts', overtime: pg0.overtime | 0, ending: (T.ending && T.ending.selector) || 'path', endingLevel: (T.ending && T.ending.level) || 'path', buildPlayed: (T.buildPlayed && T.buildPlayed.selector) || null })); }
   });
   wrap('useAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: a[1], ok: r !== false && r != null }));
   wrap('activateAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: 'activate', ok: r !== false && r != null }));
