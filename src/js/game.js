@@ -5834,16 +5834,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // and the villager takes up non-perishable work instead (real work —
       // the alt-task branch below resolves it, with its own haul + trust).
       // Never throttles into famine: an empty pantry never engages.
+      // HUNGER EXEMPTION (2026-10-14): the throttle never fires into
+      // genuine hunger. The honest active-hunger signal is
+      // progState().hungryStreak — anyStarving out of villageEats: some
+      // villager ate under 60% of (ration-adjusted) need, not fasting, not
+      // on voted half-rations. The same signal that fires the hunger-winter
+      // crisis. (The empty-pantry clock v.hungryDays is MUTUALLY EXCLUSIVE
+      // with the throttle — an empty pantry never engages — so it cannot
+      // serve as the exemption gate.) The redirect would fire; production
+      // continues instead, and the beat narrates the decision (no silent
+      // actions). HUNGEREXEMPT=0 disables (instrumentation-side control).
       if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleEngaged()) {
         const from = a.task;
-        const alt = this.prodThrottleAltTask();
         const days = this.pantryFreshDays();
         const fromName = from === 'garden' ? 'harvest' : from === 'fish' ? 'fish nets' : 'forage';
-        const altName = alt === 'wood' ? 'wood run' : alt === 'water' ? 'water run' : 'stone pile';
-        this.say(`🌿 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(days)} days of fresh on hand… leaves the ${fromName} standing and turns to the ${altName} instead. The pantry can't take more; the wild will keep.`);
-        v.throttleRedirects = (v.throttleRedirects || 0) + 1;
-        a.task = alt;
-        return this.resolveOneAssignment(vid, a);
+        let hungerExempt = true; // default ON: the landed lever never throttles into hunger
+        try {
+          if (typeof process !== 'undefined' && process.env && process.env.HUNGEREXEMPT === '0') hungerExempt = false;
+          else hungerExempt = (((this.progState() || {}).hungryStreak) || 0) > 0;
+        } catch (e) { hungerExempt = false; }
+        if (hungerExempt) {
+          this.say(`🍲 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(days)} days of fresh on hand… but someone went to bed hungry, and a full pantry means nothing while bellies are empty. ${first} keeps working the ${fromName} — the hungry eat first.`);
+          v.throttleExemptHunger = (v.throttleExemptHunger || 0) + 1;
+          // production continues: no redirect, no recursion — falls through
+          // to the task branch below and resolves the real forage/garden/fish.
+        } else {
+          const alt = this.prodThrottleAltTask();
+          const altName = alt === 'wood' ? 'wood run' : alt === 'water' ? 'water run' : 'stone pile';
+          this.say(`🌿 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(days)} days of fresh on hand… leaves the ${fromName} standing and turns to the ${altName} instead. The pantry can't take more; the wild will keep.`);
+          v.throttleRedirects = (v.throttleRedirects || 0) + 1;
+          a.task = alt;
+          return this.resolveOneAssignment(vid, a);
+        }
       }
 
       if (a.task === 'forage') {
