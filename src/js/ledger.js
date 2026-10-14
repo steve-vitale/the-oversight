@@ -1406,8 +1406,8 @@
         // relative until actually entering it when it locks. Even if they
         // qualify early, there's room for them to change or influence path
         // until they get to the very end."). Qualifying sends an invitation;
-        // the player takes the seat when ready (table.js tableInvite).
-        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableInvite();
+        // announced once; the seat is taken from Haven (table.js tableTakeSeat).
+        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableAnnounce();
       } catch (e) {}
       return r;
     };

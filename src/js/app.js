@@ -16054,6 +16054,7 @@
     // accord: the state drives the panel, the buttons drive the answer.
     document.querySelectorAll('[data-national]').forEach(b => b.onclick = () => { Game.answerNationalChoice(b.dataset.national); refresh(); });
     document.querySelectorAll('[data-global]').forEach(b => b.onclick = () => { Game.answerGlobalChoice(b.dataset.global); refresh(); });
+    document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });
     // Alliance: the understanding (regional audit 2026-10-09 — was engine-only).
     document.querySelectorAll('[data-ally-propose]').forEach(b => b.onclick = () => { Game.proposeAlliance(b.dataset.allyPropose); refresh(); });
     document.querySelectorAll('[data-demand-yes]').forEach(b => b.onclick = () => { Game.answerDemand(b.dataset.demandYes, true); refresh(); });
@@ -16580,6 +16581,18 @@
                   html += `<div style="margin-top:4px"><p class="small">📯 <b>The Binding:</b> ${esc(pnm)}'s court summons Haven's oath.<br><button class="btn sm" data-national="swear">🤝 Swear the oath (3,000 kcal)</button> <button class="btn sm ghost" data-national="serve">🚶 Serve at their court (7 days)</button> <button class="btn sm ghost" data-national="walk">🚶 Walk away</button></p></div>`;
                 }
               }
+              // THE TABLE SEAT (Steve 2026-10-14): an option at Haven once the
+              // table is set — never a morning prompt. Priced live until you sit.
+              try {
+                const tp = Game.tablePreview ? Game.tablePreview() : null;
+                if (tp) {
+                  const doors = tp.doors.length ? tp.doors.map(esc).join(', ') : 'none yet';
+                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.<br>` +
+                    (tp.ready ? `<button class="btn sm" data-table-seat>◈ Take your seat</button>`
+                              : `<button class="btn sm ghost" disabled title="The table will not sit before day 90">◈ Take your seat (opens day 90 · today: day ${tp.day})</button>`) +
+                    `</p></div>`;
+                }
+              } catch (e) { console.warn('table seat html', e); }
               if (Game.state.pendingGlobal) {
                 html += `<div style="margin-top:4px"><p class="small">📡 <b>The Watchers:</b> the world feed wants Haven.<br><button class="btn sm" data-global="champion">📡 Send the champion (7 days)</button> <button class="btn sm ghost" data-global="feast">🍲 Feast the cameras (5,000 kcal)</button> <button class="btn sm ghost" data-global="decline">Decline on camera</button></p></div>`;
               }
