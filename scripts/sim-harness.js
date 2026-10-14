@@ -232,6 +232,31 @@ async function runDays(Game, policy, opts) {
     } catch (e) { return []; }
   };
   const pop = () => ((Game.state.village || {}).roster || []).length;
+  // LIVING-NPC LIVENESS (harnessstop 2026-10-14): the engine-true "is the
+  // village alive" check. The engine declares a LOST village via Game.over /
+  // Game.villageLost (checked every phase of the day loop above). But a
+  // village can be effectively dead — zero living non-scholar villagers —
+  // while the game continues (the scholar survives alone; the engine is
+  // correct to continue: wanderers can join, babies can be born). For sim
+  // measurement the community is gone: no national, no table, no waves.
+  // Liveness uses the engine's own convention — roster minus the scholar
+  // minus .dead-marked person records (cf. game.js:14630, game.js:38703).
+  // NOTE: Game.state.villagers does not exist (always undefined); any
+  // "roster vs state.villagers" disagreement is a phantom — roster is the
+  // real villager list, pruned by removeVillager on every death path.
+  // Fail-open: a read error returns 1 (never stop a living village on a
+  // harness error); the error is noted in ctx.notes.
+  const livingNPCs = () => {
+    try {
+      const v = Game.state.village || {};
+      const sid = Game.villagerId;
+      return (v.roster || []).filter(id => {
+        if (id === sid) return false;
+        try { if ((Game.getPerson(id) || {}).dead) return false; } catch (e) {}
+        return true;
+      }).length;
+    } catch (e) { ctx.notes.push('livingNPCs read error: ' + e.message); return 1; }
+  };
   const pantryKcal = () => {
     try {
       return ((Game.state.village || {}).pantry || [])
@@ -400,6 +425,13 @@ async function runDays(Game, policy, opts) {
   } catch (e) {}
 
   let day;
+  // DEAD-VILLAGE TAIL (harnessstop 2026-10-14): once livingNPCs() hits 0 the
+  // village is dead for measurement purposes. Simulate a +10d tail so
+  // death-tail telemetry (rot, succession, grief) is still captured, then
+  // stop — a dead village must never grind the full horizon. The tail
+  // resets if the roster recovers (joiners/births), so a revived village
+  // keeps its full run. deadReason feeds endReason below.
+  let deadTail = 0, deadReason = null;
   // TIME-FREEZE WATCHDOG (crisis leg 2026-10-11): a fight that neither side
   // can advance freezes the day clock (tickAction no-ops mid-fight) — probed
   // 160 loop-days stuck on day 22 with fight=true. Mirrors winrate-iter4's
@@ -458,7 +490,13 @@ async function runDays(Game, policy, opts) {
       samples.trust.push([day, ts ? ts.mean : null]);
       if (day % 30 === 0) samples.villagers.push([day, villagerSnapshot()]);
     }
-    if (pop() === 0) break;
+    if (livingNPCs() === 0) {
+      // The old check was `if (pop() === 0) break` — roster length, which
+      // stays >0 while the scholar lives alone (and the scholar's death
+      // without successors already sets Game.over above). A scholar-alone
+      // village simulated the whole horizon for nothing.
+      if (++deadTail >= 10) { deadReason = 'village-dead'; break; }
+    } else deadTail = 0;
   }
   }); // end quietLog day loop
 
@@ -478,7 +516,7 @@ async function runDays(Game, policy, opts) {
 
   const endReason = Game.over
     ? (Game.villageLost ? 'village-lost' : 'over-other')
-    : (day > days ? 'survived' : 'pop-zero');
+    : (day > days ? 'survived' : (deadReason || 'pop-zero'));
 
   // End-state learned sets (coverage 2026-10-09): unioned across runs, these
   // answer "which skills/plants were NEVER learned". Cheaper than tele events.
