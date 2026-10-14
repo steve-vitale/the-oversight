@@ -38826,7 +38826,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const fresh = S.Godhood.checkGodhood(sch, day);
         for (const ghId of fresh) {
           const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(null, 3) : [];
-          const dp = this.dayPartName ? this.dayPartName() : null;
+          let dp = null;
+          try { dp = ['dawn', 'midday', 'dusk', 'night'][this.dayPart] || null; } catch (e2) {}
           S.Godhood.recognitionCeremony(this, ghId, witnesses, dp);
         }
         // ABILITY CODEX (Steve 2026-10-13): when close to a godhood, the
