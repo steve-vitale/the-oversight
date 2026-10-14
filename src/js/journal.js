@@ -220,7 +220,7 @@
       if (field === 'name') {
         if (!e.name) {
           e.name = { value, how: opts.how || 'told', day: day() };
-          isNew = true; label = `learned ${value}'s name`;
+          isNew = true; label = `learned their name`;
         }
       } else if (field === 'occupation') {
         if (!e.occupation || (!e.occupation.sure && opts.sure)) {

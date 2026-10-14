@@ -532,7 +532,8 @@
             this.objDepart(rid, o, hx, hy, playerAtHaven);
             // the companion walks out with them, same part
             this.objDepart(cid, co, hx, hy, playerAtHaven);
-            try { this.bumpTrust(rid, 1); this.bumpTrust(cid, 1); } catch (e) {}
+            // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+            try { this.bumpTrust(rid, 1, 'they walk out with me'); this.bumpTrust(cid, 1, 'heading out together'); } catch (e) {}
           } else if (ridOk) {
             // rid is fit but the companion sat out hurt -> rid tightens or
             // defers, same as the no-companion case
@@ -632,7 +633,10 @@
         try { tn = this.npcNode(o.targetVid); } catch (e) {}
         if (tn && tn.nx === nx && tn.ny === ny) {
           try {
-            this.bumpTrust(rid, 2); this.bumpTrust(o.targetVid, 2);
+            // TRUST LEDGER (journey landing r12 2026-10-13): reasons are the
+            // trust ledger's only attribution — reasonless bumps were 31% of
+            // week-1 trust events with no explanation.
+            this.bumpTrust(rid, 2, 'walked out to visit them'); this.bumpTrust(o.targetVid, 2, 'they came all this way to visit');
             var v = this.state.village;
             v.objectives[o.targetVid] = v.objectives[o.targetVid] || { kind: 'idle', state: 'idle' };
             this.seedGossip('deed', { generous: 2, who: rid }, [o.targetVid]);
@@ -656,7 +660,8 @@
         }, this);
         if (others.length && R() < 0.25) {
           var other = pick(others);
-          this.bumpTrust(rid, 1); this.bumpTrust(other, 1);
+          // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+          this.bumpTrust(rid, 1, 'ran into each other out there'); this.bumpTrust(other, 1, 'ran into each other out there');
           var pHere = false;
           try { pHere = (this.map.px === nx && this.map.py === ny); } catch (e) {}
           if (pHere) {
@@ -769,7 +774,8 @@
               if (here.length) lesson = this.agencyTeachVillager(rid, pick(here));
             } catch (e) {}
             if (lesson && lesson.taught) {
-              try { this.bumpTrust(rid, 1); this.bumpTrust(lesson.learner, 1); } catch (e) {}
+              // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+              try { this.bumpTrust(rid, 1, 'taught a villager their craft'); this.bumpTrust(lesson.learner, 1, 'learned a craft from a villager'); } catch (e) {}
               if (playerAtHaven) {
                 // LONGSIM agency r5 (2026-10-12): the spoken line varies off
                 // the lesson's NEED (r4 recorded it on the lesson result;
@@ -798,7 +804,8 @@
           try { tnode2 = this.npcNode(o.targetVid); } catch (e) {}
           if (tnode2 && tnode2.nx === hx && tnode2.ny === hy && R() < 0.5) {
             try {
-              this.bumpTrust(rid, 1); this.bumpTrust(o.targetVid, 1);
+              // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+              this.bumpTrust(rid, 1, 'sat and talked a while'); this.bumpTrust(o.targetVid, 1, 'shared a quiet talk');
               var nn2 = this.npcNeeds(rid); nn2.social = Math.max(0, (nn2.social || 40) - 15);
               if (playerAtHaven) {
                 var tname2 = 'someone';
@@ -886,7 +893,7 @@
         v.water = v.water || { clean: 0 };
         v.water.clean = (v.water.clean || 0) + n;
         if (playerAtHaven) this.say(`💧 ${nm} returns with water: +${n} clean.`);
-        try { this.bumpTrust(vid, 1); } catch (e) {}
+        try { this.bumpTrust(vid, 1, 'hauled clean water home'); } catch (e) {}
       } else if (purpose === 'traps') {
         var _caught = false, _kcal = 0;
         if (R() < 0.4) {
@@ -918,7 +925,7 @@
             this.say(`🪤 ${nm} catches you watching the snares come off the line. "...Want to actually SEE one?" They show you — the loop, the trigger stick, where the run narrows between the roots. "Opossum trails. Check at dawn. Always." Your hands don't know it yet. Your eyes do.`);
           }
         } catch (e) {}
-        try { this.bumpTrust(vid, 1); } catch (e) {} // NOTE: the teaching gate
+        try { this.bumpTrust(vid, 1, 'worked the snare line'); } catch (e) {} // NOTE: the teaching gate
         // above reads trust BEFORE this +1 — the lesson is earned on prior
         // regard, not on the bump for this return.
       } else if (purpose === 'visit' || purpose === 'guard') {

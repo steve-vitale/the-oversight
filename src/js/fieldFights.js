@@ -946,7 +946,8 @@
           rec.calledHelp = true;
           rec.allyVid = allyVid;
           rec.log.push(vName + ' is losing — shouts for help! ' + allyName + ' charges in!');
-          try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
+          // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+          try { if (this.bumpTrust) this.bumpTrust(allyVid, 1, 'answered a call for help'); } catch (e) {}
         } else if (hopeless) {
           // HOPELESS AND ALONE (break-it contests r11 2026-10-10): the
           // trajectory is legible (drops long before the lead falls) and no

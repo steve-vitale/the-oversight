@@ -553,7 +553,8 @@
       }
       var dist = ex.dist || 1;
       if (dist >= 4) this.recordDeed(vid, 'mapped_far', `${nm} walked farther than anyone's gone and came back with the map in their head.`, 3);
-      try { this.bumpTrust(vid, 1); } catch (e) {}
+      // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+      try { this.bumpTrust(vid, 1, 'came back from an expedition'); } catch (e) {}
       // the return is news, if you're there to see it
       if (playerAtHaven) {
         var bits = [];

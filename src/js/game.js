@@ -17373,7 +17373,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         } catch (e) {}
         tell(`\u2694\uFE0F ${summary}${wloot} The village cheers.`);
-        try { this.bumpTrust(vid, 4); } catch (e) {}
+        // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
+        try { this.bumpTrust(vid, 4, 'stood down a monster for the village'); } catch (e) {}
         try { if (this.remember) this.remember(vid, 'hero', 'killed ' + mName); } catch (e) {}
         // MEMDEPTH (2026-10-13): same witness rule as patrol kills.
         try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, wAllyVids); } catch (e) {}
