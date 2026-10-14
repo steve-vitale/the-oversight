@@ -31007,17 +31007,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       let wasCrit = false; // DRAMA B1: crits get the full spectacle
       if (p.aimed) { d = Math.round(d * 2.5); p.aimed = false; wasCrit = true; this.say('DEAD AIM: patience, then thunder. Critical ×2.5.');
-        // GEAR REWRITE (hunting_spear 2026-10-14): the crit pins — spear impales, rooted 1 round.
-        try {
-          const _eq3 = (this.state.scholar.equipped || {});
-          const _ws3 = _eq3.melee || _eq3.ranged || _eq3.weapon;
-          const _wd3 = _ws3 ? (this.data.items || []).find(i => i.id === _ws3.itemId) : null;
-          const _hk3 = (_wd3 && _wd3.abilityHooks) || [];
-          if (_hk3.some(h => h.type === 'rewrite' && h.ability === 'dead_aim') && t && t.alive) {
-            t.rooted = Math.max(t.rooted || 0, 1);
-            this.say('(The spear pins it — rooted 1 round.)');
-          }
-        } catch (e) {} }
+ }
       // ABILITY ACTIONS (Steve 2026-10-07): consume take_aim, ambush, haymaker,
       // trade_of_blows, rage, etc. flags set by Game.useAbility(). Each flag
       // is single-use unless noted; the hook narrates and clears.
@@ -31516,19 +31506,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((this.fighterSize(m) || 1) > 1) { this.say(`It's too big to shove — you'd bounce off. (Shove: size-1 monsters only.)`); return false; }
       let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
       if (!dx && !dy) dx = 1;
-      // GEAR REWRITE (machete 2026-10-14): the shove carves — bleed on the way past.
-      try {
-        const _eq = (this.state.scholar.equipped || {});
-        const _wslot = _eq.melee || _eq.ranged || _eq.weapon;
-        const _wdef = _wslot ? (this.data.items || []).find(i => i.id === _wslot.itemId) : null;
-        const _hooks = (_wdef && _wdef.abilityHooks) || [];
-        if (_hooks.some(h => h.type === 'rewrite' && h.ability === 'shoulder_check')) {
-          if (m && !m.fled && m.alive) {
-            m.bleed = (m.bleed || 0) + 5;
-            this.say('(The machete carves on the way past — 5 bleed.)');
-          }
-        }
-      } catch (e) {}
+
       if (!opts.viaAbility) p.acted = true;
       let moved = 0;
       for (let i = 0; i < 2; i++) {
@@ -31581,22 +31559,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
       if (d > 1) { this.say('Too far to bind. Get adjacent.'); return false; }
       if ((this.fighterSize(m) || 1) > 1) { this.say(`Too big to hogtie with one rope. (Bind: size-1 monsters only.)`); return false; }
-      // GEAR REWRITE (phase_blade 2026-10-14): the blade phases through and binds — no rope needed.
-      let _noRope = false;
-      try {
-        const _eq2 = (this.state.scholar.equipped || {});
-        const _wslot2 = _eq2.melee || _eq2.ranged || _eq2.weapon;
-        const _wdef2 = _wslot2 ? (this.data.items || []).find(i => i.id === _wslot2.itemId) : null;
-        const _hooks2 = (_wdef2 && _wdef2.abilityHooks) || [];
-        if (_hooks2.some(h => h.type === 'rewrite' && h.ability === 'hogtie')) {
-          _noRope = true;
-          this.say('(The phase blade binds without rope — it cuts space, not cord.)');
-        }
-      } catch (e) {}
-      if (!_noRope) {
-        if (!this.hasItem || !this.hasItem('rope_50ft')) { this.say('No rope. (Bind needs rope — 1 coil per bind.)'); return false; }
-        if (!this.consumeItem('rope_50ft', 1)) { this.say('The rope slips through your hands. (Bind failed.)'); return false; }
-      }
+      if (!this.hasItem || !this.hasItem('rope_50ft')) { this.say('No rope. (Bind needs rope — 1 coil per bind.)'); return false; }
+      if (!this.consumeItem('rope_50ft', 1)) { this.say('The rope slips through your hands. (Bind failed.)'); return false; }
       const prevBinds = m._bindCount || 0;
       const rounds = Math.max(1, 3 - prevBinds);
       m._bindCount = prevBinds + 1;
@@ -32622,10 +32586,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // (chip hits vs real protection). The monster-hide block below
           // already gates on absorbed > 0; same rule here.
           if (absorb > 0) this.say(`Armor absorbs ${absorb}.`);
-          // RETRIBUTION (build-around 2026-10-14): store blocked damage.
+          // RETRIBUTION (build-around 2026-10-14, fiction: the System records
+          // protective pain). Only charges when taking hits FOR OTHERS —
+          // bodyguard stance, draw_fire taunt, or intercepting.
           try {
             const BA4 = (globalThis.Scattering || {}).buildarounds;
-            if (BA4 && typeof BA4.onBlocked === 'function') BA4.onBlocked(this, absorb);
+            if (BA4 && typeof BA4.onBlocked === 'function') {
+              const _p = this.tbFighter('p');
+              const _forOther = !!(_p && (_p.bodyguardStance || _p.drawFireActive || _p.interceptedHit));
+              BA4.onBlocked(this, absorb, _forOther);
+            }
           } catch (e) {}
         }
       }

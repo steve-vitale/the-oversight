@@ -88,15 +88,20 @@
       } catch (e) { return 1; }
     },
 
-    // RETRIBUTION (shieldbearer): store 50% of blocked damage, unleash as shockwave.
-    onBlocked: function (game, amount) {
+    // RETRIBUTION (shieldbearer): the System records pain you take FOR OTHERS.
+    // It doesn't understand self-sacrifice — so it studies it. When you
+    // bodyguard, draw fire, or intercept, the pain is stored as data.
+    // Unleash: the System returns the data as force.
+    onBlocked: function (game, amount, forOther) {
       try {
         if (!game.hasAbility || !game.hasAbility('retribution')) return;
+        if (!forOther) return; // The System only records protective pain.
         const st = dayState(game);
-        st.retribution = (st.retribution || 0) + Math.round(amount * 0.5);
+        st.retribution = (st.retribution || 0) + Math.round(amount);
         if (st.retribution >= 30 && !st.retributionTold) {
           st.retributionTold = true;
-          game.say(`RETRIBUTION: you've stored ${st.retribution} damage. Unleash it. (active ability)`);
+          game.say(`RETRIBUTION: the System has recorded ${st.retribution} pain. "WE DON'T UNDERSTAND. DO YOU WANT IT BACK?" (Unleash: active ability)`);
+          try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e2) {}
         }
       } catch (e) {}
     },
@@ -110,7 +115,7 @@
         }
         st.retribution = 0;
         st.retributionTold = false;
-        game.say(`RETRIBUTION UNLEASHED: ${stored} stored damage erupts outward!`);
+        game.say(`RETRIBUTION: the System returns your pain — ${stored} recorded hurt erupts outward! "THANK YOU FOR THE DATA."`);
         try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e) {}
         return stored;
       } catch (e) { return 0; }

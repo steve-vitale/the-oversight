@@ -97,11 +97,13 @@ const mockGame2 = {
   state: { scholar: { buildaround: {} } },
   say: () => {}, audioEvent: () => {},
 };
-BA.onBlocked(mockGame2, 40);
-BA.onBlocked(mockGame2, 40);
-ok(mockGame2.state.scholar.buildaround.retribution === 40, `stored 40 (50% of 80, got ${mockGame2.state.scholar.buildaround.retribution})`);
+BA.onBlocked(mockGame2, 40, false); // not for other — System doesn't record
+ok((mockGame2.state.scholar.buildaround.retribution || 0) === 0, 'no charge when not protecting');
+BA.onBlocked(mockGame2, 40, true); // for other — System records
+BA.onBlocked(mockGame2, 40, true);
+ok(mockGame2.state.scholar.buildaround.retribution === 80, `stored 80 (got ${mockGame2.state.scholar.buildaround.retribution})`);
 const unleashed = BA.unleash(mockGame2);
-ok(unleashed === 40, `unleash releases 40 (got ${unleashed})`);
+ok(unleashed === 80, `unleash releases 80 (got ${unleashed})`);
 ok(mockGame2.state.scholar.buildaround.retribution === 0, 'storage cleared after unleash');
 
 console.log('\n6. Nowhere Man logic:');
@@ -118,25 +120,18 @@ ok(dodge === 0.2, `4 tiles = +20% dodge uncapped path (got ${dodge})`);
 BA.onDamaged(mockGame3);
 ok(BA.dodgeBonus(mockGame3) === 0, 'damage resets streak');
 
-// 7. Gear hooks in data
-console.log('\n7. Gear abilityHooks:');
+// 7. Gear abilityHooks: CUT per Steve 2026-10-14 — gear rewriting abilities
+// is category confusion. Gear grants situational actions (the 4 named
+// synergies: Shattering Blow etc.), it doesn't rewrite verbs.
+console.log('\n7. Gear abilityHooks (cut):');
 const items = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/items.json'), 'utf8'));
 const withHooks = items.filter(i => i.abilityHooks);
-ok(withHooks.length >= 4, `${withHooks.length} items with abilityHooks`);
-const expectedHooks = {
-  machete: ['rewrite','shoulder_check'],
-  hunting_spear: ['rewrite','dead_aim'],
-  phase_blade: ['rewrite','hogtie'],
-  hardlight_knife: ['rewrite','pocket_sand'],
-};
-for (const iid of Object.keys(expectedHooks)) {
-  const item = items.find(i => i.id === iid);
-  const h = item && item.abilityHooks && item.abilityHooks[0];
-  ok(!!h, `${iid} has abilityHooks`);
-  if (h) {
-    ok(h.type === expectedHooks[iid][0] && h.ability === expectedHooks[iid][1],
-       `  ${iid}: ${h.type}/${h.ability} (semantically coherent)`);
-  }
+ok(withHooks.length === 0, `no abilityHooks (system cut, got ${withHooks.length})`);
+// The 4 named weapon-ability synergies are the model (action-level, rare).
+const syns = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/synergies.json'), 'utf8'));
+const synList = syns.synergies || syns;
+for (const sid of ['shattering_blow','impaling_scream','blood_iron','static_edge']) {
+  ok(!!synList.find(s => s.id === sid), `${sid} synergy exists (action-level gear interaction)`);
 }
 
 // 8. Synergy hints coverage
