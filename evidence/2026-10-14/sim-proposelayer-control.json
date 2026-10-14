@@ -1,0 +1,6072 @@
+{
+ "label": "competent-control",
+ "armed": false,
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 150,
+ "horizon": "150d death-aware",
+ "prereg": "links>=2/8 AND (regional+ by d120 on >=1 seed OR national>=1/8); guards: medSurv>=ctrl-10, starv<=ctrl+9, hungry<=ctrl*1.409, no new death mode, exiled<=ctrl+1",
+ "rows": [
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 11,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 150,
+   "endReason": "survived",
+   "kills": 30,
+   "killsByWave": {
+    "1": 27,
+    "2": 3
+   },
+   "butcherEvents": 1,
+   "grossHarvest": 150,
+   "netHarvest": 45,
+   "influx": {
+    "Foraged food": 58820,
+    "Expedition haul": 14438,
+    "Fish catch": 61225,
+    "Garden harvest": 5600,
+    "Snared meat": 4920,
+    "Player donation": 480
+   },
+   "rotKcal": 264628,
+   "rotItems": 235,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 780,
+     "in_shell/nut": 0,
+     "cleaned/meat": 45,
+     "carcass/meat": 0
+    },
+    "pantry": {
+     "?/?": 171926,
+     "preserved/?": 14332,
+     "ready/plant": 4465,
+     "preserved/plant": 1425
+    },
+    "pack": {
+     "ready/plant": 71620,
+     "carcass/meat": 35
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "fish": 305,
+    "wood": 83,
+    "water": 288,
+    "stone": 82,
+    "garden": 48,
+    "cook": 111
+   },
+   "starveDays": 0,
+   "ateShareMed": 87.5,
+   "pantryDaysMed": 20,
+   "pantryKcalEnd": 53489,
+   "vests": 0,
+   "preservedKcalEnd": 33189,
+   "rotNames": {
+    "unknown shoots": 0,
+    "unknown berries": 0,
+    "Pawpaw": 5600,
+    "unknown nuts": 0,
+    "Muscadine Grapes": 12150,
+    "Lamb's Quarters": 18850,
+    "Purslane": 8220,
+    "Wild Onion": 3815,
+    "Blackberry": 26260,
+    "Garden harvest": 2000,
+    "Foraged food": 163582,
+    "Hickory Nuts (in shell)": 0,
+    "Fish catch (smoked)": 4264,
+    "Foraged food (dried)": 10068,
+    "The Big Beast (cleaned)": 45,
+    "Old Croaker (carcass)": 35,
+    "Maypop": 1320,
+    "Wood Sorrel": 650,
+    "Snared meat": 1526,
+    "Choir Toad legs (carcass)": 0,
+    "Choir Toad (carcass)": 0,
+    "Expedition haul": 4818,
+    "Lamb's Quarters (dried)": 550,
+    "Wild Onion (dried)": 875
+   },
+   "maxWave": 2,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 23080,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 23080,
+     "pop": 11,
+     "pantryKcal": 22078,
+     "pantryDays": 5,
+     "ateShare": 91.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 20515,
+     "pop": 10,
+     "pantryKcal": 19096,
+     "pantryDays": 12,
+     "ateShare": 86.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 17,
+     "need": 18615,
+     "pop": 9,
+     "pantryKcal": 31075,
+     "pantryDays": 20,
+     "ateShare": 82.6,
+     "preservedKcal": 0
+    },
+    {
+     "day": 22,
+     "need": 18615,
+     "pop": 9,
+     "pantryKcal": 24676,
+     "pantryDays": 18,
+     "ateShare": 84.5,
+     "preservedKcal": 8976
+    },
+    {
+     "day": 27,
+     "need": 18615,
+     "pop": 9,
+     "pantryKcal": 36312,
+     "pantryDays": 34,
+     "ateShare": 82.4,
+     "preservedKcal": 19312
+    },
+    {
+     "day": 32,
+     "need": 14080,
+     "pop": 7,
+     "pantryKcal": 25536,
+     "pantryDays": 17,
+     "ateShare": 77.6,
+     "preservedKcal": 11236
+    },
+    {
+     "day": 37,
+     "need": 14080,
+     "pop": 7,
+     "pantryKcal": 24636,
+     "pantryDays": 14,
+     "ateShare": 72.7,
+     "preservedKcal": 9736
+    },
+    {
+     "day": 42,
+     "need": 11755,
+     "pop": 6,
+     "pantryKcal": 12900,
+     "pantryDays": 4,
+     "ateShare": 87.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 47,
+     "need": 18614,
+     "pop": 9,
+     "pantryKcal": 6000,
+     "pantryDays": 1,
+     "ateShare": 84.8,
+     "preservedKcal": 0
+    },
+    {
+     "day": 52,
+     "need": 18614,
+     "pop": 9,
+     "pantryKcal": 8415,
+     "pantryDays": 3,
+     "ateShare": 90.8,
+     "preservedKcal": 0
+    },
+    {
+     "day": 57,
+     "need": 18614,
+     "pop": 9,
+     "pantryKcal": 11449,
+     "pantryDays": 6,
+     "ateShare": 85.5,
+     "preservedKcal": 3840
+    },
+    {
+     "day": 62,
+     "need": 16167,
+     "pop": 8,
+     "pantryKcal": 19403,
+     "pantryDays": 36,
+     "ateShare": 96.1,
+     "preservedKcal": 15103
+    },
+    {
+     "day": 67,
+     "need": 16167,
+     "pop": 8,
+     "pantryKcal": 28229,
+     "pantryDays": 54,
+     "ateShare": 92.4,
+     "preservedKcal": 14207
+    },
+    {
+     "day": 72,
+     "need": 14055,
+     "pop": 7,
+     "pantryKcal": 23439,
+     "pantryDays": 61,
+     "ateShare": 84.7,
+     "preservedKcal": 15104
+    },
+    {
+     "day": 77,
+     "need": 14055,
+     "pop": 7,
+     "pantryKcal": 17490,
+     "pantryDays": 44,
+     "ateShare": 81.4,
+     "preservedKcal": 12760
+    },
+    {
+     "day": 82,
+     "need": 14055,
+     "pop": 7,
+     "pantryKcal": 17770,
+     "pantryDays": 39,
+     "ateShare": 78.9,
+     "preservedKcal": 13656
+    },
+    {
+     "day": 87,
+     "need": 10200,
+     "pop": 5,
+     "pantryKcal": 16489,
+     "pantryDays": 17,
+     "ateShare": 83.5,
+     "preservedKcal": 13764
+    },
+    {
+     "day": 92,
+     "need": 14717,
+     "pop": 7,
+     "pantryKcal": 6732,
+     "pantryDays": 8,
+     "ateShare": 86.9,
+     "preservedKcal": 5532
+    },
+    {
+     "day": 97,
+     "need": 14717,
+     "pop": 7,
+     "pantryKcal": 6900,
+     "pantryDays": 71,
+     "ateShare": 91.1,
+     "preservedKcal": 3200
+    },
+    {
+     "day": 102,
+     "need": 12717,
+     "pop": 6,
+     "pantryKcal": 5704,
+     "pantryDays": 6,
+     "ateShare": 80.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 107,
+     "need": 12717,
+     "pop": 6,
+     "pantryKcal": 14123,
+     "pantryDays": 9,
+     "ateShare": 93.9,
+     "preservedKcal": 8798
+    },
+    {
+     "day": 112,
+     "need": 18651,
+     "pop": 9,
+     "pantryKcal": 12500,
+     "pantryDays": 22,
+     "ateShare": 90.6,
+     "preservedKcal": 10241
+    },
+    {
+     "day": 117,
+     "need": 18651,
+     "pop": 9,
+     "pantryKcal": 17151,
+     "pantryDays": 29,
+     "ateShare": 90.7,
+     "preservedKcal": 12801
+    },
+    {
+     "day": 122,
+     "need": 14551,
+     "pop": 7,
+     "pantryKcal": 36971,
+     "pantryDays": 71,
+     "ateShare": 94.3,
+     "preservedKcal": 24984
+    },
+    {
+     "day": 127,
+     "need": 14551,
+     "pop": 7,
+     "pantryKcal": 44162,
+     "pantryDays": 83,
+     "ateShare": 86.5,
+     "preservedKcal": 38920
+    },
+    {
+     "day": 132,
+     "need": 14551,
+     "pop": 7,
+     "pantryKcal": 49640,
+     "pantryDays": 113,
+     "ateShare": 86.3,
+     "preservedKcal": 38920
+    },
+    {
+     "day": 137,
+     "need": 14551,
+     "pop": 7,
+     "pantryKcal": 52838,
+     "pantryDays": 125,
+     "ateShare": 90.1,
+     "preservedKcal": 38920
+    },
+    {
+     "day": 142,
+     "need": 9869,
+     "pop": 5,
+     "pantryKcal": 41724,
+     "pantryDays": 104,
+     "ateShare": 91.7,
+     "preservedKcal": 37335
+    },
+    {
+     "day": 147,
+     "need": 9869,
+     "pop": 5,
+     "pantryKcal": 45505,
+     "pantryDays": 129,
+     "ateShare": 88.2,
+     "preservedKcal": 32187
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 71,
+   "pushPantryDaysMed": 19,
+   "pushPantryDaysMin": 0,
+   "pushAteMed": 83.5,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 1750,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 5,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 0,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 82,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 92,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 97,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 102,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 107,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 112,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 117,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 122,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 127,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 132,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 137,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 142,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 147,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 2,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 72,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 82,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 92,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 102,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 112,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 122,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 132,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 142,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 93,
+    "capBlockedDays": 0,
+    "winDays": 150,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:villager combat": 1,
+    "villager:combat": 4,
+    "player:combat": 2
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d144] — DAY 144 DAWN — The world wakes. Animals are active.",
+    "[d144] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d145] — DAY 145 DAWN — The world wakes. Animals are active.",
+    "[d145] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d145] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d145] 💡 COUNTER LEARNED — Extended Warranty: Never stand still. The RING is the telegraph — the pitch itself gives no warning. Move two or more tiles from where you stood when it dialed and the call drops. It can only dial a ",
+    "[d145] 📓 Codex: Counter: Never stand still — The RING is the telegraph — the pitch itself gives no warning. Move two or more tiles from where you stood when it dialed and the call drops. It can only dial a stationary target. N",
+    "[d146] — DAY 146 DAWN — The world wakes. Animals are active.",
+    "[d146] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d146] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d147] — DAY 147 DAWN — The world wakes. Animals are active.",
+    "[d147] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d147] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d148] — DAY 148 DAWN — The world wakes. Animals are active.",
+    "[d148] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d149] — DAY 149 DAWN — The world wakes. Animals are active.",
+    "[d149] Dawn. You wake rested. (+15 health, energy restored. By the fire. Good enough.)",
+    "[d149] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d150] — DAY 150 DAWN — The world wakes. Animals are active.",
+    "[d150] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d150] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d151] — DAY 151 DAWN — The world wakes. Animals are active.",
+    "[d151] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d152] — DAY 152 DAWN — The world wakes. Animals are active.",
+    "[d152] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 22,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 150,
+   "endReason": "survived",
+   "kills": 27,
+   "killsByWave": {
+    "1": 18,
+    "2": 8,
+    "3": 1
+   },
+   "butcherEvents": 1,
+   "grossHarvest": 2800,
+   "netHarvest": 0,
+   "influx": {
+    "Snared meat": 15708,
+    "Foraged food": 65542,
+    "Expedition haul": 24047,
+    "Fish catch": 5220
+   },
+   "rotKcal": 962042,
+   "rotItems": 253,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 1020,
+     "cleaned/meat": 0,
+     "in_shell/nut": 0
+    },
+    "pantry": {
+     "?/?": 921382,
+     "preserved/?": 36090,
+     "ready/plant": 1170
+    },
+    "pack": {
+     "ready/plant": 2380
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "fish": 670,
+    "wood": 414,
+    "water": 1084,
+    "stone": 414,
+    "garden": 528,
+    "cook": 522,
+    "forage": 55
+   },
+   "starveDays": 0,
+   "ateShareMed": 90.4,
+   "pantryDaysMed": 84,
+   "pantryKcalEnd": 13300,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown shoots": 0,
+    "unknown roots": 0,
+    "Lamb's Quarters": 50,
+    "unknown nuts": 0,
+    "Foraged food": 895379,
+    "Jerusalem Artichoke": 240,
+    "Muscadine Grapes": 2340,
+    "Expedition haul": 13481,
+    "unknown berries": 0,
+    "Pawpaw": 640,
+    "The Glow Stag (cleaned)": 0,
+    "small tree with mitten-shaped leaves (th": 0,
+    "Snared meat": 4142,
+    "Winner's share (alien rations)": 3600,
+    "Foraged food (dried)": 33590,
+    "Hickory Nuts (in shell)": 0,
+    "Squirrel gift (hickory nuts, in shell)": 0,
+    "Fish catch": 4780,
+    "American Persimmon": 1300,
+    "Expedition haul (dried)": 2500
+   },
+   "maxWave": 3,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 22984,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 22984,
+     "pop": 11,
+     "pantryKcal": 37784,
+     "pantryDays": 11,
+     "ateShare": 90.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 21184,
+     "pop": 10,
+     "pantryKcal": 49889,
+     "pantryDays": 43,
+     "ateShare": 91.4,
+     "preservedKcal": 6573
+    },
+    {
+     "day": 17,
+     "need": 21184,
+     "pop": 10,
+     "pantryKcal": 64109,
+     "pantryDays": 56,
+     "ateShare": 88.4,
+     "preservedKcal": 22126
+    },
+    {
+     "day": 22,
+     "need": 21184,
+     "pop": 10,
+     "pantryKcal": 83148,
+     "pantryDays": 76,
+     "ateShare": 92.3,
+     "preservedKcal": 37850
+    },
+    {
+     "day": 27,
+     "need": 21184,
+     "pop": 10,
+     "pantryKcal": 117848,
+     "pantryDays": 109,
+     "ateShare": 91.6,
+     "preservedKcal": 54846
+    },
+    {
+     "day": 32,
+     "need": 21184,
+     "pop": 10,
+     "pantryKcal": 107046,
+     "pantryDays": 94,
+     "ateShare": 91.2,
+     "preservedKcal": 61446
+    },
+    {
+     "day": 37,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 106886,
+     "pantryDays": 96,
+     "ateShare": 89.6,
+     "preservedKcal": 58446
+    },
+    {
+     "day": 42,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 118733,
+     "pantryDays": 105,
+     "ateShare": 92.4,
+     "preservedKcal": 57446
+    },
+    {
+     "day": 47,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 107921,
+     "pantryDays": 89,
+     "ateShare": 91.6,
+     "preservedKcal": 55546
+    },
+    {
+     "day": 52,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 113552,
+     "pantryDays": 104,
+     "ateShare": 91.7,
+     "preservedKcal": 55866
+    },
+    {
+     "day": 57,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 117325,
+     "pantryDays": 103,
+     "ateShare": 92.2,
+     "preservedKcal": 56755
+    },
+    {
+     "day": 62,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 108660,
+     "pantryDays": 94,
+     "ateShare": 91.2,
+     "preservedKcal": 52411
+    },
+    {
+     "day": 67,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 107614,
+     "pantryDays": 96,
+     "ateShare": 95.5,
+     "preservedKcal": 49048
+    },
+    {
+     "day": 72,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 126161,
+     "pantryDays": 120,
+     "ateShare": 91.6,
+     "preservedKcal": 50174
+    },
+    {
+     "day": 77,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 116757,
+     "pantryDays": 107,
+     "ateShare": 90.3,
+     "preservedKcal": 56847
+    },
+    {
+     "day": 82,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 120805,
+     "pantryDays": 112,
+     "ateShare": 88.9,
+     "preservedKcal": 53840
+    },
+    {
+     "day": 87,
+     "need": 18884,
+     "pop": 9,
+     "pantryKcal": 111684,
+     "pantryDays": 144,
+     "ateShare": 91.3,
+     "preservedKcal": 51531
+    },
+    {
+     "day": 92,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 93072,
+     "pantryDays": 145,
+     "ateShare": 93.4,
+     "preservedKcal": 46245
+    },
+    {
+     "day": 97,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 100605,
+     "pantryDays": 999,
+     "ateShare": 90.5,
+     "preservedKcal": 37454
+    },
+    {
+     "day": 102,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 82955,
+     "pantryDays": 52,
+     "ateShare": 87.4,
+     "preservedKcal": 36221
+    },
+    {
+     "day": 107,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 85977,
+     "pantryDays": 40,
+     "ateShare": 89.6,
+     "preservedKcal": 35810
+    },
+    {
+     "day": 112,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 66978,
+     "pantryDays": 31,
+     "ateShare": 80.4,
+     "preservedKcal": 28236
+    },
+    {
+     "day": 117,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 50776,
+     "pantryDays": 30,
+     "ateShare": 88.4,
+     "preservedKcal": 15400
+    },
+    {
+     "day": 122,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 53466,
+     "pantryDays": 47,
+     "ateShare": 86,
+     "preservedKcal": 13748
+    },
+    {
+     "day": 127,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 49455,
+     "pantryDays": 43,
+     "ateShare": 89.7,
+     "preservedKcal": 12323
+    },
+    {
+     "day": 132,
+     "need": 14644,
+     "pop": 7,
+     "pantryKcal": 58260,
+     "pantryDays": 49,
+     "ateShare": 88.1,
+     "preservedKcal": 15922
+    },
+    {
+     "day": 137,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 50480,
+     "pantryDays": 43,
+     "ateShare": 90.3,
+     "preservedKcal": 13262
+    },
+    {
+     "day": 142,
+     "need": 6145,
+     "pop": 3,
+     "pantryKcal": 43014,
+     "pantryDays": 31,
+     "ateShare": 87.4,
+     "preservedKcal": 7831
+    },
+    {
+     "day": 147,
+     "need": 5677,
+     "pop": 3,
+     "pantryKcal": 31180,
+     "pantryDays": 11,
+     "ateShare": 89.8,
+     "preservedKcal": 2380
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 71,
+   "pushPantryDaysMed": 100,
+   "pushPantryDaysMin": 68,
+   "pushAteMed": 91.3,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 72910,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 1,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 0,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 82,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 92,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 97,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 102,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 107,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 112,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 117,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 122,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 127,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 132,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 137,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 142,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 147,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 25,
+    "war": 25,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 1,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 3,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 72,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 82,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 92,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 102,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 112,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 122,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 132,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 142,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 127,
+    "capBlockedDays": 0,
+    "winDays": 150,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:villager combat": 2,
+    "villager:contest": 1,
+    "villager:monster": 4,
+    "villager:combat": 1,
+    "player:combat": 3
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d142] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d143] — DAY 143 DAWN — The world wakes. Animals are active.",
+    "[d143] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 38 kcal conserved. By the fire. Good enough.)",
+    "[d143] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d143] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d144] — DAY 144 DAWN — The world wakes. Animals are active.",
+    "[d144] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d144] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d145] — DAY 145 DAWN — The world wakes. Animals are active.",
+    "[d145] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 32 kcal conserved. By the fire. Good enough.)",
+    "[d145] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d146] — DAY 146 DAWN — The world wakes. Animals are active.",
+    "[d146] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 21 kcal conserved. By the fire. Good enough.)",
+    "[d146] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d147] — DAY 147 DAWN — The world wakes. Animals are active.",
+    "[d147] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d147] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d148] — DAY 148 DAWN — The world wakes. Animals are active.",
+    "[d148] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d148] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d148] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d149] — DAY 149 DAWN — The world wakes. Animals are active.",
+    "[d149] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d149] 📖 Sigrun is showing Yuki the snare — the loop, the trigger stick, where the run narrows between the roots. \"Opossum trails. Check at dawn. Always.\"",
+    "[d149] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d150] — DAY 150 DAWN — The world wakes. Animals are active.",
+    "[d150] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d150] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d151] — DAY 151 DAWN — The world wakes. Animals are active.",
+    "[d151] Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)",
+    "[d151] 💛 You hold Dispatcher's headset. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ",
+    "[d152] — DAY 152 DAWN — The world wakes. Animals are active.",
+    "[d152] Dawn. You wake rested. (+5 health, energy restored. By the fire. Good enough.)"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 33,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 35,
+   "endReason": "village-lost",
+   "kills": 8,
+   "killsByWave": {
+    "1": 6,
+    "2": 2
+   },
+   "butcherEvents": 0,
+   "grossHarvest": 0,
+   "netHarvest": 0,
+   "influx": {
+    "Foraged food": 17767,
+    "Snared meat": 1814,
+    "System-replicated stew": 400,
+    "Fish catch": 13907
+   },
+   "rotKcal": 20617,
+   "rotItems": 19,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 500
+    },
+    "pantry": {
+     "?/?": 17697
+    },
+    "pack": {
+     "ready/plant": 2420
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "water": 89,
+    "garden": 14,
+    "wood": 20,
+    "fish": 71,
+    "stone": 19
+   },
+   "starveDays": 1,
+   "ateShareMed": 86.6,
+   "pantryDaysMed": 10,
+   "pantryKcalEnd": 0,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown berries": 0,
+    "Serviceberry": 550,
+    "unknown shoots": 0,
+    "Muscadine Grapes": 2250,
+    "Foraged food": 17697,
+    "unknown nuts": 0,
+    "Purslane": 120
+   },
+   "maxWave": 2,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 23263,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 23263,
+     "pop": 11,
+     "pantryKcal": 38018,
+     "pantryDays": 13,
+     "ateShare": 91.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 20999,
+     "pop": 10,
+     "pantryKcal": 40522,
+     "pantryDays": 38,
+     "ateShare": 88.4,
+     "preservedKcal": 0
+    },
+    {
+     "day": 17,
+     "need": 18701,
+     "pop": 9,
+     "pantryKcal": 33722,
+     "pantryDays": 22,
+     "ateShare": 87,
+     "preservedKcal": 0
+    },
+    {
+     "day": 22,
+     "need": 18701,
+     "pop": 9,
+     "pantryKcal": 33120,
+     "pantryDays": 12,
+     "ateShare": 83.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 27,
+     "need": 14553,
+     "pop": 7,
+     "pantryKcal": 23800,
+     "pantryDays": 8,
+     "ateShare": 73.3,
+     "preservedKcal": 0
+    },
+    {
+     "day": 32,
+     "need": 10489,
+     "pop": 5,
+     "pantryKcal": 7917,
+     "pantryDays": 1,
+     "ateShare": 62.3,
+     "preservedKcal": 0
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 17,
+   "pushPantryDaysMed": 6,
+   "pushPantryDaysMin": 0,
+   "pushAteMed": 73.3,
+   "pushStarveDays": 1,
+   "pushPantryKcalMin": 0,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 2,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 1,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 2,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 6,
+    "capBlockedDays": 0,
+    "winDays": 35,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:combat": 7,
+    "villager:sickness": 3,
+    "player:dehydration": 1,
+    "villager:thirst": 1,
+    "villager:a wound that wouldn't close": 1,
+    "villager:starvation": 2
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d32] 💡 COUNTER LEARNED — Night Court: Dodge twice. No sound is the tell — watch the ground-shadow. A missed dive comes again instantly at your NEW position: dodge TWICE. Then it's exhausted, and the sky is yours. (You lived ",
+    "[d32] 📓 Codex: Counter: Dodge twice — No sound is the tell — watch the ground-shadow. A missed dive comes again instantly at your NEW position: dodge TWICE. Then it's exhausted, and the sky is yours.",
+    "[d32] You lived to tell it — the The Heckler's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)",
+    "[d32] 📓 Codex: Sighting 1/2: survived an encounter.",
+    "[d32] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d32] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d32] 💡 COUNTER LEARNED — The Heckler: WAIT to answer back. SHAME is the damage, not the swing — WAIT to answer back and clear it before the HEADLINER pile-on. The words demand a response. Give them one, on your terms. (Someo",
+    "[d32] 📺 The Echo. One witness, two tellings. The story of last night, told at dawn and told at noon — and the details moved between tellings. Find what the teller added for the cameras.",
+    "[d33] — DAY 33 DAWN — The world wakes. Animals are active.",
+    "[d33] 📺 The Echo. One witness, two tellings. The story of last night, told at dawn and told at noon — and the details moved between tellings. Find what the teller added for the cameras.\n\nPeople die in this one. Regularly.\n\nTh",
+    "[d33] 📺 You line them up word for word. Dawn: hid, didn't know. Noon: stood ground, scared it. What moved is the danger — and who was brave inside it. The noon version has an audience. The dawn version has fear.",
+    "[d33] 📺 The village is splitting. Half believes the noon telling — arms for a monster that charged the traps. Half heard the dawn one and is quietly terrified of something that just... breathed, out there, in the dark.\n\nWhat ",
+    "[d33] 📺 You say it plainly: the dawn telling was the true one. Irving hid, and was ashamed, and performed bravery for the cameras. The village exhales — the danger was smaller than the performance. Irving is forgiven by dinne",
+    "[d33] 📺 The System presses something humming into your hands: Gravity hook. Pulls things toward you. Including, occasionally, things you did not aim at. Pack accordingly.",
+    "[d33] 💛 You hold Knife roll. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d34] — DAY 34 DAWN — The world wakes. Animals are active.",
+    "[d34] Dawn. You wake rested. (+28 health, energy restored. Your sleeping body burned less — 63 kcal conserved. By the fire. Good enough.)",
+    "[d34] Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)",
+    "[d34] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d35] — DAY 35 DAWN — The world wakes. Animals are active.",
+    "[d35] Dawn. You wake rested. (+28 health, energy restored. Your sleeping body burned less — 278 kcal conserved. By the fire. Good enough.)",
+    "[d36] — DAY 36 DAWN — The world wakes. Animals are active.",
+    "[d36] Dawn. You wake rested. (+26 health, energy restored. Your sleeping body burned less — 399 kcal conserved. By the fire. Good enough.)"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 44,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 150,
+   "endReason": "survived",
+   "kills": 20,
+   "killsByWave": {
+    "1": 18,
+    "2": 2
+   },
+   "butcherEvents": 0,
+   "grossHarvest": 0,
+   "netHarvest": 0,
+   "influx": {
+    "Foraged food": 85014,
+    "Expedition haul": 4743,
+    "System-replicated (enthusiastic) meal": 300,
+    "Fish catch": 28332
+   },
+   "rotKcal": 405823,
+   "rotItems": 190,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 1930,
+     "in_shell/nut": 0
+    },
+    "pantry": {
+     "preserved/?": 28574,
+     "?/?": 354229,
+     "ready/plant": 450
+    },
+    "pack": {
+     "carcass/meat": 15,
+     "ready/plant": 20625
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "garden": 27,
+    "wood": 75,
+    "fish": 208,
+    "water": 294,
+    "stone": 75,
+    "cook": 196,
+    "forage": 67
+   },
+   "starveDays": 0,
+   "ateShareMed": 90.3,
+   "pantryDaysMed": 24,
+   "pantryKcalEnd": 49015,
+   "vests": 0,
+   "preservedKcalEnd": 13575,
+   "rotNames": {
+    "unknown shoots": 0,
+    "unknown berries": 0,
+    "Elderberry": 1190,
+    "Muscadine Grapes": 19800,
+    "Foraged food (dried)": 28574,
+    "Foraged food": 333269,
+    "Hummice (carcass)": 15,
+    "a thorny bush with dark berries": 650,
+    "Big-Eyes (carcass)": 0,
+    "a tree with compound leaves and hard nut": 0,
+    "Fish catch": 20960,
+    "Nevermore (carcass)": 0,
+    "Hickory Nuts (in shell)": 0,
+    "Big Big (carcass)": 0,
+    "Blackberry": 1365
+   },
+   "maxWave": 2,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 28500,
+     "pantryDays": 6,
+     "ateShare": 86.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 33576,
+     "pantryDays": 23,
+     "ateShare": 91.3,
+     "preservedKcal": 3888
+    },
+    {
+     "day": 17,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 32546,
+     "pantryDays": 26,
+     "ateShare": 87.1,
+     "preservedKcal": 3888
+    },
+    {
+     "day": 22,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 38702,
+     "pantryDays": 32,
+     "ateShare": 93.8,
+     "preservedKcal": 7594
+    },
+    {
+     "day": 27,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 56532,
+     "pantryDays": 47,
+     "ateShare": 91.6,
+     "preservedKcal": 15662
+    },
+    {
+     "day": 32,
+     "need": 22540,
+     "pop": 11,
+     "pantryKcal": 54814,
+     "pantryDays": 48,
+     "ateShare": 92.5,
+     "preservedKcal": 22117
+    },
+    {
+     "day": 37,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 51691,
+     "pantryDays": 45,
+     "ateShare": 98.4,
+     "preservedKcal": 18767
+    },
+    {
+     "day": 42,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 48285,
+     "pantryDays": 25,
+     "ateShare": 94.3,
+     "preservedKcal": 15360
+    },
+    {
+     "day": 47,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 58732,
+     "pantryDays": 26,
+     "ateShare": 90.2,
+     "preservedKcal": 18228
+    },
+    {
+     "day": 52,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 59567,
+     "pantryDays": 27,
+     "ateShare": 92.2,
+     "preservedKcal": 18228
+    },
+    {
+     "day": 57,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 58495,
+     "pantryDays": 27,
+     "ateShare": 91.7,
+     "preservedKcal": 15641
+    },
+    {
+     "day": 62,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 55434,
+     "pantryDays": 93,
+     "ateShare": 93.2,
+     "preservedKcal": 19202
+    },
+    {
+     "day": 67,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 82996,
+     "pantryDays": 999,
+     "ateShare": 90.8,
+     "preservedKcal": 21072
+    },
+    {
+     "day": 72,
+     "need": 20291,
+     "pop": 10,
+     "pantryKcal": 88950,
+     "pantryDays": 999,
+     "ateShare": 87.8,
+     "preservedKcal": 19016
+    },
+    {
+     "day": 77,
+     "need": 18134,
+     "pop": 9,
+     "pantryKcal": 57814,
+     "pantryDays": 47,
+     "ateShare": 90,
+     "preservedKcal": 15982
+    },
+    {
+     "day": 82,
+     "need": 18134,
+     "pop": 9,
+     "pantryKcal": 50920,
+     "pantryDays": 24,
+     "ateShare": 89.9,
+     "preservedKcal": 19150
+    },
+    {
+     "day": 87,
+     "need": 18134,
+     "pop": 9,
+     "pantryKcal": 57140,
+     "pantryDays": 27,
+     "ateShare": 91.7,
+     "preservedKcal": 19100
+    },
+    {
+     "day": 92,
+     "need": 16034,
+     "pop": 8,
+     "pantryKcal": 54264,
+     "pantryDays": 25,
+     "ateShare": 90.4,
+     "preservedKcal": 12725
+    },
+    {
+     "day": 95,
+     "need": 16034,
+     "pop": 8,
+     "pantryKcal": 45177,
+     "pantryDays": 21,
+     "ateShare": 85.8,
+     "preservedKcal": 15277
+    },
+    {
+     "day": 95,
+     "need": 16034,
+     "pop": 8,
+     "pantryKcal": 45177,
+     "pantryDays": 21,
+     "ateShare": 85.8,
+     "preservedKcal": 15277
+    },
+    {
+     "day": 100,
+     "need": 16034,
+     "pop": 8,
+     "pantryKcal": 51189,
+     "pantryDays": 25,
+     "ateShare": 91,
+     "preservedKcal": 15160
+    },
+    {
+     "day": 105,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 51114,
+     "pantryDays": 21,
+     "ateShare": 87.8,
+     "preservedKcal": 14311
+    },
+    {
+     "day": 110,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 48105,
+     "pantryDays": 20,
+     "ateShare": 90.4,
+     "preservedKcal": 12280
+    },
+    {
+     "day": 115,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 49492,
+     "pantryDays": 20,
+     "ateShare": 87.5,
+     "preservedKcal": 10968
+    },
+    {
+     "day": 120,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 37868,
+     "pantryDays": 15,
+     "ateShare": 82.3,
+     "preservedKcal": 13768
+    },
+    {
+     "day": 125,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 33333,
+     "pantryDays": 14,
+     "ateShare": 89.2,
+     "preservedKcal": 10223
+    },
+    {
+     "day": 130,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 40796,
+     "pantryDays": 17,
+     "ateShare": 90.7,
+     "preservedKcal": 11213
+    },
+    {
+     "day": 135,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 46165,
+     "pantryDays": 19,
+     "ateShare": 86.9,
+     "preservedKcal": 14531
+    },
+    {
+     "day": 140,
+     "need": 14021,
+     "pop": 7,
+     "pantryKcal": 57381,
+     "pantryDays": 23,
+     "ateShare": 90.8,
+     "preservedKcal": 13475
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 71,
+   "pushPantryDaysMed": 32,
+   "pushPantryDaysMin": 22,
+   "pushAteMed": 91.2,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 34740,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 1,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 1,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 82,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 92,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 95,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 95,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 100,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 105,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 110,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 115,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 120,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 125,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 130,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 135,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 140,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 2,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 72,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 82,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 92,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 95,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 105,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 115,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 125,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 135,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 127,
+    "capBlockedDays": 0,
+    "winDays": 150,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:villager combat": 3,
+    "villager:The Bright Bastard": 1,
+    "player:lockjaw": 1,
+    "villager:combat": 2
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d135] — DAY 135 DAWN — The world wakes. Animals are active.",
+    "[d135] Dawn. You wake rested. (+3 health, energy restored. By the fire. Good enough.)",
+    "[d135] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d136] — DAY 136 DAWN — The world wakes. Animals are active.",
+    "[d136] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d136] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d136] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d137] — DAY 137 DAWN — The world wakes. Animals are active.",
+    "[d137] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 39 kcal conserved. By the fire. Good enough.)",
+    "[d137] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d138] — DAY 138 DAWN — The world wakes. Animals are active.",
+    "[d138] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d138] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d139] — DAY 139 DAWN — The world wakes. Animals are active.",
+    "[d139] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d139] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d139] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d140] — DAY 140 DAWN — The world wakes. Animals are active.",
+    "[d140] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d140] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d141] — DAY 141 DAWN — The world wakes. Animals are active.",
+    "[d141] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d141] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d142] — DAY 142 DAWN — The world wakes. Animals are active.",
+    "[d142] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 42 kcal conserved. By the fire. Good enough.)",
+    "[d142] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d142] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d143] — DAY 143 DAWN — The world wakes. Animals are active.",
+    "[d143] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d143] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d144] — DAY 144 DAWN — The world wakes. Animals are active.",
+    "[d144] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d144] 💛 You hold Unnamed photograph. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & ab",
+    "[d145] — DAY 145 DAWN — The world wakes. Animals are active.",
+    "[d145] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 55,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 149,
+   "endReason": "village-lost",
+   "kills": 26,
+   "killsByWave": {
+    "1": 17,
+    "2": 8,
+    "3": 1
+   },
+   "butcherEvents": 2,
+   "grossHarvest": 3200,
+   "netHarvest": 1140,
+   "influx": {
+    "Snared meat": 9635,
+    "Foraged food": 53208,
+    "Expedition haul": 3331,
+    "Trial feast": 600,
+    "Fish catch": 21371
+   },
+   "rotKcal": 450295,
+   "rotItems": 150,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 375,
+     "cleaned/meat": 1140,
+     "carcass/meat": 0
+    },
+    "pantry": {
+     "?/?": 418594,
+     "preserved/?": 21476
+    },
+    "pack": {
+     "ready/plant": 8710
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "garden": 31,
+    "wood": 55,
+    "fish": 180,
+    "water": 185,
+    "stone": 54,
+    "cook": 99
+   },
+   "starveDays": 2,
+   "ateShareMed": 89,
+   "pantryDaysMed": 31,
+   "pantryKcalEnd": 0,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown berries": 0,
+    "Blackberry": 8905,
+    "Foraged food": 415205,
+    "Trial feast": 500,
+    "upright fuzzy red berry cones, compound ": 180,
+    "Snared meat": 2289,
+    "Foraged food (dried)": 20676,
+    "Expedition haul (dried)": 800,
+    "The Ugly Beast (cleaned)": 420,
+    "Winner's share (alien rations)": 600,
+    "unknown nuts": 0,
+    "Gray Squirrel (trapped)": 0,
+    "Speedbump (cleaned)": 720
+   },
+   "maxWave": 3,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 23910,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 23910,
+     "pop": 11,
+     "pantryKcal": 26650,
+     "pantryDays": 6,
+     "ateShare": 88.8,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 23910,
+     "pop": 11,
+     "pantryKcal": 40747,
+     "pantryDays": 33,
+     "ateShare": 87.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 17,
+     "need": 21510,
+     "pop": 10,
+     "pantryKcal": 41352,
+     "pantryDays": 39,
+     "ateShare": 92.6,
+     "preservedKcal": 13128
+    },
+    {
+     "day": 22,
+     "need": 19027,
+     "pop": 9,
+     "pantryKcal": 41975,
+     "pantryDays": 40,
+     "ateShare": 89.2,
+     "preservedKcal": 11176
+    },
+    {
+     "day": 27,
+     "need": 19027,
+     "pop": 9,
+     "pantryKcal": 56968,
+     "pantryDays": 53,
+     "ateShare": 91.8,
+     "preservedKcal": 15415
+    },
+    {
+     "day": 32,
+     "need": 19027,
+     "pop": 9,
+     "pantryKcal": 49347,
+     "pantryDays": 46,
+     "ateShare": 91.8,
+     "preservedKcal": 16998
+    },
+    {
+     "day": 37,
+     "need": 17091,
+     "pop": 8,
+     "pantryKcal": 65415,
+     "pantryDays": 40,
+     "ateShare": 91.2,
+     "preservedKcal": 15150
+    },
+    {
+     "day": 42,
+     "need": 17091,
+     "pop": 8,
+     "pantryKcal": 54902,
+     "pantryDays": 25,
+     "ateShare": 90.1,
+     "preservedKcal": 12117
+    },
+    {
+     "day": 47,
+     "need": 17091,
+     "pop": 8,
+     "pantryKcal": 63866,
+     "pantryDays": 31,
+     "ateShare": 87.9,
+     "preservedKcal": 15311
+    },
+    {
+     "day": 52,
+     "need": 17091,
+     "pop": 8,
+     "pantryKcal": 61393,
+     "pantryDays": 34,
+     "ateShare": 92.3,
+     "preservedKcal": 14213
+    },
+    {
+     "day": 57,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 50926,
+     "pantryDays": 45,
+     "ateShare": 91.4,
+     "preservedKcal": 12044
+    },
+    {
+     "day": 62,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 62256,
+     "pantryDays": 59,
+     "ateShare": 89.6,
+     "preservedKcal": 14735
+    },
+    {
+     "day": 67,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 49009,
+     "pantryDays": 45,
+     "ateShare": 90.1,
+     "preservedKcal": 14583
+    },
+    {
+     "day": 72,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 41285,
+     "pantryDays": 38,
+     "ateShare": 83.7,
+     "preservedKcal": 11185
+    },
+    {
+     "day": 77,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 73242,
+     "pantryDays": 70,
+     "ateShare": 93,
+     "preservedKcal": 13985
+    },
+    {
+     "day": 82,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 53648,
+     "pantryDays": 48,
+     "ateShare": 90.3,
+     "preservedKcal": 13348
+    },
+    {
+     "day": 87,
+     "need": 14806,
+     "pop": 7,
+     "pantryKcal": 60552,
+     "pantryDays": 59,
+     "ateShare": 89.1,
+     "preservedKcal": 11920
+    },
+    {
+     "day": 92,
+     "need": 12706,
+     "pop": 6,
+     "pantryKcal": 43926,
+     "pantryDays": 39,
+     "ateShare": 88.5,
+     "preservedKcal": 12968
+    },
+    {
+     "day": 97,
+     "need": 12633,
+     "pop": 6,
+     "pantryKcal": 31766,
+     "pantryDays": 26,
+     "ateShare": 97.7,
+     "preservedKcal": 8466
+    },
+    {
+     "day": 102,
+     "need": 10184,
+     "pop": 5,
+     "pantryKcal": 32215,
+     "pantryDays": 17,
+     "ateShare": 88.1,
+     "preservedKcal": 7515
+    },
+    {
+     "day": 107,
+     "need": 7984,
+     "pop": 4,
+     "pantryKcal": 37187,
+     "pantryDays": 19,
+     "ateShare": 87.8,
+     "preservedKcal": 10135
+    },
+    {
+     "day": 112,
+     "need": 7984,
+     "pop": 4,
+     "pantryKcal": 36280,
+     "pantryDays": 15,
+     "ateShare": 85.3,
+     "preservedKcal": 8618
+    },
+    {
+     "day": 117,
+     "need": 3884,
+     "pop": 2,
+     "pantryKcal": 23600,
+     "pantryDays": 9,
+     "ateShare": 88.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 122,
+     "need": 3884,
+     "pop": 2,
+     "pantryKcal": 16342,
+     "pantryDays": 6,
+     "ateShare": 91.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 127,
+     "need": 6241,
+     "pop": 3,
+     "pantryKcal": 7100,
+     "pantryDays": 2,
+     "ateShare": 86.3,
+     "preservedKcal": 0
+    },
+    {
+     "day": 132,
+     "need": 6241,
+     "pop": 3,
+     "pantryKcal": 3650,
+     "pantryDays": 1,
+     "ateShare": 81.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 137,
+     "need": 4336,
+     "pop": 2,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": 52.3,
+     "preservedKcal": 0,
+     "starved": true
+    },
+    {
+     "day": 142,
+     "need": 2252,
+     "pop": 1,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": 79.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 147,
+     "need": 2252,
+     "pop": 1,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": 77.6,
+     "preservedKcal": 0
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 71,
+   "pushPantryDaysMed": 45,
+   "pushPantryDaysMin": 23,
+   "pushAteMed": 90.1,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 40076,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 7,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 1,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 2
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 82,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 92,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 97,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 102,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 107,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 112,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 117,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 122,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 127,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 132,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 137,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 142,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 147,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 25,
+    "war": 25,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 1,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 3,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 72,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 82,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 92,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 102,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 112,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 122,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 132,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 142,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 99,
+    "capBlockedDays": 0,
+    "winDays": 149,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "player:combat": 2,
+    "villager:monster": 2,
+    "villager:combat": 4,
+    "villager:a wound that wouldn't close": 1,
+    "player:contest": 1,
+    "villager:starvation": 1
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d140] 💛 You hold Photo Album. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities",
+    "[d141] — DAY 141 DAWN — The world wakes. Animals are active.",
+    "[d141] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 368 kcal conserved. By the fire. Good enough.)",
+    "[d141] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d142] — DAY 142 DAWN — The world wakes. Animals are active.",
+    "[d142] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d143] — DAY 143 DAWN — The world wakes. Animals are active.",
+    "[d143] Dawn. You wake rested. (+8 health, energy restored. Your sleeping body burned less — 194 kcal conserved. By the fire. Good enough.)",
+    "[d143] Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)",
+    "[d143] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d144] — DAY 144 DAWN — The world wakes. Animals are active.",
+    "[d144] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 391 kcal conserved. By the fire. Good enough.)",
+    "[d144] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d145] — DAY 145 DAWN — The world wakes. Animals are active.",
+    "[d145] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 437 kcal conserved. By the fire. Good enough.)",
+    "[d145] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d146] — DAY 146 DAWN — The world wakes. Animals are active.",
+    "[d146] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 102 kcal conserved. By the fire. Good enough.)",
+    "[d146] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d146] 📺 The grab comes at dawn. One more day. Sleep if you can.",
+    "[d147] — DAY 147 DAWN — The world wakes. Animals are active.",
+    "[d147] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 449 kcal conserved. By the fire. Good enough.)",
+    "[d147] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d148] — DAY 148 DAWN — The world wakes. Animals are active.",
+    "[d148] Dawn touches it and the light gutters, thins, goes out. It was never meant for daytime.",
+    "[d148] You lived to tell it — the Inspiration's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)",
+    "[d148] 📓 Codex: Sighting 1/2: survived an encounter.",
+    "[d148] 💛 You hold Photo Album. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities",
+    "[d148] 💡 COUNTER LEARNED — ducks in a row: Break the line. The line is one animal, but only while it's whole. Strike a duck that ISN'T the head and the line splits — both halves hunt on their own and the formation dies. Break ",
+    "[d148] 📓 Codex: Counter: Break the line — The line is one animal, but only while it's whole. Strike a duck that ISN'T the head and the line splits — both halves hunt on their own and the formation dies. Break the line, then th",
+    "[d149] — DAY 149 DAWN — The world wakes. Animals are active.",
+    "[d149] Dawn. You wake rested. (+5 health, energy restored. Your sleeping body burned less — 234 kcal conserved. By the fire. Good enough.)",
+    "[d149] 💛 You hold Contract Quill. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilit",
+    "[d150] — DAY 150 DAWN — The world wakes. Animals are active.",
+    "[d150] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 59 kcal conserved. By the fire. Good enough.)",
+    "[d150] 📺 The grab comes at dawn. One more day. Sleep if you can."
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 66,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 118,
+   "endReason": "village-lost",
+   "kills": 16,
+   "killsByWave": {
+    "1": 11,
+    "2": 4,
+    "3": 1
+   },
+   "butcherEvents": 13,
+   "grossHarvest": 8600,
+   "netHarvest": 3360,
+   "influx": {
+    "Foraged food": 54018,
+    "Snared meat": 4660,
+    "Expedition haul": 14622,
+    "System-replicated (enthusiastic) meal": 300,
+    "Fish catch": 26730
+   },
+   "rotKcal": 201825,
+   "rotItems": 133,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 755,
+     "in_shell/nut": 0,
+     "cleaned/meat": 3360,
+     "carcass/meat": 280
+    },
+    "pantry": {
+     "?/?": 172004,
+     "preserved/?": 6266
+    },
+    "pack": {
+     "ready/plant": 19160
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "water": 224,
+    "fish": 142,
+    "wood": 39,
+    "stone": 33,
+    "garden": 13,
+    "cook": 68
+   },
+   "starveDays": 1,
+   "ateShareMed": 86.6,
+   "pantryDaysMed": 23,
+   "pantryKcalEnd": 0,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown nuts": 0,
+    "unknown berries": 0,
+    "Wild Strawberry": 4905,
+    "Foraged food": 168255,
+    "unknown shoots": 0,
+    "Muscadine Grapes": 10980,
+    "Blackberry": 4030,
+    "Expedition haul (dried)": 2121,
+    "Foraged food (dried)": 4145,
+    "Snared meat": 749,
+    "White Oak Acorns (in shell)": 0,
+    "Expedition haul": 3000,
+    "Hickory Nuts (in shell)": 0,
+    "Cottontail Rabbit (cleaned)": 2800,
+    "Gray Squirrel (cleaned)": 560,
+    "The Glow Stag (carcass)": 280,
+    "Gray Squirrel (trapped)": 0
+   },
+   "maxWave": 3,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 24158,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 24158,
+     "pop": 11,
+     "pantryKcal": 37864,
+     "pantryDays": 15,
+     "ateShare": 98.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 24158,
+     "pop": 11,
+     "pantryKcal": 44299,
+     "pantryDays": 39,
+     "ateShare": 90,
+     "preservedKcal": 1920
+    },
+    {
+     "day": 17,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 51328,
+     "pantryDays": 41,
+     "ateShare": 92.1,
+     "preservedKcal": 12344
+    },
+    {
+     "day": 22,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 67092,
+     "pantryDays": 58,
+     "ateShare": 92.3,
+     "preservedKcal": 17143
+    },
+    {
+     "day": 27,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 76163,
+     "pantryDays": 60,
+     "ateShare": 89.5,
+     "preservedKcal": 33873
+    },
+    {
+     "day": 32,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 96214,
+     "pantryDays": 80,
+     "ateShare": 88,
+     "preservedKcal": 43702
+    },
+    {
+     "day": 37,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 101911,
+     "pantryDays": 89,
+     "ateShare": 89.3,
+     "preservedKcal": 49082
+    },
+    {
+     "day": 42,
+     "need": 21980,
+     "pop": 10,
+     "pantryKcal": 105373,
+     "pantryDays": 98,
+     "ateShare": 92.5,
+     "preservedKcal": 53884
+    },
+    {
+     "day": 47,
+     "need": 19812,
+     "pop": 9,
+     "pantryKcal": 115168,
+     "pantryDays": 76,
+     "ateShare": 85.7,
+     "preservedKcal": 51696
+    },
+    {
+     "day": 52,
+     "need": 19812,
+     "pop": 9,
+     "pantryKcal": 121524,
+     "pantryDays": 58,
+     "ateShare": 85.7,
+     "preservedKcal": 51696
+    },
+    {
+     "day": 57,
+     "need": 19812,
+     "pop": 9,
+     "pantryKcal": 114376,
+     "pantryDays": 54,
+     "ateShare": 88,
+     "preservedKcal": 51696
+    },
+    {
+     "day": 62,
+     "need": 19812,
+     "pop": 9,
+     "pantryKcal": 109896,
+     "pantryDays": 52,
+     "ateShare": 79,
+     "preservedKcal": 51696
+    },
+    {
+     "day": 67,
+     "need": 17218,
+     "pop": 8,
+     "pantryKcal": 75766,
+     "pantryDays": 23,
+     "ateShare": 76.2,
+     "preservedKcal": 39848
+    },
+    {
+     "day": 72,
+     "need": 10812,
+     "pop": 5,
+     "pantryKcal": 61244,
+     "pantryDays": 17,
+     "ateShare": 87.7,
+     "preservedKcal": 29044
+    },
+    {
+     "day": 77,
+     "need": 10812,
+     "pop": 5,
+     "pantryKcal": 56080,
+     "pantryDays": 22,
+     "ateShare": 75,
+     "preservedKcal": 21330
+    },
+    {
+     "day": 82,
+     "need": 12412,
+     "pop": 6,
+     "pantryKcal": 39331,
+     "pantryDays": 11,
+     "ateShare": 72.9,
+     "preservedKcal": 9568
+    },
+    {
+     "day": 87,
+     "need": 10112,
+     "pop": 5,
+     "pantryKcal": 25150,
+     "pantryDays": 5,
+     "ateShare": 76.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 92,
+     "need": 10112,
+     "pop": 5,
+     "pantryKcal": 13200,
+     "pantryDays": 3,
+     "ateShare": 74.4,
+     "preservedKcal": 0
+    },
+    {
+     "day": 97,
+     "need": 5648,
+     "pop": 3,
+     "pantryKcal": 1000,
+     "pantryDays": 0,
+     "ateShare": 83.8,
+     "preservedKcal": 0
+    },
+    {
+     "day": 102,
+     "need": 4048,
+     "pop": 2,
+     "pantryKcal": 2940,
+     "pantryDays": 1,
+     "ateShare": 83.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 107,
+     "need": 4182,
+     "pop": 2,
+     "pantryKcal": 3845,
+     "pantryDays": 1,
+     "ateShare": 116,
+     "preservedKcal": 0
+    },
+    {
+     "day": 107,
+     "need": 4182,
+     "pop": 2,
+     "pantryKcal": 3845,
+     "pantryDays": 1,
+     "ateShare": 116,
+     "preservedKcal": 0
+    },
+    {
+     "day": 110,
+     "need": 2034,
+     "pop": 1,
+     "pantryKcal": 816,
+     "pantryDays": 0,
+     "ateShare": 62.7,
+     "preservedKcal": 0
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 71,
+   "pushPantryDaysMed": 54,
+   "pushPantryDaysMin": 4,
+   "pushAteMed": 85.7,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 18050,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 16,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 0,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 82,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 92,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 97,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 102,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 107,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 107,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 110,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 25,
+    "war": 25,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 1,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 3,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 72,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 82,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 92,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 102,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    },
+    {
+     "d": 107,
+     "tot": 25,
+     "w": 25,
+     "b": 0,
+     "br": 0,
+     "wave": 3
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 68,
+    "capBlockedDays": 0,
+    "winDays": 118,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:sickness": 3,
+    "villager:combat": 2,
+    "player:combat": 3,
+    "villager:monster": 1,
+    "villager:starvation": 1
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d106] — DAY 106 DAWN — The world wakes. Animals are active.",
+    "[d106] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 117 kcal conserved. By the fire. Good enough.)",
+    "[d106] 💛 You hold Hard Candy. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d107] — DAY 107 DAWN — The world wakes. Animals are active.",
+    "[d107] 💡 COUNTER LEARNED — The Union Rep: Kill the rep first. It does not fight, it ORGANIZES — kill the rep before WALKOUT or the stomp lands as one. First blood on the rep, every time. Every ally it rallies hits +3 harder. (",
+    "[d107] 📓 Codex: Counter: Kill the rep first — It does not fight, it ORGANIZES — kill the rep before WALKOUT or the stomp lands as one. First blood on the rep, every time. Every ally it rallies hits +3 harder.",
+    "[d107] 💛 You hold Reading Glasses. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abili",
+    "[d107] 📺 The grab comes at dawn. One more day. Sleep if you can.",
+    "[d108] — DAY 108 DAWN — The world wakes. Animals are active.",
+    "[d108] 💛 You hold Freya's Ring. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilitie",
+    "[d108] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d108] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d109] — DAY 109 DAWN — The world wakes. Animals are active.",
+    "[d110] — DAY 110 DAWN — The world wakes. Animals are active.",
+    "[d110] Dawn. You wake rested. (+27 health, energy restored. Your sleeping body burned less — 61 kcal conserved. By the fire. Good enough.)",
+    "[d110] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d110] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d111] — DAY 111 DAWN — The world wakes. Animals are active.",
+    "[d111] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 370 kcal conserved. By the fire. Good enough.)",
+    "[d111] 💛 You hold Freya's Ring. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilitie",
+    "[d111] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d112] — DAY 112 DAWN — The world wakes. Animals are active.",
+    "[d112] Dawn. You wake rested. (+0 health, energy restored. Your sleeping body burned less — 603 kcal conserved. By the fire. Good enough.)",
+    "[d112] Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)",
+    "[d112] 💛 You hold Freya's Ring. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilitie"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 77,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 78,
+   "endReason": "village-lost",
+   "kills": 12,
+   "killsByWave": {
+    "1": 12
+   },
+   "butcherEvents": 6,
+   "grossHarvest": 3400,
+   "netHarvest": 980,
+   "influx": {
+    "Foraged food": 30712,
+    "System-replicated (enthusiastic) meal": 300,
+    "Fish catch": 18747,
+    "Snared meat": 557
+   },
+   "rotKcal": 49879,
+   "rotItems": 50,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 3485,
+     "cleaned/meat": 980
+    },
+    "pack": {
+     "carcass/meat": 15,
+     "ready/plant": 10875
+    },
+    "pantry": {
+     "?/?": 31688,
+     "preserved/?": 2836
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "garden": 188,
+    "wood": 143,
+    "fish": 292,
+    "water": 345,
+    "stone": 143,
+    "cook": 204
+   },
+   "starveDays": 2,
+   "ateShareMed": 79.5,
+   "pantryDaysMed": 13,
+   "pantryKcalEnd": 0,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown shoots": 0,
+    "tall shrub with white flower clusters, d": 280,
+    "Elderberry": 910,
+    "Dandelion": 90,
+    "unknown roots": 0,
+    "Muscadine Grapes": 90,
+    "a thorny bush with dark berries": 195,
+    "the humming in the grass (carcass)": 15,
+    "Burdock": 6570,
+    "Foraged food": 31688,
+    "Foraged food (dried)": 2836,
+    "Blackberry": 4225,
+    "Big Loud (cleaned)": 980,
+    "Stinging Nettle": 1440,
+    "Wild Onion": 560,
+    "Big Ugly legs (cleaned)": 0,
+    "Big Ugly (cleaned)": 0
+   },
+   "maxWave": 2,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 23020,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 23020,
+     "pop": 11,
+     "pantryKcal": 33700,
+     "pantryDays": 11,
+     "ateShare": 88.6,
+     "preservedKcal": 0
+    },
+    {
+     "day": 12,
+     "need": 23020,
+     "pop": 11,
+     "pantryKcal": 38135,
+     "pantryDays": 29,
+     "ateShare": 81,
+     "preservedKcal": 1765
+    },
+    {
+     "day": 17,
+     "need": 23020,
+     "pop": 11,
+     "pantryKcal": 46955,
+     "pantryDays": 42,
+     "ateShare": 85.4,
+     "preservedKcal": 14005
+    },
+    {
+     "day": 22,
+     "need": 20947,
+     "pop": 10,
+     "pantryKcal": 63343,
+     "pantryDays": 57,
+     "ateShare": 85.6,
+     "preservedKcal": 19126
+    },
+    {
+     "day": 27,
+     "need": 18737,
+     "pop": 9,
+     "pantryKcal": 71684,
+     "pantryDays": 40,
+     "ateShare": 80.2,
+     "preservedKcal": 18132
+    },
+    {
+     "day": 32,
+     "need": 18737,
+     "pop": 9,
+     "pantryKcal": 81801,
+     "pantryDays": 37,
+     "ateShare": 76.4,
+     "preservedKcal": 18788
+    },
+    {
+     "day": 37,
+     "need": 16648,
+     "pop": 8,
+     "pantryKcal": 56285,
+     "pantryDays": 19,
+     "ateShare": 76.3,
+     "preservedKcal": 7447
+    },
+    {
+     "day": 42,
+     "need": 14739,
+     "pop": 7,
+     "pantryKcal": 46226,
+     "pantryDays": 14,
+     "ateShare": 71.7,
+     "preservedKcal": 12223
+    },
+    {
+     "day": 47,
+     "need": 10539,
+     "pop": 5,
+     "pantryKcal": 38414,
+     "pantryDays": 13,
+     "ateShare": 62.5,
+     "preservedKcal": 7864
+    },
+    {
+     "day": 52,
+     "need": 10791,
+     "pop": 5,
+     "pantryKcal": 29220,
+     "pantryDays": 9,
+     "ateShare": 71.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 57,
+     "need": 10980,
+     "pop": 5,
+     "pantryKcal": 24950,
+     "pantryDays": 7,
+     "ateShare": 68.4,
+     "preservedKcal": 0
+    },
+    {
+     "day": 62,
+     "need": 6441,
+     "pop": 3,
+     "pantryKcal": 19300,
+     "pantryDays": 6,
+     "ateShare": 77.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 67,
+     "need": 6441,
+     "pop": 3,
+     "pantryKcal": 13500,
+     "pantryDays": 11,
+     "ateShare": 80.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 72,
+     "need": 2000,
+     "pop": 1,
+     "pantryKcal": 12654,
+     "pantryDays": 20,
+     "ateShare": 65.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 77,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": null,
+     "preservedKcal": 0
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 60,
+   "pushPantryDaysMed": 13,
+   "pushPantryDaysMin": 0,
+   "pushAteMed": 76.4,
+   "pushStarveDays": 2,
+   "pushPantryKcalMin": 0,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 1,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 0,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 57,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 62,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 67,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 72,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 77,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 2,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 62,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 72,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 48,
+    "capBlockedDays": 0,
+    "winDays": 78,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:sickness": 4,
+    "villager:combat": 19,
+    "villager:monster": 2,
+    "villager:a wound that wouldn't close": 1,
+    "player:combat": 1,
+    "player:the expedition": 1
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d71] 💡 COUNTER LEARNED — mosquito: Hit it after it drinks. It only drinks adjacent — keep your distance during the dive. After it drinks it's HEAVY and SLOW: that's when you hit it. Smoke and fire ruin its whole plan. (You d",
+    "[d71] 📓 Codex: Counter: Hit it after it drinks — It only drinks adjacent — keep your distance during the dive. After it drinks it's HEAVY and SLOW: that's when you hit it. Smoke and fire ruin its whole plan.",
+    "[d71] Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)",
+    "[d71] 💛 You hold Mother's Ring. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d71] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d72] — DAY 72 DAWN — The world wakes. Animals are active.",
+    "[d73] — DAY 73 DAWN — The world wakes. Animals are active.",
+    "[d73] Dawn. You wake rested. (+3 health, energy restored. By the fire. Good enough.)",
+    "[d73] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d73] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d73] 📺 The grab comes at dawn. One more day. Sleep if you can.",
+    "[d74] — DAY 74 DAWN — The world wakes. Animals are active.",
+    "[d74] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d74] 💛 You hold Lucky Coin. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d74] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d75] — DAY 75 DAWN — The world wakes. Animals are active.",
+    "[d75] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d76] — DAY 76 DAWN — The world wakes. Animals are active.",
+    "[d76] Dawn. You wake rested. (+21 health, energy restored. Your sleeping body burned less — 30 kcal conserved. By the fire. Good enough.)",
+    "[d76] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d77] — DAY 77 DAWN — The world wakes. Animals are active.",
+    "[d77] Dawn. You wake rested. (+19 health, energy restored. By the fire. Good enough.)",
+    "[d77] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d77] 1 unprocessed haul onto the counter — the clock is ticking.",
+    "[d78] — DAY 78 DAWN — The world wakes. Animals are active.",
+    "[d78] Dawn. You wake rested. (+28 health, energy restored. Your sleeping body burned less — 30 kcal conserved. By the fire. Good enough.)",
+    "[d78] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti",
+    "[d79] — DAY 79 DAWN — The world wakes. Animals are active.",
+    "[d79] Dawn. You wake rested. (+11 health, energy restored. Your sleeping body burned less — 30 kcal conserved. By the fire. Good enough.)",
+    "[d79] 💛 You hold Trail compass. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abiliti"
+   ]
+  },
+  {
+   "label": "competent-control",
+   "policy": "competent",
+   "seed": 88,
+   "armed": false,
+   "finalRank": "village",
+   "regionalDay": null,
+   "networkLive": false,
+   "days": 51,
+   "endReason": "village-lost",
+   "kills": 3,
+   "killsByWave": {
+    "1": 3
+   },
+   "butcherEvents": 17,
+   "grossHarvest": 11500,
+   "netHarvest": 4520,
+   "influx": {
+    "Snared meat": 2291,
+    "Foraged food": 21820,
+    "Fish catch": 11935,
+    "System-replicated stew": 400,
+    "Player donation": 2420
+   },
+   "rotKcal": 21205,
+   "rotItems": 53,
+   "rotBy": {
+    "stash": {
+     "unknown/plant": 0,
+     "ready/plant": 4190,
+     "carcass/meat": 140,
+     "in_shell/nut": 0,
+     "cleaned/meat": 1820
+    },
+    "pack": {
+     "ready/plant": 14275,
+     "cleaned/meat": 780
+    }
+   },
+   "process": {
+    "cook": 0,
+    "smoke": 0,
+    "render": 0,
+    "pemmican": 0,
+    "spec": 0,
+    "feast": 0,
+    "feastBuff": 0
+   },
+   "tasks": {
+    "garden": 42,
+    "wood": 51,
+    "fish": 149,
+    "water": 171,
+    "stone": 50,
+    "cook": 31
+   },
+   "starveDays": 0,
+   "ateShareMed": 81.7,
+   "pantryDaysMed": 8,
+   "pantryKcalEnd": 0,
+   "vests": 0,
+   "preservedKcalEnd": 0,
+   "rotNames": {
+    "unknown shoots": 0,
+    "unknown roots": 0,
+    "Muscadine Grapes": 9180,
+    "unknown nuts": 0,
+    "Judge Hoot (carcass)": 0,
+    "Big-Eyes (carcass)": 140,
+    "Stinging Nettle": 3920,
+    "Blackberry": 5005,
+    "Sassafras": 0,
+    "White Oak Acorns (in shell)": 0,
+    "Cottontail Rabbit (cleaned)": 1200,
+    "Gray Squirrel (cleaned)": 280,
+    "Highbeam Deer (cleaned)": 1120,
+    "Dandelion": 360
+   },
+   "maxWave": 2,
+   "arc": 3,
+   "tableWaiting": false,
+   "rank": "village",
+   "won": false,
+   "national": 0,
+   "table": 0,
+   "dailyCurve": [
+    {
+     "day": 1,
+     "need": 21981,
+     "pop": 11,
+     "pantryKcal": 47250,
+     "pantryDays": 1,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 7,
+     "need": 21981,
+     "pop": 11,
+     "pantryKcal": 29788,
+     "pantryDays": 8,
+     "ateShare": 90.2,
+     "preservedKcal": 1942
+    },
+    {
+     "day": 12,
+     "need": 18066,
+     "pop": 9,
+     "pantryKcal": 31410,
+     "pantryDays": 19,
+     "ateShare": 84.3,
+     "preservedKcal": 0
+    },
+    {
+     "day": 17,
+     "need": 18066,
+     "pop": 9,
+     "pantryKcal": 28394,
+     "pantryDays": 13,
+     "ateShare": 82,
+     "preservedKcal": 4664
+    },
+    {
+     "day": 22,
+     "need": 16055,
+     "pop": 8,
+     "pantryKcal": 24016,
+     "pantryDays": 9,
+     "ateShare": 81.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 27,
+     "need": 16055,
+     "pop": 8,
+     "pantryKcal": 18736,
+     "pantryDays": 8,
+     "ateShare": 83.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 32,
+     "need": 16055,
+     "pop": 8,
+     "pantryKcal": 15332,
+     "pantryDays": 7,
+     "ateShare": 80.2,
+     "preservedKcal": 0
+    },
+    {
+     "day": 37,
+     "need": 16055,
+     "pop": 8,
+     "pantryKcal": 17018,
+     "pantryDays": 25,
+     "ateShare": 78.4,
+     "preservedKcal": 932
+    },
+    {
+     "day": 42,
+     "need": 5748,
+     "pop": 3,
+     "pantryKcal": 7500,
+     "pantryDays": 5,
+     "ateShare": 175.5,
+     "preservedKcal": 0
+    },
+    {
+     "day": 47,
+     "need": 7756,
+     "pop": 4,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": 78.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 52,
+     "need": 9848,
+     "pop": 5,
+     "pantryKcal": 222,
+     "pantryDays": 0,
+     "ateShare": 69.9,
+     "preservedKcal": 0
+    }
+   ],
+   "linksProposed": 0,
+   "linksAccepted": 0,
+   "countersOffered": 0,
+   "counterAnswers": 0,
+   "tributePaidK": 0,
+   "tributeWeeks": 0,
+   "tends": 0,
+   "tendOutK": 0,
+   "poolDrawnK": 0,
+   "beatsAnswered": 0,
+   "breaks": 0,
+   "linksEver": 0,
+   "linksSeasonedEver": 0,
+   "linksGoodEver": 0,
+   "maxForeignRealm": 0,
+   "foreign4Days": 0,
+   "nationalStagingDays": 0,
+   "nationalHeldDays": 0,
+   "rankPath": "vvvvvvvvv",
+   "goodStandingDays": 0,
+   "pushDays": 33,
+   "pushPantryDaysMed": 7,
+   "pushPantryDaysMin": 0,
+   "pushAteMed": 79.1,
+   "pushStarveDays": 0,
+   "pushPantryKcalMin": 0,
+   "influxTributeInK": 0,
+   "influxPoolAidK": 0,
+   "longestPantryCrash": 3,
+   "tributeWeeksPaid": 0,
+   "tributeWeeksThin": 0,
+   "tributeWeeksMissed": 0,
+   "exiledEver": 0,
+   "exileDay": null,
+   "exiledDays": 0,
+   "jstageEnd": 0,
+   "scaleDaily": [
+    {
+     "day": 1,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 7,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 12,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 17,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 22,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 27,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 32,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 37,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 42,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 47,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 52,
+     "rank": "village",
+     "links": [],
+     "foreignMax": 0,
+     "foreignHead": null,
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "t4": 100,
+   "t5": 200,
+   "t4Day": null,
+   "t5Day": null,
+   "wave4Day": null,
+   "wave5Day": null,
+   "driver": "none",
+   "atT4": null,
+   "endStanding": {
+    "total": 0,
+    "war": 0,
+    "diplomacy": 0,
+    "plenty": 0,
+    "warPts": 0,
+    "links": 0,
+    "feasts": 0
+   },
+   "endWave": 2,
+   "traj": [
+    {
+     "d": 1,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 12,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 22,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 32,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 1
+    },
+    {
+     "d": 42,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    },
+    {
+     "d": 52,
+     "tot": 0,
+     "w": 0,
+     "b": 0,
+     "br": 0,
+     "wave": 2
+    }
+   ],
+   "linkpipe": {
+    "proposals": {
+     "total": 0,
+     "accept": 0,
+     "counter": 0,
+     "null": 0,
+     "byDir": {}
+    },
+    "counters": {
+     "total": 0,
+     "accept": 0,
+     "sweeten": 0,
+     "walk": 0
+    },
+    "tends": 0,
+    "tributePays": 0,
+    "windowOpenDays": 16,
+    "capBlockedDays": 0,
+    "winDays": 51,
+    "linksFormed": 0,
+    "linksSeasoned": 0,
+    "links": [],
+    "fourthLeadLink": null
+   },
+   "w4faced": 0,
+   "deathCauses": {
+    "villager:a wound that wouldn't close": 1,
+    "villager:sickness": 1,
+    "player:combat": 3,
+    "villager:combat": 2,
+    "villager:starvation": 1
+   },
+   "proposelayer": {
+    "proposed": 0,
+    "tended": 0,
+    "counters": 0,
+    "accords": 0,
+    "national": 0,
+    "defense": 0
+   },
+   "scaleLines": [
+    "[d46] — DAY 46 DAWN — The world wakes. Animals are active.",
+    "[d46] Dawn. You wake stiff and cold. (+0 health, energy restored. Exposed. You'll wake stiff.)",
+    "[d46] 💛 You hold Boot stone. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d47] — DAY 47 DAWN — The world wakes. Animals are active.",
+    "[d47] Dawn. You wake stiff and half-frozen. (-15 health, restless night. Your sleeping body burned less — 30 kcal conserved. The cold got in — no healing, and it took its cut. (Sleeping unsheltered in a cold snap is a mistake ",
+    "[d47] 💛 You hold Boot stone. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d48] — DAY 48 DAWN — The world wakes. Animals are active.",
+    "[d48] Dawn. You wake stiff and cold. (+16 health, energy restored. Your sleeping body burned less — 30 kcal conserved. Exposed. You'll wake stiff.)",
+    "[d48] 💛 You hold Boot stone. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d49] — DAY 49 DAWN — The world wakes. Animals are active.",
+    "[d49] 💛 You hold Boot stone. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d50] — DAY 50 DAWN — The world wakes. Animals are active.",
+    "[d50] Dawn. You wake wrung out and unrepaired. (-4 health, wrung-out morning. Your sleeping body burned less — 30 kcal conserved. You ran on empty — no water, no food, no real recovery. The body keeps score. (Drink and eat bef",
+    "[d50] 💛 You hold Boot stone. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities ",
+    "[d51] — DAY 51 DAWN — The world wakes. Animals are active.",
+    "[d51] Dawn. You wake wrung out and unrepaired. (-4 health, wrung-out morning. Your sleeping body burned less — 30 kcal conserved. You ran on empty — no water, no food, no real recovery. The body keeps score. (Drink and eat bef",
+    "[d51] 💛 You hold Notebook. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abilities up",
+    "[d52] — DAY 52 DAWN — The world wakes. Animals are active.",
+    "[d52] Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "[d52] 💛 You hold Reading Glasses. Your gifts are not mastered — but they are lived-in, worn smooth by use, and they are with you. The feast was the weapon. (The next feast grants FEASTED until tomorrow's dawn: strikes & abili",
+    "[d52] 5 unprocessed hauls onto the counter — the clock is ticking."
+   ]
+  }
+ ]
+}
