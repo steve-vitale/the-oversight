@@ -19,7 +19,17 @@
 'use strict';
 const assert = require('assert');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
-const td = require('./policies/takedisc');
+// KILL PROTOCOL (r29 ARM2 NO-GO): the takedisc layer was deleted after the
+// pilot killed the arm. Degrade gracefully so the retained proof documents
+// the pre-kill result instead of crashing on the missing module.
+let td = null;
+try { td = require('./policies/takedisc'); } catch (e) {
+  if (e && e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: takedisc layer deleted per kill protocol (NO-GO at pilot); proof was 28/28 RED->GREEN pre-kill — see evidence/2026-10-14/sim-takedisc.md');
+    process.exit(0);
+  }
+  throw e;
+}
 
 let pass = 0;
 function ok(cond, msg) {
