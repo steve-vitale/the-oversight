@@ -735,7 +735,7 @@ Central game controller. Owns state, map, day loop, actions, encounters, combat,
 **Consumes:** state.scholar, state.village, state.codex (central game state roots)
 
 ### godhood (`godhood.js`)
-Godhood capstones — Steve 2026-10-11. When a player completes
+Godhood capstones — Steve 2026-10-11, requirements reworked
 
 **Provides:** —
 

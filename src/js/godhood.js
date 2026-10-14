@@ -1,18 +1,22 @@
 // @ontology
 // system: godhood
-// description: Godhood capstones — Steve 2026-10-11. When a player completes
-//   an ENDGAME-BUILDS.md build (ability kit + key synergy + tier-4 capstone
-//   item), the game RECOGNIZES it with a played 5-beat ceremony, grants ONE
-//   qualitative godly verb, and permanently transforms their visual into a
-//   mythic form. Each capstone is the biggest single power spike in the game
-//   AND keeps its weakness. Knowledge-gated: the capstone is unknown until
-//   you're close (4+ kit abilities). Death/respawn resets it (village-as-
-//   protagonist law).
+// description: Godhood capstones — Steve 2026-10-11, requirements reworked
+//   2026-10-13. When a player or villager completes a BUILD (4+ abilities
+//   from the godhood's pool including a core ability, a discovered synergy,
+//   any tier-4 item) after day 80, the game RECOGNIZES it with a played
+//   5-beat ceremony, grants ONE qualitative godly verb, and permanently
+//   transforms their visual into a mythic form. Each capstone is the biggest
+//   single power spike in the game AND keeps its weakness. Knowledge-gated:
+//   the capstone is unknown until you're close (3+ pool abilities).
+//   Death/respawn resets it (village-as-protagonist law).
 // provides:
 //   - GODHOODS (from godhood.json)
-//   - checkGodhood(scholar) -> [godhoodIds newly completed]
-//   - godhoodCloseness(scholar, gh) -> {kit, needKit, synergy, item, close}
-//   - recognitionCeremony(game, ghId) -> plays the 5-beat ceremony
+//   - checkGodhood(scholar, day) -> [godhoodIds newly completed]
+//   - godhoodCloseness(scholar, gh, day) -> {kit, needKit, core, synergy, item, dayOk, close}
+//   - villagerGodhoodCloseness(game, vid, gh) -> same, for villagers
+//   - checkVillagerGodhood(game, vid) -> [godhoodIds newly completed]
+//   - recognitionCeremony(game, ghId) -> plays the 5-beat ceremony (player)
+//   - villagerRecognitionCeremony(game, vid, ghId) -> ceremony for a villager
 //   - mythicSprite(ghId) -> 32x32 SVG string (mythic form, no background)
 //   - playerMythicId(scholar) -> godhood id or null (for sprite hook)
 //   - godhoodBargaining(scholar) -> leverage bonus for the table
@@ -20,12 +24,15 @@
 //     noLiesCheck, summonMarket, walkHorizon, phaseOut, takeWound
 // consumes:
 //   - scholar.abilities, scholar.activeSynergies, scholar.inventory
+//   - village.npcAbilities, village.npcSynergies, person.items (villagers)
+//   - S.ITEM_TIER (item id -> loot tier, injected at load)
 //   - game.say, game.sysSay, game.broadcastStart (ceremony)
 // rules:
 //   - No stat-stick capstones. Every verb is qualitative AND measured.
 //   - Every capstone has a real cost or limit. The weakness stays.
 //   - The ceremony is PLAYED (say/sysSay beats), never a popup.
 //   - Mythic sprites sit ON the grid: no background, tile shows through.
+//   - Endgame only: minDay 80 (Steve 2026-10-13). No mid-game godhood.
 (function (global) {
   'use strict';
   const S = global.Scattering = global.Scattering || {};
@@ -64,11 +71,46 @@
     return out;
   }
 
-  // godhoodCloseness(scholar, gh): how close to completion. Knowledge-gated
-  // hints use `close` (4+ kit abilities) without naming the capstone.
-  function godhoodCloseness(sch, gh) {
-    // RELAY (Steve 2026-10-11): the 11th godhood isn't a 6-kit — it's the
-    // office path. Complete when holding the relay office + all nine
+  // itemTier: loot tier of an item id, via S.ITEM_TIER (injected at load from
+  // items.json). Unknown items are tier 0 — they never satisfy a tier gate.
+  function itemTier(itemId) {
+    try { return ((S.ITEM_TIER || {})[itemId]) || 0; } catch (e) { return 0; }
+  }
+
+  // godhoodItemOk: Steve 2026-10-13 option (c) — flexibility in which items
+  // qualify. A named capstone item (the build's ideal) always qualifies; any
+  // item of a required tier also qualifies. The old exact-item model made
+  // godhood unobtainable (the named items had no acquisition path at all).
+  function godhoodItemOk(gh, itemIds) {
+    const req = gh.requires || {};
+    const named = req.capstoneItems || req.items || [];
+    if (named.length && itemIds.some(id => named.includes(id))) return true;
+    const tiers = req.itemTiers || [];
+    if (tiers.length && itemIds.some(id => tiers.includes(itemTier(id)))) return true;
+    // back-compat: old format with requires.items as the ONLY gate
+    return false;
+  }
+
+  // poolProgress(abs, gh): how many of the godhood's ability pool are held,
+  // and whether a core ability (build identity) is held.
+  function poolProgress(abs, gh) {
+    const req = gh.requires || {};
+    // back-compat: pre-rework godhoods used requires.abilities as an exact set
+    const pool = req.abilityPool || req.abilities || [];
+    const cores = req.coreAbilities || [];
+    const kit = pool.filter(a => abs.has(a));
+    const coreHit = cores.length ? cores.some(c => abs.has(c)) : true;
+    const need = req.abilitiesNeeded || pool.length;
+    return { kit: kit.length, needKit: need, coreHit, needCore: cores.length > 0, pool };
+  }
+
+  // godhoodCloseness(scholar, gh, day): how close to completion. Knowledge-gated
+  // hints use `close` (3+ pool abilities) without naming the capstone.
+  // day: current day for the endgame floor (minDay 80 — Steve 2026-10-13:
+  // no mid-game godhood). Pass 0/undefined to skip the day gate (tests).
+  function godhoodCloseness(sch, gh, day) {
+    // RELAY (Steve 2026-10-11): the 11th godhood isn't a kit build — it's the
+    // office path. Complete when holding the relay office + all six
     // comm-field abilities unlocked through the Relay endgame path.
     if (gh.id === 'voice_of_the_relay') {
       let holdsOffice = false;
@@ -79,37 +121,116 @@
       const ra = (sch.relayAbils || {});
       const abilCount = Object.keys(ra).filter(k => ra[k] && ra[k].unlocked).length;
       const need = gh.requires.relayAbils || 6; // 3 shared + 3 branch (light OR dark — never all 9 in one run)
+      const dayOk = (day || 0) >= ((gh.requires || {}).minDay || 0);
       return {
-        kit: abilCount, needKit: need, synergy: holdsOffice, item: true,
-        complete: holdsOffice && abilCount >= need,
+        kit: abilCount, needKit: need, coreHit: true, needCore: false,
+        synergy: holdsOffice, item: true, dayOk,
+        complete: holdsOffice && abilCount >= need && dayOk,
         close: holdsOffice && abilCount >= 4,
       };
     }
     const abs = scholarAbilities(sch);
     const syns = scholarSynergies(sch);
     const items = scholarItems(sch);
-    const kit = (gh.requires.abilities || []).filter(a => abs.has(a));
+    const pp = poolProgress(abs, gh);
     const synergy = (gh.requires.synergies || []).some(s => syns.has(s));
-    const item = (gh.requires.items || []).some(i => items.has(i));
+    const item = godhoodItemOk(gh, [...items]);
+    const dayOk = (day || 0) >= ((gh.requires || {}).minDay || 0);
     return {
-      kit: kit.length,
-      needKit: (gh.requires.abilities || []).length,
-      synergy, item,
-      complete: kit.length === (gh.requires.abilities || []).length && synergy && item,
-      close: kit.length >= 4, // hint threshold: you feel it coming
+      kit: pp.kit,
+      needKit: pp.needKit,
+      coreHit: pp.coreHit,
+      needCore: pp.needCore,
+      synergy, item, dayOk,
+      complete: pp.kit >= pp.needKit && pp.coreHit && synergy && item && dayOk,
+      close: pp.kit >= Math.min(3, Math.max(1, pp.needKit - 1)), // hint threshold: you feel it coming
     };
   }
 
-  // checkGodhood(scholar): returns ids of NEWLY completed godhoods (not yet
+  // checkGodhood(scholar, day): returns ids of NEWLY completed godhoods (not yet
   // recognized). Recognition state lives on scholar.godhood = { recognized: {id: day}, active: [ids] }.
-  function checkGodhood(sch) {
+  function checkGodhood(sch, day) {
     const g = sch.godhood || (sch.godhood = { recognized: {}, active: [] });
     const out = [];
     for (const gh of godhoods()) {
       if (g.recognized[gh.id]) continue;
-      if (godhoodCloseness(sch, gh).complete) out.push(gh.id);
+      if (godhoodCloseness(sch, gh, day).complete) out.push(gh.id);
     }
     return out;
+  }
+
+  // --- villager godhood (Steve 2026-10-13 metric: villagers occasionally
+  // obtain godhood by sim run end, 5-15% of runs) ---
+  function villagerAbilities(game, vid) {
+    try {
+      const v = (game.state || {}).village || {};
+      return new Set(((v.npcAbilities || {})[vid] || []));
+    } catch (e) { return new Set(); }
+  }
+  function villagerSynergies(game, vid) {
+    try {
+      const v = (game.state || {}).village || {};
+      return new Set(((v.npcSynergies || {})[vid] || []));
+    } catch (e) { return new Set(); }
+  }
+  function villagerItems(game, vid) {
+    const out = new Set();
+    try {
+      const p = game.getPerson ? game.getPerson(vid) : null;
+      for (const it of ((p && p.items) || [])) {
+        out.add(typeof it === 'string' ? it : (it.itemId || it.id));
+      }
+    } catch (e) {}
+    return out;
+  }
+
+  // villagerGodhoodCloseness(game, vid, gh): same requirement model as the
+  // player, read from villager stores. The relay office path is player-only.
+  function villagerGodhoodCloseness(game, vid, gh) {
+    if (gh.id === 'voice_of_the_relay') {
+      return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: false, dayOk: false, complete: false, close: false, vid };
+    }
+    const abs = villagerAbilities(game, vid);
+    const syns = villagerSynergies(game, vid);
+    const items = villagerItems(game, vid);
+    const pp = poolProgress(abs, gh);
+    const synergy = (gh.requires.synergies || []).some(s => syns.has(s));
+    const item = godhoodItemOk(gh, [...items]);
+    const day = (game.state || {}).day || 0;
+    const dayOk = day >= ((gh.requires || {}).minDay || 0);
+    return {
+      kit: pp.kit,
+      needKit: pp.needKit,
+      coreHit: pp.coreHit,
+      needCore: pp.needCore,
+      synergy, item, dayOk,
+      complete: pp.kit >= pp.needKit && pp.coreHit && synergy && item && dayOk,
+      close: pp.kit >= Math.min(3, Math.max(1, pp.needKit - 1)),
+      vid,
+    };
+  }
+
+  // checkVillagerGodhood(game, vid): newly completed godhoods for a villager.
+  // Recognition state lives on village.npcGodhood[vid] = { recognized: {id: day}, active: [ids] }.
+  function checkVillagerGodhood(game, vid) {
+    const v = (game.state || {}).village || {};
+    v.npcGodhood = v.npcGodhood || {};
+    const g = v.npcGodhood[vid] || (v.npcGodhood[vid] = { recognized: {}, active: [] });
+    const out = [];
+    for (const gh of godhoods()) {
+      if (g.recognized[gh.id]) continue;
+      if (villagerGodhoodCloseness(game, vid, gh).complete) out.push(gh.id);
+    }
+    return out;
+  }
+
+  function villagerMythicId(game, vid) {
+    try {
+      const g = ((game.state || {}).village || {}).npcGodhood || {};
+      const v = g[vid];
+      if (!v || !v.active || !v.active.length) return null;
+      return v.active[0];
+    } catch (e) { return null; }
   }
 
   function playerMythicId(sch) {
@@ -340,8 +461,49 @@
     return beats;
   }
 
-  // hintBeat(game, gh): the knowledge-gated hint when close but not complete.
-  // Fires once per godhood (scholar.godhood.hinted).
+  // villagerRecognitionCeremony(game, vid, ghId, witnesses): the village watches
+  // one of its own ascend. Played beats via say/sysSay, never a popup.
+  // Registers with the pantheon as a villager ascension. Fires once.
+  function villagerRecognitionCeremony(game, vid, ghId, witnesses) {
+    const gh = byId(ghId);
+    if (!gh || gh.id === 'voice_of_the_relay') return null;
+    const v = (game.state || {}).village || {};
+    v.npcGodhood = v.npcGodhood || {};
+    const g = v.npcGodhood[vid] || (v.npcGodhood[vid] = { recognized: {}, active: [] });
+    if (g.recognized[ghId]) return null; // fires once
+    let vname = 'Someone';
+    try { vname = game.displayName ? game.displayName(vid) : vname; } catch (e) {}
+    const beats = ceremonyBeats(gh, witnesses, null).map(b => Object.assign({}, b, {
+      // re-voice the beats for a witnessed ascension: it's THEY, not you
+      text: b.beat === 'change'
+        ? `${gh.recognition.beat} Look at ${vname}. Look at what the light does around them now. ${vname} is ${gh.name} — ${gh.mythic.title}. ${gh.mythic.desc}`
+        : b.beat === 'price'
+          ? `Godhood demands its price, and the price is not hidden: ${gh.capstone.cost} ${gh.capstone.weakness}`
+          : b.beat === 'stillness'
+            ? `Everything stops. Not all at once — conversations trail off, a dropped spoon rings too loud. Every face turns toward ${vname}.`
+            : b.text,
+    }));
+    try {
+      if (game.broadcastStart) game.broadcastStart('ascension', { godhood: ghId, name: gh.name, vid });
+    } catch (e) {}
+    for (const b of beats) {
+      try {
+        if (b.kind === 'sysSay' && game.sysSay) game.sysSay(b.text);
+        else if (game.say) game.say(b.text);
+      } catch (e) {}
+    }
+    const day = (game.state && game.state.day) || 0;
+    g.recognized[ghId] = day;
+    if (!g.active.includes(ghId)) g.active.push(ghId);
+    // PANTHEON: a villager god is a god. Register the ascension.
+    try {
+      const S2 = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+      if (S2.Pantheon && S2.Pantheon.registerAscension) {
+        S2.Pantheon.registerAscension(game, { vid, name: vname, godhoodId: ghId, kind: 'villager', architect: null });
+      }
+    } catch (e) {}
+    return beats;
+  }
   function hintBeat(game, ghId) {
     const gh = byId(ghId);
     if (!gh) return null;
@@ -381,9 +543,11 @@
   S.Godhood = {
     godhoods, byId,
     godhoodCloseness, checkGodhood, playerMythicId, godhoodBargaining,
+    villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
+    itemTier, godhoodItemOk, poolProgress,
     raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
     turnPain, noLiesCheck, summonMarket, walkHorizon, phaseOut, takeWound,
-    ceremonyBeats, recognitionCeremony, hintBeat,
+    ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,
     mythicSprite, MYTHIC_SPRITES,
   };
 })(typeof globalThis !== 'undefined' ? globalThis : this);

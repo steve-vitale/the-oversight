@@ -830,6 +830,8 @@
           // can complete a synergy's legs — recompute, like every other
           // grant path (chooseAbility, pact, gainAbilityXP level-up).
           try { this.recomputeActiveSynergies(); } catch (e) {}
+          // GODHOOD REWORK (Steve 2026-10-13): a gift can complete a build.
+          try { this.checkPlayerGodhoodAscension(); } catch (e2) {}
         }
       } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('showmanship', 3); } catch (e) {}
@@ -843,6 +845,10 @@
     // synergy leg the scholar holds (or has teased). Returns the def or null.
     // Legs are matched bare (tech:/skill: prefixes stripped); multi-path
     // synergies (requires_any) union their paths.
+    // GODHOOD REWORK (Steve 2026-10-13): also prefers abilities from the
+    // scholar's closest godhood pool — the System notices the shape of the
+    // build and feeds it. Diegetic (observation, not a wiki): the bias only
+    // kicks in once the scholar already holds 2+ pool abilities.
     _synergyGiftPick(cands, owned) {
       try {
         const syns = (this.data && this.data.synergies) || [];
@@ -850,6 +856,25 @@
         const sch = this.state.scholar || {};
         const teased = sch.synergyAttempts || {};
         const hasTease = (id) => Object.keys(teased).some(k => k.indexOf(id) === 0);
+        // godhood pool bias: find the closest unfinished godhood build
+        let poolBias = null;
+        try {
+          const S = globalThis.Scattering || {};
+          if (S.Godhood && S.Godhood.godhoods) {
+            const day = (this.state || {}).day || 0;
+            let bestClose = null, bestKit = 2;
+            for (const gh of S.Godhood.godhoods()) {
+              if (gh.id === 'voice_of_the_relay') continue;
+              if ((sch.godhood || {}).recognized && sch.godhood.recognized[gh.id]) continue;
+              const cl = S.Godhood.godhoodCloseness(sch, gh, day);
+              if (!cl.complete && cl.kit >= bestKit) { bestKit = cl.kit; bestClose = gh; }
+            }
+            if (bestClose) {
+              const req = bestClose.requires || {};
+              poolBias = new Set(req.abilityPool || []);
+            }
+          }
+        } catch (e) {}
         let best = null, bestScore = 0;
         for (const c of cands) {
           let score = 0;
@@ -864,6 +889,8 @@
               else if (others.some(l => hasTease(l))) score = Math.max(score, 1);
             }
           }
+          // pool bias: completing the noticed build scores like a held leg
+          if (poolBias && poolBias.has(c.id)) score = Math.max(score, 2);
           if (score > bestScore) { bestScore = score; best = c; }
         }
         return best;

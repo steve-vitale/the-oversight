@@ -1,5 +1,5 @@
 {
- "_comment": "GODHOOD CAPSTONES — Steve 2026-10-11. When a player completes an ENDGAME-BUILDS.md build (ability kit + key synergy + tier-4 capstone item), the game RECOGNIZES it with a played ceremony, grants ONE qualitative godly verb (not +X%), and permanently transforms their visual. Each capstone is the biggest single power spike in the game AND keeps its weakness. Knowledge-gated: the capstone is unknown until you're close.",
+ "_comment": "GODHOOD CAPSTONES — Steve 2026-10-11, requirements reworked 2026-10-13. When a player completes a build (4+ abilities from the godhood's pool incl. a core ability, a discovered synergy, any tier-4 item) after day 80, the game RECOGNIZES it with a played ceremony, grants ONE qualitative godly verb (not +X%), and permanently transforms their visual. Each capstone is the biggest single power spike in the game AND keeps its weakness. Knowledge-gated: the capstone is unknown until you're close (3+ pool abilities). Steve 2026-10-13: endgame only (minDay 80), reachable (pools not exact-6), items = any tier-4.",
  "godhoods": [
   {
    "build": 1,
@@ -23,21 +23,34 @@
     "systemLine": "\"LADIES AND GENTLEMEN AND THINGS THAT AREN'T! The audience has a NEW WORD and it's SHEPHERD! Not of sheep! OF THE DEAD! They fall! They GET UP! Somebody tell the gamblers the roster just got LONGER!\""
    },
    "requires": {
-    "abilities": [
-     "diplomat",
+    "abilityPool": [
+     "peacemaker",
      "mediator",
+     "diplomat",
+     "generous",
+     "silver_tongue",
      "pact",
-     "grave_robber",
      "hive_mind",
-     "generous"
+     "grave_robber",
+     "scream_cheese",
+     "gossip_network"
     ],
-    "items": [
-     "commanders_coat",
-     "banner_of_the_fallen"
+    "coreAbilities": [
+     "diplomat",
+     "mediator"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "peacemakers_voice",
      "delver"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "commanders_coat",
+     "banner_of_the_fallen"
     ]
    }
   },
@@ -63,19 +76,32 @@
     "systemLine": "\"STOP THE PRESSES! STOP ALL PRESSES! The Highbeam Deer just filed a COMPLAINT! It says — and I quote — 'it fears ME now'! Ladies and gentlemen, we have an APEX PREDATOR!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "tracker",
      "echo_location",
+     "game_sense",
+     "stalk",
+     "blood_trail",
      "patient_aim",
      "dead_aim",
-     "game_sense",
+     "ambush",
+     "animal_ken",
      "soft_step"
     ],
-    "items": [
-     "apex_bow"
+    "coreAbilities": [
+     "tracker",
+     "echo_location"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "apex_sense"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "apex_bow"
     ]
    }
   },
@@ -101,23 +127,36 @@
     "systemLine": "\"BREAKING! The pantry just reported a SURPLUS and the pantry does NOT do that! Somebody's growing DINNER out of THIN AIR! The audience is EATING! I repeat, the AUDIENCE is EATING! We have a LIVING GARDEN!\""
    },
    "requires": {
-    "_note": "forage_identification (ENDGAME-BUILDS.md) does not exist in abilities.json; animal_ken substituted — a forager who knows the land knows its animals.",
-    "abilities": [
+    "abilityPool": [
      "green_thumb",
      "photosynthesis",
      "compost_king",
      "dowsing",
      "animal_ken",
+     "camp_cook",
+     "preservation_instinct",
+     "field_dressing",
+     "herbal_remedy",
+     "rain_dancer"
+    ],
+    "coreAbilities": [
+     "green_thumb",
      "camp_cook"
     ],
-    "items": [
-     "seed_vault",
-     "feast_king_cauldron"
-    ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "sun_garden",
      "closed_loop"
-    ]
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "seed_vault",
+     "feast_king_cauldron"
+    ],
+    "_note": "forage_identification (ENDGAME-BUILDS.md) does not exist in abilities.json; animal_ken substituted — a forager who knows the land knows its animals."
    }
   },
   {
@@ -142,20 +181,32 @@
     "systemLine": "\"AND THEY'RE DOWN! THEY'RE — wait. WAIT. That's not their ash! WHOSE ash is that?! THE AUDIENCE IS SCREAMING! The phoenix doesn't rise from ITS ash anymore, folks — it rises from YOURS! We have an UNKILLABLE!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "phoenix_clause",
      "second_wind",
      "survivor",
      "chitin_skin",
      "molt",
-     "iron_stomach"
+     "iron_stomach",
+     "unbreakable",
+     "trade_of_blows",
+     "adrenaline_surge"
     ],
-    "items": [
-     "worldroot_plate"
+    "coreAbilities": [
+     "phoenix_clause",
+     "second_wind"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "refuses_death",
      "perfect_chrysalis"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "worldroot_plate"
     ]
    }
   },
@@ -181,22 +232,35 @@
     "systemLine": "\"THEY'RE BLEEDING! THEY'RE LOSING! THE GAMBLERS ARE CASHING OUT! ...Why is it SMILING?! OH NO. OH NO NO NO. FOLKS, THE DAMAGE ISN'T A COST ANYMORE — IT'S A WEAPON! WE HAVE A ONE-PERSON ARMY!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "rage",
-     "second_wind",
+     "haymaker",
+     "war_cry",
+     "ambush",
+     "patient_aim",
      "blood_magic",
-     "leech",
      "adrenaline_control",
-     "cornered_rat"
+     "brawler_instinct",
+     "adrenaline_surge"
     ],
-    "items": [
-     "worldbreaker_maul",
-     "bloodplate"
+    "coreAbilities": [
+     "rage",
+     "haymaker"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
+     "blood_rage",
      "undying_fury",
      "crimson_circuit",
      "cornered_fury"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "worldbreaker_maul",
+     "bloodplate"
     ]
    }
   },
@@ -222,23 +286,35 @@
     "systemLine": "\"SOMEONE JUST LIED TO OUR CHAMPION! The audience is GASPING! ...Why aren't they reacting? OH. OH THEY KNEW. THEY ALWAYS KNEW! Folks, there are no more secrets on this show! We have an ALL-SEEING!\""
    },
    "requires": {
-    "_note": "pattern_recognition (ENDGAME-BUILDS.md) does not exist in abilities.json; eagle_eye substituted — it is also required for the key synergy sees_the_weave, which the doc kit could not trigger.",
-    "abilities": [
+    "abilityPool": [
      "third_eye",
      "eagle_eye",
      "open_book",
      "translator",
      "eyes_in_back",
-     "night_eyes"
+     "night_eyes",
+     "lie_detector",
+     "evidence_board",
+     "mediator"
     ],
-    "items": [
-     "truth_lenses",
-     "the_ledger"
+    "coreAbilities": [
+     "third_eye",
+     "eagle_eye"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "sees_the_weave",
      "polyglots_ledger"
-    ]
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "truth_lenses",
+     "the_ledger"
+    ],
+    "_note": "pattern_recognition (ENDGAME-BUILDS.md) does not exist in abilities.json; eagle_eye substituted — it is also required for the key synergy sees_the_weave, which the doc kit could not trigger."
    }
   },
   {
@@ -263,20 +339,32 @@
     "systemLine": "\"BREAKING FINANCIAL NEWS! A market just APPEARED in the middle of NOWHERE! Economists are FURIOUS! The invisible hand just got a VISIBLE BODY! We have a MARKET GOD!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "hoarder",
      "scrounger",
      "grave_robber",
      "thief",
      "squirrel_friend",
-     "bird_whisperer"
+     "bird_whisperer",
+     "steady_hands",
+     "silver_tongue",
+     "gossip_network"
     ],
-    "items": [
-     "vault_key"
+    "coreAbilities": [
+     "hoarder",
+     "thief"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "delver",
      "critter_network"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "vault_key"
     ]
    }
   },
@@ -302,22 +390,33 @@
     "systemLine": "\"OUR CHAMPION WAS HERE! NOW THEY'RE — wait, that's THREE VILLAGES AWAY! THAT'S NOT POSSIBLE! THE MAP JUST FOLDED! FOLDED LIKE LAUNDRY! We have a FARSTRIDER!\""
    },
    "requires": {
-    "_noteSynergy": "Stormcaller (ENDGAME-BUILDS.md) does not exist; rain_catcher (rain_dancer+dowsing) is the real synergy for this kit.",
-    "abilities": [
+    "abilityPool": [
      "wanderer",
      "night_eyes",
      "dowsing",
      "swimmer",
      "tracker",
+     "rain_dancer",
+     "pathfinder",
+     "echo_location"
+    ],
+    "coreAbilities": [
+     "wanderer",
      "rain_dancer"
     ],
-    "items": [
+    "abilitiesNeeded": 4,
+    "synergies": [
+     "rain_catcher"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
      "farstrider_boots",
      "wayfinders_atlas"
     ],
-    "synergies": [
-     "rain_catcher"
-    ]
+    "_noteSynergy": "Stormcaller (ENDGAME-BUILDS.md) does not exist; rain_catcher (rain_dancer+dowsing) is the real synergy for this kit."
    }
   },
   {
@@ -342,19 +441,30 @@
     "systemLine": "\"THE BLOW LANDED! IT'S OVER! ...Why is everyone staring at empty air? WHERE — OH. OH THEY'RE BEHIND IT. THEY WERE NEVER THERE! FOLKS, WE HAVE A GHOST! WE HAVE THE BETWEEN!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "time_skip",
      "wanderer",
      "hollow_bones",
      "cold_blooded",
      "soft_step",
-     "night_eyes"
+     "night_eyes",
+     "stalk",
+     "ambush"
     ],
-    "items": [
-     "phase_shawl"
+    "coreAbilities": [
+     "time_skip",
+     "hollow_bones"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "efficient_machine"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "phase_shawl"
     ]
    }
   },
@@ -380,22 +490,33 @@
     "systemLine": "\"THEY'RE DOWN! THE MEDIC'S DOWN! ...Why are they STANDING? THAT WOUND WAS ON THE OTHER ONE! FOLKS, THE WOUNDS ARE MOVING! THEY'RE — THEY'RE TAKING THEM! We have an UNDYING WARD!\""
    },
    "requires": {
-    "abilities": [
+    "abilityPool": [
      "triage",
      "steady_hands",
      "field_medicine",
      "herbal_remedy",
+     "camp_cook",
      "purify",
-     "second_wind"
+     "preservation_instinct",
+     "iron_stomach"
     ],
-    "items": [
-     "surgeons_kit",
-     "lifebound_vestments"
+    "coreAbilities": [
+     "triage",
+     "field_medicine"
     ],
+    "abilitiesNeeded": 4,
     "synergies": [
      "surgeons_calm",
      "field_pharmacy",
      "clean_plate"
+    ],
+    "itemTiers": [
+     4
+    ],
+    "minDay": 80,
+    "capstoneItems": [
+     "surgeons_kit",
+     "lifebound_vestments"
     ]
    }
   },
@@ -411,7 +532,8 @@
     "synergies": [],
     "items": [],
     "relayAbils": 6,
-    "note": "Hold the relay office and unlock all six comm-field abilities (3 shared + 3 from your light/dark branch) through the Relay endgame path."
+    "note": "Hold the relay office and unlock all six comm-field abilities (3 shared + 3 from your light/dark branch) through the Relay endgame path.",
+    "minDay": 80
    },
    "capstone": {
     "verb": "Speak and Be Heard",

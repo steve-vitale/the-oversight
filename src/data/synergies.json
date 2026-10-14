@@ -1576,4 +1576,34 @@
     },
     "flags": []
   }
+  ,
+  {
+    "id": "blood_rage",
+    "name": "Blood Rage",
+    "flavor": "The rage finds the hammer. Every swing lands like the first one did \u2014 when you were angry.",
+    "requires": [
+      "rage",
+      "haymaker"
+    ],
+    "minLevel": 1,
+    "modifiers": [
+      {
+        "op": "multiply",
+        "target": "combat.strike_damage",
+        "value": 1.2
+      }
+    ],
+    "discovery": "\"RAGE! And the HAMMER! TOGETHER?! The audience just felt that one through the SCREEN! When you are angry AND armed, the arithmetic of violence changes! BLOOD RAGE!\"",
+    "discovery_method": {
+      "type": "sequential",
+      "order": [
+        "haymaker",
+        "rage"
+      ],
+      "hint": "Swing the hammer angry. Mean it both times.",
+      "tease1": "The hammer felt lighter when you were furious. That should not work. It worked.",
+      "tease2": "You stopped deciding to swing hard. The rage decided, and the hammer agreed. One more, and it is not a mood anymore \u2014 it is a technique."
+    },
+    "flags": []
+  }
 ]

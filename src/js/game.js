@@ -253,6 +253,17 @@
         const S = globalThis.Scattering;
         if (S) S.GODHOODS = godhood;
       } catch (e) {}
+      // GODHOOD REWORK (Steve 2026-10-13): item tier map for the flexible
+      // item gate (any tier-4 qualifies — option (c)). Built once at load.
+      try {
+        const S = globalThis.Scattering;
+        if (S) {
+          S.ITEM_TIER = S.ITEM_TIER || {};
+          for (const it of (items || [])) {
+            if (it && it.id && it.lootTier) S.ITEM_TIER[it.id] = it.lootTier;
+          }
+        }
+      } catch (e) {}
       // Scaffold #4 (Steve 2026-10-07): wire the drama effect registry — data-driven renderer.
       try {
         const D = globalThis.Scattering && globalThis.Scattering.Drama;
@@ -6351,6 +6362,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           person.items.push(dropId);
         }
       } catch (e) {}
+      // GODHOOD REWORK (Steve 2026-10-13): a tier-4 drop can complete a build.
+      try { this.checkVillagerGodhoodAscension(vid); } catch (e2) {}
       return dropId;
     },
 
@@ -21431,6 +21444,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.abilityOnAcquire(choice.id);
       // SYNERGIES: new ability might resonate with something you already hold.
       this.recomputeActiveSynergies();
+      // GODHOOD REWORK (Steve 2026-10-13): a new ability can complete a build.
+      try { this.checkPlayerGodhoodAscension(); } catch (e2) {}
       s.abilityChoices = null;
       this.say(`✨ Ability gained: ${choice.name} (L1). ${choice.description || choice.desc}`);
       if (choice.flavor) this.say(`"${choice.flavor}"`);
@@ -26898,6 +26913,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (freeloaders get warned, then voted out), and the mentored learn.
       try { this.freeloaderTick(v); } catch (e) {}
       try { this.mentorTick(v); } catch (e) {}
+      // GODHOOD REWORK (Steve 2026-10-13): villagers discover synergies by
+      // holding all legs day after day — practice abstracted into daily deeds.
+      try { this.npcSynergyTick(v); } catch (e) {}
       // HANDLING DEEPENS (longsim knowledge r2 2026-10-11): the village's
       // hands learn, read from today's foraging ledger. Runs inside
       // villageEats so it ticks exactly once per village day.
@@ -38570,6 +38588,46 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { return (((this.state.village || {}).npcAbilities || {})[vid] || []).includes(id); }
       catch (e) { return false; }
     },
+    // npcSynergyTick(v): GODHOOD REWORK (Steve 2026-10-13). Villagers discover
+    // synergies by holding all legs day after day — the "practice" is their
+    // daily deeds, abstracted. Deterministic: 12 days holding every leg ->
+    // discovered. Narrated once (gossip-worthy), stored on v.npcSynergies[vid].
+    // This is the villager path to the synergy leg of godhood requirements.
+    npcSynergyTick(v) {
+      try {
+        const syns = this.data.synergies || [];
+        if (!syns.length) return;
+        v.npcSynergies = v.npcSynergies || {};
+        v.npcSynergyDays = v.npcSynergyDays || {};
+        const roster = (v.roster || []).filter(id => id !== this.villagerId && !(this.vpOf && this.vpOf(id) || {}).dead);
+        for (const vid of roster) {
+          const held = new Set(((v.npcAbilities || {})[vid] || []));
+          if (held.size < 2) continue;
+          v.npcSynergies[vid] = v.npcSynergies[vid] || [];
+          v.npcSynergyDays[vid] = v.npcSynergyDays[vid] || {};
+          for (const syn of syns) {
+            if (v.npcSynergies[vid].includes(syn.id)) continue;
+            const legs = (syn.requires || []).map(l => String(l).split(':').pop());
+            if (!legs.length || !legs.every(l => held.has(l))) {
+              // not holding all legs: progress decays, not reset (they've practiced before)
+              if (v.npcSynergyDays[vid][syn.id] > 0) v.npcSynergyDays[vid][syn.id]--;
+              continue;
+            }
+            v.npcSynergyDays[vid][syn.id] = (v.npcSynergyDays[vid][syn.id] || 0) + 1;
+            if (v.npcSynergyDays[vid][syn.id] >= 12) {
+              v.npcSynergies[vid].push(syn.id);
+              const vname = this.displayName ? this.displayName(vid) : 'Someone';
+              const sname = syn.name || syn.id;
+              this.say(`✦ ${vname} has found something — ${sname}. Days of ${legs.join(' and ')} side by side, and now they move as one. (${syn.id}: villager synergy discovered)`);
+              try { this.journalNote && this.journalNote('system', 'synergy', `${vname} discovered ${sname} (${syn.id}).`); } catch (e2) {}
+              try { this.tele && this.tele('villager_synergy', { vid, synergy: syn.id }); } catch (e3) {}
+              // a new synergy can complete a godhood build — check
+              try { this.checkVillagerGodhoodAscension(vid); } catch (e4) {}
+            }
+          }
+        }
+      } catch (e) {}
+    },
     npcGrantAbility(vid, id) {
       try {
         // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. If the
@@ -38581,6 +38639,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!v.npcAbilities[vid].includes(id)) v.npcAbilities[vid].push(id);
         if (id === 'fusion_reactor') this.state.fusionReactorHolder = { who: 'villager', vid: vid, day: this.state.day || 0 };
         try { this.tele('ability_granted', { id: id, who: 'villager:' + vid }); } catch (e) {}
+        // GODHOOD REWORK (Steve 2026-10-13): a new ability can complete a
+        // godhood build — check (was wired to nothing; 0 activations ever).
+        try { this.checkVillagerGodhoodAscension(vid); } catch (e2) {}
         return true;
       } catch (e) { return false; }
     },
@@ -38589,6 +38650,58 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const m = (this.state.village || {}).npcAbilities || {};
         m[vid] = (m[vid] || []).filter(x => x !== id);
       } catch (e) {}
+    },
+    // checkVillagerGodhoodAscension(vid): GODHOOD REWORK (Steve 2026-10-13).
+    // The missing wire: nothing ever called checkGodhood, so godhood could
+    // never trigger. Now a completed villager build fires the played ceremony.
+    checkVillagerGodhoodAscension(vid) {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.checkVillagerGodhood) return;
+        const fresh = S.Godhood.checkVillagerGodhood(this, vid);
+        for (const ghId of fresh) {
+          const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(vid, 3) : [];
+          S.Godhood.villagerRecognitionCeremony(this, vid, ghId, witnesses);
+        }
+      } catch (e) {}
+    },
+    // checkPlayerGodhoodAscension(): same wire for the player — call after
+    // any ability/synergy/item acquisition.
+    checkPlayerGodhoodAscension() {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.checkGodhood) return;
+        const sch = this.state.scholar;
+        if (!sch) return;
+        const day = (this.state || {}).day || 0;
+        const fresh = S.Godhood.checkGodhood(sch, day);
+        for (const ghId of fresh) {
+          const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(null, 3) : [];
+          const dp = this.dayPartName ? this.dayPartName() : null;
+          S.Godhood.recognitionCeremony(this, ghId, witnesses, dp);
+        }
+      } catch (e) {}
+    },
+    // godhoodWitnesses(excludeVid, n): pick n living villagers (not the
+    // ascendant) with a one-line reaction each. Personality-flavored later;
+    // for now, honest awe.
+    godhoodWitnesses(excludeVid, n) {
+      try {
+        const v = this.state.village || {};
+        const ids = (v.roster || []).filter(id => id !== excludeVid && id !== this.villagerId && !(this.vpOf && this.vpOf(id) || {}).dead);
+        const out = [];
+        const lines = [
+          'I saw it happen. I was THERE.',
+          'We all felt it. Like the air changed its mind.',
+          'I have no words. I am making do with these.',
+        ];
+        for (let i = 0; i < Math.min(n || 3, ids.length); i++) {
+          const id = ids[Math.floor(Math.random() * ids.length)];
+          if (out.some(w => w.vid === id)) continue;
+          out.push({ vid: id, name: this.displayName ? this.displayName(id) : 'Someone', line: lines[i % lines.length] });
+        }
+        return out;
+      } catch (e) { return []; }
     },
 
     // --- VILLAGER XP & SYSTEM GRANTS (Steve 2026-10-09) ---
@@ -38608,7 +38721,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     NPC_MAX_ABILITIES: 6,
     NPC_ABILITY_KITS: {
       // Fixed priority order = grant order. First unheld wins; ties impossible.
-      // phoenix_clause sits 4th in combat (32 XP): a real veteran's capstone,
+      // phoenix_clause sits 5th in combat (64 XP): a real veteran's capstone,
       // unlock type system_offer -- the System offers it to those who've
       // proven themselves in death's doorway. This lights up the villager-
       // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
@@ -38618,10 +38731,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // path: the System offers them for combat bond earned beside others
       // (party-bond.js noteShieldbearerOffer). Pool/unlock stay for the
       // player's system offers.
-      combat: ['patient_aim', 'haymaker', 'ambush', 'phoenix_clause', 'war_cry', 'trade_of_blows', 'unbreakable', 'dead_aim'],
+      // GODHOOD REWORK (Steve 2026-10-13): kit order now carries the four
+      // villager-reachable godhoods. Each godhood's pool needs 4+ abilities
+      // (incl. a core) within the first 5 grants of its track(s):
+      //   combat -> one_person_army (rage/haymaker/ambush/patient_aim; core rage)
+      //   field -> apex_predator (tracker/echo_location/game_sense/stalk; core tracker|echo_location)
+      //   social -> shepherd_of_the_dead (peacemaker/mediator/diplomat/generous/silver_tongue; core diplomat|mediator)
+      //   craft -> undying_ward (steady_hands/triage/field_medicine/preservation_instinct/iron_stomach; core triage|field_medicine)
+      // The other six godhoods are player-primary (System offers + build-aware bias).
+      // phoenix_clause sits 5th in combat (32 XP): still a real veteran's
+      // capstone, still lights the villager-Bearer <redacted> phoenix path.
+      combat: ['patient_aim', 'haymaker', 'rage', 'ambush', 'phoenix_clause', 'war_cry', 'blood_magic', 'trade_of_blows', 'unbreakable', 'adrenaline_control', 'dead_aim'],
       field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
-      social: ['peacemaker', 'mediator', 'scream_cheese', 'animal_ken'],
-      craft: ['steady_hands', 'triage', 'preservation_instinct', 'iron_stomach'],
+      social: ['peacemaker', 'mediator', 'diplomat', 'generous', 'silver_tongue', 'scream_cheese', 'gossip_network', 'animal_ken'],
+      craft: ['steady_hands', 'triage', 'field_medicine', 'preservation_instinct', 'iron_stomach', 'herbal_remedy', 'camp_cook', 'purify'],
     },
     NPC_TRACK_NOUNS: { combat: 'fights', field: 'days worked on the land', social: 'words shared at the fire', craft: 'careful work' },
     npcXp(vid) {
