@@ -750,20 +750,34 @@
   Object.assign(Game, methods);
 
   // WATCHING IT USED (parity 2026-10-14): when the bearer uses an ability,
-  // the party beside them sees what it does (L2). Wrapped here (loaded after
-  // abilityActions.js and telemetry-hooks.js).
-  for (const fn of ['useAbility', 'activateAbility']) {
-    const orig = Game[fn];
-    if (typeof orig !== 'function') { warn(fn + ' missing: party cannot witness abilities'); continue; }
-    Game[fn] = function (id) {
-      const r = orig.apply(this, arguments);
-      try {
-        if (r !== false && r != null && this.npcWitnessAbility && this.partyMembers) {
-          const aid = String(id || '').split('.')[0];
-          this.npcWitnessAbility(aid, this.partyMembers(), this.villagerId);
-        }
-      } catch (e) { warn('witness', e); }
-      return r;
+  // the party beside them sees what it does (L2). useAbility/activateAbility
+  // load after this module (abilityActions.js), so the wrap installs on the
+  // first newGame/load — always before play.
+  let _witnessWrapped = false;
+  function installWitnessWraps(G) {
+    if (_witnessWrapped) return;
+    _witnessWrapped = true;
+    for (const fn of ['useAbility', 'activateAbility']) {
+      const orig = G[fn];
+      if (typeof orig !== 'function') { warn(fn + ' missing: the party cannot witness abilities'); continue; }
+      G[fn] = function (id) {
+        const r = orig.apply(this, arguments);
+        try {
+          if (r !== false && r != null && this.npcWitnessAbility && this.partyMembers) {
+            const aid = String(id || '').split('.')[0];
+            this.npcWitnessAbility(aid, this.partyMembers(), this.villagerId);
+          }
+        } catch (e) { warn('witness', e); }
+        return r;
+      };
+    }
+  }
+  for (const entry of ['newGame', 'load']) {
+    const orig = Game[entry];
+    if (typeof orig !== 'function') { warn(entry + ' missing'); continue; }
+    Game[entry] = function () {
+      try { installWitnessWraps(this); } catch (e) { warn('install witness', e); }
+      return orig.apply(this, arguments);
     };
   }
 })();

@@ -5027,7 +5027,7 @@
     // contact — the strange track, for whoever stood under the lights.
     try {
       if (this.gainTrackXP && (outcome === 'won' || outcome === 'lost')) {
-        this.creditDeed(isWatch ? ac.participant : 'player', 'contest_survived');
+        this.creditDeed && this.creditDeed(isWatch ? ac.participant : 'player', 'contest_survived');
       }
     } catch (eT) { console.warn('[tracks] contest survived', eT); }
     // RESOLVE AUDIO (Steve 2026-10-08): the contest's resolution beat lands
@@ -5096,7 +5096,7 @@
           // belongs to (+3 XP: a full first rung for a nobody, a nudge for a
           // veteran). The System was watching; the watching pays. The grant
           // path narrates its own "Earned, not given" when a threshold fires.
-          try { this.creditDeed(ac.participant, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e2) { console.warn('[tracks] contest win deed', e2); }
+          try { this.creditDeed && this.creditDeed(ac.participant, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e2) { console.warn('[tracks] contest win deed', e2); }
         }
       } else {
         this.sysSay(`📺 ${contest.name} — YOU WIN. The crowd is a weather system.`);
@@ -6060,7 +6060,7 @@
         // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): same
         // win-deed as the watch path — the televised win feeds the
         // contest's deed-XP track.
-        try { this.creditDeed(pid, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e3) { console.warn('[tracks] contest win deed', e3); }
+        try { this.creditDeed && this.creditDeed(pid, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e3) { console.warn('[tracks] contest win deed', e3); }
       } else {
         const survived = [
           `📺 ${pname} survived. Barely, by the look of them when the lights came up.`,

@@ -5760,7 +5760,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (!best || d < best.d) best = { t, wl, preyIds, d };
         }
       } catch (e) {}
-      try { this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
+      try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
       if (!best) {
         return { kcal: 0, msg: `🏹 ${first} works the grounds all day — the wild is hunted out. Nothing to bring home. The village needs new ground.` };
       }
@@ -5810,7 +5810,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
-      try { this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
+      try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
       try {
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[aid] = (this.state.codex.animalEncounters[aid] || 0) + 1;
@@ -5927,7 +5927,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`🌿 ${first} returns with foraged food: +${kcal} kcal to the pantry.${landNote}${learned}`);
         this.bumpTrust(vid, 2, 'hauled foraged food to the pantry');
         // PARITY (2026-10-14): the player's forage deed, same n and cap.
-        try { this.creditDeed(vid, 'foraging'); } catch (eT) { console.warn('[tracks] forage duty deed', eT); }
+        try { this.creditDeed && this.creditDeed(vid, 'foraging'); } catch (eT) { console.warn('[tracks] forage duty deed', eT); }
       } else if (a.task === 'hunt') {
         // PARITY (2026-10-10, Worker A): the hunt duty used to be a flat
         // R(400,900) kcal roll — the same hunter got the same meat from
@@ -6036,7 +6036,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (kcal > 0) this.stockPantry(kcal, 'Garden harvest');
           this.say(`🌱 ${first} works the garden — watered, weeded, turned${n ? `, and brings in a harvest (+${kcal} kcal to the pantry)` : '. Nothing ripe yet'}.`);
-          try { this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
+          try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the garden');
         }
       } else if (a.task === 'fish') {
@@ -6074,7 +6074,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (fkcal > 0) this.stockPantry(fkcal, 'Fish catch');
           this.say(`🎣 ${first} worked the creek — ${fn} fish, +${fkcal} kcal to the pantry.`);
-          try { this.creditDeed(vid, 'fishing'); } catch (e) { console.warn('[tracks] deed', e); }
+          try { this.creditDeed && this.creditDeed(vid, 'fishing'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the creek for fish');
         }
       } else if (a.task === 'cook') {
@@ -6241,7 +6241,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
-            try { this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
+            try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
           } else if (racksFull && eligible.length) {
             preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
           }
@@ -6249,7 +6249,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         this.say(`🍲 ${first} cooked for the haven — meals stretched.${preservedNote}`);
         // PARITY (2026-10-14): cooking is the player's craft deed too.
-        try { this.creditDeed(vid, 'cooking'); } catch (eT) { console.warn('[tracks] cook duty deed', eT); }
+        try { this.creditDeed && this.creditDeed(vid, 'cooking'); } catch (eT) { console.warn('[tracks] cook duty deed', eT); }
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'tend' || a.task === 'teach' || a.task === 'mend') {
         // HAVEN ROLES (Steve 2026-10-09): haven work is contribution. The
@@ -6292,7 +6292,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // PARITY (2026-10-14): mending is crafting, teaching is teaching —
         // the player's deeds, same n and caps. Tending the fire has no deed
         // for anyone.
-        try { if (a.task === 'mend') this.creditDeed(vid, 'crafting'); else if (a.task === 'teach') this.creditDeed(vid, 'teaching'); } catch (eT) { console.warn('[tracks] haven role deed', eT); }
+        try { if (a.task === 'mend') this.creditDeed && this.creditDeed(vid, 'crafting'); else if (a.task === 'teach') this.creditDeed && this.creditDeed(vid, 'teaching'); } catch (eT) { console.warn('[tracks] haven role deed', eT); }
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'scout') {
         // reveal tiles around haven + small chance of a find
@@ -6325,7 +6325,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         this.say(`🔭 ${first} scouts the land: mapped ${revealed} new area${revealed === 1 ? '' : 's'}.${find}`);
         // PARITY (2026-10-14): new ground mapped is the player's discovery deed.
-        if (revealed > 0) { try { this.creditDeed(vid, 'discovery'); } catch (eT) { console.warn('[tracks] scout deed', eT); } }
+        if (revealed > 0) { try { this.creditDeed && this.creditDeed(vid, 'discovery'); } catch (eT) { console.warn('[tracks] scout deed', eT); } }
         this.bumpTrust(vid, 2, 'scouted and mapped new land');
       } else if (a.task === 'patrol') {
         this.resolvePatrol(vid, first);
@@ -6527,7 +6527,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (healer) {
         v.health[vid] = Math.min(100, cur + 25);
         // VILLAGER XP (Steve 2026-10-09): doctoring is craft work.
-        try { const hid = this.campHealerVid ? this.campHealerVid() : null; if (hid) this.creditDeed(hid, 'healing'); } catch (e) { console.warn('[tracks] deed', e); }
+        try { const hid = this.campHealerVid ? this.campHealerVid() : null; if (hid) this.creditDeed && this.creditDeed(hid, 'healing'); } catch (e) { console.warn('[tracks] deed', e); }
         try {
           const who = healer === 'You' ? 'You patch them up' : `${healer} patches them up`;
           this.say(`🩹 ${nm} is hurting (${cur} HP) — ${who} before they head out. (${cur} → ${v.health[vid]} HP)`);
@@ -16368,7 +16368,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       entry.taughtDay = this.state.scholar.day;
       // VILLAGER XP (Steve 2026-10-09): teaching is acting like a player.
       // The teacher earns social XP whether the lesson was true or not.
-      try { this.creditDeed(entry.discoveredBy, 'teaching'); } catch (e) { console.warn('[tracks] deed', e); }
+      try { this.creditDeed && this.creditDeed(entry.discoveredBy, 'teaching'); } catch (e) { console.warn('[tracks] deed', e); }
       // BAD GOSSIP (Steve 2026-10-06): the teacher may be wrong — and the
       // fire spreads wrongness as fast as truth. The player gets the
       // wrongTeaching beat (contested if they know better); villagers who
@@ -16486,7 +16486,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const tname = this.displayName(tester);
       v.lastExperimentDay = day;
-      try { this.creditDeed(tester, 'crafting'); } catch (e) { console.warn('[tracks] experimenting', e); } // was 'survival' — not a track; the deed never counted (unified tracks 2026-10-14)
+      try { this.creditDeed && this.creditDeed(tester, 'crafting'); } catch (e) { console.warn('[tracks] experimenting', e); } // was 'survival' — not a track; the deed never counted (unified tracks 2026-10-14)
       if (pid) {
         const p = (this.data.plants || []).find(x => x.id === pid);
         if (!p) return;
@@ -19474,7 +19474,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       plot.pid = best.pid; plot.plantedDay = day; plot.lastTend = day;
       plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
       const first = this.displayName(vid);
-      try { this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
+      try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
       // NAME HONESTY (break-it knowledge 2026-10-11 r4): the true name is L1
       // knowledge — a gardener's work doesn't teach it to you by osmosis. The
       // believed name (wrongAs) or the honest descriptor until you've learned
@@ -24939,7 +24939,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const kcalBig = Math.round(kcal * this.vigorYieldMult(depBig.avgVigor));
           this.stockPantry(kcalBig, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
-          try { this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
+          try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
           if (present) this.say(`${first} had the day of their life — ${kcalBig} kcal. Two days of food from one person.${pers.sharing === 'selfish' ? ' (Kept some back, you suspect.)' : ''}`);
         } else if (r < 0.35) {
           // brings food: a real haul. from the world, not thin air.
@@ -24949,7 +24949,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const kcalH = Math.round(kcal * this.vigorYieldMult(depH.avgVigor));
           this.stockPantry(kcalH, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
-          try { this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
+          try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
           if (present) this.say(`${first} came back with ${kcalH} kcal of something edible. The pantry breathes.`);
           // KNOWLEDGE SPREAD (Steve 2026-10-09, tweak B): working the land
           // teaches. A forager who brings food home learned SOMETHING about

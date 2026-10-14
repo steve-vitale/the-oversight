@@ -117,8 +117,12 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
     Game2.state.systemArrived = false;
     Game2.combatBondAdd(c, d, 90);
     Game2.noteShieldbearerOffer(c);
-    const held3 = (Game2.state.village.npcAbilities || {})[c] || [];
-    ok('no offers before day-7 arrival', held3.length === 0, 'held=' + held3.join(','));
+    // PARITY (2026-10-14, design change): a villager's first ability (their
+    // knack, like the player's) is held from day 1 — only the shieldbearer
+    // offers wait for the System.
+    const knack3 = ((Game2.state.village.npcKnacks || {})[c]);
+    const held3 = ((Game2.state.village.npcAbilities || {})[c] || []).filter(id => id !== knack3);
+    ok('no offers before day-7 arrival', held3.length === 0 && !Game2.npcHasAbility(c, 'draw_fire'), 'held=' + held3.join(','));
   }
 
   // ---------- 6. rally: hold for them, once per fight ----------

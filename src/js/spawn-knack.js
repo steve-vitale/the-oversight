@@ -63,14 +63,18 @@
     // Two draw from knacks matching the seed's skill origins (the System
     // aimed its early gift at what you'd reach for); the third is wild
     // (a real choice, not a menu).
-    knackChoicesFor(char) {
+    // rng (optional): a local generator — villagers draw their choices from
+    // a stream seeded by one shared draw, so the world's luck moves exactly
+    // as it did when a villager's knack was a single pick.
+    knackChoicesFor(char, rng) {
+      const RR = rng || R;
       const all = this.knackPool();
       if (!all.length) return [];
       const ls = (char && char.lifeseed) || {};
       const origins = Object.keys(ls.skillOrigins || {});
       const matched = all.filter(k => (k.knackOrigins || []).some(o => origins.includes(o)));
       const rest = all.filter(k => !(k.knackOrigins || []).some(o => origins.includes(o)));
-      const draw = (arr) => arr.length ? arr.splice(Math.floor(R() * arr.length), 1)[0] : null;
+      const draw = (arr) => arr.length ? arr.splice(Math.floor(RR() * arr.length), 1)[0] : null;
       const choices = [];
       const m1 = draw(matched), m2 = draw(matched);
       if (m1) choices.push(m1);
@@ -166,7 +170,11 @@
           // the live magic pool, like liveKnackChoices does for the player.
           if (id && !this.knackDef(id)) id = null;
           if (!id) {
-            const choices = this.knackChoicesFor(vp);
+            // one shared draw seeds the villager's own stream (the old single
+            // pick's footprint on the world RNG)
+            let seed = Math.floor(R() * 4294967296) >>> 0;
+            const rng = () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), 1 | t); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+            const choices = this.knackChoicesFor(vp, rng);
             if (!choices.length) continue;
             id = (this.pickVillagerKnack && this.pickVillagerKnack(vid, choices)) || choices[0].id;
             v.npcKnacks[vid] = id;
