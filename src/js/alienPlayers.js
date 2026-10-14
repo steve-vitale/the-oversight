@@ -159,6 +159,28 @@
     }
   }
 
+  // CONTEST DETERMINISM (audit 2026-10-14): apContestInterference sits in
+  // the contest resolution path (verdict + the player's killing-blow check),
+  // which contestEngine promises is Math.random-free — same state, same
+  // fate; reloading replays it. Its rolls draw from the contest's own seed
+  // (_cxSeed: day, contest id, participants, stat snapshot) salted per roll,
+  // not Math.random. Math.random is only the fallback with no contest.
+  function _apContestDraw(self, ac, salt) {
+    try {
+      if (ac && typeof self._cxSeed === 'function') {
+        var pids = (ac.participants && ac.participants.length) ? ac.participants.slice() : [ac.participant];
+        var a = self._cxSeed(pids, { id: String(ac.contestId || ac.showId || '?') + '#ap:' + salt }) | 0;
+        a = (a + 0x6D2B79F5) | 0;
+        var t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }
+    } catch (e) {
+      try { console.warn('[alienPlayers] contest seed failed', e && e.message); } catch (e2) { /* no console */ }
+    }
+    return Math.random();
+  }
+
   var methods = {
     // ---------- state ----------
     apState: function () {
@@ -1559,7 +1581,7 @@
         if (ap.met[pid].encounters < 2) continue; // needs a real rivalry
         if (this.apIsDead(pid)) continue; // the dead rig nothing (break-it r12)
         if (day - (ap.lastRigDay || -999) < 5) continue; // LIMIT: max 1 rig per 5 days
-        if (Math.random() < 0.35) {
+        if (_apContestDraw(this, ac, 'rig:' + pid) < 0.35) {
           ap.lastRigDay = day;
           result.winMod -= 0.12;
           result.note = '📺 ' + per.name + ' is in the judging booth. They\'re smiling. That\'s never good.';
@@ -1593,7 +1615,7 @@
           if ((ap.met[pid2].bond || 0) < 2) continue;
           if (this.apIsDead(pid2)) continue; // the dead save no one (break-it r12)
           if (day - (ap.lastLifelineDay || -999) < 7) continue; // LIMIT: max 1 per week
-          if (Math.random() < 0.4) {
+          if (_apContestDraw(this, ac, 'lifeline:' + pid2) < 0.4) {
             ap.lastLifelineDay = day;
             result.deathSave = true;
             result.note = '📺 Somewhere in the control room, a feed cuts to static for exactly three seconds. When it returns, the killing blow... misses. No one can explain it.';
