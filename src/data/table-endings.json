@@ -1,5 +1,38 @@
 {
-  "_doc": "ENDINGS BY BUILD (Steve 2026-10-14: \"Each playstyle and godhood path, moral choice version should have its own ending.\"). paths.<tablePath>.<selector>.<moral> = { title?, lines: [closing lines said after the final's outcome], finals?: { <finalId>: [lines that REPLACE that final's outcome] } }. Lookup order for the locked ending key, most specific first: 'god:<godId>' > 'class:<path>/<subclass>' > 'class:<path>' > 'track:<track>' > the path's own light/dark finals (table-<path>.js, never in this file). A slot with nothing authored falls through to the next. Final ids per path: see table-<path>.js finals, plus 'hosts' (THE HOSTS, adds lines only) and 'poddemand' (adds lines only). Tokens: {name} {class} {god} {verb}. Morals: light, dark; grey for the relay only. Validate and list what's missing: node scripts/validate-table-endings.js --todo",
+  "_doc": "COMPOSED ENDINGS (Steve 2026-10-14 round 5, on path final + one build coda: \"Nope good idea that's kinda manageable.\"). An ending = the Table path's own light/dark final (table-<path>.js, never in this file) + ONE build coda. codas.<selector> = { light: [lines], dark: [lines] }, path-independent; selectors 'god:<godId>' (10), 'class:<path>/<subclass>' (20), 'track:<track>' (5) = 70 codas. The most specific coda for the locked ending key plays: god > class/subclass > track; none = the final alone. The relay's grey band reads light or dark by relayLean (>0 light, <0 dark, 0 light), the same rule as its door gift. paths.<tablePath>.<selector>.<moral> = { title?, lines, finals?: { <finalId>: [lines that REPLACE that final's outcome] } } is a RARE BESPOKE OVERRIDE and wins over every coda (lookup god > class/subclass > class > track; morals light, dark, grey on the relay; final ids per table-<path>.js plus 'hosts' and 'poddemand', which add lines only). Tokens: {name} {class} {god} {verb} {path} (the Table path's name, e.g. 'the Beloved'). Voice: spare, second person, two lines. Validate and list what's missing: node scripts/validate-table-endings.js --todo",
+  "codas": {
+    "_doc": "One build coda per selector x moral, played after the path's final. Exemplars 2026-10-14: god:one_person_army, class:caregiver/keeper, track:combat.",
+    "god:one_person_army": {
+      "light": [
+        "The System called you {god}. You never wanted an army. You wanted everyone home, and every wound you took, you gave back once, and then you put it down.",
+        "{name} keeps no trophies. When the children ask what it was like to be an army, you tell them: tired, and never alone."
+      ],
+      "dark": [
+        "The System called you {god}, and you kept the name. Every wound since the first day is still on your books. You still collect.",
+        "You leave the Table as {path}, and nothing around the ring will meet your eyes. In Haven, people step aside when you pass. They don't know they're doing it."
+      ]
+    },
+    "class:caregiver/keeper": {
+      "light": [
+        "You carried the keepsakes of the dead the whole way to the Table: a button, a whistle, a name scratched into a spoon. When it was over, you set them out where everyone could see.",
+        "The Codex keeps what the dead knew. {name} keeps the rest: who they were at dinner."
+      ],
+      "dark": [
+        "You carried the dead the whole way to the Table and made them stand behind you while you talked. The table counted them as yours. You let it.",
+        "{name} still sets places for people who aren't coming. Nobody in Haven dares sit in them."
+      ]
+    },
+    "track:combat": {
+      "light": [
+        "You came to the Table as {path} the hard way: one fight at a time, most of them for someone else.",
+        "{name} still wakes before dawn and walks the fence. It's a good fence. It doesn't need walking."
+      ],
+      "dark": [
+        "You came to the Table as {path} the hard way, and you made sure the hard way went through everyone in front of you.",
+        "{name} still wakes before dawn with a hand on the knife. Haven sleeps fine. It doesn't ask why."
+      ]
+    }
+  },
   "paths": {
     "beloved": {
       "class:socialite/showrunner": {

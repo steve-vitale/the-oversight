@@ -30,7 +30,8 @@
 //   - tableLiveWrap(text)
 //   - tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
 //   - tableBeatChoices(beat, T) -> a beat's own choices plus the build-aware option on the beat that plays the build
-//   - tableEndingLines(fid, outcome) -> ending text by the locked key with the path's own finals as fallback
+//   - tableEndingLines(fid, outcome) -> the path's final plus one build coda (or a bespoke path entry) for the locked key
+//   - tablePathName(id) -> the path's display name (the {path} token in endings)
 // consumes:
 //   - state.scholar, state.village, progState()
 //   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
@@ -56,6 +57,12 @@
     tableRegisterPath(def) {
       if (!def || !def.id) return;
       PATHS[def.id] = def;
+    },
+    // tablePathName: a path's display name ('the Beloved'); the {path}
+    // token in the ending codas (endingKey.js).
+    tablePathName(id) {
+      const d = pathDef(id);
+      return (d && d.name) || null;
     },
 
     // ============ THE SEAT: full / lesser / none ============

@@ -84,6 +84,9 @@
           abilitiesNeeded: rules.abilitiesNeeded || 4,
           synergies: Array.from(synIds),
           deedAlt: g.deedAlt || null,
+          // the lived-in deed (godpaths.json rules.capstone.deedClassDays):
+          // the class named on this path and held this many days
+          deedClassDays: rules.deedClassDays || 0,
           itemTiers: [], minDay: rules.minDay != null ? rules.minDay : 80,
           closeAt: rules.closeAt || 3,
           // data levers (godpaths.json rules.capstone): Steve to tune
@@ -213,6 +216,17 @@
   // hints use `close` (3+ pool abilities) without naming the capstone.
   // day: current day for the endgame floor (minDay 80 — Steve 2026-10-13:
   // no mid-game godhood). Pass 0/undefined to skip the day gate (tests).
+  // classDaysDeed(rec, req, day): THE LIVED-IN DEED (2026-10-14). The
+  // System named the class on this path and it has held for
+  // req.deedClassDays days: the build was played, not assembled on the day.
+  // An alternative to the synergy deed; 0 = off.
+  function classDaysDeed(rec, req, day) {
+    try {
+      const n = req.deedClassDays || 0;
+      if (!n || !rec || rec.lapsed || rec.path !== req.path) return false;
+      return ((day || 0) - (rec.since || 0)) >= n;
+    } catch (e) { return false; }
+  }
   function godhoodCloseness(sch, gh, day) {
     if (gh.retired) return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: true, dayOk: false, classOk: false, complete: false, close: false, readyForCapstone: false };
     const abs = scholarAbilities(sch);
@@ -220,6 +234,7 @@
     const pp = poolProgress(abs, gh);
     const req = gh.requires || {};
     let synergy = (req.synergies || []).some(x => syns.has(x));
+    if (!synergy && classDaysDeed(sch.godpath, req, day)) synergy = true;
     // The Relay office is the Socialite's alternative deed (Voice of the Relay).
     if (!synergy && req.deedAlt === 'relay_office') {
       try {
@@ -288,8 +303,9 @@
     const syns = villagerSynergies(game, vid);
     const pp = poolProgress(abs, gh);
     const req = gh.requires || {};
-    const synergy = (req.synergies || []).some(x => syns.has(x));
     const day = ((game.state || {}).scholar || {}).day || (game.state || {}).day || 0;
+    let synergy = (req.synergies || []).some(x => syns.has(x));
+    if (!synergy) { try { synergy = classDaysDeed((((game.state || {}).village || {}).npcGodpath || {})[vid], req, day); } catch (e) { synergy = false; } }
     const dayOk = day >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,

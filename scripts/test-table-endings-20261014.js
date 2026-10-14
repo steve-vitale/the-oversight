@@ -13,6 +13,12 @@
 // the titan finale feeds the beat; every path stays losable (and winnable)
 // for every fixture key; no godhood gate; endings resolve by key in play
 // and reach telemetry.
+//
+// COMPOSED ENDINGS (Steve 2026-10-14 round 5, a design change, not a
+// loosening): the ending is the path's final plus ONE build coda. Order:
+// a bespoke path entry > god coda > class/subclass coda > track coda >
+// none (the final alone). The relay's grey reads light/dark by relayLean.
+// Tokens {name} {path} fill.
 'use strict';
 const K = require('./godpath/lib');
 const T = K.reporter('table-endings');
@@ -45,6 +51,7 @@ const PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', '
     showrunner: { track: 'social', cls: ['socialite', 'showrunner'] },
     demagogue: { track: 'social', cls: ['socialite', 'demagogue'] },
     berserker: { track: 'combat', cls: ['brawler', 'berserker'] },
+    keeper: { track: 'combat', cls: ['caregiver', 'keeper'] },
     god: { track: 'combat', cls: ['brawler', 'berserker'], god: 'one_person_army', slain: { herald: true, finale: true } },
   };
 
@@ -84,12 +91,23 @@ const PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', '
   T.ok('endingSelectors() is the same order', Game.endingSelectors(k(FIX.god)).length === 5);
   const BD = Game.data.tableBeats, ED = Game.data.tableEndings;
   T.ok('data loaded (table-beats.json, table-endings.json)', !!(BD && BD.paths && ED && ED.paths));
-  const end = (b, p, m) => { const r = EK.resolveEnding(ED, p, k(b), m); return r ? r.sel : 'path'; };
+  // end(): 'path' (the final alone), a bespoke selector, or 'coda <sel>'.
+  const end = (b, p, m, lean) => { const r = EK.resolveEnding(ED, p, k(b), m, lean); return r ? (r.kind === 'coda' ? 'coda ' + r.sel : r.sel) : 'path'; };
   T.ok('ending: showrunner on Beloved resolves its bespoke slice, light and dark', end(FIX.showrunner, 'beloved', 'light') === 'class:socialite/showrunner' && end(FIX.showrunner, 'beloved', 'dark') === 'class:socialite/showrunner');
   T.ok('ending: demagogue (same path, no slice) falls back to Beloved\'s own finals', end(FIX.demagogue, 'beloved', 'light') === 'path');
   T.ok('ending: a berserker on Defiant falls back one level to the brawler slice', end(FIX.berserker, 'defiant', 'dark') === 'class:brawler');
-  T.ok('ending: a god with no god text falls through to its class slice', end(FIX.god, 'defiant', 'light') === 'class:brawler');
-  T.ok('ending: track-only and no-build runs get the path\'s own finals', end(FIX.track, 'defiant', 'light') === 'path' && end(FIX.none, 'beloved', 'dark') === 'path');
+  T.ok('ending: a bespoke path entry wins over a god coda (god on Defiant -> the brawler slice)', end(FIX.god, 'defiant', 'light') === 'class:brawler');
+  T.ok('coda: no bespoke entry -> the god coda (god on Beloved, light and dark)', end(FIX.god, 'beloved', 'light') === 'coda god:one_person_army' && end(FIX.god, 'beloved', 'dark') === 'coda god:one_person_army');
+  const godKeeper = { track: 'combat', cls: ['caregiver', 'keeper'], god: 'one_person_army' };
+  T.ok('coda: god > class/subclass (a keeper who ascended plays the god coda)', end(godKeeper, 'feared', 'light') === 'coda god:one_person_army');
+  T.ok('coda: class/subclass > track (keeper, combat track -> the keeper coda)', end(FIX.keeper, 'feared', 'dark') === 'coda class:caregiver/keeper' && end(FIX.keeper, 'witness', 'light') === 'coda class:caregiver/keeper');
+  T.ok('coda: a subclass with no coda falls through to its track coda (berserker on Beloved -> combat)', end(FIX.berserker, 'beloved', 'light') === 'coda track:combat');
+  T.ok('coda: track-only runs get the track coda on every path', PATHS.every(p => end(FIX.track, p, 'light') === 'coda track:combat'));
+  T.ok('none: no coda for the key and no bespoke entry -> the final alone (no build; social track)', end(FIX.none, 'beloved', 'dark') === 'path' && end(FIX.demagogue, 'feared', 'light') === 'path');
+  const cm = (lean) => { const r = EK.resolveEnding(ED, 'relay', k(FIX.track), 'grey', lean); return r && r.moral; };
+  T.ok('grey relay: the coda reads the forward hand (lean > 0 light, < 0 dark, 0 light)', cm(3) === 'light' && cm(-3) === 'dark' && cm(0) === 'light');
+  const one = EK.resolveEnding(ED, 'beloved', k(godKeeper), 'light');
+  T.ok('exactly one coda: the god coda alone, its own lines', one && one.kind === 'coda' && one.entry.lines.length === ED.codas['god:one_person_army'].light.length);
   const beatSel = (b, p, m) => { const r = EK.resolveBeatOption(BD, p, k(b), m); return r ? `${r.sel}${r.bespoke ? '' : '(template)'}` : null; };
   T.ok('beat: showrunner on Beloved plays its bespoke option', beatSel(FIX.showrunner, 'beloved', 'light') === 'class:socialite/showrunner');
   T.ok('beat: demagogue on Beloved plays the class template', beatSel(FIX.demagogue, 'beloved', 'light') === 'class:socialite/demagogue(template)');
@@ -216,6 +234,30 @@ const PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', '
   said = finish(FIX.berserker, 'defiant', 'dark', ['beat:grain', 'beat:build', 'beat:tear', 'beat:records'], 'terms');
   T.ok('defiant x brawler x dark: THE SALTED ROAD', said.some(l => /blood still on your hands/.test(l)) && said.some(l => /SALTED ROAD/.test(l)));
   said = finish(FIX.demagogue, 'beloved', 'light', ['beat:hunter', 'beat:song', 'beat:quiet'], 'quiet');
-  T.ok('no slice for the key: the path\'s own light ending plays, noted as the path', said.some(l => /making sure nobody else needs to be/.test(l)) && Game.tableState().ending.level === 'path');
+  T.ok('no slice and no coda for the key: the path\'s own light ending plays alone, noted as the path', said.some(l => /making sure nobody else needs to be/.test(l)) && Game.tableState().ending.level === 'path' && Game.tableState().ending.kind === 'path');
+
+  T.section('7. Composed endings in play: the path\'s final + one coda');
+  const coda = (sel, m) => ED.codas[sel][m];
+  const has = (said, line) => said.some(l => l.indexOf(line.slice(-40)) >= 0);
+  pg._teleSeen = {};
+  said = finish(FIX.track, 'defiant', 'light', ['beat:grain', 'beat:noone', 'beat:tear', 'beat:notwice'], 'walk');
+  const iWalk = said.findIndex(l => /poorer, whole, free/.test(l));
+  const iCoda = said.findIndex(l => /You came to the Table as/.test(l));
+  T.ok('track coda: the path\'s own final plays, then the coda after it', iWalk >= 0 && iCoda > iWalk, said.join(' | ').slice(0, 400));
+  T.ok('{path} fills with the path\'s name and {name} with the bearer\'s', said.some(l => /You came to the Table as the Defiant the hard way/.test(l)) && !said.some(l => /\{(path|name)\}/.test(l)));
+  T.ok('exactly one coda: no god or class coda lines alongside it', !said.some(l => /called you|keepsakes/.test(l)));
+  T.ok('the resolved coda is noted', Game.tableState().ending.kind === 'coda' && Game.tableState().ending.selector === 'track:combat');
+  const tw2 = K.teleEvents(Game, 'table_won').pop() || {};
+  T.ok('table_won records which coda resolved', tw2.ending === 'track:combat' && tw2.endingKind === 'coda' && tw2.endingLevel === 'track', JSON.stringify(tw2));
+  said = finish(FIX.god, 'beloved', 'light', ['beat:hunter', 'beat:song', 'beat:quiet'], 'quiet');
+  T.ok('god coda in play: Beloved\'s final, then the god\'s light coda with {god} filled', said.some(l => /making sure nobody else needs to be/.test(l)) && said.some(l => /The System called you The One-Person Army\. You never wanted an army/.test(l)) && Game.tableState().ending.selector === 'god:one_person_army');
+  said = finish(FIX.keeper, 'beloved', 'light', ['beat:hunter', 'beat:song', 'beat:quiet'], 'quiet');
+  T.ok('class coda in play: the keeper\'s light coda', has(said, coda('class:caregiver/keeper', 'light')[0]) && Game.tableState().ending.selector === 'class:caregiver/keeper');
+  setBuild(FIX.track); pg.table = {};
+  Game.relayLean = () => -3;
+  const g1 = Game.tableEndingFor('relay', 'grey', 'none');
+  Game.relayLean = () => 2;
+  const g2 = Game.tableEndingFor('relay', 'grey', 'none');
+  T.ok('grey relay in play: the coda follows relayLean, {path} = the Relay', g1 && g1.moral === 'dark' && /made sure the hard way/.test(g1.lines[0]) && /the Relay/.test(g1.lines[0]) && g2 && g2.moral === 'light', JSON.stringify([g1, g2]).slice(0, 300));
   T.done();
 })().catch(e => { console.error(e); process.exitCode = 2; });

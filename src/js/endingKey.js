@@ -1,6 +1,6 @@
 // @ontology
 // system: ending-key
-// description: Endings by build (Steve 2026-10-14: "The ending you can win is set as you enter the table, but that doesn't mean they play the same table scenario or that they can't lose their scenario no matter what path, light or dark. Each playstyle and godhood path, moral choice version should have its own ending." / "The table should all be relative until actually entering it when it locks." / "Both, linked"). Reads the build into an ENDING KEY and hands the Table data, never a gate. The key is live (relative) until the seat is taken; tableScene locks the build half (track, class, god, titan finale, the key) and every door entered fills the path half (path, moral). The Table then (1) plays the build: one beat per path gets a build-aware option from src/data/table-beats.json, chosen most-specific-first (god > class+subclass > class > track > the path default), whose text, gains and titan-finale odds depend on the key and which always carries the path's stake (losable for every key); (2) resolves the ending text by key from src/data/table-endings.json with fallbacks down to the path's own light/dark finals. Seat pricing and earned doors never read this module.
+// description: Endings by build (Steve 2026-10-14: "The ending you can win is set as you enter the table, but that doesn't mean they play the same table scenario or that they can't lose their scenario no matter what path, light or dark. Each playstyle and godhood path, moral choice version should have its own ending." / "The table should all be relative until actually entering it when it locks." / "Both, linked"). Reads the build into an ENDING KEY and hands the Table data, never a gate. The key is live (relative) until the seat is taken; tableScene locks the build half (track, class, god, titan finale, the key) and every door entered fills the path half (path, moral). The Table then (1) plays the build: one beat per path gets a build-aware option from src/data/table-beats.json, chosen most-specific-first (god > class+subclass > class > track > the path default), whose text, gains and titan-finale odds depend on the key and which always carries the path's stake (losable for every key); (2) composes the ending (Steve 2026-10-14 round 5): the path's own light/dark final plus ONE build coda from src/data/table-endings.json codas (god > class/subclass > track, path-independent), unless a rare bespoke path entry (paths.<path>.<selector>.<moral>) overrides it. Seat pricing and earned doors never read this module.
 // provides:
 //   - endingKeyLive() -> the key as the run stands today (relative; never stored)
 //   - endingKeyLock() -> snapshots the build half onto the table state when the seat is taken
@@ -8,11 +8,12 @@
 //   - endingKey() -> the locked key, or null before the seat is taken
 //   - endingSelectors(key) -> lookup order: ['god:<id>', 'class:<path>/<sub>', 'class:<path>', 'track:<t>', 'default']
 //   - tableBuildBeat(T) -> {line, choices} for the beat that plays the build, or null
-//   - tableEndingFor(pathId, moral, finalId) -> {level, selector, title, lines, outcome} or null (null = the path's own finals)
+//   - tableEndingFor(pathId, moral, finalId) -> {kind: 'bespoke'|'coda', level, selector, moral, title, lines, outcome} or null (null = the path's final alone)
 //   - tableEndingNote(end) -> records which ending text resolved on the table state (telemetry reads it)
 //   - titanFinaleOutcome() -> 'network' | 'apocalypse' | 'herald' | 'none' (what the titan finale contributed)
 // consumes:
 //   - state.scholar, state.titans, progState(), tableState(), playerTracks(), godpathClass(), godpathData()
+//   - tablePathName() (table.js; the {path} token), relayLean() (the grey relay's coda moral)
 //   - Game.data.tableBeats (src/data/table-beats.json), Game.data.tableEndings (src/data/table-endings.json), Game.data.tracks
 // rules:
 //   - never_a_gate: nothing here is read by tableSeat or tableEarnedPaths; a run with no class and no god walks every door it earned (code: endingKey.js, scripts/godpath/ladder.js)
@@ -93,19 +94,51 @@
     }
     return null;
   }
-  // resolveEnding(endingsData, pathId, key, moral): the most specific
-  // authored ending for this key; null = the path's own light/dark finals.
-  function resolveEnding(D, pathId, key, moral) {
-    const P = D && D.paths && D.paths[pathId];
-    if (!P) return null;
-    for (const s of selectorsFor(key)) {
-      if (s.level === 'default') break; // path+moral is the path's own finals (table-<path>.js)
-      const e = P[s.sel];
-      const m = e && e[moral];
-      if (m && ((m.lines && m.lines.length) || (m.finals && Object.keys(m.finals).length))) return { level: s.level, sel: s.sel, entry: m };
+  // COMPOSED ENDINGS (Steve 2026-10-14, round 5: "Nope good idea that's
+  // kinda manageable."): the ending is the path's own light/dark final plus
+  // ONE build coda. Codas are path-independent and live at three levels:
+  // god:<id>, class:<path>/<sub>, track:<t> (x light/dark: 10+20+5 = 35
+  // selectors, 70 codas). A path-specific entry (paths.<path>.<sel>.<moral>)
+  // is a rare bespoke override and wins over every coda.
+  const CODA_LEVELS = ['god', 'subclass', 'track'];
+  const TOKENS = ['name', 'class', 'god', 'verb', 'path'];
+  // codaMoral(moral, lean): codas are written light/dark only. The relay's
+  // grey band reads whichever hand is forward, the same rule as its door
+  // gift in table.js (relayLean > 0 light, < 0 dark); dead centre reads
+  // light, as the relay's grey finals fall back to light.
+  function codaMoral(moral, lean) {
+    if (moral === 'dark') return 'dark';
+    if (moral === 'grey') return (lean || 0) < 0 ? 'dark' : 'light';
+    return 'light';
+  }
+  // resolveEnding(endingsData, pathId, key, moral, lean): what follows the
+  // path's final. Order: a bespoke path entry (god > class/sub > class >
+  // track, unchanged) > the most specific coda (god > class/sub > track) >
+  // null (the path's final alone). Returns {kind: 'bespoke'|'coda', level,
+  // sel, entry, moral}; a coda's entry is {lines}.
+  function resolveEnding(D, pathId, key, moral, lean) {
+    if (!D) return null;
+    const sels = selectorsFor(key);
+    const P = D.paths && D.paths[pathId];
+    if (P) {
+      for (const s of sels) {
+        if (s.level === 'default') break; // path+moral is the path's own finals (table-<path>.js)
+        const e = P[s.sel];
+        const m = e && e[moral];
+        if (m && ((m.lines && m.lines.length) || (m.finals && Object.keys(m.finals).length))) return { kind: 'bespoke', level: s.level, sel: s.sel, entry: m, moral };
+      }
+    }
+    const C = D.codas || {};
+    const cm = codaMoral(moral, lean);
+    for (const s of sels) {
+      if (CODA_LEVELS.indexOf(s.level) < 0) continue;
+      const lines = (C[s.sel] || {})[cm];
+      if (Array.isArray(lines) && lines.length) return { kind: 'coda', level: s.level, sel: s.sel, entry: { lines }, moral: cm };
     }
     return null;
   }
+  // tokensIn(text): the {tokens} a line uses (the validator rejects unknown ones).
+  function tokensIn(t) { const out = []; String(t == null ? '' : t).replace(/\{(\w+)\}/g, (m, k) => { out.push(k); return m; }); return out; }
   // fill(text, vars): {class} {god} {verb} {name} {path} tokens.
   function fill(t, vars) {
     return String(t == null ? '' : t).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] != null) ? String(vars[k]) : m);
@@ -123,7 +156,7 @@
     return out;
   }
 
-  S.EndingKey = { MORALS, LEVELS, selectorsFor, levelOf, pick, hasMoral, resolveBeatOption, resolveEnding, fill, universe };
+  S.EndingKey = { MORALS, LEVELS, CODA_LEVELS, TOKENS, codaMoral, tokensIn, selectorsFor, levelOf, pick, hasMoral, resolveBeatOption, resolveEnding, fill, universe };
 
   const Game = S.Game;
   if (!Game) return;
@@ -136,10 +169,14 @@
     for (const pid of Object.keys(ps)) if (((ps[pid] || {}).god || {}).id === godId) return pid;
     return null;
   }
-  function vars(key) {
+  function vars(key, pathId) {
     const GP = godpaths() || {};
     const ps = GP.paths || {};
-    const v = { name: 'you', class: null, god: null, verb: null };
+    const v = { name: 'you', class: null, god: null, verb: null, path: null };
+    try {
+      const pid = pathId || (key && key.tablePath);
+      if (pid) v.path = (Game.tablePathName && Game.tablePathName(pid)) || pid;
+    } catch (e) { warn('vars path', e); }
     try {
       const me = ((Game.data && Game.data.villagers) || []).find(x => x.id === Game.villagerId);
       if (me && me.name) v.name = String(me.name).split(' ')[0];
@@ -248,23 +285,26 @@
       } catch (e) { warn('tableBuildBeat', e); return null; }
     },
 
-    // tableEndingFor: the most specific authored ending for the locked key.
+    // tableEndingFor: what follows the path's final for the locked key: a
+    // bespoke path entry, else ONE build coda, else null (the final alone).
     tableEndingFor(pathId, moral, finalId) {
       try {
         const key = this.endingKey() || this.endingKeyLive();
-        const r = resolveEnding(endingsData(), pathId, key, moral || 'light');
+        let lean = 0;
+        if (moral === 'grey') { try { lean = this.relayLean ? (this.relayLean() || 0) : 0; } catch (e) { warn('relayLean', e); } }
+        const r = resolveEnding(endingsData(), pathId, key, moral || 'light', lean);
         if (!r) return null;
-        const v = vars(key);
+        const v = vars(key, pathId);
         const e = r.entry;
         const lines = (e.lines || []).map(l => fill(l, v));
         const fin = (e.finals || {})[finalId];
-        return { level: r.level, selector: r.sel, title: e.title ? fill(e.title, v) : null, lines, outcome: fin ? fin.map(l => fill(l, v)) : null };
+        return { kind: r.kind, level: r.level, selector: r.sel, moral: r.moral, title: e.title ? fill(e.title, v) : null, lines, outcome: fin ? fin.map(l => fill(l, v)) : null };
       } catch (e) { warn('tableEndingFor', e); return null; }
     },
     tableEndingNote(end) {
       try {
         const T = this.tableState();
-        T.ending = end ? { level: end.level, selector: end.selector } : { level: 'path', selector: null };
+        T.ending = end ? { kind: end.kind || 'bespoke', level: end.level, selector: end.selector } : { kind: 'path', level: 'path', selector: null };
         return T.ending;
       } catch (e) { warn('note', e); return null; }
     },

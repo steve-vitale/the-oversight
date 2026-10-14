@@ -5,18 +5,21 @@
     "recognize": {
       "minAbilities": 3
     },
-    "_capstone": "Ascension: recognised class on this path + its subclass payoff held + abilitiesNeeded abilities of the path (payoff included) + the deed: day >= minDay AND a discovered synergy that uses an ability of this path (or one of god.deedSynergies; the Relay office counts for the Socialite). The capstone item is the System's gift at the ceremony, not a gate.",
+    "_capstone": "Ascension: recognised class on this path + its subclass payoff held + abilitiesNeeded abilities of the path (payoff included) + the deed: day >= minDay AND a discovered synergy that uses an ability of this path (or one of god.deedSynergies; the Relay office counts for the Socialite). The capstone item is the System's gift at the ceremony, not a gate. THE LIVED-IN DEED (godpath-buff 2026-10-14): the class named on this path and held deedClassDays days also completes the deed (the build was played, not assembled on the day; 0 = off).",
     "capstone": {
       "abilitiesNeeded": 4,
       "minDay": 80,
       "closeAt": 3,
       "requirePayoff": true,
       "requireDeed": true,
-      "_levers": "Measured 2026-10-14 (16 seeds x 150 days, capable bot, after parity): all gates on = 0 player / 0 villager ascensions; requireDeed false = 1/1; both false = 3/8 (base before the redesign: 6/12). Steve to set (evidence/2026-10-14/godpath-unified.md)."
+      "deedClassDays": 10,
+      "_levers": "Measured 2026-10-14 (16 seeds x 150 days, capable bot, after parity): all gates on = 0 player / 0 villager ascensions; requireDeed false = 1/1; both false = 3/8 (base before the redesign: 6/12) (evidence/2026-10-14/godpath-unified.md). godpath-buff, 64 seeds (original kit order): deedClassDays 10 + offers.payoffAnyTrack + abilitiesNeeded 4 = 21 player ascensions (12 of 28 runs past day 100) / 24 villager; abilitiesNeeded 3 = 21 / 27 (evidence/2026-10-14/godpath-buff.md). Payoff and deed gates stay on."
     },
     "offers": {
       "_doc": "A level-up or gift sheet leans to a recognised path: at least one offer is from it when the kit has one; offers prefer distinct roles.",
-      "lean": true
+      "lean": true,
+    "_payoffAnyTrack": "A named class's payoff may appear on any level-up or gift sheet, not only its own track's (godpath-buff 2026-10-14): the payoff is what makes a god a build, and it often sits in another track's kit.",
+    "payoffAnyTrack": true
     }
   },
   "paths": {
