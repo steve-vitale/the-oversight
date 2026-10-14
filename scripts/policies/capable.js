@@ -249,6 +249,10 @@ const ACTION_PLAN = {
   'rage.unleash_rage': (I) => (I.canLoad && I.n('rage.unleash_rage') < 1 ? 6.5 : null),
   'trade_of_blows.open_trade': (I) => (I.canLoad && I.hp > 0.7 && I.n('trade_of_blows.open_trade') < 1 ? 5 : null),
   'peacemaker.walk_in': (I) => (I.outmatched && I.n('peacemaker.walk_in') < 1 ? 8.5 : null),
+  // KEEPSAKE L2 ACTIONS (2026-10-14, keepsakes.js): worn keepsake verbs.
+  'keepsake.steady': (I) => (((I.p.stunned || 0) > 0 || ((I.p.statuses || []).some(x => x && x.id === 'fear'))) ? 8.5 : null),
+  'keepsake.hold': (I) => (I.outmatched ? 8 : null),
+  'keepsake.lucky_break': (I) => ((I.p.blindTurns || 0) > 0 || I.s.haymakerReady ? 6 : null),
   'animal_ken.calm_beast': (I) => { const m = (I.f.fighters || []).find(x => x && x.alive && !x.fled && x.kind !== 'monster' && x.kind !== 'player' && x.kind !== 'villager' && x.key !== 'p'); return m ? { s: 6, t: m.key } : null; },
 };
 
@@ -257,6 +261,7 @@ const ACTION_PLAN = {
 const ESCAPE_ACTIONS = {
   'peacemaker.walk_in': 1, 'animal_ken.calm_beast': 1, 'scream_cheese.scream': 1, 'war_cry.bellow': 1,
   'pocket_sand.throw_sand': 1, 'fear_aura.loom': 1, 'intimidating_presence.stare_down': 1,
+  'keepsake.hold': 1, // anchor L2: the flee through the edge can't be cut off
 };
 function abilityTurn(Game, ctx, st, f, p, mons, extra) {
   const s = Game.state.scholar || {};
@@ -458,6 +463,29 @@ function chooseOffers(Game, ctx) {
     bumpMap(ctx, 'capOfferPicks', best.o.id);
   } catch (e) { note(ctx, 'chooseOffers: ' + e.message); }
 }
+// KEEPSAKES (2026-10-14, Steve: keepsakes compete with accessory gear and
+// grow only while worn): simple rule — while an accessory slot is free, wear
+// the highest-bond keepsake from the pack. Never takes anything off.
+function wearKeepsakes(Game, ctx) {
+  try {
+    if (!Game.equipAccessory || !Game.isKeepsake) return;
+    const s = Game.state.scholar || {};
+    const eq = s.equipped || {};
+    for (let guard = 0; guard < 4; guard++) {
+      if (!['acc1', 'acc2', 'acc3', 'acc4'].some(sl => !eq[sl])) return;
+      let best = -1;
+      (s.inventory || []).forEach((it, idx) => {
+        if (!it || !Game.isKeepsake(it)) return;
+        if (Game.keepsakeMine && !Game.keepsakeMine(it)) return;
+        if (best < 0 || (it.bond || 0) > (s.inventory[best].bond || 0)) best = idx;
+      });
+      if (best < 0) return;
+      if (!Game.equipAccessory(best)) return;
+      bump(ctx, 'capKeepsakesWorn');
+    }
+  } catch (e) { note(ctx, 'wearKeepsakes: ' + e.message); }
+}
+
 function answerRelic(Game, ctx) {
   try {
     const rc = (Game.state.scholar || {}).relicChoices;
@@ -827,6 +855,7 @@ const capable = Object.assign({}, BASE, {
   daily(Game, ctx) {
     chooseOffers(Game, ctx);
     answerRelic(Game, ctx);
+    wearKeepsakes(Game, ctx);
     withEnv(() => BASE.daily(Game, ctx));
     capableTalk(Game, ctx);
     relayRoad(Game, ctx);
@@ -844,10 +873,10 @@ function capableSummary(ctx) {
   const k = ['capFights', 'capFleeDecisions', 'capFleeSteps', 'capFleePushes', 'capFleeExits', 'capFleeNodeExits', 'capFleeChased', 'capFleeHeld',
     'capAbilityUses', 'capAbilityRefused', 'capAbilityHungerSkips', 'capSigUses', 'capOffersChosen', 'capOffersNotFirst', 'capRelicChosen',
     'capContestChoices', 'capContestNotFirst', 'capContestRefusals', 'capTableAnswers', 'capTableNotFirst', 'capSeatTaken',
-    'capConvos', 'capConvosHeld', 'deepTurns', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes'];
+    'capConvos', 'capConvosHeld', 'deepTurns', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes', 'capKeepsakesWorn'];
   const out = {};
   for (const x of k) out[x] = (ctx && ctx[x]) || 0;
   return out;
 }
 
-module.exports = { capable, capableSummary, scoreOffer, scoreTableOption, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, wearKeepsakes, scoreOffer, scoreTableOption, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };

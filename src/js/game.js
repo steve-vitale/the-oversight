@@ -21516,8 +21516,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Your five are bonded relics. Bond accrues passively through normal play —
     // no meters to manage, no grinding. The game notices; you don't.
     // Tools/weapons: +1/day of meaningful use. Clothing: +1/day on the trail.
-    // Sentimental: +1/day simply kept close. Story moments: +3.
-    // At bond 10/25/50 the System offers 1-of-3 enhancements from the class pool.
+    // Sentimental (keepsakes): +1/day only while WORN in acc1-acc4, +3 at
+    // story moments; the pack is dormant (keepsakes.js, Steve 2026-10-14).
+    // At bond 10/25/50 the System offers 1-of-3 enhancements from the class
+    // pool — keepsakes only at 50 (their L3 evolution).
 
     // relicItems: all bonded relics (pack + equipped).
     relicItems() {
@@ -21555,7 +21557,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     hasRelicEnhancement(id) {
-      return this.relicItems().some(r => (r.enhancements || []).includes(id));
+      // KEEPSAKE GROWTH (Steve 2026-10-14): a keepsake's evolution works
+      // only while it is worn — the slot is the price.
+      return this.relicItems().some(r => (r.enhancements || []).includes(id) &&
+        !(this.isKeepsake && this.isKeepsake(r) && typeof this.keepsakeIsWorn === 'function' && !this.keepsakeIsWorn(r)));
     },
 
     // checkKeepsakeReveal: a keepsake never tells you what it does until the
@@ -21577,7 +21582,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (def.class !== 'sentimental') return false;
         r.effectRevealed = true;
         if (def.baseEffect) {
-          const eff = String(def.baseEffect).replace(/^use:\s*/i, '');
+          const eff = String(def.baseEffect).replace(/^use:\s*/i, '').replace(/when (carried|worn)/i, 'when worn');
           this.say(`◈ "UNIT ${String(r.name || def.name || 'ITEM').toUpperCase()} — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: ${eff}. You knew it mattered before we did. Cute."`);
         }
         return true;
@@ -21594,7 +21599,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!item || !item.effectRevealed) return null;
         if (!(this.isKeepsake && this.isKeepsake(item))) return null;
         const def = (this.data.items || []).find(i => i.id === (item.itemId || item.id)) || {};
-        return def.baseEffect || null;
+        // KEEPSAKE GROWTH (Steve 2026-10-14): keepsakes work while WORN.
+        return def.baseEffect ? String(def.baseEffect).replace(/when (carried|worn)/i, 'when worn') : null;
       } catch (e) { return null; }
     },
 
@@ -21613,9 +21619,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         const def = this.data.items.find(i => i.id === id);
         const cls = def && def.class;
+        // KEEPSAKE GROWTH (Steve 2026-10-14, COHERENCE-SPINE.md): a keepsake
+        // grows only while WORN in an accessory slot (+1/day); in the pack it
+        // is dormant. keepsakes.js owns the bond, level beats and the L3
+        // offer — the 10/25 offers are retired for keepsakes.
+        if (cls === 'sentimental') {
+          if (typeof this.keepsakeGrow === 'function') this.keepsakeGrow(r, 1, 'day');
+          continue;
+        }
         let gain = 0;
-        if (cls === 'sentimental') gain = 1; // kept close, every day
-        else if (used[id]) gain = 1; // meaningful use (1/day cap is inherent)
+        if (used[id]) gain = 1; // meaningful use (1/day cap is inherent)
         if (!gain) continue;
         r.bond = (r.bond || 0) + gain;
         // KEEPSAKE REVEAL (Steve 2026-10-06): checked daily for every relic —
@@ -31026,6 +31039,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (md.relentless) { relentlessHere = true; stillChasing.push(m); continue; }
         if (m._pursuit === undefined || m._pursuit === null) m._pursuit = this.chasePersistence(md);
         m._pursuit -= 1;
+        // ANCHOR KEEPSAKE (Steve 2026-10-14): L1 — chasers tire one crossing
+        // faster; L2 Hold — your flee can't be cut off (the relentless still
+        // come: only Haven or a kill ends them).
+        try { if (this.keepsakeAnchorPursuit) m._pursuit -= this.keepsakeAnchorPursuit(); } catch (e) { console.warn('[keepsakes] anchor pursuit: ' + e.message); }
         if (m._pursuit <= 0) { m.fled = true; gaveUp.push(m); }
         else stillChasing.push(m);
       }
@@ -31134,7 +31151,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // WHITE NOISE (statue): at range you're striking where you THINK it is.
       // Half the time it isn't there. Close in, or wait for the unfold.
-      if (this.heronIs(t) && this.encUsesFifo(t) && t.beamPhase === 'still' && d0 > 1 && Math.random() < 0.5) {
+      if (this.heronIs(t) && this.encUsesFifo(t) && t.beamPhase === 'still' && d0 > 1 && Math.random() < 0.5 &&
+          !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('heron'))) {
         p.acted = true;
         this.say("You strike where you thought it was. It wasn't. (The heron is hardest to see when it is stillest.)");
         this.tbAfterPlayerAction();
@@ -31165,7 +31183,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { aimGuaranteed = !!((this.state.scholar || {}).aimBonus || {}).guaranteed; } catch (e) {}
       if (p.blindTurns > 0 && !aimGuaranteed) {
         p.blindTurns -= 1;
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.5 && !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('blinded'))) {
           p.acted = true;
           this.say('You strike at afterimages — the flash is still in your eyes. Missed. (blinded)');
           this.tbAfterPlayerAction();
@@ -31192,7 +31210,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // consumed, and you're off-balance (no dodge on the next incoming hit).
       // Dead-aim ("cannot miss") holds: aim wins over the whiff.
       const _hr = (this.state.scholar || {}).haymakerReady;
-      if (_hr && _hr.accPenalty && !p.aimed && Math.random() < _hr.accPenalty) {
+      if (_hr && _hr.accPenalty && !p.aimed && Math.random() < _hr.accPenalty &&
+          !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('haymaker'))) {
         delete this.state.scholar.haymakerReady;
         this.state.scholar.haymakerOffBalance = true;
         this.say('You wind up WILD — the haymaker catches nothing but air. Off-balance, exposed: no slipping the next one. (Haymaker — missed.)');
@@ -35427,7 +35446,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const dx = Math.sign(m.mx - px), dy = Math.sign(m.my - py);
         if (dx || dy) {
           const nx = px + dx, ny = py + dy;
-          if (!(nx === m.mx && ny === m.my) && nx >= 0 && nx <= 8 && ny >= 0 && ny <= 8 && !this.tbBlocked(nx, ny)) {
+          if (!(nx === m.mx && ny === m.my) && nx >= 0 && nx <= 8 && ny >= 0 && ny <= 8 && !this.tbBlocked(nx, ny) &&
+              !(tgt.kind === 'player' && this.keepsakeHoldsGround && this.keepsakeHoldsGround(tgt))) {
             tgt.mx = nx; tgt.my = ny;
             if (tgt.kind === 'player') { this.state.scholar.mx = nx; this.state.scholar.my = ny; }
             this.say(tgt.kind === 'player'
@@ -39528,10 +39548,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.notePlaystyle('bold');
         try { this.villageEvent('victory'); } catch (e) {}
         try { this.checkPromises('fight'); } catch (e) {}
+        // STORY MOMENT: +3 bond — worn keepsakes only (keepsakeGrow is the
+        // worn-only gate; a keepsake in the pack is dormant).
         for (const r of this.relicItems()) {
           const rdef = this.data.items.find(i => i.id === (r.itemId || r.id));
-          if (rdef && rdef.class === 'sentimental') {
-            r.bond = (r.bond || 0) + 3;
+          if (rdef && rdef.class === 'sentimental' && typeof this.keepsakeGrow === 'function') {
+            this.keepsakeGrow(r, 3, 'victory');
           }
         }
         // BOND PERCEPTION (Steve 2026-10-05): the bond grows whether you

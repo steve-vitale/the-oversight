@@ -245,6 +245,8 @@
     var f = null, p = null;
     try { f = game.tbfight; p = game.tbFighter('p'); } catch (e) {}
     if (!f || !p) return;
+    // HOLD (keepsake L2, Steve 2026-10-14): nothing moves you this fight.
+    try { if (game.keepsakeHoldsGround && game.keepsakeHoldsGround(p)) return; } catch (e) { say(game, '(keepsake hold check failed: ' + e.message + ')'); }
     var opts = [];
     for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
       if (!dx && !dy) continue;

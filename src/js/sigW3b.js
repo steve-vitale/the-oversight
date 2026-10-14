@@ -238,7 +238,9 @@
         var blocked = f.fighters.some(function (o) {
           return o !== p && o.alive && !o.fled && o.mx === nx && o.my === ny;
         });
-        if (!blocked && (nx !== p.mx || ny !== p.my)) {
+        var held = false;
+        try { held = !!(game.keepsakeHoldsGround && game.keepsakeHoldsGround(p)); } catch (err) { held = false; }
+        if (!blocked && !held && (nx !== p.mx || ny !== p.my)) {
           p.mx = nx; p.my = ny;
           try { game.state.scholar.mx = nx; game.state.scholar.my = ny; } catch (err) {}
           game.say(tag + ': MOVE — the tape replays your step and the world tugs you along with it.');
