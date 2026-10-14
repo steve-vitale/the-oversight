@@ -419,8 +419,7 @@
       james: 'm', john: 'm', robert: 'm', michael: 'm', william: 'm', david: 'm', joseph: 'm', thomas: 'm', charles: 'm', daniel: 'm',
       matthew: 'm', anthony: 'm', mark: 'm', donald: 'm', steven: 'm', paul: 'm', andrew: 'm', joshua: 'm', kevin: 'm', brian: 'm',
       george: 'm', edward: 'm', ronald: 'm', timothy: 'm', jason: 'm', jeffrey: 'm', ryan: 'm', jacob: 'm', gary: 'm', nicholas: 'm',
-      eric: 'm', jonathan: 'm', stephen: 'm', larry: 'm', justin: 'm', scott: 'm', brandon: 'm', benjamin: 'm', samuel: 'm', frank: 'm',
-      gregory: 'm', raymond: 'm', alexander: 'm', patrick: 'm', jack: 'm', dennis: 'm', jerry: 'm', marcus: 'm', darius: 'm', tom: 'm',
+      eric: 'm', erich: 'm', jonathan: 'm', stephen: 'm', larry: 'm', justin: 'm', scott: 'm', brandon: 'm', benjamin: 'm', samuel: 'm', frank: 'm',      gregory: 'm', raymond: 'm', alexander: 'm', patrick: 'm', jack: 'm', dennis: 'm', jerry: 'm', marcus: 'm', darius: 'm', tom: 'm',
       leo: 'm', sam: 'm', bill: 'm', hank: 'm', ray: 'm', carl: 'm', earl: 'm',
       mary: 'f', patricia: 'f', jennifer: 'f', linda: 'f', elizabeth: 'f', barbara: 'f', susan: 'f', jessica: 'f', sarah: 'f', karen: 'f',
       nancy: 'f', lisa: 'f', betty: 'f', margaret: 'f', sandra: 'f', ashley: 'f', dorothy: 'f', kimberly: 'f', emily: 'f', donna: 'f',
@@ -428,6 +427,7 @@
       cynthia: 'f', kathryn: 'f', amy: 'f', shirley: 'f', angela: 'f', helen: 'f', anna: 'f', brenda: 'f', pamela: 'f', nicole: 'f',
       emma: 'f', samantha: 'f', katherine: 'f', christine: 'f', debora: 'f', rachel: 'f', carolyn: 'f', virginia: 'f',
       maya: 'f', ruth: 'f', elena: 'f', aisha: 'f', grace: 'f', rosa: 'f', kate: 'f', pearl: 'f', joyce: 'f', june: 'f',
+      esther: 'f', ernestine: 'f', // journey-succession r12 2026-10-14: both surfaced as they/them in the mantle orientation beat
       // nigerian
       chidi: 'm', olumide: 'm', tunde: 'm', emeka: 'm', ifeanyi: 'm', babatunde: 'm', segun: 'm', obinna: 'm', olusegun: 'm',
       abiodun: 'm', chukwuemeka: 'm', oluwafemi: 'm', oluwaseyi: 'm',

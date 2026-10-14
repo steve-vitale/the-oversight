@@ -873,6 +873,24 @@
       // MUSIC (Steve 2026-10-12): the mantle passes — a somber bell.
       try { this.audioEvent('stingSuccession'); } catch (e) {}
       this.say(`📖 The Codex turns a page: ${oldName}, ${this.pluralize(s.day || 0, 'day')}. The mantle passes to ${newName}.`);
+      // ORIENTATION (journey-succession r12 2026-10-14): the handoff told the
+      // player who they're NOT ("you're not Miriam") but never who they ARE —
+      // a silent identity swap with a silent kit change (the background legs
+      // are rebuilt above with no announcement). One beat names the new face:
+      // age, former occupation, and the hands they inherit. The full backstory
+      // lives on the char record; this is the waking-up line, not the bio.
+      try {
+        const pro = newChar.pro || 'they';
+        const poss = pro === 'she' ? 'Her' : pro === 'he' ? 'His' : 'Their';
+        const occName = newChar.formerOccupation ||
+          ((((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {}).name ||
+          'survivor';
+        const art = /^[aeiou]/i.test(occName) ? 'an' : 'a';
+        const kit = (s.backgroundAbilities || []).map(a => a.name || a.id).filter(Boolean);
+        const kitClause = kit.length ? ` ${poss} hands know different work now: ${kit.join(', ')}.` : '';
+        const ageClause = newChar.age ? `, ${newChar.age}` : '';
+        this.say(`🪞 You wake up somebody else. ${newName}${ageClause} — ${art} ${occName}.${kitClause}`);
+      } catch (e) {}
       try { this.recordMoment(`${oldName} died. ${newFirst} picked up the Codex.`); } catch (e) {}
       // MANTLE TRUST INHERITANCE (blitz-succession 2026-10-13): the old rule
       // (0.6x of the predecessor's single trust entry) compounded every
