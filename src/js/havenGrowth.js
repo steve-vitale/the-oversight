@@ -214,7 +214,10 @@
           // The crisis stays open; the player may still answer the call for
           // help themselves. Nothing automatic harms the village mid-finale.
           if (this.tableActive && this.tableActive()) continue;
-          const take = 500 + Math.floor(R() * 1000);
+          // OVERTIME (2026-10-14): a waiting table makes them hungrier.
+          let _otG = 1;
+          try { const _ok = this.overtimeRaidKnobs ? this.overtimeRaidKnobs() : null; if (_ok) _otG = _ok.gorge; } catch (e) { console.warn('overtime gorge', e); }
+          const take = Math.round((500 + Math.floor(R() * 1000)) * _otG);
           let got = 0;
           try { got = this.raidPillage(v, take); } catch (e) {}
           let mn = 'it';
@@ -344,14 +347,18 @@
       // hold (see havenGrowthDaily); nothing new comes.
       if (this.tableActive && this.tableActive()) return false;
       const day = (this.state.scholar || {}).day || 1;
-      if (day - (v.lastRaidDay || 0) < 7) return false;
+      // OVERTIME (2026-10-14, titans.json _overtime): each tier shortens the
+      // cooldown and raises the roll. Tier 0 = exactly the old 7 days / 18%.
+      let _ot = null;
+      try { _ot = this.overtimeRaidKnobs ? this.overtimeRaidKnobs() : null; } catch (e) { console.warn('overtime raid', e); }
+      if (day - (v.lastRaidDay || 0) < (_ot ? _ot.cooldown : 7)) return false;
       let monsters = [];
       try { monsters = this.worldMonsters ? this.worldMonsters() : []; } catch (e) { return false; }
       if (!monsters.length || monsters.length < 3) return false;
       let pantry = 0;
       try { pantry = this.pantryKcalLive(v) || 0; } catch (e) {}
       if (pantry < 3000) return false;
-      if (R() < 0.82) return false;
+      if (R() < (_ot ? _ot.skip : 0.82)) return false;
       // ---- RAID ----
       v.lastRaidDay = day;
       const palisade = this.havenTier() >= 2;

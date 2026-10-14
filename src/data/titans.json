@@ -65,5 +65,171 @@
       "desc": "A piece of the sky that fell. Once per fight, you may declare an omen — name a tile, and the next telegraph avoids it. The Herald taught you to read the sky.",
       "effect": "one_omen_dodge"
     }
+  },
+  "_overtime": {
+    "_comment": "OVERTIME (Steve 2026-10-14: 'waiting should have a cost'). Once the Table exists for the player (announced, day 90+, seat not none) every daysPerTier days unseated raises a tier, cap maxTier. Read by overtime.js; raid knobs read by havenGrowth.js. The key tier lives on the_network.keyTier.",
+    "daysPerTier": 7,
+    "maxTier": 6,
+    "hpPerTier": 0.25,
+    "dmgPerTier": 0.12,
+    "packEveryTiers": 2,
+    "minWave": 4,
+    "capEveryTiers": 2,
+    "raidCooldownBase": 7,
+    "raidCooldownMin": 3,
+    "raidSkipBase": 0.82,
+    "raidSkipPerTier": 0.06,
+    "gorgePerTier": 0.25,
+    "standingPerTier": 4,
+    "standingPerLoss": 3,
+    "standingCap": 40,
+    "thirdTitanTier": 2,
+    "thirdTitanOmenChance": 0.25,
+    "lines": [
+      "OVERTIME! The season was supposed to END. You didn't sit. So we kept the cameras rolling. RERUNS, folks — the hits, but HUNGRIER.",
+      "OVERTIME ×2! Ratings are UP! The audience loves a stall! The OTHER climax is warming up in the wings — we had it on the shelf, why waste it?",
+      "OVERTIME ×3! The producers are drafting something BIG. Map-sized. We're not saying what. (It's big.)",
+      "OVERTIME ×4! Raids every few nights now! Bigger packs! Is this cruel? It's TELEVISION.",
+      "OVERTIME ×5! We've stopped writing scripts. Everything is a rerun of a rerun and they all have teeth.",
+      "OVERTIME ×6! MAXIMUM OVERTIME! The table is still set. The chair is getting cold. Sit — or don't! We LOVE this!"
+    ]
+  },
+  "the_network": {
+    "title": "THE NETWORK",
+    "monster": "network_heart",
+    "role": "key",
+    "wave": 6,
+    "minAllies": 20,
+    "keyTier": 3,
+    "epithet": "the broadcast, given a body",
+    "threat": "It is not on the map. It IS the map: masts at the corners, limbs along the edges, a heart in the middle. Nine fights, in order, with one coalition. The dead stay dead. No one new answers once the march begins.",
+    "omen0": "Every screen in the sky shows the same test pattern. Then the test pattern looks back.",
+    "omen1": "The System, almost reverent: THE NETWORK. The show itself, given a body. Kill it and there is nothing left to price you by.",
+    "counter_hint": "Take the masts first, then the limbs. The heart hungers like the Finale did: feed it, or end it first.",
+    "campaign": {
+      "note": "THE KEY (Steve 2026-10-14; trigger approved, N tuned later): overtime tier >= keyTier AND herald, nielsen and finale slain. One node per 3x3 sector of the 9x9 map (9 nodes), fought in order. Upkeep 1000 kcal/blade/day (titanMusterUpkeep). 20 blades to start; any later node needs floor survivors; the heart needs heartMinSurvivors. No new blades once the march begins. Survivors below floor after a loss = the coalition is spent and the key is lost for the run.",
+      "floor": 5,
+      "heartMinSurvivors": 10,
+      "nodes": [
+        {
+          "id": "mast_nw",
+          "piece": "tower",
+          "monster": "network_tower",
+          "title": "THE NORTHWEST MAST",
+          "sector": [
+            0,
+            0
+          ],
+          "escorts": [
+            "cancellation"
+          ]
+        },
+        {
+          "id": "mast_ne",
+          "piece": "tower",
+          "monster": "network_tower",
+          "title": "THE NORTHEAST MAST",
+          "sector": [
+            2,
+            0
+          ],
+          "escorts": [
+            "editor"
+          ]
+        },
+        {
+          "id": "mast_sw",
+          "piece": "tower",
+          "monster": "network_tower",
+          "title": "THE SOUTHWEST MAST",
+          "sector": [
+            0,
+            2
+          ],
+          "escorts": [
+            "timeslot"
+          ]
+        },
+        {
+          "id": "mast_se",
+          "piece": "tower",
+          "monster": "network_tower",
+          "title": "THE SOUTHEAST MAST",
+          "sector": [
+            2,
+            2
+          ],
+          "escorts": [
+            "rerun"
+          ]
+        },
+        {
+          "id": "limb_n",
+          "piece": "limb",
+          "monster": "network_limb",
+          "title": "THE NORTH LIMB",
+          "sector": [
+            1,
+            0
+          ],
+          "escorts": [
+            "network_note"
+          ]
+        },
+        {
+          "id": "limb_w",
+          "piece": "limb",
+          "monster": "network_limb",
+          "title": "THE WEST LIMB",
+          "sector": [
+            0,
+            1
+          ],
+          "escorts": [
+            "spoiler"
+          ]
+        },
+        {
+          "id": "limb_e",
+          "piece": "limb",
+          "monster": "network_limb",
+          "title": "THE EAST LIMB",
+          "sector": [
+            2,
+            1
+          ],
+          "escorts": [
+            "cancellation"
+          ]
+        },
+        {
+          "id": "limb_s",
+          "piece": "limb",
+          "monster": "network_limb",
+          "title": "THE SOUTH LIMB",
+          "sector": [
+            1,
+            2
+          ],
+          "escorts": [
+            "editor"
+          ]
+        },
+        {
+          "id": "heart",
+          "piece": "heart",
+          "monster": "network_heart",
+          "title": "THE HEART OF THE NETWORK",
+          "sector": [
+            1,
+            1
+          ],
+          "escorts": [
+            "spoiler",
+            "network_note"
+          ]
+        }
+      ]
+    }
   }
 }

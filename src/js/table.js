@@ -28,6 +28,7 @@
 //   - tableTheme()
 //   - tableEpilogue(frame, branch, choiceId)
 //   - tableLiveWrap(text)
+//   - tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
 // consumes:
 //   - state.scholar, state.village, progState()
 //   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
@@ -106,6 +107,11 @@
         // and the audit voices it (see tableScene).
         let ascBonus = 0;
         try { ascBonus = (this.tableAscended ? this.tableAscended().length : 0) * 10; } catch (e) {}
+        // OVERTIME (Steve 2026-10-14: "waiting should have a cost"): the
+        // table docks standing per overtime tier and per Haven loss while
+        // it waited (overtime.js overtimeStanding). Priced, said aloud.
+        let otPen = 0;
+        try { otPen = this.overtimeStanding ? this.overtimeStanding().penalty : 0; } catch (e) { console.warn('table overtime price', e); }
         for (const id of Object.keys(PATHS)) {
           const def = PATHS[id];
           let pr = { earned: false, strength: 0, why: 'The table has not priced this seat yet.' };
@@ -115,7 +121,7 @@
           if ((order[seat.seat] || 0) < (order[def.minSeat || 'lesser'] || 0)) {
             pr = { earned: false, strength: 0, why: def.seatWhy || 'This seat needs a stronger table.' };
           }
-          out.push({ id, name: def.name, earned: !!pr.earned, strength: Math.min(100, (pr.strength | 0) + ascBonus), why: pr.why, showGenre: def.showGenre });
+          out.push({ id, name: def.name, earned: !!pr.earned, strength: Math.max(0, Math.min(100, (pr.strength | 0) + ascBonus) - (pr.earned ? otPen : 0)), why: pr.why, showGenre: def.showGenre });
         }
       } catch (e) {}
       return out;
@@ -403,6 +409,11 @@
         const _ascN = this.tableAscended ? this.tableAscended().length : 0;
         if (_ascN) this.say(`The table notes ${_ascN} ascension${_ascN > 1 ? 's' : ''} from one village — its terms improve accordingly. Nobody has ever seen that before.`);
       } catch (e) {}
+      try {
+        const _ot = this.overtimeStanding ? this.overtimeStanding() : null;
+        if (_ot && _ot.penalty) this.say(`The table notes the overtime: ${_ot.tier} week${_ot.tier === 1 ? '' : 's'} kept waiting${_ot.losses ? `, ${_ot.losses} of Haven lost meanwhile` : ''}. Every door's standing −${_ot.penalty}.`);
+        if (pg.networkFallen) this.say('The table notes something it has never priced: the Network is off the air. Nobody is watching this. The faces around the ring look, for the first time, unsure who is judging whom.');
+      } catch (e) { console.warn('table overtime audit', e); }
       // TABLE SANCTITY (2026-10-12, Steve): the System clears the stage.
       // One line, producer-unhinged — the world holds its breath while the
       // table sits. Ambient monster pressure is suspended for the sequence
@@ -449,7 +460,10 @@
         const day = ((this.state || {}).scholar || {}).day || 0;
         // nonexistent before day 90 — no preview, no button (no spoilers)
         if (!this.winDayFloorOk()) return null;
-        return { seat: seat.seat, doors, day, ready: true };
+        // OVERTIME (2026-10-14): the live price shows the waiting cost.
+        let ot = null;
+        try { ot = this.overtimeStanding ? this.overtimeStanding() : null; } catch (e) { console.warn('tablePreview overtime', e); }
+        return { seat: seat.seat, doors, day, ready: true, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // tableTakeSeat(): the player sits — this locks the seat (tableScene);
@@ -729,6 +743,12 @@
           finalOpts.push({ id: 'final:poddemand', label: 'Demand the pods opened. (The table will charge.)' });
         }
       } catch (e) {}
+      // THE HOSTS (the key, 2026-10-14): with the Network off the air,
+      // every path — light or dark — gets the best human ending as its
+      // last choice. The path's own challenge already ran (still losable).
+      try {
+        if (this.progState().networkFallen) finalOpts.push({ id: 'final:hosts', label: branch === 'dark' ? 'THE HOSTS — take the broadcaster\'s chair. Bring the Taken home.' : 'THE HOSTS — set the table. Bring the Taken home.' });
+      } catch (e) { console.warn('table hosts option', e); }
       this.tablePrompt(
         `<p>The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:</p>`,
         finalOpts,
@@ -761,6 +781,7 @@
         try { this.save(); } catch (e) {}
         return;
       }
+      if (!fin && fid === 'hosts' && this.progState().networkFallen) { this.tableResolveHosts(def, branch); return; }
       fin = fin || finals[0];
       if (!fin) return;
       const s = this.state.scholar, pg = this.progState();
@@ -780,6 +801,62 @@
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
       try { this.save(); } catch (e) {}
+    },
+
+    // ============ THE HOSTS — the key's ending (2026-10-14) ============
+    // evidence/2026-10-14/draft-abilities-skills-endgame-key.md "THE HOSTS":
+    // every other ending is a bargain inside the System's frame; here the
+    // pricer is dead. Humanity hosts a dinner at the Table (food is
+    // humanity's superpower; the galaxy forgot food), and the Taken come
+    // home to it: the adults taken on day zero and the pod children.
+    // Light = "An Open Table", dark = "The New Network". Each path flavors
+    // the dinner with one line.
+    tableHostsLines(pathId, branch) {
+      const flavor = {
+        feared: 'They eat because they don\'t dare refuse.',
+        indispensable: 'No contract. You hand them a recipe.',
+        beloved: 'The most-watched dinner in history, and nobody broadcasts it.',
+        witness: 'The judges sit as guests at your table.',
+        defiant: 'You paid nothing. They came anyway.',
+        assimilated: 'The ones who absorbed you get absorbed back, through the stomach.',
+        relay: 'The switchboard goes silent. You speak in person.',
+      };
+      const lines = [];
+      lines.push('◈ THE HOSTS — the ring of pale light has no cameras left. You don\'t arrive as a contestant. You arrive as the one who ended the show, and you set the table.');
+      lines.push('You cook. Haven carries the pots in. Things with too many angles lift a spoon for the first time in their history, and eat. ' + (flavor[pathId] || ''));
+      const cast = this.castTakingMourners ? this.castTakingMourners(2) : [];
+      const first = (id) => { try { return this.displayName(id).split(' ')[0]; } catch (e) { return 'someone'; } };
+      lines.push('Then the doors at the edge of the light open. The Taken walk in: the half of the adults gone since day zero, and the children out of the pods, blinking. The show was the only thing holding them. The show is over.');
+      for (const m of cast) {
+        const kin = ((m.kin && m.kin.name) || 'them').split(' ')[0];
+        lines.push(`${first(m.id)} sees ${kin} across the table, and the dinner stops, and nobody minds.`);
+      }
+      if (branch === 'dark') {
+        lines.push('THE NEW NETWORK — you take the broadcaster\'s chair. The Taken come home, but the cameras turn around: the galaxy is your audience now, and it eats what humans feed it. You became the thing you killed. You like the view.');
+      } else {
+        lines.push('AN OPEN TABLE — you feed them, and teach them that hunger is a gift. The Taken walk home through a galaxy that has started to cook. Humanity isn\'t on the menu or the schedule. It sits at the head of the table.');
+      }
+      return lines;
+    },
+    tableResolveHosts(def, branch) {
+      const T = this.tableState();
+      const s = this.state.scholar;
+      this.tableHostsLines(T.path, branch).forEach(l => this.say(l));
+      try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) { console.warn('hosts music', e); }
+      try { const v = this.state.village || {}; v.kidsReturned = true; v.takenReturned = true; } catch (e) { console.warn('hosts village', e); }
+      try { if (this.podRemember) this.podRemember('taken-home', { via: 'network' }); } catch (e) { console.warn('hosts pods', e); }
+      const label = branch === 'dark' ? 'THE HOSTS: The New Network' : 'THE HOSTS: An Open Table';
+      this.tableEpilogue(def, branch, { id: 'hosts', label });
+      try { this.recordMoment(`Haven's table path: ${def.name} (${branch}), choice: ${label}. The Taken came home.`); } catch (e) { console.warn('hosts moment', e); }
+      try { this.recordLegend({ outcome: 'table', frame: T.path, choice: label, key: 'network' }); } catch (e) { console.warn('hosts legend', e); }
+      try { this.metaNoteTableChoice && this.metaNoteTableChoice(T.path, 'hosts'); } catch (e) { console.warn('hosts meta', e); }
+      T.final = 'hosts';
+      s.tableChoices = null;
+      if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
+      T.phase = 'done';
+      this.over = true; this.won = true;
+      try { this.wipe(); } catch (e) { console.warn('hosts wipe', e); }
+      try { this.save(); } catch (e) { console.warn('hosts save', e); }
     },
 
     // tableResolveDemandPrice: the table charges, the pods open, then the

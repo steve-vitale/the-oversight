@@ -424,6 +424,51 @@ full seat therefore currently aspirational; relay path's stage-3
 qualification is the most reachable route by design (integration is
 earned through play, not territory).
 
+## Overtime, the Network, and THE HOSTS (2026-10-14)
+
+Steve: "waiting should have a cost- but also an opportunity for the truly
+powerful." Design: `evidence/2026-10-14/draft-abilities-skills-endgame-key.md`
+(Part 2, Defaults 4–6, "THE HOSTS"). All numbers live in
+`src/data/titans.json` (`_overtime`, `the_network`).
+
+**Overtime** (`overtime.js`). The clock starts the dawn the Table is
+announced (it never exists before day 90) and runs only while the seat is
+not taken. Every 7 unseated days = +1 tier, cap 6. A withdrawn seat pauses
+the clock; sitting stops it. Per tier *t*:
+
+| Knob | Value |
+|---|---|
+| Wave-4/5 fights ("RERUN ×t") | HP ×(1+0.25t), damage ×(1+0.12t), +⌊t/2⌋ in the pack |
+| Roaming monster cap | +⌈t/2⌉ |
+| Raid cooldown / chance | max(3, 7−t) days / 18% + 6% per tier |
+| Lingering raiders' gorge | ×(1+0.25t) |
+| Seat price | every door's standing −4/tier −3 per Haven person lost, cap −40 |
+| Tier 2 | the run's uncast apocalypse titan gets omens too (so all three can be slain) |
+
+Tier 0 is exactly the old game. Each tier is a System line on air, a
+`overtime_tier` telemetry event, and a line on the Haven Table block.
+
+**The key: THE NETWORK** (`network-campaign.js`). Overtime ≥ `keyTier` (3)
+AND herald, nielsen and finale slain. The broadcast given a body: one piece
+in each 3×3 sector of the 9×9 map — 4 masts (2400–2800 HP, armor 16),
+4 limbs (3000–3400, armor 18), the heart in the middle (6000–7000, armor 22,
+the Finale's hunger with a [180,240] card on a 3-round fuse). Each mast/limb
+brings one real wave-5 monster (1200–2000 HP) whose counters still work; the
+heart brings the spoiler and the network note. ~33k HP of pieces plus ~15k
+of escorts, fought in order on 12×12 with ONE coalition: 20 blades to start,
+1000 kcal/blade/day upkeep, the dead stay dead, camp between nodes (+50% /
++25%), no new blades once the march begins, ≥5 survivors to face a node,
+≥10 for the heart. A loss leaving fewer than 5 ends it: the key is lost for
+the run. (Compare the Finale: 1800–2200 HP, 3 nodes, re-muster allowed.)
+Rarity is a target, not a measurement yet: "almost impossible", well under
+1% of strong runs — the playing bot will measure it.
+
+**THE HOSTS.** With `pg.networkFallen`, every path's last choice adds THE
+HOSTS (light "An Open Table", dark "The New Network", one flavor line per
+path). The path's own challenge and fail rules still run first. Choosing it
+brings the Taken home (adults taken on day zero + pod children), records the
+legend with `key: 'network'`, and `table_won` carries `key`/`hosts`.
+
 ## File map
 
 - `src/js/table.js` (new): seat pricing, earned paths, branch axis,

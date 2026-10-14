@@ -66,6 +66,9 @@ var AudioRegistry = (function () {
     finale: 'fiTitleCard', finale_crew: 'fiCrewQuiet',
     finale_opening: 'fiOpeningSting', eulogy: 'eulogyVerse',
     network_note: 'nnNote',
+    // THE NETWORK (2026-10-14): the pieces reuse the finale campaign's
+    // stings until they get their own (placeholder reuse, said here).
+    network_tower: 'fiCrewQuiet', network_limb: 'fiOpeningSting', network_heart: 'fiTitleCard',
   };
 
   // Real animal field recordings. placeholder:false = the real thing.

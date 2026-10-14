@@ -636,7 +636,7 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 ### finale-campaign (`finale-campaign.js`)
 THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super special"). Node 1 THE COMMERCIAL BREAK (9x9 skirmish: the commercial break + spoiler + network_note trio — kill the production staff, take their tools). Node 2 THE OPENING CREDITS (12x12: the finale still ARRIVING, weaker card [100,140], 5-round fuse). Node 3 THE HEART (12x12: the full finale in two parts — part two at bloodied brings sky-fall zones, the credits rolling in from the edges, accelerated growth, and THE ENCORE). 20 blades to start the march (the largest army in the game); the heart demands 10 survivors or a re-muster at trust cost. Crew spoils become one-shot combat buttons in the heart. Dead allies stay dead across nodes; the coalition camps and partially heals between nodes.
 
-**Provides:** finaleCampaignPlace(titanId), titanEntryGate(titanId), finaleCampaign() / finaleReinforce() / finaleNodeReady(), fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale), tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons), finaleCampaignButtons() (heart-fight combat buttons), _finaleTest (test hooks)
+**Provides:** finaleCampaignPlace(titanId), titanEntryGate(titanId), finaleCampaign() / finaleReinforce() / finaleNodeReady(), fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale), tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons), finaleCampaignButtons() (heart-fight combat buttons), campaignGrieve(snap, tid) / campaignCamp(tid) / campaignInjectMonster(mid) / campaignSurvivors(tid) — the march rules, shared with THE NETWORK (network-campaign.js), _finaleTest (test hooks)
 
 **Rules:**
 - campaign_is_a_march: three nodes in order; the opening refuses until the crew is cleared, the heart until the opening is cleared. (code: titanEntryGate)
@@ -970,6 +970,35 @@ Movement animation. Step-by-step tile transitions.
 - TAP-vs-HOLD (Steve 2026-10-07): hold-to-walk chains only when the hold began at or before the landing step started (holdSince <= step._startT). A tap's brief finger-down straddling a step boundary must not spawn a phantom hold-step — that was the dpad overshoot bug. purgeHold() drops hold-generated queue on release (code: move-anim.js).
 
 **Consumes:** (none documented)
+
+### network-campaign (`network-campaign.js`)
+THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something else on the scale of titan class but even bigger. Something that has to be fought across the entire map ... Should be almost impossible to get."). Summoned when Overtime reaches the_network.keyTier AND the herald, nielsen and finale are all slain. The broadcast given a body: one piece in each 3x3 sector of the 9x9 map (4 masts, 4 limbs, the heart in the middle), fought in data order with ONE coalition by the finale's march rules — 20 blades to start, upkeep 1000 kcal/blade/day, the dead stay dead, camp between nodes, no new blades once the march begins. A loss pauses the march if the coalition still fields the floor; below it the key is lost for the run. The heart falling sets pg.networkFallen (the key), which adds THE HOSTS to every Table path.
+
+**Provides:** networkNodes() -> the node list (titans.json the_network.campaign.nodes), networkCampaign() -> campaign state {summoned, started, idx, cleared, lost, done, tiles}, networkSummon() -> place every piece on the map, said aloud, networkCurrentNode() -> the node the march faces next, networkNodeTile(node) -> {x,y} inside the node's map sector, networkStatus() -> short Haven line for app.js, _networkTest (test hooks)
+
+**Rules:**
+- one_node_per_sector: the 9x9 map is 9 sectors; each holds exactly one piece (code: networkNodeTile)
+- march_in_order: only the current node can be fought; others refuse aloud (code: startCombat wrap)
+- one_coalition: soundTitanCall for the network refuses once the march starts (code: soundTitanCall wrap)
+- dead_stay_dead: campaignGrieve removes the fallen from the muster after every node (code: networkResolve)
+- coalition_must_survive: a loss leaving fewer than floor blades ends the campaign; the key is lost (code: networkResolve)
+- pieces_hold_their_ground: network pieces never wander and do not crowd the roaming cap (code: wanderWorldMonsters / worldMonsterCap wraps)
+
+**Consumes:** titanDef, titanMusterReady, titanMusterState, soundTitanCall, titanInjectAllies, titanReleaseCommitted (titans.js), campaignGrieve, campaignCamp, campaignInjectMonster, campaignSurvivors (finale-campaign.js), spawnWorldMonster, removeWorldMonster, worldMonsters, isSafeTile, monsterAt, playerMonster, startCombat, tbEnd (game.js)
+
+### overtime (`overtime.js`)
+OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
+
+**Provides:** overtimeActive() -> bool: the clock is running (table set, announced, day 90+, seat not none, not seated), overtimeTier() -> 0..maxTier, overtimeTick() -> daily: count unseated days, raise the tier aloud, check the key, overtimeStanding() -> {tier, losses, penalty} the seat-price cost, overtimeThirdTitan() -> the uncast apocalypse id once tier >= thirdTitanTier (titans.js reads it), overtimeRaidKnobs() -> {cooldown, skip, gorge} or null at tier 0 (havenGrowth.js reads it), overtimeScaleFight(mid) -> applies the RERUN modifiers to a just-started fight, networkKeyReady() -> the key's gate (tier >= the_network.keyTier AND herald, nielsen, finale slain)
+
+**Rules:**
+- no_spoilers: nothing ticks, shows or speaks before the Table exists for the player (tableAnnounced + winDayFloorOk) (code: overtimeActive)
+- stops_when_seated: tableDone stops the clock; the tier never rises after the seat is taken (code: overtimeActive)
+- tier_is_monotonic: the tier never falls; a withdrawn seat pauses the clock, it does not reset it (code: overtimeTick)
+- zero_at_tier_zero: every knob is a no-op at tier 0, so runs that sit promptly play exactly as before (code: overtimeRaidKnobs)
+- reruns_not_titans: scaling skips titans, campaign nodes and anything below minWave (code: overtimeScaleFight)
+
+**Consumes:** progState(), tableSeat(), winDayFloorOk(), titanCast(), sysSay, say, tele, recordMoment, startCombat() (wrapped: RERUN scaling after the fight is built), tbDamage() (wrapped: rerun hits land harder), worldMonsterCap() (wrapped: more monsters per tier), endDay() (wrapped: the daily overtime tick), campaignInjectMonster() (finale-campaign.js: rerun packmates), networkSummon() (network-campaign.js: the key)
 
 ### pantheon (`pantheon.js`)
 God jealousy — the ascended have politics (Steve 2026-10-13).
@@ -1361,7 +1390,7 @@ The Witness path — the trial of the judges. Three beats: opening charges (from
 ### table (`table.js`)
 The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 
-**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text)
+**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text), tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
 
 **Rules:**
 —
