@@ -1,7 +1,7 @@
 /* PROOF TEST: Build-around abilities + gear hooks (Steve 2026-10-14 ability coherency rework)
  *
  * Tests:
- * 1. Role classification: all 118 abilities have role + slotRole; payoff count > 4
+ * 1. Role classification: all 122 abilities have role + slotRole; payoff count > 4
  * 2. Blood Frenzy: consecutive hits stack damage; miss resets
  * 3. Retribution: blocked damage stores; unleash releases
  * 4. Nowhere Man: movement builds dodge; damage resets
@@ -27,7 +27,7 @@ console.log('=== Build-around Coherency Proof ===\n');
 // 1. Role classification
 console.log('1. Role classification:');
 const abilities = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8'));
-ok(abilities.length === 118, `118 abilities (got ${abilities.length})`);
+ok(abilities.length === 118, `122 abilities (got ${abilities.length})`);
 ok(abilities.every(a => a.role), 'all have role');
 ok(abilities.every(a => a.slotRole), 'all have slotRole');
 const payoffs = abilities.filter(a => a.role === 'payoff');

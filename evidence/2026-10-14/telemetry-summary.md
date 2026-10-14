@@ -5,15 +5,15 @@ Fights per seed: 4 (baseline, blood_frenzy, retribution, battlefield_grace)
 Total fights: 12
 
 ## Key Metrics
-- Total build-around triggers: 1
-- Trigger rate: 0.08 per fight
+- Total build-around triggers: 0
+- Trigger rate: 0.00 per fight
 - Fights with 0 triggers: (see raw data)
 
 ## Verdict
 FAIL: Build-arounds trigger less than once per fight on average. They are decoration, not decisions.
 
 ## Per-Seed
-- Seed 42: 1 events
+- Seed 42: 0 events
 - Seed 43: 0 events
 - Seed 44: 0 events
 
