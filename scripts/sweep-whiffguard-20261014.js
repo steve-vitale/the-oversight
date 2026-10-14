@@ -59,6 +59,7 @@ function canonDeaths(result) {
     pop: s.pop, pantry: s.pantry, knowledge: s.knowledge,
     codexM: s.codexM, codexS: s.codexS, trust: s.trust,
     deaths: canonDeaths(result),
+    whiffGuardFired: Game._whiffGuardFiredTotal || 0,
   };
   const elapsedSec = Math.round((Date.now() - t0) / 1000);
   fs.writeFileSync(OUT, JSON.stringify(canon) + '\n');

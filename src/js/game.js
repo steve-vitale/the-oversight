@@ -31662,6 +31662,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const packIncoming = this._pendingPack && this._pendingPack.count > 0;
             if (liveMon && liveUs && !packIncoming) {
               f._whiffFired = true;
+              // Instrumentation: global fire count for sweep measurement
+              // (behavior-neutral; no RNG, no flow change).
+              this._whiffGuardFiredTotal = (this._whiffGuardFiredTotal || 0) + 1;
               this.say('It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds.');
               for (const m of (f.fighters || [])) {
                 if (m && m.kind === 'monster' && m.alive && !m.fled) m.fled = true;

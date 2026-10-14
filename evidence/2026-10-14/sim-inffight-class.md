@@ -112,3 +112,27 @@ s44/leadcourt, the seed that was unmeasurable, now lives 101 days: it seasons li
 | belongseek B (8 seeds) | 4/8 | 0/8 | 0/8 | 0/8 | 124.5d |
 
 No run reached the table or a win. The scale wall stands. s44/leadcourt: unmeasurable → 101d, national, wave-4, Standing 204.
+
+## Addendum — independent firing-count re-run (2026-10-14, post-commit)
+
+Motivation: the first sweep verified firings via a post-hoc firing-log diag. A behavior-neutral instrumentation line was added to the guard's fire branch (`this._whiffGuardFiredTotal = (this._whiffGuardFiredTotal || 0) + 1;` — no RNG, no flow change; `scripts/sweep-whiffguard-20261014.js` records it as `whiffGuardFired`) so every sweep run self-reports its firing count.
+
+Harness note (caught mid-run): the sweep script reads ENV (`SEED`, `POLICY`, `WHIFFGUARD`, `OUT`), not argv — the first re-run attempt passed `--seed/--policy` as argv and ran s44/leadcourt four times. Killed, fixed (`run-b.sh` exports env), re-ran clean: 16/16 exit=0, zero timeouts.
+
+Fresh B-sample firing counts (guard ON, second independent sample):
+
+| seed | leadcourt days/fired | belongseek days/fired |
+|---|---|---|
+| 11 | 169 / 2 | 180 / 0 |
+| 22 | 118 / 0 | 107 / 1 |
+| 33 | 86 / 1 | 96 / 0 |
+| 44 | **101 / 1** | 180 / 3 |
+| 55 | 66 / 1 | 155 / 0 |
+| 66 | 61 / 0 | 180 / 1 |
+| 77 | 145 / 0 | 151 / 0 |
+| 88 | 77 / 0 | 85 / 0 |
+
+- s44/leadcourt replicates: fired exactly once (the stall fight), 101d, village-lost, wave-4 — byte-consistent with the first sweep's B result.
+- 9 firings across 16 runs (7 seeds); 9 seeds fired zero times — the guard is inert where there is no true whiff. Every firing is a true 120+ consecutive zero-damage-round fight by construction (the counter increments only in the fire branch).
+- The firing SEEDS differ between the two samples (e.g. belongseek/66 fires here, not in the first sample; leadcourt/11 fires twice here) — expected under the #113 per-run noise floor; whiff-forever fights are trajectory events, not seed-deterministic. The class claim is sample-independent: the guard fires only on true whiffs, never on honest fights.
+- Proof test re-run with instrumentation: 15/15 GREEN; ontology 94/94.
