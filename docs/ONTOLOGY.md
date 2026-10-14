@@ -881,7 +881,7 @@ Village justice + combat dialogue. Crimes have consequences.
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.
 
-**Provides:** ledger(), ledgerAdd(entry), recordLegend(text), recordMoment(text), contestStandings(), viewershipBoard(), unityState()            (felt unified/fractured state machine), foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded), legendSurface()         (the story so far, as the world tells it), shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design), hoardFood(kcal)         (UNWIRED 2026-10-08: no callers — private stashing never tracked), hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers), exposeFallout(caseId, voterId) (named consequences when a truth goes public), flushLedgerBeats()      (fires queued beats whose knowledge gates now pass), hearsAboutSelf()        (knowledge gate: has the player heard their own legend?)
+**Provides:** ledger(), ledgerAdd(entry), recordLegend(text), recordMoment(text), contestStandings(), viewershipBoard(), unityState()            (felt unified/fractured state machine), foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded), legendSurface()         (the story so far, as the world tells it), shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design), hoardFood(kcal)         (wired 2026-10-14: takeFromPantryBulk hoard detector, game.js), hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers), exposeFallout(caseId, voterId) (named consequences when a truth goes public), flushLedgerBeats()      (fires queued beats whose knowledge gates now pass), hearsAboutSelf()        (knowledge gate: has the player heard their own legend?)
 
 **Rules:**
 - threshold beats fire once per run per dimension, knowledge-gated (gossip always, show needs viewership, system needs the overlay, lived/witness always); ungated beats queue and fire when the world catches up (code: _checkDimBeats, flushLedgerBeats)
@@ -889,7 +889,7 @@ The Leadership Vector. No single ending — ending is sum of leadership choices.
 - foodShared vs foodHoarded resolve to a felt stance; stance transitions are narrated with social consequences (code: foodStance, _checkFoodStance)
 - viewership is deed-reactive, never pantry-reactive (code: havenViewership): inits from arc*5 + showmanship + codex breadth capped at 15, floored at 12 (the drift's resting state); a fat pantry is prosperity, not fame; ledger showmanship feeds live via _viewShoMark; spikes (recordMoment/arena/stunts) and spends (OBJECT/declines) ride the sticky pool, nothing refills it
 - the player's own epithet is never shown until hearsAboutSelf() (code: ledgerBeat)
-- table_deed_recheck: true (code: ledger.js — tableScene re-verifies deedGateReady() at dawn; a stale tableWaiting is withdrawn aloud, never fired silently)
+- table_deed_recheck: true (code: ledger.js endDay wrap calls tableScene at dawn; table.js tableScene re-verifies tableSeat() — full via deedGateReady(), or lesser — and a seat of 'none' withdraws a stale tableWaiting aloud, never fired silently)
 
 **Consumes:** state.leadership
 
@@ -1366,7 +1366,7 @@ The galactic table — integrated endgame. Prices the run (never gates on godhoo
 **Rules:**
 —
 
-**Consumes:** state.scholar, state.village, progState(), ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
+**Consumes:** state.scholar, state.village, progState(), ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
 
 ### tile-scenes (`tile-scenes.js`)
 Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
@@ -1530,7 +1530,7 @@ Fixed System narrator voice lines (ElevenLabs, pre-generated MP3s in src/audio/s
 **Consumes:** Game.audio.playVoice(blob), Game.audio.isMuted(), Game._voiceUnlocked
 
 ### waves (`waveLedger.js`)
-The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
+The Wave Ledger — waves 2-3 unlock on KILLS ONLY (waves 4-5 add village Standing on top, standing.js). Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
 
 **Provides:** waveLedgerCfg(), ledgerState(), monsterCounterKnown(monsterId), scoreLedgerKill(monsterId), waveLedgerPoints(wave), ledgerProgressLine()
 
@@ -1540,7 +1540,7 @@ The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per r
 - ledger_per_type_cap: 2 (code: waveLedger.js — perTypeCap; breadth over farming)
 - ledger_announce_idempotent: true (code: waveLedger.js — 50%/full beats fire once per wave via state._ledgerAnn50/_ledgerAnnFull)
 - ledger_survives_scholar: true (code: waveLedger.js — ledgerState lives on this.state, not this.state.scholar)
-- ledger_reverses_8730921c: true (code: game.js — unlockedWave is ledger-only; engagement lanes removed 2026-10-10, Steve's call; the endgame deed gate is untouched)
+- ledger_reverses_8730921c: true (code: game.js — unlockedWave's wave 2-3 rungs are ledger-only; engagement lanes removed 2026-10-10, Steve's call; waves 4-5 add Standing (2026-10-13), not scale rank; the endgame deed gate is untouched)
 
 **Consumes:** —
 

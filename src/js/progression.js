@@ -584,7 +584,16 @@
       // contests, crises) stay. `scale` is still reported honestly in the
       // breakdown for beat text and tests.
       const scale = rank === 'national' || rank === 'global';
-      return { ok: !!(waves && contests && crises), waves, contests, crises, scale, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
+      // SUPERSET (audit 2026-10-14): the full seat also carries the lesser
+      // seat's integration-stage (>=2) and food-thesis bars (tableSeat,
+      // table.js) — a full seat must never be easier than the lesser one on
+      // those. Scale is NOT added here (open design question).
+      let stage = 0;
+      try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
+      const s = this.state.scholar || {};
+      const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
+      const stageOk = stage >= 2;
+      return { ok: !!(waves && contests && crises && stageOk && foodDeeds), waves, contests, crises, scale, stageOk, foodDeeds, stage, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
     },
     checkArc() {
       const pg = this.progState(), s = this.state.scholar;
@@ -638,7 +647,9 @@
       // aloud, never silently.
       if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && (seatNow === 'full' || seatNow === 'lesser')) {
         pg.tableWaiting = true;
-        this.say('The table is being set. They are watching to see who comes to it.');
+        // Same seat-honest text as arcBeat(4): a lesser seat is named as one.
+        if (seatNow === 'full') this.say('The table is being set. They are watching to see who comes to it.');
+        else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
       }
       if (want > pg.arc) {
         pg.arc = want;
@@ -977,19 +988,9 @@
 
   // ============ WRAPS (chain-safe) ============
   (function attach() {
-    // abilitySlots: 20->2, 35->3, 50->4, 65->5, 80->6. (pacing build
-    // 2026-10-10: pure granularity — measured play sat at integ ~35-53 with 1
-    // ability and 3 slots, so synergies were 0/240. No cap lowered.)
-    const _abilitySlots = Game.abilitySlots;
-    Game.abilitySlots = function () {
-      const integ = this.state.scholar.integration || 5;
-      if (integ >= 80) return 6;
-      if (integ >= 65) return 5;
-      if (integ >= 50) return 4;
-      if (integ >= 35) return 3;
-      if (integ >= 20) return 2;
-      return _abilitySlots ? 1 : 1;
-    };
+    // abilitySlots: the ladder lives in game.js only (20->2, 35->3, 50->4,
+    // 65->5, 80->6). The identical duplicate wrap that stood here was
+    // deleted 2026-10-14 — one ladder, one place to tune it.
 
     // integrate: fire slot moments + stage beats on threshold crossing.
     // Pre-arrival moments queue — the System can't speak before it exists.

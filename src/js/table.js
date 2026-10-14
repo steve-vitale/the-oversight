@@ -29,7 +29,7 @@
 //   - tableLiveWrap(text)
 // consumes:
 //   - state.scholar, state.village, progState()
-//   - ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
+//   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
 //   - say, sysSay, recordMoment, recordLegend, wipe, save
 //   - metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides)
 //   - switchboard() (comms.js) for the light/dark axis
@@ -56,8 +56,10 @@
 
     // ============ THE SEAT: full / lesser / none ============
     // Steve 2026-10-11: the table PRICES the run, never gates on godhood.
-    // The 2026-10-10 deedGateReady() is the FULL seat (national+, all wave
-    // bars, 3 contests, 3 crises, stage>=3, food-thesis deeds). The LESSER
+    // deedGateReady() is the FULL seat (all wave bars 5/5/4/3/2, 3 contests,
+    // 3 crises, stage>=2, food-thesis deeds; no scale bar since the
+    // 2026-10-13 Standing change — the lesser seat still needs regional+,
+    // an open asymmetry flagged 2026-10-14). The LESSER
     // seat is the reachable bar for competent non-god play — priced
     // honestly, fewer paths open, weaker terms. Below it the table does
     // not come (ledger.js's withdrawal beat handles that case).

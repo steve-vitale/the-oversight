@@ -5198,11 +5198,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             80: 'SYSTEM: Deep integration. You see the world through us now.',
           };
           this.say(msgs[t]);
-          const slotsNow = this.abilitySlots();
-          if (slotsNow > slotsBefore) {
-            this.say(`⬢ SYSTEM: "Neural depth ${t}. I can hold more of you now — ability slots: ${slotsNow}."`);
-            this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
-          }
           // ABILITY CODEX (Steve 2026-10-13): deeper integration, deeper sight.
           // At 40/60/80 the System volunteers L1 knowledge of abilities in
           // your closest godhood pool — it has been watching your shape.
@@ -5211,6 +5206,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { this.systemRevealPoolAbilities(t); } catch (e2) {}
           }
         }
+      }
+      // SLOT LINE (audit 2026-10-14): announced on ANY slot gain, not only
+      // inside the 20/40/60/80 stage loop — abilitySlots() opens slots at
+      // 20/35/50/65/80, so the 3rd/4th/5th slots used to arrive in silence.
+      const slotsNow = this.abilitySlots();
+      if (slotsNow > slotsBefore && this.state.systemArrived) {
+        this.say(`⬢ SYSTEM: "Neural depth ${Math.floor(s.integration)}. I can hold more of you now — ability slots: ${slotsNow}."`);
+        this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
       }
       if (reason) this.tele('integrate', { amount, reason, total: Math.round(s.integration) });
     },
@@ -14030,6 +14033,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.trust[vid] = Math.max(0, curTake - 2);
         if (Math.random() < 0.3) this.say('Someone watches you load up. They say nothing.');
         this.observe('hoard');
+        // THE LEDGER (audit 2026-10-14): the food truth's hoarder half —
+        // hoardFood (ledger.js) had no caller, so foodStance/the Table never
+        // saw a net-taker. Same kcal/1000 scale as shareFood.
+        try { if (this.hoardFood) this.hoardFood(totalKcal); } catch (e) { console.warn('hoardFood failed', e); }
       }
       // BLATANT THEFT with witnesses present: direct confrontation.
       // Nothing stops your hand — but someone may stop your nerve.
@@ -28378,9 +28385,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       let w4faced = false;
       try { w4faced = (typeof this.waveEngaged === 'function') ? this.waveEngaged(4) > 0 : false; } catch (e) {}
-      if (standing >= t5 && w4faced) return 5;
-      if (standing >= t4) return 4;
-      if (day >= dN && pts(2) >= ((bar[2] | 0) || 5)) return 3;
+      // The standing rungs sit ON TOP of the wave-3 rung (audit 2026-10-14):
+      // without this, high standing unlocked wave 4 before wave 3 ever had.
+      const w3 = day >= dN && pts(2) >= ((bar[2] | 0) || 5);
+      if (w3 && standing >= t5 && w4faced) return 5;
+      if (w3 && standing >= t4) return 4;
+      if (w3) return 3;
       if (day >= d2 && pts(1) >= ((bar[1] | 0) || 5)) return 2;
       return 1;
     },
@@ -28503,8 +28513,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
     // checkScalePointers: the reactive check for beats 4+5 (SCALE-DISCOVERY.md,
-    // Steve 2026-10-12). The wave gates are scale-gated (wave 4 needs regional,
-    // wave 5 needs national — unlockedWave), but nothing ever told the player.
+    // Steve 2026-10-12). Waves 4-5 unlock on village Standing (standing.js,
+    // since 2026-10-13 — no longer regional/national rank); the pointer
+    // TRIGGERS below still read scale rank (unchanged, open design question),
+    // but the TEXT names the real lever: standing.
     // Fires each pointer ONCE, at the unlock — the discoverability question
     // ("what's next?") arises the moment a new wave lands, not after its kill
     // bar fills. (Retimed 2026-10-12: the bar-banked trigger was a nearly
@@ -28545,12 +28557,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state._scalePtrW4EchoDay = day + 1;
       } catch (e) {}
     },
-    // scalePointerW5: escalation. A region held, a nation needed — three
-    // seasoned bonds under one head, or bend the knee. Producer-brain throughout.
+    // scalePointerW5: escalation. A region held; the finale needs more
+    // Standing (t5) and the Mirror Draft faced (unlockedWave) — no nation
+    // required since 2026-10-13. Producer-brain throughout.
     scalePointerW5() {
       try {
         this.say('\u{1F4FA} "A REGION! Look at you! The ratings department is doing a little DANCE over here!"');
-        this.say('\u{1F4FA} "But finales — FINALES need a NATION, sweetheart. Three seasoned bonds under ONE head. Or bend the knee to somebody who already has one. The producers are WAITING."');
+        this.say('\u{1F4FA} "But finales — FINALES need a LEGEND, sweetheart. More STANDING — blood, bonds, or bread — and look the Mirror Draft in the eye. The producers are WAITING."');
       } catch (e) {}
     },
     // scalePointerEcho: the morning-after answer to the wave-4 pointer. One

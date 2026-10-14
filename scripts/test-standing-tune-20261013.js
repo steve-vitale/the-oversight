@@ -55,6 +55,10 @@ async function liveGame() {
   ok('breakdown shape', ['total', 'war', 'diplomacy', 'plenty', 'warPts', 'links', 'feasts'].every(k => k in s));
   ok('fresh game standing 0', s.total === 0);
   ok('fresh game wave 1', Game.unlockedWave() === 1);
+  // wave-3 rung first (audit 2026-10-14: standing rungs sit on top of it):
+  // day past the floor + 5 wave-2 ledger points (no standing from w2).
+  Game.state.scholar.day = 30;
+  for (const id of ['voice_mimic_radio', 'mirror_stag', 'review_drone', 'bright_idea', 'memory_projector']) Game.recordWaveKill(id);
   // scripted war: 4 wave-3 kills of distinct types -> 100 war
   for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) Game.recordWaveKill(id);
   s = Game.villageStanding();
