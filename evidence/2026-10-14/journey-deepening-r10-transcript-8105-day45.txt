@@ -1,0 +1,28 @@
+=== seed 8105 day 45 — conversation with Aisha (app_mgpsphe4611) ===
+occupation=farmer temperament=prickly trust=23 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+YOU: [ans:q_laugh_memory:a_deflect] "Laughing feels wrong now."
+THEM: "It feels wrong because it matters. The wrong-feeling things are usually the important ones. There. Said it."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Consider it a project, then. Project: laugh. I'm assigning us both."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Did you hear? Tashi just walked away from Haven. Didn't look back. Don't make me repeat it."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "I've got things to do. People to avoid. You know."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

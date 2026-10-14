@@ -1,0 +1,23 @@
+=== seed 8104 day 60 — conversation with Brendan (gen_g2fy79b) ===
+occupation=Social worker temperament=fidgety trust=89 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You told me yes, once. No details. I haven't forgotten. I just don't ask."
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "...Hi. Sorry. I'm not good at the talking-to-strangers part."
+(want=curious stage=1)
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Tom is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

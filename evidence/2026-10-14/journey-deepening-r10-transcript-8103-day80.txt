@@ -1,0 +1,31 @@
+=== seed 8103 day 80 — conversation with Theo (gen_bnf9p8z) ===
+occupation=carpenter temperament=intense trust=45 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never finished talking about that plant lesson — we got cut off, 2 days back."
+YOU: [dlg:more] "Tell me more."
+THEM: "That's the whole of it. Sorry."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Nightlight — A soft green glow under the water. It hunts at night — give the dark a wide berth."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: The hissing stops. Ducks in a row, every time. It hunts by day — watch the open ground."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: A shadow crosses the ground — growing fast. Glasswing Darter, every time. It hunts by day — watch the open ground."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Sassafras. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wild Ramps. Leaf, stem, smell. You won't forget it now."
+(want=ask_favor stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+(want=ask_favor stage=1)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=unresolved

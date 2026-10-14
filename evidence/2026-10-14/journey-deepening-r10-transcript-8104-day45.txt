@@ -1,0 +1,26 @@
+=== seed 8104 day 45 — conversation with Brendan (gen_g2fy79b) ===
+occupation=Social worker temperament=fidgety trust=80 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Have you ever hurt someone? Since all this started. Give it time."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Owen just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

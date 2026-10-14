@@ -1,0 +1,26 @@
+=== seed 8108 day 60 — conversation with Seymour (gen_64lgihp) ===
+occupation=ER nurse temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About that question — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it. I mean it."
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Keep going."
+THEM: "Fun development — We should collect funny things. Like firewood. Stockpile them for winter."
+(want=curious stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "The hardest part isn't the hunger or the cold. It's not knowing if anyone else made it."
+(want=curious stage=2)
+YOU: [dlg:more] "I didn't know that about you."
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "That tracks."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

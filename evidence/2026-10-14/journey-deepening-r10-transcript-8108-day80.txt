@@ -1,0 +1,31 @@
+=== seed 8108 day 80 — conversation with Seymour (gen_64lgihp) ===
+occupation=ER nurse temperament=mischievous trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about their secret — we got cut off."
+YOU: [dlg:more] "Does anyone else know?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Watch for this: It doesn't move. Speedbump, every time. It hunts by day — watch the open ground."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Cattail. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+(want=curious stage=1)
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+(want=curious stage=2)
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Huh. Let me think about that." "I miss small talk. Real small talk, about weather that didn't matter and shows I hadn't seen."
+(want=curious stage=2)
+YOU: [dlg:more] "What else?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

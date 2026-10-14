@@ -1,0 +1,31 @@
+=== seed 8106 day 45 — conversation with Hank (app_mgpsphgm896) ===
+occupation=mechanic temperament=fidgety trust=26 dead=false mood=scared
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "You don't have to say it all at once."
+THEM: The mood shifts, subtly.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Chickweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "You don't have to say it all at once."
+THEM: They settle — not warm, not cold. Just two people talking.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "You don't have to say it all at once."
+THEM: They relax, a fraction. This is going well.
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+closing line: "Okay. Okay. I can do this. We can do this."
+want final: id=ask_favor stage=3 resolution=promised

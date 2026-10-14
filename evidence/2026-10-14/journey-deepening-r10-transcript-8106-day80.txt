@@ -1,0 +1,26 @@
+=== seed 8106 day 80 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=74 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About that question — You look handy. What did you do with your hands, before?"
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "People are talking about me. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

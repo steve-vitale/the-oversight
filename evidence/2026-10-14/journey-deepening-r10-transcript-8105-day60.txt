@@ -1,0 +1,29 @@
+=== seed 8105 day 60 — conversation with Aisha (app_mgpsphe4611) ===
+occupation=farmer temperament=prickly trust=66 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "You said laughing feels wrong now. I keep wondering if it still does."
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=0)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+(want=curious stage=1)
+YOU: [ans:q_believe:a_deflect] "Belief is for people with spare energy."
+THEM: "Ouch. Fair, though. I'll believe enough for both of us."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: "Belief's personal. But thanks for saying yours out loud. That takes guts."
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Ethan is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

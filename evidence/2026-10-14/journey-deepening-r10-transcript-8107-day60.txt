@@ -1,0 +1,26 @@
+=== seed 8107 day 60 — conversation with Debora (gen_vspxhzs) ===
+occupation=paramedic temperament=gentle trust=9 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:help] "I'm listening."
+THEM: "It's been days since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Chickweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

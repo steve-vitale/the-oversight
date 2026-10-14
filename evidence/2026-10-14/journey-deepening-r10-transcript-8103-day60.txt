@@ -1,0 +1,26 @@
+=== seed 8103 day 60 — conversation with Theo (gen_bnf9p8z) ===
+occupation=carpenter temperament=intense trust=46 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About that question — Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "that stray dog — the one that bit two people — lets Ruth touch it."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=curious stage=3 resolution=engaged

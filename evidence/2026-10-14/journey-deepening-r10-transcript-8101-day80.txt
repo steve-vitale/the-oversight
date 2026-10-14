@@ -1,0 +1,26 @@
+=== seed 8101 day 80 — conversation with Grace (grace_obi) ===
+occupation=ESL teacher temperament=warm trust=37 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What do you make of all this? Really."
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not. Makes sense to me."
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Hey — Did you hear? Vasyl just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting. That's the whole of it."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "This was nice. Don't be a stranger — we're nine people, it's hard."
+want final: id=curious stage=3 resolution=engaged

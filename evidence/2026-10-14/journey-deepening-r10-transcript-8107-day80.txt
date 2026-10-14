@@ -1,0 +1,26 @@
+=== seed 8107 day 80 — conversation with Wren (visjoin_65) ===
+occupation=truck driver temperament=dry trust=23 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About that question — What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "Debora ate something last month that should've killed them. They're fine."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "File that under 'productive.' Loosely defined."
+want final: id=curious stage=3 resolution=engaged

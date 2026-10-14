@@ -1,0 +1,26 @@
+=== seed 8105 day 80 — conversation with Ethan (ethan_hunt) ===
+occupation=trail crew lead temperament=bold trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About that question — When's the last time you really laughed?"
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wood Sorrel. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "swear Tashi can smell rain coming. Never wrong about it, either."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Right. Back to it."
+want final: id=curious stage=3 resolution=engaged
