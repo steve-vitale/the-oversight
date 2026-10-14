@@ -164,7 +164,8 @@ function drinkSafe(Game, ctx) {
     // fill a bottle when the tile offers water
     try {
       const t = Game.playerTile ? Game.playerTile() : null;
-      if (t && /creek|well|spring|river|pond/i.test(t.type || '') && (s.water || []).length < 3) {
+      const atHaven = (() => { try { return Game.playerAtHaven(); } catch (e) { return false; } })();
+      if ((t && /creek|well|spring|river|pond|haven/i.test(t.type || '') || atHaven) && (s.water || []).length < 3) {
         try { Game.fillWater(); } catch (e) {}
       }
     } catch (e) {}

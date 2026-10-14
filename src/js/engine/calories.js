@@ -81,6 +81,24 @@
   function resolveDay(scholar, village, opts) {
     const warnings = [];
     const need = dailyNeed(scholar);
+    // HONEST DEATH CAUSES (player-survivability 2026-10-14): the overnight
+    // tick used to report every death as 'starvation', even when dehydration
+    // or pre-existing wounds did the killing. Track which damage source
+    // brings health to 0 so the epitaph and telemetry tell the truth.
+    // A player who learns "I died of thirst" drinks tomorrow; a player told
+    // "you starved" with a full belly learns nothing.
+    let killedBy = null;
+    const healthBefore = scholar.health || 0;
+    if (healthBefore <= 0) {
+      // Already at 0 entering the night — the day's damage did it. Attribute
+      // honestly: open wounds bleed out overnight, disease kills in sleep.
+      // (This should be rare; daytime paths kill with specific causes.)
+      const wounds = (scholar.wounds || []).length;
+      const diseases = scholar.diseases ? Object.keys(scholar.diseases).length : 0;
+      if (wounds > 0) killedBy = 'wounds';
+      else if (diseases > 0) killedBy = 'sickness';
+      else killedBy = 'the night';
+    }
     scholar.kcal -= need;
     scholar.hydration -= hydrationBurn(scholar, opts);
     if (scholar.kcal < 0) {
@@ -88,6 +106,7 @@
       scholar.health -= Math.min(20, 2 + deficit / 180);
       scholar.energy = Math.max(0, scholar.energy - 25);
       warnings.push('STARVING: health and energy falling. The spiral has started.');
+      if (!killedBy && scholar.health <= 0) killedBy = 'starvation';
     } else if (scholar.kcal < STARVATION_THRESHOLD) {
       warnings.push('WARNING: reserves critical. Eat tomorrow or the spiral begins.');
     }
@@ -96,6 +115,7 @@
       scholar.health -= 12;
       scholar.energy = Math.max(0, scholar.energy - 30);
       warnings.push('DEHYDRATED: find and treat water today.');
+      if (!killedBy && scholar.health <= 0) killedBy = 'dehydration';
     }
     // floors: the body bottoms out at 0. Death is checked via ok, not negative numbers.
     // (Negative kcal/hp are display/logic noise — the spiral already did its damage above.)
@@ -103,7 +123,7 @@
     scholar.health = Math.max(0, scholar.health);
     // village metabolism lives in game.js (villageEats) — single owner, tuned net drain.
     // the engine only runs the scholar's own body here.
-    return { ok: scholar.health > 0, warnings };
+    return { ok: scholar.health > 0, warnings, killedBy };
   }
 
   global.Scattering = global.Scattering || {};
