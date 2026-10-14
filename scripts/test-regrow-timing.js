@@ -7,12 +7,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/food.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
@@ -52,7 +51,7 @@ function cellIsGreen(t, cx, cy) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261006), narration: true });
   Game.genRoster('Minneapolis, USA');
   Game.newGame('Minneapolis, USA', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -146,14 +145,25 @@ function cellIsGreen(t, cx, cy) {
     return tile && tile.type !== 'haven' && tile.type !== 'ruin';
   });
   for (const t of allWild) { Game.travelTo(t.x, t.y); Game.genDetail(Game.map.px, Game.map.py); Game.state.scholar.kcal = 2400; }
+  // Pin (flake fix 2026-10-14): depleteRandomTile picks ANY stocked tile
+  // within 2 of the crew, and only tiles with a detail grid get a cell tag.
+  // travelTargets() is just the reachable neighbours, so on some seeds the
+  // random pick landed on a never-visited tile and no tag could exist.
+  // Give every non-haven tile its grid so the pick is always observable.
+  for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+    const t = Game.tileAt(x, y);
+    if (t && t.type !== 'haven' && t.type !== 'ruin' && !t.detail) Game.genDetail(x, y);
+  }
+  // World is 9x9 (0..8) since the 2026-10-07 migration; the old 7x7 scan
+  // missed every strip depleteRandomTile landed in columns/rows 7-8.
   const allTagsBefore = new Set();
-  for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++) {
+  for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
     const t = Game.tileAt(x, y);
     for (const k of Object.keys((t && t.detailRegrow) || {})) allTagsBefore.add(`${x},${y}:${k}`);
   }
   Game.depleteRandomTile(4, Game.map.px, Game.map.py);
   const newVTags = [];
-  for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++) {
+  for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
     const t = Game.tileAt(x, y);
     for (const k of Object.keys((t && t.detailRegrow) || {})) {
       if (!allTagsBefore.has(`${x},${y}:${k}`)) {

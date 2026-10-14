@@ -5,17 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/codex-people.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/lifeseed.js', 'src/js/villager-agency.js', 'src/js/debug-scenarios.js'].forEach(f => {
-  try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
-  catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); }
-});
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -36,7 +30,7 @@ function freshVillager(temp) {
 const GENERIC = '"We should stick together. Twelve strangers is better than one stranger."';
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261005), narration: true });
 
   // 1. voiceMods derivation
   let vid = freshVillager('steady');
@@ -79,7 +73,13 @@ const GENERIC = '"We should stick together. Twelve strangers is better than one 
   // missing voice data: defensive
   const savedVoice = Game.data.characterGen.voice;
   Game.data.characterGen.voice = undefined;
+  // Speech DNA (lifeseed, 2026-10-07) is NOT voice data and still voices the
+  // line when this villager's backstory has markers — pin it off so this
+  // checks only the missing-characterGen.voice guard (was seed-dependent).
+  const savedDNA = Game.convoSpeechMarkers;
+  Game.convoSpeechMarkers = () => null;
   ok('missing voice data: line unchanged', Game.voiceLine(vid, GENERIC) === GENERIC);
+  Game.convoSpeechMarkers = savedDNA;
   Game.data.characterGen.voice = savedVoice;
 
   // 3. voicePool terse filtering
@@ -141,17 +141,30 @@ const GENERIC = '"We should stick together. Twelve strangers is better than one 
   ok('authored temperament lines not double-voiced', !doubleVoiced);
 
   // 6. blind distinctness: statistical voice markers per temperament
+  // Flake fix 2026-10-14: ONE villager re-tempered six ways, 400 lines each,
+  // with the per-PERSON layers (age-voice set, lifeseed speech DNA) pinned
+  // off. Before, each temperament got a different random villager whose
+  // own age-set/DNA openers and closers dilute the temperament pool, with
+  // only 40 samples — so the comparison measured who got dealt, not
+  // temperament, and flipped on unlucky draws. The assertions below are
+  // about the temperament PROFILES; that is now the only variable.
   const stats = {};
+  const v2 = freshVillager('steady');
+  const savedSet = Game.npcVoiceSet, savedMarkers = Game.convoSpeechMarkers;
+  Game.npcVoiceSet = () => null;
+  Game.convoSpeechMarkers = () => null;
+  const SAMPLES = Number(process.env.VOICE_SAMPLES || 400);
   for (const temp of ['bold', 'cautious', 'warm', 'prickly', 'withdrawn', 'steady']) {
-    const v2 = freshVillager(temp);
+    Game.vpOf(v2).personality.temperament = temp;
     const lines = [];
-    for (let i = 0; i < 40; i++) lines.push(Game.voiceLine(v2, GENERIC));
+    for (let i = 0; i < SAMPLES; i++) lines.push(Game.voiceLine(v2, GENERIC));
     const voicedLines = lines.filter(l => l !== GENERIC);
     const hedges = voicedLines.filter(l => /I think —|Maybe —|Probably —|not sure|Could be wrong|Just my read|how it looks to me/.test(l)).length;
     const questions = voicedLines.filter(l => /\?.*"$/.test(l) && l !== GENERIC).length;
     const avgLen = voicedLines.reduce((a, l) => a + l.length, 0) / Math.max(1, voicedLines.length);
     stats[temp] = { voiced: voicedLines.length, hedges, questions, avgLen: Math.round(avgLen) };
   }
+  Game.npcVoiceSet = savedSet; Game.convoSpeechMarkers = savedMarkers;
   console.log('voice stats:', JSON.stringify(stats, null, 1));
   ok('cautious hedges more than bold', stats.cautious.hedges > stats.bold.hedges);
   ok('warm asks back more than prickly', stats.warm.questions > stats.prickly.questions);
