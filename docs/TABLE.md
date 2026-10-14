@@ -499,16 +499,15 @@ Before the seat, `endingKeyLive()` recomputes on every call (relative);
 `endingKey()` is null. `tableScene` (via `tableTakeSeat` from Haven) locks it
 onto `pg.table.endingKey`. Telemetry: `table_entered` and `table_won` carry
 `track`, `godpath`, `subclass`, `god`, `moral`, `titanFinale`, `endingKey`;
-`table_won` adds `ending` (the selector that resolved, or `path`) and
-`buildPlayed`.
+`table_won` adds `ending` (the selector that resolved, or `path`),
+`endingKind` (`bespoke` / `coda` / `path`), `endingLevel` and `buildPlayed`.
 
 ### Lookup order
 
 Selectors, most specific first: `god:<godId>` → `class:<path>/<subclass>` →
-`class:<path>` → `track:<track>` → the path's own light/dark finals (the
-existing `table-<path>.js` text). A slot is *(table path, selector, moral)*;
-an empty slot falls through to the next. Morals are `light` / `dark`, plus
-`grey` on the relay.
+`class:<path>` → `track:<track>` → `default`. Morals are `light` / `dark`,
+plus `grey` on the relay. The beat uses all five levels per path; the ending
+is composed (below).
 
 **The build beat** (`table-beats.json`): one beat per path (`beat`, 0-based)
 adds ONE option from the key. Candidate order: god (bespoke, then
@@ -527,30 +526,39 @@ finale contributed.
   every path; Assimilated, losable for the first time, ends plainly when it is
   already the rock bottom.
 
-**The ending text** (`table-endings.json`): `paths.<path>.<selector>.<moral>`
-= `{title?, lines: [...], finals?: {<finalId>: [...]}}`. `finals` replaces
-that final's outcome; `title` and `lines` play after it as the coda. THE HOSTS
-(`hosts`) and the pod demand (`poddemand`) take coda lines only. Tokens:
-`{name}` `{class}` `{god}` `{verb}`.
+**The ending: composed** (Steve, round 5, on path final + one build coda:
+"Nope good idea that's kinda manageable."). An ending = the path's own
+light/dark final (`table-<path>.js`) + ONE build coda from
+`table-endings.json`:
+- `codas["<selector>"] = {light: [lines], dark: [lines]}`, path-independent:
+  `god:<id>` (10), `class:<path>/<subclass>` (20), `track:<t>` (5) × light/dark
+  = **70 codas**. The most specific one for the key plays: god → class/subclass
+  → track → none (the final alone). There is no bare-class coda.
+- The relay's `grey` band reads light or dark by `relayLean()` (> 0 light,
+  < 0 dark, 0 light), the same rule as its grey door gift.
+- **Bespoke override (rare):** `paths.<path>.<selector>.<moral>` =
+  `{title?, lines, finals?: {<finalId>: [...]}}` wins over every coda (lookup
+  god → class/subclass → class → track). `finals` replaces that final's
+  outcome; `title` and `lines` play after it. THE HOSTS (`hosts`) and the pod
+  demand (`poddemand`) take lines only.
+- Tokens: `{name}` `{class}` `{god}` `{verb}` `{path}` (the path's name, "the
+  Beloved"; not at the start of a sentence). Anything else is a validator error.
 
-### Authoring a slice (Muse)
+### Authoring (Muse)
 
-1. Pick a slot from the to-do list: `node scripts/validate-table-endings.js --todo`.
-2. Endings: add `paths.<path>["class:<path>/<sub>"].light|dark` with the
-   path's final ids (`table-<path>.js` finals). Write each final in the game's
-   voice (second person, present tense, the System in caps quotes), then 1–2
-   coda lines.
-3. Beats: add `paths.<path>.options["<selector>"]` with `label`, `line`, `say`
-   per moral (both label and say, or neither) and optional `effects`. Never
-   add `fail`, `goto` or `trial`: the stake is the engine's.
-4. Run `node scripts/validate-table-endings.js` (errors on bad ids, morals,
-   final ids, meters, a missing default or stake) and
-   `node scripts/test-table-endings-20261014.js`.
+1. `node scripts/validate-table-endings.js --todo` lists the missing codas.
+2. Codas: add `codas["<selector>"].light|dark`, two lines, spare, second
+   person; they must read right after any of the seven paths' finals.
+3. Bespoke entries and beats (optional): `paths.<path>[...]` as above;
+   beats `paths.<path>.options["<selector>"]` with `label`, `line`, `say` per
+   moral (both label and say, or neither) and optional `effects`. Never add
+   `fail`, `goto` or `trial`: the stake is the engine's.
+4. Run the validator and `node scripts/test-table-endings-20261014.js`.
 
-Exemplar slices (2026-10-14): Beloved × Socialite/Showrunner × light/dark
-(beat + ending), Defiant × Brawler × light/dark (beat + ending). Coverage at
-build time: beats 4/675 bespoke (+448 by template, the rest on the path
-default); endings 4/675 bespoke (the rest on the path's own finals).
+Exemplars (2026-10-14): codas `god:one_person_army`, `class:caregiver/keeper`,
+`track:combat`; bespoke Beloved × Showrunner and Defiant × Brawler (beat +
+ending). Coverage: codas 6/70; bespoke endings 4 (optional); beats 4/675
+bespoke (+448 by template, the rest on the path default).
 
 ## File map
 
