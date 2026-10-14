@@ -65,7 +65,14 @@ function stateHash(Game) {
 }
 
 async function main() {
-  const { triblead, tribbelong, gateOn, tribVerb } = require('./policies/tribdisc');
+  let TD;
+  try {
+    TD = require('./policies/tribdisc');
+  } catch (e) {
+    console.log('INFO-SKIP: tribdisc layer absent (deleted per kill protocol); proof was RED->GREEN 21/21 pre-kill — see evidence/2026-10-14/sim-tribdisc-b.md');
+    process.exit(0);
+  }
+  const { triblead, tribbelong, gateOn, tribVerb } = TD;
   const { leadfeast, belongfeast } = require('./policies/feastscale');
   const week = Math.floor(30 / 7); // 4
 

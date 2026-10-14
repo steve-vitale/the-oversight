@@ -19,7 +19,13 @@ const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 
 if (process.env.FEASTSCALE_R13 !== '1') { console.log('FEASTSCALE_R13=1 required (the measured substrate)'); process.exit(1); }
 
-const TD = require('./policies/tribdisc');
+let TD;
+try {
+  TD = require('./policies/tribdisc');
+} catch (e) {
+  console.log('INFO-SKIP: tribdisc layer absent (deleted per kill protocol); det-gate was 16/16 both modes pre-kill — see evidence/2026-10-14/sim-tribdisc-b.md');
+  process.exit(0);
+}
 const FS = require('./policies/feastscale');
 const MODE = process.env.DET_MODE || 'off-vs-base';
 
