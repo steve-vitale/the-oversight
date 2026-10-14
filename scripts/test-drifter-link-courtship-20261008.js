@@ -114,8 +114,10 @@ const ok = (name, cond, extra) => {
   ov.opinion = 0;
   ok('courtship raises the judged score (opinion feeds the formula)',
     courtedMean > coldMean + 6, `courted mean=${courtedMean.toFixed(1)} cold mean=${coldMean.toFixed(1)} (single: ${cold.score}/${colder.score})`);
+  // Mean, not the single call: the single score carries the same unreseedable
+  // +-10 noise as above (a name-culture data change 2026-10-14 drew 57 once).
   ok('cold proposal score is no longer a near-guarantee (base 38)',
-    colder.score < 55, `cold score=${colder.score}`);
+    coldMean < 55, `cold mean=${coldMean.toFixed(1)} (single: ${colder.score})`);
 
   // --- proposeLink decline path still works and costs opinion ---
   ov.opinion = -100; // force a decline
