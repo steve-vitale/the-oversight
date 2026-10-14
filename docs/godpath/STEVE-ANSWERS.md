@@ -7,6 +7,27 @@ verbatim.
 
 ---
 
+## 2026-10-14 (latest, round 2)
+
+"Human skills should be learnable before the system shows up. Do a quick
+audit for exceptions. Maybe first run let them land in the origin they choose
+a character from. Random after. Yes both groups exist.
+
+Expedition is leaving your village as a nomad to find remaining family. That
+should be another bonus ending. Seek out and find family according to
+backstory and where they went. Yes that's okay to run a wet/dry year.
+Whenever the player starts, should be the season the game starts in. Like it
+happened right when they started playing, for immersion. What is your
+estimate on play time for a full campaign?
+Let's buff everyone, or at least feel more comfortable with improving
+abilities to compensate etc. Keep that codex rule. Yes that's good for seek
+knowledge."
+
+(Context: "both groups" = the Taken and the scattered kin; "that codex rule" =
+a dead bearer's skills stay in the Codex as the office's written knowledge;
+"seek knowledge" = villagers read their 1-of-3 offers and seek only when they
+know too little about their own build.)
+
 ## 2026-10-14 (latest)
 
 **On villager builds:** "Villagers can't just take the next ability, they
