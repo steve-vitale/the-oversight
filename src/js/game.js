@@ -23521,6 +23521,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const bounty = this.bountyFor(this.map.px, this.map.py);
         const thumbLvl = this.abilityLevel('green_thumb');
         const thumbMult = thumbLvl >= 2 ? 2.0 : thumbLvl >= 1 ? 1.5 : 1.0;
+        // MODIFIER PIPELINE (audit 2026-10-14): relics, synergies, evolutions
+        // and abilities that target forage.yield / luck.global used to apply
+        // only in engine/forage.js, which the live sweep never calls.
+        const modYieldMult = this.modTarget('forage.yield', 1) * this.modTarget('luck.global', 1);
         const FORAGEABLE = { plant: 1, bush: 1, tree: 1, bigtree: 1 };
         const harvested = [];
         for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
@@ -23626,7 +23630,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let units = 3 + Math.floor(Math.random() * 3); // 3-5 per cell: a sweep, not a strip
           // MULTITOOL (Steve 2026-10-05): "+1 to foraging yields" — honest now.
           const toolMult = this.hasItem('multitool') ? 1.25 : 1.0;
-          units = Math.ceil(units * levelMult * thumbMult * toolMult);
+          units = Math.ceil(units * levelMult * thumbMult * toolMult * modYieldMult);
           // deeper knowledge accrues only for identified plants — handling
           // unknowns teaches care, not parts. Depth is per handling SESSION
           // (see PER-SWEEP KNOWLEDGE PACING above), not per cell.
