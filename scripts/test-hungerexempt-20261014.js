@@ -48,8 +48,9 @@ function check(name, cond, detail) {
 }
 
 // MODE=red: pristine tree — exemption inert. MODE=green: armed tree — exemption fires.
+// HUNGEREXEMPT=0 (control side): exemption disabled — asserts the inert shape.
 const MODE = process.env.MODE === 'red' ? 'red' : 'green';
-const expectExempt = MODE === 'green';
+const expectExempt = MODE === 'green' && process.env.HUNGEREXEMPT !== '0';
 console.log(`MODE=${MODE} (exemption ${expectExempt ? 'armed — must fire' : 'absent — must be inert'})`);
 
 const said = [];
@@ -112,10 +113,12 @@ const freshItem = (name, kcal, daysLeft) => ({
   pg.hungryStreak = 3;
   v.throttleRedirects = 0; v.throttleExemptHunger = 0;
   said.length = 0;
+  const envWas = process.env.HUNGEREXEMPT; // save: §3 must restore the side's gate value
   process.env.HUNGEREXEMPT = '0';
   const a3 = { task: 'forage' };
   Game.resolveOneAssignment(vid, a3);
-  delete process.env.HUNGEREXEMPT;
+  if (envWas === undefined) delete process.env.HUNGEREXEMPT;
+  else process.env.HUNGEREXEMPT = envWas;
   check('HUNGEREXEMPT=0: redirect fires despite hungryStreak', ['wood', 'water', 'stone'].includes(a3.task), 'a.task=' + a3.task);
   check('HUNGEREXEMPT=0: redirect counted, not exemption', (v.throttleRedirects || 0) === 1 && (v.throttleExemptHunger || 0) === 0,
     `redirects=${v.throttleRedirects} exempt=${v.throttleExemptHunger}`);
