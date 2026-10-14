@@ -465,12 +465,38 @@
       for (const k of keys) {
         if (lower.includes(k)) kw[k].forEach(t => tags.add(String(t).toLowerCase()));
       }
-      return { raw: raw || 'somewhere unremembered', tags: [...tags] };
+      // REGIONS (one origin vocabulary, docs/WORLD-REGIONS.md §7): the same
+      // tags name the origin's world region(s), best match first.
+      return { raw: raw || 'somewhere unremembered', tags: [...tags], regions: this.originRegionsForTags([...tags]) };
+    },
+    // originRegionsForTags(tags): world region ids whose originTags share a
+    // tag with this origin, most shared tags first (ties: regions.json order).
+    originRegionsForTags(tags) {
+      const rs = (this.data && Array.isArray(this.data.regions)) ? this.data.regions : [];
+      const tl = new Set((tags || []).map(t => String(t).toLowerCase()));
+      const scored = [];
+      rs.forEach((r, i) => {
+        const n = (r.originTags || []).filter(t => tl.has(String(t).toLowerCase())).length;
+        if (n) scored.push({ id: r.id, n, i });
+      });
+      scored.sort((a, b) => (b.n - a.n) || (a.i - b.i));
+      return scored.map(x => x.id);
     },
 
-    // familiarityTier: what fraction of the local plant pool shares a region tag with this origin?
-    // local >40%, visitor 15-40%, stranger <15%. The game feels the difference.
-    familiarityTier(tags) {
+    // familiarityTier(tags[, landingId]): origin region vs landing region
+    // (docs/WORLD-REGIONS.md §4 #13). Same region = local; same climateFamily
+    // = visitor; anything else (or an origin no region claims) = stranger.
+    // Sets how many plants each roster member knows at the start (3/2/1).
+    // Without regions.json it falls back to the old plant-tag overlap rule.
+    familiarityTier(tags, landingId) {
+      const land = landingId ? this.regionDef(landingId) : this.activeRegion();
+      if (land) {
+        const home = this.originRegionsForTags(tags)[0];
+        if (!home) return 'stranger';
+        if (home === land.id) return 'local';
+        const hd = this.regionDef(home);
+        return (hd && hd.climateFamily && hd.climateFamily === land.climateFamily) ? 'visitor' : 'stranger';
+      }
       const plants = this.data.plants || [];
       const tl = (tags || []).map(t => String(t).toLowerCase());
       if (!plants.length || !tl.length) return 'stranger';
