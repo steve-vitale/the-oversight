@@ -45,6 +45,7 @@
 //   - kcalCap() (delegates to food.js)
 //   - hydrateSeed(seed) -> full person (unified person system: seed -> genCharacter depth)
 //   - getPerson(id) -> person | null (unified lookup: villagers + hydrated seeds)
+//   - stablePersonKey(vid) -> string (deterministic per-person key for variation hashes: data.villagers index, append-only in creation order; villager IDs embed Date.now() so the ID string is NOT stable across runs)
 //   - ensureRosterPerson(nid, hint) -> person (recruit-ghost fix: hydrate arrivals once so every roster id resolves)
 //   - markSeen(x, y, kind, by), mapSeen(x, y) -> 'visited'|'shared'|null (player map knowledge: fog of war display)
 //   - sharedTileNote(x, y) -> honest provenance parenthetical for 'shared' tiles (dowsing / echo_location / someone)
@@ -16550,6 +16551,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
+    // stablePersonKey(vid) -> string: the deterministic per-person key for
+    // "stable per-villager variation" hashes (trader plant pools, contest
+    // TV-appeal, favor slot combos). Villager IDs embed Date.now()
+    // (membership.js), so hashing the ID string gives a different value on
+    // every in-process run of the same seed — the entropy-hunt r26 class
+    // (contestEngine _cxSeed was the first instance; these are the rest).
+    // data.villagers is append-only in deterministic creation order (same
+    // seed -> same order; deaths mark .dead, never reorder), so its index
+    // is the stable key. Falls back to the state roster index, then the raw
+    // id — both deterministic; the raw-id fallback preserves the old
+    // behavior for ids that resolve nowhere (should not fire: every roster
+    // id hydrates via ensureRosterPerson).
+    stablePersonKey(vid) {
+      try {
+        const vs = (this.data && this.data.villagers) || [];
+        for (let i = 0; i < vs.length; i++) {
+          if (vs[i] && vs[i].id === vid) return 'pv' + i;
+        }
+        const rs = ((this.state && this.state.village) || {}).roster || [];
+        const ri = rs.indexOf(vid);
+        if (ri >= 0) return 'pr' + ri;
+      } catch (e) {}
+      return 'id:' + String(vid);
+    },
+
     // what does this trader know that you don't? Returns plant IDs they can teach.
     // unfiltered=true returns their FULL pool (for "what do they already know"
     // checks — the filtered list hides plants you know deeply, which they
@@ -16557,11 +16583,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     traderKnowledge(vid, unfiltered) {
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: getPerson */ || {};
-      // traders know 2-3 plants deeply. Generate deterministically from their ID.
+      // traders know 2-3 plants deeply. Generated deterministically per
+      // person — from the STABLE person key, not the ID string (IDs embed
+      // Date.now(); hashing them broke run-to-run determinism, 2026-10-14).
       const plants = this.data.plants || [];
       if (!plants.length) return [];
+      const _pk = this.stablePersonKey ? this.stablePersonKey(vid) : String(vid);
       let h = 0;
-      for (const c of vid) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+      for (const c of _pk) h = (h * 31 + c.charCodeAt(0)) >>> 0;
       const known = [];
       const n = 2 + (h % 2); // 2-3 plants
       for (let i = 0; i < n; i++) {

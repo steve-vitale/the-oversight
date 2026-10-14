@@ -19,7 +19,7 @@
 //   - showPhases(show, who) -> played phases for a player show pull
 //   - showWatchPhases(show, pid) -> watch beat when a villager is pulled (cheer/heckle/comfort)
 //   - showTogetherPhases(show) -> communal watch-together beat
-//   - showResolveVillager(pid, show, opts) -> {outcome, score} (deterministic: fans/shame/both)
+//   - showResolveVillager(pid, show, opts) -> {outcome, score} (deterministic: fans/shame/both; TV-appeal hashes the stable person key, not the ID string — IDs embed Date.now())
 //   - _showVillagerEnd(ac) -> lands a villager's show (fans/shame/both + gossip)
 //   - _showEnd(ac, outcome, prize) -> lands a player/village show or ratings summons (fans/shame/both/refused)
 //   - _showGossip(how, pid, showName) -> seeds show gossip (REP, never trust)
@@ -1292,7 +1292,12 @@
   G.showResolveVillager = function(pid, show, opts) {
     opts = opts || {};
     let hash = 0;
-    const key = String(pid) + ':' + String((show && show.id) || show);
+    // STABLE-PERSON-KEY (determinism fix 2026-10-14): villager IDs embed
+    // Date.now() — hashing the ID string made this villager's TV-appeal
+    // differ on every in-process run of the same seed. stablePersonKey is
+    // the deterministic per-person key (entropy-hunt r26 class).
+    const _pk = (typeof this.stablePersonKey === 'function') ? this.stablePersonKey(pid) : String(pid);
+    const key = _pk + ':' + String((show && show.id) || show);
     for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) % 997;
     const deeds = ((this.state.notability || {})[pid]) || {};
     const n = deeds.showmanship || 0;

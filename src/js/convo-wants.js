@@ -7,6 +7,7 @@
 //   - convoWantEngage(vid, kind) -> state transition ('engage'|'deflect'|'commit')
 //   - convoWantMenu(vid) -> menu options for the live want
 //   - convoWantCloseLine(vid) -> goodbye beat for the resolution
+//   - convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now())
 //   - convoResolveWant(vid, how) -> plants seeds for unfinished business
 //   - convoPlantSeed(vid, seed) / convoCheckSeeds(vid)
 //   - convoWantNews(vid) / convoWantWarning(vid) -> real content beats
@@ -1125,11 +1126,15 @@
       return need;
     },
 
-    // convoFavorHash: per-instance variation key. Hashes (vid, day, seq) so
-    // the same NPC on different days — or different NPCs — don't get the
-    // same slot combination. Not cryptographic, just well-distributed.
+    // convoFavorHash: per-instance variation key. Hashes (stablePersonKey,
+    // day, seq) so the same NPC on different days — or different NPCs —
+    // don't get the same slot combination. The key is the STABLE person key,
+    // not the villager ID string (IDs embed Date.now(); the old vid hash
+    // broke run-to-run determinism, 2026-10-14). Not cryptographic, just
+    // well-distributed.
     convoFavorHash(vid, ctx) {
-      const s = String(vid) + '|' + (ctx.day || 0) + '|' + (ctx.seq || 0);
+      const _pk = (typeof this.stablePersonKey === 'function') ? this.stablePersonKey(vid) : String(vid);
+      const s = _pk + '|' + (ctx.day || 0) + '|' + (ctx.seq || 0);
       let h = 0;
       for (let i = 0; i < s.length; i++) {
         h = ((h << 5) - h + s.charCodeAt(i)) | 0;
