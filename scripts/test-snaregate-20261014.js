@@ -25,6 +25,10 @@
 //
 // Usage: node scripts/test-snaregate-20261014.js  (SEED env override)
 //        SNARECRAFT_GATE=1 node scripts/test-snaregate-20261014.js
+//
+// NOTE (2026-10-14): the layer was KILLED at pilot and deleted — the armed
+// branch of this proof only passes on the (removed) layer commit. Kept as
+// the arm's measurement record; see evidence/2026-10-14/sim-snaregate.md.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 const { competent, workTrapline } = require('./policies/competent');
