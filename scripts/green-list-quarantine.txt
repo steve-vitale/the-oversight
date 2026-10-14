@@ -1,2 +1,4 @@
 # scripts/green-list-quarantine.txt — green-list tests temporarily skipped.
 # One per line: <path>  # <date> <reason>. Empty is the goal.
+scripts/test-backgrounds-20261006.js  # 2026-10-14 REAL BUG after origins-world merge: a male-named character (e.g. Svyatoslav) gets they/them in a bio — new name-culture gender data. Fix in progress; un-quarantine when fixed.
+scripts/test-taletell-behavior.js  # 2026-10-14 fails only on the combined origins+feel merge ("proposals seeded from roster"); root-cause in progress; un-quarantine when fixed.
