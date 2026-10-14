@@ -25,6 +25,7 @@ Start every session by reading `docs/godpath/STEVE-ANSWERS.md` (outranks everyth
 | `node scripts/check.js --quick` | After every change (seconds) |
 | `node scripts/check.js` | Before every push (minutes; runs the green list) |
 | `node scripts/check.js --only <text>` | One area |
+| Sims (bots, sweeps, sim-audit) | Read `docs/SIMULATING.md` first |
 | `node scripts/validate-ontology.js` | After adding or renaming a `src/js` module or its `provides:` |
 | `bash scripts/bump-sw-version.sh` | Only when shipping a player-facing build (Steve's call) |
 
