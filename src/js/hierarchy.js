@@ -876,6 +876,17 @@
       var frac = Math.min(1, paid / 1500);
       var tGain = this._trustGain(link, Math.round(8 * frac));
       link.tendedWeek = week;
+      // SUBAID-AID-CREDIT (2026-10-14): the tended grain is real food, not
+      // narrative — it arrives in the subordinate's pantry, where their own
+      // weekly tick (_linkedVillageWeek) eats it against their need and their
+      // own production can then go to tribute. Trust math, the refusal paths
+      // (mourning / empty pantry), and the once-per-week dedup are untouched:
+      // the credit rides the same guarded block as the trust gain, credited
+      // at the ACTUAL paid amount (partial pantries aid partially).
+      try {
+        var _sov = this._otherVillage(link.subordinate);
+        if (_sov && paid > 0) _sov.pantryKcal = Math.max(0, (_sov.pantryKcal || 0)) + paid;
+      } catch (e) {}
       var onm = this._ovName(link.subordinate);
       this._linkNote(link, 'tended', 'Haven sent grain (' + paid.toLocaleString() + ' kcal, trust +' + tGain + '); the bond is fed.');
       if (frac >= 1) this.say(`🌾 Haven sends ${paid.toLocaleString()} kcal of grain to ${onm}'s fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +${tGain}.)`);
