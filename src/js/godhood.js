@@ -259,7 +259,11 @@
   function godhoodBargaining(sch) {
     const g = sch.godhood;
     if (!g || !g.active) return 0;
-    return g.active.length * 3; // each godhood: +3 bargaining strength
+    let bonus = g.active.length * 3; // each godhood: +3 bargaining strength
+    // MARKET GOD 2.0: the god of price sets the price. At the table, the
+    // Market God doesn't bargain — it NAMES. +7 on top of the generic +3.
+    if ((g.active || []).includes('market_god')) bonus += 7;
+    return bonus;
   }
 
   // --- capstone verbs (called by game systems; pure-ish, game mediates) ---
@@ -328,6 +332,7 @@
     delete sch.godhood.capstoneUsed.feedMultitude;
     delete sch.godhood.capstoneUsed.namePrice;
     delete sch.godhood.capstoneUsed.walkHorizon;
+    try { guardRegen(sch); } catch (e) {}
   }
 
   // Army: turnPain — once per fight, retaliate with total damage taken.
@@ -368,6 +373,43 @@
   function auditDue(sch) {
     return marketMarkers(sch) >= MARKET_AUDIT_AT;
   }
+  // auditCollect(sch): THE AUDIT IS REAL. When 3+ markers accrue, the Audit
+  // arrives and takes the single most valuable item (highest loot tier; ties
+  // broken by list order). If the scholar holds nothing worth taking, it
+  // takes 5000 kcal instead. Markers reset to 0 — the ledger is settled.
+  // (MARKET GOD 2.0 2026-10-14: the audit was a hook to nothing. Debt needs
+  // teeth, or the power is free.)
+  function auditCollect(sch) {
+    const g = sch.godhood || {};
+    if (!auditDue(sch)) return null;
+    const inv = sch.inventory || [];
+    let bestIdx = -1, bestTier = -1;
+    for (let i = 0; i < inv.length; i++) {
+      const id = inv[i] && (inv[i].itemId || inv[i].id);
+      const tier = id ? itemTier(id) : 0;
+      if (tier > bestTier) { bestTier = tier; bestIdx = i; }
+    }
+    let taken = null;
+    if (bestIdx >= 0 && bestTier > 0) {
+      taken = inv.splice(bestIdx, 1)[0];
+    } else {
+      // Nothing worth taking — the Audit takes food instead.
+      const kcal = sch.kcal || 0;
+      const take = Math.min(5000, kcal);
+      sch.kcal = kcal - take;
+      taken = { itemId: null, kcalTaken: take };
+    }
+    g.marketDebt = 0;
+    sch.godhood = g;
+    const takenId = taken && (taken.itemId || taken.id);
+    return {
+      verb: 'auditCollect', ok: true,
+      took: takenId || `${taken.kcalTaken} kcal`,
+      note: takenId
+        ? `The Audit arrives. It doesn't haggle. It takes your ${takenId} — the finest thing you own — and the ledger closes. The market remembers nothing.`
+        : `The Audit arrives. You own nothing worth taking, so it takes ${taken.kcalTaken} kcal of food instead. The ledger closes.`,
+    };
+  }
   function namePrice(sch, itemId) {
     const g = sch.godhood || {};
     if (!(g.active || []).includes('market_god')) return null;
@@ -378,9 +420,12 @@
     if (!tier) return { verb: 'namePrice', ok: false, why: 'The market has never heard of that. Name something real.' };
     used.namePrice = true;
     sch.godhood.capstoneUsed = used;
-    let paidKcal = 0, marker = false;
+    let paidKcal = 0, marker = false, markersTaken = 0;
     if (tier >= 4) {
-      // Relics are lent, never sold.
+      // Relics are lent, never sold. Borrowing the unbuyable costs DOUBLE —
+      // the market charges for the risk. (2.0: was 1 marker; the "lent"
+      // needs teeth, and tier-4 on demand is the strongest use.)
+      markersTaken = 2;
       marker = true;
     } else {
       const price = MARKET_PRICES[tier] || 800;
@@ -390,10 +435,11 @@
         paidKcal = price;
       } else {
         marker = true; // the market delivers anyway; the debt accrues
+        markersTaken = 1;
       }
     }
     if (marker) {
-      g.marketDebt = (g.marketDebt || 0) + 1;
+      g.marketDebt = (g.marketDebt || 0) + markersTaken;
       sch.godhood = g;
     }
     // Deliver: the trader arrives with exactly what was named.
@@ -412,24 +458,28 @@
     };
   }
 
-  // Market: buyOff — once per fight, buy a monster's hesitation. The monster
-  // spends its next 2 turns weighing your offer instead of attacking (uses
-  // the existing fighter.hesitate mechanic). Price scales with wave; wave-5
-  // hungers can't be bought, only rented (marker). Caller applies hesitate.
-  var BUYOFF_PRICES = { 1: 1000, 2: 2500, 3: 5000, 4: 10000 }; // wave 5 = marker-only
-  function buyOff(sch, wave) {
+  // Market: buyPassage — once per fight, BUY YOUR WAY OUT. The monster
+  // accepts the price and leaves; the fight ends. Wealth buys safety, not
+  // time. Price scales with wave; wave-5 hungers can't be bought, only
+  // rented (marker). Caller ends the fight.
+  // (MARKET GOD 2.0 2026-10-14: playtest proved 2-turn hesitation flips 0%
+  // of wave 4-5 fights — the DPS asymmetry is too extreme. Safe passage
+  // gives 100% survival by avoiding unwinnable fights. Steve: "unsure if
+  // actually going to be game changing" — the data said it wasn't.)
+  var BUYPASSAGE_PRICES = { 1: 1000, 2: 2500, 3: 5000, 4: 10000 }; // wave 5 = marker-only
+  function buyPassage(sch, wave) {
     const g = sch.godhood || {};
     if (!(g.active || []).includes('market_god')) return null;
     const used = (g.capstoneUsed || {});
-    if (used.buyOff) return null; // once per fight (reset on fight start)
+    if (used.buyPassage) return null; // once per fight (reset on fight start)
     const w = Math.max(1, Math.min(5, wave || 1));
-    used.buyOff = true;
+    used.buyPassage = true;
     sch.godhood.capstoneUsed = used;
     let paidKcal = 0, marker = false;
     if (w >= 5) {
       marker = true; // some hungers can't be bought, only rented
     } else {
-      const price = BUYOFF_PRICES[w] || 1000;
+      const price = BUYPASSAGE_PRICES[w] || 1000;
       const kcal = sch.kcal || 0;
       if (kcal >= price) {
         sch.kcal = kcal - price;
@@ -444,16 +494,88 @@
     }
     const due = auditDue(sch);
     return {
-      verb: 'buyOff', ok: true, wave: w,
-      hesitateTurns: 2, // caller: fighter.hesitate = (fighter.hesitate||0) + 2
+      verb: 'buyPassage', ok: true, wave: w,
+      passageBought: true, // caller: end the fight, monster departs
       paidKcal: paidKcal, marker: marker,
       markers: marketMarkers(sch), auditDue: due,
       note: marker
         ? (due
-          ? `Coin rains on the field. The monster STOPS — counting. "The Audit will call on you. Soon." MARKER ${marketMarkers(sch)} — the Audit is DUE.`
-          : `You flash wealth you don't have. The monster hesitates, doing the math. "The market remembers." MARKER ${marketMarkers(sch)}/${MARKET_AUDIT_AT}.`)
-        : `You name a number mid-battle. The monster STOPS — ${paidKcal} kcal of food, weighed against your life. It chooses the food. Two turns bought.`,
+          ? `You name a price you can't pay. The monster takes your promise instead — and LEAVES. "The Audit will call on you. Soon." MARKER ${marketMarkers(sch)} — the Audit is DUE.`
+          : `You offer wealth you don't have. The monster considers, then turns away. "The market remembers." MARKER ${marketMarkers(sch)}/${MARKET_AUDIT_AT}.`)
+        : `You name a number — ${paidKcal} kcal of food, weighed against your life. The monster takes the coin and GOES. Wealth buys the one thing strength can't: leaving.`,
     };
+  }
+  // Back-compat: buyOff is retired (0% impact). Alias to buyPassage for
+  // any lingering callers; new code should use buyPassage.
+  function buyOff(sch, wave) { return buyPassage(sch, wave); }
+
+  // Market: Gilded Guard — the orbiting coins are SHIELDS. Passive, always-on
+  // while ascended. Incoming damage to the player is intercepted by coins
+  // before HP: each coin absorbs up to GUARD_PER_COIN, then shatters.
+  // Coins regenerate slowly (1 per dawn) — wealth flows back, but not fast.
+  // The mythic sprite shows the coins; the mechanic makes them real.
+  // (MARKET GOD 2.0 2026-10-14: the binding constraint is SURVIVAL, not DPS.
+  // A 100 HP player cannot win a DPS race vs 1600 HP monsters. The guard
+  // doesn't win fights — it buys the hits needed to flee, heal, or reposition.)
+  var GUARD_COINS_MAX = 4;
+  var GUARD_PER_COIN = 50; // each coin absorbs 50; 4 coins = 200 total
+  function guardCoins(sch) {
+    const g = sch.godhood || {};
+    if (!(g.active || []).includes('market_god')) return 0;
+    // Source of truth: depletion array. Count coins not fully depleted.
+    g.guardDepletion = g.guardDepletion || [];
+    let intact = 0;
+    for (let i = 0; i < GUARD_COINS_MAX; i++) {
+      if ((g.guardDepletion[i] || 0) < GUARD_PER_COIN) intact++;
+    }
+    return intact;
+  }
+  // guardAbsorb(sch, dmg): returns { absorbed, coinsLeft, shattered }.
+  // Called from tbDamage before HP reduction. Pure-ish: mutates guard state.
+  // Each coin has GUARD_PER_COIN capacity; depletion is tracked per coin.
+  function guardAbsorb(sch, dmg) {
+    const g = sch.godhood || {};
+    if (!(g.active || []).includes('market_god')) return { absorbed: 0, coinsLeft: 0, shattered: 0 };
+    // guardDepletion: array of damage already absorbed per coin (index = coin)
+    g.guardDepletion = g.guardDepletion || [];
+    let coins = guardCoins(sch);
+    if (coins <= 0 || dmg <= 0) return { absorbed: 0, coinsLeft: coins, shattered: 0 };
+    let absorbed = 0, shattered = 0;
+    let remaining = dmg;
+    // Fill coins in order; a coin shatters only when fully depleted.
+    // Iterate by index; skip coins already at full depletion.
+    for (let i = 0; i < GUARD_COINS_MAX && remaining > 0; i++) {
+      const alreadyAbsorbed = g.guardDepletion[i] || 0;
+      if (alreadyAbsorbed >= GUARD_PER_COIN) continue; // shattered, skip
+      const capacityLeft = GUARD_PER_COIN - alreadyAbsorbed;
+      const take = Math.min(capacityLeft, remaining);
+      absorbed += take;
+      remaining -= take;
+      g.guardDepletion[i] = alreadyAbsorbed + take;
+      if (g.guardDepletion[i] >= GUARD_PER_COIN) shattered++;
+    }
+    // Recompute intact count
+    coins = 0;
+    for (let i = 0; i < GUARD_COINS_MAX; i++) {
+      if ((g.guardDepletion[i] || 0) < GUARD_PER_COIN) coins++;
+    }
+    g.guardCoins = coins;
+    sch.godhood = g;
+    return { absorbed, coinsLeft: coins, shattered };
+  }
+  function guardRegen(sch) {
+    // call at dawn: the least-depleted shattered coin flows back.
+    // (A shattered coin returns at 0 depletion — fresh.)
+    const g = sch.godhood || {};
+    if (!(g.active || []).includes('market_god')) return;
+    g.guardDepletion = g.guardDepletion || [];
+    for (let i = 0; i < GUARD_COINS_MAX; i++) {
+      if ((g.guardDepletion[i] || 0) >= GUARD_PER_COIN) {
+        g.guardDepletion[i] = 0;
+        sch.godhood = g;
+        return;
+      }
+    }
   }
 
   // Farstrider: walkHorizon — once per day, instant travel up to 3 nodes. Costs 150 kcal.
@@ -686,7 +808,8 @@
     villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
     itemTier, godhoodItemOk, poolProgress, buildReadyForCapstone, capstoneItemFor,
     raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
-    turnPain, noLiesCheck, namePrice, buyOff, marketMarkers, auditDue,
+    turnPain, noLiesCheck, namePrice, buyOff, buyPassage, marketMarkers, auditDue, auditCollect,
+    guardCoins, guardAbsorb, guardRegen,
     walkHorizon, phaseOut, takeWound,
     ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,
     mythicSprite, MYTHIC_SPRITES,

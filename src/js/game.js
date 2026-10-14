@@ -32424,6 +32424,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         } catch (e) {}
       }
+      // GILDED GUARD (Market God 2.0, 2026-10-14): orbiting coins intercept
+      // damage before HP. The mythic sprite shows the coins; the mechanic
+      // makes them real. Only for the player (the godhood is theirs).
+      try {
+        const S = globalThis.Scattering || {};
+        if (t && t.kind === 'player' && final > 0 && S.Godhood && S.Godhood.guardAbsorb) {
+          const sch = this.state && this.state.scholar;
+          if (sch) {
+            const gr = S.Godhood.guardAbsorb(sch, final);
+            if (gr.absorbed > 0) {
+              final -= gr.absorbed;
+              if (gr.absorbed > 0) this.say(`Coins flash — the Gilded Guard takes ${gr.absorbed}.${gr.shattered > 0 ? ` ${gr.shattered} coin${gr.shattered > 1 ? 's' : ''} shatter${gr.shattered > 1 ? '' : 's'}.` : ''}`);
+            }
+          }
+        }
+      } catch (e) {}
       t.hp -= final;
       // HOPELESS-FLIGHT LEDGER (structural-combat 2026-10-10): per-fighter
       // damage-taken ledger for the tactical hopeless read
@@ -39263,23 +39279,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return r;
       } catch (e) { return null; }
     },
-    marketBuyOff(fighter) {
+    marketBuyPassage(fighter) {
       try {
         const S = globalThis.Scattering || {};
-        if (!S.Godhood || !S.Godhood.buyOff) return null;
+        if (!S.Godhood || !S.Godhood.buyPassage) return null;
         const wave = (fighter && (fighter.wave || fighter.tier)) || 1;
-        const r = S.Godhood.buyOff(this.state.scholar, wave);
+        const r = S.Godhood.buyPassage(this.state.scholar, wave);
         if (!r) { this.say('The market does not answer. (Once per fight — or the godhood is not yours.)'); return null; }
         if (!r.ok) return r;
-        try { fighter.hesitate = (fighter.hesitate || 0) + (r.hesitateTurns || 2); } catch (e2) {}
+        // Caller ends the fight: the monster departs. Mark it here if we can.
+        try { if (fighter) { fighter.fled = true; fighter.alive = false; } } catch (e2) {}
         const mname = (fighter && (fighter.name || fighter.monsterId)) || 'the monster';
         if (r.marker && r.auditDue) {
-          this.say(`Coin rains on the field. ${mname} STOPS — counting. "The Audit will call on you. Soon." (MARKER ${r.markers} — the AUDIT IS DUE.)`);
+          this.say(`You name a price you can't pay. ${mname} takes your promise — and LEAVES. "The Audit will call on you. Soon." (MARKER ${r.markers} — the AUDIT IS DUE.)`);
         } else if (r.marker) {
-          this.say(`You flash wealth you don't have. ${mname} hesitates, doing the math — two turns, weighing your offer. "The market remembers." (MARKER ${r.markers}/3.)`);
+          this.say(`You offer wealth you don't have. ${mname} considers, then turns away. "The market remembers." (MARKER ${r.markers}/3.)`);
         } else {
-          this.say(`You name a number mid-battle — ${r.paidKcal} kcal of food, weighed against your life. ${mname} STOPS. It chooses the food. Two turns bought.`);
+          this.say(`You name a number — ${r.paidKcal} kcal of food, weighed against your life. ${mname} takes the coin and GOES. Wealth buys the one thing strength can't: leaving.`);
         }
+        return r;
+      } catch (e) { return null; }
+    },
+    // Back-compat: the old buyOff verb is retired (0% impact in playtest).
+    marketBuyOff(fighter) { return this.marketBuyPassage(fighter); },
+    marketAuditCollect() {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.auditCollect) return null;
+        const r = S.Godhood.auditCollect(this.state.scholar);
+        if (!r) return null;
+        this.say(r.note);
         return r;
       } catch (e) { return null; }
     },
