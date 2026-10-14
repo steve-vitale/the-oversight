@@ -2765,6 +2765,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const wt = this.wrongTeaching(vid, plantId, 'taught');
         if (wt) return wt;
       } catch (e) {}
+      // REDUNDANT-TEACHING STOP SIGNAL (longsim tedium 2026-10-13): the scholar
+      // already knows this plant at the level this lesson teaches (L1, the
+      // name). A person wouldn't sit through the same lesson twice — the
+      // teacher waves it off, warmly. Explicit no-op: no encounters, no trust,
+      // no ticks, no observe. Placed AFTER wrongTeaching on purpose: a FALSE
+      // lesson is lie-counterplay (canon, Steve 2026-10-06), not redundancy —
+      // only a true lesson the student already holds is redundant. Depth (L2+)
+      // never flows through this primitive, so nothing deeper is touched.
+      if (this.plantKnown(plantId)) {
+        const tname = this.displayName(vid);
+        const pname = (plant && plant.name) || plantId;
+        this.say(`📖 ${tname} starts in on the lesson, then catches themself. "Hold on — I already showed you this one. ${pname}. You remember."`);
+        return null;
+      }
       // LANGUAGE: no shared words? Try DRAWING. A picture of the plant, an arrow
       // to the mouth, a skull for the bad ones. Crude — but sometimes enough.
       // Success here teaches at "bad education" level (partial, not instant).

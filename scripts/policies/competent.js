@@ -175,6 +175,13 @@ function teachRound(Game, ctx) {
     if (!roster.length) return;
     let taught = 0;
     for (const pid of known.slice(0, 3)) { // a few per day, not a lecture marathon
+      // REDUNDANT-TEACHING STOP SIGNAL (longsim tedium 2026-10-13): every pid
+      // in `known` is a plant the scholar already knows — offering the lesson
+      // anyway just burns a deliberate verb on a no-op. Check before offering,
+      // not after failing. (The villager filter below is also inverted — it
+      // asks non-knowers to teach — so this loop could never teach anything
+      // new as written; fixing that direction is a separate lever.)
+      if (Game.plantKnown && Game.plantKnown(pid)) continue;
       for (const vid of roster) {
         let vk = [];
         try { vk = (vv.plantKnowledge && vv.plantKnowledge[vid]) || []; } catch (e) {}
