@@ -28,6 +28,12 @@ const T = K.reporter('godpath-ladder');
   T.ok('use-count recognition stays removed (rejected: points/meter ascension)', !/onPathLived|uses\s*>=\s*50/.test(baSrc));
   T.ok('the Table never reads godhood or god-path state (prices the run, never gates on godhood)',
     !/Godhood\b|\.godhood\b|npcGodhood|godpath|classLine|godhoodBargaining|recognizeClass/.test(tableSrc));
+  // ENDINGS BY BUILD (Steve 2026-10-14: "Each playstyle and godhood path,
+  // moral choice version should have its own ending."): the build reaches the
+  // Table only as the ending key, read by endingKey.js. It shapes the beat and
+  // the ending text, never the seat or the doors.
+  T.ok('the ending key never prices the seat or the doors (endingKey.js reads the build, the Table only reads the key)',
+    !/tableSeat\(|tableEarnedPaths\(|minSeat/.test(K.readSrc('src/js/endingKey.js')));
   T.ok('godpath.js loads from index.html', /src\/js\/godpath\.js/.test(K.readSrc('index.html')));
 
   const Game = await K.load({ seed: 20261014 });

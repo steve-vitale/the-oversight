@@ -489,6 +489,20 @@ Encounter framework. Every animal and monster follows the same pattern.
 
 **Consumes:** state.encounters
 
+### ending-key (`endingKey.js`)
+Endings by build (Steve 2026-10-14: "The ending you can win is set as you enter the table, but that doesn't mean they play the same table scenario or that they can't lose their scenario no matter what path, light or dark. Each playstyle and godhood path, moral choice version should have its own ending." / "The table should all be relative until actually entering it when it locks." / "Both, linked"). Reads the build into an ENDING KEY and hands the Table data, never a gate. The key is live (relative) until the seat is taken; tableScene locks the build half (track, class, god, titan finale, the key) and every door entered fills the path half (path, moral). The Table then (1) plays the build: one beat per path gets a build-aware option from src/data/table-beats.json, chosen most-specific-first (god > class+subclass > class > track > the path default), whose text, gains and titan-finale odds depend on the key and which always carries the path's stake (losable for every key); (2) resolves the ending text by key from src/data/table-endings.json with fallbacks down to the path's own light/dark finals. Seat pricing and earned doors never read this module.
+
+**Provides:** endingKeyLive() -> the key as the run stands today (relative; never stored), endingKeyLock() -> snapshots the build half onto the table state when the seat is taken, endingKeyEnter(pathId, moral) -> fills the path half when a door is entered (and on every downgrade), endingKey() -> the locked key, or null before the seat is taken, endingSelectors(key) -> lookup order: ['god:<id>', 'class:<path>/<sub>', 'class:<path>', 'track:<t>', 'default'], tableBuildBeat(T) -> {line, choices} for the beat that plays the build, or null, tableEndingFor(pathId, moral, finalId) -> {level, selector, title, lines, outcome} or null (null = the path's own finals), tableEndingNote(end) -> records which ending text resolved on the table state (telemetry reads it), titanFinaleOutcome() -> 'network' | 'apocalypse' | 'herald' | 'none' (what the titan finale contributed)
+
+**Rules:**
+- never_a_gate: nothing here is read by tableSeat or tableEarnedPaths; a run with no class and no god walks every door it earned (code: endingKey.js, scripts/godpath/ladder.js)
+- relative_until_locked: endingKey() is null until tableScene locks it; endingKeyLive() recomputes every call (code: endingKeyLock)
+- locked_build: once locked, the build half never changes for the rest of the Table (code: endingKeyLock)
+- always_losable: every build option carries the path's stake (a meter bar checked before it plays and the path's own limits after) (code: buildChoice)
+- if_you_dont_know_it_doesnt_show: a class counts only once the System has named it (not lapsed) (code: endingKeyLive)
+
+**Consumes:** state.scholar, state.titans, progState(), tableState(), playerTracks(), godpathClass(), godpathData(), Game.data.tableBeats (src/data/table-beats.json), Game.data.tableEndings (src/data/table-endings.json), Game.data.tracks
+
 ### calorie-engine (`engine/calories.js`)
 The master clock. Every cost in the game flows through here. Needs never decrease with level; power costs calories.
 
@@ -1439,7 +1453,7 @@ The Witness path — the trial of the judges. Three beats: opening charges (from
 ### table (`table.js`)
 The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 
-**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text), tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
+**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text), tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals), tableBeatChoices(beat, T) -> a beat's own choices plus the build-aware option on the beat that plays the build, tableEndingLines(fid, outcome) -> ending text by the locked key with the path's own finals as fallback
 
 **Rules:**
 —
