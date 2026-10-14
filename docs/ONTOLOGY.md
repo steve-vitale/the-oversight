@@ -580,7 +580,7 @@ Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, le
 ### examine-recognition (`examine.js`)
 Examine action + observation memory + recognition. Looking closely at a plant is cheap (time, tiny kcal); foraging costs more energy. Examining yields a vague description (never the name) and creates an observation memory. When someone later teaches you that species, the observation CLICKS — the vague description resolves into the name. That's what unlocks the visual change (sprite depth 1→2).
 
-**Provides:** observePlant(pid, via) -> record an observation memory, observationOf(pid) -> observation record or null, observedPlant(pid) -> boolean: any observation exists, examineQuality() -> 1-3 based on perception skill, examineDescription(pid, quality) -> vague description, never leaks the name, examinePlantCell(cx, cy) -> the Examine action (cheap look, no harvest), recognitionBeat(pid, teacherName) -> revelation narration on identify, plantVisualDepth(pid) -> 0 unknown, 1 examined, 2 known
+**Provides:** observePlant(pid, via) -> record an observation memory, observationOf(pid) -> observation record or null, observedPlant(pid) -> boolean: any observation exists, examineQuality() -> 1-3 based on perception skill, examineDescription(pid, quality) -> vague description, never leaks the name, examinePlantCell(cx, cy) -> SUPERSEDED: the live Examine verb is carexplore.js examineCell (it shadows game.js examineCell, the only caller); kept as a library entry point, recognitionBeat(pid, teacherName) -> revelation narration on identify, plantVisualDepth(pid) -> 0 unknown, 1 examined, 2 known
 
 **Rules:**
 - examine_never_names: examine output never contains the species name unless plantKnown (code: examineDescription, Steve 2026-10-06)
