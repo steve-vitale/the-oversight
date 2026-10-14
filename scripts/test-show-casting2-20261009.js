@@ -29,7 +29,7 @@ const PAIRS = [
   ['originPicker.json', 'originPicker'], ['foreignSpeech.json', 'foreignSpeech'],
   ['lifeseeds.json', 'lifeseeds'], ['arrivalText.json', 'arrivalText'],
   ['justiceVoice.json', 'justiceVoice'], ['alienPlayers.json', 'alienPlayers'],
-  ['regions.json', 'regions'], ['dramaEffects.json', 'dramaEffects'],
+  ['regions.json', 'regions'], 
   ['monsterBehaviors.json', 'monsterBehaviors'], ['contests.json', 'contests'],
   ['events.json', 'events'], ['statusEffects.json', 'statusEffects'], ['cooking.json', 'cooking'],
 ];
