@@ -31415,6 +31415,117 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (p && !p.acted) { p.acted = true; this.tbAfterPlayerAction(); }
     },
 
+    // SHOVE (control-tactics 2026-10-14, Steve: "control must change the
+    // board, not the numbers"): push a CONTROLLED monster 2 tiles directly
+    // away from you. Costs the action. Stops at the first blocked tile; if
+    // the path hits another fighter, both take [5,10] collision and the
+    // shove stops. The tactic is positioning: YOU decide which way is "away".
+    // Size-1 monsters only — you can't shoulder-check a bulldozer.
+    tbPlayerShove(targetKey) {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      const m = targetKey ? this.tbFighter(targetKey) : null;
+      if (!m || (m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) { this.say('Shove what?'); return false; }
+      if (!((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0)) {
+        this.say(`${this.encSubject(m)} is steady on its feet — shoving it would just make it angry. (Shove needs a controlled target: stunned, rooted, bound, blinded, or hesitating.)`);
+        return false;
+      }
+      const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
+      if (d > 1) { this.say('Too far to shove. Get adjacent.'); return false; }
+      if ((this.fighterSize(m) || 1) > 1) { this.say(`It's too big to shove — you'd bounce off. (Shove: size-1 monsters only.)`); return false; }
+      let dx = Math.sign(m.mx - p.mx), dy = Math.sign(m.my - p.my);
+      if (!dx && !dy) dx = 1;
+      p.acted = true;
+      let moved = 0;
+      for (let i = 0; i < 2; i++) {
+        const nx = m.mx + dx, ny = m.my + dy;
+        if (!this.tbCanOccupy(m, nx, ny)) break;
+        let hit = null;
+        for (const o of f.fighters) {
+          if (o === m || !o.alive || o.fled) continue;
+          const tiles = this.fighterTiles(o);
+          for (const t of tiles) { if (t[0] === nx && t[1] === ny) { hit = o; break; } }
+          if (hit) break;
+        }
+        if (hit) {
+          const cd = 5 + Math.floor(Math.random() * 6);
+          const hitName = hit.kind === 'player' ? 'you' : this.encSubject(hit);
+          this.say(`${this.encSubject(m)} slams into ${hitName}! (${cd} collision.)`);
+          this.tbDamage(m.key, cd, 'collision', 'p', { quiet: true });
+          this.tbDamage(hit.key, cd, 'collision', 'p', { quiet: true });
+          if (this.tbEndCheck()) return true;
+          break;
+        }
+        m.mx = nx; m.my = ny; moved++;
+      }
+      if (moved > 0) this.say(`You shoulder-check ${this.encSubject(m)} — it staggers ${moved} tile${moved > 1 ? 's' : ''}! (Shove)`);
+      else this.say(`${this.encSubject(m)} doesn't budge — something's in the way. (Shove: blocked.)`);
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
+    // BIND (control-tactics 2026-10-14): spend 1 rope + the action on a
+    // CONTROLLED monster → rooted (can't move) and can't wind up telegraphs
+    // for 3 rounds, diminishing by 1 per previous bind on the same monster
+    // (min 1). The rope holds position, not malice — it can still lash out
+    // with basics. This is the stunlock bridge: control → bind → kite, focus,
+    // or work the objective while it strains.
+    // (Accepts any control — stunned, rooted, blinded, hesitating — so the
+    // verbs compose: blind it, then tie it while it can't see you coming.)
+    tbPlayerBind(targetKey) {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      const m = targetKey ? this.tbFighter(targetKey) : null;
+      if (!m || (m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) { this.say('Bind what?'); return false; }
+      if (!((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0)) {
+        this.say(`${this.encSubject(m)} is still fighting — you can't tie up something that's moving freely. (Bind needs a controlled target: stunned, rooted, blinded, or hesitating.)`);
+        return false;
+      }
+      const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
+      if (d > 1) { this.say('Too far to bind. Get adjacent.'); return false; }
+      if ((this.fighterSize(m) || 1) > 1) { this.say(`Too big to hogtie with one rope. (Bind: size-1 monsters only.)`); return false; }
+      if (!this.hasItem || !this.hasItem('rope_50ft')) { this.say('No rope. (Bind needs rope — 1 coil per bind.)'); return false; }
+      if (!this.consumeItem('rope_50ft', 1)) { this.say('The rope slips through your hands. (Bind failed.)'); return false; }
+      const prevBinds = m._bindCount || 0;
+      const rounds = Math.max(1, 3 - prevBinds);
+      m._bindCount = prevBinds + 1;
+      m._bound = rounds;
+      p.acted = true;
+      this.say(`You hogtie ${this.encSubject(m)} while it can't fight back — ${rounds} round${rounds > 1 ? 's' : ''}, it isn't going anywhere and can't wind up for anything big. (Bind: rooted, no telegraphs.${prevBinds ? ' Diminishing — it\'s learning the rope.' : ''})`);
+      this.tbRefreshTelegraphUI();
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
+    // GOAD (control-tactics 2026-10-14): vs a BLINDED monster within 3 tiles
+    // — make a noise. It lurches toward the sound on its next move (one move,
+    // then the trick's spent). Costs the action. The tactic: stand where you
+    // want it — near your tripwire, away from the downed villager, into the
+    // open where the party can see it.
+    tbPlayerGoad(targetKey) {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || p.acted) { this.say('Already acted this turn.'); return false; }
+      const m = targetKey ? this.tbFighter(targetKey) : null;
+      if (!m || (m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) { this.say('Goad what?'); return false; }
+      if (!((m.blind || 0) > 0)) {
+        this.say(`${this.encSubject(m)} can see just fine — it won't fall for a noise. (Goad needs a blinded target.)`);
+        return false;
+      }
+      const d = Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
+      if (d > 3) { this.say('Too far — it can\'t hear you. Get within 3 tiles.'); return false; }
+      m._goadedBy = 'p';
+      p.acted = true;
+      this.say(`You whistle, sharp — ${this.encSubject(m)} cocks its head and lurches toward the sound! (Goaded: its next move comes to you.)`);
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
     tbPlayerEndTurn() {
       const f = this.tbfight;
       if (!f || !this.tbIsPlayerTurn()) return;
@@ -32277,20 +32388,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             : 'Wings tangled — it takes the hit badly. (+50% while grounded)');
         }
       }
-      // OPENINGS (ability-gaps 2026-10-14, Steve: "making a monster stop
-      // should do something when in a party"): a controlled monster
-      // (stunned/blinded/hesitating) is exposed. When the attacker has
-      // allies in the fight (party of 2+), the party piles onto the opening
-      // for +50%. Solo, control just buys time — the party makes it hurt.
-      if (t.kind === 'monster' && final > 0 && ((t.stunned || 0) > 0 || (t.blind || 0) > 0 || (t.hesitate || 0) > 0)) {
+      // OPENINGS (ability-gaps 2026-10-14; control-tactics 2026-10-14 reduced
+      // 50%→25% per Steve: "control must change the board, not the numbers" —
+      // the verbs are the headline now, this is a secondary nod): a controlled
+      // monster (stunned/blinded/hesitating/bound) is exposed. When the
+      // attacker has allies in the fight (party of 2+), the party piles onto
+      // the opening for +25%. Solo, control just buys time — the party makes
+      // it hurt a little more.
+      if (t.kind === 'monster' && final > 0 && ((t.stunned || 0) > 0 || (t.blind || 0) > 0 || (t.hesitate || 0) > 0 || (t._bound || 0) > 0)) {
         try {
           const _f = this.tbfight;
           const _allies = ((_f || {}).fighters || []).filter(x => x && x.alive && !x.fled && (x.kind === 'player' || x.kind === 'villager' || x.kind === 'ally'));
           if (_allies.length >= 2 && !t._openingNoted) {
             t._openingNoted = true;
-            this.say("It's reeling — the party sees the opening and piles on! (+50% vs controlled)");
+            this.say("It's reeling — the party sees the opening and piles on! (+25% vs controlled)");
           }
-          if (_allies.length >= 2) final = Math.round(final * 1.5);
+          if (_allies.length >= 2) final = Math.round(final * 1.25);
         } catch (e) {}
       }
       // IMPALING SCREAM (ability-gaps 2026-10-14): scream_cheese + hunting_spear
@@ -33199,6 +33312,49 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             v._vRaged = true;
             v._vRageRounds = 3;
             this.say(`${v.name}'s eyes go red — the rage takes hold. Next 3 strikes hit twice as hard.`);
+            return true;
+          }
+        }
+      }
+
+      // SHOVE (control-tactics 2026-10-14): villagers shove CONTROLLED
+      // monsters away from the most vulnerable ally. Trigger: adjacent to a
+      // controlled size-1 monster. Protective — the shove goes away from the
+      // lowest-HP ally (or away from the villager if no ally is threatened).
+      {
+        const controlled = liveMonsters.filter(m =>
+          ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0) &&
+          Math.max(Math.abs(m.mx - v.mx), Math.abs(m.my - v.my)) <= 1 &&
+          (this.fighterSize(m) || 1) <= 1);
+        if (controlled.length && !v._vShoved) {
+          // most vulnerable ally (lowest HP fraction), else the villager
+          let protect = v, worstFrac = 2;
+          for (const a of (this.tbfight.fighters || [])) {
+            if (!a.alive || a.fled || a === v) continue;
+            if (a.kind !== 'player' && a.kind !== 'villager' && a.kind !== 'ally') continue;
+            const frac = (a.hp || 0) / Math.max(1, a.maxHp || 1);
+            if (frac < worstFrac) { worstFrac = frac; protect = a; }
+          }
+          const m = controlled[0];
+          let dx = Math.sign(m.mx - protect.mx), dy = Math.sign(m.my - protect.my);
+          if (!dx && !dy) { dx = Math.sign(m.mx - v.mx) || 1; dy = 0; }
+          let moved = 0;
+          for (let i = 0; i < 2; i++) {
+            const nx = m.mx + dx, ny = m.my + dy;
+            if (!this.tbCanOccupy(m, nx, ny)) break;
+            let blockedBy = false;
+            for (const o of this.tbfight.fighters) {
+              if (o === m || !o.alive || o.fled) continue;
+              const tiles = this.fighterTiles(o);
+              for (const t of tiles) { if (t[0] === nx && t[1] === ny) { blockedBy = true; break; } }
+              if (blockedBy) break;
+            }
+            if (blockedBy) break;
+            m.mx = nx; m.my = ny; moved++;
+          }
+          if (moved > 0) {
+            v._vShoved = true;
+            this.say(`${v.name} shoulder-checks ${mname(m)} away from ${protect === v ? 'themselves' : protect.name} — it staggers ${moved} tile${moved > 1 ? 's' : ''}! (Shove)`);
             return true;
           }
         }
@@ -35023,6 +35179,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (m && m.gravityHeld > 0) return null;
       // FREEZE TAG (ability-gaps 2026-10-14): rooted — it cannot step.
       if (m && (m._frozen || 0) > 0) return null;
+      // BIND (control-tactics 2026-10-14): hogtied — the rope holds position.
+      if (m && (m._bound || 0) > 0) return null;
+      // GOAD (control-tactics 2026-10-14): it lurches toward the sound —
+      // the goader's position overrides its intended target, one move.
+      if (m && m._goadedBy) {
+        try {
+          const g = this.tbFighter ? this.tbFighter(m._goadedBy) : null;
+          if (g && g.alive && !g.fled) { tx = g.mx; ty = g.my; }
+        } catch (e) {}
+        m._goadedBy = null;
+      }
       // TRIPWIRE (ability-gaps 2026-10-14): the next step eats dirt.
       const _f = this.tbfight;
       if (m && _f && _f._tripwireSet) {
@@ -35359,6 +35526,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         m._frozen -= 1;
         if (m._frozen <= 0) this.say(`${this.encSubject(m)} shakes off the tag — it can move again. (Freeze Tag worn off.)`);
         else this.say(`${this.encSubject(m)} strains against the tag — rooted! (Freeze Tag: ${m._frozen} rounds left)`);
+      }
+      // BIND (control-tactics 2026-10-14): hogtied — the rope holds for
+      // _bound rounds. It can still act (the rope holds position, not malice)
+      // but it cannot step. (tbStepToward checks _bound and refuses.)
+      // A bound monster also CANNOT WIND UP: big telegraphed attacks need
+      // room to move, and the rope doesn't give it. Any telegraph fizzles.
+      if ((m._bound || 0) > 0) {
+        m._bound -= 1;
+        if (m.telegraph) {
+          m.telegraph = null;
+          this.say(`${this.encSubject(m)} tries to wind up — the rope bites! The attack fizzles. (Bind: no telegraphs while hogtied.)`);
+          try { this.tbRefreshTelegraphUI(); } catch (e) {}
+        }
+        if (m._bound <= 0) this.say(`${this.encSubject(m)} works a claw under the rope — it snaps! It can move again. (Bind worn off.)`);
+        else this.say(`${this.encSubject(m)} strains against the rope — hogtied! (Bind: ${m._bound} rounds left)`);
       }
       // TURNCOAT: it attacks its fellow monster instead of the party. Resolve
       // as a direct strike here — the argument is too convincing for tactics.

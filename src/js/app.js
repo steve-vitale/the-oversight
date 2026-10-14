@@ -16744,6 +16744,15 @@
     const wname = Game.equippedWeapon ? Game.equippedWeapon().name : '';
     const canScream = Game.hasAbility('scream_cheese') && Game.state.scholar.screamDay !== Game.state.scholar.day;
     const hasWell = Game.hasItem && Game.hasItem('gravity_well');
+    // CONTROL VERBS (control-tactics 2026-10-14, Steve: control must change
+    // the board, not the numbers): Shove/Bind/Goad surface only when valid —
+    // contextual, knowledge-gated (you see the button when the situation fits).
+    const isControlled = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
+    const chebTo = (m) => Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my));
+    const shoveable = p ? mons.filter(m => isControlled(m) && chebTo(m) <= 1 && (Game.fighterSize(m) || 1) <= 1) : [];
+    const bindable = p ? mons.filter(m => isControlled(m) && chebTo(m) <= 1 && (Game.fighterSize(m) || 1) <= 1) : [];
+    const hasRope = Game.hasItem && Game.hasItem('rope_50ft');
+    const goadable = p ? mons.filter(m => (m.blind || 0) > 0 && chebTo(m) <= 3) : [];
     // FLIP (speedbump, Steve 2026-10-08): show when a live turtle is adjacent.
     const flippable = p ? mons.some(m => Game.turtleIs && Game.turtleIs(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1) : false;
     const yourTurn = Game.tbIsPlayerTurn();
@@ -16784,6 +16793,9 @@
       ${canScream ? `<button class="self-btn" id="c-scream" ${p.acted ? 'disabled' : ''}>🧀 Scream</button>` : ''}
       ${hasWell ? `<button class="self-btn" id="c-well" ${p.acted ? 'disabled' : ''} title="Gravity well — hold monsters within 3 tiles for 2 turns (one use)">🕳 Well</button>` : ''}
       ${flippable ? `<button class="self-btn" id="c-flip" ${p.acted ? 'disabled' : ''} title="Flip the turtle — strength check. Upside down: no armor, can't snap, 3 turns. Fail and it snaps you.">🐢 Flip</button>` : ''}
+      ${shoveable.length ? `<button class="self-btn" id="c-shove" ${p.acted ? 'disabled' : ''} title="Shove a controlled monster 2 tiles away from you — into its friends, away from yours. (Needs: stunned/rooted/blinded/hesitating, adjacent, size-1.)">🤚 Shove${shoveable.length > 1 ? '…' : ''}</button>` : ''}
+      ${(bindable.length && hasRope) ? `<button class="self-btn" id="c-bind" ${p.acted ? 'disabled' : ''} title="Hogtie a controlled monster — 1 rope, rooted 3 rounds (diminishing), can't wind up telegraphs. It can still lash out, but it isn't going anywhere.">🪢 Bind${bindable.length > 1 ? '…' : ''}</button>` : ''}
+      ${goadable.length ? `<button class="self-btn" id="c-goad" ${p.acted ? 'disabled' : ''} title="Make a noise — the blinded monster lurches toward the sound on its next move. Stand where you want it.">📣 Goad${goadable.length > 1 ? '…' : ''}</button>` : ''}
       ${(Game.sigCombatButtonsHTML ? Game.sigCombatButtonsHTML(mons, p) : '')}
       ${Game.sigW3cCombatButtons ? Game.sigW3cCombatButtons(mons, p) : ''}
       <button class="self-btn" id="c-shout" ${p.acted ? 'disabled' : ''} title="Bellow — scatter noise-fearing monsters (2/fight)">📢 Shout</button>
@@ -16895,6 +16907,35 @@
     on('c-wait', () => { Game.tbPlayerWait(); rerender(); });
     on('c-study', () => { Game.tbPlayerStudy(); rerender(); });
     on('c-scream', () => { Game.useAbility('scream_cheese', 'scream'); rerender(); });
+    // CONTROL VERBS (control-tactics 2026-10-14): Shove/Bind/Goad with the
+    // same target-picker pattern as Strike.
+    const ctrlTargets = (list) => list.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled);
+    on('c-shove', () => {
+      const tf = Game.tbfight; if (!tf) return;
+      const p = Game.tbFighter('p');
+      const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m._bound || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
+      const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
+      if (!list.length) return;
+      if (list.length === 1) { Game.tbPlayerShove(list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '🤚 Shove which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerShove(t.key); rerender(); } });
+    });
+    on('c-bind', () => {
+      const tf = Game.tbfight; if (!tf) return;
+      const p = Game.tbFighter('p');
+      const isC = (m) => ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0);
+      const list = ctrlTargets(tf.fighters).filter(m => isC(m) && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 1 && (Game.fighterSize(m) || 1) <= 1);
+      if (!list.length) return;
+      if (list.length === 1) { Game.tbPlayerBind(list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '🪢 Bind which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerBind(t.key); rerender(); } });
+    });
+    on('c-goad', () => {
+      const tf = Game.tbfight; if (!tf) return;
+      const p = Game.tbFighter('p');
+      const list = ctrlTargets(tf.fighters).filter(m => (m.blind || 0) > 0 && Math.max(Math.abs(m.mx - p.mx), Math.abs(m.my - p.my)) <= 3);
+      if (!list.length) return;
+      if (list.length === 1) { Game.tbPlayerGoad(list[0].key); rerender(); return; }
+      enterTargeting({ prompt: '📣 Goad which?', targets: monsterTargets(list), onPick: (t) => { Game.tbPlayerGoad(t.key); rerender(); } });
+    });
     on('c-shout', () => { Game.tbPlayerShout(); rerender(); });
     on('c-rally', () => { Game.tbPlayerRally(); rerender(); });
     on('c-warcry', () => { Game.tbPlayerWarCry(); rerender(); });
