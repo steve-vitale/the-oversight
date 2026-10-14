@@ -166,7 +166,7 @@ const REAL_RANDOM = Math.random;
   npcs = (v.roster || []).filter(id => id !== me);
   const AC = npcs[0];
   for (const id of npcs) v.trust[id] = 10;
-  v.trust[me] = 10; // trustInPlayer aggregate slot
+  v.trust[me] = 10; // (trustInPlayer is now the roster average of v.trust[npc], all 10 above — 2026-10-14)
   const cs8 = { id: 'c_r7c', accuser: AC, target: me, charge: 'theft', fabricated: false };
   try { Game.seedAccuserStory(cs8); } catch (e) { console.log('THREW T8:'); fails.push('T8 seedAccuserStory threw: ' + e.message); }
   check('T8 accusation: trustInPlayer aggregate untouched by words', Game.trustInPlayer() === 10, `trustInPlayer=${Game.trustInPlayer()}`);

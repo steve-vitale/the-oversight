@@ -4076,8 +4076,19 @@
     }
     return best;
   },
+  // The village's trust in the player: the roster average of each villager's
+  // trust slot (v.trust[vid] = that villager's trust in you), the same source
+  // justiceHeat reads. The old read was v.trust[playerId] — a slot seeded at
+  // 15 that ordinary play never moves, so earned trust never reached the moot.
   trustInPlayer() {
-    const t = (this.state.village.trust || {})[this.villagerId];
+    const v = this.state.village;
+    const roster = (v.roster || []).filter(id => id !== this.villagerId);
+    if (!roster.length) return 10;
+    return roster.reduce((s, id) => s + this.jurorTrust(id), 0) / roster.length;
+  },
+  // One villager's trust in the player (default 10, as justiceHeat).
+  jurorTrust(vid) {
+    const t = (this.state.village.trust || {})[vid];
     return t == null ? 10 : t;
   },
   chargeLine(charge) {
@@ -4244,7 +4255,6 @@
   // belief polarity: negative = guilty (of the accused), positive = acquit.
   // The accuser's story landed first — the village starts suspicious.
   initPlayerCaseBelief(c) {
-    const tp = this.trustInPlayer();
     // PRIOR WARNINGS WEIGH THE CASE (mem-wire 2026-10-13; Steve: "warned and
     // still doing it" vs "never warned"): the village remembers who it called
     // out. A theft case against someone already warned for theft hits harder;
@@ -4263,7 +4273,7 @@
     } catch (e) {}
     for (const vid of this.npcIds()) {
       let b = -20;
-      b += (tp - 25) * 0.8;                              // they trust you → doubt it
+      b += (this.jurorTrust(vid) - 25) * 0.8;            // they trust you → doubt it
       b -= this.pairAffinity(vid, c.accuser) * 0.5;      // they like the accuser → believe it
       b += this.pairAffinity(vid, this.villagerId) * 0.4; // personal bond with you
       if (c.charge === 'theft') b += warnedTheft ? -15 : 12;
