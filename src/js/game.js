@@ -6515,7 +6515,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
-        try { this.recordWaveKill(m.id, vid); } catch (e) {}
+        try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
         try {
@@ -17306,7 +17306,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
-        try { this.recordWaveKill(m.id, vid); } catch (e) {}
+        try { this.recordWaveKill(m.id, vid, 'wild', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
         // CORPSE PERSISTS (break-it 2026-10-09): a villager's kill is a real
         // death — the carcass stays on the tile (lootable, rottable), the
         // same carcass your kill leaves. The old path evaporated the body:
@@ -28062,7 +28062,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the scholar's own id for player kills. Villager kills of an as-yet
     // unreported type queue the killer's tale (finding #28): the tale is the
     // report the naming debate waits on.
-    recordWaveKill(monsterId, killerVid) {
+    recordWaveKill(monsterId, killerVid, via, detail) {
       const mdef = this.data.monsters.find(m => m.id === monsterId);
       if (!mdef) return;
       const wave = mdef.wave || 1;
@@ -28115,6 +28115,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Kills feed the unlock gates from every path (player combat AND
       // villager field fights) — the beat must land whichever path earned it.
       try { this.checkWaveUnlockBeat(); } catch (e) {}
+      // KILL ATTRIBUTION (2026-10-13): channel tag for telemetry — which
+      // system scored this kill ('patrol' | 'wild' | 'aid-crisis' |
+      // 'contest' | 'agency' | 'player' | 'unknown'). Purely additive: no
+      // game logic reads these keys. Gated with Game._attrKills (default
+      // true) so the honesty control can run the identical sim with logging
+      // off and prove byte-identical state.
+      try {
+        if (this._attrKills !== false) {
+          const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
+          if (_log.length < 1000) {
+            _log.push({
+              d: (this.state.scholar || {}).day || 0,
+              mid: monsterId, w: wave,
+              by: killerVid || null, via: via || 'unknown',
+              trick: detail || null,
+            });
+          }
+          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+          const _k = (via || 'unknown') + '.w' + wave;
+          _byCh[_k] = (_byCh[_k] || 0) + 1;
+        }
+      } catch (e) {}
     },
 
     // WAVE RATIO (Steve 2026-10-06): which wave a fresh spawn belongs to.
@@ -37929,7 +37951,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const _bk = this.tbSnakeLineageKey(m);
             if (_seenKills.has(_bk)) continue;
             _seenKills.add(_bk);
-            this.recordWaveKill(m.mdef.id, this.villagerId);
+            this.recordWaveKill(m.mdef.id, this.villagerId, 'player');
           }
         }
       }

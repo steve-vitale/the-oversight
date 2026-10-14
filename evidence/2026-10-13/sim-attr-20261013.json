@@ -1,0 +1,224 @@
+{
+ "label": "attr-20261013",
+ "runs": [
+  {
+   "policy": "competent",
+   "seed": 11,
+   "expectW3": 1
+  },
+  {
+   "policy": "competent",
+   "seed": 33,
+   "expectW3": 1
+  },
+  {
+   "policy": "belongseek",
+   "seed": 33,
+   "expectW3": 1
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 88,
+   "expectW3": 3
+  }
+ ],
+ "days": 180,
+ "reproduced": true,
+ "totalW3": 6,
+ "w3WithTrick": 0,
+ "attrTable": [
+  {
+   "seed": "competent/s11",
+   "day": 71,
+   "monster": "redactor",
+   "killer": "chloe_dubois",
+   "channel": "wild",
+   "trick": null
+  },
+  {
+   "seed": "competent/s33",
+   "day": 106,
+   "monster": "ad_break",
+   "killer": "jorge_silva",
+   "channel": "player",
+   "trick": null
+  },
+  {
+   "seed": "belongseek/s33",
+   "day": 78,
+   "monster": "spool",
+   "killer": "gen_e6xz60u",
+   "channel": "player",
+   "trick": null
+  },
+  {
+   "seed": "leadcourt/s88",
+   "day": 86,
+   "monster": "ad_break",
+   "killer": "gen_myk18l9",
+   "channel": "player",
+   "trick": null
+  },
+  {
+   "seed": "leadcourt/s88",
+   "day": 91,
+   "monster": "terms_of_service",
+   "killer": "gen_myk18l9",
+   "channel": "player",
+   "trick": null
+  },
+  {
+   "seed": "leadcourt/s88",
+   "day": 96,
+   "monster": "callback",
+   "killer": "gen_myk18l9",
+   "channel": "player",
+   "trick": null
+  }
+ ],
+ "rows": [
+  {
+   "label": "attr-20261013",
+   "policy": "competent",
+   "seed": 11,
+   "days": 119,
+   "endReason": "village-lost",
+   "waveKills": {
+    "1": 19,
+    "2": 6,
+    "3": 1
+   },
+   "w3ledger": 1,
+   "expectW3": 1,
+   "reproduced": true,
+   "attr": {
+    "w3log": [
+     {
+      "day": 71,
+      "monster": "redactor",
+      "killer": "chloe_dubois",
+      "channel": "wild",
+      "trick": null
+     }
+    ],
+    "w3byChannel": {
+     "wild": 1
+    },
+    "trickTally": {
+     "shout": 2,
+     "wait:buffering-still": 2
+    }
+   }
+  },
+  {
+   "label": "attr-20261013",
+   "policy": "competent",
+   "seed": 33,
+   "days": 112,
+   "endReason": "village-lost",
+   "waveKills": {
+    "1": 10,
+    "2": 10,
+    "3": 1
+   },
+   "w3ledger": 1,
+   "expectW3": 1,
+   "reproduced": true,
+   "attr": {
+    "w3log": [
+     {
+      "day": 106,
+      "monster": "ad_break",
+      "killer": "jorge_silva",
+      "channel": "player",
+      "trick": null
+     }
+    ],
+    "w3byChannel": {
+     "player": 1
+    },
+    "trickTally": {
+     "shout": 5,
+     "wait:spool-record": 1
+    }
+   }
+  },
+  {
+   "label": "attr-20261013",
+   "policy": "belongseek",
+   "seed": 33,
+   "days": 95,
+   "endReason": "village-lost",
+   "waveKills": {
+    "1": 16,
+    "2": 9,
+    "3": 1
+   },
+   "w3ledger": 1,
+   "expectW3": 1,
+   "reproduced": true,
+   "attr": {
+    "w3log": [
+     {
+      "day": 78,
+      "monster": "spool",
+      "killer": "gen_e6xz60u",
+      "channel": "player",
+      "trick": null
+     }
+    ],
+    "w3byChannel": {
+     "player": 1
+    },
+    "trickTally": {
+     "shout": 5
+    }
+   }
+  },
+  {
+   "label": "attr-20261013",
+   "policy": "leadcourt",
+   "seed": 88,
+   "days": 99,
+   "endReason": "village-lost",
+   "waveKills": {
+    "1": 14,
+    "2": 4,
+    "3": 3
+   },
+   "w3ledger": 3,
+   "expectW3": 3,
+   "reproduced": true,
+   "attr": {
+    "w3log": [
+     {
+      "day": 86,
+      "monster": "ad_break",
+      "killer": "gen_myk18l9",
+      "channel": "player",
+      "trick": null
+     },
+     {
+      "day": 91,
+      "monster": "terms_of_service",
+      "killer": "gen_myk18l9",
+      "channel": "player",
+      "trick": null
+     },
+     {
+      "day": 96,
+      "monster": "callback",
+      "killer": "gen_myk18l9",
+      "channel": "player",
+      "trick": null
+     }
+    ],
+    "w3byChannel": {
+     "player": 3
+    },
+    "trickTally": {}
+   }
+  }
+ ],
+ "ms": 126807
+}

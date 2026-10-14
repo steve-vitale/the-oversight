@@ -78,6 +78,22 @@
   var MAX_ROUNDS = 15;
 
   var methods = {
+    // trickSummary(rec): compact trick-execution summary for the kill log.
+    // Prefers rec.trickLog (every executed trick, in order); falls back to
+    // the legacy per-type flags. Used by recordWaveKill call sites that hold
+    // the fight rec — links a kill to the counterplay that produced it
+    // (KILL ATTRIBUTION 2026-10-13).
+    trickSummary: function (rec) {
+      try {
+        if (!rec) return null;
+        if (rec.trickLog && rec.trickLog.length) return rec.trickLog.join(',');
+        var t = [];
+        if (rec.trickShouts) t.push('shoutx' + rec.trickShouts);
+        if (rec.trickStill) t.push('still');
+        if (rec.trickDance) t.push('dance');
+        return t.length ? t.join(',') : null;
+      } catch (e) { return null; }
+    },
     // villagerTrickAction(vid, mdef, fctx) -> {type, why} or null
     // COUNTER EXECUTION (2026-10-13): the village knows this beast's trick —
     // perform it. Same beats the player gets, same costs, same caps (parity,
@@ -785,6 +801,20 @@
               trickAct = this.villagerTrickAction(vid, mdef, { round: round, vHp: vHp, vHpMax: vHpMax, lead: lead, rec: rec, vp: vp });
             } catch (e) { trickAct = null; }
             if (trickAct) {
+              // KILL ATTRIBUTION (2026-10-13): per-run trick-execution tally.
+              // Non-persisted (Game._trickTally), gated with _attrKills — never
+              // touches RNG, logic, or save state.
+              try {
+                if (this._attrKills !== false) {
+                  var _tt = this._trickTally || (this._trickTally = {});
+                  var _tk = trickAct.type === 'wait' ? ('wait:' + (trickAct.why || 'x')) : trickAct.type;
+                  _tt[_tk] = (_tt[_tk] || 0) + 1;
+                }
+              } catch (e) {}
+              // Per-fight trick log on the rec (ungated, like the other rec
+              // flags — it's the fight record, not telemetry). trickSummary
+              // reads this to link kills to the counterplay involved.
+              try { (rec.trickLog || (rec.trickLog = [])).push(trickAct.type === 'wait' ? ('wait:' + (trickAct.why || 'x')) : trickAct.type); } catch (e) {}
               if (trickAct.type === 'shout') {
                 rec.trickShouts = (rec.trickShouts || 0) + 1;
                 rec.trickDisrupt = 1; // the monster's next attack is halved — the note dies mid-croak

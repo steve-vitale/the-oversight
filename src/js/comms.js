@@ -651,7 +651,7 @@
       // aid-crisis kill. (aidFight is currently dormant — no production
       // callers — so this is gap-closing, pacing-neutral by construction.)
       if (rec && rec.outcome === 'vKill') {
-        try { this.recordWaveKill(mdef && mdef.id, vid); } catch (e2) {}
+        try { this.recordWaveKill(mdef && mdef.id, vid, 'aid-crisis', this.trickSummary ? this.trickSummary(rec) : null); } catch (e2) {}
       }
       if (crisis && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
         this.say('The teeth break. The door holds — with ' + (present.length ? present.map(function (q) { return q.leader; }).join(' and ') + ' standing in Haven\'s dirt' : 'nobody\'s help but Haven\'s own') + '.');
