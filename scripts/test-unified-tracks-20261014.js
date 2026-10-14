@@ -52,8 +52,10 @@ function resetPlayer(Game) {
   T.ok('tracks.json loaded at init (Game.data.tracks)', !!(Game.data.tracks && Array.isArray(Game.data.tracks.tracks)));
   T.ok('five tracks incl. strange', JSON.stringify(Game.trackData().tracks) === JSON.stringify(['combat', 'field', 'social', 'craft', 'strange']));
   T.ok('villager thresholds = data thresholds', JSON.stringify(Game.trackThresholds('villager')) === JSON.stringify(DATA.thresholds));
-  T.ok('player thresholds = data thresholds x playerScale',
-    JSON.stringify(Game.trackThresholds('player')) === JSON.stringify(DATA.thresholds.map(t => Math.max(1, Math.round(t * DATA.playerScale)))));
+  // PARITY (2026-10-14, Steve: "Villagers and players should get the same
+  // XP"): one scale — the player's thresholds ARE the data thresholds.
+  T.ok('player thresholds = data thresholds (one scale, no playerScale)',
+    JSON.stringify(Game.trackThresholds('player')) === JSON.stringify(DATA.thresholds) && DATA.playerScale === undefined);
   T.ok('NPC_ABILITY_KITS is the data kit (one source)', Game.NPC_ABILITY_KITS === Game.data.tracks.kits);
   T.ok('NPC_XP_THRESHOLDS reads the data', JSON.stringify(Game.NPC_XP_THRESHOLDS) === JSON.stringify(DATA.thresholds));
   const kitIds = [].concat(...Object.values(DATA.kits));
@@ -263,7 +265,8 @@ function resetPlayer(Game) {
     const src = K.readSrc('src/js/game.js') + K.readSrc('src/js/contests.js') + K.readSrc('src/js/encounters.js') + K.readSrc('src/js/conversation.js') +
       K.readSrc('src/js/food.js') + K.readSrc('src/js/ledger.js') + K.readSrc('src/js/corpses.js') + K.readSrc('src/js/progression.js');
     for (const d of Object.keys(DATA.deeds)) {
-      T.ok(`deed "${d}" has a game call site`, src.includes(`noteDeed('${d}')`) || src.includes(`noteDeed && this.noteDeed('${d}')`));
+      // PARITY (2026-10-14): villager sites credit through creditDeed(who, id)
+      T.ok(`deed "${d}" has a game call site`, src.includes(`noteDeed('${d}')`) || src.includes(`noteDeed && this.noteDeed('${d}')`) || new RegExp(`creditDeed\\([^;]*'${d}'`).test(src));
     }
     T.ok('tracks.js loads from index.html', K.readSrc('index.html').includes('src/js/tracks.js'));
   }

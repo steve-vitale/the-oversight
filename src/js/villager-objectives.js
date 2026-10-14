@@ -777,6 +777,8 @@
             if (lesson && lesson.taught) {
               // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
               try { this.bumpTrust(rid, 1, 'taught a villager their craft'); this.bumpTrust(lesson.learner, 1, 'learned a craft from a villager'); } catch (e) {}
+              // PARITY (2026-10-14): a lesson that landed is the player's teaching deed.
+              try { if (this.creditDeed) this.creditDeed(rid, 'teaching'); } catch (eT) { console.warn('[tracks] teach chore deed', eT); }
               if (playerAtHaven) {
                 // LONGSIM agency r5 (2026-10-12): the spoken line varies off
                 // the lesson's NEED (r4 recorded it on the lesson result;

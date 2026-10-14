@@ -11,7 +11,8 @@
 //   - villagerTrackLevel(xp) -> villager level for an xp total
 //   - playerTracks() -> scholar.tracks {track: {xp, level}} (seeded with the occupation lean)
 //   - occupationLean(occId) -> {track: xp} from characterGen trackLean
-//   - noteDeed(deedId, trackOverride) -> player track XP from the deed table (per-day caps)
+//   - creditDeed(who, deedId, trackOverride) -> track XP from the deed table for whoever did it ('player' or a villager id); the same n and the same per-day cap per doer
+//   - noteDeed(deedId, trackOverride) -> creditDeed('player', ...)
 //   - convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic
 //   - levelUpOffers(track) -> next unheld magic abilities of the track's kit (offerSize)
 //   - pumpLevelUps() -> opens the next queued level-up sheet when none is pending
@@ -21,6 +22,7 @@
 //   - trackSummary() -> [{track, label, icon, level, xp, prev, next}] for the character sheet
 //   - npcLearnSkill(vid, abilityId) / npcKnowsSkill(vid, skillId) / npcOwnedIds(vid)
 //   - migrateNpcLanes() -> moves skill-lane ids out of villager ability slots (idempotent)
+//   - migrateTrackScale() -> old saves: villager XP rescaled from the old villager thresholds to the one shared scale (idempotent, v.trackScale)
 // consumes:
 //   - Game.data.tracks, Game.data.abilities, Game.data.characterGen
 //   - state.village.npcXp, state.village.npcAbilities, state.village.npcSkills
@@ -46,7 +48,7 @@
     _warned[k] = true;
     console.warn('[tracks] ' + msg + (e ? ': ' + (e && e.message || e) : ''));
   }
-  const FALLBACK = { tracks: [], thresholds: [3, 8, 16, 32, 64], playerScale: 1, offerSize: 3, maxAbilities: 6, kits: {}, skills: {}, deeds: {}, deedConversions: {}, labels: {}, icons: {}, nouns: {} };
+  const FALLBACK = { tracks: [], thresholds: [18, 48, 96, 192, 384], offerSize: 3, maxAbilities: 6, kits: {}, skills: {}, deeds: {}, deedConversions: {}, labels: {}, icons: {}, nouns: {} };
   const emptyRec = (T) => {
     const r = { granted: {}, skilled: {} };
     for (const t of T.tracks) { r[t] = 0; r.granted[t] = 0; r.skilled[t] = 0; }
@@ -62,14 +64,11 @@
       return FALLBACK;
     },
 
+    // ONE XP SCALE (parity 2026-10-14): the same thresholds for the player
+    // and every villager. `who` is accepted for old callers and ignored.
     trackThresholds(who) {
       const T = this.trackData();
-      const base = T.thresholds || FALLBACK.thresholds;
-      if (who === 'player') {
-        const k = T.playerScale || 1;
-        return base.map(t => Math.max(1, Math.round(t * k)));
-      }
-      return base.slice();
+      return (T.thresholds || FALLBACK.thresholds).slice();
     },
 
     trackLevelFor(xp, who) {
@@ -92,7 +91,8 @@
     npcXp(vid) {
       const T = this.trackData();
       try {
-        const v = this.state.village; v.npcXp = v.npcXp || {};
+        const v = this.state.village;
+        if (!v.npcXp) { v.npcXp = {}; v.trackScale = (T.thresholds || [1])[0]; } // new records are on today's scale
         let x = v.npcXp[vid];
         if (!x) {
           x = v.npcXp[vid] = emptyRec(T);
@@ -114,7 +114,7 @@
     },
 
     // playerTracks(): scholar.tracks, seeded on first touch with the bearer's
-    // occupation lean (scaled like the thresholds, clamped below the first).
+    // occupation lean (clamped below the first threshold, same as a villager's).
     playerTracks() {
       const T = this.trackData();
       const s = this.state.scholar;
@@ -125,7 +125,7 @@
         const lean = this.occupationLean(occId);
         const first = this.trackThresholds('player')[0] || 1;
         for (const t of T.tracks) {
-          const xp = Math.max(0, Math.min(first - 1, Math.round((lean[t] || 0) * (T.playerScale || 1))));
+          const xp = Math.max(0, Math.min(first - 1, Math.round(lean[t] || 0)));
           s.tracks[t] = { xp, level: 0 };
         }
       }
@@ -264,26 +264,71 @@
       return moved;
     },
 
-    // --- player deeds ---
-    // noteDeed(deedId, trackOverride): the deed table in tracks.json maps a
-    // deed to {track, n, perDay}. Chores are capped per day: decisions, not grinding.
-    noteDeed(deedId, trackOverride) {
+    // migrateTrackScale(): OLD SAVES. Before the one XP scale (parity
+    // 2026-10-14) villager XP sat on thresholds [3, 8, 16, 32, 64] while the
+    // player's were x6. Villager records are rescaled to today's thresholds
+    // (ratio of the first thresholds) so their earned levels hold; the
+    // player's XP was already on this scale. Sheets already granted stay
+    // granted (x.granted). Idempotent (v.trackScale).
+    migrateTrackScale() {
+      try {
+        const v = (this.state && this.state.village) || {};
+        const T = this.trackData();
+        const first = (T.thresholds || [1])[0];
+        if (!v.npcXp) return 0;
+        if (v.trackScale === first) return 0;
+        const ratio = first / (v.trackScale || 3);
+        let n = 0;
+        for (const vid of Object.keys(v.npcXp)) {
+          const x = v.npcXp[vid];
+          if (!x) continue;
+          for (const t of T.tracks) if (x[t]) { x[t] = Math.round(x[t] * ratio); n++; }
+        }
+        // a save already on the one scale, retuned since: the player moves too
+        const s = this.state.scholar || {};
+        if (v.trackScale && s.tracks) {
+          for (const t of T.tracks) if (s.tracks[t] && s.tracks[t].xp) { s.tracks[t].xp = Math.round(s.tracks[t].xp * ratio); n++; }
+        }
+        v.trackScale = first;
+        return n;
+      } catch (e) { warn('migrateTrackScale', e); return 0; }
+    },
+
+    // --- deeds: ONE table for everyone ---
+    // creditDeed(who, deedId, trackOverride): the deed table in tracks.json
+    // maps a deed to {track, n, perDay}. Whoever did it — the player or a
+    // villager — gets the same n under the same per-day cap (parity
+    // 2026-10-14: same deed, same XP). Chores are capped per day: decisions,
+    // not grinding. The bearer's villager id is the player.
+    creditDeed(who, deedId, trackOverride) {
       try {
         const T = this.trackData();
         const d = (T.deeds || {})[deedId];
         if (!d) { warn('unknown deed "' + deedId + '"'); return 0; }
+        if (!who || this.over) return 0;
+        const isPlayer = who === 'player' || (this.villagerId && who === this.villagerId);
         const s = this.state.scholar;
-        if (!s || this.over) return 0;
+        if (!s) return 0;
         if (d.perDay) {
           const day = s.day || 0;
-          s.deedDay = s.deedDay || {};
-          const rec = s.deedDay[deedId];
-          if (!rec || rec.day !== day) s.deedDay[deedId] = { day, n: 0 };
-          if (s.deedDay[deedId].n >= d.perDay) return 0;
-          s.deedDay[deedId].n++;
+          let book;
+          if (isPlayer) { s.deedDay = s.deedDay || {}; book = s.deedDay; }
+          else {
+            const v = this.state.village || (this.state.village = {});
+            v.npcDeedDay = v.npcDeedDay || {};
+            book = v.npcDeedDay[who] = v.npcDeedDay[who] || {};
+          }
+          const rec = book[deedId];
+          if (!rec || rec.day !== day) book[deedId] = { day, n: 0 };
+          if (book[deedId].n >= d.perDay) return 0;
+          book[deedId].n++;
         }
-        return this.gainTrackXP('player', trackOverride || d.track, d.n || 1, deedId);
-      } catch (e) { warn('noteDeed', e); return 0; }
+        return this.gainTrackXP(isPlayer ? 'player' : who, trackOverride || d.track, d.n || 1, deedId);
+      } catch (e) { warn('creditDeed', e); return 0; }
+    },
+
+    noteDeed(deedId, trackOverride) {
+      return this.creditDeed('player', deedId, trackOverride);
     },
 
     // convertDeedToTrackXP(key, abilityId): a trial/practice deed that used to
@@ -396,6 +441,7 @@
     Game.load = function () {
       const r = _load.apply(this, arguments);
       try { if (r !== false) this.migrateNpcLanes(); } catch (e) { warn('load migrate', e); }
+      try { if (r !== false) this.migrateTrackScale(); } catch (e) { warn('load scale migrate', e); }
       return r;
     };
   }
