@@ -104,5 +104,43 @@
       ],
       "months": ["dry", "dry", "dry", "dry", "wet", "wet", "wet", "wet", "wet", "dry_hot", "dry_hot", "dry"]
     }
+  },
+  "talk": {
+    "_note": "WHERE ARE WE (src/js/whereAreWe.js). What a villager says when asked where we are / what season it is. It depends on THEIR familiarity with the landing region (Game.familiarityTier of their origin): local -> they know (player learns it, level 2); visitor -> a rough guess (level 1, the season may be one off near a boundary); stranger -> they don't know (no change). Lines resolve most specific first: calendars[calendarId].seasons[id] -> seasons[id]; regions[id].local -> regionLocal; families[climateFamily] -> familyDefault. Slots: {region}/{Region} (display name), {rough}/{Rough} (the family's rough description). A tier-2 line must name the truth. Muse: add regional voice here, not in code. Steve 2026-10-14: 'Okay add season line but that's a small knowledge unlock as you speak to people. Where we are in the world becomes part of conversation.'",
+    "askLabels": ["\"Where do you think we are?\"", "\"What season is it here, do you think?\"", "\"Any idea where they dropped us?\""],
+    "moreLabels": ["\"What does that mean for us?\"", "\"So what's coming?\""],
+    "seasonLabels": { "spring": "Spring", "summer": "Summer", "fall": "Autumn", "winter": "Winter", "cool": "The cool season", "hot": "The hot season", "dry": "The dry", "wet": "The wet", "dry_cool": "The cool dry", "dry_hot": "The hot dry" },
+    "seasons": {
+      "spring": { "known": ["\"Spring. Early greens are up. The hungry season's ending.\"", "\"Spring. The sap's moving. Anyone from here knows that smell.\""], "late": ["\"Late spring. Summer's right behind it.\""], "guess": ["\"Feels like spring to me. Could be wrong.\""] },
+      "summer": { "known": ["\"High summer. Long light, short tempers.\"", "\"Summer. Berries soon, and storms with them.\""], "late": ["\"Summer's wearing out. Fall's coming. Get the nuts in.\""], "guess": ["\"Summer, I'd say. It's warm enough.\""] },
+      "fall": { "known": ["\"Fall. Leaves are turning. That's the harvest clock.\"", "\"Autumn. Nuts are dropping. Fatten up while you can.\""], "late": ["\"Late fall. Winter's coming, and it's long here.\""], "guess": ["\"Autumn, maybe? The light's going thin.\""] },
+      "winter": { "known": ["\"Winter. Stored food or nothing, that's how it goes here.\"", "\"Deep winter. Nothing grows till the thaw.\""], "late": ["\"Winter's back is broken. The thaw's close.\""], "guess": ["\"Winter, or near it. My bones say so.\""] },
+      "cool": { "known": ["\"The cool season. The kind days. Use them.\""], "late": ["\"The cool's almost done. The heat comes next.\""], "guess": ["\"The cool time, I think. It'll get hotter.\""] },
+      "hot": { "known": ["\"The hot season. Work early, rest at noon.\""], "late": ["\"The heat breaks soon. Not soon enough.\""], "guess": ["\"Hot season, I'd guess. Feels like it.\""] },
+      "dry": { "known": ["\"The dry. Water first, everything else after.\""], "late": ["\"End of the dry. The wet's coming, you can smell it.\""], "guess": ["\"Dry season, I think. Somewhere in it.\""] },
+      "wet": { "known": ["\"The wet. Everything grows, everything rots.\""], "late": ["\"The wet's thinning out. Dry's next.\""], "guess": ["\"The rains? Feels like the wet to me.\""] },
+      "dry_cool": { "known": ["\"The cool dry. Herds walk to water.\""], "late": ["\"The cool dry's ending. Hot and dry next.\""], "guess": ["\"Cool and dry. That season, I'd say.\""] },
+      "dry_hot": { "known": ["\"The hot dry. Before the rains break.\""], "late": ["\"Hot dry's nearly done. The wet's coming.\""], "guess": ["\"The hot dry, maybe. Hard to say.\""] }
+    },
+    "calendars": {},
+    "regionLocal": ["\"This is {region}. I'd know it anywhere.\"", "\"{Region}. I grew up with country like this.\""],
+    "regions": {
+      "na_eastern_woodlands": { "name": "Eastern Woodlands", "local": ["\"These are the eastern woods. Oak, hickory, creeks. I grew up two valleys from trees like these.\"", "\"The Eastern Woodlands. Same oaks I climbed as a kid. They dropped me home.\""] }
+    },
+    "familyDefault": { "rough": "somewhere I don't know", "visitor": ["\"Somewhere like home, but not home. {Rough}.\""] },
+    "families": {
+      "temperate_humid": { "rough": "big woods, real winters", "visitor": ["\"Somewhere with big woods and real winters. Like home, but the trees are wrong.\"", "\"Four seasons, broadleaf woods. Not my woods though.\""] },
+      "grassland": { "rough": "open grass country", "visitor": ["\"Open grass country. Could be a lot of places.\""] },
+      "mediterranean": { "rough": "warm, dry summers", "visitor": ["\"Somewhere warm with dry summers. South, maybe.\""] },
+      "boreal": { "rough": "far north, pine country", "visitor": ["\"Far north. Pine and long dark. Not my north though.\""] },
+      "arid": { "rough": "dry country", "visitor": ["\"Desert country. I know dry when I feel it. Not which dry.\""] },
+      "dry_tropical": { "rough": "hot savanna", "visitor": ["\"Savanna, somewhere hot. The grass tells me that much.\""] },
+      "tropical_wet": { "rough": "somewhere hot and wet", "visitor": ["\"Somewhere warm, south maybe. Rain like this I know.\""] },
+      "tropical_monsoon": { "rough": "monsoon country", "visitor": ["\"Monsoon country. I'd bet on that, not on where.\""] },
+      "highland": { "rough": "high country", "visitor": ["\"High up. Thin air. Somewhere in the mountains.\""] },
+      "subtropical_dry": { "rough": "warm scrub country", "visitor": ["\"Warm, dry scrub. Somewhere south, I think.\""] }
+    },
+    "stranger": ["\"Where are we? I couldn't tell you. Nothing here grows where I'm from.\"", "\"Your guess is as good as mine. The sky's the same, that's all I know.\"", "\"Don't ask me. I'm still learning which way the sun sets here.\""],
+    "notes": ["\"{Note}\"", "\"Here? {Note}\""]
   }
 }
