@@ -249,3 +249,26 @@ Full rows are in `godpath-buff-sweep.json`.
   true before these changes.
 - `test-deterministic-clock` timed out in the full `check.js` run under load.
   It passes on its own (6/6) and is on the known-flaky list.
+
+## NEEDS-STEVE (not answered in STEVE-ANSWERS.md)
+
+1. **Class diversity needs a lever beyond kit order.** Re-ordering the kits
+   can't get past about 8 of 20 subclasses without costing lives. Paths are
+   decided by the lifeseed first abilities and by which tracks level, mostly
+   field and craft. Two options:
+   - A **job → path lean**: a nurse's sheets lean caregiver, a cop's lean
+     shieldbearer. It fits "Gods are rough representatives of what starts out
+     as jobs".
+   - **Per-person sheet variety**: each person sees 3 of the next 6 kit
+     entries, not the same next 3.
+
+   Which, if either?
+2. **The payoff from any track (`offers.payoffAnyTrack`).** Once the System
+   names a class, it offers that class's payoff on any level-up. Keep it?
+3. **The lived-in deed (`deedClassDays` 10).** It sits beside the synergy
+   deed. Is "held the class for 10 days" a deed in your sense?
+4. **Villager power has a structural ceiling.** Villagers average about 1.5
+   abilities each, so buffing abilities barely moves village survival. The
+   real lever is how many abilities villagers get: per-deed XP, or the
+   per-day deed caps that a villager's single duty hits. That also moves the
+   player off "about 8 natural level ups". OK to raise for everyone?
