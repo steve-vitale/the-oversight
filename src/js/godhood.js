@@ -504,6 +504,12 @@
     } catch (e) {}
     return beats;
   }
+  // hintBeat(game, ghId): the knowledge-gated hint when close but not complete.
+  // Fires once per godhood (scholar.godhood.hinted).
+  // GODHOOD REWORK (Steve 2026-10-13): the hint is now a build guide — but a
+  // KNOWLEDGE-GATED one. It names only abilities the player's codex has heard
+  // of (L1+); unknown abilities stay teased. It organizes earned knowledge,
+  // never grants free knowledge.
   function hintBeat(game, ghId) {
     const gh = byId(ghId);
     if (!gh) return null;
@@ -511,11 +517,43 @@
     const g = sch.godhood || (sch.godhood = { recognized: {}, active: [] });
     g.hinted = g.hinted || {};
     if (g.hinted[ghId] || g.recognized[ghId]) return null;
-    const close = godhoodCloseness(sch, gh);
+    const day = (game.state || {}).day || 0;
+    const close = godhoodCloseness(sch, gh, day);
     if (!close.close || close.complete) return null;
     g.hinted[ghId] = true;
-    try { if (game.sysSay) game.sysSay(gh.hint); } catch (e) {}
-    return gh.hint;
+    let text = gh.hint;
+    // Build guide: name the missing core abilities you've heard of; tease the rest.
+    try {
+      const req = gh.requires || {};
+      const abs = scholarAbilities(sch);
+      const cores = (req.coreAbilities || []).filter(c => !abs.has(c));
+      const knownCores = cores.filter(c => game.codexAbilityLevel && game.codexAbilityLevel(c) >= 1);
+      const unknownCores = cores.filter(c => !(game.codexAbilityLevel && game.codexAbilityLevel(c) >= 1));
+      const abilName = (aid) => {
+        try {
+          const d = (game.data.abilities || []).find(a => a.id === aid);
+          return (d && d.name) || aid;
+        } catch (e) { return aid; }
+      };
+      const parts = [];
+      if (knownCores.length) parts.push(`you're missing ${knownCores.map(abilName).join(' and ')}`);
+      if (unknownCores.length) parts.push(`${unknownCores.length} more you've never even heard of`);
+      if (!close.synergy) {
+        const synNames = (req.synergies || []).map(sid => {
+          try {
+            const d = (game.data.synergies || []).find(s => s.id === sid);
+            return (d && d.name) || sid;
+          } catch (e) { return sid; }
+        });
+        if (synNames.length) parts.push(`a resonance like ${synNames[0]}`);
+      }
+      if (!close.item) parts.push('a relic worthy of the name (tier 4, from the hardest kills)');
+      if (parts.length) {
+        text += ` The shape is clear now: ${parts.join('; ')}.`;
+      }
+    } catch (e) {}
+    try { if (game.sysSay) game.sysSay(text); } catch (e2) {}
+    return text;
   }
 
   // --- mythic sprites ---

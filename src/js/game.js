@@ -5133,6 +5133,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             this.say(`⬢ SYSTEM: "Neural depth ${t}. I can hold more of you now — ability slots: ${slotsNow}."`);
             this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
           }
+          // ABILITY CODEX (Steve 2026-10-13): deeper integration, deeper sight.
+          // At 40/60/80 the System volunteers L1 knowledge of abilities in
+          // your closest godhood pool — it has been watching your shape.
+          // Diegetic revelation, not a wiki: only the noticed build, only L1.
+          if (t >= 40) {
+            try { this.systemRevealPoolAbilities(t); } catch (e2) {}
+          }
         }
       }
       if (reason) this.tele('integrate', { amount, reason, total: Math.round(s.integration) });
@@ -14612,6 +14619,128 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return true;
       } catch (e) { return false; }
     },
+    // --- ABILITY CODEX (GODHOOD REWORK, Steve 2026-10-13) ---
+    // Diegetic ability/synergy knowledge. NOT a wiki: entries exist only when
+    // discovered through play. L1 heard-of (name + rumor), L2 seen (what it
+    // does), L3 understood (synergy links — what it combines with).
+    // Sources: gossip/hearing (L1), witnessing use or mentor teaching (L2),
+    // personal use or deep study (L3). Stored on state.codex.abilities.
+    codexAbilityLevel(aid) {
+      try { return (((this.state.codex || {}).abilities || {})[aid] || {}).level || 0; }
+      catch (e) { return 0; }
+    },
+    codexAbilityDef(aid) {
+      try { return (this.data.abilities || []).find(a => a.id === aid) || null; }
+      catch (e) { return null; }
+    },
+    // codexLearnAbility(aid, level, source): raise codex knowledge to `level`
+    // (never lowers). Narrates the discovery once per level. Returns true if
+    // the level increased.
+    codexLearnAbility(aid, level, source) {
+      try {
+        const def = this.codexAbilityDef(aid);
+        if (!def) return false;
+        const cx = this.state.codex = this.state.codex || {};
+        cx.abilities = cx.abilities || {};
+        const cur = cx.abilities[aid] || { level: 0, sources: [] };
+        if (cur.level >= level) return false;
+        const day = (this.state.scholar || {}).day || 0;
+        cur.level = level;
+        cur.seenDay = cur.seenDay || day;
+        if (source && !(cur.sources || []).includes(source)) cur.sources = [...(cur.sources || []), source];
+        cx.abilities[aid] = cur;
+        const nm = def.name || aid;
+        if (level === 1) {
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've heard of **${nm}**. ${this.codexAbilityRumor(aid)}`);
+        } else if (level === 2) {
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've SEEN **${nm}** now. ${def.description || ''}`);
+        } else if (level >= 3) {
+          const links = this.codexAbilitySynergyHints(aid);
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you UNDERSTAND **${nm}**.${links ? ' It resonates with: ' + links + '.' : ''}`);
+        }
+        return true;
+      } catch (e) { return false; }
+    },
+    // codexAbilityRumor(aid): an L1 rumor — evocative, not mechanical. The
+    // player hears THAT it exists, not what it does.
+    codexAbilityRumor(aid) {
+      const rumors = {
+        rage: 'They say some fighters stop thinking and start winning.',
+        tracker: 'The hunters speak of reading the ground like a letter.',
+        diplomat: 'Words, apparently, can be a weapon. Who knew.',
+        phoenix_clause: 'Someone came back. Nobody will say how.',
+        triage: 'The medics have a way of looking at a wound and KNOWING.',
+        third_eye: 'There are those who claim to see without looking.',
+        hoarder: 'Some people just... accumulate. Deliberately.',
+        wanderer: 'They say the road teaches those who walk it far enough.',
+        time_skip: 'A blink, and they were elsewhere. Nobody saw them move.',
+      };
+      return rumors[aid] || 'Someone, somewhere, can do this. Now you know its name.';
+    },
+    // codexAbilitySynergyHints(aid): L3 knowledge — which synergies this
+    // ability feeds (names only for discovered synergies, else "something").
+    codexAbilitySynergyHints(aid) {
+      try {
+        const syns = (this.data.synergies || []).filter(s => {
+          const legs = (s.requires || []).map(l => String(l).split(':').pop());
+          return legs.includes(aid);
+        });
+        if (!syns.length) return '';
+        const known = (this.state.scholar || {}).synergies || [];
+        return syns.map(s => known.includes(s.id) ? (s.name || s.id) : 'something unnamed').join(', ');
+      } catch (e) { return ''; }
+    },
+    // noteVillagerAbilityUse(vid, aid): a villager used an ability where the
+    // player could see. Witnessing teaches: L1 if unknown, L2 if heard-of.
+    // Call from combat/daily-life ability uses with the player present.
+    noteVillagerAbilityUse(vid, aid) {
+      try {
+        if (!aid || vid === this.villagerId) return;
+        const lvl = this.codexAbilityLevel(aid);
+        if (lvl >= 2) return;
+        const vname = this.displayName ? this.displayName(vid) : 'Someone';
+        const def = this.codexAbilityDef(aid);
+        if (!def) return;
+        if (lvl === 0) this.codexLearnAbility(aid, 1, 'observed:' + vid);
+        this.say(`${vname} just used ${def.name || aid} — you saw how it works.`);
+        this.codexLearnAbility(aid, 2, 'witnessed:' + vid);
+      } catch (e) {}
+    },
+    // systemRevealPoolAbilities(threshold): ABILITY CODEX (Steve 2026-10-13).
+    // At integration thresholds the System names abilities from your closest
+    // godhood pool that you've never heard of (L1). It noticed the shape of
+    // your build — this is observation, not a wiki.
+    systemRevealPoolAbilities(threshold) {
+      try {
+        const S = globalThis.Scattering || {};
+        if (!S.Godhood || !S.Godhood.godhoods) return;
+        const sch = this.state.scholar || {};
+        const day = (this.state || {}).day || 0;
+        let bestGh = null, bestKit = 1;
+        for (const gh of S.Godhood.godhoods()) {
+          if (gh.id === 'voice_of_the_relay') continue;
+          const cl = S.Godhood.godhoodCloseness(sch, gh, day);
+          if (!cl.complete && cl.kit > bestKit) { bestKit = cl.kit; bestGh = gh; }
+        }
+        if (!bestGh) return;
+        const pool = (bestGh.requires || {}).abilityPool || [];
+        const unheard = pool.filter(aid => this.codexAbilityLevel(aid) < 1 && this.codexAbilityDef(aid));
+        if (!unheard.length) return;
+        // reveal up to 2 per threshold — a drip, not a dump
+        const n = Math.min(2, unheard.length);
+        const names = [];
+        for (let i = 0; i < n; i++) {
+          const aid = unheard[Math.floor(Math.random() * unheard.length)];
+          if (names.includes(aid)) continue;
+          names.push(aid);
+          this.codexLearnAbility(aid, 1, 'system-reveal:' + threshold);
+        }
+        if (names.length) {
+          const nm = names.map(aid => (this.codexAbilityDef(aid) || {}).name || aid).join(', ');
+          this.say(`⬢ SYSTEM: "Neural depth ${threshold}. I've been watching what you're becoming, little ${bestGh.id.split('_')[0]}. Names for your shelf: ${nm}. What they DO — that's still yours to learn."`);
+        }
+      } catch (e) {}
+    },
     // firstRef: first-name-like reference that NEVER collapses to bare "A".
     // Known/post-System → first name. Unknown → distinguishing descriptor
     // ("the woman in her 30s") so gossip/living-world lines never truncate
@@ -21857,6 +21986,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       // SYNERGY: every ability use is a potential resonance attempt.
       this.noteAbilityUse(abilityId);
+      // ABILITY CODEX (Steve 2026-10-13): using it yourself is understanding — L3.
+      try { this.codexLearnAbility(abilityId, 3, 'personal-use'); } catch (e0) {}
       // SURGE RESONANCE (bal-waves 2026-10-10): every practice moment feeds
       // the feast-surge devotion lane — uses, not just mastery. +1 per call
       // (a use is a use, whatever the XP amount), +5 on level-up. Read by
@@ -26142,6 +26273,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           : w.care >= w.system ? 'care' : 'system';
         m.xp += 1;
         m.lane = lane;
+        // ABILITY CODEX (Steve 2026-10-13): mentors demonstrate. A party
+        // villager with an ability your codex hasn't SEEN may show you how
+        // it works — knowledge, not the power itself.
+        try {
+          const theirAbils = ((this.state.village || {}).npcAbilities || {})[vid] || [];
+          const teachable = theirAbils.filter(aid => this.codexAbilityLevel(aid) < 2 && this.codexAbilityDef(aid));
+          if (teachable.length && Math.random() < 0.25) {
+            const aid = teachable[Math.floor(Math.random() * teachable.length)];
+            const first = String(person.name || 'Someone').split(' ')[0];
+            const def = this.codexAbilityDef(aid);
+            if (this.playerAtHaven() || Math.random() < 0.5) {
+              this.say(`${first} shows you ${def.name || aid} — not the power, just the shape of it. Watch and learn.`);
+            }
+            this.codexLearnAbility(aid, 2, 'mentor:' + vid);
+          }
+        } catch (e5) {}
         // every 10 xp of watching = real growth: they get better at feeding themselves
         if (m.xp % 10 === 0) {
           person.mentorBonus = Math.min(0.5, (person.mentorBonus || 0) + 0.05);
@@ -38639,6 +38786,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!v.npcAbilities[vid].includes(id)) v.npcAbilities[vid].push(id);
         if (id === 'fusion_reactor') this.state.fusionReactorHolder = { who: 'villager', vid: vid, day: this.state.day || 0 };
         try { this.tele('ability_granted', { id: id, who: 'villager:' + vid }); } catch (e) {}
+        // ABILITY CODEX (Steve 2026-10-13): you heard the System name it — L1.
+        try { this.codexLearnAbility(id, 1, 'grant-heard'); } catch (e3) {}
         // GODHOOD REWORK (Steve 2026-10-13): a new ability can complete a
         // godhood build — check (was wired to nothing; 0 activations ever).
         try { this.checkVillagerGodhoodAscension(vid); } catch (e2) {}
@@ -38679,6 +38828,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const witnesses = this.godhoodWitnesses ? this.godhoodWitnesses(null, 3) : [];
           const dp = this.dayPartName ? this.dayPartName() : null;
           S.Godhood.recognitionCeremony(this, ghId, witnesses, dp);
+        }
+        // ABILITY CODEX (Steve 2026-10-13): when close to a godhood, the
+        // System's hint fires (once per godhood) — a knowledge-gated build guide.
+        if (S.Godhood.hintBeat) {
+          for (const gh of S.Godhood.godhoods()) {
+            try { S.Godhood.hintBeat(this, gh.id); } catch (e2) {}
+          }
         }
       } catch (e) {}
     },

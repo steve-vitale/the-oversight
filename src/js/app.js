@@ -14527,6 +14527,49 @@
     } catch (e) { return `<p class="small" style="opacity:.5">Synergies unavailable.</p>`; }
   }
 
+  // ABILITY CODEX (Steve 2026-10-13): diegetic ability knowledge. NOT a wiki —
+  // only discovered entries appear. L1: name + rumor. L2: + what it does.
+  // L3: + synergy links. Discovered via gossip/hearing (L1), witnessing or
+  // mentor teaching (L2), personal use (L3).
+  function renderAbilityCodexSection() {
+    try {
+      const cx = (Game.state.codex || {}).abilities || {};
+      const ids = Object.keys(cx).filter(aid => (cx[aid] || {}).level >= 1);
+      let html = `<details style="margin:10px 0;border-top:1px solid #333;padding-top:8px">
+        <summary style="cursor:pointer;font-size:15px;font-weight:bold">📖 Ability Codex <span style="opacity:.6;font-weight:normal">(${ids.length} known)</span></summary>
+        <div style="margin-top:6px">`;
+      if (!ids.length) {
+        html += `<p class="small" style="opacity:.5">No abilities studied yet. Watch people use theirs, ask mentors, listen to gossip — knowledge is earned.</p>`;
+      } else {
+        // sort: understood first, then seen, then heard-of
+        ids.sort((a, b) => ((cx[b] || {}).level || 0) - ((cx[a] || {}).level || 0));
+        for (const aid of ids) {
+          const entry = cx[aid] || {};
+          const lvl = entry.level || 1;
+          const def = (Game.data.abilities || []).find(a => a.id === aid) || {};
+          const nm = esc(def.name || aid);
+          const badge = lvl >= 3 ? '<span style="color:#7cfc9a">● understood</span>'
+            : lvl === 2 ? '<span style="color:#ffd166">◐ seen</span>'
+            : '<span style="opacity:.6">○ heard of</span>';
+          let body = '';
+          if (lvl >= 2 && def.description) body += `<p class="small" style="opacity:.85;margin-top:4px">${esc(def.description)}</p>`;
+          else if (lvl === 1) body += `<p class="small" style="opacity:.6;margin-top:4px;font-style:italic">${esc(Game.codexAbilityRumor ? Game.codexAbilityRumor(aid) : 'You know its name. Nothing more.')}</p>`;
+          if (lvl >= 3) {
+            const links = Game.codexAbilitySynergyHints ? Game.codexAbilitySynergyHints(aid) : '';
+            if (links) body += `<p class="small" style="opacity:.75;margin-top:4px">Resonates with: ${esc(links)}</p>`;
+          }
+          const src = (entry.sources || [])[0];
+          const via = src ? ` <span style="opacity:.4;font-size:11px">via ${esc(String(src).split(':')[0])}</span>` : '';
+          html += `<details style="margin:4px 0;border:1px solid #333;border-radius:6px;padding:6px 8px">
+            <summary style="cursor:pointer"><b>${nm}</b> ${badge}${via}</summary>${body}
+          </details>`;
+        }
+      }
+      html += `</div></details>`;
+      return html;
+    } catch (e) { return `<p class="small" style="opacity:.5">Ability codex unavailable.</p>`; }
+  }
+
   // inventory: your pack. Inline — one screen, no overlay hopping.
   function renderInvInline(slot, view) {
     const st = Game.status();
@@ -15009,6 +15052,7 @@
         ${renderAbilitiesSection()}
         ${renderSkillsSection()}
         ${renderSynergiesSection()}
+        ${renderAbilityCodexSection()}
         ${renderAfflictionsSection()}
         ${renderBuildIndicator()}
         ${renderSynergyStirrings()}

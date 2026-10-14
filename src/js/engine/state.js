@@ -70,13 +70,18 @@
   }
 
   function newCodex() {
-    return { plants: {}, monsters: {}, recipes: {}, terrain: {}, skills: {}, trees: {} };
+    return { plants: {}, monsters: {}, recipes: {}, terrain: {}, skills: {}, trees: {}, abilities: {} };
     // RECIPE KNOWLEDGE (fix 2026-10-09): recipes was briefly initialized as
     // an array — named props don't survive JSON.stringify, so recipe
     // knowledge silently wiped on every save/load. It's a string-keyed object.
     // plants: {plantId: {identifiedDay, survivedEating: bool, notes}}
     // trees: {species: {level, learnedDay}} — tree species knowledge (Steve 2026-10-05)
     // skills: {skillId: {level, learnedDay, via}} — knowledge about ANYTHING, not just plants
+    // abilities: {abilityId: {level: 1-3, seenDay, sources: []}} — GODHOOD REWORK
+    //   (Steve 2026-10-13): diegetic ability knowledge. L1 heard-of (gossip/
+    //   System mention), L2 seen (witnessed use / mentor), L3 understood
+    //   (personal use / deep study — reveals synergy links). Never a wiki:
+    //   only discovered entries exist.
   }
 
   function newState() {
