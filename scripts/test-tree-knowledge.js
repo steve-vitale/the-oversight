@@ -61,7 +61,11 @@ test('game.js has treeLevel helper', gameCode.includes('treeLevel(species)'));
 test('game.js has treeName helper', gameCode.includes('treeName(species)'));
 test('game.js gates species display', gameCode.includes('this.treeName(mod.species)'));
 test('state.js newCodex has trees', fs.readFileSync(path.join(__dirname, '../src/js/engine/state.js'), 'utf8').includes('trees: {}'));
-test('newGame seeds oak/hickory at L1', gameCode.includes("for (const sp of ['oak', 'hickory'])"));
+// REGIONS (2026-10-14): the common trees are the landing region's
+// flora.commonTrees (regions.json); the eastern woodlands list oak + hickory.
+test('newGame seeds the region common trees at L1', gameCode.includes('for (const sp of this.regionCommonTrees())'));
+const ewRegion = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/regions.json'), 'utf8')).find(r => r.id === 'na_eastern_woodlands') || {};
+test('eastern woodlands common trees are oak/hickory', JSON.stringify((ewRegion.flora || {}).commonTrees) === JSON.stringify(['oak', 'hickory']));
 
 console.log(`\n=== RESULTS: ${pass} pass, ${fail} fail ===`);
 process.exit(fail > 0 ? 1 : 0);

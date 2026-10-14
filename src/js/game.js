@@ -290,7 +290,12 @@
     },
     activeRegion() {
       const id = (this.state && this.state.region) || DEFAULT_REGION_ID;
-      return this.regionDef(id) || this.regionDef(DEFAULT_REGION_ID);
+      const r = this.regionDef(id) || this.regionDef(DEFAULT_REGION_ID);
+      if (!r && !this._noRegionsWarned) {
+        this._noRegionsWarned = true;
+        console.warn('[regions] regions.json not loaded: no region environment (empty starting pantry, generic ruin, no bounty). Load src/data/regions.json with the other data.');
+      }
+      return r;
     },
     // playable = can be a random landing (status playable or rich).
     playableRegions() {
