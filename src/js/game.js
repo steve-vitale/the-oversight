@@ -33658,7 +33658,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           } catch (e) {}
           this.say(`${v.name} ${a.type === 'strike' ? 'strikes' : 'harries'} the ${this.encTheName(t)}.`);
-          const _landed = this.tbDamage(t.key, dmg, v.name);
+          // sourceKey (2026-10-14): pass the striker's key so source-keyed
+          // hooks see who hit — party-formal flank/point, War Cry rallyBuff.
+          const _landed = this.tbDamage(t.key, dmg, v.name, v.key, { strike: a.type === 'strike' });
           // HOPELESS-FLIGHT LEDGER (structural-combat 2026-10-10): damage
           // dealt, paired with _taken in tbDamage — tbVillagerHopeless reads
           // the trajectory from these.
