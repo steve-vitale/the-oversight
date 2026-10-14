@@ -584,7 +584,16 @@
       // contests, crises) stay. `scale` is still reported honestly in the
       // breakdown for beat text and tests.
       const scale = rank === 'national' || rank === 'global';
-      return { ok: !!(waves && contests && crises), waves, contests, crises, scale, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
+      // SUPERSET (audit 2026-10-14): the full seat also carries the lesser
+      // seat's integration-stage (>=2) and food-thesis bars (tableSeat,
+      // table.js) — a full seat must never be easier than the lesser one on
+      // those. Scale is NOT added here (open design question).
+      let stage = 0;
+      try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
+      const s = this.state.scholar || {};
+      const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
+      const stageOk = stage >= 2;
+      return { ok: !!(waves && contests && crises && stageOk && foodDeeds), waves, contests, crises, scale, stageOk, foodDeeds, stage, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
     },
     checkArc() {
       const pg = this.progState(), s = this.state.scholar;
