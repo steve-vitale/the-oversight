@@ -1596,7 +1596,28 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
         if (dd < bd) { bd = dd; bx = cx; by = cy; }
       }
       if (bx != null) {
-        try { Game.tbPlayerMove(bx, by); } catch (e) {}
+        // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
+        // path got this fix in r6, this one didn't — tbPlayerMove refuses a
+        // destination past this turn's movement ("Too far"), so a far trick
+        // target was a no-op every turn. Walk as far as moveLeft pays for
+        // (terrain priced like tbPlayerMove prices it).
+        try {
+          let dx = bx, dy = by;
+          if (typeof Game.findPath === 'function') {
+            const path = Game.findPath(px, py, bx, by);
+            if (path && path.length) {
+              let cost = 0, idx = -1;
+              for (let i = 0; i < path.length; i++) {
+                let c = 1;
+                try { c = Game.tbTerrainCost ? Game.tbTerrainCost(path[i][0], path[i][1]) : 1; } catch (e) { c = 1; }
+                if (cost + c > (p.moveLeft || 0)) break;
+                cost += c; idx = i;
+              }
+              if (idx >= 0) { dx = path[idx][0]; dy = path[idx][1]; }
+            }
+          }
+          Game.tbPlayerMove(dx, dy);
+        } catch (e) {}
         ctx.closed = (ctx.closed || 0) + 1;
       }
       endTurn();
@@ -2573,4 +2594,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, beastStrikeTarget, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
