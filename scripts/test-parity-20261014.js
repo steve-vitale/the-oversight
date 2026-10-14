@@ -121,9 +121,14 @@ function freshVillager(Game, vid) {
   {
     const va = vids[3];
     freshVillager(Game, va);
-    // the strange kit's first three: X is not the kit-order default
+    // KIT ORDER PINNED (godpath-buff 2026-10-14): kits are re-ordered for
+    // path diversity, so the test pins its own strange sheet (the original
+    // first three, X third) instead of reading whatever the kit leads with.
+    const KITS = Game.trackData().kits;
+    const savedStrange = KITS.strange;
+    KITS.strange = ['pocket_sand', 'third_eye', 'static_toss'].concat(savedStrange.filter(id => !['pocket_sand', 'third_eye', 'static_toss'].includes(id)));
     const offers = Game.villagerLevelUpOffers(va, 'strange');
-    T.ok('offers = the next 3 unheld strange kit abilities', JSON.stringify(offers) === JSON.stringify(DATA.kits.strange.slice(0, 3)), offers.join(','));
+    T.ok('offers = the next 3 unheld strange kit abilities', JSON.stringify(offers) === JSON.stringify(KITS.strange.slice(0, 3)), offers.join(','));
     const X = 'static_toss'; // "THROW it" — a ranged ability
     // a field build sharing no god path with the offers (god-path 2026-10-14:
     // echo_location/bloodhound are hunter-leaning now, and static_toss is
@@ -150,6 +155,7 @@ function freshVillager(Game, vid) {
     const dB = Game.buildDecide(vb, Game.villagerLevelUpOffers(vb, 'strange'));
     T.ok('without the knowledge and the bow, X is not their pick', dB.pick !== X, JSON.stringify(dB));
     T.ok('without the knowledge and the bow, X scores lower', scB < sc[offers.indexOf(X)], scB + ' < ' + sc[offers.indexOf(X)]);
+    KITS.strange = savedStrange;
   }
 
   T.section('knows too little: defers and seeks');
