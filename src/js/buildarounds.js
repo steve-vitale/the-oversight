@@ -52,23 +52,18 @@
   }
 
   var BA = {
-    // BLOOD FRENZY (brawler): consecutive hits → +10% each, max +80%.
-    // Weak alone (needs 3+ hits to matter); monstrous with multi-hit enablers.
+    // BLOOD FRENZY (brawler): 3rd consecutive hit = guaranteed crit.
+    // Designed for 3-turn fights: one decisive moment, not a ramp.
     onStrikeHit: function (game, target) {
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return;
         const st = fightState(game);
         if (!st) return;
-        st.frenzy = Math.min((st.frenzy || 0) + 1, 8);
-        const mult = 1 + st.frenzy * 0.10;
-        // Assembly gate: full stacks need 2+ brawler abilities.
-        const gated = baPathCount(game, 'brawler') >= 2 ? 8 : 3;
-        st.frenzy = Math.min(st.frenzy, gated);
-        if (st.frenzy >= 3) {
-          game.say(`BLOOD FRENZY: ${st.frenzy} consecutive hits — +${st.frenzy * 10}% damage. Don't you dare miss.`);
+        st.frenzy = (st.frenzy || 0) + 1;
+        if (st.frenzy === 2) {
+          game.say(`BLOOD FRENZY: two in a row — THIS ONE HURTS. (guaranteed crit)`);
           try { game.audioEvent('buildaround', { path: 'brawler', id: 'blood_frenzy' }); } catch (e) {}
         }
-
       } catch (e) {}
     },
     onStrikeMiss: function (game) {
@@ -84,7 +79,15 @@
       try {
         if (!game.hasAbility || !game.hasAbility('blood_frenzy')) return 1;
         const st = fightState(game);
-        return 1 + ((st && st.frenzy) || 0) * 0.10;
+        // If this is the 2nd consecutive hit (frenzy will become 2 after),
+        // this hit crits. Check pre-increment count.
+        const preCount = (st && st.frenzy) || 0;
+        if (preCount === 1) {
+          // This is the 2nd hit — crit!
+          if (st) st.frenzy = 0; // reset after crit
+          return 2.0;
+        }
+        return 1;
       } catch (e) { return 1; }
     },
 
@@ -94,8 +97,8 @@
       try {
         if (!game.hasAbility || !game.hasAbility('retribution')) return;
         const st = dayState(game);
-        st.retribution = (st.retribution || 0) + Math.round(amount * 0.5);
-        if (st.retribution >= 30 && !st.retributionTold) {
+        st.retribution = (st.retribution || 0) + Math.round(amount);
+        if (st.retribution >= 20 && !st.retributionTold) {
           st.retributionTold = true;
           game.say(`RETRIBUTION: ${st.retribution} stored. Unleash it. (active ability)`);
           try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e2) {}
@@ -150,7 +153,7 @@
           if (st) {
             st.graceHeals = st.graceHeals || {};
             st.graceHeals[targetId] = (st.graceHeals[targetId] || 0) + 1;
-            if (st.graceHeals[targetId] === 3) {
+            if (st.graceHeals[targetId] === 2) {
               game.say('BATTLEFIELD GRACE: three touches — they\'re back on their feet with a free action!');
               try { game.audioEvent('buildaround', { path: 'caregiver', id: 'battlefield_grace' }); } catch (e) {}
               try { game.grantFreeAction(targetId); } catch (e) {}

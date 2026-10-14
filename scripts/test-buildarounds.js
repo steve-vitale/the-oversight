@@ -84,10 +84,8 @@ const mockGame = {
   tbfight: { buildaround: {} },
 };
 console.log('\n4. Blood Frenzy logic:');
-BA.onStrikeHit(mockGame, {});
-BA.onStrikeHit(mockGame, {});
-BA.onStrikeHit(mockGame, {});
-ok(BA.frenzyMult(mockGame) === 1.3, `3 hits = ×1.3 (got ${BA.frenzyMult(mockGame)})`);
+BA.onStrikeHit(mockGame, {}); // hit 1: frenzy=1
+ok(BA.frenzyMult(mockGame) === 2.0, `2nd hit crits x2.0 (got ${BA.frenzyMult(mockGame)})`);
 BA.onStrikeMiss(mockGame);
 ok(BA.frenzyMult(mockGame) === 1, 'miss resets to ×1');
 
@@ -99,9 +97,9 @@ const mockGame2 = {
 };
 BA.onBlocked(mockGame2, 40);
 BA.onBlocked(mockGame2, 40);
-ok(mockGame2.state.scholar.buildaround.retribution === 40, `stored 40 (50% of 80, got ${mockGame2.state.scholar.buildaround.retribution})`);
+ok(mockGame2.state.scholar.buildaround.retribution === 80, `stored 80 (got ${mockGame2.state.scholar.buildaround.retribution})`);
 const unleashed = BA.unleash(mockGame2);
-ok(unleashed === 40, `unleash releases 40 (got ${unleashed})`);
+ok(unleashed === 80, `unleash releases 80 (got ${unleashed})`);
 ok(mockGame2.state.scholar.buildaround.retribution === 0, 'storage cleared after unleash');
 
 console.log('\n6. Nowhere Man logic:');

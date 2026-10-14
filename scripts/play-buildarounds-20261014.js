@@ -57,9 +57,18 @@ const beat = (t) => {
   for (const l of T.splice(0)) console.log(l);
 };
 const endTurn = () => {
-  if (Game.tbfight && Game.tbIsPlayerTurn()) {
-    try { Game.tbPlayerEndTurn(); } catch (e) {}
-  }
+  if (!Game.tbfight) return;
+  try {
+    if (Game.tbIsPlayerTurn()) {
+      Game.tbPlayerEndTurn();
+    } else {
+      // Not player turn - advance until it is (or fight ends)
+      let adv = 0;
+      while (Game.tbfight && !Game.tbIsPlayerTurn() && adv++ < 10) {
+        Game.tbAdvance();
+      }
+    }
+  } catch (e) {}
 };
 const feed = () => {
   const s = Game.state.scholar;
@@ -113,9 +122,17 @@ function runFight(label, abilities, monsterCount) {
   let guard = 0;
   while (Game.tbfight && guard++ < 60) {
     const foe = Game.tbfight.fighters.find(f => f.key !== 'p' && f.alive && !f.fled);
-    if (!foe) break;
+    if (!foe) { console.log('  (no foe found, breaking)'); break; }
     const pBefore = Game.tbFighter('p').hp;
+    const foeHpBefore = foe.hp;
+    if (!Game.tbIsPlayerTurn()) {
+      if (guard <= 3) console.log(`  turn ${guard}: NOT player turn, skipping strike`);
+      endTurn();
+      continue;
+    }
     Game.tbPlayerStrike(foe.key);
+    const foeHpAfter = foe.hp;
+    if (guard <= 3) console.log(`  turn ${guard}: foe ${foe.key} hp ${Math.round(foeHpBefore)} -> ${Math.round(foeHpAfter)}`);
     const pAfter = Game.tbFighter('p') ? Game.tbFighter('p').hp : 0;
     fight.playerDamageTaken += Math.max(0, pBefore - pAfter);
     // Estimate damage dealt (foe hp drop)
