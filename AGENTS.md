@@ -66,6 +66,11 @@ Start every session by reading PLAN.md §1 and the current phase.
    - If it breaks and fixing it isn't worth it now, move the line to
      `scripts/green-list-quarantine.txt` with a reason.
    - Never loosen an assertion just to go green.
+   - Many *old* scripts write into `evidence/` when run (the green list
+     excludes those). If a run leaves stray changes there, discard them with
+     `git checkout -- evidence/` rather than committing them. New tests must
+     not write into the repo; sims write once, on purpose, into
+     `evidence/<date>/`.
 5. **New tests use the shared kit** (`scripts/godpath/lib.js` or
    `scripts/sim-harness.js`). Never copy the eval boilerplate. Never hardcode
    absolute paths (55 old scripts point at another machine's `/home/hatch/…`).
