@@ -22,10 +22,17 @@
 //   OUT=evidence/2026-10-14/raiddef-pilot.json node scripts/sweep-raiddef-20261014.js
 'use strict';
 process.env.FEASTSCALE_R13 = '1';
-const rd = require('./policies/raiddef');
-const { leadfeastRaiddef } = rd;
 const fs = require('fs');
 const path = require('path');
+// 3184c187-pattern landed-tree guard (coordinator): the raiddef layer was
+// deleted per kill protocol — degrade to INFO-SKIP, not MODULE_NOT_FOUND.
+let rd = null;
+try { rd = require('./policies/raiddef'); } catch (e) { /* absent: killed arm */ }
+if (require.main === module && !rd) {
+  console.log('INFO-SKIP: raiddef layer absent (killed arm, deleted per kill protocol).');
+  process.exit(0);
+}
+const { leadfeastRaiddef } = rd;
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { leadfeast } = require('./policies/feastscale');
 

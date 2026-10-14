@@ -23,8 +23,16 @@
 process.env.FEASTSCALE_R13 = '1';
 const assert = require('assert');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
-const rd = require('./policies/raiddef');
 const { leadfeast } = require('./policies/feastscale');
+// 3184c187-pattern landed-tree guard (coordinator): the raiddef layer was
+// deleted per kill protocol — the proof's requires must degrade to INFO-SKIP,
+// not FATAL MODULE_NOT_FOUND, when the layer is absent.
+let rd = null;
+try { rd = require('./policies/raiddef'); } catch (e) { /* absent: killed arm */ }
+if (require.main === module && !rd) {
+  console.log('INFO-SKIP: raiddef layer absent (killed arm, deleted per kill protocol).');
+  process.exit(0);
+}
 
 let pass = 0;
 function ok(cond, msg) {
