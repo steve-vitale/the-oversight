@@ -25383,7 +25383,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const sch = this.state.scholar || {};
         const minLvl = 1;
-        if (rid.startsWith('tech:')) return !!(((sch.codex || {}).techniques || {})[rid.slice(5)]);
+        if (rid.startsWith('tech:')) return !!(((this.state.codex || {}).techniques || {})[rid.slice(5)]);
         if (rid.startsWith('skill:')) return ((((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level || 0) >= minLvl;
         // ITEM LEG (ability-gaps 2026-10-14): an equipped item is pure-passive
         // (no button) — wielding it counts as bringing it to bear.
@@ -25449,7 +25449,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const hasReq = (rid) => {
           if (synIds.has(rid)) return (sch.synergies || []).includes(rid);
           if (rid.startsWith('tech:')) {
-            return !!((sch.codex || {}).techniques || {})[rid.slice(5)];
+            return !!((this.state.codex || {}).techniques || {})[rid.slice(5)];
           }
           if (rid.startsWith('skill:')) {
             return (((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level >= minLvl;

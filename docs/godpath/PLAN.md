@@ -233,7 +233,7 @@ Clear out what the brief rejected, and make the god-path data reachable.
   `crimsonGodParty`, `deadeyeMark`, `deadeyeAllyMult`, `lifebringerRevive`,
   `redHarvestHeal`) into `godpath.js` as a starting library. Mark them
   `// wired-exempt: P3` until wired.
-- [ ] Fix the codex bug, in **two places** in `game.js` (grep
+- [x] Fix the codex bug, in **two places** in `game.js` (grep
   `(sch.codex || {}).techniques`): techniques are only ever written to
   `this.state.codex.techniques`, so technique-leg synergies (e.g.
   `tidecaller`) can be discovered but never activate. Read
