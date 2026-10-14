@@ -21,8 +21,13 @@ const fs = require('fs');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 
 const POLICY_REGISTRY = {
-  leadcourt: require('./policies/leadcourt'),
-  belongseek: require('./policies/belongseek'),
+  // UNWRAP FIX (#69, 2026-10-14): the policy modules export { leadcourt } /
+  // { belongseek } named objects. Object.assign({}, require(...)) on the raw
+  // module yields {leadcourt:{...}} — policy.daily undefined and the suite
+  // SILENTLY RUNS POLICY-LESS. Unwrap the named export, exactly like
+  // sweep-spoilsmoke-20261014.js line 13.
+  leadcourt: require('./policies/leadcourt').leadcourt,
+  belongseek: require('./policies/belongseek').belongseek,
 };
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
@@ -133,12 +138,14 @@ async function oneRun(seed, pid, days) {
       }
     }
   } catch (e) {}
-  let hungry = 0, redirects = 0;
+  let hungry = 0, redirects = 0, exiled = 0;
   try { hungry = (Game.state.village || {}).hungryDays || 0; } catch (e) {}
   try { redirects = (Game.state.village || {}).throttleRedirects || 0; } catch (e) {}
+  try { exiled = (typeof Game.justiceExiled === 'function' && Game.justiceExiled()) ? 1 : 0; } catch (e) {}
   return {
     policy: pid, seed, days: result.days, gameDays: result.gameDays, endReason: result.endReason,
-    won: end.won ? 1 : 0, waveReach: result.maxWaveUnlocked || 1,
+    won: end.won ? 1 : 0, wins: end.won ? 1 : 0, exiled,
+    waveReach: result.maxWaveUnlocked || 1,
     maxArc: hist.maxArc,
     maxRank: Object.keys(RANK_ORDER).find(k => RANK_ORDER[k] === hist.maxRank) || 'village',
     national: hist.maxRank >= 2 ? 1 : 0,
@@ -183,7 +190,54 @@ function aggregate(runs) {
   };
 }
 
+// INSTRUMENT-HONESTY GATE (#69, 2026-10-14): the 2026-10-13 prodthrottle
+// pilot silently ran policy-less because the unwrap bug left policy.daily
+// undefined. SMOKE=1 runs a short live smoke per policy BEFORE any pilot
+// spend and FAILS LOUDLY unless the policy is genuinely driving:
+//   (1) policy.daily is a function after unwrap (both policies);
+//   (2) the harness actually invokes policy.daily (meanPolicyCallsPerDay > 0);
+//   (3) >=1 policy-origin deliberate act happens (a policy act key lands in
+//       the pacing rows — policy isn't just present, it's DOING things).
+// A policy-less suite would have policyCalls=0 and no policy: acts —
+// the smoke turns that silence into a hard stop.
+async function smokeGate() {
+  const fails = [];
+  const check = (name, cond, detail) => {
+    console.log(`  ${cond ? 'PASS' : 'FAIL'} ${name}${detail ? ' — ' + detail : ''}`);
+    if (!cond) fails.push(name);
+  };
+  for (const pid of Object.keys(POLICY_REGISTRY)) {
+    const base = POLICY_REGISTRY[pid];
+    check(`[${pid}] unwrapped policy.daily is a function`,
+      base && typeof base.daily === 'function',
+      'typeof=' + (base && typeof base.daily));
+  }
+  if (fails.length) { console.log(`\nSMOKE STOP: ${fails.length} unwrap failure(s) — the suite would run policy-less.`); process.exit(1); }
+  for (const pid of Object.keys(POLICY_REGISTRY)) {
+    const base = POLICY_REGISTRY[pid];
+    let dailyCalls = 0;
+    const policy = Object.assign({}, base, { daily(G, ctx) { dailyCalls++; return base.daily(G, ctx); } });
+    const { Game } = await loadGame({ seed: 11, mode: 'prodthrottle-smoke-' + pid, fullTelemetry: false });
+    await setupGame(Game);
+    let result = null;
+    await quietLog(async () => { result = await runDays(Game, policy, { days: 15, manifest: undefined, sampleEvery: 10 }); });
+    const meanCalls = result.pacing ? (result.pacing.meanPolicyCallsPerDay || 0) : 0;
+    let policyActs = 0;
+    try {
+      for (const row of (result.pacing.perDay || [])) {
+        for (const k of Object.keys(row.acts || {})) if (k.indexOf('policy:') === 0) policyActs += row.acts[k];
+      }
+    } catch (e) {}
+    check(`[${pid}] harness invoked policy.daily (calls=${dailyCalls})`, dailyCalls > 0, `days=${result.days}`);
+    check(`[${pid}] policyCalls pacing > 0 (mean=${meanCalls}/day)`, meanCalls > 0);
+    check(`[${pid}] >=1 policy-origin deliberate act (policyActs=${policyActs})`, policyActs > 0);
+  }
+  if (fails.length) { console.log(`\nSMOKE STOP: ${fails.length} failure(s) — the policy is present but not driving. Fix before measuring.`); process.exit(1); }
+  console.log('\nSMOKE GATE: policies drive — safe to measure.');
+}
+
 async function main() {
+  if (process.env.SMOKE === '1') { await smokeGate(); return; }
   const label = process.env.LEVER || 'prodthrottle';
   const seeds = (process.env.SEEDS || '11,22,33,44,55,66,77,88').split(',').map(s => parseInt(s.trim(), 10)).filter(Number.isFinite);
   const pids = (process.env.POLICIES || 'leadcourt,belongseek').split(',').map(s => s.trim()).filter(Boolean);
@@ -203,6 +257,24 @@ async function main() {
     console.log(`  ${pid}: n=${b.n} won=${b.won} medD=${b.medianDays} maxD=${b.maxDays} nat=${b.national} tab=${b.table} maxWave=${b.maxWave} hungry=${b.hungryDays} trib=${(b.tributeKcal / 1000).toFixed(1)}k/${b.tributeWeeks}w arrears=${(b.arrearsEnd / 1000).toFixed(1)}k/${b.arrearsLinks} redir=${b.redirects}`);
   }
   if (outFile) { fs.writeFileSync(outFile, JSON.stringify({ label, seeds, pids, days, agg, rows, when: new Date().toISOString() }, null, 1)); console.error('wrote ' + outFile); }
+  // per-seed JSON (telemetry-check schema: national/table/wins/exiled as
+  // top-level numbers; r20b convention)
+  const perSeedDir = process.env.PERSEED_DIR || null;
+  if (perSeedDir) {
+    fs.mkdirSync(perSeedDir, { recursive: true });
+    for (const r of rows) {
+      const p = `${perSeedDir}/${label}-${r.policy}-s${r.seed}.json`;
+      fs.writeFileSync(p, JSON.stringify({
+        label, policy: r.policy, seed: r.seed, days: r.days, endReason: r.endReason,
+        national: r.national, table: r.table, wins: r.wins, exiled: r.exiled,
+        waveReach: r.waveReach, maxArc: r.maxArc, maxRank: r.maxRank,
+        rotFresh: r.rotFresh, rotPreserved: r.rotPreserved,
+        hungryDays: r.hungryDays, tributePaidKcal: r.tributePaidKcal,
+        tributeWeeks: r.tributeWeeks, throttleRedirects: r.throttleRedirects,
+      }, null, 1));
+    }
+    console.error('wrote ' + rows.length + ' per-seed files to ' + perSeedDir);
+  }
 }
 
 if (require.main === module) main().catch(e => { console.error('FATAL', e); process.exit(1); });

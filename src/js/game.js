@@ -5742,6 +5742,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const temp = (vp.personality && vp.personality.temperament) || 'steady';
       const R = (lo, hi) => lo + Math.floor(Math.random() * (hi - lo + 1));
 
+      // PRODTHROTTLE (2026-10-13): when the pantry holds >4 fresh days,
+      // duty forage/garden/fish stops routing fresh surplus into stockPantry
+      // and the villager takes up non-perishable work instead (real work —
+      // the alt-task branch below resolves it, with its own haul + trust).
+      // Never throttles into famine: an empty pantry never engages.
+      if ((a.task === 'forage' || a.task === 'garden' || a.task === 'fish') && this.prodThrottleEngaged()) {
+        const from = a.task;
+        const alt = this.prodThrottleAltTask();
+        const days = this.pantryFreshDays();
+        const fromName = from === 'garden' ? 'harvest' : from === 'fish' ? 'fish nets' : 'forage';
+        const altName = alt === 'wood' ? 'wood run' : alt === 'water' ? 'water run' : 'stone pile';
+        this.say(`🌿 ${first} checks the pantry before heading out — the shelves are full, ~${Math.round(days)} days of fresh on hand… leaves the ${fromName} standing and turns to the ${altName} instead. The pantry can't take more; the wild will keep.`);
+        v.throttleRedirects = (v.throttleRedirects || 0) + 1;
+        a.task = alt;
+        return this.resolveOneAssignment(vid, a);
+      }
+
       if (a.task === 'forage') {
         // LIVING WORLD: villagers deplete REAL tiles in their personality zone.
         // 5 foragers working the same area STRIP it. The village must branch out.
@@ -13718,6 +13735,57 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const burn = hist.reduce((a, b) => a + b, 0) / hist.length;
       if (burn <= 0) return 999;
       return Math.floor(pk / burn);
+    },
+
+    // PRODTHROTTLE (2026-10-13, Steve make-the-call, documented for overrule):
+    // village-scale production routing. The village produces far more
+    // short-shelf fresh food than 12 mouths eat before it turns (finding:
+    // "Village-scale fresh-rot overproduction" — 94% of rot is pantry-side
+    // village inflows the scholar never touches). When the pantry holds >4
+    // fresh days-on-hand at the MEASURED burn rate, duty forage/garden/fish
+    // redirects to non-perishable work (wood/water/stone) — villagers leave
+    // the surplus standing. Honest foraging practice by villagers, NOT a
+    // System intervention: they choose not to haul food that will rot.
+    // Fresh = spoil-risk food: preserved/rendered/pemmican excluded (they're
+    // the answer, not the problem); spoiled excluded (can't be eaten).
+    pantryFreshKcal() {
+      const v = this.state.village || {};
+      let t = 0;
+      for (const it of (v.pantry || [])) {
+        if (!it) continue;
+        if (it.foodState === 'preserved' || it.foodState === 'rendered' || (it.foodKind || '') === 'pemmican') continue;
+        try { if (this.isSpoiled && this.isSpoiled(it)) continue; } catch (e) {}
+        t += (it.kcalEach || 0) * (it.units || 1);
+      }
+      return t;
+    },
+
+    // fresh days-on-hand at the measured burn rate (same convention as
+    // pantryDaysEstimate: rolling 7-day net, 12x2000 fallback pre-endDay).
+    pantryFreshDays() {
+      const v = this.state.village || {};
+      const fk = this.pantryFreshKcal();
+      if (fk <= 0) return 0;
+      const hist = (v.burnHistory || []).filter(x => x > 0);
+      if (!hist.length) {
+        const pop = ((v.roster || []).length) || 12;
+        return fk / Math.max(1, pop * 2000);
+      }
+      const burn = hist.reduce((a, b) => a + b, 0) / hist.length;
+      if (burn <= 0) return 999;
+      return fk / burn;
+    },
+
+    prodThrottleEngaged() { return this.pantryFreshDays() > 4; },
+
+    // round-robin wood/water/stone for redirected duties
+    prodThrottleAltTask() {
+      const v = this.state.village || {};
+      const alts = ['wood', 'water', 'stone'];
+      v.throttleAltRot = v.throttleAltRot || 0;
+      const t = alts[v.throttleAltRot % alts.length];
+      v.throttleAltRot++;
+      return t;
     },
 
     // fairShareNote: the social norm, shown in the pantry UI. Not a limit —

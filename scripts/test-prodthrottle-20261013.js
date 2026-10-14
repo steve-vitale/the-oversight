@@ -137,6 +137,25 @@ const pantryKcal = () => (Game.state.village.pantry || []).reduce((t, i) => t + 
   for (let i = 0; i < 6; i++) alts.add(Game.prodThrottleAltTask());
   check('redirect rotation covers wood/water/stone', alts.size === 3, [...alts].join(','));
 
+  console.log('== 7. POLICY UNWRAP HONESTY (#69) ==');
+  // The 2026-10-13 pilot SILENTLY RAN POLICY-LESS: Object.assign({},
+  // require('./policies/leadcourt')) yields {leadcourt:{...}} — policy.daily
+  // undefined. RED: the broken shape must be DETECTED; GREEN: the corrected
+  // unwrap (named export) yields a runnable daily for BOTH policies, and the
+  // measure script's registry must use the corrected form.
+  const brokenMod = require('./policies/leadcourt');
+  const pBroken = Object.assign({}, brokenMod);
+  check('broken unwrap (raw module) leaves daily undefined — the #69 bug shape',
+    typeof pBroken.daily === 'undefined', 'typeof=' + typeof pBroken.daily);
+  const goodLead = require('./policies/leadcourt').leadcourt;
+  const goodBelong = require('./policies/belongseek').belongseek;
+  check('correct unwrap: leadcourt.daily is a function', goodLead && typeof goodLead.daily === 'function');
+  check('correct unwrap: belongseek.daily is a function', goodBelong && typeof goodBelong.daily === 'function');
+  const regSrc = fs.readFileSync(path.join(ROOT, 'scripts/measure-prodthrottle-20261013.js'), 'utf8');
+  check('measure script unwraps the named export (both policies)',
+    /require\('\.\/policies\/leadcourt'\)\.leadcourt/.test(regSrc) &&
+    /require\('\.\/policies\/belongseek'\)\.belongseek/.test(regSrc));
+
   console.log(fails.length ? `\n${fails.length} FAILURES: ${fails.join('; ')}` : '\nALL GREEN');
   process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.error('FATAL', e); process.exit(2); });
