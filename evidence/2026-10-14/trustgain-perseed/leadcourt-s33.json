@@ -1,0 +1,630 @@
+{
+ "policy": "leadcourt",
+ "seed": 33,
+ "invocation": 1,
+ "days": 34,
+ "gameDays": 35,
+ "endReason": "village-lost",
+ "waveReach": 2,
+ "maxArc": 3,
+ "national": 0,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "villageDays": 310,
+ "scholarTrustEnd": 42,
+ "successions": 3,
+ "channels": [
+  {
+   "channel": "gain:assignment-deed",
+   "fires": 124,
+   "gainTotal": 124,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 40,
+   "per100vd_drain": 0,
+   "reasons": {
+    "fetched creek water": 80,
+    "hauled wood for the pile": 20,
+    "pried stone from the creek bed": 20,
+    "worked the creek for fish": 16
+   }
+  },
+  {
+   "channel": "gain:rep-drift",
+   "fires": 90,
+   "gainTotal": 87,
+   "drainTotal": -12,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 28.06,
+   "per100vd_drain": -3.87,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:work-deed",
+   "fires": 30,
+   "gainTotal": 30,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 9.68,
+   "per100vd_drain": 0,
+   "reasons": {
+    "worked the snare line": 17,
+    "hauled clean water home": 13
+   }
+  },
+  {
+   "channel": "gain:npc-initiative",
+   "fires": 11,
+   "gainTotal": 22,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 7.1,
+   "per100vd_drain": 0,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:objective-tick",
+   "fires": 14,
+   "gainTotal": 14,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 4.52,
+   "per100vd_drain": 0,
+   "reasons": {
+    "sat and talked a while": 3,
+    "shared a quiet talk": 3,
+    "taught a villager their craft": 4,
+    "learned a craft from a villager": 4
+   }
+  },
+  {
+   "channel": "gain:social-away",
+   "fires": 8,
+   "gainTotal": 11,
+   "drainTotal": 0,
+   "scholarGain": 2,
+   "scholarDrain": 0,
+   "scholarFires": 1,
+   "per100vd_gain": 3.55,
+   "per100vd_drain": 0,
+   "reasons": {
+    "ran into each other out there": 2,
+    "walked out to visit them": 3,
+    "they came all this way to visit": 3
+   }
+  },
+  {
+   "channel": "gain:monster-deed",
+   "fires": 7,
+   "gainTotal": 11,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 3.55,
+   "per100vd_drain": 0,
+   "reasons": {
+    "stood down a monster and walked home": 6,
+    "stood down a monster for the village": 1
+   }
+  },
+  {
+   "channel": "set:newcomer-trust",
+   "fires": 1,
+   "gainTotal": 10,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 3.23,
+   "per100vd_drain": 0,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:contest-verdict",
+   "fires": 2,
+   "gainTotal": 8,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 2.58,
+   "per100vd_drain": 0,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:npc-chat",
+   "fires": 4,
+   "gainTotal": 4,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 1.29,
+   "per100vd_drain": 0,
+   "reasons": {
+    "?": 4
+   }
+  },
+  {
+   "channel": "gain:forage-deed",
+   "fires": 3,
+   "gainTotal": 3,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.97,
+   "per100vd_drain": 0,
+   "reasons": {
+    "foraged the wilds for the village": 3
+   }
+  },
+  {
+   "channel": "gain:fireside-conflict",
+   "fires": 2,
+   "gainTotal": 1,
+   "drainTotal": -3,
+   "scholarGain": 0,
+   "scholarDrain": -3,
+   "scholarFires": 0,
+   "per100vd_gain": 0.32,
+   "per100vd_drain": -0.97,
+   "reasons": {
+    "carried their message": 1,
+    "carried an unkind message": 1
+   }
+  },
+  {
+   "channel": "drain:lead-friction",
+   "fires": 16,
+   "gainTotal": 0,
+   "drainTotal": -32,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -10.32,
+   "reasons": {
+    "gave orders over a contender": 16
+   }
+  },
+  {
+   "channel": "drain:pantry-take-sting",
+   "fires": 12,
+   "gainTotal": 0,
+   "drainTotal": -24,
+   "scholarGain": 0,
+   "scholarDrain": -24,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -7.74,
+   "reasons": {}
+  },
+  {
+   "channel": "drain:auto-recruit",
+   "fires": 4,
+   "gainTotal": 0,
+   "drainTotal": -4,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -1.29,
+   "reasons": {
+    "the village decided without you": 4
+   }
+  },
+  {
+   "channel": "set:succession-inherit",
+   "fires": 2,
+   "gainTotal": 0,
+   "drainTotal": -95,
+   "scholarGain": 0,
+   "scholarDrain": -95,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -30.65,
+   "reasons": {}
+  },
+  {
+   "channel": "drain:ignored-ask",
+   "fires": 1,
+   "gainTotal": 0,
+   "drainTotal": -2,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -0.65,
+   "reasons": {}
+  }
+ ],
+ "progressive": [
+  {
+   "channel": "gain:assignment-deed",
+   "calls": 136,
+   "baseTotal": 136,
+   "scaledTotal": 124,
+   "efficiency": 0.91
+  },
+  {
+   "channel": "gain:rep-drift",
+   "calls": 99,
+   "baseTotal": 99,
+   "scaledTotal": 87,
+   "efficiency": 0.88
+  },
+  {
+   "channel": "gain:work-deed",
+   "calls": 30,
+   "baseTotal": 30,
+   "scaledTotal": 30,
+   "efficiency": 1
+  },
+  {
+   "channel": "gain:objective-tick",
+   "calls": 14,
+   "baseTotal": 14,
+   "scaledTotal": 14,
+   "efficiency": 1
+  },
+  {
+   "channel": "gain:social-away",
+   "calls": 8,
+   "baseTotal": 13,
+   "scaledTotal": 11,
+   "efficiency": 0.85
+  },
+  {
+   "channel": "gain:monster-deed",
+   "calls": 7,
+   "baseTotal": 14,
+   "scaledTotal": 11,
+   "efficiency": 0.79
+  },
+  {
+   "channel": "gain:contest-verdict",
+   "calls": 2,
+   "baseTotal": 6,
+   "scaledTotal": 8,
+   "efficiency": 1.33
+  },
+  {
+   "channel": "gain:npc-chat",
+   "calls": 4,
+   "baseTotal": 4,
+   "scaledTotal": 4,
+   "efficiency": 1
+  },
+  {
+   "channel": "gain:forage-deed",
+   "calls": 3,
+   "baseTotal": 3,
+   "scaledTotal": 3,
+   "efficiency": 1
+  },
+  {
+   "channel": "gain:fireside-conflict",
+   "calls": 1,
+   "baseTotal": 1,
+   "scaledTotal": 1,
+   "efficiency": 1
+  },
+  {
+   "channel": "gain:mentor-slot",
+   "calls": 1,
+   "baseTotal": 4,
+   "scaledTotal": 0,
+   "efficiency": 0
+  }
+ ],
+ "linkGains": [
+  {
+   "caller": "answerAccord",
+   "fires": 4,
+   "applied": 40
+  },
+  {
+   "caller": "linkTick",
+   "fires": 5,
+   "applied": 5
+  }
+ ],
+ "unclassified": [],
+ "senseBeats": [
+  {
+   "channel": "gain:assignment-deed",
+   "beats": [
+    "d1: Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left.",
+    "d1: 📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part.",
+    "d1: \"Got it,\" A person, maybe 60s, with a burn-scarred forearm says flatly. \"Orders are orders. Whoever gives them.\"",
+    "d1: 💧 A person, maybe 60s, with a nervous tic returns with 9L of creek water. Risky until the hearth boils it.",
+    "d18: 📺 MID-SHOW — the feed cuts away from the game. A pod, huge on the screen. A small face behind the glass, asleep. The System, syrup-sweet: \"Look at th",
+    "d18: (The pods need an answer. Speak for them — it will cost you — or let the segment play.)",
+    "d18: — DAY 18 DAWN — The world wakes. Animals are active.",
+    "d18: 👀 Someone mentioned Denver and Tariq answered to it a beat late — like responding to a name that isn't quite yours.",
+    "d35: — DAY 35 DAWN — The world wakes. Animals are active.",
+    "d35: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+    "d35: Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "d35: 🥣 Lucia of Emberhold stands at your fire, thinner than pride allows. \"Emberhold is eating bark. We're asking — 1,724 kcal, whatever you can spare. We"
+   ]
+  },
+  {
+   "channel": "gain:rep-drift",
+   "beats": [
+    "d1: Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left.",
+    "d1: 📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part.",
+    "d1: \"Got it,\" A person, maybe 60s, with a burn-scarred forearm says flatly. \"Orders are orders. Whoever gives them.\"",
+    "d1: 💧 A person, maybe 60s, with a nervous tic returns with 9L of creek water. Risky until the hearth boils it.",
+    "d18: 📺 MID-SHOW — the feed cuts away from the game. A pod, huge on the screen. A small face behind the glass, asleep. The System, syrup-sweet: \"Look at th",
+    "d18: (The pods need an answer. Speak for them — it will cost you — or let the segment play.)",
+    "d18: — DAY 18 DAWN — The world wakes. Animals are active.",
+    "d18: 👀 Someone mentioned Denver and Tariq answered to it a beat late — like responding to a name that isn't quite yours.",
+    "d35: — DAY 35 DAWN — The world wakes. Animals are active.",
+    "d35: Overnight, Muscadine Grapes went bad — beyond saving. You leave it for the flies.",
+    "d35: Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "d35: 🥣 Lucia of Emberhold stands at your fire, thinner than pride allows. \"Emberhold is eating bark. We're asking — 1,724 kcal, whatever you can spare. We"
+   ]
+  }
+ ],
+ "trajectory": [
+  {
+   "day": 1,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 3,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 4,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 5,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 6,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 7,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 8,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 9,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 10,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 11,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 12,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 13,
+   "vid": "gen_2wgh1wt",
+   "trust": 15,
+   "roster": 11
+  },
+  {
+   "day": 14,
+   "vid": "gen_jm9wtz6",
+   "trust": 42,
+   "roster": 10
+  },
+  {
+   "day": 15,
+   "vid": "gen_jm9wtz6",
+   "trust": 42,
+   "roster": 10
+  },
+  {
+   "day": 16,
+   "vid": "gen_jm9wtz6",
+   "trust": 42,
+   "roster": 10
+  },
+  {
+   "day": 17,
+   "vid": "gen_jm9wtz6",
+   "trust": 42,
+   "roster": 10
+  },
+  {
+   "day": 18,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 19,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 20,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 21,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 22,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 23,
+   "vid": "gen_jm9wtz6",
+   "trust": 44,
+   "roster": 10
+  },
+  {
+   "day": 24,
+   "vid": "gen_jm9wtz6",
+   "trust": 41,
+   "roster": 10
+  },
+  {
+   "day": 25,
+   "vid": "gen_jm9wtz6",
+   "trust": 41,
+   "roster": 9
+  },
+  {
+   "day": 26,
+   "vid": "gen_jm9wtz6",
+   "trust": 41,
+   "roster": 8
+  },
+  {
+   "day": 27,
+   "vid": "gen_jm9wtz6",
+   "trust": 41,
+   "roster": 8
+  },
+  {
+   "day": 28,
+   "vid": "gen_jm9wtz6",
+   "trust": 41,
+   "roster": 8
+  },
+  {
+   "day": 29,
+   "vid": "gen_jm9wtz6",
+   "trust": 19,
+   "roster": 5
+  },
+  {
+   "day": 30,
+   "vid": "gen_jm9wtz6",
+   "trust": 19,
+   "roster": 5
+  },
+  {
+   "day": 31,
+   "vid": "gen_jm9wtz6",
+   "trust": 17,
+   "roster": 5
+  },
+  {
+   "day": 32,
+   "vid": "gen_jm9wtz6",
+   "trust": 17,
+   "roster": 4
+  },
+  {
+   "day": 33,
+   "vid": "gen_jm9wtz6",
+   "trust": 17,
+   "roster": 2
+  },
+  {
+   "day": 34,
+   "vid": "gen_jm9wtz6",
+   "trust": 17,
+   "roster": 2
+  },
+  {
+   "day": 35,
+   "vid": "gen_dyl4dau",
+   "trust": 42,
+   "roster": 2
+  },
+  {
+   "day": 35,
+   "vid": "gen_dyl4dau",
+   "trust": 42,
+   "roster": 2
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "3:3|90|2355|12|4|4|1|358",
+  "4:4|100|1466|12|4|4|1|324",
+  "5:5|100|1311|12|4|4|1|317",
+  "6:6|100|1091|12|4|4|1|325",
+  "7:7|100|1124|12|4|4|1|380",
+  "8:8|100|1038|12|4|4|1|392",
+  "9:9|100|1201|12|4|4|1|374",
+  "10:10|100|1336|11|4|4|1|390",
+  "11:11|100|1134|11|4|4|1|403",
+  "12:12|100|1225|11|4|4|1|405",
+  "13:13|100|1490|11|4|4|1|364",
+  "14:14|100|2400|10|4|4|1|333",
+  "15:15|100|2086|10|4|4|1|327",
+  "16:16|100|2174|10|4|4|1|341",
+  "17:17|100|2268|10|4|4|1|337",
+  "18:18|100|2192|10|4|4|1|339",
+  "19:19|100|2390|10|4|4|1|360",
+  "20:20|100|2400|10|4|4|1|334",
+  "21:21|100|2169|10|4|4|1|323",
+  "22:22|100|2373|10|4|4|1|331",
+  "23:23|82|2380|10|4|4|1|306",
+  "24:24|100|890|10|5|4|1|287",
+  "25:25|100|0|9|5|4|2|271",
+  "26:26|96|500|8|5|4|2|243",
+  "27:27|89|227|8|5|4|2|197",
+  "28:28|71|47|8|5|4|2|143",
+  "29:29|90|2827|5|5|4|2|160",
+  "30:30|100|2623|5|5|4|2|134",
+  "31:31|76|2844|5|5|4|2|92",
+  "32:32|64|2864|4|5|4|2|70",
+  "33:33|37|2635|2|5|4|2|54",
+  "34:34|49|2904|2|5|4|2|0",
+  "35:35|100|1480|2|4|4|2|0"
+ ]
+}

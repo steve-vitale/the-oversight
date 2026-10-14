@@ -1,0 +1,1587 @@
+{
+ "policy": "belongseek",
+ "seed": 66,
+ "invocation": 1,
+ "days": 156,
+ "gameDays": 157,
+ "endReason": "village-lost",
+ "waveReach": 3,
+ "maxArc": 3,
+ "national": 1,
+ "table": 0,
+ "wins": 0,
+ "exiled": 0,
+ "villageDays": 1268,
+ "scholarTrustEnd": 69,
+ "successions": 4,
+ "channels": [
+  {
+   "channel": "gain:assignment-deed",
+   "fires": 295,
+   "gainTotal": 318,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 25.08,
+   "per100vd_drain": 0,
+   "reasons": {
+    "fetched creek water": 264,
+    "hauled wood for the pile": 71,
+    "pried stone from the creek bed": 63,
+    "kept the haven fed": 126,
+    "kept the haven work going": 126,
+    "worked the creek for fish": 46
+   }
+  },
+  {
+   "channel": "gain:rep-drift",
+   "fires": 260,
+   "gainTotal": 258,
+   "drainTotal": -40,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 20.35,
+   "per100vd_drain": -3.15,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:monster-deed",
+   "fires": 90,
+   "gainTotal": 129,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 10.17,
+   "per100vd_drain": 0,
+   "reasons": {
+    "stood down a monster and walked home": 109,
+    "stood down a monster for the village": 8
+   }
+  },
+  {
+   "channel": "gain:social-away",
+   "fires": 86,
+   "gainTotal": 105,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 8.28,
+   "per100vd_drain": 0,
+   "reasons": {
+    "walked out to visit them": 20,
+    "they came all this way to visit": 20,
+    "ran into each other out there": 40,
+    "they walk out with me": 7,
+    "heading out together": 7
+   }
+  },
+  {
+   "channel": "gain:objective-tick",
+   "fires": 89,
+   "gainTotal": 89,
+   "drainTotal": 0,
+   "scholarGain": 12,
+   "scholarDrain": 0,
+   "scholarFires": 12,
+   "per100vd_gain": 7.02,
+   "per100vd_drain": 0,
+   "reasons": {
+    "sat and talked a while": 21,
+    "shared a quiet talk": 21,
+    "taught a villager their craft": 28,
+    "learned a craft from a villager": 28
+   }
+  },
+  {
+   "channel": "gain:work-deed",
+   "fires": 78,
+   "gainTotal": 78,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 6.15,
+   "per100vd_drain": 0,
+   "reasons": {
+    "hauled clean water home": 25,
+    "worked the snare line": 79
+   }
+  },
+  {
+   "channel": "set:newcomer-trust",
+   "fires": 6,
+   "gainTotal": 60,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 4.73,
+   "per100vd_drain": 0,
+   "reasons": {}
+  },
+  {
+   "channel": "set:succession-inherit",
+   "fires": 11,
+   "gainTotal": 45,
+   "drainTotal": -95,
+   "scholarGain": 13,
+   "scholarDrain": -95,
+   "scholarFires": 3,
+   "per100vd_gain": 3.55,
+   "per100vd_drain": -7.49,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:npc-initiative",
+   "fires": 12,
+   "gainTotal": 24,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 1.89,
+   "per100vd_drain": 0,
+   "reasons": {}
+  },
+  {
+   "channel": "gain:forage-deed",
+   "fires": 21,
+   "gainTotal": 21,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 1.66,
+   "per100vd_drain": 0,
+   "reasons": {
+    "foraged the wilds for the village": 30
+   }
+  },
+  {
+   "channel": "gain:npc-chat",
+   "fires": 15,
+   "gainTotal": 15,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 1.18,
+   "per100vd_drain": 0,
+   "reasons": {
+    "?": 16
+   }
+  },
+  {
+   "channel": "gain:expedition-return",
+   "fires": 9,
+   "gainTotal": 9,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.71,
+   "per100vd_drain": 0,
+   "reasons": {
+    "came back from an expedition": 14
+   }
+  },
+  {
+   "channel": "gain:mentor-slot",
+   "fires": 1,
+   "gainTotal": 5,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.39,
+   "per100vd_drain": 0,
+   "reasons": {
+    "mentored you through the slot moment": 1
+   }
+  },
+  {
+   "channel": "gain:blood-bond",
+   "fires": 2,
+   "gainTotal": 2,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.16,
+   "per100vd_drain": 0,
+   "reasons": {
+    "bled together": 4
+   }
+  },
+  {
+   "channel": "gain:fireside-conflict",
+   "fires": 3,
+   "gainTotal": 1,
+   "drainTotal": -5,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.08,
+   "per100vd_drain": -0.39,
+   "reasons": {
+    "carried their message": 1,
+    "carried an unkind message": 1,
+    "sided with them in a conflict": 1,
+    "cold-shouldered in a conflict": 1
+   }
+  },
+  {
+   "channel": "gain:answered-call",
+   "fires": 1,
+   "gainTotal": 1,
+   "drainTotal": 0,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0.08,
+   "per100vd_drain": 0,
+   "reasons": {
+    "answered a call for help": 2
+   }
+  },
+  {
+   "channel": "drain:pantry-take-sting",
+   "fires": 12,
+   "gainTotal": 0,
+   "drainTotal": -24,
+   "scholarGain": 0,
+   "scholarDrain": -24,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -1.89,
+   "reasons": {}
+  },
+  {
+   "channel": "drain:ignored-ask",
+   "fires": 6,
+   "gainTotal": 0,
+   "drainTotal": -12,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -0.95,
+   "reasons": {}
+  },
+  {
+   "channel": "drain:auto-recruit",
+   "fires": 6,
+   "gainTotal": 0,
+   "drainTotal": -6,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -0.47,
+   "reasons": {
+    "the village decided without you": 6
+   }
+  },
+  {
+   "channel": "drain:convo-fallout",
+   "fires": 5,
+   "gainTotal": 0,
+   "drainTotal": -10,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -0.79,
+   "reasons": {}
+  },
+  {
+   "channel": "drain:lead-friction",
+   "fires": 4,
+   "gainTotal": 0,
+   "drainTotal": -8,
+   "scholarGain": 0,
+   "scholarDrain": 0,
+   "scholarFires": 0,
+   "per100vd_gain": 0,
+   "per100vd_drain": -0.63,
+   "reasons": {
+    "gave orders over a contender": 4
+   }
+  }
+ ],
+ "progressive": [
+  {
+   "channel": "gain:assignment-deed",
+   "calls": 696,
+   "baseTotal": 758,
+   "scaledTotal": 318,
+   "efficiency": 0.42
+  },
+  {
+   "channel": "gain:rep-drift",
+   "calls": 589,
+   "baseTotal": 622,
+   "scaledTotal": 257,
+   "efficiency": 0.41
+  },
+  {
+   "channel": "gain:monster-deed",
+   "calls": 117,
+   "baseTotal": 176,
+   "scaledTotal": 129,
+   "efficiency": 0.73
+  },
+  {
+   "channel": "gain:social-away",
+   "calls": 94,
+   "baseTotal": 114,
+   "scaledTotal": 105,
+   "efficiency": 0.92
+  },
+  {
+   "channel": "gain:objective-tick",
+   "calls": 98,
+   "baseTotal": 98,
+   "scaledTotal": 89,
+   "efficiency": 0.91
+  },
+  {
+   "channel": "gain:work-deed",
+   "calls": 104,
+   "baseTotal": 104,
+   "scaledTotal": 78,
+   "efficiency": 0.75
+  },
+  {
+   "channel": "gain:forage-deed",
+   "calls": 30,
+   "baseTotal": 30,
+   "scaledTotal": 21,
+   "efficiency": 0.7
+  },
+  {
+   "channel": "gain:npc-chat",
+   "calls": 16,
+   "baseTotal": 16,
+   "scaledTotal": 15,
+   "efficiency": 0.94
+  },
+  {
+   "channel": "gain:expedition-return",
+   "calls": 14,
+   "baseTotal": 14,
+   "scaledTotal": 9,
+   "efficiency": 0.64
+  },
+  {
+   "channel": "gain:mentor-slot",
+   "calls": 1,
+   "baseTotal": 4,
+   "scaledTotal": 5,
+   "efficiency": 1.25
+  },
+  {
+   "channel": "gain:blood-bond",
+   "calls": 4,
+   "baseTotal": 4,
+   "scaledTotal": 2,
+   "efficiency": 0.5
+  },
+  {
+   "channel": "gain:fireside-conflict",
+   "calls": 2,
+   "baseTotal": 3,
+   "scaledTotal": 1,
+   "efficiency": 0.33
+  },
+  {
+   "channel": "gain:answered-call",
+   "calls": 2,
+   "baseTotal": 2,
+   "scaledTotal": 1,
+   "efficiency": 0.5
+  },
+  {
+   "channel": "gain:contest-verdict",
+   "calls": 1,
+   "baseTotal": 3,
+   "scaledTotal": 0,
+   "efficiency": 0
+  }
+ ],
+ "linkGains": [
+  {
+   "caller": "answerAccord",
+   "fires": 1,
+   "applied": 10
+  },
+  {
+   "caller": "payTribute",
+   "fires": 18,
+   "applied": 54
+  },
+  {
+   "caller": "linkTick",
+   "fires": 17,
+   "applied": 16
+  },
+  {
+   "caller": "answerDemand",
+   "fires": 6,
+   "applied": 41
+  },
+  {
+   "caller": "proveWorth",
+   "fires": 43,
+   "applied": 57
+  },
+  {
+   "caller": "answerNationalChoice",
+   "fires": 3,
+   "applied": 24
+  }
+ ],
+ "unclassified": [],
+ "senseBeats": [
+  {
+   "channel": "gain:assignment-deed",
+   "beats": [
+    "d1: Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 24L left.",
+    "d1: 📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part.",
+    "d1: 📋 A man, maybe 20s wants to know what's by the creek. \"Just look. Come back and tell me.\"",
+    "d1: 💧 A woman, maybe 50s, with a scarred cheek returns with 8L of creek water. Risky until the hearth boils it.",
+    "d91: — DAY 91 DAWN — The world wakes. Animals are active.",
+    "d91: Overnight, Wild Strawberry went bad — beyond saving. You leave it for the flies.",
+    "d91: Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "d91: The village threw out spoiled stores: Foraged food, Snared meat. Theo mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — t",
+    "d141: — DAY 141 DAWN — The world wakes. Animals are active.",
+    "d141: 💬 Nina says: \"Someone's been leaving food out. Good food. Don't ask me how I know it wasn't one of us.\"",
+    "d141: Dawn. You wake rested. (+0 health, energy restored. By the fire. Good enough.)",
+    "d141: Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+   ]
+  },
+  {
+   "channel": "gain:rep-drift",
+   "beats": [
+    "d1: Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 24L left.",
+    "d1: 📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part.",
+    "d1: 📋 A man, maybe 20s wants to know what's by the creek. \"Just look. Come back and tell me.\"",
+    "d1: 💧 A woman, maybe 50s, with a scarred cheek returns with 8L of creek water. Risky until the hearth boils it.",
+    "d83: — DAY 83 DAWN — The world wakes. Animals are active.",
+    "d83: The village threw out spoiled stores: Foraged food. Aroha mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rac",
+    "d83: 🎁 You find a small bundle tucked where you'll find it. No one saw it left there.",
+    "d83: \"They're sending Vex after you tomorrow. He's bored. Be somewhere else.\"",
+    "d144: — DAY 144 DAWN — The world wakes. Animals are active.",
+    "d144: 💬 Nina says: \"They said you're doing well. It sounded... proud? Can they feel proud?\"",
+    "d144: ◈ WORD TRAVELS — riders from Emberhold bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands.",
+    "d144: 📊 THE STANDINGS — Haven sits 1st of 5. Haven leads. The audience has a favorite, and it's you."
+   ]
+  }
+ ],
+ "trajectory": [
+  {
+   "day": 1,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 3,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 4,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 5,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 6,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 7,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 8,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 9,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 10,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 11,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 12,
+   "vid": "gen_x3kk9k5",
+   "trust": 15,
+   "roster": 12
+  },
+  {
+   "day": 13,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 14,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 15,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 16,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 17,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 18,
+   "vid": "gen_q0nnodf",
+   "trust": 24,
+   "roster": 11
+  },
+  {
+   "day": 19,
+   "vid": "gen_q0nnodf",
+   "trust": 8,
+   "roster": 11
+  },
+  {
+   "day": 20,
+   "vid": "gen_q0nnodf",
+   "trust": 8,
+   "roster": 11
+  },
+  {
+   "day": 21,
+   "vid": "gen_q0nnodf",
+   "trust": 6,
+   "roster": 10
+  },
+  {
+   "day": 22,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 23,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 24,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 25,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 26,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 27,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 28,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 29,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 30,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 31,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 32,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 33,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 34,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 35,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 36,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 37,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 38,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 39,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 40,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 41,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 42,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 43,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 44,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 45,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 46,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 47,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 48,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 49,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 50,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 51,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 10
+  },
+  {
+   "day": 52,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 53,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 54,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 55,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 56,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 57,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 58,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 59,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 60,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 61,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 62,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 63,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 64,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 65,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 66,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 67,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 68,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 69,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 70,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 71,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 72,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 73,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 74,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 75,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 76,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 77,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 78,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 79,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 80,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 9
+  },
+  {
+   "day": 81,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 82,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 83,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 84,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 85,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 86,
+   "vid": "gen_q0nnodf",
+   "trust": 0,
+   "roster": 8
+  },
+  {
+   "day": 87,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 7
+  },
+  {
+   "day": 88,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 6
+  },
+  {
+   "day": 89,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 6
+  },
+  {
+   "day": 90,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 6
+  },
+  {
+   "day": 91,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 6
+  },
+  {
+   "day": 92,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 8
+  },
+  {
+   "day": 93,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 8
+  },
+  {
+   "day": 94,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 9
+  },
+  {
+   "day": 95,
+   "vid": "gen_5oxkjx5",
+   "trust": 52,
+   "roster": 8
+  },
+  {
+   "day": 96,
+   "vid": "gen_5oxkjx5",
+   "trust": 53,
+   "roster": 8
+  },
+  {
+   "day": 97,
+   "vid": "gen_5oxkjx5",
+   "trust": 53,
+   "roster": 8
+  },
+  {
+   "day": 98,
+   "vid": "gen_5oxkjx5",
+   "trust": 55,
+   "roster": 8
+  },
+  {
+   "day": 99,
+   "vid": "gen_5oxkjx5",
+   "trust": 55,
+   "roster": 8
+  },
+  {
+   "day": 100,
+   "vid": "gen_5oxkjx5",
+   "trust": 55,
+   "roster": 8
+  },
+  {
+   "day": 101,
+   "vid": "gen_5oxkjx5",
+   "trust": 56,
+   "roster": 8
+  },
+  {
+   "day": 102,
+   "vid": "gen_5oxkjx5",
+   "trust": 57,
+   "roster": 8
+  },
+  {
+   "day": 103,
+   "vid": "gen_5oxkjx5",
+   "trust": 58,
+   "roster": 8
+  },
+  {
+   "day": 104,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 8
+  },
+  {
+   "day": 105,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 7
+  },
+  {
+   "day": 106,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 7
+  },
+  {
+   "day": 107,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 7
+  },
+  {
+   "day": 108,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 7
+  },
+  {
+   "day": 109,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 8
+  },
+  {
+   "day": 110,
+   "vid": "gen_5oxkjx5",
+   "trust": 59,
+   "roster": 9
+  },
+  {
+   "day": 111,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 8
+  },
+  {
+   "day": 112,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 9
+  },
+  {
+   "day": 113,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 9
+  },
+  {
+   "day": 114,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 9
+  },
+  {
+   "day": 115,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 8
+  },
+  {
+   "day": 116,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 8
+  },
+  {
+   "day": 117,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 8
+  },
+  {
+   "day": 118,
+   "vid": "gen_ubchdb4",
+   "trust": 64,
+   "roster": 8
+  },
+  {
+   "day": 119,
+   "vid": "gen_ubchdb4",
+   "trust": 65,
+   "roster": 8
+  },
+  {
+   "day": 120,
+   "vid": "gen_ubchdb4",
+   "trust": 66,
+   "roster": 7
+  },
+  {
+   "day": 121,
+   "vid": "gen_ubchdb4",
+   "trust": 66,
+   "roster": 7
+  },
+  {
+   "day": 122,
+   "vid": "gen_ubchdb4",
+   "trust": 66,
+   "roster": 7
+  },
+  {
+   "day": 123,
+   "vid": "gen_ubchdb4",
+   "trust": 67,
+   "roster": 7
+  },
+  {
+   "day": 124,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 7
+  },
+  {
+   "day": 125,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 7
+  },
+  {
+   "day": 126,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 7
+  },
+  {
+   "day": 127,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 7
+  },
+  {
+   "day": 128,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 129,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 130,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 131,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 132,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 133,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 134,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 6
+  },
+  {
+   "day": 135,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 136,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 137,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 138,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 139,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 140,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 141,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 5
+  },
+  {
+   "day": 142,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 4
+  },
+  {
+   "day": 143,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 4
+  },
+  {
+   "day": 144,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 3
+  },
+  {
+   "day": 145,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 3
+  },
+  {
+   "day": 146,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 147,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 148,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 149,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 150,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 151,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 152,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 153,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 154,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 155,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 156,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 157,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  },
+  {
+   "day": 157,
+   "vid": "gen_ubchdb4",
+   "trust": 69,
+   "roster": 2
+  }
+ ],
+ "hashes": [
+  "1:1|100|2190|12|4|4|1|473",
+  "3:3|100|2400|12|4|4|1|369",
+  "4:4|100|1484|12|4|4|1|355",
+  "5:5|93|1050|12|4|4|1|343",
+  "6:6|100|1140|12|4|4|1|384",
+  "7:7|100|1302|12|4|4|1|379",
+  "8:8|100|1070|12|4|4|1|414",
+  "9:9|100|1008|12|4|4|1|422",
+  "10:10|100|1000|12|4|4|1|385",
+  "11:11|100|1030|12|4|4|1|418",
+  "12:12|100|1461|12|4|4|1|443",
+  "13:13|100|2400|11|4|4|1|464",
+  "14:14|100|1744|11|4|4|1|448",
+  "15:15|100|1734|11|4|4|1|472",
+  "16:16|100|1514|11|4|4|1|488",
+  "17:17|92|1828|11|4|4|1|513",
+  "18:18|100|1635|11|4|4|1|518",
+  "19:19|94|2400|11|4|4|1|522",
+  "20:20|100|2400|11|4|4|1|551",
+  "21:21|100|2400|10|4|4|1|486",
+  "22:22|100|2400|10|4|4|2|506",
+  "23:23|100|2400|10|4|4|2|627",
+  "24:24|98|2400|10|4|4|2|646",
+  "25:25|100|2400|10|4|4|2|597",
+  "26:26|100|2400|10|4|4|2|657",
+  "27:27|100|2400|10|4|4|2|760",
+  "28:28|100|2400|10|4|4|2|736",
+  "29:29|100|2400|10|4|4|2|620",
+  "30:30|56|2400|10|4|4|2|555",
+  "31:31|86|2400|10|4|4|2|594",
+  "32:32|100|2400|10|4|4|2|682",
+  "33:33|100|2400|10|4|4|2|705",
+  "34:34|100|2400|10|4|4|2|714",
+  "35:35|100|2400|10|4|4|2|721",
+  "36:36|100|2400|10|4|4|2|692",
+  "37:37|100|2400|10|4|4|2|725",
+  "38:38|100|2400|10|4|4|2|776",
+  "39:39|100|2400|10|4|4|2|815",
+  "40:40|100|2400|10|4|4|2|779",
+  "41:41|100|2400|10|4|4|2|669",
+  "42:42|100|2400|10|4|4|2|752",
+  "43:43|100|2400|10|4|4|3|713",
+  "44:44|100|2400|10|4|4|3|687",
+  "45:45|100|2400|10|4|4|3|713",
+  "46:46|100|2400|10|4|4|3|698",
+  "47:47|100|2400|10|4|4|3|807",
+  "48:48|100|2400|10|4|4|3|783",
+  "49:49|100|2400|10|4|4|3|734",
+  "50:50|100|2400|10|4|4|3|704",
+  "51:51|100|2400|10|4|4|3|587",
+  "52:52|100|2400|9|4|4|3|603",
+  "53:53|84|2400|9|4|4|3|726",
+  "54:54|100|2400|9|4|4|3|817",
+  "55:55|35|2400|9|4|4|3|709",
+  "56:56|48|2400|9|4|4|3|726",
+  "57:57|65|2400|9|4|4|3|798",
+  "58:58|65|2400|9|4|4|3|691",
+  "59:59|95|2400|9|4|4|3|605",
+  "60:60|100|2400|9|4|4|3|681",
+  "61:61|100|2400|9|4|4|3|753",
+  "62:62|100|2400|9|4|4|3|660",
+  "63:63|100|2400|9|4|4|3|624",
+  "64:64|100|2400|9|4|4|3|538",
+  "65:65|100|2400|9|4|4|3|559",
+  "66:66|100|2400|9|4|4|3|598",
+  "67:67|100|2400|9|4|4|3|622",
+  "68:68|100|2400|9|4|4|3|650",
+  "69:69|100|2400|9|4|4|3|591",
+  "70:70|100|2400|9|4|4|3|616",
+  "71:71|100|2400|9|4|4|3|593",
+  "72:72|100|2400|9|4|4|3|638",
+  "73:73|100|2400|9|4|4|3|637",
+  "74:74|100|2400|9|4|4|3|530",
+  "75:75|100|2400|9|4|4|3|590",
+  "76:76|100|2400|9|4|4|3|765",
+  "77:77|100|2400|9|4|4|3|814",
+  "78:78|100|2400|9|4|4|3|626",
+  "79:79|100|2400|9|4|4|3|582",
+  "80:80|100|2400|9|4|4|3|630",
+  "81:81|100|2400|8|4|4|3|610",
+  "82:82|100|2400|8|4|4|3|649",
+  "83:83|100|2400|8|4|4|3|591",
+  "84:84|100|2400|8|4|4|3|559",
+  "85:85|100|2400|8|4|4|3|529",
+  "86:86|100|2400|8|4|4|3|524",
+  "87:87|100|2400|7|4|4|3|498",
+  "88:88|100|2400|6|4|4|3|534",
+  "89:89|100|2400|6|4|4|3|561",
+  "90:90|100|2400|6|4|4|3|559",
+  "91:91|100|2400|6|4|4|3|577",
+  "92:92|100|2400|8|4|4|3|538",
+  "93:93|100|2400|8|4|4|3|544",
+  "94:94|100|2400|9|4|4|3|568",
+  "95:95|100|2400|8|4|4|3|506",
+  "96:96|54|2400|8|4|4|3|483",
+  "97:97|49|2400|8|4|4|3|476",
+  "98:98|79|2400|8|4|4|3|482",
+  "99:99|79|2400|8|4|4|3|418",
+  "100:100|100|2400|8|4|4|3|432",
+  "101:101|100|2400|8|4|4|3|414",
+  "102:102|100|2400|8|4|4|3|453",
+  "103:103|89|2400|8|4|4|3|496",
+  "104:104|100|2400|8|4|4|3|480",
+  "105:105|100|2400|7|4|4|3|436",
+  "106:106|100|2400|7|4|4|3|262",
+  "107:107|100|2400|7|4|4|3|159",
+  "108:108|100|2400|7|4|4|3|115",
+  "109:109|100|2400|8|4|4|3|79",
+  "110:110|100|2400|9|4|4|3|63",
+  "111:111|100|2400|8|4|4|3|78",
+  "112:112|100|2400|9|4|4|3|42",
+  "113:113|110|2400|9|4|4|3|26",
+  "114:114|110|2400|9|4|4|3|36",
+  "115:115|100|2400|8|4|4|3|16",
+  "116:116|110|2400|8|4|4|3|39",
+  "117:117|110|2400|8|4|4|3|68",
+  "118:118|110|2400|8|4|4|3|88",
+  "119:119|110|2400|8|4|4|3|99",
+  "120:120|110|2400|7|4|4|3|85",
+  "121:121|110|2400|7|4|4|3|134",
+  "122:122|110|2400|7|4|4|3|102",
+  "123:123|110|2400|7|4|4|3|126",
+  "124:124|105|2400|7|4|4|3|152",
+  "125:125|110|2400|7|4|4|3|92",
+  "126:126|110|2400|7|4|4|3|65",
+  "127:127|105|2400|7|4|4|3|89",
+  "128:128|105|2400|6|4|4|3|68",
+  "129:129|110|2400|6|4|4|3|64",
+  "130:130|110|2400|6|4|4|3|100",
+  "131:131|110|2400|6|4|4|3|121",
+  "132:132|110|2400|6|4|4|3|189",
+  "133:133|110|2400|6|4|4|3|70",
+  "134:134|110|2400|6|4|4|3|51",
+  "135:135|110|2400|5|4|4|3|79",
+  "136:136|110|2400|5|4|4|3|79",
+  "137:137|110|2400|5|4|4|3|79",
+  "138:138|110|2400|5|4|4|3|102",
+  "139:139|110|2400|5|4|4|3|155",
+  "140:140|110|2400|5|4|4|3|94",
+  "141:141|110|2400|5|4|4|3|102",
+  "142:142|110|2400|4|4|4|3|80",
+  "143:143|110|2400|4|4|4|3|137",
+  "144:144|49|2400|3|4|4|3|190",
+  "145:145|49|2400|3|4|4|4|82",
+  "146:146|79|2400|2|4|4|4|32",
+  "147:147|109|2400|2|4|4|4|23",
+  "148:148|109|2400|2|4|4|4|29",
+  "149:149|110|2400|2|4|4|4|15",
+  "150:150|110|2400|2|4|4|4|0",
+  "151:151|110|2400|2|4|4|4|20",
+  "152:152|110|2400|2|4|4|4|19",
+  "153:153|110|2400|2|4|4|4|14",
+  "154:154|110|2400|2|4|4|4|0",
+  "155:155|110|2400|2|4|4|3|4",
+  "156:156|110|2400|2|4|4|3|0",
+  "157:157|110|2400|2|4|4|3|0"
+ ]
+}
