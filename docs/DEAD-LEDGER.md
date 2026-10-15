@@ -59,6 +59,19 @@ call before anything happens).
 - **Disposition:** DOCUMENTED — Steve deliberately removed them in ab148efc;
   not dead code, a design removal. Test rewritten against current systems.
 
+### scholar.wounds write-never → FLAGGED
+- **What:** `src/js/engine/calories.js` resolveDay reads `(scholar.wounds || []).length`
+  for the honest-death-cause 'wounds' attribution — but nothing in the codebase
+  ever assigns `scholar.wounds` (array). Combat damage lands directly on
+  `scholar.health` with no wound record, so the 'wounds' killedBy branch can
+  never fire. (The honest-causes proof test passes only because it hand-writes
+  `s.wounds = [{...}]`.)
+- **Found:** journey-succession r14, 2026-10-15 (seed 722's second bearer died
+  with health 1, wounds 0 after a raid — the branch couldn't see the raid).
+- **Disposition:** FLAGGED — wiring combat damage into wound records is
+  invasive (fieldFights + contest paths); the r14 trivial-deficit fix covers
+  the observed misattribution ('starvation' → 'the night') without it.
+
 ## How to add an entry
 What (one line), where found (run + date), disposition + commit. If it needs
 Steve, mark DESIGN and say what the call is. If it's a cleanup, mark FLAGGED.

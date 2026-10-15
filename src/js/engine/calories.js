@@ -106,7 +106,14 @@
       scholar.health -= Math.min(20, 2 + deficit / 180);
       scholar.energy = Math.max(0, scholar.energy - 25);
       warnings.push('STARVING: health and energy falling. The spiral has started.');
-      if (!killedBy && scholar.health <= 0) killedBy = 'starvation';
+      // TRIVIAL-DEFICIT HONESTY (journey-succession r14 2026-10-15): a tiny
+      // deficit on a full belly is not starvation — the day already did the
+      // killing (seed 722: the bearer slept at 1 HP after a raid with kcal
+      // 2198, deficit ~2, and the epitaph said 'starvation'). The spiral
+      // takes credit only for a real deficit (>= STARVATION_THRESHOLD);
+      // otherwise the night found a body the day had already claimed.
+      if (!killedBy && scholar.health <= 0)
+        killedBy = deficit >= STARVATION_THRESHOLD ? 'starvation' : 'the night';
     } else if (scholar.kcal < STARVATION_THRESHOLD) {
       warnings.push('WARNING: reserves critical. Eat tomorrow or the spiral begins.');
     }
