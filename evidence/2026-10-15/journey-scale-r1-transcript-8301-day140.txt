@@ -1,0 +1,26 @@
+=== seed 8301 day 140 — conversation with Felix (app_mgpspiws802) ===
+occupation=mechanic temperament=steady trust=25 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about? Life's funny that way."
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Interesting — Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Everyone's got a hidden card. I'm keeping a mental deck of this whole village."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Did you hear? Elif just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

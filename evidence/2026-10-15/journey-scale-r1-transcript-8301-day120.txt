@@ -1,0 +1,26 @@
+=== seed 8301 day 120 — conversation with Miguel (miguel_santos) ===
+occupation=dockworker temperament=intense trust=22 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "When's the last time you really laughed?"
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like stealing."
+THEM: "Stealing joy. I like that. We should steal more of it."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Consider it a project, then. Project: laugh. I'm assigning us both."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Did you hear? Ruby just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Think about what I said."
+want final: id=curious stage=3 resolution=engaged

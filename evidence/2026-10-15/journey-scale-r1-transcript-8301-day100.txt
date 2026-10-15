@@ -1,0 +1,17 @@
+=== seed 8301 day 100 — conversation with Frieda (gen_a4yyl4d) ===
+occupation=blacksmith temperament=mischievous trust=90 dead=false mood=steady
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking. Trust me. Mostly."
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. Where the salmonberry grows thick, morning, early. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Maypop — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=ask_favor stage=3 resolution=promised

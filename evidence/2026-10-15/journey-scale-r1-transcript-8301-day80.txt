@@ -1,0 +1,26 @@
+=== seed 8301 day 80 — conversation with Sofia (sofia_chen) ===
+occupation=community gardener temperament=cautious trust=27 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Nothing's wasted. Not really. It all comes back around."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "I left. Walked back in like I'd never left, apparently. Just... be straight with me."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "I'll think about what you said. Carefully. That's how I do things."
+want final: id=curious stage=3 resolution=engaged

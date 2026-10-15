@@ -1,0 +1,17 @@
+=== seed 8308 day 100 — conversation with Tanisha (gen_ii1zhxx) ===
+occupation=Sailor temperament=fidgety trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I hate to ask, but have you got anything to spare? Anything? My hands shake when I try to work. Give it time."
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "How can I help?"
+THEM: "I haven't eaten right in days. I need food before I can't work at all."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,31 @@
+=== seed 8306 day 100 — conversation with Quinn (quinn_murphy) ===
+occupation=bartender temperament=warm trust=26 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Dandelion — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: They settle — not warm, not cold. Just two people talking.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Groundnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: Their voice loosens. The guardedness thins.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Black Walnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+(want=ask_favor stage=3)
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Sugar Maple — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=ask_favor stage=3 resolution=promised

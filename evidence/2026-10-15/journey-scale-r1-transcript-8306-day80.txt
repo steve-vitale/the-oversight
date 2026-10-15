@@ -1,0 +1,20 @@
+=== seed 8306 day 80 — conversation with Elena (app_mgpsphhq351) ===
+occupation=carpenter temperament=stoic trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "So what's your plan here? Just... get through it?"
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Plans change. But having one — even a bad one — beats drifting."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "You want to know about that? Okay." "Look — Did you hear? Brian just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [goon] "Whoa — go on."
+THEM: "Sorry — I asked you something there." Look — Did you hear?
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Steady as she goes. We'll talk again."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,32 @@
+=== seed 8305 day 100 — conversation with Maya (app_mgpsphch127) ===
+occupation=mechanic temperament=intense trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About Ruth? Don't look away from this."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, joke, invite_party, silence)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Honest. I'll take honest over certain every time."
+(want=seek_taken stage=1)
+YOU: [dlg:help] "What do you need?"
+THEM: "It's my sister, Ruth. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Elijah is gone and the world just... continues. That's the part I can't stand."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "And then?"
+THEM: "Sleep's gone strange. I oil boots on rest days at odd hours now. Whatever gets me to morning."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "We bury, we grieve, we keep going. There's no step four."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I oil boots on rest days for Elijah, now. Feels right. Feels like the least I can do."
+(want=seek_taken stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=seek_taken stage=3)
+closing line: "Don't waste what we talked about."
+want final: id=seek_taken stage=3 resolution=promised
