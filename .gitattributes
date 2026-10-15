@@ -1,8 +1,14 @@
-* text=auto
-*.js text eol=lf
-*.json text eol=lf
-*.md text eol=lf
-*.html text eol=lf
-*.css text eol=lf
-*.txt text eol=lf
-*.sh text eol=lf
+# Keep runtime parsing and the shared measurement lineage portable.
+# Leave historical docs/evidence and unrelated legacy scripts alone.
+/src/js/** text eol=lf
+/index.html text eol=lf
+/scripts/balance-* text eol=lf
+/scripts/lib/balance-*.js text eol=lf
+/scripts/godpath/test-balance-scorecard.js text eol=lf
+/scripts/godpath/test-measurement-workflow.js text eol=lf
+/scripts/gear-usage-audit.js text eol=lf
+/scripts/sim-harness.js text eol=lf
+/scripts/sweep-compare.js text eol=lf
+/scripts/sweep-dashboard.js text eol=lf
+/scripts/policies/competent.js text eol=lf
+/scripts/policies/livelihood.js text eol=lf
