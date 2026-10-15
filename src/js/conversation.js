@@ -100,6 +100,20 @@
     halting:     { open: ['I… ', '…'], close: [' …sorry.', ' …if that makes sense.'] },
   };
 
+  // clipSnippet: thread snippets are quoted back as memories (MEMORY QUOTE,
+  // deepening r11). A raw N-char slice cuts mid-sentence and the quote then
+  // dangles ("...You're '") — transcript-verified senseless (journey
+  // succession r13 2026-10-15). Clip at a word boundary with an honest
+  // ellipsis so the fragment reads as a remembered fragment, not a bug.
+  function clipSnippet(s, n) {
+    const t = String(s == null ? '' : s).replace(/^"+|"+$/g, '');
+    if (t.length <= n) return t;
+    let cut = t.slice(0, n);
+    const sp = cut.lastIndexOf(' ');
+    if (sp > n * 0.55) cut = cut.slice(0, sp);
+    return cut.replace(/[ ,;:—–-]+$/, '') + '…';
+  }
+
   // ============ REACTIVE QUESTIONS ============
   // NPC lines phrased as DIRECT questions that the old system delivered as
   // small talk with no way to answer — the player could only change the
@@ -1256,7 +1270,7 @@
           tid, label: String(label || tid).slice(0, 80),
           day: (this.state.scholar || {}).day || 1,
           why: why || 'unfinished',
-          snippet: snippet ? String(snippet).slice(0, 110) : null,
+          snippet: snippet ? clipSnippet(snippet, 110) : null,
         });
       } catch (e) {}
     },
@@ -1272,7 +1286,7 @@
         const log = (c && c.threadLog) || [];
         for (let i = log.length - 1; i >= 0; i--) {
           if (log[i] && log[i].thread === tid && log[i].snippet) {
-            return String(log[i].snippet).slice(0, 110);
+            return clipSnippet(log[i].snippet, 110);
           }
         }
       } catch (e) {}
@@ -1301,7 +1315,7 @@
       try {
         const c = this.convoGet(vid);
         this.convoNoteTopic(vid, thread, this.convoTopicLabel(vid, thread));
-        const clean = String(line == null ? '' : line).replace(/^"+|"+$/g, '').slice(0, 110);
+        const clean = clipSnippet(line, 110);
         c.threadLog = c.threadLog || [];
         const last = c.threadLog[c.threadLog.length - 1];
         if (clean && (!last || last.thread !== thread || last.snippet !== clean)) {

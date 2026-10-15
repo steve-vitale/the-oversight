@@ -1,0 +1,175 @@
+{
+ "seed": 713,
+ "pdCalls": [
+  {
+   "death": 1
+  },
+  {
+   "death": 2
+  },
+  {
+   "death": 3
+  }
+ ],
+ "deathBeats": [
+  "### death 1: Wanjiru Kamau -> Pearl Weinstein",
+  "  \ud83d\udcd6 The Codex turns a page on its own. Wanjiru Kamau is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  \ud83d\udd6f\ufe0f Wanjiru Kamau is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  \"Wanjiru's gone.\" DeShawn looks at you for a long moment. \"You're not Wanjiru.\" No heat in it. Just fact. You'll have to earn this face.",
+  "  The Codex doesn't pause for grief. Pearl blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: Wanjiru Kamau, 16 days. The mantle passes to Pearl Weinstein.",
+  "  \ud83e\ude9e You wake up somebody else. Pearl Weinstein, 55 \u2014 a welder. Her hands know different work now: Steady Hands, Adrenaline Control.",
+  "### death 2: Pearl Weinstein -> DeShawn Makarov",
+  "  \ud83d\udcd6 The Codex turns a page on its own. Pearl Weinstein is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  \ud83d\udd6f\ufe0f Pearl Weinstein is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  \"Pearl's gone.\" Consuelo looks at you for a long moment. \"You're not Pearl.\" No heat in it. Just fact. You'll have to earn this face.",
+  "  The Codex doesn't pause for grief. DeShawn blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: Pearl Weinstein, 24 days. The mantle passes to DeShawn Makarov.",
+  "  \ud83e\ude9e You wake up somebody else. DeShawn Makarov, 47 \u2014 a musician. Their hands know different work now: Diplomatic Incident.",
+  "  At the grave, Consuelo, Rosa speak for DeShawn \u2014 \"Pearl trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+ ],
+ "peopleCheck": [
+  1
+ ],
+ "census": {
+  "alive": 9,
+  "fallen": 3,
+  "bearerDeaths": 3
+ },
+ "checks": [
+  [
+   "survived-to-d1",
+   true,
+   "day 16"
+  ],
+  [
+   "mantle-passes-d1",
+   true,
+   "Wanjiru Kamau -> Pearl Weinstein"
+  ],
+  [
+   "CHAIN1-d1-abilities",
+   true,
+   "pre=[eagle_eye@1,gossip_network@1,green_thumb@1,iron_stomach@1]"
+  ],
+  [
+   "CHAIN1-d1-integration",
+   true,
+   "pre=2 post=2"
+  ],
+  [
+   "CHAIN1-d1-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d1-codex",
+   true,
+   "pre=27 post=27"
+  ],
+  [
+   "CHAIN1-d1-bglegs",
+   true,
+   "occ=welder want=[adrenaline_control,steady_hands] got=[adrenaline_control,steady_hands]"
+  ],
+  [
+   "CHAIN1-d1-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d1-names-predecessor",
+   true,
+   "no closeId (trust>55 living) \u2014 beat correctly absent (finding)"
+  ],
+  [
+   "CHAIN4-d1-trust-floor",
+   true,
+   "successor trust=40"
+  ],
+  [
+   "CHAIN5-d1-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d1",
+   true,
+   "day 24"
+  ],
+  [
+   "mantle-passes-d2",
+   true,
+   "Pearl Weinstein -> DeShawn Makarov"
+  ],
+  [
+   "CHAIN1-d2-abilities",
+   true,
+   "pre=[camp_cook@1,eagle_eye@2,gossip_network@2,green_thumb@2,iron_stomach@2]"
+  ],
+  [
+   "CHAIN1-d2-integration",
+   true,
+   "pre=3 post=3"
+  ],
+  [
+   "CHAIN1-d2-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d2-codex",
+   true,
+   "pre=31 post=31"
+  ],
+  [
+   "CHAIN1-d2-bglegs",
+   true,
+   "occ=musician want=[diplomat] got=[diplomat]"
+  ],
+  [
+   "CHAIN1-d2-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d2-names-predecessor",
+   true,
+   "\"Pearl's gone.\" Consuelo looks at you for a long moment. \"You're not Pearl.\" No heat in it. Just fact. You'll have to ea"
+  ],
+  [
+   "CHAIN4-d2-trust-floor",
+   true,
+   "successor trust=64"
+  ],
+  [
+   "CHAIN5-d2-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d2",
+   true,
+   "day 30"
+  ],
+  [
+   "CHAIN3-mantle-chain",
+   false,
+   "[\"Cesar Moeller -> Wanjiru Kamau\",\"Wanjiru Kamau -> Pearl Weinstein\",\"Pearl Weinstein -> DeShawn Makarov\"]"
+  ],
+  [
+   "F-THREAD-stamps",
+   true,
+   "8 stamped records; last handoff Pearl Weinstein->DeShawn Makarov"
+  ],
+  [
+   "F-REASK-finding",
+   true,
+   "4 re-ask-ish seeds name a predecessor"
+  ]
+ ]
+}

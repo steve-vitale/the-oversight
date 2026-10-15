@@ -1,0 +1,173 @@
+{
+ "seed": 711,
+ "pdCalls": [
+  {
+   "death": 1
+  },
+  {
+   "death": 2
+  },
+  {
+   "death": 3
+  }
+ ],
+ "deathBeats": [
+  "### death 1: Greta Hansen -> Hannah Kim",
+  "  \ud83d\udcd6 The Codex turns a page on its own. Greta Hansen is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  \ud83d\udd6f\ufe0f Greta Hansen is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  The Codex doesn't pause for grief. Hannah blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: Greta Hansen, 16 days. The mantle passes to Hannah Kim.",
+  "  \ud83e\ude9e You wake up somebody else. Hannah Kim, 28 \u2014 a Chef. Her hands know different work now: Secret Ingredient.",
+  "### death 2: Hannah Kim -> Joyce Schmid",
+  "  \ud83d\udcd6 The Codex turns a page on its own. Hannah Kim is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  HANNAH \u2014 GONE. 1 open question closed unanswered.",
+  "  \ud83d\udd6f\ufe0f Hannah Kim is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  The Codex doesn't pause for grief. Joyce blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: Hannah Kim, 24 days. The mantle passes to Joyce Schmid.",
+  "  \ud83e\ude9e You wake up somebody else. Joyce Schmid, 43 \u2014 a physical therapy aide. Her hands know different work now: Field Medicine."
+ ],
+ "peopleCheck": [
+  1
+ ],
+ "census": {
+  "alive": 9,
+  "fallen": 4,
+  "bearerDeaths": 3
+ },
+ "checks": [
+  [
+   "survived-to-d1",
+   true,
+   "day 16"
+  ],
+  [
+   "mantle-passes-d1",
+   true,
+   "Greta Hansen -> Hannah Kim"
+  ],
+  [
+   "CHAIN1-d1-abilities",
+   true,
+   "pre=[gossip_network@1,green_thumb@1,iron_stomach@1]"
+  ],
+  [
+   "CHAIN1-d1-integration",
+   true,
+   "pre=2 post=2"
+  ],
+  [
+   "CHAIN1-d1-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d1-codex",
+   true,
+   "pre=22 post=22"
+  ],
+  [
+   "CHAIN1-d1-bglegs",
+   true,
+   "occ=chef want=[camp_cook] got=[camp_cook]"
+  ],
+  [
+   "CHAIN1-d1-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d1-names-predecessor",
+   true,
+   "no closeId (trust>55 living) \u2014 beat correctly absent (finding)"
+  ],
+  [
+   "CHAIN4-d1-trust-floor",
+   true,
+   "successor trust=20"
+  ],
+  [
+   "CHAIN5-d1-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d1",
+   true,
+   "day 24"
+  ],
+  [
+   "mantle-passes-d2",
+   true,
+   "Hannah Kim -> Joyce Schmid"
+  ],
+  [
+   "CHAIN1-d2-abilities",
+   true,
+   "pre=[fusion_reactor@1,gossip_network@2,green_thumb@2,iron_stomach@1]"
+  ],
+  [
+   "CHAIN1-d2-integration",
+   true,
+   "pre=2 post=2"
+  ],
+  [
+   "CHAIN1-d2-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d2-codex",
+   true,
+   "pre=28 post=28"
+  ],
+  [
+   "CHAIN1-d2-bglegs",
+   true,
+   "occ=physical_therapist want=[field_medicine] got=[field_medicine]"
+  ],
+  [
+   "CHAIN1-d2-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d2-names-predecessor",
+   true,
+   "no closeId (trust>55 living) \u2014 beat correctly absent (finding)"
+  ],
+  [
+   "CHAIN4-d2-trust-floor",
+   true,
+   "successor trust=39"
+  ],
+  [
+   "CHAIN5-d2-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d2",
+   true,
+   "day 30"
+  ],
+  [
+   "CHAIN3-mantle-chain",
+   false,
+   "[\"Molly Nolan -> Greta Hansen\",\"Greta Hansen -> Hannah Kim\",\"Hannah Kim -> Joyce Schmid\"]"
+  ],
+  [
+   "F-THREAD-stamps",
+   true,
+   "8 stamped records; last handoff Hannah Kim->Joyce Schmid"
+  ],
+  [
+   "F-REASK-finding",
+   true,
+   "3 re-ask-ish seeds name a predecessor"
+  ]
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "seed": 712,
+ "pdCalls": [
+  {
+   "death": 1
+  },
+  {
+   "death": 2
+  },
+  {
+   "death": 3
+  }
+ ],
+ "deathBeats": [
+  "### death 1: Valentina Bennett -> June Cao",
+  "  \ud83d\udcd6 The Codex turns a page on its own. Valentina Bennett is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  VALENTINA \u2014 GONE. 1 open question closed unanswered.",
+  "  \ud83d\udd6f\ufe0f Valentina Bennett is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  The Codex doesn't pause for grief. June blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: Valentina Bennett, 16 days. The mantle passes to June Cao.",
+  "  \ud83e\ude9e You wake up somebody else. June Cao, 46 \u2014 a glazier. Her hands know different work now: Steady Hands, Soft Step.",
+  "### death 2: June Cao -> Warda Guedira",
+  "  \ud83d\udcd6 The Codex turns a page on its own. June Cao is dead. You didn't ask. It knew.",
+  "  Nobody's talking much. The fire feels smaller tonight.",
+  "  June is gone \u2014 dead. The errand dies with them; nobody's waiting on those dandelions now.",
+  "  \ud83d\udd6f\ufe0f June Cao is dead \u2014 a hushwolf. The village stops. Somebody screams. Somebody else starts digging.",
+  "  The Codex doesn't pause for grief. Warda blinks \u2014 and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+  "  \ud83c\udf1f \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+  "  \ud83d\udcd6 The Codex turns a page: June Cao, 24 days. The mantle passes to Warda Guedira.",
+  "  \ud83e\ude9e You wake up somebody else. Warda Guedira, 20 \u2014 an infantry soldier. Her hands know different work now: Adrenaline Control, Cornered Rat."
+ ],
+ "peopleCheck": [
+  1
+ ],
+ "census": {
+  "alive": 8,
+  "fallen": 4,
+  "bearerDeaths": 3
+ },
+ "checks": [
+  [
+   "survived-to-d1",
+   true,
+   "day 16"
+  ],
+  [
+   "mantle-passes-d1",
+   true,
+   "Valentina Bennett -> June Cao"
+  ],
+  [
+   "CHAIN1-d1-abilities",
+   true,
+   "pre=[eagle_eye@1,gossip_network@1,green_thumb@1]"
+  ],
+  [
+   "CHAIN1-d1-integration",
+   true,
+   "pre=2 post=2"
+  ],
+  [
+   "CHAIN1-d1-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d1-codex",
+   true,
+   "pre=28 post=28"
+  ],
+  [
+   "CHAIN1-d1-bglegs",
+   true,
+   "occ=glazier want=[soft_step,steady_hands] got=[soft_step,steady_hands]"
+  ],
+  [
+   "CHAIN1-d1-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d1-names-predecessor",
+   true,
+   "no closeId (trust>55 living) \u2014 beat correctly absent (finding)"
+  ],
+  [
+   "CHAIN4-d1-trust-floor",
+   true,
+   "successor trust=37"
+  ],
+  [
+   "CHAIN5-d1-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d1",
+   true,
+   "day 24"
+  ],
+  [
+   "mantle-passes-d2",
+   true,
+   "June Cao -> Warda Guedira"
+  ],
+  [
+   "CHAIN1-d2-abilities",
+   true,
+   "pre=[camp_cook@1,eagle_eye@2,gossip_network@2,green_thumb@2,iron_stomach@1]"
+  ],
+  [
+   "CHAIN1-d2-integration",
+   true,
+   "pre=3 post=3"
+  ],
+  [
+   "CHAIN1-d2-leadership",
+   true,
+   "equal=true"
+  ],
+  [
+   "CHAIN1-d2-codex",
+   true,
+   "pre=32 post=32"
+  ],
+  [
+   "CHAIN1-d2-bglegs",
+   true,
+   "occ=soldier want=[adrenaline_control,cornered_rat] got=[adrenaline_control,cornered_rat]"
+  ],
+  [
+   "CHAIN1-d2-npc-excl",
+   true,
+   "excl=true roster=true"
+  ],
+  [
+   "CHAIN2-d2-names-predecessor",
+   true,
+   "no closeId (trust>55 living) \u2014 beat correctly absent (finding)"
+  ],
+  [
+   "CHAIN4-d2-trust-floor",
+   true,
+   "successor trust=36"
+  ],
+  [
+   "CHAIN5-d2-promise-release",
+   true,
+   "no open promises at death (finding)"
+  ],
+  [
+   "survived-past-d2",
+   true,
+   "day 30"
+  ],
+  [
+   "CHAIN3-mantle-chain",
+   false,
+   "[\"Norman Huber -> Valentina Bennett\",\"Valentina Bennett -> June Cao\",\"June Cao -> Warda Guedira\"]"
+  ],
+  [
+   "F-THREAD-stamps",
+   true,
+   "8 stamped records; last handoff June Cao->Warda Guedira"
+  ],
+  [
+   "F-REASK-finding",
+   true,
+   "4 re-ask-ish seeds name a predecessor"
+  ]
+ ]
+}
