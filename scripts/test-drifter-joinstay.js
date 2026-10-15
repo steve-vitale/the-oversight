@@ -19,6 +19,8 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+// Modules capture the RNG during eval; later per-scenario reseeds are not enough.
+Math.random = require('./sim-harness').mulberry32(7);
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
@@ -142,7 +144,7 @@ function nearestVillage() {
       Game.joinVillageReal(v.id);
       const day0 = v.day;
       // give them a healthy turf so their foraging has something to eat
-      for (let ty = 0; ty < 7; ty++) for (let tx = 0; tx < 7; tx++) {
+      for (let ty = 0; ty < 9; ty++) for (let tx = 0; tx < 9; tx++) {
         const t = Game.tileAt(tx, ty);
         if (t && Math.abs(tx - v.x) + Math.abs(ty - v.y) <= 4 && (t.maxStock || 0) > 0) {
           t.stock = t.maxStock;
