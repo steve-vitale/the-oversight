@@ -550,7 +550,7 @@ function talkOn() { return process.env.COMPETENT_TALK === '1'; }
 // structural here too — the 5-turn cap owns continuation, not the menu.
 const TALK_STRUCTURAL = { leave: 1, goon: 1, subject: 1, 'dlg:subject': 1, deflect_q: 1, honest_pass: 1 };
 
-function pickTalkChoice(choices, seen) {
+function pickTalkChoice(choices, seen, Game) {
   try {
     // NO REPEATS (blitz simpolicy 2026-10-13): teaching three plants in a
     // row reads as a lecture, not a conversation (pilot transcripts: the
@@ -561,8 +561,29 @@ function pickTalkChoice(choices, seen) {
     if (!live.length) return null;
     const ans = live.find(c => String(c.id).indexOf('ans:') === 0);
     if (ans) return ans; // answer their question first — it's rude to ignore it
+    if (process.env.COMPETENT_DETECTIVE === '1' && Game) {
+      const ch = live.find(c => {
+        const id = String(c.id); if (!id.startsWith('confront:')) return false;
+        const d = (Game.allDoubts ? Game.allDoubts() : []).find(x => x.id === id.slice(9));
+        return d && !d.resolved && (d.eventBacked || d.theft || d.kind === 'contradiction' ||
+          ((d.evidence || []).length >= 2 && !(Game.doubtIsLead && Game.doubtIsLead(d))));
+      });
+      if (ch) return ch;
+    }
     const teach = live.find(c => String(c.id) === 'teach');
     if (teach) return teach; // knowledge is the food economy
+    // SKILL LESSONS (tuning 2026-10-15, opt-in COMPETENT_TALK_SKILLS=1, set
+    // by capable): "Teach me X?" / "I could show you X." show in ~95% of
+    // the bearer's talks but sat last in the menu, so the bot never took
+    // one (0 lessons with the player in 64 runs; diagnosis-progression.md
+    // §5). The game offers its own best pick (skillFit for the learner)
+    // and allows one lesson per sitting.
+    if (talkSkillsOn()) {
+      const learn = live.find(c => String(c.id).indexOf('skill_learn:') === 0);
+      if (learn) return learn;
+      const show = live.find(c => String(c.id).indexOf('skill_teach:') === 0);
+      if (show) return show;
+    }
     const gq = live.find(c => String(c.id).indexOf('gq') === 0);
     if (gq) return gq; // the canon questions
     const ask = live.find(c => String(c.id) === 'ask');
@@ -620,7 +641,7 @@ function holdConversation(Game, ctx, vid) {
         if (!c || !c.active) break;
         let choices = [];
         try { choices = Game.convoChoices ? Game.convoChoices(vid) : []; } catch (e) {}
-        const pick = pickTalkChoice(choices || [], seen);
+        const pick = pickTalkChoice(choices || [], seen, Game);
         if (!pick) break;
         seen[String(pick.id)] = 1;
         try { Game.convoTurn(vid, pick.id); } catch (e) { break; }
@@ -825,6 +846,59 @@ function walkTo(Game, hx, hy) {
 // around". BFS over orthogonal steps the engine's own travelBlockage allows,
 // then walk the first step. Returns true when it moved.
 function routeAroundOn() { return process.env.COMPETENT_ROUTE_AROUND === '1'; }
+function talkSkillsOn() { return process.env.COMPETENT_TALK_SKILLS === '1'; }
+function cookHaulOn() { return process.env.COMPETENT_COOK_HAUL === '1'; }
+function treatSickOn() { return process.env.COMPETENT_TREAT_SICK === '1'; }
+// COOK THE HAUL (tuning 2026-10-15, opt-in COMPETENT_COOK_HAUL=1, set by
+// capable): cookPack only matches foodState 'raw' (rendered fat, human
+// meat), so the bot never cooked cleaned meat or must-cook plants and the
+// bearer earned no craft XP from the hearth (diagnosis-progression.md §1).
+// Cook what food.js cookAll's own test accepts, near a fire, once a day,
+// before the haul is donated. Never human meat.
+function cookHaul(Game, ctx) {
+  try {
+    if (!nearFire(Game)) return 0;
+    const day = (Game.state.scholar || {}).day || 0;
+    if (ctx._cookHaulDay === day) return 0;
+    const inv = Game.state.scholar.inventory || [];
+    const human = (i) => /human/i.test(String(i.id || '') + ' ' + String(i.itemId || '') + ' ' + String(i.name || ''));
+    const cookable = (i) => i && !human(i) && (i.rawKcal ||
+      (i.foodKind === 'meat' && (i.foodState === 'cleaned' || i.undercooked)) ||
+      (i.foodKind === 'plant' && i.needsCooking && i.diseaseRisk));
+    if (!inv.some(cookable)) return 0;
+    // cookAll cooks the whole pack: set human meat aside for the batch
+    const aside = [];
+    for (let i = inv.length - 1; i >= 0; i--) if (inv[i] && human(inv[i]) && (inv[i].rawKcal || inv[i].foodState === 'raw')) aside.push(inv.splice(i, 1)[0]);
+    try { Game.cookAll(); } finally { for (const it of aside) inv.push(it); }
+    ctx._cookHaulDay = day;
+    ctx.cookHaul = (ctx.cookHaul || 0) + 1;
+    return 1;
+  } catch (e) { ctx.cookHaulErr = String(e && e.message).slice(0, 80); return 0; }
+}
+// TREAT THE SICK (tuning 2026-10-15, opt-in COMPETENT_TREAT_SICK=1, set by
+// capable): the bot never called treatVillager. A bearer with triage,
+// herbal remedy or field medicine at L2 treats one sick villager a day when
+// fed enough to give 150 kcal.
+const TREAT_SKILLS = ['herbal_remedy', 'field_medicine', 'triage'];
+function treatSick(Game, ctx) {
+  try {
+    const v = Game.state.village || {};
+    const sick = Object.keys(v.sick || {});
+    if (!sick.length || !Game.treatVillager) return 0;
+    const s = Game.state.scholar;
+    if ((s.kcal || 0) < 600) return 0;
+    const day = s.day || 0;
+    if (ctx._treatDay === day) return 0;
+    const skill = TREAT_SKILLS.find(id => { try { return Game.hasAbility(id) && Game.abilityLevel(id) >= 2; } catch (e) { return false; } });
+    if (!skill) return 0;
+    const vid = sick.find(id => { try { const p = Game.getPerson(id); return p && !p.dead; } catch (e) { return false; } });
+    if (!vid) return 0;
+    Game.treatVillager(vid, skill);
+    ctx._treatDay = day;
+    ctx.treated = (ctx.treated || 0) + 1;
+    return 1;
+  } catch (e) { ctx.treatErr = String(e && e.message).slice(0, 80); return 0; }
+}
 function routeAround(Game, hx, hy) {
   try {
     const N = (Game.map && Game.map.worldSize) || 9;
@@ -2357,6 +2431,8 @@ const competent = {
     keepKnife(Game, ctx); // knap the stone knife FIRST (food r6: wins the vine race)
     cleanCatch(Game, ctx); // clean the trapline's catch before it rots (food r5)
     trySow(Game, ctx); // sow from identified pack plants when plots wait
+    if (cookHaulOn()) cookHaul(Game, ctx); // cook the haul at the hearth first (opt-in)
+    if (treatSickOn()) treatSick(Game, ctx); // skilled hands on a sick villager (opt-in)
     donateHaul(Game, ctx); // the rest feeds the village
     if (!rec) counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
     if (!rec) workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
@@ -2650,4 +2726,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, beastStrikeTarget, walkTo, cookHaul, treatSick, routeAround, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };

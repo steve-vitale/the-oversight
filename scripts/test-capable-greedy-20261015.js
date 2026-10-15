@@ -7,8 +7,8 @@
 //     cap or near the horizon. Off: never waits (the dashboard's bot).
 //  2. CAPABLE_READ_STAKES=1: the bot reads the build option's "(needs X N+)"
 //     label against the live meter, instead of picking it on its words.
-//  3. In a real run, greedy waits through Overtime (tier >= 1) on a seed the
-//     plain bot seats at once.
+//  3. In a real run started at a ready seat (pinned state, not a seed's
+//     luck), greedy waits into Overtime (tier >= 1), then sits.
 'use strict';
 const K = require('./godpath/lib');
 const H = K.H;
@@ -18,6 +18,29 @@ function fakeGame(o) {
   return {
     state: { scholar: { day: o.day || 100, health: o.hp == null ? 100 : o.hp, maxHealth: 100 }, village: { roster: new Array(o.roster == null ? 8 : o.roster).fill('v') } },
   };
+}
+
+// pinSeatReady(Game): a fresh run pushed to day 100 with a real LESSER seat
+// (waves 4/4/3 faced, 2 contests, 2 crises, the food deeds) and the table
+// announced; Overtime at tier 0, its clock not started. Mirrors
+// debug-scenarios.js tableSetRun(0). tableSeat() computes the seat itself.
+function pinSeatReady(Game) {
+  const s = Game.state.scholar, pg = Game.progState();
+  Game.state.systemArrived = true;
+  Game.state.networkLive = true;
+  s.day = 100; s.integration = Math.max(s.integration || 0, 45);
+  const d = Game.deedState();
+  const byWave = { 1: 4, 2: 4, 3: 3 };
+  for (const m of (Game.data.monsters || [])) {
+    const w = m.wave || 1;
+    if (byWave[w] > 0 && !m.campaignOnly) { d.wavesFaced[m.id] = w; byWave[w]--; }
+  }
+  d.contestsSurvived = 2;
+  pg.crises = Object.assign({ 'first-grave': 1, 'hunger-winter': 1 }, pg.crises || {});
+  pg.sentimentTaught = true;
+  s.prog = s.prog || {}; s.prog.feastSurgeUsed = true;
+  pg.arc = 4; pg.tableWaiting = true; pg.tableAnnounced = true;
+  pg.overtime = 0; pg.overtimeStarted = false;
 }
 
 (async () => {
@@ -50,22 +73,37 @@ function fakeGame(o) {
   T.ok('on: affordable, preferred', okSc > off, okSc.toFixed(1) + ' vs ' + off.toFixed(1));
   delete process.env.CAPABLE_READ_STAKES;
 
-  T.section('3. a real run waits through Overtime');
-  // seed 1, capable, 150 days: the plain bot sits on day 93 (dashboard-diag-base16).
+  T.section('3. a real run waits through Overtime, then sits');
+  // PINNED STATE (2026-10-15): this used to ride seed 1's luck to the seat
+  // (the plain bot sat on day 93). After the deaths-diagnosis bot fixes the
+  // same seed no longer reached the seat in its day budget, so the run now
+  // starts AT the seat: a real lesser seat, day 100, the table announced,
+  // Overtime not started (the same state debug-scenarios.js tableSetRun
+  // builds, at tier 0). The live part stays live: the capable bot plays the
+  // days, the game's own overtimeTick raises the tier, greedy decides.
+  // CAPABLE_GREEDY_MAXTIER=1 keeps the wait one tier long (8 game days).
   process.env.CAPABLE_GREEDY = '1';
+  process.env.CAPABLE_GREEDY_MAXTIER = '1';
   const { Game, manifest } = await H.quietLog(() => H.loadGame({ seed: 1, mode: 'test-greedy' }));
   await H.setupGame(Game);
-  let maxTier = 0, satDay = null;
+  pinSeatReady(Game);
+  const pv0 = Game.tablePreview();
+  T.ok('pinned: the seat is ready, Overtime tier 0', !!(pv0 && pv0.ready) && Game.overtimeTier() === 0, JSON.stringify(pv0));
+  T.ok('pinned: a strong run (greedy would wait today)', cap.greedyWaits(Game, pv0 || {}) === true, 'roster ' + Game.state.village.roster.length);
+  let maxTier = 0, satDay = null, tierAtSeat = null;
   const pol = Object.assign({}, cap.capable);
   pol.daily = (G, ctx) => {
+    try { maxTier = Math.max(maxTier, G.overtimeTier()); } catch (e) { console.warn('probe', e.message); }
     const r = cap.capable.daily(G, ctx);
-    try { maxTier = Math.max(maxTier, G.overtimeTier()); if (satDay == null && G.progState().tableDone) satDay = G.state.scholar.day; } catch (e) { console.warn('probe', e.message); }
+    try { if (satDay == null && G.progState().tableDone) { satDay = G.state.scholar.day; tierAtSeat = G.overtimeTier(); } } catch (e) { console.warn('probe', e.message); }
     return r;
   };
-  await H.quietLog(() => H.runDays(Game, pol, { days: 150, manifest, sampleEvery: 10 }));
-  T.ok('greedy reached Overtime >= 1 before sitting', maxTier >= 1, 'tier ' + maxTier + ', sat day ' + satDay);
-  T.ok('and then sat', satDay != null && satDay > 93, 'sat day ' + satDay);
+  await H.quietLog(() => H.runDays(Game, pol, { days: 20, manifest, sampleEvery: 10 }));
+  T.ok('greedy reached Overtime >= 1 before sitting', maxTier >= 1 && tierAtSeat >= 1, 'tier ' + maxTier + ', tier at seat ' + tierAtSeat + ', sat day ' + satDay);
+  console.log('    sat day ' + satDay + ', tier at seat ' + tierAtSeat + ', max tier ' + maxTier + ', day now ' + Game.state.scholar.day);
+  T.ok('and then sat (after waiting past the day the seat was ready)', satDay != null && satDay > 100, 'sat day ' + satDay);
   delete process.env.CAPABLE_GREEDY;
+  delete process.env.CAPABLE_GREEDY_MAXTIER;
 
   T.done();
 })();

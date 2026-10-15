@@ -19,6 +19,21 @@
 //        -> prints a before/after markdown table
 //   FORCE_OCC=<occupation id> forces the starting bearer's job (as sweep-buff.js).
 //   SEED=7 node scripts/sweep-dashboard.js   -> one child run, one RESULT line
+//
+// VILLAGER DEATHS INCLUDE person:* (2026-10-15, evidence/2026-10-15/
+// diagnosis-deaths.md): a villager who falls in a turn-based fight (the
+// bearer's fights, raid defence, aid runners, alien playground kills) is
+// registered as kind 'person', not 'villager', and used to land in "other":
+// the villager count was short by about half. The child now splits person
+// deaths by killer (RESULT field personDeaths {villager, hostile}): a hostile
+// human the bearer kills (killerId = the bearer) stays in "other"; every other
+// person death (Haven villagers, and allied faces from linked villages who
+// fall beside you) counts as a villager death, by cause "person:<cause>".
+// Rows from older runs without personDeaths count all person:* as villager.
+// Added fields (nothing renamed): summary.deathTotals.villagerKind (the old
+// villager count), .person, .hostile; summary.personDeaths. Comparing with a
+// dashboard made before this change: its villager total did not include
+// person:* (compare prints a note).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -47,7 +62,7 @@ async function one() {
     subP: {}, subV: {}, ascPlayer: 0, ascVillager: 0, ascPaths: [], ascPlayerDay: null,
     villageLostDay: null, tablePath: null, overtime: 0, netSummoned: false, netFallen: false, netLost: 0,
     hosts: false, ksMax: 0, ksWornMax: 0, lessons: 0, lessonsToPlayer: 0, lessonsByPlayer: 0,
-    deathDays: [], lostCause: null, pTrack: {}, vTrack: {},
+    deathDays: [], lostCause: null, pTrack: {}, vTrack: {}, personDeaths: { villager: {}, hostile: {} },
     force: { pOffered: 0, pPicked: 0, vOffered: 0, vPicked: 0 },
   };
   const _loadGame = harness.loadGame;
@@ -130,6 +145,22 @@ async function one() {
       } catch (e) { console.warn('[dashboard] tele', e.message); }
       return _tele.apply(this, arguments);
     };
+    // person deaths split by killer (see header): read at registerDeath,
+    // where killerId is known (the tele event drops it).
+    const _rd = G.registerDeath;
+    if (typeof _rd === 'function') {
+      G.registerDeath = function (opts) {
+        try {
+          const o = opts || {};
+          if (o.kind === 'person' && !o.player) {
+            const grp = (o.killerId && o.killerId === G.villagerId) ? 'hostile' : 'villager';
+            const c = String(o.cause || 'unknown');
+            C.personDeaths[grp][c] = (C.personDeaths[grp][c] || 0) + 1;
+          }
+        } catch (e) { console.warn('[dashboard] registerDeath', e.message); }
+        return _rd.apply(this, arguments);
+      };
+    }
     const _ed = G.endDay;
     G.endDay = function () {
       try {
@@ -166,17 +197,34 @@ async function one() {
     overtime: C.overtime, netSummoned: C.netSummoned, netFallen: C.netFallen, netLost: C.netLost, hosts: C.hosts,
     ksMax: C.ksMax, ksWornMax: C.ksWornMax,
     lessons: C.lessons, lessonsToPlayer: C.lessonsToPlayer, lessonsByPlayer: C.lessonsByPlayer,
-    deaths: r.deaths, playerDeaths: C.deathDays, force: C.force, pTrack: C.pTrack, vTrack: C.vTrack, pAbil: (r.extra || {}).pAbil || [],
+    deaths: r.deaths, personDeaths: C.personDeaths, playerDeaths: C.deathDays, force: C.force, pTrack: C.pTrack, vTrack: C.vTrack, pAbil: (r.extra || {}).pAbil || [],
   }));
 }
 
 // ---------------------------------------------------------------- aggregate
+// player / villager / other by cause. person:* deaths go to villager (as
+// "person:<cause>"), except hostile humans the bearer killed (other). See
+// the header. Also returns villagerKind / person / hostile counts.
 function deathGroups(rows) {
-  const g = { player: {}, villager: {}, other: {} };
-  for (const r of rows) for (const [k, v] of Object.entries(r.deaths || {})) {
-    const [kind, cause] = [k.slice(0, k.indexOf(':')), k.slice(k.indexOf(':') + 1)];
-    const grp = kind === 'player' ? 'player' : kind === 'villager' ? 'villager' : 'other';
-    g[grp][cause] = (g[grp][cause] || 0) + v;
+  const g = { player: {}, villager: {}, other: {}, person: { villager: {}, hostile: {} }, villagerKind: 0 };
+  const add = (o, k, v) => { o[k] = (o[k] || 0) + v; };
+  for (const r of rows) {
+    const pd = r.personDeaths;
+    for (const [k, v] of Object.entries(r.deaths || {})) {
+      const [kind, cause] = [k.slice(0, k.indexOf(':')), k.slice(k.indexOf(':') + 1)];
+      if (kind === 'person') {
+        if (pd) continue; // counted from the split below
+        add(g.villager, 'person:' + cause, v); add(g.person.villager, cause, v); // older row: no split
+        continue;
+      }
+      const grp = kind === 'player' ? 'player' : kind === 'villager' ? 'villager' : 'other';
+      add(g[grp], cause, v);
+      if (grp === 'villager') g.villagerKind += v;
+    }
+    if (pd) {
+      for (const [c, v] of Object.entries(pd.villager || {})) { add(g.villager, 'person:' + c, v); add(g.person.villager, c, v); }
+      for (const [c, v] of Object.entries(pd.hostile || {})) { add(g.other, 'person:' + c, v); add(g.person.hostile, c, v); }
+    }
   }
   return g;
 }
@@ -214,8 +262,12 @@ function summarize(rows) {
     ascVillager: sum(rows, r => r.ascVillager),
     gods: {}, // filled by fillGods
     winsAsc: count(asc, r => r.won), runsAsc: asc.length, winsNoAsc: count(noAsc, r => r.won), runsNoAsc: noAsc.length,
-    deaths: dg, playerDeathRuns: pDeathRuns,
-    deathTotals: { player: sum(Object.values(dg.player), x => x), villager: sum(Object.values(dg.villager), x => x), other: sum(Object.values(dg.other), x => x) },
+    deaths: { player: dg.player, villager: dg.villager, other: dg.other }, playerDeathRuns: pDeathRuns,
+    deathTotals: {
+      player: sum(Object.values(dg.player), x => x), villager: sum(Object.values(dg.villager), x => x), other: sum(Object.values(dg.other), x => x),
+      villagerKind: dg.villagerKind, person: sum(Object.values(dg.person.villager), x => x), hostile: sum(Object.values(dg.person.hostile), x => x),
+    },
+    personDeaths: dg.person,
     waveReach: tally(r => r.waveReach),
     overtime: tally(r => r.overtime), netSummoned: count(rows, r => r.netSummoned), netFallen: count(rows, r => r.netFallen), hosts: count(rows, r => r.hosts),
     keepsake: tally(r => r.ksMax), keepsakeWorn: tally(r => r.ksWornMax),
@@ -254,6 +306,7 @@ function headline(s) {
     ['Player ascension, runs ≥100d', `${s.ascPlayerRuns100}/${s.runs100} (${s.asc100Pct}%)`],
     ['Ascensions player / villager', `${s.ascPlayer} / ${s.ascVillager}`],
     ['Deaths player / villager / other', `${s.deathTotals.player} / ${s.deathTotals.villager} / ${s.deathTotals.other}`],
+    ['Villager deaths: field / fell in fights (person)', s.deathTotals.person == null ? '- (before person:* counted)' : `${s.deathTotals.villagerKind} / ${s.deathTotals.person}`],
     ['Overtime ≥1 / Network summoned / fallen / HOSTS', `${s.n - ((s.overtime || {})[0] || 0)} / ${s.netSummoned} / ${s.netFallen} / ${s.hosts}`],
     ['Skill lessons / run (to / by player)', `${s.lessonsMean} (${s.lessonsToPlayerMean} / ${s.lessonsByPlayerMean})`],
   ];
@@ -289,6 +342,8 @@ function compare(a, b, la, lb) {
   for (const c of causes) L.push(`| player death: ${c} | ${a.deaths.player[c] || 0} | ${b.deaths.player[c] || 0} |`);
   const vc = new Set([...Object.keys(a.deaths.villager), ...Object.keys(b.deaths.villager)]);
   for (const c of vc) L.push(`| villager death: ${c} | ${a.deaths.villager[c] || 0} | ${b.deaths.villager[c] || 0} |`);
+  const old = [[la, a], [lb, b]].filter(([, x]) => (x.deathTotals || {}).person == null).map(([l]) => l);
+  if (old.length) L.push('', `Note: ${old.join(', ')} predates person:* in the villager count (its villager total excludes villagers who fell in fights; they are in "other").`);
   return L.join('\n');
 }
 
@@ -332,7 +387,7 @@ if (process.argv.includes('--compare')) {
   console.log(compare(A.summary, B.summary, A.label, B.label));
 } else if (process.argv.includes('--label') || process.argv.includes('--n') || process.argv.includes('--seeds')) {
   all().catch(e => { console.error('FATAL', e); process.exit(1); });
-} else {
+} else if (require.main === module) { // require() for summarize/compare runs nothing
   one().catch(e => { console.error('FATAL', e); process.exit(1); });
 }
 module.exports = { summarize, seedList, markdown, compare };

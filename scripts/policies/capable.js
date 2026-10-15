@@ -20,7 +20,11 @@
 //   1. REAL FLEEING — when outmatched or losing, walk (movement-clamped) to the
 //      havenward edge chosen by competent.chooseFleeDir and push THROUGH it
 //      (tbBarrierExit). Committed: once fleeing, keep fleeing until out.
-//      Holds at the haven node and in sealed fights (the engine says no exit).
+//      Holds in sealed fights (the engine says no exit); at Haven takes the
+//      hall door or the grounds barrier. Also leaves a known beam Stranger
+//      without resistant gear and an outmatching Highbeam Deer (threatFlee).
+//   1b. AFTERCARE (2026-10-15): treats lockjaw (treatLockjaw) and calls for
+//      help once per raid crisis (raidCall).
 //   2. ABILITIES IN COMBAT — every held combat action from abilities.json is
 //      scored each turn (control early, payoffs when they land, loaders only
 //      with a target in reach and nothing already loaded), fired through
@@ -55,7 +59,9 @@ const { leadfeast } = require('./feastscale');
 const { harmScore } = require('./risk-aware');
 
 const BASE = leadfeast;
-const ENV = { COMPETENT_DIRECTIONAL_FLEE: '1', FEASTSCALE_R13: '1', COMPETENT_ROUTE_AROUND: '1' };
+const ENV = { COMPETENT_DIRECTIONAL_FLEE: '1', FEASTSCALE_R13: '1', COMPETENT_ROUTE_AROUND: '1',
+  COMPETENT_COOK_HAUL: '1', COMPETENT_TREAT_SICK: '1', COMPETENT_TALK_SKILLS: '1', COMPETENT_DETECTIVE: '1' };
+for (const k of String(process.env.CAPABLE_OFF || '').split(',').map(x => x.trim()).filter(Boolean)) delete ENV[k];
 
 // ---------- plumbing ----------
 let _fallbackSeed = 0x9e3779b9;
@@ -164,6 +170,8 @@ function fleeSealed(Game, f) {
 function shouldFlee(Game, ctx, st, f, p, mons) {
   if (fleeSealed(Game, f)) return false;
   if (st.fleeing) return true;
+  const threat = threatFlee(Game, ctx, p, mons);
+  if (threat) { st.why = threat; return true; }
   const pmax = p.maxHp || 100;
   const hp = (p.hp || 0) / Math.max(1, pmax);
   // FEAST COMMIT (deed hunt): a fight picked to spend the feast buff holds
@@ -185,10 +193,119 @@ function shouldFlee(Game, ctx, st, f, p, mons) {
   }
   return false;
 }
+// THREATS THE HP SUM DOESN'T SEE (death diagnosis 2026-10-15 follow-ups,
+// evidence/2026-10-15/diagnosis-deaths.md, root causes #5 and #8). Checked
+// every turn, ahead of the HP read, because both kill a full-HP bearer:
+//   - BEAM STRANGER: an alien's beam is 90-110% of max HP, armor useless,
+//     x0.7 per beam-resistant piece (alienPlayers.js apBeamHit). A Stranger
+//     has 80-110 HP, so the outmatched read never fires: 12 of 99 combat
+//     deaths, every one a single drop. Flee one we KNOW carries the beam
+//     (apKnowsAlien, or we have already felt a beam: _beamHorrorSeen; "if
+//     you don't know, it doesn't show") when wearing fewer than
+//     CAPABLE_BEAM_RESIST_MIN (default 2) resistant pieces.
+//     CAPABLE_BEAM_FLEE=0 turns it off (A/B).
+//   - HIGHBEAM DEER (gallowdeer, wave 1, 150-170 HP): its swept beam does
+//     the killing ("The beam itself is the argument for leaving."), and
+//     170 < 2.5 x 100 so it never reads as outmatched: 14 deaths. Leave when
+//     the deer has more HP left than we do. The deed hunt no longer picks
+//     it either. CAPABLE_DEER_FLEE=0 turns both off (A/B).
+function beamStrangerKnown(Game, m) {
+  if (!m || !m.alienPid) return false;
+  try {
+    if (Game.apHasBeam && !Game.apHasBeam(m.alienPid)) return false;
+    const knows = (Game.apKnowsAlien && Game.apKnowsAlien(m.alienPid)) || !!((Game.state.scholar || {})._beamHorrorSeen);
+    return !!knows;
+  } catch (e) { console.warn('[capable] beamStrangerKnown', e.message); return false; }
+}
+function beamResistShort(Game) {
+  const min = parseInt(process.env.CAPABLE_BEAM_RESIST_MIN || '2', 10);
+  try { return ((Game.apBeamResistPieces ? Game.apBeamResistPieces() : []) || []).length < min; } catch (e) { console.warn('[capable] beamResist', e.message); return true; }
+}
+function isDeer(m) { return !!(m && ((m.mdef || {}).id === 'gallowdeer' || m.monsterId === 'gallowdeer')); }
+function threatFlee(Game, ctx, p, mons) {
+  if (process.env.CAPABLE_BEAM_FLEE !== '0' && mons.some(m => beamStrangerKnown(Game, m)) && beamResistShort(Game)) {
+    bump(ctx, 'capBeamFlee'); return 'beam-stranger';
+  }
+  if (process.env.CAPABLE_DEER_FLEE !== '0') {
+    const deerHp = mons.filter(isDeer).reduce((t, m) => t + (m.hp || 0), 0);
+    if (deerHp > 0 && deerHp > (p.hp || 0)) { bump(ctx, 'capDeerFlee'); return 'highbeam'; }
+  }
+  return null;
+}
+
+// THE THREAT IS INSIDE (death diagnosis 2026-10-15,
+// evidence/2026-10-15/diagnosis-deaths.md): competent.chooseFleeDir holds at
+// the Haven node, because Haven used to be where a flee ENDS. But raiders,
+// feast-draw scavengers and breach fights happen AT Haven, and holding there
+// meant trading blows to the death with wave-3..5 monsters (300-1,900 HP)
+// on a 100 HP bearer: 20 of 48 combat deaths on 16 seeds were "wanted to
+// flee, held at Haven". Haven has two real exits:
+//   - inside the hall the grid edge is wall, but the DOORS work: step on a
+//     door tile mid-fight and you dive outside (game.js tbPlayerMove, "Walls
+//     don't work, doors do"); the monsters wait at the door.
+//   - on the grounds the barrier works like anywhere else.
+// So when we are outmatched or losing at Haven, take the door, or run out
+// through the best edge (known, monster-free ground first). The
+// recover-and-return walk brings the bearer home after.
+// CAPABLE_HAVEN_FLEE=0 restores the old hold (A/B).
+function havenEscape(Game, p) {
+  if (process.env.CAPABLE_HAVEN_FLEE === '0') return null;
+  const px = Game.map.px, py = Game.map.py;
+  if (px !== C.DIR_FLEE_HAVEN.x || py !== C.DIR_FLEE_HAVEN.y) return null;
+  const s = Game.state.scholar || {};
+  if (s.insideHaven) {
+    let detail = null;
+    try { detail = Game.genDetail(px, py); } catch (e) { detail = null; }
+    let best = null;
+    for (let y = 0; detail && y < detail.length; y++) {
+      for (let x = 0; x < (detail[y] || []).length; x++) {
+        if (detail[y][x] !== 'door') continue;
+        const pth = (p.mx === x && p.my === y) ? [] : Game.findPath(p.mx, p.my, x, y);
+        if (!pth) continue;
+        if (!best || pth.length < best.n) best = { door: [x, y], n: pth.length };
+      }
+    }
+    return best;
+  }
+  let best = null;
+  for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+    let sc = null;
+    try { sc = C.fleeDirScore(Game, px, py, dx, dy); } catch (e) { sc = null; }
+    if (!sc) continue;
+    let blocked = false;
+    try { blocked = !!(Game.travelBlockage && Game.travelBlockage(sc.nx, sc.ny)); } catch (e) { blocked = false; }
+    if (blocked) continue;
+    if (!best || sc.score > best.score) best = sc;
+  }
+  return best ? { dir: best } : null;
+}
+function havenExitDir(Game) {
+  const p = (Game.tbFighter && Game.tbFighter('p')) || { mx: 4, my: 4 };
+  const e = havenEscape(Game, p);
+  return e ? (e.dir || { door: e.door }) : null;
+}
+
 // One flee turn. Returns true when the turn is consumed.
 function realFlee(Game, ctx, st, f, p) {
   let dir = null;
   try { dir = C.chooseFleeDir(Game, Game.map.px, Game.map.py); } catch (e) { note(ctx, 'chooseFleeDir: ' + e.message); }
+  if (!dir) {
+    let esc = null;
+    try { esc = havenEscape(Game, p); } catch (e) { note(ctx, 'havenEscape: ' + e.message); }
+    if (esc && !st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); bump(ctx, 'capFleeFromHaven'); }
+    if (esc && esc.door) {
+      // the hall door: one walk, and the move onto the door IS the escape
+      if (stepToward(Game, p, esc.door[0], esc.door[1])) bump(ctx, 'capFleeSteps');
+      if (!Game.tbfight || Game.tbfight.over || Game.tbfight !== f) {
+        bump(ctx, 'capFleeExits'); bump(ctx, 'capFleeDoorExits'); st.fleeing = false;
+        try { C.markRecover(Game, ctx); } catch (e) { note(ctx, 'markRecover: ' + e.message); }
+        return true;
+      }
+      endTurn(Game);
+      return true;
+    }
+    if (esc && esc.dir) dir = esc.dir;
+  }
   if (!dir) { bump(ctx, 'capFleeHeld'); st.fleeing = false; return false; } // at haven: hold ground
   if (!st.fleeing) { st.fleeing = true; bump(ctx, 'capFleeDecisions'); bumpMap(ctx, 'capFleeWhy', st.why || '?'); }
   let gmax = 8;
@@ -243,6 +360,13 @@ function loaded(s) {
 }
 function isControlled(m) { return (m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0; }
 const ACTION_PLAN = {
+  'god.turn_the_pain': (I) => ((I.s.fightDamageTaken || 0) >= 20 && I.adj.length ? { s: 12, t: I.adj[0].key } : null),
+  'god.terms_ground': (I) => (I.turn <= 2 && I.mons.length >= 3 ? 12 : null),
+  'god.terms_ambush': (I) => (I.turn <= 2 && !loaded(I.s) ? 11 : null),
+  'god.terms_range': (I) => (I.turn <= 2 && I.nearest && I.dist(I.nearest) <= 2 && I.adj.length ? 10 : null),
+  'god.no_lies': (I) => ((I.f.fighters || []).some(x => (x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled) ? 10 : null),
+  'god.rally_cry': (I) => ((I.f.fighters || []).some(x => (x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled) ? 11 : null),
+  'god.buy_passage': (I) => (I.outmatched || I.hp < 0.5 ? { s: 12, t: I.strongest.key } : null),
   'unbreakable.shake_off': (I) => ((I.p.stunned || 0) > 0 ? 9 : null),
   'unbreakable.brace': (I) => (I.hp < 0.5 && (I.adj.length || I.telegraphed) && I.n('unbreakable.brace') < 2 ? 6 : null),
   'scream_cheese.scream': (I) => (I.turn <= 3 && (I.mons.length >= 2 || (I.strongest.maxHp || 0) >= 60) ? 7 : null),
@@ -296,6 +420,7 @@ const ACTION_PLAN = {
 // Before running from a fight we can't win: one try at a verb that ends
 // it (talk it down, calm it) or stalls the pursuers (stun, blind, hesitate).
 const ESCAPE_ACTIONS = {
+  'god.buy_passage': 1, 'god.terms_ground': 1, 'god.terms_ambush': 1, 'god.terms_range': 1, 'god.rally_cry': 1,
   'peacemaker.walk_in': 1, 'animal_ken.calm_beast': 1, 'scream_cheese.scream': 1, 'war_cry.bellow': 1,
   'pocket_sand.throw_sand': 1, 'fear_aura.loom': 1, 'intimidating_presence.stare_down': 1,
   'keepsake.hold': 1, // anchor L2: the flee through the edge can't be cut off
@@ -598,6 +723,31 @@ function contestReward(ch) {
   if (d.heckle) r -= 2;
   return r;
 }
+// LETHAL CHOICES (death diagnosis 2026-10-15): harmScore prices damage in
+// the abstract, so at 8 HP "One more measure" (16-28, x1.5 on an
+// EXTREME billing, said aloud) still out-scored "Offer your name" (trauma)
+// — 5 of 9 contest deaths on 16 seeds were the Blood Tithe taken past the
+// bearer's own HP. Read the damage the way contestChoose applies it
+// (hardened x1.25, high/extreme x1.5, shows never kill) and the Maw's
+// distance. Returns the chance this choice kills (0..1); a death outweighs
+// any trauma or lost prize. CAPABLE_CONTEST_LETHAL=0 turns the read off (A/B).
+function contestLethal(Game, ac, ch) {
+  if (process.env.CAPABLE_CONTEST_LETHAL === '0') return 0;
+  const d = (ch && ch.do) || {};
+  if (typeof d.mawDist === 'number' && typeof ac.mawDist === 'number' && ac.mawDist + d.mawDist <= 0) return 1;
+  if (!Array.isArray(d.dmg) || d.dmg.length < 2) return 0;
+  if (ac.kind === 'show' || ac.kind === 'summons') return 0; // TV doesn't kill (capped at 1 HP)
+  let mult = 1;
+  if (ac.variant === 'hardened') mult *= 1.25;
+  let risk = null;
+  try { risk = ((Game._cxScaledContest ? Game._cxScaledContest(ac) : null) || {}).risk; } catch (e) { risk = null; }
+  if (risk === 'high' || risk === 'extreme') mult *= 1.5;
+  const cur = (Game.state.scholar || {}).health || 0;
+  const lo = Math.ceil(d.dmg[0] * mult), hi = Math.ceil(d.dmg[1] * mult);
+  if (lo >= cur) return 1;
+  if (hi < cur) return 0;
+  return (hi - cur + 1) / (hi - lo + 1); // uniform roll, as contestChoose rolls it
+}
 function capableContest(Game, ctx) {
   try {
     const ac = Game.state && Game.state.activeContest;
@@ -619,11 +769,15 @@ function capableContest(Game, ctx) {
       if (refuse) bump(ctx, 'capContestRefusals');
     } else {
       const w = 1 + Math.max(0, 1 - hp) * 3 + (wave >= 3 ? 0.5 : 0);
-      let best = -Infinity;
+      let best = -Infinity, bestLethal = 0;
+      const mine = !ac.participant || ac.participant === 'player';
       for (let i = 0; i < choices.length; i++) {
-        const sc = contestReward(choices[i]) - harmScore(choices[i]) * w + rnd() * 2;
-        if (sc > best) { best = sc; pick = i; }
+        let sc = contestReward(choices[i]) - harmScore(choices[i]) * w + rnd() * 2;
+        const leth = mine ? contestLethal(Game, ac, choices[i]) : 0;
+        sc -= 5000 * leth;
+        if (sc > best) { best = sc; pick = i; bestLethal = leth; }
       }
+      if (mine && choices.some(ch => contestLethal(Game, ac, ch) > 0) && bestLethal === 0) bump(ctx, 'capContestLethalAvoided');
     }
     bump(ctx, 'capContestChoices');
     if (pick !== 0) bump(ctx, 'capContestNotFirst');
@@ -750,7 +904,7 @@ function capableTalk(Game, ctx) {
     for (const { v } of ranked.slice(0, 2)) {
       if (Game.over) break;
       const before = ctx.deepTurns || 0;
-      C.holdConversation(Game, ctx, v);
+      withEnv(() => C.holdConversation(Game, ctx, v));
       bump(ctx, 'capConvos');
       if ((ctx.deepTurns || 0) > before) bump(ctx, 'capConvosHeld');
     }
@@ -848,6 +1002,7 @@ function huntTargets(Game, pred) {
     const dist = Math.abs(m.tx - px) + Math.abs(m.ty - py);
     if (dist > HUNT_MAX_DIST) continue;
     const w = md.wave || 1;
+    if (md.id === 'gallowdeer' && process.env.CAPABLE_DEER_FLEE !== '0') continue; // a fight we'd leave (threatFlee)
     if (!pred({ m, md, w, faced: !!faced[m.id] })) continue;
     out.push({ m, w, dist, faced: !!faced[m.id] });
   }
@@ -929,6 +1084,104 @@ function deedHunt(Game, ctx) {
   } catch (e) { note(ctx, 'deedHunt: ' + e.message); }
 }
 
+// THE FEAST DRAW IS A CHOICE (death diagnosis 2026-10-15): the feast's smoke
+// draws a scavenger to Haven's edge, and the phone offers "Face it" or "Let
+// the watch drive it off". The harness used to face every pending encounter
+// itself, so the bot never chose: 10 of 48 combat deaths on 16 seeds were
+// feast-draw scavengers (wave-3/4 casts of 300-1,800 HP) faced at once.
+// Called by the harness (policy.pending) before it faces a pending
+// encounter. Same "outmatched" read as shouldFlee's first turn: face it
+// when it's a fight, let the watch drive it off when it isn't. Declining
+// spends no devotion (feastBuff.js driveOffFeastDraw), so the deed hunt can
+// still find a fair fight. CAPABLE_DRAW_DECIDE=0 faces every draw (A/B).
+function drawOutmatched(Game, mid) {
+  const md = ((Game.data || {}).monsters || []).find(m => m && m.id === mid) || {};
+  const s = Game.state.scholar || {};
+  const pmax = (Game.maxHealth ? Game.maxHealth() : s.maxHealth) || 100;
+  const hp = (s.health || 0) / Math.max(1, pmax);
+  const hpTop = Array.isArray(md.hp) ? md.hp[1] : (md.hp || 0);
+  const veteran = !!((s.feastDraw || {}).veteran);
+  const total = hpTop * (veteran ? 1.5 : 1) * Math.max(1, md.pack || 1);
+  const wave = md.wave || 1;
+  return total > 2.5 * pmax || (wave >= 2 && hp < 0.7) || hp < 0.5;
+}
+function capablePending(Game, ctx) {
+  try {
+    if (process.env.CAPABLE_DRAW_DECIDE === '0') return false;
+    if (!Game.pendingEncounter || !Game.feastDrawPending || !Game.driveOffFeastDraw) return false;
+    const d = Game.feastDrawPending();
+    if (!d || !d.monsterId) return false; // not a feast draw: the panel offers only "Face it"
+    if (!drawOutmatched(Game, d.monsterId)) { bump(ctx, 'capDrawFaced'); return false; }
+    const r = Game.driveOffFeastDraw();
+    if (r && r.ok) { bump(ctx, 'capDrawDrivenOff'); return true; }
+    return false;
+  } catch (e) { note(ctx, 'capablePending: ' + e.message); return false; }
+}
+
+// TREAT LOCKJAW (death diagnosis 2026-10-15 follow-up): after the Haven
+// escape fix, bearers who survived wounded fights died of lockjaw later
+// (3 -> 15 on 32 seeds); the bot never treated it. The game's treatment
+// (statusEffects.json lockjaw.cure; game.js useMedicine / treatDisease):
+// antibiotics cure it, named or not; triage and field medicine cure it once
+// it is DIAGNOSED (examineSick), otherwise they only ease it; herbal remedy
+// eases. The symptoms show without a name ("Stiffening", the jaw), and the
+// game says what helps ("Find real treatment (antibiotics, skilled wound
+// care)"), so the bot acts on what a player sees. Once per day part.
+// CAPABLE_TREAT_LOCKJAW=0 turns it off (A/B).
+const LOCKJAW_CURES = ['triage', 'field_medicine', 'herbal_remedy'];
+function treatLockjaw(Game, ctx) {
+  if (process.env.CAPABLE_TREAT_LOCKJAW === '0') return;
+  try {
+    if (Game.over || !Game.hasStatus || !Game.hasStatus('scholar', 'lockjaw')) return;
+    const key = day(Game) + ':' + Game.dayPart;
+    if (ctx._capJawKey === key) return;
+    ctx._capJawKey = key;
+    bump(ctx, 'capLockjawSeen');
+    const isDiag = () => { try { return !!Game.isDiagnosed('scholar', 'lockjaw'); } catch (e) { return false; } };
+    if (!isDiag() && Game.canDiagnose && Game.canDiagnose() && Game.examineSick) { Game.examineSick(); bump(ctx, 'capLockjawExamined'); }
+    const inv = (Game.state.scholar || {}).inventory || [];
+    if (inv.some(i => i && i.medType === 'antibiotics' && (i.doses || 0) > 0) && Game.useMedicine) {
+      Game.useMedicine('antibiotics'); bump(ctx, 'capLockjawPills');
+    }
+    for (const ab of LOCKJAW_CURES) {
+      if (!Game.hasStatus('scholar', 'lockjaw')) break;
+      if (!(Game.hasAbility && Game.hasAbility(ab)) || !Game.treatDisease) continue;
+      Game.treatDisease(ab); bump(ctx, 'capLockjawTreated');
+    }
+    if (!Game.hasStatus('scholar', 'lockjaw')) bump(ctx, 'capLockjawCured');
+  } catch (e) { note(ctx, 'treatLockjaw: ' + e.message); }
+}
+
+// CALL FOR HELP IN A RAID (death diagnosis 2026-10-15 follow-up): raids raise
+// the aid crisis (havenGrowth.js havenRaidTick -> raiseAidCrisis, crisis.
+// raiders) and the game says the four ways to call aloud, but the capable
+// bot called 0 times. Once per raid crisis, when Haven has a linked village:
+// an ability cry first (fast, honest, build-gated), else a runner (unless
+// the road is hot), else the System relay (integration stage 2+). Never the
+// signal fire: its smoke draws company and blocks fleeing, and fleeing is
+// how the bot survives a raider it can't beat. Help then fights at the door
+// blow by blow (comms.js aidFight). CAPABLE_AID_CALL=0 turns it off (A/B).
+function raidCall(Game, ctx) {
+  if (process.env.CAPABLE_AID_CALL === '0') return;
+  try {
+    const crisis = Game.aidCrisis ? Game.aidCrisis() : null;
+    if (!crisis || !crisis.raiders || crisis.resolved || !Game.callForHelp) return;
+    if ((crisis.calls || []).some(c => c && c.result !== 'died')) return; // already called (a dead runner: call again)
+    const links = Game.villageLinks ? (Game.villageLinks('haven') || []) : [];
+    if (!links.length) { if (!crisis._capNoLink) { crisis._capNoLink = 1; bump(ctx, 'capAidNoLink'); } return; }
+    const n0 = (crisis.calls || []).length;
+    const cries = Game.aidCryAbilities ? Game.aidCryAbilities() : [];
+    let stage = 0;
+    try { stage = Game.integrationStage ? Game.integrationStage() : 0; } catch (e) { stage = 0; }
+    let tier = null;
+    if (cries.length) { tier = 'cry'; Game.callForHelp('cry', { abilityId: cries[0].id }); }
+    else if (!(Game.aidRoadHot && Game.aidRoadHot())) { tier = 'runner'; Game.callForHelp('runner'); }
+    else if (stage >= 2) { tier = 'system'; Game.callForHelp('system'); }
+    const c2 = Game.aidCrisis ? Game.aidCrisis() : null;
+    if (tier && c2 && (c2.calls || []).length > n0) { bump(ctx, 'capAidCalls'); bumpMap(ctx, 'capAidByTier', tier); }
+  } catch (e) { note(ctx, 'raidCall: ' + e.message); }
+}
+
 // FINISH THE FIGHT BEFORE BED: a fight that starts during the daily round
 // (a forage trip, the walk home after a flee, a hunt's return) used to sit
 // live until the harness's next upkeep — and Game.sleep refuses mid-fight
@@ -956,6 +1209,18 @@ function finishLiveFight(Game, ctx) {
   } catch (e) { note(ctx, 'finishLiveFight: ' + e.message); }
 }
 
+// Daily god actions use the same public entry as a tap on the action bar.
+function godDay(Game, ctx) {
+  try {
+    if (!Game.godActivatables || Game.inCombat()) return;
+    for (const a of Game.godActivatables()) {
+      if (!a.available || a.combat) continue;
+      if (Game.useAbility('god', a.actionId)) bump(ctx, 'capGodDayUses');
+      if (Game.over || Game.inCombat()) break;
+    }
+  } catch (e) { note(ctx, 'godDay: ' + e.message); }
+}
+
 // ---------- the policy ----------
 const capable = Object.assign({}, BASE, {
   id: 'capable',
@@ -965,6 +1230,8 @@ const capable = Object.assign({}, BASE, {
   },
   upkeep(Game, ctx) {
     chooseOffers(Game, ctx); // before competent's ch[0] pick in daily
+    raidCall(Game, ctx); // raids land in the night: call at dawn
+    treatLockjaw(Game, ctx);
     withEnv(() => BASE.upkeep(Game, ctx));
     deedHunt(Game, ctx); // in upkeep: the harness drives the fight right after
   },
@@ -972,6 +1239,9 @@ const capable = Object.assign({}, BASE, {
     chooseOffers(Game, ctx);
     answerRelic(Game, ctx);
     wearKeepsakes(Game, ctx);
+    godDay(Game, ctx);
+    raidCall(Game, ctx);
+    treatLockjaw(Game, ctx);
     withEnv(() => BASE.daily(Game, ctx));
     capableTalk(Game, ctx);
     relayRoad(Game, ctx);
@@ -982,6 +1252,7 @@ const capable = Object.assign({}, BASE, {
     try { return capableFight(Game, ctx); } catch (e) { note(ctx, 'capableFight: ' + e.message); return false; }
   },
   contest: capableContest,
+  pending: capablePending,
 });
 
 // capableSummary(ctx): the behaviour counters, flat, for reports/tests.
@@ -989,10 +1260,10 @@ function capableSummary(ctx) {
   const k = ['capFights', 'capFleeDecisions', 'capFleeSteps', 'capFleePushes', 'capFleeExits', 'capFleeNodeExits', 'capFleeChased', 'capFleeHeld',
     'capAbilityUses', 'capAbilityRefused', 'capAbilityHungerSkips', 'capSigUses', 'capOffersChosen', 'capOffersNotFirst', 'capRelicChosen',
     'capContestChoices', 'capContestNotFirst', 'capContestRefusals', 'capTableAnswers', 'capTableNotFirst', 'capSeatTaken', 'capGreedyWaits', 'capGreedyMaxTier',
-    'capConvos', 'capConvosHeld', 'deepTurns', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes', 'capKeepsakesWorn'];
+    'capConvos', 'capConvosHeld', 'deepTurns', 'capFleeFromHaven', 'capFleeDoorExits', 'capDrawFaced', 'capDrawDrivenOff', 'capContestLethalAvoided', 'capBeamFlee', 'capDeerFlee', 'capLockjawSeen', 'capLockjawExamined', 'capLockjawPills', 'capLockjawTreated', 'capLockjawCured', 'capAidCalls', 'capAidNoLink', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes', 'capKeepsakesWorn', 'capGodDayUses'];
   const out = {};
   for (const x of k) out[x] = (ctx && ctx[x]) || 0;
   return out;
 }
 
-module.exports = { capable, capableSummary, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, threatFlee, treatLockjaw, raidCall, godDay, havenEscape, havenExitDir, drawOutmatched, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
