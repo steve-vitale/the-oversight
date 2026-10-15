@@ -2859,6 +2859,8 @@
       }
       if (n > 0) this.say(origCooked ? `Plus ${n} from the hunt, cooked through. (16 ticks)` : `Cooked ${n} over the fire. (16 ticks)`);
       if (this.state.scholar.week1) this.state.scholar.week1.cook++;
+      // the legacy path credits its own batch; meat/plant batches never did (diagnosis 2026-10-15). Capped 1/day.
+      if (n > 0) { try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } }
     }
     this._cookAllFuelDied = null;
     return r;
@@ -3071,6 +3073,7 @@
       } else {
         this.say(`Cooked ${item.name}. Smells like meat. Whether it IS food \u2014 you still don't know. Test it cautiously.${memWarn}`);
       }
+      try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } // craft track: this path never credited it (diagnosis 2026-10-15)
       this.tickAction(cookTime);
       return null;
     }
@@ -3099,6 +3102,7 @@
       } else {
         this.say(`Cooked ${item.name}. Safe now. (${this.pluralize(timeP, 'tick')})`);
       }
+      try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } // craft track: this path never credited it (diagnosis 2026-10-15)
       this.tickAction(timeP);
       return null;
     }
