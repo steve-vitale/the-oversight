@@ -1479,7 +1479,15 @@
       // snippet is always their own last words on the thread, so quoting
       // it in-voice is honest. Threads planted before this change carry
       // null and render exactly as before.
-      if (o.snippet) inner += ` "${String(o.snippet).replace(/"+$/g, '')}"`;
+      // NESTED QUOTES (journey-social r15 2026-10-15): the opener is
+      // wrapped in double quotes downstream — wrapping the snippet in
+      // doubles too nested unescaped quotes (transcript-verified:
+      // ...neighbors.""). Single quotes nest cleanly; the snippet text
+      // itself is untouched.
+      if (o.snippet) {
+        const sq = String(o.snippet).replace(/^"+|"+$/g, '');
+        inner += ` '${sq}'`;
+      }
       const others = open.filter(x => x.tid !== o.tid);
       if (others.length && Math.random() < 0.5) {
         const o2 = others[Math.floor(Math.random() * others.length)];
@@ -4623,7 +4631,19 @@
           // INHERITED THREAD (journey-succession 2026-10-11): name whose
           // thread it was — the new Bearer <redacted> resume it as their own.
           const predT = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
-          done(beat || '"Yeah... where were we with that."',
+          // THREAD-SPECIFIC RESUME (journey-social r15 2026-10-15): the old
+          // generic line was identical for every thread — resuming a SECOND
+          // different thread in one sitting self-blocked in the no-repeat
+          // ledger, and the "I just said — did you miss it?" deflection
+          // fired at a player who wasn't repeating themselves
+          // (transcript-verified seed 53 sit490, recovered from the dead
+          // 2026-10-14 sociallife-r1 run). Naming the thread keeps each
+          // resume distinct in the ledger AND reads like a person picking
+          // up the actual thread instead of a menu.
+          const resumeLine = beat || (predT
+            ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
+            : `"About ${label} — yeah, we never did get back to that."`);
+          done(resumeLine,
             predT ? `"About ${label} — that was ${predT}'s thread. We never finished."` : `"About ${label} — we never finished."`);
         } else if (akind === 'memory') {
           // Name something you share. The ledger is continuity — they answer

@@ -1793,6 +1793,13 @@
       const exiled = c.flipped ? c.accused.filter(a => a !== c.flipped) : c.accused;
       for (const vid of exiled) {
         if (this.isPlayer(vid)) { this.exilePlayer('moot'); continue; }
+        // ALREADY GONE (journey-social r15 2026-10-15): an accused exiled
+        // (or killed/fled) by an earlier verdict can't be exiled again —
+        // sentencing the gone narrated "Deirdre is exiled" twice for one
+        // leaving (transcript-verified: case_2 day 11 + case_4 day 12, seed
+        // 1201 competent). The verdict still stands; there is just nobody
+        // left to walk out.
+        if (!(this.state.village.roster || []).includes(vid)) continue;
         this.say(`${this.displayName(vid)} is exiled. "Take what you can carry and go." The village watches them walk until the trees close.`);
       // DRAMA (Steve 2026-10-07, C1): exile is the darkest social moment
       try { this.drama('social', { type: 'exile', name: this.displayName(vid) }); } catch (e) {}
@@ -1801,7 +1808,13 @@
         try { if (this.createCorpse) { /* not dead — no corpse */ } } catch (e) {}
       }
       if (c.flipped && !this.isPlayer(c.flipped)) {
-        this.say(`${this.capFirst(this.whoTag(c.flipped))} talked first. The village remembers that too — leniency, and a long probation.`);
+        // GHOST LENIENCY (journey-social r15 2026-10-15): the flipper may
+        // have been exiled by an earlier verdict — no leniency line for
+        // someone who isn't there (transcript-verified: "Karimi talked
+        // first... leniency" for Karimi, exiled the day before).
+        if ((this.state.village.roster || []).includes(c.flipped)) {
+          this.say(`${this.capFirst(this.whoTag(c.flipped))} talked first. The village remembers that too — leniency, and a long probation.`);
+        }
       }
     } else if (path === 'weregild') {
       // verb agreement: "you" takes "pay", a single third person takes "pays"
@@ -4724,9 +4737,40 @@
       // idempotent now, and this guard keeps the intent explicit.
       if (c.trial) continue;
       if (day - c.day >= (c.mootIn || 2)) {
-        const aname = this.whoTag(c.accuser);
-        this.say(`${this.capFirst(aname)} has gathered enough voices. This is it — tonight, at the fire.`);
-        this.callMoot(c.id, c.accuser);
+        // EXILED/DEAD ACCUSER (journey-social r15 2026-10-15): the accuser
+        // can be gone by moot day (exiled or dead between the charge and
+        // the fire) — convening the moot in their name then reads as the
+        // village taking orders from someone who isn't there
+        // (transcript-verified: "Deirdre calls the moot" hours after
+        // Deirdre was exiled). The charge stands, but a LIVING villager
+        // calls it — the victim if living, else the living villager
+        // closest to the victim (same rule as npcMootTick) — and the
+        // announcement names the handoff honestly.
+        const npcs = this.npcIds() || [];
+        let caller = c.accuser;
+        const callerGone = !npcs.includes(caller);
+        if (callerGone) {
+          caller = (c.target && npcs.includes(c.target)) ? c.target : null;
+          if (!caller) {
+            let best = null, bestAff = -Infinity;
+            for (const vid of npcs) {
+              if ((c.accused || []).includes(vid)) continue;
+              let aff = -Infinity;
+              try { aff = this.pairAffinity(vid, c.target); } catch (e) {}
+              if (aff > bestAff) { bestAff = aff; best = vid; }
+            }
+            caller = best;
+          }
+        }
+        if (!caller) continue; // nobody left to call it — the case waits
+        const aname = this.whoTag(caller);
+        if (callerGone) {
+          const goneName = this.whoTag(c.accuser);
+          this.say(`${this.capFirst(goneName)} is gone, but the charge stands. ${this.capFirst(aname)} has gathered enough voices. This is it — tonight, at the fire.`);
+        } else {
+          this.say(`${this.capFirst(aname)} has gathered enough voices. This is it — tonight, at the fire.`);
+        }
+        this.callMoot(c.id, caller);
       }
     }
     try { this.considerPlayerAccusation(); } catch (e) {}

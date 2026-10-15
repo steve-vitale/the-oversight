@@ -120,7 +120,11 @@ async function main() {
   ok(planted2 && planted2.snippet === BEAT1_CLEAN,
     `subject-change plant stores the old thread's last beat (got: ${JSON.stringify(planted2 && planted2.snippet)})`);
   const lineB = resumeLine(Game, vid);
-  ok(lineB && lineB.indexOf(BEAT1) >= 0,
+  // QUOTE STYLE (journey-social r15 2026-10-15): the beat now nests in
+  // single quotes — the old double-quote wrap nested unescaped quotes
+  // (transcript-verified ...neighbors.""). Assert the beat's words, not
+  // the quote characters.
+  ok(lineB && lineB.indexOf('I saw lights over the ridge the night we woke') >= 0,
     `resume line quotes the subject-changed thread's beat (got: ${String(lineB).slice(0, 160)})`);
 
   // ---- Path C: legacy threads (no snippet) render exactly as before ----
