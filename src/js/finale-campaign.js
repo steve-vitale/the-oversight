@@ -107,13 +107,18 @@
   // already counts the gear). Said aloud.
   function finaleReinforce() {
     var before = survivors();
+    var known = {};
+    ((muster() || {}).allies || []).forEach(function (a) { known[a.villageId + ':' + a.vid] = true; });
     var ms = null;
     try { ms = Game.soundTitanCall('finale'); } catch (e) {}
     if (!ms) { Game.say('No one answers. The fires are cold.'); return null; }
     var after = survivors();
+    var joined = (ms.allies || []).filter(function (a) { return !known[a.villageId + ':' + a.vid]; });
+    if (!joined.length) { Game.say('No new blades answer. The people already marching cannot be counted twice.'); return ms; }
     try {
       var seen = {};
       (ms.allies || []).forEach(function (a) {
+        if (known[a.villageId + ':' + a.vid]) return;
         if (seen[a.villageId]) return;
         seen[a.villageId] = 1;
         var links = [];
@@ -126,7 +131,7 @@
         });
       });
     } catch (e) {}
-    Game.say('📯 The call goes out again — thinner, hoarser. ' + (after - before) + ' new blades join the march (' + before + ' → ' + after + '). The villages count their dead first. (trust −3 per answering fire — reluctance is remembered.)');
+    Game.say('📯 The call goes out again — thinner, hoarser. ' + joined.length + ' new blades join the march (' + before + ' → ' + after + '). The villages count their dead first. (trust −3 per answering fire — reluctance is remembered.)');
     try { if (Game.recordMoment) Game.recordMoment('The finale muster reinforced: ' + before + ' → ' + after + '.'); } catch (e) {}
     return ms;
   }

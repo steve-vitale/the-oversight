@@ -216,20 +216,62 @@
     } catch (e) { return null; }
   }
 
-  // Named faces from an allied roster: speaker first, then other living members.
-  function titanAlliedFaces(villageId, n) {
+  // One real person, one blade. Old saves can contain repeated calls' copies.
+  function titanUniqueAllies(muster) {
+    var seen = {};
+    return ((muster && muster.allies) || []).filter(function (a) {
+      if (!a || !a.vid) return false;
+      var key = a.villageId + ':' + a.vid;
+      if (seen[key]) return false;
+      var ov = Game._otherVillage ? Game._otherVillage(a.villageId) : null;
+      var person = ov && (ov.roster || []).find(function (r) { return r.id === a.vid; });
+      if (person && !person.alive) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function titanNormalizeMuster(muster) {
+    var unique = titanUniqueAllies(muster), byId = {};
+    unique.forEach(function (a) { byId[a.villageId + ':' + a.vid] = a; });
+    (muster.allies || []).forEach(function (a) {
+      if (!a) return;
+      var first = byId[a.villageId + ':' + a.vid];
+      if (!first || first === a) return;
+      // Real donations on old duplicate records still belong to this person.
+      // Keep the actual item objects instead of deleting gifted equipment.
+      first.outfitted = first.outfitted || [];
+      (a.outfitted || []).forEach(function (g) { if (first.outfitted.indexOf(g) < 0) first.outfitted.push(g); });
+      if (first.outfitted.length) {
+        var wb = 0, ar = 0;
+        first.outfitted.forEach(function (g) {
+          var d = (Game.data.items || []).find(function (x) { return x.id === (g.itemId || g.id); });
+          if (d && d.weapon) wb += d.weapon.bonus || 0;
+          if (d && d.armor) ar += typeof d.armor === 'number' ? d.armor : 10;
+        });
+        first.wbonus = wb; first.varmor = Math.min(ar, 40);
+        first.gearValue = first.outfitted.reduce(function (n, g) { return n + titanGearValue(g); }, 0);
+      }
+      first.hp = Math.min(first.hp == null ? 100 : first.hp, a.hp == null ? 100 : a.hp);
+    });
+    muster.allies = unique;
+  }
+
+  // Named faces from an allied roster: speaker first, then free living adults.
+  // Missing age is retained for old saves; generated rosters carry real ages.
+  function titanAlliedFaces(villageId, n, excluded) {
     var faces = [];
     try {
       var ov = Game._otherVillage(villageId);
       var roster = (ov && ov.roster) || [];
       var link = titanAlliedLinks().filter(function (l) { return titanLinkOther(l) === villageId; })[0];
       var speakerId = link && link.theirSpeaker ? link.theirSpeaker.id : null;
-      var ordered = roster.filter(function (r) { return r && r.alive; });
+      var ordered = roster.filter(function (r) { return r && r.alive && (r.age == null || r.age >= 18) && !(excluded && excluded[villageId + ':' + r.id]); });
       ordered.sort(function (a, b) { return (a.id === speakerId ? -1 : 0) - (b.id === speakerId ? -1 : 0); });
       for (var i = 0; i < Math.min(n, ordered.length); i++) {
         faces.push({ id: ordered[i].id, name: ordered[i].name || 'a fighter', villageId: villageId });
       }
-    } catch (e) {}
+    } catch (e) { console.warn('titan allied faces', villageId, e); }
     return faces;
   }
 
@@ -276,6 +318,12 @@
     if (!def) return null;
     var st = titanState();
     var muster = st.musters[titanId] = st.musters[titanId] || { allies: [], haven: [], day: (Game.state.scholar || {}).day || 0, outfitted: {} };
+    titanNormalizeMuster(muster);
+    var committed = {};
+    Object.keys(st.musters).forEach(function (tid) {
+      if (st.slain[tid]) return;
+      titanUniqueAllies(st.musters[tid]).forEach(function (a) { committed[a.villageId + ':' + a.vid] = true; });
+    });
     Game.say('📯 THE CALL GOES OUT — ' + def.title + ' must fall, and no one fire can do it.');
     var links = titanAlliedLinks();
     var answered = 0;
@@ -294,16 +342,23 @@
         Game.say('— ' + nm + ' REFUSES. ' + why + '. (trust −8 — refusals are remembered.)');
         return;
       }
-      var faces = titanAlliedFaces(vid, 2);
+      var cfg = (Game.data.titans || {})._coalition || {};
+      var quota = trust >= (cfg.trustedAt || 70) && opinion >= (cfg.trustedOpinion == null ? 10 : cfg.trustedOpinion)
+        ? (cfg.trustedBlades || 6) : (cfg.baseBlades || 2);
+      var already = muster.allies.filter(function (a) { return a.villageId === vid; }).length;
+      if (already >= quota) { Game.say('— ' + nm + '\u2019s volunteers already march. No new blades join.'); return; }
+      var faces = titanAlliedFaces(vid, quota - already, committed);
       if (!faces.length) {
-        Game.say('— ' + nm + ' has no fighters to send. Their fire is thin.');
+        Game.say('— ' + nm + ' has no free fighters to send. Their fire is thin.');
         return;
       }
       faces.forEach(function (f) {
         muster.allies.push({ villageId: vid, vid: f.id, name: f.name, hp: 100, outfitted: [], gearValue: 0 });
+        committed[vid + ':' + f.id] = true;
       });
       answered++;
       Game.say('— ' + nm + ' answers! ' + faces.map(function (f) { return f.name; }).join(' and ') + ' will march. (trust holds — they are counting on you.)');
+      if (quota === (cfg.baseBlades || 2)) Game.say('Closer bonds with ' + nm + ' could bring more volunteers. For now, these are the people they can spare.');
     });
     // HAVEN'S OWN (2026-10-13): the call no longer auto-commits anyone from
     // Haven. Committing your own people is the player's verb now —
@@ -358,7 +413,12 @@
   }
 
   function titanHavenBlades(muster) {
-    return (muster && muster.haven) || [];
+    var roster = ((Game.state || {}).village || {}).roster || [], seen = {};
+    return ((muster && muster.haven) || []).map(function (h) { return typeof h === 'string' ? { vid: h } : h; }).filter(function (h) {
+      if (!h || !h.vid || seen[h.vid] || roster.indexOf(h.vid) < 0) return false;
+      seen[h.vid] = true;
+      return true;
+    });
   }
 
   // titanCommitOwn(titanId): the player commits Haven itself to the titan.
@@ -449,11 +509,14 @@
             hint: 'Up to 3 of ours march with the muster (' + alliedN + ' allied + ' + havenN + ' ours so far). They eat, they bleed, they can die.'
           });
         }
-        if (!alliedN) {
+        var march = st.campaigns || {};
+        var networkStarted = tid === 'the_network' && march.network && march.network.started;
+        var finaleStarted = tid === 'finale' && march.finale && march.finale.started;
+        if (!networkStarted && (!alliedN || !titanMusterReady(tid))) {
           acts.push({
-            id: 'titan:call:' + tid,
-            label: '\uD83D\uDCEF Sound the call',
-            hint: 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
+            id: finaleStarted ? 'titan:reinforce:finale' : 'titan:call:' + tid,
+            label: finaleStarted ? '\uD83D\uDCEF Call for reinforcements' : '\uD83D\uDCEF Sound the call',
+            hint: finaleStarted ? 'New people can answer at a cost of 3 trust per answering fire. The dead stay dead.' : 'The call to arms \u2014 allied fires answer aloud, or refuse aloud. Refusals are remembered.'
           });
         }
       });
@@ -462,11 +525,12 @@
   }
 
   function titanSelfDo(id) {
-    var m = /^titan:(council|call|commit):(.+)$/.exec(id || '');
+    var m = /^titan:(council|call|commit|reinforce):(.+)$/.exec(id || '');
     if (!m) return null;
     if (m[1] === 'council') return Game.titanWarCouncil(m[2]);
     if (m[1] === 'call') return Game.soundTitanCall(m[2]);
     if (m[1] === 'commit') return titanCommitOwn(m[2]);
+    if (m[1] === 'reinforce' && m[2] === 'finale' && Game.finaleReinforce) return Game.finaleReinforce();
     return null;
   }
 
@@ -651,7 +715,9 @@
     var st = titanState();
     Object.keys(st.musters).forEach(function (titanId) {
       var muster = st.musters[titanId];
-      if (!muster || st.slain[titanId] || !muster.allies.length) return;
+      if (!muster || st.slain[titanId]) return;
+      titanNormalizeMuster(muster);
+      if (!muster.allies.length && !titanHavenBlades(muster).length) return;
       if (muster.lastUpkeep === day) return;
       muster.lastUpkeep = day;
       // An army marches on its stomach: 1000 kcal/day per blade — allies AND
@@ -682,7 +748,7 @@
     // HAVEN COUNTS (2026-10-13): committed Haven blades are allied blades —
     // the player's own commitment moves the hard gate. The coalition is
     // still mostly the many (cap 3 ours), never a solo with extra steps.
-    var alive = (muster.allies || []).length + titanHavenBlades(muster).length;
+    var alive = titanUniqueAllies(muster).length + new Set(titanHavenBlades(muster).map(function (h) { return h.vid; })).size;
     return alive >= def.minAllies;
   }
 
@@ -785,6 +851,7 @@
     var st = titanState();
     var muster = st.musters[titanId];
     if (!muster || !Game.tbfight || !Game.tbfight.fighters) return;
+    titanNormalizeMuster(muster);
     var fighters = Game.tbfight.fighters;
     // free spots near the player
     var taken = {};

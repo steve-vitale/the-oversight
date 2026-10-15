@@ -48,7 +48,8 @@ function check(name, cond, extra) {
 
   // HERALD: omen tutorial
   console.log('-- herald --');
-  G.state.titans = { musters: { herald: { allies: Array.from({length:10}, (_,i)=>'a'+i), haven: [], day: 0, outfitted: {} } } };
+  const blades = (n, prefix) => Array.from({length:n}, (_,i)=>({ vid: prefix+i, villageId: 'fixture', name: 'Blade '+prefix+i, hp: 100, outfitted: [], gearValue: 0 }));
+  G.state.titans = { musters: { herald: { allies: blades(10, 'a'), haven: [], day: 0, outfitted: {} } } };
   G.state.scholar.health = 9000; G.state.scholar.mx = 4; G.state.scholar.my = 4;
   G.startCombat('herald');
   const h = G.tbfight.fighters.find(f => f.kind === 'monster');
@@ -60,7 +61,7 @@ function check(name, cond, extra) {
 
   // NIELSEN: ratings game
   console.log('-- nielsen --');
-  G.state.titans.musters.nielsen = { allies: Array.from({length:12}, (_,i)=>'b'+i), haven: [], day: 0, outfitted: {} };
+  G.state.titans.musters.nielsen = { allies: blades(12, 'b'), haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('nielsen');
   const n = G.tbfight.fighters.find(f => f.kind === 'monster');
@@ -72,7 +73,7 @@ function check(name, cond, extra) {
 
   // FINALE: countdown apocalypse
   console.log('-- finale --');
-  G.state.titans.musters.finale = { allies: Array.from({length:20}, (_,i)=>'c'+i), haven: [], day: 0, outfitted: {} };
+  G.state.titans.musters.finale = { allies: blades(20, 'c'), haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('finale');
   const f = G.tbfight.fighters.find(f => f.kind === 'monster');

@@ -51,7 +51,7 @@ function muster(Game, id) {
     Game.state.titans.musters = Game.state.titans.musters || {};
     const need = { nielsen: 12, finale: 20 }[id] || 0;
     if (need && !Game.state.titans.musters[id]) {
-      const allies = []; for (let i = 0; i < need; i++) allies.push('ally' + i);
+      const allies = []; for (let i = 0; i < need; i++) allies.push({ vid: 'ally' + i, villageId: 'fixture', name: 'Blade ' + i, hp: 100, outfitted: [], gearValue: 0 });
       Game.state.titans.musters[id] = { allies, haven: [], day: 0, outfitted: {} };
     }
   } catch (e) {}

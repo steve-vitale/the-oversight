@@ -59,7 +59,7 @@ function check(name, cond, extra) {
   // Muster 10 allies for Herald
   G.state.titans = G.state.titans || {};
   G.state.titans.musters = G.state.titans.musters || {};
-  const allies = []; for (let i = 0; i < 10; i++) allies.push('ally' + i);
+  const allies = []; for (let i = 0; i < 10; i++) allies.push({ vid: 'ally' + i, villageId: 'fixture', name: 'Blade ' + i, hp: 100, outfitted: [], gearValue: 0 });
   G.state.titans.musters.herald = { allies, haven: [], day: 0, outfitted: {} };
   G.state.scholar.health = 9000;
   G.startCombat('herald');
