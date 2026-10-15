@@ -2586,7 +2586,18 @@ const competent = {
           // a wave-3 fight badly hurt is suicide, not a hunt. Gate off =
           // the block below, byte-identical.
           const huntCommitted = !!(ctx._huntCommit && maxWave === 3 && hpPct >= 0.5);
-          const outmatched = !huntCommitted && (
+          // WAVE5REACH (scale-onramp wave-5 lever 2026-10-15, via ctx._w5Commit
+          // — set only by the wave5reach wrapper when WAVE5REACH=1, wave-4
+          // unlocked, wave-5 not yet, scholar >= 50% HP): a committed
+          // wave-4+ facing overrides the start-of-fight walk-away, exactly
+          // like _huntCommit does for wave-3. DESIGN CALL (see
+          // evidence/2026-10-15/sim-wave5reach.md): the mid-fight 35% eject
+          // below is UNCHANGED — wave-4 attrition is bloodier than wave-3,
+          // so the hunt holds to 12% only via _huntCommit; a losing wave-4+
+          // race still retreats at 35%. Gate off = the block below,
+          // byte-identical.
+          const wave5Committed = !!(ctx._w5Commit && maxWave >= 4 && hpPct >= 0.5);
+          const outmatched = !(huntCommitted || wave5Committed) && (
             totalMhp > 2.5 * pmax ||
             (maxWave >= 2 && hpPct < 0.7) ||
             hpPct < 0.5);
