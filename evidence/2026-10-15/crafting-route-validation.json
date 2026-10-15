@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-15",
+  "branch": "codex/resume-claude",
+  "baseCommit": "5546dc83",
+  "implementationCommits": [
+    "10815f8e",
+    "f3ec6759",
+    "51fc768b"
+  ],
+  "scope": "Crafted and existing ammo usability, honest craft feedback, recipe/material-access measurement; broader goal active",
+  "verification": {
+    "ammunition": {
+      "before": {
+        "passed": 10,
+        "failed": 12
+      },
+      "after": {
+        "passed": 22,
+        "failed": 0
+      }
+    },
+    "observer": {
+      "passed": 10,
+      "failed": 0,
+      "stateHashOnOffDays": 100
+    },
+    "quick": {
+      "passed": 109,
+      "failed": 0,
+      "seconds": 32
+    },
+    "full": {
+      "passed": 881,
+      "failed": 0,
+      "seconds": 147
+    },
+    "ontology": {
+      "systems": 111,
+      "failed": 0
+    },
+    "syntax": [
+      "src/js/game.js",
+      "src/js/app.js"
+    ],
+    "diffCheck": true
+  },
+  "matrix": {
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "days": 150,
+    "policies": [
+      "capable",
+      "maker"
+    ],
+    "runsPerArm": 32,
+    "sourceDifferences": [
+      "src/js/game.js"
+    ],
+    "currentSourceDifferences": [
+      "src/js/app.js"
+    ],
+    "note": "Only game.js ammo identity differs between matrix arms. The subsequent app.js craft receipt fix is not loaded by sims and has separate phone proof. No balance improvement claimed from 16 seeds."
+  },
+  "artifacts": {
+    "crafting-route-audit.md": "4c4d796378ecdc47c86dab8a20925d2a354dfcc6d0f4921e6d2b61fca8904f81",
+    "gear-usage-craft-before-16.json": "d7992146c3381399215ef044564e552d233ae43f6b5e9b54540e1a047a2df82f",
+    "gear-usage-craft-before-16.md": "61b380062eae846ea9171731b83e91c67bfd1d3395eccdbe529c849051259965",
+    "gear-usage-craft-after-16.json": "e820054fd23d527b1ad40e0c87a84bc0574ff6d220d0d86bea6967ef157d9138",
+    "gear-usage-craft-after-16.md": "8d4dec3f561220acaccdfec972b98452b33198e78b88642ba4b68384a0aba979",
+    "crafted-arrow-phone.png": "f3e64a8d86d14c99d3070bf8aa7bcd3ae5d359f10ee5048eb0464d0f67b6e8af",
+    "craft-missing-materials-phone.png": "3840e11f97bf8840314fd9dc0094be231287a5d2842bb9dfbe2672d6ef245015"
+  },
+  "browser": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "preparedFixture": true,
+    "checks": [
+      "real Make -> Equip -> Strike: crafted arrows 5 -> 4",
+      "missing wood: detailed narration without false Crafted receipt"
+    ],
+    "serversStopped": true,
+    "tabClosed": true,
+    "viewportRestored": true
+  },
+  "remaining": [
+    "recipe learning and material access",
+    "earned maker career reward route",
+    "underused survival/storage/peer/party/Network systems",
+    "remaining original roadmap"
+  ],
+  "release": {
+    "pushed": false,
+    "deployed": false,
+    "versionBumped": false
+  }
+}

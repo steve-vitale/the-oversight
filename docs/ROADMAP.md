@@ -72,10 +72,15 @@ inventory snapshot preserves the IDs/metadata needed for Equip/Wear/Use.
 **This is not a claim that every playstyle is balanced.** Continue the
 simulation/playtest goal with these gaps before expanding content blindly:
 
-1. **Crafting and knowledge access.** Existing gear recipes remain basic;
-   no tier-3 recipe ladder. Measure recipe learning, materials, useful
-   crafts and gear use. Add a coherent earned upgrade route, rather than
-   filling prize tables with items whose only power is descriptive text.
+1. **Crafting and knowledge access.** The follow-up audit repaired crafted
+   ammunition that could not fire and false "Crafted" UI receipts. In the
+   16-seed screen, neither policy successfully crafted arrows; knowledge
+   and material access remain sparse. See `evidence/2026-10-15/crafting-route-audit.md`.
+   Improve usable survival supplies and earned reward access for makers;
+   an advanced recipe ladder is not an established requirement. Steve's
+   direct 2026-10-03 wording in `DECISIONS.md` focuses crafting on supplies
+   and knowledge, with less grind. Keep this distinct from the later basic
+   gear recipes; don't invent magical crafting to fill a prize gap.
 2. **Honest livelihood ending probes.** `merchant`, `maker`, `caregiver`
    share capable's survival/choice brain. Disable deliberate hunting and
    feast patrols while retaining feasts/devotion and ordinary defence.
