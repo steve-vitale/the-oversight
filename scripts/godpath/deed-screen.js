@@ -60,8 +60,19 @@ async function child() {
           if (tc) tableTrace.push({ day: this.state.scholar.day, id, options: (tc.options || []).map(x => ({ id: x.id, label: x.label })), prompt: tc.prompt, path: T.path, phase: T.phase, beat: T.beat, meters: { ...(T.meters || {}) } });
           return choose.apply(this, arguments);
         };
+        // Observe the canonical receipt; emitting diagnostic telemetry here
+        // would advance the harness's Date.now counter and change later IDs.
+        const spend = G._spendFeastedPower;
+        if (spend) G._spendFeastedPower = function () {
+          const before = this.state.scholar.feastBuff;
+          const used = before && before.used;
+          const result = spend.apply(this, arguments);
+          const after = this.state.scholar.feastBuff;
+          if (after && after.used && !used && after.use) foodUses.push({ bearer: this.villagerId, ...JSON.parse(JSON.stringify(after.use)) });
+          return result;
+        };
         const tele = G.tele;
-        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); if (type === 'godpath_deed') outcomes.push(JSON.parse(JSON.stringify(data))); if (type === 'feast_power_used') foodUses.push({ bearer: this.villagerId, ...JSON.parse(JSON.stringify(data)) }); if (type === 'table_failed' || type === 'table_won') tableTrace.push({ day: this.state.scholar.day, type, ...JSON.parse(JSON.stringify(data)) }); return tele.apply(this, arguments); };
+        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); if (type === 'godpath_deed') outcomes.push(JSON.parse(JSON.stringify(data))); if (type === 'table_failed' || type === 'table_won') tableTrace.push({ day: this.state.scholar.day, type, ...JSON.parse(JSON.stringify(data)) }); return tele.apply(this, arguments); };
         sample(G);
       }
       if (base.setup) return base.setup(g, ctx);
@@ -103,7 +114,7 @@ async function main() {
   await Promise.all(Array.from({ length: Number(arg('par', 4)) }, worker));
   rows.sort((a, b) => a.row.policy.localeCompare(b.row.policy) || seeds.indexOf(a.row.seed) - seeds.indexOf(b.row.seed));
   const hashes = {};
-  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
   fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');

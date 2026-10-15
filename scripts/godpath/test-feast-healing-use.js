@@ -47,5 +47,24 @@ const K = require('./lib'), T = K.reporter('feast-healing-use');
   const reserve = {};
   require('../policies/livelihood').care(G, reserve);
   T.ok('caregiver reserves dinner instead of spending its low food balance', !reserve.livelihoodTreatments && !s.prog.feastSurgeUsed);
+  s = ready(); s.health = G.maxHealth() - 25;
+  G.activateAbility('field_medicine');
+  T.ok('clamped bonus records only the five HP that actually landed', s.health === G.maxHealth() && s.feastBuff.use.bonusHp === 5);
+  s = ready();
+  const description = G.activatableAbilities().find(a => a.id === 'field_medicine').desc;
+  const foodBefore = s.kcal;
+  G.activateAbility('field_medicine');
+  T.ok('visible full treatment price equals its actual 140 kcal charge', /\(140 kcal\)/.test(description) && foodBefore - s.kcal === 140, description);
+  s = ready();
+  K.fight(G, 'hushwolf');
+  const clock = Date.now;
+  let clockCalls = 0, saveCalls, useCalls;
+  Date.now = () => { clockCalls++; return clock(); };
+  try {
+    G.save(); saveCalls = clockCalls;
+    clockCalls = 0;
+    G.noteFeastedCombatUse(); useCalls = clockCalls;
+  } finally { Date.now = clock; }
+  T.ok('combat credit adds no diagnostic clock reads beyond its existing save', s.feastBuff.use.kind === 'combat' && useCalls === saveCalls, `${useCalls} vs ${saveCalls}`);
   T.done();
 })().catch(e => { console.error(e.stack); process.exitCode = 1; });

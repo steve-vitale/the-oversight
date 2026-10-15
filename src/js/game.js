@@ -22598,7 +22598,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // field medicine heals real wounds only. The loop can't print free
         // kcal anymore: farming the Price ratchets max HP down, ~1/day is
         // sustainable, the body refuses past 50 wound.)
-        const healCost = 100;
+        const healCost = (((this.data.abilities || []).find(a => a.id === 'field_medicine') || {}).legacyCost || {}).kcal || 100;
         if ((s.kcal || 0) < healCost) { this.say(`Too hungry to heal — need ${healCost} kcal.`); return false; }
         // GATE AFTER THE FOOD CHECK (survival-attrition 2026-10-10): the old
         // order set fieldMedDayPart BEFORE the kcal check, so a refused

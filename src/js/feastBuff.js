@@ -411,7 +411,6 @@
         s.prog = s.prog || {};
         s.prog.feastSurge = false;
         s.prog.feastSurgeUsed = true;
-        if (typeof this.tele === 'function') this.tele('feast_power_used', b.use);
         this.save();
       } catch (e) { console.warn('[feastSurge] spending power', e); }
     },

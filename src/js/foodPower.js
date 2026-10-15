@@ -238,7 +238,11 @@
     try {
       const oc = this.overchargeLine();
       for (const a of out) {
-        const kc = (a.cost && a.cost.kcal) || this.abilityKcalCost(a.abilityId, a.actionId);
+        // Legacy treatment also pays its own native cost after activation.
+        // Display the full bill; this changes no payment or food balance.
+        const ab = ((this.data || {}).abilities || []).find(x => x.id === (a.abilityId || a.id));
+        const native = a.actionId ? 0 : (((ab || {}).legacyCost || {}).kcal || 0);
+        const kc = ((a.cost && a.cost.kcal) || this.abilityKcalCost(a.abilityId, a.actionId)) + native;
         if (kc && !/kcal/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + `(${kc} kcal)`;
         if (oc && !/OVERCHARGED/.test(a.desc || '')) a.desc = (a.desc ? a.desc + ' ' : '') + oc;
       }
