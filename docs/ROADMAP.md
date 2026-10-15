@@ -382,12 +382,14 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
 
 ### 7b. Remaining subclass coverage gaps
 - **Current screen (2026-10-15):** 64 seeds per policy, capable/maker/merchant/
-  caregiver, daily class samples: 12/20 in capable and 14/20 across the panel.
-  Juggernaut, Warden, Phantom, Undying, Hoarder and Dealer were not sampled;
-  neither Miser subclass appeared even under merchant play. These are
-  observed bot gaps, not proof that a human cannot form them. The previous
-  ten-missing list predates recovery; see `deed-audit.md` for current evidence.
-  Deep kit placement and trade-to-class progression still need investigation.
+  caregiver, daily class samples: 14/20 across the companion-body panel.
+  Bulwark, Warden, Seer, Keeper, Hoarder and Dealer were not sampled; neither
+  Miser subclass appeared even under merchant play. Juggernaut and Undying
+  now appear, replacing Seer and Keeper in this panel. These are observed
+  bot gaps, not proof that a human cannot form them. See
+  `evidence/2026-10-15/alien-party-audit.md` for current evidence; older
+  `deed-audit.md` measurements remain historical baselines. Deep kit
+  placement and trade-to-class progression still need investigation.
 - **Focused access result:** Second Wind moves from Strange position 10 to
   6; Molt stays 11 and the shared offer window stays 6. Matched 64 x four
   yields 46 player / 2 NPC appearances, three player-held runs and one actual
@@ -399,10 +401,19 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   shared fight/alien deeds; dead, absent and summoned actors do not. Source-
   isolated 64 x four: wins 115 -> 109/256, player deaths 254 -> 232, caregiver
   22 -> 26/64; other policies lose wins. Class coverage 15 -> 14 (Bulwark no
-  longer sampled). Keep balance investigation open. Actual alien-builder
-  probe also proves 77 world HP becomes fixed 30 HP with no gear bonus
-  fields: next repair that contract and verify equipment effects. Integration
-  remains a separate unmodified NPC model. See `party-deeds-audit.md`.
+  longer sampled). Keep balance investigation open. That panel's alien actor
+  probe exposed fixed 30 HP and missing gear fields, repaired below.
+  Integration remains a separate unmodified NPC model. See `party-deeds-audit.md`.
+- **Companion body repair:** real alien actors now use world HP/100 capacity
+  and worn gear. Tactical companion wounds, retreat, death and actual rescue
+  healing now persist to the same person. Eighteen runtime assertions, phone
+  Strike/normal roster proof, quick 149/149 and full 921/921 pass. Matched
+  64 x four: wins 109 -> 124/256, deaths 232 -> 229; wins increase in all four
+  policies, but merchant/caregiver deaths each rise four. One Undying class
+  and one player Unkillable recognition appear; the latter never enters a
+  Table. Molt still has no offers; no NPC retains Second Wind in daily
+  samples. Six missing classes, nine fitting god deeds and broader parity/
+  scale work remain open. See `evidence/2026-10-15/alien-party-audit.md`.
 - Claude's recommendation: add a job-path term to `buildPathLean` (villager-build.js) so villagers build toward their job's god, and move ONE entry per never-seen subclass into the first 6 of a track whose deeds fit it. Measure 64 seeds; target ≥14/20 without deaths rising >10%. (A full kit interleave was tried and reverted — it raised deaths.)
 - Job balance watch: exterminator looked weak, locksmith and mortician strong at 16 seeds — confirm with 32 seeds `FORCE_OCC=<job>` (scripts/sweep-buff.js) before retuning.
 

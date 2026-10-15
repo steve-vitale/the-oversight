@@ -70,10 +70,17 @@ Job -> track -> **class** -> **god** -> Table.
    Matched 64 x four: wins 115 -> 109, deaths 254 -> 232; caregiver 22 ->
    26/64, other policies decline. Class samples 15 -> 14 (Bulwark absent).
    See `party-deeds-audit.md`; this is not blanket balance completion.
-   Next verified actor gap: the real alien builder gives a 77-HP companion
-   fixed 30 HP and no gear bonus fields. Fix that contract before another
-   ability-strength lever. NPC integration's separate random daily counter
-   still needs reconciliation, without awarding XP for presumed deeds.
+   That actor gap is now repaired: actual alien companions enter with their
+   world HP, 100-HP capacity and worn gear, and tactical wounds/healing settle
+   back to the same person. Eighteen runtime assertions and actual phone
+   Strike/roster proof pass; full suite 921/921. Matched 64 x four: wins
+   109 -> 124/256, deaths 232 -> 229; all four policies gain wins, but
+   merchant/caregiver deaths each rise four. Class coverage stays 14/20:
+   Juggernaut/Undying replace Seer/Keeper. One merchant forms Undying; one
+   maker earns Unkillable through real Ember Heart refusal yet never enters
+   a Table. Molt still has no offers and NPCs retain no Second Wind in daily
+   samples. See `alien-party-audit.md`. NPC integration's separate random
+   daily counter still needs reconciliation, without XP for presumed deeds.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.
