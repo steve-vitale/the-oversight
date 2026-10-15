@@ -123,3 +123,9 @@ preservation; no food economics, region/nomad content or new god gate.
 Communal intake follow-up: betrayal.js probation meals and safetynets.js
 ration returns settle receipts after the existing actual adjustments.
 Returned food keeps its source; original food/reserve math stays unchanged.
+
+Host feast nourishment exception: Codex fixes game.js hostFeast so the host
+receives their existing share of the real paid pantry draw, capped by reserve
+capacity. This intentionally changes food balance after intake tracing proved
+the missing meal. Costs, guests, reactor cold seats and timing stay unchanged;
+measure with matched four-policy panels before any further food/god tuning.

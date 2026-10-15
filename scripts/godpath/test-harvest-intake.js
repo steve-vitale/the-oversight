@@ -90,7 +90,7 @@ const K = require('./lib'), T = K.reporter('harvest-intake');
   const feast = G.hostFeast({ guests: [npc] });
   const diners = [rec(me), rec(npc)];
   T.ok('actual feast allocates consumed energy once across the people who ate', feast?.ok && diners.every(Boolean) && near(diners.reduce((n, r) => n + r.routes.feast.kcal, 0), 20000 - G.pantryKcal()));
-  T.ok('feast receipt exposes the existing host reserve gap without inventing food', rec()?.routes.feast.kcal > 0 && rec()?.routes.feast.nourishment === 0 && s.kcal <= 1000);
+  T.ok('the host is nourished by their actual paid feast serving', rec()?.routes.feast.kcal === 750 && rec()?.routes.feast.nourishment === 750 && s.kcal === 1750);
   fresh(); v.pantry = [food(40)]; s.kcal = 1000; v.trust[npc] = 80; v.sick = {}; v.npcAbilities[npc] = ['fusion_reactor'];
   const coldFeast = G.hostFeast({ guests: [npc] });
   T.ok('a real fusion cold seat consumes no credited feast portion', coldFeast?.ok && !rec(npc) && rec()?.routes.feast.kcal > 0);

@@ -27721,8 +27721,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (!vidReactor) this.recordHarvestDraw(vid, drawn, 'feast', Math.min(drawn.taken * servingShare, Math.min(n.hunger || 0, 30) * 25), servingShare);
           n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
       }
-      // The existing feast gives the host bonds/buffs, not reserve kcal.
-      if (!(this.fusionReactorOnline && this.fusionReactorOnline())) this.recordHarvestDraw(this.villagerId, drawn, 'feast', 0, servingShare);
+      // The host eats their share of the pantry food already paid for.
+      // A cold reactor seat eats nothing; reserve overflow is not nourishment.
+      if (!(this.fusionReactorOnline && this.fusionReactorOnline())) {
+        const hostServing = drawn.taken * servingShare;
+        const hostNourishment = Math.min(hostServing, Math.max(0, this.kcalCap() - s.kcal));
+        s.kcal += hostNourishment;
+        this.recordHarvestDraw(this.villagerId, drawn, 'feast', hostNourishment, servingShare);
+      }
       // the feast is communal: everyone who ate together warms to each other.
       try {
         for (let i = 0; i < showed.length; i++) for (let j = i + 1; j < showed.length; j++) {
