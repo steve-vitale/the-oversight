@@ -1068,6 +1068,8 @@ THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something e
 
 ### nomad-wild (`nomad-wild.js`)
 Leg content for The Long Way Home (docs/WORLD-REGIONS.md §6).
+### nomad (`nomad.js`)
+The Long Way Home — the nomad road state machine
 
 **Provides:** —
 
