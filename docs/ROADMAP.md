@@ -127,8 +127,13 @@ simulation/playtest goal with these gaps before expanding content blindly:
    titan/Finale placement now chooses free non-village sites within the map
    and repairs invalid saved locations. All 81 origins are covered; a matched
    prepared run now reaches the real heart fight and retreats. Continue
-   public heart counters, crew spoils, a late six-slot build and the cautious
+   public heart counters, a late six-slot build and the cautious
    bot's food/overtime limits. A complete campaign remains unverified.
+   Crew spoils now parse into bot actions (the phone already exposed them),
+   with actual one-use effects proven. Item feeding now consumes a positive
+   inventory stack rather than accepting exhausted duplicates for free.
+   A matched prepared march uses one earned tool but still retreats.
+   See `evidence/2026-10-15/finale-counter-audit.md`.
    See `evidence/2026-10-15/finale-placement-audit.md`.
    See `evidence/2026-10-15/ally-reach-audit.md`.
    See `evidence/2026-10-15/campaign-usage-audit.md` for the natural screen.

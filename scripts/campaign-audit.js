@@ -55,7 +55,7 @@ async function main() {
   };
   await Promise.all(Array.from({ length: Number(arg('jobs', 4)) }, worker));
   rows.sort((a, b) => a.policy.localeCompare(b.policy) || a.seed - b.seed);
-  const files = ['scripts/policies/campaigner.js', 'scripts/policies/capable.js', 'scripts/policies/competent.js', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'src/js/engine/combat.js', 'src/js/game.js', 'src/js/titans.js', 'src/js/finale-campaign.js', 'src/js/network-campaign.js', 'src/data/titans.json'];
+  const files = ['scripts/policies/campaigner.js', 'scripts/policies/capable.js', 'scripts/policies/competent.js', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'src/js/engine/combat.js', 'src/js/game.js', 'src/js/sigW5.js', 'src/js/titans.js', 'src/js/finale-campaign.js', 'src/js/network-campaign.js', 'src/data/titans.json'];
   const report = { kind: 'natural campaign coverage screen; no prepared state', seeds, days: Number(arg('days', 240)), hashes: Object.fromEntries(files.map(f => [f, crypto.createHash('sha256').update(fs.readFileSync(path.join(root, f))).digest('hex')])), rows };
   const out = arg('out', '.git/campaign-natural-16.json'); fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
   for (const id of policies) {

@@ -37,8 +37,11 @@ function preparedGuard(G, ctx, rally = false) {
   }
   if (!G.tbIsPlayerTurn() || p.acted) return true;
   const finish = () => { if (G.tbfight === f && G.tbIsPlayerTurn() && p.acted) G.tbPlayerEndTurn(); };
-  const binding = sigButtons(G, f, p, enemies, ctx).find(b => b.key === 'tbSpAsk');
+  const buttons = sigButtons(G, f, p, enemies, ctx);
+  const binding = buttons.find(b => b.key === 'tbSpAsk');
   if (binding && binding.call()) { bump(ctx, 'GuardBindings'); finish(); return true; }
+  const spoil = ['tbFiRedPen', 'tbFiLeakedScript', 'tbFiBadNote'].map(key => buttons.find(b => b.key === key)).find(Boolean);
+  if (spoil && spoil.call()) { bump(ctx, 'GuardCrewTools'); finish(); return true; }
   if (rally && !f.rallyUsed && G.tbPlayerRally()) { bump(ctx, 'GuardRallies'); finish(); return true; }
   G.tbPlayerWait(); bump(ctx, 'GuardWaits'); return true;
 }
