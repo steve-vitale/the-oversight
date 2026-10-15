@@ -128,7 +128,13 @@ simulation/playtest goal with these gaps before expanding content blindly:
    and repairs invalid saved locations. All 81 origins are covered; a matched
    prepared run now reaches the real heart fight and retreats. Continue
    public heart counters, a late six-slot build and the cautious
-   bot's food/overtime limits. A complete campaign remains unverified.
+   bot's food/overtime limits. A developed six-slot caregiver fixture now
+   completes the real Finale in 21/64 matched prepared runs with paid Mend,
+   versus 9/64 for the same kit/old guard and 1/64 for the starter fixture.
+   All start at 100/100 HP; no balance numbers changed. Every completion has
+   three actual wins, and no dead ally reappears at the next stage. Natural
+   Finale reach and a full Network march remain unverified.
+   See `evidence/2026-10-15/caregiver-campaign-audit.md`.
    Crew spoils now parse into bot actions (the phone already exposed them),
    with actual one-use effects proven. Item feeding now consumes a positive
    inventory stack rather than accepting exhausted duplicates for free.
