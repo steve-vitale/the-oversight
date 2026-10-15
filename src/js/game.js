@@ -29942,7 +29942,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.pendingInTent = false;
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
-      this.removeWorldMonster(this.playerMonster()); // it's in the fight now, not wandering
+      const _origin = this.playerMonster();
+      this.removeWorldMonster(_origin); // it's in the fight now, not wandering
+      // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15): a
+      // titan or campaign piece (spawned with titan:true) remembers its map
+      // object, so tbEnd can put it back when it wasn't beaten.
+      if (_origin && _origin.titan && this.tbfight) this.tbfight.worldOrigin = _origin;
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
@@ -39997,6 +40002,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15):
+      // startCombat lifts the piece off the map; a titan or campaign piece
+      // that is still standing after a loss, a flee or a rout goes back on
+      // its tile at full strength. Before, nothing put it back: the Network
+      // said "re-face it when ready" with nothing to face, and a lost titan
+      // "remained" nowhere. Wild monsters still melt away (titan-only).
+      try {
+        const o = f.worldOrigin;
+        if (o && result !== 'won') {
+          const mine = (f.fighters || []).filter(x => x && x.kind === 'monster' && (((x.mdef || {}).id || x.monsterId || x.id) === o.id));
+          const standing = !mine.length || mine.some(x => x.alive && (x.hp || 0) > 0);
+          if (standing && this.worldMonsters().indexOf(o) < 0 && !this.monsterAt(o.tx, o.ty)) {
+            o.hp = o.maxHp || o.hp;
+            this.worldMonsters().push(o);
+            this.touchTileScene(o.tx, o.ty);
+            this.syncMonsterAlias();
+          }
+        }
+      } catch (e) { console.warn('[titan] piece restore', e); }
       // UNIFIED TRACKS (2026-10-14): snapshot before the narration clears it —
       // facing an alien player is System contact (strange track).
       let _alienFight = false;
