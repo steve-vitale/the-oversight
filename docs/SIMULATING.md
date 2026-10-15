@@ -98,6 +98,13 @@ across normalization versions. Gameplay fields, telemetry and any other
 pacing fields remain covered. Observed outcomes and source manifests in
 older matrices remain useful separately from that raw hash.
 
+`node scripts/coalition-audit.js --label <name> --n 16 --root <frozen-root>`
+is a **prepared relationship capacity probe**. It generates actual villagers,
+prepares ordinary/strong alliances, uses public call/commit/dawn verbs, and
+records distinct recruits, duplicate inflation, gate readiness and upkeep.
+Its prepared food and relationships do not establish natural alliance
+formation, food affordability, campaign survival or ending probability.
+
 ## Pitfalls (each one has bitten us)
 
 - **Never run two games in one node process.** Use separate processes;
