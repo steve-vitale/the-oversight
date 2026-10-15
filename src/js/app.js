@@ -14879,7 +14879,12 @@
     wireInlineX(slot);
     // obvious feedback: every action confirms, then the panel re-renders fresh.
     const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
-    slot.querySelectorAll('[data-craft]').forEach(b => b.onclick = rewire(() => Game.craft(b.dataset.craft), 'Crafted.'));
+    slot.querySelectorAll('[data-craft]').forEach(b => b.onclick = () => {
+      // Failed rolls and missing materials already explain themselves in
+      // narration. Do not cover that result with a false success receipt.
+      inlineView.result = Game.craft(b.dataset.craft) === true ? 'Crafted.' : '';
+      refresh();
+    });
     slot.querySelectorAll('[data-settrap]').forEach(b => b.onclick = (e) => { Game.setTrap(b.dataset.settrap); inlineView.result = 'Trap set.'; refresh(); });
     slot.querySelectorAll('[data-read]').forEach(b => b.onclick = rewire(() => Game.readBook(b.dataset.read), 'You read.'));
     slot.querySelectorAll('[data-use]').forEach(b => b.onclick = rewire(() => Game.useItem(+b.dataset.use), 'Used.'));

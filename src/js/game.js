@@ -14682,18 +14682,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // ammoCount / spendAmmo: ranged weapons eat stones and arrows.
     ammoCount(mat) {
       const inv = this.state.scholar.inventory || [];
-      return inv.filter(i => i.material === mat).reduce((t, i) => t + (i.units || 0), 0);
+      // Crafted/looted rounds and old saves can carry itemId/id rather than
+      // a material tag. Use the same identity when counting and spending.
+      return inv.filter(i => (i.material || i.itemId || i.id) === mat).reduce((t, i) => t + (i.units || 0), 0);
     },
     spendAmmo(mat, n) {
       let left = n || 1;
       const inv = this.state.scholar.inventory || [];
       for (const item of inv) {
-        if (item.material !== mat || left <= 0) continue;
+        if ((item.material || item.itemId || item.id) !== mat || left <= 0) continue;
         const take = Math.min(item.units || 0, left);
         item.units -= take; left -= take;
       }
       // clean empties
-      this.state.scholar.inventory = inv.filter(i => (i.units || 0) > 0 || !i.material);
+      this.state.scholar.inventory = inv.filter(i => (i.units || 0) > 0 || (!i.material && (i.itemId || i.id) !== mat));
       return left <= 0;
     },
 
