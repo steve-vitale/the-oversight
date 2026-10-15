@@ -13,7 +13,9 @@
 //   - Game.nomadWild.genLegVillage(regionId) -> village : one foreign village on the leg map
 //   - Game.nomadWild.villageMood(village) -> -2..2
 //   - Game.nomadWild.tradeWith(village, offerKcal) -> {kcal, note}
-//   - Game.nomadWild.fightVillage(village) -> {won, note}
+//   - Game.nomadWild.fightVillage(village) -> {won, note, kcal, duels[]}
+//   - Game.nomadWild.villageEncounter(village) -> {village, mood, actions[]}
+//     : stage the meeting; actions gated by mood (hostile -> fight/leave)
 //   - Game.nomadWild.joinVillage(village, days) -> {note}
 //   - Game.nomadWild.travelEvent() -> {kind, note} : 1 beat on departure
 //   - Game.nomadWild.legWaveLevel() -> current unlocked wave (waves run everywhere)
@@ -29,7 +31,16 @@
 //   - village_people: leg villages are people with names, moods and pantry,
 //     never spreadsheets (code: genLegVillage; CANON.md villager parity).
 //   - fights_real: village fights resolve through fieldFight blow-by-blow,
-//     never an outcome table (code: fightVillage; CANON.md).
+//     never an outcome table (code: fightVillage; CANON.md). Duel outcomes
+//     are read from the fight record's own outcome (vKill/mFlee = the
+//     fighter beat their defender); defenders carry real attack data
+//     (named weapons, damage ranges — the village learns the move via
+//     villagePatterns); wounds persist onto each fighter's real health; a
+//     fallen fighter dies on the road honestly via nomadKill (mantle
+//     passes, the road can end). Fighters fight as themselves, never as 'p'.
+//   - hostile_gating: a hostile village (-2, e.g. after a raid) attacks on
+//     sight — villageEncounter offers only fight/leave, and trade refuses.
+//     (code: villageEncounter, tradeWith).
 //   - waves_everywhere: the System's show runs on legs — wave unlocks key
 //     off day floors + the kill ledger, which the road does not bypass
 //     (code: legWaveLevel; WORLD-REGIONS.md §6 "waves still come").
@@ -210,6 +221,11 @@
     tradeWith(village, offerKcal) {
       const r = road();
       if (!village) return { kcal: 0, note: 'No one to trade with.' };
+      if (this.villageMood(village) <= -2) {
+        const sp0 = village.speaker || { name: 'Someone' };
+        say(`${sp0.name} doesn't answer. ${village.name} would rather bleed than barter with you.`);
+        return { kcal: 0, note: 'hostile' };
+      }
       offerKcal = Math.max(0, Math.floor(offerKcal || 0));
       if (offerKcal <= 0) return { kcal: 0, note: 'You hold out empty hands. Nothing to trade.' };
       if (((r.supplies && r.supplies.food) || 0) < offerKcal) {
@@ -267,9 +283,14 @@
     },
 
     // Fight: a real blow-by-blow fight through fieldFight — the party's
-    // fighters against the village's defenders. Winning lets the party take
-    // supplies, but the ledger remembers (their kin will hear of it).
-    // Losing costs blood and packs. This is never an outcome table.
+    // fighters against the village's defenders, one duel at a time. Duel
+    // outcomes come from the fight record itself (vKill/mFlee = the fighter
+    // beat their defender; vFlee = driven off; vDie = the fighter falls) —
+    // never a property the record doesn't carry, never an outcome table.
+    // Wounds persist onto each fighter's real health; a fallen fighter dies
+    // on the road honestly (nomadKill — the mantle passes, the road can
+    // end). Defenders are people with real tools, and fieldFight resolves
+    // the duel with that attack data.
     fightVillage(village) {
       const r = road();
       if (!village) return { won: false, note: 'No one to fight.' };
@@ -284,17 +305,46 @@
       const defenders = Math.max(2, Math.min(6, Math.floor((village.population || 8) / 2)));
       const fighters = members.slice(0, Math.max(1, Math.min(4, members.length)));
       say(`${village.name} doesn't run. ${defenders} of them pick up what they have — and neither do you.`);
+      // Defender loadout: real people, real tools. fieldFight acts with
+      // this attack data (name, damage) — and the village learns the move
+      // (villagePatterns), the way it learns any monster's.
+      const arms = [
+        { name: 'hunting spear', damage: [6, 12] },
+        { name: 'heavy club', damage: [8, 14] },
+        { name: 'skinning knife', damage: [4, 9] },
+      ];
       let won = 0, fought = 0;
+      const duels = [];
       for (const f of fighters) {
         fought++;
-        // A defender: rough villager stats, home-ground edge.
-        const mdef = { id: 'leg_defender', name: village.name + ' defender', hp: 60, maxHp: 60, wave: 1 };
-        const m = { id: 'leg_defender_' + fought, hp: 60, maxHp: 60 };
+        const vid = f.id || f.vid; // fighters fight as themselves, never as 'p'
+        const arm = arms[Math.floor(Math.random() * arms.length)];
+        const mdef = {
+          id: 'leg_defender', name: village.name + ' defender',
+          hp: [50, 70], maxHp: 70, wave: 1, speed: 3, behavior: 'territorial',
+          attack: { name: arm.name, damage: arm.damage },
+        };
+        const m = { id: 'leg_defender_' + fought };
         let rec = null;
-        try { rec = G.fieldFight(f.vid || 'p', mdef, m, {}); } catch (e) { warn('fieldFight: ' + e.message); }
-        const fWon = !!(rec && (rec.won || rec.victory));
-        if (fWon) won++;
-        else break; // the line breaks when a fighter falls
+        try { rec = G.fieldFight(vid || 'p', mdef, m, {}); } catch (e) { warn('fieldFight: ' + e.message); }
+        const out = rec && rec.outcome;
+        // Wounds persist: the fighter's real health carries exactly what
+        // the rounds did — fieldFight returns the record, it never writes.
+        try {
+          const vv = (G.state && G.state.village) || {};
+          vv.health = vv.health || {};
+          if (vid && rec && typeof rec.vHpLeft === 'number') vv.health[vid] = Math.max(0, Math.round(rec.vHpLeft));
+        } catch (e) { warn('persist wounds: ' + e.message); }
+        duels.push({ who: f.name || vid, outcome: out, rounds: rec ? rec.rounds : 0, taken: rec ? rec.vTaken : 0 });
+        if (out === 'vKill' || out === 'mFlee') { won++; continue; }
+        if (out === 'vDie' && vid) {
+          // The fighter falls: an honest road death. The mantle passes in
+          // the party; an empty party ends the road.
+          try {
+            if (G.nomad && typeof G.nomad.nomadKill === 'function') G.nomad.nomadKill(vid, 'fell raiding ' + village.name);
+          } catch (e) { warn('nomadKill: ' + e.message); }
+        }
+        break; // the line breaks when a fighter falls or is driven off
       }
       const partyWon = won === fought && fought > 0;
       if (partyWon) {
@@ -307,16 +357,39 @@
           if (G.state && G.state.moralLedger) { G.state.moralLedger.raids = (G.state.moralLedger.raids || 0) + 1; }
         } catch (e) { warn('moralLedger: ' + e.message); }
         say(`It's over. ${village.name} yields — you take ${take.toLocaleString()} kcal and leave them staring. Somewhere, someone will hear how you came to ${village.name}.`);
-        return { won: true, note: 'raid', kcal: take };
+        return { won: true, note: 'raid', kcal: take, duels };
       }
       const lost = Math.round(((r.supplies && r.supplies.food) || 0) * 0.25);
       r.supplies.food = Math.max(0, ((r.supplies && r.supplies.food) || 0) - lost);
       village.mood = -2;
       village.met = true;
       say(`They drive you off. You leave ${lost.toLocaleString()} kcal of dropped packs in the dirt behind you — and ${village.name} will remember your faces.`);
-      return { won: false, note: 'driven off', kcal: -lost };
+      return { won: false, note: 'driven off', kcal: -lost, duels };
     },
 
+    // villageEncounter(village): stage the meeting with a foreign village —
+    // the single call point for the encounter. Returns {village, mood,
+    // actions}: the honest menu of what the party can do here, gated by
+    // mood. Wary villages will trade, host, or can be fought; a hostile
+    // village (-2, e.g. after a raid) attacks on sight — the party's
+    // choices are fight or leave. The road UI calls this when the party
+    // reaches the village on the leg map.
+    villageEncounter(village) {
+      const v = village || this.genLegVillage();
+      const mood = this.villageMood(v);
+      const sp = v.speaker || { name: 'Ash', role: 'elder' };
+      if (!v.met) {
+        say(`A palisade, smoke, voices — ${v.name}, ${v.population} souls who know this land the way you know yours. ${sp.name} the ${sp.role} comes out to meet you, reading your packs the way you'd read theirs.`);
+        v.met = true;
+      }
+      if (mood <= -2) {
+        say(`${sp.name} sees your faces and shouts. They remember what happened at ${v.name} — weapons come up. There's no trade here, no fire. Fight, or walk away.`);
+        return { village: v, mood, actions: ['fight', 'leave'] };
+      }
+      const warmth = mood >= 1 ? 'wary, but willing' : 'wary';
+      say(`${v.name} is ${warmth}. You could trade pack food for theirs, ask to rest at their fire a few days — or take what you want, if you're willing to be the people who did that.`);
+      return { village: v, mood, actions: ['trade', 'join', 'fight', 'leave'] };
+    },
     // Join briefly: rest at their fire for up to a few days. Wounds close,
     // packs refill a little — but strangers wear out welcome, and the days
     // still pass (waves still come). Trust is the currency.
