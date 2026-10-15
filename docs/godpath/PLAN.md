@@ -47,7 +47,7 @@ Job -> track -> **class** -> **god** -> Table.
    actual world damage, with personal cooldowns and truthful field survivor
    HP settlement (`survivalist-passive-audit.md`). Full active/passive and
    headless player field-contest parity audits remain open.
-   Natural panel: zero Second Wind/Molt receipts, still at Strange-kit
+   Earlier panel: zero Second Wind/Molt receipts, then at Strange-kit
    positions 10/11. The offer observer confirms zero appearances in 26,733
    player/NPC kit offer appearances. The public Table-stakes policy repair
    recovers caregiver wins 15 -> 20/64 (all policies 91 -> 113/256), without
@@ -59,6 +59,12 @@ Job -> track -> **class** -> **god** -> Table.
    rule. See `feast-healing-audit.md` for corrected 16/64-seed evidence and the
    rejected clock-confounded panel. A focused ability-access lever and broader
    NPC feast/active/passive parity remain next.
+   One-entry access lever now moves Second Wind to Strange position 6.
+   Natural 64 x four: 46 player / 2 NPC offer appearances, three player
+   held runs, one actual fatal refusal. Wins 114 -> 115/256, deaths 252 ->
+   254; Molt and Undying class remain unsampled. Audit real NPC Strange-deed
+   callers next (alien-fight/integration credit gaps), not passive strength.
+   See `undying-access-audit.md` for source-isolated evidence and phone choice.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.

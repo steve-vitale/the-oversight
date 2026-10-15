@@ -388,6 +388,13 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   observed bot gaps, not proof that a human cannot form them. The previous
   ten-missing list predates recovery; see `deed-audit.md` for current evidence.
   Deep kit placement and trade-to-class progression still need investigation.
+- **Focused access result:** Second Wind moves from Strange position 10 to
+  6; Molt stays 11 and the shared offer window stays 6. Matched 64 x four
+  yields 46 player / 2 NPC appearances, three player-held runs and one actual
+  fatal refusal. Wins 114 -> 115/256, player deaths 252 -> 254, 252 standard
+  rows identical; zero warnings. Molt/Undying class remain absent. NPCs did
+  not retain Second Wind; audit actual NPC alien-fight/integration deed
+  callers next. Proof, phone choice and raw panels: `undying-access-audit.md`.
 - Claude's recommendation: add a job-path term to `buildPathLean` (villager-build.js) so villagers build toward their job's god, and move ONE entry per never-seen subclass into the first 6 of a track whose deeds fit it. Measure 64 seeds; target ≥14/20 without deaths rising >10%. (A full kit interleave was tried and reverted — it raised deaths.)
 - Job balance watch: exterminator looked weak, locksmith and mortician strong at 16 seeds — confirm with 32 seeds `FORCE_OCC=<job>` (scripts/sweep-buff.js) before retuning.
 
