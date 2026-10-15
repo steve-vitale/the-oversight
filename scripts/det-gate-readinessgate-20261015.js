@@ -30,6 +30,9 @@ async function trajectoryHash(pid, seed) {
         (typeof G.villageStandingTotal === 'function') ? G.villageStandingTotal() : -1,
         (typeof G.unlockedWave === 'function') ? (G.unlockedWave() | 0) : -1,
         (typeof G.standingDeferral === 'function') && G.standingDeferral(4).deferred ? 1 : 0,
+        (typeof G.waveEngaged === 'function') ? (G.waveEngaged(3) | 0) : -1,
+        (typeof G.waveEngaged === 'function') ? (G.waveEngaged(4) | 0) : -1,
+        (typeof G._standingPeakWave === 'function') ? (G._standingPeakWave() | 0) : -1,
       ]);
     } catch (e) {}
     if (orig) { try { return orig(G, ctx); } catch (e) {} }

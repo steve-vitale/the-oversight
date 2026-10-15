@@ -58,18 +58,24 @@ const dayOf = (Game) => { try { return (Game.state.scholar || {}).day || 0; } ca
 
 function daySample(Game) {
   const d = dayOf(Game);
-  let s = null, wave = 1, defer4 = false, defer5 = false, rd = null;
+  let s = null, wave = 1, defer4 = false, defer5 = false, rd4 = null, rd5 = null;
+  let faced3 = 0, faced4 = 0, capped5 = 0, peak = 0;
   try { s = (typeof Game.villageStanding === 'function') ? Game.villageStanding() : null; } catch (e) {}
   try { wave = (typeof Game.unlockedWave === 'function') ? (Game.unlockedWave() | 0) : 1; } catch (e) {}
   try { defer4 = !!(typeof Game.standingDeferral === 'function') && Game.standingDeferral(4).deferred; } catch (e) {}
   try { defer5 = !!(typeof Game.standingDeferral === 'function') && Game.standingDeferral(5).deferred; } catch (e) {}
-  try { rd = (typeof Game.waveUnlockReady === 'function') ? Game.waveUnlockReady(4) : null; } catch (e) {}
+  try { rd4 = (typeof Game.waveUnlockReady === 'function') ? Game.waveUnlockReady(4) : null; } catch (e) {}
+  try { rd5 = (typeof Game.waveUnlockReady === 'function') ? Game.waveUnlockReady(5) : null; } catch (e) {}
+  try { faced3 = (typeof Game.waveEngaged === 'function') ? (Game.waveEngaged(3) | 0) : 0; } catch (e) {}
+  try { faced4 = (typeof Game.waveEngaged === 'function') ? (Game.waveEngaged(4) | 0) : 0; } catch (e) {}
+  try { capped5 = (typeof Game.standingPlentyCappedTotal === 'function') ? (Game.standingPlentyCappedTotal() | 0) : 0; } catch (e) {}
+  try { peak = (typeof Game._standingPeakWave === 'function') ? (Game._standingPeakWave() | 0) : 0; } catch (e) {}
   return {
     day: d, total: s ? (s.total | 0) : 0,
     war: s ? (s.war | 0) : 0, diplomacy: s ? (s.diplomacy | 0) : 0, plenty: s ? (s.plenty | 0) : 0,
     warPts: s ? (s.warPts | 0) : 0, links: s ? (s.links | 0) : 0, feasts: s ? (s.feasts | 0) : 0,
-    wave, defer4, defer5,
-    ready4: rd ? !!rd.ready : null,
+    wave, defer4, defer5, faced3, faced4, capped5, peak,
+    ready4: rd4 ? !!rd4.ready : null, ready5: rd5 ? !!rd5.ready : null,
   };
 }
 
@@ -113,21 +119,30 @@ async function runSuite(label, out) {
           if ((rk === 'national' || rk === 'global') && nationalFirstDay == null) nationalFirstDay = r.day;
         }
       } catch (e) {}
-      // unlock detection from the samples
-      let t4Day = null, t5Day = null, wave4Day = null, wave5Day = null, atT4 = null, atT5 = null;
-      let held4Days = 0, defer4Ever = false, defer5Ever = false, ready4FirstDay = null;
+      // unlock detection from the samples.
+      // drivenNonWar is evaluated AT THE ACTUAL UNLOCK (wave4Day/wave5Day),
+      // not at the Standing crossing — a deferred unlock crosses T4 while
+      // the wave is still held at 3 (measuring at the crossing would
+      // systematically exclude every deferred unlock from the population).
+      let t4Day = null, t5Day = null, wave4Day = null, wave5Day = null;
+      let atWave4 = null, atWave5 = null;
+      let held4Days = 0, defer4Ever = false, defer5Ever = false, ready4FirstDay = null, ready5FirstDay = null;
+      let plentyCapDays = 0;
       for (const r of samples) {
         if (r.defer4) { held4Days++; defer4Ever = true; }
         if (r.defer5) defer5Ever = true;
         if (ready4FirstDay == null && r.ready4 === true) ready4FirstDay = r.day;
-        if (t4Day == null && r.total >= 100) { t4Day = r.day; atT4 = r; }
-        if (t5Day == null && r.total >= 200) { t5Day = r.day; atT5 = r; }
-        if (wave4Day == null && r.wave >= 4) { wave4Day = r.day; if (!atT4) atT4 = r; }
-        if (wave5Day == null && r.wave >= 5) { wave5Day = r.day; if (!atT5) atT5 = r; }
+        if (ready5FirstDay == null && r.ready5 === true) ready5FirstDay = r.day;
+        if (r.total >= 200 && r.capped5 < 200) plentyCapDays++;
+        if (t4Day == null && r.total >= 100) t4Day = r.day;
+        if (t5Day == null && r.total >= 200) t5Day = r.day;
+        if (wave4Day == null && r.wave >= 4) { wave4Day = r.day; atWave4 = r; }
+        if (wave5Day == null && r.wave >= 5) { wave5Day = r.day; atWave5 = r; }
       }
-      // diplomacy/plenty-driven: war alone could not have unlocked it.
-      const drivenNonWar4 = atT4 && atT4.wave >= 4 ? (atT4.war < 100) : null;
-      const drivenNonWar5 = atT5 && atT5.wave >= 5 ? (atT5.war < 200) : null;
+      // diplomacy/plenty-driven: war alone could not have unlocked it —
+      // evaluated at the unlock, when the wave actually opened.
+      const drivenNonWar4 = atWave4 ? (atWave4.war < 100) : null;
+      const drivenNonWar5 = atWave5 ? (atWave5.war < 200) : null;
       // holder: alive 30d after the unlock day.
       const holder4 = wave4Day != null ? (result.days >= wave4Day + 30 ? 1 : 0) : null;
       const holder5 = wave5Day != null ? (result.days >= wave5Day + 30 ? 1 : 0) : null;
@@ -138,10 +153,12 @@ async function runSuite(label, out) {
         { nationalFirstDay },
         {
           t4Day, t5Day, wave4Day, wave5Day,
-          driver4: atT4 ? { war: atT4.war, diplomacy: atT4.diplomacy, plenty: atT4.plenty, warPts: atT4.warPts, links: atT4.links, feasts: atT4.feasts } : null,
-          driver5: atT5 ? { war: atT5.war, diplomacy: atT5.diplomacy, plenty: atT5.plenty } : null,
+          driver4: atWave4 ? { war: atWave4.war, diplomacy: atWave4.diplomacy, plenty: atWave4.plenty, warPts: atWave4.warPts, links: atWave4.links, feasts: atWave4.feasts, faced3: atWave4.faced3 } : null,
+          driver5: atWave5 ? { war: atWave5.war, diplomacy: atWave5.diplomacy, plenty: atWave5.plenty, faced4: atWave5.faced4, capped5: atWave5.capped5 } : null,
           drivenNonWar4, drivenNonWar5, holder4, holder5,
-          defer4Ever, defer5Ever, held4Days, ready4FirstDay,
+          defer4Ever, defer5Ever, held4Days, ready4FirstDay, ready5FirstDay, plentyCapDays,
+          faced3AtUnlock4: (wave4Day != null ? (samples.find(r => r.day === wave4Day) || {}).faced3 : null),
+          faced4AtUnlock5: (wave5Day != null ? (samples.find(r => r.day === wave5Day) || {}).faced4 : null),
           endStanding: { total: (samples.length ? samples[samples.length - 1].total : 0) },
           deathCauses: deathCausesFamily(result, monsterIds),
         }
@@ -179,6 +196,7 @@ function summarize(label, rows) {
     deferral: {
       defer4Ever: agg(r => r.defer4Ever ? 1 : 0), defer5Ever: agg(r => r.defer5Ever ? 1 : 0),
       medHeld4Days: med(rows.map(r => r.held4Days || 0)),
+      medPlentyCapDays: med(rows.map(r => r.plentyCapDays || 0)),
     },
     medianDays: med(rows.map(r => r.days)),
     national: agg(r => (r.nationalFirstDay != null ? 1 : 0)),
@@ -231,20 +249,25 @@ async function smokeGate() {
   } catch (e) {}
   check('harness invokes policy.daily (meanCalls/day>0)', meanCalls > 0, 'mean=' + meanCalls);
   check('>=1 policy-origin deliberate act', policyActs > 0, 'policyActs=' + policyActs);
-  const ARMED = typeof Game.waveUnlockReady === 'function';
+  const ARMED = typeof Game.waveUnlockReady === 'function' && typeof Game.standingPlentyCappedTotal === 'function';
   if (ARMED) {
-    // the deferral mechanism is reachable: scripted unready fixture defers,
-    // a kill-type-ready fixture releases.
+    // v2: the faced-experience deferral + plenty cap are reachable on
+    // scripted fixtures.
     Game.state.scholar.day = 60;
     Game.state.feastLog = [{ day: 55, quality: 1 }, { day: 54, quality: 1 }, { day: 53, quality: 1 }, { day: 52, quality: 1 }, { day: 51, quality: 1 }];
     Game.state.waveLedger = Game.state.waveLedger || {};
     Game.state.waveLedger[2] = { points: 4, perType: { x: 2, y: 2 }, perTypeX: {} };
     Game.state.waveLedger[3] = { points: 0, perType: {}, perTypeX: {} };
-    check('armed: unready + standing>=100 => wave held at 3', Game.unlockedWave() === 3, 'wave=' + Game.unlockedWave());
-    Game.state.waveLedger[3] = { points: 3, perType: { spool: 2, chorus_line: 1 }, perTypeX: {} };
-    check('armed: 2 kill types => releases to 4', Game.unlockedWave() === 4, 'wave=' + Game.unlockedWave());
+    try { Game.deedState().wavesFaced = {}; } catch (e) {}
+    check('armed v2: 0/3 wave-3 faced + standing>=100 => wave held at 3', Game.unlockedWave() === 3, 'wave=' + Game.unlockedWave());
+    try { Game.deedState().wavesFaced = { redactor: 3, gavel: 3, spool: 3 }; } catch (e) {}
+    check('armed v2: 3/3 wave-3 faced => releases to 4', Game.unlockedWave() === 4, 'wave=' + Game.unlockedWave());
+    Game.state.feastLog = Game.state.feastLog.concat(Game.state.feastLog.map(f => ({ day: f.day - 10, quality: 1 })));
+    try { Game.deedState().wavesFaced = { redactor: 3, gavel: 3, spool: 3, eater: 4 }; } catch (e) {}
+    check('armed v2: 200 bread alone => plenty cap holds at 4', Game.unlockedWave() === 4 && Game.villageStandingTotal() === 199,
+      'wave=' + Game.unlockedWave() + ' total=' + Game.villageStandingTotal());
   } else {
-    console.log('  (pristine side: deferral gate absent by design — skip mechanism check)');
+    console.log('  (pristine side: v2 gate absent by design — skip mechanism check)');
   }
   if (fails.length) { console.log('\nSMOKE STOP: ' + fails.join('; ')); process.exit(1); }
   console.log('SMOKE GREEN');
