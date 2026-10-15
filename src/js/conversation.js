@@ -1466,7 +1466,14 @@
       const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
       if (pred) {
         if (ago > 7) {
-          inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You're not ${pred}. Still on your mind?`;
+          // STALE INHERITANCE (journey-landing r16 2026-10-15): an 8+-day-old
+          // thread from a dead predecessor resumed as "You're not {pred}.
+          // Still on your mind?" reads as a fresh realization addressed to
+          // someone who was never in the conversation (transcript-caught:
+          // "You're not Colin. Still on your mind?" to the third Bearer <redacted> day 10).
+          // Name the dead, own the gap, invite — the new Bearer <redacted> pick it
+          // up, never as if they were there.
+          inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You weren't there for that one — ${pred} was. Want to hear where it left off?`;
         } else if (ago > 1) {
           inner = `${pred} and I never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
         } else {
