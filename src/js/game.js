@@ -25743,6 +25743,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // calls villageMeal unguarded, so the day never advanced: a shipped
       // softlock (parity-hunt commit 4960fe7). Hoisted to the top.
       const v = this.state.village;
+      // CAPDRAW2 (bank-cap honest draw, loop B 2026-10-15, sim-findings
+      // #313/#315): opt-in via CAPDRAW2=1, default OFF. The scholar's
+      // pantry draw ceils indivisible pieces (no fractionating — Steve's
+      // standing rule), so taken can exceed the room under the bank cap.
+      // Pristine banks only room and lets (taken - room) vanish SILENTLY
+      // behind a "+{taken} kcal" beat. Armed: the piece is still taken
+      // whole, but the unbannable excess goes back in the bins as
+      // 'Meal leftovers', the beat reports NET banked and names the
+      // return, and the ledgers record net. Gate OFF runs the exact
+      // pristine path (det-gate C1).
+      const capdraw2 = (typeof process !== 'undefined' && process.env && process.env.CAPDRAW2 === '1');
       // JOINED VILLAGE: their pantry is physical too — you only eat from it
       // when you're actually at their fire. (BUG 2026-10-05: the joined meal
       // drew from the joined pantry from anywhere on the map, including while
@@ -25755,7 +25766,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // If you joined another village, you eat from THEIR pantry — at their fire.
       if (jv && atJv) {
         // other villages use pantryKcal (abstract). Convert to meal.
-        const meal = Math.min(2000, jv.pantryKcal || 0);
+        const meal0 = Math.min(2000, jv.pantryKcal || 0);
+        // CAPDRAW2: cap the meal at what the body can bank — the unbannable
+        // rest stays in their pantry (abstract pantry: no item bins, so no
+        // leftover return across villages; the meal itself just shrinks).
+        // Gate OFF: meal0, the pristine path.
+        const jvRoom = Math.max(0, this.kcalCap() - (scholar.kcal || 0));
+        const meal = capdraw2 ? Math.min(meal0, jvRoom) : meal0;
         jv.pantryKcal = Math.max(0, (jv.pantryKcal || 0) - meal);
         // BANK CAP (break-it food r3 2026-10-08): the meal is a kcal source
         // like any other — kcalCap() is the one number, not a 3000 literal.
@@ -25812,7 +25829,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const exposure = this.freshExposure();
       const drawn = this.pantryDraw(v, want, { cook: true, exposure });
       const taken = drawn.taken;
-      scholar.kcal = Math.min((scholar.kcal || 0) + taken, bankCap);
+      // CAPDRAW2 (see gate at top of villageMeal): the draw ceils
+      // indivisible pieces, so taken can exceed room — the unbannable
+      // excess goes back in the bins as granular 'Meal leftovers'
+      // (stockPantry splits <=500 and merges by stacksMatch), and banked /
+      // beat / ledgers go NET. Gate OFF: netBanked === taken, excess === 0
+      // — the pristine path, byte-identical.
+      let netBanked = taken, excess = 0, leftoverName = null;
+      if (capdraw2 && taken > room) {
+        excess = taken - room;
+        netBanked = room;
+        let biggest = null;
+        for (const d of drawn.items) {
+          const k = (d.units || 0) * (d.effectiveKcal || 0);
+          if (!biggest || k > biggest.k) biggest = { k, name: (d.item && d.item.name) || 'food' };
+        }
+        leftoverName = biggest ? biggest.name : 'food';
+        this.stockPantry(excess, 'Meal leftovers');
+      }
+      scholar.kcal = Math.min((scholar.kcal || 0) + netBanked, bankCap);
       // The player's body faces what the draw exposed it to — the same
       // contract as eating the same food yourself at a perfect village cook.
       if (drawn.items.length) this.playerMealConsequences(drawn.items);
@@ -25825,9 +25860,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // takeFromPantry recorded takes).
       if (taken > 0) {
         v.takes = v.takes || {};
-        v.takes[this.villagerId] = (v.takes[this.villagerId] || 0) + Math.round(taken);
+        // CAPDRAW2: the ledger records the NET banked — pristine's gross
+        // inflated the freeloader math with kcal the body never banked.
+        v.takes[this.villagerId] = (v.takes[this.villagerId] || 0) + Math.round(capdraw2 ? netBanked : taken);
       }
-      v.lastPlayerMeal = taken;
+      v.lastPlayerMeal = capdraw2 ? netBanked : taken;
       // WATER with the meal (from village storage).
       // HONEST (survivalist loop 2026-10-07): the old message said "+1L water"
       // whenever vw.clean >= 0 — which is true even when the cistern is dry
@@ -25841,7 +25878,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         gotWater = true;
       }
       if (taken > 0) {
-        this.say(`Village meal: +${Math.round(taken)} kcal${gotWater ? ', +1L water' : ''} from the communal pantry.${trust < 30 ? ' (Half ration — they don\'t trust you yet.)' : ''}`);
+        // CAPDRAW2: the beat reports the NET banked and names the return —
+        // pristine's "+{taken} kcal" claimed kcal the body never banked.
+        // Gate OFF: excess is 0 and the string is the pristine one.
+        this.say(`Village meal: +${Math.round(netBanked)} kcal${gotWater ? ', +1L water' : ''} from the communal pantry.${trust < 30 ? ' (Half ration — they don\'t trust you yet.)' : ''}${excess > 0 ? ` (You couldn't hold the whole ${leftoverName} — ${Math.round(excess).toLocaleString('en-US')} kcal went back in the bins as leftovers.)` : ''}`);
       } else {
         this.say(`No food in the pantry. The village is hungry.${gotWater ? ' You still get your 1L water.' : ''}`);
       }

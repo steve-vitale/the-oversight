@@ -4887,10 +4887,17 @@
           (Math.abs((ov.x || 0) - this.map.px) + Math.abs((ov.y || 0) - this.map.py) <= 1);
         const onProb = !!(s.probation && s.probation.villageId === jvId);
         if (ov && atJv && (onProb || (ov.trust || 0) < 15)) {
-          const meal = Math.min(1000, Math.round(ov.pantryKcal || 0));
+          // CAPDRAW2 (bank-cap honest draw, loop B 2026-10-15, sim-findings
+          // #313/#315): cap the half-share at what the body can bank —
+          // pristine banked the cap but the beat claimed the whole meal.
+          // Gate OFF (CAPDRAW2=1 unset): the pristine path.
+          const _capdraw2 = (typeof process !== 'undefined' && process.env && process.env.CAPDRAW2 === '1');
+          const _cap = this.kcalCap ? this.kcalCap() : 3000;
+          const meal0 = Math.min(1000, Math.round(ov.pantryKcal || 0));
+          const meal = _capdraw2 ? Math.min(meal0, Math.max(0, _cap - (s.kcal || 0))) : meal0;
           ov.pantryKcal = Math.max(0, (ov.pantryKcal || 0) - meal);
           // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number.
-          s.kcal = Math.min((s.kcal || 0) + meal, this.kcalCap ? this.kcalCap() : 3000);
+          s.kcal = Math.min((s.kcal || 0) + meal, _cap);
           this.say(`Village meal at ${ov.name}: +${meal} kcal. ` +
             (onProb ? `Probation portions — half shares until they vote you in (${this.pluralize(Math.max(0, s.probation.daysLeft), 'day')} left).`
                     : `New mouths eat last — earn their trust for full shares. (Trust ${Math.round(ov.trust || 0)}/15.)`));
