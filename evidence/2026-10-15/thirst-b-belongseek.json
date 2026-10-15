@@ -1,0 +1,4301 @@
+{
+ "label": "thirst-b-belongseek",
+ "policy": "belongseek",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "generated": "2026-10-15T07:03:56.883Z",
+ "wallMs": 282014.806819,
+ "aaSanity": {
+  "results": [
+   {
+    "seed": 11,
+    "identical": true,
+    "why": "34 days identical",
+    "daysA": "34/village-lost",
+    "daysC": "34/village-lost"
+   },
+   {
+    "seed": 22,
+    "identical": true,
+    "why": "180 days identical",
+    "daysA": "180/survived",
+    "daysC": "180/survived"
+   },
+   {
+    "seed": 33,
+    "identical": true,
+    "why": "42 days identical",
+    "daysA": "42/village-lost",
+    "daysC": "42/village-lost"
+   },
+   {
+    "seed": 44,
+    "identical": true,
+    "why": "156 days identical",
+    "daysA": "156/village-lost",
+    "daysC": "156/village-lost"
+   },
+   {
+    "seed": 55,
+    "identical": true,
+    "why": "106 days identical",
+    "daysA": "106/village-lost",
+    "daysC": "106/village-lost"
+   },
+   {
+    "seed": 66,
+    "identical": true,
+    "why": "103 days identical",
+    "daysA": "103/village-lost",
+    "daysC": "103/village-lost"
+   },
+   {
+    "seed": 77,
+    "identical": true,
+    "why": "180 days identical",
+    "daysA": "180/survived",
+    "daysC": "180/survived"
+   },
+   {
+    "seed": 88,
+    "identical": true,
+    "why": "78 days identical",
+    "daysA": "78/village-lost",
+    "daysC": "78/village-lost"
+   }
+  ],
+  "fails": 0
+ },
+ "smoke": {
+  "dailyFails": [],
+  "anyDeathAttribution": false,
+  "totalEarlyThirst": 0,
+  "totalCovered": 0
+ },
+ "wall": {
+  "national": 4,
+  "table": 0,
+  "wins": 0,
+  "w4": 3,
+  "w5": 0,
+  "medianSurv": 107,
+  "maxSurv": 182
+ },
+ "deathCauseShares": {
+  "expedition": 18,
+  "combat": 127,
+  "a wound that wouldn't close": 8,
+  "villager combat": 57,
+  "starvation": 5,
+  "sickness": 18,
+  "a dog-shaped silence at the treeline": 1,
+  "monster": 22,
+  "the expedition": 1,
+  "lockjaw": 1,
+  "contest": 9,
+  "dehydration": 1,
+  "The Static Kite": 1,
+  "Buffering": 1,
+  "ambush": 1
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 34,
+   "gameDays": 35,
+   "endReason": "village-lost",
+   "dailyCalls": 34,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|105|2390|12|4|4|1|307",
+    "4:4|110|1526|12|4|4|1|265",
+    "5:5|110|1139|12|4|4|1|243",
+    "6:6|110|1200|12|4|4|1|236",
+    "7:7|110|1127|12|4|4|1|233",
+    "8:8|110|1004|12|4|4|1|227",
+    "9:9|101|1000|12|4|4|1|269",
+    "10:10|100|1500|8|4|4|1|254",
+    "11:11|100|1480|8|4|4|1|236",
+    "12:12|100|1341|8|4|4|1|189",
+    "13:13|100|1409|8|4|4|1|179",
+    "14:14|100|1330|8|4|4|1|173",
+    "15:15|100|1458|8|4|4|1|167",
+    "16:16|100|1394|8|4|4|1|165",
+    "17:17|93|1150|8|4|4|1|179",
+    "18:18|100|1186|7|4|4|1|173",
+    "19:19|95|1266|7|4|4|1|174",
+    "20:20|100|1338|7|4|4|1|181",
+    "21:21|100|1541|7|4|4|1|152",
+    "22:22|100|1537|8|4|4|1|156",
+    "23:23|87|1350|8|4|4|1|133",
+    "24:24|100|1440|10|4|4|1|149",
+    "25:25|100|1551|10|4|4|1|115",
+    "26:26|59|1040|10|4|4|1|94",
+    "27:27|100|1574|10|4|4|1|60",
+    "28:28|100|1754|10|4|4|1|44",
+    "29:29|100|1331|10|4|4|1|49",
+    "30:30|100|1190|10|4|4|1|24",
+    "31:31|100|1395|10|4|4|1|45",
+    "32:32|91|1057|10|4|4|1|47",
+    "33:33|93|1000|10|4|4|1|25",
+    "34:34|93|1270|10|4|4|1|8",
+    "35:35|100|1424|10|4|4|1|0"
+   ],
+   "maxWaveUnlocked": 1,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "village",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 10,
+    "nEarlyNonScholar": 6,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "expedition": 1,
+     "a wound that wouldn't close": 1,
+     "combat": 1,
+     "villager combat": 1,
+     "starvation": 1,
+     "sickness": 1
+    },
+    "causeSplitAll": {
+     "expedition": 1,
+     "combat": 5,
+     "a wound that wouldn't close": 1,
+     "villager combat": 1,
+     "starvation": 1,
+     "sickness": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 50s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 50s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "A woman, maybe 30s, with a crooked nose heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1214 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 20s, with a shaved head heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "Carlos heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A woman, maybe 20s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "A woman, maybe 30s, with a missing fingertip heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 30s, with a crooked nose returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "Travel 1 tile to wetland.\n— Still water, cattails —\nCattails mean starch. Still water means boil it first — the Codex insists."
+     },
+     {
+      "day": 3,
+      "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 3,
+      "text": "💧 Carlos returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 Chloe returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 Carlos returns with water: +4 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 20s returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1094 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "💧 A woman, maybe 30s, with a missing fingertip returns with water: +4 clean."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1012 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "Davut heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A woman, maybe 30s, with a missing fingertip heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A person, maybe 50s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Zoltan heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Ingrid heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A woman, maybe 20s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 50s returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Davut returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Zoltan returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 A woman, maybe 30s, with a missing fingertip returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Ingrid returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 A woman, maybe 20s returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "Carlos heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "A woman, maybe 30s, with a crooked nose heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "A woman, maybe 30s, with a missing fingertip heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "The cistern is dry. Haul from a creek (risky water), or put someone on water duty."
+     },
+     {
+      "day": 6,
+      "text": "💧 A woman, maybe 30s, with a crooked nose returns with water: +2 clean."
+     },
+     {
+      "day": 6,
+      "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 6,
+      "text": "💧 Carlos returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "💧 Carlos returns with water: +2 clean."
+     },
+     {
+      "day": 6,
+      "text": "💧 Priya returns with water: +3 clean."
+     },
+     {
+      "day": 6,
+      "text": "Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "🤒 Davut is achy and wrung out, barely eating. Rest and clean water — or it gets worse."
+     },
+     {
+      "day": 7,
+      "text": "No risky water to boil."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 11,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 34,
+   "gameDays": 35,
+   "endReason": "village-lost",
+   "dailyCalls": 34,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|105|2390|12|4|4|1|307",
+    "4:4|110|1526|12|4|4|1|265",
+    "5:5|110|1139|12|4|4|1|243",
+    "6:6|110|1200|12|4|4|1|236",
+    "7:7|110|1127|12|4|4|1|233",
+    "8:8|110|1004|12|4|4|1|227",
+    "9:9|101|1000|12|4|4|1|269",
+    "10:10|100|1500|8|4|4|1|254",
+    "11:11|100|1480|8|4|4|1|236",
+    "12:12|100|1341|8|4|4|1|189",
+    "13:13|100|1409|8|4|4|1|179",
+    "14:14|100|1330|8|4|4|1|173",
+    "15:15|100|1458|8|4|4|1|167",
+    "16:16|100|1394|8|4|4|1|165",
+    "17:17|93|1150|8|4|4|1|179",
+    "18:18|100|1186|7|4|4|1|173",
+    "19:19|95|1266|7|4|4|1|174",
+    "20:20|100|1338|7|4|4|1|181",
+    "21:21|100|1541|7|4|4|1|152",
+    "22:22|100|1537|8|4|4|1|156",
+    "23:23|87|1350|8|4|4|1|133",
+    "24:24|100|1440|10|4|4|1|149",
+    "25:25|100|1551|10|4|4|1|115",
+    "26:26|59|1040|10|4|4|1|94",
+    "27:27|100|1574|10|4|4|1|60",
+    "28:28|100|1754|10|4|4|1|44",
+    "29:29|100|1331|10|4|4|1|49",
+    "30:30|100|1190|10|4|4|1|24",
+    "31:31|100|1395|10|4|4|1|45",
+    "32:32|91|1057|10|4|4|1|47",
+    "33:33|93|1000|10|4|4|1|25",
+    "34:34|93|1270|10|4|4|1|8",
+    "35:35|100|1424|10|4|4|1|0"
+   ],
+   "maxWaveUnlocked": 1,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "village",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 22,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "dailyCalls": 180,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|100|2376|12|4|4|1|378",
+    "4:4|100|1544|12|4|4|1|328",
+    "5:5|100|1268|12|4|4|1|306",
+    "6:6|100|1217|12|4|4|1|295",
+    "7:7|100|1202|11|4|4|1|309",
+    "8:8|100|1027|11|4|4|1|314",
+    "9:9|100|1100|11|4|4|1|331",
+    "10:10|100|1027|11|4|4|1|377",
+    "11:11|100|1031|11|4|4|1|363",
+    "12:12|100|1152|11|4|4|1|365",
+    "13:13|100|1033|11|4|4|1|415",
+    "14:14|100|1246|11|4|4|1|435",
+    "15:15|100|1153|11|4|4|1|453",
+    "16:16|100|1033|11|4|4|1|487",
+    "17:17|100|1049|11|4|4|1|624",
+    "18:18|100|1000|11|4|4|1|658",
+    "19:19|100|2400|11|4|4|1|733",
+    "20:20|100|2390|11|4|4|1|744",
+    "21:21|62|2300|10|4|4|2|620",
+    "22:22|59|2400|10|4|4|2|557",
+    "23:23|89|2383|10|4|4|2|563",
+    "24:24|100|2094|10|4|4|2|585",
+    "25:25|100|2201|10|4|4|2|606",
+    "26:26|89|2110|9|4|4|2|615",
+    "27:27|100|2400|9|4|4|2|642",
+    "28:28|100|2237|9|4|4|2|729",
+    "29:29|100|2152|9|4|4|2|683",
+    "30:30|100|2400|9|4|4|2|665",
+    "31:31|100|2155|9|4|4|2|726",
+    "32:32|100|2044|9|4|4|2|702",
+    "33:33|100|2152|9|4|4|2|802",
+    "34:34|100|2400|9|4|4|2|828",
+    "35:35|93|2400|9|4|4|2|728",
+    "36:36|100|2194|9|4|4|2|649",
+    "37:37|100|2400|9|4|4|2|668",
+    "38:38|100|2400|9|4|4|2|757",
+    "39:39|100|2089|9|4|4|2|764",
+    "40:40|0|2400|9|4|4|2|681",
+    "41:41|100|2260|8|4|4|2|679",
+    "42:42|100|2260|8|4|4|2|645",
+    "43:43|100|2400|8|4|4|2|522",
+    "44:44|55|2267|8|4|4|2|574",
+    "45:45|82|2218|8|4|4|2|596",
+    "46:46|100|2200|8|4|4|2|601",
+    "47:47|100|2370|8|4|4|2|754",
+    "48:48|69|2244|8|4|4|2|782",
+    "49:49|95|2340|8|4|4|2|691",
+    "50:50|100|2400|8|4|4|2|604",
+    "51:51|100|2390|8|4|4|3|696",
+    "52:52|100|2400|8|4|4|3|739",
+    "53:53|100|2258|8|4|4|3|612",
+    "54:54|100|2400|8|4|4|3|612",
+    "55:55|100|2390|8|4|4|3|599",
+    "56:56|100|2262|8|4|4|3|606",
+    "57:57|100|2400|8|4|4|3|525",
+    "58:58|100|2354|8|4|4|3|630",
+    "59:59|100|2262|8|4|4|3|729",
+    "60:60|100|2400|8|4|4|3|657",
+    "61:61|98|2390|8|4|4|3|588",
+    "62:62|100|2236|8|4|4|3|545",
+    "63:63|100|2331|7|4|4|3|488",
+    "64:64|100|2229|7|4|4|3|319",
+    "65:65|80|2094|7|4|4|3|249",
+    "66:66|100|2200|7|4|4|3|229",
+    "67:67|100|2390|8|4|4|3|246",
+    "68:68|100|2396|10|4|4|3|223",
+    "69:69|100|2256|10|4|4|3|247",
+    "70:70|100|2190|10|4|4|3|254",
+    "71:71|96|2055|10|4|4|3|177",
+    "72:72|100|2200|10|4|4|3|199",
+    "73:73|37|2390|10|4|4|3|174",
+    "74:74|65|2275|10|4|4|3|182",
+    "75:75|92|2400|9|4|4|3|175",
+    "76:76|100|2390|9|4|4|3|207",
+    "77:77|78|2330|9|4|4|3|187",
+    "78:78|100|2400|9|4|4|3|98",
+    "79:79|100|2229|9|4|4|3|74",
+    "80:80|100|2200|9|4|4|3|121",
+    "81:81|100|2255|9|4|4|3|130",
+    "82:82|100|2204|9|4|4|3|173",
+    "83:83|100|2400|9|4|4|3|294",
+    "84:84|100|2326|9|4|4|3|321",
+    "85:85|100|2390|9|4|4|3|121",
+    "86:86|100|2400|9|4|4|3|157",
+    "87:87|100|2239|9|4|4|3|205",
+    "88:88|70|2238|9|4|4|3|393",
+    "89:89|96|2400|9|4|4|3|417",
+    "90:90|100|2400|9|4|4|3|355",
+    "91:91|100|2247|9|4|4|3|406",
+    "92:92|100|2200|9|4|4|3|371",
+    "93:93|100|2400|9|4|4|3|372",
+    "94:94|100|2390|9|4|4|3|327",
+    "95:95|100|2284|9|4|4|3|379",
+    "96:96|100|2204|9|4|4|3|422",
+    "97:97|97|2390|9|4|4|3|453",
+    "98:98|100|2400|9|4|4|3|447",
+    "99:99|100|2384|9|4|4|3|249",
+    "100:100|100|2291|9|4|2|3|125",
+    "101:101|97|2200|8|4|4|3|103",
+    "102:102|100|2400|8|4|4|3|117",
+    "103:103|100|2400|8|4|2|3|159",
+    "104:104|96|2329|8|4|2|3|170",
+    "105:105|48|2333|8|4|2|3|211",
+    "106:106|85|2238|7|4|4|3|79",
+    "107:107|100|2241|7|4|4|3|45",
+    "108:108|44|2400|8|4|4|3|46",
+    "109:109|71|2257|9|4|4|3|60",
+    "110:110|98|2390|9|4|4|3|56",
+    "111:111|100|2261|9|4|4|3|56",
+    "112:112|100|2400|9|4|4|3|37",
+    "113:113|100|2390|9|4|4|3|50",
+    "114:114|100|2400|9|4|4|3|15",
+    "115:115|66|2400|9|4|4|4|54",
+    "116:116|93|2257|9|4|4|4|80",
+    "117:117|100|2330|9|4|4|4|86",
+    "118:118|100|2225|9|4|4|4|81",
+    "119:119|100|2397|9|4|4|4|71",
+    "120:120|100|2400|9|4|4|3|48",
+    "121:121|100|2390|9|4|4|3|47",
+    "122:122|100|2400|9|4|4|3|61",
+    "123:123|98|2200|9|4|4|3|93",
+    "124:124|100|2390|9|4|4|3|116",
+    "125:125|100|2201|9|4|4|3|121",
+    "126:126|92|2400|9|4|4|3|158",
+    "127:127|100|2365|9|4|4|4|77",
+    "128:128|97|2165|9|4|4|4|90",
+    "129:129|100|2200|9|4|4|4|93",
+    "130:130|91|2400|9|4|4|4|100",
+    "131:131|100|2365|9|4|4|4|145",
+    "132:132|100|2365|9|4|4|4|135",
+    "133:133|92|2325|9|4|4|4|126",
+    "134:134|89|2400|9|4|4|4|144",
+    "135:135|100|2320|8|4|4|4|107",
+    "136:136|100|2243|7|4|4|4|143",
+    "137:137|100|2400|7|4|4|4|123",
+    "138:138|72|2400|7|4|4|4|127",
+    "139:139|99|2295|8|4|4|4|145",
+    "140:140|100|2320|8|4|4|4|163",
+    "141:141|97|2365|8|4|4|4|97",
+    "142:142|100|2365|8|4|4|4|98",
+    "143:143|100|2303|8|4|4|4|165",
+    "144:144|92|2400|8|4|4|4|162",
+    "145:145|100|2400|8|4|4|4|99",
+    "146:146|100|2400|8|4|4|4|72",
+    "147:147|100|2376|8|4|4|4|60",
+    "148:148|100|2400|8|4|4|4|70",
+    "149:149|100|2365|8|4|4|4|60",
+    "150:150|100|2380|8|4|4|4|48",
+    "151:151|100|2365|8|4|4|4|32",
+    "152:152|100|2365|8|4|4|4|47",
+    "153:153|69|2400|8|4|4|4|34",
+    "154:154|97|2367|8|4|4|4|41",
+    "155:155|94|2400|8|4|4|4|52",
+    "156:156|36|2400|7|4|4|4|12",
+    "157:157|63|2400|7|4|4|4|11",
+    "158:158|8|2400|8|4|4|4|11",
+    "159:159|22|2365|8|4|4|4|33",
+    "160:160|34|2247|8|4|4|4|25",
+    "161:161|44|2400|8|4|4|4|14",
+    "162:162|59|2400|8|4|4|4|14",
+    "163:163|75|2400|8|4|4|4|38",
+    "164:164|100|2400|7|4|4|4|19",
+    "165:165|100|2226|7|4|4|4|16",
+    "166:166|97|2400|7|4|4|4|23",
+    "167:167|100|2289|7|4|4|4|41",
+    "168:168|100|2268|8|4|4|4|33",
+    "169:169|100|2365|8|4|4|4|44",
+    "170:170|100|2269|8|4|4|4|0",
+    "171:171|100|2365|8|4|4|4|16",
+    "172:172|100|2400|8|4|4|4|10",
+    "173:173|100|2296|8|4|4|4|3",
+    "174:174|100|2400|7|4|4|4|8",
+    "175:175|100|2366|7|4|4|4|11",
+    "176:176|80|2322|7|4|4|4|13",
+    "177:177|78|2400|6|4|4|4|15",
+    "178:178|100|2400|6|4|4|4|7",
+    "179:179|100|2265|6|4|4|4|0",
+    "180:180|100|2400|6|4|4|4|0",
+    "181:181|100|2400|6|4|4|4|4"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 54,
+    "nEarlyNonScholar": 10,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "a dog-shaped silence at the treeline": 1,
+     "villager combat": 6,
+     "combat": 1,
+     "monster": 1,
+     "expedition": 1
+    },
+    "causeSplitAll": {
+     "a dog-shaped silence at the treeline": 1,
+     "villager combat": 11,
+     "combat": 26,
+     "monster": 6,
+     "expedition": 7,
+     "the expedition": 1,
+     "lockjaw": 1,
+     "starvation": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1322 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 40s, with a shaved head heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 40s, with a burn-scarred forearm heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 40s, with ink-stained fingers heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 2,
+      "text": "💧 Carlos returns with 11L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 20s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "💧 Wolfgang returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 40s, with a burn-scarred forearm returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 40s, with ink-stained fingers returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 40s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1309 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "Wolfgang heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 20s returns with water: +4 clean."
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "💧 Wolfgang returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "Travel 1 tile to wetland.\n— Still water, cattails —\nCattails mean starch. Still water means boil it first — the Codex insists."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1140 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "A woman, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 40s, with thick glasses heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 40s, with ink-stained fingers heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "Carlos heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "Theo heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 4,
+      "text": "Journal: Riparian ground. Water means life, and lunch."
+     },
+     {
+      "day": 4,
+      "text": "🌿 A person, maybe 40s, with thick glasses checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 4,
+      "text": "💧 A person, maybe 40s, with thick glasses returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "💧 Carlos returns with water: +2 clean."
+     },
+     {
+      "day": 4,
+      "text": "💧 A woman, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1188 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s returns with water: +4 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 40s, with thick glasses returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 So-yoon returns with water: +4 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Theo returns with water: +4 clean."
+     },
+     {
+      "day": 5,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 5,
+      "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 5,
+      "text": "💧 Carlos returns with 11L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "🌿 Carlos checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 6,
+      "text": "💧 Carlos returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 7,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 7,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 7,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 7,
+      "text": "A person, maybe 40s, with a burn-scarred forearm heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 7,
+      "text": "Theo heads out for water. \"The well won't fill itself.\""
+     }
+    ]
+   }
+  },
+  {
+   "seed": 22,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "dailyCalls": 180,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|100|2376|12|4|4|1|378",
+    "4:4|100|1544|12|4|4|1|328",
+    "5:5|100|1268|12|4|4|1|306",
+    "6:6|100|1217|12|4|4|1|295",
+    "7:7|100|1202|11|4|4|1|309",
+    "8:8|100|1027|11|4|4|1|314",
+    "9:9|100|1100|11|4|4|1|331",
+    "10:10|100|1027|11|4|4|1|377",
+    "11:11|100|1031|11|4|4|1|363",
+    "12:12|100|1152|11|4|4|1|365",
+    "13:13|100|1033|11|4|4|1|415",
+    "14:14|100|1246|11|4|4|1|435",
+    "15:15|100|1153|11|4|4|1|453",
+    "16:16|100|1033|11|4|4|1|487",
+    "17:17|100|1049|11|4|4|1|624",
+    "18:18|100|1000|11|4|4|1|658",
+    "19:19|100|2400|11|4|4|1|733",
+    "20:20|100|2390|11|4|4|1|744",
+    "21:21|62|2300|10|4|4|2|620",
+    "22:22|59|2400|10|4|4|2|557",
+    "23:23|89|2383|10|4|4|2|563",
+    "24:24|100|2094|10|4|4|2|585",
+    "25:25|100|2201|10|4|4|2|606",
+    "26:26|89|2110|9|4|4|2|615",
+    "27:27|100|2400|9|4|4|2|642",
+    "28:28|100|2237|9|4|4|2|729",
+    "29:29|100|2152|9|4|4|2|683",
+    "30:30|100|2400|9|4|4|2|665",
+    "31:31|100|2155|9|4|4|2|726",
+    "32:32|100|2044|9|4|4|2|702",
+    "33:33|100|2152|9|4|4|2|802",
+    "34:34|100|2400|9|4|4|2|828",
+    "35:35|93|2400|9|4|4|2|728",
+    "36:36|100|2194|9|4|4|2|649",
+    "37:37|100|2400|9|4|4|2|668",
+    "38:38|100|2400|9|4|4|2|757",
+    "39:39|100|2089|9|4|4|2|764",
+    "40:40|0|2400|9|4|4|2|681",
+    "41:41|100|2260|8|4|4|2|679",
+    "42:42|100|2260|8|4|4|2|645",
+    "43:43|100|2400|8|4|4|2|522",
+    "44:44|55|2267|8|4|4|2|574",
+    "45:45|82|2218|8|4|4|2|596",
+    "46:46|100|2200|8|4|4|2|601",
+    "47:47|100|2370|8|4|4|2|754",
+    "48:48|69|2244|8|4|4|2|782",
+    "49:49|95|2340|8|4|4|2|691",
+    "50:50|100|2400|8|4|4|2|604",
+    "51:51|100|2390|8|4|4|3|696",
+    "52:52|100|2400|8|4|4|3|739",
+    "53:53|100|2258|8|4|4|3|612",
+    "54:54|100|2400|8|4|4|3|612",
+    "55:55|100|2390|8|4|4|3|599",
+    "56:56|100|2262|8|4|4|3|606",
+    "57:57|100|2400|8|4|4|3|525",
+    "58:58|100|2354|8|4|4|3|630",
+    "59:59|100|2262|8|4|4|3|729",
+    "60:60|100|2400|8|4|4|3|657",
+    "61:61|98|2390|8|4|4|3|588",
+    "62:62|100|2236|8|4|4|3|545",
+    "63:63|100|2331|7|4|4|3|488",
+    "64:64|100|2229|7|4|4|3|319",
+    "65:65|80|2094|7|4|4|3|249",
+    "66:66|100|2200|7|4|4|3|229",
+    "67:67|100|2390|8|4|4|3|246",
+    "68:68|100|2396|10|4|4|3|223",
+    "69:69|100|2256|10|4|4|3|247",
+    "70:70|100|2190|10|4|4|3|254",
+    "71:71|96|2055|10|4|4|3|177",
+    "72:72|100|2200|10|4|4|3|199",
+    "73:73|37|2390|10|4|4|3|174",
+    "74:74|65|2275|10|4|4|3|182",
+    "75:75|92|2400|9|4|4|3|175",
+    "76:76|100|2390|9|4|4|3|207",
+    "77:77|78|2330|9|4|4|3|187",
+    "78:78|100|2400|9|4|4|3|98",
+    "79:79|100|2229|9|4|4|3|74",
+    "80:80|100|2200|9|4|4|3|121",
+    "81:81|100|2255|9|4|4|3|130",
+    "82:82|100|2204|9|4|4|3|173",
+    "83:83|100|2400|9|4|4|3|294",
+    "84:84|100|2326|9|4|4|3|321",
+    "85:85|100|2390|9|4|4|3|121",
+    "86:86|100|2400|9|4|4|3|157",
+    "87:87|100|2239|9|4|4|3|205",
+    "88:88|70|2238|9|4|4|3|393",
+    "89:89|96|2400|9|4|4|3|417",
+    "90:90|100|2400|9|4|4|3|355",
+    "91:91|100|2247|9|4|4|3|406",
+    "92:92|100|2200|9|4|4|3|371",
+    "93:93|100|2400|9|4|4|3|372",
+    "94:94|100|2390|9|4|4|3|327",
+    "95:95|100|2284|9|4|4|3|379",
+    "96:96|100|2204|9|4|4|3|422",
+    "97:97|97|2390|9|4|4|3|453",
+    "98:98|100|2400|9|4|4|3|447",
+    "99:99|100|2384|9|4|4|3|249",
+    "100:100|100|2291|9|4|2|3|125",
+    "101:101|97|2200|8|4|4|3|103",
+    "102:102|100|2400|8|4|4|3|117",
+    "103:103|100|2400|8|4|2|3|159",
+    "104:104|96|2329|8|4|2|3|170",
+    "105:105|48|2333|8|4|2|3|211",
+    "106:106|85|2238|7|4|4|3|79",
+    "107:107|100|2241|7|4|4|3|45",
+    "108:108|44|2400|8|4|4|3|46",
+    "109:109|71|2257|9|4|4|3|60",
+    "110:110|98|2390|9|4|4|3|56",
+    "111:111|100|2261|9|4|4|3|56",
+    "112:112|100|2400|9|4|4|3|37",
+    "113:113|100|2390|9|4|4|3|50",
+    "114:114|100|2400|9|4|4|3|15",
+    "115:115|66|2400|9|4|4|4|54",
+    "116:116|93|2257|9|4|4|4|80",
+    "117:117|100|2330|9|4|4|4|86",
+    "118:118|100|2225|9|4|4|4|81",
+    "119:119|100|2397|9|4|4|4|71",
+    "120:120|100|2400|9|4|4|3|48",
+    "121:121|100|2390|9|4|4|3|47",
+    "122:122|100|2400|9|4|4|3|61",
+    "123:123|98|2200|9|4|4|3|93",
+    "124:124|100|2390|9|4|4|3|116",
+    "125:125|100|2201|9|4|4|3|121",
+    "126:126|92|2400|9|4|4|3|158",
+    "127:127|100|2365|9|4|4|4|77",
+    "128:128|97|2165|9|4|4|4|90",
+    "129:129|100|2200|9|4|4|4|93",
+    "130:130|91|2400|9|4|4|4|100",
+    "131:131|100|2365|9|4|4|4|145",
+    "132:132|100|2365|9|4|4|4|135",
+    "133:133|92|2325|9|4|4|4|126",
+    "134:134|89|2400|9|4|4|4|144",
+    "135:135|100|2320|8|4|4|4|107",
+    "136:136|100|2243|7|4|4|4|143",
+    "137:137|100|2400|7|4|4|4|123",
+    "138:138|72|2400|7|4|4|4|127",
+    "139:139|99|2295|8|4|4|4|145",
+    "140:140|100|2320|8|4|4|4|163",
+    "141:141|97|2365|8|4|4|4|97",
+    "142:142|100|2365|8|4|4|4|98",
+    "143:143|100|2303|8|4|4|4|165",
+    "144:144|92|2400|8|4|4|4|162",
+    "145:145|100|2400|8|4|4|4|99",
+    "146:146|100|2400|8|4|4|4|72",
+    "147:147|100|2376|8|4|4|4|60",
+    "148:148|100|2400|8|4|4|4|70",
+    "149:149|100|2365|8|4|4|4|60",
+    "150:150|100|2380|8|4|4|4|48",
+    "151:151|100|2365|8|4|4|4|32",
+    "152:152|100|2365|8|4|4|4|47",
+    "153:153|69|2400|8|4|4|4|34",
+    "154:154|97|2367|8|4|4|4|41",
+    "155:155|94|2400|8|4|4|4|52",
+    "156:156|36|2400|7|4|4|4|12",
+    "157:157|63|2400|7|4|4|4|11",
+    "158:158|8|2400|8|4|4|4|11",
+    "159:159|22|2365|8|4|4|4|33",
+    "160:160|34|2247|8|4|4|4|25",
+    "161:161|44|2400|8|4|4|4|14",
+    "162:162|59|2400|8|4|4|4|14",
+    "163:163|75|2400|8|4|4|4|38",
+    "164:164|100|2400|7|4|4|4|19",
+    "165:165|100|2226|7|4|4|4|16",
+    "166:166|97|2400|7|4|4|4|23",
+    "167:167|100|2289|7|4|4|4|41",
+    "168:168|100|2268|8|4|4|4|33",
+    "169:169|100|2365|8|4|4|4|44",
+    "170:170|100|2269|8|4|4|4|0",
+    "171:171|100|2365|8|4|4|4|16",
+    "172:172|100|2400|8|4|4|4|10",
+    "173:173|100|2296|8|4|4|4|3",
+    "174:174|100|2400|7|4|4|4|8",
+    "175:175|100|2366|7|4|4|4|11",
+    "176:176|80|2322|7|4|4|4|13",
+    "177:177|78|2400|6|4|4|4|15",
+    "178:178|100|2400|6|4|4|4|7",
+    "179:179|100|2265|6|4|4|4|0",
+    "180:180|100|2400|6|4|4|4|0",
+    "181:181|100|2400|6|4|4|4|4"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 33,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 42,
+   "gameDays": 43,
+   "endReason": "village-lost",
+   "dailyCalls": 42,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|90|2355|12|4|4|1|358",
+    "4:4|100|1466|12|4|4|1|324",
+    "5:5|100|1311|12|4|4|1|317",
+    "6:6|100|1091|12|4|4|1|326",
+    "7:7|100|1219|12|4|4|1|402",
+    "8:8|92|1199|12|4|4|1|449",
+    "9:9|100|1107|12|4|4|1|414",
+    "10:10|100|1563|12|4|4|1|375",
+    "11:11|100|1326|12|4|4|1|361",
+    "12:12|100|1239|12|4|4|1|425",
+    "13:13|100|1577|12|4|4|1|492",
+    "14:14|100|1368|12|4|4|1|422",
+    "15:15|100|1475|12|4|4|1|389",
+    "16:16|100|2390|9|4|4|1|386",
+    "17:17|100|2177|9|4|4|1|435",
+    "18:18|100|2350|9|4|4|1|463",
+    "19:19|100|2400|9|4|4|1|506",
+    "20:20|78|2400|9|4|4|1|478",
+    "21:21|100|2400|9|4|4|1|414",
+    "22:22|42|2400|9|4|4|1|394",
+    "23:23|69|2400|9|4|4|1|358",
+    "24:24|96|2400|9|4|4|1|323",
+    "25:25|49|2400|9|4|4|1|291",
+    "26:26|75|2400|9|4|4|1|257",
+    "27:27|72|2400|9|4|4|1|209",
+    "28:28|100|2400|9|4|4|1|163",
+    "29:29|100|2400|9|4|4|1|104",
+    "30:30|100|2400|9|4|4|1|85",
+    "31:31|92|2400|9|4|4|1|92",
+    "32:32|100|2400|9|4|4|1|68",
+    "33:33|92|2350|9|4|4|1|58",
+    "34:34|100|2400|9|4|4|1|11",
+    "35:35|100|1920|9|4|4|1|0",
+    "36:36|100|2400|9|4|4|1|2",
+    "37:37|83|2205|9|4|4|1|0",
+    "38:38|100|2284|8|4|4|1|0",
+    "39:39|100|1856|5|4|4|1|0",
+    "40:40|85|2400|5|4|4|1|2",
+    "41:41|100|2000|4|4|4|1|0",
+    "42:42|100|1535|4|4|4|1|0",
+    "43:43|100|1203|5|4|4|1|2"
+   ],
+   "maxWaveUnlocked": 1,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 12,
+    "nEarlyNonScholar": 8,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "villager combat": 3,
+     "monster": 1,
+     "sickness": 3,
+     "a wound that wouldn't close": 1
+    },
+    "causeSplitAll": {
+     "villager combat": 3,
+     "monster": 1,
+     "combat": 2,
+     "sickness": 3,
+     "a wound that wouldn't close": 1,
+     "contest": 1,
+     "starvation": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A person, maybe 60s, with a nervous tic returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 1,
+      "text": "📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A person, maybe 60s, with a nervous tic returns with 7L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 1,
+      "text": "📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A person, maybe 60s, with a nervous tic returns with 8L, but the cistern only holds 5L more."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "🌿 Pallavi checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 2,
+      "text": "💧 Pallavi returns with 11L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1000 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "📋 A person, maybe 60s, with a nervous tic — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 60s, with a nervous tic returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "Olga doesn't bother arguing anymore. By dusk the Fetch water crews are taking orders from them, and nobody quite remembers when it changed."
+     },
+     {
+      "day": 3,
+      "text": "💧 Olga returns with 13L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "Journal: Riparian ground. Water means life, and lunch."
+     },
+     {
+      "day": 3,
+      "text": "💧 Olga returns with 11L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1109 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 4,
+      "text": "💧 Olga returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "💧 Esteban returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 4,
+      "text": "💧 Olga returns with 12L, but the cistern only holds 6L more."
+     },
+     {
+      "day": 4,
+      "text": "💧 Esteban returns with 8L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 4,
+      "text": "💧 Olga returns with 11L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 4,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 4,
+      "text": "Travel 2 tiles to wetland.\n— Still water, cattails —\nStanding water, black as tea. Dragonflies stitch the air. Watch where you step — the ground lies."
+     },
+     {
+      "day": 4,
+      "text": "🌿 Olga checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 4,
+      "text": "💧 Olga returns with 11L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1275 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 4,
+      "text": "🤒 Greta is achy and wrung out, barely eating. Rest and clean water — or it gets worse."
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Olga returns with 13L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "💧 Esteban returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Olga returns with 12L, but the cistern only holds 2L more."
+     },
+     {
+      "day": 5,
+      "text": "💧 Esteban returns with 14L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 5,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Olga returns with 13L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 5,
+      "text": "💧 Esteban returns with 14L, but the cistern only holds 0L more."
+     },
+     {
+      "day": 5,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1041 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "📋 Esteban — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 6,
+      "text": "💧 Olga returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "🌿 Olga checks the pantry before heading out — the shelves are full, ~10 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 6,
+      "text": "💧 Olga returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "💧 Esteban returns with 11L, but the cistern only holds 5L more."
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 33,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 42,
+   "gameDays": 43,
+   "endReason": "village-lost",
+   "dailyCalls": 42,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|90|2355|12|4|4|1|358",
+    "4:4|100|1466|12|4|4|1|324",
+    "5:5|100|1311|12|4|4|1|317",
+    "6:6|100|1091|12|4|4|1|326",
+    "7:7|100|1219|12|4|4|1|402",
+    "8:8|92|1199|12|4|4|1|449",
+    "9:9|100|1107|12|4|4|1|414",
+    "10:10|100|1563|12|4|4|1|375",
+    "11:11|100|1326|12|4|4|1|361",
+    "12:12|100|1239|12|4|4|1|425",
+    "13:13|100|1577|12|4|4|1|492",
+    "14:14|100|1368|12|4|4|1|422",
+    "15:15|100|1475|12|4|4|1|389",
+    "16:16|100|2390|9|4|4|1|386",
+    "17:17|100|2177|9|4|4|1|435",
+    "18:18|100|2350|9|4|4|1|463",
+    "19:19|100|2400|9|4|4|1|506",
+    "20:20|78|2400|9|4|4|1|478",
+    "21:21|100|2400|9|4|4|1|414",
+    "22:22|42|2400|9|4|4|1|394",
+    "23:23|69|2400|9|4|4|1|358",
+    "24:24|96|2400|9|4|4|1|323",
+    "25:25|49|2400|9|4|4|1|291",
+    "26:26|75|2400|9|4|4|1|257",
+    "27:27|72|2400|9|4|4|1|209",
+    "28:28|100|2400|9|4|4|1|163",
+    "29:29|100|2400|9|4|4|1|104",
+    "30:30|100|2400|9|4|4|1|85",
+    "31:31|92|2400|9|4|4|1|92",
+    "32:32|100|2400|9|4|4|1|68",
+    "33:33|92|2350|9|4|4|1|58",
+    "34:34|100|2400|9|4|4|1|11",
+    "35:35|100|1920|9|4|4|1|0",
+    "36:36|100|2400|9|4|4|1|2",
+    "37:37|83|2205|9|4|4|1|0",
+    "38:38|100|2284|8|4|4|1|0",
+    "39:39|100|1856|5|4|4|1|0",
+    "40:40|85|2400|5|4|4|1|2",
+    "41:41|100|2000|4|4|4|1|0",
+    "42:42|100|1535|4|4|4|1|0",
+    "43:43|100|1203|5|4|4|1|2"
+   ],
+   "maxWaveUnlocked": 1,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 44,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 156,
+   "gameDays": 158,
+   "endReason": "village-lost",
+   "dailyCalls": 156,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|95|2400|12|4|4|1|337",
+    "4:4|100|1505|12|4|4|1|319",
+    "5:5|100|1165|12|4|4|1|295",
+    "6:6|100|1200|12|4|4|1|290",
+    "7:7|100|1437|12|4|4|1|277",
+    "8:8|71|1000|12|4|4|1|253",
+    "9:9|91|1410|12|4|4|1|236",
+    "10:10|100|1190|12|4|4|1|244",
+    "11:11|100|1051|12|4|4|1|232",
+    "12:12|100|1331|12|4|4|1|275",
+    "13:13|100|1083|12|4|4|1|304",
+    "14:14|100|1250|12|4|4|1|309",
+    "15:15|100|1476|12|4|4|1|342",
+    "16:16|100|1200|12|4|4|1|375",
+    "17:17|100|1087|12|4|4|1|360",
+    "18:18|100|1309|12|4|4|1|364",
+    "19:19|93|990|12|4|4|1|353",
+    "20:20|100|1000|12|4|4|1|372",
+    "21:21|100|1563|12|4|4|1|279",
+    "22:22|100|2370|12|4|4|1|221",
+    "23:23|79|2400|12|4|4|1|230",
+    "24:24|100|2400|12|4|4|1|241",
+    "25:25|100|2390|12|4|4|1|264",
+    "26:26|72|2400|12|4|4|1|317",
+    "27:27|100|2342|12|4|4|1|316",
+    "28:28|100|2345|12|4|4|1|320",
+    "29:29|100|2400|12|4|4|1|281",
+    "30:30|100|2400|12|4|4|1|309",
+    "31:31|100|2197|12|4|4|2|411",
+    "32:32|100|2058|12|4|4|2|394",
+    "33:33|87|2400|12|4|4|2|322",
+    "34:34|100|2400|12|4|4|2|342",
+    "35:35|100|2248|12|4|4|2|318",
+    "36:36|100|2385|12|4|4|2|308",
+    "37:37|20|2325|12|4|4|2|301",
+    "38:38|50|2390|12|4|4|2|296",
+    "39:39|80|2400|12|4|4|2|393",
+    "40:40|40|2400|12|4|4|2|374",
+    "41:41|70|2390|12|4|4|2|258",
+    "42:42|100|2400|12|4|4|2|229",
+    "43:43|100|2400|12|4|4|2|186",
+    "44:44|100|2390|12|4|4|2|262",
+    "45:45|24|2400|12|4|4|2|333",
+    "46:46|54|2400|12|4|4|2|299",
+    "47:47|84|2390|12|4|4|2|394",
+    "48:48|100|2400|12|4|4|2|473",
+    "49:49|100|2400|12|4|4|2|446",
+    "50:50|100|2400|12|4|4|2|330",
+    "51:51|100|2390|12|4|4|2|278",
+    "52:52|86|2400|12|4|4|2|273",
+    "53:53|81|2400|12|4|4|2|293",
+    "54:54|100|2390|12|4|4|2|336",
+    "55:55|100|2400|12|4|4|2|328",
+    "56:56|100|2400|12|4|4|2|328",
+    "57:57|100|2390|12|4|4|2|266",
+    "58:58|100|2400|12|4|4|2|270",
+    "59:59|100|2200|12|4|4|2|272",
+    "60:60|100|2390|12|4|4|2|288",
+    "61:61|100|2400|12|4|4|2|339",
+    "62:62|100|2400|12|4|4|2|453",
+    "63:63|100|2390|12|4|4|2|553",
+    "64:64|100|2400|11|4|4|2|400",
+    "65:65|100|2400|11|4|4|2|252",
+    "66:66|100|2400|11|4|4|3|272",
+    "67:67|92|2390|11|4|4|3|289",
+    "68:68|100|2400|11|4|4|3|301",
+    "69:69|100|2400|11|4|4|3|457",
+    "70:70|100|2400|11|4|4|3|454",
+    "71:71|100|2390|11|4|4|3|434",
+    "72:72|100|2400|11|4|4|3|423",
+    "73:73|100|2400|11|4|4|3|435",
+    "74:74|100|2390|11|4|4|3|530",
+    "75:75|100|2400|11|4|4|3|498",
+    "76:76|100|2400|11|4|4|3|452",
+    "77:77|100|2400|11|4|4|3|445",
+    "78:78|100|2400|11|4|4|3|287",
+    "79:79|100|2390|11|4|4|3|253",
+    "80:80|83|2400|10|4|4|3|198",
+    "81:81|83|2400|10|4|4|3|189",
+    "82:82|100|2390|10|4|4|3|213",
+    "83:83|100|2400|10|4|4|3|309",
+    "84:84|100|2400|10|4|4|3|421",
+    "85:85|100|2390|10|4|4|3|342",
+    "86:86|95|2400|10|4|4|3|254",
+    "87:87|95|2400|10|4|4|3|272",
+    "88:88|100|2390|10|4|4|3|338",
+    "89:89|100|2400|10|4|4|3|339",
+    "90:90|100|2400|10|4|4|3|387",
+    "91:91|100|2390|10|4|4|3|379",
+    "92:92|100|2400|10|4|4|3|306",
+    "93:93|100|2400|9|4|4|3|288",
+    "94:94|100|2390|9|4|4|3|202",
+    "95:95|100|2400|9|4|4|3|203",
+    "96:96|100|2250|9|4|4|3|306",
+    "97:97|100|2390|9|4|4|3|406",
+    "98:98|100|2400|9|4|4|3|368",
+    "99:99|100|2400|9|4|4|3|291",
+    "100:100|100|2390|9|4|4|3|287",
+    "101:101|100|2200|9|4|4|3|277",
+    "102:102|100|2400|9|4|4|3|287",
+    "103:103|100|2390|9|4|4|3|261",
+    "104:104|100|2400|9|4|4|3|384",
+    "105:105|100|2400|9|4|4|3|393",
+    "106:106|100|2390|9|4|4|3|221",
+    "107:107|100|2400|9|4|4|3|232",
+    "108:108|100|2400|9|4|4|3|240",
+    "109:109|100|2390|9|4|4|3|207",
+    "110:110|100|2400|9|4|4|3|233",
+    "111:111|100|2400|8|4|4|3|281",
+    "112:112|49|2320|7|4|4|3|387",
+    "113:113|79|2400|7|4|4|3|246",
+    "114:114|56|2400|7|4|4|3|240",
+    "115:115|86|2390|7|4|4|3|229",
+    "116:116|100|2400|7|4|4|3|203",
+    "117:117|100|2400|8|4|4|3|205",
+    "118:118|100|2390|9|4|4|3|260",
+    "119:119|100|2400|10|4|4|3|292",
+    "120:120|100|2400|10|4|4|3|219",
+    "121:121|100|2390|10|4|4|3|217",
+    "122:122|100|2400|10|4|4|3|203",
+    "123:123|100|2400|9|4|4|3|186",
+    "124:124|100|2390|9|4|4|3|171",
+    "125:125|100|2400|9|4|4|3|169",
+    "126:126|95|2400|9|4|4|3|172",
+    "127:127|100|2400|9|4|4|3|110",
+    "128:128|100|2190|9|4|4|3|102",
+    "129:129|79|2400|9|4|4|3|168",
+    "130:130|100|2400|9|4|4|3|227",
+    "131:131|100|2390|9|4|4|3|220",
+    "132:132|100|2400|9|4|4|3|275",
+    "133:133|100|2400|9|4|4|3|375",
+    "134:134|100|2390|9|4|4|3|237",
+    "135:135|100|2400|9|4|4|3|147",
+    "136:136|100|2311|7|4|4|4|176",
+    "137:137|100|2400|7|4|4|4|242",
+    "138:138|93|2390|7|4|4|4|262",
+    "139:139|100|2400|7|4|4|4|195",
+    "140:140|100|2323|5|4|4|4|112",
+    "141:141|100|2390|5|4|4|4|113",
+    "142:142|100|2400|5|4|4|4|128",
+    "143:143|100|2400|4|4|4|4|148",
+    "144:144|100|2390|4|4|4|4|115",
+    "145:145|100|2400|4|4|4|4|111",
+    "146:146|100|2400|4|4|4|4|94",
+    "147:147|100|2400|4|4|4|4|92",
+    "148:148|100|2290|3|4|4|3|64",
+    "149:149|61|2400|4|4|4|3|63",
+    "150:150|77|2400|4|4|4|3|30",
+    "151:151|100|2400|4|4|4|3|41",
+    "152:152|100|2390|2|4|4|3|32",
+    "153:153|100|2400|2|4|4|3|8",
+    "154:154|96|2250|2|4|4|3|0",
+    "155:155|100|2390|2|4|4|3|6",
+    "156:156|95|2400|2|4|4|3|33",
+    "157:157|100|2400|2|4|4|3|37"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "global",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 46,
+    "nEarlyNonScholar": 7,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "expedition": 5,
+     "combat": 1,
+     "villager combat": 1
+    },
+    "causeSplitAll": {
+     "expedition": 7,
+     "combat": 27,
+     "villager combat": 3,
+     "monster": 6,
+     "contest": 3
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "🌿 A man, maybe 60s checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 60s returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 50s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A woman, maybe 20s, with a scarred cheek heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 40s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 50s returns with water: +4 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 60s returns with water: +4 clean."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1242 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 60s, with a shaved head heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "Konrad heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "Ivy heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A woman, maybe 20s, with a missing fingertip heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 20s, with a scarred cheek returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 20s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 60s, with a shaved head returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 20s, with a missing fingertip returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "Journal: Riparian ground. Water means life, and lunch."
+     },
+     {
+      "day": 3,
+      "text": "🌿 A person, maybe 40s checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 40s returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 Konrad returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 Ivy returns with water: +4 clean."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1050 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "🤒 Aria is achy and wrung out, barely eating. Rest and clean water — or it gets worse. Minh is already boiling water. It's handled."
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "💧 A person, maybe 20s returns with water: +4 clean."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1023 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "Konrad heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A person, maybe 60s, with a shaved head heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A man, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Fatima heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "💧 Konrad returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "Something moves out there — a dog-shaped silence at the treeline."
+     },
+     {
+      "day": 5,
+      "text": "It followed you. The dog-shaped silence at the treeline is here."
+     },
+     {
+      "day": 5,
+      "text": "The dog-shaped silence at the treeline stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+     },
+     {
+      "day": 5,
+      "text": "🌿 A man, maybe 60s checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 5,
+      "text": "💧 A man, maybe 60s returns with 13L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s, with a shaved head returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Fatima returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "A person, maybe 60s, with a shaved head heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "A man, maybe 50s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "Konrad heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "👥 Ivy heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "💧 A man, maybe 30s returns with water: +2 clean."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 44,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 156,
+   "gameDays": 158,
+   "endReason": "village-lost",
+   "dailyCalls": 156,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|95|2400|12|4|4|1|337",
+    "4:4|100|1505|12|4|4|1|319",
+    "5:5|100|1165|12|4|4|1|295",
+    "6:6|100|1200|12|4|4|1|290",
+    "7:7|100|1437|12|4|4|1|277",
+    "8:8|71|1000|12|4|4|1|253",
+    "9:9|91|1410|12|4|4|1|236",
+    "10:10|100|1190|12|4|4|1|244",
+    "11:11|100|1051|12|4|4|1|232",
+    "12:12|100|1331|12|4|4|1|275",
+    "13:13|100|1083|12|4|4|1|304",
+    "14:14|100|1250|12|4|4|1|309",
+    "15:15|100|1476|12|4|4|1|342",
+    "16:16|100|1200|12|4|4|1|375",
+    "17:17|100|1087|12|4|4|1|360",
+    "18:18|100|1309|12|4|4|1|364",
+    "19:19|93|990|12|4|4|1|353",
+    "20:20|100|1000|12|4|4|1|372",
+    "21:21|100|1563|12|4|4|1|279",
+    "22:22|100|2370|12|4|4|1|221",
+    "23:23|79|2400|12|4|4|1|230",
+    "24:24|100|2400|12|4|4|1|241",
+    "25:25|100|2390|12|4|4|1|264",
+    "26:26|72|2400|12|4|4|1|317",
+    "27:27|100|2342|12|4|4|1|316",
+    "28:28|100|2345|12|4|4|1|320",
+    "29:29|100|2400|12|4|4|1|281",
+    "30:30|100|2400|12|4|4|1|309",
+    "31:31|100|2197|12|4|4|2|411",
+    "32:32|100|2058|12|4|4|2|394",
+    "33:33|87|2400|12|4|4|2|322",
+    "34:34|100|2400|12|4|4|2|342",
+    "35:35|100|2248|12|4|4|2|318",
+    "36:36|100|2385|12|4|4|2|308",
+    "37:37|20|2325|12|4|4|2|301",
+    "38:38|50|2390|12|4|4|2|296",
+    "39:39|80|2400|12|4|4|2|393",
+    "40:40|40|2400|12|4|4|2|374",
+    "41:41|70|2390|12|4|4|2|258",
+    "42:42|100|2400|12|4|4|2|229",
+    "43:43|100|2400|12|4|4|2|186",
+    "44:44|100|2390|12|4|4|2|262",
+    "45:45|24|2400|12|4|4|2|333",
+    "46:46|54|2400|12|4|4|2|299",
+    "47:47|84|2390|12|4|4|2|394",
+    "48:48|100|2400|12|4|4|2|473",
+    "49:49|100|2400|12|4|4|2|446",
+    "50:50|100|2400|12|4|4|2|330",
+    "51:51|100|2390|12|4|4|2|278",
+    "52:52|86|2400|12|4|4|2|273",
+    "53:53|81|2400|12|4|4|2|293",
+    "54:54|100|2390|12|4|4|2|336",
+    "55:55|100|2400|12|4|4|2|328",
+    "56:56|100|2400|12|4|4|2|328",
+    "57:57|100|2390|12|4|4|2|266",
+    "58:58|100|2400|12|4|4|2|270",
+    "59:59|100|2200|12|4|4|2|272",
+    "60:60|100|2390|12|4|4|2|288",
+    "61:61|100|2400|12|4|4|2|339",
+    "62:62|100|2400|12|4|4|2|453",
+    "63:63|100|2390|12|4|4|2|553",
+    "64:64|100|2400|11|4|4|2|400",
+    "65:65|100|2400|11|4|4|2|252",
+    "66:66|100|2400|11|4|4|3|272",
+    "67:67|92|2390|11|4|4|3|289",
+    "68:68|100|2400|11|4|4|3|301",
+    "69:69|100|2400|11|4|4|3|457",
+    "70:70|100|2400|11|4|4|3|454",
+    "71:71|100|2390|11|4|4|3|434",
+    "72:72|100|2400|11|4|4|3|423",
+    "73:73|100|2400|11|4|4|3|435",
+    "74:74|100|2390|11|4|4|3|530",
+    "75:75|100|2400|11|4|4|3|498",
+    "76:76|100|2400|11|4|4|3|452",
+    "77:77|100|2400|11|4|4|3|445",
+    "78:78|100|2400|11|4|4|3|287",
+    "79:79|100|2390|11|4|4|3|253",
+    "80:80|83|2400|10|4|4|3|198",
+    "81:81|83|2400|10|4|4|3|189",
+    "82:82|100|2390|10|4|4|3|213",
+    "83:83|100|2400|10|4|4|3|309",
+    "84:84|100|2400|10|4|4|3|421",
+    "85:85|100|2390|10|4|4|3|342",
+    "86:86|95|2400|10|4|4|3|254",
+    "87:87|95|2400|10|4|4|3|272",
+    "88:88|100|2390|10|4|4|3|338",
+    "89:89|100|2400|10|4|4|3|339",
+    "90:90|100|2400|10|4|4|3|387",
+    "91:91|100|2390|10|4|4|3|379",
+    "92:92|100|2400|10|4|4|3|306",
+    "93:93|100|2400|9|4|4|3|288",
+    "94:94|100|2390|9|4|4|3|202",
+    "95:95|100|2400|9|4|4|3|203",
+    "96:96|100|2250|9|4|4|3|306",
+    "97:97|100|2390|9|4|4|3|406",
+    "98:98|100|2400|9|4|4|3|368",
+    "99:99|100|2400|9|4|4|3|291",
+    "100:100|100|2390|9|4|4|3|287",
+    "101:101|100|2200|9|4|4|3|277",
+    "102:102|100|2400|9|4|4|3|287",
+    "103:103|100|2390|9|4|4|3|261",
+    "104:104|100|2400|9|4|4|3|384",
+    "105:105|100|2400|9|4|4|3|393",
+    "106:106|100|2390|9|4|4|3|221",
+    "107:107|100|2400|9|4|4|3|232",
+    "108:108|100|2400|9|4|4|3|240",
+    "109:109|100|2390|9|4|4|3|207",
+    "110:110|100|2400|9|4|4|3|233",
+    "111:111|100|2400|8|4|4|3|281",
+    "112:112|49|2320|7|4|4|3|387",
+    "113:113|79|2400|7|4|4|3|246",
+    "114:114|56|2400|7|4|4|3|240",
+    "115:115|86|2390|7|4|4|3|229",
+    "116:116|100|2400|7|4|4|3|203",
+    "117:117|100|2400|8|4|4|3|205",
+    "118:118|100|2390|9|4|4|3|260",
+    "119:119|100|2400|10|4|4|3|292",
+    "120:120|100|2400|10|4|4|3|219",
+    "121:121|100|2390|10|4|4|3|217",
+    "122:122|100|2400|10|4|4|3|203",
+    "123:123|100|2400|9|4|4|3|186",
+    "124:124|100|2390|9|4|4|3|171",
+    "125:125|100|2400|9|4|4|3|169",
+    "126:126|95|2400|9|4|4|3|172",
+    "127:127|100|2400|9|4|4|3|110",
+    "128:128|100|2190|9|4|4|3|102",
+    "129:129|79|2400|9|4|4|3|168",
+    "130:130|100|2400|9|4|4|3|227",
+    "131:131|100|2390|9|4|4|3|220",
+    "132:132|100|2400|9|4|4|3|275",
+    "133:133|100|2400|9|4|4|3|375",
+    "134:134|100|2390|9|4|4|3|237",
+    "135:135|100|2400|9|4|4|3|147",
+    "136:136|100|2311|7|4|4|4|176",
+    "137:137|100|2400|7|4|4|4|242",
+    "138:138|93|2390|7|4|4|4|262",
+    "139:139|100|2400|7|4|4|4|195",
+    "140:140|100|2323|5|4|4|4|112",
+    "141:141|100|2390|5|4|4|4|113",
+    "142:142|100|2400|5|4|4|4|128",
+    "143:143|100|2400|4|4|4|4|148",
+    "144:144|100|2390|4|4|4|4|115",
+    "145:145|100|2400|4|4|4|4|111",
+    "146:146|100|2400|4|4|4|4|94",
+    "147:147|100|2400|4|4|4|4|92",
+    "148:148|100|2290|3|4|4|3|64",
+    "149:149|61|2400|4|4|4|3|63",
+    "150:150|77|2400|4|4|4|3|30",
+    "151:151|100|2400|4|4|4|3|41",
+    "152:152|100|2390|2|4|4|3|32",
+    "153:153|100|2400|2|4|4|3|8",
+    "154:154|96|2250|2|4|4|3|0",
+    "155:155|100|2390|2|4|4|3|6",
+    "156:156|95|2400|2|4|4|3|33",
+    "157:157|100|2400|2|4|4|3|37"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "global",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 55,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 106,
+   "gameDays": 107,
+   "endReason": "village-lost",
+   "dailyCalls": 106,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|100|2400|12|4|4|1|345",
+    "4:4|100|1564|12|4|4|1|312",
+    "5:5|100|1288|12|4|4|1|267",
+    "6:6|100|1220|12|4|4|1|261",
+    "7:7|100|1193|12|4|4|1|257",
+    "8:8|100|355|12|2|0|1|297",
+    "9:9|88|44|12|2|0|1|309",
+    "10:10|59|10|12|2|0|1|279",
+    "11:11|41|0|12|2|0|1|318",
+    "12:12|23|0|12|2|0|1|347",
+    "13:13|89|2384|11|4|4|1|401",
+    "14:14|90|1538|11|4|4|1|437",
+    "15:15|100|1402|11|4|4|2|335",
+    "16:16|97|430|11|3|7|2|331",
+    "17:17|100|4660|10|4|4|2|261",
+    "18:18|100|4643|10|4|4|2|243",
+    "19:19|100|4562|10|4|4|2|224",
+    "20:20|100|4652|10|4|4|2|220",
+    "21:21|100|4665|10|4|4|2|113",
+    "22:22|95|4429|10|4|4|2|41",
+    "23:23|100|4716|10|4|4|2|78",
+    "24:24|100|4700|10|4|4|2|115",
+    "25:25|100|4800|10|4|4|2|52",
+    "26:26|100|4664|10|4|4|2|57",
+    "27:27|100|4694|10|4|4|2|62",
+    "28:28|100|4570|10|4|4|2|82",
+    "29:29|100|4592|10|4|4|2|107",
+    "30:30|100|4624|10|4|4|2|23",
+    "31:31|100|4644|10|4|4|2|20",
+    "32:32|100|4800|10|4|4|2|92",
+    "33:33|100|4727|9|4|4|2|109",
+    "34:34|100|2915|9|4|4|2|229",
+    "35:35|89|0|9|4|4|2|230",
+    "36:36|84|0|9|4|4|2|160",
+    "37:37|80|297|9|4|4|3|170",
+    "38:38|60|0|9|4|4|3|178",
+    "39:39|55|0|9|4|4|3|310",
+    "40:40|65|0|9|4|4|3|370",
+    "41:41|60|344|9|4|4|3|361",
+    "42:42|70|80|9|4|4|3|401",
+    "43:43|100|128|9|4|4|3|261",
+    "44:44|100|340|9|4|4|3|350",
+    "45:45|100|89|9|4|4|3|351",
+    "46:46|100|148|9|4|4|3|314",
+    "47:47|80|486|8|4|4|3|343",
+    "48:48|86|133|8|4|4|3|242",
+    "49:49|100|269|8|4|4|3|342",
+    "50:50|100|98|8|4|4|3|328",
+    "51:51|100|325|8|4|4|3|239",
+    "52:52|100|327|8|4|4|3|304",
+    "53:53|100|85|8|4|4|3|309",
+    "54:54|72|54|7|4|4|3|229",
+    "55:55|100|142|7|4|4|3|236",
+    "56:56|100|454|7|4|4|3|246",
+    "57:57|100|123|7|4|4|3|136",
+    "58:58|100|212|7|4|4|3|141",
+    "59:59|100|381|7|4|4|3|224",
+    "60:60|100|76|7|4|4|3|275",
+    "61:61|100|1490|5|4|4|3|267",
+    "62:62|81|0|5|4|4|3|253",
+    "63:63|76|225|5|4|4|3|252",
+    "64:64|100|164|5|4|4|3|143",
+    "65:65|100|36|5|4|4|3|71",
+    "66:66|80|229|5|4|4|3|97",
+    "67:67|80|0|5|4|4|3|105",
+    "68:68|60|0|5|4|4|3|88",
+    "69:69|55|0|5|4|4|3|167",
+    "70:70|100|588|5|4|4|3|162",
+    "71:71|100|138|5|4|4|3|72",
+    "72:72|100|28|5|4|4|3|105",
+    "73:73|100|117|5|4|4|3|100",
+    "74:74|100|22|5|4|4|3|159",
+    "75:75|100|212|5|4|4|3|184",
+    "76:76|100|160|5|4|4|3|208",
+    "77:77|100|35|4|4|4|3|222",
+    "78:78|80|0|4|4|4|3|95",
+    "79:79|100|196|4|4|4|3|95",
+    "80:80|100|487|4|4|4|3|106",
+    "81:81|53|0|4|4|4|3|85",
+    "82:82|71|53|4|4|4|3|85",
+    "83:83|100|316|4|4|4|3|82",
+    "84:84|100|337|4|4|4|3|125",
+    "85:85|100|78|4|4|4|3|116",
+    "86:86|80|0|3|4|4|3|110",
+    "87:87|75|0|3|4|4|3|113",
+    "88:88|70|159|3|4|4|3|132",
+    "89:89|100|208|3|4|4|3|122",
+    "90:90|100|49|3|4|4|3|118",
+    "91:91|100|239|3|4|4|3|94",
+    "92:92|100|392|3|4|4|3|93",
+    "93:93|100|80|3|4|4|3|51",
+    "94:94|54|186|3|4|4|3|51",
+    "95:95|64|25|3|4|4|3|48",
+    "96:96|100|341|3|4|4|3|102",
+    "97:97|80|393|3|4|4|3|108",
+    "98:98|90|105|3|4|4|3|85",
+    "99:99|100|246|3|4|4|3|69",
+    "100:100|100|26|3|4|4|3|39",
+    "101:101|100|1500|1|4|4|3|28",
+    "102:102|100|638|1|4|4|3|29",
+    "103:103|100|171|1|4|4|3|20",
+    "104:104|100|212|1|4|4|3|15",
+    "105:105|100|306|1|4|4|3|0",
+    "106:106|100|47|1|4|4|3|0",
+    "107:107|100|356|1|4|4|3|0"
+   ],
+   "maxWaveUnlocked": 3,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 28,
+    "nEarlyNonScholar": 10,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "expedition": 2,
+     "villager combat": 7,
+     "The Static Kite": 1
+    },
+    "causeSplitAll": {
+     "expedition": 2,
+     "villager combat": 9,
+     "dehydration": 1,
+     "combat": 11,
+     "The Static Kite": 1,
+     "contest": 2,
+     "Buffering": 1,
+     "monster": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1154 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 20s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A woman, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A woman, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "👥 A man, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "👥 Jesse heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "💧 A woman, maybe 30s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 Nora returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 40s returns with water: +3 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 20s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 Jesse returns with water: +3 clean."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1326 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 30s returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "🌿 Jesse checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 3,
+      "text": "💧 Jesse returns with 7L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1105 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "Nora heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 30s, with a farmer's tan heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "Lena heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 4,
+      "text": "💧 A person, maybe 40s returns with water: +3 clean."
+     },
+     {
+      "day": 4,
+      "text": "💧 Nora returns with water: +3 clean."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 30s, with a farmer's tan returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Lena returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 5,
+      "text": "👁 It hears you coming mid-wingbeat — in the air, you don't catch it. Hunt it roosting at dawn, or wait for the water it must come down to."
+     },
+     {
+      "day": 5,
+      "text": "🌿 Jesse checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 5,
+      "text": "💧 Jesse returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "🤒 Elena is achy and wrung out, barely eating. Rest and clean water — or it gets worse. Salvatore is already boiling water. It's handled."
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "A person, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "Leo heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "Nora heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "A person, maybe 30s, with a farmer's tan heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "A person, maybe 30s, with deep-set eyes heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 6,
+      "text": "The cistern is dry. Haul from a creek (risky water), or put someone on water duty."
+     },
+     {
+      "day": 6,
+      "text": "💧 Leo returns with water: +3 clean."
+     },
+     {
+      "day": 6,
+      "text": "💧 Nora returns with water: +2 clean."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 55,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 106,
+   "gameDays": 107,
+   "endReason": "village-lost",
+   "dailyCalls": 106,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|100|2400|12|4|4|1|345",
+    "4:4|100|1564|12|4|4|1|312",
+    "5:5|100|1288|12|4|4|1|267",
+    "6:6|100|1220|12|4|4|1|261",
+    "7:7|100|1193|12|4|4|1|257",
+    "8:8|100|355|12|2|0|1|297",
+    "9:9|88|44|12|2|0|1|309",
+    "10:10|59|10|12|2|0|1|279",
+    "11:11|41|0|12|2|0|1|318",
+    "12:12|23|0|12|2|0|1|347",
+    "13:13|89|2384|11|4|4|1|401",
+    "14:14|90|1538|11|4|4|1|437",
+    "15:15|100|1402|11|4|4|2|335",
+    "16:16|97|430|11|3|7|2|331",
+    "17:17|100|4660|10|4|4|2|261",
+    "18:18|100|4643|10|4|4|2|243",
+    "19:19|100|4562|10|4|4|2|224",
+    "20:20|100|4652|10|4|4|2|220",
+    "21:21|100|4665|10|4|4|2|113",
+    "22:22|95|4429|10|4|4|2|41",
+    "23:23|100|4716|10|4|4|2|78",
+    "24:24|100|4700|10|4|4|2|115",
+    "25:25|100|4800|10|4|4|2|52",
+    "26:26|100|4664|10|4|4|2|57",
+    "27:27|100|4694|10|4|4|2|62",
+    "28:28|100|4570|10|4|4|2|82",
+    "29:29|100|4592|10|4|4|2|107",
+    "30:30|100|4624|10|4|4|2|23",
+    "31:31|100|4644|10|4|4|2|20",
+    "32:32|100|4800|10|4|4|2|92",
+    "33:33|100|4727|9|4|4|2|109",
+    "34:34|100|2915|9|4|4|2|229",
+    "35:35|89|0|9|4|4|2|230",
+    "36:36|84|0|9|4|4|2|160",
+    "37:37|80|297|9|4|4|3|170",
+    "38:38|60|0|9|4|4|3|178",
+    "39:39|55|0|9|4|4|3|310",
+    "40:40|65|0|9|4|4|3|370",
+    "41:41|60|344|9|4|4|3|361",
+    "42:42|70|80|9|4|4|3|401",
+    "43:43|100|128|9|4|4|3|261",
+    "44:44|100|340|9|4|4|3|350",
+    "45:45|100|89|9|4|4|3|351",
+    "46:46|100|148|9|4|4|3|314",
+    "47:47|80|486|8|4|4|3|343",
+    "48:48|86|133|8|4|4|3|242",
+    "49:49|100|269|8|4|4|3|342",
+    "50:50|100|98|8|4|4|3|328",
+    "51:51|100|325|8|4|4|3|239",
+    "52:52|100|327|8|4|4|3|304",
+    "53:53|100|85|8|4|4|3|309",
+    "54:54|72|54|7|4|4|3|229",
+    "55:55|100|142|7|4|4|3|236",
+    "56:56|100|454|7|4|4|3|246",
+    "57:57|100|123|7|4|4|3|136",
+    "58:58|100|212|7|4|4|3|141",
+    "59:59|100|381|7|4|4|3|224",
+    "60:60|100|76|7|4|4|3|275",
+    "61:61|100|1490|5|4|4|3|267",
+    "62:62|81|0|5|4|4|3|253",
+    "63:63|76|225|5|4|4|3|252",
+    "64:64|100|164|5|4|4|3|143",
+    "65:65|100|36|5|4|4|3|71",
+    "66:66|80|229|5|4|4|3|97",
+    "67:67|80|0|5|4|4|3|105",
+    "68:68|60|0|5|4|4|3|88",
+    "69:69|55|0|5|4|4|3|167",
+    "70:70|100|588|5|4|4|3|162",
+    "71:71|100|138|5|4|4|3|72",
+    "72:72|100|28|5|4|4|3|105",
+    "73:73|100|117|5|4|4|3|100",
+    "74:74|100|22|5|4|4|3|159",
+    "75:75|100|212|5|4|4|3|184",
+    "76:76|100|160|5|4|4|3|208",
+    "77:77|100|35|4|4|4|3|222",
+    "78:78|80|0|4|4|4|3|95",
+    "79:79|100|196|4|4|4|3|95",
+    "80:80|100|487|4|4|4|3|106",
+    "81:81|53|0|4|4|4|3|85",
+    "82:82|71|53|4|4|4|3|85",
+    "83:83|100|316|4|4|4|3|82",
+    "84:84|100|337|4|4|4|3|125",
+    "85:85|100|78|4|4|4|3|116",
+    "86:86|80|0|3|4|4|3|110",
+    "87:87|75|0|3|4|4|3|113",
+    "88:88|70|159|3|4|4|3|132",
+    "89:89|100|208|3|4|4|3|122",
+    "90:90|100|49|3|4|4|3|118",
+    "91:91|100|239|3|4|4|3|94",
+    "92:92|100|392|3|4|4|3|93",
+    "93:93|100|80|3|4|4|3|51",
+    "94:94|54|186|3|4|4|3|51",
+    "95:95|64|25|3|4|4|3|48",
+    "96:96|100|341|3|4|4|3|102",
+    "97:97|80|393|3|4|4|3|108",
+    "98:98|90|105|3|4|4|3|85",
+    "99:99|100|246|3|4|4|3|69",
+    "100:100|100|26|3|4|4|3|39",
+    "101:101|100|1500|1|4|4|3|28",
+    "102:102|100|638|1|4|4|3|29",
+    "103:103|100|171|1|4|4|3|20",
+    "104:104|100|212|1|4|4|3|15",
+    "105:105|100|306|1|4|4|3|0",
+    "106:106|100|47|1|4|4|3|0",
+    "107:107|100|356|1|4|4|3|0"
+   ],
+   "maxWaveUnlocked": 3,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 66,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 103,
+   "gameDays": 104,
+   "endReason": "village-lost",
+   "dailyCalls": 103,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|85|2400|12|4|4|1|369",
+    "4:4|100|1561|12|4|4|1|357",
+    "5:5|100|1195|12|4|4|1|349",
+    "6:6|100|1127|12|4|4|1|350",
+    "7:7|100|1035|12|4|4|1|422",
+    "8:8|100|1380|12|4|4|1|469",
+    "9:9|100|1111|12|4|4|1|417",
+    "10:10|100|1099|12|4|4|1|417",
+    "11:11|100|1063|12|4|4|1|410",
+    "12:12|100|1006|12|4|4|1|423",
+    "13:13|100|2300|11|4|4|1|410",
+    "14:14|100|1415|11|4|4|1|406",
+    "15:15|93|1218|11|4|4|1|415",
+    "16:16|100|1049|11|4|4|1|463",
+    "17:17|94|2400|11|4|4|1|435",
+    "18:18|100|2400|11|4|4|1|442",
+    "19:19|100|2400|10|4|4|1|477",
+    "20:20|100|2400|10|4|4|1|452",
+    "21:21|100|2400|10|4|4|2|374",
+    "22:22|100|2400|10|4|4|2|336",
+    "23:23|100|2400|10|4|4|2|336",
+    "24:24|79|2400|10|4|4|2|310",
+    "25:25|100|2400|10|4|4|2|275",
+    "26:26|38|2400|10|4|4|2|298",
+    "27:27|66|2400|10|4|4|2|295",
+    "28:28|94|2400|10|4|4|2|315",
+    "29:29|100|2400|10|4|4|2|279",
+    "30:30|98|2400|9|4|4|2|253",
+    "31:31|100|2400|9|4|4|2|330",
+    "32:32|100|2400|9|4|4|2|322",
+    "33:33|100|2400|9|4|4|2|302",
+    "34:34|100|2400|9|4|4|2|295",
+    "35:35|89|2400|9|4|4|2|257",
+    "36:36|100|2400|9|4|4|2|166",
+    "37:37|100|2400|9|4|4|2|115",
+    "38:38|100|2400|9|4|4|2|88",
+    "39:39|75|2400|9|4|4|2|73",
+    "40:40|100|2400|8|4|4|2|108",
+    "41:41|100|2400|7|4|4|2|122",
+    "42:42|98|2400|7|4|4|2|124",
+    "43:43|100|2400|7|4|4|2|72",
+    "44:44|100|2400|7|4|4|2|60",
+    "45:45|98|2400|7|4|4|2|50",
+    "46:46|100|2400|7|4|4|2|55",
+    "47:47|100|2400|8|4|4|2|81",
+    "48:48|100|2400|8|4|4|2|85",
+    "49:49|100|2400|9|4|4|2|66",
+    "50:50|100|2400|9|4|4|2|47",
+    "51:51|100|2400|9|4|4|2|57",
+    "52:52|100|2400|9|4|4|2|43",
+    "53:53|100|2400|9|4|4|2|37",
+    "54:54|100|2400|9|4|4|2|64",
+    "55:55|100|2400|9|4|4|2|54",
+    "56:56|100|2400|7|4|4|2|55",
+    "57:57|100|2400|7|4|4|2|57",
+    "58:58|100|2400|7|4|4|2|52",
+    "59:59|100|2400|8|4|4|2|58",
+    "60:60|100|2400|8|4|4|2|53",
+    "61:61|100|2400|8|4|4|2|107",
+    "62:62|100|2400|8|4|4|2|89",
+    "63:63|100|2400|8|4|4|2|110",
+    "64:64|100|2400|8|4|4|2|97",
+    "65:65|100|2400|8|4|4|2|94",
+    "66:66|100|2400|8|4|4|2|111",
+    "67:67|100|2400|8|4|4|2|124",
+    "68:68|100|2400|8|4|4|2|129",
+    "69:69|100|2337|8|4|4|2|72",
+    "70:70|92|2328|8|4|4|2|151",
+    "71:71|100|2400|7|4|4|2|88",
+    "72:72|100|2400|7|4|4|2|118",
+    "73:73|98|2400|7|4|4|2|162",
+    "74:74|100|2400|7|4|4|2|182",
+    "75:75|100|2400|6|4|4|2|182",
+    "76:76|100|2400|8|4|4|2|212",
+    "77:77|100|2400|8|4|4|2|186",
+    "78:78|100|2400|8|4|4|2|119",
+    "79:79|100|2400|8|4|4|2|101",
+    "80:80|100|2400|8|4|4|2|91",
+    "81:81|100|2400|7|4|4|2|94",
+    "82:82|100|2400|7|4|4|2|119",
+    "83:83|100|2400|7|4|4|2|64",
+    "84:84|100|2400|7|4|4|2|111",
+    "85:85|100|2400|7|4|4|2|40",
+    "86:86|100|2400|7|4|4|2|39",
+    "87:87|100|2400|7|4|4|2|93",
+    "88:88|100|2400|7|4|4|3|82",
+    "89:89|87|2400|7|4|4|3|55",
+    "90:90|100|2400|7|4|4|3|56",
+    "91:91|100|2400|7|4|4|3|55",
+    "92:92|100|2400|8|4|4|3|62",
+    "93:93|100|2400|8|4|4|3|38",
+    "94:94|84|2400|7|4|4|3|34",
+    "95:95|100|2400|6|4|4|3|47",
+    "96:96|98|1300|5|4|4|3|72",
+    "97:97|100|2400|5|4|4|3|60",
+    "98:98|82|2400|4|4|4|3|21",
+    "99:99|82|2400|3|4|4|3|0",
+    "100:100|100|2400|3|4|4|3|0",
+    "101:101|88|469|2|4|4|3|0",
+    "102:102|95|1616|2|4|4|3|0",
+    "103:103|28|489|2|4|4|3|0",
+    "104:104|30|867|2|4|4|3|0"
+   ],
+   "maxWaveUnlocked": 3,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 49,
+    "nEarlyNonScholar": 13,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "villager combat": 6,
+     "monster": 2,
+     "combat": 3,
+     "sickness": 2
+    },
+    "causeSplitAll": {
+     "villager combat": 15,
+     "combat": 19,
+     "monster": 3,
+     "sickness": 6,
+     "a wound that wouldn't close": 5,
+     "starvation": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 24L left."
+     },
+     {
+      "day": 1,
+      "text": "📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A woman, maybe 50s, with a scarred cheek returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 1,
+      "text": "📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A woman, maybe 50s, with a scarred cheek returns with 7L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 1,
+      "text": "📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 1,
+      "text": "💧 A woman, maybe 50s, with a scarred cheek returns with 10L, but the cistern only holds 1L more."
+     },
+     {
+      "day": 1,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1249 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 50s, with a scarred cheek returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A woman, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "📋 A woman, maybe 50s, with a scarred cheek — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 50s, with a scarred cheek returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "A man, maybe 40s, with a crooked nose heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A woman, maybe 60s returns with water: +4 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 30s returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 40s, with a crooked nose returns with water: +4 clean."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1130 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "🤒 Eun-chae is achy and wrung out, barely eating. Rest and clean water — or it gets worse. You're already boiling water. It's handled."
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 4,
+      "text": "💧 Grace returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 4,
+      "text": "💧 Grace returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1068 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Grace returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "Elif heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Grace returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 5,
+      "text": "💧 Grace returns with 7L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "Grace heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 5,
+      "text": "⚔️ Aurora stood down the moth the size of a dinner plate and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+     },
+     {
+      "day": 5,
+      "text": "👁 It hears you coming mid-wingbeat — in the air, you don't catch it. Hunt it roosting at dawn, or wait for the water it must come down to."
+     },
+     {
+      "day": 5,
+      "text": "💧 Elif returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1134 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "💧 The hearth boiled 6L clean (1 wood). 20L of creek water is still risky."
+     },
+     {
+      "day": 5,
+      "text": "🤒 Eun-chae is doubled up with gut cramps. Rest and clean water — or it gets worse. You're already boiling water. It's handled."
+     },
+     {
+      "day": 5,
+      "text": "🤒 Liam is doubled up with gut cramps. Rest and clean water — or it gets worse."
+     },
+     {
+      "day": 5,
+      "text": "🤒 Theo is doubled up with gut cramps. Rest and clean water — or it gets worse."
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "📋 Grace — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 6,
+      "text": "💧 Grace returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "💧 A person, maybe 60s returns with water: +4 clean."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 66,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 103,
+   "gameDays": 104,
+   "endReason": "village-lost",
+   "dailyCalls": 103,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|85|2400|12|4|4|1|369",
+    "4:4|100|1561|12|4|4|1|357",
+    "5:5|100|1195|12|4|4|1|349",
+    "6:6|100|1127|12|4|4|1|350",
+    "7:7|100|1035|12|4|4|1|422",
+    "8:8|100|1380|12|4|4|1|469",
+    "9:9|100|1111|12|4|4|1|417",
+    "10:10|100|1099|12|4|4|1|417",
+    "11:11|100|1063|12|4|4|1|410",
+    "12:12|100|1006|12|4|4|1|423",
+    "13:13|100|2300|11|4|4|1|410",
+    "14:14|100|1415|11|4|4|1|406",
+    "15:15|93|1218|11|4|4|1|415",
+    "16:16|100|1049|11|4|4|1|463",
+    "17:17|94|2400|11|4|4|1|435",
+    "18:18|100|2400|11|4|4|1|442",
+    "19:19|100|2400|10|4|4|1|477",
+    "20:20|100|2400|10|4|4|1|452",
+    "21:21|100|2400|10|4|4|2|374",
+    "22:22|100|2400|10|4|4|2|336",
+    "23:23|100|2400|10|4|4|2|336",
+    "24:24|79|2400|10|4|4|2|310",
+    "25:25|100|2400|10|4|4|2|275",
+    "26:26|38|2400|10|4|4|2|298",
+    "27:27|66|2400|10|4|4|2|295",
+    "28:28|94|2400|10|4|4|2|315",
+    "29:29|100|2400|10|4|4|2|279",
+    "30:30|98|2400|9|4|4|2|253",
+    "31:31|100|2400|9|4|4|2|330",
+    "32:32|100|2400|9|4|4|2|322",
+    "33:33|100|2400|9|4|4|2|302",
+    "34:34|100|2400|9|4|4|2|295",
+    "35:35|89|2400|9|4|4|2|257",
+    "36:36|100|2400|9|4|4|2|166",
+    "37:37|100|2400|9|4|4|2|115",
+    "38:38|100|2400|9|4|4|2|88",
+    "39:39|75|2400|9|4|4|2|73",
+    "40:40|100|2400|8|4|4|2|108",
+    "41:41|100|2400|7|4|4|2|122",
+    "42:42|98|2400|7|4|4|2|124",
+    "43:43|100|2400|7|4|4|2|72",
+    "44:44|100|2400|7|4|4|2|60",
+    "45:45|98|2400|7|4|4|2|50",
+    "46:46|100|2400|7|4|4|2|55",
+    "47:47|100|2400|8|4|4|2|81",
+    "48:48|100|2400|8|4|4|2|85",
+    "49:49|100|2400|9|4|4|2|66",
+    "50:50|100|2400|9|4|4|2|47",
+    "51:51|100|2400|9|4|4|2|57",
+    "52:52|100|2400|9|4|4|2|43",
+    "53:53|100|2400|9|4|4|2|37",
+    "54:54|100|2400|9|4|4|2|64",
+    "55:55|100|2400|9|4|4|2|54",
+    "56:56|100|2400|7|4|4|2|55",
+    "57:57|100|2400|7|4|4|2|57",
+    "58:58|100|2400|7|4|4|2|52",
+    "59:59|100|2400|8|4|4|2|58",
+    "60:60|100|2400|8|4|4|2|53",
+    "61:61|100|2400|8|4|4|2|107",
+    "62:62|100|2400|8|4|4|2|89",
+    "63:63|100|2400|8|4|4|2|110",
+    "64:64|100|2400|8|4|4|2|97",
+    "65:65|100|2400|8|4|4|2|94",
+    "66:66|100|2400|8|4|4|2|111",
+    "67:67|100|2400|8|4|4|2|124",
+    "68:68|100|2400|8|4|4|2|129",
+    "69:69|100|2337|8|4|4|2|72",
+    "70:70|92|2328|8|4|4|2|151",
+    "71:71|100|2400|7|4|4|2|88",
+    "72:72|100|2400|7|4|4|2|118",
+    "73:73|98|2400|7|4|4|2|162",
+    "74:74|100|2400|7|4|4|2|182",
+    "75:75|100|2400|6|4|4|2|182",
+    "76:76|100|2400|8|4|4|2|212",
+    "77:77|100|2400|8|4|4|2|186",
+    "78:78|100|2400|8|4|4|2|119",
+    "79:79|100|2400|8|4|4|2|101",
+    "80:80|100|2400|8|4|4|2|91",
+    "81:81|100|2400|7|4|4|2|94",
+    "82:82|100|2400|7|4|4|2|119",
+    "83:83|100|2400|7|4|4|2|64",
+    "84:84|100|2400|7|4|4|2|111",
+    "85:85|100|2400|7|4|4|2|40",
+    "86:86|100|2400|7|4|4|2|39",
+    "87:87|100|2400|7|4|4|2|93",
+    "88:88|100|2400|7|4|4|3|82",
+    "89:89|87|2400|7|4|4|3|55",
+    "90:90|100|2400|7|4|4|3|56",
+    "91:91|100|2400|7|4|4|3|55",
+    "92:92|100|2400|8|4|4|3|62",
+    "93:93|100|2400|8|4|4|3|38",
+    "94:94|84|2400|7|4|4|3|34",
+    "95:95|100|2400|6|4|4|3|47",
+    "96:96|98|1300|5|4|4|3|72",
+    "97:97|100|2400|5|4|4|3|60",
+    "98:98|82|2400|4|4|4|3|21",
+    "99:99|82|2400|3|4|4|3|0",
+    "100:100|100|2400|3|4|4|3|0",
+    "101:101|88|469|2|4|4|3|0",
+    "102:102|95|1616|2|4|4|3|0",
+    "103:103|28|489|2|4|4|3|0",
+    "104:104|30|867|2|4|4|3|0"
+   ],
+   "maxWaveUnlocked": 3,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 77,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "dailyCalls": 180,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|95|2328|12|4|4|1|387",
+    "4:4|100|1511|12|4|4|1|331",
+    "5:5|100|1146|12|4|4|1|311",
+    "6:6|100|1090|12|4|4|1|341",
+    "7:7|100|1249|12|4|4|1|349",
+    "8:8|100|1054|12|4|4|1|363",
+    "9:9|100|1000|12|4|4|1|407",
+    "10:10|100|1500|11|4|4|1|393",
+    "11:11|100|1431|11|4|4|1|398",
+    "12:12|100|1189|11|4|4|1|381",
+    "13:13|100|1054|11|4|4|1|387",
+    "14:14|100|1120|11|4|4|1|367",
+    "15:15|100|1195|11|4|4|1|369",
+    "16:16|100|1056|10|4|4|1|366",
+    "17:17|100|1083|10|4|4|1|387",
+    "18:18|100|1166|10|4|4|1|417",
+    "19:19|100|1141|10|4|4|1|417",
+    "20:20|100|1221|10|4|4|1|418",
+    "21:21|100|1222|10|4|4|1|403",
+    "22:22|100|1204|10|4|4|1|355",
+    "23:23|91|1340|10|4|4|1|371",
+    "24:24|100|1670|10|4|4|1|440",
+    "25:25|94|1324|10|4|4|1|452",
+    "26:26|96|1376|10|4|4|1|484",
+    "27:27|100|1940|10|4|4|1|461",
+    "28:28|100|1322|10|4|4|1|474",
+    "29:29|100|2292|9|4|4|1|388",
+    "30:30|100|2227|9|4|4|1|381",
+    "31:31|100|2400|8|4|4|1|354",
+    "32:32|100|2400|7|4|4|1|390",
+    "33:33|100|2400|7|4|4|1|448",
+    "34:34|71|2400|7|4|4|1|445",
+    "35:35|100|2400|7|4|4|1|434",
+    "36:36|100|2400|7|4|4|1|392",
+    "37:37|100|2400|7|4|4|1|396",
+    "38:38|100|2400|9|4|4|1|402",
+    "39:39|100|2400|9|4|4|1|442",
+    "40:40|100|2400|10|4|4|2|410",
+    "41:41|100|2390|11|4|4|2|384",
+    "42:42|100|2400|11|4|4|2|335",
+    "43:43|100|2400|11|4|4|2|339",
+    "44:44|100|2400|11|4|4|2|433",
+    "45:45|100|2400|11|4|4|2|453",
+    "46:46|100|2400|11|4|4|2|532",
+    "47:47|100|2400|11|4|4|2|614",
+    "48:48|100|2400|11|4|4|2|717",
+    "49:49|100|2400|11|4|4|2|822",
+    "50:50|100|2400|11|4|4|2|768",
+    "51:51|93|2400|11|4|4|2|769",
+    "52:52|100|2400|11|4|4|2|750",
+    "53:53|100|2400|11|4|4|2|858",
+    "54:54|100|2400|11|4|4|2|893",
+    "55:55|100|2390|11|4|4|2|888",
+    "56:56|100|2400|11|4|4|2|927",
+    "57:57|100|2300|11|4|4|2|913",
+    "58:58|95|2390|11|4|4|2|947",
+    "59:59|100|2400|11|4|4|2|908",
+    "60:60|100|2400|11|4|4|2|942",
+    "61:61|100|2249|11|4|4|2|1068",
+    "62:62|100|2400|11|4|4|2|1228",
+    "63:63|100|2400|11|4|4|2|1253",
+    "64:64|100|2400|11|4|4|2|1158",
+    "65:65|76|2400|11|4|4|3|1194",
+    "66:66|54|2231|11|4|4|3|1199",
+    "67:67|84|2400|11|4|4|3|1227",
+    "68:68|100|2400|11|4|4|3|1406",
+    "69:69|100|2400|11|4|4|3|1320",
+    "70:70|100|2400|11|4|4|3|1282",
+    "71:71|100|2400|11|4|4|3|1256",
+    "72:72|100|2400|11|4|4|3|1217",
+    "73:73|100|2400|11|4|4|3|1322",
+    "74:74|89|2390|11|4|4|3|1318",
+    "75:75|100|2400|11|4|4|3|1398",
+    "76:76|100|2400|11|4|4|3|1318",
+    "77:77|100|2390|11|4|4|3|1366",
+    "78:78|100|2400|11|4|4|3|1329",
+    "79:79|100|2400|11|4|4|3|1362",
+    "80:80|100|2400|11|4|4|3|1378",
+    "81:81|100|2400|11|4|4|3|1299",
+    "82:82|100|2400|11|4|4|3|1330",
+    "83:83|100|2400|11|4|4|3|1332",
+    "84:84|100|2400|11|4|4|3|1374",
+    "85:85|100|2400|11|4|4|3|1443",
+    "86:86|100|2400|11|4|4|3|1421",
+    "87:87|100|2390|11|4|4|3|1389",
+    "88:88|100|2400|11|4|4|3|1366",
+    "89:89|100|2200|11|4|4|3|1374",
+    "90:90|100|2400|11|4|4|3|1349",
+    "91:91|100|2400|11|4|4|3|1334",
+    "92:92|100|2400|11|4|4|3|1423",
+    "93:93|100|2400|11|4|4|3|1290",
+    "94:94|100|2390|11|4|4|3|1332",
+    "95:95|100|2400|11|4|4|3|1384",
+    "96:96|100|2400|11|4|4|3|1376",
+    "97:97|100|2390|11|4|4|3|1261",
+    "98:98|100|2400|11|4|4|3|1307",
+    "99:99|100|2400|11|4|4|3|1325",
+    "100:100|100|2236|11|4|4|3|1191",
+    "101:101|100|2400|11|4|4|3|1268",
+    "102:102|100|2400|10|4|4|3|1278",
+    "103:103|100|2400|10|4|4|3|1160",
+    "104:104|100|2400|10|4|4|3|1119",
+    "105:105|100|2292|7|4|4|3|1114",
+    "106:106|100|2390|7|4|4|3|617",
+    "107:107|100|2400|8|4|4|3|632",
+    "108:108|100|2400|8|4|4|3|737",
+    "109:109|100|2400|8|4|4|3|693",
+    "110:110|31|2400|9|4|4|3|819",
+    "111:111|61|2400|9|4|4|3|975",
+    "112:112|91|2390|9|4|4|3|1027",
+    "113:113|100|2400|9|4|4|3|915",
+    "114:114|60|2400|9|4|4|3|935",
+    "115:115|60|2390|9|4|4|3|806",
+    "116:116|90|2400|9|4|4|3|694",
+    "117:117|100|2400|9|4|4|3|735",
+    "118:118|100|2390|9|4|4|3|823",
+    "119:119|100|2400|9|4|4|3|850",
+    "120:120|100|2400|9|4|4|3|793",
+    "121:121|100|2390|9|4|4|3|866",
+    "122:122|96|2400|9|4|4|3|844",
+    "123:123|100|2400|9|4|4|3|819",
+    "124:124|100|2400|9|4|4|3|932",
+    "125:125|100|2400|9|4|4|3|923",
+    "126:126|100|2400|9|4|4|3|893",
+    "127:127|100|2400|9|4|4|3|841",
+    "128:128|100|2400|9|4|4|3|864",
+    "129:129|100|2400|9|4|4|3|729",
+    "130:130|100|2400|9|4|4|3|870",
+    "131:131|95|2200|9|4|4|3|971",
+    "132:132|100|2400|9|4|4|3|957",
+    "133:133|100|2400|9|4|4|3|1000",
+    "134:134|100|2400|9|4|4|3|869",
+    "135:135|93|2400|8|4|4|3|769",
+    "136:136|93|2400|8|4|4|3|613",
+    "137:137|88|2400|8|4|4|3|579",
+    "138:138|100|2400|8|4|4|3|573",
+    "139:139|100|2400|8|4|4|3|547",
+    "140:140|100|2400|8|4|4|3|542",
+    "141:141|100|2400|8|4|4|3|571",
+    "142:142|100|2250|8|4|4|3|674",
+    "143:143|100|2400|8|4|4|3|736",
+    "144:144|53|2400|8|4|4|3|814",
+    "145:145|83|2400|8|4|4|3|837",
+    "146:146|100|2400|8|4|4|3|762",
+    "147:147|100|2400|8|4|4|3|730",
+    "148:148|100|2400|8|4|4|3|656",
+    "149:149|100|2400|8|4|4|3|735",
+    "150:150|100|2400|8|4|4|3|794",
+    "151:151|100|2400|8|4|4|3|900",
+    "152:152|100|2400|8|4|4|3|951",
+    "153:153|100|2400|8|4|4|3|990",
+    "154:154|100|2400|8|4|4|3|906",
+    "155:155|100|2400|8|4|4|3|672",
+    "156:156|63|2400|7|4|4|4|648",
+    "157:157|57|2233|7|4|4|4|737",
+    "158:158|87|2400|7|4|4|4|755",
+    "159:159|26|2400|7|4|4|4|866",
+    "160:160|39|2400|8|4|4|4|878",
+    "161:161|57|2400|9|4|4|4|814",
+    "162:162|87|2400|10|4|4|4|734",
+    "163:163|100|2400|10|4|4|4|871",
+    "164:164|100|2400|10|4|4|4|848",
+    "165:165|87|2400|10|4|4|4|849",
+    "166:166|100|2400|10|4|4|4|932",
+    "167:167|100|2400|10|4|4|4|926",
+    "168:168|83|2400|9|4|4|4|864",
+    "169:169|100|2400|9|4|4|4|845",
+    "170:170|100|2254|9|4|4|4|885",
+    "171:171|100|2400|9|4|4|4|833",
+    "172:172|83|2150|9|4|4|4|925",
+    "173:173|100|2400|9|4|4|4|878",
+    "174:174|100|2390|9|4|4|4|821",
+    "175:175|100|2400|8|4|4|4|885",
+    "176:176|100|2240|8|4|4|4|751",
+    "177:177|100|2400|8|4|4|4|665",
+    "178:178|95|2400|8|4|4|4|638",
+    "179:179|100|2400|8|4|4|4|593",
+    "180:180|100|2400|8|4|4|4|545",
+    "181:181|100|2400|8|4|4|4|511"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 51,
+    "nEarlyNonScholar": 9,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "combat": 2,
+     "a wound that wouldn't close": 1,
+     "villager combat": 3,
+     "sickness": 3
+    },
+    "causeSplitAll": {
+     "combat": 31,
+     "a wound that wouldn't close": 1,
+     "villager combat": 8,
+     "sickness": 3,
+     "expedition": 1,
+     "monster": 4,
+     "contest": 3
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "📋 A person, maybe 50s, with a long braid wants to know what's by the creek. \"Just look. Come back and tell me.\""
+     },
+     {
+      "day": 1,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 1,
+      "text": "A person, maybe 50s, with a long braid and A man, maybe 30s are comparing scars like trading cards."
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 30s, with a broad frame heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 30s, with a wiry build heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 40s, with a nervous tic heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "🌿 A man, maybe 40s, with a nervous tic checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 40s, with a nervous tic returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 50s, with a long braid heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "💧 Yodchai returns with water: +4 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 30s returns with water: +3 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 50s, with a long braid returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 30s, with a broad frame returns with water: +4 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 40s, with a nervous tic returns with water: +3 clean."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "A man, maybe 40s, with a farmer's tan heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A man, maybe 30s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "Thabo heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 50s, with a long braid heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "Nino heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "A man, maybe 40s, with a nervous tic heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 40s, with a farmer's tan returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "🌿 A man, maybe 40s, with a nervous tic checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 40s, with a nervous tic returns with 9L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 30s returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "💧 Thabo returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "🤒 Thabo is achy and wrung out, barely eating. Rest and clean water — or it gets worse."
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "💧 Enzo returns with water: +2 clean."
+     },
+     {
+      "day": 4,
+      "text": "💧 A person, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 4,
+      "text": "💧 Nino returns with water: +3 clean."
+     },
+     {
+      "day": 4,
+      "text": "💧 A man, maybe 40s, with a nervous tic returns with water: +2 clean."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1020 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "Farid heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Enzo heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "A person, maybe 50s, with a buzz cut heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 5,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 5,
+      "text": "Something moves out there — a dog-shaped silence at the treeline."
+     },
+     {
+      "day": 5,
+      "text": "It followed you. The dog-shaped silence at the treeline is here."
+     },
+     {
+      "day": 5,
+      "text": "The dog-shaped silence at the treeline stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+     },
+     {
+      "day": 5,
+      "text": "🌿 A person, maybe 30s, with a broad frame checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 30s, with a broad frame returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "💧 Enzo returns with water: +2 clean."
+     },
+     {
+      "day": 5,
+      "text": "💧 Farid returns with water: +3 clean."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1100 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 77,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 180,
+   "gameDays": 182,
+   "endReason": "survived",
+   "dailyCalls": 180,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|95|2328|12|4|4|1|387",
+    "4:4|100|1511|12|4|4|1|331",
+    "5:5|100|1146|12|4|4|1|311",
+    "6:6|100|1090|12|4|4|1|341",
+    "7:7|100|1249|12|4|4|1|349",
+    "8:8|100|1054|12|4|4|1|363",
+    "9:9|100|1000|12|4|4|1|407",
+    "10:10|100|1500|11|4|4|1|393",
+    "11:11|100|1431|11|4|4|1|398",
+    "12:12|100|1189|11|4|4|1|381",
+    "13:13|100|1054|11|4|4|1|387",
+    "14:14|100|1120|11|4|4|1|367",
+    "15:15|100|1195|11|4|4|1|369",
+    "16:16|100|1056|10|4|4|1|366",
+    "17:17|100|1083|10|4|4|1|387",
+    "18:18|100|1166|10|4|4|1|417",
+    "19:19|100|1141|10|4|4|1|417",
+    "20:20|100|1221|10|4|4|1|418",
+    "21:21|100|1222|10|4|4|1|403",
+    "22:22|100|1204|10|4|4|1|355",
+    "23:23|91|1340|10|4|4|1|371",
+    "24:24|100|1670|10|4|4|1|440",
+    "25:25|94|1324|10|4|4|1|452",
+    "26:26|96|1376|10|4|4|1|484",
+    "27:27|100|1940|10|4|4|1|461",
+    "28:28|100|1322|10|4|4|1|474",
+    "29:29|100|2292|9|4|4|1|388",
+    "30:30|100|2227|9|4|4|1|381",
+    "31:31|100|2400|8|4|4|1|354",
+    "32:32|100|2400|7|4|4|1|390",
+    "33:33|100|2400|7|4|4|1|448",
+    "34:34|71|2400|7|4|4|1|445",
+    "35:35|100|2400|7|4|4|1|434",
+    "36:36|100|2400|7|4|4|1|392",
+    "37:37|100|2400|7|4|4|1|396",
+    "38:38|100|2400|9|4|4|1|402",
+    "39:39|100|2400|9|4|4|1|442",
+    "40:40|100|2400|10|4|4|2|410",
+    "41:41|100|2390|11|4|4|2|384",
+    "42:42|100|2400|11|4|4|2|335",
+    "43:43|100|2400|11|4|4|2|339",
+    "44:44|100|2400|11|4|4|2|433",
+    "45:45|100|2400|11|4|4|2|453",
+    "46:46|100|2400|11|4|4|2|532",
+    "47:47|100|2400|11|4|4|2|614",
+    "48:48|100|2400|11|4|4|2|717",
+    "49:49|100|2400|11|4|4|2|822",
+    "50:50|100|2400|11|4|4|2|768",
+    "51:51|93|2400|11|4|4|2|769",
+    "52:52|100|2400|11|4|4|2|750",
+    "53:53|100|2400|11|4|4|2|858",
+    "54:54|100|2400|11|4|4|2|893",
+    "55:55|100|2390|11|4|4|2|888",
+    "56:56|100|2400|11|4|4|2|927",
+    "57:57|100|2300|11|4|4|2|913",
+    "58:58|95|2390|11|4|4|2|947",
+    "59:59|100|2400|11|4|4|2|908",
+    "60:60|100|2400|11|4|4|2|942",
+    "61:61|100|2249|11|4|4|2|1068",
+    "62:62|100|2400|11|4|4|2|1228",
+    "63:63|100|2400|11|4|4|2|1253",
+    "64:64|100|2400|11|4|4|2|1158",
+    "65:65|76|2400|11|4|4|3|1194",
+    "66:66|54|2231|11|4|4|3|1199",
+    "67:67|84|2400|11|4|4|3|1227",
+    "68:68|100|2400|11|4|4|3|1406",
+    "69:69|100|2400|11|4|4|3|1320",
+    "70:70|100|2400|11|4|4|3|1282",
+    "71:71|100|2400|11|4|4|3|1256",
+    "72:72|100|2400|11|4|4|3|1217",
+    "73:73|100|2400|11|4|4|3|1322",
+    "74:74|89|2390|11|4|4|3|1318",
+    "75:75|100|2400|11|4|4|3|1398",
+    "76:76|100|2400|11|4|4|3|1318",
+    "77:77|100|2390|11|4|4|3|1366",
+    "78:78|100|2400|11|4|4|3|1329",
+    "79:79|100|2400|11|4|4|3|1362",
+    "80:80|100|2400|11|4|4|3|1378",
+    "81:81|100|2400|11|4|4|3|1299",
+    "82:82|100|2400|11|4|4|3|1330",
+    "83:83|100|2400|11|4|4|3|1332",
+    "84:84|100|2400|11|4|4|3|1374",
+    "85:85|100|2400|11|4|4|3|1443",
+    "86:86|100|2400|11|4|4|3|1421",
+    "87:87|100|2390|11|4|4|3|1389",
+    "88:88|100|2400|11|4|4|3|1366",
+    "89:89|100|2200|11|4|4|3|1374",
+    "90:90|100|2400|11|4|4|3|1349",
+    "91:91|100|2400|11|4|4|3|1334",
+    "92:92|100|2400|11|4|4|3|1423",
+    "93:93|100|2400|11|4|4|3|1290",
+    "94:94|100|2390|11|4|4|3|1332",
+    "95:95|100|2400|11|4|4|3|1384",
+    "96:96|100|2400|11|4|4|3|1376",
+    "97:97|100|2390|11|4|4|3|1261",
+    "98:98|100|2400|11|4|4|3|1307",
+    "99:99|100|2400|11|4|4|3|1325",
+    "100:100|100|2236|11|4|4|3|1191",
+    "101:101|100|2400|11|4|4|3|1268",
+    "102:102|100|2400|10|4|4|3|1278",
+    "103:103|100|2400|10|4|4|3|1160",
+    "104:104|100|2400|10|4|4|3|1119",
+    "105:105|100|2292|7|4|4|3|1114",
+    "106:106|100|2390|7|4|4|3|617",
+    "107:107|100|2400|8|4|4|3|632",
+    "108:108|100|2400|8|4|4|3|737",
+    "109:109|100|2400|8|4|4|3|693",
+    "110:110|31|2400|9|4|4|3|819",
+    "111:111|61|2400|9|4|4|3|975",
+    "112:112|91|2390|9|4|4|3|1027",
+    "113:113|100|2400|9|4|4|3|915",
+    "114:114|60|2400|9|4|4|3|935",
+    "115:115|60|2390|9|4|4|3|806",
+    "116:116|90|2400|9|4|4|3|694",
+    "117:117|100|2400|9|4|4|3|735",
+    "118:118|100|2390|9|4|4|3|823",
+    "119:119|100|2400|9|4|4|3|850",
+    "120:120|100|2400|9|4|4|3|793",
+    "121:121|100|2390|9|4|4|3|866",
+    "122:122|96|2400|9|4|4|3|844",
+    "123:123|100|2400|9|4|4|3|819",
+    "124:124|100|2400|9|4|4|3|932",
+    "125:125|100|2400|9|4|4|3|923",
+    "126:126|100|2400|9|4|4|3|893",
+    "127:127|100|2400|9|4|4|3|841",
+    "128:128|100|2400|9|4|4|3|864",
+    "129:129|100|2400|9|4|4|3|729",
+    "130:130|100|2400|9|4|4|3|870",
+    "131:131|95|2200|9|4|4|3|971",
+    "132:132|100|2400|9|4|4|3|957",
+    "133:133|100|2400|9|4|4|3|1000",
+    "134:134|100|2400|9|4|4|3|869",
+    "135:135|93|2400|8|4|4|3|769",
+    "136:136|93|2400|8|4|4|3|613",
+    "137:137|88|2400|8|4|4|3|579",
+    "138:138|100|2400|8|4|4|3|573",
+    "139:139|100|2400|8|4|4|3|547",
+    "140:140|100|2400|8|4|4|3|542",
+    "141:141|100|2400|8|4|4|3|571",
+    "142:142|100|2250|8|4|4|3|674",
+    "143:143|100|2400|8|4|4|3|736",
+    "144:144|53|2400|8|4|4|3|814",
+    "145:145|83|2400|8|4|4|3|837",
+    "146:146|100|2400|8|4|4|3|762",
+    "147:147|100|2400|8|4|4|3|730",
+    "148:148|100|2400|8|4|4|3|656",
+    "149:149|100|2400|8|4|4|3|735",
+    "150:150|100|2400|8|4|4|3|794",
+    "151:151|100|2400|8|4|4|3|900",
+    "152:152|100|2400|8|4|4|3|951",
+    "153:153|100|2400|8|4|4|3|990",
+    "154:154|100|2400|8|4|4|3|906",
+    "155:155|100|2400|8|4|4|3|672",
+    "156:156|63|2400|7|4|4|4|648",
+    "157:157|57|2233|7|4|4|4|737",
+    "158:158|87|2400|7|4|4|4|755",
+    "159:159|26|2400|7|4|4|4|866",
+    "160:160|39|2400|8|4|4|4|878",
+    "161:161|57|2400|9|4|4|4|814",
+    "162:162|87|2400|10|4|4|4|734",
+    "163:163|100|2400|10|4|4|4|871",
+    "164:164|100|2400|10|4|4|4|848",
+    "165:165|87|2400|10|4|4|4|849",
+    "166:166|100|2400|10|4|4|4|932",
+    "167:167|100|2400|10|4|4|4|926",
+    "168:168|83|2400|9|4|4|4|864",
+    "169:169|100|2400|9|4|4|4|845",
+    "170:170|100|2254|9|4|4|4|885",
+    "171:171|100|2400|9|4|4|4|833",
+    "172:172|83|2150|9|4|4|4|925",
+    "173:173|100|2400|9|4|4|4|878",
+    "174:174|100|2390|9|4|4|4|821",
+    "175:175|100|2400|8|4|4|4|885",
+    "176:176|100|2240|8|4|4|4|751",
+    "177:177|100|2400|8|4|4|4|665",
+    "178:178|95|2400|8|4|4|4|638",
+    "179:179|100|2400|8|4|4|4|593",
+    "180:180|100|2400|8|4|4|4|545",
+    "181:181|100|2400|8|4|4|4|511"
+   ],
+   "maxWaveUnlocked": 4,
+   "wave4Unlocked": true,
+   "wave5Unlocked": false,
+   "maxRank": "national",
+   "reachedNational": true,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  },
+  {
+   "seed": 88,
+   "policy": "belongseek",
+   "armed": true,
+   "days": 78,
+   "gameDays": 79,
+   "endReason": "village-lost",
+   "dailyCalls": 78,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|90|2300|12|4|4|1|326",
+    "4:4|100|1566|12|4|4|1|276",
+    "5:5|100|1307|12|4|4|1|248",
+    "6:6|100|1071|12|4|4|1|254",
+    "7:7|100|1284|12|4|4|1|244",
+    "8:8|100|1263|12|4|4|1|245",
+    "9:9|100|1156|12|4|4|1|258",
+    "10:10|92|1000|11|4|4|1|243",
+    "11:11|100|1205|11|4|4|1|299",
+    "12:12|100|1605|11|4|4|1|308",
+    "13:13|100|1350|11|4|4|1|342",
+    "14:14|100|1202|11|4|4|1|394",
+    "15:15|100|2099|11|4|4|1|406",
+    "16:16|100|1865|11|4|4|1|400",
+    "17:17|100|1850|11|4|4|1|402",
+    "18:18|100|2390|10|4|4|1|490",
+    "19:19|100|2400|10|4|4|1|483",
+    "20:20|100|2400|10|4|4|1|436",
+    "21:21|100|2400|10|4|4|1|340",
+    "22:22|100|2400|10|4|4|1|281",
+    "23:23|100|2400|10|4|4|1|311",
+    "24:24|100|2400|10|4|4|1|276",
+    "25:25|100|2400|10|4|4|2|246",
+    "26:26|100|2400|10|4|4|2|234",
+    "27:27|100|2400|10|4|4|2|243",
+    "28:28|100|2400|10|4|4|2|221",
+    "29:29|100|2400|10|4|4|2|167",
+    "30:30|100|2400|10|4|4|2|164",
+    "31:31|100|2400|10|4|4|2|164",
+    "32:32|100|2400|10|4|4|2|174",
+    "33:33|100|2400|10|4|4|2|175",
+    "34:34|100|2400|10|4|4|2|159",
+    "35:35|100|2400|10|4|4|2|175",
+    "36:36|100|2400|10|4|4|2|137",
+    "37:37|100|2400|10|4|4|2|172",
+    "38:38|100|2400|10|4|4|2|175",
+    "39:39|100|2400|10|4|4|2|170",
+    "40:40|100|2400|10|4|4|2|145",
+    "41:41|100|2400|9|4|4|2|146",
+    "42:42|100|2400|9|4|4|2|133",
+    "43:43|100|2400|9|4|4|2|87",
+    "44:44|100|2400|9|4|4|2|132",
+    "45:45|100|2400|9|4|4|2|124",
+    "46:46|100|2400|9|4|4|2|139",
+    "47:47|100|2400|9|4|4|2|169",
+    "48:48|100|2400|9|4|4|2|176",
+    "49:49|100|2400|9|4|4|2|195",
+    "50:50|100|2400|9|4|4|2|151",
+    "51:51|100|2400|9|4|4|2|211",
+    "52:52|100|2400|9|4|4|2|215",
+    "53:53|100|2400|9|4|4|2|207",
+    "54:54|100|2400|8|4|4|2|229",
+    "55:55|100|2400|8|4|4|2|239",
+    "56:56|100|2400|8|4|4|2|239",
+    "57:57|96|2400|8|4|4|2|149",
+    "58:58|100|2400|8|4|4|2|136",
+    "59:59|100|2400|8|4|4|2|57",
+    "60:60|100|2400|7|4|4|2|44",
+    "61:61|100|2400|7|4|4|2|32",
+    "62:62|100|2400|7|4|4|2|9",
+    "63:63|100|2400|8|4|4|2|20",
+    "64:64|100|2400|8|4|4|2|25",
+    "65:65|100|2400|9|4|4|2|30",
+    "66:66|100|2400|9|4|4|2|18",
+    "67:67|100|2400|8|4|4|2|4",
+    "68:68|100|2400|8|4|4|2|48",
+    "69:69|100|2400|8|4|4|2|38",
+    "70:70|100|2400|7|4|4|2|37",
+    "71:71|100|2400|7|4|4|2|17",
+    "72:72|100|2400|7|4|4|2|8",
+    "73:73|100|2400|7|4|4|2|38",
+    "74:74|100|2400|7|4|4|2|9",
+    "75:75|100|2400|6|4|4|2|20",
+    "76:76|100|2400|7|4|4|2|12",
+    "77:77|100|2400|8|4|4|2|0",
+    "78:78|100|2187|8|4|4|2|6",
+    "79:79|100|2400|8|4|4|2|0"
+   ],
+   "maxWaveUnlocked": 2,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": {
+    "nDeaths": 21,
+    "nEarlyNonScholar": 8,
+    "nEarlyThirst": 0,
+    "causeSplitEarly": {
+     "villager combat": 4,
+     "ambush": 1,
+     "monster": 1,
+     "combat": 1,
+     "sickness": 1
+    },
+    "causeSplitAll": {
+     "villager combat": 7,
+     "ambush": 1,
+     "monster": 1,
+     "combat": 6,
+     "sickness": 5,
+     "starvation": 1
+    },
+    "attributed": [],
+    "coverage": null,
+    "errors": [],
+    "sayBeats": [
+     {
+      "day": 1,
+      "text": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 19L left."
+     },
+     {
+      "day": 1,
+      "text": "🛡️ Dawn at Haven. By the fire hangs an old bark cuirass, split at the seam — somebody's grandfather wore this into the treeline and came back. The shape of it is clear: bark plates laced overlapping like shingles, vine cord. Your hands don't know it yet. Your eyes do."
+     },
+     {
+      "day": 1,
+      "text": "Village meal: +1323 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A woman, maybe 60s, with grey-streaked hair heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "🌿 A person, maybe 30s, with a limp checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 30s, with a limp returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 30s, with a missing fingertip heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A man, maybe 40s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "A person, maybe 30s, with a buzz cut heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "Jude heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 2,
+      "text": "💧 A person, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A woman, maybe 60s, with grey-streaked hair returns with water: +2 clean."
+     },
+     {
+      "day": 2,
+      "text": "💧 A man, maybe 30s, with a missing fingertip returns with water: +4 clean."
+     },
+     {
+      "day": 2,
+      "text": "⚠ DEHYDRATED: find and treat water today."
+     },
+     {
+      "day": 2,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "📋 A person, maybe 30s, with a limp — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 30s, with a limp returns with 7L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 Jude returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "A person, maybe 60s heads out for water. \"The well won't fill itself.\""
+     },
+     {
+      "day": 3,
+      "text": "💧 A man, maybe 40s returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 3,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 3,
+      "text": "📋 A person, maybe 30s, with a limp — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 30s, with a limp returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 30s, with a buzz cut returns with water: +3 clean."
+     },
+     {
+      "day": 3,
+      "text": "🌿 A person, maybe 30s, with a limp checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 30s, with a limp returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 3,
+      "text": "💧 A person, maybe 60s returns with water: +2 clean."
+     },
+     {
+      "day": 3,
+      "text": "Village meal: +1280 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 3,
+      "text": "\"The sick need tending — triage tents, broth, boiled water. Or we tighten our belts and wait it out. Or the hale hunt while the sick lie still.\""
+     },
+     {
+      "day": 4,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 4,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 4,
+      "text": "📋 A person, maybe 30s, with a limp — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 4,
+      "text": "💧 A person, maybe 30s, with a limp returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+     },
+     {
+      "day": 4,
+      "text": "🌿 Jude checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 4,
+      "text": "💧 Jude returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 4,
+      "text": "A person, maybe 60s doesn't bother arguing anymore. By dusk the Fetch water crews are taking orders from them, and nobody quite remembers when it changed."
+     },
+     {
+      "day": 4,
+      "text": "Village meal: +1200 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 5,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 5,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "💧 A person, maybe 60s returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "⚔️ Rosa stood down the boulder with opinions about where you're walking and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+     },
+     {
+      "day": 5,
+      "text": "💧 Kentaro returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 5,
+      "text": "🌿 Jude checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+     },
+     {
+      "day": 5,
+      "text": "💧 Jude returns with 8L, but the cistern only holds 1L more."
+     },
+     {
+      "day": 5,
+      "text": "Village meal: +1014 kcal, +1L water from the communal pantry. (Half ration — they don't trust you yet.)"
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "💧 Kentaro returns with 8L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "No risky water to boil."
+     },
+     {
+      "day": 6,
+      "text": "Drank clean water."
+     },
+     {
+      "day": 6,
+      "text": "📋 Charlotte — 💧 Fetch water. They'll report back by next part."
+     },
+     {
+      "day": 6,
+      "text": "💧 Kentaro returns with 10L of creek water. Risky until the hearth boils it."
+     },
+     {
+      "day": 6,
+      "text": "💧 Charlotte returns with 8L, but the cistern only holds 5L more."
+     }
+    ]
+   }
+  },
+  {
+   "seed": 88,
+   "policy": "belongseek",
+   "armed": false,
+   "days": 78,
+   "gameDays": 79,
+   "endReason": "village-lost",
+   "dailyCalls": 78,
+   "hashes": [
+    "1:1|100|2190|12|4|4|1|473",
+    "3:3|90|2300|12|4|4|1|326",
+    "4:4|100|1566|12|4|4|1|276",
+    "5:5|100|1307|12|4|4|1|248",
+    "6:6|100|1071|12|4|4|1|254",
+    "7:7|100|1284|12|4|4|1|244",
+    "8:8|100|1263|12|4|4|1|245",
+    "9:9|100|1156|12|4|4|1|258",
+    "10:10|92|1000|11|4|4|1|243",
+    "11:11|100|1205|11|4|4|1|299",
+    "12:12|100|1605|11|4|4|1|308",
+    "13:13|100|1350|11|4|4|1|342",
+    "14:14|100|1202|11|4|4|1|394",
+    "15:15|100|2099|11|4|4|1|406",
+    "16:16|100|1865|11|4|4|1|400",
+    "17:17|100|1850|11|4|4|1|402",
+    "18:18|100|2390|10|4|4|1|490",
+    "19:19|100|2400|10|4|4|1|483",
+    "20:20|100|2400|10|4|4|1|436",
+    "21:21|100|2400|10|4|4|1|340",
+    "22:22|100|2400|10|4|4|1|281",
+    "23:23|100|2400|10|4|4|1|311",
+    "24:24|100|2400|10|4|4|1|276",
+    "25:25|100|2400|10|4|4|2|246",
+    "26:26|100|2400|10|4|4|2|234",
+    "27:27|100|2400|10|4|4|2|243",
+    "28:28|100|2400|10|4|4|2|221",
+    "29:29|100|2400|10|4|4|2|167",
+    "30:30|100|2400|10|4|4|2|164",
+    "31:31|100|2400|10|4|4|2|164",
+    "32:32|100|2400|10|4|4|2|174",
+    "33:33|100|2400|10|4|4|2|175",
+    "34:34|100|2400|10|4|4|2|159",
+    "35:35|100|2400|10|4|4|2|175",
+    "36:36|100|2400|10|4|4|2|137",
+    "37:37|100|2400|10|4|4|2|172",
+    "38:38|100|2400|10|4|4|2|175",
+    "39:39|100|2400|10|4|4|2|170",
+    "40:40|100|2400|10|4|4|2|145",
+    "41:41|100|2400|9|4|4|2|146",
+    "42:42|100|2400|9|4|4|2|133",
+    "43:43|100|2400|9|4|4|2|87",
+    "44:44|100|2400|9|4|4|2|132",
+    "45:45|100|2400|9|4|4|2|124",
+    "46:46|100|2400|9|4|4|2|139",
+    "47:47|100|2400|9|4|4|2|169",
+    "48:48|100|2400|9|4|4|2|176",
+    "49:49|100|2400|9|4|4|2|195",
+    "50:50|100|2400|9|4|4|2|151",
+    "51:51|100|2400|9|4|4|2|211",
+    "52:52|100|2400|9|4|4|2|215",
+    "53:53|100|2400|9|4|4|2|207",
+    "54:54|100|2400|8|4|4|2|229",
+    "55:55|100|2400|8|4|4|2|239",
+    "56:56|100|2400|8|4|4|2|239",
+    "57:57|96|2400|8|4|4|2|149",
+    "58:58|100|2400|8|4|4|2|136",
+    "59:59|100|2400|8|4|4|2|57",
+    "60:60|100|2400|7|4|4|2|44",
+    "61:61|100|2400|7|4|4|2|32",
+    "62:62|100|2400|7|4|4|2|9",
+    "63:63|100|2400|8|4|4|2|20",
+    "64:64|100|2400|8|4|4|2|25",
+    "65:65|100|2400|9|4|4|2|30",
+    "66:66|100|2400|9|4|4|2|18",
+    "67:67|100|2400|8|4|4|2|4",
+    "68:68|100|2400|8|4|4|2|48",
+    "69:69|100|2400|8|4|4|2|38",
+    "70:70|100|2400|7|4|4|2|37",
+    "71:71|100|2400|7|4|4|2|17",
+    "72:72|100|2400|7|4|4|2|8",
+    "73:73|100|2400|7|4|4|2|38",
+    "74:74|100|2400|7|4|4|2|9",
+    "75:75|100|2400|6|4|4|2|20",
+    "76:76|100|2400|7|4|4|2|12",
+    "77:77|100|2400|8|4|4|2|0",
+    "78:78|100|2187|8|4|4|2|6",
+    "79:79|100|2400|8|4|4|2|0"
+   ],
+   "maxWaveUnlocked": 2,
+   "wave4Unlocked": false,
+   "wave5Unlocked": false,
+   "maxRank": "regional",
+   "reachedNational": false,
+   "tableDays": 0,
+   "won": false,
+   "winDay": null,
+   "thirst": null
+  }
+ ]
+}
