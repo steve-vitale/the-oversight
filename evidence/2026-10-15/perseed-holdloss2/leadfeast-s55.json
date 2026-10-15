@@ -1,0 +1,1341 @@
+{
+ "seed": 55,
+ "policy": "leadfeast",
+ "loss": {
+  "reached": true,
+  "firstDay": 77,
+  "lastNatDay": 132,
+  "holdDays": 56,
+  "won": false,
+  "endState": "lost",
+  "lossDay": 131,
+  "lossMode": "succession-chain",
+  "lossEvidence": [
+   "4 succession beats within 14d of loss day 131 (0 grace-mediated): d126 \"🕯️ Ruby is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d129 \"🕯️ Xavier is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d132 \"🕯️ Elif is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d132 \"🕯️ Ines is dead — and the dead hold no treaties. Every link Haven has shakes.\"",
+   "9 person deaths in the loss window (fam tally {\"monster\":5,\"combat\":4})"
+  ],
+  "windowDeaths": [
+   {
+    "day": 111,
+    "name": "Luis",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 113,
+    "name": "Vasyl",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 116,
+    "name": "Megan",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 119,
+    "name": "Yuki",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 126,
+    "name": "Ruby Callaghan",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 127,
+    "name": "Dmitri",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 129,
+    "name": "Xavier Dubois",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 132,
+    "name": "Elif Demir",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 132,
+    "name": "Ines Diallo",
+    "cause": "combat",
+    "family": "combat"
+   }
+  ],
+  "famCounts": {
+   "monster": 5,
+   "combat": 4
+  },
+  "subCauses": {
+   "monster": 5,
+   "combat": 4
+  },
+  "graceBeats": 0,
+  "waveUnlockDays": {
+   "4": 66,
+   "5": 76
+  }
+ },
+ "narrative": {
+  "text": "national hold: first day 77, last national day 132, 56 hold-days; loss day 131, loss mode succession-chain.\nroster: 7 -> 0 villagers; pantry 192.0d -> 13.0d (window min 13.0d); ate-share min 0%.\nrank path (every 4d): gggggg\n11 deaths in the last 20d:\n  d111 Luis (villager) — monster [monster]\n  d113 Vasyl (villager) — monster [monster]\n  d116 Megan (villager) — monster [monster]\n  d116 The Commercial Break (monster) — villager combat [combat]\n  d119 Yuki (villager) — monster [monster]\n  d120 The Anaconda Empress (monster) — combat [combat]\n  d126 Ruby Callaghan (villager) — combat [combat]\n  d127 Dmitri (villager) — monster [monster]\n  d129 Xavier Dubois (villager) — combat [combat]\n  d132 Elif Demir (villager) — combat [combat]\n  d132 Ines Diallo (villager) — combat [combat]\n44 signal beats in the last 20d (showing first 12):\n  d111 ◈ OVERTIME ×3 — wave 4–5 monsters return as RERUNS (+75% HP, +36% damage, +1 to every pack). Raids come sooner. The table docks your standin\n  d111 📖 The Codex turns a page on its own. Luis is dead. You didn't ask. It knew.\n  d111 🌙 Raid — The Bloodied came in the night from the southeast. They carried off ~1627 kcal from the pantry. Nobody's dead, but the message is \n  d112 📡 The world feed: The Bloodied — a new speaker rising. The chat has opinions.\n  d113 📖 The Codex turns a page on its own. Vasyl is dead. You didn't ask. It knew.\n  d116 📖 The Codex turns a page on its own. Megan is dead. You didn't ask. It knew.\n  d116 📺 WAVE LEDGER — wave 5's bar is full (2/2 — kills only, not near-misses). That's the whole ledger — the village has bloodied the Producers \n  d116 📖 The Codex turns a page on its own. The Commercial Break is dead. You didn't ask. It knew.\n  d118 ◈ OVERTIME ×4 — wave 4–5 monsters return as RERUNS (+100% HP, +48% damage, +2 to every pack). Raids come sooner. The table docks your standi\n  d118 🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1151 kcal from the pantry. Nobody's dead, but the message is cle\n  d118 🌙 Watchers at the southeast treeline see torchlight moving in The Bloodied II's camp — and it going dark. Whatever was coming, the doubled \n  d119 📡 The world feed: The Bloodied II — a harvest festival. The chat has opinions.",
+  "rows": {
+   "food": [
+    {
+     "day": 111,
+     "need": 14953,
+     "pop": 7,
+     "pantryKcal": 59766,
+     "pantryDays": 192,
+     "ateShare": 90.9,
+     "preservedKcal": 28154
+    },
+    {
+     "day": 112,
+     "need": 12653,
+     "pop": 6,
+     "pantryKcal": 53289,
+     "pantryDays": 171,
+     "ateShare": 91.7,
+     "preservedKcal": 27164
+    },
+    {
+     "day": 113,
+     "need": 10453,
+     "pop": 5,
+     "pantryKcal": 65042,
+     "pantryDays": 209,
+     "ateShare": 108.1,
+     "preservedKcal": 30639
+    },
+    {
+     "day": 114,
+     "need": 10453,
+     "pop": 5,
+     "pantryKcal": 69356,
+     "pantryDays": 219,
+     "ateShare": 93.4,
+     "preservedKcal": 30639
+    },
+    {
+     "day": 115,
+     "need": 10453,
+     "pop": 5,
+     "pantryKcal": 70108,
+     "pantryDays": 236,
+     "ateShare": 97.6,
+     "preservedKcal": 27439
+    },
+    {
+     "day": 116,
+     "need": 10453,
+     "pop": 5,
+     "pantryKcal": 77612,
+     "pantryDays": 257,
+     "ateShare": 94,
+     "preservedKcal": 28261
+    },
+    {
+     "day": 117,
+     "need": 8252,
+     "pop": 4,
+     "pantryKcal": 73722,
+     "pantryDays": 259,
+     "ateShare": 89.6,
+     "preservedKcal": 28846
+    },
+    {
+     "day": 118,
+     "need": 8252,
+     "pop": 4,
+     "pantryKcal": 78246,
+     "pantryDays": 248,
+     "ateShare": 92.9,
+     "preservedKcal": 28846
+    },
+    {
+     "day": 119,
+     "need": 8252,
+     "pop": 4,
+     "pantryKcal": 74792,
+     "pantryDays": 253,
+     "ateShare": 93.1,
+     "preservedKcal": 23594
+    },
+    {
+     "day": 120,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 78287,
+     "pantryDays": 239,
+     "ateShare": 89.3,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 121,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 68154,
+     "pantryDays": 191,
+     "ateShare": 85.2,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 122,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 71039,
+     "pantryDays": 184,
+     "ateShare": 88.2,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 123,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 70848,
+     "pantryDays": 182,
+     "ateShare": 88.4,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 124,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 69757,
+     "pantryDays": 179,
+     "ateShare": 92.2,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 125,
+     "need": 6055,
+     "pop": 3,
+     "pantryKcal": 66864,
+     "pantryDays": 171,
+     "ateShare": 86.9,
+     "preservedKcal": 27554
+    },
+    {
+     "day": 126,
+     "need": 4155,
+     "pop": 2,
+     "pantryKcal": 56856,
+     "pantryDays": 150,
+     "ateShare": 127.9,
+     "preservedKcal": 26564
+    },
+    {
+     "day": 127,
+     "need": 6228,
+     "pop": 3,
+     "pantryKcal": 61846,
+     "pantryDays": 93,
+     "ateShare": 89.9,
+     "preservedKcal": 26564
+    },
+    {
+     "day": 128,
+     "need": 4173,
+     "pop": 2,
+     "pantryKcal": 56917,
+     "pantryDays": 60,
+     "ateShare": 89.7,
+     "preservedKcal": 26564
+    },
+    {
+     "day": 129,
+     "need": 2073,
+     "pop": 1,
+     "pantryKcal": 48131,
+     "pantryDays": 39,
+     "ateShare": 183.9,
+     "preservedKcal": 23517
+    },
+    {
+     "day": 130,
+     "need": 2073,
+     "pop": 1,
+     "pantryKcal": 46443,
+     "pantryDays": 30,
+     "ateShare": 89.5,
+     "preservedKcal": 22456
+    },
+    {
+     "day": 131,
+     "need": 2073,
+     "pop": 1,
+     "pantryKcal": 44167,
+     "pantryDays": 24,
+     "ateShare": 89.5,
+     "preservedKcal": 20749
+    },
+    {
+     "day": 132,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 30526,
+     "pantryDays": 13,
+     "ateShare": null,
+     "preservedKcal": 7108
+    }
+   ],
+   "scale": [
+    {
+     "day": 111,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 88,
+       "age": 86,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 85,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 84,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 112,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 87,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 86,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 85,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 113,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 88,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 87,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 86,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 114,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 89,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 88,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 87,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 115,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 90,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 89,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 99,
+       "age": 88,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 116,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 91,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 90,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 99,
+       "age": 89,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 117,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 92,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 91,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 99,
+       "age": 90,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 118,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 93,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 92,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 99,
+       "age": 91,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 119,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 94,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 93,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 92,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 120,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 95,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 94,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 93,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 121,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 96,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 95,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 94,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 122,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 97,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 96,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 95,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 123,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 98,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 97,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 96,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 124,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 99,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 98,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 97,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 125,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 95,
+       "age": 100,
+       "arrears": 4640,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 99,
+       "arrears": 4000,
+       "perWeek": 2250
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 100,
+       "age": 98,
+       "arrears": 0,
+       "perWeek": 2250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 126,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 101,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 100,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 99,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 127,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 102,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 101,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 100,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 128,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 103,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 102,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 101,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 129,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 104,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 103,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 102,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 130,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 105,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 104,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 103,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 131,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 106,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 105,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 104,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 132,
+     "rank": "global",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 107,
+       "arrears": 4640,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 87,
+       "age": 106,
+       "arrears": 4000,
+       "perWeek": 1688
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 105,
+       "arrears": 0,
+       "perWeek": 1688
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_36_35272",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "deaths": [
+    {
+     "day": 111,
+     "kind": "villager",
+     "vid": "luis_fernandez",
+     "name": "Luis",
+     "cause": "monster"
+    },
+    {
+     "day": 113,
+     "kind": "villager",
+     "vid": "vasyl_shevchenko",
+     "name": "Vasyl",
+     "cause": "monster"
+    },
+    {
+     "day": 116,
+     "kind": "villager",
+     "vid": "gen_eumh6sb",
+     "name": "Megan",
+     "cause": "monster"
+    },
+    {
+     "day": 116,
+     "kind": "monster",
+     "vid": "finale_crew",
+     "name": "The Commercial Break",
+     "cause": "villager combat"
+    },
+    {
+     "day": 119,
+     "kind": "villager",
+     "vid": "visjoin_102",
+     "name": "Yuki",
+     "cause": "monster"
+    },
+    {
+     "day": 120,
+     "kind": "monster",
+     "vid": "anaconda_empress",
+     "name": "The Anaconda Empress",
+     "cause": "combat"
+    },
+    {
+     "day": 126,
+     "kind": "villager",
+     "vid": "ruby_callaghan",
+     "name": "Ruby Callaghan",
+     "cause": "combat"
+    },
+    {
+     "day": 127,
+     "kind": "villager",
+     "vid": "visjoin_101",
+     "name": "Dmitri",
+     "cause": "monster"
+    },
+    {
+     "day": 129,
+     "kind": "villager",
+     "vid": "xavier_dubois",
+     "name": "Xavier Dubois",
+     "cause": "combat"
+    },
+    {
+     "day": 132,
+     "kind": "villager",
+     "vid": "elif_demir",
+     "name": "Elif Demir",
+     "cause": "combat"
+    },
+    {
+     "day": 132,
+     "kind": "villager",
+     "vid": "visjoin_125",
+     "name": "Ines Diallo",
+     "cause": "combat"
+    }
+   ],
+   "beats": [
+    {
+     "day": 111,
+     "text": "◈ OVERTIME ×3 — wave 4–5 monsters return as RERUNS (+75% HP, +36% damage, +1 to every pack). Raids come sooner. The table docks your standing −21. Take your seat from Haven to stop the clock."
+    },
+    {
+     "day": 111,
+     "text": "📖 The Codex turns a page on its own. Luis is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 111,
+     "text": "🌙 Raid — The Bloodied came in the night from the southeast. They carried off ~1627 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+     "day": 112,
+     "text": "📡 The world feed: The Bloodied — a new speaker rising. The chat has opinions."
+    },
+    {
+     "day": 113,
+     "text": "📖 The Codex turns a page on its own. Vasyl is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 116,
+     "text": "📖 The Codex turns a page on its own. Megan is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 116,
+     "text": "📺 WAVE LEDGER — wave 5's bar is full (2/2 — kills only, not near-misses). That's the whole ledger — the village has bloodied the Producers themselves. No further casting directives. You're the show now."
+    },
+    {
+     "day": 116,
+     "text": "📖 The Codex turns a page on its own. The Commercial Break is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 118,
+     "text": "◈ OVERTIME ×4 — wave 4–5 monsters return as RERUNS (+100% HP, +48% damage, +2 to every pack). Raids come sooner. The table docks your standing −34. Take your seat from Haven to stop the clock."
+    },
+    {
+     "day": 118,
+     "text": "🌙 Raid — Emberhold came in the night from the northwest. They carried off ~1151 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+     "day": 118,
+     "text": "🌙 Watchers at the southeast treeline see torchlight moving in The Bloodied II's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+    },
+    {
+     "day": 119,
+     "text": "📡 The world feed: The Bloodied II — a harvest festival. The chat has opinions."
+    },
+    {
+     "day": 119,
+     "text": "📖 The Codex turns a page on its own. Yuki is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 120,
+     "text": "A LOT of snake. Tough, rich, faintly fishy — and it feeds the whole village for days. The fat renders beautifully. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't le"
+    },
+    {
+     "day": 120,
+     "text": "Grave robber: its war horn is on the body. The dead don't need it — but you'll have to take it."
+    },
+    {
+     "day": 121,
+     "text": "🌙 Torches on the doubled watch all night — and The Bloodied knows what's waiting at the treeline. They know asking again this soon buys nothing either. The night stays quiet, and the watch explains why."
+    },
+    {
+     "day": 124,
+     "text": "🧳 Word from The Hungry Road: Jesse was killed — Wren did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+     "day": 124,
+     "text": "🌙 Watchers at the southeast treeline see torchlight moving in The Bloodied's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+    },
+    {
+     "day": 125,
+     "text": "◈ OVERTIME ×5 — wave 4–5 monsters return as RERUNS (+125% HP, +60% damage, +2 to every pack). Raids come sooner. The table docks your standing −40. Take your seat from Haven to stop the clock."
+    },
+    {
+     "day": 125,
+     "text": "🌙 Raid — Thornfield came in the night from the southwest. They carried off ~1074 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+     "day": 125,
+     "text": "🌙 Watchers at the southeast treeline see torchlight moving in The Bloodied II's camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why."
+    },
+    {
+     "day": 126,
+     "text": "📖 The Codex turns a page on its own. Ruby Callaghan is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 126,
+     "text": "🕯️ Ruby is dead — and the dead hold no treaties. Every link Haven has shakes."
+    },
+    {
+     "day": 126,
+     "text": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+    },
+    {
+     "day": 126,
+     "text": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it."
+    }
+   ]
+  }
+ },
+ "famCounts": {
+  "monster": 5,
+  "combat": 4
+ },
+ "subCauses": {
+  "monster": 5,
+  "combat": 4
+ }
+}

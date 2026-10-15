@@ -25,7 +25,11 @@
 //   wounds            'a wound that wouldn't close', 'injuries'
 //   succession-chain  repeated succession shocks around the loss day
 //                     (the tworung 'succession-collapse' death +/-3d, or
-//                     >=3 succession beats within 14d of the loss day)
+//                     >=3 succession beats within 14d of the loss day).
+//                     r5: SUCCGRACE-era beats ("the bond is fraying", "grief
+//                     delays the verdict", "the silence answered") count as
+//                     succession-context; the count of grace-mediated beats
+//                     is reported in the evidence (graceBeats).
 //   wave-unlock       wave-4/5 unlock day within 10d of the loss day AND
 //                     combat/monster deaths plural in the loss window —
 //                     the unlock's escalation killed the village
@@ -166,7 +170,18 @@ function classifyDeathFamily(cause) {
 const NATL = { national: true, global: true };
 const DEATH_END = /village-dead|village-lost|pop-zero/;
 const PERSON_KIND = /player|scholar|villager|person/i;
-const SUCC_BEAT = /dead hold no treaties|realm came apart|succession/i;
+// r5 (sim-holdloss2 2026-10-15): SUCCGRACE stages an answerable
+// renegotiation beat for sub-bar links at the funeral — its text ("the
+// bond is fraying", "grief delays the verdict", "the silence answered") is
+// succession-context and counts toward the chain threshold. Without these
+// the instrument would go blind on grace-mediated chains (the old "dead
+// hold no treaties" line never fires for them). "silence answered" is the
+// renegotiation expiry ("Seven days of silence, and the silence answered
+// for Haven") — it appears ONLY in hierarchy.js's expiry path, no false
+// positives in the corpus. "grief delays the verdict" also fires on the
+// pre-existing young-link grace beat (succession-context, honest to count).
+const SUCC_BEAT = /dead hold no treaties|realm came apart|succession|bond is fraying|silence answered|grief delays the verdict/i;
+const GRACE_BEAT = /bond is fraying|silence answered|grief delays the verdict/i;
 const WAVE_BEAT = /wave (4|5)|fourth draft|fifth draft|mirror draft/i;
 
 function num(x, d) { const n = Number(x); return Number.isFinite(n) ? n : (d == null ? 0 : d); }
@@ -242,6 +257,10 @@ function nationalLoss(rec) {
   out.subCauses = subs;
 
   const succBeats = beats.filter(b => SUCC_BEAT.test(String(b.text || '')) && Math.abs(num(b.day, 0) - ld) <= 14);
+  // r5: grace-mediated shocks — how many of the chain's beats went through
+  // the SUCCGRACE renegotiation staging/expiry instead of the old
+  // "dead hold no treaties" line. Kept as evidence, not a threshold.
+  const graceBeats = succBeats.filter(b => GRACE_BEAT.test(String(b.text || '')));
   // 'dead hold no treaties' fires per leader death (sim-succpolity: 12
   // leader deaths -> 12 identical beats), so >=3 succession beats in the
   // loss window = a repeated succession shock chain.
@@ -271,8 +290,9 @@ function nationalLoss(rec) {
     // A2. succession-chain: repeated succession shocks around the loss.
     if (succChain) {
       out.lossMode = 'succession-chain';
+      out.graceBeats = graceBeats.length;
       out.lossEvidence = [
-        `${succBeats.length} succession beats within 14d of loss day ${ld}: ` +
+        `${succBeats.length} succession beats within 14d of loss day ${ld} (${graceBeats.length} grace-mediated): ` +
         succBeats.slice(0, 4).map(b => `d${b.day} "${String(b.text).slice(0, 80)}"`).join('; '),
         `${wd.length} person deaths in the loss window (fam tally ${JSON.stringify(fams)})`,
       ];

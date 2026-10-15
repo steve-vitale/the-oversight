@@ -1,0 +1,921 @@
+{
+ "seed": 55,
+ "policy": "belongfeast",
+ "loss": {
+  "reached": true,
+  "firstDay": 72,
+  "lastNatDay": 104,
+  "holdDays": 33,
+  "won": false,
+  "endState": "lost",
+  "lossDay": 103,
+  "lossMode": "succession-chain",
+  "lossEvidence": [
+   "4 succession beats within 14d of loss day 103 (0 grace-mediated): d89 \"🕯️ Vasyl is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d99 \"🕯️ Elif is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d103 \"🕯️ Xavier is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d105 \"🕯️ Mia is dead — and the dead hold no treaties. Every link Haven has shakes.\"",
+   "5 person deaths in the loss window (fam tally {\"combat\":3,\"monster\":2})"
+  ],
+  "windowDeaths": [
+   {
+    "day": 86,
+    "name": "Luis Fernandez",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 89,
+    "name": "Vasyl Shevchenko",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 96,
+    "name": "Raj",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 99,
+    "name": "Elif",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 103,
+    "name": "Xavier Dubois",
+    "cause": "combat",
+    "family": "combat"
+   }
+  ],
+  "famCounts": {
+   "combat": 3,
+   "monster": 2
+  },
+  "subCauses": {
+   "combat": 3,
+   "monster": 2
+  },
+  "graceBeats": 0,
+  "waveUnlockDays": {
+   "4": 89,
+   "5": null
+  }
+ },
+ "narrative": {
+  "text": "national hold: first day 72, last national day 104, 33 hold-days; loss day 103, loss mode succession-chain.\nroster: 5 -> 0 villagers; pantry 13.0d -> 0.0d (window min 0.0d); ate-share min 0%.\nrank path (every 4d): nnnnnn\nwave unlocks near the loss: wave-4 d89.\n11 deaths in the last 20d:\n  d83 The Big Beast (monster) — combat [combat]\n  d83 Ugly-Eyes (monster) — combat [combat]\n  d83 White Noise (monster) — combat [combat]\n  d86 Luis Fernandez (villager) — combat [combat]\n  d88 The Loud Beast (monster) — combat [combat]\n  d89 Vasyl Shevchenko (villager) — combat [combat]\n  d96 Elder Static (monster) — combat [combat]\n  d96 Raj (villager) — monster [monster]\n  d99 Elif (villager) — monster [monster]\n  d102 The Big Beast (monster) — combat [combat]\n  d103 Xavier Dubois (villager) — combat [combat]\n54 signal beats in the last 20d (showing first 12):\n  d83 Lizard the size of a dog. Tastes like chicken, if chicken sunbathed. It's dead. The carcass is there on the ground — search the body if you \n  d83 Good eating. The glow fades after death. Mostly. It's dead. The carcass is there on the ground — search the body if you want the meat. But y\n  d83 Fishy. Obviously. Everything about it is fishy. It's dead. The carcass is there on the ground — search the body if you want the meat. But yo\n  d83 Grave robber: its tooth necklace is on the body. The dead don't need it — but you'll have to take it.\n  d84 ◈ WORD TRAVELS — riders from The Red Table bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your han\n  d85 🧳 The trader lowers their voice. \"And further still — FOUR fires under one head. They call it a REALM. Tribute flows uphill like a river; I\n  d86 📖 The Codex turns a page on its own. Luis Fernandez is dead. You didn't ask. It knew.\n  d86 🕯️ Luis is dead — and the dead hold no treaties. Every link Haven has shakes.\n  d86 With Haven grieving, The Hungry Road II installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and t\n  d86 🕯️ Luis Fernandez is dead — combat. The village stops. Somebody screams. Somebody else starts digging.\n  d86 ⚠ STARVING: health and energy falling. The spiral has started.\n  d87 📡 The Mirror Draft is still waiting. Stand on the grid with the Final Draft — 2 of 3 kinds faced.",
+  "rows": {
+   "food": [
+    {
+     "day": 83,
+     "need": 10000,
+     "pop": 5,
+     "pantryKcal": 32759,
+     "pantryDays": 13,
+     "ateShare": 96.7,
+     "preservedKcal": 11196
+    },
+    {
+     "day": 84,
+     "need": 10000,
+     "pop": 5,
+     "pantryKcal": 25974,
+     "pantryDays": 10,
+     "ateShare": 92.4,
+     "preservedKcal": 4251
+    },
+    {
+     "day": 85,
+     "need": 10000,
+     "pop": 5,
+     "pantryKcal": 23297,
+     "pantryDays": 9,
+     "ateShare": 93.4,
+     "preservedKcal": 7407
+    },
+    {
+     "day": 86,
+     "need": 10000,
+     "pop": 5,
+     "pantryKcal": 17101,
+     "pantryDays": 6,
+     "ateShare": 93.8,
+     "preservedKcal": 8847
+    },
+    {
+     "day": 87,
+     "need": 7800,
+     "pop": 4,
+     "pantryKcal": 15591,
+     "pantryDays": 6,
+     "ateShare": 91.6,
+     "preservedKcal": 10837
+    },
+    {
+     "day": 88,
+     "need": 7800,
+     "pop": 4,
+     "pantryKcal": 14295,
+     "pantryDays": 5,
+     "ateShare": 94.2,
+     "preservedKcal": 9987
+    },
+    {
+     "day": 89,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 13203,
+     "pantryDays": 5,
+     "ateShare": 123.2,
+     "preservedKcal": 8206
+    },
+    {
+     "day": 90,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 19639,
+     "pantryDays": 8,
+     "ateShare": 91.1,
+     "preservedKcal": 8206
+    },
+    {
+     "day": 91,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 7603,
+     "pantryDays": 3,
+     "ateShare": 94.7,
+     "preservedKcal": 603
+    },
+    {
+     "day": 92,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 8130,
+     "pantryDays": 3,
+     "ateShare": 91.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 93,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 9170,
+     "pantryDays": 3,
+     "ateShare": 95.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 94,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 8742,
+     "pantryDays": 3,
+     "ateShare": 95.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 95,
+     "need": 5900,
+     "pop": 3,
+     "pantryKcal": 9286,
+     "pantryDays": 3,
+     "ateShare": 88.6,
+     "preservedKcal": 0
+    },
+    {
+     "day": 96,
+     "need": 4000,
+     "pop": 2,
+     "pantryKcal": 6206,
+     "pantryDays": 2,
+     "ateShare": 131.4,
+     "preservedKcal": 0
+    },
+    {
+     "day": 97,
+     "need": 4000,
+     "pop": 2,
+     "pantryKcal": 9023,
+     "pantryDays": 3,
+     "ateShare": 91.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 98,
+     "need": 4000,
+     "pop": 2,
+     "pantryKcal": 12591,
+     "pantryDays": 4,
+     "ateShare": 97.3,
+     "preservedKcal": 0
+    },
+    {
+     "day": 99,
+     "need": 1900,
+     "pop": 1,
+     "pantryKcal": 8603,
+     "pantryDays": 3,
+     "ateShare": 205.9,
+     "preservedKcal": 0
+    },
+    {
+     "day": 100,
+     "need": 1900,
+     "pop": 1,
+     "pantryKcal": 6850,
+     "pantryDays": 2,
+     "ateShare": 100,
+     "preservedKcal": 0
+    },
+    {
+     "day": 101,
+     "need": 1900,
+     "pop": 1,
+     "pantryKcal": 4600,
+     "pantryDays": 1,
+     "ateShare": 93.4,
+     "preservedKcal": 0
+    },
+    {
+     "day": 102,
+     "need": 1900,
+     "pop": 1,
+     "pantryKcal": 2300,
+     "pantryDays": 0,
+     "ateShare": 94.3,
+     "preservedKcal": 0
+    },
+    {
+     "day": 103,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 104,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": null,
+     "preservedKcal": 0
+    }
+   ],
+   "scale": [
+    {
+     "day": 83,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 28,
+       "arrears": 0,
+       "perWeek": 7500
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 84,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 77,
+       "age": 29,
+       "arrears": 0,
+       "perWeek": 7500
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 85,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 78,
+       "age": 30,
+       "arrears": 0,
+       "perWeek": 7500
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 86,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 82,
+       "age": 31,
+       "arrears": 0,
+       "perWeek": 7500
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 87,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 32,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 88,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 33,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 89,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 34,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 90,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 35,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 91,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 36,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 92,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 37,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 93,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 38,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 94,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 39,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 95,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 74,
+       "age": 40,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 96,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 78,
+       "age": 41,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 97,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 78,
+       "age": 42,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 98,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 78,
+       "age": 43,
+       "arrears": 0,
+       "perWeek": 11250
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 99,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 44,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 100,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 45,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 101,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 46,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 102,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 47,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 103,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 48,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 104,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_spl_31_63985",
+       "kind": "belong",
+       "primary": "village_spl_31_63985",
+       "trust": 71,
+       "age": 49,
+       "arrears": 0,
+       "perWeek": 16875
+      }
+     ],
+     "foreignMax": 8,
+     "foreignHead": "village_spl_31_63985",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "deaths": [
+    {
+     "day": 83,
+     "kind": "monster",
+     "vid": "sunbasker",
+     "name": "The Big Beast",
+     "cause": "combat"
+    },
+    {
+     "day": 83,
+     "kind": "monster",
+     "vid": "nightlight_catfish",
+     "name": "Ugly-Eyes",
+     "cause": "combat"
+    },
+    {
+     "day": 83,
+     "kind": "monster",
+     "vid": "white_noise_heron",
+     "name": "White Noise",
+     "cause": "combat"
+    },
+    {
+     "day": 86,
+     "kind": "villager",
+     "vid": "luis_fernandez",
+     "name": "Luis Fernandez",
+     "cause": "combat"
+    },
+    {
+     "day": 88,
+     "kind": "monster",
+     "vid": "hushwolf",
+     "name": "The Loud Beast",
+     "cause": "combat"
+    },
+    {
+     "day": 89,
+     "kind": "villager",
+     "vid": "vasyl_shevchenko",
+     "name": "Vasyl Shevchenko",
+     "cause": "combat"
+    },
+    {
+     "day": 96,
+     "kind": "monster",
+     "vid": "voice_mimic_radio",
+     "name": "Elder Static",
+     "cause": "combat"
+    },
+    {
+     "day": 96,
+     "kind": "villager",
+     "vid": "raj_patel",
+     "name": "Raj",
+     "cause": "monster"
+    },
+    {
+     "day": 99,
+     "kind": "villager",
+     "vid": "elif_demir",
+     "name": "Elif",
+     "cause": "monster"
+    },
+    {
+     "day": 102,
+     "kind": "monster",
+     "vid": "redactor",
+     "name": "The Big Beast",
+     "cause": "combat"
+    },
+    {
+     "day": 103,
+     "kind": "villager",
+     "vid": "xavier_dubois",
+     "name": "Xavier Dubois",
+     "cause": "combat"
+    }
+   ],
+   "beats": [
+    {
+     "day": 83,
+     "text": "Lizard the size of a dog. Tastes like chicken, if chicken sunbathed. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+     "day": 83,
+     "text": "Good eating. The glow fades after death. Mostly. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+     "day": 83,
+     "text": "Fishy. Obviously. Everything about it is fishy. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+     "day": 83,
+     "text": "Grave robber: its tooth necklace is on the body. The dead don't need it — but you'll have to take it."
+    },
+    {
+     "day": 84,
+     "text": "◈ WORD TRAVELS — riders from The Red Table bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands."
+    },
+    {
+     "day": 85,
+     "text": "🧳 The trader lowers their voice. \"And further still — FOUR fires under one head. They call it a REALM. Tribute flows uphill like a river; I saw the grain carts with my own eyes.\" They won't say more. Or can't."
+    },
+    {
+     "day": 86,
+     "text": "📖 The Codex turns a page on its own. Luis Fernandez is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 86,
+     "text": "🕯️ Luis is dead — and the dead hold no treaties. Every link Haven has shakes."
+    },
+    {
+     "day": 86,
+     "text": "With Haven grieving, The Hungry Road II installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+    },
+    {
+     "day": 86,
+     "text": "🕯️ Luis Fernandez is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+     "day": 86,
+     "text": "⚠ STARVING: health and energy falling. The spiral has started."
+    },
+    {
+     "day": 87,
+     "text": "📡 The Mirror Draft is still waiting. Stand on the grid with the Final Draft — 2 of 3 kinds faced."
+    },
+    {
+     "day": 87,
+     "text": "🌙 Night. Shouts from the treeline — Peter of The Bloodied with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kcal.)"
+    },
+    {
+     "day": 87,
+     "text": "⚠ STARVING: health and energy falling. The spiral has started."
+    },
+    {
+     "day": 88,
+     "text": "Edible but lean. The old taboo itches; hunger doesn't care. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+     "day": 88,
+     "text": "Grave robber: its bone knife is on the body. The dead don't need it — but you'll have to take it."
+    },
+    {
+     "day": 88,
+     "text": "🌙 You weren't at the treeline. Peter of The Bloodied didn't wait — they hit the stores and melted back into the dark with 858 kcal. The village will talk about this for a long time."
+    },
+    {
+     "day": 88,
+     "text": "⚠ STARVING: health and energy falling. The spiral has started."
+    },
+    {
+     "day": 89,
+     "text": "📡 RATINGS ARE UP... Wave 4 talent has been released. The Mirror Draft opens."
+    },
+    {
+     "day": 89,
+     "text": "📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 4 talent has been released into your sector."
+    },
+    {
+     "day": 89,
+     "text": "📺 \"We've been watching you for a LONG time. Your faiths. Your formats. Your little institutions. So we built something out of... well. Out of YOU. Say hello to the MIRROR DRAFT.\""
+    },
+    {
+     "day": 89,
+     "text": "📖 The Codex turns a page on its own. Vasyl Shevchenko is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 89,
+     "text": "🕯️ Vasyl is dead — and the dead hold no treaties. Every link Haven has shakes."
+    },
+    {
+     "day": 89,
+     "text": "🕯️ Vasyl Shevchenko is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+     "day": 89,
+     "text": "🧳 Word from Emberhold: Malik is dead, and Ibrahim and Talia both claim the fire. Emberhold is choosing — or fighting."
+    }
+   ]
+  }
+ },
+ "famCounts": {
+  "combat": 3,
+  "monster": 2
+ },
+ "subCauses": {
+  "combat": 3,
+  "monster": 2
+ }
+}
