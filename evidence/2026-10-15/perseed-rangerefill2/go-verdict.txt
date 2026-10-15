@@ -1,0 +1,45 @@
+=== RANGEREFILL re-test before/after (8 seeds x {leadcourt,belongseek}, 180d death-aware) ===
+runs: control 16, armed 16
+
+--- PRIMARY (honest bar, §14 metric review) ---
+(a) armed ranging-dehydration deaths: 0 (control: 3) -> HOLD
+(b) FILLABLE departures (cistern>0 at dawn): armed 9, pack-full 9 (100.0%) -> HOLD (need >=90%)
+    excluded non-fillable (cistern=0 at dawn): armed 4 — belongseek-s55 d14 pack=3; belongseek-s55 d18 pack=2; leadcourt-s55 d14 pack=3; leadcourt-s55 d18 pack=2
+    raw (unscoped, for the record): armed 13 dep, full=84.6% | control 9 dep, fillable 5
+(c) true-wild fill share: armed 41.0% (50/122) vs control 13.4% (9/67) -> HOLD
+(d) empty-pack+dry-cistern departures: armed 0 (control 0) -> HOLD
+
+--- GUARDRAILS ---
+(e) median survival: armed 156d vs control 147d -> HOLD (need >= 137d)
+(f) national: armed 10/16 vs control 5/16 -> HOLD (need >= 3/16)
+(g) new death modes (armed n>=3, control 0): none -> HOLD
+
+GO VERDICT: GO — report for the 12-16 seed confirm
+
+--- WALL NUMBERS ---
+[control] national 5/16 table 1/16 won 0/16 w4 4/16 w5 0/16 median 147d max 182d
+[armed] national 10/16 table 0/16 won 0/16 w4 7/16 w5 0/16 median 156d max 182d
+
+--- #292 VISIT ANALYSIS (wild water tiles on-route: filled vs unfilled) ---
+[control] visits=497 filled=9 unfilled=488 havenFills=608 wildFills=17 refused=undefined
+[armed] visits=767 filled=56 unfilled=711 havenFills=493 wildFills=92 refused=undefined
+[control] true-wild (dist>1) visits=67 filled=9
+[armed]   true-wild (dist>1) visits=122 filled=50
+[armed layer] gateTrips=2 gateHauls=2 gateHaulBottles=6 gateUnresolvable=0 filledDawn=26 filledEnroute=31 filledGatehaul=6
+
+--- DEATH CAUSES ---
+  monster:combat: control 38 | armed 60
+  monster:expedition: control 1 | armed 0
+  monster:villager combat: control 22 | armed 15
+  person:alien: control 0 | armed 1
+  person:combat: control 2 | armed 1
+  villager:Nevermore: control 2 | armed 1
+  villager:a wound that wouldn't close: control 14 | armed 9
+  villager:combat: control 32 | armed 25
+  villager:contest: control 7 | armed 9
+  villager:lockjaw: control 2 | armed 2
+  villager:monster: control 18 | armed 18
+  villager:sickness: control 10 | armed 10
+  villager:starvation: control 16 | armed 17
+
+instrument errors: control 0, armed 0
