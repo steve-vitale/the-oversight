@@ -78,7 +78,7 @@ const T = K.reporter('proof-godhood-rework-20261013');
 
   T.section('data: one god per path, derived from godpaths.json');
   const relay = G.byId('voice_of_the_relay');
-  T.ok('T13 the Relay is the Socialite\'s god; the office is its alternative deed', relay.path === 'socialite' && relay.requires.deedAlt === 'relay_office' && relay.requires.minDay === 80);
+  T.ok('T13 the Relay is the Socialite\'s god; the office is its required fitting deed', relay.path === 'socialite' && relay.requires.deed?.event === 'relay_office' && relay.requires.minDay === 80);
   const ghs = G.godhoods();
   T.ok('T14 ten reachable gods, one per path', ghs.length === 10 && new Set(ghs.map(g => g.path)).size === 10, ghs.map(g => g.id).join(','));
   const sIds = new Set(SYN.map(s => s.id));

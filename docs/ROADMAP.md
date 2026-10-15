@@ -323,10 +323,23 @@ post-production requests; legacy missing data remains unknown. Targeted
 of need self-supplied and only eight days where every NPC requests food.
 This does not settle Garden's seven-day threshold, continuous membership or
 the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
-- **Now:** Unkillable has the first authored outcome deed: really refuse a
+- **Current authored deeds:** Unkillable requires a real fatal refusal and
+  later dawn; the Voice of the Relay now requires the person's actual current
+  office. The class-age/synergy fallback cannot bypass those two. Eight other
+  gods retain legacy proxies. Actual player claim, villager appointment,
+  removal, dead-holder rejection and save/load have runtime proof; the known
+  class's actual phone sheet changes on the public claim. Matched 64 x four
+  wins: capable 45 -> 45, maker 20 -> 20, merchant 26 -> 26, caregiver 23 -> 25.
+  Maker deaths 62 -> 64; other outcomes and reduced Voice access are retained.
+  The caregiver win increase triggers nondirectional review, not an automatic
+  improvement claim. See `evidence/2026-10-15/relay-deed-audit.md`.
+  Urgent follow-up: a real seed-7 predecessor keeps the Relay post after death,
+  blocking a later Socialite. Fix office lifetime separately; do not auto-pass
+  the job with the mantle.
+- **Earlier Unkillable implementation:** Unkillable has the first authored outcome deed: really refuse a
   fatal blow through your own survival magic, then reach a later dawn alive.
   Per-person receipts and a known-class objective are wired and tested.
-  Nine gods still retain the legacy synergy/class-held-for-10-days proxies
+  At that earlier point, nine gods retained legacy synergy/class-held-for-10-days proxies
   (`godpaths.json` `rules.capstone.deedClassDays`).
   See `evidence/2026-10-15/survivalist-deed-audit.md`.
 - **Passive follow-up:** NPC Second Wind/Molt now activate through tactical,

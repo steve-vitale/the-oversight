@@ -205,12 +205,6 @@
       return ((day || 0) - (rec.since || 0)) >= n;
     } catch (e) { return false; }
   }
-  // The same earned office counts for its actual holder in either role.
-  // Read the shared game explicitly; a detached scholar cannot borrow it.
-  function relayOfficeDeed(game, vid, req) {
-    const sw = game && game.state && game.state.switchboard;
-    return !!(req.deedAlt === 'relay_office' && vid && sw && sw.holderId === vid);
-  }
   function godhoodCloseness(sch, gh, day) {
     if (gh.retired) return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: true, dayOk: false, classOk: false, complete: false, close: false, readyForCapstone: false };
     const abs = scholarAbilities(sch);
@@ -219,7 +213,6 @@
     const req = gh.requires || {};
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy && classDaysDeed(sch.godpath, req, day)) synergy = true;
-    if (!synergy) synergy = relayOfficeDeed(S.Game, sch.villagerId, req);
     if (req.deed) synergy = !!(sch.villagerId && S.Game && S.Game.godpathDeedStatus && S.Game.godpathDeedStatus(sch.villagerId, gh.id, day)?.complete);
     const dayOk = (day || 0) >= (req.minDay || 0);
     const cl = {
@@ -275,7 +268,6 @@
     const day = ((game.state || {}).scholar || {}).day || (game.state || {}).day || 0;
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy) { try { synergy = classDaysDeed((((game.state || {}).village || {}).npcGodpath || {})[vid], req, day); } catch (e) { synergy = false; } }
-    if (!synergy) synergy = relayOfficeDeed(game, vid, req);
     if (req.deed) synergy = !!(game.godpathDeedStatus && game.godpathDeedStatus(vid, gh.id, day)?.complete);
     const dayOk = day >= (req.minDay || 0);
     const cl = {

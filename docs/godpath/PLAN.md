@@ -16,7 +16,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored outcome for Unkillable; legacy proxies for nine remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable and the Relay; legacy proxies for eight remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks
@@ -28,7 +28,13 @@ Job -> track -> **class** -> **god** -> Table.
 
 ## What's left (reconciled 2026-10-15)
 
-1. **Fitting ascension deeds and current gate measurements.** The historical
+1. **Fitting ascension deeds and current gate measurements.** Current authored
+   gates: Unkillable's actual refusal/next dawn, and the Voice's current Relay
+   service. Class age cannot bypass either. Eight legacy replacements remain.
+   Relay runtime/phone proofs and matched 16/64-seed panels are in
+   `evidence/2026-10-15/relay-deed-audit.md`. The service replay exposed a
+   dead predecessor retaining the post and blocking later holders; repair
+   office lifetime next, without passing the post automatically with the mantle. The historical
    all-on 0/16 result predates the class-held-for-10-days bridge and wider
    offers. Current rules still use that placeholder; replace it with fitting
    deeds and measure the full gates with 64 matched seeds. See ROADMAP item 3.
@@ -36,8 +42,8 @@ Job -> track -> **class** -> **god** -> Table.
    deed are in `evidence/2026-10-15/deed-audit.md`. First authored outcome
    deed: Unkillable requires a real self-refusal of a fatal blow, then a
    later dawn alive. Canonical-person receipts survive save/load and
-   succession without inheriting the predecessor's work. Nine replacements
-   remain open; see `survivalist-deed-audit.md`. No Miser subclass appeared
+   succession without inheriting the predecessor's work. Eight replacements
+   remain open after the Relay office becomes its required deed; see `survivalist-deed-audit.md`. No Miser subclass appeared
    even in merchant runs.
    Living Garden is next: the initial harvest-to-meal diagnostic found no
    harvester identity on player plant stacks or NPC garden-duty food.

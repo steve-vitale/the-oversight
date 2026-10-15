@@ -1,0 +1,9 @@
+const fs = require('fs');
+let html = fs.readFileSync('index.html','utf8').replace('<head>','<head><base href="/">');
+html = html.replace('</body>', `<div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#17241d;color:white;padding:5px;font:12px sans-serif"><b>PREPARED RELAY DEED TEST</b><br><button id="prepare-relay">Prepare old Showrunner class</button><div id="relay-proof"></div></div><script>
+const relayG=Scattering.Game;
+function relayProof(){const s=relayG.state?.scholar;if(!s?.godpath)return;const d=relayG.godpathDeedStatus('player','voice_of_the_relay');const god=Scattering.Godhood.byId('voice_of_the_relay');document.getElementById('relay-proof').textContent='Class age '+(s.day-s.godpath.since)+' days | Office '+(relayG.state.switchboard?.holderId===relayG.villagerId?'yours':'none')+' | Deed '+(d?.complete?'fulfilled':'unfulfilled')+' | Full gate '+Scattering.Godhood.godhoodCloseness(s,god,s.day).complete;}
+document.getElementById('prepare-relay').onclick=()=>{const G=relayG;G.tbfight=null;G.over=false;G.genRoster('Columbus, Ohio');G.newGame('Columbus, Ohio',null,G.generatedRoster[0].id);G.depart();const s=G.state.scholar,v=G.state.village;G.state.systemArrived=true;G.state.systemAnimationShown=true;s.knackChoices=[];s.knackChosen=true;s.health=100;s.day=85;s.kcal=3000;s.mx=4;s.my=4;s.insideHaven=true;G.map.px=v.px??4;G.map.py=v.py??4;s.abilities=['scream_cheese','cheese_wheel','crowd_favorite','live_broadcast'].map(id=>({id,level:1}));s.activeSynergies=[];s.integration=50;G.recognizeClass('player');s.godpath.since=1;G.state.networkLive=true;G.state.pendingSwitchboard={day:s.day};G.debugRefresh();relayProof();};
+document.addEventListener('click',()=>setTimeout(relayProof,100),true);
+</script></body>`);
+fs.writeFileSync('.git/relay-outcome-phone.html',html);

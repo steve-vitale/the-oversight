@@ -389,3 +389,25 @@ observer-off controls and match standard rows/full gameplay hashes against the
 balanced panel. The runtime demand return is additive metadata, not saved state
 or new telemetry. Never infer new demand fields from historical nominal diets.
 See `evidence/2026-10-15/garden-demand-audit.md`.
+
+## Relay service and the authored deed
+
+The Voice's fitting deed is current Relay office service by that actual person.
+Class age and synergies do not substitute for it. The same read-only deed API
+serves player and NPC; office removal/transfer revokes pre-ceremony eligibility.
+Already recognized gods remain recognized. No past service ledger is invented
+from an absent office, nor an appointment date invented for a legacy live one.
+
+Replay a saved case without the scorecard observer to inspect actual role calls
+and bearer/class changes:
+
+```text
+node scripts/godpath/probe-relay-service.js --root <root> --panel <saved-panel.json.gz> --policy merchant --seed 7 --out <probe.json>
+```
+
+The probe preserves original calls/returns, checks source/flags/Node, and must
+match the saved standard row and complete gameplay hash. Availability calls
+are not unique opportunities; the output keeps their count and distinct days
+separate. Policy counters are diagnosis, not ascension receipts. See
+`evidence/2026-10-15/relay-deed-audit.md` for the 16/64-seed experiment and
+separate dead-office follow-up. Use the current neutral win interpretation.

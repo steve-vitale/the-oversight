@@ -166,3 +166,9 @@ fields to the existing game.js NPC meal settlement and reads them in the
 Garden observer. No production, need, hunger, draw, cost or gate rule changes.
 This settles the known daily-demand measurement gap before the Garden deed;
 it does not claim exact continuous membership or player energy requirements.
+
+Relay lifetime follow-up (2026-10-15): the authored Socialite deed exposed
+an actual dead predecessor retaining state.switchboard and blocking later
+holders. Codex takes the narrow comms.js death/load lifetime repair and its
+shared-harness proofs. Muse's region/nomad files remain outside this change.
+Measure the office repair separately from the authored-deed lever.

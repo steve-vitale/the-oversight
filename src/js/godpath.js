@@ -158,7 +158,13 @@
     const deed = path && path.god.deed;
     if (!deed) return null;
     const vid = isPlayer(who) ? Game.villagerId : who;
-    const rec = (((v.godpathDeeds || {})[vid] || {})[deed.event]) || null;
+    // Office service is a current responsibility, not an invented history:
+    // the same live holder record governs both player and NPC. Removing or
+    // transferring it revokes the deed until this person holds it again.
+    const office = deed.event === 'relay_office' && Game.state.switchboard;
+    const rec = deed.event === 'relay_office'
+      ? (office && office.holderId === vid ? { day: office.appointedDay ?? null } : null)
+      : (((v.godpathDeeds || {})[vid] || {})[deed.event]) || null;
     const person = vid && Game.vpOf ? Game.vpOf(vid) : null;
     const living = !!(vid && person && person.id === vid && !person.dead &&
       (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
@@ -176,7 +182,7 @@
     if (g && ((g.active || []).includes(god.id) || (g.recognized || {})[god.id])) return null;
     const status = godpathDeedStatus(who, god.id);
     return status.complete ? 'Deed fulfilled. Your build and the day still matter.'
-      : status.observed ? 'You refused death. Live to see another dawn.' : god.deed.hint;
+      : status.observed ? (god.deed.pendingHint || god.deed.hint) : god.deed.hint;
   }
   // Called only after an actual lethal-hit refusal, never from an ability tap
   // or an XP event. The first receipt is enough; no repeat-use grinding.

@@ -645,7 +645,11 @@
         },
         "capstoneItems": [],
         "deedSynergies": [],
-        "deedAlt": "relay_office"
+        "deed": {
+          "event": "relay_office",
+          "afterDawn": false,
+          "hint": "Hold the Relay office yourself. Claim its wires or accept the village appointment; the work and its costs must be yours."
+        }
       }
     },
     "survivalist": {
@@ -722,7 +726,8 @@
         "deed": {
           "event": "death_refused",
           "afterDawn": true,
-          "hint": "Refuse a fatal blow through your own survival magic, then live to see another dawn."
+          "hint": "Refuse a fatal blow through your own survival magic, then live to see another dawn.",
+          "pendingHint": "You refused death. Live to see another dawn."
         },
         "deedSynergies": [
           "refuses_death",
