@@ -94,16 +94,16 @@ const PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', '
   // end(): 'path' (the final alone), a bespoke selector, or 'coda <sel>'.
   const end = (b, p, m, lean) => { const r = EK.resolveEnding(ED, p, k(b), m, lean); return r ? (r.kind === 'coda' ? 'coda ' + r.sel : r.sel) : 'path'; };
   T.ok('ending: showrunner on Beloved resolves its bespoke slice, light and dark', end(FIX.showrunner, 'beloved', 'light') === 'class:socialite/showrunner' && end(FIX.showrunner, 'beloved', 'dark') === 'class:socialite/showrunner');
-  T.ok('ending: demagogue (same path, no slice) falls back to Beloved\'s own finals', end(FIX.demagogue, 'beloved', 'light') === 'path');
+  T.ok('ending: demagogue without a bespoke slice gets its own class coda', end(FIX.demagogue, 'beloved', 'light') === 'coda class:socialite/demagogue');
   T.ok('ending: a berserker on Defiant falls back one level to the brawler slice', end(FIX.berserker, 'defiant', 'dark') === 'class:brawler');
   T.ok('ending: a bespoke path entry wins over a god coda (god on Defiant -> the brawler slice)', end(FIX.god, 'defiant', 'light') === 'class:brawler');
   T.ok('coda: no bespoke entry -> the god coda (god on Beloved, light and dark)', end(FIX.god, 'beloved', 'light') === 'coda god:one_person_army' && end(FIX.god, 'beloved', 'dark') === 'coda god:one_person_army');
   const godKeeper = { track: 'combat', cls: ['caregiver', 'keeper'], god: 'one_person_army' };
   T.ok('coda: god > class/subclass (a keeper who ascended plays the god coda)', end(godKeeper, 'feared', 'light') === 'coda god:one_person_army');
   T.ok('coda: class/subclass > track (keeper, combat track -> the keeper coda)', end(FIX.keeper, 'feared', 'dark') === 'coda class:caregiver/keeper' && end(FIX.keeper, 'witness', 'light') === 'coda class:caregiver/keeper');
-  T.ok('coda: a subclass with no coda falls through to its track coda (berserker on Beloved -> combat)', end(FIX.berserker, 'beloved', 'light') === 'coda track:combat');
+  T.ok('coda: completed subclass text wins over the track (berserker on Beloved)', end(FIX.berserker, 'beloved', 'light') === 'coda class:brawler/berserker');
   T.ok('coda: track-only runs get the track coda on every path', PATHS.every(p => end(FIX.track, p, 'light') === 'coda track:combat'));
-  T.ok('none: no coda for the key and no bespoke entry -> the final alone (no build; social track)', end(FIX.none, 'beloved', 'dark') === 'path' && end(FIX.demagogue, 'feared', 'light') === 'path');
+  T.ok('none: no build still gets the final alone; a named social class gets its coda', end(FIX.none, 'beloved', 'dark') === 'path' && end(FIX.demagogue, 'feared', 'light') === 'coda class:socialite/demagogue');
   const cm = (lean) => { const r = EK.resolveEnding(ED, 'relay', k(FIX.track), 'grey', lean); return r && r.moral; };
   T.ok('grey relay: the coda reads the forward hand (lean > 0 light, < 0 dark, 0 light)', cm(3) === 'light' && cm(-3) === 'dark' && cm(0) === 'light');
   const one = EK.resolveEnding(ED, 'beloved', k(godKeeper), 'light');
@@ -234,7 +234,7 @@ const PATHS = ['feared', 'indispensable', 'beloved', 'witness', 'assimilated', '
   said = finish(FIX.berserker, 'defiant', 'dark', ['beat:grain', 'beat:build', 'beat:tear', 'beat:records'], 'terms');
   T.ok('defiant x brawler x dark: THE SALTED ROAD', said.some(l => /blood still on your hands/.test(l)) && said.some(l => /SALTED ROAD/.test(l)));
   said = finish(FIX.demagogue, 'beloved', 'light', ['beat:hunter', 'beat:song', 'beat:quiet'], 'quiet');
-  T.ok('no slice and no coda for the key: the path\'s own light ending plays alone, noted as the path', said.some(l => /making sure nobody else needs to be/.test(l)) && Game.tableState().ending.level === 'path' && Game.tableState().ending.kind === 'path');
+  T.ok('new class coda follows the path\'s light outcome without replacing it', said.some(l => /making sure nobody else needs to be/.test(l)) && Game.tableState().ending.selector === 'class:socialite/demagogue' && Game.tableState().ending.kind === 'coda');
 
   T.section('7. Composed endings in play: the path\'s final + one coda');
   const coda = (sel, m) => ED.codas[sel][m];
