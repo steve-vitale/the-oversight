@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const K = require('./godpath/lib');
-const { install } = require('./gear-usage-audit');
+const { install, gameplayHash } = require('./gear-usage-audit');
 const { execFileSync } = require('child_process');
 const T = K.reporter('gear-usage-audit');
 (async () => {
@@ -38,6 +38,14 @@ const T = K.reporter('gear-usage-audit');
     return JSON.parse(output.split('@@GEAR@@').pop().trim());
   };
   const observed = run('1'), control = run('0');
+  T.ok('hash identifies its normalization version', observed.stateHashVersion === 2 && control.stateHashVersion === 2);
+  const a = { scholar: { day: 3 }, pacing: { lastTs: 10, dayMinutes: [0], totalMin: 0, futureField: 1 } };
+  const b = { scholar: { day: 3 }, pacing: { lastTs: 900, dayMinutes: [0.01], totalMin: 0.01, futureField: 1 } };
+  T.ok('machine-load timing diagnostics do not change the gameplay hash', gameplayHash(a) === gameplayHash(b));
+  b.scholar.day++;
+  T.ok('real gameplay changes still change the hash', gameplayHash(a) !== gameplayHash(b));
+  b.scholar.day--; b.pacing.futureField++;
+  T.ok('unknown pacing fields are retained in the hash', gameplayHash(a) !== gameplayHash(b));
   T.ok('100-day observed run preserves every gameplay-state field', observed.stateHash === control.stateHash, JSON.stringify({ observed: observed.stateHash, control: control.stateHash }));
   T.ok('observed trajectory matches the control ending and deaths', observed.won === control.won && observed.days === control.days && JSON.stringify(observed.deaths) === JSON.stringify(control.deaths));
   T.done();

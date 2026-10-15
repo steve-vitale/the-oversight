@@ -19,6 +19,13 @@ const METHODS = {
   _cxPrizeAbilityOffer: 'system-prize', _cxPrizeSynergyHint: 'system-prize',
   _cxPrizeKnowledgeDump: 'system-prize', _cxPrizeEvolutionAssist: 'system-prize',
 };
+function gameplayHash(state) {
+  const comparable = JSON.parse(JSON.stringify(state));
+  // Wall-clock diagnostics vary with machine load. Retain any other/future
+  // pacing fields so this does not mask a gameplay-state difference.
+  if (comparable.pacing) for (const k of ['lastTs', 'dayMinutes', 'totalMin']) delete comparable.pacing[k];
+  return require('crypto').createHash('sha256').update(JSON.stringify(comparable)).digest('hex');
+}
 function install(G) {
   const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, crafts: {}, recipeAccess: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
   const stack = [];
@@ -147,13 +154,9 @@ async function child() {
   finally { registry[id] = base; }
   const r = rep.runs[0];
   if (rec) delete rec.sample;
-  const comparable = JSON.parse(JSON.stringify(G.state));
-  // Real wall-clock pacing is diagnostic only; it necessarily differs
-  // between processes. All gameplay state and telemetry stay in the hash.
-  if (comparable.pacing) delete comparable.pacing.lastTs;
-  const stateHash = require('crypto').createHash('sha256').update(JSON.stringify(comparable)).digest('hex');
+  const stateHash = gameplayHash(G.state);
   if (arg('dump-state', null)) fs.writeFileSync(arg('dump-state'), JSON.stringify(G.state));
-  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHash, ...(rec || {}) }) + '\n');
+  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHashVersion: 2, stateHash, ...(rec || {}) }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
@@ -196,4 +199,4 @@ async function main() {
   console.log('\nwrote ' + file + '.{json,md}');
 }
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });
-module.exports = { install, METHODS };
+module.exports = { install, METHODS, gameplayHash };

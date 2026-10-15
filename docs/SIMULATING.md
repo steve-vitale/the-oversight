@@ -90,6 +90,14 @@ These fields distinguish an unused output from unknown recipes or missing
 materials. They do not classify each failed attempt. The observer's 100-day
 on/off state-hash proof covers this additional sampling.
 
+`stateHashVersion: 2` excludes only the three known wall-clock diagnostics
+`pacing.lastTs`, `pacing.dayMinutes` and `pacing.totalMin`. The earlier hash
+omitted only `lastTs`; machine load can change the other two. Do not use
+old raw hash mismatches as evidence of gameplay divergence or compare hashes
+across normalization versions. Gameplay fields, telemetry and any other
+pacing fields remain covered. Observed outcomes and source manifests in
+older matrices remain useful separately from that raw hash.
+
 ## Pitfalls (each one has bitten us)
 
 - **Never run two games in one node process.** Use separate processes;
