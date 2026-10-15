@@ -19,11 +19,13 @@
 //   - downgradeOutcome()
 //   - stacksMatch()       (fungibility gate for stack merging)
 //   - harvestOrigin(vid), mergeHarvestShares(target, incoming, units), blendHarvestShares(parts) (actual plant harvester provenance through fungible portions)
+//   - recordHarvestIntake(who, portions, route), recordHarvestDraw(who, draw, route, nourishment, share) (bounded actual eating receipts)
 //   - spoilBonusDays()    (preservation_instinct shelf-life bonus)
 //   - isSpoiled()         (bonus-aware spoilage boundary)
 //   - experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
 // rules:
 //   - harvest_source_only: actual player/NPC plant harvests retain canonical harvester shares; processing and fungible merging preserve proportional sources without assigning old food or changing calories (code: harvestOrigin, mergeHarvestShares, blendHarvestShares)
+//   - intake_is_consumption: eight-day canonical-person receipts record physical food and nourishment at actual eating callers; packing, transferring and anonymous production never invent harvest credit (code: recordHarvestIntake, recordHarvestDraw)
 //   - raw_penalty: true (code: food.js)
 //   - processing_required: true (code: food.js)
 //   - experiment_bridges: true (code: food.js — nibbles grant calSense/riskSense on the L0 entry, never identify; testCautiously reads entry.experiments)
@@ -237,6 +239,41 @@
       if (Object.keys(shares).length) target.harvestShares = shares;
       else delete target.harvestShares;
     },
+    // Receipt only: physical food and body nourishment are different facts.
+    // No XP, clock, RNG, telemetry timestamp or ascension gate is changed.
+    recordHarvestIntake(who, portions, route) {
+      const s = (this.state || {}).scholar, v = (this.state || {}).village;
+      const person = who && this.vpOf && this.vpOf(who);
+      if (!s || !v || !person || person.id !== who || person.dead) return;
+      const accepted = (portions || []).filter(p => Number.isFinite(p.kcal) && p.kcal > 0);
+      if (!accepted.length) return;
+      const day = s.day || 0;
+      const book = v.harvestIntake || (v.harvestIntake = {});
+      for (const d of Object.keys(book)) if (Number(d) < day - 7) delete book[d];
+      const today = book[day] || (book[day] = {});
+      const rec = today[who] || (today[who] = { kcal: 0, nourishment: 0, harvestKcal: {}, harvestNourishment: {}, routes: {} });
+      const r = rec.routes[route] || (rec.routes[route] = { kcal: 0, nourishment: 0 });
+      for (const p of accepted) {
+        const n = p.nourishment == null ? p.kcal : Number.isFinite(p.nourishment) ? Math.max(0, p.nourishment) : 0;
+        rec.kcal += p.kcal; rec.nourishment += n; r.kcal += p.kcal; r.nourishment += n;
+        const shares = this.blendHarvestShares([{ item: p.item || {}, weight: 1 }]);
+        for (const [owner, share] of Object.entries(shares)) {
+          const producer = this.vpOf && this.vpOf(owner);
+          if (!producer || producer.id !== owner) continue;
+          rec.harvestKcal[owner] = (rec.harvestKcal[owner] || 0) + share * p.kcal;
+          rec.harvestNourishment[owner] = (rec.harvestNourishment[owner] || 0) + share * n;
+        }
+      }
+    },
+    recordHarvestDraw(who, draw, route, nourishment, share = 1) {
+      const amount = (draw.taken || 0) * share;
+      const n = nourishment == null ? amount : Number.isFinite(nourishment) ? Math.max(0, nourishment) : 0;
+      this.recordHarvestIntake(who, (draw.items || []).map(p => {
+        const kcal = (p.units || 0) * (p.effectiveKcal || 0) * share;
+        return { item: p.item, kcal, nourishment: amount > 0 ? kcal * n / amount : 0 };
+      }), route);
+    },
+
     harvestOrigin(vid) {
       const person = vid && this.vpOf && this.vpOf(vid);
       return person && person.id === vid && !person.dead ? { [vid]: 1 } : {};
@@ -2513,6 +2550,7 @@
       if (!it || (it.kcalEach || 0) <= 0 || it.edible === false
           || this.isSpoiled(it)) { this.say('Nothing edible there.'); return null; }
       const s = this.state.scholar;
+      const eaterId = this.villagerId;
       // SHELLGUT (Steve 2026-10-08): armor gut — nothing ingested touches you.
       const shellgut3 = this.hasStatus && this.hasStatus('scholar', 'shellgut');
       if (it.diseaseRisk && !shellgut3 && Math.random() < it.diseaseRisk.p) {
@@ -2533,7 +2571,9 @@
       }
       const kcal = it.kcalEach;
       if (this.blendKcalQuality) this.blendKcalQuality(kcal, this.mealQuality ? this.mealQuality(it) : 1);
+      const nutrition = Math.max(0, Math.min(kcal, this.kcalCap() - (s.kcal || 0)));
       s.kcal = Math.min(this.kcalCap(), (s.kcal || 0) + kcal);
+      this.recordHarvestIntake(eaterId, [{ item: it, kcal, nourishment: nutrition }], 'counter');
       // L3 BENEFIT (break-it food r5): the level-up copy promises "+5 health
       // when eaten" — the counter bite is eating. Same grant as eat()/eatOne().
       // MEDICINE (break-it food r5): chewing medicinal plants heals — the

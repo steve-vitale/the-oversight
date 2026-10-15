@@ -3873,7 +3873,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (seed) this.alienLootReveal(seed);
       } catch (e) {}
       this.consumeItem('genesis_seed', 1);
-      t.genesis = { daysLeft: 10, plantedDay: this.state.scholar.day };
+      t.genesis = { daysLeft: 10, plantedDay: this.state.scholar.day, harvestShares: this.harvestOrigin(this.villagerId) };
       this.say('You press the seed into the dirt. It hums — actually hums — and splits open. Something alien is growing.');
       this.audioEvent('genesis_plant');
       return this.tickAction(16) || this.status();
@@ -3888,14 +3888,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const atHaven = !!(t && (t.type === 'haven' || t.isHaven));
         const px = this.map.px, py = this.map.py;
         if (x === px && y === py) {
-          this.state.scholar.inventory.push({ name: 'Genesis fruit', kcalEach: kcal, units: 1, spoilDay: this.state.scholar.day + 3, safe: true, kg: 0.5, unit: 'fruit' });
+          this.state.scholar.inventory.push({ name: 'Genesis fruit', harvestShares: t.genesis.harvestShares, kcalEach: kcal, units: 1, spoilDay: this.state.scholar.day + 3, safe: true, kg: 0.5, unit: 'fruit' });
           this.say(`The genesis crop fruits — ${kcal} kcal, strange and sweet. (+1 to your pack)`);
         } else if (atHaven) {
           // PHANTOM FIX (break-it 2026-10-08): this used to bump the compat
           // counter v.pantryKcal directly — a phantom number that villageEats'
           // end-of-day sync re-derives from items, so the 500 kcal evaporated
           // overnight while the message promised it. Real food, real item.
-          this.stockPantry(kcal, 'Genesis fruit');
+          this.stockPantry(kcal, 'Genesis fruit', { harvestShares: t.genesis.harvestShares });
           this.say(`The haven genesis crop yielded ${kcal} kcal to the pantry.`);
         }
         if (t.genesis.daysLeft <= 0) {
@@ -3990,7 +3990,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else {
         this.remember(vid, 'gift', 'unasked-for food');
       }
-      this.npcNeeds(vid).hunger = Math.max(0, this.npcNeeds(vid).hunger - 60);
+      const beforeHunger = this.npcNeeds(vid).hunger;
+      this.npcNeeds(vid).hunger = Math.max(0, beforeHunger - 60);
+      this.recordHarvestIntake(vid, [{ item: food, kcal: giftKcal, nourishment: Math.min(giftKcal, Math.min(beforeHunger, 60) * 25) }], 'gift');
       this.say(`You give ${this.displayName(vid)} some ${food.name}. They look at you differently now.`);
       // trustMoved (socialite r4 2026-10-09): the recipient's trust already
       // moved through the deed gain above — observe warms the crowd, not
@@ -4033,8 +4035,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // p.risks for the eat-time roll (claimed once, see packMeal).
         const risks = this.freshExposure();
         let drawn = 0;
-        try { drawn = this.pantryDraw(v, want, { cook: false, exposure: risks }).taken; } catch (e) {}
-        p = v.pack[vid] = { day: today, kcal: Math.round(drawn), risks };
+        let rationShares;
+        try {
+          const ration = this.pantryDraw(v, want, { cook: false, exposure: risks });
+          drawn = ration.taken;
+          rationShares = this.blendHarvestShares(ration.items.map(e => ({ item: e.item, weight: e.units * e.effectiveKcal })));
+        } catch (e) {}
+        p = v.pack[vid] = { day: today, kcal: Math.round(drawn), risks,
+          ...(rationShares && Object.keys(rationShares).length ? { harvestShares: rationShares } : {}) };
       }
       return p.kcal;
     },
@@ -4074,7 +4082,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const inv = this.state.scholar.inventory;
         // FUNGIBILITY (break-it food 2026-10-08): thefts on different days
         // have different clocks — merge only into an identical stack.
-        const tmpl = { name: 'Stolen rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Someone is going to miss these.' };
+        const tmpl = { name: 'Stolen rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Someone is going to miss these.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
         if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
@@ -4150,7 +4158,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const inv = this.state.scholar.inventory;
         // FUNGIBILITY (break-it food 2026-10-08): same rule as theft —
         // different days, different clocks.
-        const tmpl = { name: 'Taken rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. You know the difference.' };
+        const tmpl = { name: 'Taken rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. You know the difference.', harvestShares: ((v.pack || {})[vid] || {}).harvestShares };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
         if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
@@ -24357,10 +24365,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (rareChance > 0 && Math.random() < rareChance) {
           const rp = this.data.plants.find(pp => pp.id === 'rare_herb');
           if (rp && !this.plantKnown(rp.id)) {
-            this.addUnknownToLump(rp, 1, scholar.day);
+            this.addUnknownToLump(rp, 1, scholar.day, undefined, this.harvestOrigin(this.villagerId));
             this.say('Something unusual in the undergrowth — carefully into the bag. You\'ll know it when someone names it.');
           } else if (rp) {
-            scholar.inventory.push({ plantId: 'rare_herb', units: 1, kcalEach: 300, spoilDay: scholar.day + 4, name: this.plantKnown('rare_herb') ? rp.name : (rp.description || 'unfamiliar plant'), unit: 'bundle', prep: 'Potent. The Codex is interested.', kg: 0.3 });
+            scholar.inventory.push({ plantId: 'rare_herb', harvestShares: this.harvestOrigin(this.villagerId), units: 1, kcalEach: 300, spoilDay: scholar.day + 4, name: this.plantKnown('rare_herb') ? rp.name : (rp.description || 'unfamiliar plant'), unit: 'bundle', prep: 'Potent. The Codex is interested.', kg: 0.3 });
           }
         }
         scholar.kcal -= S.calories.ACTION_COSTS.forage;
@@ -24721,6 +24729,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     eat() {
       const scholar = this.state.scholar;
+      const eaterId = this.villagerId;
       if (this.over) return;
       this._packFullStreak = 0;
       // POWER NEEDS FOOD: the bar's cap scales with metabolic mult AND bank
@@ -24818,7 +24827,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // +20% kcal absorption. Symmetric opposite of shellgut's -25%.
         if (this.hasStatus && this.hasStatus('scholar', 'lemons')) { const gained = Math.round(kcal * 1.2) - kcal; kcal = Math.round(kcal * 1.2); if (gained > 0) engorgeGain += gained; }
         if (disKcalMult < 1) kcal = Math.round(kcal * disKcalMult);
+        const nutrition = Math.max(0, Math.min(kcal, cap - scholar.kcal));
         scholar.kcal += kcal; ate += kcal;
+        this.recordHarvestIntake(eaterId, [{ item: it, kcal: it.kcalEach, nourishment: nutrition }], 'pack');
         // MEDICINE (Steve): chewing medicinal plants is a skill. Track it —
         // the knowledgeable use them deliberately, the ignorant chew and hope.
         if (it.plantId) {
@@ -24948,6 +24959,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // The Eat button is gone — this is how you eat now. In combat, it costs an action.
     eatOne(idx) {
       const scholar = this.state.scholar;
+      const eaterId = this.villagerId;
       if (this.over) return;
       const it = scholar.inventory[idx];
       if (!it || (it.kcalEach || 0) <= 0 || (it.units || 0) <= 0) {
@@ -25019,7 +25031,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // DISEASE (Steve 2026-10-09): gut sickness steals absorption.
       const dkMult1 = this.diseaseDebuffs ? this.diseaseDebuffs('scholar').kcalAbsorbMult : 1;
       if (dkMult1 < 1) kcal = Math.round(kcal * dkMult1);
+      const nutrition = Math.max(0, Math.min(kcal, cap - scholar.kcal));
       scholar.kcal = Math.min(cap, scholar.kcal + kcal);
+      this.recordHarvestIntake(eaterId, [{ item: it, kcal: it.kcalEach, nourishment: nutrition }], 'pack');
       if (this.blendKcalQuality) this.blendKcalQuality(kcal, this.mealQuality ? this.mealQuality(it) : 1);
       it.units -= 1;
       if (it.units <= 0) scholar.inventory.splice(idx, 1);
@@ -26546,6 +26560,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const exposure = this.freshExposure();
       const drawn = this.pantryDraw(v, want, { cook: true, exposure });
       const taken = drawn.taken;
+      const nutrition = Math.max(0, Math.min(taken, bankCap - (scholar.kcal || 0)));
+      this.recordHarvestDraw(this.villagerId, drawn, 'pantry', nutrition);
       scholar.kcal = Math.min((scholar.kcal || 0) + taken, bankCap);
       // The player's body faces what the draw exposed it to — the same
       // contract as eating the same food yourself at a perfect village cook.
@@ -26865,6 +26881,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const take = Math.min(pool, want);
       if (take <= 0) return 0;
       this.packSpend(vid, take);
+      this.recordHarvestIntake(vid, [{ item: p || {}, kcal: take }], 'ration');
       // the ration's risks ride with it — claimed once, on the first meal
       if (p && p.risks && !p.risksClaimed) {
         p.risksClaimed = true;
@@ -27391,6 +27408,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       const ate = ownEat + pile.taken;
+      this.recordHarvestIntake(vid, [{ kcal: ownEat }], 'personal-work');
+      if (!away) {
+        const freshKcal = (pile.items || []).reduce((n, e) => n + e.units * e.effectiveKcal, 0);
+        const room = Math.max(0, need - ownEat);
+        this.recordHarvestDraw(vid, { taken: freshKcal, items: pile.items || [] }, 'pantry', Math.min(room, freshKcal));
+        this.recordHarvestIntake(vid, [{ kcal: Math.max(0, pile.taken - freshKcal), nourishment: Math.max(0, Math.min(pile.taken - freshKcal, room - freshKcal)) }], 'desperation');
+      }
       // sittings: company happens here, organically, per part of day
       for (let m = 0; m < meals; m++) {
         this.logSitting(v, vid, parts[Math.min(m, parts.length - 1)]);
@@ -27565,6 +27589,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // the cost is real: draw actual items out of the pantry.
       const drawn = this.pantryDraw(v, cost, {});
       const spent = Math.round(drawn.taken || 0);
+      // The communal meal shares consumed energy, not fractional inventory units.
+      const servingShare = 1 / (showed.length + 1);
       s.feastDay = day;
       // SERVED: aggregate per itemId — what the feast WAS, honestly. A
       // turkey feast ≠ a berry feast, and the contract carries the proof.
@@ -27689,8 +27715,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { if (this.recordLifeseedEvent) this.recordLifeseedEvent(vid, 'feast_shared'); } catch (e) {}
           try { this.bumpTrust(vid, 2 + qualityGated + ((this.hasAbility && this.hasAbility('harvest_table')) ? (this.abilityLevel('harvest_table') >= 3 ? 2 : 1) : 0), 'feast'); } catch (e) {}
         }
-        try { const n = this.npcNeeds(vid); n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
+        try { const n = this.npcNeeds(vid);
+          if (!vidReactor) this.recordHarvestDraw(vid, drawn, 'feast', Math.min(drawn.taken * servingShare, Math.min(n.hunger || 0, 30) * 25), servingShare);
+          n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
       }
+      // The existing feast gives the host bonds/buffs, not reserve kcal.
+      if (!(this.fusionReactorOnline && this.fusionReactorOnline())) this.recordHarvestDraw(this.villagerId, drawn, 'feast', 0, servingShare);
       // the feast is communal: everyone who ate together warms to each other.
       try {
         for (let i = 0; i < showed.length; i++) for (let j = i + 1; j < showed.length; j++) {

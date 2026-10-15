@@ -115,3 +115,8 @@ Scope is source preservation/dilution only; theft and corruption rules stay.
 Continuous-travel proof fixture exception: exact-edge assertions now
 prepare walkable target cells and add an explicit blocked-cell fallback
 case. Only scripts/test-continuous-travel.js changes, not Muse travel code.
+
+Living Garden intake exception: Codex edits food.js, narrow eating/packing/
+plant-source callers in game.js, carexplore.js food handoffs and corruption.js
+ration metadata. Scope is real consumption/nourishment receipts and source
+preservation; no food economics, region/nomad content or new god gate.

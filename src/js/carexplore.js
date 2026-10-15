@@ -149,10 +149,12 @@
 
     // take the food — best stacks first (lowest kcal? no: use oldest/spoiling first is complex; just take in order)
     let taken = 0, takenName = stacks[0].name, takenKcal = 0, stolenTaken = 0;
+    const eaten = [];
     for (const st of stacks) {
       if (taken >= units) break;
       const take = Math.min(st.units, units - taken);
       st.units -= take; taken += take; takenKcal += take * (st.kcalEach || 0);
+      eaten.push({ item: st, units: take, effectiveKcal: st.kcalEach || 0 });
       if (st.stolen) stolenTaken += take;
       if (!takenName) takenName = st.name;
     }
@@ -162,6 +164,7 @@
     // ---- the decision's consequences ----
     const hungerRelief = amount === 'bite' ? 25 : amount === 'meal' ? 60 : 120;
     n.hunger = Math.max(0, hunger - hungerRelief);
+    this.recordHarvestDraw(vid, { taken: takenKcal, items: eaten }, 'gift', Math.min(takenKcal, Math.min(hunger, hungerRelief) * 25));
 
     // recognized theft: the generosity beats below don't apply
     if (knowsTheft && stolenTaken > 0) {

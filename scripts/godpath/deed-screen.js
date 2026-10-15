@@ -19,6 +19,26 @@ async function child() {
   if (!base) throw new Error('Unknown policy ' + id);
   const people = new Map(), ascensions = [], outcomes = [], tableTrace = [], foodUses = [], offers = { player: {}, npc: {} }, heldPeople = { player: {}, npc: {} };
   let G;
+  const intakeDays = new Map();
+  const sampleIntake = g => {
+    for (const [day, book] of Object.entries(g.state.village.harvestIntake || {})) {
+      const out = { day: Number(day), kcal: 0, nourishment: 0, eaters: Object.keys(book).length, routes: {}, harvesters: {} };
+      for (const [eater, r] of Object.entries(book)) {
+        out.kcal += r.kcal; out.nourishment += r.nourishment;
+        for (const [route, value] of Object.entries(r.routes)) {
+          const a = out.routes[route] || (out.routes[route] = { kcal: 0, nourishment: 0 });
+          a.kcal += value.kcal; a.nourishment += value.nourishment;
+        }
+        for (const [owner, kcal] of Object.entries(r.harvestKcal)) {
+          const a = out.harvesters[owner] || (out.harvesters[owner] = { kcal: 0, nourishment: 0, othersKcal: 0, othersNourishment: 0, otherEaters: [] });
+          const n = r.harvestNourishment[owner] || 0;
+          a.kcal += kcal; a.nourishment += n;
+          if (owner !== eater && kcal > 0) { a.othersKcal += kcal; a.othersNourishment += n; a.otherEaters.push(eater); }
+        }
+      }
+      intakeDays.set(day, out);
+    }
+  };
   const person = vid => { if (!people.has(vid)) people.set(vid, { id: vid, bearerDays: [], events: {}, classes: [] }); return people.get(vid); };
   const sample = g => {
     const me = person(g.villagerId), day = g.state.scholar.day;
@@ -32,6 +52,7 @@ async function child() {
       const p = person(vid), key = rec.path + '/' + rec.subclass;
       if (!p.classes.includes(key)) p.classes.push(key);
     }
+    sampleIntake(g);
   };
   registry[id] = Object.assign({}, base, {
     setup(g, ctx) {
@@ -86,6 +107,7 @@ async function child() {
   finally { registry[id] = base; console.warn = warnBefore; }
   const hash = require('../gear-usage-audit').gameplayHash(G.state);
   const rows = [...people.values()];
+  if (arg('observe', '1') !== '0') sampleIntake(G);
   // Gate diagnostics occur only after the run and after hashing its gameplay state.
   const GH = globalThis.Scattering.Godhood;
   for (const p of rows) {
@@ -95,7 +117,7 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, foodUses, people: rows }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, foodUses, people: rows, intakeDays: [...intakeDays.values()].sort((a, b) => a.day - b.day) }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
@@ -114,7 +136,7 @@ async function main() {
   await Promise.all(Array.from({ length: Number(arg('par', 4)) }, worker));
   rows.sort((a, b) => a.row.policy.localeCompare(b.row.policy) || seeds.indexOf(a.row.seed) - seeds.indexOf(b.row.seed));
   const hashes = {};
-  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/encounters.js', 'src/js/alienPlayers.js', 'src/js/equipment.js', 'src/js/party.js', 'src/js/food.js', 'src/js/abilityActions.js', 'src/js/corruption.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/encounters.js', 'src/js/alienPlayers.js', 'src/js/equipment.js', 'src/js/party.js', 'src/js/food.js', 'src/js/carexplore.js', 'src/js/abilityActions.js', 'src/js/corruption.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
   fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');

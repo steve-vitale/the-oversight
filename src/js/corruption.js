@@ -767,7 +767,7 @@
             var units = Math.max(1, Math.round(demand / 150));
             var day = this.state.scholar.day;
             var inv = this.state.scholar.inventory;
-            var tmpl = { name: 'Taken rations', kcalEach: 150, units: units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. Fear took it.' };
+            var tmpl = { name: 'Taken rations', kcalEach: 150, units: units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. Fear took it.', harvestShares: ((this.state.village.pack || {})[vid] || {}).harvestShares };
             var stack = null;
             try { stack = inv.find(function (i) { return i.stolen && !i.bonded; }); } catch (e) {}
             if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; } else inv.push(tmpl);
