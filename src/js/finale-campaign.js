@@ -228,6 +228,9 @@
     if (!Game.startCombat || Game.startCombat.__finaleWrapped) return;
     var orig = Game.startCombat;
     var wrapped = function (mid) {
+      // Capture before the inner titan wrapper consumes the legacy flag.
+      // A summoned Table champion is not the open-world campaign heart.
+      var tableTrial = mid === 'finale' && (Game._tableTrialDirect || (arguments[1] && arguments[1].tableTrial));
       // ---- pre-gates ----
       if (mid === 'finale_crew') {
         var c0 = finaleCampaign();
@@ -260,6 +263,7 @@
       }
       var r = orig.apply(this, arguments);
       if (r === null || r === undefined) return r;
+      if (tableTrial) return r;
       try {
         if (mid === 'finale_crew') { finaleCrewSetup(); try { Game.audioEvent('fiCrewQuiet', {}); } catch (e2) {} }
         else if (mid === 'finale_opening') { finaleOpeningSetup(); try { Game.audioEvent('fiOpeningSting', {}); } catch (e2) {} }
@@ -408,7 +412,7 @@
       var snap = null;
       try {
         var tf = Game.state.titans && Game.state.titans._fight;
-        if (tf && tf.campaign && this.tbfight && this.tbfight.fighters) {
+        if (tf && tf.campaign && this.tbfight && this.tbfight.fighters && !(this.tableTrialFight && this.tableTrialFight())) {
           snap = {
             campaign: tf.campaign,
             result: result,
@@ -564,7 +568,7 @@
   function finaleCampaignButtons() {
     var f = null;
     try { f = Game.tbfight; } catch (e) {}
-    if (!f || f.over) return '';
+    if (!f || f.over || (Game.tableTrialFight && Game.tableTrialFight(f))) return '';
     if (!fiHeartMonster(Game)) return '';
     var sp = f.fiCrewSpoils;
     if (!sp) return '';
@@ -585,6 +589,7 @@
   }
 
   function spoilUsed(key) {
+    if (Game.tableTrialFight && Game.tableTrialFight()) return false;
     try {
       var sp = Game.tbfight.fiCrewSpoils;
       if (sp && sp[key] > 0) { sp[key]--; return true; }

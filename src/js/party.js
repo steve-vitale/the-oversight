@@ -1143,7 +1143,7 @@
 
   const origStartCombat = Game.startCombat;
   Game.startCombat = function (monsterId) {
-    const r = origStartCombat.call(this, monsterId);
+    const r = origStartCombat.apply(this, arguments);
     try {
       const f = this.tbfight;
       if (f && !f.betrayal) {

@@ -4,6 +4,7 @@
 // provides:
 //   - tableTrialByCombat()
 //   - tableTrialResume(result)
+//   - tableTrialFight(fight)
 // consumes:
 //   - tableState(), tableBranch(), tableRunBeat(), tableFinals(), tableFail(), tableLiveWrap(), say, sysSay
 //   - ledger(), deedState(), startCombat(), tbEnd (wrapped to resume the table)
@@ -134,6 +135,12 @@
   // The single opt-in existential risk. Real fight (startCombat vs the
   // Finale, wave-5), on the grid, right now. tbEnd resumes the table.
   const methods = {
+    tableTrialFight(fight) {
+      const f = fight || this.tbfight;
+      const scholar = (this.state || {}).scholar || {};
+      const pending = ((scholar.prog || {}).table || {}).trialPending;
+      return !!(f && (f.tableTrial || (pending && (f.fighters || []).some(m => m.kind === 'monster' && m.monsterId === 'finale'))));
+    },
     tableTrialByCombat() {
       const T = this.tableState();
       T.trialPending = true;
@@ -148,7 +155,7 @@
         // do not apply at the table — the System brings the champion to the
         // ring, right now, for a single blow-by-blow fight. (2026-10-12)
         this._tableTrialDirect = true;
-        this.startCombat('finale');
+        this.startCombat('finale', { tableTrial: true });
       } catch (e) {
         T.trialPending = false;
         this._tableTrialDirect = false;
@@ -200,8 +207,14 @@
     Game._tableTrialWrapped = true;
     const _tbEnd = Game.tbEnd;
     Game.tbEnd = function tableTrialWrapped(result) {
+      const trial = this.tableTrialFight();
       const r = _tbEnd.call(this, result);
       try {
+        // Old saved trials may already carry the leaked world-heart mark.
+        // The outer campaign resolvers skip a trial; retire that stale mark
+        // here without resolving a world titan or changing its muster.
+        const titans = this.state.titans;
+        if (trial && titans && titans._fight && titans._fight.campaign === 'finale_heart') titans._fight = null;
         const T = (typeof this.tableState === 'function') ? this.tableState() : {};
         if (T && T.trialPending && typeof this.tableTrialResume === 'function') {
           T.trialPending = false;

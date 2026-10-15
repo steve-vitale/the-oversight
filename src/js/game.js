@@ -29507,7 +29507,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       delete s.cleanShotReady;
     },
 
-    startCombat(monsterId) {
+    startCombat(monsterId, options) {
       // NO SILENT CLOBBER (break-it combat 2026-10-09): re-entering a live
       // fight rebuilt the fighters from stale scholar.health — a free heal
       // (or wound) and erased monster wounds. Fail loudly, keep the fight.
@@ -29517,10 +29517,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // CRISIS (Steve 2026-10-09): the breach — a hostile got INSIDE the
       // haven. The safe place isn't.
-      try { if (this.playerAtHaven && this.playerAtHaven() && this.fireCrisis) this.fireCrisis('breach'); } catch (e) {}
+      const tableTrial = !!(monsterId === 'finale' && options && options.tableTrial);
+      try { if (!tableTrial && this.playerAtHaven && this.playerAtHaven() && this.fireCrisis) this.fireCrisis('breach'); } catch (e) {}
       this.resetPerFightFlags();
       const s = this.state.scholar;
       this.syncMonsterAlias();
+      const worldMonster = tableTrial ? null : s.monster;
       const px = s.mx ?? 4, py = s.my ?? 4;
       // WANDERER CONTACT (forager loop 2026-10-05): the "Face it" button calls
       // startCombat() with no id — the monster that walked into you is
@@ -29547,8 +29549,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // s.monster mirrors only player-tile monsters, so this second read).
       // Scoped to the drawn monster's own id: a wanderer clobbering the
       // pending slot must not inherit the feast draw's veteran flag.
-      const isVeteran = (s.monster && s.monster.veteran) ||
-        (s.feastDraw && s.feastDraw.veteran && s.feastDraw.monsterId === mid) || false;
+      const isVeteran = !tableTrial && ((worldMonster && worldMonster.veteran) ||
+        (s.feastDraw && s.feastDraw.veteran && s.feastDraw.monsterId === mid)) || false;
       // VARIANT (Steve 2026-10-06): veterans aren't just stat bumps — each
       // has a variant with 1-2 new tricks. Scarred braces your opening.
       // Elder can't be stunned. Pack-leader brings friends.
@@ -29648,8 +29650,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (packDelayed > 0) {
         this._pendingPack = { id: mdef.id, count: packDelayed, mdef: mdef };
       }
-      const srcMx0 = (s.monster && s.monster.mx !== undefined) ? s.monster.mx : px;
-      const srcMy0 = (s.monster && s.monster.my !== undefined) ? s.monster.my : py;
+      const srcMx0 = (worldMonster && worldMonster.mx !== undefined) ? worldMonster.mx : px;
+      const srcMy0 = (worldMonster && worldMonster.my !== undefined) ? worldMonster.my : py;
       // TENT BREACH (Steve 2026-10-08): the intruder came out right behind you —
       // the fight starts at arm's length, at the tent mouth, not across the grid.
       let srcMx = srcMx0, srcMy = srcMy0;
@@ -29750,9 +29752,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           beamCooldown: 0, dwellTaught: false,
           // TRAP SETUP (glasswing): the world monster may carry a phase
           // (grounded after the dive) — preserve it, don't reset to idle.
-          beamPhase: (s.monster && s.monster.beamPhase) ||
+          beamPhase: (worldMonster && worldMonster.beamPhase) ||
             (mdef.encounter && mdef.encounter.phaseMap && mdef.encounter.phaseMap.idle) || 'stalk',
-          gwGrounded: (s.monster && s.monster.gwGrounded) || 0,
+          gwGrounded: (worldMonster && worldMonster.gwGrounded) || 0,
           threatQueue: [],
           veteran: isVeteran, veteranVariant,
           // SCARRED: braces your opening — first strike each combat -3
@@ -29791,6 +29793,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // GRID SIZE (Steve 2026-10-11): titan fights use 12x12 (144 cells) for
         // 10+ fighters; normal fights use 9x9. Per-fight, not global.
         gridSize: (typeof this.isTitan === 'function' && this.isTitan(mid)) ? 12 : 9,
+        tableTrial: tableTrial,
       };
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
@@ -29950,7 +29953,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.pendingInTent = false;
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
-      const _origin = this.playerMonster();
+      const _origin = tableTrial ? null : this.playerMonster();
       this.removeWorldMonster(_origin); // it's in the fight now, not wandering
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15): a
       // titan or campaign piece (spawned with titan:true) remembers its map

@@ -1472,7 +1472,7 @@ The Defiant path — a reverse auction against yourself. Walking away is free to
 ### table-feared (`table-feared.js`)
 The Feared path — calibrate terror. Three beats: the footage, the calibration, the branch twist. Meters in tension: alien-terror vs villager-horror. Trial by combat (opt-in, real startCombat vs the Finale) is the single existential risk: win and terror maxes; lose and the mantle passes, the village continues weakened. Light = protective terror; dark = domination.
 
-**Provides:** tableTrialByCombat(), tableTrialResume(result)
+**Provides:** tableTrialByCombat(), tableTrialResume(result), tableTrialFight(fight)
 
 **Rules:**
 —

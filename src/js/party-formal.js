@@ -734,7 +734,7 @@
   // startCombat: threat assessment. the game anticipates.
   const origStartCombat = Game.startCombat;
   Game.startCombat = function (monsterId) {
-    const r = origStartCombat.call(this, monsterId);
+    const r = origStartCombat.apply(this, arguments);
     try { this.partyThreatCheck(monsterId); } catch (e) {}
     try {
       const foes = this.detectSplitOpportunity ? this.detectSplitOpportunity() : [];

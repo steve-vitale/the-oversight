@@ -765,9 +765,9 @@
       // champion to the ring directly, as a single blow-by-blow fight. The
       // flag is consumed here (never leaks into open-world combat): the
       // campaign march, muster marking, and ally injection are all skipped.
-      if (mid === 'finale' && Game._tableTrialDirect) {
+      if (mid === 'finale' && (Game._tableTrialDirect || (arguments[1] && arguments[1].tableTrial))) {
         Game._tableTrialDirect = false;
-        return orig.apply(this, arguments);
+        return orig.call(this, mid, Object.assign({}, arguments[1], { tableTrial: true }));
       }
       var mdef = null;
       try { mdef = (Game.data.monsters || []).find(function (m) { return m.id === mid; }); } catch (e) {}
@@ -823,7 +823,7 @@
         var snap = null;
         try {
           var tf = Game.state.titans._fight;
-          if (tf && this.tbfight && this.tbfight.fighters) {
+          if (tf && this.tbfight && this.tbfight.fighters && !(this.tableTrialFight && this.tableTrialFight())) {
             snap = {
               titan: tf.titan,
               result: result,
