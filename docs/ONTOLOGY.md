@@ -694,7 +694,7 @@ THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super spe
 ### food (`food.js`)
 Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 
-**Provides:** foodMarker(), cleanCarcass(), carcassToMeat(), cookFood(), renderFat(), pemmicanSets(), pemmicanPlan()     (per-set picks + honest bar counts, no consumption), pemmicanPreview()  (honest {sets, bars} for the UI label), makePemmican(), cookTransform(), cookClassFor(), cookOutcome(), consumeCookFire(), downgradeOutcome(), stacksMatch()       (fungibility gate for stack merging), spoilBonusDays()    (preservation_instinct shelf-life bonus), isSpoiled()         (bonus-aware spoilage boundary), experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
+**Provides:** foodMarker(), cleanCarcass(), takePrepMaterial(idx, qty), carcassToMeat(), cookFood(), renderFat(), pemmicanSets(), pemmicanPlan()     (per-set picks + honest bar counts, no consumption), pemmicanPreview()  (honest {sets, bars} for the UI label), makePemmican(), cookTransform(), cookClassFor(), cookOutcome(), consumeCookFire(), downgradeOutcome(), stacksMatch()       (fungibility gate for stack merging), spoilBonusDays()    (preservation_instinct shelf-life bonus), isSpoiled()         (bonus-aware spoilage boundary), experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
 
 **Rules:**
 - raw_penalty: true (code: food.js)

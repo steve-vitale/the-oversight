@@ -4,6 +4,7 @@
 // provides:
 //   - foodMarker()
 //   - cleanCarcass()
+//   - takePrepMaterial(idx, qty)
 //   - carcassToMeat()
 //   - cookFood()
 //   - renderFat()
@@ -2214,6 +2215,34 @@
       return true;
     },
 
+    // Deliberate pickup: processing leaves byproducts on the counter.
+    // The chosen material only moves into carried crafting stock on request.
+    takePrepMaterial(idx, qty) {
+      if (this.over) return null;
+      if (this.inCombat && this.inCombat()) { this.say('Not mid-fight — finish it first.'); return null; }
+      if (!this.atCamp()) { this.say('Your counter is back at camp.'); return null; }
+      const s = this.state.scholar, stash = s.prepStash || [];
+      idx = Number(idx);
+      const it = Number.isInteger(idx) && idx >= 0 ? stash[idx] : null;
+      if (!it || !it.material || it.bonded || (this.isKeepsake && this.isKeepsake(it))) {
+        this.say('Choose a crafting material from the counter.'); return null;
+      }
+      const available = Math.floor(it.units ?? 1);
+      const wanted = qty == null ? available : Math.floor(Number(qty));
+      if (!Number.isFinite(available) || !(available > 0) || !Number.isFinite(wanted) || wanted <= 0) {
+        this.say('No material to take.'); return null;
+      }
+      const kg = it.kg > 0 ? it.kg : 0.1;
+      const fits = Math.max(0, Math.floor((this.packCapacity() - this.packWeight() + 1e-9) / kg));
+      const n = Math.min(available, wanted, fits);
+      if (!(n > 0)) { this.say('Too heavy. Lighten your pack first.'); return null; }
+      (s.inventory || (s.inventory = [])).push({ ...it, units: n, kg });
+      if (n === available) stash.splice(idx, 1);
+      else it.units = available - n;
+      this.say(`Took ${n} × ${it.name || it.material} from the counter into your pack. (2 ticks)`);
+      return this.tickAction(2) || this.status();
+    },
+
     // stageForPrep: unprocessed items move pack -> prep stash. Batch.
     stageForPrep() {
       const s = this.state.scholar;
@@ -2261,6 +2290,7 @@
 
     // prepNeeds(it): the mission-board "needs" line — short, honest.
     prepNeeds(it) {
+      if (it.material) return 'crafting material — take to pack';
       const needs = [];
       if (it.lump) needs.push('identify — sort it');
       if (it.foodState === 'carcass') {

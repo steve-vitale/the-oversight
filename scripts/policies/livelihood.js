@@ -83,9 +83,44 @@ function preserveCounter(G, ctx) {
   G.putAwayFinished();
   if (!stash.includes(item)) ctx.livelihoodCounterStored = (ctx.livelihoodCounterStored || 0) + 1;
 }
+// Collect only the missing counter stock for one otherwise funded known
+// gear recipe. Each transfer is the same deliberate paid action as the UI.
+function collectPrepMaterials(G, ctx) {
+  const s = G.state.scholar;
+  if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || !G.atCamp() ||
+      (s.kcal || 0) < 1800 || (s.dayTicks || 0) > 384 || ctx._makerMaterialDay === s.day) return;
+  const stash = s.prepStash || [], known = (G.state.codex || {}).recipes || {};
+  const owned = new Set((s.inventory || []).concat(Object.values(s.equipped || {})).filter(Boolean).map(i => i.itemId || i.id));
+  const loose = m => stash.filter(i => i.material === m && !i.bonded).reduce((n, i) => n + Math.max(0, i.units ?? 1), 0);
+  const recipe = G.data.recipes.find(r => {
+    const d = G.data.items.find(i => i.id === r.id), mats = Object.entries(r.materials || {});
+    return d && (d.weapon || d.armor) && (known[r.id] || {}).level >= 2 && !owned.has(r.id) &&
+      mats.some(([m,n]) => G.materialCount(m) < n) && mats.every(([m,n]) => G.materialCount(m) + loose(m) >= n);
+  });
+  if (!recipe) return;
+  ctx._makerMaterialDay = s.day;
+  const bearer = G.villagerId;
+  for (const [m,n] of Object.entries(recipe.materials)) {
+    for (const item of stash.filter(i => i.material === m && !i.bonded && (i.units ?? 1) > 0)) {
+      const need = n - G.materialCount(m);
+      if (need <= 0) break;
+      const before = G.materialCount(m);
+      G.takePrepMaterial(stash.indexOf(item), need);
+      const got = G.materialCount(m) - before;
+      if (got > 0) {
+        ctx.livelihoodMaterialUnits = (ctx.livelihoodMaterialUnits || 0) + got;
+        ctx.livelihoodMaterialTakes = (ctx.livelihoodMaterialTakes || 0) + 1;
+      }
+      if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || G.villagerId !== bearer) return;
+      if (got <= 0) break;
+    }
+  }
+}
 function make(G, ctx) {
   if (G.over || G.tbfight || G.state.activeContest) return;
   try {
+    collectPrepMaterials(G, ctx);
+    if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest) return;
     const s = G.state.scholar;
     const inv = s.inventory || [], owned = new Set(inv.concat(Object.values(s.equipped || {})).filter(Boolean).map(it => it.itemId || it.id));
     const candidates = G.data.recipes.filter(r => {
@@ -167,5 +202,5 @@ module.exports = {
   merchant: policy('merchant', trade),
   maker: policy('maker', (G, ctx) => { study(G, ctx); make(G, ctx); trade(G, ctx); }),
   caregiver: policy('caregiver', care),
-  trade, make, care, quiet, study, preserveCounter,
+  trade, make, care, quiet, study, preserveCounter, collectPrepMaterials,
 };

@@ -13,7 +13,7 @@ const METHODS = {
   apCarePackage: 'fan-package', apClubBoon: 'fan-vote', apPersonaPackage: 'patron', apDeadDrop: 'patron',
   visitorWares: 'trade-stock', visitorBuyWare: 'trade', traderSell: 'trade-sale', craft: 'craft', doAction: 'action',
   tbEnd: 'combat', corpseTakeItem: 'corpse', corpseLootAll: 'corpse', readBook: 'book', preserveFood: 'preserve',
-  renderFat: 'render', cleanCarcass: 'clean', makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
+  renderFat: 'render', cleanCarcass: 'clean', takePrepMaterial: 'counter-material', makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
   takeWeapon: 'armory', donateMedicine: 'pharmacy', takeMedicine: 'pharmacy', giveFood: 'care', comfort: 'care', proposeTrade: 'league',
   proposeCovenant: 'league', orderMember: 'party-order', networkSummon: 'network',
   _cxPrizeAbilityOffer: 'system-prize', _cxPrizeSynergyHint: 'system-prize',
