@@ -9898,4 +9898,289 @@
       "on land it turns slowly — flank it"
     ]
   }
+,
+  {
+    "activity": "crepuscular",
+    "aggression": "territorial",
+    "attack": {
+      "damage": [
+        16,
+        24
+      ],
+      "damageType": "physical",
+      "name": "Sanjun's Pounce",
+      "pattern": {
+        "chargeDesc": "Explosive short rush, claws first. It commits — the lane is locked at the crouch.",
+        "chargeStyle": "tiger",
+        "length": 4,
+        "type": "charge",
+        "width": 1,
+        "windup": 2
+      },
+      "telegraph": "It crouches low, tail lashing once, twice. The stripes go still. Then it comes."
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          16,
+          24
+        ],
+        "damageType": "physical",
+        "name": "Sanjun's Pounce",
+        "pattern": {
+          "chargeDesc": "Explosive short rush, claws first. It commits — the lane is locked at the crouch.",
+          "chargeStyle": "tiger",
+          "length": 4,
+          "type": "charge",
+          "width": 1,
+          "windup": 2
+        },
+        "telegraph": "It crouches low, tail lashing once, twice. The stripes go still. Then it comes.",
+        "weight": 3
+      },
+      {
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "physical",
+        "name": "Raking Claws",
+        "pattern": {
+          "range": 1,
+          "type": "direct"
+        },
+        "telegraph": "A paw rises, claws out — casual, almost lazy. It is not lazy.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "hpBelow": 0.25
+        },
+        "tactic": "withdraw",
+        "telegraph": "It stops mid-prowl, ears flat. Blood on its muzzle, sides heaving. The mountain lord has decided you are not worth dying for — it melts back into the bamboo.",
+        "weight": 4
+      }
+    ],
+    "behavior": "ambush",
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "codexStages": {
+      "observed": "An Amur tiger. The System classified apex predation as 'inefficient hierarchy' and tried to improve it — bigger, patient, and convinced the mountain is a throne. It kills with a throat bite after the rush. It expects prey to run. Everything it has ever eaten ran.",
+      "slain": "Moves: Sanjun's Pounce (charge, telegraphed by the crouch — the lane locks early), Raking Claws (close range), Withdraw (below 25% hp). It never chases what stands its ground and shouts — the chase instinct needs a runner. Meat: a tiger feeds the village for a week. The pelt is beyond price.",
+      "unknown": "The bamboo went still in a way that had nothing to do with wind. Then the stripes resolved."
+    },
+    "counter": {
+      "hint": "Running wakes the chase in it. It has eaten everything that ever ran.",
+      "kind": "shout",
+      "reveal": "When it crouches to pounce, STAND TALL and SHOUT — bang metal, wave your arms, be loud and enormous. It expects prey to flee. Be the thing that doesn't, and the pounce dies unlaunched.",
+      "trick": "Stand tall and shout"
+    },
+    "cues": {
+      "curious": [
+        "It sits, enormous, and watches you the way weather watches a field."
+      ],
+      "fearful": [
+        "It backs off a pace, ears flat — the noise is wrong and it doesn't like wrong."
+      ],
+      "warn": [
+        "The tail starts lashing. This is the last warning anything ever gets."
+      ]
+    },
+    "edible": {
+      "calories": 8000,
+      "note": "A tiger feeds the village for a week. The pelt is beyond price; the claws are trade and talisman both."
+    },
+    "emoji": "🐅",
+    "encounter": {
+      "adjacencyOverride": 1,
+      "comment": "Sanjun: stalk->crouch->pounce. Pounce lane LOCKED at the crouch (commitCharge). Shouting during the crouch (counter kind 'shout') breaks the pounce and may rout it. Missed pounce -> winded one turn (soft flanks). Withdraw below 25%.",
+      "commitCharge": true,
+      "fifo": true,
+      "knownCue": "It crouches before the pounce — tail lashing, stripes still. Shout THEN, not after.",
+      "knownTactics": "Never run. Stand tall and shout during the crouch; sidestep the locked lane.",
+      "noticeRange": 5,
+      "painSwitch": true,
+      "phaseBadges": {
+        "crouch": " 🐅 CROUCHING",
+        "pounce": " 💥 POUNCING",
+        "rake": " 🐾 RAKING",
+        "stalk": " 👁 STALKING"
+      },
+      "phaseMap": {
+        "declare": "crouch",
+        "idle": "stalk",
+        "resolve": "pounce",
+        "windup": "crouch"
+      },
+      "phases": [
+        "stalk",
+        "crouch",
+        "pounce",
+        "rake",
+        "withdraw"
+      ],
+      "shortName": "tiger"
+    },
+    "fear": "loud noise",
+    "follows": true,
+    "hp": [
+      80,
+      100
+    ],
+    "id": "sanjun",
+    "loot": {
+      "chance": 0.1,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05).",
+      "tier": 2
+    },
+    "name": "The Mountain Lord",
+    "parts": [
+      "pelt (peerless)",
+      "claws (trade)",
+      "teeth (trade)"
+    ],
+    "speed": 5,
+    "systemDesignation": "Panthera tigris altaica (standard)",
+    "unknown": "stripes resolving out of the bamboo, watching you",
+    "vibe": "the mountain lord — silent, patient, already decided",
+    "wave": 1,
+    "weaknesses": [
+      "shout it down during the crouch — it expects prey to run",
+      "the pounce lane locks early; be elsewhere when it lands"
+    ]
+  },
+  {
+    "activity": "nocturnal",
+    "aggression": "curious",
+    "attack": {
+      "damage": [
+        12,
+        18
+      ],
+      "damageType": "sonic",
+      "name": "Belly-Drum Thunderclap",
+      "pattern": {
+        "type": "burst"
+      },
+      "telegraph": "It rears up on its hind legs, belly swelling drum-taut, and beats it with both paws — BOOM."
+    },
+    "attacks": [
+      {
+        "damage": [
+          12,
+          18
+        ],
+        "damageType": "sonic",
+        "name": "Belly-Drum Thunderclap",
+        "pattern": {
+          "type": "burst"
+        },
+        "telegraph": "It rears up, belly swelling drum-taut, and beats it with both paws — BOOM. The air itself flinches.",
+        "weight": 3
+      },
+      {
+        "damage": [
+          6,
+          10
+        ],
+        "damageType": "physical",
+        "name": "Trickster's Feint",
+        "pattern": {
+          "range": 2,
+          "type": "direct"
+        },
+        "telegraph": "It waddles left, then is suddenly right — a feint, testing whether your eyes or your ears are in charge.",
+        "weight": 2
+      }
+    ],
+    "behavior": "trickster",
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "codexStages": {
+      "observed": "A raccoon dog. The System found tanuki folklore — the belly-drumming shapeshifter — and decided the folklore was understating things. The belly is a drum, the drum is a weapon, and the waddle is a lie: it is exactly where it means to be.",
+      "slain": "Moves: Belly-Drum Thunderclap (burst sonic, telegraphed by the swelling belly — strike the taut drum during the inhale and the shockwave backfires), Trickster's Feint (repositioning nip). It can't chase; it waddles. Keep your ears on the drum, not your eyes on the waddle. Meat: fatty and dark.",
+      "unknown": "BOOM. Out of the dark, a drumbeat with no drummer. Then another, closer."
+    },
+    "counter": {
+      "hint": "The drum must swell before it sounds. The inhale is the tell.",
+      "kind": "strike_windup",
+      "reveal": "When the belly swells drum-taut, STRIKE — the stretched skin is thin as a drumhead and the thunderclap backfires, stunning it senseless. Hit the drum, not the drummer.",
+      "trick": "Strike the taut drum"
+    },
+    "cues": {
+      "curious": [
+        "It sits up and drums a little paradiddle, watching to see if you flinch."
+      ],
+      "fearful": [
+        "The drumming falters into a nervous patter. It waddles backward, belly deflating."
+      ],
+      "warn": [
+        "It rears up. The belly starts to swell. You know what comes next."
+      ]
+    },
+    "edible": {
+      "calories": 2500,
+      "note": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum."
+    },
+    "emoji": "🦡",
+    "encounter": {
+      "adjacencyOverride": 1,
+      "comment": "Drum-Belly: waddle->swell->thunder. Striking during the swell (counter kind 'strike_windup') pops the drum: the thunderclap backfires, stunning it 2 turns. Missing the window means eating the burst.",
+      "fifo": true,
+      "knownCue": "The belly swells before the thunder. Strike the taut drum.",
+      "knownTactics": "Hit it while it inhales — the stretched belly is fragile. Don't chase the waddle; wait for the swell.",
+      "noticeRange": 4,
+      "painSwitch": true,
+      "phaseBadges": {
+        "spent": " 😮‍💨 SPENT",
+        "swell": " 🥁 SWELLING",
+        "thunder": " 🔊 THUNDER",
+        "waddle": " 🦡 WADDLING"
+      },
+      "phaseMap": {
+        "declare": "swell",
+        "idle": "waddle",
+        "resolve": "thunder",
+        "windup": "swell"
+      },
+      "phases": [
+        "waddle",
+        "swell",
+        "thunder",
+        "spent"
+      ],
+      "shortName": "tanuki"
+    },
+    "fear": "silence",
+    "follows": true,
+    "hp": [
+      45,
+      60
+    ],
+    "id": "drumbelly_tanuki",
+    "loot": {
+      "chance": 0.08,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05).",
+      "tier": 1
+    },
+    "name": "Drum-Belly",
+    "parts": [
+      "pelt (superb)",
+      "drumskin (trade)"
+    ],
+    "speed": 3,
+    "systemDesignation": "Nyctereutes procyonoides (standard)",
+    "unknown": "a drumbeat with no drummer, getting closer",
+    "vibe": "a trickster with a war drum for a stomach — playful until it isn't",
+    "wave": 1,
+    "weaknesses": [
+      "strike during the inhale — the taut belly is fragile",
+      "it waddles; it cannot chase — control the distance"
+    ]
+  }
 ]

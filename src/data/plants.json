@@ -4,7 +4,8 @@
       "se_woodlands",
       "eu_temperate_forest",
       "amazon_rainforest",
-      "south_asia_monsoon"
+      "south_asia_monsoon",
+      "east_asia_temperate"
     ],
     "caloriesPerUnit": 45,
     "codex": "Every part is edible — leaves, flowers, roots. Bitter means nutritious. The first green of spring and the last of fall.",
@@ -36,7 +37,11 @@
       "pacific_nw",
       "columbus",
       "india",
-      "delhi"
+      "delhi",
+      "china",
+      "beijing",
+      "korea",
+      "seoul"
     ],
     "description": "a plant with jagged leaves and a yellow flower",
     "knowledgeLevels": {
@@ -858,7 +863,8 @@
       "eu_temperate_forest",
       "amazon_rainforest",
       "sahel_savanna",
-      "south_asia_monsoon"
+      "south_asia_monsoon",
+      "east_asia_temperate"
     ],
     "caloriesPerUnit": 30,
     "unit": "handful",
@@ -877,7 +883,11 @@
       "india",
       "delhi",
       "bangladesh",
-      "dhaka"
+      "dhaka",
+      "china",
+      "beijing",
+      "korea",
+      "seoul"
     ],
     "confidence": "high",
     "idDifficulty": 2,
@@ -1111,7 +1121,8 @@
       "se_woodlands",
       "eu_temperate_forest",
       "amazon_rainforest",
-      "south_asia_monsoon"
+      "south_asia_monsoon",
+      "east_asia_temperate"
     ],
     "caloriesPerUnit": 35,
     "unit": "leaf",
@@ -1128,7 +1139,11 @@
       "pacific_nw",
       "columbus",
       "india",
-      "delhi"
+      "delhi",
+      "china",
+      "beijing",
+      "korea",
+      "seoul"
     ],
     "confidence": "high",
     "idDifficulty": 1,
@@ -9124,5 +9139,1400 @@
     "unit": "a rosary pea seed",
     "uses": [],
     "waterContent": "low"
+  }
+,
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 200,
+    "codex": "The paddies went wild years ago. The rice didn't get the memo — it still heads, still fills, still feeds whoever bothers to thresh it.",
+    "confidence": "high",
+    "description": "a grass with drooping seed heads standing in shallow water",
+    "edibility": "cook",
+    "form": "grain",
+    "id": "rice_wild",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Wild rice. A grass standing in the shallows with heavy seed heads.",
+      "2": "Parts: the grain (thresh and winnow the heads). Needs cooking — boil like any rice.",
+      "3": "Uses: real calories, stores for months dry. Harvest when the heads droop and grains fall at a touch.",
+      "4": "Mastery: beat the heads into a basket at dawn (dew keeps them from shattering early). Parboil before hulling. 2x yield."
+    },
+    "lookalikeNote": "Feral rice shatters — the grains fall at a touch when ripe. If the heads hold their grain tight, it's a planted variety gone weedy, still edible.",
+    "name": "Feral Rice",
+    "preparation": "Strip the heads, thresh, winnow, boil. The hulls are silica-sharp — winnow well.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Oryza rufipogon",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Oryza rufipogon",
+      "PROSEA Handbook"
+    ],
+    "spoilageDays": 120,
+    "taxon": [
+      "plant",
+      "herb",
+      "rice_wild"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "handful of grain",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "boiled grain; the region's staple starch"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 10,
+    "codex": "The terraces went to seed but the bushes never stopped flushing. Two leaves and a bud — the old picking rhyme still works.",
+    "confidence": "high",
+    "description": "a waist-high bush with glossy oval leaves on terraced ground",
+    "edibility": "caution",
+    "form": "leaves",
+    "id": "tea_leaf",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Tea bush. Glossy oval leaves, terraces gone wild.",
+      "2": "Parts: the young flush — two leaves and a bud. Steep, don't gorge: caffeine and tannins.",
+      "3": "Uses: brewed tea for alertness and morale; chewed leaves for the trail. Wilt then heat the leaves to keep it green.",
+      "4": "Mastery: pick at dawn in spring for the sweetest flush. Dry for storage. A rested mind forages better."
+    },
+    "lookalikeNote": "True tea has glossy evergreen leaves with finely serrated edges and a pale underside. If the leaf crushes without that clean tea smell, it's an imposter.",
+    "medicinal": true,
+    "name": "Tea Bush",
+    "preparation": "Steep the young leaves; chew sparingly. Caffeine and tannins — a handful brewed is medicine, a basket eaten is a mistake.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Camellia sinensis",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "sources": [
+      "Flora of China — Camellia sinensis",
+      "field knowledge — tea cultivation"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "bush",
+      "shrub",
+      "tea_leaf"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "brewed; chewed sparingly on the trail"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "stimulant — alertness, morale"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 130,
+    "codex": "Fall's candy, and it hangs on the tree into winter — nature's own pantry. The astringent ones teach patience; the ripe ones teach gratitude.",
+    "confidence": "high",
+    "description": "a tree hung with orange globes among broad dark leaves",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "asian_persimmon",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Persimmon. Orange fruit, still hard on the tree.",
+      "2": "Parts: the fruit — eat only when soft and wrinkled. Unripe = a mouthful of chalk (tannins).",
+      "3": "Uses: high sugar, vitamin A and C. Hangs on the tree into winter — harvest through the cold months.",
+      "4": "Mastery: frost sweetens them. Dry halved ripe fruit for winter stores. 2x yield from the old orchard trees."
+    },
+    "lookalikeNote": "Wait for the fruit to go soft and wrinkled — or for frost. An unripe persimmon's tannins will turn your mouth inside out. Ripe ones are honey.",
+    "name": "Asian Persimmon",
+    "preparation": "Eat fully ripe (soft, wrinkled). Dry the ripe fruit for winter stores.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Diospyros kaki",
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "sources": [
+      "Flora of China — Diospyros kaki",
+      "PROSEA Handbook"
+    ],
+    "spoilageDays": 5,
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "asian_persimmon"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "handful of fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe fruit fresh or dried"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 90,
+    "codex": "A living fossil, planted at temples for a thousand years. The nut is food and a small poison both — the old rule is ten a day, roasted, and never for children.",
+    "confidence": "high",
+    "description": "a fan-leafed tree dropping foul-smelling yellow fruit",
+    "edibility": "caution",
+    "form": "nut",
+    "id": "ginkgo_nut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Ginkgo. Fan-shaped leaves, foul yellow fruit on the ground.",
+      "2": "Parts: the inner kernel only. The flesh stinks and burns skin; the kernel must be roasted. Contains ginkgotoxin — dose matters.",
+      "3": "Uses: roasted kernels, ~10 a day max for adults. A documented poisoning case came from 50 roasted nuts — seizures. Respect the limit.",
+      "4": "Mastery: crack, roast 25 minutes until the shell splits. Store dry. The street and temple trees are the reliable producers."
+    },
+    "lookalikeNote": "The fleshy outer coat stinks of rancid butter and blisters skin — wash the nuts with gloves or sticks, then crack and roast the inner kernel. Never eat the flesh.",
+    "name": "Ginkgo Nut",
+    "preparation": "Remove the stinking flesh, wash, roast or boil the kernel ~25 minutes. Limit: about 10 nuts a day for adults; children far fewer. Raw or excess nuts cause vomiting and seizures (ginkgotoxin, 4'-O-methylpyridoxine).",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Ginkgo biloba",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "Wikipedia — Ginkgotoxin",
+      "J-STAGE case report Internal Medicine 59:1555-1558",
+      "MDPI Horticulturae 7:218"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "tree",
+      "nut_tree",
+      "ginkgo_nut"
+    ],
+    "tileAffinity": [
+      "grove",
+      "ruin"
+    ],
+    "unit": "handful of nuts",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "roasted kernels, strictly limited"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 200,
+    "codex": "The burrs do the guarding; the fire does the cooking. A chestnut lane in fall is a pantry with thorns.",
+    "confidence": "medium",
+    "description": "a spreading tree with spiny green burrs splitting open in fall",
+    "edibility": "cook",
+    "form": "nut",
+    "id": "chinese_chestnut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Chestnut. Spiny burrs splitting to show brown nuts.",
+      "2": "Parts: the nut (score and roast; raw is tannic). Not the glossy horse chestnut — different tree, poisonous.",
+      "3": "Uses: roasted or boiled — real starch calories, stores weeks cool and dry. Gather fast; everything else wants them too.",
+      "4": "Mastery: float-test in water (sinkers keep). Roast cut-side up. 2x yield from the old lane trees."
+    },
+    "lookalikeNote": "Horse chestnut (Aesculus) is NOT food: its seed is glossy mahogany with a big pale scar and no pointed tip, and it's bitter with saponins. True chestnut has a pointed tip and a small scar — roast it.",
+    "name": "Chinese Chestnut",
+    "preparation": "Score the shell, roast or boil. Raw chestnuts are tannic and hard to digest.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Castanea mollissima",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Castanea mollissima",
+      "field knowledge — chestnut ID"
+    ],
+    "spoilageDays": 21,
+    "taxon": [
+      "tree",
+      "nut_tree",
+      "chinese_chestnut"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "handful of nuts",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "roasted or boiled nuts"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 180,
+    "codex": "The ancestor of every soybean on earth, still twining along the field edges. Protein that asks only for a pot and patience.",
+    "confidence": "medium",
+    "description": "a twining vine with small hairy pods along field edges",
+    "edibility": "cook",
+    "form": "legume",
+    "id": "soybean_wild",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Wild soybean. A twining vine with small hairy pods.",
+      "2": "Parts: the beans (small, dark). Must be cooked — raw beans upset the stomach badly.",
+      "3": "Uses: boiled or fermented — dense protein. The ancestor of tofu, miso, and soy sauce.",
+      "4": "Mastery: harvest when pods rattle. Long-cook with a pinch of ash to soften. 2x yield."
+    },
+    "lookalikeNote": "Small black seeds in hairy pods on a twining vine. If the pods are smooth and the vine doesn't twine, it's something else — check before you pick.",
+    "name": "Wild Soybean",
+    "preparation": "Boil the beans well — raw soybeans carry trypsin inhibitors that punish the gut. Ferment or long-cook.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Glycine soja",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Glycine soja"
+    ],
+    "spoilageDays": 90,
+    "taxon": [
+      "plant",
+      "herb",
+      "soybean_wild"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of beans",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "boiled or fermented beans"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 80,
+    "codex": "Flower above, dinner below. The root keeps its crunch for months in cold mud — the pond is a root cellar that waters itself.",
+    "confidence": "high",
+    "description": "broad leaves standing tall above still water on stiff stalks",
+    "edibility": "safe",
+    "form": "root",
+    "id": "lotus_root",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Lotus. Big round leaves standing up out of still water.",
+      "2": "Parts: the root (white, jointed, crunchy). Dig it from the mud under the standing leaves.",
+      "3": "Uses: starch and crunch — slice for soup, fry for chips. The seeds in the pod are food too.",
+      "4": "Mastery: feel for the joints in the mud before you dig. Harvest in fall when the starch peaks. 2x yield."
+    },
+    "lookalikeNote": "Lotus leaves stand ABOVE the water on stiff stalks; water-lily pads float flat. Only the standing-leaf plant hides the crisp white root.",
+    "name": "Lotus Root",
+    "preparation": "Dig from the mud, peel, slice. Good raw, better cooked; the segments keep crisp in stir-fry.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Nelumbo nucifera",
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "sources": [
+      "Flora of China — Nelumbo nucifera",
+      "field knowledge — lotus ID"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "plant",
+      "flower",
+      "lotus_root"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "section of root",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "root fresh, boiled, or fried; seeds too"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "The silvery underside is the signature — flip the leaf and it flashes white. Moxa, dumplings, and the taste of spring rain.",
+    "confidence": "high",
+    "description": "a knee-high herb with silvery-white leaf undersides",
+    "edibility": "safe",
+    "form": "shoots",
+    "id": "mugwort",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Mugwort. Knee-high, silvery-white under the leaves.",
+      "2": "Parts: the young shoots and leaves (pound into dumplings, dry for tea). Medicinal too — the old moxa herb.",
+      "3": "Uses: spring greens, stomach-settling tea. Harvest before it flowers for the tenderest tips.",
+      "4": "Mastery: take the top 10cm only; it re-sprouts. Dry bundles for winter tea. 2x yield."
+    },
+    "lookalikeNote": "Flip the leaf: mugwort flashes silvery-white underneath and smells sharp-herbal when crushed. Young chrysanthemum looks similar but lacks the silver back — smell and flip before you pick.",
+    "medicinal": true,
+    "name": "Mugwort",
+    "preparation": "Eat the young shoots fresh or pounded into dumplings; dry for tea. The silver underside is the ID.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Artemisia princeps",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "sources": [
+      "Flora of China — Artemisia princeps",
+      "field knowledge — mugwort ID"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "mugwort"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "young shoots; dumplings and tea"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "stomach-settling tea; moxa herb"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 150,
+    "codex": "The vine is the enemy and the root is the prize — three feet of starch hiding under the tangle. Kuzu: the thickener emperors ate.",
+    "confidence": "high",
+    "description": "a vast tangle of vines with huge leaves, roots like buried logs",
+    "edibility": "cook",
+    "form": "root",
+    "id": "kudzu_root",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Kudzu. A tangle of vines swallowing the treeline.",
+      "2": "Parts: the root — enormous, starchy. Dig in winter when the sap is down. The starch must be washed out and settled.",
+      "3": "Uses: kuzu starch for thickening, dumplings, noodles. The flowers make jelly; the young shoots are greens.",
+      "4": "Mastery: follow the oldest vine to the crown root. Pound, wash, settle, dry — the white cake keeps for years. 2x yield."
+    },
+    "lookalikeNote": "Kudzu's leaves are big three-lobed affairs on a hairy vine. The prize is the crown root — dig where the oldest stem meets the ground.",
+    "name": "Kudzu Root",
+    "preparation": "Dig the root (winter is best), pound and wash the starch out, settle and dry. Cook the starch — dumplings, thickener, noodles.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Pueraria montana var. lobata",
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "sources": [
+      "Wikipedia — Kudzu",
+      "Wikipedia — Pueraria montana var. lobata"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "plant",
+      "vine",
+      "kudzu_root"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "unit": "chunk of root",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "washed starch; dumplings and thickener"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 50,
+    "codex": "The old mountain vegetable. Boil it, change the water, and respect the dose — bracken asks for moderation, not abstinence.",
+    "confidence": "high",
+    "description": "tightly coiled green fiddleheads unfurling into triangle fronds",
+    "edibility": "caution",
+    "form": "shoots",
+    "id": "bracken_fern",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bracken. Coiled fiddleheads opening into triangle fronds.",
+      "2": "Parts: the young fiddleheads only. Boil and discard the water — bracken carries ptaquiloside, a carcinogen. Small amounts, rarely.",
+      "3": "Uses: a traditional spring vegetable across East Asia. Boiled, shocked, dressed. Never eat mature fronds.",
+      "4": "Mastery: pick under 15cm, tight coils only. Double-boil for safety. A seasonal treat, not a staple."
+    },
+    "lookalikeNote": "True fiddleheads of bracken unfurl from fuzzy coils into triangular fronds. If the coil has a deep U-shaped groove and brown papery scales, that's ostrich fern — a different, safer fiddlehead.",
+    "name": "Bracken Fiddlehead",
+    "preparation": "Boil the young fiddleheads and discard the water (ptaquiloside). Eat sparingly and seasonally — never a daily staple.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Pteridium aquilinum",
+    "seasons": [
+      "spring"
+    ],
+    "sources": [
+      "field knowledge — bracken toxicity (ptaquiloside)",
+      "Flora of China — Pteridium aquilinum"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "bracken_fern"
+    ],
+    "tileAffinity": [
+      "forest_floor",
+      "meadow"
+    ],
+    "unit": "handful of fiddleheads",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "boiled fiddleheads, sparingly"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "The invader that eats hillsides — and the spring vegetable that eats back. Tart as rhubarb, free as weeds.",
+    "confidence": "high",
+    "description": "red-speckled hollow shoots with heart-shaped leaves by the water",
+    "edibility": "caution",
+    "form": "shoots",
+    "id": "knotweed_shoot",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Knotweed. Hollow red-speckled shoots by the water.",
+      "2": "Parts: young shoots under 30cm, tart like rhubarb. Oxalic acid — don't live on it.",
+      "3": "Uses: spring vegetable, jam, pie filling. Peel the older shoots.",
+      "4": "Mastery: snap-clean shoots only. The patch you harvest is the patch you control. 2x yield."
+    },
+    "lookalikeNote": "Young knotweed shoots look like red asparagus with heart-shaped leaves. Only the young shoots are food — once the stems toughen and the leaves broaden, it's fiber, not dinner.",
+    "name": "Knotweed Shoot",
+    "preparation": "Eat young shoots raw or cooked; tart like rhubarb. Oxalic acid — moderate amounts.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Reynoutria japonica",
+    "seasons": [
+      "spring"
+    ],
+    "sources": [
+      "Flora of China — Reynoutria japonica",
+      "field knowledge — knotweed edibility"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "herb",
+      "knotweed_shoot"
+    ],
+    "tileAffinity": [
+      "creek",
+      "trail_edge"
+    ],
+    "unit": "handful of shoots",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "young shoots; tart vegetable"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 30,
+    "codex": "Flat leaves, garlic breath. The dumpling herb — cut it and it comes back, cut it and it comes back.",
+    "confidence": "high",
+    "description": "a clump of flat grass-like leaves smelling of garlic when bruised",
+    "edibility": "safe",
+    "form": "shoots",
+    "id": "chinese_chive",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Garlic chives. Flat leaves, garlic smell when bruised.",
+      "2": "Parts: leaves and unopened buds. The smell is the ID — no garlic smell, no chive.",
+      "3": "Uses: dumplings, pancakes, stir-fry. Cut-and-come-again all season.",
+      "4": "Mastery: cut 5cm above the crown and it regrows in weeks. Divide clumps in fall. 2x yield."
+    },
+    "lookalikeNote": "The garlic smell is the whole test: crush a leaf. True garlic chives smell of garlic. Any grass-like leaf that doesn't is not food.",
+    "name": "Chinese Chive",
+    "preparation": "Eat fresh or cooked. The unopened flower buds are the best part.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Allium tuberosum",
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Allium tuberosum"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "chinese_chive"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "leaves and buds, fresh or cooked"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "The little heart-pods give it away. A weed of every continent that followed humans here and stayed for dinner.",
+    "confidence": "high",
+    "description": "a low rosette with tiny heart-shaped seed pods on wiry stems",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "shepherds_purse",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Shepherd's purse. Tiny heart-shaped pods on wiry stems.",
+      "2": "Parts: young rosette leaves and the peppery seed pods. A classic spring green.",
+      "3": "Uses: soup, dumplings, porridge herb. Vitamin C when you need it.",
+      "4": "Mastery: gather rosettes before the stem bolts. The pods dry for a peppery seasoning. 2x yield."
+    },
+    "lookalikeNote": "The heart-shaped (triangular) seed pods are unmistakable — no lookalike carries them. Rosette leaves are best before the stem shoots up.",
+    "name": "Shepherd's Purse",
+    "preparation": "Eat young leaves raw or cooked; the seed pods are peppery. A safe beginner green.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Capsella bursa-pastoris",
+    "seasons": [
+      "spring",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Capsella bursa-pastoris"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "shepherds_purse"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "young leaves; peppery pods"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 90,
+    "codex": "Red lanterns on a thorny shrub. The birds strip them by fall's end — pick with them, not after them.",
+    "confidence": "high",
+    "description": "a thorny arching shrub hung with small oblong red berries",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "goji_berry",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Goji. Small red berries on a thorny shrub.",
+      "2": "Parts: the ripe berries — soft, sweet-tart. Dry them like raisins.",
+      "3": "Uses: trail food, soup, tea. Stores dried for months.",
+      "4": "Mastery: shake the branches over a cloth. Dry in the sun until leathery. 2x yield."
+    },
+    "lookalikeNote": "Goji grows on a thorny UPRIGHT shrub. Bittersweet nightshade makes similar red berries but on a CLIMBING vine with purple star flowers — that one is poison. Shrub = goji; vine = walk away.",
+    "name": "Goji Berry",
+    "preparation": "Eat ripe berries fresh or dried. The thorny shrub is the ID — never pick red berries off a vine.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Lycium chinense",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Lycium chinense",
+      "field knowledge — nightshade distinction"
+    ],
+    "spoilageDays": 4,
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "goji_berry"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "unit": "handful of berries",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh or dried berries"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 80,
+    "codex": "The silkworm tree, feeding whoever's hungry now. Wait for the dark ones — the white ones are a lesson in patience.",
+    "confidence": "high",
+    "description": "a fast-growing tree dropping dark purple berries that stain the ground",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "mulberry_white",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Mulberry. Dark purple berries staining the ground purple.",
+      "2": "Parts: ripe berries only — dark, soft, sweet. Unripe white/green ones with milky sap cause nausea.",
+      "3": "Uses: fresh eating, jam, dried. The leaves feed silkworms — a trade good if anyone's raising them.",
+      "4": "Mastery: spread a cloth and shake. The ripe ones fall; the unripe ones cling. 2x yield."
+    },
+    "lookalikeNote": "Only the dark, soft, sweet berries are food. White or green berries with milky sap will turn your stomach — patience is the whole technique.",
+    "name": "White Mulberry",
+    "preparation": "Eat ripe (dark, soft) berries fresh or dried. Avoid unripe white/green fruit.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Morus alba",
+    "seasons": [
+      "summer"
+    ],
+    "sources": [
+      "Flora of China — Morus alba"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "mulberry_white"
+    ],
+    "tileAffinity": [
+      "grove",
+      "trail_edge"
+    ],
+    "unit": "handful of berries",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe berries fresh, dried, or jam"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 70,
+    "codex": "Spring fruit on an evergreen tree — the loquat fruits while everything else is still waking up. Sweet flesh, treacherous seeds.",
+    "confidence": "high",
+    "description": "an evergreen tree with big veined leaves and clusters of yellow-orange fruit",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "loquat",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Loquat. Yellow-orange fruit in clusters on an evergreen tree.",
+      "2": "Parts: the flesh only. The big brown seeds carry amygdalin — spit them out, don't chew them.",
+      "3": "Uses: spring fruit when little else is ripe. Jam, poached, fresh.",
+      "4": "Mastery: pick fully yellow-soft. The seeds are large — teach everyone to spit. 2x yield."
+    },
+    "lookalikeNote": "The flesh is safe and sweet; the SEEDS are the danger (cyanide compounds if chewed). Eat the fruit, spit the seeds — every time.",
+    "name": "Loquat",
+    "preparation": "Eat the ripe flesh fresh or as jam. Always spit out the seeds — they contain amygdalin.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Eriobotrya japonica",
+    "seasons": [
+      "spring"
+    ],
+    "sources": [
+      "PROSEA Handbook — Eriobotrya japonica",
+      "ivis.org — loquat toxicity"
+    ],
+    "spoilageDays": 4,
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "loquat"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "handful of fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh flesh; jam (seeds discarded)"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 35,
+    "codex": "Square stem, serrated leaf, unmistakable smell. The mint family's loud cousin — crush it and there's no doubt.",
+    "confidence": "high",
+    "description": "a bushy herb with serrated purple-green leaves on square stems",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "perilla",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Perilla. Serrated leaves, square stems, strong smell when crushed.",
+      "2": "Parts: the leaves — the smell is the ID. Wraps, pickles, seasoning.",
+      "3": "Uses: fresh wraps for anything rich; dried and salted for winter.",
+      "4": "Mastery: pinch the tops to bush it out. It self-seeds — let one plant go and you'll never plant again. 2x yield."
+    },
+    "lookalikeNote": "Crush the leaf: true perilla smells sharp and unmistakable, and the stem is square (mint family). No smell + round stem = not perilla.",
+    "name": "Perilla (Shiso)",
+    "preparation": "Eat fresh as wraps or pickled. The smell test is the ID.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Perilla frutescens",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Perilla frutescens"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "perilla"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh leaves; pickled"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 35,
+    "codex": "Tong ho — the chrysanthemum you eat. Floral, green, a little wild; the hot-pot herb that grows itself.",
+    "confidence": "high",
+    "description": "a feathery-leaved herb with daisy-like buds, smelling faintly floral",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "chrysanthemum_greens",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Edible chrysanthemum. Feathery leaves, faint floral smell.",
+      "2": "Parts: young leaves and stems. A classic hot-pot green.",
+      "3": "Uses: quick-cooked greens, soup herb. Cut and it regrows.",
+      "4": "Mastery: harvest before buds open for the tenderest leaves. Succession-sow the patch. 2x yield."
+    },
+    "lookalikeNote": "Edible chrysanthemum smells faintly floral-sweet when crushed, and the leaves are deeply cut and feathery. Ornamental mums smell sharp-medicinal — eat only the sweet-smelling one.",
+    "name": "Chrysanthemum Greens",
+    "preparation": "Cook the young leaves briefly — hot-pot style. Best before flowering.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Glebionis coronaria",
+    "seasons": [
+      "spring",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Glebionis coronaria"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "flower",
+      "chrysanthemum_greens"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "handful of greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "quick-cooked greens"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "The field weed that never left. Peppery greens in spring, sharp seeds in fall — the mustard that feeds twice.",
+    "confidence": "high",
+    "description": "a weedy mustard with yellow flowers and peppery basal leaves",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "field_mustard",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Wild mustard. Yellow flowers, peppery leaves.",
+      "2": "Parts: young leaves (peppery greens), unopened buds (like tiny broccoli), seeds (mustard).",
+      "3": "Uses: spring greens, potherb, seed mustard. A famine food with dignity.",
+      "4": "Mastery: graze the rosettes before flowering. Save seed heads for seasoning. 2x yield."
+    },
+    "lookalikeNote": "Four-petaled yellow flowers and peppery bite = mustard family, safe. The basal rosette is the eating stage; once it bolts tall and tough, take the buds instead.",
+    "name": "Field Mustard",
+    "preparation": "Eat young leaves and buds raw or cooked; grind ripe seeds for mustard.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Brassica rapa",
+    "seasons": [
+      "spring",
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Brassica rapa"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "flower",
+      "field_mustard"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "leaves, buds, seeds"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 50,
+    "codex": "Golden needles — the dried buds chefs pay for. Fresh ones ask for the pot; a few stomachs ask for caution first.",
+    "confidence": "medium",
+    "description": "tawny trumpet flowers on arching stems, buds like golden needles",
+    "edibility": "cook",
+    "form": "flower",
+    "id": "daylily",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Daylily. Tawny trumpet flowers, long buds.",
+      "2": "Parts: unopened buds (golden needles) — cook them. Some people react to daylily; try a little first.",
+      "3": "Uses: buds in soup and stir-fry; dried buds are the prized golden needles.",
+      "4": "Mastery: pick buds the day before they'd open. Dry on racks for the winter store. 2x yield."
+    },
+    "lookalikeNote": "True daylily (Hemerocallis) has fibrous roots, not bulbs — if it grows from a true bulb, it's a true lily and may be toxic. Fibrous roots + tawny trumpets = daylily.",
+    "name": "Daylily Bud",
+    "preparation": "Cook the unopened buds; dry for golden needles. Try a small portion first — a few people react.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Hemerocallis fulva",
+    "seasons": [
+      "summer"
+    ],
+    "sources": [
+      "Flora of China — Hemerocallis fulva",
+      "field knowledge — daylily edibility"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "flower",
+      "daylily"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "handful of buds",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "cooked buds; dried golden needles"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 30,
+    "codex": "Fish mint. It smells like a tidepool and tastes like one too — an acquired love, and a free salad.",
+    "confidence": "high",
+    "description": "heart-shaped leaves in wet ground smelling faintly of fish when crushed",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "houttuynia",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Fish mint. Heart-shaped leaves in the wet ground, fishy smell.",
+      "2": "Parts: leaves and tender stems. The fishy smell is the ID — nothing else smells like it.",
+      "3": "Uses: fresh salad herb, cold dishes, soup garnish. Loves wet feet.",
+      "4": "Mastery: it spreads by runners — contain it or feed the village with it. Pick the tender tops. 2x yield."
+    },
+    "lookalikeNote": "Crush it: the fishy smell is unmistakable and no lookalike has it. Heart-shaped leaves + wet ground + fish smell = fish mint.",
+    "name": "Fish Mint",
+    "preparation": "Eat fresh in salads and cold dishes. The smell cooks off but the crunch stays.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Houttuynia cordata",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "sources": [
+      "Flora of China — Houttuynia cordata"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "houttuynia"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh herb; soup garnish"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The queen of poisons wears a mountain-green disguise. Every spring someone mistakes her for dinner. Be the someone who doesn't.",
+    "confidence": "high",
+    "description": "tall spikes of helmet-shaped purple-blue flowers; young shoots like asparagus",
+    "edibility": "avoid",
+    "form": "shoots",
+    "id": "aconite",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Aconite. Helmet-shaped purple-blue flowers on tall spikes.",
+      "2": "POISON: every part carries aconitine — roots, shoots, leaves, flowers. Cooking does NOT detoxify. A few grams can stop a heart.",
+      "3": "Uses: none. It is medicine only in expert hands after elaborate processing, and never yours. Mark every patch.",
+      "4": "Mastery: learn it so you never pick it. The young shoots mimic edible mountain greens — that mimicry kills. Teach the village the helmet flower."
+    },
+    "lookalikeNote": "THE KILLER MISTAKE: young aconite shoots look like edible spring mountain greens. Rule: never gather an unidentified spring shoot. The helmet-shaped flower is the giveaway — by then it's too late for whoever picked the shoot.",
+    "name": "Aconite (Monkshood)",
+    "preparation": "DO NOT EAT. All parts contain aconitine; cooking does not detoxify. Symptoms: tingling mouth, vomiting, heart arrhythmia — can kill within hours.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Aconitum carmichaelii",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "sources": [
+      "CMAJ — aconite poisoning review",
+      "FDA Talk Paper T01-19 — Aconitum carmichaelii"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "flower",
+      "aconite"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "do not harvest",
+    "uses": [],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The trumpet flower that lies. Its seedlings pass for potherbs — in Guizhou, one bowl of mistaken seedlings killed a family.",
+    "confidence": "high",
+    "description": "rank-smelling weed with white trumpet flowers and spiny seed pods",
+    "edibility": "avoid",
+    "form": "greens",
+    "id": "jimsonweed",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Jimsonweed. White trumpet flowers, spiny pods, rank smell.",
+      "2": "POISON: tropane alkaloids — hallucinations, racing heart, death. The SEEDLINGS look like edible greens; that mistake has killed families.",
+      "3": "Uses: none. Not medicine, not food, not worth a second look. Pull it with gloves if it invades the garden.",
+      "4": "Mastery: teach the seedlings to everyone — toothed oval leaves, rank smell when crushed. If a 'wild vegetable' smells rank and wrong, it is."
+    },
+    "lookalikeNote": "The seedlings are the trap: gathered as wild greens in China with fatal results (documented Guizhou family poisoning). Mature plant is obvious — trumpet flowers, spiny pods, foul smell. Learn the seedling, not the flower.",
+    "name": "Jimsonweed",
+    "preparation": "DO NOT EAT. Tropane alkaloids cause delirium, rapid heartbeat, and death. Seedlings have been fatally mistaken for edible greens.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Datura stramonium",
+    "seasons": [
+      "summer"
+    ],
+    "sources": [
+      "BMC Pharmacology and Toxicology — Guizhou Datura case",
+      "field knowledge — Datura toxicity"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "flower",
+      "jimsonweed"
+    ],
+    "tileAffinity": [
+      "trail_edge",
+      "ruin"
+    ],
+    "unit": "do not harvest",
+    "uses": [],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The parsnip that isn't. White roots, yellow sap, a smell like the vegetable drawer — and enough cicutoxin in one bite to end you.",
+    "confidence": "high",
+    "description": "white umbrella flowers over hollow purple-streaked stems in the marsh",
+    "edibility": "avoid",
+    "form": "root",
+    "id": "water_hemlock",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Water hemlock. White umbrella flowers, hollow stems, marsh ground.",
+      "2": "POISON: the white tuberous roots look like wild parsnip. One bite can kill — cicutoxin, seizures, no antidote.",
+      "3": "Uses: none. Cut the stem and yellow oily sap oozes out, smelling of parsnip — that's the warning.",
+      "4": "Mastery: the stem base is swollen, the leaf veins end in the notches (not the tips) — unique in the family. Teach it; the marsh is full of it."
+    },
+    "lookalikeNote": "Mistaken for wild parsnip: white clustered roots, parsnip smell. Tell it by the swollen stem base and the yellow oily sap from a cut stem. Water parsnip lacks both. When in doubt in the marsh, eat nothing root-shaped.",
+    "name": "Water Hemlock",
+    "preparation": "DO NOT EAT. Cicutoxin causes seizures and respiratory paralysis; a 2-3cm piece of root can be fatal. No antidote.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Cicuta virosa",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "sources": [
+      "Wikipedia — Cicuta virosa",
+      "CDC MMWR — Water Hemlock Poisoning, Maine 1992"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "flower",
+      "water_hemlock"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "do not harvest",
+    "uses": [],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The vine that apes the goji. Red berries, purple stars — pretty, climbing, and full of solanine.",
+    "confidence": "high",
+    "description": "a scrambling vine with purple star flowers maturing to red oval berries",
+    "edibility": "avoid",
+    "form": "fruit",
+    "id": "bittersweet_nightshade",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bittersweet nightshade. Purple star flowers, red berries, climbing vine.",
+      "2": "POISON: solanine in the berries — nausea, vomiting, worse in quantity. The berries ape goji at a glance.",
+      "3": "Uses: none. The vine climbs; the shrub stands — that's the whole distinction.",
+      "4": "Mastery: drill the village: goji grows on a thorny UPRIGHT shrub; nightshade CLIMBS with purple flowers. Never pick red berries off a vine."
+    },
+    "lookalikeNote": "Goji's red berries grow on a thorny upright SHRUB. Nightshade's grow on a CLIMBING vine with purple star-shaped flowers. Shrub = goji; vine = poison. This is the pair that tests whether you learned the goji lesson.",
+    "name": "Bittersweet Nightshade",
+    "preparation": "DO NOT EAT. Berries contain solanine — gastrointestinal poisoning. Easily confused with goji at a glance; check the growth habit.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Solanum dulcamara",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "sources": [
+      "field knowledge — Solanum toxicity",
+      "Flora of China — Solanum dulcamara"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "vine",
+      "bittersweet_nightshade"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "wetland"
+    ],
+    "unit": "do not harvest",
+    "uses": [],
+    "waterContent": "medium"
   }
 ]
