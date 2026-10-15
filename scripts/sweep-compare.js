@@ -53,6 +53,8 @@ for (const id of ['merchant', 'maker', 'caregiver']) POLICY_REGISTRY[id] = requi
 for (const id of ['campaigner', 'campaigner-control']) POLICY_REGISTRY[id] = require('./policies/campaigner')[id];
 for (const id of ['covenanter', 'charterer', 'peer-control']) POLICY_REGISTRY[id] = require('./policies/peer-league')[id];
 
+POLICY_REGISTRY['garden-feeder'] = require('./policies/garden-feeder').feeder;
+
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function stdSnapshot(Game) {

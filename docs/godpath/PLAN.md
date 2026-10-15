@@ -65,6 +65,12 @@ Job -> track -> **class** -> **god** -> Table.
    current policies do not deliberately feed every resident. A targeted
    public-action feeding strategy and exact need/membership settlement are
    next; the authored gate remains open. See garden-coverage-audit.md.
+   A deliberate garden-feeder policy now harvests and gives real food. The
+   gift calorie/hunger mismatch is fixed and phone-proven: scarce 500 kcal
+   leaves 60/80 hunger; 2,000 kcal fills it. The 64-seed feeder panel flags
+   wins 31 -> 29 and community losses 8 -> 11 for review; default controls
+   are identical. See garden-gift-budget-audit.md. Exact meal demand and
+   communal serving opportunities remain needed before authoring the gate.
    The seven-day authored deed remains next. See
    `evidence/2026-10-15/feast-outcome-audit.md` and `feast-host-audit.md`.
    See `evidence/2026-10-15/harvest-source-audit.md` and the earlier

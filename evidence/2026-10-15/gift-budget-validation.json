@@ -1,0 +1,255 @@
+{
+  "frozenBaseCommit": "6c5211684c1cd8e6f70d86704050b4b10e371f7d",
+  "baselineConstruction": "git archive HEAD src/js src/data scripts index.html .gitattributes, then identical garden-feeder.js and sweep-compare.js copied into both roots before changing runtime",
+  "changedSources": [
+    "src/js/carexplore.js",
+    "src/js/game.js"
+  ],
+  "screenSeedsPerPolicy": 16,
+  "screenPolicies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver",
+    "garden-feeder"
+  ],
+  "confirmationSeeds": 64,
+  "confirmationPolicy": "garden-feeder",
+  "defaultRowsHashesAndMetricVectorsUnchanged": 64,
+  "sampledNeutralPairs": 10,
+  "retainedControlJobs": 20,
+  "confirmationReusedJobs": {
+    "before": 17,
+    "after": 17
+  },
+  "probesMatch": 6,
+  "focusedAssertions": 13,
+  "frozenFocused": {
+    "pass": 6,
+    "fail": 7
+  },
+  "quick": {
+    "pass": 156,
+    "fail": 0,
+    "seconds": 51
+  },
+  "full": {
+    "pass": 928,
+    "fail": 0,
+    "seconds": 224
+  },
+  "afterCounts": {
+    "wins": 29,
+    "communityLost": 11,
+    "deaths": 51,
+    "contestShowGear": 62
+  },
+  "beforeCounts": {
+    "wins": 31,
+    "communityLost": 8,
+    "deaths": 48,
+    "contestShowGear": 62
+  },
+  "firstGiftTraces": [
+    {
+      "seed": 7,
+      "before": {
+        "day": 59,
+        "bearer": "gen_z7f1x9s",
+        "recipient": "gen_vt70dlj",
+        "before": {
+          "reserve": 2208,
+          "hunger": 51,
+          "stock": 5005,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2208,
+          "hunger": 0,
+          "stock": 4745,
+          "consumed": 260
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 4,
+          "public": true,
+          "trustGain": 9
+        }
+      },
+      "after": {
+        "day": 59,
+        "bearer": "gen_z7f1x9s",
+        "recipient": "gen_vt70dlj",
+        "before": {
+          "reserve": 2208,
+          "hunger": 51,
+          "stock": 5005,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2208,
+          "hunger": 0,
+          "stock": 3705,
+          "consumed": 1300
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 20,
+          "public": true,
+          "trustGain": 19
+        }
+      }
+    },
+    {
+      "seed": 34,
+      "before": {
+        "day": 75,
+        "bearer": "gen_6wjwn0d",
+        "recipient": "gen_zys0159",
+        "before": {
+          "reserve": 2400,
+          "hunger": 73,
+          "stock": 9180,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2400,
+          "hunger": 0,
+          "stock": 8820,
+          "consumed": 360
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 4,
+          "public": true,
+          "trustGain": 3
+        }
+      },
+      "after": {
+        "day": 75,
+        "bearer": "gen_6wjwn0d",
+        "recipient": "gen_zys0159",
+        "before": {
+          "reserve": 2400,
+          "hunger": 73,
+          "stock": 9180,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2400,
+          "hunger": 0,
+          "stock": 7290,
+          "consumed": 1890
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 21,
+          "public": true,
+          "trustGain": 4
+        }
+      }
+    },
+    {
+      "seed": 37,
+      "before": {
+        "day": 74,
+        "bearer": "gen_nzbtq6e",
+        "recipient": "app_mgpsphin766",
+        "before": {
+          "reserve": 2360,
+          "hunger": 73,
+          "stock": 9530,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2360,
+          "hunger": 0,
+          "stock": 9270,
+          "consumed": 260
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 4,
+          "public": false,
+          "trustGain": 4
+        }
+      },
+      "after": {
+        "day": 74,
+        "bearer": "gen_nzbtq6e",
+        "recipient": "app_mgpsphin766",
+        "before": {
+          "reserve": 2360,
+          "hunger": 73,
+          "stock": 9530,
+          "consumed": 0
+        },
+        "after": {
+          "reserve": 2360,
+          "hunger": 0,
+          "stock": 7650,
+          "consumed": 1880
+        },
+        "sameBearer": true,
+        "sameDay": true,
+        "result": {
+          "ok": true,
+          "amount": "full",
+          "units": 22,
+          "public": false,
+          "trustGain": 8
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Confirmation report remains review_required; win/entry/community regression-watch intervals include zero.",
+    "Mixed feeding profile is not a pacifist or a complete all-playstyle viability proof.",
+    "The Garden seven-day gate and exact daily-demand definition remain unfinished.",
+    "Archived balance panels reported the enclosing checkout HEAD; in this experiment it equals the actual frozen archive base, but use full content manifests as provenance. Correct archive-HEAD handling remains a tooling follow-up."
+  ],
+  "artifactHashes": {
+    "garden-gift-ample-after.png": "815befaf4ba6d7b7a64d57157e8f7b140519b4328341ba8fee1df326b89a25da",
+    "garden-gift-before.png": "272a7ca496a428fc590c2def75008e5da8f4f1611de4f53d216d0f7e6d263615",
+    "garden-gift-budget-audit.md": "6a3b8fa66d4263ff64506df88d4f1bbfce95246bd7c899a125e787d687709f0c",
+    "garden-gift-phone-fixture.cjs": "98cbf9024d0a8d150406ea819d4906d2daf74b839e0be5a5489d76150541a5de",
+    "garden-gift-scarce-after.png": "39521e13cdb4af4d78a7ad2c054f9def2e7941670c162b24b680eb7fbc1b18eb",
+    "gift-budget-confirm-after.json.gz": "0eb7f71853f6a1e4be777e473ae63c5eb722a97e63c38f5e26adcde26638ce30",
+    "gift-budget-confirm-before.json.gz": "068a54f20fb1a29a4a05a9fb23a507e50845bd227f02488c870f18f39fe66196",
+    "gift-budget-confirm-comparison.json": "c2af4b5c7258b07cdabda0334e35dfd6eb81358dc573b7643f2662c5ad3b47fb",
+    "gift-budget-confirm-comparison.md": "8153088ca08285fa3b89770bb96f98494ebcd39840e2d3aa62615d8387a43669",
+    "gift-budget-full.txt": "54242420087a3bfbf768eaca50ef7886943f6fce06b7ed80b4f13d7647b8698a",
+    "gift-budget-lost-win-probes.json.gz": "f80b50ea4700c48f8dafa56c1cfd7fc44ad0df7d10ecd651600c6b67d16d945e",
+    "gift-budget-observer-proofs.json.gz": "92e2372ca695f1661c3c331fc0e59cbeb8e859ac91917866558801def45c6620",
+    "gift-budget-quick.txt": "8d8b9391356b244736f772280c86dc88daacdad6e9d13c744ed92136903c4294",
+    "gift-budget-runtime-after.txt": "ec52c035a221275487617bde00fe3dfe9b4cb8a2c94ca8f488614cef859fbf39",
+    "gift-budget-runtime-before.txt": "16376bce850113ee93fde42d9106c0a1121fe25af90f147c263a5e3add05b667",
+    "gift-budget-screen-after.json.gz": "d0836c0f4bf6e81b9e28afb441ed70cf3d5670b0f91d8b46e4e1644172276cb4",
+    "gift-budget-screen-before.json.gz": "e8379dc76d9291e59d4ff3a767617901ae9eb2f42b1aeb4f73c276bcc97966a0",
+    "gift-budget-screen-comparison.json": "a3ceb0fd399385582e9523db3ddbd31d888f121def871da9097f1fa0e1e1da42",
+    "gift-budget-screen-comparison.md": "dc06b89025cc7b6f18ebd3049ca9a6fa48ccdfde317b9205ae4681f27cd47aad",
+    "gift-budget-source.json.gz": "6d62cd5776ae00ce5183a16086835e16b1f736196a40b9aff3c02f06f1b635b4",
+    "gift-feeder-after-coverage.json": "b486653261e08cd8f61f052d9e8d60272de6df6638f9fa12fac2906d7dc8f5ee",
+    "gift-feeder-after-coverage.md": "58497a2c170d38e87ef72d46a0375880f80954a690df7fd0f1610e00bd598bab",
+    "gift-feeder-after-deeds.json.gz": "a12c16585ab2b090b7530796ea207c8a71a6907e9ad61b732c44f491020b1d5b",
+    "gift-feeder-before-coverage.json": "4de31051260ca8d149cdc9f4d3809adf43e2fff8538916a62152763957e3da5f",
+    "gift-feeder-before-coverage.md": "c930778139598fd8e23f79fee37696bc6345ad5b04a64ee1e4352bcc11398ca5",
+    "gift-feeder-before-deeds.json.gz": "19ca9cb09aed6a374a3607c59bc2268bed213745a79327aaf1dab7ff43eea647"
+  },
+  "artifactHashTextFormat": "LF as committed; gzip/image hashes cover exact bytes"
+}

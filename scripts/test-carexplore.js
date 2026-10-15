@@ -77,9 +77,9 @@ r = Game.giveFood(vid, 'bite');
 ok('giveFood bite returns ok', r && r.ok);
 ok('giveFood bite takes 1 unit', r.units === 1);
 
-// full feeds generously
+// Full feeding needs enough actual food: 80 hunger costs 2,000 kcal.
 freshGame();
-giveFoodItem(10, 50);
+giveFoodItem(60, 50);
 vid = getVillager();
 Game.npcNeeds(vid).hunger = 80;
 r = Game.giveFood(vid, 'full');

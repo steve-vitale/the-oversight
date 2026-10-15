@@ -3991,7 +3991,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.remember(vid, 'gift', 'unasked-for food');
       }
       const beforeHunger = this.npcNeeds(vid).hunger;
-      this.npcNeeds(vid).hunger = Math.max(0, beforeHunger - 60);
+      this.npcNeeds(vid).hunger = Math.max(0, beforeHunger - Math.min(60, giftKcal / 25));
       this.recordHarvestIntake(vid, [{ item: food, kcal: giftKcal, nourishment: Math.min(giftKcal, Math.min(beforeHunger, 60) * 25) }], 'gift');
       this.say(`You give ${this.displayName(vid)} some ${food.name}. They look at you differently now.`);
       // trustMoved (socialite r4 2026-10-09): the recipient's trust already

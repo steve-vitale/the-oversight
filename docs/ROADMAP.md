@@ -369,6 +369,18 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   gate or threshold changed. Next: targeted public harvest/donation/gift
   play, exact need denominators and runtime membership/day settlement.
   See `evidence/2026-10-15/garden-coverage-audit.md`.
+- **Deliberate feeding / gift repair:** garden-feeder now exercises real
+  tending, harvests and nearby gifts without resource/kit grants. Phone play
+  exposed 250 kcal clearing 80 hunger. Gift relief now follows the actual
+  food and the existing 25-kcal/hunger receipt convention; a full gift draws
+  enough food or leaves hunger. Default four-policy 16-seed rows, hashes and
+  all 23 metric vectors stay identical. The feeder's 64-seed comparison is
+  review_required: wins 31 -> 29, community losses 8 -> 11, player deaths
+  48 -> 51, with exploratory intervals including no change. Contest/show
+  tier-3+ weapon/armor access stays 62/64. Three lost-win replays match their
+  saved rows/hashes; first gifts charge real food and preserve dinner stock.
+  This is a correctness repair, not a balance improvement claim. The
+  seven-day Garden gate remains open. See garden-gift-budget-audit.md.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

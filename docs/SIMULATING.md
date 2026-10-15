@@ -326,3 +326,33 @@ The neutral-proof script runs separate observer-on/off children for every
 selected policy/seed; the default is all four policies and seed 7. Keep raw
 panels, the actual observer sources and proof jobs with the report. See the
 2026-10-15 garden-coverage evidence for the first 16-seed screen and its limits.
+
+## Deliberate village feeding
+
+`--policies garden-feeder` selects the named caregiver-based feeding strategy.
+It creates/sows/tends/harvests normal plots and gives full gifts to nearby
+residents at the gift card's visible hunger threshold. Food/kit/XP are never
+granted. It keeps 2,000 carried kcal plus a conservative full gift and one
+whole-unit rounding before giving; real survivals, contested harvests and
+limited opportunities still matter. This mixed policy is not a pacifist test.
+
+The ordinary four-policy baseline remains unchanged. Use the same feeder file
+and registry on both roots when comparing a game lever, then run matched
+16-seed screens and 64-seed confirmation where effects are small. Keep every
+metric, including ending/community regressions. A correct calorie debit is
+not evidence that a feeding strategy is balanced or that Garden is complete.
+
+To inspect a policy's own counters and actual gift transactions while replaying
+a saved case without the scorecard observer:
+
+```text
+node scripts/godpath/probe-feeder-policy.js --panel <panel.json.gz> --seed 7 --out <probe.json>
+```
+
+Use `--root <frozen-root>` for a baseline. The probe checks source/flag/Node
+identity before and after, and rejects a different standard row or gameplay
+hash. Policy counters are diagnostic, not ascension receipts. For prepared
+phone care controls, run the dated garden-gift-phone-fixture.cjs generator and
+serve its .git page with ?debug=1 on a fresh loopback origin. The PWA's offline
+cache can retain old scripts on reload; verify the displayed gift description
+before testing a change. Do not bump the release/SW version for a local test.

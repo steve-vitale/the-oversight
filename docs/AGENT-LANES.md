@@ -153,3 +153,10 @@ than comparing them against old bot reports as if only gameplay changed.
 Muse retains regions/nomad/systems ownership. Group regional cohorts separately
 and use the common guardrails when measuring its changes. Maintenance checks
 run automatically through check.js; see SIMULATING.md, Maintaining measurement.
+
+Garden gift-budget exception (2026-10-15): Codex repairs the confirmed live
+carexplore.js gift calorie/hunger mismatch and matching game.js fallback.
+Phone play showed 250 kcal clearing 80 hunger while the receipt correctly
+recorded only 250 kcal. This is a narrow actual-feeding/parity correction,
+with a dedicated public-action feeder policy, not a Garden threshold change
+or work in Muse's region/nomad/systems lane.

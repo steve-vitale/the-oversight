@@ -46,6 +46,7 @@ exposure. Run `scripts/campaign-audit.js` for natural coverage and read
 | `merchant` | livelihood.js | same capable brain, no deliberate hunts/feast fights, earns a food budget and shops/sells at actual carts | commerce opportunities, prices and gear access |
 | `maker` | livelihood.js | merchant plus reading held books, paid trips seeking books, known equipment recipes and preserving cooked meat | recipe/material reachability and useful crafting |
 | `caregiver` | livelihood.js | same capable brain, no deliberate hunts/feast fights, comforts actual frightened/grieving villagers | a care-led run's rewards, survival and ending access |
+| `garden-feeder` | garden-feeder.js | caregiver plus six real garden plots, personal tending/harvesting and full gifts to nearby visibly hungry residents; keeps a dinner buffer | named feeding experiment, not a pacifist or a default-policy replacement |
 | `covenanter` | peer-league.js | same capable survival/choice brain, no deliberate hunts; known/courted equal links, real crisis/defense answers and bounded famine draws | natural league founding, food relief, ending access |
 | `charterer` | peer-league.js | same brain, trade charters and priced help requests; no deliberate hunts | natural charter founding, useful trade routes and endings |
 | `peer-control` | peer-league.js | same brain and hunt restrictions; both LEAD and peer proposals suppressed | paired control for peer-route behavior |
