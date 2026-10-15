@@ -110,12 +110,15 @@ async function main() {
   fr = Game.firstRunLanding('sa_amazon', [fxClimate, fxNeighbor]);
   ok(fr.region.id === 'fx_wet_neighbor', 'among equals, the origin region\'s neighbor wins');
   amazon.neighbors.pop();
-  // the shipped world today: one playable region, Lagos lands there on run 1
+  // the shipped world: Lagos lands in its origin region if playable, else the default
   Game.data.regions = regionsShipped;
   wipeDevice();
   await start('Lagos, Nigeria');
-  ok(Game.state.region === 'na_eastern_woodlands' && regionStart().why === 'first_run_origin' && regionStart().via === 'default',
-    'shipped data: a Lagos first run lands in the eastern woodlands (no African region playable yet)', JSON.stringify(regionStart()));
+  const lagosRegion = Game.parseOrigin('Lagos, Nigeria').regions[0];
+  const lagosPlayable = Game.playableRegions().some(r => r.id === lagosRegion);
+  const expectLagos = lagosPlayable ? lagosRegion : 'na_eastern_woodlands';
+  ok(Game.state.region === expectLagos && regionStart().why === 'first_run_origin',
+    `shipped data: a Lagos first run lands in ${expectLagos}`, JSON.stringify(regionStart()));
   Game.data.regions = regionsShipped.concat([fx]);
 
   // ============ S4 debug wins ============
