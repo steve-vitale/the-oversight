@@ -4910,7 +4910,16 @@
       // a prize when it's taken (offering it would be a taunt, not a gift).
       && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
     if (!bag.length) return false;
-    const pick = (arr) => arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
+    // Weighted by _steerW (set below; 1 when unset), one Math.random per
+    // draw. It was a uniform splice, so the steering weights below did
+    // nothing (diagnosis 2026-10-15; scripts/test-gift-steering-20261015.js).
+    const pick = (arr) => {
+      let tot = 0;
+      for (const a of arr) tot += (a._steerW != null ? a._steerW : 1);
+      let r = Math.random() * tot, i = 0;
+      for (; i < arr.length - 1; i++) { r -= (arr[i]._steerW != null ? arr[i]._steerW : 1); if (r < 0) break; }
+      return arr.splice(i, 1)[0];
+    };
     // PATH STEERING (Steve 2026-10-14 ability coherency, Spire pattern):
     // weight offers toward held paths — the path of least resistance is a
     // build, not a pile. Build-arounds surface when you've committed (2+).
