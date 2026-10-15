@@ -266,7 +266,8 @@
         if (typeof Game.genMap === 'function') Game.genMap();
       } catch (e) { /* the map is best-effort in thin rigs */ }
       log(`entered ${rname}.`);
-      say(`The ${rname} spreads out ahead. Nobody here knows your name. That's the point — and the problem.`);
+      const disp = String(rname).replace(/^(the|a|an)\s+/i, '');
+      say(`The ${disp} spreads out ahead. Nobody here knows your name. That's the point — and the problem.`);
       return true;
     },
 
