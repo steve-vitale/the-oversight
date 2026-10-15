@@ -101,3 +101,9 @@ The tools are shared on `codex/balanced-measurement`, based on the regional
 Agent entry instructions live in AGENTS.md; check.js runs the contract/proof
 maintenance hook in both quick and full mode. See SIMULATING.md for commands
 and the update procedure. Existing cache identities prevent stale-case reuse.
+
+Publication: shared tooling branch `codex/balanced-measurement` is pushed,
+with draft integration PR https://github.com/steve-vitale/the-oversight/pull/1.
+Its branch-specific use instructions and balance-sharing.md evidence preserve
+master's policy baseline and disclose the shared game's existing red checks.
+The complete feature branch passed quick 154/154 and full 926/926.

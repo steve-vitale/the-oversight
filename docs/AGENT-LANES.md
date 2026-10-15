@@ -146,8 +146,9 @@ collector and policy/harness revisions for both comparison roots, and publish
 all per-policy regressions with any gains. The first 16-seed calibration is
 a diagnostic screen; the four policies are mixed, not certified pacifists.
 
-The shared package includes updated capable/competent and livelihood policies
-and the standard harness: start a fresh baseline with these versions rather
+The shared package keeps master's capable policy, adds the public cooking
+helper used by livelihood profiles and updates the standard harness.
+Start a fresh baseline with these versions rather
 than comparing them against old bot reports as if only gameplay changed.
 Muse retains regions/nomad/systems ownership. Group regional cohorts separately
 and use the common guardrails when measuring its changes. Maintenance checks
