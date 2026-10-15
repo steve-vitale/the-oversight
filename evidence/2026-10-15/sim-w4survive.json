@@ -1,0 +1,1045 @@
+{
+ "generated": "2026-10-15T05:34:28.986Z",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "substrate": "leadcourt (diplomacy road)",
+ "diagnostic_go": "(1) >=80% of wave-4 contacts outcome-attributed; (2) a named set of distinguishing factors survivors-vs-bleeders",
+ "trajectory_neutral": true,
+ "neutrality": [
+  {
+   "seed": 11,
+   "identical": true,
+   "days": [
+    33,
+    33
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    null,
+    null
+   ],
+   "deaths": [
+    15,
+    15
+   ]
+  },
+  {
+   "seed": 22,
+   "identical": true,
+   "days": [
+    138,
+    138
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    99,
+    99
+   ],
+   "deaths": [
+    45,
+    45
+   ]
+  },
+  {
+   "seed": 33,
+   "identical": true,
+   "days": [
+    180,
+    180
+   ],
+   "end": [
+    "survived",
+    "survived"
+   ],
+   "unlock": [
+    57,
+    57
+   ],
+   "deaths": [
+    50,
+    50
+   ]
+  },
+  {
+   "seed": 44,
+   "identical": true,
+   "days": [
+    150,
+    150
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    58,
+    58
+   ],
+   "deaths": [
+    32,
+    32
+   ]
+  },
+  {
+   "seed": 55,
+   "identical": true,
+   "days": [
+    115,
+    115
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    null,
+    null
+   ],
+   "deaths": [
+    36,
+    36
+   ]
+  },
+  {
+   "seed": 66,
+   "identical": true,
+   "days": [
+    67,
+    67
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    65,
+    65
+   ],
+   "deaths": [
+    23,
+    23
+   ]
+  },
+  {
+   "seed": 77,
+   "identical": true,
+   "days": [
+    93,
+    93
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    57,
+    57
+   ],
+   "deaths": [
+    33,
+    33
+   ]
+  },
+  {
+   "seed": 88,
+   "identical": true,
+   "days": [
+    90,
+    90
+   ],
+   "end": [
+    "village-lost",
+    "village-lost"
+   ],
+   "unlock": [
+    57,
+    57
+   ],
+   "deaths": [
+    28,
+    28
+   ]
+  }
+ ],
+ "attribution": {
+  "unlockers": 8,
+  "contacts": 5,
+  "noContact": 3,
+  "noContactSeeds": [
+   11,
+   55,
+   66
+  ],
+  "attributed": 5,
+  "rate": 1,
+  "goProng1": true
+ },
+ "distinguishing": {
+  "nSurvivors": 5,
+  "nBleeders": 0,
+  "nCensored": 0,
+  "factors": [],
+  "verdict": "unconcentrated — no measured field separates survivors from bleeders under the pre-registered rule"
+ },
+ "wall": {
+  "n": 8,
+  "national": 5,
+  "table": 0,
+  "wins": 0,
+  "wave4unlocks": 6,
+  "wave5": 0,
+  "medianDays": 115,
+  "maxDays": 180,
+  "deathCauses": {
+   "villager:expedition": 14,
+   "player:combat": 50,
+   "villager:a wound that wouldn't close": 9,
+   "villager:villager combat": 50,
+   "villager:combat": 71,
+   "villager:sickness": 12,
+   "villager:starvation": 5,
+   "villager:a dog-shaped silence at the treeline": 1,
+   "villager:monster": 39,
+   "player:the expedition": 2,
+   "villager:contest": 2,
+   "player:contest": 1,
+   "player:starvation": 2,
+   "player:dehydration": 1,
+   "player:lockjaw": 1,
+   "villager:alien": 1,
+   "villager:ambush": 1
+  }
+ },
+ "control": [
+  {
+   "seed": 11,
+   "instrumented": false,
+   "days": 33,
+   "endReason": "village-lost",
+   "maxUnlocked": 2,
+   "unlockDay": null,
+   "rosterAtUnlock": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 15,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:expedition": 1,
+    "player:combat": 4,
+    "villager:a wound that wouldn't close": 1,
+    "villager:villager combat": 2,
+    "villager:combat": 5,
+    "villager:sickness": 1,
+    "villager:starvation": 1
+   },
+   "row": null
+  },
+  {
+   "seed": 22,
+   "instrumented": false,
+   "days": 138,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 99,
+   "rosterAtUnlock": 10,
+   "nationalDays": 39,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 45,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:a dog-shaped silence at the treeline": 1,
+    "villager:villager combat": 12,
+    "villager:monster": 8,
+    "player:combat": 6,
+    "villager:combat": 16,
+    "villager:expedition": 2
+   },
+   "row": null
+  },
+  {
+   "seed": 33,
+   "instrumented": false,
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 86,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 50,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:villager combat": 4,
+    "villager:monster": 11,
+    "player:combat": 9,
+    "villager:combat": 16,
+    "villager:sickness": 3,
+    "villager:a wound that wouldn't close": 3,
+    "villager:expedition": 1,
+    "player:the expedition": 2,
+    "villager:contest": 1
+   },
+   "row": null
+  },
+  {
+   "seed": 44,
+   "instrumented": false,
+   "days": 150,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 58,
+   "rosterAtUnlock": 10,
+   "nationalDays": 74,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 32,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:expedition": 4,
+    "villager:villager combat": 3,
+    "villager:monster": 9,
+    "villager:combat": 3,
+    "player:combat": 11,
+    "player:contest": 1,
+    "player:starvation": 1
+   },
+   "row": null
+  },
+  {
+   "seed": 55,
+   "instrumented": false,
+   "days": 115,
+   "endReason": "village-lost",
+   "maxUnlocked": 3,
+   "unlockDay": null,
+   "rosterAtUnlock": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 36,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:expedition": 6,
+    "villager:villager combat": 9,
+    "player:dehydration": 1,
+    "player:combat": 7,
+    "villager:combat": 10,
+    "villager:contest": 1,
+    "villager:monster": 1,
+    "player:starvation": 1
+   },
+   "row": null
+  },
+  {
+   "seed": 66,
+   "instrumented": false,
+   "days": 67,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 65,
+   "rosterAtUnlock": 9,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 23,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:villager combat": 12,
+    "player:combat": 4,
+    "villager:monster": 1,
+    "villager:combat": 3,
+    "player:lockjaw": 1,
+    "villager:starvation": 2
+   },
+   "row": null
+  },
+  {
+   "seed": 77,
+   "instrumented": false,
+   "days": 93,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 16,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 33,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:combat": 8,
+    "player:combat": 7,
+    "villager:a wound that wouldn't close": 3,
+    "villager:villager combat": 6,
+    "villager:sickness": 4,
+    "villager:monster": 4,
+    "villager:alien": 1
+   },
+   "row": null
+  },
+  {
+   "seed": 88,
+   "instrumented": false,
+   "days": 90,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 13,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 28,
+   "trackDeaths": null,
+   "fightsObserved": null,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:villager combat": 2,
+    "villager:ambush": 1,
+    "villager:monster": 5,
+    "villager:combat": 10,
+    "villager:a wound that wouldn't close": 2,
+    "villager:sickness": 4,
+    "player:combat": 2,
+    "villager:starvation": 2
+   },
+   "row": null
+  }
+ ],
+ "instrumented": [
+  {
+   "seed": 11,
+   "instrumented": true,
+   "days": 33,
+   "endReason": "village-lost",
+   "maxUnlocked": 2,
+   "unlockDay": null,
+   "rosterAtUnlock": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 15,
+   "trackDeaths": 15,
+   "fightsObserved": 20,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:expedition": 1,
+    "player:combat": 4,
+    "villager:a wound that wouldn't close": 1,
+    "villager:villager combat": 2,
+    "villager:combat": 5,
+    "villager:sickness": 1,
+    "villager:starvation": 1
+   },
+   "row": {
+    "seed": 11,
+    "unlockDay": null,
+    "contacted": false,
+    "contactDay": null,
+    "daysSinceUnlock": null,
+    "rosterAtUnlock": null,
+    "rosterAtContact": 0,
+    "gearCoverage": null,
+    "meanWb": null,
+    "meanArmorP": null,
+    "armorCoverage": null,
+    "counterKnownW4": null,
+    "counterContactingW4": null,
+    "pantryFreshDays": null,
+    "scholarTile": null,
+    "havenTile": null,
+    "scholarAwayFromHaven": null,
+    "composition": [],
+    "contactW4FightCount": 0,
+    "contactChannels": [],
+    "preUnlockW4Fights": null,
+    "meanHp": null,
+    "minHp": null,
+    "linksActive": null,
+    "linksSeasoned": null,
+    "standingAtContact": null,
+    "standingWar": null,
+    "standingDiplomacy": null,
+    "standingPlenty": null,
+    "scaleRankAtContact": null,
+    "alive30post": null,
+    "endDay": 33,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": false
+   }
+  },
+  {
+   "seed": 22,
+   "instrumented": true,
+   "days": 138,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 99,
+   "rosterAtUnlock": 10,
+   "nationalDays": 39,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 45,
+   "trackDeaths": 45,
+   "fightsObserved": 154,
+   "contactDay": 100,
+   "contactSnapDay": 100,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:a dog-shaped silence at the treeline": 1,
+    "villager:villager combat": 12,
+    "villager:monster": 8,
+    "player:combat": 6,
+    "villager:combat": 16,
+    "villager:expedition": 2
+   },
+   "row": {
+    "seed": 22,
+    "unlockDay": 99,
+    "contacted": true,
+    "contactDay": 100,
+    "daysSinceUnlock": 1,
+    "rosterAtUnlock": 10,
+    "rosterAtContact": 10,
+    "gearCoverage": 0.6,
+    "meanWb": 10.7,
+    "meanArmorP": 16.8,
+    "armorCoverage": 0.9,
+    "counterKnownW4": 0,
+    "counterContactingW4": 1,
+    "pantryFreshDays": 57,
+    "scholarTile": {
+     "x": 5,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "scholarAwayFromHaven": true,
+    "composition": [
+     {
+      "monsterId": "algorithm",
+      "wave": 4
+     }
+    ],
+    "contactW4FightCount": 1,
+    "contactChannels": [
+     "wild"
+    ],
+    "preUnlockW4Fights": 0,
+    "meanHp": 97.1,
+    "minHp": 86,
+    "linksActive": 3,
+    "linksSeasoned": 3,
+    "standingAtContact": 102,
+    "standingWar": 0,
+    "standingDiplomacy": 102,
+    "standingPlenty": 0,
+    "scaleRankAtContact": "regional",
+    "alive30post": true,
+    "endDay": 138,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": true
+   }
+  },
+  {
+   "seed": 33,
+   "instrumented": true,
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 86,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 50,
+   "trackDeaths": 50,
+   "fightsObserved": 196,
+   "contactDay": 64,
+   "contactSnapDay": 64,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:villager combat": 4,
+    "villager:monster": 11,
+    "player:combat": 9,
+    "villager:combat": 16,
+    "villager:sickness": 3,
+    "villager:a wound that wouldn't close": 3,
+    "villager:expedition": 1,
+    "player:the expedition": 2,
+    "villager:contest": 1
+   },
+   "row": {
+    "seed": 33,
+    "unlockDay": 57,
+    "contacted": true,
+    "contactDay": 64,
+    "daysSinceUnlock": 7,
+    "rosterAtUnlock": 10,
+    "rosterAtContact": 10,
+    "gearCoverage": 0.6,
+    "meanWb": 5.3,
+    "meanArmorP": 4.8,
+    "armorCoverage": 0.7,
+    "counterKnownW4": 0,
+    "counterContactingW4": 1,
+    "pantryFreshDays": 55,
+    "scholarTile": {
+     "x": 5,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "scholarAwayFromHaven": true,
+    "composition": [
+     {
+      "monsterId": "suburb",
+      "wave": 4
+     }
+    ],
+    "contactW4FightCount": 1,
+    "contactChannels": [
+     "wild"
+    ],
+    "preUnlockW4Fights": 0,
+    "meanHp": 89.7,
+    "minHp": 59,
+    "linksActive": 3,
+    "linksSeasoned": 3,
+    "standingAtContact": 102,
+    "standingWar": 0,
+    "standingDiplomacy": 102,
+    "standingPlenty": 0,
+    "scaleRankAtContact": "regional",
+    "alive30post": true,
+    "endDay": 180,
+    "endReason": "survived",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": true
+   }
+  },
+  {
+   "seed": 44,
+   "instrumented": true,
+   "days": 150,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 58,
+   "rosterAtUnlock": 10,
+   "nationalDays": 74,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 32,
+   "trackDeaths": 32,
+   "fightsObserved": 211,
+   "contactDay": 62,
+   "contactSnapDay": 62,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:expedition": 4,
+    "villager:villager combat": 3,
+    "villager:monster": 9,
+    "villager:combat": 3,
+    "player:combat": 11,
+    "player:contest": 1,
+    "player:starvation": 1
+   },
+   "row": {
+    "seed": 44,
+    "unlockDay": 58,
+    "contacted": true,
+    "contactDay": 62,
+    "daysSinceUnlock": 4,
+    "rosterAtUnlock": 10,
+    "rosterAtContact": 9,
+    "gearCoverage": 0.667,
+    "meanWb": 14.22,
+    "meanArmorP": 5.56,
+    "armorCoverage": 0.889,
+    "counterKnownW4": 0,
+    "counterContactingW4": 1,
+    "pantryFreshDays": 18,
+    "scholarTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "scholarAwayFromHaven": false,
+    "composition": [
+     {
+      "monsterId": "suburb",
+      "wave": 4
+     }
+    ],
+    "contactW4FightCount": 1,
+    "contactChannels": [
+     "wild"
+    ],
+    "preUnlockW4Fights": 0,
+    "meanHp": 84.8,
+    "minHp": 40,
+    "linksActive": 3,
+    "linksSeasoned": 3,
+    "standingAtContact": 127,
+    "standingWar": 25,
+    "standingDiplomacy": 102,
+    "standingPlenty": 0,
+    "scaleRankAtContact": "regional",
+    "alive30post": true,
+    "endDay": 150,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": true
+   }
+  },
+  {
+   "seed": 55,
+   "instrumented": true,
+   "days": 115,
+   "endReason": "village-lost",
+   "maxUnlocked": 3,
+   "unlockDay": null,
+   "rosterAtUnlock": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 36,
+   "trackDeaths": 37,
+   "fightsObserved": 142,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": null,
+   "deathCauses": {
+    "villager:expedition": 6,
+    "villager:villager combat": 9,
+    "player:dehydration": 1,
+    "player:combat": 7,
+    "villager:combat": 10,
+    "villager:contest": 1,
+    "villager:monster": 1,
+    "player:starvation": 1
+   },
+   "row": {
+    "seed": 55,
+    "unlockDay": null,
+    "contacted": false,
+    "contactDay": null,
+    "daysSinceUnlock": null,
+    "rosterAtUnlock": null,
+    "rosterAtContact": 0,
+    "gearCoverage": null,
+    "meanWb": null,
+    "meanArmorP": null,
+    "armorCoverage": null,
+    "counterKnownW4": null,
+    "counterContactingW4": null,
+    "pantryFreshDays": null,
+    "scholarTile": null,
+    "havenTile": null,
+    "scholarAwayFromHaven": null,
+    "composition": [],
+    "contactW4FightCount": 0,
+    "contactChannels": [],
+    "preUnlockW4Fights": null,
+    "meanHp": null,
+    "minHp": null,
+    "linksActive": null,
+    "linksSeasoned": null,
+    "standingAtContact": null,
+    "standingWar": null,
+    "standingDiplomacy": null,
+    "standingPlenty": null,
+    "scaleRankAtContact": null,
+    "alive30post": null,
+    "endDay": 115,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": false
+   }
+  },
+  {
+   "seed": 66,
+   "instrumented": true,
+   "days": 67,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 65,
+   "rosterAtUnlock": 9,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 23,
+   "trackDeaths": 23,
+   "fightsObserved": 81,
+   "contactDay": null,
+   "contactSnapDay": null,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:villager combat": 12,
+    "player:combat": 4,
+    "villager:monster": 1,
+    "villager:combat": 3,
+    "player:lockjaw": 1,
+    "villager:starvation": 2
+   },
+   "row": {
+    "seed": 66,
+    "unlockDay": 65,
+    "contacted": false,
+    "contactDay": null,
+    "daysSinceUnlock": null,
+    "rosterAtUnlock": 9,
+    "rosterAtContact": 0,
+    "gearCoverage": null,
+    "meanWb": null,
+    "meanArmorP": null,
+    "armorCoverage": null,
+    "counterKnownW4": null,
+    "counterContactingW4": null,
+    "pantryFreshDays": null,
+    "scholarTile": null,
+    "havenTile": null,
+    "scholarAwayFromHaven": null,
+    "composition": [],
+    "contactW4FightCount": 0,
+    "contactChannels": [],
+    "preUnlockW4Fights": 0,
+    "meanHp": null,
+    "minHp": null,
+    "linksActive": null,
+    "linksSeasoned": null,
+    "standingAtContact": null,
+    "standingWar": null,
+    "standingDiplomacy": null,
+    "standingPlenty": null,
+    "scaleRankAtContact": null,
+    "alive30post": false,
+    "endDay": 67,
+    "endReason": "village-lost",
+    "deathCause": "combat x2",
+    "deathDay": 67,
+    "attributed": false
+   }
+  },
+  {
+   "seed": 77,
+   "instrumented": true,
+   "days": 93,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 16,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 33,
+   "trackDeaths": 33,
+   "fightsObserved": 58,
+   "contactDay": 66,
+   "contactSnapDay": 66,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:combat": 8,
+    "player:combat": 7,
+    "villager:a wound that wouldn't close": 3,
+    "villager:villager combat": 6,
+    "villager:sickness": 4,
+    "villager:monster": 4,
+    "villager:alien": 1
+   },
+   "row": {
+    "seed": 77,
+    "unlockDay": 57,
+    "contacted": true,
+    "contactDay": 66,
+    "daysSinceUnlock": 9,
+    "rosterAtUnlock": 10,
+    "rosterAtContact": 10,
+    "gearCoverage": 0.6,
+    "meanWb": 10.3,
+    "meanArmorP": 13.9,
+    "armorCoverage": 0.8,
+    "counterKnownW4": 0,
+    "counterContactingW4": 1,
+    "pantryFreshDays": 21,
+    "scholarTile": {
+     "x": 4,
+     "y": 5
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "scholarAwayFromHaven": true,
+    "composition": [
+     {
+      "monsterId": "eulogy",
+      "wave": 4
+     }
+    ],
+    "contactW4FightCount": 1,
+    "contactChannels": [
+     "wild"
+    ],
+    "preUnlockW4Fights": 0,
+    "meanHp": 90.3,
+    "minHp": 32,
+    "linksActive": 3,
+    "linksSeasoned": 3,
+    "standingAtContact": 102,
+    "standingWar": 0,
+    "standingDiplomacy": 102,
+    "standingPlenty": 0,
+    "scaleRankAtContact": "regional",
+    "alive30post": true,
+    "endDay": 93,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": true
+   }
+  },
+  {
+   "seed": 88,
+   "instrumented": true,
+   "days": 90,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay": 57,
+   "rosterAtUnlock": 10,
+   "nationalDays": 13,
+   "tableEver": false,
+   "won": false,
+   "samplerDeaths": 28,
+   "trackDeaths": 28,
+   "fightsObserved": 72,
+   "contactDay": 65,
+   "contactSnapDay": 65,
+   "preUnlockW4Fights": 0,
+   "deathCauses": {
+    "villager:villager combat": 2,
+    "villager:ambush": 1,
+    "villager:monster": 5,
+    "villager:combat": 10,
+    "villager:a wound that wouldn't close": 2,
+    "villager:sickness": 4,
+    "player:combat": 2,
+    "villager:starvation": 2
+   },
+   "row": {
+    "seed": 88,
+    "unlockDay": 57,
+    "contacted": true,
+    "contactDay": 65,
+    "daysSinceUnlock": 8,
+    "rosterAtUnlock": 10,
+    "rosterAtContact": 9,
+    "gearCoverage": 0.444,
+    "meanWb": 3.78,
+    "meanArmorP": 11.67,
+    "armorCoverage": 0.556,
+    "counterKnownW4": 0,
+    "counterContactingW4": 1,
+    "pantryFreshDays": 8,
+    "scholarTile": {
+     "x": 4,
+     "y": 4
+    },
+    "havenTile": {
+     "x": 4,
+     "y": 4
+    },
+    "scholarAwayFromHaven": false,
+    "composition": [
+     {
+      "monsterId": "suburb",
+      "wave": 4
+     }
+    ],
+    "contactW4FightCount": 1,
+    "contactChannels": [
+     "raid"
+    ],
+    "preUnlockW4Fights": 0,
+    "meanHp": 55.7,
+    "minHp": 1,
+    "linksActive": 3,
+    "linksSeasoned": 3,
+    "standingAtContact": 102,
+    "standingWar": 0,
+    "standingDiplomacy": 102,
+    "standingPlenty": 0,
+    "scaleRankAtContact": "regional",
+    "alive30post": true,
+    "endDay": 90,
+    "endReason": "village-lost",
+    "deathCause": null,
+    "deathDay": null,
+    "attributed": true
+   }
+  }
+ ]
+}
