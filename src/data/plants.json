@@ -3,7 +3,8 @@
     "biomes": [
       "se_woodlands",
       "eu_temperate_forest",
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 45,
     "codex": "Every part is edible — leaves, flowers, roots. Bitter means nutritious. The first green of spring and the last of fall.",
@@ -33,7 +34,9 @@
       "ohio",
       "georgia",
       "pacific_nw",
-      "columbus"
+      "columbus",
+      "india",
+      "delhi"
     ],
     "description": "a plant with jagged leaves and a yellow flower",
     "knowledgeLevels": {
@@ -785,7 +788,8 @@
     "scientific": "Chenopodium album",
     "biomes": [
       "se_woodlands",
-      "eu_temperate_forest"
+      "eu_temperate_forest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 50,
     "unit": "handful of leaves",
@@ -800,7 +804,11 @@
       "ohio",
       "georgia",
       "pacific_nw",
-      "columbus"
+      "columbus",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "confidence": "high",
     "idDifficulty": 1,
@@ -849,7 +857,8 @@
       "se_woodlands",
       "eu_temperate_forest",
       "amazon_rainforest",
-      "sahel_savanna"
+      "sahel_savanna",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 30,
     "unit": "handful",
@@ -864,7 +873,11 @@
       "ohio",
       "georgia",
       "pacific_nw",
-      "columbus"
+      "columbus",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "confidence": "high",
     "idDifficulty": 2,
@@ -1097,7 +1110,8 @@
     "biomes": [
       "se_woodlands",
       "eu_temperate_forest",
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 35,
     "unit": "leaf",
@@ -1112,7 +1126,9 @@
       "ohio",
       "georgia",
       "pacific_nw",
-      "columbus"
+      "columbus",
+      "india",
+      "delhi"
     ],
     "confidence": "high",
     "idDifficulty": 1,
@@ -2252,312 +2268,339 @@
       "wild_ginger"
     ]
   },
-{
- "id": "prickly_pear",
- "taxon": ["plant", "herb", "prickly_pear"],
- "name": "Prickly Pear",
- "scientific": "Opuntia engelmannii",
- "biomes": [
-   "se_woodlands",
-   "sahel_savanna"
- ],
- "caloriesPerUnit": 40,
- "unit": "pad/fruit",
- "knowledgeLevels": {
-  "1": "Prickly pear. Flat pads, sharp spines. The fruits are called tunas.",
-  "2": "Parts: pads (nopal \u2014 vegetable), fruits (tuna \u2014 sweet). Burn off spines first or use tongs.",
-  "3": "Uses: pads are food AND water \u2014 chew for moisture. Fruits are high in sugar.",
-  "4": "Mastery: singe spines over fire, then peel. Pads keep for days. In the desert, this plant is life."
- },
- "preparation": "Burn or scrape off glochids (tiny spines). Pads: grill or boil. Fruits: peel and eat.",
- "regions": [
-  "southwest_desert"
- ],
- "confidence": "high",
- "idDifficulty": 2,
- "description": "flat paddle-shaped cactus pads, wicked spines, red-purple fruits",
- "seasons": [
-  "summer",
-  "fall"
- ],
- "spoilageDays": 5,
- "tileAffinity": [
-  "meadow",
-  "thicket"
- ],
- "waterContent": "very high",
- "codex": "Desert grocery store. Food, water, and medicine in one spiny package.",
- "uses": [
   {
-   "kind": "food",
-   "detail": "pads and fruits"
+    "id": "prickly_pear",
+    "taxon": [
+      "plant",
+      "herb",
+      "prickly_pear"
+    ],
+    "name": "Prickly Pear",
+    "scientific": "Opuntia engelmannii",
+    "biomes": [
+      "se_woodlands",
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 40,
+    "unit": "pad/fruit",
+    "knowledgeLevels": {
+      "1": "Prickly pear. Flat pads, sharp spines. The fruits are called tunas.",
+      "2": "Parts: pads (nopal — vegetable), fruits (tuna — sweet). Burn off spines first or use tongs.",
+      "3": "Uses: pads are food AND water — chew for moisture. Fruits are high in sugar.",
+      "4": "Mastery: singe spines over fire, then peel. Pads keep for days. In the desert, this plant is life."
+    },
+    "preparation": "Burn or scrape off glochids (tiny spines). Pads: grill or boil. Fruits: peel and eat.",
+    "regions": [
+      "southwest_desert"
+    ],
+    "confidence": "high",
+    "idDifficulty": 2,
+    "description": "flat paddle-shaped cactus pads, wicked spines, red-purple fruits",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 5,
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "waterContent": "very high",
+    "codex": "Desert grocery store. Food, water, and medicine in one spiny package.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "pads and fruits"
+      },
+      {
+        "kind": "water",
+        "detail": "chew pads for moisture"
+      }
+    ]
   },
   {
-   "kind": "water",
-   "detail": "chew pads for moisture"
-  }
- ]
-},
-{
- "id": "mesquite",
- "taxon": ["tree", "fruit_tree", "mesquite"],
- "name": "Mesquite",
- "scientific": "Prosopis velutina",
- "biomes": [
-   "se_woodlands",
-   "sahel_savanna"
- ],
- "caloriesPerUnit": 60,
- "unit": "pod",
- "knowledgeLevels": {
-  "1": "Mesquite. Thorny tree, long bean pods. Desert staple.",
-  "2": "Parts: pods (sweet, grindable into flour), wood (best firewood in the desert).",
-  "3": "Mesquite flour is protein-rich and sweet. Pods can be eaten raw when ripe.",
-  "4": "Mastery: harvest pods when dry and tan. Grind between stones. The wood burns hot and long \u2014 worth the thorns."
- },
- "preparation": "Pods: eat raw when ripe, or dry and grind into flour. Wood: best desert fuel.",
- "regions": [
-  "southwest_desert"
- ],
- "confidence": "high",
- "idDifficulty": 1,
- "description": "thorny spreading tree, long tan bean pods, feathery leaves",
- "seasons": [
-  "summer"
- ],
- "spoilageDays": 30,
- "tileAffinity": [
-  "meadow",
-  "thicket"
- ],
- "waterContent": "low",
- "codex": "The desert's bread tree. Pods are candy and flour; wood is the finest fuel.",
- "uses": [
-  {
-   "kind": "food",
-   "detail": "pods, flour"
+    "id": "mesquite",
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "mesquite"
+    ],
+    "name": "Mesquite",
+    "scientific": "Prosopis velutina",
+    "biomes": [
+      "se_woodlands",
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 60,
+    "unit": "pod",
+    "knowledgeLevels": {
+      "1": "Mesquite. Thorny tree, long bean pods. Desert staple.",
+      "2": "Parts: pods (sweet, grindable into flour), wood (best firewood in the desert).",
+      "3": "Mesquite flour is protein-rich and sweet. Pods can be eaten raw when ripe.",
+      "4": "Mastery: harvest pods when dry and tan. Grind between stones. The wood burns hot and long — worth the thorns."
+    },
+    "preparation": "Pods: eat raw when ripe, or dry and grind into flour. Wood: best desert fuel.",
+    "regions": [
+      "southwest_desert"
+    ],
+    "confidence": "high",
+    "idDifficulty": 1,
+    "description": "thorny spreading tree, long tan bean pods, feathery leaves",
+    "seasons": [
+      "summer"
+    ],
+    "spoilageDays": 30,
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "waterContent": "low",
+    "codex": "The desert's bread tree. Pods are candy and flour; wood is the finest fuel.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "pods, flour"
+      },
+      {
+        "kind": "fuel",
+        "detail": "premium firewood"
+      }
+    ]
   },
   {
-   "kind": "fuel",
-   "detail": "premium firewood"
-  }
- ]
-},
-{
- "id": "salmonberry",
- "taxon": ["bush", "berry_bush", "salmonberry"],
- "name": "Salmonberry",
- "scientific": "Rubus spectabilis",
- "biomes": [
-  "se_woodlands"
- ],
- "caloriesPerUnit": 25,
- "unit": "berry",
- "knowledgeLevels": {
-  "1": "Salmonberry. Pink-orange berries, thorny canes. First berry of spring.",
-  "2": "Parts: berries (eat fresh), young shoots (peel and eat like asparagus).",
-  "3": "They're watery \u2014 good for hydration, not calories. Eat by the handful while working.",
-  "4": "Mastery: follow the salmonberry bloom \u2014 it marks the start of foraging season. Shoots are best before they leaf out."
- },
- "preparation": "Eat berries fresh. Peel young shoots and eat raw or steamed.",
- "regions": [
-  "pacific_northwest"
- ],
- "confidence": "high",
- "idDifficulty": 1,
- "description": "tall thorny canes, magenta flowers, salmon-colored raspberry-like berries",
- "seasons": [
-  "spring",
-  "summer"
- ],
- "spoilageDays": 1,
- "tileAffinity": [
-  "grove",
-  "creek"
- ],
- "waterContent": "very high",
- "codex": "Spring's first gift. Not calorie-dense, but they tell you the forest is waking up.",
- "uses": [
-  {
-   "kind": "food",
-   "detail": "berries, shoots"
-  }
- ]
-},
-{
- "id": "huckleberry",
- "taxon": ["bush", "berry_bush", "huckleberry"],
- "name": "Huckleberry",
- "scientific": "Vaccinium membranaceum",
- "biomes": [
-  "se_woodlands"
- ],
- "caloriesPerUnit": 30,
- "unit": "berry",
- "knowledgeLevels": {
-  "1": "Huckleberry. Small dark berries, mountain slopes. Bears love them.",
-  "2": "Parts: berries only. Richer than blueberries, harder to find.",
-  "3": "Where huckleberries grow, bears feed. Pick noisily and in groups.",
-  "4": "Mastery: they fruit heavily every 2-3 years. Remember the good patches \u2014 they're worth defending."
- },
- "preparation": "Eat fresh or dry for winter. Excellent dried.",
- "regions": [
-  "pacific_northwest"
- ],
- "confidence": "high",
- "idDifficulty": 2,
- "description": "low shrubs, small dark-purple berries, mountain slopes and clearings",
- "seasons": [
-  "summer",
-  "fall"
- ],
- "spoilageDays": 3,
- "tileAffinity": [
-  "grove",
-  "meadow"
- ],
- "waterContent": "medium",
- "codex": "The mountain's candy. Worth the climb, worth watching for bears.",
- "uses": [
-  {
-   "kind": "food",
-   "detail": "berries, dried"
-  }
- ]
-},
-{
- "id": "yaupon_holly",
- "taxon": ["bush", "shrub", "yaupon_holly"],
- "name": "Yaupon Holly",
- "scientific": "Ilex vomitoria",
- "biomes": [
-  "se_woodlands"
- ],
- "caloriesPerUnit": 5,
- "unit": "leaf",
- "knowledgeLevels": {
-  "1": "Yaupon holly. Evergreen shrub, red berries. The leaves make tea.",
-  "2": "It's the only native North American caffeine plant. Roast the leaves, steep like tea.",
-  "3": "The 'vomitoria' name is from ceremonial overuse \u2014 normal tea won't hurt you. Don't eat the berries.",
-  "4": "Mastery: roast leaves dark for best flavor. This is coffee when there's no coffee. Trade-worthy."
- },
- "preparation": "Roast leaves in a pan until dark, then steep in hot water. Do NOT eat berries.",
- "regions": [
-  "deep_south_bayou",
-  "florida"
- ],
- "confidence": "high",
- "idDifficulty": 2,
- "description": "evergreen shrub, small red berries, oval leaves",
- "seasons": [
-  "fall",
-  "winter",
-  "spring",
-  "summer"
- ],
- "spoilageDays": 60,
- "tileAffinity": [
-  "thicket",
-  "forest_floor"
- ],
- "waterContent": "low",
- "codex": "North America's only native caffeine. The bayou's coffee.",
- "uses": [
-  {
-   "kind": "stimulant",
-   "detail": "caffeinated tea"
+    "id": "salmonberry",
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "salmonberry"
+    ],
+    "name": "Salmonberry",
+    "scientific": "Rubus spectabilis",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "caloriesPerUnit": 25,
+    "unit": "berry",
+    "knowledgeLevels": {
+      "1": "Salmonberry. Pink-orange berries, thorny canes. First berry of spring.",
+      "2": "Parts: berries (eat fresh), young shoots (peel and eat like asparagus).",
+      "3": "They're watery — good for hydration, not calories. Eat by the handful while working.",
+      "4": "Mastery: follow the salmonberry bloom — it marks the start of foraging season. Shoots are best before they leaf out."
+    },
+    "preparation": "Eat berries fresh. Peel young shoots and eat raw or steamed.",
+    "regions": [
+      "pacific_northwest"
+    ],
+    "confidence": "high",
+    "idDifficulty": 1,
+    "description": "tall thorny canes, magenta flowers, salmon-colored raspberry-like berries",
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 1,
+    "tileAffinity": [
+      "grove",
+      "creek"
+    ],
+    "waterContent": "very high",
+    "codex": "Spring's first gift. Not calorie-dense, but they tell you the forest is waking up.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "berries, shoots"
+      }
+    ]
   },
   {
-   "kind": "trade",
-   "detail": "valuable"
-  }
- ]
-},
-{
- "id": "saw_palmetto",
- "taxon": ["bush", "shrub", "saw_palmetto"],
- "name": "Saw Palmetto",
- "scientific": "Serenoa repens",
- "biomes": [
-  "se_woodlands"
- ],
- "caloriesPerUnit": 35,
- "unit": "berry",
- "knowledgeLevels": {
-  "1": "Saw palmetto. Fan palms with saw-tooth stems. Blue-black berries.",
-  "2": "Parts: berries (edible, peppery-sweet), heart of palm (the growing tip \u2014 kills the plant).",
-  "3": "Berries are calorie-dense for their size. The saw teeth will cut you \u2014 harvest carefully.",
-  "4": "Mastery: berries ripen in fall. Dry them for winter. Don't take the heart unless you're starving \u2014 it kills the plant."
- },
- "preparation": "Berries: eat raw or dried. Heart of palm: only in emergency (kills plant).",
- "regions": [
-  "florida"
- ],
- "confidence": "high",
- "idDifficulty": 1,
- "description": "low fan palms, serrated stems, clusters of blue-black berries",
- "seasons": [
-  "fall"
- ],
- "spoilageDays": 7,
- "tileAffinity": [
-  "thicket",
-  "meadow"
- ],
- "waterContent": "medium",
- "codex": "Florida's pantry palm. Berries feed you; the saw teeth remind you to be careful.",
- "uses": [
-  {
-   "kind": "food",
-   "detail": "berries"
-  }
- ]
-},
-{
- "id": "sugar_maple",
- "taxon": ["tree", "sap_tree", "sugar_maple"],
- "name": "Sugar Maple",
- "scientific": "Acer saccharum",
- "biomes": [
-  "se_woodlands"
- ],
- "caloriesPerUnit": 50,
- "unit": "sap",
- "knowledgeLevels": {
-  "1": "Sugar maple. The sap makes syrup. Bark is grey, leaves turn brilliant in fall.",
-  "2": "Tap in late winter \u2014 when days thaw and nights freeze. Drill, spile, bucket.",
-  "3": "40 gallons of sap = 1 gallon of syrup. Boil it down. It's work, but it's sugar.",
-  "4": "Mastery: tap trees 10+ inches diameter, one tap each. The run lasts 4-6 weeks. Syrup keeps indefinitely."
- },
- "preparation": "Tap in late winter. Boil sap down 40:1 for syrup. Can also just drink the sap (slightly sweet water).",
- "regions": [
-  "northeast"
- ],
- "confidence": "high",
- "idDifficulty": 2,
- "description": "tall tree, grey bark, five-lobed leaves that flame orange in fall",
- "seasons": [
-  "spring"
- ],
- "spoilageDays": 365,
- "tileAffinity": [
-  "grove",
-  "forest_floor"
- ],
- "waterContent": "high",
- "codex": "Liquid gold from a tree. The northeast's answer to sugar cane.",
- "uses": [
-  {
-   "kind": "food",
-   "detail": "sap, syrup"
+    "id": "huckleberry",
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "huckleberry"
+    ],
+    "name": "Huckleberry",
+    "scientific": "Vaccinium membranaceum",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "caloriesPerUnit": 30,
+    "unit": "berry",
+    "knowledgeLevels": {
+      "1": "Huckleberry. Small dark berries, mountain slopes. Bears love them.",
+      "2": "Parts: berries only. Richer than blueberries, harder to find.",
+      "3": "Where huckleberries grow, bears feed. Pick noisily and in groups.",
+      "4": "Mastery: they fruit heavily every 2-3 years. Remember the good patches — they're worth defending."
+    },
+    "preparation": "Eat fresh or dry for winter. Excellent dried.",
+    "regions": [
+      "pacific_northwest"
+    ],
+    "confidence": "high",
+    "idDifficulty": 2,
+    "description": "low shrubs, small dark-purple berries, mountain slopes and clearings",
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 3,
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "waterContent": "medium",
+    "codex": "The mountain's candy. Worth the climb, worth watching for bears.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "berries, dried"
+      }
+    ]
   },
   {
-   "kind": "trade",
-   "detail": "syrup is valuable"
-  }
- ]
-}
-,
+    "id": "yaupon_holly",
+    "taxon": [
+      "bush",
+      "shrub",
+      "yaupon_holly"
+    ],
+    "name": "Yaupon Holly",
+    "scientific": "Ilex vomitoria",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "caloriesPerUnit": 5,
+    "unit": "leaf",
+    "knowledgeLevels": {
+      "1": "Yaupon holly. Evergreen shrub, red berries. The leaves make tea.",
+      "2": "It's the only native North American caffeine plant. Roast the leaves, steep like tea.",
+      "3": "The 'vomitoria' name is from ceremonial overuse — normal tea won't hurt you. Don't eat the berries.",
+      "4": "Mastery: roast leaves dark for best flavor. This is coffee when there's no coffee. Trade-worthy."
+    },
+    "preparation": "Roast leaves in a pan until dark, then steep in hot water. Do NOT eat berries.",
+    "regions": [
+      "deep_south_bayou",
+      "florida"
+    ],
+    "confidence": "high",
+    "idDifficulty": 2,
+    "description": "evergreen shrub, small red berries, oval leaves",
+    "seasons": [
+      "fall",
+      "winter",
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 60,
+    "tileAffinity": [
+      "thicket",
+      "forest_floor"
+    ],
+    "waterContent": "low",
+    "codex": "North America's only native caffeine. The bayou's coffee.",
+    "uses": [
+      {
+        "kind": "stimulant",
+        "detail": "caffeinated tea"
+      },
+      {
+        "kind": "trade",
+        "detail": "valuable"
+      }
+    ]
+  },
+  {
+    "id": "saw_palmetto",
+    "taxon": [
+      "bush",
+      "shrub",
+      "saw_palmetto"
+    ],
+    "name": "Saw Palmetto",
+    "scientific": "Serenoa repens",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "caloriesPerUnit": 35,
+    "unit": "berry",
+    "knowledgeLevels": {
+      "1": "Saw palmetto. Fan palms with saw-tooth stems. Blue-black berries.",
+      "2": "Parts: berries (edible, peppery-sweet), heart of palm (the growing tip — kills the plant).",
+      "3": "Berries are calorie-dense for their size. The saw teeth will cut you — harvest carefully.",
+      "4": "Mastery: berries ripen in fall. Dry them for winter. Don't take the heart unless you're starving — it kills the plant."
+    },
+    "preparation": "Berries: eat raw or dried. Heart of palm: only in emergency (kills plant).",
+    "regions": [
+      "florida"
+    ],
+    "confidence": "high",
+    "idDifficulty": 1,
+    "description": "low fan palms, serrated stems, clusters of blue-black berries",
+    "seasons": [
+      "fall"
+    ],
+    "spoilageDays": 7,
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "waterContent": "medium",
+    "codex": "Florida's pantry palm. Berries feed you; the saw teeth remind you to be careful.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "berries"
+      }
+    ]
+  },
+  {
+    "id": "sugar_maple",
+    "taxon": [
+      "tree",
+      "sap_tree",
+      "sugar_maple"
+    ],
+    "name": "Sugar Maple",
+    "scientific": "Acer saccharum",
+    "biomes": [
+      "se_woodlands"
+    ],
+    "caloriesPerUnit": 50,
+    "unit": "sap",
+    "knowledgeLevels": {
+      "1": "Sugar maple. The sap makes syrup. Bark is grey, leaves turn brilliant in fall.",
+      "2": "Tap in late winter — when days thaw and nights freeze. Drill, spile, bucket.",
+      "3": "40 gallons of sap = 1 gallon of syrup. Boil it down. It's work, but it's sugar.",
+      "4": "Mastery: tap trees 10+ inches diameter, one tap each. The run lasts 4-6 weeks. Syrup keeps indefinitely."
+    },
+    "preparation": "Tap in late winter. Boil sap down 40:1 for syrup. Can also just drink the sap (slightly sweet water).",
+    "regions": [
+      "northeast"
+    ],
+    "confidence": "high",
+    "idDifficulty": 2,
+    "description": "tall tree, grey bark, five-lobed leaves that flame orange in fall",
+    "seasons": [
+      "spring"
+    ],
+    "spoilageDays": 365,
+    "tileAffinity": [
+      "grove",
+      "forest_floor"
+    ],
+    "waterContent": "high",
+    "codex": "Liquid gold from a tree. The northeast's answer to sugar cane.",
+    "uses": [
+      {
+        "kind": "food",
+        "detail": "sap, syrup"
+      },
+      {
+        "kind": "trade",
+        "detail": "syrup is valuable"
+      }
+    ]
+  },
   {
     "biomes": [
       "eu_temperate_forest"
@@ -3930,8 +3973,7 @@
       }
     ],
     "waterContent": "high"
-  }
-,
+  },
   {
     "biomes": [
       "amazon_rainforest"
@@ -3974,7 +4016,7 @@
     "spoilageDays": 3,
     "taxon": [
       "plant",
-      "root",
+      "shrub",
       "manioc"
     ],
     "tileAffinity": [
@@ -4039,7 +4081,7 @@
     "spoilageDays": 3,
     "taxon": [
       "plant",
-      "root",
+      "shrub",
       "manioc"
     ],
     "tileAffinity": [
@@ -4105,7 +4147,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "acai"
     ],
     "tileAffinity": [
       "wetland",
@@ -4166,9 +4208,9 @@
     ],
     "spoilageDays": 60,
     "taxon": [
-      "plant",
       "tree",
-      "nut"
+      "nut_tree",
+      "brazil_nut"
     ],
     "tileAffinity": [
       "grove",
@@ -4226,7 +4268,7 @@
     "taxon": [
       "plant",
       "herb",
-      "fruit"
+      "banana"
     ],
     "tileAffinity": [
       "meadow",
@@ -4287,9 +4329,9 @@
     ],
     "spoilageDays": 3,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "cupuacu"
     ],
     "tileAffinity": [
       "grove",
@@ -4350,9 +4392,9 @@
     ],
     "spoilageDays": 3,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "cacao"
     ],
     "tileAffinity": [
       "grove",
@@ -4414,7 +4456,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "pupunha"
     ],
     "tileAffinity": [
       "grove",
@@ -4476,9 +4518,9 @@
     ],
     "spoilageDays": 3,
     "taxon": [
-      "plant",
+      "bush",
       "shrub",
-      "fruit"
+      "guava"
     ],
     "tileAffinity": [
       "thicket",
@@ -4541,7 +4583,7 @@
     "taxon": [
       "plant",
       "herb",
-      "fruit"
+      "pineapple"
     ],
     "tileAffinity": [
       "meadow",
@@ -4604,7 +4646,7 @@
     "taxon": [
       "plant",
       "vine",
-      "fruit"
+      "maracuja"
     ],
     "tileAffinity": [
       "thicket",
@@ -4667,9 +4709,9 @@
     ],
     "spoilageDays": 2,
     "taxon": [
-      "plant",
+      "bush",
       "shrub",
-      "fruit"
+      "camu_camu"
     ],
     "tileAffinity": [
       "wetland",
@@ -4730,9 +4772,9 @@
     ],
     "spoilageDays": 2,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "soursop"
     ],
     "tileAffinity": [
       "grove",
@@ -4792,9 +4834,9 @@
     ],
     "spoilageDays": 1,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "biriba"
     ],
     "tileAffinity": [
       "grove",
@@ -4848,9 +4890,9 @@
     ],
     "spoilageDays": 3,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "abiu"
     ],
     "tileAffinity": [
       "grove",
@@ -4907,7 +4949,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "tucuma"
     ],
     "tileAffinity": [
       "grove",
@@ -4966,7 +5008,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "bacaba"
     ],
     "tileAffinity": [
       "wetland",
@@ -5023,7 +5065,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "pataua"
     ],
     "tileAffinity": [
       "grove",
@@ -5080,7 +5122,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "inaja"
     ],
     "tileAffinity": [
       "grove",
@@ -5143,7 +5185,7 @@
     "taxon": [
       "plant",
       "palm",
-      "fruit"
+      "murumuru"
     ],
     "tileAffinity": [
       "wetland",
@@ -5199,9 +5241,9 @@
     ],
     "spoilageDays": 4,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "piquiarana"
     ],
     "tileAffinity": [
       "grove",
@@ -5256,9 +5298,9 @@
     ],
     "spoilageDays": 2,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "cashew"
     ],
     "tileAffinity": [
       "grove",
@@ -5321,7 +5363,7 @@
     "taxon": [
       "plant",
       "aquatic",
-      "seed"
+      "victoria_lily"
     ],
     "tileAffinity": [
       "wetland",
@@ -5384,7 +5426,7 @@
     "taxon": [
       "plant",
       "vine",
-      "root"
+      "cushcush_yam"
     ],
     "tileAffinity": [
       "thicket",
@@ -5442,7 +5484,8 @@
     "spoilageDays": 10,
     "taxon": [
       "plant",
-      "root"
+      "herb",
+      "taro"
     ],
     "tileAffinity": [
       "wetland",
@@ -5500,7 +5543,7 @@
     "taxon": [
       "plant",
       "vine",
-      "root"
+      "sweet_potato"
     ],
     "tileAffinity": [
       "meadow",
@@ -5556,9 +5599,9 @@
     ],
     "spoilageDays": 3,
     "taxon": [
-      "plant",
       "tree",
-      "fruit"
+      "fruit_tree",
+      "papaya"
     ],
     "tileAffinity": [
       "meadow",
@@ -5620,8 +5663,9 @@
     ],
     "spoilageDays": 0,
     "taxon": [
-      "plant",
-      "tree"
+      "tree",
+      "tree",
+      "sandbox_tree"
     ],
     "tileAffinity": [
       "grove",
@@ -5672,7 +5716,7 @@
     "taxon": [
       "plant",
       "shrub",
-      "seed"
+      "castor_bean"
     ],
     "tileAffinity": [
       "trail_edge",
@@ -5723,8 +5767,8 @@
     "spoilageDays": 0,
     "taxon": [
       "plant",
-      "tree",
-      "seed"
+      "seed",
+      "kapok_seed"
     ],
     "tileAffinity": [
       "grove",
@@ -5781,8 +5825,8 @@
     "spoilageDays": 7,
     "taxon": [
       "plant",
-      "tree",
-      "seed"
+      "seed",
+      "rubber_seed"
     ],
     "tileAffinity": [
       "grove",
@@ -5797,8 +5841,7 @@
       }
     ],
     "waterContent": "low"
-  }
-,
+  },
   {
     "biomes": [
       "sahel_savanna"
@@ -7486,6 +7529,1599 @@
       "trail_edge"
     ],
     "unit": "pod",
+    "uses": [],
+    "waterContent": "low"
+  }
+,
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 120,
+    "codex": "The king of fruit in this land. Ripe is perfume and honey; unripe is sour enough for pickles. The sap in the skin can rash sensitive skin — peel it.",
+    "confidence": "high",
+    "description": "a tree heavy with smooth-skinned fruit blushing red and gold",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "mango",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Mango. Sweet, fragrant, stains everything yellow. The king of fruit here.",
+      "2": "Parts: ripe flesh (eat), unripe (sour — chutneys, pickles), the big flat stone (plant it). Peel the skin — the sap rashes some people.",
+      "3": "Uses: ~120 kcal a fruit, rich in vitamin A and C. Unripe mango with salt and water steadies you in the hot-season heat.",
+      "4": "Mastery: pick at the blush stage and ripen in straw or rice husk. A grafted tree keeps its variety; a seedling is a lottery. The stone planted at the rains becomes a tree in ten years."
+    },
+    "lookalikeNote": "Unmistakable when ripe. At a distance the round orange fruit can suggest nux-vomica (nux_vomica) — check the leaves: mango has long lance-shaped alternate leaves and oblong fruit, never a perfect ball; nux-vomica has opposite oval leaves and flat coin seeds inside.",
+    "medicinal": true,
+    "name": "Mango",
+    "preparation": "Eat ripe raw. Unripe: slice for chutney or pickle. Peel the skin — the sap irritates some people.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Mangifera indica",
+    "seasons": [
+      "hot",
+      "wet"
+    ],
+    "sources": [
+      "Flowers of India — Mangifera indica",
+      "FAO fruit profiles"
+    ],
+    "spoilageDays": 4,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "mango"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "a ripe mango",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "ripe fruit raw; unripe for chutney/pickle"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "vitamin A and C; unripe + salt for heat"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 150,
+    "codex": "The biggest tree-fruit on earth. Sweet bulbs inside when ripe; the seeds boil like chestnuts; unripe flesh cooks like meat. Oil your knife — the latex glues everything.",
+    "confidence": "high",
+    "description": "a tree carrying huge knobbly green pods, some bigger than your head",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "jackfruit",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Jackfruit. Enormous, knobbly, sweet inside. One fruit feeds a family.",
+      "2": "Parts: ripe bulbs (eat), seeds (boil/roast — chestnut-like), unripe flesh (cooks like meat). Oil your knife and hands — the latex glues everything shut.",
+      "3": "Uses: ~150 kcal a chunk; the boiled seeds are a starchy staple. A single tree fruits for months.",
+      "4": "Mastery: tap for a hollow thump and sniff the stem — ripe smells sweet. Dry the seeds; they store for months. Roast before grinding into flour."
+    },
+    "lookalikeNote": "Nothing else grows fruit this size on a trunk. Breadfruit is the smaller, rounder cousin — same rules apply.",
+    "name": "Jackfruit",
+    "preparation": "Ripe: pull the bulbs, eat. Seeds: boil or roast 30 min. Unripe: cook as a vegetable. Oil hands and blade against the latex.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Artocarpus heterophyllus",
+    "seasons": [
+      "hot",
+      "wet"
+    ],
+    "sources": [
+      "Flowers of India — Artocarpus heterophyllus",
+      "FAO fruit profiles"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "jackfruit"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "a chunk of jackfruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "ripe bulbs raw; seeds boiled/roasted; unripe cooked"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 350,
+    "codex": "The traveler's canteen: sterile-ish water when young, rich meat when mature. Husk for fiber, shell for bowls and charcoal, oil that never spoils.",
+    "confidence": "high",
+    "description": "a tall leaning palm, green nuts clustered under the crown",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "coconut",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Coconut. Water inside, meat inside that. Never go thirsty near a palm.",
+      "2": "Parts: water (drink young), meat (eat; grate and press for milk), husk (fiber), shell (bowls, charcoal). Young = water; mature = meat.",
+      "3": "Uses: ~350 kcal of meat per nut; the water hydrates safely. Pressed oil keeps without spoiling and burns in lamps.",
+      "4": "Mastery: shake for slosh (young) or heft for weight (mature). A bearing palm drops year-round — mark the good ones and climb with a rope loop, never bare."
+    },
+    "lookalikeNote": "Unmistakable. Fallen old nuts may be sprouted — the spongy 'apple' inside is edible too.",
+    "name": "Coconut",
+    "preparation": "Young (sloshes): drink the water, scoop the jelly. Mature (heavy, no slosh): crack for meat; grate and press for milk.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Cocos nucifera",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "FAO fruit profiles",
+      "Coconut Development Board (India)"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "coconut"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "meadow"
+    ],
+    "unit": "a coconut's meat",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "water and meat; milk pressed from grated meat"
+      },
+      {
+        "kind": "water",
+        "minLevel": 1,
+        "note": "young coconut water is safe to drink"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 200,
+    "codex": "Rice gone feral in the drowned paddies. The staple of half the world, waiting in the mud — but the husk is silica glass. Husk it or it husks you.",
+    "confidence": "high",
+    "description": "a flooded flat of grass-like stalks hung with grain heads",
+    "edibility": "safe",
+    "form": "grain",
+    "id": "paddy_rice",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Rice, gone feral in the old paddies. The staple of half the world.",
+      "2": "Parts: grain only — pound and winnow off the husk first. The husk is inedible silica; eating unhusked paddy injures the gut.",
+      "3": "Uses: ~200 kcal a scoop cooked; the calorie backbone of every meal. Stores dry for a year.",
+      "4": "Mastery: harvest when heads droop and grains harden; sun-dry on mats before storing or it molds. One guarded paddy feeds many through the cool season."
+    },
+    "lookalikeNote": "Young rice looks like a dozen wild grasses — wait for the grain heads. No other grass here makes a fat white grain.",
+    "name": "Feral Paddy Rice",
+    "preparation": "Husk: pound and winnow until no husk remains. Boil. NEVER eat unhusked paddy — the husk tears the gut.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Oryza sativa",
+    "seasons": [
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "IRRI rice knowledge bank",
+      "FAO Ecocrop — Oryza sativa"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "herb",
+      "paddy_rice"
+    ],
+    "tileAffinity": [
+      "wetland"
+    ],
+    "unit": "a scoop of rice",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "husked and boiled; the staple grain"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 180,
+    "codex": "Chana. Protein in a pod, from the cool-season fields. Soak overnight and boil soft — raw dried chickpeas are gravel and will not hurry.",
+    "confidence": "high",
+    "description": "a low bushy plant with small round pods",
+    "edibility": "safe",
+    "form": "legume",
+    "id": "chickpea",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Chickpea (chana). Protein in a pod.",
+      "2": "Parts: seeds — soak overnight, boil till soft. Raw dried chickpeas are hard as gravel and will not cook fast.",
+      "3": "Uses: ~180 kcal a handful cooked; protein and fiber that keeps you full. Roasted, they keep for weeks in a dry bag.",
+      "4": "Mastery: the leaves sweat a sour acid (malic) — the old hands collected it for thirst on hot marches. Harvest fully dry or the pods mold in the bag."
+    },
+    "lookalikeNote": "The pods are distinctive — small, inflated, one or two round seeds. Rosary pea (rosary_pea) is a VINE with scarlet-black beads, never a pod like this.",
+    "name": "Chickpea",
+    "preparation": "Soak overnight, boil until soft (an hour or more). Roast for a keeping snack.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Cicer arietinum",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "FAO Ecocrop — Cicer arietinum",
+      "ICRISAT chickpea profiles"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "herb",
+      "chickpea"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "a handful of chickpeas",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "soaked and boiled; roasted for storage"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 170,
+    "codex": "Masoor dal. The fastest-cooking protein in the land — twenty minutes, no soaking. The broth alone has fed the sick for centuries.",
+    "confidence": "high",
+    "description": "a low feathery plant with tiny flat pods",
+    "edibility": "safe",
+    "form": "legume",
+    "id": "masoor_lentil",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Masoor dal — the red lentil. Cooks faster than anything else in the field.",
+      "2": "Parts: seeds — boil 20 minutes, no soaking. The skins slip when done; winnow out stones and chaff.",
+      "3": "Uses: ~170 kcal a handful; the fastest protein here. The broth feeds the sick when nothing else stays down.",
+      "4": "Mastery: dry thoroughly before bagging — weevils are the enemy. A cool-season field of masoor is worth guarding like rice."
+    },
+    "lookalikeNote": "Do NOT confuse the pods with rosary pea (rosary_pea) — the pretty scarlet-black 'beans' are abrin poison, not lentils. No food bean is scarlet with a black eye.",
+    "name": "Masoor Lentil",
+    "preparation": "Boil 20 minutes until soft; no soaking needed. Skim and winnow out stones and chaff.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Lens culinaris",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "FAO Ecocrop — Lens culinaris",
+      "ICRISAT lentil profiles"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "herb",
+      "masoor_lentil"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "a handful of red lentils",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "boiled 20 min; the quick staple legume"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 30,
+    "codex": "Haldi. The orange root that stains everything it touches — food, fingers, wounds. The old field dressing for cuts, and a pinch goes in every pot.",
+    "confidence": "high",
+    "description": "a clump of broad leaves; under it, orange fingers of root",
+    "edibility": "safe",
+    "form": "root",
+    "id": "turmeric",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Turmeric (haldi). The orange root that stains everything it touches.",
+      "2": "Parts: rhizome — boil, dry, grind; or grate fresh into food. Fresh stains; dried keeps for months.",
+      "3": "Uses: antiseptic on wounds (the old field dressing), anti-inflammatory in food. A pinch in every pot.",
+      "4": "Mastery: cure the rhizomes — boil 45 minutes, sun-dry a full week — or they rot in the bag. Powder with a little oil and black pepper; the body takes it up far better."
+    },
+    "lookalikeNote": "Ginger (ginger) grows beside it and looks similar — ginger is pale and hot-tasting; turmeric is orange and earthy-bitter. Both are safe; confusing them only ruins the recipe.",
+    "medicinal": true,
+    "name": "Turmeric",
+    "preparation": "Boil the rhizome, sun-dry, grind — or grate fresh into food. Fresh stains skin and cloth.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Curcuma longa",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "Ayurvedic Pharmacopoeia of India",
+      "FAO Ecocrop — Curcuma longa"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "plant",
+      "herb",
+      "turmeric"
+    ],
+    "tileAffinity": [
+      "forest_floor",
+      "meadow"
+    ],
+    "unit": "a thumb of turmeric root",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "spice; fresh grated or dried powder"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 2,
+        "note": "antiseptic wound dusting; anti-inflammatory"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 60,
+    "codex": "The monsoon berry. Sweet-tart, purple to the elbow. Ripe is deep purple and soft; red is a day early. Ferments by noon — eat or dry fast.",
+    "confidence": "high",
+    "description": "a big tree dropping purple-black berries that stain your tongue",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "jamun",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Jamun. The monsoon berry — sweet-tart, purple to the elbow.",
+      "2": "Parts: fruit (eat ripe — deep purple, not red), seed (dry and powder — the old blood-sugar remedy). Eat the fruit, spit the seed.",
+      "3": "Uses: ~60 kcal a handful; iron and vitamin C. The seed powder is medicine, not food.",
+      "4": "Mastery: shake the branches onto a cloth at dawn — the ripe ones fall on their own. They ferment by noon; eat fresh or sun-dry."
+    },
+    "lookalikeNote": "Ripe jamun is deep purple-black and soft, on a TREE. Lantana (lantana) berries cluster at the same season in mixed red-orange-purple — smaller, harder, on a rough-leafed SHRUB with square stems. Tree vs shrub is the test.",
+    "medicinal": true,
+    "name": "Jamun",
+    "preparation": "Eat ripe and soft; spit the seed. Dry surplus in the sun — they keep weeks.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Syzygium cumini",
+    "seasons": [
+      "hot",
+      "wet"
+    ],
+    "sources": [
+      "Flowers of India — Syzygium cumini",
+      "FAO fruit profiles"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "jamun"
+    ],
+    "tileAffinity": [
+      "grove",
+      "wetland"
+    ],
+    "unit": "a handful of jamun",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "ripe fruit raw; dried for storage"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "iron, vitamin C; seed powder is the folk blood-sugar remedy"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 90,
+    "codex": "Bel. The hard-shelled fruit you crack like a coconut. Ripe pulp eats like custard; unripe dried and powdered is the classic dysentery cure of this land.",
+    "confidence": "high",
+    "description": "a thorny tree with hard round green-grey fruit",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "bael",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bael (bel). The hard-shelled fruit — crack it like a coconut.",
+      "2": "Parts: ripe pulp (eat; aromatic, yields to the thumb), unripe (sun-dry, powder — the dysentery cure), leaves (bitter tea). Strain out the gummy seeds.",
+      "3": "Uses: ~90 kcal a half-fruit; the unripe powder stops dysentery — a life-saver where the water is dirty.",
+      "4": "Mastery: the shell keeps it fresh for weeks on the tree — a living pantry. Thorns mean harvest with a hooked stick, not bare hands."
+    },
+    "lookalikeNote": "Nux-vomica (nux_vomica) hangs round hard ORANGE fruit at the same season — its seeds are flat grey coins of strychnine. Bael is green-grey and larger; cracked open, bael seeds are small and woolly, never flat coins. When in doubt, don't.",
+    "medicinal": true,
+    "name": "Bael",
+    "preparation": "Crack the shell, scoop the pulp, strain out gummy seeds. Unripe: slice, sun-dry, powder for dysentery.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Aegle marmelos",
+    "seasons": [
+      "hot",
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Aegle marmelos",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 21,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "bael"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "half a bael",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "ripe pulp raw"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "unripe powder for dysentery"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 45,
+    "codex": "Amla. Sour enough to make your eyes water — and one of the richest vitamin C sources on earth. It keeps its C even dried, which is why the old hands prize it.",
+    "confidence": "high",
+    "description": "a tree with feathery leaflets and pale green round fruit",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "amla",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Amla. Eye-wateringly sour — and one of the richest vitamin C sources on earth.",
+      "2": "Parts: fruit (eat fresh if brave; better dried, pickled, or boiled with jaggery). The sour IS the medicine.",
+      "3": "Uses: preserves vitamin C even dried — the old scurvy cure of this land. A winter handful keeps gums and wounds sound.",
+      "4": "Mastery: harvest before the fruit drops; shade-dry to keep the C. One tree's harvest, dried, lasts the year."
+    },
+    "lookalikeNote": "No twin — the feathery leaflets plus pale ribbed fruit are distinctive. If it isn't mouth-puckering, it isn't ripe amla.",
+    "medicinal": true,
+    "name": "Amla",
+    "preparation": "Eat fresh, dry, pickle, or boil with jaggery. Shade-dry surplus for the year.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Phyllanthus emblica",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Phyllanthus emblica",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 10,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "amla"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "a handful of amla",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh, dried, or pickled — the sour staple"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "vitamin C that survives drying"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 120,
+    "codex": "The flowers fall like rain at dawn and taste like brown sugar — then they ferment. Dry them fast and they're storable sugar; the seeds press into lamp oil.",
+    "confidence": "high",
+    "description": "a big shady tree; at dawn the ground beneath is strewn with fleshy cream flowers",
+    "edibility": "cook",
+    "form": "flower",
+    "id": "mahua",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Mahua. The flowers fall like rain and taste like brown sugar — then they ferment.",
+      "2": "Parts: flowers (dry in sun, then cook — raw heaps ferment within a day), seeds (press for oil — cooking and lamp oil), ripe fruit pulp (eat sparingly).",
+      "3": "Uses: dried flowers are storable sugar (~120 kcal a handful); the seed oil burns clean in lamps.",
+      "4": "Mastery: gather at dawn before the bees and the boars. Dry on clean mats — moldy mahua is a stomach bomb. A good tree is worth a dawn patrol."
+    },
+    "lookalikeNote": "No twin — the dawn carpet of cream flowers under a big tree is unmistakable. If the flowers smell of liquor already, they're fermenting: dry or abandon.",
+    "name": "Mahua",
+    "preparation": "Sun-dry the fallen flowers the same day, then cook. Seeds: press for oil. Never eat moldy dried flowers.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Madhuca longifolia",
+    "seasons": [
+      "hot"
+    ],
+    "sources": [
+      "Flowers of India — Madhuca longifolia",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 60,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "mahua"
+    ],
+    "tileAffinity": [
+      "grove",
+      "forest_floor"
+    ],
+    "unit": "a handful of dried mahua",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "dried flowers cooked; the storable sugar"
+      },
+      {
+        "kind": "fuel",
+        "minLevel": 3,
+        "note": "seed oil burns clean in lamps"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 80,
+    "codex": "Kamal. The pond is a pantry: crisp starchy roots below, seeds above. Feel for the root with your feet — don't dive blind into old tanks.",
+    "confidence": "high",
+    "description": "a still pond sheeted with round leaves and pink flowers; below, the roots",
+    "edibility": "cook",
+    "form": "root",
+    "id": "lotus",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Lotus (kamal). The pond is a pantry — roots below, seeds above.",
+      "2": "Parts: rhizome (peel, slice, boil or fry — crisp and starchy), seeds (crack, boil; pick out the bitter green sprout), young leaves (wrap food, not food).",
+      "3": "Uses: ~80 kcal a root; steady starch where rice fails. The seeds store dry for months.",
+      "4": "Mastery: feel for the root in the mud with your feet — never dive blind in old tanks. Always leave a growing node; the pond feeds you again."
+    },
+    "lookalikeNote": "Water-lily pads look similar but lotus leaves stand ABOVE the water on stalks and the flowers are big and pink. Only lotus makes the fat edible root.",
+    "name": "Lotus",
+    "preparation": "Peel, slice, boil or fry the rhizome. Seeds: crack, remove the bitter green heart, boil.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Nelumbo nucifera",
+    "seasons": [
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Nelumbo nucifera",
+      "FAO aquatic food plants"
+    ],
+    "spoilageDays": 5,
+    "taxon": [
+      "plant",
+      "herb",
+      "lotus"
+    ],
+    "tileAffinity": [
+      "wetland"
+    ],
+    "unit": "a lotus root segment",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "rhizome cooked; seeds boiled"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 100,
+    "codex": "Pond popcorn. The black seeds pop white in a hot pan — the Bihar staple. The pads are armor: harvest with a hooked pole, never bare hands.",
+    "confidence": "medium",
+    "description": "a pond of huge spiny pads; under them, spiny pods of black seeds",
+    "edibility": "cook",
+    "form": "seed",
+    "id": "makhana",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Makhana (fox nut). Pond popcorn — the black seeds pop white in a hot pan.",
+      "2": "Parts: seeds only (roast/pop; raw they're hard shot). The pads are armor — harvest with a hooked pole, never bare hands.",
+      "3": "Uses: ~100 kcal a handful popped; light, and it keeps for months dry.",
+      "4": "Mastery: grade by size — the big ones pop, the small ones grind into flour. A harvested pond re-seeds itself if you leave the small pods."
+    },
+    "lookalikeNote": "Don't confuse the pods with lotus pods — makhana pads are viciously spiny, lotus pads are smooth. The seeds are black marbles; nothing else here makes those.",
+    "name": "Makhana (Fox Nut)",
+    "preparation": "Crack the spiny pods, pop the seeds in a hot dry pan like popcorn. Raw seeds are inedible shot.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Euryale ferox",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "India Biodiversity Portal — Euryale ferox",
+      "ICAR makhana profiles"
+    ],
+    "spoilageDays": 90,
+    "taxon": [
+      "plant",
+      "herb",
+      "makhana"
+    ],
+    "tileAffinity": [
+      "wetland"
+    ],
+    "unit": "a handful of popped makhana",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "seeds popped/roasted; the keeping pond grain"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 90,
+    "codex": "Singhara. The pond's horned nut — sweet and crisp. Boil it always: raw nuts from still water carry liver flukes.",
+    "confidence": "high",
+    "description": "floating rosettes of leaves; under them, black horned nuts",
+    "edibility": "cook",
+    "form": "nut",
+    "id": "water_chestnut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Singhara (water chestnut). The pond's horned nut — sweet and crisp.",
+      "2": "Parts: kernel only (boil 20 minutes, crack the horned shell). NEVER eat raw from still water — liver flukes.",
+      "3": "Uses: ~90 kcal a handful; the fasting food of the cool season, gentle and filling.",
+      "4": "Mastery: rake the rosettes with a pole — the ripe nuts drop. Dry in shell for months; the horns protect the kernel."
+    },
+    "lookalikeNote": "The horned black shell is unmistakable. Trapa's horns are the ID — nothing edible or poisonous here copies them.",
+    "name": "Water Chestnut",
+    "preparation": "Boil 20 minutes, crack the horned shell, eat the kernel. Always cooked — never raw from still water.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Trapa natans",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Trapa natans",
+      "FAO aquatic food plants"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "plant",
+      "herb",
+      "water_chestnut"
+    ],
+    "tileAffinity": [
+      "wetland"
+    ],
+    "unit": "a handful of singhara",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "kernel boiled and cracked"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "Crisp and sweet — after you boil the poison out. Raw shoots carry cyanide; slice thin, boil TWICE, discard the water. No shortcuts.",
+    "confidence": "high",
+    "description": "a clump of giant grass; after rain, pale spears push up",
+    "edibility": "cook",
+    "form": "shoots",
+    "id": "bamboo_shoot",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bamboo shoots. Crisp and sweet — after you boil the poison out.",
+      "2": "Parts: young shoots only (peel to the tender core, slice thin, boil TWICE and discard the water — cyanogenic glycosides). Old shoots are wood.",
+      "3": "Uses: ~40 kcal a shoot; bulk and crunch in the hungry wet season.",
+      "4": "Mastery: harvest at knee height — taller is bitter wood. Ferment the surplus in brine; it keeps a year and the sour is gold in the cool season."
+    },
+    "lookalikeNote": "No twin — but the rule is absolute: any shoot eaten raw or single-boiled can poison. If you can't boil twice with fresh water, don't pick.",
+    "name": "Bamboo Shoot",
+    "preparation": "Peel to the tender core, slice thin, boil, DISCARD the water, boil again. Then cook as food. Raw is poison.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Dendrocalamus strictus",
+    "seasons": [
+      "wet"
+    ],
+    "sources": [
+      "FAO bamboo shoot processing",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "herb",
+      "bamboo_shoot"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "forest_floor"
+    ],
+    "unit": "a bamboo shoot",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "double-boiled, then cooked"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 110,
+    "codex": "Arbi. The corm is potato-like once you cook the sting out — raw, the needle crystals set your mouth on fire. Cook with something sour; acid tames the itch.",
+    "confidence": "high",
+    "description": "big heart-shaped leaves on stalks, like elephant ears",
+    "edibility": "cook",
+    "form": "root",
+    "id": "colocasia",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Arbi (colocasia/taro). The corm is potato-like — once you cook the sting out.",
+      "2": "Parts: corms (boil whole, peel AFTER cooking), leaves (boil with something sour — the sour tames the itch). Raw = mouth on fire (oxalate needles).",
+      "3": "Uses: ~110 kcal a handful; the wet-season starch that grows where rice drowns.",
+      "4": "Mastery: cook with tamarind — acid dissolves the oxalate itch. Replant the tops; each corm becomes a clump."
+    },
+    "lookalikeNote": "Elephant-ear leaves are the ID. Wild aroids with similar leaves are ALL irritant raw — the rule 'boil whole, peel after, eat with sour' covers the whole family safely.",
+    "name": "Colocasia (Arbi)",
+    "preparation": "Boil or roast WHOLE until soft, peel after cooking. Leaves: boil with tamarind or another sour. Never eat raw.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Colocasia esculenta",
+    "seasons": [
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "FAO root crop profiles",
+      "Flowers of India — Colocasia esculenta"
+    ],
+    "spoilageDays": 10,
+    "taxon": [
+      "plant",
+      "herb",
+      "colocasia"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "meadow"
+    ],
+    "unit": "a handful of arbi corms",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "corms boiled whole; leaves boiled with sour"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 30,
+    "codex": "Chaulai. The weed that feeds — greens now, grain later. Strip the tops and it bushes out; let one plant seed and next rains you have a field.",
+    "confidence": "high",
+    "description": "a knee-high weed with soft green leaves and a seedy spike",
+    "edibility": "safe",
+    "form": "shoots",
+    "id": "wild_amaranth",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Chaulai (wild amaranth). The weed that feeds — greens now, grain later.",
+      "2": "Parts: leaves (cook 5 minutes), seeds (rub the dry spikes, winnow, pop or grind — a handful of seed is a meal's worth).",
+      "3": "Uses: iron and vitamin A in the greens; the seeds are ~15% protein — real grain from a weed.",
+      "4": "Mastery: cut-and-come-again — strip the tops and it bushes out thicker. Let one plant go to seed for next rains."
+    },
+    "lookalikeNote": "Young plants resemble lambs quarters (lambs_quarters) — both are safe, so the confusion costs nothing.",
+    "name": "Wild Amaranth",
+    "preparation": "Leaves: boil or sauté 5 minutes. Seeds: rub dry spikes, winnow, pop like tiny grain or grind.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Amaranthus viridis",
+    "seasons": [
+      "wet",
+      "hot"
+    ],
+    "sources": [
+      "Flowers of India — Amaranthus viridis",
+      "FAO traditional food plants"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "herb",
+      "wild_amaranth"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge",
+      "ruin"
+    ],
+    "unit": "a handful of chaulai greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "leaves cooked; seeds popped/ground"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 10,
+    "codex": "Kadi patta. Not food by the handful — the flavor that makes food food. Tempered in hot oil, the crackle means it's working.",
+    "confidence": "high",
+    "description": "a shrub with glossy leaflets that smell of curry when crushed",
+    "edibility": "safe",
+    "form": "leaves",
+    "id": "curry_leaf",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Curry leaf (kadi patta). The flavor that makes food food.",
+      "2": "Parts: leaves (temper in hot oil — the crackle means it's working; or boil in water). Strip the bitter stems.",
+      "3": "Uses: iron and the appetite back — a handful in the pot stretches thin rations. The old stomach tonic.",
+      "4": "Mastery: shade-dries well; the powder keeps a year. Plant the berries — the birds plant them everywhere anyway."
+    },
+    "lookalikeNote": "Crush a leaf: curry leaf smells of curry, unmistakable. Neem leaves are bitter and larger — don't confuse the trees, though both are useful.",
+    "medicinal": true,
+    "name": "Curry Leaf",
+    "preparation": "Fry in hot oil or boil in water. Chew a few raw for the stomach. Strip bitter stems.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Murraya koenigii",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Murraya koenigii",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 4,
+    "taxon": [
+      "plant",
+      "shrub",
+      "curry_leaf"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "grove"
+    ],
+    "unit": "a sprig of curry leaves",
+    "uses": [
+      {
+        "kind": "seasoning",
+        "minLevel": 2,
+        "note": "tempered in oil; the flavor base"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "iron; stomach tonic"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 20,
+    "codex": "Tea and mosquito armor in one clump. Bruise the stalks and boil; rub crushed leaves on skin and the mosquitoes genuinely hesitate — for an hour.",
+    "confidence": "high",
+    "description": "a fountain of sharp-edged grass smelling of lemon",
+    "edibility": "safe",
+    "form": "shoots",
+    "id": "lemongrass",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Lemongrass. Tea and mosquito armor in one clump.",
+      "2": "Parts: stalks (bruise and boil), leaves (steep). The edges cut — harvest with a twist, never a bare grab.",
+      "3": "Uses: the tea settles stomachs; the citronella oil genuinely repels mosquitoes for about an hour.",
+      "4": "Mastery: split the clump to propagate — it divides like grass because it is grass. A ring around camp is worth more than a wall of it in the pot."
+    },
+    "lookalikeNote": "Lemon smell is the ID — crush and sniff. Scentless sharp grasses are just grass.",
+    "medicinal": true,
+    "name": "Lemongrass",
+    "preparation": "Bruise stalks, boil 10 minutes for tea. Crushed leaves rubbed on skin repel mosquitoes.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Cymbopogon citratus",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "FAO Ecocrop — Cymbopogon citratus",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 7,
+    "taxon": [
+      "plant",
+      "herb",
+      "lemongrass"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "a bundle of lemongrass",
+    "uses": [
+      {
+        "kind": "tea",
+        "minLevel": 2,
+        "note": "bruised stalks boiled"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "mosquito repellent; stomach-settling tea"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 5,
+    "codex": "The courtyard herb. Tea for coughs, courage for fevers — and sacred to many households. Take only what you need, and say thanks.",
+    "confidence": "high",
+    "description": "a small bushy herb with purple-tinged leaves, smelling of cloves",
+    "edibility": "safe",
+    "form": "leaves",
+    "id": "tulsi",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Tulsi (holy basil). The courtyard herb — tea for coughs.",
+      "2": "Parts: leaves (steep or chew), seeds (soak — they swell like frogspawn; the old cooling drink).",
+      "3": "Uses: the household remedy for cough, cold, and low spirits. The smoke dislikes mosquitoes as much as you do.",
+      "4": "Mastery: pinch the flower heads and it bushes forever. It is sacred to many — harvest gently, never strip a courtyard plant bare."
+    },
+    "lookalikeNote": "Clove scent is the ID. Other basils are safe too — the confusion costs nothing.",
+    "medicinal": true,
+    "name": "Tulsi (Holy Basil)",
+    "preparation": "Steep fresh or dried leaves in hot water. Chew a few for coughs. Seeds soaked make the cooling drink.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Ocimum tenuiflorum",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "Flowers of India — Ocimum tenuiflorum",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 5,
+    "taxon": [
+      "plant",
+      "herb",
+      "tulsi"
+    ],
+    "tileAffinity": [
+      "ruin",
+      "trail_edge",
+      "grove"
+    ],
+    "unit": "a sprig of tulsi",
+    "uses": [
+      {
+        "kind": "tea",
+        "minLevel": 2,
+        "note": "steeped for coughs and fevers"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 2,
+        "note": "household remedy; mosquito-disliking smoke"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 25,
+    "codex": "Adrak. Heat without fire — for food and for guts. A thumb in the pot, a slice in the tea: the traveler's stomach insurance.",
+    "confidence": "high",
+    "description": "reed-like leaves; underground, knobby pale rhizomes",
+    "edibility": "safe",
+    "form": "root",
+    "id": "ginger",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Ginger (adrak). Heat without fire — for food and for guts.",
+      "2": "Parts: rhizome (fresh or dried). A thumb in the pot, a slice in the tea.",
+      "3": "Uses: settles nausea, warms the cold-season body. The first thing to reach for when the stomach turns.",
+      "4": "Mastery: store in dry sand — it keeps for months. Replant a knob with an eye and it multiplies."
+    },
+    "lookalikeNote": "Turmeric (turmeric) grows beside it — ginger is pale and hot, turmeric orange and earthy. Both safe; confusing them only ruins the recipe.",
+    "medicinal": true,
+    "name": "Ginger",
+    "preparation": "Grate fresh into food or boil for tea. Slice, sun-dry, and powder for the year.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Zingiber officinale",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "FAO Ecocrop — Zingiber officinale",
+      "Ayurvedic Pharmacopoeia of India"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "plant",
+      "herb",
+      "ginger"
+    ],
+    "tileAffinity": [
+      "forest_floor",
+      "meadow"
+    ],
+    "unit": "a thumb of ginger",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "spice; fresh or dried"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 2,
+        "note": "nausea; warming"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "Bargad. A single tree that's a forest — and it fruits. Eat only the soft red ripe figs, and check for wasps first: a fig without wasps didn't ripen right.",
+    "confidence": "medium",
+    "description": "the giant tree with roots dropping from its branches like curtains",
+    "edibility": "caution",
+    "form": "fruit",
+    "id": "banyan_fig",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Banyan (bargad). A single tree that's a forest — and it fruits.",
+      "2": "Parts: ripe figs only (soft, red — check for wasps first), aerial roots (fiber), bark (the old dysentery tea). Unripe figs are astringent and full of wasps.",
+      "3": "Uses: ~40 kcal a handful in fruit season; the deep shade is the real gift in the hot months.",
+      "4": "Mastery: sacred to many — harvest gently, take fallen fruit first. A fruiting banyan feeds every bird for a mile; watch what they eat."
+    },
+    "lookalikeNote": "Peepal (peepal_fig) fruits similarly — both are Ficus, both follow the same rules: ripe and soft only. The trees differ (banyan's curtain roots), the caution is identical.",
+    "name": "Banyan Fig",
+    "preparation": "Eat only fully ripe (soft, red) figs. Check for wasps. Unripe figs are astringent — leave them.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Ficus benghalensis",
+    "seasons": [
+      "hot"
+    ],
+    "sources": [
+      "Flowers of India — Ficus benghalensis",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "banyan_fig"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "a handful of banyan figs",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe figs only"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 35,
+    "codex": "The tree the Buddha sat under. Its figs feed the birds, and you in a pinch — ripe and soft only, and take fallen fruit first out of respect.",
+    "confidence": "medium",
+    "description": "a tall tree with heart-shaped leaves that shiver in any breeze",
+    "edibility": "caution",
+    "form": "fruit",
+    "id": "peepal_fig",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Peepal. The tree the Buddha sat under — its figs feed birds, and you in a pinch.",
+      "2": "Parts: ripe figs (soft, dark — fallen fruit first), leaves (the shivering hearts are the ID), bark (bitter tea, medicine not food).",
+      "3": "Uses: ~35 kcal a handful; a hunger-gap fruit more than a staple.",
+      "4": "Mastery: sacred to many — never cut, never strip. The figs come in waves; the birds will show you when."
+    },
+    "lookalikeNote": "Banyan (banyan_fig) is the cousin — same Ficus rules: ripe and soft only. Peepal's heart-shaped shivering leaves are the ID.",
+    "name": "Peepal Fig",
+    "preparation": "Eat only fully ripe fallen figs. Unripe figs are astringent.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Ficus religiosa",
+    "seasons": [
+      "hot"
+    ],
+    "sources": [
+      "Flowers of India — Ficus religiosa",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "peepal_fig"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "a handful of peepal figs",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe fallen figs"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 80,
+    "codex": "Taad. The pillar palm: jelly fruit in summer, sweet sap at dawn with a two-hour fuse — drink fresh or let it become toddy.",
+    "confidence": "high",
+    "description": "a towering fan palm, black and straight as a pillar",
+    "edibility": "caution",
+    "form": "fruit",
+    "id": "palmyra",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Palmyra (taad). The pillar palm — jelly fruit in summer, sweet sap at dawn.",
+      "2": "Parts: fruit pulp (eat fresh — the jelly spoils by evening), sap/neera (drink within hours; it ferments to toddy fast), sprout (the tuber-like shoot, roast).",
+      "3": "Uses: ~80 kcal a fruit; the sap is sugar water with a two-hour fuse. The jaggery made from it keeps a year.",
+      "4": "Mastery: tap at dawn, drink by noon. Eat the jelly in the field — it doesn't travel. The sprouts are the hidden harvest."
+    },
+    "lookalikeNote": "No twin — the black pillar trunk with a fan crown is unmistakable. Fallen fruit ferments fast; if it smells of liquor, abandon it.",
+    "name": "Palmyra Palm",
+    "preparation": "Eat the jelly pulp fresh the same day. Sap: drink within hours. Sprouts: roast.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Borassus flabellifer",
+    "seasons": [
+      "hot"
+    ],
+    "sources": [
+      "Flowers of India — Borassus flabellifer",
+      "FAO palm profiles"
+    ],
+    "spoilageDays": 1,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "palmyra"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "a palmyra fruit's pulp",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 1,
+        "note": "jelly pulp fresh; sap drunk within hours"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "Putush. Pretty flowers, pretty berries — and the green ones can wreck your liver. The invader: where lantana thickets stand, the forest lost.",
+    "confidence": "high",
+    "description": "a scrambling shrub with rough leaves and clusters of tiny flowers in mixed colors",
+    "edibility": "avoid",
+    "form": "berries",
+    "id": "lantana",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Lantana (putush/ghaneri). Pretty flowers, pretty berries — and the green ones can wreck your liver.",
+      "2": "ID: square stems, rough sandpapery leaves that stink when crushed, flower heads mixing yellow-orange-pink. Berries green, then purple-black.",
+      "3": "Danger: unripe berries and leaves carry lantadenes — liver failure in livestock, misery in people. The ripe purple ones are less bad but NEVER safe.",
+      "4": "Mastery: it's the invader — where lantana thickets stand, the forest lost. Clear it for firewood; never for food. Goats that learn it, learn the hard way."
+    },
+    "lookalikeNote": "The berry clusters mimic jamun (jamun) at a hungry glance — but jamun is a TREE with single round purple fruit; lantana is a SHRUB with clustered mixed-color berries and rough stinking leaves. Tree vs shrub is the test.",
+    "name": "Lantana",
+    "preparation": "DO NOT EAT any part. If eaten: it was probably the berries — expect vomiting; watch the liver.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Lantana camara",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "Wikipedia — Lantana camara",
+      "Native Plant Society of Texas invasive profile"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "shrub",
+      "lantana"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "trail_edge",
+      "ruin"
+    ],
+    "unit": "a cluster of lantana berries",
+    "uses": [],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "Kuchila. The fruit looks friendly; the seeds are strychnine. Monkeys eat the pulp and spit the seeds — you are not a monkey. Learn this tree like a loaded gun.",
+    "confidence": "high",
+    "description": "a medium tree with glossy oval leaves and round orange fruit like small apples",
+    "edibility": "avoid",
+    "form": "fruit",
+    "id": "nux_vomica",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Poison-nut tree (kuchila). The fruit looks friendly. The seeds are strychnine.",
+      "2": "ID: opposite glossy oval leaves, foul-smelling greenish flowers, round hard orange fruit with jelly pulp and flat grey coin-seeds.",
+      "3": "Danger: seeds are ~1.5% strychnine — convulsions, and no antidote. Even the bark is poison. The pulp is eaten by monkeys and hornbills; the seeds pass through them whole.",
+      "4": "Mastery: learn this tree the way you learn a loaded gun — by sight, at distance. Mark every one near camp and teach it to every newcomer."
+    },
+    "lookalikeNote": "Bael (bael) hangs hard round fruit at the same season — but bael is GREEN-GREY and larger, with small woolly seeds; nux-vomica is ORANGE with flat grey coin-seeds of strychnine. When in doubt, don't touch.",
+    "name": "Strychnine Tree",
+    "preparation": "DO NOT EAT any part. No safe preparation exists. Mark the tree; teach it.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Strychnos nux-vomica",
+    "seasons": [
+      "cool"
+    ],
+    "sources": [
+      "Wikipedia — Strychnos nux-vomica",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "fruit_tree",
+      "nux_vomica"
+    ],
+    "tileAffinity": [
+      "grove",
+      "forest_floor"
+    ],
+    "unit": "a nux-vomica fruit",
+    "uses": [],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The trumpet-flower bush. Every part is a delirium poison — blindness, madness, death. No safe dose, no home antidote. It loves disturbed ground near ruins: exactly where you forage.",
+    "confidence": "high",
+    "description": "a bushy plant with big trumpet flowers, white or purple, and spiny round pods",
+    "edibility": "avoid",
+    "form": "flower",
+    "id": "datura",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Datura. The trumpet-flower bush — every part is a delirium poison.",
+      "2": "ID: big trumpet blooms, spiny apple-like pods full of flat brown seeds. Smells rank when crushed.",
+      "3": "Danger: tropane alkaloids — dilated pupils, delirium, death. No safe dose and no home antidote. A single pod's seeds can kill.",
+      "4": "Mastery: it loves disturbed ground near ruins — exactly where you forage. Learn the trumpet at fifty paces; never touch the pods."
+    },
+    "lookalikeNote": "No edible twin in this land — that's the lesson. The pods tempt seed-collectors; the seeds inside are flat and brown, nothing like any food seed here.",
+    "name": "Datura",
+    "preparation": "DO NOT EAT any part. No safe preparation exists.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Datura metel",
+    "seasons": [
+      "hot",
+      "wet"
+    ],
+    "sources": [
+      "Flowers of India — Datura metel",
+      "Wikipedia — Datura"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "flower",
+      "datura"
+    ],
+    "tileAffinity": [
+      "ruin",
+      "trail_edge"
+    ],
+    "unit": "a datura pod",
+    "uses": [],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "south_asia_monsoon"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "Ratti. The prettiest poison here — beads red as blood with a black eye, once used to weigh gold. One chewed seed can kill an adult. No food bean is scarlet with a black eye.",
+    "confidence": "high",
+    "description": "a twining vine with feathery leaves and pods that split to show scarlet-black beads",
+    "edibility": "avoid",
+    "form": "seed",
+    "id": "rosary_pea",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Rosary pea (ratti/gunja). The prettiest poison here — beads red as blood with a black eye.",
+      "2": "ID: twining vine, feathery leaflets, pods curling back to show hard shiny scarlet seeds with a black spot. Once used as the ratti gold-weight.",
+      "3": "Danger: abrin — one chewed seed can kill an adult, and there is no antidote. Intact seeds may pass through, but never gamble it.",
+      "4": "Mastery: children string them into beads; don't. If you see the beads, you're looking at a legume — and legumes are food here, which is exactly why this one kills the careless."
+    },
+    "lookalikeNote": "The seeds mimic small beans and lentils (masoor_lentil, chickpea) to a hungry eye — but no food bean is scarlet with a black eye. Color is the warning.",
+    "name": "Rosary Pea",
+    "preparation": "DO NOT EAT any part. No safe preparation exists. Do not string the seeds.",
+    "regions": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
+    ],
+    "scientific": "Abrus precatorius",
+    "seasons": [
+      "hot",
+      "wet",
+      "cool"
+    ],
+    "sources": [
+      "Wikipedia — Abrus precatorius",
+      "India Biodiversity Portal"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "vine",
+      "rosary_pea"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "ruin"
+    ],
+    "unit": "a rosary pea seed",
     "uses": [],
     "waterContent": "low"
   }

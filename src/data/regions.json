@@ -1557,7 +1557,7 @@
     ],
     "covers": "Central America, Caribbean"
   },
-    {
+      {
     "biome": "amazon_rainforest",
     "challenge": {
       "description": "The river rises every year and takes the low ground for months. Game disperses, trails drown, and the water you drink wants to give you something. You don't beat the flood — you move with it, or you don't eat.",
@@ -2636,28 +2636,324 @@
     ],
     "covers": "Southern Africa"
   },
-  {
-    "id": "south_asia",
-    "name": "South Asia",
-    "continent": "asia",
-    "climateFamily": "tropical_monsoon",
-    "hemisphere": "north",
+    {
+    "biome": "south_asia_monsoon",
+    "challenge": {
+      "description": "Three seasons, each a boss: the hot steals your water, the wet drowns your stores and breeds fever, the cool is the only mercy. Stockpile, drain, endure.",
+      "id": "the_monsoon",
+      "mechanics": [
+        "monsoon_floods",
+        "heat_waves",
+        "fever_season"
+      ],
+      "name": "The Monsoon"
+    },
     "climate": {
       "calendar": "monsoon_3"
     },
-    "status": "stub",
-    "originTags": [
-      "india",
-      "bangladesh",
-      "pakistan",
-      "sri lanka"
+    "climateFamily": "tropical_monsoon",
+    "continent": "asia",
+    "covers": "Indian subcontinent: monsoon forest, groves, paddies and river ghats",
+    "fauna": {
+      "add": [],
+      "animals": [
+        "nilgai",
+        "chital",
+        "wild_boar",
+        "indian_peafowl",
+        "indian_gray_mongoose",
+        "golden_jackal",
+        "rhesus_macaque",
+        "indian_crested_porcupine",
+        "indian_palm_squirrel",
+        "black_naped_hare",
+        "bengal_tiger"
+      ],
+      "density": 1.1,
+      "fish": [
+        "rohu",
+        "catla",
+        "hilsa"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "bengal_tiger": 0.35,
+          "wild_boar": 0.25
+        }
+      },
+      "predators": [
+        "bengal_tiger"
+      ],
+      "remove": []
+    },
+    "flora": {
+      "bounty": {
+        "fallow field": [
+          "wild_amaranth",
+          "Disturbed ground grows good weeds."
+        ],
+        "feral orchard": [
+          "jackfruit",
+          "Someone planted food here once. The trees remember."
+        ],
+        "forest edge": [
+          "mahua",
+          "Dawn brings the flower-fall."
+        ],
+        "homestead": [
+          "banana",
+          "Someone's clump, gone wild."
+        ],
+        "mango grove": [
+          "mango",
+          "Old grafted trees. The fruit falls ripe."
+        ],
+        "paddy bund": [
+          "paddy_rice",
+          "The old paddies still give."
+        ],
+        "palm stand": [
+          "coconut",
+          "The traveler's canteen."
+        ],
+        "river ghat": [
+          "lotus",
+          "Still water. The pond is a pantry."
+        ],
+        "thicket edge": [
+          "tulsi",
+          "The courtyard herb, escaped."
+        ],
+        "village tank": [
+          "water_chestnut",
+          "Horned nuts under the rosettes."
+        ]
+      },
+      "bushes": [
+        "guava",
+        "tulsi",
+        "lemongrass",
+        "curry_leaf"
+      ],
+      "commonTrees": [
+        "mango",
+        "neem",
+        "banyan"
+      ],
+      "trees": [
+        {
+          "id": "mango",
+          "nut": "mango",
+          "roll": 0.3
+        },
+        {
+          "id": "banyan",
+          "nut": "banyan_fig",
+          "roll": 0.55
+        },
+        {
+          "id": "neem",
+          "roll": 0.75
+        },
+        {
+          "id": "jackfruit",
+          "nut": "jackfruit",
+          "roll": 0.85
+        },
+        {
+          "id": "coconut_palm",
+          "nut": "coconut"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 2,
+      "groveBlobs": 3,
+      "groveSize": 4,
+      "lootMult": 1,
+      "meadowSize": 4,
+      "ruinMaxDist": 3,
+      "stockMult": 1.1,
+      "thickets": 4,
+      "trailLines": 1,
+      "wetlands": 4
+    },
+    "hemisphere": "north",
+    "id": "south_asia",
+    "landingVariants": [
+      "rice_paddy",
+      "mango_grove",
+      "river_ghat"
     ],
+    "lifeseedRegions": [
+      "india_north",
+      "india_west",
+      "bangladesh"
+    ],
+    "monsters": [
+      "sweeps_week",
+      "cliffhanger"
+    ],
+    "name": "South Asia",
     "neighbors": [
       "central_asia_highlands",
       "southeast_asia",
       "mena_desert"
     ],
-    "covers": "Indian subcontinent"
+    "originTags": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka",
+      "pakistan",
+      "sri lanka"
+    ],
+    "people": {
+      "language": "hindi",
+      "pantry": [
+        {
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "kg": 0.5,
+          "name": "Rice",
+          "needsCooking": true,
+          "rawKcal": 200,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 70
+        },
+        {
+          "cookedKcal": 320,
+          "kcalEach": 180,
+          "kg": 0.5,
+          "name": "Masoor dal",
+          "needsCooking": true,
+          "rawKcal": 180,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "kcalEach": 120,
+          "kg": 0.2,
+          "name": "Jaggery",
+          "safe": true,
+          "spoilDays": 365,
+          "unit": "lump",
+          "units": 30
+        },
+        {
+          "kcalEach": 5,
+          "kg": 0.05,
+          "name": "Tea",
+          "safe": true,
+          "spoilDays": 365,
+          "unit": "pinch",
+          "units": 40
+        },
+        {
+          "kcalEach": 300,
+          "kg": 0.2,
+          "name": "Dried fish",
+          "safe": true,
+          "spoilDays": 60,
+          "unit": "strip",
+          "units": 25
+        }
+      ],
+      "ruins": [
+        "A vegetable market, its stalls collapsed in rows. Pre-Burn. The weighing scales are still bolted to one counter — someone measured out their life here in kilos.",
+        "A government school, its classrooms open to the sky. Chalk dust still ghosts one blackboard: a half-erased lesson. The Burn took the wires; the walls kept standing out of spite.",
+        "A bus depot, the bays empty, one timetable still legible behind cracked glass. The routes outlived the buses."
+      ],
+      "scavenge": [
+        {
+          "id": "rice_sack",
+          "kcal": 2000,
+          "kg": 1.5,
+          "name": "Sack of rice",
+          "text": "A torn sack, half-spilled. The grain inside is dry and clean — someone's winter, abandoned."
+        },
+        {
+          "id": "masoor_dal_bag",
+          "kcal": 1400,
+          "kg": 1,
+          "name": "Bag of masoor dal",
+          "text": "Red lentils in a stitched jute bag. The stitching held; the weevils never found it."
+        },
+        {
+          "id": "mustard_oil",
+          "kcal": 1500,
+          "kg": 0.5,
+          "name": "Tin of mustard oil",
+          "text": "A square tin, seal unbroken. Pungent, golden — cooking fat and lamp oil in one."
+        },
+        {
+          "id": "jaggery_block",
+          "kcal": 800,
+          "kg": 0.4,
+          "name": "Block of jaggery",
+          "text": "Dark unrefined sugar, wrapped in cloth. Ants found the corner; most of it is yours."
+        },
+        {
+          "id": "tea_brick",
+          "kcal": 20,
+          "kg": 0.3,
+          "name": "Brick of tea",
+          "text": "Compressed black tea, stamped with a garden name. Morale in a brick."
+        },
+        {
+          "id": "turmeric_powder",
+          "kcal": 60,
+          "kg": 0.2,
+          "name": "Pouch of turmeric",
+          "text": "Ground haldi in a sealed pouch. Stains everything; heals more."
+        },
+        {
+          "id": "tinned_hilsa",
+          "kcal": 500,
+          "kg": 0.35,
+          "name": "Tinned hilsa",
+          "text": "A tin of the queen of fish, in mustard oil. The label shows a river that still runs."
+        },
+        {
+          "id": "coir_rope",
+          "kcal": 0,
+          "kg": 0.8,
+          "name": "Coil of coir rope",
+          "text": "Coconut-fiber rope, still strong. The old hands made everything from this."
+        },
+        {
+          "doses": 4,
+          "id": "ors_packets",
+          "kcal": 0,
+          "kg": 0.1,
+          "name": "ORS packets",
+          "rare": true,
+          "text": "Oral rehydration salts, foil-sealed. For dehydration and dysentery — mix with CLEAN water."
+        },
+        {
+          "doses": 3,
+          "id": "med_cipro",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antibiotics",
+          "name": "Ciprofloxacin strips",
+          "rare": true,
+          "text": "Foil strips, seal intact. For bacterial gut infections — the monsoon special. Read the label."
+        }
+      ],
+      "villageNames": [
+        "Neemkheda",
+        "Peepalwadi",
+        "Jamunpur",
+        "Amaltas",
+        "Barapipal"
+      ]
+    },
+    "status": "playable"
   },
   {
     "id": "central_asia_highlands",
