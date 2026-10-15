@@ -13083,7 +13083,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const hasTinder = this.hasItem('tinder_bundle');
       const hasDrill = this.hasItem('hand_drill');
       const hasTorch = this.hasItem('torch');
-      let ticks = 32 + (moss ? 0 : 16), kcalCost = 70, autoFire = false, fireNote = null;
+      let ticks = 32 + (moss ? 0 : 16) + this.modTarget('fire.ticks_add', 0), kcalCost = 70, autoFire = false, fireNote = null;
       if (hasLighter) {
         autoFire = true; ticks = 8; kcalCost = 5;
         fireNote = 'The lighter catches on the first try. Fire on demand.';

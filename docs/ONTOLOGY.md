@@ -1577,6 +1577,21 @@ Telemetry for the run's milestone events, which had none (sim audit 2026-10-14):
 
 **Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
 
+### temperature (`temperature.js`)
+Regional temperature model + heat/cold stress + expanded weather (docs/WORLD-REGIONS.md §4 #6, #18). Derives a daily °C from the region's climate calendar (season temp label, seasonal curve, day-part swing, weather modifier), names the sky (heatwave/frost/snow/storm), and applies real consequences: hydration burn, forage/travel modifiers through the modifier pipeline, mosquito pressure, and exposure stress for the player and the village. Knowledge-gated: precise readings and forecasts only after observation or a sky-reader.
+
+**Provides:** Game.temperature (tempC, band, bandName, skyKind, canReadSky, forecast, observeDay, statusLine, install), tempC(), skyKind(), canReadSky(), forecast(), stressTick(), villagerStress(), narrateSky()
+
+**Rules:**
+- temp_from_calendar: base °C from the season's temp label (frozen -12 / cold 2 / cool 10 / mild 17 / warm 24 / hot 31), seasonal sine ±5 peaking mid-season, day-part swing (dawn -4, afternoon +4), weather modifier (heat +6, cold -6, storm -3, rain -2); clamped -40..48 (code: tempC)
+- sky_derived: heatwave when the roll is heat or tempC ≥ 35; snow when the roll is cold and tempC < 0; frost when the roll is cold and tempC ≥ 0; storm stays storm (code: skyKind)
+- no_new_currency: every cost is calories, hydration, energy, or time — never a separate meter (code: stressTick, hydrationBurn wrap)
+- knowledge_gate: numbers and forecasts show only after 7 observed days in the region, a living villager with the forecast lifeseed skill, or the forecast ability; before that, felt lines only (code: canReadSky)
+- pools_stay_separate: heat raises only the mild generic Fever via ambient mosquitoes; frostbite/heatstroke are mundane CONDITIONS (statusEffects.json), never diseases, never alien (code: diseaseVectorTick wrap)
+- wrap_once: every hook is guarded so double-loading never double-applies (code: install)
+
+**Consumes:** Game.season, Game.rollWeather, Game.advancePart, Game.diseaseVectorTick, Game.endDay, Game.mods via S.modifiers.collectModifiers, Game.applyStatus, Game.say (game.js), Scattering.calories.hydrationBurn (src/js/engine/calories.js), Game.shelteredFromSky, Game.nearFire, Game.hasAbility, Game.playerTile (game.js)
+
 ### tile-scenes (`tile-scenes.js`)
 Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terrain palette climbs the presentation ladder: earthy at stage 0, rich at stage 4 (Game.presentationStage). String building only (no DOM), ~64x64 viewBox readable at 40px.
 
