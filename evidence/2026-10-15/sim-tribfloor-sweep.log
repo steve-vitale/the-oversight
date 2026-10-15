@@ -1,0 +1,120 @@
+-- leadfeast seed 11 control
+-- leadfeast seed 11 armed
+-- leadfeast seed 22 control
+-- leadfeast seed 22 armed
+-- leadfeast seed 33 control
+-- leadfeast seed 33 armed
+-- leadfeast seed 44 control
+-- leadfeast seed 44 armed
+-- leadfeast seed 55 control
+-- leadfeast seed 55 armed
+-- leadfeast seed 66 control
+-- leadfeast seed 66 armed
+-- leadfeast seed 77 control
+-- leadfeast seed 77 armed
+-- leadfeast seed 88 control
+-- leadfeast seed 88 armed
+-- belongfeast seed 11 control
+-- belongfeast seed 11 armed
+-- belongfeast seed 22 control
+-- belongfeast seed 22 armed
+-- belongfeast seed 33 control
+-- belongfeast seed 33 armed
+-- belongfeast seed 44 control
+-- belongfeast seed 44 armed
+-- belongfeast seed 55 control
+-- belongfeast seed 55 armed
+-- belongfeast seed 66 control
+-- belongfeast seed 66 armed
+-- belongfeast seed 77 control
+-- belongfeast seed 77 armed
+-- belongfeast seed 88 control
+-- belongfeast seed 88 armed
+
+wrote evidence/2026-10-15/sim-tribfloor-runs.json (32 runs, -31668006s)
+
+=== SUMMARY (pre-registered verdict) ===
+{
+ "control": {
+  "n": 16,
+  "tfWouldEmpty": 16,
+  "tfCapped": 0,
+  "tfCappedKcal": 0,
+  "tfDemandRefused": 0,
+  "tfEmptied": 14,
+  "fsFeasts": 131,
+  "starveDeaths": 17,
+  "tributePaidTotal": 966401,
+  "leverageLandings": 43,
+  "national": 5,
+  "table": 8,
+  "wins": 0,
+  "w4": 8,
+  "w5": 6,
+  "medSurv": 128.5,
+  "exiled": 2,
+  "deathModes": {
+   "expedition": 19,
+   "combat": 303,
+   "a": 12,
+   "monster": 14,
+   "villager": 78,
+   "starvation": 17,
+   "contest": 15,
+   "alien": 2,
+   "sickness": 23,
+   "dehydration": 2,
+   "Big-Bane": 1,
+   "Spool": 1,
+   "ambush": 2,
+   "lockjaw": 1,
+   "Nevermore": 1,
+   "the": 1
+  }
+ },
+ "armed": {
+  "n": 16,
+  "tfWouldEmpty": 7,
+  "tfCapped": 15,
+  "tfCappedKcal": 68314,
+  "tfDemandRefused": 6,
+  "tfEmptied": 0,
+  "fsFeasts": 128,
+  "starveDeaths": 18,
+  "tributePaidTotal": 993932,
+  "leverageLandings": 39,
+  "national": 5,
+  "table": 8,
+  "wins": 0,
+  "w4": 8,
+  "w5": 6,
+  "medSurv": 105.5,
+  "exiled": 1,
+  "deathModes": {
+   "expedition": 19,
+   "combat": 305,
+   "a": 11,
+   "monster": 13,
+   "villager": 79,
+   "starvation": 18,
+   "contest": 15,
+   "alien": 2,
+   "sickness": 22,
+   "dehydration": 2,
+   "Big-Bane": 1,
+   "Spool": 1,
+   "ambush": 2,
+   "lockjaw": 1,
+   "Nevermore": 1,
+   "the": 1,
+   "The": 1
+  }
+ }
+}
+
+INTENT control would-empty=16 | armed raw-bill breaches=21 (capped 15 + refused 6), kcal held back=68314
+PRIMARY pantry-emptying armed<=0.5x control: 0 <= 0.5*14 -> GO
+GUARD national armed >= control-2: 5 >= 3 -> OK
+GUARD median survival armed >= control-10d: 105.5 >= 118.5 -> MISS
+GUARD starvation deaths armed <= control+2: 18 <= 19 -> OK
+GUARD no new death mode at n>=3: OK
