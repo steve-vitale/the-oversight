@@ -407,6 +407,7 @@
               betrayal: '"We need to talk. About what happened."',
               tension: '"It\'s tense around the fire lately."',
               hunger: '"People are going hungry. What do we do?"',
+              table: '"The table. We need to talk about the table."',
               // WEIRDNESS (journey crisis r16 2026-10-15): the changed are a
               // world event — an explicit choice, since alien quirks have no
               // want-system backstop carrying them.

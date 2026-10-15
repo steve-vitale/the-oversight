@@ -1671,6 +1671,18 @@
               mark('event');
               return `"${ev.n || 'Several'} of us are down with ${ev.desc}. Boil the water twice — I'm telling everyone."`;
             }
+            // TABLE (journey endgame r11 2026-10-14; ported 2026-10-15): the
+            // table is the village's news while it waits, sits, or has just
+            // been answered — phase-aware, knowledge-gated (what they see,
+            // never the path mechanics).
+            if (ev.kind === 'table') {
+              mark('event');
+              const ph = ev.phase || 'sitting';
+              if (ph === 'waiting') return '"Word is the table\'s coming. For us. Nobody wants to say it first, so I will."';
+              if (ph === 'deferred') return '"Ninety dawns, it said. It\'ll keep its word. The table will still be here."';
+              if (ph === 'done') return '"You answered it. Whatever happened up there — the whole village saw. We\'re still turning it over."';
+              return '"It\'s here. The table. Seven doors. Nobody\'s talking about anything else at the fire."';
+            }
             const EV_NEWS = {
               naming: '"There\'s a real argument going about what to call that thing. People are heated."',
               mourning: '"Nobody\'s saying it out loud, but everyone\'s thinking about them. The quiet ones worst."',

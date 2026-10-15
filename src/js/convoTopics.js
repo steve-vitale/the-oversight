@@ -336,6 +336,32 @@
           };
         }
       } catch (e) {}
+      // TABLE EVENT (journey endgame r11 2026-10-14; ported 2026-10-15): the
+      // table arriving is the single biggest village-scale event in the run —
+      // r10 transcript evidence showed a villager chatting idly a week after
+      // the table came ("nobody mentions it"). The village MUST acknowledge
+      // it. Phase-aware: waiting (the summons is coming), sitting (it is
+      // here, unanswered), deferred (the day-90-floor wait), done (answered).
+      // Priority: below fresh grief, the mantle, and a SEVERE outbreak
+      // (villagers actively dying in numbers outshout even this); above the
+      // naming debate it displaces, the sick row, weirdness, and every daily
+      // friction. The landed convoTableOpener (conversation.js) keeps the
+      // conversation-open beat (once per villager per sitting); this scan is
+      // the lately/event-choice/want beat — complementary, not a duplicate.
+      let tableEv = null;
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        const T = (typeof this.tableState === 'function') ? this.tableState() : null;
+        const active = (typeof this.tableActive === 'function') && this.tableActive();
+        const seat = (T && T.seat) || 'none';
+        if (T && T.phase === 'done') {
+          tableEv = { kind: 'table', phase: 'done', seat, path: T.path || null };
+        } else if (T && T.winDeferred) {
+          tableEv = { kind: 'table', phase: 'deferred', seat };
+        } else if ((pg && pg.tableWaiting) || active) {
+          tableEv = { kind: 'table', phase: (pg && pg.tableWaiting && !active) ? 'waiting' : 'sitting', seat };
+        }
+      } catch (e) { tableEv = null; }
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
@@ -348,8 +374,10 @@
         // Unlike mundane sickness (familiar, and the want system carries it
         // as sick_help), a transformation has no other conversational
         // outlet; the debate resumes when the transformation passes.
+        // YIELDS to the table (r11): the System's summons outranks the
+        // naming argument.
         if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
-            !(outbreak && outbreak.severe) && !weirdness) {
+            !(outbreak && outbreak.severe) && !weirdness && !tableEv) {
           const entries = this.state.codex.monsters || {};
           const mid = Object.keys(entries).find(k => {
             const e = entries[k];
@@ -417,6 +445,12 @@
         // days — the night lingers, then it becomes old news (the mantle
         // keeps 10). The 'defended' memory is planted by
         // resolveWildMonsterEncounter on the raid pathway only (opts.raid).
+        // TABLE RETURN (r11, ported 2026-10-15): below fresh grief, the mantle,
+        // and a SEVERE outbreak (villagers actively dying in numbers outshout
+        // even the table — the orphaned draft's own stated rule, which its
+        // code didn't implement; fixed on port); above the naming debate it
+        // displaced, the sick row, weirdness, and every daily friction.
+        if (tableEv && !(outbreak && outbreak.severe)) return tableEv;
         // OUTBREAK RETURN (r8): the scan ran before the naming check; the kind
         // surfaces here — below fresh grief and the mantle (the dead are
         // still named first), above defense and the debate.
@@ -1001,6 +1035,40 @@
             areChanging + who + ' — ' + wdesc + '. The fire keeps going quiet when they walk up."',
           ];
         }
+        case 'table': {
+          // TABLE (journey endgame r11 2026-10-14; ported 2026-10-15): the
+          // village acknowledges the System's summons. Knowledge-gated:
+          // villagers describe what they SEE (the table, the doors, the
+          // waiting) — never the path mechanics, which belong to the player.
+          // The table is televised (endgame design), so the done-lines may
+          // witness the outcome.
+          const ph = ev.phase || 'sitting';
+          if (ph === 'waiting') return [
+            '"They say the table\'s coming. For us. I keep thinking about what we\'d even bring to it."',
+            '"Have you felt it? Like the air before a storm, but — bigger. Something\'s on its way."'];
+          if (ph === 'deferred') return [
+            '"Ninety dawns, it said. It kept its word before — I believe it\'ll keep this one. The table will still be here."',
+            '"It told us to come back when the village has seen ninety dawns. Like it\'s patient. Like it can afford to be."'];
+          if (ph === 'done') {
+            const path = ev.path || '';
+            const seen = {
+              feared: '"I watched the table. We all watched. I\'m still deciding how I feel about what I saw."',
+              beloved: '"The whole village was cheering at the table. I cried. I\'m not ashamed of it."',
+              witness: '"The trial — you put THEM on trial at the table. I testified in my head the whole time."',
+              defiant: '"You walked away from the table. From THAT. I don\'t know whether you\'re brave or out of your mind."',
+              assimilated: '"You went into the table. Part of you didn\'t come back — I can tell. We all can."',
+              relay: '"You\'re still you after the table, right? Blink twice if it kept a copy."',
+              indispensable: '"The treaty at the table. You wrote us into the fine print of the universe."',
+            }[path];
+            return [
+              seen || '"You did it. Whatever it was, up there — you did it. The table\'s gone quiet now."',
+              '"People will tell this one for years. I was there. I get to say I was there."'];
+          }
+          // sitting (default): the table is HERE, unanswered.
+          return [
+            '"It\'s here. The table. I walked past where it sits three times today. I don\'t know what I\'m waiting for."',
+            '"Nobody says it out loud, but everyone\'s counting — how long before you answer it? Seven doors. I counted."'];
+        }
         case 'tension':
           return ['"Everyone\'s choosing sides and pretending they aren\'t. I hate it."',
             '"You feel that? The air before a storm. That\'s the village right now."'];
@@ -1063,6 +1131,9 @@
         weirdness: ['"I {habitI} and try not to stare. Everybody\'s trying not to stare. Nobody\'s succeeding."',
           '"Changed is changed. I watch for what it DOES, not what it looks like."',
           '"I keep my distance from the changed ones at night. Not proud of it. Just honest."'],
+        table: ['"I {habitI} when I think about what it wants from us. It wants something. Everything wants something."',
+          '"I keep my eyes down when I pass it. Respect, maybe. Fear, probably. Both."',
+          '"Seven doors and it chose US. I {habitI} and try to feel chosen instead of chosen-at."'],
         betrayal: ['"I\'m watching. That\'s what I do now — I watch."',
           '"I {habitI} and count who shows up on time. Lists help."',
           '"Trust got re-priced. I\'m just reading the new numbers."'],
@@ -1101,6 +1172,9 @@
         weirdness: ['"Nobody eats the strange meat alone anymore. That\'s the new rule. Unspoken, but it\'s the rule."',
           '"We watch the changed ones. Not cruel — careful. There\'s a difference. We keep telling ourselves that."',
           '"If the meat did this, the cook needs to know before the next haul. Someone has to say it."'],
+        table: ['"Whatever door it is — it\'ll still be there tomorrow. That\'s the worst part. The patience."',
+          '"Someone has to answer it eventually. Everyone\'s doing the math on whether it\'ll be them."',
+          '"We should talk about what we\'d ask for. Before it asks first."'],
         betrayal: ['"Either it gets talked out or it festers. I know which one I\'d bet on."',
           '"A moot could clear it. If anyone has the stomach to call one."',
           '"It\'ll surface. Things like that always surface — usually at the worst hour."'],
@@ -1139,6 +1213,9 @@
         weirdness: ['"My part? I don\'t flinch. Or I try not to. They notice the trying, I think."',
           '"I talk to them like nothing\'s different. Because the person isn\'t different. Right?"',
           '"I {habitI} near them, casual. Normal is a thing you can give someone."'],
+        table: ['"My part? I keep the fire lit where it sits. Somebody should tend the waiting."',
+          '"I {habitI} and practice what I\'d say. In case it ever asks me. It won\'t. Still."',
+          '"I tell the new ones: don\'t touch it, don\'t mock it, don\'t turn your back on it."'],
         betrayal: ['"I keep my word. Someone around here has to."',
           '"My part? I don\'t gossip about it. That\'s harder than it sounds."',
           '"I give them exactly what they give me. No more loans."'],

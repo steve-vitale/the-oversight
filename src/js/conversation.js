@@ -728,19 +728,23 @@
           sep = '';
         }
       }
-      // PUNCTUATION FOLD (journey landing r7 2026-10-12): a bare-punctuation
-      // closer ('!', from the effusive mannerism pool) appended after the
-      // line's own terminal mark stutters ("...knows about? !", seed 999
-      // day 6) — same bug class as the comma-closer fold above. Fold it: a
-      // question keeps its mark and the closer is dropped (a question stays
-      // a question); any other terminal mark is swapped for the closer
-      // ("...ask anyone!" — never "...ask anyone. !").
-      if (!useOpen && /^[!?…]+$/.test(bit.trim())) {
+      // PUNCTUATION FOLD (journey landing r7 2026-10-12; extended journey
+      // endgame r11 2026-10-14, ported 2026-10-15): a bare-punctuation closer
+      // ('!', '.', from the effusive/laconic mannerism pools) appended after
+      // the line's own terminal mark stutters ("...knows about? !", seed 999
+      // day 6; "...Solid person. .", endgame r10 transcript) — same bug
+      // class as the comma-closer fold above. Fold it: a question keeps its
+      // mark and the closer is dropped (a question stays a question); any
+      // other terminal mark is swapped for the closer ("...ask anyone!" —
+      // never "...ask anyone. !"); a line with no terminal mark takes the
+      // punctuation with no join space ("...I see." — never "...I see .").
+      if (!useOpen && /^[.!?…]+$/.test(bit.trim())) {
         const ptm = /([.!?…])\s*$/.exec(said);
         if (ptm) {
           if (ptm[1] === '?') return line;
           return '"' + said.slice(0, ptm.index) + bit.trim() + '"';
         }
+        return '"' + said + bit.trim() + '"';
       }
       // SPACE-LED CLOSER JOIN (journey establishment r7 2026-10-12): most
       // closers carry their own leading space (' Not that it matters.',
