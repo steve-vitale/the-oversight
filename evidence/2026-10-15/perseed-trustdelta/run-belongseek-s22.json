@@ -1,0 +1,538 @@
+{
+ "seed": 22,
+ "policyId": "belongseek",
+ "days": 182,
+ "dailyCalls": 180,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 4,
+ "deaths": {
+  "villager:combat": 2,
+  "monster:combat": 4,
+  "villager:lockjaw": 1,
+  "villager:starvation": 1,
+  "villager:monster": 1
+ },
+ "trust": {
+  "nTicks": 2784,
+  "coverage": 0.2364,
+  "posSum": 1386,
+  "negSum": -406,
+  "zeroN": 1452,
+  "bySource": {
+   "other": {
+    "n": 2126,
+    "pos": 1135,
+    "neg": -406
+   },
+   "talk": {
+    "n": 656,
+    "pos": 251,
+    "neg": 0
+   },
+   "ripple": {
+    "n": 2,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 66,
+   "pos": 53,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 147,
+   "pos": 89,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 653,
+   "pos": 245,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 48,
+   "pos": 0,
+   "neg": -96
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 1285,
+   "pos": 479,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 59,
+   "pos": 44,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 208,
+   "pos": 154,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 105,
+   "pos": 94,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 17,
+   "pos": 9,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 52,
+   "pos": 27,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 36,
+   "pos": 0,
+   "neg": -69
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 23,
+   "pos": 87,
+   "neg": -182
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 3,
+   "pos": 6,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:eval@<eval>": {
+   "n": 4,
+   "pos": 2,
+   "neg": -4
+  },
+  "via:bumpTrust+bumpTrust fn:fieldFight@<eval>": {
+   "n": 3,
+   "pos": 1,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:noteSharedFight@<eval>": {
+   "n": 6,
+   "pos": 3,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 53,
+   "pos": 0,
+   "neg": -53
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 8,
+   "pos": 80,
+   "neg": 0
+  },
+  "ripple:order": {
+   "n": 2,
+   "pos": 0,
+   "neg": 0
+  },
+  "fn:eval@<eval>": {
+   "n": 3,
+   "pos": 2,
+   "neg": 0
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -2
+  },
+  "fn:visitorInteract@<eval>": {
+   "n": 1,
+   "pos": 10,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 21,
+   "vid": "gen_ui3dn2f",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -46,
+   "beat": [
+    "🕯️ Casey is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.",
+    "🕯️ Casey Castillo is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Casey's gone.\" Walt looks at you for a long moment. \"You're not Casey.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Zuri blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Casey Castillo, 21 days. The mantle passes to Zuri Gu.",
+    "🪞 You wake up somebody else. Zuri Gu, 57 — a physical therapy aide. Their hands know different work now: Field Medicine."
+   ]
+  },
+  {
+   "day": 40,
+   "vid": "gen_d5ke4mq",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 2 tiles to grove.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 2 tiles to trail edge.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "The Paparazzo stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there.",
+    "You keep a day's food (1150 kcal) — nothing extra for the pantry this time."
+   ]
+  },
+  {
+   "day": 40,
+   "vid": "gen_d5ke4mq",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -26,
+   "beat": [
+    "🕯️ Zuri is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.",
+    "🕯️ Zuri Gu is dead — the expedition. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Zuri's gone.\" Caitriona looks at you for a long moment. \"You're not Zuri.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Walt blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Zuri Gu, 40 days. The mantle passes to Walt Medina.",
+    "🪞 You wake up somebody else. Walt Medina, 44 — a Pharmacist. Their hands know different work now: Herbal Remedy."
+   ]
+  },
+  {
+   "day": 66,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Carlos checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Carlos pries 1 stone loose from the creek bed. The building pile grows. (157 stone now.)",
+    "🌿 Wolfgang checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Wolfgang hauls back 8 wood. The pile grows. (709 logs now.)",
+    "🍲 Theo cooked for the haven — meals stretched. Theo worked the smoke racks too — 2 batches preserved (~3182 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Wolfgang telling Carlos about himself. The story's getting bigger than what happened.",
+    "You catch fragments by the fire — Nora telling Theo about Carlos. The retelling is already better than the event.",
+    "🚶 Carlos is back — found Walt."
+   ]
+  },
+  {
+   "day": 67,
+   "vid": "onni_korhonen",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Carlos checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Carlos returns with 20L, but the cistern only holds 2L more.",
+    "🌿 Wolfgang checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Wolfgang pries 1 stone loose from the creek bed. The building pile grows. (158 stone now.)",
+    "🍲 Theo cooked for the haven — meals stretched. Theo worked the smoke racks too — 2 batches preserved (~3200 kcal, keeps a couple of weeks).",
+    "🚶 Lucas is back — found Walt.",
+    "📨 Word came: Devon Okafor wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge."
+   ]
+  },
+  {
+   "day": 67,
+   "vid": "lena_ruiz",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Carlos checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Carlos returns with 20L, but the cistern only holds 2L more.",
+    "🌿 Wolfgang checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Wolfgang pries 1 stone loose from the creek bed. The building pile grows. (158 stone now.)",
+    "🍲 Theo cooked for the haven — meals stretched. Theo worked the smoke racks too — 2 batches preserved (~3200 kcal, keeps a couple of weeks).",
+    "🚶 Lucas is back — found Walt.",
+    "📨 Word came: Devon Okafor wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge.",
+    "🚶 Onni Korhonen walks in — pack light, eyes wide. Haven grows by one. (9 souls.)"
+   ]
+  },
+  {
+   "day": 100,
+   "vid": "theo_lindqvist",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "Stranger's heavy strike hits you for 11.",
+    "Stranger closes in, patient and unhurried.",
+    "Stranger closes in, patient and unhurried.",
+    "⚠ Stranger plants their feet — HEAVY STRIKE winding up. The marked ground is about to erupt. MOVE.",
+    "Stranger brings the heavy strike DOWN — the ground erupts.",
+    "Armor absorbs 7.",
+    "Stranger's heavy strike hits you for 11.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 100,
+   "vid": "jorge_silva",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "Stranger's heavy strike hits you for 11.",
+    "Stranger closes in, patient and unhurried.",
+    "Stranger closes in, patient and unhurried.",
+    "⚠ Stranger plants their feet — HEAVY STRIKE winding up. The marked ground is about to erupt. MOVE.",
+    "Stranger brings the heavy strike DOWN — the ground erupts.",
+    "Armor absorbs 7.",
+    "Stranger's heavy strike hits you for 11.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 100,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 12,
+   "beat": [
+    "Stranger's heavy strike hits you for 11.",
+    "Stranger closes in, patient and unhurried.",
+    "Stranger closes in, patient and unhurried.",
+    "⚠ Stranger plants their feet — HEAVY STRIKE winding up. The marked ground is about to erupt. MOVE.",
+    "Stranger brings the heavy strike DOWN — the ground erupts.",
+    "Armor absorbs 7.",
+    "Stranger's heavy strike hits you for 11.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 100,
+   "vid": "theo_lindqvist",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -22,
+   "beat": [
+    "📖 The Codex turns a page on its own. Walt Medina is dead. You didn't ask. It knew.",
+    "🕯️ Walt is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Walt Medina is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Walt's gone.\" Jorge looks at you for a long moment. \"You're not Walt.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Theo blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Walt Medina, 100 days. The mantle passes to Theo Lindqvist.",
+    "🪞 You wake up somebody else. Theo Lindqvist, 24 — a trail crew lead. His hands know different work now: Patient Aim."
+   ]
+  },
+  {
+   "day": 105,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 12,
+   "beat": [
+    "Redactor's Redact hits you for 18.",
+    "You don't stroll through the Redactor.",
+    "Your Hatchet un-redacts — the word comes back.",
+    "Its white edge-handles grab toward your last turn — POINTING. Whatever it points at goes quiet. The handles ARE the telegraph. (Redaction lands next round.)",
+    "💥 redactor's Redact finds you — no dodging it.",
+    "Armor absorbs 19.",
+    "Redactor's Redact hits you for 21.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 105,
+   "vid": "jorge_silva",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -39,
+   "beat": [
+    "📖 The Codex turns a page on its own. Theo Lindqvist is dead. You didn't ask. It knew.",
+    "🕯️ Theo is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Theo Lindqvist is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Theo's gone.\" Wolfgang looks at you for a long moment. \"You're not Theo.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Jorge blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Theo Lindqvist, 105 days. The mantle passes to Jorge Silva.",
+    "🪞 You wake up somebody else. Jorge Silva, 50 — a Rancher. His hands know different work now: Game Sense, Tracker."
+   ]
+  },
+  {
+   "day": 107,
+   "vid": "aria_thompson",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Nora — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Wolfgang worked the creek — 2 fish, +420 kcal to the pantry.",
+    "🎣 Sigrun worked the creek — 4 fish, +900 kcal to the pantry.",
+    "🎣 Nora worked the creek — 1 fish, +105 kcal to the pantry.",
+    "🪤 Sigrun is back. \"Snares were empty. They'll keep.\"",
+    "📨 Word came: Nikos Papadopoulos wants to join Haven. \"I saw you on the broadcast. You looked like people who eat.\" — they haven't set foot here. The village will judge.",
+    "The village debates Nikos Papadopoulos. The room is cold — Sigrun, Nora, Lucas against. \"More mouths, same fire.\" (35% for.)"
+   ]
+  },
+  {
+   "day": 108,
+   "vid": "devon_okafor",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Nora — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Wolfgang worked the creek — 5 fish, +1020 kcal to the pantry.",
+    "🎣 Sigrun worked the creek — 5 fish, +1020 kcal to the pantry.",
+    "🎣 Nora worked the creek — 1 fish, +140 kcal to the pantry.",
+    "You catch fragments by the fire — Nora telling Lucas about you. The story's getting bigger than what happened.",
+    "You catch fragments by the fire — Wolfgang telling Aria about themself. Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+    "🥣 Ben of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\""
+   ]
+  },
+  {
+   "day": 138,
+   "vid": "zoe_adams",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Nora worked the creek — 2 fish, +420 kcal to the pantry.",
+    "🎣 Lucas worked the creek — 5 fish, +1020 kcal to the pantry.",
+    "🍲 Onni cooked for the haven — meals stretched. Onni worked the smoke racks too — 3 batches preserved (~1680 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Nora telling Lucas about you. The story's getting bigger than what happened.",
+    "You catch fragments by the fire — Nora telling Lena about you. The details have shifted. Nobody seems to mind.",
+    "You catch fragments by the fire — Lena telling Lucas about Nora. The retelling is already better than the event.",
+    "Sigrun showed Nora the American Ginseng — \"remember it.\" Word gets around.",
+    "🪤 Sigrun is back. \"Snares were empty. They'll keep.\""
+   ]
+  },
+  {
+   "day": 155,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "🔆 The stranger raises a beam weapon. The air tastes like copper.",
+    "◈ Your resistant gear flares — 1 piece catching the beam. It helps. It's not enough for a second hit.",
+    "🔆 You take 72 beam damage (1 resistant piece absorbing) — a beam weapon.",
+    "⚠ Stranger plants their feet — HEAVY STRIKE winding up. The marked ground is about to erupt. MOVE.",
+    "Stranger brings the heavy strike DOWN — the ground erupts.",
+    "Armor absorbs 12.",
+    "Stranger's heavy strike hits you for 6.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 155,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -23,
+   "beat": [
+    "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 9,494 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "JORGE — GONE. 5 open questions closed unanswered.",
+    "🕯️ Jorge Silva is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Jorge's gone.\" Nora looks at you for a long moment. \"You're not Jorge.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Lucas blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Jorge Silva, 155 days. The mantle passes to Lucas Brown.",
+    "🪞 You wake up somebody else. Lucas Brown, 44 — a Police officer. His hands know different work now: Mediator, Adrenaline Control."
+   ]
+  },
+  {
+   "day": 157,
+   "vid": "ines_duarte",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Sigrun — 🎣 Fish. Sigrun nods eagerly. They'll report back by next part.",
+    "📋 Nora — 🎣 Fish. Nora nods eagerly. They'll report back by next part.",
+    "📋 Lena — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Sigrun worked the creek — 2 fish, +420 kcal to the pantry.",
+    "🎣 Nora worked the creek — 5 fish, +1080 kcal to the pantry.",
+    "🎣 Lena worked the creek — 2 fish, +400 kcal to the pantry.",
+    "🌿 Nora returns from foraging the wilds: +516 kcal to the pantry."
+   ]
+  },
+  {
+   "day": 164,
+   "vid": "nora_wilson",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -12,
+   "beat": [
+    "🕯️ Lucas is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 14,241 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "🕯️ Lucas Brown is dead — lockjaw. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Lucas's gone.\" Sigrun looks at you for a long moment. \"You're not Lucas.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Nora blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Lucas Brown, 164 days. The mantle passes to Nora Wilson.",
+    "🪞 You wake up somebody else. Nora Wilson, 56 — a tailor. Her hands know different work now: Eagle Eye, Steady Hands."
+   ]
+  },
+  {
+   "day": 167,
+   "vid": "tom_baker",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Sigrun worked the creek — 1 fish, +180 kcal to the pantry.",
+    "🎣 Lena worked the creek — 4 fish, +960 kcal to the pantry.",
+    "🎣 Devon worked the creek — 2 fish, +280 kcal to the pantry.",
+    "◈ THE SYSTEM has been watching Devon — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+    "🍲 Onni cooked for the haven — meals stretched.",
+    "📨 Word came: a young farmer wants to join Haven. \"I saw you on the broadcast. You looked like people who eat.\" — they haven't set foot here. The village will judge.",
+    "The village debates a young farmer. The room is cold — Sigrun, Onni, Lena against. \"More mouths, same fire.\" (0% for.)"
+   ]
+  },
+  {
+   "day": 178,
+   "vid": "visjoin_177",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Devon worked the creek — 4 fish, +600 kcal to the pantry.",
+    "🎣 Zoe worked the creek — 4 fish, +600 kcal to the pantry.",
+    "You catch fragments by the fire — Devon telling Ines about you. Half of it's true anymore. You're not sure which half.",
+    "🌿 Lena returns from foraging the wilds: +430 kcal to the pantry.",
+    "🚶 Zoe is back with Lena.",
+    "🍲 Zoe is eating by the fire — not talking, just eating.",
+    "Ben waits two days at your fire, getting thinner. Nobody answers. They walk back to Thornfield with nothing. They'll remember the silence.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 179,
+   "vid": "onni_korhonen",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -14,
+   "beat": [
+    "🕯️ Nora is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 21,362 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "🕯️ Nora Wilson is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Nora's gone.\" Lena looks at you for a long moment. \"You're not Nora.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Onni blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Nora Wilson, 179 days. The mantle passes to Onni Korhonen.",
+    "🪞 You wake up somebody else. Onni Korhonen, 63 — a chimney sweep."
+   ]
+  }
+ ]
+}

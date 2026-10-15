@@ -1,0 +1,255 @@
+{
+ "seed": 88,
+ "policyId": "belongseek",
+ "days": 79,
+ "dailyCalls": 78,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 2,
+ "deaths": {
+  "villager:sickness": 4,
+  "monster:villager combat": 2,
+  "monster:combat": 1,
+  "villager:starvation": 1
+ },
+ "trust": {
+  "nTicks": 2024,
+  "coverage": 0.2105,
+  "posSum": 987,
+  "negSum": -314,
+  "zeroN": 943,
+  "bySource": {
+   "other": {
+    "n": 1598,
+    "pos": 754,
+    "neg": -306
+   },
+   "talk": {
+    "n": 411,
+    "pos": 233,
+    "neg": -8
+   },
+   "ripple": {
+    "n": 15,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 36,
+   "pos": 29,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 36,
+   "pos": 36,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 403,
+   "pos": 218,
+   "neg": -8
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 126,
+   "pos": 0,
+   "neg": -252
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 1223,
+   "pos": 498,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 26,
+   "pos": 36,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 44,
+   "pos": 46,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 24,
+   "pos": 24,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "fn:convoConflictFallout@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -2
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 10,
+   "pos": 10,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 8,
+   "pos": 15,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 7,
+   "pos": 0,
+   "neg": -14
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 5,
+   "pos": 0,
+   "neg": -10
+  },
+  "via:bumpTrust+bumpTrust fn:npcTakeAction@<eval>": {
+   "n": 32,
+   "pos": 20,
+   "neg": 0
+  },
+  "ripple:order": {
+   "n": 15,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 18,
+   "pos": 0,
+   "neg": -18
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 5,
+   "pos": 50,
+   "neg": 0
+  },
+  "observe:loot_corpse": {
+   "n": 1,
+   "pos": 0,
+   "neg": -10
+  },
+  "observe:fight": {
+   "n": 2,
+   "pos": 4,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 62,
+   "vid": "app_mgpsphfg455",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Somchai worked the creek — 3 fish, +600 kcal to the pantry.",
+    "Onni showed Divya the giant rhubarb-like leaves, round burrs, first-year = leaf rosette with no stalk — \"remember it.\" Word gets around.",
+    "🌿 Onni returns from foraging the wilds: +254 kcal to the pantry.",
+    "🍲 Divya is eating by the fire — not talking, just eating.",
+    "📨 Word came: Caleb Jones of Emberhold wants to join Haven. \"Heard about this place three valleys over. Had to try.\" — they haven't set foot here. The village will judge.",
+    "The village debates Caleb Jones. Split room. Some for, some against. It's your call. (50% for.)",
+    "📨 The village didn't wait for you. Caleb Jones was vouched for around the fire — they're walking.",
+    "Accepted. Caleb Jones is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 64,
+   "vid": "caleb_jones",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "🌱 Malik looks over the garden: turned soil, nothing planted. Someone has to sow first.",
+    "🎣 Rosa worked the creek — 3 fish, +792 kcal to the pantry.",
+    "🎣 Kentaro worked the creek — 4 fish, +780 kcal to the pantry.",
+    "🎣 Somchai worked the creek — 2 fish, +400 kcal to the pantry.",
+    "🍲 Divya cooked for the haven — meals stretched.",
+    "Kentaro doesn't bother arguing anymore. By dusk the Fetch water crews are taking orders from them, and nobody quite remembers when it changed.",
+    "🪤 Onni is back from the snares: +298 kcal to the pantry."
+   ]
+  },
+  {
+   "day": 70,
+   "vid": "rosa_mendez",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "1 unprocessed haul onto the counter — the clock is ticking.",
+    "You walk back into Haven. 32 Codex entries. The village is glad to see you.",
+    "📋 Malik — 🌱 Garden. (a natural — good pick) They'll report back by next part.",
+    "📋 Rosa — 🎣 Fish. Rosa nods eagerly. They'll report back by next part.",
+    "📋 Somchai — 🎣 Fish. Somchai nods eagerly. They'll report back by next part.",
+    "📋 Caleb — 🎣 Fish. They'll report back by next part.",
+    "📋 Ivy — 🍲 Cook. They'll report back by next part.",
+    "You make a Snare. a loop of vine on a bent stick. catches small game. (10 uses)"
+   ]
+  },
+  {
+   "day": 75,
+   "vid": "nathan_lee",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "Onni leans in, voice low. \"Here's what we figured out about tick. Keep two squares away. Keep 2+ squares away and it's harmless — it can't chase. Don't walk up to it. Latched: burn it off with fire, or let it feed full and drop on its own.\"",
+    "💡 COUNTER LEARNED — tick: Keep two squares away. Keep 2+ squares away and it's harmless — it can't chase. Don't walk up to it. Latched: burn it off with fire, or let it feed full and drop on its own. (Someone at the haven knew the trick.)",
+    "📓 Codex: Counter: Keep two squares away — Keep 2+ squares away and it's harmless — it can't chase. Don't walk up to it. Latched: burn it off with fire, or let it feed full and drop on its own.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Rosa worked the creek — 1 fish, +288 kcal to the pantry.",
+    "🎣 Malik worked the creek — 4 fish, +800 kcal to the pantry.",
+    "◈ THE SYSTEM has been watching Malik — 3 days worked on the land. It offers Game Sense. Earned, not given. (game_sense: villager System grant)",
+    "🎣 Caleb worked the creek — 2 fish, +280 kcal to the pantry."
+   ]
+  },
+  {
+   "day": 76,
+   "vid": "carlos_diaz",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Rosa — 🎣 Fish. Rosa nods eagerly. They'll report back by next part.",
+    "📋 Malik — 🎣 Fish. They'll report back by next part.",
+    "📋 Caleb — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Rosa worked the creek — 3 fish, +864 kcal to the pantry.",
+    "🎣 Malik worked the creek — 2 fish, +400 kcal to the pantry.",
+    "🎣 Caleb worked the creek — 1 fish, +140 kcal to the pantry.",
+    "You catch fragments by the fire — Onni telling Nathan about you. Half of it's true anymore. You're not sure which half."
+   ]
+  },
+  {
+   "day": 78,
+   "vid": "app_mgpspibl868",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Rosa — 🎣 Fish. Rosa nods eagerly. They'll report back by next part.",
+    "📋 Malik — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Carlos worked the creek — 1 fish, +196 kcal to the pantry.",
+    "🎣 Rosa walked the banks — the water's fished out. Nothing to catch. It'll come back if it rests.",
+    "🎣 Malik walked the banks — the water's fished out. Nothing to catch. It'll come back if it rests.",
+    "🌿 Nathan returns from foraging the wilds: +301 kcal to the pantry.",
+    "🌿 Carlos returns from foraging the wilds: +450 kcal to the pantry."
+   ]
+  }
+ ]
+}

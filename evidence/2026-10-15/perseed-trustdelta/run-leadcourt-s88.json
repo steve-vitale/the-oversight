@@ -1,0 +1,262 @@
+{
+ "seed": 88,
+ "policyId": "leadcourt",
+ "days": 91,
+ "dailyCalls": 89,
+ "won": false,
+ "rank": "global",
+ "national": 1,
+ "tableWaiting": false,
+ "maxWave": 4,
+ "deaths": {
+  "villager:monster": 4,
+  "monster:combat": 5,
+  "villager:sickness": 2,
+  "villager:a wound that wouldn't close": 1,
+  "villager:combat": 2,
+  "villager:starvation": 2
+ },
+ "trust": {
+  "nTicks": 2130,
+  "coverage": 0.1634,
+  "posSum": 1005,
+  "negSum": -317,
+  "zeroN": 1051,
+  "bySource": {
+   "other": {
+    "n": 1782,
+    "pos": 765,
+    "neg": -313
+   },
+   "talk": {
+    "n": 345,
+    "pos": 240,
+    "neg": -4
+   },
+   "ripple": {
+    "n": 3,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 44,
+   "pos": 37,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 34,
+   "pos": 34,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 335,
+   "pos": 221,
+   "neg": -4
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 115,
+   "pos": 0,
+   "neg": -230
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 1425,
+   "pos": 505,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 52,
+   "pos": 62,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 49,
+   "pos": 51,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 18,
+   "pos": 17,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "fn:convoConflictFallout@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -2
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 10,
+   "pos": 10,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 10,
+   "pos": 19,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 4,
+   "pos": 0,
+   "neg": -8
+  },
+  "ripple:order": {
+   "n": 3,
+   "pos": 0,
+   "neg": 0
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 6,
+   "pos": 0,
+   "neg": -12
+  },
+  "via:bumpTrust+bumpTrust fn:npcTakeAction@<eval>": {
+   "n": 6,
+   "pos": 4,
+   "neg": 0
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 4,
+   "pos": 40,
+   "neg": 0
+  },
+  "observe:fight": {
+   "n": 4,
+   "pos": 4,
+   "neg": -2
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 6,
+   "pos": 0,
+   "neg": -6
+  },
+  "observe:loot_corpse": {
+   "n": 1,
+   "pos": 0,
+   "neg": -10
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -43
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 51,
+   "vid": "caleb_jones",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Kentaro — 🎣 Fish. Kentaro nods eagerly. They'll report back by next part.",
+    "🌾 Haven sends 4,240 kcal of grain to Emberhold's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Jude worked the creek — 2 fish, +420 kcal to the pantry.",
+    "🎣 Kentaro worked the creek — 4 fish, +720 kcal to the pantry.",
+    "The village debates a tired cook. Warm, mostly. \"One more pair of hands.\" (74% for.)",
+    "📨 The village didn't wait for you. a tired cook was vouched for around the fire — they're walking.",
+    "Accepted. a tired cook is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 53,
+   "vid": "app_mgpsphci284",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "Taken: Bark armor x1.",
+    "Too heavy for the rest — left where it lies: Camo Jacket x1.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Jude worked the creek — 2 fish, +480 kcal to the pantry.",
+    "🎣 Kentaro worked the creek — 5 fish, +960 kcal to the pantry.",
+    "🎣 Yavdokha worked the creek — 4 fish, +700 kcal to the pantry.",
+    "Kentaro stopped asking. They just started organizing the Fetch water crews. Nobody stopped them.",
+    "You catch fragments by the fire — Somchai telling Onni about you. It's picking up decorations as it travels."
+   ]
+  },
+  {
+   "day": 54,
+   "vid": "app_mgpspi15332",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "Kentaro waits until the fire's lit and people are watching. Then, loud enough for all of them: \"Who put YOU in charge?\"",
+    "📋 Jude — 🎣 Fish. Jude nods eagerly. They'll report back by next part.",
+    "Kentaro doesn't say a word. They just stand there, arms crossed, until you finish giving the order. The silence does the talking.",
+    "📋 Kentaro — 🎣 Fish. Kentaro nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Zoe worked the creek — 3 fish, +504 kcal to the pantry.",
+    "🎣 Jude worked the creek — 5 fish, +960 kcal to the pantry.",
+    "🎣 Kentaro worked the creek — 2 fish, +360 kcal to the pantry."
+   ]
+  },
+  {
+   "day": 72,
+   "vid": "app_mgpspi3q711",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "They're burying their speaker — grain can wait a week; grief can't. Tending resumes when the mourning lifts.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🍽️ Zoe checks the pantry before heading out — ~8 days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the fish nets instead of turning to other work.",
+    "🎣 Zoe worked the creek — 4 fish, +900 kcal to the pantry.",
+    "🍽️ Jude checks the pantry before heading out — ~8 days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the fish nets instead of turning to other work.",
+    "🎣 Jude worked the creek — 4 fish, +840 kcal to the pantry.",
+    "🍲 Kentaro cooked for the haven — meals stretched.",
+    "🍲 Zoe is eating by the fire — not talking, just eating."
+   ]
+  },
+  {
+   "day": 75,
+   "vid": "onni_korhonen",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "Travel 2 tiles to forest floor.",
+    "Still full. (Eat, test a lump, or leave some.)",
+    "Travel 1 tile to Haven.",
+    "You walk back into Haven. 32 Codex entries. The village is glad to see you.",
+    "📋 Zoe — 🎣 Fish. They'll report back by next part.",
+    "📋 Peter — 🎣 Fish. They'll report back by next part.",
+    "📋 Kentaro — 🎣 Fish. Kentaro nods eagerly. They'll report back by next part.",
+    "Ivy hesitates, then backs off. \"Not today. Sorry.\" (Low trust — reluctant.)"
+   ]
+  },
+  {
+   "day": 78,
+   "vid": "gen_21eh494",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -43,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Helga DeLuca is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Helga's gone.\" Zoe looks at you for a long moment. \"You're not Helga.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Kentaro blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Helga DeLuca, 78 days. The mantle passes to Kentaro Miyagawa.",
+    "🪞 You wake up somebody else. Kentaro Miyagawa, 65 — a Vintner. Their hands know different work now: Preservation Instinct."
+   ]
+  }
+ ]
+}

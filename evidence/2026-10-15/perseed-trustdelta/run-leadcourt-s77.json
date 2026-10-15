@@ -1,0 +1,522 @@
+{
+ "seed": 77,
+ "policyId": "leadcourt",
+ "days": 94,
+ "dailyCalls": 92,
+ "won": false,
+ "rank": "global",
+ "national": 1,
+ "tableWaiting": false,
+ "maxWave": 4,
+ "deaths": {
+  "monster:villager combat": 2,
+  "monster:combat": 3,
+  "villager:monster": 4,
+  "villager:combat": 5,
+  "person:alien": 1,
+  "villager:a wound that wouldn't close": 1
+ },
+ "trust": {
+  "nTicks": 1455,
+  "coverage": 0.233,
+  "posSum": 786,
+  "negSum": -368,
+  "zeroN": 718,
+  "bySource": {
+   "other": {
+    "n": 1116,
+    "pos": 654,
+    "neg": -361
+   },
+   "talk": {
+    "n": 333,
+    "pos": 132,
+    "neg": -7
+   },
+   "ripple": {
+    "n": 6,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 94,
+   "pos": 65,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 327,
+   "pos": 121,
+   "neg": -7
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 758,
+   "pos": 310,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 18,
+   "pos": 19,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 29,
+   "pos": 29,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 55,
+   "pos": 0,
+   "neg": -110
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 3,
+   "pos": 0,
+   "neg": -6
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 6,
+   "pos": 6,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 32,
+   "pos": 35,
+   "neg": 0
+  },
+  "fn:evStranger@<eval>": {
+   "n": 12,
+   "pos": 92,
+   "neg": 0
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 7,
+   "pos": 1,
+   "neg": -147
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 6,
+   "pos": 11,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcTakeAction@<eval>": {
+   "n": 2,
+   "pos": 2,
+   "neg": 0
+  },
+  "ripple:order": {
+   "n": 6,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:incidents@<eval>": {
+   "n": 2,
+   "pos": 1,
+   "neg": -3
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 8,
+   "pos": 7,
+   "neg": 0
+  },
+  "fn:eval@<eval>": {
+   "n": 2,
+   "pos": 4,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 54,
+   "pos": 0,
+   "neg": -72
+  },
+  "observe:fight": {
+   "n": 3,
+   "pos": 12,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 23,
+   "pos": 0,
+   "neg": -23
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 6,
+   "pos": 60,
+   "neg": 0
+  },
+  "fn:visitorInteract@<eval>": {
+   "n": 1,
+   "pos": 10,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 9,
+   "vid": "gen_i8jbo66",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "gen_v1g2568",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "gen_l4zh5sr",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 10,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "gen_ch5t7tk",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "gen_su1yi03",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "nino_kapanadze",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "hassan_ali",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "chen_wei",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 9,
+   "vid": "thabo_maseko",
+   "source": "other",
+   "detail": "fn:evStranger@<eval>",
+   "applied": 8,
+   "beat": [
+    "🚨 White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy is at Haven's door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with hon",
+    "📓 Codex: White Noise, Highbeam Deer, Hushpuppy, Night Court, Hushpuppy at the door, day 9.",
+    "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.",
+    "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "One of them is coming for YOU — White Noise, inside the haven, eyes on your bedroll.",
+    "🚶 A stranger walks into Haven. They're thin, scared, and carrying nothing. \"Please,\" they say. \"I heard you have food.\" (Drama: do you share?)"
+   ]
+  },
+  {
+   "day": 10,
+   "vid": "gen_ch5t7tk",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -16,
+   "beat": [
+    "📖 The Codex settles deeper into you. It knows things before you do now. Deaths, especially — it will tell you itself.",
+    "📖 The Codex turns a page on its own. Ray Fan is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Ray Fan is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Valentina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Ray Fan, 10 days. The mantle passes to Valentina Medina.",
+    "🪞 You wake up somebody else. Valentina Medina, 27 — a line cook. Their hands know different work now: Preservation Instinct."
+   ]
+  },
+  {
+   "day": 39,
+   "vid": "nino_kapanadze",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -50,
+   "beat": [
+    "Thornfield watches to see if Haven holds without its dead. The bond is young — they're still deciding what Haven is, and grief delays the verdict. They'll test the link — count on it, unless Haven answers first: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.",
+    "VALENTINA — GONE. 2 open questions closed unanswered.",
+    "🕯️ Valentina Medina is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Valentina's gone.\" Jesse looks at you for a long moment. \"You're not Valentina.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Nino blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Valentina Medina, 39 days. The mantle passes to Nino Kapanadze.",
+    "🪞 You wake up somebody else. Nino Kapanadze, 56 — a dry cleaner."
+   ]
+  },
+  {
+   "day": 43,
+   "vid": "zoltan_nagy",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Jesse checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Jesse pries 2 stone loose from the creek bed. The building pile grows. (74 stone now.)",
+    "🍲 Wei cooked for the haven — meals stretched. Wei worked the smoke racks too — 3 batches preserved (~1520 kcal, keeps a couple of weeks).",
+    "Thabo again, quieter: \"Three weeks we've known them. Feels longer.\"",
+    "📨 Word came: Oliver Moore wants to join Haven. \"Heard about this place three valleys over. Had to try.\" — they haven't set foot here. The village will judge.",
+    "The village debates Oliver Moore. Split room. Some for, some against. It's your call. (49% for.)",
+    "📨 The village didn't wait for you. Oliver Moore was vouched for around the fire — they're walking.",
+    "Accepted. Oliver Moore is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 44,
+   "vid": "diana_osei",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Jesse — 🎣 Fish. Jesse nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Jesse checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Jesse hauls back 10 wood. The pile grows. (305 logs now.)",
+    "🥣 Theo of The Red Table walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+    "📓 Codex: Theo of The Red Table begs food at Haven's fire.",
+    "📨 Word came: Naran Tumen wants to join Haven. \"Word travels: Haven takes people in. I'm people.\" — they haven't set foot here. The village will judge.",
+    "The village debates a young teacher. The room is cold — Wei, Jesse, Thabo against. \"More mouths, same fire.\" (0% for.)"
+   ]
+  },
+  {
+   "day": 46,
+   "vid": "oliver_moore",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "Three weeks of knowing Emberhold — and now it's real. Haven is regional.",
+    "◈ SYSTEM: \"Oh! The chat is doing the thing again — they're RANKING fires. Yours is... climbing. They keep asking which fire climbs FIRST. No pressure. (SO much pressure.)\"",
+    "Theo waits two days at your fire, getting thinner. Nobody answers. They walk back to The Red Table with nothing. They'll remember the silence.",
+    "📨 Word came: Rosa Mendez of Stonebridge wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge.",
+    "The village debates Rosa Mendez. Warm, mostly. \"One more pair of hands.\" (67% for.)",
+    "📨 The village didn't wait for you. Rosa Mendez was vouched for around the fire — they're walking.",
+    "The village debates Rosa Mendez. Split room. Some for, some against. It's your call. (53% for.)",
+    "Accepted. Rosa Mendez is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 46,
+   "vid": "app_mgpsphv6760",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "◈ SYSTEM: \"Oh! The chat is doing the thing again — they're RANKING fires. Yours is... climbing. They keep asking which fire climbs FIRST. No pressure. (SO much pressure.)\"",
+    "Theo waits two days at your fire, getting thinner. Nobody answers. They walk back to The Red Table with nothing. They'll remember the silence.",
+    "📨 Word came: Rosa Mendez of Stonebridge wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge.",
+    "The village debates Rosa Mendez. Warm, mostly. \"One more pair of hands.\" (67% for.)",
+    "📨 The village didn't wait for you. Rosa Mendez was vouched for around the fire — they're walking.",
+    "The village debates Rosa Mendez. Split room. Some for, some against. It's your call. (53% for.)",
+    "Accepted. Rosa Mendez is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them.",
+    "🚶 Oliver Moore walks in — pack light, eyes wide. Haven grows by one. (7 souls.)"
+   ]
+  },
+  {
+   "day": 49,
+   "vid": "rosa_mendez",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌾 Haven sends 1,500 kcal of grain to Stonebridge's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+    "🌾 Haven sends 1,500 kcal of grain to Thornfield's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Jesse checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Jesse pries 2 stone loose from the creek bed. The building pile grows. (78 stone now.)",
+    "◈ THE SYSTEM has been watching Wei — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+    "🍲 Wei cooked for the haven — meals stretched. Wei worked the smoke racks too — 1 batch preserved (~1382 kcal, keeps a couple of weeks).",
+    "🧳 Word comes late, through traders: Thornfield has bound itself to Emberhold. The region's map is being redrawn — not by Haven."
+   ]
+  },
+  {
+   "day": 49,
+   "vid": "naran_tumen",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌾 Haven sends 1,500 kcal of grain to Thornfield's fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +8.)",
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Jesse checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Jesse pries 2 stone loose from the creek bed. The building pile grows. (78 stone now.)",
+    "◈ THE SYSTEM has been watching Wei — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+    "🍲 Wei cooked for the haven — meals stretched. Wei worked the smoke racks too — 1 batch preserved (~1382 kcal, keeps a couple of weeks).",
+    "🧳 Word comes late, through traders: Thornfield has bound itself to Emberhold. The region's map is being redrawn — not by Haven.",
+    "🚶 Rosa Mendez walks in — pack light, eyes wide. Haven grows by one. (9 souls.)"
+   ]
+  },
+  {
+   "day": 85,
+   "vid": "chen_wei",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -39,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Nino Kapanadze is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Nino's gone.\" Thabo looks at you for a long moment. \"You're not Nino.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Wei blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Nino Kapanadze, 85 days. The mantle passes to Wei Chen.",
+    "🪞 You wake up somebody else. Wei Chen, 31 — a Beekeeper. His hands know different work now: Soft Step, Animal Ken."
+   ]
+  },
+  {
+   "day": 85,
+   "vid": "thabo_maseko",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -14,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Wei is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "WEI — GONE. 1 open question closed unanswered.",
+    "🕯️ Wei Chen is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Thabo blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Wei Chen, 85 days. The mantle passes to Thabo Maseko.",
+    "🪞 You wake up somebody else. Thabo Maseko, 41 — a taxi driver."
+   ]
+  },
+  {
+   "day": 88,
+   "vid": "visjoin_87",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "Sleeping rough means the cold ground — heal ~16. Tonight will cost you — the night drinks ~54 hydration. Eat and drink before you sleep, or the spiral starts at midnight.",
+    "You settle into the cold ground. Sleep takes you.",
+    "🌿 Rosa checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Rosa pries 1 stone loose from the creek bed. The building pile grows. (97 stone now.)",
+    "🍲 Zoltan cooked for the haven — meals stretched. The racks are already full (9,523 kcal kept — more than the haven can eat before it turns), so Zoltan left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+    "📡 The world feed: The Red Table — a feud settled. The chat has opinions.",
+    "📓 Codex: World feed: The Red Table — a feud settled",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 93,
+   "vid": "naran_tumen",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -22,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "THABO — GONE. 2 open questions closed unanswered.",
+    "🕯️ Thabo Maseko is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Naran blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Thabo Maseko, 93 days. The mantle passes to Naran Tumen.",
+    "🪞 You wake up somebody else. Naran Tumen, 60 — a bus driver."
+   ]
+  }
+ ]
+}

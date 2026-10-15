@@ -1,0 +1,147 @@
+{
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "policies": [
+  "competent",
+  "belongseek",
+  "leadcourt"
+ ],
+ "perPolicy": {
+  "competent": {
+   "n": 8,
+   "coverage": 0.2332,
+   "bySource": {
+    "other": {
+     "n": 12996,
+     "pos": 7280,
+     "neg": -2658
+    },
+    "talk": {
+     "n": 3850,
+     "pos": 1644,
+     "neg": -815
+    },
+    "ripple": {
+     "n": 61,
+     "pos": 0,
+     "neg": 0
+    },
+    "teaching": {
+     "n": 1,
+     "pos": 3,
+     "neg": 0
+    },
+    "donations": {
+     "n": 22,
+     "pos": 9,
+     "neg": 0
+    },
+    "feast": {
+     "n": 19,
+     "pos": 26,
+     "neg": 0
+    }
+   },
+   "gossipViolations": 0,
+   "national": 0,
+   "table": 0,
+   "won": 0,
+   "maxWave": 4,
+   "medianDays": 147
+  },
+  "belongseek": {
+   "n": 8,
+   "coverage": 0.2568,
+   "bySource": {
+    "other": {
+     "n": 10218,
+     "pos": 6378,
+     "neg": -1979
+    },
+    "talk": {
+     "n": 3482,
+     "pos": 1397,
+     "neg": -464
+    },
+    "ripple": {
+     "n": 48,
+     "pos": 0,
+     "neg": 0
+    }
+   },
+   "gossipViolations": 0,
+   "national": 1,
+   "table": 0,
+   "won": 0,
+   "maxWave": 4,
+   "medianDays": 107
+  },
+  "leadcourt": {
+   "n": 8,
+   "coverage": 0.2273,
+   "bySource": {
+    "other": {
+     "n": 10159,
+     "pos": 6892,
+     "neg": -2718
+    },
+    "talk": {
+     "n": 2946,
+     "pos": 1565,
+     "neg": -461
+    },
+    "ripple": {
+     "n": 39,
+     "pos": 0,
+     "neg": -8
+    },
+    "donations": {
+     "n": 3,
+     "pos": 3,
+     "neg": 0
+    }
+   },
+   "gossipViolations": 0,
+   "national": 4,
+   "table": 0,
+   "won": 0,
+   "maxWave": 4,
+   "medianDays": 108
+  }
+ },
+ "wall": {
+  "national": "5/24",
+  "table": "0/24",
+  "won": "0/24",
+  "maxWave": 4,
+  "medianDays": 111,
+  "maxDays": 182
+ },
+ "deaths": {
+  "villager:sickness": 19,
+  "villager:monster": 30,
+  "monster:combat": 103,
+  "villager:contest": 11,
+  "monster:villager combat": 35,
+  "villager:combat": 58,
+  "villager:starvation": 19,
+  "villager:thirst": 1,
+  "villager:Big Loud": 1,
+  "monster:expedition": 2,
+  "villager:lockjaw": 3,
+  "villager:a wound that wouldn't close": 9,
+  "villager:wound_fever": 1,
+  "person:combat": 1,
+  "villager:Buffering": 1,
+  "person:alien": 1
+ }
+}

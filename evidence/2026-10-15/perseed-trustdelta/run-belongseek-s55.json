@@ -1,0 +1,281 @@
+{
+ "seed": 55,
+ "policyId": "belongseek",
+ "days": 107,
+ "dailyCalls": 106,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 3,
+ "deaths": {
+  "monster:combat": 6,
+  "villager:Buffering": 1,
+  "villager:combat": 4,
+  "monster:villager combat": 2,
+  "villager:monster": 1,
+  "villager:contest": 1
+ },
+ "trust": {
+  "nTicks": 1537,
+  "coverage": 0.2232,
+  "posSum": 895,
+  "negSum": -332,
+  "zeroN": 594,
+  "bySource": {
+   "other": {
+    "n": 1194,
+    "pos": 772,
+    "neg": -253
+   },
+   "talk": {
+    "n": 343,
+    "pos": 123,
+    "neg": -79
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 92,
+   "pos": 85,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 162,
+   "pos": 139,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 23,
+   "pos": 19,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 339,
+   "pos": 115,
+   "neg": -79
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 28,
+   "pos": 0,
+   "neg": -56
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 490,
+   "pos": 301,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 54,
+   "pos": 38,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 4,
+   "pos": 4,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 4,
+   "pos": 8,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 3,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 76,
+   "pos": 67,
+   "neg": 0
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 16,
+   "pos": 53,
+   "neg": -149
+  },
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 64,
+   "pos": 48,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 169,
+   "pos": 0,
+   "neg": -44
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -2
+  },
+  "fn:freeloadWarning@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "fn:convoConflictFallout@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": -2
+  },
+  "fn:eval@<eval>": {
+   "n": 9,
+   "pos": 15,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcTakeAction@<eval>": {
+   "n": 2,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:fieldFight@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 12,
+   "vid": "elena_petrova",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -16,
+   "beat": [
+    "You camp wild tonight — no pantry meal. Eat from your pack.",
+    "🩹 Salvatore makes rounds — Jesse gets bound up properly. (58 → 73 HP)",
+    "📖 The Codex turns a page on its own. Violet Pang is dead. You didn't ask. It knew.",
+    "🕯️ Violet Pang is dead — dehydration. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Elena blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Violet Pang, 12 days. The mantle passes to Elena Petrova.",
+    "🪞 You wake up somebody else. Elena Petrova, 44 — a Baker. Her hands know different work now: Secret Ingredient, Steady Hands."
+   ]
+  },
+  {
+   "day": 17,
+   "vid": "gen_zh3y1ey",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 8,
+   "beat": [
+    "Armor absorbs 2.",
+    "Wolf's attack hits you for 6.",
+    "📖 Codex: Harass — locks onto one target — moving won't dodge it. You won't forget this.",
+    "You don't stroll through the Hushpuppy.",
+    "💥 wolf's Harass finds you — no dodging it.",
+    "Armor absorbs 2.",
+    "Wolf's Harass hits you for 6.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 17,
+   "vid": "gen_tys3mzi",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -25,
+   "beat": [
+    "Wolf's Harass hits you for 6.",
+    "You go down.",
+    "📖 The Codex turns a page on its own. Elena Petrova is dead. You didn't ask. It knew.",
+    "🕯️ Elena Petrova is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Abraham blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Elena Petrova, 17 days. The mantle passes to Abraham Vásquez.",
+    "🪞 You wake up somebody else. Abraham Vásquez, 46 — a hunting guide. Their hands know different work now: Game Sense, Patient Aim."
+   ]
+  },
+  {
+   "day": 61,
+   "vid": "leo_martin",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 11,
+   "beat": [
+    "The shutter doesn't even bother aiming. It knows. (UNAVOIDABLE flash — break line of sight or eat it.)",
+    "You're frozen — you can't move. (stunned)",
+    "You are shaking it off.",
+    "No movement left this turn.",
+    "💥 Flash Photography!",
+    "Armor absorbs 5.",
+    "Paparazzo's Flash Photography hits you for 14.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 61,
+   "vid": "leo_martin",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -42,
+   "beat": [
+    "🕯️ Abraham is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Emberhold installs their own speaker at the table. Tribute rises to 11,250 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "🕯️ Abraham Vásquez is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Abraham's gone.\" Jesse looks at you for a long moment. \"You're not Abraham.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Leo blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Abraham Vásquez, 61 days. The mantle passes to Leo Martin.",
+    "🪞 You wake up somebody else. Leo Martin, 16 — a trail crew lead. His hands know different work now: Patient Aim."
+   ]
+  },
+  {
+   "day": 61,
+   "vid": "jesse_cortez",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -20,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Leo is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Leo Martin is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Leo's gone.\" Caleb looks at you for a long moment. \"You're not Leo.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Jesse blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Leo Martin, 61 days. The mantle passes to Jesse Cortez.",
+    "🪞 You wake up somebody else. Jesse Cortez, 40 — a line cook. His hands know different work now: Preservation Instinct."
+   ]
+  },
+  {
+   "day": 101,
+   "vid": "gen_0awhdfs",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -20,
+   "beat": [
+    "🕯️ Jesse is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Emberhold installs their own speaker at the table. Tribute rises to 16,875 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "🕯️ Jesse Cortez is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Jesse's gone.\" Lena looks at you for a long moment. \"You're not Jesse.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Caleb blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Jesse Cortez, 101 days. The mantle passes to Caleb Kennedy.",
+    "🪞 You wake up somebody else. Caleb Kennedy, 30 — a musician. Their hands know different work now: Diplomatic Incident."
+   ]
+  },
+  {
+   "day": 101,
+   "vid": "lena_ruiz",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -26,
+   "beat": [
+    "📖 The Codex turns a page on its own. Caleb Kennedy is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Caleb is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Caleb Kennedy is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Lena blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Caleb Kennedy, 101 days. The mantle passes to Lena Ruiz.",
+    "🪞 You wake up somebody else. Lena Ruiz, 34 — an ER nurse. Her hands know different work now: Triage, Steady Hands."
+   ]
+  }
+ ]
+}

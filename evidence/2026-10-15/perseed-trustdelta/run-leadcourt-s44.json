@@ -1,0 +1,684 @@
+{
+ "seed": 44,
+ "policyId": "leadcourt",
+ "days": 151,
+ "dailyCalls": 150,
+ "won": false,
+ "rank": "global",
+ "national": 1,
+ "tableWaiting": false,
+ "maxWave": 4,
+ "deaths": {
+  "villager:combat": 3,
+  "villager:monster": 2,
+  "villager:starvation": 1
+ },
+ "trust": {
+  "nTicks": 2154,
+  "coverage": 0.2298,
+  "posSum": 1738,
+  "negSum": -747,
+  "zeroN": 311,
+  "bySource": {
+   "other": {
+    "n": 1659,
+    "pos": 1475,
+    "neg": -546
+   },
+   "talk": {
+    "n": 485,
+    "pos": 262,
+    "neg": -201
+   },
+   "ripple": {
+    "n": 9,
+    "pos": 0,
+    "neg": 0
+   },
+   "donations": {
+    "n": 1,
+    "pos": 1,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 132,
+   "pos": 132,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 480,
+   "pos": 252,
+   "neg": -201
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 795,
+   "pos": 654,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 23,
+   "pos": 23,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 97,
+   "pos": 97,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 194,
+   "pos": 192,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 28,
+   "pos": 0,
+   "neg": -56
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 32,
+   "pos": 29,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 13,
+   "pos": 13,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:incidents@<eval>": {
+   "n": 2,
+   "pos": 1,
+   "neg": -3
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 100,
+   "pos": 106,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 2,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 5,
+   "pos": 10,
+   "neg": 0
+  },
+  "ripple:order": {
+   "n": 9,
+   "pos": 0,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 150,
+   "pos": 0,
+   "neg": -116
+  },
+  "fn:convoConflictFallout@<eval>": {
+   "n": 5,
+   "pos": 0,
+   "neg": -10
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 33,
+   "pos": 106,
+   "neg": -319
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 42,
+   "pos": 0,
+   "neg": -42
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 6,
+   "pos": 60,
+   "neg": 0
+  },
+  "fn:donateToPantry@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "fn:visitorInteract@<eval>": {
+   "n": 6,
+   "pos": 60,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 53,
+   "vid": "gen_59eoy2l",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 9,
+   "beat": [
+    "The sound-block swings forward — the strike rings off it. (Frontal — flank it.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the gavel for 33 (Phase blade).",
+    "📺 +5 style — solid hit",
+    "🔨 THE VERDICT FALLS: \"Day 43: Minh found someone lost out past the ridge and walked them to shelter.\" — GUILTY. (45)",
+    "Armor absorbs 3.",
+    "The Gavel's VERDICT hits you for 42.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 53,
+   "vid": "gen_bptywtw",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 12,
+   "beat": [
+    "The sound-block swings forward — the strike rings off it. (Frontal — flank it.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the gavel for 33 (Phase blade).",
+    "📺 +5 style — solid hit",
+    "🔨 THE VERDICT FALLS: \"Day 43: Minh found someone lost out past the ridge and walked them to shelter.\" — GUILTY. (45)",
+    "Armor absorbs 3.",
+    "The Gavel's VERDICT hits you for 42.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 53,
+   "vid": "gen_wqy7nn6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "The sound-block swings forward — the strike rings off it. (Frontal — flank it.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the gavel for 33 (Phase blade).",
+    "📺 +5 style — solid hit",
+    "🔨 THE VERDICT FALLS: \"Day 43: Minh found someone lost out past the ridge and walked them to shelter.\" — GUILTY. (45)",
+    "Armor absorbs 3.",
+    "The Gavel's VERDICT hits you for 42.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 53,
+   "vid": "carlos_diaz",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -46,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Howard Bennett is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Howard's gone.\" Minh looks at you for a long moment. \"You're not Howard.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Carlos blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Howard Bennett, 53 days. The mantle passes to Carlos Diaz.",
+    "🪞 You wake up somebody else. Carlos Diaz, 55 — a Fisherman. His hands know different work now: Swimmer, Game Sense."
+   ]
+  },
+  {
+   "day": 60,
+   "vid": "gen_59eoy2l",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 9,
+   "beat": [
+    "The spool’s replay hits you for 11.",
+    "▶ REPLAY 3/3: STRIKE — the tape plays your own swing back at you. (11)",
+    "The tape loops. LOADED: 1. WAIT  2. STRIKE (~15)  3. STRIKE (~11).",
+    "▶ REPLAY 1/3: WAIT — the spool holds perfectly still. Your own patience, played back at you.",
+    "Armor absorbs 1.",
+    "The spool’s replay hits you for 14.",
+    "You go down.",
+    "▶ REPLAY 2/3: STRIKE — the tape plays your own swing back at you. (14)"
+   ]
+  },
+  {
+   "day": 60,
+   "vid": "gen_bptywtw",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "The spool’s replay hits you for 11.",
+    "▶ REPLAY 3/3: STRIKE — the tape plays your own swing back at you. (11)",
+    "The tape loops. LOADED: 1. WAIT  2. STRIKE (~15)  3. STRIKE (~11).",
+    "▶ REPLAY 1/3: WAIT — the spool holds perfectly still. Your own patience, played back at you.",
+    "Armor absorbs 1.",
+    "The spool’s replay hits you for 14.",
+    "You go down.",
+    "▶ REPLAY 2/3: STRIKE — the tape plays your own swing back at you. (14)"
+   ]
+  },
+  {
+   "day": 60,
+   "vid": "gen_wqy7nn6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "The spool’s replay hits you for 11.",
+    "▶ REPLAY 3/3: STRIKE — the tape plays your own swing back at you. (11)",
+    "The tape loops. LOADED: 1. WAIT  2. STRIKE (~15)  3. STRIKE (~11).",
+    "▶ REPLAY 1/3: WAIT — the spool holds perfectly still. Your own patience, played back at you.",
+    "Armor absorbs 1.",
+    "The spool’s replay hits you for 14.",
+    "You go down.",
+    "▶ REPLAY 2/3: STRIKE — the tape plays your own swing back at you. (14)"
+   ]
+  },
+  {
+   "day": 60,
+   "vid": "gen_bptywtw",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -23,
+   "beat": [
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "CARLOS — GONE. 3 open questions closed unanswered.",
+    "🕯️ Carlos Diaz is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Carlos's gone.\" Kai looks at you for a long moment. \"You're not Carlos.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Minh blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Carlos Diaz, 60 days. The mantle passes to Minh Bailey.",
+    "🪞 You wake up somebody else. Minh Bailey, 22 — an army medic. Their hands know different work now: Triage, Steady Hands."
+   ]
+  },
+  {
+   "day": 73,
+   "vid": "gen_59eoy2l",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "Overnight, Hickory Nuts (in shell) went bad — beyond saving. You leave it for the flies.",
+    "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "👀 Kai claims to belong somewhere — then spends the whole evening oriented around something they won't name. The wanting is real. The word for it isn't \"to belong somewhere\".",
+    "🏃 Mei of The Hungry Road II walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. The Hungry Road II has grain to spare — 1,767 kcal, no tribute, no ceremony. Say the word.\"",
+    "(Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+    "🥣 Malik of Stonebridge stands at your fire, thinner than pride allows. \"Stonebridge is eating bark. We're asking — 1,863 kcal, whatever you can spare. We'll remember it.\"",
+    "(They beg — give from the beats row, or refuse aloud. If they once fed you, refusing costs double.)",
+    "You wake with a start — something is wrong."
+   ]
+  },
+  {
+   "day": 73,
+   "vid": "gen_wqy7nn6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "Overnight, Hickory Nuts (in shell) went bad — beyond saving. You leave it for the flies.",
+    "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "👀 Kai claims to belong somewhere — then spends the whole evening oriented around something they won't name. The wanting is real. The word for it isn't \"to belong somewhere\".",
+    "🏃 Mei of The Hungry Road II walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. The Hungry Road II has grain to spare — 1,767 kcal, no tribute, no ceremony. Say the word.\"",
+    "(Aid offer — accept or refuse from the beats row. Refusing costs pride: trust -3.)",
+    "🥣 Malik of Stonebridge stands at your fire, thinner than pride allows. \"Stonebridge is eating bark. We're asking — 1,863 kcal, whatever you can spare. We'll remember it.\"",
+    "(They beg — give from the beats row, or refuse aloud. If they once fed you, refusing costs double.)",
+    "You wake with a start — something is wrong."
+   ]
+  },
+  {
+   "day": 73,
+   "vid": "gen_wqy7nn6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -22,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Minh Bailey is dead — contest. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Minh's gone.\" Kai looks at you for a long moment. \"You're not Minh.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Leandro blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Minh Bailey, 73 days. The mantle passes to Leandro Sala.",
+    "🪞 You wake up somebody else. Leandro Sala, 45 — a Vintner. His hands know different work now: Preservation Instinct."
+   ]
+  },
+  {
+   "day": 76,
+   "vid": "app_mgpsphc4701",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Zoe checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Zoe pries 2 stone loose from the creek bed. The building pile grows. (74 stone now.)",
+    "◈ THE SYSTEM has been watching Ivy — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+    "🍲 Ivy cooked for the haven — meals stretched. Ivy worked the smoke racks too — 3 batches preserved (~2454 kcal, keeps a couple of weeks).",
+    "🍲 Devon is eating by the fire — not talking, just eating.",
+    "◈ SYSTEM: \"Four fires. One head. GOVERNANCE LAYER: online — polity tribute routing, the court calendar, famine reserves. You built a realm. Try not to lose it the way you found it.\"",
+    "👑 Speakers from Emberhold, Stonebridge, The Hungry Road II ride in for the first court — and every one of them is measuring you. FEAST them from a shared granary (5,000 kcal, no strings), HOST the court at Haven's fire (your speaker's time), or write the law in COLD ink (they'll pay more and love y",
+    "📓 Codex: National beat staged: lead (4 villages)."
+   ]
+  },
+  {
+   "day": 78,
+   "vid": "aki_tanaka",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "Zoe showed Aisha the Salmonberry — \"remember it.\" Word gets around.",
+    "📖 Aria is walking Ivy through the Salmonberry — leaf, stem, smell, the beginner's tour.",
+    "📡 The world feed: The Hungry Road — a monster sighting. The chat has opinions.",
+    "📓 Codex: World feed: The Hungry Road — a monster sighting",
+    "📨 Word came: Lucas Brown of The Hungry Road II wants to join Haven. \"Heard about this place three valleys over. Had to try.\" — they haven't set foot here. The village will judge.",
+    "The village debates Lucas Brown. Warm, mostly. \"One more pair of hands.\" (79% for.)",
+    "📨 The village didn't wait for you. Lucas Brown was vouched for around the fire — they're walking.",
+    "Accepted. Lucas Brown is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 79,
+   "vid": "owen_smith",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "You give Stonebridge 1,400 kcal from Haven's bins — real food, honestly counted. Malik weeps, openly. \"The fire network. That's what it's FOR.\" (Trust +4. They owe you — the ledger remembers.)",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Aki worked the creek — 2 fish, +343 kcal to the pantry.",
+    "🎣 Devon worked the creek — 3 fish, +550 kcal to the pantry.",
+    "🎣 Zoe worked the creek — 2 fish, +360 kcal to the pantry.",
+    "🍲 Ivy cooked for the haven — meals stretched. Ivy worked the smoke racks too — 1 batch preserved (~160 kcal, keeps a couple of weeks).",
+    "Aria, at the fire, not quite believing it: \"Speakers rode in, ate our grain, and called us a realm. A REALM. I keep saying it to hear how it sounds.\"",
+    "📨 Word came: Owen Smith of Stonebridge wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge."
+   ]
+  },
+  {
+   "day": 81,
+   "vid": "lucas_brown",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Ivy — 🍲 Cook. Ivy nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Aki worked the creek — 2 fish, +392 kcal to the pantry.",
+    "◈ THE SYSTEM has been watching Aki — 3 days worked on the land. It offers Game Sense. Earned, not given. (game_sense: villager System grant)",
+    "🎣 Devon worked the creek — 4 fish, +780 kcal to the pantry.",
+    "🎣 Zoe worked the creek — 2 fish, +420 kcal to the pantry.",
+    "🍲 Ivy cooked for the haven — meals stretched. Ivy worked the smoke racks too — 4 batches preserved (~1542 kcal, keeps a couple of weeks).",
+    "Owen is working the cookpot, tasting, adjusting."
+   ]
+  },
+  {
+   "day": 89,
+   "vid": "zoe_adams",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -48,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,266 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 1,266 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Leandro Sala is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Leandro's gone.\" Ivy looks at you for a long moment. \"You're not Leandro.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Zoe blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Leandro Sala, 89 days. The mantle passes to Zoe Adams.",
+    "🪞 You wake up somebody else. Zoe Adams, 21 — a journalist. Her hands know different work now: Diplomatic Incident."
+   ]
+  },
+  {
+   "day": 92,
+   "vid": "ivy_wang",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -33,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Zoe is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Zoe Adams is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Zoe's gone.\" Devon looks at you for a long moment. \"You're not Zoe.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Ivy blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Zoe Adams, 92 days. The mantle passes to Ivy Wang.",
+    "🪞 You wake up somebody else. Ivy Wang, 25 — a journalist. Her hands know different work now: Diplomatic Incident."
+   ]
+  },
+  {
+   "day": 94,
+   "vid": "visjoin_93",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "The creek runs fast here — no crossing without a bridge or a swim.",
+    "You accept The Hungry Road II's food — 2,747 kcal on the road, 2 day-parts out. Mei clasps your runner's shoulder. \"That's what the fire network is FOR.\" (Trust +4.)",
+    "Sleeping rough means the cold ground — heal ~16. Cold snap — sleeping exposed will hurt you. Find shelter or build a fire.",
+    "You settle into the cold ground. Sleep takes you.",
+    "The ring light brightens to noon. The followers lean in, filming.",
+    "🤳 It moves.",
+    "You catch fragments by the fire — Fatima telling Lucas about Devon. Half of it's true anymore. You're not sure which half.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 95,
+   "vid": "devon_okafor",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -31,
+   "beat": [
+    "📖 The Codex turns a page on its own. Ivy Wang is dead. You didn't ask. It knew.",
+    "🕯️ Ivy is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "IVY — GONE. 3 open questions closed unanswered.",
+    "🕯️ Ivy Wang is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Devon blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Ivy Wang, 95 days. The mantle passes to Devon Okafor.",
+    "🪞 You wake up somebody else. Devon Okafor, 29 — a programmer. His hands know different work now: Evidence Board."
+   ]
+  },
+  {
+   "day": 96,
+   "vid": "visjoin_95",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Aki checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Aki returns with 10L, but the cistern only holds 1L more.",
+    "🌿 Ellis checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Ellis pries 1 stone loose from the creek bed. The building pile grows. (78 stone now.)",
+    "🍲 Aisha cooked for the haven — meals stretched. Aisha worked the smoke racks too — 1 batch preserved (~3200 kcal, keeps a couple of weeks).",
+    "🚶 Owen is back — found Devon.",
+    "🥣 Sam of Thornfield walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 102,
+   "vid": "wanjiru_kamau",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Aki — 🎣 Fish. (a natural — good pick) They'll report back by next part.",
+    "📋 Ellis — 🎣 Fish. (a natural — good pick) They'll report back by next part.",
+    "📋 Rafael — 🍲 Cook. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Aki worked the creek — 6 fish, +1400 kcal to the pantry.",
+    "🎣 Ellis worked the creek — 3 fish, +539 kcal to the pantry.",
+    "◈ THE SYSTEM has been watching Ellis — 3 days worked on the land. It offers Game Sense. Earned, not given. (game_sense: villager System grant)",
+    "🍲 Rafael cooked for the haven — meals stretched. Rafael worked the smoke racks too — 1 batch preserved (~1000 kcal, keeps for weeks)."
+   ]
+  },
+  {
+   "day": 103,
+   "vid": "visjoin_102",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Ellis worked the creek — 4 fish, +1120 kcal to the pantry.",
+    "🎣 Rafael worked the creek — 3 fish, +490 kcal to the pantry.",
+    "🍲 Aisha cooked for the haven — meals stretched. Aisha worked the smoke racks too — 3 batches preserved (~2000 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Aisha telling Ellis about you. Someone's added a flourish that wasn't there this morning.",
+    "👥 Out here, of all places — Rafael and Ellis run into each other. They stop and talk a while.",
+    "Peter waits two days at your fire, getting thinner. Nobody answers. They walk back to Stonebridge with nothing. They'll remember the silence.",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 103,
+   "vid": "vasyl_shevchenko",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Ellis worked the creek — 4 fish, +1120 kcal to the pantry.",
+    "🎣 Rafael worked the creek — 3 fish, +490 kcal to the pantry.",
+    "🍲 Aisha cooked for the haven — meals stretched. Aisha worked the smoke racks too — 3 batches preserved (~2000 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Aisha telling Ellis about you. Someone's added a flourish that wasn't there this morning.",
+    "👥 Out here, of all places — Rafael and Ellis run into each other. They stop and talk a while.",
+    "Peter waits two days at your fire, getting thinner. Nobody answers. They walk back to Stonebridge with nothing. They'll remember the silence.",
+    "A curious wanderer grins wide. Haven grows by one.",
+    "👋 The village didn't wait for you — a curious wanderer was taken in around the fire. Another pair of hands."
+   ]
+  },
+  {
+   "day": 111,
+   "vid": "app_mgpsphc4701",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -23,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 950 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 950 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Aki Tanaka is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Aki's gone.\" Ellis looks at you for a long moment. \"You're not Aki.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Aisha blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Aki Tanaka, 111 days. The mantle passes to Aisha Haddad.",
+    "🪞 You wake up somebody else. Aisha Haddad, 29 — a nurse. Her hands know different work now: Eagle Eye, Steady Hands."
+   ]
+  },
+  {
+   "day": 111,
+   "vid": "visjoin_93",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -19,
+   "beat": [
+    "📖 The Codex turns a page on its own. Aisha Haddad is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Aisha is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Aisha Haddad is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Ellis blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Aisha Haddad, 111 days. The mantle passes to Ellis Weber.",
+    "🪞 You wake up somebody else. Ellis Weber, 52 — a Fisherman. Their hands know different work now: Swimmer, Game Sense."
+   ]
+  },
+  {
+   "day": 118,
+   "vid": "visjoin_117",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "💧 Rafael returns with 13L, but the cistern only holds 10L more.",
+    "🌿 Wanjiru checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+    "🪨 Wanjiru pries 1 stone loose from the creek bed. The building pile grows. (87 stone now.)",
+    "🍲 Owen cooked for the haven — meals stretched. The racks are already full (9,782 kcal kept — more than the haven can eat before it turns), so Owen left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+    "Sanne shakes their head, admiring. \"Did you hear what Owen did?\" You hadn't. Now you have.",
+    "🧳 Word from Thornfield: Wren is dead, and Ben and Aisha both claim the fire. Thornfield is choosing — or fighting.",
+    "🥣 Yuki of The Red Table walks into your firelight alone, thinner than you remember. \"Our jars are empty,\" they say. No preamble. \"I'm asking for food.\"",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 121,
+   "vid": "owen_smith",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -33,
+   "beat": [
+    "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 713 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 713 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 713 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Ellis Weber is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Owen blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Ellis Weber, 121 days. The mantle passes to Owen Smith.",
+    "🪞 You wake up somebody else. Owen Smith, 33 — a hunting guide. His hands know different work now: Game Sense, Patient Aim."
+   ]
+  },
+  {
+   "day": 125,
+   "vid": "visjoin_124",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Wanjiru worked the creek — 4 fish, +720 kcal to the pantry.",
+    "🎣 Sanne worked the creek — 2 fish, +210 kcal to the pantry.",
+    "◈ THE SYSTEM has been watching Sanne — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+    "🎣 Vasyl worked the creek — 3 fish, +350 kcal to the pantry.",
+    "🪤 Wanjiru is back. \"Snares were empty. They'll keep.\"",
+    "🚶 Vasyl is back — found Wanjiru.",
+    "🧳 Word from The Hungry Road: Zoe was killed — Lena did it, they say. (The truth: dead is dead; the killing part is gossip.)",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 132,
+   "vid": "visjoin_131",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Kira — 🎣 Fish. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Sanne worked the creek — 3 fish, +450 kcal to the pantry.",
+    "🎣 Vasyl worked the creek — 2 fish, +350 kcal to the pantry.",
+    "🎣 Kira worked the creek — 4 fish, +700 kcal to the pantry.",
+    "🚶 Sanne is back — found Vasyl.",
+    "🪤 Vasyl is back. \"Snares were empty. They'll keep.\"",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 138,
+   "vid": "visjoin_102",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -26,
+   "beat": [
+    "The Hungry Road II watches to see if Haven holds without its dead — and presses the tribute down to 500 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "OWEN — GONE. 1 open question closed unanswered.",
+    "🕯️ Owen Smith is dead — starvation. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Owen's gone.\" Vasyl looks at you for a long moment. \"You're not Owen.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Sanne blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Owen Smith, 138 days. The mantle passes to Sanne Larsen.",
+    "🪞 You wake up somebody else. Sanne Larsen, 43 — a Beekeeper. Their hands know different work now: Soft Step, Animal Ken."
+   ]
+  },
+  {
+   "day": 140,
+   "vid": "visjoin_117",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -13,
+   "beat": [
+    "📖 The Codex turns a page on its own. Sanne Larsen is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Sanne is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Sanne Larsen is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Kira blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Sanne Larsen, 140 days. The mantle passes to Kira Diallo.",
+    "🪞 You wake up somebody else. Kira Diallo, 64 — a Pharmacist. Their hands know different work now: Herbal Remedy."
+   ]
+  }
+ ]
+}

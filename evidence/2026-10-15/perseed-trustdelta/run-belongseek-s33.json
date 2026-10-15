@@ -1,0 +1,296 @@
+{
+ "seed": 33,
+ "policyId": "belongseek",
+ "days": 43,
+ "dailyCalls": 42,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 1,
+ "deaths": {
+  "villager:sickness": 3,
+  "villager:a wound that wouldn't close": 1,
+  "villager:contest": 1,
+  "villager:starvation": 1
+ },
+ "trust": {
+  "nTicks": 718,
+  "coverage": 0.3162,
+  "posSum": 577,
+  "negSum": -242,
+  "zeroN": 138,
+  "bySource": {
+   "talk": {
+    "n": 209,
+    "pos": 169,
+    "neg": -2
+   },
+   "other": {
+    "n": 491,
+    "pos": 408,
+    "neg": -240
+   },
+   "ripple": {
+    "n": 18,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "observe:order": {
+   "n": 204,
+   "pos": 159,
+   "neg": -2
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 27,
+   "pos": 0,
+   "neg": -54
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 266,
+   "pos": 233,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 56,
+   "pos": 54,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 23,
+   "pos": 23,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 7,
+   "pos": 7,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 6,
+   "pos": 9,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 18,
+   "pos": 33,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:eval@<eval>": {
+   "n": 4,
+   "pos": 4,
+   "neg": -4
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 5,
+   "pos": 10,
+   "neg": 0
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 7,
+   "pos": 17,
+   "neg": -97
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 56,
+   "pos": 0,
+   "neg": -35
+  },
+  "ripple:order": {
+   "n": 18,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcTakeAction@<eval>": {
+   "n": 8,
+   "pos": 7,
+   "neg": 0
+  },
+  "fn:tickNeeds@<eval>": {
+   "n": 5,
+   "pos": 0,
+   "neg": -10
+  },
+  "observe:loot_corpse": {
+   "n": 4,
+   "pos": 0,
+   "neg": -40
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 2,
+   "pos": 20,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 16,
+   "vid": "gen_jm9wtz6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -48,
+   "beat": [
+    "It barely had to move to track you. MOVE and the beam has to chase — stand still and it parks the full beam on you.",
+    "📖 The Codex turns a page on its own. Jenny Gross is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Jenny Gross is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Esteban blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Jenny Gross, 16 days. The mantle passes to Esteban Bruno.",
+    "🪞 You wake up somebody else. Esteban Bruno, 68 — a Wild food forager. Their hands know different work now: Green Thumb, Literally, Scrounger."
+   ]
+  },
+  {
+   "day": 16,
+   "vid": "gen_dyl4dau",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -11,
+   "beat": [
+    "The chorus lands as ONE sound — then every throat goes slack. (chorus ×3)",
+    "📖 The Codex turns a page on its own. Esteban Bruno is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Esteban Bruno is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Pallavi blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Esteban Bruno, 16 days. The mantle passes to Pallavi Surve.",
+    "🪞 You wake up somebody else. Pallavi Surve, 61 — a Fisherman. Her hands know different work now: Swimmer, Game Sense."
+   ]
+  },
+  {
+   "day": 38,
+   "vid": "greta_hansen",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "While you were gone — one thing you missed:",
+    "⚔️ David stood down the Hushpuppy and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere.",
+    "You walk back into Haven. 17 Codex entries. The village is glad to see you.",
+    "📋 Greta — 🎣 Fish. (a natural — good pick) Greta nods eagerly. They'll report back by next part.",
+    "📋 Catalina — 🎣 Fish. (a natural — good pick) Catalina nods eagerly. They'll report back by next part.",
+    "📋 Irving — 🎣 Fish. Irving nods eagerly. They'll report back by next part."
+   ]
+  },
+  {
+   "day": 39,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "Something moves out there — Hushpuppy.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "The Hushpuppy stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there.",
+    "You walk back into Haven. 17 Codex entries. The village is glad to see you.",
+    "📋 Catalina — 🎣 Fish. (a natural — good pick) Catalina nods eagerly. They'll report back by next part.",
+    "📋 Nikolai — 🎣 Fish. They'll report back by next part.",
+    "📋 Tariq — 🎣 Fish. They'll report back by next part."
+   ]
+  },
+  {
+   "day": 39,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "The Hushpuppy stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there.",
+    "You walk back into Haven. 17 Codex entries. The village is glad to see you.",
+    "📋 Catalina — 🎣 Fish. (a natural — good pick) Catalina nods eagerly. They'll report back by next part.",
+    "📋 Nikolai — 🎣 Fish. They'll report back by next part.",
+    "📋 Tariq — 🎣 Fish. They'll report back by next part.",
+    "Recipe: Fire-hardened spear (Level 1). You have seen a fire-hardened spear. The tip is black, polished, hard.",
+    "Taken: Fire-hardened spear x1, Rain Shell x1, Wool socks x1, Bandana x1, Binoculars x1.",
+    "The body is stripped. What's left isn't worth taking."
+   ]
+  },
+  {
+   "day": 39,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "observe:loot_corpse",
+   "applied": -10,
+   "beat": [
+    "📋 Nikolai — 🎣 Fish. They'll report back by next part.",
+    "📋 Tariq — 🎣 Fish. They'll report back by next part.",
+    "Recipe: Fire-hardened spear (Level 1). You have seen a fire-hardened spear. The tip is black, polished, hard.",
+    "Taken: Fire-hardened spear x1, Rain Shell x1, Wool socks x1, Bandana x1, Binoculars x1.",
+    "The body is stripped. What's left isn't worth taking.",
+    "Taken: Machete x1, Work Gloves x1, Multitool x1.",
+    "The body is stripped. What's left isn't worth taking.",
+    "You will dream about this. You already know."
+   ]
+  },
+  {
+   "day": 41,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -38,
+   "beat": [
+    "🕯️ Pallavi is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "With Haven grieving, Stonebridge installs their own speaker at the table. Tribute rises to 7,500 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+    "PALLAVI — GONE. 2 open questions closed unanswered.",
+    "🕯️ Pallavi Surve is dead — contest. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Catalina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Pallavi Surve, 41 days. The mantle passes to Catalina Reyes.",
+    "🪞 You wake up somebody else. Catalina Reyes, 38 — a fishing guide. Her hands know different work now: Game Sense, Patient Aim."
+   ]
+  },
+  {
+   "day": 41,
+   "vid": "ivy_wang",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "🎣 Nikolai worked the creek — 2 fish, +245 kcal to the pantry.",
+    "🎣 Tariq worked the creek — 1 fish, +140 kcal to the pantry.",
+    "🎣 David worked the creek — 3 fish, +378 kcal to the pantry.",
+    "◈ SYSTEM: \"One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast.\"",
+    "Three weeks of knowing Stonebridge — and now it's real. Haven is regional.",
+    "◈ SYSTEM: \"Oh! The chat is doing the thing again — they're RANKING fires. Yours is... climbing. They keep asking which fire climbs FIRST. No pressure. (SO much pressure.)\"",
+    "The village debates a lean nurse. The room is cold — David, Nikolai, Tariq against. \"More mouths, same fire.\" (0% for.)"
+   ]
+  },
+  {
+   "day": 42,
+   "vid": "app_mgpsphuz366",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🎣 Ivy worked the creek — 1 fish, +126 kcal to the pantry.",
+    "Ivy is tending the fire, coaxing it steady.",
+    "📯 Stonebridge calls on the obligation: Counsel. \"Stonebridge wants Haven's read on the season.\" Honor it, or refuse — both are remembered.",
+    "🧳 Word of Haven’s the televised games, new bindings, trade is doing work out there — Word comes late, through traders: Stonebridge and The Hungry Road II have bound together — Stonebridge primary. Other fires are climbing, too.",
+    "📓 Codex: Stonebridge and The Hungry Road II bound; Stonebridge primary.",
+    "The village debates Aki Tanaka. Warm, mostly. \"One more pair of hands.\" (64% for.)",
+    "📨 The village didn't wait for you. Aki Tanaka was vouched for around the fire — they're walking.",
+    "Accepted. Aki Tanaka is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  }
+ ]
+}

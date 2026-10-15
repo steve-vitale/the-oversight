@@ -1,0 +1,458 @@
+{
+ "seed": 33,
+ "policyId": "competent",
+ "days": 182,
+ "dailyCalls": 180,
+ "won": false,
+ "rank": "village",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 3,
+ "deaths": {
+  "monster:villager combat": 1,
+  "villager:combat": 1,
+  "monster:combat": 3
+ },
+ "trust": {
+  "nTicks": 2136,
+  "coverage": 0.3146,
+  "posSum": 1232,
+  "negSum": -339,
+  "zeroN": 972,
+  "bySource": {
+   "talk": {
+    "n": 662,
+    "pos": 301,
+    "neg": -2
+   },
+   "other": {
+    "n": 1464,
+    "pos": 931,
+    "neg": -337
+   },
+   "ripple": {
+    "n": 10,
+    "pos": 0,
+    "neg": 0
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "observe:order": {
+   "n": 655,
+   "pos": 287,
+   "neg": -2
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 27,
+   "pos": 0,
+   "neg": -54
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 848,
+   "pos": 393,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 102,
+   "pos": 84,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 85,
+   "pos": 66,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 24,
+   "pos": 17,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 76,
+   "pos": 51,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 164,
+   "pos": 150,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:eval@<eval>": {
+   "n": 4,
+   "pos": 4,
+   "neg": -4
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 6,
+   "pos": 4,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 7,
+   "pos": 14,
+   "neg": 0
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 22,
+   "pos": 55,
+   "neg": -195
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 24,
+   "pos": 0,
+   "neg": -35
+  },
+  "ripple:order": {
+   "n": 10,
+   "pos": 0,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:villageAutoRecruit@<eval>": {
+   "n": 49,
+   "pos": 0,
+   "neg": -49
+  },
+  "fn:arrivalTick@<eval>": {
+   "n": 3,
+   "pos": 30,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:fieldFight@<eval>": {
+   "n": 1,
+   "pos": 1,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:noteSharedFight@<eval>": {
+   "n": 2,
+   "pos": 2,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 20,
+   "pos": 14,
+   "neg": 0
+  },
+  "fn:visitorInteract@<eval>": {
+   "n": 6,
+   "pos": 60,
+   "neg": 0
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 16,
+   "vid": "gen_jm9wtz6",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -48,
+   "beat": [
+    "It barely had to move to track you. MOVE and the beam has to chase — stand still and it parks the full beam on you.",
+    "📖 The Codex turns a page on its own. Jenny Gross is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Jenny Gross is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Esteban blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Jenny Gross, 16 days. The mantle passes to Esteban Bruno.",
+    "🪞 You wake up somebody else. Esteban Bruno, 68 — a Wild food forager. Their hands know different work now: Green Thumb, Literally, Scrounger."
+   ]
+  },
+  {
+   "day": 16,
+   "vid": "gen_dyl4dau",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -11,
+   "beat": [
+    "The chorus lands as ONE sound — then every throat goes slack. (chorus ×3)",
+    "📖 The Codex turns a page on its own. Esteban Bruno is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Esteban Bruno is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Pallavi blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Esteban Bruno, 16 days. The mantle passes to Pallavi Surve.",
+    "🪞 You wake up somebody else. Pallavi Surve, 61 — a Fisherman. Her hands know different work now: Swimmer, Game Sense."
+   ]
+  },
+  {
+   "day": 42,
+   "vid": "ivy_wang",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Catalina — 🎣 Fish. (a natural — good pick) Catalina nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🍽️ Greta checks the pantry before heading out — ~8 days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the fish nets instead of turning to other work.",
+    "🎣 Greta worked the creek — 3 fish, +840 kcal to the pantry.",
+    "🍽️ Catalina checks the pantry before heading out — ~8 days of fresh on hand, but someone has gone hungry three days running. The hungry eat first: keeps working the fish nets instead of turning to other work.",
+    "🎣 Catalina worked the creek — 3 fish, +840 kcal to the pantry.",
+    "🧳 Word from Stonebridge: Amara is dead, and Nora and Hank both claim the fire. Stonebridge is choosing — or fighting.",
+    "The village debates Aki Tanaka. The room is cold — David, Nina, Greta against. \"More mouths, same fire.\" (12% for.)"
+   ]
+  },
+  {
+   "day": 45,
+   "vid": "app_mgpsphdr422",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Catalina checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Catalina returns with 13L, but the cistern only holds 3L more.",
+    "You catch fragments by the fire — Nina telling Tariq about you. The retelling is already better than the event.",
+    "Deshawn waits two days at your fire, getting thinner. Nobody answers. They walk back to Thornfield with nothing. They'll remember the silence.",
+    "📨 Word came: Ursula Weber wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge.",
+    "The village debates Ursula Weber. Split room. Some for, some against. It's your call. (49% for.)",
+    "📨 The village didn't wait for you. Ursula Weber was vouched for around the fire — they're walking.",
+    "Accepted. Ursula Weber is walking. They'll reach Haven in a few days — membership starts when they arrive, but the village already counts them."
+   ]
+  },
+  {
+   "day": 49,
+   "vid": "ursula_weber",
+   "source": "other",
+   "detail": "fn:arrivalTick@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Greta checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Greta hauls back 7 wood. The pile grows. (55 logs now.)",
+    "🌿 Catalina checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Catalina returns with 13L, but the cistern only holds 3L more.",
+    "🍲 David cooked for the haven — meals stretched. David worked the smoke racks too — 1 batch preserved (~160 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Catalina telling Aisha about Tariq. It's picking up decorations as it travels.",
+    "🧭 Catalina is back from the south. \"It's... different out there. I'll tell you about it.\" (Ask them what they saw.)",
+    "🌙 You weren't at the treeline. Tariq of The Bloodied didn't wait — they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time."
+   ]
+  },
+  {
+   "day": 90,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "You settle into the hall floor. Sleep takes you.",
+    "David left 1 branch by the stash. No announcement. That's how it works here.",
+    "🌿 Catalina checks the pantry before heading out — the shelves are full, ~56 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Catalina hauls back 7 wood. The pile grows. (92 logs now.)",
+    "🍲 David cooked for the haven — meals stretched. David worked the smoke racks too — 2 batches preserved (~3200 kcal, keeps a couple of weeks).",
+    "🍲 David is eating by the fire — not talking, just eating.",
+    "Spasms run through you like a struck wire. (-2 HP)",
+    "The spasms lock everything shut at once — jaw, throat, back. The body starves behind a clenched jaw, breath coming in thinner and thinner. It never opens again. (lockjaw — without real treatment, it kills)"
+   ]
+  },
+  {
+   "day": 90,
+   "vid": "catalina_reyes",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -56,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "PALLAVI — GONE. 2 open questions closed unanswered.",
+    "🕯️ Pallavi Surve is dead — lockjaw. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Pallavi's gone.\" David looks at you for a long moment. \"You're not Pallavi.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Catalina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Pallavi Surve, 90 days. The mantle passes to Catalina Reyes.",
+    "🪞 You wake up somebody else. Catalina Reyes, 38 — a fishing guide. Her hands know different work now: Game Sense, Patient Aim."
+   ]
+  },
+  {
+   "day": 91,
+   "vid": "visjoin_90",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 David — 🍲 Cook. David nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "Nina left 3 wood logs by the stash. No announcement. That's how it works here.",
+    "🌿 Nina checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Nina returns with 14L, but the cistern only holds 0L more.",
+    "🍲 David cooked for the haven — meals stretched. The racks are already full (12,525 kcal kept — more than the haven can eat before it turns), so David left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+    "Nina is tending the fire, coaxing it steady.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 101,
+   "vid": "david_kim",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -28,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "CATALINA — GONE. 2 open questions closed unanswered.",
+    "🕯️ Catalina Reyes is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Catalina's gone.\" Nina looks at you for a long moment. \"You're not Catalina.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. David blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Catalina Reyes, 101 days. The mantle passes to David Kim.",
+    "🪞 You wake up somebody else. David Kim, 38 — a plumber. His hands know different work now: Steady Hands."
+   ]
+  },
+  {
+   "day": 113,
+   "vid": "visjoin_112",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Nina — 🎣 Fish. Nina nods eagerly. They'll report back by next part.",
+    "📋 Tariq — 🍲 Cook. Tariq nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Nina checks the pantry before heading out — the shelves are full, ~70 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Nina hauls back 7 wood. The pile grows. (115 logs now.)",
+    "🍲 Tariq cooked for the haven — meals stretched. Tariq worked the smoke racks too — 1 batch preserved (~3149 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Lucia telling Aisha about herself. The story's getting bigger than what happened.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 120,
+   "vid": "nina_petrova",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -18,
+   "beat": [
+    "📖 The Codex turns a page on its own. David Kim is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ David Kim is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"David's gone.\" Tariq looks at you for a long moment. \"You're not David.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Nina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: David Kim, 120 days. The mantle passes to Nina Petrova.",
+    "🪞 You wake up somebody else. Nina Petrova, 27 — a mechanic. Her hands know different work now: Steady Hands."
+   ]
+  },
+  {
+   "day": 121,
+   "vid": "tariq_mahmood",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -16,
+   "beat": [
+    "📖 The Codex turns a page on its own. Nina Petrova is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Nina Petrova is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Nina's gone.\" Aisha looks at you for a long moment. \"You're not Nina.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Tariq blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Nina Petrova, 121 days. The mantle passes to Tariq Mahmood.",
+    "🪞 You wake up somebody else. Tariq Mahmood, 49 — an electrician. His hands know different work now: Steady Hands."
+   ]
+  },
+  {
+   "day": 130,
+   "vid": "visjoin_129",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "📋 Ivy — 🍲 Cook. Ivy nods eagerly. They'll report back by next part.",
+    "You settle into the hall floor. Sleep takes you.",
+    "🌿 Aisha checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Aisha hauls back 11 wood. The pile grows. (146 logs now.)",
+    "🌿 Ursula checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Ursula returns with 13L of creek water. Risky until the hearth boils it.",
+    "🍲 Ivy cooked for the haven — meals stretched. The racks are already full (8,954 kcal kept — more than the haven can eat before it turns), so Ivy left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 131,
+   "vid": "visjoin_130",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "🪨 Aisha pries 2 stone loose from the creek bed. The building pile grows. (88 stone now.)",
+    "🌿 Ursula checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Ursula hauls back 8 wood. The pile grows. (151 logs now.)",
+    "🍲 Ivy cooked for the haven — meals stretched. Ivy worked the smoke racks too — 1 batch preserved (~698 kcal, keeps a couple of weeks).",
+    "You catch fragments by the fire — Ursula telling Tomás about you. Half of it's true anymore. You're not sure which half.",
+    "Ivy is working the cookpot, tasting, adjusting.",
+    "Nora waits two days at your fire, getting thinner. Nobody answers. They walk back to Stonebridge with nothing. They'll remember the silence.",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  },
+  {
+   "day": 164,
+   "vid": "visjoin_163",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "🌿 Aisha checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Aisha hauls back 8 wood. The pile grows. (250 logs now.)",
+    "🌿 Ursula checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Ursula returns with 16L, but the cistern only holds 0L more.",
+    "🍲 Ivy cooked for the haven — meals stretched. The racks are already full (12,517 kcal kept — more than the haven can eat before it turns), so Ivy left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+    "You catch fragments by the fire — Ursula telling Tomás about you. The details have shifted. Nobody seems to mind.",
+    "You catch fragments by the fire — Aisha telling Tomás about themself. Someone's added a flourish that wasn't there this morning.",
+    "A frightened family cries — relief, mostly. Haven grows by one."
+   ]
+  },
+  {
+   "day": 170,
+   "vid": "app_mgpsphdr422",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 8,
+   "beat": [
+    "Armor absorbs 5.",
+    "Stranger's heavy strike hits you for 13.",
+    "Stranger closes in, patient and unhurried.",
+    "🔆 The stranger raises a beam weapon. The air tastes like copper.",
+    "💀 The beam doesn't care about your armor. It goes through like it isn't there.",
+    "💀 Your rain shell might as well be paper. Whatever they're wearing stops this. Yours doesn't.",
+    "💀 THIS IS NOT A FAIR FIGHT. Run, or find resistant gear.",
+    "🔆 You take 100 beam damage (no resistance) — a beam weapon."
+   ]
+  },
+  {
+   "day": 170,
+   "vid": "app_mgpsphdr422",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -18,
+   "beat": [
+    "📖 The Codex turns a page on its own. Tariq Mahmood is dead. You didn't ask. It knew.",
+    "TARIQ — GONE. 1 open question closed unanswered.",
+    "🕯️ Tariq Mahmood is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Tariq's gone.\" Ivy looks at you for a long moment. \"You're not Tariq.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Aisha blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Tariq Mahmood, 170 days. The mantle passes to Aisha Santos.",
+    "🪞 You wake up somebody else. Aisha Santos, 39 — a nurse. Her hands know different work now: Diplomatic Incident."
+   ]
+  },
+  {
+   "day": 177,
+   "vid": "visjoin_176",
+   "source": "other",
+   "detail": "fn:visitorInteract@<eval>",
+   "applied": 10,
+   "beat": [
+    "Tomás left 1 wood log by the stash. No announcement. That's how it works here.",
+    "🌿 Ursula checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+    "🪵 Ursula hauls back 10 wood. The pile grows. (277 logs now.)",
+    "🌿 Lucia checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+    "💧 Lucia returns with 14L, but the cistern only holds 2L more.",
+    "🪤 Lucia is back. \"Snares were empty. They'll keep.\"",
+    "🌙 You weren't at the treeline. Deshawn of The Red Table didn't wait — they hit the stores and melted back into the dark with 1,000 kcal. The village will talk about this for a long time.",
+    "A curious wanderer grins wide. Haven grows by one."
+   ]
+  }
+ ]
+}

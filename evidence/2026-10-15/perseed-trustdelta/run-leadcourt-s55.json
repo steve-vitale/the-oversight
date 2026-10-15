@@ -1,0 +1,394 @@
+{
+ "seed": 55,
+ "policyId": "leadcourt",
+ "days": 108,
+ "dailyCalls": 115,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 3,
+ "deaths": {
+  "villager:combat": 5,
+  "monster:villager combat": 1,
+  "monster:combat": 3,
+  "villager:monster": 1,
+  "villager:starvation": 1
+ },
+ "trust": {
+  "nTicks": 1853,
+  "coverage": 0.1802,
+  "posSum": 1011,
+  "negSum": -531,
+  "zeroN": 718,
+  "bySource": {
+   "other": {
+    "n": 1519,
+    "pos": 897,
+    "neg": -380
+   },
+   "talk": {
+    "n": 334,
+    "pos": 114,
+    "neg": -151
+   }
+  },
+  "gossipViolations": 0,
+  "instrErrors": 0,
+  "reconMismatched": 0
+ },
+ "byDetail": {
+  "via:bumpTrust+bumpTrust fn:objReturnEffect@<eval>": {
+   "n": 96,
+   "pos": 84,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objAwayStep@<eval>": {
+   "n": 132,
+   "pos": 122,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:npcNodeTravel@<eval>": {
+   "n": 28,
+   "pos": 21,
+   "neg": 0
+  },
+  "observe:order": {
+   "n": 331,
+   "pos": 108,
+   "neg": -151
+  },
+  "via:bumpTrust+bumpTrust fn:leadershipFriction@<eval>": {
+   "n": 53,
+   "pos": 0,
+   "neg": -106
+  },
+  "via:bumpTrust+bumpTrust fn:resolveOneAssignment@<eval>": {
+   "n": 804,
+   "pos": 415,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:objMaybeDepart@<eval>": {
+   "n": 46,
+   "pos": 36,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:expeditionReturn@<eval>": {
+   "n": 8,
+   "pos": 4,
+   "neg": 0
+  },
+  "fn:villagerInitiative@<eval>": {
+   "n": 3,
+   "pos": 6,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:slotMoment@<eval>": {
+   "n": 1,
+   "pos": 3,
+   "neg": 0
+  },
+  "via:bumpTrust+bumpTrust fn:resolveWildMonsterEncounter@<eval>": {
+   "n": 64,
+   "pos": 60,
+   "neg": 0
+  },
+  "fn:playerDeath@<eval>": {
+   "n": 23,
+   "pos": 78,
+   "neg": -189
+  },
+  "via:bumpTrust+bumpTrust fn:objTick@<eval>": {
+   "n": 50,
+   "pos": 35,
+   "neg": 0
+  },
+  "fn:takeFromPantry@<eval>": {
+   "n": 186,
+   "pos": 0,
+   "neg": -70
+  },
+  "fn:convoConflictFallout@<eval>": {
+   "n": 10,
+   "pos": 24,
+   "neg": -14
+  },
+  "via:bumpTrust+bumpTrust fn:incidents@<eval>": {
+   "n": 2,
+   "pos": 1,
+   "neg": 0
+  },
+  "fn:freeloadWarning@<eval>": {
+   "n": 1,
+   "pos": 0,
+   "neg": 0
+  },
+  "fn:eval@<eval>": {
+   "n": 13,
+   "pos": 13,
+   "neg": 0
+  },
+  "observe:fight": {
+   "n": 2,
+   "pos": 1,
+   "neg": -1
+  }
+ },
+ "sayBeats": [
+  {
+   "day": 12,
+   "vid": "elena_petrova",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -16,
+   "beat": [
+    "You camp wild tonight — no pantry meal. Eat from your pack.",
+    "🩹 Salvatore makes rounds — Jesse gets bound up properly. (58 → 73 HP)",
+    "📖 The Codex turns a page on its own. Violet Pang is dead. You didn't ask. It knew.",
+    "🕯️ Violet Pang is dead — dehydration. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Elena blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Violet Pang, 12 days. The mantle passes to Elena Petrova.",
+    "🪞 You wake up somebody else. Elena Petrova, 44 — a Baker. Her hands know different work now: Secret Ingredient, Steady Hands."
+   ]
+  },
+  {
+   "day": 17,
+   "vid": "gen_zh3y1ey",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 8,
+   "beat": [
+    "Armor absorbs 2.",
+    "Wolf's attack hits you for 6.",
+    "📖 Codex: Harass — locks onto one target — moving won't dodge it. You won't forget this.",
+    "You don't stroll through the Hushpuppy.",
+    "💥 wolf's Harass finds you — no dodging it.",
+    "Armor absorbs 2.",
+    "Wolf's Harass hits you for 6.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 17,
+   "vid": "gen_tys3mzi",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -25,
+   "beat": [
+    "Wolf's Harass hits you for 6.",
+    "You go down.",
+    "📖 The Codex turns a page on its own. Elena Petrova is dead. You didn't ask. It knew.",
+    "🕯️ Elena Petrova is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Abraham blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Elena Petrova, 17 days. The mantle passes to Abraham Vásquez.",
+    "🪞 You wake up somebody else. Abraham Vásquez, 46 — a hunting guide. Their hands know different work now: Game Sense, Patient Aim."
+   ]
+  },
+  {
+   "day": 21,
+   "vid": "gen_zh3y1ey",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 8,
+   "beat": [
+    "— MIDDAY — Honest work hours. Heat builds.",
+    "You don't stroll through the Hushpuppy.",
+    "💥 wolf's Harass finds you — no dodging it.",
+    "Wolf's Harass hits you for 10.",
+    "You don't stroll through the Hushpuppy.",
+    "💥 wolf's Harass finds you — no dodging it.",
+    "Wolf's Harass hits you for 6.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 21,
+   "vid": "jesse_cortez",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -34,
+   "beat": [
+    "You go down.",
+    "📖 The Codex turns a page on its own. Abraham Vásquez is dead. You didn't ask. It knew.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Abraham Vásquez is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "The Codex doesn't pause for grief. Jesse blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Abraham Vásquez, 21 days. The mantle passes to Jesse Cortez.",
+    "🪞 You wake up somebody else. Jesse Cortez, 40 — a line cook. His hands know different work now: Preservation Instinct."
+   ]
+  },
+  {
+   "day": 34,
+   "vid": "jesse_cortez",
+   "source": "other",
+   "detail": "fn:convoConflictFallout@<eval>",
+   "applied": 8,
+   "beat": [
+    "You walk back into Haven. 18 Codex entries. The village is glad to see you.",
+    "📋 Dieter — 🌱 Garden. They'll report back by next part.",
+    "📋 Fernando — 🎣 Fish. Fernando nods eagerly. They'll report back by next part.",
+    "📋 Salvatore — 🎣 Fish. Salvatore nods eagerly. They'll report back by next part.",
+    "📋 Leo — 🎣 Fish. Leo nods eagerly. They'll report back by next part.",
+    "📋 Caleb — 🍲 Cook. They'll report back by next part.",
+    "Dieter folds their arms. \"Sure. Your call. For now.\"",
+    "Dieter steps closer. \"We need to talk. About who's actually running things here.\""
+   ]
+  },
+  {
+   "day": 45,
+   "vid": "jesse_cortez",
+   "source": "other",
+   "detail": "fn:convoConflictFallout@<eval>",
+   "applied": 8,
+   "beat": [
+    "Travel 2 tiles to grove.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 2 tiles to trail edge.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "You walk the old paths to the fire. Nobody meets your eyes. The pantry is closed to you — exile means exile. What you carry is still yours to give, if you want to start earning your way back.",
+    "📋 Dieter — 🎣 Fish. Dieter nods eagerly. They'll report back by next part.",
+    "📋 Caleb — 🍲 Cook. Caleb nods eagerly. They'll report back by next part."
+   ]
+  },
+  {
+   "day": 62,
+   "vid": "jesse_cortez",
+   "source": "other",
+   "detail": "fn:convoConflictFallout@<eval>",
+   "applied": 8,
+   "beat": [
+    "Travel 2 tiles to trail edge.",
+    "This patch is worked out — step to another green patch and forage again.",
+    "Travel 1 tile to Haven.",
+    "You walk the old paths to the fire. Nobody meets your eyes. The pantry is closed to you — exile means exile. What you carry is still yours to give, if you want to start earning your way back.",
+    "💡 COUNTER LEARNED — Big-Bane: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)",
+    "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.",
+    "📋 Dieter — 🎣 Fish. Dieter nods eagerly. They'll report back by next part.",
+    "📋 Caleb — 🍲 Cook. Caleb nods eagerly. They'll report back by next part."
+   ]
+  },
+  {
+   "day": 69,
+   "vid": "gen_zh3y1ey",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your WAIT, they HATE your DODGE (move). (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your WAIT. (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "💥 Deliberation!",
+    "Armor absorbs 18.",
+    "Focus group's Deliberation hits you for 14.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 69,
+   "vid": "leo_martin",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": 10,
+   "beat": [
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your WAIT, they HATE your DODGE (move). (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "An eye-head's lens fixes on your STRIKE. Marked — (marked actions get rated harder.)",
+    "📊 THE MURMUR DELIBERATES — you can HEAR it: they LOVE your STRIKE, they HATE your WAIT. (Loved: the System buffs it — but the mouths ANSWER it. Hated: safe, but suppressed.)",
+    "💥 Deliberation!",
+    "Armor absorbs 18.",
+    "Focus group's Deliberation hits you for 14.",
+    "You go down."
+   ]
+  },
+  {
+   "day": 69,
+   "vid": "gen_zh3y1ey",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -42,
+   "beat": [
+    "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 3,000 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "🕯️ Jesse Cortez is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Jesse's gone.\" Leo looks at you for a long moment. \"You're not Jesse.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Salvatore blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Jesse Cortez, 69 days. The mantle passes to Salvatore Boyd.",
+    "🪞 You wake up somebody else. Salvatore Boyd, 34 — a Veterinarian. Their hands know different work now: Field Dressing, Field Medicine."
+   ]
+  },
+  {
+   "day": 82,
+   "vid": "leo_martin",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -25,
+   "beat": [
+    "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+    "SALVATORE — GONE. 1 open question closed unanswered.",
+    "🕯️ Salvatore Boyd is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Salvatore's gone.\" Dieter looks at you for a long moment. \"You're not Salvatore.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Leo blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Salvatore Boyd, 82 days. The mantle passes to Leo Martin.",
+    "🪞 You wake up somebody else. Leo Martin, 16 — a trail crew lead. His hands know different work now: Patient Aim."
+   ]
+  },
+  {
+   "day": 85,
+   "vid": "gen_tvvff5f",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -12,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Leo is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Leo Martin is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Leo's gone.\" Caleb looks at you for a long moment. \"You're not Leo.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Dieter blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Leo Martin, 85 days. The mantle passes to Dieter Esposito.",
+    "🪞 You wake up somebody else. Dieter Esposito, 55 — a roofer. Their hands know different work now: Soft Step, Scar Tissue."
+   ]
+  },
+  {
+   "day": 85,
+   "vid": "gen_0awhdfs",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -15,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Dieter is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Dieter Esposito is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Dieter's gone.\" Vasyl looks at you for a long moment. \"You're not Dieter.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Caleb blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Dieter Esposito, 85 days. The mantle passes to Caleb Kennedy.",
+    "🪞 You wake up somebody else. Caleb Kennedy, 30 — a musician. Their hands know different work now: Diplomatic Incident."
+   ]
+  },
+  {
+   "day": 92,
+   "vid": "vasyl_shevchenko",
+   "source": "other",
+   "detail": "fn:playerDeath@<eval>",
+   "applied": -20,
+   "beat": [
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Caleb is dead — and the dead hold no treaties. Every link Haven has shakes.",
+    "🕯️ Caleb Kennedy is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+    "\"Caleb's gone.\" Lena looks at you for a long moment. \"You're not Caleb.\" No heat in it. Just fact. You'll have to earn this face.",
+    "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Caleb Kennedy, 92 days. The mantle passes to Vasyl Shevchenko.",
+    "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Adrenaline Control, Cornered Rat."
+   ]
+  }
+ ]
+}
