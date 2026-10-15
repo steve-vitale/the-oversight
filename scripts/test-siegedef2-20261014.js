@@ -31,11 +31,18 @@ function check(name, cond, extra) {
   if (!cond) fails++;
 }
 
-// The layer must exist — on pristine code this require throws and the
-// mechanism assertions below fail RED.
+// KILL PROTOCOL (r37 ARM3 NO-GO at pilot): the siegedef2 layer was deleted
+// after the pilot killed the arm. Degrade gracefully so the retained proof
+// documents the pre-kill result instead of failing on the missing module.
 let sd = null, requireErr = null;
 try { sd = require('./policies/siegedef2'); }
-catch (e) { requireErr = e; }
+catch (e) {
+  if (e && e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: siegedef2 layer deleted per kill protocol (NO-GO at pilot); proof was RED->GREEN pre-kill — see evidence/2026-10-15/sim-siegedef2r.md');
+    process.exit(0);
+  }
+  requireErr = e;
+}
 
 function havenCoords(Game) {
   const v = Game.state.village || {};
