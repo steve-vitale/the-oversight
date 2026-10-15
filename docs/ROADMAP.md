@@ -359,6 +359,16 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   those cases; broad negative result stays. Settle whole-village coverage
   next. See `evidence/2026-10-15/feast-outcome-audit.md`.
   See `evidence/2026-10-15/feast-host-audit.md` and the prior intake audit.
+- **Whole-village diagnostic:** 16 seeds x four policies now retain actual
+  end-of-day rosters and per-eater source receipts. All 64 standard rows and
+  final state hashes match the prior balanced baseline. Of 7,311 closed days,
+  6,518 have stable known multi-person rosters: 27 receive some nourishment
+  from one harvester across every resident, zero reach even 300 kcal each.
+  No harvester reaches seven days at the tested meal/diet references. These
+  mixed policies are not a dedicated village-feeding strategy; no Garden
+  gate or threshold changed. Next: targeted public harvest/donation/gift
+  play, exact need denominators and runtime membership/day settlement.
+  See `evidence/2026-10-15/garden-coverage-audit.md`.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

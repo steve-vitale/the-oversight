@@ -1,0 +1,176 @@
+{
+  "runtimeCommit": "f8e633c5ad35b7b31d8ea10dce05beca44fefb67",
+  "sourceHead": "7ec556a7c0468e7f41910683f05584dbbc676891",
+  "nodeVersion": "v24.13.0",
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "days": 150,
+  "sourcesStable": true,
+  "historicalRowsAndHashes": 64,
+  "neutralityPairs": 4,
+  "allNeutral": true,
+  "focusedAssertions": 17,
+  "quickPassed": 155,
+  "fullPassed": 927,
+  "policiesDiagnosis": [
+    {
+      "policy": "capable",
+      "routes": {
+        "pantry": {
+          "kcal": 2602184,
+          "nourishment": 2360791.6523378813
+        },
+        "personal-work": {
+          "kcal": 21144741.283621844,
+          "nourishment": 21144741.283621844
+        },
+        "ration": {
+          "kcal": 442651.9743801395,
+          "nourishment": 442651.9743801395
+        },
+        "pack": {
+          "kcal": 1085561,
+          "nourishment": 962250
+        },
+        "feast": {
+          "kcal": 289767.98333333374,
+          "nourishment": 242582.21507936504
+        }
+      },
+      "personalWorkNourishmentFraction": 0.8406443321764892,
+      "gardenerPeople": 7
+    },
+    {
+      "policy": "maker",
+      "routes": {
+        "pantry": {
+          "kcal": 3155665,
+          "nourishment": 2875944.5236398205
+        },
+        "personal-work": {
+          "kcal": 27541645.093180362,
+          "nourishment": 27541645.093180362
+        },
+        "pack": {
+          "kcal": 1147092,
+          "nourishment": 1081853
+        },
+        "ration": {
+          "kcal": 394161.92147345026,
+          "nourishment": 394161.92147345026
+        },
+        "feast": {
+          "kcal": 488302.84285714425,
+          "nourishment": 421479.5378427141
+        }
+      },
+      "personalWorkNourishmentFraction": 0.852284494395575,
+      "gardenerPeople": 13
+    },
+    {
+      "policy": "merchant",
+      "routes": {
+        "pantry": {
+          "kcal": 3302432,
+          "nourishment": 3006385.232183719
+        },
+        "personal-work": {
+          "kcal": 28067712.311720308,
+          "nourishment": 28067712.311720308
+        },
+        "ration": {
+          "kcal": 444348.5435469419,
+          "nourishment": 444348.5435469419
+        },
+        "pack": {
+          "kcal": 1115664,
+          "nourishment": 1040408
+        },
+        "feast": {
+          "kcal": 451713.18730158696,
+          "nourishment": 382800.17777777725
+        }
+      },
+      "personalWorkNourishmentFraction": 0.8520431938764811,
+      "gardenerPeople": 11
+    },
+    {
+      "policy": "caregiver",
+      "routes": {
+        "pantry": {
+          "kcal": 3085892,
+          "nourishment": 2877852.6122946846
+        },
+        "personal-work": {
+          "kcal": 27861893.402997043,
+          "nourishment": 27861893.402997043
+        },
+        "ration": {
+          "kcal": 467895.1589643753,
+          "nourishment": 467895.1589643753
+        },
+        "pack": {
+          "kcal": 969105,
+          "nourishment": 911037
+        },
+        "feast": {
+          "kcal": 453591.34761904646,
+          "nourishment": 390844.73849206325
+        }
+      },
+      "personalWorkNourishmentFraction": 0.8570379047940866,
+      "gardenerPeople": 15
+    }
+  ],
+  "limits": [
+    "16 seeds per mixed policy; no dedicated village-feeding strategy.",
+    "Point roster snapshots can miss a resident who joins and leaves between snapshots.",
+    "Nominal kcalPerDay is a reference, not the exact player activity or adjusted NPC food requirement.",
+    "Raw per-day snapshots are retained; changed rosters and lone survivors are excluded from the stable-roster sensitivity counts.",
+    "No gameplay or ascension changes; no natural Garden completion claimed."
+  ],
+  "sourceHeadKind": "checkout-base",
+  "proofRuntimeSourcesEqualPanel": true,
+  "proofScriptDigest": "60bc92a386daf6f997f0164767871ea5793146e6235d85f34e94a0d756555e87",
+  "cases": 64,
+  "closedDays": 7311,
+  "stableKnownMultiPersonDays": 6518,
+  "rosterChangedDays": 759,
+  "stableLoneDays": 34,
+  "quickSeconds": 38,
+  "fullSeconds": 173,
+  "artifactHashTextFormat": "LF as committed; gzip hashes cover exact compressed bytes",
+  "artifactHashes": {
+    "garden-coverage-16.json.gz": "4a9bf1683b64794eebfca6ede8a083f0a581b3335023ee9bac653417980aca52",
+    "garden-coverage-audit.md": "04beb6a6e8cca11819706917b0ecafc77822a2ba4f96cf9e77a3f0c605c8cb36",
+    "garden-coverage-full.txt": "07328de1947a836fce15a6747eea3130c38c645787e98c0d6740a82d2ce709ea",
+    "garden-coverage-neutrality.cjs": "60bc92a386daf6f997f0164767871ea5793146e6235d85f34e94a0d756555e87",
+    "garden-coverage-neutrality.json.gz": "4346cc3577b090f27ec23e9fdce3dd4bad2a38a7cf617011dfa98dba318a5e19",
+    "garden-coverage-observer-source.json.gz": "5d98392e6ab83d81ca5f67deb18a1d0d0032285252e0ffd25b9674ffab17d045",
+    "garden-coverage-quick.txt": "5d49551a9be24e90bd2c4547f00199ae38c40fdb6f2f73477584a1b645d13493",
+    "garden-coverage-report.json": "5b1f1adb98e64884f151d5d8ebc6fb90da5b8565b1ea07c0679c53f8b29303a5",
+    "garden-coverage-report.md": "7a0d96e78480db6a0e2f6330fc86bcee75ecdee218d6378d3a2de6ed463e21e8"
+  }
+}

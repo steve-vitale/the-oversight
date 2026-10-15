@@ -58,7 +58,14 @@ Job -> track -> **class** -> **god** -> Table.
    four lost-win traces reproduce all matrix rows/hashes with eight neutral
    observer pairs. First gains are positive, later food actions and succession
    diverge; no immediate serving, price or armed-buff defect in those cases.
-   Whole-village daily coverage and the seven-day deed remain next. See
+   Whole-village day snapshots are now measured: 64 unchanged campaigns,
+   7,311 closed days, 6,518 stable known multi-person days. Only 27 have any
+   one harvester nourishing everyone; none reach 300 kcal per resident or
+   seven tested feeding days. This does not establish impossibility: the
+   current policies do not deliberately feed every resident. A targeted
+   public-action feeding strategy and exact need/membership settlement are
+   next; the authored gate remains open. See garden-coverage-audit.md.
+   The seven-day authored deed remains next. See
    `evidence/2026-10-15/feast-outcome-audit.md` and `feast-host-audit.md`.
    See `evidence/2026-10-15/harvest-source-audit.md` and the earlier
    `garden-provenance-audit.md`.

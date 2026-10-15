@@ -18,7 +18,7 @@ async function child() {
   const id = arg('policy', 'capable'), base = registry[id];
   if (!base) throw new Error('Unknown policy ' + id);
   const people = new Map(), ascensions = [], outcomes = [], tableTrace = [], foodUses = [], offers = { player: {}, npc: {} }, heldPeople = { player: {}, npc: {} };
-  let G;
+  let G, gardenCoverage;
   const intakeDays = new Map();
   const sampleIntake = g => {
     for (const [day, book] of Object.entries(g.state.village.harvestIntake || {})) {
@@ -58,6 +58,7 @@ async function child() {
     setup(g, ctx) {
       G = g;
       if (arg('observe', '1') !== '0') {
+        gardenCoverage = require('../lib/garden-coverage').install(G);
         const credit = G.creditDeed;
         G.creditDeed = function (who, deed) {
           const vid = who === 'player' || who === this.villagerId ? this.villagerId : who;
@@ -117,17 +118,30 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, foodUses, people: rows, intakeDays: [...intakeDays.values()].sort((a, b) => a.day - b.day) }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, foodUses, gardenCoverage: gardenCoverage || null, people: rows, intakeDays: [...intakeDays.values()].sort((a, b) => a.day - b.day) }) + '\n');
+}
+function sourceManifest() {
+  const out = {};
+  function walk(dir) { for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+    const file = path.join(dir, e.name);
+    if (e.isDirectory()) walk(file);
+    else if (/\.(js|json)$/.test(file)) out[path.relative(root, file).replace(/\\/g, '/')] = crypto.createHash('sha256').update(fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
+  } }
+  walk(path.join(root, 'src')); walk(path.join(root, 'scripts/policies'));
+  for (const file of ['index.html', 'scripts/sim-harness.js', 'scripts/sweep-compare.js']) out[file] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n/g, '\n')).digest('hex');
+  for (const [key, file] of [['observer/deed-screen.js', __filename], ['observer/garden-coverage.js', path.join(__dirname, '../lib/garden-coverage.js')]]) out[key] = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  return out;
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
+  const sources = sourceManifest();
   const seeds = arg('seeds', '') ? arg('seeds', '').split(',').map(Number) : require('../sweep-dashboard').seedList(Number(arg('n', 64))), policies = arg('policies', 'capable,maker,merchant,caregiver').split(',');
   const jobs = policies.flatMap(policy => seeds.map(seed => ({ policy, seed }))), rows = []; let next = 0;
   const worker = async () => {
     while (next < jobs.length) {
       const j = jobs[next++];
       const row = await new Promise((resolve, reject) => {
-        const p = cp.spawn(process.execPath, [__filename, '--child', '--root', root, '--seed', String(j.seed), '--policy', j.policy, '--days', arg('days', '150')], { cwd: root });
+        const p = cp.spawn(process.execPath, [__filename, '--child', '--root', root, '--seed', String(j.seed), '--policy', j.policy, '--days', arg('days', '150'), '--observe', arg('observe', '1')], { cwd: root });
         let out = '', err = ''; p.stdout.on('data', x => { out += x; }); p.stderr.on('data', x => { err += x; }); p.on('error', reject);
         p.on('close', code => { try { if (code) throw new Error(err); resolve(JSON.parse(out.split('@@DEED@@').pop())); } catch (e) { reject(new Error(j.policy + '/' + j.seed + ': ' + e.message)); } });
       }); rows.push(row); process.stdout.write('.');
@@ -137,9 +151,11 @@ async function main() {
   rows.sort((a, b) => a.row.policy.localeCompare(b.row.policy) || seeds.indexOf(a.row.seed) - seeds.indexOf(b.row.seed));
   const hashes = {};
   for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/encounters.js', 'src/js/alienPlayers.js', 'src/js/equipment.js', 'src/js/party.js', 'src/js/food.js', 'src/js/carexplore.js', 'src/js/betrayal.js', 'src/js/safetynets.js', 'src/js/abilityActions.js', 'src/js/corruption.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  hashes['observer/garden-coverage.js'] = crypto.createHash('sha256').update(fs.readFileSync(path.join(__dirname, '../lib/garden-coverage.js'))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
-  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
+  if (JSON.stringify(sources) !== JSON.stringify(sourceManifest())) throw new Error('Sources changed during the panel; retain cases and rerun on a frozen source.');
+  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sources, sourcesStable: true, sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
   console.log('\nSaved ' + arg('out'));
 }
 module.exports = { sourceIdentity };

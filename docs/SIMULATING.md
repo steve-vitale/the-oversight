@@ -297,3 +297,32 @@ not proof of equality. Before pushing, run the quick and full checks from AGENTS
 For a new feature, document its opportunity denominator and what its success event
 means; update observed-method registration when adding a new public verb. Availability,
 attempt, accepted call, landed effect and useful reward are different observations.
+
+## Garden coverage diagnosis
+
+On the Codex godpath branch, the deed screen also captures initial, pre-closure,
+meal and post-closure resident snapshots plus actual per-eater intake. This
+observer is not a runtime deed gate. It never pools different harvesters.
+
+```text
+node scripts/godpath/deed-screen.js --n 16 --out <panel.json> --par 4
+node scripts/garden-coverage-report.js <panel.json> --out <report-prefix>
+node evidence/2026-10-15/garden-coverage-neutrality.cjs --seeds 7 --out <proof.json.gz>
+```
+
+The panel pins the full game/policy/harness source manifest at start and end;
+changed sources reject the run. The report accepts JSON or gzip. Unknown
+residents/budgets, changing rosters, lone survivors and unclosed days stay
+separate. No observed intake fails as unknown rather than reporting zero
+coverage on a source without the intake feature. Fixed 300/1000-kcal references
+and nominal person budgets are sensitivity measures, not authored thresholds;
+they do not replace actual adjusted daily needs. Feeding oneself and feeding
+other residents are measured separately. Snapshot sampling can miss a person
+who joins and leaves between observations; runtime membership accounting is
+still required before these observations can become an ascension deed.
+
+Compare standard rows and full gameplay hashes to the matched balanced panel.
+The neutral-proof script runs separate observer-on/off children for every
+selected policy/seed; the default is all four policies and seed 7. Keep raw
+panels, the actual observer sources and proof jobs with the report. See the
+2026-10-15 garden-coverage evidence for the first 16-seed screen and its limits.
