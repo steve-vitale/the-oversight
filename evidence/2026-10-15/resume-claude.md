@@ -141,3 +141,21 @@ playthrough also remain open. Read `campaign-usage-audit.md` for exact
 fixtures, raw evidence and next steps. Latest validation: **113 quick /
 885 full scripts pass**, plus 25 new focused assertions and 111 ontology
 systems. No release/push/deployment; the broad roadmap goal stays active.
+
+## Coalition presentation continuation, 2026-10-15
+
+The phone defect is repaired: active battle dimensions drive the board and
+living named allies render at their combat positions. A prepared 390x844
+phone fight shows 144 cells and 21 allies (five in outer rows), 12px labels,
+full accessible names and no horizontal overflow. Real Wait turns moved
+thirteen of twenty allies in the earlier movement fixture. Ordinary fights
+still show 81 cells. Nineteen focused assertions, 114 quick scripts and
+886 full scripts pass. See `coalition-presentation-audit.md`.
+
+The old comment that Table's direct titan trial was nine cells was wrong:
+the live trial uses twelve. The UI now follows actual dimensions. The
+same live probe found that this direct trial also receives Finale campaign
+narration/tools after the bypass flag is consumed inside the wrapper chain;
+audit that boundary separately before claiming world/Table isolation.
+Finale survival, natural food/overtime entry, Network completion and the
+remaining broad roadmap/noncombat work stay open. No release or deployment.

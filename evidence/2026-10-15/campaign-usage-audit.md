@@ -1,5 +1,9 @@
 # Campaign coverage and the remaining dead spots
 
+Follow-up: `coalition-presentation-audit.md` repairs and phone-verifies the
+missing allies/truncated board described below. The natural/prepared
+campaign results in this earlier audit are unchanged.
+
 2026-10-15. Continuation of Steve's roadmap and playstyle-viability audit.
 The prior coalition repair made real recruitment possible; it did not prove
 the route could be played. This pass adds a separate `campaigner` policy and

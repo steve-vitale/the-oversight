@@ -108,11 +108,15 @@ simulation/playtest goal with these gaps before expanding content blindly:
    donations, recruitment and approach: nine natural Herald fights, six
    kills in 16 runs, but no Finale entry or tier-three overtime/Network.
    Wide-grid AI movement is repaired with runtime proofs; matched natural
-   state hashes do not change. Phone playtesting found another real gap:
-   the UI still draws 81 cells and omits the coalition's fighters. Repair
-   that presentation next, then diagnose Finale bearer survival and the
-   cautious bot's food/overtime limits. Later-node branches and a complete
-   campaign remain unverified. See `evidence/2026-10-15/campaign-usage-audit.md`.
+   state hashes do not change. The phone presentation follow-up now draws
+   144 cells and living named allies at combat positions; labels are 12px,
+   and real Wait turns visibly move the army. Ordinary combat retains 81
+   cells. The direct Table trial actually uses 12x12 and currently inherits
+   Finale campaign narration/tools: audit that wrapper boundary separately.
+   See `evidence/2026-10-15/coalition-presentation-audit.md`.
+   Next diagnose Finale bearer survival and the cautious bot's food/overtime
+   limits. Later-node branches and a complete campaign remain unverified.
+   See `evidence/2026-10-15/campaign-usage-audit.md` for the natural screen.
 4. **Item promises.** Audit `baseEffect`-only path items and unused
    `tradeValue` fields (e.g. audience tokens). Functional armor/weapon
    fields are proven separately from bespoke advertised powers; a
