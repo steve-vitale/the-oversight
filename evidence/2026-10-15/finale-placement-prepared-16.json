@@ -1,0 +1,2426 @@
+{
+  "kind": "Prepared 16 matching seeds, real actions after explicit gear/relationship/food/arena setup; not natural reach or win-rate evidence",
+  "sources": {
+    "before": {
+      "scripts/campaign-prepared.js": "87153e7530824f12e2e8330bdfc38c66b731982703bdb6ee537895c419b983b7",
+      "scripts/policies/campaigner.js": "cff9d8a608602d952f02d74d4e666bae6fa9976e943bd8e0028a5e741376526c",
+      "scripts/policies/capable.js": "f957a2d690dda0ed843268f210cf6c2850cd9e0e8b5448be5da1756aa01d75d6",
+      "scripts/policies/competent.js": "7eb0ff9335b52876628295fab665e24a87f448b8f77e3632bcd95d96509f5fed",
+      "src/js/engine/combat.js": "c2cfe015ac713fceadea65e2060a05da9b995532bd00735817e6360a26594c76",
+      "src/js/game.js": "a4c991bdd9f18bdaef2223d58178e353f063dd77a743b6e7c76e5b76a4d014f0",
+      "src/js/titans.js": "cd8c5869b1703d0aeadc28d213616ac8d5d5ab030b6bb5656a3b6a371dd21f07",
+      "src/js/finale-campaign.js": "af1da3e996ea6b0e7f65a907506513bc482e3b9be41ae1e44b4656e7ca02fd90"
+    },
+    "after": {
+      "scripts/campaign-prepared.js": "87153e7530824f12e2e8330bdfc38c66b731982703bdb6ee537895c419b983b7",
+      "scripts/policies/campaigner.js": "cff9d8a608602d952f02d74d4e666bae6fa9976e943bd8e0028a5e741376526c",
+      "scripts/policies/capable.js": "f957a2d690dda0ed843268f210cf6c2850cd9e0e8b5448be5da1756aa01d75d6",
+      "scripts/policies/competent.js": "7eb0ff9335b52876628295fab665e24a87f448b8f77e3632bcd95d96509f5fed",
+      "src/js/engine/combat.js": "c2cfe015ac713fceadea65e2060a05da9b995532bd00735817e6360a26594c76",
+      "src/js/game.js": "a4c991bdd9f18bdaef2223d58178e353f063dd77a743b6e7c76e5b76a4d014f0",
+      "src/js/titans.js": "c2ae3502709f66e3779dbd502bc97fda7b0003d241c46fe44439aa33f88aa43f",
+      "src/js/finale-campaign.js": "28e09a168a26235133b24fba9c612c0182e536600a75e65884653f56a238aeb5"
+    }
+  },
+  "rows": [
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 42,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 16,
+        "campaignGearGiven": 32,
+        "campaignStrengthBlocked": 1
+      },
+      "notes": [],
+      "fights": [],
+      "slain": {},
+      "campaigns": {},
+      "remainingFood": 400000,
+      "currentHealth": 100,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "07939021dcb0807209249a6bc80a8ac87040ebe639722d308fe178b5fa58e233",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_crew",
+          "x": 4,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 7,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 9
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "lost",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 10,
+          "playerHp": -25,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -17,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -25,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": 933,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 0,
+      "currentHealth": 100,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "777208df4d27472e7a1ddf9c170df99ddceef6993365786838806fa7aeb35a7a",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 99,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 42,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 9
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 9,
+          "aliveAllies": 17,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -11,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -29,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": 846,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 9,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "c378b56175da1bc1e293440c6a820fbae0b10a2fd388e4385fbeea06e326d71e",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 1234,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 3,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 5,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 7,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 13,
+          "playerHp": 57,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -15,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -9,
+              "alive": false
+            }
+          ]
+        },
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_opening",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 4,
+          "playerHp": 79,
+          "aliveAllies": 22,
+          "monsters": [
+            {
+              "id": "finale_opening",
+              "hp": -18,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": true
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 90,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "7d43cfae35eb50b87ea9ef457bfdc534c48ccbf80547c986631bafdc032bf5b4",
+      "location": {
+        "x": 8,
+        "y": 3
+      },
+      "nextTargets": [
+        {
+          "id": "finale",
+          "x": 15,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 555,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 11,
+        "campaignGuardWaits": 1,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 60,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -3,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -16,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -13,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 80,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "a56feb2b873a87b25449fcc84bb9a111b13ea1cd865f806579398ba6d76a1284",
+      "location": {
+        "x": 8,
+        "y": 3
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 9,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 2026,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 11,
+        "campaignHealthBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 21,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -1,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -36,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 61,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "8ad6979c97667c9d10f0e73b2bb39e7557af6ec1b4b7038d13fe62718f2ea54c",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 9,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 777,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 3,
+        "campaignFightsStarted": 2,
+        "campaignGuardMoves": 6,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 6,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 54,
+          "aliveAllies": 20,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -5,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -17,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -12,
+              "alive": false
+            }
+          ]
+        },
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_opening",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 4,
+          "playerHp": 77,
+          "aliveAllies": 21,
+          "monsters": [
+            {
+              "id": "finale_opening",
+              "hp": -33,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": true
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 89,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "a447f48e2eddc154928cefc50c069df471754c870be978b52868c3dc2cb2c258",
+      "location": {
+        "x": 7,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale",
+          "x": 14,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 31337,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 1,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 57,
+          "aliveAllies": 20,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -30,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -1,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 79,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "43c26f6c2fa6bcb70bb5a041f1d6e15d08137eff09dc40ed11da9fc0904c04a1",
+      "location": {
+        "x": 8,
+        "y": 3
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 8,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 1,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 3,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 13,
+          "playerHp": 72,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -1,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -1,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 86,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "8a42f699d0f1537d83e0250c0ddab26f47d1ebdb61d43ca9419c7ade354074d7",
+      "location": {
+        "x": 5,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 9,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 2,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 36,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 22,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -24,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 431,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1135,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "f5a89229a3d201ef0a59e6b816196fe5d329c27f9f65a9c029958a6d7d8d8116",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 3,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 8,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -6,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 402,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1052,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 8,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "e4daf02e8a8d6a6b759899d79cdf9db4e50bbf2d50fe3d82a3ca10b73765b63c",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 4,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 2,
+        "campaignGuardBindings": 11,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 60,
+          "aliveAllies": 21,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -28,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -6,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -32,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 80,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "29a3cefb01be69553ca7b1bbe27043316c7dbcadd819df960d584e8ade0b3294",
+      "location": {
+        "x": 8,
+        "y": 3
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 7,
+          "y": 2
+        }
+      ]
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 5,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 36,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 22,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -31,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 269,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1147,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "d2d1f0f3fd8cb8989bac79dc20722c9230a70c23e2708a464fa647ad1a558824",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 8,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 42,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 8
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 10,
+          "playerHp": 21,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -35,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 309,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 764,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 21,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "94f299460dd02e70c0c71cb91df1cba008f38804e0f993bc5da01cf2724a244c",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 6,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 4
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 6,
+          "playerHp": 22,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -10,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 944,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1294,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "9c0635f03c96fa9352eda3035e4f7211cd5f1b0ce33be3ec4cd614dd938313f9",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "before",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 9,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 6
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 8,
+          "playerHp": 42,
+          "aliveAllies": 17,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -28,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 458,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1161,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 42,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "f8b60c9664805110db07f6b7b8b02796901eda44515bb793febd7f2fc1c6fb5d",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 42,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 16,
+        "campaignGearGiven": 32,
+        "campaignStrengthBlocked": 1
+      },
+      "notes": [],
+      "fights": [],
+      "slain": {},
+      "campaigns": {},
+      "remainingFood": 400000,
+      "currentHealth": 100,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "07939021dcb0807209249a6bc80a8ac87040ebe639722d308fe178b5fa58e233",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_crew",
+          "x": 4,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 7,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 9
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "lost",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 10,
+          "playerHp": -25,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -17,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -25,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": 933,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 0,
+      "currentHealth": 100,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "777208df4d27472e7a1ddf9c170df99ddceef6993365786838806fa7aeb35a7a",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 99,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 42,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 9
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 9,
+          "aliveAllies": 17,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -11,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -29,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": 846,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 9,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "c378b56175da1bc1e293440c6a820fbae0b10a2fd388e4385fbeea06e326d71e",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 1234,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 3,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 13,
+          "playerHp": 57,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -15,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -9,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 79,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "ed7b576b2bb904e53369851777e7ef36f43438907c4b8b0d7edf448453fb7a91",
+      "location": {
+        "x": 8,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 8,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 777,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 2,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 54,
+          "aliveAllies": 20,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -5,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -17,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -12,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 77,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "166374a613ae55d5018f9238ff293b91571d866e752d2ad47ac667749b4ac9a0",
+      "location": {
+        "x": 7,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 6,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 555,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 3,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 7,
+        "campaignGuardBindings": 11,
+        "campaignGuardWaits": 9
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 60,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -3,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -16,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -13,
+              "alive": false
+            }
+          ]
+        },
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_opening",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 6,
+          "playerHp": 80,
+          "aliveAllies": 21,
+          "monsters": [
+            {
+              "id": "finale_opening",
+              "hp": -9,
+              "alive": false
+            }
+          ]
+        },
+        {
+          "result": "fled",
+          "mark": {
+            "titan": "finale",
+            "day": 1,
+            "campaign": "finale_heart"
+          },
+          "rounds": 5,
+          "playerHp": 34,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale",
+              "hp": 1483,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": true
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 34,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "ff361385ac4223b410212af644af7365b087b72e450ab690a6c30c4e8cbed015",
+      "location": {
+        "x": 7,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale",
+          "x": 8,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 2026,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 11,
+        "campaignHealthBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 12,
+          "playerHp": 21,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -1,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -36,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 61,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "84e16a0c0dc6ce7ba8fa8397a0809ee6fa8238b886cf3882dfc1123ff02568ef",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 8,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 31337,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 1,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 57,
+          "aliveAllies": 20,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -30,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -1,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 79,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "ccfd85f7538414d09b9b1a87cbc289e9ba22af9d8fa98fb35b8fb5da2ea02b50",
+      "location": {
+        "x": 8,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 8,
+          "y": 5
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 1,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 23,
+        "campaignGearGiven": 46,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 10,
+        "campaignGuardWaits": 3,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 13,
+          "playerHp": 72,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": 0,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -1,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -1,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 86,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "0d6898919b9910830cc928d514ebf2d2cdd175ce6d45d0725b638367344dbe9b",
+      "location": {
+        "x": 5,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 8,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 2,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 36,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 22,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -24,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 431,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1135,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "f5a89229a3d201ef0a59e6b816196fe5d329c27f9f65a9c029958a6d7d8d8116",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 3,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 8,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -6,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 402,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1052,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 8,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "e4daf02e8a8d6a6b759899d79cdf9db4e50bbf2d50fe3d82a3ca10b73765b63c",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 4,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 24,
+        "campaignGearGiven": 48,
+        "campaignSorties": 2,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 2,
+        "campaignGuardBindings": 11,
+        "campaignTravelBlocked": 1
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "won",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 11,
+          "playerHp": 60,
+          "aliveAllies": 21,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -28,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": -6,
+              "alive": false
+            },
+            {
+              "id": "network_note",
+              "hp": -32,
+              "alive": false
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": true,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 80,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "8d5b1623b618013a33ca9ad49c4e5f2efff93fda345a2874b965fa57fe0318b4",
+      "location": {
+        "x": 8,
+        "y": 4
+      },
+      "nextTargets": [
+        {
+          "id": "finale_opening",
+          "x": 7,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 5,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 36,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 7
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 9,
+          "playerHp": 22,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -31,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 269,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1147,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "d2d1f0f3fd8cb8989bac79dc20722c9230a70c23e2708a464fa647ad1a558824",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 6,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 4
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 6,
+          "playerHp": 22,
+          "aliveAllies": 19,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -10,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 944,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1294,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 22,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "9c0635f03c96fa9352eda3035e4f7211cd5f1b0ce33be3ec4cd614dd938313f9",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 8,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 21,
+        "campaignGearGiven": 42,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 8
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 10,
+          "playerHp": 21,
+          "aliveAllies": 18,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -35,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 309,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 764,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 21,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "94f299460dd02e70c0c71cb91df1cba008f38804e0f993bc5da01cf2724a244c",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    },
+    {
+      "snapshot": "after",
+      "kind": "prepared campaign probe; not natural acquisition or win-rate evidence",
+      "seed": 9,
+      "tid": "finale",
+      "loadout": "advanced",
+      "tactic": "guard",
+      "initialHealth": 100,
+      "initialMaxHealth": 100,
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 20,
+        "campaignGearGiven": 34,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGuardMoves": 3,
+        "campaignGuardBindings": 6
+      },
+      "notes": [],
+      "fights": [
+        {
+          "result": "fled",
+          "mark": {
+            "campaign": "finale_crew",
+            "titan": null,
+            "day": 1
+          },
+          "rounds": 8,
+          "playerHp": 42,
+          "aliveAllies": 17,
+          "monsters": [
+            {
+              "id": "finale_crew",
+              "hp": -28,
+              "alive": false
+            },
+            {
+              "id": "spoiler",
+              "hp": 458,
+              "alive": true
+            },
+            {
+              "id": "network_note",
+              "hp": 1161,
+              "alive": true
+            }
+          ]
+        }
+      ],
+      "slain": {},
+      "campaigns": {
+        "finale": {
+          "started": true,
+          "crew": false,
+          "opening": false
+        }
+      },
+      "remainingFood": 400000,
+      "currentHealth": 42,
+      "over": false,
+      "liveFight": false,
+      "trace": null,
+      "stateHash": "f8b60c9664805110db07f6b7b8b02796901eda44515bb793febd7f2fc1c6fb5d",
+      "location": {
+        "x": 4,
+        "y": 4
+      },
+      "nextTargets": []
+    }
+  ]
+}
