@@ -77,9 +77,9 @@ function attrFiles() {
         const b = e.match(/^-[ ]Sources?:\s*\n((?:\s+- https?:\/\/[^\n]+\n?)+)/m);
         if (b) url = b[1].trim().split('\n')[0].replace(/^\s*-\s*/, '');
       }
-      const dir = path.dirname(ap);
+      const dir = path.posix.dirname(ap);
       for (const fn of fns) {
-        const key = path.join(dir, fn);
+        const key = path.posix.join(dir, fn);
         map[key] = {
           url: url,
           license: licM ? licM[1].trim() : null,

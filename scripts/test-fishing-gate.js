@@ -25,7 +25,7 @@ function ok(name, cond) {
   Game.depart();
 
   // Test 1: fish() refuses without tackle
-  Game.state.scholar.inventory = Game.state.scholar.inventory.filter(i => i.id !== 'fishing_line');
+  Game.state.scholar.inventory = Game.state.scholar.inventory.filter(i => (i.itemId || i.id) !== 'fishing_line');
   const r1 = Game.fish();
   ok('fish() returns null without fishing_line', r1 === null);
 

@@ -31,9 +31,11 @@ function ok(name, cond) {
   const r1 = Game.enterBuilding();
   ok('enterBuilding works at haven', r1 === true && Game.state.scholar.insideHaven === true);
 
-  // walk to a neighboring wild node, try to "go inside" there
+  // Pin a neighboring wild node. Random barriers can refuse travel, which
+  // left this location-guard test inside Haven without exercising the guard.
   const t = Game.travelTargets()[0];
-  Game.travelTo(t.x, t.y);
+  Game.tileAt(t.x, t.y).type = 'forest_floor';
+  Game.map.px = t.x; Game.map.py = t.y;
   ok('left haven', Game.playerTile().type !== 'haven');
   Game.state.scholar.insideHaven = false;
   const r2 = Game.enterBuilding();

@@ -75,7 +75,7 @@ async function main() {
 
   // ---- RED R2: gate off = baseline ----
   delete process.env.FOURTHLINK;
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fourthlink.js')) delete require.cache[k];
+  for (const k of Object.keys(require.cache)) if (k.replace(/\\/g, '/').endsWith('policies/fourthlink.js')) delete require.cache[k];
   const off = require('./policies/fourthlink').fourthlink;
   ok('R2-gate-off-is-leadcourt', off === leadcourt, 'unset gate exports leadcourt itself');
 
@@ -88,7 +88,7 @@ async function main() {
 
   // ---- GREEN G1: gate on ----
   process.env.FOURTHLINK = '1';
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fourthlink.js')) delete require.cache[k];
+  for (const k of Object.keys(require.cache)) if (k.replace(/\\/g, '/').endsWith('policies/fourthlink.js')) delete require.cache[k];
   const on = require('./policies/fourthlink').fourthlink;
   ok('G1-gate-on-differs', on !== leadcourt, 'gated policy is a distinct object');
   ok('G1-desc-names-cap', /uncapped|cap/i.test(on.desc || ''), on.desc);

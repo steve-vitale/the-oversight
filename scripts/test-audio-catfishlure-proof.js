@@ -10,7 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const APP = path.join(ROOT, 'src/js/app.js');
 const src = fs.readFileSync(APP, 'utf8');
@@ -119,7 +119,7 @@ const hits = srcFiles.filter(f => fs.readFileSync(f, 'utf8').includes('warrantyC
 check('warrantyCall has zero references in src/', hits.length === 0, hits.join(', '));
 
 // ---------- 7. syntax ----------
-try { execSync(`node --check ${APP}`, { stdio: 'pipe' }); check('app.js syntax valid', true); }
+try { execFileSync(process.execPath, ['--check', APP], { stdio: 'pipe' }); check('app.js syntax valid', true); }
 catch (e) { check('app.js syntax valid', false, 'node --check failed'); }
 
 console.log(`\n${pass} passed, ${fail} failed`);

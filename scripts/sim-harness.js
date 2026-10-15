@@ -169,8 +169,9 @@ async function loadGame(opts) {
   // (the entire crisis-relief system), villageAgency.js, and memdepth.js.
   // Sims were measuring a game without its recovery mechanics. No cap: load
   // the full list in index.html order.
-  const order = execSync(`grep -o 'src/js/[^"'"'"']*\\.js' index.html`, { cwd: ROOT })
-    .toString().split('\n')
+  // Read the manifest directly: no Bash quoting or external grep on Windows.
+  const order = (fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
+    .match(/src\/js\/[^"']*\.js/g) || [])
     .filter(s => s && !/app\.js|sprites\.js|tile-scenes\.js|move-anim\.js|drama\.js/.test(s));
 
   global.window = global;
@@ -746,6 +747,14 @@ function driveContestsImpl(Game, policy, ctx) {
     if (Game.over) break;
   }
   driveFights(Game, policy, ctx);
+  // Some encounters offer a safe response as well as a fight. Let the bot
+  // answer the same choice the phone shows before the fallback faces it.
+  if (Game.pendingEncounter && Game.pendingMonsterId && policy.pending) {
+    try {
+      if (ctx && ctx._withOrigin) ctx._withOrigin('policy', () => policy.pending(Game, ctx));
+      else policy.pending(Game, ctx);
+    } catch (e) { console.warn('[sim-harness] policy.pending threw: ' + (e && e.message)); }
+  }
   if (Game.pendingEncounter && Game.pendingMonsterId) {
     try {
       const mid = Game.pendingMonsterId;

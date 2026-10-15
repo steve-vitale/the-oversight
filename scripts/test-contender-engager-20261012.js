@@ -19,11 +19,11 @@
 //   6. Gossip fragment "X telling Y about Y" -> reflexive ("about herself").
 //   7. "What I miss most? the noise." -> capitalized ("The noise").
 'use strict';
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const path = require('path');
 
 for (const f of ['src/js/game.js', 'src/js/convoTopics.js', 'scripts/policies/contender-engager.js']) {
-  try { execSync('node --check ' + path.join(__dirname, '..', f), { stdio: 'pipe' }); }
+  try { execFileSync(process.execPath, ['--check', path.join(__dirname, '..', f)], { stdio: 'pipe' }); }
   catch (e) { console.log('FAIL syntax ' + f); process.exit(1); }
 }
 console.log('PASS syntax (3 files)');

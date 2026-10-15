@@ -15,12 +15,12 @@
 //      generic "people are talking" fallback.
 //   7. Only one departure per part (seedGossip dedup unchanged).
 'use strict';
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const path = require('path');
 
 // 0. syntax check on the touched files
 for (const f of ['src/js/villager-agency.js', 'src/js/villager-objectives.js', 'src/js/game.js']) {
-  try { execSync('node --check ' + path.join(__dirname, '..', f), { stdio: 'pipe' }); }
+  try { execFileSync(process.execPath, ['--check', path.join(__dirname, '..', f)], { stdio: 'pipe' }); }
   catch (e) { console.log('FAIL syntax ' + f); process.exit(1); }
 }
 console.log('PASS syntax (3 files)');

@@ -13,11 +13,18 @@
 // Exempt a deliberate entry point (UI-only, debug, data hook called by name)
 // by putting `// wired-exempt: <reason>` on its definition line.
 // Heuristic, not a parser: false negatives are possible (a name that also
-// appears in a comment counts as a reference). False positives are rare.
+// is shared by unrelated code can count as a reference). Comments never
+// prove a caller. Runtime proofs remain required for behavior.
+//
+// SELF-REFERENCE IS NOT A CALLER (2026-10-15, diagnosis-endgame §1): inside
+// the defining file, the module's own export list (`S.Godhood = { raiseEcho,
+// ... }`, `module.exports = {...}`) and its own comments (the `provides:`
+// header) no longer count. 9 of 10 god verbs passed this check for months
+// because godhood.js exported and documented them; nothing called them.
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const ROOT = process.env.CHECK_WIRED_ROOT || path.join(__dirname, '..');
 
 const args = process.argv.slice(2);
 const strict = args.includes('--strict');
@@ -31,8 +38,11 @@ function walk(d, out) {
   }
   return out;
 }
-const srcFiles = walk(path.join(ROOT, 'src/js'), []).concat([path.join(ROOT, 'index.html')]);
-const corpus = srcFiles.map(f => ({ f, txt: fs.readFileSync(f, 'utf8') }));
+// src/data counts: a data action's `do: "feed_camp"` is how the engine
+// dispatches a verb (godpath.js registerVerbs) — data is a real caller.
+function walkData(d) { return fs.readdirSync(d).filter(n => n.endsWith('.json')).map(n => path.join(d, n)); }
+const srcFiles = walk(path.join(ROOT, 'src/js'), []).concat([path.join(ROOT, 'index.html')]).concat(walkData(path.join(ROOT, 'src/data')));
+const corpus = srcFiles.map(f => ({ f, txt: fs.readFileSync(f, 'utf8'), self: null }));
 
 // Definitions: `name: function`, `name(args) {` (method shorthand), `function name(`.
 const DEF_RES = [
@@ -42,6 +52,19 @@ const DEF_RES = [
 ];
 const SKIP = new Set(['if', 'for', 'while', 'switch', 'catch', 'function', 'return', 'constructor']);
 
+// selfText(txt): the defining file minus what only names its functions —
+// comments and plain export-object literals (`X.Y = { a, b, c: d };`, no
+// calls or bodies inside).
+function commentless(txt) {
+  return txt
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/(^|[^:'"\\])\/\/[^\n]*/g, '$1');
+}
+function selfText(txt) {
+  return commentless(txt).replace(/(?:[\w$]+\.)*[\w$]+\s*=\s*\{[\s\w$,:]*\}/g, ' ');
+}
+
+for (const c of corpus) { c.self = selfText(c.txt); c.txt = commentless(c.txt); }
 let unwired = 0;
 for (const rel of files) {
   const abs = path.resolve(ROOT, rel);
@@ -58,9 +81,11 @@ for (const rel of files) {
   for (const d of found) {
     const re = new RegExp('\\b' + d.name.replace(/\$/g, '\\$') + '\\b', 'g');
     let refs = 0;
-    for (const { f, txt } of corpus) {
-      const n = (txt.match(re) || []).length;
-      refs += f === abs ? n - 1 : n; // minus the definition itself
+    for (const { f, txt, self } of corpus) {
+      if (f === abs) {
+        const n = (self.match(re) || []).length;
+        refs += n - 1; // minus the definition itself
+      } else refs += (txt.match(re) || []).length;
     }
     if (refs <= 0) dead.push(d);
   }

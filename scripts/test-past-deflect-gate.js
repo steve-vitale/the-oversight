@@ -31,6 +31,15 @@ const ok = (n, c, x) => { c ? pass++ : (fail++, console.log(`FAIL ${n}${x ? ' â€
     const v = (Game.data.villagers || []).find(x => x.id === id) || (Game.data.background_survivors || []).find(x => x.id === id) || {};
     if ((t === 'withdrawn' || t === 'prickly') && v.formerOccupation) { vid = id; break; }
   }
+  // Generation need not happen to produce a prickly cast. Pin a real
+  // villager's temperament so this remains a test of deflection, not luck.
+  if (!vid) {
+    vid = roster.find(id => (Game.getPerson(id) || {}).formerOccupation);
+    if (vid) {
+      const person = Game.getPerson(vid);
+      person.personality = Object.assign({}, person.personality, { temperament: 'withdrawn' });
+    }
+  }
   ok('setup: deflect-capable villager with occupation', !!vid, vid || 'none found');
   if (!vid) { console.log(`\n${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0); }
 

@@ -81,3 +81,19 @@ Count them in an `extraMetrics(Game)` hook passed to `runComparison` (see
 - **Big effects that were silently off are now on.** Forage yield, 23 relic
   perks, villager flank/War Cry, aid fights and more. Compare against
   post-2026-10-14 baselines only.
+
+## Windows checkout
+
+The shared harness reads script order from `index.html` without a shell. Some
+older proof scripts still use `grep`/`head`; run the complete legacy net with
+the installed Git for Windows tools in the current PowerShell process:
+
+```powershell
+$env:ComSpec = 'C:\Program Files\Git\bin\bash.exe'
+$env:PATH = 'C:\Program Files\Git\usr\bin;' + $env:PATH
+node scripts/check.js --jobs 4
+```
+
+`.gitattributes` keeps source and fixture text in LF: several legacy audio
+and UI tests extract actual functions by newline boundaries. Syntax-check
+probes use `execFileSync` where Windows paths must be passed as arguments.

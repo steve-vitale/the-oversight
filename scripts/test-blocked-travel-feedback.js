@@ -82,7 +82,13 @@ function freshGame() {
 
   // 4. clearBlockage on clear ground: says "nothing to clear", not silence.
   said.length = 0;
-  const plain = Game.travelTargets().find(t => !Game.travelBlockage(t.x, t.y) && !(t.x === creek.x && t.y === creek.y));
+  const plain = Game.travelTargets().find(t => !(t.x === creek.x && t.y === creek.y) && !(t.x === blocked.x && t.y === blocked.y));
+  if (plain) {
+    // A blockFrom facing another edge is traversable from here but is not
+    // clear ground. Pin the condition this assertion actually exercises.
+    const tile = Game.tileAt(plain.x, plain.y);
+    delete tile.blockFrom; tile.type = 'forest_floor'; tile.needsBridge = false;
+  }
   if (plain) {
     const pr = Game.clearBlockage(plain.x, plain.y);
     ok('clearBlockage on clear ground returns false', pr === false);

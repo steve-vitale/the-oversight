@@ -123,11 +123,11 @@ async function main() {
 
   // ---- RED R2: gate off = fourthlink itself (require-cache surgery, env read at load) ----
   delete process.env.FIFTHLINK;
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
+  for (const k of Object.keys(require.cache)) if (k.replace(/\\/g, '/').endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
   const off = require('./policies/fifthlink-r26').fifthlink;
   ok('R2-gate-off-is-fourthlink', off === fourthlink, 'unset gate exports fourthlink itself');
   process.env.FIFTHLINK = '1';
-  for (const k of Object.keys(require.cache)) if (k.endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
+  for (const k of Object.keys(require.cache)) if (k.replace(/\\/g, '/').endsWith('policies/fifthlink-r26.js')) delete require.cache[k];
   const on = require('./policies/fifthlink-r26');
   ok('R2-gate-on-differs', on.fifthlink !== fourthlink, 'gated policy is a distinct object');
   ok('R2-armed-id', on.fifthlink.id === 'fifthlink-r26', 'armed export carries the arm id');

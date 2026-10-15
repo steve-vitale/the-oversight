@@ -98,6 +98,7 @@ function ok(name, cond, note) {
   else {
     const v = (Game.data.villagers || []).find(x => x.id === truthful.id) || {};
     const occWord = String(v.formerOccupation).toLowerCase().split(/[\s(]/)[0];
+    const hasOccupation = text => new RegExp('\\b' + occWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(text);
 
     // BEFORE (a0cfe66^, betrayal.js whoTag): true occupation straight in.
     //   let occ = v.formerOccupation || (v.lifeseed && (...));
@@ -108,19 +109,19 @@ function ok(name, cond, note) {
       if (occ) beforeRole = ', the ' + String(occ).toLowerCase().replace(/\s*\(.*?\)/g, '').trim();
     }
     ok('F5-BEFORE: old whoTag named the true occupation pre-knowledge (the leak)',
-      beforeRole.toLowerCase().includes(occWord), `old role = "${beforeRole}"`);
+      hasOccupation(beforeRole), `old role = "${beforeRole}"`);
 
     // AFTER: journal is empty — tag must be age/gender descriptor only.
     const tagPre = Game.whoTag(truthful.id);
     ok('F5-AFTER: whoTag omits the true occupation pre-knowledge',
-      !tagPre.toLowerCase().includes(occWord),
+      !hasOccupation(tagPre),
       `whoTag = "${tagPre}" (occupation: ${v.formerOccupation})`);
 
     // Gate OPENS when the occupation is journal-learned (personal-topic reveal).
     Game.journalLearn(truthful.id, 'occupation', v.formerOccupation, { sure: true, via: 'talk' });
     const tagPost = Game.whoTag(truthful.id);
     ok('F5-AFTER: whoTag names the occupation once journal-learned',
-      tagPost.toLowerCase().includes(occWord),
+      hasOccupation(tagPost),
       `whoTag = "${tagPost}"`);
   }
 
