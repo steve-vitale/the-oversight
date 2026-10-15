@@ -469,6 +469,28 @@ path). The path's own challenge and fail rules still run first. Choosing it
 brings the Taken home (adults taken on day zero + pod children), records the
 legend with `key: 'network'`, and `table_won` carries `key`/`hosts`.
 
+**Recruiting the coalition (2026-10-15 audit).** Ordinary allied fires send
+two people. At trust 70+ and opinion 10+, a fire can send up to six free
+living adults from its actual roster (`titans.json` `_coalition`). Haven
+still commits at most three through the named two-tap confirmation. The
+Finale and Network still require twenty blades; no gate was lowered.
+Calls add distinct people up to that fire's quota, and new recruitment
+excludes people already committed to another army. Improving ties can
+therefore bring new volunteers without cloning the original two.
+
+An understrength muster keeps its call action available. After the Finale
+march begins, that action calls `finaleReinforce`: new volunteers cost three
+trust per answering fire, while an empty reinforcement call pays no
+answering-fire fee. The Network still forbids adding blades after its march
+begins. Every living blade pays the existing 1000 kcal/day upkeep, including
+a muster containing only Haven volunteers. Fallen Haven members stop counting.
+Duplicate legacy records cannot satisfy a gate; normalization preserves real
+outfitted items on the retained person and does not heal their wounds.
+
+`evidence/2026-10-15/coalition-recruitment-audit.md` records the prepared
+capacity test and phone flow. Natural alliance formation, campaign survival
+and THE HOSTS ending probability still require a playing campaign bot.
+
 ## Endings by build (2026-10-14)
 
 Steve, verbatim: "The ending you can win is set as you enter the table, but

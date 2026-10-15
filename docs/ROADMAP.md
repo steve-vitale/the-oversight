@@ -97,6 +97,14 @@ simulation/playtest goal with these gaps before expanding content blindly:
    pemmican, storage expansion, armory/stash sharing, peer trade/covenants,
    party orders, and the titan/Network route. Zero calls in the ordinary
    sweep establish a coverage gap, not a value judgment.
+   The coalition-entry audit found a structural ceiling (3–4 villages ×
+   two volunteers, plus three from Haven) and duplicate-call inflation.
+   Strong allies can now provide up to six distinct real people; repeated
+   calls, upkeep and the paid Finale reinforcement action are repaired.
+   Prepared strong alliances reach the unchanged 20-blade gate in 15/16
+   generated worlds. This is capacity evidence, not a campaign win rate.
+   See `evidence/2026-10-15/coalition-recruitment-audit.md`; the capable
+   titan/Network seeker and full campaign playthrough remain next work.
 4. **Item promises.** Audit `baseEffect`-only path items and unused
    `tradeValue` fields (e.g. audience tokens). Functional armor/weapon
    fields are proven separately from bespoke advertised powers; a
