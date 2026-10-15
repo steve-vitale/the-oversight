@@ -1,0 +1,903 @@
+{
+ "generated": "2026-10-15T01:10:15.808Z",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "agg": {
+  "n": 8,
+  "unlockers": 5,
+  "postUnlockVillagerCombatDeaths": 12,
+  "perUnlocker": 2.4,
+  "deathChannel": {
+   "raid": 6,
+   "wild": 6,
+   "other": 2
+  },
+  "deathWave": {
+   "w5": 2,
+   "w4": 9,
+   "w2": 1,
+   "w3": 1,
+   "w1": 1
+  },
+  "fightOutcomes": {
+   "raid:vFlee": 8,
+   "raid:mFlee": 12,
+   "wild:mFlee": 13,
+   "raid:vKill": 1,
+   "other:mFlee": 9,
+   "raid:vDie": 6,
+   "wild:vDie": 6,
+   "wild:vFlee": 4,
+   "other:vKill": 6,
+   "other:vDie": 2
+  },
+  "medianDays": 86,
+  "national": 3,
+  "table": 1
+ },
+ "rows": [
+  {
+   "seed": 11,
+   "days": 145,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 106,
+   "nationalDays": 57,
+   "tableEver": false,
+   "villagerCombatDeaths": 4,
+   "postUnlockVillagerCombatDeaths": 3,
+   "postDeaths": [
+    {
+     "day": 138,
+     "kind": "villager",
+     "who": "amina_diallo",
+     "cause": "monster"
+    },
+    {
+     "day": 139,
+     "kind": "villager",
+     "who": "visjoin_115",
+     "cause": "monster"
+    },
+    {
+     "day": 146,
+     "kind": "villager",
+     "who": "visjoin_103",
+     "cause": "monster"
+    }
+   ],
+   "postFights": [
+    {
+     "day": 108,
+     "vid": "sanne_bakker",
+     "channel": "raid",
+     "monsterId": "eulogy",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 108,
+     "vid": "amina_diallo",
+     "channel": "raid",
+     "monsterId": "ad_break",
+     "wave": 3,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 108,
+     "vid": "leo_martin",
+     "channel": "raid",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 108,
+     "vid": "visjoin_97",
+     "channel": "raid",
+     "monsterId": "white_noise_heron",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 109,
+     "vid": "sanne_bakker",
+     "channel": "wild",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 121,
+     "vid": "sanne_bakker",
+     "channel": "raid",
+     "monsterId": "rerun",
+     "wave": 5,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 121,
+     "vid": "elena_petrova",
+     "channel": "raid",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 1
+    },
+    {
+     "day": 121,
+     "vid": "amina_diallo",
+     "channel": "raid",
+     "monsterId": "ad_break",
+     "wave": 3,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 121,
+     "vid": "leo_martin",
+     "channel": "raid",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 121,
+     "vid": "visjoin_97",
+     "channel": "raid",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 131,
+     "vid": "elena_petrova",
+     "channel": "raid",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 131,
+     "vid": "amina_diallo",
+     "channel": "raid",
+     "monsterId": "influencer",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 131,
+     "vid": "leo_martin",
+     "channel": "raid",
+     "monsterId": "hushwolf",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 131,
+     "vid": "visjoin_97",
+     "channel": "raid",
+     "monsterId": "bright_idea",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "learn",
+     "rounds": 0
+    },
+    {
+     "day": 131,
+     "vid": "visjoin_103",
+     "channel": "raid",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 133,
+     "vid": "visjoin_103",
+     "channel": "wild",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 133,
+     "vid": "amina_diallo",
+     "channel": "wild",
+     "monsterId": "bright_idea",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 134,
+     "vid": "visjoin_115",
+     "channel": "wild",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 135,
+     "vid": "visjoin_97",
+     "channel": "wild",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 135,
+     "vid": "elena_petrova",
+     "channel": "wild",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 136,
+     "vid": "amina_diallo",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 136,
+     "vid": "amina_diallo",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 3
+    },
+    {
+     "day": 136,
+     "vid": "amina_diallo",
+     "channel": "other",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 137,
+     "vid": "visjoin_97",
+     "channel": "wild",
+     "monsterId": "bright_idea",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 138,
+     "vid": "amina_diallo",
+     "channel": "raid",
+     "monsterId": "spoiler",
+     "wave": 5,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 138,
+     "vid": "visjoin_97",
+     "channel": "raid",
+     "monsterId": "glasswing",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 138,
+     "vid": "visjoin_115",
+     "channel": "raid",
+     "monsterId": "eulogy",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 139,
+     "vid": "visjoin_115",
+     "channel": "wild",
+     "monsterId": "bright_idea",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 139,
+     "vid": "visjoin_115",
+     "channel": "wild",
+     "monsterId": "spoiler",
+     "wave": 5,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 146,
+     "vid": "visjoin_103",
+     "channel": "raid",
+     "monsterId": "algorithm",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    }
+   ]
+  },
+  {
+   "seed": 22,
+   "days": 86,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "villagerCombatDeaths": 1,
+   "postUnlockVillagerCombatDeaths": 0,
+   "postDeaths": [],
+   "postFights": []
+  },
+  {
+   "seed": 33,
+   "days": 111,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "nationalDays": 34,
+   "tableEver": false,
+   "villagerCombatDeaths": 9,
+   "postUnlockVillagerCombatDeaths": 7,
+   "postDeaths": [
+    {
+     "day": 75,
+     "kind": "villager",
+     "who": "ivy_wang",
+     "cause": "monster"
+    },
+    {
+     "day": 81,
+     "kind": "villager",
+     "who": "app_mgpsphdr422",
+     "cause": "monster"
+    },
+    {
+     "day": 81,
+     "kind": "villager",
+     "who": "tariq_mahmood",
+     "cause": "monster"
+    },
+    {
+     "day": 81,
+     "kind": "villager",
+     "who": "hassan_ali",
+     "cause": "monster"
+    },
+    {
+     "day": 81,
+     "kind": "villager",
+     "who": "app_mgpspi9d849",
+     "cause": "monster"
+    },
+    {
+     "day": 84,
+     "kind": "villager",
+     "who": "visjoin_82",
+     "cause": "monster"
+    },
+    {
+     "day": 102,
+     "kind": "villager",
+     "who": "visjoin_91",
+     "cause": "monster"
+    }
+   ],
+   "postFights": [
+    {
+     "day": 75,
+     "vid": "nikolai_volkov",
+     "channel": "wild",
+     "monsterId": "understudy",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "learn",
+     "rounds": 0
+    },
+    {
+     "day": 75,
+     "vid": "ivy_wang",
+     "channel": "wild",
+     "monsterId": "eater",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 75,
+     "vid": "app_mgpsphdr422",
+     "channel": "wild",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 75,
+     "vid": "nikolai_volkov",
+     "channel": "wild",
+     "monsterId": "reunion",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 81,
+     "vid": "app_mgpsphdr422",
+     "channel": "wild",
+     "monsterId": "eater",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 81,
+     "vid": "nikolai_volkov",
+     "channel": "raid",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 81,
+     "vid": "tariq_mahmood",
+     "channel": "raid",
+     "monsterId": "eater",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 81,
+     "vid": "hassan_ali",
+     "channel": "raid",
+     "monsterId": "reunion",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 81,
+     "vid": "app_mgpspi9d849",
+     "channel": "raid",
+     "monsterId": "strike",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 84,
+     "vid": "visjoin_82",
+     "channel": "wild",
+     "monsterId": "reunion",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 84,
+     "vid": "visjoin_82",
+     "channel": "wild",
+     "monsterId": "reunion",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 86,
+     "vid": "omar_farouk",
+     "channel": "other",
+     "monsterId": "lockpick_raccoon",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "engage",
+     "rounds": 3
+    },
+    {
+     "day": 102,
+     "vid": "visjoin_92",
+     "channel": "wild",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 102,
+     "vid": "app_mgpspibl325",
+     "channel": "raid",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 102,
+     "vid": "nadia_khoury",
+     "channel": "raid",
+     "monsterId": "belltoad",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 102,
+     "vid": "omar_farouk",
+     "channel": "raid",
+     "monsterId": "audit",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 102,
+     "vid": "visjoin_91",
+     "channel": "raid",
+     "monsterId": "eater",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 102,
+     "vid": "visjoin_97",
+     "channel": "raid",
+     "monsterId": "editor",
+     "wave": 5,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 111,
+     "vid": "visjoin_101",
+     "channel": "other",
+     "monsterId": "giant_mosquito",
+     "wave": 2,
+     "outcome": "vDie",
+     "intent": "engage",
+     "rounds": 7
+    }
+   ]
+  },
+  {
+   "seed": 44,
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 5,
+   "unlockDay5": 71,
+   "nationalDays": 104,
+   "tableEver": true,
+   "villagerCombatDeaths": 2,
+   "postUnlockVillagerCombatDeaths": 1,
+   "postDeaths": [
+    {
+     "day": 71,
+     "kind": "villager",
+     "who": "owen_smith",
+     "cause": "monster"
+    }
+   ],
+   "postFights": [
+    {
+     "day": 71,
+     "vid": "fatima_hassan",
+     "channel": "wild",
+     "monsterId": "nightcourt",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 0
+    },
+    {
+     "day": 71,
+     "vid": "owen_smith",
+     "channel": "wild",
+     "monsterId": "eulogy",
+     "wave": 4,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 71,
+     "vid": "owen_smith",
+     "channel": "wild",
+     "monsterId": "eulogy",
+     "wave": 4,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 130,
+     "vid": "devon_okafor",
+     "channel": "other",
+     "monsterId": "giant_mosquito",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 130,
+     "vid": "devon_okafor",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 130,
+     "vid": "devon_okafor",
+     "channel": "other",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "engage",
+     "rounds": 2
+    }
+   ]
+  },
+  {
+   "seed": 55,
+   "days": 85,
+   "endReason": "village-lost",
+   "maxUnlocked": 3,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "villagerCombatDeaths": 2,
+   "postUnlockVillagerCombatDeaths": 0,
+   "postDeaths": [],
+   "postFights": []
+  },
+  {
+   "seed": 66,
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "nationalDays": 0,
+   "tableEver": false,
+   "villagerCombatDeaths": 3,
+   "postUnlockVillagerCombatDeaths": 0,
+   "postDeaths": [],
+   "postFights": []
+  },
+  {
+   "seed": 77,
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 65,
+   "nationalDays": 0,
+   "tableEver": false,
+   "villagerCombatDeaths": 2,
+   "postUnlockVillagerCombatDeaths": 1,
+   "postDeaths": [
+    {
+     "day": 65,
+     "kind": "villager",
+     "who": "hassan_ali",
+     "cause": "monster"
+    }
+   ],
+   "postFights": [
+    {
+     "day": 65,
+     "vid": "hassan_ali",
+     "channel": "wild",
+     "monsterId": "redactor",
+     "wave": 3,
+     "outcome": "vDie",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 65,
+     "vid": "chen_wei",
+     "channel": "wild",
+     "monsterId": "redactor",
+     "wave": 3,
+     "outcome": "vFlee",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 67,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 1
+    },
+    {
+     "day": 67,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 1
+    },
+    {
+     "day": 67,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "nightlight_catfish",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "learn",
+     "rounds": 1
+    },
+    {
+     "day": 68,
+     "vid": "visjoin_59",
+     "channel": "wild",
+     "monsterId": "heckler",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "learn",
+     "rounds": 0
+    },
+    {
+     "day": 72,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "giant_mosquito",
+     "wave": 2,
+     "outcome": "vKill",
+     "intent": "learn",
+     "rounds": 2
+    },
+    {
+     "day": 72,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "sunbasker",
+     "wave": 1,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 72,
+     "vid": "thabo_maseko",
+     "channel": "other",
+     "monsterId": "mirrormoth",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 74,
+     "vid": "visjoin_58",
+     "channel": "other",
+     "monsterId": "giant_mosquito",
+     "wave": 2,
+     "outcome": "mFlee",
+     "intent": "engage",
+     "rounds": 5
+    },
+    {
+     "day": 74,
+     "vid": "visjoin_58",
+     "channel": "other",
+     "monsterId": "ducks_in_a_row",
+     "wave": 1,
+     "outcome": "vKill",
+     "intent": "engage",
+     "rounds": 2
+    },
+    {
+     "day": 74,
+     "vid": "visjoin_58",
+     "channel": "other",
+     "monsterId": "ducks_in_a_row",
+     "wave": 1,
+     "outcome": "vDie",
+     "intent": "engage",
+     "rounds": 1
+    }
+   ]
+  },
+  {
+   "seed": 88,
+   "days": 58,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "villagerCombatDeaths": 0,
+   "postUnlockVillagerCombatDeaths": 0,
+   "postDeaths": [],
+   "postFights": []
+  }
+ ]
+}
