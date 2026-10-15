@@ -49,7 +49,7 @@
 // consumes:
 //   - state.road {active, partyIds, supplies:{food}, legs, legIndex} (nomad.js; stubbed in tests)
 //   - Game.nomad.party(), Game.nomad.daily() (nomad.js; guarded)
-//   - Game.nomadScenes.sharpenTrail(name) (nomad-scenes; guarded)
+//   - Game.nomadScenes.sharpenTrail(name, source, ownerId?) (nomad-scenes; guarded)
 //   - Game.say, Game.plantKnownBy, Game.bumpPlantFamiliarity, Game.fieldFight,
 //     Game.regionDef, Game.regionVillageNames, Game.unlockedWave (game.js)
 (function () {
@@ -420,10 +420,10 @@
     travelEvent() {
       const r = road();
       const roll = Math.random();
-      const sharpen = (who) => {
+      const sharpen = (who, owner) => {
         try {
           if (G.nomadScenes && typeof G.nomadScenes.sharpenTrail === 'function') {
-            G.nomadScenes.sharpenTrail(who, 'survivor'); // a stranger on the road
+            G.nomadScenes.sharpenTrail(who, 'survivor', owner || null); // a stranger on the road
             return true;
           }
         } catch (e) { warn('sharpenTrail: ' + e.message); }
@@ -449,7 +449,7 @@
           ? `A traveler shares your fire one night. Talk turns to the lost — "${target.name}, ${target.relation}. Last I heard, ${G.worldRegionName ? G.worldRegionName(target.region) : 'somewhere east'}." The trail sharpens a little.`
           : 'A traveler shares your fire one night. Stories, nothing useful — but the night is less long.';
         say(line);
-        if (target) sharpen(target.name);
+        if (target) sharpen(target.name, target.owner);
         return { kind: 'stranger', note: line };
       }
       // An alien broadcast.

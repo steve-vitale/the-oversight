@@ -8,10 +8,14 @@
 //   villageLeft:{leaderId, leftDay, strength, abandoned, fate, fateLine},
 //   foundKin:[], log:[], endReason, tableGivenUp}.
 // provides:
-//   - Game.nomad = { canLeave(), start(), addLeg(regionId, kinName),
+//   - Game.nomad = { canLeave(), start(), addLeg(regionId, kinName, ownerId),
 //     enterLeg(i), departLeg(), daily(), endRoad(reason), party(),
-//     endingData(), onRoad(), markKinFound(name, relation, fate), addFood(kcal) }
+//     endingData(), onRoad(), markKinFound(name, relation, fate, ownerId), addFood(kcal) }
 //   - canLeave() -> {ok} | {ok:false, reason:'rank'|'no_known_kin'|'on_road'|'no_state'}
+//   - addLeg(regionId, kinName, ownerId?) -> leg: one leg per region; legs
+//     carry kinNames[] and kinOwners{} (kin name -> seeking villager id, null
+//     for the bearer's own kin) so the road driver can plan party members'
+//     kin too (nomad-drive.js)
 //   - start() -> state.road | null (leaves the village, musters the party)
 //   - daily() -> {day, ate, left, deaths[]} | null (party upkeep; starvation kills)
 //   - endRoad('settled'|'all-found'|'wiped') -> endingData()
@@ -228,23 +232,32 @@
       return st.road;
     },
 
-    addLeg(regionId, kinName) {
+    addLeg(regionId, kinName, ownerId) {
       const r = road();
       if (!r || !r.active) return null;
       let def = null;
       try { def = typeof Game.regionDef === 'function' ? Game.regionDef(regionId) : null; } catch (e) {}
       if (!def) return null;
       // One leg per region: kin who share a region share the leg.
+      // kinOwners maps each kin name to the villager seeking them (null =
+      // the bearer's own kin) — the road driver plans party members' kin
+      // alongside the bearer's (nomad-drive.js, party_kin_legs).
+      const owner = ownerId || null;
       const existing = r.legs.find(l => l.regionId === regionId && l.status !== 'done');
       if (existing) {
         existing.kinNames = existing.kinNames || [];
+        existing.kinOwners = existing.kinOwners || {};
         if (kinName && existing.kinNames.indexOf(kinName) < 0) {
+          // First push wins on a name: kin names are unique per run (the
+          // unique-person law), so a repeat is the same person's trail.
           existing.kinNames.push(kinName);
+          existing.kinOwners[kinName] = owner;
           log(`leg ${def.name || regionId}: also looking for ${kinName}.`);
         }
         return existing;
       }
-      const leg = { regionId, kinName: kinName || null, kinNames: kinName ? [kinName] : [], status: 'pending' };
+      const leg = { regionId, kinName: kinName || null, kinNames: kinName ? [kinName] : [],
+        kinOwners: kinName ? { [kinName]: owner } : {}, status: 'pending' };
       r.legs.push(leg);
       log(`leg added: ${def.name || regionId}${kinName ? ` — looking for ${kinName}` : ''}.`);
       return leg;
@@ -386,15 +399,18 @@
       return r.partyIds.map(id => ({ id, name: vname(id), bearer: id === r.bearerId }));
     },
 
-    // markKinFound: the reunion scene (Worker C) records what happened.
-    markKinFound(name, relation, fate) {
+    // markKinFound: the reunion scene records what happened. ownerId narrows
+    // the world entry to the seeking villager's kin (party members' kin);
+    // null/omitted keeps the historical name+relation match (the bearer's).
+    markKinFound(name, relation, fate, ownerId) {
       const r = road();
       if (!r) return null;
       const entry = { name, relation: relation || null, fate: fate || 'alive', day: day() };
       r.foundKin.push(entry);
       try {
         const st = Game.state;
-        const k = (st.world && st.world.kin || []).find(x => x.name === name && x.relation === relation);
+        const k = (st.world && st.world.kin || []).find(x => x.name === name && x.relation === relation &&
+          (!ownerId || x.owner === ownerId));
         if (k) k.found = true;
       } catch (e) { /* world bookkeeping is best-effort */ }
       log(`found ${name}${fate && fate !== 'alive' ? ` (${fate})` : ''}.`);

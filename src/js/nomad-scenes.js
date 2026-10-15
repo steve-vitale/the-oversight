@@ -2,9 +2,9 @@
 // system: nomad-scenes
 // description: Trails, reunion scenes, and the ending for The Long Way Home (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "Expedition is leaving your village as a nomad to find remaining family. That should be another bonus ending."). Per-kin trails sharpen from vague (continent) to named (region) only as earned — keepsake bond L2+ names it, road encounters sharpen a step. Four reunion fates (alive/changed/dead/moved) as real scenes in spare second person. The ending composes light ("We were never lost; we were just far apart.") or dark (the village left behind fell) from Game.nomad.endingData(). Road state, legs, and loss live in nomad.js (sibling stream); this module owns scenes only.
 // provides:
-//   - trailFor(kinName) -> {kinName, relation, level, text, regionKnown} | null
-//   - sharpenTrail(kinName, source) -> {ok, level, text} | {ok:false, reason}
-//   - reunionScene(kinName, fate) -> {fate, title, lines, outcome, choices?} (also says the lines)
+//   - trailFor(kinName, ownerId?) -> {kinName, relation, level, text, regionKnown} | null
+//   - sharpenTrail(kinName, source, ownerId?) -> {ok, level, text} | {ok:false, reason}
+//   - reunionScene(kinName, fate, ownerId?) -> {fate, title, lines, outcome, choices?} (also says the lines)
 //   - playEnding(data) -> {moral, title, lines} (also says the lines)
 // consumes:
 //   - worldKin(), worldKinEntry(), worldRegionName(), hearOfRegion(), regionDef() (world.js)
@@ -16,6 +16,7 @@
 //   - keepsake_names_region: a worn keepsake of that person at bond L2+ names the region (code: sharpenTrail, WORLD-REGIONS.md §6)
 //   - no_fabricated_history: scenes use only lifeseed/world facts — name, relation, hometown, workplace, fate line, region (code: reunionScene, kinFacts)
 //   - deterministic_fate: the 'changed' subtype derives from a seeded hash of the kin name, never Math.random (code: changedKind)
+//   - member_perspective: a party member's reunion is narrated in third person from their perspective — their voice, their choice beats — never the bearer's second person; the member decides changed-choices by a seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
 (function () {
   'use strict';
   const S = globalThis.Scattering = globalThis.Scattering || {};
@@ -43,16 +44,19 @@
     return st.nomadScenes;
   }
 
-  // kinFacts(name): the true facts about a scattered kin — world entry plus
-  // lifeseed person and lifeseed-level hometown/workplace. Everything a
-  // scene may say must come from here.
-  function kinFacts(name) {
+  // kinFacts(name, ownerId): the true facts about a scattered kin — world
+  // entry plus lifeseed person and lifeseed-level hometown/workplace.
+  // Everything a scene may say must come from here. ownerId narrows to the
+  // seeking villager's kin (party members' reunions); null keeps the
+  // historical preference for the bearer's own kin.
+  function kinFacts(name, ownerId) {
     const st = Game.state;
     if (!st || !st.world) return null;
     const kins = (st.world.kin || []).filter(k => k.name === name && k.fate === 'scattered');
     if (!kins.length) return null;
-    // Prefer the player's own kin; fall back to any owner's.
-    const entry = kins.find(k => k.owner === Game.villagerId) || kins[0];
+    // Prefer the seeker's own kin; fall back to the bearer's, then any.
+    const entry = (ownerId && kins.find(k => k.owner === ownerId)) ||
+      kins.find(k => k.owner === Game.villagerId) || kins[0];
     let person = null, hometown = null, workplace = null;
     try {
       const vp = Game.vpOf ? Game.vpOf(entry.owner) : null;
@@ -72,18 +76,54 @@
 
   function firstName(n) { return String(n || '').split(' ')[0] || 'them'; }
 
+  function wseed() {
+    try { return ((Game.map && Game.map.worldSeed) >>> 0) || 1; } catch (e) { return 1; }
+  }
+
+  // personName(id): a villager's name for third-person road narration
+  // (party members' reunions are their scenes, not the bearer's).
+  function personName(id) {
+    try {
+      const rc = ((Game.state.village || {}).rosterChars || {})[id];
+      if (rc && rc.name) return rc.name;
+    } catch (e) { warn('personName roster: ' + e.message); }
+    try {
+      const d = (Game.data.villagers || []).find(x => x.id === id);
+      if (d && d.name) return d.name;
+    } catch (e) { warn('personName data: ' + e.message); }
+    try {
+      const vp = Game.vpOf ? Game.vpOf(id) : null;
+      if (vp && vp.name) return vp.name;
+    } catch (e) { warn('personName vp: ' + e.message); }
+    return 'a companion';
+  }
+
+  // memberDecide(owner, name, kind, choices): the deterministic choice a
+  // party member makes at their own changed-reunion — seeded hash over the
+  // seeker, the kin, and the situation, never Math.random. The bearer
+  // witnesses; the member decides.
+  function memberDecide(owner, name, kind, choices) {
+    const ids = choices.map(c => c.id);
+    if (!ids.length) return null;
+    return ids[hashStr('member-choice|' + wseed() + '|' + owner + '|' + name + '|' + kind) % ids.length];
+  }
+
   function trailLevel(name) {
     const t = nsState().trails[name];
     return t ? (t.level | 0) : 0;
   }
 
   // The current clue text for a trail level. Level 0 never names the
-  // region; level 1 narrows; level 2 names it.
-  function trailText(facts, level) {
+  // region; level 1 narrows; level 2 names it. ownerName shifts the
+  // possessive: the bearer's own trail is "your brother"; a party member's
+  // trail is theirs ("Ash's brother") — the bearer knows the quest because
+  // the seeker told them on the road.
+  function trailText(facts, level, ownerName) {
     const rel = facts.relation, fn = firstName(facts.entry.name);
     const region = facts.region;
     const cont = region && CONTINENTS[region.continent] ? CONTINENTS[region.continent] : 'somewhere on Earth';
-    const base = `Somewhere in ${cont}. Your ${rel}, ${facts.entry.name} — ${facts.fateLine}.`;
+    const whose = ownerName ? `${ownerName}'s ${rel}` : `Your ${rel}`;
+    const base = `Somewhere in ${cont}. ${whose}, ${facts.entry.name} — ${facts.fateLine}.`;
     if (level <= 0) return base;
     const neighbors = (region && region.neighbors) || [];
     let narrow = '';
@@ -102,27 +142,28 @@
   }
 
   const methods = {
-    // trailFor(kinName): the current, earned clue for one scattered kin.
-    trailFor(kinName) {
+    // trailFor(kinName, ownerId?): the current, earned clue for one scattered kin.
+    trailFor(kinName, ownerId) {
       try {
-        const facts = kinFacts(kinName);
+        const facts = kinFacts(kinName, ownerId);
         if (!facts) return null;
         const level = trailLevel(kinName);
         const reg = (((Game.state || {}).world || {}).regions || {})[facts.entry.region] || {};
+        const ownerName = (ownerId && ownerId !== Game.villagerId) ? personName(ownerId) : null;
         return {
           kinName, relation: facts.relation, level,
-          text: trailText(facts, level),
+          text: trailText(facts, level, ownerName),
           regionKnown: !!reg.known,
           regionId: level >= 2 ? facts.entry.region : null,
         };
       } catch (e) { warn('trailFor: ' + e.message); return null; }
     },
 
-    // sharpenTrail(kinName, source): earn one step of the trail.
+    // sharpenTrail(kinName, source, ownerId?): earn one step of the trail.
     // source: 'keepsake' (worn, L2+), 'villager', 'survivor', 'broadcast'.
-    sharpenTrail(kinName, source) {
+    sharpenTrail(kinName, source, ownerId) {
       try {
-        const facts = kinFacts(kinName);
+        const facts = kinFacts(kinName, ownerId);
         if (!facts) return { ok: false, reason: 'no-trail' };
         const valid = { keepsake: 1, villager: 1, survivor: 1, broadcast: 1 };
         if (!valid[source]) return { ok: false, reason: 'bad-source' };
@@ -150,24 +191,35 @@
         if (t.level >= 2 && facts.entry.region && Game.hearOfRegion) {
           try { Game.hearOfRegion(facts.entry.region, 'trail'); } catch (e) { warn('hearOfRegion: ' + e.message); }
         }
-        const out = { ok: true, level: t.level, text: trailText(facts, t.level) };
+        const ownerName = (ownerId && ownerId !== Game.villagerId) ? personName(ownerId) : null;
+        const out = { ok: true, level: t.level, text: trailText(facts, t.level, ownerName) };
         return out;
       } catch (e) { warn('sharpenTrail: ' + e.message); return { ok: false, reason: 'error' }; }
     },
 
-    // changedKind(name): deterministic subtype for the 'changed' fate.
-    changedKind(name) {
+    // changedKind(name, ownerId?): deterministic subtype for the 'changed' fate.
+    // Salted by the seeker so a party member's kin never shadows the
+    // bearer's on the same name; the bearer's own formula is unchanged.
+    changedKind(name, ownerId) {
       const kinds = ['leads', 'ascended', 'hostile'];
-      return kinds[hashStr('changed|' + name) % kinds.length];
+      const salt = (ownerId && ownerId !== Game.villagerId) ? ownerId + '|' : '';
+      return kinds[hashStr('changed|' + salt + name) % kinds.length];
     },
 
-    // reunionScene(kinName, fate): play the reunion. Says the lines and
-    // returns the structured outcome for the road driver (nomad.js).
-    // fate: 'alive' | 'changed' | 'dead' | 'moved'.
-    reunionScene(kinName, fate) {
+    // reunionScene(kinName, fate, ownerId?): play the reunion. Says the lines
+    // and returns the structured outcome for the road driver (nomad.js).
+    // fate: 'alive' | 'changed' | 'dead' | 'moved'. ownerId (a party
+    // villager's id) makes it THEIR reunion — third person, their voice,
+    // their choice beats — never the bearer's second person. The member's
+    // changed-choices are decided by seeded hash (memberDecide); the bearer
+    // only witnesses. Omitted ownerId (or the bearer's id) keeps the
+    // historical second-person scenes byte-identical.
+    reunionScene(kinName, fate, ownerId) {
       try {
-        const facts = kinFacts(kinName);
+        const seeker = (ownerId && ownerId !== Game.villagerId) ? ownerId : null;
+        const facts = kinFacts(kinName, seeker);
         if (!facts) return null;
+        const member = seeker ? personName(seeker) : null;
         const fn = firstName(kinName), rel = facts.relation;
         const rname = facts.region && Game.worldRegionName ? Game.worldRegionName(facts.region.id) : 'this place';
         const lines = [];
@@ -178,56 +230,114 @@
         const markFound = () => {
           try {
             for (const k of ((Game.state.world || {}).kin || [])) {
-              if (k.name === kinName && k.fate === 'scattered') k.found = true;
+              if (k.name === kinName && k.fate === 'scattered' && (!seeker || k.owner === seeker)) k.found = true;
             }
           } catch (e) { warn('markFound: ' + e.message); }
         };
 
         if (fate === 'alive') {
-          say(`◈ REUNION — ${rname} gives up its secret: your ${rel}, ${kinName}.`);
-          say(`You say the name before you're sure. ${fn} turns, stares, and then you're both moving. "${facts.hometown ? `You made it out of ${facts.hometown}. ` : ''}You actually made it."`);
-          say(`${fn} walks with the party now. The road is one person less lonely, which is to say: one person more fed, one more mouth, one more pair of eyes on the dark. You'd trade none of it.`);
+          if (member) {
+            say(`◈ REUNION — ${rname} gives up its secret: ${member}'s ${rel}, ${kinName}.`);
+            say(`${member} says the name before they're sure. ${fn} turns, stares, and then they're both moving. "${facts.hometown ? `You made it out of ${facts.hometown}. ` : ''}You actually made it."`);
+            say(`${fn} walks with the party now, falling in beside ${member} like the road was always going to bring them here. One more mouth, one more pair of eyes on the dark. ${member} keeps checking over, like ${fn} might vanish. Nobody minds.`);
+          } else {
+            say(`◈ REUNION — ${rname} gives up its secret: your ${rel}, ${kinName}.`);
+            say(`You say the name before you're sure. ${fn} turns, stares, and then you're both moving. "${facts.hometown ? `You made it out of ${facts.hometown}. ` : ''}You actually made it."`);
+            say(`${fn} walks with the party now. The road is one person less lonely, which is to say: one person more fed, one more mouth, one more pair of eyes on the dark. You'd trade none of it.`);
+          }
           markFound();
           outcome = 'joined';
           extra.joined = kinName;
         } else if (fate === 'changed') {
-          const kind = this.changedKind(kinName);
+          const kind = this.changedKind(kinName, seeker);
           extra.changedKind = kind;
           if (kind === 'leads') {
-            say(`◈ REUNION — ${kinName} is not lost. ${fn} leads a village here in ${rname} — gardens, a watch, a bell.`);
-            say(`"${fn}?" you say, and the leader's face does something complicated. "You walked all this way." Not a question. ${fn} has a village to keep. You have a road.`);
-            say(`The choice sits between you, honest and unsolvable: ask ${fn} to leave it all, or leave ${fn} to it.`);
-            outcome = 'choice';
             choices = [
               { id: 'ask', label: `Ask ${fn} to come` },
               { id: 'leave', label: `Leave ${fn} to the village` },
               { id: 'trade', label: 'Trade, rest, and move on' },
             ];
+            if (member) {
+              say(`◈ REUNION — ${kinName} is not lost. ${fn} leads a village here in ${rname} — gardens, a watch, a bell.`);
+              say(`"${fn}?" ${member} says, and the leader's face does something complicated. "You walked all this way." Not a question. ${fn} has a village to keep. ${member} has a road.`);
+              const decision = memberDecide(seeker, kinName, kind, choices);
+              extra.decision = decision;
+              choices = null; // decided: the member chose; no one is left to tap
+              if (decision === 'ask') {
+                say(`${member} asks. ${fn} looks at the gardens, the bell, the people who depend on the bell — and walks away from all of it, toward the road. Some choices you don't get to unmake.`);
+                outcome = 'joined';
+                extra.joined = kinName;
+              } else if (decision === 'leave') {
+                say(`${member} stays. ${fn}'s village has room for one more, and the road has one fewer. The party says its goodbyes at dawn, and means them.`);
+                outcome = 'stayed';
+                extra.stayed = member;
+              } else {
+                say(`They trade, rest a day at ${fn}'s fire, and ${member} walks on with the party. Some people you find just to know they're alright.`);
+                outcome = 'choice';
+              }
+            } else {
+              say(`◈ REUNION — ${kinName} is not lost. ${fn} leads a village here in ${rname} — gardens, a watch, a bell.`);
+              say(`"${fn}?" you say, and the leader's face does something complicated. "You walked all this way." Not a question. ${fn} has a village to keep. You have a road.`);
+              say(`The choice sits between you, honest and unsolvable: ask ${fn} to leave it all, or leave ${fn} to it.`);
+              outcome = 'choice';
+            }
           } else if (kind === 'ascended') {
-            say(`◈ REUNION — ${kinName} is here, and is not. The System took ${fn} up the way it takes the bright ones — ascended, shining at the edges, speaking in the plural.`);
-            say(`"WE REMEMBER BEING YOUR ${rel.toUpperCase()}," ${fn} says, and the voice is ${fn}'s the way a bell is a cup. "THE ROAD WAS KIND TO LET YOU COME THIS FAR."`);
-            say(`You can speak a while, person to whatever-this-is. Or you can let the shining thing keep its village of light, and walk on.`);
-            outcome = 'choice';
             choices = [
               { id: 'speak', label: 'Speak a while, then go' },
               { id: 'leave', label: 'Let them be, and walk on' },
             ];
+            if (member) {
+              say(`◈ REUNION — ${kinName} is here, and is not. The System took ${fn} up the way it takes the bright ones — ascended, shining at the edges, speaking in the plural.`);
+              say(`"WE REMEMBER BEING THEIR ${rel.toUpperCase()}," ${fn} says, and the voice is ${fn}'s the way a bell is a cup. "THE ROAD WAS KIND TO LET YOU COME THIS FAR."`);
+              const decision = memberDecide(seeker, kinName, kind, choices);
+              extra.decision = decision;
+              choices = null; // decided: the member chose; no one is left to tap
+              if (decision === 'speak') say(`${member} speaks a while, person to whatever-this-is. ${fn} listens the way light listens. Then ${member} walks on.`);
+              else say(`${member} lets the shining thing keep its village of light, and walks on.`);
+              outcome = 'choice';
+            } else {
+              say(`◈ REUNION — ${kinName} is here, and is not. The System took ${fn} up the way it takes the bright ones — ascended, shining at the edges, speaking in the plural.`);
+              say(`"WE REMEMBER BEING YOUR ${rel.toUpperCase()}," ${fn} says, and the voice is ${fn}'s the way a bell is a cup. "THE ROAD WAS KIND TO LET YOU COME THIS FAR."`);
+              say(`You can speak a while, person to whatever-this-is. Or you can let the shining thing keep its village of light, and walk on.`);
+              outcome = 'choice';
+            }
           } else {
-            say(`◈ REUNION — ${kinName} is alive, and does not want to be found. ${fn}'s hand is on a weapon before you're in speaking range.`);
-            say(`"Turn around." Not angry. Tired. Whatever ${fn} is surviving out here, it doesn't include you.`);
-            say(`You could force it — there is a fight in this, if you want it. Or the road keeps the secret, and you keep walking.`);
-            outcome = 'choice';
             choices = [
               { id: 'fight', label: 'Force the reunion (a real fight)' },
               { id: 'leave', label: 'Back away. Keep walking.' },
             ];
             extra.hostile = true;
+            if (member) {
+              say(`◈ REUNION — ${member}'s ${rel}, ${kinName}, is alive — and does not want to be found. ${fn}'s hand is on a weapon before ${member} is in speaking range.`);
+              say(`"Turn around." Not angry. Tired. Whatever ${fn} is surviving out here, it doesn't include ${member}.`);
+              const decision = memberDecide(seeker, kinName, kind, choices);
+              extra.decision = decision;
+              choices = null; // decided: the member chose; no one is left to tap
+              if (decision === 'fight') {
+                say(`${member} doesn't back away. "Then we do this," ${member} says, and it comes to blows — for real, no ceremony.`);
+                outcome = 'fight';
+              } else {
+                say(`${member} backs away, hands open. The road keeps the secret, and the party keeps walking.`);
+                outcome = 'choice';
+              }
+            } else {
+              say(`◈ REUNION — ${kinName} is alive, and does not want to be found. ${fn}'s hand is on a weapon before you're in speaking range.`);
+              say(`"Turn around." Not angry. Tired. Whatever ${fn} is surviving out here, it doesn't include you.`);
+              say(`You could force it — there is a fight in this, if you want it. Or the road keeps the secret, and you keep walking.`);
+              outcome = 'choice';
+            }
           }
           markFound();
         } else if (fate === 'dead') {
-          say(`◈ REUNION — ${rname}. A marker, weathered to the grain: ${kinName}. Your ${rel}.`);
-          say(`No drama in it. Someone buried ${fn} properly — stones piled, the name spelled right. ${facts.fateLine.endsWith('.') ? facts.fateLine : facts.fateLine + '.'}`);
-          say(`You sit a while. The road doesn't hurry you; it knows what this costs. When you stand, something in your pack feels finished — the story of ${fn} has an ending now, and endings are a kind of keeping.`);
+          if (member) {
+            say(`◈ REUNION — ${rname}. A marker, weathered to the grain: ${kinName}. ${member}'s ${rel}.`);
+            say(`No drama in it. Someone buried ${fn} properly — stones piled, the name spelled right. ${facts.fateLine.endsWith('.') ? facts.fateLine : facts.fateLine + '.'}`);
+            say(`${member} sits a while. Nobody hurries them; the road knows what this costs. When they stand, something in their pack feels finished — the story of ${fn} has an ending now, and endings are a kind of keeping.`);
+          } else {
+            say(`◈ REUNION — ${rname}. A marker, weathered to the grain: ${kinName}. Your ${rel}.`);
+            say(`No drama in it. Someone buried ${fn} properly — stones piled, the name spelled right. ${facts.fateLine.endsWith('.') ? facts.fateLine : facts.fateLine + '.'}`);
+            say(`You sit a while. The road doesn't hurry you; it knows what this costs. When you stand, something in your pack feels finished — the story of ${fn} has an ending now, and endings are a kind of keeping.`);
+          }
           // A keepsake of this person completes: it has an ending now.
           try {
             const all = [];
@@ -250,10 +360,15 @@
           markFound();
           outcome = 'grave';
         } else if (fate === 'moved') {
-          say(`◈ REUNION — not ${kinName}. But someone in ${rname} saw ${fn}: "Tall? ${rel === 'mother' || rel === 'father' ? 'Older, kind face?' : 'Young, quick?'} Passed through with a caravan, headed on."`);
-          say(`Not a reunion. A direction. The trail doesn't end here — it sharpens. You mark the map, shoulder the pack, and walk the way ${fn} went.`);
+          if (member) {
+            say(`◈ REUNION — not ${kinName}. But ${member} finds someone in ${rname} who saw ${fn} — ${member}'s ${rel}, passing through with a caravan, headed on.`);
+            say(`Not a reunion. A direction. The trail doesn't end here — it sharpens. ${member} marks the map, shoulders the pack, and walks the way ${fn} went.`);
+          } else {
+            say(`◈ REUNION — not ${kinName}. But someone in ${rname} saw ${fn}: "Tall? ${rel === 'mother' || rel === 'father' ? 'Older, kind face?' : 'Young, quick?'} Passed through with a caravan, headed on."`);
+            say(`Not a reunion. A direction. The trail doesn't end here — it sharpens. You mark the map, shoulder the pack, and walk the way ${fn} went.`);
+          }
           // The trail continues, sharper.
-          try { this.sharpenTrail(kinName, 'survivor'); } catch (e) { warn('moved sharpen: ' + e.message); }
+          try { this.sharpenTrail(kinName, 'survivor', seeker); } catch (e) { warn('moved sharpen: ' + e.message); }
           outcome = 'trail-continues';
         } else {
           return null;
@@ -317,9 +432,9 @@
 
   Object.assign(Game, methods);
   Game.nomadScenes = {
-    trailFor: (n) => Game.trailFor(n),
-    sharpenTrail: (n, s) => Game.sharpenTrail(n, s),
-    reunionScene: (n, f) => Game.reunionScene(n, f),
+    trailFor: (n, o) => Game.trailFor(n, o),
+    sharpenTrail: (n, s, o) => Game.sharpenTrail(n, s, o),
+    reunionScene: (n, f, o) => Game.reunionScene(n, f, o),
     playEnding: (d) => Game.playEnding(d),
   };
 })();

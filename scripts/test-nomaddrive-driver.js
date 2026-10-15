@@ -33,8 +33,25 @@ async function main() {
   console.log('== departure planning ==');
   const { road, kin } = startRoad(Game, 2);
   ok(kin.length >= 1, 'has scattered kin (' + kin.length + ' known)');
-  const legs = road.legs.filter(l => l.kinName);
-  ok(legs.length === kin.length, `itinerary planned: ${legs.length} legs for ${kin.length} known kin`);
+  const legNames = (l) => (l.kinNames && l.kinNames.length ? l.kinNames : (l.kinName ? [l.kinName] : []));
+  // The bearer's own kin each get a leg (owner null).
+  for (const k of kin) {
+    ok(road.legs.some(l => legNames(l).indexOf(k.name) >= 0 && !(l.kinOwners || {})[k.name]),
+      'itinerary has a leg for bearer kin ' + k.name);
+  }
+  // Party members' known-region kin get legs too, tagged with the seeker.
+  let partyKinLegs = 0;
+  for (const pid of road.partyIds) {
+    if (pid === Game.villagerId || String(pid).indexOf('kin:') === 0) continue;
+    for (const k of Game.worldKin(pid).filter(k => k.fate === 'scattered' && !k.found && k.region)) {
+      const known = (((Game.state.world || {}).regions || {})[k.region] || {}).known;
+      if (!known) continue;
+      partyKinLegs++;
+      ok(road.legs.some(l => legNames(l).indexOf(k.name) >= 0 && (l.kinOwners || {})[k.name] === pid),
+        `itinerary has a leg for party kin ${k.name} (seeker ${pid})`);
+    }
+  }
+  console.log(`  INFO: ${partyKinLegs} party-kin legs planned at departure`);
 
   console.log('== fate determinism ==');
   const f1 = D.fateFor('Test Person', 0), f2 = D.fateFor('Test Person', 0);

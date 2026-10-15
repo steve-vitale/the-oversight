@@ -5,9 +5,14 @@
 //   - Game.nomadDrive (hooks wrap nomad.start/enterLeg/daily and Game.playerDeath, guarded wrap-once)
 //   - planLegs()
 //   - syncItinerary()
+//   - scatteredKinOf(vid)
+//   - partySeekers()
+//   - releaseGoneSeekers()
 //   - fateFor()
 //   - maybeReunion()
 //   - resolveReunion()
+//   - joinCompanion()
+//   - fightKin()
 //   - moveKinOn()
 //   - checkAllFound()
 //   - leaveTap()
@@ -15,16 +20,21 @@
 //   - settleTap()
 // rules:
 //   - itinerary: departure plans one leg per living scattered kin whose region is known; newly sharpened trails join by daily sync (code: planLegs, syncItinerary)
+//   - party_kin_legs: the itinerary plans legs for every party villager's known-region scattered kin, not just the bearer's; legs carry kinOwners (kin name -> seeking villager id, null for the bearer's own) (code: planLegs, syncItinerary, scatteredKinOf, partySeekers)
 //   - reunion_timing: one reunion per leg per day after 3+ days living there; never a prompt (code: maybeReunion)
-//   - deterministic_fate: fate = hash(kinName + worldSeed + moves), alive .5 / changed .2 / dead .15 / moved .15; moved excluded after 2 moves (code: fateFor)
+//   - deterministic_fate: fate = hash(kinName + worldSeed + moves), alive .5 / changed .2 / dead .15 / moved .15; moved excluded after 2 moves; party members' kin salt the hash with the seeker's id, the bearer's formula unchanged (code: fateFor)
+//   - member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: resolveReunion; nomad-scenes.js reunionScene/memberDecide)
+//   - hostile_fight: a hostile party-kin reunion the member won't walk away from is a real blow-by-blow fieldFight, seeker vs kin — never an outcome table (code: fightKin)
+//   - seeker_gone: a dead or departed seeker's pending kin release; released kin close their legs but never block all-found (code: releaseGoneSeekers)
 //   - moved_on: the kin relocates to a new deterministic region (never the leg's, never the landing); the trail resets to vague (code: moveKinOn)
 //   - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
-//   - all_found: every scattered kin resolved alive/changed/dead closes the road all-found (code: checkAllFound)
+//   - all_found: every scattered kin of every living party villager resolved alive/changed/dead closes the road all-found; kin whose region was never learned don't block it (code: checkAllFound)
 //   - two_tap: leaving and settling are irrevocable: first tap says the cost, second commits; tap-state only, never saved (code: leaveTap, settleTap)
 // consumes:
 //   - Game.nomad start/addLeg/enterLeg/departLeg/daily/endRoad/markKinFound/party/onRoad/canLeave, state.road (nomad.js)
 //   - Game.nomadScenes reunionScene/sharpenTrail (nomad-scenes.js, guarded)
 //   - Game.nomadWild travelEvent (nomad-wild.js, guarded)
+//   - Game.fieldFight (game.js, guarded; hostile party-kin reunions)
 //   - Game.worldKin(), Game.state.world, Game.map.worldSeed, Game.data.regions
 (function () {
   'use strict';
@@ -53,11 +63,40 @@
     for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
     return h >>> 0;
   }
-  function livingScatteredKin() {
+  // scatteredKinOf(vid): living scattered kin for any villager — the bearer
+  // or a party member. Party members volunteered because they have
+  // scattered kin of their own (nomad.js nomadMuster); their trails become
+  // legs too (party_kin_legs).
+  function scatteredKinOf(vid) {
     try {
-      const kin = typeof Game.worldKin === 'function' ? Game.worldKin(Game.villagerId) : [];
+      const kin = typeof Game.worldKin === 'function' ? Game.worldKin(vid) : [];
       return kin.filter(k => k.fate === 'scattered' && !k.found);
     } catch (e) { return []; }
+  }
+  // partySeekers(): villager ids on the road (bearer and volunteers),
+  // minus joined-kin companions ('kin:' ids have no kin entries of their own).
+  function partySeekerIds() {
+    const r = road();
+    if (!r) return [];
+    return (r.partyIds || []).filter(id => String(id || '').indexOf('kin:') !== 0);
+  }
+  // legOwner(leg, name): the villager seeking this kin, or null for the
+  // bearer's own (legs planned before kinOwners existed read as the bearer's).
+  function legOwner(leg, name) {
+    const o = leg && leg.kinOwners ? leg.kinOwners[name] : null;
+    return o || null;
+  }
+  // seekerName(id): third-person name for member-perspective narration.
+  function seekerName(id) {
+    try {
+      const rc = ((Game.state.village || {}).rosterChars || {})[id];
+      if (rc && rc.name) return rc.name;
+    } catch (e) {}
+    try {
+      const d = (Game.data.villagers || []).find(x => x.id === id);
+      if (d && d.name) return d.name;
+    } catch (e) {}
+    return 'a companion';
   }
   function regionKnown(id) {
     try { return !!(((Game.state || {}).world || {}).regions || {})[id].known; }
@@ -70,14 +109,23 @@
   }
 
   const drive = {
+    // scatteredKinOf(vid): living scattered kin for any villager.
+    scatteredKinOf(vid) { return scatteredKinOf(vid); },
+    // partySeekers(): villager ids on the road who can have kin legs.
+    partySeekers() { return partySeekerIds(); },
+
     // planLegs(): the departure itinerary — one leg per living scattered kin
-    // whose region is known. Called once, wrapped around nomad.start().
+    // whose region is known, for the bearer AND every party villager.
+    // Called once, wrapped around nomad.start().
     planLegs() {
       const N = Game.nomad;
       if (!N || !N.onRoad()) return 0;
       let n = 0;
-      for (const k of livingScatteredKin()) {
-        if (k.region && regionKnown(k.region) && N.addLeg(k.region, k.name)) n++;
+      for (const vid of partySeekerIds()) {
+        const owner = vid === Game.villagerId ? null : vid;
+        for (const k of scatteredKinOf(vid)) {
+          if (k.region && regionKnown(k.region) && N.addLeg(k.region, k.name, owner)) n++;
+        }
       }
       return n;
     },
@@ -88,25 +136,66 @@
       const N = Game.nomad, r = road();
       if (!N || !r || !r.active) return 0;
       let n = 0;
-      for (const k of livingScatteredKin()) {
-        if (!k.region || !regionKnown(k.region)) continue;
-        if (r.legs.some(l => l.status !== 'done' &&
-            ((l.kinNames || []).indexOf(k.name) >= 0 || l.kinName === k.name))) continue;
-        if (N.addLeg(k.region, k.name)) {
-          n++;
-          let rname = k.region;
-          try { const d = Game.regionDef(k.region); rname = (d && d.name) || k.region; } catch (e) {}
-          say(`The trail points to ${rname}. You mark it on the itinerary.`);
+      for (const vid of partySeekerIds()) {
+        const owner = vid === Game.villagerId ? null : vid;
+        for (const k of scatteredKinOf(vid)) {
+          if (!k.region || !regionKnown(k.region)) continue;
+          if (r.legs.some(l => l.status !== 'done' &&
+              ((l.kinNames || []).indexOf(k.name) >= 0 || l.kinName === k.name) &&
+              legOwner(l, k.name) === owner)) continue;
+          if (N.addLeg(k.region, k.name, owner)) {
+            n++;
+            let rname = k.region;
+            try { const d = Game.regionDef(k.region); rname = (d && d.name) || k.region; } catch (e) {}
+            if (owner) say(`${seekerName(owner)}'s trail points to ${rname}. It goes on the itinerary.`);
+            else say(`The trail points to ${rname}. You mark it on the itinerary.`);
+          }
         }
       }
       return n;
     },
 
-    // fateFor(name, moves): deterministic reunion fate. Weighted alive .5 /
-    // changed .2 / dead .15 / moved .15; 'moved' excluded after MAX_MOVES.
-    fateFor(name, moves) {
+    // releaseGoneSeekers(): a seeker who died or walked away (stayed with a
+    // found kin's village) can't be reunited with their other kin. Their
+    // pending kin release — the trail goes with them — so legs can close and
+    // the road never waits on the dead. Runs inside the daily tick.
+    releaseGoneSeekers() {
+      const r = road();
+      if (!r || !r.active) return 0;
+      const seekers = {};
+      for (const id of partySeekerIds()) seekers[id] = true;
+      let n = 0;
+      for (const l of r.legs) {
+        const names = l.kinNames && l.kinNames.length ? l.kinNames
+          : (l.kinName ? [l.kinName] : []);
+        l.resolvedKin = l.resolvedKin || {};
+        for (const nm of names) {
+          if (l.resolvedKin[nm]) continue;
+          const owner = legOwner(l, nm);
+          if (owner && !seekers[owner]) {
+            l.resolvedKin[nm] = 'released';
+            n++;
+            say(`No one walks ${seekerName(owner)}'s trail now. It goes quiet with them.`);
+          }
+        }
+        if (names.length && names.every(x => l.resolvedKin[x]) && l.status !== 'done') {
+          l.status = 'done';
+          l.resolved = l.resolvedKin[names[names.length - 1]] || 'released';
+        }
+      }
+      return n;
+    },
+
+    // fateFor(name, moves, ownerId): deterministic reunion fate. Weighted
+    // alive .5 / changed .2 / dead .15 / moved .15; 'moved' excluded after
+    // MAX_MOVES. A party member's kin salts the hash with the seeker's id so
+    // two seekers' kin never shadow each other on the same seed; the
+    // bearer's formula is byte-identical to before.
+    fateFor(name, moves, ownerId) {
       const mv = moves || 0;
-      const roll = (hashStr('reunion|' + worldSeed() + '|' + name + '|' + mv) % 1000) / 1000;
+      const salt = (ownerId ? 'reunion|' + worldSeed() + '|' + ownerId + '|' + name + '|' + mv
+                           : 'reunion|' + worldSeed() + '|' + name + '|' + mv);
+      const roll = (hashStr(salt) % 1000) / 1000;
       if (mv >= MAX_MOVES) return roll < 0.625 ? 'alive' : roll < 0.825 ? 'changed' : 'dead';
       if (roll < 0.5) return 'alive';
       if (roll < 0.7) return 'changed';
@@ -133,47 +222,76 @@
     },
 
     // resolveReunion(leg, name): play the scene, apply the outcome, record it.
+    // Whose reunion this is comes from the leg's kinOwners: a party
+    // villager's id means THEIR reunion (third person, their voice, their
+    // decisions — member_perspective); null — or a seeker who became the
+    // bearer mid-road — means the bearer's own.
     resolveReunion(leg, name) {
       const N = Game.nomad, r = road();
       if (!N || !r || !leg || !name) return null;
       leg.resolvedKin = leg.resolvedKin || {};
+      const storedOwner = legOwner(leg, name);
+      const seeker = (storedOwner && storedOwner !== Game.villagerId) ? storedOwner : null;
+      const sname = seeker ? seekerName(seeker) : null;
       const moves = (leg.moves && leg.moves[name]) || 0;
-      const fate = this.fateFor(name, moves);
+      const fate = this.fateFor(name, moves, seeker);
       let scene = null;
       try {
         if (Game.nomadScenes && typeof Game.nomadScenes.reunionScene === 'function') {
-          scene = Game.nomadScenes.reunionScene(name, fate);
+          scene = Game.nomadScenes.reunionScene(name, fate, seeker);
         }
       } catch (e) {}
       const outcome = (scene && scene.outcome) ||
         (fate === 'alive' ? 'joined' : fate === 'dead' ? 'grave' : fate === 'moved' ? 'trail-continues' : 'choice');
-      const kin = livingScatteredKin().find(k => k.name === name) || {};
+      const kin = scatteredKinOf(seeker || Game.villagerId).find(k => k.name === name) || {};
       const relation = kin.relation || null;
 
       if (outcome === 'joined') {
-        // The kin walks with the party — as a companion, not a villager.
-        const party = N.party ? N.party() : [];
-        if (party.length < 4) {
-          const cid = 'kin:' + String(name).replace(/[^a-zA-Z0-9]+/g, '_');
-          r.companions = r.companions || {};
-          if (!r.companions[cid]) r.companions[cid] = { name, relation };
-          if (r.partyIds.indexOf(cid) < 0) r.partyIds.push(cid);
-          say(`${name} shoulders a pack. Four mouths, four pairs of eyes.`);
-        } else {
-          say(`There's no room in the party's packs for another mouth — ${name} walks alongside anyway, sharing fire but not stores.`);
+        if (this.joinCompanion(name, relation)) {
+          if (seeker) say(`${name} shoulders a pack, and falls in beside ${sname}.`);
+          else say(`${name} shoulders a pack. Four mouths, four pairs of eyes.`);
         }
-        N.markKinFound(name, relation, 'alive');
+        N.markKinFound(name, relation, 'alive', seeker);
         leg.resolvedKin[name] = 'alive';
       } else if (outcome === 'grave') {
-        N.markKinFound(name, relation, 'dead');
+        N.markKinFound(name, relation, 'dead', seeker);
         leg.resolvedKin[name] = 'dead';
       } else if (outcome === 'choice') {
-        // Changed: the scene said the situation honestly. The choice UI is a
-        // later pass; the road default is to let them be and walk on.
-        N.markKinFound(name, relation, 'changed');
+        // Changed: the scene said the situation honestly. The member already
+        // made their call inside the scene; the bearer's own choice UI is a
+        // separate pass — the road default is to let them be and walk on.
+        N.markKinFound(name, relation, 'changed', seeker);
         leg.resolvedKin[name] = 'changed';
+      } else if (outcome === 'stayed') {
+        // The seeker stays with their kin's village. They leave the party;
+        // their other pending kin release on the next daily reconcile.
+        N.markKinFound(name, relation, 'changed', seeker);
+        leg.resolvedKin[name] = 'changed';
+        if (seeker) {
+          const ix = r.partyIds.indexOf(seeker);
+          if (ix >= 0) r.partyIds.splice(ix, 1);
+          log(`${sname} stayed with ${name}'s village; the party walks on without them.`);
+          say(`The party is one smaller. The road doesn't comment; it just keeps going.`);
+        }
+      } else if (outcome === 'fight') {
+        // The member wouldn't walk away: a real fight, seeker vs kin.
+        const result = this.fightKin(seeker, name);
+        if (result === 'won') {
+          say(`${name} yields — beaten, breathing, done fighting. ${sname} doesn't celebrate. The road gave them back, but not the way anyone wanted.`);
+          this.joinCompanion(name, relation);
+          N.markKinFound(name, relation, 'changed', seeker);
+          leg.resolvedKin[name] = 'changed';
+        } else if (result === 'lost') {
+          say(`${sname} is still breathing. ${name} is gone. Some reunions end with the road keeping its secret.`);
+          N.markKinFound(name, relation, 'changed', seeker);
+          leg.resolvedKin[name] = 'changed';
+        } else {
+          say(`${sname} thinks better of it — some fights aren't worth starting. The party walks on.`);
+          N.markKinFound(name, relation, 'changed', seeker);
+          leg.resolvedKin[name] = 'changed';
+        }
       } else if (outcome === 'trail-continues') {
-        this.moveKinOn(name, leg);
+        this.moveKinOn(name, leg, seeker);
         leg.resolvedKin[name] = 'moved';
       } else {
         leg.resolvedKin[name] = fate;
@@ -189,18 +307,56 @@
       return { fate, outcome };
     },
 
-    // moveKinOn(name, leg): the kin moved on. They relocate to a new
+    // joinCompanion(name, relation): the found kin walks with the party as a
+    // companion ('kin:' id) — eats and dies like anyone, never bears the Codex.
+    joinCompanion(name, relation) {
+      const N = Game.nomad, r = road();
+      if (!N || !r) return false;
+      const party = N.party ? N.party() : [];
+      if (party.length >= 4) {
+        say(`There's no room in the party's packs for another mouth — ${name} walks alongside anyway, sharing fire but not stores.`);
+        return false;
+      }
+      const cid = 'kin:' + String(name).replace(/[^a-zA-Z0-9]+/g, '_');
+      r.companions = r.companions || {};
+      if (!r.companions[cid]) r.companions[cid] = { name, relation };
+      if (r.partyIds.indexOf(cid) < 0) r.partyIds.push(cid);
+      return true;
+    },
+
+    // fightKin(seekerId, name): a hostile party-kin reunion come to blows.
+    // A real blow-by-blow fight through fieldFight (the road's honest path
+    // — nomad-wild.fightVillage uses the same call shape), seeker vs kin,
+    // never an outcome table. Returns 'won' | 'lost' | 'no-fight'.
+    fightKin(seekerId, name) {
+      const G = Game;
+      if (!seekerId || typeof G.fieldFight !== 'function') return 'no-fight';
+      const mdef = { id: 'kin_fighter', name: name, hp: 60, maxHp: 60, wave: 1 };
+      const m = { id: 'kin_fighter_road', hp: 60, maxHp: 60 };
+      let rec = null;
+      try {
+        rec = G.fieldFight(seekerId, mdef, m, {});
+      } catch (e) { return 'no-fight'; }
+      return (rec && (rec.won || rec.victory)) ? 'won' : 'lost';
+    },
+
+    // moveKinOn(name, leg, ownerId): the kin moved on. They relocate to a new
     // deterministic region (never this leg's, never the landing); the trail
-    // resets to vague and must be re-sharpened; the itinerary syncs when it is.
-    moveKinOn(name, leg) {
+    // resets to vague and must be re-sharpened; the itinerary syncs when it
+    // is. A party member's kin salts the relocation with the seeker's id and
+    // narrows the world entry to their kin; the bearer's formula is unchanged.
+    moveKinOn(name, leg, ownerId) {
       const pool = regionPool().filter(id => id !== leg.regionId);
       if (!pool.length) return false;
       leg.moves = leg.moves || {};
       const moves = (leg.moves[name] || 0) + 1;
-      const pick = pool[hashStr('moved|' + worldSeed() + '|' + name + '|' + moves) % pool.length];
+      const salt = ownerId ? 'moved|' + worldSeed() + '|' + ownerId + '|' + name + '|' + moves
+                          : 'moved|' + worldSeed() + '|' + name + '|' + moves;
+      const pick = pool[hashStr(salt) % pool.length];
       try {
         const st = Game.state;
-        const entry = ((st.world || {}).kin || []).find(k => k.name === name && k.fate === 'scattered');
+        const entry = ((st.world || {}).kin || []).find(k => k.name === name && k.fate === 'scattered' &&
+          (!ownerId || k.owner === ownerId));
         if (entry) entry.region = pick;
         // The trail goes vague again: what you knew was the old place.
         const ns = st.nomadScenes;
@@ -213,26 +369,36 @@
       return true;
     },
 
-    // checkAllFound(): every scattered kin resolved alive/changed/dead
-    // (moved-on kin resolve when a later leg catches them) closes the road
-    // 'all-found'. Kin whose region was never learned don't block it — the
-    // player can always choose to settle.
+    // checkAllFound(): every scattered kin of every living party villager —
+    // bearer and volunteers alike — resolved alive/changed/dead closes the
+    // road 'all-found' ("every scattered kin resolved" is the cleanest
+    // rule). Moved-on kin resolve when a later leg catches them. Kin whose
+    // region was never learned don't block it — the road can only walk
+    // trails it has; settling is always available.
     checkAllFound() {
       const N = Game.nomad, r = road();
       if (!N || !r || !r.active) return false;
-      let all = [];
-      try {
-        const kin = typeof Game.worldKin === 'function' ? Game.worldKin(Game.villagerId) : [];
-        all = kin.filter(k => k.fate === 'scattered');
-      } catch (e) {}
+      const all = [];
+      for (const vid of partySeekerIds()) {
+        const owner = vid === Game.villagerId ? null : vid;
+        for (const k of scatteredKinOf(vid)) all.push({ kin: k, owner });
+      }
       if (!all.length) return false;
       const resolved = {};
       for (const l of r.legs) {
         const rk = l.resolvedKin || {};
-        for (const n of Object.keys(rk)) if (rk[n] !== 'moved') resolved[n] = true;
-        if (l.kinName && l.resolved && l.resolved !== 'moved') resolved[l.kinName] = true;
+        for (const n of Object.keys(rk)) {
+          if (rk[n] !== 'moved') resolved[n + '|' + (legOwner(l, n) || '')] = true;
+        }
+        if (l.kinName && l.resolved && l.resolved !== 'moved') {
+          resolved[l.kinName + '|' + (legOwner(l, l.kinName) || '')] = true;
+        }
       }
-      const pending = all.filter(k => !resolved[k.name]);
+      const pending = all.filter(({ kin, owner }) => {
+        if (resolved[kin.name + '|' + (owner || '')]) return false;
+        if (!kin.region || !regionKnown(kin.region)) return false;
+        return true;
+      });
       if (!pending.length) {
         N.endRoad('all-found');
         return true;
@@ -338,6 +504,7 @@
         try {
           if (rep) {
             drive.syncItinerary();
+            drive.releaseGoneSeekers();
             drive.maybeReunion();
           }
         } catch (e) {}
