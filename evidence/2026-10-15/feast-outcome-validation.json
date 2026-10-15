@@ -1,0 +1,246 @@
+{
+  "beforeCommit": "ddfbd5d0a43b54188881cbc88510567162af096c",
+  "afterRuntimeCommit": "f8e633c5ad35b7b31d8ea10dce05beca44fefb67",
+  "afterCheckoutCommit": "d08f353a04af39652a9d5eecf9c611048fdeacd8",
+  "cases": [
+    {
+      "policy": "capable",
+      "seed": 5,
+      "firstFeastDay": 27,
+      "beforeReserve": 2353,
+      "afterReserve": 2400,
+      "firstGain": 47,
+      "firstDailyDifferenceIndex": 50,
+      "allEarlierDailyHashesMatch": true,
+      "matrixRowsAndFinalHashesMatchAllFourRuns": true,
+      "beforeEntered": 1,
+      "afterEntered": 0,
+      "firstActionCountDifference": {
+        "day": 72,
+        "actions": {
+          "policy:eat": {
+            "before": 11,
+            "after": 10
+          },
+          "policy:takeFromPantry": {
+            "before": 10,
+            "after": 9
+          }
+        }
+      },
+      "firstCombatDeathTableEventDifference": {
+        "index": 37,
+        "before": {
+          "type": "death",
+          "day": 83,
+          "data": {
+            "kind": "villager",
+            "who": "gen_q1mu4n0",
+            "cause": "the night",
+            "wave": null,
+            "player": true
+          }
+        },
+        "after": {
+          "type": "combat_start",
+          "day": 83,
+          "data": {
+            "vs": "hummice",
+            "wave": 1,
+            "pack": 4,
+            "php": 8,
+            "maxhp": 100
+          }
+        }
+      }
+    },
+    {
+      "policy": "maker",
+      "seed": 555,
+      "firstFeastDay": 27,
+      "beforeReserve": 2381,
+      "afterReserve": 2400,
+      "firstGain": 19,
+      "firstDailyDifferenceIndex": 50,
+      "allEarlierDailyHashesMatch": true,
+      "matrixRowsAndFinalHashesMatchAllFourRuns": true,
+      "beforeEntered": 1,
+      "afterEntered": 0,
+      "firstActionCountDifference": {
+        "day": 65,
+        "actions": {
+          "policy:eat": {
+            "before": 2,
+            "after": 1
+          }
+        }
+      },
+      "firstCombatDeathTableEventDifference": {
+        "index": 19,
+        "before": {
+          "type": "combat_end",
+          "day": 68,
+          "data": {
+            "result": "fled",
+            "php": 96
+          }
+        },
+        "after": {
+          "type": "death",
+          "day": 66,
+          "data": {
+            "kind": "monster",
+            "who": "mirrormoth",
+            "cause": "villager combat",
+            "wave": 1,
+            "player": false
+          }
+        }
+      }
+    },
+    {
+      "policy": "merchant",
+      "seed": 42,
+      "firstFeastDay": 34,
+      "beforeReserve": 2377,
+      "afterReserve": 2400,
+      "firstGain": 23,
+      "firstDailyDifferenceIndex": 64,
+      "allEarlierDailyHashesMatch": true,
+      "matrixRowsAndFinalHashesMatchAllFourRuns": true,
+      "beforeEntered": 1,
+      "afterEntered": 0,
+      "firstActionCountDifference": {
+        "day": 91,
+        "actions": {
+          "policy:eat": {
+            "before": 7,
+            "after": 6
+          },
+          "policy:takeFromPantry": {
+            "before": 6,
+            "after": 5
+          }
+        }
+      },
+      "firstCombatDeathTableEventDifference": {
+        "index": 18,
+        "before": {
+          "type": "death",
+          "day": 107,
+          "data": {
+            "kind": "monster",
+            "who": "hushwolf",
+            "cause": "villager combat",
+            "wave": 1,
+            "player": false
+          }
+        },
+        "after": {
+          "type": "death",
+          "day": 103,
+          "data": {
+            "kind": "villager",
+            "who": "ruby_callaghan",
+            "cause": "monster",
+            "wave": null,
+            "player": false
+          }
+        }
+      }
+    },
+    {
+      "policy": "caregiver",
+      "seed": 2026,
+      "firstFeastDay": 27,
+      "beforeReserve": 2345,
+      "afterReserve": 2400,
+      "firstGain": 55,
+      "firstDailyDifferenceIndex": 50,
+      "allEarlierDailyHashesMatch": true,
+      "matrixRowsAndFinalHashesMatchAllFourRuns": true,
+      "beforeEntered": 1,
+      "afterEntered": 0,
+      "firstActionCountDifference": {
+        "day": 69,
+        "actions": {
+          "policy:eat": {
+            "before": 35,
+            "after": 14
+          },
+          "policy:takeFromPantry": {
+            "before": 33,
+            "after": 13
+          }
+        }
+      },
+      "firstCombatDeathTableEventDifference": {
+        "index": 50,
+        "before": {
+          "type": "death",
+          "day": 106,
+          "data": {
+            "kind": "monster",
+            "who": "voice_mimic_radio",
+            "cause": "villager combat",
+            "wave": 2,
+            "player": false
+          }
+        },
+        "after": {
+          "type": "death",
+          "day": 101,
+          "data": {
+            "kind": "villager",
+            "who": "sofia_chen",
+            "cause": "monster",
+            "wave": null,
+            "player": false
+          }
+        }
+      }
+    }
+  ],
+  "campaigns": 16,
+  "observerNeutralPairs": 8,
+  "matrixRowAndHashMatches": 16,
+  "stateHashExclusions": [
+    "pacing.lastTs",
+    "pacing.dayMinutes",
+    "pacing.totalMin"
+  ],
+  "warnings": 0,
+  "rawSha256": "a66ddf3d47884b8b7ac77f32558eebf07f53e1ad58813d43dee0f39b354b89dc",
+  "gzipSha256": "4a045982cf481b566143485cd294eec7eddd0df1316f93775de67c9acd97e423",
+  "rawBytes": 5349548,
+  "gzipBytes": 275132,
+  "probeSha256": "5fc004b083f533b1d41295c77e35f14a8a6c53ead8ff8566d7e30a6f99c6791c",
+  "sources": {
+    "before": {
+      "src/js/game.js": "babecd05dd82ca4d63ee62ac021dca59b7a78c08d127231c0d3b89f84fb4061f",
+      "scripts/policies/competent.js": "56e8681a1e4c8d2d76ed835c0a2ba490bc71335a34b1e6e156dddf1cdc92270d",
+      "scripts/policies/capable.js": "923666189252b394b8f9886c561015f9884e185612e5cfb24a031f4149eb62c5",
+      "scripts/policies/livelihood.js": "4372606766b92da0091c5452cd105a404a7b007ad92e8171886a242af7cb60e5",
+      "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+      "scripts/sweep-compare.js": "60bc7d9a0c22b90f77a123aac6cfe8f92a291e31788cdfa3da18889aaacbebe8"
+    },
+    "after": {
+      "src/js/game.js": "876c6341615ee9ba640018857c00b4fddada821b33920e4f4cae440919961f53",
+      "scripts/policies/competent.js": "9bfeef329e7cc6a2022d1763109abf031f5684a4c75796096fc78e9e1c60ce48",
+      "scripts/policies/capable.js": "923666189252b394b8f9886c561015f9884e185612e5cfb24a031f4149eb62c5",
+      "scripts/policies/livelihood.js": "79a4a3548f5a756ccc9e260df19c6995efed704512bd9eb9c949414e8b98449f",
+      "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+      "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773"
+    }
+  },
+  "verification": {
+    "quick": 152,
+    "quickSeconds": 32,
+    "full": 924,
+    "fullSeconds": 130
+  },
+  "logHashes": {
+    "feast-outcome-quick.txt": "8b0053ecb2f922cf56acc782b99fc5cc85c0b4cc38a7b963ef8b2dc6c93001bf",
+    "feast-outcome-full.txt": "a6686ca0454300d299aeed9e2e4974d856d1d91c636b490b304ec365c87360e2"
+  }
+}

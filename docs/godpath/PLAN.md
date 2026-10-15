@@ -52,10 +52,14 @@ Job -> track -> **class** -> **god** -> Table.
    and feasts, with source-preserving ration returns and supplemental crops.
    Runtime 37/37 and full 923/923 pass. All 256 standard results and prior
    observer fields still match; 987 daily paired states match after removing
-   only source/intake metadata. Phone feast proves an existing host-food gap:
-   pantry 20,000 -> 15,000, reserve stays 1,000/2,400 despite the host eating.
-   Repair that gap, then settle actual whole-village day coverage and the
-   seven-day deed. See `evidence/2026-10-15/harvest-intake-audit.md`.
+   only source/intake metadata. The phone-proven host-food gap is repaired:
+   pantry 20,000 -> 15,000 now gives the host 416.67 kcal, clipped to reserve
+   capacity. Full 924/924. The 256-run balance panel worsens 124 -> 114 wins;
+   four lost-win traces reproduce all matrix rows/hashes with eight neutral
+   observer pairs. First gains are positive, later food actions and succession
+   diverge; no immediate serving, price or armed-buff defect in those cases.
+   Whole-village daily coverage and the seven-day deed remain next. See
+   `evidence/2026-10-15/feast-outcome-audit.md` and `feast-host-audit.md`.
    See `evidence/2026-10-15/harvest-source-audit.md` and the earlier
    `garden-provenance-audit.md`.
 2. **Finish the parity audit.** Ten god verbs now have player/villager callers

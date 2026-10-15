@@ -336,7 +336,11 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   1,000 -> 1,416.67 from the paid 5,000/12-kcal serving. Runtime proof 15/15,
   full 924/924. Matched 256 campaigns worsen 124 -> 114 wins and
   229 -> 256 deaths; retain that needs-eyes result, not a viability claim.
-  Settle whole-village coverage and investigate paired ending losses next.
+  Four lost-win traces now reproduce matrix rows/hashes with eight neutral
+  observer pairs. First gains are positive 19-55 kcal; later food actions,
+  fights and succession diverge. No immediate serving/buff/price defect in
+  those cases; broad negative result stays. Settle whole-village coverage
+  next. See `evidence/2026-10-15/feast-outcome-audit.md`.
   See `evidence/2026-10-15/feast-host-audit.md` and the prior intake audit.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
