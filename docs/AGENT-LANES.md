@@ -49,3 +49,9 @@ branch before applying. Tests/evidence make the issue and contract portable.
 The two Europe datasets are alternatives requiring deliberate reconciliation,
 not two sequential content upgrades. The branch is shared for review and
 integration; it does not deploy or change main.
+
+Validation exception: Codex also fixes the confirmed fireside false-teaching
+presence leak in game.js. Absent players were learning or contesting a
+lesson they could not hear. This is a narrow knowledge/parity correction,
+not region/nomad authoring; the targeted proof covers absent and present
+novice/expert cases while preserving NPC false-knowledge spread.

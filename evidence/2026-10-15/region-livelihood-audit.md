@@ -170,3 +170,27 @@ leak: the false-teaching branch called wrongTeaching for the player even
 when absent. This is fixed and independently proved in a separate follow-up
 commit. All matrices and their conclusions above describe the pre-presence-
 fix source, exactly as their hashes record; do not attribute them to that fix.
+
+## Final presence correction and publish check
+
+The false lesson now calls the player's wrongTeaching path only when the
+player is present; while absent it still detects and propagates the
+teacher's false claim among villagers. A deterministic shared-kit proof
+forces the real mistaken teacher: **3 pass / 3 fail** before correction,
+**6/6** after. It covers absent novice, absent expert, silence for absent
+listeners, village propagation, present novice belief and present expert
+contestation. Original drifter-presence proof: **18/18**. This narrow
+engine exception is recorded in AGENT-LANES before the edit.
+
+Final verification: **135 quick scripts pass; 907 full scripts pass, zero
+failures**, 146 seconds. No quarantine and no assertion removed to hide a
+failure. [Final full log](region-livelihood-final-check.log) and the earlier
+three failed full logs are retained alongside this note. `git diff --check`
+is clean. The regional matrices above predate this separate presence fix
+and are not claimed as post-fix balance measurements.
+
+Steve explicitly authorized publishing for Muse. The named branch is
+`codex/resume-claude`; shared lane note was first pushed at 0753912c.
+Follow-up commits carry the trap audit and the presence correction. No
+merge into Muse's content branch, no master/main release. The full goal
+remains active, with Codex returning to godpath runtime/balance work.

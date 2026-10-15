@@ -16814,7 +16814,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // wrongTeaching beat (contested if they know better); villagers who
       // don't know better learn it wrong.
       try {
-        const wt = this.wrongTeaching(entry.discoveredBy, pid, 'fireside');
+        // The village can spread a false name while you are away, but
+        // only listeners acquire belief or a contested codex claim.
+        const wt = present ? this.wrongTeaching(entry.discoveredBy, pid, 'fireside')
+          : ((this.villagerWrongAbout(entry.discoveredBy) || {})[pid] ? 'taught-wrong' : null);
         if (wt) {
           // BAD GOSSIP made real (break-it 2026-10-08): the learners don't
           // just learn the plant — they learn the WRONG NAME. Record it in

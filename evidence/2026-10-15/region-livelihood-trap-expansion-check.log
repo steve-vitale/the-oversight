@@ -1,0 +1,20 @@
+check.js: 906 scripts, 8 parallel
+..................F.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+
+  FAIL scripts/proof-hunter-traps-20261010.js (exit 1, 2.6s)
+        PASS direct hit deals the 20-30 dive damage
+        PASS trap is consumed by the dive
+        PASS dodged dive: no combat, no damage
+        PASS dodged dive: trap consumed
+      == T7. PIT-OWN-TRAP: warned, 50%, death handled ==
+        PASS recipe warns the own-pit risk
+         own-pit fall rate: 20/40 (50%, expect ~50%)
+        PASS own pit takes you about half the time
+        PASS the fall is narrated as YOUR pit (no silent damage)
+      
+      RESULT: 30 pass, 1 fail
+      FAILS: snare card: "catches small game" matches its catch list
+
+  slowest: scripts/test-deterministic-clock-20261014.js 57s, scripts/test-simopt-trajectory-20261010.js 48s, scripts/test-break-alien-20261010-r11.js 37s
+
+check.js: 905 passed, 1 failed in 154s
