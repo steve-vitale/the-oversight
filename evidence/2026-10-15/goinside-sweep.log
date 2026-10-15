@@ -1,0 +1,42 @@
+== goinside pilot: 8 seeds x 2 policies x 2 sides, 180d ==
+  [control/leadcourt s11] days=79 end=village-lost scholarHunger=15 giTakes=0 giKcal=0 wave=2 rank=regional
+  [armed/leadcourt s11] days=180 end=survived scholarHunger=97 giTakes=44 giKcal=654 wave=4 rank=global
+  [control/leadcourt s22] days=127 end=village-lost scholarHunger=42 giTakes=0 giKcal=0 wave=4 rank=global
+  [armed/leadcourt s22] days=175 end=village-lost scholarHunger=50 giTakes=35 giKcal=2493 wave=4 rank=global
+  [control/leadcourt s33] days=112 end=village-lost scholarHunger=46 giTakes=0 giKcal=0 wave=4 rank=national
+  [armed/leadcourt s33] days=159 end=village-lost scholarHunger=82 giTakes=27 giKcal=281 wave=4 rank=global
+  [control/leadcourt s44] days=180 end=survived scholarHunger=107 giTakes=0 giKcal=0 wave=3 rank=global
+  [armed/leadcourt s44] days=152 end=village-lost scholarHunger=55 giTakes=22 giKcal=680 wave=4 rank=global
+  [control/leadcourt s55] days=180 end=survived scholarHunger=93 giTakes=0 giKcal=0 wave=4 rank=national
+  [armed/leadcourt s55] days=180 end=survived scholarHunger=106 giTakes=31 giKcal=1245 wave=4 rank=global
+  [control/leadcourt s66] days=76 end=village-lost scholarHunger=49 giTakes=0 giKcal=0 wave=4 rank=regional
+  [armed/leadcourt s66] days=180 end=survived scholarHunger=52 giTakes=17 giKcal=311 wave=4 rank=national
+  [control/leadcourt s77] days=64 end=village-lost scholarHunger=28 giTakes=0 giKcal=0 wave=3 rank=regional
+  [armed/leadcourt s77] days=40 end=village-lost scholarHunger=16 giTakes=15 giKcal=734 wave=2 rank=village
+  [control/leadcourt s88] days=143 end=village-lost scholarHunger=56 giTakes=0 giKcal=0 wave=4 rank=national
+  [armed/leadcourt s88] days=159 end=village-lost scholarHunger=49 giTakes=23 giKcal=500 wave=4 rank=global
+  [control/belongseek s11] days=180 end=survived scholarHunger=34 giTakes=0 giKcal=0 wave=3 rank=national
+  [armed/belongseek s11] days=180 end=survived scholarHunger=89 giTakes=34 giKcal=767 wave=3 rank=national
+  [control/belongseek s22] days=122 end=village-lost scholarHunger=65 giTakes=0 giKcal=0 wave=4 rank=global
+  [armed/belongseek s22] days=154 end=village-lost scholarHunger=96 giTakes=35 giKcal=1633 wave=3 rank=national
+  [control/belongseek s33] days=35 end=village-lost scholarHunger=21 giTakes=0 giKcal=0 wave=2 rank=village
+  [armed/belongseek s33] days=180 end=survived scholarHunger=63 giTakes=34 giKcal=2014 wave=3 rank=national
+  [control/belongseek s44] days=180 end=survived scholarHunger=94 giTakes=0 giKcal=0 wave=3 rank=national
+  [armed/belongseek s44] days=180 end=survived scholarHunger=63 giTakes=29 giKcal=1437 wave=3 rank=global
+  [control/belongseek s55] days=180 end=survived scholarHunger=106 giTakes=0 giKcal=0 wave=3 rank=national
+  [armed/belongseek s55] days=180 end=survived scholarHunger=75 giTakes=19 giKcal=565 wave=3 rank=national
+  [control/belongseek s66] days=147 end=village-lost scholarHunger=62 giTakes=0 giKcal=0 wave=4 rank=national
+  [armed/belongseek s66] days=119 end=village-lost scholarHunger=35 giTakes=17 giKcal=483 wave=3 rank=national
+  [control/belongseek s77] days=89 end=village-lost scholarHunger=20 giTakes=0 giKcal=0 wave=3 rank=national
+  [armed/belongseek s77] days=180 end=survived scholarHunger=61 giTakes=21 giKcal=1489 wave=3 rank=regional
+  [control/belongseek s88] days=180 end=survived scholarHunger=35 giTakes=0 giKcal=0 wave=3 rank=regional
+  [armed/belongseek s88] days=180 end=survived scholarHunger=22 giTakes=17 giKcal=0 wave=3 rank=regional
+
+-- pooled --
+  control: scholarHunger=873 hunger=914 starveDeaths=10 median=144d national=11/16 table=0 won=0 wave4=7 wave5=0 giTakes=0 giMeals=0 giKcal=0 giNoGain=0 giRefused=0 giTriggers=0 giEnters=0
+    deaths: {"villager combat":144,"monster":62,"combat":219,"sickness":18,"starvation":10,"a wound that wouldn't close":10,"ambush":4,"expedition":17,"dehydration":5,"lockjaw":2,"contest":9,"The Callback":2,"the expedition":1,"thirst":3,"Inspiration":1,"alien":2}
+  armed: scholarHunger=1011 hunger=1052 starveDeaths=6 median=182d national=13/16 table=0 won=0 wave4=7 wave5=0 giTakes=420 giMeals=208 giKcal=15286 giNoGain=98 giRefused=66 giTriggers=998 giEnters=248
+    deaths: {"combat":300,"expedition":39,"villager combat":143,"monster":57,"ambush":4,"contest":11,"alien":5,"sickness":4,"a wound that wouldn't close":9,"starvation":6,"The Algorithm":1,"The Union Rep":1,"thirst":1,"The Suburb":1,"Night Court":1,"lockjaw":1,"Buffering":1,"the expedition":1,"Rut King":1}
+
+VERDICT: NO-GO — primary ratio=1.158 (GO<=0.60): false; median 182d vs 144d (>=ctrl-10): true; national 13 vs 11 (>=ctrl-2): true; starveDeaths 6 vs 10 (<=ctrl+2): true; new death modes: none: true; freq takes/run=26.3 (bound 16): false
+EXIT=0
