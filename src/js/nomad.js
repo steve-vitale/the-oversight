@@ -27,6 +27,9 @@
 //     first (parity); party is the bearer + up to 3.
 //   - mantle_inside_party: a dead bearer's mantle passes to the next living
 //     party member (mantleBecome); an empty party ends the road ('wiped').
+//   - companions: joined kin travel on 'kin:' ids (road.companions), eat and
+//     die like anyone, but the Codex never passes to them; if no villagers
+//     remain the kin settle where they stand (endRoad 'settled').
 //   - village_fate: the village left behind resolves thrived|survived|fell
 //     with a fate line for the epilogue; leaving it starving is abandonment.
 //   - daily_food: the party burns 2000 kcal per living member per day from
@@ -56,9 +59,15 @@
   }
   function vname(id) {
     const rc = ((Game.state && Game.state.village) || {}).rosterChars || {};
+    const r = road();
+    const comp = r && r.companions && r.companions[id];
+    if (comp && comp.name) return comp.name;
     const d = (Game.data && Game.data.villagers || []).find(x => x.id === id) || {};
     return (rc[id] && rc[id].name) || d.name || String(id || 'someone');
   }
+  // isCompanion(id): joined kin travel on a 'kin:' id, not a villager id.
+  // They eat, starve, and die like anyone — but the Codex can't pass to them.
+  function isCompanion(id) { return String(id || '').indexOf('kin:') === 0; }
   function log(line) {
     const r = road();
     if (r) { r.log = r.log || []; r.log.push({ day: day(), line }); if (r.log.length > 200) r.log.splice(0, r.log.length - 200); }
@@ -197,6 +206,7 @@
         partyIds: party.slice(),
         bearerId: party[0],
         fallen: [],
+        companions: {},
         supplies: { food: carried },
         legs: [],
         legIndex: -1,
@@ -224,8 +234,17 @@
       let def = null;
       try { def = typeof Game.regionDef === 'function' ? Game.regionDef(regionId) : null; } catch (e) {}
       if (!def) return null;
-      if (r.legs.some(l => l.regionId === regionId && l.status !== 'done')) return null;
-      const leg = { regionId, kinName: kinName || null, status: 'pending' };
+      // One leg per region: kin who share a region share the leg.
+      const existing = r.legs.find(l => l.regionId === regionId && l.status !== 'done');
+      if (existing) {
+        existing.kinNames = existing.kinNames || [];
+        if (kinName && existing.kinNames.indexOf(kinName) < 0) {
+          existing.kinNames.push(kinName);
+          log(`leg ${def.name || regionId}: also looking for ${kinName}.`);
+        }
+        return existing;
+      }
+      const leg = { regionId, kinName: kinName || null, kinNames: kinName ? [kinName] : [], status: 'pending' };
       r.legs.push(leg);
       log(`leg added: ${def.name || regionId}${kinName ? ` — looking for ${kinName}` : ''}.`);
       return leg;
@@ -274,7 +293,7 @@
       log(`${vname(id)} died on the road (${cause || 'the road'}).`);
       say(`${vname(id)} doesn't wake up. The road keeps what it takes.`);
       if (id === r.bearerId) {
-        const next = r.partyIds[0] || null;
+        const next = r.partyIds.find(pid => !isCompanion(pid)) || null;
         if (next) {
           const old = r.bearerId;
           r.bearerId = next;
@@ -282,7 +301,15 @@
           Game.villagerId = next;
           say(`The Codex doesn't pause for grief. ${vname(next)} picks it up. The road goes on.`);
           log(`mantle passed to ${vname(next)}.`);
+        } else if (r.partyIds.length) {
+          // No villagers left to bear the Codex — but the found kin endure.
+          // They bury the last bearer and stop walking. This is still home.
+          say(`No one is left who can carry the Codex. The kin the road gave back bury ${vname(id)} properly, and stop walking. This place will do.`);
+          log('the last bearer fell; the kin settle where they stand.');
+          this.endRoad('settled');
+          return true;
         }
+        // (empty party falls through to the 'wiped' close below)
       }
       if (!r.partyIds.length) this.endRoad('wiped');
       return true;

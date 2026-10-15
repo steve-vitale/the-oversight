@@ -19378,6 +19378,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         actions.push('Step outside');
       } else if (cell === 'lodge') {
         actions.push('Go inside');
+        // THE LONG WAY HOME (2026-10-15): the leave option. Knowledge-gated —
+        // it does not exist in the UI before eligibility (canLeave().ok).
+        try {
+          if (t && t.type === 'haven' && this.nomad && this.nomad.canLeave &&
+              this.nomad.canLeave().ok) actions.push('Leave the village');
+        } catch (e) {}
       } else if (cell === 'bunk') {
         actions.push('Rest (a while)');
       } else if (['gym','class','office','apt','cube','break','conf','lobby','bay','sanct'].includes(cell)) {

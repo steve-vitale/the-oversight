@@ -41,34 +41,38 @@ async function main() {
   ok(!!legA && legA.status === 'pending', 'addLeg creates a pending leg');
   ok(legA.regionId === pool[0] && legA.kinName === 'Test Kin A', 'leg records region + kin');
   const dupe = Game.nomad.addLeg(pool[0], 'Test Kin A');
-  ok(dupe === null, 'addLeg refuses a duplicate pending leg for the region');
+  ok(dupe === legA && legA.kinNames.length === 1, 'addLeg shares the pending leg for the region (no duplicate kin)');
   const legB = Game.nomad.addLeg(pool[1], 'Test Kin B');
   ok(!!legB, 'second leg added');
+  // Departure plans an itinerary (nomad-drive): our legs aren't at 0/1.
+  const idxA = Game.state.road.legs.indexOf(legA);
+  const idxB = Game.state.road.legs.indexOf(legB);
+  ok(idxA >= 0 && idxB >= 0, `test legs located in itinerary (${idxA}, ${idxB})`);
 
   console.log('== enterLeg ==');
   const noLeg = Game.nomad.enterLeg(99);
   ok(noLeg === false, 'enterLeg rejects a bad index');
-  const entered = Game.nomad.enterLeg(0);
-  ok(entered === true, 'enterLeg(0) succeeds');
-  ok(Game.state.road.legIndex === 0, 'legIndex tracks the active leg');
-  ok(Game.state.road.legs[0].status === 'active', 'leg status -> active');
+  const entered = Game.nomad.enterLeg(idxA);
+  ok(entered === true, 'enterLeg(idxA) succeeds');
+  ok(Game.state.road.legIndex === idxA, 'legIndex tracks the active leg');
+  ok(Game.state.road.legs[idxA].status === 'active', 'leg status -> active');
   ok(Game.state.region === pool[0], `state.region switched to the leg region (${Game.state.region})`);
   // The region engine generated a 9x9 map for the new region.
   const map = Game.map;
   ok(map && map.tiles && map.tiles.length === 9 && map.tiles[0].length === 9, 'a 9x9 map was generated for the leg');
-  const again = Game.nomad.enterLeg(0);
+  const again = Game.nomad.enterLeg(idxA);
   ok(again === false, 'enterLeg refuses an already-active leg');
 
   console.log('== departLeg ==');
   const dep = Game.nomad.departLeg();
   ok(dep === true, 'departLeg succeeds');
-  ok(Game.state.road.legs[0].status === 'done', 'leg status -> done');
+  ok(Game.state.road.legs[idxA].status === 'done', 'leg status -> done');
   ok(Game.state.road.legIndex === -1, 'legIndex reset between legs');
   const dep2 = Game.nomad.departLeg();
   ok(dep2 === false, 'departLeg with no active leg fails cleanly');
 
   console.log('== second leg ==');
-  ok(Game.nomad.enterLeg(1) === true, 'enterLeg(1) works after departing');
+  ok(Game.nomad.enterLeg(idxB) === true, 'enterLeg(idxB) works after departing');
   ok(Game.state.region === pool[1], 'region switched to the second leg');
 
   console.log(`\ntest-nomad-legs: ${pass} passed, ${fail} failed`);

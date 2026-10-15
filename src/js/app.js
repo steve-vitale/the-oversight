@@ -498,12 +498,23 @@
     if (st.inCombat || st.over) return '';
     const sleepDot = st.energy < 30 ? '<span class="dot"></span>'
       : (st.isNight ? '<span class="dot soft"></span>' : '');
+    // THE LONG WAY HOME (2026-10-15): on the road the slow actions are
+    // the road's — move on to the next leg, or settle. The world map rests;
+    // the itinerary is the map now.
+    let roadBtns = '';
+    try {
+      if (Game.nomadDrive && Game.nomad && Game.nomad.onRoad && Game.nomad.onRoad()) {
+        roadBtns =
+          `<button class="lm-btn" data-lm="roadmove">🚶 Move on</button>` +
+          `<button class="lm-btn" data-lm="roadsettle">🏠 Settle</button>`;
+      }
+    } catch (e) {}
     return `<div class="lowermenu">` +
       `<button class="lm-btn" data-lm="pack">🎒 Pack</button>` +
       `<button class="lm-btn" data-lm="character">🧬 You</button>` +
       `<button class="lm-btn" data-lm="sleep">😴 Sleep${sleepDot}</button>` +
       `<button class="lm-btn" data-lm="wait">⏳ Wait</button>` +
-      `<button class="lm-btn" data-lm="map">🗺️ Map</button>` +
+      (roadBtns || `<button class="lm-btn" data-lm="map">🗺️ Map</button>`) +
       `<button class="lm-btn" data-lm="settings" aria-label="settings">⚙️</button>` +
       `</div>`;
   }
@@ -517,6 +528,8 @@
         else if (a === 'character') { characterSheet(); }
         else if (a === 'sleep') { Game.sleep(); rerender(); }
         else if (a === 'wait') { Game.doAction('wait'); rerender(); }
+        else if (a === 'roadmove') { try { if (Game.nomadDrive) Game.nomadDrive.moveOnTap(); } catch (e) {} rerender(); }
+        else if (a === 'roadsettle') { try { if (Game.nomadDrive) Game.nomadDrive.settleTap(); } catch (e) {} rerender(); }
         else if (a === 'map') {
           const compass = document.getElementById('compass');
           if (compass) compass.click();
@@ -1141,6 +1154,9 @@
     }
     if (label === 'Step outside') { Game.exitBuilding(); return; }
     if (label === 'Go inside') { Game.enterBuilding(); return; }
+    // THE LONG WAY HOME (2026-10-15): leaving is a Haven option, never a prompt.
+    // The two-tap confirm lives in the road driver.
+    if (label === 'Leave the village') { try { if (Game.nomadDrive) Game.nomadDrive.leaveTap(); } catch (e) {} refresh(); return; }
     if (label === 'Rest' || label === 'Rest (a while)') { Game.doAction('rest'); return; }
     if (label === 'Search') { Game.searchRoom(cx, cy); return; }
     // QUIET WOODS (parity 2026-10-10): the day-16 hushwolf event's

@@ -350,7 +350,7 @@
       const sharpen = (who) => {
         try {
           if (G.nomadScenes && typeof G.nomadScenes.sharpenTrail === 'function') {
-            G.nomadScenes.sharpenTrail(who);
+            G.nomadScenes.sharpenTrail(who, 'survivor'); // a stranger on the road
             return true;
           }
         } catch (e) { warn('sharpenTrail: ' + e.message); }
