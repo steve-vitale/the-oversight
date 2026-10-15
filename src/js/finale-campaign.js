@@ -65,12 +65,13 @@
 
   function finaleCampaignPlace(titanId) {
     try {
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      var tx = Math.max(0, px + 3), ty = Math.max(0, py);
+      var site = Game.titanPlacementTile(3);
+      if (!site) { console.warn('finale placement: no free map tile'); return null; }
+      var tx = site.x, ty = site.y;
       var c = finaleCampaign();
       c.started = false; c.crew = false; c.opening = false;
       var mon = Game.spawnWorldMonster({ id: 'finale_crew' }, tx, ty, { titan: true });
-      Game.say('📺 Scouts found the broadcast tower — ' + tx + ' east of here. THE FINALE does not arrive alone: first, its crew. THE COMMERCIAL BREAK (node 1 of 3). Kill the production staff and the finale airs without a safety net — no one left to call "cut." The march needs 20 allied blades. Sound the call.');
+      Game.say('📺 Scouts found the broadcast tower — tile ' + tx + ',' + ty + '. THE FINALE does not arrive alone: first, its crew. THE COMMERCIAL BREAK (node 1 of 3). Kill the production staff and the finale airs without a safety net — no one left to call "cut." The march needs 20 allied blades. Sound the call.');
       try { if (Game.recordMoment) Game.recordMoment('The finale campaign begins: the commercial break located.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }
@@ -352,10 +353,11 @@
 
   function finaleSpawnNext(mid, dx, label) {
     try {
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      var tx = Math.max(0, px + dx), ty = Math.max(0, py);
+      var site = Game.titanPlacementTile(dx);
+      if (!site) { console.warn('finale next node: no free map tile', mid); return null; }
+      var tx = site.x, ty = site.y;
       var mon = Game.spawnWorldMonster({ id: mid }, tx, ty, { titan: true });
-      Game.say(label + ' — ' + tx + ' east of here.');
+      Game.say(label + ' — tile ' + tx + ',' + ty + '.');
       try { if (Game.recordMoment) Game.recordMoment(label + ' located.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }

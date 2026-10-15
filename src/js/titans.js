@@ -17,6 +17,7 @@
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
 //   - titanHavenBlades(muster)
+//   - titanPlacementTile(offset) -> a free, non-village tile inside the travel map
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
@@ -155,6 +156,43 @@
     }
   }
 
+  // Preserve the intended eastward march where it fits. At the edge, choose
+  // the closest legal site rather than placing an objective outside travelTargets.
+  function titanPlacementTile(offset) {
+    var map = Game.map, tiles = map && map.tiles;
+    if (!tiles) return null;
+    var px = map.px, py = map.py, targetX = px + offset, sites = [];
+    for (var y = 0; y < Math.min(9, tiles.length); y++) {
+      for (var x = 0; x < Math.min(9, (tiles[y] || []).length); x++) {
+        if (!tiles[y][x] || (x === px && y === py) || Game.isSafeTile(x, y) || Game.monsterAt(x, y)) continue;
+        sites.push({ x: x, y: y, d: Math.abs(x - targetX) + Math.abs(y - py) });
+      }
+    }
+    sites.sort(function (a, b) { return a.d - b.d || b.x - a.x || a.y - b.y; });
+    return sites.length ? { x: sites[0].x, y: sites[0].y } : null;
+  }
+
+  // Old saves may already contain an out-of-map lair. Repair only those
+  // coordinates, retaining the same monster, damage, muster and campaign.
+  function titanRepairPlacements() {
+    var defs = titanDefs(), changed = false;
+    var ids = Object.keys(defs).map(function (tid) { return defs[tid].monster; });
+    ids.push('finale_crew', 'finale_opening');
+    Game.worldMonsters().forEach(function (m) {
+      if (m.networkNode || ids.indexOf(m.id) < 0) return;
+      if (Number.isInteger(m.tx) && Number.isInteger(m.ty) && m.tx >= 0 && m.tx < 9 && m.ty >= 0 && m.ty < 9 &&
+          Game.map.tiles[m.ty] && Game.map.tiles[m.ty][m.tx]) return;
+      var site = titanPlacementTile(3);
+      if (!site) { console.warn('titan placement repair: no free map tile', m.id); return; }
+      m.tx = site.x; m.ty = site.y;
+      changed = true;
+      if (m.homeTx !== undefined) m.homeTx = site.x;
+      if (m.homeTy !== undefined) m.homeTy = site.y;
+      Game.say('🗺️ Scouts correct their map — ' + m.id.replace(/_/g, ' ') + ' is at tile ' + site.x + ',' + site.y + '.');
+    });
+    if (changed) Game.syncMonsterAlias();
+  }
+
   function titanPlace(titanId) {
     try {
       // FINALE CAMPAIGN (2026-10-12): the finale arrives as a three-node
@@ -163,11 +201,11 @@
         return Game.finaleCampaignPlace(titanId);
       }
       var def = titanDefs()[titanId];
-      var px = Game.map ? Game.map.px : 4, py = Game.map ? Game.map.py : 4;
-      // lair: 3 tiles out, clamped to the region map (tiles are region coords)
-      var tx = Math.max(0, px + 3), ty = Math.max(0, py);
+      var site = titanPlacementTile(3);
+      if (!site) { console.warn('titan placement: no free map tile', titanId); return null; }
+      var tx = site.x, ty = site.y;
       var mon = Game.spawnWorldMonster(def.monster, tx, ty, { titan: true });
-      Game.say('🗺️ Scouts found its lair — ' + tx + ' east of here. ' + def.title + ' — ' + (def.epithet || '') + '. It is WAITING. You cannot face it alone. Sound the call.');
+      Game.say('🗺️ Scouts found its lair — tile ' + tx + ',' + ty + '. ' + def.title + ' — ' + (def.epithet || '') + '. It is WAITING. You cannot face it alone. Sound the call.');
       try { if (Game.recordMoment) Game.recordMoment(def.title + ' located. The coalition must answer.'); } catch (e) {}
       return mon;
     } catch (e) { return null; }
@@ -495,6 +533,7 @@
     var acts = [];
     try {
       if (Game.tbfight) return acts;
+      titanRepairPlacements();
       var st = titanState();
       var defs = titanDefs();
       Object.keys(defs).forEach(function (tid) {
@@ -1031,6 +1070,7 @@
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
     titanHavenBlades: titanHavenBlades,
+    titanPlacementTile: titanPlacementTile,
     titanMusterState: function (titanId) { return titanState().musters[titanId] || null; },
     // exposed for the finale campaign (allied injection into campaign nodes)
     titanInjectAllies: titanInjectAllies,
