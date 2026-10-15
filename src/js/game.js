@@ -40031,6 +40031,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     tbEnd(result) {
       const f = this.tbfight;
       if (!f || f.over) return;
+      const _fightBearer = this.villagerId;
       try {
         const _ceP = this.tbFighter ? this.tbFighter('p') : null;
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
@@ -40307,6 +40308,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if ((_p.hp || 0) <= _maxHp * 0.25) this.noteTrialDeed('blood_trial', 1);
         }
       } catch (e) {}
+      // PARTY DEED PARITY: the same real encounter teaches each surviving
+      // villager who joined it. Mere village membership is not participation.
+      // A personal retreat earns survival, never the group's victory. Keep
+      // the original bearer id: a defeat may already have passed the mantle.
+      try {
+        if (this.creditDeed) {
+          const seen = new Set([_fightBearer]);
+          for (const ally of (f.fighters || [])) {
+            const vid = ally && ally.villagerId;
+            if (!ally || ally.kind !== 'villager' || !vid || seen.has(vid) || ally.alive === false || !(ally.hp > 0)) continue;
+            const person = this.vpOf(vid);
+            if (!person.id || person.dead) continue;
+            seen.add(vid);
+            if (ally.fled) this.creditDeed(vid, 'fight_survived');
+            else if (result === 'won') this.creditDeed(vid, 'fight_won');
+            else if (result === 'fled' || result === 'calmed') this.creditDeed(vid, 'fight_survived');
+            if (_alienFight) this.creditDeed(vid, 'alien_fight');
+          }
+        }
+      } catch (e) { console.warn('[tracks] party fight deeds', e); }
       // PRACTICE DEEDS (longsim abilities r5 2026-10-12): ambush — the fight
       // ended in round 1 with at least one monster dropped. You picked the
       // ground and the moment; it never got going. Same player-alive guard as

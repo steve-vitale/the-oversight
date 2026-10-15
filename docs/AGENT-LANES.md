@@ -86,3 +86,9 @@ This is food-powered progression/medical cost honesty, not region or nomad
 content. Integrate the clock-neutral receipt follow-up with the initial
 healing commit; the first telemetry comparison is diagnostic, not balance
 proof. See evidence/2026-10-15/feast-healing-audit.md.
+
+Tactical party-deed parity exception: Codex repairs game.js tbEnd so real
+surviving NPC participants earn the existing shared combat/alien-fight deeds.
+The player keeps its current timing and credits; no integration, world,
+region or nomad system is changed. This closes a godpath progression caller
+hole, with participant/death/flee/replay proofs and matched panels.
