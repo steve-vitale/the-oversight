@@ -76,6 +76,12 @@ simulation/playtest goal with these gaps before expanding content blindly:
    ammunition that could not fire and false "Crafted" UI receipts. In the
    16-seed screen, neither policy successfully crafted arrows; knowledge
    and material access remain sparse. See `evidence/2026-10-15/crafting-route-audit.md`.
+   The next pass added a found field notebook for bows/ammunition and a
+   maker that actually seeks and reads books. At 64 matched seeds, two runs
+   learned the recipes from it; neither crafted ammunition. All 64 maker
+   runs earned tier-3+ gear from noncombat reward sources, but overall wins
+   did not improve. See `evidence/2026-10-15/bowyer-route-audit.md` before
+   treating knowledge access, material supply or ranged-policy use as solved.
    Improve usable survival supplies and earned reward access for makers;
    an advanced recipe ladder is not an established requirement. Steve's
    direct 2026-10-03 wording in `DECISIONS.md` focuses crafting on supplies
@@ -139,9 +145,15 @@ Steve's latest steering, not a supersession of his broader roadmap.
 - **Tool:** `scripts/godpath/validate.js` and `ladder.js`, plus a 64-seed sweep.
 
 ### 4. God scale effects
-- **Now:** each god's party, titan, contest and army effects are design text
-  in `godpaths.json`.
-- **Spec:** wire them per god (PLAN.md "What's left" #4).
+- **Recovery progress (2026-10-15):** all ten god verbs now have real
+  player/villager callers, food costs and weaknesses. Party/titan interactions
+  include returned ally damage, rooting titans, raising fallen allies and
+  phase protection. `scripts/test-god-verbs-wired-20261015.js` exercises
+  these through game actions; see `evidence/2026-10-15/resume-claude.md`.
+- **Remaining:** reconcile each promised party, titan, contest and army
+  effect in `godpaths.json` against those implemented verbs. Wire and prove
+  any remaining effects (PLAN.md "What's left" #4); the recovery proof does
+  not establish that every promised scale effect is complete.
 
 ### 5. The Long Way Home (nomad ending)
 - **Spec:** `docs/WORLD-REGIONS.md` §6.
