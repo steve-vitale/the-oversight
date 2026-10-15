@@ -26507,7 +26507,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         jv.pantryKcal = Math.max(0, (jv.pantryKcal || 0) - meal);
         // BANK CAP (break-it food r3 2026-10-08): the meal is a kcal source
         // like any other — kcalCap() is the one number, not a 3000 literal.
-        scholar.kcal = Math.min((scholar.kcal || 0) + meal, this.kcalCap());
+        const cap = this.kcalCap();
+        this.queueHarvestMeal(this.villagerId, { taken: meal, items: [{ units: 1, effectiveKcal: meal }] }, 'guest-pantry', Math.max(0, Math.min(meal, cap - (scholar.kcal || 0))));
+        scholar.kcal = Math.min((scholar.kcal || 0) + meal, cap);
         this.say(`Village meal at ${jv.name}: +${Math.round(meal)} kcal.`);
         return;
       }
@@ -26561,7 +26563,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const drawn = this.pantryDraw(v, want, { cook: true, exposure });
       const taken = drawn.taken;
       const nutrition = Math.max(0, Math.min(taken, bankCap - (scholar.kcal || 0)));
-      this.recordHarvestDraw(this.villagerId, drawn, 'pantry', nutrition);
+      this.queueHarvestMeal(this.villagerId, drawn, 'pantry', nutrition);
       scholar.kcal = Math.min((scholar.kcal || 0) + taken, bankCap);
       // The player's body faces what the draw exposed it to — the same
       // contract as eating the same food yourself at a perfect village cook.

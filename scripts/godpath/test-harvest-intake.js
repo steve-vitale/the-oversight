@@ -69,6 +69,22 @@ const K = require('./lib'), T = K.reporter('harvest-intake');
 
   fresh(); v.pantry = [food(20)]; const beforeMeal = s.kcal; G.villageMeal();
   T.ok('actual player communal meal carries consumed and nourished source receipts', rec()?.routes.pantry.kcal > 0 && near(rec()?.nourishment, s.kcal - beforeMeal) && near(rec()?.harvestKcal[producer], rec()?.kcal));
+  fresh();
+  const guestCamp = { id: 'intake_guest_camp', name: 'Guest camp', x: 5, y: 4, pantryKcal: 3000, trust: 30 };
+  G.state.otherVillages.push(guestCamp); s.joinedVillage = guestCamp.id; G.map.px = 5; G.map.py = 4; G.villageMeal();
+  T.ok('actual joined-village meal records anonymous food without inventing a harvester', rec()?.routes['guest-pantry'].kcal === 2000 && rec()?.nourishment === 2000 && guestCamp.pantryKcal === 1000 && Object.keys(rec()?.harvestKcal || {}).length === 0, JSON.stringify({ rec: rec(), guestCamp, kcal: s.kcal }));
+  s.kcal = 0; s.probation = { villageId: guestCamp.id, daysLeft: 3 }; guestCamp.pantryKcal = 3000;
+  G.villageMeal();
+  T.ok('real probation override adds only its actual half meal once', rec()?.routes['guest-pantry'].kcal === 3000 && rec()?.nourishment === 3000 && guestCamp.pantryKcal === 2000);
+  fresh(); v.pantry = [food(20)]; v.rationing = { until: s.day + 1 }; G.villageMeal();
+  const returned = v.pantry.filter(x => x.name === 'Ration returned');
+  T.ok('real ration return is excluded from intake and keeps its harvest source', rec()?.kcal === 10000 - G.pantryKcal() && near(rec()?.nourishment, s.kcal) && returned.length > 0 && returned.every(x => x.harvestShares?.[producer] === 1));
+  const priorIntake = rec()?.kcal;
+  G.takeFromPantry(v.pantry.indexOf(returned[0]));
+  T.ok('taking back a returned ration is still not eating', rec()?.kcal === priorIntake);
+  const returnedCalories = s.inventory[0]?.kcalEach;
+  G.eatOne(0);
+  T.ok('eating that returned portion adds one real serving from the original harvest', rec()?.kcal === priorIntake + returnedCalories && near(rec()?.harvestKcal[producer], rec()?.kcal));
 
   fresh(); v.pantry = [food(40)]; s.kcal = 1000; v.trust[npc] = 80; v.sick = {}; G.npcNeeds(npc).hunger = 60;
   const feast = G.hostFeast({ guests: [npc] });

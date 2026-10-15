@@ -1343,14 +1343,22 @@
       day = (this.state.scholar || {}).day || 0;
       ration = !!(v.rationing && v.rationing.until >= day);
     } catch (e) {}
-    var r = _vmS.apply(this, arguments);
+    var priorHarvestDeferral = this._harvestMealDeferred;
+    this._harvestMealDeferred = true; this._harvestPantryMeal = null;
+    var r;
+    try { r = _vmS.apply(this, arguments); }
+    finally { this._harvestMealDeferred = priorHarvestDeferral; }
+    var harvestMeal = this._harvestPantryMeal, returnedHarvestKcal = 0;
+    this._harvestPantryMeal = null;
     try {
       if (ration && v && (v.lastPlayerMeal || 0) > 0) {
         var give = Math.round(v.lastPlayerMeal / 2);
         if (give > 0) {
           var s = this.state.scholar;
           s.kcal = Math.max(0, (s.kcal || 0) - give);
-          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400 });
+          returnedHarvestKcal = give;
+          var harvestShares = harvestMeal && this.blendHarvestShares ? this.blendHarvestShares(harvestMeal.draw.items.map(function (p) { return { item: p.item, weight: p.units * p.effectiveKcal }; })) : undefined;
+          if (this.stockPantry) this.stockPantry(give, 'Ration returned', { pieceKcal: 400, harvestShares: harvestShares });
           v.lastPlayerMeal = (v.lastPlayerMeal || 0) - give;
           if (v._rationSaidDay !== day) {
             v._rationSaidDay = day;
@@ -1359,6 +1367,10 @@
         }
       }
     } catch (e) {}
+    if (harvestMeal && this.recordHarvestDraw) {
+      var kept = harvestMeal.draw.taken > 0 ? Math.max(0, harvestMeal.draw.taken - returnedHarvestKcal) / harvestMeal.draw.taken : 0;
+      this.recordHarvestDraw(harvestMeal.who, harvestMeal.draw, harvestMeal.route, Math.max(0, harvestMeal.nourishment - returnedHarvestKcal), kept);
+    }
     return r;
   };
 

@@ -4852,7 +4852,9 @@
           const meal = Math.min(1000, Math.round(ov.pantryKcal || 0));
           ov.pantryKcal = Math.max(0, (ov.pantryKcal || 0) - meal);
           // BANK CAP (break-it food r3 2026-10-08): kcalCap() is the one number.
-          s.kcal = Math.min((s.kcal || 0) + meal, this.kcalCap ? this.kcalCap() : 3000);
+          const cap = this.kcalCap ? this.kcalCap() : 3000;
+          if (this.queueHarvestMeal) this.queueHarvestMeal(this.villagerId, { taken: meal, items: [{ units: 1, effectiveKcal: meal }] }, 'guest-pantry', Math.max(0, Math.min(meal, cap - (s.kcal || 0))));
+          s.kcal = Math.min((s.kcal || 0) + meal, cap);
           this.say(`Village meal at ${ov.name}: +${meal} kcal. ` +
             (onProb ? `Probation portions — half shares until they vote you in (${this.pluralize(Math.max(0, s.probation.daysLeft), 'day')} left).`
                     : `New mouths eat last — earn their trust for full shares. (Trust ${Math.round(ov.trust || 0)}/15.)`));

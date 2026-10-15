@@ -20,6 +20,7 @@
 //   - stacksMatch()       (fungibility gate for stack merging)
 //   - harvestOrigin(vid), mergeHarvestShares(target, incoming, units), blendHarvestShares(parts) (actual plant harvester provenance through fungible portions)
 //   - recordHarvestIntake(who, portions, route), recordHarvestDraw(who, draw, route, nourishment, share) (bounded actual eating receipts)
+//   - queueHarvestMeal(who, draw, route, nourishment) (settles communal food after real ration returns)
 //   - spoilBonusDays()    (preservation_instinct shelf-life bonus)
 //   - isSpoiled()         (bonus-aware spoilage boundary)
 //   - experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
@@ -272,6 +273,14 @@
         const kcal = (p.units || 0) * (p.effectiveKcal || 0) * share;
         return { item: p.item, kcal, nourishment: amount > 0 ? kcal * n / amount : 0 };
       }), route);
+    },
+
+    queueHarvestMeal(who, draw, route, nourishment) {
+      if (!this._harvestMealDeferred) return this.recordHarvestDraw(who, draw, route, nourishment);
+      // Snapshot the drawn source before a return can merge into its old stack.
+      this._harvestPantryMeal = { who, route, nourishment, draw: { taken: draw.taken,
+        items: (draw.items || []).map(p => ({ units: p.units, effectiveKcal: p.effectiveKcal,
+          item: { harvestShares: (p.item || {}).harvestShares } })) } };
     },
 
     harvestOrigin(vid) {

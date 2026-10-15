@@ -22,7 +22,7 @@ async function child() {
   const intakeDays = new Map();
   const sampleIntake = g => {
     for (const [day, book] of Object.entries(g.state.village.harvestIntake || {})) {
-      const out = { day: Number(day), kcal: 0, nourishment: 0, eaters: Object.keys(book).length, routes: {}, harvesters: {} };
+      const out = { day: Number(day), kcal: 0, nourishment: 0, eaters: Object.values(book).filter(r => r.kcal > 0).length, routes: {}, harvesters: {} };
       for (const [eater, r] of Object.entries(book)) {
         out.kcal += r.kcal; out.nourishment += r.nourishment;
         for (const [route, value] of Object.entries(r.routes)) {
@@ -136,7 +136,7 @@ async function main() {
   await Promise.all(Array.from({ length: Number(arg('par', 4)) }, worker));
   rows.sort((a, b) => a.row.policy.localeCompare(b.row.policy) || seeds.indexOf(a.row.seed) - seeds.indexOf(b.row.seed));
   const hashes = {};
-  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/encounters.js', 'src/js/alienPlayers.js', 'src/js/equipment.js', 'src/js/party.js', 'src/js/food.js', 'src/js/carexplore.js', 'src/js/abilityActions.js', 'src/js/corruption.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/encounters.js', 'src/js/alienPlayers.js', 'src/js/equipment.js', 'src/js/party.js', 'src/js/food.js', 'src/js/carexplore.js', 'src/js/betrayal.js', 'src/js/safetynets.js', 'src/js/abilityActions.js', 'src/js/corruption.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/js/feastBuff.js', 'src/js/foodPower.js', 'src/data/abilities.json', 'src/data/feast-surge.json', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
   fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');

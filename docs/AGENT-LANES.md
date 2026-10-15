@@ -120,3 +120,6 @@ Living Garden intake exception: Codex edits food.js, narrow eating/packing/
 plant-source callers in game.js, carexplore.js food handoffs and corruption.js
 ration metadata. Scope is real consumption/nourishment receipts and source
 preservation; no food economics, region/nomad content or new god gate.
+Communal intake follow-up: betrayal.js probation meals and safetynets.js
+ration returns settle receipts after the existing actual adjustments.
+Returned food keeps its source; original food/reserve math stays unchanged.
