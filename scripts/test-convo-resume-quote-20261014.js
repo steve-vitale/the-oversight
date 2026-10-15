@@ -82,11 +82,16 @@ async function main() {
   const BEAT2 = 'They will not say whose name was on the list.';
 
   // ---- Path A: walk away mid-thread (endConvo 'left' -> plant) ----
+  // MID-THREAD MEANS EXCHANGED (journey establishment r5 2026-10-15): the
+  // plant now requires >=1 player exchange (convoPlantOpenThread's
+  // phantom-thread gate). A zero-exchange walk-out plants nothing — the
+  // fixture simulates the exchange honestly instead of bypassing it.
   clearThreads(Game, vid);
   Game.startConvo(vid);
   const c = Game.convoGet(vid);
   c.thread = 'secret'; c.depth = 2;
   Game.convoNoteBeat(vid, 'secret', BEAT1);
+  c.exchanges = 1; // the player said something back — a discussion was underway
   Game.convoNoteBeat(vid, 'secret', BEAT2);
   Game.endConvo(vid, 'left');
   keepOnly(Game, vid, 'secret');

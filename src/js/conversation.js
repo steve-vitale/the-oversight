@@ -1355,6 +1355,19 @@
         if (!thread || thread === 'small' || thread === 'nonverbal' || thread === 'request') return;
         const depth = c.depth || 0;
         if (depth < 1) return;
+        // PHANTOM-THREAD FIX (journey establishment r5 2026-10-15): a
+        // conversation opened and immediately left — zero player exchanges
+        // (the talkRound open-and-walk-out; a human tapping away on turn 1)
+        // — must not plant an open thread. Nothing was discussed, so the
+        // resume opener's "we never did finish talking about X" manufactures
+        // shared history from a drive-by (transcript-caught: Anh d25 s124,
+        // Sanne d37 s82, Nadia d37 s124 — no prior conversation existed).
+        // A walked-out favor ask is not lost: the favor seed system
+        // (convoPlantSeed) owns legitimate unkept-ask follow-ups. One real
+        // exchange is the bar — discussed means somebody said something back
+        // (the opener alone notes a beat but no exchange; c.exchanges counts
+        // player turns only).
+        if ((c.exchanges || 0) < 1) return;
         const unresolved = c.pendingQ || c.reactiveQ || (c.heldBeats || []).length ||
           (typeof this.convoThreadHasMore === 'function' && this.convoThreadHasMore(vid));
         // Record the discussion FIRST (it resolves any stale open entry for

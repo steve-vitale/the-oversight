@@ -3798,7 +3798,13 @@
         const dryCount = ((cs.pressDry || {})[vid]) || 0;
         const hasUnfound = (cs.inconsistencies || []).some(i => !i.found && i.claims && i.claims[vid]);
         if (hasUnfound || dryCount < 2) {
-          out.push({ id: 'betrayal:press:' + tag + vid, label: `"Walk me through that night again. Slowly." (press ${this.whoTag(vid)})` });
+          // PRESS DISAMBIGUATION (journey establishment r5 2026-10-15): the same
+          // villager can be accused in two open cases at once — two identical
+          // "(press X)" options the player cannot tell apart (transcript-
+          // caught: Anh d25 s124, Klymentiy d31 s124). Name the charge so
+          // each option reads as its own case. The charge is public: the
+          // case is only listed when known to the player (filter above).
+          out.push({ id: 'betrayal:press:' + tag + vid, label: `"Walk me through that night again. Slowly." (press ${this.whoTag(vid)} — the ${cs.charge || 'theft'} case)` });
         }
       }
       if (cs.weakest === vid && !cs.flipped && cs.status === 'open') {
