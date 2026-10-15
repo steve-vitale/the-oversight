@@ -1,0 +1,2374 @@
+{
+ "generated": "2026-10-15T00:30:12.446Z",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "control": "leadfeast+FEASTSCALE_R13=1",
+ "armed": "leadfeast+w5avoid2+FEASTSCALE_R13=1+W5AVOID2=1",
+ "summary": {
+  "control": {
+   "n": 8,
+   "unlockers": 5,
+   "postUnlockHavenCombat": 22,
+   "postUnlockNonDraw": 17,
+   "postUnlockNonDrawPerUnlocker": 3.4,
+   "channels": {
+    "draw": 5,
+    "raid-night": 10,
+    "lingerer": 1,
+    "other": 6,
+    "nonhaven": 0,
+    "unattributed": 0
+   },
+   "medianDays": 86,
+   "maxDays": 180,
+   "national": 3,
+   "table": 1,
+   "wave4": 7,
+   "wave5": 5,
+   "won": 0,
+   "exiled": 1,
+   "deathModes": {
+    "combat": 25,
+    "sickness": 1,
+    "contest": 1
+   },
+   "w12ScholarCombatDeaths": 21,
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "marchRefused": 0
+   }
+  },
+  "armed": {
+   "n": 8,
+   "unlockers": 5,
+   "postUnlockHavenCombat": 20,
+   "postUnlockNonDraw": 12,
+   "postUnlockNonDrawPerUnlocker": 2.4,
+   "channels": {
+    "draw": 8,
+    "raid-night": 7,
+    "lingerer": 1,
+    "other": 4,
+    "nonhaven": 0,
+    "unattributed": 0
+   },
+   "medianDays": 86,
+   "maxDays": 180,
+   "national": 3,
+   "table": 1,
+   "wave4": 7,
+   "wave5": 5,
+   "won": 0,
+   "exiled": 1,
+   "deathModes": {
+    "combat": 24,
+    "contest": 2,
+    "dehydration": 1
+   },
+   "w12ScholarCombatDeaths": 21,
+   "layer": {
+    "alertDays": 95,
+    "avoided": 122,
+    "marchRefused": 104
+   }
+  }
+ },
+ "verdict": {
+  "primaryGO": false,
+  "gNational": true,
+  "gModes": true,
+  "newModes": [],
+  "gW12": true,
+  "verdict": "NO-GO"
+ },
+ "rows": [
+  {
+   "seed": 11,
+   "policyId": "leadfeast",
+   "days": 145,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 106,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 57,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 12,
+   "deaths": [
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 64,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 97,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eater",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 97,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eater",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 122,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "rerun",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 136,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "influencer",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 139,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spoiler",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 140,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spoiler",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 147,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 11,
+   "policyId": "w5avoid2",
+   "days": 154,
+   "endReason": "village-dead",
+   "maxUnlocked": 5,
+   "unlockDay5": 106,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 66,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 11,
+   "deaths": [
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 64,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 97,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eater",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 97,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eater",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 125,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "rerun",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 125,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "influencer",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 128,
+     "cause": "combat",
+     "loc": "creekside grove",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 147,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "redactor",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 147,
+     "cause": "contest",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    }
+   ],
+   "layer": {
+    "alertDays": 19,
+    "avoided": 20,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 20,
+    "marchRefused": 14
+   }
+  },
+  {
+   "seed": 22,
+   "policyId": "leadfeast",
+   "days": 86,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 19,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      },
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 55,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "memory_projector",
+       "wave": 2
+      },
+      {
+       "id": "memory_projector",
+       "wave": 2
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 60,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "heckler",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 22,
+   "policyId": "w5avoid2",
+   "days": 86,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 19,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      },
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 55,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "memory_projector",
+       "wave": 2
+      },
+      {
+       "id": "memory_projector",
+       "wave": 2
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 60,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 68,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 73,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "heckler",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    }
+   ],
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 0,
+    "marchRefused": 0
+   }
+  },
+  {
+   "seed": 33,
+   "policyId": "leadfeast",
+   "days": 111,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 34,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 11,
+   "deaths": [
+    {
+     "day": 75,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spool",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 82,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 83,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spoiler",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    },
+    {
+     "day": 103,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eater",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 103,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 111,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "network_note",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 111,
+     "cause": "sickness",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 112,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spool",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 33,
+   "policyId": "w5avoid2",
+   "days": 145,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 68,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 13,
+   "deaths": [
+    {
+     "day": 75,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 75,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spool",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 115,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 135,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "timeslot",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 146,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    }
+   ],
+   "layer": {
+    "alertDays": 35,
+    "avoided": 61,
+    "avoidedRaider": 10,
+    "avoidedLinger": 2,
+    "avoidedFollower": 49,
+    "marchRefused": 43
+   }
+  },
+  {
+   "seed": 44,
+   "policyId": "leadfeast",
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 5,
+   "unlockDay5": 71,
+   "tableEver": true,
+   "tableDay": 72,
+   "nationalDays": 104,
+   "exiledEver": false,
+   "arc": 4,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 30,
+     "cause": "combat",
+     "loc": "the shallows",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 37,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 53,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "terms_of_service",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 94,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "network_note",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 121,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "timeslot",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 126,
+     "cause": "combat",
+     "loc": "forest floor",
+     "monsters": [
+      {
+       "id": "spoiler",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 130,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ad_break",
+       "wave": 3
+      },
+      {
+       "id": "?",
+       "wave": null
+      },
+      {
+       "id": "?",
+       "wave": null
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 152,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "network_note",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 160,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 44,
+   "policyId": "w5avoid2",
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 5,
+   "unlockDay5": 71,
+   "tableEver": true,
+   "tableDay": 72,
+   "nationalDays": 97,
+   "exiledEver": false,
+   "arc": 4,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 30,
+     "cause": "combat",
+     "loc": "the shallows",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 34,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 37,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      },
+      {
+       "id": "ducks_in_a_row",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 41,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 53,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "terms_of_service",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      },
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 86,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spoiler",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 89,
+     "cause": "combat",
+     "loc": "edge thicket",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 91,
+     "cause": "dehydration",
+     "loc": "forest floor",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 127,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 135,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "callback",
+       "wave": 3
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 143,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 151,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "terms_of_service",
+       "wave": 3
+      },
+      {
+       "id": "terms_of_service",
+       "wave": 3
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 166,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "cancellation",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    }
+   ],
+   "layer": {
+    "alertDays": 41,
+    "avoided": 41,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 41,
+    "marchRefused": 46
+   }
+  },
+  {
+   "seed": 55,
+   "policyId": "leadfeast",
+   "days": 85,
+   "endReason": "village-lost",
+   "maxUnlocked": 3,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": true,
+   "arc": 3,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "loc": "forest floor",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "loc": "creek bend",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 21,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "buffering",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "belltoad",
+       "wave": 1
+      },
+      {
+       "id": "?",
+       "wave": null
+      },
+      {
+       "id": "?",
+       "wave": null
+      },
+      {
+       "id": "?",
+       "wave": null
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 55,
+   "policyId": "w5avoid2",
+   "days": 85,
+   "endReason": "village-lost",
+   "maxUnlocked": 3,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": true,
+   "arc": 3,
+   "won": false,
+   "raids": 7,
+   "deaths": [
+    {
+     "day": 12,
+     "cause": "dehydration",
+     "loc": "forest floor",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 17,
+     "cause": "combat",
+     "loc": "creek bend",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 21,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 46,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "buffering",
+       "wave": 3
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "moderator",
+       "wave": 2
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    },
+    {
+     "day": 77,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 78,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "belltoad",
+       "wave": 1
+      },
+      {
+       "id": "?",
+       "wave": null
+      },
+      {
+       "id": "?",
+       "wave": null
+      },
+      {
+       "id": "?",
+       "wave": null
+      }
+     ],
+     "draw": false,
+     "channel": "lingerer"
+    }
+   ],
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 0,
+    "marchRefused": 0
+   }
+  },
+  {
+   "seed": 66,
+   "policyId": "leadfeast",
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 5,
+   "deaths": [
+    {
+     "day": 13,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "old pasture",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 67,
+     "cause": "starvation",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spool",
+       "wave": 3
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 66,
+   "policyId": "w5avoid2",
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 75,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 5,
+   "deaths": [
+    {
+     "day": 13,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "gallowdeer",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 66,
+     "cause": "combat",
+     "loc": "old pasture",
+     "monsters": [
+      {
+       "id": "reunion",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 67,
+     "cause": "starvation",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "spool",
+       "wave": 3
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    }
+   ],
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 0,
+    "marchRefused": 0
+   }
+  },
+  {
+   "seed": 77,
+   "policyId": "leadfeast",
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 65,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 5,
+   "deaths": [
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "loc": "open meadow",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "influencer",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "open meadow",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 74,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "suburb",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 74,
+     "cause": "contest",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    }
+   ],
+   "layer": null
+  },
+  {
+   "seed": 77,
+   "policyId": "w5avoid2",
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 65,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 5,
+   "deaths": [
+    {
+     "day": 10,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "hushwolf",
+       "wave": 1
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 65,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "eulogy",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "raid-night"
+    },
+    {
+     "day": 67,
+     "cause": "combat",
+     "loc": "open meadow",
+     "monsters": [
+      {
+       "id": "algorithm",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 69,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "editor",
+       "wave": 5
+      }
+     ],
+     "draw": true,
+     "channel": "draw"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "influencer",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 72,
+     "cause": "combat",
+     "loc": "open meadow",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    },
+    {
+     "day": 74,
+     "cause": "combat",
+     "loc": "Haven",
+     "monsters": [
+      {
+       "id": "suburb",
+       "wave": 4
+      }
+     ],
+     "draw": false,
+     "channel": "other"
+    },
+    {
+     "day": 74,
+     "cause": "contest",
+     "loc": "Haven",
+     "monsters": [],
+     "draw": false,
+     "channel": "nonhaven"
+    }
+   ],
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 0,
+    "marchRefused": 1
+   }
+  },
+  {
+   "seed": 88,
+   "policyId": "leadfeast",
+   "days": 58,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 3,
+   "deaths": [],
+   "layer": null
+  },
+  {
+   "seed": 88,
+   "policyId": "w5avoid2",
+   "days": 58,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "tableEver": false,
+   "tableDay": null,
+   "nationalDays": 0,
+   "exiledEver": false,
+   "arc": 3,
+   "won": false,
+   "raids": 3,
+   "deaths": [],
+   "layer": {
+    "alertDays": 0,
+    "avoided": 0,
+    "avoidedRaider": 0,
+    "avoidedLinger": 0,
+    "avoidedFollower": 0,
+    "marchRefused": 0
+   }
+  }
+ ]
+}
