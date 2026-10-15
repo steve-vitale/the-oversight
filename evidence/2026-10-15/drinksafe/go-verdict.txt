@@ -1,0 +1,39 @@
+=== sim-drinksafe-b verdict ===
+runs: control 16, armed 16
+
+--- MECHANISM: wild water-tile fill share ---
+[control] all-wild visits=497 filled=9 share=0.0181 | true-wild visits=67 filled=9 share=0.1343 | havenFills=608 wildFills=17 refused=214
+[armed] all-wild visits=497 filled=9 share=0.0181 | true-wild visits=67 filled=9 share=0.1343 | havenFills=608 wildFills=17 refused=214
+row-cap hits (300 rows): control 0, armed 0
+MECHANISM GO (armed true-wild share >= 2x control): MISS (0.1343 vs 2x0.1343=0.2687)
+
+--- CO-PRIMARY: ranging-dehydration deaths ---
+control total=3 ranging=3 | armed total=3 ranging=3
+CO-PRIMARY (armed ranging-dehy <= control): HOLD
+
+--- GUARDRAILS ---
+(d) median survival: armed 147d vs control 147d (bar >= 137) -> HOLD
+(e) national: armed 5/16 vs control 5/16 (bar >= 3) -> HOLD
+(f) new death modes (armed n>=3, control 0): none -> HOLD
+
+GO VERDICT: MISS — revert competent.js byte-clean, evidence-only landing
+
+--- WALL NUMBERS ---
+[control] national 5/16 table 1/16 won 0/16 w4 4/16 w5 0/16 median 147d max 182d
+[armed] national 5/16 table 1/16 won 0/16 w4 4/16 w5 0/16 median 147d max 182d
+
+--- DEATH CAUSES ---
+  monster:combat: control 38 | armed 38
+  monster:expedition: control 1 | armed 1
+  monster:villager combat: control 22 | armed 22
+  person:combat: control 2 | armed 2
+  villager:Nevermore: control 2 | armed 2
+  villager:a wound that wouldn't close: control 14 | armed 14
+  villager:combat: control 32 | armed 32
+  villager:contest: control 7 | armed 7
+  villager:lockjaw: control 2 | armed 2
+  villager:monster: control 18 | armed 18
+  villager:sickness: control 10 | armed 10
+  villager:starvation: control 16 | armed 16
+
+instrument errors: control 0, armed 0
