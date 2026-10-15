@@ -120,6 +120,26 @@ formation, food affordability, campaign survival or ending probability.
   perks, villager flank/War Cry, aid fights and more. Compare against
   post-2026-10-14 baselines only.
 
+## Campaign coverage
+
+`campaigner` and `campaigner-control` share capable survival and cautious
+late-game waiting. The seeker uses public coalition actions and actual
+food/gear transfers, never prepared progression or relationships. Use:
+
+```powershell
+node scripts/campaign-audit.js --n 16 --days 240 --jobs 4 --out .git/campaign-natural.json
+node scripts/campaign-audit.js --root C:/path/to/frozen-checkout --n 16 --days 240 --out .git/campaign-baseline.json
+node scripts/campaign-prepared.js --seed 7 --titan finale --loadout advanced
+```
+
+The last command is explicitly **prepared**: strong relations, large food
+and gear stock, and nearby arena placement. It uses real recruitment and
+combat but does not establish acquisition, affordability or natural odds.
+Later campaign branches remain incompletely covered. See the dated
+`campaign-usage-audit.md` before interpreting a policy counter as a victory.
+Actual battle starts can occur during approach: the audit observes the
+public start/end methods and verifies observer-on/off gameplay hashes.
+
 ## Windows checkout
 
 The shared harness reads script order from `index.html` without a shell. Some

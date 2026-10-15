@@ -103,8 +103,16 @@ simulation/playtest goal with these gaps before expanding content blindly:
    calls, upkeep and the paid Finale reinforcement action are repaired.
    Prepared strong alliances reach the unchanged 20-blade gate in 15/16
    generated worlds. This is capacity evidence, not a campaign win rate.
-   See `evidence/2026-10-15/coalition-recruitment-audit.md`; the capable
-   titan/Network seeker and full campaign playthrough remain next work.
+   See `evidence/2026-10-15/coalition-recruitment-audit.md`.
+   The separate `campaigner`/control policies now use real councils, food,
+   donations, recruitment and approach: nine natural Herald fights, six
+   kills in 16 runs, but no Finale entry or tier-three overtime/Network.
+   Wide-grid AI movement is repaired with runtime proofs; matched natural
+   state hashes do not change. Phone playtesting found another real gap:
+   the UI still draws 81 cells and omits the coalition's fighters. Repair
+   that presentation next, then diagnose Finale bearer survival and the
+   cautious bot's food/overtime limits. Later-node branches and a complete
+   campaign remain unverified. See `evidence/2026-10-15/campaign-usage-audit.md`.
 4. **Item promises.** Audit `baseEffect`-only path items and unused
    `tradeValue` fields (e.g. audience tokens). Functional armor/weapon
    fields are proven separately from bespoke advertised powers; a

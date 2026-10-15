@@ -122,3 +122,22 @@ Changes are local and reviewable. No release version was bumped and no
 production deployment was made; the service-worker asset list includes the
 new runtime/data for a later release. Gameplay/feel commits are marked
 `[needs-eyes]` for Steve's review.
+
+## Campaign continuation, 2026-10-15
+
+The campaign-seeking policy is now implemented separately from capable,
+with a matched waiting control and actual recruitment, provisions, donated
+gear, travel and combat. The 16-seed screen yields six real Herald kills
+and no Finale/Network entry. A hard-coded 9x9 AI movement boundary is fixed
+for 12x12 battles; all 32 natural before/after state hashes remain identical.
+Prepared advanced armies beat the Herald, but the Finale crew still drops
+or routes the bearer while the army remains intact. These are not complete
+campaign proofs or a demonstrated balance gain.
+
+Phone playtesting found a separate next priority: the battle UI clamps to
+81 cells and does not draw coalition fighters. That remains open. The
+policy's later-node branches, natural food/overtime viability and Network
+playthrough also remain open. Read `campaign-usage-audit.md` for exact
+fixtures, raw evidence and next steps. Latest validation: **113 quick /
+885 full scripts pass**, plus 25 new focused assertions and 111 ontology
+systems. No release/push/deployment; the broad roadmap goal stays active.
