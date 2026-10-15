@@ -92,3 +92,14 @@ surviving NPC participants earn the existing shared combat/alien-fight deeds.
 The player keeps its current timing and credits; no integration, world,
 region or nomad system is changed. This closes a godpath progression caller
 hole, with participant/death/flee/replay proofs and matched panels.
+
+Alien companion readiness exception: Codex repairs encounters.js's actual
+startAlienCombat party builder to carry existing world HP and equipment,
+matching the ordinary monster builder. No region/nomad content changes and
+no beam tuning. Paired constructor, damage, passive and campaign proofs
+separate this from the preceding party-XP fix.
+
+Companion health settlement exception: the same readiness audit proved that
+57 surviving tactical HP reverted to 77 world HP on escape. Codex also
+repairs game.js tbEnd's NPC health settlement, for real actor IDs only,
+including fleeing and actual rescue healing. No repeated damage/death hooks.

@@ -2688,14 +2688,28 @@
         try {
           var vl = this.data.villagers || [];
           for (var vi = 0; vi < vl.length; vi++) if (vl[vi].id === rid) { vdef = vl[vi]; break; }
-        } catch (e2) {}
+          if (!vdef) vdef = (this.data.background_survivors || []).find(function (p) { return p.id === rid; });
+        } catch (e2) { console.warn('[encounters] companion definition', e2); }
+        if (!vdef) continue;
         var temp = (vdef && vdef.personality && vdef.personality.temperament) || 'steady';
         var ai = temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'helpful';
+        // Same body and gear as an ordinary monster encounter. Wounds
+        // carry in; the legacy 30-HP helper was a different, weaker person.
+        var vhpCur = ((this.state.village || {}).health || {})[rid];
+        var vhp = Math.max(1, Math.round(vhpCur !== undefined ? vhpCur : 100));
+        var vwbonus = 0, varmor = 0;
+        try {
+          if (S.equipment) {
+            vwbonus = S.equipment.weaponBonusOf(vdef, this.data.items);
+            varmor = S.equipment.armorOf(vdef, this.data.items);
+          }
+        } catch (e3) { console.warn('[encounters] companion equipment', e3); }
         fighters.push({
           key: 'v_' + rid, kind: 'villager', villagerId: rid,
           name: this.displayName ? this.displayName(rid) : rid, emoji: '🧍',
-          hp: 30, maxHp: 30, speed: this.villagerSpeed(rid), mx: vp.mx, my: vp.my,
+          hp: vhp, maxHp: Math.max(vhp, 100), speed: this.villagerSpeed(rid), mx: vp.mx, my: vp.my,
           alive: true, fled: false, ai: ai, helped: false,
+          wbonus: vwbonus, varmor: varmor,
         });
       }
     } catch (e) {}

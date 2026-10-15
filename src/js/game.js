@@ -40112,8 +40112,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       const p = this.tbFighter('p');
       if (p) s.health = Math.max(0, p.hp);
+      const _settledCompanions = new Set([_fightBearer]);
       for (const v of f.fighters) {
-        if (v.kind === 'villager' && v.alive && !v.fled) this.tbVillagerSyncPos(v);
+        if (v.kind !== 'villager') continue;
+        if (v.alive && !v.fled) this.tbVillagerSyncPos(v);
+        const vid = v.villagerId;
+        if (!vid || _settledCompanions.has(vid)) continue;
+        try {
+          let person = this.vpOf ? this.vpOf(vid) : null;
+          if (!person || !person.id) person = (this.data.background_survivors || []).find(p => p.id === vid);
+          if (!person) continue;
+          _settledCompanions.add(vid);
+          const village = this.state.village;
+          village.health = village.health || {};
+          // Carry actual wounds/healing, including a retreating survivor.
+          // Damage and death already resolved in the fight; never replay them.
+          village.health[vid] = person.dead || (v.alive === false && !v.fled)
+            ? 0 : Math.max(0, Math.round(v.hp || 0));
+        } catch (e) { console.warn('[combat] companion health settlement', e); }
       }
       // LINEAGE-DEDUPED KILL LIST (break-it combat r12 2026-10-11): shared by
       // the 'won' and 'routed' reward paths below. One body = one kill —
