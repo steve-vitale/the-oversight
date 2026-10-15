@@ -108,9 +108,17 @@ simulation/playtest goal with these gaps before expanding content blindly:
    actual phone Pantry-button proofs retain costs, builder discount, labor,
    and capacity gains. All 32 matched natural states remain identical, with
    zero storage/pemmican calls; this is contract proof, not livelihood value.
-   See `evidence/2026-10-15/storage-worksite-audit.md`. Preservation already
-   appears in some maker runs; pemmican and deliberate storage use still
-   need public-action playtests before adding them to a livelihood policy.
+   See `evidence/2026-10-15/storage-worksite-audit.md`. The next audit proved
+   the paid smoke/render/pemmican ladder and repaired empty ingredient stacks
+   funding pemmican. Actual phone play found corpse-menu dispatch swallowing
+   terrain/person actions on empty cells; the body branch now requires a body,
+   restoring the existing fire menu and its pemmican action. A prepared novice
+   completes Render → Smoke → Make with real costs and yields. Natural 16-seed
+   capable/maker screens show no sampled fat, no rendering knowledge, and zero
+   pemmican calls. Maker smokable meat often sits on the prep counter its own
+   routine ignores. Next test deliberate counter preservation and measure
+   supply/value before adding more rewards. See
+   `evidence/2026-10-15/preservation-access-audit.md`.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
    two volunteers, plus three from Haven) and duplicate-call inflation.
    Strong allies can now provide up to six distinct real people; repeated
