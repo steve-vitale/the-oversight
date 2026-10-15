@@ -111,8 +111,12 @@ simulation/playtest goal with these gaps before expanding content blindly:
    state hashes do not change. The phone presentation follow-up now draws
    144 cells and living named allies at combat positions; labels are 12px,
    and real Wait turns visibly move the army. Ordinary combat retains 81
-   cells. The direct Table trial actually uses 12x12 and currently inherits
-   Finale campaign narration/tools: audit that wrapper boundary separately.
+   cells. The direct Table trial actually uses 12x12. Its world-campaign
+   setup/tools/resolution leak is now repaired, with real phone loss →
+   mantle → Table continuation. See `evidence/2026-10-15/table-trial-isolation-audit.md`.
+   That playtest transferred the mantle to an already committed Haven
+   volunteer: audit injection/upkeep/readiness for a duplicate bearer role
+   before treating raw muster entries as distinct active blades.
    See `evidence/2026-10-15/coalition-presentation-audit.md`.
    Next diagnose Finale bearer survival and the cautious bot's food/overtime
    limits. Later-node branches and a complete campaign remain unverified.

@@ -159,3 +159,25 @@ narration/tools after the bypass flag is consumed inside the wrapper chain;
 audit that boundary separately before claiming world/Table isolation.
 Finale survival, natural food/overtime entry, Network completion and the
 remaining broad roadmap/noncombat work stay open. No release or deployment.
+
+## Direct Table trial isolation, 2026-10-15
+
+Explicit trial context now survives both party wrappers and core combat.
+The summoned champion does not lift or inherit a nearby world monster,
+grant world crew tools, mark the Finale world heart or resolve its muster.
+Old pending trials are recognized, leaked tools unusable, and their leaked
+world-heart mark retired. A real phone loss passed the mantle from Carlos
+to Benedetta and resumed the Table at beat three with reduced terror;
+the separate world Herald and world muster data remained present.
+
+Validation: 43 focused checks (original runtime fails 25), 115 quick /
+887 full scripts pass, ontology 111 systems, no unwired Table/Finale
+functions. Sixteen seeds × capable/campaigner have identical before/after
+gameplay hashes in all 32 pairs; those ordinary runs did not choose a trial.
+See `table-trial-isolation-audit.md` for fixture limits and actual UI proof.
+
+Next investigate the committed-volunteer mantle transition: Benedetta was
+already listed among Haven's blades, and current muster filtering does not
+exclude the new bearer. Do not count raw entries as distinct active allies
+until actual injection/upkeep/readiness are checked. Full campaign survival,
+Network and the rest of the roadmap remain open; no release/deployment.

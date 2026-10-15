@@ -1,5 +1,8 @@
 # Coalition presentation repair
 
+Follow-up: `table-trial-isolation-audit.md` repairs and verifies the direct
+Table/world-campaign boundary found in this presentation pass.
+
 2026-10-15, following `campaign-usage-audit.md`. This closes the confirmed
 phone defect that hid a coalition while its actual combat turns still ran.
 
