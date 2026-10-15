@@ -770,7 +770,7 @@
             var tmpl = { name: 'Taken rations', kcalEach: 150, units: units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. Fear took it.' };
             var stack = null;
             try { stack = inv.find(function (i) { return i.stolen && !i.bonded; }); } catch (e) {}
-            if (stack) stack.units += units; else inv.push(tmpl);
+            if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; } else inv.push(tmpl);
             this.say('😶 ' + dname + ' hands it over without a word. No pleading this time — just arithmetic. It\'s worse.');
           } else {
             this.say('😶 ' + dname + ' empties their pockets. There\'s almost nothing. The look they give you isn\'t gratitude — it\'s bookkeeping.');

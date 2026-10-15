@@ -4076,7 +4076,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // have different clocks — merge only into an identical stack.
         const tmpl = { name: 'Stolen rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Someone is going to miss these.' };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
-        if (stack) stack.units += units;
+        if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
       };
       if (Math.random() < chance) {
@@ -4152,7 +4152,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // different days, different clocks.
         const tmpl = { name: 'Taken rations', kcalEach: 150, units, stolen: true, spoilDay: day + 3, desc: 'Taken, not given. You know the difference.' };
         const stack = inv.find(i => i.stolen && !i.bonded && !(this.isSpoiled && this.isSpoiled(i)) && this.stacksMatch(i, tmpl));
-        if (stack) stack.units += units;
+        if (stack) { this.mergeHarvestShares(stack, tmpl, units); stack.units += units; }
         else inv.push(tmpl);
         this.npcNeeds(vid).hunger = Math.min(100, (this.npcNeeds(vid).hunger || 0) + Math.round(demand / 25));
       };
@@ -6287,7 +6287,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const vigorMult = this.vigorYieldMult(dep.avgVigor);
         const kcal = Math.round(R(300, 600) * eff * (dep.depleted > 0 ? vigorMult : 0.3));
         // less to find when the land is stripped — scarcity is real
-        this.stockPantry(kcal, 'Foraged food');
+        this.stockPantry(kcal, 'Foraged food', { harvestShares: this.harvestOrigin(vid) });
         let landNote = '';
         if (dep.depleted === 0) {
           landNote = ` The ${dep.zone} are picked clean — ${first} found scraps. The village needs new ground.`;
@@ -6442,7 +6442,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               p.lastHarvest = gday; n++;
             }
           }
-          if (kcal > 0) this.stockPantry(kcal, 'Garden harvest');
+          if (kcal > 0) this.stockPantry(kcal, 'Garden harvest', { harvestShares: this.harvestOrigin(vid) });
           this.say(`🌱 ${first} works the garden — watered, weeded, turned${n ? `, and brings in a harvest (+${kcal} kcal to the pantry)` : '. Nothing ripe yet'}.`);
           try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the garden');
@@ -7594,12 +7594,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const _sgb = this.granarySpoilBonus ? this.granarySpoilBonus() : 0;
         const item = {
           name: name || 'Foraged food', kcalEach: pk, units: 1,
+          ...(opts.harvestShares ? { harvestShares: opts.harvestShares } : {}),
           spoilDay: day + 3 + _sgb,
           safe: true, kg: Math.max(0.05, Math.round(pk / 5) / 1000),
         };
         if (_sgb > 0) item.granaryDays = _sgb;
         const existing = (this.stacksMatch && v.pantry.find(p => this.stacksMatch(p, item))) || null;
-        if (existing) existing.units += 1;
+        if (existing) { this.mergeHarvestShares(existing, item, 1); existing.units += 1; }
         else v.pantry.push(item);
       }
       // keep the compat counter honest until the next end-of-day sync
@@ -11449,10 +11450,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const scholar = this.state.scholar;
       const kcal = n * plant.caloriesPerUnit;
       if (this.plantKnown(pid)) {
-        scholar.inventory.push(this.foodForageItem(plant, true, n, kcal, scholar.day));
+        scholar.inventory.push(this.foodForageItem(plant, true, n, kcal, scholar.day, this.harvestOrigin(this.villagerId)));
         this.say('+' + n + 'x ' + this.plantCalledName(pid) + ' (+' + kcal + ' kcal).');
       } else {
-        this.addUnknownToLump(plant, n, scholar.day);
+        this.addUnknownToLump(plant, n, scholar.day, undefined, this.harvestOrigin(this.villagerId));
         this.say('Unfamiliar unknown nuts — into the bag. (Unknowns lump together; sort them at camp.)');
       }
     },
@@ -14094,6 +14095,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const existing = v.pantry.find(p => this.stacksMatch(p, donated));
       if (existing) {
+        this.mergeHarvestShares(existing, donated, item.units || 1);
         existing.units += (item.units || 1);
       } else {
         v.pantry.push(donated);
@@ -14480,9 +14482,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // FOOD REALITY: keep processing state — the haul stays workable.
           plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
         const existing = inv.find(i => this.stacksMatch(i, takenStack));
-        if (existing) existing.units += canTake;
+        if (existing) { this.mergeHarvestShares(existing, takenStack, canTake); existing.units += canTake; }
         else inv.push(takenStack);
         totalKcal += canTake * item.kcalEach;
         totalKg += canTake * (item.kg || 0);
@@ -14654,9 +14656,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const takenStack = { name: item.name, kcalEach: item.kcalEach, units: 1, spoilDay: this.pantryTakeSpoilDay(item), safe: item.safe, kg: item.kg, unit: item.unit || 'item', rawKcal: item.rawKcal, cookedKcal: item.cookedKcal, needsCooking: item.needsCooking,
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, prep: item.prep,
           // TRICHINOSIS (break-it food 2026-10-10): the take never washes worms.
-          parasiteRisk: item.parasiteRisk };
+          parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
       const existing = inv.find(i => this.stacksMatch(i, takenStack));
       if (existing) {
+        this.mergeHarvestShares(existing, takenStack, 1);
         existing.units++;
       }
       else inv.push(takenStack);
@@ -14974,7 +14977,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const first = this.displayName(rid);
             if (away.purpose === 'forage') {
               const kcal = 200 + Math.floor(Math.random() * 400);
-              this.stockPantry(kcal, 'Foraged food');
+              this.stockPantry(kcal, 'Foraged food', { harvestShares: this.harvestOrigin(rid) });
               // Only announce if you're at Haven to see it.
               if (this.map.px === hx && this.map.py === hy) {
                 this.say(`🌿 ${first} returns from foraging the wilds: +${kcal} kcal to the pantry.`);
@@ -19984,6 +19987,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const entry = ((this.state.codex || {}).plants || {})[p.pid] || {};
         this.state.scholar.inventory.push({
           plantId: p.pid, units, kcalEach: plant.caloriesPerUnit || 100,
+          harvestShares: this.harvestOrigin(this.villagerId),
           spoilDay: day + (plant.spoilageDays || 4), name: plant.name || p.pid,
           unit: plant.unit || 'handful', kg: 0.1,
           prep: (entry.level || 0) >= 2 && entry.prepKnown ? 'Garden-fresh.' : 'Fresh from the garden.',
@@ -24293,7 +24297,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const e = bySpecies[pid];
           const kcal = e.units * e.plant.caloriesPerUnit;
           if (e.known) {
-            const item = this.foodForageItem(e.plant, true, e.units, kcal, scholar.day);
+            const item = this.foodForageItem(e.plant, true, e.units, kcal, scholar.day, this.harvestOrigin(this.villagerId));
             scholar.inventory.push(item);
             // BELIEVED NAME (break-it knowledge 2026-10-10c): the pack line
             // speaks the name the player believes — a false label is still
@@ -24305,7 +24309,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // name; their kcal arrives after the Shell action, honestly.
             if (item.edible) totalKcalKnown += kcal;
           } else {
-            this.addUnknownToLump(e.plant, e.units, scholar.day);
+            this.addUnknownToLump(e.plant, e.units, scholar.day, undefined, this.harvestOrigin(this.villagerId));
             packedBits.push(`${e.units}\u00d7 ${this.lumpFormName(e.plant)}`);
           }
         }
@@ -26827,7 +26831,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (newUnits <= 0) return;
       } catch (e) {}
       const existing = v.pantry.find(p => p.name === 'Foraged food' && p.spoilDay === freshDay);
-      if (existing) existing.units += newUnits;
+      if (existing) { this.mergeHarvestShares(existing, {}, newUnits); existing.units += newUnits; }
       else v.pantry.push({ name: 'Foraged food', kcalEach: 200, units: newUnits, spoilDay: freshDay, safe: true, kg: 0.2 });
     },
 

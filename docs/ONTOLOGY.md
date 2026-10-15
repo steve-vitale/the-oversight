@@ -694,9 +694,10 @@ THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super spe
 ### food (`food.js`)
 Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 
-**Provides:** foodMarker(), cleanCarcass(), takePrepMaterial(idx, qty), carcassToMeat(), cookFood(), renderFat(), pemmicanSets(), pemmicanPlan()     (per-set picks + honest bar counts, no consumption), pemmicanPreview()  (honest {sets, bars} for the UI label), makePemmican(), cookTransform(), cookClassFor(), cookOutcome(), consumeCookFire(), downgradeOutcome(), stacksMatch()       (fungibility gate for stack merging), spoilBonusDays()    (preservation_instinct shelf-life bonus), isSpoiled()         (bonus-aware spoilage boundary), experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
+**Provides:** foodMarker(), cleanCarcass(), takePrepMaterial(idx, qty), carcassToMeat(), cookFood(), renderFat(), pemmicanSets(), pemmicanPlan()     (per-set picks + honest bar counts, no consumption), pemmicanPreview()  (honest {sets, bars} for the UI label), makePemmican(), cookTransform(), cookClassFor(), cookOutcome(), consumeCookFire(), downgradeOutcome(), stacksMatch()       (fungibility gate for stack merging), harvestOrigin(vid), mergeHarvestShares(target, incoming, units), blendHarvestShares(parts) (actual plant harvester provenance through fungible portions), spoilBonusDays()    (preservation_instinct shelf-life bonus), isSpoiled()         (bonus-aware spoilage boundary), experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
 
 **Rules:**
+- harvest_source_only: actual player/NPC plant harvests retain canonical harvester shares; processing and fungible merging preserve proportional sources without assigning old food or changing calories (code: harvestOrigin, mergeHarvestShares, blendHarvestShares)
 - raw_penalty: true (code: food.js)
 - processing_required: true (code: food.js)
 - experiment_bridges: true (code: food.js — nibbles grant calSense/riskSense on the L0 entry, never identify; testCautiously reads entry.experiments)

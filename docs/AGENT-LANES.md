@@ -103,3 +103,12 @@ Companion health settlement exception: the same readiness audit proved that
 57 surviving tactical HP reverted to 77 world HP on escape. Codex also
 repairs game.js tbEnd's NPC health settlement, for real actor IDs only,
 including fleeing and actual rescue healing. No repeated damage/death hooks.
+
+Living Garden provenance exception: Codex edits food.js and narrow game.js
+plant-harvest/stocking/transfer callers to retain the actual harvester
+through existing food processing and whole-unit moves. No region/nomad
+authoring, food-yield/cost changes or new ascension gate in this prerequisite.
+The seven-day gate waits for actual eater receipts and parity measurements.
+Harvest transfer follow-up: the same source metadata crosses Light Fingers
+(abilityActions.js) and the corruption ration merge (corruption.js).
+Scope is source preservation/dilution only; theft and corruption rules stay.

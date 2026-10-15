@@ -18,10 +18,12 @@
 //   - consumeCookFire()
 //   - downgradeOutcome()
 //   - stacksMatch()       (fungibility gate for stack merging)
+//   - harvestOrigin(vid), mergeHarvestShares(target, incoming, units), blendHarvestShares(parts) (actual plant harvester provenance through fungible portions)
 //   - spoilBonusDays()    (preservation_instinct shelf-life bonus)
 //   - isSpoiled()         (bonus-aware spoilage boundary)
 //   - experimentWith()    (nibble: calorie/sickness knowledge without ID; bridges testCautiously)
 // rules:
+//   - harvest_source_only: actual player/NPC plant harvests retain canonical harvester shares; processing and fungible merging preserve proportional sources without assigning old food or changing calories (code: harvestOrigin, mergeHarvestShares, blendHarvestShares)
 //   - raw_penalty: true (code: food.js)
 //   - processing_required: true (code: food.js)
 //   - experiment_bridges: true (code: food.js — nibbles grant calSense/riskSense on the L0 entry, never identify; testCautiously reads entry.experiments)
@@ -209,11 +211,43 @@
     // ---------- item construction ----------
 
     // A foraged plant, knowledge-gated. Unknown plants aren't food yet.
-    foodForageItem(plant, isKnown, units, kcal, day) {
+    // Provenance is a share of a fungible portion, not extra food. Unknown
+    // and legacy food stays unattributed. Mixing never changes stack choice,
+    // whole-unit rounding, calories, safety, spoilage or the actor's XP.
+    blendHarvestShares(parts) {
+      const out = Object.create(null);
+      let total = 0;
+      for (const p of parts || []) {
+        const w = Number(p.weight);
+        if (!Number.isFinite(w) || w <= 0) continue;
+        total += w;
+        const shares = (p.item || {}).harvestShares || {};
+        const valid = Object.entries(shares).filter(([, n]) => Number.isFinite(n) && n > 0 && n <= 1);
+        const sum = valid.reduce((n, [, x]) => n + x, 0);
+        for (const [id, n] of valid) out[id] = (out[id] || 0) + w * n / Math.max(1, sum);
+      }
+      if (total > 0) for (const id of Object.keys(out)) out[id] /= total;
+      return out;
+    },
+    mergeHarvestShares(target, incoming, units) {
+      const shares = this.blendHarvestShares([
+        { item: target, weight: target.units || 0 },
+        { item: incoming, weight: units == null ? incoming.units || 0 : units },
+      ]);
+      if (Object.keys(shares).length) target.harvestShares = shares;
+      else delete target.harvestShares;
+    },
+    harvestOrigin(vid) {
+      const person = vid && this.vpOf && this.vpOf(vid);
+      return person && person.id === vid && !person.dead ? { [vid]: 1 } : {};
+    },
+
+    foodForageItem(plant, isKnown, units, kcal, day, harvestShares) {
       const isNut = NUT_IDS[plant.id] || NUT_RE.test(plant.preparation || '');
       const mustCook = MUST_COOK_RE.test(plant.preparation || '');
       const base = {
         plantId: plant.id, units, kg: 0.1,
+        ...(harvestShares && Object.keys(harvestShares).length ? { harvestShares } : {}),
         unit: plant.unit, spoilDay: day + (plant.spoilageDays || 2),
       };
       if (!isKnown) {
@@ -342,7 +376,7 @@
 
     // addUnknownToLump: the game never loses track of what is what, even
     // though the player sees one opaque stack.
-    addUnknownToLump(plant, units, day, container) {
+    addUnknownToLump(plant, units, day, container, harvestShares) {
       const cont = container || this.state.scholar.inventory;
       const form = this.lumpFormOf(plant);
       const F = LUMP_FORMS[form];
@@ -360,6 +394,7 @@
       }
       const comp = lump.lump;
       const e = comp[plant.id] || { units: 0, day };
+      this.mergeHarvestShares(e, { harvestShares }, units);
       e.units += units;
       e.day = Math.min(e.day, day);
       comp[plant.id] = e;
@@ -387,6 +422,7 @@
       const notFood = (p.edibility || 'safe') === 'avoid';
       const item = {
         plantId: pid, units: e.units, kg: 0.1, unit: p.unit,
+        ...(e.harvestShares ? { harvestShares: e.harvestShares } : {}),
         spoilDay: e.day + (p.spoilageDays || 2),
         foodKind: isNut ? 'nut' : 'plant',
         foodState: isNut ? 'in_shell' : 'ready',
@@ -439,7 +475,7 @@
         if (!p) continue;
         const ix = inv.indexOf(it);
         if (ix >= 0) inv.splice(ix, 1);
-        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv);
+        const lump = this.addUnknownToLump(p, it.units || 1, s.day, inv, it.harvestShares);
         if (it.spoilDay) lump.spoilDay = Math.min(lump.spoilDay, it.spoilDay);
       }
     },
@@ -927,6 +963,7 @@
         const barRisk = wormRisk ? { id: wormRisk.id || 'trichinosis', p: wormRisk.p || 0.25, from: wormRisk.from } : null;
         inv.push({
           itemId: 'pemmican', plantId: null, foodKind: 'meat', foodState: 'pemmican',
+          harvestShares: this.blendHarvestShares(set.picks.map(p => ({ item: p.it, weight: p.kcal }))),
           edible: true, units: set.bars, unit: 'bar', kcalEach: set.kcalEach,
           spoilDay: day + 120, kg: 0.3, safe: true, // KG PER-UNIT (break-it food r4 2026-10-10): 0.3 kg per bar; the old *bars total bricked the pack.
           name: 'Pemmican',
@@ -2262,6 +2299,7 @@
             for (const pid of Object.keys(it.lump)) {
               const e = it.lump[pid];
               const te = target.lump[pid] || { units: 0, day: e.day };
+              this.mergeHarvestShares(te, e, e.units);
               te.units += e.units;
               te.day = Math.min(te.day, e.day);
               target.lump[pid] = te;
@@ -2602,7 +2640,7 @@
         safe: item.safe !== false, kg: item.kg || 0.2, prep: item.prep,
         foodKind: item.foodKind, foodState: item.foodState, edible: item.edible,
         diseaseRisk: item.diseaseRisk, needsCooking: item.needsCooking,
-        wellMade: item.wellMade,
+        wellMade: item.wellMade, harvestShares: item.harvestShares,
         // FULL PROCESSING STATE (break-it food 2026-10-09): the old subset-push
         // silently stripped poisonRisk — toxin laundering: poisoned meat came
         // back from the pantry clean, and trackMealExposure saw nothing, so

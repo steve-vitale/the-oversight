@@ -1651,9 +1651,9 @@
       var takenStack = { name: item.name, kcalEach: item.kcalEach, units: take, spoilDay: item.spoilDay, safe: item.safe, kg: item.kg, unit: item.unit || 'item',
         plantId: item.plantId, foodKind: item.foodKind, foodState: item.foodState, edible: item.edible, hiddenKcal: item.hiddenKcal, diseaseRisk: item.diseaseRisk, poisonRisk: item.poisonRisk, wellMade: item.wellMade, needsCooking: item.needsCooking, prep: item.prep,
         // TRICHINOSIS (break-it food 2026-10-10): a light lift doesn't wash worms either.
-        parasiteRisk: item.parasiteRisk };
+        parasiteRisk: item.parasiteRisk, harvestShares: item.harvestShares };
       var existing = inv.find(function (it) { return game.stacksMatch(it, takenStack); });
-      if (existing) existing.units += take;
+      if (existing) { game.mergeHarvestShares(existing, takenStack, take); existing.units += take; }
       else inv.push(takenStack);
       var caught = Math.random() < 0.5;
       if (caught) {
