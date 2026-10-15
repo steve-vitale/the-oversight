@@ -1,0 +1,69 @@
+[SETUP] seed 6141: oracleV2 establishing 12d...
+[DEFEND] d8 Lena vs mirrormoth
+[DEFEND] d8 Christian vs sweeps_week
+[DEFEND] d8 Duc vs gallowdeer
+[DEFEND] d8 Dante vs rut_king
+[DEFEND] d8 Aurora vs belltoad
+[RAID] d8 havenRaidTick FIRED — pantry=27667 monsters=8
+[CRISIS] d9 breach
+[CRISIS] d9 the-siege
+[RAID-RESOLVE] d9 aid crisis resolved: fought
+[ESTABLISHED] d14 pop=12 pantry=93515
+[DEFEND] d15 Lena vs rut_king
+[DEFEND] d15 Christian vs sweeps_week
+[DEFEND] d15 Duc vs murkcap
+[DEFEND] d15 Dante vs anaconda_empress
+[DEFEND] d15 Aurora vs cliffhanger
+[RAID] d15 havenRaidTick FIRED — pantry=59612 monsters=13
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[BLIGHT] d16 pantry=45179 pop=12 blocked=2330
+[RAID-RESOLVE] d16 aid crisis resolved: fought
+[CRISIS] d17 first-grave
+[PLAYER-DEATH] d17 Madison -> Lena (combat)
+[BLIGHT] d17 pantry=27966 pop=10 blocked=36803
+[BLIGHT] d20 pantry=19438 pop=10 blocked=42451
+[BLIGHT] d21 pantry=12017 pop=10 blocked=45037
+[STAGE-FAIL] blight did not bite: pantry=12017 >= 1200
+[RECOVER] d24 pantry=37332 pop=10 monsters=19 eligible=true raid=true
+
+[PEOPLE] mid-raid conversations (1-2d after raid)...
+[CONVO] mid-raid Lena latelyKind=mourning
+[CONVO] mid-raid Christian latelyKind=mourning
+[CONVO] mid-raid Duc latelyKind=mourning
+[CONVO] mid-raid Dante latelyKind=mourning
+[DEFEND] d26 Duc vs lockpick_raccoon
+[DEFEND] d26 Aurora vs lockpick_raccoon
+[DEFEND] d26 Sigrun vs anaconda_empress
+[DEFEND] d26 Giulia vs living_wire
+[DEFEND] d26 Jovan vs rut_king
+[RAID] d26 havenRaidTick FIRED — pantry=33718 monsters=21
+[RAID-RESOLVE] d27 aid crisis resolved: fought
+[PLAYER-DEATH] d32 Lena -> Christian (combat)
+[DEFEND] d38 Aurora vs rut_king
+[DEFEND] d38 Sigrun vs sunbasker
+[DEFEND] d38 Giulia vs nightcourt
+[DEFEND] d38 Jovan vs cliffhanger
+[DEFEND] d38 Greta vs murkcap
+[RAID] d38 havenRaidTick FIRED — pantry=49702 monsters=19
+[RAID-RESOLVE] d39 aid crisis resolved: fought
+[DEFEND] d45 Dante vs lockpick_raccoon
+[DEFEND] d45 Aurora vs murkcap
+[DEFEND] d45 Sigrun vs rut_king
+[DEFEND] d45 Jovan vs anaconda_empress
+[DEFEND] d45 Greta vs anaconda_empress
+[RAID] d45 havenRaidTick FIRED — pantry=101931 monsters=19
+[RAID-RESOLVE] d46 aid crisis resolved: fought
+[PLAYER-DEATH] d48 Christian -> Duc (dehydration)
+[PLAYER-DEATH] d55 Duc -> Dante (combat)
+
+[PEOPLE] end-state conversations...
+[CONVO] end Dante latelyKind=naming
+[CONVO] end Aurora latelyKind=naming
+[CONVO] end Sigrun latelyKind=naming
+[CONVO] end Giulia latelyKind=naming
+
+[CENSUS] d55 over=false living=7 fallen=5 raidFired=true
+  trust@raid: [{"name":"Duc","trust":90},{"name":"Greta","trust":90},{"name":"Dante","trust":74}]
+  trust@end:  [{"name":"Greta","trust":90},{"name":"Jovan","trust":58},{"name":"Dante","trust":56}]
+  defenderFights: 25 resolutions: [{"day":9,"how":"fought"},{"day":16,"how":"fought"},{"day":27,"how":"fought"},{"day":39,"how":"fought"},{"day":46,"how":"fought"}]
+  metrics: M1(raid+fight)=true

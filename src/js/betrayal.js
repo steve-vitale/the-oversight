@@ -452,6 +452,12 @@
     inviteReward(vid) {
       const name = this.displayName(vid);
       const first = this.whoTag(vid);
+      // YOU-AGREEMENT (journey crisis r10 2026-10-15): whoTag returns 'you'
+      // when the PLAYER is the inviter (the player walks an NPC out and
+      // shares their own secret) — "you digs" is wrong. The beat is the
+      // inviter's own secret either way: their "I", their hands. Branch all
+      // four kinds so the verbs (and the gift direction) agree with the tag.
+      const you = first === 'you';
       const kind = pick(['cache', 'bundle', 'knowledge', 'item']);
       if (kind === 'cache') {
         const kcal = 800 + Math.floor(R() * 1200);
@@ -459,18 +465,22 @@
         // directly — a phantom number wiped by villageEats' end-of-day sync,
         // so the promised cache evaporated. Real food arrives as a real item.
         try { this.stockPantry(kcal, 'Buried cache'); } catch (e) {}
-        return { kind, line: `"I buried this before the Scattering. Seemed stupid to keep it secret." ${first} digs up a wrapped bundle — food, still good. (+${kcal} kcal to the pantry.)` };
+        const digVerb = you ? 'dig' : 'digs';
+        return { kind, line: `"I buried this before the Scattering. Seemed stupid to keep it secret." ${first} ${digVerb} up a wrapped bundle — food, still good. (+${kcal} kcal to the pantry.)` };
       }
       if (kind === 'bundle') {
         try {
           const st = this.stashState ? this.stashState() : null;
           if (st) { st.materials = st.materials || {}; st.materials.wood = (st.materials.wood || 0) + 4; st.materials.fiber = (st.materials.fiber || 0) + 4; }
         } catch (e) {}
-        return { kind, line: `${first} has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)` };
+        const haveVerb = you ? 'have' : 'has';
+        return { kind, line: `${first} ${haveVerb} been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)` };
       }
       if (kind === 'knowledge') {
+        if (you) return { kind, line: `On the way, you stop and actually teach them something — how you read a slope for water, how your grandmother did it. (Knowledge, freely given. The Codex notes it.)` };
         return { kind, line: `On the way, ${first} stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)` };
       }
+      if (you) return { kind, line: `"Here. I made an extra." You press something into their hand — a decent tool, oiled and kept. (Useful. Keep it.)` };
       return { kind, line: `"Here. I made an extra." ${first} presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)` };
     },
 

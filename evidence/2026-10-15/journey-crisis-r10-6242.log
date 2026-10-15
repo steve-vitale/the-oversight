@@ -1,0 +1,71 @@
+[SETUP] seed 6242: oracleV2 establishing 12d...
+[DEFEND] d7 Ricardo vs sweeps_week mHp 80->15 defAlive=true
+[DEFEND] d7 Dorothy vs nightcourt mHp 55->10 defAlive=true
+[DEFEND] d7 Meera vs hushwolf mHp 50->11 defAlive=true
+[DEFEND] d7 Elena vs belltoad mHp 35->17 defAlive=true
+[DEFEND] d7 Carlos vs white_noise_heron mHp 60->5 defAlive=true
+[RAID] d7 havenRaidTick FIRED — pantry=27330 monsters=8
+[CRISIS] d8 breach
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[CRISIS] d8 the-siege
+[RAID-RESOLVE] d8 aid crisis resolved: fought
+[ESTABLISHED] d14 pop=12 pantry=47080
+[DEFEND] d14 Ji vs nightcourt mHp 55->9 defAlive=true
+[DEFEND] d14 Dorothy vs nightcourt mHp 10->10 defAlive=true
+[DEFEND] d14 Lerato vs hummice mHp 10->10 defAlive=true
+[DEFEND] d14 Carlos vs sweeps_week mHp 15->15 defAlive=true
+[DEFEND] d14 Mateo vs white_noise_heron mHp 5->5 defAlive=true
+[RAID] d14 havenRaidTick FIRED — pantry=39204 monsters=8
+[RAID-RESOLVE] d15 aid crisis resolved: fought
+[BLIGHT] d16 pantry=17680 pop=12 blocked=61469
+[PLAYER-DEATH] d17 Viola -> Mateo (combat)
+[BLIGHT] d17 pantry=8620 pop=11 blocked=65854
+[PLAYER-DEATH] d18 Mateo -> Ricardo (combat)
+[BLIGHT] d20 pantry=11580 pop=10 blocked=69527
+[BLIGHT] d22 pantry=6120 pop=10 blocked=73832
+[BLIGHT-LIFT] d22 pantry 47080->6120 (drop 87%) — the famine bit. Lifting the blight.
+[RECOVER] d24 pantry=18037 pop=10 monsters=15 eligible=true raid=true
+
+[PEOPLE] mid-raid conversations (1-2d after raid)...
+[CONVO] mid-raid Ricardo latelyKind=mourning
+[CONVO] mid-raid Dorothy latelyKind=mourning
+[CONVO] mid-raid Ji latelyKind=mourning
+[CONVO] mid-raid Lerato latelyKind=mourning
+[DEFEND] d28 Ji vs murkcap mHp 60->7 defAlive=true
+[DEFEND] d28 Dorothy vs heckler mHp 85->85 defAlive=true
+[DEFEND] d28 Rubén vs paparazzo mHp 70->56 defAlive=true
+[DEFEND] d28 Elena vs bright_idea mHp 55->55 defAlive=true
+[RAID] d28 havenRaidTick FIRED — pantry=19429 monsters=14
+[RAID-RESOLVE] d29 aid crisis resolved: fought
+[DEFEND] d37 Lerato vs paparazzo mHp 10->10 defAlive=true
+[DEFEND] d37 Meera vs terms_of_service mHp 319->271 defAlive=true
+[DEFEND] d37 Marcus vs nightcourt mHp 55->55 defAlive=true
+[DEFEND] d37 Carlos vs understudy mHp 14->14 defAlive=true
+[DEFEND] d37 Lucas vs drumbelly_tanuki mHp 5->5 defAlive=true
+[RAID] d37 havenRaidTick FIRED — pantry=32305 monsters=14
+[PLAYER-DEATH] d38 Ricardo -> Dorothy (combat)
+[RAID-RESOLVE] d38 aid crisis resolved: fought
+[PLAYER-DEATH] d40 Dorothy -> Ji (dehydration)
+[CRISIS] d42 first-grave
+[DEFEND] d44 Meera vs redactor mHp 241->203 defAlive=true
+[DEFEND] d44 Priya vs buffering mHp 280->267 defAlive=true
+[RAID] d44 havenRaidTick FIRED — pantry=53394 monsters=16
+[RAID-RESOLVE] d45 aid crisis resolved: fought
+[RAID-RESOLVE] d51 aid crisis resolved: fought
+[DEFEND] d51 Lerato vs cliffhanger mHp 10->10 defAlive=true
+[DEFEND] d51 Rubén vs nightcourt mHp 10->10 defAlive=true
+[DEFEND] d51 Marcus vs understudy mHp 14->14 defAlive=true
+[DEFEND] d51 Mei vs sunback mHp 55->38 defAlive=true
+[RAID] d51 havenRaidTick FIRED — pantry=49694 monsters=19
+
+[PEOPLE] end-state conversations...
+[CONVO] end Meera latelyKind=table
+[CONVO] end Elena latelyKind=table
+[CONVO] end Ji latelyKind=table
+[CONVO] end Lerato latelyKind=table
+
+[CENSUS] d56 over=false living=10 fallen=5 raidFired=true
+  trust@raid: [{"name":"Lerato","trust":90},{"name":"Carlos","trust":90},{"name":"Rubén","trust":60}]
+  trust@end:  [{"name":"Lerato","trust":90},{"name":"Carlos","trust":90},{"name":"Rubén","trust":62}]
+  defenderFights: 25 resolutions: [{"day":8,"how":"fought"},{"day":15,"how":"fought"},{"day":29,"how":"fought"},{"day":38,"how":"fought"},{"day":45,"how":"fought"},{"day":51,"how":"fought"}]
+  metrics: M1(raid+fight)=true

@@ -1,0 +1,51 @@
+[SETUP] seed 6343: oracleV2 establishing 12d...
+[PLAYER-DEATH] d9 Jordan -> Mahmut (combat)
+[DEFEND] d9 Joyce vs hummice mHp 10->10 defAlive=true
+[DEFEND] d9 Sidney vs rut_king mHp 65->12 defAlive=true
+[DEFEND] d9 Kenneth vs ducks_in_a_row mHp 12->12 defAlive=true
+[DEFEND] d9 Venkatesh vs dustboar mHp 9->9 defAlive=true
+[DEFEND] d9 Jesse vs sanjun mHp 6->6 defAlive=true
+[RAID] d9 havenRaidTick FIRED — pantry=71566 monsters=5
+[CRISIS] d9 first-grave
+[CRISIS] d10 breach
+[feastBuff] Game.feastBurn() is retired (feast-surge rework 2026-10-10) — returning 0, no burn.
+[CRISIS] d10 the-siege
+[RAID-RESOLVE] d10 aid crisis resolved: fought
+[PLAYER-DEATH] d11 Mahmut -> Joyce (starvation)
+[ESTABLISHED] d14 pop=9 pantry=32479
+[BLIGHT] d16 pantry=20000 pop=9 blocked=7583
+[BLIGHT] d18 pantry=12880 pop=8 blocked=11721
+[DEFEND] d18 Sidney vs lockpick_raccoon mHp 40->8 defAlive=true
+[DEFEND] d18 Kenneth vs living_wire mHp 60->8 defAlive=true
+[DEFEND] d18 Venkatesh vs lockpick_raccoon mHp 40->40 defAlive=true
+[DEFEND] d18 Nathan vs speedbump_turtle mHp 50->7 defAlive=true
+[RAID] d18 havenRaidTick FIRED — pantry=12040 monsters=13
+[RAID-RESOLVE] d19 aid crisis resolved: fought
+[BLIGHT] d20 pantry=8040 pop=8 blocked=12140
+[PLAYER-DEATH] d20 Joyce -> Sidney (combat)
+[BLIGHT] d22 pantry=2000 pop=7 blocked=36715
+[BLIGHT-LIFT] d22 pantry 32479->2000 (drop 94%) — the famine bit. Lifting the blight.
+[RECOVER] d23 pantry=4418 pop=7 monsters=16 eligible=true raid=true
+
+[PEOPLE] mid-raid conversations (1-2d after raid)...
+[CONVO] mid-raid Sidney latelyKind=naming
+[CONVO] mid-raid Kenneth latelyKind=naming
+[CONVO] mid-raid Venkatesh latelyKind=naming
+[CONVO] mid-raid Ines latelyKind=naming
+[CRISIS] d30 hunger-winter
+[DEFEND] d31 Kenneth vs statickite mHp 58->6 defAlive=true
+[DEFEND] d31 Venkatesh vs cliffhanger mHp 16->16 defAlive=true
+[DEFEND] d31 Ines vs moderator mHp 22->22 defAlive=true
+[RAID] d31 havenRaidTick FIRED — pantry=9344 monsters=20
+
+[PEOPLE] end-state conversations...
+[CONVO] end Sidney latelyKind=mourning
+[CONVO] end Kenneth latelyKind=mourning
+[CONVO] end Venkatesh latelyKind=mourning
+[CONVO] end Ines latelyKind=mourning
+
+[CENSUS] d32 over=false living=8 fallen=5 raidFired=true
+  trust@raid: [{"name":"Kenneth","trust":90},{"name":"Ines","trust":88},{"name":"Venkatesh","trust":82}]
+  trust@end:  [{"name":"Kenneth","trust":90},{"name":"Ines","trust":89},{"name":"Venkatesh","trust":87}]
+  defenderFights: 12 resolutions: [{"day":10,"how":"fought"},{"day":19,"how":"fought"}]
+  metrics: M1(raid+fight)=true
