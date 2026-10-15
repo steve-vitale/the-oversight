@@ -8,7 +8,7 @@ INSTRUMENT, zero game-code changes, zero policy changes (scripts + evidence only
 built on holdloss-lib) found bearer-death chains are shallow (mean 1.22), 27/28
 deaths combat, 22/23 keep rank — succession-collapse is closed as a loss mode; the
 cascade is combat mortality, not polity dissolution. It never broke down WHERE/HOW
-the bearer <redacted> combat. This arm builds the census that does.
+the bearer dies in combat. This arm builds the census that does.
 
 **Canon:** docs/CANON.md read first; docs/MONSTER-WAVES.md read for the wave law
 (wave 1 = animal shock incl. the Highbeam Deer benchmark; wave 2 = conceptual
@@ -18,7 +18,7 @@ taxonomy is this arm's instrument, not canon.
 
 ## Pre-registration (docs/MEASUREMENT.md §§9–12, 14 — BINDING, written BEFORE sims)
 
-**Question:** on runs that reach national, every bearer combat <redacted> — what
+**Question:** on runs that reach national, every bearer combat death — what
 killed them? Killer wave (1–5), tile class (haven/wild/arena-contest), fight type
 (turn-based/contest/hunt/expedition/field-damage), entry HP + armor P at fight
 start, counter-known state, succession consequences (rank 7d after, days to next

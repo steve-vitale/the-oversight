@@ -10,7 +10,7 @@
 //
 // Reuses the inherited conventions:
 //   - SC.isBearerDeath / SC.bearerDeaths / SC.attributeChains (succhain-lib)
-//     for the bearer <redacted> and the young-national window / national detection.
+//     for the bearer deaths and the young-national window / national detection.
 //   - HL.classifyDeathFamily (holdloss-lib) for the combat|monster family gate.
 //
 // ATTRIBUTION DEFINITION (the pre-registered 90% GO bar): a bearer combat
@@ -75,7 +75,7 @@ function rank7d(rec, day) {
   return (hit || rows[rows.length - 1]).rank || null;
 }
 
-// daysToNextBearer(rec, day): days until the next bearer <redacted> (any family), null if none.
+// daysToNextBearer(rec, day): days until the next bearer death (any family), null if none.
 function daysToNextBearer(rec, day) {
   const all = SC.bearerDeaths(rec);
   const nx = all.find(d => num(d.day, -1) > day);
@@ -168,7 +168,7 @@ function deathNarrative(rec, a) {
   } else if (a.armorPAtDeath != null) {
     lines.push(`  no TB session (died off-turn-based path); armor P at death ${a.armorPAtDeath}.`);
   }
-  lines.push(`  rank 7d after: ${a.rank7d || 'n/a'}; days to next bearer <redacted> ${a.daysToNextBearer != null ? a.daysToNextBearer : 'n/a'}${a.attributed ? '' : '  [UNATTRIBUTED — trail: ' + (a.trail || 'none') + ']'}.`);
+  lines.push(`  rank 7d after: ${a.rank7d || 'n/a'}; days to next bearer death ${a.daysToNextBearer != null ? a.daysToNextBearer : 'n/a'}${a.attributed ? '' : '  [UNATTRIBUTED — trail: ' + (a.trail || 'none') + ']'}.`);
   if (beats.length) lines.push('  nearby beats:\n    ' + beats.join('\n    '));
   return lines.join('\n');
 }

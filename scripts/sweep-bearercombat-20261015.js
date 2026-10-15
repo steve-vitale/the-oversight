@@ -13,7 +13,7 @@
 // The succhain instrument (evidence/2026-10-15/sim-succhain.md) found
 // bearer-death chains are shallow (mean 1.22), 27/28 deaths combat, 22/23
 // keep rank — succession-collapse is closed; the cascade is combat mortality.
-// This census names WHERE/HOW the bearer <redacted> combat, so the next run knows
+// This census names WHERE/HOW the bearer dies in combat, so the next run knows
 // which combat-mortality lever to pull.
 //
 // PRE-REGISTRATION (docs/MEASUREMENT.md §§9-12, 14 — BINDING, written BEFORE sims):
@@ -32,7 +32,7 @@
 //
 // Modes:
 //   SMOKE=1      15d x {leadfeast, belongfeast}: samples collect, no crash,
-//                bearer <redacted> present, TB sessions hook live.
+//                bearer deaths present, TB sessions hook live.
 //   DETGATE=1    D1 gate determinism (60d x2 byte-identical); D2 instrument
 //                ON vs OFF byte-identical 60d (every hook is read-only).
 //   default      the 16-run suite -> evidence/2026-10-15/perseed-bearercombat/,
@@ -311,7 +311,7 @@ function attachDeaths(Game, t) {
             vid: String(o.villagerId || o.monsterId || '?').slice(0, 24),
             name: String(o.name || '?').slice(0, 40),
             cause: cause.slice(0, 80),
-            player: !!o.player,   // the r17 deathattr bearer <redacted>
+            player: !!o.player,   // the r17 deathattr bearer-death flag
             ctx,
           });
         }
