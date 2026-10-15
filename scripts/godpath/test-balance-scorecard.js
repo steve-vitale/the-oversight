@@ -33,6 +33,8 @@ after = copy(before); after.options.flags.CAPABLE_GREEDY = '1';
 T.ok('different policy flags invalidate pairing', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.rows.push(copy(after.rows[0]));
 T.ok('duplicate or incomplete cases are rejected', S.comparePanels(before, after).decision === 'invalid');
+after = copy(before); after.rows[0].row.seed = 999;
+T.ok('the declared seed set is enforced even when row count is right', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.validity.neutrality = [];
 T.ok('a comparison needs a passing neutrality proof for every policy', S.comparePanels(before, after).decision === 'invalid');
 after = copy(before); after.rows[0].observerErrors.push('sample failed');
@@ -52,4 +54,12 @@ let rejected = false; try { mergePanels([left, left]); } catch (e) { rejected = 
 T.ok('overlapping shards are rejected rather than double-counted', rejected);
 right.sourceDigest = 'other-runtime'; rejected = false; try { mergePanels([left, right]); } catch (e) { rejected = /sourceDigest/.test(e.message); }
 T.ok('shards with different game contents cannot be pooled', rejected);
+const featurePanel = panel();
+for (const r of featurePanel.rows) { r.gear = { observedMethods: ['craft', 'absent', 'unused'], calls: { craft: 1 }, effects: { craft: 0 }, missing: ['absent'], recipeAccess: { tool: { knownSamples: 1, materialsReadySamples: 1 } }, crafts: { failed: { attempts: 1, successes: 0 } }, grants: [] }; r.classes = r.gods = { player: [], npc: [] }; r.endings = []; }
+const summary = require('../balance-features').summarize(featurePanel)[0];
+T.ok('feature summaries separate unavailable methods from reached calls', summary.features.find(f => f.name === 'absent').status === 'unavailable' && summary.features.find(f => f.name === 'craft').status === 'reached');
+T.ok('zero-call methods stay in the denominator instead of disappearing', summary.completeMethodCoverage && summary.features.find(f => f.name === 'unused').status === 'not_reached');
+T.ok('ready unused recipes and failed attempts are different dead-spot leads', summary.recipes.find(r => r.id === 'tool').status === 'ready_unused' && summary.recipes.find(r => r.id === 'failed').status === 'attempted_no_success');
+metric = S.compareMetric(Array(8).fill(0), Array(8).fill(1), S.contract.metrics.find(m => m.id === 'corpseGear'), 'neutral');
+T.ok('descriptive movement is not mislabeled better or worse', metric.increased === 8 && metric.better === null && metric.worse === null);
 T.done();

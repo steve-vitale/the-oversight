@@ -19,6 +19,7 @@ function manifest(root) {
 function install(G) {
   const census = gear.install(G), days = new Map(), intake = new Map(), bearerIds = new Set(), npcIds = new Set(), npcClassIds = new Set();
   census.startingTier = null; // Not sampled by this observer; starting gear is never earned.
+  census.observedMethods = Object.keys(gear.METHODS); // Preserve the denominator, including zero-call methods.
   const classes = { player: new Set(), npc: new Set() }, gods = { player: new Set(), npc: new Set() }, events = {}, endings = [], errors = [];
   let firstDeath = null, accepted = 0;
   const initial = G.villagerId;
@@ -110,7 +111,7 @@ async function run() {
   const options = { seeds: arg('seeds', '') ? arg('seeds').split(',').map(Number) : require('./sweep-dashboard').seedList(Number(arg('n', 16))),
     policies: arg('policies', 'capable,maker,merchant,caregiver').split(','), days: Number(arg('days', 150)), region: arg('region', null), origin: arg('origin', 'Columbus, Ohio'),
     nodeVersion: process.version, flags: Object.fromEntries(flagNames.map(k => [k, process.env[k] ?? null])) };
-  if (!options.seeds.length || options.seeds.some(s => !Number.isSafeInteger(s)) || new Set(options.seeds).size !== options.seeds.length || new Set(options.policies).size !== options.policies.length || !(options.days > 0)) throw new Error('Invalid/duplicate cases');
+  if (!options.seeds.length || options.seeds.some(s => !Number.isSafeInteger(s)) || new Set(options.seeds).size !== options.seeds.length || new Set(options.policies).size !== options.policies.length || !Number.isSafeInteger(options.days) || options.days < 1) throw new Error('Invalid/duplicate cases');
   if (process.env.REGION || process.env.ORIGIN || process.env.SEEDS || process.env.POLICIES || process.env.DAYS) throw new Error('Use explicit panel options; unset legacy sweep environment overrides');
   const observerHash = () => digest([__filename, path.join(__dirname, 'gear-usage-audit.js'), path.join(__dirname, 'lib/balance-scorecard.js')].map(f => fs.readFileSync(f)).join('\n'));
   const sources = manifest(root), observerDigest = observerHash();
@@ -125,7 +126,7 @@ async function run() {
     while (next < jobs.length) {
       const job = jobs[next++], identity = { schemaVersion: 1, sourceDigest, observerDigest, contractDigest, ...options, seeds: undefined, policies: undefined, ...job };
       const key = digest(JSON.stringify(identity)), file = path.join(cache, key + '.json');
-      if (fs.existsSync(file)) { const value = read(file); if (value.key !== key || JSON.stringify(value.identity) !== JSON.stringify(identity) || value.resultDigest !== digest(JSON.stringify(value.result))) throw new Error('Invalid cached case ' + key); results.push(value); reused++; continue; }
+      if (fs.existsSync(file)) { const value = read(file); if (value.key !== key || JSON.stringify(value.identity) !== JSON.stringify(identity) || value.resultDigest !== digest(JSON.stringify(value.result)) || value.result.row.policy !== job.policy || value.result.row.seed !== job.seed) throw new Error('Invalid cached case ' + key); results.push(value); reused++; continue; }
       const result = await new Promise((resolve, reject) => {
         const args = [__filename, '--child', '--root', root, '--policy', job.policy, '--seed', String(job.seed), '--observe', job.observe, '--days', String(options.days), '--origin', options.origin, ...(options.region ? ['--region', options.region] : [])];
         const p = cp.spawn(process.execPath, args, { cwd: root, env: process.env }); let stdout = '', stderr = '';

@@ -9,6 +9,15 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+**Measurement priority (Steve, 2026-10-15):** optimize against a balanced set
+of telemetry, not win rate alone. Follow `docs/MEASUREMENT-PLAN.md` and the
+balanced-scorecard commands in `docs/SIMULATING.md`. Keep per-playstyle survival,
+community, food/water, earned gear, progression, feature use and ending outcomes
+visible. The resumable runner, paired comparator and shard merger are tooling;
+they do not complete Garden or other gameplay backlog items. Small-effect
+confirmation, fixed time windows, opportunity funnels and human playtesting
+remain required where applicable.
+
 1. Read `docs/godpath/STEVE-ANSWERS.md` (Steve's verbatim calls; it outranks
    everything). **Never ask Steve something it already answers.**
 2. Read `docs/COHERENCE-SPINE.md`: how the progression features fit together.

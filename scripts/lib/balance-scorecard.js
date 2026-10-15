@@ -28,7 +28,9 @@ function compareMetric(before, after, spec, key) {
     totalPairs: before.length, eligibleBefore: before.filter(Number.isFinite).length, eligibleAfter: after.filter(Number.isFinite).length, pairs: pairs.length,
     before: mean(pairs.map(p => p[0])), after: mean(pairs.map(p => p[1])), delta, interval95: ci,
     pairedP10: quantile(diffs, 0.1), pairedMedian: quantile(diffs, 0.5), pairedP90: quantile(diffs, 0.9),
-    better: diffs.filter(d => d * orientation > 0).length, worse: diffs.filter(d => d * orientation < 0).length, tied: diffs.filter(d => d === 0).length };
+    increased: diffs.filter(d => d > 0).length, decreased: diffs.filter(d => d < 0).length,
+    better: spec.direction === 'neutral' ? null : diffs.filter(d => d * orientation > 0).length,
+    worse: spec.direction === 'neutral' ? null : diffs.filter(d => d * orientation < 0).length, tied: diffs.filter(d => d === 0).length };
 }
 const caseKey = r => r.row.policy + ':' + r.row.seed;
 function comparePanels(before, after) {
@@ -41,6 +43,8 @@ function comparePanels(before, after) {
   }
   const validate = panel => {
     const keys = panel.rows.map(caseKey);
+    const expected = new Set(panel.options.policies.flatMap(p => panel.options.seeds.map(s => p + ':' + s)));
+    if (keys.some(k => !expected.has(k))) errors.push('Case does not belong to declared panel');
     if (new Set(keys).size !== keys.length) errors.push('Duplicate cases');
     if (keys.length !== panel.options.seeds.length * panel.options.policies.length) errors.push('Incomplete panel');
     if (!panel.validity.sourcesStable) errors.push('Sources changed mid-panel');

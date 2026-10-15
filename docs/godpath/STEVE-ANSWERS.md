@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-15 (balanced measurement)
+
+"Yes, let’s create a more balanced set of measuring telemetry we can optimize from. Don’t simply look at win rate, we need to make sure many key metrics aren’t regressing. Plan this out and make repeatable and scalable."
+
+Plan and contracts: `docs/MEASUREMENT-PLAN.md`; repeatable runner and comparison
+commands: `docs/SIMULATING.md`. Preserve per-playstyle guardrails and expose
+tradeoffs rather than replacing them with one weighted score.
+
 ## 2026-10-15 (playstyle viability audit)
 
 "Make sure that combat isn’t the only viable way to obtain good gear. We want to see viability in game for all playstyles. Do contests and tv shows reward enough? Auditing for any dead spots in feature usage?"
