@@ -316,10 +316,17 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   21 -> 15 caregiver regression remains recorded above, not erased.
   `evidence/2026-10-15/table-access-audit.md` records the public-information
   proof and zero Second Wind/Molt appearances in 26,733 kit offer appearances.
-  Caregiver seed 12 reaches global rank but misses its seat solely on food
-  deeds: its real feast expired unused because credit currently requires
-  combat use. Next prove meaningful paid noncombat feast use and measure
-  ability access; broader parity and nine authored deeds remain open.
+  Caregiver seed 12 exposed a global-rank run blocked solely by combat-only
+  food-use credit. Landed, paid Field Medicine feast bonus now earns that
+  deed outside combat; hosting, failed treatment and zero bonus do not.
+  The caregiver policy uses learned wound care, and the treatment label now
+  states its full existing 140 kcal price. Prepared phone play and corrected
+  16/64-seed comparisons are in `feast-healing-audit.md`. An initial telemetry
+  comparison was rejected because it advanced the harness clock; use the
+  corrected artifacts. Clean matched caregiver wins rise 17 -> 21/64 with
+  four new Table entries; all 192 control-policy rows stay identical.
+  Measure ability access next; broader parity, NPC
+  feast power and nine authored deeds remain open.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

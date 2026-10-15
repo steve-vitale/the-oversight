@@ -51,10 +51,14 @@ Job -> track -> **class** -> **god** -> Table.
    positions 10/11. The offer observer confirms zero appearances in 26,733
    player/NPC kit offer appearances. The public Table-stakes policy repair
    recovers caregiver wins 15 -> 20/64 (all policies 91 -> 113/256), without
-   changing entries, deaths or median game days. Seed 12 remains blocked
+   changing entries, deaths or median game days. The earlier seed 12 was blocked
    solely by combat-only feast-use credit despite global rank and a real
-   feast. Next prove meaningful paid noncombat feast use and measure a
-   focused ability-access lever. See `table-access-audit.md`.
+   feast. Landed noncombat feast healing now earns that deed through paid,
+   learned wound care, proved in runtime and phone play. The caregiver policy
+   now treats visible wounds; comparisons separate that policy from the game
+   rule. See `feast-healing-audit.md` for corrected 16/64-seed evidence and the
+   rejected clock-confounded panel. A focused ability-access lever and broader
+   NPC feast/active/passive parity remain next.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.

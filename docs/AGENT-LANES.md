@@ -77,3 +77,12 @@ activation plus their real health and gear results in fieldFights.js,
 game.js, contestEngine.js and villager-agency.js. Field callers must apply
 surviving HP once, rather than replaying cumulative damage after a rescue.
 This is the godpath combat/contest contract, not region or nomad authoring.
+
+Feast-deed/medical-cost exception: Codex credits actually landed, paid
+noncombat feast healing through feastBuff.js and expands the caregiver bot
+from comfort into known wound care. game.js only reads the existing native
+Field Medicine price from data; foodPower.js shows the full unchanged bill.
+This is food-powered progression/medical cost honesty, not region or nomad
+content. Integrate the clock-neutral receipt follow-up with the initial
+healing commit; the first telemetry comparison is diagnostic, not balance
+proof. See evidence/2026-10-15/feast-healing-audit.md.
