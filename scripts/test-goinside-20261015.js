@@ -73,6 +73,14 @@ function check(name, cond, detail) {
   if (!cond) failures++;
 }
 
+// Post-kill: the layer is deleted per kill protocol. The committed proof stays
+// runnable by skipping the layer-dependent parts loudly instead of FATAL-ing.
+const GI_PATH = (() => { try { return require.resolve('./policies/goinside'); } catch (e) { return null; } })();
+function skipIfLayerGone(part) {
+  if (!GI_PATH) { console.log(`  SKIP ${part} (layer deleted per kill protocol — scripts/policies/goinside absent)`); return true; }
+  return false;
+}
+
 // ---------------- PART A: fixtures (mock) ----------------
 function partA() {
   console.log('PART A — gate + projection + go-inside fixtures');
@@ -150,7 +158,8 @@ function partA() {
   ]);
   const foodPack = () => [{ name: 'acorn mush', plantId: 'acorn', kcalEach: 400, units: 2, edible: true, kg: 0.2 }];
   const baseOf = () => ({ id: 'leadcourt', desc: 'base', upkeep(G, ctx) { ctx.u = 1; }, daily(G, ctx) { ctx.d = 1; } });
-  const giPath = './policies/goinside';
+  if (skipIfLayerGone('partA')) return;
+  const giPath = GI_PATH;
 
   // A1 — gate off.
   delete require.cache[require.resolve(giPath)];
@@ -421,9 +430,10 @@ function partA() {
 // ---------------- PART B: live engine, REAL RED ----------------
 async function partB() {
   console.log('PART B — live engine (REAL RED)');
+  if (skipIfLayerGone('partB')) return;
   const { loadGame, setupGame, quietLog } = require('./sim-harness');
   process.env.GOINSIDE = '1';
-  const giPath = './policies/goinside';
+  const giPath = GI_PATH;
   delete require.cache[require.resolve(giPath)];
   const gi = require(giPath);
   const { leadcourt } = require('./policies/leadcourt');
@@ -591,6 +601,7 @@ function seedPackFull(Game) {
 }
 async function partC() {
   console.log('PART C — det-gate: 30d x 8 seeds x 2 policies, base vs wrapped(gate on), pack-seeded');
+  if (skipIfLayerGone('partC')) return;
   const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
   const SEEDS = [11, 22, 33, 44, 55, 66, 77, 88];
   const PIDS = ['leadcourt', 'belongseek'];
@@ -601,7 +612,7 @@ async function partC() {
       const trig = [];
       for (const armed of [false, true]) {
         if (armed) process.env.GOINSIDE = '1'; else delete process.env.GOINSIDE;
-        const giPath = './policies/goinside';
+        const giPath = GI_PATH;
         delete require.cache[require.resolve(giPath)];
         const gi = require(giPath);
         const base = require('./policies/' + pid)[pid];
@@ -655,9 +666,10 @@ async function partC() {
 // ---------------- SMOKE ----------------
 async function smoke() {
   console.log('== goinside SMOKE (instrument-honesty) ==');
+  if (skipIfLayerGone('smoke')) return;
   const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
   process.env.GOINSIDE = '1';
-  const giPath = './policies/goinside';
+  const giPath = GI_PATH;
   delete require.cache[require.resolve(giPath)];
   const gi = require(giPath);
   const base = require('./policies/belongseek').belongseek;
