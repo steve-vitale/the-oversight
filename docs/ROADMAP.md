@@ -1,6 +1,6 @@
 # ROADMAP: what's built, what's next, how to do it
 
-*For Muse (and any agent). Updated 2026-10-14. The early-October roadmap
+*For Muse (and any agent). Updated 2026-10-15. The early-October roadmap
 is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 > "Get the important stuff built, leave the bulk of work once scaffolded to
@@ -60,6 +60,43 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 ## 2. Muse's backlog, in order
 
 Each item: **spec**, **done when**, and the **tool** that measures it.
+
+### Current priority from Steve — playstyle viability (2026-10-15)
+
+"Make sure that combat isn’t the only viable way to obtain good gear. We want to see viability in game for all playstyles. Do contests and tv shows reward enough? Auditing for any dead spots in feature usage?"
+
+The first audit and reward-to-equip fixes are in
+`evidence/2026-10-15/noncombat-gear-audit.md`. Contests, audience gifts and
+repeat trade now have earned access to actual weapons/armor. The Pack's
+inventory snapshot preserves the IDs/metadata needed for Equip/Wear/Use.
+**This is not a claim that every playstyle is balanced.** Continue the
+simulation/playtest goal with these gaps before expanding content blindly:
+
+1. **Crafting and knowledge access.** Existing gear recipes remain basic;
+   no tier-3 recipe ladder. Measure recipe learning, materials, useful
+   crafts and gear use. Add a coherent earned upgrade route, rather than
+   filling prize tables with items whose only power is descriptive text.
+2. **Honest livelihood ending probes.** `merchant`, `maker`, `caregiver`
+   share capable's survival/choice brain. Disable deliberate hunting and
+   feast patrols while retaining feasts/devotion and ordinary defence.
+   Measure seat prerequisites and actual endings; distinguish missing bot
+   behavior from a gate that excludes a playstyle. Never use legacy
+   `socialite`'s failure to take a seat as proof social play cannot win.
+3. **Underused systems.** Targeted public-action probes for preservation,
+   pemmican, storage expansion, armory/stash sharing, peer trade/covenants,
+   party orders, and the titan/Network route. Zero calls in the ordinary
+   sweep establish a coverage gap, not a value judgment.
+4. **Item promises.** Audit `baseEffect`-only path items and unused
+   `tradeValue` fields (e.g. audience tokens). Functional armor/weapon
+   fields are proven separately from bespoke advertised powers; a
+   `findable: true` flag does not establish a real acquisition route.
+5. **Telemetry purity and attrition.** Use the version-2 gear census's
+   standard driver and observer-on/off state proof. Don't mix its rows
+   with exploratory custom-cadence or legacy dashboard counts. Reward
+   access improved; survival/win-rate improvement is not established.
+
+Keep the ordered content backlog below and its dependencies. This audit is
+Steve's latest steering, not a supersession of his broader roadmap.
 
 ### 1. Region content, wave 1 (biggest value)
 - **Spec:** `docs/WORLD-REGIONS.md` §9 (waves) and §11 (the checklist).

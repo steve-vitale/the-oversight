@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-15 (playstyle viability audit)
+
+"Make sure that combat isn’t the only viable way to obtain good gear. We want to see viability in game for all playstyles. Do contests and tv shows reward enough? Auditing for any dead spots in feature usage?"
+
+This steers the active roadmap goal: measure earned gear by source, test the
+real reward-to-use UI, and distinguish unused bot routes from broken or weak
+gameplay. Evidence: `evidence/2026-10-15/noncombat-gear-audit.md`.
+
 ## 2026-10-15 (latest, recovered from the interrupted Claude session)
 
 Context: **Ability/god-path system design**, after the endgame and deaths diagnoses.
