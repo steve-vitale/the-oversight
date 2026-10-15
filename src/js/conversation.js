@@ -1230,6 +1230,13 @@
 
     // convoThreadOpen: plant an unfinished thread. Cap 4 — people can only
     // hold so many loose ends; oldest lapses first.
+    //
+    // MEMORY QUOTE (deepening r11 2026-10-15): the 5th arg is the last
+    // NPC-spoken beat on the thread (from the live conversation's thread
+    // log). Stored on the thread record so the resume opener can QUOTE what
+    // was actually said — the ledger already had the field, but nothing
+    // wrote it, so resumes referenced labels ("their secret") with no
+    // content and read as fabricated shared history.
     convoThreadOpen(vid, tid, label, why, snippet) {
       if (!tid || tid === 'small' || tid === 'nonverbal' || tid === 'request') return;
       // LEDGER GATE (convo rebuild 2026-10-11): no backing event, no plant.
@@ -1248,6 +1255,24 @@
           snippet: snippet ? String(snippet).slice(0, 110) : null,
         });
       } catch (e) {}
+    },
+
+    // convoLastThreadSnippet: the last NPC-spoken beat landed on a thread in
+    // the live conversation (deepening r11 2026-10-15). threadLog only
+    // records beats the NPC landed (convoNoteBeat / convoNoteSpokenBeat), so
+    // quoting it in the NPC's voice at resume time is honest — it's
+    // literally the last thing THEY said on that thread.
+    convoLastThreadSnippet(vid, tid) {
+      try {
+        const c = this.convoGet(vid);
+        const log = (c && c.threadLog) || [];
+        for (let i = log.length - 1; i >= 0; i--) {
+          if (log[i] && log[i].thread === tid && log[i].snippet) {
+            return String(log[i].snippet).slice(0, 110);
+          }
+        }
+      } catch (e) {}
+      return null;
     },
 
     convoThreadResolve(vid, tid) {
@@ -1279,10 +1304,12 @@
           c.threadLog.push({ thread, snippet: clean, ex: c.exchanges || 0 });
           if (c.threadLog.length > 12) c.threadLog.shift();
         }
-        // SUBJECT CHANGE: the old thread was live and we moved on.
+        // SUBJECT CHANGE: the old thread was live and we moved on. The plant
+        // carries the last beat spoken on the old thread (deepening r11).
         const prev = c._beatThread;
         if (prev && prev !== thread && prev !== 'small' && thread !== 'small') {
-          this.convoThreadOpen(vid, prev, this.convoTopicLabel(vid, prev), 'changed the subject');
+          this.convoThreadOpen(vid, prev, this.convoTopicLabel(vid, prev), 'changed the subject',
+            this.convoLastThreadSnippet(vid, prev));
         }
         c._beatThread = thread;
       } catch (e) {}
@@ -1316,10 +1343,13 @@
         // this thread), THEN plant the new open thread — order matters,
         // because noting a topic as discussed resolves its open thread.
         this.convoNoteTopic(vid, thread, this.convoTopicLabel(vid, thread));
+        // MEMORY QUOTE (deepening r11 2026-10-15): carry the last spoken
+        // beat into the plant so the resume opener can quote it.
+        const _memSnip = this.convoLastThreadSnippet(vid, thread);
         if (how === 'left') {
-          this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'walked away mid-thread');
+          this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'walked away mid-thread', _memSnip);
         } else if (unresolved) {
-          this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'unfinished business');
+          this.convoThreadOpen(vid, thread, this.convoTopicLabel(vid, thread), 'unfinished business', _memSnip);
         }
       } catch (e) {}
     },
@@ -1429,6 +1459,16 @@
       // MULTI-THREAD AWARENESS (Steve 2026-10-07): no orphaned threads — if
       // more than one thread is hanging, the other gets a brief nod so it
       // doesn't feel forgotten. One sentence, inside the same breath.
+      //
+      // MEMORY QUOTE (deepening r11 2026-10-15): the planted thread carries
+      // the last NPC-spoken beat (convoThreadOpen's snippet, written at
+      // plant time from the thread log). Quote it so the resume reads as a
+      // real memory — "their secret" with no content was indistinguishable
+      // from fabricated shared history (Steve's conversation bar). The
+      // snippet is always their own last words on the thread, so quoting
+      // it in-voice is honest. Threads planted before this change carry
+      // null and render exactly as before.
+      if (o.snippet) inner += ` "${String(o.snippet).replace(/"+$/g, '')}"`;
       const others = open.filter(x => x.tid !== o.tid);
       if (others.length && Math.random() < 0.5) {
         const o2 = others[Math.floor(Math.random() * others.length)];
