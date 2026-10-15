@@ -8751,4 +8751,338 @@
     ],
     "fiCountdownRounds": 3
   }
+,
+  {
+    "activity": "nocturnal",
+    "aggression": "territorial",
+    "armor": 1,
+    "attack": {
+      "damage": [
+        10,
+        16
+      ],
+      "damageType": "psychic",
+      "name": "Sporefall",
+      "pattern": {
+        "burstDesc": "A visible shimmer pours from under the cap and drifts outward. Breathe it and the trees start talking.",
+        "burstStyle": "sporefall",
+        "radius": 2,
+        "type": "burst",
+        "windup": 2
+      },
+      "telegraph": "The gills begin to breathe — a sweet, wrong smell rolls out from under the cap. The air shimmers."
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "psychic",
+        "name": "Sporefall",
+        "pattern": {
+          "burstDesc": "A visible shimmer pours from under the cap and drifts outward. Breathe it and the trees start talking.",
+          "burstStyle": "sporefall",
+          "radius": 2,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "The gills begin to breathe — a sweet, wrong smell rolls out from under the cap. The air shimmers.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          16,
+          22
+        ],
+        "damageType": "physical",
+        "name": "Cap Slam",
+        "pattern": {
+          "directDesc": "The whole cap comes down like a hammer. Slow, but the cap is the size of a cartwheel.",
+          "range": 1,
+          "type": "direct",
+          "windup": 1
+        },
+        "telegraph": "The cap tilts. The stem creaks like a ship's mast. Get out from under it.",
+        "weight": 3
+      }
+    ],
+    "behavior": "territorial",
+    "biomes": [
+      "eu_temperate_forest"
+    ],
+    "codexStages": {
+      "observed": "A fly agaric grown monstrous. The System found the forest's most recognizable mushroom and decided it needed to be MORE — a red cap the size of a cartwheel, warts like knucklebones, a stem thick as a sapling, gills that visibly breathe. It does not chase. It does not need to. The spores do the traveling.",
+      "slain": "Moves: Sporefall (drifting spore cloud — disorienting, keep your distance), Cap Slam (slow, devastating, telegraphed by the tilting cap). It is nearly sessile — speed is its weakness and the spore cloud its kingdom. Strike the stem: cut it and the cap can't aim. Fire dries it out. Never eat the flesh — the spores alone are a trip you don't come back from.",
+      "unknown": "A red moon rose between the trees. It was breathing."
+    },
+    "counter": {
+      "hint": "The cloud drifts — it can't chase you. Watch the wind.",
+      "kind": "keep_distance",
+      "reveal": "The spores only drift so far and sink in still air. When the gills start breathing, back off and let the cloud settle — then move in while it recovers. Never stand downwind of a breathing cap.",
+      "trick": "Stay out of the sporefall"
+    },
+    "cues": {
+      "curious": [
+        "The cap turns toward you, slowly, like a sunflower following something it shouldn't."
+      ],
+      "fearful": [
+        "The gills flutter. Spores jet in a panic — it's afraid, and making the air afraid with it."
+      ],
+      "warn": [
+        "A sweet smell, suddenly strong. The warts seem to lean toward you."
+      ]
+    },
+    "edible": {
+      "calories": 0,
+      "note": "Do not eat the monster mushroom. The flesh is ibotenic sponge — the spores alone are a trip you don't come back from."
+    },
+    "emoji": "🍄",
+    "encounter": {
+      "aggroAudio": "sporefallBreath",
+      "comment": "Sessile-ish bruiser: the threat is the drifting spore cloud, not the chase. keep_distance is engine-observed movement.",
+      "fifo": true,
+      "knownCue": "When the gills breathe and the air shimmers, the cloud is coming.",
+      "knownTactics": "Stay out of the sporefall. Strike the stem while it recovers.",
+      "noticeAudio": "sporefallShimmer",
+      "noticeRange": 5,
+      "painSwitch": true,
+      "phaseBadges": {
+        "breathing": " 🍄 BREATHING",
+        "dormant": " 🍄 DORMANT",
+        "slam": " 🍄 SLAM"
+      },
+      "phaseMap": {
+        "declare": "breathing",
+        "idle": "dormant",
+        "resolve": "slam",
+        "windup": "breathing"
+      },
+      "phases": [
+        "dormant",
+        "breathing",
+        "slam"
+      ],
+      "shortName": "cap"
+    },
+    "fear": "fire",
+    "follows": false,
+    "hp": [
+      60,
+      80
+    ],
+    "id": "murkcap",
+    "loot": {
+      "chance": 0.1,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05).",
+      "tier": 2
+    },
+    "name": "Murkcap",
+    "parts": [
+      "warts (trade)",
+      "cap leather",
+      "spore sac (do not open)"
+    ],
+    "resistances": {},
+    "size": 2,
+    "speed": 1,
+    "systemDesignation": "Amanita muscaria (amplified)",
+    "unknown": "a red moon rising between the trees, breathing",
+    "vibe": "a fairy-tale mushroom with the fairy tale removed",
+    "wave": 1,
+    "weaknesses": [
+      "fire (dry it out)",
+      "the stem — cut the stem and the cap can't aim the slam",
+      "it barely moves — the cloud is the whole fight, and clouds don't chase"
+    ]
+  },
+  {
+    "id": "rut_king",
+    "counter": {
+      "kind": "sidestep",
+      "trick": "Give it a tree",
+      "hint": "The crown is wide and the forest is thick. He cannot turn mid-charge.",
+      "reveal": "His antler rack catches on trunks — keep a tree between you and let the charge tangle. Step aside at the last breath and strike while he is pulling free."
+    },
+    "activity": "crepuscular",
+    "name": "Rut King",
+    "biomes": [
+      "eu_temperate_forest"
+    ],
+    "hp": [
+      65,
+      85
+    ],
+    "attack": {
+      "name": "Crown Charge",
+      "damage": [
+        16,
+        24
+      ],
+      "telegraph": "He lowers the crown. Paws the earth once, twice. The whole forest holds its breath.",
+      "pattern": {
+        "type": "charge",
+        "length": 5,
+        "width": 2,
+        "chargeStyle": "rut_king",
+        "chargeDesc": "Straight-line royal demolition. The rack is too wide to turn.",
+        "windup": 2
+      },
+      "damageType": "physical"
+    },
+    "attacks": [
+      {
+        "name": "Crown Charge",
+        "damage": [
+          16,
+          24
+        ],
+        "telegraph": "He lowers the crown. Paws the earth once, twice. The whole forest holds its breath.",
+        "pattern": {
+          "type": "charge",
+          "length": 5,
+          "width": 2,
+          "chargeStyle": "rut_king",
+          "chargeDesc": "Straight-line royal demolition. The rack is too wide to turn.",
+          "windup": 2
+        },
+        "damageType": "physical",
+        "condition": {
+          "minRange": 2
+        },
+        "weight": 3
+      },
+      {
+        "name": "Bellow",
+        "damage": [
+          8,
+          12
+        ],
+        "telegraph": "His chest swells. The inhale goes on too long — cover your ears or get behind something.",
+        "pattern": {
+          "type": "burst",
+          "radius": 2,
+          "burstStyle": "bellow",
+          "burstDesc": "A bone-shaking roar. Leaves fall. You forget which way is up.",
+          "windup": 2
+        },
+        "damageType": "sonic",
+        "condition": {
+          "maxRange": 3
+        },
+        "weight": 2
+      },
+      {
+        "name": "Antler Sweep",
+        "damage": [
+          12,
+          18
+        ],
+        "telegraph": "He tosses his head — the crown whistles sideways through the air.",
+        "pattern": {
+          "type": "direct",
+          "range": 2,
+          "directDesc": "The rack sweeps a full arc. Close is worse than far.",
+          "windup": 1
+        },
+        "damageType": "physical",
+        "condition": {
+          "maxRange": 2
+        },
+        "weight": 3
+      },
+      {
+        "name": "Withdraw",
+        "tactic": "withdraw",
+        "telegraph": "He tosses his head, snorts, and backs into the treeline — crown high. A king does not die in the mud; he will be back in the rut.",
+        "condition": {
+          "hpBelow": 0.25
+        },
+        "weight": 4
+      }
+    ],
+    "weaknesses": [
+      "the rack catches on trees — fight near trunks",
+      "the bellow needs breath — the inhale is the tell",
+      "he cannot turn mid-charge — never stand in the lane"
+    ],
+    "edible": {
+      "calories": 8000,
+      "note": "The crown is bone and vanity, but the haunches are venison fit for a king. Literally."
+    },
+    "parts": [
+      "antler crown (trophy/trade)",
+      "hide (leather)",
+      "venison"
+    ],
+    "behavior": "territorial",
+    "codexStages": {
+      "unknown": "Something wearing a crown of bone bellowed at the moon. The leaves fell off the trees.",
+      "observed": "A red deer stag the System crowned — literally. It watched the rut and concluded the forest needed a king, so it grew his rack into a tangled crown and never let the rut end. He collects tribute (the shiniest things, the best grazing) and answers every challenge. Vain, territorial, unstoppable in a straight line.",
+      "slain": "Moves: Crown Charge (heavy, telegraphed, destroys everything in a straight lane — the rack is too wide to turn), Bellow (sonic burst, disorienting — the long inhale is the tell), Antler Sweep (close range, punishing), Withdraw (below 25% hp, may return). The crown catches on trunks — keep a tree between you. Strike during the bellow's inhale. Never stand in the lane. Meat: excellent. The crown is a trophy worth hauling."
+    },
+    "systemDesignation": "Cervus elaphus (crowned)",
+    "aggression": "territorial",
+    "follows": true,
+    "fear": "fire",
+    "speed": 4,
+    "emoji": "👑",
+    "unknown": "something wearing a crown of bone, bellowing at the dusk",
+    "vibe": "royalty as a contact sport — vain, magnificent, furious",
+    "cues": {
+      "curious": [
+        "He regards you down the length of his nose. You are being evaluated as a subject or a rival."
+      ],
+      "warn": [
+        "The bellow rolls out — not at you, at the whole forest. You happen to be in the forest."
+      ],
+      "fearful": [
+        "He backs a step, crown high. Even kings reconsider."
+      ]
+    },
+    "wave": 1,
+    "encounter": {
+      "fifo": true,
+      "noticeRange": 6,
+      "phases": [
+        "prowl",
+        "bellow",
+        "charge",
+        "withdraw"
+      ],
+      "phaseBadges": {
+        "prowl": " 👑 PROWL",
+        "bellow": " 👑 BELLOW",
+        "charge": " 👑 CHARGE"
+      },
+      "phaseMap": {
+        "declare": "bellow",
+        "windup": "bellow",
+        "resolve": "charge",
+        "idle": "prowl"
+      },
+      "painSwitch": true,
+      "shortName": "king",
+      "noticeAudio": "rutKingBellow",
+      "aggroAudio": "rutKingCharge",
+      "knownTactics": "Give it a tree — the rack catches. Strike during the bellow inhale.",
+      "comment": "Charge-lane bruiser with a sonic opener. sidestep is engine-observed movement off the telegraph lane.",
+      "knownCue": "The long inhale before the bellow — that is your moment."
+    },
+    "loot": {
+      "chance": 0.12,
+      "tier": 2,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05)."
+    },
+    "armor": 2,
+    "resistances": {},
+    "size": 2,
+    "fleeAt": 0.25
+  }
 ]

@@ -1883,4 +1883,441 @@
       "north_america"
     ]
   }
+,
+  {
+    "activity": "crepuscular",
+    "behavior": "wary",
+    "behaviorDesc": "Grazes in the open at dawn and dusk, always with one ear on the treeline. A stag will stand between you and the herd — and a stag in the rut answers a challenge.",
+    "biomes": [
+      "meadow",
+      "grove",
+      "forest_floor"
+    ],
+    "butcher": {
+      "antler": 1,
+      "bone": 2,
+      "hide": 1
+    },
+    "calories": 25000,
+    "common": true,
+    "description": "a big russet deer, the stag carrying a wide crown of antlers",
+    "difficulty": "hard",
+    "diseaseVector": "Deer carry ticks — check the hide before you carry it. Cook the meat through.",
+    "emoji": "🦌",
+    "fleeDifficulty": "hard",
+    "huntText": "The herd lifts its heads as one. The stag steps forward, antlers wide — deciding whether you're worth the trouble.",
+    "id": "red_deer",
+    "killText": "About {kcal} kcal — a mountain of venison, and a hide worth tanning. The antlers are tools, trade, and trophy all at once.",
+    "knowledgeLevels": {
+      "1": "Red deer. Big russet deer; stags carry wide antlers.",
+      "2": "Parts: meat (excellent, lean), hide (large), antlers (tools), bones (needles, awls). Gut fast, hang high.",
+      "3": "Uses: the forest's main meat crop. Lean like all venison — eat with fat. The rut (fall) makes stags bold and dangerous.",
+      "4": "Mastery: hunt the dawn meadows, wind in your face. In the rut, stags answer a bellow — call, don't chase. Never get between a stag and his hinds."
+    },
+    "method": [
+      "bow",
+      "trap"
+    ],
+    "name": "Red Deer",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Cervus elaphus",
+    "tell": "freezes mid-step, head high, ears rotating like dishes.",
+    "unknown": "something large and russet moving through the meadow mist"
+  },
+  {
+    "activity": "crepuscular",
+    "behavior": "skittish",
+    "behaviorDesc": "Sits tight in its form until the last second, then explodes in a zigzag. Hares outrun everything except a dog or a snare they don't see.",
+    "biomes": [
+      "meadow",
+      "trail_edge",
+      "thicket"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 900,
+    "common": true,
+    "description": "a big long-legged hare, ears laid flat, sitting tight in the grass",
+    "difficulty": "medium",
+    "diseaseVector": "Hares carry tularemia like rabbits — gloves for gutting, cook through.",
+    "emoji": "🐰",
+    "fleeDifficulty": "medium",
+    "huntText": "It sits. You take one more step — and it's gone, a brown streak bouncing impossibly high.",
+    "id": "european_hare",
+    "killText": "About {kcal} kcal — lean hare, a solid meal. Like rabbit: all protein, no fat — eat with something greasy.",
+    "knowledgeLevels": {
+      "1": "European hare. Big, long-legged, ears like antennae.",
+      "2": "Parts: meat (lean), fur (soft, thin). Snare the runs between feeding grounds.",
+      "3": "Uses: protein — but lean (rabbit starvation applies). Best in the cold months when they're fat.",
+      "4": "Mastery: find the forms (flattened grass nests) by day, snare by night. Hares run a circuit — learn it."
+    },
+    "method": [
+      "snare",
+      "chase"
+    ],
+    "name": "European Hare",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Lepus europaeus",
+    "tell": "one ear swivels toward you; the body goes utterly still.",
+    "unknown": "a brown shape that wasn't there a second ago"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "flock",
+    "behaviorDesc": "Scratches in coveys along field edges. Roosts in trees at night — a loud explosive flush when startled that warns everything for a mile.",
+    "biomes": [
+      "meadow",
+      "thicket",
+      "trail_edge"
+    ],
+    "butcher": {
+      "bone": 1,
+      "feather": 2
+    },
+    "calories": 1800,
+    "common": true,
+    "description": "a gaudy long-tailed game bird, the cock iridescent copper-green",
+    "difficulty": "medium",
+    "diseaseVector": "Wild birds can carry mites — pluck away from camp.",
+    "emoji": "🐓",
+    "fleeDifficulty": "medium",
+    "huntText": "The covey erupts under your feet — wings hammering, cocks screaming. Pick one and commit.",
+    "id": "common_pheasant",
+    "killText": "About {kcal} kcal — rich dark meat, and tail feathers worth keeping for fletching and trade.",
+    "knowledgeLevels": {
+      "1": "Pheasant. Gaudy long-tailed bird; the cock shines copper-green.",
+      "2": "Parts: meat (dark, rich), feathers (fletching, trade). Roosts in trees — catch them going up at dusk.",
+      "3": "Uses: the field-edge meat bird. Hens are drabber and better eating (cocks are stringy in spring).",
+      "4": "Mastery: walk the field edges at last light toward the roost trees. A snare on the dust-bathing hollows works while you sleep."
+    },
+    "method": [
+      "bow",
+      "trap"
+    ],
+    "name": "Common Pheasant",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Phasianus colchicus",
+    "tell": "a harsh grating cackle from the hedge — then silence.",
+    "unknown": "an explosion of wings and a gaudy flash of copper"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "forager",
+    "behaviorDesc": "Snuffles through leaf litter after dark, loud as a tiny pig. Rolls into a spiny ball when scared — patience beats force.",
+    "biomes": [
+      "thicket",
+      "forest_floor",
+      "ruin"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 500,
+    "common": true,
+    "description": "a spiny shuffling ball of a mammal, snuffling through the leaf litter",
+    "difficulty": "easy",
+    "diseaseVector": "Hedgehogs carry ticks and fleas — handle with gloves, cook well.",
+    "emoji": "🦔",
+    "fleeDifficulty": "easy",
+    "huntText": "Snuffle, snuffle, pause. It hears you — and becomes a ball of spines. Wait it out or take it as it is.",
+    "id": "european_hedgehog",
+    "killText": "About {kcal} kcal — small but fatty. Bake it in clay, spines and all; the old way works.",
+    "knowledgeLevels": {
+      "1": "Hedgehog. A walking pincushion that snuffles.",
+      "2": "Parts: meat (fatty for its size). The classic bake: clay-coat the whole animal, fire it, crack it open — spines come away with the clay.",
+      "3": "Uses: a fat little package — good when bigger game won't show. Mostly active after dark.",
+      "4": "Mastery: listen for the snuffling after dusk along hedgerows. They hibernate in winter — don't dig them up; let them sleep."
+    },
+    "method": [
+      "hands",
+      "trap"
+    ],
+    "name": "European Hedgehog",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Erinaceus europaeus",
+    "tell": "loud snuffling in the leaf litter, then sudden silence.",
+    "unknown": "rustling in the leaves, like a tiny drunk pig"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "defensive",
+    "behaviorDesc": "Digs setts that last centuries and defends them. Mostly wants earthworms, but cornered it fights like something three times its size.",
+    "biomes": [
+      "forest_floor",
+      "thicket",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 1,
+      "hide": 1
+    },
+    "calories": 6000,
+    "common": false,
+    "description": "a heavy black-and-white striped mammal, low-slung and purposeful",
+    "difficulty": "hard",
+    "diseaseVector": "Badgers can carry bovine TB — gloves, and cook the meat thoroughly.",
+    "emoji": "🦡",
+    "fleeDifficulty": "medium",
+    "huntText": "It turns sideways — making itself wide, striped face low. That jaw can crush bone. Are you sure?",
+    "id": "eurasian_badger",
+    "killText": "About {kcal} kcal — strong dark meat, and a striped hide. Respect the animal; it died hard.",
+    "knowledgeLevels": {
+      "1": "Badger. Heavy, striped, low to the ground.",
+      "2": "Parts: meat (strong-flavored, fatty), hide (tough). Trap the sett paths — never dig a sett.",
+      "3": "Uses: a serious meat package when the snares are lucky. Nocturnal; the paths to the sett are highways.",
+      "4": "Mastery: setts are ancient — the same families for generations. Take the dispersing young in fall, never the breeding sow. And never corner one."
+    },
+    "method": [
+      "trap"
+    ],
+    "name": "Eurasian Badger",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Meles meles",
+    "tell": "a low churring growl from the dark under the bushes.",
+    "unknown": "a striped shadow digging with great serious purpose"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "arboreal",
+    "behaviorDesc": "Lives in the beech canopy, fattening on mast all fall. In a mast year they're everywhere; in a lean year they're ghosts.",
+    "biomes": [
+      "grove",
+      "forest_floor"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 300,
+    "common": false,
+    "description": "a big sleepy gray dormouse, fat as a plum in the fall",
+    "difficulty": "easy",
+    "diseaseVector": "Dormice are clean as rodents go — still, cook them.",
+    "emoji": "🐭",
+    "fleeDifficulty": "easy",
+    "huntText": "It blinks at you from the branch, too fat to hurry. The Romans kept these in jars and ate them with honey.",
+    "id": "edible_dormouse",
+    "killText": "About {kcal} kcal — tiny, but in fall it's a ball of nut-fat. A handful of them is a meal.",
+    "knowledgeLevels": {
+      "1": "Edible dormouse. A big fat gray dormouse, sleepy in the hand.",
+      "2": "Parts: the whole tiny animal — mostly fat in a mast year. The Romans fattened them on purpose; the name is literal.",
+      "3": "Uses: fall fat. When beech mast is heavy, dormice are heavy too — trap the runways.",
+      "4": "Mastery: nest boxes and hollow branches. They hibernate half the year — take them in the fat weeks of October, never from a winter nest."
+    },
+    "method": [
+      "hands",
+      "trap"
+    ],
+    "name": "Edible Dormouse",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Glis glis",
+    "tell": "a soft chittering from the canopy at dusk.",
+    "unknown": "a plump gray shape asleep on a branch"
+  },
+  {
+    "activity": "both",
+    "behavior": "slow",
+    "behaviorDesc": "Grazes damp leaves after rain. Withdraws into its shell at a touch — collect by hand, no chase needed.",
+    "biomes": [
+      "forest_floor",
+      "creek",
+      "thicket"
+    ],
+    "butcher": {},
+    "calories": 150,
+    "common": true,
+    "description": "big spiral-shelled snails grazing the damp leaf litter",
+    "difficulty": "easy",
+    "diseaseVector": "Snails can carry rat lungworm — purge and cook thoroughly, never eat raw.",
+    "emoji": "🐌",
+    "fleeDifficulty": "easy",
+    "huntText": "They don't flee. They barely hurry. Fill your bag.",
+    "id": "edible_snail",
+    "killText": "About {kcal} kcal per handful — chewy, mild, real food. Purge them on clean greens first, then cook.",
+    "knowledgeLevels": {
+      "1": "Edible snail. Big spiral shells in the damp.",
+      "2": "Parts: the meat from the shell. Purge 2-3 days on clean food, then boil or grill — never raw.",
+      "3": "Uses: slow but certain protein after rain. The old escargot animal — people paid for these.",
+      "4": "Mastery: hunt after rain on limestone and old walls. Take the big ones, leave the small to grow."
+    },
+    "method": [
+      "hands"
+    ],
+    "name": "Roman Snail",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Helix pomatia",
+    "tell": "silver trails on the wet leaves in the morning.",
+    "unknown": "glossy spirals in the wet leaf litter"
+  },
+  {
+    "activity": "both",
+    "behavior": "pack",
+    "behaviorDesc": "Ranges miles in a pack, testing everything. A missed strike answers itself — the pack investigates the shooter.",
+    "biomes": [
+      "forest_floor",
+      "meadow",
+      "thicket"
+    ],
+    "butcher": {
+      "bone": 1,
+      "hide": 1
+    },
+    "calories": 12000,
+    "common": false,
+    "description": "a big gray wolf, yellow-eyed, watching you the way you watch deer",
+    "difficulty": "hard",
+    "diseaseVector": "Wolves carry ticks and tapeworm — gloves for the hide, cook the meat.",
+    "emoji": "🐺",
+    "fleeDifficulty": "hard",
+    "huntText": "It doesn't run. It watches. The pack is somewhere behind it, and now they know your smell.",
+    "id": "gray_wolf",
+    "killText": "About {kcal} kcal — lean wolf, and a gray hide worth more than the meat. The pack will remember this.",
+    "knowledgeLevels": {
+      "1": "Gray wolf. Big, gray, yellow-eyed. The forest's old landlord.",
+      "2": "Parts: meat (lean, strong), hide (prime). A predator answers a missed strike — the pack comes to investigate.",
+      "3": "Uses: dangerous game. Take lone dispersers, never the pack's core. Fire keeps them honest.",
+      "4": "Mastery: they're smartest in winter when they're hungriest. Never turn your back on a pack that's decided you're interesting."
+    },
+    "method": [
+      "trap",
+      "bow"
+    ],
+    "name": "Gray Wolf",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Canis lupus",
+    "tell": "a silence falls over the birds — then a howl, far off, answered nearer.",
+    "unknown": "yellow eyes at the treeline, there and gone"
+  },
+  {
+    "activity": "both",
+    "behavior": "aquatic",
+    "behaviorDesc": "Hangs motionless in the weeds, then strikes like a thrown spear. The freshwater shark — everything smaller is food.",
+    "biomes": [
+      "creek",
+      "wetland"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 2500,
+    "common": true,
+    "description": "a long torpedo of a fish hanging in the weeds, all teeth",
+    "difficulty": "medium",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it.",
+    "emoji": "🦈",
+    "fleeDifficulty": "medium",
+    "huntText": "A shadow detaches from the weeds — long, green, patient. It watched your lure the way you watch it.",
+    "id": "northern_pike",
+    "killText": "About {kcal} kcal — firm white pike, excellent eating. Watch the Y-bones; they're the tax on the meal.",
+    "knowledgeLevels": {
+      "1": "Northern pike. Long, toothy, green — the creek's shark.",
+      "2": "Parts: big white fillets. Mind the Y-bones. A wire leader or it bites your line off.",
+      "3": "Uses: the best eating of the still waters. Ambush predator — fish the weed edges at dawn.",
+      "4": "Mastery: big spoons, slow retrieve past the weed beds. In winter they go deep and sluggish — fish the holes."
+    },
+    "method": [
+      "line",
+      "spear"
+    ],
+    "name": "Northern Pike",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Esox lucius",
+    "tell": "a swirl in the shallows where no wind reached.",
+    "unknown": "a green torpedo holding station in the current"
+  },
+  {
+    "activity": "both",
+    "behavior": "aquatic",
+    "behaviorDesc": "Schools in the shallows, spiny dorsal cocked. Nips at anything — easy to catch, prickly to handle.",
+    "biomes": [
+      "creek",
+      "wetland"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 400,
+    "common": true,
+    "description": "a striped little fish with a spiny sail of a dorsal fin",
+    "difficulty": "easy",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it.",
+    "emoji": "🐡",
+    "fleeDifficulty": "easy",
+    "huntText": "The shallows boil with stripes — a school of perch, bold as brass, nipping at your hook.",
+    "id": "european_perch",
+    "killText": "About {kcal} kcal — sweet white perch, worth the pricked thumbs. The spiny dorsal is the price of admission.",
+    "knowledgeLevels": {
+      "1": "European perch. Striped, spiny-finned, everywhere.",
+      "2": "Parts: small sweet fillets. Grip behind the gills — the dorsal spines mean business.",
+      "3": "Uses: the reliable pan fish. Where there's one there's twenty.",
+      "4": "Mastery: dawn and dusk in the shallows. Small hooks, worms, patience."
+    },
+    "method": [
+      "line",
+      "hands"
+    ],
+    "name": "European Perch",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Perca fluviatilis",
+    "tell": "a flurry of small splashes in the shallows.",
+    "unknown": "striped flashes schooling in the shallows"
+  },
+  {
+    "activity": "both",
+    "behavior": "aquatic",
+    "behaviorDesc": "Holds in the current behind stones, rising to the fly. Wild trout are wary — one wrong shadow and the pool empties.",
+    "biomes": [
+      "creek"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 800,
+    "common": true,
+    "description": "a spotted bronze fish holding in the current",
+    "difficulty": "medium",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it.",
+    "emoji": "🐠",
+    "fleeDifficulty": "medium",
+    "huntText": "A bronze flank turns in the current — spotted, perfect, and already watching your shadow.",
+    "id": "brown_trout",
+    "killText": "About {kcal} kcal — the prince of the creek, pink-fleshed and rich. Worth every cold hour.",
+    "knowledgeLevels": {
+      "1": "Brown trout. Bronze, black-and-red spotted, holding in the current.",
+      "2": "Parts: rich pink flesh. Fish upstream, keep your shadow off the water.",
+      "3": "Uses: the creek's prize. Needs clean cold water — where trout live, the water's drinkable (boil it anyway).",
+      "4": "Mastery: dawn, small flies or worms drifted natural. The big ones feed at last light under the banks."
+    },
+    "method": [
+      "line",
+      "hands"
+    ],
+    "name": "Brown Trout",
+    "regions": [
+      "europe"
+    ],
+    "scientific": "Salmo trutta",
+    "tell": "a rise-ring spreading on the pool's surface.",
+    "unknown": "a bronze shadow holding against the current"
+  }
 ]
