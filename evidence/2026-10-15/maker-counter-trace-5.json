@@ -1,0 +1,5621 @@
+{
+  "seed": 5,
+  "policy": "maker",
+  "sourceHashes": {
+    "src/js/game.js": "3e3d138e660b3b96f0a93c128e20a322886cb0e438fea0fcc92963cf0329ec0c",
+    "src/js/food.js": "477d5d45907c52aa84f458ec0b92ce42b0eab2d4c52c4f410605d924cbbff7d9",
+    "src/js/storage.js": "ce7a473ace6b96b175f96aaa408c16face1fd167359ce992650efd6b12727b37",
+    "src/js/app.js": "0e2ce472c021b85b414075a15c90f388572d9e0f1c581988b38d1752050e3802",
+    "scripts/policies/competent.js": "9bfeef329e7cc6a2022d1763109abf031f5684a4c75796096fc78e9e1c60ce48",
+    "scripts/policies/livelihood.js": "50bd50d6a33c12ab701fd751e1387ce26240705692e00faff9751dc227edf8f0",
+    "scripts/maker-counter-trace.js": "2972576bb995136714d1e1dd566258a47abe23ba1c23e3ffd403b0d57c1f97b4"
+  },
+  "sourceHead": "f379d70f1660a71055c06676b041de038acaa1af",
+  "driver": "sweep-compare",
+  "days": 108,
+  "won": false,
+  "stateHash": "f97ee62b1469801ddd2229c33de374bf11f6cac5122464e1a6196defc3593a25",
+  "referencePath": "C:\\Users\\Steve\\oversight\\evidence\\2026-10-15\\gear-usage-maker-counter-after-64.json",
+  "referenceHash": "f97ee62b1469801ddd2229c33de374bf11f6cac5122464e1a6196defc3593a25",
+  "matchesReference": true,
+  "events": [
+    {
+      "method": "cookFood",
+      "index": 36,
+      "before": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 0,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 60,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "after": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 32,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cooked",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": null,
+            "spoilDay": 69,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cooked)",
+            "prep": "Cooked perfect — Fire kills the parasites and loosens the protein. Worth the fuel..",
+            "kg": 0.182,
+            "diseaseRisk": null,
+            "undercooked": false,
+            "safe": true
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "narration": [
+        "Cooked Gray Squirrel (cooked): 182 → 182 kcal, perfect — Fire kills the parasites and loosens the protein. Worth the fuel.. (32 ticks)",
+        "Miles won't go far from the group. \"Something's out there. I can feel it looking.\""
+      ]
+    },
+    {
+      "method": "preserveFood",
+      "index": 36,
+      "before": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 32,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cooked",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": null,
+            "spoilDay": 69,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cooked)",
+            "prep": "Cooked perfect — Fire kills the parasites and loosens the protein. Worth the fuel..",
+            "kg": 0.182,
+            "diseaseRisk": null,
+            "undercooked": false,
+            "safe": true
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "after": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 48,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "preserved",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 146,
+            "hiddenKcal": null,
+            "spoilDay": 79,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (smoked)",
+            "prep": "Smoked (rough job). Keeps ~two weeks — a real preserver could do better.",
+            "kg": 0.182,
+            "diseaseRisk": null,
+            "undercooked": false,
+            "safe": true
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "narration": [
+        "★ Learned: preserving food. Messy, but it worked. Next time will be cleaner.",
+        "You rig a smoky fire and tend it a good while. It sort of works — drier, safer, but you know a real preserver would do better. (16 ticks)"
+      ]
+    },
+    {
+      "method": "putAwayFinished",
+      "before": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 48,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "preserved",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 146,
+            "hiddenKcal": null,
+            "spoilDay": 79,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (smoked)",
+            "prep": "Smoked (rough job). Keeps ~two weeks — a real preserver could do better.",
+            "kg": 0.182,
+            "diseaseRisk": null,
+            "undercooked": false,
+            "safe": true
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "after": {
+        "bearer": "gen_2jnri07",
+        "day": 64,
+        "ticks": 48,
+        "kcal": 2040,
+        "health": 100,
+        "integration": 100,
+        "insideHaven": true,
+        "map": {
+          "x": 4,
+          "y": 4
+        },
+        "over": false,
+        "fight": false,
+        "encounter": false,
+        "contest": false,
+        "pantryCap": 120000,
+        "pantry": [
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 23,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 450,
+            "units": 1,
+            "spoilDay": 59,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 60,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 25,
+            "spoilDay": 61,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 20,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 103,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 210,
+            "units": 1,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 200,
+            "units": 33,
+            "spoilDay": 62,
+            "safe": true,
+            "kg": 0.2
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 63
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 47,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 85,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 352,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.07,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 312,
+            "units": 1,
+            "spoilDay": 63,
+            "safe": true,
+            "kg": 0.062,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 220,
+            "units": 59,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 2,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 97,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 298,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.06,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 90,
+            "units": 1,
+            "spoilDay": 64,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 12,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 311,
+            "units": 4,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.078,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 474,
+            "units": 47,
+            "spoilDay": 65,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 500,
+            "units": 29,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 57,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 66,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 266,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.053,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 362,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.072,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 67,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 383,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.077,
+            "granaryDays": 3
+          },
+          {
+            "name": "Snared meat",
+            "kcalEach": 225,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 100,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 338,
+            "units": 1,
+            "spoilDay": 68,
+            "safe": true,
+            "kg": 0.068,
+            "granaryDays": 3
+          },
+          {
+            "name": "Foraged food",
+            "kcalEach": 232,
+            "units": 1,
+            "spoilDay": 69,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 70
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 9,
+            "spoilDay": 70,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 24,
+            "spoilDay": 71,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 360,
+            "units": 8,
+            "spoilDay": 72,
+            "safe": true,
+            "kg": 0.09,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 380,
+            "units": 1,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.095,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 18,
+            "spoilDay": 74,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 400,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.1,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Expedition haul (dried)",
+            "kcalEach": 334,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.083,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 80,
+            "units": 4,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.05,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 365,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.091,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 342,
+            "units": 1,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.085,
+            "granaryDays": 3,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Foraged food (dried)",
+            "kcalEach": 160,
+            "units": 6,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "foodState": "preserved",
+            "diseaseRisk": null,
+            "prep": "Preserved (rough job). Keeps a couple of weeks — a real preserver could do better.",
+            "wellMade": false
+          },
+          {
+            "name": "Winner's share (alien rations)",
+            "kcalEach": 300,
+            "units": 2,
+            "spoilDay": 75,
+            "safe": true,
+            "kg": 0.2,
+            "granaryDays": 3
+          },
+          {
+            "name": "Tribute grain from Thornfield",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Hungry Road",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          },
+          {
+            "name": "Tribute grain from The Red Table II",
+            "kcalEach": 4000,
+            "units": 1,
+            "spoilDay": 84
+          }
+        ],
+        "counter": [
+          {
+            "plantId": "hickory_nut",
+            "units": 2,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 63,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats."
+          },
+          {
+            "plantId": "hickory_nut",
+            "units": 4,
+            "kg": 0.1,
+            "unit": "handful of nuts",
+            "spoilDay": 72,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 200,
+            "name": "Hickory Nuts (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 61,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 64,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 8,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 67,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 7,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 70,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 5,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 73,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "bone",
+            "units": 1,
+            "name": "Bone",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.2
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "acorn_white_oak",
+            "units": 10,
+            "kg": 0.1,
+            "unit": "handful of nutmeats",
+            "spoilDay": 76,
+            "foodKind": "nut",
+            "foodState": "in_shell",
+            "edible": false,
+            "kcalEach": 0,
+            "hiddenKcal": 150,
+            "name": "White Oak Acorns (in shell)",
+            "prep": "Needs shelling — crack and pick the nutmeats. (Shell action)"
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "preserved",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 146,
+            "hiddenKcal": null,
+            "spoilDay": 79,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (smoked)",
+            "prep": "Smoked (rough job). Keeps ~two weeks — a real preserver could do better.",
+            "kg": 0.182,
+            "diseaseRisk": null,
+            "undercooked": false,
+            "safe": true
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          },
+          {
+            "plantId": "meat_gray_squirrel",
+            "foodKind": "meat",
+            "foodState": "cleaned",
+            "edible": true,
+            "units": 1,
+            "kcalEach": 182,
+            "hiddenKcal": 350,
+            "spoilDay": 64,
+            "unit": "portion",
+            "how": "trapped",
+            "name": "Gray Squirrel (cleaned)",
+            "prep": "⚠️ Risky: raw meat. Cook it, or preserve it. Spoils in ~2 days.",
+            "kg": 0.182,
+            "diseaseRisk": {
+              "p": 0.35,
+              "dmg": 12,
+              "note": "raw meat"
+            }
+          },
+          {
+            "material": "hide",
+            "units": 1,
+            "name": "Hide",
+            "kcalEach": 0,
+            "spoilDay": 9999,
+            "kg": 0.8
+          }
+        ]
+      },
+      "narration": [
+        "The pantry is full (150,000 kcal cap) — Gray Squirrel (smoked) stays on the counter. Expand storage to take more."
+      ]
+    }
+  ]
+}
