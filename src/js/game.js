@@ -15488,7 +15488,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (Math.random() < 0.3) {
               // BELIEVED NAME (break-it knowledge 2026-10-09 r2): the narrator
               // speaks to the player in the player's terms.
-              this.say(`${this.displayName(teacher)} showed ${this.displayName(learner)} the ${this.plantDisplayName(pid)} — "remember it." Word gets around.`);
+              // ARTICLE FOLD (journey-endgame r12 2026-10-15): plantDisplayName
+              // for an unidentified plant returns the description, which
+              // often opens with its own article ("a cluster of...") — the
+              // line supplies "the", so fold the description's leading
+              // article to avoid "showed Tariq the a cluster of...".
+              const pdName = String(this.plantDisplayName(pid)).replace(/^(a|an|the)\s+/i, '');
+              this.say(`${this.displayName(teacher)} showed ${this.displayName(learner)} the ${pdName} — "remember it." Word gets around.`);
             }
           }
           }

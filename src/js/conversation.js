@@ -2519,8 +2519,9 @@
     // table waits unanswered (or during the win-day-floor deferral), and
     // once after it resolves, villagers open with it — ahead of secrets,
     // taught-plant callbacks, and small talk. Once per villager per sitting
-    // (pg.tableSittingId, bumped in tableScene when a seat is granted);
-    // never a loop. Talk requests still lead (convoOpening #1), and planted
+    // per phase — one remark while it waits, one after it resolves (r12:
+    // the kind is part of the once-per key; a waiting remark must not eat
+    // the resolved remark). Talk requests still lead (convoOpening #1), and planted
     // want-seeds keep their resume priority (a favor follow-up is a
     // commitment, not chatter). Question openers route through
     // convoMatchReactive downstream and become answerable — the NPC wants
@@ -2539,7 +2540,9 @@
       // after it resolves (the run usually ends on a win, so this is the
       // rare continued run — downgrade paths, or the table answered without
       // winning). After resolution the sitting predicate is false by design
-      // (the table is gone) — the remark is still owed once per sitting.
+      // (the table is gone) — the resolved remark is still owed once per
+      // sitting, even to villagers who already remarked while it waited
+      // (r12: kind-aware guard below).
       const pg0 = (typeof this.progState === 'function') ? this.progState() : null;
       if (!pg0 || !(pg0.tableSittingId | 0)) return null; // never sat this run
       if (!this.convoTableSitting()) {
@@ -2550,15 +2553,24 @@
       const sitting = pg.tableSittingId | 0;
       const c = this.convoGet(vid);
       if (!c) return null;
-      const remarked = c.tableRemarked;
-      if (remarked && remarked.sitting === sitting) return null; // said their piece
       const T = (typeof this.tableState === 'function') ? this.tableState() : {};
       const deferred = !!T.winDeferred;
       const waiting = deferred || !!pg.tableWaiting ||
         (!!pg.tableDone && T.phase && T.phase !== 'done');
       const resolved = !!pg.tableDone && T.phase === 'done';
       if (!waiting && !resolved) return null;
-      c.tableRemarked = { sitting: sitting, kind: waiting ? 'waiting' : 'done' };
+      // REMARK KIND (journey-endgame r12 2026-10-15): one remark while the
+      // table waits AND one after it resolves — they are different news
+      // ("it's sitting up there" vs "you walked out of the light"). The old
+      // guard compared sitting only, so a villager who remarked during the
+      // wait never got the post-resolution remark: the "once after it
+      // resolves" half of the design never fired for them. The kind is part
+      // of the once-per key now; repeat conversations in the same phase
+      // still remark only once (never a loop).
+      const wantKind = resolved ? 'done' : 'waiting';
+      const remarked = c.tableRemarked;
+      if (remarked && remarked.sitting === sitting && remarked.kind === wantKind) return null; // said their piece for this phase
+      c.tableRemarked = { sitting: sitting, kind: wantKind };
       let pool;
       if (deferred) {
         pool = [

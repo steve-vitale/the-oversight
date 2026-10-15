@@ -1,0 +1,22 @@
+=== seed 48 day 90 POST-WIN — conversation with Tariq (tariq_mahmood) ===
+want: ask_favor (stage 0, fromSeed) thread=table
+THEM: "The light's gone. The sky's just sky again. Tell me it meant something."
+YOU: [dlg:more] "Go on."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "About the sickness I'm fighting — I hate to ask twice, but it's still open. Will you?"
+(want=ask_favor stage=2)
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Sorry — I asked you something there." Will you?
+(want=ask_favor stage=2)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "You don't know what that means to me. Thank you."
+(want=ask_favor stage=3)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I should go. You know where to find me."
+(want=ask_favor stage=3)
+YOU: (leave)
