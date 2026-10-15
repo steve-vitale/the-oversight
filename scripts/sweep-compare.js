@@ -51,6 +51,7 @@ try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catc
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
 for (const id of ['merchant', 'maker', 'caregiver']) POLICY_REGISTRY[id] = require('./policies/livelihood')[id];
 for (const id of ['campaigner', 'campaigner-control']) POLICY_REGISTRY[id] = require('./policies/campaigner')[id];
+for (const id of ['covenanter', 'charterer', 'peer-control']) POLICY_REGISTRY[id] = require('./policies/peer-league')[id];
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 

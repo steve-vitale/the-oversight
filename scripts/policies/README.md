@@ -46,6 +46,9 @@ exposure. Run `scripts/campaign-audit.js` for natural coverage and read
 | `merchant` | livelihood.js | same capable brain, no deliberate hunts/feast fights, earns a food budget and shops/sells at actual carts | commerce opportunities, prices and gear access |
 | `maker` | livelihood.js | merchant plus reading held books, paid trips seeking books, known equipment recipes and preserving cooked meat | recipe/material reachability and useful crafting |
 | `caregiver` | livelihood.js | same capable brain, no deliberate hunts/feast fights, comforts actual frightened/grieving villagers | a care-led run's rewards, survival and ending access |
+| `covenanter` | peer-league.js | same capable survival/choice brain, no deliberate hunts; known/courted equal links, real crisis/defense answers and bounded famine draws | natural league founding, food relief, ending access |
+| `charterer` | peer-league.js | same brain, trade charters and priced help requests; no deliberate hunts | natural charter founding, useful trade routes and endings |
+| `peer-control` | peer-league.js | same brain and hunt restrictions; both LEAD and peer proposals suppressed | paired control for peer-route behavior |
 
 The livelihood policies still defend themselves in unavoidable fights; these
 are not zero-combat or pacifist proofs. Compare the same policy code on
@@ -64,6 +67,22 @@ Also present (legacy, not canonical): `idle.js` (zero/mvc/leader), `oracle.js`,
 `oracleV2.js` (systems-engaged), `socialite.js` (social-play), `weird-c.js`,
 `progress-*.js`. Use the six above for new measurement; the legacy set stays
 for reproducing old results.
+
+The peer probes replace the inherited LEAD proposal with no action during all
+callbacks (restored in finally). Only the two route policies propose their
+chosen kind: day 25+, a known unlinked village with opinion 10+, pantry above
+12,000 kcal, one proposal/day and seven days between asks of the same village.
+They rely on actual visible relationships and ordinary broadcast/time courtship;
+they do not grant opinion, travel to codices, or read hidden village contents.
+They accept counters, make an affordable first gift (otherwise a visit), concede
+priced crises and send help with a roster of at least six. The engine still
+checks the actual bench. Covenant draws move at most 4,000 kcal/day toward a
+12,000-kcal pantry buffer, consuming the real pool. Normal Table taking remains
+on: these are whole-run strategies, not a national-rank-only ceiling. Peak link,
+live benefit and pool counters are sampled decision observations; they are not
+complete weekly accounting or exact founding timestamps. Inherited courtship
+counters can count suppressed LEAD attempts, so use livelihoodPeer counters and
+observed public actions for peer claims.
 
 ## Adding a policy
 
