@@ -461,6 +461,22 @@
           if (weirdness && (!outbreak || (weirdness.severe && !outbreak.severe))) return weirdness;
           return outbreak;
         }
+        // REALM (journey scale r1 2026-10-15): the court sat or the oath was
+        // sworn and the village knows — but after the one-shot echo beat
+        // (scaleDiscovery._sdNationalBeatEcho), conversations never carried
+        // the realm as a topic. The realm is the village's own political
+        // transformation (tribute flows, the court calendar, the oath); it
+        // holds the lately slot for the acute window. Below the table (the
+        // System's summons outranks the village's own politics), the sick,
+        // and the dead — above defense and the debate. Window 10 days (the
+        // mantle's tail); shape-aware; the primary's name is knowledge-gated.
+        try {
+          var _natDay = this.state.nationalDay || 0;
+          if (this.state.nationalLive &&
+              (day - _natDay) >= 0 && (day - _natDay) <= 10) {
+            return { kind: 'realm', shape: this.state.nationalShape || 'lead' };
+          }
+        } catch (e) {}
         const defended = this.t2mem(vid).find(m => m.t === 'defended' &&
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
         if (defended) return { kind: 'defense', note: String(defended.note || '') };
@@ -1068,6 +1084,32 @@
           return [
             '"It\'s here. The table. I walked past where it sits three times today. I don\'t know what I\'m waiting for."',
             '"Nobody says it out loud, but everyone\'s counting — how long before you answer it? Seven doors. I counted."'];
+        }
+        case 'realm': {
+          // REALM (journey scale r1 2026-10-15): the village talks about the
+          // court in its own voice, shape-aware. The primary's name is
+          // knowledge-gated (_ovName); the shapes are public (the court sat
+          // openly). Villagers describe what the realm MEANS for them —
+          // tribute, the court, the oath — never the mechanics.
+          var sh = ev.shape || 'lead';
+          var pnm = null;
+          try { if (this.state.nationalPrimary) pnm = this._ovName(this.state.nationalPrimary); } catch (e) {}
+          if (sh === 'belong') return [
+            '"We swore to ' + (pnm || 'them') + '. The oath\'s sealed. We\'re somebody\'s now — I keep waiting to feel different."',
+            '"Five thousand kcal a week walks out of our pantry to ' + (pnm || 'them') + '. The relationship holds. That\'s what they say, anyway."'];
+          if (sh === 'covenant') return [
+            '"No thrones. A circle of speakers and a shared granary. The audience has never seen one survive — well. We\'ll show them."',
+            '"The pool\'s open — grain in from every fire, grain out when someone\'s hungry. We all feel it now."'];
+          if (sh === 'trade') return [
+            '"Signed the charter. Tariffs, ledgers, routes. No swords — written plainly, so nobody can pretend otherwise."',
+            '"We\'re a ledger now. Four fires on the same books. The traders are already acting like they own the road."'];
+          if (sh === 'conquest') return [
+            '"They knelt because they lost. I watched it happen. I don\'t know what I\'m supposed to feel."',
+            '"The realm\'s ours and it cost blood. Their grain comes in heavy now — and they hate us for it."'];
+          // lead (default): Haven holds the high seat.
+          return [
+            '"Four fires, one head — and the head is us. The speakers rode in and... I still can\'t quite believe it."',
+            '"Tribute\'s coming IN now. Their grain, our fire. Feels strange to be on this end of it."'];
         }
         case 'tension':
           return ['"Everyone\'s choosing sides and pretending they aren\'t. I hate it."',

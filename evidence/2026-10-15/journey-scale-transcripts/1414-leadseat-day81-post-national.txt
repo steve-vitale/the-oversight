@@ -1,0 +1,23 @@
+=== seed 1414 leadseat day 81 [post-national] — conversation with Jorge ===
+occupation=Rancher temperament=steady mood=cheerful scale=global
+want: curious (stage 1)
+
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Sofia is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged

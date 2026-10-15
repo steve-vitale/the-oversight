@@ -286,7 +286,11 @@
       var shape = this.state.nationalShape || 'lead';
       var vid = this._sdVillager();
       if (!vid) return;
-      if (!this._sdFire('natBeatEcho', 'villager')) return;
+      // GATE-AFTER-SAY (journey scale r1 2026-10-15): the once-only gate used
+      // to be consumed BEFORE the say() — a throw in _sdName/pick/say (all
+      // swallowed by scaleDiscoveryDaily's try/catch) permanently silenced
+      // the echo with the gate marked fired. Now the line goes out first;
+      // the gate marks only on success, so a failed attempt retries tomorrow.
       var nm = this._sdName(vid);
       var primaryNm = 'them';
       try {
@@ -316,6 +320,7 @@
       };
       var pool = lines[shape] || lines.lead;
       this.say(`${nm}, at the fire, not quite believing it: ${pick(pool)}`);
+      this._sdFire('natBeatEcho', 'villager');
       this._sdNote('scale', `The village is talking about the court — the ${shape} road. The realm is real to them now.`);
     },
 

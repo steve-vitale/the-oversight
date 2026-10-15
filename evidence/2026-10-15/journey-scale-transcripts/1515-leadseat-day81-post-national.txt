@@ -1,0 +1,26 @@
+=== seed 1515 leadseat day 81 [post-national] — conversation with Hugo ===
+occupation=line cook temperament=sardonic mood=steady scale=national
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+(want=curious stage=2)
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Eyes open, mouth shut. That's the policy. For now. What could go wrong."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Huh. Let me think about that." "Ruth? A librarian, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I go back and forth. Ask me tomorrow, I'll say different."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. That's settled, then. Onward."
+want final: id=curious stage=3 resolution=engaged
