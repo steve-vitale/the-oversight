@@ -5,8 +5,9 @@
 //  1. CAPABLE_GREEDY=1: the bot keeps the Table waiting (Overtime) while the
 //     run is strong, and sits with the key, when Haven weakens, at the tier
 //     cap or near the horizon. Off: never waits (the dashboard's bot).
-//  2. CAPABLE_READ_STAKES=1: the bot reads the build option's "(needs X N+)"
-//     label against the live meter, instead of picking it on its words.
+//  2. CAPABLE_READ_STAKES=1: retain the historical hidden-meter diagnostic
+//     when a legacy/fake prompt has no public meter line. Normal policy now
+//     reads the actual visible prompt; test-table-stake-progress proves that.
 //  3. In a real run started at a ready seat (pinned state, not a seed's
 //     luck), greedy waits into Overtime (tier >= 1), then sits.
 'use strict';
@@ -68,7 +69,7 @@ function pinSeatReady(Game) {
   const shortSc = cap.scoreTableOption({}, opt, { meters: { terror: 3 } });
   const okSc = cap.scoreTableOption({}, opt, { meters: { terror: 4 } });
   const cageShort = cap.scoreTableOption({}, { id: 'build', label: 'Sign it. (needs cage ≤4)' }, { meters: { cage: 5 } });
-  T.ok('off: the short build option still scores on its words', off > 0, off.toFixed(1));
+  T.ok('default without public progress leaves the stake unknown', off > 0, off.toFixed(1));
   T.ok('on: short of the stake, never picked', shortSc < -40 && cageShort < -40, shortSc.toFixed(1) + ' / ' + cageShort.toFixed(1));
   T.ok('on: affordable, preferred', okSc > off, okSc.toFixed(1) + ' vs ' + off.toFixed(1));
   delete process.env.CAPABLE_READ_STAKES;

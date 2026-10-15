@@ -9,11 +9,15 @@ async function child() {
   const { runComparison, POLICY_REGISTRY: registry } = require(path.join(root, 'scripts/sweep-compare'));
   const id = arg('policy', 'capable'), base = registry[id];
   if (!base) throw new Error('Unknown policy ' + id);
-  const people = new Map(), ascensions = [], outcomes = [];
+  const people = new Map(), ascensions = [], outcomes = [], tableTrace = [], offers = { player: {}, npc: {} }, heldPeople = { player: {}, npc: {} };
   let G;
   const person = vid => { if (!people.has(vid)) people.set(vid, { id: vid, bearerDays: [], events: {}, classes: [] }); return people.get(vid); };
   const sample = g => {
     const me = person(g.villagerId), day = g.state.scholar.day;
+    for (const [vid, ids] of [[g.villagerId, (g.state.scholar.abilities || []).map(x => typeof x === 'string' ? x : x.evolvedFrom || x.id)], ...Object.entries(g.state.village.npcAbilities || {})]) {
+      const role = vid === g.villagerId ? 'player' : 'npc';
+      for (const id of ids) { const seen = heldPeople[role][id] || (heldPeople[role][id] = []); if (!seen.includes(vid)) seen.push(vid); }
+    }
     if (!me.bearerDays.includes(day)) me.bearerDays.push(day);
     for (const [vid, rec] of [[g.villagerId, g.state.scholar.godpath], ...Object.entries(g.state.village.npcGodpath || {})]) {
       if (!rec || rec.lapsed) continue;
@@ -36,8 +40,20 @@ async function child() {
           }
           return value;
         };
+        const sheet = G.kitSheet;
+        G.kitSheet = function (cands, who, track, level) {
+          const out = sheet.apply(this, arguments), role = who === 'player' || who === this.villagerId ? 'player' : 'npc';
+          for (const item of out || []) offers[role][item.id] = (offers[role][item.id] || 0) + 1;
+          return out;
+        };
+        const choose = G.chooseTableOption;
+        G.chooseTableOption = function (id) {
+          const tc = this.state.scholar.tableChoices, T = ((this.state.scholar.prog || {}).table || {});
+          if (tc) tableTrace.push({ day: this.state.scholar.day, id, options: (tc.options || []).map(x => ({ id: x.id, label: x.label })), prompt: tc.prompt, path: T.path, phase: T.phase, beat: T.beat, meters: { ...(T.meters || {}) } });
+          return choose.apply(this, arguments);
+        };
         const tele = G.tele;
-        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); if (type === 'godpath_deed') outcomes.push(JSON.parse(JSON.stringify(data))); return tele.apply(this, arguments); };
+        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); if (type === 'godpath_deed') outcomes.push(JSON.parse(JSON.stringify(data))); if (type === 'table_failed' || type === 'table_won') tableTrace.push({ day: this.state.scholar.day, type, ...JSON.parse(JSON.stringify(data)) }); return tele.apply(this, arguments); };
         sample(G);
       }
       if (base.setup) return base.setup(g, ctx);
@@ -60,11 +76,11 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, people: rows }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, offers, heldPeople, tableTrace, people: rows }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
-  const seeds = require('../sweep-dashboard').seedList(Number(arg('n', 64))), policies = arg('policies', 'capable,maker,merchant,caregiver').split(',');
+  const seeds = arg('seeds', '') ? arg('seeds', '').split(',').map(Number) : require('../sweep-dashboard').seedList(Number(arg('n', 64))), policies = arg('policies', 'capable,maker,merchant,caregiver').split(',');
   const jobs = policies.flatMap(policy => seeds.map(seed => ({ policy, seed }))), rows = []; let next = 0;
   const worker = async () => {
     while (next < jobs.length) {
@@ -79,10 +95,10 @@ async function main() {
   await Promise.all(Array.from({ length: Number(arg('par', 4)) }, worker));
   rows.sort((a, b) => a.row.policy.localeCompare(b.row.policy) || seeds.indexOf(a.row.seed) - seeds.indexOf(b.row.seed));
   const hashes = {};
-  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
-  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, sourceHead: cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), sourceHashes: hashes, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
+  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, sourceHead: cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
   console.log('\nSaved ' + arg('out'));
 }
 main().catch(e => { console.error(e.stack); process.exitCode = 1; });

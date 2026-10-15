@@ -806,16 +806,28 @@ function scoreTableOption(Game, o, T) {
     } catch (e) { /* unpriced path: jitter only */ }
     return sc;
   }
-  // READ THE STAKE (CAPABLE_READ_STAKES=1, diagnosis-endgame 2026-10-15):
-  // the build option's label says what it needs ("(needs terror 4+)"). A
-  // player reads it; the bot used to pick it on its words and fail the door.
-  if (process.env.CAPABLE_READ_STAKES === '1') {
+  // The requirement is on the button; the current meter is in the same
+  // visible prompt's italic status line. Read those public strings by default.
+  // 0 reproduces the old word-only policy. 1 retains the old hidden-meter
+  // diagnostic only when a legacy/fake prompt provides no public reading.
+  if (process.env.CAPABLE_READ_STAKES !== '0') {
     const m = /\(needs (\w+) (?:(\d+)\+|≤(\d+))\)/.exec(label);
     if (m) {
-      const cur = ((T && T.meters) || {})[m[1]] | 0;
-      const short = m[2] != null ? cur < +m[2] : cur > +m[3];
-      if (short) return sc - 50;
-      sc += 4; // the build option, affordable: play the build
+      const prompt = ((((Game.state || {}).scholar || {}).tableChoices || {}).prompt);
+      let cur = null;
+      if (typeof prompt === 'string') {
+        for (const line of prompt.matchAll(/<i>([\s\S]*?)<\/i>/g)) {
+          const visible = line[1].replace(/<[^>]*>/g, ' ');
+          const value = new RegExp('\\b' + m[1] + '\\s+(-?\\d+)\\b').exec(visible);
+          if (value) { cur = Number(value[1]); break; }
+        }
+      }
+      if (cur == null && process.env.CAPABLE_READ_STAKES === '1') cur = ((T && T.meters) || {})[m[1]] | 0;
+      if (cur != null) {
+        const short = m[2] != null ? cur < Number(m[2]) : cur > Number(m[3]);
+        if (short) return sc - 50;
+        sc += 4;
+      }
     }
   }
   const dark = T && T.branch === 'dark';
