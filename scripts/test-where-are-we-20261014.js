@@ -47,6 +47,10 @@ function ok(cond, name, detail) {
 
 async function main() {
   const { Game, loadFails } = await loadGame({ seed: 20261014, mode: 'where-are-we-proof' });
+  // Wave 1 (2026-10-14): more than one region is playable, so newGame lands
+  // randomly. Every assertion here is eastern-woodlands-specific (seasons,
+  // "Eastern Woodlands", the Ohio/Kyiv/Hanoi tier fixture), so pin it.
+  Game.debugRegion = 'na_eastern_woodlands';
   ok(!loadFails.length, 'all modules load', loadFails.join('; '));
   ok(typeof Game.whereLine === 'function' && typeof Game.placeLearnFrom === 'function', 'whereAreWe.js attached to Game');
 

@@ -54,6 +54,20 @@ function fakeGame(o) {
   // seed 1, capable, 150 days: the plain bot sits on day 93 (dashboard-diag-base16).
   process.env.CAPABLE_GREEDY = '1';
   const { Game, manifest } = await H.quietLog(() => H.loadGame({ seed: 1, mode: 'test-greedy' }));
+  // MULTI-REGION WORLD (region-wave1 2026-10-14): more than one region is
+  // playable now, so pickLandingRegion draws randomly. This is a behavioral
+  // regression test with a fixed seed — pin the landing to the woodlands.
+  Game.debugRegion = 'na_eastern_woodlands';
+  // MONSTER POOL (region-wave1 2026-10-14): monsterWavePool() is wave-scoped,
+  // not region-scoped (WORLD-REGIONS.md §11: monster variants and spawn
+  // weights are an engine follow-up), so a new region's variants join the
+  // global pool and shift this seeded run. regions.json's `monsters` field
+  // names each region's variants (designed, not read by the engine yet) —
+  // emulate the intended scoping by excluding region-claimed variants here.
+  // On pre-wave-1 data this is a no-op (no region claims monsters).
+  const claimed = new Set();
+  for (const r of (Game.data.regions || [])) for (const m of (r.monsters || [])) claimed.add(typeof m === 'string' ? m : m.id);
+  Game.data.monsters = (Game.data.monsters || []).filter(m => !claimed.has(m.id));
   await H.setupGame(Game);
   let maxTier = 0, satDay = null;
   const pol = Object.assign({}, cap.capable);

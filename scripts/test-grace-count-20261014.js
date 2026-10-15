@@ -11,6 +11,10 @@ const T = K.reporter('grace-count');
 
 (async () => {
   const Game = await K.load({ seed: 1014 });
+  // Wave 1 (2026-10-14): a second playable region shifts the RNG draw order
+  // (pickLandingRegion draws only with 2+ playable). This test is about heal
+  // counting, not regions — pin the landing to keep the seed's fight order.
+  Game.debugRegion = 'na_eastern_woodlands';
   K.newRun(Game);
   K.openSlots(Game, 6);
   K.giveAbility(Game, 'battlefield_grace', { level: 1 });
@@ -24,6 +28,10 @@ const T = K.reporter('grace-count');
   heal();
   T.ok('L1: grace on the 3rd heal', graced() === 1);
 
+  // Full heal between fights: the monster's opening turn must not decide this
+  // test (RNG order shifts as content grows; the assertions are about counting).
+  // Both copies: K.fight's tbEnd syncs the fighter's hp back onto the scholar.
+  p.hp = 100; Game.state.scholar.health = 100;
   K.fight(Game, 'hushwolf', { hp: 100 });
   const ab = Game.state.scholar.abilities.find(a => a.id === 'battlefield_grace');
   ab.level = 2;

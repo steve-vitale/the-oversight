@@ -15,6 +15,11 @@ function setup(Game, grid, px) {
   // another village's camp (seed-dependent placement; origins-world
   // 2026-10-14 changed the roster's RNG draws and seed 11 put Thornfield there).
   for (const v of (Game.state.otherVillages || [])) if (v.x === 5 && v.y === 6) { v.x = 0; v.y = 8; }
+  // Pin the terrain too: (5,6) must not be an unbridged creek (seed-dependent
+  // map gen; region-wave1 content shifted the RNG and seed 11 now puts a
+  // needsBridge creek there, which travelTo blocks mid-fight).
+  const dest = (Game.map.tiles[6] || [])[5];
+  if (dest && dest.type === 'creek') { dest.needsBridge = false; dest.bridged = true; }
   K.fight(Game, 'belltoad', { px, py: 4, mx: 2, my: 4, hp: 100 });
   if (grid) Game.tbfight.gridSize = grid;
   const pf = Game.tbFighter('p'); pf.mx = px; pf.my = 4; pf.moveLeft = 3; pf.acted = false;
