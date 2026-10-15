@@ -1,0 +1,96 @@
+-- fx-control-pilot leadcourt seed 11 (180d) --
+   days=145 end=village-lost wave=5 arc=3 rank=global table=0 seat=none traced=0 foodDeeds=0 feastPath={"firstFeastDay":50,"surgeUsedDay":-1,"sentimentDay":22,"seatDay":-1,"seat":"none"} fsFeasts=7/0 exp=0(L0/D0/DU0) standing=222(w0/d102/p120)
+-- fx-control-pilot leadcourt seed 22 (180d) --
+   days=86 end=village-lost wave=4 arc=3 rank=regional table=0 seat=none traced=0 foodDeeds=1 feastPath={"firstFeastDay":27,"surgeUsedDay":34,"sentimentDay":19,"seatDay":-1,"seat":"none"} fsFeasts=7/7 exp=0(L0/D0/DU0) standing=190(w50/d0/p140)
+-- fx-control-pilot leadcourt seed 33 (180d) --
+   days=111 end=village-lost wave=5 arc=3 rank=global table=0 seat=none traced=0 foodDeeds=1 feastPath={"firstFeastDay":27,"surgeUsedDay":27,"sentimentDay":16,"seatDay":-1,"seat":"none"} fsFeasts=6/2 exp=0(L0/D0/DU0) standing=207(w25/d102/p80)
+-- fx-control-pilot leadcourt seed 44 (180d) --
+   days=180 end=survived wave=5 arc=4 rank=global table=1 seat=lesser traced=1 foodDeeds=1 feastPath={"firstFeastDay":27,"surgeUsedDay":27,"sentimentDay":15,"seatDay":71,"seat":"lesser"} fsFeasts=16/16 exp=0(L0/D0/DU0) standing=497(w75/d102/p320)
+-- fx-control-pilot belongseek seed 11 (180d) --
+   days=26 end=village-lost wave=1 arc=3 rank=village table=0 seat=none traced=0 foodDeeds=0 feastPath={"firstFeastDay":21,"surgeUsedDay":-1,"sentimentDay":22,"seatDay":-1,"seat":"none"} fsFeasts=1/0 exp=0(L0/D0/DU0) standing=20(w0/d0/p20)
+-- fx-control-pilot belongseek seed 22 (180d) --
+   days=180 end=survived wave=5 arc=4 rank=regional table=1 seat=lesser traced=1 foodDeeds=1 feastPath={"firstFeastDay":21,"surgeUsedDay":29,"sentimentDay":19,"seatDay":43,"seat":"lesser"} fsFeasts=19/18 exp=0(L0/D0/DU0) standing=480(w100/d0/p380)
+-- fx-control-pilot belongseek seed 33 (180d) --
+   days=66 end=village-lost wave=4 arc=3 rank=regional table=0 seat=none traced=0 foodDeeds=1 feastPath={"firstFeastDay":21,"surgeUsedDay":21,"sentimentDay":16,"seatDay":-1,"seat":"none"} fsFeasts=5/5 exp=0(L0/D0/DU0) standing=100(w0/d0/p100)
+-- fx-control-pilot belongseek seed 44 (180d) --
+   days=180 end=survived wave=5 arc=4 rank=regional table=1 seat=full traced=1 foodDeeds=1 feastPath={"firstFeastDay":21,"surgeUsedDay":21,"sentimentDay":15,"seatDay":82,"seat":"lesser"} fsFeasts=16/16 exp=0(L0/D0/DU0) standing=370(w50/d0/p320)
+
+===== AGGREGATE fx-control-pilot =====
+{
+ "n": 8,
+ "survivalDays": [
+  145,
+  86,
+  111,
+  180,
+  26,
+  180,
+  66,
+  180
+ ],
+ "medianSurvival": 145,
+ "maxSurvival": 180,
+ "national": 3,
+ "table": 3,
+ "wins": 0,
+ "exiled": 0,
+ "foodDeeds": 6,
+ "traced": 3,
+ "seats": [
+  "leadcourt-s44:lesser(traced)",
+  "belongseek-s22:lesser(traced)",
+  "belongseek-s44:full(traced)"
+ ],
+ "wave4": 7,
+ "wave5": 5,
+ "maxWave": 5,
+ "maxArc": 4,
+ "starveDeaths": 3,
+ "hungryDays": 9,
+ "fsFeasts": 77,
+ "fsArmedFeasts": 64,
+ "exposureAssessed": 0,
+ "exposureLeft": 0,
+ "exposureDriven": 0,
+ "exposureDrivenUsed": 0,
+ "standing": {
+  "total": 222,
+  "war": 50,
+  "diplomacy": 0,
+  "plenty": 140,
+  "maxTotal": 497
+ },
+ "deaths": {
+  "villager combat": 4,
+  "combat": 50,
+  "monster": 4,
+  "sickness": 7,
+  "a wound that wouldn't close": 2,
+  "expedition": 1,
+  "starvation": 3,
+  "contest": 2
+ },
+ "perPid": [
+  {
+   "pid": "leadcourt",
+   "n": 4,
+   "national": 3,
+   "table": 1,
+   "foodDeeds": 3,
+   "traced": 1,
+   "fsFeasts": 36,
+   "exposureDriven": 0
+  },
+  {
+   "pid": "belongseek",
+   "n": 4,
+   "national": 0,
+   "table": 2,
+   "foodDeeds": 3,
+   "traced": 2,
+   "fsFeasts": 41,
+   "exposureDriven": 0
+  }
+ ]
+}
+EXIT:0
