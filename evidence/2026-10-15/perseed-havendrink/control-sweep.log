@@ -1,0 +1,58 @@
+havendrink [control] policy=leadcourt seed=11 ...
+  -> days=72 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=22 ...
+  -> days=129 departures=4 (>=1L: 4) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=33 ...
+  -> days=113 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=44 ...
+  -> days=182 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=55 ...
+  -> days=182 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=66 ...
+  -> days=77 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=leadcourt seed=77 ...
+  -> days=65 departures=1 (>=1L: 1) atHavenDehy=1 thirst=3
+havendrink [control] policy=leadcourt seed=88 ...
+  -> days=144 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=11 ...
+  -> days=173 departures=0 (>=1L: 0) atHavenDehy=1 thirst=0
+havendrink [control] policy=belongseek seed=22 ...
+  -> days=123 departures=6 (>=1L: 5) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=33 ...
+  -> days=36 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=44 ...
+  -> days=182 departures=2 (>=1L: 2) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=55 ...
+  -> days=182 departures=1 (>=1L: 1) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=66 ...
+  -> days=148 departures=0 (>=1L: 0) atHavenDehy=1 thirst=0
+havendrink [control] policy=belongseek seed=77 ...
+  -> days=90 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+havendrink [control] policy=belongseek seed=88 ...
+  -> days=182 departures=0 (>=1L: 0) atHavenDehy=0 thirst=0
+{
+ "side": "control",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "runs": 16,
+ "departures": 14,
+ "departuresGe1": 13,
+ "departuresGe1Frac": 0.9286,
+ "atHavenDehyDeaths": 3,
+ "thirstDeaths": 3,
+ "national": 10,
+ "medianDays": 136.5,
+ "maxDays": 182,
+ "wins": 0,
+ "maxWave": 4,
+ "layerTotals": null
+}
