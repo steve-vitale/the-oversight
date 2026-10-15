@@ -13,7 +13,7 @@ const METHODS = {
   apCarePackage: 'fan-package', apClubBoon: 'fan-vote', apPersonaPackage: 'patron', apDeadDrop: 'patron',
   visitorWares: 'trade-stock', visitorBuyWare: 'trade', traderSell: 'trade-sale', craft: 'craft', doAction: 'action',
   tbEnd: 'combat', corpseTakeItem: 'corpse', corpseLootAll: 'corpse', readBook: 'book', preserveFood: 'preserve',
-  makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
+  renderFat: 'render', cleanCarcass: 'clean', makePemmican: 'pemmican', expandStorage: 'storage', donateWeapon: 'armory',
   takeWeapon: 'armory', giveFood: 'care', comfort: 'care', proposeTrade: 'league',
   proposeCovenant: 'league', orderMember: 'party-order', networkSummon: 'network',
   _cxPrizeAbilityOffer: 'system-prize', _cxPrizeSynergyHint: 'system-prize',
@@ -25,6 +25,28 @@ function gameplayHash(state) {
   // pacing fields so this does not mask a gameplay-state difference.
   if (comparable.pacing) for (const k of ['lastTs', 'dayMinutes', 'totalMin']) delete comparable.pacing[k];
   return require('crypto').createHash('sha256').update(JSON.stringify(comparable)).digest('hex');
+}
+// Observation only: no technique, fire, detail, pantry or modifier helpers.
+// Nominal freshness deliberately excludes spoilage bonuses; these are input
+// snapshots, not permission checks. Explicit zero-unit stacks count as empty.
+function preservationSnapshot(G) {
+  const s = G.state.scholar || {}, day = s.day || 0;
+  const out = { renderKnown: !!(((G.state.codex || {}).techniques || {}).render), containers: {} };
+  for (const [name, inv] of Object.entries({ pack: s.inventory, prep: s.prepStash, pantry: (G.state.village || {}).pantry })) {
+    const n = { rawFat: 0, renderedFat: 0, smokableMeat: 0, preservedMeat: 0, berries: 0 };
+    for (const it of inv || []) {
+      if (!it || (it.spoilDay != null && it.spoilDay <= day)) continue;
+      const units = it.units == null ? 1 : Math.max(0, Number(it.units) || 0);
+      if (it.foodKind === 'fat' && it.foodState === 'raw') n.rawFat += units;
+      if (it.foodKind === 'fat' && it.foodState === 'rendered') n.renderedFat += units;
+      if (it.foodKind === 'meat' && ['cleaned', 'cooked'].includes(it.foodState)) n.smokableMeat += units;
+      if (it.foodKind === 'meat' && it.foodState === 'preserved') n.preservedMeat += units;
+      if (it.foodKind === 'plant' && /berr/i.test(String(it.plantId || '')) && it.edible !== false) n.berries += units;
+    }
+    n.ingredientSets = Math.min(Math.floor(n.preservedMeat / 2), n.renderedFat, Math.floor(n.berries / 2));
+    out.containers[name] = n;
+  }
+  return out;
 }
 function install(G) {
   const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, crafts: {}, recipeAccess: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
@@ -106,6 +128,16 @@ function install(G) {
     // Read existing knowledge/materials only. Never call lazy discovery or
     // grant helpers from an observer. Samples include successor knowledge;
     // they establish access during the run, not one person's learning rate.
+    const food = preservationSnapshot(G);
+    const access = rec.preservationAccess || (rec.preservationAccess = { samples: 0, renderKnownSamples: 0, containers: {} });
+    access.samples++; access.renderKnownSamples += food.renderKnown ? 1 : 0;
+    for (const [where, counts] of Object.entries(food.containers)) {
+      const a = access.containers[where] || (access.containers[where] = { peakUnits: {}, samplesWith: {} });
+      for (const [kind, n] of Object.entries(counts)) {
+        a.peakUnits[kind] = Math.max(a.peakUnits[kind] || 0, n);
+        a.samplesWith[kind] = (a.samplesWith[kind] || 0) + (n > 0 ? 1 : 0);
+      }
+    }
     const pack = G.state.scholar.inventory || [];
     const known = (G.state.codex || {}).recipes || {};
     for (const r of G.data.recipes) {
@@ -199,4 +231,4 @@ async function main() {
   console.log('\nwrote ' + file + '.{json,md}');
 }
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });
-module.exports = { install, METHODS, gameplayHash };
+module.exports = { install, METHODS, gameplayHash, preservationSnapshot };

@@ -814,7 +814,7 @@
     // -> 3 bars. ~97% kcal retention on the meat+fat: the reward is real.
     pemmicanSets(container) {
       const inv = container || this.state.scholar.inventory;
-      const sum = (pred) => inv.reduce((a, it) => a + ((it && pred(it) && !this.isSpoiled(it)) ? (it.units || 1) : 0), 0);
+      const sum = (pred) => inv.reduce((a, it) => a + ((it && pred(it) && !this.isSpoiled(it)) ? (it.units ?? 1) : 0), 0);
       const meatU = sum(i => i.foodKind === 'meat' && i.foodState === 'preserved');
       const fatU = sum(i => i.foodKind === 'fat' && i.foodState === 'rendered');
       const berryU = sum(i => i.foodKind === 'plant' && /berr/i.test(String(i.plantId || '')) && i.edible !== false);
@@ -838,7 +838,7 @@
       const BERRY = i => i.foodKind === 'plant' && /berr/i.test(String(i.plantId || '')) && i.edible !== false;
       const sets = this.pemmicanSets(inv);
       const plan = [];
-      const rem = inv.map(it => it ? (it.units || 1) : 0); // shadow units
+      const rem = inv.map(it => it ? (it.units ?? 1) : 0); // shadow units
       // STALE-INDEX HARDENING (forager break-it 2026-10-10): picks used to
       // carry only the ARRAY INDEX. makePemmican consumed set-by-set with
       // mid-loop splices, so a set-1 splice shifted every later set's picks:
@@ -916,7 +916,7 @@
           const it = p.it;
           const at = inv.indexOf(it);
           if (at < 0) continue; // already gone — the plan is exact, so this shouldn't happen
-          it.units = (it.units || 1) - p.take;
+          it.units = (it.units ?? 1) - p.take;
           if (it.units <= 0) inv.splice(at, 1);
         }
         totalBars += set.bars;
