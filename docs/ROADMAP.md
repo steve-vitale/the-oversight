@@ -132,11 +132,20 @@ simulation/playtest goal with these gaps before expanding content blindly:
    exact quantities/metadata. Actual butchering → pickup → hide-armor craft →
    wear is proved in the shared harness and phone UI. Makers fetch just the
    missing counter stock for an otherwise funded known recipe. In 64 matched
-   maker seeds all states remain identical: none knows hide armor at L2+, so
-   no pickup or craft occurs. Audit the real recipe-learning/teaching path
-   before treating the material repair as natural crafting viability.
-   See `evidence/2026-10-15/prep-material-access-audit.md` and the preceding
-   `maker-counter-trace-audit.md`.
+   maker seeds initially all states remained identical: none knew hide armor
+   at L2+. The next audit found an existing L1 hide-handling lesson wired only
+   to corpse loot, not ordinary butcher byproducts/pickups. Actual handling now
+   uses that same lesson across paths. Makers can try a bounded L1 experiment
+   with visible supplies, without reading the hidden recipe's requirements.
+   In 64 matched maker runs, L1 access grows 3→42, L2 0→13, successful armor
+   crafts 0→18. All 64 retain earned noncombat tier-3+ gear, but wins 21→19
+   and bearer deaths 53→56 establish no survival improvement. The capable
+   control learns more outlines but retains 14/16 wins. Real phone L0→L1→
+   successful blind trial→L2→Wear is proved; maker trial cadence/guess quality
+   needs further playtesting. Do not promote these outcomes to crafting-only
+   viability or a demand for an advanced recipe ladder.
+   See `evidence/2026-10-15/hide-discovery-audit.md` and the preceding
+   `prep-material-access-audit.md` / `maker-counter-trace-audit.md`.
    Armory/pharmacy public deposit → take → equip/consume now reject empty
    units and depleted doses, including NPC use; ordinary medicines spend one
    unit and dosed bottles one dose. Real positive stacks and player/NPC use
