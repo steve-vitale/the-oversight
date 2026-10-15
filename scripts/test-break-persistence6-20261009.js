@@ -386,6 +386,10 @@ function saveAndReloadKey() {
   buildGame('v5');
   Game.syncRun();
   const st = Game.state;
+  // This fixture bypasses newGame's run timestamp. Pin it before asking
+  // for a key: otherwise saveKey() and save() can straddle a millisecond
+  // and the assertion searches for a blob under a different run's key.
+  st.startedAt = 1791936000000;
   const key = S.state.saveKey(st);
   // poison ONLY the index write
   const realSet = store.setItem;
