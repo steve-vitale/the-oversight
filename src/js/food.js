@@ -1868,6 +1868,14 @@
     // EXPAND STORAGE: materials + labor. A builder halves the material cost.
     expandStorage() {
       const v = this.state.village;
+      if (this.tbfight && !this.tbfight.over) {
+        this.say('Finish the fight before building storage.');
+        return null;
+      }
+      if (!this.map || this.map.px !== (v.px ?? 4) || this.map.py !== (v.py ?? 4)) {
+        this.say('Return to Haven to expand its storage.');
+        return null;
+      }
       const tier = this.storageTier();
       const builders = this.specialistsHere('builder');
       const hasBuilder = builders.length > 0;
@@ -1884,7 +1892,7 @@
         if (count(m) < n) missing.push(`${n - count(m)} more ${m}`);
       }
       if (missing.length) {
-        this.say(`Not enough materials: ${missing.join(', ')}. (Branches, stone, vine for lashing.${hasBuilder ? ` ${builders[0].name} the ${builders[0].occupation} halves the cost.` : ' A builder would halve the cost.'})`);
+        this.say(`Not enough materials: ${missing.join(', ')}. (Branches, stone, vine for lashing.${hasBuilder ? ` ${builders[0].name}${this.specOccLabel(builders[0])} halves the cost.` : ' A builder would halve the cost.'})`);
         return null;
       }
       for (const [m, n] of Object.entries(need)) {
