@@ -14975,8 +14975,8 @@
       if (it && it.material) Game.donateMaterial(it.material, it.units || 1);
     }, 'Stashed.'));
     slot.querySelectorAll('[data-stashtool]').forEach(b => b.onclick = rewire(() => Game.donateTool(+b.dataset.stashtool), 'Tool stashed.'));
-    slot.querySelectorAll('[data-stashweapon]').forEach(b => b.onclick = rewire(() => Game.donateWeapon(+b.dataset.stashweapon), 'Stashed in the armory.'));
-    slot.querySelectorAll('[data-stashmed]').forEach(b => b.onclick = rewire(() => Game.donateMedicine(+b.dataset.stashmed), 'Stashed in the pharmacy.'));
+    slot.querySelectorAll('[data-stashweapon]').forEach(b => b.onclick = rewire(() => Game.donateWeapon(+b.dataset.stashweapon), null));
+    slot.querySelectorAll('[data-stashmed]').forEach(b => b.onclick = rewire(() => Game.donateMedicine(+b.dataset.stashmed), null));
     slot.querySelectorAll('[data-activate]').forEach(b => b.onclick = (e) => {
       Game.activateAbility(b.dataset.activate); inlineView.result = 'Activated.'; refresh();
     });

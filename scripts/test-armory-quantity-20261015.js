@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+'use strict';
+const K = require('./godpath/lib'), T = K.reporter('armory-quantity');
+(async () => {
+  const G = await K.load({ seed: 7 }); K.newRun(G);
+  const s = G.state.scholar, v = G.state.village; s.insideHaven = true; s.kcal = 4000;
+  const stash = G.stashState();
+  const item = (itemId, units) => ({ itemId, name: itemId, units, kcalEach: 0, kg: 0.1 });
+  const snap = () => JSON.stringify({ pack: s.inventory, stash, trust: v.trust, ticks: s.dayTicks });
+  s.inventory = [item('phase_blade', 0)]; let before = snap();
+  T.ok('empty weapon is not offered as a communal contribution', !G.isStashableWeapon(s.inventory[0]));
+  G.donateWeapon(0);
+  T.ok('empty weapon cannot donate stock, earn trust or spend time', snap() === before);
+  const med = G.data.items.find(i => i.healAmount);
+  if (!med) throw new Error('No actual medicine definition');
+  s.inventory = [item(med.id, 0)]; before = snap(); G.donateMedicine(0);
+  T.ok('empty medicine cannot donate stock, earn trust or spend time', snap() === before);
+  stash.weapons = [item('phase_blade', 0)]; s.inventory = []; before = snap(); G.takeWeapon('phase_blade');
+  T.ok('empty armory entry cannot become a player weapon', snap() === before);
+  stash.medicine = [item(med.id, 0)]; before = snap(); G.takeMedicine(med.id);
+  T.ok('empty pharmacy entry cannot become a player dose', snap() === before);
+  stash.weapons = [item('phase_blade', 0)]; stash.medicine = [item(med.id, 0)];
+  T.ok('actual stash renderer hides empty weapon and medicine take actions', !/data-stash-weapon=|data-stash-med=/.test(G.stashHtml()));
+  // Independent positive fixture, including a stale empty entry first.
+  stash.weapons = [item('phase_blade', 0), item('phase_blade', 2)]; s.inventory = [];
+  let ticks = s.dayTicks; G.takeWeapon('phase_blade');
+  T.ok('player take skips empty rows and transfers the real whole stack', s.inventory.length === 1 && s.inventory[0].units === 2 && stash.weapons.length === 1 && stash.weapons[0].units === 0 && s.dayTicks === ticks + 2);
+  G.equip(0, 'melee');
+  T.ok('withdrawn actual gear equips through the normal public action', (s.equipped.melee || {}).itemId === 'phase_blade');
+  // Actual generated people; explicit unarmed roles avoid confiscation or
+  // making a person abandon their own weapon in order to exercise a gift.
+  const rid = v.roster.find(id => id !== G.villagerId), p = G.getPerson(rid);
+  p.items = []; p.stashed = []; p.equipped = {}; v.wood = 0;
+  stash.weapons = [item('phase_blade', 0)]; G.villagerGearUp(rid, true);
+  T.ok('an unarmed real villager cannot borrow an empty armory entry', !p.items.length && stash.weapons[0].units === 0);
+  p.items = []; p.stashed = []; p.equipped = {};
+  stash.weapons = [item('phase_blade', 0), item('stone_knife', 2)]; G.villagerGearUp(rid, true);
+  T.ok('villager selects a real weaker donation over a phantom stronger one', p.items.some(i => (i.itemId || i.id || i) === 'stone_knife') && !p.items.some(i => (i.itemId || i.id || i) === 'phase_blade'));
+  T.ok('villager borrowing spends exactly one real unit', stash.weapons.find(i => i.itemId === 'stone_knife').units === 1 && stash.weapons[0].units === 0);
+  // Missing units are the legacy singleton shape, not an explicit empty.
+  stash.weapons = []; s.inventory = [item('phase_blade', undefined)]; ticks = s.dayTicks;
+  G.donateWeapon(0);
+  T.ok('legacy singleton donation remains real communal stock', s.inventory.length === 0 && stash.weapons.length === 1 && stash.weapons[0].units === 1 && s.dayTicks === ticks + 2);
+  stash.weapons = []; s.inventory = [item('phase_blade', 2)]; ticks = s.dayTicks;
+  G.donateWeapon(0);
+  T.ok('positive merged donation retains every real unit and pays deposit time', s.inventory.length === 0 && stash.weapons[0].units === 2 && s.dayTicks === ticks + 2);
+  G.takeWeapon('phase_blade');
+  T.ok('normal donation and return conserve the whole weapon stack', s.inventory.length === 1 && s.inventory[0].units === 2 && stash.weapons.length === 0);
+  stash.medicine = [Object.assign(item(med.id, 1), { doses: 0 })]; s.inventory = [];
+  before = snap(); G.takeMedicine(med.id);
+  T.ok('explicit depleted doses cannot be withdrawn as useful medicine', snap() === before);
+  s.inventory = [Object.assign(item(med.id, 1), { doses: 0 })]; before = snap(); G.donateMedicine(0);
+  T.ok('explicit depleted doses cannot earn donation stock or trust', snap() === before);
+  v.health = v.health || {};
+  const emptyMed = item(med.id, 0); stash.medicine = [emptyMed]; v.health[rid] = 10;
+  G.villagerHealCheck(rid, 'Prepared patient', { noSitOut: true });
+  T.ok('villager cannot consume a nonexistent medicine unit', stash.medicine.includes(emptyMed) && emptyMed.units === 0);
+  const depleted = Object.assign(item(med.id, 1), { doses: 0 }); stash.medicine = [depleted]; v.health[rid] = 10;
+  G.villagerHealCheck(rid, 'Prepared patient', { noSitOut: true });
+  T.ok('villager cannot consume an explicitly depleted dose', stash.medicine.includes(depleted) && depleted.doses === 0);
+  const realMed = item(med.id, 2); stash.medicine = [realMed]; v.health[rid] = 10;
+  G.villagerHealCheck(rid, 'Prepared patient', { noSitOut: true });
+  T.ok('undosed medicine use spends one unit and retains the second', stash.medicine.includes(realMed) && realMed.units === 1 && v.health[rid] === Math.min(100, 10 + med.healAmount));
+  const dosed = Object.assign(item(med.id, 1), { doses: 3 }); stash.medicine = [dosed]; v.health[rid] = 10;
+  G.villagerHealCheck(rid, 'Prepared patient', { noSitOut: true });
+  T.ok('dosed bottle retains one-dose use and the other real doses', stash.medicine.includes(dosed) && dosed.units === 1 && dosed.doses === 2);
+  const bottles = Object.assign(item(med.id, 2), { doses: 3 }); stash.medicine = [bottles]; v.health[rid] = 10;
+  G.villagerHealCheck(rid, 'Prepared patient', { noSitOut: true });
+  T.ok('one dose from two bottles leaves five doses across two real units', stash.medicine.reduce((n,i) => n + i.units * i.doses, 0) === 5 && stash.medicine.reduce((n,i) => n + i.units, 0) === 2);
+  T.done();
+})().catch(e => { console.error(e); process.exitCode = 1; });

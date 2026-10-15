@@ -6829,7 +6829,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (let i = 0; i < pile.length; i++) {
           const gid = pile[i].itemId || pile[i].id;
           const def = (this.data.items || []).find(d => d.id === gid);
-          if (def && def.class === 'weapon' && def.weapon && (def.weapon.bonus || 0) > bestB) {
+          if ((pile[i].units ?? 1) > 0 && def && def.class === 'weapon' && def.weapon && (def.weapon.bonus || 0) > bestB) {
             bestB = def.weapon.bonus; best = gid; bestIdx = i;
           }
         }
@@ -6837,7 +6837,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // UNITS (miser break-it 2026-10-10): the borrower takes ONE weapon —
           // a merged 2-stack entry is decremented, not devoured whole.
           const taken = pile[bestIdx];
-          taken.units = (taken.units || 1) - 1;
+          taken.units = (taken.units ?? 1) - 1;
           if (taken.units <= 0) pile.splice(bestIdx, 1);
           try { if (this.stashLog) this.stashLog('take', best, 1, vid); } catch (e2) {}
           person.items = person.items || [];
@@ -6906,6 +6906,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const deficit = 100 - cur;
           let bestFit = null, bestFitAmt = 0, biggest = null, biggestAmt = 0;
           for (const e of pile) {
+            if ((e.units ?? 1) <= 0 || (e.doses != null && e.doses <= 0)) continue;
             const amt = (defs[e.itemId || e.id] || {}).healAmount || 0;
             if (amt <= 0) continue;
             if (amt > biggestAmt) { biggest = e; biggestAmt = amt; }
@@ -6918,8 +6919,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // 3-dose bottle survives two more hurts. The entry is spliced
             // only when the last dose goes. Legacy unit-less entries count
             // as a single dose.
-            pick.doses = (pick.doses == null ? 1 : pick.doses) - 1;
-            if (idx >= 0 && pick.doses <= 0) pile.splice(idx, 1);
+            if (pick.doses != null) {
+              // Use one bottle; untouched bottles keep their full dose pools.
+              if ((pick.units ?? 1) > 1) {
+                pile.push({ ...pick, units: pick.units - 1 });
+                pick.units = 1;
+              }
+              pick.doses -= 1;
+              if (idx >= 0 && pick.doses <= 0) pile.splice(idx, 1);
+            } else {
+              pick.units = (pick.units ?? 1) - 1;
+              if (idx >= 0 && pick.units <= 0) pile.splice(idx, 1);
+            }
             try { if (this.stashLog) this.stashLog('take', pick.name || pick.itemId, 1, vid); } catch (e2) {}
             v.health[vid] = Math.min(100, cur + (bestFit ? bestFitAmt : biggestAmt));
             try {
