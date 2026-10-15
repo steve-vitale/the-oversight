@@ -24,3 +24,11 @@ Steve adjudicates; either agent may update this file when lanes change.
 ## Rule
 Neither agent edits the other's listed files without a note here first.
 Content merges happen through the normal worktree + `--ff-only` flow.
+
+## Shared-file note (2026-10-15, Muse)
+- Codex's `codex/resume-claude` branch is fleshing out `src/data/regions.json`
+  (region-livelihood: Europe now playable with biome/gen/fauna/landingVariants).
+- Muse's next lane item (region systems: temperature, weather) also touches
+  `src/data/regions.json` — restricted to `climate`/temperature blocks and a
+  new `src/js/temperature.js` module; will not touch Codex's livelihood fields
+  (biome, gen, fauna, landingVariants, lifeseedRegions). Rebase care on landing.
