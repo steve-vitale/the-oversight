@@ -109,6 +109,12 @@ inviter teaches/gives the NPC; an NPC inviter teaches/gives you).
   original code (all four player-inviter kinds fail), GREEN 14/14 after.
 - Regressions: test-betrayal-fixes-20261008 (13/13),
   test-convo-beats-20261006 (25/25), test-convo-gaps (ALL GREEN).
+- check.js --quick: 92 passed, 2 failed — both failures are pre-existing in
+  test-where-are-we-20261014.js ("stranger conversation offers 'where'",
+  "stranger says a flavour line from the data") and reproduce identically
+  with the pre-change betrayal.js (verified via HEAD-version swap); they
+  come from the region-content-wave1 merge, not this run. Left for the
+  region owner; not quarantined unilaterally.
 
 ## Metric verdicts
 
