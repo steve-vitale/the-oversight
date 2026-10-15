@@ -1,0 +1,47 @@
+=== BANKLEGRECAL PILOT ANALYSIS (own control, same sweep) ===
+seeds=11,22,33,44,55,66,77,88 policies=belongseek,leadfeast n=32
+
+-- pooled (armed n=16, control n=16) --
+PRIMARY h1200:            195/381 = 0.512  (GO <= 0.650)
+CO-PRIMARY trust>=30:     1212/854 = 1.419  (GO >= 1.100)
+half-ration days:         511/881 = 0.580
+old 0.6cap (deprecated):  908/830 = 1.094  (calibration only, NEVER a verdict)
+guard median survival:    113.5 vs 105.5 (need >= 95.5)
+guard national:           10/16 vs 9/16 (need >= 7)
+guard starvation deaths:  15 vs 12 (need within 12±3)
+guard villager thirst:    9 vs 0 (need <= 2); scholar thirst 0 vs 0 (need <= 1)
+wall: table 0/16 vs 0/16; wins 0/0; w4 6 vs 7; w5 0 vs 0; max 182d/182d
+mechanism: legs 1689 (g34/f87/h1655); skipped 34; refused 8316; hatch 24
+exposure: wild visits/day 2.86 vs 2.73 (total 4987/4798)
+
+-- belongseek (armed n=8, control n=8) --
+PRIMARY h1200:            102/187 = 0.545  (GO <= 0.650)
+CO-PRIMARY trust>=30:     751/340 = 2.209  (GO >= 1.100)
+half-ration days:         264/539 = 0.490
+old 0.6cap (deprecated):  506/465 = 1.088  (calibration only, NEVER a verdict)
+guard median survival:    150.5 vs 105.5 (need >= 95.5)
+guard national:           4/8 vs 4/8 (need >= 2)
+guard starvation deaths:  10 vs 5 (need within 5±3)
+guard villager thirst:    5 vs 0 (need <= 2); scholar thirst 0 vs 0 (need <= 1)
+wall: table 0/8 vs 0/8; wins 0/0; w4 1 vs 2; w5 0 vs 0; max 182d/182d
+mechanism: legs 996 (g22/f76/h974); skipped 19; refused 4040; hatch 0
+exposure: wild visits/day 2.77 vs 2.70 (total 2846/2401)
+
+-- leadfeast (armed n=8, control n=8) --
+PRIMARY h1200:            93/194 = 0.479  (GO <= 0.650)
+CO-PRIMARY trust>=30:     461/514 = 0.897  (GO >= 1.100)
+half-ration days:         247/342 = 0.722
+old 0.6cap (deprecated):  402/365 = 1.101  (calibration only, NEVER a verdict)
+guard median survival:    98.5 vs 101 (need >= 91)
+guard national:           6/8 vs 5/8 (need >= 3)
+guard starvation deaths:  5 vs 7 (need within 7±3)
+guard villager thirst:    4 vs 0 (need <= 2); scholar thirst 0 vs 0 (need <= 1)
+wall: table 0/8 vs 0/8; wins 0/0; w4 5 vs 5; w5 0 vs 0; max 133d/182d
+mechanism: legs 693 (g12/f11/h681); skipped 15; refused 4276; hatch 24
+exposure: wild visits/day 2.98 vs 2.76 (total 2141/2397)
+
+-- death-cause shares (pooled) --
+[control] total=199 rot/total-deaths=0.000 starve=12 thirst=0 (scholar 0)
+  combat 113 (57%), monster 22 (11%), villager combat 21 (11%), sickness 13 (7%), starvation 12 (6%), a wound that wouldn't close 7 (4%), contest 7 (4%), lockjaw 2 (1%), Buffering 1 (1%), alien 1 (1%)
+[armed] total=231 rot/total-deaths=0.000 starve=15 thirst=9 (scholar 0)
+  combat 102 (44%), monster 42 (18%), villager combat 28 (12%), starvation 15 (6%), sickness 15 (6%), a wound that wouldn't close 9 (4%), thirst 9 (4%), contest 7 (3%), expedition 3 (1%), lockjaw 1 (0%)
