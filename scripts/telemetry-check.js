@@ -57,6 +57,7 @@ function metricValue(obj, dot) {
   if (v == null) return 0;
   if (Array.isArray(v)) return v.length;
   if (typeof v === 'number') return v;
+  if (typeof v === 'boolean') return v ? 1 : 0; // #267: per-seed booleans (e.g. "national": true) count, not vanish
   if (typeof v === 'object') {
     // sum numeric leaves (e.g. fightsByWave.3 handled by exact path; this is a fallback)
     return Object.values(v).reduce((t, x) => t + (typeof x === 'number' ? x : 0), 0);
