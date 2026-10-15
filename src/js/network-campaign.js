@@ -136,7 +136,7 @@
     if (!node) return;
     try { if (Game.campaignGrieve) Game.campaignGrieve(snap, NET); } catch (e) { console.warn('network grieve', e); }
     const n = survivors();
-    if (snap.result === 'won') {
+    if (snap.result === 'won' || (snap.result === 'routed' && snap.pieceDead)) {
       removePieces(node.id);
       c.cleared.push(node.id);
       c.idx++;
@@ -203,8 +203,15 @@
       try {
         const tf = Game.state.titans && Game.state.titans._fight;
         if (tf && typeof tf.campaign === 'string' && tf.campaign.indexOf('network:') === 0 && this.tbfight && this.tbfight.fighters) {
+          const nid = tf.campaign.slice(8);
+          const pmid = (nodeById(nid) || {}).monster;
+          // ROUTED WITH THE PIECE DOWN (diagnosis-endgame 2026-10-15): the
+          // node's piece died and only its escort disengaged — the node is
+          // beaten (the escort is not the node).
+          const piece = this.tbfight.fighters.filter(f => f.kind === 'monster' && (((f.mdef || {}).id || f.monsterId) === pmid));
           snap = {
-            node: tf.campaign.slice(8), result,
+            node: nid, result,
+            pieceDead: piece.length > 0 && piece.every(f => !f.alive || (f.hp || 0) <= 0),
             allies: this.tbfight.fighters.filter(f => f.kind === 'ally')
               .map(f => ({ key: f.key, name: f.name, villageId: f.villageId, vid: f.vid || f.villagerId, alive: !!f.alive })),
           };

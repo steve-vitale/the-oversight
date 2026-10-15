@@ -803,6 +803,15 @@
       taken[nx + ',' + ny] = 1;
       o.mx = nx; o.my = ny;
       fighters.push(o);
+      // TURN ORDER (diagnosis-endgame 2026-10-15): startCombat built
+      // tbfight.order before the coalition arrived, and the turn loop walks
+      // f.order — blades pushed only into fighters never took a turn (every
+      // titan, Finale and Network blade stood still). Join the order now
+      // (as finale-campaign injectMonster does); re-sort by speed next round.
+      if (Array.isArray(Game.tbfight.order) && Game.tbfight.order.indexOf(o.key) < 0) {
+        Game.tbfight.order.push(o.key);
+        Game.tbfight.orderDirty = true;
+      }
       spot++;
     }
     muster.allies.forEach(function (a) {

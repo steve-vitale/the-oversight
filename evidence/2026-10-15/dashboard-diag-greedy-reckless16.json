@@ -1,0 +1,1560 @@
+{
+ "label": "diag-greedy-reckless16",
+ "days": 150,
+ "seeds": [
+  7,
+  42,
+  99,
+  1234,
+  555,
+  777,
+  2026,
+  31337,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  8,
+  9
+ ],
+ "forceOcc": null,
+ "forceSub": null,
+ "summary": {
+  "n": 16,
+  "won": 5,
+  "sat": 5,
+  "invited": 11,
+  "tablePaths": {
+   "relay": 2,
+   "feared": 2,
+   "beloved": 1
+  },
+  "villageLost": 7,
+  "villageLostDayMed": 99,
+  "medDays": 128,
+  "pLU": {
+   "med": 9,
+   "min": 7,
+   "max": 15
+  },
+  "pLU100med": 9.5,
+  "vLUmean": 21.5,
+  "classPlayerPct": 63,
+  "classPlayerDayMed": 44.5,
+  "villagersClassed": 30,
+  "subclassesSeen": 8,
+  "subclassesPlayer": 7,
+  "subclassesVillager": 6,
+  "subclasses": {
+   "hunter/beastmaster": 3,
+   "forager/gardener": 15,
+   "forager/feaster": 12,
+   "hunter/stalker": 6,
+   "survivalist/furnace": 1,
+   "drifter/trickster": 1,
+   "caregiver/healer": 3,
+   "socialite/showrunner": 2
+  },
+  "ascPlayer": 9,
+  "ascPlayerRuns": 7,
+  "runs100": 14,
+  "ascPlayerRuns100": 7,
+  "asc100Pct": 50,
+  "ascVillager": 13,
+  "gods": {
+   "p:living_garden": 2,
+   "p:apex_predator": 3,
+   "v:living_garden": 11,
+   "v:apex_predator": 1,
+   "p:the_between": 1,
+   "v:shepherd_of_the_dead": 1,
+   "p:shepherd_of_the_dead": 2,
+   "p:voice_of_the_relay": 1
+  },
+  "winsAsc": 3,
+  "runsAsc": 7,
+  "winsNoAsc": 2,
+  "runsNoAsc": 9,
+  "deaths": {
+   "player": {
+    "combat": 51,
+    "contest": 12,
+    "sickness": 6,
+    "lockjaw": 2,
+    "the expedition": 2,
+    "the night": 1,
+    "dehydration": 1
+   },
+   "villager": {
+    "monster": 107,
+    "Loud-Eyes": 1,
+    "a wound that wouldn't close": 8,
+    "sickness": 8,
+    "The Focus Group": 1,
+    "Choir Toad": 1,
+    "The Algorithm": 1,
+    "contest": 1,
+    "Big Big": 2,
+    "The Reunion": 1
+   },
+   "other": {
+    "villager combat": 127,
+    "combat": 329,
+    "expedition": 17,
+    "alien": 13,
+    "ambush": 1
+   }
+  },
+  "playerDeathRuns": {
+   "combat": 14,
+   "contest": 10,
+   "sickness": 6,
+   "lockjaw": 2,
+   "the expedition": 2,
+   "the night": 1,
+   "dehydration": 1
+  },
+  "deathTotals": {
+   "player": 75,
+   "villager": 131,
+   "other": 487
+  },
+  "waveReach": {
+   "4": 2,
+   "5": 14
+  },
+  "overtime": {
+   "0": 7,
+   "1": 2,
+   "2": 1,
+   "3": 1,
+   "4": 5
+  },
+  "netSummoned": 0,
+  "netFallen": 0,
+  "hosts": 0,
+  "keepsake": {
+   "2": 4,
+   "3": 12
+  },
+  "keepsakeWorn": {
+   "2": 4,
+   "3": 12
+  },
+  "lessonsMean": 38.8,
+  "lessonsToPlayerMean": 0,
+  "lessonsByPlayerMean": 0,
+  "occ": {
+   "er_nurse": {
+    "runs": 1,
+    "won": 1,
+    "lost": 0
+   },
+   "exterminator": {
+    "runs": 1,
+    "won": 1,
+    "lost": 0
+   },
+   "gardener": {
+    "runs": 1,
+    "won": 0,
+    "lost": 0
+   },
+   "esl_teacher": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "social_worker": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "baker": {
+    "runs": 2,
+    "won": 1,
+    "lost": 0
+   },
+   "plumber": {
+    "runs": 1,
+    "won": 0,
+    "lost": 0
+   },
+   "fisherman": {
+    "runs": 1,
+    "won": 1,
+    "lost": 0
+   },
+   "glazier": {
+    "runs": 1,
+    "won": 1,
+    "lost": 0
+   },
+   "chef": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "rancher": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "lawyer": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "roofer": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "farmer": {
+    "runs": 1,
+    "won": 0,
+    "lost": 1
+   },
+   "librarian": {
+    "runs": 1,
+    "won": 0,
+    "lost": 0
+   }
+  },
+  "force": {
+   "pOffered": 0,
+   "pPicked": 0,
+   "vOffered": 0,
+   "vPicked": 0
+  },
+  "pTrack": {
+   "social": 59,
+   "field": 53,
+   "strange": 25,
+   "combat": 19
+  },
+  "vTrack": {
+   "field": 65,
+   "craft": 80,
+   "social": 157,
+   "combat": 38,
+   "strange": 4
+  },
+  "pAbil": {
+   "beast_calm": 4,
+   "lucky_rock": 3,
+   "green_whisper": 6,
+   "bird_whisperer": 1,
+   "pack_hunt": 1,
+   "scream_cheese": 9,
+   "the_touch": 2,
+   "turncoat": 3,
+   "echo_location": 3,
+   "fusion_reactor": 9,
+   "rage": 3,
+   "loud_chewer": 4,
+   "iron_stomach": 2,
+   "live_broadcast": 2,
+   "pocket_sand": 1,
+   "beard_moss": 1,
+   "harvest_table": 1,
+   "green_thumb": 2,
+   "translator": 2,
+   "mending_hands": 1,
+   "lifeline": 1,
+   "battlefield_grace": 2,
+   "night_eyes": 3,
+   "purify": 1
+  }
+ },
+ "rows": [
+  {
+   "seed": 7,
+   "occ": "er_nurse",
+   "days": 144,
+   "end": "over-other",
+   "won": true,
+   "invited": true,
+   "sat": true,
+   "tablePath": "relay",
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 11,
+   "vLU": 22,
+   "classPlayer": true,
+   "classPlayerDay": 108,
+   "classVillagers": 2,
+   "subP": {
+    "hunter/beastmaster": 1
+   },
+   "subV": {
+    "forager/gardener": 2
+   },
+   "ascPlayer": 2,
+   "ascPlayerDay": 80,
+   "ascVillager": 0,
+   "ascPaths": [
+    "p:living_garden",
+    "p:apex_predator"
+   ],
+   "overtime": 4,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 2,
+   "ksWornMax": 2,
+   "lessons": 23,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 8,
+    "monster:combat": 6,
+    "villager:monster": 8,
+    "monster:expedition": 1,
+    "player:combat": 4,
+    "person:alien": 2,
+    "player:contest": 1,
+    "person:combat": 5
+   },
+   "playerDeaths": [
+    "37:combat",
+    "73:contest",
+    "76:combat",
+    "93:combat",
+    "102:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 5,
+    "field": 4,
+    "strange": 1,
+    "combat": 1
+   },
+   "vTrack": {
+    "field": 5,
+    "craft": 5,
+    "social": 9,
+    "combat": 2,
+    "strange": 1
+   },
+   "pAbil": [
+    "beast_calm",
+    "lucky_rock",
+    "green_whisper",
+    "bird_whisperer",
+    "pack_hunt",
+    "scream_cheese"
+   ]
+  },
+  {
+   "seed": 42,
+   "occ": "exterminator",
+   "days": 134,
+   "end": "over-other",
+   "won": true,
+   "invited": true,
+   "sat": true,
+   "tablePath": "feared",
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 10,
+   "vLU": 26,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 3,
+   "subP": {},
+   "subV": {
+    "forager/feaster": 3
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 2,
+   "ascPaths": [
+    "v:living_garden",
+    "v:living_garden"
+   ],
+   "overtime": 4,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 46,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 9,
+    "person:ambush": 1,
+    "monster:expedition": 1,
+    "monster:combat": 21,
+    "person:combat": 4,
+    "player:contest": 1,
+    "villager:monster": 12,
+    "player:combat": 1
+   },
+   "playerDeaths": [
+    "65:contest",
+    "91:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 3,
+    "social": 2,
+    "strange": 2,
+    "combat": 3
+   },
+   "vTrack": {
+    "field": 5,
+    "craft": 8,
+    "social": 12,
+    "combat": 1
+   },
+   "pAbil": [
+    "the_touch"
+   ]
+  },
+  {
+   "seed": 99,
+   "occ": "gardener",
+   "days": 150,
+   "end": "survived",
+   "won": false,
+   "invited": false,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 4,
+   "pLU": 12,
+   "vLU": 34,
+   "classPlayer": true,
+   "classPlayerDay": 25,
+   "classVillagers": 3,
+   "subP": {
+    "forager/gardener": 1
+   },
+   "subV": {
+    "hunter/beastmaster": 1,
+    "forager/gardener": 2
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 2,
+   "ascPaths": [
+    "v:apex_predator",
+    "v:living_garden"
+   ],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 47,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 13,
+    "monster:combat": 24,
+    "person:combat": 5,
+    "player:combat": 1,
+    "monster:expedition": 6,
+    "villager:Loud-Eyes": 1,
+    "villager:monster": 1
+   },
+   "playerDeaths": [
+    "31:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 5,
+    "social": 4,
+    "combat": 2,
+    "strange": 1
+   },
+   "vTrack": {
+    "social": 13,
+    "combat": 7,
+    "field": 8,
+    "craft": 5,
+    "strange": 1
+   },
+   "pAbil": [
+    "scream_cheese",
+    "turncoat",
+    "echo_location",
+    "fusion_reactor",
+    "rage",
+    "loud_chewer"
+   ]
+  },
+  {
+   "seed": 1234,
+   "occ": "esl_teacher",
+   "days": 100,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": 96,
+   "waveReach": 5,
+   "pLU": 9,
+   "vLU": 11,
+   "classPlayer": true,
+   "classPlayerDay": 42,
+   "classVillagers": 1,
+   "subP": {
+    "hunter/stalker": 1
+   },
+   "subV": {
+    "forager/gardener": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 32,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 7,
+    "villager:monster": 6,
+    "player:combat": 2,
+    "villager:a wound that wouldn't close": 6,
+    "monster:combat": 24,
+    "villager:sickness": 5,
+    "player:contest": 1
+   },
+   "playerDeaths": [
+    "12:combat",
+    "70:contest",
+    "90:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 3,
+    "field": 3,
+    "strange": 2,
+    "combat": 1
+   },
+   "vTrack": {
+    "craft": 2,
+    "social": 6,
+    "field": 1,
+    "strange": 2
+   },
+   "pAbil": [
+    "green_whisper",
+    "fusion_reactor"
+   ]
+  },
+  {
+   "seed": 555,
+   "occ": "social_worker",
+   "days": 81,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 7,
+   "vLU": 11,
+   "classPlayer": true,
+   "classPlayerDay": 40,
+   "classVillagers": 0,
+   "subP": {
+    "forager/gardener": 1
+   },
+   "subV": {},
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 2,
+   "ksWornMax": 2,
+   "lessons": 18,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 8,
+    "monster:combat": 15,
+    "villager:monster": 4,
+    "player:combat": 4,
+    "person:combat": 9,
+    "player:sickness": 1
+   },
+   "playerDeaths": [
+    "25:combat",
+    "39:combat",
+    "44:sickness",
+    "72:combat",
+    "72:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 3,
+    "field": 2,
+    "combat": 1,
+    "strange": 1
+   },
+   "vTrack": {
+    "craft": 3,
+    "social": 6,
+    "combat": 1,
+    "field": 1
+   },
+   "pAbil": [
+    "iron_stomach",
+    "scream_cheese",
+    "live_broadcast"
+   ]
+  },
+  {
+   "seed": 777,
+   "occ": "baker",
+   "days": 150,
+   "end": "survived",
+   "won": false,
+   "invited": false,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 15,
+   "vLU": 23,
+   "classPlayer": true,
+   "classPlayerDay": 31,
+   "classVillagers": 3,
+   "subP": {
+    "survivalist/furnace": 1,
+    "hunter/beastmaster": 1,
+    "hunter/stalker": 1,
+    "forager/gardener": 1
+   },
+   "subV": {
+    "forager/feaster": 1,
+    "forager/gardener": 1,
+    "hunter/stalker": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 47,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "villager:monster": 6,
+    "monster:villager combat": 9,
+    "monster:combat": 19,
+    "monster:expedition": 2,
+    "villager:sickness": 3,
+    "person:combat": 5,
+    "player:combat": 2,
+    "player:lockjaw": 1,
+    "person:alien": 3,
+    "player:contest": 1
+   },
+   "playerDeaths": [
+    "69:combat",
+    "78:lockjaw",
+    "100:contest",
+    "140:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 5,
+    "social": 5,
+    "combat": 1,
+    "strange": 4
+   },
+   "vTrack": {
+    "field": 6,
+    "social": 11,
+    "craft": 4,
+    "combat": 2
+   },
+   "pAbil": [
+    "beast_calm",
+    "rage",
+    "scream_cheese",
+    "pocket_sand",
+    "fusion_reactor",
+    "lucky_rock"
+   ]
+  },
+  {
+   "seed": 2026,
+   "occ": "plumber",
+   "days": 150,
+   "end": "survived",
+   "won": false,
+   "invited": false,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 9,
+   "vLU": 31,
+   "classPlayer": true,
+   "classPlayerDay": 47,
+   "classVillagers": 4,
+   "subP": {
+    "drifter/trickster": 1
+   },
+   "subV": {
+    "forager/feaster": 2,
+    "caregiver/healer": 1,
+    "socialite/showrunner": 1
+   },
+   "ascPlayer": 1,
+   "ascPlayerDay": 80,
+   "ascVillager": 2,
+   "ascPaths": [
+    "p:the_between",
+    "v:shepherd_of_the_dead",
+    "v:living_garden"
+   ],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 57,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 8,
+    "monster:combat": 7,
+    "person:combat": 4,
+    "villager:a wound that wouldn't close": 1,
+    "monster:expedition": 1,
+    "villager:The Focus Group": 1,
+    "person:alien": 1,
+    "villager:monster": 9,
+    "player:the expedition": 1
+   },
+   "playerDeaths": [
+    "135:the expedition"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 3,
+    "field": 2,
+    "strange": 3,
+    "combat": 1
+   },
+   "vTrack": {
+    "social": 14,
+    "craft": 7,
+    "field": 6,
+    "combat": 4
+   },
+   "pAbil": [
+    "green_whisper",
+    "scream_cheese",
+    "beard_moss",
+    "loud_chewer",
+    "harvest_table",
+    "green_thumb"
+   ]
+  },
+  {
+   "seed": 31337,
+   "occ": "fisherman",
+   "days": 126,
+   "end": "over-other",
+   "won": true,
+   "invited": true,
+   "sat": true,
+   "tablePath": "feared",
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 10,
+   "vLU": 17,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 2,
+   "subP": {},
+   "subV": {
+    "hunter/stalker": 1,
+    "forager/gardener": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 4,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 2,
+   "ksWornMax": 2,
+   "lessons": 21,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 7,
+    "monster:combat": 24,
+    "villager:monster": 5,
+    "villager:Choir Toad": 1,
+    "player:combat": 4,
+    "person:alien": 2,
+    "player:sickness": 1,
+    "villager:The Algorithm": 1,
+    "person:combat": 5
+   },
+   "playerDeaths": [
+    "27:combat",
+    "49:sickness",
+    "63:combat",
+    "64:combat",
+    "115:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 3,
+    "social": 4,
+    "combat": 2,
+    "strange": 1
+   },
+   "vTrack": {
+    "social": 8,
+    "craft": 2,
+    "field": 5,
+    "combat": 2
+   },
+   "pAbil": [
+    "green_whisper",
+    "scream_cheese",
+    "loud_chewer",
+    "green_thumb",
+    "fusion_reactor"
+   ]
+  },
+  {
+   "seed": 1,
+   "occ": "glazier",
+   "days": 126,
+   "end": "over-other",
+   "won": true,
+   "invited": true,
+   "sat": true,
+   "tablePath": "beloved",
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 8,
+   "vLU": 17,
+   "classPlayer": true,
+   "classPlayerDay": 63,
+   "classVillagers": 0,
+   "subP": {
+    "caregiver/healer": 1
+   },
+   "subV": {},
+   "ascPlayer": 1,
+   "ascPlayerDay": 80,
+   "ascVillager": 0,
+   "ascPaths": [
+    "p:shepherd_of_the_dead"
+   ],
+   "overtime": 4,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 56,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 8,
+    "monster:combat": 16,
+    "villager:monster": 8,
+    "player:contest": 2,
+    "person:combat": 5,
+    "person:alien": 1,
+    "player:sickness": 1,
+    "player:combat": 2,
+    "villager:contest": 1
+   },
+   "playerDeaths": [
+    "23:contest",
+    "38:sickness",
+    "41:combat",
+    "41:contest",
+    "43:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 3,
+    "field": 3,
+    "combat": 1,
+    "strange": 1
+   },
+   "vTrack": {
+    "craft": 4,
+    "social": 12,
+    "field": 1
+   },
+   "pAbil": [
+    "green_whisper",
+    "fusion_reactor",
+    "translator",
+    "mending_hands",
+    "lifeline",
+    "battlefield_grace"
+   ]
+  },
+  {
+   "seed": 2,
+   "occ": "chef",
+   "days": 130,
+   "end": "village-lost",
+   "won": false,
+   "invited": false,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 8,
+   "vLU": 23,
+   "classPlayer": true,
+   "classPlayerDay": 36,
+   "classVillagers": 3,
+   "subP": {
+    "hunter/stalker": 1
+   },
+   "subV": {
+    "forager/feaster": 3
+   },
+   "ascPlayer": 1,
+   "ascPlayerDay": 80,
+   "ascVillager": 3,
+   "ascPaths": [
+    "p:apex_predator",
+    "v:living_garden",
+    "v:living_garden",
+    "v:living_garden"
+   ],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 36,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 11,
+    "villager:monster": 5,
+    "monster:combat": 35,
+    "villager:Big Big": 1,
+    "player:combat": 8,
+    "person:combat": 4,
+    "player:contest": 2
+   },
+   "playerDeaths": [
+    "30:combat",
+    "88:combat",
+    "90:combat",
+    "95:contest",
+    "95:combat",
+    "95:combat",
+    "103:combat",
+    "109:contest",
+    "121:combat",
+    "122:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 2,
+    "social": 4,
+    "combat": 1,
+    "strange": 1
+   },
+   "vTrack": {
+    "craft": 7,
+    "social": 10,
+    "field": 4,
+    "combat": 2
+   },
+   "pAbil": [
+    "iron_stomach",
+    "scream_cheese",
+    "night_eyes"
+   ]
+  },
+  {
+   "seed": 3,
+   "occ": "rancher",
+   "days": 102,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 10,
+   "vLU": 15,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 1,
+   "subP": {},
+   "subV": {
+    "forager/gardener": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 1,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 34,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 3,
+    "monster:combat": 10,
+    "player:combat": 4,
+    "villager:monster": 10,
+    "person:combat": 2,
+    "villager:The Reunion": 1,
+    "player:sickness": 1,
+    "player:contest": 1
+   },
+   "playerDeaths": [
+    "17:combat",
+    "19:combat",
+    "33:combat",
+    "70:sickness",
+    "71:combat",
+    "102:contest"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 4,
+    "social": 4,
+    "strange": 2
+   },
+   "vTrack": {
+    "craft": 4,
+    "social": 7,
+    "field": 3,
+    "combat": 1
+   },
+   "pAbil": [
+    "scream_cheese",
+    "loud_chewer",
+    "fusion_reactor",
+    "live_broadcast",
+    "night_eyes",
+    "echo_location"
+   ]
+  },
+  {
+   "seed": 4,
+   "occ": "lawyer",
+   "days": 99,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": 99,
+   "waveReach": 5,
+   "pLU": 8,
+   "vLU": 19,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 1,
+   "subP": {},
+   "subV": {
+    "forager/feaster": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 0,
+   "ascPaths": [],
+   "overtime": 1,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 18,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 6,
+    "monster:combat": 15,
+    "player:the night": 1,
+    "villager:monster": 5,
+    "player:lockjaw": 1,
+    "person:combat": 5
+   },
+   "playerDeaths": [
+    "29:the night",
+    "73:lockjaw"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 3,
+    "field": 3,
+    "combat": 1,
+    "strange": 1
+   },
+   "vTrack": {
+    "social": 9,
+    "field": 2,
+    "craft": 5,
+    "combat": 3
+   },
+   "pAbil": [
+    "beast_calm",
+    "turncoat",
+    "rage",
+    "lucky_rock",
+    "fusion_reactor"
+   ]
+  },
+  {
+   "seed": 5,
+   "occ": "baker",
+   "days": 132,
+   "end": "over-other",
+   "won": true,
+   "invited": true,
+   "sat": true,
+   "tablePath": "relay",
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 8,
+   "vLU": 23,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 2,
+   "subP": {},
+   "subV": {
+    "forager/gardener": 2
+   },
+   "ascPlayer": 1,
+   "ascPlayerDay": 94,
+   "ascVillager": 1,
+   "ascPaths": [
+    "v:living_garden",
+    "p:living_garden"
+   ],
+   "overtime": 4,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 45,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "monster:villager combat": 5,
+    "monster:combat": 16,
+    "villager:monster": 9,
+    "monster:expedition": 2,
+    "player:sickness": 1,
+    "person:alien": 2,
+    "player:combat": 4,
+    "player:contest": 1,
+    "villager:a wound that wouldn't close": 1,
+    "person:combat": 1
+   },
+   "playerDeaths": [
+    "32:sickness",
+    "85:combat",
+    "89:contest",
+    "107:combat",
+    "114:combat",
+    "118:combat"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 4,
+    "social": 3,
+    "strange": 1
+   },
+   "vTrack": {
+    "craft": 6,
+    "social": 10,
+    "field": 5,
+    "combat": 2
+   },
+   "pAbil": [
+    "green_whisper",
+    "turncoat"
+   ]
+  },
+  {
+   "seed": 6,
+   "occ": "roofer",
+   "days": 120,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": 116,
+   "waveReach": 5,
+   "pLU": 14,
+   "vLU": 14,
+   "classPlayer": true,
+   "classPlayerDay": 95,
+   "classVillagers": 0,
+   "subP": {
+    "socialite/showrunner": 1
+   },
+   "subV": {},
+   "ascPlayer": 1,
+   "ascPlayerDay": 99,
+   "ascVillager": 0,
+   "ascPaths": [
+    "p:voice_of_the_relay"
+   ],
+   "overtime": 3,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 2,
+   "ksWornMax": 2,
+   "lessons": 51,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "villager:monster": 8,
+    "monster:villager combat": 8,
+    "monster:combat": 15,
+    "monster:expedition": 1,
+    "person:combat": 9,
+    "player:combat": 9,
+    "player:contest": 1
+   },
+   "playerDeaths": [
+    "23:combat",
+    "35:combat",
+    "55:combat",
+    "71:combat",
+    "74:combat",
+    "81:combat",
+    "82:combat",
+    "87:combat",
+    "104:combat",
+    "115:contest"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 5,
+    "social": 5,
+    "combat": 3,
+    "strange": 1
+   },
+   "vTrack": {
+    "craft": 3,
+    "field": 3,
+    "social": 7,
+    "combat": 1
+   },
+   "pAbil": [
+    "beast_calm",
+    "scream_cheese"
+   ]
+  },
+  {
+   "seed": 8,
+   "occ": "farmer",
+   "days": 109,
+   "end": "village-lost",
+   "won": false,
+   "invited": true,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": true,
+   "villageLostDay": null,
+   "waveReach": 5,
+   "pLU": 8,
+   "vLU": 22,
+   "classPlayer": false,
+   "classPlayerDay": null,
+   "classVillagers": 1,
+   "subP": {},
+   "subV": {
+    "forager/feaster": 1
+   },
+   "ascPlayer": 0,
+   "ascPlayerDay": null,
+   "ascVillager": 1,
+   "ascPaths": [
+    "v:living_garden"
+   ],
+   "overtime": 2,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 27,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "villager:monster": 8,
+    "monster:villager combat": 9,
+    "monster:expedition": 1,
+    "monster:combat": 12,
+    "person:combat": 2,
+    "player:combat": 5,
+    "person:alien": 2,
+    "player:contest": 1,
+    "player:the expedition": 1
+   },
+   "playerDeaths": [
+    "71:combat",
+    "72:combat",
+    "72:combat",
+    "84:combat",
+    "105:combat",
+    "105:contest",
+    "107:the expedition"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "field": 2,
+    "social": 4,
+    "strange": 1,
+    "combat": 1
+   },
+   "vTrack": {
+    "social": 9,
+    "craft": 6,
+    "combat": 4,
+    "field": 3
+   },
+   "pAbil": [
+    "night_eyes",
+    "fusion_reactor"
+   ]
+  },
+  {
+   "seed": 9,
+   "occ": "librarian",
+   "days": 150,
+   "end": "survived",
+   "won": false,
+   "invited": false,
+   "sat": false,
+   "tablePath": null,
+   "villageLost": false,
+   "villageLostDay": null,
+   "waveReach": 4,
+   "pLU": 9,
+   "vLU": 36,
+   "classPlayer": true,
+   "classPlayerDay": 67,
+   "classVillagers": 4,
+   "subP": {
+    "forager/gardener": 1
+   },
+   "subV": {
+    "forager/gardener": 1,
+    "hunter/stalker": 1,
+    "forager/feaster": 1,
+    "caregiver/healer": 1
+   },
+   "ascPlayer": 2,
+   "ascPlayerDay": 80,
+   "ascVillager": 2,
+   "ascPaths": [
+    "p:apex_predator",
+    "v:living_garden",
+    "v:living_garden",
+    "p:shepherd_of_the_dead"
+   ],
+   "overtime": 0,
+   "netSummoned": false,
+   "netFallen": false,
+   "netLost": 0,
+   "hosts": false,
+   "ksMax": 3,
+   "ksWornMax": 3,
+   "lessons": 62,
+   "lessonsToPlayer": 0,
+   "lessonsByPlayer": 0,
+   "deaths": {
+    "villager:monster": 3,
+    "player:combat": 1,
+    "monster:expedition": 2,
+    "monster:combat": 5,
+    "villager:Big Big": 1,
+    "monster:villager combat": 8,
+    "player:dehydration": 1,
+    "player:sickness": 1
+   },
+   "playerDeaths": [
+    "8:combat",
+    "77:dehydration",
+    "83:sickness"
+   ],
+   "force": {
+    "pOffered": 0,
+    "pPicked": 0,
+    "vOffered": 0,
+    "vPicked": 0
+   },
+   "pTrack": {
+    "social": 4,
+    "strange": 2,
+    "field": 3
+   },
+   "vTrack": {
+    "field": 7,
+    "social": 14,
+    "craft": 9,
+    "combat": 6
+   },
+   "pAbil": [
+    "the_touch",
+    "battlefield_grace",
+    "echo_location",
+    "purify",
+    "fusion_reactor",
+    "translator"
+   ]
+  }
+ ]
+}
