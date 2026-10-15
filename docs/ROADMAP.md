@@ -144,6 +144,15 @@ simulation/playtest goal with these gaps before expanding content blindly:
    successful blind trial→L2→Wear is proved; maker trial cadence/guess quality
    needs further playtesting. Do not promote these outcomes to crafting-only
    viability or a demand for an advanced recipe ladder.
+   Read-only stock traces now separate unfunded guesses from actual risky
+   rolls. The maker remembers an unchanged rejected visible guess; new stock
+   and restocking a funded failed roll remain retryable. In 64 matched seeds,
+   trial calls fall 85 to 49, crafts stay 18 and L2 learners stay 13. All 64
+   retain earned noncombat tier-3+ gear; 63 final states match exactly. The
+   one changed seed makes a newly available funded attempt, loses materials
+   and misses its prior win (aggregate 19 to 18, deaths unchanged at 56).
+   This is honest policy coverage, not a survival improvement; no gameplay
+   costs or odds change. See `evidence/2026-10-15/maker-trial-audit.md`.
    See `evidence/2026-10-15/hide-discovery-audit.md` and the preceding
    `prep-material-access-audit.md` / `maker-counter-trace-audit.md`.
    Armory/pharmacy public deposit → take → equip/consume now reject empty
