@@ -309,6 +309,17 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   wins 21 -> 15/64. No natural Second Wind/Molt receipt in that panel; their
   Strange-kit positions 10/11 and the caregiver outcome regression need
   targeted access/ending investigation. Full broader parity remains open.
+- **Public-stakes diagnosis:** the default campaign policy now reads the
+  Table's already-visible current meters. Matched 64 x four runs improve
+  wins 91 -> 113/256, caregiver 15 -> 20/64, with Table entries, deaths and
+  median game days unchanged. No reward, gate or UI change. The earlier
+  21 -> 15 caregiver regression remains recorded above, not erased.
+  `evidence/2026-10-15/table-access-audit.md` records the public-information
+  proof and zero Second Wind/Molt appearances in 26,733 kit offer appearances.
+  Caregiver seed 12 reaches global rank but misses its seat solely on food
+  deeds: its real feast expired unused because credit currently requires
+  combat use. Next prove meaningful paid noncombat feast use and measure
+  ability access; broader parity and nine authored deeds remain open.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

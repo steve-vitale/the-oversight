@@ -1,0 +1,212 @@
+{
+  "baseline": "survivalist-passive-after-64.json.gz",
+  "after": "table-access-public-64.json.gz",
+  "matrixSourceHead": "90c2d0247b006b392cff143b5ab0c0141a66e01a",
+  "days": 150,
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58
+  ],
+  "matchedRows": 256,
+  "identicalStandardRows": 227,
+  "summary": {
+    "capable": {
+      "before": {
+        "wins": 42,
+        "seatAvailable": 60,
+        "entered": 56,
+        "medianDriverDays": 92.0,
+        "medianGameDays": 90.0,
+        "playerDeaths": 95
+      },
+      "after": {
+        "wins": 52,
+        "seatAvailable": 60,
+        "entered": 56,
+        "medianDriverDays": 92.0,
+        "medianGameDays": 90.0,
+        "playerDeaths": 95
+      }
+    },
+    "maker": {
+      "before": {
+        "wins": 18,
+        "seatAvailable": 24,
+        "entered": 24,
+        "medianDriverDays": 122.0,
+        "medianGameDays": 120.5,
+        "playerDeaths": 73
+      },
+      "after": {
+        "wins": 21,
+        "seatAvailable": 24,
+        "entered": 24,
+        "medianDriverDays": 122.0,
+        "medianGameDays": 120.5,
+        "playerDeaths": 73
+      }
+    },
+    "merchant": {
+      "before": {
+        "wins": 16,
+        "seatAvailable": 24,
+        "entered": 24,
+        "medianDriverDays": 146.0,
+        "medianGameDays": 144.5,
+        "playerDeaths": 42
+      },
+      "after": {
+        "wins": 20,
+        "seatAvailable": 24,
+        "entered": 24,
+        "medianDriverDays": 146.0,
+        "medianGameDays": 144.5,
+        "playerDeaths": 42
+      }
+    },
+    "caregiver": {
+      "before": {
+        "wins": 15,
+        "seatAvailable": 23,
+        "entered": 22,
+        "medianDriverDays": 136.5,
+        "medianGameDays": 136.0,
+        "playerDeaths": 52
+      },
+      "after": {
+        "wins": 20,
+        "seatAvailable": 23,
+        "entered": 22,
+        "medianDriverDays": 136.5,
+        "medianGameDays": 136.0,
+        "playerDeaths": 52
+      }
+    }
+  },
+  "warnings": 0,
+  "offers": {
+    "player": {
+      "appearances": 6453,
+      "distinctIds": 62,
+      "second_wind": 0,
+      "molt": 0
+    },
+    "npc": {
+      "appearances": 20280,
+      "distinctIds": 51,
+      "second_wind": 0,
+      "molt": 0
+    }
+  },
+  "changedCommonSourceHashes": [
+    "scripts/policies/capable.js",
+    "observer/deed-screen.js"
+  ],
+  "beforeSourceHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "e7b3af23cbae3bb33631c507e4b802a4b3b1d5ba8c8b7727c711e17d9e2528c6"
+  },
+  "afterSourceHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/js/endingKey.js": "c5f097faccc9039991077590d3e4e10e64fcc9ad0b12b8d96473a2dc5b8e7d0d",
+    "src/js/table.js": "e6009781e4db9f79820e178a8458e6a5de1f9f409a930b0837f2793a4b6472d1",
+    "src/js/fieldFights.js": "65e7b3cdbf23c1c616cf7237d5807e896702e1f1a961520e39cbc38df6cfa01d",
+    "src/js/game.js": "11ff33a5345681b87162c4b399e06164e14240993f5459a6f4fec15a60f6d957",
+    "src/js/contestEngine.js": "e17874fb852606837ba66dfc3cf0dae852664a5f89b401e121479a1d6459cdf4",
+    "src/js/villager-agency.js": "88afba50af69f8b71dbe1b694ad4c8ca24ae823cc09df8516faef6c180b00146",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "923666189252b394b8f9886c561015f9884e185612e5cfb24a031f4149eb62c5",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "dcbb04ce681afbd64c62a30d175c6335db9d10add658a078f536731afb6d10ec"
+  },
+  "rawSha256": "6e0f178036c62e24788f9baaa7e209fa24285cebef31ce9a4f92ddceea56a4f2",
+  "gzipSha256": "6b9a8e7b74d9e5a06ee99503731b2d8b09b9c010dc3e25f795ce8213ad33d34e",
+  "rawBytes": 38635154,
+  "gzipBytes": 2031907,
+  "verification": {
+    "quick": 145,
+    "full": 917,
+    "fullSeconds": 158,
+    "publicStakeAssertions": 5,
+    "actualTablePrompts": 30,
+    "archiveIdentityAssertions": 5,
+    "legacyGreedyAssertions": 15,
+    "observerAssertions": 4
+  },
+  "metadataFollowup": "Source identity guard only; matrix observer pinned above."
+}

@@ -48,8 +48,13 @@ Job -> track -> **class** -> **god** -> Table.
    HP settlement (`survivalist-passive-audit.md`). Full active/passive and
    headless player field-contest parity audits remain open.
    Natural panel: zero Second Wind/Molt receipts, still at Strange-kit
-   positions 10/11. Fix their observed access gap next; caregiver Table wins
-   also fell 21 to 15/64 in the mixed settlement-repair screen.
+   positions 10/11. The offer observer confirms zero appearances in 26,733
+   player/NPC kit offer appearances. The public Table-stakes policy repair
+   recovers caregiver wins 15 -> 20/64 (all policies 91 -> 113/256), without
+   changing entries, deaths or median game days. Seed 12 remains blocked
+   solely by combat-only feast-use credit despite global rank and a real
+   feast. Next prove meaningful paid noncombat feast use and measure a
+   focused ability-access lever. See `table-access-audit.md`.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.

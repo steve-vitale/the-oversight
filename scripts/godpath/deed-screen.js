@@ -4,6 +4,14 @@
 const fs = require('fs'), path = require('path'), cp = require('child_process'), crypto = require('crypto');
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ? d : process.argv[i + 1]; };
 const root = path.resolve(arg('root', path.join(__dirname, '../..')));
+function sourceIdentity(sourceRoot, archiveBase) {
+  if (archiveBase != null) {
+    if (!/^[a-f0-9]{40}$/i.test(archiveBase)) throw new Error('--source-head must be a full immutable commit hash');
+    return { sourceHead: archiveBase, sourceHeadKind: 'supplied-archive-base' };
+  }
+  if (!fs.existsSync(path.join(sourceRoot, '.git'))) return { sourceHead: null, sourceHeadKind: 'archive-base-unavailable' };
+  return { sourceHead: cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: sourceRoot, encoding: 'utf8' }).trim(), sourceHeadKind: 'checkout-base' };
+}
 async function child() {
   const H = require(path.join(root, 'scripts/sim-harness'));
   const { runComparison, POLICY_REGISTRY: registry } = require(path.join(root, 'scripts/sweep-compare'));
@@ -98,7 +106,8 @@ async function main() {
   for (const rel of ['src/js/godhood.js', 'src/js/godpath.js', 'src/js/tracks.js', 'src/js/endingKey.js', 'src/js/table.js', 'src/js/fieldFights.js', 'src/js/game.js', 'src/js/contestEngine.js', 'src/js/villager-agency.js', 'src/data/godpaths.json', 'src/data/tracks.json', 'scripts/sim-harness.js', 'scripts/sweep-compare.js', 'scripts/policies/capable.js', 'scripts/policies/livelihood.js']) hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
   hashes['observer/deed-screen.js'] = crypto.createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
   if (!arg('out', null)) throw new Error('--out required');
-  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, sourceHead: cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
+  fs.writeFileSync(arg('out'), JSON.stringify({ driver: 'sweep-compare', sourceRoot: root, ...sourceIdentity(root, arg('source-head', null)), sourceHashes: hashes, policyFlags: { CAPABLE_READ_STAKES: process.env.CAPABLE_READ_STAKES || null, CAPABLE_GREEDY: process.env.CAPABLE_GREEDY || null }, days: Number(arg('days', 150)), seeds, policies, rows }, null, 2) + '\n');
   console.log('\nSaved ' + arg('out'));
 }
-main().catch(e => { console.error(e.stack); process.exitCode = 1; });
+module.exports = { sourceIdentity };
+if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

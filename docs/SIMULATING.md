@@ -148,6 +148,33 @@ Later campaign branches remain incompletely covered. See the dated
 Actual battle starts can occur during approach: the audit observes the
 public start/end methods and verifies observer-on/off gameplay hashes.
 
+## Table and ability-access observer
+
+`scripts/godpath/deed-screen.js` records actual kit offer appearances, daily
+held-ability samples, Table decisions, deeds and a gameplay hash. Its on/off
+parity proof checks that observation does not change the campaign. Repeated
+sheet presentations count repeatedly; daily samples are not an exhaustive
+acquisition census. Prepared fixtures are separate from natural campaigns.
+
+```powershell
+node scripts/godpath/deed-screen.js --n 64 --par 4 --out .git/deed-panel.json
+node scripts/godpath/deed-screen.js --seeds 99,2,12,24 --policies caregiver --out .git/deed-traces.json
+node scripts/godpath/deed-screen.js --root C:/path/to/archive --source-head <full-40-character-commit> --n 16 --out .git/archive-panel.json
+```
+
+An archive without its own `.git` reports a null source HEAD unless supplied
+an immutable `--source-head`; it never inherits the enclosing checkout's
+HEAD. Compare file hashes too. Earlier archive reports can contain a parent
+checkout's HEAD, so that field alone is insufficient provenance.
+
+The default capable/livelihood Table reader uses the meter in the public
+italic prompt and the requirement in the choice label. Missing readings
+remain unknown. `CAPABLE_READ_STAKES=0` reproduces historical word-only
+selection; `=1` retains the legacy private-meter diagnostic fallback when
+the prompt lacks a reading. It is not the default public-information policy.
+`CAPABLE_GREEDY` remains a separate opt-in diagnostic. Record policy flags
+when comparing panels. See `evidence/2026-10-15/table-access-audit.md`.
+
 ## Windows checkout
 
 The shared harness reads script order from `index.html` without a shell. Some
