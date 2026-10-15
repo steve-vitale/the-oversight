@@ -204,6 +204,12 @@
       return ((day || 0) - (rec.since || 0)) >= n;
     } catch (e) { return false; }
   }
+  // The same earned office counts for its actual holder in either role.
+  // Read the shared game explicitly; a detached scholar cannot borrow it.
+  function relayOfficeDeed(game, vid, req) {
+    const sw = game && game.state && game.state.switchboard;
+    return !!(req.deedAlt === 'relay_office' && vid && sw && sw.holderId === vid);
+  }
   function godhoodCloseness(sch, gh, day) {
     if (gh.retired) return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: true, dayOk: false, classOk: false, complete: false, close: false, readyForCapstone: false };
     const abs = scholarAbilities(sch);
@@ -212,13 +218,7 @@
     const req = gh.requires || {};
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy && classDaysDeed(sch.godpath, req, day)) synergy = true;
-    // The Relay office is the Socialite's alternative deed (Voice of the Relay).
-    if (!synergy && req.deedAlt === 'relay_office') {
-      try {
-        const sw = (typeof Game !== 'undefined' && Game.state && Game.state.switchboard) || {};
-        synergy = !!(sw.holderId && sch.villagerId && sw.holderId === sch.villagerId);
-      } catch (e) { /* no switchboard: the synergy deed stands alone */ }
-    }
+    if (!synergy) synergy = relayOfficeDeed(S.Game, sch.villagerId, req);
     const dayOk = (day || 0) >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
@@ -263,7 +263,7 @@
   }
 
   // villagerGodhoodCloseness(game, vid, gh): same requirement model as the
-  // player, read from villager stores. The relay office path is player-only.
+  // player, read from villager stores, including the actual Relay office holder.
   function villagerGodhoodCloseness(game, vid, gh) {
     if (gh.retired) return { kit: 0, needKit: 0, coreHit: false, needCore: false, synergy: false, item: true, dayOk: false, classOk: false, complete: false, close: false, readyForCapstone: false, vid };
     const abs = villagerAbilities(game, vid);
@@ -273,6 +273,7 @@
     const day = ((game.state || {}).scholar || {}).day || (game.state || {}).day || 0;
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy) { try { synergy = classDaysDeed((((game.state || {}).village || {}).npcGodpath || {})[vid], req, day); } catch (e) { synergy = false; } }
+    if (!synergy) synergy = relayOfficeDeed(game, vid, req);
     const dayOk = day >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,

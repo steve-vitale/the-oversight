@@ -32,6 +32,9 @@ Job -> track -> **class** -> **god** -> Table.
    all-on 0/16 result predates the class-held-for-10-days bridge and wider
    offers. Current rules still use that placeholder; replace it with fitting
    deeds and measure the full gates with 64 matched seeds. See ROADMAP item 3.
+   Current 64-seed/four-policy screen and the repaired shared Relay office
+   deed are in `evidence/2026-10-15/deed-audit.md`; the ten fitting outcome
+   deeds remain open. No Miser subclass appeared even in merchant runs.
 2. **Finish the parity audit.** Ten god verbs now have player/villager callers
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that

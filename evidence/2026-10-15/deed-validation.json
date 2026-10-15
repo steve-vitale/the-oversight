@@ -1,0 +1,193 @@
+{
+  "sourceHead": "7751d906c19fddfdb3d8cab1fd3b04f6b64e37d9",
+  "driver": "sweep-compare",
+  "days": 150,
+  "seedsPerPolicy": 64,
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "matchedRows": 256,
+  "identical": {
+    "stateHash": 256,
+    "row": 256,
+    "ascensions": 256,
+    "people": 256
+  },
+  "sourceHashChanges": [
+    "src/js/godhood.js",
+    "scripts/sweep-compare.js",
+    "scripts/policies/livelihood.js"
+  ],
+  "sourceHashChangesOnlyCRLF": [
+    "scripts/sweep-compare.js",
+    "scripts/policies/livelihood.js"
+  ],
+  "beforeHashes": {
+    "src/js/godhood.js": "c01e29ded481457e45ec5f0c7d74122c6bc8105bd14d10e384bde02850a9e96f",
+    "src/js/godpath.js": "f9e92b858879fb9e231a31286096275ac90794752b8ad5869d4e45c7a7893583",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "ed8bbbcfe6535a2f765ba779ce3afa778500284fef92d57cf7700ed5d25eecef",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "60bc7d9a0c22b90f77a123aac6cfe8f92a291e31788cdfa3da18889aaacbebe8",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "5a7cae3cb591c388543c6a71d92863c931cfc806bf9be3b8bce954f1975ab585",
+    "observer/deed-screen.js": "89cdc4a383f00f3388538f5600344cdd82c744597c7c14c4afce093013281213"
+  },
+  "afterHashes": {
+    "src/js/godhood.js": "e965480d8be0589845093d794be5a757a01f1566887b59522712f01185412911",
+    "src/js/godpath.js": "f9e92b858879fb9e231a31286096275ac90794752b8ad5869d4e45c7a7893583",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "ed8bbbcfe6535a2f765ba779ce3afa778500284fef92d57cf7700ed5d25eecef",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "89cdc4a383f00f3388538f5600344cdd82c744597c7c14c4afce093013281213"
+  },
+  "compressedReports": {
+    "deed-before-64.json.gz": {
+      "uncompressedBytes": 35866837,
+      "compressedBytes": 1536517,
+      "uncompressedSha256": "e45d523b6be12e2990e77322467ccceeb38ac96181dce0cc17d53d9ba33b6695",
+      "compressedSha256": "aaa555633939e0d918eafce698cfb7f217df95b55cc169dc4ecdd859962525fb"
+    },
+    "deed-after-64.json.gz": {
+      "uncompressedBytes": 35866811,
+      "compressedBytes": 1536498,
+      "uncompressedSha256": "e115277465a920a6a24bcc9b55497ecf7c4e5696469ad18ef469870911ea0f69",
+      "compressedSha256": "f6ce8e934b89783ae52505fd4815229bd72fa7360d64cb93a015d565f9f6f48b"
+    }
+  },
+  "validation": {
+    "quick": {
+      "command": "node scripts/check.js --quick --jobs 4",
+      "passed": 140,
+      "failed": 0,
+      "seconds": 63
+    },
+    "full": {
+      "command": "node scripts/check.js --jobs 8",
+      "passed": 912,
+      "failed": 0,
+      "seconds": 209
+    },
+    "relayDeed": {
+      "initialRedPassed": 10,
+      "initialRedFailed": 2,
+      "expandedFinalPassed": 14,
+      "expandedFinalFailed": 0
+    },
+    "observer": {
+      "seed": 7,
+      "days": 150,
+      "passed": 4,
+      "failed": 0,
+      "onOffGameplayHashEqual": true,
+      "onOffStandardRowEqual": true
+    }
+  },
+  "policySummary": {
+    "capable": {
+      "runs": 64,
+      "wins": 41,
+      "seated": 55,
+      "medianGameDay": 90.0,
+      "playerAscensionRuns": 27,
+      "npcAscensionRuns": 15,
+      "runsPast100": 9,
+      "playerAscensionRunsPast100": 4,
+      "playerDeaths": 93,
+      "sampledSubclassRunCounts": {
+        "brawler/berserker": 1,
+        "caregiver/healer": 4,
+        "drifter/trickster": 2,
+        "explorer/cartographer": 1,
+        "forager/feaster": 15,
+        "forager/gardener": 33,
+        "hunter/beastmaster": 5,
+        "hunter/stalker": 19,
+        "shieldbearer/bulwark": 1,
+        "socialite/demagogue": 6,
+        "socialite/showrunner": 16,
+        "survivalist/furnace": 2
+      }
+    },
+    "maker": {
+      "runs": 64,
+      "wins": 18,
+      "seated": 25,
+      "medianGameDay": 116.0,
+      "playerAscensionRuns": 34,
+      "npcAscensionRuns": 38,
+      "runsPast100": 47,
+      "playerAscensionRunsPast100": 24,
+      "playerDeaths": 64,
+      "sampledSubclassRunCounts": {
+        "caregiver/healer": 10,
+        "drifter/trickster": 4,
+        "explorer/cartographer": 2,
+        "forager/feaster": 31,
+        "forager/gardener": 38,
+        "hunter/beastmaster": 4,
+        "hunter/stalker": 31,
+        "socialite/demagogue": 2,
+        "socialite/showrunner": 11,
+        "survivalist/furnace": 3
+      }
+    },
+    "merchant": {
+      "runs": 64,
+      "wins": 10,
+      "seated": 22,
+      "medianGameDay": 123.5,
+      "playerAscensionRuns": 37,
+      "npcAscensionRuns": 41,
+      "runsPast100": 44,
+      "playerAscensionRunsPast100": 25,
+      "playerDeaths": 43,
+      "sampledSubclassRunCounts": {
+        "caregiver/healer": 9,
+        "caregiver/keeper": 1,
+        "drifter/trickster": 2,
+        "explorer/cartographer": 5,
+        "explorer/seer": 2,
+        "forager/feaster": 31,
+        "forager/gardener": 32,
+        "hunter/beastmaster": 3,
+        "hunter/stalker": 27,
+        "socialite/demagogue": 6,
+        "socialite/showrunner": 15,
+        "survivalist/furnace": 6
+      }
+    },
+    "caregiver": {
+      "runs": 64,
+      "wins": 21,
+      "seated": 30,
+      "medianGameDay": 123.5,
+      "playerAscensionRuns": 31,
+      "npcAscensionRuns": 40,
+      "runsPast100": 50,
+      "playerAscensionRunsPast100": 24,
+      "playerDeaths": 49,
+      "sampledSubclassRunCounts": {
+        "caregiver/healer": 6,
+        "caregiver/keeper": 2,
+        "drifter/trickster": 4,
+        "explorer/cartographer": 1,
+        "forager/feaster": 25,
+        "forager/gardener": 37,
+        "hunter/beastmaster": 2,
+        "hunter/stalker": 27,
+        "socialite/demagogue": 4,
+        "socialite/showrunner": 15,
+        "survivalist/furnace": 2
+      }
+    }
+  }
+}

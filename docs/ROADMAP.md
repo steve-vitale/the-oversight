@@ -302,6 +302,13 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs
   (measure it).
 - **Tool:** `scripts/godpath/validate.js` and `ladder.js`, plus a 64-seed sweep.
+- **Measurement / parity repair (2026-10-15):** a 64-seed x four-policy
+  standard-driver panel now measures current ascensions and credited work.
+  The actual Relay office holder now completes the same existing Socialite
+  deed as player or villager (prepared real-action gate/ceremony proofs).
+  Ten fitting outcome deeds are still open: gardening XP, for example,
+  credits sowing/tending and cannot prove village feeding. See
+  `evidence/2026-10-15/deed-audit.md` and `scripts/godpath/deed-screen.js`.
 
 ### 4. God scale effects
 - **Recovery progress (2026-10-15):** all ten god verbs now have real
@@ -343,8 +350,14 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
 - **Spec:** draw them in the audited style (`evidence/2026-10-14/sprite-audit.md`);
   the sprite test checks validity.
 
-### 7b. The 10 subclasses that never form
-- brawler, shieldbearer, miser, seer, undying, phantom (and others) never appear in sims: their abilities sit 7–20 deep in the track kits.
+### 7b. Remaining subclass coverage gaps
+- **Current screen (2026-10-15):** 64 seeds per policy, capable/maker/merchant/
+  caregiver, daily class samples: 12/20 in capable and 14/20 across the panel.
+  Juggernaut, Warden, Phantom, Undying, Hoarder and Dealer were not sampled;
+  neither Miser subclass appeared even under merchant play. These are
+  observed bot gaps, not proof that a human cannot form them. The previous
+  ten-missing list predates recovery; see `deed-audit.md` for current evidence.
+  Deep kit placement and trade-to-class progression still need investigation.
 - Claude's recommendation: add a job-path term to `buildPathLean` (villager-build.js) so villagers build toward their job's god, and move ONE entry per never-seen subclass into the first 6 of a track whose deeds fit it. Measure 64 seeds; target ≥14/20 without deaths rising >10%. (A full kit interleave was tried and reverted — it raised deaths.)
 - Job balance watch: exterminator looked weak, locksmith and mortician strong at 16 seeds — confirm with 32 seeds `FORCE_OCC=<job>` (scripts/sweep-buff.js) before retuning.
 
