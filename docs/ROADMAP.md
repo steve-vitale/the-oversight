@@ -126,9 +126,17 @@ simulation/playtest goal with these gaps before expanding content blindly:
    is established. All 64 retain earned noncombat tier-3+ gear; fat/pemmican
    access remains absent. Seed 5's unshelved batch is now traced: public
    shelving correctly refuses a full pantry and retains the smoked portion;
-   the replay exactly matches its recorded hash. Inspect whether materials
-   accumulated on prep counters can actually reach crafting or storage next.
-   See `evidence/2026-10-15/maker-counter-trace-audit.md`.
+   the replay exactly matches its recorded hash. Counter byproducts had no
+   pickup path even though crafting requires carried stock. The counter now
+   offers a deliberate, capacity-limited material pickup (2 ticks), preserving
+   exact quantities/metadata. Actual butchering → pickup → hide-armor craft →
+   wear is proved in the shared harness and phone UI. Makers fetch just the
+   missing counter stock for an otherwise funded known recipe. In 64 matched
+   maker seeds all states remain identical: none knows hide armor at L2+, so
+   no pickup or craft occurs. Audit the real recipe-learning/teaching path
+   before treating the material repair as natural crafting viability.
+   See `evidence/2026-10-15/prep-material-access-audit.md` and the preceding
+   `maker-counter-trace-audit.md`.
    Armory/pharmacy public deposit → take → equip/consume now reject empty
    units and depleted doses, including NPC use; ordinary medicines spend one
    unit and dosed bottles one dose. Real positive stacks and player/NPC use
