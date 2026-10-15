@@ -4,7 +4,7 @@
   "confirmationSeeds": 64,
   "bootstrapSamples": 1000,
   "metrics": [
-    { "id": "won", "label": "Table win rate", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
+    { "id": "won", "label": "Table win rate", "unit": "fraction", "direction": "neutral", "tolerance": 0.02, "reviewChanges": true },
     { "id": "entered", "label": "Table entry rate", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
     { "id": "table", "label": "Table invitation rate", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },
     { "id": "national", "label": "National scale access", "unit": "fraction", "direction": "higher", "tolerance": 0.02 },

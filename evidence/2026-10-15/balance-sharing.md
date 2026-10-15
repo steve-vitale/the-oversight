@@ -53,3 +53,11 @@ It found worse outcomes across the four mixed policies; do not cherry-pick a
 win headline or compare it directly with the shared master smoke. Confirmation,
 fixed exposure windows, opportunity-conditioned contest/show cohorts, landed
 ability effects, NPC parity and human playtests remain on the measurement plan.
+
+## Challenge contract update (2026-10-15)
+
+Win-rate movement is now neutral and reviewed in either direction; no decline
+is automatically a regression. See balance-challenge-audit.md for the new
+contract, current tests (shared quick 95/97), preserved historical limitations
+and both roots' fresh observer-neutral proofs. SURVIVAL-LEVERS.md is the
+maintained register and decision log. Existing shared game failures remain.

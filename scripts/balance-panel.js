@@ -116,7 +116,7 @@ async function run() {
   const observerHash = () => digest([__filename, path.join(__dirname, 'gear-usage-audit.js'), path.join(__dirname, 'lib/balance-scorecard.js')].map(f => fs.readFileSync(f)).join('\n'));
   const sources = manifest(root), observerDigest = observerHash();
   const contractDigest = digest(fs.readFileSync(path.join(__dirname, 'balance-metrics.json'))), sourceDigest = digest(JSON.stringify(sources));
-  const head = () => { try { return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch (e) { if (fs.existsSync(path.join(root, '.git'))) throw e; return null; } };
+  const head = () => sourceHead(root);
   const sourceHeadStart = head(), proofSeeds = arg('proof-seeds', String(options.seeds[0])).split(',').map(Number);
   if (proofSeeds.some(s => !options.seeds.includes(s))) throw new Error('Proof seeds must belong to the panel');
   const cache = path.join(out, 'cases'); fs.mkdirSync(cache, { recursive: true });
@@ -159,5 +159,10 @@ async function main() {
   }
   return run();
 }
-module.exports = { install, manifest };
+// An archive nested inside a checkout must not inherit its enclosing HEAD.
+function sourceHead(root) {
+  if (!fs.existsSync(path.join(root, '.git'))) return null;
+  return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+}
+module.exports = { install, manifest, sourceHead };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

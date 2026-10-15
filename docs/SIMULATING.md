@@ -84,6 +84,12 @@ Count them in an `extraMetrics(Game)` hook passed to `runComparison` (see
 
 ## Balanced scorecards (2026-10-15)
 
+Win rate is neutral: material changes in either direction request investigation
+(`change_watch` / `change_signal`), without labeling lower wins a regression
+or higher wins an improvement. Winning should be difficult. Record causal
+evidence, counterplay and accepted tradeoffs in `docs/SURVIVAL-LEVERS.md`.
+Other directional warnings are review triggers, not automatic tuning orders.
+
 Read `docs/MEASUREMENT-PLAN.md` before optimizing a lever. The scorecard has
 23 separate metric contracts, not a weighted win score. A regression in one
 policy is never canceled by another policy's improvement. Starting practical
@@ -99,6 +105,8 @@ node scripts/balance-features.js <candidate-panel-dir>/panel.json.gz --out <feat
 Run the current observer against both roots. The root controls game, policies
 and shared harness; the caller controls the observer and contract. The full
 source manifests normalize CRLF to LF and must stay stable throughout a panel.
+Archives without their own `.git` report a null HEAD rather than inheriting
+the enclosing checkout commit. Their content manifest remains authoritative.
 The contract/observer fingerprints must match between paired panels. Different
 policy/harness sources, flags, Node versions, regions or case lists invalidate
 a game-only comparison. Separate named experiments are needed for bot changes.

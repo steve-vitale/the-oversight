@@ -21,10 +21,13 @@ function compareMetric(before, after, spec, key) {
   if (!pairs.length) status = 'not_observed';
   else if (pairs.length < contract.minimumPairs) status = 'insufficient';
   else if (coverageChanged) status = 'coverage_changed';
+  else if (spec.direction === 'neutral' && spec.reviewChanges && Math.abs(delta) > spec.tolerance) {
+    status = (ci[0] > 0 || ci[1] < 0) ? 'change_signal' : 'change_watch';
+  }
   else if (spec.direction !== 'neutral' && orientation * delta < -spec.tolerance) {
     status = (spec.direction === 'lower' ? ci[0] > 0 : ci[1] < 0) ? 'regression_signal' : 'regression_watch';
   }
-  return { id: spec.id, label: spec.label, unit: spec.unit, direction: spec.direction, tolerance: spec.tolerance, status, coverageChanged,
+  return { id: spec.id, label: spec.label, unit: spec.unit, direction: spec.direction, tolerance: spec.tolerance, reviewChanges: !!spec.reviewChanges, status, coverageChanged,
     totalPairs: before.length, eligibleBefore: before.filter(Number.isFinite).length, eligibleAfter: after.filter(Number.isFinite).length, pairs: pairs.length,
     before: mean(pairs.map(p => p[0])), after: mean(pairs.map(p => p[1])), delta, interval95: ci,
     pairedP10: quantile(diffs, 0.1), pairedMedian: quantile(diffs, 0.5), pairedP90: quantile(diffs, 0.9),
@@ -62,7 +65,7 @@ function comparePanels(before, after) {
     return { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
   });
   return { schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
-    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence.' };
+    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' };
 }
 function markdown(report) {
   const lines = ['# Balanced campaign comparison', '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];

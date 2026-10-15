@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "interpretation": "Neutral bidirectional win-rate investigation, no gameplay tuning. Historical reports retain their original contracts.",
+  "jobs": {
+    "primary": 8,
+    "shared": 8,
+    "archive-before": 2,
+    "archive-after": 2
+  },
+  "primaryChecks": {
+    "quick": [
+      157,
+      157
+    ],
+    "full": [
+      929,
+      929
+    ]
+  },
+  "sharedChecks": {
+    "quick": [
+      95,
+      97
+    ],
+    "full": "not rerun; historical 821/868 remains red"
+  },
+  "artifactSha256": {
+    "balance-challenge-audit.md": "4e50c321d0632f35f569335db824705fc87d46b0c3d53932b9f4410911b58006",
+    "balance-challenge-full.txt": "7277912ee05198c717672c807cf273fdf59ba7affe0e8b66e02c9989e25ebaaf",
+    "balance-challenge-jobs.json.gz": "63d92df23f5265f435de244d6dae0e72acb7f1c37b48d34a4a589e58794d1db4",
+    "balance-challenge-observer-panel.json.gz": "cf71e7d967538e6b13f4ee4a6b71d952eda91acb8b93ad74cc9f28659a3e42c7",
+    "balance-challenge-quick.txt": "caa6903fd0339f2c190b1031d315eb3d71556aba4ec77c7bac94bc203cf7d5b2",
+    "balance-challenge-shared-panel.json.gz": "04c35eda5f303506a2ace021c2c2f5c3af3419e73dfa9c1aee4c59a786184668",
+    "balance-challenge-shared-quick.txt": "9c1887ac0de3a833466613c11d716c6eb4458630db62fce95faa2d1e4e0a28d7",
+    "balance-challenge-sources.json.gz": "e315d0e9700917d73b2948e7d153240fcb47f1259d834156c3b3a8aec5f2a6e9",
+    "balance-archive-head-before.json.gz": "4a1ae4b5977a0349e0ca6ff79742313d07832fea9f919460e097870ee5c3304d",
+    "balance-archive-head-after.json.gz": "80ca66e2c2b045bd8ee60a0bc0d67121fc3bbf130ce84af1582c75b7311919e4"
+  }
+}
