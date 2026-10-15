@@ -1,0 +1,26 @@
+=== seed 84 day 72 — conversation with Thabo (thabo_maseko) ===
+want: ask_favor (stage 0) thread=want
+THEM: "We never finished talking about that favor — we got cut off. "Amina and I never did finish talking about that hard time — that was 11 days back. You're not Amina. Still on ""
+YOU: [dlg:help] "What do you need?"
+THEM: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Good. The creek bend, past the treeline, before the dew dries. Pack and knife. We travel light."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Maypop — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Greenbrier Shoots — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "I'm listening."
+THEM: "Okay. We'll pick this up later."
+(want=ask_favor stage=3)
+YOU: (leave)
+want final: id=ask_favor stage=3 resolution=promised

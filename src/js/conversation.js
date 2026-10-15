@@ -1146,6 +1146,10 @@
         // label — the villager never offered a lesson. The honest label names
         // what happened, in neutral voice (spoken by NPC and player alike).
         taughtref: 'that plant lesson', recall: 'that personal stuff',
+        // TABLE SITTING (journey-endgame r11 2026-10-14): the table opener's
+        // thread id must never leak raw into resume/recap lines
+        // ("talking about table") — the honest label is the table.
+        table: 'the table',
       };
       if (base[tid]) return base[tid];
       // T2 SPEECH LABELS (journey-social r13 2026-10-14): t2 ask-labels are
@@ -1411,6 +1415,13 @@
       // conversation planted a seed (e.g. an unkept favor ask), the seed's
       // follow-up opens — not the generic resume.
       if ((v.convoSeeds || {})[vid]) return null;
+      // TABLE SITS (journey-endgame r11 2026-10-14): the table pre-empts
+      // generic open-thread resumes — the village talks about the table
+      // first. Planted want-seeds (above) keep their priority: a favor
+      // follow-up is a commitment, not chatter.
+      try {
+        if (typeof this.convoTableSitting === 'function' && this.convoTableSitting()) return null;
+      } catch (e) {}
       const c = this.convoGet(vid);
       if (c._resumedOnce) return null;
       const trust = ((v.trust || {})[vid] || 10);
@@ -2230,7 +2241,18 @@
         return { line: this.renderTalkLine(String(treq.line).replace(/ \(Talk to .*?\.\)$/, ''), vid), thread: 'request' };
       }
 
-      // 2. UNFINISHED BUSINESS — a seed from last time opens the conversation.
+      // 2. THE TABLE SITS (journey-endgame r11 2026-10-14): the most
+      // newsworthy thing that has ever happened to the village. While the
+      // table waits unanswered — or once per resolution — they talk about
+      // it first, ahead of secrets, taught-plant callbacks, and small talk.
+      // Talk requests keep priority (#1): they came to you for a reason.
+      // Once per villager per sitting; never a loop.
+      try {
+        const top = this.convoTableOpener(vid);
+        if (top) return top;
+      } catch (e) {}
+
+      // 3. UNFINISHED BUSINESS — a seed from last time opens the conversation.
       // The want was established before; now it resurfaces, named. The seed
       // is consumed by the resolution at endConvo (or expiry after 7 days).
       if (want && want.fromSeed && want.def) {
@@ -2444,6 +2466,72 @@
       // 6. Truly nothing new — said like a person, not a loop.
       const ex = this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know."']);
       return { line: this.voiceLine(vid, ex || '"Good to just be around people."'), thread: 'small' };
+    },
+
+    // THE TABLE SITS — opener (journey-endgame r11 2026-10-14). The most
+    // newsworthy thing that has ever happened to the village: while the
+    // table waits unanswered (or during the win-day-floor deferral), and
+    // once after it resolves, villagers open with it — ahead of secrets,
+    // taught-plant callbacks, and small talk. Once per villager per sitting
+    // (pg.tableSittingId, bumped in tableScene when a seat is granted);
+    // never a loop. Talk requests still lead (convoOpening #1), and planted
+    // want-seeds keep their resume priority (a favor follow-up is a
+    // commitment, not chatter). Question openers route through
+    // convoMatchReactive downstream and become answerable — the NPC wants
+    // to know what you're going to tell it.
+    convoTableSitting() {
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (!pg || !(pg.tableSittingId | 0)) return false;
+        const T = (typeof this.tableState === 'function') ? this.tableState() : {};
+        return !!pg.tableWaiting || !!T.winDeferred ||
+          (!!pg.tableDone && T.phase && T.phase !== 'done');
+      } catch (e) { return false; }
+    },
+    convoTableOpener(vid) {
+      // Fires while the table actively sits (convoTableSitting) OR once
+      // after it resolves (the run usually ends on a win, so this is the
+      // rare continued run — downgrade paths, or the table answered without
+      // winning). After resolution the sitting predicate is false by design
+      // (the table is gone) — the remark is still owed once per sitting.
+      const pg0 = (typeof this.progState === 'function') ? this.progState() : null;
+      if (!pg0 || !(pg0.tableSittingId | 0)) return null; // never sat this run
+      if (!this.convoTableSitting()) {
+        const T0 = (typeof this.tableState === 'function') ? this.tableState() : {};
+        if (!(pg0.tableDone && T0.phase === 'done')) return null;
+      }
+      const pg = this.progState();
+      const sitting = pg.tableSittingId | 0;
+      const c = this.convoGet(vid);
+      if (!c) return null;
+      const remarked = c.tableRemarked;
+      if (remarked && remarked.sitting === sitting) return null; // said their piece
+      const T = (typeof this.tableState === 'function') ? this.tableState() : {};
+      const deferred = !!T.winDeferred;
+      const waiting = deferred || !!pg.tableWaiting ||
+        (!!pg.tableDone && T.phase && T.phase !== 'done');
+      const resolved = !!pg.tableDone && T.phase === 'done';
+      if (!waiting && !resolved) return null;
+      c.tableRemarked = { sitting: sitting, kind: waiting ? 'waiting' : 'done' };
+      let pool;
+      if (deferred) {
+        pool = [
+          '"The table\'s still sitting up there. Waiting on the days, they say — ninety dawns. We just... live, until then?"',
+        ];
+      } else if (waiting) {
+        pool = [
+          '"The table\'s here. The ring — the light — it\'s just sitting there. Waiting on you."',
+          '"Nobody\'s sleeping. The sky is waiting and nobody knows what to do with their hands. What are you going to tell it?"',
+          '"Did you see their faces? Too many angles. I keep wondering what they want from us."',
+        ];
+      } else {
+        pool = [
+          '"You walked out of the light and came back breathing. Did it work? Is it done?"',
+          '"The light\'s gone. The sky\'s just sky again. Tell me it meant something."',
+        ];
+      }
+      const line = pool[Math.floor(Math.random() * pool.length)];
+      return { line: this.voiceLine(vid, line), thread: 'table' };
     },
 
     convoThreadHasMore(vid) {

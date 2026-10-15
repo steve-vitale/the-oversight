@@ -372,7 +372,11 @@
     // ============ CALLOUS OVERSIGHT ============
     // Reach a good ending having shrugged at every intrusion, and the
     // epilogue paints it. This must sting. The title's new meaning, aloud.
-    podOversightEpilogue() {
+    // opts.deferred (journey-endgame r11 2026-10-14): the win-day floor
+    // deferred this finale — the challenge resolved but the table has not
+    // signed yet. The epilogue must not claim a win that hasn't been
+    // granted; it frames the ending as written, not yet won.
+    podOversightEpilogue(opts) {
       let h = [];
       try {
         const T = (typeof Game.tableState === 'function') ? Game.tableState() : {};
@@ -386,11 +390,18 @@
         if (intrusions < 1 && !h.some(e => e.kind === 'promise')) return false;
         if (asked && !Game.podShrugged()) return false;
       } catch (e) { return false; }
+      const deferred = !!(opts && opts.deferred);
       const lines = [
         '◈ THE OVERSIGHT —',
-        'You won. Say it plainly: you won. The village endures. The table signed. The galaxy applauds, and the applause is real, and you earned it.',
-        'And somewhere out there — past the cameras, past the light — in rows of humming glass, the little ones are still napping.',
       ];
+      if (deferred) {
+        lines.push('Not won yet — the table only waits on time. But the ending is already written: the village endures, the table will sign, and the applause will be real, and you will have earned it.');
+      } else {
+        lines.push('You won. Say it plainly: you won. The village endures. The table signed. The galaxy applauds, and the applause is real, and you earned it.');
+      }
+      lines.push(
+        'And somewhere out there — past the cameras, past the light — in rows of humming glass, the little ones are still napping.',
+      );
       // The accusation is specific: built from what actually happened.
       const did = (k) => h.some(e => e.kind === k);
       const sawIntr = (t) => h.some(e => (e.kind === 'acted' || e.kind === 'shrugged') && e.intrusion === t);

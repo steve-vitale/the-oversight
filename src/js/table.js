@@ -416,6 +416,11 @@
       }
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
+      // TABLE SITTING (journey-endgame r11 2026-10-14): conversations need to
+      // know the table has sat — villagers remark on it once per sitting.
+      // A new sitting starts here; the win-day-floor re-offer is the SAME
+      // sitting (the table never left), so it does not bump.
+      pg.tableSittingId = (pg.tableSittingId | 0) + 1;
       const d = seat.detail || {};
       // MUSIC (Steve 2026-10-12): the table gets its ceremonial bed.
       try { this.music('scenario', 'table'); } catch (e) {}
@@ -983,9 +988,14 @@
         if (asc.length) this.say(`The terms held — the table had priced the village, ascension${asc.length > 1 ? 's' : ''} and all, and the village paid in full.`);
         // PODS WEIGHT (2026-10-11, KIN canon): the history is read here.
         // Shrugged runs curdle (the oversight); jackpot losses are carried.
+        // WIN-DAY-FLOOR DEFERRAL (journey-endgame r11 2026-10-14): the finale
+        // can resolve before day 90 — the epilogue then frames the ending as
+        // written, not yet won, so it never claims a win the table hasn't
+        // granted (the deferral beat follows with the table's own words).
         try {
+          const deferred = (typeof this.winDayFloorOk === 'function') && !this.winDayFloorOk();
           if (typeof this.podJackpotLossEpilogue === 'function') this.podJackpotLossEpilogue();
-          if (typeof this.podOversightEpilogue === 'function') this.podOversightEpilogue();
+          if (typeof this.podOversightEpilogue === 'function') this.podOversightEpilogue(deferred ? { deferred: true } : null);
         } catch (e) {}
       } catch (e) {}
     },
