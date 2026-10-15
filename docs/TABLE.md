@@ -566,7 +566,7 @@ light/dark final (`table-<path>.js`) + ONE build coda from
 - Tokens: `{name}` `{class}` `{god}` `{verb}` `{path}` (the path's name, "the
   Beloved"; not at the start of a sentence). Anything else is a validator error.
 
-### Authoring (Muse)
+### Authoring (Codex lane)
 
 1. `node scripts/validate-table-endings.js --todo` lists the missing codas.
 2. Codas: add `codas["<selector>"].light|dark`, two lines, spare, second
@@ -579,8 +579,18 @@ light/dark final (`table-<path>.js`) + ONE build coda from
 
 Exemplars (2026-10-14): codas `god:one_person_army`, `class:caregiver/keeper`,
 `track:combat`; bespoke Beloved × Showrunner and Defiant × Brawler (beat +
-ending). Coverage: codas 6/70; bespoke endings 4 (optional); beats 4/675
+ending). Coverage (2026-10-15): codas 70/70; bespoke endings 4 (optional); beats 4/675
 bespoke (+448 by template, the rest on the path default).
+
+The actual final choice retains `{title, finalId, label, lines}` in
+`table.resolution`. The ending screen displays those escaped paragraphs
+only for a won run, including the path outcome before the selected coda.
+THE HOSTS retains its full reunion story; pod-demand retains the actual
+price receipt. Rendering does not call the resolver again or depend on the
+log tail. Older finished states without this optional field retain their
+record. The Table sheet consumes its old prompt before queuing the next,
+so door, beat and final choices remain visible. Proof and screenshots:
+`evidence/2026-10-15/coda-audit.md`.
 
 ## File map
 

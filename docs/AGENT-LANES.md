@@ -55,3 +55,15 @@ presence leak in game.js. Absent players were learning or contesting a
 lesson they could not hear. This is a narrow knowledge/parity correction,
 not region/nomad authoring; the targeted proof covers absent and present
 novice/expert cases while preserving NPC false-knowledge spread.
+
+Table-ending verification exception: Codex fixes tableSheet's own click
+lifecycle in app.js. Browser play showed the selected door dropping its
+next prompt because refresh ran while the old same-ID sheet was queued.
+This stays inside the Table UI handoff; generic sheets and Muse's region/
+nomad modules are unchanged.
+
+Table ending-display exception: Codex retains the actually resolved final
+outcome plus build coda in table.js and renders those escaped paragraphs in
+app.js's ending screen. Phone play proved they previously existed only in
+Game.say while the final screen showed a generic record. THE HOSTS and
+pod-demand keep their full base stories, and losses reveal no win text.

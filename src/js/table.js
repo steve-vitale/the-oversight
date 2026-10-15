@@ -866,7 +866,11 @@
       const s = this.state.scholar, pg = this.progState();
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
       const outcome = typeof fin.outcome === 'function' ? fin.outcome.call(this, T) : fin.outcome;
-      this.tableEndingLines(fin.id, outcome).forEach(l => this.say(l));
+      const endingLines = this.tableEndingLines(fin.id, outcome);
+      // Retain exactly what resolved; the final screen must not reroll or
+      // reconstruct the outcome from a later build or a truncated log.
+      T.resolution = { title: def.name, finalId: fin.id, label: fin.label, lines: endingLines.slice() };
+      endingLines.forEach(l => this.say(l));
       // MUSIC (Steve 2026-10-12): endings get their bed — warm or cold.
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) {}
       // Epilogue: hero, facilitator, or outshone — credited honestly.
@@ -941,8 +945,9 @@
     tableResolveHosts(def, branch) {
       const T = this.tableState();
       const s = this.state.scholar;
-      this.tableHostsLines(T.path, branch).forEach(l => this.say(l));
-      this.tableEndingLines('hosts', []).forEach(l => this.say(l));
+      const endingLines = this.tableHostsLines(T.path, branch).concat(this.tableEndingLines('hosts', []));
+      T.resolution = { title: 'THE HOSTS', finalId: 'hosts', label: branch === 'dark' ? 'The New Network' : 'An Open Table', lines: endingLines.slice() };
+      endingLines.forEach(l => this.say(l));
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) { console.warn('hosts music', e); }
       try { const v = this.state.village || {}; v.kidsReturned = true; v.takenReturned = true; } catch (e) { console.warn('hosts village', e); }
       try { if (this.podRemember) this.podRemember('taken-home', { via: 'network' }); } catch (e) { console.warn('hosts pods', e); }
@@ -965,10 +970,14 @@
     tableResolveDemandPrice(price) {
       const T = this.tableState();
       const def = pathDef(T.path);
-      this.say(`◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`);
+      const priceLine = `◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`;
+      this.say(priceLine);
       const lines = (typeof this.podDemandCost === 'function') ? this.podDemandCost(price) : [];
-      (Array.isArray(lines) ? lines : [lines]).forEach(l => this.say(l));
-      this.tableEndingLines('poddemand', []).forEach(l => this.say(l));
+      const costLines = Array.isArray(lines) ? lines : [lines];
+      costLines.forEach(l => this.say(l));
+      const closingLines = this.tableEndingLines('poddemand', []);
+      closingLines.forEach(l => this.say(l));
+      T.resolution = { title: 'THE PODS OPEN', finalId: 'poddemand', label: 'Demanded the pods opened.', lines: [priceLine].concat(costLines, closingLines) };
       if (def) this.tableEpilogue(def, T.branch || 'light', { id: 'poddemand', label: 'Demanded the pods opened.' });
       try { this.recordMoment(`Haven's table path: ${(def || {}).name} (${T.branch}), choice: demanded the pods opened (paid ${price}).`); } catch (e) {}
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}

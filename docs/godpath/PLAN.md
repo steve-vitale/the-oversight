@@ -26,13 +26,24 @@ Job -> track -> **class** -> **god** -> Table.
 - `node scripts/test-godpath-unified-20261014.js` (every verb, through the game)
 - `scripts/godpath/phase.json` is vestigial (no phased checks remain).
 
-## What's left
+## What's left (reconciled 2026-10-15)
 
-1. **Steve: ascension gates.** All on, the capable bot ascends 0/16 runs
-   (before: 6 player / 12 villager). Levers in `godpaths.json rules.capstone`.
-2. Villagers can't use the new active verbs (tbVillagerAbility is id-based);
-   new passive hooks read the player only.
-3. Early kit entries decide which paths appear (6 of 20 subclasses in sims).
-   Kit order is a lever.
-4. god.scale (party/titan/contest/army) is design text; wire per god.
-5. Table endings by class/god x light/dark (COHERENCE-SPINE build order).
+1. **Fitting ascension deeds and current gate measurements.** The historical
+   all-on 0/16 result predates the class-held-for-10-days bridge and wider
+   offers. Current rules still use that placeholder; replace it with fitting
+   deeds and measure the full gates with 64 matched seeds. See ROADMAP item 3.
+2. **Finish the parity audit.** Ten god verbs now have player/villager callers
+   and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
+   subclass active verbs and passive hooks too; the old blanket claim that
+   villagers cannot use any new verb is no longer the current state.
+3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
+   after the documented job lean and offer window. Measure the remaining
+   classes and jobs before another lever; survival targets are flexible.
+4. **Finish god.scale reconciliation.** Party/titan effects are partly wired;
+   compare every promised contest/army/party/titan effect with actual callers
+   and prove remaining gaps. Do not treat all design text as already working.
+5. **Done: Table build codas.** All 70 light/dark codas are authored and
+   reachable; the Table sheet handoff and final-screen rendering are wired.
+   Prepared 595-case/70-choice proofs, actual mobile play and matched natural
+   screens are in `evidence/2026-10-15/coda-audit.md`. Optional bespoke path
+   beats/overrides remain optional; narrative feel needs Steve's eyes.

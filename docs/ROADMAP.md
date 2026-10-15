@@ -275,7 +275,7 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
 15 Table wins, 71 to 63 bearer deaths). See
 `evidence/2026-10-15/region-livelihood-audit.md`; maintain the playstyle audit.
 
-### 2. Table ending codas (64 left)
+### 2. Table ending codas (complete, 2026-10-15)
 - **Spec:** `docs/TABLE.md`, "Endings by build". Write in this order:
   1. god codas (20)
   2. class codas (40)
@@ -283,6 +283,16 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
 - **Voice:** spare and second person, matching the 6 samples. A coda must read
   right after any of the seven paths' finals. `{path}` is lowercase "the …".
 - **Tool:** `node scripts/validate-table-endings.js --todo`
+- **Complete:** all 70 light/dark codas (10 gods, 20 subclasses, 5 tracks),
+  including noncombat builds. Bespoke path overrides retain priority. The
+  actual Table sheet now advances between choices, and the final screen
+  renders the resolved path outcome plus one coda. THE HOSTS and pod-demand
+  retain their base stories. Prepared coverage: 595 selector/path/moral
+  cases and 70 actual final choices; real phone Gardener/Assimilated ending.
+  Matched 16-seed capable/maker screens preserve all standard outcome fields
+  (9 and 6 wins respectively), while 15 formerly generic wins gain codas.
+  Narrative voice remains needs-eyes. See `evidence/2026-10-15/coda-audit.md`.
+  Optional bespoke beats/overrides are not a missing-coda backlog.
 
 ### 3. God deeds (replace the placeholder)
 - **Now:** "held the class for 10 days" counts as the god's deed

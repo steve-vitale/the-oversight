@@ -14104,7 +14104,14 @@
       buttons: tc.options.map(o => ({
         label: '<b>' + esc(o.label) + '</b>',
         primary: true, hidden: true,
-        onClick: () => { Game.chooseTableOption(o.id); refresh(); },
+        onClick: () => {
+          // Consume this prompt before refresh queues its same-ID successor.
+          // The generic dispatcher must then leave that new sheet open.
+          closeSheet('the-table');
+          Game.chooseTableOption(o.id);
+          refresh();
+          return 'keep';
+        },
       })),
       priority: 100, modal: true, dismissible: false,
     });
@@ -18962,10 +18969,14 @@
         return `<p class="small">🕯️ ${nm} — ${dstr}${tail}</p>`;
       }).join('') + `</div>`
       : '';
+    // Read the final that actually resolved, never a fresh lookup or log tail.
+    const resolution = st.won && ((Game.state.scholar.prog || {}).table || {}).resolution;
+    const storyHtml = resolution && Array.isArray(resolution.lines)
+      ? `<div class="card"><h3>At the Table</h3>${resolution.lines.map(line => `<p>${esc(line)}</p>`).join('')}</div>` : '';
     let endTitle, sub, record;
     if (st.won) {
-      endTitle = String(last.epithet || 'the ending').toUpperCase();
-      sub = 'The village endures. The Codex closes on a story the galaxy will retell.';
+      endTitle = String((resolution && resolution.title) || last.epithet || 'the ending').toUpperCase();
+      sub = (resolution && resolution.label) || 'The village endures. The Codex closes on a story the galaxy will retell.';
       record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}`;
     } else if (last.outcome === 'table-lost') {
       endTitle = 'THE TABLE CLOSES';
@@ -18984,6 +18995,7 @@
       ${bar('scattering://end', st.won ? 'survived' : last.outcome === 'table-lost' ? 'no agreement' : 'fallen')}
       <h1 class="title" style="font-size:26px">${esc(endTitle)}</h1>
       <p class="small">${esc(sub)}</p>
+      ${storyHtml}
       <div class="card"><h3>Expedition record</h3>
         <p class="small">${record}</p></div>
       ${chainHtml}
