@@ -48,4 +48,20 @@ panel.rows[0].gardenCoverage.errors = [];
 panel.rows[0].gardenCoverage.days[0].book = {};
 rejected = false; try { summarize(panel); } catch (e) { rejected = /unknown/.test(e.message); }
 T.ok('a source with no observed intake cannot report zero coverage as a finding', rejected);
+const required = [{ ...person('a'), bearer: true }, person('b')];
+const settled = { eater: 'b', ate: 2000, drawn: 100, gave: 0, fasting: false,
+  demand: { need: 2000, produced: 1900, ownEat: 1900, communalWant: 100, requested: 100, away: false } };
+T.ok('NPC demand explicitly excludes the bearer budget', C.mealDemand(required, [settled]).known && C.mealDemand(required, [settled]).people.length === 1);
+T.ok('missing settlement is unknown rather than zero demand', !C.mealDemand(required, []).known && C.mealDemand(required, []).unknown.includes('b'));
+T.ok('duplicate settlements cannot be pooled', !C.mealDemand(required, [settled, settled]).known);
+T.ok('nonfinite demand is rejected', !C.mealDemand(required, [{ ...settled, demand: { ...settled.demand, need: NaN } }]).known);
+const diagnostic = { sourcesStable: true, policies: ['maker'], seeds: [7], rows: [{ row: { policy: 'maker', seed: 7 }, warnings: [], gardenCoverage: { errors: [], days: [{ day: 7, closed: true, dawn: required, before: required, atMeal: required, after: required, meals: [settled], book: { b: { harvestKcal: { a: 100 }, harvestNourishment: { a: 100 } } } }] } }] };
+let stats=summarize(diagnostic).policies[0];
+T.ok('covering a real shortfall is distinct from providing a full NPC diet', stats.npcRequested===1 && stats.npcActualNeed===0 && stats.npcNeedKcal===2000 && stats.npcOwnKcal===1900);
+diagnostic.rows[0].gardenCoverage.days[0].meals=[{...settled, fasting:true, drawn:0, demand:{...settled.demand,requested:0}}];
+stats=summarize(diagnostic).policies[0];
+T.ok('a fast with no request cannot make whole-village request coverage vacuously succeed', stats.npcFastingMeals===1 && stats.npcZeroRequestMeals===1 && stats.npcRequested===0 && stats.allNpcHaveRequestDays===0);
+delete diagnostic.rows[0].gardenCoverage.days[0].meals;
+stats=summarize(diagnostic).policies[0];
+T.ok('historical panels preserve unknown actual demand', stats.demandUnknownDays===1 && stats.demandKnownDays===0);
 T.done();

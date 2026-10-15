@@ -32,10 +32,33 @@ function coverage(dawn, settlement, book, intermediate = []) {
         minimumNourishment: portions.length ? Math.min(...portions.map(p => p.nourishment)) : null };
     }) };
 }
+function mealDemand(required, meals = []) {
+  const npcs = required.filter(p => !p.bearer), unknown = [], people = [];
+  for (const p of npcs) {
+    const rows = meals.filter(m => m.eater === p.id), m = rows[0], d = m?.demand;
+    if (rows.length !== 1 || !d || ![d.need, d.produced, d.ownEat, d.communalWant, d.requested, m.drawn, m.ate].every(Number.isFinite) ||
+        d.need <= 0 || d.ownEat < 0 || d.ownEat > d.need || d.requested < 0 || typeof m.fasting !== 'boolean' || typeof d.away !== 'boolean') {
+      unknown.push(p.id); continue;
+    }
+    people.push({ eater: p.id, ...d, drawn: m.drawn, ate: m.ate, fasting: m.fasting,
+      unmet: Math.max(0, d.need - m.ate) });
+  }
+  return { known: npcs.length > 0 && !unknown.length, unknown, people };
+}
 function install(G) {
-  const days = [], errors = [];
+  const days = [], errors = [], meals = new Map();
   let dawn = roster(G), atMeal = null, depth = 0;
-  const eats = G.villageEats, end = G.endDay;
+  const eats = G.villageEats, end = G.endDay, meal = G.villagerMealDay;
+  if (meal) G.villagerMealDay = function (vid) {
+    const day = this.state.scholar.day;
+    const result = meal.apply(this, arguments);
+    try {
+      if (!meals.has(day)) meals.set(day, []);
+      meals.get(day).push({ eater: vid, ate: result.ate, drawn: result.drawn,
+        gave: result.gave, fasting: result.fasting, demand: result.demand ? clone(result.demand) : null });
+    } catch (e) { errors.push('meal demand: ' + e.message); }
+    return result;
+  };
   G.villageEats = function () {
     try { atMeal = roster(this); } catch (e) { errors.push('meal roster: ' + e.message); }
     return eats.apply(this, arguments);
@@ -53,8 +76,9 @@ function install(G) {
         const book = clone(village.harvestIntake?.[day] || {});
         const after = roster(this, village);
         days.push({ day, closed: completed && this.state.scholar.day > day && this.state.village === village,
-          dawn: clone(dawn), before, atMeal, after, book,
+          dawn: clone(dawn), before, atMeal, after, book, meals: meals.get(day) || [],
           ...coverage(dawn, after, book, [before, ...(atMeal ? [atMeal] : [])]) });
+        meals.delete(day);
         dawn = roster(this);
       } catch (e) { errors.push('day closure: ' + e.message); }
       depth--;
@@ -62,4 +86,4 @@ function install(G) {
   };
   return { days, errors };
 }
-module.exports = { roster, coverage, install };
+module.exports = { roster, coverage, mealDemand, install };

@@ -1,0 +1,16 @@
+  ok   real home meal reports the computed healthy need
+  ok   real own-food production is distinct from communal demand
+  ok   actual eaten total conserves own-food and communal draw
+  ok   personal-work intake agrees with the returned own-food amount
+  ok   injured meal reports health-adjusted need rather than nominal diet
+  ok   longhouse meal reports the real hearth reduction
+  ok   away meal does not invent a home hearth reduction
+  ok   ration wrapper reports the effective half-ration need
+  ok   ration wrapper restores the persons normal daily budget
+  ok   empty stores do not erase an actual communal request
+  ok   self-sufficient meal retains need but has no communal opportunity
+  ok   a real voluntary fast has zero request without erasing physiological need
+  ok   observer snapshots the returned demand without keeping mutable references
+  ok   duplicate meals are unknown instead of pooled into a daily demand
+
+village-meal-demand: 14 passed, 0 failed, 0 todo (phase 0)

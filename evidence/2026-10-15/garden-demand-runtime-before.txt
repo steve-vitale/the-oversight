@@ -1,0 +1,17 @@
+  FAIL real home meal reports the computed healthy need
+  FAIL real own-food production is distinct from communal demand
+  FAIL actual eaten total conserves own-food and communal draw
+  FAIL personal-work intake agrees with the returned own-food amount
+  FAIL injured meal reports health-adjusted need rather than nominal diet
+  FAIL longhouse meal reports the real hearth reduction
+  FAIL away meal does not invent a home hearth reduction
+  FAIL ration wrapper reports the effective half-ration need
+  ok   ration wrapper restores the persons normal daily budget
+  FAIL empty stores do not erase an actual communal request
+  FAIL self-sufficient meal retains need but has no communal opportunity
+  FAIL a real voluntary fast has zero request without erasing physiological need
+  FAIL observer snapshots the returned demand without keeping mutable references
+  ok   duplicate meals are unknown instead of pooled into a daily demand
+
+village-meal-demand: 2 passed, 12 failed, 0 todo (phase 0)
+failing: real home meal reports the computed healthy need | real own-food production is distinct from communal demand | actual eaten total conserves own-food and communal draw | personal-work intake agrees with the returned own-food amount | injured meal reports health-adjusted need rather than nominal diet | longhouse meal reports the real hearth reduction | away meal does not invent a home hearth reduction | ration wrapper reports the effective half-ration need | empty stores do not erase an actual communal request | self-sufficient meal retains need but has no communal opportunity | a real voluntary fast has zero request without erasing physiological need | observer snapshots the returned demand without keeping mutable references

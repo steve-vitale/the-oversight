@@ -70,7 +70,13 @@ Job -> track -> **class** -> **god** -> Table.
    leaves 60/80 hunger; 2,000 kcal fills it. The 64-seed feeder panel flags
    wins 31 -> 29 and community losses 8 -> 11 for review; default controls
    are identical. See garden-gift-budget-audit.md. Exact meal demand and
-   communal serving opportunities remain needed before authoring the gate.
+   communal serving opportunities were the next measurement gap.
+   Actual NPC meal demand is now observed at settlement, including health,
+   hearth, rationing, personal production and chosen fasting. The targeted
+   16-seed feeder cohort has 1,673 stable village-days and 14,916 NPC meals;
+   only eight days have requests from every NPC. This is opportunity evidence,
+   not an authored gate or a complete bearer/continuous-membership ledger.
+   See `evidence/2026-10-15/garden-demand-audit.md`.
    The seven-day authored deed remains next. See
    `evidence/2026-10-15/feast-outcome-audit.md` and `feast-host-audit.md`.
    See `evidence/2026-10-15/harvest-source-audit.md` and the earlier

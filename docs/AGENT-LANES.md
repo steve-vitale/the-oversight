@@ -160,3 +160,9 @@ Phone play showed 250 kcal clearing 80 hunger while the receipt correctly
 recorded only 250 kcal. This is a narrow actual-feeding/parity correction,
 with a dedicated public-action feeder policy, not a Garden threshold change
 or work in Muse's region/nomad/systems lane.
+
+Garden demand diagnostic exception (2026-10-15): Codex adds detached return
+fields to the existing game.js NPC meal settlement and reads them in the
+Garden observer. No production, need, hunger, draw, cost or gate rule changes.
+This settles the known daily-demand measurement gap before the Garden deed;
+it does not claim exact continuous membership or player energy requirements.

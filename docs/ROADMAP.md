@@ -10,7 +10,9 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 ## 0. Every session
 
 **Measurement priority (Steve, 2026-10-15):** optimize against a balanced set
-of telemetry, not win rate alone. Follow `docs/MEASUREMENT-PLAN.md` and the
+of telemetry, not win rate alone. Winning should be difficult; win-rate
+changes prompt investigation in either direction, not an automatic regression
+or improvement judgment. Keep `docs/SURVIVAL-LEVERS.md` current. Follow `docs/MEASUREMENT-PLAN.md` and the
 balanced-scorecard commands in `docs/SIMULATING.md`. Keep per-playstyle survival,
 community, food/water, earned gear, progression, feature use and ending outcomes
 visible. The resumable runner, paired comparator and shard merger are tooling;
@@ -312,6 +314,15 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   Optional bespoke beats/overrides are not a missing-coda backlog.
 
 ### 3. God deeds (replace the placeholder)
+
+Actual NPC food-demand diagnostic (2026-10-15): meal settlement now returns
+its computed need, personal production and actual communal request without
+changing meal rules. Garden coverage distinguishes actual NPC diets from
+post-production requests; legacy missing data remains unknown. Targeted
+16-seed feeder evidence: 1,673 stable village-days, 14,916 NPC meals, about 95%
+of need self-supplied and only eight days where every NPC requests food.
+This does not settle Garden's seven-day threshold, continuous membership or
+the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
 - **Now:** Unkillable has the first authored outcome deed: really refuse a
   fatal blow through your own survival magic, then reach a later dawn alive.
   Per-person receipts and a known-class objective are wired and tested.

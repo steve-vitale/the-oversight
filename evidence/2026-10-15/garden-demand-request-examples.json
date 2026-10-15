@@ -1,0 +1,74 @@
+[
+  {
+    "policy": "maker",
+    "seed": 9,
+    "day": 138,
+    "owner": "yara_haddad",
+    "required": [
+      {
+        "id": "yara_haddad",
+        "known": true,
+        "bearer": false,
+        "nominalKcal": 1900
+      },
+      {
+        "id": "emma_larsen",
+        "known": true,
+        "bearer": true,
+        "nominalKcal": 2000
+      }
+    ],
+    "meals": [
+      {
+        "eater": "yara_haddad",
+        "ate": 1499.8214853947984,
+        "drawn": 485,
+        "gave": 0,
+        "fasting": false,
+        "demand": {
+          "nominalKcal": 1900,
+          "need": 1330,
+          "produced": 1014.8214853947983,
+          "ownEat": 1014.8214853947983,
+          "communalWant": 315.1785146052017,
+          "requested": 315.1785146052017,
+          "away": false
+        }
+      }
+    ],
+    "book": {
+      "emma_larsen": {
+        "kcal": 364,
+        "nourishment": 220,
+        "harvestKcal": {},
+        "harvestNourishment": {},
+        "routes": {
+          "pantry": {
+            "kcal": 364,
+            "nourishment": 220
+          }
+        }
+      },
+      "yara_haddad": {
+        "kcal": 1499.8214853947984,
+        "nourishment": 1330,
+        "harvestKcal": {
+          "yara_haddad": 485
+        },
+        "harvestNourishment": {
+          "yara_haddad": 315.1785146052017
+        },
+        "routes": {
+          "personal-work": {
+            "kcal": 1014.8214853947983,
+            "nourishment": 1014.8214853947983
+          },
+          "pantry": {
+            "kcal": 485,
+            "nourishment": 315.1785146052017
+          }
+        }
+      }
+    }
+  }
+]

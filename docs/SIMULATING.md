@@ -364,3 +364,28 @@ phone care controls, run the dated garden-gift-phone-fixture.cjs generator and
 serve its .git page with ?debug=1 on a fresh loopback origin. The PWA's offline
 cache can retain old scripts on reload; verify the displayed gift description
 before testing a change. Do not bump the release/SW version for a local test.
+
+## Garden actual meal demand
+
+`deed-screen.js` observes the detached `villagerMealDay().demand` result at the
+actual call. `garden-coverage-report.js` separates physiological NPC meal need,
+personal-work food, communal request, actual draw, fasting and no-request meals.
+`nominalKcal` in that return is the effective basis inside the ration wrapper;
+the person record is restored afterward. The request is zero on a chosen fast
+or when the post-production gap is at most 50 kcal, matching the existing draw
+rule. `unmet` compares need with the meal's `ate` result, including any spoiled
+food that settlement counts; it is not a separate nutrient-quality measure.
+Source-attributed nourishment remains distinct from food physically consumed.
+
+Missing or duplicate NPC settlements are unknown, not zero need. NPC demand
+excludes the bearer, whose activity/food bank needs a separate denominator.
+The report requires positive requests from every NPC before counting coverage
+of every request, so a no-request village cannot pass by vacuous truth. This
+view describes an opportunity and does not author an ascension threshold.
+Dawn/pre/meal/post membership snapshots still cannot prove continuous presence.
+
+Run the existing deed-screen/report commands with a named policy cohort; retain
+observer-off controls and match standard rows/full gameplay hashes against the
+balanced panel. The runtime demand return is additive metadata, not saved state
+or new telemetry. Never infer new demand fields from historical nominal diets.
+See `evidence/2026-10-15/garden-demand-audit.md`.

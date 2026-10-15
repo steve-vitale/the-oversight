@@ -27287,7 +27287,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // villagerMealDay(vid, person, v, ctx): one villager's whole day of
     // eating — the individual behind the old collective drain. Returns
-    // {ate, gave}. They eat what they catch first, then stores: pantry at
+    // {ate, gave, drawn, fasting, demand}. demand reports the exact computed
+    // need, own food and communal request; it changes no settlement rules.
+    // They eat what they catch first, then stores: pantry at
     // home (best-fit real items, village-cooked), pack rations away.
     // THE DAY'S FOOD IS DRAWN ONCE — one best-fit pass, one rounding — the
     // same honest accounting the old communal pass had. The meals below are
@@ -27460,7 +27462,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`${first} went to sleep hungry. Nobody says anything.`);
         }
       }
-      return { ate, gave, drawn: pile.taken, fasting };
+      return { ate, gave, drawn: pile.taken, fasting,
+        demand: { nominalKcal: person.kcalPerDay || 2000, need, produced, ownEat,
+          communalWant: dayWant, requested: !fasting && dayWant > 50 ? dayWant : 0, away } };
     },
 
     // hostFeast(opts) + feastPlan(): the feast as a RITUAL (feast-surge

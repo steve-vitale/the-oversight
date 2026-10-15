@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "02f07158adc695f16d411892ee86be93f9207164",
+  "matchedCases": 80,
+  "standardRowsExact": 80,
+  "fullGameplayHashesExact": 80,
+  "metricVectorsExact": 80,
+  "deedObserverMatchesBalanced": 80,
+  "balancedNeutralPairs": 10,
+  "deedNeutralPairs": 5,
+  "baselineRuntime": {
+    "pass": 2,
+    "fail": 12
+  },
+  "runtimeAssertions": 14,
+  "observerAssertions": 24,
+  "checks": {
+    "quick": [
+      158,
+      158
+    ],
+    "full": [
+      930,
+      930
+    ]
+  },
+  "eligibleVillageDays": 8191,
+  "npcMeals": 70441,
+  "gateChanged": false,
+  "limitations": [
+    "NPC-only demand; bearer budget is separate",
+    "Snapshot membership is not continuous membership",
+    "Threshold is not authored",
+    "Not a balance-effect estimate"
+  ],
+  "artifactHashRule": "SHA-256; text canonical LF, gzip exact bytes",
+  "artifactSha256": {
+    "garden-demand-audit.md": "e4f1325537447dfd5303ee82e8d785405a7f7f11c4e1e5f93f737d0497c36d78",
+    "garden-demand-balance-after.json.gz": "54ee7d7cbdd5d8bc53d7674fae3839e91298c7d3ec2263909b00f1667401153c",
+    "garden-demand-balance-before.json.gz": "678e29aee2a447087c348b5577078e2a8e4ebf65293ab16a9e2fc11f969577a8",
+    "garden-demand-balance-comparison.json": "cd975a033542e6d0b0d7eb36d1790b942d655cbcde31747f69227cfc560b09f6",
+    "garden-demand-balance-comparison.md": "386ef22a7acfc4d50e14185a4d7048f3f29db5269728947ceeb938f657695ade",
+    "garden-demand-balanced-controls.json.gz": "09f7442246f13967d5a17ce1a2f7448591e55b02b0ffcb93a73c275b21f1f852",
+    "garden-demand-deeds.json.gz": "31a0341f75463e87a0d4c9f3180400060bf26f310478af245517c6c3584d67c3",
+    "garden-demand-full.txt": "30ee09e59a883d86be22cc5533f990d630768b0f3228e81500ba636860ca8f5a",
+    "garden-demand-observer-off.json.gz": "b6e62f5da4eb3193824fae0d889b33dcbfa432f2df9c262792aa1a237a2e9fe8",
+    "garden-demand-quick.txt": "5fca3ddc02694a63c3c841bf3a51e7883ffcbaffb0acbff489ebcd26c535d4b4",
+    "garden-demand-report.json": "2b0c097a2203dde909d7983e4aadf48fa46b8f2de4cbd33c901e96969af0f0ae",
+    "garden-demand-report.md": "bf66b43e928a1869dd3d6c136af6c474b3d3de4b6e76a4b557a98b0acd7e5688",
+    "garden-demand-request-examples.json": "6aea73a8b9542e5e1352d0c61541af0922895446f0df41a6167e92cc0577e3d4",
+    "garden-demand-runtime-after.txt": "d6eecc3faa72371d3c75bc708d1442f907d0218946a941402245e859007a4fdd",
+    "garden-demand-runtime-before.txt": "7a69b939cc39a8f0a112ace5d5e033b4a7c45e7f41b5e1fe50367e1f9fa61a0c",
+    "garden-demand-sources.json.gz": "53c66769f462a381b85794f1be1bc81765a082304cbf6d9d77b8eafca5b93cf4"
+  }
+}
