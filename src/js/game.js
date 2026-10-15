@@ -21107,8 +21107,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // The aliens finally notice they forgot survival basics.
     // Interface shifts: journal -> game overlay. Abilities unlock.
     // Timed events: challenges, new monsters, world-building drama.
-    // systemArrivalBeats: the Day 7 cinematic script, STAGED. Each beat lands
-    // before the next starts — trailer pacing, tap to continue. The System is
+    // systemArrivalBeats: the day-8-dawn cinematic script, STAGED. (Fires on
+    // the sleep ending day 7 — the player wakes on day 8, after a full week.
+    // The old header said "Day 7" while the event observably fires day 8;
+    // the fiction now matches the clock. Journey landing r15 2026-10-14.)
+    // Each beat lands before the next starts — trailer pacing, tap to
+    // continue. The System is
     // joyous, genuinely trying its best, and deeply out of touch.
     // FICTION GUARDRAIL: the System NEVER displays correct understanding of
     // human nutritional needs, cooking, or food spoilage. If it references
@@ -21122,9 +21126,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const w1 = (this.state.scholar || {}).week1 || {};
       const beats = [
         {
-          id: 'glitch', kicker: 'day 7 — dawn', button: '…hello?',
+          id: 'glitch', kicker: 'day 8 — dawn', button: '…hello?',
           lines: [
-            { who: 'narr', text: 'Day 7. Dawn. The sky glitches.' },
+            { who: 'narr', text: 'Day 8. Dawn. The sky glitches.' },
             { who: 'narr', text: 'Not clouds. Interface. Windows scrolling across the blue, too fast to read.' },
             { who: 'narr', text: 'Then — a voice. Behind your eyes. Bright. Delighted. Utterly wrong.' },
           ],

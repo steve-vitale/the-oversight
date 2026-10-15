@@ -1089,7 +1089,13 @@
         try {
           const day = (Game.state.scholar || {}).day || 0;
           const c = this.convoGet(vid);
-          if ((c.takenWantDay || 0) >= day - 3) return 0;
+          // SENTINEL FIX (journey landing r15 2026-10-14): takenWantDay is
+          // unset (0) until the want first fires — and 0 >= day-3 is TRUE on
+          // days 1-3, so the "never twice in three days" gate hard-blocked
+          // the want for the entire opening window. Only gate when a draw
+          // actually happened.
+          const lastDraw = c.takenWantDay || 0;
+          if (lastDraw > 0 && lastDraw >= day - 3) return 0;
           if (!this.takenKinOf || !this.takenKinOf(vid).length) return 0;
           return 2;
         } catch (e) { return 0; }
@@ -1493,6 +1499,17 @@
           if (id === 'curious') w = Math.max(w, 3);
           else if (id === 'ask_favor' && w > 0 && w < 4) w = w * 0.4;
         }
+        // GRIEF FLOOR (journey landing r15 2026-10-14): the Taking is the
+        // run's central grief (KIN.md) and seek_taken is the villagers' only
+        // voice for it — but ask_favor's urgency (2-4) starved it on every
+        // repeat sitting whenever any real need existed (0/48 conversations
+        // + 0/4 forced repeat sittings across 4 seeds). First meetings stay
+        // curiosity-led (2026-10-11 gaps call). On repeat meetings an
+        // eligible seek_taken gets a floor of 3.1: it beats chronic needs
+        // (urgency <= 3) but still yields to acute ones (urgency 4:
+        // starving, sick, wounded — that's human). The want's own
+        // never-twice-in-three-days gate keeps it from dominating.
+        if (!firstMeeting && id === 'seek_taken' && w > 0) w = Math.max(w, 3.1);
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }
