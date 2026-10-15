@@ -332,9 +332,12 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   probation meals. Real ration returns are excluded until later eaten.
   Runtime 37/37, full 923/923; 256 matched standard results remain identical
   (124 wins / 229 player deaths). The seven-day authored gate remains open.
-  Actual phone feast exposes a reward gap: 5,000 pantry kcal spent, host
-  reserve unchanged at 1,000/2,400. Repair host nourishment, then settle and
-  measure village coverage. See `evidence/2026-10-15/harvest-intake-audit.md`.
+  The exposed host-food gap is now repaired: actual phone reserve rises
+  1,000 -> 1,416.67 from the paid 5,000/12-kcal serving. Runtime proof 15/15,
+  full 924/924. Matched 256 campaigns worsen 124 -> 114 wins and
+  229 -> 256 deaths; retain that needs-eyes result, not a viability claim.
+  Settle whole-village coverage and investigate paired ending losses next.
+  See `evidence/2026-10-15/feast-host-audit.md` and the prior intake audit.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

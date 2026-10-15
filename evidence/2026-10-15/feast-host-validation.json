@@ -1,0 +1,827 @@
+{
+  "baseline": "harvest-intake-after-64.json.gz",
+  "baselineRuntimeCommit": "0eb727a495f8b2fac4c1903981005512d2155e63",
+  "beforeCommit": "ddfbd5d0a43b54188881cbc88510567162af096c",
+  "candidateCodeCommit": "f8e633c5ad35b7b31d8ea10dce05beca44fefb67",
+  "screen": {
+    "before": {
+      "runs": 64,
+      "wins": 38,
+      "entered": 40,
+      "playerDeaths": 50,
+      "deathCauses": {
+        "player:the expedition": 2,
+        "player:starvation": 3,
+        "player:combat": 39,
+        "player:the night": 2,
+        "player:dehydration": 3,
+        "player:sickness": 1
+      },
+      "warnings": 0,
+      "feastConsumedKcal": 1720315.4154761904,
+      "feastNourishment": 1433492.2485569986
+    },
+    "after": {
+      "runs": 64,
+      "wins": 31,
+      "entered": 35,
+      "playerDeaths": 63,
+      "deathCauses": {
+        "player:the expedition": 1,
+        "player:combat": 50,
+        "player:starvation": 6,
+        "player:dehydration": 5,
+        "player:the night": 1
+      },
+      "warnings": 0,
+      "feastConsumedKcal": 1692784.361111111,
+      "feastNourishment": 1445836.344191919
+    },
+    "policies": {
+      "capable": {
+        "before": {
+          "runs": 16,
+          "wins": 12,
+          "entered": 13,
+          "playerDeaths": 16,
+          "deathCauses": {
+            "player:the expedition": 1,
+            "player:starvation": 1,
+            "player:combat": 9,
+            "player:the night": 2,
+            "player:dehydration": 2,
+            "player:sickness": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 321153.0972222222,
+          "feastNourishment": 266192.34920634923
+        },
+        "after": {
+          "runs": 16,
+          "wins": 11,
+          "entered": 13,
+          "playerDeaths": 15,
+          "deathCauses": {
+            "player:the expedition": 1,
+            "player:combat": 11,
+            "player:starvation": 1,
+            "player:dehydration": 2
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 291367.98333333334,
+          "feastNourishment": 244182.21507936507
+        }
+      },
+      "maker": {
+        "before": {
+          "runs": 16,
+          "wins": 7,
+          "entered": 7,
+          "playerDeaths": 12,
+          "deathCauses": {
+            "player:combat": 11,
+            "player:starvation": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 491104.45,
+          "feastNourishment": 413211.1172077922
+        },
+        "after": {
+          "runs": 16,
+          "wins": 6,
+          "entered": 6,
+          "playerDeaths": 16,
+          "deathCauses": {
+            "player:combat": 12,
+            "player:dehydration": 2,
+            "player:starvation": 2
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 494111.84285714285,
+          "feastNourishment": 426406.2128427128
+        }
+      },
+      "merchant": {
+        "before": {
+          "runs": 16,
+          "wins": 9,
+          "entered": 9,
+          "playerDeaths": 13,
+          "deathCauses": {
+            "player:combat": 12,
+            "player:the expedition": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 469042.5206349206,
+          "feastNourishment": 391334.05039682536
+        },
+        "after": {
+          "runs": 16,
+          "wins": 6,
+          "entered": 6,
+          "playerDeaths": 23,
+          "deathCauses": {
+            "player:combat": 20,
+            "player:dehydration": 1,
+            "player:the night": 1,
+            "player:starvation": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 451713.1873015873,
+          "feastNourishment": 382800.1777777778
+        }
+      },
+      "caregiver": {
+        "before": {
+          "runs": 16,
+          "wins": 10,
+          "entered": 11,
+          "playerDeaths": 9,
+          "deathCauses": {
+            "player:starvation": 1,
+            "player:dehydration": 1,
+            "player:combat": 7
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 439015.3476190476,
+          "feastNourishment": 362754.7317460317
+        },
+        "after": {
+          "runs": 16,
+          "wins": 8,
+          "entered": 10,
+          "playerDeaths": 9,
+          "deathCauses": {
+            "player:starvation": 2,
+            "player:combat": 7
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 455591.3476190476,
+          "feastNourishment": 392447.7384920635
+        }
+      }
+    },
+    "winChanges": [
+      {
+        "policy": "capable",
+        "seed": 42,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 5,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 8,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 2026,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 1,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 8,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "caregiver",
+        "seed": 9,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 555,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 31337,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 1,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 42,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 99,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 1234,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 5,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 6,
+        "before": 1,
+        "after": 0
+      }
+    ]
+  },
+  "matrix": {
+    "before": {
+      "runs": 256,
+      "wins": 124,
+      "entered": 134,
+      "playerDeaths": 229,
+      "deathCauses": {
+        "player:the expedition": 4,
+        "player:starvation": 17,
+        "player:combat": 185,
+        "player:the night": 3,
+        "player:dehydration": 11,
+        "player:sickness": 7,
+        "player:lockjaw": 2
+      },
+      "warnings": 0,
+      "feastConsumedKcal": 6779098.068326118,
+      "feastNourishment": 5668308.5505772
+    },
+    "after": {
+      "runs": 256,
+      "wins": 114,
+      "entered": 131,
+      "playerDeaths": 256,
+      "deathCauses": {
+        "player:the expedition": 2,
+        "player:combat": 207,
+        "player:starvation": 21,
+        "player:dehydration": 17,
+        "player:sickness": 5,
+        "player:lockjaw": 2,
+        "player:contest": 1,
+        "player:the night": 1
+      },
+      "warnings": 0,
+      "feastConsumedKcal": 6910242.006601731,
+      "feastNourishment": 5957770.570418471
+    },
+    "policies": {
+      "capable": {
+        "before": {
+          "runs": 64,
+          "wins": 48,
+          "entered": 52,
+          "playerDeaths": 76,
+          "deathCauses": {
+            "player:the expedition": 1,
+            "player:starvation": 5,
+            "player:combat": 54,
+            "player:the night": 3,
+            "player:dehydration": 5,
+            "player:sickness": 7,
+            "player:lockjaw": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1310613.446031746,
+          "feastNourishment": 1086001.9443001442
+        },
+        "after": {
+          "runs": 64,
+          "wins": 45,
+          "entered": 52,
+          "playerDeaths": 89,
+          "deathCauses": {
+            "player:the expedition": 1,
+            "player:combat": 68,
+            "player:starvation": 8,
+            "player:dehydration": 6,
+            "player:sickness": 5,
+            "player:lockjaw": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1271218.5734126985,
+          "feastNourishment": 1078822.9594516593
+        }
+      },
+      "maker": {
+        "before": {
+          "runs": 64,
+          "wins": 21,
+          "entered": 23,
+          "playerDeaths": 59,
+          "deathCauses": {
+            "player:combat": 49,
+            "player:starvation": 8,
+            "player:dehydration": 1,
+            "player:the expedition": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1861946.4638167387,
+          "feastNourishment": 1561095.04512987
+        },
+        "after": {
+          "runs": 64,
+          "wins": 20,
+          "entered": 24,
+          "playerDeaths": 62,
+          "deathCauses": {
+            "player:combat": 48,
+            "player:dehydration": 5,
+            "player:starvation": 8,
+            "player:contest": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1981562.5471500722,
+          "feastNourishment": 1704677.7764430013
+        }
+      },
+      "merchant": {
+        "before": {
+          "runs": 64,
+          "wins": 27,
+          "entered": 29,
+          "playerDeaths": 50,
+          "deathCauses": {
+            "player:combat": 45,
+            "player:the expedition": 2,
+            "player:dehydration": 2,
+            "player:starvation": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1775588.6342712843,
+          "feastNourishment": 1489908.9102092353
+        },
+        "after": {
+          "runs": 64,
+          "wins": 26,
+          "entered": 28,
+          "playerDeaths": 62,
+          "deathCauses": {
+            "player:combat": 56,
+            "player:dehydration": 3,
+            "player:the night": 1,
+            "player:starvation": 2
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1769268.3443722944,
+          "feastNourishment": 1533059.8338023087
+        }
+      },
+      "caregiver": {
+        "before": {
+          "runs": 64,
+          "wins": 28,
+          "entered": 30,
+          "playerDeaths": 44,
+          "deathCauses": {
+            "player:starvation": 3,
+            "player:dehydration": 3,
+            "player:combat": 37,
+            "player:lockjaw": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1830949.5242063492,
+          "feastNourishment": 1531302.650937951
+        },
+        "after": {
+          "runs": 64,
+          "wins": 23,
+          "entered": 27,
+          "playerDeaths": 43,
+          "deathCauses": {
+            "player:starvation": 3,
+            "player:combat": 35,
+            "player:dehydration": 3,
+            "player:the expedition": 1,
+            "player:lockjaw": 1
+          },
+          "warnings": 0,
+          "feastConsumedKcal": 1888192.5416666665,
+          "feastNourishment": 1641210.0007215007
+        }
+      }
+    },
+    "winChanges": [
+      {
+        "policy": "capable",
+        "seed": 42,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 5,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 8,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 12,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 29,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 32,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 35,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 37,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 38,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "capable",
+        "seed": 43,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 44,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 46,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 48,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 52,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "capable",
+        "seed": 56,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 2026,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 1,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 8,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "caregiver",
+        "seed": 9,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 12,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "caregiver",
+        "seed": 22,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 24,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 28,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 30,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "caregiver",
+        "seed": 43,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 57,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 555,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 31337,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 1,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 10,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 22,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 27,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 31,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 33,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 47,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 50,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "maker",
+        "seed": 55,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 42,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 99,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 1234,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 5,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 6,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 10,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 16,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 22,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 23,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 24,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 29,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 41,
+        "before": 1,
+        "after": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 49,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 55,
+        "before": 0,
+        "after": 1
+      },
+      {
+        "policy": "merchant",
+        "seed": 58,
+        "before": 1,
+        "after": 0
+      }
+    ]
+  },
+  "changedSourceHashes": [
+    "src/js/game.js"
+  ],
+  "verification": {
+    "feastAssertions": 15,
+    "frozenBeforePassed": 8,
+    "frozenBeforeFailed": 7,
+    "intakeAssertions": 37,
+    "quick": 152,
+    "quickSeconds": 38,
+    "full": 924,
+    "fullSeconds": 157,
+    "fixtureCommit": "c0a02d7bf1fe9c74fd611f521b1655f55d9b00d4",
+    "initialFull": "922 passed, 2 failed: random starter Codex breadth; ontology subprocess (original stderr unavailable).",
+    "retryFull": "923 passed, 1 failed: random ambient distrust included in moot heat fixture.",
+    "fixtureAssertions": {
+      "corpses": 40,
+      "moot": 29
+    },
+    "foodpower": 30,
+    "packagerSyntaxChecked": true
+  },
+  "phone": {
+    "prepared": true,
+    "width": 390,
+    "height": 844,
+    "actions": [
+      "Prepare feast",
+      "Host a feast",
+      "Light the fire"
+    ],
+    "beforeReserve": 1000,
+    "afterReserve": 1416.6666666666667,
+    "reserveCap": 2400,
+    "beforePantry": 20000,
+    "afterPantry": 15000,
+    "hostConsumed": 416.6666666666667,
+    "hostNourishment": 416.6666666666667,
+    "ticks": 48,
+    "buff": "not armed; existing devotion gate refuses buff"
+  },
+  "artifactHashes": {
+    "feast-host-after-16.json.gz": {
+      "observedSourceHead": "f8e633c5ad35b7b31d8ea10dce05beca44fefb67",
+      "rawSha256": "0687f20c9482518bda7a05b204f8ac49aebf5172cffd68ab84374947bd4f8546",
+      "gzipSha256": "47aa1110c2bd9a6993daac1cb9ffad82eb85f739426d0a5002cbc35b9f81dee8",
+      "rawBytes": 16052881,
+      "gzipBytes": 1142555
+    },
+    "feast-host-after-64.json.gz": {
+      "observedSourceHead": "c0a02d7bf1fe9c74fd611f521b1655f55d9b00d4",
+      "rawSha256": "dbbcc2870f888fb2e6b6b61f017b2e162f67adb56b5dea97b1fc53706f72a196",
+      "gzipSha256": "ddc05838f0e0e713dadd0e4a10456b976c089b97f0a25cd91d18dbbd8de36482",
+      "rawBytes": 63227668,
+      "gzipBytes": 4435260
+    }
+  },
+  "limitations": [
+    "Real food rule change: campaign states expected to diverge; no state-parity claim.",
+    "Prepared phone/proofs demonstrate serving and UI, not natural acquisition.",
+    "No new Garden gate; whole-village seven-day coverage remains open."
+  ],
+  "logHashes": {
+    "feast-host-quick.txt": "63e4c3fb419789b4a1c7ffb8c00f3ef9d755229c82b9e7f627708fd7c64ad941",
+    "feast-host-quick-final.txt": "c8b3cb097be880b7439601617a1572705eee7b457139b52e30521cda100dbc23",
+    "feast-host-full.txt": "4927149eec20dfc3df4abf8da70f187897cfdae4b828820c0cb4bbacb2373672",
+    "feast-host-full-retry.txt": "9cdd376d7800b3aa25999775516a4f74659cf5b28386a9728652ad3670b16cd0",
+    "feast-host-full-final.txt": "5e7a77bfc2ccb4b8a8f04cd884879384410bc2b8aa6ee5d1ff4c515f3ac06281"
+  },
+  "otherArtifactHashes": {
+    "feast-host-phone.png": "62edb27b43fd44a910328f4493ac2a3a843194b97416b3c2466414d057d65edb",
+    "feast-host-browser.txt": "993987b4dde221d86609cdf32ec779eba20dde5a8707bed676630d41127b84de"
+  },
+  "crossPanelRepeatability": {
+    "matchedScreenRows": 64,
+    "identicalStandardRows": 64
+  },
+  "winFlips": {
+    "lost": 31,
+    "gained": 21
+  }
+}
