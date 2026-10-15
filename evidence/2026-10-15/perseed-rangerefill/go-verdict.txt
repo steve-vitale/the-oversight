@@ -1,0 +1,42 @@
+=== RANGEREFILL before/after (8 seeds x {leadcourt,belongseek}, 180d death-aware) ===
+runs: control 16, armed 16
+
+--- PRIMARY ---
+(a) armed ranging-dehydration deaths: 0 (control: 3) -> HOLD
+(b) pack-full departures: armed 13 departures, full=0.8462 (control 9, full=0.7778) -> MISS (need >=0.90)
+(c) empty-pack+dry-cistern departures: armed 0 (control 0) -> HOLD
+
+--- GUARDRAILS ---
+(d) median survival: armed 156d vs control 147d -> HOLD (need >= 137d)
+(e) national: armed 10/16 vs control 5/16 -> HOLD (need >= 3/16)
+(f) new death modes (armed n>=3, control 0): none -> HOLD
+
+GO VERDICT: MISS — layer deleted per kill protocol, evidence-only landing
+
+--- WALL NUMBERS ---
+[control] national 5/16 table 1/16 won 0/16 w4 4/16 w5 0/16 median 147d max 182d
+[armed] national 10/16 table 0/16 won 0/16 w4 7/16 w5 0/16 median 156d max 182d
+
+--- #292 VISIT ANALYSIS (wild water tiles on-route: filled vs unfilled) ---
+[control] visits=497 filled=9 unfilled=488 havenFills=608 wildFills=17 refused=undefined
+[armed] visits=767 filled=55 unfilled=712 havenFills=493 wildFills=92 refused=undefined
+[control] true-wild (dist>1) visits=67 filled=9 unfilled=58
+[armed] true-wild (dist>1) visits=122 filled=49 unfilled=73
+[armed layer] gateTrips=2 gateHauls=2 gateHaulBottles=0 gateUnresolvable=0 filledDawn=26 filledEnroute=37
+
+--- DEATH CAUSES ---
+  monster:combat: control 38 | armed 60
+  monster:expedition: control 1 | armed 0
+  monster:villager combat: control 22 | armed 15
+  person:alien: control 0 | armed 1
+  person:combat: control 2 | armed 1
+  villager:Nevermore: control 2 | armed 1
+  villager:a wound that wouldn't close: control 14 | armed 9
+  villager:combat: control 32 | armed 25
+  villager:contest: control 7 | armed 9
+  villager:lockjaw: control 2 | armed 2
+  villager:monster: control 18 | armed 18
+  villager:sickness: control 10 | armed 10
+  villager:starvation: control 16 | armed 17
+
+instrument errors: control 0, armed 0
