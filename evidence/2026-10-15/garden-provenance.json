@@ -1,0 +1,202 @@
+{
+  "prepared": true,
+  "seed": 7,
+  "player": "gen_z7f1x9s",
+  "npc": "gen_c02sxrk",
+  "plant": "dandelion",
+  "sourceHashes": {
+    "src/js/game.js": "da549a12cdfb07bf09c40d8e18beab92d26203512da69bf788d5a27ea1299e6c",
+    "src/js/food.js": "5913a441c6f38425d4912a32c19b8783d1f20239a761e481dbb058a708cfd7b5",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "scripts/godpath/probe-garden-provenance.js": "2be2a87500c90aaf408e844cfbb7b51e74df404a432898a4f8d83d6deb900b3f"
+  },
+  "beforeDonate": {
+    "day": 85,
+    "inventoryKcal": 7515
+  },
+  "playerHarvest": [
+    {
+      "plantId": "dandelion",
+      "units": 167,
+      "kcalEach": 45,
+      "spoilDay": 87,
+      "name": "Dandelion",
+      "unit": "handful of greens",
+      "kg": 0.1,
+      "prep": "Garden-fresh."
+    }
+  ],
+  "donated": [
+    {
+      "plantId": "dandelion",
+      "units": 167,
+      "kcalEach": 45,
+      "spoilDay": 87,
+      "name": "Dandelion",
+      "unit": "handful of greens",
+      "kg": 0.1,
+      "prep": "Garden-fresh."
+    }
+  ],
+  "playerHarvestDraw": {
+    "taken": 990,
+    "items": [
+      {
+        "item": {
+          "plantId": "dandelion",
+          "units": 145,
+          "kcalEach": 45,
+          "spoilDay": 87,
+          "name": "Dandelion",
+          "unit": "handful of greens",
+          "kg": 0.1,
+          "prep": "Garden-fresh."
+        },
+        "units": 22,
+        "effectiveKcal": 45,
+        "cooked": false
+      }
+    ],
+    "shortOfFresh": false
+  },
+  "npcHarvest": [
+    {
+      "name": "Garden harvest",
+      "kcalEach": 500,
+      "units": 8,
+      "spoilDay": 88,
+      "safe": true,
+      "kg": 0.1
+    },
+    {
+      "name": "Garden harvest",
+      "kcalEach": 200,
+      "units": 1,
+      "spoilDay": 88,
+      "safe": true,
+      "kg": 0.05
+    }
+  ],
+  "npcHarvestDraw": {
+    "taken": 700,
+    "items": [
+      {
+        "item": {
+          "name": "Garden harvest",
+          "kcalEach": 200,
+          "units": 0,
+          "spoilDay": 88,
+          "safe": true,
+          "kg": 0.05
+        },
+        "units": 1,
+        "effectiveKcal": 200,
+        "cooked": false
+      },
+      {
+        "item": {
+          "name": "Garden harvest",
+          "kcalEach": 500,
+          "units": 7,
+          "spoilDay": 88,
+          "safe": true,
+          "kg": 0.1
+        },
+        "units": 1,
+        "effectiveKcal": 500,
+        "cooked": false
+      }
+    ],
+    "shortOfFresh": false
+  },
+  "actualNpcMeal": {
+    "ate": 1340.0478565178346,
+    "gave": 0,
+    "drawn": 1000,
+    "fasting": false
+  },
+  "mealDraws": [
+    {
+      "taken": 1000,
+      "items": [
+        {
+          "item": {
+            "name": "Garden harvest",
+            "kcalEach": 500,
+            "units": 5,
+            "spoilDay": 88,
+            "safe": true,
+            "kg": 0.1
+          },
+          "units": 2,
+          "effectiveKcal": 500,
+          "cooked": false
+        }
+      ],
+      "shortOfFresh": false
+    }
+  ],
+  "npcNeedsBefore": {
+    "hunger": 60,
+    "fear": 18,
+    "social": 41,
+    "energy": 72
+  },
+  "npcNeedsAfter": {
+    "hunger": 33,
+    "fear": 18,
+    "social": 41,
+    "energy": 72
+  },
+  "existingGodRequirement": {
+    "path": "forager",
+    "needsClass": true,
+    "abilityPool": [
+      "green_thumb",
+      "rain_dancer",
+      "loud_chewer",
+      "photosynthesis",
+      "beard_moss",
+      "purify",
+      "pyrokinesis",
+      "green_whisper",
+      "cornucopia",
+      "harvest_table",
+      "long_table"
+    ],
+    "coreAbilities": [
+      "cornucopia",
+      "harvest_table"
+    ],
+    "abilitiesNeeded": 4,
+    "synergies": [
+      "sun_garden",
+      "closed_loop",
+      "rain_catcher",
+      "clean_plate",
+      "read_the_patch",
+      "loud_and_proud",
+      "master_of_flame"
+    ],
+    "deedAlt": null,
+    "deed": null,
+    "deedClassDays": 10,
+    "itemTiers": [],
+    "minDay": 80,
+    "closeAt": 3,
+    "requirePayoff": true,
+    "requireDeed": true,
+    "capstoneItems": [
+      "seed_vault",
+      "feast_king_cauldron"
+    ]
+  },
+  "notes": [
+    "Prepared ripe plot and empty stores; actual harvestGarden/donateToPantry/resolveOneAssignment/pantryDraw.",
+    "Actual NPC meal uses a prepared 10-HP, hunger-60 diner; ordinary production and meal code remain enabled.",
+    "pantryDraw consumes physical food and reports items, units and effective kcal; it does not know the eater.",
+    "Inspect recorded player/NPC harvest stacks for source identity; this probe does not invent it.",
+    "No production changes; no seven-day or natural acquisition claim."
+  ]
+}

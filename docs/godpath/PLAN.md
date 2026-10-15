@@ -39,6 +39,12 @@ Job -> track -> **class** -> **god** -> Table.
    succession without inheriting the predecessor's work. Nine replacements
    remain open; see `survivalist-deed-audit.md`. No Miser subclass appeared
    even in merchant runs.
+   Living Garden is next: the real harvest-to-meal diagnostic proves neither
+   player's plant stacks nor NPC garden-duty food retains the harvester.
+   Meal totals also include personal production, so donations/gardening XP
+   cannot prove seven days feeding the village from one's own harvest.
+   Implement source preservation plus actual eater receipts before changing
+   its gate; see `evidence/2026-10-15/garden-provenance-audit.md`.
 2. **Finish the parity audit.** Ten god verbs now have player/villager callers
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that
