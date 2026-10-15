@@ -272,14 +272,46 @@
     },
 
     // peopleJournal: entries for the Codex screen, met-order.
+    // THE BEARER <redacted> THE PAGE (journey-succession r14 2026-10-15): this used
+    // to filter the player character OUT, so the new bearer could never
+    // re-read their own backstory after the orientation beat scrolled by
+    // (r12 blank — a silent identity gap Steve's rules forbid). You know
+    // who you are: the self entry is pinned first and name / occupation /
+    // backstory are written in from the char record, no knowledge gates.
     peopleJournal() {
       const cx = Game.state.codex || {};
       const v = Game.state.village || {};
-      const roster = (v.roster || []).filter(id => id !== Game.villagerId);
-      return roster.map(vid => {
+      const selfId = Game.villagerId;
+      const roster = (v.roster || []).filter(id => id !== selfId);
+      const folks = roster.map(vid => {
         const e = this.journalPerson(vid);
         return { vid, e };
       }).sort((a, b) => (a.e.metDay || 0) - (b.e.metDay || 0));
+      let self = null;
+      try {
+        if (selfId) {
+          const se = this.journalPerson(selfId);
+          const ch = (this.data.villagers || []).find(x => x.id === selfId) || {};
+          const cg = (this.data.characterGen || {});
+          const selfDay = se.metDay || day();
+          // You know your own full name and job — an NPC-era entry may hold
+          // a first-name-only guess ("Kurt") from when they were a stranger.
+          // The self card is not the place for partial knowledge.
+          if (ch.name && (!se.name || se.name.value !== ch.name))
+            se.name = { value: ch.name, how: 'self', day: selfDay };
+          const occDef = ((cg.occupations || []).find(o => o.id === ch.occupationId) || {});
+          const occLabel = occDef.name || ch.formerOccupation || null;
+          if (occLabel && (!se.occupation || se.occupation.value !== occLabel || !se.occupation.sure))
+            se.occupation = { value: occLabel, sure: true, day: selfDay };
+          if (ch.backstory && !(se.backstory || []).some(b => b.text === ch.backstory)) {
+            (se.backstory = se.backstory || []).push({
+              text: ch.backstory, day: selfDay, via: 'your own memory', sure: true,
+            });
+          }
+          self = { vid: selfId, e: se, self: true };
+        }
+      } catch (e) {}
+      return self ? [self].concat(folks) : folks;
     },
 
     // occupationKnown: gated like names (Steve 2026-10-06). Learned via

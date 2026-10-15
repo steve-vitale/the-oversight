@@ -18723,14 +18723,18 @@
     const sys = !!Game.state.systemArrived;
     const folks = Game.peopleJournal();
     if (!folks.length) return '';
-    const cards = folks.map(({ vid, e }) => {
+    const cards = folks.map(({ vid, e, self }) => {
       const trust = (Game.state.village.trust || {})[vid] || 10;
-      const rel = trust >= 60 ? (sys ? 'Trusts you.' : 'I think they trust me.')
+      const rel = self
+        ? (sys ? 'The Codex rides with you.' : "That's you.")
+        : trust >= 60 ? (sys ? 'Trusts you.' : 'I think they trust me.')
         : trust >= 40 ? (sys ? 'Warming.' : 'Warming up, maybe.')
         : trust >= 25 ? (sys ? 'Guarded.' : 'Still guarded.')
         : (sys ? 'Distrustful.' : 'Doesn\'t trust me yet.');
-      const title = e.name ? esc(e.name.value) : esc(Game.personDescriptor(vid));
-      const nameNote = e.name
+      const title = self
+        ? `YOU — ${esc(e.name ? e.name.value : Game.personDescriptor(vid))}`
+        : (e.name ? esc(e.name.value) : esc(Game.personDescriptor(vid)));
+      const nameNote = (!self && e.name)
         ? (sys ? `<span class="small" style="opacity:.6"> · id: ${esc(e.name.how || 'filed')}</span>` : `<span class="small" style="opacity:.6"> · ${esc(e.name.how === 'overheard by the fire' ? 'heard someone say it' : e.name.how || '')}</span>`)
         : '';
       const q = sys ? '—' : '?';
