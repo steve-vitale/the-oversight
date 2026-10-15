@@ -43,6 +43,10 @@ async function main() {
   Game.audioEvent = function () {};
   if (Game.drama === undefined) Game.drama = function () {};
   await Game.init();
+  // Region wave 1 (2026-10-15): 6 playable regions now, so newGame lands
+  // randomly. These needle measurements are region-sensitive (ruin density);
+  // pin to the woodlands for determinism.
+  Game.debugRegion = 'na_eastern_woodlands';
 
   const evos = Game.data.evolutions.evolutions;
   // Map family -> a representative base ability id for testing.
