@@ -16270,8 +16270,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         n.fear = Math.max(0, n.fear - 8);
         n.energy = Math.min(100, n.energy + 4);
       }
-      if ((v.grief || 0) > 0) v.grief--;
-      if ((v.cheer || 0) > 0) v.cheer--;
+      // GRIEF/CHEER DECAY (journey-social r16 2026-10-15): these fields are
+      // documented in DAYS ("days of village-wide grief (death)"), but
+      // tickNeeds runs once per day-PART (advancePart, 4/day) — so a 3-day
+      // grief window was decaying in 3 parts (~0.75 days). The acute grief
+      // window opened and closed between conversation rounds: the r16 pilot
+      // caught 2 of 8 runs with deaths but zero grief-thread conversations
+      // because the window had already burned out. The decay lives in
+      // endDay() now — once per day, as the field's own comment says.
       // unanswered requests curdle: asked, ignored, remembered.
       const reqs = v.requests || {};
       for (const rid of Object.keys(reqs)) {
@@ -28546,6 +28552,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     endDay() {
       const scholar = this.state.scholar;
+      // GRIEF/CHEER DECAY (journey-social r16 2026-10-15): once per DAY, not
+      // per day-part — the fields are documented in days ("days of
+      // village-wide grief (death)"), and tickNeeds() runs 4x/day, which was
+      // burning a 3-day grief window in ~0.75 days.
+      try {
+        const vg = this.state.village || {};
+        if ((vg.grief || 0) > 0) vg.grief--;
+        if ((vg.cheer || 0) > 0) vg.cheer--;
+      } catch (e) {}
       // PHOENIX FUSE (Steve 2026-10-09): unchosen links resolve at dawn --
       // the fire doesn't wait. Silence is consent.
       try { this.phoenixFuseCheck && this.phoenixFuseCheck(); } catch (e) {}

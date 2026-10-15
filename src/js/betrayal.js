@@ -3947,7 +3947,18 @@
       const ok = this.approachWeakest(parts[2], true);
       return finish(ok ? 'They talked. Everything changes now.' : 'Not yet. The offer stands.', '"Talk first. Leniency."');
     }
-    if (act === 'wounds') { this.showWounds(parts[2]); return finish('The wounds speak for themselves.', '"Look at me."'); }
+    if (act === 'wounds') {
+      // WOUND HONESTY (journey-social r16 2026-10-15): showWounds narrates
+      // "You have no wounds to show" when there are none — but the old code
+      // then spoke "The wounds speak for themselves." in dialogue ANYWAY,
+      // a lie the player hears in the conversation UI (the honest narration
+      // may not be visible there). No wounds -> the NPC hears the claim
+      // land flat, honestly.
+      const shown = this.showWounds(parts[2]);
+      return shown
+        ? finish('The wounds speak for themselves.', '"Look at me."')
+        : finish('"Nothing to show. Just my word."', '"Look at me."');
+    }
     if (act === 'site') { this.examineAmbushSite(parts[2]); return finish('The ground remembers.', '(examine the site)'); }
     if (act === 'witnesses') { this.nameWitnesses(parts[2]); return finish('Names, named.', '"Who saw us leave?"'); }
     if (act === 'expose') {

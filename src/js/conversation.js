@@ -853,6 +853,19 @@
       const inviteAct = !!(opts && opts.inviteBeat);
       const selfBlocked = !inviteAct && c.saidLines.indexOf(key) !== -1;
       const runBlocked = !inviteAct && !selfBlocked && runLedger.indexOf(key) !== -1;
+      // THIS-SITTING vs OLDER (journey-social r16 2026-10-15): saidLines is
+      // never reset between sittings (endConvo/startConvo leave it — the
+      // pools rely on the persistence), so "self-blocked" conflates "said
+      // five minutes ago in THIS conversation" with "said three days ago in
+      // another sitting". The caller's "I just said — did you miss it?"
+      // fallback is only honest for the first: a villager who told you
+      // 'Nothing new.' about another case last week and snaps "did you miss
+      // it?" today is accusing you of something that never happened (caught
+      // in r16 grief transcripts: betrayal:askheard's reveal re-blocked
+      // across sittings). saidLinesConvo is the per-sitting ledger (reset in
+      // startConvo); only its hits keep the accusation fallback. Older
+      // self-blocks get the honest dry line, like run-blocks.
+      const convoBlocked = !inviteAct && (c.saidLinesConvo || []).indexOf(key) !== -1;
       // FALLBACK (journey-social 2026-10-11): a blocked line must never go
       // silent — "no silent actions" is a standing rule, and a blocked beat
       // with fired consequences (trust/mood/evidence) but no words reads as
@@ -870,7 +883,10 @@
       // self-repeats keep the caller's "I just said" fallback.
       let useChunks = chunks;
       if (selfBlocked || runBlocked) {
-        if (runBlocked) {
+        if (runBlocked || (selfBlocked && !convoBlocked)) {
+          // Another villager said it recently, or THIS villager said it in
+          // an earlier sitting — the "I just said" accusation would be a
+          // lie either way. Honest dry line.
           const dry = this.convoDryLine(vid);
           if (!dry) return null;
           useChunks = this.convoSplitBeats(dry);
@@ -887,6 +903,8 @@
         // generic fallback: never ledgered, never blocked
       } else {
         c.saidLines.push(key);
+        c.saidLinesConvo = c.saidLinesConvo || [];
+        c.saidLinesConvo.push(key);
         runLedger.push(key);
         // WINDOW, not run-history (journey-social 2026-10-11): the ledger is
         // a backstop against ADJACENT parroting (defect 7: "Lena and David
@@ -975,7 +993,10 @@
     // convoSelfRepeatLine: honest deflections for SELF-repeat blocks. The
     // NPC already said the line in THIS conversation, so the caller has no
     // fresh line and the beat must not go silent (no-silent-actions is
-    // standing law). A single hardcoded fallback parrots VERBATIM on
+    // standing law). The "THIS conversation" part is ENFORCED by sayLine
+    // (journey-social r16 2026-10-15): blocks against lines said in earlier
+    // sittings get the dry line instead — this pool only fires for
+    // within-sitting repeats, where the accusation is true. A single hardcoded fallback parrots VERBATIM on
     // consecutive blocks (observed 2026-10-12: "I just said — did you miss
     // it?" x3 in one conversation) — the exact filler-loop Steve called
     // out. Per-conversation cycling pool, never verbatim, like
@@ -1019,6 +1040,9 @@
       // single-use choice ids (resumed threads, named memories, asked
       // events, invitations). finalizeMenu filters them; startConvo resets.
       if (!c.spent) c.spent = {};
+      // PER-SITTING said-lines (journey-social r16 2026-10-15): normalized
+      // for older convo states; startConvo resets it every sitting.
+      if (!c.saidLinesConvo) c.saidLinesConvo = [];
       return c;
     },
 
@@ -2340,6 +2364,38 @@
           // was left hanging, it wasn't nothing — the air is heavier.
           if (typeof this.convoMoodShift === 'function') this.convoMoodShift(vid, -1);
           return { line: this.voiceLine(vid, seedLine), thread: 'want', wantId: want.id };
+        }
+      }
+
+      // ACUTE GRIEF (journey-social r16 2026-10-15): someone died within the
+      // last ~3 days (villageEvent('death') sets v.grief=3, decaying 1/day;
+      // murder of an innocent sets 5). The grief thread used to be fallback
+      // #4 — structurally starved behind the want opener, which is the
+      // default and almost always fires (r15: 0 grief-thread convos in
+      // 3,908 with 43 villager deaths). Grief in its acute window IS
+      // something the villager has on their mind, so it displaces the
+      // default want/small-talk opening — but nothing concrete: pending
+      // talk requests (#1), the table (#2), and unfinished business (#3)
+      // keep priority above (they're commitments the player is owed), and
+      // acute bodily needs own the opening too (a villager doubled up with
+      // gut cramps leads with the cramps — crisis-leg precedent). The
+      // no-repeat ledger means each villager says each grief line once per
+      // life, so the thread can't spam the whole window; when the pool is
+      // exhausted (or grief is stale) the opener falls through to want.
+      if ((v.grief || 0) > 0) {
+        let acuteNeed = false;
+        try {
+          if (want && want.id === 'ask_favor' && typeof this.convoFindFavorNeed === 'function') {
+            const wneed = this.convoFindFavorNeed(vid);
+            acuteNeed = !!(wneed && (wneed.urgency || 0) >= 4);
+          }
+        } catch (e) {}
+        if (!acuteNeed) {
+          const l = this.convoPick(vid, 'grief', [
+            '"Have you — sorry. I keep thinking about them."',
+            '"It\'s quiet today. Wrong kind of quiet."',
+          ]);
+          if (l) return { line: this.voiceLine(vid, l), thread: 'grief' };
         }
       }
 
@@ -4056,6 +4112,11 @@
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.followUsed = {};
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
+      // PER-SITTING said-lines (journey-social r16 2026-10-15): the
+      // no-repeat ledger (c.saidLines) persists across sittings by design
+      // (pool draws rely on it), but the "I just said" fallback is only
+      // honest within one sitting — reset the sitting ledger here.
+      c.saidLinesConvo = [];
       // SPENT (journey-succession 2026-10-12): reset the per-conversation
       // spent-choice ledger — a new sitting, fresh offers.
       c.spent = {};
@@ -4064,6 +4125,13 @@
       // per-sitting ledgers, or the cycle never restarts and the old cap
       // logic collapses to verbatim.
       c.selfRepeatLines = 0;
+      // DRY LINES (journey-social r16 2026-10-15): the dry pool's own comment
+      // says "past 9 uses in one conversation" — but the counter never
+      // reset, so it was per-RUN: after 9 lifetime dry uses a villager went
+      // permanently silent on blocked beats (12 silent "Look at me." turns
+      // in an r16 grief transcript — no-silent-actions violation). Reset
+      // per sitting like the self-repeat counter.
+      c.dryLines = 0;
       // COHERENCE (Steve 2026-10-07): per-conversation teaching state resets
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.
