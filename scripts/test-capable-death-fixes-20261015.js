@@ -85,6 +85,12 @@ function tithe(Game, hp) {
 // one capable turn in a fresh wild fight; returns the flee read
 function wildTurn(Game, mid, tweak) {
   K.newRun(Game);
+  // This fixture is the unprotected bearer, not whichever advanced armor
+  // happened to be offered in the generated starting wardrobe.
+  Game.state.scholar.equipped = {};
+  Game.state.scholar.abilities = [];
+  Game.state.scholar.backgroundAbilities = [];
+  Game.state.codex.skills = {};
   Game.debugToWildNode();
   const mf = K.fight(Game, mid, { px: 2, py: 4, mx: 6, my: 4, hp: 100 });
   if (tweak) tweak(mf);

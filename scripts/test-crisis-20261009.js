@@ -196,14 +196,16 @@ function crisisCount(name) {
     Game.checkArc();
     const arcMid = Game.progState().arc;
     // fire a second, distinct crisis: the gate opens
-    Game.state.village.pantry = [];
-    for (let d = 0; d < 12 && !(Game.progState().crises || {})['hunger-winter']; d++) Game.villageEats();
+    // C1 above proves the real meal/hunger trigger. This block isolates the
+    // arc's two-kind gate; an empty pantry need not starve a generated cast
+    // that actually gathers enough of its own food.
+    Game.fireCrisis('hunger-winter');
     Game.checkArc();
     const arcAfter = Game.progState().arc;
     const crisesBefore = 0;
     ok('setup reached arc 2', arcBefore === 2, `arc=${arcBefore} (plants ${before} -> ${Object.keys(Game.state.codex.plants).length})`);
     ok('one crisis is not enough', arcMid < 3, `arc ${arcBefore} -> ${arcMid} after 1 crisis`);
-    ok('two crises open the gate', arcBefore < 3 && arcAfter >= 3, `arc ${arcBefore} -> ${arcAfter} (crises before: ${crisesBefore})`);
+    ok('two crises open the gate', arcBefore < 3 && arcAfter >= 3, `arc ${arcBefore} -> ${arcAfter}; stage=${Game.integrationStage()} breadth=${Game.codexBreadth()} crises=${JSON.stringify(Game.progState().crises)} hunger=${Game.progState().hungryStreak} over=${Game.over}`);
   }
 
   console.log(`\n${pass} passed, ${fail} failed`);

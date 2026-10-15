@@ -42,44 +42,10 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SEED = parseInt(process.env.SEED || '20261008', 10);
-let _s = SEED >>> 0;
-Math.random = function () {
-  _s |= 0; _s = (_s + 0x6D2B79F5) | 0;
-  let t = Math.imul(_s ^ (_s >>> 15), 1 | _s);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-};
-const show = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
-
-// ---- data from the worktree (worktree == main HEAD, clean, verified) ----
-const DATA_FILES = ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json',
-  'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json',
-  'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json',
-  'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json',
-  'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json',
-  // REGIONS (2026-10-14): the environment (pantry, ruins, bounty, fauna…)
-  // is regions.json data now — core data like plants.json.
-  'regions.json'];
-global.SCATTER_DATA = {};
-for (const f of DATA_FILES) global.SCATTER_DATA[f.replace('.json', '')] = JSON.parse(show('src/data/' + f));
-
-// ---- engine in index.html script order, minus DOM-only + drama.js ----
-const SCRIPTS = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
-  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
-  'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
-  'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
-  'src/js/convo-scene.js',
-  'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
-  'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
-  'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
-  'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
-  'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js', 'src/js/membership.js',
-  'src/js/hierarchy.js', 'src/js/debug-scenarios.js', 'src/js/build.js'];
-global.window = global; // equipment.js needs window at load
-for (const f of SCRIPTS) eval(show(f));
-delete global.window; // else combat goes async and the harness stalls
-const Game = globalThis.Scattering.Game;
-Game.data = global.SCATTER_DATA;
+// Shared complete engine: the old hand-maintained list omitted tracks,
+// rewards and later conversation wrappers, producing false reachability claims.
+const H = require('./sim-harness');
+let Game;
 
 // ---------- harness plumbing ----------
 const transcript = [];
@@ -102,10 +68,6 @@ function saidSomething(actionName) {
   return fresh;
 }
 const audioSeen = [];
-try {
-  const _ae = Game.audioEvent.bind(Game);
-  Game.audioEvent = (n, d) => { audioSeen.push(n); try { return _ae(n, d); } catch (e) {} };
-} catch (e) {}
 const nm = (vid) => { try { return Game.displayName(vid); } catch (e) { return vid; }; };
 function grantFood(kcalTotal, name) {
   const s = Game.state.scholar;
@@ -116,7 +78,13 @@ function grantFood(kcalTotal, name) {
 const feed = () => { const s = Game.state.scholar; s.kcal = Math.max(s.kcal || 0, 4000); s.health = Math.max(s.health || 0, 95); };
 
 (async () => {
-await Game.init();
+const loaded = await H.loadGame({ seed: SEED, mode: 'social-proof', narration: true });
+Game = loaded.Game;
+try {
+  const _ae = Game.audioEvent.bind(Game);
+  Game.audioEvent = (n, d) => { audioSeen.push(n); try { return _ae(n, d); } catch (e) {} };
+} catch (e) {}
+
 note('== SEED ' + SEED + ' ==');
 
 // ================= ACT 1: MOOT — YOU STAND ACCUSED =================
@@ -349,6 +317,22 @@ for (const rid of den) {
 }
 const seenOutcomes = new Set(Object.values(outcomes));
 note(`   branches hit: ${[...seenOutcomes].join(', ')}`);
+// Eight watches can honestly miss four of five people. Preserve that play
+// trace, then prove opposed reaction branches with explicit live-lie and
+// evidence fixtures, instead of depending on a tiny sample's lucky spread.
+for (const [i, roll, expected] of [[0, 0, 'confessed'], [1, 0.99, 'attacked']]) {
+  const rid = den[i], lies = Game.npcLies(rid), lie = lies.occupation;
+  lie.confessed = false; lie.motive = i === 0 ? 'shame' : 'pathological';
+  Game.state.village.trust[rid] = 30;
+  const d = Game.addDoubt(rid, 'contradiction', 'Pinned confrontation ' + i, [lie.told], { field: 'occupation' });
+  const rng = Math.random;
+  let reaction;
+  Math.random = () => roll;
+  try { reaction = Game.confrontDoubt(rid, d.id); } finally { Math.random = rng; }
+  ok('controlled live lie: ' + expected + ' branch', reaction && reaction.outcome === expected, reaction && reaction.outcome);
+  seenOutcomes.add(reaction && reaction.outcome);
+  drain();
+}
 ok('liars: more than one branch of human behavior seen', seenOutcomes.size >= 2, [...seenOutcomes].join(','));
 ok('knowledge gate: no unconfessed truth spoken anywhere', leakHits.length === 0, leakHits.slice(0, 3).join(' ‖ ') || 'clean');
 ok("liars: audio liarConfront tension beats fired", audioSeen.includes('liarConfront'), `audio=[${audioSeen.join(',')}]`);

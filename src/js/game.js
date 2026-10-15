@@ -265,9 +265,9 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'survival-balance.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance, rewardEconomy] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'survival-balance.json', 'reward-economy.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance, rewardEconomy };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -1846,7 +1846,8 @@
       take('sentimental', 2, def => this.kinAgeOk(def.kin || 'none', charAge));
       // wild card: one more from anywhere but food (bonded relics aren't snacks)
       // — and no high-tier loot either (Steve 2026-10-06).
-      const all = (this.data.items || []).filter(i => i.class !== 'food' && !result.includes(i.id) && (i.lootTier || 1) <= 2 && i.origin !== 'alien').map(i => i.id);
+      const all = (this.data.items || []).filter(i => i.class !== 'food' && !result.includes(i.id) && (i.lootTier || 1) <= 2 && i.origin !== 'alien'
+        && this.kinAgeOk(i.kin || 'none', charAge)).map(i => i.id);
       if (all.length) result.push(all[Math.floor(Math.random() * all.length)]);
       // PERSONALIZE (Steve 2026-10-05): kin keepsakes get their person.
       // Stored per-character; the pick screen and inventory read the override.
@@ -39756,7 +39757,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const wave = mdef.wave || 1;
       let maxTier = loot.tier || 1;
       const isVeteran = fighter && (fighter.veteranVariant || fighter.veteran);
-      if (wave <= 1 && !mdef.apex) {
+      if (wave <= 1 && !mdef.apex && !loot.rewardSource) {
         maxTier = Math.min(maxTier, 2);
         if (isVeteran && this.unlockedWave() >= 2) {
           // Veterans are a tier harder: bump one, cap at 3.
@@ -39767,7 +39768,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let tier = Math.max(1, maxTier);
       let pool = [];
       while (tier >= 1 && !pool.length) {
-        pool = (this.data.items || []).filter(i => i.origin === 'alien' && (i.lootTier || 1) === tier
+        const extra = loot.rewardSource ? (((this.data.rewardEconomy || {}).extraItems || {})[tier] || []) : [];
+        pool = (this.data.items || []).filter(i => (i.origin === 'alien' || extra.includes(i.id)) && (i.lootTier || 1) === tier
           // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. Once
           // taken, pellets stop dropping as installable loot — existing ones
           // still burn, but no new reactor can rise.
@@ -41472,7 +41474,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // never string-concat the raw array; that's how you get "[object Object]").
         waterL: Math.round(((s.water || []).reduce((t, b) => t + (b.liters || 1), 0)) * 10) / 10,
         waterCleanL: Math.round(((s.water || []).filter(b => b.quality === 'clean').reduce((t, b) => t + (b.liters || 1), 0)) * 10) / 10,
-        inventory: s.inventory.map(i => ({ name: i.name, units: i.units, kcalEach: i.kcalEach, spoilDay: i.spoilDay })),
+        // The Pack UI feeds these entries to isWeapon/isArmor/isUsable and
+        // the food-state gates. A four-field food summary erased itemId,
+        // kg, hidden-effect flags, medicine and processing state: real
+        // rewards appeared as inert parcels with no Equip/Wear/Use button.
+        inventory: s.inventory.map(i => Object.assign({}, i)),
         invCount: s.inventory.reduce((t, i) => t + (i.units || 1), 0),
         invKcal: s.inventory.reduce((t, i) => t + (i.units || 0) * (i.kcalEach || 0), 0),
         // Pantry kcal computed from ITEMS, not a bucket. Unsafe food counts (it's there, it's risky).

@@ -90,7 +90,9 @@ const narrated = () => says.some(t => NARR.some(rx => rx.test(t)));
   // --- 4. fireside: village learns, player does NOT, while away ---
   const plant = Game.data.plants[0];
   delete (Game.state.codex.plants || {})[plant.id];
-  v.sharedKnowledge = v.sharedKnowledge || {};
+  // Isolate the pending lesson: starter knowledge may contain other
+  // untaught plants, which otherwise win this fixture's seeded pick.
+  v.sharedKnowledge = {};
   v.sharedKnowledge[plant.id] = { taughtAround: false, discoveredBy: (v.roster || [])[1], level: 2, taughtDay: 0 };
   stubRandom(0.1); // pass the 0.35 gate and the 0.6 learn roll
   says.length = 0;

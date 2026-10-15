@@ -45,6 +45,9 @@ function freshGame() {
   const pid = 'jewelweed';
   const plant = Game.data.plants.find(p => p.id === pid);
   ok('test plant exists', !!plant);
+  // The generated job can already know jewelweed. Pin this test's UNKNOWN
+  // precondition; choosing an herbalist must not invalidate the fixture.
+  delete (Game.state.codex.plants || {})[pid];
 
   // 1. No observation yet: depth 0, not observed
   ok('unobserved: depth 0', Ex.plantVisualDepth(pid) === 0);

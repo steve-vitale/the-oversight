@@ -3391,6 +3391,7 @@
     vis.credit = (vis.credit || 0) + total;
     const name = it.name || 'it';
     inv.splice(packIdx, 1);
+    this.state.scholar.tradesDone = (this.state.scholar.tradesDone || 0) + 1;
     this.say(`${ap.line} Done — ${units}× ${name} for ${total} kcal on your tab.`);
     try { this.observe('trade', { noTrust: true }); } catch (e) {}
     return true;
@@ -3404,15 +3405,18 @@
   visitorWares(vis) {
     if (vis.wares && vis.wares.length) return vis.wares;
     const wares = [];
-    // 1. off-world curiosity: tier-1 only. The trader is not the System; their
-    //    best stock is small things that fell out of the sky. The name is the
-    //    System's narration (visible); what it DOES, you learn by using it.
+    // Repeat business opens a better supply route, paid in real finished
+    // food. No monster-kill gate and no apex stock on an ordinary cart.
     try {
-      const alienId = this.rollAlienLoot({ loot: { chance: 1, tier: 1 }, wave: 1 });
+      const cfg = (this.data.rewardEconomy || {}).trade || {};
+      const trades = this.state.scholar.tradesDone || 0;
+      const bars = cfg.tradesForTier || [0, 3, 8];
+      const tier = trades >= bars[2] ? 3 : trades >= bars[1] ? 2 : 1;
+      const alienId = this.rollAlienLoot({ loot: { chance: 1, tier, rewardSource: 'trade' }, wave: 1 });
       const def = (this.data.items || []).find(i => i.id === alienId) || {};
       if (alienId) wares.push({
         kind: 'alien', itemId: alienId, name: def.name || alienId, sold: false,
-        price: 1200 + Math.floor(R() * 9) * 100, kg: def.kg || 0.3,
+        price: (cfg.pricePerTier || 1200) * tier + Math.floor(R() * 9) * 100, kg: def.kg || 0.3,
         blurb: `"Came down in a care package. No idea what it does. That's the fun part."`,
       });
     } catch (e) {}

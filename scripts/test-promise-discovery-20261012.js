@@ -67,8 +67,11 @@ function driveToOffer(Game, vid, maxTurns) {
   for (let t = 0; t < 6 && !sawAskGoal; t++) {
     const ans = chIds.find(id => id.indexOf('ans:') === 0) || chIds.find(id => id.indexOf('gq:') === 0)
       || chIds.find(id => id === 'deflect_q');
-    if (!ans) break;
-    take(Game, vid, ans);
+    // A substantive opener can use the held-dialogue menu. Open its
+    // subject picker through the same button a player has.
+    const next = ans || chIds.find(id => id === 'dlg:subject');
+    if (!next) break;
+    take(Game, vid, next);
     chIds = ids(Game, vid);
     sawAskGoal = chIds.indexOf('ask:goal') !== -1;
   }

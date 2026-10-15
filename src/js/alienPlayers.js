@@ -1253,6 +1253,11 @@
       };
       if (def && def.kg != null) entry.kg = def.kg;
       if (def && def.kcalEach != null) entry.kcalEach = def.kcalEach;
+      var rewardIds = Object.values((((this.data || {}).rewardEconomy || {}).extraItems) || {}).reduce(function(a, b) { return a.concat(b); }, []);
+      if (def && (def.origin === 'alien' || rewardIds.indexOf(def.id) >= 0)) {
+        entry.alienLoot = true;
+        entry.alienEffectHidden = true;
+      }
       try {
         var s = this.state.scholar;
         s.inventory = s.inventory || [];
@@ -1278,12 +1283,24 @@
       // game.js rollAlienLoot). This path had no filter (diagnosis 2026-10-15).
       var taken = !!(this.state && this.state.fusionReactorHolder);
       var cands = items.filter(function (it) {
-        return it.origin === 'alien' && (it.tier || 1) <= t
+        var extras = ((((this.data || {}).rewardEconomy || {}).extraItems || {})[it.lootTier || it.tier || 1] || []);
+        return (it.origin === 'alien' || extras.indexOf(it.id) >= 0) && (it.lootTier || it.tier || 1) <= t
           && !it.kcalEach && it.class !== 'food'
           && !(taken && it.id === 'fusion_pellet');
-      });
+      }, this);
       if (!cands.length) return null;
-      return cands[Math.floor(Math.random() * cands.length)];
+      // Hot packages usually deliver their earned tier, while keeping the
+      // fuel/medicine curios in circulation. Removing those entirely also
+      // removed the reactor seed from established careers (18 -> 5 final
+      // bearers in the first 64-seed screen). One draw, no extra RNG call.
+      var best = Math.max.apply(null, cands.map(function(it) { return it.lootTier || it.tier || 1; }));
+      var starter = cands.filter(function(it) { return (it.lootTier || it.tier || 1) === 1; });
+      var hot = cands.filter(function(it) { return (it.lootTier || it.tier || 1) === best; });
+      var cfg = (((this.data || {}).rewardEconomy || {}).broadcast) || {};
+      var chance = best > 1 && starter.length ? ((cfg.starterGiftChance || [0, 0.45, 0.3])[best - 1] || 0) : 0;
+      var roll = Math.random();
+      if (roll < chance) return starter[Math.floor(roll / chance * starter.length)];
+      return hot[Math.min(hot.length - 1, Math.floor((roll - chance) / (1 - chance) * hot.length))];
     },
 
     // Care package: the fan club sends supplies. Quality and frequency scale
@@ -1301,7 +1318,7 @@
 
       ap.lastPackageDay = day;
       // Package quality scales with favor
-      var tier = favor >= 70 ? 3 : favor >= 40 ? 2 : 1;
+      var tier = this.broadcastRewardTier ? this.broadcastRewardTier('player') : (favor >= 70 ? 3 : favor >= 40 ? 2 : 1);
       // WACKY, NEVER DINNER (canon; break-it fame-seeker 2026-10-10): the
       // "Can labeled BEANS" (350 kcal, class food) used to be grantable
       // here — dinner wearing a joke label. The _showEnd prize filter

@@ -152,7 +152,7 @@ ok('softlock: full dig completes after lightening', Game.materialCount('wood') =
 
 // All-rot dig: cache removed, no phantom goods, no strand.
 freshGame();
-Game.state.scholar.inventory.push(foodItem('Old berries', 3, 0, 40)); // spoilDay 0, day 5 -> rotten
+Game.state.scholar.inventory.push(foodItem('Old berries', 3, -100, 40)); // rotten even with a generated preservation skill
 Game.buryCache('food', 0, 3);
 const rotId = Game.playerCaches()[0].id;
 said = [];

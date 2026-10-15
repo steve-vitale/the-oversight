@@ -172,6 +172,32 @@ Prizes feed EVERY progression lane, never just combat:
 Prizes must be worth the fear. A contest you survive should change your
 game — that's the high-risk/high-reward contract.
 
+### Earned gear outside hunting (2026-10-15)
+
+Steve: "combat isn’t the only viable way to obtain good gear."
+The levers live in `src/data/reward-economy.json`:
+
+- Three personal contest wins unlock tier-2 prizes; six unlock tier 3,
+  independently of monster-wave unlocks. Fan favor 40/70 provides another
+  route to the same tiers. Cooking, puzzles, foraging and moots count too.
+- Extreme contests retain a rare apex roll. An eight-win specialist or a
+  100-favor celebrity can earn that roll without wave 4. Ordinary wins and
+  routine TV gifts stop at tier 3. No automatic apex item for waiting.
+- Player and villager winners share the gear table. Villager prizes belong
+  to that person and can be worn/shared through normal equipment behavior.
+  Their existing pantry ration share remains.
+- Successful TV appearances have a 35% gift chance; authored prize beats
+  still grant their gift. A ratings summons keeps its one care-package
+  reward. Hot gifts usually deliver their earned tier, including real armor.
+  A smaller starter-supply lane retains fuel/medicine and the reactor seed;
+  the first screen showed that excluding those starved a different feature.
+  Packages keep the existing gate and cooldown;
+  gifts still exclude meals and respect the world's one fusion reactor.
+
+These are measured starting values, not permanent balance targets. Gear
+acquisition, a usable Pack button, survival and an actual ending are separate
+proof obligations. See the dated audit for outcomes and remaining gaps.
+
 ## Implementation notes
 
 - Exists: `viewershipBoard()` in ledger.js (per-village viewership, trends).
