@@ -146,6 +146,7 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 - **Never trust 8 seeds.**
 
 ## 3. Known issues (small, logged)
+- World map overlay: the close button sits in an oversized empty bordered box (presentation pass B tokens). Showcase of the pass: https://claude.ai/artifact/9Vr2HxjbHyCTShDdDxkzYf (private to Steve).
 - Name cultures without a `fem` list fall back to they/them for some names (german, vietnamese, moroccan, and others): add fem lists (data only). A broader code fallback was tried and dropped — it shifts seeded RNG.
 - Lifeseed grammar: "X's grandchildren Yarina" (one name for a plural relation), first-person lines inside third-person bios ("He taught me to swim"), "still understand more than he can say" (agreement).
 - Monster-naming vote: if the scholar dies, a vote they cast earlier as a villager counts double as the player's backing.
@@ -166,6 +167,7 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 - Load-flaky tests under the parallel full check (they pass alone):
   simopt-trajectory, deterministic-clock, scale-lead-fix, intraviol,
   enter-building-guard, examine-recognition, item-use, blocked-travel-feedback,
+  drifter-joinstay (failed twice in full runs; seed-sensitive — worth pinning),
   drifter-grab, past-deflect-gate, social-shared-barks, corpses.
 
 ## 4. Where things are
