@@ -8,9 +8,13 @@ const C = require('./policies/competent'), { sigButtons } = require('./policies/
 const bump = (ctx, key) => { ctx['campaign' + key] = (ctx['campaign' + key] || 0) + 1; };
 // Prepared experiments call this explicitly; promotion into the ordinary
 // campaign policy requires a matched screen. All movement/waits are paid.
-function preparedGuard(G, ctx, rally = false) {
+function preparedGuard(G, ctx, rally = false, heal = false) {
   const f = G.tbfight, p = f && G.tbFighter('p');
-  if (!p || !G.tbIsPlayerTurn() || p.acted || !C.coalitionCommitted(G, ctx, f, p)) return false;
+  if (!p || !G.tbIsPlayerTurn() || p.acted) return false;
+  const march = (G.state.titans || {})._fight;
+  const healingMarch = heal && march && (march.titan || march.campaign) && ctx.campaignFight === f &&
+    f.fighters.filter(a => a.kind === 'ally' && a.alive && !a.fled).length >= 5;
+  if (!C.coalitionCommitted(G, ctx, f, p) && !healingMarch) return false;
   const enemies = f.fighters.filter(a => (a.kind === 'monster' || a.kind === 'hostile') && a.alive && !a.fled);
   const allies = f.fighters.filter(a => a.kind === 'ally' && a.alive && !a.fled);
   if (!enemies.length) return false;
@@ -37,6 +41,13 @@ function preparedGuard(G, ctx, rally = false) {
   }
   if (!G.tbIsPlayerTurn() || p.acted) return true;
   const finish = () => { if (G.tbfight === f && G.tbIsPlayerTurn() && p.acted) G.tbPlayerEndTurn(); };
+  if (heal && p.hp < p.maxHp * 0.85) {
+    const mend = G.activatableAbilities().find(a => a.abilityId === 'mending_hands' && a.actionId === 'mend' && a.combat && a.available);
+    if (mend && G.state.scholar.kcal >= 550 + ((mend.cost || {}).kcal || 0) && G.useAbility(mend.abilityId, mend.actionId, 'p')) {
+      bump(ctx, 'GuardMends'); finish(); return true;
+    }
+  }
+  if (!C.coalitionCommitted(G, ctx, f, p)) return false;
   const buttons = sigButtons(G, f, p, enemies, ctx);
   const binding = buttons.find(b => b.key === 'tbSpAsk');
   if (binding && binding.call()) { bump(ctx, 'GuardBindings'); finish(); return true; }
@@ -51,6 +62,7 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const G = await K.load({ seed }); K.newRun(G);
   const s = G.state.scholar, ctx = { notes: [] }, links = G.hierarchyState(); links.length = 0;
   const trace = arg('trace', '0') === '1' ? [] : null;
+  const abilityTrace = trace ? [] : null;
   if (trace) {
     const damage = G.tbDamage;
     G.tbDamage = function(key, amount, source, sourceKey) {
@@ -58,6 +70,13 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
       const before = target && target.hp;
       const result = damage.apply(this, arguments);
       if (target && trace.length < 500) trace.push({ round: f.round, target: key, kind: target.kind, name: target.name, sourceKey, source, raw: amount, returned: result, before, after: target.hp, at: [target.mx, target.my], from: actor ? [actor.mx, actor.my] : null });
+      return result;
+    };
+    const useAbility = G.useAbility;
+    G.useAbility = function(id, action, key) {
+      const p = this.tbfight && this.tbFighter('p'), before = p && p.hp, kcal = this.state.scholar.kcal;
+      const result = useAbility.apply(this, arguments);
+      if (abilityTrace.length < 100) abilityTrace.push({ id, action, key, result, before, after: p && p.hp, kcalBefore: kcal, kcalAfter: this.state.scholar.kcal, acted: p && p.acted });
       return result;
     };
   }
@@ -72,6 +91,15 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const loadout = arg('loadout', 'armed');
   if (loadout === 'armed') s.inventory.push(...Array.from({ length: 25 }, () => ({ itemId: 'stone_knife', units: 1 })), ...Array.from({ length: 25 }, () => ({ itemId: 'padded_cloth', units: 1 })));
   if (loadout === 'advanced') s.inventory.push(...Array.from({ length: 25 }, () => ({ itemId: 'phase_blade', units: 1 })), ...Array.from({ length: 25 }, () => ({ itemId: 'alien_carapace', units: 1 })), ...['alien_helm', 'alien_greaves', 'alien_gauntlets', 'alien_boots'].map(itemId => ({ itemId, units: 1 })));
+  const build = arg('build', 'starter');
+  if (build === 'caregiver') {
+    s.abilities = []; K.openSlots(G, 6);
+    for (const id of ['mending_hands', 'the_touch', 'lifeline', 'last_rites', 'battlefield_grace', 'second_wind']) {
+      if (!K.giveAbility(G, id, { level: 2 })) throw new Error('Prepared ability grant failed: ' + id);
+    }
+    G.recomputeActiveSynergies();
+  } else if (build !== 'starter') throw new Error('Unknown prepared build: ' + build);
+  const initialBuild = (s.abilities || []).map(a => ({ id: a.id, level: a.level }));
   const initialHealth = s.health, initialMaxHealth = G.maxHealth();
   // Prepared arena geometry only. Approach still walks through the normal
   // local path API; subsequent fights must follow real campaign ordering.
@@ -81,7 +109,7 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const tactic = arg('tactic', 'baseline');
   const policy = { ...P.campaigner, fight(game, context) {
     const f = game.tbfight;
-    if (tactic.includes('guard') && preparedGuard(game, context, tactic.includes('rally'))) return true;
+    if (tactic.includes('guard') && preparedGuard(game, context, tactic.includes('rally'), tactic.includes('heal'))) return true;
     if (f && game.tbIsPlayerTurn() && f.fighters.some(a => a.kind === 'ally' && a.alive && !a.fled)) {
       if (tactic.includes('rally') && !f.rallyUsed && game.tbPlayerRally()) return true;
       if (tactic.includes('cry') && !f.warCryUsed && game.tbPlayerWarCry()) return true;
@@ -91,7 +119,7 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const orig = G.tbEnd;
   G.tbEnd = function(result) {
     const f = this.tbfight, tf = (this.state.titans || {})._fight;
-    if (f && tf) fights.push({ result, mark: { ...tf }, rounds: f.round, playerHp: (this.tbFighter('p') || {}).hp, aliveAllies: f.fighters.filter(a => a.kind === 'ally' && a.alive && !a.fled).length, monsters: f.fighters.filter(m => m.kind === 'monster').map(m => ({ id: m.monsterId, hp: m.hp, alive: m.alive })) });
+    if (f && tf) fights.push({ result, mark: { ...tf }, rounds: f.round, playerHp: (this.tbFighter('p') || {}).hp, aliveAllies: f.fighters.filter(a => a.kind === 'ally' && a.alive && !a.fled).length, allies: f.fighters.filter(a => a.kind === 'ally').map(a => ({ key: a.key, villageId: a.villageId, vid: a.villagerId, hp: a.hp, alive: a.alive, fled: !!a.fled })), monsters: f.fighters.filter(m => m.kind === 'monster').map(m => ({ id: m.monsterId, hp: m.hp, maxHp: m.maxHp, alive: m.alive })) });
     return orig.apply(this, arguments);
   };
   for (let node = 0; node < mids.length && !G.over; node++) {
@@ -106,6 +134,7 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const st = G.state.titans || {};
   const row = { kind: 'prepared campaign probe; not natural acquisition or win-rate evidence', seed, tid, loadout, tactic, initialHealth, initialMaxHealth, counters: Object.fromEntries(Object.entries(ctx).filter(([k, v]) => k.startsWith('campaign') && typeof v !== 'object')), notes: ctx.notes, fights, slain: st.slain, campaigns: st.campaigns || {}, remainingFood: P.food(G), currentHealth: G.state.scholar.health, over: !!G.over, liveFight: !!G.tbfight, trace, stateHash: require('./gear-usage-audit').gameplayHash(G.state) };
   row.location = { x: G.map.px, y: G.map.py };
+  row.build = build; row.initialBuild = initialBuild; row.abilityTrace = abilityTrace;
   row.nextTargets = G.worldMonsters().filter(m => mids.includes(m.id)).map(m => ({ id: m.id, x: m.tx, y: m.ty }));
   console.log(JSON.stringify(row, null, 2));
 })().catch(e => { console.error(e); process.exitCode = 1; });
