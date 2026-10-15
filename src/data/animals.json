@@ -2759,4 +2759,596 @@
     "tell": "a nervous shimmer as the school turns as one",
     "unknown": "a shimmer of red bellies in the creek"
   }
+,
+  {
+    "activity": "diurnal",
+    "behavior": "skittish",
+    "behaviorDesc": "Scratches in flocks, exploding upward in a clatter of wings at the first wrong step. Loud — the whole savanna hears them go.",
+    "biomes": [
+      "meadow",
+      "thicket"
+    ],
+    "butcher": {
+      "bone": 1,
+      "feather": 2
+    },
+    "calories": 900,
+    "common": true,
+    "description": "a plump grey bird with white spots and a bony blue head",
+    "difficulty": "medium",
+    "diseaseVector": "Wild birds can carry avian parasites — cook through.",
+    "emoji": "🐔",
+    "fleeDifficulty": "medium",
+    "huntText": "The flock erupts — grey bodies, white spots, a racket of alarm calls. One lags. That one is dinner.",
+    "id": "helmeted_guineafowl",
+    "killText": "About {kcal} kcal — dark rich meat, the Sahel's chicken. The flock will remember this spot; hunt elsewhere tomorrow.",
+    "knowledgeLevels": {
+      "1": "Guineafowl. Grey, spotted, loud. Fast on the ground, loud in the air.",
+      "2": "Parts: meat (dark, rich), feathers (fletching, insulation), bones (broth).",
+      "3": "Uses: the wild chicken — snare at dust-bathing spots or flush at dawn. The alarm call warns everything else, so move fast.",
+      "4": "Mastery: they roost in the same trees nightly — find the roost, hunt at first light. Their racket also warns YOU of predators; listen."
+    },
+    "method": [
+      "snare",
+      "chase",
+      "bow"
+    ],
+    "name": "Helmeted Guineafowl",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Numida meleagris",
+    "tell": "a harsh grating alarm call, then the whole flock freezes.",
+    "unknown": "a grey spotted bird with a bare blue head, scratching in the dust"
+  },
+  {
+    "activity": "both",
+    "behavior": "bold",
+    "behaviorDesc": "Grazes on its knees in the open, tail straight up like a flag. Tough, fast, and armed — a cornered boar is a hospital visit.",
+    "biomes": [
+      "meadow",
+      "thicket",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 3,
+      "fat": 2,
+      "hide": 1
+    },
+    "calories": 25000,
+    "common": true,
+    "description": "a grey bristled pig with curved tusks and warted face",
+    "difficulty": "medium",
+    "diseaseVector": "Wild pig — cook through; gut carefully, avoid the gut contents.",
+    "emoji": "🐖",
+    "fleeDifficulty": "medium",
+    "huntText": "It looks up from its knees, tail snapping vertical. Then it runs — surprisingly fast for a pig.",
+    "id": "warthog",
+    "killText": "About {kcal} kcal on the bone. A real pig — fat, meat, hide. Respect the tusks even now; they don't know they're dead.",
+    "knowledgeLevels": {
+      "1": "Warthog. Grey pig, tusks, grazes kneeling. Fast and dangerous when cornered.",
+      "2": "Parts: meat (excellent pork), fat, thick hide (leather), tusks (tools, trade).",
+      "3": "Uses: the savanna's pig — hunt at dawn near burrows, or wait at water. Never corner one; the tusks slash upward.",
+      "4": "Mastery: they back into burrows tail-first — block the hole at night, hunt at dawn exit. A spear from the side; never face the tusks."
+    },
+    "method": [
+      "spear",
+      "snare",
+      "trap"
+    ],
+    "name": "Warthog",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Phacochoerus africanus",
+    "tell": "tail goes straight up like a flag — it's about to bolt.",
+    "unknown": "a bristled grey shape grazing on its knees, tail flagged"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "skittish",
+    "behaviorDesc": "Freezes flat in the grass, ears down, then vanishes in bounds. Crepuscular feeder — dawn and dusk are the windows.",
+    "biomes": [
+      "meadow"
+    ],
+    "butcher": {
+      "bone": 1,
+      "hide": 1
+    },
+    "calories": 900,
+    "common": true,
+    "description": "a lean brown hare with long ears",
+    "difficulty": "easy",
+    "diseaseVector": "Hares carry tularemia — wear gloves gutting, cook through.",
+    "emoji": "🐰",
+    "fleeDifficulty": "medium",
+    "huntText": "It sits up, ears tall — then it's gone, bounding in long arcs through the grass.",
+    "id": "cape_hare",
+    "killText": "About {kcal} kcal — lean meat, one meal. Eat with fat or you'll run hollow.",
+    "knowledgeLevels": {
+      "1": "Cape hare. Brown, long ears, fast.",
+      "2": "Parts: meat (lean), hide (small but soft), bones.",
+      "3": "Uses: snare on runs at dawn/dusk. Lean protein — pair with fat.",
+      "4": "Mastery: they use the same forms (resting spots) daily — find the flattened grass, set snares on the approach runs."
+    },
+    "method": [
+      "snare",
+      "chase"
+    ],
+    "name": "Cape Hare",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Lepus capensis",
+    "tell": "sits bolt upright, ears swiveling — deciding whether you're worth running from.",
+    "unknown": "a brown shape that flattens into the grass, all ears"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "skittish",
+    "behaviorDesc": "The classic savanna antelope — grazes in small herds, pronks when startled, and can outrun anything you have except patience.",
+    "biomes": [
+      "meadow"
+    ],
+    "butcher": {
+      "bone": 4,
+      "hide": 2
+    },
+    "calories": 18000,
+    "common": true,
+    "description": "a small elegant antelope with lyre-shaped horns",
+    "difficulty": "hard",
+    "diseaseVector": "Cook through; gut quickly in heat.",
+    "emoji": "🐐",
+    "fleeDifficulty": "hard",
+    "huntText": "The herd lifts its heads as one. Then the pronking starts — stiff-legged bounces — and they're gone in a dust line.",
+    "id": "dorcas_gazelle",
+    "killText": "About {kcal} kcal — lean red meat, a serious hunt's reward. The herd will be warier for days.",
+    "knowledgeLevels": {
+      "1": "Dorcas gazelle. Small antelope, elegant horns. Very fast.",
+      "2": "Parts: meat (lean, excellent), hide (light leather), horns (tools), bones.",
+      "3": "Uses: the savanna's deer — ambush at water in the dry season, or stalk with the wind in your face. They drink at dawn.",
+      "4": "Mastery: dry-season waterholes are the trap — wait downwind before dawn. A bow at close range or a snare line on the game trail; never a chase you can't win."
+    },
+    "method": [
+      "bow",
+      "spear",
+      "snare"
+    ],
+    "name": "Dorcas Gazelle",
+    "regions": [
+      "mauritania",
+      "niger",
+      "mali"
+    ],
+    "scientific": "Gazella dorcas",
+    "tell": "the whole herd freezes, heads up, ears forward — the pronk comes next.",
+    "unknown": "a small antelope bouncing stiff-legged through the heat shimmer"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "social",
+    "behaviorDesc": "Troops raid, squabble, and post sentries. Clever, quick, and they learn — a troop you hunt today ambushes your snares tomorrow.",
+    "biomes": [
+      "grove",
+      "thicket"
+    ],
+    "butcher": {
+      "bone": 2
+    },
+    "calories": 3500,
+    "common": true,
+    "description": "a grey-green monkey with a black face",
+    "difficulty": "medium",
+    "diseaseVector": "Primates share our diseases — cook thoroughly, avoid bites and blood contact.",
+    "emoji": "🐒",
+    "fleeDifficulty": "medium",
+    "huntText": "The sentry barks once and the troop explodes into the trees — all but one, tangled in the low branches.",
+    "id": "vervet_monkey",
+    "killText": "About {kcal} kcal — stringy but real meat. The troop will remember your face; hunt far from here next time.",
+    "knowledgeLevels": {
+      "1": "Vervet monkey. Grey-green, black face, troops. Clever.",
+      "2": "Parts: meat (tough, cook long), bones.",
+      "3": "Uses: trap or snare at fruiting trees; they raid crops and camps, so they come to you. Watch for the sentry — no sentry call means no monkey.",
+      "4": "Mastery: they learn fast — rotate trap sites, never hunt the same troop twice in a row. Their alarm calls also warn you of leopards and snakes."
+    },
+    "method": [
+      "snare",
+      "trap",
+      "bow"
+    ],
+    "name": "Vervet Monkey",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Chlorocebus pygerythrus",
+    "tell": "a sharp barking alarm — the troop's sentry has made you.",
+    "unknown": "a grey-green monkey watching you from a branch, unimpressed"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "skittish",
+    "behaviorDesc": "Bursts from the grass with a whirring cackle, flying low and fast. Coveys scatter — mark where each lands.",
+    "biomes": [
+      "thicket",
+      "meadow"
+    ],
+    "butcher": {
+      "bone": 1,
+      "feather": 2
+    },
+    "calories": 700,
+    "common": true,
+    "description": "a plump brown partridge with a double spur",
+    "difficulty": "medium",
+    "diseaseVector": "Cook through.",
+    "emoji": "🐓",
+    "fleeDifficulty": "medium",
+    "huntText": "The grass erupts — brown wings, cackling, low and fast. One peels off from the covey.",
+    "id": "double_spurred_francolin",
+    "killText": "About {kcal} kcal — small but fine game bird. Mark the covey's landing; they'll hold again.",
+    "knowledgeLevels": {
+      "1": "Francolin. Plump brown game bird. Bursts from grass.",
+      "2": "Parts: meat (good), feathers.",
+      "3": "Uses: flush at dawn from thicket edges; snare at dust baths. Coveys hold territory — learn their ground.",
+      "4": "Mastery: walk the thicket edge slowly at dawn; when one flushes, watch the rest land and work them one by one."
+    },
+    "method": [
+      "snare",
+      "chase",
+      "bow"
+    ],
+    "name": "Double-spurred Francolin",
+    "regions": [
+      "senegal",
+      "mali",
+      "guinea"
+    ],
+    "scientific": "Pternistis bicalcaratus",
+    "tell": "a harsh cackling from deep in the grass — the covey is about to flush.",
+    "unknown": "a plump brown bird freezing in the grass, hoping you didn't see"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "bold",
+    "behaviorDesc": "Fearless beyond reason. It will stand down a leopard, eat a scorpion, and raid your camp for the honey — in that order.",
+    "biomes": [
+      "thicket",
+      "meadow"
+    ],
+    "butcher": {
+      "bone": 2,
+      "hide": 1
+    },
+    "calories": 4000,
+    "common": false,
+    "description": "a stocky black-and-grey mustelid with massive claws",
+    "difficulty": "hard",
+    "diseaseVector": "Aggressive biter — avoid the mouth; cook through.",
+    "emoji": "🦡",
+    "fleeDifficulty": "hard",
+    "huntText": "It turns to face you — grey mantle, black belly, zero fear. This one decides if there's a fight.",
+    "id": "honey_badger",
+    "killText": "About {kcal} kcal — but what a fight. Thick loose skin, claws like garden tools. You earned every bite.",
+    "knowledgeLevels": {
+      "1": "Honey badger. Stocky, grey back, black belly. Fearless — do not corner it.",
+      "2": "Parts: meat (tough), famously thick loose hide (armor-grade leather), claws.",
+      "3": "Uses: hunt only with a spear and respect — it twists inside its own skin to bite back. The hide is the real prize.",
+      "4": "Mastery: they follow honeyguide birds to hives — find the bird, find the badger. Strike from behind the head; the skin slides and the teeth find fingers."
+    },
+    "method": [
+      "spear",
+      "trap"
+    ],
+    "name": "Honey Badger",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Mellivora capensis",
+    "tell": "stands its ground, head low, making a rattling growl — it is not bluffing.",
+    "unknown": "a stocky grey-and-black shape digging with total confidence"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "bold",
+    "behaviorDesc": "Strides the grassland in pairs, hammering the ground for snakes and tortoises. Huge, loud, and utterly unafraid of you.",
+    "biomes": [
+      "meadow",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 2,
+      "feather": 3
+    },
+    "calories": 2500,
+    "common": false,
+    "description": "a huge black-and-white ground bird with a massive bill",
+    "difficulty": "medium",
+    "diseaseVector": "Cook through.",
+    "emoji": "🦜",
+    "fleeDifficulty": "easy",
+    "huntText": "It doesn't fly — it strides away, booming, too big to hurry. You can walk it down if you're patient.",
+    "id": "abyssinian_ground_hornbill",
+    "killText": "About {kcal} kcal — big bird, dark meat. It eats snakes for a living; the favor is returned.",
+    "knowledgeLevels": {
+      "1": "Ground hornbill. Huge, black-and-white, walks. Not afraid.",
+      "2": "Parts: meat (dark, substantial), massive bill (tool material), feathers.",
+      "3": "Uses: stalk in the open — they can't fly far and they know it. Pairs hold big territories; learn the pair's route.",
+      "4": "Mastery: they hunt cooperatively, flushing prey to each other — watch a pair work and you'll learn where the snakes den, too."
+    },
+    "method": [
+      "chase",
+      "bow",
+      "spear"
+    ],
+    "name": "Abyssinian Ground Hornbill",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Bucorvus abyssinicus",
+    "tell": "a deep booming call that carries a mile — the pair talking.",
+    "unknown": "a huge black-and-white bird striding through the grass like it owns it"
+  },
+  {
+    "activity": "diurnal",
+    "behavior": "skittish",
+    "behaviorDesc": "Suns on the rocks in a pile, scattering at a shadow. Quick, small, and everywhere there's stone.",
+    "biomes": [
+      "thicket",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 1200,
+    "common": true,
+    "description": "a plump guinea-pig-like animal with rubbery padded feet",
+    "difficulty": "easy",
+    "diseaseVector": "Cook through.",
+    "emoji": "🐹",
+    "fleeDifficulty": "medium",
+    "huntText": "The rock pile erupts — a dozen plump bodies scattering for the crevices. One hesitates.",
+    "id": "rock_hyrax",
+    "killText": "About {kcal} kcal — small but tender. The colony's sentry saw you coming; next time come quieter.",
+    "knowledgeLevels": {
+      "1": "Rock hyrax. Plump, rock-dwelling, quick.",
+      "2": "Parts: meat (tender, small), hide (soft).",
+      "3": "Uses: snare at rock crevices at dawn; they sun in the same spots daily. The sentry's whistle is your warning.",
+      "4": "Mastery: learn the colony's sunning rocks — set snares on the approach paths, not the rocks. Their middens mark the best spots."
+    },
+    "method": [
+      "snare",
+      "trap"
+    ],
+    "name": "Rock Hyrax",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Procavia capensis",
+    "tell": "a sharp whistle from the rocks — the sentry has spotted you.",
+    "unknown": "plump shapes piled on a sun-warmed rock, scattering at your shadow"
+  },
+  {
+    "activity": "both",
+    "behavior": "dangerous",
+    "behaviorDesc": "A ton of muscle with a bad attitude and no reverse gear. Buffalo don't bluff — if it lowers its head, the conversation is over.",
+    "biomes": [
+      "meadow",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 8,
+      "fat": 4,
+      "hide": 3
+    },
+    "calories": 120000,
+    "common": false,
+    "description": "a massive black buffalo with bossed horns",
+    "difficulty": "deadly",
+    "diseaseVector": "Cook through; gut carefully.",
+    "emoji": "🐃",
+    "fleeDifficulty": "hard",
+    "huntText": "It turns — massive head, horns like a battering ram. It is deciding whether you are a problem. You are.",
+    "id": "african_buffalo",
+    "killText": "About {kcal} kcal — a mountain of meat. This was the most dangerous thing you've done this month. Butcher fast, guard the carcass, and expect company.",
+    "knowledgeLevels": {
+      "1": "African buffalo. Huge, black, horned. One of the most dangerous animals alive — never hunt alone.",
+      "2": "Parts: meat (enormous quantity), thick hide (the best leather), horns (tools), fat, bones.",
+      "3": "Uses: a herd animal — hunt the straggler, never the herd. Spear from ambush with an escape tree picked in advance. Lions do it; you can too, carefully.",
+      "4": "Mastery: old bulls separate from the herd — the target. Wound it and it WILL come for you; finish fast or climb. A buffalo kill feeds the village for a week — and the lions know it."
+    },
+    "method": [
+      "spear"
+    ],
+    "name": "African Buffalo",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Syncerus caffer",
+    "tell": "lowers its massive head and paws the dust — the last warning you'll get.",
+    "unknown": "a black wall of muscle with horns, watching you back"
+  },
+  {
+    "activity": "both",
+    "behavior": "predator",
+    "behaviorDesc": "The reason the savanna goes quiet at dusk. Lions hunt in prides, see in the dark, and consider you a rounding error.",
+    "biomes": [
+      "meadow",
+      "grove"
+    ],
+    "butcher": {
+      "bone": 6,
+      "fat": 3,
+      "hide": 2
+    },
+    "calories": 60000,
+    "common": false,
+    "description": "a tawny lion, scarred and utterly confident",
+    "difficulty": "deadly",
+    "diseaseVector": "Apex predator — cook through; never eat a sick-looking animal.",
+    "emoji": "🦁",
+    "fleeDifficulty": "hard",
+    "huntText": "The grass parts and it's just THERE — tawny, scarred, looking at you the way you look at lunch.",
+    "id": "lion",
+    "killText": "About {kcal} kcal. You killed a lion. Tell this story for the rest of your life — quietly, because the pride heard it too.",
+    "knowledgeLevels": {
+      "1": "Lion. Tawny, huge, pride hunter. The apex. Avoid.",
+      "2": "Parts: meat (tough), hide (prestige), claws and teeth (tools, trade).",
+      "3": "Uses: hunt only in desperation or defense — a spear, a tree behind you, and friends. Lions hunt at night; your fire is your wall.",
+      "4": "Mastery: a lone old male separated from the pride is the only sane target. Never hunt near a kill — the pride owns it. Your best defense is never needing one: fire, noise, numbers."
+    },
+    "method": [
+      "spear"
+    ],
+    "name": "Lion",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Panthera leo",
+    "tell": "the savanna goes quiet — birds stop, monkeys freeze. Something big is moving.",
+    "unknown": "a tawny shape in the grass, too big, too calm"
+  },
+  {
+    "activity": "both",
+    "behavior": "aquatic",
+    "behaviorDesc": "Stays in water. Nests in the shallows, guards its young, and bites the hand that tickles it.",
+    "biomes": [
+      "creek",
+      "wetland"
+    ],
+    "butcher": {
+      "bone": 1
+    },
+    "calories": 600,
+    "common": true,
+    "description": "a deep-bodied silver-grey fish",
+    "difficulty": "easy",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it.",
+    "emoji": "🐟",
+    "fleeDifficulty": "medium",
+    "huntText": "A silver flash in the shallows — tilapia, circling its nest.",
+    "id": "nile_tilapia",
+    "killText": "About {kcal} kcal — clean white meat, the river's chicken. The males guard nests in the shallows; that's your window.",
+    "knowledgeLevels": {
+      "1": "Nile tilapia. Silver-grey, deep-bodied. Good eating.",
+      "2": "Parts: meat (white, clean), bones (careful with the small ones).",
+      "3": "Uses: net or line in the shallows; they nest in circles on the bottom. A basket trap at the nest mouth is the patient hunter's play.",
+      "4": "Mastery: breeding males are dark and aggressive — they guard, so they don't flee. Dawn in the shallows; the nest circles are visible from above."
+    },
+    "method": [
+      "line",
+      "net",
+      "hands"
+    ],
+    "name": "Nile Tilapia",
+    "regions": [
+      "mali",
+      "niger",
+      "senegal"
+    ],
+    "scientific": "Oreochromis niloticus",
+    "tell": "circular cleared nests on the shallow bottom, a dark male hovering over each.",
+    "unknown": "a flicker of silver over a cleared circle in the shallows"
+  },
+  {
+    "activity": "nocturnal",
+    "behavior": "aquatic",
+    "behaviorDesc": "The night catfish — air-breathing, mud-walking, and strong enough to straighten a hook. Hunts by smell in the dark.",
+    "biomes": [
+      "creek",
+      "wetland"
+    ],
+    "butcher": {
+      "bone": 2
+    },
+    "calories": 1200,
+    "common": true,
+    "description": "a dark eel-like catfish with long barbels",
+    "difficulty": "medium",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it. Watch the sharp pectoral spines when handling.",
+    "emoji": "🐟",
+    "fleeDifficulty": "medium",
+    "huntText": "Something heavy moves in the dark water — a catfish, barbels sweeping, smelling its way to your bait.",
+    "id": "african_catfish",
+    "killText": "About {kcal} kcal — rich, fatty, no scales to fight. Mind the spines; they mean it.",
+    "knowledgeLevels": {
+      "1": "African catfish. Dark, eel-like, whiskered. Night hunter.",
+      "2": "Parts: meat (rich, fatty, scaleless), spines (sharp — handle with care).",
+      "3": "Uses: night lines and basket traps; they walk between pools in the rains. Smelly bait wins.",
+      "4": "Mastery: they breathe air — they survive in mud as pools dry. As the wetland shrinks, they concentrate. That's the harvest."
+    },
+    "method": [
+      "line",
+      "net",
+      "trap"
+    ],
+    "name": "African Sharptooth Catfish",
+    "regions": [
+      "mali",
+      "niger",
+      "senegal"
+    ],
+    "scientific": "Clarias gariepinus",
+    "tell": "a swirl in dark water and the smell of mud — it's hunting by scent.",
+    "unknown": "a dark whiskered shape sliding through night water"
+  },
+  {
+    "activity": "both",
+    "behavior": "aquatic",
+    "behaviorDesc": "The river's wolf — a huge silver predator that inhales smaller fish whole. Where the perch hunts, the water goes still.",
+    "biomes": [
+      "creek",
+      "wetland"
+    ],
+    "butcher": {
+      "bone": 4
+    },
+    "calories": 4000,
+    "common": false,
+    "description": "a huge silver predatory fish",
+    "difficulty": "hard",
+    "diseaseVector": "Raw freshwater fish can carry parasites. Cook it.",
+    "emoji": "🐟",
+    "fleeDifficulty": "medium",
+    "huntText": "The water goes still — then a silver torpedo rolls through the shallows, and the small fish scatter.",
+    "id": "nile_perch",
+    "killText": "About {kcal} kcal — a monster of a fish, steaks like a mammal. The river's top predator, on your fire.",
+    "knowledgeLevels": {
+      "1": "Nile perch. Huge, silver, predatory. The big one.",
+      "2": "Parts: meat (thick white steaks), bones (large, useful).",
+      "3": "Uses: strong line or a big basket trap in deep pools. It hunts at dawn and dusk — be there.",
+      "4": "Mastery: find the deep pool, fish the edges at first light. A perch this size needs a real line and patience; hand-fishing is a good way to lose a finger."
+    },
+    "method": [
+      "line",
+      "net"
+    ],
+    "name": "Nile Perch",
+    "regions": [
+      "mali",
+      "niger",
+      "senegal"
+    ],
+    "scientific": "Lates niloticus",
+    "tell": "the small fish vanish all at once — something big is moving below.",
+    "unknown": "a huge silver shadow turning slowly in the deep pool"
+  }
 ]

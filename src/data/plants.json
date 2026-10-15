@@ -848,7 +848,8 @@
     "biomes": [
       "se_woodlands",
       "eu_temperate_forest",
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "sahel_savanna"
     ],
     "caloriesPerUnit": 30,
     "unit": "handful",
@@ -2257,7 +2258,8 @@
  "name": "Prickly Pear",
  "scientific": "Opuntia engelmannii",
  "biomes": [
-  "se_woodlands"
+   "se_woodlands",
+   "sahel_savanna"
  ],
  "caloriesPerUnit": 40,
  "unit": "pad/fruit",
@@ -2302,7 +2304,8 @@
  "name": "Mesquite",
  "scientific": "Prosopis velutina",
  "biomes": [
-  "se_woodlands"
+   "se_woodlands",
+   "sahel_savanna"
  ],
  "caloriesPerUnit": 60,
  "unit": "pod",
@@ -5793,6 +5796,1697 @@
         "note": "only after thorough prolonged cooking — famine food"
       }
     ],
+    "waterContent": "low"
+  }
+,
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 360,
+    "codex": "The grain that feeds the Sahel. It grows on rain that other crops call a drought.",
+    "confidence": "high",
+    "description": "a tall grass with a dense bottle-brush grain head",
+    "edibility": "safe",
+    "form": "grain",
+    "id": "pearl_millet",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Pearl millet. Tall grass, dense grain head like a bottle brush. This is food.",
+      "2": "Parts: grain heads (thresh, winnow, grind). Stalks are fodder and building material.",
+      "3": "Uses: the Sahel's staple grain — porridge, couscous, flatbread. Drought-tough; it fruits where maize dies.",
+      "4": "Mastery: harvest when heads are hard and dry; thresh by beating, winnow in wind. Pound to flour; stores a year dry. 2x yield if you cut whole heads before birds do."
+    },
+    "lookalikeNote": "The grain head is a dense cylindrical spike, unmistakable once headed. Young shoots resemble any grass — wait for the head.",
+    "medicinal": false,
+    "name": "Pearl Millet",
+    "preparation": "Thresh and winnow the grain; grind to flour. Cook as porridge or couscous — raw grain is indigestible.",
+    "regions": [
+      "nigeria",
+      "senegal",
+      "niger",
+      "mali"
+    ],
+    "scientific": "Cenchrus americanus",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — pearl millet crop profile",
+      "field notes: dominant Sahel staple grain"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "grass",
+      "grain"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "cup of grain",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "thresh, grind, cook as porridge/couscous"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 340,
+    "codex": "Sorghum waits out the dry season in a granary and outlasts every other plan.",
+    "confidence": "high",
+    "description": "a tall cane-like grass with a loose branching head of grain",
+    "edibility": "safe",
+    "form": "grain",
+    "id": "sorghum",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Sorghum. Tall as a person, grain in a branching head. Food.",
+      "2": "Parts: grain (thresh and grind), sweet stalks (chew for juice), leaves (fodder).",
+      "3": "Uses: porridge, flatbread, brewing. The grain keeps for years dry — famine insurance.",
+      "4": "Mastery: some varieties have bitter tannin coats — taste a grain first; the sweet-stalk types are the treat. Harvest whole panicles; thresh dry."
+    },
+    "lookalikeNote": "Tall cane-like stalks with a loose branching grain head — distinct from pearl millet's dense spike. Wild sorghums exist; the grain head shape is the tell.",
+    "medicinal": false,
+    "name": "Sorghum",
+    "preparation": "Thresh, winnow, grind. Cook thoroughly as porridge or flatbread.",
+    "regions": [
+      "nigeria",
+      "senegal",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Sorghum bicolor",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — sorghum crop profile",
+      "field notes: Sahel staple grain"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "grass",
+      "grain"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "cup of grain",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "grain for porridge/flatbread; sweet stalks chewed fresh"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 320,
+    "codex": "The oldest cultivated grain in West Africa, and the fastest from seed to bowl.",
+    "confidence": "high",
+    "description": "a delicate low grass with tiny grains on finger-like heads",
+    "edibility": "safe",
+    "form": "grain",
+    "id": "fonio",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Fonio. Small grass, tiny grains. The grains are food.",
+      "2": "Parts: the tiny grains (pound to dehusk, winnow). Cooks in minutes.",
+      "3": "Uses: West Africa's ancient grain — porridge, couscous. Matures fast; the hungry-season bridge.",
+      "4": "Mastery: the grains are sand-sized — winnow carefully or you eat grit. Parboil then steam; 2x yield from a patient threshing."
+    },
+    "lookalikeNote": "Tiny grains on delicate finger-like seed heads. Resembles wild Digitaria grasses — the cultivated stands are planted in rows; wild ones scatter.",
+    "medicinal": false,
+    "name": "Fonio",
+    "preparation": "Dehusk by pounding, winnow well, rinse. Cooks fast — porridge or steamed like couscous.",
+    "regions": [
+      "senegal",
+      "mali",
+      "guinea",
+      "nigeria"
+    ],
+    "scientific": "Digitaria exilis",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — fonio (ancient African grain) profile",
+      "field notes: West African Sahel grain"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "grass",
+      "grain"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "cup of grain",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "dehusked grains cooked as porridge or couscous"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 200,
+    "codex": "Beans for the grain, leaves for the pot — the vine that completes the millet.",
+    "confidence": "high",
+    "description": "a trailing vine with three-part leaves and long thin pods",
+    "edibility": "cook",
+    "form": "beans",
+    "id": "cowpea",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Cowpea. Vine, three-part leaves, long pods. The beans inside are food — cooked.",
+      "2": "Parts: dried beans (boil well), young leaves (greens), fresh pods (vegetable).",
+      "3": "Uses: protein to go with the grain — the Sahel's bean. Fixes nitrogen; planted with the millet.",
+      "4": "Mastery: beans must be boiled until fully soft — undercooked beans punish you. Young leaves are the fastest green you'll get."
+    },
+    "lookalikeNote": "Climbing/trailing vine with trifoliate leaves and long thin pods. Pods resemble wild legumes — the plump cultivated pods are the tell.",
+    "medicinal": false,
+    "name": "Cowpea",
+    "preparation": "Boil dried beans until completely soft. Never eat dried beans raw or undercooked.",
+    "regions": [
+      "nigeria",
+      "senegal",
+      "niger"
+    ],
+    "scientific": "Vigna unguiculata",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — cowpea profile",
+      "field notes: Sahel staple legume"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "legume",
+      "vine"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "cup of beans",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "beans boiled soft; young leaves as greens"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 400,
+    "codex": "Called groundnut here, peanut elsewhere. Fat you can carry in your pocket.",
+    "confidence": "high",
+    "description": "a low bushy plant with paired oval leaves; nuts underground",
+    "edibility": "caution",
+    "form": "nuts",
+    "id": "peanut",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Groundnut. Low bush, nuts buried under it. Dig them up.",
+      "2": "Parts: the nuts (roast or boil). Oil-rich — serious calories.",
+      "3": "Uses: roast for eating, pound for sauce, press for oil. Protein and fat together.",
+      "4": "Mastery: NEVER eat moldy, shriveled, or bitter nuts — aflatoxin from bad storage is a slow poison. Roast fresh nuts; discard anything off-smelling."
+    },
+    "lookalikeNote": "Low bushy plant with paired oval leaflets; the nuts grow underground. Dig carefully — the shells are unmistakable, but moldy nuts are the real danger.",
+    "medicinal": false,
+    "name": "Peanut",
+    "preparation": "Roast or boil fresh nuts. Discard any moldy, discolored, or bitter nuts — aflatoxin.",
+    "regions": [
+      "senegal",
+      "nigeria",
+      "mali"
+    ],
+    "scientific": "Arachis hypogaea",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — groundnut profile",
+      "field notes: aflatoxin risk in Sahel storage"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "legume",
+      "groundnut"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "handful of nuts",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "nuts roasted or boiled; pounded into sauce"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 120,
+    "codex": "The tree of life, and it earns the name. Fruit in the hungry season, leaves for the pot, shade for the village.",
+    "confidence": "high",
+    "description": "a massive bottle-trunked tree, branches like roots against the sky",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "baobab",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Baobab. The upside-down tree. Everything it offers is food.",
+      "2": "Parts: dry fruit pulp (tangy, vitamin C — eat dry or stir into water), young leaves (greens, cooked), seeds (roast).",
+      "3": "Uses: the fruit is called monkey bread — powdery pulp eaten as-is or as a drink. Leaves make a mucilaginous sauce leaf. Vitamin C when nothing else has any.",
+      "4": "Mastery: fruit ripens in the dry season — the hungry months. Crack the hard pod, shake out the dry pulp; no cooking needed. Leaves dried and pounded keep for the dry season."
+    },
+    "lookalikeNote": "Unmistakable: a trunk like a water tower, branches like roots in the air. Nothing else looks like it.",
+    "medicinal": true,
+    "name": "Baobab",
+    "preparation": "Eat the dry fruit pulp as-is or stirred into water. Cook young leaves as greens.",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina",
+      "nigeria"
+    ],
+    "scientific": "Adansonia digitata",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: iconic Sahel tree"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "tree",
+      "baobab"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "fruit pod",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "dry fruit pulp eaten raw or as drink; leaves cooked as greens"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "vitamin C — scurvy prevention in the dry season"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 90,
+    "codex": "Sour enough to wake the dead, sweet enough to keep you walking. The traveler's tree.",
+    "confidence": "high",
+    "description": "a broad shady tree with feathery leaves and hanging brown pods",
+    "edibility": "safe",
+    "form": "pods",
+    "id": "tamarind",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Tamarind. Big shady tree, brown pods. The sour pulp inside is food.",
+      "2": "Parts: ripe pod pulp (sour-sweet, eat fresh or soak into a drink), seeds (roast in famine).",
+      "3": "Uses: souring for sauces, a tart drink, travel food — the pulp keeps for months. Vitamin C and appetite when food is dull.",
+      "4": "Mastery: pick pods that are brown and brittle; the pulp should pull away clean. Soak pulp, strain seeds — the drink keeps days."
+    },
+    "lookalikeNote": "Feathery compound leaves, brown curved pods hanging in clusters. The sour pulp inside is the tell — nothing poisonous mimics it.",
+    "medicinal": false,
+    "name": "Tamarind",
+    "preparation": "Eat ripe pulp fresh or soak in water for a tart drink. Strain out seeds and fibers.",
+    "regions": [
+      "senegal",
+      "mali",
+      "nigeria"
+    ],
+    "scientific": "Tamarindus indica",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: Sahel parkland tree"
+    ],
+    "spoilageDays": 120,
+    "taxon": [
+      "plant",
+      "tree",
+      "tamarind"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "handful of pods",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe pulp eaten fresh or as a drink"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 150,
+    "codex": "Sweet underground nuts that survive the dry season in the ground, waiting.",
+    "confidence": "high",
+    "description": "a grass-like sedge; striped nutty tubers underground",
+    "edibility": "safe",
+    "form": "tubers",
+    "id": "tiger_nut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Tiger nut. Sedge, tubers underground. Dig — the striped tubers are food.",
+      "2": "Parts: the tubers (eat fresh, dried, or ground into a sweet milky drink).",
+      "3": "Uses: sweet, chewy, filling — the original energy bar. The drink (kunun aya) is a meal in a cup.",
+      "4": "Mastery: wash tubers well — grit is the enemy. Dry them for storage; soak dried ones overnight before eating."
+    },
+    "lookalikeNote": "Grass-like sedge with triangular stems; the tubers are small striped nuts underground. Other sedges look identical above ground — dig to confirm.",
+    "medicinal": false,
+    "name": "Tiger Nut",
+    "preparation": "Wash well. Eat fresh, dried, or ground and soaked into a sweet drink.",
+    "regions": [
+      "nigeria",
+      "senegal",
+      "mali"
+    ],
+    "scientific": "Cyperus esculentus",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "PFAF — Cyperus esculentus",
+      "field notes: Sahel tuber crop"
+    ],
+    "spoilageDays": 90,
+    "taxon": [
+      "plant",
+      "sedge",
+      "tuber"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "wetland"
+    ],
+    "unit": "handful of tubers",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "tubers fresh, dried, or as a ground drink"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 60,
+    "codex": "The pod that holds a sauce together. Slimy is the point.",
+    "confidence": "high",
+    "description": "a hibiscus-like plant with ridged green pods",
+    "edibility": "safe",
+    "form": "pods",
+    "id": "okra",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Okra. Ridged green pods. Pick young pods — food.",
+      "2": "Parts: young pods (cook), leaves (greens), seeds (roast as coffee substitute in famine).",
+      "3": "Uses: the pod's mucilage thickens sauces — the base of a thousand Sahel stews. Leaves are good greens.",
+      "4": "Mastery: pick pods young and tender; old pods are woody string. Slice and sun-dry for the dry season."
+    },
+    "lookalikeNote": "Ridged green pods on a hibiscus-like plant. WARNING: thorn-apple (Datura) grows nearby with spiky round pods — compare carefully; okra pods are ridged and elongated, never round and spiny.",
+    "medicinal": false,
+    "name": "Okra",
+    "preparation": "Cook young pods — stews, sauces. Sun-dry sliced pods for storage.",
+    "regions": [
+      "nigeria",
+      "senegal",
+      "mali"
+    ],
+    "scientific": "Abelmoschus esculentus",
+    "seasons": [
+      "wet"
+    ],
+    "sources": [
+      "FAO — okra crop profile",
+      "field notes: Sahel vegetable"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "vegetable",
+      "okra"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "handful of pods",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "young pods cooked; leaves as greens"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "Red as sunset, sour as gossip. The drink of every market in the Sahel.",
+    "confidence": "high",
+    "description": "a tall plant with deep red fleshy calyces",
+    "edibility": "safe",
+    "form": "calyces",
+    "id": "hibiscus_bissap",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Bissap. Red fleshy cups around the seed pods. Those red calyces are food and drink.",
+      "2": "Parts: calyces (steep into tart red tea, hot or cold), leaves (sour greens).",
+      "3": "Uses: bissap — the Sahel's drink. Vitamin C, cooling, keeps in the heat. Leaves sour a sauce like tamarind.",
+      "4": "Mastery: harvest calyces when plump and deep red; dry them — dried bissap keeps a year and is trade goods."
+    },
+    "lookalikeNote": "Deep red fleshy calyces around a seed pod — unmistakable when fruiting. Leaves resemble okra's; the red calyx is the confirmation.",
+    "medicinal": true,
+    "name": "Bissap Hibiscus",
+    "preparation": "Steep fresh or dried calyces in water for bissap tea. Cook leaves as sour greens.",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina",
+      "nigeria"
+    ],
+    "scientific": "Hibiscus sabdariffa",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — roselle profile",
+      "field notes: bissap is the Sahel's drink"
+    ],
+    "spoilageDays": 5,
+    "taxon": [
+      "plant",
+      "shrub",
+      "hibiscus"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "handful of calyces",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "calyces as tea; leaves as sour greens"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "vitamin C; cooling drink in heat"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 50,
+    "codex": "The tree that feeds you twice — leaves in the rains, pods in the dry.",
+    "confidence": "high",
+    "description": "a slender fast-growing tree with feathery leaves and long hanging pods",
+    "edibility": "safe",
+    "form": "leaves",
+    "id": "moringa",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Moringa. Feathery leaves, long pods. The leaves are food — fresh or dried.",
+      "2": "Parts: leaves (eat fresh, cooked, or dried and pounded to powder), pods (cook young), flowers (tea).",
+      "3": "Uses: the most nutritious leaf in the Sahel — protein, iron, vitamins. Dried leaf powder keeps months and fortifies porridge.",
+      "4": "Mastery: strip leaves, dry in shade (sun kills the vitamins), pound to powder. A spoonful a day in the hungry season."
+    },
+    "lookalikeNote": "Feathery twice-divided leaves, slender trunk, long ribbed pods. The drumstick pods are the tell.",
+    "medicinal": true,
+    "name": "Moringa",
+    "preparation": "Eat leaves fresh or cooked; dry and pound to powder for storage. Cook young pods.",
+    "regions": [
+      "senegal",
+      "nigeria",
+      "mali"
+    ],
+    "scientific": "Moringa oleifera",
+    "seasons": [
+      "wet",
+      "dry"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "FAO — moringa profile"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "tree",
+      "moringa"
+    ],
+    "tileAffinity": [
+      "grove",
+      "thicket"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "leaves fresh/cooked/dried; young pods cooked"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "iron, vitamin A — deficiency greens"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 180,
+    "codex": "Gold you have to work for. The nuts are useless raw; the butter feeds a continent.",
+    "confidence": "high",
+    "description": "a broad gnarled tree with round green fruits",
+    "edibility": "cook",
+    "form": "nuts",
+    "id": "shea",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Shea. Gnarled tree, round fruits. The nuts inside need work before they're food.",
+      "2": "Parts: nuts (process to butter — never eat raw), fruit pulp (eat fresh when ripe, sweet).",
+      "3": "Uses: shea butter — cooking fat, the Sahel's oil. The ripe fruit pulp is a sweet snack in season.",
+      "4": "Mastery: boil nuts, sun-dry, crack, roast kernels, grind, knead with water — the butter rises. Days of work; months of fat."
+    },
+    "lookalikeNote": "Broad gnarled canopy, round green fruits ripening in the rains. The fruit pulp is sweet and safe fresh — the NUT is the part that needs processing.",
+    "medicinal": false,
+    "name": "Shea",
+    "preparation": "NEVER eat raw nuts. Boil, dry, crack, roast, grind, knead — extract the butter. Eat ripe fruit pulp fresh.",
+    "regions": [
+      "mali",
+      "burkina",
+      "ghana",
+      "nigeria"
+    ],
+    "scientific": "Vitellaria paradoxa",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: shea parklands, women's harvest"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "tree",
+      "shea"
+    ],
+    "tileAffinity": [
+      "grove"
+    ],
+    "unit": "handful of nuts",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 3,
+        "note": "nuts processed to butter; ripe fruit pulp eaten fresh"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 70,
+    "codex": "Sweet, bitter, and stubborn — the tree that fruits when nothing else dares.",
+    "confidence": "high",
+    "description": "a spiny evergreen tree with plum-sized yellow-brown fruits",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "desert_date",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Desert date. Spiny tree, plum-sized fruits. The ripe pulp is food — bittersweet.",
+      "2": "Parts: ripe fruit pulp (eat fresh or dried), young leaves (boil as vegetable), kernel (crack the stone, roast — oily).",
+      "3": "Uses: pulp is candy in the dry season; kernel oil cooks and the kernel meal feeds stock. Leaves are famine greens.",
+      "4": "Mastery: ripe = yellow-brown and fragrant; green fruit is harsh. Soak fruit, wash off pulp, sun-dry the stones, crack for kernels — stone-on-stone work."
+    },
+    "lookalikeNote": "Spiny branches, plum-sized faintly five-grooved fruits ripening yellow-brown. Green fruit is harsh — wait for the color change.",
+    "medicinal": true,
+    "name": "Desert Date",
+    "preparation": "Eat ripe pulp fresh or dried. Boil young leaves. Crack stones for kernels; roast them.",
+    "regions": [
+      "senegal",
+      "mauritania",
+      "niger",
+      "sudan"
+    ],
+    "scientific": "Balanites aegyptiaca",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "MDPI Foods 2023 — Balanites aegyptiaca kernel oil (Sahel/Sahara uses)"
+    ],
+    "spoilageDays": 60,
+    "taxon": [
+      "plant",
+      "tree",
+      "desert_date"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "handful of fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe pulp fresh/dried; leaves boiled; kernels roasted"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "pulp used traditionally for cough, constipation"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 60,
+    "codex": "The bush by every path, fruiting in the worst months. The Sahel's candy store.",
+    "confidence": "high",
+    "description": "a thorny bush with small round yellow-red fruits",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "jujube",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Jujube. Thorny bush, small round fruits. Ripe ones are food.",
+      "2": "Parts: ripe fruits (eat fresh, dry for later), leaves (fodder, tea).",
+      "3": "Uses: sweet-tart snack, dried into a travel food. Fruits in the dry season when little else does.",
+      "4": "Mastery: pick when deep yellow to red and slightly wrinkled — fully ripe. Dry in the sun; dried jujubes keep months."
+    },
+    "lookalikeNote": "Thorny zigzag branches, small round fruits ripening yellow to red. Ripe fruit is safe; unripe green ones are just sour, not dangerous.",
+    "medicinal": false,
+    "name": "Jujube",
+    "preparation": "Eat ripe fruit fresh or sun-dried.",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger",
+      "burkina"
+    ],
+    "scientific": "Ziziphus mauritiana",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: common Sahel bush"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "plant",
+      "bush",
+      "jujube"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "unit": "handful of fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe fruits fresh or dried"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 55,
+    "codex": "Small white berries on a dusty bush — the children's harvest.",
+    "confidence": "medium",
+    "description": "a dusty grey-green bush with small white-pink berries",
+    "edibility": "safe",
+    "form": "berries",
+    "id": "grewia",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Grewia. Grey-green bush, small pale berries. The ripe berries are food.",
+      "2": "Parts: ripe berries (eat fresh; pound with water into a drink), leaves (famine greens).",
+      "3": "Uses: called godeim — the berries make a sweet drink; children live on them in season. Iron-rich.",
+      "4": "Mastery: berries ripen white to pinkish — taste for sweetness. Pound, soak, strain; the juice is the prize."
+    },
+    "lookalikeNote": "Small shrub with rough grey-green leaves and pea-sized pale berries. Ripe berries are sweet — sour or bitter ones aren't ready.",
+    "medicinal": false,
+    "name": "White Crossberry",
+    "preparation": "Eat ripe berries fresh or pounded into a drink.",
+    "regions": [
+      "sudan",
+      "niger",
+      "mali"
+    ],
+    "scientific": "Grewia tenax",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "Sudan National Food Research Centre — indigenous fruits (godeim)",
+      "field notes: Sahel wild berry"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "bush",
+      "berry"
+    ],
+    "tileAffinity": [
+      "thicket"
+    ],
+    "unit": "handful of berries",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe berries fresh or as a drink"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 45,
+    "codex": "The weed that feeds. It volunteers in every disturbed patch of ground.",
+    "confidence": "high",
+    "description": "a fast leafy green, sometimes reddish stems",
+    "edibility": "safe",
+    "form": "greens",
+    "id": "amaranth",
+    "idDifficulty": 1,
+    "knowledgeLevels": {
+      "1": "Amaranth. Leafy green, fast-growing. The young leaves are food.",
+      "2": "Parts: young leaves and shoots (cook as greens), seeds (grain — thresh like millet, smaller).",
+      "3": "Uses: alefu — the everyday green. Iron and protein when the grain runs thin. Seeds are a bonus grain.",
+      "4": "Mastery: pick young tops before flowering; older leaves get tough. The seeds ripen after the leaves are done — two harvests, one plant."
+    },
+    "lookalikeNote": "Fast-growing leafy green with a dense flower spike. Young plants resemble other weeds — the grain-like seed head at maturity confirms it.",
+    "medicinal": false,
+    "name": "African Amaranth",
+    "preparation": "Cook young leaves as greens. Thresh seeds as a grain.",
+    "regions": [
+      "ghana",
+      "nigeria",
+      "togo"
+    ],
+    "scientific": "Amaranthus cruentus",
+    "seasons": [
+      "wet"
+    ],
+    "sources": [
+      "FAO — amaranth leaf vegetable profile",
+      "field notes: West African greens"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "green",
+      "amaranth"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "handful of greens",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "young leaves cooked; seeds as grain"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 30,
+    "codex": "Tree tears you can eat. The Sahel's oldest export is food if you know which wound to tap.",
+    "confidence": "high",
+    "description": "a thorny acacia; amber gum oozing from bark wounds",
+    "edibility": "safe",
+    "form": "gum",
+    "id": "acacia_gum",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Gum acacia. Thorny tree, amber tears on the bark. The gum is food.",
+      "2": "Parts: gum tears (dissolve in water — a sustaining drink), seeds (famine food, cooked), pods (fodder).",
+      "3": "Uses: gum arabic — dissolved, it's calories and calm for an empty stomach. A handful of gum and water is a meal's ghost.",
+      "4": "Mastery: collect tears that are hard and clear; tap by wounding bark in the dry season and return in days. The pale tears are the cleanest."
+    },
+    "lookalikeNote": "Thorny acacia with paired white thorns; amber gum tears on wounded bark. Other acacias gum too — the pale hard tears of this one are the food grade.",
+    "medicinal": false,
+    "name": "Gum Acacia",
+    "preparation": "Dissolve clean gum tears in water as a drink. Cook seeds in famine.",
+    "regions": [
+      "senegal",
+      "mauritania",
+      "sudan",
+      "niger"
+    ],
+    "scientific": "Senegalia senegal",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "FAO — gum arabic profile"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "tree",
+      "acacia"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "handful of gum",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "gum dissolved in water; seeds cooked in famine"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 20,
+    "codex": "Medicine with teeth. It cures at a spoonful and punishes at a bowlful.",
+    "confidence": "high",
+    "description": "a fast tree with feathery leaves and bitter smell",
+    "edibility": "caution",
+    "form": "leaves",
+    "id": "neem",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Neem. Feathery leaves, bitter smell. Medicine, not food — small amounts only.",
+      "2": "Parts: leaves and bark (bitter tea — fever, malaria tradition), twigs (chewing sticks), seeds (oil — NOT food).",
+      "3": "Uses: the Sahel's pharmacy tree — fever tea, wound wash, tooth sticks. The bitterness is the dose talking.",
+      "4": "Mastery: a small handful of leaves steeped, not boiled to death. Large doses of leaves or any seed oil are toxic — this is a medicine with a ceiling."
+    },
+    "lookalikeNote": "Feathery compound leaves with a bitter garlic-onion smell when crushed, small white flowers, olive-like fruits. The bitter smell is the tell — moringa, which looks similar, smells like nothing.",
+    "medicinal": true,
+    "name": "Neem",
+    "preparation": "Steep a small handful of leaves as a bitter tea. Never ingest seed oil. Chew twigs as tooth sticks.",
+    "regions": [
+      "senegal",
+      "nigeria",
+      "mali",
+      "niger"
+    ],
+    "scientific": "Azadirachta indica",
+    "seasons": [
+      "dry",
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: Sahel medicinal tree"
+    ],
+    "spoilageDays": 30,
+    "taxon": [
+      "plant",
+      "tree",
+      "neem"
+    ],
+    "tileAffinity": [
+      "grove",
+      "thicket"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "medicine",
+        "minLevel": 2,
+        "note": "bitter leaf tea for fever; twigs as tooth sticks"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 65,
+    "codex": "A palm that fruits where the groundwater runs, and feeds the villages along the river.",
+    "confidence": "high",
+    "description": "a clustering palm with orange date-like fruits",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "senegal_date_palm",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Senegal date palm. Clustering palm, orange fruits. The ripe fruits are food.",
+      "2": "Parts: ripe fruits (eat fresh — sweet pulp around a hard seed), palm heart (famine food, kills the stem), young shoots (vegetable).",
+      "3": "Uses: the wild date of the riverbanks — sweet, filling, reliable. The heart is a last-resort meal; taking it kills that stem.",
+      "4": "Mastery: fruits ripen orange and soft; green ones are astringent. Clusters keep on the tree for weeks — harvest as needed."
+    },
+    "lookalikeNote": "Clustering palm (many stems) with feathery fronds and orange date clusters. Green unripe fruits are astringent but not dangerous — wait for orange.",
+    "medicinal": false,
+    "name": "Senegal Date Palm",
+    "preparation": "Eat ripe orange fruits fresh. Cook young shoots as vegetable.",
+    "regions": [
+      "senegal",
+      "mali",
+      "guinea"
+    ],
+    "scientific": "Phoenix reclinata",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: Sahel riverine palm"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "plant",
+      "palm",
+      "date"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "handful of dates",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "ripe fruits fresh; young shoots as vegetable"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 80,
+    "codex": "Gingerbread you have to gnaw. The doum fruits when the river remembers it.",
+    "confidence": "high",
+    "description": "a forked palm with fan leaves and large brown gingerbread-smelling fruits",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "doum_palm",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Doum palm. Forked trunk, fan leaves. The brown fruits are food — gnaw the rind.",
+      "2": "Parts: fruit rind (gnaw the sweet fibrous flesh; soak pounded rind for a sweet drink), unripe kernel (crack green fruit for the white nut), germinated shoots (vegetable).",
+      "3": "Uses: the gingerbread tree — the rind tastes of spice and honey. Pounded rind soaked in water makes a brown sweet juice for millet cakes.",
+      "4": "Mastery: green fruit hides a white edible kernel — crack it young. Ripe fruit: chew the rind, spit the fiber, or pound and soak for juice. The hard seed is vegetable ivory, not food."
+    },
+    "lookalikeNote": "The only palm that forks — Y-shaped trunk, fan leaves. Large brown woody fruits. Unmistakable.",
+    "medicinal": false,
+    "name": "Doum Palm",
+    "preparation": "Gnaw ripe rind; pound rind and soak for sweet juice. Crack green fruit for the white kernel.",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger",
+      "sudan"
+    ],
+    "scientific": "Hyphaene thebaica",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "EOL — doum palm uses (Niger/Senegal)"
+    ],
+    "spoilageDays": 90,
+    "taxon": [
+      "plant",
+      "palm",
+      "doum"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "rind gnawed or soaked for juice; green kernels"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 220,
+    "codex": "The melon is a lie; the seeds are the truth. Bitter enough to kill, rich enough to live on.",
+    "confidence": "high",
+    "description": "a trailing vine with yellow-green melon-sized fruits",
+    "edibility": "cook",
+    "form": "seeds",
+    "id": "egusi_melon",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Egusi melon. Vine, melon-sized fruits. The FRUIT is poison-bitter — the SEEDS are food, cooked.",
+      "2": "Parts: seeds (separate from the pulp, wash, roast or boil well — the famous egusi). The flesh is violently bitter and purgative.",
+      "3": "Uses: egusi soup — the seeds ground into a rich thick soup, protein and oil. Famine food of the Sahara for millennia.",
+      "4": "Mastery: harvest ripe, crack, scoop seeds, wash them free of pulp, sun-dry, then roast. The bitter flesh never goes in the pot — not a scrap."
+    },
+    "lookalikeNote": "Looks EXACTLY like a small watermelon — yellow-green rind, melon size. Taste a crumb of flesh: watermelon is sweet, egusi is unspeakably bitter. The bitterness is the warning. Never confuse the two.",
+    "medicinal": false,
+    "name": "Egusi Melon",
+    "preparation": "Separate seeds from bitter pulp; wash, dry, roast or boil thoroughly. Never eat the flesh.",
+    "regions": [
+      "nigeria",
+      "niger",
+      "mali"
+    ],
+    "scientific": "Citrullus colocynthis",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "Wikipedia — Citrullus colocynthis (culinary: seeds separated and thoroughly cooked)",
+      "phys.org 2022 — ancient egusi seed use, Libya/Sudan"
+    ],
+    "spoilageDays": 180,
+    "taxon": [
+      "plant",
+      "vine",
+      "melon"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "cup of seeds",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 3,
+        "note": "seeds washed and cooked — egusi soup base"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 40,
+    "codex": "Bitter as regret, good as medicine. The washing is the cooking.",
+    "confidence": "high",
+    "description": "a shrub with dark green slightly bitter-smelling leaves",
+    "edibility": "cook",
+    "form": "greens",
+    "id": "bitter_leaf",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bitter leaf. Shrub, dark leaves. The leaves are food — but only after washing the bitter out.",
+      "2": "Parts: leaves (squeeze-wash repeatedly, then boil — the classic soup leaf).",
+      "3": "Uses: the great West African soup leaf — nutrition under the bitterness. Also a fever tea in small amounts.",
+      "4": "Mastery: pound or squeeze the leaves in water, change the water, repeat until the bitterness is bearable. Boil after washing. Under-washed leaves are a stomach ache, not a meal."
+    },
+    "lookalikeNote": "Shrub with dark green elliptical leaves, intensely bitter when crushed. The bitterness itself is the ID — sweet lookalikes don't punish you for skipping the wash.",
+    "medicinal": true,
+    "name": "Bitter Leaf",
+    "preparation": "Squeeze-wash leaves in several changes of water, then boil. Never eat unwashed.",
+    "regions": [
+      "nigeria",
+      "ghana",
+      "cameroon"
+    ],
+    "scientific": "Vernonia amygdalina",
+    "seasons": [
+      "wet",
+      "dry"
+    ],
+    "sources": [
+      "Frontiers in Natural Products 2024 — Vernonia amygdalina review",
+      "European J. Food Sci. Tech. — debittering methods"
+    ],
+    "spoilageDays": 2,
+    "taxon": [
+      "plant",
+      "shrub",
+      "bitter_leaf"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "unit": "handful of leaves",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "leaves squeeze-washed and boiled"
+      },
+      {
+        "kind": "medicine",
+        "minLevel": 3,
+        "note": "fever tea, small amounts"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 300,
+    "codex": "The root that feeds half a billion people — and poisons anyone in a hurry.",
+    "confidence": "high",
+    "description": "a woody shrub with starchy tuberous roots",
+    "edibility": "cook",
+    "form": "tubers",
+    "id": "cassava",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Cassava. Shrub, thick roots. The roots are food ONLY after proper processing.",
+      "2": "Parts: roots (peel completely, soak/ferment, then cook thoroughly). Leaves (boil well — also cyanogenic raw).",
+      "3": "Uses: the calorie backbone — garri, fufu, éba. But bitter varieties carry cyanide; the processing is not optional.",
+      "4": "Mastery: peel all skin, soak peeled roots in water (change it), ferment sour, then roast or boil. Sweet varieties need peeling + thorough cooking; bitter ones need the full soak-ferment. Hungry shortcuts have killed people — WHO counts ~200 deaths a year from bad processing."
+    },
+    "lookalikeNote": "Woody shrub with palmate leaves and thick roots. Sweet vs bitter varieties look identical — treat every root as bitter until you know the planting. The rule is the processing, not the variety.",
+    "medicinal": false,
+    "name": "Cassava",
+    "preparation": "Peel completely, soak/ferment in changed water, then cook thoroughly. Never eat raw or under-processed.",
+    "regions": [
+      "nigeria",
+      "ghana",
+      "togo"
+    ],
+    "scientific": "Manihot esculenta",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "WHO — cassava cyanide guidance",
+      "FAO — cassava processing"
+    ],
+    "spoilageDays": 7,
+    "taxon": [
+      "plant",
+      "shrub",
+      "cassava"
+    ],
+    "tileAffinity": [
+      "meadow"
+    ],
+    "unit": "root",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "roots peeled, soaked/fermented, cooked — garri/fufu"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 280,
+    "codex": "Pound it and it becomes a meal you can hold. The yam barn is the bank.",
+    "confidence": "high",
+    "description": "a climbing vine with large starchy tubers underground",
+    "edibility": "cook",
+    "form": "tubers",
+    "id": "yam",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Yam. Climbing vine, huge tubers. The tubers are food — cooked.",
+      "2": "Parts: tubers (boil, roast, or pound into fufu). Never raw — raw yam is harsh and some wild kinds are toxic.",
+      "3": "Uses: pounded yam — the feast food. Roasted yam is travel food. A barn of yams is wealth you can eat.",
+      "4": "Mastery: harvest by digging carefully — broken tubers rot. Cure in shade; store in an airy barn. Boil or roast fully; pounding is for the celebration."
+    },
+    "lookalikeNote": "Climbing vine with heart-shaped leaves and massive tubers. Cultivated yams are the food — wild yams in the bush can be bitter and toxic; don't dig at random.",
+    "medicinal": false,
+    "name": "White Yam",
+    "preparation": "Boil, roast, or pound fully cooked. Never eat raw.",
+    "regions": [
+      "nigeria",
+      "ghana",
+      "togo"
+    ],
+    "scientific": "Dioscorea rotundata",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — yam profile",
+      "field notes: West African staple"
+    ],
+    "spoilageDays": 120,
+    "taxon": [
+      "plant",
+      "vine",
+      "yam"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "thicket"
+    ],
+    "unit": "tuber",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "tubers boiled/roasted/pounded"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 70,
+    "codex": "The lily that feeds the floodplain. Roots in the mud, dinner on the plate.",
+    "confidence": "medium",
+    "description": "broad floating leaves and white-blue flowers on still water",
+    "edibility": "cook",
+    "form": "tubers",
+    "id": "water_lily",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Water lily. Floating leaves, showy flowers. The tubers and seeds are food — cooked.",
+      "2": "Parts: rhizomes/tubers (dig from mud, boil), seeds (dry, grind or pop like grain).",
+      "3": "Uses: floodplain food — tubers when the water drops, seeds when it flowers. Filling starch.",
+      "4": "Mastery: feel for tubers in the mud with your feet; boil well. Dry seeds fully before grinding."
+    },
+    "lookalikeNote": "Floating round leaves with a notch, white to blue flowers. The edible tubers are underwater — confirm by digging, not by the flower.",
+    "medicinal": false,
+    "name": "Water Lily",
+    "preparation": "Boil tubers from the mud. Dry and grind seeds.",
+    "regions": [
+      "mali",
+      "niger",
+      "senegal"
+    ],
+    "scientific": "Nymphaea lotus",
+    "seasons": [
+      "wet"
+    ],
+    "sources": [
+      "PFAF — Nymphaea lotus",
+      "field notes: Sahel floodplain food"
+    ],
+    "spoilageDays": 4,
+    "taxon": [
+      "plant",
+      "aquatic",
+      "lily"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "handful of tubers",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "tubers boiled; seeds dried and ground"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 330,
+    "codex": "Rice's wild ancestor, still feeding the floodplains it came from.",
+    "confidence": "medium",
+    "description": "a tall wild grass with rice-like grains, standing in shallow water",
+    "edibility": "safe",
+    "form": "grain",
+    "id": "wild_rice",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Wild rice. Tall grass in shallow water, rice-like grains. The grains are food.",
+      "2": "Parts: grains (knock into a canoe or basket, winnow, parch, cook).",
+      "3": "Uses: the Niger floodplain's grain — harvested from boats by knocking ripe heads. Nutty, filling, free.",
+      "4": "Mastery: harvest by bending heads over a basket and beating — the ripe grains fall. Parch to loosen husks, winnow, then cook like rice. Shallow water only; deep water is for fish."
+    },
+    "lookalikeNote": "Tall grass in standing water with rice-like panicles. Resembles cultivated rice — the wild stands are in natural floodplain, unplanted rows.",
+    "medicinal": false,
+    "name": "African Wild Rice",
+    "preparation": "Knock ripe grains into a basket, winnow, parch, cook.",
+    "regions": [
+      "mali",
+      "niger",
+      "senegal"
+    ],
+    "scientific": "Oryza longistaminata",
+    "seasons": [
+      "wet"
+    ],
+    "sources": [
+      "FAO — African rice wild relatives",
+      "field notes: Niger inner delta grain"
+    ],
+    "spoilageDays": 365,
+    "taxon": [
+      "plant",
+      "grass",
+      "grain"
+    ],
+    "tileAffinity": [
+      "wetland"
+    ],
+    "unit": "cup of grain",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "grains knocked, winnowed, parched, cooked"
+      }
+    ],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 50,
+    "codex": "The famine berry. Bitter, small, and there when nothing else is.",
+    "confidence": "medium",
+    "description": "a tough evergreen shrub with small round berries",
+    "edibility": "safe",
+    "form": "berries",
+    "id": "hanza",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Hanza. Tough shrub, small round berries. The ripe berries are famine food.",
+      "2": "Parts: berries (soak to remove bitterness, then eat or dry), leaves (famine greens, cooked).",
+      "3": "Uses: called hanza — the berries carry villages through the hungry season. Bitter raw; soaking tames them.",
+      "4": "Mastery: soak berries in several changes of water to debitter, then dry. The bitterness is the price of a free harvest."
+    },
+    "lookalikeNote": "Evergreen shrub with small round green-to-yellow berries. Bitter when raw — the soaking is the preparation, not a warning sign of poison.",
+    "medicinal": false,
+    "name": "Hanza",
+    "preparation": "Soak berries in changed water to debitter, then eat or dry.",
+    "regions": [
+      "niger",
+      "mali",
+      "burkina"
+    ],
+    "scientific": "Boscia senegalensis",
+    "seasons": [
+      "dry",
+      "dry_cool"
+    ],
+    "sources": [
+      "World Agroforestry Centre — Agroforestry Database",
+      "field notes: Sahel famine food"
+    ],
+    "spoilageDays": 60,
+    "taxon": [
+      "plant",
+      "shrub",
+      "berry"
+    ],
+    "tileAffinity": [
+      "thicket",
+      "meadow"
+    ],
+    "unit": "handful of berries",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "berries soaked to debitter, eaten or dried"
+      }
+    ],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "Pretty as an apple, honest as a lie. Everything about it is poison.",
+    "confidence": "high",
+    "description": "a grey-green shrub with apple-sized green fruits and milky sap",
+    "edibility": "avoid",
+    "form": "fruit",
+    "id": "sodom_apple",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Sodom apple. Grey-green shrub, apple-sized green fruits. DO NOT EAT. The sap burns.",
+      "2": "Parts: none are food. The milky latex blisters skin and blinds eyes; the fruit's cardiac poisons stop hearts.",
+      "3": "Uses: none for the pot. Traditional medicine uses it in expert hands only — the margin between dose and death is a whisper.",
+      "4": "Mastery: recognize it at a glance — thick grey-green leaves, inflated apple-like green fruits, white latex from any cut. Teach everyone. This is the plant that kills the curious."
+    },
+    "lookalikeNote": "THIS IS THE LOOKALIKE WARNING: the green apple-sized fruits look like food from a distance. They are not. Milky latex from any cut = walk away. Nothing edible in the Sahel bleeds white like this.",
+    "medicinal": false,
+    "name": "Sodom Apple",
+    "preparation": "No preparation makes it food. Avoid entirely.",
+    "regions": [
+      "senegal",
+      "mauritania",
+      "niger",
+      "mali"
+    ],
+    "scientific": "Calotropis procera",
+    "seasons": [
+      "dry",
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "Wikipedia — Calotropis procera (toxicity)",
+      "PMC — ocular toxicity of Calotropis latex"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "shrub",
+      "toxic"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "fruit",
+    "uses": [],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The living fence with murder in its seeds. One to three seeds hospitalize; children die.",
+    "confidence": "high",
+    "description": "a small tree with lobed leaves and black seeds in three-part pods",
+    "edibility": "avoid",
+    "form": "seeds",
+    "id": "physic_nut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Physic nut. Small tree, often planted as a living fence. The seeds are POISON.",
+      "2": "Parts: none are food. Seeds carry curcin and phorbol esters — 1–3 seeds poison an adult, fewer kill a child.",
+      "3": "Uses: none for the pot. The oil burns in lamps and runs engines; the seed cake kills rats. That is its job.",
+      "4": "Mastery: the living fences around fields are physic nut — teach children by name. The black seeds look like small chestnuts; the resemblance is the trap."
+    },
+    "lookalikeNote": "Planted in rows as living fences — lobed leaves, yellow-green three-part fruits, black seeds. The seeds look like small edible chestnuts. They are not. Fence rows = warning rows.",
+    "medicinal": false,
+    "name": "Physic Nut",
+    "preparation": "No preparation makes it food. Avoid entirely.",
+    "regions": [
+      "senegal",
+      "mali",
+      "burkina",
+      "nigeria"
+    ],
+    "scientific": "Jatropha curcas",
+    "seasons": [
+      "dry",
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "FAO — Jatropha curcas toxicity (1-3 seeds toxic)",
+      "PFAF — Jatropha curcas"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "tree",
+      "toxic"
+    ],
+    "tileAffinity": [
+      "trail_edge",
+      "thicket"
+    ],
+    "unit": "seed",
+    "uses": [],
+    "waterContent": "low"
+  },
+  {
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "caloriesPerUnit": 0,
+    "codex": "The trumpet flower that unmakes minds. Beautiful, common, and utterly not food.",
+    "confidence": "high",
+    "description": "a weed with trumpet flowers and spiny round pods",
+    "edibility": "avoid",
+    "form": "pods",
+    "id": "thorn_apple",
+    "idDifficulty": 3,
+    "knowledgeLevels": {
+      "1": "Thorn apple. Trumpet flowers, spiny round pods. POISON — every part.",
+      "2": "Parts: none are food. Tropane alkaloids — delirium, racing heart, death. The seeds are the worst.",
+      "3": "Uses: none for the pot. This is the plant that steals minds; there is no safe dose for the hungry.",
+      "4": "Mastery: the spiny round pods grow near okra fields and look vaguely like okra's cousins. They are not cousins. Okra pods are ridged and elongated; thorn-apple pods are round and spiny. When in doubt, the trumpet flower decides — walk away."
+    },
+    "lookalikeNote": "CRITICAL LOOKALIKE: spiny round pods vs okra's ridged elongated pods. Same fields, same season. Check the pod shape, check for the trumpet flower. A mistake here is a funeral.",
+    "medicinal": false,
+    "name": "Thorn Apple",
+    "preparation": "No preparation makes it food. Avoid entirely.",
+    "regions": [
+      "senegal",
+      "mali",
+      "niger",
+      "nigeria"
+    ],
+    "scientific": "Datura stramonium",
+    "seasons": [
+      "wet",
+      "dry_cool"
+    ],
+    "sources": [
+      "field notes: tropane alkaloid toxicity",
+      "PFAF — Datura stramonium"
+    ],
+    "spoilageDays": 0,
+    "taxon": [
+      "plant",
+      "weed",
+      "toxic"
+    ],
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "unit": "pod",
+    "uses": [],
     "waterContent": "low"
   }
 ]

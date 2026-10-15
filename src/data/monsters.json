@@ -9359,4 +9359,282 @@
       "slow and heavy on land — it needs the water to be dangerous"
     ]
   }
+,
+  {
+    "activity": "diurnal",
+    "aggression": "territorial",
+    "attack": {
+      "damage": [
+        16,
+        24
+      ],
+      "damageType": "physical",
+      "name": "Dust-Choked Charge",
+      "pattern": {
+        "chargeDesc": "Straight-line demolition through a wall of its own dust. Tramples, never turns.",
+        "chargeStyle": "bulldozer",
+        "length": 5,
+        "type": "charge",
+        "width": 1,
+        "windup": 2
+      },
+      "telegraph": "It drops its head and paws the earth — once, twice — and the dust comes up in a wall. Tusks down. It is not going around you."
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          16,
+          24
+        ],
+        "damageType": "physical",
+        "name": "Dust-Choked Charge",
+        "pattern": {
+          "chargeDesc": "Straight-line demolition through a wall of its own dust. Tramples, never turns.",
+          "chargeStyle": "bulldozer",
+          "length": 5,
+          "type": "charge",
+          "width": 1,
+          "windup": 2
+        },
+        "telegraph": "It drops its head and paws the earth — once, twice — and the dust comes up in a wall. Tusks down. It is not going around you.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          10,
+          16
+        ],
+        "damageType": "physical",
+        "name": "Tusk Rake",
+        "pattern": {
+          "reach": 1,
+          "type": "melee"
+        },
+        "telegraph": "It swings its whole head sideways, tusks sweeping like scythes. The warts on its face are armor; the tusks are the argument.",
+        "weight": 2
+      },
+      {
+        "condition": {
+          "hpBelow": 0.25
+        },
+        "name": "Retreat",
+        "tactic": "withdraw",
+        "telegraph": "It stops, sides heaving, dust settling off its back. It has decided you are not worth dying for — it backs away, tusks still facing you.",
+        "weight": 4
+      }
+    ],
+    "behavior": "territorial",
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "codexStages": {
+      "observed": "Warthog. The System watched it graze on its knees and decided the meek part was a lie. It charges through its own dust wall — tusks, hooves, and bad intentions. It cannot turn mid-charge.",
+      "slain": "Moves: Dust-Choked Charge (heavy, telegraphed, a wall of blinding dust ahead of it), Tusk Rake (close range, sideways sweep), Retreat (below 25% hp). It never goes around — step OFF the lane and hold your breath until the dust settles. Meat: excellent pork. The tusks make fine awls.",
+      "unknown": "Something heavy moved in the grass. Then the dust stood up and walked toward you."
+    },
+    "counter": {
+      "hint": "It never turns. The charge is a straight-line promise, and the dust is just weather.",
+      "kind": "sidestep",
+      "reveal": "When it paws the earth, step OFF the lane — sideways, not back — and cover your mouth. The dust blinds it too; it charges where you WERE. Wait for the cough, then strike.",
+      "trick": "Step OFF the lane — and hold your breath"
+    },
+    "cues": {
+      "curious": [
+        "It snorts, considering you. Deciding if you're worth the effort."
+      ],
+      "fearful": [
+        "It backs off, snorting — firelight in its eyes. It doesn't like this."
+      ],
+      "warn": [
+        "It drops its head. Paws the earth. Dust rises. This is the warning. There won't be another."
+      ]
+    },
+    "edible": {
+      "calories": 22000,
+      "note": "Pork is pork. Smoke it; it keeps for weeks. The tusks make excellent awls."
+    },
+    "emoji": "🌪️",
+    "encounter": {
+      "fifo": true,
+      "noticeRange": 4,
+      "phaseBadges": {
+        "charge": " 🌪️ CHARGING",
+        "paw": " 🐖 PAWING",
+        "rake": " 🗡️ RAKING",
+        "root": " 🌱 ROOTING",
+        "spent": " 💨 SPENT"
+      },
+      "phases": [
+        "root",
+        "paw",
+        "charge",
+        "rake",
+        "spent"
+      ]
+    },
+    "fear": "fire",
+    "follows": true,
+    "hp": [
+      65,
+      85
+    ],
+    "id": "dustboar",
+    "name": "Dustboar",
+    "parts": [
+      "tusks (tools)",
+      "hide (leather)"
+    ],
+    "speed": 3,
+    "systemDesignation": "Phacochoerus africanus (dust-charged)",
+    "unknown": "something heavy rooting in the grass, dust rising for no reason",
+    "vibe": "a living dust storm with tusks — territorial, impatient, unimpressed by you",
+    "wave": 1,
+    "weaknesses": [
+      "dodge the charge - it ends winded, flanks soft; STRIKE then",
+      "it never goes around — position accordingly",
+      "the dust blinds it too; it charges where you were"
+    ]
+  },
+  {
+    "activity": "diurnal",
+    "aggression": "territorial",
+    "attack": {
+      "damage": [
+        14,
+        20
+      ],
+      "damageType": "physical",
+      "name": "Sunflash Lunge",
+      "pattern": {
+        "range": 3,
+        "type": "lunge",
+        "windup": 2
+      },
+      "telegraph": "It goes perfectly still and arches its back to the sun. The mirror-scales catch the light — the glare builds, builds —"
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 2
+        },
+        "damage": [
+          14,
+          20
+        ],
+        "damageType": "physical",
+        "name": "Sunflash Lunge",
+        "pattern": {
+          "range": 3,
+          "type": "lunge",
+          "windup": 2
+        },
+        "telegraph": "It goes perfectly still and arches its back to the sun. The mirror-scales catch the light — the glare builds, builds — then it launches, blind-fast, straight at where you were standing.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "maxRange": 1
+        },
+        "damage": [
+          12,
+          18
+        ],
+        "damageType": "physical",
+        "name": "Tail Sweep",
+        "pattern": {
+          "reach": 1,
+          "type": "melee"
+        },
+        "telegraph": "The thick tail lifts off the ground, swaying once — then sweeps like a felled tree. A monitor's tail is a battering ram with scales.",
+        "weight": 2
+      },
+      {
+        "condition": {
+          "hpBelow": 0.25
+        },
+        "name": "Retreat",
+        "tactic": "withdraw",
+        "telegraph": "The mirror-scales dull. It stops arching, hisses once, and slides backward into the grass — done being looked at.",
+        "weight": 4
+      }
+    ],
+    "behavior": "territorial",
+    "biomes": [
+      "sahel_savanna"
+    ],
+    "codexStages": {
+      "observed": "Nile monitor. The System grew mirror-scales along its back and taught it to aim the sun. It blinds you with reflected light, then lunges while you can't see. The tail is a separate weapon — thick as your leg.",
+      "slain": "Moves: Sunflash Lunge (blinding telegraph, then a fast lunge at your last position), Tail Sweep (close range, knockdown), Retreat (below 25% hp). The glare needs the sun behind IT — fight from its shadow side, or make it face away from the sun. Never stand where you were standing.",
+      "unknown": "A flash of light from the grass, like a mirror catching the sun. Then nothing. Then the flash again, closer."
+    },
+    "counter": {
+      "hint": "The glare needs the sun behind it. Its shadow side is blind.",
+      "kind": "blindside",
+      "reveal": "When it arches, move to its SHADOW side — between it and the sun — and don't stand still. The lunge goes where you WERE, and the glare can't touch you from the shade. Strike while it's recharging the scales.",
+      "trick": "Fight from its shadow side"
+    },
+    "cues": {
+      "curious": [
+        "It tastes the air, forked tongue flickering. Deciding if you're food or furniture."
+      ],
+      "fearful": [
+        "The mirror-scales dull to grey. It wants the deep grass now."
+      ],
+      "warn": [
+        "It arches its back to the sun. The light off its scales hurts to look at. Move."
+      ],
+      "wary": [
+        "It circles, keeping the sun at its back. It knows what its weapon needs."
+      ]
+    },
+    "edible": {
+      "calories": 3000,
+      "note": "Tough reptile meat — stew it long. The mirror-scales flake off; they're pretty and useless."
+    },
+    "emoji": "🦕",
+    "encounter": {
+      "fifo": true,
+      "noticeRange": 4,
+      "phaseBadges": {
+        "arch": " ☀️ ARCHING",
+        "lunge": " 💥 LUNGING",
+        "stalk": " 👀 STALKING",
+        "sweep": " 🌀 SWEEPING"
+      },
+      "phases": [
+        "stalk",
+        "arch",
+        "lunge",
+        "sweep"
+      ]
+    },
+    "fear": "fire",
+    "follows": true,
+    "hp": [
+      55,
+      75
+    ],
+    "id": "sunback",
+    "name": "Sunback",
+    "parts": [
+      "mirror-scales (trade)",
+      "tail meat"
+    ],
+    "speed": 3,
+    "systemDesignation": "Varanus niloticus (mirrorback)",
+    "unknown": "a monitor lizard the size of a canoe, light sliding wrong off its back",
+    "vibe": "a patient mirror with teeth — it lets the sun do the aiming",
+    "wave": 1,
+    "weaknesses": [
+      "the glare needs the sun behind it — fight from the shadow side",
+      "after the lunge it recharges; STRIKE then",
+      "it lunges where you WERE — never stand still"
+    ]
+  }
 ]
