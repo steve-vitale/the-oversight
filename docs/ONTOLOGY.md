@@ -1077,6 +1077,18 @@ The Long Way Home — the nomad road state machine
 —
 
 **Consumes:** —
+### nomad-scenes (`nomad-scenes.js`)
+Trails, reunion scenes, and the ending for The Long Way Home (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "Expedition is leaving your village as a nomad to find remaining family. That should be another bonus ending."). Per-kin trails sharpen from vague (continent) to named (region) only as earned — keepsake bond L2+ names it, road encounters sharpen a step. Four reunion fates (alive/changed/dead/moved) as real scenes in spare second person. The ending composes light ("We were never lost; we were just far apart.") or dark (the village left behind fell) from Game.nomad.endingData(). Road state, legs, and loss live in nomad.js (sibling stream); this module owns scenes only.
+
+**Provides:** trailFor(kinName) -> {kinName, relation, level, text, regionKnown} | null, sharpenTrail(kinName, source) -> {ok, level, text} | {ok:false, reason}, reunionScene(kinName, fate) -> {fate, title, lines, outcome, choices?} (also says the lines), playEnding(data) -> {moral, title, lines} (also says the lines)
+
+**Rules:**
+- knowledge_gated: a trail never names a region the village hasn't earned; level 0 is continent-only (code: trailFor, sharpenTrail)
+- keepsake_names_region: a worn keepsake of that person at bond L2+ names the region (code: sharpenTrail, WORLD-REGIONS.md §6)
+- no_fabricated_history: scenes use only lifeseed/world facts — name, relation, hometown, workplace, fate line, region (code: reunionScene, kinFacts)
+- deterministic_fate: the 'changed' subtype derives from a seeded hash of the kin name, never Math.random (code: changedKind)
+
+**Consumes:** worldKin(), worldKinEntry(), worldRegionName(), hearOfRegion(), regionDef() (world.js), keepsakeKinPerson(), keepsakeLevel(), wornKeepsakes() (keepsakes.js), state, say(), vpOf(), mulberry32, Game.nomad.endingData() (nomad.js, sibling stream; defensive — playEnding takes data)
 
 ### overtime (`overtime.js`)
 OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
