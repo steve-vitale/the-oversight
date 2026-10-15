@@ -1,0 +1,51 @@
+'use strict';
+// Prepared runtime proof: real paid wound care must spend only power that lands.
+const K = require('./lib'), T = K.reporter('feast-healing-use');
+(async () => {
+  const G = await K.load({ seed: 12 });
+  function ready(hp = 40) {
+    K.newRun(G);
+    const s = G.state.scholar;
+    s.health = hp; s.kcal = 2400;
+    G.learnSkill('wound_care', 2, 'prepared treatment proof');
+    s.prog = s.prog || {}; s.prog.feastSurge = 1.5;
+    G.grantFeastBuff({ quality: 1, served: [{ itemId: 'foraged_food', kcal: 1800 }], guests: ['a', 'b', 'c'] });
+    G.driveOffFeastDraw();
+    return s;
+  }
+  let s = ready(), before = s.kcal;
+  T.ok('prepared wound care is known without a magic slot', G.hasAbility('field_medicine') && !(s.abilities || []).some(a => a.id === 'field_medicine'));
+  T.ok('grant and declining scavenger do not earn food-use credit', !s.prog.feastSurgeUsed && !s.feastBuff.used && !!s.prog.feastSurge);
+  G.activateAbility('field_medicine');
+  T.ok('noncombat treatment lands its real 20 HP plus authored 10 HP feast bonus', !G.inCombat() && s.health === 70, s.health);
+  T.ok('treatment pays food and the real day-part allowance', s.kcal < before && s.fieldMedDayPart === `${s.day}-${G.dayPart}`);
+  T.ok('landed noncombat feast healing earns the food-use deed and spends devotion', s.prog.feastSurgeUsed === true && s.feastBuff.used && s.prog.feastSurge === false);
+  const saved = JSON.parse(JSON.stringify(s.feastBuff));
+  G.activateAbility('field_medicine');
+  T.ok('refused repeated treatment grants no further healing or new receipt', s.health === 70 && JSON.stringify(s.feastBuff) === JSON.stringify(saved));
+  s = ready(G.maxHealth());
+  G.activateAbility('field_medicine');
+  T.ok('full-health treatment grants no bonus or credit', !s.prog.feastSurgeUsed && !s.feastBuff.used && !!s.prog.feastSurge);
+  s = ready(G.maxHealth() - 20);
+  G.activateAbility('field_medicine');
+  T.ok('ordinary healing that leaves no room for the bonus does not spend feast power', s.health === G.maxHealth() && !s.prog.feastSurgeUsed && !s.feastBuff.used);
+  s = ready(); s.kcal = 0;
+  G.activateAbility('field_medicine');
+  T.ok('starving refusal has no heal, cooldown or food-use credit', s.health === 40 && !s.fieldMedDayPart && !s.prog.feastSurgeUsed);
+  s = ready(); s.day = s.feastBuff.untilDay;
+  G.activateAbility('field_medicine');
+  T.ok('expired feast gives ordinary treatment only and no deed', s.health === 60 && !s.prog.feastSurgeUsed);
+  s = ready();
+  K.giveAbility(G, 'game_sense');
+  G.useAbility('game_sense', 'read_sign');
+  T.ok('unrelated successful noncombat action still spends no feast devotion', !s.prog.feastSurgeUsed && !s.feastBuff.used);
+  s = ready();
+  const ctx = {};
+  require('../policies/livelihood').care(G, ctx);
+  T.ok('caregiver uses its learned visible treatment on real wounds', ctx.livelihoodTreatments === 1 && s.prog.feastSurgeUsed === true);
+  s = ready(); s.kcal = 1100;
+  const reserve = {};
+  require('../policies/livelihood').care(G, reserve);
+  T.ok('caregiver reserves dinner instead of spending its low food balance', !reserve.livelihoodTreatments && !s.prog.feastSurgeUsed);
+  T.done();
+})().catch(e => { console.error(e.stack); process.exitCode = 1; });

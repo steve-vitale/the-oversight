@@ -613,10 +613,10 @@ Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build careful
 
 **Rules:**
 - feast_draw: on a FRESH armed grant (never a refresh — one draw per buff), the feast's smoke draws a wave-appropriate scavenger to the haven's edge as a pending encounter the player faces (faceFeastDraw -> startCombat, blow-by-blow) or declines (driveOffFeastDraw — devotion unspent); the draw dies with the buff (code: drawFeastScavenger, clearFeastBuff).
-- devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
+- devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to _spendFeastedPower after real combat or bonus healing.
 - timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
-- honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
+- honest_use_marking: feastSurgeUsed marks on real combat use or actually landed feasted healing bonus; hosting, failed treatment and base healing alone spend no devotion (code: noteFeastedCombatUse)
 - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
 - generic_forms: feasted ability variants are data-driven (feast-surge.json twists) through generic handlers — never hand-written per-ability mechanics (code: applyFeastedForm)
 - telegraph_honesty: every buff label states the true effective multiplier AND the true window ("dawn"/"tomorrow's dawn" via feastDawnWord, read from the same data lever as the grant — never a stale "until dawn") (code: grantFeastBuff, feastedLine, tbDamage hook in game.js; arm message in progression.js; feast broadcast + report panel)

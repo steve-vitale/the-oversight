@@ -213,6 +213,18 @@ function study(G, ctx) {
 function care(G, ctx) {
   if (!G.playerAtHaven() || G.over || G.tbfight || G.state.activeContest) return;
   try {
+    const s = G.state.scholar;
+    // Read the same known treatment and cooldown shown in the skills sheet.
+    // Reserve dinner, and treat real wounds rather than farming a feast deed.
+    if (!G.pendingEncounter && (s.kcal || 0) >= 1200 && G.maxHealth() - s.health >= 20) {
+      const treatment = G.activatableAbilities().find(a => a.id === 'field_medicine' && a.available);
+      if (treatment) {
+        const before = s.health;
+        G.activateAbility(treatment.id);
+        if (s.health > before) ctx.livelihoodTreatments = (ctx.livelihoodTreatments || 0) + 1;
+      }
+    }
+    if (G.over || G.tbfight || G.state.activeContest || !G.playerAtHaven()) return;
     for (const vid of (G.state.village.roster || []).filter(id => id !== G.villagerId)) {
       const mood = G.npcMood(vid);
       if (mood === 'scared' || mood === 'grieving') {

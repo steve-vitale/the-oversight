@@ -19,10 +19,10 @@
 //   - driveOffFeastDraw()
 // rules:
 //   - feast_draw: on a FRESH armed grant (never a refresh — one draw per buff), the feast's smoke draws a wave-appropriate scavenger to the haven's edge as a pending encounter the player faces (faceFeastDraw -> startCombat, blow-by-blow) or declines (driveOffFeastDraw — devotion unspent); the draw dies with the buff (code: drawFeastScavenger, clearFeastBuff).
-//   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to noteFeastedCombatUse.
+//   - devotion_gate: the buff grants ONLY when the devotion lane is armed — prog.feastSurge or the feast-carried feast.surge (code: grantFeastBuff). hostFeast must not clear the arming before the grant; consumption belongs to _spendFeastedPower after real combat or bonus healing.
 //   - timed_not_trigger: the buff is a window of durationNights dawns (data lever, feast-surge.json), never an on-strike burn (code: grantFeastBuff, feastedActive)
 //   - no_double_stack: re-feasting while feasted REFRESHES (better quality wins, expiry extends) — never stacks (code: grantFeastBuff)
-//   - honest_use_marking: feastSurgeUsed marks ONLY on real combat use (strike or ability while feasted, inCombat); a feast that warms no blades spends no devotion (code: noteFeastedCombatUse)
+//   - honest_use_marking: feastSurgeUsed marks on real combat use or actually landed feasted healing bonus; hosting, failed treatment and base healing alone spend no devotion (code: noteFeastedCombatUse)
 //   - clean_expiry: expiry is lazy-evaluated against absolute (untilDay, untilPart) — save/load mid-buff is clean, no phantom buffs (code: feastedActive)
 //   - generic_forms: feasted ability variants are data-driven (feast-surge.json twists) through generic handlers — never hand-written per-ability mechanics (code: applyFeastedForm)
 //   - telegraph_honesty: every buff label states the true effective multiplier AND the true window ("dawn"/"tomorrow's dawn" via feastDawnWord, read from the same data lever as the grant — never a stale "until dawn") (code: grantFeastBuff, feastedLine, tbDamage hook in game.js; arm message in progression.js; feast broadcast + report panel)
@@ -237,7 +237,7 @@
         // circling drawn beast gets bored and moves on. Only OUR draw is
         // cleared (matched by monsterId): a wanderer pending behind it is
         // someone else's encounter. The devotion was never spent by waiting;
-        // only real combat spends it (noteFeastedCombatUse).
+        // only real combat or landed bonus healing spends it (_spendFeastedPower).
         try {
           const d = s.feastDraw;
           if (d && d.monsterId) {
@@ -359,7 +359,10 @@
         if (landed <= 0) return;
         const line = String(tw.line || 'Feasted: +{bonus} HP.').replace('{bonus}', String(landed));
         this.say(line);
-      } catch (e) {}
+        // The authored bonus really closed a wound. This is food becoming
+        // power even outside a fight; base healing alone spends no feast.
+        this._spendFeastedPower('healing', landed);
+      } catch (e) { console.warn('[feastSurge] healing use', e); }
     },
 
     // _feastStatusExtend: the feasted form holds the ability's status longer.
@@ -392,21 +395,28 @@
       } catch (e) {}
     },
 
-    // noteFeastedCombatUse: the buff's first real combat use — a player
-    // strike or an ability resolved while feasted and in combat. Marks
-    // feastSurgeUsed (Arc IV deed-gate requirement) and spends the devotion
-    // arming. Idempotent. A feast that warms no blades marks nothing and
-    // spends nothing — the devotion stays armed for the next feast.
-    noteFeastedCombatUse() {
+    // First real use spends devotion once. A combat resolution keeps the
+    // existing contract; noncombat use requires actually landed bonus HP.
+    _spendFeastedPower(kind, bonusHp) {
       try {
-        if (!this.inCombat || !this.inCombat()) return;
+        if (!this.feastedActive()) return;
+        if (kind === 'combat') {
+          if (!this.inCombat || !this.inCombat()) return;
+        } else if (kind !== 'healing' || !(bonusHp > 0)) return;
         const s = this.state.scholar || {};
         const b = s.feastBuff;
         if (!b || b.used) return;
         b.used = true;
-        if (s.prog) { s.prog.feastSurge = false; s.prog.feastSurgeUsed = true; }
-        try { this.save(); } catch (e) {}
-      } catch (e) {}
+        b.use = { kind, day: s.day, bonusHp: kind === 'healing' ? bonusHp : 0 };
+        s.prog = s.prog || {};
+        s.prog.feastSurge = false;
+        s.prog.feastSurgeUsed = true;
+        if (typeof this.tele === 'function') this.tele('feast_power_used', b.use);
+        this.save();
+      } catch (e) { console.warn('[feastSurge] spending power', e); }
+    },
+    noteFeastedCombatUse() {
+      this._spendFeastedPower('combat');
     },
 
     // drawFeastScavenger: the cookfire's smoke draws something. A loud,
