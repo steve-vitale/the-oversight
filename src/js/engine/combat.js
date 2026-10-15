@@ -9,6 +9,7 @@
 //   - patternCells(pattern, ax, ay, tx, ty)
 //   - isFoe(a, b)
 //   - nearestEnemy(fighters, f)
+//   - distanceToBody(x, y, body)
 //   - stepToward(fx, fy, tx, ty, blocked, avoidCells)
 //   - stepAway(fx, fy, tx, ty, blocked, avoidCells)
 //   - villagerDecide(f, fighters, blocked, dangerCells)
@@ -108,12 +109,17 @@
     if (a.kind === 'monster' || a.kind === 'hostile') return b.kind !== 'monster' && b.kind !== 'hostile';
     return b.kind === 'monster' || b.kind === 'hostile';
   }
+  function bodySize(f) { return Math.max(1, Math.min(3, (f.mdef && f.mdef.size) || f.size || 1)); }
+  function distanceToBody(x, y, body) {
+    return Math.max(0, body.mx - x, x - (body.mx + bodySize(body) - 1),
+      body.my - y, y - (body.my + bodySize(body) - 1));
+  }
   function nearestEnemy(fighters, f) {
     let best = null, bestD = 99;
     for (const o of fighters) {
       if (!o.alive || o.fled || o.key === f.key) continue;
       if (!isFoe(f, o)) continue;
-      const d = cheb(f.mx, f.my, o.mx, o.my);
+      const d = distanceToBody(f.mx, f.my, o);
       if (d < bestD) { bestD = d; best = o; }
     }
     return best ? { f: best, d: bestD } : null;
@@ -167,7 +173,7 @@
     let foe = nearestEnemy(fighters, f);
     if (preferKey) {
       const pf = fighters.find(o => o.key === preferKey && o.alive && !o.fled && isFoe(f, o));
-      if (pf) foe = { f: pf, d: cheb(fx, fy, pf.mx, pf.my) };
+      if (pf) foe = { f: pf, d: distanceToBody(fx, fy, pf) };
     }
     const moveTo = (tx, ty, toward) => {
       for (let i = 0; i < f.speed; i++) {
@@ -177,16 +183,20 @@
         fx = s.x; fy = s.y; moves.push([fx, fy]);
       }
     };
+    const distance = body => distanceToBody(fx, fy, body);
+    const moveToBody = (body, toward) => moveTo(
+      Math.max(body.mx, Math.min(fx, body.mx + bodySize(body) - 1)),
+      Math.max(body.my, Math.min(fy, body.my + bodySize(body) - 1)), toward);
     const ally = (kind) => fighters.find(o => o.alive && !o.fled && o.kind === kind && o.key !== f.key);
     const player = ally('player');
 
     if (f.ai === 'brave') {
       if (!foe) return { moves, action: { type: 'wait' } };
-      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) {
+      if (distance(foe.f) <= 1) {
         return { moves, action: { type: 'strike', target: foe.f.key } };
       }
-      moveTo(foe.f.mx, foe.f.my, true);
-      const d2 = cheb(fx, fy, foe.f.mx, foe.f.my);
+      moveToBody(foe.f, true);
+      const d2 = distance(foe.f);
       if (d2 <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
       if (d2 <= 3) return { moves, action: { type: 'harry', target: foe.f.key } }; // thrown rock
       return { moves, action: { type: 'wait' } };
@@ -194,34 +204,34 @@
     if (f.ai === 'cautious') {
       // flee if hurt or if a monster is close
       if ((f.hp / f.maxHp) < 0.5 || (foe && foe.d <= 2)) {
-        if (foe) moveTo(foe.f.mx, foe.f.my, false);
+        if (foe) moveToBody(foe.f, false);
         return { moves, action: { type: 'flee' } };
       }
       // otherwise keep distance from the fight
-      if (foe && foe.d <= 4) moveTo(foe.f.mx, foe.f.my, false);
+      if (foe && foe.d <= 4) moveToBody(foe.f, false);
       return { moves, action: { type: 'wait' } };
     }
     // helpful: stick near the player, patch them up, harry monsters
     if (player && (player.hp / player.maxHp) < 0.7 && !f.helped) {
-      if (cheb(fx, fy, player.mx, player.my) <= 1) {
+      if (distance(player) <= 1) {
         return { moves, action: { type: 'help', target: player.key } };
       }
-      moveTo(player.mx, player.my, true);
-      if (cheb(fx, fy, player.mx, player.my) <= 1) return { moves, action: { type: 'help', target: player.key } };
+      moveToBody(player, true);
+      if (distance(player) <= 1) return { moves, action: { type: 'help', target: player.key } };
       return { moves, action: { type: 'wait' } };
     }
     // HELPFUL STRIKE (combat-survival 2026-10-13): adjacent to the enemy,
     // they strike — harrying for [2,4] forever read as a losing trajectory
     // and fled at 70% having contributed nothing. A strike is [4,8].
-    if (foe && cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) {
+    if (foe && distance(foe.f) <= 1) {
       return { moves, action: { type: 'strike', target: foe.f.key } };
     }
     if (foe && foe.d <= 3) {
       // close in to strike, but don't stand in telegraphs
-      moveTo(foe.f.mx, foe.f.my, true);
-      if (cheb(fx, fy, foe.f.mx, foe.f.my) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
+      moveToBody(foe.f, true);
+      if (distance(foe.f) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
     } else if (player) {
-      moveTo(player.mx, player.my, true);
+      moveToBody(player, true);
     }
     return { moves, action: { type: 'wait' } };
   }
@@ -229,6 +239,6 @@
   global.Scattering = global.Scattering || {};
   global.Scattering.combat = {
     roll, cheb, key, inGrid, turnOrder, patternCells,
-    isFoe, nearestEnemy, stepToward, stepAway, villagerDecide,
+    isFoe, nearestEnemy, distanceToBody, stepToward, stepAway, villagerDecide,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

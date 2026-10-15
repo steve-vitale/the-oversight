@@ -518,7 +518,7 @@ The master clock. Every cost in the game flows through here. Needs never decreas
 ### combat-engine (`engine\combat.js`)
 Turn-based grid combat pure helpers. 9x9 detail grid, speed order, square-targeted telegraphed attacks.
 
-**Provides:** roll(range), cheb(ax, ay, bx, by), inGrid(x, y), turnOrder(fighters), patternCells(pattern, ax, ay, tx, ty), isFoe(a, b), nearestEnemy(fighters, f), stepToward(fx, fy, tx, ty, blocked, avoidCells), stepAway(fx, fy, tx, ty, blocked, avoidCells), villagerDecide(f, fighters, blocked, dangerCells)
+**Provides:** roll(range), cheb(ax, ay, bx, by), inGrid(x, y), turnOrder(fighters), patternCells(pattern, ax, ay, tx, ty), isFoe(a, b), nearestEnemy(fighters, f), distanceToBody(x, y, body), stepToward(fx, fy, tx, ty, blocked, avoidCells), stepAway(fx, fy, tx, ty, blocked, avoidCells), villagerDecide(f, fighters, blocked, dangerCells)
 
 **Rules:**
 - zero-range: beam/line/charge with attacker and target on the same tile covers the shared tile — zero range never whiffs. (code: patternCells)

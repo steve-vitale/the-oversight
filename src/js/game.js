@@ -39689,7 +39689,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!monstersFighting.length) { this.tbEnd(monstersAlive ? 'routed' : 'won'); return true; }
       // DISENGAGE (break-it turtle 2026-10-08; reach-hardened break-it
       // combat-2 2026-10-08): you walked away from things that can't/won't
-      // chase. If every living monster is beyond ITS OWN striking distance
+      // chase. If the whole living party is beyond every monster's striking distance
       // and none of them chases (follows:false — territorial, ambush,
       // drifter), the fight is over: you're not fighting, you're leaving.
       // (The turtle's own weakness: "it cannot chase (it is a turtle)",
@@ -39711,11 +39711,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // The chorus check above runs first, so incoming reinforcements still
       // hold the fight open.
       if (p && p.alive && !p.fled) {
+        const ourSide = f.fighters.filter(x => x.alive && !x.fled && (x.kind === 'player' || x.kind === 'ally' || x.kind === 'villager'));
         const allGone = monstersFighting.every(m => {
           if ((m.mdef || {}).follows !== false) return false;
           if (m.telegraph) return false;
-          const d = Math.max(Math.abs((m.mx || 0) - (p.mx || 0)), Math.abs((m.my || 0) - (p.my || 0)));
-          return d > Math.max(2, this.tbMonsterReach(m));
+          // The bearer can stand behind a fighting coalition. Their retreat
+          // alone does not make enemies disengage from everyone else's blows.
+          return ourSide.every(a => this.fighterDistTo(m, a.mx, a.my) > Math.max(2, this.tbMonsterReach(m)));
         });
         if (allGone) {
           // HONEST (brawler loop 2026-10-09 r7): the old code marked the
