@@ -27009,6 +27009,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state.feastLog.push({ day, quality: qualityGated | 0 });
         if (this.state.feastLog.length > 60) this.state.feastLog.splice(0, this.state.feastLog.length - 60);
       } catch (e) {}
+      // UNLOCK BEAT: STANDING PATH — BREAD (sim-unlockbeat 2026-10-15): the
+      // feast's +20 plenty can cross the wave gates with no kill ever firing
+      // checkWaveUnlockBeat — the System's "New casting directives incoming"
+      // trailed the unlock by 0-6 days (evidence/2026-10-15/
+      // sim-readinessbind.md §6). Route the feast into the same idempotent
+      // choke point — never a new beat, never a new voice. Cannot double-
+      // fire (the choke point's _waveAnnounced watermark no-ops when the
+      // kill path already announced) and cannot fire early (unlockedWave()
+      // reads live Standing — the gate hasn't crossed until it crossed).
+      // Harness gate: Game._standingBeatOff (default falsy) lets the sweep's
+      // control side replay the pre-fix tree byte-identically (precedent:
+      // Game._attrKills in recordWaveKill).
+      try { if (!this._standingBeatOff) this.checkWaveUnlockBeat(); } catch (e) {}
       try { this.save(); } catch (e) {}
       return {
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],
@@ -28130,6 +28143,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SPOILAGE (hunter loop): overnight, rotten food leaves the pack —
       // announced, never silent. Neglect has a visible cost.
       try { this.sweepSpoiled(); } catch (e) {}
+      // UNLOCK BEAT: STANDING PATH — BONDS (sim-unlockbeat 2026-10-15): link
+      // seasoning is a passive threshold (hierarchy.js _linkSeasoned: 30+
+      // days, trust 40+) with no event to hang a caller on — the diplomacy
+      // unlock crosses at dawn, and the beat used to wait 0-6 days for the
+      // next kill. One daily check catches it the same morning (lag 0),
+      // plus any trust-crossing from the previous day's tending. Same
+      // idempotent choke point; same no-double-fire / no-early guarantees
+      // as the bread path above. Harness gate: Game._standingBeatOff.
+      try { if (!this._standingBeatOff) this.checkWaveUnlockBeat(); } catch (e) {}
       this.save();
       return this.status();
     },
