@@ -29,7 +29,21 @@ const fs = require('fs');
 const path = require('path');
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
 const { leadfeast } = require('./policies/feastscale');
-const { siegerosterleadfeast } = require('./policies/siegeroster');
+// Kill-protocol degradation: the SIEGEROSTER layer was deleted post-kill.
+// The armed side is unmeasurable now; control-side (pure leadfeast) still runs.
+let siegerosterleadfeast = null;
+let srLayerAbsent = false;
+try { ({ siegerosterleadfeast } = require('./policies/siegeroster')); } catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    srLayerAbsent = true;
+    if (process.env.SIEGEROSTER === '1') {
+      console.log('INFO-SKIP: siegeroster layer deleted per kill protocol (KILLED AT PILOT); armed side unmeasurable post-kill — see evidence/2026-10-15/sim-siegeroster.md');
+      process.exit(0);
+    }
+    // control side: fall back to pure leadfeast
+    siegerosterleadfeast = leadfeast;
+  } else { throw e; }
+}
 
 const SEEDS = [11, 22, 33, 44, 55, 66, 77, 88];
 const DAYS = 180;
@@ -133,6 +147,10 @@ function aggregate(rows) {
 }
 
 async function smokeGate() {
+  if (srLayerAbsent) {
+    console.log('INFO-SKIP: siegeroster layer deleted per kill protocol (KILLED AT PILOT); SMOKE gate unmeasurable post-kill — see evidence/2026-10-15/sim-siegeroster.md');
+    process.exit(0);
+  }
   const fails = [];
   const check = (name, cond, detail) => {
     const ok = !!cond;

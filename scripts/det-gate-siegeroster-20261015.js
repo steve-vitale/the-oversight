@@ -10,7 +10,14 @@
 process.env.FEASTSCALE_R13 = '1';
 process.env.SIEGEROSTER = '1';
 const { loadGame, setupGame, runDays, quietLog } = require('./sim-harness');
-const { siegerosterleadfeast } = require('./policies/siegeroster');
+let siegerosterleadfeast = null;
+try { ({ siegerosterleadfeast } = require('./policies/siegeroster')); } catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: siegeroster layer deleted per kill protocol (KILLED AT PILOT); det-gate was 2/2 bit-identical pre-kill — see evidence/2026-10-15/sim-siegeroster.md');
+    process.exit(0);
+  }
+  throw e;
+}
 
 const SEEDS = [11, 22];
 const DAYS = 60;

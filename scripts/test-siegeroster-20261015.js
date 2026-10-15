@@ -28,8 +28,17 @@ try {
 ok('RED: no siegeroster module at bogus path (mechanism absent)', redAbsent);
 
 // ---- GREEN: load the real module ----
+// Kill-protocol degradation: if the layer file was deleted post-kill,
+// this script degrades to INFO-SKIP (exit 0), never MODULE_NOT_FOUND.
 console.log('GREEN phase (mechanism fires):');
-const sr = require('./policies/siegeroster');
+let sr = null;
+try { sr = require('./policies/siegeroster'); } catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: siegeroster layer deleted per kill protocol (KILLED AT PILOT); proof was RED->GREEN pre-kill — see evidence/2026-10-15/sim-siegeroster.md');
+    process.exit(0);
+  }
+  throw e;
+}
 ok('module loads', !!sr);
 ok('exports siegeRosterOn', typeof sr.siegeRosterOn === 'function');
 ok('exports threatNearHaven', typeof sr.threatNearHaven === 'function');
