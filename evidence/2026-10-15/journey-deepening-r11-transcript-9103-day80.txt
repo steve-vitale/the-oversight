@@ -1,0 +1,23 @@
+=== seed 9103 day 80 — conversation with Terry (gen_20cfe83) ===
+occupation=truck driver temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never did finish talking about that question — that was 14 days back. Still on your mind?"
+YOU: [gq:open:take] "What do you think?"
+THEM: "Short version: I don't know. Long version: also that, but slower."
+(want=curious stage=2)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Did you hear? Sam just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

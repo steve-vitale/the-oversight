@@ -1,0 +1,26 @@
+=== seed 9104 day 45 — conversation with Michael (gen_e3ictcb) ===
+occupation=welder temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you think happened to us — I've been turning something over. What do YOU think actually happened to us?"
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+(want=curious stage=1)
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "Look — That's where I keep landing too. The question is what it wants."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: The warmth pulls back a notch. They're weighing something.
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Did you hear? Diana just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=curious stage=3 resolution=engaged

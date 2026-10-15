@@ -1,0 +1,26 @@
+=== seed 9104 day 60 — conversation with Michael (gen_e3ictcb) ===
+occupation=welder temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 0)
+
+THEM: "We never finished talking about that question — we got cut off, 3 days back."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "That's everything I brought back. The rest is just walking."
+(want=curious stage=0)
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What day is it? ...Do you still count? I lost track days ago."
+(want=curious stage=1)
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+(want=curious stage=2)
+YOU: [goon] "Do go on."
+THEM: "Days, weeks — we'll make new names for them if we have to."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Yeah, that was me. I walked away from Haven once. Didn't look back. You'd know about that."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Good talk."
+want final: id=curious stage=3 resolution=engaged

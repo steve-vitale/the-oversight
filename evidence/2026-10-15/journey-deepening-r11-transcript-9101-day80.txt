@@ -1,0 +1,20 @@
+=== seed 9101 day 80 — conversation with Gladys (gen_f30wjkw) ===
+occupation=exterminator temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 0)
+
+THEM: "We never did finish talking about that plant lesson — that was 10 days back. Still on your mind?"
+YOU: [gq:open:take] "What do you think?"
+THEM: "You really want my take? ...Yeah. Okay. I think we're being tested."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Go on."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I'm sorry — I can't shake it. I'm feverish, a cut gone hot and angry. Will you help me?"
+(want=ask_favor stage=1)
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Sorry — I asked you something there." Will you help me?
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "See you at the fire."
+want final: id=ask_favor stage=3 resolution=unresolved

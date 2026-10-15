@@ -1,0 +1,26 @@
+=== seed 9103 day 60 — conversation with Terry (gen_20cfe83) ===
+occupation=truck driver temperament=fidgety trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the worst thing you've done since the sky changed?"
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Prickly Pear. Leaf, stem, smell. You won't forget it now."
+(want=curious stage=1)
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Mohrael? A tailor, back before. Solid person."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Take care of yourself."
+want final: id=curious stage=3 resolution=engaged

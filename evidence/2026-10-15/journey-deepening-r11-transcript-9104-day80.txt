@@ -1,0 +1,20 @@
+=== seed 9104 day 80 — conversation with Ingrid (ingrid_vik) ===
+occupation=physical therapy aide temperament=gentle trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what got you through the first week — What got you through the first week? The very first days."
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:lately] "How are you holding up — really?"
+THEM: "You want to know about that? Okay." "Have you seen the sick row? 3 down with a hot angry fever. Nobody says it out loud but everyone's counting."
+(want=curious stage=2)
+YOU: [goon] "And then?"
+THEM: "Sorry — I asked you something there." Have you seen the sick row?
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Go easy today, okay? The world's hard enough."
+want final: id=curious stage=3 resolution=engaged

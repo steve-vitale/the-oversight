@@ -1,0 +1,20 @@
+=== seed 9106 day 60 — conversation with Jesse (app_mgpsphg4916) ===
+occupation=cook temperament=prickly trust=30 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "Well now — God, yes. That's the dream now. Eight hours of not being afraid."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Is that so? Did you hear? Ava just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [goon] "Please, go on."
+THEM: "Sorry — I asked you something there." Is that so?
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Okay. We're done. That wasn't terrible."
+want final: id=curious stage=3 resolution=engaged

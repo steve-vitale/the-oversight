@@ -1,0 +1,23 @@
+=== seed 9101 day 60 — conversation with Gladys (gen_f30wjkw) ===
+occupation=exterminator temperament=cautious trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "Pantry's thin and getting thinner. Forage with me tomorrow? I know the north treeline by the fallen oak. ...at least, that's how it looks to me."
+YOU: [gq:open:take] "What do you think?"
+THEM: "I've got theories. Most of them are just fear with better lighting."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I did the count twice. The count doesn't change. Nobody's worked the north treeline by the fallen oak in days. We'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Good — The north treeline by the fallen oak, at sunup. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Alright. Think about what I said. I'll be thinking about what you said."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,31 @@
+=== seed 9102 day 80 — conversation with Mai (gen_llyqgye) ===
+occupation=locksmith temperament=fidgety trust=90 dead=false mood=steady
+want: ask_favor (stage 1)
+
+THEM: "We're down to 1 liters of clean water. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [gq:open:take] "What do you think?"
+THEM: "Yeah — Honestly? I think about it more than I say."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I checked the cistern three times hoping I misread it. 1 liters. The creek's a twenty-minute walk — with two of us it's one trip, not three."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "I'll do it."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+(want=ask_favor stage=3)
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Walt is gone and the world just... continues. That's the part I can't stand."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "Sleep's gone strange. I sit apart to eat at odd hours now. Whatever gets me to morning."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "The fire feels smaller without Walt. The rest of us will have to be bigger."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Go on."
+THEM: "I'm picking up Walt's share of the work. Someone should, and it might as well be me."
+(want=ask_favor stage=3)
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=3)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised
