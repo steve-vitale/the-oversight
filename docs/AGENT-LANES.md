@@ -1,0 +1,51 @@
+# Agent lanes (2026-10-15)
+
+Two agents work this repo. This note prevents file-level collisions.
+Steve adjudicates; either agent may update this file when lanes change.
+
+## Codex (taking over Claude's godpath work)
+- Lane: `docs/godpath/PLAN.md` "What's left" — ascension gates, villager active
+  verbs, early-kit subclass visibility, `god.scale` wiring, Table endings by
+  class/god x light/dark.
+- Files: `src/data/godpaths.json`, `src/js/godpath.js`, `src/js/godhood.js`,
+  `src/data/table-endings.json` (endings side), `scripts/godpath/`.
+- Status 2026-10-15: active on `codex/resume-claude`; publishing the recovered
+  Claude work, noncombat gear/playstyle simulations, and actual runtime fixes.
+  Resume higher-value godpath/ascension/subclass/scale/coda work next.
+
+## Muse
+- Lane: Claude roadmap `docs/ROADMAP.md` §2 minus the godpath files —
+  region content wave 1 (done, on branch `region-content-wave1`), then
+  The Long Way Home (nomad ending, `docs/WORLD-REGIONS.md` §6), then region
+  systems (temperature, weather).
+- Explicitly avoiding until lanes are confirmed: `src/data/godpaths.json`,
+  `src/data/table-endings.json` (Table codas), godpath scripts.
+- Files: `src/js/world.js`, region engine, new nomad-ending modules.
+
+## Rule
+Neither agent edits the other's listed files without a note here first.
+Content merges happen through the normal worktree + `--ff-only` flow.
+
+
+## Codex reconciliation note (2026-10-15)
+
+Steve: "Muse agent is also working. You take the higher value work befitting
+your model, I believe muse claimed a lane somewhere in roadmap. Push so it
+can see your work."
+
+Codex fetched `agent-lanes` and `region-content-wave1` after this direction.
+Muse's wave-1 branch is already at `9cc36028` with six playable regions.
+Codex's independently authored Europe slice (`7480ed60`) was made before
+that remote claim was visible in this checkout. It overlaps Muse's Europe;
+**do not blindly merge or replace Muse's regional data with it.** Preserve
+Muse's region/nomad/systems lane. No further region authoring by Codex.
+
+Already-running Codex regional audit is being completed as an explicit
+exception: standard driver region/origin selection, 150-day gear/dead-usage
+screens, and recipe catch-pool wiring (North American-only catch lists left
+European traps unable to catch their actual local animals). These recipe
+additions refer to Codex's animal IDs; reconcile species IDs against Muse's
+branch before applying. Tests/evidence make the issue and contract portable.
+The two Europe datasets are alternatives requiring deliberate reconciliation,
+not two sequential content upgrades. The branch is shared for review and
+integration; it does not deploy or change main.
