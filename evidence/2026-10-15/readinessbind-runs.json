@@ -1,0 +1,2766 @@
+{
+ "aggregate": {
+  "label": "readinessbind",
+  "seeds": [
+   11,
+   22,
+   33,
+   44,
+   55,
+   66,
+   77,
+   88
+  ],
+  "policies": [
+   "fourthlink",
+   "belongseek",
+   "leadfeast"
+  ],
+  "days": 180,
+  "mutate": false,
+  "nRuns": 24,
+  "nUnlocks": 19,
+  "w4": 14,
+  "w5": 5,
+  "outcomes": {
+   "held": 12,
+   "died": 4,
+   "held-censored": 1,
+   "hollow": 2
+  },
+  "tableBy30": 2,
+  "attribution": {
+   "n": 19,
+   "fullyAttributed": 18,
+   "censored": 1,
+   "rate": 0.947
+  },
+  "separation": {
+   "underpowered": false,
+   "n": 19,
+   "holders": 12,
+   "corpses": 6,
+   "perCovariate": [
+    {
+     "covariate": "ledgerPointsPrev",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 0,
+     "corpseMedian": 0,
+     "pooledMAD": 0,
+     "holderRange": [
+      0,
+      3
+     ],
+     "corpseRange": [
+      0,
+      3
+     ],
+     "signal": "none"
+    },
+    {
+     "covariate": "tricksPrevShare",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 0,
+     "corpseMedian": 0,
+     "pooledMAD": 0,
+     "holderRange": [
+      0,
+      0.111
+     ],
+     "corpseRange": [
+      0,
+      0
+     ],
+     "signal": "none"
+    },
+    {
+     "covariate": "scholarArmorP",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 6,
+     "corpseMedian": 23.5,
+     "pooledMAD": 10,
+     "holderRange": [
+      0,
+      40
+     ],
+     "corpseRange": [
+      0,
+      35
+     ],
+     "signal": "SUGGESTIVE"
+    },
+    {
+     "covariate": "rosterAlive",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 8,
+     "corpseMedian": 7,
+     "pooledMAD": 1,
+     "holderRange": [
+      4,
+      9
+     ],
+     "corpseRange": [
+      6,
+      8
+     ],
+     "signal": "SUGGESTIVE"
+    },
+    {
+     "covariate": "pantryFreshDays",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 14.04,
+     "corpseMedian": 14.395,
+     "pooledMAD": 5.74,
+     "holderRange": [
+      2.19,
+      46.8
+     ],
+     "corpseRange": [
+      0.76,
+      24.24
+     ],
+     "signal": "none"
+    },
+    {
+     "covariate": "trustMean",
+     "holders": 12,
+     "corpses": 6,
+     "holderMedian": 48.9,
+     "corpseMedian": 51.45,
+     "pooledMAD": 2.45,
+     "holderRange": [
+      41.4,
+      55
+     ],
+     "corpseRange": [
+      44,
+      57.7
+     ],
+     "signal": "SUGGESTIVE"
+    }
+   ],
+   "verdict": "SUGGESTIVE-ONLY",
+   "note": "suggestive only (medians differ >= pooled MAD, ranges overlap): scholarArmorP, rosterAlive, trustMean"
+  }
+ },
+ "unlocks": [
+  {
+   "policy": "fourthlink",
+   "seed": 22,
+   "wave": 4,
+   "unlockDay": 99,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 99,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 24.54,
+    "trustMean": 55,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 99,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 44,
+   "wave": 4,
+   "unlockDay": 58,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 58,
+    "standing": {
+     "total": 127,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "scholarArmorP": 2,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 12.91,
+    "trustMean": 51,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 4,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 58,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 66,
+   "wave": 4,
+   "unlockDay": 65,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 65,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 14.89,
+    "trustMean": 44,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "died",
+    "tableBy30": 0,
+    "daysObserved": 29,
+    "unlockDay": 65,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 77,
+   "wave": 4,
+   "unlockDay": 57,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 14.34,
+    "trustMean": 41.4,
+    "trustN": 18,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 57,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 88,
+   "wave": 4,
+   "unlockDay": 57,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 4,
+    "rosterTotal": 5,
+    "pantryFreshDays": 5.4,
+    "trustMean": 48.3,
+    "trustN": 13,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 57,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "wave": 4,
+   "unlockDay": 115,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 115,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "terms_of_service": 2,
+     "spool": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 40,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 2.19,
+    "trustMean": 49.5,
+    "trustN": 17,
+    "rank": "national",
+    "waveEngagedPrev": 7,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 115,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "wave": 4,
+   "unlockDay": 136,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 136,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1,
+     "callback": 2
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 22.07,
+    "trustMean": 57.7,
+    "trustN": 15,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "died",
+    "tableBy30": 0,
+    "daysObserved": 22,
+    "unlockDay": 136,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "wave": 4,
+   "unlockDay": 156,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 156,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 2,
+     "redactor": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 101.73,
+    "trustMean": 65.7,
+    "trustN": 18,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held-censored",
+    "tableBy30": 0,
+    "daysObserved": 26,
+    "unlockDay": 156,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 22,
+   "wave": 4,
+   "unlockDay": 55,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 55,
+    "standing": {
+     "total": 100,
+     "war": 0,
+     "diplomacy": 0,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 0,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 17,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 24.24,
+    "trustMean": 54.9,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "died",
+    "tableBy30": 0,
+    "daysObserved": 29,
+    "unlockDay": 55,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 22,
+   "wave": 5,
+   "unlockDay": 82,
+   "coincident": false,
+   "snapshot": {
+    "wave": 5,
+    "day": 82,
+    "standing": {
+     "total": 287,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 160,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 8
+    },
+    "ledgerPrevWave": 4,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 10,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 0.76,
+    "trustMean": 51.2,
+    "trustN": 17,
+    "rank": "regional",
+    "waveEngagedPrev": 4,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "died",
+    "tableBy30": 0,
+    "daysObserved": 2,
+    "unlockDay": 82,
+    "wave": 5
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 33,
+   "wave": 4,
+   "unlockDay": 57,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 182,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 80,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 4
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 19.78,
+    "trustMean": 50.2,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 57,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 33,
+   "wave": 5,
+   "unlockDay": 58,
+   "coincident": false,
+   "snapshot": {
+    "wave": 5,
+    "day": 58,
+    "standing": {
+     "total": 202,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 4,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 10,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 16.36,
+    "trustMean": 48.1,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 1,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 58,
+    "wave": 5
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 44,
+   "wave": 4,
+   "unlockDay": 55,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 55,
+    "standing": {
+     "total": 100,
+     "war": 0,
+     "diplomacy": 0,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 0,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 8.3,
+    "trustMean": 52.6,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 55,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 44,
+   "wave": 5,
+   "unlockDay": 59,
+   "coincident": false,
+   "snapshot": {
+    "wave": 5,
+    "day": 59,
+    "standing": {
+     "total": 227,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 100,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 4,
+    "ledgerPerType": {
+     "strike": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 0,
+     "total": 10,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 13.74,
+    "trustMean": 53,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 1,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 59,
+    "wave": 5
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 66,
+   "wave": 4,
+   "unlockDay": 43,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 43,
+    "standing": {
+     "total": 105,
+     "war": 25,
+     "diplomacy": 0,
+     "plenty": 80,
+     "warPts": 1,
+     "links": 0,
+     "feasts": 4
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "ad_break": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 46.8,
+    "trustMean": 42,
+    "trustN": 12,
+    "rank": "village",
+    "waveEngagedPrev": 1,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 43,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 77,
+   "wave": 4,
+   "unlockDay": 56,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 56,
+    "standing": {
+     "total": 100,
+     "war": 0,
+     "diplomacy": 0,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 0,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 15.4,
+    "trustMean": 44.4,
+    "trustN": 16,
+    "rank": "regional",
+    "waveEngagedPrev": 2,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 1,
+    "daysObserved": 30,
+    "unlockDay": 56,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 77,
+   "wave": 5,
+   "unlockDay": 60,
+   "coincident": false,
+   "snapshot": {
+    "wave": 5,
+    "day": 60,
+    "standing": {
+     "total": 202,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 4,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 10,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 7,
+    "rosterTotal": 8,
+    "pantryFreshDays": 10.17,
+    "trustMean": 43.5,
+    "trustN": 16,
+    "rank": "regional",
+    "waveEngagedPrev": 1,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "held",
+    "tableBy30": 1,
+    "daysObserved": 30,
+    "unlockDay": 60,
+    "wave": 5
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 88,
+   "wave": 4,
+   "unlockDay": 55,
+   "coincident": false,
+   "snapshot": {
+    "wave": 4,
+    "day": 55,
+    "standing": {
+     "total": 100,
+     "war": 0,
+     "diplomacy": 0,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 0,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 4.12,
+    "trustMean": 50.6,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "hollow",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 55,
+    "wave": 4
+   }
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 88,
+   "wave": 5,
+   "unlockDay": 58,
+   "coincident": false,
+   "snapshot": {
+    "wave": 5,
+    "day": 58,
+    "standing": {
+     "total": 202,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 100,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 5
+    },
+    "ledgerPrevWave": 4,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 10,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 13.9,
+    "trustMean": 51.7,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 1,
+    "waveEngagedW": 0
+   },
+   "outcome": {
+    "outcome": "hollow",
+    "tableBy30": 0,
+    "daysObserved": 30,
+    "unlockDay": 58,
+    "wave": 5
+   }
+  }
+ ],
+ "runs": [
+  {
+   "policy": "fourthlink",
+   "seed": 11,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 34,
+   "over": true,
+   "maxWaveUnlocked": 2
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 22,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 99,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 99,
+      "standing": {
+       "total": 102,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 0,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 10,
+      "rosterAlive": 9,
+      "rosterTotal": 10,
+      "pantryFreshDays": 24.54,
+      "trustMean": 55,
+      "trustN": 15,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: Sigrun heads out to check the snares. \"Wire doesn't lie.\"",
+      "say: Nora heads out to check the snares. \"Wire doesn't lie.\"",
+      "say: The joints throb; everything costs more than it should. (-1 HP)",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: You catch fragments by the fire — Theo telling Nora about you. Half of it's true anymore. You're not sure which half.",
+      "say: You catch fragments by the fire — Caitriona telling Theo about you. The retelling is already better than the event.",
+      "say: Walt showed Caitriona the White Oak Acorns — \"remember it.\" Word gets around.",
+      "say: The joints throb; everything costs more than it should. (-1 HP)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 99,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 160,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 33,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 54,
+   "over": true,
+   "maxWaveUnlocked": 2
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 44,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 58,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 58,
+      "standing": {
+       "total": 127,
+       "war": 25,
+       "diplomacy": 102,
+       "plenty": 0,
+       "warPts": 1,
+       "links": 3,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {
+       "spool": 1
+      },
+      "ledgerPointsPrev": 1,
+      "tricksPrev": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "spool"
+       ]
+      },
+      "tricksW3": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "spool"
+       ]
+      },
+      "scholarArmorP": 2,
+      "rosterAlive": 9,
+      "rosterTotal": 10,
+      "pantryFreshDays": 12.91,
+      "trustMean": 51,
+      "trustN": 12,
+      "rank": "regional",
+      "waveEngagedPrev": 4,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 💧 Kai returns with 14L, but the cistern only holds 1L more.",
+      "say: You catch fragments by the fire — Kai telling Fatima about Devon. It's barely the same story now. That's what fires do.",
+      "say: You catch fragments by the fire — Kai telling Ivy about you. Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+      "say: You catch fragments by the fire — Minh telling Devon about you. The truth left this story two fires ago. What's left is better theater.",
+      "say: 💬 Carlos says: \"If they're watching, let them watch me work. That's all I've got.\"",
+      "say: 🚶 Kai is back — found Zoe.",
+      "say: Divya is mending something by the door — patient work.",
+      "say: Leandro is sweeping the hall. Someone has to.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 58,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 124,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 55,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 108,
+   "over": true,
+   "maxWaveUnlocked": 3
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 66,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 65,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 65,
+      "standing": {
+       "total": 102,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 0,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 14.89,
+      "trustMean": 44,
+      "trustN": 12,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: You catch fragments by the fire — Aroha telling Nino about you. It's barely the same story now. That's what fires do.",
+      "say: Aurora heads out to check the snares. \"Wire doesn't lie.\"",
+      "say: Nino sets out to find Marcus. \"Won't be long.\"",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: Elif left 3 wood logs by the stash. No announcement. That's how it works here.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 29,
+      "unlockDay": 65,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 94,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 77,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 57,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 57,
+      "standing": {
+       "total": 102,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 0,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 35,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 14.34,
+      "trustMean": 41.4,
+      "trustN": 18,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🚶 Elijah is back — found Zoltan.",
+      "say: — MIDDAY — Honest work hours. Heat builds.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: 💬 Diana says: \"Someone's been leaving food out. Good food. Don't ask me how I know it wasn't one of us.\"",
+      "say: 🚶 Felix is back — found Wei.",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: You catch fragments by the fire — Felix telling Thabo about Zoltan. The retelling is already better than the event.",
+      "say: 🚶 Malik is back — found Wei.",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 57,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 104,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "fourthlink",
+   "seed": 88,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 57,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 57,
+      "standing": {
+       "total": 102,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 0,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 30,
+      "rosterAlive": 4,
+      "rosterTotal": 5,
+      "pantryFreshDays": 5.4,
+      "trustMean": 48.3,
+      "trustN": 13,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: You catch fragments by the fire — Wren telling Onni about you. The retelling is already better than the event.",
+      "say: 🩹 Yavdokha is still hurting (18 HP) — no healer at haven. They rest today instead of ranging out.",
+      "say: 🩹 Onni is still hurting (43 HP) — no healer at haven. They rest today instead of ranging out.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — MIDDAY — Honest work hours. Heat builds.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: No risky water to boil.",
+      "say: Drank clean water.",
+      "say: Wren heads out to forage. \"Back before dark. Probably.\"",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 57,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-dead",
+   "gameDays": 116,
+   "over": false,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "belongseek",
+   "seed": 11,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 35,
+   "over": true,
+   "maxWaveUnlocked": 1
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 115,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 115,
+      "standing": {
+       "total": 109,
+       "war": 75,
+       "diplomacy": 34,
+       "plenty": 0,
+       "warPts": 3,
+       "links": 1,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {
+       "terms_of_service": 2,
+       "spool": 1
+      },
+      "ledgerPointsPrev": 3,
+      "tricksPrev": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "buffering"
+       ]
+      },
+      "tricksW3": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "buffering"
+       ]
+      },
+      "scholarArmorP": 40,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 2.19,
+      "trustMean": 49.5,
+      "trustN": 17,
+      "rank": "national",
+      "waveEngagedPrev": 7,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: Sigrun sets out to find Wolfgang. \"Won't be long.\"",
+      "say: Lucas is working the cookpot, tasting, adjusting.",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: Onni left 3 branches by the stash. No announcement. That's how it works here.",
+      "say: You catch fragments by the fire — Nora telling Devon about Wolfgang. Three retellings in, nobody remembers what actually happened — but everyone has opinions.",
+      "say: You catch fragments by the fire — Aria telling Sigrun about Lucas. Someone's added a flourish that wasn't there this morning.",
+      "say: Lena sets out to find Wolfgang. \"Won't be long.\"",
+      "say: Aria is mending something by the door — patient work.",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 115,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "survived",
+   "gameDays": 182,
+   "over": false,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "belongseek",
+   "seed": 33,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 43,
+   "over": true,
+   "maxWaveUnlocked": 1
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 136,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 136,
+      "standing": {
+       "total": 109,
+       "war": 75,
+       "diplomacy": 34,
+       "plenty": 0,
+       "warPts": 3,
+       "links": 1,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {
+       "spool": 1,
+       "callback": 2
+      },
+      "ledgerPointsPrev": 3,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 10,
+      "rosterAlive": 6,
+      "rosterTotal": 7,
+      "pantryFreshDays": 22.07,
+      "trustMean": 57.7,
+      "trustN": 15,
+      "rank": "national",
+      "waveEngagedPrev": 6,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 👥 Fatima walks out with Devon. \"Nobody walks alone today.\"",
+      "say: 🎒 Owen shoulders a pack. \"Going far this time. Don't wait up.\"",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: You don't know how to make a Arrow yet.",
+      "say: ◈ THE SYSTEM has been watching Owen — 3 days worked on the land. It offers Game Sense. Earned, not given. (game_sense: villager System grant)",
+      "say: ◈ THE SYSTEM has been watching Owen — 4 fights. It offers Patient Aim. Earned, not given. (patient_aim: villager System grant)",
+      "say: 📖 The Codex turns a page on its own. The Big Beast is dead. You didn't ask. It knew.",
+      "say: 📺 Owen killed The Big Beast out past the ridge — alone — and walked home. 2 rounds, 16 taken. (The village watches the broadcast. Nobody blinks.)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 22,
+      "unlockDay": 136,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 158,
+   "over": true,
+   "maxWaveUnlocked": 3
+  },
+  {
+   "policy": "belongseek",
+   "seed": 55,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 107,
+   "over": true,
+   "maxWaveUnlocked": 3
+  },
+  {
+   "policy": "belongseek",
+   "seed": 66,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 104,
+   "over": true,
+   "maxWaveUnlocked": 3
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 156,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 156,
+      "standing": {
+       "total": 109,
+       "war": 75,
+       "diplomacy": 34,
+       "plenty": 0,
+       "warPts": 3,
+       "links": 1,
+       "feasts": 0
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {
+       "spool": 2,
+       "redactor": 1
+      },
+      "ledgerPointsPrev": 3,
+      "tricksPrev": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "buffering"
+       ]
+      },
+      "tricksW3": {
+       "known": 1,
+       "total": 9,
+       "share": 0.111,
+       "knownIds": [
+        "buffering"
+       ]
+      },
+      "scholarArmorP": 35,
+      "rosterAlive": 6,
+      "rosterTotal": 7,
+      "pantryFreshDays": 101.73,
+      "trustMean": 65.7,
+      "trustN": 18,
+      "rank": "national",
+      "waveEngagedPrev": 6,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: (The new things wearing your shapes are already here. The horror: it's made of you.)",
+      "say: 🔥 Ruth, at the fire: \"Of course it looks like us. Flattering. Still killing it.\"",
+      "sys: WINNER! Style score: 45. The gamblers are ecstatic!",
+      "say: It is a blooper reel. Do not eat the blooper reel.",
+      "say: ✨ ALIEN LOOT: Phase sling. The pouch phases half a second ahead of your hand. Stones arrive before you throw them. It's on the body — search it.",
+      "say: You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+      "say: You clutch your Mixtape, Home key, Dispatcher's headset, Lucky Coin, Knife roll. You're still here. The resonance deepens. (bond 378)",
+      "sys: \"WE SAW that — Adrenaline Control was yours. But your slots are full (6/6). Make room, or grow the interface, and ask again by DOING it again.\"",
+      "say: Diana is sweeping the hall. Someone has to.",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held-censored",
+      "tableBy30": 0,
+      "daysObserved": 26,
+      "unlockDay": 156,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "survived",
+   "gameDays": 182,
+   "over": false,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "belongseek",
+   "seed": 88,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 79,
+   "over": true,
+   "maxWaveUnlocked": 2
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 11,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 34,
+   "over": true,
+   "maxWaveUnlocked": 2
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 22,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 55,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 55,
+      "standing": {
+       "total": 100,
+       "war": 0,
+       "diplomacy": 0,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 0,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 17,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 24.24,
+      "trustMean": 54.9,
+      "trustN": 12,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "sys: \"WE SAW that — Haymaker was yours. But your slots are full (6/6). Make room, or grow the interface, and earn it again.\"",
+      "say: 📺 +20 style — dropped the Heckler!",
+      "sys: 📺 WAVE LEDGER — wave 2's bar is full (4/4 — kills only, not near-misses).",
+      "sys: WINNER! Style score: 25. The gamblers nod approvingly.",
+      "say: It is all mouth. You are not hungry enough.",
+      "say: You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+      "say: You clutch your Coat button, Mixtape, Dog tags, Trail compass, Field suture kit. You're still here. The resonance deepens. (bond 250)",
+      "say: You catch fragments by the fire — Victor telling Wolfgang about Sigrun. The story's getting bigger than what happened.",
+      "say: Jorge heads out to check the snares. \"Wire doesn't lie.\"",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 29,
+      "unlockDay": 55,
+      "wave": 4
+     }
+    },
+    {
+     "wave": 5,
+     "unlockDay": 82,
+     "coincident": false,
+     "snapshot": {
+      "wave": 5,
+      "day": 82,
+      "standing": {
+       "total": 287,
+       "war": 25,
+       "diplomacy": 102,
+       "plenty": 160,
+       "warPts": 1,
+       "links": 3,
+       "feasts": 8
+      },
+      "ledgerPrevWave": 4,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 10,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 35,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 0.76,
+      "trustMean": 51.2,
+      "trustN": 17,
+      "rank": "regional",
+      "waveEngagedPrev": 4,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: You catch fragments by the fire — Onni telling Talia about you. The truth left this story two fires ago. What's left is better theater.",
+      "say: 🚶 Ben is back — found Sigrun.",
+      "say: Talia heads out to forage. \"Back before dark. Probably.\"",
+      "say: Ibrahim is mending something by the door — patient work.",
+      "say: Ben is mending something by the door — patient work.",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: 📖 Onni is going over their finds, re-tying the bundle.",
+      "say: Ibrahim is mending something by the door — patient work.",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 2,
+      "unlockDay": 82,
+      "wave": 5
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 84,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 33,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 57,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 57,
+      "standing": {
+       "total": 182,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 80,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 4
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 10,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 19.78,
+      "trustMean": 50.2,
+      "trustN": 15,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 💧 Joseph returns with 14L, but the cistern only holds 5L more.",
+      "say: 🚶 Nadia is back — found Catalina.",
+      "say: 💬 Joseph is sitting with Nikolai, talking low. Not business. Just people.",
+      "say: David is working the cookpot, tasting, adjusting.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — DUSK — Animals stir again. Shadows lengthen.",
+      "say: You wait. The light changes. Nothing asks anything of you.",
+      "say: 💬 Greta is sitting with Joseph, talking low. Not business. Just people.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 57,
+      "wave": 4
+     }
+    },
+    {
+     "wave": 5,
+     "unlockDay": 58,
+     "coincident": false,
+     "snapshot": {
+      "wave": 5,
+      "day": 58,
+      "standing": {
+       "total": 202,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 4,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 10,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 16.36,
+      "trustMean": 48.1,
+      "trustN": 15,
+      "rank": "regional",
+      "waveEngagedPrev": 1,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: The Codex doesn't pause for grief. Catalina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+      "say: 🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+      "say: 📖 The Codex turns a page: Pallavi Surve, 58 days. The mantle passes to Catalina Reyes.",
+      "say: 🪞 You wake up somebody else. Catalina Reyes, 38 — a fishing guide. Her hands know different work now: Game Sense, Patient Aim.",
+      "say: At the grave, Joseph, Greta speak for Catalina — \"Pallavi trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+      "say: You catch fragments by the fire — David telling Fatima about you. The details have shifted. Nobody seems to mind.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "say: The air thins a little. Someone nods at you by the fire. Maybe it blows over.",
+      "say: The relief moment passes — the crisis runs its own course now. What you did stands; what you didn't, doesn't.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 58,
+      "wave": 5
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 115,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 44,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 55,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 55,
+      "standing": {
+       "total": 100,
+       "war": 0,
+       "diplomacy": 0,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 0,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 8.3,
+      "trustMean": 52.6,
+      "trustN": 12,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🌿 Kai checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+      "say: 🪵 Kai hauls back 7 wood. The pile grows. (285 logs now.)",
+      "say: 🌿 Kai checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the forage standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+      "say: 💧 Kai returns with 14L, but the cistern only holds 0L more.",
+      "say: 🍲 Kai cooked for the haven — meals stretched. The racks are already full (15,447 kcal kept — more than the haven can eat before it turns), so Kai left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+      "say: You catch fragments by the fire — Divya telling Aria about Kai. The retelling is already better than the event.",
+      "say: 📖 Ivy is walking Devon through the thorny climbing vines everywhere, with tender coiled tips in spring — leaf, stem, smell, the beginner's tour.",
+      "say: Fever dreams shake you — wings, black water, a sky full of eyes. (-2 HP)",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 55,
+      "wave": 4
+     }
+    },
+    {
+     "wave": 5,
+     "unlockDay": 59,
+     "coincident": false,
+     "snapshot": {
+      "wave": 5,
+      "day": 59,
+      "standing": {
+       "total": 227,
+       "war": 25,
+       "diplomacy": 102,
+       "plenty": 100,
+       "warPts": 1,
+       "links": 3,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 4,
+      "ledgerPerType": {
+       "strike": 1
+      },
+      "ledgerPointsPrev": 1,
+      "tricksPrev": {
+       "known": 0,
+       "total": 10,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 13.74,
+      "trustMean": 53,
+      "trustN": 12,
+      "rank": "regional",
+      "waveEngagedPrev": 1,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🌿 Kai checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the forage standing and turns to the water run instead. The pantry can't take more; the wild will keep.",
+      "say: 💧 Kai returns with 13L, but the cistern only holds 0L more.",
+      "say: 🍲 Kai cooked for the haven — meals stretched. The racks are already full (17,126 kcal kept — more than the haven can eat before it turns), so Kai left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.",
+      "say: Kai doesn't bother arguing anymore. By dusk the Cook crews are taking orders from them, and nobody quite remembers when it changed.",
+      "say: 🚶 Ivy is back — found Kai.",
+      "say: Aria heads out to forage. \"Back before dark. Probably.\"",
+      "say: Konrad is working the cookpot, tasting, adjusting.",
+      "say: Fever dreams shake you — wings, black water, a sky full of eyes. (-2 HP)",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 59,
+      "wave": 5
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 94,
+   "over": true,
+   "maxWaveUnlocked": 5
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 55,
+   "days": 180,
+   "unlocks": [],
+   "tableDays": [],
+   "endReason": "village-dead",
+   "gameDays": 147,
+   "over": false,
+   "maxWaveUnlocked": 3
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 66,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 43,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 43,
+      "standing": {
+       "total": 105,
+       "war": 25,
+       "diplomacy": 0,
+       "plenty": 80,
+       "warPts": 1,
+       "links": 0,
+       "feasts": 4
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {
+       "ad_break": 1
+      },
+      "ledgerPointsPrev": 1,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 10,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 46.8,
+      "trustMean": 42,
+      "trustN": 12,
+      "rank": "village",
+      "waveEngagedPrev": 1,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "sys: 📺 You are WATCHING. This is a scene playing out — not your life. Nobody dies on television. That is the rule. Probably.",
+      "sys: 📺 🎙️ PLAY-BY-PLAY: And we are LIVE with a special presentation: THE FEAST! The little ones are putting flavored matter in their mouths ON PURPOSE. For joy. The file says joy.",
+      "sys: 📺 🎨 COLOR: They cooked it. They did not have to cook it. They cooked it anyway and now they are SHARING it. I need to sit down.",
+      "sys: 📺 🎙️ PLAY-BY-PLAY: Look at that spread. Seventeen systems are watching and every one of them is hungry now. This is a war crime against our nutrient paste.",
+      "sys: 📺 Broadcast over — back to your life.",
+      "say: 🍖 FEAST 📺 — Theo opens the pantry wide: 8× Foraged food, 1× Cattail. Aurora, Cheryl, Eun-chae, Elif and 1 more eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−2,832 kcal from the pantry) Christopher",
+      "say: 🍖 The feast carries you on — the fire is stoked higher, not doubled. FEASTED ×2.03 until tomorrow's dawn (6 parts left): a proper feast. (Re-feast refreshes; it never stacks.)",
+      "say: Fever grips you. (-4 HP) (-4 hydration)",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 43,
+      "wave": 4
+     }
+    }
+   ],
+   "tableDays": [
+    74,
+    75,
+    76
+   ],
+   "endReason": "village-lost",
+   "gameDays": 76,
+   "over": true,
+   "maxWaveUnlocked": 4
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 77,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 56,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 56,
+      "standing": {
+       "total": 100,
+       "war": 0,
+       "diplomacy": 0,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 0,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 9,
+      "rosterTotal": 10,
+      "pantryFreshDays": 15.4,
+      "trustMean": 44.4,
+      "trustN": 16,
+      "rank": "regional",
+      "waveEngagedPrev": 2,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🔥 Jesse, at the fire: \"It wears our faces? Then we don't trust faces after dark.\"",
+      "sys: ROUND 2!",
+      "sys: 📋 Big Big (packmate)'s turn",
+      "say: \"PICKET LINE!\" A Glasswing Darter lumbers in, holding a tiny sign. (The rep called backup — from the OLD wave.)",
+      "sys: 📋 Big Big (packmate)'s turn",
+      "sys: 📋 Pack-leader Big Big's turn",
+      "sys: ROUND 3!",
+      "sys: 🪰 Glasswing Darter (picket)'s turn",
+      "say: A whine from overhead. The glasswing is circling you.",
+      "say: The shadow detaches from the clouds and starts growing.",
+      "sys: 📋 Big Big (packmate)'s turn",
+      "say: Not mid-fight — finish it first."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 1,
+      "daysObserved": 30,
+      "unlockDay": 56,
+      "wave": 4
+     }
+    },
+    {
+     "wave": 5,
+     "unlockDay": 60,
+     "coincident": false,
+     "snapshot": {
+      "wave": 5,
+      "day": 60,
+      "standing": {
+       "total": 202,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 4,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 10,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 0,
+      "rosterAlive": 7,
+      "rosterTotal": 8,
+      "pantryFreshDays": 10.17,
+      "trustMean": 43.5,
+      "trustN": 16,
+      "rank": "regional",
+      "waveEngagedPrev": 1,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: Nobody's talking much. The fire feels smaller tonight.",
+      "say: 🕯️ Lily is dead — and the dead hold no treaties. Every link Haven has shakes.",
+      "say: Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+      "say: Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+      "say: Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it.",
+      "say: 🕯️ Lily Duarte is dead — combat. The village stops. Somebody screams. Somebody else starts digging.",
+      "say: \"Lily's gone.\" Jesse looks at you for a long moment. \"You're not Lily.\" No heat in it. Just fact. You'll have to earn this face.",
+      "say: The Codex doesn't pause for grief. Nino blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+      "say: 🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+      "say: 📖 The Codex turns a page: Lily Duarte, 60 days. The mantle passes to Nino Kapanadze.",
+      "say: 🪞 You wake up somebody else. Nino Kapanadze, 56 — a dry cleaner.",
+      "say: At the grave, Jesse speaks for Nino — \"Lily trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+     ],
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 1,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 5
+     }
+    }
+   ],
+   "tableDays": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174
+   ],
+   "endReason": "survived",
+   "gameDays": 175,
+   "over": false,
+   "maxWaveUnlocked": 5
+  },
+  {
+   "policy": "leadfeast",
+   "seed": 88,
+   "days": 180,
+   "unlocks": [
+    {
+     "wave": 4,
+     "unlockDay": 55,
+     "coincident": false,
+     "snapshot": {
+      "wave": 4,
+      "day": 55,
+      "standing": {
+       "total": 100,
+       "war": 0,
+       "diplomacy": 0,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 0,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 3,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 30,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 4.12,
+      "trustMean": 50.6,
+      "trustN": 15,
+      "rank": "regional",
+      "waveEngagedPrev": 0,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🌿 Kentaro checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+      "say: 🪵 Kentaro hauls back 7 wood. The pile grows. (917 logs now.)",
+      "say: 🍲 Kentaro cooked for the haven — meals stretched.",
+      "say: Kentaro stopped asking. They just started organizing the Fish crews. Nobody stopped them.",
+      "say: Helga showed Onni the Wild Strawberry — \"remember it.\" Word gets around.",
+      "say: Onni showed Jude the Wild Strawberry — \"remember it.\" Word gets around.",
+      "say: 🚶 Jude is back with Yara.",
+      "say: 🚶 Yara is back with Jude.",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "hollow",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 55,
+      "wave": 4
+     }
+    },
+    {
+     "wave": 5,
+     "unlockDay": 58,
+     "coincident": false,
+     "snapshot": {
+      "wave": 5,
+      "day": 58,
+      "standing": {
+       "total": 202,
+       "war": 0,
+       "diplomacy": 102,
+       "plenty": 100,
+       "warPts": 0,
+       "links": 3,
+       "feasts": 5
+      },
+      "ledgerPrevWave": 4,
+      "ledgerPerType": {},
+      "ledgerPointsPrev": 0,
+      "tricksPrev": {
+       "known": 0,
+       "total": 10,
+       "share": 0,
+       "knownIds": []
+      },
+      "tricksW3": {
+       "known": 0,
+       "total": 9,
+       "share": 0,
+       "knownIds": []
+      },
+      "scholarArmorP": 30,
+      "rosterAlive": 8,
+      "rosterTotal": 9,
+      "pantryFreshDays": 13.9,
+      "trustMean": 51.7,
+      "trustN": 15,
+      "rank": "regional",
+      "waveEngagedPrev": 1,
+      "waveEngagedW": 0
+     },
+     "beats": [
+      "say: 🌿 Kentaro checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep.",
+      "say: 🪨 Kentaro pries 2 stone loose from the creek bed. The building pile grows. (226 stone now.)",
+      "say: 🌿 Kentaro checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep.",
+      "say: 🪵 Kentaro hauls back 6 wood. The pile grows. (985 logs now.)",
+      "say: 🍲 Kentaro cooked for the haven — meals stretched.",
+      "say: Jude showed Kentaro the Black Walnut — \"remember it.\" Word gets around.",
+      "say: Jude showed Yavdokha the Black Walnut — \"remember it.\" Word gets around.",
+      "say: Ines sets out to find Yara. \"Won't be long.\"",
+      "say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "say: — NIGHT — Camp. Rest — or risk the dark.",
+      "say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "say: You wait. The light changes. Nothing asks anything of you."
+     ],
+     "outcome": {
+      "outcome": "hollow",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 58,
+      "wave": 5
+     }
+    }
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 110,
+   "over": true,
+   "maxWaveUnlocked": 5
+  }
+ ]
+}
