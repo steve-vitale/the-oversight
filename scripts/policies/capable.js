@@ -649,10 +649,47 @@ function scoreTableOption(Game, o, T) {
     } catch (e) { /* unpriced path: jitter only */ }
     return sc;
   }
+  // READ THE STAKE (CAPABLE_READ_STAKES=1, diagnosis-endgame 2026-10-15):
+  // the build option's label says what it needs ("(needs terror 4+)"). A
+  // player reads it; the bot used to pick it on its words and fail the door.
+  if (process.env.CAPABLE_READ_STAKES === '1') {
+    const m = /\(needs (\w+) (?:(\d+)\+|≤(\d+))\)/.exec(label);
+    if (m) {
+      const cur = ((T && T.meters) || {})[m[1]] | 0;
+      const short = m[2] != null ? cur < +m[2] : cur > +m[3];
+      if (short) return sc - 50;
+      sc += 4; // the build option, affordable: play the build
+    }
+  }
   const dark = T && T.branch === 'dark';
   if (LIGHT_WORDS.test(label)) sc += dark ? 0 : 3;
   if (DARK_WORDS.test(label)) sc += dark ? 3 : -1;
   return sc;
+}
+// GREEDY (CAPABLE_GREEDY=1, diagnosis-endgame 2026-10-15): Steve's Overtime
+// is "a cost- but also an opportunity for the truly powerful". The default
+// bot sits the day the seat is ready, so Overtime, the Network and THE HOSTS
+// are never measured. Greedy waits while the run looks strong: Haven holds
+// (5+ people, under 3 lost while waiting), the bearer is above 40% HP, and
+// the tier is under the cap (CAPABLE_GREEDY_MAXTIER, default 4). It sits at
+// once with the key, when
+// the run weakens, or near the sim horizon (CAPABLE_GREEDY_LASTDAY, 145).
+// CAPABLE_GREEDY_RECKLESS=1 drops the strength checks (waits to the cap or
+// the horizon): the pure cost of Overtime. Off by default: the tuning
+// dashboard measures the plain bot.
+function greedyWaits(Game, pv) {
+  if (process.env.CAPABLE_GREEDY !== '1') return false;
+  if (pv.key) return false;
+  const maxTier = parseInt(process.env.CAPABLE_GREEDY_MAXTIER || '4', 10);
+  const lastDay = parseInt(process.env.CAPABLE_GREEDY_LASTDAY || '145', 10);
+  if ((pv.overtime | 0) >= maxTier || day(Game) >= lastDay) return false;
+  if (process.env.CAPABLE_GREEDY_RECKLESS === '1') return true; // measure the pure cost of waiting
+  if ((pv.losses | 0) >= 3) return false;
+  let roster = 0;
+  try { roster = ((Game.state.village || {}).roster || []).length; } catch (e) { roster = 0; }
+  if (roster < 5) return false;
+  if (hpFrac(Game) < 0.4) return false;
+  return true;
 }
 function tableRoad(Game, ctx) {
   try {
@@ -661,7 +698,8 @@ function tableRoad(Game, ctx) {
       const pv = Game.tablePreview();
       if (pv) {
         ctx.capTablePreviewSeen = 1;
-        if (pv.ready) {
+        if (pv.ready && greedyWaits(Game, pv)) { bump(ctx, 'capGreedyWaits'); ctx.capGreedyMaxTier = Math.max(ctx.capGreedyMaxTier | 0, pv.overtime | 0); }
+        else if (pv.ready) {
           const r = Game.tableTakeSeat();
           if (r && r.ok) { bump(ctx, 'capSeatTaken'); ctx.capSeatDay = day(Game); ctx.capSeatKind = pv.seat; }
         }
@@ -950,11 +988,11 @@ const capable = Object.assign({}, BASE, {
 function capableSummary(ctx) {
   const k = ['capFights', 'capFleeDecisions', 'capFleeSteps', 'capFleePushes', 'capFleeExits', 'capFleeNodeExits', 'capFleeChased', 'capFleeHeld',
     'capAbilityUses', 'capAbilityRefused', 'capAbilityHungerSkips', 'capSigUses', 'capOffersChosen', 'capOffersNotFirst', 'capRelicChosen',
-    'capContestChoices', 'capContestNotFirst', 'capContestRefusals', 'capTableAnswers', 'capTableNotFirst', 'capSeatTaken',
+    'capContestChoices', 'capContestNotFirst', 'capContestRefusals', 'capTableAnswers', 'capTableNotFirst', 'capSeatTaken', 'capGreedyWaits', 'capGreedyMaxTier',
     'capConvos', 'capConvosHeld', 'deepTurns', 'capHuntSorties', 'capHuntFeastFights', 'capHuntWaveFights', 'capHuntNoTarget', 'capHuntUnreached', 'capHuntGone', 'capRelayClaimed', 'capRelayAppointed', 'capRelayAnswers', 'capRelayCommunes', 'capKeepsakesWorn'];
   const out = {};
   for (const x of k) out[x] = (ctx && ctx[x]) || 0;
   return out;
 }
 
-module.exports = { capable, capableSummary, wearKeepsakes, scoreOffer, scoreTableOption, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
+module.exports = { capable, capableSummary, wearKeepsakes, scoreOffer, scoreTableOption, greedyWaits, stepToward, sigButtons, ACTION_PLAN, SIG_PREF };
