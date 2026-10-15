@@ -54,6 +54,10 @@ function driveToMoot(others) {
   // ---------- 1. judged crimes count half heat (no double jeopardy) ----------
   {
     await boot();
+    // Isolate crime heat: random starter distrust is a separate, unhalved term.
+    const v = Game.state.village;
+    for (const id of v.roster) v.trust[id] = 80;
+    v.takes = {}; v.gives = {}; Game.justiceState().amendsCredit = 0;
     Game.recordCrime('theft', { victim: 'x1', caught: true });
     Game.recordCrime('attack', { victim: 'x2' });
     const heatBefore = Game.justiceHeat(); // 35
@@ -61,6 +65,10 @@ function driveToMoot(others) {
     const heatAfter = Game.justiceHeat();
     ok('judged heat is half of unjudged', heatAfter === Math.round(heatBefore * 0.5));
     ok('judged heat < confrontation threshold', heatAfter < 50);
+    for (const id of v.roster) v.trust[id] = 5;
+    ok('ambient distrust stays unhalved after judgment', Game.justiceHeat() === Math.round(17.5 + 15));
+    for (const cr of Game.justiceState().crimes) delete cr.caseId;
+    ok('unjudged crime heat and ambient distrust both apply', Game.justiceHeat() === 35 + 15);
   }
 
   // ---------- 2. summons names the strongest witnessed charge ----------

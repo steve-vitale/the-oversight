@@ -134,10 +134,19 @@ function mkPersonCorpse(trust, dayDied) {
 
   // 9. no sync at attunement 1 without witnessing
   freshGame();
-  Game.state.systemArrived = true; // day 1 -> attunement 1
+  Game.state.systemArrived = true;
+  // A generated profession can already know 15 entries: prepare the low-breadth
+  // branch explicitly instead of assuming every random starter is unattuned.
+  Game.state.scholar.day = 1;
+  for (const key of ['plants', 'monsters', 'skills']) Game.state.codex[key] = {};
+  ok('prepared day-one low-breadth codex is attunement one', Game.codexAttunement() === 1);
   said.length = 0;
   const c9 = Game.registerDeath({ kind: 'person', villagerId: 'vnosync', name: 'No Sync', mx: 4, my: 4, witnesses: [] });
   ok('no auto-sync before attunement 2', c9.deathKnown === false);
+  Game.state.codex.skills = Object.fromEntries(Array.from({ length: 15 }, (_, i) => ['known_' + i, { level: 1 }]));
+  const c9b = Game.registerDeath({ kind: 'person', villagerId: 'vbreadthsync', name: 'Breadth Sync', mx: 4, my: 4, witnesses: [] });
+  ok('day-one breadth of fifteen reaches attunement two', Game.codexAttunement() === 2);
+  ok('broad day-one codex really syncs an unwitnessed death', c9b.deathKnown === true);
 
   // 10. party auto-notification
   freshGame();

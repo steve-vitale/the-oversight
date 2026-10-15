@@ -129,3 +129,9 @@ receives their existing share of the real paid pantry draw, capped by reserve
 capacity. This intentionally changes food balance after intake tracing proved
 the missing meal. Costs, guests, reactor cold seats and timing stay unchanged;
 measure with matched four-policy panels before any further food/god tuning.
+
+Legacy validation fixture exception: Codex explicitly prepares the low-breadth
+Codex and neutral-ambient justice branches in test-corpses.js and
+test-moot-justice-aftermath.js after random starter knowledge/trust broke
+full-suite assumptions. Complementary breadth/ambient cases stay covered.
+Foodpower test failures now retain ontology subprocess stderr; no runtime edits.

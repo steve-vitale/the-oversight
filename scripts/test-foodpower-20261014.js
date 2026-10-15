@@ -172,7 +172,7 @@ async function main() {
       execSync('node scripts/validate-ontology.js', { cwd: ROOT, stdio: 'pipe' });
       ok(true, 'ontology green');
     } catch (e) {
-      ok(false, 'ontology green', (e.stdout || '').toString().slice(0, 300));
+      ok(false, 'ontology green', [e.message, e.stdout, e.stderr].filter(Boolean).map(x => String(x)).join('\n').slice(-3000));
     }
   }
 
