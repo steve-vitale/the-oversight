@@ -1,0 +1,45 @@
+=== RANGEREFILL re-test before/after (8 seeds x {leadcourt,belongseek}, 180d death-aware) ===
+runs: control 16, armed 16
+
+--- PRIMARY (honest bar, §14 metric review) ---
+(a) armed ranging-dehydration deaths: 3 (control: 3) -> MISS
+(b) FILLABLE departures (cistern>0 at dawn): armed 15, pack-full 15 (100.0%) -> HOLD (need >=90%)
+    excluded non-fillable (cistern=0 at dawn): armed 0 — none
+    raw (unscoped, for the record): armed 15 dep, full=100.0% | control 13 dep, fillable 11
+(c) true-wild fill share: armed 24.2% (29/120) vs control 16.6% (24/145) -> HOLD
+(d) empty-pack+dry-cistern departures: armed 0 (control 0) -> HOLD
+
+--- GUARDRAILS ---
+(e) median survival: armed 160d vs control 181d -> MISS (need >= 171d)
+(f) national: armed 9/16 vs control 5/16 -> HOLD (need >= 3/16)
+(g) new death modes (armed n>=3, control 0): none -> HOLD
+
+GO VERDICT: MISS — layer deleted per kill protocol, evidence-only landing
+
+--- WALL NUMBERS ---
+[control] national 5/16 table 1/16 won 0/16 w4 7/16 w5 1/16 median 181d max 182d
+[armed] national 9/16 table 0/16 won 0/16 w4 9/16 w5 1/16 median 160d max 182d
+
+--- #292 VISIT ANALYSIS (wild water tiles on-route: filled vs unfilled) ---
+[control] visits=721 filled=24 unfilled=697 havenFills=856 wildFills=48 refused=undefined
+[armed] visits=646 filled=34 unfilled=612 havenFills=673 wildFills=49 refused=undefined
+[control] true-wild (dist>1) visits=145 filled=24
+[armed]   true-wild (dist>1) visits=120 filled=29
+[armed layer] gateTrips=0 gateHauls=0 gateHaulBottles=0 gateUnresolvable=0 filledDawn=48 filledEnroute=17 filledGatehaul=0
+
+--- DEATH CAUSES ---
+  monster:combat: control 53 | armed 68
+  monster:expedition: control 3 | armed 0
+  monster:villager combat: control 21 | armed 20
+  person:combat: control 1 | armed 0
+  villager:The Focus Group: control 2 | armed 0
+  villager:a wound that wouldn't close: control 2 | armed 7
+  villager:combat: control 32 | armed 20
+  villager:contest: control 6 | armed 4
+  villager:lockjaw: control 1 | armed 3
+  villager:monster: control 37 | armed 36
+  villager:sickness: control 2 | armed 1
+  villager:starvation: control 5 | armed 8
+  villager:wound_fever: control 0 | armed 1
+
+instrument errors: control 0, armed 0

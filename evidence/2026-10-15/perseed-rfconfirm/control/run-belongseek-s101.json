@@ -1,0 +1,964 @@
+{
+ "seed": 101,
+ "policyId": "belongseek",
+ "side": "control",
+ "instrumented": true,
+ "days": 181,
+ "dailyCalls": 180,
+ "won": false,
+ "rank": "regional",
+ "national": 0,
+ "tableWaiting": false,
+ "maxWave": 3,
+ "deaths": {
+  "monster:combat": 7,
+  "villager:combat": 5,
+  "villager:monster": 1
+ },
+ "hashes": [
+  "2|97|1009|36|4|0|0|12|gen_71fzibm",
+  "3|82|1200|0|5|0|0|12|gen_71fzibm",
+  "4|90|1227|42|4|0|0|12|gen_71fzibm",
+  "5|94|1231|34|4|7|0|12|gen_71fzibm",
+  "6|93|1100|20|4|0|0|12|gen_71fzibm",
+  "7|92|1000|6|4|0|0|12|gen_71fzibm",
+  "8|91|1308|36|4|0|0|12|gen_71fzibm",
+  "9|93|1000|22|4|0|0|12|gen_71fzibm",
+  "10|58|1130|8|4|0|0|10|naran_tumen",
+  "11|84|1000|45|4|0|0|10|naran_tumen",
+  "12|92|1333|31|4|0|0|10|naran_tumen",
+  "13|93|1347|17|4|0|0|10|naran_tumen",
+  "14|93|1000|45|3|4|0|10|naran_tumen",
+  "15|91|1000|31|4|0|0|10|naran_tumen",
+  "16|91|1000|23|4|0|0|10|naran_tumen",
+  "17|91|1100|15|4|3|0|10|naran_tumen",
+  "18|92|1000|45|4|0|0|10|naran_tumen",
+  "19|78|1200|31|4|0|0|10|naran_tumen",
+  "20|92|1239|17|4|0|0|10|naran_tumen",
+  "21|92|1125|36|3|12|0|10|naran_tumen",
+  "22|92|1233|28|4|21|0|10|naran_tumen",
+  "23|92|1192|14|4|12|0|10|naran_tumen",
+  "24|4|1161|36|4|19|0|10|naran_tumen",
+  "25|11|1187|28|4|22|0|9|naran_tumen",
+  "26|100|2387|20|4|25|0|8|gen_b3fhjrm",
+  "27|100|2737|6|4|25|0|8|gen_b3fhjrm",
+  "28|100|2414|36|4|25|0|8|gen_b3fhjrm",
+  "29|100|2904|22|7|25|0|8|gen_b3fhjrm",
+  "30|100|2904|8|7|25|0|8|gen_b3fhjrm",
+  "31|100|2904|36|6|25|0|8|gen_b3fhjrm",
+  "32|100|2904|22|6|25|0|8|gen_b3fhjrm",
+  "33|100|2904|8|6|20|0|8|gen_b3fhjrm",
+  "34|100|2904|42|5|25|0|8|gen_b3fhjrm",
+  "35|100|2904|37|5|19|0|8|gen_b3fhjrm",
+  "36|100|2904|23|5|22|0|8|gen_b3fhjrm",
+  "37|100|2904|9|5|25|0|8|gen_b3fhjrm",
+  "38|100|2904|36|4|18|0|8|gen_b3fhjrm",
+  "39|100|2904|31|4|25|0|8|gen_b3fhjrm",
+  "40|100|2904|17|4|19|0|8|gen_b3fhjrm",
+  "41|100|2904|45|4|24|0|8|gen_b3fhjrm",
+  "42|100|2904|31|4|25|0|8|gen_b3fhjrm",
+  "43|100|2904|17|4|23|0|8|gen_b3fhjrm",
+  "44|100|2904|36|4|25|0|8|gen_b3fhjrm",
+  "45|100|2904|28|4|25|0|8|gen_b3fhjrm",
+  "46|100|2904|14|4|23|0|8|gen_b3fhjrm",
+  "47|100|2904|36|4|25|0|8|gen_b3fhjrm",
+  "48|100|2904|22|4|25|0|8|gen_b3fhjrm",
+  "49|100|2904|8|4|23|0|8|gen_b3fhjrm",
+  "50|100|2904|42|4|25|0|8|gen_b3fhjrm",
+  "51|100|2904|28|4|25|0|8|gen_b3fhjrm",
+  "52|100|2904|20|4|25|0|8|gen_b3fhjrm",
+  "53|100|2904|6|4|23|0|8|gen_b3fhjrm",
+  "54|72|2904|42|4|25|0|8|gen_b3fhjrm",
+  "55|100|2904|34|4|21|0|8|gen_b3fhjrm",
+  "56|100|2904|20|4|25|0|8|gen_b3fhjrm",
+  "57|100|2904|6|4|24|0|8|gen_b3fhjrm",
+  "58|100|2904|36|4|25|0|8|gen_b3fhjrm",
+  "59|100|2904|31|4|25|0|8|gen_b3fhjrm",
+  "60|100|2904|26|4|24|0|8|gen_b3fhjrm",
+  "61|100|2904|12|4|25|0|8|gen_b3fhjrm",
+  "62|100|2904|36|4|21|0|8|gen_b3fhjrm",
+  "63|100|2904|31|4|25|0|8|gen_b3fhjrm",
+  "64|100|2904|23|4|23|0|8|gen_b3fhjrm",
+  "65|100|2904|15|4|25|0|8|gen_b3fhjrm",
+  "66|100|2904|36|4|23|0|8|gen_b3fhjrm",
+  "67|100|2904|22|4|25|0|8|gen_b3fhjrm",
+  "68|95|2904|8|4|25|0|8|gen_b3fhjrm",
+  "69|84|2904|45|4|22|0|8|gen_b3fhjrm",
+  "70|84|2904|31|4|25|0|8|gen_b3fhjrm",
+  "71|100|2904|17|4|25|0|8|gen_b3fhjrm",
+  "72|100|2904|36|4|24|0|8|gen_b3fhjrm",
+  "73|92|2904|31|4|25|0|8|gen_b3fhjrm",
+  "74|100|2904|17|4|25|0|8|gen_b3fhjrm",
+  "75|100|2904|36|4|27|0|7|gen_am3k4l8",
+  "76|100|2904|28|4|27|0|7|gen_am3k4l8",
+  "77|100|2904|14|4|27|0|7|gen_am3k4l8",
+  "78|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "79|100|2904|28|4|25|0|8|gen_am3k4l8",
+  "80|100|2904|14|4|25|0|8|gen_am3k4l8",
+  "81|95|2904|36|4|25|0|8|gen_am3k4l8",
+  "82|100|2904|22|4|25|0|8|gen_am3k4l8",
+  "83|100|2904|8|4|25|0|8|gen_am3k4l8",
+  "84|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "85|100|2904|22|4|25|0|8|gen_am3k4l8",
+  "86|100|2904|8|4|25|0|8|gen_am3k4l8",
+  "87|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "88|100|2904|22|4|25|0|8|gen_am3k4l8",
+  "89|100|2904|8|4|25|0|8|gen_am3k4l8",
+  "90|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "91|100|2904|22|4|25|0|8|gen_am3k4l8",
+  "92|95|2904|8|4|25|0|8|gen_am3k4l8",
+  "93|95|2904|36|5|25|0|8|gen_am3k4l8",
+  "94|100|2904|22|5|25|0|8|gen_am3k4l8",
+  "95|100|2904|8|5|25|0|8|gen_am3k4l8",
+  "96|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "97|42|2904|28|5|25|0|8|gen_am3k4l8",
+  "98|72|2904|14|5|25|0|8|gen_am3k4l8",
+  "99|100|2904|42|4|25|0|8|gen_am3k4l8",
+  "100|100|2904|28|4|25|0|8|gen_am3k4l8",
+  "101|100|2904|14|5|25|0|8|gen_am3k4l8",
+  "102|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "103|100|2904|28|4|25|0|8|gen_am3k4l8",
+  "104|100|2904|14|5|25|0|8|gen_am3k4l8",
+  "105|100|2904|36|4|25|0|8|gen_am3k4l8",
+  "106|85|2904|22|5|25|0|8|gen_am3k4l8",
+  "107|100|2904|8|6|25|0|8|gen_am3k4l8",
+  "108|100|2904|42|5|25|0|8|gen_am3k4l8",
+  "109|100|2904|28|5|25|0|8|gen_am3k4l8",
+  "110|26|2904|14|5|25|0|8|gen_am3k4l8",
+  "111|18|2904|36|4|25|0|8|gen_am3k4l8",
+  "112|35|2904|22|4|25|0|8|gen_am3k4l8",
+  "113|65|2904|8|4|25|0|8|gen_am3k4l8",
+  "114|95|2904|36|4|25|0|8|gen_am3k4l8",
+  "115|90|2904|28|4|25|0|8|gen_am3k4l8",
+  "116|100|2904|20|4|25|0|8|gen_am3k4l8",
+  "117|100|2904|6|5|25|0|8|gen_am3k4l8",
+  "118|100|2904|36|5|25|0|8|gen_am3k4l8",
+  "119|40|2904|22|6|25|0|8|gen_am3k4l8",
+  "120|70|2904|14|6|25|0|8|gen_am3k4l8",
+  "121|100|2904|36|5|25|0|8|gen_am3k4l8",
+  "122|100|2904|22|5|25|0|8|gen_am3k4l8",
+  "123|100|2904|8|5|25|0|8|gen_am3k4l8",
+  "124|100|2904|42|5|25|0|8|gen_am3k4l8",
+  "125|100|2904|34|5|25|0|8|gen_am3k4l8",
+  "126|100|2904|20|5|25|0|8|gen_am3k4l8",
+  "127|100|2904|6|6|25|0|8|gen_am3k4l8",
+  "128|100|2904|36|5|25|0|8|gen_am3k4l8",
+  "129|100|2904|22|5|25|0|8|gen_am3k4l8",
+  "130|100|2904|8|5|25|0|8|gen_am3k4l8",
+  "131|100|2904|45|4|25|0|8|gen_am3k4l8",
+  "132|95|2904|37|4|25|0|8|gen_am3k4l8",
+  "133|100|2904|23|4|25|0|8|gen_am3k4l8",
+  "134|100|2904|15|4|25|0|8|gen_am3k4l8",
+  "135|100|2904|36|5|25|0|8|gen_am3k4l8",
+  "136|100|2904|28|5|25|0|8|gen_am3k4l8",
+  "137|100|2904|20|6|25|0|8|gen_am3k4l8",
+  "138|83|2904|6|6|25|0|8|gen_am3k4l8",
+  "139|100|2904|36|6|25|0|8|gen_am3k4l8",
+  "140|100|2904|22|6|25|0|8|gen_am3k4l8",
+  "141|100|2904|8|7|25|0|8|gen_am3k4l8",
+  "142|100|2904|42|6|25|0|8|gen_am3k4l8",
+  "143|100|2904|28|6|27|0|7|gen_am3k4l8",
+  "144|100|2608|23|5|17|0|6|gen_ni94dfh",
+  "145|100|2904|15|6|31|0|5|desmond_clarke",
+  "146|100|2904|36|5|24|0|4|jesse_cortez",
+  "147|67|2904|31|6|31|0|4|jesse_cortez",
+  "148|82|2904|23|7|33|0|4|jesse_cortez",
+  "149|100|2904|9|8|35|0|3|yara_haddad",
+  "150|100|2904|42|8|33|0|4|yara_haddad",
+  "151|90|2904|28|8|33|0|4|yara_haddad",
+  "152|100|2904|14|8|33|0|4|yara_haddad",
+  "153|80|2904|36|7|33|0|4|yara_haddad",
+  "154|100|2904|28|7|33|0|4|yara_haddad",
+  "155|100|2904|20|8|33|0|4|yara_haddad",
+  "156|100|2904|6|8|33|0|4|yara_haddad",
+  "157|100|2904|36|7|33|0|4|yara_haddad",
+  "158|100|2904|31|7|33|0|4|yara_haddad",
+  "159|100|2904|17|7|28|0|3|nina_petrova",
+  "160|94|2904|36|6|35|0|3|nina_petrova",
+  "161|100|2904|28|6|35|0|3|nina_petrova",
+  "162|100|2904|20|6|30|0|3|nina_petrova",
+  "163|100|2904|6|6|35|0|3|nina_petrova",
+  "164|59|2904|36|5|35|0|3|nina_petrova",
+  "165|89|2904|22|5|30|0|3|nina_petrova",
+  "166|89|2904|8|5|35|0|3|nina_petrova",
+  "167|100|2904|45|4|35|0|3|nina_petrova",
+  "168|67|2904|37|4|30|0|3|nina_petrova",
+  "169|97|2904|23|4|35|0|3|nina_petrova",
+  "170|97|2904|9|4|35|0|3|nina_petrova",
+  "171|97|2904|42|4|29|0|3|nina_petrova",
+  "172|97|2904|28|4|26|0|2|miguel_santos",
+  "173|97|2904|14|4|37|0|2|miguel_santos",
+  "174|100|2904|36|4|33|0|2|miguel_santos",
+  "175|100|2904|22|3|31|0|2|miguel_santos",
+  "176|100|2699|8|3|29|0|2|miguel_santos",
+  "177|93|2615|36|3|27|0|2|miguel_santos",
+  "178|100|2699|22|3|25|0|2|miguel_santos",
+  "179|82|2558|12|4|23|0|2|miguel_santos",
+  "180|26|2422|21|3|21|0|2|miguel_santos",
+  "181|32|2498|20|3|21|0|1|miguel_santos"
+ ],
+ "dehy": {
+  "nDehydration": 0,
+  "nFullyAttributed": 0,
+  "coverage": null,
+  "deaths": [],
+  "verbsAll": {
+   "fill": 42,
+   "drink": 236,
+   "boil": 236,
+   "pour": 0
+  },
+  "refusedFills": 2,
+  "rangedDays": 8,
+  "maxMapDist": 7,
+  "awayNights": 7,
+  "instrErrors": []
+ },
+ "route": {
+  "nTravels": 774,
+  "nWaterTileVisits": 71,
+  "nFilledVisits": 6,
+  "nUnfilledVisits": 65,
+  "wildFillShareOfVisits": 0.0845,
+  "havenFills": 29,
+  "wildFills": 11,
+  "refusedFills": 2,
+  "instrErrors": [],
+  "haven": {
+   "hx": 4,
+   "hy": 4
+  },
+  "visits": [
+   {
+    "day": 4,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 5,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 7,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 8,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 10,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 11,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 12,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 13,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 2,
+    "filled": false
+   },
+   {
+    "day": 14,
+    "to": {
+     "x": 4,
+     "y": 1
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 15,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 16,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 17,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 18,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 19,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 20,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 2,
+    "filled": false
+   },
+   {
+    "day": 21,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 22,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 23,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 24,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 27,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 28,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 6,
+    "filled": false
+   },
+   {
+    "day": 29,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 6,
+    "filled": false
+   },
+   {
+    "day": 30,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 5,
+    "filled": false
+   },
+   {
+    "day": 31,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 5,
+    "filled": false
+   },
+   {
+    "day": 32,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 5,
+    "filled": false
+   },
+   {
+    "day": 44,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 45,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 49,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 50,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 51,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 52,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 53,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 54,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 55,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 56,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 57,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 61,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 76,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 79,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 82,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 88,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 102,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 132,
+    "to": {
+     "x": 4,
+     "y": 1
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 133,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 135,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 136,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 138,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 146,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 150,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 7,
+    "filled": false
+   },
+   {
+    "day": 151,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 7,
+    "filled": false
+   },
+   {
+    "day": 152,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 6,
+    "filled": false
+   },
+   {
+    "day": 153,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 6,
+    "filled": false
+   },
+   {
+    "day": 155,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 7,
+    "filled": false
+   },
+   {
+    "day": 156,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 6,
+    "filled": false
+   },
+   {
+    "day": 160,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 5,
+    "filled": false
+   },
+   {
+    "day": 163,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 163,
+    "to": {
+     "x": 3,
+     "y": 3
+    },
+    "destType": "creek",
+    "pack": 4,
+    "filled": false
+   },
+   {
+    "day": 169,
+    "to": {
+     "x": 4,
+     "y": 2
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 169,
+    "to": {
+     "x": 4,
+     "y": 1
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 171,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 173,
+    "to": {
+     "x": 3,
+     "y": 4
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 174,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 175,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 176,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 177,
+    "to": {
+     "x": 3,
+     "y": 7
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 177,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 178,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 179,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 180,
+    "to": {
+     "x": 3,
+     "y": 7
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   },
+   {
+    "day": 180,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": true
+   },
+   {
+    "day": 181,
+    "to": {
+     "x": 3,
+     "y": 6
+    },
+    "destType": "creek",
+    "pack": 3,
+    "filled": false
+   }
+  ]
+ },
+ "departures": [
+  {
+   "day": 143,
+   "packAtDepart": 6,
+   "packFull": true,
+   "cisternClean": 27,
+   "violation": false
+  },
+  {
+   "day": 174,
+   "packAtDepart": 4,
+   "packFull": true,
+   "cisternClean": 33,
+   "violation": false
+  }
+ ],
+ "nDepartures": 2,
+ "packFullFrac": 1,
+ "nViolations": 0,
+ "layer": null
+}
