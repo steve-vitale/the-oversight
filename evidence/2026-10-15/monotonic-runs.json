@@ -1,0 +1,5548 @@
+{
+ "aggregate": {
+  "label": "monotonic",
+  "arms": [
+   "break",
+   "sticky"
+  ],
+  "seeds": [
+   11,
+   22,
+   33,
+   44,
+   55,
+   66,
+   77,
+   88
+  ],
+  "policies": [
+   "leadcourt",
+   "belongseek"
+  ],
+  "days": 180,
+  "doBreak": true,
+  "monoOff": false,
+  "nRuns": 32,
+  "nScenarios": 18,
+  "nAttributed": 16,
+  "attributionRate": 0.889,
+  "goA": true,
+  "scenariosByArm": {
+   "break": 9,
+   "sticky": 9
+  },
+  "reLockedBreak": 9,
+  "heldByRatchetSticky": 9,
+  "pairVerdicts": {
+   "neutral": 6,
+   "hurt": 1,
+   "helped": 1,
+   "unknown": 1
+  },
+  "separation": {
+   "underpowered": true,
+   "n": 2,
+   "holders": 1,
+   "corpses": 1,
+   "verdict": "UNDERPOWERED",
+   "note": "fewer than 6 unlock events — cannot name separating factors or unconcentration honestly"
+  },
+  "secondaryRelockMercy": {
+   "breakArmRelockedOutcomes": {
+    "held": 6,
+    "died": 2,
+    "held-censored": 1
+   },
+   "stickyArmHeldOutcomes": {
+    "held": 6,
+    "died": 2,
+    "held-censored": 1
+   }
+  },
+  "noScenario": [
+   {
+    "policy": "leadcourt",
+    "seed": 11,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 2,
+    "gameDays": 34,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 55,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 108,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 11,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 1,
+    "gameDays": 35,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 33,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 1,
+    "gameDays": 43,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 55,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 107,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 66,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 104,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 88,
+    "arm": "break",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 2,
+    "gameDays": 79,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 11,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 2,
+    "gameDays": 34,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 55,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 108,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 11,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 1,
+    "gameDays": 35,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 33,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 1,
+    "gameDays": 43,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 55,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 107,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 66,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 3,
+    "gameDays": 104,
+    "endReason": "village-lost"
+   },
+   {
+    "policy": "belongseek",
+    "seed": 88,
+    "arm": "sticky",
+    "reason": "no-w4-unlock",
+    "maxWaveRaw": 2,
+    "gameDays": 79,
+    "endReason": "village-lost"
+   }
+  ],
+  "runTelemetry": [
+   {
+    "policy": "leadcourt",
+    "seed": 11,
+    "arm": "break",
+    "gameDays": 34,
+    "endReason": "village-lost",
+    "maxWaveRaw": 2,
+    "maxWaveEff": 2,
+    "peakWaveSeen": 0,
+    "maxRank": "village",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 22,
+    "arm": "break",
+    "gameDays": 144,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 33,
+    "arm": "break",
+    "gameDays": 141,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 44,
+    "arm": "break",
+    "gameDays": 106,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 55,
+    "arm": "break",
+    "gameDays": 108,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 0,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 1
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 66,
+    "arm": "break",
+    "gameDays": 68,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 77,
+    "arm": "break",
+    "gameDays": 155,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 88,
+    "arm": "break",
+    "gameDays": 144,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 11,
+    "arm": "break",
+    "gameDays": 35,
+    "endReason": "village-lost",
+    "maxWaveRaw": 1,
+    "maxWaveEff": 1,
+    "peakWaveSeen": 0,
+    "maxRank": "village",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 22,
+    "arm": "break",
+    "gameDays": 145,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 33,
+    "arm": "break",
+    "gameDays": 43,
+    "endReason": "village-lost",
+    "maxWaveRaw": 1,
+    "maxWaveEff": 1,
+    "peakWaveSeen": 0,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 44,
+    "arm": "break",
+    "gameDays": 182,
+    "endReason": "survived",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 55,
+    "arm": "break",
+    "gameDays": 107,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 0,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 1
+   },
+   {
+    "policy": "belongseek",
+    "seed": 66,
+    "arm": "break",
+    "gameDays": 104,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 0,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 77,
+    "arm": "break",
+    "gameDays": 182,
+    "endReason": "survived",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 0,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 88,
+    "arm": "break",
+    "gameDays": 79,
+    "endReason": "village-lost",
+    "maxWaveRaw": 2,
+    "maxWaveEff": 2,
+    "peakWaveSeen": 0,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 11,
+    "arm": "sticky",
+    "gameDays": 34,
+    "endReason": "village-lost",
+    "maxWaveRaw": 2,
+    "maxWaveEff": 2,
+    "peakWaveSeen": 2,
+    "maxRank": "village",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 22,
+    "arm": "sticky",
+    "gameDays": 151,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 33,
+    "arm": "sticky",
+    "gameDays": 157,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 44,
+    "arm": "sticky",
+    "gameDays": 119,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 55,
+    "arm": "sticky",
+    "gameDays": 108,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 3,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 1
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 66,
+    "arm": "sticky",
+    "gameDays": 68,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 77,
+    "arm": "sticky",
+    "gameDays": 103,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "leadcourt",
+    "seed": 88,
+    "arm": "sticky",
+    "gameDays": 85,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 11,
+    "arm": "sticky",
+    "gameDays": 35,
+    "endReason": "village-lost",
+    "maxWaveRaw": 1,
+    "maxWaveEff": 1,
+    "peakWaveSeen": 1,
+    "maxRank": "village",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 22,
+    "arm": "sticky",
+    "gameDays": 167,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 33,
+    "arm": "sticky",
+    "gameDays": 43,
+    "endReason": "village-lost",
+    "maxWaveRaw": 1,
+    "maxWaveEff": 1,
+    "peakWaveSeen": 1,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 44,
+    "arm": "sticky",
+    "gameDays": 180,
+    "endReason": "village-lost",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "global",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 55,
+    "arm": "sticky",
+    "gameDays": 107,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 3,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 1
+   },
+   {
+    "policy": "belongseek",
+    "seed": 66,
+    "arm": "sticky",
+    "gameDays": 104,
+    "endReason": "village-lost",
+    "maxWaveRaw": 3,
+    "maxWaveEff": 3,
+    "peakWaveSeen": 3,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 77,
+    "arm": "sticky",
+    "gameDays": 182,
+    "endReason": "survived",
+    "maxWaveRaw": 4,
+    "maxWaveEff": 4,
+    "peakWaveSeen": 4,
+    "maxRank": "national",
+    "national": 1,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   },
+   {
+    "policy": "belongseek",
+    "seed": 88,
+    "arm": "sticky",
+    "gameDays": 79,
+    "endReason": "village-lost",
+    "maxWaveRaw": 2,
+    "maxWaveEff": 2,
+    "peakWaveSeen": 2,
+    "maxRank": "regional",
+    "national": 0,
+    "table": 0,
+    "wins": 0,
+    "exiled": 0
+   }
+  ]
+ },
+ "scenarios": [
+  {
+   "policy": "leadcourt",
+   "seed": 22,
+   "arm": "break",
+   "unlockDay": 99,
+   "breakN": 1,
+   "breakDay": 102,
+   "linkId": "link_mgpsphrd34",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 3,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 99,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 24.54,
+    "trustMean": 55,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 33,
+   "arm": "break",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphpg340",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 2,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 37,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 3.26,
+    "trustMean": 39,
+    "trustN": 19,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 44,
+   "arm": "break",
+   "unlockDay": 58,
+   "breakN": 1,
+   "breakDay": 61,
+   "linkId": "link_mgpsphou170",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 127,
+   "standingPost": 25,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 3,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 58,
+    "standing": {
+     "total": 127,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "scholarArmorP": 2,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 12.91,
+    "trustMean": 51,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 4,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 66,
+   "arm": "break",
+   "unlockDay": 65,
+   "breakN": 1,
+   "breakDay": 68,
+   "linkId": "link_mgpsphpd244",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 2,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "died",
+   "daysObserved": 0,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 65,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 5.46,
+    "trustMean": 38.9,
+    "trustN": 14,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 77,
+   "arm": "break",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphom123",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 2,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 16.79,
+    "trustMean": 38.8,
+    "trustN": 18,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 88,
+   "arm": "break",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphs3931",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 2,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 4.5,
+    "trustMean": 48.9,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "arm": "break",
+   "unlockDay": 115,
+   "breakN": 1,
+   "breakDay": 118,
+   "linkId": "link_mgpsphod903",
+   "linkKind": "?",
+   "other": "Thornfield",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 3,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "died",
+   "daysObserved": 27,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 115,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "terms_of_service": 2,
+     "spool": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 40,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 2.19,
+    "trustMean": 49.5,
+    "trustN": 17,
+    "rank": "national",
+    "waveEngagedPrev": 7,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "arm": "break",
+   "unlockDay": 136,
+   "breakN": 1,
+   "breakDay": 139,
+   "linkId": "link_mgpspi7g932",
+   "linkKind": "?",
+   "other": "The Hungry Road",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 3,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 136,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1,
+     "callback": 2
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 22.07,
+    "trustMean": 57.7,
+    "trustN": 15,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "arm": "break",
+   "unlockDay": 156,
+   "breakN": 1,
+   "breakDay": 159,
+   "linkId": "link_mgpspi1y674",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 3,
+   "reLocked": true,
+   "heldByRatchet": false,
+   "outcome": "held-censored",
+   "daysObserved": 23,
+   "tableBy30": 0,
+   "attributed": false,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 156,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 2,
+     "redactor": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 101.73,
+    "trustMean": 65.7,
+    "trustN": 18,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 22,
+   "arm": "sticky",
+   "unlockDay": 99,
+   "breakN": 1,
+   "breakDay": 102,
+   "linkId": "link_mgpsphrd34",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 99,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 24.54,
+    "trustMean": 55,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 33,
+   "arm": "sticky",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphpg340",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 37,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 3.26,
+    "trustMean": 39,
+    "trustN": 19,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 44,
+   "arm": "sticky",
+   "unlockDay": 58,
+   "breakN": 1,
+   "breakDay": 61,
+   "linkId": "link_mgpsphou170",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 127,
+   "standingPost": 25,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 58,
+    "standing": {
+     "total": 127,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "scholarArmorP": 2,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 12.91,
+    "trustMean": 51,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 4,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 66,
+   "arm": "sticky",
+   "unlockDay": 65,
+   "breakN": 1,
+   "breakDay": 68,
+   "linkId": "link_mgpsphpd244",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "died",
+   "daysObserved": 0,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 65,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 5.46,
+    "trustMean": 38.9,
+    "trustN": 14,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 77,
+   "arm": "sticky",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphom123",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 16.79,
+    "trustMean": 38.8,
+    "trustN": 18,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 88,
+   "arm": "sticky",
+   "unlockDay": 57,
+   "breakN": 1,
+   "breakDay": 60,
+   "linkId": "link_mgpsphs3931",
+   "linkKind": "?",
+   "other": "Emberhold",
+   "standingPre": 102,
+   "standingPost": 0,
+   "standingDrop": 102,
+   "waveRawPre": 4,
+   "waveRawPost": 2,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "died",
+   "daysObserved": 25,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 4.5,
+    "trustMean": 48.9,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "arm": "sticky",
+   "unlockDay": 115,
+   "breakN": 1,
+   "breakDay": 118,
+   "linkId": "link_mgpsphod903",
+   "linkKind": "?",
+   "other": "Thornfield",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 115,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "terms_of_service": 2,
+     "spool": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 40,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 2.19,
+    "trustMean": 49.5,
+    "trustN": 17,
+    "rank": "national",
+    "waveEngagedPrev": 7,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "arm": "sticky",
+   "unlockDay": 136,
+   "breakN": 1,
+   "breakDay": 139,
+   "linkId": "link_mgpspi7g932",
+   "linkKind": "?",
+   "other": "The Hungry Road",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held",
+   "daysObserved": 30,
+   "tableBy30": 0,
+   "attributed": true,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 136,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1,
+     "callback": 2
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 22.07,
+    "trustMean": 57.7,
+    "trustN": 15,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   }
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "arm": "sticky",
+   "unlockDay": 156,
+   "breakN": 1,
+   "breakDay": 159,
+   "linkId": "link_mgpspi1y674",
+   "linkKind": "?",
+   "other": "Stonebridge",
+   "standingPre": 109,
+   "standingPost": 75,
+   "standingDrop": 34,
+   "waveRawPre": 4,
+   "waveRawPost": 3,
+   "waveEffPost": 4,
+   "reLocked": true,
+   "heldByRatchet": true,
+   "outcome": "held-censored",
+   "daysObserved": 23,
+   "tableBy30": 0,
+   "attributed": false,
+   "snapshotAtUnlock": {
+    "wave": 4,
+    "day": 156,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 2,
+     "redactor": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 101.73,
+    "trustMean": 65.7,
+    "trustN": 18,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0
+   }
+  }
+ ],
+ "pairs": [
+  {
+   "key": "leadcourt/22",
+   "policy": "leadcourt",
+   "seed": 22,
+   "breakOutcome": "held",
+   "stickyOutcome": "held",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 102,
+   "standingPost": 0,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 99,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 24.54,
+    "trustMean": 55,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0,
+    "standingPre": 102,
+    "standingPost": 0,
+    "breakDay": 102
+   }
+  },
+  {
+   "key": "leadcourt/33",
+   "policy": "leadcourt",
+   "seed": 33,
+   "breakOutcome": "held",
+   "stickyOutcome": "held",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 102,
+   "standingPost": 0,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 37,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 3.26,
+    "trustMean": 39,
+    "trustN": 19,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0,
+    "standingPre": 102,
+    "standingPost": 0,
+    "breakDay": 60
+   }
+  },
+  {
+   "key": "leadcourt/44",
+   "policy": "leadcourt",
+   "seed": 44,
+   "breakOutcome": "held",
+   "stickyOutcome": "held",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 127,
+   "standingPost": 25,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 58,
+    "standing": {
+     "total": 127,
+     "war": 25,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 1,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1
+    },
+    "ledgerPointsPrev": 1,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "spool"
+     ]
+    },
+    "scholarArmorP": 2,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 12.91,
+    "trustMean": 51,
+    "trustN": 12,
+    "rank": "regional",
+    "waveEngagedPrev": 4,
+    "waveEngagedW": 0,
+    "standingPre": 127,
+    "standingPost": 25,
+    "breakDay": 61
+   }
+  },
+  {
+   "key": "leadcourt/66",
+   "policy": "leadcourt",
+   "seed": 66,
+   "breakOutcome": "died",
+   "stickyOutcome": "died",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 102,
+   "standingPost": 0,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 65,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 0,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 5.46,
+    "trustMean": 38.9,
+    "trustN": 14,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0,
+    "standingPre": 102,
+    "standingPost": 0,
+    "breakDay": 68
+   }
+  },
+  {
+   "key": "leadcourt/77",
+   "policy": "leadcourt",
+   "seed": 77,
+   "breakOutcome": "held",
+   "stickyOutcome": "held",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 102,
+   "standingPost": 0,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 16.79,
+    "trustMean": 38.8,
+    "trustN": 18,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0,
+    "standingPre": 102,
+    "standingPost": 0,
+    "breakDay": 60
+   }
+  },
+  {
+   "key": "leadcourt/88",
+   "policy": "leadcourt",
+   "seed": 88,
+   "breakOutcome": "held",
+   "stickyOutcome": "died",
+   "verdict": "hurt",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 102,
+   "standingPost": 0,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 57,
+    "standing": {
+     "total": 102,
+     "war": 0,
+     "diplomacy": 102,
+     "plenty": 0,
+     "warPts": 0,
+     "links": 3,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {},
+    "ledgerPointsPrev": 0,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 30,
+    "rosterAlive": 9,
+    "rosterTotal": 10,
+    "pantryFreshDays": 4.5,
+    "trustMean": 48.9,
+    "trustN": 15,
+    "rank": "regional",
+    "waveEngagedPrev": 0,
+    "waveEngagedW": 0,
+    "standingPre": 102,
+    "standingPost": 0,
+    "breakDay": 60
+   }
+  },
+  {
+   "key": "belongseek/22",
+   "policy": "belongseek",
+   "seed": 22,
+   "breakOutcome": "died",
+   "stickyOutcome": "held",
+   "verdict": "helped",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 109,
+   "standingPost": 75,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 115,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "terms_of_service": 2,
+     "spool": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 40,
+    "rosterAlive": 8,
+    "rosterTotal": 9,
+    "pantryFreshDays": 2.19,
+    "trustMean": 49.5,
+    "trustN": 17,
+    "rank": "national",
+    "waveEngagedPrev": 7,
+    "waveEngagedW": 0,
+    "standingPre": 109,
+    "standingPost": 75,
+    "breakDay": 118
+   }
+  },
+  {
+   "key": "belongseek/44",
+   "policy": "belongseek",
+   "seed": 44,
+   "breakOutcome": "held",
+   "stickyOutcome": "held",
+   "verdict": "neutral",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 109,
+   "standingPost": 75,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 136,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 1,
+     "callback": 2
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "tricksW3": {
+     "known": 0,
+     "total": 9,
+     "share": 0,
+     "knownIds": []
+    },
+    "scholarArmorP": 10,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 22.07,
+    "trustMean": 57.7,
+    "trustN": 15,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0,
+    "standingPre": 109,
+    "standingPost": 75,
+    "breakDay": 139
+   }
+  },
+  {
+   "key": "belongseek/77",
+   "policy": "belongseek",
+   "seed": 77,
+   "breakOutcome": "held-censored",
+   "stickyOutcome": "held-censored",
+   "verdict": "unknown",
+   "reLockedBreak": true,
+   "heldSticky": true,
+   "standingPre": 109,
+   "standingPost": 75,
+   "breakSnap": null,
+   "cov": {
+    "wave": 4,
+    "day": 156,
+    "standing": {
+     "total": 109,
+     "war": 75,
+     "diplomacy": 34,
+     "plenty": 0,
+     "warPts": 3,
+     "links": 1,
+     "feasts": 0
+    },
+    "ledgerPrevWave": 3,
+    "ledgerPerType": {
+     "spool": 2,
+     "redactor": 1
+    },
+    "ledgerPointsPrev": 3,
+    "tricksPrev": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "tricksW3": {
+     "known": 1,
+     "total": 9,
+     "share": 0.111,
+     "knownIds": [
+      "buffering"
+     ]
+    },
+    "scholarArmorP": 35,
+    "rosterAlive": 6,
+    "rosterTotal": 7,
+    "pantryFreshDays": 101.73,
+    "trustMean": 65.7,
+    "trustN": 18,
+    "rank": "national",
+    "waveEngagedPrev": 6,
+    "waveEngagedW": 0,
+    "standingPre": 109,
+    "standingPost": 75,
+    "breakDay": 159
+   }
+  }
+ ],
+ "runs": [
+  {
+   "policy": "leadcourt",
+   "seed": 11,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 34,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "village",
+   "maxWaveRaw": 2,
+   "maxWaveEff": 2,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 33,
+     "ring": [
+      "d33 say: Armor absorbs 1.",
+      "d33 say: Hum-mouse 2's Nibble Tide hits you for 4.",
+      "d33 sys: 🐭 Big Big 4's turn",
+      "d33 say: 💥 Swarm Hum!",
+      "d33 say: The hum stacks — a low thrum. (hum ×1)",
+      "d33 say: Armor absorbs 1.",
+      "d33 say: Hum-mouse 4's Swarm Hum hits you for 7.",
+      "d33 say: 📖 Codex: Swarm Hum — hits everything close around it. You won't forget this.",
+      "d33 sys: 🐭 Big Big 3's turn",
+      "d33 say: 💥 Swarm Hum!",
+      "d33 say: You're not where it landed. Clean dodge.",
+      "d33 say: 📺 +15 style — dodged the Swarm Hum!",
+      "d33 say: Your strikes land harder. (x1.30 training)",
+      "d33 say: The Big Big 4 falls.",
+      "d33 say: You STRIKE the hum-mouse 4 for 38 (Hatchet).",
+      "d33 say: 📺 +5 style — solid hit"
+     ]
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 22,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 99,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 99,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 10,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 24.54,
+     "trustMean": 55,
+     "trustN": 15,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 102,
+    "breakDay2": 109
+   },
+   "breaks": [
+    {
+     "breakDay": 102,
+     "linkId": "link_mgpsphrd34",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 3,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d102 say: You catch fragments by the fire — Jorge telling Elif about you. The details have shifted. Nobody seems to mind.",
+      "d102 say: 🪤 Lucas is back from the snares: +237 kcal to the pantry.",
+      "d102 say: The joints throb; everything costs more than it should. (-1 HP)",
+      "d102 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d102 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d102 say: Riders from The Red Table: something's at THEIR door now. They can't spare anyone — and they wanted Haven to know first.",
+      "d102 say: You wait. The light changes. Nothing asks anything of you.",
+      "d102 say: The link with Stonebridge is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 7
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 3
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 5
+      },
+      "d+30": {
+       "stRaw": 102,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 5
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 102,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    102
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 144,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 102,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 103,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 132,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 33,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 37,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 3.26,
+     "trustMean": 39,
+     "trustN": 19,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphpg340",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 2,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d60 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: Raj is mending something by the door — patient work.",
+      "d60 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 8
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 7
+      },
+      "d+30": {
+       "stRaw": 102,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 7
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 141,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 90,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 138,
+     "ring": [
+      "d138 say: Something has shifted. Conversations stop when you approach the fire. Nobody meets your eyes for long.",
+      "d138 say: Dawn. You wake rested. (+19 health, energy restored. By the fire. Good enough.)",
+      "d138 say: No risky water to boil.",
+      "d138 say: Drank clean water.",
+      "d138 say: A 'for sale' sign turns toward you. The price is... reasonable.",
+      "d138 say: 🏘️ It moves.",
+      "d138 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d138 say: — MIDDAY — Honest work hours. Heat builds.",
+      "d138 say: You wait. The light changes. Nothing asks anything of you.",
+      "d138 say: The streetlights flicker — all of them, in sequence. The tax is coming.",
+      "d138 say: 🏘️ It moves.",
+      "d138 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d138 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d138 say: Word with the traders: Emberhold door is clear again. Whatever had them, let go.",
+      "d138 say: Word with the traders: Thornfield door is clear again. Whatever had them, let go.",
+      "d138 say: You wait. The light changes. Nothing asks anything of you."
+     ]
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 44,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 58,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 58,
+     "standing": {
+      "total": 127,
+      "war": 25,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 1,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 1
+     },
+     "ledgerPointsPrev": 1,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "spool"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "spool"
+      ]
+     },
+     "scholarArmorP": 2,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 12.91,
+     "trustMean": 51,
+     "trustN": 12,
+     "rank": "regional",
+     "waveEngagedPrev": 4,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 61,
+    "breakDay2": 68
+   },
+   "breaks": [
+    {
+     "breakDay": 61,
+     "linkId": "link_mgpsphou170",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 127,
+     "standingPost": 25,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 3,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d61 say: Divya sets out to find Aria. \"Won't be long.\"",
+      "d61 say: 🚶 Fatima is back — found Minh.",
+      "d61 say: 🍲 Zoe is eating by the fire — not talking, just eating.",
+      "d61 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d61 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d61 say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "d61 say: You wait. The light changes. Nothing asks anything of you.",
+      "d61 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+7": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+14": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+30": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 6
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 61,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    61
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 106,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 62,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 92,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 55,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 108,
+   "over": true,
+   "won": 0,
+   "exiled": 1,
+   "maxRank": "regional",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 15,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 49,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 66,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 65,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 65,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 0,
+     "rosterAlive": 8,
+     "rosterTotal": 9,
+     "pantryFreshDays": 5.46,
+     "trustMean": 38.9,
+     "trustN": 14,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 68,
+    "breakDay2": 75
+   },
+   "breaks": [
+    {
+     "breakDay": 68,
+     "linkId": "link_mgpsphpd244",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 2,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d68 say: Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "d68 say: Back at the haven the argument starts: Eun-chae is calling it \"Big Ugly.\" They'll fight it out — weigh in if you want.",
+      "d68 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d68 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d68 say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "d68 say: The relief moment passes — the crisis runs its own course now. What you did stands; what you didn't, doesn't.",
+      "d68 say: You wait. The light changes. Nothing asks anything of you.",
+      "d68 say: The link with Stonebridge is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": null,
+      "d+3": null,
+      "d+7": null,
+      "d+14": null,
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 0,
+      "unlockDay": 68,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    68
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 68,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 68,
+     "ring": [
+      "d66 say: 📺 +5 style — solid hit",
+      "d66 sys: ROUND 3!",
+      "d66 sys: 🐕 The Ugly Bastard's turn",
+      "d66 say: 💥 wolf's Harass finds you — no dodging it.",
+      "d66 say: Wolf's Harass hits you for 9.",
+      "d66 say: (wolf's hide absorbs 2.)",
+      "d66 say: OVERCHARGED ×1.25 (well-fed): food is fuel.",
+      "d66 say: The lead staggers — and the pack's silence shatters into yips and snarls. Coordination broken. (WOUND THE LEAD: it worked.)",
+      "d66 say: wolf is hurt — and it goes quiet and clever. It stops rushing. It starts CHOOSING. Watch the spacing.",
+      "d66 say: You STRIKE the wolf for 15.",
+      "d66 say: 📺 +5 style — solid hit",
+      "d66 sys: ROUND 4!",
+      "d66 sys: 🐕 The Ugly Bastard's turn",
+      "d66 say: 💥 wolf's Harass finds you — no dodging it.",
+      "d66 say: Wolf's Harass hits you for 9.",
+      "d66 say: The Ugly Bastard breaks and runs!",
+      "d66 say: It got away. No meat, no trophy — but you're breathing, and now you know its moves.",
+      "d66 sys: It RAN! Style score: 15. The gamblers wanted blood, but they'll settle for drama.",
+      "d66 say: Equipped Crowbar (melee).",
+      "d66 say: Equipped Work Gloves (hands).",
+      "d66 say: 🎣 Eun-chae worked the creek — 3 fish, +500 kcal to the pantry.",
+      "d66 say: ◈ THE SYSTEM has been watching Eun-chae — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+      "d66 say: 🎣 Elif worked the creek — 1 fish, +105 kcal to the pantry.",
+      "d66 say: 🎣 Aroha worked the creek — 3 fish, +385 kcal to the pantry."
+     ]
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 77,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 35,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 16.79,
+     "trustMean": 38.8,
+     "trustN": 18,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphom123",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 2,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d60 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: Thabo sets out to find Diana. \"Won't be long.\"",
+      "d60 say: Naran is mending something by the door — patient work.",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+30": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 155,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 91,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 88,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 30,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 4.5,
+     "trustMean": 48.9,
+     "trustN": 15,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphs3931",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 2,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d60 say: 🎣 Kentaro worked the creek — 5 fish, +1020 kcal to the pantry.",
+      "d60 say: 🍲 Kentaro cooked for the haven — meals stretched.",
+      "d60 say: Kentaro doesn't bother arguing anymore. By dusk the Fish crews are taking orders from them, and nobody quite remembers when it changed.",
+      "d60 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 7
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 7
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 5
+      },
+      "d+30": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 2,
+       "living": 7
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 144,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 106,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 111,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 117,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 137,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 11,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 35,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "village",
+   "maxWaveRaw": 1,
+   "maxWaveEff": 1,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 115,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 115,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "terms_of_service": 2,
+      "spool": 1
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "scholarArmorP": 40,
+     "rosterAlive": 8,
+     "rosterTotal": 9,
+     "pantryFreshDays": 2.19,
+     "trustMean": 49.5,
+     "trustN": 17,
+     "rank": "national",
+     "waveEngagedPrev": 7,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 118,
+    "breakDay2": 125
+   },
+   "breaks": [
+    {
+     "breakDay": 118,
+     "linkId": "link_mgpsphod903",
+     "linkKind": "?",
+     "other": "Thornfield",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 3,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d118 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d118 say: You wait. The light changes. Nothing asks anything of you.",
+      "d118 say: Wolfgang heads out to check the snares. \"Wire doesn't lie.\"",
+      "d118 say: 🚶 Lena is back — found Sigrun.",
+      "d118 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d118 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d118 say: You wait. The light changes. Nothing asks anything of you.",
+      "d118 say: 🗡️ The vassal's gambit: Haven breaks with Thornfield. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion 4 — Thornfield remembers: Haven broke faith (today); Haven act"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+7": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+14": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 27,
+      "unlockDay": 118,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    118
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 145,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 118,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 119,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 135,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 33,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 43,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 1,
+   "maxWaveEff": 1,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 136,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 136,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 1,
+      "callback": 2
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 10,
+     "rosterAlive": 6,
+     "rosterTotal": 7,
+     "pantryFreshDays": 22.07,
+     "trustMean": 57.7,
+     "trustN": 15,
+     "rank": "national",
+     "waveEngagedPrev": 6,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 139,
+    "breakDay2": 146
+   },
+   "breaks": [
+    {
+     "breakDay": 139,
+     "linkId": "link_mgpspi7g932",
+     "linkKind": "?",
+     "other": "The Hungry Road",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 3,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d139 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d139 say: You wait. The light changes. Nothing asks anything of you.",
+      "d139 say: You don't know how to make a Arrow yet.",
+      "d139 say: 💬 Konrad is sitting with Devon, talking low. Not business. Just people.",
+      "d139 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d139 say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "d139 say: You wait. The light changes. Nothing asks anything of you.",
+      "d139 say: 🗡️ The vassal's gambit: Haven breaks with The Hungry Road. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion -9 — The Hungry Road remembers: Haven broke faith (today)"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 6
+      },
+      "d+3": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 6
+      },
+      "d+7": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 6
+      },
+      "d+14": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 6
+      },
+      "d+30": {
+       "stRaw": 109,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 5
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 139,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    139
+   ],
+   "tableDays": [],
+   "endReason": "survived",
+   "gameDays": 182,
+   "over": false,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 139,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 140,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 169,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 55,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 107,
+   "over": true,
+   "won": 0,
+   "exiled": 1,
+   "maxRank": "regional",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 15,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 37,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 66,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 104,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 21,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 88,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 156,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 156,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 2,
+      "redactor": 1
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "scholarArmorP": 35,
+     "rosterAlive": 6,
+     "rosterTotal": 7,
+     "pantryFreshDays": 101.73,
+     "trustMean": 65.7,
+     "trustN": 18,
+     "rank": "national",
+     "waveEngagedPrev": 6,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 159,
+    "breakDay2": 166
+   },
+   "breaks": [
+    {
+     "breakDay": 159,
+     "linkId": "link_mgpspi1y674",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 3,
+     "reLocked": true,
+     "heldByRatchet": false,
+     "beatTail": [
+      "d159 say: You catch fragments by the fire — Lily telling Ruth about you. The details have shifted. Nobody seems to mind.",
+      "d159 say: You catch fragments by the fire — Diana telling Ruth about herself. Half of it's true anymore. You're not sure which half.",
+      "d159 say: 🪤 Ruth is back. \"Snares were empty. They'll keep.\"",
+      "d159 say: The cut throbs hot — a cut gone wrong. Red streaks crawl out from the wound's edges.",
+      "d159 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d159 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d159 say: You wait. The light changes. Nothing asks anything of you.",
+      "d159 say: 🗡️ The vassal's gambit: Haven breaks with Stonebridge. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion -16 — Stonebridge remembers: Haven broke faith (today); Haven"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 7
+      },
+      "d+3": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+14": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 3,
+       "living": 8
+      },
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "held-censored",
+      "tableBy30": 0,
+      "daysObserved": 23,
+      "unlockDay": 159,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    159
+   ],
+   "tableDays": [],
+   "endReason": "survived",
+   "gameDays": 182,
+   "over": false,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 0,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 159,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 160,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 88,
+   "arm": "break",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 79,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 2,
+   "maxWaveEff": 2,
+   "peakWaveSeen": 0,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 25,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 11,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 34,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "village",
+   "maxWaveRaw": 2,
+   "maxWaveEff": 2,
+   "peakWaveSeen": 2,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 33,
+     "ring": [
+      "d33 say: Armor absorbs 1.",
+      "d33 say: Hum-mouse 2's Nibble Tide hits you for 4.",
+      "d33 sys: 🐭 Big Big 4's turn",
+      "d33 say: 💥 Swarm Hum!",
+      "d33 say: The hum stacks — a low thrum. (hum ×1)",
+      "d33 say: Armor absorbs 1.",
+      "d33 say: Hum-mouse 4's Swarm Hum hits you for 7.",
+      "d33 say: 📖 Codex: Swarm Hum — hits everything close around it. You won't forget this.",
+      "d33 sys: 🐭 Big Big 3's turn",
+      "d33 say: 💥 Swarm Hum!",
+      "d33 say: You're not where it landed. Clean dodge.",
+      "d33 say: 📺 +15 style — dodged the Swarm Hum!",
+      "d33 say: Your strikes land harder. (x1.30 training)",
+      "d33 say: The Big Big 4 falls.",
+      "d33 say: You STRIKE the hum-mouse 4 for 38 (Hatchet).",
+      "d33 say: 📺 +5 style — solid hit"
+     ]
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 22,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 99,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 99,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 10,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 24.54,
+     "trustMean": 55,
+     "trustN": 15,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 102,
+    "breakDay2": 109
+   },
+   "breaks": [
+    {
+     "breakDay": 102,
+     "linkId": "link_mgpsphrd34",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d102 say: You catch fragments by the fire — Jorge telling Elif about you. The details have shifted. Nobody seems to mind.",
+      "d102 say: 🪤 Lucas is back from the snares: +237 kcal to the pantry.",
+      "d102 say: The joints throb; everything costs more than it should. (-1 HP)",
+      "d102 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d102 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d102 say: Riders from The Red Table: something's at THEIR door now. They can't spare anyone — and they wanted Haven to know first.",
+      "d102 say: You wait. The light changes. Nothing asks anything of you.",
+      "d102 say: The link with Stonebridge is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 4
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 4
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+30": {
+       "stRaw": 127,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 6
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 102,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    102
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 151,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 102,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 103,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 132,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 33,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 37,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 3.26,
+     "trustMean": 39,
+     "trustN": 19,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphpg340",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d60 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: Raj is mending something by the door — patient work.",
+      "d60 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 6
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+30": {
+       "stRaw": 152,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 8
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 157,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 90,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 44,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 58,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 58,
+     "standing": {
+      "total": 127,
+      "war": 25,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 1,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 1
+     },
+     "ledgerPointsPrev": 1,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "spool"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "spool"
+      ]
+     },
+     "scholarArmorP": 2,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 12.91,
+     "trustMean": 51,
+     "trustN": 12,
+     "rank": "regional",
+     "waveEngagedPrev": 4,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 61,
+    "breakDay2": 68
+   },
+   "breaks": [
+    {
+     "breakDay": 61,
+     "linkId": "link_mgpsphou170",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 127,
+     "standingPost": 25,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d61 say: Divya sets out to find Aria. \"Won't be long.\"",
+      "d61 say: 🚶 Fatima is back — found Minh.",
+      "d61 say: 🍲 Zoe is eating by the fire — not talking, just eating.",
+      "d61 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d61 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d61 say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "d61 say: You wait. The light changes. Nothing asks anything of you.",
+      "d61 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+7": {
+       "stRaw": 25,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+14": {
+       "stRaw": 50,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 6
+      },
+      "d+30": {
+       "stRaw": 50,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 6
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 61,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    61
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 119,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 62,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 55,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 108,
+   "over": true,
+   "won": 0,
+   "exiled": 1,
+   "maxRank": "regional",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 3,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 15,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 49,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 66,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 65,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 65,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 0,
+     "rosterAlive": 8,
+     "rosterTotal": 9,
+     "pantryFreshDays": 5.46,
+     "trustMean": 38.9,
+     "trustN": 14,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 68,
+    "breakDay2": 75
+   },
+   "breaks": [
+    {
+     "breakDay": 68,
+     "linkId": "link_mgpsphpd244",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d68 say: Word gets around the haven. Whatever that thing was — everyone's talking about it now.",
+      "d68 say: Back at the haven the argument starts: Eun-chae is calling it \"Big Ugly.\" They'll fight it out — weigh in if you want.",
+      "d68 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d68 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d68 say: No watches tonight. Everyone sleeps with one ear open and pretends not to.",
+      "d68 say: The relief moment passes — the crisis runs its own course now. What you did stands; what you didn't, doesn't.",
+      "d68 say: You wait. The light changes. Nothing asks anything of you.",
+      "d68 say: The link with Stonebridge is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": null,
+      "d+3": null,
+      "d+7": null,
+      "d+14": null,
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 0,
+      "unlockDay": 68,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    68
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 68,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 68,
+     "ring": [
+      "d66 say: 📺 +5 style — solid hit",
+      "d66 sys: ROUND 3!",
+      "d66 sys: 🐕 The Ugly Bastard's turn",
+      "d66 say: 💥 wolf's Harass finds you — no dodging it.",
+      "d66 say: Wolf's Harass hits you for 9.",
+      "d66 say: (wolf's hide absorbs 2.)",
+      "d66 say: OVERCHARGED ×1.25 (well-fed): food is fuel.",
+      "d66 say: The lead staggers — and the pack's silence shatters into yips and snarls. Coordination broken. (WOUND THE LEAD: it worked.)",
+      "d66 say: wolf is hurt — and it goes quiet and clever. It stops rushing. It starts CHOOSING. Watch the spacing.",
+      "d66 say: You STRIKE the wolf for 15.",
+      "d66 say: 📺 +5 style — solid hit",
+      "d66 sys: ROUND 4!",
+      "d66 sys: 🐕 The Ugly Bastard's turn",
+      "d66 say: 💥 wolf's Harass finds you — no dodging it.",
+      "d66 say: Wolf's Harass hits you for 9.",
+      "d66 say: The Ugly Bastard breaks and runs!",
+      "d66 say: It got away. No meat, no trophy — but you're breathing, and now you know its moves.",
+      "d66 sys: It RAN! Style score: 15. The gamblers wanted blood, but they'll settle for drama.",
+      "d66 say: Equipped Crowbar (melee).",
+      "d66 say: Equipped Work Gloves (hands).",
+      "d66 say: 🎣 Eun-chae worked the creek — 3 fish, +500 kcal to the pantry.",
+      "d66 say: ◈ THE SYSTEM has been watching Eun-chae — 8 days worked on the land. It offers Field Dressing. Earned, not given. (field_dressing: villager System grant)",
+      "d66 say: 🎣 Elif worked the creek — 1 fish, +105 kcal to the pantry.",
+      "d66 say: 🎣 Aroha worked the creek — 3 fish, +385 kcal to the pantry."
+     ]
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 77,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 35,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 16.79,
+     "trustMean": 38.8,
+     "trustN": 18,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphom123",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d60 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: Thabo sets out to find Diana. \"Won't be long.\"",
+      "d60 say: Naran is mending something by the door — patient work.",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 7
+      },
+      "d+30": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 4
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 103,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 91,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "leadcourt",
+   "seed": 88,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 57,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 57,
+     "standing": {
+      "total": 102,
+      "war": 0,
+      "diplomacy": 102,
+      "plenty": 0,
+      "warPts": 0,
+      "links": 3,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {},
+     "ledgerPointsPrev": 0,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 30,
+     "rosterAlive": 9,
+     "rosterTotal": 10,
+     "pantryFreshDays": 4.5,
+     "trustMean": 48.9,
+     "trustN": 15,
+     "rank": "regional",
+     "waveEngagedPrev": 0,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 60,
+    "breakDay2": 67
+   },
+   "breaks": [
+    {
+     "breakDay": 60,
+     "linkId": "link_mgpsphs3931",
+     "linkKind": "?",
+     "other": "Emberhold",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 102,
+     "standingPost": 0,
+     "waveRawPre": 4,
+     "waveRawPost": 2,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d60 say: 🎣 Kentaro worked the creek — 5 fish, +1020 kcal to the pantry.",
+      "d60 say: 🍲 Kentaro cooked for the haven — meals stretched.",
+      "d60 say: Kentaro doesn't bother arguing anymore. By dusk the Fish crews are taking orders from them, and nobody quite remembers when it changed.",
+      "d60 say: Sunlight on your skin. You drink it. +100 kcal. (photosynthesis)",
+      "d60 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d60 say: The fire burns lower than it should. Nobody wants to be the one to go for wood in the dark.",
+      "d60 say: You wait. The light changes. Nothing asks anything of you.",
+      "d60 say: The link with Emberhold is broken (gambit). What was built over weeks comes apart in a sentence."
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+3": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 7
+      },
+      "d+7": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 5
+      },
+      "d+14": {
+       "stRaw": 0,
+       "waveRaw": 2,
+       "waveEff": 4,
+       "living": 2
+      },
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "died",
+      "tableBy30": 0,
+      "daysObserved": 25,
+      "unlockDay": 60,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    60
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 85,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 60,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 61,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 11,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 35,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "village",
+   "maxWaveRaw": 1,
+   "maxWaveEff": 1,
+   "peakWaveSeen": 1,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 22,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 115,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 115,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "terms_of_service": 2,
+      "spool": 1
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "scholarArmorP": 40,
+     "rosterAlive": 8,
+     "rosterTotal": 9,
+     "pantryFreshDays": 2.19,
+     "trustMean": 49.5,
+     "trustN": 17,
+     "rank": "national",
+     "waveEngagedPrev": 7,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 118,
+    "breakDay2": 125
+   },
+   "breaks": [
+    {
+     "breakDay": 118,
+     "linkId": "link_mgpsphod903",
+     "linkKind": "?",
+     "other": "Thornfield",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d118 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d118 say: You wait. The light changes. Nothing asks anything of you.",
+      "d118 say: Wolfgang heads out to check the snares. \"Wire doesn't lie.\"",
+      "d118 say: 🚶 Lena is back — found Sigrun.",
+      "d118 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d118 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d118 say: You wait. The light changes. Nothing asks anything of you.",
+      "d118 say: 🗡️ The vassal's gambit: Haven breaks with Thornfield. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion 4 — Thornfield remembers: Haven broke faith (today); Haven act"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+3": {
+       "stRaw": 100,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 8
+      },
+      "d+7": {
+       "stRaw": 150,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 7
+      },
+      "d+14": {
+       "stRaw": 175,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 7
+      },
+      "d+30": {
+       "stRaw": 175,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 6
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 118,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    118
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 167,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 118,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 119,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 120,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 33,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 43,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 1,
+   "maxWaveEff": 1,
+   "peakWaveSeen": 1,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 44,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 136,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 136,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 1,
+      "callback": 2
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "tricksW3": {
+      "known": 0,
+      "total": 9,
+      "share": 0,
+      "knownIds": []
+     },
+     "scholarArmorP": 10,
+     "rosterAlive": 6,
+     "rosterTotal": 7,
+     "pantryFreshDays": 22.07,
+     "trustMean": 57.7,
+     "trustN": 15,
+     "rank": "national",
+     "waveEngagedPrev": 6,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 139,
+    "breakDay2": 146
+   },
+   "breaks": [
+    {
+     "breakDay": 139,
+     "linkId": "link_mgpspi7g932",
+     "linkKind": "?",
+     "other": "The Hungry Road",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d139 say: — DUSK — Animals stir again. Shadows lengthen.",
+      "d139 say: You wait. The light changes. Nothing asks anything of you.",
+      "d139 say: You don't know how to make a Arrow yet.",
+      "d139 say: 💬 Konrad is sitting with Devon, talking low. Not business. Just people.",
+      "d139 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d139 say: Night. The treeline is just a sound now. The fire is the whole argument against it.",
+      "d139 say: You wait. The light changes. Nothing asks anything of you.",
+      "d139 say: 🗡️ The vassal's gambit: Haven breaks with The Hungry Road. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion -9 — The Hungry Road remembers: Haven broke faith (today)"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 6
+      },
+      "d+3": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 6
+      },
+      "d+7": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 5
+      },
+      "d+14": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 5
+      },
+      "d+30": {
+       "stRaw": 100,
+       "waveRaw": 4,
+       "waveEff": 4,
+       "living": 6
+      }
+     },
+     "outcome": {
+      "outcome": "held",
+      "tableBy30": 0,
+      "daysObserved": 30,
+      "unlockDay": 139,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    139
+   ],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 180,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "global",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 139,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 140,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 163,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 55,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 107,
+   "over": true,
+   "won": 0,
+   "exiled": 1,
+   "maxRank": "regional",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 3,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 15,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 37,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 66,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 104,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 3,
+   "maxWaveEff": 3,
+   "peakWaveSeen": 3,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 21,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 88,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 77,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": {
+    "day": 156,
+    "waveRawAtUnlock": 4,
+    "waveEffAtUnlock": 4,
+    "snapshot": {
+     "wave": 4,
+     "day": 156,
+     "standing": {
+      "total": 109,
+      "war": 75,
+      "diplomacy": 34,
+      "plenty": 0,
+      "warPts": 3,
+      "links": 1,
+      "feasts": 0
+     },
+     "ledgerPrevWave": 3,
+     "ledgerPerType": {
+      "spool": 2,
+      "redactor": 1
+     },
+     "ledgerPointsPrev": 3,
+     "tricksPrev": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "tricksW3": {
+      "known": 1,
+      "total": 9,
+      "share": 0.111,
+      "knownIds": [
+       "buffering"
+      ]
+     },
+     "scholarArmorP": 35,
+     "rosterAlive": 6,
+     "rosterTotal": 7,
+     "pantryFreshDays": 101.73,
+     "trustMean": 65.7,
+     "trustN": 18,
+     "rank": "national",
+     "waveEngagedPrev": 6,
+     "waveEngagedW": 0
+    },
+    "breakDay1": 159,
+    "breakDay2": 166
+   },
+   "breaks": [
+    {
+     "breakDay": 159,
+     "linkId": "link_mgpspi1y674",
+     "linkKind": "?",
+     "other": "Stonebridge",
+     "how": "gambit",
+     "brokeOk": true,
+     "standingPre": 109,
+     "standingPost": 75,
+     "waveRawPre": 4,
+     "waveRawPost": 3,
+     "waveEffPost": 4,
+     "reLocked": true,
+     "heldByRatchet": true,
+     "beatTail": [
+      "d159 say: You catch fragments by the fire — Lily telling Ruth about you. The details have shifted. Nobody seems to mind.",
+      "d159 say: You catch fragments by the fire — Diana telling Ruth about herself. Half of it's true anymore. You're not sure which half.",
+      "d159 say: 🪤 Ruth is back. \"Snares were empty. They'll keep.\"",
+      "d159 say: The cut throbs hot — a cut gone wrong. Red streaks crawl out from the wound's edges.",
+      "d159 say: — NIGHT — Camp. Rest — or risk the dark.",
+      "d159 say: Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should.",
+      "d159 say: You wait. The light changes. Nothing asks anything of you.",
+      "d159 say: 🗡️ The vassal's gambit: Haven breaks with Stonebridge. No more tribute, no more calls — and no more protection. Word will travel: Haven broke faith. (Opinion -16 — Stonebridge remembers: Haven broke faith (today); Haven"
+     ],
+     "n": 1,
+     "postSeries": {
+      "d+1": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 7
+      },
+      "d+3": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+7": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+14": {
+       "stRaw": 75,
+       "waveRaw": 3,
+       "waveEff": 4,
+       "living": 9
+      },
+      "d+30": null
+     },
+     "outcome": {
+      "outcome": "held-censored",
+      "tableBy30": 0,
+      "daysObserved": 23,
+      "unlockDay": 159,
+      "wave": 4
+     }
+    }
+   ],
+   "breakDays": [
+    159
+   ],
+   "tableDays": [],
+   "endReason": "survived",
+   "gameDays": 182,
+   "over": false,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "national",
+   "maxWaveRaw": 4,
+   "maxWaveEff": 4,
+   "peakWaveSeen": 4,
+   "noScenarioReason": null,
+   "sense": [
+    {
+     "kind": "break",
+     "day": 159,
+     "ring": []
+    },
+    {
+     "kind": "relock",
+     "day": 160,
+     "ring": []
+    }
+   ]
+  },
+  {
+   "policy": "belongseek",
+   "seed": 88,
+   "arm": "sticky",
+   "days": 180,
+   "monoOff": false,
+   "doBreak": true,
+   "unlock4": null,
+   "breaks": [],
+   "breakDays": [],
+   "tableDays": [],
+   "endReason": "village-lost",
+   "gameDays": 79,
+   "over": true,
+   "won": 0,
+   "exiled": 0,
+   "maxRank": "regional",
+   "maxWaveRaw": 2,
+   "maxWaveEff": 2,
+   "peakWaveSeen": 2,
+   "noScenarioReason": "no-w4-unlock",
+   "sense": [
+    {
+     "kind": "relock",
+     "day": 1,
+     "ring": []
+    },
+    {
+     "kind": "reopen",
+     "day": 25,
+     "ring": []
+    }
+   ]
+  }
+ ]
+}
