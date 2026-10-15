@@ -331,7 +331,25 @@
       if (r.endReason === 'wiped') say(`The road ends here, unnamed and unmarked.`);
       else if (r.endReason === 'all-found') say(`Everyone's found. The long way home ends at a door, not a grave.`);
       else say(`You stop walking. This place will do.`);
-      return this.endingData();
+      const data = this.endingData();
+      // The ending is its own scene (nomad-scenes.js, guarded): light or dark,
+      // with the village's fate and the party's found kin in the epilogue.
+      try {
+        if (Game.nomadScenes && typeof Game.nomadScenes.playEnding === 'function') {
+          Game.nomadScenes.playEnding(data);
+        }
+      } catch (e) {}
+      // Closing the run: the road ending is an ending. Wiped is a loss;
+      // settling or finding everyone is the Long Way Home, won.
+      try {
+        Game.over = true;
+        Game.won = r.endReason !== 'wiped';
+        if (typeof Game.recordLegend === 'function') {
+          Game.recordLegend({ outcome: 'nomad', reason: r.endReason, dark: !!data.dark,
+            found: (data.foundKin || []).length, days: data.daysOnRoad });
+        }
+      } catch (e) {}
+      return data;
     },
 
     party() {
