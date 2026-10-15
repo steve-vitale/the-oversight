@@ -35,6 +35,8 @@ function pickerLabels(Game) {
 
 (async () => {
   const Game = await K.load({ seed: 20261014 });
+  // These cases compare origins against explicitly selected US landing variants.
+  Game.debugRegion = 'na_eastern_woodlands';
   const regions = Game.data.regions;
   const regionIds = new Set(regions.map(r => r.id));
   const labels = pickerLabels(Game);

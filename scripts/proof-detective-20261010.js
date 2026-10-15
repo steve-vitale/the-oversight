@@ -34,6 +34,7 @@ global.window = global;
 ].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 
 let checks = 0, failures = 0;
 function check(cond, label, extra) {
@@ -188,6 +189,7 @@ async function main() {
   // ---------- A3: tentative clears cost nothing ----------
   console.log('\n== A3: honesty of tentative clears ==');
   const leadT = npcs[3];
+  Game.vpOf(leadT).lies = {}; // this case is an innocent, tentative gossip lead
   Game.state.village.bgLangs[leadT] = { native: 'english' };
   Game.checkGossipClaim(leadT, 'occupation', 'baker', teller);
   clearLog();

@@ -813,7 +813,7 @@
   function obHome() {
     // WHERE ARE YOU FROM? Visual picker — tap a place. No typing.
     // Still stores the same origin string downstream (parseOrigin handles it).
-    // What you know grows where you're from. It doesn't grow here.
+    // What you know grew where you lived. Learn what grows here.
     const picker = Game.data.originPicker || { regions: [] };
     const allOrigins = [];
     for (const r of picker.regions) for (const o of r.origins) allOrigins.push({ ...o, region: r.name });
@@ -843,7 +843,7 @@
 
     screen.innerHTML = `${bar('scattering://home', '?')}
       <h1 class="title" style="font-size:22px">WHERE ARE YOU FROM?</h1>
-      <p class="small">Tap where you're from. What you know grows there — it doesn't grow here.</p>
+      <p class="small">Tap where you're from. Your home shapes what you know when you arrive.</p>
       <input id="ob-origin-search" type="text" placeholder="🔍 Search places..." autocomplete="off"
         style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
       <div id="origin-list"></div>
@@ -963,7 +963,7 @@
       <h1 class="title" style="font-size:22px">YOU WAKE UP</h1>
       <div class="card" style="margin-top:24px">
         <p style="font-size:17px;line-height:1.7">${lines.join('<br><br>')}</p>
-        <p class="small" style="opacity:.6;margin-top:16px">What you know grows where you're from. It doesn't grow here.</p>
+        <p class="small" style="opacity:.6;margin-top:16px">What you know grew where you lived. Learn what grows here.</p>
         <button class="btn" id="b-wake">Open your eyes</button>
       </div>`;
     document.getElementById('b-wake').onclick = () => {

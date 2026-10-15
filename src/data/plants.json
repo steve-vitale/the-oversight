@@ -1,7 +1,8 @@
 [
   {
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 45,
     "codex": "Every part is edible — leaves, flowers, roots. Bitter means nutritious. The first green of spring and the last of fall.",
@@ -63,7 +64,8 @@
   },
   {
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 120,
     "codex": "The survivalist's supermarket: shoots, roots, pollen, and fluff for tinder. If you find cattails, you found water too.",
@@ -128,7 +130,8 @@
   },
   {
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 65,
     "codex": "Thorns guard the sweetest calories in the woods. Summer's paycheck — eat fresh, dry what you can't carry.",
@@ -421,7 +424,8 @@
   },
   {
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 30,
     "codex": "Grows in the cold months when little else does. The humble green that shows up when you need it most.",
@@ -780,7 +784,8 @@
     "name": "Lamb's Quarters",
     "scientific": "Chenopodium album",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 50,
     "unit": "handful of leaves",
@@ -841,7 +846,8 @@
     "name": "Purslane",
     "scientific": "Portulaca oleracea",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 30,
     "unit": "handful",
@@ -1025,7 +1031,8 @@
     "name": "Yarrow",
     "scientific": "Achillea millefolium",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 10,
     "unit": "handful of leaves/flowers",
@@ -1086,7 +1093,8 @@
     "name": "Common Plantain",
     "scientific": "Plantago major",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 35,
     "unit": "leaf",
@@ -1332,7 +1340,8 @@
     "name": "Burdock",
     "scientific": "Arctium minus",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 90,
     "unit": "root",
@@ -1748,7 +1757,8 @@
     "name": "Stinging Nettle",
     "scientific": "Urtica dioica",
     "biomes": [
-      "se_woodlands"
+      "se_woodlands",
+      "eu_broadleaf"
     ],
     "caloriesPerUnit": 40,
     "unit": "handful of tops",
@@ -2541,5 +2551,969 @@
    "detail": "syrup is valuable"
   }
  ]
-}
+},
+  {
+    "id": "european_hazelnut",
+    "name": "Hazelnut",
+    "scientific": "Corylus avellana",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 500,
+    "unit": "handful of kernels",
+    "form": "nuts",
+    "edibility": "safe",
+    "description": "a tree dropping hard-shelled mast",
+    "knowledgeLevels": {
+      "1": "Hazelnut. A name is a beginning, not permission to eat.",
+      "2": "Shell sound nuts; eat the kernels or roast them.",
+      "3": "Do not substitute horse chestnuts or other unrelated nuts.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Shell sound nuts; eat the kernels or roast them.",
+    "lookalikeNote": "Do not substitute horse chestnuts or other unrelated nuts.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2024/09/foraging-in-september/"
+    ],
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "spoilageDays": 14,
+    "tileAffinity": [
+      "grove",
+      "thicket"
+    ],
+    "waterContent": "low",
+    "idDifficulty": 2,
+    "codex": "Hazelnut. Shell sound nuts; eat the kernels or roast them.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Shell sound nuts; eat the kernels or roast them."
+      }
+    ],
+    "taxon": [
+      "tree",
+      "nut_tree",
+      "european_hazelnut"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "beech_nut",
+    "name": "Beech mast",
+    "scientific": "Fagus sylvatica",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 320,
+    "unit": "small handful of kernels",
+    "form": "nuts",
+    "edibility": "cook",
+    "description": "a tree dropping hard-shelled mast",
+    "knowledgeLevels": {
+      "1": "Beech mast. A name is a beginning, not permission to eat.",
+      "2": "Shell and roast a modest portion; never make raw beech mast a staple.",
+      "3": "Small triangular beech nuts are not a general rule for edible seeds.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Shell and roast a modest portion; never make raw beech mast a staple.",
+    "lookalikeNote": "Small triangular beech nuts are not a general rule for edible seeds.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/foraging-in-october/"
+    ],
+    "seasons": [
+      "fall"
+    ],
+    "spoilageDays": 14,
+    "tileAffinity": [
+      "forest_floor",
+      "grove"
+    ],
+    "waterContent": "low",
+    "idDifficulty": 2,
+    "codex": "Beech mast. Shell and roast a modest portion; never make raw beech mast a staple.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Shell and roast a modest portion; never make raw beech mast a staple."
+      }
+    ],
+    "taxon": [
+      "tree",
+      "nut_tree",
+      "beech_nut"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "pedunculate_acorn",
+    "name": "Pedunculate oak acorn",
+    "scientific": "Quercus robur",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 400,
+    "unit": "portion of leached meal",
+    "form": "nuts",
+    "edibility": "cook",
+    "description": "a tree dropping hard-shelled mast",
+    "knowledgeLevels": {
+      "1": "Pedunculate oak acorn. A name is a beginning, not permission to eat.",
+      "2": "Shell, crush and leach out bitter tannins before cooking the meal.",
+      "3": "A brown nut is not an identification. Horse chestnuts are not acorns.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Shell, crush and leach out bitter tannins before cooking the meal.",
+    "lookalikeNote": "A brown nut is not an identification. Horse chestnuts are not acorns.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/foraging-in-october/"
+    ],
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "spoilageDays": 14,
+    "tileAffinity": [
+      "grove",
+      "forest_floor"
+    ],
+    "waterContent": "low",
+    "idDifficulty": 2,
+    "codex": "Pedunculate oak acorn. Shell, crush and leach out bitter tannins before cooking the meal.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Shell, crush and leach out bitter tannins before cooking the meal."
+      }
+    ],
+    "taxon": [
+      "tree",
+      "nut_tree",
+      "pedunculate_acorn"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "sloe",
+    "name": "Sloe",
+    "scientific": "Prunus spinosa",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 70,
+    "unit": "handful of fruit",
+    "form": "berries",
+    "edibility": "caution",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Sloe. A name is a beginning, not permission to eat.",
+      "2": "Cook and strain the tart fruit; discard stones without crushing them.",
+      "3": "Do not chew kernels or use unidentified dark berries.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Cook and strain the tart fruit; discard stones without crushing them.",
+    "lookalikeNote": "Do not chew kernels or use unidentified dark berries.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2024/09/foraging-in-september/"
+    ],
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "thicket",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Sloe. Cook and strain the tart fruit; discard stones without crushing them.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Cook and strain the tart fruit; discard stones without crushing them."
+      }
+    ],
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "sloe"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "rosehip",
+    "name": "Dog rose hip",
+    "scientific": "Rosa canina",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 90,
+    "unit": "portion of strained pulp",
+    "form": "berries",
+    "edibility": "caution",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Dog rose hip. A name is a beginning, not permission to eat.",
+      "2": "Remove seeds and irritating hairs, or cook and strain the pulp.",
+      "3": "The hairs inside a hip are not food.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Remove seeds and irritating hairs, or cook and strain the pulp.",
+    "lookalikeNote": "The hairs inside a hip are not food.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2024/09/foraging-in-september/"
+    ],
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "thicket",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Dog rose hip. Remove seeds and irritating hairs, or cook and strain the pulp.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Remove seeds and irritating hairs, or cook and strain the pulp."
+      }
+    ],
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "rosehip"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "hawthorn_berry",
+    "name": "Hawthorn haw",
+    "scientific": "Crataegus monogyna",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 70,
+    "unit": "handful of fruit",
+    "form": "berries",
+    "edibility": "caution",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Hawthorn haw. A name is a beginning, not permission to eat.",
+      "2": "Use the fruit flesh in cooked, strained preserves; discard the pips.",
+      "3": "Red hedgerow fruit is not automatically a haw.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use the fruit flesh in cooked, strained preserves; discard the pips.",
+    "lookalikeNote": "Red hedgerow fruit is not automatically a haw.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.rhs.org.uk/advice/grow-your-own/features/harvesting-hedgerow-fruits-and-nuts"
+    ],
+    "seasons": [
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "thicket",
+      "grove"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Hawthorn haw. Use the fruit flesh in cooked, strained preserves; discard the pips.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use the fruit flesh in cooked, strained preserves; discard the pips."
+      }
+    ],
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "hawthorn_berry"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "european_elderberry",
+    "name": "European elderberry",
+    "scientific": "Sambucus nigra",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 80,
+    "unit": "portion of cooked berries",
+    "form": "berries",
+    "edibility": "cook",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "European elderberry. A name is a beginning, not permission to eat.",
+      "2": "Cook ripe berries and remove stalks. Raw or unripe berries, leaves and stems are not food.",
+      "3": "Do not use raw berries or infer identity from their dark colour.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Cook ripe berries and remove stalks. Raw or unripe berries, leaves and stems are not food.",
+    "lookalikeNote": "Do not use raw berries or infer identity from their dark colour.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2024/09/foraging-in-september/"
+    ],
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "thicket",
+      "grove"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "European elderberry. Cook ripe berries and remove stalks. Raw or unripe berries, leaves and stems are not food.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Cook ripe berries and remove stalks. Raw or unripe berries, leaves and stems are not food."
+      }
+    ],
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "european_elderberry"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "crab_apple",
+    "name": "Crab apple",
+    "scientific": "Malus sylvestris",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 100,
+    "unit": "small fruit",
+    "form": "berries",
+    "edibility": "safe",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Crab apple. A name is a beginning, not permission to eat.",
+      "2": "Use sound fruit flesh; cooking softens its sharp flavour. Discard the core.",
+      "3": "Do not eat apple seeds or substitute ornamental fruit you do not know.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use sound fruit flesh; cooking softens its sharp flavour. Discard the core.",
+    "lookalikeNote": "Do not eat apple seeds or substitute ornamental fruit you do not know.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/foraging-in-october/"
+    ],
+    "seasons": [
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "grove",
+      "ruin"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Crab apple. Use sound fruit flesh; cooking softens its sharp flavour. Discard the core.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use sound fruit flesh; cooking softens its sharp flavour. Discard the core."
+      }
+    ],
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "crab_apple"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "european_wild_cherry",
+    "name": "Wild cherry",
+    "scientific": "Prunus avium",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 90,
+    "unit": "handful of pitted cherries",
+    "form": "berries",
+    "edibility": "caution",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Wild cherry. A name is a beginning, not permission to eat.",
+      "2": "Use only ripe fruit flesh. Discard stones; leaves and kernels are not food.",
+      "3": "Do not crush or chew cherry stones.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use only ripe fruit flesh. Discard stones; leaves and kernels are not food.",
+    "lookalikeNote": "Do not crush or chew cherry stones.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/wild-cherry/"
+    ],
+    "seasons": [
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "grove",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Wild cherry. Use only ripe fruit flesh. Discard stones; leaves and kernels are not food.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use only ripe fruit flesh. Discard stones; leaves and kernels are not food."
+      }
+    ],
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "european_wild_cherry"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "common_sorrel",
+    "name": "Common sorrel",
+    "scientific": "Rumex acetosa",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 35,
+    "unit": "small portion of leaves",
+    "form": "leaves",
+    "edibility": "caution",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Common sorrel. A name is a beginning, not permission to eat.",
+      "2": "Use sparingly as a sour green, not as a staple; it contains oxalates.",
+      "3": "Do not use sour taste as an identification test.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use sparingly as a sour green, not as a staple; it contains oxalates.",
+    "lookalikeNote": "Do not use sour taste as an identification test.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2021/06/foraging-in-june/"
+    ],
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "meadow",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Common sorrel. Use sparingly as a sour green, not as a staple; it contains oxalates.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use sparingly as a sour green, not as a staple; it contains oxalates."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "herb",
+      "common_sorrel"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "wild_garlic",
+    "name": "Wild garlic",
+    "scientific": "Allium ursinum",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 40,
+    "unit": "handful of leaves",
+    "form": "leaves",
+    "edibility": "safe",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Wild garlic. A name is a beginning, not permission to eat.",
+      "2": "Use identified leaves as a green or seasoning.",
+      "3": "Lily-of-the-valley and autumn crocus can be deadly lookalikes. Smell alone does not identify every leaf.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use identified leaves as a green or seasoning.",
+    "lookalikeNote": "Lily-of-the-valley and autumn crocus can be deadly lookalikes. Smell alone does not identify every leaf.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/foraging-in-april/"
+    ],
+    "seasons": [
+      "spring"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "forest_floor",
+      "grove"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Wild garlic. Use identified leaves as a green or seasoning.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use identified leaves as a green or seasoning."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "herb",
+      "wild_garlic"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "garlic_mustard",
+    "name": "Garlic mustard",
+    "scientific": "Alliaria petiolata",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 35,
+    "unit": "handful of young leaves",
+    "form": "leaves",
+    "edibility": "safe",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Garlic mustard. A name is a beginning, not permission to eat.",
+      "2": "Use young identified leaves as a peppery green or cooked seasoning.",
+      "3": "Do not treat every garlic-scented plant as this species.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use young identified leaves as a peppery green or cooked seasoning.",
+    "lookalikeNote": "Do not treat every garlic-scented plant as this species.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/foraging-in-april/"
+    ],
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "trail_edge",
+      "thicket"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Garlic mustard. Use young identified leaves as a peppery green or cooked seasoning.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use young identified leaves as a peppery green or cooked seasoning."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "herb",
+      "garlic_mustard"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "european_wood_sorrel",
+    "name": "Wood sorrel",
+    "scientific": "Oxalis acetosella",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 25,
+    "unit": "small portion of leaves",
+    "form": "leaves",
+    "edibility": "caution",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Wood sorrel. A name is a beginning, not permission to eat.",
+      "2": "Use only a small amount as a sour garnish; oxalates make it unsuitable as a staple.",
+      "3": "Its three heart-shaped leaflets are not clover; never identify food by taste.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use only a small amount as a sour garnish; oxalates make it unsuitable as a staple.",
+    "lookalikeNote": "Its three heart-shaped leaflets are not clover; never identify food by taste.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wood-sorrel/"
+    ],
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "forest_floor"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Wood sorrel. Use only a small amount as a sour garnish; oxalates make it unsuitable as a staple.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use only a small amount as a sour garnish; oxalates make it unsuitable as a staple."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "herb",
+      "european_wood_sorrel"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "red_clover",
+    "name": "Red clover",
+    "scientific": "Trifolium pratense",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 30,
+    "unit": "small handful of flower heads",
+    "form": "leaves",
+    "edibility": "caution",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Red clover. A name is a beginning, not permission to eat.",
+      "2": "Use a modest amount of fresh, identified flowers; discard spoiled material.",
+      "3": "Three leaflets alone do not identify a clover.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use a modest amount of fresh, identified flowers; discard spoiled material.",
+    "lookalikeNote": "Three leaflets alone do not identify a clover.",
+    "confidence": "medium",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/blog/2021/06/foraging-in-june/"
+    ],
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "meadow"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Red clover. Use a modest amount of fresh, identified flowers; discard spoiled material.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use a modest amount of fresh, identified flowers; discard spoiled material."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "flower",
+      "red_clover"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "bilberry",
+    "name": "Bilberry",
+    "scientific": "Vaccinium myrtillus",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 70,
+    "unit": "handful of berries",
+    "form": "berries",
+    "edibility": "safe",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Bilberry. A name is a beginning, not permission to eat.",
+      "2": "Use ripe identified berries, fresh or cooked.",
+      "3": "Do not confuse low bilberry bushes with unrelated dark-fruited plants.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use ripe identified berries, fresh or cooked.",
+    "lookalikeNote": "Do not confuse low bilberry bushes with unrelated dark-fruited plants.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/bilberry/"
+    ],
+    "seasons": [
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "forest_floor",
+      "thicket"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Bilberry. Use ripe identified berries, fresh or cooked.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use ripe identified berries, fresh or cooked."
+      }
+    ],
+    "taxon": [
+      "bush",
+      "berry_bush",
+      "bilberry"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "european_wild_strawberry",
+    "name": "Woodland strawberry",
+    "scientific": "Fragaria vesca",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 45,
+    "unit": "handful of berries",
+    "form": "berries",
+    "edibility": "safe",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Woodland strawberry. A name is a beginning, not permission to eat.",
+      "2": "Use ripe identified fruit. It is a small summer food, not a winter reserve.",
+      "3": "Do not identify a berry only by colour.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Use ripe identified fruit. It is a small summer food, not a winter reserve.",
+    "lookalikeNote": "Do not identify a berry only by colour.",
+    "confidence": "high",
+    "sources": [
+      "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wild-strawberry/"
+    ],
+    "seasons": [
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "trail_edge",
+      "grove"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 2,
+    "codex": "Woodland strawberry. Use ripe identified fruit. It is a small summer food, not a winter reserve.",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "Use ripe identified fruit. It is a small summer food, not a winter reserve."
+      }
+    ],
+    "taxon": [
+      "plant",
+      "berry_plant",
+      "european_wild_strawberry"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "foxglove",
+    "name": "Foxglove",
+    "scientific": "Digitalis purpurea",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 0,
+    "unit": "leafy stem",
+    "form": "leaves",
+    "edibility": "avoid",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Foxglove. A name is a beginning, not permission to eat.",
+      "2": "Do not eat. Cooking does not turn foxglove into food.",
+      "3": "Its leaves can be confused with useful greens; the whole plant is toxic.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Do not eat. Cooking does not turn foxglove into food.",
+    "lookalikeNote": "Its leaves can be confused with useful greens; the whole plant is toxic.",
+    "confidence": "high",
+    "sources": [
+      "https://www.rhs.org.uk/prevention-protection/potentially-harmful-garden-plants"
+    ],
+    "seasons": [
+      "spring",
+      "summer",
+      "fall"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "forest_floor",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 4,
+    "codex": "Foxglove. Do not eat. Cooking does not turn foxglove into food.",
+    "uses": [],
+    "taxon": [
+      "plant",
+      "flower",
+      "foxglove"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "poison_hemlock",
+    "name": "Poison hemlock",
+    "scientific": "Conium maculatum",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 0,
+    "unit": "leafy stem",
+    "form": "leaves",
+    "edibility": "avoid",
+    "description": "a leafy plant among the undergrowth",
+    "knowledgeLevels": {
+      "1": "Poison hemlock. A name is a beginning, not permission to eat.",
+      "2": "Do not eat or taste any part. This is a deadly poisonous plant.",
+      "3": "Umbellifer leaves and white flower clusters do not distinguish edible plants from hemlock.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Do not eat or taste any part. This is a deadly poisonous plant.",
+    "lookalikeNote": "Umbellifer leaves and white flower clusters do not distinguish edible plants from hemlock.",
+    "confidence": "high",
+    "sources": [
+      "https://www.rhs.org.uk/garden-inspiration/plants-we-love/poisonous-plants"
+    ],
+    "seasons": [
+      "spring",
+      "summer"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "creek",
+      "trail_edge"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 4,
+    "codex": "Poison hemlock. Do not eat or taste any part. This is a deadly poisonous plant.",
+    "uses": [],
+    "taxon": [
+      "plant",
+      "flower",
+      "poison_hemlock"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  },
+  {
+    "id": "yew",
+    "name": "Yew",
+    "scientific": "Taxus baccata",
+    "biomes": [
+      "eu_broadleaf"
+    ],
+    "caloriesPerUnit": 0,
+    "unit": "fruiting sprig",
+    "form": "berries",
+    "edibility": "avoid",
+    "description": "a fruiting plant along the woodland edge",
+    "knowledgeLevels": {
+      "1": "Yew. A name is a beginning, not permission to eat.",
+      "2": "Do not eat. Needles and seeds are highly toxic; this game treats the whole sprig as unsafe.",
+      "3": "The fleshy covering does not make the seed inside safe.",
+      "4": "Read the season and habitat. Keep this species separate from lookalikes."
+    },
+    "preparation": "Do not eat. Needles and seeds are highly toxic; this game treats the whole sprig as unsafe.",
+    "lookalikeNote": "The fleshy covering does not make the seed inside safe.",
+    "confidence": "high",
+    "sources": [
+      "https://www.rhs.org.uk/plants/yew"
+    ],
+    "seasons": [
+      "fall",
+      "winter"
+    ],
+    "spoilageDays": 2,
+    "tileAffinity": [
+      "grove",
+      "ruin"
+    ],
+    "waterContent": "high",
+    "idDifficulty": 4,
+    "codex": "Yew. Do not eat. Needles and seeds are highly toxic; this game treats the whole sprig as unsafe.",
+    "uses": [],
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "yew"
+    ],
+    "regions": [
+      "eu_temperate"
+    ]
+  }
 ]

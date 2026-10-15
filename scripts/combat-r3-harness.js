@@ -46,6 +46,7 @@ delete global.window; // default: runtime takes the sync combat path
 
 async function newCombatReadyGame() {
   const Game = globalThis.Scattering.Game;
+  Game.debugRegion = 'na_eastern_woodlands'; // synthetic woodland fights
   await Game.init();
   Game.genRoster('Breaker');
   Game.newGame('Breaker', null, Game.generatedRoster[0].id);

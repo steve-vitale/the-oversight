@@ -8,8 +8,11 @@ const T = K.reporter('campaigner');
   const meal = n => ({ name: 'Prepared campaign meals', units: n, kcalEach: 1000, foodKind: 'plant', foodState: 'cooked', safe: true, edible: true, kg: 0.01, spoilDay: 9999 });
   G.state.titans = { omens: { finale: { stage: 2, day: s.day } }, musters: {}, slain: {}, cast: null };
   const villages = G.state.otherVillages, links = G.hierarchyState(); links.length = 0;
-  for (const v of villages) {
-    G.genVillageRoster(v); v.opinion = 30;
+  // Prepared 5/6/6-adult force; generated ages are not the behavior under test.
+  for (const [i, v] of villages.entries()) {
+    G.genVillageRoster(v); v.roster = v.roster.slice(0, i === 0 ? 5 : 6);
+    for (const r of v.roster) { r.age = 35; r.alive = true; }
+    v.opinion = 30;
     links.push({ primary: 'haven', subordinate: v.id, status: 'active', trust: 90, arrears: 0, theirSpeaker: { id: v.roster.find(r => r.age >= 18).id, name: 'Speaker' } });
   }
   const relationships = JSON.stringify(links);

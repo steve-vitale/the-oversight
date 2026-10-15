@@ -80,5 +80,80 @@
    "fog",
    "storm"
   ]
- }
+ },
+  {
+    "id": "eu_broadleaf",
+    "name": "European broadleaf and hedgerows",
+    "description": "Mixed broadleaf woods, old fields and river margins. Familiar-looking greens can still be the wrong species.",
+    "forageTable": {
+      "dandelion": 4,
+      "cattail": 4,
+      "blackberry": 5,
+      "chickweed": 3,
+      "lambs_quarters": 3,
+      "purslane": 3,
+      "yarrow": 1,
+      "plantain_leaf": 3,
+      "burdock": 3,
+      "stinging_nettle": 3,
+      "european_hazelnut": 5,
+      "beech_nut": 3,
+      "pedunculate_acorn": 4,
+      "sloe": 3,
+      "rosehip": 3,
+      "hawthorn_berry": 3,
+      "european_elderberry": 3,
+      "crab_apple": 3,
+      "european_wild_cherry": 3,
+      "common_sorrel": 3,
+      "wild_garlic": 3,
+      "garlic_mustard": 3,
+      "european_wood_sorrel": 3,
+      "red_clover": 3,
+      "bilberry": 3,
+      "european_wild_strawberry": 3,
+      "foxglove": 1,
+      "poison_hemlock": 1,
+      "yew": 1
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "seasons": {
+      "fall": {
+        "days": 75,
+        "note": "Harvest season. Nuts, persimmons, last greens. Fatten up."
+      },
+      "spring": {
+        "days": 80,
+        "note": "Greens return. Hungry season ends — if you make it."
+      },
+      "summer": {
+        "days": 95,
+        "note": "Berries, heat, snakes. Water is everywhere; food takes work."
+      },
+      "winter": {
+        "days": 115,
+        "note": "The boss. Nuts and stored food or nothing. Game gets bold."
+      }
+    },
+    "weather": [
+      "showers",
+      "overcast",
+      "clear",
+      "frost"
+    ],
+    "hazards": [
+      "toxic lookalikes",
+      "damp winters",
+      "seasonal food gaps"
+    ]
+  }
 ]

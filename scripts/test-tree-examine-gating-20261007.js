@@ -47,6 +47,7 @@ const ORDER = [
 for (const f of ORDER) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 
 const says = [];
 const results = [];

@@ -45,6 +45,7 @@ function knownVillage(Game) {
 async function runSeed(seed) {
   console.log(`seed ${seed}:`);
   const { Game } = await loadGame({ seed, mode: 'test-peer-rekindle', fullTelemetry: false });
+  Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
   await setupGame(Game);
   const said = saidLines(Game);
 
@@ -57,6 +58,7 @@ async function runSeed(seed) {
   let linkId = null;
   try {
     const r = Game.proposeLink(v1.id);
+    if (r === 'counter') Game.answerCounter('accept'); // play a real middle-band offer
     const links = Game.hierarchyState().filter(l => l.status === 'active');
     linkId = links.length ? links[links.length - 1].id : null;
   } catch (e) { check('proposeLink ran', false, e.message); return; }

@@ -63,6 +63,7 @@ const FILES = ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/e
 for (const f of FILES) { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log('EVAL FAIL', f, e.message); process.exit(2); } }
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 const said = [];
 Game.say = (m) => { said.push(String(m)); };
 Game.sysSay = () => {};

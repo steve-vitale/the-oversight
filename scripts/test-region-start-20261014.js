@@ -82,7 +82,8 @@ async function main() {
   ok(regionStart().why === 'random', 'second run: why=random', JSON.stringify(regionStart()));
   const seen = {};
   for (let i = 0; i < 60; i++) { const r = Game.pickLandingRegion(FX); seen[r.id] = (seen[r.id] || 0) + 1; }
-  ok(seen[FX] > 0 && seen.na_eastern_woodlands > 0 && Object.keys(seen).length === 2, 'random picks cover both playable regions', JSON.stringify(seen));
+  const playableIds = Game.playableRegions().map(r => r.id);
+  ok(playableIds.every(id => seen[id] > 0) && Object.keys(seen).length === playableIds.length, 'random picks cover every playable region, including the fixture', JSON.stringify(seen));
   ok(Game._landingWhy.why === 'random', 'pickLandingRegion reports random');
   wipeDevice();
   _store['scattering-save-v1-someone-123'] = '{}';

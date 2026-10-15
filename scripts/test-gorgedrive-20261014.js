@@ -39,11 +39,11 @@ function havenTile(Game) {
 }
 function injectLingering(Game) {
   const { x: hx, y: hy } = havenTile(Game);
-  // clear other entities on the haven tile so the test's linkage asserts
+  // clear other entities in the gorging ring so the test's linkage asserts
   // are unambiguous (test setup, documented)
   const wms = Game.worldMonsters();
   for (let i = wms.length - 1; i >= 0; i--) {
-    if (wms[i].tx === hx && wms[i].ty === hy) wms.splice(i, 1);
+    if (Math.max(Math.abs(wms[i].tx - hx), Math.abs(wms[i].ty - hy)) <= 1) wms.splice(i, 1);
   }
   const m = {
     id: 'cancellation', tx: hx, ty: hy, mx: 4, my: 4, size: 1,
@@ -62,6 +62,7 @@ function dayHash(Game) {
 }
 async function runHashed(policy, seed, days) {
   const { Game } = await loadGame({ seed, mode: 'gorge-test', fullTelemetry: false });
+  Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
   await setupGame(Game);
   const hashes = [];
   const p = Object.assign({}, policy);
@@ -94,6 +95,7 @@ async function main() {
   console.log('PART 1 — RED (gate off): no engagement, pristine gorge beat');
   await withEnv('GORGEDRIVE', undefined, async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
+    Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
     await setupGame(Game);
     await quietLog(() => runDays(Game, gd.leadfeast, { days: 25 }));
     const ent = injectLingering(Game);
@@ -126,6 +128,7 @@ async function main() {
   console.log('PART 3 — GREEN (gate on): honest engagement, gorge stops');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
+    Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
     await setupGame(Game);
     await quietLog(() => runDays(Game, gd.leadfeast, { days: 25 }));
     console.log(`  info: day=${gday(Game)} systemArrived=${!!Game.state.systemArrived} codexUnlocked=${!!Game.state.scholar.codexUnlocked}`);
@@ -171,10 +174,17 @@ async function main() {
       ok(Game.map.px === ent.tx && Game.map.py === ent.ty, 'GREEN: scholar marched to the monster tile first');
       // harness resolution path (sim-harness driveContests end-block)
       Game.pendingEncounter = false; Game.pendingMonsterId = null;
+      // Contact scene: macro travel can leave the bearer at a far map edge.
+      // Put this prepared fight in reach so automatic disengagement cannot
+      // resolve it before the wiring assertion.
+      Game.state.scholar.mx = ent.mx; Game.state.scholar.my = Math.min(8, ent.my + 1);
       Game.startCombat('cancellation');
       ok(Game.tbfight && !Game.tbfight.over, 'GREEN: real player combat started (tbfight live)');
       ok(!Game.worldMonsters().includes(ent), 'GREEN: lingering entity removed from world at fight start');
-      Game.tbEnd('fled');
+      // Prepared public damage finishes the contact. Fleeing honestly lets
+      // the monster return; it does not prove the gorge stopped.
+      const foe = Game.tbfight.fighters.find(f => f.kind === 'monster' && f.alive);
+      Game.tbDamage(foe.key, foe.hp + 1, 'prepared finish', 'p'); Game.tbEndCheck();
       ok(!Game.tbfight || Game.tbfight.over, 'GREEN: fight ended');
       // the gorge beat is now silent
       Game.havenGrowthDaily();
@@ -188,6 +198,7 @@ async function main() {
   console.log('PART 3b — wrapper invokes the layer when ON (drift-robust)');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
+    Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
     await setupGame(Game);
     await quietLog(() => runDays(Game, gd.leadfeast, { days: 25 }));
     try {
@@ -223,6 +234,7 @@ async function main() {
   console.log('PART 4 — JUDGMENT gates');
   await withEnv('GORGEDRIVE', '1', async () => {
     const { Game } = await loadGame({ seed: 11, mode: 'gorge-test', fullTelemetry: false });
+    Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
     await setupGame(Game);
     await quietLog(() => runDays(Game, gd.leadfeast, { days: 25 }));
     // table sanctity

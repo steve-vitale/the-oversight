@@ -53,6 +53,7 @@ function pinPantry(Game, kcal) {
 
 async function buildLink({ trust }) {
   const { Game } = await loadGame({ seed: 42, mode: 'renegans-proof' });
+  Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
   await setupGame(Game);
   Game.state.otherVillages = (Game.state.otherVillages || []).concat([
     { id: 'dryv', name: 'Dryfield', pantryKcal: 0, population: 0, day: 0, roster: [] },
@@ -100,17 +101,20 @@ async function main() {
     const tStaged = trustOf(Game);
     ok('R2-haircut-applied', tStaged === 16, `trust 24 -> ${tStaged} (-8 succession haircut)`);
     const ctx = {};
+    let expiryCost = null;
     for (let d = 11; d <= 18; d++) { // 8 days: the beat expires at day 17 unanswered
       Game.state.scholar.day = d;
       pinPantry(Game, 15000);
       fourthlink.daily(Game, ctx); // the baseline policy — never answers
+      const pendingBefore = beatOf(Game), trustBeforeExpiry = trustOf(Game);
       Game._renegotiationTick();
+      if (pendingBefore && !beatOf(Game)) expiryCost = trustBeforeExpiry - trustOf(Game);
     }
     const notes = renegNotes(Game).join(' | ');
     ok('R2-baseline-lets-expire', beatOf(Game) == null && /silence answered/i.test(notes),
       'beat expired unanswered; engine said the silence answered');
     const tEnd = trustOf(Game);
-    ok('R2-expiry-costs-6', tEnd === 10, `trust 16 -> ${tEnd} (-6 expiry)`);
+    ok('R2-expiry-costs-6', expiryCost === 6, `expiry debit=${expiryCost}; trust after other daily actions=${tEnd}`);
     ok('R2-no-answer-fired', !/met grief with grain|speaker rode out/i.test(notes), 'no answer fiction — leadcourt never clicked it');
   }
 

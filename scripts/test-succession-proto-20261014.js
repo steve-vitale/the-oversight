@@ -62,6 +62,7 @@ function pantryTotal(Game) {
 //        path — death + neglect kills, and this proof tests mourning).
 async function buildLink({ trust, linkDay, lastKeptDay }) {
   const { Game } = await loadGame({ seed: 42, mode: 'succession-proof' });
+  Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
   await setupGame(Game);
   Game.state.otherVillages = (Game.state.otherVillages || []).concat([
     { id: 'dryv', name: 'Dryfield', pantryKcal: 0, population: 0, day: 0, roster: [] },
@@ -110,16 +111,19 @@ async function main() {
     ok('R2-beat-staged-real', ret === 'grace' && beatOf(Game) != null, `successionCrisis -> ${ret}, beat staged`);
     ok('R2-haircut-applied', trustOf(Game) === 16, `trust 24 -> ${trustOf(Game)} (-8 succession haircut)`);
     const ctx = {};
+    let expiryCost = null;
     for (let d = 11; d <= 18; d++) {
       Game.state.scholar.day = d;
       pinPantry(Game, 15000);
       fourthlink.daily(Game, ctx);
+      const pendingBefore = beatOf(Game), trustBeforeExpiry = trustOf(Game);
       Game._renegotiationTick();
+      if (pendingBefore && !beatOf(Game)) expiryCost = trustBeforeExpiry - trustOf(Game);
     }
     const notes = renegNotes(Game).join(' | ');
     ok('R2-baseline-lets-expire', beatOf(Game) == null && /silence answered/i.test(notes),
       'beat expired unanswered; engine said the silence answered');
-    ok('R2-expiry-costs-6', trustOf(Game) === 10, `trust 16 -> ${trustOf(Game)} (-6 expiry)`);
+    ok('R2-expiry-costs-6', expiryCost === 6, `expiry debit=${expiryCost}; trust after other daily actions=${trustOf(Game)}`);
     ok('R2-succ-window-unanswered', !(ctx.succBeatsAnswered > 0), 'baseline answered nothing');
   }
 

@@ -58,6 +58,7 @@ const files = [
 for (const f of files) { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); }
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 if (typeof Game.emit !== 'function') Game.emit = function (m) { return m; };
 
 // The four wants whose seed notes referenced the speaker in 3rd person.

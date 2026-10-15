@@ -37,6 +37,10 @@ function withGate(name, val, fn) {
 
 function havenFight(Game, outside) {
   K.newRun(Game);
+  // Test walking escape, not a generated starting ability that can end the fight.
+  Game.state.scholar.abilities = [];
+  Game.state.scholar.backgroundAbilities = [];
+  Game.state.codex.skills = {};
   Game.map.px = 4; Game.map.py = 4; // the Haven node
   if (outside) {
     Game.state.scholar.insideHaven = false;

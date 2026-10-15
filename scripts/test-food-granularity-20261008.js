@@ -48,6 +48,7 @@ function check(name, cond, extra) {
 }
 
 function freshGame(Game) {
+  Game.debugRegion = 'na_eastern_woodlands'; // fixed meal/food fixture
   Game.genRoster('Breaker');
   const rid = Game.generatedRoster[0].id;
   Game.newGame('Breaker', null, rid);

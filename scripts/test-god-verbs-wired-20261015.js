@@ -86,6 +86,9 @@ const T = K.reporter('test-god-verbs-wired-20261015');
     clearGods();
     T.ok('player ascends through the ceremony', ascendPlayer('one_person_army') === 'one_person_army');
     const { f, m, p } = arena({ px: 3, py: 4, mx: 4, my: 4 });
+    // Initiative may resolve a setup hit before K.fight positions the arena.
+    // This case begins explicitly unwounded; the subsequent public hits fund it.
+    s.fightDamageTaken = 0;
     const bar = Game.activatableAbilities().find(a => a.id === 'god.turn_the_pain');
     T.ok('the verb is on the fight action bar', !!bar);
     T.ok('before any wound it is refused (nothing to give back)', bar && bar.available === false);

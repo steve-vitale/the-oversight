@@ -31,8 +31,11 @@ async function main() {
   // wipe background knowledge so the payment plant is the ONLY currency.
   G.state.codex.plants = {};
   const rawPool = G.traderKnowledge(vid, true);
-  const payPid = G.data.plants.map(p => p.id).find(id => !rawPool.includes(id));
-  G.identifyPlant(payPid, 'observation');
+  const knownToTrader = new Set([...rawPool, ...G.plantsKnownBy(vid)]);
+  const payPid = G.data.plants.map(p => p.id).find(id => !knownToTrader.has(id));
+  // Prepared private knowledge: identifying it beside this trader can teach
+  // the watching trader immediately, leaving nothing new to pay with.
+  G.state.codex.plants[payPid] = { level: 1, by: 'prepared private observation' };
   v.trust[vid] = 10; // price = 'knowledge'
   const w = G.villagerWrongAbout(vid); delete w[pid]; delete w[pid2]; // no counterfeit
 

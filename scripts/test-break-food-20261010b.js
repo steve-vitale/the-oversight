@@ -56,6 +56,7 @@ for (const f of FILES) {
 }
 delete global.window; // drop the stub: runtime checks take the sync path without window
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {

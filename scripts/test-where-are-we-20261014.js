@@ -66,6 +66,7 @@ async function main() {
     if (!keepStart) Game.state.scholar.placeKnown = { region: 0, season: 0 };
   };
   const start0 = async () => {
+    Game.debugRegion = 'na_eastern_woodlands'; // fixed conversation tier fixture
     await quietLog(async () => {
       Game.genRoster('Columbus, Ohio');
       Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -73,7 +74,9 @@ async function main() {
     const rc = Game.state.village.rosterChars;
     const ids = others().filter(id => rc[id]);
     for (const t of [2, 1, 0]) {
+      let tierAttempts = 0;
       while (byTier(t).length < 2) {
+        if (++tierAttempts > ids.length * 3) throw new Error('cannot prepare familiarity tier ' + t + ' in ' + Game.state.region);
         const counts = { 2: byTier(2).length, 1: byTier(1).length, 0: byTier(0).length };
         const donor = ids.find(id => counts[Game.placeTellTier(id)] > 2);
         if (!donor) throw new Error('roster too small for the tier fixture');

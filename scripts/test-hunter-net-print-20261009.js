@@ -52,6 +52,7 @@ const ORDER = ['src/js/engine/state.js','src/js/engine/modifiers.js','src/js/eng
 for (const f of ORDER) eval(fs.readFileSync(path.join(ROOT, f), 'utf8'));
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 
 const fails = [];
 function check(name, cond, detail) {

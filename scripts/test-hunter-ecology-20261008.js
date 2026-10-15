@@ -32,6 +32,7 @@ global.window = global;
 ].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // US fish stock fixture
 const realRand = Math.random;
 let pass = 0, fail = 0;
 const ok = (n, c, d) => { if (c) { pass++; } else { fail++; console.log('FAIL  ' + n + (d ? ' — ' + d : '')); } };

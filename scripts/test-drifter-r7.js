@@ -72,6 +72,7 @@ for (const f of LIST) {
 }
 delete global.window;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 Game.data = global.SCATTER_DATA;
 Game.checkEncounter = () => {}; // no monster noise in travel tests
 const realCheckAnimals = Game.checkAnimals.bind(Game);

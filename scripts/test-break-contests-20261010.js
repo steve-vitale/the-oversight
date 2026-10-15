@@ -78,6 +78,7 @@ for (const f of LIST) {
 }
 delete global.window; // sync combat path for the harness
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 Game.data = global.SCATTER_DATA;
 
 // ---------- log capture ----------

@@ -42,6 +42,7 @@ global.document = { getElementById: () => null, createElement: () => ({ textCont
 order.forEach(f => { try { eval(fs.readFileSync(path.join(ROOT, f), 'utf8')); } catch (e) { console.log(`LOAD FAIL ${f}: ${e.message}`); } });
 delete global.window; delete global.document;
 const Game = globalThis.Scattering.Game;
+Game.debugRegion = 'na_eastern_woodlands'; // explicit woodland scene fixture
 
 const fails = [];
 function check(name, cond, detail) {

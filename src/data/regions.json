@@ -1636,7 +1636,7 @@
     "climate": {
       "calendar": "temperate_4"
     },
-    "status": "stub",
+    "status": "playable",
     "originTags": [
       "england",
       "france",
@@ -1650,7 +1650,304 @@
       "eu_mediterranean",
       "eurasia_taiga"
     ],
-    "covers": "Western/Central Europe"
+    "covers": "Western/Central Europe",
+    "biome": "eu_broadleaf",
+    "gen": {
+      "creeks": 1,
+      "wetlands": 3,
+      "groveBlobs": 2,
+      "groveSize": 4,
+      "meadowSize": 5,
+      "thickets": 5,
+      "trailLines": 1,
+      "ruinMaxDist": 3,
+      "lootMult": 1,
+      "stockMult": 1
+    },
+    "landingVariants": [
+      "eu_hedgerow",
+      "eu_forest_village",
+      "eu_river_mill"
+    ],
+    "lifeseedRegions": [
+      "germany",
+      "poland",
+      "ukraine",
+      "ireland"
+    ],
+    "fauna": {
+      "animals": [
+        "wild_boar",
+        "european_rabbit",
+        "brown_hare",
+        "red_squirrel",
+        "roe_deer",
+        "red_deer",
+        "red_fox",
+        "european_badger",
+        "eurasian_beaver",
+        "wood_pigeon",
+        "mallard",
+        "brown_trout",
+        "european_perch",
+        "roach"
+      ],
+      "fish": [
+        "brown_trout",
+        "european_perch",
+        "roach"
+      ],
+      "predators": [
+        "brown_bear"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "wild_boar": 0.25,
+          "brown_bear": 0.35
+        }
+      },
+      "density": 1,
+      "variants": {
+        "eu_forest_village": {
+          "add": [
+            "brown_bear"
+          ]
+        }
+      },
+      "_note": "Continental forest hamlet alone adds brown bear. Shared wild boar is the same Eurasian species. Numeric yields and parasite chances retain existing game tuning, not measured regional prevalence."
+    },
+    "flora": {
+      "trees": [
+        {
+          "id": "oak",
+          "roll": 0.3,
+          "nut": "pedunculate_acorn"
+        },
+        {
+          "id": "beech",
+          "roll": 0.3,
+          "nut": "beech_nut"
+        },
+        {
+          "id": "hazel",
+          "roll": 0.3,
+          "nut": "european_hazelnut"
+        },
+        {
+          "id": "birch",
+          "roll": 0.4
+        },
+        {
+          "id": "pine",
+          "roll": 0.4
+        },
+        {
+          "id": "ash"
+        }
+      ],
+      "bushes": [
+        "blackberry",
+        "sloe",
+        "rosehip",
+        "hawthorn_berry",
+        "european_elderberry",
+        "bilberry"
+      ],
+      "commonTrees": [
+        "oak",
+        "birch"
+      ],
+      "bounty": {
+        "deep grove": [
+          "european_hazelnut",
+          "The coppice still drops a harvest."
+        ],
+        "orchard ruin": [
+          "crab_apple",
+          "Small sour fruit where a garden used to be."
+        ],
+        "creek meadow": [
+          "cattail",
+          "The reed bed follows the slow water."
+        ],
+        "edge thicket": [
+          "blackberry",
+          "A sunny gap in the hedge."
+        ]
+      }
+    },
+    "people": {
+      "language": "german",
+      "ruins": [
+        "A stone bakery, its oven cold. The wiring is gone, but the bread peel still leans beside the door.",
+        "The mill office has a flood mark on the wall. A pencilled ledger ends halfway through a column.",
+        "A village school with coats still hanging low enough for children. The Burn spared the hooks."
+      ],
+      "scavenge": [
+        {
+          "id": "can_beans",
+          "name": "Tinned white beans",
+          "kcal": 650,
+          "kg": 0.4,
+          "text": "A pantry staple that outlasted the shelves."
+        },
+        {
+          "id": "can_corn",
+          "name": "Tinned peas",
+          "kcal": 550,
+          "kg": 0.4,
+          "text": "A dented tin from a village shop. The seal held."
+        },
+        {
+          "id": "can_soup",
+          "name": "Canned soup",
+          "kcal": 450,
+          "kg": 0.35,
+          "text": "Chicken soup. Tastes like before."
+        },
+        {
+          "id": "jar_peaches",
+          "name": "Jarred peaches",
+          "kcal": 700,
+          "kg": 0.5,
+          "text": "Home-canned. Whoever sealed this knew what they were doing."
+        },
+        {
+          "id": "med_antibiotics",
+          "name": "Antibiotics (amoxicillin)",
+          "kcal": 0,
+          "kg": 0.1,
+          "rare": true,
+          "medType": "antibiotics",
+          "doses": 3,
+          "text": "A rattling bottle, seal intact. For bacterial infections. Read the label."
+        },
+        {
+          "id": "med_antiparasitic",
+          "name": "Antiparasitic (mebendazole)",
+          "kcal": 0,
+          "kg": 0.1,
+          "rare": true,
+          "medType": "antiparasitic",
+          "doses": 3,
+          "text": "Foil blister pack, unbroken. For worms and gut parasites. Only for those."
+        },
+        {
+          "id": "eu_oat_biscuits",
+          "name": "Oat biscuits",
+          "kcal": 800,
+          "kg": 0.3,
+          "text": "A dry tin from the mill kitchen. The lid still fits."
+        },
+        {
+          "id": "eu_apple_preserve",
+          "name": "Apple preserve",
+          "kcal": 450,
+          "kg": 0.3,
+          "text": "Sealed glass, a handwritten date and a layer of sugar."
+        },
+        {
+          "id": "eu_sardine_tin",
+          "name": "Tinned sardines",
+          "kcal": 500,
+          "kg": 0.2,
+          "text": "Packed in oil. The tin is small enough to pocket."
+        },
+        {
+          "id": "eu_lentil_tin",
+          "name": "Tinned lentils",
+          "kcal": 600,
+          "kg": 0.4,
+          "text": "A label in two languages. Dinner needs neither of them."
+        }
+      ],
+      "pantry": [
+        {
+          "name": "Dried white beans",
+          "rawKcal": 150,
+          "cookedKcal": 300,
+          "kcalEach": 150,
+          "units": 80,
+          "spoilDays": 365,
+          "safe": false,
+          "kg": 0.5,
+          "needsCooking": true,
+          "unit": "scoop"
+        },
+        {
+          "name": "Pearl barley",
+          "rawKcal": 200,
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "units": 65,
+          "spoilDays": 365,
+          "safe": false,
+          "kg": 0.5,
+          "needsCooking": true,
+          "unit": "scoop"
+        },
+        {
+          "name": "Tinned vegetable soup",
+          "kcalEach": 250,
+          "units": 30,
+          "spoilDays": 365,
+          "safe": true,
+          "kg": 0.4,
+          "unit": "can"
+        },
+        {
+          "name": "Dried meat",
+          "kcalEach": 400,
+          "units": 22,
+          "spoilDays": 30,
+          "safe": true,
+          "kg": 0.3,
+          "unit": "strip"
+        },
+        {
+          "name": "Hazelnut kernels",
+          "kcalEach": 170,
+          "units": 35,
+          "spoilDays": 60,
+          "safe": true,
+          "kg": 0.1,
+          "unit": "handful"
+        }
+      ],
+      "villageNames": [
+        "Millbank",
+        "The Coppice",
+        "Stonebridge",
+        "Hedge End",
+        "The Old Orchard",
+        "Upper Ford"
+      ]
+    },
+    "challenge": {
+      "id": "eu_hungry_gap",
+      "name": "The Hungry Gap",
+      "description": "Stored mast runs low before spring growth is ready. Reserve food is work done ahead of time.",
+      "mechanics": [
+        "seasonal_scarcity",
+        "preservation"
+      ],
+      "status": "scaffolded"
+    },
+    "monsters": [
+      {
+        "id": "hushwolf",
+        "name": "The Hedge Listener",
+        "description": "The quiet shape on the other side of every hedge.",
+        "status": "scaffolded"
+      },
+      {
+        "id": "belltoad",
+        "name": "The Mill Bell",
+        "description": "It rings from the flooded wheel pit after the rope has rotted away.",
+        "status": "scaffolded"
+      }
+    ],
+    "_contentNote": "Forage/fauna/landings use the regional engine. Challenge and named monster skin proposals are authored scaffolding; runtime region challenge/skin wiring remains roadmap item 6. Not every listed species lives in every real European locality."
   },
   {
     "id": "eu_mediterranean",

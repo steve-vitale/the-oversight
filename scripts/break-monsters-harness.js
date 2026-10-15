@@ -57,6 +57,7 @@ function loadGame() {
 async function freshGame(seed) {
   seedRng(seed);
   const Game = loadGame();
+  Game.debugRegion = 'na_eastern_woodlands'; // synthetic woodland fights
   await Game.init();
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);

@@ -45,7 +45,7 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 | **Keepsakes.** Compete for accessory slots, grow only while worn, L0 to L3, thread-home clues | `keepsakes.js` | `COHERENCE-SPINE.md` |
 | **The Table.** Haven option from day 90, locks on entry, the ending key, build-aware beats, composed endings (path final plus one coda) | `table*.js`, `endingKey.js`, `table-endings.json`, `table-beats.json` | `docs/TABLE.md` |
 | **Overtime, THE NETWORK, THE HOSTS.** Waiting costs; the map-spanning key; the best human ending | `overtime.js`, `network-campaign.js` | `docs/TABLE.md` |
-| **World regions engine.** 20 regions (1 playable), first run lands at your origin, real-date seasons, wet/dry calendars, kin placed across the world, the Taken off-world | `regions.json`, `climates.json`, `world.js` | `docs/WORLD-REGIONS.md` |
+| **World regions engine.** 20 regions (2 playable), first run lands at your origin, real-date seasons, wet/dry calendars, kin placed across the world, the Taken off-world | `regions.json`, `climates.json`, `world.js` | `docs/WORLD-REGIONS.md` |
 | **Where are we.** Season and region learned through conversation; the header line | `whereAreWe.js`, `climates.json` `talk` | `CONVERSATIONS.md` |
 | **Sim bot.** `capable` flees, uses abilities, takes the seat, and sweeps | `scripts/policies/capable.js` | `docs/SIMULATING.md` |
 | **Sprites audited** (294; 28 redrawn, 19 plants added) | `sprites.js` | `sprite-audit.md` |
@@ -253,6 +253,19 @@ Steve's latest steering, not a supersession of his broader roadmap.
   `confidence` and `sources` fields.
 - **Done when:** `node scripts/validate-regions.js` shows it playable, and
   `REGION=<id> node scripts/region-smoke.js` passes.
+
+**Europe progress (2026-10-15):** `eu_temperate` is now selectable and
+passes the playable-region data contract: 29 plants (19 new with their own
+sprites), regional fauna including 3 fish, 6 trees, 3 landings, regional
+pantry/ruins/scavenge and climate voice. The 16-seed, 60-day capable screen
+has 15 villages surviving; the matched woodland control has 16. Berlin and
+Lagos origin screens each survive 3/3. This is a playable content slice,
+not full regional parity: the Hungry Gap challenge and two monster skins
+remain explicitly scaffolded until their roadmap runtime wiring. Seed 777's
+day-40 loss, global-pool RNG shifts, remaining species/art accuracy and
+all-playstyle survival are open. See
+`evidence/2026-10-15/europe-region-audit.md`. Continue the other four wave-1
+regions and keep the playstyle audit above active.
 
 ### 2. Table ending codas (64 left)
 - **Spec:** `docs/TABLE.md`, "Endings by build". Write in this order:

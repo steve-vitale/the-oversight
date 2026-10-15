@@ -5,7 +5,13 @@ const T = K.reporter('coalition-recruitment');
 (async () => {
   const G = await K.load({ seed: 7 }); K.newRun(G);
   const villages = G.state.otherVillages;
-  for (const v of villages) { G.genVillageRoster(v); v.opinion = 30; }
+  // Prepared capacity case: 5/6/6 living adults, independent of seed-driven
+  // background knowledge consuming a different number of RNG draws.
+  for (const [i, v] of villages.entries()) {
+    G.genVillageRoster(v); v.roster = v.roster.slice(0, i === 0 ? 5 : 6);
+    for (const r of v.roster) { r.age = 35; r.alive = true; }
+    v.opinion = 30;
+  }
   const links = G.hierarchyState(); links.length = 0;
   for (const v of villages) links.push({ primary: 'haven', subordinate: v.id, status: 'active', trust: 90, arrears: 0, theirSpeaker: { id: v.roster.find(r => r.age >= 18).id, name: 'Speaker' } });
   const st = G.state.titans = { omens: { finale: { stage: 2 }, herald: { stage: 2 } }, musters: {}, slain: {}, cast: null };
