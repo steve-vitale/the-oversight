@@ -1,0 +1,1179 @@
+{
+ "generated": "2026-10-15T02:39:26.093Z",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "days": 180,
+ "substrate": "leadfeast+FEASTSCALE_R13=1",
+ "diagnostic_go": ">=80% of post-unlock wild-channel villager combat deaths tile-attributed, plus channel x tile breakdown answering #256",
+ "agg": {
+  "n": 8,
+  "unlockers": 5,
+  "postUnlockVillagerCombatDeaths": 14,
+  "paired": 14,
+  "unmatched": 0,
+  "wildPairs": 11,
+  "wildAttributed": 11,
+  "medianDays": 109,
+  "days": [
+   33,
+   83,
+   114,
+   93,
+   153,
+   75,
+   180,
+   109
+  ],
+  "national": 4,
+  "table": 2,
+  "wins": 0,
+  "wave5": 5,
+  "wildAttributionRate": 1,
+  "answer256": {
+   "n": 11,
+   "breakdown": {
+    "havenTile_scholarAway": 3,
+    "havenTile_scholarHome": 0,
+    "wildTile_scholarAway": 5,
+    "wildTile_scholarHome": 3
+   },
+   "shareOnHavenTile": 0.273,
+   "shareScholarAway": 0.727,
+   "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+   "assumptionHolds": 3,
+   "verdict": "assumption PARTIAL: 3/11 wild deaths on Haven tile with scholar away"
+  }
+ },
+ "rows": [
+  {
+   "seed": 11,
+   "days": 33,
+   "endReason": "village-lost",
+   "maxUnlocked": 2,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 0,
+   "postUnlockVillagerCombatDeaths": 0,
+   "samplerDeaths": 0,
+   "samplerPostUnlock": 0,
+   "fightsObserved": 20,
+   "pairs": 0,
+   "unmatched": 0,
+   "attribution": {
+    "total": 0,
+    "attributed": 0,
+    "rate": null,
+    "byChannel": {
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 0,
+   "wildAttributed": 0,
+   "wildAttributionRate": null,
+   "answer256": {
+    "n": 0,
+    "breakdown": {
+     "havenTile_scholarAway": 0,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": null,
+    "shareScholarAway": null,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 0,
+    "verdict": "no wild deaths measured — question unanswered"
+   },
+   "channelTile": {},
+   "rows": [],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 22,
+   "days": 83,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 82,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 3,
+   "postUnlockVillagerCombatDeaths": 1,
+   "samplerDeaths": 3,
+   "samplerPostUnlock": 1,
+   "fightsObserved": 110,
+   "pairs": 1,
+   "unmatched": 0,
+   "attribution": {
+    "total": 1,
+    "attributed": 1,
+    "rate": 1,
+    "byChannel": {
+     "raid": {
+      "n": 1,
+      "attributed": 1
+     },
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 0,
+   "wildAttributed": 0,
+   "wildAttributionRate": null,
+   "answer256": {
+    "n": 0,
+    "breakdown": {
+     "havenTile_scholarAway": 0,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": null,
+    "shareScholarAway": null,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 0,
+    "verdict": "no wild deaths measured — question unanswered"
+   },
+   "channelTile": {
+    "raid": {
+     "n": 1,
+     "attributed": 1,
+     "onHavenTile": 1,
+     "wildTile": 0,
+     "scholarAway": 0,
+     "scholarHome": 1
+    }
+   },
+   "rows": [
+    {
+     "death": {
+      "day": 82,
+      "vid": "app_mgpspi6d82",
+      "who": "app_mgpspi6d82",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 22,
+      "day": 82,
+      "vid": "app_mgpspi6d82",
+      "channel": "raid",
+      "monsterId": "eulogy",
+      "wave": 4,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 2,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 0,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 0,
+      "dScholarHaven": 0,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": false,
+      "scholarAtDeathTile": true,
+      "attributed": true
+     }
+    }
+   ],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 33,
+   "days": 114,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 58,
+   "nationalDays": 37,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 8,
+   "postUnlockVillagerCombatDeaths": 6,
+   "samplerDeaths": 8,
+   "samplerPostUnlock": 6,
+   "fightsObserved": 124,
+   "pairs": 6,
+   "unmatched": 0,
+   "attribution": {
+    "total": 6,
+    "attributed": 6,
+    "rate": 1,
+    "byChannel": {
+     "wild": {
+      "n": 5,
+      "attributed": 5
+     },
+     "raid": {
+      "n": 1,
+      "attributed": 1
+     },
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 5,
+   "wildAttributed": 5,
+   "wildAttributionRate": 1,
+   "answer256": {
+    "n": 5,
+    "breakdown": {
+     "havenTile_scholarAway": 1,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 4,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": 0.2,
+    "shareScholarAway": 1,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 1,
+    "verdict": "assumption PARTIAL: 1/5 wild deaths on Haven tile with scholar away"
+   },
+   "channelTile": {
+    "wild": {
+     "n": 5,
+     "attributed": 5,
+     "onHavenTile": 1,
+     "wildTile": 4,
+     "scholarAway": 5,
+     "scholarHome": 0
+    },
+    "raid": {
+     "n": 1,
+     "attributed": 1,
+     "onHavenTile": 1,
+     "wildTile": 0,
+     "scholarAway": 0,
+     "scholarHome": 1
+    }
+   },
+   "rows": [
+    {
+     "death": {
+      "day": 61,
+      "vid": "david_kim",
+      "who": "david_kim",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 61,
+      "vid": "david_kim",
+      "channel": "wild",
+      "monsterId": "editor",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 5
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 5
+      },
+      "scholarTile": {
+       "x": 3,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 79,
+      "vid": "henry_zhang",
+      "who": "henry_zhang",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 79,
+      "vid": "henry_zhang",
+      "channel": "wild",
+      "monsterId": "editor",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 3,
+       "y": 3
+      },
+      "villagerTile": {
+       "x": 3,
+       "y": 3
+      },
+      "scholarTile": {
+       "x": 5,
+       "y": 7
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 4,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 4,
+      "dScholarHaven": 3,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 91,
+      "vid": "app_mgpsphdr422",
+      "who": "app_mgpsphdr422",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 91,
+      "vid": "app_mgpsphdr422",
+      "channel": "wild",
+      "monsterId": "redactor",
+      "wave": 3,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 5
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 5
+      },
+      "scholarTile": {
+       "x": 5,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 97,
+      "vid": "priya_nair",
+      "who": "priya_nair",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 97,
+      "vid": "priya_nair",
+      "channel": "wild",
+      "monsterId": "redactor",
+      "wave": 3,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 3,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 3,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 5
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 99,
+      "vid": "raj_patel",
+      "who": "raj_patel",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 99,
+      "vid": "raj_patel",
+      "channel": "raid",
+      "monsterId": "rerun",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 2,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 0,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 0,
+      "dScholarHaven": 0,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": false,
+      "scholarAtDeathTile": true,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 100,
+      "vid": "sofia_chen",
+      "who": "sofia_chen",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 33,
+      "day": 100,
+      "vid": "sofia_chen",
+      "channel": "wild",
+      "monsterId": "rerun",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 3,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    }
+   ],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 44,
+   "days": 93,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 59,
+   "nationalDays": 17,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 6,
+   "postUnlockVillagerCombatDeaths": 6,
+   "samplerDeaths": 6,
+   "samplerPostUnlock": 6,
+   "fightsObserved": 126,
+   "pairs": 6,
+   "unmatched": 0,
+   "attribution": {
+    "total": 6,
+    "attributed": 6,
+    "rate": 1,
+    "byChannel": {
+     "wild": {
+      "n": 5,
+      "attributed": 5
+     },
+     "raid": {
+      "n": 1,
+      "attributed": 1
+     },
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 5,
+   "wildAttributed": 5,
+   "wildAttributionRate": 1,
+   "answer256": {
+    "n": 5,
+    "breakdown": {
+     "havenTile_scholarAway": 1,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 1,
+     "wildTile_scholarHome": 3
+    },
+    "shareOnHavenTile": 0.2,
+    "shareScholarAway": 0.4,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 1,
+    "verdict": "assumption PARTIAL: 1/5 wild deaths on Haven tile with scholar away"
+   },
+   "channelTile": {
+    "wild": {
+     "n": 5,
+     "attributed": 5,
+     "onHavenTile": 1,
+     "wildTile": 4,
+     "scholarAway": 2,
+     "scholarHome": 3
+    },
+    "raid": {
+     "n": 1,
+     "attributed": 1,
+     "onHavenTile": 1,
+     "wildTile": 0,
+     "scholarAway": 0,
+     "scholarHome": 1
+    }
+   },
+   "rows": [
+    {
+     "death": {
+      "day": 74,
+      "vid": "app_mgpsphc4701",
+      "who": "app_mgpsphc4701",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 74,
+      "vid": "app_mgpsphc4701",
+      "channel": "wild",
+      "monsterId": "herald",
+      "wave": 4,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 3
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 3
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 0,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 76,
+      "vid": "zoe_adams",
+      "who": "zoe_adams",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 76,
+      "vid": "zoe_adams",
+      "channel": "wild",
+      "monsterId": "spoiler",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 3,
+       "y": 5
+      },
+      "villagerTile": {
+       "x": 3,
+       "y": 5
+      },
+      "scholarTile": {
+       "x": 3,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 77,
+      "vid": "owen_smith",
+      "who": "owen_smith",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 77,
+      "vid": "owen_smith",
+      "channel": "wild",
+      "monsterId": "reunion",
+      "wave": 4,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 6,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 6,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 2,
+      "dVillagerScholar": 2,
+      "dMonsterHaven": 2,
+      "dMonsterScholar": 2,
+      "dScholarHaven": 0,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 85,
+      "vid": "devon_okafor",
+      "who": "devon_okafor",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 85,
+      "vid": "devon_okafor",
+      "channel": "raid",
+      "monsterId": "cancellation",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 2,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 0,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 0,
+      "dScholarHaven": 0,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": false,
+      "scholarAtDeathTile": true,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 86,
+      "vid": "fatima_hassan",
+      "who": "fatima_hassan",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 86,
+      "vid": "fatima_hassan",
+      "channel": "wild",
+      "monsterId": "herald",
+      "wave": 4,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 3,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    },
+    {
+     "death": {
+      "day": 93,
+      "vid": "ingrid_vik",
+      "who": "ingrid_vik",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 44,
+      "day": 93,
+      "vid": "ingrid_vik",
+      "channel": "wild",
+      "monsterId": "rerun",
+      "wave": 5,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 2,
+      "monsterTile": {
+       "x": 5,
+       "y": 5
+      },
+      "villagerTile": {
+       "x": 5,
+       "y": 5
+      },
+      "scholarTile": {
+       "x": 4,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 1,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 1,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 0,
+      "onHavenTile": false,
+      "scholarAwayFromHaven": false,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    }
+   ],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 55,
+   "days": 153,
+   "endReason": "village-dead",
+   "maxUnlocked": 3,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 0,
+   "postUnlockVillagerCombatDeaths": 0,
+   "samplerDeaths": 0,
+   "samplerPostUnlock": 0,
+   "fightsObserved": 175,
+   "pairs": 0,
+   "unmatched": 0,
+   "attribution": {
+    "total": 0,
+    "attributed": 0,
+    "rate": null,
+    "byChannel": {
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 0,
+   "wildAttributed": 0,
+   "wildAttributionRate": null,
+   "answer256": {
+    "n": 0,
+    "breakdown": {
+     "havenTile_scholarAway": 0,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": null,
+    "shareScholarAway": null,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 0,
+    "verdict": "no wild deaths measured — question unanswered"
+   },
+   "channelTile": {},
+   "rows": [],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 66,
+   "days": 75,
+   "endReason": "village-lost",
+   "maxUnlocked": 4,
+   "unlockDay5": null,
+   "nationalDays": 0,
+   "tableEver": true,
+   "won": false,
+   "villagerCombatDeaths": 6,
+   "postUnlockVillagerCombatDeaths": 0,
+   "samplerDeaths": 6,
+   "samplerPostUnlock": 0,
+   "fightsObserved": 74,
+   "pairs": 0,
+   "unmatched": 0,
+   "attribution": {
+    "total": 0,
+    "attributed": 0,
+    "rate": null,
+    "byChannel": {
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 0,
+   "wildAttributed": 0,
+   "wildAttributionRate": null,
+   "answer256": {
+    "n": 0,
+    "breakdown": {
+     "havenTile_scholarAway": 0,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": null,
+    "shareScholarAway": null,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 0,
+    "verdict": "no wild deaths measured — question unanswered"
+   },
+   "channelTile": {},
+   "rows": [],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 77,
+   "days": 180,
+   "endReason": "survived",
+   "maxUnlocked": 5,
+   "unlockDay5": 60,
+   "nationalDays": 97,
+   "tableEver": true,
+   "won": false,
+   "villagerCombatDeaths": 1,
+   "postUnlockVillagerCombatDeaths": 0,
+   "samplerDeaths": 1,
+   "samplerPostUnlock": 0,
+   "fightsObserved": 52,
+   "pairs": 0,
+   "unmatched": 0,
+   "attribution": {
+    "total": 0,
+    "attributed": 0,
+    "rate": null,
+    "byChannel": {
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 0,
+   "wildAttributed": 0,
+   "wildAttributionRate": null,
+   "answer256": {
+    "n": 0,
+    "breakdown": {
+     "havenTile_scholarAway": 0,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": null,
+    "shareScholarAway": null,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 0,
+    "verdict": "no wild deaths measured — question unanswered"
+   },
+   "channelTile": {},
+   "rows": [],
+   "unmatchedDeaths": []
+  },
+  {
+   "seed": 88,
+   "days": 109,
+   "endReason": "village-lost",
+   "maxUnlocked": 5,
+   "unlockDay5": 58,
+   "nationalDays": 33,
+   "tableEver": false,
+   "won": false,
+   "villagerCombatDeaths": 2,
+   "postUnlockVillagerCombatDeaths": 1,
+   "samplerDeaths": 2,
+   "samplerPostUnlock": 1,
+   "fightsObserved": 71,
+   "pairs": 1,
+   "unmatched": 0,
+   "attribution": {
+    "total": 1,
+    "attributed": 1,
+    "rate": 1,
+    "byChannel": {
+     "wild": {
+      "n": 1,
+      "attributed": 1
+     },
+     "unpaired": {
+      "n": 0,
+      "attributed": 0
+     }
+    }
+   },
+   "wildPairs": 1,
+   "wildAttributed": 1,
+   "wildAttributionRate": 1,
+   "answer256": {
+    "n": 1,
+    "breakdown": {
+     "havenTile_scholarAway": 1,
+     "havenTile_scholarHome": 0,
+     "wildTile_scholarAway": 0,
+     "wildTile_scholarHome": 0
+    },
+    "shareOnHavenTile": 1,
+    "shareScholarAway": 1,
+    "assumption": "wild deaths happen at Haven (monsterTile==havenTile) while the scholar is away (scholarTile!=havenTile)",
+    "assumptionHolds": 1,
+    "verdict": "assumption CONFIRMED: all wild deaths on Haven tile with scholar away"
+   },
+   "channelTile": {
+    "wild": {
+     "n": 1,
+     "attributed": 1,
+     "onHavenTile": 1,
+     "wildTile": 0,
+     "scholarAway": 1,
+     "scholarHome": 0
+    }
+   },
+   "rows": [
+    {
+     "death": {
+      "day": 106,
+      "vid": "visjoin_103",
+      "who": "visjoin_103",
+      "kind": "villager",
+      "cause": "monster",
+      "player": false
+     },
+     "fight": {
+      "seed": 88,
+      "day": 106,
+      "vid": "visjoin_103",
+      "channel": "wild",
+      "monsterId": "nevermore",
+      "wave": 1,
+      "outcome": "vDie",
+      "intent": "learn",
+      "rounds": 1,
+      "monsterTile": {
+       "x": 4,
+       "y": 4
+      },
+      "villagerTile": {
+       "x": 4,
+       "y": 4
+      },
+      "scholarTile": {
+       "x": 3,
+       "y": 4
+      },
+      "havenTile": {
+       "x": 4,
+       "y": 4
+      },
+      "dVillagerHaven": 0,
+      "dVillagerScholar": 1,
+      "dMonsterHaven": 0,
+      "dMonsterScholar": 1,
+      "dScholarHaven": 1,
+      "onHavenTile": true,
+      "scholarAwayFromHaven": true,
+      "scholarAwayFromDeath": true,
+      "scholarAtDeathTile": false,
+      "attributed": true
+     }
+    }
+   ],
+   "unmatchedDeaths": []
+  }
+ ]
+}
