@@ -17,7 +17,20 @@
 // boilerplate. Seeded RNG before eval (loadGame). Never stubs Game.save.
 'use strict';
 const { loadGame, setupGame, runDays } = require('./sim-harness');
-const { layerBowlDecline, hasFullPackedMeal, wouldServeBowl } = require('./policies/bowldecline');
+// Post-kill: the layer is deleted per kill protocol. Skip loudly instead of
+// FATAL-ing on the missing module; proof was ALL GREEN pre-kill — see
+// evidence/2026-10-15/sim-bowldecline-b.md.
+let layerBowlDecline, hasFullPackedMeal, wouldServeBowl;
+try {
+  ({ layerBowlDecline, hasFullPackedMeal, wouldServeBowl } = require('./policies/bowldecline'));
+} catch (e) {
+  if (e && e.code === 'MODULE_NOT_FOUND') {
+    console.log('INFO-SKIP: bowldecline layer deleted per kill protocol (NO-GO at pilot); ' +
+      'proof was ALL GREEN pre-kill — see evidence/2026-10-15/sim-bowldecline-b.md');
+    process.exit(0);
+  }
+  throw e;
+}
 const { leadcourt } = require('./policies/leadcourt');
 
 let failures = 0;
