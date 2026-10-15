@@ -1106,7 +1106,7 @@
         const first = (kin.name || 'them').split(' ')[0];
         return Game.convoPickCycle(vid, 'want:taken:open', [
           '"Have you heard anything? About the taken. The pods. Anything at all."',
-          `"You talk to it -- the System. Have you ever asked? About ${first}?"`,
+          `"You talk to it -- the System. Have you ever asked? About the taken -- about ${first}?"`,
           '"I keep dreaming about rows of pods. Humming. Tell me I\'m not the only one."',
         ]);
       },

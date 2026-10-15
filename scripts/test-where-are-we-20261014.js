@@ -169,6 +169,18 @@ async function main() {
   console.log('\n[W4] a stranger does not know');
   await start();
   const s1 = byTier(0)[0];
+  // Fixture guard (journey landing 2026-10-15): W4 is about place-knowledge —
+  // "a stranger to the LAND" — not the language barrier. Region-first roster
+  // draws (2026-10-14) can yield a tier-0 villager with no shared tongue;
+  // their conversation is nonverbal and never offers the spoken 'where'
+  // topic, so the two assertions below fail on fixture luck, not game
+  // behavior. Guarantee the fixture stranger shares basic English.
+  try {
+    const sp = Game.getPerson(s1) || {};
+    sp.languages = sp.languages || { native: 'english', levels: {} };
+    sp.languages.levels = sp.languages.levels || {};
+    if (!(sp.languages.levels.english >= 1)) sp.languages.levels.english = 1;
+  } catch (e) { /* fixture best-effort */ }
   const str = askWhere(s1);
   console.log('    stranger says: ' + str.line);
   ok(str.offered, "stranger conversation offers 'where'");

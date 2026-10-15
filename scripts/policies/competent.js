@@ -50,6 +50,7 @@ function competentEat(Game) {
         return;
       }
     }
+
     let guard = 0;
     while (s.kcal < Game.kcalCap() * 0.95 && guard++ < 20) {
       const pantry = vv.pantry || [];
@@ -1101,6 +1102,11 @@ function forageTripSeedFirst(Game, ctx) {
 // (The seed was already sown by trySow; the player keeps a 1-day buffer.)
 function donateHaul(Game, ctx) {
   try {
+    // HALL GATE (journey landing 2026-10-15): the pantry is in the hall —
+    // donating from the wild prints one honest refusal PER ITEM (160 lines
+    // in 3 days on seed 49). A competent player learns the rule and stops
+    // trying until they're home; the game already says it once, honestly.
+    if (Game.havenStoresAccess && Game.havenStoresAccess() === 'none') return 0;
     const s = Game.state.scholar;
     const cap = Game.kcalCap ? Game.kcalCap() : 2400;
     const keep = cap; // one day's buffer stays in the pack
@@ -2419,15 +2425,18 @@ const competent = {
     // (base owns it) from a 2+2 day (the layer owns it) — and double-fires.
     if (!rec) vinebank.blindBand(Game, ctx);
     if (!rec) workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
-    // donate surplus beyond a 2-day personal buffer
+    // donate surplus beyond a 2-day personal buffer (hall-gated: see donateHaul)
     try {
-      const s = Game.state.scholar;
-      const cap = Game.kcalCap();
-      if (s.kcal > cap * 1.5) {
-        const inv = s.inventory || [];
-        for (let i = inv.length - 1; i >= 0; i--) {
-          if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
-            try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
+      const hallGated = Game.havenStoresAccess && Game.havenStoresAccess() === 'none';
+      if (!hallGated) {
+        const s = Game.state.scholar;
+        const cap = Game.kcalCap();
+        if (s.kcal > cap * 1.5) {
+          const inv = s.inventory || [];
+          for (let i = inv.length - 1; i >= 0; i--) {
+            if ((inv[i].kcalEach || 0) > 0 && inv[i].foodState !== 'raw') {
+              try { Game.donateToPantry(i); ctx.donated = (ctx.donated || 0) + 1; ctx._lastGiveDay = (Game.state.scholar && Game.state.scholar.day) || 0; break; } catch (e) {}
+            }
           }
         }
       }
