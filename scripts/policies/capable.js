@@ -55,7 +55,7 @@ const { leadfeast } = require('./feastscale');
 const { harmScore } = require('./risk-aware');
 
 const BASE = leadfeast;
-const ENV = { COMPETENT_DIRECTIONAL_FLEE: '1', FEASTSCALE_R13: '1' };
+const ENV = { COMPETENT_DIRECTIONAL_FLEE: '1', FEASTSCALE_R13: '1', COMPETENT_ROUTE_AROUND: '1' };
 
 // ---------- plumbing ----------
 let _fallbackSeed = 0x9e3779b9;

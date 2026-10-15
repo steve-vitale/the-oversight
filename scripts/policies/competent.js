@@ -808,9 +808,49 @@ function walkTo(Game, hx, hy) {
       if (!best) break;
       const px0 = Game.map.px, py0 = Game.map.py;
       try { Game.travelTo(best.x, best.y); } catch (e) { break; }
-      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+      if (Game.map.px === px0 && Game.map.py === py0) {
+        // refused: stay put, safely — or (opt-in) go around, as the
+        // blockage card's own "Go around" button offers a human.
+        if (routeAroundOn() && routeAround(Game, hx, hy)) continue;
+        break;
+      }
     }
   } catch (e) {}
+}
+// ROUTE AROUND (tuning 2026-10-15, opt-in COMPETENT_ROUTE_AROUND=1, set by
+// capable): walkTo stopped dead at the first refused step. A fallen tree
+// guarding the haven's approach side left the bearer one tile from home for
+// days, out of water and food, until dehydration killed them (seed 42 day
+// 27; 18 of 64 baseline runs had a dehydration death). A human taps "Go
+// around". BFS over orthogonal steps the engine's own travelBlockage allows,
+// then walk the first step. Returns true when it moved.
+function routeAroundOn() { return process.env.COMPETENT_ROUTE_AROUND === '1'; }
+function routeAround(Game, hx, hy) {
+  try {
+    const N = (Game.map && Game.map.worldSize) || 9;
+    const sx = Game.map.px, sy = Game.map.py;
+    const key = (x, y) => x + ',' + y;
+    const prev = {}; prev[key(sx, sy)] = null;
+    const q = [[sx, sy]];
+    while (q.length) {
+      const [x, y] = q.shift();
+      if (x === hx && y === hy) break;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N || key(nx, ny) in prev) continue;
+        let blocked = true;
+        try { blocked = !!Game.travelBlockage(nx, ny, x, y); } catch (e) { blocked = true; }
+        if (blocked) continue;
+        prev[key(nx, ny)] = [x, y];
+        q.push([nx, ny]);
+      }
+    }
+    if (!(key(hx, hy) in prev)) return false;
+    let cur = [hx, hy];
+    while (prev[key(cur[0], cur[1])] && !(prev[key(cur[0], cur[1])][0] === sx && prev[key(cur[0], cur[1])][1] === sy)) cur = prev[key(cur[0], cur[1])];
+    try { Game.travelTo(cur[0], cur[1]); } catch (e) { return false; }
+    return Game.map.px !== sx || Game.map.py !== sy;
+  } catch (e) { return false; }
 }
 // nearest rubble-choked path in travel reach (from the player's tile)
 function nearestRubble(Game) {
@@ -2288,6 +2328,22 @@ const competent = {
     // Outward legs (stoneRun's frontier pushes, forage trips, counterPlay,
     // workTrapline) are skipped while recovering() is true; haven chores
     // below (sort, donate, teach, talk) still run.
+    // THIRST HOME (tuning 2026-10-15, with COMPETENT_ROUTE_AROUND): no water
+    // carried and hydration low -> walk home and drink before anything else.
+    // The bot sat on a trail tile for 6 days at hydration 0 with a fed belly
+    // while the cistern held clean water (seeds 2026, 43): recovering() only
+    // reads kcal and hp. The game says "DEHYDRATED: find and treat water
+    // today." — a human listens.
+    if (routeAroundOn()) {
+      try {
+        const s = Game.state.scholar;
+        if ((s.hydration || 0) < 45 && !(s.water || []).length && !Game.playerAtHaven()) {
+          walkTo(Game, DIR_FLEE_HAVEN.x, DIR_FLEE_HAVEN.y);
+          drinkSafe(Game, ctx);
+          ctx.thirstHome = (ctx.thirstHome || 0) + 1;
+        }
+      } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
+    }
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
