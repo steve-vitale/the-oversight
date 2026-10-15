@@ -15899,19 +15899,9 @@
     // MODE SHIFT: combat gets its own visual skin — darkened edges,
     // claustrophobic grid. You FEEL the game change.
     try { document.body.classList.toggle('in-combat', !!st.inCombat); } catch (e) {}
-    // TITAN FIGHT (Steve 2026-10-11): ants vs titan. Same 9x9 grid (mobile),
-    // smaller cells, tiny fighters, huge titan, player spotlight.
-    try {
-      var _isTitanFight = false;
-      if (st.inCombat && Game.tbfight && Game.isTitan) {
-        var _tf = Game.tbfight.fighters || [];
-        for (var _i = 0; _i < _tf.length; _i++) {
-          var _m = _tf[_i];
-          if (_m.kind === 'monster' && _m.mdef && Game.isTitan(_m.mdef.id)) { _isTitanFight = true; break; }
-        }
-      }
-      document.body.classList.toggle('titan-fight', _isTitanFight);
-    } catch (e) {}
+    // The battle owns its dimensions, including Network pieces. A Table
+    // trial can contain a titan on a normal 9x9 board.
+    document.body.classList.toggle('titan-fight', combatPresentation().gridSize > 9);
     // NIGHT: the world gets dark, continuously. --sky-light (0..1) drives the
     // grid dimming in CSS; is-night adds the moonlight tint and fire glow.
     try {
@@ -17596,6 +17586,18 @@
     }
     return out;
   }
+  function combatPresentation() {
+    const f = Game.tbfight;
+    const active = !!(f && !f.over && !Game.state.scholar.insideHaven);
+    const view = { active, gridSize: active ? Game.tbGridSize() : 9, allies: {} };
+    if (!active) return view;
+    for (const a of f.fighters) {
+      if ((a.kind !== 'ally' && a.kind !== 'villager') || !a.alive || a.fled) continue;
+      const key = a.mx + ',' + a.my;
+      if (!view.allies[key]) view.allies[key] = a;
+    }
+    return view;
+  }
   function renderDetail(st) {
     // Collect telegraph visuals once per render (not per cell)
     const _tg = tbAllTelegraphCells();
@@ -17643,15 +17645,8 @@
     let html = '';
     // TITAN FIGHT (Steve 2026-10-11): 12x12 grid, smaller cells, same screen space.
     // More cells for 10+ fighters, but cells shrink so it fits mobile.
-    let _gridN = 9;
-    try {
-      if (document.body.classList.contains('titan-fight')) _gridN = 12;
-    } catch (e) {}
-    // GUARD (presentation pass A, 2026-10-14): a titan summoned onto a 9x9
-    // node (the Table's trial by combat, _tableTrialDirect) set titan-fight
-    // with a 9-row cell array, and cells[9][0] threw — the whole screen
-    // stopped rendering. Never draw more rows than exist.
-    _gridN = Math.min(_gridN, (cells && cells.length) || 9);
+    const _combatView = combatPresentation();
+    const _gridN = _combatView.gridSize;
     for (let cy = 0; cy < _gridN; cy++) {
       html += '<div class="drow">';
       for (let cx = 0; cx < _gridN; cx++) {
@@ -17808,8 +17803,27 @@
           const _inside = Game.state.scholar && Game.state.scholar.insideHaven;
           const tbf = Game.tbfight;
           let drawn = false;
+          const ally = _combatView.allies[cx + ',' + cy];
+          if (ally) {
+            // Recruitment names foreign volunteers aloud; local helpers
+            // keep the ordinary name-knowledge gate. Use battle positions,
+            // never Haven's out-of-date world positions.
+            const home = (Game.state.otherVillages || []).find(v => v.id === ally.villageId);
+            const person = (Game.data.villagers || []).find(v => v.id === ally.villagerId)
+              || (Game.data.background_survivors || []).find(v => v.id === ally.villagerId)
+              || ((home && home.roster) || []).find(v => v.id === ally.villagerId);
+            const showName = ally.kind === 'ally' || Game.state.systemArrived || Game.nameKnown(ally.villagerId);
+            const fullName = showName ? String(ally.name || (person && person.name) || 'Companion') : 'Companion';
+            const name = showName ? fullName.split(' ')[0] : '';
+            const label = fullName.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+            g = `<span class="vent" data-ent="ally:${encodeURIComponent(ally.key)}" role="img" aria-label="${label}" title="${label}"><span class="vtoken">${villagerSpriteHtml(person) || '🧍'}</span>`
+              + (name ? `<span class="vname">${esc(name)}</span>` : '') + '</span>';
+            cls += ' villager coalition-ally';
+            drawn = true;
+          }
           if (tbf && !tbf.over && !_inside) {
             for (let _mfi = 0; _mfi < tbf.fighters.length; _mfi++) {
+              if (drawn) break;
               const mf = tbf.fighters[_mfi];
               if (mf.kind !== 'monster' && mf.kind !== 'hostile') continue;
               if (!mf.alive || mf.fled) continue;
@@ -17872,7 +17886,7 @@
               drawn = true; break;
             }
           }
-          if (!drawn && mon && !_inside && Game.targetCovers({ cx: mon.mx, cy: mon.my, tiles: Game.fighterTiles(mon) }, cx, cy)) {
+          if (!drawn && !_combatView.active && mon && !_inside && Game.targetCovers({ cx: mon.mx, cy: mon.my, tiles: Game.fighterTiles(mon) }, cx, cy)) {
             const mdef = (Game.data.monsters || []).find(m => m.id === mon.id) || {};
             // INDISTINCT (Steve 2026-10-05): same 'creature' class as animals
             // HUMANOID SPRITES (Steve 2026-10-06): human-like horrors show
@@ -17894,7 +17908,7 @@
             cls += ' creature'; drawn = true;
             }
           }
-          if (!drawn && ani && cx === ani.mx && cy === ani.my) {
+          if (!drawn && !_combatView.active && ani && cx === ani.mx && cy === ani.my) {
             // INDISTINCT (Steve 2026-10-05): show the correct species emoji —
             // that's fine to know from looking. But no 'animal' vs 'monster' indicator.
             let aemoji = '🐾';
@@ -17914,7 +17928,7 @@
             g = `<span data-ent="creature:${esc(ani.id || 'wild')}">${_aniSpr || esc(aemoji)}${_pbadge ? `<span class="preybadge" style="display:block;font-size:12px;line-height:1;margin-top:-3px">${esc(_pbadge)}</span>` : ''}</span>`;
             cls += ' creature'; drawn = true;
           }
-          if (!drawn) {
+          if (!drawn && !_combatView.active) {
             // villagers: 🧍 with a TINY name label underneath.
             // (names were rendering at full size and swallowing the grid.)
             for (const [rid, pos] of Object.entries(vpos)) {

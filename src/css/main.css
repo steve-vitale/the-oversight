@@ -1692,6 +1692,15 @@ body.titan-fight .cell .vsprite svg.sprite {
   max-height: 28px;
 }
 body.titan-fight .cell.titan-cell { z-index: 4; }
+/* Readable labels on the crowded battle board. Names may truncate to the
+   cell; each coalition token also carries its complete accessible name. */
+body.titan-fight .cell .vent {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; width: 100%; height: 100%; min-width: 0;
+}
+body.titan-fight .cell .vname { font-size: 12px; line-height: 12px; display: block; }
+body.titan-fight .cell.villager .vtoken .vsprite { width: 14px; height: 14px; }
+body.titan-fight .cell.villager .vtoken .vsprite svg.sprite { width: 14px !important; height: 14px !important; }
 /* the titan's body: no 72px portrait cap, a shadow it casts on the arena */
 body.titan-fight .cell.titan-cell .multitile svg.sprite {
   max-width: none; max-height: none;
