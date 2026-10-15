@@ -9,7 +9,7 @@ async function child() {
   const { runComparison, POLICY_REGISTRY: registry } = require(path.join(root, 'scripts/sweep-compare'));
   const id = arg('policy', 'capable'), base = registry[id];
   if (!base) throw new Error('Unknown policy ' + id);
-  const people = new Map(), ascensions = [];
+  const people = new Map(), ascensions = [], outcomes = [];
   let G;
   const person = vid => { if (!people.has(vid)) people.set(vid, { id: vid, bearerDays: [], events: {}, classes: [] }); return people.get(vid); };
   const sample = g => {
@@ -37,7 +37,7 @@ async function child() {
           return value;
         };
         const tele = G.tele;
-        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); return tele.apply(this, arguments); };
+        G.tele = function (type, data) { if (type === 'ascension') ascensions.push(JSON.parse(JSON.stringify(data))); if (type === 'godpath_deed') outcomes.push(JSON.parse(JSON.stringify(data))); return tele.apply(this, arguments); };
         sample(G);
       }
       if (base.setup) return base.setup(g, ctx);
@@ -58,7 +58,7 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, people: rows }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, people: rows }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();

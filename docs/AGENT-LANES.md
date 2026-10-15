@@ -67,3 +67,7 @@ outcome plus build coda in table.js and renders those escaped paragraphs in
 app.js's ending screen. Phone play proved they previously existed only in
 Game.say while the final screen showed a generic record. THE HOSTS and
 pod-demand keep their full base stories, and losses reveal no win text.
+
+Ascension-deed visibility exception: Codex adds the known class deed hint
+to app.js Tracks, alongside its existing class line. Scope is godpath
+objective/progress display only; no region or nomad UI changes.

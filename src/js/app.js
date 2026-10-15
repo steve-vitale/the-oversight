@@ -15317,7 +15317,11 @@
       // it ("If you don't know, it doesn't show").
       try {
         const cl = Game.classLine ? Game.classLine('player') : null;
-        if (cl) html += `<div class="small" style="margin:0 0 6px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(cl)}">◈ ${esc(cl)}</div>`;
+        if (cl) {
+          html += `<div class="small" style="margin:0 0 6px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(cl)}">◈ ${esc(cl)}</div>`;
+          const deedHint = Game.godpathDeedHint ? Game.godpathDeedHint('player') : null;
+          if (deedHint) html += `<div class="small" data-godpath-deed style="margin:0 0 8px;opacity:.85">${esc(deedHint)}</div>`;
+        }
       } catch (eC) { console.warn('[godpath] class line', eC); }
       for (const r of rows) {
         const pips = '●'.repeat(r.level) + '○'.repeat(Math.max(0, r.max - r.level));

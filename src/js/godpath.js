@@ -8,6 +8,8 @@
 //   - holderMagicIds(who) -> magic ability ids held by 'player' or a villager id
 //   - recognizeClass(who) -> the holder's class record or null (narrates once per change)
 //   - godpathClass(who) -> stored class record {path, subclass, since, god} or null
+//   - godpathDeedStatus(who, godId, day?) -> read-only real deed progress for the canonical person; no old-save invention
+//   - godpathDeedHint(who) -> objective/progress only for a known class, until ascension
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
 //   - shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible
@@ -145,6 +147,52 @@
   function classLine(who) {
     const rec = godpathClass(who);
     return (rec && !rec.lapsed) ? lineFor(rec) : null;
+  }
+
+  // A deed belongs to a person, not to the bearer office. Reading a missing
+  // old-save ledger never creates one or invents accomplishments.
+  function godpathDeedStatus(who, godId, day) {
+    const D = data() || {}, s = (Game.state || {}).scholar || {}, v = (Game.state || {}).village || {};
+    const path = Object.values(D.paths || {}).find(p => p.god && p.god.id === godId);
+    const deed = path && path.god.deed;
+    if (!deed) return null;
+    const vid = isPlayer(who) ? Game.villagerId : who;
+    const rec = (((v.godpathDeeds || {})[vid] || {})[deed.event]) || null;
+    const person = vid && Game.vpOf ? Game.vpOf(vid) : null;
+    const living = !!(vid && person && person.id === vid && !person.dead &&
+      (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
+    const now = day == null ? s.day || 0 : day;
+    return { complete: !!(rec && living && (!deed.afterDawn || now > rec.day)),
+      observed: !!rec, day: rec ? rec.day : null, hint: deed.hint };
+  }
+  function godpathDeedHint(who) {
+    const cl = godpathClass(who);
+    if (!cl || cl.lapsed) return null;
+    const p = ((data() || {}).paths || {})[cl.path], god = p && p.god;
+    if (!god || !god.deed) return null;
+    const v = (Game.state || {}).village || {}, s = (Game.state || {}).scholar || {};
+    const g = isPlayer(who) ? s.godhood : (v.npcGodhood || {})[who];
+    if (g && ((g.active || []).includes(god.id) || (g.recognized || {})[god.id])) return null;
+    const status = godpathDeedStatus(who, god.id);
+    return status.complete ? 'Deed fulfilled. Your build and the day still matter.'
+      : status.observed ? 'You refused death. Live to see another dawn.' : god.deed.hint;
+  }
+  // Called only after an actual lethal-hit refusal, never from an ability tap
+  // or an XP event. The first receipt is enough; no repeat-use grinding.
+  function recordDeathRefusal(who, ability, scene) {
+    const s = (Game.state || {}).scholar, v = (Game.state || {}).village;
+    const vid = isPlayer(who) ? Game.villagerId : who;
+    if (!s || !v || !vid || Game.over) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {});
+    const book = books[vid] || (books[vid] = {});
+    if (book.death_refused) return;
+    book.death_refused = { day: s.day || 0, ability, scene };
+    // Share the triggering action's timestamp. An extra Date.now() would
+    // shift deterministic sim IDs even in runs whose ascension never changes.
+    const events = Game.state.telemetry || [], last = events[events.length - 1];
+    const t = last && Number.isFinite(last.t) ? last.t : 0;
+    try { Game.tele && Game.tele('godpath_deed', { t, who: vid, event: 'death_refused', ability, scene, day: s.day || 0 }); }
+    catch (e) { warn('tele deed', e); }
   }
 
   // recognizeClass(who): THE one function for player and villagers.
@@ -1211,7 +1259,7 @@
   // (600 kcal: +24 hunger), then Back from the Brink. Returns new vHp or null.
   function fieldCheatDeath(G, c) {
     try {
-      if (!G || G.cheated) return null;
+      if (!G || G.cheated || !(c.vHp <= 0)) return null;
       if (!G.held.ember_heart) {
         // SECOND WIND (refuse_death, once a day): drop to 1 HP instead.
         if (!G.held.second_wind) return null;
@@ -1221,6 +1269,7 @@
         vp[G.vid] = day; G.cheated = true;
         c.log.push(c.vName + ' should be down — and refuses. Second wind: 1 HP. (Second Wind)');
         try { Game.tele && Game.tele('godpath_verb', { ability: 'second_wind', verb: 'refuse_death', who: G.vid, field: true }); } catch (e) { warn('tele sw', e); }
+        recordDeathRefusal(G.vid, 'second_wind', 'field');
         return 1;
       }
       if (!vCanPay(G.vid, 600 * 0.6)) return null; // the body must have something to burn
@@ -1230,6 +1279,7 @@
       c.log.push(c.vName + ' should be down — the furnace eats the blow and they stand back up at ' + hp + '. (Ember Heart)');
       try { Game.tele && Game.tele('godpath_ember', { kcal: 600, who: G.vid }); } catch (e) { warn('tele ember v', e); }
       if (G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
+      recordDeathRefusal(G.vid, 'ember_heart', 'field');
       return hp;
     } catch (e) { warn('fieldCheatDeath', e); return null; }
   }
@@ -1266,7 +1316,7 @@
   }
   function allyWouldFall(game, t) {
     try {
-      const f = game.tbfight; if (!f) return false;
+      const f = game.tbfight; if (!f || !(t.hp <= 0)) return false;
       // EMBER HEART on a villager (parity): their own furnace eats the blow.
       if (t.villagerId && !t._emberUsed && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'ember_heart') && vCanPay(t.villagerId, 360)) {
         t._emberUsed = true;
@@ -1274,6 +1324,7 @@
         t.hp = Math.max(1, Math.ceil((t.maxHp || 10) * 0.2));
         game.say(`${t.name} should be down. The furnace eats the blow and they stand back up at ${t.hp} HP. (Ember Heart)`);
         try { game.tele && game.tele('godpath_ember', { kcal: 600, who: t.villagerId }); } catch (e) { warn('tele ember v', e); }
+        recordDeathRefusal(t.villagerId, 'ember_heart', 'battle');
         if (game.npcHasAbility(t.villagerId, 'back_from_the_brink')) { t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' }; game.say(`${t.name} comes back ANGRY. (Back from the Brink)`); }
         return true;
       }
@@ -1377,6 +1428,8 @@
     recognizeClass(who) { return recognizeClass(who); },
     godpathClass(who) { return godpathClass(who); },
     classLine(who) { return classLine(who); },
+    godpathDeedStatus(who, godId, day) { return godpathDeedStatus(who, godId, day); },
+    godpathDeedHint(who) { return godpathDeedHint(who); },
     pathLean(who, abilityId, opts) { return pathLean(who, abilityId, opts); },
     shapeOffers(choices, pool, who, opts) { return shapeOffers(choices, pool, who, opts); },
     kitSheet(cands, who, track, level) { return kitSheet(cands, who, track, level); },
@@ -1468,7 +1521,8 @@
   if (typeof _md === 'function') {
     Game.maybeCheatDeath = function (cause) {
       const s = this.state.scholar;
-      let cheated = false;
+      let cheated = false, refusal = null;
+      const fatal = s.health <= 0, windBefore = [s.secondWindDay, s.secondWindUses], moltBefore = [s.moltWeek, s.moltUses];
       try {
         const f = this.tbfight;
         if (f && !f.over && s.health <= 0 && this.hasAbility('ember_heart') && !f._emberUsed) {
@@ -1479,12 +1533,15 @@
             s.health = Math.max(1, Math.ceil(this.maxHealth() * (this.abilityLevel('ember_heart') >= 2 ? 0.3 : 0.2)));
             this.say(`EMBER HEART: the blow lands, and the furnace eats it. ${cost} kcal burn in one breath and you stand back up at ${s.health} HP.`);
             try { this.tele && this.tele('godpath_ember', { kcal: cost }); } catch (e) { warn('tele ember', e); }
-            cheated = true;
+            cheated = true; refusal = 'ember_heart';
           }
         }
       } catch (e) { warn('ember heart', e); }
       if (!cheated) cheated = _md.apply(this, arguments);
       if (cheated && s.health > 0) {
+        if (!refusal && (s.secondWindDay !== windBefore[0] || s.secondWindUses !== windBefore[1])) refusal = 'second_wind';
+        if (!refusal && (s.moltWeek !== moltBefore[0] || s.moltUses !== moltBefore[1])) refusal = 'molt';
+        if (fatal && refusal) recordDeathRefusal('player', refusal, this.tbfight && !this.tbfight.over ? 'battle' : 'world');
         try {
           if (this.hasAbility('back_from_the_brink')) {
             const L = this.abilityLevel('back_from_the_brink');

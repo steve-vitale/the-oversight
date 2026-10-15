@@ -1,0 +1,196 @@
+{
+  "baselineArtifact": "deed-after-64.json.gz",
+  "sourceBaseHead": "543406bf0323434c8bed12c829c4dd17cfd920d9",
+  "driver": "sweep-compare",
+  "days": 150,
+  "seedsPerPolicy": 64,
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "matchedRows": 256,
+  "unchangedStandardRows": 249,
+  "unchangedAscensionLists": 250,
+  "beforeHashes": {
+    "src/js/godhood.js": "e965480d8be0589845093d794be5a757a01f1566887b59522712f01185412911",
+    "src/js/godpath.js": "f9e92b858879fb9e231a31286096275ac90794752b8ad5869d4e45c7a7893583",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "ed8bbbcfe6535a2f765ba779ce3afa778500284fef92d57cf7700ed5d25eecef",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "89cdc4a383f00f3388538f5600344cdd82c744597c7c14c4afce093013281213"
+  },
+  "afterHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "c6a6aaa922a5f5f6f61f0b07e4440004c370cea935cb16cb2cb884526f1d4208",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "17b3af240de41c03eccd7479130a228d00391b24cbcf131ecf748ac55f91043f"
+  },
+  "policySummary": {
+    "capable": {
+      "before": {
+        "wins": 41,
+        "seated": 55,
+        "medianGameDay": 90.0,
+        "playerDeaths": 93,
+        "playerAscensionRuns": 27,
+        "unkillableAscensions": {
+          "villager": 1,
+          "player": 1
+        }
+      },
+      "after": {
+        "wins": 41,
+        "seated": 55,
+        "medianGameDay": 90.0,
+        "playerDeaths": 93,
+        "playerAscensionRuns": 27,
+        "unkillableAscensions": {
+          "player": 1
+        }
+      },
+      "runsWithReceipts": 1,
+      "receipts": {
+        "ember_heart/battle": 1
+      }
+    },
+    "maker": {
+      "before": {
+        "wins": 18,
+        "seated": 25,
+        "medianGameDay": 116.0,
+        "playerDeaths": 64,
+        "playerAscensionRuns": 34,
+        "unkillableAscensions": {
+          "villager": 1
+        }
+      },
+      "after": {
+        "wins": 18,
+        "seated": 24,
+        "medianGameDay": 116.0,
+        "playerDeaths": 63,
+        "playerAscensionRuns": 34,
+        "unkillableAscensions": {}
+      },
+      "runsWithReceipts": 0,
+      "receipts": {}
+    },
+    "merchant": {
+      "before": {
+        "wins": 10,
+        "seated": 22,
+        "medianGameDay": 123.5,
+        "playerDeaths": 43,
+        "playerAscensionRuns": 37,
+        "unkillableAscensions": {
+          "villager": 2,
+          "player": 1
+        }
+      },
+      "after": {
+        "wins": 10,
+        "seated": 22,
+        "medianGameDay": 123.5,
+        "playerDeaths": 43,
+        "playerAscensionRuns": 36,
+        "unkillableAscensions": {}
+      },
+      "runsWithReceipts": 1,
+      "receipts": {
+        "ember_heart/battle": 1
+      }
+    },
+    "caregiver": {
+      "before": {
+        "wins": 21,
+        "seated": 30,
+        "medianGameDay": 123.5,
+        "playerDeaths": 49,
+        "playerAscensionRuns": 31,
+        "unkillableAscensions": {
+          "villager": 1
+        }
+      },
+      "after": {
+        "wins": 21,
+        "seated": 30,
+        "medianGameDay": 123.5,
+        "playerDeaths": 49,
+        "playerAscensionRuns": 31,
+        "unkillableAscensions": {}
+      },
+      "runsWithReceipts": 0,
+      "receipts": {}
+    }
+  },
+  "trace": {
+    "file": "survivalist-deed-seed46.json",
+    "policy": "capable",
+    "seed": 46,
+    "receiptDay": 90,
+    "recognizedDay": 91,
+    "ability": "ember_heart",
+    "won": false
+  },
+  "validation": {
+    "quick": {
+      "passed": 142,
+      "failed": 0,
+      "seconds": 49
+    },
+    "full": {
+      "passed": 914,
+      "failed": 0,
+      "seconds": 207
+    },
+    "survivalistProof": {
+      "passed": 27,
+      "failed": 0
+    },
+    "actualRendererProof": {
+      "passed": 6,
+      "failed": 0
+    },
+    "observerProof": {
+      "passed": 4,
+      "failed": 0,
+      "seed": 7,
+      "days": 150
+    },
+    "dataContract": {
+      "passed": 66,
+      "failed": 0
+    },
+    "ladder": {
+      "passed": 25,
+      "failed": 0
+    },
+    "ontologySystems": 111,
+    "unwiredGodpathFunctions": 0
+  },
+  "artifact": {
+    "file": "survivalist-deed-after-64.json.gz",
+    "uncompressedBytes": 35902952,
+    "uncompressedSha256": "af7c68e9e8926ac429e621d97efc5f81e0e8735e8cbf63a6fd5e45915eaadde9",
+    "compressedBytes": 1540998,
+    "compressedSha256": "2e72bca8e19ba6a2e2820bd5d0e4d08eb27d9cad2c3845801fbbc6eee1703526"
+  },
+  "additionalSourceHashes": {
+    "src/js/app.js": "0285cc9e34c417ee19023ba0e6441028a208ceea78c31f18026a86235ea10384",
+    "scripts/godpath/test-survivalist-deed.js": "aa31f1252478bd1bc534ad7546ec241f737859ac50223eaa9bebb188c1c56125",
+    "scripts/godpath/test-deed-hint.js": "1373b08d987dd92d083457c73e6179d9f4a2319b5055ce88652df0448445f24a",
+    "scripts/godpath/validate.js": "d0edc9920ee0db87ef530e26c00eb02412a04f122d5dc4bca4f4d8e0b4d739d0"
+  }
+}

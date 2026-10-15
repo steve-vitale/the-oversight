@@ -295,8 +295,12 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   Optional bespoke beats/overrides are not a missing-coda backlog.
 
 ### 3. God deeds (replace the placeholder)
-- **Now:** "held the class for 10 days" counts as the god's deed
+- **Now:** Unkillable has the first authored outcome deed: really refuse a
+  fatal blow through your own survival magic, then reach a later dawn alive.
+  Per-person receipts and a known-class objective are wired and tested.
+  Nine gods still retain the legacy synergy/class-held-for-10-days proxies
   (`godpaths.json` `rules.capstone.deedClassDays`).
+  See `evidence/2026-10-15/survivalist-deed-audit.md`.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs
@@ -306,7 +310,7 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   standard-driver panel now measures current ascensions and credited work.
   The actual Relay office holder now completes the same existing Socialite
   deed as player or villager (prepared real-action gate/ceremony proofs).
-  Ten fitting outcome deeds are still open: gardening XP, for example,
+  Nine fitting outcome replacements remain open: gardening XP, for example,
   credits sowing/tending and cannot prove village feeding. See
   `evidence/2026-10-15/deed-audit.md` and `scripts/godpath/deed-screen.js`.
 

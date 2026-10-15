@@ -84,6 +84,7 @@
           abilitiesNeeded: rules.abilitiesNeeded || 4,
           synergies: Array.from(synIds),
           deedAlt: g.deedAlt || null,
+          deed: g.deed || null, // authored outcomes replace the legacy proxies for this god
           // the lived-in deed (godpaths.json rules.capstone.deedClassDays):
           // the class named on this path and held this many days
           deedClassDays: rules.deedClassDays || 0,
@@ -219,6 +220,7 @@
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy && classDaysDeed(sch.godpath, req, day)) synergy = true;
     if (!synergy) synergy = relayOfficeDeed(S.Game, sch.villagerId, req);
+    if (req.deed) synergy = !!(sch.villagerId && S.Game && S.Game.godpathDeedStatus && S.Game.godpathDeedStatus(sch.villagerId, gh.id, day)?.complete);
     const dayOk = (day || 0) >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
@@ -274,6 +276,7 @@
     let synergy = (req.synergies || []).some(x => syns.has(x));
     if (!synergy) { try { synergy = classDaysDeed((((game.state || {}).village || {}).npcGodpath || {})[vid], req, day); } catch (e) { synergy = false; } }
     if (!synergy) synergy = relayOfficeDeed(game, vid, req);
+    if (req.deed) synergy = !!(game.godpathDeedStatus && game.godpathDeedStatus(vid, gh.id, day)?.complete);
     const dayOk = day >= (req.minDay || 0);
     const cl = {
       kit: pp.kit, needKit: pp.needKit, coreHit: pp.coreHit, needCore: pp.needCore,
@@ -712,7 +715,8 @@
       const parts = [];
       if (knownCores.length) parts.push(`you're missing ${knownCores.map(abilName).join(' and ')}`);
       if (unknownCores.length) parts.push(`${unknownCores.length} more you've never even heard of`);
-      if (!close.synergy) {
+      if (!close.synergy && req.deed) parts.push(req.deed.hint);
+      if (!close.synergy && !req.deed) {
         const synNames = (req.synergies || []).map(sid => {
           try {
             const d = (game.data.synergies || []).find(s => s.id === sid);
