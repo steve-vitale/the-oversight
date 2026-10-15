@@ -2761,6 +2761,13 @@
       }
     } catch (e) {}
 
+    // An aimed beam owns the next turn. Declaring a heavy strike here used
+    // to postpone the promised discharge (and its counterplay) indefinitely.
+    if (m._beamAim) {
+      this.apMaybeBeamAttack(m);
+      endTurn(); return;
+    }
+
     // 2. PENDING HEAVY resolves: burst radius 1 around the declared tile.
     // The grid highlight was the warning; being elsewhere was the answer.
     if (m.telegraph && m.telegraph.kind === 'apHeavy') {
@@ -2852,7 +2859,7 @@
     // The roll lives here now, in the alien's own turn.) No beam while
     // recovering — the heavy strike took it out of them. No beam on the
     // opening turn either: the old post-player-action beam could never fire
-    // before the player's first move, and a 90-110% max-HP beam with zero
+    // before the player's first move, and a beam hit with zero
     // counterplay on turn zero is not a fight, it's an execution.
     if (!(m.apSpent > 0) && (m.apTurns || 0) > 1) {
       try {

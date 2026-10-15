@@ -265,9 +265,9 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'survival-balance.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, survivalBalance };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -20674,6 +20674,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // monsters move when you do. they're in the detail grid with you.
     monsterTurn() {
       const s = this.state.scholar;
+      // The palisade's watch protects sleepers even when a raid has already
+      // pinned a monster to Haven. Awake bearers and unwalled camps still fight.
+      const haven = this.state.village || {};
+      if (this._sleeping && this.map.px === (haven.px ?? 4) && this.map.py === (haven.py ?? 4) &&
+          this.havenTier && this.havenTier() >= 2) return;
       const m = this.playerMonster();
       if (!m || m.mx === undefined) return;
       const px = s.mx ?? 4, py = s.my ?? 4;
@@ -33339,7 +33344,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say('The blow startles it — gold flares back across its scales as it scrambles for the sunlight.');
         }
       }
-      if (t.kind === 'player' && typeof this.armorBonus === 'function') {
+      if (t.kind === 'player' && !(opts && opts.alienBeamFinal) && typeof this.armorBonus === 'function') {
         const prot = this.armorBonus();
         // HONESTY (break-it combat r6 2026-10-09): the old line stated
         // Math.min(dmg, prot) — the RAW incoming number — but union-rep
@@ -33378,7 +33383,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // block — state the post-modifier absorbed number, not the raw input.
       // ALLIES (2026-10-13): titan-outfitted forces carry real varmor —
       // "what it bought is real" — so kind 'ally' absorbs here too.
-      if ((t.kind === 'villager' || t.kind === 'ally') && (t.varmor || 0) > 0) {
+      if ((t.kind === 'villager' || t.kind === 'ally') && !(opts && opts.alienBeamFinal) && (t.varmor || 0) > 0) {
         const prot = t.varmor;
         // ARMOR (Steve 2026-10-09): same diminishing-returns curve as the
         // player block — no immunity cliff. Same pierce hook.
@@ -40238,6 +40243,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (_held) {
             this.say('🔥 You go down -- but the fire is already holding your death, and it does not let go. The fight is lost. What happens next is the fire\'s to decide.');
           } else {
+            // Settle co-taken fates before choosing a successor. Resolving them
+            // after playerDeath can immediately kill the new bearer too.
+            const arena = this.state.arenaContest;
+            const contest = this.state.activeContest;
+            if (arena && contest && typeof this._contestResolveOthers === 'function') {
+              try { this._contestResolveOthers(contest); }
+              catch (e) { console.warn('[arena] co-taken fates', e); }
+            }
             try { this.playerDeath('combat'); } catch (e5) { this.over = true; try { this.wipe(); } catch (e6) {} }
           }
         }

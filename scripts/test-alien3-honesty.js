@@ -53,7 +53,7 @@ async function main() {
     let tamBeams = 0, otherBeams = 0;
     for (const pid of ['vex_marlowe', 'countess_sable', 'rax_dentist', 'pip_quindle', 'sarge', 'dr_fenwick', 'old_tam']) {
       const f = { alienPid: pid, _enraged: true };
-      Game.tbfight = { fighters: [f], _beamCooldown: 0, over: false };
+      Game.tbfight = { fighters: [f, { key: 'p', kind: 'player', alive: true, hp: 100000, maxHp: 100000, mx: 4, my: 4 }], _beamCooldown: 0, over: false };
       for (let i = 0; i < 40; i++) {
         RNG.reset((i * 2654435761 + pid.length * 97) >>> 0 || 1);
         H.clearLog();

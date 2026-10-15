@@ -3,7 +3,7 @@
 //   1. apBeamHit('player', ...) must damage the ENGINE's player fighter ('p'),
 //      not silently whiff on a 'player' key that doesn't exist (the
 //      2026-10-08 engineKey fix — re-verify it holds).
-//   2. Resistance math: 0 pieces ~ lethal (90-110% maxHp); each piece x0.7.
+//   2. Resistance math: 0 pieces ~ lethal (65-85% maxHp); each piece x0.7.
 //      Verify a 1-piece and 5-piece case against the formula.
 //   3. apBeamResistPieces honesty: alien armor (beamResist) counts; bonded
 //      sentimental ARMOR (bond>=25, equipped) counts; inventory-sitting
@@ -58,14 +58,15 @@ async function main() {
     const f = startFight('vex_marlowe');
     assert(!!f, 'setup: vex fight live');
     const p = f.fighters.find(x => x.key === 'p');
+    p.maxHp = p.hp;
     const hpBefore = p.hp;
-    // No resistant gear: expect ~lethal (90-110% of maxHp = 900-1100).
+    // No resistant gear: expect ~lethal (65-85% of maxHp = 650-850).
     let dealt = 0;
     try { dealt = Game.apBeamHit('player', 0, 'test beam', { damageType: 'alien_beam' }); } catch (e) { console.log('  threw ' + e.message); }
     assert(p.hp < hpBefore, 'player fighter hp dropped (' + hpBefore + ' -> ' + p.hp + ')');
     assert(dealt === hpBefore - p.hp || (p.hp === 0 && dealt >= hpBefore),
       'reported damage matches hp delta (' + dealt + ', overkill clamps at 0)');
-    assert(dealt >= 900 && dealt <= 1100, '0 pieces: nearly lethal, dealt ' + dealt + ' of maxHp 1000');
+    assert(dealt >= 650 && dealt <= 850, '0 pieces: nearly lethal, dealt ' + dealt + ' of maxHp 1000');
     assert(Game.state.scholar._beamHorrorSeen === true, 'horror beat fired on first unresisted hit');
     endFight();
   }
@@ -86,8 +87,8 @@ async function main() {
     const dealt = Game.apBeamHit('player', 0, 'test beam', { damageType: 'alien_beam' });
     // base = round(100 * (0.9 + r*0.2)) with seeded r; final = round(base*0.7)
     console.log('  dealt with 1 piece: ' + dealt + ' (hp ' + hpBefore + ' -> ' + p.hp + ')');
-    assert(dealt >= Math.round(90 * 0.7) && dealt <= Math.round(110 * 0.7),
-      '1 piece: damage in [63,77], got ' + dealt);
+    assert(dealt >= Math.round(65 * 0.7) && dealt <= Math.round(85 * 0.7),
+      '1 piece: damage in [46,60], got ' + dealt);
     endFight();
   }
 

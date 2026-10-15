@@ -36,9 +36,10 @@ async function freshGame(seed) {
   try { if (!Game.playerAtHaven()) Game.travelTo(hx, hy); } catch (e) {}
   // open the raid gate: 3+ monsters, 3k+ pantry (bait — the gate isn't
   // what's under test; the player-encounter logic is)
-  let mons = Game.worldMonsters().length;
-  const ids = ['hushwolf', 'bulldozer', 'choir_toad'];
-  for (let i = mons; i < 3; i++) { try { Game.spawnWorldMonster({ id: ids[i % 3] }, hx + 2, hy + 1, {}); } catch (e) {} }
+  const wave = Game.unlockedWave();
+  Game.worldMonsters().length = 0;
+  const ids = Game.data.monsters.filter(m => m.wave === wave && !m.campaignOnly).slice(0, 3);
+  for (const md of ids) Game.spawnWorldMonster(md, hx + 2, hy + 1, {});
   try {
     const pk = Math.round(((v.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0)));
     if (pk < 3000 && Game.stockPantry) Game.stockPantry(90000, 'Bait');

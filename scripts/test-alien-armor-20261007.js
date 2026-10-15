@@ -67,7 +67,7 @@ assert(readinessScore(0, 60, 30, 3) >= 100, 'geared solo ready');
 console.log('=== Items: alien armor exists ===');
 const items = JSON.parse(fs.readFileSync('src/data/items.json', 'utf8'));
 const itemList = Array.isArray(items) ? items : items.items;
-const alienArmor = itemList.filter(i => i.armor && i.armor.beamResist);
+const alienArmor = itemList.filter(i => i.id.startsWith('alien_') && i.armor && i.armor.beamResist);
 assert(alienArmor.length === 5, '5 alien armor pieces (' + alienArmor.length + ')');
 const slots = ['head', 'torso', 'legs', 'hands', 'feet'];
 // Check via equipment slot mapping (SLOT_BY_ID in equipment.js)
@@ -76,6 +76,8 @@ for (const a of alienArmor) {
   assert(eqSrc.includes(a.id) || a.id.startsWith('alien_'), 'alien armor piece: ' + a.id);
 }
 assert(alienArmor.every(a => a.tier === 4), 'all alien armor is tier 4');
+const advancedArmor = itemList.filter(i => i.armor && i.lootTier >= 4);
+assert(advancedArmor.length === 8 && advancedArmor.every(i => i.armor.beamResist), 'all eight advanced body armor definitions stop beams too');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

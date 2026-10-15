@@ -654,7 +654,10 @@
       if (rec && rec.outcome === 'vKill') {
         try { this.recordWaveKill(mdef && mdef.id, vid, 'aid-crisis', this.trickSummary ? this.trickSummary(rec) : null); } catch (e2) {}
       }
-      if (crisis && rec && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
+      var raidStillHere = crisis && crisis.raiders && (this.worldMonsters ? this.worldMonsters() : []).some(function (x) {
+        return x !== m && x.lingering && (x.hp || 0) > 0;
+      });
+      if (crisis && rec && !raidStillHere && (rec.outcome === 'vKill' || rec.outcome === 'mFlee')) {
         this.say('The teeth break. The door holds — with ' + (present.length ? present.map(function (q) { return q.leader; }).join(' and ') + ' standing in Haven\'s dirt' : 'nobody\'s help but Haven\'s own') + '.');
         this.resolveAidCrisis('fought');
       }
@@ -748,7 +751,7 @@
           var ms2 = this.worldMonsters ? this.worldMonsters() : [];
           for (var i = 0; i < ms2.length; i++) {
             var mm = ms2[i];
-            if (mm && mm.lingering && mm.tx === hx2 && mm.ty === hy2 && (mm.hp || 0) > 0) { threat = true; break; }
+            if (mm && mm.lingering && ((mm.raidHaven && mm.raidHaven.x === hx2 && mm.raidHaven.y === hy2) || (mm.tx === hx2 && mm.ty === hy2)) && (mm.hp || 0) > 0) { threat = true; break; }
           }
         } catch (e) {}
         if (!threat) this.resolveAidCrisis('fought');

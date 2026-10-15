@@ -1,0 +1,41 @@
+{
+  "_doc": "Resumed 2026-10-15. Steve: advanced gear should carry survival; human-class beam hits remain surprisingly lethal, with a dodgeable wind-up; raids use the current wave. Health stays at its existing cap while equipment/ability/party survival is measured.",
+  "beam": {
+    "maxHealthFraction": [
+      0.65,
+      0.85
+    ],
+    "perPieceMultiplier": 0.7
+  },
+  "raids": {
+    "currentWaveOnly": true,
+    "spread": true
+  },
+  "table": {
+    "cumulativeLateWave": true,
+    "failureKcal": 500,
+    "failureStanding": 25,
+    "maxFailures": 2,
+    "standing": {
+      "feared": {
+        "base": 25,
+        "scale": 200
+      },
+      "beloved": {
+        "base": 20,
+        "scale": 120
+      },
+      "relay": {
+        "base": 25,
+        "scale": 60
+      }
+    },
+    "finalStakes": {
+      "feared": {
+        "meter": "terror",
+        "min": 4
+      }
+    },
+    "strongOpeningStanding": 75
+  }
+}

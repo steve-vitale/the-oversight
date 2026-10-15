@@ -2166,7 +2166,7 @@
       // smoke on the horizon — the road has neighbors. Discovery for exiles
       // sizing up where to petition.
       try {
-        const px = (this.map && this.map.px) || 3, py = (this.map && this.map.py) || 3;
+        const px = (this.map && this.map.px) ?? 3, py = (this.map && this.map.py) ?? 3;
         let best = null, bd = 99;
         for (const v of (this.state.otherVillages || [])) {
           const d = Math.abs((v.x || 0) - px) + Math.abs((v.y || 0) - py);

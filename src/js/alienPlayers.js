@@ -2673,19 +2673,24 @@
     // - MONSTER TIERS (wave 1/2/veterans) = how hard the monster is
     // - LOOT TIERS (1-4) = how strong the item is
     // - BEAM RESISTANCE = whether your gear stops alien beam weapons
-    // Beam resistance is its own axis. It doesn't care about waves or tiers.
+    // Beam resistance is its own axis. High-tier armor declares its resistance in items.json.
 
     // apBeamResistPieces: count beam-resistant pieces the player is wearing.
-    // One source: alien armor (armor.beamResist:true in items.json) — grown,
+    // Resistant armor (armor.beamResist:true in items.json), including advanced gear — grown,
     // not made — EQUIPPED in head/torso/legs/hands/shoes. Weapons and
     // accessories never count.
     // Full-body sets count per covered slot (head+torso+legs+shoes = 4).
     // Returns array of {slot, itemId, source:'alien'}.
-    apBeamResistPieces: function () {
+    apBeamResistPieces: function (targetKey) {
       var pieces = [];
       try {
         var s = this.state.scholar || {};
         var equipped = s.equipped || {};
+        if (targetKey && targetKey !== 'p' && targetKey !== 'player') {
+          var target = this.tbFighter(targetKey);
+          var person = target && target.villagerId && this.getPerson(target.villagerId);
+          equipped = (person && person.equipped) || {};
+        }
         // Armor slots only. 'feet' kept as legacy alias for old saves.
         var slots = ['head', 'torso', 'legs', 'hands', 'shoes', 'feet'];
         for (var i = 0; i < slots.length; i++) {
@@ -2705,7 +2710,8 @@
           // Full-body set on torso: counts per covered slot.
           var isFS = false;
           try {
-            if (typeof S !== 'undefined' && S.equipment && S.equipment.isFullSet(itemId, def)) isFS = true;
+            var equipment = (_g.Scattering || {}).equipment;
+            if (equipment && equipment.isFullSet(itemId, def)) isFS = true;
           } catch (e) {}
           // Source 1: alien armor
           if (def.armor && def.armor.beamResist) {
@@ -2722,7 +2728,11 @@
           }
         }
       } catch (e) {}
-      return pieces;
+      // A full-body set and legacy feet alias cannot count one body slot twice.
+      return pieces.filter(function (p, i, all) {
+        var slot = p.slot === 'feet' ? 'shoes' : p.slot;
+        return all.findIndex(function (q) { return (q.slot === 'feet' ? 'shoes' : q.slot) === slot; }) === i;
+      });
     },
 
     // apBeamResistLevel: none (0), partial (1-2), substantial (3-4), full (5+).
@@ -2796,7 +2806,7 @@
     // apBeamHit: alien beam weapon damage resolution.
     // Called from the tbDamage wrap when damageType is 'alien_beam'.
     // Normal armor does NOTHING. Only beam-resistant gear helps.
-    // 0 pieces: nearly instant lethal (90-110% of max HP).
+    // 0 pieces: 65-85% of max HP; a fresh, healthy bearer survives one hit.
     // Each piece multiplies damage by 0.7. Full set (5): ~17% — hard but fair.
     apBeamHit: function (targetKey, dmg, sourceLabel, opts) {
       var s = this.state.scholar || {};
@@ -2805,13 +2815,17 @@
       // damage actually lands — tbFighter('player') is undefined and beams
       // used to announce then silently whiff (Steve 2026-10-08).
       var engineKey = (targetKey === 'player') ? 'p' : targetKey;
-      var maxHp = s.maxHp || 100;
-      var pieces = this.apBeamResistPieces();
+      var t = this.tbFighter(engineKey);
+      if (!t || !t.alive) return 0;
+      var maxHp = t.maxHp || (this.maxHealth ? this.maxHealth() : 100);
+      var pieces = this.apBeamResistPieces(engineKey);
+      var knobs = ((this.data.survivalBalance || {}).beam) || {};
+      var range = knobs.maxHealthFraction || [0.65, 0.85];
       var n = pieces.length;
       // Base beam damage: devastating. This is the "oh shit" weapon.
-      var base = Math.round(maxHp * (0.9 + Math.random() * 0.2));
+      var base = Math.round(maxHp * (range[0] + Math.random() * (range[1] - range[0])));
       // Each resistant piece multiplies by 0.7
-      var mult = Math.pow(0.7, n);
+      var mult = Math.pow(knobs.perPieceMultiplier || 0.7, n);
       var final = Math.max(1, Math.round(base * mult));
       // THE "OH SHIT" MOMENT: first beam hit with no resistance.
       // The game tells you, clearly: your armor will not save you from this.
@@ -2824,7 +2838,7 @@
         // "a beam weapon" the same way.)
         var _beamKnown = false;
         try { _beamKnown = !!((opts && opts.pid) && this.apKnowsAlien(opts.pid)); } catch (e0b) {}
-        this.say('💀 Your ' + this.apArmorName() + ' might as well be paper. ' + (_beamKnown ? 'You need alien armor — or something you love enough to resonate.' : 'Whatever they\'re wearing stops this. Yours doesn\'t.'));
+        this.say('💀 Your ' + this.apArmorName() + ' might as well be paper. ' + (_beamKnown ? 'You need resistant armor — advanced gear that can turn the beam.' : 'Whatever they\'re wearing stops this. Yours doesn\'t.'));
         this.say('💀 THIS IS NOT A FAIR FIGHT. Run, or find resistant gear.');
         try { this.drama('beamHorror', s.mx, s.my); } catch (e) {}
       } else if (n > 0 && n < 5 && !s._beamPartialSeen) {
@@ -2834,40 +2848,16 @@
         s._beamFullSeen = true;
         this.say('◈ Your full resistant set sings — the beam breaks across it like water on stone. You can fight them now. It\'s still going to hurt.');
       }
-      // Apply the damage via the normal path (bypassing armor since we
-      // already calculated final — damage is applied directly below).
-      // DEAD CODE (break-it 2026-10-10): an orphaned flag object used to be
-      // built here and marked "beam final", but nothing ever read it — the
-      // tbDamage wrap's matching branch was removed (break-it 2026-10-08)
-      // and apBeamHit never re-enters tbDamage.
-      // AUDIO (break-it 2026-10-09): the beam DISCHARGES here — the resolve
-      // sounds like any machine beam (droneBeam via the impact dispatcher),
-      // whether or not the target is still standing to take it. Was: the
-      // game's most devastating attack played nothing.
-      try { this.audioEvent('impact', { pattern: 'beam' }); } catch (e) {}
-      try {
-        var t = this.tbFighter(engineKey);
-        if (t && t.alive) {
-          t.hp = Math.max(0, (t.hp || maxHp) - final);
-          var who = targetKey === 'player' ? 'You take' : (t.name || 'They take');
-          this.say('🔆 ' + who + ' ' + final + ' beam damage' + (n > 0 ? ' (' + n + ' resistant ' + (n === 1 ? 'piece' : 'pieces') + ' absorbing)' : ' (no resistance)') + ' — ' + sourceLabel + '.');
-          if (t.hp <= 0) {
-            t.alive = false;
-            // DEATH PROCESSING (sim audit 2026-10-14): this called this.tbKill,
-            // which never existed — beam deaths skipped the fall + death record
-            // (swallowed in every run that had one). Mirror tbDamage's branches.
-            try {
-              if (t.kind === 'player') this.say('You go down.');
-              else if (t.kind === 'villager' || (t.kind === 'ally' && t.villageId === 'haven' && t.villagerId)) {
-                this.say('☠ ' + t.name + ' falls.');
-                this.tbVillagerFalls(t);
-                this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'alien_beam', witnesses: this.fightWitnesses ? this.fightWitnesses(t.villagerId) : [] });
-              }
-            } catch (e) { console.warn('apBeamHit death', e && e.message); }
-          }
-        }
-      } catch (e) {}
-      return final;
+      // The shared damage funnel keeps gods, party protection and death records
+      // live. Only ordinary armor and random footwork are bypassed: the aimed
+      // tile can be dodged before discharge, and resistant gear already paid.
+      try { this.audioEvent('impact', { pattern: 'beam' }); } catch (e) { console.warn('[beam] impact', e); }
+      var sourceKey = opts && opts.sourceKey;
+      var landed = this.tbDamage(engineKey, final, sourceLabel + ' beam', sourceKey,
+        { undodgeable: true, alienBeamFinal: true, quiet: true });
+      this.say('🔆 ' + (engineKey === 'p' ? 'You take' : t.name + ' takes') + ' ' + landed +
+        ' beam damage (' + n + ' resistant ' + (n === 1 ? 'piece' : 'pieces') + ') — ' + sourceLabel + '.');
+      return landed;
     },
 
     // apArmorName: what the player is currently wearing (for the horror text).
@@ -2930,6 +2920,19 @@
         // who fields a beam weapon — not a second hardcoded list. Old Tam
         // fights fair: no beam, ever.
         if (!this.apHasBeam(pid)) return false;
+        var shot = fighter._beamAim;
+        if (shot) {
+          delete fighter._beamAim;
+          fighter._beamCooldown = 3;
+          var target = this.tbFighter('p');
+          if (target && target.alive && target.mx === shot.x && target.my === shot.y) {
+            this.apBeamHit('player', 0, shot.name, { pid: pid, sourceKey: fighter.key });
+          } else {
+            this.say('🔆 The beam burns the place you were standing. You moved in time.');
+            try { this.audioEvent('impact', { pattern: 'beam' }); } catch (e) { console.warn('[beam] miss', e); }
+          }
+          return true;
+        }
         // Cooldown ticks on the alien's own turn: max one beam per ~3 rounds.
         // (break-it 2026-10-09: the tick used to live in a tbAfterPlayerAction
         // wrap that ALSO fired the beam after the alien's normal strike — a
@@ -2937,13 +2940,12 @@
         // design. The roll moved into tbAlienTurn (encounters.js); the tick
         // moved with it.)
         var f = this.tbfight;
-        if (f && f._beamCooldown > 0) { f._beamCooldown--; return false; }
+        if (fighter._beamCooldown > 0) { fighter._beamCooldown--; return false; }
         // Who uses beams? Sadistic ones love them. Others use them when serious.
         var chance = 0.25;
         if (per.disposition === 'sadistic') chance = 0.4;
         if (fighter._enraged) chance += 0.2;
         if (Math.random() >= chance) return false;
-        if (f) f._beamCooldown = 3;
         // FIRE THE BEAM
         var beamNames = {
           'vex_marlowe': 'Vex\'s phase lance',
@@ -2961,16 +2963,17 @@
         try { _known = !!this.apKnowsAlien(pid); } catch (e0k) {}
         var _who = _known ? per.name : 'The stranger';
         var beamName = _known ? (beamNames[pid] || (per.name + '\'s beam weapon')) : 'a beam weapon';
-        this.say('🔆 ' + _who + ' raises ' + beamName + '. The air tastes like copper.');
+        this.say('🔆 ' + _who + ' raises ' + beamName + '. A bright point locks onto your tile. MOVE before their next turn. The air tastes like copper.');
         // AUDIO (break-it 2026-10-09): the beam is the aliens' signature
         // weapon — the raise is the "oh shit" telegraph and it was silent.
         // Machine-beam windup (beamTechWindup via the telegraph dispatcher),
         // not the deer's beamCharge — other beams are machines.
         try { this.audioEvent('telegraph', { pattern: 'beam', urgency: 1 }); } catch (e) {}
-        // Player is the target (beam weapons are for the player)
-        this.apBeamHit('player', 0, beamName, { damageType: 'alien_beam', pid: pid });
+        var target = this.tbFighter('p');
+        if (!target || !target.alive) return false;
+        fighter._beamAim = { x: target.mx, y: target.my, name: beamName };
         return true;
-      } catch (e) { return false; }
+      } catch (e) { console.warn('[beam] attack', e); return false; }
     },
 
   };

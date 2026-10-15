@@ -86,8 +86,10 @@ async function main() {
       tries++;
     }
     assert(fired, 'seed ' + seed + ': beam fires within 60 seeded rolls');
+    assert(pF.hp === 100 && aF._beamAim, 'seed ' + seed + ': aiming is a full turn without damage');
+    Game.apMaybeBeamAttack(aF); // the next alien turn resolves the declared tile
     assert(pF.hp < 100, 'seed ' + seed + ': beam damage actually lands (hp ' + pF.hp + ')');
-    assert(Game.tbfight._beamCooldown === 3, 'seed ' + seed + ': cooldown set to 3 on fire');
+    assert(aF._beamCooldown === 3, 'seed ' + seed + ': cooldown set to 3 on fire');
     const again = Game.apMaybeBeamAttack(aF);
     assert(again === false, 'seed ' + seed + ': immediate re-fire blocked by cooldown');
     const said = H.sayText();
@@ -148,6 +150,8 @@ async function main() {
     Math.random = () => 0.0; // force the 40% sadistic roll to fire
     H.clearLog();
     Game.tbAlienTurn(aF);
+    assert(pF.hp === hp0 && aF._beamAim, 'seed ' + seed + ': the beam wind-up replaces the strike');
+    Game.tbAlienTurn(aF); // actual next hostile turn, before any heavy declare
     Math.random = realR;
     assert(pF.hp < hp0, 'seed ' + seed + ': turn 2 beam replaces the strike (hp ' + hp0 + ' -> ' + pF.hp + ')');
     assert(/🔆/.test(H.sayText()), 'seed ' + seed + ': turn-2 beam telegraph said');

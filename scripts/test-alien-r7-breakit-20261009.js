@@ -5,7 +5,7 @@
 //   F3: apPersonaPackage sadistic branch said "a beautiful ALIEN medkit" pre-reveal.
 //   F4: apContactedVillager establishment said "contacted by an alien player" pre-reveal.
 //   F5: apPlaygroundDuel said "Even aliens have limits" while gating only the NAME.
-//   F6: apBeamHit horror beat said "You need alien armor" pre-reveal.
+//   F6: apBeamHit horror beat said "You need resistant armor" pre-reveal.
 //   F8: apPlaygroundRookieMistake said "alien currency" on the System feed pre-reveal.
 //   F9: salvaged armor is literally named "Alien <piece>" — the strip now
 //       reveals the persona on the spot, so the item name never precedes
@@ -130,7 +130,7 @@ function noAlienWord(t) { return !/alien/i.test(t); }
     G.state.scholar._beamHorrorSeen = false;
     H.clearLog();
     G.apBeamHit('player', 0, "Vex's phase lance", { damageType: 'alien_beam', pid: 'vex_marlowe' });
-    ok(/alien armor/i.test(H.sayText()), `seed ${seed}: F6 post-reveal horror says "alien armor"`);
+    ok(/resistant armor/i.test(H.sayText()), `seed ${seed}: F6 post-reveal horror says "resistant armor"`);
     delete ap().known.vex_marlowe;
     G.tbfight = null;
 
@@ -310,6 +310,8 @@ function noAlienWord(t) { return !/alien/i.test(t); }
     const bf = { alienPid: 'vex_marlowe', _enraged: false };
     forceRoll(0.0); // 0.0 < 0.4 sadistic beam chance
     ok(G.apMaybeBeamAttack(bf) === true, `seed ${seed}: I beam fires`);
+    ok(beamTarget === null, `seed ${seed}: I aiming leaves counterplay before damage`);
+    G.apMaybeBeamAttack(bf); // next alien turn: discharge
     unforce();
     ok(beamTarget === 'player', `seed ${seed}: I beam targets the player with villagers in the fight (got ${beamTarget})`);
     G.apBeamHit = origBeamHit;

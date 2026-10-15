@@ -14,6 +14,7 @@ const ASSETS = [
   './assets/icons/icon-192.png', './assets/icons/icon-512.png',
   './src/css/main.css',
   './src/js/app.js', './src/js/game.js', './src/js/build.js',
+  './src/js/godverbs.js', './src/data/survival-balance.json',
   './src/js/engine/state.js', './src/js/engine/modifiers.js',
   './src/js/engine/calories.js', './src/js/engine/day.js',
   './src/js/engine/forage.js', './src/js/engine/combat.js',
