@@ -17932,6 +17932,7 @@
             // villagers: 🧍 with a TINY name label underneath.
             // (names were rendering at full size and swallowing the grid.)
             for (const [rid, pos] of Object.entries(vpos)) {
+              if (rid === Game.villagerId) continue;
               if (pos.mx === cx && pos.my === cy) {
                 const vp = Game.data.villagers.find(v => v.id === rid) || Game.data.background_survivors.find(v => v.id === rid);
                 const showName = Game.state.systemArrived || Game.nameKnown(rid);

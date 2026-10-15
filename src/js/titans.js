@@ -16,6 +16,7 @@
 //     council, call, and commit buttons in the camp self bar (app.js)
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
+//   - titanHavenBlades(muster)
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
@@ -88,6 +89,7 @@
 
   function titanDawnTick() {
     try {
+      titanReconcileBearer();
       var day = (Game.state.scholar || {}).day || 0;
       var cast = titanCast();
       // Herald omen: wave 4 unlocked + regional+
@@ -415,9 +417,20 @@
   function titanHavenBlades(muster) {
     var roster = ((Game.state || {}).village || {}).roster || [], seen = {};
     return ((muster && muster.haven) || []).map(function (h) { return typeof h === 'string' ? { vid: h } : h; }).filter(function (h) {
-      if (!h || !h.vid || seen[h.vid] || roster.indexOf(h.vid) < 0) return false;
+      if (!h || !h.vid || h.vid === Game.villagerId || seen[h.vid] || roster.indexOf(h.vid) < 0) return false;
       seen[h.vid] = true;
       return true;
+    });
+  }
+
+  // You become that villager, not that villager plus their old NPC role.
+  // Also reconciles old saves before a dawn upkeep/injection can count it.
+  function titanReconcileBearer() {
+    var state = Game.state || {}, st = state.titans, v = state.village || {};
+    if (v.titanCommitted) delete v.titanCommitted[Game.villagerId];
+    Object.keys((st && st.musters) || {}).forEach(function (tid) {
+      var m = st.musters[tid];
+      if (m) m.haven = titanHavenBlades(m);
     });
   }
 
@@ -1017,6 +1030,7 @@
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
+    titanHavenBlades: titanHavenBlades,
     titanMusterState: function (titanId) { return titanState().musters[titanId] || null; },
     // exposed for the finale campaign (allied injection into campaign nodes)
     titanInjectAllies: titanInjectAllies,
@@ -1025,6 +1039,17 @@
   };
 
   Object.assign(Game, methods);
+
+  // ledger.js sets the new bearer before calling mantleBecome. Keep role
+  // cleanup here with the muster rather than duplicating it in the ledger.
+  if (Game.mantleBecome) {
+    var become = Game.mantleBecome;
+    Game.mantleBecome = function () {
+      var result = become.apply(this, arguments);
+      titanReconcileBearer();
+      return result;
+    };
+  }
 
   // test hooks (proof tests exercise internals without faking combat)
   Game._titanTest = {
