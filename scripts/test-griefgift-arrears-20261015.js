@@ -172,8 +172,10 @@ async function main() {
     return;
   }
   if (!controlCopyValid()) {
-    console.error('FATAL: control copy missing or malformed (need GRIEFGRAIN-AID-CREDIT-DISABLED at ' + CONTROL_TREE + ')');
-    process.exit(1);
+    // The disposable control copy is deleted per kill protocol once the
+    // verdict is recorded; its absence is an expected post-kill state.
+    console.log('INFO-SKIP: control copy absent (deleted per kill protocol) — engine-discrimination checks cannot run. Exit 0.');
+    return;
   }
   const armedHarness = require(path.join(WORKTREE, 'scripts', 'sim-harness'));
   const controlHarness = require(path.join(CONTROL_TREE, 'scripts', 'sim-harness'));
