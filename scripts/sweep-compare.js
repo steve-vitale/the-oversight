@@ -86,6 +86,10 @@ async function runComparison(opts) {
   const policyIds = opts.policies || (process.env.POLICIES || 'competent').split(',').map(s => s.trim()).filter(Boolean);
   const days = opts.days || parseInt(process.env.DAYS || '60', 10);
   const extraMetrics = opts.extraMetrics || null;
+  // Explicit regional comparisons use the same driver and sampling cadence.
+  // Omission preserves the ordinary origin/random landing behavior.
+  const region = opts.region || process.env.REGION || null;
+  const origin = opts.origin || process.env.ORIGIN || 'Columbus, Ohio';
 
   const runs = [];
   for (const pid of policyIds) {
@@ -93,7 +97,12 @@ async function runComparison(opts) {
     if (!base) throw new Error(`unknown policy: ${pid} (see scripts/policies/README.md)`);
     for (const seed of seeds) {
       const { Game, manifest } = await loadGame({ seed, mode: 'compare-' + pid, fullTelemetry: false });
-      await setupGame(Game);
+      if (region) {
+        if (!Game.playableRegions().some(r => r.id === region)) throw new Error('Region is not playable: ' + region);
+        Game.debugRegion = region;
+      }
+      await setupGame(Game, origin);
+      if (region && Game.state.region !== region) throw new Error('Wrong comparison region: ' + Game.state.region);
       // Shallow copy: never mutate the shared policy object. Wrap daily to
       // track max scale rank / arc / table — reachability needs history,
       // not just the end state.
@@ -121,7 +130,7 @@ async function runComparison(opts) {
         }
       } catch (e) {}
       const row = {
-        label, policy: pid, seed,
+        label, policy: pid, seed, region: Game.state.region, origin,
         days: result.days, gameDays: result.gameDays,
         endReason: result.endReason,
         won: end.won ? 1 : 0,

@@ -161,6 +161,7 @@ function install(G) {
 }
 async function child() {
   const root = path.resolve(arg('root', ROOT));
+  const region = arg('region', null), origin = arg('origin', null);
   const H = require(path.join(root, 'scripts/sim-harness'));
   const { POLICY_REGISTRY: registry, runComparison } = require(path.join(root, 'scripts/sweep-compare'));
   const id = arg('policy', 'capable'), base = registry[id];
@@ -183,13 +184,13 @@ async function child() {
   // progression snapshot. A different sampling cadence can initialize lazy
   // game state at different times and produce a different trajectory.
   let rep;
-  try { rep = await H.quietLog(() => runComparison({ seeds: [Number(arg('seed', 7))], policies: [id], days: Number(arg('days', 150)) })); }
+  try { rep = await H.quietLog(() => runComparison({ seeds: [Number(arg('seed', 7))], policies: [id], days: Number(arg('days', 150)), ...(region ? { region } : {}), ...(origin ? { origin } : {}) })); }
   finally { registry[id] = base; }
   const r = rep.runs[0];
   if (rec) delete rec.sample;
   const stateHash = gameplayHash(G.state);
   if (arg('dump-state', null)) fs.writeFileSync(arg('dump-state'), JSON.stringify(G.state));
-  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHashVersion: 2, stateHash, ...(rec || {}) }) + '\n');
+  process.stdout.write('\n@@GEAR@@' + JSON.stringify({ seed: Number(arg('seed', 7)), policy: id, region: r.region, origin: r.origin, days: r.days, endReason: r.endReason, won: !!r.won, sat: !!r.entered, invited: !!r.table, deaths: r.deaths, stateHashVersion: 2, stateHash, ...(rec || {}) }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();
@@ -202,7 +203,7 @@ async function main() {
     while (next < jobs.length) {
       const { policy, seed } = jobs[next++];
       const row = await new Promise((resolve, reject) => {
-        const p = spawn(process.execPath, [__filename, '--child', '--root', root, '--policy', policy, '--seed', String(seed), '--days', arg('days', '150')], { cwd: root, env: process.env });
+        const p = spawn(process.execPath, [__filename, '--child', '--root', root, '--policy', policy, '--seed', String(seed), '--days', arg('days', '150'), ...(arg('region', null) ? ['--region', arg('region')] : []), ...(arg('origin', null) ? ['--origin', arg('origin')] : [])], { cwd: root, env: process.env });
         let out = '', err = '';
         p.stdout.on('data', x => { out += x; if (out.length > 3e6) out = out.slice(-2e6); });
         p.stderr.on('data', x => { err += x; });
@@ -226,7 +227,9 @@ async function main() {
   const hashes = {};
   const walk = dir => { for (const ent of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, ent.name); if (ent.isDirectory()) walk(p); else if (/\.(js|json)$/.test(p)) hashes[path.relative(root, p).replace(/\\/g, '/')] = require('crypto').createHash('sha256').update(fs.readFileSync(p)).digest('hex'); } };
   walk(path.join(root, 'src')); walk(path.join(root, 'scripts', 'policies'));
-  fs.writeFileSync(file + '.json', JSON.stringify({ schemaVersion: 2, driver: 'sweep-compare', root, sourceHead: sha, sourceHashes: hashes, seeds, policies, days: Number(arg('days', 150)), sources, rows }, null, 2) + '\n');
+  for (const rel of ['scripts/sweep-compare.js', 'scripts/sim-harness.js']) hashes[rel] = require('crypto').createHash('sha256').update(fs.readFileSync(path.join(root, rel))).digest('hex');
+  hashes['observer/gear-usage-audit.js'] = require('crypto').createHash('sha256').update(fs.readFileSync(__filename)).digest('hex');
+  fs.writeFileSync(file + '.json', JSON.stringify({ schemaVersion: 2, driver: 'sweep-compare', root, sourceHead: sha, sourceHashes: hashes, seeds, policies, requestedRegion: arg('region', process.env.REGION || null), origin: arg('origin', process.env.ORIGIN || 'Columbus, Ohio'), days: Number(arg('days', 150)), sources, rows }, null, 2) + '\n');
   const methods = Object.keys(METHODS).map(m => [m, rows.reduce((n, r) => n + (r.calls[m] || 0), 0), rows.filter(r => r.calls[m]).length]);
   fs.writeFileSync(file + '.md', ['# Gear and usage census', '', 'Observer only; acquisitions exclude starting gear. Calls are coverage, not proof of value or success. NPC gifts count for their recipient. Nested sources do not double-count.', '', `Source: ${sha}; ${rows.length} runs, ${seeds.length} seeds, ${arg('days', 150)} days.`, '', '| source | items | gear | tier 3+ | tier 4 | beam armor |', '|---|---:|---:|---:|---:|---:|', ...Object.entries(sources).map(([s, n]) => `| ${s} | ${n.items} | ${n.gear} | ${n.tier3} | ${n.tier4} | ${n.beam} |`), '', '| method | calls | runs |', '|---|---:|---:|', ...methods.map(m => `| ${m[0]} | ${m[1]} | ${m[2]} |`), '', '| policy | wins | mean days | max favor | starting tier 4 runs |', '|---|---:|---:|---:|---:|', ...policies.map(p => { const rs = rows.filter(r => r.policy === p); return `| ${p} | ${rs.filter(r => r.won).length}/${rs.length} | ${(rs.reduce((n, r) => n + r.days, 0) / rs.length).toFixed(1)} | ${Math.max(...rs.map(r => r.maxFavor))} | ${rs.filter(r => r.startingTier === 4).length} |`; }), ''].join('\n'));
   console.log('\nwrote ' + file + '.{json,md}');

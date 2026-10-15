@@ -72,6 +72,14 @@ Count them in an `extraMetrics(Game)` hook passed to `runComparison` (see
 `node scripts/gear-usage-audit.js --label <name> --n 16 --days 150 --par 4`
 records actual acquisitions by source (contest, show, package, trade, craft,
 and each corpse kind), including tier, armor/weapon fields and beam resistance.
+Use `--region eu_temperate --origin "Berlin, Germany"` for an explicit
+regional landing on the same standard driver. Invalid/unplayable regions
+fail instead of silently falling back. Omit these flags for ordinary origin
+routing. Reports record the actual region/origin; comparisons across regions
+include their different maps, ecology, familiarity and RNG histories, so do
+not attribute an outcome difference to one isolated lever. `sweep-compare`
+also accepts `region`/`origin` options or `REGION`/`ORIGIN` environment values.
+
 Use `--policies merchant,maker,caregiver` for livelihood probes and `--n 64`
 for balance comparisons. `--root <frozen-checkout>` runs identical current
 observer code against frozen game/policy sources; reports include hashes.

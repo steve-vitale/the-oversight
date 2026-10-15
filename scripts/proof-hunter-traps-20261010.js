@@ -162,7 +162,7 @@ const recipe = (id) => Game.data.recipes.find(r => r.id === id);
   {
     const sn = recipe('snare'), df = recipe('deadfall'), bx = recipe('box_trap'), pt = recipe('pit_trap');
     check('snare card: "catches small game" matches its catch list',
-      /small game/.test(sn.description) && sn.catches.every(c => ['cottontail_rabbit', 'gray_squirrel', 'opossum'].includes(c)),
+      /small game/.test(sn.description) && sn.catches.every(c => ['cottontail_rabbit', 'gray_squirrel', 'opossum', 'european_rabbit', 'brown_hare', 'red_squirrel'].includes(c)),
       sn.catches.join(','));
     check('deadfall card: "once in a long while it takes a deer" — deer rare in list',
       df.catches.includes('white_tailed_deer') && df.catches.filter(c => c === 'white_tailed_deer').length === 1,

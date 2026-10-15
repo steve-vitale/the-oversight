@@ -12,7 +12,9 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 1. Read `docs/godpath/STEVE-ANSWERS.md` (Steve's verbatim calls; it outranks
    everything). **Never ask Steve something it already answers.**
 2. Read `docs/COHERENCE-SPINE.md`: how the progression features fit together.
-3. Pick the top unclaimed item in §2 and read its spec doc.
+3. Read `docs/AGENT-LANES.md` before claiming work. Muse owns region
+   content/nomad/regional systems; Codex owns godpath/ascension/subclass/scale
+   and Table codas. Pick the next unclaimed item in your lane and read its spec.
 4. Work the loop in `AGENTS.md`: proof test, then `node scripts/check.js
    --quick`, then a small commit. Run the full `node scripts/check.js` before
    pushing.
@@ -264,8 +266,14 @@ not full regional parity: the Hungry Gap challenge and two monster skins
 remain explicitly scaffolded until their roadmap runtime wiring. Seed 777's
 day-40 loss, global-pool RNG shifts, remaining species/art accuracy and
 all-playstyle survival are open. See
-`evidence/2026-10-15/europe-region-audit.md`. Continue the other four wave-1
-regions and keep the playstyle audit above active.
+`evidence/2026-10-15/europe-region-audit.md`. Muse has published six regions
+on `region-content-wave1`; its Europe data overlaps this independent slice
+and needs deliberate reconciliation, not a blind merge. Codex resumes the
+godpath lane. The follow-up 150-day audit found regional trap catch lists
+restricted to North American species. Correcting those restores actual
+carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
+15 Table wins, 71 to 63 bearer deaths). See
+`evidence/2026-10-15/region-livelihood-audit.md`; maintain the playstyle audit.
 
 ### 2. Table ending codas (64 left)
 - **Spec:** `docs/TABLE.md`, "Endings by build". Write in this order:
