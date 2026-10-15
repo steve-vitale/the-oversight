@@ -1,0 +1,20 @@
+=== seed 8207 day 45 — conversation with Milton (gen_hzq7vg4) ===
+occupation=Midwife temperament=warm trust=90 dead=false mood=steady
+want: seek_taken (stage 1)
+
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Simple as that."
+YOU: [dlg:help] null
+THEM: "It's my grandmother, Ashley. Was taken. Eighty-one years old and they called her boring. Eighty-one years. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Blackberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+(want=seek_taken stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=seek_taken stage=3 resolution=promised

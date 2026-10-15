@@ -1,0 +1,26 @@
+=== seed 8204 day 45 — conversation with Devon (devon_okafor) ===
+occupation=programmer temperament=anxious trust=33 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — still need hands. Are you in?"
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: They relax, a fraction. This is going well.
+(want=ask_favor stage=3)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Wild Ramps — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Here — let me show you."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Good. We've got a plan forming. I can feel it."
+want final: id=ask_favor stage=3 resolution=promised

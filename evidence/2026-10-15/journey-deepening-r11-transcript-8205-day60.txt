@@ -1,0 +1,26 @@
+=== seed 8205 day 60 — conversation with Chloe (chloe_dubois) ===
+occupation=interpreter temperament=dry trust=29 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your plan here — So what's your plan here? Just... get through it? I mean it."
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+(want=curious stage=2)
+YOU: [goon] "And?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Did you hear? Maya just walked away from Haven. Didn't look back. You'd know about that."
+(want=curious stage=2)
+YOU: [dlg:more] "Who told you?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Well. That was conversation."
+want final: id=curious stage=3 resolution=engaged

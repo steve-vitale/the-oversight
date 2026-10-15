@@ -1,0 +1,26 @@
+=== seed 8208 day 45 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About the worst thing you've done — What's the worst thing you've done since the sky changed? I won't forget that."
+YOU: [ans:q_guilty:a_tell] "Yes. I don't want to get into what. But yes."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: That could have stung. They let it pass — you've been kind before.
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "People are talking about Onni. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: They nod slowly, not quite done, not quite continuing.
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Anyway. I'm glad we talked. Really."
+want final: id=curious stage=3 resolution=engaged

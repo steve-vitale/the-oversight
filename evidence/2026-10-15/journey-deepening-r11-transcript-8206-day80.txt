@@ -1,0 +1,28 @@
+=== seed 8206 day 80 — conversation with Nino (nino_kapanadze) ===
+occupation=dry cleaner temperament=prickly trust=20 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What got you through the first week? The very first days. This isn't new."
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Look. Shock's underrated. It's the body's way of buying you time."
+(want=curious stage=2)
+YOU: [goon] "Go on."
+THEM: "The first week's behind us. That counts for something. That counts for a lot."
+(want=curious stage=2)
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Good question." "What? Did you hear? Oliver just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "What else did you hear?"
+THEM: "Right. Done. Don't look so relieved."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

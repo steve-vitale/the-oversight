@@ -1,0 +1,20 @@
+=== seed 8201 day 60 — conversation with Dylan (gen_cls0x0t) ===
+occupation=Baker temperament=cautious trust=90 dead=false mood=hungry
+want: ask_favor (stage 1)
+
+THEM: "I'm going hungry — have you got anything to spare? Anything? My hands shake when I try to work."
+YOU: [gq:open:take] "What do you think?"
+THEM: "Everyone's got a take. Mine's just the one I can live with."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Later."
+want final: id=ask_favor stage=3 resolution=promised

@@ -1,0 +1,14 @@
+=== seed 8202 day 60 — conversation with Kofi (gen_n05repo) ===
+occupation=Fisherman temperament=prickly trust=90 dead=false mood=steady
+want: seek_taken (stage 1, fromSeed)
+
+THEM: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:help] "What do you need?"
+THEM: "I just said — did you miss it?"
+(want=seek_taken stage=2)
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+(want=seek_taken stage=3)
+YOU: (leave)
+closing line: "We're done here. Don't make it weird."
+want final: id=seek_taken stage=3 resolution=promised

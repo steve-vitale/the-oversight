@@ -1,0 +1,31 @@
+=== seed 8205 day 80 — conversation with Grace (grace_obi) ===
+occupation=ESL teacher temperament=warm trust=22 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you're good at — What's something you're good at that nobody here knows about?"
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Listen — Noted. Filing that under 'extremely useful.' The village needs that."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [ask:lately] "Anything on your mind lately?"
+THEM: "You want to know about that? Okay." "You want to know what I did in the raid? I stood down The Ugly Beast at the treeline — it ran. Don't call it brave. Call it awake."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "My take? We're not going to like the answer, whatever it is."
+(want=curious stage=2)
+YOU: [dlg:more] "Go on."
+THEM: "I keep touching the spot where it grazed me. Like it'll explain itself."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "Next time I go out there, I tend the fire without being asked first. Calms the aim."
+(want=curious stage=2)
+YOU: [dlg:more] "Tell me more."
+THEM: "I stand where I stood. That's the whole of my plan."
+(want=curious stage=2)
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+closing line: "Take care of yourself, yeah? I mean it."
+want final: id=curious stage=3 resolution=engaged

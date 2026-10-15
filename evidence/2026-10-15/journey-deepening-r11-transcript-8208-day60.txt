@@ -1,0 +1,17 @@
+=== seed 8208 day 60 — conversation with Elena (elena_petrova) ===
+occupation=Baker temperament=warm trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Can I be honest? ...Hi. Sorry. I'm not good at the talking-to-strangers part."
+YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+(want=curious stage=2)
+YOU: [goon] "I'm listening."
+THEM: "Bottom line: You're alright. ...We're alright. Saying it out loud helps, I think."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Listen — Xavier is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Come find me later, yeah? I like talking to you."
+want final: id=curious stage=3 resolution=engaged
