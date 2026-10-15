@@ -1,0 +1,28 @@
+=== seed 8405 day 80 — conversation with Aisha (visjoin_78) ===
+occupation=street artist temperament=anxious trust=22 dead=false mood=cheerful
+want: curious (stage 1, fromSeed)
+
+THEM: "About where you're from — Where are you from — originally? Before all this. …sorry."
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their tone levels out — courteous, careful, further away.
+(want=curious stage=2)
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Priya? A carpenter, back before. Solid person. …if that makes sense."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "I should get back to it."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

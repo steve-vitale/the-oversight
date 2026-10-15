@@ -1,0 +1,26 @@
+=== seed 8403 day 60 — conversation with Fernando (gen_4vg8la2) ===
+occupation=glazier temperament=fidgety trust=52 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Where are you from — originally? Before all this."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+(want=curious stage=1)
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Funny — I keep a little map in my head of where everyone says they're from. Like we might go back and check."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "People are talking about Onni. Take it for what it's worth."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. One thing at a time. That's how we get through."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,20 @@
+=== seed 8405 day 45 — conversation with Anna (gen_86xrhe4) ===
+occupation=appliance repair tech temperament=sardonic trust=90 dead=false mood=hungry
+want: ask_favor (stage 2, fromSeed)
+
+THEM: "About the food I needed — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "I'll do it."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+(want=ask_favor stage=3)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A warmth settles over the conversation — they lean in a little.
+(want=ask_favor stage=3)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+(want=ask_favor stage=3)
+YOU: (leave)
+closing line: "Alright. Back to it."
+want final: id=ask_favor stage=3 resolution=promised

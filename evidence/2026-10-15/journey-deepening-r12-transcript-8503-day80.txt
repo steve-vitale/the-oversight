@@ -1,0 +1,29 @@
+=== seed 8503 day 80 — conversation with Ellis (visjoin_76) ===
+occupation=Butcher temperament=intense trust=20 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+(turn0 choices: ans:q_fun:a_people, ans:q_fun:a_hobby, ans:q_fun:honest_pass, ans:q_fun:a_deflect, deflect_q, leave, silence)
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: They pull back half a step — not leaving, just... further.
+(want=curious stage=2)
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "I wonder if undefined looks like this now. Empty. Quiet. Or if it's worse there." A detail doesn’t fit. Ellis said "doctor" — but then mentions something no doctor would ever say. They don’t notice. You do.
+(want=curious stage=2)
+YOU: [dlg:more] "What else?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "I get that."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: [goon] "I'm listening, I promise."
+THEM: "That's enough for now. It'll percolate."
+(want=curious stage=2)
+YOU: (leave)
+want final: id=curious stage=3 resolution=engaged

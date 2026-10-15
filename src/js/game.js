@@ -974,7 +974,16 @@
     // language, knowledge tags, and heritage all derive from it.
     // opts: { origin, forceCultureMatch, candidate, usedNames, usedOccs }
     genCharacter(opts) {
-      const { origin, forceCultureMatch, candidate, usedNames, usedOccs } = opts || {};
+      let { origin, forceCultureMatch, candidate, usedNames, usedOccs } = opts || {};
+      // ORIGIN DEFAULT (journey deepening r12 2026-10-15): arrival paths
+      // (visitor invites via ensureRosterPerson) call genCharacter WITHOUT an
+      // origin — the fill closure's replaceAll('{origin}', origin) then baked
+      // the literal string "undefined" into talk lines (sense-caught 8503-d80:
+      // "I wonder if undefined looks like this now"). Every person is from
+      // somewhere (Steve 2026-10-04: 12 random people from all over the
+      // world) — pick one, and the person record's homeRegion stays real.
+      if (!origin && typeof this.npcOriginPick === 'function') origin = this.npcOriginPick();
+      if (!origin) origin = 'somewhere';
       const cg = this.data.characterGen || {};
       const pick = a => a[Math.floor(Math.random() * a.length)];
       // distinct occupations across a candidate set when the pool allows it

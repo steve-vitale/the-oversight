@@ -1,0 +1,26 @@
+=== seed 8406 day 45 — conversation with Jack (gen_b5gg862) ===
+occupation=Social worker temperament=steady trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "Look — Are you going to stay? With us. For real."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+(want=curious stage=2)
+YOU: [goon] "Go on. I'm listening."
+THEM: "What's this about? Staying's a choice you make daily. I'll keep making it if you do."
+(want=curious stage=2)
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? Mateo just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "I'll keep that in mind."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "Anyway." A small smile.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Alright. Back to work."
+want final: id=curious stage=3 resolution=engaged

@@ -1,0 +1,26 @@
+=== seed 8403 day 80 — conversation with Olivia (gen_yb3q106) ===
+occupation=plumber temperament=withdrawn trust=90 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: The ease drains out of it, a little.
+(want=curious stage=2)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Why do you ask? Nothing's wasted. Not really. It all comes back around."
+(want=curious stage=2)
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Emma is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "Do you believe it?"
+THEM: "That's the whole of it. Sorry."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "A small wave. Already retreating inward."
+want final: id=curious stage=3 resolution=engaged

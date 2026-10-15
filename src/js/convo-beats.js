@@ -351,8 +351,13 @@
           (entry.id === 'dlg:react' && (c.reactDryCount || 0) >= 2)) continue;
       seen.add(entry.id);
       const label = (typeof this.convoPickCycle === 'function')
-        ? this.convoPickCycle(vid, 'reply:' + tag + ':' + topic + ':' + entry.id, entry.v)
+        ? (this.convoPickCycle(vid, 'reply:' + tag + ':' + topic + ':' + entry.id, entry.v) || (entry.v && entry.v[0]) || entry.id)
         : entry.v[Math.floor(Math.random() * entry.v.length)];
+      // NULL-LABEL GUARD (journey deepening r12 2026-10-15): convoPickCycle
+      // returns null when every variant in entry.v was said this conversation
+      // (the no-repeat ledger). A null label renders as a literal "null"
+      // button in the UI (esc(String(null))). A repeated player-voice label
+      // is honest — the want menu's || labels[0] fallback already does this.
       // Voice-shape the label: blunt/soft/plain variants are baked into
       // the pools above as alternates; the cycle keeps them fresh.
       out.push({ id: entry.id, label });

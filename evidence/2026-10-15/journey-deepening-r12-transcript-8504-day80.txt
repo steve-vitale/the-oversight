@@ -1,0 +1,30 @@
+=== seed 8504 day 80 — conversation with Monique (gen_8hitwxl) ===
+occupation=blacksmith temperament=intense trust=44 dead=false mood=steady
+want: curious (stage 1, fromSeed)
+
+THEM: "About who you don't trust — Is there someone here you don't trust? Be honest."
+(turn0 choices: agency:ask_field, ans:q_someone:a_tell, ans:q_someone:a_vague, ans:q_someone:honest_pass, deflect_q, leave, silence)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+(want=curious stage=1)
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+(want=curious stage=2)
+YOU: [goon] "Yeah?"
+THEM: "Why do you ask? Eyes open, mouth shut. That's the policy. For now."
+(want=curious stage=2)
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "We need to — Did you hear? Sofia just walked away from Haven. Didn't look back."
+(want=curious stage=2)
+YOU: [gq:open:take] "What do you think?"
+THEM: "I think the asking matters more than the answer, out here. Hm."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "That's... pretty much all of it, honestly."
+(want=curious stage=2)
+YOU: (leave)
+closing line: "We're just getting started, you and I. Remember that."
+want final: id=curious stage=3 resolution=engaged

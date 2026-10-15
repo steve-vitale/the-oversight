@@ -1,0 +1,20 @@
+=== seed 8406 day 60 — conversation with Jack (gen_b5gg862) ===
+occupation=Social worker temperament=steady trust=90 dead=false mood=cheerful
+want: ask_favor (stage 0)
+
+THEM: "You said you're staying — you didn't expect to say it, but you said it. Still true?"
+YOU: [gq:open:take] "What do you think?"
+THEM: "Honestly? I think about it more than I say."
+(want=ask_favor stage=0)
+YOU: [dlg:more] "Tell me more."
+THEM: "I wish there was more to tell. That's it."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "My cut needs a second pair of hands. Will you help me clean it?"
+(want=ask_favor stage=1)
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Sorry — I asked you something there." Will you help me clean it?
+(want=ask_favor stage=1)
+YOU: (leave)
+closing line: "Don't be a stranger."
+want final: id=ask_favor stage=3 resolution=unresolved

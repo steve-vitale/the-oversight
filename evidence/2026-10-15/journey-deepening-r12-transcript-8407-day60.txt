@@ -1,0 +1,23 @@
+=== seed 8407 day 60 — conversation with Courtney (gen_09yajbz) ===
+occupation=Veterinarian temperament=sardonic trust=90 dead=false mood=steady
+want: curious (stage 1)
+
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+(want=curious stage=2)
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Dale is back. Walked in like they'd never left."
+(want=curious stage=2)
+YOU: [dlg:more] "What else have you heard?"
+THEM: "I wish there was more to tell. That's it."
+(want=curious stage=2)
+YOU: [dlg:react] "Huh. People talk."
+THEM: "Well." A breath. "That's where things stand."
+(want=curious stage=2)
+YOU: [dlg:react] "No kidding."
+THEM: "So." They look at the fire for a moment.
+(want=curious stage=2)
+YOU: (leave)
+closing line: "Later."
+want final: id=curious stage=3 resolution=engaged

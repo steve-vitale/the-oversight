@@ -1,0 +1,30 @@
+=== seed 8405 day 60 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=61 dead=false mood=hungry
+want: seek_comfort (stage 1, fromSeed)
+
+THEM: "About whatever's been weighing on me — Do you ever — no. Never mind." They don't look away, though. They want you to ask.
+YOU: [dlg:comfort] "Hey — are you alright?"
+THEM: "I — yeah. It helps, hearing that."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Good. Company's company."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They lean back on their hands. "Wind's up tonight. Good night to not be walking."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Nice. Sit. The fire's warm."
+(want=seek_comfort stage=2)
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Don't tell the others —" a glance sideways. "I don't know if I'm doing any of this right."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] null
+THEM: "...Most days I don't think about it. Today I am. Appreciate you noticing."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] null
+THEM: "Thanks. ...Thanks for saying that."
+(want=seek_comfort stage=3)
+YOU: [dlg:comfort] null
+THEM: "I should go. You know where to find me."
+(want=seek_comfort stage=3)
+want final: id=seek_comfort stage=3 resolution=comforted

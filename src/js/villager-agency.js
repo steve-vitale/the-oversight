@@ -981,6 +981,13 @@
       } catch (e) {}
       cx.plants[p.id] = { level: 1, source: 'taught' };
       st.lastTaughtPlantName = p.name || p.id;
+      // AGENCY-TEACH HONESTY (journey deepening r12 2026-10-15): teaching the
+      // player a plant proves the teacher knows it. Record it in
+      // village.taught so plantsKnownBy covers it — otherwise the
+      // conversation teach-back menu later offers the SAME plant back with
+      // "I never knew that" reactions (sense-caught 8504-d45: Monique
+      // taught Chinese Chive, then the player "taught" it back to her).
+      try { if (this.villagerLearnsPlant) this.villagerLearnsPlant(vid, p.id, 'taught'); } catch (e2) {}
       var nm = '';
       try { nm = this.firstRef ? this.firstRef(vid) : this.displayName(vid); } catch (e) { nm = 'They'; } // firstRef: never bare "A" for stranger descriptors
       this.say(this.teachPlantLine(nm, p.name, need));
