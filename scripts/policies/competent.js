@@ -4,6 +4,7 @@
 // keeps the takes/gives ledger honest. This is the skill-ceiling seed.
 'use strict';
 const idle = require('./idle');
+const { vinebank } = require('./vinebank'); // materials-banking arm (VINEBANK=1, default OFF)
 
 // Eat like someone who knows the disease roster (DISEASES.md): cooked/safe
 // food first, never human meat (trembles — cooking doesn't kill prions),
@@ -868,6 +869,11 @@ function keepKnife(Game, ctx) {
   if (process.env.COMPETENT_KEEP_KNIFE === '0') return; // before/after harness gate
   try {
     if (!knifeNeeded(Game, ctx)) return;
+    // VINEBANK (materials-banking 2026-10-14): while the trapper is banking
+    // vine+stick for the blind band, the bank has first claim — the knife
+    // waits. Counted in ctx for the pilot's telemetry.
+    const defer = vinebank.defersCraft(Game, 'stone_knife');
+    if (defer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferKnife = (ctx.vinebankDeferKnife || 0) + 1; return; }
     // KNAP FIRST: stone + vine → the universal stone knife. Runs before
     // workTrapline's snare crafts in daily() so the durable knife wins the
     // vine race. The 15% fail is real: materials already consumed by craft().
@@ -891,6 +897,10 @@ function armUp(Game, ctx) {
     const w = (Game.equippedWeapon && Game.equippedWeapon()) || {};
     if (!w.unarmed) return; // already holding a real weapon
     if (packMat(Game, 'stone') >= 1 && packMat(Game, 'vine') >= 1) {
+      // VINEBANK (materials-banking 2026-10-14): the weapon knife waits for
+      // the blind band too — the bank has first claim while it is not full.
+      const defer = vinebank.defersCraft(Game, 'stone_knife');
+      if (defer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferArm = (ctx.vinebankDeferArm || 0) + 1; return; }
       if (Game.craft('stone_knife')) ctx.armedKnife = (ctx.armedKnife || 0) + 1;
       else ctx.armFailed = (ctx.armFailed || 0) + 1;
     }
@@ -957,11 +967,18 @@ function forageTripSeedFirst(Game, ctx) {
     // that's player-visible world knowledge (revealed tiles only; the fog
     // keeps its secrets). A vine-rich tile counts as one step nearer.
     const wantVine = keepKnifeOn && knifeWantsVine(Game, ctx);
+    // VINEBANK (materials-banking 2026-10-14): a trapper banking vine+stick
+    // for the blind band wants the same ground the knife wants — thickets
+    // for vine (bush harvests), groves for stick (tree harvests).
+    const vbBoost = vinebank.tripBoost(Game);
+    const vbWantVine = vbBoost.vine, vbWantStick = vbBoost.stick;
     // STONE-FIRST SORT (food r6): when the knife needs its stone half, a
     // rubble-choked tile IS the destination — route to it deliberately
     // instead of sorting it last. The trip's clearing branch does the work.
     const wantStone = keepKnifeOn && knifeWantsStone(Game, ctx);
-    const deff = (c) => c.d - ((wantVine && c.revealed && (c.type === 'thicket' || c.type === 'grove')) ? 1 : 0);
+    const wantVineBank = wantVine || vbWantVine; // the bank wants thickets too
+    const deff = (c) => c.d - ((wantVineBank && c.revealed && (c.type === 'thicket' || c.type === 'grove')) ? 1 : 0)
+                             - ((vbWantStick && c.revealed && c.type === 'grove') ? 1 : 0);
     cands.sort((a, b) =>
       ((wantStone && a.blockType === 'rubble' ? 0 : 1) - (wantStone && b.blockType === 'rubble' ? 0 : 1)) ||
       (a.blocked - b.blocked) || (deff(a) - deff(b)));
@@ -1403,7 +1420,11 @@ function gearUp(Game, ctx) {
     }
     if (bestI < 0 && dryI >= 0) {
       // best weapon is dry: a competent player makes arrows (honest fail ok)
-      try { if (Game.craft) Game.craft('arrow'); } catch (e) {}
+      // VINEBANK (materials-banking 2026-10-14): arrows eat the stick bank
+      // (stick 2 per craft) — they wait while the trapper is banking.
+      const defer = vinebank.defersCraft(Game, 'arrow');
+      if (defer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferArrow = (ctx.vinebankDeferArrow || 0) + 1; }
+      else { try { if (Game.craft) Game.craft('arrow'); } catch (e) {} }
       if (ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
       else ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
     }
@@ -1486,7 +1507,11 @@ function gearUp(Game, ctx) {
         if ((rk.level || 0) >= 1) {
           const have = (m) => inv.filter(it => it && it.material === m)
             .reduce((t, it) => t + (it.units || 0), 0);
-          if (have('bark') >= 3 && have('vine') >= 2 && Game.craft) {
+          // VINEBANK (materials-banking 2026-10-14): bark armor eats the whole
+          // vine bank (vine 2) — it waits while the trapper is banking.
+          const vbDefer = vinebank.defersCraft(Game, 'bark_armor');
+          if (vbDefer) { ctx.vinebankDeferred = (ctx.vinebankDeferred || 0) + 1; ctx.vinebankDeferArmor = (ctx.vinebankDeferArmor || 0) + 1; }
+          else if (have('bark') >= 3 && have('vine') >= 2 && Game.craft) {
             const made = Game.craft('bark_armor');
             if (made) {
               ctx.barkArmorCrafted = (ctx.barkArmorCrafted || 0) + 1;
@@ -2282,6 +2307,12 @@ const competent = {
     trySow(Game, ctx); // sow from identified pack plants when plots wait
     donateHaul(Game, ctx); // the rest feeds the village
     if (!rec) counterPlay(Game, ctx); // gardens / fishing / traps when the land thins
+    // VINEBANK (materials-banking 2026-10-14): spend the bank through the
+    // 2+2 blind band — one honest attempt per day, below the base 3+3 band.
+    // Runs BEFORE workTrapline deliberately: workTrapline's craft consumes
+    // materials first, so a layer reading after it can't tell a 3+3 day
+    // (base owns it) from a 2+2 day (the layer owns it) — and double-fires.
+    if (!rec) vinebank.blindBand(Game, ctx);
     if (!rec) workTrapline(Game, ctx); // craft + set the snare line when known (longsim combat r2)
     // donate surplus beyond a 2-day personal buffer
     try {
@@ -2573,4 +2604,4 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
