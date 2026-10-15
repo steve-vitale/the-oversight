@@ -7,6 +7,14 @@ verbatim.
 
 ---
 
+## 2026-10-15
+
+"Keep on running simulations and adjusting levers!"
+
+"Those targets are all flexible. If a subclass doesn't appear, that either
+means we need to tweak the game or it's truly useless and maybe needs cut.
+Feel free to be flexible."
+
 ## 2026-10-14 (latest, round 7)
 
 "Yes can address player as you. Job to skills sounds right if it's balanced
