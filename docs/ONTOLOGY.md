@@ -1066,6 +1066,16 @@ THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something e
 
 **Consumes:** titanDef, titanMusterReady, titanMusterState, soundTitanCall, titanInjectAllies, titanReleaseCommitted (titans.js), campaignGrieve, campaignCamp, campaignInjectMonster, campaignSurvivors (finale-campaign.js), spawnWorldMonster, removeWorldMonster, worldMonsters, isSafeTile, monsterAt, playerMonster, startCombat, tbEnd (game.js)
 
+### nomad-wild (`nomad-wild.js`)
+Leg content for The Long Way Home (docs/WORLD-REGIONS.md §6).
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
 ### overtime (`overtime.js`)
 OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
 
