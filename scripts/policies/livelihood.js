@@ -45,6 +45,44 @@ function trade(G, ctx) {
     }
   } catch (e) { err(ctx, 'trade', e); }
 }
+// One real counter batch per day, inside Haven with time/meal reserves.
+// Cooking comes first: smoking cannot kill parasites or finish an undercook.
+function preserveCounter(G, ctx) {
+  const s = G.state.scholar;
+  if (G.over || G.tbfight || G.state.activeContest || G.pendingEncounter ||
+      G.havenStoresAccess() !== 'inside' || (s.kcal || 0) < 1800 ||
+      s.health < 50 || (s.dayTicks || 0) > 384 || ctx._makerCounterDay === s.day) return;
+  const stash = s.prepStash || [];
+  const candidates = stash.filter(it => it && it.foodKind === 'meat' &&
+    ['cleaned', 'cooked'].includes(it.foodState) && (it.units ?? 1) > 0 &&
+    (it.kcalEach || 0) > 0 && it.edible !== false && it.safe !== false &&
+    !it.poisonRisk && !/human/i.test(String(it.plantId || '') + ' ' + String(it.name || '')) &&
+    !G.data.monsters.some(m => 'meat_' + m.id === it.plantId) && !G.isSpoiled(it));
+  const item = candidates.sort((a, b) => (a.spoilDay ?? Infinity) - (b.spoilDay ?? Infinity))[0];
+  if (!item || !G.nearFire()) return;
+  ctx._makerCounterDay = s.day;
+  const bearer = G.villagerId;
+  if (item.foodState === 'cleaned' || item.undercooked) {
+    const ticks = s.dayTicks;
+    G.cookFood(stash.indexOf(item), stash);
+    if (s.dayTicks !== ticks) ctx.livelihoodCounterCooks = (ctx.livelihoodCounterCooks || 0) + 1;
+  }
+  if (G.over || G.tbfight || G.state.activeContest || G.pendingEncounter || G.villagerId !== bearer ||
+      !stash.includes(item) || G.isSpoiled(item) || item.foodState !== 'cooked' ||
+      item.undercooked || item.parasiteRisk || item.diseaseRisk || item.safe === false) return;
+  G.preserveFood(stash.indexOf(item), stash);
+  if (item.foodState !== 'preserved') return;
+  ctx.livelihoodCounterPreserves = (ctx.livelihoodCounterPreserves || 0) + 1;
+  if (G.over || G.tbfight || G.pendingEncounter || G.villagerId !== bearer || G.havenStoresAccess() !== 'inside') return;
+  // The UI shelves finished food in bulk. Do not also feed a dangerous
+  // neighboring batch merely because this selected batch is ready.
+  if (stash.some(it => G.isFinishedFood(it) && (it.safe === false || it.undercooked ||
+      it.poisonRisk || it.parasiteRisk || it.diseaseRisk ||
+      /human/i.test(String(it.plantId || '') + ' ' + String(it.name || '')) ||
+      G.data.monsters.some(m => 'meat_' + m.id === it.plantId)))) return;
+  G.putAwayFinished();
+  if (!stash.includes(item)) ctx.livelihoodCounterStored = (ctx.livelihoodCounterStored || 0) + 1;
+}
 function make(G, ctx) {
   if (G.over || G.tbfight || G.state.activeContest) return;
   try {
@@ -57,6 +95,7 @@ function make(G, ctx) {
         && Object.entries(r.materials || {}).every(([m, n]) => inv.filter(it => it.material === m).reduce((a, it) => a + (it.units || 0), 0) >= n);
     });
     if (candidates.length && G.craft(candidates[0].id)) ctx.livelihoodCrafts = (ctx.livelihoodCrafts || 0) + 1;
+    preserveCounter(G, ctx);
     if (G.nearFire() && G.knowsTechnique('preserve') && inv.some(it => it.foodKind === 'meat' && it.foodState === 'cooked' && !G.isSpoiled(it))) {
       G.preserveFood(); ctx.livelihoodPreserves = (ctx.livelihoodPreserves || 0) + 1;
     }
@@ -128,5 +167,5 @@ module.exports = {
   merchant: policy('merchant', trade),
   maker: policy('maker', (G, ctx) => { study(G, ctx); make(G, ctx); trade(G, ctx); }),
   caregiver: policy('caregiver', care),
-  trade, make, care, quiet, study,
+  trade, make, care, quiet, study, preserveCounter,
 };

@@ -2397,6 +2397,10 @@
 
     // putAwayFinished: batch — finished food goes to the pantry.
     putAwayFinished() {
+      if (this.havenStoresAccess && this.havenStoresAccess() === 'none') {
+        this.say('The pantry is in the hall. Your hands are not.');
+        return null;
+      }
       const stash = this.prepStash();
       let n = 0, kcal = 0, blocked = 0;
       for (let i = stash.length - 1; i >= 0; i--) {
@@ -2626,6 +2630,19 @@
           label: this.knowsTechnique('preserve') ? 'Smoke it' : 'Smoke it (you\'re learning)',
           detail: `${this.nearFire() ? '' : 'NEEDS FIRE · '}16 ticks · safe · ~${smokeKcal}/portion · keeps ~${this.knowsTechnique('preserve') ? 30 : 15}d`,
           blocked: !this.nearFire() ? 'needs fire' : null,
+        });
+      } else if (it.foodKind === 'meat' && it.foodState === 'cooked') {
+        const fire = this.nearFire();
+        if (it.undercooked) opts.push({
+          id: 'cook', label: 'Finish cooking',
+          detail: `${(this.cookClassFor(it) || {}).time || 32} ticks · finish the undercooked batch; outcome depends on skill`,
+          blocked: !fire ? 'needs fire' : null,
+        });
+        const knows = this.knowsTechnique('preserve');
+        opts.push({
+          id: 'smoke', label: knows ? 'Smoke it' : "Smoke it (you're learning)",
+          detail: `16 ticks · ~${Math.round((it.kcalEach || 0) * (knows ? 0.95 : 0.80))}/portion · keeps ~${knows ? 30 : 15}d${it.undercooked || it.parasiteRisk ? ' · smoking does not finish cooking or kill parasites' : ''}`,
+          blocked: !fire ? 'needs fire' : null,
         });
       } else if (it.needsCooking) {
         opts.push({

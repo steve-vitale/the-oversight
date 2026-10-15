@@ -14390,7 +14390,7 @@
     if (it.foodState === 'in_shell') {
       html += ` <button class="btn ghost sm" data-stash-shell="${idx}">Shell them</button> <span class="small" style="opacity:.6">4 ticks · net 75%</span>`;
     }
-    if ((it.foodKind === 'meat' && it.foodState === 'cleaned') || it.needsCooking) {
+    if ((it.foodKind === 'meat' && (it.foodState === 'cleaned' || it.foodState === 'cooked')) || it.needsCooking) {
       try {
         const how = Game.howFarOptions(it) || [];
         for (const o of how) {
@@ -14920,7 +14920,7 @@
     // PREP STASH: the kitchen counter. Every action confirms, panel re-renders.
     const stashOf = () => Game.prepStash();
     slot.querySelectorAll('[data-stash-stage]').forEach(b => b.onclick = rewire(() => Game.stageForPrep(), 'Staged.'));
-    slot.querySelectorAll('[data-stash-putaway]').forEach(b => b.onclick = rewire(() => Game.putAwayFinished(), 'Put away.'));
+    slot.querySelectorAll('[data-stash-putaway]').forEach(b => b.onclick = rewire(() => Game.putAwayFinished(), null));
     slot.querySelectorAll('[data-stash-sort]').forEach(b => b.onclick = rewire(() => Game.sortBag(null, +b.dataset.stashSort, stashOf()), 'Sorted.'));
     slot.querySelectorAll('[data-stash-sortask]').forEach(b => b.onclick = rewire(() => Game.sortBag(b.dataset.vid, +b.dataset.stashSortask, stashOf()), 'Sorted.'));
     slot.querySelectorAll('[data-stash-test]').forEach(b => b.onclick = rewire(() => Game.testCautiously(+b.dataset.stashTest, {}, stashOf()), 'Tested.'));
