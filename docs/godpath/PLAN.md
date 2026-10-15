@@ -39,16 +39,23 @@ Job -> track -> **class** -> **god** -> Table.
    succession without inheriting the predecessor's work. Nine replacements
    remain open; see `survivalist-deed-audit.md`. No Miser subclass appeared
    even in merchant runs.
-   Living Garden is next: the real harvest-to-meal diagnostic proves neither
-   player's plant stacks nor NPC garden-duty food retains the harvester.
+   Living Garden is next: the initial harvest-to-meal diagnostic found no
+   harvester identity on player plant stacks or NPC garden-duty food.
    Meal totals also include personal production, so donations/gardening XP
    cannot prove seven days feeding the village from one's own harvest.
    Source preservation is now wired for main plant-harvest callers, unknown
    species lumps, fungible mixed stacks, processing and pantry transfers.
    Runtime 26/26 passes (frozen source: 7 pass / 19 fail); matched 64 x four
    result rows remain identical (124 wins / 229 player deaths, no warnings).
-   All 987 paired daily states remain equal after removing only source maps. Actual eater receipts, away rations, supplemental
-   harvest callers and seven-day village coverage still precede the gate.
+   All 987 paired daily states remain equal after removing only source maps.
+   Actual intake now covers pack/counter, home/away, guest/probation, gifts
+   and feasts, with source-preserving ration returns and supplemental crops.
+   Runtime 37/37 and full 923/923 pass. All 256 standard results and prior
+   observer fields still match; 987 daily paired states match after removing
+   only source/intake metadata. Phone feast proves an existing host-food gap:
+   pantry 20,000 -> 15,000, reserve stays 1,000/2,400 despite the host eating.
+   Repair that gap, then settle actual whole-village day coverage and the
+   seven-day deed. See `evidence/2026-10-15/harvest-intake-audit.md`.
    See `evidence/2026-10-15/harvest-source-audit.md` and the earlier
    `garden-provenance-audit.md`.
 2. **Finish the parity audit.** Ten god verbs now have player/villager callers

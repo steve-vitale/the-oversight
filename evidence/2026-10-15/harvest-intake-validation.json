@@ -1,0 +1,215 @@
+{
+  "baseline": "harvest-source-after-64.json.gz",
+  "baselineRuntimeCommit": "ab36f77ae5eebd4d1eb06998110883c9881faa01",
+  "frozenBeforeCommit": "1ddb24203a621623d006c51ff682c1fc9dbede82",
+  "candidateCodeCommit": "0eb727a495f8b2fac4c1903981005512d2155e63",
+  "screen": {
+    "runs": 64,
+    "identicalStandardRows": 64,
+    "identicalPriorObserverFieldsExceptRawStateHash": 64,
+    "warnings": 0,
+    "wins": 38,
+    "playerDeaths": 50
+  },
+  "matrix": {
+    "runs": 256,
+    "identicalStandardRows": 256,
+    "identicalPriorObserverFieldsExceptRawStateHash": 256,
+    "warnings": 0,
+    "wins": 124,
+    "playerDeaths": 229
+  },
+  "intakeScreen": {
+    "observedDays": 7141,
+    "consumedKcal": 123723558.10992374,
+    "nourishment": 122112214.66500826,
+    "trackedHarvestConsumedKcal": 2412777.241358936,
+    "trackedHarvestNourishment": 2317116.6538596456,
+    "harvesterDaysNourishingOthers": 5511,
+    "trackedHarvestNourishmentToOthers": 538099.3773396747,
+    "maxOtherPhysicalConsumersInHarvesterDay": 11,
+    "harvesterPersonRunsNourishingOthers": 572,
+    "npcOnlyHarvesterPersonRunsNourishingOthers": 533,
+    "foragerClassHarvesterPersonRunsNourishingOthers": 61,
+    "routes": {
+      "pantry": {
+        "kcal": 11983411,
+        "nourishment": 10971770.722003683
+      },
+      "personal-work": {
+        "kcal": 103865729.96991052,
+        "nourishment": 103865729.96991052
+      },
+      "ration": {
+        "kcal": 1718223.7245370839,
+        "nourishment": 1718223.7245370839
+      },
+      "pack": {
+        "kcal": 4435878,
+        "nourishment": 4122998
+      },
+      "feast": {
+        "kcal": 1720315.4154761909,
+        "nourishment": 1433492.248556999
+      }
+    }
+  },
+  "intakeMatrix": {
+    "observedDays": 28843,
+    "consumedKcal": 494427096.47098833,
+    "nourishment": 488249130.3219364,
+    "trackedHarvestConsumedKcal": 8540607.677651962,
+    "trackedHarvestNourishment": 8200260.8832415445,
+    "harvesterDaysNourishingOthers": 19780,
+    "trackedHarvestNourishmentToOthers": 1898794.7747602658,
+    "maxOtherPhysicalConsumersInHarvesterDay": 11,
+    "harvesterPersonRunsNourishingOthers": 2201,
+    "npcOnlyHarvesterPersonRunsNourishingOthers": 2042,
+    "foragerClassHarvesterPersonRunsNourishingOthers": 234,
+    "routes": {
+      "pantry": {
+        "kcal": 46558844,
+        "nourishment": 42701484.368697
+      },
+      "personal-work": {
+        "kcal": 418489193.0318723,
+        "nourishment": 418489193.0318723
+      },
+      "ration": {
+        "kcal": 6121727.370789218,
+        "nourishment": 6121727.370789218
+      },
+      "pack": {
+        "kcal": 16478234,
+        "nourishment": 15268417
+      },
+      "feast": {
+        "kcal": 6779098.06832612,
+        "nourishment": 5668308.550577206
+      }
+    }
+  },
+  "changedExistingSourceHashes": [
+    "src/js/food.js",
+    "src/js/corruption.js",
+    "src/js/game.js",
+    "observer/deed-screen.js"
+  ],
+  "addedSourceHashes": [
+    "src/js/carexplore.js",
+    "src/js/betrayal.js",
+    "src/js/safetynets.js"
+  ],
+  "afterSourceHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/js/endingKey.js": "c5f097faccc9039991077590d3e4e10e64fcc9ad0b12b8d96473a2dc5b8e7d0d",
+    "src/js/table.js": "e6009781e4db9f79820e178a8458e6a5de1f9f409a930b0837f2793a4b6472d1",
+    "src/js/fieldFights.js": "65e7b3cdbf23c1c616cf7237d5807e896702e1f1a961520e39cbc38df6cfa01d",
+    "src/js/encounters.js": "57cf6554e0aa5b130431ebf9f79966e62cc7b5926e162956353a13758f398c71",
+    "src/js/alienPlayers.js": "0d26460d692ee57e9b47dc8b4b0c77e1992bb29690d49c2779b9f36e66163dbb",
+    "src/js/equipment.js": "377d72c2832b1b49358e87a0d9ee3adcc10267ffd5504888f8c64ba5bb43cae6",
+    "src/js/party.js": "6bc91cd6ca2543c877b26240d6e2f49bb659f80262aa73d57b2eb6c3ec481654",
+    "src/js/food.js": "8aee85ca5196d1b5b5c37248ff725e5554a06f64030ca808243b5c6d59e4e93b",
+    "src/js/carexplore.js": "5c39ef202acfb7056a28bc6589873dbd5d2f98004c32b9e350b5e6e7237870c3",
+    "src/js/betrayal.js": "026eeba41dd51e9974c3e2c7dd3a6265d75ee55ae912dec39e2a2503486a29e8",
+    "src/js/safetynets.js": "a2f53a71e804e40169da635e4ef98f73650abcabd62f96e652b296d821bcbfbd",
+    "src/js/abilityActions.js": "d9242796610552c778a223ba63e75fc25681aa1c8887aff8f618cffebb6c2adc",
+    "src/js/corruption.js": "cfb76bfa6e662063b58eee0f4a4966242c3d0644daea45023c161a9ec56aa9e3",
+    "src/js/game.js": "babecd05dd82ca4d63ee62ac021dca59b7a78c08d127231c0d3b89f84fb4061f",
+    "src/js/contestEngine.js": "e17874fb852606837ba66dfc3cf0dae852664a5f89b401e121479a1d6459cdf4",
+    "src/js/villager-agency.js": "88afba50af69f8b71dbe1b694ad4c8ca24ae823cc09df8516faef6c180b00146",
+    "src/js/feastBuff.js": "01719b36b31a7b621a7d6dba48b8d79e6fc0adb897b24a5ebb5bdf1fdfaaafde",
+    "src/js/foodPower.js": "599409015c1df6df4bdedf5729625d952ced06a13ce44802e59392285beb4428",
+    "src/data/abilities.json": "ef315fa8943b8076a9975a437ab87479e24bd097457bb4a5905ce3b5214ddf2a",
+    "src/data/feast-surge.json": "69918edc7018ec03bb0d27ddae2732dda771c8e937ff05dcc7badc4b79dceeff",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "3357beb2a0cbd202ed9f7b9262b109cd7c3b03c62b4e946bdcfe78105f6f42b9",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "923666189252b394b8f9886c561015f9884e185612e5cfb24a031f4149eb62c5",
+    "scripts/policies/livelihood.js": "79a4a3548f5a756ccc9e260df19c6995efed704512bd9eb9c949414e8b98449f",
+    "observer/deed-screen.js": "b590bc060565c54b62c13dc7ecadb55230b2d032bdd4f236a8ab45a10aab8d22"
+  },
+  "beforeAdditionalNormalizedSourceHashes": {
+    "src/js/carexplore.js": "79490480e5fdeb1ebd1e0d25350ea5c366c42178ea7d7eb2c49cec7cc4f7b51f",
+    "src/js/betrayal.js": "1264de9db5029c5552602a8613df643667b5c724c620ba8e5caad92fa85fe9ae",
+    "src/js/safetynets.js": "bd68094b4332c6d5d1e8ac4819d1e401fe5b4567d899fcf0f7cf9f970d86345c"
+  },
+  "observerChange": "Read-only summaries of actual eight-day intake books; earlier observer fields/decisions unchanged. On/off full-state proof4 passes. New intakeDays is intentionally absent in baseline.",
+  "pairedState": {
+    "pairs": 8,
+    "dailySamplesPerSide": 987,
+    "excludedFields": [
+      "harvestShares",
+      "harvestIntake"
+    ],
+    "allStandardRowsDailyAndFinalStatesMatch": true
+  },
+  "verification": {
+    "runtimeAssertions": 37,
+    "frozenBeforePassed": 9,
+    "frozenBeforeFailed": 28,
+    "sourceAssertions": 26,
+    "observerAssertions": 4,
+    "quick": 151,
+    "quickSeconds": 32,
+    "full": 923,
+    "fullSeconds": 171
+  },
+  "phone": {
+    "prepared": true,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "actions": [
+      "Prepare feast",
+      "Host a feast",
+      "Light the fire"
+    ],
+    "beforeReserve": 1000,
+    "afterReserve": 1000,
+    "reserveCap": 2400,
+    "beforePantry": 20000,
+    "afterPantry": 15000,
+    "nominalFeastCost": 4800,
+    "actualFeastFoodSpent": 5000,
+    "hostPhysicalServing": 416.6666666666667,
+    "hostNourishment": 0,
+    "notes": "Prepared resources/character, actual production UI actions. No natural acquisition claim. Initial fixture needed ?debug=1 for the existing refresh hook; corrected before actual feast."
+  },
+  "artifactHashes": {
+    "harvest-intake-after-16.json": {
+      "rawSha256": "dcdcf62eb29981d4c57501567c55391e8eb9146252e30eed0cd661598791c1d4",
+      "gzipSha256": "30d7e8f6fdfe3c95934377b64a9e6528953d4aa0f6a9b70395185b26bd12e308",
+      "rawBytes": 15874136,
+      "gzipBytes": 1147492
+    },
+    "harvest-intake-after-64.json": {
+      "rawSha256": "3b6b2eb1e49e9ae4b85db82b7c030f68c03f885616b4fce22ffce0a87aaad143",
+      "gzipSha256": "34c609952cda12fab702fe9117c9fcd88325f755aad820e98492d8e302efff93",
+      "rawBytes": 62468383,
+      "gzipBytes": 4398662
+    },
+    "harvest-intake-state-parity.json": {
+      "rawSha256": "0aad6e805505542cd033ae1e774a02fbbf7bc65b2c9f4f4a8c77143e5f348746",
+      "gzipSha256": "31624743f411a9209d7226a8ea821866a1accf80ca66850fa96c3b9741eb340b",
+      "rawBytes": 2359690,
+      "gzipBytes": 242662
+    }
+  },
+  "noFoodEconomicsOrGateChange": true,
+  "remaining": [
+    "host feast reserve gap",
+    "whole-village daily coverage definition/settlement and seven-day authored deed",
+    "eight other authored deeds",
+    "broader NPC/class/scale roadmap work"
+  ],
+  "otherArtifactHashes": {
+    "harvest-intake-phone.png": "8c20505afd8eedeb2f49da189b170a60987fd359eabc0defbaa8d6e5d61f17cd",
+    "harvest-intake-browser.txt": "a226f52a232f46730a7aa7ec1df2a4c43b4acff771b7116bd3c96c24d847ac7d",
+    "harvest-intake-phone-fixture.cjs": "2877dca3a4d486871038cc1c0dcb98a4078b5653eb672938f9a3b9cfc257b110"
+  }
+}
