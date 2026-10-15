@@ -1,0 +1,1341 @@
+{
+ "seed": 55,
+ "policy": "leadfeast",
+ "loss": {
+  "reached": true,
+  "firstDay": 77,
+  "lastNatDay": 112,
+  "holdDays": 36,
+  "won": false,
+  "endState": "lost",
+  "lossDay": 111,
+  "lossMode": "succession-chain",
+  "lossEvidence": [
+   "4 succession beats within 14d of loss day 111 (0 grace-mediated): d97 \"🕯️ Adaeze is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d97 \"🕯️ Xavier is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d98 \"🕯️ Luis is dead — and the dead hold no treaties. Every link Haven has shakes.\"; d111 \"🕯️ Ruby is dead — and the dead hold no treaties. Every link Haven has shakes.\"",
+   "9 person deaths in the loss window (fam tally {\"monster\":6,\"combat\":3})"
+  ],
+  "windowDeaths": [
+   {
+    "day": 93,
+    "name": "Wren",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 94,
+    "name": "Pavel",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 96,
+    "name": "Rosa",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 96,
+    "name": "Quinn",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 97,
+    "name": "Adaeze Nwosu",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 97,
+    "name": "Xavier",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 98,
+    "name": "Luis Fernandez",
+    "cause": "combat",
+    "family": "combat"
+   },
+   {
+    "day": 110,
+    "name": "Marcus",
+    "cause": "monster",
+    "family": "monster"
+   },
+   {
+    "day": 111,
+    "name": "Ruby Callaghan",
+    "cause": "combat",
+    "family": "combat"
+   }
+  ],
+  "famCounts": {
+   "monster": 6,
+   "combat": 3
+  },
+  "subCauses": {
+   "monster": 6,
+   "combat": 3
+  },
+  "graceBeats": 0,
+  "waveUnlockDays": {
+   "4": 76,
+   "5": 93
+  }
+ },
+ "narrative": {
+  "text": "national hold: first day 77, last national day 112, 36 hold-days; loss day 111, loss mode succession-chain.\nroster: 5 -> 0 villagers; pantry 18.0d -> 0.0d (window min 0.0d); ate-share min 0%.\nrank path (every 4d): nnnnnn\nwave unlocks near the loss: wave-5 d93.\n11 deaths in the last 20d:\n  d93 Wren (villager) — monster [monster]\n  d94 Pavel (villager) — monster [monster]\n  d96 Rosa (villager) — monster [monster]\n  d96 Quinn (villager) — monster [monster]\n  d97 Adaeze Nwosu (villager) — combat [combat]\n  d97 Xavier (villager) — monster [monster]\n  d98 Luis Fernandez (villager) — combat [combat]\n  d104 Night Court (monster) — combat [combat]\n  d104 Big-Eyes (monster) — combat [combat]\n  d110 Marcus (villager) — monster [monster]\n  d111 Ruby Callaghan (villager) — combat [combat]\n72 signal beats in the last 20d (showing first 12):\n  d91 🧳 Ashford has split — the eaters walked. They call the new fire The Red Table III. Half of them were headed this way, or so the traveler sa\n  d91 ⚠ STARVING: health and energy falling. The spiral has started.\n  d92 Word later: they walked to The Red Table III. Another fire in the world, whether you wanted it or not.\n  d92 🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1708 kcal from the pantry. Nobody's dead, but the message is c\n  d93 📡 RATINGS ARE UP... the Producers have greenlit the fifth draft. Wave 5 talent has been released.\n  d93 📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 5 talent has been released into your sector.\n  d93 📖 The Codex turns a page on its own. Wren is dead. You didn't ask. It knew.\n  d94 📖 The Codex turns a page on its own. Pavel is dead. You didn't ask. It knew.\n  d94 📺 Pattern Hunger. A sequence of foods. Eat them in the right order. The wrong order... disagrees with you. The audience expects entertainme\n  d94 📖 The memory leaves something behind: Page 12: deadfall diagrams. You remember drawing them.\n  d95 The dead don't mind. Much.\n  d95 📺 SYSTEM: \"\"The living AND the dead?! You're looting BOTH SIDES of mortality! The ancestors' union has filed a grievance! We tore it up! DE",
+  "rows": {
+   "food": [
+    {
+     "day": 91,
+     "need": 10563,
+     "pop": 5,
+     "pantryKcal": 42597,
+     "pantryDays": 18,
+     "ateShare": 90.6,
+     "preservedKcal": 12131
+    },
+    {
+     "day": 92,
+     "need": 14602,
+     "pop": 7,
+     "pantryKcal": 28892,
+     "pantryDays": 11,
+     "ateShare": 89.5,
+     "preservedKcal": 12131
+    },
+    {
+     "day": 93,
+     "need": 14663,
+     "pop": 7,
+     "pantryKcal": 24184,
+     "pantryDays": 9,
+     "ateShare": 105.9,
+     "preservedKcal": 10479
+    },
+    {
+     "day": 94,
+     "need": 12563,
+     "pop": 6,
+     "pantryKcal": 20593,
+     "pantryDays": 7,
+     "ateShare": 90.7,
+     "preservedKcal": 12085
+    },
+    {
+     "day": 95,
+     "need": 12563,
+     "pop": 6,
+     "pantryKcal": 20083,
+     "pantryDays": 6,
+     "ateShare": 78.3,
+     "preservedKcal": 10493
+    },
+    {
+     "day": 96,
+     "need": 10600,
+     "pop": 5,
+     "pantryKcal": 16638,
+     "pantryDays": 5,
+     "ateShare": 95.6,
+     "preservedKcal": 11375
+    },
+    {
+     "day": 97,
+     "need": 4400,
+     "pop": 2,
+     "pantryKcal": 15941,
+     "pantryDays": 4,
+     "ateShare": 149,
+     "preservedKcal": 8713
+    },
+    {
+     "day": 98,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 12105,
+     "pantryDays": 3,
+     "ateShare": 197.4,
+     "preservedKcal": 6234
+    },
+    {
+     "day": 99,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 13817,
+     "pantryDays": 4,
+     "ateShare": 87.6,
+     "preservedKcal": 4694
+    },
+    {
+     "day": 100,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 12842,
+     "pantryDays": 4,
+     "ateShare": 88.4,
+     "preservedKcal": 4694
+    },
+    {
+     "day": 101,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 14654,
+     "pantryDays": 5,
+     "ateShare": 89.2,
+     "preservedKcal": 4694
+    },
+    {
+     "day": 102,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 14248,
+     "pantryDays": 5,
+     "ateShare": 83,
+     "preservedKcal": 3894
+    },
+    {
+     "day": 103,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 10995,
+     "pantryDays": 4,
+     "ateShare": 85.6,
+     "preservedKcal": 3894
+    },
+    {
+     "day": 104,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 9470,
+     "pantryDays": 3,
+     "ateShare": 87.4,
+     "preservedKcal": 3894
+    },
+    {
+     "day": 105,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 8597,
+     "pantryDays": 3,
+     "ateShare": 84.6,
+     "preservedKcal": 3894
+    },
+    {
+     "day": 106,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 11418,
+     "pantryDays": 4,
+     "ateShare": 79.1,
+     "preservedKcal": 3894
+    },
+    {
+     "day": 107,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 9483,
+     "pantryDays": 3,
+     "ateShare": 79.9,
+     "preservedKcal": 2700
+    },
+    {
+     "day": 108,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 7107,
+     "pantryDays": 2,
+     "ateShare": 78.7,
+     "preservedKcal": 0
+    },
+    {
+     "day": 109,
+     "need": 4696,
+     "pop": 2,
+     "pantryKcal": 5164,
+     "pantryDays": 1,
+     "ateShare": 77.8,
+     "preservedKcal": 0
+    },
+    {
+     "day": 110,
+     "need": 2100,
+     "pop": 1,
+     "pantryKcal": 1754,
+     "pantryDays": 0,
+     "ateShare": 186.1,
+     "preservedKcal": 0
+    },
+    {
+     "day": 111,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 0,
+     "pantryDays": 0,
+     "ateShare": null,
+     "preservedKcal": 0
+    },
+    {
+     "day": 112,
+     "need": 0,
+     "pop": 0,
+     "pantryKcal": 21,
+     "pantryDays": 0,
+     "ateShare": null,
+     "preservedKcal": 0
+    }
+   ],
+   "scale": [
+    {
+     "day": 91,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 66,
+       "arrears": 2759,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 86,
+       "age": 65,
+       "arrears": 3808,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 64,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 92,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 67,
+       "arrears": 4025,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 92,
+       "age": 66,
+       "arrears": 5074,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 65,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 93,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 68,
+       "arrears": 4025,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 67,
+       "arrears": 5074,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 66,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 94,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 69,
+       "arrears": 4025,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 68,
+       "arrears": 5074,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 67,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 95,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 70,
+       "arrears": 4025,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 69,
+       "arrears": 5074,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 68,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 96,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 71,
+       "arrears": 4025,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 96,
+       "age": 70,
+       "arrears": 5074,
+       "perWeek": 1266
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 97,
+       "age": 69,
+       "arrears": 1728,
+       "perWeek": 1266
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 97,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 72,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 88,
+       "age": 71,
+       "arrears": 5074,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 70,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 98,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 73,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 88,
+       "age": 72,
+       "arrears": 5074,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 71,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 99,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 74,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 73,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 72,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 100,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 75,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 74,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 73,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 101,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 76,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 75,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 84,
+       "age": 74,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 102,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 77,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 76,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 84,
+       "age": 75,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 103,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 78,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 77,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 84,
+       "age": 76,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    },
+    {
+     "day": 104,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 79,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 78,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 84,
+       "age": 77,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 105,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 89,
+       "age": 80,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 79,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 84,
+       "age": 78,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 106,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 81,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 80,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 85,
+       "age": 79,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 107,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 82,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 81,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 85,
+       "age": 80,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 108,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 83,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 82,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 85,
+       "age": 81,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 109,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 84,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 83,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 85,
+       "age": 82,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 110,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 90,
+       "age": 85,
+       "arrears": 4025,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 91,
+       "age": 84,
+       "arrears": 6024,
+       "perWeek": 950
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 85,
+       "age": 83,
+       "arrears": 1728,
+       "perWeek": 950
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 111,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 86,
+       "age": 86,
+       "arrears": 4025,
+       "perWeek": 713
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 83,
+       "age": 85,
+       "arrears": 6024,
+       "perWeek": 713
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 72,
+       "age": 84,
+       "arrears": 1728,
+       "perWeek": 713
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 1
+    },
+    {
+     "day": 112,
+     "rank": "national",
+     "links": [
+      {
+       "vid": "village_0",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 86,
+       "age": 87,
+       "arrears": 4025,
+       "perWeek": 713
+      },
+      {
+       "vid": "village_2",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 83,
+       "age": 86,
+       "arrears": 6024,
+       "perWeek": 713
+      },
+      {
+       "vid": "village_3",
+       "kind": "lead",
+       "primary": "haven",
+       "trust": 72,
+       "age": 85,
+       "arrears": 1728,
+       "perWeek": 713
+      }
+     ],
+     "foreignMax": 7,
+     "foreignHead": "village_0",
+     "pendingNat": null,
+     "pendingGlobal": false,
+     "exiled": false,
+     "jstage": 0
+    }
+   ],
+   "deaths": [
+    {
+     "day": 93,
+     "kind": "villager",
+     "vid": "visjoin_90",
+     "name": "Wren",
+     "cause": "monster"
+    },
+    {
+     "day": 94,
+     "kind": "villager",
+     "vid": "pavel_dubinin",
+     "name": "Pavel",
+     "cause": "monster"
+    },
+    {
+     "day": 96,
+     "kind": "villager",
+     "vid": "app_mgpsphi9408",
+     "name": "Rosa",
+     "cause": "monster"
+    },
+    {
+     "day": 96,
+     "kind": "villager",
+     "vid": "quinn_murphy",
+     "name": "Quinn",
+     "cause": "monster"
+    },
+    {
+     "day": 97,
+     "kind": "villager",
+     "vid": "adaeze_nwosu",
+     "name": "Adaeze Nwosu",
+     "cause": "combat"
+    },
+    {
+     "day": 97,
+     "kind": "villager",
+     "vid": "xavier_dubois",
+     "name": "Xavier",
+     "cause": "monster"
+    },
+    {
+     "day": 98,
+     "kind": "villager",
+     "vid": "luis_fernandez",
+     "name": "Luis Fernandez",
+     "cause": "combat"
+    },
+    {
+     "day": 104,
+     "kind": "monster",
+     "vid": "nightcourt",
+     "name": "Night Court",
+     "cause": "combat"
+    },
+    {
+     "day": 104,
+     "kind": "monster",
+     "vid": "hushwolf",
+     "name": "Big-Eyes",
+     "cause": "combat"
+    },
+    {
+     "day": 110,
+     "kind": "villager",
+     "vid": "visjoin_101",
+     "name": "Marcus",
+     "cause": "monster"
+    },
+    {
+     "day": 111,
+     "kind": "villager",
+     "vid": "ruby_callaghan",
+     "name": "Ruby Callaghan",
+     "cause": "combat"
+    }
+   ],
+   "beats": [
+    {
+     "day": 91,
+     "text": "🧳 Ashford has split — the eaters walked. They call the new fire The Red Table III. Half of them were headed this way, or so the traveler says."
+    },
+    {
+     "day": 91,
+     "text": "⚠ STARVING: health and energy falling. The spiral has started."
+    },
+    {
+     "day": 92,
+     "text": "Word later: they walked to The Red Table III. Another fire in the world, whether you wanted it or not."
+    },
+    {
+     "day": 92,
+     "text": "🌙 Raid — Stonebridge came in the night from the southwest. They carried off ~1708 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+     "day": 93,
+     "text": "📡 RATINGS ARE UP... the Producers have greenlit the fifth draft. Wave 5 talent has been released."
+    },
+    {
+     "day": 93,
+     "text": "📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 5 talent has been released into your sector."
+    },
+    {
+     "day": 93,
+     "text": "📖 The Codex turns a page on its own. Wren is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 94,
+     "text": "📖 The Codex turns a page on its own. Pavel is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 94,
+     "text": "📺 Pattern Hunger. A sequence of foods. Eat them in the right order. The wrong order... disagrees with you. The audience expects entertainment, not blood. The lights come up. You can hear the crowd — millions of them, somewhere past the sky. A sequence of foods on the table. Eat them in the right or"
+    },
+    {
+     "day": 94,
+     "text": "📖 The memory leaves something behind: Page 12: deadfall diagrams. You remember drawing them."
+    },
+    {
+     "day": 95,
+     "text": "The dead don't mind. Much."
+    },
+    {
+     "day": 95,
+     "text": "📺 SYSTEM: \"\"The living AND the dead?! You're looting BOTH SIDES of mortality! The ancestors' union has filed a grievance! We tore it up! DELVE! DELVE!\"\""
+    },
+    {
+     "day": 95,
+     "text": "A runner from The Red Table III, dusty and direct: \"Your foragers are stripping our side of the southeast ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+    },
+    {
+     "day": 96,
+     "text": "◈ WORD TRAVELS — riders from The Red Table III bring talk of Haven. Out there they call you the Feared. The show's narration lingers on your hands."
+    },
+    {
+     "day": 96,
+     "text": "📖 The Codex turns a page on its own. Rosa is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 96,
+     "text": "📖 The Codex turns a page on its own. Quinn is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 97,
+     "text": "◈ OVERTIME ×1 — wave 4–5 monsters return as RERUNS (+25% HP, +12% damage). Raids come sooner. The table docks your standing −19. Take your seat from Haven to stop the clock."
+    },
+    {
+     "day": 97,
+     "text": "📖 The Codex turns a page on its own. Adaeze Nwosu is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 97,
+     "text": "🕯️ Adaeze is dead — and the dead hold no treaties. Every link Haven has shakes."
+    },
+    {
+     "day": 97,
+     "text": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 950 kcal/week while the chair is empty. They'll test the link. Count on it."
+    },
+    {
+     "day": 97,
+     "text": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 950 kcal/week while the chair is empty. They'll test the link. Count on it."
+    },
+    {
+     "day": 97,
+     "text": "Ashford watches to see if Haven holds without its dead — and presses the tribute down to 950 kcal/week while the chair is empty. They'll test the link. Count on it."
+    },
+    {
+     "day": 97,
+     "text": "🕯️ Adaeze Nwosu is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+     "day": 97,
+     "text": "📖 The Codex turns a page on its own. Xavier is dead. You didn't ask. It knew."
+    },
+    {
+     "day": 97,
+     "text": "🕯️ Xavier is dead — and the dead hold no treaties. Every link Haven has shakes."
+    }
+   ]
+  }
+ },
+ "famCounts": {
+  "monster": 6,
+  "combat": 3
+ },
+ "subCauses": {
+  "monster": 6,
+  "combat": 3
+ }
+}

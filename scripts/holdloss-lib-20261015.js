@@ -33,6 +33,23 @@
 //   wave-unlock       wave-4/5 unlock day within 10d of the loss day AND
 //                     combat/monster deaths plural in the loss window —
 //                     the unlock's escalation killed the village
+//   tribute-collapse  r6: PROMOTED to a named mode (sim-tribcollapse
+//                     2026-10-15; sim-findings #342, the open grief-leverage
+//                     steve-call). The polity lost national rank while the
+//                     village lived — NOT a village-death loss — AND
+//                     Haven's belong-link arrears rose by >2,000 kcal in
+//                     the 7 days before the loss day AND stood at >=2,000
+//                     kcal at/after the loss AND a grief-leverage trail
+//                     ("Tribute rises to ... kcal/week") appears in the
+//                     beats within 14d of the loss AND the loss-window
+//                     deaths are not starvation-plural. The mode where the
+//                     village lives to pay (TRIBFLOOR-era: payments capped
+//                     at the pantry floor, shortfalls posted as arrears,
+//                     never forgiven) but the polity dissolves on the
+//                     arrears — the BELONG road's characteristic loss.
+//                     Falsifiable on the rows: scaleRows.links arrears
+//                     deltas per link-kind, beat text, the rank path +
+//                     endReason, the window family tally.
 //   other-named       everything else, with the FULL evidence trail
 //                     preserved (fam counts, exact causes, beats) — never
 //                     silently bucketed
@@ -43,11 +60,15 @@
 //   3. family plurality (>=40% of loss-window villager deaths in one family)
 //   4. tie / no-deaths -> 'other-named' with the trail
 //
-// For non-village-death losses the tworung mechanisms are preserved into
-// the named set: succession-collapse -> succession-chain; link-break,
-// tribute-collapse, succession-exile -> 'other-named' WITH the mechanism
-// named in the evidence (a mode the instrument cannot name honestly stays
-// 'other-named', trail preserved — never silently bucketed).
+// Priority order for rank-fell-while-the-village-lived losses (B-branch):
+//   1. link-break     (a recorded link break within 3d of the loss)
+//   2. succession-exile (scholar.exiled fired)
+//   3. tribute-collapse (the named mode above: belong-arrears spike +
+//      level gate + grief-leverage trail + not-starved guard)
+//   4. arrears-spike without the named mode's guards -> 'other-named'
+//      WITH the trail (honest remainder, never silently bucketed)
+//   5. deaths-in-3d -> succession-chain
+//   6. nothing fires -> 'other-named' with the negative trail
 //
 // 'held-to-end' is not a loss (rank national at the horizon, village alive)
 // and sits OUTSIDE the loss-mode denominator. The diagnostic GO metric is
@@ -186,18 +207,117 @@ const WAVE_BEAT = /wave (4|5)|fourth draft|fifth draft|mirror draft/i;
 
 function num(x, d) { const n = Number(x); return Number.isFinite(n) ? n : (d == null ? 0 : d); }
 
-// sumArrears(row): home-link arrears for the tribute-collapse check.
-function sumArrears(row) {
-  try { return (row.links || []).reduce((t, l) => t + num(l.arrears, 0), 0); } catch (e) { return 0; }
+// sumArrears(row, kind): home-link arrears for the spike check. kind
+// restricts to one link direction — 'belong' for the tribute-collapse
+// mode (Haven pays; the old-link x1.5 grief-leverage only fires when
+// Haven is the subordinate — hierarchy.js successionCrisis). No kind =
+// all links (the r5 behavior, kept for the honest-remainder trail).
+function sumArrears(row, kind) {
+  try {
+    return (row.links || []).reduce((t, l) => t + ((kind && l.kind !== kind) ? 0 : num(l.arrears, 0)), 0);
+  } catch (e) { return 0; }
 }
-function arrearsSpike(scaleRows, lossDay) {
+// arrearsSpike(scaleRows, lossDay, kind): home-link arrears rose by
+// >2,000 kcal in the 7 days before the loss day. Returns
+// {before, after, lossDay, trail} or null. The 2,000 bar separates the
+// ratchet-driven collapse from thin-week noise: the BELONG
+// good-standing bar is arrears===0 (hierarchy.js polityOf), so the
+// DISSOLVE fires on any positive arrears — the mode's bar is the spike,
+// which is what the s44 tribute-collapse showed (0 -> 37,970).
+function arrearsSpike(scaleRows, lossDay, kind) {
   try {
     const win = (scaleRows || []).filter(r => r.day >= lossDay - 7 && r.day <= lossDay && r.links);
     if (win.length < 2) return null;
-    const before = sumArrears(win[0]), after = sumArrears(win[win.length - 1]);
-    if (after - before > 2000) return `home-link arrears ${Math.round(before)} -> ${Math.round(after)} kcal in the 7d before loss day ${lossDay}`;
+    const before = sumArrears(win[0], kind), after = sumArrears(win[win.length - 1], kind);
+    if (after - before > 2000) return {
+      before: Math.round(before), after: Math.round(after), lossDay,
+      trail: `home-link arrears ${Math.round(before)} -> ${Math.round(after)} kcal in the 7d before loss day ${lossDay}` + (kind ? ` (kind=${kind})` : ''),
+    };
     return null;
   } catch (e) { return null; }
+}
+
+// The grief-leverage ratchet line (old-link succession, Haven the
+// subordinate — hierarchy.js successionCrisis, verbatim): "With Haven
+// grieving, Thornfield installs their own speaker at the table. Tribute
+// rises to 25,313 kcal/week. Grief is leverage, and they know it." The
+// SUCCGRACE-era lapsed variant rides the same "tribute rises to" line
+// ("Grief became leverage, and they knew it would") — one regex covers
+// both. This is the x1.5 compounding whose unpaid balances post as the
+// arrears the polity dissolves on.
+const GRIEF_LEVERAGE_RE = /tribute rises to/i;
+// The TRIBFLOOR floor-cap line (the "village lives to pay" evidence):
+// "tribute takes 12,645 of 25,313 kcal and no more. What isn't paid rides
+// as arrears; the village eats first."
+const TRIBFLOOR_CAP_RE = /tribute takes .* of .* no more/i;
+
+function griefLeverageTrail(beats, lossDay) {
+  try {
+    return (beats || [])
+      .filter(b => GRIEF_LEVERAGE_RE.test(String(b.text || '')) && Math.abs(num(b.day, 0) - lossDay) <= 14)
+      .map(b => `d${b.day} "${String(b.text).slice(0, 110)}"`);
+  } catch (e) { return []; }
+}
+function tribfloorCaps(beats, lossDay) {
+  try {
+    return (beats || [])
+      .filter(b => TRIBFLOOR_CAP_RE.test(String(b.text || '')) && Math.abs(num(b.day, 0) - lossDay) <= 14)
+      .map(b => `d${b.day} "${String(b.text).slice(0, 110)}"`);
+  } catch (e) { return []; }
+}
+
+// tributeCollapse(rec, loss): the named-mode detector. rec is the full
+// persisted record; loss is the in-progress attribution from nationalLoss
+// (carries lossDay and famCounts). Returns {fires, evidence[]} or
+// {fires:false, why, spike?, trail?} describing WHY not — the guard
+// failures stay auditable, never silent.
+//
+// The definition (falsifiable on the rows):
+//   1. B-branch loss (polity lost national rank while the village lived —
+//      NOT a village-death loss; the caller guarantees this).
+//   2. Haven's BELONG-link arrears rose by >2,000 kcal in the 7 days
+//      before the loss day AND stood at >=2,000 kcal at/after the loss
+//      (the spike + the level gate at the same X=2,000 bar — a spike
+//      paid back down before the loss is not this mode).
+//   3. A grief-leverage trail in the beats within 14d of the loss: at
+//      least one "Tribute rises to ... kcal/week" succession-leverage
+//      line (the x1.5 ratchet whose unpaid balances posted as the
+//      arrears).
+//   4. The loss-window deaths are not starvation-plural (<40% starvation
+//      family): the village lived to pay. A starvation-plural window is
+//      the "starve paying" story — TRIBFLOOR did not hold — not this
+//      mode.
+// B-branch priority (link-break, exile) is applied by the caller BEFORE
+// this detector; deaths-in-3d succession is checked AFTER it.
+function tributeCollapse(rec, loss) {
+  const ld = loss.lossDay;
+  const spike = arrearsSpike(rec.scaleRows, ld, 'belong');
+  if (!spike) return { fires: false, why: 'no belong-arrears spike (>2,000 kcal/7d)' };
+  if (spike.after < 2000) {
+    return { fires: false, why: `belong arrears paid back down before the loss (after=${spike.after})`, spike };
+  }
+  const trail = griefLeverageTrail(rec.beats, ld);
+  if (!trail.length) {
+    return { fires: false, why: 'arrears spike without a grief-leverage trail', spike };
+  }
+  const fams = loss.famCounts || {};
+  const total = Object.keys(fams).reduce((t, f) => t + fams[f], 0);
+  const starv = fams['starvation'] || 0;
+  if (total > 0 && starv / total >= 0.4) {
+    return { fires: false, why: `starvation-plural window (${starv}/${total}) — starve-paying, not tribute-collapse`, spike, trail };
+  }
+  const caps = tribfloorCaps(rec.beats, ld);
+  const ev = [
+    `belong-link arrears ${spike.before.toLocaleString()} -> ${spike.after.toLocaleString()} kcal in the 7d before loss day ${ld} (level gate >=2,000 holds)`,
+    `grief-leverage trail (${trail.length} ratchet line${trail.length > 1 ? 's' : ''} within 14d): ` + trail.slice(0, 3).join('; '),
+  ];
+  if (caps.length) {
+    ev.push(`TRIBFLOOR held the payments (${caps.length} floor-cap${caps.length > 1 ? 's' : ''} in the window): ` + caps.slice(0, 3).join('; '));
+  } else {
+    ev.push('no TRIBFLOOR floor-cap lines in the window — payments were not floor-capped here');
+  }
+  ev.push(`loss-window deaths ${total} (tally ${JSON.stringify(fams)}) — not starvation-plural; the village lived to pay but the polity dissolved on the arrears`);
+  return { fires: true, evidence: ev, spike, trail, caps };
 }
 
 // nationalLoss(rec): full hold-duration + loss-mode attribution for one
@@ -337,10 +457,26 @@ function nationalLoss(rec) {
     out.lossEvidence = [`succession-exile: scholar.exiled fired (day ${rec.exiledDay != null ? rec.exiledDay : '?'})`];
     return out;
   }
-  const spike = arrearsSpike(scaleRows, ld);
-  if (spike) {
+  // r6: tribute-collapse is a NAMED mode now (see the detector above).
+  // The r5 all-links arrearsSpike stays as the honest-remainder trail when
+  // the named mode's guards don't fire — a spike that isn't
+  // tribute-collapse by the definition is still a named mechanism, never
+  // silently bucketed.
+  const tc = tributeCollapse(rec, out);
+  if (tc.fires) {
+    out.lossMode = 'tribute-collapse';
+    out.lossEvidence = tc.evidence;
+    return out;
+  }
+  if (tc.spike) {
     out.lossMode = 'other-named';
-    out.lossEvidence = ['tribute-collapse: ' + spike];
+    out.lossEvidence = [`arrears-spike, not tribute-collapse (${tc.why}): ${tc.spike.trail}`];
+    return out;
+  }
+  const anySpike = arrearsSpike(scaleRows, ld);
+  if (anySpike) {
+    out.lossMode = 'other-named';
+    out.lossEvidence = ['arrears-spike on non-belong links: ' + anySpike.trail + ' — honest remainder'];
     return out;
   }
   const dd = wd.filter(d => near(d.day, 3));
@@ -350,7 +486,7 @@ function nationalLoss(rec) {
     return out;
   }
   out.lossMode = 'other-named';
-  out.lossEvidence = [`no mechanism fires within 3d of loss day ${ld} (breaks ${linkBreaks.length}, exiled ${!!rec.exiledEver}, arrears-spike ${!!spike}, deaths-in-3d ${dd.length})`];
+  out.lossEvidence = [`no mechanism fires within 3d of loss day ${ld} (breaks ${linkBreaks.length}, exiled ${!!rec.exiledEver}, arrears-spike ${!!(tc.spike || anySpike)}, deaths-in-3d ${dd.length})`];
   return out;
 }
 
@@ -417,6 +553,7 @@ function last20Narrative(rec, loss) {
 
 module.exports = {
   classifyDeathFamily, nationalLoss, holdBucket, last20Narrative,
+  tributeCollapse, arrearsSpike, griefLeverageTrail, sumArrears,
   loadMonsterNames, MONSTER_NAMES: () => MONSTER_NAMES.slice(),
   MONSTER_DESCRIPTORS: () => MONSTER_DESCRIPTORS.slice(),
   DISEASE_IDS, DISEASE_NAMES,
