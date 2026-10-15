@@ -28552,6 +28552,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     endDay() {
       const scholar = this.state.scholar;
+      // NOMAD ROAD (nomad-core 2026-10-15): the party's daily upkeep (food,
+      // starvation, mantle) ticks here while the road is active.
+      try { if (this.nomad && this.nomad.onRoad()) this.nomad.daily(); } catch (e) { console.warn('[nomad] daily', e); }
       // GRIEF/CHEER DECAY (journey-social r16 2026-10-15): once per DAY, not
       // per day-part — the fields are documented in days ("days of
       // village-wide grief (death)"), and tickNeeds() runs 4x/day, which was
