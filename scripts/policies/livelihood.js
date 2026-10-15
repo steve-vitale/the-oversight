@@ -140,9 +140,17 @@ function experimentHideCraft(G, ctx) {
   }
   const lashing = (s.inventory || []).some(i => ['vine', 'fiber', 'cloth'].includes(i.material) && (i.units || 0) > 0);
   if (known() !== 1 || G.materialCount('hide') < 2 || !lashing) return;
+  // Remember a rejected visible guess. More of the same stock may permit a
+  // new guess, but passing days alone cannot make identical supplies work.
+  // A funded failed roll consumes inputs, so it must remain retryable later.
+  const guess = () => [bearer, ...['hide', 'vine', 'fiber', 'cloth'].map(m => G.materialCount(m))].join('/');
+  const before = guess();
+  if (ctx._makerHideRejectedGuess === before) return;
   ctx._makerHideTrialDay = s.day;
   ctx.livelihoodHideTrials = (ctx.livelihoodHideTrials || 0) + 1;
-  if (G.craft('hide_armor') === true) ctx.livelihoodHideTrialSuccesses = (ctx.livelihoodHideTrialSuccesses || 0) + 1;
+  const made = G.craft('hide_armor');
+  if (made === true) ctx.livelihoodHideTrialSuccesses = (ctx.livelihoodHideTrialSuccesses || 0) + 1;
+  ctx._makerHideRejectedGuess = made !== true && G.villagerId === bearer && known() === 1 && guess() === before ? before : null;
 }
 function make(G, ctx) {
   if (G.over || G.tbfight || G.state.activeContest) return;

@@ -63,5 +63,17 @@ const K = require('./godpath/lib'), T = K.reporter('hide-discovery');
   T.ok('wrong visible lashing guess preserves stock and reveals no hidden ingredient list', G.materialCount('hide') === 2 && G.materialCount('fiber') === 1 && said.some(x => /best guess|not really/i.test(x)) && !said.some(x => /Need 1 vine/.test(x)));
   require('./policies/livelihood').make(G, ctx);
   T.ok('repeated upkeep cannot spam blind recipe probes', ctx.livelihoodHideTrials === 1);
+  s.day += 3; s.dayTicks = 0;
+  require('./policies/livelihood').make(G, ctx);
+  T.ok('passing days does not repeat an unchanged rejected guess', ctx.livelihoodHideTrials === 1);
+  G.addMaterial('vine', 1);
+  require('./policies/livelihood').make(G, ctx);
+  T.ok('new visible supplies permit a real funded trial without a skipped-probe cooldown', ctx.livelihoodHideTrials === 2 && G.materialCount('hide') === 0 && G.materialCount('vine') === 0);
+  // A real failed roll must not permanently blacklist its now-consumed kit.
+  if (level() === 1) {
+    s.day += 3; s.dayTicks = 0; G.addMaterial('hide', 2); G.addMaterial('vine', 1);
+    require('./policies/livelihood').make(G, ctx);
+    T.ok('restocking a funded failed trial permits another real roll', ctx.livelihoodHideTrials === 3 && G.materialCount('hide') === 0 && G.materialCount('vine') === 0);
+  }
   T.done();
 })().catch(e => { console.error(e); process.exitCode = 1; });
