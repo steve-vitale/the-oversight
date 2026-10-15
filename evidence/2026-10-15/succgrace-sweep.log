@@ -1,0 +1,83 @@
+-- leadfeast seed 11 control
+-- leadfeast seed 11 armed
+-- leadfeast seed 22 control
+-- leadfeast seed 22 armed
+-- leadfeast seed 33 control
+-- leadfeast seed 33 armed
+-- leadfeast seed 44 control
+-- leadfeast seed 44 armed
+-- leadfeast seed 55 control
+-- leadfeast seed 55 armed
+-- leadfeast seed 66 control
+-- leadfeast seed 66 armed
+-- leadfeast seed 77 control
+-- leadfeast seed 77 armed
+-- leadfeast seed 88 control
+-- leadfeast seed 88 armed
+-- belongfeast seed 11 control
+-- belongfeast seed 11 armed
+-- belongfeast seed 22 control
+-- belongfeast seed 22 armed
+-- belongfeast seed 33 control
+-- belongfeast seed 33 armed
+-- belongfeast seed 44 control
+-- belongfeast seed 44 armed
+-- belongfeast seed 55 control
+-- belongfeast seed 55 armed
+-- belongfeast seed 66 control
+-- belongfeast seed 66 armed
+-- belongfeast seed 77 control
+-- belongfeast seed 77 armed
+-- belongfeast seed 88 control
+-- belongfeast seed 88 armed
+
+wrote evidence/2026-10-15/sim-succgrace-runs.json (32 runs, -31667692s)
+
+=== PRIMARY (intermediate) ===
+eligible sub-bar successions (armed): 2; staged beats: 2; violations: 0
+PRIMARY staged==eligible (2==2) && violations==0 && eligible>0 -> GO
+
+=== SUMMARY (guardrails) ===
+{
+ "control": {
+  "n": 16,
+  "national": 5,
+  "table": 8,
+  "wins": 0,
+  "w4": 8,
+  "w5": 6,
+  "medSurv": 128.5,
+  "holdSum": 337,
+  "dissolves": 3,
+  "sgStaged": 0,
+  "lossModes": {
+   "n/a": 11,
+   "succession-chain": 2,
+   "held-to-end": 2,
+   "other-named": 1
+  }
+ },
+ "armed": {
+  "n": 16,
+  "national": 5,
+  "table": 8,
+  "wins": 0,
+  "w4": 8,
+  "w5": 6,
+  "medSurv": 128.5,
+  "holdSum": 375,
+  "dissolves": 2,
+  "sgStaged": 2,
+  "lossModes": {
+   "n/a": 11,
+   "succession-chain": 1,
+   "held-to-end": 3,
+   "other-named": 1
+  }
+ }
+}
+
+GUARD national armed >= control-2: 5 >= 3 -> OK
+GUARD median survival armed >= control-10d: 128.5 >= 118.5 -> OK
+GUARD no new loss mode at n>=3: OK
+SECONDARY hold-days sum ratio armed/control: 1.11

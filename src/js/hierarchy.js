@@ -101,6 +101,7 @@
 //   - region_moves_on_engagement: foreign-realm growth is engagement-driven, not clock-driven — waiting banks nothing; playing advances the arc. Haven-linked villages are NOT excluded from candidacy (the old exclusion punished courting: the more Haven courted, the slower the region climbed). Still earned: momentum is deed-gated, a 4-realm takes weeks of real beats, never a calendar path. (code: hierarchy.js)
 //   - grief_coalesces: one funeral doesn't become five — a link already grieving (young-link beat staged, or inside the mourning window) takes no new haircut, beat, or leverage grab from a further death; the first death keeps full force. The neglect snap still runs mid-grief. (code: hierarchy.js)
 //   - young_links_get_grace: succession on a link younger than 21 days costs -8 trust (not -15) and never snaps — instead a staged renegotiation beat (link.pendingRenegotiation, answered via answerRenegotiation: gift/visit/wait with real costs, expires aloud in 7 days). Older links still snap when trust craters — deaths hit hard. Grief delays the verdict because they're still deciding what Haven is. (code: hierarchy.js)
+//   - succession_grace_for_sub_bar_links (SUCCGRACE=1, sim-succgrace 2026-10-15, experimental env-gated, default OFF — sim-findings #321): the young-link idiom extended to succession day. In successionCrisis, a Haven-primary link below the seasoned bar (trust < 40) at the funeral that would dissolve the realm aloud gets an answerable renegotiation beat instead of the silent verdict (gift/visit/wait, real costs, expires aloud in 7 days). While pending, _linkSeasoned holds the fire's place; the beat's answers land through the mourning choke (the new speaker's played deeds, like the young-link idiom — mourning itself untouched: ordinary gains stay gagged). Answered, the link follows the beat's normal resolution; unanswered, the realm dissolves aloud exactly as today. Chaos untouched: haircut, tribute moves, neglect snap, 14d proving window. (code: hierarchy.js)
 //   - the_world_watches: global = national + deed-reactive viewership >= 32 (travel longsim r5 2026-10-12: recalibrated from provisional v1 40 — the 40 bar was set under the old pantry-frozen viewership economy; the earned economy's deed-rich seasons plateau at ~31-38), staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
 //   - national_routes_tribute: when national, subordinate tribute grain arrives at x1.25 via the System's logistics layer — and the arrival line says the true amount. Copy and engine agree. (code: hierarchy.js)
 //   - demand_honor_is_proportional: honoring a tribute demand with a thin pantry grants proportional trust and honest copy, never a free +8 on empty hands; an already-loaned representative extends instead of being clobbered. (code: hierarchy.js)
@@ -230,6 +231,12 @@
         var day = (this.state.scholar || {}).day || 0;
         if ((day - (link.day || 0)) < 30) return false;
         if (forConquest) return true;
+        // SUCCGRACE (sim-succgrace 2026-10-15, env-gated, default OFF): a
+        // pending succession-grace beat holds the fire's place — the
+        // verdict is delayed while the new speaker answers. Polity
+        // membership only (forPolity callers); the trust itself is
+        // unchanged, and the beat's resolution decides afterward.
+        if (forPolity && this._succGraceGate() && link.pendingRenegotiation && link.pendingRenegotiation.succgrace) return true;
         // SUCCPOLITY (sim-succpolity 2026-10-15, env-gated, default OFF):
         // polity-membership bars read the INHERITED standing — see
         // _succTrustOf. Standing's diplomacy count (standing.js) keeps the
@@ -244,6 +251,15 @@
     // through succession; default OFF = the old funeral-hour collapse.
     _succPolityGate() {
       try { return typeof process !== 'undefined' && process.env && process.env.SUCCPOLITY === '1'; } catch (e) { return false; }
+    },
+
+    // _succGraceGate: the succession-day grace lever (sim-succgrace,
+    // 2026-10-15, sim-findings #321). SUCCGRACE=1 stages an answerable
+    // renegotiation beat for sub-bar Haven-primary links at successions
+    // that would dissolve the realm aloud; default OFF = dissolution
+    // proceeds exactly as today, byte-identical.
+    _succGraceGate() {
+      try { return typeof process !== 'undefined' && process.env && process.env.SUCCGRACE === '1'; } catch (e) { return false; }
     },
 
     // _succTrustOf: the trust a polity-membership bar reads. The link is
@@ -1578,6 +1594,26 @@
         this.breakLink(link.id, 'succession');
         return 'broken';
       }
+      // SUCCGRACE (sim-succgrace 2026-10-15, sim-findings #321, env-gated,
+      // default OFF): a Haven-primary link below the seasoned bar at the
+      // funeral that would dissolve the realm aloud gets an answerable
+      // renegotiation beat instead of the silent verdict — the
+      // young_links_get_grace idiom extended to succession day. The chaos
+      // above is untouched (haircut landed, mourning marked, tribute moved,
+      // neglect checked). While the beat is pending the link holds its
+      // fire's place in the polity read (_linkSeasoned); answered, the link
+      // follows the beat's normal resolution; unanswered, the realm
+      // dissolves aloud exactly as today.
+      if (this._succGraceGate() && link.status === 'active' && !link.pendingRenegotiation &&
+          link.primary === HOME && (day0 - (link.day || 0)) >= 30 &&
+          !this._linkSeasoned(link, !!link.conquered, true) &&
+          this.state.nationalLive && !this._havenPolity()) {
+        link.pendingRenegotiation = { day: day0, sub: false, succgrace: true };
+        this._linkNote(link, 'succession', 'Sub-bar link at the funeral — grief delays the verdict: a renegotiation is staged.');
+        this.say(`${this._ovName(other)}'s new speaker sends word: the bond is fraying — trust ${link.trust}, below the 40 the realm stands on. The realm will come apart unless the new bearer answers: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer. Grief delays the verdict — seven days.`);
+        try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'succession-grace:' + other); } catch (e) {}
+        return 'grace';
+      }
       return 'shaken';
     },
 
@@ -1649,6 +1685,16 @@
       var onm = this._ovName(other);
       var pr = link.pendingRenegotiation;
       link.pendingRenegotiation = null;
+      // SUCCGRACE (sim-succgrace 2026-10-15, #321): the staged succession
+      // beat's answers are the new speaker's played deeds — like the
+      // young-link idiom (which never marks mourning, so its answers
+      // land), they are NOT gagged by the funeral's mourning window.
+      // mourningUntil is restored untouched after the answer resolves: the
+      // village still grieves, ordinary gains stay gagged, the neglect snap
+      // still runs. Only the beat's answers land.
+      var _sgBeat = !!(pr && pr.succgrace);
+      var _sgMourn = _sgBeat ? (link.mourningUntil || 0) : 0;
+      if (_sgBeat) link.mourningUntil = 0;
       if (how === 'gift') {
         var paid = this._removePantryKcal(1500);
         var frac = Math.min(1, paid / 1500);
@@ -1672,6 +1718,7 @@
         if (frac >= 1) this.say(`🕊️ Haven sends ${paid.toLocaleString()} kcal to ${onm}'s fire — grief met with grain. The new speaker eats with Haven's people and the tribute stays where it was. (Trust +${tGain}.)`);
         else this.say(`🕊️ Haven sends ${paid.toLocaleString()} of 1,500 kcal — all the pantry holds. ${onm} counts the gap, but counts the gesture too. (Trust +${tGain}.)`);
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'renegotiated-gift:' + other); } catch (e) {}
+        if (_sgBeat) link.mourningUntil = _sgMourn;
         return 'gift';
       }
       if (how === 'visit') {
@@ -1690,9 +1737,11 @@
           this.say(`🚶 Haven's speaker rides to ${onm}'s fire for two days — a face for the grief, not a ledger. The tribute stays where it was. (Trust +${_vg4}.)`);
         }
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'renegotiated-visit:' + other); } catch (e) {}
+        if (_sgBeat) link.mourningUntil = _sgMourn;
         return 'visit';
       }
       // 'wait' (or anything unrecognized): the silence answers.
+      if (_sgBeat) link.mourningUntil = _sgMourn;
       return this._resolveRenegotiation(link, pr, true);
     },
 
