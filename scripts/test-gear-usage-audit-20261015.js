@@ -22,6 +22,13 @@ const T = K.reporter('gear-usage-audit');
   G._contestEnd(ac, 'won', true);
   T.ok('idempotent terminal is not a second acquisition', rec.grants.length === old);
   T.ok('observer reports no missing methods or swallowed wrapper errors', rec.missing.length === 0 && rec.errors.length === 0, JSON.stringify(rec.missing));
+  G.learnRecipe('stone_knife', 3);
+  s.inventory.push({ material: 'stone', units: 1 }, { material: 'vine', units: 1 });
+  rec.sample();
+  T.ok('recipe census separates knowledge from available materials', rec.recipeAccess.stone_knife.maxLevel === 3 && rec.recipeAccess.stone_knife.materialsReadySamples === 1);
+  Math.random = () => 0.1;
+  try { G.craft('stone_knife'); } finally { Math.random = r; }
+  T.ok('craft census counts actual recipe attempts and successes', rec.crafts.stone_knife.attempts === 1 && rec.crafts.stone_knife.successes === 1);
   // Imported tooling must not dispatch the caller's --compare options.
   // The old bug tried reading nonexistent comparison files here.
   const out = execFileSync(process.execPath, ['-e', "process.argv.push('--compare','missing-before','missing-after'); require('./scripts/sweep-dashboard'); process.stdout.write('imported');"], { cwd: K.ROOT, encoding: 'utf8' });

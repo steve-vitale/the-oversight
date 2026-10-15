@@ -83,6 +83,13 @@ not universal success counts. Inspect policy counters/errors and pair this
 with `sim-audit.js` coverage. Use the real `Game._fullStatus` when proving UI
 inventory behavior: the default simulator intentionally slims `status()`.
 
+The census also records `crafts` (attempts and actual successes per recipe)
+and `recipeAccess` (highest knowledge, known samples, materials-ready samples).
+Knowledge samples include succession; readiness can be missed between samples.
+These fields distinguish an unused output from unknown recipes or missing
+materials. They do not classify each failed attempt. The observer's 100-day
+on/off state-hash proof covers this additional sampling.
+
 ## Pitfalls (each one has bitten us)
 
 - **Never run two games in one node process.** Use separate processes;

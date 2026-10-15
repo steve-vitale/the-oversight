@@ -20,7 +20,7 @@ const METHODS = {
   _cxPrizeKnowledgeDump: 'system-prize', _cxPrizeEvolutionAssist: 'system-prize',
 };
 function install(G) {
-  const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
+  const rec = { calls: {}, effects: {}, grants: [], missing: [], errors: [], contest: {}, show: {}, crafts: {}, recipeAccess: {}, maxTier: 0, maxFavor: 0, startingTier: 0 };
   const stack = [];
   const defs = new Map(G.data.items.map(d => [d.id, d]));
   const inventory = () => {
@@ -66,6 +66,11 @@ function install(G) {
       const corpse = lane === 'corpse' ? (G.state.corpses || []).find(c => c.id === args[0]) : null;
       const source = corpse ? 'corpse-' + (corpse.kind || 'unknown') : lane;
       const before = inventory(), bearer = G.villagerId, frame = { lane: source, children: new Map() };
+      let craft;
+      if (name === 'craft') {
+        craft = rec.crafts[args[0]] || (rec.crafts[args[0]] = { attempts: 0, successes: 0 });
+        craft.attempts++;
+      }
       stack.push(frame);
       let result;
       try { result = fn.apply(this, args); }
@@ -83,6 +88,7 @@ function install(G) {
         }
       }
       if (result && result !== false) rec.effects[name] = (rec.effects[name] || 0) + 1;
+      if (craft && result === true) craft.successes++;
       // Calls/results are reachability evidence, NOT universal success counts.
       if (name === '_contestEnd') { const k = String(args[1]); rec.contest[k] = (rec.contest[k] || 0) + 1; }
       if (name === '_showEnd') { const k = String(args[1]); rec.show[k] = (rec.show[k] || 0) + 1; }
@@ -90,6 +96,18 @@ function install(G) {
     };
   }
   rec.sample = () => {
+    // Read existing knowledge/materials only. Never call lazy discovery or
+    // grant helpers from an observer. Samples include successor knowledge;
+    // they establish access during the run, not one person's learning rate.
+    const pack = G.state.scholar.inventory || [];
+    const known = (G.state.codex || {}).recipes || {};
+    for (const r of G.data.recipes) {
+      const level = (known[r.id] || {}).level || 0;
+      if (!level) continue;
+      const a = rec.recipeAccess[r.id] || (rec.recipeAccess[r.id] = { maxLevel: 0, knownSamples: 0, materialsReadySamples: 0 });
+      a.maxLevel = Math.max(a.maxLevel, level); a.knownSamples++;
+      if (Object.entries(r.materials || {}).every(([m, n]) => pack.filter(it => m === 'bait' ? (it.kcalEach || 0) > 0 : it.material === m).reduce((n, it) => n + (it.units || 0), 0) >= n)) a.materialsReadySamples++;
+    }
     for (const v of inventory().values()) {
       const d = defs.get(v.id);
       rec.maxTier = Math.max(rec.maxTier, d.lootTier || d.tier || 1);
