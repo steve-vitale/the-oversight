@@ -605,6 +605,7 @@
             material: mk, units: n2, name: (matName[mk] || mk) + (n2 > 1 ? 's' : ''),
             kcalEach: 0, spoilDay: 9999, kg: (matKg[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): matKg is per-item; the old *n2 total bricked the pack.
           });
+          if (mk === 'hide' && inv === this.state.scholar.inventory && this.noteHideHandled) this.noteHideHandled(inv[inv.length - 1]);
           got.push(n2 + ' ' + (matName[mk] || mk).toLowerCase() + (n2 > 1 ? 's' : ''));
         }
         if (got.length) this.say('Butchering yields: ' + got.join(', ') + '.');
@@ -1183,6 +1184,7 @@
               material: mk, units: n3, name: (matName2[mk] || mk) + (n3 > 1 ? 's' : ''),
               kcalEach: 0, spoilDay: 9999, kg: (matKg2[mk] || 0.3), // KG PER-UNIT (break-it food r4 2026-10-10): same fix as above.
             });
+            if (mk === 'hide' && inv === this.state.scholar.inventory && this.noteHideHandled) this.noteHideHandled(inv[inv.length - 1]);
             got2.push(n3 + ' ' + (matName2[mk] || mk).toLowerCase() + (n3 > 1 ? 's' : ''));
           }
           if (got2.length) this.say('Butchering yields: ' + got2.join(', ') + '.');
@@ -2236,10 +2238,12 @@
       const fits = Math.max(0, Math.floor((this.packCapacity() - this.packWeight() + 1e-9) / kg));
       const n = Math.min(available, wanted, fits);
       if (!(n > 0)) { this.say('Too heavy. Lighten your pack first.'); return null; }
-      (s.inventory || (s.inventory = [])).push({ ...it, units: n, kg });
+      const taken = { ...it, units: n, kg };
+      (s.inventory || (s.inventory = [])).push(taken);
       if (n === available) stash.splice(idx, 1);
       else it.units = available - n;
       this.say(`Took ${n} × ${it.name || it.material} from the counter into your pack. (2 ticks)`);
+      if (this.noteHideHandled) this.noteHideHandled(taken);
       return this.tickAction(2) || this.status();
     },
 

@@ -461,7 +461,7 @@
       // dependency (needed L1 to craft, L1 only from having hide_armor):
       // handling the MATERIAL teaches the shape, the same way handling gear
       // teaches its recipe. Fires once, L0 only.
-      try { this.noteHideHandled(it); } catch (e) {}
+      try { this.noteHideHandled({ ...it, units }); } catch (e) {}
       return it;
     },
 
@@ -473,7 +473,7 @@
     // craft teaches L2 (your hands learn). One system, no parallel track.
     noteHideHandled(it) {
       try {
-        if (!it || it.plantId !== 'animal_hide') return;
+        if (!it || !Number.isFinite(it.units ?? 1) || (it.units ?? 1) <= 0 || (it.plantId !== 'animal_hide' && it.material !== 'hide')) return;
         const rk = ((this.state.codex || {}).recipes || {})['hide_armor'] || {};
         if ((rk.level || 0) >= 1) return;
         if (this.grantKnowledge) this.grantKnowledge('recipe', 'hide_armor', 1, { type: 'witnessed' });
@@ -645,11 +645,11 @@
           if (c.ash) carried.ashOf = c.ashVictim; // ASH: provenance rides along
           inv.push(carried);
         }
-        it.units -= 1;
+        it.units = (it.units ?? 1) - 1;
         took.push(it);
         // HIDE-HANDLING BEAT (armor discovery 2026-10-13): batch looting
         // teaches the shape too — same as the per-item path. See noteHideHandled.
-        try { this.noteHideHandled(it); } catch (e) {}
+        try { this.noteHideHandled({ ...it, units: 1 }); } catch (e) {}
         return true;
       };
 

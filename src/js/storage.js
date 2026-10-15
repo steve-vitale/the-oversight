@@ -163,6 +163,7 @@
       let e = inv.find(i => i.material === mat);
       if (e) e.units = (e.units || 0) + n;
       else inv.push({ material: mat, units: n, name: def.name, kcalEach: 0, spoilDay: 9999, kg: def.kg });
+      if (mat === 'hide' && this.noteHideHandled) this.noteHideHandled({ material: mat, units: n });
       return n;
     },
     materialCount(mat) {

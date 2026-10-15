@@ -116,9 +116,39 @@ function collectPrepMaterials(G, ctx) {
     }
   }
 }
+// Maker fieldwork: handle spare visible hide and try the earned L1 outline.
+// Two panels plus any visible lashing are a player's guess, not a lookup of
+// hidden recipe.materials. Wrong guesses receive the same blind refusal.
+function experimentHideCraft(G, ctx) {
+  const s = G.state.scholar, known = () => ((G.state.codex.recipes || {}).hide_armor || {}).level || 0;
+  if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || !G.atCamp() ||
+      (s.kcal || 0) < 1800 || (s.dayTicks || 0) > 384 || known() >= 2 ||
+      (ctx._makerHideTrialDay != null && s.day - ctx._makerHideTrialDay < 3)) return;
+  if ((s.inventory || []).concat(Object.values(s.equipped || {})).some(i => i && (i.units ?? 1) > 0 && (i.itemId || i.id) === 'hide_armor')) return;
+  const stash = s.prepStash || [], bearer = G.villagerId;
+  if (ctx._makerHideHandleDay !== s.day && G.materialCount('hide') < 2) {
+    ctx._makerHideHandleDay = s.day;
+    for (const item of stash.filter(i => i.material === 'hide' && !i.bonded && (i.units ?? 1) > 0)) {
+      const need = 2 - G.materialCount('hide');
+      if (need <= 0) break;
+      const before = G.materialCount('hide');
+      G.takePrepMaterial(stash.indexOf(item), need);
+      const got = G.materialCount('hide') - before;
+      if (got > 0) ctx.livelihoodHideHandledUnits = (ctx.livelihoodHideHandledUnits || 0) + got;
+      if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || G.villagerId !== bearer || got <= 0) return;
+    }
+  }
+  const lashing = (s.inventory || []).some(i => ['vine', 'fiber', 'cloth'].includes(i.material) && (i.units || 0) > 0);
+  if (known() !== 1 || G.materialCount('hide') < 2 || !lashing) return;
+  ctx._makerHideTrialDay = s.day;
+  ctx.livelihoodHideTrials = (ctx.livelihoodHideTrials || 0) + 1;
+  if (G.craft('hide_armor') === true) ctx.livelihoodHideTrialSuccesses = (ctx.livelihoodHideTrialSuccesses || 0) + 1;
+}
 function make(G, ctx) {
   if (G.over || G.tbfight || G.state.activeContest) return;
   try {
+    experimentHideCraft(G, ctx);
+    if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest) return;
     collectPrepMaterials(G, ctx);
     if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest) return;
     const s = G.state.scholar;
@@ -202,5 +232,5 @@ module.exports = {
   merchant: policy('merchant', trade),
   maker: policy('maker', (G, ctx) => { study(G, ctx); make(G, ctx); trade(G, ctx); }),
   caregiver: policy('caregiver', care),
-  trade, make, care, quiet, study, preserveCounter, collectPrepMaterials,
+  trade, make, care, quiet, study, preserveCounter, collectPrepMaterials, experimentHideCraft,
 };
