@@ -5,6 +5,8 @@
 //   - trailFor(kinName, ownerId?) -> {kinName, relation, level, text, regionKnown} | null
 //   - sharpenTrail(kinName, source, ownerId?) -> {ok, level, text} | {ok:false, reason}
 //   - reunionScene(kinName, fate, ownerId?) -> {fate, title, lines, outcome, choices?} (also says the lines)
+//   - changedChoices(kind, kinName) -> [{id: 'ask'|'leave'|'fight', label}] — the three real choices at a 'changed' reunion of the bearer's own kin
+//   - choiceLines(kind, choice, kinName) -> [lines] — narration for a resolved ASK or LEAVE (FIGHT is fought in nomad-drive.js)
 //   - playEnding(data) -> {moral, title, lines} (also says the lines)
 // consumes:
 //   - worldKin(), worldKinEntry(), worldRegionName(), hearOfRegion(), regionDef() (world.js)
@@ -17,6 +19,7 @@
 //   - no_fabricated_history: scenes use only lifeseed/world facts — name, relation, hometown, workplace, fate line, region (code: reunionScene, kinFacts)
 //   - deterministic_fate: the 'changed' subtype derives from a seeded hash of the kin name, never Math.random (code: changedKind)
 //   - member_perspective: a party member's reunion is narrated in third person from their perspective — their voice, their choice beats — never the bearer's second person; the member decides changed-choices by a seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
+//   - real_choice: a 'changed' reunion of the BEARER's own kin always presents exactly ASK / LEAVE / FIGHT; labels are kind-specific, never knowledge-leaking (code: changedChoices)
 (function () {
   'use strict';
   const S = globalThis.Scattering = globalThis.Scattering || {};
@@ -206,6 +209,70 @@
       return kinds[hashStr('changed|' + salt + name) % kinds.length];
     },
 
+    // changedChoices(kind, kinName): the three real choices at a 'changed'
+    // reunion — ASK / LEAVE / FIGHT, normalized across all changed kinds
+    // (Steve 2026-10-15: the road default of walking on is the LEAVE choice,
+    // narrated honestly). Labels are kind-specific but reveal nothing the
+    // party couldn't know.
+    changedChoices(kind, kinName) {
+      const fn = firstName(kinName);
+      let ask = 'Ask ' + fn + ' what happened';
+      let leave = 'Leave ' + fn + ' be, and walk on';
+      if (kind === 'leads') {
+        ask = 'Ask ' + fn + ' to come';
+        leave = 'Leave ' + fn + ' to the village';
+      } else if (kind === 'ascended') {
+        ask = 'Speak a while, then go';
+        leave = 'Let the shining thing be';
+      } else { // hostile
+        ask = 'Demand an answer';
+        leave = 'Back away. Keep walking.';
+      }
+      return [
+        { id: 'ask', label: ask },
+        { id: 'leave', label: leave },
+        { id: 'fight', label: 'Force it — a real fight' },
+      ];
+    },
+
+    // choiceLines(kind, choice, kinName): narration for a resolved ASK or
+    // LEAVE at a 'changed' reunion. FIGHT is fought in the driver
+    // (nomad-drive.js fightKin) and narrated there from the real outcome.
+    // The NPC wants something in every scene; each ends resolved, planted,
+    // or owed — never a filler loop.
+    choiceLines(kind, choice, kinName) {
+      try {
+        const facts = kinFacts(kinName);
+        const fn = firstName(kinName);
+        const rel = facts ? facts.relation : 'kin';
+        const L = [];
+        if (choice === 'ask') {
+          if (kind === 'leads') {
+            L.push('You ask ' + fn + ' to come. ' + fn + ' looks at the gardens, the watch, the bell — then back at you, and the arithmetic is all over their face.');
+            L.push('"I walked until the walking made sense," ' + fn + ' says. "Then I stopped, and people started depending on the stopping. I can\'t unbuild it. But I remember every face at that fire — including yours."');
+            L.push('They press a pack of their stores into your hands. ' + fn + ' isn\'t coming. The blessing is: you understand.');
+          } else if (kind === 'ascended') {
+            L.push('You speak a while. The shining thing answers in plurals, in fragments — the System took the bright ones up, the way it takes everything it doesn\'t understand, and it almost understands ' + fn + '.');
+            L.push('"WE REMEMBER BEING YOUR ' + String(rel).toUpperCase() + '," it says, softer now. "TELL THE BRIGHT VOICE WE ARE WELL. IT WORRIES, IN ITS WAY."');
+            L.push('You leave lighter than you came. Some questions don\'t need the person back. They just need asking.');
+          } else {
+            L.push('You demand an answer. ' + fn + ' gives it — flat, tired, the way you set down something heavy: what they crossed, who they buried, what it cost to learn not to be found.');
+            L.push('"You got your answer," ' + fn + ' says. "Now take your people and go, before I decide the answer was a mistake." The hand doesn\'t leave the weapon. Some doors open exactly once.');
+          }
+        } else {
+          // leave: the road default, narrated honestly.
+          if (kind === 'leads') {
+            L.push('You leave ' + fn + ' to it. The bell rings behind you as the party shoulders packs — a sound like a door closing gently.');
+          } else if (kind === 'ascended') {
+            L.push('You let the shining thing keep its village of light. Behind you the air hums a half-step lower — then the road is just the road.');
+          } else {
+            L.push('You back away. ' + fn + '\'s hand stays on the weapon until the trees take you. The road keeps the secret, and you keep walking.');
+          }
+        }
+        return L;
+      } catch (e) { warn('choiceLines: ' + e.message); return []; }
+    },
+
     // reunionScene(kinName, fate, ownerId?): play the reunion. Says the lines
     // and returns the structured outcome for the road driver (nomad.js).
     // fate: 'alive' | 'changed' | 'dead' | 'moved'. ownerId (a party
@@ -252,15 +319,11 @@
           const kind = this.changedKind(kinName, seeker);
           extra.changedKind = kind;
           if (kind === 'leads') {
-            choices = [
-              { id: 'ask', label: `Ask ${fn} to come` },
-              { id: 'leave', label: `Leave ${fn} to the village` },
-              { id: 'trade', label: 'Trade, rest, and move on' },
-            ];
+            const normChoices = this.changedChoices(kind, kinName);
             if (member) {
               say(`◈ REUNION — ${kinName} is not lost. ${fn} leads a village here in ${rname} — gardens, a watch, a bell.`);
               say(`"${fn}?" ${member} says, and the leader's face does something complicated. "You walked all this way." Not a question. ${fn} has a village to keep. ${member} has a road.`);
-              const decision = memberDecide(seeker, kinName, kind, choices);
+              const decision = memberDecide(seeker, kinName, kind, normChoices);
               extra.decision = decision;
               choices = null; // decided: the member chose; no one is left to tap
               if (decision === 'ask') {
@@ -272,45 +335,48 @@
                 outcome = 'stayed';
                 extra.stayed = member;
               } else {
-                say(`They trade, rest a day at ${fn}'s fire, and ${member} walks on with the party. Some people you find just to know they're alright.`);
-                outcome = 'choice';
+                say(`${member} doesn't ask — doesn't even slow down. "${fn}," ${member} says, "you don't get to keep them AND me." It comes to blows before anyone can stop it.`);
+                outcome = 'fight';
               }
             } else {
               say(`◈ REUNION — ${kinName} is not lost. ${fn} leads a village here in ${rname} — gardens, a watch, a bell.`);
               say(`"${fn}?" you say, and the leader's face does something complicated. "You walked all this way." Not a question. ${fn} has a village to keep. You have a road.`);
               say(`The choice sits between you, honest and unsolvable: ask ${fn} to leave it all, or leave ${fn} to it.`);
               outcome = 'choice';
+              choices = this.changedChoices(kind, kinName);
             }
           } else if (kind === 'ascended') {
-            choices = [
-              { id: 'speak', label: 'Speak a while, then go' },
-              { id: 'leave', label: 'Let them be, and walk on' },
-            ];
+            const normChoices = this.changedChoices(kind, kinName);
             if (member) {
               say(`◈ REUNION — ${kinName} is here, and is not. The System took ${fn} up the way it takes the bright ones — ascended, shining at the edges, speaking in the plural.`);
               say(`"WE REMEMBER BEING THEIR ${rel.toUpperCase()}," ${fn} says, and the voice is ${fn}'s the way a bell is a cup. "THE ROAD WAS KIND TO LET YOU COME THIS FAR."`);
-              const decision = memberDecide(seeker, kinName, kind, choices);
+              const decision = memberDecide(seeker, kinName, kind, normChoices);
               extra.decision = decision;
               choices = null; // decided: the member chose; no one is left to tap
-              if (decision === 'speak') say(`${member} speaks a while, person to whatever-this-is. ${fn} listens the way light listens. Then ${member} walks on.`);
-              else say(`${member} lets the shining thing keep its village of light, and walks on.`);
-              outcome = 'choice';
+              if (decision === 'ask') {
+                say(`${member} speaks a while, person to whatever-this-is. ${fn} listens the way light listens. Then ${member} walks on.`);
+                outcome = 'choice';
+              } else if (decision === 'fight') {
+                say(`${member} looks at the shining thing for a long moment — then raises a weapon. "Come back down," ${member} says. It doesn't. It comes to blows anyway.`);
+                outcome = 'fight';
+              } else {
+                say(`${member} lets the shining thing keep its village of light, and walks on.`);
+                outcome = 'choice';
+              }
             } else {
               say(`◈ REUNION — ${kinName} is here, and is not. The System took ${fn} up the way it takes the bright ones — ascended, shining at the edges, speaking in the plural.`);
               say(`"WE REMEMBER BEING YOUR ${rel.toUpperCase()}," ${fn} says, and the voice is ${fn}'s the way a bell is a cup. "THE ROAD WAS KIND TO LET YOU COME THIS FAR."`);
               say(`You can speak a while, person to whatever-this-is. Or you can let the shining thing keep its village of light, and walk on.`);
               outcome = 'choice';
+              choices = this.changedChoices(kind, kinName);
             }
           } else {
-            choices = [
-              { id: 'fight', label: 'Force the reunion (a real fight)' },
-              { id: 'leave', label: 'Back away. Keep walking.' },
-            ];
+            const normChoices = this.changedChoices(kind, kinName);
             extra.hostile = true;
             if (member) {
               say(`◈ REUNION — ${member}'s ${rel}, ${kinName}, is alive — and does not want to be found. ${fn}'s hand is on a weapon before ${member} is in speaking range.`);
               say(`"Turn around." Not angry. Tired. Whatever ${fn} is surviving out here, it doesn't include ${member}.`);
-              const decision = memberDecide(seeker, kinName, kind, choices);
+              const decision = memberDecide(seeker, kinName, kind, normChoices);
               extra.decision = decision;
               choices = null; // decided: the member chose; no one is left to tap
               if (decision === 'fight') {
@@ -325,6 +391,7 @@
               say(`"Turn around." Not angry. Tired. Whatever ${fn} is surviving out here, it doesn't include you.`);
               say(`You could force it — there is a fight in this, if you want it. Or the road keeps the secret, and you keep walking.`);
               outcome = 'choice';
+              choices = this.changedChoices(kind, kinName);
             }
           }
           markFound();
@@ -392,7 +459,7 @@
 
         say('◈ THE LONG WAY HOME — the road ends.');
         if (found.length) {
-          const names = found.slice(0, 3).join(', ') + (found.length > 3 ? `, and ${found.length - 3} more` : '');
+          const names = found.slice(0, 3).map(e => (e && e.name) || e).join(', ') + (found.length > 3 ? `, and ${found.length - 3} more` : '');
           say(`You found them: ${names}. ${days} days of walking, and the world finally gave back what the sky took.`);
         } else {
           say(`You didn't find them all. ${days} days of walking, and some trails just go quiet. You stopped where the walking felt done.`);
@@ -435,6 +502,9 @@
     trailFor: (n, o) => Game.trailFor(n, o),
     sharpenTrail: (n, s, o) => Game.sharpenTrail(n, s, o),
     reunionScene: (n, f, o) => Game.reunionScene(n, f, o),
+    changedKind: (n) => Game.changedKind(n),
+    changedChoices: (k, n) => Game.changedChoices(k, n),
+    choiceLines: (k, c, n) => Game.choiceLines(k, c, n),
     playEnding: (d) => Game.playEnding(d),
   };
 })();

@@ -1069,16 +1069,18 @@ THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something e
 ### nomad-drive (`nomad-drive.js`)
 The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, stages foreign-village encounters on leg entry, and owns the leave / move-on / settle / village-encounter UI taps.
 
-**Provides:** Game.nomadDrive (hooks wrap nomad.start/enterLeg/departLeg/daily and Game.playerDeath, guarded wrap-once), planLegs(), syncItinerary(), scatteredKinOf(vid), partySeekers(), releaseGoneSeekers(), fateFor(), maybeReunion(), resolveReunion(), joinCompanion(), fightKin(), moveKinOn(), checkAllFound(), leaveTap(), moveOnTap(), settleTap(), stageVillageEncounter(leg) -> encounter|null, pendingVillageEncounter() -> {villageName, moodLabel, actions[]}|null, villageTap(action)
+**Provides:** Game.nomadDrive (hooks wrap nomad.start/enterLeg/departLeg/daily and Game.playerDeath, guarded wrap-once), planLegs(), syncItinerary(), scatteredKinOf(vid), partySeekers(), releaseGoneSeekers(), fateFor(), maybeReunion(), resolveReunion(), joinCompanion(), closeLegIfDone(), pendingChoice(), changedTap(), chooseReunion(), fightKin(), duelKin(), fightKin(), moveKinOn(), checkAllFound(), leaveTap(), moveOnTap(), settleTap(), stageVillageEncounter(leg) -> encounter|null, pendingVillageEncounter() -> {villageName, moodLabel, actions[]}|null, villageTap(action)
 
 **Rules:**
 - itinerary: departure plans one leg per living scattered kin whose region is known; newly sharpened trails join by daily sync (code: planLegs, syncItinerary)
 - party_kin_legs: the itinerary plans legs for every party villager's known-region scattered kin, not just the bearer's; legs carry kinOwners (kin name -> seeking villager id, null for the bearer's own) (code: planLegs, syncItinerary, scatteredKinOf, partySeekers)
 - reunion_timing: one reunion per leg per day after 3+ days living there; never a prompt (code: maybeReunion)
 - deterministic_fate: fate = hash(kinName + worldSeed + moves), alive .5 / changed .2 / dead .15 / moved .15; moved excluded after 2 moves; party members' kin salt the hash with the seeker's id, the bearer's formula unchanged (code: fateFor)
-- member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: resolveReunion; nomad-scenes.js reunionScene/memberDecide)
+- member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
 - hostile_fight: a hostile party-kin reunion the member won't walk away from is a real blow-by-blow fieldFight, seeker vs kin — never an outcome table (code: fightKin)
 - seeker_gone: a dead or departed seeker's pending kin release; released kin close their legs but never block all-found (code: releaseGoneSeekers)
+- real_choice: a 'changed' reunion of the BEARER's own kin holds road.pendingChoice open with exactly ask/leave/fight; ask/leave are spoken scenes (nomad-scenes.choiceLines), fight is a real blow-by-blow DUEL (the bearer <redacted> the kin through fieldFight) — vKill changes the road outcome to 'grave', mFlee brings the kin home FORCED ('alive'), vDie/vFlee leave it 'changed' (code: chooseReunion, duelKin, fightKin)
+- road_default: an unanswered choice auto-resolves to leave at the next tick — never a prompt, deterministic for sims (code: maybeReunion)
 - moved_on: the kin relocates to a new deterministic region (never the leg's, never the landing); the trail resets to vague (code: moveKinOn)
 - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
 - all_found: every scattered kin of every living party villager resolved alive/changed/dead closes the road all-found; kin whose region was never learned don't block it (code: checkAllFound)
@@ -1090,7 +1092,7 @@ The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the dep
 ### nomad-scenes (`nomad-scenes.js`)
 Trails, reunion scenes, and the ending for The Long Way Home (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "Expedition is leaving your village as a nomad to find remaining family. That should be another bonus ending."). Per-kin trails sharpen from vague (continent) to named (region) only as earned — keepsake bond L2+ names it, road encounters sharpen a step. Four reunion fates (alive/changed/dead/moved) as real scenes in spare second person. The ending composes light ("We were never lost; we were just far apart.") or dark (the village left behind fell) from Game.nomad.endingData(). Road state, legs, and loss live in nomad.js (sibling stream); this module owns scenes only.
 
-**Provides:** trailFor(kinName, ownerId?) -> {kinName, relation, level, text, regionKnown} | null, sharpenTrail(kinName, source, ownerId?) -> {ok, level, text} | {ok:false, reason}, reunionScene(kinName, fate, ownerId?) -> {fate, title, lines, outcome, choices?} (also says the lines), playEnding(data) -> {moral, title, lines} (also says the lines)
+**Provides:** trailFor(kinName, ownerId?) -> {kinName, relation, level, text, regionKnown} | null, sharpenTrail(kinName, source, ownerId?) -> {ok, level, text} | {ok:false, reason}, reunionScene(kinName, fate, ownerId?) -> {fate, title, lines, outcome, choices?} (also says the lines), changedChoices(kind, kinName) -> [{id: 'ask'|'leave'|'fight', label}] — the three real choices at a 'changed' reunion of the bearer's own kin, choiceLines(kind, choice, kinName) -> [lines] — narration for a resolved ASK or LEAVE (FIGHT is fought in nomad-drive.js), playEnding(data) -> {moral, title, lines} (also says the lines)
 
 **Rules:**
 - knowledge_gated: a trail never names a region the village hasn't earned; level 0 is continent-only (code: trailFor, sharpenTrail)
@@ -1098,6 +1100,7 @@ Trails, reunion scenes, and the ending for The Long Way Home (docs/WORLD-REGIONS
 - no_fabricated_history: scenes use only lifeseed/world facts — name, relation, hometown, workplace, fate line, region (code: reunionScene, kinFacts)
 - deterministic_fate: the 'changed' subtype derives from a seeded hash of the kin name, never Math.random (code: changedKind)
 - member_perspective: a party member's reunion is narrated in third person from their perspective — their voice, their choice beats — never the bearer's second person; the member decides changed-choices by a seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
+- real_choice: a 'changed' reunion of the BEARER's own kin always presents exactly ASK / LEAVE / FIGHT; labels are kind-specific, never knowledge-leaking (code: changedChoices)
 
 **Consumes:** worldKin(), worldKinEntry(), worldRegionName(), hearOfRegion(), regionDef() (world.js), keepsakeKinPerson(), keepsakeLevel(), wornKeepsakes() (keepsakes.js), state, say(), vpOf(), mulberry32, Game.nomad.endingData() (nomad.js, sibling stream; defensive — playEnding takes data)
 

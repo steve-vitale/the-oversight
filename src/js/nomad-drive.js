@@ -12,7 +12,12 @@
 //   - maybeReunion()
 //   - resolveReunion()
 //   - joinCompanion()
+//   - closeLegIfDone()
+//   - pendingChoice()
+//   - changedTap()
+//   - chooseReunion()
 //   - fightKin()
+//   - duelKin()
 //   - moveKinOn()
 //   - checkAllFound()
 //   - leaveTap()
@@ -26,9 +31,11 @@
 //   - party_kin_legs: the itinerary plans legs for every party villager's known-region scattered kin, not just the bearer's; legs carry kinOwners (kin name -> seeking villager id, null for the bearer's own) (code: planLegs, syncItinerary, scatteredKinOf, partySeekers)
 //   - reunion_timing: one reunion per leg per day after 3+ days living there; never a prompt (code: maybeReunion)
 //   - deterministic_fate: fate = hash(kinName + worldSeed + moves), alive .5 / changed .2 / dead .15 / moved .15; moved excluded after 2 moves; party members' kin salt the hash with the seeker's id, the bearer's formula unchanged (code: fateFor)
-//   - member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: resolveReunion; nomad-scenes.js reunionScene/memberDecide)
+//   - member_perspective: a party member's reunion is their scene (third person, their voice); they decide changed-choices by seeded hash (code: reunionScene, memberDecide; nomad-drive.js applies the outcomes)
 //   - hostile_fight: a hostile party-kin reunion the member won't walk away from is a real blow-by-blow fieldFight, seeker vs kin — never an outcome table (code: fightKin)
 //   - seeker_gone: a dead or departed seeker's pending kin release; released kin close their legs but never block all-found (code: releaseGoneSeekers)
+//   - real_choice: a 'changed' reunion of the BEARER's own kin holds road.pendingChoice open with exactly ask/leave/fight; ask/leave are spoken scenes (nomad-scenes.choiceLines), fight is a real blow-by-blow DUEL (the bearer <redacted> the kin through fieldFight) — vKill changes the road outcome to 'grave', mFlee brings the kin home FORCED ('alive'), vDie/vFlee leave it 'changed' (code: chooseReunion, duelKin, fightKin)
+//   - road_default: an unanswered choice auto-resolves to leave at the next tick — never a prompt, deterministic for sims (code: maybeReunion)
 //   - moved_on: the kin relocates to a new deterministic region (never the leg's, never the landing); the trail resets to vague (code: moveKinOn)
 //   - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
 //   - all_found: every scattered kin of every living party villager resolved alive/changed/dead closes the road all-found; kin whose region was never learned don't block it (code: checkAllFound)
@@ -213,6 +220,12 @@
     maybeReunion() {
       const r = road();
       if (!r || !r.active) return null;
+      if (r.pendingChoice) {
+        // The road default: an unanswered changed-choice walks on at the
+        // next tick — honest, deterministic, never a prompt. Headless sims
+        // behave exactly like the old road default.
+        return this.chooseReunion(r.pendingChoice.kinName, 'leave', { auto: true });
+      }
       const leg = r.legs[r.legIndex];
       if (!leg || leg.status !== 'active') return null;
       const names = leg.kinNames && leg.kinNames.length ? leg.kinNames
@@ -245,7 +258,7 @@
           scene = Game.nomadScenes.reunionScene(name, fate, seeker);
         }
       } catch (e) {}
-      const outcome = (scene && scene.outcome) ||
+      let outcome = (scene && scene.outcome) ||
         (fate === 'alive' ? 'joined' : fate === 'dead' ? 'grave' : fate === 'moved' ? 'trail-continues' : 'choice');
       const kin = scatteredKinOf(seeker || Game.villagerId).find(k => k.name === name) || {};
       const relation = kin.relation || null;
@@ -261,11 +274,26 @@
         N.markKinFound(name, relation, 'dead', seeker);
         leg.resolvedKin[name] = 'dead';
       } else if (outcome === 'choice') {
-        // Changed: the scene said the situation honestly. The member already
-        // made their call inside the scene; the bearer's own choice UI is a
-        // separate pass — the road default is to let them be and walk on.
-        N.markKinFound(name, relation, 'changed', seeker);
-        leg.resolvedKin[name] = 'changed';
+        if (seeker) {
+          // Changed: the scene said the situation honestly. The member already
+          // made their call inside the scene (memberDecide); 'choice' here is
+          // their trade-and-rest — the party walks on.
+          N.markKinFound(name, relation, 'changed', seeker);
+          leg.resolvedKin[name] = 'changed';
+        } else {
+          // Changed: the choice is REAL — three taps (ask/leave/fight),
+          // rendered as an open beat in the beats row. The driver holds it
+          // open; an unanswered choice auto-resolves to the road default
+          // (leave) at the next tick (code: chooseReunion, maybeReunion).
+          r.pendingChoice = {
+            kinName: name,
+            kind: (scene && scene.kind) || 'hostile',
+            relation,
+            choices: (scene && scene.choices) || [],
+            legIndex: r.legIndex,
+          };
+          outcome = 'choice-pending';
+        }
       } else if (outcome === 'stayed') {
         // The seeker stays with their kin's village. They leave the party;
         // their other pending kin release on the next daily reconcile.
@@ -278,19 +306,34 @@
           say(`The party is one smaller. The road doesn't comment; it just keeps going.`);
         }
       } else if (outcome === 'fight') {
-        // The member wouldn't walk away: a real fight, seeker vs kin.
-        const result = this.fightKin(seeker, name);
-        if (result === 'won') {
-          say(`${name} yields — beaten, breathing, done fighting. ${sname} doesn't celebrate. The road gave them back, but not the way anyone wanted.`);
+        // The member wouldn't walk away: a real fight, seeker vs kin —
+        // one blow-by-blow bout, the bout's real outcome tag, never a table.
+        const tag = this.fightKin(seeker, name);
+        const fn = String(name).split(' ')[0];
+        if (tag === 'vKill') {
+          say(`It ends the way these things end. ${fn} is on the ground. ${sname} doesn't celebrate — stands there a long time, then helps dig. The road gave them back, but not the way anyone wanted.`);
+          try { const ml = Game.state && Game.state.moralLedger; if (ml) ml.kinKills = (ml.kinKills || 0) + 1; } catch (e) {}
+          N.markKinFound(name, relation, 'dead', seeker);
+          leg.resolvedKin[name] = 'dead';
+        } else if (tag === 'mFlee') {
+          say(`${fn} yields — beaten, breathing, done fighting. ${sname} doesn't celebrate. The road gave them back, but not the way anyone wanted.`);
           this.joinCompanion(name, relation);
           N.markKinFound(name, relation, 'changed', seeker);
           leg.resolvedKin[name] = 'changed';
-        } else if (result === 'lost') {
-          say(`${sname} is still breathing. ${name} is gone. Some reunions end with the road keeping its secret.`);
+        } else if (tag === 'vDie') {
+          say(`${sname} goes down and doesn't get up. ${fn} stares at their hands like they belong to someone else — then runs, and keeps running.`);
+          try { if (N.nomadKill) N.nomadKill(seeker, 'the fight for ' + name); } catch (e) {}
+          N.markKinFound(name, relation, 'changed', seeker);
+          leg.resolvedKin[name] = 'changed';
+        } else if (tag === 'no-fight') {
+          say(`${sname} thinks better of it — some fights aren't worth starting. The party walks on.`);
           N.markKinFound(name, relation, 'changed', seeker);
           leg.resolvedKin[name] = 'changed';
         } else {
-          say(`${sname} thinks better of it — some fights aren't worth starting. The party walks on.`);
+          // vFlee / evade: the seeker yields. Bloodied, lighter.
+          const lost = Math.round(((r.supplies && r.supplies.food) || 0) * 0.15);
+          r.supplies.food = Math.max(0, ((r.supplies && r.supplies.food) || 0) - lost);
+          say(`${sname} yields — steps back with hands open. ${fn} doesn't follow. The party walks on, slower now.`);
           N.markKinFound(name, relation, 'changed', seeker);
           leg.resolvedKin[name] = 'changed';
         }
@@ -301,12 +344,7 @@
         leg.resolvedKin[name] = fate;
       }
       // The leg closes when every kin on it has resolved.
-      const names = leg.kinNames && leg.kinNames.length ? leg.kinNames
-        : (leg.kinName ? [leg.kinName] : []);
-      if (names.every(n => leg.resolvedKin[n])) {
-        leg.status = 'done';
-        leg.resolved = leg.resolvedKin[names[names.length - 1]] || fate;
-      }
+      this.closeLegIfDone(leg, fate);
       this.checkAllFound();
       return { fate, outcome };
     },
@@ -328,23 +366,199 @@
       return true;
     },
 
-    // fightKin(seekerId, name): a hostile party-kin reunion come to blows.
-    // A real blow-by-blow fight through fieldFight (the road's honest path
-    // — nomad-wild.fightVillage uses the same call shape), seeker vs kin,
-    // never an outcome table. Returns 'won' | 'lost' | 'no-fight'.
-    fightKin(seekerId, name) {
-      const G = Game;
-      if (!seekerId || typeof G.fieldFight !== 'function') return 'no-fight';
-      const mdef = { id: 'kin_fighter', name: name, hp: 60, maxHp: 60, wave: 1 };
-      const m = { id: 'kin_fighter_road', hp: 60, maxHp: 60 };
+    // fightKin(fighterId, name, opts): a 'changed' reunion come to blows —
+    // bearer <redacted> or seeker vs their kin. One real blow-by-blow bout through
+    // fieldFight with the kin's real attack kit — never an outcome table.
+    // Reads rec.outcome (the engine's real record), never phantom fields.
+    // Returns the bout's outcome tag: 'vKill' | 'mFlee' | 'vDie' | 'vFlee' |
+    // 'evade' | 'no-fight'. Callers map tags to road outcomes.
+    // opts.rng seeds the fight (proofs); the live path passes none.
+    fightKin(fighterId, name, opts) {
+      opts = opts || {};
+      if (typeof Game.fieldFight !== 'function') return 'no-fight';
+      // The kin: a person, not a monster — dangerous and desperate, with a
+      // real attack kit (fieldFights honors mdef.attacks verbatim). A duel
+      // against a desperate person is a genuine fight, not a boss — and not
+      // a formality either.
+      const mdef = {
+        id: 'kin_fighter', name: name, hp: [50, 50], maxHp: 50,
+        speed: 3, wave: 1,
+        attacks: [
+          { name: 'wild swing', damage: [7, 12] },
+          { name: 'knife slash', damage: [9, 14], weight: 2 },
+          { name: 'desperate lunge', damage: [11, 17], weight: 1, condition: { hpBelow: 0.5 } },
+        ],
+      };
+      const m = { id: 'kin_' + String(name).replace(/[^a-zA-Z0-9]+/g, '_'), hp: 50, maxHp: 50 };
       let rec = null;
-      try {
-        rec = G.fieldFight(seekerId, mdef, m, {});
-      } catch (e) { return 'no-fight'; }
-      return (rec && (rec.won || rec.victory)) ? 'won' : 'lost';
+      try { rec = Game.fieldFight(fighterId || 'p', mdef, m, { rng: opts.rng }); } catch (e) { return 'no-fight'; }
+      if (!rec) return 'no-fight';
+      const o = rec.outcome;
+      if (o === 'vKill' || (typeof rec.mHpLeft === 'number' && rec.mHpLeft <= 0)) return 'vKill';
+      if (o === 'vDie') return 'vDie';
+      if (o === 'mFlee') return 'mFlee';
+      if (o === 'vFlee') return 'vFlee';
+      return 'evade';
     },
 
-    // moveKinOn(name, leg, ownerId): the kin moved on. They relocate to a new
+    // closeLegIfDone(leg, fallback): the leg closes when every kin on it
+    // has resolved; the leg's resolution is the last kin's.
+    closeLegIfDone(leg, fallback) {
+      if (!leg) return false;
+      const names = leg.kinNames && leg.kinNames.length ? leg.kinNames
+        : (leg.kinName ? [leg.kinName] : []);
+      if (names.length && names.every(n => leg.resolvedKin && leg.resolvedKin[n])) {
+        leg.status = 'done';
+        leg.resolved = leg.resolvedKin[names[names.length - 1]] || fallback || leg.resolved;
+        return true;
+      }
+      return false;
+    },
+
+    // pendingChoice(): the open changed-reunion choice, if any — rendered
+    // as an open beat (app.js beats row) with three taps.
+    pendingChoice() {
+      const r = road();
+      if (!r || !r.active) return null;
+      return r.pendingChoice || null;
+    },
+
+    // changedTap(choiceId): the UI tap — resolves the pending choice.
+    changedTap(choiceId) {
+      const pc = this.pendingChoice();
+      if (!pc) return null;
+      return this.chooseReunion(pc.kinName, choiceId);
+    },
+
+    // chooseReunion(name, choiceId, opts): resolve a 'changed' reunion's
+    // three choices. ask/leave are spoken scenes (nomad-scenes.js owns the
+    // words); fight is a REAL blow-by-blow fight (Game.fieldFight) whose
+    // outcome changes the road outcome — never an outcome table.
+    // opts.rng seeds the fight (proofs); the live path passes none.
+    chooseReunion(name, choiceId, opts) {
+      const N = Game.nomad, r = road();
+      const pc = r && r.pendingChoice;
+      if (!N || !r || !r.active || !pc || pc.kinName !== name) return null;
+      const id = (choiceId === 'ask' || choiceId === 'fight') ? choiceId : 'leave';
+      const kind = pc.kind || 'hostile';
+      const relation = pc.relation || null;
+      r.pendingChoice = null;
+      const leg = (pc.legIndex != null && r.legs[pc.legIndex]) || r.legs[r.legIndex] || null;
+      if (id === 'fight') return this.duelKin(name, kind, leg, relation, opts);
+      // ask / leave: spoken scenes.
+      let lines = [];
+      try {
+        if (Game.nomadScenes && typeof Game.nomadScenes.choiceLines === 'function')
+          lines = Game.nomadScenes.choiceLines(kind, id, name) || [];
+      } catch (e) {}
+      if (!lines.length) lines = [id === 'ask'
+        ? 'You ask. The answer is longer than the road has time for, and shorter than you feared.'
+        : 'You walk on. The road doesn\'t hurry you; it knows what this costs.'];
+      for (const l of lines) say(l);
+      if (id === 'ask' && kind === 'leads') {
+        // A village leader sends the party off with a pack — the trade
+        // content folded into the asking, honest and unsolicited.
+        N.addFood(1500);
+        say('A pack of their stores comes with you — 1,500 kcal of somebody else\'s winter. You carry it gently.');
+      }
+      N.markKinFound(name, relation, 'changed');
+      if (leg) {
+        leg.resolvedKin = leg.resolvedKin || {};
+        leg.resolvedKin[name] = 'changed';
+        this.closeLegIfDone(leg, 'changed');
+      }
+      this.checkAllFound();
+      return { fate: 'changed', outcome: 'changed', choice: id, auto: !!(opts && opts.auto) };
+    },
+
+    // duelKin(name, kind, leg, relation, opts): the FIGHT choice — a DUEL.
+    // The bearer <redacted> up alone against their kin (it's personal); the rest
+    // of the party is there to run the kin down if they break. One real
+    // blow-by-blow bout through fightKin — never an outcome table. The result
+    // changes the road outcome:
+    //   - vKill: the kin dies -> 'grave' (dark; the ledger remembers).
+    //   - mFlee: the kin breaks; the party runs them down and brings them
+    //     home FORCED -> 'alive' as a companion (forced: true). A reunion,
+    //     but not the one anyone walked all this way for.
+    //   - vDie: the bearer <redacted> -> nomadKill (the mantle stays in the
+    //     party); the kin flees in horror -> 'changed'.
+    //   - vFlee/evade: the bearer <redacted> down -> 'changed', bloodied, and
+    //     lighter in the packs.
+    // opts.rng seeds the fight (proofs); the live path passes none.
+    duelKin(name, kind, leg, relation, opts) {
+      const N = Game.nomad, r = road();
+      opts = opts || {};
+      const resolve = (fate, tag, extra) => {
+        N.markKinFound(name, relation, fate);
+        if (leg) {
+          leg.resolvedKin = leg.resolvedKin || {};
+          leg.resolvedKin[name] = fate;
+          this.closeLegIfDone(leg, fate);
+        }
+        this.checkAllFound();
+        return Object.assign({ fate: 'changed', outcome: tag, choice: 'fight' }, extra || {});
+      };
+      const fn = String(name).split(' ')[0];
+      if (typeof Game.fieldFight !== 'function') {
+        say('There is a fight in this — but the road refuses to stage it. You walk on instead.');
+        return resolve('changed', 'changed');
+      }
+      const party = (N.party ? N.party() : []) || [];
+      const champ = party.find(p => p.id === r.bearerId) || party[0];
+      if (!champ) {
+        say('No one in the party can stand. You back away — the fight stays hypothetical.');
+        return resolve('changed', 'changed');
+      }
+      const cn = String(champ.name || 'you').split(' ')[0];
+      say(fn + ' sees ' + cn + ' step forward alone, and understands. No System theatrics — blow by blow, the way all real fights are.');
+      // The kin: a person, not a monster — dangerous and desperate, with a
+      // real attack kit (fieldFights honors mdef.attacks verbatim). A duel
+      // against a desperate person is a genuine fight, not a boss — and not
+      // a formality either.
+
+      const tag = this.fightKin(champ.id || 'p', name, opts);
+      if (!tag || tag === 'no-fight') return resolve('changed', 'changed');
+      const o = tag;
+      if (o === 'vKill') {
+        say('It ends the way these things end. ' + fn + ' is on the ground, and the road is suddenly, obscenely quiet.');
+        say('You bury them properly — stones piled, the name spelled right. The party doesn\'t speak for a long time. Some victories are just losses wearing better clothes.');
+        try {
+          const ml = Game.state && Game.state.moralLedger;
+          if (ml) ml.kinKills = (ml.kinKills || 0) + 1;
+        } catch (e) {}
+        return resolve('dead', 'grave');
+      }
+      if (o === 'vDie') {
+        // The bearer fell. The road keeps what it takes; the mantle stays
+        // in the party. The kin looks at what they've done — and runs.
+        const fname = champ.name || 'the bearer';
+        try { if (N.nomadKill) N.nomadKill(champ.id, 'the fight for ' + name); } catch (e) {}
+        say(fname + ' goes down and doesn\'t get up. ' + fn + ' stares at their hands like they belong to someone else — then runs, and keeps running.');
+        if (!r.active) return { fate: 'changed', outcome: 'wiped', choice: 'fight' };
+        return resolve('changed', 'changed');
+      }
+      if (o === 'mFlee') {
+        // The kin breaks — and the party is four pairs of legs against one.
+        // They run them down and bring them home. A reunion, forced: not the
+        // one anyone walked all this way for. Desperate and traumatic — and
+        // the road will have to live with it.
+        const cid = 'kin:' + String(name).replace(/[^a-zA-Z0-9]+/g, '_');
+        r.companions = r.companions || {};
+        r.companions[cid] = { name, relation, forced: true };
+        if (r.partyIds.indexOf(cid) < 0) r.partyIds.push(cid);
+        say(fn + ' breaks and runs — and the party is four pairs of legs against one. They run ' + fn + ' down by the creek and bring them back, not gently.');
+        say('\'' + fn + ',\' ' + cn + ' says, breathing hard, \'you\'re coming home.\' It isn\'t a question. The road just got heavier, and nobody pretends otherwise.');
+        return resolve('alive', 'joined-forced');
+      }
+      // vFlee / evade / judges: the bearer backs down. Bloodied, lighter.
+      const lost = Math.round(((r.supplies && r.supplies.food) || 0) * 0.25);
+      r.supplies.food = Math.max(0, ((r.supplies && r.supplies.food) || 0) - lost);
+      say(cn + ' yields — steps back with hands open. ' + fn + ' doesn\'t follow. Some fights you walk into; this one you walk out of.');
+      say('You leave ' + lost.toLocaleString() + ' kcal of dropped packs in the dirt. The road keeps the secret, and you keep walking — slower now.');
+      return resolve('changed', 'changed');
+    },
+
+    // moveKinOn(name, leg): the kin moved on. They relocate to a new
     // deterministic region (never this leg's, never the landing); the trail
     // resets to vague and must be re-sharpened; the itinerary syncs when it
     // is. A party member's kin salts the relocation with the seeker's id and

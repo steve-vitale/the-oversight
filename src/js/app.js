@@ -267,6 +267,18 @@
         if (fsl) out.push(`<div class="statrow beat-open" style="opacity:.95">🍖 ${esc(fsl)}</div>`);
       } catch (e) {}
       const pb = st.pendingBeg;
+      // THE LONG WAY HOME (2026-10-15): a 'changed' reunion holds its three
+      // choices open as a beat — ask / leave / fight. Never a prompt: the
+      // road auto-resolves to leave at the next tick if the player taps
+      // nothing (nomad-drive.js maybeReunion).
+      try {
+        const pc = (Game.nomadDrive && typeof Game.nomadDrive.pendingChoice === 'function') ? Game.nomadDrive.pendingChoice() : null;
+        if (pc && pc.choices && pc.choices.length) {
+          const fn = String(pc.kinName || 'your kin').split(' ')[0];
+          const btns = pc.choices.map(c => `<button class="btn sm" data-beat="nch:${esc(c.id)}">${esc(c.label)}</button>`).join(' ');
+          out.push(`<div class="statrow beat-open">◈ <b>${esc(fn)}</b> — the choice sits open. ${btns}</div>`);
+        }
+      } catch (e) {}
       if (pb) {
         let vnm = 'their fire';
         try { const v = Game._otherVillage ? Game._otherVillage(pb.villageId) : null; if (v && v.name) vnm = v.name; } catch (e) {}
@@ -16302,6 +16314,11 @@
       // trade / rest / fight / walk away, resolved in nomad-drive.js.
       else if (kind === 'nve') {
         try { if (Game.nomadDrive) Game.nomadDrive.villageTap(spec[1]); } catch (e) {}
+      }
+      // THE LONG WAY HOME (2026-10-15): the changed-reunion choice taps —
+      // ask / leave / fight, resolved in nomad-drive.js.
+      else if (kind === 'nch') {
+        try { if (Game.nomadDrive) Game.nomadDrive.changedTap(spec[1]); } catch (e) {}
       }
       else if (kind === 'sw') {
         if (spec[1] === 'appoint') Game.appointSwitchboard(spec[2]);
