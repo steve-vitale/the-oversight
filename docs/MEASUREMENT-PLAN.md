@@ -4,6 +4,14 @@ Steve, 2026-10-15: "Yes, let’s create a more balanced set of measuring telemet
 
 ## Decision rule
 
+Winning should be difficult. Win rate is a measure of challenge, not an
+objective to maximize. A material change in either direction requires
+investigation and consideration; fewer wins are not automatically a regression,
+and more wins are not automatically an improvement. Review whether costs,
+counterplay, preparation and access remain fair for each playstyle. Survival
+and resource warnings also prompt review, not an automatic buff or revert.
+Record accepted tradeoffs in [the survival lever register](SURVIVAL-LEVERS.md).
+
 Use a vector of outcomes, never one weighted score. Keep results separate
 for capable, maker, merchant and caregiver. An aggregate improvement cannot
 cancel a regression in one playstyle, food security, survival or gear access.
@@ -26,7 +34,11 @@ Measurement has three layers:
 ## Metric contracts
 
 `scripts/balance-metrics.json` versions the practical regression thresholds,
-units, direction and interpretation. These are starting **review thresholds**,
+units, direction and interpretation. `won` has neutral direction with
+`reviewChanges: true`: an absolute paired change above 0.02 triggers
+`change_watch`, or `change_signal` if the exploratory interval excludes zero.
+These statuses request investigation without a better/worse judgment.
+These are starting **review thresholds**,
 not game design quotas. Keep the same contract for a comparison; changes to
 it require a reason. Review all policies and raw paired rows.
 
@@ -75,7 +87,7 @@ it require a reason. Review all policies and raw paired rows.
   start/end source manifests, and failure receipts. Larger panels reuse
   finished identical cases and only schedule missing work.
 - **First benchmark:** pre/post host-feast nourishment. Report every guardrail,
-  including the already-known negative win/death results. This is calibration
+  including the already-known win/death movements. This is calibration
   of measurement, not another balance lever.
 - **Then:** use the scorecard for Garden's real seven-day deed and later
   subclass/scale/gear changes. Extend outcomes only with observer-neutral

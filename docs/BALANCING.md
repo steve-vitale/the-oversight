@@ -2,7 +2,16 @@
 
 Everything rooted in reality, everything balanced. This is how we evaluate changes.
 
-## Target Metrics (the numbers we're aiming for)
+**Current direction, 2026-10-15:** winning should be difficult. A reduction in
+win rate prompts investigation and consideration, not an automatic regression
+judgment. Do not tune toward the historical win-rate percentages below.
+[Survival levers and decision log](SURVIVAL-LEVERS.md) is the maintained register;
+[the measurement plan](MEASUREMENT-PLAN.md) defines current comparisons.
+Older economy/end-condition measurements below describe their dated builds,
+including the retired codex/pantry win condition; they are not current Table
+acceptance criteria.
+
+## Historical reference measurements (check the dated build)
 
 ### Daily Economy
 - **Scholar needs**: 2,200 kcal/day (realistic adult).
@@ -17,13 +26,13 @@ Everything rooted in reality, everything balanced. This is how we evaluate chang
 - **Forest floor/Trail**: 400–600 kcal.
 - **Stock**: Grove 3, others 2, forest floor 1. (Breadbasket grove: 2.)
 
-### Win/Loss
-- **Greedy bot win rate**: 60–80% (optimal play should usually win; humans will be 30–50%).
-- **Avg win days**: 12–18.
+### Historical pre-Table win/loss
+- **Retired win-rate target**: the former 60–80% greedy-bot target and 30–50% human estimate are historical assumptions, superseded by Steve on 2026-10-15. There is no replacement win-rate quota.
+- **Historical average win days**: 12–18.
 - **Pantry start**: ~47,250 kcal as real items (dried beans, rice, canned soup, dried meat, peanuts — long-spoil staples). CORRECTED 2026-10-10 (was 94k in this doc, stale): measured day-0 pantry is 47,250 kcal across 40 seeds. At the real early deficit (~3.5k/day with strangers who don't know the land) that's a 3–4 week buffer while the village learns — a neglectful village is in crisis by week two; a learning village stretches it. The scarcity comes fast, by design.
-- **Win** (as coded): Codex 10+ AND Pantry 8,000+. NOTE: pantry half is trivially satisfied from the start (94k >> 8k) — the win is effectively codex-only until the starting pantry is rebalanced.
-- **Loss**: 3 hungry days (pantry empty) OR scholar death.
-- **Greedy bot win rate, measured 2026-10-04**: ~20% pre-fix; ~2-8% after honest tree yields (oak→acorns, hickory→nuts — trees no longer a species slot machine for codex entries). The bot doesn't identify strategically; human path to 10 entries via plant/bush cells is intact. If the win-rate target matters, the lever is codex acquisition, not tree honesty.
+- **Historical win** (pre-Table build): Codex 10+ AND Pantry 8,000+. NOTE: pantry half is trivially satisfied from the start (94k >> 8k) — the win is effectively codex-only until the starting pantry is rebalanced.
+- **Historical loss**: 3 hungry days (pantry empty) OR scholar death.
+- **Greedy bot win rate, measured 2026-10-04**: ~20% pre-fix; ~2-8% after honest tree yields (oak→acorns, hickory→nuts — trees no longer a species slot machine for codex entries). The bot doesn't identify strategically; human path to 10 entries via plant/bush cells is intact. This dated bot result is evidence about its identification strategy, not a reason to undo honest tree yields.
 
 ### Village Lives
 - **Food haul**: 400–800 kcal (a real haul for one person, visible on top of abstract provision).
@@ -99,10 +108,11 @@ Steve's rule: NO second pool. The kcal bar IS the bank — one energy economy, c
 Before changing a number, answer:
 1. **What's the real-world anchor?** (2000 kcal/day is a human. 140 kcal is a snack.)
 2. **What breaks if this is wrong?** (Too high = trivial. Too low = impossible.)
-3. **What does the sim say?** Run `node scripts/simulate.js 30` and check:
-   - Greedy win rate in 20–40%?
-   - Avg days in 12–18?
-   - Pantry doesn't explode or collapse?
+3. **What does the sim say?** Follow the current balanced panel workflow and check:
+   - Use the matched multi-policy panel in SIMULATING.md; keep each outcome separate.
+   - Investigate win-rate movement in either direction. Is challenge fair and legible?
+   - Explain survival, resource, community and earned-gear warnings with real traces.
+   - Record the lever, tradeoffs, evidence and decision in SURVIVAL-LEVERS.md.
 4. **What does it FEEL like?** Play 3 days. Does the pressure feel real but fair?
 5. **Does it respect the fiction?** (Villagers work. The System is alien but trying.)
 

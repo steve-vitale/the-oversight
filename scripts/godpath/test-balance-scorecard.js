@@ -11,12 +11,12 @@ function panel(policies = ['maker'], n = 8) {
 let before = panel(), after = copy(before);
 for (const r of after.rows) { r.metrics.won = 1; r.metrics.lowFood = 0.5; }
 let result = S.comparePanels(before, after);
-T.ok('better win rate cannot cancel a food-security regression', result.decision === 'review_required' && result.policies[0].metrics.find(m => m.id === 'lowFood').status === 'regression_signal');
+T.ok('increased wins cannot cancel a food-security regression', result.decision === 'review_required' && result.policies[0].metrics.find(m => m.id === 'lowFood').status === 'regression_signal');
 before = panel(['capable', 'maker']); after = copy(before);
 for (const r of before.rows) r.metrics.won = r.row.policy === 'maker' ? 1 : 0;
 for (const r of after.rows) r.metrics.won = r.row.policy === 'maker' ? 0 : 1;
 result = S.comparePanels(before, after);
-T.ok('an equal aggregate does not hide one playstyles lost wins', result.policies.find(p => p.policy === 'maker').decision === 'review_required');
+T.ok('an equal aggregate does not hide either playstyles win-rate change', result.policies.find(p => p.policy === 'maker').decision === 'review_required');
 const spec = S.contract.metrics.find(m => m.id === 'survival60');
 let metric = S.compareMetric(Array(8).fill(null), Array(8).fill(null), spec, 'censored');
 T.ok('unobserved survival remains unknown rather than zero', metric.status === 'not_observed' && metric.before === null && metric.pairs === 0);
@@ -62,4 +62,13 @@ T.ok('zero-call methods stay in the denominator instead of disappearing', summar
 T.ok('ready unused recipes and failed attempts are different dead-spot leads', summary.recipes.find(r => r.id === 'tool').status === 'ready_unused' && summary.recipes.find(r => r.id === 'failed').status === 'attempted_no_success');
 metric = S.compareMetric(Array(8).fill(0), Array(8).fill(1), S.contract.metrics.find(m => m.id === 'corpseGear'), 'neutral');
 T.ok('descriptive movement is not mislabeled better or worse', metric.increased === 8 && metric.better === null && metric.worse === null);
+const win = S.contract.metrics.find(m => m.id === 'won');
+for (const [b, a] of [[1, 0], [0, 1]]) {
+  metric = S.compareMetric(Array(8).fill(b), Array(8).fill(a), win, 'challenge');
+  T.ok('win movement ' + b + ' to ' + a + ' prompts investigation without a better/worse verdict', metric.status === 'change_signal' && metric.better === null && metric.worse === null);
+}
+metric = S.compareMetric([1,0,0,0,0,0,0,0], [0,1,1,0,0,0,0,0], win, 'challenge-watch');
+T.ok('uncertain material win movement remains an investigation watch', metric.status === 'change_watch');
+metric = S.compareMetric(Array(8).fill(1), Array(8).fill(1), win, 'unchanged');
+T.ok('unchanged wins make no difficulty claim', metric.status === 'descriptive');
 T.done();

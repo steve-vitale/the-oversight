@@ -7,6 +7,10 @@ verbatim.
 
 ---
 
+## 2026-10-15 (challenge and survival levers)
+
+"Winning shouldn’t be easy. A reduction in win rate is cause for investigation and consideration not automatically assuming it’s a regression. Keep documentation on our levers that impact survival."
+
 ## 2026-10-15 (balanced measurement)
 
 "Yes, let’s create a more balanced set of measuring telemetry we can optimize from. Don’t simply look at win rate, we need to make sure many key metrics aren’t regressing. Plan this out and make repeatable and scalable."

@@ -138,7 +138,10 @@ small-effect claims. Add named region/job cohorts for the lane under test.
 These mixed policies do not establish pacifist viability.
 
 Review every policy's survival, community, resources, progression and earned
-gear metrics. Better aggregate wins cannot cancel a regression. Save raw
+gear metrics. Win-rate changes in either direction require investigation, not
+an automatic regression/improvement verdict. Winning should be difficult.
+Consult `docs/SURVIVAL-LEVERS.md`; update its register and decision log with
+every survival-affecting lever change. More wins cannot cancel other warnings. Save raw
 panels, feature census, configuration, hashes, and the tradeoff decision in
 `evidence/<date>/`. Unknowns stay unknown. Zero calls do not prove a feature
 is broken; inspect its availability and opportunity first.
