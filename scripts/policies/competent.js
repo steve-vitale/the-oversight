@@ -2651,7 +2651,7 @@ const competent = {
           // mid build), not burst deaths. The <50% HP guard stays: starting
           // a wave-3 fight badly hurt is suicide, not a hunt. Gate off =
           // the block below, byte-identical.
-          const huntCommitted = !!(ctx._huntCommit && maxWave === 3 && hpPct >= 0.5);
+          const huntCommitted = !!(ctx._huntCommit && maxWave === 3 && hpPct >= 0.5) || coalitionCommitted(Game, ctx, f, p);
           const outmatched = !huntCommitted && (
             totalMhp > 2.5 * pmax ||
             (maxWave >= 2 && hpPct < 0.7) ||
@@ -2751,3 +2751,14 @@ module.exports = { competent, beastStrikeTarget, walkTo, cookHaul, treatSick, ro
 
 // Shared policy probe: executes the same gearing routine used by upkeep.
 module.exports.gearUp = gearUp;
+
+// A public-action campaign has real allied fighters. Its HP budget is not
+// the lone player's budget. Only the campaign policy opts in, per fight;
+// losing half the bearer or the army still restores the ordinary retreat.
+function coalitionCommitted(Game, ctx, f, p) {
+  const march = (Game.state.titans || {})._fight;
+  return !!(march && (march.titan || march.campaign) && ctx.campaignFight === f &&
+    p.hp >= (p.maxHp || 100) * 0.5 &&
+    f.fighters.filter(a => a.kind === 'ally' && a.alive && !a.fled).length >= 5);
+}
+module.exports.coalitionCommitted = coalitionCommitted;

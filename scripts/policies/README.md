@@ -27,6 +27,13 @@ policy objects (sweep-compare shallow-copies per run).
 
 ## The six canonical policies
 
+`campaigner` is a separate capable-based coverage policy: real coalition
+recruitment, food, spare-gear donations, announced-target approach and battle.
+`campaigner-control` has the same cautious late-game waiting without that
+route. Both can take the Table when weakened; neither guarantees Network
+exposure. Run `scripts/campaign-audit.js` for natural coverage and read
+`evidence/2026-10-15/campaign-usage-audit.md` for the prepared/natural limits.
+
 | id | file | plays like | measures |
 |---|---|---|---|
 | `competent` | competent.js | aware experienced player: learns, cooks, avoids vectors, fights with advantage | the default baseline — keep behavior stable |

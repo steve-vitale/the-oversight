@@ -174,6 +174,7 @@ function shouldFlee(Game, ctx, st, f, p, mons) {
   if (threat) { st.why = threat; return true; }
   const pmax = p.maxHp || 100;
   const hp = (p.hp || 0) / Math.max(1, pmax);
+  if (C.coalitionCommitted(Game, ctx, f, p)) return false;
   // FEAST COMMIT (deed hunt): a fight picked to spend the feast buff holds
   // until a blow lands (feastSurgeUsed) — unless HP drops under half.
   if (st.feastCommit && feastPending(Game) && hp >= 0.5) return false;

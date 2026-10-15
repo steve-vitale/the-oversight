@@ -34399,7 +34399,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // COORDINATE (2026-10-13): Rally marks a focus target — the ally AI
       // prefers it via villagerDecide's prefer param.
       const prefer = (v.coordRounds > 0 && v.coordKey) ? v.coordKey : null;
-      const dec = S.combat.villagerDecide(v, f.fighters, blocked, danger, prefer);
+      const dec = S.combat.villagerDecide(v, f.fighters, blocked, danger, prefer, this.tbGridMax());
       for (const [nx, ny] of dec.moves) { v.mx = nx; v.my = ny; }
       // kind 'ally' never syncs village positions: titan fights happen far
       // from Haven, and foreign allies aren't on our positions map at all.
@@ -35761,7 +35761,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const danger = this.tbDangerCells();
           const blocked = (x, y) => !this.tbCanOccupy(a, x, y);
           for (let i = 0; i < (a.speed || 3); i++) {
-            const s = SC.combat.stepToward(a.mx, a.my, p.mx, p.my, blocked, danger);
+            const s = SC.combat.stepToward(a.mx, a.my, p.mx, p.my, blocked, danger, this.tbGridMax());
             if (!s) break;
             a.mx = s.x; a.my = s.y; gathered++;
           }
@@ -36139,22 +36139,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.abilityLevel('tripwire') >= 2) this.applyStatus(m, 'bleed', { source: 'barbed wire' }); } catch (e) {}
         return null;
       }
-      return S.combat.stepToward(m.mx, m.my, tx, ty, blocked, danger);
+      return S.combat.stepToward(m.mx, m.my, tx, ty, blocked, danger, this.tbGridMax());
     },
     // tbAirStepToward (Steve 2026-10-06): FLIGHT. Flyers ignore terrain
     // blocking entirely — trees, walls, water are scenery from the air.
-    // Only the grid edge stops them (and they never leave the 9x9: the
+    // Only the current grid edge stops them (9x9 or 12x12: the
     // fight is the node). They must still END on a real cell — landing is
     // handled per-monster (dive/strafe/grounded phases descend adjacent to
     // the target on a non-blocking cell).
     tbAirStepToward(m, tx, ty, danger) {
       if (m && m.gravityHeld > 0) return null;
       return S.combat.stepToward(m.mx, m.my, tx, ty,
-        (x, y) => x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax(), danger);
+        (x, y) => x < 0 || x > this.tbGridMax() || y < 0 || y > this.tbGridMax(), danger, this.tbGridMax());
     },
     tbStepAway(m, tx, ty, blocked, danger) {
       if (m && m.gravityHeld > 0) return null;
-      return S.combat.stepAway(m.mx, m.my, tx, ty, blocked, danger);
+      return S.combat.stepAway(m.mx, m.my, tx, ty, blocked, danger, this.tbGridMax());
     },
     // NEVERMORE (Steve 2026-10-06): it speaks with the voices of the run's
     // dead. Dead villagers (vpOf().dead) feed the fragments — the System's

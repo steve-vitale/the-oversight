@@ -27,7 +27,7 @@
   function roll(range) { return range[0] + Math.floor(Math.random() * (range[1] - range[0] + 1)); }
   function cheb(ax, ay, bx, by) { return Math.max(Math.abs(ax - bx), Math.abs(ay - by)); }
   function key(x, y) { return x + ',' + y; }
-  function inGrid(x, y) { return x >= 0 && x <= 8 && y >= 0 && y <= 8; }
+  function inGrid(x, y, gridMax = 8) { return x >= 0 && x <= gridMax && y >= 0 && y <= gridMax; }
 
   // turnOrder: speed desc. Ties: player first, then villagers, then monsters.
   function turnOrder(fighters) {
@@ -121,12 +121,12 @@
 
   // stepToward: one step (8-dir) reducing Chebyshev distance, avoiding blocked cells.
   // blocked(x,y): callback. avoidCells: Set of "x,y" to avoid (telegraphs).
-  function stepToward(fx, fy, tx, ty, blocked, avoidCells) {
+  function stepToward(fx, fy, tx, ty, blocked, avoidCells, gridMax = 8) {
     let best = null, bestD = cheb(fx, fy, tx, ty);
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       if (!dx && !dy) continue;
       const nx = fx + dx, ny = fy + dy;
-      if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+      if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
       const d = cheb(nx, ny, tx, ty);
       const danger = avoidCells && avoidCells.has(key(nx, ny));
       if (d < bestD && !danger) { bestD = d; best = { x: nx, y: ny }; }
@@ -136,19 +136,19 @@
       for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
         if (!dx && !dy) continue;
         const nx = fx + dx, ny = fy + dy;
-        if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+        if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
         if (cheb(nx, ny, tx, ty) < cheb(fx, fy, tx, ty)) { best = { x: nx, y: ny }; break; }
       }
     }
     return best;
   }
 
-  function stepAway(fx, fy, tx, ty, blocked, avoidCells) {
+  function stepAway(fx, fy, tx, ty, blocked, avoidCells, gridMax = 8) {
     let best = null, bestD = -1;
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
       if (!dx && !dy) continue;
       const nx = fx + dx, ny = fy + dy;
-      if (!inGrid(nx, ny) || blocked(nx, ny)) continue;
+      if (!inGrid(nx, ny, gridMax) || blocked(nx, ny)) continue;
       const d = cheb(nx, ny, tx, ty);
       const danger = avoidCells && avoidCells.has(key(nx, ny)) ? -100 : 0;
       if (d + danger > bestD) { bestD = d + danger; best = { x: nx, y: ny }; }
@@ -161,7 +161,7 @@
   // preferKey (2026-10-13): Rally's focus-fire mark — when set to a living
   // foe's key, the brave AI closes on and strikes THAT foe instead of the
   // nearest. Optional; null preserves the old behavior exactly.
-  function villagerDecide(f, fighters, blocked, dangerCells, preferKey) {
+  function villagerDecide(f, fighters, blocked, dangerCells, preferKey, gridMax = 8) {
     const moves = [];
     let fx = f.mx, fy = f.my;
     let foe = nearestEnemy(fighters, f);
@@ -171,8 +171,8 @@
     }
     const moveTo = (tx, ty, toward) => {
       for (let i = 0; i < f.speed; i++) {
-        const s = toward ? stepToward(fx, fy, tx, ty, blocked, dangerCells)
-                         : stepAway(fx, fy, tx, ty, blocked, dangerCells);
+        const s = toward ? stepToward(fx, fy, tx, ty, blocked, dangerCells, gridMax)
+                         : stepAway(fx, fy, tx, ty, blocked, dangerCells, gridMax);
         if (!s) break;
         fx = s.x; fy = s.y; moves.push([fx, fy]);
       }
