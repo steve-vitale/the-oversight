@@ -1,0 +1,1795 @@
+{
+  "kind": "natural campaign coverage screen; no prepared state",
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "days": 240,
+  "hashes": {
+    "scripts/policies/campaigner.js": "cff9d8a608602d952f02d74d4e666bae6fa9976e943bd8e0028a5e741376526c",
+    "scripts/policies/capable.js": "f957a2d690dda0ed843268f210cf6c2850cd9e0e8b5448be5da1756aa01d75d6",
+    "scripts/policies/competent.js": "7eb0ff9335b52876628295fab665e24a87f448b8f77e3632bcd95d96509f5fed",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "6624ad752152febc2799d33f177632d6b0803f7960f8b21e18b1612ad58ccddc",
+    "src/js/engine/combat.js": "ded2f2e3252fa0a4472643f57ba854b1f544a597ec62393ddcd5c3124ba4ffd2",
+    "src/js/game.js": "9ada909bf08a569f477c59854470d2103b43f7431245de8a08ab803956bddbee",
+    "src/js/titans.js": "cd8c5869b1703d0aeadc28d213616ac8d5d5ab030b6bb5656a3b6a371dd21f07",
+    "src/js/finale-campaign.js": "af1da3e996ea6b0e7f65a907506513bc482e3b9be41ae1e44b4656e7ca02fd90",
+    "src/js/network-campaign.js": "f83caddfb777e1f81684ada39cc922e1f10e11d8ccb609ab12371c6132b08ac2",
+    "src/data/titans.json": "1b446a45db7159b325299e323e3d751963c0f638807031ec75aeb5cd90046f4e"
+  },
+  "rows": [
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 1,
+      "days": 131,
+      "gameDays": 123,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 8,
+        "person:ambush": 1,
+        "villager:monster": 7,
+        "monster:combat": 24,
+        "person:alien": 4,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 66.3,
+        "policyCalls": 129.4,
+        "ticks": 400.9
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 0
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "b8d60eb0128a48ec4f743c3e077940f62e5d1d7eaf0427159061cfff8e1365e4"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 2,
+      "days": 104,
+      "gameDays": 103,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 10,
+        "monster:expedition": 2,
+        "villager:monster": 7,
+        "monster:combat": 4,
+        "player:combat": 1,
+        "person:aid-runner": 1
+      },
+      "pacing": {
+        "verbs": 54.4,
+        "policyCalls": 5.2,
+        "ticks": 390.6
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignFoodBlocked": 51
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "db234af84119b6e0ed6a3f9d0cd87d8531a2e087a5d479678c316175fab0879c"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 3,
+      "days": 104,
+      "gameDays": 102,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 4,
+      "maxArc": 4,
+      "maxRank": "regional",
+      "national": 0,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 1,
+        "monster:villager combat": 6,
+        "villager:Hushpuppy": 1,
+        "monster:combat": 11,
+        "person:combat": 5,
+        "player:combat": 2,
+        "villager:monster": 10
+      },
+      "pacing": {
+        "verbs": 73,
+        "policyCalls": 60.4,
+        "ticks": 394.2
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignProvisionKcal": 184260,
+        "campaignCalls": 2,
+        "campaignMaxBlades": 6,
+        "campaignStrengthBlocked": 14,
+        "campaignFoodBlocked": 104,
+        "campaignGearGiven": 6
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "c5493801c3fc53a9b1cdef24fc33d69b177fb2941eb5a1a7fab23e26ab435e56"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 4,
+      "days": 112,
+      "gameDays": 106,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:combat": 13,
+        "villager:monster": 9,
+        "person:alien": 2,
+        "player:combat": 2
+      },
+      "pacing": {
+        "verbs": 82,
+        "policyCalls": 58.8,
+        "ticks": 380
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 2,
+        "campaignProvisionKcal": 133759,
+        "campaignCalls": 2,
+        "campaignMaxBlades": 15,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignGearGiven": 10,
+        "campaignStrengthBlocked": 7,
+        "campaignFoodBlocked": 8
+      },
+      "fights": [
+        {
+          "day": 83,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 83
+          },
+          "allies": 11
+        }
+      ],
+      "resolved": [
+        {
+          "day": 83,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 83
+          },
+          "round": 11
+        }
+      ],
+      "maxOvertime": 2,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "0e3fb2630e3f14a5d698a81be8fec0057286435909d696fbbeca0ec1e2d6272d"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 5,
+      "days": 105,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:a heron that isn't quite there when you look at it": 1,
+        "villager:monster": 7,
+        "monster:villager combat": 12,
+        "monster:combat": 20,
+        "player:dehydration": 1,
+        "villager:a wound that wouldn't close": 1
+      },
+      "pacing": {
+        "verbs": 90.6,
+        "policyCalls": 117.8,
+        "ticks": 389.1
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignFoodBlocked": 70,
+        "campaignProvisionKcal": 20844
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "53b60a29179cb62235777a22f6ec829bd804cd4caed57e92bfa50215a5c61e7f"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 6,
+      "days": 104,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 10,
+        "villager:monster": 9,
+        "monster:combat": 12,
+        "person:combat": 1,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 65.3,
+        "policyCalls": 45.5,
+        "ticks": 396.4
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 2,
+        "campaignProvisionKcal": 57092,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 10,
+        "campaignSorties": 1,
+        "campaignFightsStarted": 1,
+        "campaignFoodBlocked": 43
+      },
+      "fights": [
+        {
+          "day": 61,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 61
+          },
+          "allies": 10
+        }
+      ],
+      "resolved": [
+        {
+          "day": 61,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 61
+          },
+          "round": 5
+        }
+      ],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "dd4c3af75056bac6c6ff0ccd924feb9266f169ad8bb0c9c21ae55eabc4fb76fd"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 7,
+      "days": 95,
+      "gameDays": 89,
+      "endReason": "village-lost",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 0,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:combat": 14,
+        "monster:expedition": 2,
+        "player:combat": 3,
+        "villager:monster": 13,
+        "villager:a wound that wouldn't close": 1
+      },
+      "pacing": {
+        "verbs": 70.2,
+        "policyCalls": 177,
+        "ticks": 386.2
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignFoodBlocked": 36,
+        "campaignProvisionKcal": 12442
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "e0e578add582bf986c4185b0fa84044aad5f1504cbed2e8fb039557eb84f527c"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 8,
+      "days": 108,
+      "gameDays": 102,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:monster": 9,
+        "monster:villager combat": 7,
+        "monster:expedition": 3,
+        "monster:combat": 7,
+        "person:alien": 2,
+        "player:dehydration": 1,
+        "person:combat": 3
+      },
+      "pacing": {
+        "verbs": 67.8,
+        "policyCalls": 5.5,
+        "ticks": 400.8
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 2,
+        "campaignProvisionKcal": 448753,
+        "campaignCalls": 3,
+        "campaignMaxBlades": 18,
+        "campaignHealthBlocked": 23,
+        "campaignFoodBlocked": 37,
+        "campaignSorties": 4
+      },
+      "fights": [
+        {
+          "day": 79,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 79
+          },
+          "allies": 18
+        },
+        {
+          "day": 83,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 83
+          },
+          "allies": 18
+        },
+        {
+          "day": 86,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 86
+          },
+          "allies": 18
+        }
+      ],
+      "resolved": [
+        {
+          "day": 79,
+          "result": "fled",
+          "mark": {
+            "titan": "herald",
+            "day": 79
+          },
+          "round": 11
+        },
+        {
+          "day": 83,
+          "result": "fled",
+          "mark": {
+            "titan": "herald",
+            "day": 83
+          },
+          "round": 12
+        },
+        {
+          "day": 86,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 86
+          },
+          "round": 6
+        }
+      ],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "a8aab69cbe3e9e98a08dd20c248501ed1a4573e85adff62c004569e302868d10"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 9,
+      "days": 103,
+      "gameDays": 102,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:monster": 9,
+        "monster:villager combat": 7,
+        "monster:combat": 11,
+        "monster:expedition": 1,
+        "player:sickness": 1,
+        "villager:a wound that wouldn't close": 2,
+        "person:combat": 1
+      },
+      "pacing": {
+        "verbs": 78.9,
+        "policyCalls": 5.1,
+        "ticks": 393.6
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignFoodBlocked": 124,
+        "campaignProvisionKcal": 200079,
+        "campaignCalls": 1,
+        "campaignOwnCommitments": 1,
+        "campaignMaxBlades": 11,
+        "campaignSorties": 10,
+        "campaignTravelBlocked": 10,
+        "campaignGearGiven": 4
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "6e6ef0505deb3dd08aab2dd411acd54b919cd353f5b5fd8736b7ec963f932490"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 42,
+      "days": 97,
+      "gameDays": 92,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 3,
+        "monster:villager combat": 10,
+        "monster:combat": 13,
+        "villager:monster": 9,
+        "villager:a wound that wouldn't close": 1,
+        "person:alien": 1
+      },
+      "pacing": {
+        "verbs": 84.6,
+        "policyCalls": 66.9,
+        "ticks": 389.6
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignProvisionKcal": 24847,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 14,
+        "campaignGearGiven": 15,
+        "campaignSorties": 1,
+        "campaignFoodBlocked": 27
+      },
+      "fights": [
+        {
+          "day": 85,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 85
+          },
+          "allies": 14
+        }
+      ],
+      "resolved": [
+        {
+          "day": 85,
+          "result": "routed",
+          "mark": {
+            "titan": "herald",
+            "day": 85
+          },
+          "round": 2
+        }
+      ],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2,
+        "finale": 1
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "ccb9176936ea247cc440b0667aca1b7e25c67dd37f875038eda328c76d0e2d3c"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 99,
+      "days": 101,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 10,
+        "monster:combat": 9,
+        "monster:expedition": 2,
+        "villager:monster": 10
+      },
+      "pacing": {
+        "verbs": 88.7,
+        "policyCalls": 61.4,
+        "ticks": 376.6
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 2,
+        "campaignProvisionKcal": 15852,
+        "campaignFoodBlocked": 26,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 12,
+        "campaignSorties": 1
+      },
+      "fights": [
+        {
+          "day": 65,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 65
+          },
+          "allies": 12
+        }
+      ],
+      "resolved": [
+        {
+          "day": 65,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 65
+          },
+          "round": 5
+        }
+      ],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "4a4548f407b41280345b2846c9046ff96467b7b98fbd75a84a1ef004ec664f05"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 555,
+      "days": 100,
+      "gameDays": 94,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 1,
+        "villager:monster": 10,
+        "monster:villager combat": 3,
+        "monster:combat": 15,
+        "player:combat": 1,
+        "person:alien": 1,
+        "villager:a wound that wouldn't close": 1
+      },
+      "pacing": {
+        "verbs": 72.5,
+        "policyCalls": 65.7,
+        "ticks": 379.3
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignProvisionKcal": 12000,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 14,
+        "campaignSorties": 1
+      },
+      "fights": [
+        {
+          "day": 77,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 77
+          },
+          "allies": 14
+        }
+      ],
+      "resolved": [
+        {
+          "day": 77,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 77
+          },
+          "round": 5
+        }
+      ],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "5eabf426f7e6f59e4dca707ef13c8174118d4ea91574cd8ccb07cbc032c7dfd2"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 777,
+      "days": 112,
+      "gameDays": 110,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 8,
+        "monster:expedition": 2,
+        "monster:combat": 4,
+        "villager:Big-Eyes": 1,
+        "villager:monster": 9,
+        "person:combat": 3,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 70.3,
+        "policyCalls": 92.6,
+        "ticks": 400.7
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 2,
+        "campaignFoodBlocked": 10,
+        "campaignProvisionKcal": 19900,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 17,
+        "campaignSorties": 1
+      },
+      "fights": [
+        {
+          "day": 68,
+          "mid": "herald",
+          "mark": {
+            "titan": "herald",
+            "day": 68
+          },
+          "allies": 17
+        }
+      ],
+      "resolved": [
+        {
+          "day": 68,
+          "result": "won",
+          "mark": {
+            "titan": "herald",
+            "day": 68
+          },
+          "round": 8
+        }
+      ],
+      "maxOvertime": 2,
+      "omens": {
+        "herald": 2,
+        "finale": 2,
+        "nielsen": 0
+      },
+      "slain": {
+        "herald": true
+      },
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "66c36dff1a0b3060ac78f6d0fe634ad3513adb9429fb09c7c25a24a3d7a7a419"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 1234,
+      "days": 138,
+      "gameDays": 133,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 6,
+        "monster:expedition": 2,
+        "monster:combat": 44,
+        "person:aid-runner": 1,
+        "player:starvation": 1,
+        "person:combat": 5
+      },
+      "pacing": {
+        "verbs": 73,
+        "policyCalls": 204,
+        "ticks": 390.5
+      },
+      "counters": {
+        "campaignTarget": "finale",
+        "campaignCouncils": 1,
+        "campaignFoodBlocked": 8,
+        "campaignProvisionKcal": 39701,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 15,
+        "campaignStrengthBlocked": 4
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "174802aa36a4540e133bf1ccb45e75dec69c2fc1efd462282593aad22a341dfb"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 2026,
+      "days": 101,
+      "gameDays": 98,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:combat": 27,
+        "monster:villager combat": 5,
+        "player:sickness": 1,
+        "villager:monster": 10,
+        "player:combat": 1,
+        "person:combat": 2
+      },
+      "pacing": {
+        "verbs": 81.8,
+        "policyCalls": 46.3,
+        "ticks": 386.1
+      },
+      "counters": {
+        "campaignTarget": "herald",
+        "campaignCouncils": 1,
+        "campaignProvisionKcal": 56201,
+        "campaignFoodBlocked": 34,
+        "campaignCalls": 1,
+        "campaignMaxBlades": 4,
+        "campaignStrengthBlocked": 7
+      },
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "0fe5f93abcdf7c3978b0d9221c2321844684866950c83ec491a5c84a204d17a0"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner",
+      "seed": 31337,
+      "days": 104,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:expedition": 3,
+        "villager:Ugly-Eyes": 2,
+        "monster:combat": 2,
+        "player:combat": 1,
+        "villager:monster": 3
+      },
+      "pacing": {
+        "verbs": 55.8,
+        "policyCalls": 61.4,
+        "ticks": 396.7
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {},
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "1b8104fa759d33b57216a45bfcb9c07b7c03e0c9301a9c20efe95f28b66e24f9"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 1,
+      "days": 131,
+      "gameDays": 123,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 8,
+        "person:ambush": 1,
+        "villager:monster": 7,
+        "monster:combat": 24,
+        "person:alien": 4,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 66.3,
+        "policyCalls": 129.4,
+        "ticks": 400.9
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 0
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "b796c4f753d18cfe4c8e3105ac0b1c26ca7da947d366970c6633394829e35161"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 2,
+      "days": 95,
+      "gameDays": 94,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 10,
+        "monster:expedition": 2,
+        "villager:monster": 5,
+        "monster:combat": 4,
+        "player:combat": 1,
+        "person:aid-runner": 1
+      },
+      "pacing": {
+        "verbs": 55.7,
+        "policyCalls": 5.3,
+        "ticks": 389.3
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2,
+        "finale": 1
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "b78ed32fa4ea6e76d69da74bb60e15d40fabf0563c3d260ffff387e872bacbe0"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 3,
+      "days": 95,
+      "gameDays": 93,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 4,
+      "maxArc": 4,
+      "maxRank": "regional",
+      "national": 0,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 1,
+        "monster:villager combat": 7,
+        "villager:Hushpuppy": 1,
+        "monster:combat": 7,
+        "person:combat": 5,
+        "player:combat": 1,
+        "villager:monster": 11
+      },
+      "pacing": {
+        "verbs": 68.4,
+        "policyCalls": 65.6,
+        "ticks": 394.5
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "5ae2cc2dbf16e2dc9583e48f2a18a3d9916f3f44d510d95dd1c758ab598d155e"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 4,
+      "days": 95,
+      "gameDays": 90,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:combat": 12,
+        "villager:monster": 4,
+        "person:alien": 2,
+        "player:combat": 2,
+        "person:combat": 1
+      },
+      "pacing": {
+        "verbs": 94.1,
+        "policyCalls": 68.2,
+        "ticks": 376.7
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2,
+        "finale": 0
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "e703b09492a54fabef2b9f3129ab3bf58699299b4fe82ed62398e3aa7e72fb02"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 5,
+      "days": 101,
+      "gameDays": 98,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:a heron that isn't quite there when you look at it": 1,
+        "villager:monster": 8,
+        "monster:villager combat": 12,
+        "monster:combat": 4,
+        "player:dehydration": 1,
+        "villager:a wound that wouldn't close": 2
+      },
+      "pacing": {
+        "verbs": 89.9,
+        "policyCalls": 62.7,
+        "ticks": 388.5
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "ea9e9c1655080f788e9764d10382ced41215d48434541ea39f0101f9eb017b8a"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 6,
+      "days": 106,
+      "gameDays": 101,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 10,
+        "villager:monster": 7,
+        "monster:combat": 11,
+        "person:combat": 1,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 60.8,
+        "policyCalls": 45.1,
+        "ticks": 397.8
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "561f396e6557ab404a51dd2bb381b533f015af8b995c4fe96a534fc67a879a25"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 7,
+      "days": 96,
+      "gameDays": 90,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:combat": 14,
+        "monster:expedition": 2,
+        "player:combat": 3,
+        "villager:monster": 12,
+        "person:combat": 1
+      },
+      "pacing": {
+        "verbs": 75.8,
+        "policyCalls": 175.2,
+        "ticks": 387.1
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "d043074dcec18872b975774fa4c62443e59d5464e9b4f0f6be29460ecaec9e5c"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 8,
+      "days": 112,
+      "gameDays": 106,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:monster": 8,
+        "monster:villager combat": 6,
+        "monster:expedition": 2,
+        "monster:combat": 7,
+        "person:alien": 4,
+        "villager:contest": 1,
+        "villager:Loud-Eyes": 1,
+        "player:contest": 1
+      },
+      "pacing": {
+        "verbs": 49.9,
+        "policyCalls": 5.7,
+        "ticks": 396.9
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "f0cd21ba0be0fabe8f6b77d6e6be19e8a20f7daa2f905e3dfecdc7a92278482e"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 9,
+      "days": 91,
+      "gameDays": 90,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "villager:monster": 16,
+        "monster:villager combat": 7,
+        "monster:combat": 12,
+        "monster:expedition": 1,
+        "player:sickness": 1,
+        "villager:a wound that wouldn't close": 1
+      },
+      "pacing": {
+        "verbs": 71.7,
+        "policyCalls": 5.3,
+        "ticks": 386.5
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "8d9fa7d24b52bf43ef667ce93e547274e57c1f5119167bf5116690f5904b6b73"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 42,
+      "days": 98,
+      "gameDays": 94,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 2,
+        "monster:villager combat": 10,
+        "monster:combat": 13,
+        "villager:monster": 11,
+        "villager:a wound that wouldn't close": 1,
+        "person:combat": 1
+      },
+      "pacing": {
+        "verbs": 92.5,
+        "policyCalls": 65.5,
+        "ticks": 386.9
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2,
+        "finale": 1
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "80ea4ea394f8393bd2c14be9bf9222d20dadb86e43891dd55a4e04e5eef2c309"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 99,
+      "days": 105,
+      "gameDays": 106,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 9,
+        "monster:combat": 8,
+        "monster:expedition": 2,
+        "villager:monster": 10,
+        "person:aid-runner": 1,
+        "villager:starvation": 1
+      },
+      "pacing": {
+        "verbs": 58.6,
+        "policyCalls": 58,
+        "ticks": 381.3
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 2,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "9e09db1e35bec27a49abb87bbb2bbe96a61d3e7d13d5ab8a2500d42962763924"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 555,
+      "days": 101,
+      "gameDays": 96,
+      "endReason": "over-other",
+      "won": 1,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:expedition": 1,
+        "villager:monster": 10,
+        "monster:villager combat": 3,
+        "monster:combat": 14,
+        "player:combat": 1,
+        "villager:a wound that wouldn't close": 1
+      },
+      "pacing": {
+        "verbs": 71.3,
+        "policyCalls": 64.2,
+        "ticks": 383.2
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "6e09b269c872c394e151c636fd4348fc809b535c9ef521d9b98020de4aaa33b2"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 777,
+      "days": 101,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 8,
+        "monster:expedition": 2,
+        "monster:combat": 3,
+        "villager:Big-Eyes": 1,
+        "villager:monster": 4,
+        "player:combat": 1
+      },
+      "pacing": {
+        "verbs": 68.4,
+        "policyCalls": 5.3,
+        "ticks": 389.2
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "herald": 2,
+        "finale": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "a3ad56ac9a64d8a225a71895fb5d11586d612401614ea3dc5d82e4cada0110dc"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 1234,
+      "days": 147,
+      "gameDays": 142,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 6,
+        "monster:expedition": 2,
+        "monster:combat": 44,
+        "person:aid-runner": 1,
+        "player:starvation": 1,
+        "villager:monster": 2,
+        "person:combat": 1
+      },
+      "pacing": {
+        "verbs": 70.6,
+        "policyCalls": 191.4,
+        "ticks": 392
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {
+        "finale": 2,
+        "herald": 2
+      },
+      "slain": {},
+      "finale": {
+        "started": false,
+        "crew": false,
+        "opening": false
+      },
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "57718f80bc53860dd42cd0a7cd3e578a7636575da31041c03a23b6d74bd9c08b"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 2026,
+      "days": 95,
+      "gameDays": 92,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 5,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:combat": 27,
+        "monster:villager combat": 4,
+        "player:sickness": 1,
+        "villager:monster": 9,
+        "player:combat": 1,
+        "person:combat": 2
+      },
+      "pacing": {
+        "verbs": 83.8,
+        "policyCalls": 49,
+        "ticks": 384.7
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 0,
+      "omens": {
+        "herald": 2
+      },
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "177a13ee07e21066d2ff9d18585893e371f43e7d9a8ae00907992026e245db0a"
+    },
+    {
+      "label": "unlabeled",
+      "policy": "campaigner-control",
+      "seed": 31337,
+      "days": 104,
+      "gameDays": 100,
+      "endReason": "over-other",
+      "won": 0,
+      "waveReach": 4,
+      "maxArc": 4,
+      "maxRank": "global",
+      "national": 1,
+      "table": 1,
+      "entered": 1,
+      "vests": 0,
+      "deaths": {
+        "monster:villager combat": 5,
+        "monster:expedition": 3,
+        "villager:Ugly-Eyes": 2,
+        "monster:combat": 2,
+        "player:combat": 1,
+        "villager:monster": 3
+      },
+      "pacing": {
+        "verbs": 55.8,
+        "policyCalls": 61.4,
+        "ticks": 396.7
+      },
+      "counters": {},
+      "fights": [],
+      "resolved": [],
+      "maxOvertime": 1,
+      "omens": {},
+      "slain": {},
+      "finale": null,
+      "network": null,
+      "activeLinks": 3,
+      "policyErrors": [],
+      "capabilityErrors": [],
+      "stateHash": "d2f562438acdcc84af51234faabf0d37584cb3f84dfe282c65e274438d9761ca"
+    }
+  ]
+}

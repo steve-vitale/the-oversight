@@ -120,8 +120,13 @@ simulation/playtest goal with these gaps before expanding content blindly:
    the allied muster by one, and continues the Table with one bearer token.
    See `evidence/2026-10-15/mantle-coalition-audit.md`.
    See `evidence/2026-10-15/coalition-presentation-audit.md`.
-   Next diagnose Finale bearer survival and the cautious bot's food/overtime
-   limits. Later-node branches and a complete campaign remain unverified.
+   Ally reach now uses a large target's whole body; disengagement checks the
+   entire party. With a prepared guard/counter tactic, 7/16 crew clears
+   replace zero (not a natural win-rate claim). Two runs clear the opening
+   credits, then expose heart spawns beyond the nine-wide world map. Repair
+   reachable next-node placement next, then continue bearer survival and the
+   cautious bot's food/overtime limits. A complete campaign remains unverified.
+   See `evidence/2026-10-15/ally-reach-audit.md`.
    See `evidence/2026-10-15/campaign-usage-audit.md` for the natural screen.
 4. **Item promises.** Audit `baseEffect`-only path items and unused
    `tradeValue` fields (e.g. audience tokens). Functional armor/weapon
