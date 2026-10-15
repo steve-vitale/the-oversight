@@ -263,10 +263,19 @@
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 2, mood: 1, temper: 'kind', name: 'dlg:' + dlg }); } catch (e) {}
         // They open up a little more, or accept the comfort.
+        // COMFORT POOLS (journey scale r4 2026-10-14): was 3 lines — two
+        // villagers back-to-back recited the identical comfort sequence
+        // verbatim (r3: Ruby d85 ≡ Wolfgang d105; r4: Kai d105 too). Seven
+        // variants now, in the gritty-warm villager voice — no filler, no
+        // fabricated shared history. The originals stay first (tone kept).
         const raw = this.convoPickCycle(vid, 'dlg:comfort:lines', [
           '"Thanks. ...Thanks for saying that."',
           '"I — yeah. It helps, hearing that."',
           '"You\'re kind. Don\'t let this place change that."',
+          '"Most days I don\'t think about it. Today I am. Appreciate you noticing."',
+          'A long exhale. "I\'ll get there. Just needed a minute where I didn\'t have to be fine."',
+          '"Heh. Nobody\'s asked me that in a while. ...I\'m alright. Getting there."',
+          'They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."',
         ]) || '"Thanks. ...Thanks for saying that."';
         const line = this.voiceLine ? this.voiceLine(vid, raw) : raw;
         this.sayLine(vid, line, { tag: 'comfort' });
@@ -454,9 +463,16 @@
         const stays = (c._stayCount = (c._stayCount || 0) + 1);
         let line;
         if (stays >= 4) {
+          // COMFORT POOLS (journey scale r4 2026-10-14): was 2 lines —
+          // the fourth stay deepened into one of two identical grief
+          // scripts. Five variants now, each naming the weight out loud
+          // without fabricating shared history.
           const raw = this.convoPickCycle(vid, 'dlg:stay:deepen', [
             '"...I keep thinking about them. About — everyone. Sorry. It just comes out, sitting here."',
             '"You know what\'s worst? The quiet parts. When the fire\'s the only one talking."',
+            '"I keep count of who\'s at the fire. I don\'t mean to — I just notice the gaps."',
+            '"Some nights I\'m fine. Tonight I\'m not. That\'s the whole story."',
+            '"Don\'t tell the others —" a glance sideways. "I don\'t know if I\'m doing any of this right."',
           ]) || '"...I keep thinking about them. About — everyone."';
           line = raw;
           this.sayLine(vid, line, { tag: 'comfort' });
@@ -464,10 +480,18 @@
           // ("Thanks for... you know. Just listening.") carries the goodbye.
           this.convoWantEngage(vid, 'commit');
         } else {
+          // COMFORT POOLS (journey scale r4 2026-10-14): was 3 lines —
+          // Ruby d85 ≡ Wolfgang d105 ≡ Kai d105 recited the identical
+          // stay sequence verbatim. Seven variants now, gritty-warm,
+          // no filler. Originals stay first (tone kept).
           line = this.convoPickCycle(vid, 'dlg:stay:lines', [
             '"Nice. Sit. The fire\'s warm."',
             '"Good. Company\'s company."',
             'They shift over, making room. "Stay as long as you like."',
+            'They lean back on their hands. "Wind\'s up tonight. Good night to not be walking."',
+            'They pat the ground beside them. "Here. It\'s dry."',
+            '"Careful — that log\'s hotter than it looks." They shift it with a boot, making space.',
+            '"Mm." They don\'t look up from the fire, but they nod you down. "Sit."',
           ]) || '"Nice. Sit. The fire\'s warm."';
           this.sayLine(vid, line, { tag: 'small' });
           this.convoWantEngage(vid, 'engage');
