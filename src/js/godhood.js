@@ -8,7 +8,7 @@
 //   recognised CLASS is on the path, they hold the subclass payoff and 4+
 //   magic abilities of the path, and they have done the god's deed: day 80+
 //   and a discovered synergy that uses an ability of the path. The game
-//   then plays a 5-beat ceremony, grants ONE qualitative godly verb (the
+//   then plays a 5-beat ceremony, grants ONE qualitative godly verb, played by godverbs.js (the
 //   capstone item is the System's gift, not a gate), and permanently
 //   transforms their visual. Each capstone keeps its weakness.
 //   Knowledge-gated: the capstone is felt only once the class is named and
@@ -24,8 +24,8 @@
 //   - mythicSprite(ghId) -> 32x32 SVG string (mythic form, no background)
 //   - playerMythicId(scholar) -> godhood id or null (for sprite hook)
 //   - godhoodBargaining(scholar) -> leverage bonus for the table
-//   - capstone verbs: raiseEcho, chooseTerms, feedMultitude, turnPain,
-//     noLiesCheck, namePrice, buyOff, walkHorizon, phaseOut, takeWound
+//   - market verbs: namePrice, buyPassage (buyOff alias), guardCoins/guardAbsorb/guardRegen, resetFightVerbs/resetDayVerbs
+//     (every other god verb is played by src/js/godverbs.js)
 //   - market debt: marketMarkers(sch), auditDue(sch) — 3 markers → the Audit
 // consumes:
 //   - scholar.abilities, scholar.activeSynergies, scholar.inventory
@@ -141,20 +141,6 @@
   function scholarSynergies(sch) {
     return new Set(sch.activeSynergies || []);
   }
-  function scholarItems(sch) {
-    const out = new Set();
-    for (const it of (sch.inventory || [])) {
-      const id = it.itemId || it.id;
-      if (id) out.add(id);
-    }
-    // equipped gear counts too
-    const eq = sch.equipment || sch.equipped || {};
-    for (const k of Object.keys(eq)) {
-      const it = eq[k];
-      if (it && (it.itemId || it.id)) out.add(it.itemId || it.id);
-    }
-    return out;
-  }
 
   // itemTier: loot tier of an item id, via S.ITEM_TIER (injected at load from
   // items.json). Unknown items are tier 0 — they never satisfy a tier gate.
@@ -168,15 +154,6 @@
     const req = gh.requires || {};
     const named = req.capstoneItems || req.items || [];
     return named.length ? named[0] : null;
-  }
-  function godhoodItemOk(gh, itemIds) {
-    const req = gh.requires || {};
-    const named = req.capstoneItems || req.items || [];
-    if (named.length && itemIds.some(id => named.includes(id))) return true;
-    const tiers = req.itemTiers || [];
-    if (tiers.length && itemIds.some(id => tiers.includes(itemTier(id)))) return true;
-    // back-compat: old format with requires.items as the ONLY gate
-    return false;
   }
 
   // poolProgress(abs, gh): how many of the godhood's ability pool are held,
@@ -284,16 +261,6 @@
       return new Set(((v.npcSynergies || {})[vid] || []));
     } catch (e) { return new Set(); }
   }
-  function villagerItems(game, vid) {
-    const out = new Set();
-    try {
-      const p = game.getPerson ? game.getPerson(vid) : null;
-      for (const it of ((p && p.items) || [])) {
-        out.add(typeof it === 'string' ? it : (it.itemId || it.id));
-      }
-    } catch (e) {}
-    return out;
-  }
 
   // villagerGodhoodCloseness(game, vid, gh): same requirement model as the
   // player, read from villager stores. The relay office path is player-only.
@@ -332,7 +299,7 @@
     return out;
   }
 
-  function villagerMythicId(game, vid) {
+  function villagerMythicId(game, vid) { // wired-exempt: sprite hook; villager mythic sprites are not drawn yet (docs/godpath/PLAN.md)
     try {
       const g = ((game.state || {}).village || {}).npcGodhood || {};
       const v = g[vid];
@@ -349,7 +316,7 @@
 
   // godhoodBargaining(scholar): the table prices the run — a god is worth
   // more. Each recognized godhood adds bargaining leverage.
-  function godhoodBargaining(sch) {
+  function godhoodBargaining(sch) { // wired-exempt: retired by law (the Table never reads godhood); kept for test-marketgod-v2
     const g = sch.godhood;
     if (!g || !g.active) return 0;
     let bonus = g.active.length * 3; // each godhood: +3 bargaining strength
@@ -361,93 +328,23 @@
 
   // --- capstone verbs (called by game systems; pure-ish, game mediates) ---
 
-  // Shepherd: raiseEcho — called on ally death in a fight the player is in.
-  // Returns echo descriptor or null (already used this fight / not ascended).
-  function raiseEcho(sch, ally) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('shepherd_of_the_dead')) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.raiseEcho) return null; // once per fight
-    used.raiseEcho = true;
-    sch.godhood.capstoneUsed = used;
-    return {
-      verb: 'raiseEcho',
-      allyId: ally.id || ally.vid,
-      allyName: ally.name,
-      rounds: 3,
-      // the echo fights as themselves: stats snapshot
-      stats: { hp: ally.hp || ally.health || 30, dmg: ally.dmg || 8 },
-      final: true, // this death is final — no second raising
-    };
-  }
+  // THE VERBS IN PLAY live in src/js/godverbs.js (2026-10-15): Turn the
+  // Pain, Take the Wound, Choose the Terms, Raise Echo, Phase Out, No Lies,
+  // Speak and Be Heard, Phoenix, Feed the Multitude — for the player and
+  // villagers through one implementation, with godpaths.json god.play data.
+  // The pure stubs that used to sit here had no caller (diagnosis-endgame
+  // §1) and were removed. The Market God's economy stays here (prices,
+  // markers, the Audit, the Gilded Guard); godverbs.js plays it.
   function resetFightVerbs(sch) {
     // call at fight start: once-per-fight verbs refresh
     if (sch.godhood) sch.godhood.capstoneUsed = {};
   }
 
-  // Apex: chooseTerms — pre-fight choice. Returns the chosen setup.
-  function chooseTerms(sch, choice) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('apex_predator')) return null;
-    const valid = { ambush: 1, range: 1, ground: 1 };
-    if (!valid[choice]) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.chooseTerms) return null; // set before the first blow, can't re-choose
-    used.chooseTerms = choice;
-    sch.godhood.capstoneUsed = used;
-    return {
-      verb: 'chooseTerms', choice,
-      ambush: choice === 'ambush' ? { firstStrike: true, unseen: true } : null,
-      range: choice === 'range' ? { idealDistance: true } : null,
-      ground: choice === 'ground' ? { terrainEdge: true } : null,
-    };
-  }
-
-  // Garden: feedMultitude — once per day, army-scale food. Costs 200 kcal.
-  function feedMultitude(sch) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('living_garden')) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.feedMultitude) return null; // once per day (reset on dawn)
-    if ((sch.kcal || 0) < 200) return { verb: 'feedMultitude', ok: false, why: 'Need 200 kcal of your own — the garden gives through you.' };
-    used.feedMultitude = true;
-    sch.godhood.capstoneUsed = used;
-    sch.kcal = (sch.kcal || 0) - 200;
-    return {
-      verb: 'feedMultitude', ok: true,
-      feeds: 50, // mouths fed — titan-coalition scale
-      note: 'The harvest comes up through your hands. Fifty mouths eat because you asked.',
-    };
-  }
   function resetDayVerbs(sch) {
     // call at dawn: once-per-day verbs refresh
     if (!sch.godhood || !sch.godhood.capstoneUsed) return;
-    delete sch.godhood.capstoneUsed.feedMultitude;
     delete sch.godhood.capstoneUsed.namePrice;
-    delete sch.godhood.capstoneUsed.walkHorizon;
-    try { guardRegen(sch); } catch (e) {}
-  }
-
-  // Army: turnPain — once per fight, retaliate with total damage taken.
-  function turnPain(sch, damageTakenThisFight) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('one_person_army')) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.turnPain) return null;
-    if (!damageTakenThisFight || damageTakenThisFight <= 0) return null;
-    used.turnPain = true;
-    sch.godhood.capstoneUsed = used;
-    return {
-      verb: 'turnPain',
-      damage: damageTakenThisFight, // no cap — the needle
-      note: `Every wound, given back at once: ${damageTakenThisFight} damage, no cap.`,
-    };
-  }
-
-  // Seer: noLiesCheck — passive. Returns true if a deception vs the player fails.
-  function noLiesCheck(sch) {
-    const g = sch.godhood || {};
-    return (g.active || []).includes('all_seeing');
+    try { guardRegen(sch); } catch (e) { console.warn('[godhood] guardRegen', e); }
   }
 
   // Market: namePrice — once per day, NAME any item; the market delivers it
@@ -600,7 +497,7 @@
   }
   // Back-compat: buyOff is retired (0% impact). Alias to buyPassage for
   // any lingering callers; new code should use buyPassage.
-  function buyOff(sch, wave) { return buyPassage(sch, wave); }
+  function buyOff(sch, wave) { return buyPassage(sch, wave); } // wired-exempt: backward-compatible alias; gameplay calls buyPassage
 
   // Market: Gilded Guard — the orbiting coins are SHIELDS. Passive, always-on
   // while ascended. Incoming damage to the player is intercepted by coins
@@ -669,52 +566,6 @@
         return;
       }
     }
-  }
-
-  // Farstrider: walkHorizon — once per day, instant travel up to 3 nodes. Costs 150 kcal.
-  function walkHorizon(sch, nodes) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('farstrider')) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.walkHorizon) return null;
-    if (!nodes || nodes < 1 || nodes > 3) return null;
-    if ((sch.kcal || 0) < 150) return { verb: 'walkHorizon', ok: false, why: 'The horizon charges 150 kcal toll.' };
-    used.walkHorizon = true;
-    sch.godhood.capstoneUsed = used;
-    sch.kcal = (sch.kcal || 0) - 150;
-    return { verb: 'walkHorizon', ok: true, nodes, note: `The map folds. ${nodes} node${nodes > 1 ? 's' : ''}, one step.` };
-  }
-
-  // Between: phaseOut — once per fight, negate one hit entirely.
-  function phaseOut(sch) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('the_between')) return null;
-    const used = (g.capstoneUsed || {});
-    if (used.phaseOut) return null;
-    used.phaseOut = true;
-    sch.godhood.capstoneUsed = used;
-    return { verb: 'phaseOut', negated: true, note: 'You were never there. The blow passes through empty air.' };
-  }
-
-  // Ward: takeWound — redirect ally damage to self. Redirected damage can't
-  // drop below 1 HP. 3 strains in one fight = collapse (alive, out).
-  function takeWound(sch, ally, damage) {
-    const g = sch.godhood || {};
-    if (!(g.active || []).includes('undying_ward')) return null;
-    const strains = (g.capstoneUsed || {}).wardStrains || 0;
-    if (strains >= 3) return { verb: 'takeWound', ok: false, collapsed: true, note: 'Three wounds carried. You collapse — alive, but out.' };
-    const used = (g.capstoneUsed || {});
-    used.wardStrains = strains + 1;
-    sch.godhood.capstoneUsed = used;
-    const hp = sch.health || sch.hp || 100;
-    const newHp = Math.max(1, hp - damage); // redirected wounds can't drop you below 1
-    if (sch.health != null) sch.health = newHp; else sch.hp = newHp;
-    return {
-      verb: 'takeWound', ok: true,
-      redirected: damage, hpAfter: newHp, strains: strains + 1,
-      collapsed: strains + 1 >= 3,
-      note: `${ally.name || 'Your ally'}'s wound is yours now. You keep standing. (${strains + 1}/3 strains)`,
-    };
   }
 
   // --- recognition ceremony ---
@@ -904,11 +755,10 @@
     godhoods, allGodhoods, byId, deriveGodhoods,
     godhoodCloseness, checkGodhood, playerMythicId, godhoodBargaining,
     villagerGodhoodCloseness, checkVillagerGodhood, villagerMythicId,
-    itemTier, godhoodItemOk, poolProgress, buildReadyForCapstone, capstoneItemFor,
-    raiseEcho, resetFightVerbs, chooseTerms, feedMultitude, resetDayVerbs,
-    turnPain, noLiesCheck, namePrice, buyOff, buyPassage, marketMarkers, auditDue, auditCollect,
+    itemTier, poolProgress, buildReadyForCapstone, capstoneItemFor,
+    resetFightVerbs, resetDayVerbs,
+    namePrice, buyOff, buyPassage, marketMarkers, auditDue, auditCollect,
     guardCoins, guardAbsorb, guardRegen,
-    walkHorizon, phaseOut, takeWound,
     ceremonyBeats, recognitionCeremony, villagerRecognitionCeremony, hintBeat,
     mythicSprite, MYTHIC_SPRITES,
   };

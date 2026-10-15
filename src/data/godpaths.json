@@ -1,5 +1,5 @@
 {
-  "_doc": "THE GOD LAYER: the one source of truth for builds above the ability (docs/COHERENCE-SPINE.md: Job -> Playstyle/track -> Class -> God -> Table). 10 paths x 2 subclasses (Steve 2026-10-14: \"Good calls! Continue all.\"). Each magic ability in abilities.json carries `path` + `subclass` (+ optional `alsoPath`); a path's god is its capstone. src/js/godhood.js derives its capstone list from THIS file (godhood.json is retired). god.scale lines are design intent; only the verb is wired.",
+  "_doc": "THE GOD LAYER: the one source of truth for builds above the ability (docs/COHERENCE-SPINE.md: Job -> Playstyle/track -> Class -> God -> Table). 10 paths x 2 subclasses (Steve 2026-10-14: \"Good calls! Continue all.\"). Each magic ability in abilities.json carries `path` + `subclass` (+ optional `alsoPath`); a path's god is its capstone. src/js/godhood.js derives its capstone list from THIS file (godhood.json is retired). god.play is the verb in play (src/js/godverbs.js): the action/passive data, its numbers, and which scale lines it wires (party/titan/contest/army); the rest of god.scale is design intent (docs/godpath/PLAN.md lists it).",
   "rules": {
     "_recognize": "Class recognition: a holder (player or villager, same function) whose magic abilities include >= minAbilities of one path, strictly more than any other path, is named \"<Subclass> of <God>\" once. The subclass is the one with more held abilities (ties: the one whose payoff is held, then the first).",
     "recognize": {
@@ -78,6 +78,26 @@
           "contest": "Blood contests: the crowd counts your scars.",
           "army": "You are the breach the coalition pours through."
         },
+        "play": {
+          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight.",
+          "actions": [
+            {
+              "id": "turn_the_pain",
+              "name": "Turn the Pain",
+              "context": "combat",
+              "cost": {
+                "kcal": 150,
+                "turn": 1
+              },
+              "perFight": 1,
+              "reach": 1,
+              "effect": "Every wound you took this fight, given back in one blow to an adjacent foe. No cap. Beams do not count."
+            }
+          ],
+          "partyRallyAt": 0.5,
+          "partyRallyRounds": 3,
+          "villagerCastAt": 0.35
+        },
         "hint": "\"You get hurt, little brawler. A lot. Lately the hurting seems... productive. Like you're SAVING it. The audience is leaning forward. So am I.\"",
         "mythic": {
           "desc": "A massive crimson silhouette, weapon fused to the arm, veins of darker red. Bigger than a person. The rage, given a body.",
@@ -147,6 +167,18 @@
           "titan": "You take a titan hit meant for the line, and live to say so.",
           "contest": "The audience weeps when you take the blow for someone else.",
           "army": "The army advances behind you."
+        },
+        "play": {
+          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size.",
+          "passive": {
+            "id": "take_the_wound",
+            "name": "Take the Wound",
+            "kcal": 60,
+            "strains": 3,
+            "minFrac": 0.25
+          },
+          "selfHealMult": 0.5,
+          "aggro": true
         },
         "hint": "\"You catch people, little caregiver. Falls, fevers, failures \u2014 you're always there first. Lately it looks less like catching and more like... absorbing. I have a word for it. Soon.\"",
         "mythic": {
@@ -218,6 +250,50 @@
           "contest": "Accuracy contests are yours to lose.",
           "army": "Scouts follow your marks."
         },
+        "play": {
+          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan.",
+          "actions": [
+            {
+              "id": "terms_ambush",
+              "name": "Choose the Terms: Ambush",
+              "terms": "ambush",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe loses its first turn; your next strike hits x3."
+            },
+            {
+              "id": "terms_range",
+              "name": "Choose the Terms: Range",
+              "terms": "range",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe is driven back 4 tiles; strikes from 2+ tiles hit x1.5 until contact."
+            },
+            {
+              "id": "terms_ground",
+              "name": "Choose the Terms: Ground",
+              "terms": "ground",
+              "context": "combat",
+              "cost": {
+                "kcal": 120
+              },
+              "perFight": 1,
+              "effect": "Before the first blow: every foe is rooted 2 rounds, titans too; you dodge +25% until contact."
+            }
+          ],
+          "ambushMult": 3,
+          "allyAmbushMult": 2,
+          "rangeDist": 4,
+          "rangeMult": 1.5,
+          "groundRoot": 2,
+          "groundDodge": 0.25
+        },
         "hint": "\"You don't chase anymore. You ARRIVE. The gamblers have noticed \u2014 your fights start before the monster knows it's in one. One more step, little hunter.\"",
         "mythic": {
           "desc": "Antlered silhouette, clawed hands, amber predator eyes that catch the light. Tawny and red \u2014 the beast you hunted, wearing you.",
@@ -284,6 +360,17 @@
           "titan": "The dead hold the line for three more rounds.",
           "contest": "The mercy moment: sparing a foe moves the crowd.",
           "army": "An army that does not stay down."
+        },
+        "play": {
+          "_doc": "Raise Echo: automatic. When an ally falls in a fight the Shepherd is in (alive), the ally rises as an echo at full HP, hitting x strikeMult, for rounds rounds, then fades for good. Their death is real and final (it is already recorded). Once per fight; in a titan-class fight every fallen ally rises once (ARMY/TITAN: an army that does not stay down), each paying titanKcal. WEAKNESS: alone, no echoes.",
+          "passive": {
+            "id": "raise_echo",
+            "name": "Raise Echo",
+            "kcal": 150,
+            "titanKcal": 100,
+            "rounds": 3,
+            "strikeMult": 2
+          }
         },
         "hint": "\"You're collecting people, little leader. Even the dead ones are starting to listen. I have a WORD for what you're becoming. Not yet. Soon.\"",
         "mythic": {
@@ -353,6 +440,17 @@
           "contest": "Chases and races lean your way.",
           "army": "The coalition's runner between camps."
         },
+        "play": {
+          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first).",
+          "passive": {
+            "id": "phase_out",
+            "name": "Phase Out",
+            "kcal": 100,
+            "minFrac": 0.25,
+            "retreat": 3
+          },
+          "aggro": true
+        },
         "hint": "\"You're hard to find lately, little drifter. Even for me, and I see EVERYTHING. The gamblers bet on where you'll be and lose. Where ARE you, exactly?\"",
         "mythic": {
           "desc": "A half-transparent figure, glitching between states \u2014 indigo and shadow, offset duplicates trailing. Here, and not.",
@@ -419,6 +517,25 @@
           "titan": "You read the titan's next moves aloud.",
           "contest": "Strategy contests: nobody bluffs you.",
           "army": "The coalition plans with your map."
+        },
+        "play": {
+          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie.",
+          "actions": [
+            {
+              "id": "no_lies",
+              "name": "No Lies: Read Them Aloud",
+              "context": "combat",
+              "cost": {
+                "kcal": 100
+              },
+              "perFight": 1,
+              "effect": "Every foe's next move said aloud; allies slip telegraphed blows (50%); your strikes on a winding-up foe hit x1.5."
+            }
+          ],
+          "allyDodge": 0.5,
+          "strikeMult": 1.5,
+          "trustCostPerDay": 1,
+          "dailyKcal": 60
         },
         "hint": "\"You see too much, little detective. People are starting to notice you noticing. The gamblers stopped betting on surprises around you \u2014 there aren't any. Something's about to give.\"",
         "mythic": {
@@ -487,6 +604,36 @@
           "contest": "You are the show: performance contests lean your way.",
           "army": "Every allied village hears your word the same day."
         },
+        "play": {
+          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, and every fight today starts rallied. Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
+          "actions": [
+            {
+              "id": "rally_cry",
+              "name": "Speak and Be Heard: Rally Cry",
+              "context": "combat",
+              "cost": {
+                "kcal": 120,
+                "turn": 1
+              },
+              "perFight": 1,
+              "effect": "Every ally acts now, emboldened 3 rounds, next 2 strikes x1.5; every foe hesitates."
+            },
+            {
+              "id": "be_heard",
+              "name": "Speak and Be Heard",
+              "context": "explore",
+              "cost": {
+                "kcal": 150
+              },
+              "perDay": 1,
+              "effect": "Every Haven villager hears you: +2 trust, and every fight today starts rallied."
+            }
+          ],
+          "grounding": 5,
+          "rallyRounds": 3,
+          "strikeMult": 1.5,
+          "trust": 2
+        },
         "hint": "\"Little switchboard. Every word in the region passes through YOUR hands now. I have a WORD for what you're becoming. Not yet. Soon.\"",
         "mythic": {
           "title": "Wreathed in Signal",
@@ -551,6 +698,14 @@
           "titan": "You outlast the titan's worst round.",
           "contest": "Endurance contests lean your way.",
           "army": "The coalition's last one standing."
+        },
+        "play": {
+          "_doc": "Phoenix: automatic. On a death the holder would die, the phoenix clause fires without the ability and is never spent: a living villager burns (the existing register: volunteers, protest struggles, the broadcast, exile after the second burn), the holder rises at 1 HP. The fire needs fuel: kcal (villager: belly) or the death sticks, so it never saves you from starving.",
+          "passive": {
+            "id": "phoenix",
+            "name": "Phoenix",
+            "kcal": 500
+          }
         },
         "hint": "\"You've died before, little survivor. Everyone's noticed you keep... not. The gamblers are asking what you'd trade for one more morning. I think you already know the answer.\"",
         "mythic": {
@@ -619,6 +774,32 @@
           "contest": "The sponsor: money talks to judges (risky).",
           "army": "The coalition's quartermaster."
         },
+        "play": {
+          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly.",
+          "actions": [
+            {
+              "id": "buy_passage",
+              "name": "Buy Passage",
+              "context": "combat",
+              "cost": {
+                "kcal": 40,
+                "turn": 1
+              },
+              "perFight": 1,
+              "effect": "Name a price (1000/2500/5000/10000 kcal by wave; wave 5 or short: a marker). The monster takes it and leaves. Not titans."
+            },
+            {
+              "id": "name_price",
+              "name": "Name Your Price",
+              "context": "explore",
+              "cost": {
+                "kcal": 40
+              },
+              "perDay": 1,
+              "effect": "A trader brings exactly what you name (default: the best weapon you lack). 800/2000/5000 kcal by tier; relics are lent for 2 markers."
+            }
+          ]
+        },
         "hint": "\"The traders have stopped haggling with you. They just... agree. Too fast. And the coins \u2014 have you noticed the coins don\u2019t fall anymore? They orbit. Slowly. Like they\u2019re waiting to be spent. Someone is keeping a ledger. You can feel the columns. Soon you\u2019ll be allowed to read it.\"",
         "mythic": {
           "desc": "A figure in gold, coins orbiting slowly, a balance-scale motif worked into the silhouette. Wealth, given a body and a smile.",
@@ -686,6 +867,23 @@
           "titan": "The coalition marches because you feed it.",
           "contest": "Feast contests lean your way.",
           "army": "Feeds fifty mouths a day."
+        },
+        "play": {
+          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first.",
+          "actions": [
+            {
+              "id": "feed_multitude",
+              "name": "Feed the Multitude",
+              "context": "explore",
+              "cost": {
+                "kcal": 200
+              },
+              "perDay": 1,
+              "effect": "Every Haven villager eats their fill; every fight today starts with the party fed. Not you: the garden gives through you."
+            }
+          ],
+          "strikeMult": 0.8,
+          "aggro": true
         },
         "hint": "\"The land likes you, little gardener. A little TOO much, some say. The seeds lean toward you when you walk past. I wonder what happens when you stop walking past and start ASKING.\"",
         "mythic": {

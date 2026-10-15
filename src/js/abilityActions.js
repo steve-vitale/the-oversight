@@ -128,6 +128,12 @@
       if (abilityId === 'keepsake' && typeof this.keepsakeActionDef === 'function') {
         return this.keepsakeActionDef(actionId);
       }
+      // GOD VERBS (2026-10-15, godverbs.js): an ascended holder's god verb
+      // is an action of the pseudo-ability 'god'; its data lives in
+      // godpaths.json god.play.
+      if (abilityId === 'god' && typeof this.godActionDef === 'function') {
+        return this.godActionDef(actionId);
+      }
       var abilities = (this.data && this.data.abilities) || [];
       var ability = null;
       for (var i = 0; i < abilities.length; i++) {
@@ -213,7 +219,9 @@
       }
       var _held = (abilityId === 'keepsake')
         ? !!(typeof this.keepsakeActionReady === 'function' && this.keepsakeActionReady(actionId))
-        : this.hasAbility(abilityId);
+        : (abilityId === 'god')
+          ? !!(typeof this.godActionReady === 'function' && this.godActionReady(actionId))
+          : this.hasAbility(abilityId);
       if (!_held) {
         this.say('You don\'t have that ability. (' + (def.ability.name || abilityId) + ')');
         return false;
@@ -318,7 +326,7 @@
         // grant 2 XP (were 1) — they cost food/actions, they're investments.
         // Related-action grants elsewhere stay at 1 (passive).
         // Keepsake actions grow by being WORN (bond), not by ability XP.
-        if (abilityId !== 'keepsake') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
+        if (abilityId !== 'keepsake' && abilityId !== 'god') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
         // FEASTED (feast-surge rework, Worker B 2026-10-10): the feasted
         // form — the known ability, temporarily evolved. Generic framework:
         // uplift rode the damage funnels; here the data-driven twist runs.
