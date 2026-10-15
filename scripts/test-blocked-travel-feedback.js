@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+Math.random = require('./sim-harness').mulberry32(7);
 global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
 ['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
@@ -56,8 +57,13 @@ function freshGame() {
     var creek = t;
   }
   const stripSwim = (l) => (l || []).filter(a => (a.id || a) !== 'swimmer');
+  Game.state.codex.skills = Game.state.codex.skills || {};
+  Game.state.codex.skills.swimmer = { level: 1 };
+  ok('Swimming in the skill lane is recognized before stripping the fixture', !!Game.hasAbility('swimmer'));
   Game.state.scholar.abilities = stripSwim(Game.state.scholar.abilities);
   Game.state.scholar.backgroundAbilities = stripSwim(Game.state.scholar.backgroundAbilities);
+  if (Game.state.codex.skills) delete Game.state.codex.skills.swimmer;
+  ok('hard-creek fixture has no Swimming skill or ability', !Game.hasAbility('swimmer'));
 
   // 1. travelTo into a blocked tile: returns the blockage AND says something.
   said.length = 0;
