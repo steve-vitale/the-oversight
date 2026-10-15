@@ -1,0 +1,185 @@
+{
+ "seed": 77,
+ "policy": "leadfeast",
+ "packet": {
+  "diedHolding": true,
+  "deathDay": 91,
+  "endReason": "village-lost",
+  "attributed": true,
+  "evidence": [
+   "death shares (30d): combat 1/2, starvation 1/2; modal combat",
+   "pantry -30d:d61=0.0d -15d:d76=12.0d -7d:d84=5.0d -1d:d90=2.0d | window min 0.0d (d61), starved-days 0/30, pantry hit 0 on d61, at death: 0.0d, pop 9",
+   "polity at death (d91): national, 3 link(s) — village_0(lead,trust 96,arrears 0) | village_1(lead,trust 81,arrears 2100) | village_2(lead,trust 75,arrears 0); total arrears 2100kcal",
+   "co-occurrence ±4d of d91: 3 raids, 0 successions, 4 contest/arena, 0 tribute-snaps, 1 wave/draft"
+  ],
+  "deathShares": {
+   "total": 2,
+   "deaths": [
+    {
+     "day": 83,
+     "name": "Jesse Cortez",
+     "cause": "combat",
+     "family": "combat",
+     "rawCause": "combat",
+     "bearer": true
+    },
+    {
+     "day": 92,
+     "name": "James",
+     "cause": "starvation",
+     "family": "starvation",
+     "rawCause": "starvation",
+     "bearer": false
+    }
+   ],
+   "famCounts": {
+    "combat": 1,
+    "starvation": 1
+   },
+   "subCauses": {
+    "combat": 1,
+    "starvation": 1
+   },
+   "famShares": {
+    "combat": 0.5,
+    "starvation": 0.5
+   },
+   "modalFamily": "combat",
+   "bearerDeaths": [
+    {
+     "day": 83,
+     "name": "Jesse Cortez",
+     "cause": "combat",
+     "family": "combat",
+     "rawCause": "combat",
+     "bearer": true
+    }
+   ]
+  },
+  "pantry": {
+   "readable": true,
+   "marks": [
+    {
+     "off": -30,
+     "day": 61,
+     "pantryDays": 0,
+     "pantryKcal": 4000,
+     "pop": 7,
+     "ateShare": 81.6
+    },
+    {
+     "off": -15,
+     "day": 76,
+     "pantryDays": 12,
+     "pantryKcal": 25401,
+     "pop": 7,
+     "ateShare": 83.4
+    },
+    {
+     "off": -7,
+     "day": 84,
+     "pantryDays": 5,
+     "pantryKcal": 12302,
+     "pop": 6,
+     "ateShare": 85.9
+    },
+    {
+     "off": -1,
+     "day": 90,
+     "pantryDays": 2,
+     "pantryKcal": 8116,
+     "pop": 9,
+     "ateShare": 80.7
+    }
+   ],
+   "minPantryDays": 0,
+   "minDay": 61,
+   "starvedDays": 0,
+   "hitZeroDay": 61,
+   "endPantryDays": 0,
+   "endPantryKcal": 0,
+   "endPop": 9,
+   "evidence": [
+    "pantry -30d:d61=0.0d -15d:d76=12.0d -7d:d84=5.0d -1d:d90=2.0d",
+    "window min 0.0d (d61), starved-days 0/30, pantry hit 0 on d61, at death: 0.0d, pop 9"
+   ]
+  },
+  "cooccur": {
+   "raids": [
+    {
+     "day": 87,
+     "text": "🌙 Raid — The Bloodied came in the night from the northeast. They carried off ~940 kcal from the pantry. Nobody's dead, but the message is clear: the ground is "
+    },
+    {
+     "day": 90,
+     "text": "🌙 Raid — The Hungry Road came in the night from the northeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is"
+    },
+    {
+     "day": 91,
+     "text": "🌙 Raid — Stonebridge came in the night from the northeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is the"
+    }
+   ],
+   "successions": [],
+   "contests": [
+    {
+     "day": 87,
+     "text": "📺 ═══ CONTEST INTERRUPTION ═══"
+    },
+    {
+     "day": 87,
+     "text": "📺 Arena: ⚖️ 👥👥👥👥👥 ⬜⬜🎤⬜⬜ ⬜⬜⬜⬜⬜ 👥👥👥👥👥"
+    },
+    {
+     "day": 87,
+     "text": "📺 MAIN EVENT rules: the arena runs hotter tonight. You start this one already hurt — the galaxy loves an underdog. Especially a bleeding one."
+    },
+    {
+     "day": 88,
+     "text": "📺 MAIN EVENT rules: the arena runs hotter tonight. You start this one already hurt — the galaxy loves an underdog. Especially a bleeding one."
+    }
+   ],
+   "snaps": [],
+   "waves": [
+    {
+     "day": 90,
+     "text": "📡 The Mirror Draft is still waiting. Stand on the grid with the Final Draft — 2 of 3 kinds faced."
+    }
+   ]
+  },
+  "polity": {
+   "day": 91,
+   "rank": "national",
+   "exiled": false,
+   "nLinks": 3,
+   "links": [
+    {
+     "vid": "village_0",
+     "kind": "lead",
+     "trust": 96,
+     "arrears": 0,
+     "perWeek": 2250,
+     "age": 66
+    },
+    {
+     "vid": "village_1",
+     "kind": "lead",
+     "trust": 81,
+     "arrears": 2100,
+     "perWeek": 2250,
+     "age": 65
+    },
+    {
+     "vid": "village_2",
+     "kind": "lead",
+     "trust": 75,
+     "arrears": 0,
+     "perWeek": 2250,
+     "age": 64
+    }
+   ],
+   "totalArrears": 2100,
+   "minTrust": 75
+  }
+ },
+ "narrative": "national since d77; the village dies village-lost on d91 with the rank still on.\nthe pantry story: 0.0d on d61 -> 12.0d on d76 -> 5.0d on d84 -> 2.0d on d90; window min 0.0d (d61); 0 starved days in the window (ate-share <60% or the starved flag); the pantry hit 0 on d61.\n2 person deaths in the last 30d:\n  d83 Jesse Cortez (the bearer) — combat [combat]\n  d92 James — starvation [starvation]\nthe family tally: 1 combat, 1 starvation.\nin the ±4d co-occurrence window: 3 raid(s): d87 \"🌙 Raid — The Bloodied came in the night from the northeast. They carried off ~940 kcal fr\"; d90 \"🌙 Raid — The Hungry Road came in the night from the northeast. They carried off ~0 kcal f\"; d91 \"🌙 Raid — Stonebridge came in the night from the northeast. They carried off ~0 kcal from \" | 4 contest/arena beat(s): d87 \"📺 ═══ CONTEST INTERRUPTION ═══\"; d87 \"📺 Arena: ⚖️ 👥👥👥👥👥 ⬜⬜🎤⬜⬜ ⬜⬜⬜⬜⬜ 👥👥👥👥👥\"; d87 \"📺 MAIN EVENT rules: the arena runs hotter tonight. You start this one already hurt — the \" | 1 wave/draft beat(s).\nat death the polity holds: national, 3 link(s), total arrears 2100kcal, weakest trust 75.\nverdict: ATTRIBUTED — the packet above names the terminal cause families, the pantry crash, the polity, and the co-occurrence."
+}
