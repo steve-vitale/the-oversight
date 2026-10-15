@@ -1,0 +1,92 @@
+[
+  {
+    "test": "scripts/test-kgate-audit.js",
+    "seed": 7,
+    "baseline": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "candidate": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "match": true
+  },
+  {
+    "test": "scripts/test-kgate-audit.js",
+    "seed": 42,
+    "baseline": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "candidate": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "match": true
+  },
+  {
+    "test": "scripts/test-kgate-audit.js",
+    "seed": 99,
+    "baseline": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "candidate": {
+      "exitCode": 1,
+      "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+      "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+    },
+    "match": true
+  },
+  {
+    "test": "scripts/test-past-deflect-gate.js",
+    "seed": 7,
+    "baseline": {
+      "exitCode": 1,
+      "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+      "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+    },
+    "candidate": {
+      "exitCode": 1,
+      "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+      "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+    },
+    "match": true
+  },
+  {
+    "test": "scripts/test-past-deflect-gate.js",
+    "seed": 42,
+    "baseline": {
+      "exitCode": 1,
+      "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+      "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+    },
+    "candidate": {
+      "exitCode": 1,
+      "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+      "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+    },
+    "match": true
+  },
+  {
+    "test": "scripts/test-past-deflect-gate.js",
+    "seed": 99,
+    "baseline": {
+      "exitCode": 0,
+      "output": "\n7 passed, 0 failed\n",
+      "outputDigest": "c712b9c58b5fa5fbf11c16e01b91e78bd27c66f51464bba52d82e8d3c08043b1"
+    },
+    "candidate": {
+      "exitCode": 0,
+      "output": "\n7 passed, 0 failed\n",
+      "outputDigest": "c712b9c58b5fa5fbf11c16e01b91e78bd27c66f51464bba52d82e8d3c08043b1"
+    },
+    "match": true
+  }
+]

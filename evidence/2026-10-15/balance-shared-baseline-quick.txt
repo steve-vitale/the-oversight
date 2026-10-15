@@ -1,0 +1,46 @@
+check.js: 94 scripts, 4 parallel (quick)
+......................F...................................................F........F..........
+
+  FAIL scripts/test-sprites-valid-20261014.js (exit 1, 0.2s)
+      FAIL: dustboar calm != aggro 
+      FAIL: sunback calm sprite 
+      FAIL: sunback aggro sprite 
+      FAIL: sunback calm != aggro 
+      FAIL: sweeps_week calm sprite 
+      FAIL: sweeps_week aggro sprite 
+      FAIL: sweeps_week calm != aggro 
+      FAIL: cliffhanger calm sprite 
+      FAIL: cliffhanger aggro sprite 
+      FAIL: cliffhanger calm != aggro 
+      items: 120 own sprites, 95 use the documented UNKNOWN_ITEM parcel
+      1556 passed, 216 failed
+
+  FAIL scripts/test-skills-pre-system-20261014.js (exit 1, 0.5s)
+        ok   villager level-up sheet waits (no magic pre-System)
+        ok   war_cry (magic practice) not granted pre-System
+        ok   player level-up queued, no sheet pre-System
+        ok   no magic entered the player slots
+      
+      Skills panel (app.js) is not System-gated
+        ok   renderSkillsSection found
+        FAIL renderSkillsSection has no systemArrived early return
+        ok   renderCharacterInline renders the Skills section
+      
+      skills-pre-system: 20 passed, 1 failed, 0 todo (phase 0)
+      failing: renderSkillsSection has no systemArrived early return
+
+  FAIL scripts/test-where-are-we-20261014.js (exit 1, 0.7s)
+        ok   every calendar season has a label and known/late/guess lines
+        ok   every climate family has a rough description and visitor lines
+        ok   every playable region has its own local lines
+        ok   wet/dry calendar: "The dry · Sahel and the Savanna"
+        ok   wet/dry rough line
+      
+      [W9] wiring
+        ok   app.js day header (expHeadHTML) renders Game.whereLine()
+        ok   index.html loads whereAreWe.js
+      
+      test-where-are-we: 45 passed, 2 failed
+      failing: stranger conversation offers 'where' | stranger says a flavour line from the data
+
+check.js: 91 passed, 3 failed in 34s

@@ -1,0 +1,167 @@
+{
+  "calibrationCollectorCommit": "03ab118e17b8af08313d52a9e88b558a4b496638",
+  "finalCollectorCommit": "5dccc96e858897d54e2b81b2448f35e28288c731",
+  "beforeRuntimeCommit": "ddfbd5d0a43b54188881cbc88510567162af096c",
+  "afterRuntimeCommit": "f8e633c5ad35b7b31d8ea10dce05beca44fefb67",
+  "metrics": 23,
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "seedsPerPolicy": 16,
+  "gameplayChanged": false,
+  "historicalRowAndHashMatches": {
+    "before": 64,
+    "after": 64
+  },
+  "artifactHashes": {
+    "balance-feast-before-16.json.gz": "8f0d83d338e0b1e52d98ecf7b5051f7b5f5565e07d6cc134a9e86d8667bb6d02",
+    "balance-feast-after-16.json.gz": "28fae1a8df5d869c98122dccedb4657e9fd0c1d238a0bf76efef03fb2a39566b",
+    "balance-final-observer-panel.json.gz": "d0e5ab6d4c200dc05286ddc095e6bd0f135c12479cea5622d4e6f5329460ea5b",
+    "balance-shards-merged.json.gz": "25061219ad17b68221bd44711ecc9a988dea713e7e7e7d985e51eb202f7e9161",
+    "balance-extended-panel.json.gz": "9b6b4926b31999bbdd395f83d3c7c3a86267a3e4c335e290f65800eeae5ec342",
+    "balance-feast-comparison.json": "d9f76a92fbf513b14e0eb6d42663a61865faef788e51dcd00124d011f52a7fea",
+    "balance-feast-comparison.md": "cfc7e25cca5d40c0336a950a878872b11e9cdd378807c44ea6a0d90ef765e233",
+    "balance-feature-census-16.json": "71033e2f4b9d9117f4251c4a2ca721e30af6e4ad1f6790702052ec804cf16827",
+    "balance-feature-census-16.md": "eaf87c0c2756b27a3f2607549e600195edb589c7f377bb26be6497f7db90b437",
+    "balance-final-feature-census.json": "17fdf2acd726c02795d892c9372502c8811ba8c314c1660d7f126289572123b4",
+    "balance-final-feature-census.md": "70174f5d65b731993d2e759a4938f759523e08fbc38615507bcf978627a45219",
+    "balance-cache-corruption-proof.txt": "5a40da8ce4c85e755292aa849f852ca3d3038c7b8e985ad4a103af9e2af32fa2",
+    "balance-resume-proof.txt": "366e470cc1759374e47a256547f2ff69d0b263a5bfbf2a1880b314bdc054549b",
+    "balance-extension-proof.txt": "4c0b0827d2747dfcea0deeaf7bcbc3b61a9309675e17d09fa89c2facecb033db",
+    "balance-observer-proof.json.gz": "aadb5a007b069e70fb1733d8a5dc288b08e17bc884e69d4d3027f2d504351b1e",
+    "balance-ready-quick.txt": "a2693dccc46d26cf7489bfe4c353e624ff905ea3bfec943fd91fd424eb51781e",
+    "balance-ready-full.txt": "f0e03819bb40c353bde064b67e03a974735b5a33a21aa8ede8ca2244a71b663b"
+  },
+  "sampledNeutralityPairs": 12,
+  "finalCollectorHistoricalRowsHashesAndMetricMatches": 4,
+  "resumeCachedJobs": 8,
+  "extensionReusedJobs": 8,
+  "mergedRowsEqualExtendedPanel": 8,
+  "corruptCacheRejected": true,
+  "sourceChanges": [
+    "src/js/game.js"
+  ],
+  "metricContractDigest": "6a921da32dbc2b7bc30d8e4b4c4fa3be404d0f976d8f3b28e1d15cc98ab97a24",
+  "calibrationObserverDigest": "d432e1384db43ba91ab279e28b2a249097cbd4b001ad6a1bf923336bca02e9ab",
+  "finalObserverDigest": "eefe60fe2889734a9ed61185d42447cab37b4a2941c4fd9bffec96394cc47121",
+  "reviewItems": {
+    "capable": [
+      {
+        "metric": "won",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "survival60",
+        "status": "regression_watch",
+        "delta": -0.125
+      }
+    ],
+    "maker": [
+      {
+        "metric": "won",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "entered",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "table",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "playerDeaths",
+        "status": "regression_watch",
+        "delta": 0.25
+      },
+      {
+        "metric": "playerDeaths100Days",
+        "status": "regression_watch",
+        "delta": 0.15953096599556035
+      },
+      {
+        "metric": "communityLost",
+        "status": "regression_watch",
+        "delta": 0.0625
+      },
+      {
+        "metric": "livingNpcs",
+        "status": "regression_watch",
+        "delta": -0.286292422347092
+      }
+    ],
+    "merchant": [
+      {
+        "metric": "won",
+        "status": "regression_watch",
+        "delta": -0.1875
+      },
+      {
+        "metric": "entered",
+        "status": "regression_watch",
+        "delta": -0.1875
+      },
+      {
+        "metric": "table",
+        "status": "regression_watch",
+        "delta": -0.1875
+      },
+      {
+        "metric": "survival60",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "playerDeaths",
+        "status": "regression_signal",
+        "delta": 0.625
+      },
+      {
+        "metric": "playerDeaths100Days",
+        "status": "regression_signal",
+        "delta": 0.5567695887555607
+      },
+      {
+        "metric": "communityLost",
+        "status": "regression_watch",
+        "delta": 0.0625
+      }
+    ],
+    "caregiver": [
+      {
+        "metric": "won",
+        "status": "regression_watch",
+        "delta": -0.125
+      },
+      {
+        "metric": "entered",
+        "status": "regression_watch",
+        "delta": -0.0625
+      },
+      {
+        "metric": "table",
+        "status": "regression_watch",
+        "delta": -0.0625
+      }
+    ]
+  },
+  "verification": {
+    "focusedAssertions": 23,
+    "quick": 153,
+    "full": 925
+  },
+  "limitations": [
+    "16 seeds per policy: screen, not small-effect confirmation",
+    "Calibration collector03ab lacked full zero-use method denominator; final5d retains it and proves unchanged rows/hashes/metrics in four cases. Do not mix different observer digests.",
+    "Fixed-time windows, opportunity funnels, pure noncombat cohorts and 64-seed scorecard confirmation remain open."
+  ],
+  "caseDigestsVerifiedWithNode": 24,
+  "artifactHashTextFormat": "LF as committed; gzip hashes cover exact compressed bytes"
+}

@@ -182,3 +182,12 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
 | World | `docs/WORLD-REGIONS.md` |
 | Table | `docs/TABLE.md` |
 | Kin canon | `docs/KIN.md` (the Taken are off-world; scattered kin are on Earth; both exist) |
+
+## Shared measurement requirement (2026-10-15)
+
+Before tuning gameplay, read docs/MEASUREMENT-PLAN.md and the balanced
+scorecard workflow in docs/SIMULATING.md. Compare matched policies/seeds and
+review survival, community, resource, progression and earned-gear guardrails
+separately. See evidence/2026-10-15/balance-audit.md for the first screen and
+its limits. Collector/proof drift is checked by check.js in quick/full mode.
+Region/nomad ownership stays with Muse; do not import Codex's region data.
