@@ -4243,7 +4243,8 @@
   },
   {
     "biomes": [
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 105,
     "codex": "Not a tree — the world's biggest herb. An old roça always has banana: the first thing planted, the last thing to die.",
@@ -4268,7 +4269,11 @@
       "manaus",
       "belem",
       "loreto",
-      "iquitos"
+      "iquitos",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Musa acuminata (cultivar)",
     "seasons": [
@@ -4495,7 +4500,8 @@
   },
   {
     "biomes": [
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 70,
     "codex": "The weed-tree that feeds everyone. Guava colonizes every clearing — where people were, guava still is.",
@@ -4521,7 +4527,11 @@
       "manaus",
       "belem",
       "loreto",
-      "iquitos"
+      "iquitos",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Psidium guajava",
     "seasons": [
@@ -5460,7 +5470,8 @@
   },
   {
     "biomes": [
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "east_asia_temperate"
     ],
     "caloriesPerUnit": 140,
     "codex": "The floodplain's potato. Taro loves standing water — and it will punish you with a mouthful of needles if you get impatient.",
@@ -5486,7 +5497,12 @@
       "manaus",
       "belem",
       "loreto",
-      "iquitos"
+      "iquitos",
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
     ],
     "scientific": "Colocasia esculenta",
     "seasons": [
@@ -5577,7 +5593,8 @@
   },
   {
     "biomes": [
-      "amazon_rainforest"
+      "amazon_rainforest",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 60,
     "codex": "The fast one. Papaya goes from seed to fruit in a year — the pioneer's fruit, first to colonize every clearing.",
@@ -5602,7 +5619,11 @@
       "manaus",
       "belem",
       "loreto",
-      "iquitos"
+      "iquitos",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Carica papaya",
     "seasons": [
@@ -6200,7 +6221,8 @@
   },
   {
     "biomes": [
-      "sahel_savanna"
+      "sahel_savanna",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 90,
     "codex": "Sour enough to wake the dead, sweet enough to keep you walking. The traveler's tree.",
@@ -6223,7 +6245,11 @@
     "regions": [
       "senegal",
       "mali",
-      "nigeria"
+      "nigeria",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Tamarindus indica",
     "seasons": [
@@ -6428,7 +6454,8 @@
   },
   {
     "biomes": [
-      "sahel_savanna"
+      "sahel_savanna",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 50,
     "codex": "The tree that feeds you twice — leaves in the rains, pods in the dry.",
@@ -6451,7 +6478,11 @@
     "regions": [
       "senegal",
       "nigeria",
-      "mali"
+      "mali",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Moringa oleifera",
     "seasons": [
@@ -6831,7 +6862,8 @@
   },
   {
     "biomes": [
-      "sahel_savanna"
+      "sahel_savanna",
+      "south_asia_monsoon"
     ],
     "caloriesPerUnit": 20,
     "codex": "Medicine with teeth. It cures at a spoonful and punishes at a bowlful.",
@@ -6855,7 +6887,11 @@
       "senegal",
       "nigeria",
       "mali",
-      "niger"
+      "niger",
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka"
     ],
     "scientific": "Azadirachta indica",
     "seasons": [
@@ -7546,8 +7582,7 @@
     "unit": "pod",
     "uses": [],
     "waterContent": "low"
-  }
-,
+  },
   {
     "biomes": [
       "south_asia_monsoon"
@@ -9139,8 +9174,7 @@
     "unit": "a rosary pea seed",
     "uses": [],
     "waterContent": "low"
-  }
-,
+  },
   {
     "biomes": [
       "east_asia_temperate"
@@ -10533,6 +10567,173 @@
     ],
     "unit": "do not harvest",
     "uses": [],
+    "waterContent": "medium"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 60,
+    "codex": "Crisp white corms under the mud — the water chestnut doesn't taste like much until you need crunch more than flavor.",
+    "confidence": "high",
+    "description": "spiky grass tufts in the shallows hiding crisp round corms",
+    "edibility": "cook",
+    "form": "corm",
+    "id": "chinese_water_chestnut",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Water chestnut. Spiky grass in the shallows.",
+      "2": "Parts: the round corms in the mud. Peel, and always cook — ditch water carries flukes.",
+      "3": "Uses: crunch that survives cooking — stir-fry, soup, ground for flour.",
+      "4": "Mastery: rake the mud in fall when the tops brown. Keep peeled corms in clean water. 2x yield."
+    },
+    "lookalikeNote": "True water chestnut is a sedge — spiky grass-like tufts, round crisp corms. Don't confuse with ornamental water plants; if the corm isn't crisp-white inside, don't eat it.",
+    "name": "Water Chestnut",
+    "preparation": "Dig the corms, peel, and boil or stir-fry. Always cook — paddy and ditch water can carry parasites.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Eleocharis dulcis",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "PROSEA Handbook",
+      "field knowledge — Eleocharis dulcis"
+    ],
+    "spoilageDays": 10,
+    "taxon": [
+      "plant",
+      "herb",
+      "chinese_water_chestnut"
+    ],
+    "tileAffinity": [
+      "wetland",
+      "creek"
+    ],
+    "unit": "handful of corms",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "cooked corms; flour"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 60,
+    "codex": "Spring's first vegetable. The shoot is a promise the whole grove keeps — peel it, boil it, and it feeds you like grain.",
+    "confidence": "high",
+    "description": "a pale pointed shoot pushing up through leaf litter",
+    "edibility": "cook",
+    "form": "shoots",
+    "id": "moso_bamboo_shoot",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Bamboo shoot. Pale, pointed, pushing out of the ground near the poles.",
+      "2": "Parts: the tender shoot (peel the sheaths, eat the core). Raw shoots carry taxiphyllin — a cyanide compound. Boiling destroys it.",
+      "3": "Uses: boil 20-30 minutes and discard the water. Slice thin for soup, chunk for stew. A spring staple — harvest daily while they come.",
+      "4": "Mastery: take shoots under 30cm, snap-clean at the base. Boil with the lid off. 2x yield from a good brake."
+    },
+    "lookalikeNote": "Only take shoots you watched emerge from a food bamboo. Ornamental bamboos run far more bitter and toxic — if you didn't see it planted as food, leave it.",
+    "name": "Bamboo Shoot",
+    "preparation": "Peel the tough sheaths, slice, and boil 20-30 minutes; discard the water. Never eat raw.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Phyllostachys edulis",
+    "seasons": [
+      "spring"
+    ],
+    "sources": [
+      "National Geographic — bamboo shoots superfood piece",
+      "guaduabamboo.com edible species list",
+      "bambooweb.info — Phyllostachys edibility"
+    ],
+    "spoilageDays": 3,
+    "taxon": [
+      "plant",
+      "herb",
+      "moso_bamboo_shoot"
+    ],
+    "tileAffinity": [
+      "thicket"
+    ],
+    "unit": "shoot",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "boiled shoots; soup and stew vegetable"
+      }
+    ],
+    "waterContent": "high"
+  },
+  {
+    "biomes": [
+      "east_asia_temperate"
+    ],
+    "caloriesPerUnit": 110,
+    "codex": "Apple-crisp fresh, date-sweet dried. The tree fruits whether or not anyone is watching — plant once, eat for a lifetime.",
+    "confidence": "high",
+    "description": "a small thorny tree with wrinkled reddish-brown fruit",
+    "edibility": "safe",
+    "form": "fruit",
+    "id": "chinese_jujube",
+    "idDifficulty": 2,
+    "knowledgeLevels": {
+      "1": "Jujube. Small tree, wrinkled red-brown fruit.",
+      "2": "Parts: the fruit — crisp like apple when fresh, sweet like dates dried.",
+      "3": "Uses: fresh eating, dried for winter, boiled into tonic soups.",
+      "4": "Mastery: harvest at full red-brown. Dry on the branch or in the sun. 2x yield."
+    },
+    "lookalikeNote": "Ripe jujubes are deep red-brown and wrinkled like big dates. Unripe ones are green-yellow and bland — wait for the wrinkle.",
+    "name": "Jujube",
+    "preparation": "Eat fresh when crisp; dry for winter stores. The wrinkled red fruit is ripe.",
+    "regions": [
+      "china",
+      "beijing",
+      "korea",
+      "seoul",
+      "sichuan"
+    ],
+    "scientific": "Ziziphus jujuba",
+    "seasons": [
+      "fall"
+    ],
+    "sources": [
+      "Flora of China — Ziziphus jujuba"
+    ],
+    "spoilageDays": 14,
+    "taxon": [
+      "tree",
+      "fruit_tree",
+      "chinese_jujube"
+    ],
+    "tileAffinity": [
+      "grove",
+      "meadow"
+    ],
+    "unit": "handful of fruit",
+    "uses": [
+      {
+        "kind": "food",
+        "minLevel": 2,
+        "note": "fresh or dried fruit"
+      }
+    ],
     "waterContent": "medium"
   }
 ]
