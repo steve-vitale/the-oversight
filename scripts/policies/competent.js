@@ -1490,12 +1490,6 @@ function gearUp(Game, ctx) {
       try { if (!w || !w.ammo) return true; return Game.ammoCount(w.ammo) > 0; }
       catch (e) { return true; }
     };
-    const wbonus = (slot) => {
-      const w = eq[slot];
-      if (!w) return -1;
-      const def = (Game.data.items || []).find(d => d.id === (w.itemId || w.id));
-      return ((def || {}).weapon || {}).bonus || 0;
-    };
     // WEAPON SLOT ROUTING (fix 2026-10-12): route exactly like the inventory
     // UI (app.js data-equip-w) — isRangedWeapon (range > 1, which INCLUDES
     // spears), not the def's flavor type. The old `w.type === 'ranged'` check
@@ -1510,55 +1504,58 @@ function gearUp(Game, ctx) {
       } catch (e) {}
       return (w && w.type === 'ranged') ? 'ranged' : 'melee';
     };
-    // WEAPON: best bonus among USABLE weapons in inventory -> melee or ranged slot
-    let bestI = -1, bestB = -1, bestSlot = 'melee';
-    let dryI = -1, dryB = -1, drySlot = 'ranged', dryW = null;
-    for (let i = 0; i < inv.length; i++) {
-      const def = defOf(inv[i]);
-      if (def && def.class === 'weapon') {
+    // Compare the whole owned kit, including what is already worn. Otherwise
+    // a weak packed knife both blocks ammo crafting and displaces a better bow.
+    const weapons = () => {
+      const out = [];
+      const add = (it, fromSlot) => {
+        const def = it && defOf(it);
+        if (!def || def.class !== 'weapon' || (it.units == null ? 1 : it.units) <= 0) return;
         const w = def.weapon || {};
-        const b = w.bonus || 0;
-        const slot = weaponSlot(def, w);
-        if (ammoOk(w)) {
-          if (b > bestB) { bestB = b; bestI = i; bestSlot = slot; }
-        } else if (b > dryB) { dryB = b; dryI = i; drySlot = slot; dryW = w; }
-      }
+        out.push({ it, fromSlot, w, bonus: w.bonus || 0, slot: weaponSlot(def, w), id: it.itemId || it.id });
+      };
+      for (const slot of ['melee', 'ranged', 'weapon']) add((s.equipped || {})[slot], slot);
+      for (const it of s.inventory || []) add(it, null);
+      return out.sort((a, b) => b.bonus - a.bonus);
+    };
+    let owned = weapons(), best = owned.find(c => ammoOk(c.w));
+    const fundedRecipe = c => {
+      const recipe = (Game.data.recipes || []).find(r => r.id === c.w.ammo);
+      const level = ((((Game.state.codex || {}).recipes || {})[c.w.ammo] || {}).level || 0);
+      return recipe && level >= 1 && Object.entries(recipe.materials || {}).every(([m, n]) =>
+        (s.inventory || []).filter(it => m === 'bait' ? (it.kcalEach || 0) > 0 : it.material === m)
+          .reduce((sum, it) => sum + (it.units || 0), 0) >= n) ? recipe : null;
+    };
+    const upgrade = owned.find(c => !ammoOk(c.w) && (!best || c.bonus > best.bonus) && fundedRecipe(c));
+    if (upgrade && !Game.over && !(Game.inCombat && Game.inCombat())) {
+      const bearer = Game.villagerId, recipe = fundedRecipe(upgrade);
+      const made = Game.craft(recipe.id);
+      if (Game.over || bearer !== Game.villagerId) return;
+      if (made) { ctx.ammoCrafts = (ctx.ammoCrafts || 0) + 1; if (recipe.id === 'arrow') ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
+      owned = weapons(); best = owned.find(c => ammoOk(c.w));
     }
-    if (bestI < 0 && dryI >= 0) {
-      // Replenish the weapon's actual ammunition, only with known recipes
-      // and real materials. Craft replaces the pack array and shifts indices.
-      const dryId = inv[dryI].itemId || inv[dryI].id;
-      const recipe = (Game.data.recipes || []).find(r => r.id === dryW.ammo);
-      const level = ((((Game.state.codex || {}).recipes || {})[dryW.ammo] || {}).level || 0);
-      const ready = recipe && level >= 1 && Object.entries(recipe.materials || {}).every(([m, n]) =>
-        inv.filter(it => m === 'bait' ? (it.kcalEach || 0) > 0 : it.material === m).reduce((sum, it) => sum + (it.units || 0), 0) >= n);
-      if (ready && !Game.over && !(Game.inCombat && Game.inCombat())) {
-        const bearer = Game.villagerId;
-        const made = Game.craft(recipe.id);
-        if (Game.over || bearer !== Game.villagerId) return;
-        if (made) { ctx.ammoCrafts = (ctx.ammoCrafts || 0) + 1; if (recipe.id === 'arrow') ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
-        inv = s.inventory || [];
-        dryI = inv.findIndex(it => (it.itemId || it.id) === dryId);
-      }
-      if (dryI >= 0 && ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; }
-      else ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
-    }
-    if (bestI >= 0 && bestB > wbonus(bestSlot)) {
-      try { Game.equip(bestI, bestSlot); ctx.geared = (ctx.geared || 0) + 1; } catch (e) {}
-    }
-    if (bestI < 0) {
-      // nothing usable: unequip any dry ranged weapon rather than posing
-      try {
-        for (const slot of Object.keys(eq)) {
-          const cur = eq[slot]; if (!cur) continue;
-          const def = (Game.data.items || []).find(d => d.id === (cur.itemId || cur.id));
-          const w = def && def.weapon;
-          if (w && w.ammo && !ammoOk(w) && Game.unequip) {
-            try { Game.unequip(slot); ctx.unarmedDry = (ctx.unarmedDry || 0) + 1; } catch (e2) {}
+    if (best) {
+      let activeSlot = best.fromSlot;
+      if (!activeSlot) {
+        const index = (s.inventory || []).findIndex(it => it === best.it);
+        if (index >= 0) {
+          Game.equip(index, best.slot);
+          if (((s.equipped || {})[best.slot] || {}).itemId === best.id) {
+            ctx.geared = (ctx.geared || 0) + 1; activeSlot = best.slot;
           }
         }
-      } catch (e) {}
+      }
+      // The game's public weapon reader uses melee first. Take off the
+      // weaker blocker through the same public Take off action as players.
+      if (activeSlot === 'ranged' && (s.equipped || {}).melee) Game.unequip('melee');
+      if (activeSlot === 'weapon') for (const slot of ['melee', 'ranged']) if ((s.equipped || {})[slot]) Game.unequip(slot);
+    } else {
+      if (owned.some(c => c.w.ammo)) ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
+      for (const c of owned) if (c.fromSlot && c.w.ammo && !ammoOk(c.w)) {
+        Game.unequip(c.fromSlot); ctx.unarmedDry = (ctx.unarmedDry || 0) + 1;
+      }
     }
+    inv = s.inventory || [];
     // ARMOR (longsim combat r6 2026-10-12): wear the BEST armor owned, and
     // craft bark armor when the recipe is known. Two blanks closed:
     // (1) the old code equipped the FIRST armor-def item in inventory order
