@@ -1208,11 +1208,15 @@
       if ((m.fiCountdown || 0) <= 0) { this.say('No countdown running — nothing to feed. (It declares once per fight.)'); return false; }
       const s = this.state.scholar;
       if (kind === 'item') {
-        const inv = (s.inventory || []).filter(it => (it.units || 1) > 0);
-        if (!inv.length) { this.say('Your pack is empty — nothing to feed it. (Try a memory.)'); return false; }
-        const it = inv[0], iid = it.itemId || it.id, nm = it.name || iid;
+        const inv = s.inventory || [];
+        const idx = inv.findIndex(it => (it.units == null ? 1 : it.units) > 0);
+        if (idx < 0) { this.say('Your pack is empty — nothing to feed it. (Try a memory.)'); return false; }
+        const it = inv[idx], iid = it.itemId || it.id, nm = it.name || iid;
         p.acted = true;
-        try { this.consumeItem(iid, 1); } catch (e) {}
+        // Consume this exact positive stack, including food without an ID.
+        // Looking it up again by ID can select an earlier exhausted stack.
+        it.units = (it.units == null ? 1 : it.units) - 1;
+        if (it.units <= 0) inv.splice(idx, 1);
         m.fiCountdown = null;
         this.say('🎁 You feed it ' + nm + '. The title card pauses — chews — swallows. "...SATISFIED." The finale passes. (Once per fight — it will not declare again.)');
       } else if (kind === 'memory') {

@@ -495,6 +495,7 @@ const SIG_PREF = {
   tbCxOffScript: [8, 2], tbEdContradict: [6, 2], tbEdRetrieve: [5, 1], 'tbRrLeaveMessage:left': [6, 1], 'tbRrLeaveMessage:big': [5, 1],
   tbSpAsk: [6, 1], tbSpCheapFulfill: [5, 1], tbTsOwnVenue: [7, 1], 'tbFiSacrifice:memory': [8, 3, (I) => (I.s.kcal || 0) > 900],
   'tbNnBadNote:smaller': [7, 1], tbNnReadMemo: [4, 1],
+  tbFiRedPen: [12, 1], tbFiLeakedScript: [11, 1], tbFiBadNote: [9, 1],
 };
 function sigButtons(Game, f, p, mons, ctx) {
   let html = '';
@@ -517,6 +518,7 @@ function sigButtons(Game, f, p, mons, ctx) {
     else if (get('data-sigw3b')) { fn = get('data-sigw3b'); }
     else if (get('data-sigw4')) { fn = get('data-sigw4'); }
     else if (get('data-sigw5')) { fn = get('data-sigw5'); arg = get('data-arg'); }
+    else if (get('data-finale')) { fn = get('data-finale'); }
     else if (get('id') && SIG_W3C_IDS[get('id')]) { fn = SIG_W3C_IDS[get('id')]; }
     if (!fn) continue;
     if (!call) { const f2 = fn, a2 = arg; call = () => (a2 ? Game[f2](a2) : Game[f2]()); }
