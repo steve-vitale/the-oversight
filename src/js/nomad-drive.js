@@ -1,41 +1,30 @@
 // @ontology
 // system: nomad-drive
-// description: The Long Way Home — the road driver
-//   (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "Expedition is leaving your
-//   village as a nomad to find remaining family. That should be another bonus
-//   ending."). Plans the itinerary at departure, triggers reunions after days
-//   on a leg, determines fates deterministically, applies outcomes (joined
-//   kin become companions), relocates moved-on kin, closes the road when every
-//   living scattered kin is resolved, and owns the leave / move-on / settle UI
-//   taps (two-tap confirms for the irrevocable ones).
+// description: The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, and owns the leave / move-on / settle UI taps.
 // provides:
-//   - Game.nomadDrive = { planLegs(), syncItinerary(), fateFor(name, moves),
-//     maybeReunion(), resolveReunion(leg), moveKinOn(entry),
-//     leaveTap(), moveOnTap(), settleTap() }
+//   - Game.nomadDrive (hooks wrap nomad.start/enterLeg/daily and Game.playerDeath, guarded wrap-once)
+//   - planLegs()
+//   - syncItinerary()
+//   - fateFor()
+//   - maybeReunion()
+//   - resolveReunion()
+//   - moveKinOn()
+//   - checkAllFound()
+//   - leaveTap()
+//   - moveOnTap()
+//   - settleTap()
 // rules:
-//   - itinerary: departure plans one leg per living scattered kin whose
-//     region is known; newly sharpened trails join the itinerary by daily sync.
-//   - reunion_timing: a leg's reunion fires once, after 3+ days on the leg —
-//     the party lives there; word gets around. Never a prompt.
-//   - deterministic_fate: fate = hash(kinName + worldSeed + moves), weighted
-//     alive .5 / changed .2 / dead .15 / moved .15; 'moved' excluded after 2
-//     moves (they can't run forever).
-//   - moved_on: the kin relocates to a new deterministic region (never the
-//     current leg's, never the landing); the trail resets to vague and must
-//     be re-sharpened; the itinerary syncs when it is.
-//   - joined_kin: an 'alive' reunion joins the party as a companion ('kin:'
-//     id, road.companions) when there's room; companions eat and die like
-//     anyone but never bear the Codex.
-//   - all_found: when every living scattered kin resolves alive/changed/dead,
-//     the road ends 'all-found'. Unresolvable kin (region never learned) don't
-//     block it — the player can always settle.
-//   - two_tap: leaving the village and settling are irrevocable; the first
-//     tap says the cost honestly, the second commits. The confirm is
-//     tap-state only (never saved).
+//   - itinerary: departure plans one leg per living scattered kin whose region is known; newly sharpened trails join by daily sync (code: planLegs, syncItinerary)
+//   - reunion_timing: one reunion per leg per day after 3+ days living there; never a prompt (code: maybeReunion)
+//   - deterministic_fate: fate = hash(kinName + worldSeed + moves), alive .5 / changed .2 / dead .15 / moved .15; moved excluded after 2 moves (code: fateFor)
+//   - moved_on: the kin relocates to a new deterministic region (never the leg's, never the landing); the trail resets to vague (code: moveKinOn)
+//   - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
+//   - all_found: every scattered kin resolved alive/changed/dead closes the road all-found (code: checkAllFound)
+//   - two_tap: leaving and settling are irrevocable: first tap says the cost, second commits; tap-state only, never saved (code: leaveTap, settleTap)
 // consumes:
-//   - Game.nomad (start/addLeg/enterLeg/departLeg/daily/endRoad/markKinFound/
-//     party/onRoad/canLeave, state.road), Game.nomadScenes (reunionScene,
-//     sharpenTrail), Game.nomadWild (travelEvent, guarded)
+//   - Game.nomad start/addLeg/enterLeg/departLeg/daily/endRoad/markKinFound/party/onRoad/canLeave, state.road (nomad.js)
+//   - Game.nomadScenes reunionScene/sharpenTrail (nomad-scenes.js, guarded)
+//   - Game.nomadWild travelEvent (nomad-wild.js, guarded)
 //   - Game.worldKin(), Game.state.world, Game.map.worldSeed, Game.data.regions
 (function () {
   'use strict';
