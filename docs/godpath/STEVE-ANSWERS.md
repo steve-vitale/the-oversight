@@ -7,6 +7,17 @@ verbatim.
 
 ---
 
+## 2026-10-15 (latest, recovered from the interrupted Claude session)
+
+Context: **Ability/god-path system design**, after the endgame and deaths diagnoses.
+
+"Address all gaps"
+
+"Health should scale if gear can’t carry it alone. But yes abilities and allies should do a lot of lifting. The beam is supposed to not be as lethal to sufficiently tiered gear. But with human class gear yes surprisingly lethal, just maybe not that lethal. Limit raids to current wave."
+
+Implementation and measured choices are in `evidence/2026-10-15/resume-claude.md`.
+Health growth is conditional, not an instruction to add HP regardless of gear.
+
 ## 2026-10-15
 
 "Keep on running simulations and adjusting levers!"

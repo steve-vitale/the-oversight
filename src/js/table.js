@@ -83,7 +83,7 @@
         let w1 = 0, w2 = 0, w3 = 0;
         for (const mid of Object.keys(faced)) {
           const w = faced[mid] | 0;
-          if (w === 1) w1++; else if (w === 2) w2++; else if (w === 3) w3++;
+          if (w === 1) w1++; else if (w === 2) w2++; else if (w >= 3 && (w === 3 || ((this.data.survivalBalance || {}).table || {}).cumulativeLateWave !== false)) w3++;
         }
         const contestsN = (d && d.contestsSurvived) | 0;
         const pg = this.progState();
@@ -105,6 +105,13 @@
     // ============ EARNED PATHS ============
     // Each path def provides prereq() -> {earned, strength 0-100, why}.
     // Unearned paths are named and priced, never silently hidden.
+    // Saturating evidence curves preserve differences above the old hard cap.
+    tableStanding(path, evidence) {
+      const k = ((((this.data || {}).survivalBalance || {}).table || {}).standing || {})[path];
+      if (!k) return Math.min(100, evidence);
+      const n = Math.max(0, Number(evidence) || 0);
+      return Math.round(k.base + (100 - k.base) * n / (n + k.scale));
+    },
     tableEarnedPaths() {
       const out = [];
       try {
@@ -577,6 +584,24 @@
         branchAbils = rl > 0 ? ab.light : rl < 0 ? ab.dark : [];
       }
       grantList(ab.shared); grantList(branchAbils);
+      const tableKnobs = ((this.data.survivalBalance || {}).table) || {};
+      const finalStake = (tableKnobs.finalStakes || {})[pathId];
+      if (finalStake) {
+        const standing = (this.tableEarnedPaths().find(p => p.id === pathId) || {}).strength || 0;
+        if (standing >= (tableKnobs.strongOpeningStanding || 75)) {
+          T.meters[finalStake.meter] = (T.meters[finalStake.meter] || 0) + 1;
+          this.say('Your standing carries into the room: an extra opening advantage.');
+        }
+        this.say(`The closing bargain needs ${finalStake.meter} ${finalStake.min}+. Spend it carefully: below that, this door fails.`);
+      }
+      if (T.weakened > 0) {
+        // Failed doors spend the opening advantage of the next challenge.
+        const bad = new Set(['horror', 'cage', 'debt', 'heat']);
+        for (const k of Object.keys(T.meters)) {
+          if (T.meters[k] > 0 && !bad.has(k)) T.meters[k] = Math.max(0, T.meters[k] - T.weakened);
+        }
+        this.say(`The previous refusal follows you in: opening advantages −${T.weakened}.`);
+      }
       const seat = this.tableSeat();
       // The show component: televised in the path's genre.
       this.tableLiveWrap(def.showLive);
@@ -714,8 +739,21 @@
       const failDef = (def && def.failure) || {};
       T.phase = 'downgrade';
       T.weakened = (T.weakened | 0) + 1;
+      T.failedPaths = Array.from(new Set((T.failedPaths || []).concat(T.path)));
+      const cost = ((this.data.survivalBalance || {}).table) || {};
+      const sch = this.state.scholar;
+      const paid = Math.min(sch.kcal || 0, cost.failureKcal ?? 500);
+      sch.kcal = Math.max(0, (sch.kcal || 0) - paid);
+      this.say(`The failed door costs ${paid} kcal, closes for this sitting, and spends an opening advantage in the next challenge.`);
+      if (T.weakened >= (cost.maxFailures || 2)) {
+        T.phase = 'done'; sch.tableChoices = null;
+        this.over = true; this.won = false;
+        this.say('The last smaller door closes. Haven leaves the Table alive, with no agreement. The world remembers the attempt.');
+        try { this.recordLegend({ outcome: 'table-lost', frame: T.path, choice: reason }); this.save(); } catch (e) { console.warn('[table] failed sitting', e); }
+        return;
+      }
       this.say(`◈ THE TABLE FALTERS — ${reason}. ${(failDef.beat) || 'The ring dims. The faces confer. The offer changes.'}`);
-      const remaining = this.tableEarnedPaths().filter(p => p.earned && p.id !== T.path);
+      const remaining = this.tableEarnedPaths().filter(p => p.earned && !(T.failedPaths || []).includes(p.id));
       if (!remaining.length) {
         // No path left: the honest rock-bottom — Assimilated on the
         // table's terms, or the walk with nothing. The story still ends.
@@ -742,7 +780,7 @@
         try { this.save(); } catch (e) {}
         return;
       }
-      const lines = remaining.map(p => `<p><b>◇ ${this.escHtml(p.name)}</b> — weakened terms (standing ${Math.max(5, (p.strength | 0) - 25 * T.weakened)})</p>`).join('');
+      const lines = remaining.map(p => `<p><b>◇ ${this.escHtml(p.name)}</b> — weakened terms (standing ${Math.max(5, (p.strength | 0) - (((this.data.survivalBalance || {}).table || {}).failureStanding || 25) * T.weakened)})</p>`).join('');
       this.tablePrompt(
         `<p>The ring dims. The faces confer. The offer changes.</p><p>${this.escHtml(failDef.offerLine || 'The table does not punish failure with death. It punishes it with smaller doors.')}</p>` + lines,
         remaining.map(p => ({ id: 'downgrade:' + p.id, label: `Take the weakened path of ${p.name}` })),
@@ -754,6 +792,7 @@
       const def = pathDef(pathId);
       if (!def) return;
       const T = this.tableState();
+      if ((T.failedPaths || []).includes(pathId)) return;
       this.say(`You take the smaller door. It is still a door.`);
       this.tableStartPath(pathId);
       try { this.save(); } catch (e) {}
@@ -764,6 +803,11 @@
       const T = this.tableState();
       const def = pathDef(T.path);
       if (!def) return;
+      const stake = ((((this.data.survivalBalance || {}).table || {}).finalStakes) || {})[T.path];
+      if (stake && !this.progState().networkFallen && ((T.meters || {})[stake.meter] || 0) < stake.min) {
+        this.tableFail(`the closing bargain needs ${stake.meter} ${stake.min}+, but you carried only ${((T.meters || {})[stake.meter] || 0)}`);
+        return;
+      }
       T.phase = 'finals';
       const branch = T.branch || 'light';
       const finals = (def.finals && (def.finals[branch] || def.finals.light)) || [];

@@ -106,6 +106,21 @@ async function main() {
   check('win-screen-frame', F(/toUpperCase\(\)/) && F(/epithet/),
     'won screen titles on the ending frame, not a hardcoded week');
 
+  // Render the real ending function with a small DOM surface. Losing the
+  // negotiation is not a bearer death, and the replay button must call the
+  // title-screen function rather than a shadowed title string.
+  let restarted = 0;
+  const replay = {}, screen = { innerHTML: '' };
+  const sandbox = {
+    Game: { status: () => ({ won: false, villageLost: false, day: 100, lineage: [{ name: 'Bearer', outcome: 'table-lost' }] }), codexEntries: () => [] },
+    screen, esc: String, bar: (name, stamp) => stamp,
+    document: { getElementById: () => replay }, title: () => { restarted++; },
+  };
+  require('vm').runInNewContext(endBlock + '\nending();', sandbox);
+  check('failed-table-honest-screen', /THE TABLE CLOSES/.test(screen.innerHTML) && /Haven leaves alive/.test(screen.innerHTML) && !/THE WOODS KEEP YOU/.test(screen.innerHTML), 'an unsuccessful agreement is not a dead bearer');
+  replay.onclick();
+  check('ending-replay-button', restarted === 1, 'Begin a new village returns to title');
+
   console.log(`\n${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 }

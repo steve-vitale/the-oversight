@@ -18938,23 +18938,27 @@
         return `<p class="small">🕯️ ${nm} — ${dstr}${tail}</p>`;
       }).join('') + `</div>`
       : '';
-    let title, sub, record;
+    let endTitle, sub, record;
     if (st.won) {
-      title = String(last.epithet || 'the ending').toUpperCase();
+      endTitle = String(last.epithet || 'the ending').toUpperCase();
       sub = 'The village endures. The Codex closes on a story the galaxy will retell.';
       record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}`;
+    } else if (last.outcome === 'table-lost') {
+      endTitle = 'THE TABLE CLOSES';
+      sub = 'Haven leaves alive, without an agreement. The doors closed; the village and its story remain.';
+      record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}`;
     } else if (st.villageLost) {
-      title = 'THE VILLAGE DIES OUT';
+      endTitle = 'THE VILLAGE DIES OUT';
       sub = 'No one is left to pick up the Codex. The village dies out — quietly, the way villages do. The season ends here.';
       record = `Days: ${st.day} · Bearers: ${lin.length || 1} · Plants learned: ${entries}<br>The Codex closes. Nobody will carry it.`;
     } else {
-      title = 'THE WOODS KEEP YOU';
+      endTitle = 'THE WOODS KEEP YOU';
       sub = 'The story ends here. The Codex keeps what was brought home.';
       record = `Days: ${st.day} · Plants learned: ${entries}`;
     }
     screen.innerHTML = `
-      ${bar('scattering://end', st.won ? 'survived' : 'fallen')}
-      <h1 class="title" style="font-size:26px">${esc(title)}</h1>
+      ${bar('scattering://end', st.won ? 'survived' : last.outcome === 'table-lost' ? 'no agreement' : 'fallen')}
+      <h1 class="title" style="font-size:26px">${esc(endTitle)}</h1>
       <p class="small">${esc(sub)}</p>
       <div class="card"><h3>Expedition record</h3>
         <p class="small">${record}</p></div>

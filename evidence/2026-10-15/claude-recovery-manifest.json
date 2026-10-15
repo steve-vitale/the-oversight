@@ -1,0 +1,144 @@
+{
+  "source": "Claude Code cloud session session_01QPzbuApDmn3auifxsV7pNN",
+  "upstream": "7d011395d99bdfca71892d0f3a23a8a332f3ab15",
+  "recovery_copies": ".git/claude-recovery (local originals, outside tracked source)",
+  "notes": [
+    "The file viewer truncates files at 1 MB. The parent game.js prefix was NOT applied. Two tail fixes were ported against the complete Git source and verified with the recovered regression tests.",
+    "The local transcript is preserved under the Claude projects directory as 2559eb45-a3f0-4d14-9769-3fac0108a1bd.jsonl.",
+    "Worker source was recovered before changing gameplay: god verbs, completed bot followups, and interrupted cooking/treatment/skill lesson tuning."
+  ],
+  "files": [
+    {
+      "path": "botworker/scripts/policies/capable.js",
+      "bytes": 68374,
+      "sha256": "978cc9006800aaacf9322a17e23d1b86f6029e912da9fc9b436baf2e6d9f69b7",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "botworker/scripts/sweep-dashboard.js",
+      "bytes": 24814,
+      "sha256": "74de56185a3e384738cd9a17dd3a3deeb6473ffa04a359317a8fb8f84e17f407",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "botworker/scripts/test-capable-death-fixes-20261015.js",
+      "bytes": 14361,
+      "sha256": "9c5aa42ee89e7f0e7d6d793c54e5478809b253eee3970a360a1ed5625410ff43",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "botworker/scripts/test-capable-greedy-20261015.js",
+      "bytes": 6333,
+      "sha256": "ca1470bc49acdbdcfba593112c4562a114a7b53361643571887ed910a06dc877",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/index.html",
+      "bytes": 18163,
+      "sha256": "42d1d99c9749310569e091e2779f91401e3c6938b8ff5874f5cf15ca15d21b70",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/scripts/check-wired.js",
+      "bytes": 4186,
+      "sha256": "29c03b304b3e58d3ddced6668b053a85ba0ff1086de14f43f251602b3148390b",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/scripts/policies/capable.js",
+      "bytes": 53945,
+      "sha256": "920724fc50d288ec41729b6ded11920ffe0464a3fe74a28609d34f6a5b2e295f",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/scripts/test-god-verbs-wired-20261015.js",
+      "bytes": 27665,
+      "sha256": "570ff2773f44a52d0844e872e8141fc54f7a3ca86f5a3d24eb7ffbe309c6dc46",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/src/data/godpaths.json",
+      "bytes": 48526,
+      "sha256": "e260794410c69e1fddb039d9990a99c333c59c68ea9e5cb4e3296a43805b055f",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/src/js/abilityActions.js",
+      "bytes": 105741,
+      "sha256": "88772ca231d6ffc051d6d226e52fab838152e5d7a24a5e5b5f7ea973fcaa54f7",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/src/js/godhood.js",
+      "bytes": 46195,
+      "sha256": "702c9330ab566e8f43a00e4bc30d1cd178f980055ba9adb38e27679f2f9baf4e",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "godworker/src/js/godverbs.js",
+      "bytes": 65143,
+      "sha256": "0105a72dfaae5216d032198703ba4822142f2d2dd593818808a24cb03816ae44",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/evidence/2026-10-15/diagnosis-deaths.md",
+      "bytes": 15221,
+      "sha256": "a13a0d35157653222882709f50566a6379cc82c9f6e648c341d8538d94a85f5f",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/green-list.txt",
+      "bytes": 35466,
+      "sha256": "0c8bad95da42114e711944eb3a9df6315d31f233ccee7200769d22573a2951d1",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/policies/capable.js",
+      "bytes": 61194,
+      "sha256": "ea54b595aeb663f6c0271c77de17c61163e4b141fcb85084ffe233a204ae6077",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/sim-harness.js",
+      "bytes": 38285,
+      "sha256": "ec5c3eb24d350487209598410442ca64d673fa7b395768ab2b2ad1388bf11eca",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/test-arena-cotaken-succession-20261015.js",
+      "bytes": 2858,
+      "sha256": "52ffcfe9816c497986d84a2125f292482bed37cddfdab139474eba2cf4886895",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/test-capable-death-fixes-20261015.js",
+      "bytes": 7802,
+      "sha256": "56fe3c47b92a3a963431e8ed05cf3babc32f5cafe782bdc2c984225c49c753e3",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/scripts/test-palisade-sleep-20261015.js",
+      "bytes": 2203,
+      "sha256": "d6da0d9619b8424e13b64ce60d1f832703d2cd65b880518e2786dfb19399bd9b",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "parent/src/js/game.js",
+      "bytes": 1000000,
+      "sha256": "461fbb29354a5f88b4865bdbf50d8700221dc73601602f6146ab27af34f867cc",
+      "applied": false
+    },
+    {
+      "path": "tuningworker/scripts/policies/capable.js",
+      "bytes": 52155,
+      "sha256": "9e425000a3b6c1a95c5a4df766f9b3feee1d5784f944c85cf4432456c4c7b9ca",
+      "applied": "merged or used as recovery evidence"
+    },
+    {
+      "path": "tuningworker/scripts/policies/competent.js",
+      "bytes": 134751,
+      "sha256": "ab1a9f4653ecc746d60bc259caf1d74a64363fe4c59208e9059fb7de8e63f5dc",
+      "applied": "merged or used as recovery evidence"
+    }
+  ]
+}

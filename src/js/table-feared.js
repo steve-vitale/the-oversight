@@ -53,7 +53,7 @@
       if (!seat || seat.seat === 'none') return { earned: false, strength: 0, why: 'No seat at the table.' };
       const score = ((L.might | 0) + (L.killed | 0));
       if (score < 6) return { earned: false, strength: 0, why: `The table has seen fiercer ledgers (might+killed ${score} — the footage isn't there yet).` };
-      const strength = Math.min(100, 25 + distinct * 3 + ((L.might | 0) * 2));
+      const strength = this.tableStanding('feared', distinct * 3 + ((L.might | 0) * 2));
       return { earned: true, strength, why: `${distinct} distinct monsters faced blow-by-blow. The footage exists, and it plays unasked.` };
     },
     abilities: {

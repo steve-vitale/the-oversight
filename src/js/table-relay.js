@@ -67,8 +67,8 @@
       if (!seat || seat.seat === 'none') return { earned: false, strength: 0, why: 'No seat at the table.' };
       let bond = 0;
       try { bond = (typeof Game.sysBond === 'function') ? Game.sysBond() : 0; } catch (e) {}
-      if (stage >= 3) return { earned: true, strength: Math.min(100, 40 + bond * 10), why: `Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond ${bond})` };
-      if (stage >= 2 && sw) return { earned: true, strength: 25 + bond * 5, why: `Stage 2 with the relay office — the wires know your hands. (sysbond ${bond})` };
+      if (stage >= 3) return { earned: true, strength: Game.tableStanding('relay', 15 + bond * 10), why: `Stage-3 neural integration. The matrix doesn't care about your kingdom — it cares how deep you are. (sysbond ${bond})` };
+      if (stage >= 2 && sw) return { earned: true, strength: Game.tableStanding('relay', bond * 5), why: `Stage 2 with the relay office — the wires know your hands. (sysbond ${bond})` };
       return { earned: false, strength: 0, why: 'The relay path needs stage-3 integration, or stage 2 with the relay office held.' };
     },
     abilities: {

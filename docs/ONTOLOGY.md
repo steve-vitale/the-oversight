@@ -505,7 +505,7 @@ Endings by build (Steve 2026-10-14: "The ending you can win is set as you enter 
 
 **Consumes:** state.scholar, state.titans, progState(), tableState(), playerTracks(), godpathClass(), godpathData(), tablePathName() (table.js; the {path} token), relayLean() (the grey relay's coda moral), Game.data.tableBeats (src/data/table-beats.json), Game.data.tableEndings (src/data/table-endings.json), Game.data.tracks
 
-### calorie-engine (`engine/calories.js`)
+### calorie-engine (`engine\calories.js`)
 The master clock. Every cost in the game flows through here. Needs never decrease with level; power costs calories.
 
 **Provides:** BASE_BMR (code: calories.js), ACTIVE_DAY (code: calories.js), ACTION_COSTS (code: calories.js), dailyNeed(scholar), resolveDay(scholar, village)
@@ -515,7 +515,7 @@ The master clock. Every cost in the game flows through here. Needs never decreas
 
 **Consumes:** (none documented)
 
-### combat-engine (`engine/combat.js`)
+### combat-engine (`engine\combat.js`)
 Turn-based grid combat pure helpers. 9x9 detail grid, speed order, square-targeted telegraphed attacks.
 
 **Provides:** roll(range), cheb(ax, ay, bx, by), inGrid(x, y), turnOrder(fighters), patternCells(pattern, ax, ay, tx, ty), isFoe(a, b), nearestEnemy(fighters, f), stepToward(fx, fy, tx, ty, blocked, avoidCells), stepAway(fx, fy, tx, ty, blocked, avoidCells), villagerDecide(f, fighters, blocked, dangerCells)
@@ -525,7 +525,7 @@ Turn-based grid combat pure helpers. 9x9 detail grid, speed order, square-target
 
 **Consumes:** (none documented)
 
-### day-engine (`engine/day.js`)
+### day-engine (`engine\day.js`)
 Day resolution order. The turn structure — one day, one turn. Order is load-bearing.
 
 **Provides:** PHASES (code: day.js), newDay(scholar)
@@ -535,7 +535,7 @@ Day resolution order. The turn structure — one day, one turn. Order is load-be
 
 **Consumes:** (none documented)
 
-### forage-engine (`engine/forage.js`)
+### forage-engine (`engine\forage.js`)
 Foraging resolver. Tile + biome + day yields plant yield from plants.json + biomes.json data. Pure logic.
 
 **Provides:** weightedPick(table, rng), forage(tile, biome, plants, scholar, codex, abilitiesData, bounty, opts), canForage(tile)
@@ -545,7 +545,7 @@ Foraging resolver. Tile + biome + day yields plant yield from plants.json + biom
 
 **Consumes:** (none documented)
 
-### modifier-pipeline (`engine/modifiers.js`)
+### modifier-pipeline (`engine\modifiers.js`)
 The scalability core. Every computed value resolves base -> collect modifiers -> apply adds, then multiplies -> final.
 
 **Provides:** resolve(base, target, modifiers, context), checkCondition(cond, ctx), levelOf(entry), scaledValue(m, level), describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe), collectModifiers(scholar, abilitiesData), hasAbility(scholar, id), abilityLevel(scholar, id), ownedEntries(scholar)        (slots + background + skill-lane abilities known via codex skills), collectKnowledgeModifiers(codexSkills, knowledgeData), hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
@@ -555,7 +555,7 @@ The scalability core. Every computed value resolves base -> collect modifiers ->
 
 **Consumes:** (none documented)
 
-### game-state (`engine/state.js`)
+### game-state (`engine\state.js`)
 State factories, versioned save/load. Village / scholars / Codex / run are independent so one can reset cleanly.
 
 **Provides:** SAVE_VERSION (code: state.js), newVillage(), newScholar(villagerId), newCodex(), newState(), saveKey(state), save(state) -> true | 'tombstoned' | 'stale' | false: honest save status; false on quota/blocked/unserializable, 'tombstoned' when the run's key was wiped (break-it 2026-10-09 r5), 'stale' when another tab saved this run newer (cross-tab overwrite refused, break-it 2026-10-09 r7), listSaves(opts): opts.includeStale surfaces version-mismatched saves with no migration path flagged {stale:true} (break-it 2026-10-09); self-heals a corrupt/missing index by adopting orphaned blobs from disk (break-it 2026-10-09 r7), load(key): refuses tombstoned keys; runs registered migrations for old versions (break-it 2026-10-09 r7), wipe(key, reason?): leaves a per-key tombstone so a wiped run stays dead (break-it 2026-10-09 r5), wipeAll(): tombstones every removed key — a stale tab's autosave can't resurrect wiped runs (break-it 2026-10-09 r7), quarantineKey(key): move corrupt save data to a capped dated quarantine key; writes a one-shot player notice + a restore manifest (break-it 2026-10-09 r7), takeQuarantineNotice(): one-shot {key, at} for the title screen toast (break-it 2026-10-09 r7), listQuarantines(): restorable snapshots [{qkey, origKey, at}] (break-it 2026-10-09 r7), restoreQuarantine(qkey) -> true | 'occupied' | 'corrupt' | 'unusable' | false (break-it 2026-10-09 r7; 'unusable' added break-it persistence r1 2026-10-10: parseable but never-loadable snapshots refuse instead of lying "restored"), MIGRATIONS: {targetVersion: (state)=>state} forward-migration registry; the runner owns version stamping, fns must not set version (break-it 2026-10-09 r7), migrateSave(state): run registered migrations forward; null when no path or version > SAVE_VERSION (break-it 2026-10-09 r7), hasMigrationPath(fromVersion): dry-run path check, no mutation (break-it 2026-10-09 r7)
@@ -834,6 +834,21 @@ The god-path runtime (2026-10-14 redesign, Steve: "Gods are rough representative
 - never_silent: every verb narrates, success or refusal; errors are reported via warn (code: warn)
 
 **Consumes:** Game.data.godpaths, Game.data.abilities, state.scholar.abilities, state.village.npcAbilities, useAbility, tbFighter, tbCanOccupy, tbBlocked, tbDamage, tbVillagerTurn, addHealth, npcNeeds, keepsakeGrow, wornKeepsakes
+
+### godverbs (`godverbs.js`)
+THE GOD VERBS IN PLAY (2026-10-15). Steve: "Paint a path towards functional godhood. If they learn and experiment enough, people can get there and it's scary good." Until today ascension changed narration, sprite and the ending key only: 9 of the 10 god verbs had no caller. This module puts each god's ONE verb (src/data/godpaths.json god.verb + god.play) into real play for whoever ascended, the player and villagers through the same functions ("when in doubt we treat them the same way"): combat actions in the fight grid (the pseudo-ability 'god' through useAbility), reactive passives in tbDamage, daily actions out of a fight, and the villager's own cast in tactical and off-screen fights. Every verb burns food (kcal; a villager's belly at kcal/25 hunger) and keeps its weakness. The numbers live in god.play.
+
+**Provides:** holderGod(who) -> god id for 'player' or a villager id (the first ascension), or null, fighterGod(fighter) -> god id of a fight participant on our side, or null, godPlay(godId) -> the god's play data (godpaths.json god.play), godActionDef(actionId) / godActionReady(actionId) / godActivatables() -> the 'god' pseudo-ability for useAbility and the action bar, godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs), godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
+
+**Rules:**
+- same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
+- food_powered: every verb pays kcal (player) or belly (villager, kcal/25 hunger, refused at hunger >= 80); the player's hunger gate (500 kcal) applies to passives too (code: canPay, pay)
+- weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
+- never_skips_dinner: no verb feeds its own holder (Feed the Multitude feeds other bellies; the phoenix cannot rise through starvation) (code: feedMultitude, phoenixPlayer)
+- table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
+- never_silent: every verb narrates; errors are reported via warn (code: warn)
+
+**Consumes:** Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood, useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie, Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath), Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs), Scattering.combat.nearestEnemy (monster aim)
 
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
