@@ -44,6 +44,14 @@ async function trajectoryHash(pid, seed, variant) {
 }
 
 (async () => {
+  // Kill-protocol INFO-SKIP: the arm was killed and standing.js reverted
+  // byte-clean — the env-gated variants cannot exist. Skip, don't crash
+  // (never MODULE_NOT_FOUND).
+  const probe = await loadGame({ seed: 1, mode: 'plentycap-detgate-probe' });
+  if (typeof probe.Game._standingVariant !== 'function') {
+    console.log('INFO-SKIP: plentycap layer deleted per kill protocol (no env reader in standing.js); see evidence/2026-10-15/sim-plentycap.md');
+    process.exit(0);
+  }
   const fails = [];
   for (const variant of VARIANTS) {
     for (const pid of Object.keys(POLICY_REGISTRY)) {

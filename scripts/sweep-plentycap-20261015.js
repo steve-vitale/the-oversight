@@ -259,17 +259,18 @@ async function fixtureMechanism(Game) {
 }
 
 async function main() {
-  if (process.env.SMOKE === '1') return smokeGate();
-  const OUT = process.env.OUT;
-  // killed-arm INFO-SKIP: variant requested but the env reader is absent.
-  if (VARIANT !== 'all') {
-    process.env.STANDING_VARIANT = ENV_FOR[VARIANT];
-    const { Game } = await loadGame({ seed: 1, mode: 'plentycap-variant-probe' });
-    if (typeof Game._standingVariant !== 'function') {
+  // Kill-protocol INFO-SKIP: the arm was killed and standing.js reverted
+  // byte-clean — the env reader is absent. Any variant mode (incl. 'all'
+  // and SMOKE) would misread v3-both as variant behavior. Skip, not crash.
+  {
+    const probe = await loadGame({ seed: 1, mode: 'plentycap-variant-probe' });
+    if (typeof probe.Game._standingVariant !== 'function') {
       console.log(`INFO-SKIP: VARIANT=${VARIANT} requested but standing.js has no env reader (arm killed) — exit 0`);
       process.exit(0);
     }
   }
+  if (process.env.SMOKE === '1') return smokeGate();
+  const OUT = process.env.OUT;
   const sums = {}, allRows = {};
   for (const leg of LEGS) {
     process.env.STANDING_VARIANT = ENV_FOR[leg];

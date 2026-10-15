@@ -98,6 +98,13 @@ async function main() {
   // ---------- PHASE 2: variants on armed ----------
   console.log('== PHASE 2: teeth on the armed tree ==');
   const G0 = await loadFresh(undefined);
+  // Kill-protocol INFO-SKIP: the arm was killed and standing.js reverted
+  // byte-clean, so the env reader is absent — Phase 2's variants cannot
+  // exist. Skip, don't crash (never MODULE_NOT_FOUND).
+  if (typeof G0._standingVariant !== 'function') {
+    console.log('INFO-SKIP: plentycap layer deleted per kill protocol (no env reader in standing.js); see evidence/2026-10-15/sim-plentycap.md');
+    process.exit(0);
+  }
   check('armed default: env reader present', typeof G0._standingVariant === 'function');
   check('armed default: variant reads as both', G0._standingVariant() === 'both');
   fixtureWarNoFaced(G0);
