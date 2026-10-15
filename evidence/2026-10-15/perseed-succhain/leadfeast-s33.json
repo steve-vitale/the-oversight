@@ -1,0 +1,474 @@
+{
+ "seed": 33,
+ "policy": "leadfeast",
+ "window": {
+  "firstDay": 77,
+  "lastDay": 137
+ },
+ "chains": {
+  "window": {
+   "firstDay": 77,
+   "lastDay": 137
+  },
+  "nChains": 4,
+  "nAttributed": 4,
+  "attribRate": 1,
+  "chains": [
+   {
+    "length": 1,
+    "firstDay": 79,
+    "lastDay": 79,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 79,
+      "name": "Catalina Reyes",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 79,
+       "rank": "national",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 83,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 54
+        },
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 79,
+         "arrears": 3320,
+         "perWeek": 2250,
+         "age": 53
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 55,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 52
+        }
+       ],
+       "totalArrears": 3320,
+       "minTrust": 55
+      },
+      "pantry": {
+       "day": 79,
+       "pop": 7,
+       "pantryDays": 5,
+       "pantryKcal": 12074,
+       "ateShare": 104.8
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [
+        {
+         "day": 77,
+         "text": "🌾 Stonebridge's tribute comes up thin — 2,680 of 3,000 kcal. They sent everything the wagons could carry, and it wasn't enough. The shortfall rides as arrears "
+        }
+       ],
+       "successions": [
+        {
+         "day": 79,
+         "text": "🕯️ Catalina is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d79->d79 (1 bearers): polity national 3 links arrears 3320kcal -> national 3 links arrears 3320kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 1 tribute-short beats (±3d per death)",
+      "pantry through the chain: 5.0d (12074kcal, pop 7) -> 5.0d (12074kcal, pop 7)"
+     ],
+     "start": {
+      "day": 79,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 3320,
+      "minTrust": 55
+     },
+     "end": {
+      "day": 79,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 3320,
+      "minTrust": 55
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 1,
+     "causeSeq": "d79 Catalina Reyes (combat [combat])"
+    }
+   },
+   {
+    "length": 1,
+    "firstDay": 94,
+    "lastDay": 94,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 94,
+      "name": "Malik Moreau",
+      "cause": "sickness",
+      "family": "sickness",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 94,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 100,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 69
+        },
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 100,
+         "arrears": 3542,
+         "perWeek": 2250,
+         "age": 68
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 72,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 67
+        }
+       ],
+       "totalArrears": 3542,
+       "minTrust": 72
+      },
+      "pantry": {
+       "day": 94,
+       "pop": 7,
+       "pantryDays": 12,
+       "pantryKcal": 29493,
+       "ateShare": 87.8
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [
+        {
+         "day": 97,
+         "text": "🌙 Night. Shouts from the treeline — Fatima of The Bloodied with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 "
+        }
+       ],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 94,
+         "text": "🕯️ Malik is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d94->d94 (1 bearers): polity global 3 links arrears 3542kcal -> global 3 links arrears 3542kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 1 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 12.0d (29493kcal, pop 7) -> 12.0d (29493kcal, pop 7)"
+     ],
+     "start": {
+      "day": 94,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 3542,
+      "minTrust": 72
+     },
+     "end": {
+      "day": 94,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 3542,
+      "minTrust": 72
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 1,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d94 Malik Moreau (sickness [sickness])"
+    }
+   },
+   {
+    "length": 1,
+    "firstDay": 116,
+    "lastDay": 116,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 116,
+      "name": "David Kim",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 116,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 87,
+         "arrears": 0,
+         "perWeek": 1266,
+         "age": 91
+        },
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 92,
+         "arrears": 5230,
+         "perWeek": 1266,
+         "age": 90
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 82,
+         "arrears": 0,
+         "perWeek": 1266,
+         "age": 89
+        }
+       ],
+       "totalArrears": 5230,
+       "minTrust": 82
+      },
+      "pantry": {
+       "day": 116,
+       "pop": 6,
+       "pantryDays": 18,
+       "pantryKcal": 38725,
+       "ateShare": 107.7
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 116,
+         "text": "🕯️ David is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d116->d116 (1 bearers): polity global 3 links arrears 5230kcal -> global 3 links arrears 5230kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 18.0d (38725kcal, pop 6) -> 18.0d (38725kcal, pop 6)"
+     ],
+     "start": {
+      "day": 116,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 5230,
+      "minTrust": 82
+     },
+     "end": {
+      "day": 116,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 5230,
+      "minTrust": 82
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d116 David Kim (combat [combat])"
+    }
+   },
+   {
+    "length": 1,
+    "firstDay": 124,
+    "lastDay": 124,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 124,
+      "name": "Nikolai Volkov",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 124,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 87,
+         "arrears": 0,
+         "perWeek": 950,
+         "age": 99
+        },
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 87,
+         "arrears": 5230,
+         "perWeek": 950,
+         "age": 98
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 82,
+         "arrears": 0,
+         "perWeek": 950,
+         "age": 97
+        }
+       ],
+       "totalArrears": 5230,
+       "minTrust": 82
+      },
+      "pantry": {
+       "day": 124,
+       "pop": 6,
+       "pantryDays": 12,
+       "pantryKcal": 29323,
+       "ateShare": 106.3
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 124,
+         "text": "🕯️ Nikolai is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d124->d124 (1 bearers): polity global 3 links arrears 5230kcal -> global 3 links arrears 5230kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 12.0d (29323kcal, pop 6) -> 12.0d (29323kcal, pop 6)"
+     ],
+     "start": {
+      "day": 124,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 5230,
+      "minTrust": 82
+     },
+     "end": {
+      "day": 124,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 5230,
+      "minTrust": 82
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d124 Nikolai Volkov (combat [combat])"
+    }
+   }
+  ],
+  "outsideWindow": [
+   {
+    "day": 16,
+    "name": "Jenny Gross",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 27,
+    "name": "Esteban Bruno",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 30,
+    "name": "Irving Chu",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 64,
+    "name": "Pallavi Surve",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 139,
+    "name": "Nina Petrova",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 147,
+    "name": "Tariq Mahmood",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 158,
+    "name": "Andre Nakamura",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 180,
+    "name": "Aisha Baker",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   }
+  ]
+ },
+ "narratives": [
+  "bearer-death chain: 1 bearers, d79->d79 (gaps n/a).\n  d79 Catalina Reyes dies (combat [combat]) — the first bearer of this chain.\n    polity then: national, 3 link(s) — village_0(lead,trust 83,arrears 0) | village_1(lead,trust 79,arrears 3320) | village_2(lead,trust 55,arrears 0); total arrears 3320kcal.\n    pantry then: 5.0d (12074kcal), pop 7.\n    [tribute] d77 🌾 Stonebridge's tribute comes up thin — 2,680 of 3,000 kcal. They sent everything the wagons could carry, and it wasn't enough. The shortfall rides as arrears \n    [succ] d79 🕯️ Catalina is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity national 3 links (arrears 3320kcal) -> national 3 links (arrears 3320kcal); rank 7d after last death: global.\n  cause sequence: d79 Catalina Reyes (combat [combat]).",
+  "bearer-death chain: 1 bearers, d94->d94 (gaps n/a).\n  d94 Malik Moreau dies (sickness [sickness]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_0(lead,trust 100,arrears 0) | village_1(lead,trust 100,arrears 3542) | village_2(lead,trust 72,arrears 0); total arrears 3542kcal.\n    pantry then: 12.0d (29493kcal), pop 7.\n    [raid] d97 🌙 Night. Shouts from the treeline — Fatima of The Bloodied with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 \n    [succ] d94 🕯️ Malik is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 3542kcal) -> global 3 links (arrears 3542kcal); rank 7d after last death: global.\n  cause sequence: d94 Malik Moreau (sickness [sickness]).",
+  "bearer-death chain: 1 bearers, d116->d116 (gaps n/a).\n  d116 David Kim dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_0(lead,trust 87,arrears 0) | village_1(lead,trust 92,arrears 5230) | village_2(lead,trust 82,arrears 0); total arrears 5230kcal.\n    pantry then: 18.0d (38725kcal), pop 6.\n    [succ] d116 🕯️ David is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 5230kcal) -> global 3 links (arrears 5230kcal); rank 7d after last death: global.\n  cause sequence: d116 David Kim (combat [combat]).",
+  "bearer-death chain: 1 bearers, d124->d124 (gaps n/a).\n  d124 Nikolai Volkov dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_0(lead,trust 87,arrears 0) | village_1(lead,trust 87,arrears 5230) | village_2(lead,trust 82,arrears 0); total arrears 5230kcal.\n    pantry then: 12.0d (29323kcal), pop 6.\n    [succ] d124 🕯️ Nikolai is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 5230kcal) -> global 3 links (arrears 5230kcal); rank 7d after last death: global.\n  cause sequence: d124 Nikolai Volkov (combat [combat])."
+ ],
+ "lossMode": "held-to-end"
+}

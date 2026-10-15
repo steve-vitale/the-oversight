@@ -1,0 +1,150 @@
+{
+ "seed": 77,
+ "policy": "leadfeast-winpursuit",
+ "window": {
+  "firstDay": 77,
+  "lastDay": 137
+ },
+ "chains": {
+  "window": {
+   "firstDay": 77,
+   "lastDay": 137
+  },
+  "nChains": 1,
+  "nAttributed": 1,
+  "attribRate": 1,
+  "chains": [
+   {
+    "length": 1,
+    "firstDay": 83,
+    "lastDay": 83,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 83,
+      "name": "Jesse Cortez",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 83,
+       "rank": "national",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 92,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 58
+        },
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 81,
+         "arrears": 2100,
+         "perWeek": 2250,
+         "age": 57
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 75,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 56
+        }
+       ],
+       "totalArrears": 2100,
+       "minTrust": 75
+      },
+      "pantry": {
+       "day": 83,
+       "pop": 6,
+       "pantryDays": 10,
+       "pantryKcal": 21544,
+       "ateShare": 98.6
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [
+        {
+         "day": 82,
+         "text": "🌙 Night. Shouts from the treeline — Dmitri of The Hungry Road with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,0"
+        },
+        {
+         "day": 84,
+         "text": "🌙 Night. Shouts from the treeline — Theo of The Bloodied with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kc"
+        }
+       ],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 83,
+         "text": "🕯️ Jesse is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d83->d83 (1 bearers): polity national 3 links arrears 2100kcal -> national 3 links arrears 2100kcal; rank 7d after: national",
+      "co-occurrence through the chain: 0 tribute-snap beats, 2 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 10.0d (21544kcal, pop 6) -> 10.0d (21544kcal, pop 6)"
+     ],
+     "start": {
+      "day": 83,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 2100,
+      "minTrust": 75
+     },
+     "end": {
+      "day": 83,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 2100,
+      "minTrust": 75
+     },
+     "rank7dAfter": "national",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 2,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d83 Jesse Cortez (combat [combat])"
+    }
+   }
+  ],
+  "outsideWindow": [
+   {
+    "day": 10,
+    "name": "Ray Fan",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 41,
+    "name": "Valentina Medina",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 44,
+    "name": "Madison Carter",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   }
+  ]
+ },
+ "narratives": [
+  "bearer-death chain: 1 bearers, d83->d83 (gaps n/a).\n  d83 Jesse Cortez dies (combat [combat]) — the first bearer of this chain.\n    polity then: national, 3 link(s) — village_0(lead,trust 92,arrears 0) | village_1(lead,trust 81,arrears 2100) | village_2(lead,trust 75,arrears 0); total arrears 2100kcal.\n    pantry then: 10.0d (21544kcal), pop 6.\n    [raid] d82 🌙 Night. Shouts from the treeline — Dmitri of The Hungry Road with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,0\n    [raid] d84 🌙 Night. Shouts from the treeline — Theo of The Bloodied with 3 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 kc\n    [succ] d83 🕯️ Jesse is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity national 3 links (arrears 2100kcal) -> national 3 links (arrears 2100kcal); rank 7d after last death: national.\n  cause sequence: d83 Jesse Cortez (combat [combat])."
+ ],
+ "lossMode": "other-named"
+}

@@ -1,0 +1,436 @@
+{
+ "seed": 22,
+ "policy": "leadfeast",
+ "window": {
+  "firstDay": 77,
+  "lastDay": 137
+ },
+ "chains": {
+  "window": {
+   "firstDay": 77,
+   "lastDay": 137
+  },
+  "nChains": 3,
+  "nAttributed": 3,
+  "attribRate": 1,
+  "chains": [
+   {
+    "length": 2,
+    "firstDay": 86,
+    "lastDay": 90,
+    "gaps": [
+     4
+    ],
+    "deaths": [
+     {
+      "day": 86,
+      "name": "Wolfgang McDonald",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 86,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 96,
+         "arrears": 0,
+         "perWeek": 1688,
+         "age": 61
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 81,
+         "arrears": 0,
+         "perWeek": 1688,
+         "age": 60
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 78,
+         "arrears": 4000,
+         "perWeek": 3000,
+         "age": 51
+        }
+       ],
+       "totalArrears": 4000,
+       "minTrust": 78
+      },
+      "pantry": {
+       "day": 86,
+       "pop": 6,
+       "pantryDays": 18,
+       "pantryKcal": 43245,
+       "ateShare": 113.1
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 86,
+         "text": "🕯️ Wolfgang is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     },
+     {
+      "day": 90,
+      "name": "Victor Lopez",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": 4,
+      "polity": {
+       "day": 90,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 96,
+         "arrears": 0,
+         "perWeek": 1688,
+         "age": 65
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 76,
+         "arrears": 0,
+         "perWeek": 1688,
+         "age": 64
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 78,
+         "arrears": 4000,
+         "perWeek": 3000,
+         "age": 55
+        }
+       ],
+       "totalArrears": 4000,
+       "minTrust": 76
+      },
+      "pantry": {
+       "day": 90,
+       "pop": 5,
+       "pantryDays": 15,
+       "pantryKcal": 37050,
+       "ateShare": 109.8
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 90,
+         "text": "🕯️ Victor is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d86->d90 (2 bearers): polity global 3 links arrears 4000kcal -> global 3 links arrears 4000kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 18.0d (43245kcal, pop 6) -> 15.0d (37050kcal, pop 5)"
+     ],
+     "start": {
+      "day": 86,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 78
+     },
+     "end": {
+      "day": 90,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 76
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d86 Wolfgang McDonald (combat [combat]) ; d90 Victor Lopez (combat [combat])"
+    }
+   },
+   {
+    "length": 1,
+    "firstDay": 98,
+    "lastDay": 98,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 98,
+      "name": "Jorge Silva",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 98,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 92,
+         "arrears": 0,
+         "perWeek": 1266,
+         "age": 73
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 71,
+         "arrears": 0,
+         "perWeek": 1266,
+         "age": 72
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 73,
+         "arrears": 4000,
+         "perWeek": 2250,
+         "age": 63
+        }
+       ],
+       "totalArrears": 4000,
+       "minTrust": 71
+      },
+      "pantry": {
+       "day": 98,
+       "pop": 4,
+       "pantryDays": 9,
+       "pantryKcal": 22643,
+       "ateShare": 108.7
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 98,
+         "text": "🕯️ Jorge is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d98->d98 (1 bearers): polity global 3 links arrears 4000kcal -> global 3 links arrears 4000kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 9.0d (22643kcal, pop 4) -> 9.0d (22643kcal, pop 4)"
+     ],
+     "start": {
+      "day": 98,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 71
+     },
+     "end": {
+      "day": 98,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 71
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d98 Jorge Silva (combat [combat])"
+    }
+   },
+   {
+    "length": 1,
+    "firstDay": 125,
+    "lastDay": 125,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 125,
+      "name": "Sigrun Eiriksdottir",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 125,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 100,
+         "arrears": 0,
+         "perWeek": 950,
+         "age": 100
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 81,
+         "arrears": 0,
+         "perWeek": 950,
+         "age": 99
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 65,
+         "arrears": 4000,
+         "perWeek": 1688,
+         "age": 90
+        }
+       ],
+       "totalArrears": 4000,
+       "minTrust": 65
+      },
+      "pantry": {
+       "day": 125,
+       "pop": 4,
+       "pantryDays": 999,
+       "pantryKcal": 8549,
+       "ateShare": 92.9
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 125,
+         "text": "🕯️ Sigrun is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d125->d125 (1 bearers): polity global 3 links arrears 4000kcal -> global 3 links arrears 4000kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 999.0d (8549kcal, pop 4) -> 999.0d (8549kcal, pop 4)"
+     ],
+     "start": {
+      "day": 125,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 65
+     },
+     "end": {
+      "day": 125,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 4000,
+      "minTrust": 65
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d125 Sigrun Eiriksdottir (combat [combat])"
+    }
+   }
+  ],
+  "outsideWindow": [
+   {
+    "day": 39,
+    "name": "Casey Castillo",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 39,
+    "name": "Caitriona O'Keeffe",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 42,
+    "name": "Zuri Gu",
+    "cause": "starvation",
+    "family": "starvation",
+    "rawCause": "starvation"
+   },
+   {
+    "day": 55,
+    "name": "Carlos Diaz",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 62,
+    "name": "Theo Lindqvist",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 141,
+    "name": "Elif Demir",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 148,
+    "name": "Zoe Reyes",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 153,
+    "name": "Kira Weiss",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 153,
+    "name": "June Novak",
+    "cause": "contest",
+    "family": "combat",
+    "rawCause": "contest"
+   }
+  ]
+ },
+ "narratives": [
+  "bearer-death chain: 2 bearers, d86->d90 (gaps 4d).\n  d86 Wolfgang McDonald dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_1(lead,trust 96,arrears 0) | village_2(lead,trust 81,arrears 0) | village_0(lead,trust 78,arrears 4000); total arrears 4000kcal.\n    pantry then: 18.0d (43245kcal), pop 6.\n    [succ] d86 🕯️ Wolfgang is dead — and the dead hold no treaties. Every link Haven has shakes.\n  d90 Victor Lopez dies (combat [combat]) — 4d after the previous bearer.\n    polity then: global, 3 link(s) — village_1(lead,trust 96,arrears 0) | village_2(lead,trust 76,arrears 0) | village_0(lead,trust 78,arrears 4000); total arrears 4000kcal.\n    pantry then: 15.0d (37050kcal), pop 5.\n    [succ] d90 🕯️ Victor is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 4000kcal) -> global 3 links (arrears 4000kcal); rank 7d after last death: global.\n  cause sequence: d86 Wolfgang McDonald (combat [combat]) ; d90 Victor Lopez (combat [combat]).",
+  "bearer-death chain: 1 bearers, d98->d98 (gaps n/a).\n  d98 Jorge Silva dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_1(lead,trust 92,arrears 0) | village_2(lead,trust 71,arrears 0) | village_0(lead,trust 73,arrears 4000); total arrears 4000kcal.\n    pantry then: 9.0d (22643kcal), pop 4.\n    [succ] d98 🕯️ Jorge is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 4000kcal) -> global 3 links (arrears 4000kcal); rank 7d after last death: global.\n  cause sequence: d98 Jorge Silva (combat [combat]).",
+  "bearer-death chain: 1 bearers, d125->d125 (gaps n/a).\n  d125 Sigrun Eiriksdottir dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_1(lead,trust 100,arrears 0) | village_2(lead,trust 81,arrears 0) | village_0(lead,trust 65,arrears 4000); total arrears 4000kcal.\n    pantry then: 999.0d (8549kcal), pop 4.\n    [succ] d125 🕯️ Sigrun is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 4000kcal) -> global 3 links (arrears 4000kcal); rank 7d after last death: global.\n  cause sequence: d125 Sigrun Eiriksdottir (combat [combat])."
+ ],
+ "lossMode": "succession-chain"
+}

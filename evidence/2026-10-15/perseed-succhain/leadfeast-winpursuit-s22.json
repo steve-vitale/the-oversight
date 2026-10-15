@@ -1,0 +1,148 @@
+{
+ "seed": 22,
+ "policy": "leadfeast-winpursuit",
+ "window": {
+  "firstDay": 77,
+  "lastDay": 137
+ },
+ "chains": {
+  "window": {
+   "firstDay": 77,
+   "lastDay": 137
+  },
+  "nChains": 1,
+  "nAttributed": 1,
+  "attribRate": 1,
+  "chains": [
+   {
+    "length": 1,
+    "firstDay": 77,
+    "lastDay": 77,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 77,
+      "name": "Theo Lindqvist",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 77,
+       "rank": "national",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 84,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 52
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 75,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 51
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 66,
+         "arrears": 6500,
+         "perWeek": 2250,
+         "age": 42
+        }
+       ],
+       "totalArrears": 6500,
+       "minTrust": 66
+      },
+      "pantry": {
+       "day": 77,
+       "pop": 6,
+       "pantryDays": 10,
+       "pantryKcal": 23600,
+       "ateShare": 100.6
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 77,
+         "text": "🕯️ Theo is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d77->d77 (1 bearers): polity national 3 links arrears 6500kcal -> national 3 links arrears 6500kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 0 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 10.0d (23600kcal, pop 6) -> 10.0d (23600kcal, pop 6)"
+     ],
+     "start": {
+      "day": 77,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 6500,
+      "minTrust": 66
+     },
+     "end": {
+      "day": 77,
+      "rank": "national",
+      "nLinks": 3,
+      "totalArrears": 6500,
+      "minTrust": 66
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 0,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d77 Theo Lindqvist (combat [combat])"
+    }
+   }
+  ],
+  "outsideWindow": [
+   {
+    "day": 39,
+    "name": "Casey Castillo",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 39,
+    "name": "Caitriona O'Keeffe",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 42,
+    "name": "Zuri Gu",
+    "cause": "starvation",
+    "family": "starvation",
+    "rawCause": "starvation"
+   },
+   {
+    "day": 69,
+    "name": "Carlos Diaz",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   }
+  ]
+ },
+ "narratives": [
+  "bearer-death chain: 1 bearers, d77->d77 (gaps n/a).\n  d77 Theo Lindqvist dies (combat [combat]) — the first bearer of this chain.\n    polity then: national, 3 link(s) — village_1(lead,trust 84,arrears 0) | village_2(lead,trust 75,arrears 0) | village_0(lead,trust 66,arrears 6500); total arrears 6500kcal.\n    pantry then: 10.0d (23600kcal), pop 6.\n    [succ] d77 🕯️ Theo is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity national 3 links (arrears 6500kcal) -> national 3 links (arrears 6500kcal); rank 7d after last death: global.\n  cause sequence: d77 Theo Lindqvist (combat [combat])."
+ ],
+ "lossMode": "held-to-end"
+}

@@ -1,0 +1,153 @@
+{
+ "seed": 66,
+ "policy": "leadfeast-winpursuit",
+ "window": {
+  "firstDay": 77,
+  "lastDay": 137
+ },
+ "chains": {
+  "window": {
+   "firstDay": 77,
+   "lastDay": 137
+  },
+  "nChains": 1,
+  "nAttributed": 1,
+  "attribRate": 1,
+  "chains": [
+   {
+    "length": 1,
+    "firstDay": 83,
+    "lastDay": 83,
+    "gaps": [],
+    "deaths": [
+     {
+      "day": 83,
+      "name": "Christopher Álvarez",
+      "cause": "combat",
+      "family": "combat",
+      "gapFromPrev": null,
+      "polity": {
+       "day": 83,
+       "rank": "global",
+       "exiled": false,
+       "nLinks": 3,
+       "links": [
+        {
+         "vid": "village_1",
+         "kind": "lead",
+         "trust": 92,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 58
+        },
+        {
+         "vid": "village_2",
+         "kind": "lead",
+         "trust": 85,
+         "arrears": 0,
+         "perWeek": 2250,
+         "age": 57
+        },
+        {
+         "vid": "village_0",
+         "kind": "lead",
+         "trust": 90,
+         "arrears": 0,
+         "perWeek": 3000,
+         "age": 47
+        }
+       ],
+       "totalArrears": 0,
+       "minTrust": 85
+      },
+      "pantry": {
+       "day": 83,
+       "pop": 6,
+       "pantryDays": 9,
+       "pantryKcal": 22960,
+       "ateShare": 103.5
+      },
+      "cooccur": {
+       "snaps": [],
+       "raids": [
+        {
+         "day": 81,
+         "text": "🌙 Night. Shouts from the treeline — Elena of The Red Table with 4 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 "
+        }
+       ],
+       "tributeShorts": [],
+       "successions": [
+        {
+         "day": 83,
+         "text": "🕯️ Christopher is dead — and the dead hold no treaties. Every link Haven has shakes."
+        }
+       ]
+      }
+     }
+    ],
+    "impact": {
+     "attributed": true,
+     "evidence": [
+      "chain d83->d83 (1 bearers): polity global 3 links arrears 0kcal -> global 3 links arrears 0kcal; rank 7d after: global",
+      "co-occurrence through the chain: 0 tribute-snap beats, 1 rival-raid beats, 0 tribute-short beats (±3d per death)",
+      "pantry through the chain: 9.0d (22960kcal, pop 6) -> 9.0d (22960kcal, pop 6)"
+     ],
+     "start": {
+      "day": 83,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 0,
+      "minTrust": 85
+     },
+     "end": {
+      "day": 83,
+      "rank": "global",
+      "nLinks": 3,
+      "totalArrears": 0,
+      "minTrust": 85
+     },
+     "rank7dAfter": "global",
+     "rankFell7d": false,
+     "snapsInChain": 0,
+     "raidsInChain": 1,
+     "tributeShortsInChain": 0,
+     "causeSeq": "d83 Christopher Álvarez (combat [combat])"
+    }
+   }
+  ],
+  "outsideWindow": [
+   {
+    "day": 13,
+    "name": "June Aguilar",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 27,
+    "name": "Theo Lindqvist",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 35,
+    "name": "Cheryl Ahmed",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   },
+   {
+    "day": 50,
+    "name": "Grace Schulz",
+    "cause": "combat",
+    "family": "combat",
+    "rawCause": "combat"
+   }
+  ]
+ },
+ "narratives": [
+  "bearer-death chain: 1 bearers, d83->d83 (gaps n/a).\n  d83 Christopher Álvarez dies (combat [combat]) — the first bearer of this chain.\n    polity then: global, 3 link(s) — village_1(lead,trust 92,arrears 0) | village_2(lead,trust 85,arrears 0) | village_0(lead,trust 90,arrears 0); total arrears 0kcal.\n    pantry then: 9.0d (22960kcal), pop 6.\n    [raid] d81 🌙 Night. Shouts from the treeline — Elena of The Red Table with 4 others, and they're not here to talk. \"Your pantry or your blood. Choose.\" (They want ~2,000 \n    [succ] d83 🕯️ Christopher is dead — and the dead hold no treaties. Every link Haven has shakes.\n  impact: polity global 3 links (arrears 0kcal) -> global 3 links (arrears 0kcal); rank 7d after last death: global.\n  cause sequence: d83 Christopher Álvarez (combat [combat])."
+ ],
+ "lossMode": "held-to-end"
+}
