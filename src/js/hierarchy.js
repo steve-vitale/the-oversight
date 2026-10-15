@@ -2071,6 +2071,9 @@
           var hadGlobal = !!this.state.globalLive;
           this.state.nationalLive = false;
           this.state.globalLive = false;
+          // raiddensity r16 2026-10-15: the realm died, so does its stamp —
+          // a re-formed court stamps fresh at formation.
+          try { delete this.state.nationalFirstDay; } catch (e) {}
           if (this.state.pendingGlobal) {
             this.state.pendingGlobal = null;
             this.say('📡 The world feed goes quiet — the summons dies with the realm that earned it. The galaxy watched a fire that is out.');
@@ -2539,6 +2542,12 @@
       // THE COURT SAT (or the oath was sworn): Haven is national.
       this.state.nationalLive = true;
       this.state.nationalDay = day;
+      // raiddensity r16 2026-10-15: stamp the day the court sat so the Haven
+      // raid cooldown only ever covers young nationals (day - first < 60).
+      // Hooks the existing formation point — never a new detector.
+      // Env-gated: with RAIDDENSITY off the field never exists (det-gate
+      // byte-identical).
+      try { if (typeof process !== 'undefined' && process.env && process.env.RAIDDENSITY === '1') this.state.nationalFirstDay = day; } catch (e) {}
       // journey-scale-r2 2026-10-14: remember HOW it happened for the
       // villager echo (scaleDiscovery._sdNationalBeatEcho) — non-behavioral.
       if (pn && pn.shape) this.state.nationalShape = pn.shape;

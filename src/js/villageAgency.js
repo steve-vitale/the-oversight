@@ -1105,8 +1105,38 @@
       var opinion = v.opinion || 0;
       var raidP = opinion < -10 ? 0.6 : 0.25;
       if (v.isSplinter && v.splinterCause === 'hardline') raidP = 0.8;
-      if (R() < raidP) this._vaStageRaidDefense(v);
+      if (R() < raidP) {
+        // raiddensity r16 2026-10-15: the famine channel stages through the
+        // guarded gate — a raid chosen inside the doubled-watch window
+        // devolves into a beg (subject to the normal beg cooldown, already
+        // paid above), never both, never an ungated raid.
+        if (this._vaGuardRaidStage(v) === 'raid') this._vaStageRaidDefense(v);
+      }
       else this._vaStageBeg(v);
+    },
+
+    // _vaGuardRaidStage(v): the one famine-channel raid-stage gate
+    // (raiddensity r16 2026-10-15). Returns 'raid' when the raid may stage,
+    // 'beg' when the doubled watch converts it into a beg, 'none' when the
+    // beg's own cooldown blocks that too — and the watch does the talking.
+    // The 14-day per-village beg throttle is the NORMAL beg cooldown: the
+    // famine beat never stages both, never goes ungated, never goes silent.
+    _vaGuardRaidStage(v) {
+      try {
+        if (!this._raidCooldownYoung || !this._raidCooldownYoung()) return 'raid';
+      } catch (e) { return 'raid'; }
+      var day = 0;
+      try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+      var inner = null;
+      try { inner = this._vaInner(v); } catch (e) {}
+      if (inner && day < (inner.begCooldownUntil || 0)) {
+        this.say(`🌙 Torches on the doubled watch all night — and ${v.name} knows what's waiting at the treeline. They know asking again this soon buys nothing either. The night stays quiet, and the watch explains why.`);
+        try { if (this.journalNote) this.journalNote('village', 'raid', `Famine raid from ${v.name} died on the doubled watch — beg cooldown still owed, no beat staged.`); } catch (e) {}
+        return 'none';
+      }
+      this.say(`🌙 Torches on the doubled watch all night — ${v.name} heard what's waiting at the treeline. Come morning a thinner speaker walks in alone instead of the spears. "We saw your torches," they say. "We're asking. Not taking."`);
+      this._vaStageBeg(v);
+      return 'beg';
     },
 
     // _vaStageBeg: their speaker at your fire, thin. Played.
@@ -1151,10 +1181,15 @@
       }
       this.say(`You refuse. ${pb.speaker} nods — once — and walks back into the dark with nothing. The fire feels colder after.`);
       try { if (this._nudgeOpinion) this._nudgeOpinion(pb.villageId, -8); } catch (e) {}
-      // hunger doesn't take no for an answer: 30% they come back with spears
+      // hunger doesn't take no for an answer: 30% they come back with spears.
+      // raiddensity r16 2026-10-15: the comeback rides the guarded gate too —
+      // inside the doubled-watch window the spears don't come (the beg's own
+      // cooldown is still owed here, so the watch fiction stands alone).
       if (v && R() < 0.3) {
-        this.say(`Three nights later, you hear them in the treeline. Asking didn't work.`);
-        this._vaStageRaidDefense(v);
+        if (this._vaGuardRaidStage(v) === 'raid') {
+          this.say(`Three nights later, you hear them in the treeline. Asking didn't work.`);
+          this._vaStageRaidDefense(v);
+        }
       }
       try { if (this.ledgerAdd) this.ledgerAdd('villageAgency', 'beg-refused:' + pb.villageId); } catch (e) {}
       return false;
@@ -1162,6 +1197,7 @@
 
     // _vaStageRaidDefense: their champion at your treeline. Played standoff.
     _vaStageRaidDefense(v) {
+      try { if (this._raidCooldownSet) this._raidCooldownSet(); } catch (e) {}
       var faces = this.ensureFaces(v);
       var day = 0;
       try { day = (this.state.scholar || {}).day || 0; } catch (e) {}

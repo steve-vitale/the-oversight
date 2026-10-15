@@ -19707,15 +19707,54 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`A runner from ${ov.name}, dusty and direct: "Your foragers are stripping our side of the ${dir} ground. Back off — or we'll talk with teeth." (Trust -3. The commons cuts both ways.)`);
         }
         // RAIDS: tension 70+, trust under 15, no deal — they take it back.
+        // raiddensity r16 2026-10-15: inside the post-raid doubled-watch
+        // window (young nationals only) the raid never stages — the scouts'
+        // torches do the talking. A quiet night, said aloud, never silent.
         if (!c.deal && c.tension >= 70 && (ov.trust || 0) < 15 && Math.random() < 0.08) {
-          this.commonsRaid(ov);
+          if (this._raidCooldownYoung && this._raidCooldownYoung()) {
+            this.say(`🌙 Watchers at the ${dir} treeline see torchlight moving in ${ov.name}'s camp — and it going dark. Whatever was coming, the doubled watch turned it. The night stays quiet, and everyone at the fire understands why.`);
+            try { if (this.journalNote) this.journalNote('village', 'raid', `Commons raid from ${ov.name} turned back by the doubled watch — cooldown holds.`); } catch (e) {}
+          } else this.commonsRaid(ov);
         }
       }
+    },
+
+    // ============ HAVEN RAID COOLDOWN (raiddensity r16 2026-10-15) ============
+    // One Haven-side post-raid cooldown across BOTH rival-raid channels:
+    // commons raids (game.js commonsRaid) and famine raids
+    // (villageAgency.js _vaStageRaidDefense). Env-gated RAIDDENSITY=1 —
+    // with the gate off every helper below returns early and touches no
+    // state (det-gate byte-identical). The cooldown is only ever enforced
+    // on YOUNG nationals (nationalLive and under 60 days from the day the
+    // court sat — stamped at the existing formation point in hierarchy.js,
+    // never a new detector). During the 7-day window the doubled watch
+    // holds: a blocked commons raid is a quiet night with scouts' fiction,
+    // a blocked famine raid devolves into a beg (never both, never silent,
+    // and a beg beats an ungated raid).
+    _rdOn() {
+      try { return typeof process !== 'undefined' && process.env && process.env.RAIDDENSITY === '1'; } catch (e) { return false; }
+    },
+    _raidCooldownYoung() {
+      if (!this._rdOn()) return false;
+      var s = this.state;
+      if (!s || !s.nationalLive) return false;
+      var day = 0;
+      try { day = (s.scholar || {}).day || 0; } catch (e) {}
+      var first = s.nationalFirstDay || s.nationalDay || 0;
+      if (day - first >= 60) return false; // old nationals: no cooldown
+      return day < (s.havenRaidCooldownUntil || 0);
+    },
+    _raidCooldownSet() {
+      if (!this._rdOn()) return;
+      var day = 0;
+      try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+      this.state.havenRaidCooldownUntil = day + 7;
     },
 
     // commonsRaid(ov): the sharp end of the commons. They hit the pantry or
     // trample the garden — narrated, never silent. Trust craters.
     commonsRaid(ov) {
+      this._raidCooldownSet();
       const v = this.state.village;
       const dir = this.directionTo(4, 4, ov.x, ov.y);
       const take = 500 + Math.floor(Math.random() * 1001); // 500-1500 kcal
