@@ -1,5 +1,9 @@
 # Table trial and world campaign isolation
 
+Follow-up: `mantle-coalition-audit.md` confirms and repairs the committed
+volunteer's duplicate bearer/NPC role noted below. The earlier raw muster
+count and screenshot remain historical evidence of that finding.
+
 2026-10-15. Follow-up to the phone finding in
 `coalition-presentation-audit.md`. A direct Table challenge was entering
 the Finale's world-campaign setup after the inner titan wrapper consumed

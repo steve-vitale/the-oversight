@@ -114,9 +114,11 @@ simulation/playtest goal with these gaps before expanding content blindly:
    cells. The direct Table trial actually uses 12x12. Its world-campaign
    setup/tools/resolution leak is now repaired, with real phone loss →
    mantle → Table continuation. See `evidence/2026-10-15/table-trial-isolation-audit.md`.
-   That playtest transferred the mantle to an already committed Haven
-   volunteer: audit injection/upkeep/readiness for a duplicate bearer role
-   before treating raw muster entries as distinct active blades.
+   The committed-volunteer mantle follow-up now removes the extra NPC role:
+   readiness, upkeep, injection and Network survivor floors exclude the
+   current bearer. An actual phone death transfers to a volunteer, reduces
+   the allied muster by one, and continues the Table with one bearer token.
+   See `evidence/2026-10-15/mantle-coalition-audit.md`.
    See `evidence/2026-10-15/coalition-presentation-audit.md`.
    Next diagnose Finale bearer survival and the cautious bot's food/overtime
    limits. Later-node branches and a complete campaign remain unverified.

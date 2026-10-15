@@ -181,3 +181,26 @@ already listed among Haven's blades, and current muster filtering does not
 exclude the new bearer. Do not count raw entries as distinct active allies
 until actual injection/upkeep/readiness are checked. Full campaign survival,
 Network and the rest of the roadmap remain open; no release/deployment.
+
+## Committed volunteer becomes the bearer, 2026-10-15
+
+The actual mantle transition now removes the successor's extra allied-NPC
+role and committed-workforce flag. Readiness, injection, upkeep and Network
+survivor floors use living Haven blades excluding the current bearer;
+dawn reconciles old saves. Real replacement still requires two taps and
+another living volunteer. Other recruits and actual donated knives survive
+unchanged. The world renderer no longer draws the bearer at a stale NPC
+position too.
+
+The phone replay killed Debbie through seven ordinary combat turns and
+selected committed volunteer Lily. The allied muster correctly fell from
+25 to 24, with one Lily player token, no Lily NPC token, and a resumed Table.
+Fourteen identity checks, 21 renderer checks, 43 trial isolation checks,
+116 quick and 888 full scripts pass. The 16-seed × two-policy screen has
+31/32 identical final hashes; campaigner seed 9 changes to a Table win.
+Do not treat that single change as an established win-rate gain. See
+`mantle-coalition-audit.md` for exact fixtures and raw records.
+
+Return next to actual campaign survival/tactics and natural food/overtime
+entry, then full Finale/Network verification. The broader roadmap remains
+active; this is not a completed endgame or all-playstyle balance audit.
