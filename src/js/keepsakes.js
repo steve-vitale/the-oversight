@@ -205,6 +205,8 @@
       this.say(keepsake
         ? `You wear the ${worn.name} close. (accessory ${used}/4 — worn keepsakes grow; in the pack they only remember)`
         : `You put on the ${worn.name}. (accessory ${used}/4)`);
+      // An already-bonded keepsake can name its region the moment it's worn.
+      try { if (keepsake) this.keepsakeTrailCheck(worn); } catch (e) { warn('trail: ' + e.message); }
       return target;
     },
 
@@ -229,6 +231,8 @@
         const after = this.keepsakeLevel(r);
         try { if (this.checkKeepsakeReveal) this.checkKeepsakeReveal(r); } catch (e) { warn('reveal: ' + e.message); }
         if (after > before) this.keepsakeLevelBeat(r, before, after);
+        // The trail sharpens as the bond deepens (L2+ names the region).
+        try { this.keepsakeTrailCheck(r); } catch (e) { warn('trail: ' + e.message); }
         this.keepsakeMaybeOffer(r);
         return gain;
       } catch (e) { warn('keepsakeGrow: ' + e.message); return 0; }
@@ -288,6 +292,24 @@
       let taken = [];
       try { taken = this.takenKinOf ? this.takenKinOf(this.villagerId) : []; } catch (e) { warn('takenKinOf: ' + e.message); }
       return taken.some(t => t.name === p.name && t.relation === p.relation) ? p : null;
+    },
+    // keepsakeTrailCheck(r): The Long Way Home (WORLD-REGIONS.md §6) — a worn
+    // keepsake of a scattered kin at L2+ names their region. The sharpenTrail
+    // 'keepsake' path existed but had no pre-road caller (nomad-reachability
+    // 2026-10-15: only tests and the on-road 'survivor' path called it).
+    // Guarded: keepsakes never hard-depends on nomad-scenes.
+    keepsakeTrailCheck(r) {
+      try {
+        if (!r || !this.isKeepsake || !this.isKeepsake(r)) return false;
+        if (!this.keepsakeIsWorn || !this.keepsakeIsWorn(r)) return false;
+        if (!this.keepsakeLevel || this.keepsakeLevel(r) < 2) return false;
+        const p = this.keepsakeKinPerson ? this.keepsakeKinPerson(r) : null;
+        if (!p || !p.name) return false;
+        const NS = this.nomadScenes;
+        if (!NS || typeof NS.sharpenTrail !== 'function') return false;
+        const out = NS.sharpenTrail(p.name, 'keepsake');
+        return !!(out && out.ok);
+      } catch (e) { warn('keepsakeTrailCheck: ' + e.message); return false; }
     },
     // keepsakeThreadCheck(r): record the link (item -> taken person) and
     // turn a place/name reveal into a clue. Idempotent.
