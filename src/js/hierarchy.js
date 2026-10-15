@@ -77,6 +77,7 @@
 //   - regional_dawn: Haven's first gesture toward another fire stages a played beat (gift/visit/cold, each with real costs) — and the Regional Dawn itself, the System overlay growing into coordination (networkLive), fires when the bond is 21+ days old (the_gesture_is_not_the_dawn). Played, never a threshold flip. (code: hierarchy.js)
 //   - speaker_is_named: theirSpeaker is a named person from the sim's roster; when the sim kills them, theirLeaderDied fires the mirror succession beat. (code: hierarchy.js)
 //   - succession_is_with_the_village: a speaker death costs the link a trust haircut (-8, not -15) and opens a 7-day mourning window with no trust gains — it never snaps the link by itself; the new speaker inherits the village's bond. The snap survives only for the neglected: trust under 20 with no upkeep (tribute or trust-granting deeds) for 14+ days. Death + neglect kills; death alone doesn't. (code: hierarchy.js)
+//   - succession_polity_persists (SUCCPOLITY=1, sim-succpolity 2026-10-15, experimental env-gated, default OFF — sim-findings #301): onLeaderDeath stamps each shaken link with its pre-death standing (_succDay/_succTrust); for 14 days after, the polity-membership trust bars (belong's >=50, seasoned >=40 on the lead/covenant/trade roads) read the inherited standing, not the funeral hour's shaken trust — the realm's fires judge the new speaker over a proving window (Steve's young-bond ruling: the bearer inherits the obligations). The chaos is untouched: the -8 haircut still lands on link.trust, mourning still gags gains 7d, tribute still renegotiates, the neglect snap still kills. Past the window without re-tending, the realm dissolves aloud as before. (code: hierarchy.js)
 //   - trust_gains_are_choked: every trust gain routes through _trustGain (mourning blocks, gains stamp lastKeptDay) — no silent side-channel gains. (code: hierarchy.js)
 //   - rumors_are_delivered: queued village rumors are spoken one per day at the day boundary — "heard of them" is reachable. (code: hierarchy.js)
 //   - tribute_partials_dont_double_count: weekly tribute payments accumulate (tributePaidKcal); linkTick charges the true shortfall once — paying half is strictly better than paying nothing. (code: hierarchy.js)
@@ -223,14 +224,43 @@
     // "Not fresh conquests." (scale-pacing 2026-10-11, Steve: "National is
     // being hit way too quickly" — three cold covenant accepts in three
     // days was a nation.)
-    _linkSeasoned(link, forConquest) {
+    _linkSeasoned(link, forConquest, forPolity) {
       try {
         if (!link || link.status !== 'active') return false;
         var day = (this.state.scholar || {}).day || 0;
         if ((day - (link.day || 0)) < 30) return false;
         if (forConquest) return true;
-        return (link.trust || 0) >= 40;
+        // SUCCPOLITY (sim-succpolity 2026-10-15, env-gated, default OFF):
+        // polity-membership bars read the INHERITED standing — see
+        // _succTrustOf. Standing's diplomacy count (standing.js) keeps the
+        // shaken trust: this grace is polity membership only, not wave math.
+        var tr = (forPolity && this._succPolityGate()) ? this._succTrustOf(link) : (link.trust || 0);
+        return tr >= 40;
       } catch (e) { return false; }
+    },
+
+    // _succPolityGate: the succession-persistence lever (sim-succpolity,
+    // 2026-10-15, sim-findings #301). SUCCPOLITY=1 keeps the polity alive
+    // through succession; default OFF = the old funeral-hour collapse.
+    _succPolityGate() {
+      try { return typeof process !== 'undefined' && process.env && process.env.SUCCPOLITY === '1'; } catch (e) { return false; }
+    },
+
+    // _succTrustOf: the trust a polity-membership bar reads. The link is
+    // with the VILLAGE, not the person — when the speaker dies, the new
+    // speaker inherits the village's standing, and the realm's fires judge
+    // the inheritance over a 14-day proving window, not in the funeral
+    // hour (Steve's young-bond ruling: the bearer inherits the obligations).
+    // After 14 days without re-tending, the shaken trust reads again — the
+    // realm can still come apart, aloud. Only active on the SUCCPOLITY gate.
+    _succTrustOf(link) {
+      try {
+        var t0 = (link || {}).trust || 0;
+        if (!this._succPolityGate() || !link) return t0;
+        var day = (this.state.scholar || {}).day || 0;
+        if (link._succDay != null && (day - link._succDay) <= 14 && link._succTrust != null) return link._succTrust;
+        return t0;
+      } catch (e) { return (link || {}).trust || 0; }
     },
 
     _otherVillage(id) {
@@ -1449,6 +1479,15 @@
         for (var i = 0; i < links.length; i++) {
           try {
             var _dl = links[i];
+            // SUCCPOLITY (sim-succpolity 2026-10-15, sim-findings #301):
+            // the new speaker inherits the village's standing — stamp what
+            // the bond held before the shake so the polity bars can read the
+            // inheritance for the proving window. The chaos below still
+            // fires in full (haircut, mourning, tribute moves, neglect snap).
+            if (this._succPolityGate()) {
+              var _sd = (this.state.scholar || {}).day || 0;
+              _dl._succDay = _sd; _dl._succTrust = _dl.trust;
+            }
             // peer leagues shake covenant-style, not vassal-style
             if (_dl.kind === 'covenant' || _dl.kind === 'trade') this.covenantCrisis(_dl.id, 'leader-death');
             else this.successionCrisis(_dl.id);
@@ -1757,7 +1796,7 @@
           // SEASONED ONLY (scale-pacing 2026-10-11): a subordinate counts
           // toward the realm only when the relationship is real — 28+ days
           // and trust 40+ (conquered: the season, not the trust).
-          if (l.status === 'active' && l.primary === HOME && this._linkSeasoned(l, !!l.conquered)) { subs.push(l.subordinate); subLinks.push(l); }
+          if (l.status === 'active' && l.primary === HOME && this._linkSeasoned(l, !!l.conquered, true)) { subs.push(l.subordinate); subLinks.push(l); }
         }
         if (subs.length >= 3) {
           // CONQUEST (2026-10-10): a led realm where every subordinate was
@@ -1770,7 +1809,10 @@
       l = this.linkWith(id);
       if (!l || l.status !== 'active' || l.subordinate !== HOME) return null;
       var day = (this.state.scholar || {}).day || 0;
-      var good = l.trust >= 50 && (l.arrears || 0) === 0 && (day - (l.day || 0)) >= 14;
+      // SUCCPOLITY (sim-succpolity 2026-10-15): the BELONG "good standing"
+      // bar reads the inherited standing inside the succession grace — the
+      // oath is with the village, not the dead speaker.
+      var good = this._succTrustOf(l) >= 50 && (l.arrears || 0) === 0 && (day - (l.day || 0)) >= 14;
       if (!good) return null;
       var fp = null;
       var fps = this.foreignPolities();
@@ -1812,7 +1854,7 @@
     // 28+ days old with trust 40+ — three cold accepts in three days is a
     // pact, not a nation.
     _covenantPolity() {
-      var ls = this._peerLinks('covenant').filter((l) => this._linkSeasoned(l));
+      var ls = this._peerLinks('covenant').filter((l) => this._linkSeasoned(l, false, true));
       if (ls.length < 3) return null;
       var vs = ['haven'];
       for (var i = 0; i < ls.length; i++) vs.push(ls[i].a === HOME ? ls[i].b : ls[i].a);
@@ -1823,7 +1865,7 @@
     // charter. Pooled trade routes, tariff income, no mutual defense.
     // SEASONED ONLY (scale-pacing 2026-10-11): same bar as covenant.
     _tradePolity() {
-      var ls = this._peerLinks('trade').filter((l) => this._linkSeasoned(l));
+      var ls = this._peerLinks('trade').filter((l) => this._linkSeasoned(l, false, true));
       if (ls.length < 3) return null;
       var vs = ['haven'];
       for (var i = 0; i < ls.length; i++) vs.push(ls[i].a === HOME ? ls[i].b : ls[i].a);
