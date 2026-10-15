@@ -4,11 +4,11 @@
 // explicit relationship, pantry, loadout and announced-location fixtures.
 // Never evidence of natural reach or a campaign win rate.
 const K = require('./godpath/lib'), H = require('./sim-harness'), P = require('./policies/campaigner');
-const C = require('./policies/competent'), { sigButtons } = require('./policies/capable');
+const C = require('./policies/competent'), { sigButtons, SIG_PREF } = require('./policies/capable');
 const bump = (ctx, key) => { ctx['campaign' + key] = (ctx['campaign' + key] || 0) + 1; };
 // Prepared experiments call this explicitly; promotion into the ordinary
 // campaign policy requires a matched screen. All movement/waits are paid.
-function preparedGuard(G, ctx, rally = false, heal = false) {
+function preparedGuard(G, ctx, rally = false, heal = false, counters = false) {
   const f = G.tbfight, p = f && G.tbFighter('p');
   if (!p || !G.tbIsPlayerTurn() || p.acted) return false;
   const march = (G.state.titans || {})._fight;
@@ -53,6 +53,19 @@ function preparedGuard(G, ctx, rally = false, heal = false) {
   if (binding && binding.call()) { bump(ctx, 'GuardBindings'); finish(); return true; }
   const spoil = ['tbFiRedPen', 'tbFiLeakedScript', 'tbFiBadNote'].map(key => buttons.find(b => b.key === key)).find(Boolean);
   if (spoil && spoil.call()) { bump(ctx, 'GuardCrewTools'); finish(); return true; }
+  if (counters) {
+    const fights = ctx._guardCounters || (ctx._guardCounters = new WeakMap());
+    let used = fights.get(f); if (!used) { used = {}; fights.set(f, used); }
+    const info = { s: G.state.scholar, hp: p.hp / p.maxHp };
+    const offered = buttons.filter(b => SIG_PREF[b.key]).sort((a, b) => SIG_PREF[b.key][0] - SIG_PREF[a.key][0]);
+    for (const b of offered) {
+      const pref = SIG_PREF[b.key];
+      if ((used[b.key] || 0) >= pref[1] || (pref[2] && !pref[2](info))) continue;
+      used[b.key] = (used[b.key] || 0) + 1;
+      if (b.call()) { bump(ctx, 'GuardSignatureCounters'); finish(); return true; }
+      used[b.key] = pref[1]; // a refused public action is not worth repeating
+    }
+  }
   if (rally && !f.rallyUsed && G.tbPlayerRally()) { bump(ctx, 'GuardRallies'); finish(); return true; }
   G.tbPlayerWait(); bump(ctx, 'GuardWaits'); return true;
 }
@@ -103,13 +116,18 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
   const initialHealth = s.health, initialMaxHealth = G.maxHealth();
   // Prepared arena geometry only. Approach still walks through the normal
   // local path API; subsequent fights must follow real campaign ordering.
-  const mids = tid === 'finale' ? ['finale_crew', 'finale_opening', 'finale'] : [tid];
-  G.spawnWorldMonster(mids[0], G.map.px, G.map.py, { mx: 5, my: 4, titan: true });
+  const mids = tid === 'finale' ? ['finale_crew', 'finale_opening', 'finale'] : tid === 'the_network' ? G.networkNodes().map(n => n.monster) : [tid];
+  if (tid === 'the_network') {
+    // Explicit entry prerequisites, not claimed as played victories or waiting.
+    Object.assign(G.state.titans.slain, { herald: true, nielsen: true, finale: true });
+    G.progState().overtime = G.titanDef(tid).keyTier || 3;
+    if (!G.networkKeyReady() || !G.networkSummon()) throw new Error('Prepared Network entry failed');
+  } else G.spawnWorldMonster(mids[0], G.map.px, G.map.py, { mx: 5, my: 4, titan: true });
   const fights = [];
   const tactic = arg('tactic', 'baseline');
   const policy = { ...P.campaigner, fight(game, context) {
     const f = game.tbfight;
-    if (tactic.includes('guard') && preparedGuard(game, context, tactic.includes('rally'), tactic.includes('heal'))) return true;
+    if (tactic.includes('guard') && preparedGuard(game, context, tactic.includes('rally'), tactic.includes('heal'), tactic.includes('counters'))) return true;
     if (f && game.tbIsPlayerTurn() && f.fighters.some(a => a.kind === 'ally' && a.alive && !a.fled)) {
       if (tactic.includes('rally') && !f.rallyUsed && game.tbPlayerRally()) return true;
       if (tactic.includes('cry') && !f.warCryUsed && game.tbPlayerWarCry()) return true;
@@ -123,12 +141,14 @@ const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ?
     return orig.apply(this, arguments);
   };
   for (let node = 0; node < mids.length && !G.over; node++) {
+    const previousIndex = ((((G.state.titans || {}).campaigns || {}).network || {}).idx) || 0;
     P.road(G, ctx);
     if (!G.tbfight) break;
     H.driveFights(G, policy, ctx);
     if (G.tbfight && !G.tbfight.over) break;
     const st = G.state.titans || {};
-    if (fights.length && fights[fights.length - 1].result !== 'won') break;
+    const networkAdvanced = tid === 'the_network' && st.campaigns && st.campaigns.network && st.campaigns.network.idx > previousIndex;
+    if (fights.length && fights[fights.length - 1].result !== 'won' && !networkAdvanced) break;
     if (st.slain[tid]) break;
   }
   const st = G.state.titans || {};

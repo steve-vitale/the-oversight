@@ -135,6 +135,12 @@ simulation/playtest goal with these gaps before expanding content blindly:
    three actual wins, and no dead ally reappears at the next stage. Natural
    Finale reach and a full Network march remain unverified.
    See `evidence/2026-10-15/caregiver-campaign-audit.md`.
+   The Network audit closes an in-march Haven recruitment loophole, keeps
+   its 20/5/10 gates, and enables the ordinary paid route-around behavior
+   for campaign travel. A prepared 16-world screen enters 11 Networks and
+   reaches three cleared nodes at most; no full Network win. Extra public
+   counter use remains experimental because it did not improve that screen.
+   See `evidence/2026-10-15/network-march-audit.md`.
    Crew spoils now parse into bot actions (the phone already exposed them),
    with actual one-use effects proven. Item feeding now consumes a positive
    inventory stack rather than accepting exhausted duplicates for free.
