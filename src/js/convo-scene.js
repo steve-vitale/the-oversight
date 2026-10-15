@@ -407,6 +407,10 @@
               betrayal: '"We need to talk. About what happened."',
               tension: '"It\'s tense around the fire lately."',
               hunger: '"People are going hungry. What do we do?"',
+              // WEIRDNESS (journey crisis r16 2026-10-15): the changed are a
+              // world event — an explicit choice, since alien quirks have no
+              // want-system backstop carrying them.
+              weirdness: '"People are changing. Have you noticed?"',
             };
             if (EV_LABELS[ev.kind]) {
               items.push({ kind: 'event', eventKind: ev.kind, id: 'alive:event:' + ev.kind, label: EV_LABELS[ev.kind], temper: 'neutral' });

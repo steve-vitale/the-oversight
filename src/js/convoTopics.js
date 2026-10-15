@@ -273,15 +273,83 @@
           outbreak = { kind: 'outbreak', n: sickIds.length, self: sickIds.indexOf(vid) >= 0, desc, severe: weight >= 5 };
         }
       } catch (e) {}
+      // WEIRDNESS SCAN (journey crisis r16 2026-10-15): the alien pool.
+      // Villagers carrying monster-meat quirks (howlbelly, gristlefit,
+      // croakbelly, shellgut, witness_maw, flockmind) or warping viruses
+      // (eurika, east_nile, lemons) are the village's business from the
+      // FIRST one — unlike mundane sickness, the want system deliberately
+      // gives alien quirks no sick_help ("no promise the engine can't
+      // keep", convo-wants.js), so a single changed villager otherwise has
+      // NO conversational outlet at all: no want, no lately event. A
+      // villager howling at night is the talk of the fire even alone.
+      // Symptom-honest descriptions, never the quirk's true name — the
+      // transformations are visible, the names aren't common knowledge.
+      // The player counts too: the Bearer's own warping is the talk of the
+      // fire (scholar statuses, not the person record).
+      let weirdness = null;
+      try {
+        const ALIEN_QUIRKS = ['howlbelly', 'gristlefit', 'croakbelly', 'shellgut', 'witness_maw', 'flockmind', 'eurika', 'east_nile', 'lemons'];
+        const QDESC = {
+          howlbelly: 'howling at night', gristlefit: 'shoulders knotted, lashing out',
+          croakbelly: 'guts ribbiting', shellgut: 'digestion clanking',
+          witness_maw: 'tears running black', flockmind: 'quacking when startled',
+          eurika: 'senses gone strange', east_nile: 'fever dreams, hearing crows',
+          lemons: 'ringed rashes at the joints',
+        };
+        const qids = (v.roster || []).filter(id => {
+          try {
+            const svp = this.vpOf(id);
+            if (!svp || svp.dead) return false;
+            if (id === this.villagerId) {
+              return ALIEN_QUIRKS.some(q => this.hasStatus && this.hasStatus('scholar', q));
+            }
+            const person = this.getPerson ? this.getPerson(id) : null;
+            return person && this.hasStatus && ALIEN_QUIRKS.some(q => this.hasStatus(person, q));
+          } catch (e) { return false; }
+        });
+        if (qids.length >= 1) {
+          const counts = {}, firstQ = {};
+          for (const id of qids) {
+            const qs = id === this.villagerId
+              ? ALIEN_QUIRKS.filter(q => { try { return this.hasStatus('scholar', q); } catch (e) { return false; } })
+              : ALIEN_QUIRKS.filter(q => { try { const p = this.getPerson(id); return p && this.hasStatus(p, q); } catch (e) { return false; } });
+            if (!qs.length) continue;
+            firstQ[id] = qs[0];
+            const d = QDESC[qs[0]] || 'changing';
+            counts[d] = (counts[d] || 0) + 1;
+          }
+          const desc = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || 'changing';
+          const names = qids.slice(0, 2).map(id => {
+            try { return this.firstRef(id) || null; } catch (e) { return null; }
+          }).filter(Boolean);
+          // Severe: three or more changed, or anyone with black tears
+          // (witness_maw — "people decide you're possessed" is the most
+          // socially severe transformation).
+          const severe = qids.length >= 3 || qids.some(id => (firstQ[id] || '') === 'witness_maw');
+          const selfQuirk = qids.indexOf(vid) >= 0 ? (firstQ[vid] || null) : null;
+          // firstQ for the player was built from scholar statuses above.
+          weirdness = {
+            kind: 'weirdness', n: qids.length,
+            self: qids.indexOf(vid) >= 0,
+            selfDesc: selfQuirk ? (QDESC[selfQuirk] || 'changing') : null,
+            desc, names, severe,
+          };
+        }
+      } catch (e) {}
       try {
         // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
         // naming debate is the talk of the fire — it surfaces here with the
         // proposals the NPC actually heard. Names stay knowledge-gated: the
         // descriptor until the village agrees, never the true name.
         // YIELDS to a severe outbreak (r8): the debate doesn't outshout the
-        // sick row.
+        // sick row. YIELDS to ANY weirdness (r16): an alien transformation
+        // is unprecedented body horror happening to someone you know —
+        // "what is happening to us" outshouts "what do we call that thing."
+        // Unlike mundane sickness (familiar, and the want system carries it
+        // as sick_help), a transformation has no other conversational
+        // outlet; the debate resumes when the transformation passes.
         if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
-            !(outbreak && outbreak.severe)) {
+            !(outbreak && outbreak.severe) && !weirdness) {
           const entries = this.state.codex.monsters || {};
           const mid = Object.keys(entries).find(k => {
             const e = entries[k];
@@ -352,7 +420,13 @@
         // OUTBREAK RETURN (r8): the scan ran before the naming check; the kind
         // surfaces here — below fresh grief and the mantle (the dead are
         // still named first), above defense and the debate.
-        if (outbreak) return outbreak;
+        // WEIRDNESS RETURN (r16): the alien-quirk scan rides the same slot.
+        // Sickness kills; transformations unnerve — when both are live, the
+        // severe one wins, otherwise the outbreak (existing behavior).
+        if (outbreak || weirdness) {
+          if (weirdness && (!outbreak || (weirdness.severe && !outbreak.severe))) return weirdness;
+          return outbreak;
+        }
         const defended = this.t2mem(vid).find(m => m.t === 'defended' &&
           (day - (m.day || 0)) >= 0 && (day - (m.day || 0)) <= 7);
         if (defended) return { kind: 'defense', note: String(defended.note || '') };
@@ -905,6 +979,28 @@
             '"Have you seen the sick row? ' + n + ' down with ' + desc + '. Nobody says it out loud but everyone\'s counting."',
           ];
         }
+        case 'weirdness': {
+          // WEIRDNESS (journey crisis r16 2026-10-15): the changed are the
+          // news. Symptom-honest (ev.desc), never the quirk's true name —
+          // the transformations are visible, the names aren't common
+          // knowledge. The changed villager themself gets the first-person
+          // variant, naming their own symptom.
+          const wn = ev.n || 2, wdesc = ev.desc || 'changing';
+          const wself = ev.selfDesc || wdesc;
+          if (ev.self) return [
+            '"It\'s me. ' + wself + ' — you\'ve seen it. I don\'t know what it means yet."',
+            '"Since the meat — ' + wself + '. Don\'t look away. Please."',
+          ];
+          const wnames = (ev.names || []).filter(Boolean);
+          const who = wnames.length ? wnames.join(' and ') : 'a couple of us';
+          const areChanging = wn === 1
+            ? '"One of us is changing. '
+            : '"' + wn + ' of us are changing. ';
+          return [
+            '"Have you seen ' + who + '? ' + wdesc + '. Since the strange meat. Nobody taught them that."',
+            areChanging + who + ' — ' + wdesc + '. The fire keeps going quiet when they walk up."',
+          ];
+        }
         case 'tension':
           return ['"Everyone\'s choosing sides and pretending they aren\'t. I hate it."',
             '"You feel that? The air before a storm. That\'s the village right now."'];
@@ -964,6 +1060,9 @@
         outbreak: ['"I {habitI} between tending rounds. Someone has to keep the water boiled."',
           '"I don\'t sleep much when the sick row\'s full. I {habitI} instead."',
           '"Wash your hands. I say it ten times a day now. Wash your hands."'],
+        weirdness: ['"I {habitI} and try not to stare. Everybody\'s trying not to stare. Nobody\'s succeeding."',
+          '"Changed is changed. I watch for what it DOES, not what it looks like."',
+          '"I keep my distance from the changed ones at night. Not proud of it. Just honest."'],
         betrayal: ['"I\'m watching. That\'s what I do now — I watch."',
           '"I {habitI} and count who shows up on time. Lists help."',
           '"Trust got re-priced. I\'m just reading the new numbers."'],
@@ -999,6 +1098,9 @@
         outbreak: ['"We need whoever knows sickness tending full-time. That\'s the whole plan."',
           '"Boiled water, clean hands, rest. It\'s not much of a plan but it\'s the plan."',
           '"If it takes anyone else we bury them properly. That\'s the deal we made."'],
+        weirdness: ['"Nobody eats the strange meat alone anymore. That\'s the new rule. Unspoken, but it\'s the rule."',
+          '"We watch the changed ones. Not cruel — careful. There\'s a difference. We keep telling ourselves that."',
+          '"If the meat did this, the cook needs to know before the next haul. Someone has to say it."'],
         betrayal: ['"Either it gets talked out or it festers. I know which one I\'d bet on."',
           '"A moot could clear it. If anyone has the stomach to call one."',
           '"It\'ll surface. Things like that always surface — usually at the worst hour."'],
@@ -1034,6 +1136,9 @@
         outbreak: ['"My part? I carry water to the sick row. Someone has to."',
           '"I {habitI} and check on them at every bell. It\'s not nothing."',
           '"I sit with them when the fever\'s bad. Company counts as medicine. Almost."'],
+        weirdness: ['"My part? I don\'t flinch. Or I try not to. They notice the trying, I think."',
+          '"I talk to them like nothing\'s different. Because the person isn\'t different. Right?"',
+          '"I {habitI} near them, casual. Normal is a thing you can give someone."'],
         betrayal: ['"I keep my word. Someone around here has to."',
           '"My part? I don\'t gossip about it. That\'s harder than it sounds."',
           '"I give them exactly what they give me. No more loans."'],
@@ -1055,6 +1160,21 @@
       };
       const mname = (ev && ev.name) || 'them';
       const nm = (arr) => (arr || []).map(l => String(l).replaceAll('{mname}', mname));
+      // WEIRDNESS SELF (journey crisis r16 2026-10-15): the changed villager
+      // themself gets first-person follow-ups — the observer pools ("try not
+      // to stare") read wrong in their mouth.
+      if (kind === 'weirdness' && ev && ev.self) {
+        const selfCope = ['"I {habitI} so people have something else to look at."',
+          '"I catch them staring. I stare back now. It\'s the only power I have left."',
+          '"I eat apart. Not because they asked. Because it\'s easier."'];
+        const selfNext = ['"It\'ll pass. They say it passes. I\'m counting the days."',
+          '"If it doesn\'t pass, I learn to live loud. That\'s the plan."',
+          '"Someone has to be first through this. Might as well be me."'];
+        const selfPart = ['"My part? I don\'t hide it. Hiding makes it worse."',
+          '"I answer their questions. Even the stupid ones. Especially the stupid ones."',
+          '"I {habitI} and let them look. Looking is better than whispering."'];
+        return [nm(selfCope), nm(selfNext), nm(selfPart)];
+      }
       return [nm(cope[kind] || cope.none), nm(next[kind] || next.none), nm(part[kind] || part.none)];
     },
   };
