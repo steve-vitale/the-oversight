@@ -1067,9 +1067,9 @@ THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something e
 **Consumes:** titanDef, titanMusterReady, titanMusterState, soundTitanCall, titanInjectAllies, titanReleaseCommitted (titans.js), campaignGrieve, campaignCamp, campaignInjectMonster, campaignSurvivors (finale-campaign.js), spawnWorldMonster, removeWorldMonster, worldMonsters, isSafeTile, monsterAt, playerMonster, startCombat, tbEnd (game.js)
 
 ### nomad-drive (`nomad-drive.js`)
-The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, and owns the leave / move-on / settle UI taps.
+The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, stages foreign-village encounters on leg entry, and owns the leave / move-on / settle / village-encounter UI taps.
 
-**Provides:** Game.nomadDrive (hooks wrap nomad.start/enterLeg/daily and Game.playerDeath, guarded wrap-once), planLegs(), syncItinerary(), scatteredKinOf(vid), partySeekers(), releaseGoneSeekers(), fateFor(), maybeReunion(), resolveReunion(), joinCompanion(), fightKin(), moveKinOn(), checkAllFound(), leaveTap(), moveOnTap(), settleTap()
+**Provides:** Game.nomadDrive (hooks wrap nomad.start/enterLeg/departLeg/daily and Game.playerDeath, guarded wrap-once), planLegs(), syncItinerary(), scatteredKinOf(vid), partySeekers(), releaseGoneSeekers(), fateFor(), maybeReunion(), resolveReunion(), joinCompanion(), fightKin(), moveKinOn(), checkAllFound(), leaveTap(), moveOnTap(), settleTap(), stageVillageEncounter(leg) -> encounter|null, pendingVillageEncounter() -> {villageName, moodLabel, actions[]}|null, villageTap(action)
 
 **Rules:**
 - itinerary: departure plans one leg per living scattered kin whose region is known; newly sharpened trails join by daily sync (code: planLegs, syncItinerary)
@@ -1083,6 +1083,7 @@ The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the dep
 - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
 - all_found: every scattered kin of every living party villager resolved alive/changed/dead closes the road all-found; kin whose region was never learned don't block it (code: checkAllFound)
 - two_tap: leaving and settling are irrevocable: first tap says the cost, second commits; tap-state only, never saved (code: leaveTap, settleTap)
+- road_people: entering a leg stages the foreign village on its map; the mood-gated actions stay open as a beat until answered or the party departs (code: stageVillageEncounter, villageTap; hostile -> fight/leave only, nomad-wild.js villageEncounter)
 
 **Consumes:** Game.nomad start/addLeg/enterLeg/departLeg/daily/endRoad/markKinFound/party/onRoad/canLeave, state.road (nomad.js), Game.nomadScenes reunionScene/sharpenTrail (nomad-scenes.js, guarded), Game.nomadWild travelEvent (nomad-wild.js, guarded), Game.fieldFight (game.js, guarded; hostile party-kin reunions), Game.worldKin(), Game.state.world, Game.map.worldSeed, Game.data.regions
 
