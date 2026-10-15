@@ -116,8 +116,16 @@ simulation/playtest goal with these gaps before expanding content blindly:
    completes Render → Smoke → Make with real costs and yields. Natural 16-seed
    capable/maker screens show no sampled fat, no rendering knowledge, and zero
    pemmican calls. Maker smokable meat often sits on the prep counter its own
-   routine ignores. Next test deliberate counter preservation and measure
-   supply/value before adding more rewards. See
+   routine ignored. The maker now processes one safe counter batch per day
+   inside Haven, retaining meal/time reserves: cook through first, then smoke
+   and shelf. Public shelving now honors normal pantry access (including exile
+   and Full Integration); its false success receipt is removed. Cooked counter
+   meat now exposes Smoke and undercooked batches expose re-cooking in the UI.
+   In 64 matched maker seeds, four runs use the route (five cooked/smoked,
+   four shelved); wins 20→21, bearer deaths 51→53, so no balance improvement
+   is established. All 64 retain earned noncombat tier-3+ gear; fat/pemmican
+   access remains absent. Inspect seed 5's unshelved batch and broader supply
+   access next. See `evidence/2026-10-15/maker-counter-audit.md` and
    `evidence/2026-10-15/preservation-access-audit.md`.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
    two volunteers, plus three from Haven) and duplicate-call inflation.
