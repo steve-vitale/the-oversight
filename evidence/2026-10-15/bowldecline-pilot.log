@@ -1,0 +1,76 @@
+  [leadcourt       seed 11] days=180 end=survived crossDay=4 mealShare=0.855 hunger=113 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 11] days=144 end=village-lost crossDay=4 mealShare=0.631 hunger=48 declines=36 nat=1 won=0
+  [leadcourt       seed 22] days=180 end=survived crossDay=4 mealShare=0.891 hunger=75 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 22] days=163 end=village-lost crossDay=14 mealShare=0.828 hunger=53 declines=22 nat=1 won=0
+  [leadcourt       seed 33] days=95 end=village-lost crossDay=4 mealShare=0.856 hunger=29 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 33] days=38 end=village-lost crossDay=4 mealShare=0.662 hunger=17 declines=1 nat=0 won=0
+  [leadcourt       seed 44] days=148 end=village-lost crossDay=4 mealShare=0.887 hunger=48 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 44] days=180 end=survived crossDay=4 mealShare=0.664 hunger=59 declines=125 nat=1 won=0
+  [leadcourt       seed 55] days=158 end=village-lost crossDay=4 mealShare=0.853 hunger=74 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 55] days=180 end=survived crossDay=4 mealShare=0.667 hunger=120 declines=66 nat=1 won=0
+  [leadcourt       seed 66] days=96 end=village-lost crossDay=4 mealShare=0.888 hunger=39 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 66] days=94 end=village-lost crossDay=4 mealShare=0.637 hunger=25 declines=26 nat=1 won=0
+  [leadcourt       seed 77] days=152 end=village-lost crossDay=4 mealShare=0.86 hunger=60 declines=0 nat=1 won=0
+  [leadcourt+bowl seed 77] days=48 end=village-lost crossDay=9 mealShare=0.644 hunger=8 declines=15 nat=0 won=0
+  [leadcourt       seed 88] days=38 end=village-lost crossDay=4 mealShare=0.863 hunger=13 declines=0 nat=0 won=0
+  [leadcourt+bowl seed 88] days=180 end=survived crossDay=4 mealShare=0.64 hunger=32 declines=118 nat=1 won=0
+  [belongseek       seed 11] days=180 end=survived crossDay=4 mealShare=0.855 hunger=23 declines=0 nat=0 won=0
+  [belongseek+bowl seed 11] days=180 end=survived crossDay=4 mealShare=0.631 hunger=95 declines=28 nat=1 won=0
+  [belongseek       seed 22] days=162 end=village-lost crossDay=4 mealShare=0.891 hunger=73 declines=0 nat=1 won=0
+  [belongseek+bowl seed 22] days=117 end=village-lost crossDay=14 mealShare=0.828 hunger=50 declines=6 nat=1 won=0
+  [belongseek       seed 33] days=174 end=village-lost crossDay=4 mealShare=0.856 hunger=103 declines=0 nat=1 won=0
+  [belongseek+bowl seed 33] days=52 end=village-lost crossDay=4 mealShare=0.662 hunger=14 declines=2 nat=0 won=0
+  [belongseek       seed 44] days=123 end=village-lost crossDay=4 mealShare=0.887 hunger=49 declines=0 nat=1 won=0
+  [belongseek+bowl seed 44] days=180 end=survived crossDay=4 mealShare=0.664 hunger=92 declines=50 nat=1 won=0
+  [belongseek       seed 55] days=180 end=survived crossDay=4 mealShare=0.853 hunger=87 declines=0 nat=1 won=0
+  [belongseek+bowl seed 55] days=180 end=survived crossDay=4 mealShare=0.667 hunger=81 declines=31 nat=1 won=0
+  [belongseek       seed 66] days=180 end=survived crossDay=4 mealShare=0.888 hunger=89 declines=0 nat=1 won=0
+  [belongseek+bowl seed 66] days=131 end=village-lost crossDay=4 mealShare=0.637 hunger=42 declines=29 nat=0 won=0
+  [belongseek       seed 77] days=76 end=village-lost crossDay=4 mealShare=0.86 hunger=40 declines=0 nat=0 won=0
+  [belongseek+bowl seed 77] days=180 end=survived crossDay=9 mealShare=0.644 hunger=25 declines=67 nat=1 won=0
+  [belongseek       seed 88] days=180 end=survived crossDay=4 mealShare=0.863 hunger=43 declines=0 nat=0 won=0
+  [belongseek+bowl seed 88] days=180 end=survived crossDay=4 mealShare=0.64 hunger=83 declines=86 nat=0 won=0
+
+=== PILOT VERDICT ===
+{
+ "meanDelay": 1.9,
+ "byPolicy": {
+  "leadcourt": {
+   "meanDelay": 1.9,
+   "n": 8
+  },
+  "belongseek": {
+   "meanDelay": 1.9,
+   "n": 8
+  }
+ },
+ "goPrimary": false,
+ "hungerRatio": 0.88,
+ "starvArmed": 7,
+ "starvControl": 2,
+ "medSurvArmed": 180,
+ "medSurvControl": 162,
+ "natArmed": 11,
+ "natControl": 12,
+ "winArmed": 0,
+ "winControl": 0,
+ "newDeathModes": [
+  "villager:contest",
+  "villager:The Audit",
+  "villager:The Heckler",
+  "person:combat",
+  "villager:Hummice",
+  "player:starvation",
+  "villager:Nostalgia",
+  "villager:Judge Hoot"
+ ],
+ "guardrails": {
+  "hunger": true,
+  "starv": false,
+  "surv": true,
+  "nat": true,
+  "deathModes": false
+ }
+}
+NO-GO — kill or revise per metric review
+wrote evidence/2026-10-15/bowldecline-pilot.json
