@@ -84,6 +84,15 @@ function check(name, cond, detail) {
 
 const GR_PATH = './policies/guardreplace';
 
+// Post-kill: the layer is deleted per kill protocol. The committed proof stays
+// runnable by skipping loudly instead of FATAL-ing on the missing module.
+const GR_RESOLVED = (() => { try { return require.resolve(GR_PATH); } catch (e) { return null; } })();
+if (!GR_RESOLVED) {
+  console.log('INFO-SKIP: guardreplace layer deleted per kill protocol (NO-GO at pilot); ' +
+    'proof was ALL GREEN pre-kill — see evidence/2026-10-15/sim-guardreplace-b.md');
+  process.exit(0);
+}
+
 // ---------------- PART A: fixtures (mock) ----------------
 function partA() {
   console.log('PART A — gate + guard + replacement fixtures');
