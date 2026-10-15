@@ -220,8 +220,19 @@
           node: { x: node.nx != null ? node.nx : node.x, y: node.ny != null ? node.ny : node.y },
           cause: 'expedition', killerId: vid, witnesses: [vid],
         });
-        var meat = this.monsterMeatEntry ? this.monsterMeatEntry(m) : null;
-        if (corpse && meat) corpse.items.push(meat);
+        // BELLTOAD (Steve 2026-10-13): expedition kills use the plural
+        // monsterCarcassEntries like the patrol path — the legs drop as a
+        // separate item from the poisonous body. (The singular
+        // monsterMeatEntry lost the legs entirely here.)
+        var mdef = m;
+        try {
+          var _found = (this.data.monsters || []).find(function (x) { return x.id === m.id; });
+          if (_found) mdef = _found;
+        } catch (e) {}
+        var meats = this.monsterCarcassEntries ? this.monsterCarcassEntries(mdef) : [];
+        if (corpse && meats && meats.length) {
+          for (var _mi = 0; _mi < meats.length; _mi++) corpse.items.push(meats[_mi]);
+        }
       } catch (e) {}
       if (!corpse) return null;
       try { return this.mapmemRemember(vid, corpse); } catch (e) {}
