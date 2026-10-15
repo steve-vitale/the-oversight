@@ -88,7 +88,16 @@ Game.say = function (t) { said.push(String(t)); return t; };
     const j = Game.justiceState();
     j.crimes = crimes.map(t => ({ type: t, day: 1 }));
     j.stage = 1; j.confrontedBy = null; j.pendingConfront = false;
-    for (let i = 0; i < 16; i++) { said.length = 0; Game.justiceConfront(); const l = said.find(x => x.startsWith('⚖')); if (l) seen.add(l); }
+    // Cover the eligible voice pool instead of gambling that sixteen
+    // independent rolls happen to include every required variant.
+    const random = Math.random;
+    try {
+      for (let i = 0; i < 16; i++) {
+        Math.random = () => (i + 0.5) / 16;
+        said.length = 0; Game.justiceConfront();
+        const l = said.find(x => x.startsWith('⚖')); if (l) seen.add(l);
+      }
+    } finally { Math.random = random; }
   };
   runJustice('murder close', ['murder'], 60, 'bold');
   runJustice('attack close cautious', ['attack'], 55, 'cautious');
