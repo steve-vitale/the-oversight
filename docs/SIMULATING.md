@@ -268,3 +268,32 @@ as survival or death. Mean NPC population also depends on observed run length;
 use the retained daily samples for time-window diagnosis before attributing a
 population difference to one cause. Opportunity funnels and fixed early/mid/late
 windows are explicit follow-up work in the plan.
+
+## Maintaining measurement
+
+The shared quick/full check discovers `scripts/godpath/test-measurement-workflow.js`.
+It checks contract structure, actual metric coverage, source fingerprints and
+sampled observer neutrality in a retained real panel. It does not rerun costly
+campaigns on every edit or require historical game sources to match today's game.
+Text source fingerprints normalize CRLF to LF so different checkouts can use
+the same proof; the actual runner still requires exact observer/contract bytes
+between paired panels.
+
+When changing balance-panel.js, gear-usage-audit.js, balance-scorecard.js or the
+metric contract, rerun all four default policies with `--seeds 7` in a new output
+directory (on/off controls are automatic). Inspect warnings, raw cases and
+neutrality. Retain the resulting panel under evidence and update balance-proof.json:
+set panel to its relative path, panelDigest to its raw SHA-256, and normalizedSources
+to SHA-256 of each listed source with CRLF replaced by LF. Keep the old proof and
+reports as historical evidence. Update focused assertions and the plan for changed
+metric meanings; never just refresh fingerprints to bypass a failed neutrality
+proof. Any changed collector/contract starts a new measurement lineage: rerun both
+baseline and candidate, without mixing old case caches into the comparison.
+
+For a gameplay-only change, retain the existing collector proof, run matched
+baseline/candidate panels, inspect every policy and the feature census, then record
+the decision and limitations. A 16-seed screen is diagnostic; no-material-signal is
+not proof of equality. Before pushing, run the quick and full checks from AGENTS.md.
+For a new feature, document its opportunity denominator and what its success event
+means; update observed-method registration when adding a new public verb. Availability,
+attempt, accepted call, landed effect and useful reward are different observations.

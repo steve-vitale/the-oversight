@@ -86,3 +86,18 @@ it require a reason. Review all policies and raw paired rows.
   accessible human playtest rubrics, and region/job stratification. Preserve
   these blind spots explicitly rather than claiming the first version covers
   all gameplay quality. Instrumented totals never measure fun by themselves.
+
+The four initial policies are mixed campaign strategies, not certified
+pacifist challenges. Gear-source rates show actual routes to rewards;
+they do not prove a whole campaign can avoid combat. Add explicit pacifist,
+contest/show-focused and other named cohorts when testing those claims.
+
+Steve's publication direction: "Get these live so muse can use it too for its
+simulations. Make sure our internal workflows are clear and there are
+instructions or hooks to keep things up to date."
+
+The tools are shared on `codex/balanced-measurement`, based on the regional
+`master` rather than the unrelated gameplay commits on `codex/resume-claude`.
+Agent entry instructions live in AGENTS.md; check.js runs the contract/proof
+maintenance hook in both quick and full mode. See SIMULATING.md for commands
+and the update procedure. Existing cache identities prevent stale-case reuse.

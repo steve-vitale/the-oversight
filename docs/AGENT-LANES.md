@@ -135,3 +135,20 @@ Codex and neutral-ambient justice branches in test-corpses.js and
 test-moot-justice-aftermath.js after random starter knowledge/trust broke
 full-suite assumptions. Complementary breadth/ambient cases stay covered.
 Foodpower test failures now retain ontology subprocess stderr; no runtime edits.
+
+## Shared balanced simulation tooling (2026-10-15)
+
+Codex is publishing `codex/balanced-measurement` based on Muse's shared
+`master` at 15614d03. It contains tools, measurement evidence and instructions
+only. No regional or godpath runtime files are copied from Codex's game branch.
+Both agents should read MEASUREMENT-PLAN.md and SIMULATING.md, use the same
+collector and policy/harness revisions for both comparison roots, and publish
+all per-policy regressions with any gains. The first 16-seed calibration is
+a diagnostic screen; the four policies are mixed, not certified pacifists.
+
+The shared package includes updated capable/competent and livelihood policies
+and the standard harness: start a fresh baseline with these versions rather
+than comparing them against old bot reports as if only gameplay changed.
+Muse retains regions/nomad/systems ownership. Group regional cohorts separately
+and use the common guardrails when measuring its changes. Maintenance checks
+run automatically through check.js; see SIMULATING.md, Maintaining measurement.

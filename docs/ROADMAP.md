@@ -18,6 +18,14 @@ they do not complete Garden or other gameplay backlog items. Small-effect
 confirmation, fixed time windows, opportunity funnels and human playtesting
 remain required where applicable.
 
+Measurement v1 is implemented: 23 contracts, a resumable standard-driver
+collector, per-policy paired comparison and disjoint shard merger. The initial
+16-seed × four-policy feast screen reproduces all 128 historical rows/hashes
+and flags survival/community/death regressions beyond wins. Final zero-use
+method denominators and feature/recipe funnels are retained; broad confirmation
+and opportunity/time-window work remain open. See
+`evidence/2026-10-15/balance-audit.md`.
+
 1. Read `docs/godpath/STEVE-ANSWERS.md` (Steve's verbatim calls; it outranks
    everything). **Never ask Steve something it already answers.**
 2. Read `docs/COHERENCE-SPINE.md`: how the progression features fit together.
