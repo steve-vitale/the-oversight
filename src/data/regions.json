@@ -1558,27 +1558,302 @@
     "covers": "Central America, Caribbean"
   },
   {
-    "id": "sa_amazon",
-    "name": "The Amazon",
-    "continent": "south_america",
-    "climateFamily": "tropical_wet",
-    "hemisphere": "south",
+    "biome": "amazon_rainforest",
+    "challenge": {
+      "description": "The river rises every year and takes the low ground for months. Game disperses, trails drown, and the water you drink wants to give you something. You don't beat the flood — you move with it, or you don't eat.",
+      "id": "a_cheia",
+      "mechanics": [
+        "flooding",
+        "water_contamination",
+        "disease"
+      ],
+      "name": "A Cheia (The Flood)"
+    },
     "climate": {
       "calendar": "tropical_wet_2"
     },
-    "status": "stub",
-    "originTags": [
-      "brazil",
-      "amazonas",
-      "loreto",
-      "para"
+    "continent": "south_america",
+    "covers": "Amazon basin: várzea floodplain, terra firme upland forest, blackwater creeks",
+    "fauna": {
+      "animals": [
+        "jaguar",
+        "capybara",
+        "agouti",
+        "collared_peccary",
+        "scarlet_macaw",
+        "toco_toucan",
+        "red_howler",
+        "lowland_tapir"
+      ],
+      "density": 1.1,
+      "fish": [
+        "pirarucu",
+        "tambaqui",
+        "piranha"
+      ],
+      "predators": [
+        "jaguar"
+      ]
+    },
+    "flora": {
+      "bounty": {
+        "blackwater creek": [
+          "victoria_lily",
+          "Still black water. The giant lilies spread their pads."
+        ],
+        "flooded grove": [
+          "acai",
+          "The floodplain palms stand in black water. Açaí and bacaba."
+        ],
+        "old roça": [
+          "sweet_cassava",
+          "An old garden clearing. Manioc gone wild — bitter and sweet, and only knowledge tells them apart."
+        ],
+        "river beach": [
+          "tucuma",
+          "Sand and sun. Tucumã palms lean over the water."
+        ],
+        "terra firme rise": [
+          "brazil_nut",
+          "High ground, old giants. The castanheiras drop their cannonball pods here."
+        ],
+        "the gap": [
+          "banana",
+          "Light got in. Someone's old clearing — banana and papaya."
+        ],
+        "understory shade": [
+          "cacao",
+          "Dim and damp. Cacao pods hang straight from the trunks."
+        ]
+      },
+      "bushes": [
+        "pineapple",
+        "camu_camu",
+        "guava"
+      ],
+      "commonTrees": [
+        "acai_palm",
+        "cacao_tree"
+      ],
+      "trees": [
+        {
+          "id": "brazil_nut_tree",
+          "nut": "brazil_nut",
+          "roll": 0.25
+        },
+        {
+          "id": "acai_palm",
+          "nut": "acai",
+          "roll": 0.5
+        },
+        {
+          "id": "cacao_tree",
+          "nut": "cacao",
+          "roll": 0.7
+        },
+        {
+          "id": "pupunha_palm",
+          "nut": "pupunha",
+          "roll": 0.85
+        },
+        {
+          "id": "rubber_tree",
+          "roll": 0.95
+        },
+        {
+          "id": "kapok_tree"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 3,
+      "groveBlobs": 5,
+      "groveSize": 6,
+      "lootMult": 1,
+      "meadowSize": 2,
+      "ruinMaxDist": 3,
+      "stockMult": 1,
+      "thickets": 6,
+      "trailLines": 1,
+      "wetlands": 5
+    },
+    "hemisphere": "south",
+    "id": "sa_amazon",
+    "landingVariants": [
+      "varzea_levee",
+      "terra_firme",
+      "ribeirinho_dock"
     ],
+    "lifeseedRegions": [
+      "amazon_brazil",
+      "amazon_peru"
+    ],
+    "monsters": [
+      "living_wire",
+      "anaconda_empress"
+    ],
+    "name": "The Amazon",
     "neighbors": [
       "mesoamerica_caribbean",
       "sa_andes",
       "sa_pampas_patagonia"
     ],
-    "covers": "Amazon basin"
+    "originTags": [
+      "brazil",
+      "amazonas",
+      "loreto",
+      "para",
+      "manaus",
+      "belem"
+    ],
+    "people": {
+      "language": "portuguese",
+      "pantry": [
+        {
+          "kcalEach": 300,
+          "kg": 0.5,
+          "name": "Manioc flour (farinha)",
+          "safe": true,
+          "spoilDays": 180,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "kg": 0.5,
+          "name": "Rice",
+          "needsCooking": true,
+          "rawKcal": 200,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 65
+        },
+        {
+          "cookedKcal": 300,
+          "kcalEach": 150,
+          "kg": 0.5,
+          "name": "Dried black beans",
+          "needsCooking": true,
+          "rawKcal": 150,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 80
+        },
+        {
+          "kcalEach": 400,
+          "kg": 0.3,
+          "name": "Dried pirarucu",
+          "safe": true,
+          "spoilDays": 30,
+          "unit": "strip",
+          "units": 22
+        },
+        {
+          "kcalEach": 180,
+          "kg": 0.1,
+          "name": "Brazil nuts",
+          "safe": true,
+          "spoilDays": 60,
+          "unit": "handful",
+          "units": 30
+        }
+      ],
+      "ruins": [
+        "A feira — the riverside market. The stalls are skeletons now, awnings rotted to lace. Nothing worth stealing; everything worth eating is long gone.",
+        "An escola, paint peeling in the humidity. The chalkboard still has a date on it. Nobody loots a school — you take a desk for firewood and feel bad about it.",
+        "A rodoviária, the bus depot. The buses rust where they died, and the timetables have faded to ghosts."
+      ],
+      "scavenge": [
+        {
+          "id": "farinha",
+          "kcal": 700,
+          "kg": 0.5,
+          "name": "Manioc flour (farinha)",
+          "text": "A sealed bag of toasted manioc flour. The Amazon's bread — bland, filling, eternal."
+        },
+        {
+          "id": "can_sardines",
+          "kcal": 400,
+          "kg": 0.3,
+          "name": "Canned sardines",
+          "text": "Dusty tin, intact. The river towns ran on these."
+        },
+        {
+          "id": "rapadura",
+          "kcal": 900,
+          "kg": 0.5,
+          "name": "Rapadura sugar blocks",
+          "text": "Hard brown bricks of raw cane sugar. A shaving in water is a meal's worth of energy."
+        },
+        {
+          "id": "carne_seca",
+          "kcal": 600,
+          "kg": 0.4,
+          "name": "Carne-seca (dried beef)",
+          "text": "Salt-cured, sun-dried beef. Tough as a boot, keeps like a stone."
+        },
+        {
+          "id": "dried_pirarucu",
+          "kcal": 500,
+          "kg": 0.35,
+          "name": "Dried pirarucu",
+          "text": "Strips of the great river fish, salted and sun-dried. Chewy, salty, perfect."
+        },
+        {
+          "id": "guarana_powder",
+          "kcal": 100,
+          "kg": 0.1,
+          "name": "Guaraná powder",
+          "text": "A small bag of bitter brown powder. A pinch in water wakes you like a slap — the river people's coffee."
+        },
+        {
+          "id": "can_feijoada",
+          "kcal": 650,
+          "kg": 0.4,
+          "name": "Canned feijoada",
+          "text": "Black beans and pork, ready to eat. Tastes like before."
+        },
+        {
+          "id": "salt_bag",
+          "kcal": 0,
+          "kg": 0.3,
+          "name": "Bag of salt",
+          "text": "Coarse salt in a tied sack. Worth its weight in everything."
+        },
+        {
+          "doses": 3,
+          "id": "med_antibiotics",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antibiotics",
+          "name": "Antibiotics (amoxicillin)",
+          "rare": true,
+          "text": "A rattling bottle from the health post's cabinet. For bacterial infections. Read the label."
+        },
+        {
+          "doses": 3,
+          "id": "med_antiparasitic",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antiparasitic",
+          "name": "Antiparasitic (mebendazole)",
+          "rare": true,
+          "text": "Foil blister pack, unbroken. The river gives worms with everything else. Only for those."
+        }
+      ],
+      "villageNames": [
+        "Vila Esperança",
+        "Remanso Verde",
+        "São João do Lago",
+        "Porto Sossego",
+        "Nova Beira"
+      ]
+    },
+    "status": "playable",
+    "climateFamily": "tropical_wet"
   },
   {
     "id": "sa_andes",
@@ -1628,15 +1903,162 @@
     "covers": "Pampas, Patagonia"
   },
   {
-    "id": "eu_temperate",
-    "name": "Temperate Europe",
-    "continent": "europe",
-    "climateFamily": "temperate_humid",
-    "hemisphere": "north",
+    "biome": "eu_temperate_forest",
+    "challenge": {
+      "description": "Winter ends, but the forest doesn't get the memo. March and April are the killing months — the stores are empty, the greens aren't up yet, and the game is lean. The hungry gap.",
+      "id": "hungry_gap",
+      "mechanics": [
+        "harsh_winter",
+        "seasonal_scarcity",
+        "spring_hunger_gap"
+      ],
+      "name": "Przednówek — The Hungry Gap"
+    },
     "climate": {
       "calendar": "temperate_4"
     },
-    "status": "stub",
+    "continent": "europe",
+    "covers": "Central Europe: beech-oak forest, creek valleys, allotment edges, and quiet ruins",
+    "fauna": {
+      "add": [],
+      "animals": [
+        "red_deer",
+        "wild_boar",
+        "european_hare",
+        "common_pheasant",
+        "european_hedgehog",
+        "eurasian_badger",
+        "edible_dormouse",
+        "edible_snail",
+        "gray_wolf"
+      ],
+      "density": 1,
+      "fish": [
+        "northern_pike",
+        "european_perch",
+        "brown_trout"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "wild_boar": 0.25
+        }
+      },
+      "predators": [
+        "gray_wolf"
+      ],
+      "remove": []
+    },
+    "flora": {
+      "bounty": {
+        "beech mast grove": [
+          "beechnut",
+          "Mast country. The old beeches feed everything."
+        ],
+        "berry clearing": [
+          "bilberry",
+          "Purple fingers. Summer's savings account."
+        ],
+        "elder thicket": [
+          "european_elder",
+          "Cook the black clusters. The bush insists."
+        ],
+        "garlic bank": [
+          "wild_garlic",
+          "The whole bank smells of it in April. Sniff every leaf."
+        ],
+        "hazel coppice": [
+          "european_hazelnut",
+          "Cut and regrown for a hundred years. The stools are older than the village."
+        ],
+        "mushroom hollow": [
+          "chanterelle",
+          "Damp and dim. The mushrooms know."
+        ],
+        "oak hollow": [
+          "acorn_pedunculate_oak",
+          "The oaks drop dinner — if you leach it right."
+        ],
+        "old orchard": [
+          "crab_apple",
+          "Someone planted food here once. The trees remember."
+        ],
+        "porcini ground": [
+          "porcini",
+          "Where the roots run deep. Check the stems for the white net."
+        ],
+        "rose tangle": [
+          "rose_hip",
+          "Thorns with a vitamin C pension."
+        ]
+      },
+      "bushes": [
+        "bilberry",
+        "blackberry",
+        "hawthorn"
+      ],
+      "commonTrees": [
+        "pedunculate_oak",
+        "european_beech"
+      ],
+      "trees": [
+        {
+          "id": "pedunculate_oak",
+          "nut": "acorn_pedunculate_oak",
+          "roll": 0.3
+        },
+        {
+          "id": "european_beech",
+          "nut": "beechnut",
+          "roll": 0.45
+        },
+        {
+          "id": "hazel",
+          "nut": "european_hazelnut",
+          "roll": 0.5
+        },
+        {
+          "id": "silver_birch",
+          "roll": 0.5
+        },
+        {
+          "id": "crab_apple"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 2,
+      "groveBlobs": 4,
+      "groveSize": 5,
+      "lootMult": 1,
+      "meadowSize": 4,
+      "ruinMaxDist": 3,
+      "stockMult": 1,
+      "thickets": 4,
+      "trailLines": 2,
+      "wetlands": 2
+    },
+    "hemisphere": "north",
+    "id": "eu_temperate",
+    "landingVariants": [
+      "beech_hollow",
+      "allotment_edge",
+      "depot_yard"
+    ],
+    "lifeseedRegions": [
+      "germany",
+      "poland",
+      "ukraine",
+      "ireland"
+    ],
+    "monsters": [
+      "murkcap",
+      "rut_king"
+    ],
+    "name": "Temperate Europe",
+    "neighbors": [
+      "eu_mediterranean",
+      "eurasia_taiga"
+    ],
     "originTags": [
       "england",
       "france",
@@ -1644,13 +2066,163 @@
       "netherlands",
       "poland",
       "ukraine",
-      "ireland"
+      "ireland",
+      "berlin",
+      "warsaw"
     ],
-    "neighbors": [
-      "eu_mediterranean",
-      "eurasia_taiga"
-    ],
-    "covers": "Western/Central Europe"
+    "people": {
+      "language": "german",
+      "pantry": [
+        {
+          "cookedKcal": 320,
+          "kcalEach": 150,
+          "kg": 0.5,
+          "name": "Rye flour",
+          "needsCooking": true,
+          "rawKcal": 150,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "cookedKcal": 180,
+          "kcalEach": 80,
+          "kg": 0.5,
+          "name": "Potatoes",
+          "needsCooking": true,
+          "rawKcal": 80,
+          "safe": false,
+          "spoilDays": 60,
+          "unit": "potato",
+          "units": 40
+        },
+        {
+          "cookedKcal": 300,
+          "kcalEach": 150,
+          "kg": 0.5,
+          "name": "Yellow peas",
+          "needsCooking": true,
+          "rawKcal": 150,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 50
+        },
+        {
+          "kcalEach": 450,
+          "kg": 0.3,
+          "name": "Smoked sausage",
+          "safe": true,
+          "spoilDays": 30,
+          "unit": "link",
+          "units": 15
+        },
+        {
+          "kcalEach": 300,
+          "kg": 0.2,
+          "name": "Honey",
+          "safe": true,
+          "spoilDays": 365,
+          "unit": "dollop",
+          "units": 12
+        }
+      ],
+      "ruins": [
+        "A village school. The desks still stand in rows. Someone chalked the date of the last lesson on the board and underlined it twice.",
+        "A bus depot. The timetable behind cracked glass still lists routes to towns that aren't there anymore. A driver's lunchbox sits empty on the bench.",
+        "A corner clinic. The waiting-room chairs face a faded poster about flu shots. The medicine cabinet was emptied long ago — by someone careful, not someone desperate.",
+        "An allotment garden colony. The sheds lean and the fences sag, but someone's roses still bloom on schedule, for no one."
+      ],
+      "scavenge": [
+        {
+          "id": "jar_pickles",
+          "kcal": 120,
+          "kg": 0.5,
+          "name": "Pickled cucumbers",
+          "text": "Dill and garlic in cloudy brine — that's how you know they're real."
+        },
+        {
+          "id": "rye_loaf",
+          "kcal": 1100,
+          "kg": 0.8,
+          "name": "Dense rye loaf",
+          "text": "Stale enough to build with. Soak it and it's bread again."
+        },
+        {
+          "id": "can_sauerkraut",
+          "kcal": 200,
+          "kg": 0.4,
+          "name": "Canned sauerkraut",
+          "text": "Sour, salty, and full of the vitamins winter steals."
+        },
+        {
+          "id": "honey_jar",
+          "kcal": 900,
+          "kg": 0.5,
+          "name": "Jar of honey",
+          "text": "Crystallized solid. Honey doesn't spoil; it just waits."
+        },
+        {
+          "id": "dried_porcini",
+          "kcal": 300,
+          "kg": 0.2,
+          "name": "Dried porcini",
+          "text": "Strung on a thread by someone who knew their mushrooms. Trust the string."
+        },
+        {
+          "id": "chocolate_bar",
+          "kcal": 550,
+          "kg": 0.1,
+          "name": "Chocolate bar",
+          "text": "A little gray with bloom. Still chocolate."
+        },
+        {
+          "id": "can_white_sausage",
+          "kcal": 700,
+          "kg": 0.4,
+          "name": "Canned white sausage",
+          "text": "The label promises Munich; the contents promise calories."
+        },
+        {
+          "id": "jar_beets",
+          "kcal": 180,
+          "kg": 0.5,
+          "name": "Pickled beets",
+          "text": "Earthy and sweet. The jar sealed before the Burn and never looked back."
+        },
+        {
+          "doses": 3,
+          "id": "med_antibiotics",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antibiotics",
+          "name": "Antibiotics (amoxicillin)",
+          "rare": true,
+          "text": "A rattling bottle, seal intact. For bacterial infections. Read the label."
+        },
+        {
+          "doses": 3,
+          "id": "med_antiparasitic",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antiparasitic",
+          "name": "Antiparasitic (mebendazole)",
+          "rare": true,
+          "text": "Foil blister pack, unbroken. For worms and gut parasites. Only for those."
+        }
+      ],
+      "villageNames": [
+        "Eichenau",
+        "Buchenheim",
+        "Dębowa",
+        "Brzezina",
+        "Lindenfeld",
+        "Mühlbach"
+      ]
+    },
+    "status": "playable",
+    "climateFamily": "temperate_humid"
   },
   {
     "id": "eu_mediterranean",
@@ -1731,32 +2303,293 @@
     "covers": "Sahara, Arabia, Middle East"
   },
   {
-    "id": "africa_sahel_savanna",
-    "name": "The Sahel and the Savanna",
-    "continent": "africa",
-    "climateFamily": "dry_tropical",
-    "hemisphere": "north",
+    "biome": "sahel_savanna",
+    "challenge": {
+      "description": "No single killer. The long dry is the boss — the waterholes shrink, the grain runs out, and everything hungry gets bold.",
+      "id": "the_long_dry",
+      "mechanics": [
+        "dry_season_scarcity",
+        "water_pressure",
+        "heat_stress"
+      ],
+      "name": "The Long Dry"
+    },
     "climate": {
       "calendar": "dry_tropical_wet_dry"
     },
-    "status": "stub",
-    "originTags": [
+    "climateFamily": "dry_tropical",
+    "continent": "africa",
+    "covers": "West/East Africa savanna: baobab parkland, tall grass, riverine wetlands",
+    "fauna": {
+      "animals": [
+        "helmeted_guineafowl",
+        "warthog",
+        "cape_hare",
+        "dorcas_gazelle",
+        "vervet_monkey",
+        "double_spurred_francolin",
+        "honey_badger",
+        "abyssinian_ground_hornbill",
+        "rock_hyrax",
+        "african_buffalo",
+        "lion"
+      ],
+      "density": 1.2,
+      "fish": [
+        "nile_tilapia",
+        "african_catfish",
+        "nile_perch"
+      ],
+      "predators": [
+        "lion"
+      ]
+    },
+    "flora": {
+      "bounty": {
+        "baobab hollow": [
+          "baobab",
+          "The old tree feeds everything that can reach."
+        ],
+        "dry riverbed": [
+          "wild_rice",
+          "Where the water stood, the grain remembers."
+        ],
+        "old field": [
+          "pearl_millet",
+          "Someone farmed here. The millet stayed."
+        ],
+        "tamarind shade": [
+          "tamarind",
+          "Cool ground, sour pods. Rest and eat."
+        ],
+        "thorn scrub": [
+          "grewia",
+          "Grey bush, sweet berries. The children's harvest."
+        ]
+      },
+      "bushes": [
+        "jujube",
+        "grewia"
+      ],
+      "commonTrees": [
+        "baobab",
+        "acacia"
+      ],
+      "trees": [
+        {
+          "id": "baobab",
+          "nut": "baobab",
+          "roll": 0.5
+        },
+        {
+          "id": "shea",
+          "nut": "shea",
+          "roll": 0.65
+        },
+        {
+          "id": "tamarind",
+          "nut": "tamarind",
+          "roll": 0.8
+        },
+        {
+          "id": "desert_date",
+          "nut": "desert_date",
+          "roll": 0.9
+        },
+        {
+          "id": "acacia"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 2,
+      "groveBlobs": 2,
+      "groveSize": 4,
+      "lootMult": 1,
+      "meadowSize": 7,
+      "ruinMaxDist": 3,
+      "stockMult": 1,
+      "thickets": 4,
+      "trailLines": 1,
+      "wetlands": 3
+    },
+    "hemisphere": "north",
+    "id": "africa_sahel_savanna",
+    "landingVariants": [
+      "waterhole_edge",
+      "acacia_grove",
+      "market_ruins"
+    ],
+    "lifeseedRegions": [
       "nigeria",
-      "lagos",
+      "senegal",
       "ghana",
       "kenya",
-      "senegal",
       "ethiopia",
-      "tanzania",
-      "savanna"
+      "tanzania"
     ],
+    "monsters": [
+      "dustboar",
+      "sunback"
+    ],
+    "name": "The Sahel and the Savanna",
     "neighbors": [
       "mena_desert",
       "africa_congo",
       "africa_southern",
       "eu_mediterranean"
     ],
-    "covers": "West/East Africa savanna"
+    "originTags": [
+      "nigeria",
+      "lagos",
+      "ghana",
+      "kenya",
+      "senegal",
+      "dakar",
+      "ethiopia",
+      "tanzania",
+      "savanna"
+    ],
+    "people": {
+      "language": "french",
+      "pantry": [
+        {
+          "kcalEach": 180,
+          "kg": 0.5,
+          "name": "Pearl millet",
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 70
+        },
+        {
+          "kcalEach": 170,
+          "kg": 0.5,
+          "name": "Sorghum",
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "kcalEach": 170,
+          "kg": 0.2,
+          "name": "Groundnuts",
+          "safe": true,
+          "spoilDays": 90,
+          "unit": "handful",
+          "units": 40
+        },
+        {
+          "kcalEach": 350,
+          "kg": 0.3,
+          "name": "Dried tilapia",
+          "safe": true,
+          "spoilDays": 45,
+          "unit": "fish",
+          "units": 18
+        },
+        {
+          "kcalEach": 40,
+          "kg": 0.1,
+          "name": "Dried moringa leaves",
+          "safe": true,
+          "spoilDays": 180,
+          "unit": "handful",
+          "units": 25
+        }
+      ],
+      "ruins": [
+        "A roadside market. Stalls in rows under a skeleton of awning poles, a painted price board that outlived money itself. The Burn took the wiring; the bargaining echoes stayed.",
+        "A village school block. Three classrooms, one blackboard with the last lesson still on it, half-erased by rain. The desks went to firewood years ago.",
+        "A rural clinic. White paint, a red cross weathered to pink. The medicine cabinet was emptied a long time ago — but check the drawers anyway. Quietly."
+      ],
+      "scavenge": [
+        {
+          "id": "bag_millet",
+          "kcal": 3600,
+          "kg": 2,
+          "name": "Sack of pearl millet",
+          "text": "A torn grain sack, half-full. The millet is dry and clean — someone stored it right."
+        },
+        {
+          "id": "bag_sorghum",
+          "kcal": 3400,
+          "kg": 2,
+          "name": "Sack of sorghum",
+          "text": "Sorghum in a woven sack. Heavy, honest, and still good."
+        },
+        {
+          "id": "tin_sardines",
+          "kcal": 400,
+          "kg": 0.25,
+          "name": "Tinned sardines",
+          "text": "Small oily fish in a tin with a faded label. The Sahel ate these by the million."
+        },
+        {
+          "id": "dried_tilapia",
+          "kcal": 700,
+          "kg": 0.3,
+          "name": "Dried tilapia",
+          "text": "Sun-dried fish, stiff as boards. Soak it, stew it — the river's savings account."
+        },
+        {
+          "id": "groundnut_bag",
+          "kcal": 2800,
+          "kg": 1,
+          "name": "Bag of groundnuts",
+          "text": "Roasted groundnuts in a cloth bag. Check for mold before you feast — the bad ones go back."
+        },
+        {
+          "id": "salt_block",
+          "kcal": 0,
+          "kg": 1.5,
+          "name": "Salt block",
+          "text": "A dense block of salt. No calories, but everything you cook for the next month tastes like food again."
+        },
+        {
+          "id": "kola_nut",
+          "kcal": 120,
+          "kg": 0.2,
+          "name": "Kola nuts",
+          "text": "Bitter red nuts, chewed for long days. Caffeine the old way — respect the dose."
+        },
+        {
+          "id": "water_sachet",
+          "kcal": 0,
+          "kg": 0.5,
+          "name": "Sealed water sachet",
+          "text": "Plastic sachet of water, seal intact. The street vendors sold these by the thousand."
+        },
+        {
+          "doses": 3,
+          "id": "med_antimalarial",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antimalarial",
+          "name": "Antimalarials (artemether)",
+          "rare": true,
+          "text": "Foil blister pack, unbroken. For malaria fevers. Read the label, take the full course."
+        },
+        {
+          "doses": 3,
+          "id": "med_antiparasitic",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antiparasitic",
+          "name": "Antiparasitic (mebendazole)",
+          "rare": true,
+          "text": "Foil blister pack, unbroken. For worms and gut parasites. Only for those."
+        }
+      ],
+      "villageNames": [
+        "Dankoro",
+        "Ngoulé",
+        "Saréma",
+        "Koumbiri"
+      ]
+    },
+    "status": "playable"
   },
   {
     "id": "africa_congo",
@@ -1804,27 +2637,323 @@
     "covers": "Southern Africa"
   },
   {
-    "id": "south_asia",
-    "name": "South Asia",
-    "continent": "asia",
-    "climateFamily": "tropical_monsoon",
-    "hemisphere": "north",
+    "biome": "south_asia_monsoon",
+    "challenge": {
+      "description": "Three seasons, each a boss: the hot steals your water, the wet drowns your stores and breeds fever, the cool is the only mercy. Stockpile, drain, endure.",
+      "id": "the_monsoon",
+      "mechanics": [
+        "monsoon_floods",
+        "heat_waves",
+        "fever_season"
+      ],
+      "name": "The Monsoon"
+    },
     "climate": {
       "calendar": "monsoon_3"
     },
-    "status": "stub",
-    "originTags": [
-      "india",
-      "bangladesh",
-      "pakistan",
-      "sri lanka"
+    "climateFamily": "tropical_monsoon",
+    "continent": "asia",
+    "covers": "Indian subcontinent: monsoon forest, groves, paddies and river ghats",
+    "fauna": {
+      "add": [],
+      "animals": [
+        "nilgai",
+        "chital",
+        "wild_boar",
+        "indian_peafowl",
+        "indian_gray_mongoose",
+        "golden_jackal",
+        "rhesus_macaque",
+        "indian_crested_porcupine",
+        "indian_palm_squirrel",
+        "black_naped_hare",
+        "bengal_tiger"
+      ],
+      "density": 1.1,
+      "fish": [
+        "rohu",
+        "catla",
+        "hilsa"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "bengal_tiger": 0.35,
+          "wild_boar": 0.25
+        }
+      },
+      "predators": [
+        "bengal_tiger"
+      ],
+      "remove": []
+    },
+    "flora": {
+      "bounty": {
+        "fallow field": [
+          "wild_amaranth",
+          "Disturbed ground grows good weeds."
+        ],
+        "feral orchard": [
+          "jackfruit",
+          "Someone planted food here once. The trees remember."
+        ],
+        "forest edge": [
+          "mahua",
+          "Dawn brings the flower-fall."
+        ],
+        "homestead": [
+          "banana",
+          "Someone's clump, gone wild."
+        ],
+        "mango grove": [
+          "mango",
+          "Old grafted trees. The fruit falls ripe."
+        ],
+        "paddy bund": [
+          "paddy_rice",
+          "The old paddies still give."
+        ],
+        "palm stand": [
+          "coconut",
+          "The traveler's canteen."
+        ],
+        "river ghat": [
+          "lotus",
+          "Still water. The pond is a pantry."
+        ],
+        "thicket edge": [
+          "tulsi",
+          "The courtyard herb, escaped."
+        ],
+        "village tank": [
+          "water_chestnut",
+          "Horned nuts under the rosettes."
+        ]
+      },
+      "bushes": [
+        "guava",
+        "tulsi",
+        "lemongrass",
+        "curry_leaf"
+      ],
+      "commonTrees": [
+        "mango",
+        "neem",
+        "banyan"
+      ],
+      "trees": [
+        {
+          "id": "mango",
+          "nut": "mango",
+          "roll": 0.3
+        },
+        {
+          "id": "banyan",
+          "nut": "banyan_fig",
+          "roll": 0.55
+        },
+        {
+          "id": "neem",
+          "roll": 0.75
+        },
+        {
+          "id": "jackfruit",
+          "nut": "jackfruit",
+          "roll": 0.85
+        },
+        {
+          "id": "coconut_palm",
+          "nut": "coconut"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 2,
+      "groveBlobs": 3,
+      "groveSize": 4,
+      "lootMult": 1,
+      "meadowSize": 4,
+      "ruinMaxDist": 3,
+      "stockMult": 1.1,
+      "thickets": 4,
+      "trailLines": 1,
+      "wetlands": 4
+    },
+    "hemisphere": "north",
+    "id": "south_asia",
+    "landingVariants": [
+      "rice_paddy",
+      "mango_grove",
+      "river_ghat"
     ],
+    "lifeseedRegions": [
+      "india_north",
+      "india_west",
+      "bangladesh"
+    ],
+    "monsters": [
+      "sweeps_week",
+      "cliffhanger"
+    ],
+    "name": "South Asia",
     "neighbors": [
       "central_asia_highlands",
       "southeast_asia",
       "mena_desert"
     ],
-    "covers": "Indian subcontinent"
+    "originTags": [
+      "india",
+      "delhi",
+      "bangladesh",
+      "dhaka",
+      "pakistan",
+      "sri lanka"
+    ],
+    "people": {
+      "language": "hindi",
+      "pantry": [
+        {
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "kg": 0.5,
+          "name": "Rice",
+          "needsCooking": true,
+          "rawKcal": 200,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 70
+        },
+        {
+          "cookedKcal": 320,
+          "kcalEach": 180,
+          "kg": 0.5,
+          "name": "Masoor dal",
+          "needsCooking": true,
+          "rawKcal": 180,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "kcalEach": 120,
+          "kg": 0.2,
+          "name": "Jaggery",
+          "safe": true,
+          "spoilDays": 365,
+          "unit": "lump",
+          "units": 30
+        },
+        {
+          "kcalEach": 5,
+          "kg": 0.05,
+          "name": "Tea",
+          "safe": true,
+          "spoilDays": 365,
+          "unit": "pinch",
+          "units": 40
+        },
+        {
+          "kcalEach": 300,
+          "kg": 0.2,
+          "name": "Dried fish",
+          "safe": true,
+          "spoilDays": 60,
+          "unit": "strip",
+          "units": 25
+        }
+      ],
+      "ruins": [
+        "A vegetable market, its stalls collapsed in rows. Pre-Burn. The weighing scales are still bolted to one counter — someone measured out their life here in kilos.",
+        "A government school, its classrooms open to the sky. Chalk dust still ghosts one blackboard: a half-erased lesson. The Burn took the wires; the walls kept standing out of spite.",
+        "A bus depot, the bays empty, one timetable still legible behind cracked glass. The routes outlived the buses."
+      ],
+      "scavenge": [
+        {
+          "id": "rice_sack",
+          "kcal": 2000,
+          "kg": 1.5,
+          "name": "Sack of rice",
+          "text": "A torn sack, half-spilled. The grain inside is dry and clean — someone's winter, abandoned."
+        },
+        {
+          "id": "masoor_dal_bag",
+          "kcal": 1400,
+          "kg": 1,
+          "name": "Bag of masoor dal",
+          "text": "Red lentils in a stitched jute bag. The stitching held; the weevils never found it."
+        },
+        {
+          "id": "mustard_oil",
+          "kcal": 1500,
+          "kg": 0.5,
+          "name": "Tin of mustard oil",
+          "text": "A square tin, seal unbroken. Pungent, golden — cooking fat and lamp oil in one."
+        },
+        {
+          "id": "jaggery_block",
+          "kcal": 800,
+          "kg": 0.4,
+          "name": "Block of jaggery",
+          "text": "Dark unrefined sugar, wrapped in cloth. Ants found the corner; most of it is yours."
+        },
+        {
+          "id": "tea_brick",
+          "kcal": 20,
+          "kg": 0.3,
+          "name": "Brick of tea",
+          "text": "Compressed black tea, stamped with a garden name. Morale in a brick."
+        },
+        {
+          "id": "turmeric_powder",
+          "kcal": 60,
+          "kg": 0.2,
+          "name": "Pouch of turmeric",
+          "text": "Ground haldi in a sealed pouch. Stains everything; heals more."
+        },
+        {
+          "id": "tinned_hilsa",
+          "kcal": 500,
+          "kg": 0.35,
+          "name": "Tinned hilsa",
+          "text": "A tin of the queen of fish, in mustard oil. The label shows a river that still runs."
+        },
+        {
+          "id": "coir_rope",
+          "kcal": 0,
+          "kg": 0.8,
+          "name": "Coil of coir rope",
+          "text": "Coconut-fiber rope, still strong. The old hands made everything from this."
+        },
+        {
+          "doses": 4,
+          "id": "ors_packets",
+          "kcal": 0,
+          "kg": 0.1,
+          "name": "ORS packets",
+          "rare": true,
+          "text": "Oral rehydration salts, foil-sealed. For dehydration and dysentery — mix with CLEAN water."
+        },
+        {
+          "doses": 3,
+          "id": "med_cipro",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antibiotics",
+          "name": "Ciprofloxacin strips",
+          "rare": true,
+          "text": "Foil strips, seal intact. For bacterial gut infections — the monsoon special. Read the label."
+        }
+      ],
+      "villageNames": [
+        "Neemkheda",
+        "Peepalwadi",
+        "Jamunpur",
+        "Amaltas",
+        "Barapipal"
+      ]
+    },
+    "status": "playable"
   },
   {
     "id": "central_asia_highlands",
@@ -1853,27 +2982,366 @@
     "covers": "Steppe, Himalaya, Tibet"
   },
   {
-    "id": "east_asia",
-    "name": "East Asia",
-    "continent": "asia",
-    "climateFamily": "temperate_humid",
-    "hemisphere": "north",
-    "climate": {
-      "calendar": "temperate_4"
+    "biome": "east_asia_temperate",
+    "challenge": {
+      "description": "Early summer brings the meiyu — weeks of warm, unrelenting rain. The paddies flood, stored food molds, mosquitoes rise in clouds, and the rivers take back their roads.",
+      "id": "plum_rains",
+      "mechanics": [
+        "relentless_rain",
+        "flood_risk",
+        "spoilage_surge",
+        "mosquito_bloom"
+      ],
+      "name": "The Plum Rains"
     },
-    "status": "stub",
-    "originTags": [
-      "china",
-      "japan",
-      "korea",
-      "sichuan"
+    "climate": {
+      "calendar": "temperate_4",
+      "seasons": [
+        {
+          "days": 80,
+          "id": "spring",
+          "note": "Greens return. Bamboo shoots push up — the hungry season's exit.",
+          "temp": "mild",
+          "weather": {
+            "clear": 0.6,
+            "cold": 0.05,
+            "rain": 0.35
+          }
+        },
+        {
+          "days": 95,
+          "id": "summer",
+          "note": "The plum rains, then typhoon season. Hot, wet, everything grows — including the mosquitoes.",
+          "temp": "hot",
+          "weather": {
+            "clear": 0.55,
+            "rain": 0.35,
+            "storm": 0.1
+          }
+        },
+        {
+          "days": 75,
+          "id": "fall",
+          "note": "Harvest. Persimmons, chestnuts, rice. Fatten up.",
+          "temp": "cool",
+          "weather": {
+            "clear": 0.7,
+            "cold": 0.1,
+            "rain": 0.2
+          }
+        },
+        {
+          "days": 115,
+          "id": "winter",
+          "note": "The Siberian wind. Dry, bitter, still. Stored food or nothing.",
+          "temp": "cold",
+          "weather": {
+            "clear": 0.6,
+            "cold": 0.3,
+            "rain": 0.1
+          }
+        }
+      ]
+    },
+    "climateFamily": "temperate_humid",
+    "continent": "asia",
+    "covers": "Eastern China, the Korean peninsula, Japan: bamboo brakes, feral rice paddies, persimmon orchards, tea terraces gone wild",
+    "fauna": {
+      "animals": [
+        "sika_deer",
+        "raccoon_dog",
+        "ringneck_pheasant",
+        "red_crowned_crane",
+        "mandarin_duck",
+        "japanese_macaque",
+        "dhole",
+        "amur_tiger",
+        "wild_boar",
+        "common_carp",
+        "crucian_carp",
+        "japanese_eel"
+      ],
+      "density": 1.1,
+      "fish": [
+        "common_carp",
+        "crucian_carp",
+        "japanese_eel"
+      ],
+      "parasites": {
+        "trichinosis": {
+          "wild_boar": 0.25
+        }
+      },
+      "predators": [
+        "amur_tiger"
+      ]
+    },
+    "flora": {
+      "bounty": {
+        "bamboo brake": [
+          "moso_bamboo_shoot",
+          "Where the poles stand thick, the shoots come up sweet."
+        ],
+        "chestnut lane": [
+          "chinese_chestnut",
+          "The burrs split in fall. Watch your fingers; the nuts are worth it."
+        ],
+        "feral paddy": [
+          "rice_wild",
+          "The paddies went wild years ago. The rice didn't get the memo."
+        ],
+        "goji hedge": [
+          "goji_berry",
+          "Thorny hedges, red berries. The birds know."
+        ],
+        "mulberry row": [
+          "mulberry_white",
+          "Silkworm country, once. The berries are for whoever's hungry now."
+        ],
+        "old orchard": [
+          "asian_persimmon",
+          "Someone planted food here once. The trees remember."
+        ],
+        "pond margin": [
+          "lotus_root",
+          "Still water, broad leaves standing tall. Dinner is under the mud."
+        ],
+        "tea terrace": [
+          "tea_leaf",
+          "Terraces gone to seed. The bushes still flush every spring."
+        ],
+        "temple ginkgo": [
+          "ginkgo_nut",
+          "Planted for shade and long life. The nuts are a bonus — roast them, and mind the dose."
+        ],
+        "wet ditch": [
+          "chinese_water_chestnut",
+          "Crisp corms under the mud. Cook them — the ditch water isn't clean."
+        ]
+      },
+      "bushes": [
+        "goji_berry",
+        "tea_leaf"
+      ],
+      "commonTrees": [
+        "ginkgo",
+        "chestnut"
+      ],
+      "trees": [
+        {
+          "id": "ginkgo",
+          "nut": "ginkgo_nut",
+          "roll": 0.35
+        },
+        {
+          "id": "chestnut",
+          "nut": "chinese_chestnut",
+          "roll": 0.65
+        },
+        {
+          "id": "bamboo",
+          "roll": 0.8
+        },
+        {
+          "id": "camphor"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 1,
+      "groveBlobs": 3,
+      "groveSize": 4,
+      "lootMult": 1.2,
+      "meadowSize": 4,
+      "ruinMaxDist": 2,
+      "stockMult": 1.1,
+      "thickets": 6,
+      "trailLines": 1,
+      "wetlands": 4
+    },
+    "hemisphere": "north",
+    "id": "east_asia",
+    "landingVariants": [
+      "paddy_margin",
+      "bamboo_hollow",
+      "old_hutong"
     ],
+    "lifeseedRegions": [
+      "china_north",
+      "korea"
+    ],
+    "monsters": [
+      "sanjun",
+      "drumbelly_tanuki"
+    ],
+    "name": "East Asia",
     "neighbors": [
       "central_asia_highlands",
       "southeast_asia",
       "eurasia_taiga"
     ],
-    "covers": "China, Korea, Japan"
+    "originTags": [
+      "china",
+      "japan",
+      "korea",
+      "sichuan",
+      "beijing",
+      "seoul",
+      "tokyo",
+      "shanghai",
+      "chengdu"
+    ],
+    "people": {
+      "language": "mandarin",
+      "pantry": [
+        {
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "kg": 0.5,
+          "name": "White rice",
+          "needsCooking": true,
+          "rawKcal": 200,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 70
+        },
+        {
+          "cookedKcal": 380,
+          "kcalEach": 220,
+          "kg": 0.5,
+          "name": "Dried wheat noodles",
+          "needsCooking": true,
+          "rawKcal": 220,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "bundle",
+          "units": 55
+        },
+        {
+          "cookedKcal": 300,
+          "kcalEach": 180,
+          "kg": 0.5,
+          "name": "Dried soybeans",
+          "needsCooking": true,
+          "rawKcal": 180,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 40
+        },
+        {
+          "kcalEach": 60,
+          "kg": 0.05,
+          "name": "Dried shiitake",
+          "safe": true,
+          "spoilDays": 180,
+          "unit": "handful",
+          "units": 30
+        },
+        {
+          "kcalEach": 0,
+          "kg": 0.1,
+          "name": "Salt",
+          "safe": true,
+          "spoilDays": 9999,
+          "unit": "pinch",
+          "units": 40
+        }
+      ],
+      "ruins": [
+        "An elementary school. The classrooms are open to the sky; a wall chart of the seasons still hangs, faded to pastels. Someone chalked a height chart on a doorframe — the marks stop halfway up.",
+        "A township clinic. The medicine cabinet was emptied years ago, but the posters on the wall still explain hand-washing in four cheerful steps. The examination table is now a planter — mugwort grows through it.",
+        "A bus depot. The buses sit in a patient row, tires long since gone to moss. The route map by the gate is still legible: forty stops, none of which exist anymore.",
+        "A small roadside shrine, roofed and swept — someone still tends it. The offering box is empty, and stays empty."
+      ],
+      "scavenge": [
+        {
+          "id": "pack_noodles",
+          "kcal": 380,
+          "kg": 0.12,
+          "name": "Instant noodles",
+          "text": "A brick of noodles, seasoning dust at the bottom of the bag. Civilization's emergency ration."
+        },
+        {
+          "id": "can_congee",
+          "kcal": 320,
+          "kg": 0.35,
+          "name": "Canned congee",
+          "text": "Rice porridge in a can. Bland, warm, perfect — the taste of being looked after."
+        },
+        {
+          "id": "pack_ricecake",
+          "kcal": 420,
+          "kg": 0.25,
+          "name": "Rice cakes",
+          "text": "Pounded rice, dried hard. Soak it, grill it, soup it — it keeps coming back."
+        },
+        {
+          "id": "pack_seaweed",
+          "kcal": 150,
+          "kg": 0.05,
+          "name": "Dried seaweed",
+          "text": "Nori sheets, still crisp. Salt and iodine in paper-thin form."
+        },
+        {
+          "id": "can_mackerel",
+          "kcal": 480,
+          "kg": 0.3,
+          "name": "Canned mackerel",
+          "text": "Oily fish in a tin. The bones went soft years ago; the flavor didn't."
+        },
+        {
+          "id": "bottle_soysauce",
+          "kcal": 120,
+          "kg": 0.5,
+          "name": "Soy sauce",
+          "text": "A heavy bottle, half full. Salt you can pour — everything bland becomes food again."
+        },
+        {
+          "id": "pack_mooncake",
+          "kcal": 620,
+          "kg": 0.3,
+          "name": "Mooncakes (lotus)",
+          "text": "Dense, sweet, impossibly rich. A festival food, years out of season. Eat it anyway."
+        },
+        {
+          "id": "brick_tea",
+          "kcal": 0,
+          "kg": 0.4,
+          "name": "Tea brick",
+          "text": "Compressed tea, hard as a roof tile. Not food — morale in solid form."
+        },
+        {
+          "doses": 4,
+          "id": "med_kakkonto",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "cold_remedy",
+          "name": "Cold medicine (kakkonto)",
+          "rare": true,
+          "text": "Foil packets of kakkonto — the kudzu-root cold formula. For fever and stiffness, not for infections."
+        },
+        {
+          "doses": 6,
+          "id": "med_bandage",
+          "kcal": 0,
+          "kg": 0.08,
+          "medType": "bandage",
+          "name": "Bandages (roll)",
+          "rare": true,
+          "text": "A clean roll, still sealed. For wounds that need covering."
+        }
+      ],
+      "villageNames": [
+        "Cranehaven",
+        "Plumgrove",
+        "Stillpaddy",
+        "Bamboolight",
+        "Hearthollow"
+      ]
+    },
+    "status": "playable"
   },
   {
     "id": "southeast_asia",

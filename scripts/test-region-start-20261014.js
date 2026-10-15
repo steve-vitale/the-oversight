@@ -82,7 +82,8 @@ async function main() {
   ok(regionStart().why === 'random', 'second run: why=random', JSON.stringify(regionStart()));
   const seen = {};
   for (let i = 0; i < 60; i++) { const r = Game.pickLandingRegion(FX); seen[r.id] = (seen[r.id] || 0) + 1; }
-  ok(seen[FX] > 0 && seen.na_eastern_woodlands > 0 && Object.keys(seen).length === 2, 'random picks cover both playable regions', JSON.stringify(seen));
+  const nPlayable = Game.playableRegions().length;
+  ok(seen[FX] > 0 && seen.na_eastern_woodlands > 0 && Object.keys(seen).length === nPlayable, `random picks cover all ${nPlayable} playable regions (was exactly 2 before wave 1)`, JSON.stringify(seen));
   ok(Game._landingWhy.why === 'random', 'pickLandingRegion reports random');
   wipeDevice();
   _store['scattering-save-v1-someone-123'] = '{}';
@@ -109,12 +110,15 @@ async function main() {
   fr = Game.firstRunLanding('sa_amazon', [fxClimate, fxNeighbor]);
   ok(fr.region.id === 'fx_wet_neighbor', 'among equals, the origin region\'s neighbor wins');
   amazon.neighbors.pop();
-  // the shipped world today: one playable region, Lagos lands there on run 1
+  // the shipped world: Lagos lands in its origin region if playable, else the default
   Game.data.regions = regionsShipped;
   wipeDevice();
   await start('Lagos, Nigeria');
-  ok(Game.state.region === 'na_eastern_woodlands' && regionStart().why === 'first_run_origin' && regionStart().via === 'default',
-    'shipped data: a Lagos first run lands in the eastern woodlands (no African region playable yet)', JSON.stringify(regionStart()));
+  const lagosRegion = Game.parseOrigin('Lagos, Nigeria').regions[0];
+  const lagosPlayable = Game.playableRegions().some(r => r.id === lagosRegion);
+  const expectLagos = lagosPlayable ? lagosRegion : 'na_eastern_woodlands';
+  ok(Game.state.region === expectLagos && regionStart().why === 'first_run_origin',
+    `shipped data: a Lagos first run lands in ${expectLagos}`, JSON.stringify(regionStart()));
   Game.data.regions = regionsShipped.concat([fx]);
 
   // ============ S4 debug wins ============

@@ -1,84 +1,473 @@
 [
- {
-  "description": "Southeast US deciduous woodlands. Rich forage, real winters in the north of range. Your first classroom.",
-  "forageTable": {
-   "acorn_white_oak": 5,
-   "blackberry": 4,
-   "cattail": 3,
-   "chickweed": 3,
-   "dandelion": 5,
-   "hickory_nut": 4,
-   "muscadine": 3,
-   "persimmon": 4,
-   "wild_onion": 3,
-   "wood_sorrel": 3,
-   "lambs_quarters": 4,
-   "purslane": 3,
-   "plantain_leaf": 3,
-   "wild_strawberry": 2,
-   "elderberry": 3,
-   "pawpaw": 3,
-   "ramps": 2,
-   "black_walnut": 2,
-   "burdock": 3,
-   "staghorn_sumac": 2,
-   "sassafras": 2,
-   "yarrow": 2,
-   "jewelweed": 2,
-   "goldenrod": 2,
-   "mayapple": 2,
-   "spicebush": 3,
-   "american_hazelnut": 2,
-   "sunchoke": 3,
-   "stinging_nettle": 2,
-   "greenbrier": 3,
-   "pokeweed": 2,
-   "maypop": 3,
-   "wild_cherry": 3,
-   "serviceberry": 2,
-   "groundnut": 2
+  {
+    "description": "Southeast US deciduous woodlands. Rich forage, real winters in the north of range. Your first classroom.",
+    "forageTable": {
+      "acorn_white_oak": 5,
+      "blackberry": 4,
+      "cattail": 3,
+      "chickweed": 3,
+      "dandelion": 5,
+      "hickory_nut": 4,
+      "muscadine": 3,
+      "persimmon": 4,
+      "wild_onion": 3,
+      "wood_sorrel": 3,
+      "lambs_quarters": 4,
+      "purslane": 3,
+      "plantain_leaf": 3,
+      "wild_strawberry": 2,
+      "elderberry": 3,
+      "pawpaw": 3,
+      "ramps": 2,
+      "black_walnut": 2,
+      "burdock": 3,
+      "staghorn_sumac": 2,
+      "sassafras": 2,
+      "yarrow": 2,
+      "jewelweed": 2,
+      "goldenrod": 2,
+      "mayapple": 2,
+      "spicebush": 3,
+      "american_hazelnut": 2,
+      "sunchoke": 3,
+      "stinging_nettle": 2,
+      "greenbrier": 3,
+      "pokeweed": 2,
+      "maypop": 3,
+      "wild_cherry": 3,
+      "serviceberry": 2,
+      "groundnut": 2
+    },
+    "hazards": [
+      "ticks (spring/summer)",
+      "venomous snakes (summer)",
+      "flash floods"
+    ],
+    "id": "se_woodlands",
+    "name": "Southeast Woodlands",
+    "seasons": {
+      "fall": {
+        "days": 75,
+        "note": "Harvest season. Nuts, persimmons, last greens. Fatten up."
+      },
+      "spring": {
+        "days": 80,
+        "note": "Greens return. Hungry season ends — if you make it."
+      },
+      "summer": {
+        "days": 95,
+        "note": "Berries, heat, snakes. Water is everywhere; food takes work."
+      },
+      "winter": {
+        "days": 115,
+        "note": "The boss. Nuts and stored food or nothing. Game gets bold."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "weather": [
+      "mild rain",
+      "humid heat",
+      "cold snap",
+      "fog",
+      "storm"
+    ]
   },
-  "hazards": [
-   "ticks (spring/summer)",
-   "venomous snakes (summer)",
-   "flash floods"
-  ],
-  "id": "se_woodlands",
-  "name": "Southeast Woodlands",
-  "seasons": {
-   "fall": {
-    "days": 75,
-    "note": "Harvest season. Nuts, persimmons, last greens. Fatten up."
-   },
-   "spring": {
-    "days": 80,
-    "note": "Greens return. Hungry season ends \u2014 if you make it."
-   },
-   "summer": {
-    "days": 95,
-    "note": "Berries, heat, snakes. Water is everywhere; food takes work."
-   },
-   "winter": {
-    "days": 115,
-    "note": "The boss. Nuts and stored food or nothing. Game gets bold."
-   }
+  {
+    "description": "Central European deciduous forest — beech, oak, hornbeam under a closed canopy, with meadow clearings, creek valleys, and the ruins of the people who managed it for centuries. Rich, seasonal, and honest: the mast feeds you in fall, the gap starves you in spring.",
+    "forageTable": {
+      "acorn_pedunculate_oak": 5,
+      "autumn_crocus": 1,
+      "beechnut": 5,
+      "bilberry": 4,
+      "birch_sap": 2,
+      "blackberry": 3,
+      "burdock": 2,
+      "chanterelle": 4,
+      "chickweed": 3,
+      "common_sorrel": 2,
+      "cow_parsley": 2,
+      "crab_apple": 2,
+      "dandelion": 4,
+      "deadly_nightshade": 1,
+      "death_cap": 1,
+      "european_elder": 3,
+      "european_hazelnut": 4,
+      "fly_agaric": 2,
+      "giant_puffball": 2,
+      "good_king_henry": 2,
+      "ground_elder": 3,
+      "hawthorn": 3,
+      "hemlock": 1,
+      "lambs_quarters": 3,
+      "lily_of_the_valley": 2,
+      "plantain_leaf": 3,
+      "porcini": 3,
+      "purslane": 2,
+      "rose_hip": 3,
+      "stinging_nettle": 4,
+      "wild_carrot": 2,
+      "wild_garlic": 5,
+      "woodland_strawberry": 2,
+      "yarrow": 2
+    },
+    "hazards": [
+      "ticks (spring/summer)",
+      "wild boar (all year — sows with young)",
+      "harsh winter",
+      "autumn storms bring down limbs"
+    ],
+    "id": "eu_temperate_forest",
+    "name": "Temperate European Forest",
+    "seasons": {
+      "fall": {
+        "days": 75,
+        "note": "Mast season. Acorns, beechnuts, hazel, mushrooms. Fatten up — the gap is coming."
+      },
+      "spring": {
+        "days": 80,
+        "note": "The hungry gap ends here — wild garlic, first greens. Ticks wake up too."
+      },
+      "summer": {
+        "days": 95,
+        "note": "Berries, mushrooms after rain, heat in the clearings. Boar are bold."
+      },
+      "winter": {
+        "days": 115,
+        "note": "The boss. Nuts and stored food or nothing. The wolves come closer."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "weather": [
+      "mild rain",
+      "cool overcast",
+      "cold snap",
+      "fog",
+      "storm"
+    ]
   },
-  "tileTypes": [
-   "forest_floor",
-   "grove",
-   "meadow",
-   "thicket",
-   "wetland",
-   "creek",
-   "trail_edge",
-   "ruin"
-  ],
-  "weather": [
-   "mild rain",
-   "humid heat",
-   "cold snap",
-   "fog",
-   "storm"
-  ]
- }
+  {
+    "description": "Towering terra firme forest, blackwater creeks, and floodplain that spends half the year underwater. Food hangs everywhere — if you know what you're looking at. The forest is not empty; it is a garden that forgot its gardeners.",
+    "forageTable": {
+      "abiu": 3,
+      "acai": 5,
+      "bacaba": 4,
+      "banana": 4,
+      "biriba": 3,
+      "bitter_cassava": 4,
+      "brazil_nut": 4,
+      "cacao": 4,
+      "camu_camu": 4,
+      "cashew": 3,
+      "castor_bean": 2,
+      "cupuacu": 4,
+      "cushcush_yam": 3,
+      "dandelion": 2,
+      "guava": 4,
+      "inaja": 3,
+      "kapok_seed": 2,
+      "maracuja": 3,
+      "murumuru": 3,
+      "papaya": 4,
+      "pataua": 3,
+      "pineapple": 4,
+      "piquiarana": 3,
+      "plantain_leaf": 2,
+      "pupunha": 4,
+      "purslane": 3,
+      "rubber_seed": 3,
+      "sandbox_tree": 2,
+      "soursop": 3,
+      "sweet_cassava": 5,
+      "sweet_potato": 4,
+      "taro": 3,
+      "tucuma": 4,
+      "victoria_lily": 3
+    },
+    "hazards": [
+      "flash floods in the wet season — the várzea goes under",
+      "fer-de-lance and other pit vipers in the leaf litter",
+      "mosquitoes at dusk (itchy; the giant ones carry worse)",
+      "jaguar near water at dusk and dawn"
+    ],
+    "id": "amazon_rainforest",
+    "name": "Amazon Rainforest",
+    "seasons": {
+      "dry": {
+        "days": 120,
+        "note": "Rivers drop. Fish crowd the shrinking pools — the hungry season for the forest, the harvest season for you."
+      },
+      "wet": {
+        "days": 245,
+        "note": "Rain most afternoons. Rivers flood the forest and the fish swim among the trees. Fruit everywhere; game dispersed."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ]
+  },
+  {
+    "description": "West and East African savanna — baobab and acacia parkland, tall grass, riverine wetlands. Feast in the rains, hunger in the long dry. The big animals drink here too.",
+    "forageTable": {
+      "acacia_gum": 3,
+      "amaranth": 4,
+      "baobab": 5,
+      "bitter_leaf": 3,
+      "cassava": 3,
+      "cowpea": 4,
+      "desert_date": 4,
+      "doum_palm": 3,
+      "egusi_melon": 3,
+      "fonio": 5,
+      "grewia": 3,
+      "hanza": 2,
+      "hibiscus_bissap": 4,
+      "jujube": 4,
+      "mesquite": 2,
+      "moringa": 4,
+      "neem": 2,
+      "okra": 4,
+      "pearl_millet": 5,
+      "physic_nut": 2,
+      "prickly_pear": 2,
+      "purslane": 3,
+      "senegal_date_palm": 3,
+      "shea": 4,
+      "sodom_apple": 2,
+      "sorghum": 5,
+      "tamarind": 4,
+      "thorn_apple": 2,
+      "tiger_nut": 4,
+      "water_lily": 3,
+      "wild_rice": 3,
+      "yam": 3,
+      "peanut": 4
+    },
+    "hazards": [
+      "heat (dry season)",
+      "venomous snakes",
+      "mosquitoes (wet season)",
+      "lions near water"
+    ],
+    "id": "sahel_savanna",
+    "name": "Sahel Savanna",
+    "seasons": {
+      "dry": {
+        "days": 151,
+        "note": "The long dry. Grass cures to gold, waterholes shrink, herds walk to water."
+      },
+      "dry_cool": {
+        "days": 92,
+        "note": "Harvest, then the dusty harmattan wind. Cool nights, grain in the granary."
+      },
+      "wet": {
+        "days": 122,
+        "note": "The rains. Planting, mud, mosquitoes — and everything green at once."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "weather": [
+      "harmattan dust",
+      "humid heat",
+      "dry heat",
+      "torrential rain",
+      "storm"
+    ]
+  },
+  {
+    "description": "Monsoon forest, groves and paddies of the Indian subcontinent. Feast in the wet, sweat in the hot, harvest in the cool — the year breathes in three seasons and the land gives generously to those who learn its poisons.",
+    "forageTable": {
+      "amla": 3,
+      "bael": 3,
+      "bamboo_shoot": 3,
+      "banana": 5,
+      "banyan_fig": 3,
+      "chickpea": 3,
+      "coconut": 4,
+      "colocasia": 3,
+      "curry_leaf": 3,
+      "dandelion": 2,
+      "datura": 1,
+      "ginger": 2,
+      "guava": 4,
+      "jackfruit": 4,
+      "jamun": 4,
+      "lambs_quarters": 4,
+      "lantana": 2,
+      "lemongrass": 3,
+      "lotus": 3,
+      "mahua": 3,
+      "makhana": 2,
+      "mango": 5,
+      "masoor_lentil": 3,
+      "moringa": 4,
+      "neem": 3,
+      "nux_vomica": 1,
+      "paddy_rice": 4,
+      "palmyra": 2,
+      "papaya": 3,
+      "peepal_fig": 2,
+      "plantain_leaf": 2,
+      "purslane": 4,
+      "rosary_pea": 1,
+      "tamarind": 4,
+      "tulsi": 3,
+      "turmeric": 3,
+      "water_chestnut": 3,
+      "wild_amaranth": 4
+    },
+    "hazards": [
+      "monsoon floods (wet season — creeks rise fast)",
+      "heat waves (hot season)",
+      "venomous snakes (year-round)",
+      "mosquitoes (wet season — fever risk)",
+      "tigers (thickets at dawn and dusk)"
+    ],
+    "id": "south_asia_monsoon",
+    "name": "South Asian Monsoon Lands",
+    "seasons": {
+      "cool": {
+        "days": 151,
+        "note": "Dry and cool. Harvest and festivals. The kind season."
+      },
+      "hot": {
+        "days": 92,
+        "note": "Heat builds. Wells drop. Work at dawn or not at all."
+      },
+      "wet": {
+        "days": 122,
+        "note": "The monsoon. Floods, rice, fever. Abundance with teeth."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "weather": [
+      "humid heat",
+      "monsoon downpour",
+      "dust haze",
+      "cool dry dawn",
+      "thunderstorm"
+    ]
+  },
+  {
+    "description": "Temperate East Asia: bamboo brakes, feral rice paddies, persimmon orchards and tea terraces gone wild. Hot wet summers under the plum rains; dry bitter winters on the Siberian wind.",
+    "forageTable": {
+      "aconite": 2,
+      "asian_persimmon": 4,
+      "bittersweet_nightshade": 2,
+      "bracken_fern": 3,
+      "chinese_chestnut": 4,
+      "chinese_chive": 4,
+      "chrysanthemum_greens": 3,
+      "dandelion": 4,
+      "daylily": 3,
+      "field_mustard": 4,
+      "ginkgo_nut": 3,
+      "goji_berry": 3,
+      "houttuynia": 3,
+      "jimsonweed": 2,
+      "knotweed_shoot": 4,
+      "kudzu_root": 3,
+      "loquat": 3,
+      "lotus_root": 4,
+      "mugwort": 5,
+      "mulberry_white": 4,
+      "perilla": 4,
+      "plantain_leaf": 3,
+      "purslane": 3,
+      "rice_wild": 4,
+      "shepherds_purse": 4,
+      "soybean_wild": 3,
+      "taro": 3,
+      "tea_leaf": 3,
+      "water_hemlock": 2,
+      "chinese_water_chestnut": 3,
+      "moso_bamboo_shoot": 5,
+      "chinese_jujube": 3
+    },
+    "hazards": [
+      "plum-rain floods (summer)",
+      "typhoons (late summer)",
+      "ticks (spring/summer)",
+      "mamushi vipers (summer)"
+    ],
+    "id": "east_asia_temperate",
+    "name": "East Asian Temperate Forest",
+    "seasons": {
+      "fall": {
+        "days": 75,
+        "note": "Harvest. Persimmons, chestnuts, rice. Fatten up."
+      },
+      "spring": {
+        "days": 80,
+        "note": "Greens return. Bamboo shoots push up — the hungry season's exit."
+      },
+      "summer": {
+        "days": 95,
+        "note": "The plum rains, then typhoon season. Hot, wet, everything grows — including the mosquitoes."
+      },
+      "winter": {
+        "days": 115,
+        "note": "The Siberian wind. Dry, bitter, still. Stored food or nothing."
+      }
+    },
+    "tileTypes": [
+      "forest_floor",
+      "grove",
+      "meadow",
+      "thicket",
+      "wetland",
+      "creek",
+      "trail_edge",
+      "ruin"
+    ],
+    "weather": [
+      "humid heat",
+      "plum rain",
+      "typhoon",
+      "cold snap",
+      "fog"
+    ]
+  }
 ]

@@ -1,0 +1,69 @@
+diff --git a/scripts/test-origins-world-20261014.js b/scripts/test-origins-world-20261014.js
+index 43adc61a..94636b41 100644
+--- a/scripts/test-origins-world-20261014.js
++++ b/scripts/test-origins-world-20261014.js
+@@ -112,6 +112,10 @@ function pickerLabels(Game) {
+   T.ok('12 rosters\' NPCs come from >= 8 regions (called from genRoster)', npcRegions.size >= 8, [...npcRegions].join(','));
+ 
+   T.section('W5 familiarity ladder');
++  // W5/W6 target the eastern woodlands explicitly: pin the debug region so
++  // newGame's random-playable-region pick (2+ playable regions) can't drift
++  // these legacy explicit-landing calls into another region.
++  Game.debugRegion = 'na_eastern_woodlands';
+   const start = (place, loc) => {
+     Game.genRoster(place);
+     Game.newGame(place, loc, Game.generatedRoster[0].id);
+@@ -183,6 +187,7 @@ function pickerLabels(Game) {
+   T.ok('the alder marsh pool adds moose', Game.regionAnimalPool().has('moose') && !Game.regionAnimalPool().has('american_alligator'));
+   T.ok('trichinosis: boar yes, javelina no (eastern data)', !!Game.regionParasiteRisk('wild_boar') && !Game.regionParasiteRisk('javelina'));
+   T.ok('javelina carries it in the drylands data', regions.find(r => r.id === 'na_arid').fauna.parasites.trichinosis.javelina > 0);
++  Game.debugRegion = null;
+ 
+   T.section('W7 names');
+   let femOk = 0, femN = 0;
+diff --git a/scripts/test-region-engine-20261014.js b/scripts/test-region-engine-20261014.js
+index 2aca3a80..2a8bbaa5 100644
+--- a/scripts/test-region-engine-20261014.js
++++ b/scripts/test-region-engine-20261014.js
+@@ -113,7 +113,7 @@ async function main() {
+   const data = loadData();
+   const shipped = validateRegions(data);
+   ok(shipped.errors.length === 0, 'shipped regions.json validates', shipped.errors.slice(0, 3).join(' | '));
+-  ok(data.regions.length === 20 && data.regions.filter(r => r.status === 'playable').length === 1, '20 regions, 1 playable');
++  ok(data.regions.length === 20 && data.regions.filter(r => r.status === 'playable' || r.status === 'rich').length >= 1, `20 regions, ${data.regions.filter(r => r.status === 'playable' || r.status === 'rich').length} playable+`);
+   // origins-world 2026-10-14: a region now also needs >=2 picker origins, a
+   // lifeseed sub-area and a name culture (validate-regions origin coverage),
+   // so the fixture brings its own — injected into copies, never shipped.
+diff --git a/scripts/test-region-start-20261014.js b/scripts/test-region-start-20261014.js
+index 6d32f927..ce7a36d3 100644
+--- a/scripts/test-region-start-20261014.js
++++ b/scripts/test-region-start-20261014.js
+@@ -82,7 +82,8 @@ async function main() {
+   ok(regionStart().why === 'random', 'second run: why=random', JSON.stringify(regionStart()));
+   const seen = {};
+   for (let i = 0; i < 60; i++) { const r = Game.pickLandingRegion(FX); seen[r.id] = (seen[r.id] || 0) + 1; }
+-  ok(seen[FX] > 0 && seen.na_eastern_woodlands > 0 && Object.keys(seen).length === 2, 'random picks cover both playable regions', JSON.stringify(seen));
++  const playableIds = Game.playableRegions().map(r => r.id).concat([FX]);
++  ok(playableIds.every(id => seen[id] > 0), `random picks cover all ${playableIds.length} playable regions`, JSON.stringify(seen));
+   ok(Game._landingWhy.why === 'random', 'pickLandingRegion reports random');
+   wipeDevice();
+   _store['scattering-save-v1-someone-123'] = '{}';
+@@ -109,12 +110,15 @@ async function main() {
+   fr = Game.firstRunLanding('sa_amazon', [fxClimate, fxNeighbor]);
+   ok(fr.region.id === 'fx_wet_neighbor', 'among equals, the origin region\'s neighbor wins');
+   amazon.neighbors.pop();
+-  // the shipped world today: one playable region, Lagos lands there on run 1
++  // the shipped world: Lagos lands in its origin region if playable, else the default
+   Game.data.regions = regionsShipped;
+   wipeDevice();
+   await start('Lagos, Nigeria');
+-  ok(Game.state.region === 'na_eastern_woodlands' && regionStart().why === 'first_run_origin' && regionStart().via === 'default',
+-    'shipped data: a Lagos first run lands in the eastern woodlands (no African region playable yet)', JSON.stringify(regionStart()));
++  const lagosRegion = Game.parseOrigin('Lagos, Nigeria').regions[0];
++  const lagosPlayable = Game.playableRegions().some(r => r.id === lagosRegion);
++  const expectLagos = lagosPlayable ? lagosRegion : 'na_eastern_woodlands';
++  ok(Game.state.region === expectLagos && regionStart().why === 'first_run_origin',
++    `shipped data: a Lagos first run lands in ${expectLagos}`, JSON.stringify(regionStart()));
+   Game.data.regions = regionsShipped.concat([fx]);
+ 
+   // ============ S4 debug wins ============

@@ -113,7 +113,7 @@ async function main() {
   const data = loadData();
   const shipped = validateRegions(data);
   ok(shipped.errors.length === 0, 'shipped regions.json validates', shipped.errors.slice(0, 3).join(' | '));
-  ok(data.regions.length === 20 && data.regions.filter(r => r.status === 'playable').length === 1, '20 regions, 1 playable');
+  ok(data.regions.length === 20 && data.regions.filter(r => r.status === 'playable').length >= 1, `20 regions, ${data.regions.filter(r => r.status === 'playable').length} playable (wave 1 added south_asia 2026-10-14; was 1)`);
   // origins-world 2026-10-14: a region now also needs >=2 picker origins, a
   // lifeseed sub-area and a name culture (validate-regions origin coverage),
   // so the fixture brings its own — injected into copies, never shipped.

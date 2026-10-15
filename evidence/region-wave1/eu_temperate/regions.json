@@ -1,0 +1,322 @@
+{
+ "biome": "eu_temperate_forest",
+ "challenge": {
+  "description": "Winter ends, but the forest doesn't get the memo. March and April are the killing months — the stores are empty, the greens aren't up yet, and the game is lean. The hungry gap.",
+  "id": "hungry_gap",
+  "mechanics": [
+   "harsh_winter",
+   "seasonal_scarcity",
+   "spring_hunger_gap"
+  ],
+  "name": "Przednówek — The Hungry Gap"
+ },
+ "climate": {
+  "calendar": "temperate_4"
+ },
+ "continent": "europe",
+ "covers": "Central Europe: beech-oak forest, creek valleys, allotment edges, and quiet ruins",
+ "fauna": {
+  "add": [],
+  "animals": [
+   "red_deer",
+   "wild_boar",
+   "european_hare",
+   "common_pheasant",
+   "european_hedgehog",
+   "eurasian_badger",
+   "edible_dormouse",
+   "edible_snail",
+   "gray_wolf"
+  ],
+  "density": 1,
+  "fish": [
+   "northern_pike",
+   "european_perch",
+   "brown_trout"
+  ],
+  "parasites": {
+   "trichinosis": {
+    "wild_boar": 0.25
+   }
+  },
+  "predators": [
+   "gray_wolf"
+  ],
+  "remove": []
+ },
+ "flora": {
+  "bounty": {
+   "beech mast grove": [
+    "beechnut",
+    "Mast country. The old beeches feed everything."
+   ],
+   "berry clearing": [
+    "bilberry",
+    "Purple fingers. Summer's savings account."
+   ],
+   "elder thicket": [
+    "european_elder",
+    "Cook the black clusters. The bush insists."
+   ],
+   "garlic bank": [
+    "wild_garlic",
+    "The whole bank smells of it in April. Sniff every leaf."
+   ],
+   "hazel coppice": [
+    "european_hazelnut",
+    "Cut and regrown for a hundred years. The stools are older than the village."
+   ],
+   "mushroom hollow": [
+    "chanterelle",
+    "Damp and dim. The mushrooms know."
+   ],
+   "oak hollow": [
+    "acorn_pedunculate_oak",
+    "The oaks drop dinner — if you leach it right."
+   ],
+   "old orchard": [
+    "crab_apple",
+    "Someone planted food here once. The trees remember."
+   ],
+   "porcini ground": [
+    "porcini",
+    "Where the roots run deep. Check the stems for the white net."
+   ],
+   "rose tangle": [
+    "rose_hip",
+    "Thorns with a vitamin C pension."
+   ]
+  },
+  "bushes": [
+   "bilberry",
+   "blackberry",
+   "hawthorn"
+  ],
+  "commonTrees": [
+   "pedunculate_oak",
+   "european_beech"
+  ],
+  "trees": [
+   {
+    "id": "pedunculate_oak",
+    "nut": "acorn_pedunculate_oak",
+    "roll": 0.3
+   },
+   {
+    "id": "european_beech",
+    "nut": "beechnut",
+    "roll": 0.45
+   },
+   {
+    "id": "hazel",
+    "nut": "european_hazelnut",
+    "roll": 0.5
+   },
+   {
+    "id": "silver_birch",
+    "roll": 0.5
+   },
+   {
+    "id": "crab_apple"
+   }
+  ]
+ },
+ "gen": {
+  "creeks": 2,
+  "groveBlobs": 4,
+  "groveSize": 5,
+  "lootMult": 1,
+  "meadowSize": 4,
+  "ruinMaxDist": 3,
+  "stockMult": 1,
+  "thickets": 4,
+  "trailLines": 2,
+  "wetlands": 2
+ },
+ "hemisphere": "north",
+ "id": "eu_temperate",
+ "landingVariants": [
+  "beech_hollow",
+  "allotment_edge",
+  "depot_yard"
+ ],
+ "lifeseedRegions": [
+  "germany",
+  "poland",
+  "ukraine",
+  "ireland"
+ ],
+ "monsters": [
+  "murkcap",
+  "rut_king"
+ ],
+ "name": "Temperate Europe",
+ "neighbors": [
+  "eu_mediterranean",
+  "eurasia_taiga"
+ ],
+ "originTags": [
+  "england",
+  "france",
+  "germany",
+  "netherlands",
+  "poland",
+  "ukraine",
+  "ireland",
+  "berlin",
+  "warsaw"
+ ],
+ "people": {
+  "language": "german",
+  "pantry": [
+   {
+    "cookedKcal": 320,
+    "kcalEach": 150,
+    "kg": 0.5,
+    "name": "Rye flour",
+    "needsCooking": true,
+    "rawKcal": 150,
+    "safe": false,
+    "spoilDays": 365,
+    "unit": "scoop",
+    "units": 60
+   },
+   {
+    "cookedKcal": 180,
+    "kcalEach": 80,
+    "kg": 0.5,
+    "name": "Potatoes",
+    "needsCooking": true,
+    "rawKcal": 80,
+    "safe": false,
+    "spoilDays": 60,
+    "unit": "potato",
+    "units": 40
+   },
+   {
+    "cookedKcal": 300,
+    "kcalEach": 150,
+    "kg": 0.5,
+    "name": "Yellow peas",
+    "needsCooking": true,
+    "rawKcal": 150,
+    "safe": false,
+    "spoilDays": 365,
+    "unit": "scoop",
+    "units": 50
+   },
+   {
+    "kcalEach": 450,
+    "kg": 0.3,
+    "name": "Smoked sausage",
+    "safe": true,
+    "spoilDays": 30,
+    "unit": "link",
+    "units": 15
+   },
+   {
+    "kcalEach": 300,
+    "kg": 0.2,
+    "name": "Honey",
+    "safe": true,
+    "spoilDays": 365,
+    "unit": "dollop",
+    "units": 12
+   }
+  ],
+  "ruins": [
+   "A village school. The desks still stand in rows. Someone chalked the date of the last lesson on the board and underlined it twice.",
+   "A bus depot. The timetable behind cracked glass still lists routes to towns that aren't there anymore. A driver's lunchbox sits empty on the bench.",
+   "A corner clinic. The waiting-room chairs face a faded poster about flu shots. The medicine cabinet was emptied long ago — by someone careful, not someone desperate.",
+   "An allotment garden colony. The sheds lean and the fences sag, but someone's roses still bloom on schedule, for no one."
+  ],
+  "scavenge": [
+   {
+    "id": "jar_pickles",
+    "kcal": 120,
+    "kg": 0.5,
+    "name": "Pickled cucumbers",
+    "text": "Dill and garlic in cloudy brine — that's how you know they're real."
+   },
+   {
+    "id": "rye_loaf",
+    "kcal": 1100,
+    "kg": 0.8,
+    "name": "Dense rye loaf",
+    "text": "Stale enough to build with. Soak it and it's bread again."
+   },
+   {
+    "id": "can_sauerkraut",
+    "kcal": 200,
+    "kg": 0.4,
+    "name": "Canned sauerkraut",
+    "text": "Sour, salty, and full of the vitamins winter steals."
+   },
+   {
+    "id": "honey_jar",
+    "kcal": 900,
+    "kg": 0.5,
+    "name": "Jar of honey",
+    "text": "Crystallized solid. Honey doesn't spoil; it just waits."
+   },
+   {
+    "id": "dried_porcini",
+    "kcal": 300,
+    "kg": 0.2,
+    "name": "Dried porcini",
+    "text": "Strung on a thread by someone who knew their mushrooms. Trust the string."
+   },
+   {
+    "id": "chocolate_bar",
+    "kcal": 550,
+    "kg": 0.1,
+    "name": "Chocolate bar",
+    "text": "A little gray with bloom. Still chocolate."
+   },
+   {
+    "id": "can_white_sausage",
+    "kcal": 700,
+    "kg": 0.4,
+    "name": "Canned white sausage",
+    "text": "The label promises Munich; the contents promise calories."
+   },
+   {
+    "id": "jar_beets",
+    "kcal": 180,
+    "kg": 0.5,
+    "name": "Pickled beets",
+    "text": "Earthy and sweet. The jar sealed before the Burn and never looked back."
+   },
+   {
+    "doses": 3,
+    "id": "med_antibiotics",
+    "kcal": 0,
+    "kg": 0.1,
+    "medType": "antibiotics",
+    "name": "Antibiotics (amoxicillin)",
+    "rare": true,
+    "text": "A rattling bottle, seal intact. For bacterial infections. Read the label."
+   },
+   {
+    "doses": 3,
+    "id": "med_antiparasitic",
+    "kcal": 0,
+    "kg": 0.1,
+    "medType": "antiparasitic",
+    "name": "Antiparasitic (mebendazole)",
+    "rare": true,
+    "text": "Foil blister pack, unbroken. For worms and gut parasites. Only for those."
+   }
+  ],
+  "villageNames": [
+   "Eichenau",
+   "Buchenheim",
+   "Dębowa",
+   "Brzezina",
+   "Lindenfeld",
+   "Mühlbach"
+  ]
+ },
+ "status": "playable",
+ "climateFamily": "temperate_humid"
+}

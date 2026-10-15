@@ -1,2 +1,3 @@
 # scripts/green-list-quarantine.txt — green-list tests temporarily skipped.
 # One per line: <path>  # <date> <reason>. Empty is the goal.
+scripts/test-capable-greedy-20261015.js  # 2026-10-15 region-wave1: §3's seeded e2e (seed 1 must reach Overtime>=1 then sit) is content-fragile by construction — any content addition re-rolls the RNG trajectory (plant familiarity shuffle etc.); proven NOT a content bug (30 inert dummy plants break it identically; §1-2 decision-logic unit tests pass 11/11). Un-quarantine when §3 is reworked property-based or the shuffle is content-stable.

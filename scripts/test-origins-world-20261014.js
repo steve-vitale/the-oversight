@@ -35,6 +35,10 @@ function pickerLabels(Game) {
 
 (async () => {
   const Game = await K.load({ seed: 20261014 });
+  // Wave 1 (2026-10-14): more than one region is playable, so newGame lands
+  // randomly. This test's W5/W6 fixtures are eastern-woodlands-specific
+  // (hay_field, creek_bottom, cypress_slough...), so pin the landing region.
+  Game.debugRegion = 'na_eastern_woodlands';
   const regions = Game.data.regions;
   const regionIds = new Set(regions.map(r => r.id));
   const labels = pickerLabels(Game);
