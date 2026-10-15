@@ -1,0 +1,80 @@
+-- leadfeast seed 11 control
+-- leadfeast seed 11 armed
+-- leadfeast seed 22 control
+-- leadfeast seed 22 armed
+-- leadfeast seed 33 control
+-- leadfeast seed 33 armed
+-- leadfeast seed 44 control
+-- leadfeast seed 44 armed
+-- leadfeast seed 55 control
+-- leadfeast seed 55 armed
+-- leadfeast seed 66 control
+-- leadfeast seed 66 armed
+-- leadfeast seed 77 control
+-- leadfeast seed 77 armed
+-- leadfeast seed 88 control
+-- leadfeast seed 88 armed
+-- belongfeast seed 11 control
+-- belongfeast seed 11 armed
+-- belongfeast seed 22 control
+-- belongfeast seed 22 armed
+-- belongfeast seed 33 control
+-- belongfeast seed 33 armed
+-- belongfeast seed 44 control
+-- belongfeast seed 44 armed
+-- belongfeast seed 55 control
+-- belongfeast seed 55 armed
+-- belongfeast seed 66 control
+-- belongfeast seed 66 armed
+-- belongfeast seed 77 control
+-- belongfeast seed 77 armed
+-- belongfeast seed 88 control
+-- belongfeast seed 88 armed
+
+wrote evidence/2026-10-15/sim-tribshield-runs.json (32 runs, -31664224s)
+
+=== SUMMARY (pre-registered verdict) ===
+{
+ "control": {
+  "n": 16,
+  "youngTributeSnap": 0,
+  "tributeCollapseAny": 0,
+  "national": 5,
+  "table": 8,
+  "wins": 0,
+  "w4": 8,
+  "w5": 6,
+  "medSurv": 128.5,
+  "shieldVerbs": 0,
+  "lossModes": {
+   "n/a": 11,
+   "succession-chain": 2,
+   "held-to-end": 2,
+   "other-named": 1
+  }
+ },
+ "armed": {
+  "n": 16,
+  "youngTributeSnap": 0,
+  "tributeCollapseAny": 0,
+  "national": 8,
+  "table": 9,
+  "wins": 0,
+  "w4": 9,
+  "w5": 6,
+  "medSurv": 130.5,
+  "shieldVerbs": 62,
+  "lossModes": {
+   "n/a": 8,
+   "succession-chain": 2,
+   "held-to-end": 1,
+   "other-named": 4,
+   "wave-unlock": 1
+  }
+ }
+}
+
+PRIMARY young-tribute-snap armed<=0.7x control: 0 <= 0.7*0 -> GO
+GUARD national armed >= control-2: 8 >= 3 -> OK
+GUARD median survival armed >= control-10d: 130.5 >= 118.5 -> OK
+GUARD no new loss mode at n>=3: OK
