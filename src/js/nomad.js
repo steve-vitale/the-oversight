@@ -197,13 +197,20 @@
       const pop = Math.max(1, (v.roster || []).length);
       const runwayDays = stores / pop / KCAL_PER_PERSON_DAY;
       const abandoned = runwayDays < 7;
+      // The party musters first: the village's new leader must be a stayer,
+      // never someone walking the road (nomad-reachability 2026-10-15: the
+      // old order appointed the leader from all non-bearer <redacted> then
+      // mustered the party from the same pool, so the leader could be
+      // drafted — the epilogue praised them for holding the village while
+      // they starved on the road).
+      const party = nomadMuster();
+      const partySet = new Set(party);
       // The village appoints a new leader by the mantle's rule: trust decides.
       const trust = v.trust || {};
-      const stayers = (v.roster || []).filter(id => id !== Game.villagerId);
+      const stayers = (v.roster || []).filter(id => !partySet.has(id));
       stayers.sort((a, b) => (trust[b] || 0) - (trust[a] || 0));
       const leaderId = stayers[0] || null;
-      // The party musters and takes its share of the stores.
-      const party = nomadMuster();
+      // The party takes its share of the stores.
       const carried = takeSupplies(v, Math.round(stores * CARRY_SHARE));
       st.road = {
         active: true,

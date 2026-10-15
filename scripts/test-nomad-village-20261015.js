@@ -38,11 +38,14 @@ async function main() {
     for (const id of v.roster) v.trust[id] = 10;
     v.trust[npc] = 99;
     const road = Game.nomad.start();
-    // The leader is the highest-trust stayer (mantle-passing rule).
+    // The leader is the highest-trust stayer (mantle-passing rule) — and a
+    // stayer can never be in the road party (leader-draft fix 2026-10-15).
     const trust = v.trust;
-    const stayers = v.roster.filter(id => id !== Game.villagerId);
+    const partySet = new Set(road.partyIds || []);
+    const stayers = v.roster.filter(id => !partySet.has(id));
     const expectLeader = stayers.slice().sort((a, b) => (trust[b] || 0) - (trust[a] || 0))[0];
     ok(road.villageLeft.leaderId === expectLeader, 'leader = highest-trust stayer (mantle rule)');
+    ok(!partySet.has(road.villageLeft.leaderId), 'leader is not in the road party');
     ok(road.villageLeft.abandoned === false, 'a strong village is not abandonment');
     ok(road.villageLeft.strength > 0.5, `departure strength high (${road.villageLeft.strength.toFixed(2)})`);
     // Ledger remembers the leaving.
