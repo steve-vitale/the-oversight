@@ -483,6 +483,11 @@
     if (!def) return null;
     var st = titanState();
     if (st.slain[titanId]) { Game.say('It is already dead. The committed have nothing left to march against.'); return null; }
+    if (titanId === 'the_network' && st.campaigns && st.campaigns.network && st.campaigns.network.started) {
+      if (st.pendingCommit && st.pendingCommit.indexOf(titanId + ':') === 0) st.pendingCommit = null;
+      Game.say('📯 No new blades join the Network march — not even Haven\u2019s. The coalition is the one you started with.');
+      return null;
+    }
     var o = titanOmen(titanId);
     if (!o || o.stage < 2) {
       Game.say('There is nothing located to march against — the sky is quiet. You commit no one into the dark.');
@@ -547,9 +552,11 @@
           hint: 'Sit the council. Faces, scout intel, the System\u2019s odds (entertainment, not truth).'
         });
         var muster = st.musters[tid];
+        var march = st.campaigns || {};
+        var networkStarted = tid === 'the_network' && march.network && march.network.started;
         var havenN = muster ? titanHavenBlades(muster).length : 0;
         var alliedN = muster ? (muster.allies || []).length : 0;
-        if (havenN < 3) {
+        if (havenN < 3 && !networkStarted) {
           var pend = st.pendingCommit && st.pendingCommit.indexOf(tid + ':') === 0;
           acts.push(pend ? {
             id: 'titan:commit:' + tid,
@@ -561,8 +568,6 @@
             hint: 'Up to 3 of ours march with the muster (' + alliedN + ' allied + ' + havenN + ' ours so far). They eat, they bleed, they can die.'
           });
         }
-        var march = st.campaigns || {};
-        var networkStarted = tid === 'the_network' && march.network && march.network.started;
         var finaleStarted = tid === 'finale' && march.finale && march.finale.started;
         if (!networkStarted && (!alliedN || !titanMusterReady(tid))) {
           acts.push({

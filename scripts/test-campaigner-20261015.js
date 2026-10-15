@@ -31,6 +31,20 @@ const T = K.reporter('campaigner');
   s.inventory.push(...force.map(() => ({ itemId: 'stone_knife', units: 1 })));
   const armed = s.inventory.length; P.outfit(G, ctx, 'finale', m);
   T.ok('policy never stacks a second weapon per soldier', s.inventory.length === armed);
+  G.spawnWorldMonster('finale_crew', 8, 4, { mx: 4, my: 4, titan: true });
+  const routeBefore = process.env.COMPETENT_ROUTE_AROUND, walk = C.walkTo;
+  const routeCtx = { ...ctx, notes: [] }; let routeSeen = null;
+  try {
+    process.env.COMPETENT_ROUTE_AROUND = '0';
+    C.walkTo = () => { routeSeen = process.env.COMPETENT_ROUTE_AROUND; throw new Error('prepared route sentinel'); };
+    P.road(G, routeCtx);
+    T.ok('campaign travel enables the existing paid route-around behavior', routeSeen === '1');
+    T.ok('campaign restores route-around environment even on travel error', process.env.COMPETENT_ROUTE_AROUND === '0');
+    T.ok('travel errors remain visible to the audit', routeCtx.notes.some(n => n.includes('prepared route sentinel')));
+  } finally {
+    C.walkTo = walk;
+    if (routeBefore === undefined) delete process.env.COMPETENT_ROUTE_AROUND; else process.env.COMPETENT_ROUTE_AROUND = routeBefore;
+  }
   const f = { fighters: Array.from({ length: 5 }, () => ({ kind: 'ally', alive: true })) }, p = { hp: 100, maxHp: 100 };
   ctx.campaignFight = f;
   T.ok('ordinary fight cannot use coalition commitment', !C.coalitionCommitted(G, ctx, f, p));

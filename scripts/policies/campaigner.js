@@ -94,34 +94,40 @@ function road(G, ctx) {
       || (camps.finale && camps.finale.started && !camps.finale.done ? 'finale' : null) || known[0];
     if (!tid || !known.includes(tid)) return;
     ctx.campaignTarget = tid;
+    const started = tid === 'finale' ? camps.finale && camps.finale.started : tid === 'the_network' ? camps.network && camps.network.started : false;
+    const canRecruit = tid !== 'the_network' || !started;
     const seen = ctx._campaignCouncil || (ctx._campaignCouncil = {});
     if (!seen[tid]) { G.titanSelfDo('titan:council:' + tid); seen[tid] = true; bump(ctx, 'Councils'); }
     let m = G.titanMusterState(tid);
-    const need = G.titanDef(tid).minAllies;
-    const count = () => m ? (m.allies || []).length + (m.haven || []).length : 0;
+    const def = G.titanDef(tid), node = tid === 'the_network' && started ? G.networkCurrentNode() : null;
+    const need = node ? (node.piece === 'heart' ? (def.campaign.heartMinSurvivors || 10) : (def.campaign.floor || 5)) : def.minAllies;
+    const count = () => m ? (m.allies || []).length + G.titanHavenBlades(m).length : 0;
     provision(G, ctx, Math.max(need, count()) * 1000 + 2400);
     // Do not create a hungry army just to watch it disperse at dawn.
     if (food(G) < Math.max(need, count()) * 1000 + 1200) { bump(ctx, 'FoodBlocked'); return; }
     const call = acts.find(a => a.id === 'titan:call:' + tid || a.id === 'titan:reinforce:' + tid);
     const last = ctx._campaignCalls || (ctx._campaignCalls = {});
-    if (call && (last[tid] == null || day(G) - last[tid] >= 7)) {
+    if (canRecruit && call && (last[tid] == null || day(G) - last[tid] >= 7)) {
       G.titanSelfDo(call.id); last[tid] = day(G); bump(ctx, 'Calls'); m = G.titanMusterState(tid);
     }
     if (!m) return;
-    if (count() < need && count() + 3 >= need && acts.some(a => a.id === 'titan:commit:' + tid)) {
+    if (canRecruit && count() < need && count() + 3 >= need && acts.some(a => a.id === 'titan:commit:' + tid)) {
       G.titanSelfDo('titan:commit:' + tid); G.titanSelfDo('titan:commit:' + tid); bump(ctx, 'OwnCommitments');
     }
     ctx.campaignMaxBlades = Math.max(ctx.campaignMaxBlades || 0, count());
     C.gearUp(G, ctx); // keep the bearer's best pieces before donating spares
     outfit(G, ctx, tid, m);
-    const started = tid === 'finale' ? camps.finale && camps.finale.started : tid === 'the_network' ? camps.network && camps.network.started : false;
     if (!started && !G.titanMusterReady(tid)) { bump(ctx, 'StrengthBlocked'); return; }
+    if (tid === 'the_network' && started && count() < need) { bump(ctx, 'StrengthBlocked'); return; }
     const s = G.state.scholar;
     if (s.health < G.maxHealth() * 0.7) { bump(ctx, 'HealthBlocked'); return; }
     const goal = target(G, tid);
     if (!goal) { bump(ctx, 'MissingTarget'); return; }
     bump(ctx, 'Sorties');
-    C.walkTo(G, goal.tx, goal.ty);
+    const route = process.env.COMPETENT_ROUTE_AROUND;
+    process.env.COMPETENT_ROUTE_AROUND = '1';
+    try { C.walkTo(G, goal.tx, goal.ty); }
+    finally { if (route === undefined) delete process.env.COMPETENT_ROUTE_AROUND; else process.env.COMPETENT_ROUTE_AROUND = route; }
     if (G.over || G.tbfight || G.pendingEncounter) return;
     if (G.map.px !== goal.tx || G.map.py !== goal.ty) { bump(ctx, 'TravelBlocked'); return; }
     approach(G, ctx, goal);
