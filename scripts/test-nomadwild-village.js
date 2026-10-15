@@ -15,7 +15,7 @@ async function main() {
 
   const roster = (Game.state.village.roster || []).slice(0, 3);
   Game.state.road = {
-    active: true, partyIds: roster, supplies: 8000,
+    active: true, partyIds: roster, supplies: { food: 8000 },
     legs: [{ regionId: 'eu_temperate' }], legIndex: 0,
   };
 
@@ -30,11 +30,11 @@ async function main() {
   T.ok('same village returned twice', NW.genLegVillage('eu_temperate') === v);
 
   T.section('trade');
-  const sup0 = Game.state.road.supplies;
+  const sup0 = Game.state.road.supplies.food;
   const pan0 = v.pantryKcal;
   const tr = NW.tradeWith(v, 2000);
-  T.ok('trade moves kcal through packs', Game.state.road.supplies === sup0 - 2000 + Math.round(2000 * 1.0),
-    `before ${sup0} after ${Game.state.road.supplies}`);
+  T.ok('trade moves kcal through packs', Game.state.road.supplies.food === sup0 - 2000 + Math.round(2000 * 1.0),
+    `before ${sup0} after ${Game.state.road.supplies.food}`);
   T.ok('village pantry decreased', v.pantryKcal < pan0, `${pan0} -> ${v.pantryKcal}`);
   T.ok('generous trade warms mood', NW.villageMood(v) === 1, String(NW.villageMood(v)));
   T.ok('trade narrates', tr.note === 'trade' || tr.note === 'trade + knowledge', tr.note);
@@ -44,12 +44,12 @@ async function main() {
   T.ok('transcript names speaker', log.includes(v.speaker.name), 'speaker name in log');
 
   T.section('trade refuses honestly when broke');
-  Game.state.road.supplies = 100;
+  Game.state.road.supplies = { food: 100 };
   const broke = NW.tradeWith(v, 5000);
   T.ok('insufficient-supplies trade blocked', broke.kcal === 0 && /haven't got/i.test((Game.log || []).join('\n').slice(-400)));
 
   T.section('join briefly');
-  Game.state.road.supplies = 8000;
+  Game.state.road.supplies = { food: 8000 };
   const j = NW.joinVillage(v, 3);
   T.ok('join rests the party', j.note === 'rested' && j.days === 3, JSON.stringify(j));
   T.ok('join feeds packs', (j.kcal || 0) > 0, String(j.kcal));

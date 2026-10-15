@@ -16,7 +16,7 @@ async function main() {
   const roster = (Game.state.village.roster || []).slice(0, 2);
   T.ok('roster has 2+', roster.length >= 2, JSON.stringify(roster.length));
   Game.state.road = {
-    active: true, partyIds: roster, supplies: 1000,
+    active: true, partyIds: roster, supplies: { food: 1000 },
     legs: [{ regionId: 'sa_amazon' }], legIndex: 0,
   };
 
@@ -24,7 +24,7 @@ async function main() {
   T.ok('stranger mult is 0.75 on road', NW.strangerForageMult() === 0.75);
   const r1 = NW.partyForage();
   T.ok('forage yields kcal', r1.kcal > 0, String(r1.kcal));
-  T.ok('supplies grew', Game.state.road.supplies > 1000, String(Game.state.road.supplies));
+  T.ok('supplies grew', Game.state.road.supplies.food > 1000, String(Game.state.road.supplies.food));
   T.ok('stranger note narrated', r1.notes.length > 0, JSON.stringify(r1.notes));
 
   T.section('knowledge closes the gap');
@@ -36,7 +36,7 @@ async function main() {
   for (const vid of roster) for (const pid of amazPlants) {
     for (let i = 0; i < 6; i++) { try { Game.teachPlant(vid, pid); } catch (e) {} }
   }
-  const before = Game.state.road.supplies;
+  const before = Game.state.road.supplies.food;
   // Average over several days to smooth RNG.
   let tot = 0;
   for (let d = 0; d < 5; d++) tot += NW.partyForage().kcal;

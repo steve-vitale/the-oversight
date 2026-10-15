@@ -15,7 +15,7 @@ async function main() {
 
   const roster = (Game.state.village.roster || []).slice(0, 2);
   Game.state.road = {
-    active: true, partyIds: roster, supplies: 6000,
+    active: true, partyIds: roster, supplies: { food: 6000 },
     legs: [{ regionId: 'sa_amazon' }, { regionId: 'eu_temperate' }], legIndex: 0,
   };
 

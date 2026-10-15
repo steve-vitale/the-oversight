@@ -15,8 +15,8 @@ async function main() {
 
   const roster = (Game.state.village.roster || []).slice(0, 2);
   Game.state.road = {
-    active: true, partyIds: roster, supplies: 30000,
-    legs: [{ regionId: 'sa_amazon' }], legIndex: 0,
+    active: true, partyIds: roster, bearerId: roster[0], supplies: { food: 30000 },
+    legs: [{ regionId: 'sa_amazon' }], legIndex: 0, log: [], fallen: [],
   };
 
   T.section('waves visible on the road');
@@ -44,13 +44,18 @@ async function main() {
   })());
 
   T.section('starvation is honest');
-  Game.state.road.supplies = 100; // not enough for 2 mouths
+  Game.state.road.supplies = { food: 100 }; // not enough for 2 mouths
+  const _pf = NW.partyForage;
+  NW.partyForage = () => ({ kcal: 0, notes: [] }); // a day with no forage
   const before = (Game.log || []).length;
-  const s = NW.daily();
-  const newLines = (Game.log || []).slice(before).join('\n');
-  T.ok('starving flagged', s.starving === true);
-  T.ok('starvation narrated, not silent', /empty|hunger/i.test(newLines), newLines.slice(-200));
-  T.ok('supplies floored at 0', Game.state.road.supplies === 0);
+  const members0 = Game.state.road.partyIds.length;
+  NW.daily();
+  NW.partyForage = _pf;
+  const newLines = (Game.state.road.log || []).slice(0).map(e => e.line).join('\n');
+  T.ok('a starving day takes one life', Game.state.road.partyIds.length === members0 - 1,
+    members0 + ' -> ' + Game.state.road.partyIds.length);
+  T.ok('starvation narrated, not silent', /died on the road/i.test(newLines), newLines.slice(-200));
+  T.ok('supplies floored at 0', Game.state.road.supplies.food === 0);
 
   T.done();
 }

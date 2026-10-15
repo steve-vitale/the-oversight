@@ -61,7 +61,7 @@
   }
   function log(line) {
     const r = road();
-    if (r) { r.log.push({ day: day(), line }); if (r.log.length > 200) r.log.splice(0, r.log.length - 200); }
+    if (r) { r.log = r.log || []; r.log.push({ day: day(), line }); if (r.log.length > 200) r.log.splice(0, r.log.length - 200); }
   }
 
   // nomadKnownKin(): living scattered kin whose region the village knows.
@@ -269,6 +269,7 @@
       const ix = r.partyIds.indexOf(id);
       if (ix < 0) return false;
       r.partyIds.splice(ix, 1);
+      r.fallen = r.fallen || [];
       r.fallen.push({ id, cause: cause || 'the road', day: day() });
       log(`${vname(id)} died on the road (${cause || 'the road'}).`);
       say(`${vname(id)} doesn't wake up. The road keeps what it takes.`);
@@ -291,9 +292,17 @@
       const r = road();
       if (!r || !r.active) return null;
       r.daysOnRoad++;
+      const report0 = { day: r.daysOnRoad, deaths: [] };
+      // The party forages the strange ground first (nomad-wild.js, guarded).
+      try {
+        if (Game.nomadWild && typeof Game.nomadWild.partyForage === 'function') {
+          const f = Game.nomadWild.partyForage();
+          report0.foraged = f.kcal;
+        }
+      } catch (e) {}
       const need = r.partyIds.length * KCAL_PER_PERSON_DAY;
       r.supplies.food -= need;
-      const report = { day: r.daysOnRoad, ate: need, left: Math.max(0, Math.round(r.supplies.food)), deaths: [] };
+      const report = Object.assign(report0, { ate: need, left: Math.max(0, Math.round(r.supplies.food)) });
       if (r.supplies.food < 0) {
         r.supplies.food = 0;
         // Starvation takes one life. The bearer starves last.
@@ -302,6 +311,12 @@
         const victim = pool[Math.floor(Math.random() * pool.length)];
         if (victim && this.nomadKill(victim, 'starvation')) report.deaths.push(victim);
       }
+      // Joined-village welcome and wave check (nomad-wild.js, guarded).
+      try {
+        if (Game.nomadWild && typeof Game.nomadWild.legTick === 'function') {
+          Object.assign(report, Game.nomadWild.legTick());
+        }
+      } catch (e) {}
       return report;
     },
 

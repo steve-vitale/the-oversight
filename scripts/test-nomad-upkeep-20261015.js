@@ -36,12 +36,16 @@ async function main() {
   const rep = Game.nomad.daily();
   ok(rep && rep.day === 1, 'daily() advances the road day');
   ok(rep.ate === n * 2000, `party ate ${n} x 2000 kcal`);
-  ok(road.supplies.food === food0 - n * 2000, 'supplies depleted by exactly the party need');
+  ok(road.supplies.food === food0 + (rep.foraged || 0) - n * 2000,
+    `supplies = carried + foraged - eaten (${food0} + ${rep.foraged || 0} - ${n * 2000})`);
   ok(rep.deaths.length === 0, 'no deaths while food lasts');
   ok(Game.nomad.onRoad() === true, 'onRoad() true while active');
 
   console.log('== starvation ==');
   // Drain to just under one day's need: tomorrow someone starves.
+  // Forage stubbed to zero so the day is deterministic.
+  const _pf = Game.nomadWild.partyForage;
+  Game.nomadWild.partyForage = () => ({ kcal: 0, notes: [] });
   road.supplies.food = n * 2000 - 1;
   const before = road.partyIds.length;
   const bearer = road.bearerId;
@@ -51,6 +55,7 @@ async function main() {
   ok(road.fallen.length === 1 && road.fallen[0].cause === 'starvation', 'the fallen are recorded with cause');
   ok(!rep2.deaths.includes(bearer), 'the bearer starves last');
   ok(road.supplies.food === 0, 'supplies floor at zero, never negative');
+  Game.nomadWild.partyForage = _pf;
 
   console.log('== mantle passes inside the party ==');
   // Kill the bearer directly: the mantle must stay inside the party.

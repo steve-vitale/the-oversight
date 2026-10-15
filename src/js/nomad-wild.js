@@ -17,7 +17,9 @@
 //   - Game.nomadWild.joinVillage(village, days) -> {note}
 //   - Game.nomadWild.travelEvent() -> {kind, note} : 1 beat on departure
 //   - Game.nomadWild.legWaveLevel() -> current unlocked wave (waves run everywhere)
-//   - Game.nomadWild.daily() -> day summary : called from nomad.daily()
+//   - Game.nomadWild.partyForage() / .legTick() : called from nomad.daily()
+//     (the canonical daily, hooked into endDay); .daily() is the standalone
+//     composition for tests (sibling present: delegates to nomad.daily())
 // rules:
 //   - stranger_penalty: on a leg the party forages blind — unknown-region
 //     plants yield at 0.65x and the party cannot target good patches (code:
@@ -34,7 +36,7 @@
 //   - sibling_guarded: every Game.nomad / Game.nomadScenes access is
 //     guarded; this module works (degraded) before nomad.js lands.
 // consumes:
-//   - state.road {active, partyIds, supplies, legs, legIndex} (nomad.js; stubbed in tests)
+//   - state.road {active, partyIds, supplies:{food}, legs, legIndex} (nomad.js; stubbed in tests)
 //   - Game.nomad.party(), Game.nomad.daily() (nomad.js; guarded)
 //   - Game.nomadScenes.sharpenTrail(name) (nomad-scenes; guarded)
 //   - Game.say, Game.plantKnownBy, Game.bumpPlantFamiliarity, Game.fieldFight,
@@ -49,11 +51,11 @@
   // ---- sibling guards ----
   function road() {
     const st = G.state || {};
-    if (!st.road) st.road = { active: false, partyIds: [], supplies: 0, legs: [], legIndex: 0 };
+    if (!st.road) st.road = { active: false, partyIds: [], supplies: { food: 0 }, legs: [], legIndex: 0 };
     const r = st.road;
     if (!Array.isArray(r.partyIds)) r.partyIds = [];
     if (!Array.isArray(r.legs)) r.legs = [];
-    if (typeof r.supplies !== 'number') r.supplies = 0;
+    if (!r.supplies || typeof r.supplies.food !== 'number') r.supplies = { food: 0 };
     if (typeof r.legIndex !== 'number') r.legIndex = 0;
     return r;
   }
@@ -151,7 +153,7 @@
           notes.push(`${m.name || 'A companion'} doesn't know this land yet — every green thing is a guess.`);
         }
       }
-      r.supplies = (r.supplies || 0) + totalKcal;
+      r.supplies.food = (r.supplies.food || 0) + totalKcal;
       const n = members.length;
       say(`The party works the strange ground — ${n} foraging, nothing familiar. (+${totalKcal.toLocaleString()} kcal to the packs.)`);
       for (const l of learned.slice(0, 2)) {
@@ -210,8 +212,8 @@
       if (!village) return { kcal: 0, note: 'No one to trade with.' };
       offerKcal = Math.max(0, Math.floor(offerKcal || 0));
       if (offerKcal <= 0) return { kcal: 0, note: 'You hold out empty hands. Nothing to trade.' };
-      if ((r.supplies || 0) < offerKcal) {
-        say(`You haven't got ${offerKcal.toLocaleString()} kcal to trade — the packs hold ${(r.supplies || 0).toLocaleString()}.`);
+      if (((r.supplies && r.supplies.food) || 0) < offerKcal) {
+        say(`You haven't got ${offerKcal.toLocaleString()} kcal to trade — the packs hold ${((r.supplies && r.supplies.food) || 0).toLocaleString()}.`);
         return { kcal: 0, note: 'insufficient supplies' };
       }
       const mood = this.villageMood(village);
@@ -223,9 +225,9 @@
         say(`${village.speaker.name} spreads empty hands. "${village.name} has nothing to spare, traveler. The land's been lean."`);
         return { kcal: 0, note: 'village pantry empty' };
       }
-      r.supplies -= offerKcal;
+      r.supplies.food -= offerKcal;
       village.pantryKcal -= give;
-      r.supplies += give;
+      r.supplies.food += give;
       village.mood = Math.max(-2, Math.min(2, (village.mood || 0) + (offerKcal >= 2000 ? 1 : 0)));
       village.met = true;
       const sp = village.speaker;
@@ -298,7 +300,7 @@
       if (partyWon) {
         const take = Math.min(village.pantryKcal || 0, 4000 + Math.floor(Math.random() * 4000));
         village.pantryKcal = Math.max(0, (village.pantryKcal || 0) - take);
-        r.supplies = (r.supplies || 0) + take;
+        r.supplies.food = ((r.supplies && r.supplies.food) || 0) + take;
         village.mood = -2;
         village.met = true;
         try {
@@ -307,8 +309,8 @@
         say(`It's over. ${village.name} yields — you take ${take.toLocaleString()} kcal and leave them staring. Somewhere, someone will hear how you came to ${village.name}.`);
         return { won: true, note: 'raid', kcal: take };
       }
-      const lost = Math.round((r.supplies || 0) * 0.25);
-      r.supplies = Math.max(0, (r.supplies || 0) - lost);
+      const lost = Math.round(((r.supplies && r.supplies.food) || 0) * 0.25);
+      r.supplies.food = Math.max(0, ((r.supplies && r.supplies.food) || 0) - lost);
       village.mood = -2;
       village.met = true;
       say(`They drive you off. You leave ${lost.toLocaleString()} kcal of dropped packs in the dirt behind you — and ${village.name} will remember your faces.`);
@@ -331,7 +333,7 @@
       const need = perDay * days * partyMembers().length;
       const give = Math.min(need, village.pantryKcal || 0);
       village.pantryKcal = Math.max(0, (village.pantryKcal || 0) - give);
-      r.supplies = (r.supplies || 0) + give;
+      r.supplies.food = ((r.supplies && r.supplies.food) || 0) + give;
       village.joinedDays = (village.joinedDays || 0) + days;
       village.mood = Math.max(-2, Math.min(2, mood - (days > 3 ? 1 : 0)));
       village.met = true;
@@ -363,7 +365,7 @@
           ['Wind carries woodsmoke from somewhere ahead — people, maybe.', 0],
         ];
         const [text, kcal] = kinds[Math.floor(Math.random() * kinds.length)];
-        r.supplies = Math.max(0, (r.supplies || 0) + kcal);
+        r.supplies.food = Math.max(0, ((r.supplies && r.supplies.food) || 0) + kcal);
         say(text + (kcal ? ` (${kcal.toLocaleString()} kcal)` : ''));
         return { kind: 'weather', note: text };
       } else if (roll < 0.7) {
@@ -390,34 +392,37 @@
       try { return (G.unlockedWave && G.unlockedWave()) || 1; } catch (e) { warn('unlockedWave: ' + e.message); return 1; }
     },
 
-    // daily(): one lived day on the leg. Called from the sibling's
-    // nomad.daily() — or standalone in tests. Party forages, party eats,
-    // the joined village ticks, waves are checked.
-    daily() {
-      const r = road();
-      if (!r.active) return { note: 'not on the road' };
-      const out = { day: (G.state.scholar && G.state.scholar.day) || 0 };
-      // 1. The party forages.
-      const f = this.partyForage();
-      out.foraged = f.kcal;
-      // 2. The party eats: 2000 kcal per mouth, from the packs.
-      const members = partyMembers();
-      const need = members.length * 2000;
-      r.supplies = (r.supplies || 0) - need;
-      out.ate = need;
-      if (r.supplies < 0) {
-        out.starving = true;
-        say(`The packs are empty and ${members.length} mouths are not. Hunger walks with the party tonight. (${Math.abs(Math.round(r.supplies)).toLocaleString()} kcal short)`);
-        r.supplies = 0;
-      }
-      // 3. Joined village ticks down.
+    // legTick(): the non-eating half of a lived day — the joined
+    // village's welcome ticks down, and the wave level is reported.
+    // Called from nomad.daily() (the canonical daily, hooked into endDay).
+    legTick() {
+      const out = {};
       const l = leg();
       if (l && l.village && l.village.joinedDays > 0) {
         l.village.joinedDays--;
         if (l.village.joinedDays === 0) say(`Time to move on from ${l.village.name} — welcome's wearing thin.`);
       }
-      // 4. Waves still come.
       out.wave = this.legWaveLevel();
+      return out;
+    },
+
+    // daily(): one lived day on the leg, standalone (tests, debug).
+    // Composes the same pieces as the canonical path: forage, then the
+    // sibling's nomad.daily() (eating, starvation, mantle), then legTick.
+    // Never called from nomad.daily() — that would eat twice.
+    daily() {
+      const r = road();
+      if (!r.active) return { note: 'not on the road' };
+      const out = { day: (G.state.scholar && G.state.scholar.day) || 0 };
+      let core = null;
+      try { core = (G.nomad && G.nomad.daily) ? G.nomad.daily() : null; } catch (e) { warn('nomad.daily: ' + e.message); }
+      if (core) {
+        Object.assign(out, core); // sibling foraged, ate, starved, passed the mantle
+      } else {
+        const f = this.partyForage(); // sibling absent: forage only, no upkeep
+        out.foraged = f.kcal;
+      }
+      Object.assign(out, this.legTick());
       return out;
     },
   };
