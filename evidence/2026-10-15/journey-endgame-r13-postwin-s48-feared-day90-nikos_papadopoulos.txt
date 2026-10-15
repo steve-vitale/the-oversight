@@ -1,0 +1,28 @@
+=== seed 48 day 90 POST-WIN — conversation with Nikos (nikos_papadopoulos) ===
+want: ask_favor (stage 0) thread=table
+THEM: "The light's gone. The sky's just sky again. Tell me it meant something."
+YOU: [dlg:more] "And then?"
+THEM: "That's... pretty much all of it, honestly."
+(want=ask_favor stage=0)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Pantry's thin and getting thinner. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+(want=ask_favor stage=1)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+(want=ask_favor stage=1)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Sorry — I asked you something there." Will you forage with me tomorrow?
+(want=ask_favor stage=1)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "Nobody is, these days. We're all guessing — some of us just guess louder. Give it time."
+(want=ask_favor stage=1)
+YOU: [dlg:help] "I'm listening."
+THEM: "I did the count twice. The count doesn't change. Meet me at the old burn east of camp and we'll fill packs before dark."
+(want=ask_favor stage=2)
+YOU: [dlg:commit] "Count me in."
+THEM: "Then it’s set. The old burn east of camp, before the heat sets in. Bring your pack and your knife."
+(want=ask_favor stage=3)
+YOU: [teach] "Watch — this is useful."
+THEM: "Hm. Never mind — go on."
+(want=ask_favor stage=3)
+closing line: "I'll... I'll be around. If you need anything. Anything at all."

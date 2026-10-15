@@ -2628,16 +2628,23 @@
         pool = [
           '"The table\'s still sitting up there. Waiting on the days, they say — ninety dawns. We just... live, until then?"',
         ];
-      } else if (waiting) {
+      } else if (wantKind === 'done') {
+        // RESOLVED POOL (journey-endgame r13 2026-10-15): the kind-aware
+        // guard above computes wantKind='done' once the table resolves, but
+        // the pool used to branch on `waiting` — and pg.tableWaiting is
+        // never cleared by the resolve paths, so post-win villagers served
+        // the WAITING lines ("it's just sitting there. Waiting on you.")
+        // after the table was gone. The pool follows the kind, not the
+        // stale flag.
+        pool = [
+          '"You walked out of the light and came back breathing. Did it work? Is it done?"',
+          '"The light\'s gone. The sky\'s just sky again. Tell me it meant something."',
+        ];
+      } else {
         pool = [
           '"The table\'s here. The ring — the light — it\'s just sitting there. Waiting on you."',
           '"Nobody\'s sleeping. The sky is waiting and nobody knows what to do with their hands. What are you going to tell it?"',
           '"Did you see their faces? Too many angles. I keep wondering what they want from us."',
-        ];
-      } else {
-        pool = [
-          '"You walked out of the light and came back breathing. Did it work? Is it done?"',
-          '"The light\'s gone. The sky\'s just sky again. Tell me it meant something."',
         ];
       }
       const line = pool[Math.floor(Math.random() * pool.length)];

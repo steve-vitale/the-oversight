@@ -776,6 +776,10 @@
           this.say('You take the comfort. It is gentle. It is a trap. It is an ending — the story resolves, which is more than the void offered.');
           if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
           T.phase = 'done';
+          // RESOLVED (journey-endgame r13 2026-10-15): the table is gone —
+          // clear the waiting flag so post-win readers (convoTableSitting,
+          // the table opener) don't treat a finished table as still sitting.
+          try { this.progState().tableWaiting = false; } catch (e) {}
           this.over = true; this.won = true;
           try { this.wipe(); } catch (e) {}
         }
@@ -873,6 +877,10 @@
       s.tableChoices = null;
       if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
       T.phase = 'done';
+      // RESOLVED (journey-endgame r13 2026-10-15): the table is gone —
+      // clear the waiting flag so post-win readers (convoTableSitting,
+      // the table opener) don't treat a finished table as still sitting.
+      try { this.progState().tableWaiting = false; } catch (e) {}
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
       try { this.save(); } catch (e) {}
@@ -951,6 +959,10 @@
       s.tableChoices = null;
       if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
       T.phase = 'done';
+      // RESOLVED (journey-endgame r13 2026-10-15): the table is gone —
+      // clear the waiting flag so post-win readers (convoTableSitting,
+      // the table opener) don't treat a finished table as still sitting.
+      try { this.progState().tableWaiting = false; } catch (e) {}
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) { console.warn('hosts wipe', e); }
       try { this.save(); } catch (e) { console.warn('hosts save', e); }
@@ -972,6 +984,10 @@
       s.tableChoices = null;
       if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
       T.phase = 'done';
+      // RESOLVED (journey-endgame r13 2026-10-15): the table is gone —
+      // clear the waiting flag so post-win readers (convoTableSitting,
+      // the table opener) don't treat a finished table as still sitting.
+      try { this.progState().tableWaiting = false; } catch (e) {}
       this.over = true; this.won = true;
       try { this.wipe(); } catch (e) {}
       try { this.save(); } catch (e) {}
