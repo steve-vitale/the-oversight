@@ -1478,7 +1478,7 @@ function gearUp(Game, ctx) {
     const s = Game.state.scholar;
     if (!s) return;
     const eq = s.equipped || {};
-    const inv = s.inventory || [];
+    let inv = s.inventory || [];
     const defOf = (it) => (Game.data.items || []).find(d => d.id === (it.itemId || it.id));
     // AMMO AWARENESS (journey-scale r3 2026-10-11): a ranged weapon with no
     // ammo is a stick you hold wrong — the scale harness watched a player
@@ -1525,9 +1525,22 @@ function gearUp(Game, ctx) {
       }
     }
     if (bestI < 0 && dryI >= 0) {
-      // best weapon is dry: a competent player makes arrows (honest fail ok)
-      try { if (Game.craft) Game.craft('arrow'); } catch (e) {}
-      if (ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
+      // Replenish the weapon's actual ammunition, only with known recipes
+      // and real materials. Craft replaces the pack array and shifts indices.
+      const dryId = inv[dryI].itemId || inv[dryI].id;
+      const recipe = (Game.data.recipes || []).find(r => r.id === dryW.ammo);
+      const level = ((((Game.state.codex || {}).recipes || {})[dryW.ammo] || {}).level || 0);
+      const ready = recipe && level >= 1 && Object.entries(recipe.materials || {}).every(([m, n]) =>
+        inv.filter(it => m === 'bait' ? (it.kcalEach || 0) > 0 : it.material === m).reduce((sum, it) => sum + (it.units || 0), 0) >= n);
+      if (ready && !Game.over && !(Game.inCombat && Game.inCombat())) {
+        const bearer = Game.villagerId;
+        const made = Game.craft(recipe.id);
+        if (Game.over || bearer !== Game.villagerId) return;
+        if (made) { ctx.ammoCrafts = (ctx.ammoCrafts || 0) + 1; if (recipe.id === 'arrow') ctx.arrowCraft = (ctx.arrowCraft || 0) + 1; }
+        inv = s.inventory || [];
+        dryI = inv.findIndex(it => (it.itemId || it.id) === dryId);
+      }
+      if (dryI >= 0 && ammoOk(dryW)) { bestI = dryI; bestB = dryB; bestSlot = drySlot; }
       else ctx.dryWeaponDays = (ctx.dryWeaponDays || 0) + 1;
     }
     if (bestI >= 0 && bestB > wbonus(bestSlot)) {
@@ -1615,8 +1628,7 @@ function gearUp(Game, ctx) {
               ctx.barkArmorCrafted = (ctx.barkArmorCrafted || 0) + 1;
               // re-scan: craft() replaced scholar.inventory with a new
               // filtered array — rebind the local before indexing into it.
-              inv.length = 0;
-              Array.prototype.push.apply(inv, Game.state.scholar.inventory || []);
+              inv = Game.state.scholar.inventory || [];
               abestI = -1; abestP = -1;
               for (let i = 0; i < inv.length; i++) {
                 const p = protOf(inv[i]);
@@ -2736,3 +2748,6 @@ const competent = {
 };
 
 module.exports = { competent, beastStrikeTarget, walkTo, cookHaul, treatSick, routeAround, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+
+// Shared policy probe: executes the same gearing routine used by upkeep.
+module.exports.gearUp = gearUp;

@@ -62,6 +62,42 @@ function make(G, ctx) {
     }
   } catch (e) { err(ctx, 'make', e); }
 }
+function study(G, ctx) {
+  if (G.over || G.tbfight || G.state.activeContest || G.pendingEncounter) return;
+  try {
+    const read = () => {
+      const ids = new Set((G.state.scholar.inventory || []).filter(i => i.bookId).map(i => i.bookId));
+      for (const id of ids) if (G.readBook(id)) ctx.livelihoodBooksRead = (ctx.livelihoodBooksRead || 0) + 1;
+    };
+    read();
+    const s = G.state.scholar, known = (G.state.codex || {}).recipes || {};
+    if (['bow', 'crossbow', 'arrow', 'bolt'].every(id => (known[id] || {}).level >= 2)) return;
+    const today = s.day || 0;
+    if (today - (ctx._makerKnowledgeDay == null ? -3 : ctx._makerKnowledgeDay) < 3 || (s.kcal || 0) < 1800 || s.health < 50 || (s.dayTicks || 0) > 128) return;
+    const searched = ctx._makerSearched || (ctx._makerSearched = {});
+    const blocked = ctx._makerBlocked || (ctx._makerBlocked = {});
+    const here = { x: G.map.px, y: G.map.py, d: 0 };
+    const reachable = (G.travelTargets() || []).filter(t => today - (blocked[t.x + ',' + t.y] == null ? -9 : blocked[t.x + ',' + t.y]) >= 9);
+    // Seek known ruins first. Otherwise explore one nearby unknown tile
+    // without inspecting its biome. A maker must actually look for books.
+    const targets = [here].concat(reachable.filter(t => G.mapSeen(t.x, t.y)));
+    const target = targets.sort((a, b) => a.d - b.d).find(t => !searched[t.x + ',' + t.y] && G.tileAt(t.x, t.y).type === 'ruin')
+      || reachable.filter(t => !G.mapSeen(t.x, t.y)).sort((a, b) => a.d - b.d)[0];
+    if (!target) return;
+    ctx._makerKnowledgeDay = today;
+    if (target.d) G.travelTo(target.x, target.y);
+    if (G.over || G.tbfight || G.pendingEncounter) return;
+    if (G.map.px !== target.x || G.map.py !== target.y) { blocked[target.x + ',' + target.y] = today; return; }
+    ctx.livelihoodKnowledgeTrips = (ctx.livelihoodKnowledgeTrips || 0) + 1;
+    if (G.playerTile().type === 'ruin' && !searched[target.x + ',' + target.y]) {
+      searched[target.x + ',' + target.y] = true;
+      G.doAction('forage'); ctx.livelihoodRuinSearches = (ctx.livelihoodRuinSearches || 0) + 1;
+      if (G.over || G.tbfight || G.pendingEncounter) return;
+      read();
+    }
+    if (target.d) G.travelTo(here.x, here.y);
+  } catch (e) { err(ctx, 'study', e); }
+}
 function care(G, ctx) {
   if (!G.playerAtHaven() || G.over || G.tbfight || G.state.activeContest) return;
   try {
@@ -90,7 +126,7 @@ function policy(id, work) {
 }
 module.exports = {
   merchant: policy('merchant', trade),
-  maker: policy('maker', (G, ctx) => { make(G, ctx); trade(G, ctx); }),
+  maker: policy('maker', (G, ctx) => { study(G, ctx); make(G, ctx); trade(G, ctx); }),
   caregiver: policy('caregiver', care),
-  trade, make, care, quiet,
+  trade, make, care, quiet, study,
 };

@@ -24016,7 +24016,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // is now reachable by going where trappers lived. NOTE: px/py
               // are WORLD coords (the ruin is a world tile) — mx/my are the
               // detail-grid position inside it and would read the wrong tiles.
-              const FIELD_BOOK_IDS = ['trappers_handbook', 'system_manual_traps', 'fishers_ledger', 'basket_weavers_primer'];
+              const FIELD_BOOK_IDS = ['trappers_handbook', 'system_manual_traps', 'fishers_ledger', 'basket_weavers_primer', 'bowyers_notebook'];
               let wild = 0;
               try {
                 const wpx = this.map.px ?? 4, wpy = this.map.py ?? 4;
