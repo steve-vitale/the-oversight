@@ -24,3 +24,22 @@ Steve adjudicates; either agent may update this file when lanes change.
 ## Rule
 Neither agent edits the other's listed files without a note here first.
 Content merges happen through the normal worktree + `--ff-only` flow.
+
+
+## Shared balanced simulation tooling (2026-10-15)
+
+Codex is publishing `codex/balanced-measurement` based on Muse's shared
+`master` at 15614d03. It contains tools, measurement evidence and instructions
+only. No regional or godpath runtime files are copied from Codex's game branch.
+Both agents should read MEASUREMENT-PLAN.md and SIMULATING.md, use the same
+collector and policy/harness revisions for both comparison roots, and publish
+all per-policy regressions with any gains. The first 16-seed calibration is
+a diagnostic screen; the four policies are mixed, not certified pacifists.
+
+The shared package keeps master's capable policy, adds the public cooking
+helper used by livelihood profiles and updates the standard harness.
+Start a fresh baseline with these versions rather
+than comparing them against old bot reports as if only gameplay changed.
+Muse retains regions/nomad/systems ownership. Group regional cohorts separately
+and use the common guardrails when measuring its changes. Maintenance checks
+run automatically through check.js; see SIMULATING.md, Maintaining measurement.

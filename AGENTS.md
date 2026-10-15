@@ -127,3 +127,32 @@ Verbatim, with sources:
 Pushes to `master` deploy the PWA (Vercel). `scripts/`, `docs/` and
 `evidence/` are excluded from the deploy (`.vercelignore`), so tooling
 commits are safe. Changes in `src/` reach players on the next deploy.
+
+
+## Balanced measurement workflow (Codex and Muse)
+
+Before tuning gameplay, read `docs/MEASUREMENT-PLAN.md` and the balanced
+scorecard instructions in `docs/SIMULATING.md`. Use the same current observer
+against baseline and candidate roots. Start with 16 matched seeds for each
+of capable/maker/merchant/caregiver; use 64 and independent holdouts for
+small-effect claims. Add named region/job cohorts for the lane under test.
+These mixed policies do not establish pacifist viability.
+
+Review every policy's survival, community, resources, progression and earned
+gear metrics. Win-rate changes in either direction require investigation, not
+an automatic regression/improvement verdict. Winning should be difficult.
+Consult `docs/SURVIVAL-LEVERS.md`; update its register and decision log with
+every survival-affecting lever change. More wins cannot cancel other warnings. Save raw
+panels, feature census, configuration, hashes, and the tradeoff decision in
+`evidence/<date>/`. Unknowns stay unknown. Zero calls do not prove a feature
+is broken; inspect its availability and opportunity first.
+
+`check.js --quick` and the full check automatically run the scorecard tests
+and `test-measurement-workflow.js`. Collector/contract changes require a fresh
+retained neutral panel and updated `scripts/balance-proof.json`; follow
+"Maintaining measurement" in SIMULATING.md. Update contracts, observer,
+assertions and docs together when semantics change. Case-cache fingerprints
+invalidate changed inputs automatically. Never compare different policy or
+harness revisions as if only the game changed. Resume/shard instructions are
+in SIMULATING.md. Keep all tooling shared with the other agent before using
+it as a balance gate. No local Git hook installation is required.

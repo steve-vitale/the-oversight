@@ -1,0 +1,325 @@
+{
+  "baseCommit": "15614d035c9ea7caa77310cc0a678cd303fa4800",
+  "featureBranchPublished": "9bfe9b53d1756d89044d9ae42636bf27b013795b",
+  "gameplaySourceChanges": [],
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "seeds": [
+    7
+  ],
+  "days": 150,
+  "neutrality": {
+    "sourcesStable": true,
+    "neutrality": [
+      {
+        "policy": "capable",
+        "seed": 7,
+        "match": true,
+        "warnings": 0
+      },
+      {
+        "policy": "maker",
+        "seed": 7,
+        "match": true,
+        "warnings": 0
+      },
+      {
+        "policy": "merchant",
+        "seed": 7,
+        "match": true,
+        "warnings": 0
+      },
+      {
+        "policy": "caregiver",
+        "seed": 7,
+        "match": true,
+        "warnings": 0
+      }
+    ]
+  },
+  "sourceDigest": "f84c0e942cb5d7f81478da6d6bf58e48eac836a52341b51c7a63055247961d56",
+  "observerDigest": "18d1e7a84a8b5f3affc0a4591f7029020d7d9c1eddc1703022bbc671b3b7d4a5",
+  "contractDigest": "6a921da32dbc2b7bc30d8e4b4c4fa3be404d0f976d8f3b28e1d15cc98ab97a24",
+  "cacheReuseJobs": 8,
+  "retainedProofJobs": 8,
+  "unknownMetricsByPolicy": [
+    {
+      "policy": "capable",
+      "metrics": [
+        "usefulIntake"
+      ]
+    },
+    {
+      "policy": "caregiver",
+      "metrics": [
+        "usefulIntake"
+      ]
+    },
+    {
+      "policy": "maker",
+      "metrics": [
+        "usefulIntake"
+      ]
+    },
+    {
+      "policy": "merchant",
+      "metrics": [
+        "usefulIntake"
+      ]
+    }
+  ],
+  "checks": {
+    "featureQuick": {
+      "passed": 154,
+      "failed": 0
+    },
+    "featureFull": {
+      "passed": 926,
+      "failed": 0
+    },
+    "sharedQuick": {
+      "passed": 94,
+      "failed": 2
+    },
+    "sharedFull": {
+      "passed": 821,
+      "failed": 47
+    },
+    "baselineQuick": {
+      "passed": 91,
+      "failed": 3
+    },
+    "baselineFull": {
+      "passed": 812,
+      "failed": 54
+    },
+    "focusedScorecardAssertions": 23,
+    "workflowAssertions": 6
+  },
+  "baselineFailedTests": [
+    "scripts/proof-combat-survival-20261013.js",
+    "scripts/test-aid-comms-20261010.js",
+    "scripts/test-animal-cues-20261008.js",
+    "scripts/test-attack-visuals.js",
+    "scripts/test-audio-mix-20261012.js",
+    "scripts/test-audio-pattern-honesty.js",
+    "scripts/test-audio-catfishlure-proof.js",
+    "scripts/test-bal-waves-20261010.js",
+    "scripts/test-blitz-audiolab.js",
+    "scripts/test-blitz-scaledisc.js",
+    "scripts/test-audio-real-20261013.js",
+    "scripts/test-break-counters-20261011.js",
+    "scripts/test-break-contests-20261010.js",
+    "scripts/test-break-food4-20261009.js",
+    "scripts/test-break-monsters3-fieldfights-20261008.js",
+    "scripts/test-combat-r2-hp-routing-20261008.js",
+    "scripts/test-contend-arc-20261012.js",
+    "scripts/test-contender-engager-20261012.js",
+    "scripts/test-detective-observe-wariness-20261008d.js",
+    "scripts/test-dps-race-r1.js",
+    "scripts/test-ending-screen-20261012.js",
+    "scripts/test-feed-goal-forage-r7.js",
+    "scripts/test-fifthlink-r26-20261014.js",
+    "scripts/test-hunter-attack-20261009.js",
+    "scripts/test-hunter-break-20261010-worms.js",
+    "scripts/test-hunter-dress-20261009.js",
+    "scripts/test-hunter-ecology-20261008.js",
+    "scripts/test-hunter-net-print-20261009.js",
+    "scripts/test-fourthlink-20261014.js",
+    "scripts/test-hunter-yield-20261010.js",
+    "scripts/test-journey-deepening-fixes-20261011.js",
+    "scripts/test-leadership-pools-20261012.js",
+    "scripts/test-monster-math-premise-20261013.js",
+    "scripts/test-music-deadpipe-20261012.js",
+    "scripts/test-petition-moot-afterlife-20261012.js",
+    "scripts/test-quest-knowledge-gate-20261007.js",
+    "scripts/test-renegans-20261014.js",
+    "scripts/test-sharcensus-20261014.js",
+    "scripts/test-shows-breakit-r16-20261011.js",
+    "scripts/test-social-animals-20261008.js",
+    "scripts/test-social-gossip-20261011.js",
+    "scripts/test-social-play-20261008.js",
+    "scripts/test-sprites-monsters-20261006.js",
+    "scripts/test-sprites-valid-20261014.js",
+    "scripts/test-spoilgate-20261014.js",
+    "scripts/test-succession-proto-20261014.js",
+    "scripts/test-telegraph-distinct-20261008.js",
+    "scripts/test-telegraph-judgment.js",
+    "scripts/test-trapline-20261011.js",
+    "scripts/test-trust-news-witnesses-20261011.js",
+    "scripts/test-vest-tracker-20261010.js",
+    "scripts/test-wave5-confirm-20261013.js",
+    "scripts/test-skills-pre-system-20261014.js",
+    "scripts/test-where-are-we-20261014.js"
+  ],
+  "candidateFailedTests": [
+    "scripts/proof-combat-survival-20261013.js",
+    "scripts/test-aid-comms-20261010.js",
+    "scripts/test-animal-cues-20261008.js",
+    "scripts/test-attack-visuals.js",
+    "scripts/test-audio-pattern-honesty.js",
+    "scripts/test-audio-catfishlure-proof.js",
+    "scripts/test-bal-waves-20261010.js",
+    "scripts/test-blitz-audiolab.js",
+    "scripts/test-blitz-scaledisc.js",
+    "scripts/test-break-counters-20261011.js",
+    "scripts/test-audio-real-20261013.js",
+    "scripts/test-break-contests-20261010.js",
+    "scripts/test-break-food4-20261009.js",
+    "scripts/test-break-monsters3-fieldfights-20261008.js",
+    "scripts/test-combat-r2-hp-routing-20261008.js",
+    "scripts/test-contend-arc-20261012.js",
+    "scripts/test-contender-engager-20261012.js",
+    "scripts/test-detective-observe-wariness-20261008d.js",
+    "scripts/test-dps-race-r1.js",
+    "scripts/test-feed-goal-forage-r7.js",
+    "scripts/test-fifthlink-r26-20261014.js",
+    "scripts/test-hunter-attack-20261009.js",
+    "scripts/test-hunter-break-20261010-worms.js",
+    "scripts/test-hunter-dress-20261009.js",
+    "scripts/test-hunter-ecology-20261008.js",
+    "scripts/test-hunter-net-print-20261009.js",
+    "scripts/test-fourthlink-20261014.js",
+    "scripts/test-hunter-yield-20261010.js",
+    "scripts/test-journey-deepening-fixes-20261011.js",
+    "scripts/test-kgate-audit.js",
+    "scripts/test-leadership-pools-20261012.js",
+    "scripts/test-monster-math-premise-20261013.js",
+    "scripts/test-past-deflect-gate.js",
+    "scripts/test-petition-moot-afterlife-20261012.js",
+    "scripts/test-quest-knowledge-gate-20261007.js",
+    "scripts/test-renegans-20261014.js",
+    "scripts/test-sharcensus-20261014.js",
+    "scripts/test-social-animals-20261008.js",
+    "scripts/test-social-gossip-20261011.js",
+    "scripts/test-social-play-20261008.js",
+    "scripts/test-sprites-monsters-20261006.js",
+    "scripts/test-sprites-valid-20261014.js",
+    "scripts/test-succession-proto-20261014.js",
+    "scripts/test-trapline-20261011.js",
+    "scripts/test-trust-news-witnesses-20261011.js",
+    "scripts/test-wave5-confirm-20261013.js",
+    "scripts/test-where-are-we-20261014.js"
+  ],
+  "failuresAbsentFromBaselineRun": [
+    "scripts/test-kgate-audit.js",
+    "scripts/test-past-deflect-gate.js"
+  ],
+  "fixedSeedLegacyComparisons": [
+    {
+      "test": "scripts/test-kgate-audit.js",
+      "seed": 7,
+      "baseline": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "candidate": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "match": true
+    },
+    {
+      "test": "scripts/test-kgate-audit.js",
+      "seed": 42,
+      "baseline": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "candidate": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "match": true
+    },
+    {
+      "test": "scripts/test-kgate-audit.js",
+      "seed": 99,
+      "baseline": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "candidate": {
+        "exitCode": 1,
+        "output": "FAIL setup: pine is unknown species knowledge — treeName(pine)=null treeName(oak)=null\n\nkgate-audit: 10 pass, 1 fail, 0 skip\nAll green — these asserts guard the fixed knowledge gates against regressions.\n",
+        "outputDigest": "6a21ddae2644c265ecd04e297be16ecb86f8fd25e44deee9a2a1546dc9f65df4"
+      },
+      "match": true
+    },
+    {
+      "test": "scripts/test-past-deflect-gate.js",
+      "seed": 7,
+      "baseline": {
+        "exitCode": 1,
+        "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+        "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+      },
+      "candidate": {
+        "exitCode": 1,
+        "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+        "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+      },
+      "match": true
+    },
+    {
+      "test": "scripts/test-past-deflect-gate.js",
+      "seed": 42,
+      "baseline": {
+        "exitCode": 1,
+        "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+        "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+      },
+      "candidate": {
+        "exitCode": 1,
+        "output": "FAIL setup: deflect-capable villager with occupation — none found\n\n0 passed, 1 failed\n",
+        "outputDigest": "4c59668a349c6f21d76bb77561fc568ae3aad59c7658c45f09a15f8b2c7a21fc"
+      },
+      "match": true
+    },
+    {
+      "test": "scripts/test-past-deflect-gate.js",
+      "seed": 99,
+      "baseline": {
+        "exitCode": 0,
+        "output": "\n7 passed, 0 failed\n",
+        "outputDigest": "c712b9c58b5fa5fbf11c16e01b91e78bd27c66f51464bba52d82e8d3c08043b1"
+      },
+      "candidate": {
+        "exitCode": 0,
+        "output": "\n7 passed, 0 failed\n",
+        "outputDigest": "c712b9c58b5fa5fbf11c16e01b91e78bd27c66f51464bba52d82e8d3c08043b1"
+      },
+      "match": true
+    }
+  ],
+  "limitations": [
+    "One seed per policy is an execution/neutrality smoke test, not balance evidence.",
+    "Shared master has no useful-intake receipts; metric remains unknown.",
+    "Full shared game suite remains red; no failing tests were loosened or quarantined.",
+    "Two unseeded legacy setup failures vary between runs; six fixed-seed comparisons reproduced identical baseline/candidate output and exit codes.",
+    "Calibration panels use their recorded Codex runtime and policy sources; do not compare them directly with this shared master."
+  ],
+  "artifactHashes": {
+    "balance-shared-panel.json.gz": "878bb2ef12bec1bcd8e6398fc10a54ed88b82e330b2d7d8cec0ecef3326885ed",
+    "balance-shared-feature-census.json": "41a87626c1c34ce413d1c60670f34812779c0aa47af0bf1114ba3361f9f6dddd",
+    "balance-shared-feature-census.md": "e1ea9dd0892a353b02e1df28d907d5ce71b25f9558fe07cb3d0d98fccc2666f5",
+    "balance-shared-quick.txt": "b438e34dbdc384a04fc9d12f98572289742f4fde02eb50a932f36f17c79947bd",
+    "balance-shared-full.txt": "4f71f797c4091bf9861b0c0e8472d06d3e876ede593821f1f4447f8ded560e38",
+    "balance-shared-baseline-quick.txt": "f39b2daf0ce8f94b8c79d1ec7789721b4850bc485050d54543ea588905cc4c17",
+    "balance-shared-baseline-full.txt": "e6fb2f6e7092c74e66e36d64f9869557c12cd508854de42ca982cf0b34ea43d8",
+    "balance-legacy-fixture-proof.json": "33871ad313a20c5e110a34e263721559e633937bbcfa6eefd0655690eb1178b3",
+    "balance-published-feature-quick.txt": "318477130a53af0e7cac2ed6e32c44a622d6c3ca9af423714accf44de75f7dc8",
+    "balance-published-feature-full.txt": "df54869b9879d9629db90e0021e30aa119faea20abaf375dffb60ed2c7685346",
+    "balance-shared-observer-proof.json.gz": "89e1be340661af5442ba3868f0b6059014bfea957ef688c803243f5a43a35779"
+  },
+  "artifactHashTextFormat": "LF as committed; gzip hashes cover exact compressed bytes"
+}

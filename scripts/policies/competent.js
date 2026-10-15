@@ -2683,3 +2683,27 @@ const competent = {
 
 module.exports = { competent, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
 
+
+// Livelihood profiles cook real haul through the public cooking verb.
+function cookHaul(Game, ctx) {
+  try {
+    if (!nearFire(Game)) return 0;
+    const day = (Game.state.scholar || {}).day || 0;
+    if (ctx._cookHaulDay === day) return 0;
+    const inv = Game.state.scholar.inventory || [];
+    const human = (i) => /human/i.test(String(i.id || '') + ' ' + String(i.itemId || '') + ' ' + String(i.name || ''));
+    const cookable = (i) => i && !human(i) && (i.rawKcal ||
+      (i.foodKind === 'meat' && (i.foodState === 'cleaned' || i.undercooked)) ||
+      (i.foodKind === 'plant' && i.needsCooking && i.diseaseRisk));
+    if (!inv.some(cookable)) return 0;
+    // cookAll cooks the whole pack: set human meat aside for the batch
+    const aside = [];
+    for (let i = inv.length - 1; i >= 0; i--) if (inv[i] && human(inv[i]) && (inv[i].rawKcal || inv[i].foodState === 'raw')) aside.push(inv.splice(i, 1)[0]);
+    try { Game.cookAll(); } finally { for (const it of aside) inv.push(it); }
+    ctx._cookHaulDay = day;
+    ctx.cookHaul = (ctx.cookHaul || 0) + 1;
+    return 1;
+  } catch (e) { ctx.cookHaulErr = String(e && e.message).slice(0, 80); return 0; }
+}
+
+module.exports.cookHaul = cookHaul;

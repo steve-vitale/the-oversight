@@ -1,0 +1,1552 @@
+[
+  {
+    "policy": "capable",
+    "runs": 16,
+    "completeMethodCoverage": false,
+    "features": [
+      {
+        "name": "_contestEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 155,
+        "returnedTruthy": 155,
+        "status": "reached"
+      },
+      {
+        "name": "_contestResolveOthers",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 101,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeAbilityOffer",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 45,
+        "returnedTruthy": 16,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeEvolutionAssist",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 20,
+        "returnedTruthy": 20,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeKnowledgeDump",
+        "availableRuns": 16,
+        "reachedRuns": 13,
+        "calls": 19,
+        "returnedTruthy": 19,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeSynergyHint",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 49,
+        "returnedTruthy": 49,
+        "status": "reached"
+      },
+      {
+        "name": "_showEnd",
+        "availableRuns": 16,
+        "reachedRuns": 15,
+        "calls": 80,
+        "returnedTruthy": 80,
+        "status": "reached"
+      },
+      {
+        "name": "_showVillagerEnd",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 25,
+        "returnedTruthy": 25,
+        "status": "reached"
+      },
+      {
+        "name": "apCarePackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 442,
+        "returnedTruthy": 141,
+        "status": "reached"
+      },
+      {
+        "name": "apClubBoon",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1204,
+        "returnedTruthy": 38,
+        "status": "reached"
+      },
+      {
+        "name": "apDeadDrop",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1204,
+        "returnedTruthy": 304,
+        "status": "reached"
+      },
+      {
+        "name": "apPersonaPackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 267,
+        "returnedTruthy": 21,
+        "status": "reached"
+      },
+      {
+        "name": "cleanCarcass",
+        "availableRuns": 16,
+        "reachedRuns": 15,
+        "calls": 268,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "corpseLootAll",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 290,
+        "returnedTruthy": 290,
+        "status": "reached"
+      },
+      {
+        "name": "craft",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 86,
+        "returnedTruthy": 74,
+        "status": "reached"
+      },
+      {
+        "name": "doAction",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 10019,
+        "returnedTruthy": 7271,
+        "status": "reached"
+      },
+      {
+        "name": "tbEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 229,
+        "returnedTruthy": 0,
+        "status": "reached"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "bark_armor",
+        "knownRuns": 16,
+        "readyRuns": 2,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "bow",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "cloth",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crossbow",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crude_bow",
+        "knownRuns": 7,
+        "readyRuns": 2,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "fire_hardened_spear",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "hide_armor",
+        "knownRuns": 10,
+        "readyRuns": 2,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "hunting_spear",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "padded_cloth",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "sharpened_stick",
+        "knownRuns": 8,
+        "readyRuns": 7,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "sling",
+        "knownRuns": 5,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "snare",
+        "knownRuns": 16,
+        "readyRuns": 13,
+        "attempts": 70,
+        "successes": 60,
+        "status": "produced"
+      },
+      {
+        "id": "stone_knife",
+        "knownRuns": 16,
+        "readyRuns": 4,
+        "attempts": 16,
+        "successes": 14,
+        "status": "produced"
+      },
+      {
+        "id": "water_filter",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      }
+    ],
+    "sources": {
+      "player/craft": {
+        "units": 14,
+        "tier3WeaponArmor": 0
+      },
+      "npc/contest": {
+        "units": 61,
+        "tier3WeaponArmor": 19
+      },
+      "player/fan-package": {
+        "units": 141,
+        "tier3WeaponArmor": 79
+      },
+      "npc/action": {
+        "units": 89,
+        "tier3WeaponArmor": 1
+      },
+      "player/contest": {
+        "units": 98,
+        "tier3WeaponArmor": 62
+      },
+      "player/corpse-villager": {
+        "units": 270,
+        "tier3WeaponArmor": 14
+      },
+      "player/patron": {
+        "units": 4,
+        "tier3WeaponArmor": 0
+      },
+      "player/show": {
+        "units": 24,
+        "tier3WeaponArmor": 7
+      },
+      "player/corpse-monster": {
+        "units": 3,
+        "tier3WeaponArmor": 0
+      },
+      "npc/combat": {
+        "units": 2,
+        "tier3WeaponArmor": 0
+      },
+      "player/fan-vote": {
+        "units": 38,
+        "tier3WeaponArmor": 0
+      },
+      "player/corpse-person": {
+        "units": 50,
+        "tier3WeaponArmor": 5
+      },
+      "player/combat": {
+        "units": 1,
+        "tier3WeaponArmor": 1
+      },
+      "npc/show": {
+        "units": 1,
+        "tier3WeaponArmor": 0
+      }
+    },
+    "distributions": {
+      "playerClasses": {
+        "caregiver/healer": 2,
+        "hunter/beastmaster": 2,
+        "socialite/demagogue": 2,
+        "socialite/showrunner": 3,
+        "hunter/stalker": 3,
+        "explorer/cartographer": 2,
+        "survivalist/furnace": 1
+      },
+      "npcClasses": {
+        "caregiver/healer": 1,
+        "forager/feaster": 3,
+        "forager/gardener": 8,
+        "hunter/beastmaster": 1,
+        "hunter/stalker": 4,
+        "socialite/demagogue": 1,
+        "socialite/showrunner": 2,
+        "drifter/trickster": 1
+      },
+      "playerGods": {
+        "shepherd_of_the_dead": 1,
+        "voice_of_the_relay": 3,
+        "apex_predator": 2,
+        "all_seeing": 1
+      },
+      "npcGods": {
+        "shepherd_of_the_dead": 1,
+        "living_garden": 6
+      },
+      "winningEndings": {
+        "feared/caregiver/healer/light": 1,
+        "assimilated/none/none/light": 1,
+        "beloved/none/none/light": 2,
+        "witness/none/none/light": 2,
+        "relay/socialite/demagogue/grey": 1,
+        "witness/explorer/cartographer/light": 1,
+        "feared/socialite/showrunner/light": 1,
+        "witness/survivalist/furnace/light": 1,
+        "beloved/hunter/beastmaster/light": 1
+      }
+    }
+  },
+  {
+    "policy": "maker",
+    "runs": 16,
+    "completeMethodCoverage": false,
+    "features": [
+      {
+        "name": "_contestEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 226,
+        "returnedTruthy": 226,
+        "status": "reached"
+      },
+      {
+        "name": "_contestResolveOthers",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 143,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeAbilityOffer",
+        "availableRuns": 16,
+        "reachedRuns": 15,
+        "calls": 61,
+        "returnedTruthy": 15,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeEvolutionAssist",
+        "availableRuns": 16,
+        "reachedRuns": 13,
+        "calls": 21,
+        "returnedTruthy": 21,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeKnowledgeDump",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 38,
+        "returnedTruthy": 37,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeSynergyHint",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 76,
+        "returnedTruthy": 76,
+        "status": "reached"
+      },
+      {
+        "name": "_showEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 102,
+        "returnedTruthy": 102,
+        "status": "reached"
+      },
+      {
+        "name": "_showVillagerEnd",
+        "availableRuns": 16,
+        "reachedRuns": 14,
+        "calls": 40,
+        "returnedTruthy": 40,
+        "status": "reached"
+      },
+      {
+        "name": "apCarePackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 648,
+        "returnedTruthy": 217,
+        "status": "reached"
+      },
+      {
+        "name": "apClubBoon",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1663,
+        "returnedTruthy": 61,
+        "status": "reached"
+      },
+      {
+        "name": "apDeadDrop",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1663,
+        "returnedTruthy": 405,
+        "status": "reached"
+      },
+      {
+        "name": "apPersonaPackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 349,
+        "returnedTruthy": 30,
+        "status": "reached"
+      },
+      {
+        "name": "cleanCarcass",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 270,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "corpseLootAll",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 390,
+        "returnedTruthy": 390,
+        "status": "reached"
+      },
+      {
+        "name": "craft",
+        "availableRuns": 16,
+        "reachedRuns": 11,
+        "calls": 78,
+        "returnedTruthy": 69,
+        "status": "reached"
+      },
+      {
+        "name": "doAction",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 13592,
+        "returnedTruthy": 9562,
+        "status": "reached"
+      },
+      {
+        "name": "preserveFood",
+        "availableRuns": 16,
+        "reachedRuns": 2,
+        "calls": 3,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "readBook",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 14,
+        "returnedTruthy": 14,
+        "status": "reached"
+      },
+      {
+        "name": "takePrepMaterial",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 59,
+        "returnedTruthy": 35,
+        "status": "reached"
+      },
+      {
+        "name": "tbEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 157,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "traderSell",
+        "availableRuns": 16,
+        "reachedRuns": 9,
+        "calls": 37,
+        "returnedTruthy": 37,
+        "status": "reached"
+      },
+      {
+        "name": "visitorBuyWare",
+        "availableRuns": 16,
+        "reachedRuns": 8,
+        "calls": 8,
+        "returnedTruthy": 8,
+        "status": "reached"
+      },
+      {
+        "name": "visitorWares",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1278,
+        "returnedTruthy": 1278,
+        "status": "reached"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "arrow",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "bark_armor",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "bolt",
+        "knownRuns": 1,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "bow",
+        "knownRuns": 4,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "cloth",
+        "knownRuns": 16,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "crossbow",
+        "knownRuns": 4,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crude_bow",
+        "knownRuns": 4,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "decoy_rattle",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "fire_hardened_spear",
+        "knownRuns": 6,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "fish_weir",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "hide_armor",
+        "knownRuns": 12,
+        "readyRuns": 3,
+        "attempts": 11,
+        "successes": 7,
+        "status": "produced"
+      },
+      {
+        "id": "hunting_spear",
+        "knownRuns": 4,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "padded_cloth",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "sharpened_stick",
+        "knownRuns": 11,
+        "readyRuns": 8,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "sling",
+        "knownRuns": 5,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "snare",
+        "knownRuns": 15,
+        "readyRuns": 8,
+        "attempts": 56,
+        "successes": 51,
+        "status": "produced"
+      },
+      {
+        "id": "spring_snare",
+        "knownRuns": 8,
+        "readyRuns": 3,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "stone_knife",
+        "knownRuns": 16,
+        "readyRuns": 6,
+        "attempts": 11,
+        "successes": 11,
+        "status": "produced"
+      },
+      {
+        "id": "trotline",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "water_filter",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      }
+    ],
+    "sources": {
+      "npc/action": {
+        "units": 84,
+        "tier3WeaponArmor": 1
+      },
+      "player/corpse-person": {
+        "units": 88,
+        "tier3WeaponArmor": 5
+      },
+      "player/craft": {
+        "units": 18,
+        "tier3WeaponArmor": 0
+      },
+      "npc/contest": {
+        "units": 115,
+        "tier3WeaponArmor": 50
+      },
+      "player/contest": {
+        "units": 145,
+        "tier3WeaponArmor": 93
+      },
+      "player/fan-package": {
+        "units": 217,
+        "tier3WeaponArmor": 113
+      },
+      "player/patron": {
+        "units": 11,
+        "tier3WeaponArmor": 0
+      },
+      "player/corpse-villager": {
+        "units": 427,
+        "tier3WeaponArmor": 49
+      },
+      "player/trade": {
+        "units": 8,
+        "tier3WeaponArmor": 0
+      },
+      "player/fan-vote": {
+        "units": 59,
+        "tier3WeaponArmor": 0
+      },
+      "player/show": {
+        "units": 26,
+        "tier3WeaponArmor": 14
+      },
+      "player/action": {
+        "units": 2,
+        "tier3WeaponArmor": 1
+      },
+      "npc/show": {
+        "units": 1,
+        "tier3WeaponArmor": 1
+      }
+    },
+    "distributions": {
+      "playerClasses": {
+        "forager/gardener": 4,
+        "hunter/stalker": 3,
+        "explorer/cartographer": 2,
+        "survivalist/furnace": 2,
+        "forager/feaster": 1,
+        "socialite/showrunner": 1,
+        "hunter/beastmaster": 1
+      },
+      "npcClasses": {
+        "forager/gardener": 9,
+        "forager/feaster": 9,
+        "hunter/stalker": 4,
+        "survivalist/furnace": 2,
+        "caregiver/healer": 1,
+        "socialite/demagogue": 1
+      },
+      "playerGods": {
+        "living_garden": 4,
+        "all_seeing": 2,
+        "unkillable": 1,
+        "apex_predator": 3
+      },
+      "npcGods": {
+        "living_garden": 11,
+        "apex_predator": 2
+      },
+      "winningEndings": {
+        "witness/explorer/cartographer/light": 1,
+        "assimilated/forager/gardener/light": 2,
+        "assimilated/none/none/light": 1,
+        "beloved/none/none/light": 1,
+        "witness/hunter/beastmaster/light": 1
+      }
+    }
+  },
+  {
+    "policy": "merchant",
+    "runs": 16,
+    "completeMethodCoverage": false,
+    "features": [
+      {
+        "name": "_contestEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 210,
+        "returnedTruthy": 210,
+        "status": "reached"
+      },
+      {
+        "name": "_contestResolveOthers",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 151,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeAbilityOffer",
+        "availableRuns": 16,
+        "reachedRuns": 15,
+        "calls": 53,
+        "returnedTruthy": 18,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeEvolutionAssist",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 20,
+        "returnedTruthy": 20,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeKnowledgeDump",
+        "availableRuns": 16,
+        "reachedRuns": 14,
+        "calls": 27,
+        "returnedTruthy": 27,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeSynergyHint",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 71,
+        "returnedTruthy": 71,
+        "status": "reached"
+      },
+      {
+        "name": "_showEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 94,
+        "returnedTruthy": 94,
+        "status": "reached"
+      },
+      {
+        "name": "_showVillagerEnd",
+        "availableRuns": 16,
+        "reachedRuns": 14,
+        "calls": 43,
+        "returnedTruthy": 43,
+        "status": "reached"
+      },
+      {
+        "name": "apCarePackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 569,
+        "returnedTruthy": 212,
+        "status": "reached"
+      },
+      {
+        "name": "apClubBoon",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1606,
+        "returnedTruthy": 63,
+        "status": "reached"
+      },
+      {
+        "name": "apDeadDrop",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1606,
+        "returnedTruthy": 401,
+        "status": "reached"
+      },
+      {
+        "name": "apPersonaPackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 315,
+        "returnedTruthy": 2,
+        "status": "reached"
+      },
+      {
+        "name": "cleanCarcass",
+        "availableRuns": 16,
+        "reachedRuns": 9,
+        "calls": 219,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "corpseLootAll",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 209,
+        "returnedTruthy": 209,
+        "status": "reached"
+      },
+      {
+        "name": "craft",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 110,
+        "returnedTruthy": 102,
+        "status": "reached"
+      },
+      {
+        "name": "doAction",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 13416,
+        "returnedTruthy": 9508,
+        "status": "reached"
+      },
+      {
+        "name": "tbEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 145,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "traderSell",
+        "availableRuns": 16,
+        "reachedRuns": 11,
+        "calls": 33,
+        "returnedTruthy": 33,
+        "status": "reached"
+      },
+      {
+        "name": "visitorBuyWare",
+        "availableRuns": 16,
+        "reachedRuns": 8,
+        "calls": 9,
+        "returnedTruthy": 9,
+        "status": "reached"
+      },
+      {
+        "name": "visitorWares",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1205,
+        "returnedTruthy": 1205,
+        "status": "reached"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "arrow",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "bark_armor",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "bow",
+        "knownRuns": 8,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "cloth",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crossbow",
+        "knownRuns": 4,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crude_bow",
+        "knownRuns": 6,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "decoy_rattle",
+        "knownRuns": 1,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "fire_hardened_spear",
+        "knownRuns": 6,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "hide_armor",
+        "knownRuns": 5,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "hunting_spear",
+        "knownRuns": 7,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "padded_cloth",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "sharpened_stick",
+        "knownRuns": 7,
+        "readyRuns": 4,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "sling",
+        "knownRuns": 8,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "snare",
+        "knownRuns": 16,
+        "readyRuns": 8,
+        "attempts": 96,
+        "successes": 91,
+        "status": "produced"
+      },
+      {
+        "id": "stone_knife",
+        "knownRuns": 16,
+        "readyRuns": 5,
+        "attempts": 14,
+        "successes": 11,
+        "status": "produced"
+      },
+      {
+        "id": "water_filter",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      }
+    ],
+    "sources": {
+      "player/craft": {
+        "units": 11,
+        "tier3WeaponArmor": 0
+      },
+      "npc/contest": {
+        "units": 105,
+        "tier3WeaponArmor": 55
+      },
+      "player/corpse-villager": {
+        "units": 628,
+        "tier3WeaponArmor": 83
+      },
+      "player/contest": {
+        "units": 132,
+        "tier3WeaponArmor": 84
+      },
+      "player/trade": {
+        "units": 9,
+        "tier3WeaponArmor": 0
+      },
+      "player/fan-package": {
+        "units": 212,
+        "tier3WeaponArmor": 106
+      },
+      "npc/action": {
+        "units": 97,
+        "tier3WeaponArmor": 0
+      },
+      "player/show": {
+        "units": 24,
+        "tier3WeaponArmor": 12
+      },
+      "player/fan-vote": {
+        "units": 62,
+        "tier3WeaponArmor": 0
+      },
+      "player/corpse-person": {
+        "units": 62,
+        "tier3WeaponArmor": 6
+      },
+      "npc/combat": {
+        "units": 1,
+        "tier3WeaponArmor": 0
+      },
+      "player/corpse-monster": {
+        "units": 1,
+        "tier3WeaponArmor": 0
+      }
+    },
+    "distributions": {
+      "playerClasses": {
+        "forager/feaster": 4,
+        "hunter/stalker": 5,
+        "socialite/showrunner": 5,
+        "forager/gardener": 4,
+        "caregiver/healer": 1,
+        "explorer/cartographer": 1,
+        "hunter/beastmaster": 1,
+        "drifter/trickster": 1
+      },
+      "npcClasses": {
+        "hunter/stalker": 6,
+        "forager/feaster": 8,
+        "survivalist/furnace": 1,
+        "caregiver/healer": 1,
+        "forager/gardener": 6,
+        "socialite/showrunner": 1,
+        "explorer/cartographer": 1
+      },
+      "playerGods": {
+        "apex_predator": 3,
+        "living_garden": 7,
+        "voice_of_the_relay": 5,
+        "shepherd_of_the_dead": 1
+      },
+      "npcGods": {
+        "apex_predator": 2,
+        "living_garden": 13,
+        "voice_of_the_relay": 3,
+        "shepherd_of_the_dead": 1,
+        "all_seeing": 1
+      },
+      "winningEndings": {
+        "feared/none/none/light": 1,
+        "defiant/none/none/light": 1,
+        "witness/none/none/light": 1,
+        "beloved/socialite/showrunner/light": 1,
+        "witness/hunter/stalker/light": 1,
+        "beloved/hunter/stalker/light": 1
+      }
+    }
+  },
+  {
+    "policy": "caregiver",
+    "runs": 16,
+    "completeMethodCoverage": false,
+    "features": [
+      {
+        "name": "_contestEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 198,
+        "returnedTruthy": 198,
+        "status": "reached"
+      },
+      {
+        "name": "_contestResolveOthers",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 117,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeAbilityOffer",
+        "availableRuns": 16,
+        "reachedRuns": 15,
+        "calls": 50,
+        "returnedTruthy": 12,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeEvolutionAssist",
+        "availableRuns": 16,
+        "reachedRuns": 11,
+        "calls": 17,
+        "returnedTruthy": 17,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeKnowledgeDump",
+        "availableRuns": 16,
+        "reachedRuns": 12,
+        "calls": 25,
+        "returnedTruthy": 25,
+        "status": "reached"
+      },
+      {
+        "name": "_cxPrizeSynergyHint",
+        "availableRuns": 16,
+        "reachedRuns": 14,
+        "calls": 66,
+        "returnedTruthy": 66,
+        "status": "reached"
+      },
+      {
+        "name": "_showEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 83,
+        "returnedTruthy": 83,
+        "status": "reached"
+      },
+      {
+        "name": "_showVillagerEnd",
+        "availableRuns": 16,
+        "reachedRuns": 13,
+        "calls": 33,
+        "returnedTruthy": 33,
+        "status": "reached"
+      },
+      {
+        "name": "apCarePackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 553,
+        "returnedTruthy": 167,
+        "status": "reached"
+      },
+      {
+        "name": "apClubBoon",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1457,
+        "returnedTruthy": 46,
+        "status": "reached"
+      },
+      {
+        "name": "apDeadDrop",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 1457,
+        "returnedTruthy": 371,
+        "status": "reached"
+      },
+      {
+        "name": "apPersonaPackage",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 262,
+        "returnedTruthy": 6,
+        "status": "reached"
+      },
+      {
+        "name": "cleanCarcass",
+        "availableRuns": 16,
+        "reachedRuns": 5,
+        "calls": 139,
+        "returnedTruthy": 0,
+        "status": "reached"
+      },
+      {
+        "name": "comfort",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 286,
+        "returnedTruthy": 286,
+        "status": "reached"
+      },
+      {
+        "name": "corpseLootAll",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 407,
+        "returnedTruthy": 407,
+        "status": "reached"
+      },
+      {
+        "name": "craft",
+        "availableRuns": 16,
+        "reachedRuns": 9,
+        "calls": 45,
+        "returnedTruthy": 40,
+        "status": "reached"
+      },
+      {
+        "name": "doAction",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 11846,
+        "returnedTruthy": 8637,
+        "status": "reached"
+      },
+      {
+        "name": "tbEnd",
+        "availableRuns": 16,
+        "reachedRuns": 16,
+        "calls": 108,
+        "returnedTruthy": 0,
+        "status": "reached"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "bark_armor",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "bolt",
+        "knownRuns": 1,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "bow",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "cloth",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crossbow",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "crude_bow",
+        "knownRuns": 7,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "fire_hardened_spear",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "hide_armor",
+        "knownRuns": 4,
+        "readyRuns": 1,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "hunting_spear",
+        "knownRuns": 3,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "padded_cloth",
+        "knownRuns": 2,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "sharpened_stick",
+        "knownRuns": 8,
+        "readyRuns": 6,
+        "attempts": 0,
+        "successes": 0,
+        "status": "ready_unused"
+      },
+      {
+        "id": "sling",
+        "knownRuns": 7,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      },
+      {
+        "id": "snare",
+        "knownRuns": 15,
+        "readyRuns": 6,
+        "attempts": 33,
+        "successes": 30,
+        "status": "produced"
+      },
+      {
+        "id": "stone_knife",
+        "knownRuns": 16,
+        "readyRuns": 5,
+        "attempts": 12,
+        "successes": 10,
+        "status": "produced"
+      },
+      {
+        "id": "water_filter",
+        "knownRuns": 16,
+        "readyRuns": 0,
+        "attempts": 0,
+        "successes": 0,
+        "status": "known_no_material_sample"
+      }
+    ],
+    "sources": {
+      "player/craft": {
+        "units": 10,
+        "tier3WeaponArmor": 0
+      },
+      "npc/contest": {
+        "units": 107,
+        "tier3WeaponArmor": 54
+      },
+      "player/fan-package": {
+        "units": 167,
+        "tier3WeaponArmor": 80
+      },
+      "npc/action": {
+        "units": 49,
+        "tier3WeaponArmor": 2
+      },
+      "player/show": {
+        "units": 15,
+        "tier3WeaponArmor": 6
+      },
+      "player/corpse-villager": {
+        "units": 275,
+        "tier3WeaponArmor": 22
+      },
+      "player/contest": {
+        "units": 128,
+        "tier3WeaponArmor": 90
+      },
+      "player/fan-vote": {
+        "units": 46,
+        "tier3WeaponArmor": 0
+      },
+      "player/corpse-person": {
+        "units": 25,
+        "tier3WeaponArmor": 1
+      },
+      "player/action": {
+        "units": 1,
+        "tier3WeaponArmor": 0
+      },
+      "npc/show": {
+        "units": 1,
+        "tier3WeaponArmor": 0
+      },
+      "player/patron": {
+        "units": 2,
+        "tier3WeaponArmor": 0
+      }
+    },
+    "distributions": {
+      "playerClasses": {
+        "forager/gardener": 6,
+        "hunter/stalker": 4,
+        "explorer/cartographer": 1,
+        "forager/feaster": 1,
+        "socialite/showrunner": 1
+      },
+      "npcClasses": {
+        "caregiver/healer": 2,
+        "hunter/stalker": 5,
+        "survivalist/furnace": 1,
+        "forager/feaster": 11,
+        "forager/gardener": 9,
+        "hunter/beastmaster": 1,
+        "socialite/demagogue": 2
+      },
+      "playerGods": {
+        "living_garden": 6,
+        "apex_predator": 2,
+        "all_seeing": 1,
+        "voice_of_the_relay": 1
+      },
+      "npcGods": {
+        "living_garden": 11,
+        "apex_predator": 1,
+        "shepherd_of_the_dead": 1
+      },
+      "winningEndings": {
+        "witness/hunter/stalker/light": 1,
+        "beloved/explorer/cartographer/light": 1,
+        "witness/none/none/light": 2,
+        "assimilated/forager/gardener/light": 1,
+        "witness/forager/gardener/light": 1,
+        "assimilated/none/none/light": 1,
+        "witness/forager/feaster/light": 1
+      }
+    }
+  }
+]
