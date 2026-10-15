@@ -82,6 +82,12 @@ simulation/playtest goal with these gaps before expanding content blindly:
    runs earned tier-3+ gear from noncombat reward sources, but overall wins
    did not improve. See `evidence/2026-10-15/bowyer-route-audit.md` before
    treating knowledge access, material supply or ranged-policy use as solved.
+   The next policy audit compares worn and packed weapons, funds a stronger
+   dry bow despite a weaker fallback, and actually wields it via public
+   equipment actions. Its real-shot proof passes; 64 matched capable/maker
+   runs per arm still craft no ammunition. All makers retain earned noncombat
+   tier-3+ gear, but neither overall balance nor natural ammo supply is solved.
+   See `evidence/2026-10-15/ammo-upgrade-policy-audit.md`.
    Improve usable survival supplies and earned reward access for makers;
    an advanced recipe ladder is not an established requirement. Steve's
    direct 2026-10-03 wording in `DECISIONS.md` focuses crafting on supplies
@@ -97,6 +103,10 @@ simulation/playtest goal with these gaps before expanding content blindly:
    pemmican, storage expansion, armory/stash sharing, peer trade/covenants,
    party orders, and the titan/Network route. Zero calls in the ordinary
    sweep establish a coverage gap, not a value judgment.
+   A prepared storage API probe can expand Haven while the bearer is away;
+   repair/prove its location and specialist knowledge contracts before adding
+   storage use to a livelihood policy. Preservation already appears in some
+   maker runs; pemmican and storage access still need public-action playtests.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
    two volunteers, plus three from Haven) and duplicate-call inflation.
    Strong allies can now provide up to six distinct real people; repeated
