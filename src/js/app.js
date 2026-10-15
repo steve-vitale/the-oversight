@@ -272,6 +272,17 @@
         try { const v = Game._otherVillage ? Game._otherVillage(pb.villageId) : null; if (v && v.name) vnm = v.name; } catch (e) {}
         out.push(`<div class="statrow beat-open">🥣 <b>${esc(pb.speaker || 'A speaker')}</b> of ${esc(vnm)} begs food (~${(pb.amount || 1500).toLocaleString()} kcal). <button class="btn sm" data-beat="beg:give">Give it</button> <button class="btn sm ghost" data-beat="beg:refuse">Refuse</button></div>`);
       }
+      // THE LONG WAY HOME (2026-10-15): a foreign village on the road holds
+      // its mood-gated actions open as a beat — trade / rest / fight / walk
+      // away (hostile: fight / walk away only). Resolved in nomad-drive.js.
+      try {
+        const pv = (Game.nomadDrive && typeof Game.nomadDrive.pendingVillageEncounter === 'function') ? Game.nomadDrive.pendingVillageEncounter() : null;
+        if (pv && pv.actions && pv.actions.length) {
+          const labels = { trade: '🤝 Trade 1k kcal', join: '🔥 Rest 3 days', fight: '⚔️ Fight', leave: '🚶 Walk away' };
+          const btns = pv.actions.map(a => `<button class="btn sm${a === 'fight' ? ' ghost' : ''}" data-beat="nve:${a}">${labels[a] || esc(a)}</button>`).join(' ');
+          out.push(`<div class="statrow beat-open">🏘️ <b>${esc(pv.villageName)}</b> — ${esc(pv.moodLabel)}. ${btns}</div>`);
+        }
+      } catch (e) {}
       const prd = st.pendingRaidDefense;
       if (prd) {
         out.push(`<div class="statrow beat-open">🌙 <b>${esc(prd.champion || 'Raiders')}</b> at the treeline — ~${(prd.demand || 2000).toLocaleString()} kcal or blood. <button class="btn sm" data-beat="raiddef:give">Pay</button> <button class="btn sm ghost" data-beat="raiddef:hold">Hold the line</button> <button class="btn sm ghost" data-beat="raiddef:fight">Fight them</button></div>`);
@@ -16286,6 +16297,11 @@
       }
       else if (kind === 'fav') {
         Game.answerSystemFavor(spec[1] === 'pay' ? 'pay' : 'refuse');
+      }
+      // THE LONG WAY HOME (2026-10-15): the foreign-village encounter taps —
+      // trade / rest / fight / walk away, resolved in nomad-drive.js.
+      else if (kind === 'nve') {
+        try { if (Game.nomadDrive) Game.nomadDrive.villageTap(spec[1]); } catch (e) {}
       }
       else if (kind === 'sw') {
         if (spec[1] === 'appoint') Game.appointSwitchboard(spec[2]);

@@ -1,8 +1,8 @@
 // @ontology
 // system: nomad-drive
-// description: The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, and owns the leave / move-on / settle UI taps.
+// description: The Long Way Home — the road driver (docs/WORLD-REGIONS.md §6). Plans the departure itinerary, fires reunions after days on a leg, determines fates deterministically, applies outcomes, relocates moved-on kin, closes the road when every scattered kin resolves, stages foreign-village encounters on leg entry, and owns the leave / move-on / settle / village-encounter UI taps.
 // provides:
-//   - Game.nomadDrive (hooks wrap nomad.start/enterLeg/daily and Game.playerDeath, guarded wrap-once)
+//   - Game.nomadDrive (hooks wrap nomad.start/enterLeg/departLeg/daily and Game.playerDeath, guarded wrap-once)
 //   - planLegs()
 //   - syncItinerary()
 //   - scatteredKinOf(vid)
@@ -18,6 +18,9 @@
 //   - leaveTap()
 //   - moveOnTap()
 //   - settleTap()
+//   - stageVillageEncounter(leg) -> encounter|null
+//   - pendingVillageEncounter() -> {villageName, moodLabel, actions[]}|null
+//   - villageTap(action)
 // rules:
 //   - itinerary: departure plans one leg per living scattered kin whose region is known; newly sharpened trails join by daily sync (code: planLegs, syncItinerary)
 //   - party_kin_legs: the itinerary plans legs for every party villager's known-region scattered kin, not just the bearer's; legs carry kinOwners (kin name -> seeking villager id, null for the bearer's own) (code: planLegs, syncItinerary, scatteredKinOf, partySeekers)
@@ -30,6 +33,7 @@
 //   - joined_kin: alive joins the party as a companion (kin: id, road.companions); companions never bear the Codex (code: resolveReunion, nomad.js isCompanion)
 //   - all_found: every scattered kin of every living party villager resolved alive/changed/dead closes the road all-found; kin whose region was never learned don't block it (code: checkAllFound)
 //   - two_tap: leaving and settling are irrevocable: first tap says the cost, second commits; tap-state only, never saved (code: leaveTap, settleTap)
+//   - road_people: entering a leg stages the foreign village on its map; the mood-gated actions stay open as a beat until answered or the party departs (code: stageVillageEncounter, villageTap; hostile -> fight/leave only, nomad-wild.js villageEncounter)
 // consumes:
 //   - Game.nomad start/addLeg/enterLeg/departLeg/daily/endRoad/markKinFound/party/onRoad/canLeave, state.road (nomad.js)
 //   - Game.nomadScenes reunionScene/sharpenTrail (nomad-scenes.js, guarded)
@@ -454,6 +458,77 @@
       this._settleArmed = 0;
       N.endRoad('settled');
     },
+
+    // ---- foreign-village encounters (the road's people, wired 2026-10-15) ----
+
+    // stageVillageEncounter(leg): when the party reaches the village on the
+    // leg map, the meeting is staged through nomad-wild's single call point
+    // (villageEncounter) and held open on the leg until the player answers
+    // it (trade / rest / fight / walk away) or departs the leg.
+    stageVillageEncounter(leg) {
+      const r = road();
+      if (!r || !r.active || !leg || leg.encounterOpen) return null;
+      const W = Game.nomadWild;
+      if (!W || typeof W.villageEncounter !== 'function') return null;
+      const v = (typeof W.genLegVillage === 'function') ? W.genLegVillage(leg.regionId) : null;
+      const enc = W.villageEncounter(v || undefined);
+      if (!enc || !Array.isArray(enc.actions)) return null;
+      leg.encounterOpen = { village: enc.village || v, mood: enc.mood, actions: enc.actions.slice() };
+      return leg.encounterOpen;
+    },
+
+    // pendingVillageEncounter(): the open encounter, in beat shape for the
+    // road UI — village name, an honest mood label, the gated actions.
+    pendingVillageEncounter() {
+      const r = road();
+      if (!r || !r.active) return null;
+      const leg = r.legs[r.legIndex];
+      const open = leg && leg.encounterOpen;
+      if (!open || !open.actions || !open.actions.length) return null;
+      const labels = { '-2': 'hostile', '-1': 'cold', '0': 'wary', '1': 'warming', '2': 'warm' };
+      return {
+        villageName: (open.village && open.village.name) || 'A village',
+        moodLabel: labels[String(open.mood)] || 'wary',
+        actions: open.actions.slice(),
+      };
+    },
+
+    // villageTap(action): answer the open encounter. FIGHT routes into
+    // fightVillage (real blow-by-blow combat); TRADE and JOIN reuse
+    // nomad-wild's trade/rest beats honestly; LEAVE walks away for free.
+    villageTap(action) {
+      const N = Game.nomad, r = road();
+      if (!N || !r || !r.active) return;
+      const leg = r.legs[r.legIndex];
+      const open = leg && leg.encounterOpen;
+      if (!open) { say('The moment has passed — the road moves on.'); return; }
+      const W = Game.nomadWild;
+      if (!W) return;
+      const v = open.village || {};
+      const close = () => { leg.encounterOpen = null; };
+      if (action === 'trade') {
+        if (open.actions.indexOf('trade') < 0) {
+          const sp = (v.speaker && v.speaker.name) || 'Someone';
+          say(`${sp} doesn't answer. ${v.name || 'The village'} would rather bleed than barter with you.`);
+          close();
+          return;
+        }
+        // A standard offer: 1,000 kcal of pack food. tradeWith narrates
+        // the bargain (or the empty hands) itself.
+        W.tradeWith(v, 1000);
+        close();
+      } else if (action === 'join') {
+        if (open.actions.indexOf('join') < 0) { close(); return; }
+        W.joinVillage(v, 3);
+        close();
+      } else if (action === 'fight') {
+        W.fightVillage(v);
+        close();
+      } else if (action === 'leave') {
+        say(`You lift a hand to ${v.name || 'the village'} and walk on. Some doors stay closed; the road doesn't mind.`);
+        close();
+      }
+    },
   };
 
   // ---- hooks into the road state machine (all guarded, wrap-once) ----
@@ -485,12 +560,38 @@
             const r = road();
             const leg = r && r.legs[i];
             if (leg && leg.enterDay == null) leg.enterDay = r.daysOnRoad;
+            // The road has people: stage the foreign village on the leg map.
+            try { drive.stageVillageEncounter(leg); } catch (e2) {}
           } catch (e) {}
         }
         return ok;
       };
       wrapped._driveWrapped = true;
       N.enterLeg = wrapped;
+    } catch (e) {}
+  }
+
+  // Walking past a village forfeits the meeting: the open encounter is
+  // cleared (with a quiet line) when the party departs the leg.
+  function wrapDepartLeg() {
+    try {
+      const N = Game.nomad;
+      if (!N || N.departLeg._driveWrapped) return;
+      const _dep = N.departLeg.bind(N);
+      const wrapped = function () {
+        try {
+          const r = road();
+          const leg = r && r.legs[r.legIndex];
+          if (leg && leg.encounterOpen) {
+            const vn = (leg.encounterOpen.village && leg.encounterOpen.village.name) || 'the village';
+            say(`You walk past ${vn} without stopping — the chance goes with the dust.`);
+            leg.encounterOpen = null;
+          }
+        } catch (e) {}
+        return _dep();
+      };
+      wrapped._driveWrapped = true;
+      N.departLeg = wrapped;
     } catch (e) {}
   }
 
@@ -538,6 +639,7 @@
 
   wrapStart();
   wrapEnterLeg();
+  wrapDepartLeg();
   wrapDaily();
   wrapPlayerDeath();
 
