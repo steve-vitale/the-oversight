@@ -160,6 +160,17 @@ simulation/playtest goal with these gaps before expanding content blindly:
    unit and dosed bottles one dose. Real positive stacks and player/NPC use
    are proved in the shared harness and phone UI. All 32 matched natural states
    are unchanged, with zero player sharing calls: value/use remain open.
+   New capable covenant/charter/control probes now exercise public equal
+   links, real pool relief, priced crises and actual away-party help. A first
+   16-seed screen per policy reaches three peers in every route run and live
+   national benefits in 13/16, but no seats: removing LEAD tribute exposed the
+   inherited bot's feast-contribution dependency. Explicit affordable armed
+   hosting, applied to all three probes with actual costs/buffs and no granted
+   combat-use deed, reaches 7/16 covenant and 8/16 charter wins versus 1/16
+   control. All 48 still personally earn noncombat tier-3+ gear; this proves
+   natural reachability, not all-build balance. Actual pool/help transfers and
+   21 prepared runtime checks pass. Weekly net economics and fresh mobile
+   peer controls remain open. See `evidence/2026-10-15/peer-league-audit.md`.
    See `evidence/2026-10-15/armory-quantity-audit.md` and the preceding
    `maker-counter-audit.md` / `preservation-access-audit.md`.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
