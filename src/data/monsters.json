@@ -9085,4 +9085,278 @@
     "size": 2,
     "fleeAt": 0.25
   }
+,
+  {
+    "activity": "nocturnal",
+    "aggression": "territorial",
+    "armor": 0,
+    "attack": {
+      "damage": [
+        16,
+        24
+      ],
+      "damageType": "electric",
+      "name": "Full Discharge",
+      "pattern": {
+        "burstDesc": "600+ volts through the water. Everything wet in radius 2 convulses and drops what it's holding.",
+        "burstStyle": "discharge",
+        "radius": 2,
+        "type": "burst",
+        "windup": 2
+      },
+      "telegraph": "The water goes glass-still. A faint crackling, and the hairs on your arms lift. The eel's back arches — it is about to empty itself."
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 1
+        },
+        "damage": [
+          16,
+          24
+        ],
+        "damageType": "electric",
+        "name": "Full Discharge",
+        "pattern": {
+          "burstDesc": "600+ volts through the water. Everything wet in radius 2 convulses.",
+          "burstStyle": "discharge",
+          "radius": 2,
+          "type": "burst",
+          "windup": 2
+        },
+        "telegraph": "The water goes glass-still. A faint crackling, and the hairs on your arms lift.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "hpBelow": 0.3
+        },
+        "tactic": "withdraw",
+        "telegraph": "The crackling fades. It slides backward into the black water, done spending itself — for now.",
+        "weight": 4
+      }
+    ],
+    "behavior": "territorial",
+    "biomes": [
+      "amazon_rainforest"
+    ],
+    "codexStages": {
+      "observed": "Electric eel. The System measured 860 volts and filed it under 'portable weather.' It hunts in the shallows, stunning fish — and anything else standing in the water.",
+      "slain": "Moves: Full Discharge (electric burst, radius 2 in water, telegraphed by crackling), Slip Away (below 30% it withdraws). The shock cannot cross dry ground. Fight it from the bank, never from the creek. Meat: long, boneless, excellent roasted.",
+      "unknown": "The creek went still, and your arm-hairs stood up."
+    },
+    "counter": {
+      "hint": "Its shock travels through water, not air. It crackles before it fires — that sound is your whole warning.",
+      "kind": "keep_distance",
+      "reveal": "When the crackling starts, step onto dry ground — the discharge cannot reach you there. On land it is just a long blind fish: slow, harmless, dinner. Never fight it standing in the creek.",
+      "trick": "Get OUT of the water"
+    },
+    "cues": {
+      "curious": [
+        "It drifts closer, ripples spreading from its snout. Testing the water — literally."
+      ],
+      "fearful": [
+        "It thrashes toward deep water, crackling in panic. It wants depth between you and it."
+      ],
+      "warn": [
+        "The water stills. A faint crackling rises — the hairs on your arms lift. This is the warning."
+      ]
+    },
+    "edible": {
+      "calories": 2500,
+      "note": "Long muscle, barely a bone in it. Roast it well — and make sure it's actually dead first. It can twitch a shock out for a while after."
+    },
+    "emoji": "⚡",
+    "encounter": {
+      "comment": "Living Wire: coil->crackle->discharge. Burst is water-only (radius 2); dry ground is immunity. Withdraws below 30% hp.",
+      "fifo": true,
+      "knownCue": "Crackling water means get out. Dry ground is a wall it cannot cross.",
+      "knownTactics": "Never fight it in the water. Bait the discharge, step ashore, strike while it recovers.",
+      "noticeRange": 3,
+      "phaseBadges": {
+        "coil": " ⚡ COILED",
+        "crackle": " ⚡ CRACKLING",
+        "discharge": " ⚡ DISCHARGE",
+        "spent": " 😮‍💨 SPENT"
+      },
+      "phaseMap": {
+        "declare": "crackle",
+        "idle": "coil",
+        "resolve": "discharge",
+        "windup": "crackle"
+      },
+      "phases": [
+        "coil",
+        "crackle",
+        "discharge",
+        "spent"
+      ],
+      "shortName": "eel"
+    },
+    "fear": "fire",
+    "follows": false,
+    "hp": [
+      60,
+      80
+    ],
+    "id": "living_wire",
+    "loot": {
+      "chance": 0.08,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05).",
+      "tier": 1
+    },
+    "name": "The Living Wire",
+    "parts": [
+      "electric organ (strange craft)",
+      "skin (leather)"
+    ],
+    "size": 1,
+    "speed": 2,
+    "systemDesignation": "Electrophorus electricus (standard)",
+    "unknown": "the creek went still, and your arm-hairs stood up",
+    "vibe": "a living battery — patient, coiled, humming",
+    "wave": 1,
+    "weaknesses": [
+      "the discharge cannot cross dry ground — fight from the bank",
+      "it must surface to breathe — watch for the roll, strike then"
+    ]
+  },
+  {
+    "activity": "nocturnal",
+    "aggression": "territorial",
+    "armor": 6,
+    "attack": {
+      "damage": [
+        14,
+        20
+      ],
+      "damageType": "physical",
+      "name": "Death Coil",
+      "pattern": {
+        "ambushDesc": "Grapples and constricts. Damage each turn until the coil is broken — strike the head.",
+        "ambushStyle": "coil",
+        "radius": 1,
+        "type": "ambush",
+        "windup": 1
+      },
+      "telegraph": "The water bulges — a ripple with intent. Then the coils are around you, and each breath you let out is a breath you don't get back."
+    },
+    "attacks": [
+      {
+        "condition": {
+          "minRange": 1
+        },
+        "damage": [
+          14,
+          20
+        ],
+        "damageType": "physical",
+        "name": "Death Coil",
+        "pattern": {
+          "ambushDesc": "Grapples and constricts. Damage each turn until broken.",
+          "ambushStyle": "coil",
+          "radius": 1,
+          "type": "ambush",
+          "windup": 1
+        },
+        "telegraph": "The water bulges — a ripple with intent.",
+        "weight": 3
+      },
+      {
+        "condition": {
+          "hpBelow": 0.25
+        },
+        "tactic": "withdraw",
+        "telegraph": "It loosens, reluctantly, and pours itself back into the water. It will remember this pool.",
+        "weight": 4
+      }
+    ],
+    "behavior": "territorial",
+    "biomes": [
+      "amazon_rainforest"
+    ],
+    "codexStages": {
+      "observed": "Green anaconda. Twenty-plus feet of constrictor that hunts like the river itself — patient, submerged, inevitable. The System admires the efficiency and is taking notes.",
+      "slain": "Moves: Death Coil (ambush grapple from water, constricts each turn), Withdraw (below 25% it releases). It kills by wrapping, not biting. When the coils start, strike the head and eyes — it releases to protect them. Never let it get a second wrap. Meat: a feast. The hide is legendary.",
+      "unknown": "Something displaced a LOT of water, and it wasn't a log."
+    },
+    "counter": {
+      "hint": "It kills by wrapping, not biting. It hates having its head touched — the head is the whole animal's pride.",
+      "kind": "strike_windup",
+      "reveal": "When the coils start to wrap, don't pull away — strike the head and eyes. It will release to protect them. On land it is slow and heavy; it needs the water to be the Empress. Never let it get a second wrap.",
+      "trick": "Strike the head as it coils"
+    },
+    "cues": {
+      "curious": [
+        "A ripple crosses the pool toward you, slow and deliberate. Something is measuring you."
+      ],
+      "fearful": [
+        "It uncoils in a rush and pours itself into deep water. Even the Empress knows fire."
+      ],
+      "warn": [
+        "The water bulges. A ripple with intent — and then the coils move. This is the warning."
+      ]
+    },
+    "edible": {
+      "calories": 8000,
+      "note": "A LOT of snake. Tough, rich, faintly fishy — and it feeds the whole village for days. The fat renders beautifully."
+    },
+    "emoji": "🐍",
+    "encounter": {
+      "comment": "Anaconda Empress: lurk->bulge->coil. Ambush grapple from water tiles; head strikes break the coil. Slow on land.",
+      "fifo": true,
+      "knownCue": "A bulging ripple with intent — don't be in the water when it arrives.",
+      "knownTactics": "Strike the head during the coil windup. Fight it on land if you must fight it at all.",
+      "noticeRange": 3,
+      "phaseBadges": {
+        "bulge": " 🐍 BULGING",
+        "coil": " 🐍 COILING",
+        "lurk": " 🐍 LURKING",
+        "spent": " 😮‍💨 SPENT",
+        "squeeze": " 🐍 SQUEEZING"
+      },
+      "phaseMap": {
+        "declare": "bulge",
+        "idle": "lurk",
+        "resolve": "coil",
+        "windup": "bulge"
+      },
+      "phases": [
+        "lurk",
+        "bulge",
+        "coil",
+        "squeeze",
+        "spent"
+      ],
+      "shortName": "anaconda"
+    },
+    "fear": "fire",
+    "follows": true,
+    "hp": [
+      90,
+      120
+    ],
+    "id": "anaconda_empress",
+    "loot": {
+      "chance": 0.1,
+      "note": "Alien loot: low chance, tier scales with monster strength (Steve 2026-10-05).",
+      "tier": 2
+    },
+    "name": "The Anaconda Empress",
+    "parts": [
+      "hide (legendary leather)",
+      "fat (cooking)",
+      "head (trophy)"
+    ],
+    "size": 3,
+    "speed": 2,
+    "systemDesignation": "Eunectes murinus (standard)",
+    "unknown": "something displaced a LOT of water, and it wasn't a log",
+    "vibe": "twenty feet of patience — she has been here longer than the river",
+    "wave": 1,
+    "weaknesses": [
+      "striking the head breaks the coil — the head is sacred to it",
+      "slow and heavy on land — it needs the water to be dangerous"
+    ]
+  }
 ]

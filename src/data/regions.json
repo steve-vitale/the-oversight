@@ -1557,28 +1557,303 @@
     ],
     "covers": "Central America, Caribbean"
   },
-  {
-    "id": "sa_amazon",
-    "name": "The Amazon",
-    "continent": "south_america",
-    "climateFamily": "tropical_wet",
-    "hemisphere": "south",
+    {
+    "biome": "amazon_rainforest",
+    "challenge": {
+      "description": "The river rises every year and takes the low ground for months. Game disperses, trails drown, and the water you drink wants to give you something. You don't beat the flood — you move with it, or you don't eat.",
+      "id": "a_cheia",
+      "mechanics": [
+        "flooding",
+        "water_contamination",
+        "disease"
+      ],
+      "name": "A Cheia (The Flood)"
+    },
     "climate": {
       "calendar": "tropical_wet_2"
     },
-    "status": "stub",
-    "originTags": [
-      "brazil",
-      "amazonas",
-      "loreto",
-      "para"
+    "continent": "south_america",
+    "covers": "Amazon basin: várzea floodplain, terra firme upland forest, blackwater creeks",
+    "fauna": {
+      "animals": [
+        "jaguar",
+        "capybara",
+        "agouti",
+        "collared_peccary",
+        "scarlet_macaw",
+        "toco_toucan",
+        "red_howler",
+        "lowland_tapir"
+      ],
+      "density": 1.1,
+      "fish": [
+        "pirarucu",
+        "tambaqui",
+        "piranha"
+      ],
+      "predators": [
+        "jaguar"
+      ]
+    },
+    "flora": {
+      "bounty": {
+        "blackwater creek": [
+          "victoria_lily",
+          "Still black water. The giant lilies spread their pads."
+        ],
+        "flooded grove": [
+          "acai",
+          "The floodplain palms stand in black water. Açaí and bacaba."
+        ],
+        "old roça": [
+          "sweet_cassava",
+          "An old garden clearing. Manioc gone wild — bitter and sweet, and only knowledge tells them apart."
+        ],
+        "river beach": [
+          "tucuma",
+          "Sand and sun. Tucumã palms lean over the water."
+        ],
+        "terra firme rise": [
+          "brazil_nut",
+          "High ground, old giants. The castanheiras drop their cannonball pods here."
+        ],
+        "the gap": [
+          "banana",
+          "Light got in. Someone's old clearing — banana and papaya."
+        ],
+        "understory shade": [
+          "cacao",
+          "Dim and damp. Cacao pods hang straight from the trunks."
+        ]
+      },
+      "bushes": [
+        "pineapple",
+        "camu_camu",
+        "guava"
+      ],
+      "commonTrees": [
+        "acai_palm",
+        "cacao_tree"
+      ],
+      "trees": [
+        {
+          "id": "brazil_nut_tree",
+          "nut": "brazil_nut",
+          "roll": 0.25
+        },
+        {
+          "id": "acai_palm",
+          "nut": "acai",
+          "roll": 0.5
+        },
+        {
+          "id": "cacao_tree",
+          "nut": "cacao",
+          "roll": 0.7
+        },
+        {
+          "id": "pupunha_palm",
+          "nut": "pupunha",
+          "roll": 0.85
+        },
+        {
+          "id": "rubber_tree",
+          "roll": 0.95
+        },
+        {
+          "id": "kapok_tree"
+        }
+      ]
+    },
+    "gen": {
+      "creeks": 3,
+      "groveBlobs": 5,
+      "groveSize": 6,
+      "lootMult": 1,
+      "meadowSize": 2,
+      "ruinMaxDist": 3,
+      "stockMult": 1,
+      "thickets": 6,
+      "trailLines": 1,
+      "wetlands": 5
+    },
+    "hemisphere": "south",
+    "id": "sa_amazon",
+    "landingVariants": [
+      "varzea_levee",
+      "terra_firme",
+      "ribeirinho_dock"
     ],
+    "lifeseedRegions": [
+      "amazon_brazil",
+      "amazon_peru"
+    ],
+    "monsters": [
+      "living_wire",
+      "anaconda_empress"
+    ],
+    "name": "The Amazon",
     "neighbors": [
       "mesoamerica_caribbean",
       "sa_andes",
       "sa_pampas_patagonia"
     ],
-    "covers": "Amazon basin"
+    "originTags": [
+      "brazil",
+      "amazonas",
+      "loreto",
+      "para",
+      "manaus",
+      "belem"
+    ],
+    "people": {
+      "language": "portuguese",
+      "pantry": [
+        {
+          "kcalEach": 300,
+          "kg": 0.5,
+          "name": "Manioc flour (farinha)",
+          "safe": true,
+          "spoilDays": 180,
+          "unit": "scoop",
+          "units": 60
+        },
+        {
+          "cookedKcal": 350,
+          "kcalEach": 200,
+          "kg": 0.5,
+          "name": "Rice",
+          "needsCooking": true,
+          "rawKcal": 200,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 65
+        },
+        {
+          "cookedKcal": 300,
+          "kcalEach": 150,
+          "kg": 0.5,
+          "name": "Dried black beans",
+          "needsCooking": true,
+          "rawKcal": 150,
+          "safe": false,
+          "spoilDays": 365,
+          "unit": "scoop",
+          "units": 80
+        },
+        {
+          "kcalEach": 400,
+          "kg": 0.3,
+          "name": "Dried pirarucu",
+          "safe": true,
+          "spoilDays": 30,
+          "unit": "strip",
+          "units": 22
+        },
+        {
+          "kcalEach": 180,
+          "kg": 0.1,
+          "name": "Brazil nuts",
+          "safe": true,
+          "spoilDays": 60,
+          "unit": "handful",
+          "units": 30
+        }
+      ],
+      "ruins": [
+        "A feira — the riverside market. The stalls are skeletons now, awnings rotted to lace. Nothing worth stealing; everything worth eating is long gone.",
+        "An escola, paint peeling in the humidity. The chalkboard still has a date on it. Nobody loots a school — you take a desk for firewood and feel bad about it.",
+        "A rodoviária, the bus depot. The buses rust where they died, and the timetables have faded to ghosts."
+      ],
+      "scavenge": [
+        {
+          "id": "farinha",
+          "kcal": 700,
+          "kg": 0.5,
+          "name": "Manioc flour (farinha)",
+          "text": "A sealed bag of toasted manioc flour. The Amazon's bread — bland, filling, eternal."
+        },
+        {
+          "id": "can_sardines",
+          "kcal": 400,
+          "kg": 0.3,
+          "name": "Canned sardines",
+          "text": "Dusty tin, intact. The river towns ran on these."
+        },
+        {
+          "id": "rapadura",
+          "kcal": 900,
+          "kg": 0.5,
+          "name": "Rapadura sugar blocks",
+          "text": "Hard brown bricks of raw cane sugar. A shaving in water is a meal's worth of energy."
+        },
+        {
+          "id": "carne_seca",
+          "kcal": 600,
+          "kg": 0.4,
+          "name": "Carne-seca (dried beef)",
+          "text": "Salt-cured, sun-dried beef. Tough as a boot, keeps like a stone."
+        },
+        {
+          "id": "dried_pirarucu",
+          "kcal": 500,
+          "kg": 0.35,
+          "name": "Dried pirarucu",
+          "text": "Strips of the great river fish, salted and sun-dried. Chewy, salty, perfect."
+        },
+        {
+          "id": "guarana_powder",
+          "kcal": 100,
+          "kg": 0.1,
+          "name": "Guaraná powder",
+          "text": "A small bag of bitter brown powder. A pinch in water wakes you like a slap — the river people's coffee."
+        },
+        {
+          "id": "can_feijoada",
+          "kcal": 650,
+          "kg": 0.4,
+          "name": "Canned feijoada",
+          "text": "Black beans and pork, ready to eat. Tastes like before."
+        },
+        {
+          "id": "salt_bag",
+          "kcal": 0,
+          "kg": 0.3,
+          "name": "Bag of salt",
+          "text": "Coarse salt in a tied sack. Worth its weight in everything."
+        },
+        {
+          "doses": 3,
+          "id": "med_antibiotics",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antibiotics",
+          "name": "Antibiotics (amoxicillin)",
+          "rare": true,
+          "text": "A rattling bottle from the health post's cabinet. For bacterial infections. Read the label."
+        },
+        {
+          "doses": 3,
+          "id": "med_antiparasitic",
+          "kcal": 0,
+          "kg": 0.1,
+          "medType": "antiparasitic",
+          "name": "Antiparasitic (mebendazole)",
+          "rare": true,
+          "text": "Foil blister pack, unbroken. The river gives worms with everything else. Only for those."
+        }
+      ],
+      "villageNames": [
+        "Vila Esperança",
+        "Remanso Verde",
+        "São João do Lago",
+        "Porto Sossego",
+        "Nova Beira"
+      ]
+    },
+    "status": "playable",
+    "climateFamily": "tropical_wet"
   },
   {
     "id": "sa_andes",
