@@ -1,0 +1,41 @@
+== dawnmeal pilot: 8 seeds x 2 policies x 2 sides, 180d ==
+  [control/leadcourt s11] days=34 end=village-lost scholarHunger=29 dmTakes=0 dmKcal=0 wave=2 rank=village
+  [armed/leadcourt s11] days=34 end=village-lost scholarHunger=29 dmTakes=0 dmKcal=0 wave=2 rank=village
+  [control/leadcourt s22] days=147 end=village-lost scholarHunger=142 dmTakes=0 dmKcal=0 wave=4 rank=national
+  [armed/leadcourt s22] days=137 end=village-lost scholarHunger=88 dmTakes=9 dmKcal=1288 wave=4 rank=global
+  [control/leadcourt s33] days=146 end=village-lost scholarHunger=22 dmTakes=0 dmKcal=0 wave=4 rank=national
+  [armed/leadcourt s33] days=146 end=village-lost scholarHunger=22 dmTakes=0 dmKcal=0 wave=4 rank=national
+  [control/leadcourt s44] days=180 end=survived scholarHunger=172 dmTakes=0 dmKcal=0 wave=4 rank=global
+  [armed/leadcourt s44] days=180 end=survived scholarHunger=172 dmTakes=5 dmKcal=220 wave=3 rank=global
+  [control/leadcourt s55] days=106 end=village-dead scholarHunger=80 dmTakes=0 dmKcal=0 wave=3 rank=regional
+  [armed/leadcourt s55] days=106 end=village-dead scholarHunger=80 dmTakes=0 dmKcal=0 wave=3 rank=regional
+  [control/leadcourt s66] days=180 end=survived scholarHunger=177 dmTakes=0 dmKcal=0 wave=4 rank=global
+  [armed/leadcourt s66] days=65 end=village-lost scholarHunger=62 dmTakes=4 dmKcal=0 wave=3 rank=regional
+  [control/leadcourt s77] days=51 end=village-lost scholarHunger=33 dmTakes=0 dmKcal=0 wave=2 rank=regional
+  [armed/leadcourt s77] days=58 end=village-lost scholarHunger=33 dmTakes=5 dmKcal=1061 wave=3 rank=regional
+  [control/leadcourt s88] days=43 end=village-lost scholarHunger=41 dmTakes=0 dmKcal=0 wave=2 rank=village
+  [armed/leadcourt s88] days=176 end=village-lost scholarHunger=22 dmTakes=2 dmKcal=176 wave=3 rank=global
+  [control/belongseek s11] days=27 end=village-lost scholarHunger=24 dmTakes=0 dmKcal=0 wave=1 rank=village
+  [armed/belongseek s11] days=27 end=village-lost scholarHunger=24 dmTakes=0 dmKcal=0 wave=1 rank=village
+  [control/belongseek s22] days=180 end=survived scholarHunger=175 dmTakes=0 dmKcal=0 wave=3 rank=global
+  [armed/belongseek s22] days=148 end=village-lost scholarHunger=131 dmTakes=12 dmKcal=562 wave=3 rank=global
+  [control/belongseek s33] days=180 end=survived scholarHunger=164 dmTakes=0 dmKcal=0 wave=3 rank=national
+  [armed/belongseek s33] days=180 end=survived scholarHunger=161 dmTakes=6 dmKcal=682 wave=3 rank=national
+  [control/belongseek s44] days=158 end=village-lost scholarHunger=73 dmTakes=0 dmKcal=0 wave=3 rank=national
+  [armed/belongseek s44] days=175 end=village-lost scholarHunger=146 dmTakes=8 dmKcal=1224 wave=3 rank=national
+  [control/belongseek s55] days=121 end=village-dead scholarHunger=106 dmTakes=0 dmKcal=0 wave=3 rank=regional
+  [armed/belongseek s55] days=121 end=village-dead scholarHunger=106 dmTakes=0 dmKcal=0 wave=3 rank=regional
+  [control/belongseek s66] days=119 end=village-lost scholarHunger=115 dmTakes=0 dmKcal=0 wave=3 rank=regional
+  [armed/belongseek s66] days=59 end=village-lost scholarHunger=56 dmTakes=5 dmKcal=200 wave=2 rank=regional
+  [control/belongseek s77] days=155 end=village-lost scholarHunger=126 dmTakes=0 dmKcal=0 wave=3 rank=national
+  [armed/belongseek s77] days=180 end=survived scholarHunger=142 dmTakes=2 dmKcal=160 wave=3 rank=global
+  [control/belongseek s88] days=71 end=village-lost scholarHunger=69 dmTakes=0 dmKcal=0 wave=2 rank=regional
+  [armed/belongseek s88] days=73 end=village-lost scholarHunger=71 dmTakes=2 dmKcal=176 wave=2 rank=regional
+
+-- pooled --
+  control: scholarHunger=1548 hunger=1594 starveDeaths=16 median=147d national=8/16 table=1 won=0 wave4=4 wave5=0 dmTakes=0 dmMeals=0 dmKcal=0 dmNoGain=0 dmRefused=0 dmTriggers=0
+    deaths: {"combat":72,"a wound that wouldn't close":14,"monster":18,"villager combat":22,"starvation":16,"contest":7,"sickness":10,"lockjaw":2,"expedition":1,"Nevermore":2}
+  armed: scholarHunger=1345 hunger=1397 starveDeaths=14 median=138d national=8/16 table=0 won=0 wave4=2 wave5=0 dmTakes=60 dmMeals=39 dmKcal=5749 dmNoGain=49 dmRefused=415 dmTriggers=807
+    deaths: {"combat":93,"a wound that wouldn't close":7,"monster":13,"villager combat":24,"starvation":14,"contest":9,"expedition":3,"sickness":10,"lockjaw":1,"Nevermore":1,"The Big Stare":1,"Ugly-Eyes":1}
+
+VERDICT: NO-GO — primary ratio=0.869 (GO<=0.60): false; median 138d vs 147d (>=ctrl-10): true; national 8 vs 8 (>=ctrl-2): true; starveDeaths 14 vs 16 (<=ctrl+2): true; new death modes: none: true; freq takes/run=3.8 (bound 16): true
