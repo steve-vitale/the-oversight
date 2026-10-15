@@ -103,10 +103,14 @@ simulation/playtest goal with these gaps before expanding content blindly:
    pemmican, storage expansion, armory/stash sharing, peer trade/covenants,
    party orders, and the titan/Network route. Zero calls in the ordinary
    sweep establish a coverage gap, not a value judgment.
-   A prepared storage API probe can expand Haven while the bearer is away;
-   repair/prove its location and specialist knowledge contracts before adding
-   storage use to a livelihood policy. Preservation already appears in some
-   maker runs; pemmican and storage access still need public-action playtests.
+   Storage expansion now requires the exact Haven world tile and no live
+   fight, and its warning respects unknown professions. Shared-harness and
+   actual phone Pantry-button proofs retain costs, builder discount, labor,
+   and capacity gains. All 32 matched natural states remain identical, with
+   zero storage/pemmican calls; this is contract proof, not livelihood value.
+   See `evidence/2026-10-15/storage-worksite-audit.md`. Preservation already
+   appears in some maker runs; pemmican and deliberate storage use still
+   need public-action playtests before adding them to a livelihood policy.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
    two volunteers, plus three from Haven) and duplicate-call inflation.
    Strong allies can now provide up to six distinct real people; repeated
