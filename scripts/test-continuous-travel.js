@@ -29,7 +29,17 @@ function walkableCell(x, y) {
   const s = Game.state.scholar;
   const px0 = Game.map.px, py0 = Game.map.py;
 
+  // Exact-coordinate cases require a walkable target. Random terrain may
+  // legitimately force findWalkableEntry inward; test that case separately.
+  function prepareEntry(nx, ny, x, y, kind = 'grass') {
+    const detail = Game.genDetail(nx, ny);
+    detail[y] = detail[y] || {}; detail[y][x] = kind;
+    // A lone walkable pocket is also a valid reason to fall back.
+    if (kind === 'grass') detail[y][x === 8 ? x - 1 : x + 1] = 'grass';
+  }
+
   // --- travel NORTH: enter at south edge, same column ---
+  prepareEntry(px0, py0 - 1, 6, 8);
   s.mx = 6; s.my = 0; // standing at north rim, column 6
   Game.travelTo(px0, py0 - 1, true);
   ok('north: map moved', Game.map.py === py0 - 1);
@@ -38,6 +48,7 @@ function walkableCell(x, y) {
   ok('north: entry cell walkable', walkableCell(s.mx, s.my));
 
   // --- travel SOUTH back: enter at north edge ---
+  prepareEntry(px0, py0, 2, 0);
   s.mx = 2; // change column mid-node to verify it carries over
   Game.travelTo(px0, py0, true);
   ok('south: map moved back', Game.map.py === py0);
@@ -46,6 +57,7 @@ function walkableCell(x, y) {
   ok('south: entry cell walkable', walkableCell(s.mx, s.my));
 
   // --- travel EAST: enter at west edge, same row ---
+  prepareEntry(px0 + 1, py0, 0, 5);
   s.my = 5;
   Game.reveal(px0 + 1, py0);
   Game.travelTo(px0 + 1, py0, true);
@@ -55,18 +67,23 @@ function walkableCell(x, y) {
   ok('east: entry cell walkable', walkableCell(s.mx, s.my));
 
   // --- travel WEST back: enter at east edge ---
+  prepareEntry(px0, py0, 8, 5);
   Game.travelTo(px0, py0, true);
   ok('west: map moved back', Game.map.px === px0);
   ok('west: entered at east edge (mx=8)', s.mx === 8);
   ok('west: row preserved (my=5)', s.my === 5);
   ok('west: entry cell walkable', walkableCell(s.mx, s.my));
 
-  // --- diagonal NE: enter at SW corner (or nearest walkable if corner blocked) ---
+  // --- diagonal NE: a blocked corner must use its known walkable neighbor ---
+  prepareEntry(px0 + 1, py0 - 1, 0, 8, 'tree');
+  prepareEntry(px0 + 1, py0 - 1, 1, 8);
   s.mx = 4; s.my = 4;
   Game.reveal(px0 + 1, py0 - 1);
   Game.travelTo(px0 + 1, py0 - 1, true);
   ok('diag NE: entered near SW corner (mx<=2, my>=6)', s.mx <= 2 && s.my >= 6);
   ok('diag: entry cell walkable', walkableCell(s.mx, s.my));
+  ok('diag: blocked requested corner is not used', !(s.mx === 0 && s.my === 8));
+  ok('diag: nearest prepared exit is used', s.mx === 1 && s.my === 8);
 
   // --- findWalkableEntry always returns a walkable cell ---
   const entry = Game.findWalkableEntry(Game.map.px, Game.map.py, 0, 0);
@@ -75,6 +92,7 @@ function walkableCell(x, y) {
   // --- multi-tile jump still enters at the correct edge ---
   Game.reveal(px0 + 1, py0 + 1);
   Game.reveal(px0 + 1, py0 + 2);
+  prepareEntry(px0 + 1, py0 + 2, 1, 0);
   Game.travelTo(px0 + 1, py0 + 2, true); // 3 tiles south (d=3, diagonal-ish)
   ok('multi-tile: entry cell walkable', walkableCell(s.mx, s.my));
   ok('multi-tile: entered near north edge (my<=2)', s.my <= 2);

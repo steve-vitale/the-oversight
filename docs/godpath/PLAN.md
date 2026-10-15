@@ -43,8 +43,14 @@ Job -> track -> **class** -> **god** -> Table.
    player's plant stacks nor NPC garden-duty food retains the harvester.
    Meal totals also include personal production, so donations/gardening XP
    cannot prove seven days feeding the village from one's own harvest.
-   Implement source preservation plus actual eater receipts before changing
-   its gate; see `evidence/2026-10-15/garden-provenance-audit.md`.
+   Source preservation is now wired for main plant-harvest callers, unknown
+   species lumps, fungible mixed stacks, processing and pantry transfers.
+   Runtime 26/26 passes (frozen source: 7 pass / 19 fail); matched 64 x four
+   result rows remain identical (124 wins / 229 player deaths, no warnings).
+   All 987 paired daily states remain equal after removing only source maps. Actual eater receipts, away rations, supplemental
+   harvest callers and seven-day village coverage still precede the gate.
+   See `evidence/2026-10-15/harvest-source-audit.md` and the earlier
+   `garden-provenance-audit.md`.
 2. **Finish the parity audit.** Ten god verbs now have player/villager callers
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that

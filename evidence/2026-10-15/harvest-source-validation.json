@@ -1,0 +1,133 @@
+{
+  "baseline": "alien-party-after-64.json.gz",
+  "baselineRuntimeCommit": "ab14c7bbf8add77ea279942148990045b7e61add",
+  "beforeFrozenCommit": "d4380f9819ec209c2565db18b2ebe10ed07faeda",
+  "candidateCodeCommit": "ab36f77ae5eebd4d1eb06998110883c9881faa01",
+  "screen": {
+    "runs": 64,
+    "identicalStandardRows": 64,
+    "identicalObserverRowsExceptRawStateHash": 64,
+    "warnings": 0,
+    "wins": 38,
+    "playerDeaths": 50
+  },
+  "matrix": {
+    "runs": 256,
+    "identicalStandardRows": 256,
+    "identicalObserverRowsExceptRawStateHash": 256,
+    "warnings": 0,
+    "wins": 124,
+    "playerDeaths": 229
+  },
+  "changedExistingSourceHashes": [
+    "src/js/game.js",
+    "observer/deed-screen.js"
+  ],
+  "addedSourceHashes": [
+    "src/js/food.js",
+    "src/js/abilityActions.js",
+    "src/js/corruption.js"
+  ],
+  "afterSourceHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/js/endingKey.js": "c5f097faccc9039991077590d3e4e10e64fcc9ad0b12b8d96473a2dc5b8e7d0d",
+    "src/js/table.js": "e6009781e4db9f79820e178a8458e6a5de1f9f409a930b0837f2793a4b6472d1",
+    "src/js/fieldFights.js": "65e7b3cdbf23c1c616cf7237d5807e896702e1f1a961520e39cbc38df6cfa01d",
+    "src/js/encounters.js": "57cf6554e0aa5b130431ebf9f79966e62cc7b5926e162956353a13758f398c71",
+    "src/js/alienPlayers.js": "0d26460d692ee57e9b47dc8b4b0c77e1992bb29690d49c2779b9f36e66163dbb",
+    "src/js/equipment.js": "377d72c2832b1b49358e87a0d9ee3adcc10267ffd5504888f8c64ba5bb43cae6",
+    "src/js/party.js": "6bc91cd6ca2543c877b26240d6e2f49bb659f80262aa73d57b2eb6c3ec481654",
+    "src/js/food.js": "d35d774667a14f91338dfb0800494c571507e505404195bc549fe2f8e853abac",
+    "src/js/abilityActions.js": "d9242796610552c778a223ba63e75fc25681aa1c8887aff8f618cffebb6c2adc",
+    "src/js/corruption.js": "78a9fabf6069794aa8b65767bebb07a46acf57b552f33c85293e7bdbd4de181e",
+    "src/js/game.js": "3d74f04dbf9f2c1512a76b224a8ab941efee5cacf13a0e5aeff3b73a9314cc7a",
+    "src/js/contestEngine.js": "e17874fb852606837ba66dfc3cf0dae852664a5f89b401e121479a1d6459cdf4",
+    "src/js/villager-agency.js": "88afba50af69f8b71dbe1b694ad4c8ca24ae823cc09df8516faef6c180b00146",
+    "src/js/feastBuff.js": "01719b36b31a7b621a7d6dba48b8d79e6fc0adb897b24a5ebb5bdf1fdfaaafde",
+    "src/js/foodPower.js": "599409015c1df6df4bdedf5729625d952ced06a13ce44802e59392285beb4428",
+    "src/data/abilities.json": "ef315fa8943b8076a9975a437ab87479e24bd097457bb4a5905ce3b5214ddf2a",
+    "src/data/feast-surge.json": "69918edc7018ec03bb0d27ddae2732dda771c8e937ff05dcc7badc4b79dceeff",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "3357beb2a0cbd202ed9f7b9262b109cd7c3b03c62b4e946bdcfe78105f6f42b9",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "923666189252b394b8f9886c561015f9884e185612e5cfb24a031f4149eb62c5",
+    "scripts/policies/livelihood.js": "79a4a3548f5a756ccc9e260df19c6995efed704512bd9eb9c949414e8b98449f",
+    "observer/deed-screen.js": "6c4f48fa4f7394befda08f0f1d0ba36ff36857c95901884a6ad01a7b87a6143a"
+  },
+  "beforeFoodSourceHash": "5913a441c6f38425d4912a32c19b8783d1f20239a761e481dbb058a708cfd7b5",
+  "beforeAdditionalNormalizedSourceHashes": {
+    "src/js/food.js": "76bf65e0d7e26a6fa82645c8159b457fc5612ad1ded93ddf18ed732099d72894",
+    "src/js/abilityActions.js": "d7fae13ddf6839736ffa2d4ae926d462545d15f4e6cb9ceb5ce587963f4cb96a",
+    "src/js/corruption.js": "38b57f075aa976f28befe870b64448edb7a8ae66f3044bc290094e3a1395f778"
+  },
+  "pairedDailyState": {
+    "pairs": 8,
+    "dailySamplesPerSide": 987,
+    "candidateSamplesWithSources": 920,
+    "allDailyAndFinalStatesMatchWithoutHarvestShares": true
+  },
+  "verification": {
+    "runtimeAssertions": 26,
+    "frozenBeforePassed": 7,
+    "frozenBeforeFailed": 19,
+    "quick": 150,
+    "quickSeconds": 44,
+    "initialFull": 922,
+    "initialFullSeconds": 159,
+    "subsequentFullPassed": 919,
+    "subsequentFullFailed": 3,
+    "cause": "The earlier three failures did not recur directly on frozen/current sources. The later travel failure was isolated to a random fixture assuming a walkable exact edge; an explicit blocked original reproduces it. The repaired test prepares open cells/exits and adds blocked-nearest-entry assertions; final full recheck passes 922/922.",
+    "isolatedFullPassed": 921,
+    "isolatedFullFailed": 1,
+    "travelFixture": {
+      "existingAssertionsRetained": 21,
+      "newAssertions": 2,
+      "repairedAssertions": 23,
+      "repairedTrials": 10,
+      "repairedTrialFailures": 0,
+      "forcedBlockedOriginalFailed": true
+    },
+    "finalFull": 922,
+    "finalFullSeconds": 156,
+    "finalFullFailed": 0,
+    "finalFullLog": "check.js: 922 scripts, 8 parallel\n..........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................\n\n  slowest: scripts/test-simopt-trajectory-20261010.js 61s, scripts/test-break-alien-20261010-r11.js 39s, scripts/test-deterministic-clock-20261014.js 35s\n\ncheck.js: 922 passed, 0 failed in 156s\n",
+    "travelFixtureSha256": "378a618b033f607f1c2f8f82564083eec35d07e22079a0276ae52ae00da23f48"
+  },
+  "artifactHashes": {
+    "harvest-source-after-16.json": {
+      "rawSha256": "4a81834b00a7e57122e771f687baa57483bbb99ca6b6c49a33c4379fa394d73d",
+      "gzipSha256": "94e2c1e45eac553de63701e7c2e037f9b791909819c408a3717cc2a3368f6b14",
+      "rawBytes": 9467894,
+      "gzipBytes": 526414
+    },
+    "harvest-source-after-64.json": {
+      "rawSha256": "d41d6c42ef6a5f5a2479b392633529f541a5a8ecbdd10701e210e2ee903dc2d8",
+      "gzipSha256": "510ae8c5fef99ef6cb4a0bdbf122e15895f880e2ebf32cf8632da921e9636f09",
+      "rawBytes": 38173059,
+      "gzipBytes": 2054155
+    },
+    "harvest-source-state-parity.json": {
+      "rawSha256": "e603fa15551ec0a439b8015148a7d3ebb606b56de9d271e21e19bc96de965eb9",
+      "gzipSha256": "420aecfb40f3d5f8201ad4dd9f75190755bff94fd76395bd442516e98220148c",
+      "rawBytes": 2303227,
+      "gzipBytes": 203005
+    }
+  },
+  "noGateChange": true,
+  "remaining": [
+    "actual eater receipts including away rations and gifts",
+    "whole-village day coverage",
+    "seven feeding days authored gate with shared player/NPC progress",
+    "eight other authored deeds"
+  ],
+  "matrixSourceHead": "ab36f77ae5eebd4d1eb06998110883c9881faa01",
+  "screenSourceHead": "ab36f77ae5eebd4d1eb06998110883c9881faa01",
+  "trajectoryProbeSha256": "5e30c023c7d6a234945127852e136068e1ec18969c3a533fa4646c6a9334e7a4",
+  "failureTriageHashes": {
+    "rawSha256": "4d25af38bcdb8d6c6ba6ff13267243694b5695acaa003e0c70b8b382089b8dfb",
+    "gzipSha256": "b8b80cf7f682bdf8074ad5267c789a799a9c63ce5527675537340c3ee3edaa8e"
+  }
+}

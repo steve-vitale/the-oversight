@@ -112,3 +112,6 @@ The seven-day gate waits for actual eater receipts and parity measurements.
 Harvest transfer follow-up: the same source metadata crosses Light Fingers
 (abilityActions.js) and the corruption ration merge (corruption.js).
 Scope is source preservation/dilution only; theft and corruption rules stay.
+Continuous-travel proof fixture exception: exact-edge assertions now
+prepare walkable target cells and add an explicit blocked-cell fallback
+case. Only scripts/test-continuous-travel.js changes, not Muse travel code.
