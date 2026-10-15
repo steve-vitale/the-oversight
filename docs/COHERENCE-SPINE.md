@@ -40,6 +40,12 @@
 
 ---
 
+Implementation note (2026-10-15): the Relay post belongs to its actual person.
+Death vacates it and the next bearer must explicitly claim or accept it. The
+network itself stays live. Current Relay service is the Voice's authored deed;
+class age and a predecessor's work cannot substitute for it. See the dated
+relay-deed and relay-office audits for the two separate measured changes.
+
 ## Gear: three lanes, one competition
 
 | Lane | Slots | Job | Arc |

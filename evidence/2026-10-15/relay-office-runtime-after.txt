@@ -1,0 +1,15 @@
+  ok   actual bearer death passes the mantle but vacates the old persons post
+  ok   the ordinary appointment beat returns after death
+  ok   a successor can explicitly claim the reopened role
+  ok   actual NPC death preserves its corpse return and reopens the office
+  ok   duplicate registration returns its original no-op without evicting the replacement
+  ok   another persons death does not remove the living holder
+  ok   nonfatal wounds do not relinquish the office
+  ok   an actual Second Wind refusal keeps the living holder in post
+  ok   valid actual save/load retains the holder and post
+  ok   successful actual load repairs a saved dead predecessor post
+  ok   read-only office queries do not repair or mutate a legacy save
+  ok   actual communications tick also repairs an old in-memory dead post
+  ok   day-zero death records are not mistaken for a living holder
+
+relay-office-lifetime: 13 passed, 0 failed, 0 todo (phase 0)

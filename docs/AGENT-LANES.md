@@ -172,3 +172,9 @@ an actual dead predecessor retaining state.switchboard and blocking later
 holders. Codex takes the narrow comms.js death/load lifetime repair and its
 shared-harness proofs. Muse's region/nomad files remain outside this change.
 Measure the office repair separately from the authored-deed lever.
+
+Relay lifetime implemented: the narrow comms.js helper is called at actual
+registered death, successful load and the communications tick. It reuses the
+normal removal/appointment path, preserves live/refusing holders, and leaves
+the job for the next person to claim. Source, runtime, phone and independent
+matched-panel evidence are in relay-office-audit.md; no region/nomad edit.

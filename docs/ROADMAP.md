@@ -333,9 +333,23 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
   Maker deaths 62 -> 64; other outcomes and reduced Voice access are retained.
   The caregiver win increase triggers nondirectional review, not an automatic
   improvement claim. See `evidence/2026-10-15/relay-deed-audit.md`.
-  Urgent follow-up: a real seed-7 predecessor keeps the Relay post after death,
-  blocking a later Socialite. Fix office lifetime separately; do not auto-pass
-  the job with the mantle.
+  The exposed dead-predecessor blockage is now repaired separately: actual
+  death, successful load and the communications tick vacate a dead person's
+  post and restore the ordinary appointment beat. Living holders and real
+  death refusals keep the post; the successor must claim/accept it explicitly.
+  Runtime 13/13 and actual phone death -> mantle -> vacant role -> public
+  claim pass. See `evidence/2026-10-15/relay-office-audit.md` for the separate
+  matched screen/confirmation and retained outcome warnings. At 64 seeds
+  per policy, the office fix changes wins 45 -> 41 / 20 -> 21 / 26 -> 25 /
+  25 -> 28 (capable/maker/merchant/caregiver). Maker community losses rise
+  19 -> 25; all six new cases replay exactly and actual new role choices
+  are recorded. This remains an open balance investigation, not a reason to
+  restore dead holders. Next: a separate public-goal/food/grounding-aware
+  policy experiment, with held-out seeds and equal-time exposure checks.
+  First settle the reproduced existing Relay clock mismatch: code promises
+  daily upkeep but the part hook charges 100 -> 96 grounding across four
+  calls on one day. See relay-office-clock-probe.cjs / relay-office-clock.json;
+  measure that correction independently before tuning prices or policy.
 - **Earlier Unkillable implementation:** Unkillable has the first authored outcome deed: really refuse a
   fatal blow through your own survival magic, then reach a later dawn alive.
   Per-person receipts and a known-class objective are wired and tested.

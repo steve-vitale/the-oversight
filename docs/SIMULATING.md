@@ -411,3 +411,15 @@ are not unique opportunities; the output keeps their count and distinct days
 separate. Policy counters are diagnosis, not ascension receipts. See
 `evidence/2026-10-15/relay-deed-audit.md` for the 16/64-seed experiment and
 separate dead-office follow-up. Use the current neutral win interpretation.
+
+The Relay lifetime fix settles a canonical dead holder at registerDeath,
+successful load, and the communications tick. Its death book includes day zero;
+older memorial/dead flags also count. It calls the existing removeSwitchboard
+path, leaving the network live and reopening the ordinary appointment UI.
+Pure switchboard/availability reads remain pure. Injury or a successful death
+refusal does not vacate an occupied living post. The mantle does not appoint
+its next bearer. Probe snapshots include holderDeathDay/holderFallen so a
+claimed-but-dead post cannot be mistaken for a bot ignoring a live opportunity.
+The lifetime comparison uses the authored-deed candidate as its baseline;
+do not collapse it with the prior class-age-to-office change. See
+`evidence/2026-10-15/relay-office-audit.md`.

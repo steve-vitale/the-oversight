@@ -128,3 +128,12 @@ runtime, data, test and probe bytes. Preserve these deed-only panels when
 measuring the office repair; do not combine both changes into an unexplained
 single lever. Full observer controls, traces, service probes, logs, screenshots
 and artifact hashes are retained beside this note.
+
+## Evidence packaging correction before publication
+
+The final retained-job digest check caught a UTF-8 text file read through the
+Windows default code page during bundle assembly. The authoritative cache and
+raw panels were valid. The control/trace/probe bundles were rebuilt from explicit
+UTF-8 originals, preserving their text as well as numbers. All retained control
+result digests are checked again before push. This corrects packaging only;
+no simulation or gameplay result was rerun or silently relabeled.

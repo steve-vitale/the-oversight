@@ -33,8 +33,10 @@ Job -> track -> **class** -> **god** -> Table.
    service. Class age cannot bypass either. Eight legacy replacements remain.
    Relay runtime/phone proofs and matched 16/64-seed panels are in
    `evidence/2026-10-15/relay-deed-audit.md`. The service replay exposed a
-   dead predecessor retaining the post and blocking later holders; repair
-   office lifetime next, without passing the post automatically with the mantle. The historical
+   dead predecessor retaining the post and blocking later holders. Office
+   lifetime now repairs actual death and legacy load/tick boundaries, without
+   passing the job with the mantle. Runtime 13/13 and the real phone handoff
+   pass; see `evidence/2026-10-15/relay-office-audit.md` for independent evidence. The historical
    all-on 0/16 result predates the class-held-for-10-days bridge and wider
    offers. Current rules still use that placeholder; replace it with fitting
    deeds and measure the full gates with 64 matched seeds. See ROADMAP item 3.

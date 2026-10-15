@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "e89e9e853531af0457b5a135b1af634b415e7683",
+  "screenCases": 64,
+  "confirmationCases": 256,
+  "changedConfirmationStates": 132,
+  "balancedNeutralPairs": 8,
+  "balancedControlJobs": 16,
+  "makerLossReplayMatches": 12,
+  "merchantReplayMatches": 2,
+  "runtimeAssertions": 13,
+  "frozenRuntime": {
+    "pass": 6,
+    "fail": 7
+  },
+  "quick": [
+    159,
+    159
+  ],
+  "full": [
+    931,
+    931
+  ],
+  "ontologySystems": 111,
+  "decision": "Retain death/vacancy correctness; maker community signal and policy/exposure follow-up remain open.",
+  "artifactHashRule": "SHA-256; text canonical LF, gzip/png exact bytes",
+  "artifactSha256": {
+    "relay-office-audit.md": "3fcecc8991d4191353794032713a4a5b98e069f3458df326c8283896e8c4bcbb",
+    "relay-office-clock-probe.cjs": "582ebe2fe09b15933493f5d0dfa16d20ed06f22e2b01015efcc914c1d7747ad5",
+    "relay-office-clock.json": "d49d535d9838d0680959661dab1221770626c904560565c49981bd0bec12bf07",
+    "relay-office-confirm-after.json.gz": "28c62d04f9b9798a3bbd0fa6d1bbc2e169a31cdea82390bc3cd64e4b0e7e09aa",
+    "relay-office-confirm-before.json.gz": "e34523e7a1d896e0baa8d982ed653e635d77cafe1863b8737d478960ac9216be",
+    "relay-office-confirmation.json": "02999ea04db84f1af16efd522d73d69c041dd702f2b012083b14b2dd5a637492",
+    "relay-office-confirmation.md": "02925f40f114eef945436b2c0b805a9627afef4abe25a8bcf78a5921f91df54b",
+    "relay-office-full.txt": "2969310354af695035c301e69a6d6afd3a5d35aece3b2a2646b768bf3a2c35a9",
+    "relay-office-maker-loss-probes.json.gz": "17e7d0bff709c451589613d53c3cef9dc9e5a55c6ff2dd5c364b7f4f15a37077",
+    "relay-office-maker-loss-summary.json": "b5bf2afbace1cafda85bb9d1a69a4b142b5cb5e24df613d244f2488376297856",
+    "relay-office-observer-proofs.json.gz": "ecb2d609f0ac941b33652bc7c714ca46b096a2c54ea07efdd9f27919aa235ae4",
+    "relay-office-phone-fixture.cjs": "ee75e9f8867520e548d15fcba09891923951a4d45b224127a0d683ac759b6dfc",
+    "relay-office-quick.txt": "6915d97a910429b852bdfc98505d457c470f1df113b26425ad01442ad5194d9d",
+    "relay-office-runtime-after.txt": "f4f3b36f16dc1e603054ff2136ac79a3379295f770a0e515d3a85d099af59aa5",
+    "relay-office-runtime-before.txt": "76012f61924cd965345a7f10ea9fd5bfaacda1a41c8f496ca9f244f33d1e2348",
+    "relay-office-screen-after.json.gz": "1083a747c444ab32fd04b0f51215c6e420b0e7b188f7f7742a675c65c9129a19",
+    "relay-office-screen-before.json.gz": "86911f0aed0deecb079833ab764ea7c23cc9618d3d8f893a825848d9d4659c90",
+    "relay-office-screen.json": "68560b144d994a9bcb1badbcd117e1b76414283828a6c670839f9f49aa1387e6",
+    "relay-office-screen.md": "1caac9a683dc1685a17aff761ae9e2c498c7e2b4fa1802e1ccae6f4a56896abf",
+    "relay-office-service-probes.json.gz": "f121db098885e32b13651e9e4bc861615e57eaa2f35593ec3617830a02df3dde",
+    "relay-office-sources.json.gz": "553dfe00c4f755127140e72c914da24dff32ab2941ecfa46a7b0bd491727f5f3",
+    "relay-office-successor-claimed.png": "2ad8cb5e3719fb843b27a9828611ac74b180a51529d965ba45903d802e4dc7d9",
+    "relay-office-successor-dom.txt": "4d21f897357f77b8ae79d78c38086073df66faf7570056932fd1737da3cd3ef7",
+    "relay-office-successor-vacant.png": "324798939f34f17df0234c349ea20a94f4ea080c29affe7a4071addd0cf529b1"
+  },
+  "knownFollowup": "Actual daily-versus-part Relay upkeep clock mismatch, then policy/exposure/holdout review of maker community signal.",
+  "packagingCorrection": "Regenerated control/trace/probe bundles from explicit UTF-8 originals before publication; authoritative caches, raw panels and comparison results unchanged."
+}

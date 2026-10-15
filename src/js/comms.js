@@ -36,6 +36,7 @@
 //   - switchboardStageTick()
 //   - confrontSwitchboard()
 // rules:
+//   - dead_holder_vacates: actual death and successful load reopen the relay; the next bearer must claim or accept it, never inherit a corpse's job (code: retireDeadSwitchboard, registerDeath/load wrappers, commsTick)
 //   - four_tiers_honest_costs: runner (time in day-parts + real road danger), signal (loud/indiscriminate), system relay (garbled + favor owed), cry (build-gated, fast, honest). Help is never free and never guaranteed. (code: callForHelp)
 //   - runner_road_danger: the runner can be hurt or die on the road (registerDeath); when the beacon's attention has made the road hot (attracted >= 2) nobody volunteers — said aloud. (code: aidSendRunner)
 //   - signal_is_indiscriminate: the beacon asks every linked village, but hostile known villages see it too (opinion -5, remembered), and the smoke draws company — crisis.attracted grows, arrives as real pack members in the fight (packBonus), and fleeing is blocked while it holds. (code: aidSignalFire)
@@ -686,6 +687,7 @@
     // officeholder's stage rides the scale ladder, the System collects.
     // Chain-wrapped onto advancePart.
     commsTick() {
+      retireDeadSwitchboard(this);
       var day = _day(this);
       // RUNNERS
       var runners = this.state.aidRunners || [];
@@ -1085,6 +1087,36 @@
   };
 
   for (var k in methods) { if (methods.hasOwnProperty(k)) G[k] = methods[k]; }
+
+  // A role belongs to its living person, not to the mantle or a corpse.
+  // deathSeen is the canonical committed death book, including day zero;
+  // the memorial/dead flags recover older saves that predate that book.
+  function retireDeadSwitchboard(game) {
+    var st = game.state || {}, sw = st.switchboard, v = st.village || {};
+    if (!sw || !sw.holderId) return false;
+    var id = sw.holderId;
+    var seen = Object.prototype.hasOwnProperty.call(v.deathSeen || {}, id);
+    var fallen = (v.fallen || []).some(function (p) { return p.villagerId === id; });
+    var person = ((game.data || {}).villagers || []).find(function (p) { return p.id === id; });
+    if (!seen && !fallen && !(person && person.dead)) return false;
+    return game.removeSwitchboard('the holder died') === true;
+  }
+  // Repair at the actual death/load boundaries. The paid world tick also
+  // settles old in-memory states; merely reading office availability stays pure.
+  var _relayDeath = G.registerDeath;
+  if (_relayDeath) G.registerDeath = function () {
+    var r = _relayDeath.apply(this, arguments);
+    try { retireDeadSwitchboard(this); } catch (e) { console.warn('[comms] relay death cleanup', e); }
+    return r;
+  };
+  var _relayLoad = G.load;
+  if (_relayLoad) G.load = function () {
+    var r = _relayLoad.apply(this, arguments);
+    if (r) {
+      try { retireDeadSwitchboard(this); } catch (e) { console.warn('[comms] relay load cleanup', e); }
+    }
+    return r;
+  };
 
   // commsTick rides advancePart — runners walk, help marches, doors rattle.
   var _advancePartC = G.advancePart;
