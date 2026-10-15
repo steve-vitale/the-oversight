@@ -532,10 +532,13 @@
       const s = this.state.scholar, v = this.state.village || {};
       const T = this.trackData();
       try {
-        // fusion singularity: a dead bearer's reactor is free again; the
-        // successor's own reactor becomes the bearer's.
+        // fusion singularity (Steve 2026-10-12: "only affect a single one of
+        // the villagers"): a dead bearer's reactor goes with the body and the
+        // world's flag STAYS set, so no second reactor rises (game.js
+        // abilityOnAcquire). Clearing it here re-opened the offer for every
+        // successor (diagnosis 2026-10-15). A successor who already holds
+        // the world's reactor keeps it as the bearer's.
         const fh = this.state.fusionReactorHolder;
-        if (fh && fh.who === 'player') this.state.fusionReactorHolder = null;
         if (fh && fh.who === 'villager' && fh.vid === newId) this.state.fusionReactorHolder = Object.assign({}, fh, { who: 'player' });
         // abilities: theirs
         const mine = ((v.npcAbilities || {})[newId] || []).slice();

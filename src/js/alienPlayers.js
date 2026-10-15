@@ -1273,9 +1273,14 @@
       var items = [];
       try { items = this.data.items || []; } catch (e) {}
       var t = tier || 1;
+      // FUSION SINGULARITY (Steve 2026-10-12): once the world's reactor is
+      // taken, no new installable pellet is handed out (same rule as
+      // game.js rollAlienLoot). This path had no filter (diagnosis 2026-10-15).
+      var taken = !!(this.state && this.state.fusionReactorHolder);
       var cands = items.filter(function (it) {
         return it.origin === 'alien' && (it.tier || 1) <= t
-          && !it.kcalEach && it.class !== 'food';
+          && !it.kcalEach && it.class !== 'food'
+          && !(taken && it.id === 'fusion_pellet');
       });
       if (!cands.length) return null;
       return cands[Math.floor(Math.random() * cands.length)];
