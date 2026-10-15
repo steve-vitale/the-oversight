@@ -3,6 +3,7 @@ occupation=mechanic temperament=steady trust=25 dead=false mood=steady
 want: curious (stage 1, fromSeed)
 
 THEM: "About what you're good at — What's something you're good at that nobody here knows about? Life's funny that way."
+(turn0 choices: ans:q_skill:a_tell, ans:q_skill:a_vague, ans:q_skill:a_deflect, ans:q_skill:honest_pass, deflect_q, leave, silence)
 YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
 THEM: "Interesting — Noted. Filing that under 'extremely useful.' The village needs that."
 (want=curious stage=2)

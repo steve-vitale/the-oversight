@@ -3,6 +3,7 @@ occupation=blacksmith temperament=mischievous trust=90 dead=false mood=steady
 want: ask_favor (stage 2, fromSeed)
 
 THEM: "About the pantry run — the need hasn't gone anywhere. I'm still asking. Trust me. Mostly."
+(turn0 choices: betrayal:accept, betrayal:decline, alive:event:naming, dlg:commit, dlg:cant, recap, teach, dlg:subject, leave, silence)
 YOU: [dlg:commit] "Count me in."
 THEM: "Then it’s set. Where the salmonberry grows thick, morning, early. Bring your pack and your knife."
 (want=ask_favor stage=3)

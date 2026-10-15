@@ -3,6 +3,7 @@ occupation=community gardener temperament=cautious trust=27 dead=false mood=stea
 want: curious (stage 1, fromSeed)
 
 THEM: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+(turn0 choices: ans:q_before_skill:a_tell, ans:q_before_skill:a_vague, ans:q_before_skill:a_deflect, deflect_q, leave, silence)
 YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
 THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
 (want=curious stage=2)
