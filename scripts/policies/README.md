@@ -74,6 +74,10 @@ chosen kind: day 25+, a known unlinked village with opinion 10+, pantry above
 12,000 kcal, one proposal/day and seven days between asks of the same village.
 They rely on actual visible relationships and ordinary broadcast/time courtship;
 they do not grant opinion, travel to codices, or read hidden village contents.
+All three also explicitly host an armed feast at dusk, using the real plan,
+1.5x pantry buffer and shared seven-day cooldown; an online reactor prevents
+this buff-hosting choice. This does not require paying LEAD tribute or grant
+food deeds. Normal combat must actually use the real buff to earn that deed.
 They accept counters, make an affordable first gift (otherwise a visit), concede
 priced crises and send help with a roster of at least six. The engine still
 checks the actual bench. Covenant draws move at most 4,000 kcal/day toward a

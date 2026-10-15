@@ -7,6 +7,26 @@ function pantryKcal(G) {
   return ((G.state.village || {}).pantry || []).reduce((n, i) => n + Math.max(0, i.units ?? 1) * (i.kcalEach || 0), 0);
 }
 function count(ctx, key, n = 1) { ctx['livelihoodPeer' + key] = (ctx['livelihoodPeer' + key] || 0) + n; }
+function hostPeerFeast(G, ctx) {
+  const s = G.state.scholar;
+  if (G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || s.exiled ||
+      !G.playerAtHaven() || G.dayPart !== 2 || !(s.prog || {}).feastSurge || s.feastDay === s.day) return;
+  if (G.fusionReactorOnline && G.fusionReactorOnline()) return;
+  const last = Math.max(ctx._peerLastFeastDay ?? -7, ctx._fsLastFeastDay ?? -7, ctx._lastFeastDay ?? -7);
+  if (s.day - last < 7) return;
+  try {
+    const plan = G.feastPlan();
+    if (!plan.ok || plan.have < plan.cost * 1.5) return;
+    const r = G.hostFeast();
+    if (r && r.ok) {
+      ctx._peerLastFeastDay = ctx._fsLastFeastDay = ctx._lastFeastDay = s.day;
+      count(ctx, 'Feasts');
+    }
+  } catch (e) {
+    const errors = ctx.livelihoodPeerErrors || (ctx.livelihoodPeerErrors = []);
+    if (errors.length < 30) errors.push('feast: ' + e.message);
+  }
+}
 function peerWork(G, ctx, kind) {
   const s = G.state.scholar;
   if (!kind || G.over || G.tbfight || G.pendingEncounter || G.state.activeContest || !G.playerAtHaven() || s.exiled) return;
@@ -58,7 +78,7 @@ function policy(id, kind) {
   const p = { ...capable, id, desc: 'capable, no deliberate hunts; ' + (kind || 'no peer proposals') };
   for (const hook of ['setup', 'upkeep', 'daily', 'fight', 'contest', 'pending']) {
     p[hook] = (G, ctx) => withoutLead(G, () => {
-      if (hook === 'upkeep' || hook === 'daily') peerWork(G, ctx, kind);
+      if (hook === 'upkeep' || hook === 'daily') { peerWork(G, ctx, kind); hostPeerFeast(G, ctx); }
       if (hook === 'pending') {
         const draw = G.feastDrawPending && G.feastDrawPending();
         if (draw && draw.monsterId && G.driveOffFeastDraw) { const r = G.driveOffFeastDraw(); if (r && r.ok) return true; }
@@ -68,6 +88,6 @@ function policy(id, kind) {
   }
   return p;
 }
-module.exports = { peerWork, pantryKcal, withoutLead,
+module.exports = { peerWork, hostPeerFeast, pantryKcal, withoutLead,
   covenanter: policy('covenanter', 'covenant'), charterer: policy('charterer', 'trade'),
   'peer-control': policy('peer-control', null) };
