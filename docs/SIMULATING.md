@@ -168,6 +168,11 @@ The feast-use observer wraps the existing spend call and reads its canonical
 receipt instead. Compare observer-on/off hashes and standard rows, and use
 an unaffected policy as a control for cross-version measurement.
 
+On success, `creditDeed` returns the resulting track total, not the earned
+increment. Compare actual before/after XP when proving a reward amount;
+observe successful calls separately when counting credited events. Defeat
+can also earn family-death and mantle XP, so isolate the deed under test.
+
 An archive without its own `.git` reports a null source HEAD unless supplied
 an immutable `--source-head`; it never inherits the enclosing checkout's
 HEAD. Compare file hashes too. Earlier archive reports can contain a parent

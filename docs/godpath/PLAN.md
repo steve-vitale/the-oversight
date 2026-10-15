@@ -65,6 +65,15 @@ Job -> track -> **class** -> **god** -> Table.
    254; Molt and Undying class remain unsampled. Audit real NPC Strange-deed
    callers next (alien-fight/integration credit gaps), not passive strength.
    See `undying-access-audit.md` for source-isolated evidence and phone choice.
+   Tactical party deed credit now covers real surviving NPC actors, with
+   death/absence/flee/replay/succession guards and real level-up thresholds.
+   Matched 64 x four: wins 115 -> 109, deaths 254 -> 232; caregiver 22 ->
+   26/64, other policies decline. Class samples 15 -> 14 (Bulwark absent).
+   See `party-deeds-audit.md`; this is not blanket balance completion.
+   Next verified actor gap: the real alien builder gives a 77-HP companion
+   fixed 30 HP and no gear bonus fields. Fix that contract before another
+   ability-strength lever. NPC integration's separate random daily counter
+   still needs reconciliation, without awarding XP for presumed deeds.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.

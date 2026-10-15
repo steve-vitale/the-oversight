@@ -395,6 +395,14 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   rows identical; zero warnings. Molt/Undying class remain absent. NPCs did
   not retain Second Wind; audit actual NPC alien-fight/integration deed
   callers next. Proof, phone choice and raw panels: `undying-access-audit.md`.
+- **NPC party progression:** surviving tactical companions now earn actual
+  shared fight/alien deeds; dead, absent and summoned actors do not. Source-
+  isolated 64 x four: wins 115 -> 109/256, player deaths 254 -> 232, caregiver
+  22 -> 26/64; other policies lose wins. Class coverage 15 -> 14 (Bulwark no
+  longer sampled). Keep balance investigation open. Actual alien-builder
+  probe also proves 77 world HP becomes fixed 30 HP with no gear bonus
+  fields: next repair that contract and verify equipment effects. Integration
+  remains a separate unmodified NPC model. See `party-deeds-audit.md`.
 - Claude's recommendation: add a job-path term to `buildPathLean` (villager-build.js) so villagers build toward their job's god, and move ONE entry per never-seen subclass into the first 6 of a track whose deeds fit it. Measure 64 seeds; target ≥14/20 without deaths rising >10%. (A full kit interleave was tried and reverted — it raised deaths.)
 - Job balance watch: exterminator looked weak, locksmith and mortician strong at 16 seeds — confirm with 32 seeds `FORCE_OCC=<job>` (scripts/sweep-buff.js) before retuning.
 
