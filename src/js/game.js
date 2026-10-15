@@ -29139,7 +29139,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return Math.round(rating);
     },
 
-    // WAVE UNLOCK (Steve 2026-10-05, revised; waves 4-5 gated 2026-10-10):
+    // WAVE UNLOCK (Steve 2026-10-05, revised; waves 4-5 gated on STANDING
+    // 2026-10-13 — Steve's flexible-route call, replacing the 2026-10-10
+    // two-rung ledger+scale gates. The old gates were retired 2026-10-15
+    // after a 16-run audit (0/16 runs ever met both rungs of the old wave-4
+    // gate): unlockedWave() now reads villageStandingTotal() only. Waves
+    // 1-3 unchanged — day floors + wave-ledger kills, village-wide.
     // reactive to deeds/kills/scale, never pure calendar. The show has a
     // schedule, but you can't cheese it with a lucky weapon find — and it
     // can't arrive before you've proven you can handle the last wave.
@@ -29147,8 +29152,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Wave 2: day 8+ AND 5 wave-1 ledger points (kills only) — village-wide
     // Wave 3 ("The Final Draft"): day 25+ AND 4 wave-2 ledger points (kills only)
     // Wave 2 needs day >= wave2DayFloor; wave 3+ needs day >= dayFloor.
-    // Wave 4 ("The Mirror Draft"): 4 wave-3 ledger points AND scaleRank >= 'regional'
-    // Wave 5 ("The Producers"): 3 wave-4 ledger points AND scaleRank >= 'national'
+    // Wave 4 ("The Mirror Draft"): w3 rung met AND villageStandingTotal() >= t4(100).
+    //   Earned by blood (+25 per wave-3+ ledger kill point), bonds (+34 per
+    //   seasoned regional+ link), or bread (+20 per major feast) — pure or
+    //   hybrid. Readiness gate v3 may HOLD the gated total at t4-1 until 3
+    //   distinct wave-3 kinds are faced blow-by-blow (named aloud, never silent).
+    // Wave 5 ("The Producers"): w3 rung met AND villageStandingTotal() >= t5(200)
+    //   AND wave-4 faced. Bread counts at most 100 toward the t5 bar (the
+    //   plenty cap — "not bought with bread alone"); peak ratchet floors the
+    //   total at the released wave's threshold forever.
     // (Wave 5 is the apex; readiness win comes after proving yourself there.)
     //
     // WAVE LEDGER (Steve 2026-10-10) — kills only, cumulative across player

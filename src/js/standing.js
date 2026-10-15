@@ -253,9 +253,29 @@
         const first = (last == null);
         const n = h.rd.need, f = h.rd.faced;
         if (h.kind === 'defer4') {
+          // KNOWLEDGE GATE (2026-10-15): this hold can bite before wave 3
+          // unlocks (bread road: standing hits t4 early), so the wave-4
+          // title is never named here — the name isn't earned until wave 4
+          // lands ("the next act" discipline, matching the scale-pointer
+          // beats). Wave 3's title is used only when wave 3 itself is
+          // earned (day floor + wave-2 bar, read directly — unlockedWave()
+          // recurses through villageStandingTotal()). Mechanics untouched.
+          let w3 = false;
+          try {
+            const wl = (typeof this.waveLedgerCfg === 'function') ? this.waveLedgerCfg() : {};
+            const bars = (wl && wl.barsPerWave) || {};
+            const dN = wl.dayFloor != null ? wl.dayFloor : 25;
+            const need2 = (bars[2] | 0) || 4;
+            const pts2 = (typeof this.waveLedgerPoints === 'function') ? (this.waveLedgerPoints(2) | 0) : 0;
+            w3 = day >= dN && pts2 >= need2;
+          } catch (e) {}
           say(first
-            ? '📡 The Mirror Draft is not for strangers. Face what hunts you now — stand on the grid with the Final Draft, more than once, more than one kind.'
-            : `📡 The Mirror Draft is still waiting. Stand on the grid with the Final Draft — ${f} of ${n} kinds faced.`);
+            ? (w3
+              ? '📡 The next act is not for strangers. Face what hunts you now — stand on the grid with the Final Draft, more than once, more than one kind.'
+              : '📡 The next act is not for strangers. Face what hunts you now — stand on the grid, more than once, more than one kind.')
+            : (w3
+              ? `📡 The next act is still waiting. Stand on the grid with the Final Draft — ${f} of ${n} kinds faced.`
+              : `📡 The next act is still waiting. Stand on the grid and face what hunts you — ${f} of ${n} kinds faced.`));
         } else {
           say(first
             ? "📡 The fifth draft stays in the wings. Stand before the Mirror Draft's champions — more than once, more than one kind — and the Producers will take notice."

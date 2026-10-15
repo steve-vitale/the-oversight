@@ -272,9 +272,18 @@ known kills score 2 ledger points instead of 1 (perTypeCap 2, never less than
   LEDGER (2026-10-10, Steve's reversal of 8730921c; w2 bar calibrated 5->4,
   2026-10-11): day 8 + 5 wave-1 ledger
   points (kills only) for wave 2; day 25 + 4 wave-2 ledger points for wave 3;
-  4 wave-3 ledger points + scaleRank >= 'regional' for wave 4;
-  3 wave-4 ledger points + scaleRank >= 'national' for wave 5. Levers:
-  `src/data/wave-ledger.json`; docs/PROGRESSION.md section 12.
+  wave-3 rung + villageStandingTotal() >= t4(100) for wave 4 (Steve 2026-10-13
+  flexible-route call — earned by blood, bonds, or bread, pure or hybrid; the
+  old "4 wave-3 ledger points + scaleRank >= 'regional'" two-rung gate was
+  retired 2026-10-15 after 0/16 measured runs ever met both its rungs —
+  see the Wave 4 section);
+  wave-3 rung + villageStandingTotal() >= t5(200) AND wave-4 faced for wave 5
+  (same call; bread counts at most 100 toward the t5 bar — "not bought with
+  bread alone"; the old "3 wave-4 ledger points + scaleRank >= 'national'"
+  gate retired the same day — see the Wave 5 section). Levers:
+  `src/data/wave-ledger.json` (waves 2-3 bars), `src/js/standing.js`
+  standingCfg() (t4/t5 and the readiness gate). Earlier waves never leave
+  the pool. Engagements (distinct monsters fought
   Earlier waves never leave the pool. Engagements (distinct monsters fought
   blow-by-blow — fled or won — via the deed feed's wavesFaced) feed the
   ENDGAME deed gate only; they score nothing on the ledger.
