@@ -124,9 +124,18 @@ simulation/playtest goal with these gaps before expanding content blindly:
    In 64 matched maker seeds, four runs use the route (five cooked/smoked,
    four shelved); wins 20→21, bearer deaths 51→53, so no balance improvement
    is established. All 64 retain earned noncombat tier-3+ gear; fat/pemmican
-   access remains absent. Inspect seed 5's unshelved batch and broader supply
-   access next. See `evidence/2026-10-15/maker-counter-audit.md` and
-   `evidence/2026-10-15/preservation-access-audit.md`.
+   access remains absent. Seed 5's unshelved batch is now traced: public
+   shelving correctly refuses a full pantry and retains the smoked portion;
+   the replay exactly matches its recorded hash. Inspect whether materials
+   accumulated on prep counters can actually reach crafting or storage next.
+   See `evidence/2026-10-15/maker-counter-trace-audit.md`.
+   Armory/pharmacy public deposit → take → equip/consume now reject empty
+   units and depleted doses, including NPC use; ordinary medicines spend one
+   unit and dosed bottles one dose. Real positive stacks and player/NPC use
+   are proved in the shared harness and phone UI. All 32 matched natural states
+   are unchanged, with zero player sharing calls: value/use remain open.
+   See `evidence/2026-10-15/armory-quantity-audit.md` and the preceding
+   `maker-counter-audit.md` / `preservation-access-audit.md`.
    The coalition-entry audit found a structural ceiling (3–4 villages ×
    two volunteers, plus three from Haven) and duplicate-call inflation.
    Strong allies can now provide up to six distinct real people; repeated
