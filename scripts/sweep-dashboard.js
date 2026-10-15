@@ -381,11 +381,11 @@ async function all() {
   console.log('wrote ' + base + '.json/.md');
 }
 
-if (process.argv.includes('--compare')) {
+if (require.main === module && process.argv.includes('--compare')) {
   const i = process.argv.indexOf('--compare');
   const A = JSON.parse(fs.readFileSync(process.argv[i + 1], 'utf8')), B = JSON.parse(fs.readFileSync(process.argv[i + 2], 'utf8'));
   console.log(compare(A.summary, B.summary, A.label, B.label));
-} else if (process.argv.includes('--label') || process.argv.includes('--n') || process.argv.includes('--seeds')) {
+} else if (require.main === module && (process.argv.includes('--label') || process.argv.includes('--n') || process.argv.includes('--seeds'))) {
   all().catch(e => { console.error('FATAL', e); process.exit(1); });
 } else if (require.main === module) { // require() for summarize/compare runs nothing
   one().catch(e => { console.error('FATAL', e); process.exit(1); });

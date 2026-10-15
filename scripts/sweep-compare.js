@@ -49,6 +49,7 @@ try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || r
 // real flee, combat abilities, scored choices, held talks, the Table.
 try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
+for (const id of ['merchant', 'maker', 'caregiver']) POLICY_REGISTRY[id] = require('./policies/livelihood')[id];
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 

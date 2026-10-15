@@ -67,6 +67,22 @@ Sims keep the **full** stream (`Game.state.telemetry`). The phone keeps only
 Count them in an `extraMetrics(Game)` hook passed to `runComparison` (see
 `scripts/sweep-compare.js` header).
 
+### Gear and feature-use audit
+
+`node scripts/gear-usage-audit.js --label <name> --n 16 --days 150 --par 4`
+records actual acquisitions by source (contest, show, package, trade, craft,
+and each corpse kind), including tier, armor/weapon fields and beam resistance.
+Use `--policies merchant,maker,caregiver` for livelihood probes and `--n 64`
+for balance comparisons. `--root <frozen-checkout>` runs identical current
+observer code against frozen game/policy sources; reports include hashes.
+
+Starting gear, equipping/transferring an owned item and taking a successor's
+pack are not earned prizes. The observer excludes those transfers; corpses
+remain separate from monster drops. Method calls are reachability evidence,
+not universal success counts. Inspect policy counters/errors and pair this
+with `sim-audit.js` coverage. Use the real `Game._fullStatus` when proving UI
+inventory behavior: the default simulator intentionally slims `status()`.
+
 ## Pitfalls (each one has bitten us)
 
 - **Never run two games in one node process.** Use separate processes;

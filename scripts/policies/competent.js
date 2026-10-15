@@ -351,6 +351,7 @@ function eveningFeast(Game, ctx) {
 // the buff is the point, a single sweep is a coin flip. (Pattern proven
 // in winseek's feastFight/feastDrawRoad.)
 function feastFightRoad(Game, ctx) {
+  if (process.env.COMPETENT_SEEK_FIGHTS === '0') return; // livelihood: feast/devotion stay, deliberate patrols do not
   if (!feastOn()) return; // before/after harness gate
   try {
     const s = Game.state.scholar || {}, day = s.day || 0;
@@ -1132,7 +1133,15 @@ function donateHaul(Game, ctx) {
   try {
     const s = Game.state.scholar;
     const cap = Game.kcalCap ? Game.kcalCap() : 2400;
-    const keep = cap; // one day's buffer stays in the pack
+    let keep = cap; // one day's buffer stays in the pack
+    // A merchant keeps an actual trade budget while a cart is here, instead
+    // of donating the entire sale before reaching the counter. Opt-in bot
+    // preference only; leave two village meal-days before reserving grain.
+    if (process.env.COMPETENT_TRADE_RESERVE === '1') {
+      const v = Game.state.village || {};
+      const deep = Game.pantryKcalLive && Game.pantryKcalLive() >= Math.max(16000, (v.roster || []).length * 1600);
+      if (deep && (v.visitors || []).some(vis => vis.entrepreneurial)) keep += 3600;
+    }
     let packKcal = (s.inventory || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
     const inv = s.inventory || [];
     for (let i = inv.length - 1; i >= 0; i--) {

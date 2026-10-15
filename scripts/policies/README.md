@@ -36,6 +36,14 @@ policy objects (sweep-compare shallow-copies per run).
 | `deed-seeking` | deed-seeking.js | competent + hunts notability deeds: patrols, channels, always takes cameras | deed-accumulation curves, table-bar pacing |
 | `winseek` | winseek.js | full table-gate pursuit (6 roads) | win-path reachability ceiling |
 | `capable` | capable.js | leadfeast base + real flee (barrier push), combat abilities + signature verbs, scored offers/contests/Table/relics, held talks by need, relay | the game as a capable player plays it — the default bot for build/lever sims |
+| `merchant` | livelihood.js | same capable brain, no deliberate hunts/feast fights, earns a food budget and shops/sells at actual carts | commerce opportunities, prices and gear access |
+| `maker` | livelihood.js | merchant plus known equipment recipes and preserving cooked meat | recipe/material reachability and useful crafting |
+| `caregiver` | livelihood.js | same capable brain, no deliberate hunts/feast fights, comforts actual frightened/grieving villagers | a care-led run's rewards, survival and ending access |
+
+The livelihood policies still defend themselves in unavoidable fights; these
+are not zero-combat or pacifist proofs. Compare the same policy code on
+frozen before/after game sources. A policy called merchant making zero
+purchases is an audit finding, not proof that trade is balanced.
 
 Also present (legacy, not canonical): `idle.js` (zero/mvc/leader), `oracle.js`,
 `oracleV2.js` (systems-engaged), `socialite.js` (social-play), `weird-c.js`,
