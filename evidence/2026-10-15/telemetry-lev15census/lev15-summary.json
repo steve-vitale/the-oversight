@@ -1,0 +1,211 @@
+{
+ "substrate": "FEASTSCALE_R13=1, leadfeast/belongfeast base (TRIBSHIELD unset)",
+ "seeds": [
+  11,
+  22,
+  33,
+  44,
+  55,
+  66,
+  77,
+  88
+ ],
+ "policies": [
+  "leadfeast",
+  "belongfeast"
+ ],
+ "days": 180,
+ "nRuns": 16,
+ "medianDays": 136,
+ "nationalRuns": 0,
+ "tableRuns": 14,
+ "wonRuns": 0,
+ "totalLeverageEvents": 35,
+ "attribution": {
+  "attributed": 35,
+  "misses": 0,
+  "rate": 1
+ },
+ "byCallSite": {
+  "renegotiation:expiry-7d": 10,
+  "successionCrisis": 25
+ },
+ "byRole": {
+  "subordinate": 35
+ },
+ "byAge": {
+  "young": 8,
+  "old": 27
+ },
+ "byYoungNat": {
+  "inWindow": 6,
+  "outOfWindow": 29
+ },
+ "depthDist": {
+  "1": 11,
+  "2": 8,
+  "3": 7,
+  "4": 5,
+  "5": 3,
+  "6": 1
+ },
+ "outcomes": {
+  "dissolve": 3,
+  "hold": 7,
+  "demote": 1
+ },
+ "weeklyHikeKcal": {
+  "n": 35,
+  "min": 2500,
+  "max": 22782,
+  "p50": 3750,
+  "p90": 12657,
+  "mean": 5912
+ },
+ "rows": [
+  {
+   "seed": 11,
+   "policy": "leadfeast",
+   "days": 180,
+   "endReason": "survived",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 22,
+   "policy": "leadfeast",
+   "days": 110,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 33,
+   "policy": "leadfeast",
+   "days": 122,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 3,
+   "attribRate": 1
+  },
+  {
+   "seed": 44,
+   "policy": "leadfeast",
+   "days": 158,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 55,
+   "policy": "leadfeast",
+   "days": 174,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 66,
+   "policy": "leadfeast",
+   "days": 95,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 77,
+   "policy": "leadfeast",
+   "days": 143,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 88,
+   "policy": "leadfeast",
+   "days": 180,
+   "endReason": "survived",
+   "nationalReached": false,
+   "nEvents": 0,
+   "attribRate": 1
+  },
+  {
+   "seed": 11,
+   "policy": "belongfeast",
+   "days": 90,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 4,
+   "attribRate": 1
+  },
+  {
+   "seed": 22,
+   "policy": "belongfeast",
+   "days": 81,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 4,
+   "attribRate": 1
+  },
+  {
+   "seed": 33,
+   "policy": "belongfeast",
+   "days": 76,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 1,
+   "attribRate": 1
+  },
+  {
+   "seed": 44,
+   "policy": "belongfeast",
+   "days": 136,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 6,
+   "attribRate": 1
+  },
+  {
+   "seed": 55,
+   "policy": "belongfeast",
+   "days": 68,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 2,
+   "attribRate": 1
+  },
+  {
+   "seed": 66,
+   "policy": "belongfeast",
+   "days": 180,
+   "endReason": "survived",
+   "nationalReached": false,
+   "nEvents": 5,
+   "attribRate": 1
+  },
+  {
+   "seed": 77,
+   "policy": "belongfeast",
+   "days": 98,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 5,
+   "attribRate": 1
+  },
+  {
+   "seed": 88,
+   "policy": "belongfeast",
+   "days": 176,
+   "endReason": "village-lost",
+   "nationalReached": false,
+   "nEvents": 5,
+   "attribRate": 1
+  }
+ ]
+}

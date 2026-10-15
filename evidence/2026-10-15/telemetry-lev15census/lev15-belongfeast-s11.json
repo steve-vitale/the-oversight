@@ -1,0 +1,2045 @@
+{
+ "seed": 11,
+ "policy": "belongfeast",
+ "days": 90,
+ "endReason": "village-lost",
+ "trajHash": "2a6cfef1547da1bb6449f231934127a4723810a1",
+ "national": {
+  "reached": false,
+  "mode": "n/a",
+  "firstDay": null,
+  "holdDays": 0
+ },
+ "tableSeat": "none",
+ "maxWave": 2,
+ "won": false,
+ "rankAtEnd": "regional",
+ "attribution": {
+  "attributed": 4,
+  "misses": [],
+  "rate": 1
+ },
+ "instrumentErrors": [],
+ "events": [
+  {
+   "linkId": "link_mgpsphsq385",
+   "day": 30,
+   "callSite": "renegotiation:expiry-7d",
+   "role": "subordinate",
+   "kind": "?",
+   "ageDays": 10,
+   "oldLink": false,
+   "trustBefore": 60,
+   "trustAfter": 54,
+   "arrearsBefore": 0,
+   "arrearsAfter": 0,
+   "tributeBefore": 5000,
+   "tributeAfter": 7500,
+   "weeklyHike": 2500,
+   "depthPrior": 0,
+   "depthNew": 1,
+   "rankAtEvent": "village",
+   "youngNational": false,
+   "natAgeDays": null,
+   "verdict": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "linkId": "link_mgpsphsq385",
+   "day": 39,
+   "callSite": "renegotiation:expiry-7d",
+   "role": "subordinate",
+   "kind": "?",
+   "ageDays": 19,
+   "oldLink": false,
+   "trustBefore": 70,
+   "trustAfter": 64,
+   "arrearsBefore": 0,
+   "arrearsAfter": 0,
+   "tributeBefore": 7500,
+   "tributeAfter": 11250,
+   "weeklyHike": 3750,
+   "depthPrior": 1,
+   "depthNew": 2,
+   "rankAtEvent": "village",
+   "youngNational": false,
+   "natAgeDays": null,
+   "verdict": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "linkId": "link_mgpsphsq385",
+   "day": 69,
+   "callSite": "successionCrisis",
+   "role": "subordinate",
+   "kind": "?",
+   "ageDays": 49,
+   "oldLink": true,
+   "trustBefore": 83,
+   "trustAfter": 75,
+   "arrearsBefore": 0,
+   "arrearsAfter": 0,
+   "tributeBefore": 11250,
+   "tributeAfter": 16875,
+   "weeklyHike": 5625,
+   "depthPrior": 2,
+   "depthNew": 3,
+   "rankAtEvent": "regional",
+   "youngNational": false,
+   "natAgeDays": null,
+   "verdict": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 16,875 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "linkId": "link_mgpsphsq385",
+   "day": 82,
+   "callSite": "successionCrisis",
+   "role": "subordinate",
+   "kind": "?",
+   "ageDays": 62,
+   "oldLink": true,
+   "trustBefore": 63,
+   "trustAfter": 55,
+   "arrearsBefore": 33750,
+   "arrearsAfter": 33750,
+   "tributeBefore": 16875,
+   "tributeAfter": 25313,
+   "weeklyHike": 8438,
+   "depthPrior": 3,
+   "depthNew": 4,
+   "rankAtEvent": "regional",
+   "youngNational": false,
+   "natAgeDays": null,
+   "verdict": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 25,313 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  }
+ ],
+ "depth": {
+  "link_mgpsphsq385": 4
+ },
+ "outcomes": [
+  {
+   "linkId": "link_mgpsphsq385",
+   "nEvents": 4,
+   "role": "subordinate",
+   "kind": "?",
+   "maxDepth": 4,
+   "lowestBefore": 5000,
+   "highestAfter": 25313,
+   "finalTribute": 25313,
+   "finalArrears": 33750,
+   "finalTrust": 55,
+   "rankAtEnd": "regional",
+   "outcome": "hold"
+  }
+ ],
+ "leverageSayLines": [
+  {
+   "day": 30,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would.",
+   "paired": true
+  },
+  {
+   "day": 39,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would.",
+   "paired": true
+  },
+  {
+   "day": 69,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 16,875 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+   "paired": true
+  },
+  {
+   "day": 82,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 25,313 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.",
+   "paired": true
+  }
+ ],
+ "deaths": [
+  {
+   "day": 4,
+   "kind": "monster",
+   "vid": "mirrormoth",
+   "name": "a moth the size of a dinner plate, catch",
+   "cause": "villager combat"
+  },
+  {
+   "day": 8,
+   "kind": "monster",
+   "vid": "murkcap",
+   "name": "Murkcap",
+   "cause": "villager combat"
+  },
+  {
+   "day": 8,
+   "kind": "monster",
+   "vid": "lockpick_raccoon",
+   "name": "Lockpick",
+   "cause": "villager combat"
+  },
+  {
+   "day": 10,
+   "kind": "monster",
+   "vid": "nightcourt",
+   "name": "Night Court",
+   "cause": "villager combat"
+  },
+  {
+   "day": 17,
+   "kind": "villager",
+   "vid": "maya_singh",
+   "name": "Maya",
+   "cause": "monster"
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "vid": "hummice",
+   "name": "Hummice",
+   "cause": "villager combat"
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "vid": "nightcourt",
+   "name": "Judge Hoot",
+   "cause": "villager combat"
+  },
+  {
+   "day": 23,
+   "kind": "villager",
+   "vid": "gen_47lto9e",
+   "name": "Moshe Zhong",
+   "cause": "Nevermore"
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "vid": "giant_mosquito",
+   "name": "mosquito",
+   "cause": "villager combat"
+  },
+  {
+   "day": 27,
+   "kind": "villager",
+   "vid": "gen_vy65vfz",
+   "name": "Oliverio Rendón",
+   "cause": "a wound that wouldn't close"
+  },
+  {
+   "day": 28,
+   "kind": "monster",
+   "vid": "drumbelly_tanuki",
+   "name": "Drum-Belly",
+   "cause": "combat"
+  },
+  {
+   "day": 32,
+   "kind": "villager",
+   "vid": "gen_k8y9lex",
+   "name": "Emma Shea",
+   "cause": "Choir Toad"
+  },
+  {
+   "day": 36,
+   "kind": "monster",
+   "vid": "drumbelly_tanuki",
+   "name": "The Loud Beast",
+   "cause": "villager combat"
+  },
+  {
+   "day": 45,
+   "kind": "villager",
+   "vid": "hassan_ali",
+   "name": "Hassan",
+   "cause": "sickness"
+  },
+  {
+   "day": 49,
+   "kind": "villager",
+   "vid": "stan_kowalski",
+   "name": "Stan",
+   "cause": "sickness"
+  },
+  {
+   "day": 56,
+   "kind": "monster",
+   "vid": "review_drone",
+   "name": "Performance Review",
+   "cause": "combat"
+  },
+  {
+   "day": 66,
+   "kind": "villager",
+   "vid": "gen_9g02w24",
+   "name": "Tom",
+   "cause": "monster"
+  },
+  {
+   "day": 67,
+   "kind": "monster",
+   "vid": "hushwolf",
+   "name": "Hushpuppy",
+   "cause": "combat"
+  },
+  {
+   "day": 67,
+   "kind": "villager",
+   "vid": "naran_tumen",
+   "name": "Naran",
+   "cause": "monster"
+  },
+  {
+   "day": 69,
+   "kind": "person",
+   "vid": "miguel_santos",
+   "name": "Miguel",
+   "cause": "combat"
+  },
+  {
+   "day": 69,
+   "kind": "villager",
+   "vid": "gen_dkjljvy",
+   "name": "Lamar Boehm",
+   "cause": "combat"
+  },
+  {
+   "day": 82,
+   "kind": "villager",
+   "vid": "gen_v7krsq7",
+   "name": "Ettore Borghi",
+   "cause": "combat"
+  }
+ ],
+ "beats": [
+  {
+   "day": 1,
+   "text": "You break ground behind the hall — plot 1 of 6, turned and ready. (Sow seeds to plant. Nothing grows until you sow, and nothing lives unless you tend it daily.)"
+  },
+  {
+   "day": 1,
+   "text": "You break ground behind the hall — plot 2 of 6, turned and ready. (Sow seeds to plant. Nothing grows until you sow, and nothing lives unless you tend it daily.)"
+  },
+  {
+   "day": 1,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 2,
+   "text": "You break ground behind the hall — plot 3 of 6, turned and ready. (Sow seeds to plant. Nothing grows until you sow, and nothing lives unless you tend it daily.)"
+  },
+  {
+   "day": 2,
+   "text": "You break ground behind the hall — plot 4 of 6, turned and ready. (Sow seeds to plant. Nothing grows until you sow, and nothing lives unless you tend it daily.)"
+  },
+  {
+   "day": 2,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 2,
+   "text": "🌿 A person, maybe 30s checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 3,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 3,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "◈ The Records: The village drew first blood: Flashbulb Moth is dead. It is written."
+  },
+  {
+   "day": 4,
+   "text": "A shot in the dark — you take what's green: 5× unknown nuts, 5× unknown nuts, 3× unknown shoots. Into the bag, unnamed. (Not food until identified — sort them at camp.) You also gather deadfall: 1× branches, 1× bark fiber. This patch is picked clean — it'll re"
+  },
+  {
+   "day": 4,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 4,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 5,
+   "text": "You work the patch: 3× Muscadine Grapes — and 3× unknown nuts you can't name yet. You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 5,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 5,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 5,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~7 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 5,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~8 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 6,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "Travel 2 tiles to forest floor. — Under the canopy — Saplings push up through last year's deadfall, racing each other for the light. The forest never stops trying."
+  },
+  {
+   "day": 7,
+   "text": "⚔️ Moshe stood down the something displaced a LOT of water and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A woman, maybe 40s checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "🌿 A person, maybe 50s checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 7,
+   "text": "◈ NEURAL CREEP — the overlay isn't on the world anymore. It's under it. Behind your eyes, faintly, when you blink."
+  },
+  {
+   "day": 7,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 7,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1500 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 8,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "✨ Ability gained: Green Thumb, Literally (L1). Your thumb is green. Not metaphorically. Foraging yields +50%, AND you can ask a plant what's nearby (once/day: reveals this tile's forage table)."
+  },
+  {
+   "day": 8,
+   "text": "\"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!\""
+  },
+  {
+   "day": 8,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~12 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 8,
+   "text": "📖 The Codex turns a page on its own. Murkcap is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 8,
+   "text": "📖 The Codex turns a page on its own. Lockpick is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 8,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 9,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "🛟 Ettore stands up by the fire. \"We take the hit and we answer it — standing here isn't an answer. Here's what we CAN do — pick one, maybe two, but everything costs something.\""
+  },
+  {
+   "day": 9,
+   "text": "\"We can bind the wounds, or go lean, or hunt hard to replace what we lost. Say which — standing here isn't an answer.\""
+  },
+  {
+   "day": 9,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "You work the patch with practiced hands: 8× Muscadine Grapes, 5× Hickory Nuts (720 kcal). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 9,
+   "text": "⚔️ Tom stood down the Murkcap and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 9,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~17 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 9,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "📖 The Codex turns a page on its own. Night Court is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~23 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 10,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 10,
+   "text": "◈ FLASHBACK — Hard Candy Butterscotch, doled out like medals — good report card, brave dentist visit, the day the dog died. Small sweetness, on purpose."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "Movement — a waddling opossum, playing dead (badly)."
+  },
+  {
+   "day": 11,
+   "text": "👁 You know this one's trick: it plays dead. Don't fall for it — or do, and be ready when it wakes."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 11,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "You work the patch with practiced hands: 8× Muscadine Grapes, 6× Hickory Nuts (720 kcal). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~33 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 12,
+   "text": "\"Your understanding is... deepening! We can see it! Like watching a seed decide to be a tree! Beautiful! Profitable!\""
+  },
+  {
+   "day": 12,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 12,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 13,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 14,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "You work the patch with practiced hands: 12× Muscadine Grapes, 15× Hickory Nuts (1080 kcal). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~41 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 15,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 15,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "🌿 Moshe checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 16,
+   "text": "📺 Moshe found someone lost out past the ridge and walked them to shelter. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 16,
+   "text": "The garden: your untended Muscadine Grapes drowned in weeds and died. (Six untended days. The garden keeps honest books.)"
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (You did the thing — and it worked.)"
+  },
+  {
+   "day": 17,
+   "text": "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free."
+  },
+  {
+   "day": 17,
+   "text": "⚔️ Maya stood down the Hushpuppy and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 17,
+   "text": "⚔️ Maya stood down the Hushpuppy and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 17,
+   "text": "📖 The Codex turns a page on its own. Maya is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 17,
+   "text": "◈ CRISIS — THE FIRST GRAVE. Maya is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did."
+  },
+  {
+   "day": 17,
+   "text": "Maya is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+  },
+  {
+   "day": 17,
+   "text": "📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 2 talent has been released into your sector."
+  },
+  {
+   "day": 17,
+   "text": "📖 The Codex turns a page on its own. Hummice is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 17,
+   "text": "\"The REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!\""
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~32 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 17,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "📺 Moshe found someone lost out past the ridge and walked them to shelter. (The village watches the broadcast. Nobody blinks.)"
+  },
+  {
+   "day": 18,
+   "text": "📖 Oliverio is walking Hassan through the broad leaves standing tall above still water on stiff stalks — leaf, stem, smell, the beginner's tour."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~35 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~36 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "You work the patch with practiced hands: 15× Muscadine Grapes, 15× Hickory Nuts (1350 kcal). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 18,
+   "text": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~39 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 19,
+   "text": "📖 The Codex turns a page on its own. Judge Hoot is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~50 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~50 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "You catch Stan telling the fire about Oliverio. \"Oliverio showed Hassan the broad leaves standing tall above still water on stiff stalks\" The story's already growing."
+  },
+  {
+   "day": 20,
+   "text": "\"We can bind the wounds, or go lean, or hunt hard to replace what we lost. Say which — standing here isn't an answer.\""
+  },
+  {
+   "day": 20,
+   "text": "⛓️ Moshe brings it home: Haven bows to Thornfield — one organization, them primary. Tribute: 5,000 kcal/week. The relationship starts at trust 30. Everything from here is earned."
+  },
+  {
+   "day": 20,
+   "text": "The village feels it before they understand it: Haven isn't just Haven anymore. Moshe speaks at Thornfield's table now — earned, not appointed. And the other fire is watching what Haven does FIRST."
+  },
+  {
+   "day": 20,
+   "text": "📓 Codex: First link formed with Thornfield. The gesture goes out now; the Dawn waits for seasons."
+  },
+  {
+   "day": 20,
+   "text": "⚔️ Omar stood down the Drum-Belly and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 20,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 20,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~44 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~61 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~61 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~61 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~61 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 21,
+   "text": "Tribute paid: 5,100 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 21,
+   "text": "You work the patch with practiced hands: 15× Muscadine Grapes, 19× Hickory Nuts (1350 kcal). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 21,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 22,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~57 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🏃 Rafael of Thornfield walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Thornfield has grain to spare — 1,628 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~55 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 23,
+   "text": "📖 The Codex turns a page on its own. Moshe Zhong is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 23,
+   "text": "🕯️ Moshe is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 23,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speak"
+  },
+  {
+   "day": 23,
+   "text": "📓 Codex: Moshe died while mentored in your party."
+  },
+  {
+   "day": 24,
+   "text": "📊 THE STANDINGS — Haven sits 1st of 4. Haven leads. The audience has a favorite, and it's you."
+  },
+  {
+   "day": 24,
+   "text": "You work the patch with practiced hands: 12× Muscadine Grapes, 15× Hickory Nuts (1080 kcal). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+  },
+  {
+   "day": 24,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~81 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~81 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~81 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 24,
+   "text": "📺 The System waits. The cameras are already rolling. 📺 The billing says EXTREME RISK — almost nobody walks away from this one. 📺 No one has died in this one yet. That you know of. 📺 You are at 100 health. Participate — or refuse, and let the galaxy watch y"
+  },
+  {
+   "day": 25,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~87 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 25,
+   "text": "💛 The Knife roll has become something you can reach for. (Keepsake L2 — new combat action: Lucky Break. Your next miss this fight becomes a hit. Once per fight.)"
+  },
+  {
+   "day": 25,
+   "text": "💛 The Hard Candy has become something you can reach for. (Keepsake L2 — new combat action: Lucky Break. Your next miss this fight becomes a hit. Once per fight.)"
+  },
+  {
+   "day": 26,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~84 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 26,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~84 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 26,
+   "text": "⚔️ Naran stood down the Cliffhanger and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 26,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~90 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 26,
+   "text": "💔 A faction of Stonebridge has turned cannibal — and split. The eaters walked. The Red Table is a new fire in the world now — 2 people under Alba."
+  },
+  {
+   "day": 26,
+   "text": "📓 Codex: Stonebridge split (cannibal). The Red Table formed; 2 petition at Haven's fire."
+  },
+  {
+   "day": 27,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~108 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 27,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~108 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 27,
+   "text": "⚔️ Stan stood down the Moderator and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 27,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~108 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 27,
+   "text": "📖 The Codex turns a page on its own. mosquito is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 27,
+   "text": "📖 The Codex turns a page on its own. Oliverio Rendón is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 27,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~864 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 28,
+   "text": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it "
+  },
+  {
+   "day": 28,
+   "text": "◈ TRIAL RECOGNIZED — the System has been watching. You WON a fight. Not survived — won. The audience is still standing. So are you. (Combat track +)"
+  },
+  {
+   "day": 28,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~114 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~114 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~114 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~114 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 28,
+   "text": "Tribute paid: 5,000 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 28,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~96 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~95 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~95 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~97 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~97 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~97 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 29,
+   "text": "Word later: they walked to The Red Table. Another fire in the world, whether you wanted it or not."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "⚔️ Omar stood down the Loud Beast and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 30,
+   "text": "⚔️ Ettore stood down the tick and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 30,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~98 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 30,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 7,500 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 31,
+   "text": "📺 You move like a kitchen fire. Something sizzles, something singes — including you, slightly — and the plate lands with two seconds left. The judges blink."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~91 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~91 days of fresh on hand… leaves the harvest standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~91 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~91 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~91 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 31,
+   "text": "📺 CONTEST: The Long Odds. Dice against the house champion — a smug alien who has never lost on camera. The dice are fair. The stakes are the game. Raise, hold, or walk — but the table is unavoidable."
+  },
+  {
+   "day": 32,
+   "text": "🏃 Rafael of Thornfield walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Thornfield has grain to spare — 2,483 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 32,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~76 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~76 days of fresh on hand… leaves the harvest standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~78 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "🌿 Emma checks the pantry before heading out — the shelves are full, ~78 days of fresh on hand… leaves the harvest standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "📖 The Codex turns a page on its own. Emma Shea is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 32,
+   "text": "🕯️ Emma is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 32,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speak"
+  },
+  {
+   "day": 32,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~78 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 32,
+   "text": "📺 The Long Odds. Dice against the house champion — a smug alien who has never lost on camera. The dice are fair. The stakes are the game. Raise, hold, or walk — but the table is unavoidable."
+  },
+  {
+   "day": 32,
+   "text": "📺 The Long Odds. Dice against the house champion — a smug alien who has never lost on camera. The dice are fair. The stakes are the game. Raise, hold, or walk — but the table is unavoidable. People have been hurt in this one. Not always. The lights come up. Y"
+  },
+  {
+   "day": 33,
+   "text": "📺 The last roll. Everything staked is in the middle of the table, and the dice are in your hand. Vex is watching the dice. For the first time tonight, it is not smiling."
+  },
+  {
+   "day": 33,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~89 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 33,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~89 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 34,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~80 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 35,
+   "text": "Tribute paid: 7,600 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 35,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~46 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 35,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~46 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 35,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1128 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 36,
+   "text": "◈ WORD TRAVELS — riders from The Red Table bring talk of Haven. Out there they call you the Beloved. Strangers ask for your blessing. You don't know what to do with that."
+  },
+  {
+   "day": 36,
+   "text": "You send 3,952 kcal. It hurts. That's rather the point of tribute."
+  },
+  {
+   "day": 36,
+   "text": "📖 The Codex turns a page on its own. The Loud Beast is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 36,
+   "text": "📖 LEARNED: Field Dressing (Level 1). Break down game fast and clean. Less waste, more meat, usable parts."
+  },
+  {
+   "day": 36,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 36,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~31 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 37,
+   "text": "🏃 Rafael of Thornfield walks into Haven unannounced, pack-mules behind. \"Heard your bins are echoing. Thornfield has grain to spare — 2,159 kcal, no tribute, no ceremony. Say the word.\""
+  },
+  {
+   "day": 37,
+   "text": "⚔️ Omar stood down the Cliffhanger and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 37,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~49 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 37,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~49 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 38,
+   "text": "⚔️ Hassan stood down the Inspiration and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 38,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 38,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~51 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 39,
+   "text": "The teeth break. The door holds — with nobody's help but Haven's own."
+  },
+  {
+   "day": 39,
+   "text": "⚔️ Miguel stood down the Heckler and kept walking — 4 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 39,
+   "text": "⚔️ Tom stood down the Ugly-Eyes and kept walking — 2 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 39,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~66 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 39,
+   "text": "Seven days of silence, and the silence answered for Haven. Thornfield's new speaker reads it plainly. (Trust -6.) Thornfield installs their own speaker at the table after all — tribute rises to 11,250 kcal/week. Grief became leverage, and they knew it would."
+  },
+  {
+   "day": 39,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~1454 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 39,
+   "text": "🌙 Raid — Thornfield came in the night from the northeast. They carried off ~954 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 40,
+   "text": "The Ugly-Eyes breaks and runs!"
+  },
+  {
+   "day": 40,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~40 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~27 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~27 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 41,
+   "text": "◈ SYSTEM: \"One fire was a village. Two fires is a NETWORK. Coordination layer: online — tribute, demands, the long climb, all tracked now. Try not to starve twice as fast.\""
+  },
+  {
+   "day": 41,
+   "text": "Three weeks of knowing Thornfield — and now it's real. Haven is regional."
+  },
+  {
+   "day": 42,
+   "text": "Tribute paid: 11,417 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 42,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 42,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 42,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~22 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 42,
+   "text": "🌙 Raid — Thornfield came in the night from the northeast. They carried off ~785 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 43,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 43,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 43,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 44,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 44,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 45,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 45,
+   "text": "📖 The Codex turns a page on its own. Hassan is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 46,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 47,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 47,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~15 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 48,
+   "text": "📊 THE STANDINGS — Haven sits 1st of 5. Haven leads. The audience has a favorite, and it's you."
+  },
+  {
+   "day": 48,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 48,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 49,
+   "text": "Tribute paid: 11,400 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 49,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 49,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~11 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 49,
+   "text": "📖 The Codex turns a page on its own. Stan is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 50,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~6 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 51,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 51,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 51,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~16 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 52,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 52,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 52,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 53,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 53,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 54,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 54,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~29 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 55,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 55,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~37 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 56,
+   "text": "💡 COUNTER LEARNED — Performance Review: Dodge unpredictably. It grades your dodges aloud — so stop giving it the same dodge twice. Move two rounds running, never the same way, and its lock breaks. Unpredictability is the only passing grade. (You did the thing"
+  },
+  {
+   "day": 56,
+   "text": "📓 Codex: Counter: Dodge unpredictably — It grades your dodges aloud — so stop giving it the same dodge twice. Move two rounds running, never the same way, and its lock breaks. Unpredictability is the only passing grade."
+  },
+  {
+   "day": 56,
+   "text": "🛟 Omar stands up by the fire. \"We take the hit and we answer it — standing here isn't an answer. Here's what we CAN do — pick one, maybe two, but everything costs something.\""
+  },
+  {
+   "day": 56,
+   "text": "Tribute paid: 11,277 kcal walks out of the pantry toward Thornfield. The relationship holds."
+  },
+  {
+   "day": 56,
+   "text": "⚔️ Naran stood down the Understudy and kept walking — 5 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~50 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~50 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 56,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~50 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~20 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~20 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 57,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~20 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 58,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 58,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 58,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 59,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 59,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 59,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 60,
+   "text": "📺 The System was going to take Omar AGAIN. The producers cut it — somebody else takes the arena."
+  },
+  {
+   "day": 61,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 61,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 61,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~13 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 62,
+   "text": "For a second, the world had a texture — like fabric, like something woven. You blinked and it was just trees again."
+  },
+  {
+   "day": 62,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 62,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 62,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~9 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 63,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~14 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 64,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 64,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 64,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~894 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 65,
+   "text": "🌿 Ettore checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 65,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 65,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~5 days of fresh on hand… leaves the fish nets standing and turns to the wood run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 65,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~720 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 66,
+   "text": "🌿 Tom checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the water run instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 66,
+   "text": "🌿 Omar checks the pantry before heading out — the shelves are full, ~4 days of fresh on hand… leaves the fish nets standing and turns to the stone pile instead. The pantry can't take more; the wild will keep."
+  },
+  {
+   "day": 66,
+   "text": "📖 The Codex turns a page on its own. Tom is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 67,
+   "text": "Edible but lean. The old taboo itches; hunger doesn't care. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: me"
+  },
+  {
+   "day": 67,
+   "text": "📖 The Codex turns a page on its own. Naran is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 69,
+   "text": "You don't know what that was. The thing with headlights for eyes, standing too still. Someone at the haven should hear about this."
+  },
+  {
+   "day": 69,
+   "text": "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (You did the thing — and it worked.)"
+  },
+  {
+   "day": 69,
+   "text": "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming."
+  },
+  {
+   "day": 69,
+   "text": "You carry the weight of it. They died beside you."
+  },
+  {
+   "day": 69,
+   "text": "The light touches the ground where you were standing. It has not found you yet."
+  },
+  {
+   "day": 69,
+   "text": "The beam carves a bright arc across the ground, swinging after its target. It does not blink. It does not hurry."
+  },
+  {
+   "day": 69,
+   "text": "📖 The Codex turns a page on its own. Lamar Boehm is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 69,
+   "text": "🕯️ Lamar is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 69,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 16,875 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 69,
+   "text": "🕯️ Lamar Boehm is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 69,
+   "text": "The Codex doesn't pause for grief. Ettore blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 70,
+   "text": "🧳 The trader lowers their voice. \"And further still — FOUR fires under one head. They call it a REALM. Tribute flows uphill like a river; I saw the grain carts with my own eyes.\" They won't say more. Or can't."
+  },
+  {
+   "day": 71,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 72,
+   "text": "📊 THE STANDINGS — Haven sits 1st of 5. Haven leads. The audience has a favorite, and it's you."
+  },
+  {
+   "day": 77,
+   "text": "The teeth break. The door holds — with nobody's help but Haven's own."
+  },
+  {
+   "day": 77,
+   "text": "🛟 Omar stands up by the fire. \"We take the hit and we answer it — standing here isn't an answer. Here's what we CAN do — pick one, maybe two, but everything costs something.\""
+  },
+  {
+   "day": 77,
+   "text": "⚔️ Omar stood down the Inspiration and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 77,
+   "text": "⚔️ Omar stood down the Highbeam Deer and kept walking — 6 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 77,
+   "text": "⚠️ Thornfield notices the missing tribute. Arrears: 33,750 kcal. The air changes."
+  },
+  {
+   "day": 78,
+   "text": "⚔️ Omar stood down the Living Wire and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+  },
+  {
+   "day": 78,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 79,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 79,
+   "text": "🌙 Raid — Thornfield came in the night from the northeast. They carried off ~200 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 80,
+   "text": "💡 COUNTER LEARNED — The Living Wire: Get OUT of the water. When the crackling starts, step onto dry ground — the discharge cannot reach you there. On land it is just a long blind fish: slow, harmless, dinner. Never fight it standing in the creek. (You did the"
+  },
+  {
+   "day": 80,
+   "text": "📓 Codex: Counter: Get OUT of the water — When the crackling starts, step onto dry ground — the discharge cannot reach you there. On land it is just a long blind fish: slow, harmless, dinner. Never fight it standing in the creek."
+  },
+  {
+   "day": 80,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 81,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  },
+  {
+   "day": 82,
+   "text": "📖 The Codex turns a page on its own. Ettore Borghi is dead. You didn't ask. It knew."
+  },
+  {
+   "day": 82,
+   "text": "🕯️ Ettore is dead — and the dead hold no treaties. Every link Haven has shakes."
+  },
+  {
+   "day": 82,
+   "text": "With Haven grieving, Thornfield installs their own speaker at the table. Tribute rises to 25,313 kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person."
+  },
+  {
+   "day": 82,
+   "text": "🕯️ Ettore Borghi is dead — combat. The village stops. Somebody screams. Somebody else starts digging."
+  },
+  {
+   "day": 82,
+   "text": "The Codex doesn't pause for grief. Omar blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+  },
+  {
+   "day": 82,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 83,
+   "text": "📺 🎙️ PLAY-BY-PLAY: BREAKING: the numbers are soft and the System is NERVOUS. Someone will provide a moment."
+  },
+  {
+   "day": 83,
+   "text": "⚠ STARVING: health and energy falling. The spiral has started."
+  },
+  {
+   "day": 83,
+   "text": "🌙 Raid — Emberhold came in the night from the southeast. They carried off ~0 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+  }
+ ],
+ "waveUnlockDays": {}
+}
