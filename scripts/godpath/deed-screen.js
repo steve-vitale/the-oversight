@@ -44,9 +44,11 @@ async function child() {
     },
     daily(g, ctx) { const r = base.daily && base.daily(g, ctx); if (arg('observe', '1') !== '0') sample(g); return r; },
   });
+  const warnings = [], warnBefore = console.warn;
+  console.warn = function (...args) { if (warnings.length < 100) warnings.push(args.map(String).join(' ')); return warnBefore.apply(console, args); };
   let report;
   try { report = await H.quietLog(() => runComparison({ seeds: [Number(arg('seed', 7))], policies: [id], days: Number(arg('days', 150)) })); }
-  finally { registry[id] = base; }
+  finally { registry[id] = base; console.warn = warnBefore; }
   const hash = require('../gear-usage-audit').gameplayHash(G.state);
   const rows = [...people.values()];
   // Gate diagnostics occur only after the run and after hashing its gameplay state.
@@ -58,7 +60,7 @@ async function child() {
       if (c.classOk || c.kit >= 3) p.gates[god.id] = { kit: c.kit, need: c.needKit, payoff: c.coreHit, deed: c.synergy, day: c.dayOk, complete: c.complete };
     }
   }
-  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, people: rows }) + '\n');
+  process.stdout.write('@@DEED@@' + JSON.stringify({ row: report.runs[0], stateHash: hash, ascensions, outcomes, warnings, people: rows }) + '\n');
 }
 async function main() {
   if (process.argv.includes('--child')) return child();

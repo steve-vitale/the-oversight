@@ -71,3 +71,9 @@ pod-demand keep their full base stories, and losses reveal no win text.
 Ascension-deed visibility exception: Codex adds the known class deed hint
 to app.js Tracks, alongside its existing class line. Scope is godpath
 objective/progress display only; no region or nomad UI changes.
+
+Survivalist parity/settlement exception: Codex repairs Second Wind/Molt
+activation plus their real health and gear results in fieldFights.js,
+game.js, contestEngine.js and villager-agency.js. Field callers must apply
+surviving HP once, rather than replaying cumulative damage after a rescue.
+This is the godpath combat/contest contract, not region or nomad authoring.

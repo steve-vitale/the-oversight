@@ -30,7 +30,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
   K.newRun(Game);
   Game.state.systemArrived = true;
   const v = Game.state.village;
-  const roster0 = (v.roster || []).slice();
+  const roster0 = (v.roster || []).filter(id => id !== Game.villagerId);
   const vidA = roster0[0], vidB = roster0[1], vidC = roster0[2];
   T.ok('three villagers to test with', !!(vidA && vidB && vidC), roster0.length);
   Game.villageFoodTier = (() => { const o = Game.villageFoodTier; let forced = null; const f = function () { return forced || o.apply(this, arguments); }; f.force = (t) => { forced = t; }; return f; })();

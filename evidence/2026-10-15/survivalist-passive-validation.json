@@ -1,0 +1,267 @@
+{
+  "baselineArtifact": "survivalist-deed-after-64.json.gz",
+  "sourceBaseHead": "8d7d8d77bcaad57230796f0dc4a3e7c9b15d93c1",
+  "driver": "sweep-compare",
+  "days": 150,
+  "seedsPerPolicy": 64,
+  "policies": [
+    "capable",
+    "maker",
+    "merchant",
+    "caregiver"
+  ],
+  "matchedRows": 256,
+  "identicalStandardRows": 8,
+  "beforeRecordedHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "c6a6aaa922a5f5f6f61f0b07e4440004c370cea935cb16cb2cb884526f1d4208",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "17b3af240de41c03eccd7479130a228d00391b24cbcf131ecf748ac55f91043f"
+  },
+  "afterRecordedHashes": {
+    "src/js/godhood.js": "25f137e355dc7edcb481a0d76253e0bb9274f554e117fce75cc287cf1cdeacf4",
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/tracks.js": "c408ba2ed86095eb5aed8d036f44b0c53585f135f4aefbd72e518cece7ea550d",
+    "src/data/godpaths.json": "81c0d870e43d29ab5fd053a9d59ed0cf70ea691561b6ec98d8bee712858b78b2",
+    "src/data/tracks.json": "7b12b55eaf9fff4042ab1a837a0aeb3d925da8d8918c6de421f14b89681085d0",
+    "scripts/sim-harness.js": "431b98b36c56c65c4ef94118e4e1b51c8add295099ec461d9379ff1b456600e6",
+    "scripts/sweep-compare.js": "2fb57b679ef70d4320af4f3c2d1b8a64f9c77a12005f0563328ef16d5810e773",
+    "scripts/policies/capable.js": "729c4c759a3c0df1227e9f381dcb56b2572280a0a1cfa54de03eef0513fb7824",
+    "scripts/policies/livelihood.js": "1eb64b506b94e6c61021567dee4f5719a35c07ca7120ea85b86e9acc2fb5260b",
+    "observer/deed-screen.js": "e7b3af23cbae3bb33631c507e4b802a4b3b1d5ba8c8b7727c711e17d9e2528c6"
+  },
+  "policySummary": {
+    "capable": {
+      "before": {
+        "wins": 41,
+        "seated": 55,
+        "medianGameDay": 90.0,
+        "playerDeaths": 93,
+        "otherPersonDeaths": 591,
+        "endReasons": {
+          "over-other": 55,
+          "village-lost": 8,
+          "survived": 1
+        },
+        "ascensionEvents": {
+          "villager": 18,
+          "player": 27
+        },
+        "unkillableEvents": {
+          "player": 1
+        },
+        "receipts": {
+          "ember_heart": 1
+        }
+      },
+      "after": {
+        "wins": 42,
+        "seated": 56,
+        "medianGameDay": 90.0,
+        "playerDeaths": 95,
+        "otherPersonDeaths": 585,
+        "endReasons": {
+          "over-other": 56,
+          "survived": 3,
+          "village-lost": 5
+        },
+        "ascensionEvents": {
+          "villager": 27,
+          "player": 24
+        },
+        "unkillableEvents": {},
+        "receipts": {}
+      }
+    },
+    "maker": {
+      "before": {
+        "wins": 18,
+        "seated": 24,
+        "medianGameDay": 116.0,
+        "playerDeaths": 63,
+        "otherPersonDeaths": 734,
+        "endReasons": {
+          "village-lost": 19,
+          "over-other": 24,
+          "survived": 19,
+          "village-dead": 2
+        },
+        "ascensionEvents": {
+          "villager": 44,
+          "player": 36
+        },
+        "unkillableEvents": {},
+        "receipts": {}
+      },
+      "after": {
+        "wins": 18,
+        "seated": 24,
+        "medianGameDay": 120.5,
+        "playerDeaths": 73,
+        "otherPersonDeaths": 742,
+        "endReasons": {
+          "over-other": 24,
+          "village-lost": 16,
+          "survived": 23,
+          "village-dead": 1
+        },
+        "ascensionEvents": {
+          "villager": 63,
+          "player": 42
+        },
+        "unkillableEvents": {},
+        "receipts": {}
+      }
+    },
+    "merchant": {
+      "before": {
+        "wins": 10,
+        "seated": 22,
+        "medianGameDay": 123.5,
+        "playerDeaths": 43,
+        "otherPersonDeaths": 710,
+        "endReasons": {
+          "village-lost": 17,
+          "over-other": 22,
+          "survived": 23,
+          "village-dead": 2
+        },
+        "ascensionEvents": {
+          "player": 37,
+          "villager": 50
+        },
+        "unkillableEvents": {},
+        "receipts": {
+          "ember_heart": 1
+        }
+      },
+      "after": {
+        "wins": 16,
+        "seated": 24,
+        "medianGameDay": 144.5,
+        "playerDeaths": 42,
+        "otherPersonDeaths": 595,
+        "endReasons": {
+          "village-lost": 9,
+          "over-other": 24,
+          "survived": 30,
+          "village-dead": 1
+        },
+        "ascensionEvents": {
+          "player": 41,
+          "villager": 51
+        },
+        "unkillableEvents": {},
+        "receipts": {
+          "ember_heart": 1
+        }
+      }
+    },
+    "caregiver": {
+      "before": {
+        "wins": 21,
+        "seated": 30,
+        "medianGameDay": 123.5,
+        "playerDeaths": 49,
+        "otherPersonDeaths": 636,
+        "endReasons": {
+          "over-other": 30,
+          "village-lost": 13,
+          "survived": 19,
+          "village-dead": 2
+        },
+        "ascensionEvents": {
+          "player": 32,
+          "villager": 54
+        },
+        "unkillableEvents": {},
+        "receipts": {}
+      },
+      "after": {
+        "wins": 15,
+        "seated": 22,
+        "medianGameDay": 136.0,
+        "playerDeaths": 52,
+        "otherPersonDeaths": 641,
+        "endReasons": {
+          "village-lost": 16,
+          "survived": 26,
+          "over-other": 22
+        },
+        "ascensionEvents": {
+          "villager": 60,
+          "player": 34
+        },
+        "unkillableEvents": {},
+        "receipts": {}
+      }
+    }
+  },
+  "afterWarnings": {},
+  "additionalBeforeArchiveHashes": {
+    "src/js/godpath.js": "c6a6aaa922a5f5f6f61f0b07e4440004c370cea935cb16cb2cb884526f1d4208",
+    "src/js/fieldFights.js": "4f2cb75fafe0e9a2d9d59fc159ef43fff779ddce3c7bdff6b0016afead389d07",
+    "src/js/game.js": "7adfd9d889c202e17d830dd198098d6be8ae4d126c7d94185a390ccfc75bef64",
+    "src/js/contestEngine.js": "6bd37dd100cc9ff354dfcbd8904130386ae93d3964e8219381eec530d7e8110f",
+    "src/js/villager-agency.js": "0c264b2c8caede4b39f54e827757ae39ccc3925feab52c78174c43c31b30882c",
+    "scripts/test-godpath-villagers-20261014.js": "d098969778563d0acd8af0213a99b594e3d8483ef01c9babc450b7e486d7dd3d"
+  },
+  "additionalCurrentHashes": {
+    "src/js/godpath.js": "1f8bfd39f381646f82647cf42e9d9c2b6dcac87a926ffb836b78405648538332",
+    "src/js/fieldFights.js": "65e7b3cdbf23c1c616cf7237d5807e896702e1f1a961520e39cbc38df6cfa01d",
+    "src/js/game.js": "11ff33a5345681b87162c4b399e06164e14240993f5459a6f4fec15a60f6d957",
+    "src/js/contestEngine.js": "e17874fb852606837ba66dfc3cf0dae852664a5f89b401e121479a1d6459cdf4",
+    "src/js/villager-agency.js": "88afba50af69f8b71dbe1b694ad4c8ca24ae823cc09df8516faef6c180b00146",
+    "scripts/test-godpath-villagers-20261014.js": "a8e59a335d6220d4f4385208354d6fb4d23b949cfc227f4e10b2d6e32060de18",
+    "scripts/godpath/test-survivalist-passives.js": "d78085ed87f44e6bec5deef63cfbd048f1a52b37874e0af128a76ec1dba8254f"
+  },
+  "validation": {
+    "quick": {
+      "passed": 143,
+      "failed": 0,
+      "seconds": 33
+    },
+    "firstFull": {
+      "passed": 914,
+      "failed": 1,
+      "failedScript": "scripts/test-spawn-knack.js",
+      "detail": "nested ontology command failed; isolated validator passes and isolated unchanged test 37/37; cause not established from retained output"
+    },
+    "finalUnchangedFull": {
+      "passed": 915,
+      "failed": 0,
+      "seconds": 194
+    },
+    "newRuntimeProof": {
+      "passed": 31,
+      "failed": 0
+    },
+    "existingNPCProof": {
+      "passed": 57,
+      "failed": 0,
+      "fixtureChange": "select non-bearer NPC identities; retain every assertion"
+    },
+    "observerProof": {
+      "seed": 7,
+      "days": 150,
+      "passed": 4,
+      "failed": 0
+    },
+    "ontologySystems": 111,
+    "godpathUnwired": 0,
+    "fieldFightsUnwired": 0
+  },
+  "artifact": {
+    "file": "survivalist-passive-after-64.json.gz",
+    "uncompressedSha256": "bd9c5aa4204be5112f7180d3e43545eafddb513a32eae5395fd731e21e70d2d1",
+    "uncompressedBytes": 36698171,
+    "compressedSha256": "b95bb8ff42b81393ed97cf538e6bf613147ad04d857a70720bfb1860cf047164",
+    "compressedBytes": 1567039
+  }
+}

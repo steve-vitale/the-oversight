@@ -379,7 +379,7 @@
       // outcome now pays the fight's real price through the hurt pipeline.)
       a.know[vid].monsters++;
       if (rec.outcome === 'vKill') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         // WAVE GATE (break-it 2026-10-09): village-wide kill minimums —
         // see resolveWildMonsterEncounter. The expedition's kill counts too.
         try { this.recordWaveKill(m.id, vid, 'agency', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
@@ -420,7 +420,7 @@
         return;
       }
       if (rec.outcome === 'mFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         a.xp[vid].bravery += 1;
         // stood it down = real contact = teachable (gap-breadth 2026-10-10).
         // Evades are just sightings — they stay flavor, never knowledge.
@@ -431,7 +431,7 @@
       }
       if (rec.outcome === 'vDie') return this.expedDeath(vid, mName, nm, playerAtHaven);
       // vFlee: real wounds from the real fight, then the hurt pipeline
-      try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+      try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);
     },
     expedHurt(vid, mName, nm) {

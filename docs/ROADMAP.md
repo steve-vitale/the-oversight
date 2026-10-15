@@ -301,6 +301,14 @@ carcasses/hide learning, but the 64-maker screen has mixed outcomes (21 to
   Nine gods still retain the legacy synergy/class-held-for-10-days proxies
   (`godpaths.json` `rules.capstone.deedClassDays`).
   See `evidence/2026-10-15/survivalist-deed-audit.md`.
+- **Passive follow-up:** NPC Second Wind/Molt now activate through tactical,
+  field and actual world health damage. Per-person caps survive succession;
+  field wound callers preserve actual survivor HP instead of cumulative
+  damage. Runtime/caller proofs and 64-seed x four-policy comparison are in
+  `survivalist-passive-audit.md`: wins 90 -> 91/256 overall, but caregiver
+  wins 21 -> 15/64. No natural Second Wind/Molt receipt in that panel; their
+  Strange-kit positions 10/11 and the caregiver outcome regression need
+  targeted access/ending investigation. Full broader parity remains open.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
   own harvest for 7 days. Keep ascension at roughly 25–40% of long runs

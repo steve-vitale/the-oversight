@@ -43,8 +43,13 @@ Job -> track -> **class** -> **god** -> Table.
    and paid runtime proofs (`test-god-verbs-wired-20261015.js`). Reconcile all
    subclass active verbs and passive hooks too; the old blanket claim that
    villagers cannot use any new verb is no longer the current state.
-   Confirmed next gaps: foreground NPC Second Wind and NPC Molt activation.
-   The shared deed predicate does not establish those missing passive routes.
+   NPC Second Wind/Molt automatic activation now covers tactical, field and
+   actual world damage, with personal cooldowns and truthful field survivor
+   HP settlement (`survivalist-passive-audit.md`). Full active/passive and
+   headless player field-contest parity audits remain open.
+   Natural panel: zero Second Wind/Molt receipts, still at Strange-kit
+   positions 10/11. Fix their observed access gap next; caregiver Table wins
+   also fell 21 to 15/64 in the mixed settlement-repair screen.
 3. **Subclass access and job balance.** Initial 6/20 coverage rose to 10/20
    after the documented job lean and offer window. Measure the remaining
    classes and jobs before another lever; survival targets are flexible.

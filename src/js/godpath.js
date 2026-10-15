@@ -16,6 +16,7 @@
 //   - kitSheet(cands, who, track, level) -> THE level-up sheet for player and villagers: offerSize offers drawn from the next rules.offers.window unheld kit entries, weighted to earlier ones, deterministic per holder/track/level (private hash stream), then shapeOffers
 //   - holderJobPaths(who) -> god paths the holder's occupation leans to (characterGen occupations[].pathLean)
 //   - registerVerbs() -> registers a generic impl + precheck for every data action with `do` (verbs: aegis, wall, pull, push, pack, heal, blink, swap, foresee, broadcast, command, empower, guard, bribe, feed_camp)
+//   - npcDeathRefusal(game, vid, context) -> shared priced self-rescue for tactical/field/world damage; per-person use limits
 //   - allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage)
 //   - absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage)
 //   - damageMult(game, target) / dodgeBonus(game) -> Misdirection / Prophecy (buildarounds damageMult / dodgeBonus)
@@ -1042,7 +1043,7 @@
   // dread, turncoat, retribution, second wind, and the data modifiers:
   // adrenaline_control strikes x1.3, adrenaline_surge +15% dodge,
   // chitin_skin +30 armor). Same numbers as the player's cards.
-  const FIELD_KIT = ['rage', 'pocket_sand', 'fear_aura', 'static_toss', 'cheese_wheel', 'bird_strike', 'turncoat', 'retribution', 'second_wind'];
+  const FIELD_KIT = ['rage', 'pocket_sand', 'fear_aura', 'static_toss', 'cheese_wheel', 'bird_strike', 'turncoat', 'retribution', 'second_wind', 'molt'];
   function modSum(ids, target) {
     try {
       const M = S.modifiers;
@@ -1255,32 +1256,80 @@
     if (G && G.aegis > 0) { G.aegis--; return 0; }
     return share;
   }
-  // fieldCheatDeath(G, c): Ember Heart — the furnace eats the killing blow
-  // (600 kcal: +24 hunger), then Back from the Brink. Returns new vHp or null.
+  // Passive use limits belong to the person across scene and mantle changes.
+  function survivalUses(who) {
+    const v = Game.state.village || {}, s = Game.state.scholar || {};
+    const vid = isPlayer(who) ? Game.villagerId : who;
+    const out = Object.assign({}, (v.godpathSurvival || {})[vid] || {});
+    const legacy = isPlayer(who) ? s : { secondWindDay: (v.npcSecondWind || {})[vid], secondWindUses: 1 };
+    for (const [period, uses] of [['secondWindDay', 'secondWindUses'], ['moltWeek', 'moltUses']]) {
+      if (!Number.isFinite(legacy[period])) continue;
+      if (!Number.isFinite(out[period]) || legacy[period] > out[period]) { out[period] = legacy[period]; out[uses] = legacy[uses] || 1; }
+      else if (legacy[period] === out[period]) out[uses] = Math.max(out[uses] || 1, legacy[uses] || 1);
+    }
+    return out;
+  }
+  function saveSurvivalUses(who, rec) {
+    const v = Game.state.village, vid = isPlayer(who) ? Game.villagerId : who;
+    v.godpathSurvival = v.godpathSurvival || {};
+    v.godpathSurvival[vid] = Object.assign({}, rec);
+    if (isPlayer(who)) Object.assign(Game.state.scholar, rec);
+    else if (Number.isFinite(rec.secondWindDay)) {
+      v.npcSecondWind = v.npcSecondWind || {}; v.npcSecondWind[vid] = rec.secondWindDay;
+    }
+  }
+  function syncPlayerSurvivalUses() {
+    const rec = survivalUses('player');
+    for (const key of ['secondWindDay', 'secondWindUses', 'moltWeek', 'moltUses']) {
+      if (rec[key] !== undefined) Game.state.scholar[key] = rec[key];
+    }
+  }
+  // One NPC resolver for tactical hits, field hits and actual world damage.
+  // Outcomes, prices, daily/weekly caps and discovered synergies are the same.
+  function npcDeathRefusal(game, vid, c) {
+    if (!vid || isPlayer(vid) || !c || !(c.hp <= 0) || game.over) return null;
+    const v = game.state.village, day = game.state.scholar.day || 0, week = Math.floor(day / 7);
+    const link = game.state.phoenixLink;
+    if (link && link.bearerIsPlayer === false && link.bearer === vid) return { hp: 1, held: true };
+    const has = id => game.npcHasAbility && game.npcHasAbility(vid, id);
+    const syn = id => ((v.npcSynergies || {})[vid] || []).includes(id);
+    const uses = survivalUses(vid), max = syn('refuses_death') ? 2 : 1;
+    let hp, ability, shedGear = false;
+    if (c.emberAvailable && has('ember_heart') && vCanPay(vid, 360)) {
+      vPay(vid, 600); hp = Math.max(1, Math.ceil(c.maxHp * 0.2)); ability = 'ember_heart';
+    } else if (has('molt') && (uses.moltWeek === week ? uses.moltUses || 1 : 0) < max) {
+      uses.moltUses = (uses.moltWeek === week ? uses.moltUses || 1 : 0) + 1; uses.moltWeek = week;
+      const person = game.vpOf(vid); person.equipped = {};
+      hp = c.maxHp; ability = 'molt'; shedGear = true; saveSurvivalUses(vid, uses);
+    } else if (has('second_wind') && (uses.secondWindDay === day ? uses.secondWindUses || 1 : 0) < max) {
+      uses.secondWindUses = (uses.secondWindDay === day ? uses.secondWindUses || 1 : 0) + 1; uses.secondWindDay = day;
+      hp = syn('undying_fury') && c.raging ? c.maxHp : 1; ability = 'second_wind';
+      if (!c.nonviolent && !['starvation', 'hunger', 'disease', 'sickness'].includes(c.cause)) {
+        const needs = game.npcNeeds(vid); if (needs) needs.hunger = Math.min(needs.hunger || 0, 80); // 500 kcal floor, not +500
+      }
+      saveSurvivalUses(vid, uses);
+    } else return null;
+    const name = game.displayName ? game.displayName(vid) : vid;
+    const line = ability === 'molt' ? name + ' sheds their skin and stands whole, but loses all equipped gear. (Molt)'
+      : ability === 'second_wind' ? name + ' should be down — and refuses. Second wind: ' + hp + ' HP. (Second Wind)'
+        : name + ' should be down — the furnace burns 600 kcal and stands them up at ' + hp + ' HP. (Ember Heart)';
+    if (c.log) c.log.push(line); else game.say(line);
+    if (ability === 'ember_heart') game.tele('godpath_ember', { kcal: 600, who: vid });
+    else game.tele('godpath_verb', { ability, verb: ability === 'molt' ? 'shed' : 'refuse_death', who: vid, field: c.scene === 'field' });
+    recordDeathRefusal(vid, ability, c.scene);
+    return { hp, ability, shedGear };
+  }
   function fieldCheatDeath(G, c) {
     try {
-      if (!G || G.cheated || !(c.vHp <= 0)) return null;
-      if (!G.held.ember_heart) {
-        // SECOND WIND (refuse_death, once a day): drop to 1 HP instead.
-        if (!G.held.second_wind) return null;
-        const vp = (Game.state.village.npcSecondWind = Game.state.village.npcSecondWind || {});
-        const day = (Game.state.scholar || {}).day || 0;
-        if (vp[G.vid] === day) return null;
-        vp[G.vid] = day; G.cheated = true;
-        c.log.push(c.vName + ' should be down — and refuses. Second wind: 1 HP. (Second Wind)');
-        try { Game.tele && Game.tele('godpath_verb', { ability: 'second_wind', verb: 'refuse_death', who: G.vid, field: true }); } catch (e) { warn('tele sw', e); }
-        recordDeathRefusal(G.vid, 'second_wind', 'field');
-        return 1;
-      }
-      if (!vCanPay(G.vid, 600 * 0.6)) return null; // the body must have something to burn
+      if (!G || !(c.vHp <= 0)) return null;
+      const r = npcDeathRefusal(Game, G.vid, { hp: c.vHp, maxHp: c.vHpMax, emberAvailable: !G.used.ember_death,
+        raging: G.used.rage && G.nextMult === 2 && G.nextN > 0, scene: 'field', log: c.log });
+      if (!r) return null;
       G.cheated = true;
-      vPay(G.vid, 600);
-      const hp = Math.max(1, Math.ceil(c.vHpMax * 0.2));
-      c.log.push(c.vName + ' should be down — the furnace eats the blow and they stand back up at ' + hp + '. (Ember Heart)');
-      try { Game.tele && Game.tele('godpath_ember', { kcal: 600, who: G.vid }); } catch (e) { warn('tele ember v', e); }
-      if (G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
-      recordDeathRefusal(G.vid, 'ember_heart', 'field');
-      return hp;
+      if (r.ability === 'ember_heart') G.used.ember_death = 1;
+      if (r.shedGear) G.shedGear = true;
+      if (!r.held && G.held.back_from_the_brink) { G.nextMult = Math.max(G.nextMult || 0, 1.5); G.nextN = Math.max(G.nextN || 0, 3); c.log.push(c.vName + ' comes back ANGRY. (Back from the Brink)'); }
+      return r.hp;
     } catch (e) { warn('fieldCheatDeath', e); return null; }
   }
   // fieldAllyDown(G, c): Lifeline holds a falling ally at 1; Last Rites
@@ -1317,15 +1366,13 @@
   function allyWouldFall(game, t) {
     try {
       const f = game.tbfight; if (!f || !(t.hp <= 0)) return false;
-      // EMBER HEART on a villager (parity): their own furnace eats the blow.
-      if (t.villagerId && !t._emberUsed && game.npcHasAbility && game.npcHasAbility(t.villagerId, 'ember_heart') && vCanPay(t.villagerId, 360)) {
-        t._emberUsed = true;
-        vPay(t.villagerId, 600);
-        t.hp = Math.max(1, Math.ceil((t.maxHp || 10) * 0.2));
-        game.say(`${t.name} should be down. The furnace eats the blow and they stand back up at ${t.hp} HP. (Ember Heart)`);
-        try { game.tele && game.tele('godpath_ember', { kcal: 600, who: t.villagerId }); } catch (e) { warn('tele ember v', e); }
-        recordDeathRefusal(t.villagerId, 'ember_heart', 'battle');
-        if (game.npcHasAbility(t.villagerId, 'back_from_the_brink')) { t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' }; game.say(`${t.name} comes back ANGRY. (Back from the Brink)`); }
+      const saved = t.villagerId && npcDeathRefusal(game, t.villagerId, { hp: t.hp, maxHp: t.maxHp || 100,
+        emberAvailable: !t._emberUsed, raging: t._vRageRounds > 0, scene: 'battle' });
+      if (saved) {
+        t.hp = saved.hp;
+        if (saved.ability === 'ember_heart') t._emberUsed = true;
+        if (saved.shedGear) { t.wbonus = 0; t.varmor = 0; }
+        if (!saved.held && game.npcHasAbility(t.villagerId, 'back_from_the_brink')) t._nextStrikes = { mult: 1.5, n: 3, label: 'BACK FROM THE BRINK' };
         return true;
       }
       const hs = sideHolders(game, f, 'lifeline', t);
@@ -1521,6 +1568,7 @@
   if (typeof _md === 'function') {
     Game.maybeCheatDeath = function (cause) {
       const s = this.state.scholar;
+      if (s.health <= 0) syncPlayerSurvivalUses();
       let cheated = false, refusal = null;
       const fatal = s.health <= 0, windBefore = [s.secondWindDay, s.secondWindUses], moltBefore = [s.moltWeek, s.moltUses];
       try {
@@ -1541,6 +1589,7 @@
       if (cheated && s.health > 0) {
         if (!refusal && (s.secondWindDay !== windBefore[0] || s.secondWindUses !== windBefore[1])) refusal = 'second_wind';
         if (!refusal && (s.moltWeek !== moltBefore[0] || s.moltUses !== moltBefore[1])) refusal = 'molt';
+        if (fatal && refusal) { if (refusal !== 'ember_heart') saveSurvivalUses('player', survivalUses('player')); }
         if (fatal && refusal) recordDeathRefusal('player', refusal, this.tbfight && !this.tbfight.over ? 'battle' : 'world');
         try {
           if (this.hasAbility('back_from_the_brink')) {
@@ -1554,10 +1603,20 @@
     };
   }
 
+  // The voluntary shed action shares the same weekly use with the automatic
+  // death cheat, including a body that earned/spent it while still an NPC.
+  const _survivalUse = Game.useAbility;
+  Game.useAbility = function (abilityId) {
+    if (abilityId === 'molt') syncPlayerSurvivalUses();
+    const r = _survivalUse.apply(this, arguments);
+    if (r === true && abilityId === 'molt') saveSurvivalUses('player', survivalUses('player'));
+    return r;
+  };
+
   S.Godpath = {
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
     pathLean, shapeOffers, kitSheet, holderJobPaths, sheetRng, VERBS, registerVerbs, wardenWallAt,
-    allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
+    npcDeathRefusal, allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,
     villagerCast, villagerStrikeMult, absorbVillagerHit,
     fieldBegin, fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade, villagerPowerMult,
   };

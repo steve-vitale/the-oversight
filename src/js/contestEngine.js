@@ -377,7 +377,7 @@
         try { rec = this.fieldFight(pid, beast, null, { braveryBonus: opts.cheerBonus || 0, rng: R, noFlee: true }); }
         catch (e) { return { outcome: 'lost', detail: 'fight failed', log }; }
         log.push(`Wave ${w}: ${rec.log[rec.log.length - 1] || rec.outcome} (${rec.rounds} rounds, ${rec.vTaken} taken)`);
-        if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e) {} }
+        if (rec.vTaken > 0 || rec.healthSettlement) { try { this.settleFieldFight(pid, rec, 'contest'); } catch (e) {} }
         if (rec.outcome === 'vDie') return { outcome: 'died', detail: `killed on wave ${w} by ${beast.id}`, log };
         if (rec.outcome === 'vFlee') {
           // Sealed arena: the only vFlee is the judges' call at the round
@@ -617,7 +617,7 @@
               let rec = null;
               try { rec = this.fieldFight(pid, seeker, null, { rng: R }); } catch (e) {}
               if (rec) {
-                if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
+                if (rec.vTaken > 0 || rec.healthSettlement) { try { this.settleFieldFight(pid, rec, 'contest'); } catch (e2) {} }
                 if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'found and killed', log };
                 else if (rec.outcome === 'vKill') {
                   // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): the
@@ -643,7 +643,7 @@
           try { rec = this.fieldFight(pid, beast, null, { rng: R }); } catch (e) {}
           const st = stats[pid];
           if (!rec) { results[pid] = { outcome: 'lost', detail: 'no fight', log: [] }; continue; }
-          if (rec.vTaken > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest'); } catch (e2) {} }
+          if (rec.vTaken > 0 || rec.healthSettlement) { try { this.settleFieldFight(pid, rec, 'contest'); } catch (e2) {} }
           if (rec.outcome === 'vDie') results[pid] = { outcome: 'died', detail: 'the beast was not impressed', log: rec.log.slice(-2) };
           else if (rec.outcome === 'vKill' || rec.outcome === 'mFlee') {
             // VILLAGER XP LAW (longsim wave lever r2 2026-10-11): a real

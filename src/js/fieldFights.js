@@ -3,6 +3,7 @@
 // description: Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, real stats, the monster's real attack data — never an outcome table. (Steve 2026-10-08: "It should be a fight. A hard one.")
 // provides:
 //   - fieldFight(vid, mdef, m, opts)
+//   - settleFieldFight(vid, rec, cause) -> applies an NPC fight health result once; preserves gross damage for logs
 // rules:
 //   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
 //   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
@@ -217,6 +218,22 @@
         return null;
       } catch (e) { return null; }
     },
+    settleFieldFight: function (vid, rec, cause) {
+      const h = rec && rec.healthSettlement;
+      if (!h) return this.hurtVillager(vid, rec && rec.vTaken || 0, cause);
+      if (h.who !== vid || h.applied || !Number.isFinite(h.start) || !Number.isFinite(h.end)) return false;
+      const current = ((this.state.village.health || {})[vid]);
+      const hp = current == null ? 100 : current;
+      if (hp !== h.start && hp !== h.end) {
+        console.warn('[field-fights] refused stale health settlement for ' + vid);
+        return false;
+      }
+      h.applied = true;
+      const delta = hp - h.end;
+      if (delta) this.hurtVillager(vid, delta, cause);
+      return true;
+    },
+
     // fieldFight(vid, mdef, m, opts) -> record
     //   vid: villager id. mdef: monster definition (monsters.json).
     //   m: world-monster entity or null (ephemeral meeting). Wounds persist
@@ -276,6 +293,7 @@
       var vHpMax = 100;
       var vHp = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
       if (vHp > vHpMax) vHpMax = vHp;
+      var vHpStart = vHp;
       // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
       // a lie — villagers move at different paces. villagerSpeed derives
       // initiative from age, wounds, and temperament (2..4), on the same
@@ -945,7 +963,13 @@
           } catch (e) {}
         }
         if (vHp <= 0 && gpF) {
-          try { var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round })); if (_gpHp) { vHp = _gpHp; vAlive = true; } } catch (e) { console.warn('[godpath] cheat death', e); }
+          try {
+            var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round }));
+            if (_gpHp) {
+              vHp = _gpHp; vAlive = true;
+              if (gpF.shedGear) { if (wb > 0) holdBonus -= 0.08; wb = 0; varmor = gpF.armorAdd || 0; gpF.shedGear = false; }
+            }
+          } catch (e) { console.warn('[godpath] cheat death', e); }
         }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
@@ -1098,6 +1122,9 @@
       }
 
       rec.vHpLeft = Math.max(0, vHp);
+      // NPC callers apply the actual survivor, including in-fight healing.
+      // Keep vTaken as cumulative damage for tactics and truthful fight logs.
+      if (vid !== this.villagerId && vid !== 'player') rec.healthSettlement = { who: vid, start: vHpStart, end: rec.vHpLeft, applied: false };
       rec.mHpLeft = Math.max(0, members[0].hp);
       // wounds persist onto the world entity — part of the world, not RNG
       try { if (m && rec.outcome !== 'vKill') m.hp = rec.mHpLeft; } catch (e) {}

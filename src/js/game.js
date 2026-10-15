@@ -7096,7 +7096,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.removeWorldMonster(m);
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         if (!pViaAid) { try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
@@ -7120,7 +7120,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, pAllyVids); } catch (e) {}
         if (this.state.systemArrived) this.sysSay(`"OH! ${first.toUpperCase()} DID THE FIGHTING! Delegated violence! The audience is CHEERING! Style points!"`);
       } else if (rec.outcome === 'mFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].sort(() => Math.random() - 0.5);
         for (const d of dirs) {
           const nx = m.tx + d[0], ny = m.ty + d[1];
@@ -7133,7 +7133,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary} It's still out there, somewhere.`);
         this.bumpTrust(vid, 3);
       } else if (rec.outcome === 'vFlee') {
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         this.say(`⚔️ ${summary} — barely escaped. It's still out there.`);
         this.bumpTrust(vid, -2);
       } else if (rec.outcome === 'vDie') {
@@ -7146,7 +7146,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     // hurt a villager (non-player). Tracks health, handles death.
-    hurtVillager(vid, dmg, cause) {
+    hurtVillager(vid, dmg, cause, opts) {
       const v = this.state.village;
       v.health = v.health || {};
       // BREAK-IT abilities r4: the player has ONE health pool
@@ -7166,7 +7166,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // killed the Unkillable with no cheat attempt. Cause is violent
           // (contest/field damage), so the second_wind spite-ration keeps
           // its honest semantics.
-          try { if (!this.maybeCheatDeath()) this.playerDeath(cause || 'injuries'); } catch (e) {}
+          try { if (!this.maybeCheatDeath(opts && opts.nonviolent ? 'disease' : undefined)) this.playerDeath(cause || 'injuries'); } catch (e) {}
         }
         return;
       }
@@ -7179,6 +7179,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (cur <= 0) return;
       v.health[vid] = Math.max(0, cur - dmg);
       if (v.health[vid] <= 0) {
+        try {
+          const gp = (globalThis.Scattering || {}).Godpath;
+          const saved = gp && gp.npcDeathRefusal && gp.npcDeathRefusal(this, vid, { hp: v.health[vid], maxHp: Math.max(100, cur), cause,
+            nonviolent: !!(opts && opts.nonviolent), emberAvailable: false, scene: 'world' });
+          if (saved) { v.health[vid] = saved.hp; return; }
+        } catch (e) { console.warn('[godpath] world death refusal', e); }
         // LETHAL HURT IS DEATH (2026-10-08): no silent roster vanishes.
         // The individual gets a real death: corpse, gossip, dead mark.
         try {
@@ -18183,7 +18189,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // real wounds from the real fight — the win cost blood too.
         // (2026-10-08: these were silently dropped; villagers fought for
         // free and the gossip lied about wounds that never landed.)
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
@@ -18233,7 +18239,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.stampKillWitnesses) this.stampKillWitnesses(vid, mName, wAllyVids); } catch (e) {}
       } else if (rec.outcome === 'mFlee') {
         // standing it down still cost whatever the record says it cost
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].sort(() => Math.random() - 0.5);
         for (const d of dirs) {
           const nx = m.tx + d[0], ny = m.ty + d[1];
@@ -18247,7 +18253,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.bumpTrust(vid, 2, 'stood down a monster and walked home'); } catch (e) {}
       } else if (rec.outcome === 'vFlee') {
         // real wounds from the real fight — not a scaled table number
-        try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
+        try { this.settleFieldFight(vid, rec, 'monster'); } catch (e) {}
         tell(`🩸 ${summary}`);
       } else if (rec.outcome === 'vDie') {
         try { this.hurtVillager(vid, 500, 'monster'); } catch (e) {}
@@ -28319,7 +28325,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (sdid && sickName(s)) sickCause = sdid;
           else if (s && s.name && /food poisoning|bad belly|spoiled gut|poisoned/i.test(s.name)) sickCause = s.name;
         } catch (e) {}
-        try { this.hurtVillager(vid, sickDmg, sickCause); } catch (e) {}
+        try { this.hurtVillager(vid, sickDmg, sickCause, { nonviolent: true }); } catch (e) {}
         // DEAD IS DEAD (2026-10-08): hurtVillager now routes lethal sickness
         // through the real death pipeline. Clean up the sick record — no
         // "on the mend" for a corpse.
