@@ -574,6 +574,13 @@
       v.followers = (v.followers || []).filter(id => id !== vid);
       this._betrayAggressor = 'player';
       this._betrayVictimWasParty = wasParty || wasFollower;
+      // THE LEDGER (audit 2026-10-14): turning on someone who walked with
+      // you is a betrayal on the record — the Table's 'betrayed' signal
+      // (table.js tableBranch, ledger.js endingFrame) had no writer. Attacking
+      // a villager outside your party is assault, not betrayal: not counted.
+      if (wasParty || wasFollower) {
+        try { if (this.ledgerAdd) this.ledgerAdd('betrayed', 1); } catch (e) { console.warn('ledgerAdd betrayed failed', e); }
+      }
       this.startBetrayalCombat(vid, { aggressor: 'player' });
       return true;
     },

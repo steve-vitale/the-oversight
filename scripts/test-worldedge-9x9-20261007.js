@@ -8,23 +8,12 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-global.window = global;
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/convo-mood.js',
- 'src/js/convoTopics.js', 'src/js/convo-wants.js', 'src/js/convo-dialogue.js', 'src/js/convo-beats.js',
- 'src/js/examine.js', 'src/js/equipment.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/party-formal.js', 'src/js/truth.js', 'src/js/contests.js', 'src/js/storage.js',
- 'src/js/perceive.js', 'src/js/carexplore.js', 'src/js/justice.js', 'src/js/food.js',
- 'src/js/betrayal.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/ledger.js', 'src/js/villager-agency.js', 'src/js/codex-people.js',
- 'src/js/membership.js', 'src/js/hierarchy.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-delete global.window;
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 const says = [];
-const osay = Game.say.bind(Game);
-Game.say = (t) => { says.push(String(t)); return osay(t); };
 let fails = 0;
 function check(label, cond, extra) {
   console.log(`   ${cond ? 'PASS' : 'FAIL'} ${label}${extra ? ' — ' + extra : ''}`);
@@ -37,7 +26,9 @@ function hopTo(x, y) { // adjacent force-hops (bypass blockages) to reposition f
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261007), narration: true });
+  const osay = Game.say.bind(Game);
+  Game.say = (t) => { says.push(String(t)); return osay(t); };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -45,6 +36,10 @@ function hopTo(x, y) { // adjacent force-hops (bypass blockages) to reposition f
 
   // 1. THE bug: rim-walk east from node (7,4) must enter (8,4), not "world ends here"
   while (Game.map.px !== 7 || Game.map.py !== 4) hopTo(7, 4);
+  // Pin open ground at (8,4): a creek needing a bridge or a fallen tree on
+  // that approach is map luck (origins-world 2026-10-14 rerolled this seed's
+  // map) and is a different refusal from the world edge being tested.
+  { const t84 = Game.map.tiles[4][8]; delete t84.blockFrom; delete t84.needsBridge; }
   says.length = 0;
   Game.state.scholar.mx = 8; Game.state.scholar.my = 4;
   const r1 = Game.tryNodeExit(1, 0);

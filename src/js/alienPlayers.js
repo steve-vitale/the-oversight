@@ -134,6 +134,53 @@
   // "Pilot" = the alien wearing the human sleeve. They are PEOPLE, not monsters.
   var COMBAT_PILOTS = ['vex_marlowe', 'countess_sable', 'rax_dentist', 'pip_quindle', 'sarge', 'dr_fenwick', 'old_tam'];
 
+  // GALACTIC CAST STAGES 3-4 (audit 2026-10-14; handoff in
+  // evidence/2026-10-11/galactic-cast.md): the encounter system drives the
+  // cross-layer cast registry past stage 2. Only the five cast personae
+  // (CAST_PERSONAS) are tracked. KNOWLEDGE GATE: a stage-0 persona is never
+  // advanced by a fight with a stranger — castKnows() would then render a
+  // name the player never learned. They reach 3 when the player knows who
+  // they are (heard on the show, or the alien reveal).
+  function _castAdvance(self, pid, stage, why) {
+    try {
+      if (!self.advanceCastStage || !self.CAST_PERSONAS || self.CAST_PERSONAS.indexOf(pid) < 0) return;
+      var knows = (self.castKnows && self.castKnows(pid)) || (self.apKnowsAlien && self.apKnowsAlien(pid));
+      if (!knows) return;
+      self.advanceCastStage(pid, stage, why);
+    } catch (e) {
+      try { console.warn('[galactic-cast] advance failed', pid, stage, e && e.message); } catch (e2) { /* no console */ }
+    }
+  }
+  function _castFlag(self, pid, flag, val) {
+    try {
+      if (self.castFlag && self.CAST_PERSONAS && self.CAST_PERSONAS.indexOf(pid) >= 0) self.castFlag(pid, flag, val);
+    } catch (e) {
+      try { console.warn('[galactic-cast] flag failed', pid, flag, e && e.message); } catch (e2) { /* no console */ }
+    }
+  }
+
+  // CONTEST DETERMINISM (audit 2026-10-14): apContestInterference sits in
+  // the contest resolution path (verdict + the player's killing-blow check),
+  // which contestEngine promises is Math.random-free — same state, same
+  // fate; reloading replays it. Its rolls draw from the contest's own seed
+  // (_cxSeed: day, contest id, participants, stat snapshot) salted per roll,
+  // not Math.random. Math.random is only the fallback with no contest.
+  function _apContestDraw(self, ac, salt) {
+    try {
+      if (ac && typeof self._cxSeed === 'function') {
+        var pids = (ac.participants && ac.participants.length) ? ac.participants.slice() : [ac.participant];
+        var a = self._cxSeed(pids, { id: String(ac.contestId || ac.showId || '?') + '#ap:' + salt }) | 0;
+        a = (a + 0x6D2B79F5) | 0;
+        var t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }
+    } catch (e) {
+      try { console.warn('[alienPlayers] contest seed failed', e && e.message); } catch (e2) { /* no console */ }
+    }
+    return Math.random();
+  }
+
   var methods = {
     // ---------- state ----------
     apState: function () {
@@ -193,6 +240,8 @@
       }
       // CODEX (Steve 2026-10-08): the book catches up to the truth.
       try { this.apCodexEntry(pid); } catch (e) {}
+      // GALACTIC CAST: a revealed persona has been faced (stage 3).
+      _castAdvance(this, pid, 3, 'persona revealed');
     },
 
     // ---------- EXCLUSIVE POOL: human-impersonator encounters ----------
@@ -467,6 +516,8 @@
             try { delete this.state.alienEncounter; } catch (e2b) {}
             return false;
           }
+          // GALACTIC CAST: the fight began — the player FACES them (stage 3).
+          _castAdvance(this, pid, 3, 'alien encounter');
         } else {
           // Fallback: use the standard combat flow
           this.say('(The stranger raises their hands. This is going to hurt.)');
@@ -955,6 +1006,8 @@
       // time, so a refused start wasted it. Record on success only — and the
       // banter plays for a fight that actually begins, not a phantom one.
       try { this.apState().lastGroupDay = (this.state.scholar || {}).day || 1; } catch (e4) {}
+      // GALACTIC CAST: the whole circle is faced, not just the first in.
+      for (var gi = 0; gi < pids.length; gi++) _castAdvance(this, pids[gi], 3, 'alien encounter');
       this.apGroupBanter(pids);
       this.say('(The others are circling. They\'ll join the fight in turn.)');
       return true;
@@ -1089,6 +1142,19 @@
 
       ap.met[pid] = rec;
 
+      // GALACTIC CAST history flags + stage 4 (handoff vocabulary): fought
+      // always; killed / spared (won, persona broke and left alive) /
+      // beat_player. A decisive end (won or lost — not fled) makes them
+      // KNOWN (stage 4), knowledge-gated like stage 3.
+      _castFlag(this, pid, 'fought', day);
+      if (killed) _castFlag(this, pid, 'killed', day);
+      else if (outcome === 'won') _castFlag(this, pid, 'spared', day);
+      if (outcome === 'lost') _castFlag(this, pid, 'beat_player', day);
+      if (outcome === 'won' || outcome === 'lost') {
+        _castAdvance(this, pid, 3, 'alien encounter');
+        _castAdvance(this, pid, 4, outcome === 'won' ? 'faced and survived' : 'faced and fell');
+      }
+
       // CODEX (Steve 2026-10-08): every encounter is discoverable truth.
       // Knowledge-gated inside apCodexEntry — pre-reveal the entry reads
       // as the human persona, never the alien truth.
@@ -1207,9 +1273,14 @@
       var items = [];
       try { items = this.data.items || []; } catch (e) {}
       var t = tier || 1;
+      // FUSION SINGULARITY (Steve 2026-10-12): once the world's reactor is
+      // taken, no new installable pellet is handed out (same rule as
+      // game.js rollAlienLoot). This path had no filter (diagnosis 2026-10-15).
+      var taken = !!(this.state && this.state.fusionReactorHolder);
       var cands = items.filter(function (it) {
         return it.origin === 'alien' && (it.tier || 1) <= t
-          && !it.kcalEach && it.class !== 'food';
+          && !it.kcalEach && it.class !== 'food'
+          && !(taken && it.id === 'fusion_pellet');
       });
       if (!cands.length) return null;
       return cands[Math.floor(Math.random() * cands.length)];
@@ -1515,7 +1586,7 @@
         if (ap.met[pid].encounters < 2) continue; // needs a real rivalry
         if (this.apIsDead(pid)) continue; // the dead rig nothing (break-it r12)
         if (day - (ap.lastRigDay || -999) < 5) continue; // LIMIT: max 1 rig per 5 days
-        if (Math.random() < 0.35) {
+        if (_apContestDraw(this, ac, 'rig:' + pid) < 0.35) {
           ap.lastRigDay = day;
           result.winMod -= 0.12;
           result.note = '📺 ' + per.name + ' is in the judging booth. They\'re smiling. That\'s never good.';
@@ -1549,7 +1620,7 @@
           if ((ap.met[pid2].bond || 0) < 2) continue;
           if (this.apIsDead(pid2)) continue; // the dead save no one (break-it r12)
           if (day - (ap.lastLifelineDay || -999) < 7) continue; // LIMIT: max 1 per week
-          if (Math.random() < 0.4) {
+          if (_apContestDraw(this, ac, 'lifeline:' + pid2) < 0.4) {
             ap.lastLifelineDay = day;
             result.deathSave = true;
             result.note = '📺 Somewhere in the control room, a feed cuts to static for exactly three seconds. When it returns, the killing blow... misses. No one can explain it.';
@@ -2593,7 +2664,9 @@
 
     // ============ ALIEN ARMOR TRANSITION (Steve 2026-10-07) ============
     // Alien beam weapons vs human armor = nearly instant lethal.
-    // Alien armor OR sufficiently bonded sentimental gear = resistant.
+    // Alien armor = resistant. (2026-10-14, Steve: the old 'bonded sentimental
+    // vest blocks beams' line "was never a rule" — removed; no keepsake has
+    // armor in data, so it never fired.)
     // Until you have a full set, every alien encounter is tremendous risk.
     //
     // The three concepts stay separate:
@@ -2603,17 +2676,11 @@
     // Beam resistance is its own axis. It doesn't care about waves or tiers.
 
     // apBeamResistPieces: count beam-resistant pieces the player is wearing.
-    // GEAR SLOTS (Steve 2026-10-07): sentimental gear must be EQUIPPED in an
-    // armor slot to count. Sitting in inventory does nothing — out of sight,
-    // out of mind. Weapons and accessories never count (a knife doesn't block
-    // beams — but a bonded sentimental VEST does).
-    // Two sources:
-    // 1. Alien armor (armor.beamResist:true in items.json) — grown, not made.
-    // 2. Sentimental armor with bond >= 25, EQUIPPED in head/torso/legs/hands/shoes.
-    //    Your love for it creates resonance that deflects beam weapons.
-    //    (Bond 10 reveals the keepsake; 25 is deep.)
+    // One source: alien armor (armor.beamResist:true in items.json) — grown,
+    // not made — EQUIPPED in head/torso/legs/hands/shoes. Weapons and
+    // accessories never count.
     // Full-body sets count per covered slot (head+torso+legs+shoes = 4).
-    // Returns array of {slot, itemId, source:'alien'|'bonded'}.
+    // Returns array of {slot, itemId, source:'alien'}.
     apBeamResistPieces: function () {
       var pieces = [];
       try {
@@ -2652,12 +2719,6 @@
               pieces.push({ slot: slot, itemId: itemId, source: 'alien' });
             }
             continue;
-          }
-          // Source 2: sufficiently bonded sentimental ARMOR, equipped.
-          // Weapons don't block beams. Accessories don't block beams.
-          // A bonded vest does. (Steve 2026-10-07: knife is a bad example.)
-          if (def.class === 'sentimental' && def.armor && (item.bond || 0) >= 25) {
-            pieces.push({ slot: slot, itemId: itemId, source: 'bonded' });
           }
         }
       } catch (e) {}
@@ -2792,22 +2853,17 @@
           this.say('🔆 ' + who + ' ' + final + ' beam damage' + (n > 0 ? ' (' + n + ' resistant ' + (n === 1 ? 'piece' : 'pieces') + ' absorbing)' : ' (no resistance)') + ' — ' + sourceLabel + '.');
           if (t.hp <= 0) {
             t.alive = false;
-            try { this.tbKill(t, sourceLabel); } catch (e) {}
-          }
-        }
-      } catch (e) {}
-      // SENTIMENTAL BOND (Steve 2026-10-07): surviving a beam hit while wearing
-      // bonded sentimental armor is a meaningful moment — the bond deepens.
-      // HONEST (break-it 2026-10-09): this.bumpBond never existed — the
-      // guarded call was dead and the bond never moved. Bump inline, on the
-      // actual equipped piece (same +3 the victory path uses in game.js).
-      try {
-        if (targetKey === 'player' && n > 0) {
-          var eq2 = (this.state.scholar || {}).equipped || {};
-          for (var bi = 0; bi < pieces.length; bi++) {
-            if (pieces[bi].source !== 'bonded') continue;
-            var bitem = eq2[pieces[bi].slot];
-            if (bitem) bitem.bond = (bitem.bond || 0) + 3;
+            // DEATH PROCESSING (sim audit 2026-10-14): this called this.tbKill,
+            // which never existed — beam deaths skipped the fall + death record
+            // (swallowed in every run that had one). Mirror tbDamage's branches.
+            try {
+              if (t.kind === 'player') this.say('You go down.');
+              else if (t.kind === 'villager' || (t.kind === 'ally' && t.villageId === 'haven' && t.villagerId)) {
+                this.say('☠ ' + t.name + ' falls.');
+                this.tbVillagerFalls(t);
+                this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'alien_beam', witnesses: this.fightWitnesses ? this.fightWitnesses(t.villagerId) : [] });
+              }
+            } catch (e) { console.warn('apBeamHit death', e && e.message); }
           }
         }
       } catch (e) {}
@@ -3085,7 +3141,7 @@
     };
 
     // 2. BEAM DAMAGE INTERCEPT: alien_beam damage type bypasses normal armor.
-    // Only beam-resistant gear (alien armor, bonded sentimental) reduces it.
+    // Only beam-resistant gear (alien armor) reduces it.
     // VETERAN PLATE (break-it 2026-10-08): Sarge's tech "reduces all damage
     // by 2" was pure copy — no reduction existed in the damage path. Applied
     // here, on the target fighter's alien tech (base or upgraded id).

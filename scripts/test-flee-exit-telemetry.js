@@ -66,8 +66,13 @@ function stageQuickKill(Game) {
   const p = Game.tbFighter('p');
   const m = f.fighters.find(x => x && x.kind === 'monster' && (x.hp || 0) > 0);
   if (p && m) {
-    m.mx = Math.max(0, Math.min(8, (p.mx || 4) + 1));
-    m.my = Math.max(0, Math.min(8, p.my || 4));
+    // (region engine 2026-10-14) `p.mx || 4` read a player on column 0 as
+    // column 4, staging the turtle 5 cells away — the strike was out of
+    // reach and the turtle came apart ('routed'). Upstream RNG drift put
+    // the player on column 0. Use the real column; step inward at the edge.
+    const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+    m.mx = px < 8 ? px + 1 : px - 1;
+    m.my = Math.max(0, Math.min(8, py));
     m.hp = 1;
   }
 }

@@ -166,6 +166,21 @@
       // at the kill site (monsterDown/deathAudio); this is for people.
       if (opts.kind === 'person' || opts.kind === 'villager') {
         try { this.audioEvent('villagerDeath'); } catch (e) {}
+        // UNIFIED TRACKS (2026-10-14): a death in the family is System
+        // contact — the strange track. PARITY (Steve 2026-10-14: "Yes any
+        // death for strange path"): every living member of the village gets
+        // the same deed, the player and each villager alike (per-day cap per
+        // doer). The bearer's own death credits the villagers; the successor
+        // also gets the mantle deed.
+        try {
+          if (opts.villagerId && this.creditDeed) {
+            if (!opts.player && opts.villagerId !== this.villagerId) this.creditDeed('player', 'death_in_family');
+            for (const rid of (((this.state.village || {}).roster) || []).slice()) {
+              if (rid === opts.villagerId || rid === this.villagerId) continue;
+              this.creditDeed(rid, 'death_in_family');
+            }
+          }
+        } catch (eT) { console.warn('[tracks] death deed', eT); }
       }
       // SIM TELEMETRY (2026-10-09): THE death hook — cause-of-death analysis
       // across world runs. kind covers person/monster/animal; wave for monsters.
@@ -266,8 +281,8 @@
       return corpse;
     },
 
-    // possessions: what the dead carried. Practical things + one keepsake.
-    // The keepsake is flavor you can take or leave — taking it costs extra.
+    // possessions: what the dead carried. Monsters/animals: generic pools.
+    // Sapient dead: their own non-sentimental gear (sentimentals die with them).
     generatePossessions(opts) {
       opts = opts || {};
       if (opts.items) return opts.items;
@@ -351,13 +366,6 @@
         { name: 'Bandages', kg: 0.2, note: 'Clean. They were careful.' },
         { name: 'Work gloves', kg: 0.3, note: 'Broken in.' },
       ];
-      const keepsakes = [
-        'A creased photograph, faces smiling',
-        'A letter, unsent, in careful handwriting',
-        'A wedding ring, worn thin',
-        "A child's drawing of a house",
-        'A smooth stone, pocket-worn',
-      ];
       const shuffled = practical.slice().sort(() => R() - 0.5);
       const n = 2 + Math.floor(R() * 2);
       for (let i = 0; i < n && i < shuffled.length; i++) {
@@ -368,7 +376,6 @@
         const cd0 = ((this.state || {}).scholar || {}).day || 0;
         items.push({ plantId: 'effect_' + i, name: p.name, units: p.units || 1, kg: p.kg, kcalEach: p.kcalEach || 0, spoilDay: (p.kcalEach || 0) > 0 ? cd0 + (p.spoilDays || 30) : 9999, prep: p.note });
       }
-      items.push({ plantId: 'keepsake', name: keepsakes[Math.floor(R() * keepsakes.length)], units: 1, kg: 0.1, kcalEach: 0, spoilDay: 9999, keepsake: true, prep: 'Not useful. Not yours. Take it or leave it with them.' });
       return items;
     },
 

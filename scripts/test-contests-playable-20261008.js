@@ -125,7 +125,7 @@ note('2. PLAYER BLOOD — pit plays as a real tactical fight');
   const r0 = Game.contestChoose(0);
   const hasSpear = (Game.state.scholar.inventory || []).some(i => i.itemId === 'hunting_spear');
   ok('weapon choice grants a real spear item', hasSpear);
-  ok('spear is equipped', (Game.state.scholar.equipped || {}).weapon?.itemId === 'hunting_spear');
+  ok('spear is equipped', Game.equippedWeapon().itemId === 'hunting_spear');
   // Choice 0 on phase 1: enter the pit (arena).
   const ac = Game.state.activeContest;
   ac.phaseIdx = 1;
@@ -164,16 +164,29 @@ note('3. VILLAGER BLOOD — duel is fought, not tabled');
   const contest = Game.contestPool().find(c => c.id === 'duel') || { id: 'duel', category: 'blood', risk: 'high', name: 'Duel' };
   // Duel is head-to-head — resolve via the group (single-pid returns
   // 'duel needs a partner' by design).
-  const r1 = Game.contestResolveGroup([a, b], contest, {})[a];
+  const g1 = Game.contestResolveGroup([a, b], contest, {});
+  const r1 = g1[a];
   ok('duel resolves to won/lost/died', ['won', 'lost', 'died'].includes(r1.outcome), r1.outcome);
-  ok('duel produces a fight log', (r1.log || []).length > 0);
+  // The fight log rides on the winner's record (the yielder's is empty by
+  // design, contestEngine contestResolveGroup) — check the duel, not side A.
+  ok('duel produces a fight log', ((g1[a] || {}).log || []).length + ((g1[b] || {}).log || []).length > 0);
   // Strong beats weak: run group duel, strong should win more often.
   const wins = { [a]: 0, [b]: 0 };
+  // duelFight self-seeds from the duelists + the DAY (contestEngine
+  // _cxSeed), so reseeding Math.random alone replays one identical duel 20
+  // times. Vary the day: 20 genuinely different duels (region engine
+  // 2026-10-14: upstream RNG drift flipped the single replayed duel).
+  const day0 = Game.state.scholar.day;
   for (let i = 0; i < 20; i++) {
     Math.random = mulberry32(SEED + i);
+    Game.state.scholar.day = day0 + i;
+    // Each duel hurts both (hurtVillager): restore full health so every run
+    // compares strong vs weak at equal health, not whoever bled less so far.
+    v.health = v.health || {}; v.health[a] = 100; v.health[b] = 100;
     const g = Game.contestResolveGroup([a, b], contest, {});
     for (const pid of [a, b]) if (g[pid] && g[pid].outcome === 'won') wins[pid]++;
   }
+  Game.state.scholar.day = day0;
   Math.random = mulberry32(SEED);
   note(`   duel 20 runs: strong(A) wins ${wins[a]}, weak(B) wins ${wins[b]}`);
   ok('strong villager wins more duels than weak', wins[a] > wins[b]);

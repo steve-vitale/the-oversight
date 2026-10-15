@@ -2,12 +2,11 @@
 // system: progression
 // description: Character progression. XP, levels, abilities.
 // provides:
-//   - abilitySlots()
-//   - accrueRelicBond(item)
 //   - integrationStage()
 //   - checkTrial(id)
 //   - completeTrial(id)
 //   - _synergyGiftPick(cands, owned)
+//   - trialLessonSkill() -> the audience trial's lesson: an unknown skill (no magic gift; unified tracks 2026-10-14)
 //   - progState()
 //   - fireCrisis(kind, ctx)
 //   - progDaily()
@@ -31,6 +30,8 @@
 // consumes:
 //   - scholar.xp
 //   - scholar.abilities
+//   - abilitySlots() (game.js)
+//   - accrueRelicBond(item) (game.js)
 // ============ PROGRESSION, ARCS & SENTIMENTAL ITEMS ============
 // Built on the lifeseed foundation (lifeseed.js). Steve's design (2026-10-04):
 //
@@ -265,7 +266,7 @@
       try {
         const ready = this.channelReadyKeepsakes ? this.channelReadyKeepsakes() : [];
         if (ready.length) {
-          const item = (this.state.scholar.inventory || [])[ready[0]];
+          const item = this.keepsakeAtRef(ready[0]);
           const nm = (item && (item.name || '')) || 'it';
           this.say(`SYSTEM: "DEMONSTRATION. Give me that — ${nm}. WATCH."`);
           this.channelSentiment(ready[0]);
@@ -274,8 +275,12 @@
     },
     sentimentTaught() { return !!(this.progState && this.progState().sentimentTaught); },
 
-    // channelReadyKeepsakes: inventory indices of keepsakes not yet channeled
-    // today. One source for the demo, the trauma nudge, and the button state.
+    // channelReadyKeepsakes: refs of keepsakes not yet channeled today —
+    // pack inventory indices first, then worn accessory slot keys
+    // ('acc1'..'acc4'). One source for the demo, the trauma nudge, and the
+    // button state. KEEPSAKE GROWTH (Steve 2026-10-14): channeling reads
+    // worn OR pack — spending a keepsake's day is about holding it, not
+    // where it sits; growth is what needs it worn.
     channelReadyKeepsakes() {
       try {
         const s = this.state.scholar, pg = this.progState();
@@ -286,8 +291,21 @@
           const key = it.itemId || it.id;
           if (!((pg.chanDay[key] || {})[day])) out.push(idx);
         });
+        for (const sl of ['acc1', 'acc2', 'acc3', 'acc4']) {
+          const it = (s.equipped || {})[sl];
+          if (!it || !this.isKeepsake(it)) continue;
+          const key = it.itemId || it.id;
+          if (!((pg.chanDay[key] || {})[day])) out.push(sl);
+        }
         return out;
       } catch (e) { return []; }
+    },
+    // keepsakeAtRef(ref): a channel ref -> the keepsake instance. A number
+    // is a pack index; 'acc1'..'acc4' is a worn accessory slot.
+    keepsakeAtRef(ref) {
+      const s = this.state.scholar || {};
+      if (typeof ref === 'string' && /^acc[1-4]$/.test(ref)) return (s.equipped || {})[ref] || null;
+      return (s.inventory || [])[ref] || null;
     },
 
     // channelLabel: honest button copy. Mirrors channelSentiment's branch
@@ -323,7 +341,7 @@
     // feast. Once per item per day. Chosen keepsakes and deep grief hit harder.
     channelSentiment(idx) {
       const s = this.state.scholar, pg = this.progState();
-      const item = (s.inventory || [])[idx];
+      const item = this.keepsakeAtRef(idx);
       if (!item || !this.isKeepsake(item)) return 'Not a keepsake.';
       if (!pg.sentimentTaught) return 'You hold it. Nothing happens. Not yet.';
       const day = s.day;
@@ -405,8 +423,18 @@
     // This is worldbuilding, not flavor text.
     playFlashback(item, def) {
       const s = this.state.scholar;
-      const char = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
-      const holder = char.lifeseed ? char : { name: char.name || 'you', lifeseed: null };
+      // The holder is whose memory it is: the keepsake's owner (the player's
+      // own for their own keepsakes), else the player. Hydrated survivors
+      // (successors) are born without a seed and may carry only a { lived }
+      // stub — ensurePersonLifeseed gives them a real one, so the memory
+      // resolves against THEIR people and places.
+      const holderId = item.owner || this.villagerId;
+      const char = (this.data.villagers || []).find(v => v.id === holderId) || {};
+      const ls0 = char.lifeseed;
+      if (char.id && !(ls0 && Array.isArray(ls0.people) && Array.isArray(ls0.places)) && this.ensurePersonLifeseed) {
+        this.ensurePersonLifeseed(char.id);
+      }
+      const holder = (char.lifeseed && Array.isArray(char.lifeseed.people)) ? char : { name: char.name || 'you', lifeseed: null };
       // keepsakes of the dead carry their own provenance — resolved against
       // THEIR lifeseed at the moment of taking, not the player's. Grief as fuel.
       const memory = (item.memoryOf && item.keepsakeMemory)
@@ -584,7 +612,16 @@
       // contests, crises) stay. `scale` is still reported honestly in the
       // breakdown for beat text and tests.
       const scale = rank === 'national' || rank === 'global';
-      return { ok: !!(waves && contests && crises), waves, contests, crises, scale, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
+      // SUPERSET (audit 2026-10-14): the full seat also carries the lesser
+      // seat's integration-stage (>=2) and food-thesis bars (tableSeat,
+      // table.js) — a full seat must never be easier than the lesser one on
+      // those. Scale is NOT added here (open design question).
+      let stage = 0;
+      try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
+      const s = this.state.scholar || {};
+      const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
+      const stageOk = stage >= 2;
+      return { ok: !!(waves && contests && crises && stageOk && foodDeeds), waves, contests, crises, scale, stageOk, foodDeeds, stage, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
     },
     checkArc() {
       const pg = this.progState(), s = this.state.scholar;
@@ -638,7 +675,14 @@
       // aloud, never silently.
       if (pg.arc >= 4 && !pg.tableWaiting && !pg.tableDone && (seatNow === 'full' || seatNow === 'lesser')) {
         pg.tableWaiting = true;
-        this.say('The table is being set. They are watching to see who comes to it.');
+        // NO SPOILERS (Steve 2026-10-14): the table is never named before the
+        // seat can be taken (day 90). From then, the same seat-honest text as
+        // arcBeat(4); tableAnnounce won't repeat it.
+        if (this.winDayFloorOk && this.winDayFloorOk()) {
+          pg.tableAnnounced = true;
+          if (seatNow === 'full') this.say('The table is being set. They are watching to see who comes to it.');
+          else this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+        }
       }
       if (want > pg.arc) {
         pg.arc = want;
@@ -681,16 +725,21 @@
           // five waves; the lesser-seat text names only waves 1-3 (the ones
           // the run actually faced). Claiming the Mirror Draft and the
           // Producers on a lesser run would be a lie the audit would catch.
-          if (seat4 === 'full') {
-            this.say('The table is being set. They are watching to see who comes to it.');
-          } else {
-            this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+          // NO SPOILERS (Steve 2026-10-14): silent before day 90 — the
+          // table is announced by tableAnnounce once the seat can be taken.
+          if (this.winDayFloorOk && this.winDayFloorOk()) {
+            this.progState().tableAnnounced = true;
+            if (seat4 === 'full') {
+              this.say('The table is being set. They are watching to see who comes to it.');
+            } else {
+              this.say('The table is being set — a lesser seat, priced for what you built. They are watching to see who comes to it.');
+            }
           }
         } catch (e) {}
         if (seat4 === 'full') {
-          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You fought every draft they threw at you — the calibration fauna, the audience's notes, the Final Draft, the Mirror Draft, the Producers themselves — lived through their Show, weathered the worst together, and built something bigger than a village. One day humanity will need a case to make. The case is made of deeds, not words — and yours are done. (Feasted buffs burn hotter from here.)`);
         } else {
-          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You stood up to the calibration fauna, the audience's notes, the Final Draft — lived through their Show, weathered the worst together, and built something bigger than a village. One day there will be a table, and humanity will need a case to make. The case is made of deeds, not words — and yours, though unfinished, are undeniable. (Feasted buffs burn hotter from here.)`);
+          this.say(`◈ ARC IV — THE INEFFICIENCY. SYSTEM: "ROUNDING ERROR RECLASSIFIED: ANOMALY. Organic consumption yields impossible output. Recalculating. Recalculating." — They finally see it. The thing they laughed at — needing to EAT — is the engine. Their confusion is your weapon now. You stood up to the calibration fauna, the audience's notes, the Final Draft — lived through their Show, weathered the worst together, and built something bigger than a village. One day humanity will need a case to make. The case is made of deeds, not words — and yours, though unfinished, are undeniable. (Feasted buffs burn hotter from here.)`);
         }
         try { this.state.scholar.arc4burn = 1.25; } catch (e) {}
       }
@@ -747,7 +796,7 @@
         : reason === 'audience'
           ? 'SYSTEM: "The audience wants an encore. A trial, then — smaller this time, but televised."'
           : 'SYSTEM: "A trial, broadcast live. The audience loves a trial."';
-      this.say(`◈ AUDIENCE TRIAL — ${why} ${t.text} Reward: integration, and a gift.`);
+      this.say(`◈ AUDIENCE TRIAL — ${why} ${t.text} Reward: integration, and a lesson.`);
       try { this.save(); } catch (e) {}
     },
     // AUDIENCE ENCORE (pacing build 2026-10-10): post-40 the audience keeps
@@ -801,44 +850,38 @@
       // the old rhythm — the audience's disappointment has a half-life.
       pg.trial = null; pg.trialCd = (s.day || 0) + 4;
       this.integrate(15, 'audience trial');
-      // the gift: a System ability, if there's room
-      // (break-it abilities 2026-10-09: the old filter was `a.system` — a
-      // schema flag that exists on ZERO abilities, so the promised gift was
-      // dead from birth. System abilities are unlock.type === 'system_offer'.)
+      // THE LESSON (unified tracks 2026-10-14, Steve: "Things acquired from
+      // events and other meaningful experiences, knowledge learned etc should
+      // be typically ending up in skills"): the trial no longer gifts a magic
+      // ability — powers come from track level-ups. It TEACHES one skill you
+      // don't know (preferring one that carries an ability), and the trial
+      // itself is System contact: the strange track.
       let gift = null;
       try {
-        const owned = new Set((s.abilities || []).map(a => a.id));
-        const cands = (this.data.abilities || []).filter(a => !owned.has(a.id) && a.unlock && a.unlock.type === 'system_offer'
-          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world —
-          // never gifted when it's taken.
-          && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
-        if (cands.length && (s.abilities || []).length < this.abilitySlots()) {
-          // SYNERGY-AWARE GIFT (util audit 2026-10-10): synergy discovery was
-          // dead (1/120 runs) because grants never completed held legs — the
-          // pairs were never held. If a candidate completes a synergy with a
-          // leg the scholar holds (or has teased), the System notices the
-          // shape of the build and offers that one. Still a gift, not a menu.
-          const def = this._synergyGiftPick(cands, owned) || pick(cands);
-          s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
-          gift = def.name;
-          // BREAK-IT abilities r5: a System gift is still an acquisition --
-          // priced abilities pay their documented costs (chitin_skin /
-          // fear_aura trust, hive_mind's map reveal), whichever path grants
-          // them. The trial used to skip abilityOnAcquire entirely.
-          try { this.abilityOnAcquire(def.id); } catch (e3) {}
-          // BREAK-IT abilities 2026-10-10 (sibling sweep): a granted ability
-          // can complete a synergy's legs — recompute, like every other
-          // grant path (chooseAbility, pact, gainAbilityXP level-up).
-          try { this.recomputeActiveSynergies(); } catch (e) {}
-          // GODHOOD REWORK (Steve 2026-10-13): a gift can complete a build.
-          try { this.checkPlayerGodhoodAscension(); } catch (e2) {}
+        const lesson = this.trialLessonSkill();
+        if (lesson && this.learnSkill(lesson.id, 1, 'trial')) {
+          gift = 'a lesson: ' + lesson.name;
+          try { this.tele('skill_taught', { id: lesson.id, via: 'audience_trial' }); } catch (eT) { console.warn('[tracks] tele', eT); }
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[tracks] trial lesson', e); }
+      try { this.noteDeed && this.noteDeed('audience_trial'); } catch (e) { console.warn('[tracks] trial deed', e); }
       try { if (this.ledgerAdd) this.ledgerAdd('showmanship', 3); } catch (e) {}
       try { if (this.recordMoment && t) this.recordMoment(`Survived the audience's trial: ${t.text}.`); } catch (e) {}
       const luck = (pg.flags || {}).quiet_luck ? ' Quiet luck was with you.' : '';
       this.say(`◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration${gift ? `, gift: ${gift}` : ''})${luck}`);
       try { this.save(); } catch (e) {}
+    },
+
+    // trialLessonSkill(): the audience trial's lesson — an unknown skill,
+    // preferring one that carries an ability (lane 'skill' in abilities.json).
+    trialLessonSkill() {
+      const known = ((this.state.codex || {}).skills) || {};
+      const all = (this.data.knowledge || []).filter(k => k && k.id && !((known[k.id] || {}).level >= 1));
+      if (!all.length) return null;
+      const carriers = new Set((this.data.abilities || []).filter(a => a && a.lane === 'skill').map(a => a.skillId || a.id));
+      const pool = all.filter(k => carriers.has(k.id));
+      const from = pool.length ? pool : all;
+      return from[Math.floor(Math.random() * from.length)];
     },
 
     // _synergyGiftPick(cands, owned): prefer a trial gift that completes a
@@ -864,7 +907,6 @@
             const day = ((this.state || {}).scholar || {}).day || (this.state || {}).day || 0;
             let bestClose = null, bestKit = 2;
             for (const gh of S.Godhood.godhoods()) {
-              if (gh.id === 'voice_of_the_relay') continue;
               if ((sch.godhood || {}).recognized && sch.godhood.recognized[gh.id]) continue;
               const cl = S.Godhood.godhoodCloseness(sch, gh, day);
               if (!cl.complete && cl.kit >= bestKit) { bestKit = cl.kit; bestClose = gh; }
@@ -976,19 +1018,9 @@
 
   // ============ WRAPS (chain-safe) ============
   (function attach() {
-    // abilitySlots: 20->2, 35->3, 50->4, 65->5, 80->6. (pacing build
-    // 2026-10-10: pure granularity — measured play sat at integ ~35-53 with 1
-    // ability and 3 slots, so synergies were 0/240. No cap lowered.)
-    const _abilitySlots = Game.abilitySlots;
-    Game.abilitySlots = function () {
-      const integ = this.state.scholar.integration || 5;
-      if (integ >= 80) return 6;
-      if (integ >= 65) return 5;
-      if (integ >= 50) return 4;
-      if (integ >= 35) return 3;
-      if (integ >= 20) return 2;
-      return _abilitySlots ? 1 : 1;
-    };
+    // abilitySlots: the ladder lives in game.js only (20->2, 35->3, 50->4,
+    // 65->5, 80->6). The identical duplicate wrap that stood here was
+    // deleted 2026-10-14 — one ladder, one place to tune it.
 
     // integrate: fire slot moments + stage beats on threshold crossing.
     // Pre-arrival moments queue — the System can't speak before it exists.
@@ -1029,7 +1061,12 @@
     Game.offerRelicEnhancement = function (item, threshold) {
       try {
         const def = this.itemDef ? this.itemDef(item) : ((this.data.items || []).find(i => i.id === (item.itemId || item.id)) || {});
-        if (def.class === 'sentimental' && def.memory) this.playFlashback(item, def);
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the memory opens once (at L1,
+        // keepsakes.js); the L3 offer only replays it if it never played.
+        if (def.class === 'sentimental' && def.memory && !item.flashbackPlayed) {
+          item.flashbackPlayed = true;
+          this.playFlashback(item, def);
+        }
       } catch (e) {}
       return _offer ? _offer.call(this, item, threshold) : undefined;
     };
@@ -1040,8 +1077,10 @@
     Game.accrueRelicBond = function () {
       const r = _accrue ? _accrue.call(this) : undefined;
       try {
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the chosen bonus also needs
+        // the keepsake worn (keepsakeGrow is the worn-only gate).
         for (const it of this.relicItems()) {
-          if (it.chosen && this.isKeepsake(it)) it.bond = (it.bond || 0) + 1;
+          if (it.chosen && this.isKeepsake(it) && this.keepsakeGrow) this.keepsakeGrow(it, 1, 'chosen');
         }
       } catch (e) {}
       return r;
@@ -1067,47 +1106,6 @@
     // marks on first real combat use of the buff, not on the burn.
     // The old wrapper is deleted, not wrapped — nothing calls feastBurn
     // anymore (food.js keeps a deprecated stub for old scripts).
-
-    // lootCorpse: taken keepsakes become bonded sentimental items with a memory
-    // of the dead — grief as fuel, handled with care.
-    //
-    // Corpse keepsakes are generated ad-hoc (plantId 'keepsake', an evocative
-    // name, no itemId), so bond could never accrue and flashbacks could never
-    // fire. Here we adopt them into the sentimental family: map the evocative
-    // name onto the closest sentimental def so the itemId exists, bond accrues
-    // daily, thresholds fire, and the flashback plays the dead friend's own
-    // provenance (keepsakeMemory) — not the def's memory.
-    const CORPSE_KEEPSAKE_DEFS = {
-      'A creased photograph, faces smiling': 'photo_album',
-      'A letter, unsent, in careful handwriting': 'notebook',
-      'A wedding ring, worn thin': 'wedding_ring',
-      "A child's drawing of a house": 'daughters_drawing',
-      'A smooth stone, pocket-worn': 'lucky_coin',
-    };
-    const _loot = Game.lootCorpse;
-    Game.lootCorpse = function (id, takeAll) {
-      const r = _loot ? _loot.call(this, id, takeAll) : undefined;
-      try {
-        const s = this.state.scholar;
-        const corpse = (this.state.corpses || []).find(c => c.id === id);
-        const dead = corpse && (this.data.villagers || []).find(v => v.id === corpse.villagerId);
-        for (const it of (s.inventory || [])) {
-          if (it.keepsake && !it.sentimental) {
-            it.sentimental = true; it.bonded = true; it.bond = it.bond || 0;
-            if (corpse) it.memoryOf = corpse.villagerId;
-            const def = (this.data.items || []).find(i => i.id === (CORPSE_KEEPSAKE_DEFS[it.name] || 'lucky_coin'));
-            if (def) it.itemId = def.id;
-            if (dead && this.resolveKeepsakeText) {
-              const holder = { name: dead.name, lifeseed: dead.lifeseed };
-              it.keepsakeMemory = this.resolveKeepsakeText(holder,
-                { kin: 'none' },
-                `${dead.name.split(' ')[0]} carried this on purpose. That is the whole provenance, and it is enough.`);
-            }
-          }
-        }
-      } catch (e) {}
-      return r;
-    };
 
     // newGame: the gear pick is the gamble. Picked keepsakes are marked CHOSEN —
     // the opening asks the player to trust the game, and the game remembers.

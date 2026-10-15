@@ -323,7 +323,7 @@ function ambushRun(label, policy, maxRounds) {
   const tells = plot.tells || [];
   note(`   tells noticed: ${tells.length} (perception-gated: observant earn more)`);
   for (const t of tells) note(`     · ${trunc(t, 110)}`);
-  ok(`${label}: tell count matches earned perception`, tells.length === Game.plotAwareness(plot));
+  ok(`${label}: tell count matches earned perception`, tells.length === Game.ambushTells(plot).length);
   const c0 = Game.convoGet(plot.leader);
   ok(`${label}: the beat opens as a conversation (RUN/TALK/FIGHT)`, c0.thread === 'ambush');
   let choices = Game.convoChoices(plot.leader).map(x => x.id);

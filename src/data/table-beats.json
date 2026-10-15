@@ -1,0 +1,140 @@
+{
+  "_doc": "THE TABLE PLAYS THE BUILD (Steve 2026-10-14: \"Both, linked\" / \"Each playstyle and godhood path, moral choice version should have its own ending.\"). One beat per Table path (paths.<path>.beat, 0-based) gets ONE extra option, chosen from the locked ending key most-specific-first: 'god:<godId>' > 'class:<path>/<subclass>' > 'class:<path>' > 'track:<track>' > 'default'. A level with no bespoke entry falls back to templates.<level> (god and subclass only), then to the next level. An entry authors a moral only when it has BOTH label and say for it (light / dark; grey is the relay's middle band). Tokens: {name} the bearer's first name, {class} the class name, {god} the god's name, {verb} the god's verb. Order of candidates: god (bespoke, then templates.god), class/subclass and class (bespoke), templates.subclass, track, default. Effects: entry.effects[moral] exactly as authored; an entry without effects gets the path's gain[moral] plus levelBonus[level]; the titan finale's bonus adds to the path's meter either way (the odds). STAKE (losable for every key, light or dark): the option plays only if stake[moral] is met when chosen, else the path fails with stakeFail; the path's limits still apply after. Never gate the option on godhood: 'default' exists for every path and moral. Validate: node scripts/validate-table-endings.js (lists what's missing).",
+  "levelBonus": { "god": 2, "subclass": 1, "class": 1, "track": 0, "default": 0 },
+  "finale": {
+    "_doc": "What the titan finale fed the Table (endingKey.titanFinale). bonus adds to the build option's meter; line is added to the build line.",
+    "network": { "bonus": 1, "line": { "light": "The Network is off the air, and the ring knows who did it.", "dark": "The Network is off the air. The ring knows who did it, and is afraid of who might take the chair.", "grey": "The Network is off the air. The ring is not sure what that makes you." } },
+    "apocalypse": { "bonus": 1, "line": { "light": "The ring has seen the footage of the titan coming down. It sits a little straighter.", "dark": "The ring has seen the footage of the titan coming down. Some of it is still on your boots.", "grey": "The ring has seen the footage of the titan coming down, and is still deciding what it means." } },
+    "herald": { "bonus": 0, "line": { "light": "The herald fell to your village. The ring remembers that much.", "dark": "The herald fell to your village. The ring remembers how.", "grey": "The herald fell to your village. The ring files it under 'possible'." } }
+  },
+  "templates": {
+    "god": {
+      "_doc": "Every ascended god's verb is an option on every path, before any bespoke text exists.",
+      "label": { "light": "{verb}. Answer as {god}.", "dark": "{verb}. Let them see {god}.", "grey": "{verb}. Half god, half instrument." },
+      "line": { "light": "The table has priced gods before. It has never had one sit down. {god} is in the ring, and every face knows the verb: {verb}.", "dark": "The table has priced gods before. It has never had one sit down and smile. {god} is in the ring, and every face knows the verb: {verb}.", "grey": "{god} sits at the console with its hands half in the wires. The verb is still yours: {verb}." },
+      "say": { "light": ["You do the thing only {god} can do. The ring goes quiet in eleven dimensions. It isn't a threat. It's a demonstration of what a human became by eating, and not stopping."], "dark": ["You do the thing only {god} can do, and you do it AT them. The ring flinches. The System, very softly: \"oh no. oh, that's GOOD.\""], "grey": ["You do the thing only {god} can do, and you do it carefully, like someone who knows the System is taking notes."] }
+    },
+    "subclass": {
+      "_doc": "Every named class gets an option in its own name, before any bespoke text exists.",
+      "label": { "light": "Play it the way a {class} would.", "dark": "Play it the way a {class} would. No mercy in the edit.", "grey": "Play it the way a {class} would, both hands." },
+      "line": { "light": "The System named you {class}. The table read the file. It wants to see whether the name is true.", "dark": "The System named you {class}. The table read the file, and the footnotes.", "grey": "The System named you {class}. The table wants to know which hand the name belongs to." },
+      "say": { "light": ["You play it the way a {class} plays everything: all the way, in public. The name holds."], "dark": ["You play it the way a {class} plays everything, and you let the cameras see the cost land on someone else. The name holds. It isn't flattering."], "grey": ["You play it the way a {class} plays everything, and keep one hand free. The name holds, for now."] }
+    }
+  },
+  "paths": {
+    "feared": {
+      "beat": 1,
+      "meter": "terror",
+      "stake": { "light": { "meter": "terror", "gte": 4 }, "dark": { "meter": "terror", "gte": 4 } },
+      "stakeFail": "you played your hand before the fear was in the room, and the demonstration underwhelmed",
+      "limits": [ { "meter": "horror", "gte": 5, "fail": "the demonstration curdled — your own people flinched, visibly, where trillions watched" } ],
+      "gain": { "light": { "terror": 2, "horror": -1 }, "dark": { "terror": 3, "horror": 2 } },
+      "options": {
+        "default": {
+          "label": { "light": "Show them what you can do — and what you won't.", "dark": "Show them what you can do. All of it." },
+          "line": { "light": "The table has the footage. It doesn't have you, in the room, choosing.", "dark": "The table has the footage. It wants the live version." },
+          "say": { "light": ["You show them the thing your hands learned, and then you stop, on purpose, a hand's width short. The stop is the frightening part."], "dark": ["You show them the thing your hands learned, and you don't stop. The table remembers every second of it. So does Haven."] }
+        }
+      }
+    },
+    "indispensable": {
+      "beat": 1,
+      "meter": "leverage",
+      "stake": { "light": { "meter": "leverage", "gte": 5 }, "dark": { "meter": "cage", "lte": 4 } },
+      "stakeFail": "you put your one irreplaceable thing on the table too early, and they priced it as replaceable",
+      "limits": [ { "meter": "cage", "overMeter": "leverage", "by": 4, "fail": "the cage closed while you were still drafting — every clause made you more necessary and less free" } ],
+      "gain": { "light": { "leverage": 2 }, "dark": { "leverage": 2, "cage": 2 } },
+      "options": {
+        "default": {
+          "label": { "light": "Write in the clause only you can fulfil — with an exit.", "dark": "Write in the clause only you can fulfil. No exit." },
+          "line": { "light": "Every contract has a clause nobody else can sign. Yours is the one you actually do every day.", "dark": "Every contract has a clause nobody else can sign. You can make sure they never find anyone who can." },
+          "say": { "light": ["You write it in plain words: what you do, why nobody else does it, and the door you leave yourself. The aliens read it twice. They sign."], "dark": ["You write it so tight it squeaks. They need you now. They will always need you. The cage door clicks somewhere behind the light, and you tell yourself it's on their side."] }
+        }
+      }
+    },
+    "beloved": {
+      "beat": 1,
+      "meter": "audience",
+      "stake": { "light": { "meter": "audience", "gte": 4 }, "dark": { "meter": "audience", "gte": 5 } },
+      "stakeFail": "you went for the big number before the room was yours, and the audience turned",
+      "limits": [ { "meter": "audience", "lte": -3, "fail": "the audience turned — the love curdled mid-finale, live, in front of trillions" } ],
+      "gain": { "light": { "audience": 2 }, "dark": { "audience": 3 } },
+      "options": {
+        "default": {
+          "label": { "light": "Do your own number. The real one.", "dark": "Do your own number. The produced one." },
+          "line": { "light": "Act two has a slot nobody cast. It has your name on it, in somebody else's handwriting.", "dark": "Act two has a slot nobody cast. The producers penciled you in weeks ago." },
+          "say": { "light": ["You step into the light yourself, with the thing you actually do. No bit. The audience leans in the way people lean toward a fire."], "dark": ["You step into the light with the version of yourself that tests well. It tests well. The audience roars on the beat it was told to roar on."] }
+        },
+        "class:socialite/showrunner": {
+          "label": { "light": "Run the show from the floor: hand every act its cue.", "dark": "Take the control room. Call every cut yourself." },
+          "line": { "light": "You've produced a hundred little shows at the fire. The System named you {class}. Tonight the floor manager is you.", "dark": "The System named you {class}. The producers saw the file, and quietly left the control room door open." },
+          "effects": { "light": { "audience": 3 }, "dark": { "audience": 4 } },
+          "say": { "light": ["You don't take the stage. You stand at the edge of it with a hand up, and every cue lands: the funny one breathes before the punchline, the quiet one gets the long shot, the kid who forgot the words gets a laugh that is on their side. The audience can't see you. They can feel you everywhere."], "dark": ["You take the control room and you take it gently, the way you take everything. Camera three on the crying grandmother. Cut the shot of the empty chair. Cue the swell. The audience weeps exactly where you want it to, and you never once appear on screen."] }
+        }
+      }
+    },
+    "witness": {
+      "beat": 1,
+      "meter": "swing",
+      "stake": { "light": { "meter": "swing", "gte": 4 }, "dark": { "meter": "swing", "gte": 4 } },
+      "stakeFail": "you put yourself on the stand before the room believed you, and the defense took you apart",
+      "limits": [ { "meter": "swing", "lte": -1, "fail": "your own record convicted you mid-trial — the defense was good, and the ledger was honest" } ],
+      "gain": { "light": { "swing": 2 }, "dark": { "swing": 3 } },
+      "options": {
+        "default": {
+          "label": { "light": "Take the stand yourself. Everything you did.", "dark": "Take the stand. Everything they did." },
+          "line": { "light": "The court has heard your charges. It has not heard you.", "dark": "The court has heard your charges. It wants to hear you say them like you mean it." },
+          "say": { "light": ["You testify to all of it, your own record included. The judges look at each other. A witness who confesses first is a new genre."], "dark": ["You testify like a blade. Every charge lands. Nobody asks about your own record, yet."] }
+        }
+      }
+    },
+    "assimilated": {
+      "beat": 1,
+      "meter": { "light": "self", "dark": "comfort" },
+      "stake": { "light": { "meter": "self", "gte": 2 }, "dark": { "meter": "self", "gte": 0 } },
+      "stakeFail": "the intake scan found what you were carrying before you'd decided what it was, and filed you under furniture",
+      "gain": { "light": { "self": 2, "comfort": 1 }, "dark": { "comfort": 2, "self": -1 } },
+      "options": {
+        "default": {
+          "label": { "light": "Carry the thing you're best at inside with you.", "dark": "Hand them the thing you're best at. Ask for a better room." },
+          "line": { "light": "The intake scan is asking what you'll bring. They mean skills. You mean something else.", "dark": "The intake scan is asking what you'll bring. Better quarters go to the useful." },
+          "say": { "light": ["You declare it plainly, and smuggle it anyway: the way your hands work is also the way you remember who you are. The scan logs a skill. It misses the point."], "dark": ["You hand it over, gift-wrapped. The quarters get bigger. Something in you gets a little smaller, and it is very comfortable in there."] }
+        }
+      }
+    },
+    "defiant": {
+      "beat": 1,
+      "meter": "dignity",
+      "stake": { "light": { "meter": "dignity", "gte": 3 }, "dark": { "meter": "dignity", "gte": 1 } },
+      "stakeFail": "you tried to pay the price your own way before the table believed you could, and the walk stalled at the door",
+      "gain": { "light": { "dignity": 2 }, "dark": { "dignity": 1, "paid": 1 } },
+      "options": {
+        "default": {
+          "label": { "light": "Pay this one with what you are, not who you love.", "dark": "Pay this one with what you are, and make them regret the invoice." },
+          "line": { "light": "The price has a face. There is another currency the table hasn't priced: you.", "dark": "The price has a face. There is another currency the table hasn't priced, and it bites." },
+          "say": { "light": ["You offer the table yourself instead: your work, your season, your hands. It's an unusual coin. The table takes it, and nobody you love has to stand up."], "dark": ["You offer the table yourself instead, and you make it hurt to accept. The table takes it. It counts its fingers afterward."] }
+        },
+        "class:brawler": {
+          "label": { "light": "Stand in front of them. Make the table take the price through you.", "dark": "Break the collector's hands on the light." },
+          "line": { "light": "The System named you {class}. The collector is walking toward the person you love most, and you have always been the one who stands in the doorway.", "dark": "The System named you {class}. The collector is walking toward the person you love most. It will have to walk through you, and it will not enjoy the walk." },
+          "effects": { "light": { "dignity": 3, "paid": 1 }, "dark": { "dignity": 2, "paid": 2 } },
+          "say": { "light": ["You step into the collector's path. It is twice your height, made of angles and paperwork. You don't swing. You just stand there, the way you stood in front of everything that came for Haven, until the table understands the price will have to come through you, and decides it has been paid. Behind you, someone you love starts breathing again."], "dark": ["The collector reaches past you and you catch its wrist, and then you keep closing your hand. The sound is very small. The ring hears it anyway. The table strikes the line from the price list without a word, and every face in the ring learns where Haven keeps its no."] }
+        }
+      }
+    },
+    "relay": {
+      "beat": 1,
+      "meter": "merge",
+      "stake": { "light": { "meter": "merge", "gte": 2 }, "dark": { "meter": "merge", "gte": 2 }, "grey": { "meter": "merge", "gte": 2 } },
+      "stakeFail": "you pushed your own pattern into the wires before the console knew your hands, and the System quarantined it",
+      "gain": { "light": { "merge": 2, "sysBond": 1 }, "dark": { "merge": 3, "grounding": -3 }, "grey": { "merge": 2 } },
+      "options": {
+        "default": {
+          "label": { "light": "Teach the wires how you work.", "dark": "Overwrite the wires with how you work.", "grey": "Show the wires how you work. Keep a copy." },
+          "line": { "light": "The System has watched you for ninety days. It has never asked how you do what you do. It's asking.", "dark": "The System has watched you for ninety days. Tonight the wires will learn your pattern whether they want it or not.", "grey": "The System has watched you for ninety days. It's asking how you do what you do, and you get to decide how much to answer." },
+          "say": { "light": ["You show it, slowly, the way you'd show a child to bank a fire. The overlay's weather turns warm. It is learning a human thing."], "dark": ["You push your pattern into the wires until they hum in your rhythm. It works. Something human goes out with it, and does not come back."], "grey": ["You show it half, and keep half. The System notices the half you kept, and respects it, which is new."] }
+        }
+      }
+    }
+  }
+}

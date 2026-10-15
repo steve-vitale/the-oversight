@@ -21,16 +21,18 @@
 //   - game.hasAbility, game.abilitySlots, game.abilityOnAcquire,
 //     game.recomputeActiveSynergies, game.say, game.sysSay, game.tele
 // rules:
-//   - Six-slot law: full slots = honest refusal copy, never silent, never overflow.
-//   - Human skills are never granted — the pool is unlock.type === 'trial',
-//     which is alien-ability-only (same lane as the villager kit grants).
+//   - Unified tracks (2026-10-14): a MAGIC trial credits its track once (tracks.js convertDeedToTrackXP) instead of granting the ability; the power comes from the track's level-up sheet.
+//   - Ability lanes (2026-10-14): trial abilities that are human
+//     competences (lane 'skill': intimidating_presence, gossip_network,
+//     peacemaker, eagle_eye, evidence_board) are TAUGHT as codex skills via
+//     teachAbilitySkill; only magic trials are System grants (slot law).
 //   - Deterministic: same deeds -> same grants. The data picks the ability;
 //     this code never picks randomly.
 //   - Longsim abilities r4 2026-10-12 (Steve: figure it out yourself): these
 //     9 trial-type abilities were data-declared but had NO player grant path —
 //     dead rungs on the unlock ladder. practice-type (stalk, blood_trail,
-//     ambush, war_cry, haymaker) and discovery-type (soft_step) remain
-//     documented-not-wired: their triggers are ambiguous, a bigger design call.
+//     ambush, war_cry, haymaker) and discovery-type (soft_step) grants are
+//     wired separately in practice-deeds.js (notePracticeDeed).
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
@@ -83,28 +85,28 @@
         const def = this.trialGrantFor(trialKey);
         if (!def) return null;
         if (this.hasAbility && this.hasAbility(def.id)) return null; // already held
-        if (!this.state.systemArrived) return 'pending';
-        s.abilities = s.abilities || [];
-        const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
-        if (s.abilities.length >= maxSlots) {
-          // FULL SLOTS: honest, not silent. The System saw the deed; the gift
-          // waits on room (same honesty as the day-7 gift and the purify offer).
-          try {
-            this.sysSay(`"WE SAW that — ${def.name} was yours. But your slots are full (${s.abilities.length}/${maxSlots}). Make room, or grow the interface, and ask again by DOING it again."`);
-          } catch (e) {}
+        // ABILITY LANES (2026-10-14): a human competence earned by doing is
+        // a SKILL — taught now (no System needed, no slot), honestly
+        // narrated by learnSkill. Only magic waits on the System and slots.
+        if (this.isSkillLane && this.isSkillLane(def.id)) {
+          if (this.teachAbilitySkill(def.id, 1, 'trial')) {
+            try { this.tele('skill_taught_deed', { id: def.id, via: 'trial_deed' }); } catch (eT) { console.warn('[lanes] tele', eT); }
+            return def.id;
+          }
           return null;
         }
-        s.abilities.push({ id: def.id, name: def.name, desc: def.description || '', level: 1, xp: 0 });
-        try { this.tele('ability_granted', { id: def.id, who: 'player', via: 'trial_deed' }); } catch (e) {}
-        // Priced gifts pay their costs, like every other grant path
-        // (break-it abilities r5: trial gifts, pact, chooseAbility).
-        try { this.abilityOnAcquire(def.id); } catch (e2) {}
-        try { this.recomputeActiveSynergies(); } catch (e3) {}
-        const deedLine = this.trialDeedLine(trialKey);
-        this.say(`◈ TRIAL RECOGNIZED — the System has been watching. ${deedLine}`);
-        this.say(`✨ Ability gained: ${def.name} (L1). ${def.description || ''}`);
-        try { if (def.flavor) this.say(`"${def.flavor}"`); } catch (e) {}
-        return def.id;
+        // UNIFIED TRACKS (2026-10-14, Steve: "I intended abilities to be
+        // gained from a variety of related XP sources"): a magic trial no
+        // longer hands over the power. The deed credits its track ONCE
+        // (tracks.json deedConversions); the power comes from that track's
+        // level-up sheet. XP accrues from day one; the line waits for the watcher.
+        const track = this.convertDeedToTrackXP ? this.convertDeedToTrackXP(trialKey, def.id) : null;
+        if (!track) return null; // already credited
+        if (this.state.systemArrived) {
+          const label = (((this.trackData && this.trackData()) || {}).labels || {})[track] || track;
+          this.say(`◈ TRIAL RECOGNIZED — the System has been watching. ${this.trialDeedLine(trialKey)} (${label} track +)`);
+        }
+        return 'track:' + track;
       } catch (e) { return null; }
     },
 

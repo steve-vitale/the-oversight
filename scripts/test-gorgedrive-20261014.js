@@ -151,6 +151,10 @@ async function main() {
       try { said.push(String((msg && (msg.text || msg.msg || msg.message)) || msg || '')); } catch (e) {}
       return origSay(msg);
     };
+    // HP is the JUDGMENT section's subject (below), not this one: pin a
+    // healthy scholar so the fight branch doesn't depend on the 20-day
+    // run's incidental HP (2026-10-14: an upstream RNG shift left 47.6% < 50%).
+    try { const _s = Game.state.scholar; _s.health = Math.max(_s.health || 0, (Game.maxHealth ? Game.maxHealth() : 100) || 100); } catch (e) {}
     // the layer directly (deterministic: no base.daily runs between the
     // injection and the engagement, so the entity cannot drift first)
     gd.gorgeDrive(Game, ctx);
@@ -194,14 +198,24 @@ async function main() {
       }
     } catch (e) {}
     injectLingering(Game);
-    // bounded: each wrapped daily re-targets the (possibly drifted) entity —
-    // the same dynamics as the live sweep. Engagement must land within 3.
+    // bounded: each wrapped daily re-targets the entity. Engagement must land
+    // within 3. PIN (flake fix 2026-10-14): world-monster wandering is held
+    // still here — the march-out's tile-entry worldTick drifted the target
+    // off its tile (ctx.gorgeVerifyFailed) on some RNG streams, which is the
+    // layer's honest retry, not what 3b checks (that the WRAPPER calls the
+    // layer when ON). The drift-retry itself is the layer's own concern.
     const ctx = {};
     let it = 0;
-    for (; it < 3 && !(ctx.gorgeEngagements > 0); it++) {
-      await quietLog(() => gd.policyForRun().daily(Game, ctx));
-      if (Game.over) break;
-    }
+    const realWander = Game.wanderWorldMonsters;
+    Game.wanderWorldMonsters = function () {};
+    try {
+      for (; it < 3 && !(ctx.gorgeEngagements > 0); it++) {
+        // HP judgment is tested in PART 4; pin a healthy scholar here (seed-robust)
+        try { const _s = Game.state.scholar; _s.health = Math.max(_s.health || 0, (Game.maxHealth ? Game.maxHealth() : 100) || 100); } catch (e) {}
+        await quietLog(() => gd.policyForRun().daily(Game, ctx));
+        if (Game.over) break;
+      }
+    } finally { Game.wanderWorldMonsters = realWander; }
     ok((ctx.gorgeEngagements || 0) > 0, `3b: wrapper drove an engagement within 3 dailies (took ${it})`);
     ok(!!Game.pendingEncounter, '3b: pendingEncounter set via the wrapped policy');
   });

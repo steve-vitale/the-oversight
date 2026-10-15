@@ -5,13 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/progression.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/debug-scenarios.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -20,7 +18,7 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261005), narration: true });
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
   Game.depart();
@@ -53,17 +51,26 @@ function ok(name, cond) {
   ok('at most one witness learns instantly', blackberryKnowers.length <= 1);
   ok('rumor seeded for slow spread', !!(v.plantRumors || {})[pidB]);
 
-  // --- one spread tick teaches at most one per plant (deterministic cap) ---
+  // --- one spread tick teaches at most TWO per plant (deterministic cap) ---
+  // Design change: "WORD OF MOUTH, BRISK (Steve 2026-10-09): two teaching
+  // chances per day-part" (game.js spreadPlantKnowledge). This test predates
+  // it and asserted <=1, so it failed whenever both 50% chances landed.
   const before = blackberryKnowers.length;
   Game.spreadPlantKnowledge();
   const after = roster.filter(rid => (v.taught[rid] || []).includes(pidB) && !preB.has(rid)).length;
-  ok('single spread tick teaches at most one', after - before <= 1);
+  ok('single spread tick teaches at most two (still not instant)', after - before <= 2 && after < roster.length);
 
   // --- spread completes over many ticks (slow, not instant) ---
-  for (let i = 0; i < 300 && roster.some(rid => !(v.taught[rid] || []).includes(pidB)); i++) {
+  // "Knows" = Game.plantKnownBy (familiar ∪ taught ∪ plantKnowledge) — the
+  // check spreadPlantKnowledge itself uses. Since the 2026-10-11 convo rebuild
+  // background familiarity lives in v.familiar, so a villager who already
+  // knew pidB from their background is never re-taught into v.taught; the old
+  // taught[]-only check failed on every seed that dealt such a villager.
+  const knowsB = rid => Game.plantKnownBy(rid, pidB);
+  for (let i = 0; i < 300 && roster.some(rid => !knowsB(rid)); i++) {
     Game.spreadPlantKnowledge();
   }
-  ok('word of mouth eventually reaches everyone', roster.every(rid => (v.taught[rid] || []).includes(pidB)));
+  ok('word of mouth eventually reaches everyone', roster.every(knowsB));
   Game.spreadPlantKnowledge(); // one more tick lets the rumor clear
   ok('rumor cleared when done', !(v.plantRumors || {})[pidB]);
 

@@ -185,7 +185,7 @@
         "are with their other grandparent, or were",
         "called {first} every Sunday",
         "loved the butterscotch ones best",
-        "ask about the cousins who went up. I say they are napping. They are too young to know I am guessing"
+        "ask about the cousins who went up. {first} says the cousins are napping; the little ones are too young to know it is a guess"
       ],
       "relation": "grandchildren"
     },
@@ -447,6 +447,17 @@
         "the boatyard",
         "the paper mill",
         "the hospital on the hill"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "rural Vermont"
+      ],
+      "landings": [
+        "alder_marsh",
+        "beaver_pond",
+        "mill_town",
+        "lookout_tower",
+        "orchard_row"
       ]
     },
     {
@@ -474,6 +485,10 @@
         "the ranger station",
         "the cannery",
         "the clinic"
+      ],
+      "worldRegion": "na_boreal_pacific",
+      "origins": [
+        "Portland, Oregon"
       ]
     },
     {
@@ -503,6 +518,18 @@
         "the shipyard",
         "the county hospital",
         "the school"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "New Orleans, Louisiana"
+      ],
+      "landings": [
+        "pine_flat",
+        "pecan_grove",
+        "swamp_hummock",
+        "cypress_slough",
+        "creek_bottom",
+        "market_row"
       ]
     },
     {
@@ -537,6 +564,17 @@
         "the grain elevator",
         "the VA clinic",
         "the high school"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "Chicago, Illinois"
+      ],
+      "landings": [
+        "hay_field",
+        "grain_silo",
+        "rail_yard",
+        "floodplain",
+        "school_yard"
       ]
     },
     {
@@ -564,6 +602,10 @@
         "the co-op",
         "the county shop",
         "the nursing home"
+      ],
+      "worldRegion": "na_plains",
+      "origins": [
+        "Omaha, Nebraska"
       ]
     },
     {
@@ -593,6 +635,11 @@
         "the border clinic",
         "the air base",
         "the motel"
+      ],
+      "worldRegion": "na_arid",
+      "origins": [
+        "Tucson, Arizona",
+        "Phoenix, Arizona"
       ]
     },
     {
@@ -621,7 +668,8 @@
         "the mine",
         "the ski hill",
         "the ranger station"
-      ]
+      ],
+      "worldRegion": "na_arid"
     },
     {
       "id": "mid_atlantic",
@@ -648,6 +696,15 @@
         "the rail yard",
         "the state hospital",
         "the orchard co-op"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "landings": [
+        "ridgeline",
+        "river_bluff",
+        "mill_town",
+        "lookout_tower",
+        "quarry_edge",
+        "junkyard_edge"
       ]
     },
     {
@@ -674,7 +731,8 @@
         "the packing house",
         "the community college",
         "the ER"
-      ]
+      ],
+      "worldRegion": "na_arid"
     },
     {
       "id": "far_away",
@@ -692,7 +750,8 @@
         "the workshop",
         "the school",
         "the clinic"
-      ]
+      ],
+      "_note": "Last resort only: an origin no world region claims (free text with no known place)."
     },
     {
       "id": "alaska",
@@ -720,6 +779,10 @@
         "the air base",
         "the fishing boat",
         "the oil field"
+      ],
+      "worldRegion": "na_boreal_pacific",
+      "origins": [
+        "Anchorage, Alaska"
       ]
     },
     {
@@ -748,7 +811,8 @@
         "the harbor",
         "the coffee farm",
         "the old cannery"
-      ]
+      ],
+      "worldRegion": "oceania"
     },
     {
       "id": "florida",
@@ -775,6 +839,15 @@
         "the marina",
         "the airboat dock",
         "the roadside motel"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "Miami, Florida"
+      ],
+      "landings": [
+        "swamp_hummock",
+        "pine_flat",
+        "cypress_slough"
       ]
     },
     {
@@ -802,6 +875,13 @@
         "the lead mine",
         "the float-trip outfitter",
         "the poultry farm"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "landings": [
+        "river_bluff",
+        "limestone_glade",
+        "cedar_thicket",
+        "old_campground"
       ]
     },
     {
@@ -830,6 +910,13 @@
         "the auto plant",
         "the brewery",
         "the dairy"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "landings": [
+        "beaver_pond",
+        "alder_marsh",
+        "rail_yard",
+        "warehouse_row"
       ]
     },
     {
@@ -842,7 +929,9 @@
         "biloxi",
         "gulfport",
         "lake charles",
-        "houma"
+        "houma",
+        "houston",
+        "galveston"
       ],
       "towns": [
         "Biloxi",
@@ -850,13 +939,26 @@
         "Lake Charles",
         "Houma",
         "Bay St. Louis",
-        "Pascagoula"
+        "Pascagoula",
+        "Galveston",
+        "Beaumont",
+        "Port Arthur"
       ],
       "workplaces": [
         "the shrimp dock",
         "the bait shop",
         "the casino",
         "the sugar mill"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "Houston, Texas"
+      ],
+      "landings": [
+        "cypress_slough",
+        "swamp_hummock",
+        "floodplain",
+        "warehouse_row"
       ]
     },
     {
@@ -884,7 +986,8 @@
         "the feed store",
         "the dance hall",
         "the limestone quarry"
-      ]
+      ],
+      "worldRegion": "na_plains"
     },
     {
       "id": "great_basin",
@@ -912,6 +1015,1491 @@
         "the truck stop",
         "the ranch",
         "the geothermal plant"
+      ],
+      "worldRegion": "na_arid"
+    },
+    {
+      "id": "new_york_metro",
+      "label": "New York and the harbor towns",
+      "land": "brownstones, river piers, and the train lines out to the suburbs",
+      "matchTags": [
+        "new york",
+        "brooklyn",
+        "queens",
+        "bronx",
+        "new jersey"
+      ],
+      "towns": [
+        "Yonkers",
+        "Newark",
+        "Hoboken",
+        "Jersey City",
+        "New Rochelle",
+        "White Plains"
+      ],
+      "workplaces": [
+        "the subway yard",
+        "the hospital laundry",
+        "the container port",
+        "the bakery on the corner"
+      ],
+      "worldRegion": "na_eastern_woodlands",
+      "origins": [
+        "Brooklyn, New York"
+      ],
+      "landings": [
+        "subway_cut",
+        "warehouse_row",
+        "rail_yard",
+        "old_suburb",
+        "hospital_grounds"
+      ]
+    },
+    {
+      "id": "prairies",
+      "label": "the Canadian Prairies",
+      "land": "wheat to the horizon, river elms, and winters that crack the roads",
+      "matchTags": [
+        "manitoba",
+        "winnipeg",
+        "saskatchewan",
+        "prairies"
+      ],
+      "towns": [
+        "Saskatoon",
+        "Steinbach",
+        "Moose Jaw",
+        "Portage la Prairie",
+        "Morden",
+        "Swift Current"
+      ],
+      "workplaces": [
+        "the grain terminal",
+        "the hog barn",
+        "the curling rink",
+        "the farm-equipment dealer"
+      ],
+      "worldRegion": "na_plains",
+      "origins": [
+        "Winnipeg, Canada"
+      ]
+    },
+    {
+      "id": "northern_mexico",
+      "label": "northern Mexico",
+      "land": "dry mountains, factory towns, and long highways to the border",
+      "matchTags": [
+        "monterrey",
+        "nuevo leon",
+        "sonora",
+        "chihuahua",
+        "coahuila"
+      ],
+      "towns": [
+        "Saltillo",
+        "Monclova",
+        "Torreón",
+        "Hermosillo",
+        "Ciudad Obregón",
+        "Montemorelos"
+      ],
+      "workplaces": [
+        "the steel mill",
+        "the assembly plant",
+        "the bus terminal",
+        "the cement works"
+      ],
+      "worldRegion": "na_arid",
+      "origins": [
+        "Monterrey, Mexico"
+      ]
+    },
+    {
+      "id": "british_columbia",
+      "label": "British Columbia",
+      "land": "cedar rain forest, fjord water, and logging roads up every valley",
+      "matchTags": [
+        "british columbia",
+        "vancouver",
+        "victoria bc"
+      ],
+      "towns": [
+        "Kamloops",
+        "Nanaimo",
+        "Squamish",
+        "Prince Rupert",
+        "Kelowna",
+        "Abbotsford"
+      ],
+      "workplaces": [
+        "the sawmill",
+        "the ferry terminal",
+        "the pulp mill",
+        "the tree nursery"
+      ],
+      "worldRegion": "na_boreal_pacific",
+      "origins": [
+        "Vancouver, Canada"
+      ]
+    },
+    {
+      "id": "central_mexico",
+      "label": "central Mexico",
+      "land": "volcano country, cornfields, and old stone towns around the capital",
+      "matchTags": [
+        "mexico city",
+        "mexico",
+        "puebla",
+        "toluca"
+      ],
+      "towns": [
+        "Toluca",
+        "Puebla",
+        "Cuernavaca",
+        "Pachuca",
+        "Querétaro",
+        "Tlaxcala"
+      ],
+      "workplaces": [
+        "the metro depot",
+        "the auto-parts plant",
+        "the public hospital",
+        "the market hall"
+      ],
+      "worldRegion": "mesoamerica_caribbean",
+      "origins": [
+        "Mexico City, Mexico"
+      ]
+    },
+    {
+      "id": "venezuela",
+      "label": "the Venezuelan coast",
+      "land": "green mountains over the sea, mango trees, and crowded hillside barrios",
+      "matchTags": [
+        "venezuela",
+        "caracas"
+      ],
+      "towns": [
+        "Maracay",
+        "Barquisimeto",
+        "Maracaibo",
+        "Cumaná",
+        "Puerto Cabello",
+        "San Cristóbal"
+      ],
+      "workplaces": [
+        "the oil depot",
+        "the port warehouse",
+        "the public clinic",
+        "the shoe factory"
+      ],
+      "worldRegion": "mesoamerica_caribbean",
+      "origins": [
+        "Caracas, Venezuela"
+      ]
+    },
+    {
+      "id": "amazon_brazil",
+      "label": "the Brazilian Amazon",
+      "land": "brown rivers wide as lakes, floating markets, and forest to the sky",
+      "matchTags": [
+        "amazonas",
+        "manaus",
+        "para",
+        "belem",
+        "belém"
+      ],
+      "towns": [
+        "Parintins",
+        "Itacoatiara",
+        "Tefé",
+        "Santarém",
+        "Castanhal",
+        "Marabá"
+      ],
+      "workplaces": [
+        "the river ferry",
+        "the fish market",
+        "the electronics plant",
+        "the açaí co-op"
+      ],
+      "worldRegion": "sa_amazon",
+      "origins": [
+        "Manaus, Brazil",
+        "Belém, Brazil"
+      ]
+    },
+    {
+      "id": "amazon_peru",
+      "label": "the Peruvian Amazon",
+      "land": "river towns on stilts, mototaxis, and the forest pressing in on every road",
+      "matchTags": [
+        "loreto",
+        "iquitos",
+        "ucayali"
+      ],
+      "towns": [
+        "Yurimaguas",
+        "Nauta",
+        "Pucallpa",
+        "Contamana",
+        "Tarapoto",
+        "Caballococha"
+      ],
+      "workplaces": [
+        "the river port",
+        "the sawmill",
+        "the health post",
+        "the boat-repair yard"
+      ],
+      "worldRegion": "sa_amazon",
+      "origins": [
+        "Iquitos, Peru"
+      ]
+    },
+    {
+      "id": "peru_andes",
+      "label": "the Peruvian Andes",
+      "land": "terraced valleys, cold bright mornings, and a coast of fog and desert below",
+      "matchTags": [
+        "peru",
+        "lima",
+        "cusco",
+        "arequipa"
+      ],
+      "towns": [
+        "Huancayo",
+        "Cusco",
+        "Arequipa",
+        "Cajamarca",
+        "Huaraz",
+        "Ayacucho"
+      ],
+      "workplaces": [
+        "the textile mill",
+        "the bus company",
+        "the regional hospital",
+        "the potato co-op"
+      ],
+      "worldRegion": "sa_andes",
+      "origins": [
+        "Lima, Peru"
+      ]
+    },
+    {
+      "id": "colombia_andes",
+      "label": "the Colombian Andes",
+      "land": "coffee slopes, cloud forest, and cities stacked up mountainsides",
+      "matchTags": [
+        "colombia",
+        "bogota",
+        "bogotá",
+        "medellin"
+      ],
+      "towns": [
+        "Manizales",
+        "Tunja",
+        "Pasto",
+        "Ibagué",
+        "Bucaramanga",
+        "Popayán"
+      ],
+      "workplaces": [
+        "the flower farm",
+        "the coffee warehouse",
+        "the cable-car station",
+        "the public library"
+      ],
+      "worldRegion": "sa_andes",
+      "origins": [
+        "Bogotá, Colombia"
+      ]
+    },
+    {
+      "id": "ecuador_andes",
+      "label": "the Ecuadorian highlands",
+      "land": "volcanoes on every side, wool markets, and rain at four o'clock",
+      "matchTags": [
+        "ecuador",
+        "quito"
+      ],
+      "towns": [
+        "Ambato",
+        "Riobamba",
+        "Latacunga",
+        "Otavalo",
+        "Loja",
+        "Tulcán"
+      ],
+      "workplaces": [
+        "the textile cooperative",
+        "the dairy",
+        "the bus terminal",
+        "the rose greenhouse"
+      ],
+      "worldRegion": "sa_andes",
+      "origins": [
+        "Quito, Ecuador"
+      ]
+    },
+    {
+      "id": "bolivia_altiplano",
+      "label": "the Bolivian altiplano",
+      "land": "high plain, thin air, and snow peaks you can see from anywhere",
+      "matchTags": [
+        "bolivia",
+        "la paz",
+        "el alto"
+      ],
+      "towns": [
+        "El Alto",
+        "Oruro",
+        "Cochabamba",
+        "Potosí",
+        "Uyuni",
+        "Tarija"
+      ],
+      "workplaces": [
+        "the tin mine",
+        "the cable-car line",
+        "the brick works",
+        "the quinoa co-op"
+      ],
+      "worldRegion": "sa_andes",
+      "origins": [
+        "La Paz, Bolivia"
+      ]
+    },
+    {
+      "id": "argentina_pampas",
+      "label": "the Pampas and Patagonia",
+      "land": "flat grassland to the horizon, then wind and stone all the way south",
+      "matchTags": [
+        "argentina",
+        "buenos aires",
+        "patagonia"
+      ],
+      "towns": [
+        "La Plata",
+        "Mar del Plata",
+        "Bahía Blanca",
+        "Bariloche",
+        "Tandil",
+        "Neuquén"
+      ],
+      "workplaces": [
+        "the meatpacking plant",
+        "the grain port",
+        "the railway shop",
+        "the wool warehouse"
+      ],
+      "worldRegion": "sa_pampas_patagonia",
+      "origins": [
+        "Buenos Aires, Argentina"
+      ]
+    },
+    {
+      "id": "uruguay",
+      "label": "the Uruguayan countryside",
+      "land": "rolling grass, cattle, and a long brown river to the sea",
+      "matchTags": [
+        "uruguay",
+        "montevideo"
+      ],
+      "towns": [
+        "Paysandú",
+        "Tacuarembó",
+        "Colonia del Sacramento",
+        "Durazno",
+        "Fray Bentos",
+        "Treinta y Tres"
+      ],
+      "workplaces": [
+        "the dairy co-op",
+        "the port customs house",
+        "the rice mill",
+        "the bus company"
+      ],
+      "worldRegion": "sa_pampas_patagonia",
+      "origins": [
+        "Montevideo, Uruguay"
+      ]
+    },
+    {
+      "id": "sao_paulo_state",
+      "label": "São Paulo state",
+      "land": "red earth, sugarcane, and highways out of the biggest city on the continent",
+      "matchTags": [
+        "sao paulo",
+        "são paulo",
+        "campinas"
+      ],
+      "towns": [
+        "Campinas",
+        "Sorocaba",
+        "Jundiaí",
+        "Bauru",
+        "Piracicaba",
+        "Ribeirão Preto"
+      ],
+      "workplaces": [
+        "the auto plant",
+        "the sugar mill",
+        "the metro maintenance yard",
+        "the orange-juice plant"
+      ],
+      "worldRegion": "sa_pampas_patagonia",
+      "origins": [
+        "São Paulo, Brazil"
+      ]
+    },
+    {
+      "id": "germany",
+      "label": "Germany",
+      "land": "beech woods, river towns, and allotment gardens behind the rail lines",
+      "matchTags": [
+        "germany",
+        "berlin",
+        "hamburg",
+        "munich"
+      ],
+      "towns": [
+        "Leipzig",
+        "Hamburg",
+        "Kassel",
+        "Dresden",
+        "Rostock",
+        "Freiburg"
+      ],
+      "workplaces": [
+        "the tram depot",
+        "the hospital kitchen",
+        "the auto-parts plant",
+        "the hardware store"
+      ],
+      "worldRegion": "eu_temperate",
+      "origins": [
+        "Berlin, Germany"
+      ]
+    },
+    {
+      "id": "poland",
+      "label": "Poland",
+      "land": "birch and pine, flat farmland, and apartment blocks with gardens below",
+      "matchTags": [
+        "poland",
+        "warsaw",
+        "krakow",
+        "kraków"
+      ],
+      "towns": [
+        "Łódź",
+        "Poznań",
+        "Lublin",
+        "Gdańsk",
+        "Białystok",
+        "Toruń"
+      ],
+      "workplaces": [
+        "the shipyard",
+        "the bakery",
+        "the furniture factory",
+        "the regional clinic"
+      ],
+      "worldRegion": "eu_temperate",
+      "origins": [
+        "Warsaw, Poland"
+      ]
+    },
+    {
+      "id": "ukraine",
+      "label": "Ukraine",
+      "land": "black-earth fields, sunflowers, and river cities with long memories",
+      "matchTags": [
+        "ukraine",
+        "kyiv",
+        "kiev",
+        "lviv",
+        "odesa"
+      ],
+      "towns": [
+        "Ternopil",
+        "Kharkiv",
+        "Poltava",
+        "Chernihiv",
+        "Vinnytsia",
+        "Zhytomyr"
+      ],
+      "workplaces": [
+        "the grain elevator",
+        "the rail depot",
+        "the tractor works",
+        "the district hospital"
+      ],
+      "worldRegion": "eu_temperate",
+      "origins": [
+        "Kyiv, Ukraine"
+      ]
+    },
+    {
+      "id": "ireland",
+      "label": "the west of Ireland",
+      "land": "stone walls, bog, and rain that never quite stops",
+      "matchTags": [
+        "ireland",
+        "dublin",
+        "galway"
+      ],
+      "towns": [
+        "Galway",
+        "Castlebar",
+        "Sligo",
+        "Tralee",
+        "Westport",
+        "Athlone"
+      ],
+      "workplaces": [
+        "the creamery",
+        "the peat works",
+        "the parish hall",
+        "the bus garage"
+      ],
+      "worldRegion": "eu_temperate",
+      "origins": [
+        "rural Ireland"
+      ]
+    },
+    {
+      "id": "italy",
+      "label": "Italy",
+      "land": "olive terraces, hill towns, and a sea that is always just over the ridge",
+      "matchTags": [
+        "italy",
+        "rome",
+        "naples",
+        "sicily"
+      ],
+      "towns": [
+        "Naples",
+        "Perugia",
+        "Bologna",
+        "Palermo",
+        "Ancona",
+        "Lecce"
+      ],
+      "workplaces": [
+        "the olive press",
+        "the tile factory",
+        "the railway station",
+        "the public hospital"
+      ],
+      "worldRegion": "eu_mediterranean",
+      "origins": [
+        "Rome, Italy"
+      ]
+    },
+    {
+      "id": "turkey",
+      "label": "Turkey",
+      "land": "pine hills over two seas, orchards, and ferries crossing all day",
+      "matchTags": [
+        "turkey",
+        "istanbul",
+        "ankara"
+      ],
+      "towns": [
+        "Bursa",
+        "Izmir",
+        "Edirne",
+        "Antalya",
+        "Eskişehir",
+        "Trabzon"
+      ],
+      "workplaces": [
+        "the textile mill",
+        "the ferry dock",
+        "the hazelnut warehouse",
+        "the state hospital"
+      ],
+      "worldRegion": "eu_mediterranean",
+      "origins": [
+        "Istanbul, Turkey"
+      ]
+    },
+    {
+      "id": "morocco",
+      "label": "Morocco",
+      "land": "argan scrub, red walls, and the Atlas going white in winter",
+      "matchTags": [
+        "morocco",
+        "marrakech",
+        "casablanca",
+        "rabat"
+      ],
+      "towns": [
+        "Fes",
+        "Meknes",
+        "Agadir",
+        "Tangier",
+        "Rabat",
+        "Essaouira"
+      ],
+      "workplaces": [
+        "the tannery",
+        "the phosphate works",
+        "the port warehouse",
+        "the provincial hospital"
+      ],
+      "worldRegion": "eu_mediterranean",
+      "origins": [
+        "Marrakech, Morocco",
+        "Casablanca, Morocco"
+      ]
+    },
+    {
+      "id": "norway",
+      "label": "Norway",
+      "land": "fjords, spruce, and towns where the sun stays down for weeks",
+      "matchTags": [
+        "norway",
+        "oslo",
+        "bergen"
+      ],
+      "towns": [
+        "Ålesund",
+        "Molde",
+        "Tromsø",
+        "Lillehammer",
+        "Bodø",
+        "Hamar"
+      ],
+      "workplaces": [
+        "the fish-processing plant",
+        "the ferry terminal",
+        "the hydro station",
+        "the timber yard"
+      ],
+      "worldRegion": "eurasia_taiga",
+      "origins": [
+        "Oslo, Norway"
+      ]
+    },
+    {
+      "id": "russian_north",
+      "label": "the Russian north",
+      "land": "white nights, wooden towns, and the White Sea frozen half the year",
+      "matchTags": [
+        "arkhangelsk",
+        "murmansk",
+        "karelia",
+        "white sea"
+      ],
+      "towns": [
+        "Severodvinsk",
+        "Kotlas",
+        "Vologda",
+        "Onega",
+        "Murmansk",
+        "Petrozavodsk"
+      ],
+      "workplaces": [
+        "the shipyard",
+        "the sawmill",
+        "the river port",
+        "the district hospital"
+      ],
+      "worldRegion": "eurasia_taiga",
+      "origins": [
+        "Arkhangelsk, Russia"
+      ]
+    },
+    {
+      "id": "siberia",
+      "label": "Siberia",
+      "land": "endless taiga, wide frozen rivers, and cities built for sixty below",
+      "matchTags": [
+        "siberia",
+        "novosibirsk",
+        "russia",
+        "irkutsk"
+      ],
+      "towns": [
+        "Tomsk",
+        "Barnaul",
+        "Omsk",
+        "Krasnoyarsk",
+        "Irkutsk",
+        "Kemerovo"
+      ],
+      "workplaces": [
+        "the rail depot",
+        "the heating plant",
+        "the research institute",
+        "the tractor works"
+      ],
+      "worldRegion": "eurasia_taiga",
+      "origins": [
+        "Novosibirsk, Russia"
+      ]
+    },
+    {
+      "id": "egypt",
+      "label": "Egypt",
+      "land": "the green Nile strip, then sand on both sides as far as anyone walks",
+      "matchTags": [
+        "egypt",
+        "cairo",
+        "alexandria"
+      ],
+      "towns": [
+        "Alexandria",
+        "Aswan",
+        "Luxor",
+        "Asyut",
+        "Port Said",
+        "Mansoura"
+      ],
+      "workplaces": [
+        "the textile mill",
+        "the irrigation office",
+        "the bus garage",
+        "the university hospital"
+      ],
+      "worldRegion": "mena_desert",
+      "origins": [
+        "Cairo, Egypt"
+      ]
+    },
+    {
+      "id": "arabia",
+      "label": "the Arabian peninsula",
+      "land": "gravel plains, date groves, and cities that run on air conditioning",
+      "matchTags": [
+        "saudi arabia",
+        "riyadh",
+        "jeddah",
+        "arabia"
+      ],
+      "towns": [
+        "Jeddah",
+        "Dammam",
+        "Buraydah",
+        "Abha",
+        "Taif",
+        "Unaizah"
+      ],
+      "workplaces": [
+        "the desalination plant",
+        "the date-packing house",
+        "the hospital pharmacy",
+        "the water-truck depot"
+      ],
+      "worldRegion": "mena_desert",
+      "origins": [
+        "Riyadh, Saudi Arabia"
+      ]
+    },
+    {
+      "id": "nigeria",
+      "label": "Nigeria",
+      "land": "red laterite roads, yam farms, and markets bigger than towns",
+      "matchTags": [
+        "nigeria",
+        "lagos",
+        "abuja"
+      ],
+      "towns": [
+        "Ibadan",
+        "Abeokuta",
+        "Zaria",
+        "Owerri",
+        "Ilorin",
+        "Port Harcourt"
+      ],
+      "workplaces": [
+        "the cassava mill",
+        "the bus park",
+        "the teaching hospital",
+        "the cement plant"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Lagos, Nigeria"
+      ]
+    },
+    {
+      "id": "ghana",
+      "label": "Ghana",
+      "land": "cocoa forest in the south, open savanna in the north, and the coast between",
+      "matchTags": [
+        "ghana",
+        "accra",
+        "kumasi"
+      ],
+      "towns": [
+        "Bolgatanga",
+        "Cape Coast",
+        "Takoradi",
+        "Sunyani",
+        "Koforidua",
+        "Tema"
+      ],
+      "workplaces": [
+        "the cocoa warehouse",
+        "the trotro station",
+        "the regional hospital",
+        "the timber yard"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Accra, Ghana",
+        "Kumasi, Ghana"
+      ]
+    },
+    {
+      "id": "kenya",
+      "label": "Kenya",
+      "land": "highland tea, savanna grass, and the Rift dropping away below",
+      "matchTags": [
+        "kenya",
+        "nairobi"
+      ],
+      "towns": [
+        "Naivasha",
+        "Kisumu",
+        "Eldoret",
+        "Mombasa",
+        "Nyeri",
+        "Machakos"
+      ],
+      "workplaces": [
+        "the tea factory",
+        "the matatu stage",
+        "the county hospital",
+        "the flower farm"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Nairobi, Kenya"
+      ]
+    },
+    {
+      "id": "ethiopia",
+      "label": "the Ethiopian highlands",
+      "land": "eucalyptus groves, teff fields, and cool high mornings",
+      "matchTags": [
+        "ethiopia",
+        "addis ababa"
+      ],
+      "towns": [
+        "Bahir Dar",
+        "Gondar",
+        "Hawassa",
+        "Jimma",
+        "Dire Dawa",
+        "Mekelle"
+      ],
+      "workplaces": [
+        "the coffee-washing station",
+        "the flour mill",
+        "the health center",
+        "the bus terminal"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Addis Ababa, Ethiopia"
+      ]
+    },
+    {
+      "id": "senegal",
+      "label": "Senegal",
+      "land": "baobab country, peanut fields, and Atlantic surf on the long coast",
+      "matchTags": [
+        "senegal",
+        "dakar"
+      ],
+      "towns": [
+        "Thiès",
+        "Saint-Louis",
+        "Kaolack",
+        "Ziguinchor",
+        "Touba",
+        "Rufisque"
+      ],
+      "workplaces": [
+        "the fish landing",
+        "the peanut-oil mill",
+        "the bus station",
+        "the district clinic"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Dakar, Senegal"
+      ]
+    },
+    {
+      "id": "tanzania",
+      "label": "Tanzania",
+      "land": "acacia plains, sisal fields, and the warm Indian Ocean coast",
+      "matchTags": [
+        "tanzania",
+        "dar es salaam",
+        "zanzibar"
+      ],
+      "towns": [
+        "Arusha",
+        "Dodoma",
+        "Iringa",
+        "Morogoro",
+        "Tanga",
+        "Mbeya"
+      ],
+      "workplaces": [
+        "the port",
+        "the sisal estate",
+        "the regional hospital",
+        "the dala-dala depot"
+      ],
+      "worldRegion": "africa_sahel_savanna",
+      "origins": [
+        "Dar es Salaam, Tanzania"
+      ]
+    },
+    {
+      "id": "congo_basin",
+      "label": "the Congo basin",
+      "land": "the great river, rain forest on both banks, and boats that take weeks",
+      "matchTags": [
+        "congo",
+        "kinshasa",
+        "kisangani"
+      ],
+      "towns": [
+        "Mbandaka",
+        "Matadi",
+        "Kikwit",
+        "Bandundu",
+        "Kananga",
+        "Boma"
+      ],
+      "workplaces": [
+        "the river port",
+        "the brewery",
+        "the general hospital",
+        "the market depot"
+      ],
+      "worldRegion": "africa_congo",
+      "origins": [
+        "Kinshasa, DR Congo",
+        "Kisangani, DR Congo"
+      ]
+    },
+    {
+      "id": "south_africa",
+      "label": "South Africa",
+      "land": "highveld grass, thunderstorms at four, and the fynbos coast in the south",
+      "matchTags": [
+        "south africa",
+        "johannesburg",
+        "cape town",
+        "durban"
+      ],
+      "towns": [
+        "Durban",
+        "Pretoria",
+        "Soweto",
+        "Bloemfontein",
+        "Gqeberha",
+        "Stellenbosch"
+      ],
+      "workplaces": [
+        "the gold mine",
+        "the taxi rank",
+        "the provincial hospital",
+        "the fruit-packing shed"
+      ],
+      "worldRegion": "africa_southern",
+      "origins": [
+        "Johannesburg, South Africa",
+        "Cape Town, South Africa"
+      ]
+    },
+    {
+      "id": "india_north",
+      "label": "north India",
+      "land": "wheat plains, winter fog, and the hills rising to the north",
+      "matchTags": [
+        "india",
+        "delhi",
+        "punjab",
+        "uttar pradesh"
+      ],
+      "towns": [
+        "Agra",
+        "Jaipur",
+        "Lucknow",
+        "Meerut",
+        "Chandigarh",
+        "Dehradun"
+      ],
+      "workplaces": [
+        "the metro depot",
+        "the government hospital",
+        "the sugar mill",
+        "the wholesale market"
+      ],
+      "worldRegion": "south_asia",
+      "origins": [
+        "Delhi, India"
+      ]
+    },
+    {
+      "id": "india_west",
+      "label": "western India",
+      "land": "monsoon coast, the Western Ghats, and cotton country inland",
+      "matchTags": [
+        "mumbai",
+        "maharashtra",
+        "pune",
+        "kerala",
+        "gujarat"
+      ],
+      "towns": [
+        "Pune",
+        "Nashik",
+        "Satara",
+        "Kolhapur",
+        "Nagpur",
+        "Solapur"
+      ],
+      "workplaces": [
+        "the textile mill",
+        "the suburban railway",
+        "the municipal hospital",
+        "the fishing harbor"
+      ],
+      "worldRegion": "south_asia",
+      "origins": [
+        "Mumbai, India"
+      ]
+    },
+    {
+      "id": "bangladesh",
+      "label": "Bangladesh",
+      "land": "river delta, rice paddies, and floods that come every year",
+      "matchTags": [
+        "bangladesh",
+        "dhaka"
+      ],
+      "towns": [
+        "Chittagong",
+        "Khulna",
+        "Sylhet",
+        "Rajshahi",
+        "Barisal",
+        "Comilla"
+      ],
+      "workplaces": [
+        "the garment factory",
+        "the river ferry",
+        "the jute mill",
+        "the upazila health complex"
+      ],
+      "worldRegion": "south_asia",
+      "origins": [
+        "Dhaka, Bangladesh"
+      ]
+    },
+    {
+      "id": "kazakhstan",
+      "label": "Kazakhstan",
+      "land": "steppe without end, apple-tree foothills, and wind with nothing to stop it",
+      "matchTags": [
+        "kazakhstan",
+        "almaty",
+        "astana",
+        "steppe"
+      ],
+      "towns": [
+        "Shymkent",
+        "Taraz",
+        "Karaganda",
+        "Taldykorgan",
+        "Pavlodar",
+        "Kokshetau"
+      ],
+      "workplaces": [
+        "the coal mine",
+        "the grain elevator",
+        "the rail depot",
+        "the city polyclinic"
+      ],
+      "worldRegion": "central_asia_highlands",
+      "origins": [
+        "Almaty, Kazakhstan",
+        "Astana, Kazakhstan"
+      ]
+    },
+    {
+      "id": "himalaya",
+      "label": "the Himalaya",
+      "land": "terraced hills, prayer-flag passes, and rivers loud with snowmelt",
+      "matchTags": [
+        "nepal",
+        "kathmandu",
+        "tibet",
+        "himalaya"
+      ],
+      "towns": [
+        "Pokhara",
+        "Lalitpur",
+        "Bhaktapur",
+        "Biratnagar",
+        "Butwal",
+        "Dharan"
+      ],
+      "workplaces": [
+        "the trekking lodge",
+        "the carpet workshop",
+        "the hydro project",
+        "the district hospital"
+      ],
+      "worldRegion": "central_asia_highlands"
+    },
+    {
+      "id": "mongolia",
+      "label": "Mongolia",
+      "land": "open grassland, ger camps, and winters that kill herds",
+      "matchTags": [
+        "mongolia",
+        "ulaanbaatar"
+      ],
+      "towns": [
+        "Erdenet",
+        "Baganuur",
+        "Khovd",
+        "Mörön",
+        "Choibalsan",
+        "Kharkhorin"
+      ],
+      "workplaces": [
+        "the copper mine",
+        "the cashmere factory",
+        "the bus depot",
+        "the aimag hospital"
+      ],
+      "worldRegion": "central_asia_highlands"
+    },
+    {
+      "id": "japan",
+      "label": "Japan",
+      "land": "cedar mountains, rice paddies, and quiet towns along the rail lines",
+      "matchTags": [
+        "japan",
+        "tokyo",
+        "kyoto",
+        "osaka",
+        "hokkaido"
+      ],
+      "towns": [
+        "Sendai",
+        "Sapporo",
+        "Matsue",
+        "Niigata",
+        "Hakodate",
+        "Kagoshima"
+      ],
+      "workplaces": [
+        "the rail yard",
+        "the fish market",
+        "the electronics plant",
+        "the city hospital"
+      ],
+      "worldRegion": "east_asia",
+      "origins": [
+        "Tokyo, Japan"
+      ]
+    },
+    {
+      "id": "korea",
+      "label": "Korea",
+      "land": "pine ridges, apartment towers, and red-pepper fields drying in the sun",
+      "matchTags": [
+        "korea",
+        "seoul",
+        "busan"
+      ],
+      "towns": [
+        "Busan",
+        "Daegu",
+        "Gwangju",
+        "Daejeon",
+        "Jeonju",
+        "Chuncheon"
+      ],
+      "workplaces": [
+        "the shipyard",
+        "the subway depot",
+        "the university hospital",
+        "the semiconductor plant"
+      ],
+      "worldRegion": "east_asia",
+      "origins": [
+        "Seoul, South Korea"
+      ]
+    },
+    {
+      "id": "china_north",
+      "label": "north China",
+      "land": "dry plains, poplar windbreaks, and dust storms in spring",
+      "matchTags": [
+        "beijing",
+        "tianjin",
+        "hebei",
+        "china"
+      ],
+      "towns": [
+        "Tianjin",
+        "Baoding",
+        "Shijiazhuang",
+        "Tangshan",
+        "Datong",
+        "Zhangjiakou"
+      ],
+      "workplaces": [
+        "the steel works",
+        "the bus company",
+        "the district hospital",
+        "the wholesale vegetable market"
+      ],
+      "worldRegion": "east_asia",
+      "origins": [
+        "Beijing, China"
+      ]
+    },
+    {
+      "id": "china_east",
+      "label": "the Yangtze delta",
+      "land": "canals, rice paddies, and cities that never stop building",
+      "matchTags": [
+        "shanghai",
+        "jiangsu",
+        "zhejiang"
+      ],
+      "towns": [
+        "Suzhou",
+        "Hangzhou",
+        "Ningbo",
+        "Wuxi",
+        "Nanjing",
+        "Changzhou"
+      ],
+      "workplaces": [
+        "the container port",
+        "the textile factory",
+        "the metro depot",
+        "the city hospital"
+      ],
+      "worldRegion": "east_asia",
+      "origins": [
+        "Shanghai, China"
+      ]
+    },
+    {
+      "id": "china_southwest",
+      "label": "Sichuan",
+      "land": "misty basins, bamboo hills, and rivers cutting down from Tibet",
+      "matchTags": [
+        "chengdu",
+        "sichuan",
+        "chongqing"
+      ],
+      "towns": [
+        "Leshan",
+        "Mianyang",
+        "Zigong",
+        "Chongqing",
+        "Yibin",
+        "Deyang"
+      ],
+      "workplaces": [
+        "the tea warehouse",
+        "the motorcycle factory",
+        "the county hospital",
+        "the pepper-processing plant"
+      ],
+      "worldRegion": "east_asia",
+      "origins": [
+        "Chengdu, China"
+      ]
+    },
+    {
+      "id": "indonesia",
+      "label": "Java",
+      "land": "volcanoes, rice terraces, and motorbikes on every road",
+      "matchTags": [
+        "indonesia",
+        "jakarta",
+        "java"
+      ],
+      "towns": [
+        "Bandung",
+        "Semarang",
+        "Yogyakarta",
+        "Surabaya",
+        "Bogor",
+        "Medan"
+      ],
+      "workplaces": [
+        "the garment factory",
+        "the bus terminal",
+        "the puskesmas clinic",
+        "the palm-oil mill"
+      ],
+      "worldRegion": "southeast_asia",
+      "origins": [
+        "Jakarta, Indonesia"
+      ]
+    },
+    {
+      "id": "thailand",
+      "label": "Thailand",
+      "land": "paddy country, teak hills in the north, and long hot afternoons",
+      "matchTags": [
+        "thailand",
+        "bangkok"
+      ],
+      "towns": [
+        "Chiang Mai",
+        "Khon Kaen",
+        "Hat Yai",
+        "Udon Thani",
+        "Ayutthaya",
+        "Nakhon Ratchasima"
+      ],
+      "workplaces": [
+        "the rice mill",
+        "the auto plant",
+        "the provincial hospital",
+        "the night market"
+      ],
+      "worldRegion": "southeast_asia",
+      "origins": [
+        "Bangkok, Thailand"
+      ]
+    },
+    {
+      "id": "philippines",
+      "label": "the Philippines",
+      "land": "coconut coasts, typhoon seasons, and jeepneys on the mountain roads",
+      "matchTags": [
+        "philippines",
+        "manila"
+      ],
+      "towns": [
+        "Cebu",
+        "Davao",
+        "Iloilo",
+        "Baguio",
+        "Batangas",
+        "Bacolod"
+      ],
+      "workplaces": [
+        "the call center",
+        "the fish port",
+        "the sugar central",
+        "the provincial hospital"
+      ],
+      "worldRegion": "southeast_asia",
+      "origins": [
+        "Manila, Philippines"
+      ]
+    },
+    {
+      "id": "vietnam",
+      "label": "Vietnam",
+      "land": "river deltas, karst hills, and rice paddies to the sea",
+      "matchTags": [
+        "vietnam",
+        "hanoi",
+        "saigon"
+      ],
+      "towns": [
+        "Hai Phong",
+        "Nam Dinh",
+        "Da Nang",
+        "Thanh Hoa",
+        "Ninh Binh",
+        "Hue"
+      ],
+      "workplaces": [
+        "the shoe factory",
+        "the river port",
+        "the district hospital",
+        "the rice mill"
+      ],
+      "worldRegion": "southeast_asia",
+      "origins": [
+        "Hanoi, Vietnam"
+      ]
+    },
+    {
+      "id": "new_zealand",
+      "label": "Aotearoa New Zealand",
+      "land": "sheep country, bush-covered ranges, and weather from four directions a day",
+      "matchTags": [
+        "new zealand",
+        "auckland",
+        "wellington"
+      ],
+      "towns": [
+        "Tauranga",
+        "Christchurch",
+        "Dunedin",
+        "Rotorua",
+        "Whanganui",
+        "Invercargill"
+      ],
+      "workplaces": [
+        "the dairy factory",
+        "the timber mill",
+        "the ferry terminal",
+        "the district hospital"
+      ],
+      "worldRegion": "oceania",
+      "origins": [
+        "Auckland, New Zealand",
+        "Wellington, New Zealand",
+        "rural New Zealand"
+      ]
+    },
+    {
+      "id": "australia",
+      "label": "south-east Australia",
+      "land": "gum trees, dry paddocks, and bushfire summers",
+      "matchTags": [
+        "australia",
+        "sydney",
+        "melbourne"
+      ],
+      "towns": [
+        "Geelong",
+        "Ballarat",
+        "Wollongong",
+        "Bendigo",
+        "Toowoomba",
+        "Albury"
+      ],
+      "workplaces": [
+        "the abattoir",
+        "the tram depot",
+        "the regional hospital",
+        "the wheat silo"
+      ],
+      "worldRegion": "oceania",
+      "origins": [
+        "Sydney, Australia",
+        "Melbourne, Australia"
       ]
     }
   ],

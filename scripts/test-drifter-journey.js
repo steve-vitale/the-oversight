@@ -5,19 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/conversation.js', 'src/js/journal.js',
- 'src/js/party.js', 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js',
- 'src/js/food.js', 'src/js/corpses.js', 'src/js/lifeseed.js', 'src/js/progression.js',
- 'src/js/betrayal.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-globalThis.Scattering.Game.progState = function () { const s = this.state.scholar; s.prog = s.prog || {}; s.prog.moments = s.prog || []; return s.prog; };
-globalThis.Scattering.Game.recordMoment = function () {};
-globalThis.Scattering.Game.broadcastLine = function () {};
-eval(fs.readFileSync(path.join(ROOT, 'src/js/membership.js'), 'utf8'));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -28,7 +20,7 @@ const said = [];
 function manhattan(ax, ay, bx, by) { return Math.abs(ax - bx) + Math.abs(ay - by); }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261005), narration: true });
   Game.say = function (t) { said.push(String(t)); };
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
@@ -39,7 +31,9 @@ function manhattan(ax, ay, bx, by) { return Math.abs(ax - bx) + Math.abs(ay - by
 
   // --- A. where are the villages? pick the farthest ---
   const villages = Game.state.otherVillages || [];
-  ok('2-3 villages exist', villages.length >= 2 && villages.length <= 3);
+  // genVillages is 3-4 since bal-scale 2026-10-10 (was 2-3); this assertion
+  // was stale and only passed on the 50% of seeds that rolled 3.
+  ok('3-4 villages exist', villages.length >= 3 && villages.length <= 4);
   villages.forEach(v => console.log(`  village ${v.name} at (${v.x},${v.y}), dist ${manhattan(3, 3, v.x, v.y)} from haven`));
   const target = villages.slice().sort((a, b) => manhattan(3, 3, b.x, b.y) - manhattan(3, 3, a.x, a.y))[0];
   const dist = manhattan(3, 3, target.x, target.y);

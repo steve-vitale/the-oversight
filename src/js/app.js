@@ -385,7 +385,34 @@
                   sc.choices.map(c => `<button class="btn sm" data-beat="sw:answer:${esc(c.id)}">${esc(c.label)}</button>`).join(' ') + `</div>`;
               }
             } catch (e) {}
-            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b>${leanHtml} <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button></div>${pendingHtml}`);
+            // RELAY ABILITIES (audit 2026-10-14): unlocked relay abilities
+            // had no button anywhere — granted, announced, unusable. One
+            // button per HELD ability with a use verb (relay-ext.js).
+            // Deep Listen / Omnipresence have no use verb yet: not shown.
+            let abilHtml = '';
+            try {
+              const has = (id) => !!(Game.relayHas && Game.relayHas(id));
+              const ab = [];
+              if (has('translate')) {
+                const taught = (((Game.state.scholar || {}).relay || {}).translated) || [];
+                for (const c of ['grief', 'food', 'joy']) if (taught.indexOf(c) < 0) ab.push(`<button class="btn sm ghost" data-beat="sw:use:translate:${c}">Translate: ${c}</button>`);
+              }
+              if (has('sanctuary')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:sanctuary">Sanctuary</button>`);
+              if (has('advocate')) {
+                const ros = ((Game.state.village || {}).roster || []).filter(id => id !== Game.villagerId).slice(0, 3);
+                for (const id of ros) {
+                  let an = id;
+                  try { an = Game.displayName ? String(Game.displayName(id)).split(' ')[0] : id; } catch (e) {}
+                  ab.push(`<button class="btn sm ghost" data-beat="sw:use:advocate:${esc(id)}">Advocate: ${esc(an)}</button>`);
+                }
+              }
+              if (has('relay-sight')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:relay-sight">Relay-sight</button>`);
+              if (has('faithful-carry')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:faithful-carry">Faithful Carry</button>`);
+              if (has('rewrite')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:rewrite" title="Dark: erodes grounding">Rewrite</button>`);
+              if (has('skim')) ab.push(`<button class="btn sm ghost" data-beat="sw:use:skim" title="Dark: erodes grounding">Skim</button>`);
+              if (ab.length) abilHtml = `<br><span class="small">Relay abilities:</span> ` + ab.join(' ');
+            } catch (e) {}
+            out.push(`<div class="statrow beat-open">🔌 <b>The wires are yours.</b>${leanHtml} <button class="btn sm ghost" data-beat="sw:probe">Probe</button> <button class="btn sm ghost" data-beat="sw:reroute:honest">Reroute: honest</button> <button class="btn sm ghost" data-beat="sw:reroute:efficient">Reroute: efficient</button> <button class="btn sm ghost" data-beat="sw:deepen">Deepen</button> <button class="btn sm ghost" data-beat="sw:commune">Commune</button>${abilHtml}</div>${pendingHtml}`);
           }
         }
       } catch (e) {}
@@ -426,18 +453,20 @@
         contestRow = `<div class="statrow contest-pending">📺 CONTEST: ${esc(cname)} — ${who} in ${daysLeft}d</div>`;
       }
     } catch (e) {}
-    function chip(icon, val, pct, low, title, click) {
+    function chip(icon, val, pct, low, title, click, extra) {
       const p = Math.max(0, Math.min(100, pct));
       const clickAttr = click ? ` data-statclick="${click}" style="cursor:pointer"` : '';
-      return `<div class="statc${low ? ' low' : ''}"${clickAttr} title="${esc(title || '')}"><span>${icon} ${val}</span><div class="sbar"><i style="width:${p}%"></i></div></div>`;
+      return `<div class="statc${low ? ' low' : ''}${extra ? ' ' + extra : ''}"${clickAttr} title="${esc(title || '')}"><span>${icon} ${val}</span><div class="sbar"><i style="width:${p}%"></i></div></div>`;
     }
     const sys = Game.state && Game.state.systemArrived;
     return `<div class="statgrid">` +
       chip('❤', Math.round(st.health), st.health, st.health < 35, 'Health') +
-      chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : '')) +
+      // THE HUNGER METER STAYS THE BIGGEST ELEMENT (DECISIONS.md 2026-10-03:
+      // "a visual joke about priorities"): full row, thickest bar, always.
+      chip('🍽', foodVal, st.kcal / cap * 100, st.kcal < 500, 'Food (you)' + (banked > 0 ? ' — banked war chest' : ''), null, 'statc-food') +
       chip('💧', st.hydration + '%' + (st.waterCleanL ? ' · ' + st.waterCleanL + 'L clean' : ''), st.hydration, st.hydration < 30, 'Hydration') +
       chip('🎒', st.packKg + '/' + st.packCap + 'kg', st.packKg / st.packCap * 100, st.packKg >= st.packCap, 'Pack: ' + st.invKcal + ' kcal carried', 'pack') +
-      (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration') : '') +
+      (sys ? chip('◈', st.integration + '%', st.integration, false, 'System integration', null, 'sys-ui') : '') +
       `</div>` + contestRow + beatsRowHTML() + afflictionRow(st);
   }
 
@@ -625,7 +654,7 @@
       </div>
       <p class="small" id="install-hint" style="display:none;opacity:.7"></p>
       <p class="small" style="margin-top:20px">slice 1: open expeditions. forage · eat · drink · bring it home.</p>
-      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:11px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
+      <p class="small" style="opacity:.45;margin-top:14px"><span id="build-tag" style="cursor:pointer" title="tap to check for updates">build ${esc(window.BUILD_VERSION || 'dev')}</span> <span id="b-debug" style="cursor:pointer;opacity:.35;font-size:12px" title="toggle debug tools">🐞</span> <span id="b-settings" style="cursor:pointer;opacity:.6;font-size:13px" title="settings">⚙️</span></p>
       <p class="small" style="margin-top:6px"><span id="b-notes" style="cursor:pointer;opacity:.7" title="recent changes">📰 What's new ▸</span></p>
       <div id="build-notes" style="display:none;max-width:340px;margin:0 auto"></div>`;
     // UI taps are covered by the global Game.uiBlip() capture listener (boot).
@@ -816,7 +845,7 @@
       <h1 class="title" style="font-size:22px">WHERE ARE YOU FROM?</h1>
       <p class="small">Tap where you're from. What you know grows there — it doesn't grow here.</p>
       <input id="ob-origin-search" type="text" placeholder="🔍 Search places..." autocomplete="off"
-        style="width:100%;padding:12px;margin:12px 0;background:#0a0f0a;color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+        style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
       <div id="origin-list"></div>
       <p class="small" style="opacity:.6;margin-top:12px">Don't see it? <a href="#" id="ob-origin-custom" style="color:#8a9a8a">Type it instead</a>.</p>`;
     render('');
@@ -907,7 +936,7 @@
       <h1 class="title" style="font-size:22px">NAME THIS EXPEDITION</h1>
       <p class="small">Every run gets a name. You'll see it in your saves.</p>
       <input id="ob-runname" type="text" maxlength="40" value="${esc(def)}" autocomplete="off" autocapitalize="words"
-        style="width:100%;padding:12px;margin:12px 0;background:#0a0f0a;color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
+        style="width:100%;padding:12px;margin:12px 0;background:var(--bg);color:#c9d4c0;border:1px solid #3a4a3a;font-size:16px">
       <button class="btn" id="b-name-go">Begin</button>`;
     const input = document.getElementById('ob-runname');
     input.focus(); input.select();
@@ -976,8 +1005,7 @@
     if (!info) return;
     const { x, y, blockType } = block;
     const wood = Game.woodCount();
-    const canSwim = (Game.state.scholar.abilities || []).some(a => (a.id || a) === 'swimmer') ||
-                    (Game.state.scholar.backgroundAbilities || []).some(a => (a.id || a) === 'swimmer');
+    const canSwim = Game.hasAbility('swimmer'); // ABILITY LANES: swimmer is a skill now
     let html = '';
     const goAround = `<button class="btn sm ghost" data-act="around">Go around</button>`;
     if (blockType === 'fallen_tree') {
@@ -1438,7 +1466,7 @@
     return `<div class="abilitybar"><span class="ctx-label">⚡</span>` +
       acts.map(a => {
         const _def = _abDef(a.id);
-        const _path = (_def.paths || [])[0] || '';
+        const _path = _def.path || '';
         const _role = _def.slotRole || '';
         return `<button class="ab-btn" data-ab="${a.id}" data-path="${_path}" ${a.available ? '' : 'disabled'} title="${esc(a.desc || a.name)}">⚡ ${esc(a.name)}${_role ? `<span class="ab-role">${esc(_role)}</span>` : ''}${a.desc ? `<span class="ctx-desc"> — ${esc(a.desc)}</span>` : ''}</button>`;
       }).join('') +
@@ -2036,6 +2064,11 @@
       modal: !!opts.modal,
       dismissible: opts.dismissible !== false,
       onClose: opts.onClose || null,
+      // BESPOKE SHEETS (presentation B 2026-10-14): cls styles the sheet,
+      // and any [data-sheetpick=i] element in html fires buttons[i] (a
+      // button with hidden:true is not repeated in the button row).
+      cls: opts.cls || '',
+      onRender: opts.onRender || null,
     });
     sheetQueue.sort((a, b) => b.priority - a.priority);
     renderSheets();
@@ -2069,10 +2102,10 @@
     root.className = s.modal ? '' : 'nomodal';
     root.innerHTML = `
       <div class="sheet-backdrop"${s.dismissible && s.modal ? ' data-backdrop="1"' : ''}>
-        <div class="sheet" role="dialog">
+        <div class="sheet${s.cls ? ' ' + s.cls : ''}" role="dialog" aria-label="${esc(String(s.title).replace(/<[^>]*>/g, '').replace(/"/g, '&quot;'))}">
           <div class="sheet-head"><b>${s.title}</b>${s.dismissible ? '<button class="sheet-x" data-sheetx="1" aria-label="Close">\u2715</button>' : ''}</div>
           <div class="sheet-body">${s.html}</div>
-          ${s.buttons.length ? `<div class="sheet-btns">${s.buttons.map((b, i) =>
+          ${s.buttons.some(b => !b.hidden) ? `<div class="sheet-btns">${s.buttons.map((b, i) => b.hidden ? '' :
             `<button class="btn sm${b.primary ? '' : ' ghost'}" data-sheetbtn="${i}">${b.label}</button>`).join('')}</div>` : ''}
         </div>
       </div>`;
@@ -2080,9 +2113,9 @@
     if (x) x.onclick = () => closeSheet(s.id);
     const bd = root.querySelector('[data-backdrop]');
     if (bd) bd.onclick = (e) => { if (e.target === bd) closeSheet(s.id); };
-    root.querySelectorAll('[data-sheetbtn]').forEach(btn => {
+    root.querySelectorAll('[data-sheetbtn], [data-sheetpick]').forEach(btn => {
       btn.onclick = () => {
-        const b = s.buttons[+btn.dataset.sheetbtn];
+        const b = s.buttons[+(btn.dataset.sheetbtn != null ? btn.dataset.sheetbtn : btn.dataset.sheetpick)];
         if (!b) return;
         let keep = !!b.keepOpen;
         if (b.onClick) { try { const r = b.onClick(); if (r === 'keep') keep = true; } catch (e) {} }
@@ -8612,7 +8645,9 @@
         src.playbackRate.value = opts.pitch || 1;
         src.connect(voiceBus);
         voiceSrc = src;
-        src.onended = () => { if (voiceSrc === src) voiceSrc = null; };
+        // opts.onended (presentation pass A): the day-7 cinematic chains the
+        // System's lines; a superseded line (stopVoice) never calls it.
+        src.onended = () => { if (voiceSrc === src) { voiceSrc = null; if (typeof opts.onended === 'function') { try { opts.onended(); } catch (e) { console.warn('voice onended', e && e.message); } } } };
         src.start();
         return true;
       } catch (e) { return false; }
@@ -12703,6 +12738,10 @@
       setBusVolume(bus, v) { return setBusVolume(bus, v); },
       getBusVolume(bus) { return getBusVolume(bus); },
       playVoice(blob, opts) { return playVoice(blob, opts); },
+      // FEEL PORT (presentation pass A, 2026-10-14): feel-audio.js registers
+      // its synth voices on this graph (same buses, mute, compressor) without
+      // growing this file. null when muted or no context: callers stay silent.
+      port() { if (!ensure() || muted) return null; return { ctx, sfx: sfxBus, music: musicBus, noise, duck: duckMusic }; },
       stopVoice() { stopVoice(); },
       round(d) { roundTick(d); }, // the System is counting — it gets heavier each round
       // AUDIO COMPLETION (Steve 2026-10-06): these fired with no synth at all.
@@ -13082,7 +13121,7 @@
     // === ATTACK: deliberate, two-tap. Violence against people is always a choice.
     // Not an accident, not a misclick. You tap once, it asks. You tap again, it's done.
     if (view.confirmAttack === villagerId) {
-      btns += ` <button class="btn sm" data-act="attackConfirm" style="border-color:#e05c5c;color:#e05c5c">⚔ Attack ${esc(titleName)}? Tap again — this can't be undone.</button>`;
+      btns += ` <button class="btn sm" data-act="attackConfirm" style="border-color:var(--bad-soft);color:var(--bad-soft)">⚔ Attack ${esc(titleName)}? Tap again — this can't be undone.</button>`;
     } else {
       btns += ` <button class="btn sm ghost" data-act="attackAsk" style="opacity:.55">⚔ Attack</button>`;
     }
@@ -13090,7 +13129,7 @@
     let challengeHtml = '';
     if (chal.cid === villagerId) {
       const taskName = (Game.delegateTasks()[chal.task] || {}).name || chal.task || 'work';
-      challengeHtml = `<div class="card" style="border-left:3px solid #e05c5c;margin:8px 0">
+      challengeHtml = `<div class="card" style="border-left:3px solid var(--bad-soft);margin:8px 0">
         <p class="small"><b>⚠ ${esc(titleName)} is challenging your lead.</b><br>
         "Let ME run the ${esc(taskName)}. People listen to me. You know they do."</p></div>`;
       btns = `<button class="btn sm" data-act="yield">Let them lead ${esc(taskName)}</button>
@@ -13903,9 +13942,34 @@
     const overlay = document.createElement('div');
     overlay.className = 'system-arrival-overlay';
     document.body.appendChild(overlay);
+    // SOUND (presentation pass A, 2026-10-14): the cinematic used to play
+    // silent. Now: an arrival sting + haptic (feel.js systemArrival), a held
+    // bed whose root climbs with each tapped beat, and the System's recorded
+    // ElevenLabs lines (voice-system.js) chained per beat. Every piece
+    // degrades to silence — muted, no context, missing manifest or MP3.
+    let voiceTok = 0;
+    function arrivalAudio(fn, what) {
+      try { fn(); } catch (e) { console.warn('[arrival audio] ' + what, e && e.message); }
+    }
+    function speakBeat(b) {
+      const tok = ++voiceTok;
+      const ids = (Game.arrivalVoiceIds && Game.arrivalVoiceIds(b)) || [];
+      const next = (k) => {
+        if (tok !== voiceTok || done || k >= ids.length || !Game.playSystemLine) return;
+        Promise.resolve(Game.playSystemLine(ids[k], { onended: () => setTimeout(() => next(k + 1), 350) }))
+          .then(st => { if (st !== 'playing' && tok === voiceTok) next(k + 1); })
+          .catch(e => console.warn('[arrival voice]', e && e.message));
+      };
+      // a beat's voice starts after its first line has landed on screen
+      setTimeout(() => next(0), 700);
+    }
+    arrivalAudio(() => Game.feel && Game.feel('systemArrival', {}), 'sting');
     function finish() {
       if (done) return;
       done = true;
+      voiceTok++;
+      arrivalAudio(() => { if (Game.audio && Game.audio.stopVoice) Game.audio.stopVoice(); }, 'stopVoice');
+      arrivalAudio(() => { if (Game.audio && Game.audio.arrivalStop) Game.audio.arrivalStop(); }, 'bed stop');
       // Remove ALL arrival overlays, not just ours — a stray from an older
       // build (or a re-entry that slipped through) must never trap the player.
       try { document.querySelectorAll('.system-arrival-overlay').forEach(el => el.remove()); } catch (e) {}
@@ -13929,9 +13993,13 @@
       const btn = overlay.querySelector('.arrival-next');
       if (btn) btn.onclick = () => {
         i++;
+        arrivalAudio(() => { if (Game.audio && Game.audio.stopVoice) Game.audio.stopVoice(); }, 'stopVoice');
         if (i >= beats.length) finish();
         else showBeat();
       };
+      arrivalAudio(() => { if (Game.audio && Game.audio.arrivalBed) Game.audio.arrivalBed({ beat: i }); }, 'bed');
+      arrivalAudio(() => speakBeat(b), 'voice');
+      if (i > 0) arrivalAudio(() => Game.haptic && Game.haptic('soft'), 'haptic');
     }
     showBeat();
     // Backstop: never trap the player behind the overlay.
@@ -14006,18 +14074,36 @@
 
   // tableSheet: the galactic table. One final live choice, inside your earned frame.
   // Modal sheet - the galaxy waits.
+  // THE TABLE AS A TABLE (presentation B 2026-10-14): the run's climax is
+  // laid out as a place, not a popup — the ring of cold light above, a long
+  // warm table, your path at its head, and each option a place setting you
+  // sit down at. One screen: the prompt scrolls inside its own box; the
+  // settings stay big thumb targets.
   function tableSheet() {
     const tc = Game.state.scholar.tableChoices;
     if (!tc) return;
+    const prompt = tc.prompt ? tc.prompt :
+      '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
+      '<p>Your case is made. Now — the last choice is yours, and it\'s live:</p>';
+    let head = '';
+    try {
+      const line = Game.classLine ? Game.classLine('player') : null;
+      head = line ? `you sit as <b>${esc(line)}</b>` : 'your seat';
+    } catch (e) { console.warn('[table] classLine', e && e.message); head = 'your seat'; }
+    const plates = ['\u{1F37D}\uFE0F', '\u{1F944}', '\u{1F377}', '\u{1F56F}\uFE0F', '\u{1F35E}', '\u{1F9C2}', '\u{1FAD6}'];
+    const settings = tc.options.map((o, i) =>
+      `<button class="tbl-setting" data-sheetpick="${i}"><span class="tbl-plate" aria-hidden="true">${plates[i % plates.length]}</span><span class="tbl-label">${esc(o.label)}</span></button>`).join('');
     openSheet({
       id: 'the-table',
       title: '\u{1F30C} The Table',
-      html: tc.prompt ? tc.prompt :
-        '<p>The ring of pale light. The too-many-angled faces. The trillions of eyes.</p>' +
-        '<p>Your case is made. Now — the last choice is yours, and it\'s live:</p>',
+      cls: 'sheet-table',
+      html: `<div class="tbl"><div class="tbl-ring" aria-hidden="true"></div>` +
+        `<div class="tbl-prompt">${prompt}</div>` +
+        `<div class="tbl-board"><div class="tbl-head">${head}</div><div class="tbl-settings">${settings}</div></div>` +
+        `<div class="tbl-chair">the galaxy waits. pull out a chair.</div></div>`,
       buttons: tc.options.map(o => ({
         label: '<b>' + esc(o.label) + '</b>',
-        primary: true,
+        primary: true, hidden: true,
         onClick: () => { Game.chooseTableOption(o.id); refresh(); },
       })),
       priority: 100, modal: true, dismissible: false,
@@ -14029,6 +14115,9 @@
   function abilitySheet() {
     const choices = Game.state.scholar.abilityChoices;
     if (!choices || !choices.length) return;
+    // UNIFIED TRACKS (2026-10-14): a track level-up is its own sheet — pick 1
+    // of 3 from the track's kit; full slots = the pick replaces one you hold.
+    if (Game.isLevelUpSheet && Game.isLevelUpSheet()) return levelUpSheet(choices);
     openSheet({
       id: 'offer-ability',
       title: '\u{1F31F} The System Offers a Gift',
@@ -14046,21 +14135,115 @@
     });
   }
 
+  // levelUpSheet: a track level-up (Steve 2026-10-14: "maybe 8 natural level
+  // ups ... that compete for those 6 slots"). Pick 1 of 3. When the slots
+  // are full, each pick names what it will replace (second step), and
+  // "Keep what I have" is always there.
+  function levelUpSheet(choices) {
+    const s = Game.state.scholar;
+    const track = String(choices[0].src || '').slice('level_up:'.length);
+    const td = Game.trackData ? Game.trackData() : {};
+    const label = ((td.labels || {})[track]) || track;
+    const icon = ((td.icons || {})[track]) || '';
+    const lvl = choices[0].level || '';
+    const full = (s.abilities || []).length >= Game.abilitySlots();
+    // THREE CARDS (presentation B 2026-10-14): each pick shows what it IS at
+    // a glance — track icon, path/subclass (only once your class is
+    // recognised: if you don't know, it doesn't show), role, what it costs
+    // in food, and with full slots what it would push out.
+    const cards = choices.map((c, i) => levelUpCardHTML(c, i, icon, full)).join('');
+    openSheet({
+      id: 'offer-ability',
+      title: `${icon} ${esc(label)} ${lvl} \u2014 Level up`,
+      cls: 'sheet-levelup',
+      html: `<div class="lu-wrap"><p class="lu-intro">"We've been counting your ${esc(((td.nouns || {})[track]) || 'deeds')}. Pick one."</p>` +
+        (full ? `<p class="lu-full"><b>Slots full (${(s.abilities || []).length}/${Game.abilitySlots()}).</b> A pick replaces one you hold \u2014 you choose which next.</p>` : '') +
+        `<div class="lu-cards">${cards}</div></div>`,
+      buttons: choices.map(c => ({
+        label: '<b>' + esc(c.name) + '</b>',
+        primary: true, hidden: true,
+        onClick: () => {
+          if (full) { replaceSheet(c); return; }
+          Game.chooseAbility(c.id); refresh();
+        },
+      })).concat([{
+        label: 'Keep what I have',
+        onClick: () => { Game.keepAbilities(); refresh(); },
+      }]),
+      priority: 80, modal: true, dismissible: false,
+    });
+  }
+  // levelUpCardHTML: one level-up pick as a card. The button index matches
+  // the sheet's buttons[i] (data-sheetpick).
+  function levelUpCardHTML(c, i, icon, full) {
+    const def = ((Game.data && Game.data.abilities) || []).find(a => a.id === c.id) || {};
+    const tags = [];
+    try {
+      const cls = Game.godpathClass ? Game.godpathClass('player') : null;
+      if (cls && cls.path) {
+        const paths = Game.abilityPaths ? (Game.abilityPaths(def) || []) : [def.path].filter(Boolean);
+        const gp = (Game.data && Game.data.godpaths && Game.data.godpaths.paths) || {};
+        const p = paths[0];
+        if (p && gp[p]) {
+          const sub = def.subclass && gp[p].subclasses && gp[p].subclasses[def.subclass];
+          const onPath = paths.indexOf(cls.path) >= 0;
+          tags.push(`<span class="lu-tag path" style="--pathc:var(--path-${esc(p)})">${onPath ? '\u2605 ' : ''}${esc(gp[p].name || p)}${sub ? ' \u00b7 ' + esc(sub.name || def.subclass) : ''}</span>`);
+        }
+      }
+    } catch (e) { console.warn('[levelup] path tag', e && e.message); }
+    if (def.slotRole || def.role) tags.push(`<span class="lu-tag">${esc(def.slotRole || def.role)}</span>`);
+    const daily = def.metabolic && def.metabolic.daily;
+    const use = ((def.actions || []).find(a => a && a.cost && a.cost.kcal) || {}).cost;
+    if (daily) tags.push(`<span class="lu-tag cost">\u{1F525} ${daily} kcal/day</span>`);
+    if (use && use.kcal) tags.push(`<span class="lu-tag cost">\u26A1 ${use.kcal} kcal/use</span>`);
+    if (full) {
+      let like = null;
+      try {
+        const held = (Game.state.scholar.abilities || []).map(e => ((Game.data.abilities || []).find(a => a.id === ((e && e.id) || e))) || null).filter(Boolean);
+        like = held.find(h => h.slotRole && h.slotRole === def.slotRole) || null;
+      } catch (e) { console.warn('[levelup] swap hint', e && e.message); }
+      tags.push(`<span class="lu-tag swap">\u21C4 ${like ? 'same role as ' + esc(like.name) : 'replaces one you hold'}</span>`);
+    }
+    return `<button class="lu-card" data-sheetpick="${i}"><span class="lu-icon" aria-hidden="true">${icon || '\u2726'}</span>` +
+      `<span class="lu-name">${esc(c.name)}</span>` +
+      (tags.length ? `<span class="lu-tags">${tags.join('')}</span>` : '<span></span>') +
+      `<span class="lu-desc">${esc(c.description || c.desc || '')}</span>` +
+      (c.flavor ? `<span class="lu-flavor">${esc(Game.quoteWrap ? Game.quoteWrap(c.flavor) : c.flavor)}</span>` : '') +
+      `</button>`;
+  }
+  function replaceSheet(choice) {
+    const s = Game.state.scholar;
+    const held = (s.abilities || []).filter(e => ((e && e.id) || e) !== 'fusion_reactor');
+    openSheet({
+      id: 'level-up-replace',
+      title: 'Make room for ' + esc(choice.name),
+      html: '<p>Which ability do you let go? It\u2019s gone for good.</p>',
+      buttons: held.map(e => ({
+        label: '<b>' + esc(e.name || e.id) + '</b> <span class="small">(L' + (e.level || 1) + ')</span>',
+        onClick: () => { Game.chooseAbility(choice.id, e.id); refresh(); },
+      })).concat([
+        { label: 'Keep what I have', onClick: () => { Game.keepAbilities(); refresh(); } },
+        { label: 'Back', onClick: () => { refresh(); } },
+      ]),
+      priority: 81, modal: true, dismissible: false,
+    });
+  }
+
   // knackSheet: the spawn knack choice. Quiet, pre-System — no System chrome.
   // This is a moment of self-recognition, not an offer. The framing is
   // feeling/dream/quiet: no 🎁, no "PICK A TRICK", no System voice.
   // Modal: the knack is the first rung of the level-up ladder — it must be
   // named. (spawn-knack 2026-10-11)
   function knackSheet() {
-    const choices = Game.state.scholar.knackChoices;
+    const choices = Game.liveKnackChoices ? Game.liveKnackChoices() : Game.state.scholar.knackChoices;
     if (!choices || !choices.length) return;
     openSheet({
       id: 'knack-choice',
-      title: '\u{1F4AD} Something you never told anyone',
+      title: '\u{1F4AD} Something changed in you',
       html:
         '<p>The fire crackles. Twelve strangers breathe in the dark around you.</p>' +
-        '<p>And under all of it \u2014 under the fear, under the wrong-colored sky \u2014 something in you is awake. It\u2019s always been there. A knack. A trick you learned long ago that you never could explain, so you never mentioned it.</p>' +
-        '<p>The world ended. It didn\u2019t take this. If anything, it\u2019s louder now.</p>' +
+        '<p>And under all of it \u2014 under the fear, under the wrong-colored sky \u2014 something in you is different. You didn\u2019t learn it. You\u2019d remember learning it. It started days ago, and it is getting stronger.</p>' +
+        '<p>Nobody has noticed yet. You\u2019re not sure you want them to.</p>' +
         '<p>Which one is it?</p>',
       buttons: choices.map(c => ({
         label: '<b>' + esc(c.name) + '</b><br><span class="small">' + esc(c.description || c.desc) + '</span>' +
@@ -14362,11 +14545,11 @@
         const xpPct = level >= 3 ? 100 : Math.min(100, Math.round((xp / xpNeed) * 100));
         const isActive = !!(def.actions && def.actions.length);
         const badge = isActive
-          ? `<span style="background:#4df3ff22;border:1px solid #4df3ff;border-radius:3px;padding:1px 5px;font-size:10px;color:#4df3ff">ACTIVE</span>`
-          : `<span style="background:#8882;border:1px solid #888;border-radius:3px;padding:1px 5px;font-size:10px;color:#aaa">PASSIVE</span>`;
-        const paths = (def.paths || []).map(p => {
+          ? `<span style="background:#4df3ff22;border:1px solid var(--sys-cyan);border-radius:3px;padding:1px 5px;font-size:12px;color:var(--sys-cyan)">ACTIVE</span>`
+          : `<span style="background:#8882;border:1px solid var(--muted-2);border-radius:3px;padding:1px 5px;font-size:12px;color:var(--muted)">PASSIVE</span>`;
+        const paths = (Game.abilityPaths ? Game.abilityPaths(def) : []).map(p => {
           const c = pathColors[p] || '#aaa';
-          return `<span style="color:${c};font-size:11px">● ${esc(p)}</span>`;
+          return `<span style="color:${c};font-size:12px">● ${esc(p)}</span>`;
         }).join(' ');
         // Detail: description, actions, modifiers
         let detail = `<p class="small" style="opacity:.8">${esc(ab.desc || def.description || '')}</p>`;
@@ -14435,7 +14618,7 @@
       }
 
       let html = `<details style="margin:10px 0;border-top:1px solid #333;padding-top:8px">
-        <summary style="cursor:pointer;font-size:15px;font-weight:bold">📖 Skills <span style="opacity:.6;font-weight:normal">(Codex)</span></summary>
+        <summary style="cursor:pointer;font-size:15px;font-weight:bold">📖 Skills <span style="opacity:.6;font-weight:normal">(${Game.state.systemArrived ? 'Codex' : 'Journal'})</span></summary>
         <div style="margin-top:6px">`;
 
       for (const [domain, skills] of Object.entries(byDomain)) {
@@ -14454,10 +14637,12 @@
           }
           const entry = codexSkills[sk.id] || {};
           const lvl = entry.level || 0;
-          const pips = '\u25CF'.repeat(lvl) + '\u25CB'.repeat(Math.max(0, 4 - lvl));
           const levels = sk.levels || {};
+          // PIPS: the data has 3 levels (the old 4th pip was never fillable).
+          const maxL = Math.max(1, Object.keys(levels).length || 3);
+          const pips = '\u25CF'.repeat(Math.min(lvl, maxL)) + '\u25CB'.repeat(Math.max(0, maxL - lvl));
           let levelDetail = '';
-          for (let l = 1; l <= 4; l++) {
+          for (let l = 1; l <= maxL; l++) {
             if (levels[String(l)]) {
               const unlocked = lvl >= l;
               levelDetail += `<p class="small" style="margin:2px 0 2px 12px;${unlocked ? '' : 'opacity:.4'}"><b>L${l}:</b> ${unlocked ? esc(levels[String(l)]) : '???'}</p>`;
@@ -14472,9 +14657,26 @@
               return `<p class="small" style="margin-left:12px;${tKnown ? '' : 'opacity:.4'}">🔧 <b>${tKnown ? esc(t.technique || t.ability) : '???'}</b>${tKnown && t.effect ? ` — ${esc(t.effect)}` : ''}</p>`;
             }).join('');
           }
+          // ABILITY LANES (2026-10-14): human competences are skills. A known
+          // skill shows the ability mechanics it carries (actions + passives
+          // at the skill's level) — the Abilities slots show magic only.
+          let mechHtml = '';
+          const carries = (lvl >= 1) ? (sk.abilityMechanics || []) : [];
+          if (carries.length) {
+            const M = (typeof Scattering !== 'undefined' && Scattering.modifiers) || null;
+            const abDefs = Game.data.abilities || [];
+            mechHtml = carries.map(aid => {
+              const ad = abDefs.find(a => a.id === aid);
+              if (!ad) return '';
+              const acts = (ad.actions || []).map(a => `⚡ ${esc(a.name)}`).join(', ');
+              const pas = (ad.modifiers || []).map(m => { try { return (M && M.describe) ? M.describe(m, Math.min(lvl, 3)) : null; } catch (e) { return null; } }).filter(Boolean).join('; ');
+              return `<p class="small" style="margin:2px 0 2px 12px"><b>${esc(ad.name)}</b>${acts ? ` — ${acts}` : ''}${pas ? ` <span style="opacity:.7">(${esc(pas)})</span>` : ''}</p>`;
+            }).join('');
+            if (mechHtml) mechHtml = `<p class="small" style="margin-top:4px"><b>In practice:</b></p>` + mechHtml;
+          }
           html += `<details style="margin:4px 0">
             <summary style="cursor:pointer"><b>${esc(sk.name)}</b> <span style="color:#ffd166">${pips}</span></summary>
-            <div style="margin-top:4px">${levelDetail}${techHtml}</div>
+            <div style="margin-top:4px">${levelDetail}${mechHtml}${techHtml}</div>
           </details>`;
         }
         html += `</div></details>`;
@@ -14502,7 +14704,7 @@
         for (const s of active) {
           const triggers = (s.triggers || []).map(t => esc(t.name || t.id)).join(' + ');
           html += `<details style="margin:4px 0;border:1px solid #2a4d2a;border-radius:6px;padding:6px 8px">
-            <summary style="cursor:pointer"><b>${esc(s.name)}</b> ${triggers ? `<span style="opacity:.6;font-size:11px">${triggers}</span>` : ''}</summary>
+            <summary style="cursor:pointer"><b>${esc(s.name)}</b> ${triggers ? `<span style="opacity:.6;font-size:12px">${triggers}</span>` : ''}</summary>
             <p class="small" style="opacity:.8;margin-top:4px">${esc(s.flavor)}</p>
           </details>`;
         }
@@ -14567,7 +14769,7 @@
             if (links) body += `<p class="small" style="opacity:.75;margin-top:4px">Resonates with: ${esc(links)}</p>`;
           }
           const src = (entry.sources || [])[0];
-          const via = src ? ` <span style="opacity:.4;font-size:11px">via ${esc(String(src).split(':')[0])}</span>` : '';
+          const via = src ? ` <span style="opacity:.4;font-size:12px">via ${esc(String(src).split(':')[0])}</span>` : '';
           html += `<details style="margin:4px 0;border:1px solid #333;border-radius:6px;padding:6px 8px">
             <summary style="cursor:pointer"><b>${nm}</b> ${badge}${via}</summary>${body}
           </details>`;
@@ -14655,7 +14857,7 @@
               if (isPlant && !Game.canShow('plant', i.plantId, 'kcal')) return "?";
             }
             return (i.kcalEach || 0) * i.units;
-          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ' <span class="small" style="opacity:.6">keepsake</span>' : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</p>`;
+          } catch (e) { return (i.kcalEach || 0) * i.units; } })()} kcal · ${(((i.kg || 0.1)) * i.units).toFixed(1)} kg)${foodMark}${i.bonded ? ` <span class="small" title="Bonded relic \u2014 grown, not found">bond ${i.bond || 0}${(i.enhancements || []).length ? ' \u00B7 ' + i.enhancements.join(', ') : ''}</span>` : ''}${(Game.isKeepsake && Game.isKeepsake(i)) ? ` <span class="small" style="opacity:.6">keepsake</span>${ksPips(i)}` : ''}${(() => { try { const et = Game.keepsakeEffectText ? Game.keepsakeEffectText(i) : null; return et ? ` <span class="small" style="opacity:.75">⚙ ${et}</span>` : ''; } catch (e) { return ''; } })()}${(Game.isSpoiled && Game.isSpoiled(i)) ? ' \u26A0 spoiled' : ''}${i.bookId ? ` <button class="btn ghost sm" data-read="${i.bookId}">Read</button>` : ''}${Game.isUsable(i) && !i.bonded ? ` <button class="btn ghost sm" data-use="${idx}">Use</button>` : ''}${i.unopened ? ` <button class="btn ghost sm" data-openpkg="1">Open it (a day-part, on camera)</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-eatone="${idx}">Eat</button>` : ''}${foodBtns}${i._cookable ? ` <button class="btn ghost sm" data-cook="${idx}">Cook</button>` : ''}${Game.isWeapon(i) ? ` <button class="btn ghost sm" data-equip-w="${idx}">Equip</button>` : ''}${Game.isArmor(i) ? ` <button class="btn ghost sm" data-equip-a="${idx}">Wear</button>` : ''}${ksWearable(i) ? ` <button class="btn ghost sm" data-wear-acc="${idx}" title="Accessory slot — keepsakes and accessories share the same four">Wear</button>` : ''}${(Game.isKeepsake && Game.isKeepsake(i) && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel="${idx}">${(() => { try { return Game.channelLabel ? Game.channelLabel() : '💛 Channel'; } catch (e) { return '💛 Channel'; } })()}</button>` : ''}${(i.kcalEach || 0) > 0 && i.edible !== false && !i.bonded ? ` <button class="btn ghost sm" data-donate="${idx}">Donate</button>` : ''}${!i.bonded && !(Game.isKeepsake && Game.isKeepsake(i)) ? ` <button class="btn ghost sm" data-drop="${idx}">Leave it</button>` : ''}${i.material ? ` <button class="btn ghost sm" data-stashmat="${idx}">Stash</button>` : ''}${Game.isStashableTool(i) ? ` <button class="btn ghost sm" data-stashtool="${idx}">Stash</button>` : ''}${Game.isStashableWeapon(i) ? ` <button class="btn ghost sm" data-stashweapon="${idx}" title="Deposit to the armory — becomes communal">Armory</button>` : ''}${Game.isMedicine(i) ? ` <button class="btn ghost sm" data-stashmed="${idx}" title="Deposit to the pharmacy — becomes communal">Pharmacy</button>` : ''}</p>`;
         }).join('') : '<p class="small">Empty. The world provides.</p>'}
         ${stashSectionHtml()}
         ${tools.length ? `<h3 style="margin-top:12px">🔧 Tools</h3>${tools.map(t => `<p class="small"><b>${t.name}</b> (${t.uses} uses left) <button class="btn ghost sm" data-settrap="${t.recipeId}">Set</button></p>`).join('')}` : ''}
@@ -14757,6 +14959,8 @@
       Game.equip(+b.dataset.equipA, tgt);
     }, 'Worn.'));
     slot.querySelectorAll('[data-unequip-slot]').forEach(b => b.onclick = rewire(() => Game.unequip(b.dataset.unequipSlot), 'Taken off.'));
+    // KEEPSAKE GROWTH (Steve 2026-10-14): keepsakes and accessories wear in acc1-acc4.
+    slot.querySelectorAll('[data-wear-acc]').forEach(b => b.onclick = rewire(() => Game.equipAccessory(+b.dataset.wearAcc), 'Worn.'));
     slot.querySelectorAll('[data-donate]').forEach(b => b.onclick = rewire(() => Game.donateToPantry(+b.dataset.donate), 'Donated to the pantry.'));
     // FORAGER LOOP: "leave it for the woods" — the pack-full message promises
     // this, so it exists. Anything not bonded or keepsake can be left behind.
@@ -14862,6 +15066,15 @@
       + `<span id="set-voicesw">${setSwitch(voiceOn)}</span></div>`
       + dlRowHtml
       + `</div>`
+      // FEEL (presentation pass A, 2026-10-14): vibration (only where the
+      // device can) and reduced motion (also follows the OS setting).
+      + `<div style="padding:14px 16px 0;font-size:12px;opacity:.55;text-transform:uppercase;letter-spacing:.6px">Feel</div>`
+      + `<div style="background:#26262b;margin:6px 12px 0;border-radius:12px">`
+      + (Game.hapticsSupported && Game.hapticsSupported()
+        ? `<div id="set-hapticrow" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.07)"><span style="font-size:15px">Vibration<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">Hits, deaths, level-ups, the big moments</span></span><span id="set-hapticsw">${setSwitch(!!(Game.hapticsEnabled && Game.hapticsEnabled()))}</span></div>`
+        : '')
+      + `<div id="set-motionrow" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer"><span style="font-size:15px">Reduce motion<span style="display:block;font-size:12px;opacity:.55;font-weight:normal">No shaking or bursts — effects fade instead</span></span><span id="set-motionsw">${setSwitch(!!(Game.reducedMotion && Game.reducedMotion()))}</span></div>`
+      + `</div>`
       + `<p class="small" style="opacity:.45;text-align:center;margin:16px 12px 0">build ${esc(window.BUILD_VERSION || 'dev')}</p>`
       + `</div>`;
     document.body.appendChild(ov);
@@ -14930,6 +15143,19 @@
         dlActive = false;
         setSt('Download failed — try again');
       });
+    };
+    const hrow = document.getElementById('set-hapticrow');
+    if (hrow) hrow.onclick = () => {
+      const on = !(Game.hapticsEnabled && Game.hapticsEnabled());
+      if (Game.setHaptics) Game.setHaptics(on);
+      if (on && Game.haptic) Game.haptic('crit');
+      const sw = document.getElementById('set-hapticsw'); if (sw) sw.innerHTML = setSwitch(on);
+    };
+    const mrow = document.getElementById('set-motionrow');
+    if (mrow) mrow.onclick = () => {
+      const on = !(Game.reducedMotion && Game.reducedMotion());
+      if (Game.setReducedMotion) Game.setReducedMotion(on);
+      const sw = document.getElementById('set-motionsw'); if (sw) sw.innerHTML = setSwitch(!!(Game.reducedMotion && Game.reducedMotion()));
     };
     document.getElementById('set-muterow').onclick = () => {
       try { Game.audio.toggleMute(); } catch (e) {}
@@ -15030,6 +15256,69 @@
     } catch (e) { return ''; }
   }
 
+  // KEEPSAKE GROWTH (Steve 2026-10-14, COHERENCE-SPINE.md): level pips 0-3
+  // on the item card; the title carries the honest detail (passive, action,
+  // worn = growing / pack = dormant). Compact for 390px.
+  function ksPips(item) {
+    try {
+      if (!Game.keepsakeLevel) return '';
+      const lv = Game.keepsakeLevel(item);
+      const pips = '●'.repeat(lv) + '○'.repeat(3 - lv);
+      const t = Game.keepsakeLevelText ? Game.keepsakeLevelText(item) : '';
+      const ta = esc(t).replace(/"/g, '&quot;');
+      return ` <span class="small" style="opacity:.8;letter-spacing:1px;white-space:nowrap" title="${ta}" aria-label="${ta}">${pips}</span>`;
+    } catch (e) { return ''; }
+  }
+  function ksWearable(item) {
+    try {
+      if (Game.isKeepsake && Game.isKeepsake(item)) return true;
+      const def = (Game.data.items || []).find(d => d.id === (item.itemId || item.id));
+      return !!(def && /^acc[1-4]?$/.test(def.slot || ''));
+    } catch (e) { return false; }
+  }
+  // The thread home: keepsake clues (a Taken relative's place or name).
+  function ksThreadHtml() {
+    try {
+      const clues = Game.keepsakeClues ? Game.keepsakeClues() : [];
+      if (!clues.length) return '';
+      return `<div style="margin-top:6px"><p class="small"><b>🧵 The thread home</b></p>` +
+        clues.map(c => `<p class="small" style="opacity:.85;overflow-wrap:anywhere">${c.kind === 'place' ? '📍' : '🔎'} ${esc(c.text)}</p>`).join('') + `</div>`;
+    } catch (e) { return ''; }
+  }
+
+  // UNIFIED TRACKS (2026-10-14): what your deeds have added up to — five
+  // tracks, level pips and a thin bar to the next level-up. Only after the
+  // System arrives ("If you don't know, it doesn't show": before day 7
+  // nobody is counting). Compact rows for a 390px screen.
+  function renderTracksSection() {
+    try {
+      if (!Game.state.systemArrived || !Game.trackSummary) return '';
+      const rows = Game.trackSummary();
+      if (!rows.length) return '';
+      const q = ((Game.state.scholar || {}).levelUpQueue || []).length;
+      let html = `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">📈 Tracks${q ? ` <span style="opacity:.7;font-weight:normal">(${q} level-up${q > 1 ? 's' : ''} waiting)</span>` : ''}</summary><div style="margin-top:6px">`;
+      // GOD-PATH CLASS (2026-10-14): one line, only once the System has named
+      // it ("If you don't know, it doesn't show").
+      try {
+        const cl = Game.classLine ? Game.classLine('player') : null;
+        if (cl) html += `<div class="small" style="margin:0 0 6px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(cl)}">◈ ${esc(cl)}</div>`;
+      } catch (eC) { console.warn('[godpath] class line', eC); }
+      for (const r of rows) {
+        const pips = '●'.repeat(r.level) + '○'.repeat(Math.max(0, r.max - r.level));
+        const span = r.next != null ? Math.max(1, r.next - r.prev) : 1;
+        const pct = r.next != null ? Math.max(0, Math.min(100, Math.round(100 * (r.xp - r.prev) / span))) : 100;
+        const tip = r.next != null ? `${r.xp}/${r.next} to the next level-up` : 'every level reached';
+        html += `<div class="small" style="display:flex;align-items:center;gap:6px;margin:3px 0" title="${esc(tip)}" aria-label="${esc(r.label + ' level ' + r.level + ', ' + tip)}">` +
+          `<span style="width:84px;white-space:nowrap">${esc(r.icon)} ${esc(r.label)}</span>` +
+          `<span style="letter-spacing:1px;white-space:nowrap;opacity:.85">${pips}</span>` +
+          `<span style="flex:1;min-width:40px;height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:${pct}%;background:currentColor;opacity:.6"></span></span>` +
+          `</div>`;
+      }
+      html += `</div></details>`;
+      return html;
+    } catch (e) { console.warn('[tracks] renderTracksSection', e); return ''; }
+  }
+
   function renderCharacterInline(slot, view) {
     const st = Game.status();
     const bodyHtml = `
@@ -15052,12 +15341,15 @@
               }
               if (!item) return `<p class="small" style="opacity:.5"><b>${lbl}:</b> —</p>`;
               const bond = item.bonded ? ` <span class="small" style="opacity:.75">bond ${item.bond||0}${item.heirloom ? ' \u00B7 heirloom' : ''}</span>` : '';
-              return `<p class="small"><b>${lbl}:</b> ${itemSpriteHtml(item)}${esc(item.name)}${bond} <button class="btn ghost sm" data-unequip-slot="${slot}">Take off</button></p>`;
+              const isKs = !!(Game.isKeepsake && Game.isKeepsake(item));
+              const chan = (isKs && Game.sentimentTaught && Game.sentimentTaught()) ? ` <button class="btn ghost sm" data-channel-slot="${slot}">${esc(Game.channelLabel ? Game.channelLabel() : '💛 Channel')}</button>` : '';
+              return `<p class="small"><b>${lbl}:</b> ${itemSpriteHtml(item)}${isKs ? '💛 ' : ''}${esc(item.name)}${bond}${isKs ? ksPips(item) : ''} <button class="btn ghost sm" data-unequip-slot="${slot}">Take off</button>${chan}</p>`;
             }).join('');
-            return `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">🛡️ Equipped <span style="opacity:.6;font-weight:normal">(${eqCount} worn)</span></summary><div style="margin-top:6px">${rows}</div></details>`;
+            return `<details open style="margin:8px 0"><summary style="cursor:pointer;font-size:15px;font-weight:bold">🛡️ Equipped <span style="opacity:.6;font-weight:normal">(${eqCount} worn)</span></summary><div style="margin-top:6px">${rows}${ksThreadHtml()}</div></details>`;
           } catch (e) { return ''; }
         })()}
         ${renderAbilitiesSection()}
+        ${renderTracksSection()}
         ${renderSkillsSection()}
         ${renderSynergiesSection()}
         ${renderAbilityCodexSection()}
@@ -15074,6 +15366,7 @@
     wireInlineX(slot);
     const rewire = (fn, ok) => (e) => { fn(e); inlineView.result = ok; refresh(); };
     slot.querySelectorAll('[data-unequip-slot]').forEach(b => b.onclick = rewire(() => Game.unequip(b.dataset.unequipSlot), 'Taken off.'));
+    slot.querySelectorAll('[data-channel-slot]').forEach(b => b.onclick = rewire(() => Game.channelSentiment(b.dataset.channelSlot), 'Channeled.'));
     // DISEASE (Steve 2026-10-09): affliction buttons — examine, treat, folk
     // remedies, medicine, villager care.
     slot.querySelectorAll('[data-aff]').forEach(b => b.onclick = rewire(() => {
@@ -15183,7 +15476,11 @@
   // FULL path step-by-step instead of jumping.
   const MoveAnim = S.MoveAnim;
   function expHeadHTML(st) {
-    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:11px;opacity:.7">${esc(st.dayPartHint)}</span></span>${Game.partyHud()}`);
+    // SEASON LINE (Steve 2026-10-14): where/when you are, only once someone
+    // told you (whereAreWe.js). Nothing known -> nothing shown.
+    const wl = Game.whereLine ? Game.whereLine() : '';
+    const wlHTML = wl ? `<br><span class="whereline" style="font-size:12px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block;max-width:58vw;vertical-align:bottom">${esc(wl)}</span>` : '';
+    return bar('scattering://field', `${dialHTML(st)}<span>day ${st.day} · ${st.dayPart}<br><span style="font-size:12px;opacity:.7">${esc(st.dayPartHint)}</span>${wlHTML}</span>${Game.partyHud()}`);
   }
   // D-PAD: compact floating pad docked bottom-right of the grid — the thumb
   // zone on a one-handed phone. It overlays the grid (never pushes layout,
@@ -15627,6 +15924,7 @@
       <div class="game-cols">
         <div class="game-col-main">
           <div class="ord-gridwrap">
+            ${titanBarHTML(st)}
             <div class="detail">${renderDetail(st)}</div>
             ${surroundHTML(st)}
             <div id="inlineslot"></div>
@@ -15656,7 +15954,7 @@
           </div><!-- /ord-topstack -->
           <button class="dpshow hidden" id="dpshow" aria-label="show walk pad">🧭</button>
           <div class="toast-layer" id="toast-layer"></div>
-          ${st.activeQuest ? `<div class="ord-quest-top"><p class="small" style="border-left:3px solid #7fd67f;padding:6px 8px;margin:8px 0;background:rgba(127,214,127,0.08);border-radius:4px">📋 ${esc(st.activeQuest.text || (st.activeQuest.giverName + ' needs ' + st.activeQuest.qty + ' ' + st.activeQuest.plant + '.'))}</p></div>` : ''}
+          ${st.activeQuest ? `<div class="ord-quest-top"><p class="small" style="border-left:3px solid var(--ok);padding:6px 8px;margin:8px 0;background:rgba(127,214,127,0.08);border-radius:4px">📋 ${esc(st.activeQuest.text || (st.activeQuest.giverName + ' needs ' + st.activeQuest.qty + ' ' + st.activeQuest.plant + '.'))}</p></div>` : ''}
           <div class="ord-status">${statusBars(st)}</div>
           <div class="ord-lowermenu">${lowerMenuHTML(st)}</div>
           <div class="ord-panel">${panelFor(st, n)}</div>
@@ -15984,6 +16282,12 @@
         else if (spec[1] === 'deepen') Game.relayDeepen();
         else if (spec[1] === 'commune') Game.relayCommune();
         else if (spec[1] === 'answer') Game.relayAnswer(spec[2]);
+        // RELAY ABILITIES (audit 2026-10-14): sw:use:<abilityId>[:arg]
+        else if (spec[1] === 'use') {
+          const fn = { 'translate': 'relayTranslate', 'sanctuary': 'relaySanctuary', 'advocate': 'relayAdvocate',
+            'rewrite': 'relayRewrite', 'skim': 'relaySkim', 'relay-sight': 'relaySight', 'faithful-carry': 'relayCarry' }[spec[2]];
+          if (fn && typeof Game[fn] === 'function') Game[fn](spec[3]);
+        }
       }
       refresh();
     });
@@ -16021,6 +16325,7 @@
     // accord: the state drives the panel, the buttons drive the answer.
     document.querySelectorAll('[data-national]').forEach(b => b.onclick = () => { Game.answerNationalChoice(b.dataset.national); refresh(); });
     document.querySelectorAll('[data-global]').forEach(b => b.onclick = () => { Game.answerGlobalChoice(b.dataset.global); refresh(); });
+    document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });
     // Alliance: the understanding (regional audit 2026-10-09 — was engine-only).
     document.querySelectorAll('[data-ally-propose]').forEach(b => b.onclick = () => { Game.proposeAlliance(b.dataset.allyPropose); refresh(); });
     document.querySelectorAll('[data-demand-yes]').forEach(b => b.onclick = () => { Game.answerDemand(b.dataset.demandYes, true); refresh(); });
@@ -16057,6 +16362,7 @@
     // THE SYSTEM INTEGRATING INTO YOUR PERCEPTION: post-day-7, the interface
     // gains System styling — glowing borders, overlay accents. You FEEL it.
     try { document.body.classList.toggle('system-live', !!Game.state.systemArrived); } catch (e) {}
+    applyPresentation();
     // Inline interaction slot: person panels, assignment, pantry — no overlays.
     renderInlineSlot(st);
     // Pending offers (ability/relic choices) queue as sheets — no screen takeover.
@@ -16093,7 +16399,8 @@
       // gift WAITS — announced once, held pending, never silently eaten.
       // The integrate() wrapper announces when the slot opens.
       const free = Game.abilitySlots() - ((s.abilities || []).length);
-      if (free > 0) {
+      // a level-up sheet opens even when full: it offers replace-or-keep
+      if (free > 0 || (Game.isLevelUpSheet && Game.isLevelUpSheet())) {
         abilitySheet();
       } else if (s._offerWaitFor !== s.abilityChoices) {
         s._offerWaitFor = s.abilityChoices;
@@ -16161,7 +16468,7 @@
     const vWater = Game.state.village.water || { clean: 0, dirty: 0 };
     const carry = st.carryKg;
     const maxCarry = Game.carryCapacity();
-    const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid #4df3ff">
+    const waterRow = vWater.clean > 0 ? `<div class="card" style="margin:6px 0;padding:8px 10px;border-left:3px solid var(--sys-cyan)">
         <p class="small"><b>\uD83D\uDCA7 Water (clean)</b> \u00D7${vWater.clean} L<br>
         <span style="opacity:.7">0 kcal/L \u00B7 1 kg/L \u00B7 from the Haven well</span></p>
         <div style="display:flex;align-items:center;gap:8px">
@@ -16240,7 +16547,7 @@
         return rows.length ? rows.join('') : '<p class="small">Empty.</p>';
       })()}
       </div>
-      <div class="card" id="packsummary" style="border-left:3px solid #7fd67f">
+      <div class="card" id="packsummary" style="border-left:3px solid var(--ok)">
         <p class="small"><b>Packing:</b> <span id="ps-items">nothing yet</span></p>
         <p class="small">\u2696\uFE0F <span id="ps-kg">0.0</span> kg \u00B7 \uD83D\uDD25 <span id="ps-kcal">0 kcal</span> \u00B7 \uD83D\uDCA7 <span id="ps-water">0 L</span></p>
       </div>`;
@@ -16547,6 +16854,23 @@
                   html += `<div style="margin-top:4px"><p class="small">📯 <b>The Binding:</b> ${esc(pnm)}'s court summons Haven's oath.<br><button class="btn sm" data-national="swear">🤝 Swear the oath (3,000 kcal)</button> <button class="btn sm ghost" data-national="serve">🚶 Serve at their court (7 days)</button> <button class="btn sm ghost" data-national="walk">🚶 Walk away</button></p></div>`;
                 }
               }
+              // THE TABLE SEAT (Steve 2026-10-14): an option at Haven once the
+              // table is set — never a morning prompt. Priced live until you sit.
+              // Nonexistent before day 90: tablePreview() is null (no spoilers).
+              try {
+                const tp = Game.tablePreview ? Game.tablePreview() : null;
+                if (tp) {
+                  const doors = tp.doors.length ? tp.doors.map(esc).join(', ') : 'none yet';
+                  // OVERTIME (2026-10-14): the waiting cost, shown where the seat is.
+                  let otLine = '';
+                  if (tp.overtime) otLine += `<br>⏱ <b>OVERTIME ×${tp.overtime}</b> — reruns hit harder, raids come sooner. Standing −${tp.standingCost}${tp.losses ? ` (${tp.losses} lost)` : ''}.`;
+                  try { const ns = Game.networkStatus ? Game.networkStatus() : null; if (ns) otLine += `<br>${esc(ns)}`; } catch (e) { console.warn('network status html', e); }
+                  if (tp.key) otLine += `<br>🍽️ <b>The key is yours:</b> every door now ends with THE HOSTS.`;
+                  html += `<div style="margin-top:4px"><p class="small">◈ <b>The Table is set.</b> As your run stands today: a <b>${esc(tp.seat)}</b> seat; open doors: ${doors}. Nothing is final until you sit.${otLine}<br>` +
+                    `<button class="btn sm" data-table-seat>◈ Take your seat</button>` +
+                    `</p></div>`;
+                }
+              } catch (e) { console.warn('table seat html', e); }
               if (Game.state.pendingGlobal) {
                 html += `<div style="margin-top:4px"><p class="small">📡 <b>The Watchers:</b> the world feed wants Haven.<br><button class="btn sm" data-global="champion">📡 Send the champion (7 days)</button> <button class="btn sm ghost" data-global="feast">🍲 Feast the cameras (5,000 kcal)</button> <button class="btn sm ghost" data-global="decline">Decline on camera</button></p></div>`;
               }
@@ -16900,7 +17224,7 @@
     // You get 3 moves AND 1 action. The line shows both distinctly.
     const turnLine = yourTurn && p
       ? (p.moveLeft <= 0 && !p.acted
-          ? `<b style="color:#ffd54d">ACT!</b> <span style="opacity:.8">strike, shout… or ⏸ hold</span>`
+          ? `<b style="color:var(--gold)">ACT!</b> <span style="opacity:.8">strike, shout… or ⏸ hold</span>`
           : `<span title="Movement — D-pad or tap to walk"><b>${p.moveLeft}</b> move</span>${p.acted ? '' : ' <span title="Action — strike, study, shout…" style="opacity:.8">· <b>1</b> act</span>'}`)
       : (cur ? `${esc(cur.kind === 'player' ? 'You' : (Game.monsterDisplayName && cur.mdef ? Game.monsterDisplayName(cur.mdef.id) : cur.name))} acting…` : '');
     // COMBAT STRIP (Steve 2026-10-05, revised): threat + turn status ONLY.
@@ -17318,10 +17642,20 @@
     try {
       if (document.body.classList.contains('titan-fight')) _gridN = 12;
     } catch (e) {}
+    // GUARD (presentation pass A, 2026-10-14): a titan summoned onto a 9x9
+    // node (the Table's trial by combat, _tableTrialDirect) set titan-fight
+    // with a 9-row cell array, and cells[9][0] threw — the whole screen
+    // stopped rendering. Never draw more rows than exist.
+    _gridN = Math.min(_gridN, (cells && cells.length) || 9);
     for (let cy = 0; cy < _gridN; cy++) {
       html += '<div class="drow">';
       for (let cx = 0; cx < _gridN; cx++) {
-        const cell = cells[cy][cx];
+        // TITAN ARENA (presentation B 2026-10-14): the node detail is 9x9 but
+        // a titan fight runs 12x12 (tbGridSize). Cells past the node are open
+        // trodden ground — the same as game.js tbBlocked reads them (an
+        // undefined cell never blocks). Indexing cells[9] used to throw and
+        // blank the whole fight screen.
+        const cell = (cells[cy] && cells[cy][cx] !== undefined) ? cells[cy][cx] : 'dirt';
         const isMe = (cx === pmx && cy === pmy);
         let g, cls = 'cell';
         // INDISTINCT (Steve 2026-10-05): creatures show their species emoji —
@@ -17503,10 +17837,13 @@
               try {
                 if (_mid && S.Sprites && S.Sprites.monsterSprite) {
                   const _aggro = true; // combat = aggro form
-                  const _svg = S.Sprites.monsterSprite(_mid, _aggro);
+                  // TITAN BODIES (presentation B 2026-10-14): a titan fights
+                  // in its own sprite, not its scaled-up monster form.
+                  const _tsvg = (Game.isTitan && Game.isTitan(_mid) && S.Sprites.titanSprite) ? S.Sprites.titanSprite(_mid) : null;
+                  const _svg = _tsvg || S.Sprites.monsterSprite(_mid, _aggro);
                   if (_svg) _mspr = `<span class="csprite">${_svg}</span>`;
                 }
-              } catch (e) {}
+              } catch (e) { console.warn('[titan sprite]', e && e.message); }
               // Humanoids get the special ambiguous treatment; others get their SVG
               const _hspr = humanoidSpriteHtml(_mid);
               // BUFFERING FAINTEST FRAME (r15 CATCH 3): the real present is the
@@ -17517,7 +17854,11 @@
               let _sprInner = _hspr || _mspr || esc(mf.emoji || '👹');
               if (_msz > 1 && _sprInner.indexOf('csprite') !== -1)
                 _sprInner = _sprInner.replace('class="csprite"', 'class="csprite multitile mts' + _msz + '"');
-              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}>${_sprInner}</span>`;
+              // ent-multi: the entity wrapper fills the anchor cell, so the
+              // 200%/300% span sizes against the CELL. (The wrapper is a
+              // will-change:transform containing block; at 0 width the
+              // multi-tile sprite collapsed to 0x0 and the body vanished.)
+              g = `<span data-ent="creature:${esc(_hkey)}"${_bufDim}${_msz > 1 ? ' class="ent-multi"' : ''}>${_sprInner}</span>`;
               cls += ' creature';
               // TITAN FIGHT (Steve 2026-10-11): mark titan cells for ant-vs-titan scaling
               try {
@@ -17544,7 +17885,7 @@
               _fSprInner = _fSprInner.replace('class="csprite"', 'class="csprite multitile mts' + _fmsz + '"');
             else if (_fmsz > 1 && _fSprInner.indexOf('msprite') !== -1)
               _fSprInner = _fSprInner.replace('class="msprite"', 'class="msprite multitile mts' + _fmsz + '"');
-            g = `<span data-ent="creature:${esc(mon.id || 'wild')}">${_fSprInner}</span>`;
+            g = `<span data-ent="creature:${esc(mon.id || 'wild')}"${_fmsz > 1 ? ' class="ent-multi"' : ''}>${_fSprInner}</span>`;
             cls += ' creature'; drawn = true;
             }
           }
@@ -17565,7 +17906,7 @@
               _pbadge = ({ wary: '⚠', bolt: '💨', winded: '😮‍💨', playing_dead: '💀', taunt: '👀' })[_pp] || '';
             } catch (e) {}
             const _aniSpr = monsterSpriteHtml(ani.id || ani.monsterId, false);
-            g = `<span data-ent="creature:${esc(ani.id || 'wild')}">${_aniSpr || esc(aemoji)}${_pbadge ? `<span class="preybadge" style="display:block;font-size:9px;line-height:1;margin-top:-3px">${esc(_pbadge)}</span>` : ''}</span>`;
+            g = `<span data-ent="creature:${esc(ani.id || 'wild')}">${_aniSpr || esc(aemoji)}${_pbadge ? `<span class="preybadge" style="display:block;font-size:12px;line-height:1;margin-top:-3px">${esc(_pbadge)}</span>` : ''}</span>`;
             cls += ' creature'; drawn = true;
           }
           if (!drawn) {
@@ -17834,7 +18175,7 @@
   background: linear-gradient(135deg, rgba(191,233,255,.30), rgba(191,233,255,.08) 50%, rgba(191,233,255,.30)) !important;
   animation: w2aShimmer 1.1s infinite alternate; }
 @keyframes w2aShimmer { from { filter: brightness(1.0); } to { filter: brightness(1.5); } }
-.cell.beamLane.w2aDrone { outline: 2px dotted #4df3ff !important; outline-offset: -2px;
+.cell.beamLane.w2aDrone { outline: 2px dotted var(--sys-cyan) !important; outline-offset: -2px;
   background-color: rgba(77,243,255,.16) !important; animation: w2aProject 0.7s infinite alternate; }
 @keyframes w2aProject { from { filter: brightness(1.0); } to { filter: brightness(1.35); } }
 .cell.w2aStatic { outline: 3px solid #d9a7ff !important; outline-offset: -3px;
@@ -17854,13 +18195,13 @@
   animation: w2bIdeaHeat 1.0s infinite alternate; }
 @keyframes w2bIdeaHeat { from { filter: brightness(1.0); } to { filter: brightness(1.6); } }
 .cell.w2bPz, .cell.pzFlash { background-color: rgba(8,8,10,.80) !important;
-  outline: 2px solid #ffffff !important; outline-offset: -2px;
+  outline: 2px solid var(--white) !important; outline-offset: -2px;
   animation: w2bPzFlash 0.5s steps(2) infinite; }
 @keyframes w2bPzFlash { 0%, 49% { filter: brightness(1.0); } 50%, 100% { filter: brightness(2.2); } }
 .cell.w2bPz::before, .cell.w2bPz::after, .cell.pzFlash::before, .cell.pzFlash::after { content: ''; position: absolute;
   width: 10px; height: 10px; pointer-events: none; }
-.cell.w2bPz::before, .cell.pzFlash::before { top: 3px; left: 3px; border-top: 3px solid #fff; border-left: 3px solid #fff; }
-.cell.w2bPz::after, .cell.pzFlash::after { bottom: 3px; right: 3px; border-bottom: 3px solid #fff; border-right: 3px solid #fff; }
+.cell.w2bPz::before, .cell.pzFlash::before { top: 3px; left: 3px; border-top: 3px solid var(--white); border-left: 3px solid var(--white); }
+.cell.w2bPz::after, .cell.pzFlash::after { bottom: 3px; right: 3px; border-bottom: 3px solid var(--white); border-right: 3px solid var(--white); }
 .cell.w2bKite { outline: 2px solid #a5f3fc !important; outline-offset: -2px;
   background: repeating-linear-gradient(115deg, rgba(165,243,252,.34) 0 4px, rgba(30,27,75,.55) 4px 9px) !important;
   animation: w2bKiteCrackle 0.4s steps(3) infinite; }
@@ -17917,7 +18258,7 @@
    the more urgent read; the gold tile fill still shows underneath). */
 .cell.me .vent.sbLockTarget::before {
   content: ''; position: absolute; inset: -2px;
-  border: 3px solid #ffd34d; border-radius: 50%;
+  border: 3px solid var(--gold); border-radius: 50%;
   box-shadow: 0 0 14px rgba(255,211,77,.95), inset 0 0 8px rgba(255,211,77,.55);
   animation: ppulse .7s ease-in-out infinite; pointer-events: none;
 }
@@ -17970,6 +18311,74 @@
 }
 </style>`;
     return html;
+  }
+
+  // applyPresentation (presentation B 2026-10-14): the ladder on <body>.
+  // stage-0..4 (presentation.js: Codex depth + days survived) lets main.css
+  // and the map grow richer as the run earns it; then, post-System, an
+  // occasional alien-script glitch under the overlay.
+  let _presStage = -1;
+  function applyPresentation() {
+    try {
+      const stage = Game.presentationStage ? Game.presentationStage() : 0;
+      if (stage !== _presStage) {
+        for (let i = 0; i <= 4; i++) document.body.classList.toggle('stage-' + i, i === stage);
+        _presStage = stage;
+      }
+    } catch (e) { console.warn('[presentation] stage', e && e.message); }
+    try { if (Game.state && Game.state.systemArrived) maybeAlienGlitch(); } catch (e) { console.warn('[presentation] glitch', e && e.message); }
+  }
+  // maybeAlienGlitch: "Occasional glitches reveal untranslated alien script
+  // underneath" (DECISIONS.md 2026-10-03). For half a second a strip of the
+  // System's real script shows through one System element, sliced, then the
+  // translation snaps back. Rate-limited by Game.glitchDue (presentation.json),
+  // decorative only (aria-hidden, pointer-events none), and never under
+  // prefers-reduced-motion.
+  function maybeAlienGlitch(force) {
+    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; } catch (e) { return false; }
+    if (!force && !(Game.glitchDue && Game.glitchDue(Date.now()))) return false;
+    const cands = Array.from(document.querySelectorAll('.sheet, .sys-ui, #log .sys, .sundial.post'))
+      .filter(el => { const r = el.getBoundingClientRect(); return r.width > 40 && r.height > 12 && r.bottom > 0 && r.top < window.innerHeight; });
+    if (!cands.length) return false;
+    const el = cands[Math.floor(Math.random() * cands.length)];
+    const r = el.getBoundingClientRect();
+    const g = document.createElement('div');
+    g.className = 'alien-glitch';
+    g.setAttribute('aria-hidden', 'true');
+    const h = Math.min(r.height, 120);
+    g.style.cssText = `left:${Math.round(r.left)}px;top:${Math.round(r.top + Math.max(0, (r.height - h) / 2))}px;width:${Math.round(r.width)}px;height:${Math.round(h)}px`;
+    const n = Math.max(12, Math.min(220, Math.round(r.width * h / 90)));
+    g.textContent = Game.alienScript ? Game.alienScript(n, Date.now()) : '';
+    document.body.appendChild(g);
+    const ms = ((Game.data && Game.data.presentation && Game.data.presentation.glitch) || {}).durationMs || 450;
+    setTimeout(() => { try { g.remove(); } catch (e) { console.warn('[glitch] remove', e && e.message); } }, ms);
+    return true;
+  }
+  Game.debugAlienGlitch = () => maybeAlienGlitch(true); // wired-exempt: debug/screenshot hook
+
+  // titanBarHTML (presentation B 2026-10-14): a titan fight gets a marquee
+  // over the arena — the titan's face, its title, and one long health bar cut
+  // into three acts (the show's language: every season needs its climax).
+  // The acts are HP thirds, nothing hidden: the combat strip already shows
+  // the same bar. Only while a titan is alive in the fight.
+  function titanBarHTML(st) {
+    try {
+      if (!st.inCombat || !Game.tbfight || !Game.isTitan) return '';
+      const f = (Game.tbfight.fighters || []).find(x => x.kind === 'monster' && x.alive && !x.fled && x.mdef && Game.isTitan(x.mdef.id));
+      if (!f) return '';
+      const mid = f.mdef.id;
+      const def = (Game.titanDef && Game.titanDef(mid)) || {};
+      const pct = Math.max(0, Math.min(100, Math.round((f.hp / Math.max(1, f.maxHp)) * 100)));
+      const act = pct > 66 ? 'I' : pct > 33 ? 'II' : 'III';
+      const spr = (S.Sprites && S.Sprites.titanSprite && S.Sprites.titanSprite(mid)) || '';
+      return `<div class="titanbar" role="status" aria-label="${esc((def.title || f.name) + ', act ' + act)}">` +
+        `<span class="titanbar-face">${spr}</span>` +
+        `<span class="titanbar-main"><span class="titanbar-name">${esc(def.title || f.name || 'THE TITAN')}` +
+        `<span class="titanbar-act">ACT ${act}</span></span>` +
+        `<span class="titanbar-track"><i style="width:${pct}%"></i><b class="tb-tick" style="left:33.3%"></b><b class="tb-tick" style="left:66.6%"></b></span>` +
+        (def.epithet ? `<span class="titanbar-epi">${esc(def.epithet)}</span>` : '') +
+        `</span></div>`;
+    } catch (e) { console.warn('[titanbar]', e && e.message); return ''; }
   }
 
   // compassHTML (Steve 2026-10-05): the minimap was 49 tiles for minor info.
@@ -18038,6 +18447,12 @@
     // SVG TILE SCENES (Steve 2026-10-06): tiles render as miniature scenes
     // when the module is loaded; glyph fallback otherwise.
     const TS = (typeof Scattering !== 'undefined' && Scattering.TileScenes) || null;
+    // PALETTE LADDER (presentation B 2026-10-14): every flat-colour fallback
+    // below takes its colour from the same earthy->rich ladder as the SVG
+    // scenes (tile-scenes.js palette), so a fallback tile never jumps out.
+    let _stage = 0;
+    try { _stage = Game.presentationStage ? Game.presentationStage() : 0; } catch (e) { console.warn('[map] stage', e && e.message); }
+    const _pal = (type) => { try { return (TS && TS.palette) ? TS.palette(type || 'meadow', _stage).base : null; } catch (e) { console.warn('[map] palette', e && e.message); return null; } };
     for (let y = 0; y < 9; y++) {
       html += '<div class="mrow">';
       for (let x = 0; x < 9; x++) {
@@ -18067,7 +18482,7 @@
           } catch (e) {}
           // Haven always shows 🏘️ (Steve 2026-10-06) — center of 9x9
           if (x === 4 && y === 4) {
-            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:#7cbd6b;width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">🏘️</div></div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal('haven') || '#7cbd6b'};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">🏘️</div></div>`;
             continue;
           }
           // Try TileScenes SVG for detailed terrain
@@ -18094,7 +18509,7 @@
               ruin: ['#9a9a9a', '🏚️'],
             };
             const _t = _terrain[_ttype] || _terrain['meadow'];
-            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div></div>`;
+            html += `<div class="tile" data-x="${x}" data-y="${y}"><div style="background:${_pal(_ttype) || _t[0]};width:100%;height:100%;min-height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px">${_t[1]}</div></div>`;
           }
           continue;
         }
@@ -18178,8 +18593,11 @@
             // DIAGNOSTIC: show the failure color
             g = `<div style="background:${diagColor};width:100%;height:100%;border-radius:4px"></div>`;
         } else if (!seen && !_hive) {
-            g = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">` +
-              `<rect x="2" y="2" width="60" height="60" rx="8" fill="#0d120d" stroke="#1a2a1a" stroke-width="1"/></svg>`;
+            // FOG (presentation B 2026-10-14): the unknown has texture, not
+            // content — a faint hatch, varied per tile so the fog doesn't read
+            // as a grid of identical holes. Never derived from the tile:
+            // "If you don't know, it doesn't show."
+            g = `<div class="fogtile fog-v${(x * 7 + y * 13) % 4}" aria-label="unexplored"></div>`;
           } else if (seen === 'shared' || (_hive && !seen)) {
             // Steve 2026-10-07: shared tiles show as BIOME COLOR ONLY,
             // not detailed SVG. Fog of war for detail until visited personally
@@ -18190,7 +18608,7 @@
               wetland: '#4a8a8a', creek: '#5a9aba', thicket: '#2d5a2d', trail_edge: '#8a7a5a',
               forest_floor: '#3a5a3a'
             };
-            const bg = biomeColors[(tl && tl.type) || 'meadow'] || '#7cbd6b';
+            const bg = _pal((tl && tl.type) || 'meadow') || biomeColors[(tl && tl.type) || 'meadow'] || '#7cbd6b';
             g = `<div style="background:${bg};width:100%;height:100%;min-height:40px;border-radius:4px;opacity:0.7"></div>`;
           } else {
             try {
@@ -18220,7 +18638,7 @@
               // If no tile data, use bright meadow default (Steve 2026-10-06).
               // Explored tiles must NEVER be dark.
               const isUnknown = !tl || ttype === 'unknown';
-              const base = isUnknown ? '#7aaa4a' : (colors[ttype] || '#7aaa4a');
+              const base = (isUnknown ? _pal('meadow') : _pal(ttype)) || (isUnknown ? '#7aaa4a' : (colors[ttype] || '#7aaa4a'));
               // Simple DIV (not SVG) - must render (Steve 2026-10-06)
               g = `<div style="background:${base};width:100%;height:100%;min-height:40px;border-radius:4px"></div>`;
             }
@@ -18399,8 +18817,8 @@
     screen.innerHTML = `
       ${bar('scattering://codex', entries.length + ' entries')}
       <h1 class="title" style="font-size:22px">${Game.journalName().toUpperCase()}</h1>
-      <p class="small"><i>${Game.journalName() === 'Codex' ? 'the village keeps what you write. the System is watching.' : 'field journal — your handwriting. what you learned, so far just yours.'}</i></p>
-      ${(() => { try { const jo = Game.journalOpening ? Game.journalOpening() : null; return jo && jo.line ? `<p class="small" style="opacity:.7"><i>${esc(jo.line)}</i></p>` : ''; } catch (e) { return ''; } })()}
+      <p class="small">${Game.journalName() === 'Codex' ? '<i>the village keeps what you write. the System is watching.</i>' : '<span class="journal-hand">field journal — your handwriting. what you learned, so far just yours.</span>'}</p>
+      ${(() => { try { const jo = Game.journalOpening ? Game.journalOpening() : null; return jo && jo.line ? `<p class="hand note">${esc(jo.line)}</p>` : ''; } catch (e) { console.warn('[codex] journalOpening', e && e.message); return ''; } })()}
       ${villageMapSection()}
       ${entries.length ? entries.map(e => `
         <div class="card codex"><h3>${e.wrongAs ? esc(e.wrongAs) + ' <span class="small" style="opacity:.6">(as taught)</span>' : e.name} <span class="small">· ${e.kcalKnown ? `${e.kcal} kcal/${e.unit}` : `<i>kcal unknown — learn preparation</i>`}</span> <span class="small" style="opacity:.7">[${LVL[e.level] || 'L1'}]</span></h3>
@@ -18409,9 +18827,9 @@
         <p class="small"><b>Prep:</b> ${e.prepKnown ? (e.prep || '—') : '<i>unknown — eat it or reach L2 to learn</i>'}</p>
         <p class="small"><b>Uses:</b> ${e.uses ? esc(e.uses) : '<i>unknown — harvest and taste to learn</i>'}</p>
         ${(e.knowledgeGaps || []).length ? `<p class="small" style="opacity:.8">🔍 <i>still to learn:</i> ${esc(e.knowledgeGaps.join(' '))}</p>` : ''}
-        ${(e.journalMarks || []).length ? e.journalMarks.map(m => `<p class="small" style="color:#e8a13c">⚠ ${esc(m.kind)} — day ${m.day}${m.note ? ': ' + esc(m.note) : ''}</p>`).join('') : ''}
-        ${(e.journalEntries || []).length ? `<p class="small"><i>📓 ${esc(e.journalEntries[e.journalEntries.length - 1].text)}</i></p>` : ''}
-        ${(e.marginalia || []).length ? e.marginalia.slice(-2).map(m => `<p class="small" style="opacity:.7"><i>✒ ${esc(m.first || 'a former hand')}${m.register ? ' · ' + esc(m.register) : ''}, day ${m.day}: ${esc(m.text)}</i></p>`).join('') : ''}
+        ${(e.journalMarks || []).length ? e.journalMarks.map(m => `<p class="hand note" style="color:#e8a13c">⚠ ${esc(m.kind)} — day ${m.day}${m.note ? ': ' + esc(m.note) : ''}</p>`).join('') : ''}
+        ${(e.journalEntries || []).length ? `<p class="hand note">${esc(e.journalEntries[e.journalEntries.length - 1].text)}</p>` : ''}
+        ${(e.marginalia || []).length ? e.marginalia.slice(-2).map(m => `<p class="hand note"><span class="who">${esc(m.first || 'a former hand')}${m.register ? ' · ' + esc(m.register) : ''}, day ${m.day}:</span> ${esc(m.text)}</p>`).join('') : ''}
         <p class="small"><i>${esc(e.knowledge || '')}</i></p>${e.text ? `<p>${esc(e.text)}</p>` : ''}</div>`).join('')
         : '<div class="card"><h3>No entries yet.</h3><p>Forage something. Survive it. Write it down.</p></div>'}
       ${skills.length ? '<h1 class="title" style="font-size:18px">SKILLS</h1><p class="small"><i>knowledge about anything — not just plants. your old life, books, strangers, hard lessons.</i></p>' + skills.map(s => `
@@ -18551,6 +18969,16 @@
   // combat, skip to day 7, grant abilities, teleport, heal. For testing
   // combat without wandering the woods hoping to get mauled.
   let DEBUG = /[?&]debug=1/.test(location.search);
+  // REGION OVERRIDE (docs/WORLD-REGIONS.md §11): ?region=<id> lands the next
+  // new game in that region (it must have landing variants). Testing only.
+  { const rm = location.search.match(/[?&]region=([a-z_]+)/); if (rm) Game.debugRegion = rm[1]; }
+  // SCREENSHOT HOOKS (?debug=1 only): headless proof runs (presentation
+  // evidence) re-render and open the climax sheets without tapping through.
+  if (DEBUG) {
+    Game.debugRefresh = () => refresh(); // wired-exempt: debug/screenshot hook
+    Game.debugOpenTable = () => tableSheet(); // wired-exempt: debug/screenshot hook
+    Game.debugOpenCodex = () => codexScreen(); // wired-exempt: debug/screenshot hook
+  }
   function debugPanel() {
     let el = document.getElementById('debug-panel');
     if (el) { el.remove(); return; }
@@ -18583,7 +19011,7 @@
     const loadoutBtns = (typeof Game.debugLoadoutList === 'function' ? Game.debugLoadoutList() : [])
       .map(([id, label]) => `<button class="dbg-loadout" data-loadout="${id}" style="display:block;width:100%;text-align:left;margin:3px 0;padding:8px;font-size:14px">${label}</button>`).join('');
     const loadoutSection = loadoutBtns
-      ? `<p style="margin:10px 0 4px"><b>LOADOUTS</b> <span style="opacity:.6;font-size:11px">apply to current run</span></p>
+      ? `<p style="margin:10px 0 4px"><b>LOADOUTS</b> <span style="opacity:.6;font-size:12px">apply to current run</span></p>
          <div id="dbg-loadouts">${loadoutBtns}</div>`
       : '';
     // RETIRED: never deleted, saved for later — collapsed behind a toggle.
@@ -18599,7 +19027,7 @@
         if (!ps) return `<p style="opacity:.6;font-size:12px">PACE: no day data yet</p>`;
         return `<p style="font-size:12px">⏱️ PACE: ${ps.medianMin} min/day median (${ps.meanMin} mean) over ${ps.days}d — ${ps.totalMin} min total</p>`;
       } catch (e) { return ''; } })()}
-      <p style="margin:8px 0 4px"><b>SCENARIOS</b> <span style="opacity:.6;font-size:11px">one tap, fresh run</span></p>
+      <p style="margin:8px 0 4px"><b>SCENARIOS</b> <span style="opacity:.6;font-size:12px">one tap, fresh run</span></p>
       ${scenHtml}
       ${loadoutSection}
       ${retSection}
@@ -18702,7 +19130,9 @@
       const id = q('#dbg-ab').value;
       const s = Game.state.scholar;
       s.abilities = s.abilities || [];
-      if (!s.abilities.includes(id)) s.abilities.push(id);
+      // ABILITY LANES: a human competence is taught as its skill, never slotted.
+      if (Game.isSkillLane && Game.isSkillLane(id)) Game.teachAbilitySkill(id, 1, 'debug');
+      else if (!s.abilities.includes(id)) s.abilities.push(id);
       Game.say(`🐞 DEBUG: granted ${id}.`);
       refresh();
     };
@@ -18766,7 +19196,7 @@
       let qs = [];
       try { qs = Game.listQuarantines(); } catch (e) {}
       if (!qs.length) { qzBox.innerHTML = ''; return; }
-      qzBox.innerHTML = '<p style="margin:8px 0 4px"><b>QUARANTINED SAVES</b> <span style="opacity:.6;font-size:11px">corrupt, set aside — not deleted</span></p>' +
+      qzBox.innerHTML = '<p style="margin:8px 0 4px"><b>QUARANTINED SAVES</b> <span style="opacity:.6;font-size:12px">corrupt, set aside — not deleted</span></p>' +
         qs.map(x => {
           let when = '';
           try { when = new Date(x.at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); } catch (e) {}

@@ -65,7 +65,6 @@
 //   - unlock_day: 14 (code: contestTick, contestEligible)
 //   - eligible_villagers: alive + member in good standing + fighting age 15-72 + health > 20 (gravely wounded out per docs/CONTESTS.md; break-it 2026-10-09); player alive/health>0/not exiled (code: contestEligible, Steve 2026-10-06)
 //   - weekly_budget: 2 combined contests+shows (code: contestTick)
-//   - daily_chance: 0.3 (code: contestTick)
 //   - contest_vs_show_ratio: 0.6 (code: contestTick)
 //   - system_whim_chance: 0.1 random participant override (code: fireContest)
 //   - countdown_days: 1 (code: fireContest)
@@ -611,13 +610,6 @@
         rv.winsVs = wins;
         const NAMES = ['Manglejaw', 'The Quiet One', 'Second Dinner', 'Audience Favorite', 'The Rematch'];
         rv.name = NAMES[wins % NAMES.length];
-      }
-    } else {
-      // Villager dossier: their wins heat THEIR file — the System casts
-      // hotter against proven villagers via the hardened variant path.
-      if (outcome === 'won') {
-        const r = this._cxRecord(id);
-        if ((r.wins || 0) >= 2) { try { ac._villagerHeat = true; } catch (e) {} }
       }
     }
   };
@@ -1379,7 +1371,7 @@
     else this.sysSay(`📺 The village will talk about this for days.`);
     try { this.leadShift('showmanship', 1); } catch (e) {}
     // VILLAGER XP (Steve 2026-10-09): being on television teaches.
-    try { if (this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'show'); } catch (e) {}
+    try { if (this.creditDeed) this.creditDeed(pid, 'contest'); } catch (e) { console.warn('[tracks] show deed', e); }
     return { done: true, outcome: 'show_' + outcome };
   };
 
@@ -4313,7 +4305,9 @@
           const entry = { itemId: def.id, name: def.name, units: 1, unit: 'piece', kg: def.kg || 1 };
           s2.inventory.push(entry);
           s2.equipped = s2.equipped || {};
-          s2.equipped.weapon = { itemId: def.id, name: def.name };
+          // modern slots (the legacy .weapon slot is read by nothing live)
+          const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
+          s2.equipped[wslot] = { itemId: def.id, name: def.name };
           // (longsim contests r8 2026-10-12: the bespoke do.note already
           // announces the take — the generic line doubled it.)
           if (!d.note) this.sysSay(`📺 You take the ${def.name}. It feels honest. It's yours now.`);
@@ -4866,14 +4860,23 @@
     };
     const own = items.filter(mine);
     if (!own.length) return false;
-    const sent = own.filter(r => defOf(r).class === 'sentimental');
-    const pool = sent.length ? sent : own;
+    // KEEPSAKE GROWTH (Steve 2026-10-14): a keepsake grows only while WORN
+    // (acc1-acc4); pack keepsakes are dormant and never take the assist.
+    const isWorn = (r) => (typeof this.keepsakeIsWorn === 'function') ? this.keepsakeIsWorn(r) : true;
+    const sent = own.filter(r => defOf(r).class === 'sentimental' && isWorn(r));
+    const nonSent = own.filter(r => defOf(r).class !== 'sentimental');
+    const pool = sent.length ? sent : nonSent;
+    if (!pool.length) return false;
     const eqIds = new Set(Object.values(s.equipped || {}).map(e => e && (e.itemId || e.id)).filter(Boolean));
     const carried = pool.filter(r => eqIds.has(r.itemId || r.id));
     const cands = carried.length ? carried : pool;
     const r = cands[Math.floor(Math.random() * cands.length)];
     const risk = (contest && contest.risk) || '';
     const gain = risk === 'extreme' ? 5 : 3;
+    if (defOf(r).class === 'sentimental' && typeof this.keepsakeGrow === 'function') {
+      // keepsakes.js: bond + level beats + the L3 (bond 50) offer.
+      this.keepsakeGrow(r, gain, 'contest');
+    } else {
     r.bond = (r.bond || 0) + gain;
     try { if (this.checkKeepsakeReveal) this.checkKeepsakeReveal(r); } catch (e) {}
     try {
@@ -4884,6 +4887,7 @@
         }
       }
     } catch (e) {}
+    }
     const nm = r.name || defOf(r).name || (r.itemId || r.id);
     this.sysSay(`📺 SYSTEM: "UNIT ${String(nm).toUpperCase()} — the cameras kept finding it. It mattered to you on the floor, and that is... interesting. Meaning is fuel. We are curious what it becomes. (+${gain} bond on your ${nm})"`);
     try { this.tele('prize_evolution_assist', { item: (r.itemId || r.id), gain: gain, bond: r.bond }); } catch (e2) {}
@@ -4895,7 +4899,8 @@
     if ((s.abilityChoices || []).length) return false; // don't trample a pending offer
     const maxSlots = this.abilitySlots ? this.abilitySlots() : 6;
     if ((s.abilities || []).length >= maxSlots) return false;
-    const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+    // ABILITY LANES (2026-10-14): prizes are magic only.
+    const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
     const owned = new Set((s.abilities || []).map(a => (a && a.id) || a));
     // The gift bag: practical + wacky + mid tiers. The dark tiers (vile,
     // body_horror) and the pact tier (overpowered) are NOT prizes — they
@@ -4905,7 +4910,16 @@
       // a prize when it's taken (offering it would be a taunt, not a gift).
       && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
     if (!bag.length) return false;
-    const pick = (arr) => arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
+    // Weighted by _steerW (set below; 1 when unset), one Math.random per
+    // draw. It was a uniform splice, so the steering weights below did
+    // nothing (diagnosis 2026-10-15; scripts/test-gift-steering-20261015.js).
+    const pick = (arr) => {
+      let tot = 0;
+      for (const a of arr) tot += (a._steerW != null ? a._steerW : 1);
+      let r = Math.random() * tot, i = 0;
+      for (; i < arr.length - 1; i++) { r -= (arr[i]._steerW != null ? arr[i]._steerW : 1); if (r < 0) break; }
+      return arr.splice(i, 1)[0];
+    };
     // PATH STEERING (Steve 2026-10-14 ability coherency, Spire pattern):
     // weight offers toward held paths — the path of least resistance is a
     // build, not a pile. Build-arounds surface when you've committed (2+).
@@ -4914,17 +4928,18 @@
       const _pathCount = {};
       for (const _hid of _held) {
         const _hd = all.find(a => a.id === _hid);
-        for (const _p of ((_hd && _hd.paths) || [])) _pathCount[_p] = (_pathCount[_p] || 0) + 1;
+        // GOD-PATH REDESIGN (2026-10-14): one source — def.path (+ alsoPath).
+        for (const _p of (this.abilityPaths ? this.abilityPaths(_hd) : [])) _pathCount[_p] = (_pathCount[_p] || 0) + 1;
       }
       for (const _c of bag) {
         _c._steerW = 1;
-        for (const _p of (_c.paths || [])) {
+        for (const _p of (this.abilityPaths ? this.abilityPaths(_c) : [])) {
           if ((_pathCount[_p] || 0) >= 2) _c._steerW += 2;
           else if ((_pathCount[_p] || 0) >= 1) _c._steerW += 0.5;
         }
         // Build-arounds: only when committed, then heavily weighted.
         if (_c.unlock && _c.unlock.buildaround) {
-          const _bp = (_c.paths || [])[0];
+          const _bp = _c.path;
           _c._steerW = (_pathCount[_bp] || 0) >= 2 ? 5 : 0.1;
         }
       }
@@ -4944,6 +4959,11 @@
       }
     }
     while (choices.length < 3 && bag.length) choices.push(pick(bag));
+    // GOD-PATH LEAN (2026-10-14): >=1 offer on a recognised path, distinct roles.
+    let _shaped = choices;
+    try { if (this.shapeOffers) _shaped = this.shapeOffers(choices, bag, 'player'); } catch (eS) { console.warn('[godpath] gift lean', eS); }
+    _shaped = _shaped.slice();
+    choices.length = 0; for (const _c of _shaped) choices.push(_c);
     s.abilityChoices = choices.map(e => ({ id: e.id, name: e.name, description: e.description, flavor: e.flavor }));
     try { this.tele('prize_ability_offer', { contest: (contest && contest.id) || '?', ids: choices.map(c => c.id) }); } catch (e2) {}
     this.sysSay(`📺 The System LIKED that. "YOU. WINNER. PICK A TRICK — ON US. Choose." (The System offers you an ability — choose one.)`);
@@ -5018,6 +5038,13 @@
     const isWatch = ac.participant && ac.participant !== 'player';
     const pname = isWatch ? this.displayName(ac.participant) : 'You';
     ac.phase = 'done';
+    // UNIFIED TRACKS (2026-10-14): surviving the System's cameras is System
+    // contact — the strange track, for whoever stood under the lights.
+    try {
+      if (this.gainTrackXP && (outcome === 'won' || outcome === 'lost')) {
+        this.creditDeed && this.creditDeed(isWatch ? ac.participant : 'player', 'contest_survived');
+      }
+    } catch (eT) { console.warn('[tracks] contest survived', eT); }
     // RESOLVE AUDIO (Steve 2026-10-08): the contest's resolution beat lands
     // whether it was won, lost, died, or refused.
     try { this._cxBeat(this._cxB(ac.contestId, 'Resolve')); } catch (e) {}
@@ -5084,11 +5111,14 @@
           // belongs to (+3 XP: a full first rung for a nobody, a nudge for a
           // veteran). The System was watching; the watching pays. The grant
           // path narrates its own "Earned, not given" when a threshold fires.
-          try { this.villagerGainXP(ac.participant, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e2) {}
+          try { this.creditDeed && this.creditDeed(ac.participant, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e2) { console.warn('[tracks] contest win deed', e2); }
         }
       } else {
         this.sysSay(`📺 ${contest.name} — YOU WIN. The crowd is a weather system.`);
         this.addNotability('player', 'contestWin');
+        // UNIFIED TRACKS (2026-10-14): the villager prize deed, for you — a
+        // televised win feeds the contest's track (+3), same as theirs.
+        try { if (this.gainTrackXP) this.gainTrackXP('player', this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (eT) { console.warn('[tracks] contest win', eT); }
         try { this.leadShift('showmanship', 2); } catch (e) {}
         // ALIEN PLAYERS (Steve 2026-10-08; lanes audit-shows 2026-10-09):
         // winning on camera moves the fan club that watched it — the crowd
@@ -5848,7 +5878,14 @@
       fates.push({ pid, outcome });
       // VILLAGER XP (Steve 2026-10-09): surviving the cameras teaches.
       // (The dead earn nothing -- same rule as fights.)
-      try { if (pid !== 'player' && outcome !== 'died' && this.villagerGainXP) this.villagerGainXP(pid, 'social', 1, 'contest'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): the same deed credits the player when
+      // the player was the one under the lights.
+      try {
+        if (outcome !== 'died') {
+          if (pid === 'player') { if (this.noteDeed) this.noteDeed('contest'); }
+          else if (this.creditDeed) this.creditDeed(pid, 'contest');
+        }
+      } catch (e) { console.warn('[tracks] contest deed', e); }
       // The bet rides on the first taken. The System honors wagers: 2x.
       if (i === 0 && ac.bet) {
         const amt = ac.bet.amount;
@@ -6038,7 +6075,7 @@
         // VILLAGER PRIZE DEED (longsim abilities r2 2026-10-11): same
         // win-deed as the watch path — the televised win feeds the
         // contest's deed-XP track.
-        try { this.villagerGainXP(pid, this._cxContestDeedTrack(contest), 3, 'won ' + contest.name + ' on camera'); } catch (e3) {}
+        try { this.creditDeed && this.creditDeed(pid, 'contest_won', this._cxContestDeedTrack(contest)); } catch (e3) { console.warn('[tracks] contest win deed', e3); }
       } else {
         const survived = [
           `📺 ${pname} survived. Barely, by the look of them when the lights came up.`,

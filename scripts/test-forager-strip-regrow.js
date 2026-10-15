@@ -62,6 +62,10 @@ async function main() {
     // stand adjacent (the sweep works the 3x3 around you)
     s.mx = Math.max(0, gx - 1); s.my = gy;
     says.length = 0;
+    // a villager's 'bring me X' quest turned in on this press takes food out
+    // of the pack mid-measure; whether one is open is roster luck
+    // (origins-world 2026-10-14). H3 measures the forage message vs the haul.
+    s.activeQuest = null;
     const kcalBefore = s.kcal, ticksBefore = s.dayTicks, packBefore = packKcal();
     G.doAction('forage');
     const msg = says.join(' || ');

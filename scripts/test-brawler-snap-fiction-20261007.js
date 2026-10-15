@@ -7,22 +7,21 @@
 // npcBetrays(vid, {reason:'snap'|'rage'}) must use matching fiction; the
 // default (cold) path must be unchanged.
 // Run: node scripts/test-brawler-snap-fiction-20261007.js
-const fs = require('fs');
-const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/party.js',
- 'src/js/justice.js', 'src/js/conversation.js', 'src/js/truth.js', 'src/js/journal.js',
- 'src/js/betrayal.js', 'src/js/corpses.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+// Loader: scripts/godpath/lib.js (index.html script order, seeded RNG, frozen
+// clock). The old hand-rolled 16-file eval list went stale (statusEffects.js
+// missing -> seTickFighter crash) and left Math.random unseeded.
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 const ok = (cond, name) => { if (cond) { pass++; console.log('  PASS ' + name); } else { fail++; console.log('  FAIL ' + name); } };
 const newLog = (mark) => Game.log.slice(mark).join('\n');
-const savedRandom = Math.random;
+let savedRandom;
 
+function setTemper(vid, temp) {
+  const vp = Game.vpOf(vid); vp.personality = vp.personality || {}; vp.personality.temperament = temp;
+  return vid;
+}
 async function freshGame() {
   await Game.init();
   Game.genRoster('Columbus, Ohio');
@@ -35,12 +34,15 @@ async function freshGame() {
 }
 
 (async () => {
+  Game = await K.load({ seed: Number(process.env.SEED || 20261007), narration: true });
+  savedRandom = Math.random;
   // ---- TEST 1: snap path (fear>=95 forces breaking point; random<0.5 -> snap) ----
   {
     const others = await freshGame();
-    const soft = others.find(id => ['cautious', 'withdrawn'].includes(Game.npcTemper(id)));
-    if (!soft) { console.log('SKIP test1: no cautious/withdrawn villager this seed'); }
-    else {
+    // Pin the temper (flake fix 2026-10-14): was SKIP when the seed dealt no
+    // cautious/withdrawn villager. Re-temper one instead.
+    const soft = others.find(id => ['cautious', 'withdrawn'].includes(Game.npcTemper(id))) || setTemper(others[0], 'cautious');
+    {
       Game.npcNeeds(soft).fear = 95;
       Math.random = () => 0.1;
       const m = Game.log.length;
@@ -56,9 +58,8 @@ async function freshGame() {
   // ---- TEST 2: rage path (bold temper, low fear, random<0.4 -> swings first) ----
   {
     const others = await freshGame();
-    const bold = others.find(id => ['bold', 'prickly', 'intense'].includes(Game.npcTemper(id)));
-    if (!bold) { console.log('SKIP test2: no bold/prickly/intense villager this seed'); }
-    else {
+    const bold = others.find(id => ['bold', 'prickly', 'intense'].includes(Game.npcTemper(id))) || setTemper(others[0], 'bold');
+    {
       Game.npcNeeds(bold).fear = 0;
       Math.random = () => 0.1;
       const m = Game.log.length;

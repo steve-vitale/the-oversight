@@ -8,6 +8,7 @@
 //   - fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale)
 //   - tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons)
 //   - finaleCampaignButtons() (heart-fight combat buttons)
+//   - campaignGrieve(snap, tid) / campaignCamp(tid) / campaignInjectMonster(mid) / campaignSurvivors(tid) — the march rules, shared with THE NETWORK (network-campaign.js)
 //   - _finaleTest (test hooks)
 // rules:
 //   - campaign_is_a_march: three nodes in order; the opening refuses until the crew is cleared, the heart until the opening is cleared. (code: titanEntryGate)
@@ -42,12 +43,14 @@
     return st.campaigns.finale;
   }
 
-  function muster() {
-    try { return (titanSt().musters || {}).finale || null; } catch (e) { return null; }
+  // muster(tid): the campaign's muster — the finale's by default. THE
+  // NETWORK (2026-10-14) reuses the same march rules on its own muster.
+  function muster(tid) {
+    try { return (titanSt().musters || {})[tid || 'finale'] || null; } catch (e) { return null; }
   }
 
-  function survivors() {
-    var m = muster();
+  function survivors(tid) {
+    var m = muster(tid);
     return m ? (m.allies || []).length : 0;
   }
 
@@ -267,7 +270,7 @@
 
   // Dead allies leave the muster (faces stay dead), home rosters marked,
   // trust cost paid, grief said aloud. Shared by crew/opening resolves.
-  function finaleGrieve(snap) {
+  function finaleGrieve(snap, tid) {
     var dead = (snap.allies || []).filter(function (a) { return !a.alive; });
     if (!dead.length) return;
     var seenVillages = {};
@@ -301,7 +304,7 @@
     });
     // remove the dead from the muster — the next node marches with survivors
     try {
-      var m = muster();
+      var m = muster(tid);
       if (m) {
         var deadVids = {};
         dead.forEach(function (a) { deadVids[a.vid] = 1; });
@@ -310,19 +313,26 @@
     } catch (e) {}
   }
 
-  function finaleInterlude(node) {
-    // the coalition camps: partial healing, said aloud
+  // campaignCamp(tid): the coalition camps between nodes — player +50% of
+  // missing health, allies +25%. Shared by the finale and THE NETWORK.
+  function campaignCamp(tid) {
     try {
       var s = Game.state.scholar;
       var maxH = Game.maxHealth ? Game.maxHealth() : 100;
       var missing = Math.max(0, maxH - (s.health || 0));
       s.health = Math.min(maxH, (s.health || 0) + Math.round(missing * 0.5));
-      var m = muster();
+      var m = muster(tid);
       (m ? m.allies : []).forEach(function (a) {
         var am = Math.max(0, 100 - (a.hp || 0));
         a.hp = Math.min(100, (a.hp || 0) + Math.round(am * 0.25));
       });
-    } catch (e) {}
+    } catch (e) { console.warn('campaignCamp', e); }
+    return survivors(tid);
+  }
+
+  function finaleInterlude(node) {
+    // the coalition camps: partial healing, said aloud
+    campaignCamp('finale');
     if (node === 'finale_crew') {
       Game.say('🏕️ The coalition makes camp among the dead air. You sleep in your armor. (+50% of missing health; allies +25%.) The broadcast tower is dark. Ahead, the sky is half-arrived — THE OPENING CREDITS roll over a world that isn\'t ready. (' + survivors() + ' blades march on.)');
     } else if (node === 'finale_opening') {
@@ -398,7 +408,8 @@
             campaign: tf.campaign,
             result: result,
             allies: this.tbfight.fighters.filter(function (f) { return f.kind === 'ally'; })
-              .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid, alive: !!f.alive }; }),
+              // injected ally fighters carry their id as villagerId (titanInjectAllies), not vid
+              .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid || f.villagerId, alive: !!f.alive }; }),
           };
         }
       } catch (e) {}
@@ -709,6 +720,11 @@
     finaleReinforce: finaleReinforce,
     finaleNodeReady: finaleNodeReady,
   });
+  // THE NETWORK (2026-10-14) marches by the same rules on its own muster.
+  Game.campaignGrieve = finaleGrieve;
+  Game.campaignCamp = campaignCamp;
+  Game.campaignInjectMonster = injectMonster;
+  Game.campaignSurvivors = survivors;
   Object.assign(Game, finaleMethods);
 
   // test hooks

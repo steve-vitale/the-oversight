@@ -123,6 +123,11 @@
     // abilityActionDef: look up an action definition from abilities.json.
     // Returns {ability, action} or null.
     abilityActionDef: function (abilityId, actionId) {
+      // KEEPSAKE ACTIONS (Steve 2026-10-14, COHERENCE-SPINE.md): a worn L2
+      // keepsake grants a combat action; its data lives in keepsakes.js.
+      if (abilityId === 'keepsake' && typeof this.keepsakeActionDef === 'function') {
+        return this.keepsakeActionDef(actionId);
+      }
       var abilities = (this.data && this.data.abilities) || [];
       var ability = null;
       for (var i = 0; i < abilities.length; i++) {
@@ -206,7 +211,10 @@
         this.say('That action doesn\'t exist. (Unknown: ' + abilityId + '.' + actionId + ')');
         return false;
       }
-      if (!this.hasAbility(abilityId)) {
+      var _held = (abilityId === 'keepsake')
+        ? !!(typeof this.keepsakeActionReady === 'function' && this.keepsakeActionReady(actionId))
+        : this.hasAbility(abilityId);
+      if (!_held) {
         this.say('You don\'t have that ability. (' + (def.ability.name || abilityId) + ')');
         return false;
       }
@@ -309,7 +317,8 @@
         // XP RICHNESS (evolution build 2026-10-11, measured): real activations
         // grant 2 XP (were 1) — they cost food/actions, they're investments.
         // Related-action grants elsewhere stay at 1 (passive).
-        try { this.gainAbilityXP(abilityId, 2); } catch (e) {}
+        // Keepsake actions grow by being WORN (bond), not by ability XP.
+        if (abilityId !== 'keepsake') { try { this.gainAbilityXP(abilityId, 2); } catch (e) {} }
         // FEASTED (feast-surge rework, Worker B 2026-10-10): the feasted
         // form — the known ability, temporarily evolved. Generic framework:
         // uplift rode the damage funnels; here the data-driven twist runs.
@@ -527,6 +536,14 @@
           this.say('The rage burns out. You\'re yourself again — shaking, but yourself.');
         }
       }
+      // NEXT STRIKES (god-path 2026-10-14): Stoke (furnace) and Back from the
+      // Brink (undying) load a multiplier for the next N strikes (godpath.js).
+      if (s._nextStrikes && s._nextStrikes.n > 0) {
+        d = Math.round(d * s._nextStrikes.mult);
+        s._nextStrikes.n--;
+        this.say(s._nextStrikes.label + ': ×' + s._nextStrikes.mult + (s._nextStrikes.n > 0 ? ' (' + s._nextStrikes.n + ' left).' : '.'));
+        if (s._nextStrikes.n <= 0) delete s._nextStrikes;
+      }
       // ONE PERSON ARMY (wired 2026-10-07): the synergy's modifiers fire here.
       // Outnumbered (2+ living foes): bonus scales the strike. Alone with a
       // single foe and no allies standing: solo damage. Needs a live fight.
@@ -736,6 +753,24 @@
       if (game.state.scholar.haymakerReady)
         return { ok: false, why: 'Already wound up — swing to release it.' };
       return { ok: true };
+    },
+    'retribution.unleash': function (game) {
+      // REFUSED TAPS COST NOTHING (2026-10-14): BA.unleash empties the
+      // battery and takes the 25% self-hit, and the turn + 30 kcal are paid,
+      // all BEFORE the impl looked for an adjacent enemy. Check the battery,
+      // the fight and adjacency here, before anything is spent.
+      var bs = (game.state.scholar && game.state.scholar.buildaround) || {};
+      if ((bs.retribution || 0) < 10)
+        return { ok: false, why: 'Nothing stored yet — block damage first, then serve it back.' };
+      var f = game.tbfight;
+      var p = game.tbFighter ? game.tbFighter('p') : null;
+      if (!f || f.over || !p) return { ok: false, why: 'Retribution needs a fight to answer.' };
+      for (var i = 0; i < f.fighters.length; i++) {
+        var m = f.fighters[i];
+        if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
+        if (Math.abs((m.mx || 0) - (p.mx || 0)) + Math.abs((m.my || 0) - (p.my || 0)) <= 1) return { ok: true };
+      }
+      return { ok: false, why: 'No one adjacent to take it — the stored fury stays stored.' };
     },
     'animal_ken.calm_beast': function (game, target) {
       // The bar passes no target (self/none actions); the impl needs a live
@@ -1743,6 +1778,10 @@
       if (!m) { game.say('Nothing left to scream at.'); return false; }
       s._cheeseWheelDay = day;
       var dmg = 25 + Math.floor(Math.random() * 11);
+      // CROWD FAVORITE (showrunner payoff, god-path 2026-10-14): the
+      // audience scales your social tricks — the wheel flies on fan noise.
+      try { var _BAc = (_g.Scattering || {}).buildarounds; if (_BAc && _BAc.socialMult) dmg = Math.round(dmg * _BAc.socialMult(game)); }
+      catch (eC) { console.warn('[godpath] crowd favorite', eC); }
       var label = game.encSubject ? game.encSubject(m) : (m.name || 'it');
       game.say('You hurl the wheel — it SCREAMS the whole way there, homing in on ' + label + '! It cannot miss. (Cheese Wheel: ' + dmg + '.)');
       game.tbDamage(m.key, dmg, 'cheese wheel', 'p');
@@ -1999,8 +2038,10 @@
     'trophy_room.mark': function (game, target) {
       var BA2 = (typeof globalThis !== 'undefined' && globalThis.Scattering || {}).buildarounds;
       if (!BA2) { game.say('Trophy Room: the engine is not loaded.'); return false; }
-      // Mark a monster type from recent kills.
-      var kills = ((game.state.codex || {}).monsterKills) || {};
+      // Mark a monster type from recent kills. state.villageSlain is the real
+      // per-type kill record (recordWaveKill, the choke point for every kill);
+      // state.codex.monsterKills was never written.
+      var kills = game.state.villageSlain || {};
       var types = Object.keys(kills).filter(function (k) { return kills[k] > 0; });
       if (!types.length) { game.say('Trophy Room: no kills recorded yet — hunt something first, then mark it.'); return false; }
       // If a target type was passed, use it; otherwise mark the most-killed.

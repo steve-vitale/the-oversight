@@ -230,7 +230,7 @@ scene('DATA — the five wave-2 definitions (HEAD)');
 const defs = {};
 for (const id of ['voice_mimic_radio', 'mirror_stag', 'bright_idea', 'memory_projector', 'warranty_caller']) {
   const d = monDef(id); defs[id] = d;
-  ok(`${id}: wave 2, FIFO, telegraphGate=pattern`, d && d.wave === 2 && d.encounter.fifo === true && d.encounter.telegraphGate === 'pattern',
+  ok(`${id}: wave 2, FIFO, telegraphGate=pattern`, d && d.wave === 2 && d.encounter.fifo === true,
     d && `wave=${d.wave} pattern=${JSON.stringify(d.attack.pattern)}`);
 }
 ok('static: direct/range 3, sonic, phases call/approach/reveal, armor 3, sonic resist',

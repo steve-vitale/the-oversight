@@ -20,6 +20,10 @@ changing the subject, offering help, or leaving. Never just "continue".
 - `village` — how everyone's holding up (generated from live needs/moods/heat)
 - `plans` — what they'll do tomorrow
 - `request` / `grief` / `cheer` / `recall` — single-beat contextual threads
+- `where` — "Where do you think we are?" A new run doesn't know its landing
+  region or season (`state.scholar.placeKnown`). Locals tell you (known),
+  visitors guess (rough), strangers can't. Raises the day-header season line.
+  Generated topic in `src/js/whereAreWe.js`; lines in `climates.json` `talk`.
 
 "Tell me more." goes deeper until the thread is honestly exhausted — then they
 say so ("I've told you everything I know about that") instead of looping.

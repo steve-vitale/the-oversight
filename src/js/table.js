@@ -7,6 +7,7 @@
 //   - tableBranch(pathId)
 //   - tableRegisterPath(def)
 //   - tableScene()
+//   - tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14)
 //   - tableActive()
 //   - chooseTableOption(id)
 //   - tableStartPath(pathId)
@@ -27,9 +28,13 @@
 //   - tableTheme()
 //   - tableEpilogue(frame, branch, choiceId)
 //   - tableLiveWrap(text)
+//   - tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals)
+//   - tableBeatChoices(beat, T) -> a beat's own choices plus the build-aware option on the beat that plays the build
+//   - tableEndingLines(fid, outcome) -> the path's final plus one build coda (or a bespoke path entry) for the locked key
+//   - tablePathName(id) -> the path's display name (the {path} token in endings)
 // consumes:
 //   - state.scholar, state.village, progState()
-//   - ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
+//   - ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership()
 //   - say, sysSay, recordMoment, recordLegend, wipe, save
 //   - metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides)
 //   - switchboard() (comms.js) for the light/dark axis
@@ -53,11 +58,19 @@
       if (!def || !def.id) return;
       PATHS[def.id] = def;
     },
+    // tablePathName: a path's display name ('the Beloved'); the {path}
+    // token in the ending codas (endingKey.js).
+    tablePathName(id) {
+      const d = pathDef(id);
+      return (d && d.name) || null;
+    },
 
     // ============ THE SEAT: full / lesser / none ============
     // Steve 2026-10-11: the table PRICES the run, never gates on godhood.
-    // The 2026-10-10 deedGateReady() is the FULL seat (national+, all wave
-    // bars, 3 contests, 3 crises, stage>=3, food-thesis deeds). The LESSER
+    // deedGateReady() is the FULL seat (all wave bars 5/5/4/3/2, 3 contests,
+    // 3 crises, stage>=2, food-thesis deeds; no scale bar since the
+    // 2026-10-13 Standing change — the lesser seat still needs regional+,
+    // an open asymmetry flagged 2026-10-14). The LESSER
     // seat is the reachable bar for competent non-god play — priced
     // honestly, fewer paths open, weaker terms. Below it the table does
     // not come (ledger.js's withdrawal beat handles that case).
@@ -103,6 +116,11 @@
         // and the audit voices it (see tableScene).
         let ascBonus = 0;
         try { ascBonus = (this.tableAscended ? this.tableAscended().length : 0) * 10; } catch (e) {}
+        // OVERTIME (Steve 2026-10-14: "waiting should have a cost"): the
+        // table docks standing per overtime tier and per Haven loss while
+        // it waited (overtime.js overtimeStanding). Priced, said aloud.
+        let otPen = 0;
+        try { otPen = this.overtimeStanding ? this.overtimeStanding().penalty : 0; } catch (e) { console.warn('table overtime price', e); }
         for (const id of Object.keys(PATHS)) {
           const def = PATHS[id];
           let pr = { earned: false, strength: 0, why: 'The table has not priced this seat yet.' };
@@ -112,7 +130,7 @@
           if ((order[seat.seat] || 0) < (order[def.minSeat || 'lesser'] || 0)) {
             pr = { earned: false, strength: 0, why: def.seatWhy || 'This seat needs a stronger table.' };
           }
-          out.push({ id, name: def.name, earned: !!pr.earned, strength: Math.min(100, (pr.strength | 0) + ascBonus), why: pr.why, showGenre: def.showGenre });
+          out.push({ id, name: def.name, earned: !!pr.earned, strength: Math.max(0, Math.min(100, (pr.strength | 0) + ascBonus) - (pr.earned ? otPen : 0)), why: pr.why, showGenre: def.showGenre });
         }
       } catch (e) {}
       return out;
@@ -416,11 +434,18 @@
       }
       pg.tableDone = true;
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
+
+      // ENDINGS BY BUILD (Steve 2026-10-14): "The ending you can win is set
+      // as you enter the table." The build half of the ending key locks
+      // here; each door entered fills the path and its moral.
+      try { if (this.endingKeyLock) this.endingKeyLock(); } catch (e) { console.warn('table ending key lock', e); }
+
       // TABLE SITTING (journey-endgame r11 2026-10-14): conversations need to
       // know the table has sat — villagers remark on it once per sitting.
       // A new sitting starts here; the win-day-floor re-offer is the SAME
       // sitting (the table never left), so it does not bump.
       pg.tableSittingId = (pg.tableSittingId | 0) + 1;
+
       const d = seat.detail || {};
       // MUSIC (Steve 2026-10-12): the table gets its ceremonial bed.
       try { this.music('scenario', 'table'); } catch (e) {}
@@ -437,6 +462,11 @@
         const _ascN = this.tableAscended ? this.tableAscended().length : 0;
         if (_ascN) this.say(`The table notes ${_ascN} ascension${_ascN > 1 ? 's' : ''} from one village — its terms improve accordingly. Nobody has ever seen that before.`);
       } catch (e) {}
+      try {
+        const _ot = this.overtimeStanding ? this.overtimeStanding() : null;
+        if (_ot && _ot.penalty) this.say(`The table notes the overtime: ${_ot.tier} week${_ot.tier === 1 ? '' : 's'} kept waiting${_ot.losses ? `, ${_ot.losses} of Haven lost meanwhile` : ''}. Every door's standing −${_ot.penalty}.`);
+        if (pg.networkFallen) this.say('The table notes something it has never priced: the Network is off the air. Nobody is watching this. The faces around the ring look, for the first time, unsure who is judging whom.');
+      } catch (e) { console.warn('table overtime audit', e); }
       // TABLE SANCTITY (2026-10-12, Steve): the System clears the stage.
       // One line, producer-unhinged — the world holds its breath while the
       // table sits. Ambient monster pressure is suspended for the sequence
@@ -445,6 +475,57 @@
       try { this.recordMoment(`Haven reached the table (${seat.seat} seat).`); } catch (e) {}
       try { this.metaNoteTable && this.metaNoteTable('table'); } catch (e) {}
       this.tableOfferPaths('The ring waits. Seven doors — some open, some priced beyond you. The choice is which risk you take.');
+    },
+
+    // TABLE SEAT AT HAVEN (Steve 2026-10-14): the table stays RELATIVE until
+    // the player sits ("relative until actually entering it when it locks"),
+    // and is NOT asked every morning ("It will get annoying if we ask them
+    // about the table every morning after it's available. Make it an option
+    // in haven once unlocked."). Qualifying announces it once; the Haven
+    // panel shows tablePreview() and calls tableTakeSeat().
+    tableAnnounce() {
+      try {
+        const pg = this.progState();
+        if (pg.tableDone) return;
+        const seat = this.tableSeat();
+        // lost the seat: the existing withdrawal beat, and a fresh
+        // announcement if the run qualifies again later
+        if (seat.seat === 'none') { pg.tableAnnounced = false; this.tableScene(); return; }
+        if (pg.tableAnnounced) return;
+        // NO SPOILERS (Steve 2026-10-14: "Not just greyed out before 90,
+        // nonexistent. Don't spoil the game for them."): before the seat can
+        // be taken, the table does not exist for the player.
+        if (!this.winDayFloorOk()) return;
+        pg.tableAnnounced = true;
+        this.say('◈ THE TABLE IS SET. A ring of pale light waits — take your seat from Haven when you are ready. Nothing is final until you sit.');
+        try { this.save(); } catch (e) {}
+      } catch (e) { console.warn('tableAnnounce', e); }
+    },
+    // tablePreview(): the run as priced TODAY (recomputed live). null when
+    // the table isn't available. ready = the seat can be taken now.
+    tablePreview() {
+      try {
+        const pg = this.progState();
+        if (!pg.tableWaiting || pg.tableDone) return null;
+        const seat = this.tableSeat();
+        if (seat.seat === 'none') return null;
+        const doors = this.tableEarnedPaths().filter(p => p.earned).map(p => p.name);
+        const day = ((this.state || {}).scholar || {}).day || 0;
+        // nonexistent before day 90 — no preview, no button (no spoilers)
+        if (!this.winDayFloorOk()) return null;
+        // OVERTIME (2026-10-14): the live price shows the waiting cost.
+        let ot = null;
+        try { ot = this.overtimeStanding ? this.overtimeStanding() : null; } catch (e) { console.warn('tablePreview overtime', e); }
+        return { seat: seat.seat, doors, day, ready: true, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen };
+      } catch (e) { console.warn('tablePreview', e); return null; }
+    },
+    // tableTakeSeat(): the player sits — this locks the seat (tableScene);
+    // tableStartPath locks the branch.
+    tableTakeSeat() {
+      const pv = this.tablePreview();
+      if (!pv) return { ok: false, msg: '' };
+      this.tableScene();
+      return { ok: true };
     },
 
     // tableOfferPaths: path selection modal. Earned paths are choices;
@@ -505,6 +586,7 @@
       // light / grey / dark — instead of the binary signals.branch. The
       // grey middle is an honest ending color, not a coin flip.
       if (pathId === 'relay' && branch.band) { T.branch = branch.band; T.band = branch.band; }
+      try { if (this.endingKeyEnter) this.endingKeyEnter(pathId, T.branch); } catch (e) { console.warn('table ending key door', e); }
       // Path abilities: mostly shared + several branch-unique. Granted
       // aloud at the door; grant effects are immediate and honest.
       const ab = def.abilities || {};
@@ -587,11 +669,28 @@
       const beat = def.beats[T.beat];
       let lines = [];
       try { lines = (typeof beat.say === 'function' ? beat.say.call(this, T) : beat.say) || []; } catch (e) {}
+      // THE TABLE PLAYS THE BUILD (Steve 2026-10-14, "Both, linked"): one
+      // beat per path reads the ending key — its line names what you are.
+      let build = null;
+      try { build = this.tableBuildBeat ? this.tableBuildBeat(T) : null; } catch (e) { console.warn('table build line', e); }
       const prompt = lines.map(l => `<p>${this.escHtml(l)}</p>`).join('') +
+        (build && build.line ? `<p><b>◈ YOUR BUILD</b> — ${this.escHtml(build.line)}</p>` : '') +
         (beat.meterLine ? `<p><i>${this.escHtml(typeof beat.meterLine === 'function' ? beat.meterLine.call(this, T) : beat.meterLine)}</i></p>` : '');
-      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const chList = this.tableBeatChoices(beat, T);
       const options = chList.map(c => ({ id: 'beat:' + c.id, label: c.label }));
       this.tablePrompt(prompt, options, def.name);
+    },
+    // tableBeatChoices: the beat's own choices, plus the build-aware option
+    // on the beat that plays the build (data: src/data/table-beats.json).
+    // The build option always carries the path's stake: losable for every
+    // build, light or dark (Steve 2026-10-14).
+    tableBeatChoices(beat, T) {
+      let list = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      try {
+        const b = this.tableBuildBeat ? this.tableBuildBeat(T) : null;
+        if (b && b.choices && b.choices.length) list = list.concat(b.choices);
+      } catch (e) { console.warn('table build choices', e); }
+      return list;
     },
 
     tableChoose(id) {
@@ -601,7 +700,7 @@
       const beatId = (id.indexOf('beat:') === 0) ? id.slice(5) : id;
       const beat = (def.beats || [])[T.beat];
       if (!beat) return;
-      const chList = (typeof beat.choices === 'function') ? beat.choices.call(this, T) : (beat.choices || []);
+      const chList = this.tableBeatChoices(beat, T);
       const choice = chList.find(c => c.id === beatId);
       if (!choice) return;
       // Apply meter/effect deltas. Ability mods (e.g. oathbound halves
@@ -664,9 +763,13 @@
         // assimilated def means the test rig is thin — end plainly rather
         // than stranding the challenge.)
         this.say('No doors remain open. The table makes its final offer: comfort, on its terms — or the long walk with empty hands.');
-        const ad = pathDef('assimilated');
+        // A failed Assimilated walk is already the rock bottom (losable since
+        // 2026-10-14, Steve: "they can't lose their scenario no matter what
+        // path" was a defect): it ends plainly instead of looping back in.
+        const ad = T.path === 'assimilated' ? null : pathDef('assimilated');
         if (ad) {
           T.path = 'assimilated'; T.phase = 'challenge'; T.beat = 0; T.meters = {};
+          try { if (this.endingKeyEnter) this.endingKeyEnter('assimilated', T.branch); } catch (e) { console.warn('table ending key rock-bottom', e); }
           this.say(`◈ ${ad.name.toUpperCase()} — ${ad.openLine}`);
           this.tableRunBeat();
         } else {
@@ -715,6 +818,12 @@
           finalOpts.push({ id: 'final:poddemand', label: 'Demand the pods opened. (The table will charge.)' });
         }
       } catch (e) {}
+      // THE HOSTS (the key, 2026-10-14): with the Network off the air,
+      // every path — light or dark — gets the best human ending as its
+      // last choice. The path's own challenge already ran (still losable).
+      try {
+        if (this.progState().networkFallen) finalOpts.push({ id: 'final:hosts', label: branch === 'dark' ? 'THE HOSTS — take the broadcaster\'s chair. Bring the Taken home.' : 'THE HOSTS — set the table. Bring the Taken home.' });
+      } catch (e) { console.warn('table hosts option', e); }
       this.tablePrompt(
         `<p>The ring holds its light. Trillions of eyes. Now — the last choice is yours, and it's live:</p>`,
         finalOpts,
@@ -747,12 +856,13 @@
         try { this.save(); } catch (e) {}
         return;
       }
+      if (!fin && fid === 'hosts' && this.progState().networkFallen) { this.tableResolveHosts(def, branch); return; }
       fin = fin || finals[0];
       if (!fin) return;
       const s = this.state.scholar, pg = this.progState();
       this.say(`◈ ${def.name.toUpperCase()} — "${fin.label}"`);
       const outcome = typeof fin.outcome === 'function' ? fin.outcome.call(this, T) : fin.outcome;
-      (Array.isArray(outcome) ? outcome : [outcome]).forEach(l => this.say(l));
+      this.tableEndingLines(fin.id, outcome).forEach(l => this.say(l));
       // MUSIC (Steve 2026-10-12): endings get their bed — warm or cold.
       try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) {}
       // Epilogue: hero, facilitator, or outshone — credited honestly.
@@ -768,6 +878,84 @@
       try { this.save(); } catch (e) {}
     },
 
+    // tableEndingLines(fid, outcome): ENDINGS BY BUILD (Steve 2026-10-14:
+    // "Each playstyle and godhood path, moral choice version should have its
+    // own ending."). The most specific authored ending for the locked key
+    // (src/data/table-endings.json) may replace this final's outcome and adds
+    // its closing lines; with nothing authored, the path's own light/dark
+    // outcome stands. Which text resolved is noted for telemetry.
+    tableEndingLines(fid, outcome) {
+      const T = this.tableState();
+      let lines = Array.isArray(outcome) ? outcome.slice() : (outcome ? [outcome] : []);
+      try {
+        const end = this.tableEndingFor ? this.tableEndingFor(T.path, T.branch || 'light', fid) : null;
+        if (this.tableEndingNote) this.tableEndingNote(end);
+        if (end) {
+          if (end.outcome && end.outcome.length) lines = end.outcome.slice();
+          if (end.title) lines.push(`◈ ${end.title}`);
+          lines = lines.concat(end.lines || []);
+        }
+      } catch (e) { console.warn('table ending lines', e); }
+      return lines;
+    },
+
+    // ============ THE HOSTS — the key's ending (2026-10-14) ============
+    // evidence/2026-10-14/draft-abilities-skills-endgame-key.md "THE HOSTS":
+    // every other ending is a bargain inside the System's frame; here the
+    // pricer is dead. Humanity hosts a dinner at the Table (food is
+    // humanity's superpower; the galaxy forgot food), and the Taken come
+    // home to it: the adults taken on day zero and the pod children.
+    // Light = "An Open Table", dark = "The New Network". Each path flavors
+    // the dinner with one line.
+    tableHostsLines(pathId, branch) {
+      const flavor = {
+        feared: 'They eat because they don\'t dare refuse.',
+        indispensable: 'No contract. You hand them a recipe.',
+        beloved: 'The most-watched dinner in history, and nobody broadcasts it.',
+        witness: 'The judges sit as guests at your table.',
+        defiant: 'You paid nothing. They came anyway.',
+        assimilated: 'The ones who absorbed you get absorbed back, through the stomach.',
+        relay: 'The switchboard goes silent. You speak in person.',
+      };
+      const lines = [];
+      lines.push('◈ THE HOSTS — the ring of pale light has no cameras left. You don\'t arrive as a contestant. You arrive as the one who ended the show, and you set the table.');
+      lines.push('You cook. Haven carries the pots in. Things with too many angles lift a spoon for the first time in their history, and eat. ' + (flavor[pathId] || ''));
+      const cast = this.castTakingMourners ? this.castTakingMourners(2) : [];
+      const first = (id) => { try { return this.displayName(id).split(' ')[0]; } catch (e) { return 'someone'; } };
+      lines.push('Then the doors at the edge of the light open. The Taken walk in: the half of the adults gone since day zero, and the children out of the pods, blinking. The show was the only thing holding them. The show is over.');
+      for (const m of cast) {
+        const kin = ((m.kin && m.kin.name) || 'them').split(' ')[0];
+        lines.push(`${first(m.id)} sees ${kin} across the table, and the dinner stops, and nobody minds.`);
+      }
+      if (branch === 'dark') {
+        lines.push('THE NEW NETWORK — you take the broadcaster\'s chair. The Taken come home, but the cameras turn around: the galaxy is your audience now, and it eats what humans feed it. You became the thing you killed. You like the view.');
+      } else {
+        lines.push('AN OPEN TABLE — you feed them, and teach them that hunger is a gift. The Taken walk home through a galaxy that has started to cook. Humanity isn\'t on the menu or the schedule. It sits at the head of the table.');
+      }
+      return lines;
+    },
+    tableResolveHosts(def, branch) {
+      const T = this.tableState();
+      const s = this.state.scholar;
+      this.tableHostsLines(T.path, branch).forEach(l => this.say(l));
+      this.tableEndingLines('hosts', []).forEach(l => this.say(l));
+      try { this.music('scenario', branch === 'dark' ? 'ending-dark' : 'ending-light'); } catch (e) { console.warn('hosts music', e); }
+      try { const v = this.state.village || {}; v.kidsReturned = true; v.takenReturned = true; } catch (e) { console.warn('hosts village', e); }
+      try { if (this.podRemember) this.podRemember('taken-home', { via: 'network' }); } catch (e) { console.warn('hosts pods', e); }
+      const label = branch === 'dark' ? 'THE HOSTS: The New Network' : 'THE HOSTS: An Open Table';
+      this.tableEpilogue(def, branch, { id: 'hosts', label });
+      try { this.recordMoment(`Haven's table path: ${def.name} (${branch}), choice: ${label}. The Taken came home.`); } catch (e) { console.warn('hosts moment', e); }
+      try { this.recordLegend({ outcome: 'table', frame: T.path, choice: label, key: 'network' }); } catch (e) { console.warn('hosts legend', e); }
+      try { this.metaNoteTableChoice && this.metaNoteTableChoice(T.path, 'hosts'); } catch (e) { console.warn('hosts meta', e); }
+      T.final = 'hosts';
+      s.tableChoices = null;
+      if (!this.winDayFloorOk()) { this.winDayFloorDefer(T); return; }
+      T.phase = 'done';
+      this.over = true; this.won = true;
+      try { this.wipe(); } catch (e) { console.warn('hosts wipe', e); }
+      try { this.save(); } catch (e) { console.warn('hosts save', e); }
+    },
+
     // tableResolveDemandPrice: the table charges, the pods open, then the
     // normal epilogue (which will NOT sting — you paid).
     tableResolveDemandPrice(price) {
@@ -776,6 +964,7 @@
       this.say(`◈ THE PRICE — "${price}." The table nods. The System rubs its hands.`);
       const lines = (typeof this.podDemandCost === 'function') ? this.podDemandCost(price) : [];
       (Array.isArray(lines) ? lines : [lines]).forEach(l => this.say(l));
+      this.tableEndingLines('poddemand', []).forEach(l => this.say(l));
       if (def) this.tableEpilogue(def, T.branch || 'light', { id: 'poddemand', label: 'Demanded the pods opened.' });
       try { this.recordMoment(`Haven's table path: ${(def || {}).name} (${T.branch}), choice: demanded the pods opened (paid ${price}).`); } catch (e) {}
       try { this.recordLegend({ outcome: 'table', frame: T.path, choice: 'demanded the pods opened' }); } catch (e) {}

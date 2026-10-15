@@ -5,8 +5,8 @@
 //   (2) withdrawal attribution: forced tableScene on a fresh game (seat 'none') -> 'scene-withdrawn' event.
 //   (3) deferral-stall attribution: real winDayFloorDefer(T) -> 'win-deferred' event, then synthetic
 //       days in phase 'paths' + tableChoices null -> stall.deferredDays > 0 in finalize.
-//   (4) live run: leadfeast s22 (known table-reacher from r31) 180d -> waitingDay/scene/prompts attributed,
-//       gate chain reaches at least SCENE.
+//   (4) live run: leadfeast, first of a fixed candidate seed list that reaches the table in 180d
+//       (was hardcoded s22) -> waitingDay/scene/prompts attributed, gate chain reaches at least SCENE.
 //   (5) A/A determinism: two invocations -> identical day-hashes AND identical gate chains.
 // INFO-SKIP discipline: any setup failure degrades to INFO-SKIP (exit 0), never MODULE_NOT_FOUND.
 process.env.FEASTSCALE_R13 = process.env.FEASTSCALE_R13 || '1';
@@ -34,6 +34,12 @@ async function runCensus(seed, arm, days) {
   const wrapped = Object.create(policy);
   const base = policy.daily;
   wrapped.daily = (G, ctx) => {
+    // TAKE THE SEAT (2026-10-14): the Table no longer fires at dawn — it is
+    // a Haven option the player takes (table.js tableTakeSeat, Steve
+    // 2026-10-14 "Make it an option in haven once unlocked"). A sim policy
+    // never clicks it, so the live chain stalled at WAIT on every seed.
+    // Sit as soon as the seat is offered, like a decisive player.
+    try { const pv = Game.tablePreview && Game.tablePreview(); if (pv && pv.ready) Game.tableTakeSeat(); } catch (e) { console.log('  tableTakeSeat threw: ' + e.message); }
     wc.censusRow(Game, t);
     hashes.push(Game.state.scholar.day + ':' + dayHash(Game));
     return base ? base(G, ctx) : undefined;
@@ -91,9 +97,25 @@ async function main() {
     check('chain names the stall', c.gates.chain.join(' ').indexOf('-won') >= 0, c.gates.chain.join(' '));
   }
 
-  console.log('[test-wincensus] (4) live run: leadfeast s22 reaches the table, gates attributed');
-  {
-    const { census } = await runCensus(22, 'origin', 180);
+  // (4)+(5) need a LIVE run that reaches the table. Which seed does that is
+  // a property of today's RNG stream, not of the instrument: s22 was the
+  // r31 table-reacher until an RNG-shifting change (trial 1-of-3 sheet,
+  // ledger events) tipped it under and this test went red for the wrong
+  // reason. Scan a fixed candidate list and use the FIRST seed whose live
+  // run reaches the scene; fail only if none does (that would be a real
+  // regression worth a look). Override: WINCENSUS_SEEDS=22,11,...
+  const CANDIDATES = (process.env.WINCENSUS_SEEDS || '22,11,33,44,55,66,77,88,99,101')
+    .split(',').map(Number).filter(Number.isFinite);
+  let liveSeed = null, live = null;
+  for (const sd of CANDIDATES) {
+    const r = await runCensus(sd, 'origin', 180);
+    if (r.census.gates.sceneDay != null && r.census.gates.promptsOffered > 0) { liveSeed = sd; live = r; break; }
+    console.log(`  (s${sd}: no table scene in 180d — chain ${r.census.gates.chain.join(' ')})`);
+  }
+  console.log(`[test-wincensus] (4) live run: leadfeast s${liveSeed} reaches the table, gates attributed`);
+  check('a candidate seed reaches the table scene', liveSeed != null, 'tried ' + CANDIDATES.join(','));
+  if (live) {
+    const { census } = live;
     const g = census.gates;
     check('waitingDay attributed', g.waitingDay != null, 'chain=' + g.chain.join(' '));
     check('scene fired', g.sceneDay != null, 'chain=' + g.chain.join(' '));
@@ -103,10 +125,10 @@ async function main() {
     check('transcript captured', census.transcript.length > 0, 'lines=' + census.transcript.length);
   }
 
-  console.log('[test-wincensus] (5) A/A determinism on s22');
-  {
-    const a = await runCensus(22, 'origin', 180);
-    const b = await runCensus(22, 'origin', 180);
+  console.log(`[test-wincensus] (5) A/A determinism on s${liveSeed}`);
+  if (live) {
+    const a = live;
+    const b = await runCensus(liveSeed, 'origin', 180);
     const hEq = a.hashes.join('|') === b.hashes.join('|');
     const cEq = a.census.gates.chain.join(' ') === b.census.gates.chain.join(' ');
     check('identical day-hashes A/A', hEq);

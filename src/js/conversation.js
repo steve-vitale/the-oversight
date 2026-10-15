@@ -1396,10 +1396,6 @@
     // new face never pretends they were in the room. (v.mantleOf is written
     // by playerDeath in ledger.js.)
     mantleOf() { try { return (this.state.village || {}).mantleOf || []; } catch (e) { return []; } },
-    bearerStartDay() {
-      const m = this.mantleOf();
-      return m.length ? (m[m.length - 1].day || 1) : 1;
-    },
     // inheritedName(rec): first name of the Bearer <redacted> held the office
     // when this conversational record (open thread, seed, favor, memory)
     // was made — or null when the current Bearer <redacted> it. Prefers the
@@ -3350,6 +3346,11 @@
       const s = this.state.scholar || {};
       const cur = this.playerDisposition();
       s.disposition = Math.max(-3, Math.min(3, cur + delta));
+      // TABLE INPUT (coherence audit 2026-10-14; Steve: conversation style
+      // counts toward the ending): only REAL movement on the axis counts, so
+      // the clamp stops farming. Cruel → might (Feared), kind → protected (Beloved).
+      const moved = s.disposition - cur;
+      if (moved && this.ledgerAdd) this.ledgerAdd(moved < 0 ? 'might' : 'protected', Math.abs(moved));
     },
 
     // relDays: relationship age in days (for trust gating — the count
@@ -3772,6 +3773,9 @@
             sub.push({ id: 'teach', label: this.convoActionLabel(vid, 'teach') });
           }
         } catch (e) {}
+        if (!suppressPivot && this.convoSkillChoices) {
+          try { for (const ch of this.convoSkillChoices(vid)) if (!sub.some(s => s.id === ch.id)) sub.push(ch); } catch (e) { console.warn('[skill-teaching] subject menu', e); }
+        }
         sub.push({ id: 'leave', label: c.exchanges === 0 ? '"Actually — never mind."' : '"I should go."' }); // BREAK-IT (socialite 2026-10-08): 'Nice talking to you' lied on a zero-exchange menu — the player said nothing. An aborted approach says never mind.
         return this.finalizeMenu(vid, sub);
       }
@@ -3996,6 +4000,10 @@
       }
       // Earned verbs ride after the capped topics (see TEACHING above).
       if (teachChoice) choices.push(teachChoice);
+      // SKILL LESSONS (skill-teaching.js): "Teach me X?" / "I could show you X." — earned verbs, same slot rule.
+      if (!onThread && !suppressPivot && this.convoSkillChoices) {
+        try { for (const ch of this.convoSkillChoices(vid)) choices.push(ch); } catch (e) { console.warn('[skill-teaching] menu', e); }
+      }
       if (tradeChoice) choices.push(tradeChoice);
       if (offerHelpChoice) choices.push(offerHelpChoice);
       // The subject-change is always available mid-thread (it's the explicit
@@ -5038,6 +5046,10 @@
       } else if (choiceId === 'hawker_no') {
         c.pendingHawk = null;
         done('"No hurry. It\'ll keep."', '"Not today."');
+      } else if (choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0) {
+        // SKILL LESSON (skill-teaching.js): one mechanic, either direction.
+        const r = this.convoSkillLesson(vid, choiceId);
+        done(r.line, r.you);
       } else if (choiceId === 'teach') {
         // Teaching happens in conversation now — show, don't menu.
         // TOPICAL TEACH (Steve, Rule 2): show/teach must relate to what's
@@ -5571,6 +5583,19 @@
       const goodbyeSaid = !!c.windingDown;
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
+      // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,
+      // not a hello) is social work — the deed that feeds a villager's social
+      // track feeds yours. Per-day capped in the deed table.
+      // PARITY (2026-10-14): it was a conversation for both of them — the
+      // villager gets the same social deed, and learns of one ability the
+      // bearer holds (villager ability knowledge, villager-build.js).
+      try {
+        if ((c.transcript || []).length >= 4) {
+          if (this.noteDeed) this.noteDeed('conversation');
+          if (this.creditDeed && vid && vid !== this.villagerId) this.creditDeed(vid, 'conversation');
+          if (this.npcLearnFromTalk && vid && vid !== this.villagerId) this.npcLearnFromTalk(vid, 'player');
+        }
+      } catch (eT) { console.warn('[tracks] convo deed', eT); }
       c.heldBeats = []; c.heldAsk = false; c.winddownQueued = false; c.windingDown = false;
       // INVITATION HONESTY (journey landing r8 2026-10-12): an undecided
       // invite is re-spoken next sitting. inv.spoken meant "the NPC said
@@ -5822,9 +5847,6 @@
     // not "active" in this sense — it helps you learn, never replaces it.
     translatorActive() {
       return this.translatorStage() === 2;
-    },
-    memoryAidActive() {
-      return this.translatorStage() >= 1;
     },
     // mediatedBySystem: live translate is on AND you share no tongue with
     // them. The System gives you the words — the human work doesn't happen.

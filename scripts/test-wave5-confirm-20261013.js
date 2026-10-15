@@ -33,6 +33,14 @@ function unitDeathCauses() {
   ok('deathCauses handles missing samples', JSON.stringify(deathCauses({})) === '{}');
 }
 
+// meetWave3(G): the standing rungs sit on top of the wave-3 rung (audit
+// 2026-10-14) — day past the floor + 5 wave-2 ledger points (wave-2 kills
+// add no standing; the war source reads waves 3+).
+function meetWave3(G) {
+  G.state.scholar.day = 30;
+  for (const id of ['voice_mimic_radio', 'mirror_stag', 'review_drone', 'bright_idea', 'memory_projector']) G.scoreLedgerKill(id);
+}
+
 async function liveGate() {
   const { Game } = await loadGame({ seed: 777, mode: 'wave5-confirm-proof' });
   await setupGame(Game);
@@ -45,6 +53,7 @@ async function liveGate() {
   ok('fresh waveEngaged(4) is 0', (Game.waveEngaged(4) | 0) === 0);
 
   // plenty path: 10 major feasts -> 200 plenty
+  meetWave3(Game);
   Game.state.feastLog = [];
   for (let i = 0; i < 10; i++) Game.state.feastLog.push({ quality: 1, day: 10 + i });
   s = Game.villageStanding();
@@ -60,6 +69,7 @@ async function liveGate() {
   // a wave-4 kill also registers faced (single path integrity)
   const { Game: G2 } = await loadGame({ seed: 778, mode: 'wave5-confirm-proof2' });
   await setupGame(G2);
+  meetWave3(G2);
   G2.state.feastLog = [];
   for (let i = 0; i < 10; i++) G2.state.feastLog.push({ quality: 1, day: 10 + i });
   ok('G2 standing>=200, no faced -> still wave 4', G2.unlockedWave() === 4);

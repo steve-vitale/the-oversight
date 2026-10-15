@@ -78,27 +78,32 @@ function makeEligible(Game) {
   ok(/pg\.trialCd = \(s\.day \|\| 0\) \+ 4;/.test(src),
     'wiring: completeTrial cooldown +4');
 
-  // ---------- 4. completion: cooldown, integ, gift, synergy ----------
+  // ---------- 4. completion: cooldown, integ, lesson ----------
+  // UNIFIED TRACKS (2026-10-14, deliberate design change): the audience
+  // trial no longer gifts a magic ability (no 1-of-3 sheet). Powers come
+  // from track level-ups; the trial TEACHES one unknown skill and feeds the
+  // strange track. The old gift assertions are replaced by lesson ones.
   makeEligible(Game);
   const s = Game.state.scholar;
-  s.abilities = [{ id: 'mediator', name: 'Mediator', level: 1, xp: 0 }]; // one synergy leg held
-  s.synergies = [];
+  s.abilities = [{ id: 'adrenaline_control', name: 'Adrenaline Control', level: 1, xp: 0 }];
+  s.abilityChoices = null;
   const integBefore = s.integration;
   const vRawBefore = (Game.state.village || {}).viewership; // may be null
+  const knownSkills = () => Object.keys((Game.state.codex || {}).skills || {}).filter(k => ((Game.state.codex.skills[k] || {}).level || 0) >= 1).length;
+  const sk0 = knownSkills();
   // stage a completable trial: pantry haul, already hauled
   const pg = Game.progState();
   const pk = Game.pantryKcal ? Game.pantryKcal() : 0;
   pg.trial = { id: 'haul_small', text: 'Haul 1,000 kcal to the pantry within 3 days.', need: 1000, have: 0, kind: 'pantry', start: pk - 1000, expires: (s.day || 0) + 3 };
+  said.length = 0;
   Game.checkTrial('daily');
   ok(pg.trial == null, 'trial completes when the haul is met');
   ok(pg.trialCd === (s.day || 0) + 4, 'cooldown is day+4', `trialCd=${pg.trialCd} day=${s.day}`);
   ok(Math.round(s.integration) === Math.round(Math.min(100, integBefore + 15)), '+15 integration', `${integBefore} -> ${s.integration}`);
-  const got = (s.abilities || []).map(a => a.id);
-  ok(got.includes('diplomat'), 'synergy-aware gift: mediator held -> diplomat gifted', got.join(','));
-  // discovery itself needs uses (checkSynergyDiscovery attempt windows) —
-  // the gift's job is completing the legs. Assert the pairing is co-held.
-  ok(got.includes('mediator') && got.includes('diplomat'),
-    'synergy legs co-held after gift (discovery follows from play)', got.join(','));
+  ok(!(s.abilityChoices || []).length, 'no ability sheet: the trial gifts no magic', JSON.stringify(s.abilityChoices));
+  ok((s.abilities || []).map(a => a.id).join(',') === 'adrenaline_control', 'abilities untouched by the trial', (s.abilities || []).map(a => a.id).join(','));
+  ok(knownSkills() === sk0 + 1, 'the trial teaches one unknown skill', `${sk0} -> ${knownSkills()}`);
+  ok(said.some(m => /TRIAL COMPLETE/.test(m) && /a lesson:/.test(m)), 'completion names the lesson', said.find(m => /TRIAL COMPLETE/.test(m)));
   // the moment: recorded with real text, not undefined
   const moments = pg.moments || [];
   ok(moments.length > 0 && /Haul 1,000 kcal/.test(moments[0].text || ''), 'recordMoment fires with trial text', moments[0] && moments[0].text);
@@ -108,38 +113,19 @@ function makeEligible(Game) {
   // showmanship-reactive); this test asserts the moment registered at all.
   ok(viewAfter != null && viewAfter > 0, 'viewership registered by the moment', `${vRawBefore} -> ${viewAfter}`);
 
-  // ---------- 5. slot-opening gift + true-full refusal ----------
-  // Pre-existing design (verified on this code): completeTrial integrates
-  // FIRST (+15 can open a slot), then the gift fills it. 4/4 at integ 60
-  // -> integ 75 opens slot 5 -> the gift takes it. Honest, not forced.
-  makeEligible(Game);
-  s.abilities = [];
-  {
-    const slots = Game.abilitySlots();
-    const pool = (Game.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
-    for (let i = 0; i < slots && i < pool.length; i++) s.abilities.push({ id: pool[i].id, name: pool[i].name, level: 1, xp: 0 });
-    ok(s.abilities.length === slots, 'setup: slots full at current integ', `${s.abilities.length}/${slots}`);
-    pg.trial = { id: 'haul_small', text: 'Haul 1,000 kcal to the pantry within 3 days.', need: 1000, have: 0, kind: 'pantry', start: (Game.pantryKcal ? Game.pantryKcal() : 0) - 1000, expires: (s.day || 0) + 3 };
-    said.length = 0;
-    Game.checkTrial('daily');
-    ok(s.abilities.length === slots + 1 && s.abilities.length === Game.abilitySlots(),
-      'trial opens a slot and the gift fills it (never exceeds slots)',
-      `${slots} -> ${s.abilities.length} (slots now ${Game.abilitySlots()})`);
-  }
-  // True-full: integ 100 (6 slots), 6 held -> the gift is refused honestly.
+  // ---------- 5. full slots: the trial still completes, nothing forced ----------
   makeEligible(Game);
   s.integration = 100;
   ok(Game.abilitySlots() === 6, 'setup: 6 slots at integ 100');
   s.abilities = [];
   {
-    const pool = (Game.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+    const pool = (Game.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane === 'magic');
     for (let i = 0; i < 6 && i < pool.length; i++) s.abilities.push({ id: pool[i].id, name: pool[i].name, level: 1, xp: 0 });
     pg.trial = { id: 'haul_small', text: 'Haul 1,000 kcal to the pantry within 3 days.', need: 1000, have: 0, kind: 'pantry', start: (Game.pantryKcal ? Game.pantryKcal() : 0) - 1000, expires: (s.day || 0) + 3 };
     said.length = 0;
     Game.checkTrial('daily');
-    ok(s.abilities.length === 6, 'full slots at max: no gift forced', `6 -> ${s.abilities.length}`);
-    ok(said.some(m => /TRIAL COMPLETE/.test(m)) && !/gift:/.test(said.join(' ')),
-      'completion narrated without a gift when slots are full');
+    ok(s.abilities.length === 6, 'full slots at max: nothing forced', `6 -> ${s.abilities.length}`);
+    ok(said.some(m => /TRIAL COMPLETE/.test(m)), 'completion narrated with full slots');
   }
 
   // ---------- 6. sense read: the copy ----------
@@ -150,7 +136,7 @@ function makeEligible(Game) {
   console.log('\n--- sense: offer copy ---\n' + offerCopy.split('\n').slice(0, 4).join('\n'));
   ok(/AUDIENCE TRIAL/.test(offerCopy), 'offer beat fires with the trial frame');
   ok(!/undefined/.test(offerCopy), 'no "undefined" in offer copy');
-  ok(/integration, and a gift/i.test(offerCopy), 'offer names the reward honestly');
+  ok(/integration, and a lesson/i.test(offerCopy), 'offer names the reward honestly (a lesson, no magic gift — unified tracks 2026-10-14)');
 
   console.log(`\n${pass} passed, ${fail} failed`);
   if (notes.length) console.log(notes.join('\n'));

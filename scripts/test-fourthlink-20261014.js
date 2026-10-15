@@ -26,7 +26,12 @@ const { leadcourt } = require('./policies/leadcourt');
 const { attachLinkPipe, finalizeLinkPipe } = require('./link-pipeline-20261014');
 const tune = require('./sweep-standing-tune-20261013');
 
-const SEED = 11, DAYS = 60;
+// SEED 11 -> 12 (ability lanes 2026-10-14): seed 11's 60-day economy now
+// collapses (pantry 0 by d28, run over d47) after occupations stopped
+// granting magic background abilities and the RNG path shifted; the
+// courtship gate (pantry > 15k at d>=35) is never reached, so the proof
+// had nothing to observe. Seed 12 reaches the gate; assertions unchanged.
+const SEED = Number(process.env.FL_SEED || 12), DAYS = 60;
 
 async function shortRun({ armed, instrument }) {
   const base = armed ? require('./policies/fourthlink').fourthlink : leadcourt;

@@ -1,0 +1,225 @@
+# Steve's answers — god paths, Table, testing
+
+Direct answers from Steve, in his words. **These outrank every summary,
+brief, or proposal**, including `opus-brief-ability-system.md` and both
+versions of `opus-godpath-proposal.md`. Add new answers at the top, dated,
+verbatim.
+
+---
+
+## 2026-10-15
+
+"Keep on running simulations and adjusting levers!"
+
+"Those targets are all flexible. If a subclass doesn't appear, that either
+means we need to tweak the game or it's truly useless and maybe needs cut.
+Feel free to be flexible."
+
+## 2026-10-14 (latest, round 7)
+
+"Yes can address player as you. Job to skills sounds right if it's balanced
+well." (Bios and the System's assessment may speak to the player in second
+person. The job → background skill pairings stand, subject to a balance
+check in sweeps.)
+
+## 2026-10-14 (latest, round 6)
+
+"Those calls are fine for now." (Claude's calls: job → path lean plus a wider
+offer window for class diversity; a named class's payoff may appear on any
+track; "held the class 10 days" as a placeholder god deed; no XP raise beyond
+~8 player level-ups; first run counted per device; endings written gods →
+classes → tracks.)
+
+## 2026-10-14 (latest, round 5)
+
+On composing Table endings (path final + one build coda: ~70 codas — 10 gods,
+20 subclasses, 5 tracks, × light/dark — instead of 675 bespoke endings; ~6
+fully playable regions first): "Nope good idea that's kinda manageable."
+On the player starting with their own familiarity of the land: "Yeah I think
+that makes sense."
+
+## 2026-10-14 (latest, round 4)
+
+"Get the important stuff built, leave the bulk of work once scaffolded to the
+muse agent to resume. But set it up for success in all future endeavors."
+
+On showing the season: "Okay add season line but that's a small knowledge
+unlock as you speak to people. Where we are in the world becomes part of
+conversation."
+
+## 2026-10-14 (latest, round 3)
+
+On trimming the eastern woodlands' 48 animals to real eastern species:
+"Sure aren't they eastern already?" (They weren't: bison, javelina,
+alligator and python spawned on every map. Trim approved.)
+
+On local/visitor/stranger: "Yes the local visitor map looks okay just maybe
+not granular enough or synced to our available starting options. Flesh out
+where it needs to be to make sense, either with starting characters or new
+locations to originate. I did answer a few of your repeated questions
+already."
+
+(Note to agents: check this file before asking Steve anything. Don't
+re-ask.)
+
+## 2026-10-14 (latest, round 2)
+
+"Human skills should be learnable before the system shows up. Do a quick
+audit for exceptions. Maybe first run let them land in the origin they choose
+a character from. Random after. Yes both groups exist.
+
+Expedition is leaving your village as a nomad to find remaining family. That
+should be another bonus ending. Seek out and find family according to
+backstory and where they went. Yes that's okay to run a wet/dry year.
+Whenever the player starts, should be the season the game starts in. Like it
+happened right when they started playing, for immersion. What is your
+estimate on play time for a full campaign?
+Let's buff everyone, or at least feel more comfortable with improving
+abilities to compensate etc. Keep that codex rule. Yes that's good for seek
+knowledge."
+
+(Context: "both groups" = the Taken and the scattered kin; "that codex rule" =
+a dead bearer's skills stay in the Codex as the office's written knowledge;
+"seek knowledge" = villagers read their 1-of-3 offers and seek only when they
+know too little about their own build.)
+
+## 2026-10-14 (latest)
+
+**On villager builds:** "Villagers can't just take the next ability, they
+need to seek knowledge about the abilities and go for a build that suits
+their technology."
+
+Answering the tracks/keepsake/roster round: "Good calls! Continue all."
+(The 10-path roster with 2 subclasses each is approved to build.)
+
+**On parity:** "Villagers and players should get the same XP, when in doubt
+we treat them the same way. You should get to swap on level up or keep
+existing. No I don't think you should take your XP or the abilities. You
+become that villager. That's why you have to treat villagers and players as
+similarly as possible, and villagers need to act in smart ways, including
+towards getting good gear and builds. They want to win as well."
+
+**On the strange track and family:** "Yes any death for strange path,
+eventually we will add more family content but canon is that people got
+randomized and split up across the world. The family arc has to be late game
+content at the global stage."
+
+**On the world:** "Please provide muse scaffolding for establishing the rest
+of the nations as starting regions and places that can be accessed. This also
+necessitates other starting flora and fauna, and we can truly have the
+starting characters be thrown into a random enviroment. What else needs to be
+adapted to the new environments? We don't need every country but take a shot
+at like all continents/subcontinents roughly. Your job is inclusive and
+synergistic design that muse agent will execute against. Build the rest
+though, just not the massive content expansion."
+
+## 2026-10-14 (late night)
+
+**On coherence:** "We need all these features coherent. Gods are rough
+representatives of what starts out as jobs and classes, or playstyles."
+
+**On sentimental items:** "Sentimental items need to compete with accessory
+gear for the extra slots available. The gear must both contribute to some
+bigger structure in the game kinda like you mention but each must grow into
+evolving levels of what act like skills or abilities. They start off doing
+nothing, they start doing a little, but they displace gear or accessories that
+would typically give other actions or boosts."
+
+(Design: `docs/COHERENCE-SPINE.md`.)
+
+## 2026-10-14 (night)
+
+**On ability classes:** "The classes are supposed to be oriented around the god
+paths as icing on the cake. Each god path can have some intended subclasses
+though that fit the build. Let's keep thinking this way."
+
+**On the ending:** "Good call on the ending." (THE HOSTS approved.)
+
+**On progression:** "I think we need to sync the player and villager system.
+But the villager system sounds like the better model." / Key trigger: "Yes
+that trigger sounds good with n being determined and tuned later." /
+Ambiguous abilities: "I want your executive judgement. Reuse what you can but
+things need to be useful and make sense."
+
+## 2026-10-14 (evening)
+
+**On abilities vs skills:** "We have a slot for skills. I intended abilities
+to be gained from a variety of related XP sources. Things acquired from
+events and other meaningful experiences, knowledge learned etc should be
+typically ending up in skills, unless it fits the magic power theme. There
+should be maybe 8 natural level ups plus a few other gifts or events etc that
+compete for those 6 slots. I just want everything in its logical
+categorization."
+
+**On waiting at the Table:** "waiting should have a cost- but also an
+opportunity for the truly powerful. Waves get truly ridiculous and maybe we
+can throw an Easter egg monster in at a certain milestone and enough crazy
+punishment. Something else on the scale of titan class but even bigger.
+Something that has to be fought across the entire map etc. all working as a
+key to unlock the best ending for humans at the table. Should be almost
+impossible to get. This will present a final target for our game breaking
+builds to conquer."
+
+**On the Table prompt:** "It will get annoying if we ask them about the table
+every morning after it's available. Make it an option in haven once
+unlocked." (Implemented: Haven panel "Take your seat", 116a8b9d.)
+
+**On the Table method:** "The table method we chose is kinda low drama and it
+lets the ending be kinda farmed."
+
+## 2026-10-14 (later)
+
+**On the keepsake beam rule:** "Bonded vests blocks beams was never a rule,
+probably just a vague suggestion recorded. Look for evidence of a coherent
+system in each feature and correct where necessary as it contributes to the
+whole." (Rule removed; full coherence audit in
+`evidence/2026-10-14/coherence-audit.md`.)
+
+**Q: Should diplomacy, conquest, titan kills, kind/cruel conversation and detective work count toward the ending?**
+**A:** "Yes, all of them." (Implemented: ledger event mapping.)
+
+**Q: What is the one source of truth for "a build"?**
+**A:** "Redesign it." (Part of the god-path redesign.)
+
+**Q: Should ability gifts offer a choice?**
+**A:** "It's supposed to already pick 1 of 3 are you sure it doesn't do this
+already? The first ability is pick 1 of 3." (Verified: arrival, contest and
+aid offers were choices; the audience-trial gift was not, and is now 1 of 3.)
+
+**Q: What happens if the Table is reached early?**
+**A:** "The table should all be relative until actually entering it when it
+locks. Even if they qualify early, there's room for them to change or
+influence path until they get to the very end." (Implemented: tableInvite.)
+
+## 2026-10-14
+
+Context: `evidence/2026-10-14/opus-assumption-review.md` §5.
+
+**Q: Is the ability brief yours?**
+**A:** "Muse's summary." Treat it as a draft; only Steve's direct quotes are law.
+
+**Q: What should the last hour of a winning run feel like?**
+**A:** "Both, linked": the titan finale feeds into the Table, and the
+Table also plays your build.
+
+**Q: How should god-path work be tested, given sim bots make zero ability uses?**
+**A:** "Build a bot": first invest in a sim player that actually uses
+abilities and builds, so sims can measure.
+
+**Q: Should a player be able to change light/dark at the Table?**
+**A:** "The ending you can win is set as you enter the table, but that
+doesn't mean they play the same table scenario or that they can't lose
+their scenario no matter what path, light or dark. Each playstyle and
+godhood path, moral choice version should have its own ending."
+
+### What follows directly (no interpretation needed)
+
+- Which ending is on offer is fixed at entry, and that's intended.
+- Every Table scenario must be **losable**, light or dark. Today 5 of 7 light walks can't fail; that's a defect.
+- Scenarios must **differ by playstyle, godhood path and moral side**. Today six paths share one 3-beat menu shape.
+- The Table must **read the build**. Today no `table*.js` file reads abilities, gear or godhood.
+- The finale campaign must **connect** to the Table.
+
+### Open (needs Steve)
+
+- How "playstyle × godhood path × moral side" combines into a manageable number of endings (see the assumption review follow-up).

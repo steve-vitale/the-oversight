@@ -23,6 +23,16 @@ function toNight(Game) {
   while (Game.dayPart !== 3 && g++ < 8) Game.advancePart();
 }
 function runParts(Game, n) { for (let i = 0; i < n; i++) Game.advancePart(); }
+// keepFed: the scholar never eats in this test, so an idle run starves around
+// day 7 and the mantle passes to a villager who may already hold a proposal
+// (then "the scholar" is in the proposals by succession, not by seeding).
+// Whether the debate converged first was seed luck; pin the body instead.
+function keepFed(Game) {
+  const s = Game.state.scholar;
+  s.kcal = Math.max(s.kcal || 0, 3000);
+  s.hydration = Math.max(s.hydration || 0, 100);
+  s.health = Math.max(s.health || 0, 100);
+}
 
 (async () => {
   console.log('== 1. dead killer: tale dies, no report ==');
@@ -75,13 +85,16 @@ function runParts(Game, n) { for (let i = 0; i < n; i++) Game.advancePart(); }
   {
     const { Game } = await loadGame({ seed: 105, mode: 'taletell-parity', fullTelemetry: false });
     await setupGame(Game);
+    const scholarId = Game.villagerId;
     const [killer] = rosterOf(Game);
     Game.recordWaveKill('belltoad', killer);
     toNight(Game);
     const e = (Game.state.codex.monsters || {}).belltoad || {};
     check('killer is the first knower', (e.knowers || [])[0] === killer);
     let g = 0;
-    while (!e.villageName && g++ < 300) Game.advancePart();
+    while (!e.villageName && g++ < 300) { keepFed(Game); Game.advancePart(); }
+    check('scholar survived the debate (no succession)', Game.villagerId === scholarId,
+      `scholar ${scholarId} -> ${Game.villagerId}`);
     check('debate converged', !!e.villageName, 'no villageName after 300 parts');
     const proposals = Object.values(e.proposals || {});
     check('name came from villager proposals', proposals.includes(e.villageName),

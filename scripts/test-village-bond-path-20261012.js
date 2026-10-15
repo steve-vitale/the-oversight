@@ -99,22 +99,33 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
       ok(id + ' not a decorative kit entry', kit.indexOf(id) < 0);
     }
     // the real route: bleed beside someone, the System offers the path
+    // UNIFIED TRACKS (2026-10-14, design change): the shieldbearer abilities
+    // are skill-lane, so a villager LEARNS them as villager skills (no slot).
+    // "Held" = npcHasAbility (slots + known skills), the villager twin of
+    // the player's hasAbility.
     Game.combatBondAdd(a, b, 30);
     Game.noteShieldbearerOffer(a);
-    const held = (Game.state.village.npcAbilities || {})[a] || [];
-    ok('bond 30 -> System offers draw_fire', held.indexOf('draw_fire') >= 0, 'held=' + held.join(','));
+    const owned = () => (Game.npcOwnedIds ? Game.npcOwnedIds(a) : ((Game.state.village.npcAbilities || {})[a] || []));
+    ok('bond 30 -> System offers draw_fire', Game.npcHasAbility(a, 'draw_fire'), 'held=' + owned().join(','));
     Game.combatBondAdd(a, b, 20); // 50 total
     Game.noteShieldbearerOffer(a);
-    const held2 = (Game.state.village.npcAbilities || {})[a] || [];
-    ok('bond 50 -> bodyguard follows', held2.indexOf('bodyguard') >= 0, 'held=' + held2.join(','));
-    // nothing before the System's arrival
+    ok('bond 50 -> bodyguard follows', Game.npcHasAbility(a, 'bodyguard'), 'held=' + owned().join(','));
+    ok('skill-lane shieldbearer abilities take no villager slot', ((Game.state.village.npcAbilities || {})[a] || []).indexOf('draw_fire') < 0);
+    // before the System's arrival
+    // DESIGN CHANGE (Steve 2026-10-14: "Human skills should be learnable
+    // before the system shows up"): the shieldbearer entries are skill-lane,
+    // so a villager learns them pre-System too — as a skill, never a slot.
+    // Only a magic path entry would wait for the arrival.
     const Game2 = await freshGame(SEED + 40);
     const [c, d] = vids(Game2, 2);
     Game2.state.systemArrived = false;
     Game2.combatBondAdd(c, d, 90);
     Game2.noteShieldbearerOffer(c);
-    const held3 = (Game2.state.village.npcAbilities || {})[c] || [];
-    ok('no offers before day-7 arrival', held3.length === 0, 'held=' + held3.join(','));
+    // PARITY (2026-10-14, design change): a villager's first ability (their
+    // knack, like the player's) is held from day 1.
+    const knack3 = ((Game2.state.village.npcKnacks || {})[c]);
+    const held3 = ((Game2.state.village.npcAbilities || {})[c] || []).filter(id => id !== knack3);
+    ok('pre-arrival: the skill is learned (draw_fire), no slot taken', held3.length === 0 && Game2.npcHasAbility(c, 'draw_fire'), 'held=' + held3.join(','));
   }
 
   // ---------- 6. rally: hold for them, once per fight ----------

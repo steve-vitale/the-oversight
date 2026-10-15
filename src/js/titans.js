@@ -16,6 +16,7 @@
 //     council, call, and commit buttons in the camp self bar (app.js)
 //   - titanOutfit(villageId, itemIds[]) -> real gear transfer; real effectiveness
 //   - titanMusterState(titanId) / titanMusterReady(titanId)
+//   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
 // rules:
@@ -98,8 +99,20 @@
       var rankOk5 = ['national', 'global'].indexOf(rank) >= 0;
       if (wave >= 4 && rankOk4) titanMaybeOmen(cast.herald, day, 0.10);
       if (wave >= 5 && rankOk5) titanMaybeOmen(cast.apocalypse, day, 0.08);
+      // OVERTIME (Steve 2026-10-14: "waiting should have a cost"): a run
+      // that keeps the Table waiting gets the OTHER climax too — the
+      // apocalypse this run did not cast airs as a rerun. Without it,
+      // "all three titans slain" (the key's gate) could never happen.
+      var live = [cast.herald, cast.apocalypse];
+      var third = (typeof Game.overtimeThirdTitan === 'function') ? Game.overtimeThirdTitan() : null;
+      if (third) {
+        var otc = 0.25;
+        try { otc = ((Game.data.titans || {})._overtime || {}).thirdTitanOmenChance || 0.25; } catch (e) { console.warn('titans overtime cfg', e); }
+        titanMaybeOmen(third, day, otc);
+        live.push(third);
+      }
       // advance omens, escalation, muster upkeep, turn tick
-      [cast.herald, cast.apocalypse].forEach(function (tid) {
+      live.forEach(function (tid) {
         titanAdvanceOmen(tid, day);
         titanEscalate(tid, day);
       });
@@ -749,7 +762,8 @@
               titan: tf.titan,
               result: result,
               allies: this.tbfight.fighters.filter(function (f) { return f.kind === 'ally'; })
-                .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid, alive: !!f.alive }; })
+                // injected ally fighters carry their id as villagerId (titanInjectAllies), not vid
+                .map(function (f) { return { key: f.key, name: f.name, villageId: f.villageId, vid: f.vid || f.villagerId, alive: !!f.alive }; })
             };
           }
         } catch (e) {}
@@ -789,6 +803,15 @@
       taken[nx + ',' + ny] = 1;
       o.mx = nx; o.my = ny;
       fighters.push(o);
+      // TURN ORDER (diagnosis-endgame 2026-10-15): startCombat built
+      // tbfight.order before the coalition arrived, and the turn loop walks
+      // f.order — blades pushed only into fighters never took a turn (every
+      // titan, Finale and Network blade stood still). Join the order now
+      // (as finale-campaign injectMonster does); re-sort by speed next round.
+      if (Array.isArray(Game.tbfight.order) && Game.tbfight.order.indexOf(o.key) < 0) {
+        Game.tbfight.order.push(o.key);
+        Game.tbfight.orderDirty = true;
+      }
       spot++;
     }
     muster.allies.forEach(function (a) {
@@ -930,6 +953,8 @@
     titanMusterState: function (titanId) { return titanState().musters[titanId] || null; },
     // exposed for the finale campaign (allied injection into campaign nodes)
     titanInjectAllies: titanInjectAllies,
+    // exposed for THE NETWORK (network-campaign.js): the committed come home
+    titanReleaseCommitted: titanReleaseCommitted,
   };
 
   Object.assign(Game, methods);

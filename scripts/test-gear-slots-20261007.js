@@ -71,8 +71,10 @@ check('no block without full set', E.blockedSlots({ torso: { itemId: 'leather_ja
 check('hoodie -> torso', E.slotForItem(items[9]) === 'torso');
 check('mothers_ring -> null (accessory)', E.slotForItem(items[10]) === null);
 check('isAccessory mothers_ring', E.isAccessory(items[10]) === true);
-check('reading_glasses -> head', E.slotForItem(items[11]) === 'head');
-check('spare_socks -> shoes', E.slotForItem(items[12]) === 'shoes');
+// 2026-10-14 (Steve: keepsakes compete with accessory gear for acc1-acc4):
+// keepsakes without armor/weapon stats wear as accessories now.
+check('reading_glasses -> null (accessory)', E.slotForItem(items[11]) === null);
+check('spare_socks -> null (accessory)', E.slotForItem(items[12]) === null);
 check('lucky_coin -> null (accessory)', E.slotForItem(items[13]) === null);
 check('sentimental axe -> melee', E.slotForItem(items[14]) === 'melee');
 

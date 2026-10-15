@@ -354,7 +354,10 @@
         try {
           const sch = game && game.state && game.state.scholar;
           const name = (sch && (sch.name || sch.villagerName)) || 'the Bearer';
-          registerAscension(game, { vid: sch && sch.villagerId, name, godhoodId: ghId, kind: 'player', architect: null });
+          // Through the published API (not the closure) so wrappers see it —
+          // telemetry-hooks counted villager ascensions only (god-path 2026-10-14).
+          const reg = (S.Pantheon && S.Pantheon.registerAscension) || registerAscension;
+          reg(game, { vid: sch && sch.villagerId, name, godhoodId: ghId, kind: 'player', architect: null });
         } catch (e) {}
       });
     }

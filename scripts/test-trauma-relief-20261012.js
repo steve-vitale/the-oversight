@@ -90,6 +90,11 @@ function armTraumaScene(Game) {
     armTraumaScene(Game);
     const s = Game.state.scholar;
     s.inventory = (s.inventory || []).filter(it => !(Game.isKeepsake && Game.isKeepsake(it)));
+    // 2026-10-14 keepsake growth: keepsakes start WORN (acc1-acc4) and
+    // channeling reads worn OR pack — "no keepsake" means none worn either.
+    for (const sl of ['acc1', 'acc2', 'acc3', 'acc4']) {
+      if (s.equipped && s.equipped[sl] && Game.isKeepsake(s.equipped[sl])) delete s.equipped[sl];
+    }
     s.trauma = 40;
     const ctx = {};
     sootheTrauma(Game, ctx);

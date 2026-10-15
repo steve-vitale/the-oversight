@@ -148,6 +148,10 @@ async function freshGame() {
   {
     const Game = await freshGame();
     ok('fresh game wave 1', Game.unlockedWave() === 1);
+    // wave-3 rung first (audit 2026-10-14: standing rungs sit on top of it):
+    // day past the floor + 5 wave-2 ledger points (no standing from w2).
+    Game.state.scholar.day = 30;
+    for (const id of ['voice_mimic_radio', 'mirror_stag', 'review_drone', 'bright_idea', 'memory_projector']) Game.recordWaveKill(id);
     for (const id of ['redactor', 'gavel', 'focus_group', 'spool']) Game.recordWaveKill(id);
     ok('war path still unlocks wave 4 (4 kills = 100)', Game.villageStanding().war === 100 && Game.unlockedWave() === 4);
     ok('wave 5 still locked without w4 faced', Game.unlockedWave() !== 5);

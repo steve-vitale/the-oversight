@@ -242,13 +242,10 @@ function inventoryFired() {
 
   // drama A/V sync path: schema exists, but is it wired?
   const dramaJs = JS('js/drama.js');
-  const dramaFx = JSON.parse(JS('data/dramaEffects.json'));
+  // (dramaEffects.json was deleted 2026-10-14 with the reverted data-driven
+  // renderer; it was never read at runtime.)
   const audioForExists = /audioFor/.test(dramaJs);
-  const nonNullAudio = Object.entries(dramaFx)
-    .filter(([k, v]) => k !== '_schema' && k !== '_comment' && v && typeof v === 'object' && v.audio)
-    .map(([k]) => k);
-  console.log(`\ndrama subsystem: Drama.audioFor ${audioForExists ? 'EXISTS' : 'MISSING'}; ` +
-    `dramaEffects.json non-null audio: ${nonNullAudio.length}`);
+  console.log(`\ndrama subsystem: Drama.audioFor ${audioForExists ? 'EXISTS' : 'MISSING'}`);
   if (!audioForExists) note('drama A/V sync audio path is dead code (game.js calls D.audioFor in try/catch) — see audit note');
 
   // defined-but-never-fired (informational; includes dispatcher internals)

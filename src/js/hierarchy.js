@@ -2980,6 +2980,8 @@
         var onm = this._ovName(other);
         if (!link.chartered) { this._trustGain(link, 1); return; }
         var rate = link.tariffRate || 1000;
+        // HAGGLE (god-path 2026-10-14, dealer): routes pay the haggler more.
+        try { rate = Math.round(this.modTarget('trade.tariff_mult', rate, {})); } catch (eH) { console.warn('[godpath] tariff', eH); }
         var v = this.state.village || {}; v.pantry = v.pantry || [];
         v.pantry.push({ name: 'Route tariff — ' + onm, kcalEach: rate, units: 1, spoilDay: day + 21 });
         var upkeep = this._removePantryKcal(400);

@@ -27,7 +27,12 @@ console.log('=== Build-around Coherency Proof ===\n');
 // 1. Role classification
 console.log('1. Role classification:');
 const abilities = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/abilities.json'), 'utf8'));
-ok(abilities.length === 118, `122 abilities (got ${abilities.length})`);
+
+// 118 -> 115 (ability lanes 2026-10-14): duplicate ids night_eyes/pathfinder
+// merged, iron_gut knack merged into iron_stomach (Steve's exec call).
+// 115 -> 142 (god-path redesign 2026-10-14): 27 new subclass abilities.
+ok(abilities.length === 142, `142 abilities (got ${abilities.length})`);
+
 ok(abilities.every(a => a.role), 'all have role');
 ok(abilities.every(a => a.slotRole), 'all have slotRole');
 const payoffs = abilities.filter(a => a.role === 'payoff');
@@ -84,8 +89,11 @@ const mockGame = {
   tbfight: { buildaround: {} },
 };
 console.log('\n4. Blood Frenzy logic:');
-BA.onStrikeHit(mockGame, {}); // hit 1: frenzy=1
-ok(BA.frenzyMult(mockGame) === 2.0, `2nd hit crits x2.0 (got ${BA.frenzyMult(mockGame)})`);
+// Real order (game.js tbPlayerStrike): damageMult/frenzyMult BEFORE onStrikeHit.
+const _strike = () => { const m = BA.frenzyMult(mockGame); BA.onStrikeHit(mockGame, {}); return m; };
+const _mults = [_strike(), _strike(), _strike(), _strike(), _strike(), _strike()];
+ok(_mults.join(',') === '1,1,2,1,1,2', `3rd consecutive hit crits: [1,1,2,1,1,2] (got [${_mults}])`);
+_strike(); _strike(); // two hits banked
 BA.onStrikeMiss(mockGame);
 ok(BA.frenzyMult(mockGame) === 1, 'miss resets to ×1');
 

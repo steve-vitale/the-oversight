@@ -92,10 +92,6 @@
   function playerFighter(game) {
     try { return game.tbFighter('p'); } catch (e) { return null; }
   }
-  function playerActed(game) {
-    var p = playerFighter(game);
-    return !!(p && p.acted);
-  }
   function spendPlayerTurn(game) {
     var p = playerFighter(game);
     if (!p) return false;

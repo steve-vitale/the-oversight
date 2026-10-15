@@ -12,7 +12,7 @@
 //   - foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded)
 //   - legendSurface()         (the story so far, as the world tells it)
 //   - shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design)
-//   - hoardFood(kcal)         (UNWIRED 2026-10-08: no callers — private stashing never tracked)
+//   - hoardFood(kcal)         (wired 2026-10-14: takeFromPantryBulk hoard detector, game.js)
 //   - hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers)
 //   - exposeFallout(caseId, voterId) (named consequences when a truth goes public)
 //   - flushLedgerBeats()      (fires queued beats whose knowledge gates now pass)
@@ -23,7 +23,7 @@
 //   - foodShared vs foodHoarded resolve to a felt stance; stance transitions are narrated with social consequences (code: foodStance, _checkFoodStance)
 //   - viewership is deed-reactive, never pantry-reactive (code: havenViewership): inits from arc*5 + showmanship + codex breadth capped at 15, floored at 12 (the drift's resting state); a fat pantry is prosperity, not fame; ledger showmanship feeds live via _viewShoMark; spikes (recordMoment/arena/stunts) and spends (OBJECT/declines) ride the sticky pool, nothing refills it
 //   - the player's own epithet is never shown until hearsAboutSelf() (code: ledgerBeat)
-//   - table_deed_recheck: true (code: ledger.js — tableScene re-verifies deedGateReady() at dawn; a stale tableWaiting is withdrawn aloud, never fired silently)
+//   - table_deed_recheck: true (code: ledger.js endDay wrap calls tableScene at dawn; table.js tableScene re-verifies tableSeat() — full via deedGateReady(), or lesser — and a seat of 'none' withdraws a stale tableWaiting aloud, never fired silently)
 // consumes:
 //   - state.leadership
 // ============ THE LEADERSHIP VECTOR ============
@@ -208,9 +208,51 @@
       if (pg.ledger.foodHoarded === undefined) pg.ledger.foodHoarded = 0;
       return pg.ledger;
     },
+    // LEDGER EVENTS (coherence audit 2026-10-14; Steve: "Yes, all of them"
+    // count toward the ending). Hierarchy, titans, comms, village agency,
+    // membership and pods call ledgerAdd(system, 'kind:detail') with a STRING
+    // payload — 51 such writes were silently dropped because `system` isn't a
+    // dimension. Now each event is logged (pg.ledgerEvents, capped) and its
+    // kind is translated into the real dimensions below. Kinds with no clear
+    // meaning stay log-only ({}), never guessed.
+    LEDGER_EVENT_DIMS: {
+      hierarchy: {
+        'counter': { brokerage: 1 }, 'linked': { brokerage: 1, unified: 1 },
+        'regional-dawn': { unified: 1 }, 'tended': { protected: 1 },
+        'revolt': { fractured: 1 }, 'broke': { fractured: 1 },
+        'primacy': { brokerage: 1 }, 'succession-grace': { unified: 1 },
+        'renegotiated-gift': { brokerage: 1 }, 'renegotiated-visit': { brokerage: 1 },
+        'renegotiation-lapsed': { fractured: 1 }, 'national-lost': { fractured: 1 },
+        'national-beat-died': { fractured: 1 }, 'national-live': { unified: 1 },
+        'global-declined': { defiance: 1 }, 'scale-refused': { defiance: 1 },
+        'peer-counter': { brokerage: 1 }, 'peer': { brokerage: 1 },
+        'trade-call': { brokerage: 1 }, 'favor-sent': { brokerage: 1 },
+        'defense-sent': { protected: 2 }, 'defense-refused': { fractured: 1 },
+        'crisis-conceded': { fractured: 1 }, 'raid-mustered': { might: 1 },
+        'yielded': { might: 1 }, 'conquered': { might: 2 },
+      },
+      titan: { 'commit-own': { might: 1 }, 'turned': { fractured: 1 }, 'slew': { might: 3, protected: 2 } },
+      comms: { 'aid-arrived': { brokerage: 1 } },
+      villageAgency: {
+        'petition-accepted': { protected: 1, unified: 1 }, 'aid': { foodShared: 1, brokerage: 1 },
+        'beg-gave': { foodShared: 1 }, 'beg-refused': { foodHoarded: 1 },
+        'raid-fought': { might: 1, protected: 1 },
+      },
+    },
     ledgerAdd(dim, n) {
       try {
         const L = this.ledger();
+        if (typeof n === 'string') {
+          const pg = this.progState();
+          pg.ledgerEvents = pg.ledgerEvents || [];
+          const day = ((this.state && this.state.scholar) || {}).day || 0;
+          pg.ledgerEvents.push({ sys: dim, ev: n, day });
+          if (pg.ledgerEvents.length > 400) pg.ledgerEvents.splice(0, pg.ledgerEvents.length - 400);
+          const kind = n.split(':')[0];
+          const map = (this.LEDGER_EVENT_DIMS[dim] || {})[kind];
+          if (map) for (const d of Object.keys(map)) this.ledgerAdd(d, map[d]);
+          return;
+        }
         if (dim in L) {
           const before = L[dim] || 0;
           L[dim] = before + n;
@@ -493,9 +535,9 @@
       return null;
     },
     hoardFood(kcal) {
-      // UNWIRED (sibling-sweep 2026-10-08): nothing calls this — private
-      // stashing is never tracked, so foodStance never sees the hoarder half.
-      // Deliberately quiet by design — no broadcast, no moment — IF wired.
+      // WIRED 2026-10-14: takeFromPantryBulk's net-taker hoard detector
+      // (game.js) calls this. The one-unit takeFromPantry path does not. Deliberately quiet —
+      // no broadcast, no moment.
       try {
         const n = Math.max(1, Math.round((kcal || 500) / 1000));
         this.ledgerAdd('foodHoarded', n);
@@ -538,7 +580,7 @@
     // ---------- THE TABLE (2026-10-11: the scene moved to table.js) ----------
     // The old single-choice stub lived here; the integrated endgame (7 paths
     // × light/dark, pricing, deed-gate re-check at dawn) is now tableScene()
-    // in src/js/table.js, which this file's checkArc re-fire calls (line ~1236).
+    // in src/js/table.js, which this file's endDay wrap calls at dawn.
     // The deed-gate re-check (stale tableWaiting withdrawn aloud) lives there.
 
 
@@ -597,8 +639,8 @@
       // DEATH PACK (Steve 2026-10-09): the body keeps what it carried.
       // Non-sentimental inventory + equipped gear goes on the corpse as the
       // lootable death pack (take, leave, or use per item — nothing
-      // auto-transfers). SENTIMENTALS DIE WITH THE OWNER: bonded keepsakes
-      // are buried with the body — never placed on the corpse, never lootable.
+      // auto-transfers). SENTIMENTALS DIE WITH THE OWNER: keepsakes are
+      // buried with the body — never placed on the corpse, never lootable.
       let gearPack = [];
       try {
         const defs = {}; (this.data.items || []).forEach(i => { defs[i.id] = i; });
@@ -625,7 +667,10 @@
           seen.add(it);
           const gid = it.itemId || it.id;
           const def = (gid && defs[gid]) || {};
-          if (it.bonded || it.sentimental || def.class === 'sentimental') continue; // dies with them
+          // Only SENTIMENTALS die with them (corpses.js rule). A bonded tool is
+          // still stuff: the bond doesn't transfer (this entry carries none),
+          // the object does (audit 2026-10-14).
+          if (it.sentimental || def.class === 'sentimental') continue; // dies with them
           gearPack.push({
             itemId: gid || it.name, name: it.name || def.name || gid || 'something',
             units: it.units || 1,
@@ -766,22 +811,17 @@
       // SUCCESSOR'S OWN KIT (Steve 2026-10-09): the dead bearer's gear stays
       // on the corpse — the new bearer starts from their own belongings, not
       // an auto-transfer of the old inventory.
+      // YOU BECOME THAT VILLAGER (Steve 2026-10-14: "No I don't think you
+      // should take your XP or the abilities. You become that villager."):
+      // their own abilities, tracks, XP, skills, knowledge and gear; what
+      // they wore stays worn (villager-build.js mantleBecome lists each field).
       try {
-        const sdef = {}; (this.data.items || []).forEach(i => { sdef[i.id] = i; });
-        const kit = (newChar.items || []).slice(0, 5);
-        s.inventory = kit.map(id => {
-          const def = sdef[id] || {};
-          const personal = (newChar.itemPersonal || {})[id];
-          return {
-            itemId: id, units: 1, kcalEach: 0,
-            kg: def.kg != null ? def.kg : 0.2,
-            name: personal ? personal.name : (def.name || id),
-            flavor: personal ? personal.flavor : def.flavor, owner: newId,
-            bonded: true, bond: 0, bondOffered: [], enhancements: [],
-          };
-        });
-        s.equipped = {};
-      } catch (e) {}
+        if (typeof this.mantleBecome === 'function') this.mantleBecome(oldId, newId);
+        // KEEPSAKE GROWTH (Steve 2026-10-14): the successor's keepsakes start
+        // worn in free accessory slots, like a new run's (keepsakes.js).
+        delete s.ksGrowthV;
+        if (typeof this.migrateKeepsakes === 'function') this.migrateKeepsakes();
+      } catch (e) { console.warn('[mantle] successor kit', e); }
       // MANTLE IDENTITY SYNC (break-it persistence 2026-10-08): the scholar
       // record kept the DEAD bearer's id — the save index then listed the dead
       // villager as the expedition's scholar, saveKey drifted, and Light
@@ -803,7 +843,7 @@
         if (v.takeHist) v.takeHist[newId] = [];
         if (v.giveHist) v.giveHist[newId] = []; // r9: the dated gives reset with the rest of the book
       } catch (e) {}
-      // the mantle passes: the PROGRESSION is the village's (slots, arc,
+      // the mantle passes: the OFFICE is the village's (slots, arc,
       // integration, ledger, Codex). The body is new.
       // BLOOD-PRICE WOUND (break-it food r3 2026-10-08): the wound is the old
       // body's missing mass — a new body has no Price cuts. Without this the
@@ -854,20 +894,22 @@
       // their hands" was a lie for every body after the first.
       try {
         const occ = (((this.data.characterGen || {}).occupations) || []).find(o => o.id === newChar.occupationId) || {};
-        const granted = (occ.granted || []).filter(id => (this.data.abilities || []).find(a => a.id === id));
-        s.backgroundAbilities = granted.map(id => {
-          const d = (this.data.abilities || []).find(a => a.id === id) || {};
-          return { id, name: d.name || id, desc: d.description || '', level: 1, xp: 0, background: true };
-        });
+        // ABILITY LANES (2026-10-14): occupations grant SKILLS only — the
+        // new body's past is taught into the codex, never a slot.
+        s.backgroundAbilities = [];
+        if (typeof this.grantOccupationSkills === 'function') this.grantOccupationSkills(occ);
         // BREAK-IT abilities r6: a new body's background legs change --
         // activeSynergies was computed for the OLD body's legs. Recompute
         // or the successor keeps firing synergies for legs they never held
         // (and misses newly-completed ones).
         try { this.recomputeActiveSynergies(); } catch (e2) {}
       } catch (e) {}
-      // System abilities pass with the mantle — the System recognizes the
-      // office, not the face. It's alien like that.
-      this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
+      // The office passes (slots, integration, Codex); the build does not —
+      // the new face brings their own abilities and tracks (mantleBecome).
+      this.say('🌟 "MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)"');
+      // UNIFIED TRACKS (2026-10-14): the mantle passing is System contact —
+      // the strange track, on the successor's own record.
+      try { if (this.noteDeed) this.noteDeed('mantle'); } catch (eT) { console.warn('[tracks] mantle deed', eT); }
       // DRAMA (Steve 2026-10-07, Round C2): bright emergence — a new scholar awakens.
       try { this.drama('newLife', newName); } catch (e) {}
       // MUSIC (Steve 2026-10-12): the mantle passes — a somber bell.
@@ -1116,77 +1158,9 @@
         return `⏳ ${w.name}: ${n === 0 ? 'TODAY' : n + 'd'}`;
       } catch (e) { return ''; }
     },
-    // DEAD (sibling-sweep 2026-10-08): superseded by contests.js
-    // (fireContest/contestInterruption/resolveContest). Zero callers —
-    // the live contest system never routes through here. Kept, not
-    // deleted, until a --force-delete cleanup is approved.
-    declineChallenge() {
-      const s = this.state.scholar, w = s.challengeWarning;
-      if (!w) return null;
-      if (!w.canDecline) {
-        this.say('There is no decline. There never was, for this kind.');
-        return null;
-      }
-      s.challengeWarning = null; s.challengeInvites = null;
-      const pg = this.progState();
-      pg.showDebt = (pg.showDebt || 0) + 1; // whether you owe the show: a design lever
-      try { const v = this.state.village; v.viewership = Math.max(0, (v.viewership == null ? 0 : v.viewership) - 3); } catch (e) {}
-      this.say('You decline. The sky goes quiet in a way that feels personal. The audience boos — politely, the way trillions of beings boo. (Viewership −3. The show will remember that you owe it one.)');
-      try { this.recordMoment('Declined the show\u2019s invitation.'); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return null;
-    },
-    // DEAD (sibling-sweep 2026-10-08): superseded by contests.js
-    // contestInterruption. Zero callers — the mandatory teleport lives
-    // there now. Kept, not deleted, until a --force-delete cleanup is approved.
-    abduct(contestantIds, challengeId) {
-      // MANDATORY teleport. Interrupts ANYTHING — conversations end
-      // mid-sentence, fights stop mattering. The show doesn't care.
-      const s = this.state.scholar;
-      const ids = (contestantIds && contestantIds.length ? contestantIds : [this.villagerId]);
-      try {
-        for (const vid of (this.state.village.roster || [])) {
-          try { const c = this.convoGet(vid); if (c && c.active) this.endConvo(vid, 'abducted'); } catch (e) {}
-        }
-      } catch (e) {}
-      try { this.tbfight = null; this.fight = null; } catch (e) {}
-      s.rippedFrom = { mx: s.mx, my: s.my, day: s.day || 0 };
-      s.abducted = {
-        challengeId: challengeId || (s.challengeWarning && s.challengeWarning.id) || 'unknown',
-        at: s.day || 0,
-        contestants: [...ids],
-      };
-      s.challengeWarning = null;
-      const names = ids.map(id => { try { return this.displayName(id).split(' ')[0]; } catch (e) { return 'someone'; } }).join(', ');
-      this.say('⚡ The sky OPENS. Light like a held breath — and then you are NOT where you were. Mid-step, mid-word, mid-swing: GONE. The show doesn\u2019t care what you were doing.');
-      this.say(`Ripped from the world: ${names}. Back home, the village stares at the empty air where people used to be.`);
-      try { this.recordMoment(`${names} ${ids.length > 1 ? 'were' : 'was'} taken to the arena.`); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return s.abducted;
-    },
     // ---------- THE INVITATION LIST ----------
-    // DEAD (sibling-sweep 2026-10-08): the invitation-list flow was never
-    // wired — zero callers. Kept, not deleted, until a --force-delete
-    // cleanup is approved.
-    bringCompanion(vid) {
-      // the chosen can bring friends. Who you bring into a deadly televised
-      // game — and who you leave — is its own drama. Trust, guilt, politics.
-      const s = this.state.scholar, inv = s.challengeInvites;
-      if (!inv) return null;
-      if (inv.brought.length >= inv.canBring) {
-        this.say('The invitation list is full. The show is strict about headcounts.');
-        return null;
-      }
-      if (inv.brought.includes(vid) || inv.picked.includes(vid)) return null;
-      inv.brought.push(vid);
-      let nm = 'them';
-      try { nm = this.displayName(vid).split(' ')[0]; } catch (e) {}
-      this.say(`You put ${nm} on the list. ${nm} goes pale, then nods. The ones you didn't pick look away.`);
-      try { const t = this.state.village.trust || {}; t[vid] = Math.min(100, (t[vid] || 10) + 8); } catch (e) {}
-      try { this.recordMoment(`${nm} was brought to the arena.`); } catch (e) {}
-      try { this.save(); } catch (e) {}
-      return null;
-    },
+    // declineChallenge / abduct / bringCompanion (DEAD since 2026-10-08,
+    // superseded by contests.js, zero callers) were deleted 2026-10-14.
     expectedButLeft() {
       // who expected to be brought and wasn't. Future drama reads this.
       try {
@@ -1388,9 +1362,13 @@
     Game.resolveCase = function (caseId, path) {
       const r = _resolveCase ? _resolveCase.call(this, caseId, path) : undefined;
       try {
-        if (path === 'weregild') { this.ledgerAdd('brokerage', 2); this.ledgerAdd('unified', 1); }
+        // The player's OWN conviction isn't brokerage or exposure work they
+        // did: no exposed/unified/brokerage credit when they're the accused.
+        const c = this.getCase ? this.getCase(caseId) : null;
+        const accused = !!c && (c.playerRole === 'accused' || (c.accused || []).includes(this.villagerId));
+        if (path === 'weregild') { if (!accused) { this.ledgerAdd('brokerage', 2); this.ledgerAdd('unified', 1); } }
         else if (path === 'schism') { this.ledgerAdd('fractured', 2); }
-        else if (path === 'exile') { this.ledgerAdd('exposed', 1); this.ledgerAdd('unified', 1); }
+        else if (path === 'exile') { if (!accused) { this.ledgerAdd('exposed', 1); this.ledgerAdd('unified', 1); } }
         else if (path === 'cold_war') { this.ledgerAdd('fractured', 1); }
       } catch (e) {}
       return r;
@@ -1439,7 +1417,12 @@
         this._checkUnityTransition();
         this._checkFoodStance();
         const pg = this.progState();
-        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableScene();
+        // RELATIVE UNTIL ENTERED (Steve 2026-10-14: "The table should all be
+        // relative until actually entering it when it locks. Even if they
+        // qualify early, there's room for them to change or influence path
+        // until they get to the very end."). Qualifying sends an invitation;
+        // announced once; the seat is taken from Haven (table.js tableTakeSeat).
+        if (pg.tableWaiting && !pg.tableDone && this.state.systemArrived) this.tableAnnounce();
       } catch (e) {}
       return r;
     };

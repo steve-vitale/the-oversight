@@ -132,7 +132,9 @@
   // finale-campaign (2026-10-12): the sacrifice / countdown buttons work in
   // THE OPENING CREDITS too — same hunger, smaller card.
   function fiMonster(game) {
-    return w5monster(game, 'finale') || w5monster(game, 'finale_opening');
+    // THE NETWORK (2026-10-14): its heart hungers the same way — the
+    // sacrifice counter must find it too.
+    return w5monster(game, 'finale') || w5monster(game, 'finale_opening') || w5monster(game, 'network_heart');
   }
   function fullMove(game, p) {
     try {
@@ -332,6 +334,10 @@
         game.say('✂️ CUT — your last turn hits the floor. (' + undoneDealt + ' damage un-dealt; ' + undoneTaken + ' of your wounds close. The cut took the whole take.) Redo it — your turn is yours again.');
         m.edPrevSnap = snap();
       } else if (cutKind === 'position') {
+        var _held = false;
+        // HOLD (keepsake L2, Steve 2026-10-14): the cut can't move you.
+        try { _held = !!(game.keepsakeHoldsGround && game.keepsakeHoldsGround(p)); } catch (err) { _held = false; }
+        if (!_held) {
         var ox = p.mx, oy = p.my, placed = false, tries = 0;
         while (!placed && tries++ < 40) {
           var nx2 = 1 + Math.floor(Math.random() * 7), ny2 = 1 + Math.floor(Math.random() * 7);
@@ -344,6 +350,7 @@
         try { game.state.scholar.mx = p.mx; game.state.scholar.my = p.my; } catch (err) {}
         (f.edFloorItems = f.edFloorItems || []).push({ kind: 'position', x: ox, y: oy });
         game.say('✂️ CUT — you are suddenly elsewhere. (Your old position is on the cutting-room floor — retrieve it to step back.)');
+        }
         m.edPrevSnap = snap();
       } else {
         var ally = liveAllies[Math.floor(Math.random() * liveAllies.length)];

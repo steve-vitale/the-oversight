@@ -18,7 +18,6 @@
 //   - state.convos
 //   - convoGet(vid)
 //   - convoPickCycle(vid, key, pool)
-//   - playerVoice()
 // ============ BEAT-TAGGED CONVERSATION ============
 // Steve 2026-10-06 (Idea: "Make every reply answer what's actually said"):
 // Every NPC line IS an offer, a question, a news item, or a feeling — tagged
@@ -190,20 +189,11 @@
 
   // ============ TOPIC-AWARE REPLIES ============
   // Every reply answers (beat, topic). Pools rotate — no two conversations
-  // show the same menu. Player voice (blunt/soft/plain) shapes phrasing.
+  // show the same menu. (Player voice does NOT shape these labels: the
+  // phrasing is picked by convoPickCycle rotation alone.)
 
-  function pvVoice(Game, blunt, soft, plain) {
-    try {
-      const pv = Game.playerVoice ? Game.playerVoice() : null;
-      if (!pv) return plain;
-      if (pv.voiceClass === 'blunt') return blunt;
-      if (pv.voiceClass === 'soft') return soft;
-    } catch (e) {}
-    return plain;
-  }
-
-  // Reply pools: [beat][topic] -> array of {id, label}
-  // Labels are templates — voice() picks the phrasing per player voice.
+  // Reply pools: [beat][topic] -> array of {id, v: [label variants]}
+  // beatMenuResponses rotates one variant per id via convoPickCycle.
   const REPLY_POOLS = {
     news: {
       past: [

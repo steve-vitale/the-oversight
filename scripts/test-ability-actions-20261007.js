@@ -157,6 +157,16 @@ var combatActsIn = acts.filter(a => a.context === 'combat' && a.actionId);
 check('combat actions appear in combat', combatActsIn.length > 0, 'found ' + combatActsIn.length);
 Game.tbfight = null;
 
+// GOD-PATH (2026-10-14, design change): the subclass abilities' generic
+// data verbs (`do`) register from src/js/godpath.js onto the same impl table.
+try {
+  const _prevS = globalThis.Scattering, _prevI = globalThis.AbilityActionImpls, _prevP = globalThis.AbilityActionPrechecks;
+  globalThis.Scattering = _g.Scattering;
+  globalThis.AbilityActionImpls = _g.AbilityActionImpls;
+  globalThis.AbilityActionPrechecks = _g.AbilityActionPrechecks;
+  new Function(fs.readFileSync(path.join(ROOT, 'src/js/godpath.js'), 'utf8'))();
+  globalThis.Scattering = _prevS; globalThis.AbilityActionImpls = _prevI; globalThis.AbilityActionPrechecks = _prevP;
+} catch (e) { console.log('godpath.js load failed: ' + e.message); }
 // 11. All 28 HEAD actions have implementations or honest fallback
 var allAbs = Game.data.abilities;
 var missing = [];

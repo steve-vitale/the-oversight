@@ -164,7 +164,24 @@
     forest_floor: 'forest floor', grove: 'grove', meadow: 'meadow', thicket: 'thicket',
     wetland: 'wetland', creek: 'creek', trail_edge: 'trail edge', ruin: 'ruin', haven: 'Haven',
   };
+  // REGIONS (docs/WORLD-REGIONS.md): the region every old save and every
+  // region-less harness belongs to. Today's whole environment lives in
+  // src/data/regions.json under this id.
+  const DEFAULT_REGION_ID = 'na_eastern_woodlands';
+  // Familiarity ladder (origins-world 2026-10-14). Effects are data:
+  // characterGen.familiarity.tiers; these defaults cover harnesses without it.
+  const FAMILIARITY_ORDER = ['native', 'local', 'neighbor', 'visitor', 'stranger'];
+  const FAMILIARITY_DEFAULTS = {
+    native: { plants: 4, plantLevel: 1, animals: 'pool', animalLevel: 0, say: '' },
+    local: { plants: 3, plantLevel: 1, animals: 'pool', animalLevel: 0, say: '' },
+    neighbor: { plants: 2, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+    visitor: { plants: 2, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+    stranger: { plants: 1, plantLevel: 1, animals: 'continent', animalLevel: 0, say: '' },
+  };
   // scavenged goods (ruins) — finite. the houses feed you until they don't.
+  // REGIONS: the live pool is regions.json people.scavenge (regionScavenge);
+  // this copy is the fallback for harnesses that load no regions.json and
+  // for loot ids in old saves (scavengeItem).
   const SCAVENGED = [
     { id: 'can_beans', name: 'Canned beans', kcal: 650, kg: 0.4, text: 'Dusty can, intact seal. Someone\'s pantry, a lifetime ago.' },
     { id: 'can_corn', name: 'Canned corn', kcal: 550, kg: 0.4, text: 'The label is gone. The corn doesn\'t care.' },
@@ -248,14 +265,27 @@
     async init() {
       if (global.SCATTER_DATA) { this.data = global.SCATTER_DATA; return this.data; }
       const get = f => fetch('src/data/' + f).then(r => r.json());
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'dramaEffects.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godhood.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, dramaEffects, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godhood };
-      // GODHOOD (Steve 2026-10-11): expose capstone data to the module.
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks };
+      // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
+      // godhood.js derives its capstones from it (godhood.json retired).
+      // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
+      // own so a missing file only costs the real-date season start.
+      // PRESENTATION LADDER (presentation B 2026-10-14): stage thresholds +
+      // glitch rate (presentation.js). Own load: a missing file keeps the
+      // module's built-in ladder.
+      try { this.data.presentation = await get('presentation.json'); } catch (e) { console.warn('[presentation] presentation.json: ' + (e && e.message)); this.data.presentation = null; }
+      try { this.data.climates = await get('climates.json'); } catch (e) { console.warn('[regions] climates.json: ' + (e && e.message)); this.data.climates = null; }
+      // ENDINGS BY BUILD (2026-10-14): the Table's build-aware beats and the
+      // ending texts by key (endingKey.js). Loaded on their own so a missing
+      // file only costs the build beats and bespoke endings, never the Table.
+      try { this.data.tableBeats = await get('table-beats.json'); } catch (e) { console.warn('[ending-key] table-beats.json: ' + (e && e.message)); this.data.tableBeats = null; }
+      try { this.data.tableEndings = await get('table-endings.json'); } catch (e) { console.warn('[ending-key] table-endings.json: ' + (e && e.message)); this.data.tableEndings = null; }
       try {
         const S = globalThis.Scattering;
-        if (S) S.GODHOODS = godhood;
-      } catch (e) {}
+        if (S) S.GODPATHS = godpaths;
+      } catch (e) { console.warn('[godpath] expose godpaths', e); }
       // GODHOOD REWORK (Steve 2026-10-13): item tier map for the flexible
       // item gate (any tier-4 qualifies — option (c)). Built once at load.
       try {
@@ -267,15 +297,212 @@
           }
         }
       } catch (e) {}
-      // Scaffold #4 (Steve 2026-10-07): wire the drama effect registry — data-driven renderer.
-      try {
-        const D = globalThis.Scattering && globalThis.Scattering.Drama;
-        if (D) D.effectRegistry = dramaEffects;
-      } catch (e) {}
       return this.data;
     },
 
-    biome() { return this.data.biomes.find(b => b.id === 'se_woodlands'); },
+    // ============ REGIONS (docs/WORLD-REGIONS.md §6-7) ============
+    // src/data/regions.json is the world list: 20 regions, each a biome
+    // profile + a people layer. state.region is the LANDING region (where the
+    // System dropped you); origin regions come from parseOrigin. Every
+    // environment read below goes through activeRegion(), so a new region is
+    // data, not code. Fallbacks only cover harnesses that load no regions.json.
+    regionDef(id) {
+      const rs = this.data && this.data.regions;
+      if (!Array.isArray(rs) || !id) return null;
+      return rs.find(r => r && r.id === id) || null;
+    },
+    activeRegion() {
+      const id = (this.state && this.state.region) || DEFAULT_REGION_ID;
+      const r = this.regionDef(id) || this.regionDef(DEFAULT_REGION_ID);
+      if (!r && !this._noRegionsWarned) {
+        this._noRegionsWarned = true;
+        console.warn('[regions] regions.json not loaded: no region environment (empty starting pantry, generic ruin, no bounty). Load src/data/regions.json with the other data.');
+      }
+      return r;
+    },
+    // playable = can be a random landing (status playable or rich).
+    playableRegions() {
+      const rs = (this.data && Array.isArray(this.data.regions)) ? this.data.regions : [];
+      return rs.filter(r => r && (r.status === 'playable' || r.status === 'rich'));
+    },
+    // pickLandingRegion(originRegionId): debug override first
+    // (Game.debugRegion, set by the ?region= URL hook or a test); then, on a
+    // device's FIRST run, the player's origin region or the nearest playable
+    // one (world.js firstRunLanding; Steve 2026-10-14: "Maybe first run let
+    // them land in the origin they choose a character from. Random after.");
+    // else a random PLAYABLE region. With one playable region no RNG is
+    // drawn, so today's runs are unchanged. Sets this._landingWhy =
+    // {why: 'debug'|'first_run_origin'|'random', via?} for region_start.
+    pickLandingRegion(originRegionId) {
+      const dbg = this.debugRegion && this.regionDef(this.debugRegion);
+      if (dbg) {
+        if ((dbg.landingVariants || []).length) { this._landingWhy = { why: 'debug' }; return dbg; }
+        console.warn('[regions] debugRegion ' + this.debugRegion + ' has no landing variants (status ' + dbg.status + '); ignored');
+      }
+      const pool = this.playableRegions();
+      if (pool.length && this.isFirstRun && this.isFirstRun()) {
+        const fr = this.firstRunLanding(originRegionId, pool);
+        if (fr) { this._landingWhy = { why: 'first_run_origin', via: fr.via }; return fr.region; }
+      }
+      this._landingWhy = { why: 'random' };
+      if (!pool.length) return this.regionDef(DEFAULT_REGION_ID);
+      if (pool.length === 1) return pool[0];
+      return pool[Math.floor(Math.random() * pool.length)];
+    },
+    // landingPool(region): the region's landing variants as locations.json
+    // entries (in the region's listed order). No region data -> every location.
+    landingPool(region) {
+      const all = this.data.locations || [];
+      const ids = region && region.landingVariants;
+      if (!ids || !ids.length) return all;
+      const out = ids.map(id => all.find(l => l.id === id)).filter(Boolean);
+      return out.length ? out : all;
+    },
+    regionFauna() { return (this.activeRegion() || {}).fauna || {}; },
+    regionFlora() { return (this.activeRegion() || {}).flora || {}; },
+    regionPeople() { return (this.activeRegion() || {}).people || {}; },
+    // regionFish: the fish species this water holds (nets, rods, fish duty).
+    regionFish() {
+      const f = this.regionFauna().fish;
+      return (f && f.length) ? f.slice() : ['creek_chub', 'bluegill'];
+    },
+    // regionAnimalPool: ids that can live here (fauna.animals + add - remove).
+    // null = no region list -> every animal (pre-region behaviour).
+    regionAnimalPool() {
+      const fa = this.regionFauna();
+      if (!fa.animals) return null;
+      const set = new Set(fa.animals);
+      for (const id of (fa.add || [])) set.add(id);
+      for (const id of (fa.remove || [])) set.delete(id);
+      // LANDING VARIANT FAUNA (origins-world 2026-10-14): fauna.variants[<landing
+      // id>] adds/removes animals for that landing only (the cypress slough has
+      // alligators; the eastern woodlands at large do not).
+      const vr = (fa.variants || {})[(this.state && this.state.startLocation) || ''];
+      if (vr) {
+        for (const id of (vr.add || [])) set.add(id);
+        for (const id of (vr.remove || [])) set.delete(id);
+      }
+      return set;
+    },
+    // isRegionPredator: the land's apex predator — answers a missed strike
+    // and mauls at close range (encounters.js). Today: the black bear.
+    isRegionPredator(animalId) {
+      const p = this.regionFauna().predators;
+      return (p ? p : ['black_bear']).includes(animalId);
+    },
+    // regionParasiteRisk(meatId): {id, p, from} when this meat carries a
+    // parasite here (food.js trichinosis), else null.
+    regionParasiteRisk(meatId) {
+      // Data-driven (regions.json fauna.parasites). The literal table is only
+      // for harnesses that load no regions.json.
+      const ps = this.regionFauna().parasites || (this.activeRegion() ? {} : { trichinosis: { black_bear: 0.35, wild_boar: 0.25 } });
+      for (const pid of Object.keys(ps)) {
+        const p = ps[pid] && ps[pid][meatId];
+        if (p != null) return { id: pid, p, from: meatId };
+      }
+      return null;
+    },
+    // regionTreeRoll(rnd): one tree species. Each listed tree but the last
+    // takes its `roll` chance in order (one draw each); the last is the rest.
+    regionTreeRoll(rnd) {
+      const trees = this.regionFlora().trees;
+      if (!trees || !trees.length) return rnd() < 0.4 ? 'oak' : rnd() < 0.7 ? 'hickory' : 'pine';
+      for (let i = 0; i < trees.length - 1; i++) {
+        if (rnd() < (trees[i].roll ?? 0.5)) return trees[i].id;
+      }
+      return trees[trees.length - 1].id;
+    },
+    // regionTreeNut(species): the forageable nut a tree species drops, if any.
+    regionTreeNut(species) {
+      const trees = this.regionFlora().trees;
+      if (!trees) return species === 'oak' ? 'acorn_white_oak' : species === 'hickory' ? 'hickory_nut' : null;
+      const tr = trees.find(t => t.id === species);
+      if (tr) return tr.nut || null;
+      // a tree from another region's table (old save, debug): look it up anywhere
+      for (const r of (this.data.regions || [])) {
+        const t2 = ((r.flora || {}).trees || []).find(t => t.id === species);
+        if (t2) return t2.nut || null;
+      }
+      return null;
+    },
+    regionBushes() {
+      const b = this.regionFlora().bushes;
+      return (b && b.length) ? b : ['blackberry', 'muscadine'];
+    },
+    regionCommonTrees() {
+      const c = this.regionFlora().commonTrees;
+      return c ? c : ['oak', 'hickory'];
+    },
+    regionVillageNames() {
+      const n = this.regionPeople().villageNames;
+      return (n && n.length) ? n : ['Emberhold', 'Stonebridge', 'Thornfield', 'Ashford'];
+    },
+    regionRuinStories() {
+      const r = this.regionPeople().ruins;
+      return (r && r.length) ? r : ['A ruin. Pre-Burn. The walls kept standing out of spite.'];
+    },
+    // regionScavenge: the ruins' finite loot pool (common + rare medicine).
+    regionScavenge() {
+      const s = this.regionPeople().scavenge;
+      return (s && s.length) ? s : SCAVENGED;
+    },
+    // scavengeItem(id): any scavenge definition — this region first, then
+    // every region (old saves, a region change), then the legacy pool.
+    scavengeItem(id) {
+      const here = this.regionScavenge().find(s => s.id === id);
+      if (here) return here;
+      for (const r of (this.data.regions || [])) {
+        const it = (((r || {}).people || {}).scavenge || []).find(s => s.id === id);
+        if (it) return it;
+      }
+      return SCAVENGED.find(s => s.id === id) || null;
+    },
+    // season(day): the landing region's season on that day (default today).
+    // Day 1 is state.calendarStart.doy: the real-world season when the run
+    // started (world.js calendarStartFor; Steve 2026-10-14: "Whenever the
+    // player starts, should be the season the game starts in."). Saves from
+    // before that (no calendarStart) keep the old rule: day 1 is world
+    // day-of-year climate.startDayOfYear (default 0 = the first listed
+    // season's first day), the southern hemisphere half a year offset.
+    // Seasons are the region's own, else its climates.json template's.
+    // -> {id, temp, weather, dayOfSeason, seasonDays, dayOfYear, yearDays,
+    // hemisphere, region}
+    season(day) {
+      const r = this.activeRegion() || {};
+      const seasons = ((r.climate || {}).seasons) || (this.regionCalendar ? this.regionCalendar(r).seasons : null) || [];
+      const d = day != null ? day : ((this.state && this.state.scholar && this.state.scholar.day) || 1);
+      if (!seasons.length) return { id: 'none', temp: null, weather: null, dayOfSeason: 0, seasonDays: 0, dayOfYear: 0, yearDays: 0, hemisphere: r.hemisphere || 'north', region: r.id || null };
+      const yearDays = seasons.reduce((t, s) => t + (s.days || 0), 0) || 1;
+      const cs = this.state && this.state.calendarStart;
+      const offset = r.hemisphere === 'south' ? Math.floor(yearDays / 2) : 0;
+      const start = (cs && typeof cs.doy === 'number' && cs.region === r.id) ? cs.doy - offset : (((r.climate || {}).startDayOfYear) || 0);
+      let doy = (((start + d - 1 + offset) % yearDays) + yearDays) % yearDays;
+      let acc = 0;
+      for (const s of seasons) {
+        if (doy < acc + (s.days || 0)) {
+          return { id: s.id, temp: s.temp || null, weather: s.weather || null, dayOfSeason: doy - acc + 1, seasonDays: s.days, dayOfYear: doy, yearDays, hemisphere: r.hemisphere || 'north', region: r.id || null };
+        }
+        acc += s.days || 0;
+      }
+      const last = seasons[seasons.length - 1];
+      return { id: last.id, temp: last.temp || null, weather: last.weather || null, dayOfSeason: last.days, seasonDays: last.days, dayOfYear: doy, yearDays, hemisphere: r.hemisphere || 'north', region: r.id || null };
+    },
+    // rollWeather(wr): weather for a [0,1) draw from this season's table
+    // (cumulative, in listed order). No table -> today's clear/rain/cold.
+    rollWeather(wr, day) {
+      const tbl = this.season(day).weather;
+      const keys = tbl ? Object.keys(tbl) : [];
+      if (!keys.length) return wr < 0.7 ? 'clear' : wr < 0.9 ? 'rain' : 'cold';
+      let acc = 0;
+      for (const k of keys) { acc += tbl[k] || 0; if (wr < acc) return k; }
+      return keys[keys.length - 1];
+    },
+
+    biome() {
+      const r = this.activeRegion();
+      const id = (r && r.biome) || 'se_woodlands';
+      return this.data.biomes.find(b => b.id === id) || this.data.biomes.find(b => b.id === 'se_woodlands');
+    },
 
     // ============ EXPEDITION SETUP ============
     // Your origin is yours — you type it. The scattering is random.
@@ -292,12 +519,61 @@
       for (const k of keys) {
         if (lower.includes(k)) kw[k].forEach(t => tags.add(String(t).toLowerCase()));
       }
-      return { raw: raw || 'somewhere unremembered', tags: [...tags] };
+      // REGIONS (one origin vocabulary, docs/WORLD-REGIONS.md §7): the same
+      // tags name the origin's world region(s), best match first.
+      return { raw: raw || 'somewhere unremembered', tags: [...tags], regions: this.originRegionsForTags([...tags]) };
+    },
+    // originRegionsForTags(tags): world region ids whose originTags share a
+    // tag with this origin, most shared tags first (ties: regions.json order).
+    originRegionsForTags(tags) {
+      const rs = (this.data && Array.isArray(this.data.regions)) ? this.data.regions : [];
+      const tl = new Set((tags || []).map(t => String(t).toLowerCase()));
+      const scored = [];
+      rs.forEach((r, i) => {
+        let n = (r.originTags || []).filter(t => tl.has(String(t).toLowerCase())).length;
+        // An origin can name its region outright: every picker city's
+        // originKeywords carry its region id (origins-world 2026-10-14), so
+        // Houston is the Gulf Coast woodlands, not a plains/desert tie.
+        if (tl.has(String(r.id).toLowerCase())) n += 100;
+        if (n) scored.push({ id: r.id, n, i });
+      });
+      scored.sort((a, b) => (b.n - a.n) || (a.i - b.i));
+      return scored.map(x => x.id);
     },
 
-    // familiarityTier: what fraction of the local plant pool shares a region tag with this origin?
-    // local >40%, visitor 15-40%, stranger <15%. The game feels the difference.
-    familiarityTier(tags) {
+    // familiarityTier(tags[, landingId[, originLabel]]): origin vs landing
+    // (docs/WORLD-REGIONS.md §4 #13; origins-world 2026-10-14). Best first:
+    //   native   = your lifeseed sub-area lists this landing variant as home
+    //              ground (lifeseeds.json regions[].landings; New Orleans ->
+    //              the cypress slough). Needs the active landing.
+    //   local    = same world region
+    //   neighbor = the two regions border (regions.json neighbors, either side)
+    //   visitor  = same climateFamily
+    //   stranger = anything else, or an origin no region claims
+    // What each tier knows lives in characterGen.familiarity (familiarityTierDef).
+    // Without regions.json it falls back to the old plant-tag overlap rule.
+    familiarityTier(tags, landingId, originLabel) {
+      const land = landingId ? this.regionDef(landingId) : this.activeRegion();
+      const order = ((((this.data || {}).characterGen || {}).familiarity || {}).order) || FAMILIARITY_ORDER;
+      const pickTier = (want) => {
+        // a tier the data leaves out falls to the next one down
+        for (let i = FAMILIARITY_ORDER.indexOf(want); i < FAMILIARITY_ORDER.length; i++) {
+          if (order.includes(FAMILIARITY_ORDER[i])) return FAMILIARITY_ORDER[i];
+        }
+        return 'stranger';
+      };
+      if (land) {
+        const home = this.originRegionsForTags(tags)[0];
+        if (!home) return pickTier('stranger');
+        if (home === land.id) {
+          // native needs THIS landing (an explicit landingId asks about the
+          // region in general, so it stops at local).
+          return pickTier(!landingId && this.isNativeLanding(tags, originLabel, land.id) ? 'native' : 'local');
+        }
+        const hd = this.regionDef(home);
+        if ((land.neighbors || []).includes(home) || (hd && (hd.neighbors || []).includes(land.id))) return pickTier('neighbor');
+        return pickTier((hd && hd.climateFamily && hd.climateFamily === land.climateFamily) ? 'visitor' : 'stranger');
+      }
       const plants = this.data.plants || [];
       const tl = (tags || []).map(t => String(t).toLowerCase());
       if (!plants.length || !tl.length) return 'stranger';
@@ -308,6 +584,27 @@
       }
       const frac = known / plants.length;
       return frac > 0.4 ? 'local' : frac >= 0.15 ? 'visitor' : 'stranger';
+    },
+    // isNativeLanding: the origin's lifeseed sub-area (lifeseed.js) belongs to
+    // this world region AND lists the current landing variant as home ground.
+    isNativeLanding(tags, originLabel, regionId) {
+      try {
+        if (typeof this.lifeseedRegion !== 'function') return false;
+        const loc = this.state && this.state.startLocation;
+        if (!loc) return false;
+        const ls = this.lifeseedRegion({ originTags: tags || [], homeRegion: originLabel || '' });
+        return !!(ls && ls.worldRegion === regionId && (ls.landings || []).includes(loc));
+      } catch (e) {
+        console.warn('[familiarity] native check failed: ' + (e && e.message));
+        return false;
+      }
+    },
+    // familiarityTierDef(tier): what that tier knows at the start, from
+    // characterGen.familiarity.tiers (defaults = the old 3/2/1 plant counts).
+    familiarityTierDef(tier) {
+      const tiers = ((((this.data || {}).characterGen || {}).familiarity || {}).tiers) || {};
+      const dflt = FAMILIARITY_DEFAULTS[tier] || FAMILIARITY_DEFAULTS.stranger;
+      return Object.assign({}, dflt, tiers[tier] || {});
     },
 
     // heritageFor: which fictionalized people-group does this origin read as?
@@ -346,7 +643,8 @@
     // locParams: genMap tuning for the chosen landing zone (with safe defaults).
     locParams() {
       const loc = (this.data.locations || []).find(l => l.id === (this.state && this.state.startLocation));
-      const g = (loc && loc.gen) || {};
+      // REGIONS: the region's gen numbers are the base; the landing variant's own gen wins.
+      const g = Object.assign({}, ((this.activeRegion && this.activeRegion()) || {}).gen || {}, (loc && loc.gen) || {});
       return {
         creeks: g.creeks ?? 1, wetlands: g.wetlands ?? 3,
         groveBlobs: g.groveBlobs ?? 2, groveSize: g.groveSize ?? 4,
@@ -405,10 +703,22 @@
       }
       const culture = cultures[cultureId];
       if (culture && culture.first && culture.last) {
-        return { name: pick(culture.first) + ' ' + pick(culture.last), cultureId };
+        const first = pick(culture.first);
+        let last = pick(culture.last);
+        // nameCultures femSurname 'slavic': Anna Ivanova, not Anna Ivanov.
+        if (culture.femSurname === 'slavic' && (culture.fem || []).includes(first)) last = this.feminineSurname(last);
+        return { name: first + ' ' + last, cultureId };
       }
       // fallback: legacy flat lists
       return { name: pick(cg.firstNames || ['Sam']) + ' ' + pick(cg.lastNames || ['Reyes']), cultureId };
+    },
+
+    // feminineSurname: the Slavic feminine form (-ov/-ev/-in -> +a, -sky -> -skaya).
+    feminineSurname(last) {
+      const l = String(last || '');
+      if (/(ov|ev|in|yn)$/.test(l)) return l + 'a';
+      if (/sky$/.test(l)) return l.slice(0, -1) + 'aya';
+      return l;
     },
 
     // NAME_GENDER: first names we're confident about. Curated, not guessed —
@@ -468,6 +778,10 @@
     guessNameGender(first, cultureId) {
       const key = String(first || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (this.NAME_GENDER[key]) return this.NAME_GENDER[key];
+      // Cultures that list their female first names (nameCultures fem): those
+      // read f, the culture's other first names read m. No guessing.
+      const fg = this.cultureNameGender(key, cultureId);
+      if (fg) return fg;
       const n = key;
       const ROMANCE = ['mexican', 'argentine', 'colombian', 'peruvian', 'venezuelan', 'brazilian', 'filipino'];
       const SLAVIC = ['polish', 'ukrainian'];
@@ -494,6 +808,31 @@
         if (n.endsWith('a')) return 'f';
         if (/(jun|hoon|woo|seok|hyun)$/.test(n)) return 'm';
         return null;
+      }
+      return null;
+    },
+
+    // cultureNameGender(key, cultureId): 'f'|'m' from a culture's fem list
+    // (normalized key), searching every such culture when cultureId is null.
+    cultureNameGender(key, cultureId) {
+      const cultures = ((this.data || {}).nameCultures || {}).cultures || {};
+      if (!this._cultureGenderIdx || this._cultureGenderSrc !== cultures) {
+        const norm = n => String(n).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        this._cultureGenderIdx = {};
+        for (const [cid, c] of Object.entries(cultures)) {
+          if (!c || !Array.isArray(c.fem)) continue;
+          this._cultureGenderIdx[cid] = { fem: new Set(c.fem.map(norm)), all: new Set((c.first || []).map(norm)) };
+        }
+        this._cultureGenderSrc = cultures;
+      }
+      const look = (ix) => ix.fem.has(key) ? 'f' : ix.all.has(key) ? 'm' : null;
+      if (cultureId) {
+        const ix = this._cultureGenderIdx[cultureId];
+        return ix ? look(ix) : null;
+      }
+      for (const ix of Object.values(this._cultureGenderIdx)) {
+        const g = look(ix);
+        if (g) return g;
       }
       return null;
     },
@@ -604,6 +943,31 @@
         }
       }
       return { native, levels, reasons };
+    },
+
+    // npcOriginPick: where a starting NPC is from. Region first (every world
+    // region with a listed origin equally likely), then a city in it, so a
+    // village is plausibly global instead of weighted to whichever region
+    // lists the most cities (origins-world 2026-10-14). Pool: sampleOrigins
+    // (every picker city). ONE draw, the old uniform pick's RNG budget: the
+    // integer part picks the region, the fraction the city inside it.
+    npcOriginPick() {
+      const list = ((this.data.characterGen || {}).sampleOrigins) || [];
+      if (!list.length) return 'somewhere';
+      if (!this._npcOriginGroups || this._npcOriginGroupsSrc !== list) {
+        const groups = {};
+        for (const o of list) {
+          const r = this.originRegionsForTags(this.parseOrigin(o).tags)[0] || '_unclaimed';
+          (groups[r] = groups[r] || []).push(o);
+        }
+        this._npcOriginGroups = Object.keys(groups).map(k => groups[k]);
+        this._npcOriginGroupsSrc = list;
+      }
+      const n = this._npcOriginGroups.length;
+      const x = Math.random() * n;
+      const gi = Math.min(n - 1, Math.floor(x));
+      const g = this._npcOriginGroups[gi];
+      return g[Math.min(g.length - 1, Math.floor((x - gi) * g.length))];
     },
 
     // genCharacter: one full person. The origin is authoritative — name, native
@@ -1254,7 +1618,7 @@
       // is a new cast — the dead stay buried in their own run.
       for (const v of (this.data.villagers || [])) { if (v.dead) delete v.dead; }
       for (const v of (this.data.background_survivors || [])) { if (v.dead) delete v.dead; }
-      const origin = playerOrigin || pick(cg.sampleOrigins || ['somewhere']);
+      const origin = playerOrigin || this.npcOriginPick();
       const usedNames = new Set();
       const usedOccs = new Set();
       // game-level dedup registries: names + backstory variants shouldn't repeat
@@ -1284,7 +1648,7 @@
         c0.languages.levels.english = 2;
       }
       for (let i = 0; i < 2; i++) {
-        const npcOrigin = pick(cg.sampleOrigins || ['somewhere']);
+        const npcOrigin = this.npcOriginPick();
         chars.push(this.genCharacter({ origin: npcOrigin, forceCultureMatch: false, candidate: false, usedNames, usedOccs }));
       }
       for (const c of chars) this.data.villagers.push(c);
@@ -1826,11 +2190,18 @@
       this.homeRegion = parsed.raw; this.villagerId = villagerId;
       // landing zone: the scattering is random. Your origin doesn't choose where you wake up.
       // locationId is only honored for legacy/test callers — live play always randomizes.
-      const locPool = (this.data.locations || []);
-      const loc = (locationId && locPool.find(l => l.id === locationId))
+      // REGIONS (docs/WORLD-REGIONS.md): region first (a random PLAYABLE
+      // region, or the Game.debugRegion override), then a landing variant
+      // from that region. One playable region draws no RNG.
+      const landRegion = this.pickLandingRegion((parsed.regions || [])[0]);
+      const landingWhy = this._landingWhy || { why: 'random' };
+      try { if (this.noteRunStart) this.noteRunStart(); } catch (e) { console.warn('[regions] noteRunStart: ' + (e && e.message)); }
+      const locPool = this.landingPool(landRegion);
+      const loc = (locationId && (this.data.locations || []).find(l => l.id === locationId))
         || locPool[Math.floor(Math.random() * locPool.length)]
         || {};
       this.state = S.state.newState();
+      this.state.region = (landRegion && landRegion.id) || DEFAULT_REGION_ID;
       // SYSTEM VOICE (Steve 2026-10-12): warm the ElevenLabs manifest early
       // so the text->id index is ready before the System's first line.
       try { if (typeof this.preloadSystemVoice === 'function') this.preloadSystemVoice(); } catch (e) {}
@@ -1879,13 +2250,16 @@
       // staples/cans keep ~a year, dried meat ~a month (PRESERVATION.md), the
       // quick snacks ~two months. The two-week design window is untouched.
       const d0 = (this.state.scholar && this.state.scholar.day) || 1;
-      const staples = [
-        { name: 'Dried beans', rawKcal: 150, cookedKcal: 300, kcalEach: 150, units: 80, spoilDay: d0 + 365, safe: false, kg: 0.5, needsCooking: true, unit: 'scoop' },
-        { name: 'Rice', rawKcal: 200, cookedKcal: 350, kcalEach: 200, units: 65, spoilDay: d0 + 365, safe: false, kg: 0.5, needsCooking: true, unit: 'scoop' },
-        { name: 'Canned soup', kcalEach: 250, units: 30, spoilDay: d0 + 365, safe: true, kg: 0.4, unit: 'can' },
-        { name: 'Dried meat', kcalEach: 400, units: 22, spoilDay: d0 + 30, safe: true, kg: 0.3, unit: 'strip' },
-        { name: 'Peanuts', kcalEach: 170, units: 35, spoilDay: d0 + 60, safe: true, kg: 0.1, unit: 'handful' },
-      ];
+      // REGIONS: what was in the bags is the landing region's people.pantry
+      // (spoilDays -> an absolute spoilDay, same key position).
+      const pantryDefs = this.regionPeople().pantry || [];
+      const staples = pantryDefs.map(def => {
+        const it = {};
+        for (const [k, v] of Object.entries(def)) {
+          if (k === 'spoilDays') it.spoilDay = d0 + v; else it[k] = v;
+        }
+        return it;
+      });
       let kcal = 0;
       for (const s of staples) {
         const item = { ...s };
@@ -1948,11 +2322,21 @@
           const person = (this.data.background_survivors || []).find(s => s.id === id) || {};
           const lastName = String(person.name || '').split(' ').slice(-1)[0].toLowerCase();
           const matches = (lastToCultures[lastName] || []).filter(c => c !== 'american');
-          const bHome = matches.length
-            ? matches[Math.floor(Math.random() * matches.length)]
-            : ((lastToCultures[lastName] || [])[0] || 'american');
-          const bHeritage = (bHome !== 'american' && Math.random() < 0.25 && cids.length)
-            ? cids[Math.floor(Math.random() * cids.length)] : null;
+          // HOME FIRST (origins-world 2026-10-14): a survivor from Shanghai
+          // grew up speaking Mandarin whatever the surname; a surname from
+          // elsewhere is the family's heritage. Unknown home -> surname rule.
+          const homeCult = this.cultureForOrigin(person.homeRegion || person.origin);
+          let bHome, bHeritage;
+          if (homeCult) {
+            bHome = homeCult;
+            bHeritage = matches.includes(homeCult) ? null : (matches[0] || null);
+          } else {
+            bHome = matches.length
+              ? matches[Math.floor(Math.random() * matches.length)]
+              : ((lastToCultures[lastName] || [])[0] || 'american');
+            bHeritage = (bHome !== 'american' && Math.random() < 0.25 && cids.length)
+              ? cids[Math.floor(Math.random() * cids.length)] : null;
+          }
           const bOcc = (cg.occupations || []).find(o => o.name === String(person.formerOccupation || '').toLowerCase()) || null;
           this.state.village.bgLangs[id] = this.genCultureLanguages(bHome, bOcc, {
             heritageCultureId: bHeritage === bHome ? null : bHeritage, age: person.age || 35,
@@ -1964,17 +2348,8 @@
       // an Okonkwo from Nigeria. Coherent people, coherent origins.
       this.state.village.bgHome = {};
       {
-        const culturePlaces = {
-          american: 'America', argentine: 'Argentina', bangladeshi: 'Bangladesh',
-          brazilian: 'Brazil', colombian: 'Colombia', egyptian: 'Egypt',
-          ethiopian: 'Ethiopia', filipino: 'the Philippines', german: 'Germany',
-          ghanaian: 'Ghana', indian: 'India', indonesian: 'Indonesia',
-          irish: 'Ireland', japanese: 'Japan', kenyan: 'Kenya', korean: 'Korea',
-          mexican: 'Mexico', moroccan: 'Morocco', newzealander: 'New Zealand',
-          nigerian: 'Nigeria', norwegian: 'Norway', peruvian: 'Peru',
-          polish: 'Poland', thai: 'Thailand', turkish: 'Turkey',
-          ukrainian: 'Ukraine', venezuelan: 'Venezuela', vietnamese: 'Vietnam',
-        };
+        // nameCultures.culturePlaces (data since origins-world 2026-10-14).
+        const culturePlaces = (this.data.nameCultures || {}).culturePlaces || {};
         const nc2 = this.data.nameCultures || {};
         const cultures2 = nc2.cultures || {};
         const lastToCultures2 = {};
@@ -2182,12 +2557,13 @@
         }
         return [...shuf(local), ...shuf(other)];
       };
-      const tierCount = { local: 3, visitor: 2, stranger: 1 };
+      // How many: the familiarity tier (native/local/neighbor/visitor/stranger,
+      // characterGen.familiarity.tiers[].plants).
       for (const rid of this.state.village.roster) {
         const rc = (this.state.village.rosterChars || {})[rid];
         const tags = rc ? (rc.originTags || []) : [];
-        const tier = this.familiarityTier(tags);
-        this.state.village.familiar[rid] = plantsByFamiliarity(tags).slice(0, tierCount[tier] || 1);
+        const tier = this.familiarityTier(tags, null, rc ? rc.homeRegion : null);
+        this.state.village.familiar[rid] = plantsByFamiliarity(tags).slice(0, this.familiarityTierDef(tier).plants || 1);
       }
       const scholar = S.state.newScholar(this.villagerId);
       // REGION KNOWLEDGE (Steve 2026-10-07): the scholar carries the player's
@@ -2265,15 +2641,11 @@
         { name: 'Trail mix', kcalEach: 400, units: 2, spoilDay: d0p + 60, safe: true, kg: 0.3, unit: 'bag' },
         { name: 'Dried meat', kcalEach: 300, units: 2, spoilDay: d0p + 30, safe: true, kg: 0.2, unit: 'strip' },
       );
-      // granted abilities from villager data (2 each, defined here for slice 1)
-      // BACKGROUND ABILITIES: separate from System slots. This is YOU — your past.
-      // Your occupation decides what you brought with you. Some people are just lucky.
-      // These level with use, like System abilities.
-      const grantedIds = (occ.granted || []).filter(id => this.data.abilities.find(a => a.id === id));
-      scholar.backgroundAbilities = grantedIds.map(id => {
-        const def = this.data.abilities.find(a => a.id === id);
-        return { id, name: def ? def.name : id, desc: def ? def.description : '', level: 1, xp: 0, background: true };
-      });
+      // BACKGROUND (ABILITY LANES 2026-10-14): "Occupations grant skills
+      // only." occ.granted names human competences; each is TAUGHT as its
+      // codex skill below (after the codex exists). Magic ids in a granted
+      // list are not taught — a past life gives know-how, not System powers.
+      scholar.backgroundAbilities = [];
       scholar.abilities = []; // System abilities (slot-limited) start empty.
       // WATER BOTTLES: 1L each, 1kg each. Assume you have bottles.
       // Quality matters: clean vs risky. Source is retained.
@@ -2289,26 +2661,36 @@
       // TREE SPECIES: common trees start known at weak level (L1) — it's common
       // knowledge. Rare trees start unknown. (Steve 2026-10-05)
       this.state.codex.trees = this.state.codex.trees || {};
-      for (const sp of ['oak', 'hickory']) {
+      for (const sp of this.regionCommonTrees()) {
         this.state.codex.trees[sp] = { level: 1, learnedDay: 0, via: 'common knowledge' };
       }
       // KNOWLEDGE TAXONOMY: your occupation IS knowledge. Not flavor — mechanical.
       // An electrician knows circuits. A nurse knows wound care. Day 1, real Codex entries.
       // This is the "background = starting knowledge" principle.
-      const bgCount = this.grantBackgroundKnowledge(villager);
+      let bgCount = this.grantBackgroundKnowledge(villager);
+      bgCount += this.grantOccupationSkills(occ);
       if (bgCount > 0) {
         this.say(`📖 Your old life taught you things. ${bgCount} skill${bgCount > 1 ? 's' : ''} from your past — check your Journal.`);
       }
       // YOUR starting knowledge: what your old life taught you — if this land resembles it.
       // Arizona -> Georgia creek: you start knowing almost nothing. That's the point.
+      // How well: the tier's plantLevel (a native knows home plants past the name).
+      const famTier = this.familiarityTier(parsed.tags, null, parsed.raw);
+      const famDef = this.familiarityTierDef(famTier);
+      this.state.scholar.famTier = famTier; // canShow('animal') reads it
       for (const pid of this.plantsKnownBy(this.villagerId)) {
-        this.state.codex.plants[pid] = { identifiedDay: 0, level: 1, harvests: 0, tastings: 0 };
+        this.state.codex.plants[pid] = { identifiedDay: 0, level: famDef.plantLevel || 1, harvests: 0, tastings: 0 };
         this.state.codex.encounters = this.state.codex.encounters || {};
         this.state.codex.encounters[pid] = 99;
       }
-      const famTier = this.familiarityTier(parsed.tags);
-      if (famTier === 'stranger') this.say('Nothing here looks like home. You know none of these plants. Learn fast.');
-      else if (famTier === 'visitor') this.say('Some of this country feels familiar. Not enough.');
+      // Home animals: a native has hunted and eaten this land's common game.
+      if ((famDef.animalLevel || 0) > 0) {
+        const pool = this.regionAnimalPool();
+        for (const a of (this.data.animals || [])) {
+          if (a.common && (!pool || pool.has(a.id))) this._noteAnimalDepth(a.id, famDef.animalLevel, { type: 'home', day: 0 });
+        }
+      }
+      if (famDef.say) this.say(famDef.say);
       // Hunters start knowing the snare. Others must learn.
       if (occ.knowsSnare) {
         this.state.codex.recipes['snare'] = { level: 3 };
@@ -2390,6 +2772,22 @@
         this.say(`${who}: "${line}"`);
         if (this.journalNote) this.journalNote('haven', 'outward', 'Food won\'t come to Haven. Walk past the treeline — learn what grows out there, bring it back, and get it named at camp.');
       } catch (e) {}
+
+      // REGIONS: the world registry (world.js: regions known/visited, kin
+      // scattered across the world) and the run-start region telemetry.
+      try { if (this.initWorld) this.initWorld(); } catch (e) { console.warn('[regions] initWorld: ' + (e && e.message)); }
+      // REAL-DATE SEASON: day 1 is the real-world season right now in the
+      // landing region (saved as state.calendarStart). One Date.now() call,
+      // reused as the telemetry timestamp, so the sim harness's counting
+      // clock ticks exactly as before.
+      try {
+        const now = Date.now();
+        try { this.state.calendarStart = this.calendarStartFor ? this.calendarStartFor(this.activeRegion(), now) : null; }
+        catch (e) { this.state.calendarStart = null; console.warn('[regions] calendarStart: ' + (e && e.message)); }
+        const se = this.season();
+        this.tele('region_start', { t: now, region: this.state.region, landing: this.state.startLocation, season: se.id, hemisphere: se.hemisphere,
+          why: landingWhy.why, via: landingWhy.via || null, calendarDate: (this.state.calendarStart || {}).date || null });
+      } catch (e) { console.warn('[regions] region_start telemetry: ' + (e && e.message)); }
 
       return this.status();
     },
@@ -2650,10 +3048,12 @@
           const plants = this.data.plants || [];
           if (theyKnow.length && plants.length > 1) {
             const rollWrong = malicious ? 0.3 : 0.12;
-            if (R() < rollWrong) {
-              const pid = theyKnow[Math.floor(R() * theyKnow.length)];
+            // (sim audit 2026-10-14: `R` was never defined here — this whole
+            // "villagers are wrong about plants" feature threw every time.)
+            if (Math.random() < rollWrong) {
+              const pid = theyKnow[Math.floor(Math.random() * theyKnow.length)];
               const others = plants.filter(p => p.id !== pid);
-              const wrong = others[Math.floor(R() * others.length)];
+              const wrong = others[Math.floor(Math.random() * others.length)];
               v.wrongAbout[vid][pid] = { wrongPid: wrong.id, deliberate: !!malicious };
             }
           }
@@ -2905,6 +3305,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // THEY LEARN: a successful lesson sticks. Their foraging improves —
       // knowledge feeds, through the taught[] the village metabolism reads.
       try { this.villagerLearnsPlant(vid, plantId, 'taught'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): teaching is social, for you as for a villager.
+      try { if (this.noteDeed) this.noteDeed('teaching'); } catch (eT) { console.warn('[tracks] teach deed', eT); }
       // ACTION CLOCK: a real lesson takes 3 ticks (time-only — minds, not muscles).
       this.tickAction(3);
       this.setEngaged(vid, 2);
@@ -3013,6 +3415,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SIM TELEMETRY (2026-10-11, combat-lever): crafted-item acquisition
       // by source (traps vs other). Zero gameplay effect.
       try { this.tele('craft', { id: recipeId, name: recipe.name }); } catch (e) {}
+      try { if (this.noteDeed) this.noteDeed('crafting'); } catch (eT) { console.warn('[tracks] craft deed', eT); } // unified tracks: craft
       this.tickAction(32);
       return true;
     },
@@ -3230,6 +3633,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // waste" and "full yield", both bounded by the gross.
             const catchKcal = animal.calories;
             this.state.scholar.inventory.push(this.foodCarcass(animal, catchKcal, this.state.scholar.day, 'trapped'));
+            try { if (this.noteDeed) this.noteDeed('trapping'); } catch (eT) { console.warn('[tracks] trap deed', eT); } // unified tracks: field
             // a body in hand teaches you what it was — same as a kill.
             try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(catchId); } catch (e) {}
             // TRAP PRIORITY (Steve 2026-10-07): trap catches were getting buried
@@ -3359,8 +3763,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return this.tickAction(16) || this.status();
     },
     checkNets() {
-      // the net fishes real fish: creek chub and bluegill, the tile's own stock.
-      const FISH_IDS = ['creek_chub', 'bluegill'];
+      // the net fishes real fish: the region's fish (creek chub and bluegill
+      // in the eastern woodlands), the tile's own stock.
+      const FISH_IDS = this.regionFish();
       for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
         const t = this.tileAt(x, y);
         if (!t.nets || !t.nets.length) continue;
@@ -3429,6 +3834,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // still the skill channel — just an honest one.
               const kcal = adef.calories || 200;
               this.state.scholar.inventory.push(this.foodCarcass(adef, kcal, this.state.scholar.day, 'netted'));
+              try { if (this.noteDeed) this.noteDeed('fishing'); } catch (eT) { console.warn('[tracks] net deed', eT); } // unified tracks: field
               // a body in hand teaches you what it was — same as a trap catch.
               try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(fid); } catch (e) {}
               _names.push((adef.name || 'fish').toLowerCase());
@@ -4627,7 +5033,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           arc.state = 'leave';
           const lines = [
             `${d} packs a bag at dusk — their own things, nothing else. "I won't work under you. But I won't fight you either. So I'm going." They walk past the fire line and don't look back.`,
-            `"This was never going to work," ${d} says, shouldering a pack. "You run your village. I'll run mine — somewhere else." Nobody stops them. Nobody should.`,
+            `"This was never going to work," ${d} says, shouldering a pack — their own things, nothing else. "You run your village. I'll run mine — somewhere else." Nobody stops them. Nobody should.`,
           ];
           this.say(this.leadPick('contendLeave', cid, lines));
           // The village learns it like they learn everything — someone saw.
@@ -5198,11 +5604,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             80: 'SYSTEM: Deep integration. You see the world through us now.',
           };
           this.say(msgs[t]);
-          const slotsNow = this.abilitySlots();
-          if (slotsNow > slotsBefore) {
-            this.say(`⬢ SYSTEM: "Neural depth ${t}. I can hold more of you now — ability slots: ${slotsNow}."`);
-            this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
-          }
+          // UNIFIED TRACKS (2026-10-14): an integration milestone is System
+          // contact — it feeds the strange track.
+          try { this.noteDeed && this.noteDeed('integration'); } catch (eT) { console.warn('[tracks] integration deed', eT); }
           // ABILITY CODEX (Steve 2026-10-13): deeper integration, deeper sight.
           // At 40/60/80 the System volunteers L1 knowledge of abilities in
           // your closest godhood pool — it has been watching your shape.
@@ -5211,6 +5615,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { this.systemRevealPoolAbilities(t); } catch (e2) {}
           }
         }
+      }
+      // SLOT LINE (audit 2026-10-14): announced on ANY slot gain, not only
+      // inside the 20/40/60/80 stage loop — abilitySlots() opens slots at
+      // 20/35/50/65/80, so the 3rd/4th/5th slots used to arrive in silence.
+      const slotsNow = this.abilitySlots();
+      if (slotsNow > slotsBefore && this.state.systemArrived) {
+        this.say(`⬢ SYSTEM: "Neural depth ${Math.floor(s.integration)}. I can hold more of you now — ability slots: ${slotsNow}."`);
+        this.audioEvent('knowledgeReveal', { kind: 'slots', slots: slotsNow, integration: Math.round(s.integration) });
       }
       if (reason) this.tele('integrate', { amount, reason, total: Math.round(s.integration) });
     },
@@ -5755,7 +6167,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (!best || d < best.d) best = { t, wl, preyIds, d };
         }
       } catch (e) {}
-      try { if (this.villagerGainXP) this.villagerGainXP(vid, 'field', 1, 'hunting'); } catch (e) {}
+      try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
       if (!best) {
         return { kcal: 0, msg: `🏹 ${first} works the grounds all day — the wild is hunted out. Nothing to bring home. The village needs new ground.` };
       }
@@ -5805,7 +6217,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
-      try { if (this.villagerGainXP) this.villagerGainXP(vid, 'field', 1, 'clean kill'); } catch (e) {}
+      try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
       try {
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[aid] = (this.state.codex.animalEncounters[aid] || 0) + 1;
@@ -5921,6 +6333,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.villagerCuriousExamine(vid); } catch (e) {}
         this.say(`🌿 ${first} returns with foraged food: +${kcal} kcal to the pantry.${landNote}${learned}`);
         this.bumpTrust(vid, 2, 'hauled foraged food to the pantry');
+        // PARITY (2026-10-14): the player's forage deed, same n and cap.
+        try { this.creditDeed && this.creditDeed(vid, 'foraging'); } catch (eT) { console.warn('[tracks] forage duty deed', eT); }
       } else if (a.task === 'hunt') {
         // PARITY (2026-10-10, Worker A): the hunt duty used to be a flat
         // R(400,900) kcal roll — the same hunter got the same meat from
@@ -6029,7 +6443,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (kcal > 0) this.stockPantry(kcal, 'Garden harvest');
           this.say(`🌱 ${first} works the garden — watered, weeded, turned${n ? `, and brings in a harvest (+${kcal} kcal to the pantry)` : '. Nothing ripe yet'}.`);
-          try { this.villagerGainXP(vid, 'field', 1, 'gardening'); } catch (e) {}
+          try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the garden');
         }
       } else if (a.task === 'fish') {
@@ -6038,7 +6452,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // (creek_chub 200, bluegill 150), the ecology pays per fish (wildlife
         // decrement, like the player's line and the gill nets). A fished-out
         // creek says so honestly; the stock regrows at the ecology's pace.
-        const FISH_IDS = ['creek_chub', 'bluegill'];
+        const FISH_IDS = this.regionFish();
         let best = null;
         for (let fy = 0; fy < 9; fy++) for (let fx = 0; fx < 9; fx++) {
           const ft = this.tileAt(fx, fy);
@@ -6067,7 +6481,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (fkcal > 0) this.stockPantry(fkcal, 'Fish catch');
           this.say(`🎣 ${first} worked the creek — ${fn} fish, +${fkcal} kcal to the pantry.`);
-          try { this.villagerGainXP(vid, 'field', 1, 'fishing'); } catch (e) {}
+          try { this.creditDeed && this.creditDeed(vid, 'fishing'); } catch (e) { console.warn('[tracks] deed', e); }
           this.bumpTrust(vid, 1, 'worked the creek for fish');
         }
       } else if (a.task === 'cook') {
@@ -6234,13 +6648,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
-            try { this.villagerGainXP(vid, 'field', 1, 'preserving'); } catch (e) {}
+            try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
           } else if (racksFull && eligible.length) {
             preservedNote = ` The racks are already full (${Math.round(preservedKcal).toLocaleString()} kcal kept — more than the haven can eat before it turns), so ${first} left the fresh pile for tonight's dinner instead of smoking it onto the rot pile.`;
           }
           try { this.bumpTrust(vid, 1, 'kept the haven fed'); } catch (e) {}
         } catch (e) {}
         this.say(`🍲 ${first} cooked for the haven — meals stretched.${preservedNote}`);
+        // PARITY (2026-10-14): cooking is the player's craft deed too.
+        try { this.creditDeed && this.creditDeed(vid, 'cooking'); } catch (eT) { console.warn('[tracks] cook duty deed', eT); }
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'tend' || a.task === 'teach' || a.task === 'mend') {
         // HAVEN ROLES (Steve 2026-10-09): haven work is contribution. The
@@ -6280,6 +6696,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } catch (e) {}
         }
         this.say(`${roleLine} (+${credit} contribution recognized.)`);
+        // PARITY (2026-10-14): mending is crafting, teaching is teaching —
+        // the player's deeds, same n and caps. Tending the fire has no deed
+        // for anyone.
+        try { if (a.task === 'mend') this.creditDeed && this.creditDeed(vid, 'crafting'); else if (a.task === 'teach') this.creditDeed && this.creditDeed(vid, 'teaching'); } catch (eT) { console.warn('[tracks] haven role deed', eT); }
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'scout') {
         // reveal tiles around haven + small chance of a find
@@ -6311,6 +6731,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           find = ` Found a forgotten cache: +${kcal} kcal.`;
         }
         this.say(`🔭 ${first} scouts the land: mapped ${revealed} new area${revealed === 1 ? '' : 's'}.${find}`);
+        // PARITY (2026-10-14): new ground mapped is the player's discovery deed.
+        if (revealed > 0) { try { this.creditDeed && this.creditDeed(vid, 'discovery'); } catch (eT) { console.warn('[tracks] scout deed', eT); } }
         this.bumpTrust(vid, 2, 'scouted and mapped new land');
       } else if (a.task === 'patrol') {
         this.resolvePatrol(vid, first);
@@ -6512,7 +6934,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (healer) {
         v.health[vid] = Math.min(100, cur + 25);
         // VILLAGER XP (Steve 2026-10-09): doctoring is craft work.
-        try { const hid = this.campHealerVid ? this.campHealerVid() : null; if (hid) this.villagerGainXP(hid, 'craft', 1, 'healing'); } catch (e) {}
+        try { const hid = this.campHealerVid ? this.campHealerVid() : null; if (hid) this.creditDeed && this.creditDeed(hid, 'healing'); } catch (e) { console.warn('[tracks] deed', e); }
         try {
           const who = healer === 'You' ? 'You patch them up' : `${healer} patches them up`;
           this.say(`🩹 ${nm} is hurting (${cur} HP) — ${who} before they head out. (${cur} → ${v.health[vid]} HP)`);
@@ -6566,7 +6988,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(`🩹 ${healer === 'You' ? 'You make' : healer + ' makes'} rounds — ${nm} gets bound up properly. (${worstHp} → ${v.health[worst]} HP)`);
       try {
         const hid = this.campHealerVid ? this.campHealerVid() : null;
-        if (hid && this.villagerGainXP) this.villagerGainXP(hid, 'craft', 1, 'healing');
+        if (hid && this.creditDeed) this.creditDeed(hid, 'healing');
       } catch (e) {}
       return worst;
     },
@@ -6630,7 +7052,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (pAllyVids.length < 2) pAllyVids.push(rid);
         }
       } catch (e) {}
-      const rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids });
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): a lingering raider at
+      // Haven during an aid crisis is the crisis fight — route through
+      // aidFight so allies at the door join as real combatants (it scores
+      // the kill itself, channel 'aid-crisis', and resolves the crisis).
+      let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
+      if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought the ${mName}`;
       const killCorpse = () => {
         // the carcass stays where it died — same as your kills, same as the
@@ -6657,7 +7085,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`⚔️ ${summary}`);
       } else if (rec.outcome === 'vKill') {
         try { this.hurtVillager(vid, rec.vTaken, 'monster'); } catch (e) {}
-        try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
+        if (!pViaAid) { try { this.recordWaveKill(m.id, vid, 'patrol', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // KILL LOOT (Steve 2026-10-09): the patroller loots the body.
         let lootNote = '';
         try {
@@ -7730,6 +8158,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // REGION MIGRATION (docs/WORLD-REGIONS.md): saves from before regions
+      // existed all landed in today's environment, the eastern woodlands.
+      if (!this.state.region) this.state.region = DEFAULT_REGION_ID;
+      try { if (this.migrateWorld) this.migrateWorld(); } catch (e) { console.warn('[regions] migrateWorld: ' + (e && e.message)); }
       // RECIPE KNOWLEDGE MIGRATION (2026-10-09): codex.recipes was briefly an
       // array — named props don't survive JSON.stringify, so old saves load
       // with recipe knowledge silently wiped. Copy any named props over and
@@ -7847,6 +8279,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // ABILITY LANES (2026-10-14): human abilities held in slots by older
+      // saves move into codex.skills (level kept) and free their slot.
+      try {
+        const movedLanes = this.migrateAbilityLanes();
+        if (movedLanes > 0) this.say(`(Your human know-how now lives in Skills, not ability slots — ${this.pluralize(movedLanes, 'ability', 'abilities')} moved; nothing was lost.)`);
+      } catch (e) { console.warn('[lanes] migrateAbilityLanes', e); }
       // SYNERGIES: recompute on load (saves predate the resonance system).
       // Discovered ones stay discovered; no re-announcement (checkSynergies only says on new).
       this.recomputeActiveSynergies();
@@ -8131,7 +8569,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!pick) pick = pool[Math.floor(Math.random() * pool.length)];
         const village = {
           id: `village_${i}`,
-          name: ['Emberhold', 'Stonebridge', 'Thornfield', 'Ashford'][i] || `Village ${i}`,
+          name: this.regionVillageNames()[i] || `Village ${i}`, // REGIONS: people.villageNames
           x: pick.x, y: pick.y,
           day: 0, // how many days they've been simulated
           population: 8 + Math.floor(Math.random() * 5), // 8-12
@@ -8207,8 +8645,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           learnedCounts.animals++;
         }
       }
-      // costs time: studying is a day-part activity
-      try { this.spendDayPart(1); } catch (e) {}
+      // costs time: studying is a day-part activity. (sim audit 2026-10-14:
+      // spendDayPart never existed; the documented convention is
+      // tickAction(128) = one full day-part.)
+      try { this.tickAction(128); } catch (e) { console.warn('study time', e && e.message); }
       // LINK THE CODEX: studying links their codex to yours. The System integrates.
       // TWO INTEGRATION SCALES — not the same thing (Steve 2026-10-07):
       //   systemIntegrationLevel() 0-3: CODICES LINKED. How much of the WORLD the
@@ -8744,8 +9184,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const r of recipes) {
         village.codex.recipes[r] = { known: true, learnedDay: 0 };
       }
-      // ANIMAL LORE: they know the animals in their territory
+      // ANIMAL LORE: they know the animals in their territory (this land's
+      // fauna, regions.json — origins-world 2026-10-14)
+      const lorePool = this.regionAnimalPool ? this.regionAnimalPool() : null;
       const animals = (this.data.animals || []).filter(a => {
+        if (lorePool && !lorePool.has(a.id)) return false;
         const biomes = (a.biomes || []).join(' ').toLowerCase();
         if (profile.focus === 'fisher') return biomes.includes('water') || biomes.includes('creek');
         if (profile.focus === 'farmer') return biomes.includes('meadow') || biomes.includes('field');
@@ -8826,7 +9269,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // build needs a real population to work.
     initTileWildlife(biomeType, rnd) {
       const wildlife = {};
-      const animals = (this.data.animals || []).filter(a => (a.biomes || []).includes(biomeType));
+      // REGIONS: only animals the landing region holds (fauna.animals +
+      // add - remove), in animals.json order; density scales the counts.
+      const pool = this.regionAnimalPool ? this.regionAnimalPool() : null;
+      const animals = (this.data.animals || []).filter(a => (a.biomes || []).includes(biomeType) && (!pool || pool.has(a.id)));
+      const density = (this.regionFauna ? this.regionFauna().density : 1) ?? 1;
       // 1-3 species per tile, 1-4 individuals each
       const nSpecies = 1 + Math.floor((rnd || Math.random)() * 3);
       for (let i = 0; i < nSpecies && i < animals.length; i++) {
@@ -8836,13 +9283,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           wildlife[a.id] = watery
             ? 4 + Math.floor((rnd || Math.random)() * 7)   // 4-10: a creek holds fish
             : 1 + Math.floor((rnd || Math.random)() * 4);  // 1-4: land game
+          if (density !== 1) wildlife[a.id] = Math.max(1, Math.round(wildlife[a.id] * density));
         }
       }
       // DEPLETION 2026-10-10: water holds fish, guaranteed. A creek that
       // rolls only mink is a dry hole with wet rocks — a fishing BUILD
       // can't depend on a coin flip per tile. One fish species always.
       if (['creek', 'wetland', 'pond'].includes(biomeType)) {
-        const FISH = ['creek_chub', 'bluegill'];
+        const FISH = this.regionFish ? this.regionFish() : ['creek_chub', 'bluegill'];
         if (!FISH.some(id => wildlife[id])) {
           const fid = FISH[Math.floor((rnd || Math.random)() * FISH.length)];
           const adef = (this.data.animals || []).find(a => a.id === fid);
@@ -8915,8 +9363,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // empty while you're on it.
         if (!(x === this.map.px && y === this.map.py)) {
           const present = t.wildlife || {};
+          // only animals this land holds (regions.json fauna; origins-world
+          // 2026-10-14: before the eastern trim this let bison wander in).
+          const rpool = this.regionAnimalPool ? this.regionAnimalPool() : null;
           const cands = (this.data.animals || []).filter(ad =>
-            (ad.biomes || []).includes(t.type) && !(present[ad.id] > 0));
+            (ad.biomes || []).includes(t.type) && !(present[ad.id] > 0) && (!rpool || rpool.has(ad.id)));
           for (const cand of cands) {
             if (Math.random() < 0.03) {
               t.wildlife = t.wildlife || {};
@@ -9030,17 +9481,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       {
         const [rx3, ry3] = ruinXY;
         set(rx3, ry3, 'ruin');
-        tiles[ry3][rx3].ruinStory = ['A collapsed barn. Pre-Burn. The wiring is gone — everything is gone — but the stones remember the shape of work.',
-          'A farmhouse foundation. Someone\'s kitchen. The Burn took the wires from the walls; the walls kept standing out of spite.',
-          'A gas station. The pumps are sculptures now. Nothing combustible within miles — the Burn was thorough.'][Math.floor(R() * 3)];
+        // REGIONS: ruin stories and loot are the landing region's people layer.
+        const ruinStories = this.regionRuinStories();
+        tiles[ry3][rx3].ruinStory = ruinStories[Math.floor(R() * ruinStories.length)];
         // finite pantry: 3-5 cans, scaled by landing zone. the houses feed you until they don't.
         const nLoot = Math.max(1, Math.round((3 + Math.floor(R() * 3)) * P.lootMult));
         tiles[ry3][rx3].loot = [];
         // MEDICINE (disease rework 2026-10-09): rare, specific — never in the
         // common pool. 8% of ruins hide a medicine cabinet.
-        const commonLoot = SCAVENGED.filter(x => !x.rare);
+        const scav = this.regionScavenge();
+        const commonLoot = scav.filter(x => !x.rare);
+        const rareLoot = scav.filter(x => x.rare);
         for (let i = 0; i < nLoot; i++) tiles[ry3][rx3].loot.push(commonLoot[Math.floor(R() * commonLoot.length)].id);
-        if (R() < 0.08) tiles[ry3][rx3].loot.push(R() < 0.5 ? 'med_antibiotics' : 'med_antiparasitic');
+        if (R() < 0.08 && rareLoot.length) tiles[ry3][rx3].loot.push(rareLoot[Math.floor(R() * rareLoot.length)].id);
       }
       // stock: rich ground gives more pulls. number of times depends on the biome and landing zone.
       // (computed inline — this.map doesn't exist yet during gen)
@@ -9149,7 +9602,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const c = cells[cy] && cells[cy][cx];
         if (c === 'plant' && !t.plantSpecies[key]) t.plantSpecies[key] = pick();
         else if (c === 'bush' && !t.bushSpecies[key]) {
-          t.bushSpecies[key] = srnd() < 0.5 ? 'blackberry' : 'muscadine';
+          const bushes = this.regionBushes();
+          t.bushSpecies[key] = bushes[Math.floor(srnd() * bushes.length)];
         }
       }
     },
@@ -9159,7 +9613,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const key = cx + ',' + cy;
       if (cell === 'bush') {
         t.bushSpecies = t.bushSpecies || {};
-        if (!t.bushSpecies[key]) t.bushSpecies[key] = Math.random() < 0.5 ? 'blackberry' : 'muscadine';
+        if (!t.bushSpecies[key]) { const bushes = this.regionBushes(); t.bushSpecies[key] = bushes[Math.floor(Math.random() * bushes.length)]; }
         return t.bushSpecies[key];
       }
       if (cell === 'plant') {
@@ -9169,9 +9623,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       if (cell === 'tree' || cell === 'bigtree') {
         const mod = t.modifiers && t.modifiers[key];
-        if (mod && mod.species === 'oak') return 'acorn_white_oak';
-        if (mod && mod.species === 'hickory') return 'hickory_nut';
-        return null;
+        // REGIONS: the tree's nut comes from flora.trees[].nut.
+        return (mod && mod.species) ? this.regionTreeNut(mod.species) : null;
       }
       return null;
     },
@@ -9526,7 +9979,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const c = cells[cy][cx];
         if (t.modifiers[key]) continue;
         if (c === 'tree' || c === 'bigtree') {
-          const species = rnd2() < 0.4 ? 'oak' : rnd2() < 0.7 ? 'hickory' : 'pine';
+          const species = this.regionTreeRoll(rnd2); // REGIONS: flora.trees
           const health = rnd2() < 0.75 ? 'healthy' : 'diseased';
           const ivy = rnd2() < 0.3;
           t.modifiers[key] = { species, health, ivy, known: false };
@@ -9632,7 +10085,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!cur || (cur.k === 's' && kind === 'visited')) {
           s.seenTiles[k] = { k: kind === 'visited' ? 'v' : 's', by: by || null };
           // TRIAL DEED (longsim abilities r4): a new tile under your boots.
-          if (kind === 'visited') { try { this.noteTrialDeed('discover_5_locations', 1); } catch (e2) {} }
+          if (kind === 'visited') {
+            try { this.noteTrialDeed('discover_5_locations', 1); } catch (e2) {}
+            // UNIFIED TRACKS (2026-10-14): a new place walked is field work, like a villager's expedition.
+            try { if (this.noteDeed) this.noteDeed('discovery'); } catch (eT) { console.warn('[tracks] discovery deed', eT); }
+          }
         }
       } catch (e) {}
     },
@@ -9918,8 +10375,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // hard creek crossing: bridge it, swim it, or go around
       if (dest.type === 'creek' && dest.needsBridge && !dest.bridged) {
-        const canSwim = (this.state.scholar.abilities || []).some(a => (a.id || a) === 'swimmer') ||
-                        (this.state.scholar.backgroundAbilities || []).some(a => (a.id || a) === 'swimmer');
+        // ABILITY LANES: swimmer is a skill now — hasAbility covers all lanes.
+        const canSwim = this.hasAbility('swimmer');
         if (!canSwim) return { kind: 'blockage', blockType: 'creek', x, y };
       }
       return null;
@@ -11906,6 +12363,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // TREATED (2026-10-13): skilled hands on someone's sickness — the
       // bond machinery never noticed. +3, same as tending.
       try { if (this.bondAdd) this.bondAdd(this.villagerId, vid, 3, 'treated'); } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): doctoring is craft work — yours as a villager's.
+      try { if (this.noteDeed) this.noteDeed('healing'); } catch (eT) { console.warn('[tracks] heal deed', eT); }
       this.gainAbilityXP(abilityId, 2);
       return null;
     },
@@ -12266,6 +12725,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       item.needsCooking = false; // cooked — the pack UI drops the "needs cooking" badge
       // (after the water spend above, which keys off needsCooking)
+      try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } // unified tracks: craft
       // ACTION CLOCK: cooking = 1 chunk (32 ticks, tending the fire).
       // A camp pot works faster — proper cookware.
       this.tickAction(hasPot ? 16 : 32);
@@ -13402,7 +13862,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return null;
       }
       const t = this.playerTile();
-      const FISH_IDS = ['creek_chub', 'bluegill']; // same stock the gill net fishes
+      const FISH_IDS = this.regionFish(); // same stock the gill net fishes
       const still = !(t.type === 'creek' || t.type === 'wetland');
       if (still) {
         // ponds and puddles hold small fish too — the tile check is for rivers.
@@ -13473,6 +13933,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         // a body in hand teaches you what it was — same as a trap/net catch.
         try { if (this.encIdentifyAnimal) this.encIdentifyAnimal(fid); } catch (e) {}
+        // UNIFIED TRACKS (2026-10-14): same deed as a villager's fishing — field.
+        try { if (this.noteDeed) this.noteDeed('fishing'); } catch (eT) { console.warn('[tracks] fish deed', eT); }
         const fname = (adef.name || 'fish').toLowerCase();
         if (known) this.say(`You read the water — the deep cut by the bank, the shade line. A ${fname} takes it${bonusKcal ? ' — and another!' : ''}. About ${kcal + bonusKcal} kcal — clean them quickly (knife).`);
         else {
@@ -13563,6 +14025,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       this.say(n ? `Cooked ${n} item${n > 1 ? 's' : ''}${waterUsed ? ` (-${waterUsed}L water${wellUsed ? `, incl. ${wellUsed}L haven well` : ' from your bottles'})` : ''}.` : 'Nothing raw to cook.');
+      if (n) { try { if (this.noteDeed) this.noteDeed('cooking'); } catch (eT) { console.warn('[tracks] cook deed', eT); } } // unified tracks: craft
       if (n > 0 && this.state.scholar.week1) this.state.scholar.week1.cook++;
       if (n > 0) this.noteToolUse(); // RELIC BOND: the knife, the pot, the fire kit.
       this.gainAbilityXP('camp_cook', 1);
@@ -13690,7 +14153,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       let cap = 20;
       const s = this.state.scholar;
       // Abilities
-      const has = (id) => (s.abilities || []).some(a => a.id === id) || (s.backgroundAbilities || []).some(a => a.id === id);
+      const has = (id) => this.hasAbility(id);
       if (has('pack_rat')) cap += 5;
       if (has('hoarder')) cap += 10;
       // Items: backpacks, etc. (equipped or in inventory)
@@ -14024,6 +14487,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.trust[vid] = Math.max(0, curTake - 2);
         if (Math.random() < 0.3) this.say('Someone watches you load up. They say nothing.');
         this.observe('hoard');
+        // THE LEDGER (audit 2026-10-14): the food truth's hoarder half —
+        // hoardFood (ledger.js) had no caller, so foodStance/the Table never
+        // saw a net-taker. Same kcal/1000 scale as shareFood.
+        try { if (this.hoardFood) this.hoardFood(totalKcal); } catch (e) { console.warn('hoardFood failed', e); }
       }
       // BLATANT THEFT with witnesses present: direct confrontation.
       // Nothing stops your hand — but someone may stop your nerve.
@@ -14179,12 +14646,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return null;
     },
 
-    // weaponBonus: from EQUIPPED weapon. One slot.
+    // weaponBonus: from the EQUIPPED weapon (melee/ranged slots, via
+    // equippedWeapon — the legacy .weapon slot is migrated away on load).
     weaponBonus() {
-      const eq = (this.state.scholar.equipped || {}).weapon;
-      if (!eq) return 0;
-      const def = this.data.items.find(i => i.id === eq.itemId);
-      return (def && def.weapon) ? def.weapon.bonus : 0;
+      return this.equippedWeapon().bonus || 0;
     },
 
     // equippedWeapon: full weapon profile — range, type, ammo. Unarmed fallback.
@@ -14197,7 +14662,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // reader never followed, so every player strike since has been unarmed
       // (spear bonus silently zero). Read the modern slots, legacy fallback.
       const wslot = eq.melee || eq.ranged || eq.weapon;
-      if (!wslot) return { name: 'your hands', bonus: 0, type: 'melee', range: 1, ammo: null, unarmed: true };
+      if (!wslot) return { name: 'your hands', bonus: 0, type: 'melee', range: 1, ammo: null, unarmed: true, itemId: null, item: null, def: null };
       const def = this.data.items.find(i => i.id === wslot.itemId);
       const w = (def && def.weapon) || {};
       return {
@@ -14207,6 +14672,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         range: w.range || 1,
         ammo: w.ammo || null,
         unarmed: false,
+        itemId: wslot.itemId || null,
+        item: wslot, // the equipped instance (alien reveal flags live here)
+        def: def || null,
       };
     },
 
@@ -14310,8 +14778,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // ENERGY WEAPONS (Steve 2026-10-05): beam weapons and overkill elemental
         // abilities char the meat. You get charred remains — 10% calories, no
         // proper butchering. You can't hunt with a searcaster.
-        const eqW = (this.state.scholar.equipped || {}).weapon;
-        const wdef = eqW && this.data.items.find(i => i.id === eqW.itemId);
+        const wdef = this.equippedWeapon().def;
         const charsMeat = wdef && wdef.weapon && wdef.weapon.charsMeat;
         if (charsMeat) {
           const charredKcal = Math.round(kcal * 0.1);
@@ -14335,6 +14802,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // knowledge: encounters
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[animal.id] = (this.state.codex.animalEncounters[animal.id] || 0) + 1;
+        // UNIFIED TRACKS (2026-10-14): a clean kill — field, like a villager's hunt.
+        try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); }
         return true;
       } else {
         // KNOWLEDGE-GATED: the miss names only what you know — descriptor until
@@ -14683,25 +15152,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) { return false; }
     },
     // personVisibleTrait: stable per villager (id-hashed), unique within the
-    // village. Assigned lazily onto the record; hash-based so it's identical
-    // even if the record wasn't persisted.
+    // village. Cached PER RUN on state.personLooks (saved with the run), never
+    // on the shared data.villagers record: that record outlives newGame, so a
+    // look cached in an earlier run collided with this village's looks
+    // (two "with a limp" in one village, 2026-10-14).
     personVisibleTrait(vid) {
       try {
         const pool = this.visibleTraitPool();
-        const v = this.personRecord(vid);
-        if (v && v.look) return v.look;
+        const looks = this.state.personLooks = this.state.personLooks || {};
+        if (looks[vid]) return looks[vid];
         const taken = new Set();
         for (const id of this.villagePersonIds()) {
-          if (id === vid) continue;
-          const rec = this.personRecord(id);
-          if (rec && rec.look) taken.add(rec.look);
+          if (id !== vid && looks[id]) taken.add(looks[id]);
         }
         let idx = this._hashStr(String(vid)) % pool.length;
         for (let i = 0; i < pool.length && taken.has(pool[idx]); i++) idx = (idx + 1) % pool.length;
         const trait = pool[idx];
-        if (v) v.look = trait;
+        looks[vid] = trait;
         return trait;
-      } catch (e) { return 'with a tired face'; }
+      } catch (e) {
+        if (typeof console !== 'undefined') console.warn('personVisibleTrait', e);
+        return 'with a tired face';
+      }
     },
     // displayName: THE funnel. Names pre-System only if earned socially.
     displayName(vid) {
@@ -14827,7 +15299,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const day = (this.state || {}).day || 0;
         let bestGh = null, bestKit = 1;
         for (const gh of S.Godhood.godhoods()) {
-          if (gh.id === 'voice_of_the_relay') continue;
           const cl = S.Godhood.godhoodCloseness(sch, gh, day);
           if (!cl.complete && cl.kit > bestKit) { bestKit = cl.kit; bestGh = gh; }
         }
@@ -16329,7 +16800,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       entry.taughtDay = this.state.scholar.day;
       // VILLAGER XP (Steve 2026-10-09): teaching is acting like a player.
       // The teacher earns social XP whether the lesson was true or not.
-      try { this.villagerGainXP(entry.discoveredBy, 'social', 1, 'teaching'); } catch (e) {}
+      try { this.creditDeed && this.creditDeed(entry.discoveredBy, 'teaching'); } catch (e) { console.warn('[tracks] deed', e); }
       // BAD GOSSIP (Steve 2026-10-06): the teacher may be wrong — and the
       // fire spreads wrongness as fast as truth. The player gets the
       // wrongTeaching beat (contested if they know better); villagers who
@@ -16447,7 +16918,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       const tname = this.displayName(tester);
       v.lastExperimentDay = day;
-      try { this.villagerGainXP(tester, 'survival', 1, 'experimenting'); } catch (e) {}
+      try { this.creditDeed && this.creditDeed(tester, 'crafting'); } catch (e) { console.warn('[tracks] experimenting', e); } // was 'survival' — not a track; the deed never counted (unified tracks 2026-10-14)
       if (pid) {
         const p = (this.data.plants || []).find(x => x.id === pid);
         if (!p) return;
@@ -17066,6 +17537,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return xp;
     },
 
+    // grantOccupationSkills: occ.granted (characterGen.json) lists the human
+    // competences a past life brings. ABILITY LANES (2026-10-14): they are
+    // skills — taught at L1 via learnSkill, never slotted. Magic ids in the
+    // list are skipped (occupations grant skills only). Returns count taught.
+    grantOccupationSkills(occ) {
+      let n = 0;
+      for (const id of ((occ && occ.granted) || [])) {
+        const sid = this.abilitySkillId(id);
+        if (sid && this.learnSkill(sid, 1, 'background')) n++;
+      }
+      return n;
+    },
+
     // backgroundKnowledge: your occupation IS knowledge. Not flavor — mechanical.
     // An electrician knows circuits. A nurse knows wound care. Day 1, real Codex entries.
     grantBackgroundKnowledge(villager) {
@@ -17671,7 +18155,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (wAllyVids.length < 2) wAllyVids.push(rid);
         }
       } catch (e) {}
-      const rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids });
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
+      // resolvePatrol — a lingering raider during an aid crisis is fought
+      // through aidFight, allies at the door in the fight from round one.
+      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
       const summary = this.fieldFightSummary(rec, name, mName);
       if (rec.outcome === 'alreadyDead') {
         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
@@ -17687,7 +18176,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // WAVE GATE (break-it 2026-10-09): the design promises village-wide
         // kill minimums ("village-wide, not just player") — a villager's real
         // kill proves the village can handle it, same as yours.
-        try { this.recordWaveKill(m.id, vid, 'wild', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
+        if (!wViaAid) { try { this.recordWaveKill(m.id, vid, 'wild', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {} }
         // CORPSE PERSISTS (break-it 2026-10-09): a villager's kill is a real
         // death — the carcass stays on the tile (lootable, rottable), the
         // same carcass your kill leaves. The old path evaporated the body:
@@ -18930,7 +19419,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const key = `${cx},${cy}`;
       if (t.bushSpecies[key]) return t.bushSpecies[key];
       // assign a species (berry bushes in this biome)
-      const species = ['blackberry', 'muscadine'][Math.floor(Math.random() * 2)];
+      const bushes = this.regionBushes();
+      const species = bushes[Math.floor(Math.random() * bushes.length)];
       t.bushSpecies[key] = species;
       // CHAIN: nearby bushes (within 2) of the same "type" also reveal.
       // You see one blackberry, you recognize the patch.
@@ -19417,7 +19907,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       plot.pid = best.pid; plot.plantedDay = day; plot.lastTend = day;
       plot.lastHarvest = 0; plot.weeds = 0; plot.dead = false;
       const first = this.displayName(vid);
-      try { this.villagerGainXP(vid, 'field', 1, 'gardening'); } catch (e) {}
+      try { this.creditDeed && this.creditDeed(vid, 'gardening'); } catch (e) { console.warn('[tracks] deed', e); }
       // NAME HONESTY (break-it knowledge 2026-10-11 r4): the true name is L1
       // knowledge — a gardener's work doesn't teach it to you by osmosis. The
       // believed name (wrongAs) or the honest descriptor until you've learned
@@ -19456,6 +19946,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const p of live) { p.lastTend = day; p.weeds = 0; }
       this.state.scholar.kcal = Math.max(0, (this.state.scholar.kcal || 0) - 40);
       this.say(`You work the garden — water, weeds, turned soil. ${live.length} plot${live.length > 1 ? 's' : ''} tended. (Miss days and the weeds take it back.)`);
+      // PARITY (2026-10-14): the same deed a villager's garden duty credits.
+      try { if (this.noteDeed) this.noteDeed('gardening'); } catch (eT) { console.warn('[tracks] garden deed', eT); }
       return this.tickAction(16) || this.status();
     },
 
@@ -20578,23 +21070,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.tileAt(x, y).type === 'haven') return null;
       const t = this.tileAt(x, y);
       const epithet = this.nodeEpithet(x, y);
-      const FAVORED = {
-        'creekside grove': ['cattail', 'Riparian ground. Water means life, and lunch.'],
-        'drowned grove': ['cattail', 'Wet feet, full pantry.'],
-        'deep grove': ['hickory_nut', 'Mast country. The old trees feed everything.'],
-        'orchard ruin': ['persimmon', 'Someone planted food here once. The trees remember.'],
-        'old pasture': ['dandelion', 'Disturbed ground grows good weeds.'],
-        'creek meadow': ['wild_onion', 'Open ground by water — the onion beds.'],
-        'open meadow': ['wild_onion', null],
-        'creek bend': ['cattail', 'Slow water. The cattails stand thick.'],
-        'the shallows': ['cattail', null],
-        'creekmouth marsh': ['cattail', 'Where the creek spreads out, the starch grows.'],
-        'still marsh': ['cattail', null],
-        'edge thicket': ['blackberry', 'Edge habitat. Berries grow where the light gets in.'],
-        'heart thicket': ['muscadine', null],
-        'the old trail': ['chickweed', 'Trampled ground. The humble weeds win.'],
-        'forest floor': ['wood_sorrel', 'Deep shade. The floor keeps its secrets.'],
-      };
+      // REGIONS: the epithet -> favored plant table is the landing region's
+      // flora.bounty ({epithet: [plantId, why]}).
+      const FAVORED = this.regionFlora().bounty || {};
       const base = { grove: 1.5, wetland: 1.4, creek: 1.3, meadow: 1.3, thicket: 1.2, trail_edge: 1.0, forest_floor: 0.8 }[t.type] || 1.0;
       // water bonus: neighbors with creek/wetland
       let bonus = 0;
@@ -21204,12 +21682,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const s = this.state.scholar;
       if (s.day >= 7 && !this.state.systemArrived) {
         this.state.systemArrived = true;
-        // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
-        // System starts granting now (the villager-mirror rule).
-        try { this.checkPendingTrialDeeds(); } catch (e) {}
-        // PRACTICE DEEDS (longsim abilities r5): same rule for the
-        // practice/discovery deeds.
-        try { this.checkPendingPracticeDeeds(); } catch (eP) {}
         // the System names everything — meat in packs updates too
         try {
           for (const mid of Object.keys(this.state.codex.monsters || {})) this.refreshMeatNames(mid);
@@ -21222,7 +21694,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say('A voice behind your eyes — bright, delighted, utterly wrong. (The System has arrived.)');
         s.abilities = s.abilities || [];
         s.systemQuests = [];
-        s.abilityChoices = this.firstAbilityChoices();
+        // src tags the offer so chooseAbility's "watching you all week" line
+        // only plays for the arrival gift (contest prizes / aid gifts reuse it).
+        s.abilityChoices = this.firstAbilityChoices().map(c => Object.assign({}, c, { src: 'arrival' }));
+        // TRIAL DEEDS (longsim abilities r4): deeds accrue from day one; the
+        // System starts granting now (the villager-mirror rule).
+        // PRACTICE DEEDS (longsim abilities r5): same rule for the
+        // practice/discovery deeds. UNIFIED TRACKS (2026-10-14): run AFTER the
+        // arrival gift is set — a deed's track XP can queue a level-up, and
+        // the queue must wait behind the gift sheet, never be overwritten by it.
+        try { this.checkPendingTrialDeeds(); } catch (e) { console.warn('[tracks] checkPendingTrialDeeds', e); }
+        try { this.checkPendingPracticeDeeds(); } catch (eP) { console.warn('[tracks] checkPendingPracticeDeeds', eP); }
+        try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eL) { console.warn('[tracks] pumpLevelUps', eL); }
         const w1 = s.week1 || {};
         const didAnything = (w1.forage || 0) + (w1.hunt || 0) + (w1.talk || 0) + (w1.cook || 0) + (w1.donate || 0) + (w1.scavenge || 0) > 0;
         if (didAnything) {
@@ -21383,7 +21866,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     firstAbilityChoices() {
       const s = this.state.scholar;
       const w = s.week1 || {};
-      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+      // ABILITY LANES: System gifts are magic only (human competences are skills).
+      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
       // action thresholds
       const cond = {
         green_thumb: (w.forage || 0) >= 3,
@@ -21412,7 +21896,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // did nothing all week: the System improvises — 3 honest options, no random vile pick.
         choices.push(
           { id: 'survivor', name: 'Survivor', description: 'You endured. +10 max health.', flavor: 'You lived! Marginally interesting! We are SO proud!', tier: 'utility' },
-          { id: 'wanderer', name: 'Wanderer', description: 'You kept moving. -10% travel cost.', flavor: 'You go places! The audience almost watched!', tier: 'utility' },
+          // ABILITY LANES: Wanderlust is a human skill now (-> pathfinder);
+          // the improvised magic pick is Cold-Blooded (same utility tier).
+          { id: 'cold_blooded', name: 'Cold-Blooded', description: 'You need 20% less food in cold weather. Your body budgets like an accountant.', flavor: 'You lived through the cold! We tuned you a little. You are welcome!', tier: 'utility' },
           { id: 'lucky_rock', name: 'Lucky Rock', description: 'You have a lucky rock. (+1% to everything.)', flavor: 'The rock! It is lucky! It carried you, honestly.', tier: 'underpowered' },
         );
       } else {
@@ -21454,7 +21940,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // single). Idempotent: no offer while one is pending, none when purify is
     // held, none when the slots are full, none before the System arrives.
     poisonAidChoices() {
-      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer');
+      const all = (this.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'system_offer' && a.lane !== 'skill');
       const owned = new Set((this.state.scholar.abilities || []).map(a => (a && a.id) || a));
       const pu = all.find(a => a.id === 'purify');
       const out = [];
@@ -21488,8 +21974,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Your five are bonded relics. Bond accrues passively through normal play —
     // no meters to manage, no grinding. The game notices; you don't.
     // Tools/weapons: +1/day of meaningful use. Clothing: +1/day on the trail.
-    // Sentimental: +1/day simply kept close. Story moments: +3.
-    // At bond 10/25/50 the System offers 1-of-3 enhancements from the class pool.
+    // Sentimental (keepsakes): +1/day only while WORN in acc1-acc4, +3 at
+    // story moments; the pack is dormant (keepsakes.js, Steve 2026-10-14).
+    // At bond 10/25/50 the System offers 1-of-3 enhancements from the class
+    // pool — keepsakes only at 50 (their L3 evolution).
 
     // relicItems: all bonded relics (pack + equipped).
     relicItems() {
@@ -21527,7 +22015,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     hasRelicEnhancement(id) {
-      return this.relicItems().some(r => (r.enhancements || []).includes(id));
+      // KEEPSAKE GROWTH (Steve 2026-10-14): a keepsake's evolution works
+      // only while it is worn — the slot is the price.
+      return this.relicItems().some(r => (r.enhancements || []).includes(id) &&
+        !(this.isKeepsake && this.isKeepsake(r) && typeof this.keepsakeIsWorn === 'function' && !this.keepsakeIsWorn(r)));
     },
 
     // checkKeepsakeReveal: a keepsake never tells you what it does until the
@@ -21549,7 +22040,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (def.class !== 'sentimental') return false;
         r.effectRevealed = true;
         if (def.baseEffect) {
-          const eff = String(def.baseEffect).replace(/^use:\s*/i, '');
+          const eff = String(def.baseEffect).replace(/^use:\s*/i, '').replace(/when (carried|worn)/i, 'when worn');
           this.say(`◈ "UNIT ${String(r.name || def.name || 'ITEM').toUpperCase()} — [TRANSLATION COMPLETE] — we have been watching you carry this. Attachment waveform: significant. Function decoded: ${eff}. You knew it mattered before we did. Cute."`);
         }
         return true;
@@ -21566,7 +22057,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!item || !item.effectRevealed) return null;
         if (!(this.isKeepsake && this.isKeepsake(item))) return null;
         const def = (this.data.items || []).find(i => i.id === (item.itemId || item.id)) || {};
-        return def.baseEffect || null;
+        // KEEPSAKE GROWTH (Steve 2026-10-14): keepsakes work while WORN.
+        return def.baseEffect ? String(def.baseEffect).replace(/when (carried|worn)/i, 'when worn') : null;
       } catch (e) { return null; }
     },
 
@@ -21585,9 +22077,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) {}
         const def = this.data.items.find(i => i.id === id);
         const cls = def && def.class;
+        // KEEPSAKE GROWTH (Steve 2026-10-14, COHERENCE-SPINE.md): a keepsake
+        // grows only while WORN in an accessory slot (+1/day); in the pack it
+        // is dormant. keepsakes.js owns the bond, level beats and the L3
+        // offer — the 10/25 offers are retired for keepsakes.
+        if (cls === 'sentimental') {
+          if (typeof this.keepsakeGrow === 'function') this.keepsakeGrow(r, 1, 'day');
+          continue;
+        }
         let gain = 0;
-        if (cls === 'sentimental') gain = 1; // kept close, every day
-        else if (used[id]) gain = 1; // meaningful use (1/day cap is inherent)
+        if (used[id]) gain = 1; // meaningful use (1/day cap is inherent)
         if (!gain) continue;
         r.bond = (r.bond || 0) + gain;
         // KEEPSAKE REVEAL (Steve 2026-10-06): checked daily for every relic —
@@ -21703,16 +22202,46 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     // chooseAbility: player picks from the System's offer.
-    chooseAbility(id) {
+    // UNIFIED TRACKS (2026-10-14): a level-up sheet (src 'level_up:<track>')
+    // with full slots asks which held ability the pick REPLACES (replaceId);
+    // keepAbilities() declines. Any other offer still waits for a free slot.
+    chooseAbility(id, replaceId) {
       const s = this.state.scholar;
       const choice = (s.abilityChoices || []).find(c => c.id === id);
       if (!choice) return null;
       s.abilities = s.abilities || [];
+      // ABILITY LANES (2026-10-14): a human competence never takes a slot.
+      // Every offer path filters them out; if one slips through (old save
+      // with a pending sheet), the choice teaches the skill instead.
+      if (this.isSkillLane(choice.id)) {
+        s.abilityChoices = null;
+        this.teachAbilitySkill(choice.id, 1, 'experience');
+        try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eP) { console.warn('[tracks] pumpLevelUps', eP); }
+        return null;
+      }
       // Ability slots: integration unlocks more. Start 1, max 6.
       const maxSlots = this.abilitySlots();
+      const isLevelUp = String(choice.src || '').indexOf('level_up:') === 0;
       if (s.abilities.length >= maxSlots) {
-        this.say(`No free ability slots (${s.abilities.length}/${maxSlots}). Increase System integration to unlock more.`);
-        return null;
+        if (!isLevelUp) {
+          this.say(`No free ability slots (${s.abilities.length}/${maxSlots}). Increase System integration to unlock more.`);
+          return null;
+        }
+        const ri = replaceId ? s.abilities.findIndex(e => ((e && e.id) || e) === replaceId) : -1;
+        if (ri < 0) {
+          this.say(`Your slots are full (${s.abilities.length}/${maxSlots}). Choose which ability ${choice.name} replaces — or keep what you have.`);
+          return null;
+        }
+        // FUSION SINGULARITY (Steve 2026-10-12): the reactor does not come out.
+        if (replaceId === 'fusion_reactor') {
+          this.say('The reactor does not come out. Choose something else to let go of.');
+          return null;
+        }
+        const gone = s.abilities.splice(ri, 1)[0];
+        const goneName = (gone && gone.name) || ((this.abilityDef && this.abilityDef(replaceId)) || {}).name || replaceId;
+        this.say(`You let ${goneName} go. Its place is empty for a breath — then it isn't.`);
+        try { this.tele('ability_replaced', { out: replaceId, in: choice.id, src: choice.src }); } catch (eR) { console.warn('[tracks] tele', eR); }
+        if (this.trackStat) this.trackStat('replaced');
       }
       s.abilities.push({ id: choice.id, name: choice.name, desc: choice.description || choice.desc, level: 1, xp: 0 });
       try { this.tele('ability_granted', { id: choice.id, who: 'player' }); } catch (e) {}
@@ -21725,7 +22254,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.abilityChoices = null;
       this.say(`✨ Ability gained: ${choice.name} (L1). ${choice.description || choice.desc}`);
       if (choice.flavor) this.say(`"${choice.flavor}"`);
-      this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      // The "all week" line is the arrival gift's; other offers (contest
+      // prizes, aid gifts, poison/pellet offers) get a neutral line.
+      if (choice.src === 'arrival') this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      else if (isLevelUp) {
+        this.say(`"Earned, not given. You did the work — we just wrote it down."`);
+        if (this.trackStat) this.trackStat('picked');
+      }
+      else this.say(`"The REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
+      // the next queued level-up (if any) opens now that the sheet is clear
+      try { this.pumpLevelUps && this.pumpLevelUps(); } catch (eP) { console.warn('[tracks] pumpLevelUps', eP); }
       return null;
     },
     // abilityOnAcquire: the price is paid up front, where the fiction demands it.
@@ -21746,7 +22284,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
       if (id === 'pact') {
         // The Static gives. The Static takes.
-        const ops = (this.data.abilities || []).filter(a => a.tier === 'overpowered' && a.id !== 'pact' && !this.hasAbility(a.id));
+        const ops = (this.data.abilities || []).filter(a => a.tier === 'overpowered' && a.lane !== 'skill' && a.id !== 'pact' && !this.hasAbility(a.id));
         const utils = (s.abilities || []).filter(e => {
           const a = this.data.abilities.find(x => x.id === ((e && e.id) || e));
           return a && a.tier === 'utility';
@@ -22147,6 +22685,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Check both background and System abilities.
       const ab = (s.backgroundAbilities || []).find(a => a.id === abilityId) ||
                  (s.abilities || []).find(a => a.id === abilityId);
+      // ABILITY LANES (2026-10-14): a skill-lane ability deepens its SKILL
+      // (learnSkill at the same 6/12 thresholds), never a slot entry.
+      if (!ab && this.isSkillLane(abilityId)) { this.gainSkillLaneXP(abilityId, amount); return; }
       if (!ab || ab.level >= 3) return;
       ab.xp = (ab.xp || 0) + (amount || 1);
       // XP THRESHOLDS (evolution build 2026-10-11, measured): L1->L2: 6,
@@ -22337,11 +22878,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     drama(kind, ...args) {
       try {
         const D = globalThis.Scattering && globalThis.Scattering.Drama;
+        const F = globalThis.Scattering && globalThis.Scattering.Feel;
+        // PRESENTATION PASS A (2026-10-14, Steve: "Address all graphic and
+        // sound survey gaps."): payoff moments and god-path verbs come from
+        // feel.js, which already applied the System gate per moment
+        // (system-styled moments wait for day 7; keepsakes, feasts, flee are
+        // human and play any day).
+        if (kind === 'moment' || kind === 'verb') {
+          if (D && kind === 'moment' && D.moment) D.moment(args[0], args[1] || {});
+          else if (D && kind === 'verb' && D.verbFx) D.verbFx(args[0] || {});
+          return;
+        }
+        // HAPTICS: the body feels the big hits (feel.js: setting-gated,
+        // feature-detected, throttled; a no-op in node).
+        if (F && F.hapticFor(kind)) F.haptic(F.hapticFor(kind));
+        // Steve 2026-10-07: ALL System drama is OFF before the System arrives
+        // (day 7). The game starts simple and quiet. Then the System
+        // integrates and the world comes alive. PRESENTATION PASS A: "quiet"
+        // no longer means "still" — days 1-6 get GROUNDED feedback for the
+        // human things (hit, miss, crit, hurt, kill, weather, death): earthy,
+        // no System chrome, no cyan, no System voice (drama.js grounded).
+        // Every System-flavoured kind stays gated.
+        if (!this.state.systemArrived) {
+          const gk = F ? F.groundedKind(kind) : null;
+          if (!gk) return;
+          if (D && D.grounded) D.grounded(gk, ...args);
+          const ga = F.groundedAudio(kind, args[0]);
+          if (ga) this.audioEvent(ga, { drama: kind, grounded: true });
+          return;
+        }
         if (!D) return;
-        // Steve 2026-10-07: ALL drama is OFF before the System arrives (day 7).
-        // The game starts simple and quiet. Then the System integrates and the
-        // world comes alive — it's really happening to your character.
-        if (!this.state.systemArrived) return;
         // Steve 2026-10-07: all drama scales with system integration.
         // Higher integration = more elaborate effects. The System watches more closely.
         let integ = 0;
@@ -22470,8 +23036,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // wild->animalRustle, levelUp(ability)->levelup,
         // synergyShimmer->synergyDiscovered, phaseShift->patternWindup,
         // codexLinked->paperRustle, plantIdentified->knowledgeReveal.
-        // The day-7 systemArrived gate above covers audio too: pre-System the
-        // game is quiet as well as still.
+        // The day-7 systemArrived gate above covers audio too: pre-System only
+        // the grounded mates (feel.js groundedAudio) sound.
         const syncName = D.audioFor(kind, args[0]);
         if (syncName) this.audioEvent(syncName, { drama: kind });
       } catch (e) {}
@@ -22697,8 +23263,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 //
 // CONVENTIONS HONORED:
 //   - Day-part cost = this.tickAction(128) (128 ticks = one full day-part).
-//     (spendDayPart() does NOT exist — the one call site is dead code in a
-//     try/catch. Do not use it.)
+//     (spendDayPart() does NOT exist — do not use it.)
 //   - kcal costs via scholar.kcal / pantry item lists (see _ev helpers).
 //   - audioEvent() and drama() are safe no-ops headless; voice names used
 //     are real Game.audio voices (wolfSilence, wolfSnarl, horrorSting,
@@ -23071,6 +23636,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         { id: 'salt', label: 'Downriver salt (a whole pouch)', price: 350, blurb: 'Salt. For preserving. The System asks if it is "angry sugar."' },
         { id: 'rope', label: 'River rope, twenty strides', price: 250, blurb: 'Good river rope. Twenty strides of it.' },
       ];
+      // HAGGLE (god-path 2026-10-14, dealer): trade.price_mult lowers prices.
+      try { for (const g of goods) g.price = Math.round(this.modTarget('trade.price_mult', g.price, {})); }
+      catch (e) { console.warn('[godpath] haggle', e); }
       let pick = goods.find(g => g.id === goodId);
       if (!pick) {
         // No pick: the trader sizes Haven up. No blade in your pack? Knife.
@@ -23487,7 +24055,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // SYNERGY passive: grave_robber works the same ruins.
           this.noteAbilityUse('grave_robber');
           this.noteToolUse(); // RELIC BOND: prying, cutting, carrying.
-          const item = SCAVENGED.find(s => s.id === lootId);
+          const item = this.scavengeItem(lootId);
           if (!this.canCarry(item.kg)) { t.loot.unshift(lootId); this.say('Too heavy — your pack can\'t take it. Eat something or leave it.'); return null; }
           // MEDICINE (disease rework 2026-10-09): bottled, dosed, specific.
           const medPush = { plantId: lootId, units: 1, kcalEach: item.kcal, spoilDay: 9999, name: item.name, unit: item.medType ? 'bottle' : 'can', prep: item.medType ? 'Use from your pack when sick. Specific — read the label.' : 'No prep. The miracle of the can.', kg: item.kg };
@@ -23496,7 +24064,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // scrounger: the System's gift. You see what others miss — +1 item per visit.
           if (this.hasAbility('scrounger') && t.loot.length) {
             const lootId2 = t.loot.shift();
-            const item2 = SCAVENGED.find(s => s.id === lootId2);
+            const item2 = this.scavengeItem(lootId2);
             if (item2 && this.canCarry(item2.kg)) {
               scholar.inventory.push({ plantId: lootId2, units: 1, kcalEach: item2.kcal, spoilDay: 9999, name: item2.name, unit: 'can', prep: 'No prep. The miracle of the can.', kg: item2.kg });
               this.say(`Scrounger: you spot another — ${item2.name}.`);
@@ -23508,7 +24076,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const findMult = this.modTarget('ruin.find_mult', 1);
           if (findMult > 1 && t.loot.length && Math.random() < 0.3 * findMult) {
             const bonusId = t.loot.shift();
-            const bonus = SCAVENGED.find(x => x.id === bonusId);
+            const bonus = this.scavengeItem(bonusId);
             if (bonus && this.canCarry(bonus.kg)) {
               scholar.inventory.push({ plantId: bonusId, units: 1, kcalEach: bonus.kcal, spoilDay: 9999, name: bonus.name, unit: 'can', prep: 'No prep.', kg: bonus.kg });
               this.say(`Taste vision: behind the loose panel — ${bonus.name}. The walls were right.`);
@@ -23531,6 +24099,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const bounty = this.bountyFor(this.map.px, this.map.py);
         const thumbLvl = this.abilityLevel('green_thumb');
         const thumbMult = thumbLvl >= 2 ? 2.0 : thumbLvl >= 1 ? 1.5 : 1.0;
+        // MODIFIER PIPELINE (audit 2026-10-14): relics, synergies, evolutions
+        // and abilities that target forage.yield / luck.global used to apply
+        // only in engine/forage.js, which the live sweep never calls.
+        const modYieldMult = this.modTarget('forage.yield', 1) * this.modTarget('luck.global', 1);
         const FORAGEABLE = { plant: 1, bush: 1, tree: 1, bigtree: 1 };
         const harvested = [];
         for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
@@ -23636,7 +24208,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let units = 3 + Math.floor(Math.random() * 3); // 3-5 per cell: a sweep, not a strip
           // MULTITOOL (Steve 2026-10-05): "+1 to foraging yields" — honest now.
           const toolMult = this.hasItem('multitool') ? 1.25 : 1.0;
-          units = Math.ceil(units * levelMult * thumbMult * toolMult);
+          units = Math.ceil(units * levelMult * thumbMult * toolMult * modYieldMult);
           // deeper knowledge accrues only for identified plants — handling
           // unknowns teaches care, not parts. Depth is per handling SESSION
           // (see PER-SWEEP KNOWLEDGE PACING above), not per cell.
@@ -23820,6 +24392,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         this.tele('forage', { tile: t.type, epithet: this.nodeEpithet(this.map.px, this.map.py), plants: Object.keys(bySpecies), cells: harvested.length, kcal: totalKcalKnown, cost: S.calories.ACTION_COSTS.forage });
         if (scholar.week1) scholar.week1.forage++;
+        // UNIFIED TRACKS (2026-10-14): same deed as a villager's foraging — field.
+        if (harvested.length) { try { if (this.noteDeed) this.noteDeed('foraging'); } catch (eT) { console.warn('[tracks] forage deed', eT); } }
         this.gainAbilityXP('green_thumb', 1);
         // BETTER HUMAN: foraging is perception practice — reading the ground.
         this.practice('per', 1);
@@ -24816,7 +25390,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const kcalBig = Math.round(kcal * this.vigorYieldMult(depBig.avgVigor));
           this.stockPantry(kcalBig, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
-          try { this.villagerGainXP(id, 'field', 1, 'foraging'); } catch (e) {}
+          try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
           if (present) this.say(`${first} had the day of their life — ${kcalBig} kcal. Two days of food from one person.${pers.sharing === 'selfish' ? ' (Kept some back, you suspect.)' : ''}`);
         } else if (r < 0.35) {
           // brings food: a real haul. from the world, not thin air.
@@ -24826,7 +25400,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const kcalH = Math.round(kcal * this.vigorYieldMult(depH.avgVigor));
           this.stockPantry(kcalH, 'Foraged food');
           // VILLAGER XP (Steve 2026-10-09): acting like a player earns.
-          try { this.villagerGainXP(id, 'field', 1, 'foraging'); } catch (e) {}
+          try { this.creditDeed && this.creditDeed(id, 'foraging'); } catch (e) { console.warn('[tracks] deed', e); }
           if (present) this.say(`${first} came back with ${kcalH} kcal of something edible. The pantry breathes.`);
           // KNOWLEDGE SPREAD (Steve 2026-10-09, tweak B): working the land
           // teaches. A forager who brings food home learned SOMETHING about
@@ -24971,6 +25545,137 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     abilityLevel(id) {
       return (globalThis.Scattering && globalThis.Scattering.abilityLevel(this.state.scholar, id)) || 0;
+    },
+
+    // ============ ABILITY LANES (2026-10-14) ============
+    // Steve: "Things acquired from events and other meaningful experiences,
+    // knowledge learned etc should be typically ending up in skills, unless
+    // it fits the magic power theme." abilities.json tags every entry with
+    // lane 'magic' (System powers: the 6 slots) or lane 'skill' (a human
+    // competence). A skill-lane entry keeps its modifiers/actions as the
+    // mechanics source, but it is OWNED by knowing its codex skill
+    // (def.skillId || def.id): level = that skill's level (1-3). It never
+    // occupies a slot and is never offered as a System gift.
+    // Design: evidence/2026-10-14/draft-abilities-skills-endgame-key.md.
+    abilityDef(id) {
+      const list = (this.data && this.data.abilities) || [];
+      if (this._abDefSrc !== list) {
+        this._abDefSrc = list;
+        this._abDefMap = {};
+        this._abSkillLane = [];
+        for (const a of list) {
+          if (!a || !a.id || this._abDefMap[a.id]) continue;
+          this._abDefMap[a.id] = a;
+          if (a.lane === 'skill') this._abSkillLane.push(a);
+        }
+        // aliases: a merged id (iron_gut -> iron_stomach) resolves to its home.
+        for (const a of list) for (const al of ((a && a.aliases) || [])) if (!this._abDefMap[al]) this._abDefMap[al] = a;
+      }
+      return this._abDefMap[id] || null;
+    },
+    isSkillLane(id) {
+      const d = this.abilityDef(id);
+      return !!(d && d.lane === 'skill');
+    },
+    // abilitySkillId: the codex skill that carries a skill-lane ability.
+    abilitySkillId(id) {
+      const d = this.abilityDef(id);
+      return (d && d.lane === 'skill') ? (d.skillId || d.id) : null;
+    },
+    // skillLaneEntries: the skill-lane abilities you know, as ability-shaped
+    // entries {id, name, level, lane:'skill'} — read by the modifier
+    // pipeline and hasAbility (engine/modifiers.js) so every mechanic that
+    // asked "do you have tracker?" keeps working when tracker is a skill.
+    skillLaneEntries() {
+      this.abilityDef('');
+      const skills = ((this.state && this.state.codex) || {}).skills || {};
+      const out = [];
+      for (const a of (this._abSkillLane || [])) {
+        const e = skills[a.skillId || a.id];
+        const lvl = e ? (e.level || 0) : 0;
+        if (lvl >= 1) out.push({ id: a.id, name: a.name, level: Math.min(3, lvl), lane: 'skill', skillId: a.skillId || a.id });
+      }
+      return out;
+    },
+    // ownedAbilityIds: every ability that is mechanically yours — magic in
+    // the slots (an evolved form counts as its root), legacy background
+    // entries, and skill-lane abilities known through skills. THE one
+    // ownership list for counting (build-around paths, party anchors);
+    // generic on purpose so player and villager progression can share it.
+    ownedAbilityIds() {
+      const s = (this.state && this.state.scholar) || {};
+      const ids = new Set();
+      for (const e of (s.abilities || []).concat(s.backgroundAbilities || [])) {
+        const id = (e && (e.evolvedFrom || e.id)) || e;
+        if (id) ids.add(id);
+      }
+      for (const e of this.skillLaneEntries()) ids.add(e.id);
+      return Array.from(ids);
+    },
+    // teachAbilitySkill: a path that used to GRANT a human ability now
+    // TEACHES its skill — honest narration, no System chrome, no slot.
+    teachAbilitySkill(id, level, via) {
+      const sid = this.abilitySkillId(id);
+      if (!sid) return false;
+      const k = (this.data.knowledge || []).find(x => x.id === sid);
+      if (!k) return false;
+      const ok = this.learnSkill(sid, level || 1, via || 'experience');
+      if (ok) {
+        const d = this.abilityDef(id) || {};
+        if (d.name && d.name !== k.name) this.say(`You've learned ${k.name} — it carries ${d.name}.`);
+        try { this.recomputeActiveSynergies(); } catch (e) { console.warn('[lanes] teachAbilitySkill synergy recompute', e); }
+        try { this.tele('skill_taught', { id: sid, ability: id, via: via || 'experience' }); } catch (e) { console.warn('[lanes] tele', e); }
+      }
+      return ok;
+    },
+    // gainSkillLaneXP: a use of a skill-lane ability deepens its SKILL
+    // (same 6/12 use thresholds as slot abilities), never a slot entry.
+    gainSkillLaneXP(id, amount) {
+      const sid = this.abilitySkillId(id);
+      const skills = ((this.state.codex || {}).skills) || {};
+      const e = sid && skills[sid];
+      if (!e || (e.level || 0) < 1 || e.level >= 3) return false;
+      e.xp = (e.xp || 0) + (amount || 1);
+      const need = e.level === 1 ? 6 : 12;
+      if (e.xp < need) return false;
+      const ok = this.learnSkill(sid, e.level + 1, 'practice');
+      if (ok) { try { this.recomputeActiveSynergies(); } catch (e2) { console.warn('[lanes] gainSkillLaneXP synergy recompute', e2); } }
+      return ok;
+    },
+    // migrateAbilityLanes: saves from before the lanes held human abilities
+    // in s.abilities / s.backgroundAbilities. Move them into codex.skills
+    // (keeping the level) so they free their slot and show in Skills.
+    // Idempotent. Evolved entries (evolvedFrom) stay where they are.
+    migrateAbilityLanes() {
+      const s = this.state && this.state.scholar;
+      if (!s) return 0;
+      this.state.codex = this.state.codex || {};
+      const skills = this.state.codex.skills = this.state.codex.skills || {};
+      let moved = 0;
+      for (const key of ['abilities', 'backgroundAbilities']) {
+        const arr = s[key];
+        if (!Array.isArray(arr)) continue;
+        // aliases first: a slot holding a merged id (iron_gut) becomes its home id.
+        for (const e of arr) {
+          if (!e || typeof e !== 'object' || !e.id) continue;
+          const d = this.abilityDef(e.id);
+          if (d && d.id !== e.id && !arr.some(o => o && o.id === d.id)) { e.id = d.id; e.name = d.name; moved++; }
+        }
+        s[key] = arr.filter(e => {
+          const id = (e && e.id) || e;
+          if (!id || (e && e.evolvedFrom) || !this.isSkillLane(id)) return true;
+          const sid = this.abilitySkillId(id);
+          if (!(this.data.knowledge || []).some(k => k.id === sid)) return true;
+          const lvl = Math.min(3, Math.max(1, (e && e.level) || 1));
+          const cur = skills[sid];
+          if (!cur || (cur.level || 0) < lvl) {
+            skills[sid] = { level: lvl, learnedDay: (cur && cur.learnedDay) || s.day || 0, via: 'carried over', xp: (e && e.xp) || 0 };
+          }
+          moved++;
+          return false;
+        });
+      }
+      return moved;
     },
     // trustGainMult: applies trust.gain_mult modifier (Hoarder, Chitin Skin,
     // Fear Aura reduce trust gains). Use for ALL trust increases.
@@ -25393,7 +26098,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const sch = this.state.scholar || {};
         const minLvl = 1;
-        if (rid.startsWith('tech:')) return !!(((sch.codex || {}).techniques || {})[rid.slice(5)]);
+        if (rid.startsWith('tech:')) return !!(((this.state.codex || {}).techniques || {})[rid.slice(5)]);
         if (rid.startsWith('skill:')) return ((((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level || 0) >= minLvl;
         // ITEM LEG (ability-gaps 2026-10-14): an equipped item is pure-passive
         // (no button) — wielding it counts as bringing it to bear.
@@ -25459,7 +26164,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const hasReq = (rid) => {
           if (synIds.has(rid)) return (sch.synergies || []).includes(rid);
           if (rid.startsWith('tech:')) {
-            return !!((sch.codex || {}).techniques || {})[rid.slice(5)];
+            return !!((this.state.codex || {}).techniques || {})[rid.slice(5)];
           }
           if (rid.startsWith('skill:')) {
             return (((this.state.codex || {}).skills || {})[rid.slice(6)] || {}).level >= minLvl;
@@ -25485,8 +26190,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (held) active.push(syn.id);
       }
       // WITNESSED SYNERGIES (Steve 2026-10-14 ability coherency, diegetic
-      // discovery): newly-active synergies are recorded in the Codex with
-      // their path pair — the game is its own wiki.
+      // discovery): newly-active synergies are recorded with their path pair
+      // (sch.codex.witnessedSynergies). No Codex UI reads that record yet, so
+      // the line no longer claims "(Recorded in your Codex.)" (audit 2026-10-14).
       try {
         const _prev = new Set(sch.activeSynergies || []);
         const _newly = active.filter(id => !_prev.has(id));
@@ -25499,7 +26205,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               const _paths = [];
               for (const _req of ((_syn && _syn.requires) || [])) {
                 const _ad = (this.data.abilities || []).find(a => a.id === _req);
-                for (const _p of ((_ad && _ad.paths) || [])) if (!_paths.includes(_p)) _paths.push(_p);
+                for (const _p of (this.abilityPaths ? this.abilityPaths(_ad) : [])) if (!_paths.includes(_p)) _paths.push(_p);
               }
               sch.codex.witnessedSynergies[_sid] = {
                 day: (this.state.scholar || {}).day || 0,
@@ -25507,9 +26213,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 name: (_syn && _syn.name) || _sid,
               };
               if (_paths.length >= 2) {
-                this.say(`⚡ SYNERGY WITNESSED: ${_paths[0].toUpperCase()} × ${_paths[1].toUpperCase()} — ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+                this.say(`⚡ SYNERGY WITNESSED: ${_paths[0].toUpperCase()} × ${_paths[1].toUpperCase()} — ${(_syn && _syn.name) || _sid}!`);
               } else {
-                this.say(`⚡ SYNERGY WITNESSED: ${(_syn && _syn.name) || _sid}! (Recorded in your Codex.)`);
+                this.say(`⚡ SYNERGY WITNESSED: ${(_syn && _syn.name) || _sid}!`);
               }
               try { this.audioEvent('synergy', { paths: _paths }); } catch (e) {}
             }
@@ -26969,6 +27675,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           surgeSpent = typeof s.prog.feastSurge === 'number' ? s.prog.feastSurge : 1.5;
         }
       } catch (e) {}
+      // HARVEST TABLE (god-path 2026-10-14, feaster payoff): the host's
+      // feasts are rituals — they arm the surge without devotion (x1.3, x1.5
+      // at L2). Devotion still wins when it's higher.
+      try {
+        if (this.hasAbility && this.hasAbility('harvest_table')) {
+          const _ht = (this.abilityLevel('harvest_table') >= 2) ? 1.5 : 1.3;
+          if ((surgeSpent || 0) < _ht) surgeSpent = _ht;
+        }
+      } catch (e) { console.warn('[godpath] harvest table', e); }
       const hostName = (() => { try { return this.displayName(this.villagerId).split(' ')[0]; } catch (e) { return 'you'; } })();
       // SHORT-NAME (longsim winpath r4): strangers are descriptors, not
       // names ("A person, maybe 20s") — split(' ')[0] rendered four
@@ -26990,7 +27705,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } else {
           try { this.remember(vid, 'feast', `${hostName} hosted a feast — real food, firelight, laughing.`); } catch (e) {}
           try { if (this.recordLifeseedEvent) this.recordLifeseedEvent(vid, 'feast_shared'); } catch (e) {}
-          try { this.bumpTrust(vid, 2 + qualityGated, 'feast'); } catch (e) {}
+          try { this.bumpTrust(vid, 2 + qualityGated + ((this.hasAbility && this.hasAbility('harvest_table')) ? (this.abilityLevel('harvest_table') >= 3 ? 2 : 1) : 0), 'feast'); } catch (e) {}
         }
         try { const n = this.npcNeeds(vid); n.hunger = Math.max(0, (n.hunger || 0) - 30); n.social = Math.min(100, (n.social || 0) + 10); } catch (e) {}
       }
@@ -27354,6 +28069,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // GODHOOD REWORK (Steve 2026-10-13): villagers discover synergies by
       // holding all legs day after day — practice abstracted into daily deeds.
       try { this.npcSynergyTick(v); } catch (e) {}
+      // PARITY (2026-10-14): villagers gear up and settle pending level-up sheets (villager-build.js).
+      try { if (this.villagerBuildDay) this.villagerBuildDay(); } catch (e) { console.warn('[villager-build] day', e); }
       // HANDLING DEEPENS (longsim knowledge r2 2026-10-11): the village's
       // hands learn, read from today's foraging ledger. Runs inside
       // villageEats so it ticks exactly once per village day.
@@ -27948,7 +28665,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // cold_blooded: on cold days your body budgets — 20% less food needed.
       const wr = Math.random();
       const prevWeather = this.state.weather;
-      this.state.weather = wr < 0.7 ? 'clear' : wr < 0.9 ? 'rain' : 'cold';
+      // REGIONS: the landing region's season table (Game.season()).
+      this.state.weather = this.rollWeather(wr);
       // DRAMA (Steve 2026-10-07): dramatic weather change — screen-wide effect
       try {
         if (this.state.weather !== prevWeather && (this.state.weather === 'rain' || this.state.weather === 'cold')) {
@@ -28433,9 +29151,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       let w4faced = false;
       try { w4faced = (typeof this.waveEngaged === 'function') ? this.waveEngaged(4) > 0 : false; } catch (e) {}
-      if (standing >= t5 && w4faced) return 5;
-      if (standing >= t4) return 4;
-      if (day >= dN && pts(2) >= ((bar[2] | 0) || 5)) return 3;
+      // The standing rungs sit ON TOP of the wave-3 rung (audit 2026-10-14):
+      // without this, high standing unlocked wave 4 before wave 3 ever had.
+      const w3 = day >= dN && pts(2) >= ((bar[2] | 0) || 5);
+      if (w3 && standing >= t5 && w4faced) return 5;
+      if (w3 && standing >= t4) return 4;
+      if (w3) return 3;
       if (day >= d2 && pts(1) >= ((bar[1] | 0) || 5)) return 2;
       return 1;
     },
@@ -28558,8 +29279,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
     // checkScalePointers: the reactive check for beats 4+5 (SCALE-DISCOVERY.md,
-    // Steve 2026-10-12). The wave gates are scale-gated (wave 4 needs regional,
-    // wave 5 needs national — unlockedWave), but nothing ever told the player.
+    // Steve 2026-10-12). Waves 4-5 unlock on village Standing (standing.js,
+    // since 2026-10-13 — no longer regional/national rank); the pointer
+    // TRIGGERS below still read scale rank (unchanged, open design question),
+    // but the TEXT names the real lever: standing.
     // Fires each pointer ONCE, at the unlock — the discoverability question
     // ("what's next?") arises the moment a new wave lands, not after its kill
     // bar fills. (Retimed 2026-10-12: the bar-banked trigger was a nearly
@@ -28600,12 +29323,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.state._scalePtrW4EchoDay = day + 1;
       } catch (e) {}
     },
-    // scalePointerW5: escalation. A region held, a nation needed — three
-    // seasoned bonds under one head, or bend the knee. Producer-brain throughout.
+    // scalePointerW5: escalation. A region held; the finale needs more
+    // Standing (t5) and the Mirror Draft faced (unlockedWave) — no nation
+    // required since 2026-10-13. Producer-brain throughout.
     scalePointerW5() {
       try {
         this.say('\u{1F4FA} "A REGION! Look at you! The ratings department is doing a little DANCE over here!"');
-        this.say('\u{1F4FA} "But finales — FINALES need a NATION, sweetheart. Three seasoned bonds under ONE head. Or bend the knee to somebody who already has one. The producers are WAITING."');
+        this.say('\u{1F4FA} "But finales — FINALES need a LEGEND, sweetheart. More STANDING — blood, bonds, or bread — and look the Mirror Draft in the eye. The producers are WAITING."');
       } catch (e) {}
     },
     // scalePointerEcho: the morning-after answer to the wave-4 pointer. One
@@ -29290,7 +30014,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.pendingInTent = false;
       // face to face: the ambiguity does NOT end. Descriptor and dread, not a name.
       try { this.identifyMonster(mdef.id); } catch (e) {}
-      this.removeWorldMonster(this.playerMonster()); // it's in the fight now, not wandering
+      const _origin = this.playerMonster();
+      this.removeWorldMonster(_origin); // it's in the fight now, not wandering
+      // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15): a
+      // titan or campaign piece (spawned with titan:true) remembers its map
+      // object, so tbEnd can put it back when it wasn't beaten.
+      if (_origin && _origin.titan && this.tbfight) this.tbfight.worldOrigin = _origin;
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
@@ -30508,6 +31237,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         if (typeof AudioRegistry !== 'undefined' && typeof Audio !== 'undefined') {
           var reg = AudioRegistry.resolveHook(name);
+          // PLACEHOLDER FILES (presentation pass A, 2026-10-14): a file
+          // flagged placeholder is a rendered synth — the live synth voice is
+          // better (varies per play, rides the mixer), so it wins when one is
+          // registered. Real recordings (placeholder:false) still play first.
+          if (reg && reg.file && reg.placeholder && self.audio && typeof self.audio[name] === 'function') { synth(); return; }
           if (reg && reg.file) {
             // MIX (Steve 2026-10-13): route files through the mixer (volume,
             // mute, ducking) with synth fallback when the file can't play.
@@ -30794,9 +31528,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!f || f.over || !this.tbIsPlayerTurn()) return false;
       const p = this.tbFighter('p');
       if (!p) return false;
-      // Must be on the edge you're pushing through.
-      const onEdge = (dx < 0 && p.mx === 0) || (dx > 0 && p.mx === 8) ||
-                     (dy < 0 && p.my === 0) || (dy > 0 && p.my === 8);
+      // Must be on the edge you're pushing through. GRID BOUND (capable bot
+      // 2026-10-14): the far edge is the fight's real grid max — titan fights
+      // run 12x12 (tbGridSize), where the old hard-coded 8 was an interior
+      // line and the real edge (11) never counted: no barrier exit, ever.
+      const gmax = this.tbGridMax();
+      const onEdge = (dx < 0 && p.mx === 0) || (dx > 0 && p.mx === gmax) ||
+                     (dy < 0 && p.my === 0) || (dy > 0 && p.my === gmax);
       if (!onEdge) return false;
       // SEALED (Steve 2026-10-11): a sealed fight is sealed — the barrier
       // holds, no edge-flee. The red barrierSealed outline says so visually;
@@ -30901,6 +31639,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (md.relentless) { relentlessHere = true; stillChasing.push(m); continue; }
         if (m._pursuit === undefined || m._pursuit === null) m._pursuit = this.chasePersistence(md);
         m._pursuit -= 1;
+        // ANCHOR KEEPSAKE (Steve 2026-10-14): L1 — chasers tire one crossing
+        // faster; L2 Hold — your flee can't be cut off (the relentless still
+        // come: only Haven or a kill ends them).
+        try { if (this.keepsakeAnchorPursuit) m._pursuit -= this.keepsakeAnchorPursuit(); } catch (e) { console.warn('[keepsakes] anchor pursuit: ' + e.message); }
         if (m._pursuit <= 0) { m.fled = true; gaveUp.push(m); }
         else stillChasing.push(m);
       }
@@ -30934,8 +31676,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const md = m.mdef || {};
         const mSpeed = m.speed || md.speed || 3;
         const shift = Math.max(-2, Math.min(2, mSpeed - pSpeed)); // +: gained on you
-        m.mx = Math.max(0, Math.min(8, 4 - dx * 3 + dx * shift + Math.floor(Math.random() * 3) - 1));
-        m.my = Math.max(0, Math.min(8, 4 - dy * 3 + dy * shift + Math.floor(Math.random() * 3) - 1));
+        const gc = Math.floor(gmax / 2); // grid centre (4 on the 9x9)
+        m.mx = Math.max(0, Math.min(gmax, gc - dx * 3 + dx * shift + Math.floor(Math.random() * 3) - 1));
+        m.my = Math.max(0, Math.min(gmax, gc - dy * 3 + dy * shift + Math.floor(Math.random() * 3) - 1));
         const subj = this.encSubject(m);
         if ((m._pursuit || 99) === 1) this.say(`${subj} is flagging — it won't follow much further.`);
         else if (shift > 0) this.say(`${subj} is gaining on you.`);
@@ -30944,8 +31687,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const m of gaveUp) this.say(`${this.encSubject(m)} gives up the chase, melting back into the treeline.`);
       if (stayers.length) this.say('The slow ones are left behind.');
       // Player enters from the opposite edge
-      p.mx = Math.max(0, Math.min(8, 4 + dx * 3));
-      p.my = Math.max(0, Math.min(8, 4 + dy * 3));
+      p.mx = Math.max(0, Math.min(gmax, Math.floor(gmax / 2) + dx * 3));
+      p.my = Math.max(0, Math.min(gmax, Math.floor(gmax / 2) + dy * 3));
       this.state.scholar.mx = p.mx; this.state.scholar.my = p.my;
       this.tbRefreshTelegraphUI();
       return true;
@@ -31008,7 +31751,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       // WHITE NOISE (statue): at range you're striking where you THINK it is.
       // Half the time it isn't there. Close in, or wait for the unfold.
-      if (this.heronIs(t) && this.encUsesFifo(t) && t.beamPhase === 'still' && d0 > 1 && Math.random() < 0.5) {
+      if (this.heronIs(t) && this.encUsesFifo(t) && t.beamPhase === 'still' && d0 > 1 && Math.random() < 0.5 &&
+          !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('heron'))) {
         p.acted = true;
         this.say("You strike where you thought it was. It wasn't. (The heron is hardest to see when it is stillest.)");
         this.tbAfterPlayerAction();
@@ -31039,7 +31783,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { aimGuaranteed = !!((this.state.scholar || {}).aimBonus || {}).guaranteed; } catch (e) {}
       if (p.blindTurns > 0 && !aimGuaranteed) {
         p.blindTurns -= 1;
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.5 && !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('blinded'))) {
           p.acted = true;
           this.say('You strike at afterimages — the flash is still in your eyes. Missed. (blinded)');
           this.tbAfterPlayerAction();
@@ -31066,7 +31810,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // consumed, and you're off-balance (no dodge on the next incoming hit).
       // Dead-aim ("cannot miss") holds: aim wins over the whiff.
       const _hr = (this.state.scholar || {}).haymakerReady;
-      if (_hr && _hr.accPenalty && !p.aimed && Math.random() < _hr.accPenalty) {
+      if (_hr && _hr.accPenalty && !p.aimed && Math.random() < _hr.accPenalty &&
+          !(this.keepsakeLuckyBreak && this.keepsakeLuckyBreak('haymaker'))) {
         delete this.state.scholar.haymakerReady;
         this.state.scholar.haymakerOffBalance = true;
         this.say('You wind up WILD — the haymaker catches nothing but air. Off-balance, exposed: no slipping the next one. (Haymaker — missed.)');
@@ -31413,7 +32158,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       // ALIEN LOOT REVEAL (Steve 2026-10-06): first swing teaches you what the
       // alien weapon actually does. Knowledge is earned by doing.
-      try { this.alienLootReveal((this.state.scholar.equipped || {}).weapon); } catch (e) {}
+      try { this.alienLootReveal(this.equippedWeapon().item); } catch (e) {}
       const tAfter = this.tbFighter(t.key);
       // PRACTICE DEEDS (longsim abilities r5 2026-10-12): haymaker — one
       // blow for half or more of a REAL opponent's max HP (maxHp >= 30, so a
@@ -31737,8 +32482,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const str = ((this.state.scholar || {}).stats || {}).str || 5;
       let chance = 0.3 + str * 0.04;
       try {
-        const wid = String((((this.state.scholar || {}).equipped || {}).weapon || {}).itemId || '');
-        if (wid === 'crowbar') chance += 0.25;
+        if (this.equippedWeapon().itemId === 'crowbar') chance += 0.25;
       } catch (e) {}
       if (Math.random() < chance) {
         t.turtleFlipped = 3;
@@ -32742,7 +33486,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // well not be there. Checked the same way as the torch-vs-golem rule.
       let ignoresArmor = false;
       try {
-        const wdef = this.data.items.find(i => i.id === String((((this.state.scholar || {}).equipped || {}).weapon || {}).itemId || ''));
+        const wdef = this.equippedWeapon().def;
         ignoresArmor = !!(wdef && wdef.weapon && wdef.weapon.ignoresArmor);
       } catch (e) {}
       // BUNKER (speedbump): sealed shell — nearly invulnerable. Chip damage only.
@@ -32805,6 +33549,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
         } catch (e) {}
       }
+      // AEGIS LINK (god-path 2026-10-14, bulwark): a linked ally's hit lands
+      // on the player in full (godpath.js aegisRedirect). Before leech, so a
+      // redirected hit isn't drunk twice.
+      if ((t.kind === 'villager' || t.kind === 'ally') && final > 0 && this.tbfight) {
+        try { const GPa = (globalThis.Scattering || {}).Godpath; if (GPa) final = GPa.aegisRedirect(this, t, final, sourceKey); }
+        catch (e) { console.warn('[godpath] aegis', e); }
+        // COIN GUARD / LAST RITES / PROPHECY on a villager (parity 2026-10-14)
+        if (final > 0) {
+          try { const GPv = (globalThis.Scattering || {}).Godpath; if (GPv && GPv.absorbVillagerHit) final = GPv.absorbVillagerHit(this, t, final); }
+          catch (e) { console.warn('[godpath] villager absorb', e); }
+        }
+      }
       // LEECH STANCE (break-it abilities 2026-10-10): the data action
       // leech.leech_stance plants the flag on the player fighter for the
       // round. When an ally fighter takes damage while the stance is up and
@@ -32862,6 +33618,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
           }
         } catch (e) {}
+      }
+      // COIN GUARD / LAST RITES (god-path 2026-10-14): per-hit absorbs on
+      // the player (godpath.js absorbPlayerHit), before the godhood coins.
+      if (t && t.kind === 'player' && final > 0) {
+        try { const GPg = (globalThis.Scattering || {}).Godpath; if (GPg) final = GPg.absorbPlayerHit(this, final); }
+        catch (e) { console.warn('[godpath] absorb', e); }
       }
       // GILDED GUARD (Market God 2.0, 2026-10-14): orbiting coins intercept
       // damage before HP. The mythic sprite shows the coins; the mechanic
@@ -33011,8 +33773,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.drama('enrage', t.mx, t.my, t.encWound || 'enraged');
         } catch (e) {}
       }
+      // LIFELINE (god-path 2026-10-14, healer): once per fight an ally that
+      // would fall holds instead (godpath.js allyWouldFall).
+      if (t.hp <= 0 && (t.kind === 'villager' || t.kind === 'ally')) {
+        try { const GPl = (globalThis.Scattering || {}).Godpath; if (GPl) GPl.allyWouldFall(this, t); }
+        catch (e) { console.warn('[godpath] lifeline', e); }
+      }
       if (t.hp <= 0) {
         t.alive = false;
+        // LAST RITES (god-path 2026-10-14, keeper): the fallen stand guard.
+        if (t.kind === 'villager' || t.kind === 'ally') {
+          try { const GPr = (globalThis.Scattering || {}).Godpath; if (GPr) GPr.onAllyFell(this, t); }
+          catch (e) { console.warn('[godpath] last rites', e); }
+        }
         // SNAKE SPLIT (Steve 2026-10-05): kill a middle segment and the snake
         // splits at the break. The tail-side becomes a new snake with its own
         // head. Kill sequentially (tail first) to avoid this.
@@ -33729,8 +34502,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               if (v._haymakerSwings % 3 === 0) { dmg = Math.round(dmg * 2); _hmSwung = true; }
             }
           } catch (e) {}
+          // GOD-PATH (parity 2026-10-14): Stoke / Back from the Brink /
+          // Misdirection on a villager's strike, same numbers as the player's.
+          if (a.type === 'strike') {
+            try { const GPs = (globalThis.Scattering || {}).Godpath; if (GPs && GPs.villagerStrikeMult) dmg = Math.round(dmg * GPs.villagerStrikeMult(this, v, t)); }
+            catch (e) { console.warn('[godpath] villager strike', e); }
+          }
           this.say(`${v.name} ${a.type === 'strike' ? 'strikes' : 'harries'} the ${this.encTheName(t)}.`);
-          const _landed = this.tbDamage(t.key, dmg, v.name);
+          // sourceKey (2026-10-14): pass the striker's key so source-keyed
+          // hooks see who hit — party-formal flank/point, War Cry rallyBuff.
+          const _landed = this.tbDamage(t.key, dmg, v.name, v.key, { strike: a.type === 'strike' });
           // HOPELESS-FLIGHT LEDGER (structural-combat 2026-10-10): damage
           // dealt, paired with _taken in tbDamage — tbVillagerHopeless reads
           // the trajectory from these.
@@ -35300,7 +36081,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const dx = Math.sign(m.mx - px), dy = Math.sign(m.my - py);
         if (dx || dy) {
           const nx = px + dx, ny = py + dy;
-          if (!(nx === m.mx && ny === m.my) && nx >= 0 && nx <= 8 && ny >= 0 && ny <= 8 && !this.tbBlocked(nx, ny)) {
+          if (!(nx === m.mx && ny === m.my) && nx >= 0 && nx <= 8 && ny >= 0 && ny <= 8 && !this.tbBlocked(nx, ny) &&
+              !(tgt.kind === 'player' && this.keepsakeHoldsGround && this.keepsakeHoldsGround(tgt))) {
             tgt.mx = nx; tgt.my = ny;
             if (tgt.kind === 'player') { this.state.scholar.mx = nx; this.state.scholar.my = ny; }
             this.say(tgt.kind === 'player'
@@ -35416,6 +36198,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         _f._tripwireSet = false;
         this.say(`${this.encSubject(m)} steps — and hits the tripwire! It eats dirt, prone and stunned! (Tripwire!)`);
         try { this.applyStatus(m, 'stun', { rounds: 1 }); } catch (e) { m.stunned = Math.max(m.stunned || 0, 1); }
+        // Deepening 2 ("Barbed wire. The prone monster also bleeds.") —
+        // coherence audit 2026-10-14: the text promised it, nothing applied it.
+        try { if (this.abilityLevel('tripwire') >= 2) this.applyStatus(m, 'bleed', { source: 'barbed wire' }); } catch (e) {}
         return null;
       }
       return S.combat.stepToward(m.mx, m.my, tx, ty, blocked, danger);
@@ -36094,7 +36879,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // SUNBASKER: the bite lands with whatever charge SURVIVED the
             // windup — a mid-declare hit weakens it honestly.
             if (this.sunbaskerIs(m)) tg.dmg = this.sbBiteDmg(m);
-            let dmg = S.combat.roll(tg.dmg), missed = false;
+            // a tactic-only move (landlord's Jurisdiction Spread: no damage
+            // range) rolled undefined[0] and threw mid-turn; it deals none.
+            let dmg = Array.isArray(tg.dmg) ? S.combat.roll(tg.dmg) : (tg.dmg || 0), missed = false;
             // FLANK (party tactics 2026-10-10): packmates beside the target
             // hit harder. Computed at resolve — never stale. 0 for duels.
             const flankD = this.tbFlankBonus ? this.tbFlankBonus(m, t) : 0;
@@ -39287,6 +40074,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15):
+      // startCombat lifts the piece off the map; a titan or campaign piece
+      // that is still standing after a loss, a flee or a rout goes back on
+      // its tile at full strength. Before, nothing put it back: the Network
+      // said "re-face it when ready" with nothing to face, and a lost titan
+      // "remained" nowhere. Wild monsters still melt away (titan-only).
+      try {
+        const o = f.worldOrigin;
+        if (o && result !== 'won') {
+          const mine = (f.fighters || []).filter(x => x && x.kind === 'monster' && (((x.mdef || {}).id || x.monsterId || x.id) === o.id));
+          const standing = !mine.length || mine.some(x => x.alive && (x.hp || 0) > 0);
+          if (standing && this.worldMonsters().indexOf(o) < 0 && !this.monsterAt(o.tx, o.ty)) {
+            o.hp = o.maxHp || o.hp;
+            this.worldMonsters().push(o);
+            this.touchTileScene(o.tx, o.ty);
+            this.syncMonsterAlias();
+          }
+        }
+      } catch (e) { console.warn('[titan] piece restore', e); }
+      // UNIFIED TRACKS (2026-10-14): snapshot before the narration clears it —
+      // facing an alien player is System contact (strange track).
+      let _alienFight = false;
+      try { _alienFight = !!(this.state.alienEncounter || (f.fighters || []).some(x => x && x.alienPid)); } catch (eA) { console.warn('[tracks] alien snapshot', eA); }
       // COMBAT CLEANUP GUARANTEE (Steve 2026-10-06): the victory/defeat
       // narration below is long and calls many subsystems. If ANY of it
       // throws, tbfight must still clear — a stuck tbfight softlocks movement
@@ -39398,10 +40208,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.notePlaystyle('bold');
         try { this.villageEvent('victory'); } catch (e) {}
         try { this.checkPromises('fight'); } catch (e) {}
+        // STORY MOMENT: +3 bond — worn keepsakes only (keepsakeGrow is the
+        // worn-only gate; a keepsake in the pack is dormant).
         for (const r of this.relicItems()) {
           const rdef = this.data.items.find(i => i.id === (r.itemId || r.id));
-          if (rdef && rdef.class === 'sentimental') {
-            r.bond = (r.bond || 0) + 3;
+          if (rdef && rdef.class === 'sentimental' && typeof this.keepsakeGrow === 'function') {
+            this.keepsakeGrow(r, 3, 'victory');
           }
         }
         // BOND PERCEPTION (Steve 2026-10-05): the bond grows whether you
@@ -39511,6 +40323,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try {
         const _p = this.tbFighter('p');
         if (_p && _p.alive !== false && (_p.hp || 0) > 0) {
+          // UNIFIED TRACKS (2026-10-14): the same fight deeds that feed a
+          // villager's combat track (fieldFights: kill 2, survived 1) feed yours.
+          if (this.noteDeed) try {
+            if (result === 'won') this.noteDeed('fight_won');
+            else if (result === 'fled' || result === 'calmed') this.noteDeed('fight_survived');
+            if (_alienFight) this.noteDeed('alien_fight');
+          } catch (eT) { console.warn('[tracks] fight deed', eT); }
           if (result === 'won') this.noteTrialDeed('win_a_fight', 1);
           const _taken = _p._taken || 0;
           if (_taken >= 50) this.noteTrialDeed('take_50_damage_in_one_fight', 1);
@@ -39586,11 +40405,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
-    combatRound(cmd) {
-      // OLD menu combat retired — the grid is the combat now.
-      // Kept as a no-op shim so any stale caller doesn't crash.
-      return null;
-    },
     // ONE TEXT STREAM (Steve 2026-10-11): Game.log is the single text
     // stream. Every emitted line is pushed EXACTLY ONCE and carries a
     // surface tag — narration | feedback | toast | bubble | dialogue |
@@ -39644,7 +40458,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         (this._freshScratch = this._freshScratch || {});
       let used = store[key] || (store[key] = []);
       let avail = pool.filter(l => !used.includes(l));
-      if (!avail.length) { used = store[key] = []; avail = pool.slice(); }
+      if (!avail.length) {
+        // cycle reset: never open the new cycle with the line that closed
+        // the last one (an immediate verbatim repeat; test-social-gossip).
+        const last = used[used.length - 1];
+        used = store[key] = [];
+        avail = pool.length > 1 ? pool.filter(l => l !== last) : pool.slice();
+      }
       const pick = avail[Math.floor(Math.random() * avail.length)];
       used.push(pick);
       return pick;
@@ -39748,9 +40568,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // game; this is the smallest honest extension letting one hold the clause.
     // (Natural acquisition: the System grants villagers abilities via the
     // villager XP system -- villagerGainXP/NPC_ABILITY_KITS, Steve 2026-10-09.)
+    // UNIFIED TRACKS (2026-10-14): a skill-lane ability is theirs when they
+    // know its skill (v.npcSkills, tracks.js) — the villager twin of the
+    // player's skillLaneEntries. Every "does this villager have tracker?"
+    // check keeps working now that tracker is a skill.
     npcHasAbility(vid, id) {
-      try { return (((this.state.village || {}).npcAbilities || {})[vid] || []).includes(id); }
-      catch (e) { return false; }
+      try {
+        if ((((this.state.village || {}).npcAbilities || {})[vid] || []).includes(id)) return true;
+        const sid = this.abilitySkillId ? this.abilitySkillId(id) : null;
+        return !!(sid && this.npcKnowsSkill && this.npcKnowsSkill(vid, sid));
+      }
+      catch (e) { console.warn('[tracks] npcHasAbility', e); return false; }
     },
     // npcSynergyTick(v): GODHOOD REWORK (Steve 2026-10-13). Villagers discover
     // synergies by holding all legs day after day — the "practice" is their
@@ -39765,7 +40593,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.npcSynergyDays = v.npcSynergyDays || {};
         const roster = (v.roster || []).filter(id => id !== this.villagerId && !(this.vpOf && this.vpOf(id) || {}).dead);
         for (const vid of roster) {
-          const held = new Set(((v.npcAbilities || {})[vid] || []));
+          const held = new Set(this.npcOwnedIds ? this.npcOwnedIds(vid) : ((v.npcAbilities || {})[vid] || []));
           if (held.size < 2) continue;
           v.npcSynergies[vid] = v.npcSynergies[vid] || [];
           v.npcSynergyDays[vid] = v.npcSynergyDays[vid] || {};
@@ -39798,6 +40626,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // world's reactor is taken by someone else, the grant is refused — the
         // caller must not narrate it as granted. Returns false on refusal.
         if (id === 'fusion_reactor' && this.state.fusionReactorHolder) return false;
+        // KITS ARE MAGIC ONLY (unified tracks 2026-10-14): a human competence
+        // is a villager SKILL — learned, never slotted (no System chrome).
+        if (this.isSkillLane && this.isSkillLane(id) && this.npcLearnSkill) {
+          this.npcLearnSkill(vid, id);
+          return true;
+        }
         const v = this.state.village; v.npcAbilities = v.npcAbilities || {};
         v.npcAbilities[vid] = v.npcAbilities[vid] || [];
         if (!v.npcAbilities[vid].includes(id)) v.npcAbilities[vid].push(id);
@@ -39847,7 +40681,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const G = S.Godhood;
         if (!G) return;
         for (const gh of G.godhoods()) {
-          if (gh.id === 'voice_of_the_relay') continue;
           const cl = isPlayer
             ? G.godhoodCloseness(this.state.scholar, gh, ((this.state || {}).scholar || {}).day || 0)
             : G.villagerGodhoodCloseness(this, vid, gh);
@@ -39993,100 +40826,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // --- VILLAGER XP & SYSTEM GRANTS (Steve 2026-10-09) ---
     // "System abilities aren't RNG, they are earned by villagers acting like
-    // players." Villagers accrue XP per track from real deeds; at thresholds
-    // the System grants the next ability from the kit matching that track.
-    // Deterministic: same deeds -> same XP -> same grants. No RNG anywhere in
-    // the grant path. Kits fit the villager's situation (canon:
-    // people-not-classes, System-granted ability kits). Thresholds mirror the
-    // player's skill-practice shape (3/8/16, night_hunting). The System's
-    // six-slot rule applies to villagers too (same System, same slots).
-    // XP accrues from day one; GRANTS wait for the System's arrival (day 7) --
-    // nobody was watching before that. Pending grants fire on the next deed
-    // after arrival (the level loop grants all crossed thresholds).
-    NPC_XP_TRACKS: ['combat', 'field', 'social', 'craft'],
-    NPC_XP_THRESHOLDS: [3, 8, 16, 32, 64],
-    NPC_MAX_ABILITIES: 6,
-    NPC_ABILITY_KITS: {
-      // Fixed priority order = grant order. First unheld wins; ties impossible.
-      // phoenix_clause sits 5th in combat (64 XP): a real veteran's capstone,
-      // unlock type system_offer -- the System offers it to those who've
-      // proven themselves in death's doorway. This lights up the villager-
-      // Bearer <redacted> phoenix path (phoenixVillagerTrigger).
-      // PARTY-BOND (2026-10-12, rework): the tank abilities left the combat
-      // kit — at 6th/8th/11th they were unreachable (grants cap at 5) and
-      // decorative. Their honest villager route is the SHIELDBEARER ability
-      // path: the System offers them for combat bond earned beside others
-      // (party-bond.js noteShieldbearerOffer). Pool/unlock stay for the
-      // player's system offers.
-      // GODHOOD REWORK (Steve 2026-10-13): kit order now carries the four
-      // villager-reachable godhoods. Each godhood's pool needs 4+ abilities
-      // (incl. a core) within the first 5 grants of its track(s):
-      //   combat -> one_person_army (rage/haymaker/ambush/patient_aim; core rage)
-      //   field -> apex_predator (tracker/echo_location/game_sense/stalk; core tracker|echo_location)
-      //   social -> shepherd_of_the_dead (peacemaker/mediator/diplomat/generous/silver_tongue; core diplomat|mediator)
-      //   craft -> undying_ward (steady_hands/triage/field_medicine/preservation_instinct/iron_stomach; core triage|field_medicine)
-      // The other six godhoods are player-primary (System offers + build-aware bias).
-      // phoenix_clause sits 5th in combat (32 XP): still a real veteran's
-      // capstone, still lights the villager-Bearer <redacted> phoenix path.
-      combat: ['patient_aim', 'haymaker', 'rage', 'ambush', 'phoenix_clause', 'war_cry', 'blood_magic', 'trade_of_blows', 'unbreakable', 'adrenaline_control', 'dead_aim'],
-      field: ['game_sense', 'field_dressing', 'stalk', 'tracker', 'echo_location', 'blood_trail', 'purify', 'water_breathing', 'animal_ken', 'fusion_reactor'],
-      social: ['peacemaker', 'mediator', 'diplomat', 'generous', 'silver_tongue', 'scream_cheese', 'gossip_network', 'animal_ken'],
-      craft: ['steady_hands', 'triage', 'field_medicine', 'preservation_instinct', 'iron_stomach', 'herbal_remedy', 'camp_cook', 'purify'],
-    },
-    NPC_TRACK_NOUNS: { combat: 'fights', field: 'days worked on the land', social: 'words shared at the fire', craft: 'careful work' },
-    npcXp(vid) {
-      try {
-        const v = this.state.village; v.npcXp = v.npcXp || {};
-        const x = v.npcXp[vid] = v.npcXp[vid] || { combat: 0, field: 0, social: 0, craft: 0, granted: { combat: 0, field: 0, social: 0, craft: 0 } };
-        x.granted = x.granted || { combat: 0, field: 0, social: 0, craft: 0 };
-        return x;
-      } catch (e) { return { combat: 0, field: 0, social: 0, craft: 0, granted: { combat: 0, field: 0, social: 0, craft: 0 } }; }
-    },
-    villagerTrackLevel(xp) {
-      let lvl = 0;
-      for (const t of (this.NPC_XP_THRESHOLDS || [3, 8, 16, 32, 64])) if (xp >= t) lvl++;
-      return lvl;
-    },
-    // villagerGainXP(vid, track, n, why): the deed happened; accrue and maybe
-    // grant. The grant path uses NO randomness: kit order is fixed, first
-    // unheld wins, six-slot cap is a count. Same history -> same abilities.
-    villagerGainXP(vid, track, n, why) {
-      try {
-        if (!vid || vid === this.villagerId) return 0;
-        if ((this.NPC_XP_TRACKS || []).indexOf(track) < 0) return 0;
-        const vp = this.vpOf ? this.vpOf(vid) : null;
-        if (vp && vp.dead) return 0; // the dead earn nothing
-        const x = this.npcXp(vid);
-        x[track] = (x[track] || 0) + (n || 0);
-        if (!this.state.systemArrived) return x[track]; // XP accrues; the System isn't watching yet
-        const kits = this.NPC_ABILITY_KITS || {};
-        const kit = kits[track] || [];
-        const level = this.villagerTrackLevel(x[track]);
-        let granted = (x.granted && x.granted[track]) || 0;
-        while (granted < level) {
-          const held = ((this.state.village || {}).npcAbilities || {})[vid] || [];
-          if (held.length >= (this.NPC_MAX_ABILITIES || 6)) break; // six slots, same as you
-          // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world. If
-          // it's taken, the capstone is simply not on the table — the kit
-          // reads as exhausted for this villager, XP keeps accruing.
-          const next = kit.find(id => held.indexOf(id) < 0 && !(id === 'fusion_reactor' && this.state.fusionReactorHolder));
-          if (!next) break; // kit exhausted: natural saturation, XP keeps accruing
-          if (this.npcGrantAbility(vid, next) === false) break; // refused (singularity) — never narrate a grant that didn't happen
-          granted++;
-          const aname = ((this.data.abilities || []).find(a => a.id === next) || {}).name || next;
-          const vname = this.displayName ? this.displayName(vid) : 'Someone';
-          const noun = (this.NPC_TRACK_NOUNS || {})[track] || track;
-          this.say(`◈ THE SYSTEM has been watching ${vname} — ${x[track]} ${noun}. It offers ${aname}. Earned, not given. (${next}: villager System grant)`);
-          // FUSION SINGULARITY (Steve 2026-10-12): name it out loud — one
-          // reactor per world, and the village just watched it get claimed.
-          if (next === 'fusion_reactor') this.say(`"ONE REACTOR PER WORLD. ${vname.toUpperCase()} HOLDS IT NOW. IT DOES NOT COME OUT."`);
-          try { this.journalNote && this.journalNote('system', 'grant', `The System granted ${vname} ${aname} (${next}) for ${x[track]} ${noun}.`); } catch (e2) {}
-          try { this.tele && this.tele('villager_grant', { vid, ability: next, track, xp: x[track] }); } catch (e3) {}
-        }
-        x.granted[track] = granted;
-        return x[track];
-      } catch (e) { return 0; }
-    },
+    // players." UNIFIED TRACKS (Steve 2026-10-14: "I think we need to sync the
+    // player and villager system. But the villager system sounds like the
+    // better model."): the engine moved to tracks.js (gainTrackXP — one engine
+    // for the player and villagers) and the tracks, thresholds and kits moved
+    // to src/data/tracks.json. These names stay as read-only views of the data
+    // for older callers. Kits are MAGIC ONLY now; the human competences the
+    // old kits held (tracker, triage, diplomat, haymaker...) are villager
+    // SKILLS learned at the same thresholds (tracks.json `skills`), so the
+    // four villager-reachable godhood pools stay reachable.
+    get NPC_XP_TRACKS() { return this.trackData ? this.trackData().tracks : []; },
+    get NPC_XP_THRESHOLDS() { return this.trackThresholds ? this.trackThresholds('villager') : []; },
+    get NPC_MAX_ABILITIES() { return (this.trackData && this.trackData().maxAbilities) || 6; },
+    get NPC_ABILITY_KITS() { return this.trackData ? this.trackData().kits : {}; },
+    get NPC_TRACK_NOUNS() { return this.trackData ? this.trackData().nouns : {}; },
 
     // phoenixPlayerTrigger: the scholar would die holding phoenix_clause.
     // Returns true if death was cheated or is being held (caller: don't set over).
@@ -40716,7 +41469,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.state.telemetry = this.state.telemetry || [];
       const s = this.state.scholar || {};
       this.state.telemetry.push(Object.assign({
-        t: Date.now(), day: s.day || 0, part: DAY_PARTS[this.dayPart] || '?', type,
+        t: (data && typeof data.t === 'number') ? data.t : Date.now(), day: s.day || 0, part: DAY_PARTS[this.dayPart] || '?', type,
         kcal: Math.round(s.kcal || 0), hp: Math.round(s.health || 0),
         packKcal: (this.state.scholar ? this.state.scholar.inventory.reduce((t, i) => t + (i.units || 0) * (i.kcalEach || 0), 0) : 0),
         pantry: Math.round(this.state.village ? this.state.village.pantryKcal : 0),
@@ -40876,12 +41629,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try {
               const adef = (this.data.animals || []).find(a => a.id === id);
               if (adef && adef.common) {
+                // FAMILIARITY (origins-world 2026-10-14): the tier's animals
+                // mode (characterGen.familiarity): pool = every common animal
+                // of this land; continent = your continent's or your tags';
+                // overlap = your tags' only. Old saves (no famTier) = continent.
+                const ft = (s.scholar || {}).famTier;
+                const mode = ft ? this.familiarityTierDef(ft).animals : 'continent';
+                if (mode === 'pool') {
+                  const pool = this.regionAnimalPool();
+                  if (!pool || pool.has(id)) return true;
+                }
                 const tags = ((s.scholar || {}).originTags || []).map(t => String(t).toLowerCase());
                 const aregions = (adef.regions || ['north_america']).map(r => String(r).toLowerCase());
                 const overlap = tags.some(t => aregions.includes(t));
                 const isNorthAmerican = tags.includes('north_america') || tags.some(t =>
                   ['united states', 'usa', 'america', 'canada'].includes(t));
-                if (overlap || (isNorthAmerican && aregions.includes('north_america'))) return true;
+                if (overlap || (mode !== 'overlap' && isNorthAmerican && aregions.includes('north_america'))) return true;
               }
             } catch (e) {}
             return (((s.codex || {}).animalEncounters || {})[id] || 0) >= 3;

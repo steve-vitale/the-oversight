@@ -200,7 +200,10 @@ const mixId = Game.playerCaches()[0].id;
 // Two separate buries -> two caches. Merge them for the mixed test:
 Game.state.scholar.caches = [{
   id: 'cmix', node: node0, desc: 'mixed', label: 'mixed', found: false, day: 5,
-  items: [foodItem('Old berries', 2, 0, 40), foodItem('Fresh berries', 2, 9999, 40)],
+  // spoilDay far past: a preservation skill from the starting occupation adds
+  // spoil days (seed luck; origins-world 2026-10-14 drew one), and day 0 + 6
+  // would still be fresh on day 5.
+  items: [foodItem('Old berries', 2, -100, 40), foodItem('Fresh berries', 2, 9999, 40)],
 }];
 Game.map.px = node0.x; Game.map.py = node0.y;
 said = [];

@@ -14,7 +14,7 @@ function chatterDaily(Game, ctx) {
     if (Game.talkTo && roster.length) {
       const n = Math.min(roster.length, 3);
       for (let i = 0; i < n; i++) {
-        const vid = roster[Math.floor(Math.random() * roster.length)];
+        const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
         try {
           Game.talkTo(vid);
           // hold the conversation: keep taking non-leave choices until it

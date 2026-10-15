@@ -424,6 +424,142 @@ full seat therefore currently aspirational; relay path's stage-3
 qualification is the most reachable route by design (integration is
 earned through play, not territory).
 
+## Overtime, the Network, and THE HOSTS (2026-10-14)
+
+Steve: "waiting should have a cost- but also an opportunity for the truly
+powerful." Design: `evidence/2026-10-14/draft-abilities-skills-endgame-key.md`
+(Part 2, Defaults 4–6, "THE HOSTS"). All numbers live in
+`src/data/titans.json` (`_overtime`, `the_network`).
+
+**Overtime** (`overtime.js`). The clock starts the dawn the Table is
+announced (it never exists before day 90) and runs only while the seat is
+not taken. Every 7 unseated days = +1 tier, cap 6. A withdrawn seat pauses
+the clock; sitting stops it. Per tier *t*:
+
+| Knob | Value |
+|---|---|
+| Wave-4/5 fights ("RERUN ×t") | HP ×(1+0.25t), damage ×(1+0.12t), +⌊t/2⌋ in the pack |
+| Roaming monster cap | +⌈t/2⌉ |
+| Raid cooldown / chance | max(3, 7−t) days / 18% + 6% per tier |
+| Lingering raiders' gorge | ×(1+0.25t) |
+| Seat price | every door's standing −4/tier −3 per Haven person lost, cap −40 |
+| Tier 2 | the run's uncast apocalypse titan gets omens too (so all three can be slain) |
+
+Tier 0 is exactly the old game. Each tier is a System line on air, a
+`overtime_tier` telemetry event, and a line on the Haven Table block.
+
+**The key: THE NETWORK** (`network-campaign.js`). Overtime ≥ `keyTier` (3)
+AND herald, nielsen and finale slain. The broadcast given a body: one piece
+in each 3×3 sector of the 9×9 map — 4 masts (2400–2800 HP, armor 16),
+4 limbs (3000–3400, armor 18), the heart in the middle (6000–7000, armor 22,
+the Finale's hunger with a [180,240] card on a 3-round fuse). Each mast/limb
+brings one real wave-5 monster (1200–2000 HP) whose counters still work; the
+heart brings the spoiler and the network note. ~33k HP of pieces plus ~15k
+of escorts, fought in order on 12×12 with ONE coalition: 20 blades to start,
+1000 kcal/blade/day upkeep, the dead stay dead, camp between nodes (+50% /
++25%), no new blades once the march begins, ≥5 survivors to face a node,
+≥10 for the heart. A loss leaving fewer than 5 ends it: the key is lost for
+the run. (Compare the Finale: 1800–2200 HP, 3 nodes, re-muster allowed.)
+Rarity is a target, not a measurement yet: "almost impossible", well under
+1% of strong runs — the playing bot will measure it.
+
+**THE HOSTS.** With `pg.networkFallen`, every path's last choice adds THE
+HOSTS (light "An Open Table", dark "The New Network", one flavor line per
+path). The path's own challenge and fail rules still run first. Choosing it
+brings the Taken home (adults taken on day zero + pod children), records the
+legend with `key: 'network'`, and `table_won` carries `key`/`hosts`.
+
+## Endings by build (2026-10-14)
+
+Steve, verbatim: "The ending you can win is set as you enter the table, but
+that doesn't mean they play the same table scenario or that they can't lose
+their scenario no matter what path, light or dark. Each playstyle and godhood
+path, moral choice version should have its own ending." / "The table should
+all be relative until actually entering it when it locks." / "Both, linked"
+(the titan finale feeds the Table, and the Table plays your build).
+
+Engine: `src/js/endingKey.js`. Data: `src/data/table-beats.json`,
+`src/data/table-endings.json`. The Table files (`table*.js`) still never read
+god-path state: they read only the key that `endingKey.js` hands them, and
+neither the key nor the beats touch `tableSeat` or `tableEarnedPaths`. A run
+with no class and no god walks every door it earned and can win every one.
+
+### The key
+
+| Field | Source | When |
+|---|---|---|
+| `track` | the dominant of the 5 playstyle tracks (`playerTracks()` xp; ties by tracks.json order) | locked at the seat |
+| `godpath`, `subclass` | the class the System has *named* (`godpathClass('player')`, not lapsed), else null | locked at the seat |
+| `god` | the first ascended god (`scholar.godhood.active`), else null | locked at the seat |
+| `titanFinale` | `network` (the key) > `apocalypse` (finale/nielsen slain) > `herald` > `none` | locked at the seat |
+| `key` | `'network'` when the Network fell (THE HOSTS), else null | locked at the seat |
+| `tablePath`, `moral` | the door entered and the branch the Table already earns from the ledger (`tableBranch`; the relay's light/grey/dark band) | each door; a downgrade re-fills them (`doors` keeps the history) |
+
+Before the seat, `endingKeyLive()` recomputes on every call (relative);
+`endingKey()` is null. `tableScene` (via `tableTakeSeat` from Haven) locks it
+onto `pg.table.endingKey`. Telemetry: `table_entered` and `table_won` carry
+`track`, `godpath`, `subclass`, `god`, `moral`, `titanFinale`, `endingKey`;
+`table_won` adds `ending` (the selector that resolved, or `path`),
+`endingKind` (`bespoke` / `coda` / `path`), `endingLevel` and `buildPlayed`.
+
+### Lookup order
+
+Selectors, most specific first: `god:<godId>` → `class:<path>/<subclass>` →
+`class:<path>` → `track:<track>` → `default`. Morals are `light` / `dark`,
+plus `grey` on the relay. The beat uses all five levels per path; the ending
+is composed (below).
+
+**The build beat** (`table-beats.json`): one beat per path (`beat`, 0-based)
+adds ONE option from the key. Candidate order: god (bespoke, then
+`templates.god`, so every god's verb is an option on every path) → class and
+class/subclass (bespoke) → `templates.subclass` (every named class gets an
+option in its own name) → track → `default` (exists for every path and
+moral). The prompt gains a "YOUR BUILD" line, plus a line for what the titan
+finale contributed.
+- **Odds:** an entry's own `effects[moral]` apply exactly; an entry without
+  them gets the path's `gain[moral]` plus `levelBonus` (god +2, class +1). The
+  titan finale adds its `bonus` to the path's meter either way.
+- **Stakes (always losable):** the option plays only if `stake[moral]` holds
+  when chosen (e.g. Beloved light needs audience 4+, shown on the label); short
+  of it, the path fails with `stakeFail` and the usual downgrade. The path's
+  `limits` (its own fail rules) still apply after. A light walk can now lose
+  every path; Assimilated, losable for the first time, ends plainly when it is
+  already the rock bottom.
+
+**The ending: composed** (Steve, round 5, on path final + one build coda:
+"Nope good idea that's kinda manageable."). An ending = the path's own
+light/dark final (`table-<path>.js`) + ONE build coda from
+`table-endings.json`:
+- `codas["<selector>"] = {light: [lines], dark: [lines]}`, path-independent:
+  `god:<id>` (10), `class:<path>/<subclass>` (20), `track:<t>` (5) × light/dark
+  = **70 codas**. The most specific one for the key plays: god → class/subclass
+  → track → none (the final alone). There is no bare-class coda.
+- The relay's `grey` band reads light or dark by `relayLean()` (> 0 light,
+  < 0 dark, 0 light), the same rule as its grey door gift.
+- **Bespoke override (rare):** `paths.<path>.<selector>.<moral>` =
+  `{title?, lines, finals?: {<finalId>: [...]}}` wins over every coda (lookup
+  god → class/subclass → class → track). `finals` replaces that final's
+  outcome; `title` and `lines` play after it. THE HOSTS (`hosts`) and the pod
+  demand (`poddemand`) take lines only.
+- Tokens: `{name}` `{class}` `{god}` `{verb}` `{path}` (the path's name, "the
+  Beloved"; not at the start of a sentence). Anything else is a validator error.
+
+### Authoring (Muse)
+
+1. `node scripts/validate-table-endings.js --todo` lists the missing codas.
+2. Codas: add `codas["<selector>"].light|dark`, two lines, spare, second
+   person; they must read right after any of the seven paths' finals.
+3. Bespoke entries and beats (optional): `paths.<path>[...]` as above;
+   beats `paths.<path>.options["<selector>"]` with `label`, `line`, `say` per
+   moral (both label and say, or neither) and optional `effects`. Never add
+   `fail`, `goto` or `trial`: the stake is the engine's.
+4. Run the validator and `node scripts/test-table-endings-20261014.js`.
+
+Exemplars (2026-10-14): codas `god:one_person_army`, `class:caregiver/keeper`,
+`track:combat`; bespoke Beloved × Showrunner and Defiant × Brawler (beat +
+ending). Coverage: codas 6/70; bespoke endings 4 (optional); beats 4/675
+bespoke (+448 by template, the rest on the path default).
+
 ## File map
 
 - `src/js/table.js` (new): seat pricing, earned paths, branch axis,

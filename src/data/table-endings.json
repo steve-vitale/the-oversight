@@ -1,0 +1,112 @@
+{
+  "_doc": "COMPOSED ENDINGS (Steve 2026-10-14 round 5, on path final + one build coda: \"Nope good idea that's kinda manageable.\"). An ending = the Table path's own light/dark final (table-<path>.js, never in this file) + ONE build coda. codas.<selector> = { light: [lines], dark: [lines] }, path-independent; selectors 'god:<godId>' (10), 'class:<path>/<subclass>' (20), 'track:<track>' (5) = 70 codas. The most specific coda for the locked ending key plays: god > class/subclass > track; none = the final alone. The relay's grey band reads light or dark by relayLean (>0 light, <0 dark, 0 light), the same rule as its door gift. paths.<tablePath>.<selector>.<moral> = { title?, lines, finals?: { <finalId>: [lines that REPLACE that final's outcome] } } is a RARE BESPOKE OVERRIDE and wins over every coda (lookup god > class/subclass > class > track; morals light, dark, grey on the relay; final ids per table-<path>.js plus 'hosts' and 'poddemand', which add lines only). Tokens: {name} {class} {god} {verb} {path} (the Table path's name, e.g. 'the Beloved'). Voice: spare, second person, two lines. Validate and list what's missing: node scripts/validate-table-endings.js --todo",
+  "codas": {
+    "_doc": "One build coda per selector x moral, played after the path's final. Exemplars 2026-10-14: god:one_person_army, class:caregiver/keeper, track:combat.",
+    "god:one_person_army": {
+      "light": [
+        "The System called you {god}. You never wanted an army. You wanted everyone home, and every wound you took, you gave back once, and then you put it down.",
+        "{name} keeps no trophies. When the children ask what it was like to be an army, you tell them: tired, and never alone."
+      ],
+      "dark": [
+        "The System called you {god}, and you kept the name. Every wound since the first day is still on your books. You still collect.",
+        "You leave the Table as {path}, and nothing around the ring will meet your eyes. In Haven, people step aside when you pass. They don't know they're doing it."
+      ]
+    },
+    "class:caregiver/keeper": {
+      "light": [
+        "You carried the keepsakes of the dead the whole way to the Table: a button, a whistle, a name scratched into a spoon. When it was over, you set them out where everyone could see.",
+        "The Codex keeps what the dead knew. {name} keeps the rest: who they were at dinner."
+      ],
+      "dark": [
+        "You carried the dead the whole way to the Table and made them stand behind you while you talked. The table counted them as yours. You let it.",
+        "{name} still sets places for people who aren't coming. Nobody in Haven dares sit in them."
+      ]
+    },
+    "track:combat": {
+      "light": [
+        "You came to the Table as {path} the hard way: one fight at a time, most of them for someone else.",
+        "{name} still wakes before dawn and walks the fence. It's a good fence. It doesn't need walking."
+      ],
+      "dark": [
+        "You came to the Table as {path} the hard way, and you made sure the hard way went through everyone in front of you.",
+        "{name} still wakes before dawn with a hand on the knife. Haven sleeps fine. It doesn't ask why."
+      ]
+    }
+  },
+  "paths": {
+    "beloved": {
+      "class:socialite/showrunner": {
+        "light": {
+          "title": "THE SHOWRUNNER'S FINALE",
+          "finals": {
+            "audience": [
+              "You hand the audience the microphone and walk off your own stage. It's the best cue you ever called. Trillions of viewers find out what it's like to be asked, and the show becomes the government without anyone quite deciding it should.",
+              "It works because you built it to work: every segment has an exit, every host has a replacement, and nobody holds the remote for long. The ratings dip. The constitution doesn't."
+            ],
+            "quiet": [
+              "You spend the finale on people the show never booked. You give the unfilmed villages the good lighting. You give the dead the long shot. You give the quiet ones the last word, and you cut the music so it's the only sound.",
+              "The audience weeps in eleven dimensions. Nobody can find you in the footage. That was the point."
+            ]
+          },
+          "lines": [
+            "Later, the galaxy will try to name the producer of the most-watched night in its history. The credits roll for an hour and list everyone in Haven, alphabetically. Your name is in there somewhere, between a beekeeper and a child.",
+            "{name} never takes a bow. At the fire that night, someone asks who ran the whole thing. Everyone looks at everyone else, and laughs, and that's the right answer."
+          ]
+        },
+        "dark": {
+          "title": "THE SHOWRUNNER'S CUT",
+          "finals": {
+            "audience": [
+              "The audience speaks, and every word is one you wrote for it. You built the show so well that the galaxy can't tell the difference between being heard and being produced. Neither can you, most nights.",
+              "The government is a program now. You are its showrunner, uncredited and permanent. The ratings never dip. You made sure."
+            ],
+            "contract": [
+              "The network slides the forever-contract across the light, and you read it twice, and you strike out the part where they own you, and you add a part where you own them. They sign. They have seen what you do to a room.",
+              "The show never ends. You never appear in it. Every cut in the galaxy goes through your hands, and somewhere in Haven a grandmother watches herself cry on a screen and doesn't remember crying."
+            ]
+          },
+          "lines": [
+            "The galaxy loves Haven perfectly. Haven isn't sure which parts of itself were real.",
+            "{name} watches the final cut alone in the control room. It's flawless. You are not in a single frame of it, and that was always the job."
+          ]
+        }
+      }
+    },
+    "defiant": {
+      "class:brawler": {
+        "light": {
+          "title": "THE DOORWAY",
+          "finals": {
+            "walk": [
+              "Humanity walks, and you walk last. Not to lead. To stand in the doorway until the last child is through, the way you stood in front of every thing that ever came for Haven. Nothing comes. The table watches you watch it, and doesn't move.",
+              "The long shot is famous: the small figures leaving the light, and one of them turned around, facing the ring, walking backwards the whole way out."
+            ],
+            "terms": [
+              "You name terms like someone who has been hit before and got up: plainly, without hurry. They can have trade. They can have visits. They cannot have anyone, ever. They sign. Nobody at the ring wants to find out what you do when a promise breaks."
+            ]
+          },
+          "lines": [
+            "The System named you a brawler. It never quite understood that most of the fighting was standing still in the right place.",
+            "{name} still sleeps nearest the door. Haven never asks why. Haven sleeps fine."
+          ]
+        },
+        "dark": {
+          "title": "THE SALTED ROAD",
+          "finals": {
+            "walk": [
+              "Humanity walks, and you make sure the table remembers the walk. The collector you broke is still holding its hand. The road behind you is salt and ash and the marks of your knuckles on the light.",
+              "The long shot is famous for a different reason: the figure at the back, turning once, and every face around the ring looking away first."
+            ],
+            "terms": [
+              "You name your terms with blood still on your hands, and you don't wipe them first. Everything, on your word, or you come back. They sign before you finish the sentence."
+            ]
+          },
+          "lines": [
+            "The galaxy learns the other meaning of 'no': the one that hits back. The table never prices humanity again. It never invites it again either.",
+            "{name} walks home through a village that loves them and flinches when they raise a hand to wave."
+          ]
+        }
+      }
+    }
+  }
+}

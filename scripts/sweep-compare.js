@@ -45,6 +45,9 @@ const POLICY_REGISTRY = {
   'zero': idle.zero, 'mvc': idle.mvc, 'leader': idle.leader,
 };
 try { POLICY_REGISTRY['oraclev2'] = require('./policies/oracleV2').oraclev2 || require('./policies/oracleV2'); } catch (e) {}
+// capable (2026-10-14, Steve "Build a bot"): the bot that uses the game —
+// real flee, combat abilities, scored choices, held talks, the Table.
+try { POLICY_REGISTRY['capable'] = require('./policies/capable').capable; } catch (e) { console.warn('capable policy failed to load: ' + e.message); }
 try { POLICY_REGISTRY['socialite'] = require('./policies/socialite').socialite || require('./policies/socialite'); } catch (e) {}
 
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
@@ -52,11 +55,11 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 function stdSnapshot(Game) {
   // Everything behind try/catch: a hostile read must never kill a run.
   const out = {
-    won: false, arc: 1, tableWaiting: false, rank: 'village',
+    won: false, arc: 1, tableWaiting: false, tableEntered: false, rank: 'village',
     breadth: 0, stage: 0, vests: 0,
   };
   try { out.won = !!Game.won; } catch (e) {}
-  try { const pg = Game.progState ? Game.progState() : {}; out.arc = pg.arc || 1; out.tableWaiting = !!pg.tableWaiting; } catch (e) {}
+  try { const pg = Game.progState ? Game.progState() : {}; out.arc = pg.arc || 1; out.tableWaiting = !!pg.tableWaiting; out.tableEntered = !!pg.tableDone; } catch (e) {}
   try { out.rank = (Game.scaleRank ? Game.scaleRank() : 'village') || 'village'; } catch (e) {}
   try { out.breadth = Game.codexBreadth ? Game.codexBreadth() : 0; } catch (e) {}
   try { out.stage = Game.integrationStage ? Game.integrationStage() : 0; } catch (e) {}
@@ -92,7 +95,7 @@ async function runComparison(opts) {
       // track max scale rank / arc / table — reachability needs history,
       // not just the end state.
       const policy = Object.assign({}, base);
-      const hist = { maxRank: 0, maxArc: 1, everTable: false, maxVests: 0 };
+      const hist = { maxRank: 0, maxArc: 1, everTable: false, everEntered: false, maxVests: 0 };
       const origDaily = base.daily;
       policy.daily = (G, ctx) => {
         try {
@@ -101,6 +104,7 @@ async function runComparison(opts) {
           hist.maxArc = Math.max(hist.maxArc, s.arc || 1);
           hist.maxVests = Math.max(hist.maxVests, s.vests || 0);
           if (s.tableWaiting) hist.everTable = true;
+          if (s.tableEntered) hist.everEntered = true;
         } catch (e) {}
         if (origDaily) { try { return origDaily(G, ctx); } catch (e) {} }
       };
@@ -109,7 +113,7 @@ async function runComparison(opts) {
       const deaths = {};
       try {
         for (const d of (result.samples.deaths || [])) {
-          const k = String(d.cause || d.kind || 'unknown');
+          const k = (d.player ? 'player:' : (d.kind || 'other') + ':') + String(d.cause || 'unknown');
           deaths[k] = (deaths[k] || 0) + 1;
         }
       } catch (e) {}
@@ -121,12 +125,15 @@ async function runComparison(opts) {
         waveReach: result.maxWaveUnlocked || 1,
         maxArc: hist.maxArc,
         maxRank: Object.keys(RANK_ORDER).find(k => RANK_ORDER[k] === hist.maxRank) || 'village',
-        national: hist.maxRank >= 2 ? 1 : 0,
+        // end.rank too: a run that ends via Game.over before daily misses its last rank (audit 2026-10-14)
+        national: Math.max(hist.maxRank, RANK_ORDER[end.rank] || 0) >= 2 ? 1 : 0,
+        // 'table' = INVITED (tableWaiting ever set), not reached; 'entered' = sat at the table (audit 2026-10-14)
         table: hist.everTable || end.tableWaiting ? 1 : 0,
+        entered: hist.everEntered || end.tableEntered ? 1 : 0,
         vests: Math.max(hist.maxVests, end.vests || 0),
         deaths,
         pacing: result.pacing ? {
-          verbs: result.pacing.meanVerbsPerDay,
+          verbs: result.pacing.meanDeliberatePerDay,
           policyCalls: result.pacing.meanPolicyCallsPerDay,
           ticks: result.pacing.meanTicksPerDay,
           perDay: result.pacing.perDay,
@@ -169,6 +176,7 @@ async function runComparison(opts) {
       maxWave: Math.max.apply(null, rs.map(r => r.waveReach).concat([1])),
       nationalPct: +(100 * rs.reduce((t, r) => t + r.national, 0) / Math.max(1, rs.length)).toFixed(0),
       tablePct: +(100 * rs.reduce((t, r) => t + r.table, 0) / Math.max(1, rs.length)).toFixed(0),
+      enteredPct: +(100 * rs.reduce((t, r) => t + (r.entered || 0), 0) / Math.max(1, rs.length)).toFixed(0),
       vests: rs.reduce((t, r) => t + (r.vests || 0), 0),
       deaths: deathTotals,
       meanVerbsPerDay: rs.length && rs[0].pacing
@@ -184,14 +192,14 @@ async function runComparison(opts) {
 
 function printTable(report) {
   console.log(`\n=== ${report.label} ===  (${report.policies.join(', ')}) seeds=[${report.seeds.join(',')}] days=${report.days}`);
-  console.log('policy        n  won  medD  maxD  maxWave  nat%  tab%  vests  verbs/d  deaths');
+  console.log('policy        n  won  medD  maxD  maxWave  nat%  inv%  sat%  vests  delib/d  deaths');
   for (const pid of report.policies) {
     const b = report.byPolicy[pid];
     const dstr = Object.entries(b.deaths).map(([k, v]) => `${k}:${v}`).join(',') || '-';
     console.log(
       `${pid.padEnd(13)} ${String(b.n).padEnd(2)} ${String(b.won).padEnd(4)} ` +
       `${String(b.medianDays).padEnd(5)} ${String(b.maxDays).padEnd(5)} ${String(b.maxWave).padEnd(8)} ` +
-      `${String(b.nationalPct).padEnd(5)} ${String(b.tablePct).padEnd(5)} ${String(b.vests).padEnd(6)} ${String(b.meanVerbsPerDay).padEnd(8)} ${dstr}`
+      `${String(b.nationalPct).padEnd(5)} ${String(b.tablePct).padEnd(5)} ${String(b.enteredPct).padEnd(5)} ${String(b.vests).padEnd(6)} ${String(b.meanVerbsPerDay).padEnd(8)} ${dstr}`
     );
     const ex = Object.entries(b.extra || {});
     if (ex.length) console.log(`  extra: ${ex.map(([k, v]) => `${k}=${v}`).join(' ')}`);

@@ -19,7 +19,10 @@ global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(f
  'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
  'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
  'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/debug-scenarios.js', 'src/js/progression.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+ 'src/js/justice.js', 'src/js/debug-scenarios.js', 'src/js/progression.js',
+ // 2026-10-14 keepsake growth (Steve): keepsakes grow only while WORN — the
+ // growth/worn rules live in keepsakes.js; a new run starts with them worn.
+ 'src/js/keepsakes.js'].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 const Game = globalThis.Scattering.Game;
 
 let pass = 0, fail = 0;
@@ -46,8 +49,12 @@ function freshGameWithKeepsake() {
   return s;
 }
 function keepsakeItem() {
-  return Game.state.scholar.inventory.find(i => (i.itemId || i.id) === 'daughters_drawing');
+  const s = Game.state.scholar;
+  const worn = Object.values(s.equipped || {}).find(i => i && (i.itemId || i.id) === 'daughters_drawing');
+  return worn || s.inventory.find(i => (i.itemId || i.id) === 'daughters_drawing');
 }
+// 2026-10-14: the reveal reads "when worn" (keepsakes work while worn).
+const wornText = (t) => String(t).replace(/when (carried|worn)/i, 'when worn');
 function lastSayHas(substr) {
   return (Game.log || []).join('\n').includes(substr);
 }
@@ -106,7 +113,7 @@ function lastSayHas(substr) {
     ok('reveal: voiced as a System translation moment',
       lastSayHas('TRANSLATION COMPLETE') && lastSayHas('daughters_drawing'.toUpperCase()) === false /* name is personalized or def name */,
       'say=' + (Game.log || []).slice(-2).join(' | ').slice(0, 160));
-    ok('reveal: the say names what it does', lastSayHas(def.baseEffect.replace(/^use:\s*/i, '')));
+    ok('reveal: the say names what it does', lastSayHas(wornText(def.baseEffect.replace(/^use:\s*/i, ''))));
 
     // Idempotent: no second moment
     Game.log = [];
@@ -128,7 +135,7 @@ function lastSayHas(substr) {
     Game.state.systemArrived = true; k.bond = 10; Game.log = [];
     Game.checkKeepsakeReveal(k);
     ok('pack: revealed keepsake -> effect text',
-      Game.keepsakeEffectText(k) === def.baseEffect);
+      Game.keepsakeEffectText(k) === wornText(def.baseEffect));
     // non-keepsake -> null even if flag somehow set
     const tool = Game.state.scholar.inventory.find(i => (i.itemId || i.id) === 'multitool');
     tool.effectRevealed = true;
@@ -151,7 +158,7 @@ function lastSayHas(substr) {
     ok('lifecycle: first post-arrival tick -> revealed', !!k.effectRevealed);
     ok('lifecycle: reveal was voiced', lastSayHas('TRANSLATION COMPLETE'));
     ok('lifecycle: pack predicate now shows it',
-      Game.keepsakeEffectText(k) === Game.itemDef(k).baseEffect);
+      Game.keepsakeEffectText(k) === wornText(Game.itemDef(k).baseEffect));
   }
 
   // === 5. SIBLING SURFACES: no other leak of keepsake effects ===

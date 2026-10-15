@@ -79,17 +79,26 @@
 
     // ensurePersonLifeseed: generated cast has lifeseeds; background
     // survivors get one lazily so the codex has depth to unlock.
+    // A REAL seed has people + places. recordLifeseedEvent writes
+    // vp.lifeseed.lived onto anyone, so a hydrated survivor (no seed at
+    // birth) can carry a bare { lived } stub — that is NOT a lifeseed, and
+    // reading people[0]/places[0] off it crashed flashbacks (2026-10-14).
     ensurePersonLifeseed(vid) {
       const rc = ((this.state.village || {}).rosterChars || {})[vid];
-      if (rc && rc.lifeseed) return rc.lifeseed;
+      const vp = (this.data.villagers || []).find(x => x && x.id === vid);
+      const prior = (rc && rc.lifeseed) || (vp && vp.lifeseed);
+      if (prior && Array.isArray(prior.people) && Array.isArray(prior.places)) return prior;
+      const host = rc || vp;
       const person = this.getPerson(vid);
-      const name = (rc && rc.name) || (person && person.name) || 'someone';
-      const home = ((this.state.village || {}).bgHome || {})[vid] || 'America';
+      const name = (host && host.name) || (person && person.name) || 'someone';
+      const home = (host && host.homeRegion) || ((this.state.village || {}).bgHome || {})[vid] || 'America';
       try {
-        const ls = this.genLifeseed({ name, homeRegion: home, originTags: [home] });
+        const ls = this.genLifeseed({ name, homeRegion: home, originTags: (host && host.originTags) || [home] });
+        if (prior && prior.lived) ls.lived = prior.lived; // keep what they lived through
         if (rc) rc.lifeseed = ls;
+        if (vp) vp.lifeseed = ls;
         return ls;
-      } catch (e) { return null; }
+      } catch (e) { console.warn('[codex-people] ensurePersonLifeseed: ' + e.message); return null; }
     },
 
     personFirst(vid) {

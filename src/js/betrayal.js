@@ -47,8 +47,11 @@
 //   - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
 //   - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 // consumes:
-//   - village.relationships
-//   - scholar.reputation
+//   - village.trust
+//   - village.bonds
+//   - village.betrayal
+//   - village.visitors
+//   - village.justice.crimes
 // ============ BETRAYAL, ACCUSATION, TRIAL & EXILE ============
 // Steve's design: micro-quests disguise later betrayals; the aftermath is the
 // real game. SYMMETRY RULE: this is NOT player-centric. Any villager can be
@@ -582,11 +585,6 @@
       { min: 95, text: `Someone's name came up at the fire earlier — ${inviter} went quiet, and so did everyone else. You didn't think anything of it then. You do now.` },
     ];
     return T.filter(t => p >= t.min).map(t => t.text);
-  },
-  plotAwareness(plot) {
-    // how many tells the target noticed → escape tuning
-    if (!this.isPlayer(plot.target)) return R() < 0.35 ? 2 : 0;
-    return plot.tells.length;
   },
 
   // ---------- 5. THE AMBUSH ----------
@@ -2849,8 +2847,8 @@
     // the founder teaches what they knew from their old life — like newGame
     try {
       const tags = (playerChar && playerChar.originTags) || [];
-      const tier = (this.familiarityTier ? this.familiarityTier(tags) : 'stranger');
-      const tierCount = { local: 3, visitor: 2, stranger: 1 };
+      const tier = (this.familiarityTier ? this.familiarityTier(tags, null, playerChar && playerChar.homeRegion) : 'stranger');
+      const tierPlants = (this.familiarityTierDef ? this.familiarityTierDef(tier).plants : ({ local: 3, visitor: 2, stranger: 1 })[tier]) || 1;
       const tl = (tags || []).map(t => String(t).toLowerCase());
       const local = [], other = [];
       for (const p of (this.data.plants || [])) {
@@ -2859,7 +2857,7 @@
       }
       for (let i = local.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[local[i], local[j]] = [local[j], local[i]]; }
       for (let i = other.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1));[other[i], other[j]] = [other[j], other[i]]; }
-      v.familiar[pid] = [...local, ...other].slice(0, tierCount[tier] || 1);
+      v.familiar[pid] = [...local, ...other].slice(0, tierPlants);
     } catch (e) { v.familiar[pid] = []; }
     this.state.village = v;
     // social groups regenerate honestly on the new roster (solo → none)
@@ -4095,8 +4093,19 @@
     }
     return best;
   },
+  // The village's trust in the player: the roster average of each villager's
+  // trust slot (v.trust[vid] = that villager's trust in you), the same source
+  // justiceHeat reads. The old read was v.trust[playerId] — a slot seeded at
+  // 15 that ordinary play never moves, so earned trust never reached the moot.
   trustInPlayer() {
-    const t = (this.state.village.trust || {})[this.villagerId];
+    const v = this.state.village;
+    const roster = (v.roster || []).filter(id => id !== this.villagerId);
+    if (!roster.length) return 10;
+    return roster.reduce((s, id) => s + this.jurorTrust(id), 0) / roster.length;
+  },
+  // One villager's trust in the player (default 10, as justiceHeat).
+  jurorTrust(vid) {
+    const t = (this.state.village.trust || {})[vid];
     return t == null ? 10 : t;
   },
   chargeLine(charge) {
@@ -4263,7 +4272,6 @@
   // belief polarity: negative = guilty (of the accused), positive = acquit.
   // The accuser's story landed first — the village starts suspicious.
   initPlayerCaseBelief(c) {
-    const tp = this.trustInPlayer();
     // PRIOR WARNINGS WEIGH THE CASE (mem-wire 2026-10-13; Steve: "warned and
     // still doing it" vs "never warned"): the village remembers who it called
     // out. A theft case against someone already warned for theft hits harder;
@@ -4282,7 +4290,7 @@
     } catch (e) {}
     for (const vid of this.npcIds()) {
       let b = -20;
-      b += (tp - 25) * 0.8;                              // they trust you → doubt it
+      b += (this.jurorTrust(vid) - 25) * 0.8;            // they trust you → doubt it
       b -= this.pairAffinity(vid, c.accuser) * 0.5;      // they like the accuser → believe it
       b += this.pairAffinity(vid, this.villagerId) * 0.4; // personal bond with you
       if (c.charge === 'theft') b += warnedTheft ? -15 : 12;

@@ -44,7 +44,15 @@ const check = (name, cond, detail) => {
   const medLine = (rec.log || []).find(s => /field medicine/i.test(s));
   check('W1 field_medicine fires when hurt', !!medLine, (rec.log || []).slice(-4).join(' | '));
   check('W1 heal is +20 (honest number)', medLine && /\+20/.test(medLine), medLine || '(no line)');
-  Game.state.village.npcAbilities[vid] = (Game.state.village.npcAbilities[vid] || []).filter(a => a !== 'field_medicine');
+  // UNIFIED TRACKS (2026-10-14): field_medicine is skill-lane, so the grant
+  // is a villager SKILL (wound_care) — forget it from both stores.
+  const forgetMed = () => {
+    const v = Game.state.village;
+    v.npcAbilities = v.npcAbilities || {};
+    v.npcAbilities[vid] = (v.npcAbilities[vid] || []).filter(a => a !== 'field_medicine');
+    if (v.npcSkills && v.npcSkills[vid]) v.npcSkills[vid] = v.npcSkills[vid].filter(sk => sk !== 'wound_care');
+  };
+  forgetMed();
 
   // W2: no fire at full health; at most once
   Game.npcGrantAbility(vid, 'field_medicine');
@@ -53,7 +61,7 @@ const check = (name, cond, detail) => {
   const rec2 = Game.fieldFight(vid, bulldozer, null, { awareness: false });
   const medLines = (rec2.log || []).filter(s => /field medicine/i.test(s));
   check('W2 field_medicine silent at/near full health OR fires at most once', medLines.length <= 1, `fired ${medLines.length}x`);
-  Game.state.village.npcAbilities[vid] = (Game.state.village.npcAbilities[vid] || []).filter(a => a !== 'field_medicine');
+  forgetMed();
 
   // ---- healer rounds ----
   const vid2 = roster[1], vid3 = roster[2];
@@ -93,6 +101,11 @@ const check = (name, cond, detail) => {
   });
   Game.state.scholar.abilities = stripMed(Game.state.scholar.abilities);
   Game.state.scholar.backgroundAbilities = stripMed(Game.state.scholar.backgroundAbilities);
+  // ABILITY LANES (2026-10-14): triage/field_medicine/herbal_remedy are now
+  // owned by knowing wound_care / herbal_medicine — strip those skills too.
+  const cxSkills = (Game.state.codex && Game.state.codex.skills) || {};
+  const savedMedSkills = { wound_care: cxSkills.wound_care, herbal_medicine: cxSkills.herbal_medicine };
+  delete cxSkills.wound_care; delete cxSkills.herbal_medicine;
   const benched = [];
   const v = Game.state.village;
   for (const id of (v.roster || [])) {
@@ -113,6 +126,7 @@ const check = (name, cond, detail) => {
   // restore
   Game.state.scholar.abilities = savedAbilities;
   Game.state.scholar.backgroundAbilities = savedBgAbilities;
+  for (const k of Object.keys(savedMedSkills)) if (savedMedSkills[k]) cxSkills[k] = savedMedSkills[k];
   for (const [p, wasDead] of benched) p.dead = wasDead;
 
   console.log(`\nwounds proof: ${pass} passed, ${fail} failed`);

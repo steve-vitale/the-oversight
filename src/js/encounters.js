@@ -56,7 +56,8 @@
  *  6. CODEX-GATED TELEGRAPH — telegraph generosity scales with codex
  *     knowledge: diegetic cues only pre-knowledge (freezing, sounds),
  *     tactical warnings after earned. Implemented in game.js as
- *     encTelegraphKnown(m) (gate: "pattern" — survive a full Discharge);
+ *     encTelegraphKnown(m) (gate: any move of its kit learned, or codex
+ *     stage slain — hardcoded, not config);
  *     encPickCue() below picks the cue text by knowledge.
  *
  * REGISTRATION CHECKLIST for a new animal or monster:
@@ -65,7 +66,7 @@
  *  2. Prey: add a Game.ENC_PREY entry {notice, awareRate, stamina} — the
  *     stalk/strike/flee loop is free.
  *  3. Threats: add an "encounter" config block to monsters.json
- *     {fifo, noticeRange, phases, telegraphGate, painSwitch,
+ *     {fifo, noticeRange, phases, painSwitch,
  *     adjacencyOverride} and use the game.js enc* interface
  *     (encThreatQueue/encNoticeFighter/encCurrentTarget/encNoticesPain/
  *     encScanThreats/encTelegraphKnown/encSetPhase/encPhaseBadge).
@@ -148,7 +149,7 @@
   //   encCurrentTarget(m)            — first live, non-fled entry wins
   //   encNoticesPain(m, attackerKey) — pain jumps the line (config: painSwitch)
   //   encScanThreats(m)              — notice range + adjacency override
-  //   encTelegraphKnown(m)           — codex gate (config: telegraphGate)
+  //   encTelegraphKnown(m)           — codex gate (kit move learned, or slain)
   //   encSetPhase(m, phase) / encPhaseBadge(m)
   // Anyone can be targeted — player, villager, party member. The queue
   // switches ONLY on damage taken or adjacency override. Future threats:
@@ -1018,6 +1019,7 @@
     // (butcherYieldFrac), never gross inflation.
     var kcal = animal.calories;
     try { s.inventory.push(this.foodCarcass(animal, kcal, s.day, 'hunted')); } catch (e) {}
+    try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); } // unified tracks: field
     this.encIdentifyAnimal(a.id); // a kill teaches you what it was — before the name is said
     try {
       this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
@@ -2113,7 +2115,7 @@
     // BEAR (Steve 2026-10-09): a missed strike doesn't rout a bear — it
     // answers. The fight continues on the bear's terms: mauling damage, and
     // it stays. This is the non-monster monster fight.
-    if (animal && animal.id === 'black_bear') {
+    if (animal && this.isRegionPredator(animal.id)) { // REGIONS: fauna.predators
       var bDmg = 6 + Math.floor(Math.random() * 8);
       try { s.health = Math.max(0, (s.health == null ? 100 : s.health) - bDmg); } catch (e) {}
       a.pstate = 'advancing'; a.aware = 1;
@@ -2403,7 +2405,7 @@
     // bite double-dipped: a dist-1 strike could bite (3-8, "Teeth in your
     // hand" — weak fiction for a bear) AND maul AND draw the roar-answer,
     // three damage events on one swing. The maul is the full answer.
-    if (dist <= 1 && a.id !== 'black_bear' && hBeh !== 'quilled' && hBeh !== 'bedding') {
+    if (dist <= 1 && !this.isRegionPredator(a.id) && hBeh !== 'quilled' && hBeh !== 'bedding') {
       var bBeh = animal.behavior || '';
       var biteP = bBeh === 'aggressive' ? 0.6 : bBeh === 'defensive' ? 0.6 : bBeh === 'constrictor' ? 0.5 : bBeh === 'plays_dead' ? 0.3 : 0.2;
       if (Math.random() < biteP) {
@@ -2452,7 +2454,7 @@
     // 8-17 maul per encounter, then free close-range knife strikes at FULL
     // kill chance (the x0.4 penalty lived inside the same one-shot block).
     // Canon (docs/BEAR.md) is present-tense: "at range <= 2 the bear mauls".
-    if (a.id === 'black_bear' && dist <= 2) {
+    if (this.isRegionPredator(a.id) && dist <= 2) { // REGIONS: the land's apex predator mauls
       var maulMethod = 'hands';
       try { maulMethod = this.encWeaponMethod(); } catch (e) {}
       var maulDmg = 8 + Math.floor(Math.random() * 10);
@@ -2491,10 +2493,11 @@
       // charred remains, no hide/bones. You can't hunt with a searcaster.
       var charsMeat = false;
       try {
-        var eqW = (s.equipped || {}).weapon;
-        var wdef = eqW && (this.data.items || []).find(function (i) { return i.id === eqW.itemId; });
+        var wdef = this.equippedWeapon().def;
         charsMeat = !!(wdef && wdef.weapon && wdef.weapon.charsMeat);
       } catch (e) {}
+      // UNIFIED TRACKS (2026-10-14): a kill is a hunt deed — field, like a villager's.
+      try { if (this.noteDeed) this.noteDeed('hunting'); } catch (eT) { console.warn('[tracks] hunt deed', eT); }
       if (charsMeat) {
         var charredKcal = Math.round(kcal * 0.1);
         try { s.inventory.push(this.foodCarcass(animal, charredKcal, s.day, 'charred')); } catch (e) {}

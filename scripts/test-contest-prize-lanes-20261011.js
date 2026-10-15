@@ -181,10 +181,22 @@ async function main() {
   Game.villagerGainXP(vid, Game._cxContestDeedTrack({ cat: 'blood' }), 3, 'won The Blood Tithe on camera');
   const xpAfter = ((Game.state.village.npcXp || {})[vid] || {}).combat || 0;
   ok(xpAfter === xpBefore + 3, 'contest win feeds the combat deed track (+3)', xpBefore + ' -> ' + xpAfter);
+  // PARITY (2026-10-14, design change, test-parity-20261014.js): one XP
+  // scale (thresholds are tracks.json's, not 3) and villagers choose from the
+  // player's 1-of-3 sheet. A contest win is still +3 on the deed track; the
+  // first rung lights when the shared first threshold is crossed.
+  const first = Game.trackThresholds()[0];
+  const kit = ((Game.trackData && Game.trackData().kits) || {}).combat;
+  Game.state.systemArrived = true;
+  Game.state.village.npcKnow = Game.state.village.npcKnow || {};
+  Game.state.village.npcKnow[vid] = Object.assign({ pocket_sand: 2, third_eye: 2 }, Game.state.village.npcKnow[vid] || {});
+  const held0 = ((Game.state.village.npcAbilities || {})[vid] || []).slice();
+  Game.villagerGainXP(vid, 'combat', Math.max(0, first - xpAfter), 'test: reach the first rung');
   const granted = ((Game.state.village.npcAbilities || {})[vid] || []);
-  ok(granted.includes('patient_aim') || xpBefore >= 3,
-    'first rung lights at threshold 3 (patient_aim) for a nobody', JSON.stringify(granted));
-  ok(lines.some(t => /Earned, not given/.test(t)), 'grant narrates "Earned, not given"');
+  const fresh = granted.filter(id => !held0.includes(id));
+  ok(fresh.length === 1 && kit.slice(0, 3).includes(fresh[0]),
+    'first rung lights at the shared first threshold: one of the first 3 combat kit abilities, chosen', JSON.stringify(granted));
+  ok(lines.some(t => /Earned, chosen/.test(t)), 'the choice is narrated ("Earned, chosen")');
 
   // ---- G. wiring ----
   // NOTE: metaProgression.js wrapHook()s _contestEnd, so Game._contestEnd

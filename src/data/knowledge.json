@@ -125,6 +125,9 @@
         "technique": "Front Runner",
         "effect": "You feel storms 12 hours out. Your rain-dance charges faster before rain."
       }
+    ],
+    "abilityMechanics": [
+      "storm_ear"
     ]
   },
   {
@@ -197,6 +200,11 @@
         "technique": "Ghost Trail",
         "effect": "You read tracks so well it's almost seeing the past. Hunt finds +25%."
       }
+    ],
+    "abilityMechanics": [
+      "tracker",
+      "game_sense",
+      "blood_trail"
     ]
   },
   {
@@ -227,7 +235,10 @@
       "hunting guide",
       "fishing guide"
     ],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "abilityMechanics": [
+      "animal_ken"
+    ]
   },
   {
     "id": "star_navigate",
@@ -301,6 +312,10 @@
         "technique": "Clean Transfer",
         "effect": "You take wounds cleanly. No infection risk when you absorb damage."
       }
+    ],
+    "abilityMechanics": [
+      "triage",
+      "field_medicine"
     ]
   },
   {
@@ -368,7 +383,10 @@
       "forager",
       "gardener"
     ],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "abilityMechanics": [
+      "herbal_remedy"
+    ]
   },
   {
     "id": "snare_wire",
@@ -436,7 +454,10 @@
       "butcher",
       "gardener"
     ],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "abilityMechanics": [
+      "preservation_instinct"
+    ]
   },
   {
     "id": "tool_knap",
@@ -527,6 +548,11 @@
         "technique": "Deep Read",
         "effect": "You don't just read trust \u2014 you read intent. Know what they'll do next."
       }
+    ],
+    "abilityMechanics": [
+      "lie_detector",
+      "evidence_board",
+      "open_book"
     ]
   },
   {
@@ -592,6 +618,10 @@
         "technique": "Peaceweaver",
         "effect": "Your mediation is almost supernatural. Conflicts dissolve."
       }
+    ],
+    "abilityMechanics": [
+      "mediator",
+      "peacemaker"
     ]
   },
   {
@@ -733,7 +763,8 @@
       "philosopher",
       "theologian"
     ],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "teachable": false
   },
   {
     "id": "ritual_meaning",
@@ -803,7 +834,8 @@
       }
     },
     "backgrounds": [],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "teachable": false
   },
   {
     "id": "old_world_cache",
@@ -824,7 +856,10 @@
       }
     },
     "backgrounds": [],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "abilityMechanics": [
+      "eagle_eye"
+    ]
   },
   {
     "id": "hive_craft",
@@ -1260,6 +1295,517 @@
       "gardener",
       "herbalist"
     ],
-    "abilitySynergies": []
+    "abilitySynergies": [],
+    "abilityMechanics": [
+      "compost_king"
+    ]
+  },
+  {
+    "id": "steady_hands",
+    "name": "Steady Hands",
+    "domain": "crafting",
+    "rarity": "common",
+    "levels": {
+      "1": "Fine work under pressure. Dressing game, stitching wounds, tying snares \u2014 no shake.",
+      "2": "Your hands don't shake anymore \u2014 not ever. Delicate work is just work.",
+      "3": "MASTER: your fine work teaches itself \u2014 villagers watching you learn twice as fast."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "steady_hands",
+      "still_hands"
+    ],
+    "moved_from_ability": "steady_hands"
+  },
+  {
+    "id": "patient_aim",
+    "name": "Patient Aim",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "One shot. You don't take the shot unless it's the shot.",
+      "2": "The shot is always there. You just wait.",
+      "3": "One shot, one kill: your opening strike cannot miss."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "patient_aim"
+    ],
+    "moved_from_ability": "patient_aim"
+  },
+  {
+    "id": "field_dressing",
+    "name": "Field Dressing",
+    "domain": "survival",
+    "rarity": "common",
+    "levels": {
+      "1": "Break down game fast and clean. Less waste, more meat, usable parts.",
+      "2": "Clean cuts, no waste \u2014 the carcass gives everything.",
+      "3": "You read the animal in the dressing: its health, its range, its story."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "field_dressing"
+    ],
+    "moved_from_ability": "field_dressing"
+  },
+  {
+    "id": "brawler_instinct",
+    "name": "Brawler's Instinct",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "You read a fight as it moves. The body tells you what the mouth won't.",
+      "2": "You act first in every fight.",
+      "3": "You see the killing blow before they do."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "brawler_instinct"
+    ],
+    "moved_from_ability": "brawler_instinct"
+  },
+  {
+    "id": "swimmer",
+    "name": "Swimmer",
+    "domain": "survival",
+    "rarity": "common",
+    "levels": {
+      "1": "Cross water freely. Rivers are roads to you.",
+      "2": "Water is home.",
+      "3": "You are the river: currents carry you where you will."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "swimmer"
+    ],
+    "moved_from_ability": "swimmer"
+  },
+  {
+    "id": "stalk",
+    "name": "Stalk",
+    "domain": "survival",
+    "rarity": "common",
+    "levels": {
+      "1": "Move unseen. Close distance without being noticed.",
+      "2": "Distance closes without permission.",
+      "3": "You become landscape: watching eyes slide off you."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "stalk"
+    ],
+    "moved_from_ability": "stalk"
+  },
+  {
+    "id": "ambush",
+    "name": "Ambush",
+    "domain": "combat",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "Pick your ground. Wait. Strike when it's too late for them.",
+      "2": "You don't set ambushes. You become them.",
+      "3": "Your ambushes are perfect: the enemy never gets a first turn."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "ambush"
+    ],
+    "moved_from_ability": "ambush"
+  },
+  {
+    "id": "haymaker",
+    "name": "Haymaker",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "One big swing. Everything you have, all at once. Subtlety is for people with time.",
+      "2": "The big swing always lands where it hurts.",
+      "3": "One perfect blow: your haymaker can end a fight outright."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "haymaker"
+    ],
+    "moved_from_ability": "haymaker"
+  },
+  {
+    "id": "soft_step",
+    "name": "Soft Step",
+    "domain": "survival",
+    "rarity": "common",
+    "levels": {
+      "1": "Move through woods like weather. Less noise, fewer surprises.",
+      "2": "You move like weather. Even twigs don't notice.",
+      "3": "You can walk a sleeping camp and no one dreams of you."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "soft_step"
+    ],
+    "moved_from_ability": "soft_step"
+  },
+  {
+    "id": "intimidating_presence",
+    "name": "Intimidating Presence",
+    "domain": "social",
+    "rarity": "common",
+    "levels": {
+      "1": "You don't have to fight. Most people decide not to, just looking at you.",
+      "2": "Most back down. Some join you.",
+      "3": "Monsters hesitate. They feel you."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "intimidating_presence"
+    ],
+    "moved_from_ability": "intimidating_presence"
+  },
+  {
+    "id": "dead_aim",
+    "name": "Dead Aim",
+    "domain": "combat",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "First attack in any combat is a guaranteed critical if you waited 1 round. Patience, then thunder.",
+      "2": "The waiting is the weapon.",
+      "3": "Death waits with you: your held shot kills anything it hits."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "dead_aim"
+    ],
+    "moved_from_ability": "dead_aim"
+  },
+  {
+    "id": "draw_fire",
+    "name": "Draw Fire",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "In the wilds, beside your people, you make yourself the problem. Shout, wave, bleed loudly \u2014 the beast's eye stays on you and off them. Monsters focus you instead of your allies.",
+      "2": "Your challenge carries further. Beasts hear it first.",
+      "3": "You are the wall it breaks on. Everyone knows it, especially the wall."
+    },
+    "backgrounds": [
+      "firefighter"
+    ],
+    "abilityMechanics": [
+      "draw_fire"
+    ],
+    "moved_from_ability": "draw_fire"
+  },
+  {
+    "id": "bodyguard",
+    "name": "Bodyguard",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "In the wilds, when a blow is falling on someone beside you, you step into it. Once per fight, an attack meant for your ally lands on you instead. It hurts. That's the job.",
+      "2": "You read the blow a breath earlier.",
+      "3": "Your people stop flinching when things fall. They know where you'll be."
+    },
+    "backgrounds": [
+      "police officer"
+    ],
+    "abilityMechanics": [
+      "bodyguard"
+    ],
+    "moved_from_ability": "bodyguard"
+  },
+  {
+    "id": "shield_wall",
+    "name": "Shield Wall",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer \u2014 the line holds together or not at all.",
+      "2": "The line tightens. Less gets through.",
+      "3": "You have been the wall so long you've forgotten what it was like to stand alone."
+    },
+    "backgrounds": [
+      "soldier"
+    ],
+    "abilityMechanics": [
+      "shield_wall"
+    ],
+    "moved_from_ability": "shield_wall"
+  },
+  {
+    "id": "rally",
+    "name": "Rally",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "In the wilds, when the fight is lost and running would be sane, you look at the people standing with you and you do not run. Once per fight, when the trajectory turns hopeless and an ally stands beside you, you hold the line instead of fleeing. Not volume \u2014 a promise kept.",
+      "2": "Your voice finds them faster in the noise.",
+      "3": "They have heard you hold before. They believe it now."
+    },
+    "backgrounds": [
+      "firefighter"
+    ],
+    "abilityMechanics": [
+      "rally"
+    ],
+    "moved_from_ability": "rally"
+  },
+  {
+    "id": "shoulder_check",
+    "name": "Shoulder Check",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "You know exactly where to hit something with your shoulder so it goes where YOU want. Shove a controlled monster 2 tiles \u2014 into its friends, away from yours.",
+      "2": "The shoulder knows.",
+      "3": "You can shoulder-check a door off its hinges. You've done it. Twice."
+    },
+    "backgrounds": [
+      "rancher"
+    ],
+    "abilityMechanics": [
+      "shoulder_check"
+    ],
+    "moved_from_ability": "shoulder_check"
+  },
+  {
+    "id": "hogtie",
+    "name": "Hogtie",
+    "domain": "combat",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "Rope, a dazed monster, and thirty seconds of not being eaten. Hogtie a controlled monster: rooted 3 rounds (diminishing), and it can't wind up telegraphs. It can still lash out \u2014 the rope holds position, not malice.",
+      "2": "Your knots have knots.",
+      "3": "You once hogtied a rumor. It stayed tied."
+    },
+    "backgrounds": [
+      "rancher",
+      "police officer"
+    ],
+    "abilityMechanics": [
+      "hogtie"
+    ],
+    "moved_from_ability": "hogtie"
+  },
+  {
+    "id": "come_get_some",
+    "name": "Come Get Some",
+    "domain": "combat",
+    "rarity": "common",
+    "levels": {
+      "1": "Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it.",
+      "2": "You can goad a statue into flinching.",
+      "3": "Your taunts have a return address."
+    },
+    "backgrounds": [
+      "bartender",
+      "hunting guide"
+    ],
+    "abilityMechanics": [
+      "come_get_some"
+    ],
+    "moved_from_ability": "come_get_some"
+  },
+  {
+    "id": "tripwire",
+    "name": "Tripwire",
+    "domain": "crafting",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "You string a wire at ankle height. The next monster that moves eats dirt \u2014 prone, stunned, and embarrassed. (Sets up the party.)",
+      "2": "Barbed wire. The prone monster also bleeds.",
+      "3": "Two wires. Two monsters. Twice the embarrassment."
+    },
+    "backgrounds": [
+      "exterminator",
+      "soldier"
+    ],
+    "abilityMechanics": [
+      "tripwire"
+    ],
+    "moved_from_ability": "tripwire"
+  },
+  {
+    "id": "scarecrow",
+    "name": "Scarecrow",
+    "domain": "combat",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "You can stage a fake injury to lure monsters into traps. They fall for it. Every time.",
+      "2": "The ruse is perfect.",
+      "3": "You become the monster they fear: traps set themselves."
+    },
+    "backgrounds": [
+      "hunting guide"
+    ],
+    "abilityMechanics": [
+      "scarecrow"
+    ],
+    "moved_from_ability": "scarecrow"
+  },
+  {
+    "id": "silver_tongue",
+    "name": "Silver Tongue",
+    "domain": "social",
+    "rarity": "common",
+    "levels": {
+      "1": "Words are tools. You've got a whole workshop.",
+      "2": "You can talk your way out of anything.",
+      "3": "People believe you. Even when they shouldn't."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "silver_tongue"
+    ],
+    "moved_from_ability": "silver_tongue"
+  },
+  {
+    "id": "pathfinder",
+    "name": "Tireless Stride",
+    "domain": "navigation",
+    "rarity": "common",
+    "levels": {
+      "1": "You walk like water downhill \u2014 no wasted steps, no wasted breath. Every mile costs 15% less.",
+      "2": "Every step costs less. Distance shrinks.",
+      "3": "Distance is a rumor."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "pathfinder",
+      "wanderer"
+    ],
+    "moved_from_ability": "pathfinder"
+  },
+  {
+    "id": "diplomat",
+    "name": "Diplomatic Incident",
+    "domain": "social",
+    "rarity": "common",
+    "levels": {
+      "1": "Trust builds 2x faster. You're TOO good though \u2014 once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+      "2": "Trust builds 3x (was 2x).",
+      "3": "Villagers tell you secrets unprompted."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "diplomat"
+    ],
+    "moved_from_ability": "diplomat"
+  },
+  {
+    "id": "generous",
+    "name": "Generous Heart",
+    "domain": "social",
+    "rarity": "common",
+    "levels": {
+      "1": "Donating gives 2x trust.",
+      "2": "Giving is your signature now.",
+      "3": "Your generosity is famous: donations return threefold in loyalty."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "generous"
+    ],
+    "moved_from_ability": "generous"
+  },
+  {
+    "id": "scrounger",
+    "name": "Scrounger",
+    "domain": "survival",
+    "rarity": "common",
+    "levels": {
+      "1": "Ruin looting finds +1 item.",
+      "2": "Ruins give up their secrets to you.",
+      "3": "You find what others missed: picked ruins still hide one more thing."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "scrounger"
+    ],
+    "moved_from_ability": "scrounger"
+  },
+  {
+    "id": "gossip_network",
+    "name": "Gossip Network",
+    "domain": "social",
+    "rarity": "common",
+    "levels": {
+      "1": "You hear things. People tell you things. You remember who told you what.",
+      "2": "You hear everything. Nothing is secret.",
+      "3": "Travelers seek you out with news."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "gossip_network"
+    ],
+    "moved_from_ability": "gossip_network"
+  },
+  {
+    "id": "thief",
+    "name": "Light Fingers",
+    "domain": "social",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "Steal from pantry without trust loss (50%). If caught, -20 trust.",
+      "2": "Hands like smoke.",
+      "3": "You can steal the truth itself: learn one secret per theft."
+    },
+    "backgrounds": [
+      "locksmith",
+      "street artist"
+    ],
+    "abilityMechanics": [
+      "thief"
+    ],
+    "moved_from_ability": "thief"
+  },
+  {
+    "id": "poisoner",
+    "name": "Tainted Bait",
+    "domain": "crafting",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "Your bait is tainted \u2014 traps catch 50% more. (The poison\u2019s in the bait, not your hands. Mostly.)",
+      "2": "Your bait is legend.",
+      "3": "Master of the tainted trap: the bait takes only what you meant it to."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "poisoner"
+    ],
+    "moved_from_ability": "poisoner"
+  },
+  {
+    "id": "grave_robber",
+    "name": "Grave Robber",
+    "domain": "survival",
+    "rarity": "uncommon",
+    "levels": {
+      "1": "You can loot the dead (villagers, monsters). Good gear. -15 trust if seen.",
+      "2": "The dead don't mind. Much.",
+      "3": "You speak with the dead: the looted tell you where they hid the rest."
+    },
+    "backgrounds": [
+      "mortician"
+    ],
+    "abilityMechanics": [
+      "grave_robber"
+    ],
+    "moved_from_ability": "grave_robber"
+  },
+  {
+    "id": "camp_cooking",
+    "name": "Camp Cooking",
+    "domain": "crafting",
+    "rarity": "common",
+    "levels": {
+      "1": "Cooking uses half the water, +10% kcal. Once per day: add a Secret Ingredient (a random inventory item) \u2014 50% delicious (+morale), 50% educational.",
+      "2": "No water needed for cooking.",
+      "3": "+25% kcal (was +10%)."
+    },
+    "backgrounds": [],
+    "abilityMechanics": [
+      "camp_cook"
+    ],
+    "moved_from_ability": "camp_cook"
   }
 ]

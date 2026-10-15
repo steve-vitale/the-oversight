@@ -85,7 +85,10 @@ async function runSeed(seed) {
     if (!knowsPreserve) {
       Game.state.scholar.day = 2;
       Game.state.village.pantry = Game.state.village.pantry || [];
-      Game.state.village.pantry.push({ name: 'Test greens', spoilDay: 0, kcalEach: 10, units: 5 });
+      // spoilDay well in the past: ABILITY LANES (2026-10-14) — knowing
+      // preserve_food now carries preservation_instinct (+2 spoilage
+      // days/level), so a just-expired item can legitimately still keep.
+      Game.state.village.pantry.push({ name: 'Test greens', spoilDay: -20, kcalEach: 10, units: 5 });
       Game.sweepSpoiled();
       const pantryLines = said.filter(l => /threw out spoiled stores/.test(l));
       check('A1: spoilage beat fired', pantryLines.length > 0, `said=${JSON.stringify(said.slice(-3))}`);

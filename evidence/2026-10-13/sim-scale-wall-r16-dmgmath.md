@@ -1,5 +1,8 @@
 # Scale-wall r16 arm B — wave-1/2 damage-number audit + W2-DISENGAGE pilot
 
+> **⚠ CORRECTION 2026-10-14** (`evidence/2026-10-14/simulator-audit.md` §3): the dmg-audit instrument read HP *after* `tbEnd`, when a lost fight had already replaced the dead bearer, and never counted the player's strikes. Re-run corrected: **25/91 fights (27%) killed the bearer**, not 1/104; player damage was 9,491, not 0. Conclusions here that rest on "103/104 survive" are void.
+
+
 Run: fleshout-20261013T1930Z-r16, arm B (sim-dmgmath). Worktree: ~/workspace/worktrees/sim-dmgmath.
 Axis: scale-onramp (blocking). Canon: docs/CANON.md, docs/MONSTER-WAVES.md read first. Highbeam Deer 160 HP untouched; no monster stats touched anywhere in this run. No game-code changes at all — policy-side lever + tooling only.
 

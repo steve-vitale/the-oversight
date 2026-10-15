@@ -127,7 +127,7 @@ Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; afte
 - switchboard_holder_absent: the relay holder runs the relay, not the moot — excluded from moot voters (code: betrayal.js — tallyVotes)
 - desperation_is_loud: a thin village (roster < 8) draws strangers below the notability gate at a 0.08/day floor — the desperate (curious/fleeing), not traders. (code: betrayal.js — considerStrangers, 2026-10-13)
 
-**Consumes:** village.relationships, scholar.reputation
+**Consumes:** village.trust, village.bonds, village.betrayal, village.visitors, village.justice.crimes
 
 ### broadcast (`broadcast.js`)
 The television mechanism — BROADCAST MODE. When a show, contest watch-beat, ratings summons, or Death Reel moment airs, the game becomes a TV screen: entry title card, persistent LIVE bug, broadcast-treated grid (scanlines + vignette + screen frame), running alien commentary in a ticker, lower-third name cards, CUT TO transitions, crowd reactions. Entry and exit are ALWAYS explicit — the player never wonders whether they're playing or watching. TV never kills (canon).
@@ -240,7 +240,6 @@ Alien TV contests and shows that interrupt village life. Contests are FEARED hig
 - unlock_day: 14 (code: contestTick, contestEligible)
 - eligible_villagers: alive + member in good standing + fighting age 15-72 + health > 20 (gravely wounded out per docs/CONTESTS.md; break-it 2026-10-09); player alive/health>0/not exiled (code: contestEligible, Steve 2026-10-06)
 - weekly_budget: 2 combined contests+shows (code: contestTick)
-- daily_chance: 0.3 (code: contestTick)
 - contest_vs_show_ratio: 0.6 (code: contestTick)
 - system_whim_chance: 0.1 random participant override (code: fireContest)
 - countdown_days: 1 (code: fireContest)
@@ -350,7 +349,7 @@ Beat-tagged conversation. Every NPC line is tagged at generation time with its b
 - four_rules_kept: transcript_cap, one_beat_turns, tap_advance, history_view untouched (code: conversation.js ontology)
 - probe_on_news_and_small: the "That doesn't add up" soft probe is offered on news and small beats (wherever the hard confrontation is reachable); withheld on feeling/offer beats (code: beatMenuResponses, Steve 2026-10-06)
 
-**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool), playerVoice()
+**Consumes:** village.villagers, state.convos, convoGet(vid), convoPickCycle(vid, key, pool)
 
 ### convo-dialogue (`convo-dialogue.js`)
 Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu layers are gone — dialogueBeatKind/dialogueResponses and the convoChoices override were removed; the single menu builder is Game.buildMenu (conversation.js). This module now wraps Game.convoTurn with dlg: handlers. REBUILD (2026-10-11, Steve): the handlers speak through the want defs (engage/deflect/commit beats), pool every hardcoded line via convoPickCycle (the verbatim "Anyway." loop is dead), compose beats before emission via convoComposeDlg, advance the want arc directly (convoWantEngage), and emit ONLY through sayLine — the single emission choke point. New handlers: dlg:commit (formal commitment), dlg:heed (heeding a warning), dlg:stay (keeping company).
@@ -469,13 +468,15 @@ One-tap preloaded scenarios for the debug panel. Testing only.
 ### drama (`drama.js`)
 Drama overlay — loosely-bound animation layer for emphasis.
 
-**Provides:** abilitySignature: per-ability signature visuals — 10 unique + pool-styled fallbacks (Steve 2026-10-07, Drama D1), poolSignature: pool-styled fallback visuals (combat/social/exploration/investigation/system/care/fieldcraft/craft), ensureOverlay: creates the .drama-overlay div over the grid, hit: impact starburst — L1 standard, L2 larger+secondary, L3 massive+shockwave (Steve 2026-10-07, Drama C3), floatText: damage numbers / labels that drift up and fade, flash: full-screen color pulse for big moments, shake: screen shake (transform on grid container, GPU-cheap), heroCard: centered high-res moment card (synergy, integration), soulWisp: death wisp floats up from tile, systemCommentary: L2+ floating System observations — L2 cyan-gold, L3 👁️ white-gold (Steve 2026-10-07, Drama C3), exclaim: !/? above NPCs who want attention — L1 flat, L2 glow, L3 glow + 👁️ (Steve 2026-10-07, Drama C3), npcAlert: semantic NPC attention marker — talk/curious/dialogue/warn/heart/break; L2 glow, L3 + 👁️ (Steve 2026-10-07, Drama A1/C3), abilityBurst: radial pulse on ability use, color by pool — L1 thin ring, L2 double+glow, L3 triple+sparkles (Steve 2026-10-07, Drama C3), contestFlash: TV show moment banner, integrationPulse: System presence evolves with integration level, contestAnnounce: full-screen CONTEST INCOMING banner (Steve 2026-10-07), contestCheer: gold sparkle rain for audience cheers, contestBoo: red pulses for audience boos, contestJudging: slow-mo desaturation + spotlight, contestWinner: confetti + hero card, contestLoser: sympathetic dim + broken heart, secretShimmer: hidden cache/ruin/secret discovery — shimmer + hero card (Steve 2026-10-07), ambushWarning: red vignette pulse + warning marker at ambush location (Steve 2026-10-07), wildRipple: subtle green ripple when wildlife appears/flees (Steve 2026-10-07), weatherShift: screen-wide weather effect — rain streaks, heat shimmer, cold breath (Steve 2026-10-07), trailMark: faint footprint marker for tracking (Steve 2026-10-07), phaseShift: monster phase-transition cue — edge pulse + label (Steve 2026-10-07, Drama B1), enrage: half-HP temperament — red aura + 💢 + shake (Steve 2026-10-07, Drama B1), lootSparkle: gold sparkles on monster death (Steve 2026-10-07, Drama B1), critHit: oversized starburst + CRIT! + damage (Steve 2026-10-07, Drama B1), playerHurt: red vignette + shake when hurt (Steve 2026-10-07, Drama B1), dodgeMiss: MISS float + ghost afterimage (Steve 2026-10-07, Drama B1), socialFlash: dispatcher for social scenario spectacle (Steve 2026-10-07, Drama C1), mootGather: village gathers — fire pulse + banner (Steve 2026-10-07, Drama C1), mootVote: vote tally bar with visual weight (Steve 2026-10-07, Drama C1), exileMoment: dark vignette + EXILED banner (Steve 2026-10-07, Drama C1), liarExposed: narrowing spotlight + ⚡ crackle (Steve 2026-10-07, Drama C1), reconcileGlow: warm glow + rising hearts (Steve 2026-10-07, Drama C1), betraySlash: red slash + BETRAYED banner (Steve 2026-10-07, Drama C1), playerDeath: slow fade to black + soul wisp + "THE STORY CONTINUES" (Steve 2026-10-07, Drama C2), newLife: bright emergence — "A NEW SCHOLAR AWAKENS" (Steve 2026-10-07, Drama C2), abilityLevelUp: golden burst + LEVEL UP + ability name (Steve 2026-10-07, Drama C2), synergyShimmer: pre-reveal shimmer — "something is happening" (Steve 2026-10-07, Drama C2), villageBirth: soft pink glow + baby (Steve 2026-10-07, Drama C2), villageDeath: gray wisp + bell toll (Steve 2026-10-07, Drama C2), plantIdentified: leaf unfurl + name reveal (Steve 2026-10-07, Drama D2), techniqueLearned: scroll unroll + golden name (Steve 2026-10-07, Drama D2), codexLinked: book-open card + page-flip shimmer (Steve 2026-10-07, Drama D2), skillGained: rising light beam + skill name (Steve 2026-10-07, Drama D2), teaseFaint: 1st-tease whisper shimmer (Steve 2026-10-07, Drama D2), ahaMoment: lightbulb + radiating lines on knowledge unlocks (Steve 2026-10-07, Drama D2)
+**Provides:** abilitySignature: per-ability signature visuals — 10 unique + pool-styled fallbacks (Steve 2026-10-07, Drama D1), poolSignature: pool-styled fallback visuals (combat/social/exploration/investigation/system/care/fieldcraft/craft), ensureOverlay: creates the .drama-overlay div over the grid, hit: impact starburst — L1 standard, L2 larger+secondary, L3 massive+shockwave (Steve 2026-10-07, Drama C3), floatText: damage numbers / labels that drift up and fade, flash: full-screen color pulse for big moments, shake: screen shake (transform on grid container, GPU-cheap), heroCard: centered high-res moment card (synergy, integration), soulWisp: death wisp floats up from tile, systemCommentary: L2+ floating System observations — L2 cyan-gold, L3 👁️ white-gold (Steve 2026-10-07, Drama C3), exclaim: !/? above NPCs who want attention — L1 flat, L2 glow, L3 glow + 👁️ (Steve 2026-10-07, Drama C3), npcAlert: semantic NPC attention marker — talk/curious/dialogue/warn/heart/break; L2 glow, L3 + 👁️ (Steve 2026-10-07, Drama A1/C3), abilityBurst: radial pulse on ability use, color by pool — L1 thin ring, L2 double+glow, L3 triple+sparkles (Steve 2026-10-07, Drama C3), contestFlash: TV show moment banner, integrationPulse: System presence evolves with integration level, contestAnnounce: full-screen CONTEST INCOMING banner (Steve 2026-10-07), contestCheer: gold sparkle rain for audience cheers, contestBoo: red pulses for audience boos, contestJudging: slow-mo desaturation + spotlight, contestWinner: confetti + hero card, contestLoser: sympathetic dim + broken heart, secretShimmer: hidden cache/ruin/secret discovery — shimmer + hero card (Steve 2026-10-07), ambushWarning: red vignette pulse + warning marker at ambush location (Steve 2026-10-07), wildRipple: subtle green ripple when wildlife appears/flees (Steve 2026-10-07), weatherShift: screen-wide weather effect — rain streaks, heat shimmer, cold breath (Steve 2026-10-07), trailMark: faint footprint marker for tracking (Steve 2026-10-07), phaseShift: monster phase-transition cue — edge pulse + label (Steve 2026-10-07, Drama B1), enrage: half-HP temperament — red aura + 💢 + shake (Steve 2026-10-07, Drama B1), lootSparkle: gold sparkles on monster death (Steve 2026-10-07, Drama B1), critHit: oversized starburst + CRIT! + damage (Steve 2026-10-07, Drama B1), playerHurt: red vignette + shake when hurt (Steve 2026-10-07, Drama B1), dodgeMiss: MISS float + ghost afterimage (Steve 2026-10-07, Drama B1), socialFlash: dispatcher for social scenario spectacle (Steve 2026-10-07, Drama C1), mootGather: village gathers — fire pulse + banner (Steve 2026-10-07, Drama C1), mootVote: vote tally bar with visual weight (Steve 2026-10-07, Drama C1), exileMoment: dark vignette + EXILED banner (Steve 2026-10-07, Drama C1), liarExposed: narrowing spotlight + ⚡ crackle (Steve 2026-10-07, Drama C1), reconcileGlow: warm glow + rising hearts (Steve 2026-10-07, Drama C1), betraySlash: red slash + BETRAYED banner (Steve 2026-10-07, Drama C1), playerDeath: slow fade to black + soul wisp + "THE STORY CONTINUES" (Steve 2026-10-07, Drama C2), newLife: bright emergence — "A NEW SCHOLAR AWAKENS" (Steve 2026-10-07, Drama C2), abilityLevelUp: golden burst + LEVEL UP + ability name (Steve 2026-10-07, Drama C2), synergyShimmer: pre-reveal shimmer — "something is happening" (Steve 2026-10-07, Drama C2), villageBirth: soft pink glow + baby (Steve 2026-10-07, Drama C2), villageDeath: gray wisp + bell toll (Steve 2026-10-07, Drama C2), plantIdentified: leaf unfurl + name reveal (Steve 2026-10-07, Drama D2), techniqueLearned: scroll unroll + golden name (Steve 2026-10-07, Drama D2), codexLinked: book-open card + page-flip shimmer (Steve 2026-10-07, Drama D2), skillGained: rising light beam + skill name (Steve 2026-10-07, Drama D2), teaseFaint: 1st-tease whisper shimmer (Steve 2026-10-07, Drama D2), ahaMoment: lightbulb + radiating lines on knowledge unlocks (Steve 2026-10-07, Drama D2), grounded: pre-System (days 1-6) variants — hit/crit/miss/hurt/heavy/kill/weather/shake/death/text — earthy, no System chrome (presentation pass A, 2026-10-14), moment: payoff painters — ascension, classRecognized, levelUpOpen, flashback, keepsakeLevel, feast, flee, titanEntry/Phase/Fall, tableEnter/Lock/Beat/Win/Lose (feel.js FEEL_MOMENTS), verbFx: one grid effect per god-path ability fx (feel.js FEEL_VERBS), calm: reduced motion (OS or in-game toggle) — shakes skipped, every effect a calm fade, ensureScreen: fixed full-screen pointer-events:none layer above sheets for the big moments, fxAt: painter helper — element centred on a grid cell, fxRing: painter helper — ring on a grid cell, fxLine: painter helper — line between two grid cells, fxScreenCard: painter helper — centred card on the screen layer
 
 **Rules:**
 - Overlay is pointer-events:none — never blocks input (code: drama.js).
 - All animations use transform/opacity only — GPU-composited, no layout/paint (code: drama.js).
 - Elements self-remove after animation — no DOM bloat (code: drama.js).
 - Coordinates are loosely bound: tile centers for anchored effects, screen-relative for full moments (code: drama.js).
+- Reduced motion: when calm(), spawn() swaps every animation class for a plain opacity fade and shake() is a no-op (code: spawn, shake).
+- Grounded variants never use cyan or System words (code: grounded, GROUNDED_PALETTE).
 
 **Consumes:** —
 
@@ -489,6 +490,20 @@ Encounter framework. Every animal and monster follows the same pattern.
 - (alien-wiring) alien-player pool rolls SEPARATE from monsters in checkEncounter (guarded); hostile person-fighters take bespoke tbAlienTurn via tbMonsterTurn+tbHostileTurn intercepts, never the monster/betrayal pipelines; tbEndCheck counts alien hostiles (code: encounters.js)
 
 **Consumes:** state.encounters
+
+### ending-key (`endingKey.js`)
+Endings by build (Steve 2026-10-14: "The ending you can win is set as you enter the table, but that doesn't mean they play the same table scenario or that they can't lose their scenario no matter what path, light or dark. Each playstyle and godhood path, moral choice version should have its own ending." / "The table should all be relative until actually entering it when it locks." / "Both, linked"). Reads the build into an ENDING KEY and hands the Table data, never a gate. The key is live (relative) until the seat is taken; tableScene locks the build half (track, class, god, titan finale, the key) and every door entered fills the path half (path, moral). The Table then (1) plays the build: one beat per path gets a build-aware option from src/data/table-beats.json, chosen most-specific-first (god > class+subclass > class > track > the path default), whose text, gains and titan-finale odds depend on the key and which always carries the path's stake (losable for every key); (2) composes the ending (Steve 2026-10-14 round 5): the path's own light/dark final plus ONE build coda from src/data/table-endings.json codas (god > class/subclass > track, path-independent), unless a rare bespoke path entry (paths.<path>.<selector>.<moral>) overrides it. Seat pricing and earned doors never read this module.
+
+**Provides:** endingKeyLive() -> the key as the run stands today (relative; never stored), endingKeyLock() -> snapshots the build half onto the table state when the seat is taken, endingKeyEnter(pathId, moral) -> fills the path half when a door is entered (and on every downgrade), endingKey() -> the locked key, or null before the seat is taken, endingSelectors(key) -> lookup order: ['god:<id>', 'class:<path>/<sub>', 'class:<path>', 'track:<t>', 'default'], tableBuildBeat(T) -> {line, choices} for the beat that plays the build, or null, tableEndingFor(pathId, moral, finalId) -> {kind: 'bespoke'|'coda', level, selector, moral, title, lines, outcome} or null (null = the path's final alone), tableEndingNote(end) -> records which ending text resolved on the table state (telemetry reads it), titanFinaleOutcome() -> 'network' | 'apocalypse' | 'herald' | 'none' (what the titan finale contributed)
+
+**Rules:**
+- never_a_gate: nothing here is read by tableSeat or tableEarnedPaths; a run with no class and no god walks every door it earned (code: endingKey.js, scripts/godpath/ladder.js)
+- relative_until_locked: endingKey() is null until tableScene locks it; endingKeyLive() recomputes every call (code: endingKeyLock)
+- locked_build: once locked, the build half never changes for the rest of the Table (code: endingKeyLock)
+- always_losable: every build option carries the path's stake (a meter bar checked before it plays and the path's own limits after) (code: buildChoice)
+- if_you_dont_know_it_doesnt_show: a class counts only once the System has named it (not lapsed) (code: endingKeyLive)
+
+**Consumes:** state.scholar, state.titans, progState(), tableState(), playerTracks(), godpathClass(), godpathData(), tablePathName() (table.js; the {path} token), relayLean() (the grey relay's coda moral), Game.data.tableBeats (src/data/table-beats.json), Game.data.tableEndings (src/data/table-endings.json), Game.data.tracks
 
 ### calorie-engine (`engine/calories.js`)
 The master clock. Every cost in the game flows through here. Needs never decrease with level; power costs calories.
@@ -533,7 +548,7 @@ Foraging resolver. Tile + biome + day yields plant yield from plants.json + biom
 ### modifier-pipeline (`engine/modifiers.js`)
 The scalability core. Every computed value resolves base -> collect modifiers -> apply adds, then multiplies -> final.
 
-**Provides:** resolve(base, target, modifiers, context), checkCondition(cond, ctx), levelOf(entry), scaledValue(m, level), describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe), collectModifiers(scholar, abilitiesData), hasAbility(scholar, id), abilityLevel(scholar, id), collectKnowledgeModifiers(codexSkills, knowledgeData), hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
+**Provides:** resolve(base, target, modifiers, context), checkCondition(cond, ctx), levelOf(entry), scaledValue(m, level), describeModifier(m, level)   (plain-English modifier rendering for ability cards; exported as Scattering.modifiers.describe), collectModifiers(scholar, abilitiesData), hasAbility(scholar, id), abilityLevel(scholar, id), ownedEntries(scholar)        (slots + background + skill-lane abilities known via codex skills), collectKnowledgeModifiers(codexSkills, knowledgeData), hasKnowledgeUnlock(codexSkills, knowledgeData, unlockId)
 
 **Rules:**
 - wildcard_target_all: modifiers with target 'all' apply to every resolution target (code: resolve)
@@ -558,7 +573,7 @@ State factories, versioned save/load. Village / scholars / Codex / run are indep
 **Consumes:** (none documented)
 
 ### equipment (`equipment.js`)
-Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, legs, hands, shoes (1 each). Accessories: 4 non-exclusive slots for anything that doesn't fit a body part. Full-body sets (riot gear) equip to torso and block head/legs/shoes (greyed out in UI); hands and accessories stay usable. Sentimental gear has assigned slots like everything else and only accrues bond while EQUIPPED. AI equips intelligently with personality flavor. Equipped gear renders on sprites and affects combat. Threat is readable at grid distance from the gear itself.
+Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, legs, hands, shoes (1 each). Accessories: 4 non-exclusive slots for anything that doesn't fit a body part. Full-body sets (riot gear) equip to torso and block head/legs/shoes (greyed out in UI); hands and accessories stay usable. Keepsakes (sentimental gear) wear in the four accessory slots and compete with accessory gear for them; bond grows only while worn (player only; in the pack a keepsake is dormant — keepsakes.js). AI equips intelligently with personality flavor. Equipped gear renders on sprites and affects combat. Threat is readable at grid distance from the gear itself.
 
 **Provides:** autoEquip(v, itemDefs) -> equip best gear (set-vs-pieces decision + personality), slotForItem(def) -> main slot for an item, or null, isFullSet(itemId, def) -> boolean, blockedSlots(equipped) -> slots blocked by full-body gear (for UI grey-out), slotLabel(slot) -> display name, equipScore(itemId, slot, personality, itemDefs) -> numeric score, armorOf(v, itemDefs) -> total protection (pieces + coordination, or set), coordinationBonus(v) -> +2 per fitted piece beyond the first, compareSetVsPieces(v, itemDefs) -> { setTotal, piecesTotal, winner } for UI, weaponBonusOf(v, itemDefs, slot) -> weapon bonus from equipped melee/ranged, meleeWeaponOf(v, itemDefs) / rangedWeaponOf(v, itemDefs) -> equipped weapon entries, threatLevel(v, itemDefs) -> 0-3: unarmed, carrying, armored, dangerous, threatLabel(level) -> readable label, gearDescription(v) -> prose for examine/person card, migrateEquipment(person) -> old-save migration (armor->torso, weapon->melee, feet->shoes, misc->acc), weaponKind(def) -> spear|blade|axe|bow|blunt|other render hint, isRangedWeapon(def) -> boolean (range > 1 or bow/sling), armorTier(protection) -> light|medium|heavy render hint, headKind(def) -> pot|cap|helmet|other render hint, isAccessory(def) -> boolean (fits no main slot)
 
@@ -567,7 +582,7 @@ Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, le
 - explicit_slots: melee, ranged, head, torso, legs, hands, shoes (1 each) + acc1-4 (non-exclusive). Every equipable item has exactly one assigned slot (code: slotForItem, Steve 2026-10-07)
 - weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07)
 - full_body_blocks: full-body sets (def.fullBody or FULL_SETS) equip to torso and block head/legs/shoes only — hands and accessories stay usable. Blocked slots grey out in UI (code: blockedSlots, Steve 2026-10-07)
-- sentimental_slots: sentimental gear has assigned slots like all other gear; bond accrues ONLY while equipped (code: SENTIMENTAL_SLOTS, Steve 2026-10-07)
+- keepsakes_in_accessory_slots: keepsakes (class sentimental, no weapon/armor stats) fit no main slot — they wear in acc1-acc4 and compete with accessory gear for the same four (code: slotForItem, keepsakes.js equipAccessory; Steve 2026-10-14 STEVE-ANSWERS "Sentimental items need to compete with accessory gear for the extra slots available"). Bond grows ONLY while worn; in the pack a keepsake is dormant — memory intact, no growth (code: keepsakes.js keepsakeGrow, game.js accrueRelicBond)
 - one_per_slot: each main slot holds exactly one item (code: autoEquip, Steve 2026-10-06)
 - set_vs_pieces_arc: riot set (30) beats early junk (~17) but loses to optimized pieces (~57); coordination bonus (+2/piece) rewards fitted gear (code: coordinationBonus, compareSetVsPieces, Steve 2026-10-06)
 - equip_from_inventory: equipment comes from the person's own items, never conjured (code: autoEquip, Steve 2026-10-06)
@@ -580,7 +595,7 @@ Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, le
 ### examine-recognition (`examine.js`)
 Examine action + observation memory + recognition. Looking closely at a plant is cheap (time, tiny kcal); foraging costs more energy. Examining yields a vague description (never the name) and creates an observation memory. When someone later teaches you that species, the observation CLICKS — the vague description resolves into the name. That's what unlocks the visual change (sprite depth 1→2).
 
-**Provides:** observePlant(pid, via) -> record an observation memory, observationOf(pid) -> observation record or null, observedPlant(pid) -> boolean: any observation exists, examineQuality() -> 1-3 based on perception skill, examineDescription(pid, quality) -> vague description, never leaks the name, examinePlantCell(cx, cy) -> the Examine action (cheap look, no harvest), recognitionBeat(pid, teacherName) -> revelation narration on identify, plantVisualDepth(pid) -> 0 unknown, 1 examined, 2 known
+**Provides:** observePlant(pid, via) -> record an observation memory, observationOf(pid) -> observation record or null, observedPlant(pid) -> boolean: any observation exists, examineQuality() -> 1-3 based on perception skill, examineDescription(pid, quality) -> vague description, never leaks the name, examinePlantCell(cx, cy) -> SUPERSEDED: the live Examine verb is carexplore.js examineCell (it shadows game.js examineCell, the only caller); kept as a library entry point, recognitionBeat(pid, teacherName) -> revelation narration on identify, plantVisualDepth(pid) -> 0 unknown, 1 examined, 2 known
 
 **Rules:**
 - examine_never_names: examine output never contains the species name unless plantKnown (code: examineDescription, Steve 2026-10-06)
@@ -608,6 +623,31 @@ Feast Surge — the TIMED BUFF (Worker B, 2026-10-10, Steve: "Okay build careful
 - arc4_hotter: Arc IV's arc4burn multiplies the granted buff and is stated in the grant line (code: grantFeastBuff)
 
 **Consumes:** state.scholar (feastBuff, prog.feastSurge, prog.feastSurgeUsed, day, health, feastDraw), dayPart, inCombat, tbFighter, addHealth, say, save, Game.data.feastSurge (src/data/feast-surge.json), castMonster, startCombat, pendingEncounter/pendingMonsterId, monsterDisplayName, seedGossip
+
+### feel-audio (`feel-audio.js`)
+Synth voices for presentation pass A (2026-10-14, Steve: "Address all graphic and sound survey gaps."). Registers on Game.audio (app.js CombatAudio) through its port(): same buses, same mute, same compressor, zero assets. Grounded pre-System cues (human, earthy), the payoff stings (ascension, class, level-up, keepsake, feast, titans, the Table), one cue per god-path verb, the day-7 arrival bed + sting, and real synths for the placeholder signatures that only had rendered MP3s (fiCrewQuiet, fiOpeningSting, auditTax). Browser-only: without Game.audio (node) it attaches nothing.
+
+**Provides:** groundedHurt, groundedMiss, groundedFlee, weatherRain, weatherCold, ascensionRise, classChime, levelUpFlourish, flashbackWarm, keepsakeGlow, feastFire, titanEntrySting, titanPhaseSting, titanFallSting, tableEnterSting, tableLockIn, tableBeatPulse, tableWinSting, tableLoseSting, verbCue(d) -> one recipe per god-path verb cue (feel.js FEEL_VERBS.cue), arrivalSting, arrivalBed(d) -> the day-7 bed, root climbs per tapped beat, arrivalStop, fiCrewQuiet, fiOpeningSting, auditTax
+
+**Rules:**
+- one_graph: every voice routes through CombatAudio.port() (sfx/music buses -> master -> compressor); muted or no context = silent no-op (code: feel-audio.js)
+- no_persistent_loops: the arrival bed is one held voice stopped by arrivalStop or its own 150s ceiling (code: arrivalBed)
+
+**Consumes:** Game.audio.port
+
+### feel (`feel.js`)
+Presentation pass A (2026-10-14, Steve: "Address all graphic and sound survey gaps."): one data-driven place that turns game moments into a visual (Game.drama), a sound (Game.audioEvent) and a haptic. Covers the payoff moments that were log-only (ascension, class recognition, keepsake flashback and level-up, feast, the 27 god-path abilities, titans, the Table, the level-up sheet, flee), the grounded pre-System combat feedback (days 1-6: earthy and human, no System chrome) and the haptics/reduced-motion settings. Hooks from OUTSIDE the systems it dresses (wraps and tele events), so godpath.js, godhood.js, titans.js and table.js stay untouched. Headless-safe: in node every effect is a call into Game.drama/Game.audioEvent, which tests stub.
+
+**Provides:** feel(name, data) -> true when the moment fired (drama 'moment' + audioEvent + haptic), feelVerb(abilityId, data) -> true when a god-path ability's grid effect + cue fired, groundedKind(kind) -> the pre-System grounded drama variant for a drama kind, or null (stays still), groundedAudio(kind, arg) -> the pre-System grounded sound for a drama kind, or null, hapticFor(kind) -> haptic pattern name for a drama kind, or null, haptic(kind) -> true when navigator.vibrate was called (feature-detected, setting-gated, throttled), hapticsSupported() / hapticsEnabled() / setHaptics(on), reducedMotion() / setReducedMotion(on) -> OS prefers-reduced-motion OR the in-game toggle, arrivalVoiceIds(beat) -> the recorded System line ids for one day-7 cinematic beat (text match, then ARRIVAL_VOICE), FEEL_MOMENTS: moment name -> {drama, audio, haptic, system?, grounded?}, FEEL_VERBS: the 27 god-path abilities -> {fx, color, glyph, cue, tag?}
+
+**Rules:**
+- system_styled_waits: a moment flagged system:true never fires before the System arrives (code: feel)
+- grounded_is_human: pre-System variants are earthy (bark, ochre, blood, ash) — no cyan, no System voice, no System text (code: GROUNDED_KINDS, drama.js grounded)
+- observe_only: every wrap calls the original first and returns its result unchanged (code: wrap)
+- no_rng: no Math.random, no game-state writes except per-fight _feel bookkeeping on tbfight (code: feel.js)
+- never_silent_errors: failures warn once per site, never throw into game code (code: warn)
+
+**Consumes:** Game.data.monsters, AudioRegistry.monsterSig, drama(), audioEvent(), tele(), playFlashback(), keepsakeLevelBeat(), hostFeast(), startCombat(), tbDamage(), tbEnd(), tableScene(), tableStartPath(), tableRunBeat(), tableFail(), tableResolveFinal(), pumpLevelUps(), say(), isTitan(), recognitionCeremony(), mythicSprite(), classLine(), tbFighter(), tableState(), progState(), systemVoiceIdFor(), localStorage.oversight_haptics, localStorage.oversight_reduce_motion
 
 ### field-fights (`fieldFights.js`)
 Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, real stats, the monster's real attack data — never an outcome table. (Steve 2026-10-08: "It should be a fight. A hard one.")
@@ -637,7 +677,7 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 ### finale-campaign (`finale-campaign.js`)
 THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super special"). Node 1 THE COMMERCIAL BREAK (9x9 skirmish: the commercial break + spoiler + network_note trio — kill the production staff, take their tools). Node 2 THE OPENING CREDITS (12x12: the finale still ARRIVING, weaker card [100,140], 5-round fuse). Node 3 THE HEART (12x12: the full finale in two parts — part two at bloodied brings sky-fall zones, the credits rolling in from the edges, accelerated growth, and THE ENCORE). 20 blades to start the march (the largest army in the game); the heart demands 10 survivors or a re-muster at trust cost. Crew spoils become one-shot combat buttons in the heart. Dead allies stay dead across nodes; the coalition camps and partially heals between nodes.
 
-**Provides:** finaleCampaignPlace(titanId), titanEntryGate(titanId), finaleCampaign() / finaleReinforce() / finaleNodeReady(), fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale), tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons), finaleCampaignButtons() (heart-fight combat buttons), _finaleTest (test hooks)
+**Provides:** finaleCampaignPlace(titanId), titanEntryGate(titanId), finaleCampaign() / finaleReinforce() / finaleNodeReady(), fiFinaleHeart(game, m) (MonsterBehaviorHooks — wraps sigW5 fiFinale), tbFiRedPen() / tbFiLeakedScript() / tbFiBadNote() (crew-spoil buttons), finaleCampaignButtons() (heart-fight combat buttons), campaignGrieve(snap, tid) / campaignCamp(tid) / campaignInjectMonster(mid) / campaignSurvivors(tid) — the march rules, shared with THE NETWORK (network-campaign.js), _finaleTest (test hooks)
 
 **Rules:**
 - campaign_is_a_march: three nodes in order; the opening refuses until the crew is cleared, the heart until the opening is cleared. (code: titanEntryGate)
@@ -667,7 +707,7 @@ Food reality system. Food must be known-edible AND in edible state. Processing c
 ### foodPower (`foodPower.js`)
 Food is fuel — every System ability burns kcal from the ONE economy (no mana pool); a topped-up user OVERCHARGES (+25% impact, max with the feast buff); village pantry tiers gate villager ability uses (starving: none, tight: only when outmatched, secure: normal, abundant: bonus uses). (Steve 2026-10-14: "Abilities should be stronger, and they were always meant to be powered by food.")
 
-**Provides:** abilityKcalCost(abilityId, actionId), foodPowerGate(), overcharged(), abilityPowerMult(), overchargeLine(), villageDailyNeed(), villageFoodDays(), villageFoodTier()
+**Provides:** abilityKcalCost(abilityId, actionId), foodPowerGate(), overcharged(), abilityPowerMult(), overchargeMult(), overchargeLine(), villageDailyNeed(), villageFoodDays(), villageFoodTier()
 
 **Rules:**
 - one_economy: true (code: foodPower.js — kcal only, deducted from scholar.kcal; no mana/ability-point pool anywhere)
@@ -775,6 +815,26 @@ Godhood capstones — Steve 2026-10-11, requirements reworked
 
 **Consumes:** —
 
+### godpath (`godpath.js`)
+The god-path runtime (2026-10-14 redesign, Steve: "Gods are rough representatives of what starts out as jobs and classes, or playstyles." / "Each god path can have some intended subclasses though that fit the build."). ONE source of truth: src/data/godpaths.json (10 paths x 2 subclasses, each path's god) + the `path`/`subclass` tag on every magic ability. This module (1) names a holder's CLASS when their magic leans clearly to one path ("<Subclass> of <God>", player and villager through the same function), (2) leans level-up and gift offers toward a recognised path with distinct roles, (3) scores how far an ability pulls a holder toward a god (pathLean, read by villager-build.js buildPathLean, the one hook in Game.buildScore), and (4) runs the small engine verbs the new subclass abilities declare in data (`do` on an action): walls, pulls, pushes, swaps, blinks, heals, pins, bribes, broadcasts, commands.
+
+**Provides:** godpathData() -> godpaths.json record, abilityPaths(idOrDef) -> [path, alsoPath?] (THE reader for an ability's path; replaces the old `paths` array), classify(ids) -> {path, subclass, count, counts} | null (pure), holderMagicIds(who) -> magic ability ids held by 'player' or a villager id, recognizeClass(who) -> the holder's class record or null (narrates once per change), godpathClass(who) -> stored class record {path, subclass, since, god} or null, classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised), pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them), shapeOffers(choices, pool, who, opts) -> offers with >=1 on the recognised path (else >=1 on the holder's job path within opts.jobWindow) and distinct roles where possible, kitSheet(cands, who, track, level) -> THE level-up sheet for player and villagers: offerSize offers drawn from the next rules.offers.window unheld kit entries, weighted to earlier ones, deterministic per holder/track/level (private hash stream), then shapeOffers, holderJobPaths(who) -> god paths the holder's occupation leans to (characterGen occupations[].pathLean), registerVerbs() -> registers a generic impl + precheck for every data action with `do` (verbs: aegis, wall, pull, push, pack, heal, blink, swap, foresee, broadcast, command, empower, guard, bribe, feed_camp), allyWouldFall(game, t) / onAllyFell(game, t) -> Lifeline / Last Rites hooks (tbDamage), absorbPlayerHit(game, dmg) / aegisRedirect(game, t, dmg, src) -> Coin Guard / Last Rites absorbs, Aegis Link redirect (tbDamage), damageMult(game, target) / dodgeBonus(game) -> Misdirection / Prophecy (buildarounds damageMult / dodgeBonus), villagerCast(game, v) -> a villager fighter casts a held subclass verb through the SAME VERBS (actor = their fighter), paying the data kcal from their belly (hunger kcal/25); true / 'free' / false (wraps tbVillagerAbility), villagerStrikeMult(game, v, target) / absorbVillagerHit(game, t, final) -> Stoke, Back from the Brink, Misdirection / Coin Guard, Last Rites, Prophecy on villagers (game.js tbVillagerTurn, tbDamage), fieldBegin(game, vid, vAbs) -> per-fight state for the verbs and passives in off-screen field fights (fieldFights.js), with fieldAct, fieldStrike, fieldIncoming, fieldAllyShare, fieldCheatDeath, fieldAllyDown, fieldEvade
+
+**Rules:**
+- one_source: an ability's path is `def.path` (+ `def.alsoPath`); nothing reads the retired `paths` array (code: abilityPaths)
+- same_function: recognition runs the same classify() for the player and every villager (code: recognizeClass)
+- if_you_dont_know_it_doesnt_show: classLine is null until the class is recognised (code: classLine)
+- one_sheet: player and villager level-up sheets both come from kitSheet (code: kitSheet)
+- sheet_rng_private: the sheet window draw never consumes Math.random (code: sheetRng)
+- job_lean_before_class: before a class is named, a sheet carries >=1 offer on the holder's job path when the window has one; after, the class lean rules (code: shapeOffers)
+- knowledge_gated_lean: pathLean scores only abilities the caller says the holder knows; an unknown ability scores 0 (code: pathLean)
+- control_changes_the_board: warden/trickster/dealer verbs move fighters or raise terrain on the real grid (code: VERBS.wall, push, pull, swap, bribe)
+- food_powered: every verb's cost is in the action's data (kcal), paid by useAbility before dispatch (code: registerVerbs)
+- same_verbs_for_villagers: a villager casts the same VERBS with the same data kcal (their hunger pays; hunger >= 80 or a starving pantry refuses), and held passives apply to whoever holds them (code: villagerCast, sideHolders, fieldBegin)
+- never_silent: every verb narrates, success or refusal; errors are reported via warn (code: warn)
+
+**Consumes:** Game.data.godpaths, Game.data.abilities, state.scholar.abilities, state.village.npcAbilities, useAbility, tbFighter, tbCanOccupy, tbBlocked, tbDamage, tbVillagerTurn, addHealth, npcNeeds, keepsakeGrow, wornKeepsakes
+
 ### havenGrowth (`havenGrowth.js`)
 Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, Steve 2026-10-10). Resource-based, System-announced, never deed-based, never calendar. Each tier visibly improves the Haven and grants real mechanics. The raid system gives the Palisade something to defend against.
 
@@ -784,7 +844,7 @@ Haven growth milestones — the 12→24 population ladder (PROGRESSION.md §10, 
 - resource_based: tiers unlock on stockpile thresholds only (code: havenGrowth.js — havenGrowthDaily checks havenStores() vs HAVEN_TIERS req; no deed, calendar, or knowledge reads anywhere in the tier path)
 - knowledge_never_gates: nothing here reads the codex (code: havenGrowth.js — havenTierUp/havenGrowthMeter reference stores only; announceHavenBar prints exact numbers)
 - discoverable: System announces each tier bar post-arrival, Haven panel shows the live meter, villagers gossip the shortfall (code: havenGrowth.js — announceHavenBar, havenGrowthMeter + app.js havenGrowthHTML, havenNeedGossip)
-- reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 +1 per 12k pantry over 3k, cap 5)
+- reactive_raids: raids fire on world state, never a schedule (code: havenGrowth.js — havenRaidTick requires 3+ world monsters, 3k+ pantry kcal, 7-day cooldown, 18% roll; wealth draws teeth: 3 raiders, +1 above 12k pantry kcal and +1 above 24k, cap 5)
 - raid_raises_crisis: a raid raises an aid crisis reactively (the village looks to you; four call-for-help options said aloud). Raiders nobody meets LINGER at the treeline and gorge nightly (havenGrowthDaily) until driven off — the persistent threat the comms chain exists for. (code: havenRaidTick, 2026-10-10)
 - cap_ceiling: havenPopCap is the ceiling; intake reads it via housingCap (code: havenGrowth.js — havenPopCap; membership.js — housingCap takes max(shelters, 12+4*havenTier()))
 - no_consumption: reaching a tier does not eat the stockpile (code: havenGrowth.js — havenTierUp sets v.havenTier only; stores untouched)
@@ -879,12 +939,29 @@ Village justice + combat dialogue. Crimes have consequences.
 - summons_voice: the moot demand is generated from the confronter's identity + the strongest witnessed crime + why it's happening now; never names unwitnessed crimes (code: justiceDemandMoot)
 - accuser_aftermath: the verdict moves the accuser's standing too — weak cases cost them, held cases earn them respect (code: mootAccuserAftermath)
 
-**Consumes:** village.laws, scholar.crimes
+**Consumes:** village.justice.crimes, village.trust
+
+### keepsakes (`keepsakes.js`)
+Keepsake growth (docs/COHERENCE-SPINE.md "Keepsakes: the growth model", Steve 2026-10-14). Keepsakes (class sentimental) are worn in the four accessory slots acc1-acc4 and compete with accessory gear for them. Bond grows ONLY while worn (+1/day, +3 at story moments); in the pack a keepsake is dormant. Levels by bond: L0 <10 nothing, L1 >=10 a small passive from its lane (resolve/anchor/quiet_luck), L2 >=25 a once-per-fight combat action from that lane, L3 >=50 the System's 1-of-3 enhancement offer or its secret evolution. A keepsake whose kin relative was Taken turns its place/name reveal into a clue (the thread home), and Game.keepsakeTakenKin() names those people for the endgame.
+
+**Provides:** keepsakeLane(item) -> 'resolve' | 'anchor' | 'quiet_luck', keepsakeLevel(item) -> 0..3 (by bond; 3 = evolution unlocked), keepsakePowerLevel(item) -> level its powers answer at (+1 with Keeper's Oath, god-path keeper), keepsakeLevelText(item) -> short honest line for the item card, keepsakeIsWorn(item) -> boolean (in acc1-acc4), wornKeepsakes() -> own keepsakes worn in accessory slots, keepsakePassive(lane) -> boolean (an own worn L1+ keepsake of that lane), equipAccessory(idx, slot?) -> wear a keepsake or accessory (def.slot 'acc') in a free acc slot, keepsakeGrow(r, gain, why) -> bond gain (worn only) + level beats + L3 offer, relicOfferThresholds(r) -> [50] for keepsakes, [10, 25, 50] for other relics, keepsakeActionDef(actionId) / keepsakeActionReady(actionId) / keepsakeActivatables(), keepsakeLuckyBreak(where) -> true when a miss becomes a hit (L2 Lucky Break, L1 quiet luck), keepsakeHoldsGround(fighter) -> true when forced movement must not move this fighter (L2 Hold), keepsakeAnchorPursuit() -> extra chaser stamina lost per barrier crossing (anchor L1/L2), keepsakeTakenKin() -> [{itemId, name, relation, bond, level, clue}], keepsakeClues() -> [{kind:'place'|'name', itemId, kinName, relation, text}], migrateKeepsakes() -> idempotent old-save migration
+
+**Rules:**
+- worn_only_growth: bond accrues only while the keepsake is worn in acc1-acc4; the pack is dormant (memory intact, no growth) (code: keepsakeGrow, game.js accrueRelicBond, Steve 2026-10-14 STEVE-ANSWERS "Sentimental items need to compete with accessory gear")
+- shared_slots: keepsakes and accessory gear share the same four slots; a full set refuses with an explanation, never silently swaps (code: equipAccessory)
+- unequip_keeps_bond: taking a keepsake off moves the whole instance back to the pack — bond, enhancements, reveals intact (code: unequip wrap)
+- levels: L1 bond>=10 passive, L2 bond>=25 action, L3 bond>=50 evolution offer; keepsakes no longer get offers at 10/25 (code: KS_LEVELS, relicOfferThresholds)
+- powers_worn_only: L1 passives, L2 actions and L3 enhancements of a keepsake work only while it is worn and only for its owner (code: keepsakePassive, keepsakeActionReady, game.js hasRelicEnhancement)
+- once_per_fight: each keepsake action fires once per fight; state lives on the fight object so it never leaks (code: tbfight.ksUsed)
+- thread_home: a keepsake whose kin relative (player lifeseed) was Taken records the link; its place/name reveal becomes a clue (code: keepsakeThreadCheck, keepsakeTakenKin)
+- old_saves: chosen enhancements survive; old 10/25 offers stay chosen; up to four keepsakes are auto-worn into free accessory slots so nothing goes dormant on load (code: migrateKeepsakes)
+
+**Consumes:** relicItems, offerRelicEnhancement, playFlashback, isKeepsake, itemDef (game.js / progression.js), takenKinOf, lifeseedKin, vpOf (lifeseed.js / conversation.js), worldKinEntry, worldRegionName (world.js), cureStatus, tbfight, tbFighter (statusEffects.js / game.js), useAbility, _actionAvailable (abilityActions.js; impls registered on its published impl/precheck tables)
 
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.
 
-**Provides:** ledger(), ledgerAdd(entry), recordLegend(text), recordMoment(text), contestStandings(), viewershipBoard(), unityState()            (felt unified/fractured state machine), foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded), legendSurface()         (the story so far, as the world tells it), shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design), hoardFood(kcal)         (UNWIRED 2026-10-08: no callers — private stashing never tracked), hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers), exposeFallout(caseId, voterId) (named consequences when a truth goes public), flushLedgerBeats()      (fires queued beats whose knowledge gates now pass), hearsAboutSelf()        (knowledge gate: has the player heard their own legend?)
+**Provides:** ledger(), ledgerAdd(entry), recordLegend(text), recordMoment(text), contestStandings(), viewershipBoard(), unityState()            (felt unified/fractured state machine), foodStance()            (sharer/even/hoarder from foodShared vs foodHoarded), legendSurface()         (the story so far, as the world tells it), shareFood(kcal, toName)  (WIRED 2026-10-11: deliberate gifts call it; homecoming pool stays unwired by design), hoardFood(kcal)         (wired 2026-10-14: takeFromPantryBulk hoard detector, game.js), hearGossipAboutSelf(source) (UNWIRED 2026-10-08: no callers), exposeFallout(caseId, voterId) (named consequences when a truth goes public), flushLedgerBeats()      (fires queued beats whose knowledge gates now pass), hearsAboutSelf()        (knowledge gate: has the player heard their own legend?)
 
 **Rules:**
 - threshold beats fire once per run per dimension, knowledge-gated (gossip always, show needs viewership, system needs the overlay, lived/witness always); ungated beats queue and fire when the world catches up (code: _checkDimBeats, flushLedgerBeats)
@@ -892,7 +969,7 @@ The Leadership Vector. No single ending — ending is sum of leadership choices.
 - foodShared vs foodHoarded resolve to a felt stance; stance transitions are narrated with social consequences (code: foodStance, _checkFoodStance)
 - viewership is deed-reactive, never pantry-reactive (code: havenViewership): inits from arc*5 + showmanship + codex breadth capped at 15, floored at 12 (the drift's resting state); a fat pantry is prosperity, not fame; ledger showmanship feeds live via _viewShoMark; spikes (recordMoment/arena/stunts) and spends (OBJECT/declines) ride the sticky pool, nothing refills it
 - the player's own epithet is never shown until hearsAboutSelf() (code: ledgerBeat)
-- table_deed_recheck: true (code: ledger.js — tableScene re-verifies deedGateReady() at dawn; a stale tableWaiting is withdrawn aloud, never fired silently)
+- table_deed_recheck: true (code: ledger.js endDay wrap calls tableScene at dawn; table.js tableScene re-verifies tableSeat() — full via deedGateReady(), or lesser — and a seat of 'none' withdraws a stale tableWaiting aloud, never fired silently)
 
 **Consumes:** state.leadership
 
@@ -974,6 +1051,35 @@ Movement animation. Step-by-step tile transitions.
 
 **Consumes:** (none documented)
 
+### network-campaign (`network-campaign.js`)
+THE NETWORK — the key to the best human ending (Steve 2026-10-14: "Something else on the scale of titan class but even bigger. Something that has to be fought across the entire map ... Should be almost impossible to get."). Summoned when Overtime reaches the_network.keyTier AND the herald, nielsen and finale are all slain. The broadcast given a body: one piece in each 3x3 sector of the 9x9 map (4 masts, 4 limbs, the heart in the middle), fought in data order with ONE coalition by the finale's march rules — 20 blades to start, upkeep 1000 kcal/blade/day, the dead stay dead, camp between nodes, no new blades once the march begins. A loss pauses the march if the coalition still fields the floor; below it the key is lost for the run. The heart falling sets pg.networkFallen (the key), which adds THE HOSTS to every Table path.
+
+**Provides:** networkNodes() -> the node list (titans.json the_network.campaign.nodes), networkCampaign() -> campaign state {summoned, started, idx, cleared, lost, done, tiles}, networkSummon() -> place every piece on the map, said aloud, networkCurrentNode() -> the node the march faces next, networkNodeTile(node) -> {x,y} inside the node's map sector, networkStatus() -> short Haven line for app.js, _networkTest (test hooks)
+
+**Rules:**
+- one_node_per_sector: the 9x9 map is 9 sectors; each holds exactly one piece (code: networkNodeTile)
+- march_in_order: only the current node can be fought; others refuse aloud (code: startCombat wrap)
+- one_coalition: soundTitanCall for the network refuses once the march starts (code: soundTitanCall wrap)
+- dead_stay_dead: campaignGrieve removes the fallen from the muster after every node (code: networkResolve)
+- coalition_must_survive: a loss leaving fewer than floor blades ends the campaign; the key is lost (code: networkResolve)
+- pieces_hold_their_ground: network pieces never wander and do not crowd the roaming cap (code: wanderWorldMonsters / worldMonsterCap wraps)
+
+**Consumes:** titanDef, titanMusterReady, titanMusterState, soundTitanCall, titanInjectAllies, titanReleaseCommitted (titans.js), campaignGrieve, campaignCamp, campaignInjectMonster, campaignSurvivors (finale-campaign.js), spawnWorldMonster, removeWorldMonster, worldMonsters, isSafeTile, monsterAt, playerMonster, startCombat, tbEnd (game.js)
+
+### overtime (`overtime.js`)
+OVERTIME — the Table's waiting cost (Steve 2026-10-14: "waiting should have a cost- but also an opportunity for the truly powerful. Waves get truly ridiculous"). Once the Table exists for the player (announced, day 90+, seat not none) and they have not sat, every 7 days raises a tier (cap 6). Each tier: wave-4/5 fights become RERUNS (HP, damage and pack size stack per tier, a "RERUN ×N" label), the world holds more monsters, raids come sooner and more often, lingering raiders gorge harder, and the live seat price drops (standing per tier and per Haven loss). The System announces each tier on air. At tier 2 the run's uncast apocalypse titan airs too; at the key tier with all three titans slain, THE NETWORK is summoned (network-campaign.js). Tuning is data: titans.json _overtime.
+
+**Provides:** overtimeActive() -> bool: the clock is running (table set, announced, day 90+, seat not none, not seated), overtimeTier() -> 0..maxTier, overtimeTick() -> daily: count unseated days, raise the tier aloud, check the key, overtimeStanding() -> {tier, losses, penalty} the seat-price cost, overtimeThirdTitan() -> the uncast apocalypse id once tier >= thirdTitanTier (titans.js reads it), overtimeRaidKnobs() -> {cooldown, skip, gorge} or null at tier 0 (havenGrowth.js reads it), overtimeScaleFight(mid) -> applies the RERUN modifiers to a just-started fight, networkKeyReady() -> the key's gate (tier >= the_network.keyTier AND herald, nielsen, finale slain)
+
+**Rules:**
+- no_spoilers: nothing ticks, shows or speaks before the Table exists for the player (tableAnnounced + winDayFloorOk) (code: overtimeActive)
+- stops_when_seated: tableDone stops the clock; the tier never rises after the seat is taken (code: overtimeActive)
+- tier_is_monotonic: the tier never falls; a withdrawn seat pauses the clock, it does not reset it (code: overtimeTick)
+- zero_at_tier_zero: every knob is a no-op at tier 0, so runs that sit promptly play exactly as before (code: overtimeRaidKnobs)
+- reruns_not_titans: scaling skips titans, campaign nodes and anything below minWave (code: overtimeScaleFight)
+
+**Consumes:** progState(), tableSeat(), winDayFloorOk(), titanCast(), sysSay, say, tele, recordMoment, startCombat() (wrapped: RERUN scaling after the fight is built), tbDamage() (wrapped: rerun hits land harder), worldMonsterCap() (wrapped: more monsters per tier), endDay() (wrapped: the daily overtime tick), campaignInjectMonster() (finale-campaign.js: rerun packmates), networkSummon() (network-campaign.js: the key)
+
 ### pantheon (`pantheon.js`)
 God jealousy — the ascended have politics (Steve 2026-10-13).
 
@@ -985,7 +1091,7 @@ God jealousy — the ascended have politics (Steve 2026-10-13).
 **Consumes:** —
 
 ### party-bond (`party-bond.js`)
-Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER ability path (draw_fire/bodyguard/shield_wall/rally) carries the village-scale bond pool: the System offers its abilities to villagers who've bled beside others, and a completed path anchors the whole village.
+Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER path (draw_fire/bodyguard/shield_wall/rally, villager skills) carries the village-scale bond pool: villagers who've bled beside others learn it, and a completed path anchors the whole village.
 
 **Provides:** combatBondGet(a, b), combatBondAdd(a, b, n), noteSharedFight(vids), noteBondGrief(deadVid, partyVids), noteCrewTogether(crewVids), bondCombatBonus(vid, allyVids), pathAnchor(), villageBondBonus(), noteVillageBondFight(), noteVillageBondGrief(), noteShieldbearerOffer(vid), isNewcomer(vid), findVeteranBuddy(vid, task), OUTDOOR_TASKS, SHIELDBEARER_PATH
 
@@ -1051,7 +1157,7 @@ Perception system. Proximity hints, spotting.
 **Consumes:** scholar.perception
 
 ### pods (`pods.js`)
-The stasis pods as a standing weight (KIN.md: "a weight, not a meter", Steve 2026-10-11). No devotion score — a HISTORY of pod-related choices across the run: what you did at each intrusion, what it cost, who saw it. Intrusions fire at dramatically-charged moments (~1/season, never two in a week); each is a real choice with real costs both ways. The village's social memory of those choices IS the system — mourners have opinions, broken promises surface (Witness especially). The System monetizes guilt (the Jackpot sells devotion back as entertainment). At the table, history determines what is POSSIBLE: championed runs can demand the pods opened at a real cost; shrugged runs get the callous-oversight epilogue; jackpot losses are part of the story. Adults stay unknown, always.
+The stasis pods as a standing weight (KIN.md: "a weight, not a meter", Steve 2026-10-11). No devotion score — a HISTORY of pod-related choices across the run: what you did at each intrusion, what it cost, who saw it. Intrusions fire on a dawn roll from day 14 (~1/28 per dawn, at least 8 days apart), the type weighted by context (high viewership → camera, thin pantry → famine); each is a real choice with real costs both ways. The village's social memory of those choices IS the system — mourners have opinions, broken promises surface (Witness especially). The System monetizes guilt (the Jackpot sells devotion back as entertainment). At the table, history determines what is POSSIBLE: championed runs can demand the pods opened at a real cost; shrugged runs get the callous-oversight epilogue; jackpot losses are part of the story. Adults stay unknown, always.
 
 **Provides:** podRemember(kind, detail) -> append a history event, podHistory() -> the event list, podIntrusionTick() -> dawn roll for intrusions, podAnswer(choice) -> resolve a pending intrusion, podAsk() -> "ask the System about the pods" (fulfills promises, costs a favor owed), podChampioned() -> history reader: championed run, podShrugged() -> history reader: shrugged run, podJackpotLost() -> history reader: jackpot lost, podJackpotWon() -> history reader: jackpot won, podConscripted() -> history reader: conscripted (dark), podBrokenPromises() -> broken-promise events, podKidsReturned() -> kids home flag, podDemandAvailable() -> table demand possible (history, not meter), podDemandCost(choice) -> the table charges; pods open, podOversightEpilogue() -> the sting for shrugged good endings, podJackpotLossEpilogue() -> the carried loss, podJackpotStage(via) -> stage the televised Jackpot, podJackpotChoose() -> the approach choice, podJackpotApproach(how) -> spin the wheel, podJackpotSpin(how) -> resolve win/loss, podJackpotWin(how) -> pods open live, podJackpotLoss(how) -> the quiet beat, podConscriptOffer(pathId) -> dark offer (feared/relay), podConscriptAnswer(accept) -> horror or refusal, podWitnessMaterial() -> broken-promise lines for the Witness defense
 
@@ -1070,10 +1176,23 @@ Practice deed grants — unlock.type === 'practice' abilities
 
 **Consumes:** —
 
+### presentation (`presentation.js`)
+The presentation ladder (DECISIONS.md 2026-10-03, Steve: "Start simple, but it would be cool if as you progress, the game graphics and interface keep getting better and better."). Stage 0 terminal -> 1 annotated -> 2 pixel entities -> 3 arrival vignettes -> 4 full tileset. A stage is earned on Codex depth AND days survived (src/data/presentation.json), never on a timer, and is never taken back within a run. app.js renders it as body.stage-N; tile-scenes.js blends the map palette from earthy (stage 0) to rich (stage 4). Also owns the alien-script glyph generator and the glitch rate limit for the System overlay (no DOM here: app.js applies them).
+
+**Provides:** presentationStage() -> 0..4, the current ladder stage (monotonic per run), presentationInfo() -> {stage, id, label, codexDepth, days, next} for debug and tests, codexDepth() -> knowledge depth across every codex section (plant/tree/skill/animal/ability levels; one per beast, recipe, terrain), alienScript(n, seed) -> n glyphs of untranslated System script (generated, zero assets), glitchDue(now) -> true when an alien-script glitch may play now (rate-limited by presentation.json glitch)
+
+**Rules:**
+- earned_not_timed: a stage needs BOTH its codexDepth and its days; days alone never advance it (code: presentationStage)
+- never_taken_back: the reached stage is kept on state.presentation.maxStage; the interface is a reward (code: presentationStage)
+- glitch_is_occasional: at most one glitch per glitch.minGapMs, and only on a chance roll (code: glitchDue)
+- zero_assets: the alien script is generated from fixed unicode ranges, no font or image (code: alienScript)
+
+**Consumes:** Game.data.presentation (src/data/presentation.json), state.codex, state.scholar.day, state.presentation
+
 ### progression (`progression.js`)
 Character progression. XP, levels, abilities.
 
-**Provides:** abilitySlots(), accrueRelicBond(item), integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
+**Provides:** integrationStage(), checkTrial(id), completeTrial(id), _synergyGiftPick(cands, owned), trialLessonSkill() -> the audience trial's lesson: an unknown skill (no magic gift; unified tracks 2026-10-14), progState(), fireCrisis(kind, ctx), progDaily(), slotMoment(), teachSentiment(), channelSentiment(idx), channelReadyKeepsakes(), channelLabel(), deedState(), recordDeedFight(monsterId), deedGateReady()
 
 **Rules:**
 - crisis_once: true (code: progression.js — fireCrisis dedupes via pg.crises keys; one per kind per run)
@@ -1085,7 +1204,7 @@ Character progression. XP, levels, abilities.
 - sentiment_at_60: true (code: progression.js — slotMoment(60); was 80)
 - audience_encore: true (code: progression.js — checkAudienceEncore, recurring post-40 trials)
 
-**Consumes:** scholar.xp, scholar.abilities
+**Consumes:** scholar.xp, scholar.abilities, abilitySlots() (game.js), accrueRelicBond(item) (game.js)
 
 ### runRecords (`records.js`)
 Persistent Records — the village's story (Steve 2026-10-13).
@@ -1229,17 +1348,33 @@ Wave-5 signature combat mechanics (Steve 2026-10-11): The Producers — the show
 
 **Consumes:** say, tbDamage, addHealth, audioEvent, tbRefreshTelegraphUI, tbFighter, tbIsPlayerTurn, tbAfterPlayerAction, tbEndCheck, tbPlayerStrike, hasItem, consumeItem, seList, seDef, apTopLane, apFanLane, apAdjustFavor, apClubName, feastedActive, clearFeastBuff
 
+### skill-teaching (`skill-teaching.js`)
+ONE teaching mechanic for human skills, the same for everyone (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way." / "Human skills should be learnable before the system shows up."). A person who knows a skill can teach it to a person who doesn't: villager to player, player to villager, villager to villager. The learner gets the skill at L1 (it levels by use as before). It costs a held conversation (the player) or the day's lesson (a villager pair), works before the System, and credits the teacher's 'teaching' deed. Villagers know their past trade from day one (occupation 'granted' plus knowledge backgrounds, the player's own two background routes). Villagers choose lessons that fit their target build (villager-build.js). The player also learns the track skill a villager learns at the same track levels (tracks.json skillLevels).
+
+**Provides:** skillTeachable(skillId) -> true unless knowledge.json flags the skill teachable:false, skillsKnownBy(who) -> skill ids; who = 'player' or a villager id (the bearer's id = the player), personKnowsSkill(who, skillId) -> boolean, npcSeedSkills(vid) -> villager's background skills from their old life (idempotent), teachableSkills(teacher, learner) -> skill ids the teacher can teach the learner now, canTeachSkill(teacher, learner, skillId) -> {ok, why}, teachSkill(teacher, learner, skillId, opts) -> true if the learner learned it (L1), skillFit(vid, skillId) -> how well a skill fits a villager's target build and tracks, villagerSkillLessonsDay() -> count of villager-to-villager lessons today (daily tick), convoSkillChoices(vid) -> conversation menu choices ("Teach me X?" / "I could show you X."), convoSkillLesson(vid, choiceId) -> {line, you} for a skill_learn:/skill_teach: choice, playerTrackSkills(track, rec) -> name of the track skill the player just learned, or null
+
+**Rules:**
+- one_mechanic: villager->player, player->villager and villager->villager lessons all go through teachSkill (code: teachSkill)
+- pre_system: no systemArrived check anywhere in teaching (code: canTeachSkill)
+- learner_starts_at_l1: a lesson teaches L1; use deepens it (code: teachSkill, game.js gainSkillLaneXP)
+- lesson_costs_time: one lesson per learner per day and one per conversation; the player's lesson spends 3 action ticks like teachPlant (code: canTeachSkill, convoSkillLesson)
+- same_gates_both_ways: trust 15+ and a shared language, whichever side teaches (code: canTeachSkill)
+- data_first: every knowledge skill is teachable unless flagged teachable:false (code: skillTeachable)
+- track_skill_parity: the player learns the next unknown track skill at tracks.json skillLevels, like a villager (code: playerTrackSkills, tracks.js _playerTrackXP)
+
+**Consumes:** Game.data.knowledge, Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.characterGen, state.codex.skills, state.village.npcSkills, state.village.trust, state.village.away, learnSkill(skillId, level, via), npcLearnSkill(vid, id), npcKnowsSkill(vid, sid), creditDeed(who, deedId), villagerTargetBuild(vid), villagerNeedTrack(vid)
+
 ### spawn-knack (`spawn-knack.js`)
 The spawn knack — the System's early touch. Granted before the System's formal arrival (sent ahead), unexplained at grant time but GIVEN — never innate, never "always had" (Steve 2026-10-14). Backstory-rooted via lifeseed memories.
 
-**Provides:** knackChoicesFor(char), chooseKnack(id), grantVillagerKnacks(), npcKnack(vid), knackGossipLine(tellerVid, targetVid), knackDef(id)
+**Provides:** knackChoicesFor(char), chooseKnack(id), grantVillagerKnacks(), npcKnack(vid), knackGossipLine(tellerVid, targetVid), knackDef(id), liveKnackChoices()
 
 **Rules:**
 - knack_system_granted_early: true (code: spawn-knack.js — knacks are unlock.type latent_knack, never system_offer at grant; zero System chrome in copy or UI because the System hasn't formally arrived — but the fiction is GIVEN, not innate)
 - latent_knack_not_skill: true (code: spawn-knack.js — knacks are not teachable earthly skills; they are unexplained and fill a System slot)
 - knack_fills_slot_1: true (code: spawn-knack.js — chooseKnack pushes to s.abilities; the day-7 gift waits honestly for slot 2)
 - knack_lifeseed_tied: true (code: spawn-knack.js — choices derive from char.lifeseed.skillOrigins; memories fill {kin}/{place} from the seed)
-- villager_knacks_quiet: true (code: spawn-knack.js — villagers get knacks via lifeseed; gossip-visible, never UI)
+- villager_knack_like_player: true (code: spawn-knack.js grantVillagerKnacks — a villager's first ability comes from the same 3 lifeseed-tied choices, picked by buildScore, held in slot 1 of npcAbilities and counted in their build; the player learns of it through gossip, never UI; old-save skill ids are re-chosen from the magic pool)
 
 **Consumes:** Game.data.abilities (latent_knack pool), village.rosterChars.lifeseed (skillOrigins, people, places)
 
@@ -1366,17 +1501,28 @@ The Witness path — the trial of the judges. Three beats: opening charges (from
 ### table (`table.js`)
 The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 
-**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text)
+**Provides:** tableSeat(), tableEarnedPaths(), tableBranch(pathId), tableRegisterPath(def), tableScene(), tableAnnounce(), tablePreview(), tableTakeSeat() — the seat is taken from Haven; relative until then (Steve 2026-10-14), tableActive(), chooseTableOption(id), tableStartPath(pathId), tableChoose(choiceId), tableFail(reason), tableDowngradePick(pathId), tableResolveFinal(choiceId), tablePrompt(html, options, frame), grounding(), groundingTier(), groundingMult(), addGrounding(n, why), groundingReactionBeats(oldTier, newTier), sysBond(), addSysBond(n, why), villagerAscensionScore(vid), tableFacilitate(kind, vid), tableTheme(), tableEpilogue(frame, branch, choiceId), tableLiveWrap(text), tableHostsLines(pathId, branch) / tableResolveHosts(def, branch) — THE HOSTS, the key's ending (pg.networkFallen adds it to every path's finals), tableBeatChoices(beat, T) -> a beat's own choices plus the build-aware option on the beat that plays the build, tableEndingLines(fid, outcome) -> the path's final plus one build coda (or a bespoke path entry) for the locked key, tablePathName(id) -> the path's display name (the {path} token in endings)
 
 **Rules:**
 —
 
-**Consumes:** state.scholar, state.village, progState(), ledger(), endingFrame(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
+**Consumes:** state.scholar, state.village, progState(), ledger(), deedGateReady(), deedState(), scaleRank(), integrationStage(), havenViewership(), say, sysSay, recordMoment, recordLegend, wipe, save, metaNoteTable(), metaNoteTableChoice() (called directly — metaProgression's wraps bound at ITS load time to ledger.js's versions, so the wraps don't see these overrides), switchboard() (comms.js) for the light/dark axis
+
+### telemetry-hooks (`telemetry-hooks.js`)
+Telemetry for the run's milestone events, which had none (sim audit 2026-10-14): table entry/path/fail/win, ability use, arc changes, scale rank changes, synergy activation, godhood ascension, titan fight results, village lost. Wraps existing functions; never changes their behaviour or return values. Feeds the sim harness and sweeps; in the browser it only appends to the existing capped telemetry ring.
+
+**Provides:** teleMilestone(type, data)
+
+**Rules:**
+- observe_only: every wrap calls the original first and returns its result unchanged (code: telemetry-hooks.js)
+- no_rng: no Math.random and no state writes except the telemetry ring and its own _teleSeen bookkeeping (code: telemetry-hooks.js)
+
+**Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
 
 ### tile-scenes (`tile-scenes.js`)
-Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terminal aesthetic, string building only (no DOM), ~64x64 viewBox readable at 40px.
+Composes each world-map tile as a miniature auto-composed SVG scene: terrain base + a simplified sampling of detail-grid cells (structures, water, trees, plants as mini shapes) + entity markers for player/villagers/monster/animal when they occupy the tile. Cached per tile on tile._sceneCache, keyed by a cheap state fingerprint; re-rendered only when meaningful state changes. Fog-of-war aware: unseen tiles render a blank dark square. Terrain palette climbs the presentation ladder: earthy at stage 0, rich at stage 4 (Game.presentationStage). String building only (no DOM), ~64x64 viewBox readable at 40px.
 
-**Provides:** svgFor(x, y, opts) -> SVG string for the tile (opts.seen decides fog), invalidate(x, y) -> drop the cached scene for one tile, invalidateAll() -> drop cached scenes for all tiles, touch(x, y) -> bump the tile's scene version so the next svgFor re-renders
+**Provides:** svgFor(x, y, opts) -> SVG string for the tile (opts.seen decides fog), invalidate(x, y) -> drop the cached scene for one tile, invalidateAll() -> drop cached scenes for all tiles, touch(x, y) -> bump the tile's scene version so the next svgFor re-renders, palette(type, stage) -> {base, tex, dot} terrain colours for a presentation stage (0 earthy .. 4 rich)
 
 **Rules:**
 - fog_is_blank: svgFor with opts.seen falsy returns a blank dark square and never generates detail (code: svgFor, Steve 2026-10-06)
@@ -1385,6 +1531,7 @@ Composes each world-map tile as a miniature auto-composed SVG scene: terrain bas
 - miniature_not_sprite: detail cells render as simple shapes, never full sprites — this is a 40px-readable miniature (code: markerFor, Steve 2026-10-06)
 - entities_are_local: player/villager/animal markers only render on the player's tile, from detail-grid mx/my coords (code: entityMarkers, Steve 2026-10-06)
 - no_monster_markers: the map shows geography only, never live monster positions (code: entityMarkers, Steve 2026-10-06)
+- palette_follows_ladder: terrain colours blend earthy (stage 0) -> rich (stage 4) by Game.presentationStage(); the stage is in the cache key (code: palette, fingerprint)
 - no_dom: composition is pure string building; safe to call from hot paths and off-thread tests (code: compose, Steve 2026-10-06)
 
 **Consumes:** Game.tileAt, Game.genDetail (detail-grid generation), Game.map.px/py (player tile), Game.state.scholar (mx,my,animal), Game.state.worldMonsters (NOT rendered on map — geography only, Steve 2026-10-06), Game.state.village.positions (villager detail-grid positions)
@@ -1398,6 +1545,23 @@ The TITAN CLASS (Steve 2026-10-11) — the threat ladder that justifies the scal
 —
 
 **Consumes:** —
+
+### tracks (`tracks.js`)
+ONE progression system for the player and villagers (Steve 2026-10-14: "I think we need to sync the player and villager system. But the villager system sounds like the better model."). Five tracks (combat, field, social, craft, strange) fed by real deeds; thresholds and kits are data (src/data/tracks.json). Crossing a threshold is a level-up: a villager gets the same 1-of-3 sheet and picks by buildScore (villager-build.js), and learns the next track skill; the player gets a level-up sheet, pick 1 of the next 3 unheld kit abilities (src 'level_up:<track>'). Kits are magic only; skill-lane entries become villager SKILLS (no slot). Occupations seed a starting lean (characterGen trackLean), below the first threshold.
+
+**Provides:** trackData() -> the tracks.json record (tracks, thresholds, kits, skills, deeds), trackThresholds(who) -> threshold list: ONE scale, the same for the player and every villager (who is ignored; kept for callers), trackLevelFor(xp, who) -> thresholds crossed, gainTrackXP(who, track, n, why) -> new xp; who = 'player' or a villager id (the bearer's id = the player), villagerGainXP(vid, track, n, why) -> thin wrapper over gainTrackXP (kept for its callers), npcXp(vid) -> villager track record {combat, field, social, craft, strange, granted, skilled}, villagerTrackLevel(xp) -> villager level for an xp total, playerTracks() -> scholar.tracks {track: {xp, level}} (seeded with the occupation lean), occupationLean(occId) -> {track: xp} from characterGen trackLean, creditDeed(who, deedId, trackOverride) -> track XP from the deed table for whoever did it ('player' or a villager id); the same n and the same per-day cap per doer, noteDeed(deedId, trackOverride) -> creditDeed('player', ...), convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic, levelUpOffers(track, level) -> offerSize of the next 6 unheld magic abilities of the track's kit, drawn per holder/level and leaned to a recognised god path or, before one, the job path (godpath.js kitSheet, the same function villagers use), pumpLevelUps() -> opens the next queued level-up sheet when none is pending, keepAbilities() -> declines a level-up sheet ("Keep what I have"), isLevelUpSheet() -> the pending ability sheet is a track level-up, trackStat(k) -> scholar.trackStats counters (offered/picked/replaced/kept), trackSummary() -> [{track, label, icon, level, xp, prev, next}] for the character sheet, npcLearnSkill(vid, abilityId) / npcKnowsSkill(vid, skillId) / npcOwnedIds(vid), migrateNpcLanes() -> moves skill-lane ids out of villager ability slots (idempotent), migrateTrackScale() -> old saves: villager XP rescaled from the old villager thresholds to the one shared scale (idempotent, v.trackScale)
+
+**Rules:**
+- same_events_feed_both: a deed credits whoever did it; villagerGainXP with the bearer's id credits the player (code: gainTrackXP)
+- shared_data: thresholds, tracks and kits come from tracks.json for both (code: trackData)
+- one_xp_scale: the player and villagers use the same thresholds, the same per-deed credit and the same per-day caps — no player-only multiplier (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way.") (code: trackThresholds, creditDeed)
+- kits_magic_only: kits hold lane 'magic' ids only; a villager's skill-lane grant becomes a villager skill, never a slot (code: npcGrantAbility, npcLearnSkill)
+- villager_chooses_like_player: a villager crossing a threshold gets the player's sheet (next 3 unheld kit abilities), queued on npcXp.sheets and chosen by buildScore; full slots = swap or keep, same rule (code: _villagerTrackXP, villager-build.js villagerResolveLevelUps)
+- player_pick_one_of_three: a player level-up offers the next 3 unheld kit abilities; full slots = each pick REPLACES a held ability, or keep what you have (code: pumpLevelUps, chooseAbility, keepAbilities)
+- queue_never_drop: level-ups wait in scholar.levelUpQueue behind any pending sheet and before the System's arrival (code: pumpLevelUps)
+- lean_below_first_threshold: occupation lean never grants a free level-up at spawn (code: playerTracks, npcXp)
+
+**Consumes:** Game.data.tracks, Game.data.abilities, Game.data.characterGen, state.village.npcXp, state.village.npcAbilities, state.village.npcSkills, state.scholar.tracks, state.scholar.levelUpQueue, state.scholar.abilityChoices, npcGrantAbility(vid, id), abilitySlots(), ownedAbilityIds(), isSkillLane(id), abilitySkillId(id)
 
 ### trial-deeds (`trial-deeds.js`)
 Trial deed grants — unlock.type === 'trial' abilities are the
@@ -1451,12 +1615,12 @@ Truth/distortion. Claim-gossip corrects (tellers share the truth); action-gossip
 ### villageAgency (`villageAgency.js`)
 Foreign villages as players — inner life (famine, succession, schism), splinter events, petition-to-join beats, rumor-carried internal events.
 
-**Provides:** villageAgencyDaily(), ensureFaces(v), havenPopCap(), havenRoom(), openPetition(pet), petitionInterview(petitionId, qid), conductPetitionMoot(petitionId), answerPetition(petitionId, how), aidVillage(villageId, kcal), answerBeg(how), answerRaidDefense(how), answerSuccession(how), stageSuccessionBeat(villageId), queueVillageEventRumor(villageId, kind, opts), fireSplinter(villageId, cause), _vaInner(v), _vaSimInner(v), _vaStartSuccession(v), _vaResolveSuccession(v, backedIdx), _vaPickSplinterCause(v), _vaSplinterMembers(v, n), _vaMakeSplinterVillage(v, remainers, cause, kcal, day), _vaUniqueVillageName(base), _vaNameAmbiguous(a, b), _vaStripNameMark(s), _vaPetitionScore(vid, pet, ppm, mood), _vaFinishPetition(pet, playerAccept), _vaAdmitPetitioners(pet), _vaTurnAway(pet, why), _vaPetitionConsequences(pet, accepted), _vaFamineAct(v), _vaStageBeg(v), _vaStageRaidDefense(v), _vaRumorText(v, kind, wrong, opts), _vaPantryPerMouth()
+**Provides:** villageAgencyDaily(), ensureFaces(v), havenRoom(), openPetition(pet), petitionInterview(petitionId, qid), conductPetitionMoot(petitionId), answerPetition(petitionId, how), aidVillage(villageId, kcal), answerBeg(how), answerRaidDefense(how), answerSuccession(how), stageSuccessionBeat(villageId), queueVillageEventRumor(villageId, kind, opts), fireSplinter(villageId, cause), _vaInner(v), _vaSimInner(v), _vaStartSuccession(v), _vaResolveSuccession(v, backedIdx), _vaPickSplinterCause(v), _vaSplinterMembers(v, n), _vaMakeSplinterVillage(v, remainers, cause, kcal, day), _vaUniqueVillageName(base), _vaNameAmbiguous(a, b), _vaStripNameMark(s), _vaPetitionScore(vid, pet, ppm, mood), _vaFinishPetition(pet, playerAccept), _vaAdmitPetitioners(pet), _vaTurnAway(pet, why), _vaPetitionConsequences(pet, accepted), _vaFamineAct(v), _vaStageBeg(v), _vaStageRaidDefense(v), _vaRumorText(v, kind, wrong, opts), _vaPantryPerMouth()
 
 **Rules:**
 - camera_rule: max 3 named faces per village (speaker, leader, champion); every beat goes through them, everything else via rumors (code: villageAgency.js)
 - petition_never_silent: intake is always a played beat with a vote; never silent population ticks (code: villageAgency.js)
-- cap_is_ceiling: havenPopCap() is the haven workstream's hook — reads their growthTier when present, falls back to 12/16/20/24 (code: villageAgency.js)
+- cap_is_ceiling: havenRoom() admits up to housingCap() (membership.js: max of shelters and the havenGrowth.js tier ladder 12/16/20/24) — the number the Haven UI shows (code: villageAgency.js — havenRoom)
 - knowledge_never_gates: a starving stranger doesn't check your codex; no beat here is knowledge-gated (code: villageAgency.js)
 - reactive_not_calendar: schisms, succession, famine fire from conditions (hunger, tension, leader death), never timers (code: villageAgency.js)
 - they_eat_too: unapproached villages burn pantry daily (pop × 120 kcal net) — static pantries froze their inner lives (0/120 beg/raid answers). Approached villages run the catch-up sim instead. (code: _vaSimInner, util audit 2026-10-10)
@@ -1476,6 +1640,22 @@ Villager AI. Villagers act on their own with goals and routines.
 - (none documented)
 
 **Consumes:** village.villagers
+
+### villager-build (`villager-build.js`)
+PARITY (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way. You should get to swap on level up or keep existing. ... villagers need to act in smart ways, including towards getting good gear and builds. They want to win as well." / "Villagers can't just take the next ability, they need to seek knowledge about the abilities and go for a build that suits their technology."). THE build brain for the player's bots and every villager: buildScore scores an ability for whoever would hold it (what they hold, synergies, build-around paths, their technology = gear, tools, skills and job lean, their target build, what they know). Villagers keep ability KNOWLEDGE (0-3, the player's codex levels), seek it from people who hold or know abilities, keep a target build, choose on the same 1-of-3 level-up sheet the player gets (swap or keep, same rule), and gear up from their own things, gifts and the village armory with a daily greedy allocation.
+
+**Provides:** buildScore(who, abilityId, opts) -> number; who = 'player' or a villager id (THE one scoring function), buildPathLean(who, abilityId) -> 0; the god-path redesign adds path/subclass lean HERE (single hook), buildTechnology(who) -> {melee, ranged, armor, tools, skillTracks, lean} — what their hands and kit can use, abilityKnowledge(who, abilityId) -> 0-3 (held = 3; player = codex level; villager = v.npcKnow), npcLearnAbility(vid, abilityId, level, source) -> true if knowledge rose, villagerTargetBuild(vid) -> up to 6 ability ids they are building toward (from what they know), buildDecide(who, offerIds, opts) -> {pick, replace} | {keep: true}; the swap-or-keep rule for both, villagerLevelUpOffers(vid, track, level) -> the player's sheet for them: 3 of the next 6 unheld kit abilities (godpath.js kitSheet, the same function), villagerResolveLevelUps(vid) -> resolves queued sheets: pick by buildScore, swap or keep; defers to seek knowledge when they know too little, villagerWantsKnowledge(vid) -> 'sheet' | 'build' | null, villagerSeekKnowledge(vid) -> {teacher, abilityId, level} | null (the agency action), npcLearnFromTalk(learnerVid, teacherId) -> abilityId | null (a held conversation teaches), npcWitnessAbility(abilityId, witnessIds, userId) -> count of witnesses who learned, villagerNeedTrack(vid) -> the track whose level-up would bring their next target ability, villagerGearFit(vid, itemId) -> multiplier for how well an item fits their build, villagerGearDay() -> greedy daily gear allocation (own stash, gifts of spares, armory), villagerBuildDay() -> the daily tick: gear, pending sheets, pickVillagerKnack(vid, choices) -> knack id chosen by buildScore, mantleBecome(oldId, newId) -> the new bearer keeps THEIR OWN tracks, XP, abilities, skills, knowledge, godhood and gear; the predecessor's do not pass (Steve 2026-10-14: "No I don't think you should take your XP or the abilities. You become that villager.")
+
+**Rules:**
+- one_brain: the player's bot picks (capable policy) and every villager use buildScore/buildDecide (code: buildScore, buildDecide)
+- path_lean_hook: god-path/subclass lean is added ONLY in buildPathLean (code: buildPathLean)
+- knowledge_gates_planning: an ability nobody told them about scores 0; the sheet shows its offers (L2), held = L3 (code: abilityKnowledge, buildScore)
+- seek_not_drift: a villager whose build knowledge is too thin defers a sheet (max 3 days) and seeks knowledge instead (code: villagerResolveLevelUps, villagerSeekKnowledge)
+- swap_or_keep_same_rule: full slots -> the best offer replaces the weakest held only if it beats it by more than 1, else keep (code: buildDecide)
+- you_become_that_villager: on the mantle, scholar.abilities/tracks/levelUpQueue/deedDay/godhood/inventory/equipped are REPLACED by the successor's own villager records (npcAbilities, npcXp + pending sheets, npcDeedDay, npcGodhood, person.items/equipped); integration, slots, Codex knowledge, ledger, trust and village state stay with the office (code: mantleBecome, ledger.js playerDeath)
+- gear_greedy_no_hoard: equipped gear is never taken; spares go to whoever gains most; armory weapons go to the biggest gain first, one per villager per day, the old weapon goes back (code: villagerGearDay)
+
+**Consumes:** Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.items, state.village.npcAbilities, npcSkills, npcXp, npcKnow, npcBuild, rosterChars (person.items/equipped/stashed), state.scholar.abilities, state.codex.abilities, stashState().weapons, Scattering.equipment (autoEquip, weaponBonusOf, armorOf, slotForItem, isRangedWeapon)
 
 ### villager-mapmem (`villager-mapmem.js`)
 Villager map memory + cross-node objectives. Villagers remember resource sites on other nodes (v1: corpses) and form haul objectives that carry past whatever node they're on — kills become the resources they are.
@@ -1535,7 +1715,7 @@ Fixed System narrator voice lines (ElevenLabs, pre-generated MP3s in src/audio/s
 **Consumes:** Game.audio.playVoice(blob), Game.audio.isMuted(), Game._voiceUnlocked
 
 ### waves (`waveLedger.js`)
-The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
+The Wave Ledger — waves 2-3 unlock on KILLS ONLY (waves 4-5 add village Standing on top, standing.js). Per wave, per village, per run, cumulative across player deaths (lives on state, not the scholar).
 
 **Provides:** waveLedgerCfg(), ledgerState(), monsterCounterKnown(monsterId), scoreLedgerKill(monsterId), waveLedgerPoints(wave), ledgerProgressLine()
 
@@ -1545,7 +1725,33 @@ The Wave Ledger — wave unlocks run on KILLS ONLY. Per wave, per village, per r
 - ledger_per_type_cap: 2 (code: waveLedger.js — perTypeCap; breadth over farming)
 - ledger_announce_idempotent: true (code: waveLedger.js — 50%/full beats fire once per wave via state._ledgerAnn50/_ledgerAnnFull)
 - ledger_survives_scholar: true (code: waveLedger.js — ledgerState lives on this.state, not this.state.scholar)
-- ledger_reverses_8730921c: true (code: game.js — unlockedWave is ledger-only; engagement lanes removed 2026-10-10, Steve's call; the endgame deed gate is untouched)
+- ledger_reverses_8730921c: true (code: game.js — unlockedWave's wave 2-3 rungs are ledger-only; engagement lanes removed 2026-10-10, Steve's call; waves 4-5 add Standing (2026-10-13), not scale rank; the endgame deed gate is untouched)
 
 **Consumes:** —
+
+### where-are-we (`whereAreWe.js`)
+Place knowledge. The Scattering dropped the player somewhere
+
+**Provides:** —
+
+**Rules:**
+—
+
+**Consumes:** —
+
+### world (`world.js`)
+The world registry (docs/WORLD-REGIONS.md §6, Steve 2026-10-14: "people got randomized and split up across the world. The family arc has to be late game content at the global stage."). state.world = {regions:{id:{known,contact,visited,heardDay,heardWhy}}, kin:[{owner,name,relation,region,fate,found}]}. At run start every region of regions.json gets an entry (the landing region known+visited, every roster member's origin region known), and each roster member's lifeseed kin is placed in a seeded random region that is never the landing region (fate 'scattered'), or off-world with region null when the lifeseed says Taken (fate 'taken', docs/KIN.md) (kin who died before the sky changed are not placed). Hidden: no UI until the global-stage content reads it.
+
+**Provides:** initWorld() -> builds state.world for a new run (called from newGame), migrateWorld() -> old saves get a world; new regions get entries (called from load), worldRegions() -> [{id, name, continent, status, known, contact, visited}], worldKin(owner) -> that owner's kin entries (default: the player); places them lazily for late joiners, worldKinEntry(owner, person) -> the kin entry for one lifeseed person, or null, hearOfRegion(id, why) -> true when the region was newly heard of, worldRegionName(id) -> the region's display name, runsStarted() / noteRunStart() / isFirstRun() -> the cross-run run counter (localStorage oversight.runs.v1); first run = none counted and no save on the device, firstRunLanding(originId, pool) -> {region, via}: the origin region when playable, else the nearest playable (climateFamily, continent, default), regionCalendar(region) -> {id, seasons, months}: the region's climate calendar (src/data/climates.json template + region overrides), calendarStartFor(region, ms) -> {doy, region, calendar, season, date}: day 1's world day-of-year for a run started at real time ms
+
+**Rules:**
+- kin_never_local: kin are never placed in the landing region (code: placeKinFor)
+- kin_deterministic: placement is a pure function of map.worldSeed + owner + person, drawing no Math.random (code: kinRand)
+- taken_matches_lifeseed: fate 'taken' uses the same test as lifeseed.js takenKinOf (code: KIN_TAKEN)
+- first_run_origin: a device's first run lands in the player's origin region (or the nearest playable); later runs are random; Game.debugRegion wins (code: game.js pickLandingRegion, firstRunLanding; Steve 2026-10-14 "first run let them land in the origin they choose a character from. Random after.")
+- real_date_season: day 1's season is the real-world season at run start for the landing region's calendar and hemisphere, stored as state.calendarStart (code: calendarStartFor, game.js season; Steve 2026-10-14 "Whenever the player starts, should be the season the game starts in.")
+- runs_not_meta: the run counter is its own key; newGame never touches oversight.meta.v1 (code: RUNS_KEY)
+- hidden_until_known: nothing here is shown; keepsake clues name a kin's region only once world.regions[id].known (code: keepsakes.js keepsakeClues)
+
+**Consumes:** regionDef, activeRegion, originRegionsForTags, mulberry32 (game.js), vpOf (conversation.js), state.world, state.region, state.village.roster, state.village.rosterChars, playableRegions (game.js), data.climates (src/data/climates.json)
 

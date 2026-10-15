@@ -321,9 +321,21 @@
       var vAbs = [];
       try {
         if (typeof this.npcHasAbility === 'function')
-          vAbs = (((this.state.village || {}).npcAbilities || {})[vid] || []).slice();
+          vAbs = (typeof this.npcOwnedIds === 'function') ? this.npcOwnedIds(vid)
+            : (((this.state.village || {}).npcAbilities || {})[vid] || []).slice(); // unified tracks: skills count
       } catch (e) {}
       var vHasAb = function (id) { return vAbs.indexOf(id) >= 0; };
+      // GOD-PATH VERBS (parity 2026-10-14): the subclass actives and
+      // passives a villager holds, in this engine's terms (godpath.js
+      // fieldBegin/fieldAct/...). null when they hold none.
+      var GPf = (_g.Scattering || {}).Godpath || null, gpF = null;
+      try { if (GPf && GPf.fieldBegin) gpF = GPf.fieldBegin(this, vid, vAbs); } catch (e) { console.warn('[godpath] fieldBegin', e); }
+      if (gpF && gpF.armorAdd) varmor += gpF.armorAdd; // chitin_skin's armor.flat, held
+      var gpC = function (extra) {
+        var c = { round: rec.rounds, vHp: vHp, vHpMax: vHpMax, allyIn: allyIn, allyHp: allyHp, allyMax: allyMax, RR: RR, lroll: lroll, vName: vName, mName: mName, log: rec.log, members: members };
+        for (var k in (extra || {})) c[k] = extra[k];
+        return c;
+      };
       // one-shot ability state, reset per fight
       var abAim = false, abAimed = false, abWarCried = false, abScreamed = false,
           abBraced = false, abDebtSettled = false, abStun = 0, abRoundTaken = 0,
@@ -395,6 +407,10 @@
         if (vHasAb('game_sense')) evade += 0.10;
         if (vHasAb('tracker')) evade += 0.05;
         if (vHasAb('echo_location') && abNight) evade += 0.10;
+        // DETECTION, HELD (godpath-buff 2026-10-14): the monster.detect_chance
+        // modifiers a villager holds (bird_whisperer, third_eye, beast_calm)
+        // read here the way they read for the player: seen first, given room.
+        if (gpF) { try { evade = GPf.fieldEvade(gpF, evade); } catch (e) { console.warn('[godpath] fieldEvade', e); } }
         evade = clamp(evade, 0.05, 0.90);
         if (RR() < evade) {
           rec.outcome = 'evade';
@@ -554,6 +570,7 @@
       var day = 0;
       try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
       if (day >= 7) holdBonus += 0.08;                       // post-System desperation
+      if (gpF && gpF.holdBonus) holdBonus += gpF.holdBonus;  // RALLY AURA held (godpath.js)
       vBreak = clamp(vBreak - holdBonus, 0.05, 0.6);
       // PARTY-UP (Steve 2026-10-09): when the trajectory turns hopeless and
       // help is near, they shout instead of scattering. One ally answers per
@@ -604,7 +621,9 @@
           if (acted[ai] === 'm' && !mStunnedThisRound) {
             // every live pack member acts — pack hunters hunt as a pack
             for (var mi = 0; mi < members.length; mi++) {
-              if (members[mi].hp <= 0 || !vAlive) continue;
+              // the lead fell earlier this round: the pack's coordination is
+              // gone — the rest scatter, they don't keep swinging (2026-10-14)
+              if (members[mi].hp <= 0 || !vAlive || members[0].hp <= 0) continue;
               // SIGNATURE MECHANICS (sigW3a.js, wave 3 batch A 2026-10-10):
               // the monster's real signature runs off-screen too — villagers
               // face the same fight. Consumes the member's action when it
@@ -721,6 +740,7 @@
               // the problem. The beast's eye stays on them: ally hit share
               // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
               var _allyShare = 0.4;
+              if (gpF && allyIn && allyHp > 0) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
               if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
                 abDrewFire = true;
                 _allyShare = 0.1;
@@ -733,6 +753,9 @@
                 abBodyguarded = true;
                 hittingAlly = false;
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
+              }
+              if (!hittingAlly && gpF && total > 0) {
+                try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round })); } catch (e) { console.warn('[godpath] incoming', e); }
               }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09): diminishing-returns curve,
@@ -750,6 +773,9 @@
               if (hittingAlly) {
                 allyHp -= total;
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                if (allyHp <= 0 && gpF) {
+                  try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
+                }
                 if (allyHp <= 0) {
                   allyIn = false;
                   rec.log.push(allyName + ' goes down!');
@@ -800,7 +826,28 @@
             try {
               trickAct = this.villagerTrickAction(vid, mdef, { round: round, vHp: vHp, vHpMax: vHpMax, lead: lead, rec: rec, vp: vp });
             } catch (e) { trickAct = null; }
-            if (trickAct) {
+            // GOD-PATH VERB (parity 2026-10-14): free verbs (Foresight, Coin
+            // Guard, Stoke) ride along; a turn verb spends the action.
+            var gpOut = null;
+            if (!trickAct && gpF) {
+              try {
+                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken }));
+                if (gpOut.vHp != null) vHp = gpOut.vHp;
+                if (gpOut.abStun) abStun += gpOut.abStun;
+                if (gpOut.dealt) rec.mDealt += gpOut.dealt;
+                if (gpOut.extraAlly && allyIn && allyHp > 0) {
+                  for (var _xa = 0; _xa < gpOut.extraAlly && lead.hp > 0; _xa++) {
+                    var _xad = lroll([3, 6]);
+                    lead.hp -= _xad; rec.mDealt += _xad; rec.allyDealt += _xad;
+                    if (lead.hp <= 0) lead.alive = false;
+                    rec.log.push('R' + round + ': ' + allyName + ' strikes again for ' + _xad + ' (' + Math.max(0, lead.hp) + ' left)');
+                  }
+                }
+              } catch (e) { console.warn('[godpath] fieldAct', e); gpOut = null; }
+            }
+            if (gpOut && gpOut.consumed) {
+              // the verb was the action this round (narrated in fieldAct)
+            } else if (trickAct) {
               // KILL ATTRIBUTION (2026-10-13): per-run trick-execution tally.
               // Non-persisted (Game._trickTally), gated with _attrKills — never
               // touches RNG, logic, or save state.
@@ -872,6 +919,7 @@
               if (!abDebtSettled && vHasAb('trade_of_blows') && abLastRoundTaken > 20) {
                 abDebtSettled = true; vd = Math.round(vd * 1.5); abNote += ' (debt settled 1.5x)';
               }
+              if (gpF) { try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } }
               lead.hp -= vd; rec.mDealt += vd;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + vName + ' strikes for ' + vd + abNote + ' (' + Math.max(0, lead.hp) + ' left)');
@@ -896,12 +944,27 @@
             _ve[roundAtkName] = true;
           } catch (e) {}
         }
+        if (vHp <= 0 && gpF) {
+          try { var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round })); if (_gpHp) { vHp = _gpHp; vAlive = true; } } catch (e) { console.warn('[godpath] cheat death', e); }
+        }
         if (vHp <= 0) { vAlive = false; rec.outcome = 'vDie'; break; }
         if (vHp / vHpMax < rec.minHpFrac) rec.minHpFrac = vHp / vHpMax;
         // COUNTER EXECUTION (2026-10-13): the dance is a per-round flag — a
         // mistimed dance (monster went first) must not leak into a later
         // downbeat. Clear after the round's phases all ran.
         rec.trickDance = 0;
+        // THE LEAD FELL THIS ROUND (unified tracks 2026-10-14): decide it
+        // before morale. Morale reads the first LIVE member, so a lead
+        // dropped by the villager's blow (haymaker x2) could still read as
+        // "hopeless" against the pack-mates and end in vFlee with the lead
+        // at 0 HP (a zombie entity). Surfaced once villagers learned track
+        // skills before the System's arrival.
+        if (members[0].hp <= 0) {
+          rec.outcome = 'vKill';
+          for (var mz = 0; mz < members.length; mz++) { members[mz].hp = 0; members[mz].alive = false; }
+          rec.log.push('The lead falls — the pack\'s coordination shatters. The rest scatter or die.');
+          break;
+        }
         // SITUATIONAL MORALE (Steve 2026-10-09): after a couple of rounds the
         // trajectory is legible. Winning -> commit (only the floor breaks
         // them). Hopeless and alone -> believable flight. Hopeless with help
@@ -1041,12 +1104,19 @@
       // VILLAGER XP (Steve 2026-10-09): fighting teaches. Kills teach double.
       // (vDie earns nothing -- the dead are done learning.)
       try {
-        if (vid && vid !== 'player' && this.villagerGainXP) {
-          if (rec.outcome === 'vKill') this.villagerGainXP(vid, 'combat', 2, 'monster kill');
-          else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee') this.villagerGainXP(vid, 'combat', 1, 'survived a fight');
-          else if (rec.outcome === 'evade') this.villagerGainXP(vid, 'field', 1, 'read the signs');
+        // PARITY (2026-10-14): the player's deed table, same n and caps —
+        // a kill is fight_won, a fight walked away from (fled, driven off,
+        // evaded) is fight_survived.
+        if (vid && vid !== 'player' && this.creditDeed) {
+          if (rec.outcome === 'vKill') this.creditDeed(vid, 'fight_won');
+          else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade') this.creditDeed(vid, 'fight_survived');
         }
-      } catch (e) {}
+        // VILLAGER KNOWLEDGE (parity 2026-10-14): whoever fought beside them
+        // watched their abilities work — what each does (L2).
+        if (vid && vid !== 'player' && this.npcWitnessAbility && (opts.allyVids || []).length) {
+          for (var _wi = 0; _wi < vAbs.length; _wi++) this.npcWitnessAbility(vAbs[_wi], opts.allyVids, vid);
+        }
+      } catch (e) { console.warn('[tracks] field fight deed', e); }
       // NON-LETHAL COUNTER LEARNING (Steve 2026-10-13): surviving teaches
       // the trick. A villager who lives through an encounter with a
       // trick-bearing beast brings home an observation — two observations

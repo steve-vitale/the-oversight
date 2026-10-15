@@ -90,23 +90,25 @@ async function main() {
   // w4: STANDING lane (2026-10-13, Steve: flexible route — the old two-rung
   // kill+scale gate is replaced by village Standing >= 100). 4 w3 points =
   // 100 standing -> wave 4 at ANY rank: the war path needs no links.
-  setDay(60); setLedger({ 3: W3 }); setFaced([]); setRank('regional');
+  // (audit 2026-10-14: the standing rungs now also need the wave-3 rung —
+  // 5 w2 points past the day floor — so W2 is credited too.)
+  setDay(60); setLedger({ 2: W2, 3: W3 }); setFaced([]); setRank('regional');
   check('w4 standing lane (4 w3 kills = 100) unlocks', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
   // w4: engagements score nothing (unchanged)
   setDay(60); setLedger({}); setFaced(['redactor', 'gavel', 'spool']); setRank('regional');
   check('w4 engagement-only (3 faced + regional) stays locked', Game.unlockedWave() < 4, 'uw=' + Game.unlockedWave());
   // w4: no rank floor anymore — war path at village rank unlocks via standing
-  setDay(60); setLedger({ 3: W3 }); setFaced([]); setRank('village');
+  setDay(60); setLedger({ 2: W2, 3: W3 }); setFaced([]); setRank('village');
   check('w4 war path (ledger full, village rank) unlocks via standing', Game.unlockedWave() >= 4, 'uw=' + Game.unlockedWave());
 
   // w5: STANDING lane — 200 standing AND wave-4 faced. 3 w4 kills = 75 < 200.
-  setDay(90); setLedger({ 4: W4 }); setFaced([]); setRank('national');
+  setDay(90); setLedger({ 2: W2, 4: W4 }); setFaced([]); setRank('national');
   check('w5 needs 200 standing (3 w4 kills = 75) stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
   // w5: 200 standing via war (8 w3 pts, 2/type cap) + wave-4 faced -> unlocks
-  setDay(90); setLedger({ 3: W3.concat(W3) }); setFaced(['congregation']); setRank('village');
+  setDay(90); setLedger({ 2: W2, 3: W3.concat(W3) }); setFaced(['congregation']); setRank('village');
   check('w5 standing lane (200 + w4 faced) unlocks', Game.unlockedWave() >= 5, 'uw=' + Game.unlockedWave());
   // w5: 200 standing but wave-4 never faced -> stays locked
-  setDay(90); setLedger({ 3: W3.concat(W3) }); setFaced([]); setRank('national');
+  setDay(90); setLedger({ 2: W2, 3: W3.concat(W3) }); setFaced([]); setRank('national');
   check('w5 without wave-4 faced stays locked', Game.unlockedWave() < 5, 'uw=' + Game.unlockedWave());
   // w5: engagements score nothing (unchanged)
   setDay(90); setLedger({}); setFaced(['congregation', 'strike']); setRank('national');

@@ -1,6 +1,6 @@
 // @ontology
 // system: party-bond
-// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER ability path (draw_fire/bodyguard/shield_wall/rally) carries the village-scale bond pool: the System offers its abilities to villagers who've bled beside others, and a completed path anchors the whole village.
+// description: Bond between villagers who fight and survive together. A combat dimension on the existing pair-bond store (betrayal.js), grows on shared survival, steadies them in combat, grieves proportionally on death. The SHIELDBEARER path (draw_fire/bodyguard/shield_wall/rally, villager skills) carries the village-scale bond pool: villagers who've bled beside others learn it, and a completed path anchors the whole village.
 // provides:
 //   - combatBondGet(a, b)
 //   - combatBondAdd(a, b, n)
@@ -28,8 +28,8 @@
   // ---------- THE SHIELDBEARER PATH: the stand-together ability path ----------
   // Steve 2026-10-12: the village-scale bond belongs to an ABILITY PATH, not
   // a godhood. Four abilities, one identity: the villager who stands between
-  // the monsters and everyone else. The System offers them to villagers who
-  // have bled beside others — the party bond (feature 1, for everyone) is the
+  // the monsters and everyone else. Villagers who have bled beside others
+  // learn them (skill-lane since 2026-10-14: skills, not System offers) — the party bond (feature 1, for everyone) is the
   // on-ramp to this path (feature 2). Grant order is fixed; the bond
   // threshold is the price. System_offer unlock stays for the player's route.
   var SHIELDBEARER_PATH = ['draw_fire', 'bodyguard', 'shield_wall', 'rally'];
@@ -182,7 +182,10 @@
       var g = global.Game;
       if (!g || !g.state) return 0;
       var sch = g.state.scholar || {};
-      var pAbs = (sch.abilities || []).map(function (a) { return (a && a.id) || a; });
+      // An evolved ability counts as its root (evolvedFrom keeps the lineage).
+      // ABILITY LANES (2026-10-14): known skill-lane abilities count too.
+      var pAbs = (typeof g.ownedAbilityIds === 'function') ? g.ownedAbilityIds()
+        : (sch.abilities || []).map(function (a) { return (a && (a.evolvedFrom || a.id)) || a; });
       var pCount = pathAbilityCount(pAbs);
       if (pCount >= 4) return 1;
       if ((sch.synergies || []).indexOf('stand_together') >= 0) return 1;
@@ -190,7 +193,8 @@
       var walking = pCount >= 2;
       for (var vid in npcAbs) {
         if (!livingVid(vid)) continue;
-        var n = pathAbilityCount(npcAbs[vid] || []);
+        // UNIFIED TRACKS (2026-10-14): villager skills count too (npcOwnedIds).
+        var n = pathAbilityCount((typeof g.npcOwnedIds === 'function') ? g.npcOwnedIds(vid) : (npcAbs[vid] || []));
         if (n >= 4) return 1;
         if (n >= 2) walking = true;
       }
@@ -198,16 +202,21 @@
     } catch (e) { return 0; }
   }
 
-  // noteShieldbearerOffer: the System's path grant. Called at fight end for
-  // villagers who fought. The System has been watching who bleeds beside
-  // whom — at bond thresholds it offers the next shieldbearer ability.
-  // Same honesty rules as the track grants: nothing before the System's
-  // arrival (day 7), the dead earn nothing, six slots like everyone.
+  // noteShieldbearerOffer: the shieldbearer path. Called at fight end for
+  // villagers who fought. At combat-bond thresholds the next path entry
+  // lands. Skill-lane entries (all four today) are LEARNED beside someone,
+  // from day one, no slot. A magic entry would be the System's offer: it
+  // waits for the arrival (day 7) and takes one of six slots. The dead
+  // earn nothing.
   function noteShieldbearerOffer(vid) {
     try {
       var g = global.Game;
       if (!g || !g.state || !vid || vid === g.villagerId) return;
-      if (!g.state.systemArrived) return;
+      // SKILLS PRE-SYSTEM (Steve 2026-10-14: "Human skills should be
+      // learnable before the system shows up"): the path's skill-lane
+      // entries are learned beside someone, so they need no watcher. Only a
+      // magic entry waits for the System's arrival (checked per id below).
+      var sysUp = !!g.state.systemArrived;
       if (!livingVid(vid)) return;
       var v = g.state.village || {};
       var roster = v.roster || [];
@@ -220,11 +229,17 @@
       }
       if (!who) return;
       var held = (v.npcAbilities || {})[vid] || [];
-      if (held.length >= 6) return; // six slots, same as you
       for (var k = 0; k < SHIELDBEARER_PATH.length; k++) {
         var id = SHIELDBEARER_PATH[k];
-        if (held.indexOf(id) >= 0) continue;
+        var isSkill = !!(g.isSkillLane && g.isSkillLane(id));
+        // UNIFIED TRACKS (2026-10-14): the shieldbearer abilities are skill-lane
+        // (villager skills, not slots) — ask npcHasAbility, or this re-offered
+        // the same one every fight.
+        if (held.indexOf(id) >= 0 || (g.npcHasAbility && g.npcHasAbility(vid, id))) continue;
         if (best < SHIELDBEARER_BOND[id]) return; // not yet — keep bleeding together
+        // magic waits for the System and takes a slot (six, same as you);
+        // a skill takes neither.
+        if (!isSkill && (!sysUp || held.length >= 6)) return;
         if (g.npcGrantAbility) g.npcGrantAbility(vid, id);
         else {
           v.npcAbilities = v.npcAbilities || {};
@@ -236,8 +251,16 @@
           if (def && def.name) aname = def.name;
         } catch (e2) {}
         var vname = vnameOf(vid), wname = vnameOf(who);
-        if (g.say) g.say('◈ THE SYSTEM has been watching ' + vname + ' — stood beside ' + wname + ' through blood and back. It offers ' + aname + '. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
-        try { if (g.journalNote) g.journalNote('system', 'grant', 'The System granted ' + vname + ' ' + aname + ' (' + id + ') for a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        // A skill-lane id is a villager SKILL (ability lanes 2026-10-14):
+        // learned beside someone, not offered by the System. Only magic
+        // keeps the System's voice.
+        if (isSkill) {
+          if (g.say) g.say(vname + ' has stood beside ' + wname + ' through blood and back — and learned ' + aname + ' from it. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
+          try { if (g.journalNote) g.journalNote('village', 'skill:' + vid + ':' + id, vname + ' learned ' + aname + ' (' + id + ') from a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        } else {
+          if (g.say) g.say('◈ THE SYSTEM has been watching ' + vname + ' — stood beside ' + wname + ' through blood and back. It offers ' + aname + '. The line needs its shieldbearer. Earned, not given. (' + id + ': shieldbearer path)');
+          try { if (g.journalNote) g.journalNote('system', 'grant', 'The System granted ' + vname + ' ' + aname + ' (' + id + ') for a combat bond of ' + best + ' with ' + wname + '.'); } catch (e3) {}
+        }
         try { if (g.tele) g.tele('villager_grant', { vid: vid, ability: id, track: 'shieldbearer', bond: best }); } catch (e4) {}
         return; // one offer per fight
       }

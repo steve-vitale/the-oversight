@@ -191,7 +191,7 @@ freshState();
 }
 
 // ================= BREAK 5: beam bond bump — bumpBond never existed =================
-console.log('BREAK 5: apBeamHit — bonded sentimental armor bond deepens');
+console.log('BREAK 5: keepsakes are not beam armor (Steve 2026-10-14: "was never a rule")');
 freshState();
 {
   // equip a bonded sentimental armor piece in torso.
@@ -206,8 +206,10 @@ freshState();
     // beam the player
     G.tbfight = { fighters: [], over: false };
     G.tbFighter = function (k) { return k === 'p' ? { key: 'p', name: 'You', hp: 100, alive: true } : null; };
+    check('a bonded sentimental armor piece is NOT a beam-resistant piece',
+      G.apBeamResistPieces().length === 0, 'pieces=' + G.apBeamResistPieces().length);
     G.apBeamHit('player', 0, 'test beam', {});
-    check('bond increased on the piece that caught the beam', piece.bond > before,
+    check('a beam hit does not change keepsake bond', piece.bond === before,
       'bond ' + before + ' -> ' + piece.bond);
   }
 }

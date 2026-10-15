@@ -26,7 +26,7 @@ const PAIRS = [
   ['foreignSpeech.json', 'foreignSpeech'], ['lifeseeds.json', 'lifeseeds'],
   ['arrivalText.json', 'arrivalText'], ['justiceVoice.json', 'justiceVoice'],
   ['alienPlayers.json', 'alienPlayers'], ['regions.json', 'regions'],
-  ['dramaEffects.json', 'dramaEffects'], ['monsterBehaviors.json', 'monsterBehaviors'],
+  ['monsterBehaviors.json', 'monsterBehaviors'],
   ['contests.json', 'contests'], ['events.json', 'events'],
   ['statusEffects.json', 'statusEffects'], ['cooking.json', 'cooking'],
 ];
@@ -93,6 +93,18 @@ Game.kcalCap = function() { return 2400; };
 Game.maxHealth = function() { return 100; };
 Game.havenViewership = function() { return (this.state.village || {}).viewership || 0; };
 
+// Pin distinct roles: the best talker (agency + trust/5) and the weakest
+// forager (lowest agency) must be different people, or the weakest's cost
+// reads as the talker's. Which villager is which is roster luck
+// (origins-world 2026-10-14 rerolled the cast); the trust ordering is pinned.
+function separateTalkerFromWeakest() {
+  const v = Game.state.village;
+  const ids = (v.roster || []).filter(id => id !== Game.villagerId && Game.isMember(id));
+  if (ids.length < 2) return;
+  const byWork = ids.slice().sort((a, b) => Game.agencyScore(a) - Game.agencyScore(b));
+  v.trust[byWork[0]] = 10; // the default: the -10 on appointment stays measurable
+  v.trust[byWork[byWork.length - 1]] = 100;
+}
 function setupAid(opts) {
   opts = opts || {};
   rng.reset(opts.seed != null ? opts.seed : SEED);
@@ -343,6 +355,7 @@ sec('8. help fights blow-by-blow');
 sec('9. the switchboard office');
 {
   setupAid();
+  separateTalkerFromWeakest();
   Game.state.networkLive = false;
   ok('office gated pre-regional', Game.switchboardAvailable() === false);
   Game.state.networkLive = true;
@@ -369,6 +382,7 @@ sec('9. the switchboard office');
 {
   // appoint the weakest forager: resentment is mechanical
   setupAid();
+  separateTalkerFromWeakest();
   const weakest = Game.switchboardCandidates().find(c => c.isWeakest);
   Game.appointSwitchboard(weakest.id);
   const mods = Game.state.village.moodMods || [];

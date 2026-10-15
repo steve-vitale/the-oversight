@@ -113,6 +113,10 @@ function mkPersonCorpse(trust, dayDied) {
 
   // 7. codex attunement stages
   freshGame();
+  // ABILITY LANES (2026-10-14): occupations now teach their human
+  // competences as codex skills, so a random background can start near the
+  // breadth-15 attunement line. Stage tests need a thin codex.
+  Game.state.codex.skills = {};
   ok('pre-System attunement 0', Game.codexAttunement() === 0);
   Game.state.systemArrived = true;
   ok('post-arrival attunement 1', Game.codexAttunement() === 1);

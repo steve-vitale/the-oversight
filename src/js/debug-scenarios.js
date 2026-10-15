@@ -54,7 +54,8 @@
     s.inventory = s.inventory || [];
     s.inventory.push({ itemId, units: 1, kcalEach: 0, kg: 0.5, name: def.name || itemId, bonded: true, bond: 0, bondOffered: [], enhancements: [] });
     s.equipped = s.equipped || {};
-    s.equipped.weapon = { itemId, name: def.name || itemId };
+    const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
+    s.equipped[wslot] = { itemId, name: def.name || itemId };
     if (ammoId && ammoN) {
       const adef = (Game.data.items || []).find(i => i.id === ammoId) || {};
       s.inventory.push({ itemId: ammoId, material: ammoId, units: ammoN, kcalEach: 0, kg: 0.05, name: adef.name || ammoId });
@@ -150,7 +151,80 @@
   }
   Game.debugToWildNode = toWildNode; // test hook (break-it travel 2026-10-08)
 
+  // THE TABLE IS SET (2026-10-14, Overtime / the Network / THE HOSTS): a
+  // fresh run pushed to day 100 with a real LESSER seat — waves 4/4/3
+  // faced, 2 contests, 2 crises, regional, stage 2, the food deeds — and
+  // the table announced. Real state, no stubs: tableSeat() computes it.
+  function tableSetRun(tier) {
+    freshGame();
+    try { Game.depart(); } catch (e) { console.warn('debug depart', e); }
+    const s = Game.state.scholar, pg = Game.progState();
+    Game.state.systemArrived = true;
+    Game.state.networkLive = true;
+    s.day = 100; s.integration = Math.max(s.integration || 0, 45);
+    const d = Game.deedState();
+    const byWave = { 1: 4, 2: 4, 3: 3 };
+    for (const m of (Game.data.monsters || [])) {
+      const w = m.wave || 1;
+      if (byWave[w] > 0 && !m.campaignOnly) { d.wavesFaced[m.id] = w; byWave[w]--; }
+    }
+    d.contestsSurvived = 2;
+    pg.crises = Object.assign({ 'first-grave': 1, 'hunger-winter': 1 }, pg.crises || {});
+    pg.sentimentTaught = true;
+    s.prog = s.prog || {}; s.prog.feastSurgeUsed = true;
+    pg.arc = 4; pg.tableWaiting = true; pg.tableAnnounced = true;
+    pg.overtimeStarted = true; pg.overtimeDays = 7 * (tier | 0); pg.overtime = tier | 0;
+    pg.overtimeLastDay = s.day; pg.overtimeRoster = ((Game.state.village || {}).roster || []).slice();
+    return { s, pg };
+  }
+  function debugCoalition(n) {
+    const allies = [];
+    for (let i = 0; i < n; i++) allies.push({ villageId: 'debug_v' + (i % 10), vid: 'debug_b' + i, name: 'Blade ' + (i + 1), hp: 100, outfitted: [], gearValue: 0, wbonus: 3, varmor: 3 });
+    return { allies, haven: [], day: (Game.state.scholar || {}).day || 0, outfitted: {} };
+  }
+
   const SCENARIOS = {
+    // OVERTIME (2026-10-14): the table is set and you kept it waiting three
+    // weeks. Haven shows OVERTIME ×3; wave-4/5 fights are RERUNS ×3.
+    overtime3() {
+      tableSetRun(3);
+      toWildNode();
+      const s = Game.state.scholar;
+      giveWeapon('hunting_spear');
+      s.mx = 2; s.my = 4;
+      s.monster = { id: 'cancellation', mx: 5, my: 4 };
+      Game.say('🐞 SCENARIO: OVERTIME ×3 — the Table has waited three weeks. Haven shows the cost. Walk east: the Cancellation is a RERUN ×3 (+75% HP, +36% damage, +1 in the pack). Sleep a week to see ×4.');
+    },
+    // THE NETWORK (2026-10-14): all three titans slain at overtime ×3 — the
+    // Network is summoned; a 20-blade debug coalition stands with you at
+    // its first node (the northwest mast).
+    network() {
+      tableSetRun(3);
+      const st = Game.state.titans = Game.state.titans || { omens: {}, musters: {}, slain: {}, cast: null };
+      st.slain = Object.assign(st.slain || {}, { herald: true, nielsen: true, finale: true });
+      st.musters = st.musters || {};
+      Game.state.worldMonsters = [];
+      Game.networkSummon();
+      st.musters.the_network = debugCoalition(20);
+      const c = Game.networkCampaign();
+      const first = Game.networkNodes()[0];
+      const t = c.tiles[first.id];
+      Game.map.px = t.x; Game.map.py = t.y;
+      const s = Game.state.scholar;
+      s.insideHaven = false; s.mx = 1; s.my = 4;
+      giveWeapon('hunting_spear');
+      Game.say('🐞 SCENARIO: THE NETWORK — you stand at ' + first.title + ' with 20 debug blades. Fight it: 9 nodes, in order, the dead stay dead. (Debug: Game.networkStatus() shows the march.)');
+    },
+    // THE HOSTS (2026-10-14): the Network has fallen; you sit at the Table.
+    // Walk any door — its last choice includes THE HOSTS.
+    takenhome() {
+      const r = tableSetRun(3);
+      const st = Game.state.titans = Game.state.titans || { omens: {}, musters: {}, slain: {}, cast: null };
+      st.slain = Object.assign(st.slain || {}, { herald: true, nielsen: true, finale: true, the_network: true });
+      r.pg.networkSummoned = true; r.pg.networkFallen = true;
+      Game.tableScene();
+      Game.say('🐞 SCENARIO: THE HOSTS — the Network is off the air and you have sat at the Table. Walk a door; its final choice includes THE HOSTS (light: An Open Table, dark: The New Network).');
+    },
     // 1. Deer encounter — bow in hand, deer adjacent, dawn.
     deer() {
       freshGame();
@@ -2174,6 +2248,9 @@
       ['w5crew', '📺 The Commercial Break fight'],
       ['w5opening', '🎞️ The Opening Credits fight'],
       ['w5note', '📝 The Network Note fight'],
+      ['overtime3', '⏱ Overtime ×3 — the Table kept waiting'],
+      ['network', '📡 THE NETWORK — the key campaign'],
+      ['takenhome', '🍽️ THE HOSTS — the key ending at the Table'],
       ['audioWaves', '🔊 Sound check: wave 3-5 voices (32, tagged)'],
       ['audioAnimals', '🐾 Sound check: animal voices (real vs placeholder)'],
       ['audioWeapons', '⚔️ Sound check: weapon & item placeholders'],
@@ -2243,6 +2320,7 @@
       '🔊 Audio — sound check': ['audioSystem', 'audioVillager', 'audioPersona', 'audioClaude', 'audioWaves', 'audioAnimals', 'audioWeapons', 'musicMenu', 'musicAmbience', 'musicStingers', 'musicContest', 'footsteps'],
       '🎬 VFX & Milestones': ['vfxShowcase', 'milestoneWave'],
       '💍 Items': ['keepsake'],
+      '🍽️ Endgame — the Key': ['overtime3', 'network', 'takenhome'],
       '🌍 Scale': ['scaleDawn', 'scaleCouncil', 'scaleCharter', 'scaleCourt', 'scaleWatchers', 'scaleVillage', 'scaleRegional', 'scaleNational', 'scaleGlobal'],
     };
     // Only include categories that have at least one existing scenario

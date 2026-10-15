@@ -49,7 +49,11 @@ async function main() {
   if (Game.drama === undefined) Game.drama = function () {};
   await Game.init();
 
-  const knackIds = () => (Game.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'latent_knack').map(a => a.id);
+  // ABILITY LANES (2026-10-14): the knack pool is Game.knackPool() — magic
+  // latent knacks plus System abilities that merged a knack (alsoKnack:
+  // night_eyes, iron_stomach <- iron_gut). Waywise/Still Hands/Storm-ear
+  // became human skills (pathfinder/steady_hands/weather_read): 9 -> 6.
+  const knackIds = () => Game.knackPool().map(a => a.id);
 
   function freshRun() {
     Game.genRoster('Columbus, Ohio');
@@ -60,17 +64,18 @@ async function main() {
 
   // ---------- (f) pool purity ----------
   console.log('(f) knack pool purity');
-  const knacks = (Game.data.abilities || []).filter(a => a.unlock && a.unlock.type === 'latent_knack');
-  ok(knacks.length >= 9, 'knack pool has 9+ entries', knacks.length);
-  ok(knacks.every(k => k.pool === 'latent_knack'), 'all knacks pool=latent_knack');
-  ok(knacks.every(k => k.unlock.type !== 'system_offer'), 'no knack is system_offer unlock');
+  const knacks = Game.knackPool();
+  ok(knacks.length >= 6, 'knack pool has 6+ entries', knacks.length);
+  ok(knacks.every(k => k.pool === 'latent_knack' || k.alsoKnack), 'all knacks pool=latent_knack (or a merged System ability)');
+  ok(knacks.every(k => k.lane === 'magic'), 'every knack is magic (no human skill)');
+  ok(knacks.every(k => k.alsoKnack || k.unlock.type !== 'system_offer'), 'no pure knack is system_offer unlock');
   ok(knacks.every(k => k.tier !== 'vile' && k.tier !== 'body_horror'), 'no vile/body_horror tiers');
   ok(knacks.every(k => (k.modifiers || []).length > 0), 'every knack has a real modifier');
   ok(knacks.every(k => k.memory && k.memory.includes('{kin}')), 'every knack has a lifeseed memory');
   // Steve 2026-10-14: the knack is System-given, not innate — descriptions must
   // frame it as ARRIVING recently, never as "always had" / lifelong
   const innateRe = /always had|always been|born with|my whole life|lifelong|since I was/i;
-  ok(knacks.every(k => !innateRe.test(k.description || '')), 'no "always had" in descriptions');
+  ok(knacks.every(k => !innateRe.test(k.knackDescription || k.description || '')), 'no "always had" in descriptions');
   ok(knacks.every(k => !innateRe.test(k.memory || '')), 'no "always had" in memories');
 
   // ---------- (a) spawn offers 3 lifeseed-tied choices ----------

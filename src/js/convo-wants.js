@@ -1371,14 +1371,22 @@
       p.kept = 'broken';
       const favor = this.convoGetFavor(vid);
       if (favor && favor.id === p.favorId) favor.state = 'broken';
-      const t = v.trust || (v.trust = {});
+      const t = v.trust || {};
       // RENOUNCE MAKER (journey-succession r11 2026-10-14): the broken word is
       // the renouncer's — stamp maker like the rot path does (game.js), so a
       // successor isn't refused amends for a promise they never made (canon:
       // "it's not yours to carry"). trustAtBreak is the pre-penalty standing,
       // matching the rot path — the decay refusal reads it later.
       const trustAtBreakRen = (t[vid] == null ? 10 : t[vid]);
-      t[vid] = Math.max(0, (t[vid] || 10) - 15);
+      // Through the one consequence path (convo-scene.js) like every other
+      // conversation trust move; talk:false — breaking your word is an act.
+      if (typeof this.resolveConsequence === 'function') {
+        this.resolveConsequence(vid, { trust: -15, mood: 0, temper: 'neutral', talk: false, name: 'favor_renounce' });
+      } else {
+        // convo-scene.js not loaded (some unit harnesses): same delta, direct
+        const tw = v.trust || (v.trust = {});
+        tw[vid] = Math.max(0, trustAtBreakRen - 15);
+      }
       try { this.remember(vid, 'promise_broken', p.favorTask || p.goal, { trustAtBreak: trustAtBreakRen, maker: p.maker || this.villagerId }); } catch (e) {}
       try { this.journalLearn(vid, 'promise', { text: p.favorTask || 'a promise', status: 'broken' }, {}); } catch (e) {}
       try { this.say(`${this.displayName(vid)} goes quiet. "...Okay." The air between you cools a degree.`); } catch (e) {}

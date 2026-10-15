@@ -58,6 +58,10 @@ async function fresh() {
   {
     const { v, me, npcs } = await fresh();
     const target = npcs[0], listener = npcs[1];
+    // Pin a talker: a prickly/withdrawn first hearer passes stories on at
+    // 12%, so whether 12 rumors travel at all was roster luck (origins-world
+    // 2026-10-14 rerolled the cast). 'steady' = the ordinary 35%.
+    { const rec = (Game.data.villagers || []).find(x => x.id === listener); if (rec) { rec.personality = rec.personality || {}; rec.personality.temperament = 'steady'; } }
     const types = ['untrustworthy', 'scheming', 'coward', 'stingy'];
     const startKcal = Game.state.scholar.kcal;
     v.trust[target] = 50;

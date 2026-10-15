@@ -509,7 +509,7 @@ function talkRound(Game, ctx) {
     const vv = Game.state.village;
     const roster = (vv.roster || []).filter(id => id !== Game.villagerId);
     if (!roster.length || !Game.talkTo) return;
-    const vid = roster[Math.floor(Math.random() * roster.length)];
+    const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
     try {
       Game.talkTo(vid);
       try { Game.endConvo(vid, 'left'); } catch (e2) {} // don't leave modal state open
@@ -809,9 +809,49 @@ function walkTo(Game, hx, hy) {
       if (!best) break;
       const px0 = Game.map.px, py0 = Game.map.py;
       try { Game.travelTo(best.x, best.y); } catch (e) { break; }
-      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+      if (Game.map.px === px0 && Game.map.py === py0) {
+        // refused: stay put, safely — or (opt-in) go around, as the
+        // blockage card's own "Go around" button offers a human.
+        if (routeAroundOn() && routeAround(Game, hx, hy)) continue;
+        break;
+      }
     }
   } catch (e) {}
+}
+// ROUTE AROUND (tuning 2026-10-15, opt-in COMPETENT_ROUTE_AROUND=1, set by
+// capable): walkTo stopped dead at the first refused step. A fallen tree
+// guarding the haven's approach side left the bearer one tile from home for
+// days, out of water and food, until dehydration killed them (seed 42 day
+// 27; 18 of 64 baseline runs had a dehydration death). A human taps "Go
+// around". BFS over orthogonal steps the engine's own travelBlockage allows,
+// then walk the first step. Returns true when it moved.
+function routeAroundOn() { return process.env.COMPETENT_ROUTE_AROUND === '1'; }
+function routeAround(Game, hx, hy) {
+  try {
+    const N = (Game.map && Game.map.worldSize) || 9;
+    const sx = Game.map.px, sy = Game.map.py;
+    const key = (x, y) => x + ',' + y;
+    const prev = {}; prev[key(sx, sy)] = null;
+    const q = [[sx, sy]];
+    while (q.length) {
+      const [x, y] = q.shift();
+      if (x === hx && y === hy) break;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N || key(nx, ny) in prev) continue;
+        let blocked = true;
+        try { blocked = !!Game.travelBlockage(nx, ny, x, y); } catch (e) { blocked = true; }
+        if (blocked) continue;
+        prev[key(nx, ny)] = [x, y];
+        q.push([nx, ny]);
+      }
+    }
+    if (!(key(hx, hy) in prev)) return false;
+    let cur = [hx, hy];
+    while (prev[key(cur[0], cur[1])] && !(prev[key(cur[0], cur[1])][0] === sx && prev[key(cur[0], cur[1])][1] === sy)) cur = prev[key(cur[0], cur[1])];
+    try { Game.travelTo(cur[0], cur[1]); } catch (e) { return false; }
+    return Game.map.px !== sx || Game.map.py !== sy;
+  } catch (e) { return false; }
 }
 // nearest rubble-choked path in travel reach (from the player's tile)
 function nearestRubble(Game) {
@@ -1621,7 +1661,28 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
         if (dd < bd) { bd = dd; bx = cx; by = cy; }
       }
       if (bx != null) {
-        try { Game.tbPlayerMove(bx, by); } catch (e) {}
+        // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
+        // path got this fix in r6, this one didn't — tbPlayerMove refuses a
+        // destination past this turn's movement ("Too far"), so a far trick
+        // target was a no-op every turn. Walk as far as moveLeft pays for
+        // (terrain priced like tbPlayerMove prices it).
+        try {
+          let dx = bx, dy = by;
+          if (typeof Game.findPath === 'function') {
+            const path = Game.findPath(px, py, bx, by);
+            if (path && path.length) {
+              let cost = 0, idx = -1;
+              for (let i = 0; i < path.length; i++) {
+                let c = 1;
+                try { c = Game.tbTerrainCost ? Game.tbTerrainCost(path[i][0], path[i][1]) : 1; } catch (e) { c = 1; }
+                if (cost + c > (p.moveLeft || 0)) break;
+                cost += c; idx = i;
+              }
+              if (idx >= 0) { dx = path[idx][0]; dy = path[idx][1]; }
+            }
+          }
+          Game.tbPlayerMove(dx, dy);
+        } catch (e) {}
         ctx.closed = (ctx.closed || 0) + 1;
       }
       endTurn();
@@ -2292,6 +2353,22 @@ const competent = {
     // Outward legs (stoneRun's frontier pushes, forage trips, counterPlay,
     // workTrapline) are skipped while recovering() is true; haven chores
     // below (sort, donate, teach, talk) still run.
+    // THIRST HOME (tuning 2026-10-15, with COMPETENT_ROUTE_AROUND): no water
+    // carried and hydration low -> walk home and drink before anything else.
+    // The bot sat on a trail tile for 6 days at hydration 0 with a fed belly
+    // while the cistern held clean water (seeds 2026, 43): recovering() only
+    // reads kcal and hp. The game says "DEHYDRATED: find and treat water
+    // today." — a human listens.
+    if (routeAroundOn()) {
+      try {
+        const s = Game.state.scholar;
+        if ((s.hydration || 0) < 45 && !(s.water || []).length && !Game.playerAtHaven()) {
+          walkTo(Game, DIR_FLEE_HAVEN.x, DIR_FLEE_HAVEN.y);
+          drinkSafe(Game, ctx);
+          ctx.thirstHome = (ctx.thirstHome || 0) + 1;
+        }
+      } catch (e) { ctx.thirstHomeErr = String(e && e.message).slice(0, 80); }
+    }
     const rec = recovering(Game, ctx);
     if (rec) recoverStep(Game, ctx);
     // the honest food run: forage, sort the haul at camp, sow seed first,
@@ -2347,7 +2424,7 @@ const competent = {
           const vv = Game.state.village || {};
           const roster = (vv.roster || []).filter(id => id !== Game.villagerId);
           if (roster.length) {
-            const vid = roster[Math.floor(Math.random() * roster.length)];
+            const vid = roster[Math.floor((global.__policyRandom || Math.random)() * roster.length)];
             const r = Game.askAbout(vid, 'beasttricks');
             if (r && r.taught) ctx.beastTricks = (ctx.beastTricks || 0) + 1;
           }
@@ -2604,4 +2681,5 @@ const competent = {
   },
 };
 
-module.exports = { competent, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+module.exports = { competent, beastStrikeTarget, walkTo, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE };
+

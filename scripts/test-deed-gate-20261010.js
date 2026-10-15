@@ -178,7 +178,15 @@ function abortFight(Game) {
   said.length = 0;
   Game.checkArc();
   ok('D: invitation re-fired when full deed set holds', !!pg().tableWaiting);
-  ok('D: re-fire said aloud', said.join(' ').includes('being set'));
+  // NO SPOILERS (Steve 2026-10-14): before day 90 the re-fire is silent;
+  // from day 90 it is said aloud. Assert both halves.
+  const _day = (Game.state.scholar || {}).day || 0;
+  if (_day < 90) ok('D: re-fire silent before day 90 (no spoilers)', !said.join(' ').includes('being set'));
+  pg().tableWaiting = false; pg().tableAnnounced = false; said.length = 0;
+  Game.state.scholar.day = 95;
+  Game.checkArc();
+  ok('D: re-fire said aloud from day 90', said.join(' ').includes('being set'));
+  Game.state.scholar.day = _day;
   ok('D: arcBeat not re-run (arcSeen intact)', pg().arcSeen[4] === true);
 
   // ---------- 5. Scenario C: genuine powerhouse, all five waves ----------

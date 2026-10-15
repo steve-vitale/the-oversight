@@ -185,7 +185,8 @@ function attachDmgAudit(Game) {
       let applied;
       try { closeIfAbandoned(); ensureOpen(); } catch (e) {}
       try { applied = origTD.apply(this, arguments); } catch (e) { throw e; }
-      try { recordDamage(sourceKey, targetKey, applied); } catch (e) {}
+      // AUDIT FIX 2026-10-14: player strikes pass sourceKey null + label 'you'
+      try { recordDamage(sourceKey == null && sourceLabel === 'you' ? 'p' : sourceKey, targetKey, applied); } catch (e) {}
       return applied;
     };
     w._dmgWrapped = true;
@@ -257,9 +258,28 @@ function attachDmgAudit(Game) {
   if (typeof origTE === 'function' && !origTE._dmgWrapped) {
     const w = function (result) {
       const rec = audit.open;
+      // AUDIT FIX 2026-10-14: snapshot the bearer BEFORE tbEnd — a 'lost'
+      // fight runs playerDeath inside tbEnd and restores a SUCCESSOR, so
+      // reading HP afterwards recorded deaths as full-HP survivals.
+      let pre = null;
+      try {
+        const f0 = this.tbFighter ? this.tbFighter('p') : null;
+        const s0 = (this.state || {}).scholar || {};
+        pre = { hp: f0 ? Math.round(f0.hp || 0) : Math.round((s0.hp != null ? s0.hp : s0.health) || 0), alive: f0 ? f0.alive !== false : true, vid: this.villagerId };
+      } catch (e) {}
       let r;
       try { r = origTE.apply(this, arguments); } catch (e) { throw e; }
-      try { if (rec) closeRecord(rec, result); } catch (e) {}
+      try {
+        if (rec) {
+          closeRecord(rec, result);
+          if (pre) {
+            rec.phpEnd = pre.hp;
+            const succeeded = pre.vid != null && this.villagerId !== pre.vid;
+            rec.playerDied = pre.hp <= 0 || !pre.alive || succeeded || !!this.over;
+            rec.succession = succeeded;
+          }
+        }
+      } catch (e) {}
       return r;
     };
     w._dmgWrapped = true;

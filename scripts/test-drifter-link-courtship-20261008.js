@@ -105,10 +105,19 @@ const ok = (name, cond, extra) => {
   ov.opinion = 0;
   reseed();
   const colder = Game.judgeLink(ov.id, { asSubordinate: true, tributeKcalPerWeek: 3000 });
+  // judgeLink's +-10 noise uses hierarchy.js's load-time Math.random (R), which
+  // reseed() cannot reset, so one call each compared noise, not opinion
+  // (it flipped when origins-world 2026-10-14 shifted the RNG stream).
+  // Compare means over 40 calls each: opinion +8 courted is +12 in the formula.
+  const meanScore = (op) => { ov.opinion = op; let t = 0; for (let i = 0; i < 40; i++) t += Game.judgeLink(ov.id, { asSubordinate: true, tributeKcalPerWeek: 3000 }).score; return t / 40; };
+  const courtedMean = meanScore(op0 + 8), coldMean = meanScore(0);
+  ov.opinion = 0;
   ok('courtship raises the judged score (opinion feeds the formula)',
-    cold.score > colder.score, `courted=${cold.score} cold=${colder.score}`);
+    courtedMean > coldMean + 6, `courted mean=${courtedMean.toFixed(1)} cold mean=${coldMean.toFixed(1)} (single: ${cold.score}/${colder.score})`);
+  // Mean, not the single call: the single score carries the same unreseedable
+  // +-10 noise as above (a name-culture data change 2026-10-14 drew 57 once).
   ok('cold proposal score is no longer a near-guarantee (base 38)',
-    colder.score < 55, `cold score=${colder.score}`);
+    coldMean < 55, `cold mean=${coldMean.toFixed(1)} (single: ${colder.score})`);
 
   // --- proposeLink decline path still works and costs opinion ---
   ov.opinion = -100; // force a decline

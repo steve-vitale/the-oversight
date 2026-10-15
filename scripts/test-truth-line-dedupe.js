@@ -5,14 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
-Game.say = function () {};
+// Loader: scripts/godpath/lib.js — index.html script order, seeded
+// Math.random, frozen Date.now (flake fix 2026-10-14; the old
+// hand-rolled eval list was unseeded and missed modules).
+const K = require('./godpath/lib');
+let Game;
 
 let pass = 0, fail = 0;
 function ok(name, cond) {
@@ -21,7 +18,7 @@ function ok(name, cond) {
 }
 
 (async () => {
-  await Game.init();
+  Game = await K.load({ seed: Number(process.env.SEED || 20261006) }); // narration silenced (was Game.say = () => {})
   Game.genRoster('Columbus, Ohio');
   Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
 
@@ -56,8 +53,12 @@ function ok(name, cond) {
   // 4. No state at all (pre-game / fallback): still no crash, still no same-villager repeat.
   const saved = Game.state;
   Game.state = null;
-  const c = Game.drawTruthLine('attacks', 'nobody', { first: 'Nobody' });
-  const d = Game.drawTruthLine('attacks', 'nobody', { first: 'Nobody' });
+  // A REAL villager (flake fix 2026-10-14): the stateless fallback remembers
+  // the last line on the villager record (vp.truthLineLast). The old probe
+  // used the made-up id 'nobody', for which vpOf returns a fresh {} each call
+  // — nothing to remember on, so c === d on 1 draw in pool.length.
+  const c = Game.drawTruthLine('attacks', vids[0], { first: 'Nobody' });
+  const d = Game.drawTruthLine('attacks', vids[0], { first: 'Nobody' });
   Game.state = saved;
   ok('drawTruthLine works with null state and avoids consecutive repeats', typeof c === 'string' && c !== d);
 
