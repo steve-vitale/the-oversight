@@ -14,6 +14,13 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Garden recipient diagnosis (2026-10-16): Codex audits godverbs.js's existing
+daily feeding/payment boundary through source-pinned prepared calls and every
+holdout cohort with sampled NPC Garden exposure. This unit changes no runtime,
+policy, food amount or seven-day deed. Preserve the measured player omission,
+stale-dead caster, duplicate count and zero-recipient marker observations before
+a separate recipient/food-settlement repair. See the dated garden-recipient audit.
+
 Table entry ownership (2026-10-16): Codex owns table.js's public entry
 guard and the native Haven seat button's readiness/reason. Match actual
 havenStoresAccess, including full-integration remote access and exile.

@@ -43,6 +43,17 @@ contest rule, audience reaction, judged advantage or mercy choice.
 
 ## Concrete gaps to take next
 
+Garden recipient follow-up (2026-10-16): the source-bound diagnosis is in
+../../evidence/2026-10-16/garden-recipient-audit.md. Prepared same-verb calls
+confirm NPC caster hunger20->28, another NPC60->0, but player reserve300->300.
+A stale dead holder on the roster can cast; duplicate other-person entries
+inflate the fed count; a lone hungry caster pays for zero fed recipients and
+still stamps harvestDay. Departed and unaffordable holders do not cast in the
+controls. These are observations, not passing feature contracts. A separate
+repair must reconcile canonical living membership, actual recipient hunger,
+player fullness versus war-chest capacity, and meaningful daily commitment.
+No food amount, daily effect or authored Garden deed is changed by the audit.
+
 1. Finish the existing weakness/cost contracts before claiming forty working
    scale effects. Field Gilded Guard previously intercepted beams that already
    bypassed the tactical guard. The selected attack and beam component now

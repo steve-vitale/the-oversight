@@ -61,6 +61,19 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Garden recipient diagnosis (2026-10-16): **unresolved repair**, no survival
+lever changed. Current200-kcal NPC casting pays8 hunger but excludes the
+player in addition to the actual holder. Prepared player reserve300 remains
+300 while another NPC hunger60 becomes0. Dead/stale holder validity, duplicate
+counting and zero-recipient daily commitment also need correction/audit.
+Do not turn this observation into an unpriced player reserve refill: fullness,
+bank capacity, metabolism/reactor behavior, caster dinner and daily armed
+combat power are different contracts. Any chosen repair must preserve its
+cost, avoid invented harvest/deed provenance, prove real dawn/load callers,
+and retain all policy survival/community/resource effects. No claim that a
+prepared dead-roster case occurred naturally. Source-bound cohort exposure
+and eight prepared observations: ../evidence/2026-10-16/garden-recipient-audit.md.
+
 Table entry ownership (2026-10-16): **retain**, needs-eyes. Entry timing/access
 is a survival lever: it decides when ambient pressure stops and which story
 owns an existing activity. Apply actual Haven-panel access to the public action,

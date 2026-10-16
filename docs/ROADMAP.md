@@ -610,6 +610,17 @@ the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
   `evidence/2026-10-15/deed-audit.md` and `scripts/godpath/deed-screen.js`.
 
 ### 4. God scale effects
+
+Garden recipient audit (2026-10-16): the current NPC daily cast fills other
+NPC bellies but omits a distinct player. Prepared source-pinned cases also
+expose stale-dead casting, duplicate fed counts and a paid zero-recipient
+harvest marker. All sampled NPC-Garden holdout cases are replayed through the
+standard driver with unchanged rows/hashes/23metrics. This establishes actual
+usage coverage plus separate prepared defects, not balance or a completed
+repair. Next implement/prove canonical living recipient settlement and compare
+survival/resource directions before adopting it. Garden's seven-day feeding
+interpretation and the reactor question remain separate and unanswered.
+See ../evidence/2026-10-16/garden-recipient-audit.md.
 - **Recovery progress (2026-10-15):** all ten god verbs now have real
   player/villager callers, food costs and weaknesses. Party/titan interactions
   include returned ally damage, rooting titans, raising fallen allies and

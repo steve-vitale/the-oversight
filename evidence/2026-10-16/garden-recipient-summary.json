@@ -1,0 +1,48 @@
+{
+  "sourceDigest": "e29bacba1cdd83c376a2d4db5d09edfbd8951f55a18c199d7947c6fb7917965f",
+  "selection": "All holdout cases with sampled eligible NPC Living Garden; player-only cases excluded from this NPC daily-caster audit",
+  "neutralReplays": 105,
+  "policies": [
+    {
+      "policy": "capable",
+      "selectedCases": 20,
+      "panelCases": 64,
+      "npcCastCases": 7,
+      "npcCasts": 79,
+      "playerCastsInSelectedCases": 58,
+      "npcCastsWithPlayerKcalBelow500": 6,
+      "npcCastsWithZeroFed": 0
+    },
+    {
+      "policy": "maker",
+      "selectedCases": 24,
+      "panelCases": 64,
+      "npcCastCases": 12,
+      "npcCasts": 84,
+      "playerCastsInSelectedCases": 195,
+      "npcCastsWithPlayerKcalBelow500": 1,
+      "npcCastsWithZeroFed": 0
+    },
+    {
+      "policy": "merchant",
+      "selectedCases": 24,
+      "panelCases": 64,
+      "npcCastCases": 3,
+      "npcCasts": 53,
+      "playerCastsInSelectedCases": 73,
+      "npcCastsWithPlayerKcalBelow500": 0,
+      "npcCastsWithZeroFed": 0
+    },
+    {
+      "policy": "caregiver",
+      "selectedCases": 37,
+      "panelCases": 64,
+      "npcCastCases": 13,
+      "npcCasts": 144,
+      "playerCastsInSelectedCases": 235,
+      "npcCastsWithPlayerKcalBelow500": 0,
+      "npcCastsWithZeroFed": 0
+    }
+  ],
+  "note": "Conditional sampled-holder cohort, not independent campaigns or a balance comparison. Snapshots occur at actual cast telemetry after settlement. Low reserve is not a measured food deficit; reactor/metabolism, cap and location matter. No causal player kcal increment is inferred from the natural snapshot."
+}
