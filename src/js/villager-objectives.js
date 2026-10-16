@@ -258,8 +258,20 @@
       // the ability they're building toward weights the matching errand.
       var needTrack = null;
       try { needTrack = this.villagerNeedTrack ? this.villagerNeedTrack(vid) : null; } catch (e) { console.warn('[objectives] needTrack', e); }
-      var water = 99;
-      try { water = ((v.water || {}).clean == null) ? 99 : v.water.clean; } catch (e) {}
+      // DESIGNCALL 7 (2026-10-16): thirst measured in days of village supply.
+      // The village shares one cistern (villageDrinks: 2L/head/day) — this is
+      // the honest signal, not a per-villager thirst stat.
+      var waterDays = 99;
+      try {
+        var _wliv = 0;
+        for (var _wli = 0; _wli < (v.roster || []).length; _wli++) {
+          var _wvp = this.vpOf((v.roster || [])[_wli]);
+          if (_wvp && !_wvp.dead) _wliv++;
+        }
+        var _wdem = 2 * Math.max(1, _wliv);
+        var _wsup = ((v.water || {}).clean || 0) + ((v.water || {}).dirty || 0);
+        waterDays = _wsup / _wdem;
+      } catch (e) {}
       var cands = [];
       if (needTrack === 'field' && maxD > 0) cands.push({ kind: 'FORAGE', w: 1.5 });
       if (needTrack === 'social') cands.push({ kind: 'HAVEN_CHORE', w: 1.2, chore: 'teach' });
@@ -278,8 +290,19 @@
         if (prof === 'homebody' && pantry >= 2000 && (n.hunger || 0) <= 60) w = 0;
         if (w > 0) cands.push({ kind: 'FORAGE', w: w });
       }
-      // WATER — the well runs dry; someone has to walk.
-      if (water < 3) cands.push({ kind: 'WATER', w: 3.5 });
+      // WATER — the cistern is the village's thirst, measured against what the
+      // village actually drinks (2L/head/day, see villageDrinks in game.js).
+      // DESIGNCALL 7 (2026-10-16): the old gate was a binary cliff at <3L
+      // clean against a ~24L/day drain — a thirsty village (10L = half a day's
+      // supply) adapted NOTHING, and at the cliff only half the village walked.
+      // Now the weight ramps as days-of-supply falls, and when the cistern
+      // can't cover today's drinks, thirst beats every errand including
+      // hunger — it kills faster than hunger does (BALANCING.md attrition).
+      if (waterDays < 2) {
+        var ww = 3.5 + (2 - waterDays) * 2.5; // 2 days -> 3.5, 1 day -> 6, dry -> 8.5
+        if (waterDays < 1) ww = Math.max(ww, 7); // thirst outranks hunger now
+        cands.push({ kind: 'WATER', w: ww });
+      }
       // TRAPS — only hands that know the wire. (knowledge-gated)
       if (vp.knowsSnare) cands.push({ kind: 'TRAPS', w: 1.6 });
       // HAUL — map memory (villager-mapmem 2026-10-13): a remembered corpse
@@ -318,7 +341,11 @@
         o.partsLeft = 2 + Math.floor(R() * 3); o.tightness = dist;
       } else if (chosen.kind === 'WATER') {
         o.purpose = 'water'; dist = Math.min(1 + Math.floor(R() * 2), Math.max(1, maxD));
-        o.partsLeft = 2 + Math.floor(R() * 2); o.tightness = dist;
+        // DESIGNCALL 7 (2026-10-16): a parched cistern (< half a day's supply)
+        // means the near creek is picked over — the water run ranges farther
+        // out, like foragers do when the near grounds are thin.
+        if (waterDays < 0.5) dist = Math.max(1, Math.min(maxD, 2 + Math.floor(R() * 3)));
+        o.partsLeft = 2 + Math.floor(R() * 2) + (waterDays < 0.5 ? 1 : 0); o.tightness = dist;
       } else if (chosen.kind === 'TRAPS') {
         o.purpose = 'traps'; dist = Math.min(1 + Math.floor(R() * 2), Math.max(1, maxD));
         o.partsLeft = 2 + Math.floor(R() * 2); o.tightness = dist;

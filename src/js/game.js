@@ -28256,10 +28256,35 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!v || !v.roster) return;
       const vw = v.water = v.water || { clean: 0, dirty: 0 };
       v.health = v.health || {};
+      // DESIGNCALL 7 (2026-10-16): rationing. When the cistern can't cover a
+      // full 2L ration for every living villager today, the village rations
+      // ITSELF to 1L/head — no player micromanagement — buying the water runs
+      // time to restock. Announced once per transition, never silently.
+      let _living = 0;
+      for (const id of (v.roster || [])) {
+        if (id === this.villagerId) continue; // you drink your own bottles
+        if ((this.vpOf(id) || {}).dead) continue;
+        _living++;
+      }
+      const _demand = 2 * Math.max(1, _living);
+      const _supply = (vw.clean || 0) + (vw.dirty || 0);
+      const _rationing = _supply < _demand;
+      const _rationMsg = (m) => {
+        if (this.playerAtHaven()) this.say(m);
+        else { const sch = this.state.scholar; sch.awayNews = sch.awayNews || []; if (sch.awayNews.length < 8) sch.awayNews.push(m); }
+      };
+      if (_rationing && !v.waterRationed) {
+        v.waterRationed = true;
+        _rationMsg(`💧 The cistern won't cover today — the hall's call, no vote needed: half rations until the water runs come back.`);
+      } else if (!_rationing && v.waterRationed) {
+        v.waterRationed = false;
+        _rationMsg(`💧 The cistern's recovered — full cups again, and nobody's guarding the dipper.`);
+      }
+      const _perCap = _rationing ? 1 : 2;
       for (const id of (v.roster || []).slice()) {
         if (id === this.villagerId) continue; // you drink your own bottles
         if ((this.vpOf(id) || {}).dead || !(v.roster || []).includes(id)) continue;
-        let need = 2;
+        let need = _perCap;
         const takeClean = Math.min(need, Math.floor(vw.clean || 0));
         vw.clean = Math.max(0, (vw.clean || 0) - takeClean); need -= takeClean;
         const takeDirty = Math.min(need, Math.floor(vw.dirty || 0));
