@@ -726,6 +726,26 @@
       try {
         if (s.insideTent) { s.insideTent = null; s.tentSmoke = 0; }
         this.pendingEncounter = false; this.pendingMonsterId = null; this.pendingInTent = false;
+        // SANCTUARY (design call 3, Steve 2026-10-16): the door-flee stash is
+        // the DEAD bearer's — it must not re-engage the successor through the
+        // fire. Backfill legacy untagged entries with the dead bearer, and
+        // name the treeline wait honestly: the killer doesn't vanish
+        // (monsters wait — Steve 2026-10-05), it falls back outside the walls
+        // and holds there. It meets the new bearer when they leave Haven
+        // (treelineAmbush in travelTo), never at the hall door.
+        try {
+          const dw = this.state.doorFledMonsters;
+          if (Array.isArray(dw) && dw.length) {
+            for (const m of dw) { if (m && m.bearer == null) m.bearer = oldId; }
+            const claimed = dw.filter(m => m && m.bearer === oldId && m.id);
+            if (claimed.length) {
+              const names = [...new Set(claimed.map(m => {
+                try { return this.monsterDisplayName(m.id) || 'something'; } catch (e2) { return 'something'; }
+              }))];
+              this.say(`🌲 Something still paces the treeline beyond the walls — ${names.join(', ')} — waiting for a dead ${oldFirst}. It doesn't come in. The walls end the argument. (Haven is sanctuary. It'll still be out there when the new bearer leaves.)`);
+            }
+          }
+        } catch (e2) {}
         const c = this.state.camp;
         if (c) {
           // COLD-PIT HONESTY (break-it camps R10 2026-10-10): same class as

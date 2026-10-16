@@ -10623,40 +10623,84 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say('You push through the doors into open air. Haven grounds — tents, a fire pit, worn paths. The world is that way.');
       // MONSTERS WAIT (Steve 2026-10-05): if you fled through a door, they're
       // still out here. They didn't leave. Going back out re-engages.
+      // SANCTUARY (design call 3, Steve 2026-10-16): the stash is the fleeing
+      // bearer's — a DEAD bearer's killer does not re-engage the successor
+      // through the fire. Untagged entries are legacy saves: treated as the
+      // current bearer's (the old unconditional behavior).
       const waiting = this.state.doorFledMonsters;
       if (waiting && waiting.length) {
-        this.state.doorFledMonsters = null;
-        this.say('⚠️ They\'re still here. Waiting.');
-        // Re-engage with the first monster — they were waiting for you.
-        const first = waiting[0];
-        try {
-          this.startCombat(first.id);
-          // Steve 2026-10-08 (break-it): door-flee stashed each monster's HP
-          // (monsterPositions, ~19126) but re-engage spawned a FRESH full-HP
-          // monster — beat it to 1 HP, duck inside, heal for free, walk out to
-          // a full-HP monster. A no-cost full reset of YOUR damage.
-          // r6 honored the stashed HP — but ONLY for waiting[0]. A pack fight
-          // stashes every monster, and startCombat respawns the whole pack
-          // fresh, so monsters 2..N came back at FULL hp behind the "they're
-          // still here. Waiting." promise. (break-it travel r7 2026-10-09:
-          // hostile re-run with a 3-wolf pack caught wolves 2-3 respawning
-          // unwounded.) Now EVERY waiting monster keeps its wounds: each
-          // stashed entry claims one respawned fighter of the same species,
-          // in order. They waited, and they're still bleeding.
-          if (this.tbfight) {
-            const claimed = new Set();
-            for (const w of waiting) {
-              if (w.hp == null) continue;
-              const mf = this.tbfight.fighters.find(x =>
-                !claimed.has(x) && (x.kind === 'monster' || x.kind === 'hostile') &&
-                (x.monsterId === w.id || (x.mdef && x.mdef.id === w.id)));
-              // (mf.maxHp || w.hp): never NaN a fighter's hp if maxHp is absent.
-              if (mf) { claimed.add(mf); mf.hp = Math.max(1, Math.min(mf.maxHp || w.hp, w.hp)); }
-            }
-          }
-        } catch (e) {}
+        const me = this.villagerId;
+        const mine = waiting.filter(w => !w || w.bearer == null || w.bearer === me);
+        const theirs = waiting.filter(w => w && w.bearer != null && w.bearer !== me);
+        this.state.doorFledMonsters = theirs.length ? theirs : null;
+        if (mine.length) {
+          this.say('⚠️ They\'re still here. Waiting.');
+          // Re-engage with the first monster — they were waiting for you.
+          this.reengageWaitingMonsters(mine);
+        }
+        // theirs: the killer holds the treeline — it was named at the mantle
+        // passing (playerDeath). No hostile re-engagement inside Haven.
       }
       return true;
+    },
+    // SANCTUARY (design call 3, Steve 2026-10-16): re-engage a stash of
+    // waiting monsters — startCombat plus the wound-honoring claim, shared by
+    // the hall-door re-engage and the treeline ambush.
+    reengageWaitingMonsters(waiting) {
+      const first = waiting && waiting[0];
+      if (!first) return;
+      try {
+        this.startCombat(first.id);
+        // Steve 2026-10-08 (break-it): door-flee stashed each monster's HP
+        // (monsterPositions, ~19126) but re-engage spawned a FRESH full-HP
+        // monster — beat it to 1 HP, duck inside, heal for free, walk out to
+        // a full-HP monster. A no-cost full reset of YOUR damage.
+        // r6 honored the stashed HP — but ONLY for waiting[0]. A pack fight
+        // stashes every monster, and startCombat respawns the whole pack
+        // fresh, so monsters 2..N came back at FULL hp behind the "they're
+        // still here. Waiting." promise. (break-it travel r7 2026-10-09:
+        // hostile re-run with a 3-wolf pack caught wolves 2-3 respawning
+        // unwounded.) Now EVERY waiting monster keeps its wounds: each
+        // stashed entry claims one respawned fighter of the same species,
+        // in order. They waited, and they're still bleeding.
+        if (this.tbfight) {
+          const claimed = new Set();
+          for (const w of waiting) {
+            if (w.hp == null) continue;
+            const mf = this.tbfight.fighters.find(x =>
+              !claimed.has(x) && (x.kind === 'monster' || x.kind === 'hostile') &&
+              (x.monsterId === w.id || (x.mdef && x.mdef.id === w.id)));
+            // (mf.maxHp || w.hp): never NaN a fighter's hp if maxHp is absent.
+            if (mf) { claimed.add(mf); mf.hp = Math.max(1, Math.min(mf.maxHp || w.hp, w.hp)); }
+          }
+        }
+      } catch (e) {}
+    },
+    // SANCTUARY (design call 3, Steve 2026-10-16): the treeline ambush. A
+    // dead bearer's door-flee stash waits OUTSIDE the walls; when the new
+    // bearer departs the haven node for the wild, the killer is there.
+    // Returns true when it fired (it was the encounter — skip the roll).
+    treelineAmbush(fromX, fromY) {
+      try {
+        if (!this.isSafeTile(fromX, fromY)) return false; // not departing Haven
+        if (this.isSafeTile(this.map.px, this.map.py)) return false; // onto safe ground: it holds
+        const dw = this.state.doorFledMonsters;
+        if (!Array.isArray(dw) || !dw.length) return false;
+        const me = this.villagerId;
+        // w.id guard: betrayal-fight stashes hold id-less villagers (party.js
+        // strips them post-fight) — never startCombat(undefined) a phantom.
+        const theirs = dw.filter(w => w && w.id && w.bearer != null && w.bearer !== me);
+        if (!theirs.length) return false;
+        if ((this.tbfight && !this.tbfight.over) || this.pendingEncounter || this.over) return false;
+        const mine = dw.filter(w => !w || w.bearer == null || w.bearer === me);
+        this.state.doorFledMonsters = mine.length ? mine : null;
+        const first = theirs[0];
+        let mname = 'something';
+        try { mname = this.monsterDisplayName(first.id) || mname; } catch (e) {}
+        this.say(`🌲 The treeline — and it's WAITING. ${mname}, pacing where the walls end. It waited for a dead bearer. It'll take the living one.`);
+        this.reengageWaitingMonsters(theirs);
+        return true;
+      } catch (e) { return false; }
     },
     enterBuilding(doorFlee) {
       // DEAD (break-it travel r6 2026-10-09): same class as exitBuilding.
@@ -11064,7 +11108,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // site gets the estranged return beat, never the PIN.
       if (tile.type === 'haven') this.returnToVillage();
       else if (tile.type === 'oldhaven') this.returnToOldVillage(tile);
-      this.checkEncounter();
+      // SANCTUARY (design call 3, Steve 2026-10-16): a dead bearer's waiting
+      // killer holds the treeline — departing Haven for the wild walks into
+      // it. The ambush IS the tile-entry encounter; skip the roll when it fires.
+      if (!this.treelineAmbush(fromX, fromY)) this.checkEncounter();
       this.checkAnimals();
       this.checkQuest('travel');
       // PROMISES (break-it social r7 2026-10-09): "I'll watch the roads. If
@@ -31797,7 +31844,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (f.betrayal) f.playerFled = true;
         // Preserve monsters: they don't melt away, they wait outside.
         // (Standard tbEnd despawns; we stash positions first.)
-        this.state.doorFledMonsters = monsterPositions;
+        // SANCTUARY (design call 3, Steve 2026-10-16): the stash is the
+        // FLEEING bearer's — tag it, so a dead bearer's killer can't
+        // re-engage the successor through the fire (see exitBuilding).
+        this.state.doorFledMonsters = monsterPositions.map(m => ({ ...m, bearer: this.villagerId }));
         this.tbEnd('fled');
         // Restore monsters to the world — they're still out there.
         // (They'll re-engage if you go back outside.)
