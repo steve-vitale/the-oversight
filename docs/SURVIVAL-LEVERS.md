@@ -43,6 +43,21 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Ward protection (2026-10-16): distinguish two levers. Aegis now admits the
+player as an NPC's actual protected ally and composes the redirected hit
+once for the protector, before the intended recipient's armor/history.
+The protector's armor and source rally apply once; expiry/departure end the
+link and finalized-beam options survive recursion. This can increase a
+protector's wound where the old code stacked two people's armor, while
+enabling reciprocal protection. It does not prove beam resistance has been
+recomputed for a new target. The second lever replaces Ward's legacy
+age/synergy proxy with an actual carried hostile wound and both-person
+living exit. It changes access, not damage, costs, day80 or full-build gates.
+Keep those arms separate when measuring; see the source-bound
+../evidence/2026-10-16/ward-audit.md. Formal30HP/gear and field70HP/helper
+models remain separate limitations. Do not compensate for restricted god
+access by reducing enemy or Table difficulty without new evidence.
+
 Retained army-ration strategy (2026-10-16): new opt-in campaigner-quartermaster
 uses the native whole-batch counter pickup toward its current known plan,
 with the existing village reserve and paid work.16 caller checks and full963/963

@@ -9,6 +9,16 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Ward protection (2026-10-16): fourth authored deed requires a real hostile
+wound carried for another known living person, then both surviving the fight.
+Actual withdrawal qualifies. Six god proxies remain. Separate Aegis-only and
+deed source arms measure NPC/player recipients and single damage composition
+independently of the access gate.37 focused checks, quick193/193 and
+full965/965 pass; prepared mobile NPC cast/wound/save/native victory earns
+only that person's deed. See ../evidence/2026-10-16/ward-audit.md for all23
+metrics, complete changed-hash replays and limitations. Garden/reactor and
+natural Finale/Network questions remain open; no difficulty quota is imposed.
+
 Retained army-ration strategy (2026-10-16): new opt-in campaigner-quartermaster
 uses the native whole-batch counter pickup toward its current known plan,
 with the existing village reserve and paid work.16 caller checks and full963/963
@@ -599,7 +609,17 @@ post-production requests; legacy missing data remains unknown. Targeted
 of need self-supplied and only eight days where every NPC requests food.
 This does not settle Garden's seven-day threshold, continuous membership or
 the bearer diet. See `evidence/2026-10-15/garden-demand-audit.md`.
-- **Current authored deeds:** Unkillable requires a real fatal refusal and
+- **Current authored deeds:** four now have real outcomes: Unkillable, Voice,
+  Apex and Undying Ward. Ward requires a real hostile wound carried for
+  another known living person, followed by both surviving the fight; an
+  actual withdrawal can qualify. Six proxies remain. No kill, arbitrary
+  wound quota, class age or paid tap substitutes. Real tactical Aegis/Leech
+  and named field Aegis/Bodyguard callers, saved pending evidence, old-save
+  absence and personal ownership have37 focused checks. See
+  ../evidence/2026-10-16/ward-audit.md for the separate Aegis prerequisite,
+  matched simulations, all23 metrics and prepared mobile proof. Garden's
+  seven-day definition and the early reactor question remain unanswered.
+- **Earlier Relay implementation:** Unkillable requires a real fatal refusal and
   later dawn; the Voice of the Relay now requires the person's actual current
   office. The class-age/synergy fallback cannot bypass those two. Eight other
   gods retain legacy proxies. Actual player claim, villager appointment,

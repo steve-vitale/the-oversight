@@ -1,0 +1,78 @@
+
+the roster (Steve 2026-10-14: "Good calls! Continue all.")
+  ok   godpaths.json has exactly the 10 paths
+  ok   brawler: subclasses berserker + juggernaut
+  ok   shieldbearer: subclasses bulwark + warden
+  ok   hunter: subclasses stalker + beastmaster
+  ok   caregiver: subclasses healer + keeper
+  ok   drifter: subclasses phantom + trickster
+  ok   explorer: subclasses seer + cartographer
+  ok   socialite: subclasses showrunner + demagogue
+  ok   survivalist: subclasses furnace + undying
+  ok   miser: subclasses hoarder + dealer
+  ok   forager: subclasses gardener + feaster
+  ok   godhood.json is retired (one source of truth)
+
+every magic ability: one path, one subclass
+  ok   every ability has a valid role
+  ok   nothing carries the retired `paths` array
+  ok   all 94 magic abilities carry a valid path + subclass
+  ok   alsoPath (when present) is another real path
+  ok   alsoPath stays rare (<= 10 shared magic abilities)
+  ok   skills never carry a subclass (classes are magic)
+
+subclasses: payoff + 2 enablers + god tie-in
+  ok   brawler/berserker: payoff blood_frenzy (role payoff), 3 enablers, tie adrenaline_control; all tagged berserker
+  ok   brawler/juggernaut: payoff trade_of_blows (role payoff), 2 enablers, tie cornered_rat; all tagged juggernaut
+  ok   shieldbearer/bulwark: payoff retribution (role payoff), 2 enablers, tie aegis_link; all tagged bulwark
+  ok   shieldbearer/warden: payoff landslide (role payoff), 2 enablers, tie raise_earth; all tagged warden
+  ok   hunter/stalker: payoff trophy_room (role payoff), 3 enablers, tie night_eyes; all tagged stalker
+  ok   hunter/beastmaster: payoff pack_hunt (role payoff), 2 enablers, tie beast_calm; all tagged beastmaster
+  ok   caregiver/healer: payoff battlefield_grace (role payoff), 3 enablers, tie lifeline; all tagged healer
+  ok   caregiver/keeper: payoff keepers_oath (role payoff), 2 enablers, tie last_rites; all tagged keeper
+  ok   drifter/phantom: payoff nowhere_man (role payoff), 3 enablers, tie time_skip; all tagged phantom
+  ok   drifter/trickster: payoff misdirection (role payoff), 2 enablers, tie switcheroo; all tagged trickster
+  ok   explorer/seer: payoff prophecy (role payoff), 2 enablers, tie third_eye; all tagged seer
+  ok   explorer/cartographer: payoff cartographers_eye (role payoff), 3 enablers, tie hive_mind; all tagged cartographer
+  ok   socialite/showrunner: payoff crowd_favorite (role payoff), 2 enablers, tie live_broadcast; all tagged showrunner
+  ok   socialite/demagogue: payoff the_crowd_moves (role payoff), 2 enablers, tie war_cry; all tagged demagogue
+  ok   survivalist/furnace: payoff feast_engine (role payoff), 3 enablers, tie ember_heart; all tagged furnace
+  ok   survivalist/undying: payoff back_from_the_brink (role payoff), 3 enablers, tie phoenix_clause; all tagged undying
+  ok   miser/hoarder: payoff hoarders_interest (role payoff), 3 enablers, tie coin_guard; all tagged hoarder
+  ok   miser/dealer: payoff sweetener (role payoff), 2 enablers, tie bribe; all tagged dealer
+  ok   forager/gardener: payoff cornucopia (role payoff), 3 enablers, tie photosynthesis; all tagged gardener
+  ok   forager/feaster: payoff harvest_table (role payoff), 3 enablers, tie long_table; all tagged feaster
+
+gods: one verb each, the weakness kept
+  ok   ten distinct gods
+  ok   brawler -> one_person_army: one verb ("Turn the Pain"), desc, cost, weakness, why, party/titan/contest/army
+  ok   brawler: god text respects the constraints
+  ok   shieldbearer -> undying_ward: one verb ("Take the Wound"), desc, cost, weakness, why, party/titan/contest/army
+  ok   shieldbearer: god text respects the constraints
+  ok   hunter -> apex_predator: one verb ("Choose the Terms"), desc, cost, weakness, why, party/titan/contest/army
+  ok   hunter: god text respects the constraints
+  ok   caregiver -> shepherd_of_the_dead: one verb ("Raise Echo"), desc, cost, weakness, why, party/titan/contest/army
+  ok   caregiver: god text respects the constraints
+  ok   drifter -> the_between: one verb ("Phase Out"), desc, cost, weakness, why, party/titan/contest/army
+  ok   drifter: god text respects the constraints
+  ok   explorer -> all_seeing: one verb ("No Lies"), desc, cost, weakness, why, party/titan/contest/army
+  ok   explorer: god text respects the constraints
+  ok   socialite -> voice_of_the_relay: one verb ("Speak and Be Heard"), desc, cost, weakness, why, party/titan/contest/army
+  ok   socialite: god text respects the constraints
+  ok   survivalist -> unkillable: one verb ("Phoenix"), desc, cost, weakness, why, party/titan/contest/army
+  ok   survivalist: god text respects the constraints
+  ok   miser -> market_god: one verb ("Name Your Price"), desc, cost, weakness, why, party/titan/contest/army
+  ok   miser: god text respects the constraints
+  ok   forager -> living_garden: one verb ("Feed the Multitude"), desc, cost, weakness, why, party/titan/contest/army
+  ok   forager: god text respects the constraints
+  ok   authored outcome deeds declare a wired event, dawn rule and objective
+  ok   the leftover capstone (farstrider) is retired and folded into a subclass, with a reason
+
+tracks and verbs
+  ok   every magic ability sits in exactly one track kit (fusion_reactor excepted)
+  ok   every data verb is known to godpath.js (15 verbs)
+  ok   every data verb is food-powered (kcal cost)
+  ok   warden/trickster control changes the board: grid verbs only, no combat +X% modifiers
+  ok   warden shapes the board three ways (walls, pulls, pushes)
+
+godpath-validate: 66 passed, 0 failed, 0 todo (phase 0)

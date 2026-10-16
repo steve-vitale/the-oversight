@@ -8019,6 +8019,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             playerCommandReturn: f.playerCommandReturn || null,
             godVerbs: f._gv || null,
             godpathApexHunt: f._gpApexHunt || null,
+            godpathWardRescues: f._gpWardRescues || null,
             godpathUses: f._gpUses || null,
             godpathVillagerUses: f._gpVUses || null,
             terraform: f.terraform || {},
@@ -8491,6 +8492,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             playerCommandReturn: tbS.playerCommandReturn || null,
             _gv: tbS.godVerbs || null,
             _gpApexHunt: tbS.godpathApexHunt || null,
+            _gpWardRescues: tbS.godpathWardRescues || null,
             _gpUses: tbS.godpathUses || null,
             _gpVUses: tbS.godpathVillagerUses || null,
             round: tbS.round || 1,
@@ -33428,6 +33430,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return 0;
         }
       }
+      // A linked hit is composed once for its actual protector. The intended
+      // ally's armor, damage history and other hit effects do not take it first.
+      if (['player', 'villager', 'ally'].includes(t.kind) && dmg > 0 && this.tbfight) {
+        try {
+          const gp = S.Godpath;
+          if (gp && gp.aegisRedirect(this, t, dmg, sourceKey, opts) === 0) return 0;
+        } catch (e) { console.warn('[godpath] aegis', e); }
+      }
       let final = Math.max(0, Math.round(dmg));
       // MULTI-MOVE RALLY (2026-10-12): union_rep's Solidarity Speech — allied
       // monsters +4 damage while the buff lasts. Source-keyed, honest.
@@ -33729,12 +33739,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
         } catch (e) {}
       }
-      // AEGIS LINK (god-path 2026-10-14, bulwark): a linked ally's hit lands
-      // on the player in full (godpath.js aegisRedirect). Before leech, so a
-      // redirected hit isn't drunk twice.
+      // Personal absorbs and Leech run only for a blow still reaching this ally.
       if ((t.kind === 'villager' || t.kind === 'ally') && final > 0 && this.tbfight) {
-        try { const GPa = (globalThis.Scattering || {}).Godpath; if (GPa) final = GPa.aegisRedirect(this, t, final, sourceKey); }
-        catch (e) { console.warn('[godpath] aegis', e); }
         // COIN GUARD / LAST RITES / PROPHECY on a villager (parity 2026-10-14)
         if (final > 0) {
           try { const GPv = (globalThis.Scattering || {}).Godpath; if (GPv && GPv.absorbVillagerHit) final = GPv.absorbVillagerHit(this, t, final); }
@@ -33767,7 +33773,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (_near) {
               const _half = Math.ceil(final / 2);
               final = final - _half;
+              const _wardHp = _pf.hp;
               this.addHealth(-_half);
+              try { S.Godpath?.noteWardCarry(this, this.tbfight, _pf, t, Math.max(0, _wardHp - _pf.hp), sourceKey, 'leech'); }
+              catch (e) { console.warn('[godpath] leech protection', e); }
               // HONESTY (break-it combat 2026-10-10): the redirected half IS
               // damage taken — trade_of_blows.settle_debt promises "you cash in
               // every bruise, every cut". addHealth doesn't write
@@ -40259,6 +40268,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       f.over = true; f.result = result;
       try { S.Godpath?.finishApexHunt(this, f, result); } catch (e) { console.warn('[godpath] hunt outcome', e); }
+      try { S.Godpath?.finishWardRescues(this, f, result); } catch (e) { console.warn('[godpath] protection outcome', e); }
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15):
       // startCombat lifts the piece off the map; a titan or campaign piece
       // that is still standing after a loss, a flee or a rout goes back on

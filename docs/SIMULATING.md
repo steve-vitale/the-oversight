@@ -1,5 +1,16 @@
 # Simulating The Oversight — how to measure a change
 
+Ward protection (2026-10-16): automatically discovered
+`scripts/godpath/test-aegis-recipient.js` and `test-ward-deed.js` test actual
+recipient damage, person-owned outcomes and save/load with one harness each.
+Keep three source arms: original, recipient/damage repair only, and authored
+deed. Do not infer natural use from prepared caller coverage, or discard
+saved-null metadata when checking full gameplay hashes. Reconstruct with
+ward-reconstruct.cjs and its raw collector overlay; use ward-compare.cjs,
+ward-replays.cjs and ward-verify.cjs in the dated evidence directory. Read
+ward-audit.md for source-bound controls, all23 metrics and known body-model
+limitations. Lower wins prompt investigation; there is no win quota.
+
 Preparation coverage (2026-10-16): `campaigner-preparer` is a separate opt-in
 cohort over campaigner-rations. It shells one real carried/counter nut batch
 per person/day, stages opaque pack harvests before camp sorting, and uses the

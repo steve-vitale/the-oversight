@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),assert=require('assert'),dir=__dirname,read=n=>JSON.parse(z.gunzipSync(fs.readFileSync(path.join(dir,n)))),summary={cohorts:{},naturalReceipts:[],changedStates:[]};
+for(const cohort of ['screen','holdout']){
+ const panels={before:read(cohort==='screen'?'quartermaster-standard-report.json.gz':`ward-before-${cohort}-report.json.gz`),parity:read(`ward-parity-${cohort}-report.json.gz`),after:read(`ward-after-${cohort}-report.json.gz`)},plan=read(`ward-${cohort}-replay-plan.json.gz`);
+ for(const r of panels.after.rows){const match=arm=>panels[arm].rows.find(x=>x.row.policy===r.row.policy&&x.row.seed===r.row.seed);assert.deepStrictEqual(match('before').row,r.row);assert.deepStrictEqual(match('before').metrics,r.metrics);assert.deepStrictEqual(match('before'),match('parity'));}
+ summary.cohorts[cohort]={cases:panels.after.rows.length,exactRawRows:true,exact23Metrics:true,exactBeforeParityResults:true,policies:panels.after.options.policies.map(policy=>{const rs=panels.after.rows.filter(x=>x.row.policy===policy),sum=k=>rs.reduce((a,r)=>a+(r.row[k]||0),0);return{policy,cases:rs.length,wins:sum('won'),entries:sum('entered'),playerDeaths:rs.reduce((a,r)=>a+Object.entries(r.row.deaths).filter(([k])=>k.startsWith('player:')).reduce((b,[,v])=>b+v,0),0),communityLosses:rs.filter(r=>['village-lost','village-dead'].includes(r.row.endReason)).length};})};
+ for(const p of plan.filter(x=>x.arm==='after')){
+  const stem=`ward-replay-${cohort}-`,after=read(`${stem}after-${p.policy}-${p.seed}.json.gz`),parity=read(`${stem}parity-${p.policy}-${p.seed}.json.gz`),diffs=[];
+  function diff(a,b,loc){if(JSON.stringify(a)===JSON.stringify(b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],loc+'.'+k);}else diffs.push({path:loc,beforeType:a===undefined?'absent':a===null?'null':typeof a,afterType:b===undefined?'absent':b===null?'null':typeof b,before:a,after:b});}
+  diff(parity.state,after.state,'state');summary.changedStates.push({cohort,policy:p.policy,seed:p.seed,diffs});
+  for(const e of after.events.filter(e=>e.type==='godpath_deed'&&e.data.event==='ward_rescue'))summary.naturalReceipts.push({cohort,policy:p.policy,seed:p.seed,event:e.data,atOutcome:e.after,final:after.final,row:{won:after.row.won,endReason:after.row.endReason,gameDays:after.row.gameDays},fieldResults:after.events.filter(x=>x.type==='fieldFight'&&x.after.day===e.data.day)});
+ }
+}
+fs.writeFileSync(path.join(dir,'ward-diagnosis.json.gz'),z.gzipSync(JSON.stringify(summary)+'\n'));console.log(JSON.stringify({cohorts:summary.cohorts,naturalReceipts:summary.naturalReceipts.map(x=>({seed:x.seed,event:x.event,row:x.row})),changedStates:summary.changedStates.length},null,2));

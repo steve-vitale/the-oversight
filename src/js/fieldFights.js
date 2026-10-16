@@ -604,6 +604,7 @@
       // help is near, they shout instead of scattering. One ally answers per
       // fight — a second pair of hands, off-balance, exposed (no armor).
       var helpCalled = false, allyIn = false, allyHp = 0;
+      var wardCarries = [];
       var allyMax = 70, allyVid = null, allyName = 'Someone';
       // AID (comms 2026-10-10): allied parties already at the door join from
       // round 1 — they came to fight, not to watch. A new combatant, same as
@@ -773,18 +774,22 @@
               // the problem. The beast's eye stays on them: ally hit share
               // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
               var _allyShare = 0.4;
+              var _wardAegis = !!(gpF && gpF.aegis > 0), _wardVia = null;
               if (gpF && allyIn && allyHp > 0) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
               if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
                 abDrewFire = true;
                 _allyShare = 0.1;
                 rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
               }
-              var hittingAlly = allyIn && allyHp > 0 && RR() < _allyShare;
+              var _allyRoll = allyIn && allyHp > 0 ? RR() : 1;
+              var hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
+              if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) _wardVia = 'aegis_link';
               // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
               // on the ally lands on the guard instead. "Not them."
               if (hittingAlly && vHasAb('bodyguard') && !abBodyguarded) {
                 abBodyguarded = true;
                 hittingAlly = false;
+                _wardVia = 'bodyguard';
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
               }
               if (!hittingAlly && gpF && total > 0) {
@@ -849,6 +854,8 @@
                   if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
+                  wardCarries.push({ ally: allyVid, via: _wardVia, wound: total, day: day });
                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * painBeamShare)));
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
@@ -1201,6 +1208,9 @@
       try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
         { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
+      try { if (GPf && GPf.finishFieldWardRescue) GPf.finishFieldWardRescue(this, vid, wardCarries, rec,
+        { id: allyVid, alive: helpCalled && allyIn && allyHp > 0 }); }
+      catch (e) { console.warn('[godpath] field protection outcome', e); }
       return rec;
     },
 

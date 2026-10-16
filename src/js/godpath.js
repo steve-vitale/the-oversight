@@ -11,6 +11,8 @@
 //   - godpathDeedStatus(who, godId, day?) -> read-only real deed progress for the canonical person; no old-save invention
 //   - beginApexHunt(game, fight), observeApexHunt(game, fight), finishApexHunt(game, fight, result) -> saved opening/participation evidence for actual solo monster kills
 //   - finishFieldApexHunt(game, vid, opening, result) -> the same person-owned deed from a real NPC field result
+//   - noteWardCarry(game, fight, actor, ally, wound, sourceKey, via), finishWardRescues(game, fight, result) -> real carried wound and both-person living exit
+//   - finishFieldWardRescue(game, actor, carries, result, ally) -> the same canonical-person protection outcome from actual field diversion
 //   - godpathDeedHint(who) -> objective/progress only for a known class, until ascension
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
@@ -297,6 +299,55 @@
     const pack = opening.pack && support.packUsed;
     const alone = !opening.allies && !result.calledHelp && !result.allyVid && !(result.allyDealt > 0);
     if (pack || alone) recordApexHunt(vid, opening.actorMaxHp, opening.prey, 'field', pack ? 'pack' : 'solo');
+  }
+
+  function wardPerson(game, fighter) {
+    if (!fighter || !['player', 'villager', 'ally'].includes(fighter.kind)) return null;
+    const id = fighter.kind === 'player' ? game.villagerId : fighter.villagerId;
+    const person = id && game.vpOf(id);
+    return person && person.id === id && !person.dead ? id : null;
+  }
+  function recordWardRescue(actor, ally, via, scene, wound, day) {
+    const s = Game.state.scholar, v = Game.state.village;
+    const a = actor && Game.vpOf(actor), b = ally && Game.vpOf(ally);
+    if (Game.over || !a || !b || a.dead || b.dead || a.id !== actor || b.id !== ally ||
+        actor === ally || !(wound > 0)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[actor] || (books[actor] = {});
+    if (book.ward_rescue) return;
+    book.ward_rescue = { day, ally, ability: via, scene, wound };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: actor, event: 'ward_rescue', day: s.day || 0, ally, scene, via }); }
+    catch (e) { warn('ward deed', e); }
+  }
+  // Observe the real damage caller, then wait for both people to leave alive.
+  // A link tap, an absorbed blow or an anonymous summon is not this outcome.
+  function noteWardCarry(game, f, actor, ally, wound, sourceKey, via) {
+    const source = f?.fighters?.find(x => x.key === sourceKey);
+    const actorId = wardPerson(game, actor), allyId = wardPerson(game, ally);
+    if (!f || !actorId || !allyId || actorId === allyId || !Number.isFinite(wound) || wound <= 0 ||
+        !source || !['monster', 'hostile'].includes(source.kind)) return;
+    const h = f._gpWardRescues || (f._gpWardRescues = { version: 1, entries: [] });
+    if (h.version !== 1 || !Array.isArray(h.entries) || h.entries.some(x => x.actorId === actorId && x.allyId === allyId)) return;
+    h.entries.push({ actorId, allyId, actorKey: actor.key, allyKey: ally.key, wound, via, day: game.state.scholar.day || 0 });
+    // A retaliation may have ended the fight inside the redirected hit.
+    if (f.over) finishWardRescues(game, f, f.result);
+  }
+  function finishWardRescues(game, f, result) {
+    const h = f?._gpWardRescues;
+    if (!h || h.version !== 1 || !Array.isArray(h.entries) || !['won', 'routed', 'fled', 'calmed'].includes(result) ||
+        (result === 'fled' && f.noFlee)) return;
+    for (const r of h.entries) {
+      const a = f.fighters.find(x => x.key === r.actorKey), b = f.fighters.find(x => x.key === r.allyKey);
+      if (a?.alive && a.hp > 0 && b?.alive && b.hp > 0 &&
+          wardPerson(game, a) === r.actorId && wardPerson(game, b) === r.allyId)
+        recordWardRescue(r.actorId, r.allyId, r.via, 'tactical', r.wound, r.day);
+    }
+  }
+  function finishFieldWardRescue(game, actor, carries, result, ally) {
+    if (!(result.vHpLeft > 0) || !['vKill', 'vFlee', 'mFlee'].includes(result.outcome) ||
+        !ally.alive || !ally.id || ally.id === game.villagerId || actor === game.villagerId || actor === 'player') return;
+    for (const r of carries || []) if (r.ally === ally.id)
+      recordWardRescue(actor, r.ally, r.via, 'field', r.wound, r.day);
   }
 
   // recognizeClass(who): THE one function for player and villagers.
@@ -586,7 +637,7 @@
     aegis(a, ab, target, actor) {
       const C = actorCtx(actor), f = Game.tbfight, p = C.p;
       let t = target ? Game.tbFighter(target) : null;
-      const allies = alliesOf(f, C);
+      const allies = Game.tbOtherAllies(C.p);
       if (!t || allies.indexOf(t) < 0) t = allies.slice().sort((x, y) => (x.hp / (x.maxHp || 1)) - (y.hp / (y.maxHp || 1)))[0];
       if (!t) { if (C.isP) Game.say('No ally to link to. (Aegis Link needs someone beside you in the fight.)'); return false; }
       const rounds = (a.rounds || 3) + (lvlC(C, ab.id) >= 2 ? 1 : 0);
@@ -1021,7 +1072,7 @@
     empower: (I) => (!I.v._nextStrikes && I.d <= 1 ? 6 : null),
     guard: (I) => (I.n < 1 && !I.v._absorb && I.d <= 2 && I.hp < 0.8 ? 6 : null),
     bribe: (I) => (I.n < 1 && I.near && I.d <= 2 && !isTitanish(I.near) && (I.hp < 0.6 || I.mons.length >= 2) ? 6.5 : null),
-    aegis: (I) => (I.n < 1 && I.hp > 0.6 && I.allies.some(a => a.hp / (a.maxHp || 1) < 0.5) ? 5.5 : null),
+    aegis: (I) => (I.n < 1 && I.hp > 0.6 && Game.tbOtherAllies(I.v).some(a => a.hp / (a.maxHp || 1) < 0.5) ? 5.5 : null),
   };
   // villagerCast(game, v): one subclass verb for this villager's turn, or
   // false. "No turn" verbs (cost.turn absent) return 'free' so the villager
@@ -1534,23 +1585,25 @@
       return final - took;
     } catch (e) { warn('absorbPlayerHit', e); return final; }
   }
-  // aegisRedirect(game, t, final): a linked ally's hit lands on the player.
-  // Returns the damage the ally still takes.
-  function aegisRedirect(game, t, final, sourceKey) {
+  // Route the incoming attack once through the living linker's own damage
+  // pipeline, before the intended ally's armor/history. Return their remainder.
+  function aegisRedirect(game, t, final, sourceKey, opts) {
     try {
       const f = game.tbfight;
       if (!f || !(final > 0) || sourceKey === 'p' || f._aegisBusy) return final;
       // the linker: the player, or any villager fighter (parity)
       const cands = [game.tbFighter && game.tbFighter('p')].concat(liveAllies(f));
       for (const p of cands) {
-        if (!p || !p.alive || p === t || !p._aegis) continue;
+        if (!p || !p.alive || p.fled || p === t || !p._aegis) continue;
         if (p._aegis.until < (f.round || 1)) { p._aegis = null; continue; }
         if (p._aegis.key !== t.key) continue;
         if (p.key === sourceKey) continue;
         const isP = p.key === 'p';
         game.say(`The light-thread snaps tight: the blow meant for ${t.name} lands on ${isP ? 'you' : p.name}. (Aegis Link)`);
         f._aegisBusy = true; // one redirect per blow: links never ping-pong
-        try { game.tbDamage(p.key, final, 'aegis link', sourceKey || null, { quiet: true, undodgeable: true }); } finally { f._aegisBusy = false; }
+        let carried = 0;
+        try { carried = game.tbDamage(p.key, final, 'aegis link', sourceKey || null, { ...opts, quiet: true, undodgeable: true }); } finally { f._aegisBusy = false; }
+        noteWardCarry(game, f, p, t, carried, sourceKey, 'aegis_link');
         return 0;
       }
       return final;
@@ -1722,6 +1775,7 @@
   };
 
   S.Godpath = {
+    noteWardCarry, finishWardRescues, finishFieldWardRescue,
     beginApexHunt, observeApexHunt, finishApexHunt, finishFieldApexHunt,
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
     pathLean, shapeOffers, kitSheet, holderJobPaths, sheetRng, VERBS, registerVerbs, wardenWallAt,

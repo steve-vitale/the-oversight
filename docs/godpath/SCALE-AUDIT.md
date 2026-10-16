@@ -8,6 +8,16 @@ Prepared titan/coalition campaign evidence is separate from natural reachability
 
 ## Forty-context map
 
+2026-10-16 Ward prerequisite/deed: actual NPC Aegis can protect the bearer;
+redirected damage is composed once for the actual protector. Real carried
+wounds plus both-person living exit are observed in tactical Aegis/Leech
+and named field Aegis/Bodyguard. This is the authored ascension deed, not
+proof that Ward's god-scale field intervention, crowd response or strategic
+army promise is complete. Anonymous support earns no invented person receipt.
+The prepared phone encounter retains the actual30HP formal body; broad
+formal/field body and gear parity, beam target resistance recalculation and
+natural usage frequency remain open. See ../../evidence/2026-10-16/ward-audit.md.
+
 2026-10-16 support follow-up: One-Person Army's wound rally now includes the
 distinct nearby living player; real player damage and finite own-turn duration
 honor the existing flags. NPC Voice collapse now includes the player's full

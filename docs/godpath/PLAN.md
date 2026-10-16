@@ -7,6 +7,17 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 Ward deed: carry a real hostile wound intended for another known
+living person, then both leave that fight alive. Actual Aegis, Leech and
+named field Bodyguard/Aegis callers record the outcome; withdrawal qualifies.
+Paid casts, zero wounds, anonymous support and class age cannot substitute.
+Pending evidence survives load; old missing evidence is not invented.
+Four authored deeds now replace their proxies; six remain. Existing gods and
+day80/full-build gates stay. A separate Aegis prerequisite repairs NPC links
+to the player and applies damage composition once to the actual protector.
+See ../../evidence/2026-10-16/ward-audit.md for separate parity/deed arms,
+all23 metrics, full-state replays and the disclosed prepared phone proof.
+
 2026-10-16 Apex formal ownership: the prior audit's formal-caster limitation
 is closed by a saved encounter-opening ownership/capacity snapshot, then
 enrollment of actual injected NPC bodies. Later talent acquisition and old
@@ -52,7 +63,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay and Apex; legacy proxies for seven remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay, Apex and Ward; legacy proxies for six remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks

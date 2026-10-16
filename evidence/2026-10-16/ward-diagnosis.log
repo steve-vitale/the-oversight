@@ -1,0 +1,121 @@
+{
+  "cohorts": {
+    "screen": {
+      "cases": 64,
+      "exactRawRows": true,
+      "exact23Metrics": true,
+      "exactBeforeParityResults": true,
+      "policies": [
+        {
+          "policy": "capable",
+          "cases": 16,
+          "wins": 12,
+          "entries": 12,
+          "playerDeaths": 18,
+          "communityLosses": 2
+        },
+        {
+          "policy": "maker",
+          "cases": 16,
+          "wins": 4,
+          "entries": 4,
+          "playerDeaths": 18,
+          "communityLosses": 4
+        },
+        {
+          "policy": "merchant",
+          "cases": 16,
+          "wins": 4,
+          "entries": 4,
+          "playerDeaths": 18,
+          "communityLosses": 6
+        },
+        {
+          "policy": "caregiver",
+          "cases": 16,
+          "wins": 9,
+          "entries": 9,
+          "playerDeaths": 10,
+          "communityLosses": 4
+        }
+      ]
+    },
+    "holdout": {
+      "cases": 256,
+      "exactRawRows": true,
+      "exact23Metrics": true,
+      "exactBeforeParityResults": true,
+      "policies": [
+        {
+          "policy": "capable",
+          "cases": 64,
+          "wins": 48,
+          "entries": 48,
+          "playerDeaths": 88,
+          "communityLosses": 13
+        },
+        {
+          "policy": "maker",
+          "cases": 64,
+          "wins": 20,
+          "entries": 20,
+          "playerDeaths": 82,
+          "communityLosses": 21
+        },
+        {
+          "policy": "merchant",
+          "cases": 64,
+          "wins": 23,
+          "entries": 23,
+          "playerDeaths": 56,
+          "communityLosses": 28
+        },
+        {
+          "policy": "caregiver",
+          "cases": 64,
+          "wins": 34,
+          "entries": 36,
+          "playerDeaths": 45,
+          "communityLosses": 15
+        }
+      ]
+    }
+  },
+  "naturalReceipts": [
+    {
+      "seed": 10040,
+      "event": {
+        "t": 1760400000780,
+        "who": "gen_3jnykz6",
+        "event": "ward_rescue",
+        "day": 42,
+        "ally": "ines_duarte",
+        "scene": "tactical",
+        "via": "leech"
+      },
+      "row": {
+        "won": 1,
+        "endReason": "over-other",
+        "gameDays": 90
+      }
+    },
+    {
+      "seed": 10056,
+      "event": {
+        "t": 1760400000920,
+        "who": "gen_bdwo28w",
+        "event": "ward_rescue",
+        "day": 44,
+        "ally": "gen_xxgv6tp",
+        "scene": "field",
+        "via": "bodyguard"
+      },
+      "row": {
+        "won": 0,
+        "endReason": "survived",
+        "gameDays": 152
+      }
+    }
+  ],
+  "changedStates": 16
+}

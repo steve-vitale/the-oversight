@@ -1,5 +1,13 @@
 # Agent lanes (2026-10-15)
 
+Codex Ward unit (2026-10-16): narrow godpath.js/game.js Aegis recipient and
+damage-route correction, authored Undying Ward receipt, matching field
+observation/data/validation and dated three-arm measurement. Field RNG count,
+ability costs, kit/default policies and Muse's world/region/nomad/systems
+files stay fixed. See ../evidence/2026-10-16/ward-audit.md; use the exact raw
+collector/source bundle for both roots. Six fitting deeds remain after this
+unit; Garden/reactor questions and natural Finale/Network coverage stay open.
+
 Two agents work this repo. This note prevents file-level collisions.
 Steve adjudicates; either agent may update this file when lanes change.
 

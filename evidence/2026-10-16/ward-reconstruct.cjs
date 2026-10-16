@@ -1,0 +1,6 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert'),[arm,arg]=process.argv.slice(2),dest=path.resolve(arg||''),repo=path.resolve(__dirname,'../..'),bundle=JSON.parse(z.gunzipSync(fs.readFileSync(path.join(__dirname,'ward-sources.json.gz'))));
+assert(bundle.arms[arm]&&arg&&!fs.existsSync(dest)&&!fs.existsSync(dest+'.tar'),'Use before/parity/after and a fresh destination');
+cp.execFileSync('git',['archive',bundle.baseCommit,'-o',dest+'.tar','src','scripts','docs','index.html','.gitattributes'],{cwd:repo});fs.mkdirSync(dest);cp.execFileSync('tar',['-xf',dest+'.tar','-C',dest]);
+for(const[n,r]of Object.entries(bundle.arms[arm].files)){const b=Buffer.from(r.base64,'base64');assert.strictEqual(crypto.createHash('sha256').update(b).digest('hex'),r.sha256);fs.mkdirSync(path.dirname(path.join(dest,n)),{recursive:true});fs.writeFileSync(path.join(dest,n),b);}
+assert.deepStrictEqual(require(path.join(dest,'scripts/balance-panel')).manifest(dest),bundle.arms[arm].sources);console.log('Rebuilt exact '+arm+' source manifest with raw seven-file measurement overlay and common validation');

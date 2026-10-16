@@ -1,0 +1,101 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 85 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: Winter · Eastern Woodlands
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - generic: 🏠
+  - generic: 👹
+  - generic: 🏠
+  - generic: 🔥
+  - text: Li
+  - generic: 🏠
+  - generic: 🏠
+  - generic: ⛺
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - button "👁 Haven · Haven home The ground here looks disturbed. Worth a closer look. ▾ details":
+    - generic: 👁 Haven · Haven
+    - generic: home
+    - text: The ground here looks disturbed. Worth a closer look.
+    - generic: ▾ details
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - generic "Tap for full map": 📍 Haven
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - generic: "nearby:"
+  - button "Make a garden plot ↖"
+  - button "Go inside ↑"
+  - button "Warm hands ←"
+  - button "Examine ↘"
+  - generic: "📺 SYSTEM: \"📺 \"THE PARTY WINS!!\" The crowd goes WILD! Team merch is already selling!\""
+  - generic "Health":
+    - generic: ❤ 20
+  - generic "Food (you) — banked war chest":
+    - generic: 🍽 6000/2400 kcal (+3600 banked)
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 0 kcal carried"':
+    - generic: 🎒 2/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "🎒 Pack"
+  - button "🧬 You"
+  - button "😴 Sleep"
+  - button "⏳ Wait"
+  - button "🗺️ Map"
+  - button "settings": ⚙️
+  - heading "🏠 HAVEN — 2 souls" [level=3]
+  - paragraph: Morning in Haven. Twelve people, one fire, no plan beyond today.
+  - paragraph: "Pantry: 50.0 Mcal (about 12 days at this burn)"
+  - paragraph: "💧 Water: 20L clean / 0L dirty"
+  - button "📍 Caches"
+  - button "🍖 Host a feast (1,500 kcal)"
+  - paragraph:
+    - text: 😴 a tent · +33 health · energy restored
+    - text: Sheltered. Decent rest.
+  - paragraph:
+    - text: "🏠 Membership: 2/12 housed"
+    - text: "Membership means: Pantry share · Codex · \"One of ours\" · Cast"
+  - heading "🛖 Haven growth — Haven (cap 12)" [level=3]
+  - paragraph: A camp with a name. Twelve mouths, one fire.
+  - paragraph: "Next: The Longhouse (cap 16)"
+  - generic: "food stored: 50,000 / 8,000 ✓"
+  - generic: "wood: 10 / 12"
+  - paragraph:
+    - text: Population cap 16 — four more mouths under the roof.
+    - text: "Longhouse hearth: village meals stretch 10% further (less food burned daily)."
+    - text: Pantry capacity +25% — room for the bigger village.
+  - button "🔨 Build shelter (+2, 10 wood)"
+  - paragraph: 2 mouths need 800/day · the village brings in 0 · shortfall 800/day
+  - paragraph: "Haven survives when: Codex 10 (4) · Pantry 8.0 Mcal+ (50.0 Mcal)"
+  - paragraph: Tap a person in the grid to talk. They're living their lives.
+  - paragraph: 🟢 Li Rice — plumber (100)
+  - paragraph: 🔴 Jenny — carpenter (20)
+  - paragraph: "Also here:"
+  - paragraph: 📋 No one assigned. Tap a person → Assign task to direct them.
+  - button "Codex (4)"
+- complementary:
+  - text: PREPARED WARD — NATIVE TURNS / LEGACY30HP NPC
+  - button "Prepare protection"
+  - button "Read protection"
+  - button "Save and load" [active]
+  - button "Controlled hostile10"
+  - generic: "day 85; protector Jenny; NPC body settled; player 20; paid NPC casts 1; hunger 2; pending null; personal deed {\"day\":85,\"ally\":\"gen_upvqweo\",\"ability\":\"aegis_link\",\"scene\":\"tactical\",\"wound\":10}; player borrowed deed false; explicit load true"

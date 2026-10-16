@@ -1,0 +1,68 @@
+- main:
+  - generic: scattering://field
+  - generic "SYSTEM CHRONOMETER — exact. 512 ticks to dawn.":
+  - text: day 85 · dawn
+  - text: The world wakes. Animals are active.
+  - generic: "Season: probably winter? · big woods, real winters?"
+  - 'generic "The day''s budget: 0 of 512 used. Everything you do costs a little of the day."':
+    - generic: 512 left today
+  - generic: 🏠
+  - generic: 🏠
+  - generic: 🔥
+  - text: Leroy
+  - generic: 🏠
+  - generic: 🏠
+  - img "Mario":
+    - text: Mario
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - generic: 🌱
+  - generic: 🌿
+  - paragraph:
+    - text: 🧭 d-pad walks a step · hold to keep walking · tap a far tile to walk the full path · 🗺 walk to the edge, tap yourself, head out
+    - button "got it"
+  - group "walk pad":
+    - button "step northwest": ↖
+    - button "step north": ↑
+    - button "step northeast": ↗
+    - button "step west": ←
+    - button "stop walking": ■
+    - button "step east": →
+    - button "step southwest": ↙
+    - button "step south": ↓
+    - button "step southeast": ↘
+    - button "hide walk pad": –
+    - button "switch dpad side": ⇄
+  - text: The Understudy
+  - text: · 3 move · 1 act
+  - text: 🛡
+  - generic: 🧍 Mario
+  - button "⚔ Strike"
+  - button "👁 Study"
+  - button "📢 Shout"
+  - button "📢 Rally"
+  - button "🗣️ War cry"
+  - button "🍖 Offer"
+  - button "⏸ Wait"
+  - generic: ⚡
+  - 'button "⚡ Read Stance — Once per fight: study the monster''s stance. Reveals its likely next move (knowledge-gated). (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"'
+  - button "⚡ Take Aim — Spend turn aiming. Next shot is 2.5x damage and cannot miss. You are exposed (enemies get +hit). (40 kcal) ⚡ OVERCHARGED ×1.25 (well-fed) — food is fuel, abilities hit harder"
+  - generic: "📺 SYSTEM: \"ROUND 2!\""
+  - generic "Health":
+    - generic: ❤ 20
+  - generic "Food (you) — banked war chest":
+    - generic: 🍽 6000/2400 kcal (+3600 banked)
+  - generic "Hydration":
+    - generic: 💧 100% · 2L clean
+  - 'generic "Pack: 0 kcal carried"':
+    - generic: 🎒 2/20kg
+  - generic "System integration":
+    - generic: ◈ 5%
+  - button "Codex (2)"
+- complementary:
+  - text: PREPARED WARD — NATIVE TURNS / LEGACY30HP NPC
+  - button "Prepare protection"
+  - button "Read protection" [active]
+  - button "Save and load"
+  - generic: day 85; protector Mario; NPC body 30/30; player 20/100; paid NPC casts 1; hunger 2; pending null; personal deed null; player borrowed deed false
