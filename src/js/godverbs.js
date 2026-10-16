@@ -1092,9 +1092,10 @@
           const act = (id) => (P.actions || []).find(a => a.id === id);
           const kc = (a) => (a && a.cost && a.cost.kcal) || 100;
           const L = c.log, pw = G.power || 1;
-          if (gid === 'one_person_army' && !G.gv.pain && (c.taken || 0) >= (P.villagerCastAt || 0.35) * c.vHpMax && canPay(C, kc(act('turn_the_pain')))) {
+          const fieldPain = Math.max(0, (c.taken || 0) - (c.beamTaken || 0));
+          if (gid === 'one_person_army' && c.vHp > 0 && !G.gv.pain && fieldPain >= (P.villagerCastAt || 0.35) * c.vHpMax && canPay(C, kc(act('turn_the_pain')))) {
             G.gv.pain = true; pay(C, kc(act('turn_the_pain')));
-            const d = Math.round((c.taken || 0) * pw);
+            const d = Math.round(fieldPain * pw);
             c.lead.hp -= d; if (c.lead.hp <= 0) c.lead.alive = false;
             L.push('R' + c.round + ': every wound ' + c.vName + ' took comes back at once — ' + d + ' into the ' + c.mName + '. (Turn the Pain)');
             tele('god_verb', { god: gid, verb: 'turn_the_pain', who: G.vid, field: true, dealt: d });

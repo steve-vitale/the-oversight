@@ -5,6 +5,7 @@
 //   - fieldFight(vid, mdef, m, opts)
 //   - settleFieldFight(vid, rec, cause) -> applies an NPC fight health result once; preserves gross damage for logs
 // rules:
+//   - field_pain_weakness: Turn the Pain receives only actual bearer wounds minus landed beam damage; mixed aggregate hits apportion final damage by their original beam/physical shares, after mitigation, with physical taking the rounding remainder (code: fieldFight)
 //   - market_beam_weakness: pass the actual selected attack and its beam component to fieldIncoming; Gilded Guard can stop physical antlers, never beam damage. No extra RNG. (code: fieldFight)
 //   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
 //   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
@@ -295,6 +296,7 @@
       var vHp = (vv.health && vv.health[vid] !== undefined) ? vv.health[vid] : 100;
       if (vHp > vHpMax) vHpMax = vHp;
       var vHpStart = vHp;
+      var vBeamTaken = 0; // fight-local landed light; never a raw attack estimate
       // VILLAGER COMBAT SPEED (blitz-combatstats 2026-10-13): the flat 3 was
       // a lie — villagers move at different paces. villagerSpeed derives
       // initiative from age, wounds, and temperament (2..4), on the same
@@ -682,6 +684,11 @@
               // adjacent IN ADDITION to the beam. Closing in has a price.
               var thrash = 0;
               if (mdef.id === 'gallowdeer') thrash = lroll([10, 16]);
+              // The field model resolves one aggregate hit. Common reductions
+              // preserve its beam/physical shares; only the final bearer hit
+              // enters the pool, never a miss, ally hit or absorbed damage.
+              var painBeamShare = /beam|sweep/i.test(String((rAttack.pattern || {}).type || '')) || /beam|\bray\b|laser|glare|searchlight/i.test(rAtkName)
+                ? (thrash > 0 ? d / Math.max(1, d + thrash) : 1) : 0;
               var total = d + thrash;
               // SIG W3C (2026-10-10): signature bonus damage (callback borrowed
               // swing, buffering predicted strike) — blow by blow, not a table.
@@ -834,6 +841,7 @@
                   if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                vBeamTaken += Math.max(0, Math.min(total, Math.round(total * painBeamShare)));
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
@@ -854,7 +862,7 @@
             var gpOut = null;
             if (!trickAct && gpF) {
               try {
-                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken }));
+                gpOut = GPf.fieldAct(gpF, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound, taken: rec.vTaken, beamTaken: vBeamTaken }));
                 if (gpOut.vHp != null) vHp = gpOut.vHp;
                 if (gpOut.abStun) abStun += gpOut.abStun;
                 if (gpOut.dealt) rec.mDealt += gpOut.dealt;

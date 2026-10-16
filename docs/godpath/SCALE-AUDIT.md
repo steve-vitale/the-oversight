@@ -35,10 +35,16 @@ contest rule, audience reaction, judged advantage or mercy choice.
    bypassed the tactical guard. The selected attack and beam component now
    reach the field hook; mixed antlers remain physical. See market-beam-audit.md
    in dated evidence and test-field-market-beams.js.
-2. Brawler field Turn the Pain currently reads aggregate `c.taken`; tactical
-   painPool subtracts tracked beam damage. The field model's wound accounting
-   must distinguish actual landed beam wounds before changing its retaliation.
-   Do not infer a wound amount merely from the attack's raw damage.
+2. Brawler field Turn the Pain now receives cumulative landed beam damage
+   separately from gross `c.taken` (2026-10-16). Actual final bearer hits,
+   after dodge/armor/brace, determine the exclusion; ally hits do not count.
+   The field model's single mixed hit apportions final integer damage by its
+   original beam/physical shares, with physical taking the remainder. This
+   attribution is a needs-eyes judgment; actual hit damage is unchanged.
+   The cast also requires positive current HP, preventing retaliation after
+   a fatal blow before the field round's normal death check. Runtime22/22
+   and prepared real browser fights prove the contracts; natural access and
+   larger scale/strategic effects remain distinct. See dated field-pain-audit.md.
 3. Audit true player/NPC recipients of party powers and daily nourishment.
    `liveOurs` includes the bearer, but some command/terms loops explicitly skip
    player-kind actors; `feedMultitude` always excludes Game.villagerId even when

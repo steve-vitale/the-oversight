@@ -21,9 +21,16 @@ prevent repeat and mantle payouts. All holders calculate from the same dawn
 opening stock. Prepared runtime22/22, public phone Sleep/save/reload and
 matched source-bound campaigns are retained in interest-parity-audit.md.
 Other passives and Muse regional files remain outside this change. The
-wiring audit also reproduces pre-existing Cornucopia onForage/forageMult
-missing callers on both roots; audit those next, without treating module
-wiring as universally green.
+wiring audit reproduced missing Cornucopia onForage/forageMult callers;
+the subsequent repair is documented below. No universal wiring claim.
+
+Field pain weakness (2026-10-16): Codex takes the narrow fieldFights.js
+landed beam accounting and godverbs.js physical-only/positive-HP Turn the
+Pain caller. Existing hit damage, food cost, power, threshold and frequency
+stay fixed. The mixed aggregate-hit attribution is documented for Steve's
+eyes. No region/nomad files or broader field damage/targeting rewrite.
+The ordinary field strike's separate end-of-round death ordering remains
+outside this god-verb correction; no blanket posthumous-action fix is claimed.
 
 - Lane: `docs/godpath/PLAN.md` "What's left" — ascension gates, villager active
   verbs, early-kit subclass visibility, `god.scale` wiring, Table endings by

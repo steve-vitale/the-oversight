@@ -9,6 +9,17 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Field brawler weakness (2026-10-16): Turn the Pain now uses actual landed
+field wounds minus light, matching the tactical beam exclusion. Final
+post-mitigation harm determines the counter; ally hits are separate. A
+fatal hit cannot trigger this god strike before end-of-round death handling.
+The existing35percent trigger,150kcal-equivalent price, power and one-use
+limit remain. Runtime22/22 and prepared real browser fights pass; quick170/170
+and full942/942 pass after disclosed legacy drifter-test triage. Exact
+sources, matched panels, opportunity limits and the needs-eyes mixed-hit
+attribution are in ../evidence/2026-10-16/field-pain-audit.md. Other scale
+and recipient gaps in godpath/SCALE-AUDIT.md remain open.
+
 Hoarder payoff parity (2026-10-15): the existing dawn hook paid only the
 player. It now pays actual living resident NPC holders with their own build,
 the same existing rate/threshold/cap and a saved once-per-person/day guard.

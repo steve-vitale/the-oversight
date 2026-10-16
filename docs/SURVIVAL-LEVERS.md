@@ -235,6 +235,31 @@ when the pending introductory-choice policy question is resolved.
 See ../evidence/2026-10-15/cornucopia-audit.md for exact roots, raw panels,
 census, matched replay controls and finite-patch native phone proof.
 
+## One-Person Army: off-screen returnable wounds
+
+2026-10-16: actual landed beam damage is now excluded from the field
+Turn the Pain pool, matching the tactical weakness. Gross vTaken still
+records all harm for wounds, morale, settlement and logs; a fight-local
+beam counter changes no actual hit. Pure light contributes zero, physical
+hits remain fully returnable, and mixed aggregate hits apportion final
+integer harm by premitigation beam/physical shares. Physical receives the
+rounding remainder. This attribution is an Agent interpretation of the
+existing aggregate model, marked needs-eyes, not a new damage reduction.
+
+The automatic field cast uses the same35percent-maxHP trigger, one use,
+150kcal-equivalent payment and power multiplier, with no cap. It now also
+requires current HP above zero: a fatal hit cannot buy a posthumous god
+strike before end-of-round death processing. A refusal after that boundary
+and a later living action are separate. Ordinary field-strike death ordering,
+direct signature models and other gods are not declared fully reconciled.
+
+These are two related corrections (beam weakness and living delivery), so
+do not attribute every outcome difference to one. Prepared physical controls
+still cast/pay, while beam, dodged, ally-targeted and fatal controls do not
+create returnable light or posthumous casts. Hunger still blocks payment.
+Read ../evidence/2026-10-16/field-pain-audit.md for all per-policy metrics,
+actual exposure, full-suite triage, source roots and phone proof.
+
 ## Introductory choice and reactor timing
 
 The shared loader leaves choices to policies; capable currently omits the
