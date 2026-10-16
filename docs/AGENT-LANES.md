@@ -14,6 +14,13 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Daily Voice (2026-10-16): Codex owns godverbs.js's shared first-own-turn
+daily rally hook for player/NPC recipients and its save/expiry proof. Keep
+the existing150kcal/five-grounding daily price and three active turns. The
+named natural-holder replays audit bot timing; a policy change is separate.
+See ../evidence/2026-10-16/daily-voice-audit.md. Aura timing, regional systems
+and NPC daily cast planning are outside this unit.
+
 Personal grounding (2026-10-16): Codex owns table.js's actor grounding store,
 villager-build.js's mantle transfer, godverbs.js's actual speaker cost and paid
 Voice save settlement. Narrow game.js shared-feast and villager-agency.js
@@ -26,8 +33,8 @@ cursor resume and save/load gates for NPC Voice/Crowd Moves commands. The
 player chooses the bonus action; NPC AI never chooses it. The shared canonical
 recipient selector also serves Live Broadcast and Rally Aura. Preserve food
 costs, use limits, original order and normal player turns. The personal
-grounding follow-up above closes the NPC Voice erosion gap; daily Voice
-support remains separate. See
+grounding follow-up above closes the NPC Voice erosion gap; the daily Voice
+follow-up now covers the player's finite daily rally. See
 ../evidence/2026-10-16/player-command-audit.md.
 
 God support recipients (2026-10-16): Codex owns the narrow godverbs.js

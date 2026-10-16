@@ -9,6 +9,17 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Daily Voice (2026-10-16): real player turn entry now receives the existing
+paid day's rally, with finite own-turn expiry, saved recipient gate and
+late-NPC parity. Shared-kit and native phone proof are in
+../evidence/2026-10-16/daily-voice-audit.md. Natural-holder replays expose a
+separate policy timing gap: dawn/upkeep fights can happen before godDay;
+four sampled holders pay102 daily casts but start no fight under that day's
+word. Investigate public-goal/food/grounding-aware preparation in a separate
+policy experiment; do not force peaceful playstyles into combat or infer
+campaign viability from prepared access. NPC daily planning, class aura
+opening/late injection and performance-contest realization remain open.
+
 Personal grounding (2026-10-16): actual speaker costs, person-owned succession,
 paid shared-feast recovery and finite knowledge-transfer recovery are wired.
 The cost/save/retry proof runs in the normal quick/full check. Read
@@ -21,8 +32,8 @@ the ordinary player turn. Sync/async paths and save/load retain the handoff
 and spent cast gates; stale callbacks cannot advance a different loaded fight.
 Live Broadcast and nearby Rally Aura now include distinct living player allies.
 Read ../evidence/2026-10-16/player-command-audit.md for runtime/phone proof,
-source-bound campaign measurements and remaining limits. Daily Voice support
-remains open; the personal grounding follow-up closes NPC Voice erosion,
+source-bound campaign measurements and remaining limits. The daily Voice
+follow-up above covers player turn entry; personal grounding closes NPC erosion,
 not full NPC social/food-conversion parity.
 
 God support recipient repair (2026-10-16): wounded NPC One-Person Army holders

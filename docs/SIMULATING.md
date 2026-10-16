@@ -311,9 +311,18 @@ do not mistake those timestamps for gameplay effects. Calls trace that named
 replay, not every run in a panel. Prepared bonus turns and unchanged campaign
 metrics cannot prove natural NPC acquisition, usefulness or complete Voice
 cost parity. That dated audit predates the personal grounding follow-up;
-daily Voice support and full NPC feast/social parity remain open.
+the daily Voice follow-up covers player turn entry; full NPC feast/social
+parity remains open.
 
 ## Maintaining measurement
+
+Daily Voice upkeep: `scripts/godpath/test-daily-voice.js` runs automatically
+in quick/full. Preserve actual paid action → real constructor/turn entry →
+damage/expiry → save/reload, plus late/dead/fled/hostile/self-alias cases.
+The existing `_gvVoiced` fighter receipt survives saves; bonus turns consume
+duration rather than refresh it. Natural-holder traces must count paid casts
+separately from same-day fight opportunities: `godDay` in daily can follow
+upkeep encounters. See the daily-voice audit before interpreting zero effects.
 
 Grounding upkeep: `node scripts/godpath/test-grounding-person.js` is discovered
 by quick/full checks. Keep legacy/current-bearer storage, per-person history,

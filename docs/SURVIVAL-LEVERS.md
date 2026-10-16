@@ -61,6 +61,18 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision log
 
+Daily Voice recipients (2026-10-16): Be Heard's unchanged150kcal and five
+grounding now buy the existing daily rally for the player as well as NPCs.
+Four counters are set before the ordinary own-turn decrement, preserving
+three active turns of the existing raw+4 damage/hold-line convention.
+Stronger existing rally is preserved before ticking. No extra strike charge,
+command, food or repeated grounding bill is created. Recipient gates persist
+across save/load; bonus/stunned turns spend duration, and tomorrow's new
+fight needs tomorrow's paid word. Prepared native access and matched metrics
+are recorded in ../evidence/2026-10-16/daily-voice-audit.md. Four named natural
+holders pay102 daily casts with zero same-day fights; preserve that timing
+diagnosis before changing policy or claiming useful campaign exposure.
+
 Personal grounding (2026-10-16): humanity follows the person across succession,
 not the inherited office. Current bearer remains scholar.grounding; other
 people use state.groundingByPerson, default100, including explicit zero.

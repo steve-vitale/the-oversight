@@ -915,17 +915,36 @@
   // including coalition blades injected after the fight began
   function today() { return (Game.state.scholar || {}).day || 0; }
   function fedToday() { return ((Game.state.village || {}).harvestDay) === today(); }
+  function dailyVoice(f, v) {
+    if (!f || f.over || !v || !v.alive || v.fled || !isOurs(v) || !(f.fighters || []).includes(v) || v._gvVoiced) return;
+    if (v.kind !== 'player' && v.villagerId === Game.villagerId) return;
+    if (((Game.state.village || {}).voiceDay) !== today()) return;
+    // Both real turn-entry paths decrement their own counters next: four
+    // preserves the existing three active turns, once per fighter/fight.
+    v._gvVoiced = true;
+    v.rallyBuff = Math.max(v.rallyBuff || 0, 4); v.rallied = Math.max(v.rallied || 0, 4);
+    const g = GV(f);
+    if (!g.saidVoice) {
+      g.saidVoice = true;
+      Game.say(v.kind === 'player'
+        ? 'Your word from this morning is still in your ears: you fight rallied. (Speak and Be Heard)'
+        : 'Your word from this morning is still in their ears: your people fight rallied. (Speak and Be Heard)');
+    }
+  }
+  const _bt = Game.tbBeginTurn;
+  if (typeof _bt === 'function') {
+    Game.tbBeginTurn = function () {
+      try { const p = this.tbCurrent(); if (p && p.kind === 'player') dailyVoice(this.tbfight, p); }
+      catch (e) { warn('player daily Voice', e); }
+      return _bt.apply(this, arguments);
+    };
+  }
   const _vt = Game.tbVillagerTurn;
   if (typeof _vt === 'function') {
     Game.tbVillagerTurn = function (v) {
       try {
         const f = this.tbfight;
-        if (f && v && !v._gvVoiced && ((this.state.village || {}).voiceDay) === today()) {
-          v._gvVoiced = true;
-          v.rallyBuff = Math.max(v.rallyBuff || 0, 4); v.rallied = Math.max(v.rallied || 0, 4);
-          const g = GV(f);
-          if (!g.saidVoice) { g.saidVoice = true; this.say('Your word from this morning is still in their ears: your people fight rallied. (Speak and Be Heard)'); }
-        }
+        dailyVoice(f, v);
         if (f && v && fedToday()) { const g = GV(f); if (!g.saidFed) { g.saidFed = true; this.say('Everyone here ate this morning because the garden asked: the party fights fed. (Feed the Multitude)'); } }
       } catch (e) { warn('villager turn', e); }
       return _vt.apply(this, arguments);
