@@ -38,7 +38,7 @@
 // mantleDay at the reset moment (mirror of ledger.js:841-844); dawn has a
 // fallback for non-death transitions (exile etc.).
 //
-// RE-ARM EVENT (per successor bearer <redacted> initial vid): the first dawn row with
+// RE-ARM EVENT (per successor; bearer = initial vid): the first dawn row with
 // day > mantleDay[vid] and cumNet < -5000 (strict <, the engine's
 // comparison). Each event is attributed with:
 //   (1) latency = armDay - mantleDay (days from mantle-take to re-arm)
@@ -49,7 +49,7 @@
 //       'voluntary' if voluntaryNet(armDay) < -5000
 //   (3) mealShare = (cumTakes - volTakesCum)/cumTakes at arm day
 //   (4) cold-shoulder agreement: the bearer's first stage 0->1 firing while
-//       Bearer <redacted> office agrees with the dated ledger iff voluntaryNet7 < 0
+//       in office agrees with the dated ledger iff voluntaryNet7 < 0
 //       (the freeloader-clock reading; the cumulative-dated form
 //       voluntaryNet < 0 is reported alongside, not scored)
 // An event counts ATTRIBUTED when (1)-(3) are present and (4) is present or
@@ -303,10 +303,10 @@ function installRearmLat(Game) {
         continue;
       }
       // Cold-shoulder agreement: the bearer's first 0->1 firing while in
-      // office (matched to the bearer <redacted> record at firing day).
+      // office (matched to the bearer's record at firing day).
       const firings = track.stageEvents.filter(e => e.from === 0 && e.to === 1);
       const dayVid = (d) => {
-        // bearer <redacted> record at day d: last row with day <= d
+        // bearer's record at day d: last row with day <= d
         let bvid = null;
         for (const r of track.rows) { if (r.day <= d) bvid = r.vid; }
         return bvid;

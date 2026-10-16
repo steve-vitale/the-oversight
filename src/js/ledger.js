@@ -830,13 +830,13 @@
       s.villagerId = newId;
       // FRESH SOCIAL LEDGER (longsim scale-wall r8 2026-10-13, lever 5): the
       // takes/gives book is per-PERSON, and the successor's NPC-era communal
-      // meals sat in v.takes[newId] as "mystery takes" the new Bearer <redacted> write
+      // meals sat in v.takes[newId] as "mystery takes" under the new bearer's id
       // (r7) — the old cumulative bar read them as hoarding on day one. The
       // new face starts their own book: takes, gives, and the dated takeHist
       // all reset. (The office's trust transfers discounted just below — the
       // village remembers the office, not the meals. The freeload clock
       // v.freeload[newId] is intentionally untouched here: a known drain
-      // becoming Bearer <redacted> a design question for a future run, not this one.)
+      // becoming bearer is a design question for a future run, not this one.)
       try {
         if (v.takes) v.takes[newId] = 0;
         if (v.gives) v.gives[newId] = 0;
@@ -988,13 +988,13 @@
       // MANTLE HANDOFF RECORD (journey-succession 2026-10-11): the village is
       // the protagonist — conversational continuity must survive the bearer,
       // but HONESTLY. Threads, want-seeds, favors and memories planted with
-      // the dead Bearer <redacted> the predecessor's name from here on (see
+      // the dead bearer are filed under the predecessor's name from here on (see
       // inheritedName() in conversation.js) — the new face never pretends
-      // they were in the room. Obligations the dead Bearer <redacted> not
+      // they were in the room. Obligations the dead bearer owed do not
       // transfer silently: an open promise is released (neither kept nor
       // broken — the promiser is dead; mirrors PROMISE RELEASE for dead NPCs
       // in betrayal.js) and its favor reverts to a live ask, so the NPC
-      // re-asks the new Bearer <redacted> naming the predecessor. The repay
+      // re-asks the new bearer, naming the predecessor. The repay
       // seed references a promise that no longer exists — stale, deleted;
       // the need-flow re-asks honestly via the favor record.
       try {
