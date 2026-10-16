@@ -9,6 +9,8 @@
 //   - recognizeClass(who) -> the holder's class record or null (narrates once per change)
 //   - godpathClass(who) -> stored class record {path, subclass, since, god} or null
 //   - godpathDeedStatus(who, godId, day?) -> read-only real deed progress for the canonical person; no old-save invention
+//   - beginApexHunt(game, fight), observeApexHunt(game, fight), finishApexHunt(game, fight, result) -> saved opening/participation evidence for actual solo monster kills
+//   - finishFieldApexHunt(game, vid, opening, result) -> the same person-owned deed from a real NPC field result
 //   - godpathDeedHint(who) -> objective/progress only for a known class, until ascension
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
 //   - pathLean(who, abilityId, opts) -> lean score (opts.knows(id) gates unknown abilities to 0; never reveals them)
@@ -200,6 +202,87 @@
     const t = last && Number.isFinite(last.t) ? last.t : 0;
     try { Game.tele && Game.tele('godpath_deed', { t, who: vid, event: 'death_refused', ability, scene, day: s.day || 0 }); }
     catch (e) { warn('tele deed', e); }
+  }
+
+  function recordApexHunt(vid, actorMaxHp, prey, scene, method) {
+    const s = Game.state.scholar, v = Game.state.village, p = Game.vpOf(vid);
+    if (Game.over || !vid || !p || p.id !== vid || p.dead ||
+        (isPlayer(vid) && !(s.health > 0)) || !prey.full ||
+        !Game.data.monsters.some(m => m.id === prey.monster) ||
+        !(Number.isFinite(actorMaxHp) && actorMaxHp > 0 && Number.isFinite(prey.hp) && prey.hp > actorMaxHp)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.apex_hunt) return;
+    book.apex_hunt = { day: s.day || 0, monster: prey.monster, actorMaxHp, openingHp: prey.hp, scene, method };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: vid, event: 'apex_hunt', day: s.day || 0, monster: prey.monster, scene, method }); }
+    catch (e) { warn('solo hunt deed', e); }
+  }
+  const huntSide = x => x && ['player', 'villager', 'ally'].includes(x.kind);
+  const huntPerson = (game, x) => x.kind === 'player' ? game.villagerId : x.villagerId;
+  function beginApexHunt(game, f) {
+    if (!f || f._gpApexHunt) return;
+    const side = (f.fighters || []).filter(huntSide), prey = new Map();
+    for (const m of (f.fighters || [])) {
+      if (m.kind !== 'monster' || !m.mdef || !m.alive || m.fled || !(m.hp > 0)) continue;
+      const key = game.tbSnakeLineageKey(m), old = prey.get(key);
+      if (old) { old.hp += m.hp; old.full = old.full && m.hp === m.maxHp; }
+      else prey.set(key, { key, monster: m.mdef.id, hp: m.hp, full: m.hp === m.maxHp });
+    }
+    f._gpApexHunt = { version: 1, lost: false, present: side.map(x => x.key), prey: [...prey.values()],
+      actors: side.map(x => { const id = huntPerson(game, x); return { key: x.key, id,
+        // A distant human companion's legacy30HP proxy is not their body's
+        // full capacity. Field fights use the same100HP human floor.
+        maxHp: x.kind === 'player' ? x.maxHp : Math.max(100, x.maxHp || 0, game.state.village.health?.[id] || 0),
+        pack: !!(id && holderMagicIds(id).includes('pack_hunt')), usedPack: [] }; }) };
+    observeApexHunt(game, f);
+  }
+  function observeApexHunt(game, f, damagedKey) {
+    const h = f && f._gpApexHunt;
+    if (!h || h.version !== 1) return;
+    // Door re-entry restores wounds after startCombat returns. Check each
+    // prey again before its first actual hit; an opening template must not
+    // turn that already wounded animal into a fresh hunt. Later own damage
+    // is expected and must not revoke an otherwise qualifying encounter.
+    for (const p of h.prey) {
+      const body = (f.fighters || []).filter(x => x.kind === 'monster' && game.tbSnakeLineageKey(x) === p.key);
+      if (!p.hit && body.some(x => x.hp !== x.maxHp)) p.full = false;
+      if (body.some(x => x.key === damagedKey)) p.hit = true;
+    }
+    const side = (f.fighters || []).filter(huntSide);
+    for (const x of side) {
+      if (!h.present.includes(x.key)) h.present.push(x.key);
+      if (!x.alive || x.fled || !(x.hp > 0) || x._echoed) h.lost = true;
+    }
+    for (const key of h.present) if (!side.some(x => x.key === key)) h.lost = true;
+    for (const a of h.actors) {
+      const x = side.find(x => x.key === a.key);
+      if (!x || huntPerson(game, x) !== a.id) h.lost = true;
+    }
+  }
+  function markApexPack(f, actor, monster) {
+    observeApexHunt(Game, f);
+    const h = f?._gpApexHunt, a = h?.actors.find(x => x.key === actor?.key);
+    if (a?.pack && monster) a.usedPack.push(Game.tbSnakeLineageKey(monster));
+  }
+  function finishApexHunt(game, f, result) {
+    observeApexHunt(game, f);
+    const h = f && f._gpApexHunt;
+    if (!h || h.lost || !['won', 'routed'].includes(result)) return;
+    for (const p of h.prey) {
+      const body = (f.fighters || []).filter(x => x.kind === 'monster' && game.tbSnakeLineageKey(x) === p.key);
+      if (body.length && body.every(x => !x.alive && !x.fled && x.hp <= 0)) {
+        for (const a of h.actors) {
+          const pack = a.pack && a.usedPack.includes(p.key);
+          if (pack || h.present.length === 1) recordApexHunt(a.id, a.maxHp, p, 'tactical', pack ? 'pack' : 'solo');
+        }
+      }
+    }
+  }
+  function finishFieldApexHunt(game, vid, opening, result, support) {
+    if (!opening || result.outcome !== 'vKill' || !(result.vHpLeft > 0) || opening.lost || !support.intact) return;
+    const pack = opening.pack && support.packUsed;
+    const alone = !opening.allies && !result.calledHelp && !result.allyVid && !(result.allyDealt > 0);
+    if (pack || alone) recordApexHunt(vid, opening.actorMaxHp, opening.prey, 'field', pack ? 'pack' : 'solo');
   }
 
   // recognizeClass(who): THE one function for player and villagers.
@@ -588,6 +671,7 @@
       const rounds = birds ? (a.rounds || 3) * 2 : (a.rounds || 3);
       m._frozen = Math.max(m._frozen || 0, pin);
       m._birdStrike = (m._birdStrike || 0) + rounds;
+      if (ab.id === 'pack_hunt') markApexPack(f, p, m);
       say(C, `You whistle once. They were listening: wings, teeth, claws, all on ${nm(m)}. It's pinned for ${pin} rounds and harried for ${rounds}${birds ? ' (the birds were already on it: twice as long)' : ''}. (Pack Hunt)`,
         `${C.name} whistles once. Wings, teeth, claws, all on ${nm(m)}: pinned ${pin} rounds, harried ${rounds}. (Pack Hunt)`);
       return true;
@@ -1624,6 +1708,7 @@
   };
 
   S.Godpath = {
+    beginApexHunt, observeApexHunt, finishApexHunt, finishFieldApexHunt,
     data, abilityPaths, classify, holderMagicIds, recognizeClass, godpathClass, classLine,
     pathLean, shapeOffers, kitSheet, holderJobPaths, sheetRng, VERBS, registerVerbs, wardenWallAt,
     npcDeathRefusal, allyWouldFall, onAllyFell, absorbPlayerHit, aegisRedirect, damageMult, dodgeBonus,

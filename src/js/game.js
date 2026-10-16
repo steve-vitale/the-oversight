@@ -8017,6 +8017,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             playerCommands: f.playerCommands || [],
             playerCommandReturn: f.playerCommandReturn || null,
             godVerbs: f._gv || null,
+            godpathApexHunt: f._gpApexHunt || null,
             godpathUses: f._gpUses || null,
             godpathVillagerUses: f._gpVUses || null,
             terraform: f.terraform || {},
@@ -8488,6 +8489,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             playerCommands: Array.isArray(tbS.playerCommands) ? tbS.playerCommands : [],
             playerCommandReturn: tbS.playerCommandReturn || null,
             _gv: tbS.godVerbs || null,
+            _gpApexHunt: tbS.godpathApexHunt || null,
             _gpUses: tbS.godpathUses || null,
             _gpVUses: tbS.godpathVillagerUses || null,
             round: tbS.round || 1,
@@ -29923,6 +29925,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         gridSize: (typeof this.isTitan === 'function' && this.isTitan(mid)) ? 12 : 9,
         tableTrial: tableTrial,
       };
+      try { S.Godpath?.beginApexHunt(this, this.tbfight); } catch (e) { console.warn('[godpath] hunt opening', e); }
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
       // the earlier top-of-startCombat placement read a null fight.)
@@ -30219,6 +30222,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
 
     tbBeginTurn() {
+      try { S.Godpath?.observeApexHunt(this, this.tbfight); } catch (e) { console.warn('[godpath] hunt participation', e); }
       // EMPTY-FIELD RESOLUTION (blitz-fightres 2026-10-13): the end check
       // ran after AI turns, player verbs, and damage sites — but never when
       // the turn driver itself ARRIVED at the player's turn. A fight at zero
@@ -33274,6 +33278,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
 
     tbDamage(targetKey, dmg, sourceLabel, sourceKey, opts) {
+      try { S.Godpath?.observeApexHunt(this, this.tbfight, targetKey); } catch (e) { console.warn('[godpath] hunt damage', e); }
       const t = this.tbFighter(targetKey);
       // EVOLUTION (combat__iron_warden, 2026-10-11): intercept — take an ally's hit, once per fight.
       try {
@@ -40211,6 +40216,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.tele('combat_end', { result: result, php: _ceP ? Math.round(_ceP.hp || 0) : null });
       } catch (e) {}
       f.over = true; f.result = result;
+      try { S.Godpath?.finishApexHunt(this, f, result); } catch (e) { console.warn('[godpath] hunt outcome', e); }
       // TITAN PIECES HOLD THEIR GROUND (diagnosis-endgame 2026-10-15):
       // startCombat lifts the piece off the map; a titan or campaign piece
       // that is still standing after a loss, a flee or a rout goes back on

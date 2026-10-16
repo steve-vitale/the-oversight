@@ -14,6 +14,16 @@ region/nomad files are untouched.
 
 ## Codex (taking over Claude's godpath work)
 
+Apex fitting deed (2026-10-16): Codex owns godpath.js's person-owned fresh,
+stronger-prey receipt, real tactical opening/damage/outcome and saved encounter
+ledger, plus fieldFights.js's actual living kill settlement. Stalker can hunt
+solo; Beastmaster must actually pay/call opening-held Pack Hunt on the prey,
+with every allied fighter alive and still present. Preserve full-body HP,
+day80/build gates, existing active gods, costs and all23 metrics. Source-pinned
+panels, changed-outcome replays and native combat/load/class proof are in
+../evidence/2026-10-16/apex-deed-audit.md. This does not claim Muse's region,
+nomad or world lane, or resolve Garden/reactor interpretation questions.
+
 Garden feeding repair (2026-10-16): Codex owns godverbs.js's canonical living
 NPC caster/recipient boundary, player fullness at min(fullLine,kcalCap), and
 post-payment dawn snapshot. Preserve stronger reserves, reactor restrictions,

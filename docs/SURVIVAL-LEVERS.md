@@ -41,6 +41,21 @@ campaign while the first bearer dies. Winning early can censor survival samples.
 
 ## Decision procedure and upkeep
 
+Apex authored hunt (2026-10-16, needs-eyes): ascension access now requires a
+personal actual fresh monster kill above opening full-body HP, either solo
+or with opening-held Pack Hunt actually paid/called on that prey and every
+allied fighter alive/present. Both tactical and field callers use the same
+receipt. Class age, old synergies, a wounded foe and another person's pack
+cannot substitute. A larger own health bar raises the qualifying prey line;
+being wounded does not lower it. Fresh field draws use their actual opening
+HP, not the template's random upper bound. Existing active gods remain.
+This changes access to Apex's existing power, not its damage/cost, enemy stats,
+day80, complete-kit gates or Table access. Holdout wins48->48/19->18/25->24/
+34->33; deaths88->88/84->87/53->55/46->44 and community13->13/24->24/27->28/
+15->16. Keep the adverse directions even below automated tolerances. Read
+../evidence/2026-10-16/apex-deed-audit.md for the review decision and source-bound
+replays; no lower-win result alone establishes a regression or a good change.
+
 1. Name one lever and the causal hypothesis. State which opportunity, cost or
    counterplay should change and the plausible harm to other playstyles.
 2. Collect matched 16-seed screens across the four standard policies plus the

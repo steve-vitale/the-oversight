@@ -374,6 +374,13 @@
         members.push({ hp: php, maxHp: pmax, alive: php > 0 });
       }
       rec.packCount = packN;
+      // A freshly drawn field body has no prior wounds. A persisted world's
+      // body needs a known full-health maximum; unknown old wounds earn no deed.
+      var huntOpening = { actorMaxHp: vid === this.villagerId ? this.maxHealth() : vHpMax,
+        allies: Math.max(0, opts.allies || 0), pack: vAbs.indexOf('pack_hunt') >= 0, lost: false,
+        // vKill means the lead fell; other members may merely scatter.
+        prey: { monster: mdef.id, hp: members[0].hp,
+          full: !m || m.hp == null || (Number.isFinite(m.maxHp) && m.hp === m.maxHp) } };
       var mBreak = wave >= 2 ? 0.15 : 0.25; // nastier things hold longer
 
       var vAlive = vHp > 0;
@@ -807,6 +814,7 @@
                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
                 }
                 if (allyHp <= 0) {
+                  huntOpening.lost = true;
                   allyIn = false;
                   rec.log.push(allyName + ' goes down!');
                   // AID (comms 2026-10-10): a foreign ally's fall lands on the
@@ -1190,6 +1198,9 @@
           if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
         }
       } catch (e) {}
+      try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
+        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
+      catch (e) { console.warn('[godpath] field hunt outcome', e); }
       return rec;
     },
 

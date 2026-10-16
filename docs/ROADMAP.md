@@ -9,6 +9,18 @@ is archived in `docs/_archive-ROADMAP-2026-10-03.md`.*
 
 ## 0. Every session
 
+Apex fitting deed (2026-10-16): real fresh stronger-prey kills now replace
+the Hunter's class-age/synergy shortcut. Solo supports Stalker; Beastmaster
+uses its opening-held, actually paid Pack Hunt with all allied fighters alive
+and present. Tactical and field receipts are personal and saved. Full-body
+HP, existing costs, day80 and the complete build remain required. Three
+authored deeds/seven legacy proxies; Garden and reactor questions remain open.
+Matched16 screens and64 disjoint holdouts per policy, every changed discrete
+outcome/sampled-god replay and actual native combat/load/class proof are in
+../evidence/2026-10-16/apex-deed-audit.md. Maker/merchant/caregiver each lose one
+holdout win; maker/merchant deaths and merchant/caregiver community losses
+rise. Investigate and retain these tradeoffs without win-recovery tuning.
+
 Table public entry (2026-10-16): the pending overlap audit below is resolved
 by a shared entry reason, preview readiness and click-time recheck. It matches
 actual Haven-panel access (full-integration remote access remains), refuses

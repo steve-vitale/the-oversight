@@ -7,6 +7,15 @@ Proof note: `evidence/2026-10-14/godpath-unified.md`.
 
 ## The design (built)
 
+2026-10-16 Apex deed: actual fresh monster kills replace its class-age/synergy
+proxy. Opening prey HP must exceed the hunter's full-body maximum. Solo and
+actually paid Pack Hunt routes preserve both subclass fantasies; supported
+hunts require every allied fighter to remain alive/present. Receipts belong
+to actual people across tactical/field fights and save/load. Old victories
+are not invented and existing active gods remain. Three authored deeds are
+now wired; seven proxies remain. Read ../../evidence/2026-10-16/apex-deed-audit.md
+before interpreting the lower Apex access or adjusting a survival lever.
+
 2026-10-16 support follow-up: NPC brawler wound rally and fallen Voice weakness
 now reach distinct living player allies under the existing terms. Player rally
 has a real damage consumer and finite own-turn lifetime. See
@@ -35,7 +44,7 @@ Job -> track -> **class** -> **god** -> Table.
 | Subclass verbs (walls, pulls, pushes, swaps, blink, heals, pins, bribes, broadcast, command, stoke, guard, feed camp) | `src/js/godpath.js` (`do` on a data action) | built, 27 new abilities |
 | Class recognition, player + villager, one function | `godpath.js recognizeClass` | built; sheet line in `app.js` |
 | Offers lean to the path | `godpath.js shapeOffers` (player, villager, gift sheets); `villager-build.js buildPathLean` | built |
-| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable and the Relay; legacy proxies for eight remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
+| Ascension = class + payoff + 4 path + deed, day 80+ (authored deeds for Unkillable, the Relay and Apex; legacy proxies for seven remaining gods) | `godhood.js` (derived) + dawn check | built; gates are data levers |
 | Table never reads godhood | `scripts/godpath/ladder.js` | enforced |
 
 ## Checks

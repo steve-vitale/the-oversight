@@ -28,9 +28,13 @@ const T = K.reporter('proof-godhood-rework-20261013');
   const apex = G.byId('apex_predator');
   const stalker = ['trophy_room', 'static_toss', 'bloodhound', 'lucky_rock'];
   const deed = apex.requires.synergies[0];
-  const build = (ids, syns) => ({ abilities: ids.map(id => ({ id })), activeSynergies: syns || [deed], inventory: [], godhood: { recognized: {}, active: [] } });
+  const build = (ids, syns) => ({ villagerId: Game.villagerId, abilities: ids.map(id => ({ id })), activeSynergies: syns || [deed], inventory: [], godhood: { recognized: {}, active: [] } });
 
   T.section('player: the four gates');
+  // Prepared requirement-model receipt. Real tactical/field acquisition is
+  // independently exercised by scripts/godpath/test-apex-deed.js.
+  const hunt = { day: 84, monster: 'moderator', scene: 'tactical', method: 'solo', actorMaxHp: 100, openingHp: 160 };
+  Game.state.village.godpathDeeds = { [Game.villagerId]: { apex_hunt: hunt } };
   const t1 = G.godhoodCloseness(build(stalker), apex, 85);
   T.ok('T1 stalker build completes: class + payoff + 4 path + deed @ day 85', t1.complete === true, JSON.stringify(t1));
   T.ok('T2 day gate: no godhood before day 80', G.godhoodCloseness(build(stalker), apex, 79).complete === false);
@@ -48,8 +52,10 @@ const T = K.reporter('proof-godhood-rework-20261013');
   const t5 = G.godhoodCloseness(build(split), apex, 85);
   T.ok('T5 class required: a 4/4 hunter-brawler tie names no class and does not ascend', t5.classOk === false && t5.complete === false);
   T.ok('T5b no class: the god stays unknown (close false)', t5.close === false);
-  const t6 = G.godhoodCloseness(build(stalker, []), apex, 85);
-  T.ok('T6 deed required: no synergy fails', t6.complete === false && t6.synergy === false);
+  delete Game.state.village.godpathDeeds[Game.villagerId].apex_hunt;
+  const t6 = G.godhoodCloseness(build(stalker), apex, 85);
+  T.ok('T6 actual hunt required: a legacy synergy cannot substitute', t6.complete === false && t6.synergy === false);
+  Game.state.village.godpathDeeds[Game.villagerId].apex_hunt = hunt;
   T.ok('T7 the item is not a gate; a complete build is ready for the System\'s gift', t1.item === true && t1.readyForCapstone === true);
   T.ok('T7b capstoneItemFor still names the gift', G.capstoneItemFor(apex) === 'apex_bow');
   const t8 = G.godhoodCloseness(build(stalker.concat(['echo_location'])), apex, 85);

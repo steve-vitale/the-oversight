@@ -1,5 +1,14 @@
 # Simulating The Oversight — how to measure a change
 
+Apex authored deed (2026-10-16): `scripts/godpath/test-apex-deed.js` is found
+automatically by quick/full checks. It uses one shared harness and real
+tactical/field callers, including the post-constructor door-wound restore,
+paid player/NPC Pack Hunt, load and succession. General ceremony/model tests
+use an explicitly prepared personal receipt; they do not prove acquisition.
+See `evidence/2026-10-16/apex-deed-audit.md` for exact-source reconstruction,
+reused baseline accounting,23-metric reports and conditional outcome replays.
+Keep screens, disjoint holdouts, prepared access and selected tails separate.
+
 Garden feeding (2026-10-16): `scripts/godpath/test-garden-feeding.js` runs
 automatically in quick/full discovery. Run it before freezing campaign roots.
 Verify automatic dawn snapshots as well as manual save-then-load: the first

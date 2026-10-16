@@ -299,7 +299,7 @@ const T = K.reporter('test-godpath-villagers-20261014');
     T.ok('tb: adrenaline_control (combat.strike_damage x1.3) on a villager\'s strike', Math.abs(GP.villagerStrikeMult(Game, t3.A, t3.m) - 1.3) < 1e-9);
   }
 
-  T.section('ascension: the lived-in deed (rules.capstone.deedClassDays)');
+  T.section('ascension: the authored Apex hunt replaces class age');
   {
     if (Game.tbfight) Game.tbfight = null;
     const GH = S.Godhood;
@@ -318,7 +318,10 @@ const T = K.reporter('test-godpath-villagers-20261014');
     const early = GH.godhoodCloseness(s, gh, 80 + n - 1);
     const late = GH.godhoodCloseness(s, gh, 80 + n);
     T.ok(`held ${n - 1} days: the deed is not yet done (no synergy)`, !early.synergy && !early.complete, JSON.stringify(early));
-    T.ok(`held ${n} days: the lived-in deed completes the god (payoff + 4 + class + day 80+)`, late.synergy && late.complete, JSON.stringify(late));
+    T.ok(`held ${n} days: class age cannot replace the actual hunt`, !late.synergy && !late.complete, JSON.stringify(late));
+    // Prepared requirement fixture; real acquisition has its own shared-kit test.
+    Game.state.village.godpathDeeds = { [Game.villagerId]: { apex_hunt: { day: 84, monster: 'moderator', scene: 'tactical', method: 'solo', actorMaxHp: 100, openingHp: 160 } } };
+    T.ok('an earned hunt completes the otherwise ready build', GH.godhoodCloseness(s, gh, 80 + n).complete);
     s.abilities = s.abilities.filter(a => (a.id || a) !== 'trophy_room');
     Game.recognizeClass('player');
     const noPay = GH.godhoodCloseness(s, gh, 80 + n + 5);

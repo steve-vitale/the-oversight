@@ -1,0 +1,38 @@
+
+player: the four gates
+  ok   T1 stalker build completes: class + payoff + 4 path + deed @ day 85
+  ok   T2 day gate: no godhood before day 80
+  ok   T3 payoff required: 4 stalker abilities without Trophy Room fail
+  ok   T4 4 path abilities (abilitiesNeeded) with payoff + deed: complete
+  ok   T4b 3 path abilities: not complete
+  ok   T5 class required: a 4/4 hunter-brawler tie names no class and does not ascend
+  ok   T5b no class: the god stays unknown (close false)
+  ok   T6 actual hunt required: a legacy synergy cannot substitute
+  ok   T7 the item is not a gate; a complete build is ready for the System's gift
+  ok   T7b capstoneItemFor still names the gift
+  ok   T8 alsoPath abilities count toward the pool (echo_location is explorer, alsoPath hunter)
+
+villagers: the same function
+  ok   T9 villager berserker completes the One-Person Army
+  ok   T10 villager without the deed does not
+  ok   T11a first check returns the army
+  ok   T11b second check returns nothing (fires once)
+  ok   T12a player check returns apex_predator
+  ok   T12b player re-check returns nothing
+
+data: one god per path, derived from godpaths.json
+  ok   T13 the Relay is the Socialite's god; the office is its required fitting deed
+  ok   T14 ten reachable gods, one per path
+  ok   T14b pools are magic, cores are payoffs, every god has a deed synergy
+  ok   T15 old saves: the retired Farstrider still resolves (ceremony, mythic) but is never reachable
+  ok   T15b godhood.json is gone (one source of truth)
+  ok   T15c every path's god id is a godhood the verbs know
+
+sense-read
+  [stillness/say] Everything stops. Not all at once — conversations trail off, a dropped spoon rings too loud. The dusk does something it has never done. Ever…
+  [witnesses/say] Mara: "I saw it happen. I was THERE."
+  [system/sysSay] "STOP THE PRESSES! STOP ALL PRESSES! The Highbeam Deer just filed a COMPLAINT! It says — and I quote — 'it fears ME now'! Ladies and gentlem…
+  [change/say] Somewhere, something that hunts you decides not to. Look at your hands. Look at what the light does around you now. You are The Apex Predato…
+  [price/say] Godhood demands its price, and the price is not hidden: Once per fight — it's set before the first blow. You can't re-choose mid-fight. If i…
+
+proof-godhood-rework-20261013: 23 passed, 0 failed, 0 todo (phase 0)

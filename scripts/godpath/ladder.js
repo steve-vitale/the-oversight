@@ -96,6 +96,8 @@ const T = K.reporter('godpath-ladder');
   s.activeSynergies = [apex.requires.synergies[0]];
   s.day = 85; Game.state.day = 85;
   s.godhood = { recognized: {}, active: [] };
+  // Prepared ceremony fixture; test-apex-deed proves actual kill callers.
+  Game.state.village.godpathDeeds = { [Game.villagerId]: { apex_hunt: { day: 84, monster: 'moderator', scene: 'tactical', method: 'solo', actorMaxHp: 100, openingHp: 160 } } };
   const tAsc = K.teleEvents(Game, 'ascension').length;
   Game.checkPlayerGodhoodAscension();
   T.ok('player ascends as the Apex Predator (class + payoff + 4 + deed, day 85)', (s.godhood.active || []).includes('apex_predator'), JSON.stringify(s.godhood));

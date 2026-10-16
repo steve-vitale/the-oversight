@@ -1,0 +1,37 @@
+
+foundations
+  ok   godpaths.json is in the data load list (game.js init)
+  ok   godhood.json is not loaded (retired)
+  ok   fusion code stays removed (rejected approach)
+  ok   use-count recognition stays removed (rejected: points/meter ascension)
+  ok   the Table never reads godhood or god-path state (prices the run, never gates on godhood)
+  ok   the ending key never prices the seat or the doors (endingKey.js reads the build, the Table only reads the key)
+  ok   godpath.js loads from index.html
+  ok   Game.data.godpaths is loaded at runtime
+  ok   the god-path API exists (recognizeClass, classLine, pathLean, shapeOffers, buildScore)
+
+class recognition: player
+  ok   two brawler abilities: no class, no line ("If you don't know, it doesn't show")
+  ok   three: "Berserker of the One-Person Army", stored with path/subclass/since
+  ok   telemetry class_recognized fired
+  ok   the build shifts: the class changes to Stalker of the Apex Predator
+
+offers lean to your path
+  ok   a level-up sheet holds >=1 hunter ability when the kit has one
+  ok   the sheet's roles are distinct where the kit allows
+  ok   pathLean scores an on-path ability above an off-path one
+  ok   pathLean is knowledge-gated: an unknown ability scores 0
+  ok   a contest gift sheet holds >=1 hunter ability
+
+class recognition: villagers (the same function)
+  ok   two beastmaster abilities: no villager class
+  ok   three: the villager is named "Beastmaster of the Apex Predator"
+  ok   stored on village.npcGodpath[vid]
+
+capstone: reachable in a scripted build, same ceremony for both
+  ok   player ascends as the Apex Predator (class + payoff + 4 + deed, day 85)
+  ok   the System gifts the capstone item at the ceremony
+  ok   ascension telemetry fires
+  ok   a villager ascends through the same requirement model
+
+godpath-ladder: 25 passed, 0 failed, 0 todo (phase 0)
