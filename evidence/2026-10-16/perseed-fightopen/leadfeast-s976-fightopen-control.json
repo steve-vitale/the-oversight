@@ -1,0 +1,152 @@
+{
+ "seed": 976,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "control",
+ "fightopen": 0,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=0",
+ "days": 135,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 43,
+ "fieldDeaths": 33,
+ "playerDeaths": 10,
+ "deathCauses": {
+  "combat": 24,
+  "a wound that wouldn't close": 1,
+  "monster": 13,
+  "villager combat": 4,
+  "The Network Note": 1
+ },
+ "trickTally": {
+  "wait:algorithm-tank": 4,
+  "wait:spool-record": 10
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "algorithm": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 106,
+   "id": "algorithm"
+  }
+ ],
+ "nFieldFights": 156,
+ "nTbFights": 35,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L147-algorithm",
+   "seq": 147,
+   "day": 106,
+   "id": "algorithm",
+   "trick": "algorithm",
+   "trickText": "Lose on purpose — tank the prediction",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:algorithm-tank"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L147-algorithm",
+   "day": 106,
+   "id": "algorithm",
+   "trick": "algorithm",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 2,
+    "trick fired but failed": 1,
+    "tb-n/a": 1
+   },
+   "execs": 3,
+   "fights": [
+    {
+     "seq": 148,
+     "day": 106,
+     "path": "field",
+     "vid": "fatima_hassan",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:algorithm-tank"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:algorithm-tank"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 150,
+     "day": 106,
+     "path": "field",
+     "vid": "fatima_hassan",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:algorithm-tank"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:algorithm-tank"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 158,
+     "day": 110,
+     "path": "field",
+     "vid": "visjoin_108",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "evals": 3,
+     "fires": 2,
+     "firedTokens": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 165,
+     "day": 112,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}

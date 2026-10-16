@@ -1,0 +1,135 @@
+{
+ "seed": 985,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "treatment",
+ "fightopen": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1",
+ "days": 117,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 52,
+ "fieldDeaths": 44,
+ "playerDeaths": 8,
+ "deathCauses": {
+  "villager combat": 6,
+  "ambush": 1,
+  "combat": 36,
+  "lockjaw": 1,
+  "monster": 6,
+  "expedition": 1,
+  "The Congregation": 1
+ },
+ "trickTally": {
+  "wait:redactor-quiet": 13,
+  "shout": 1,
+  "wait:reunion-novel": 2
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "reunion": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 104,
+   "id": "reunion"
+  }
+ ],
+ "nFieldFights": 182,
+ "nTbFights": 22,
+ "nWaveKillTricks": 6,
+ "witnessLearnings": [
+  {
+   "learnId": "L188-reunion",
+   "seq": 188,
+   "day": 104,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L188-reunion",
+   "day": 104,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 1,
+    "trick fired but failed": 1,
+    "tb-n/a": 1
+   },
+   "execs": 2,
+   "fights": [
+    {
+     "seq": 190,
+     "day": 105,
+     "path": "field",
+     "vid": "amina_diallo",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "wait:reunion-novel"
+     ],
+     "evals": 2,
+     "fires": 1,
+     "firedTokens": [
+      "wait:reunion-novel"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 192,
+     "day": 105,
+     "path": "field",
+     "vid": "app_mgpsphh6820",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:reunion-novel"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:reunion-novel"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 198,
+     "day": 111,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}

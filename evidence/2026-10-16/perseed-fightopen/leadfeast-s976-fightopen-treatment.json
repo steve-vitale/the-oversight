@@ -1,0 +1,181 @@
+{
+ "seed": 976,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "treatment",
+ "fightopen": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1",
+ "days": 114,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 31,
+ "fieldDeaths": 24,
+ "playerDeaths": 7,
+ "deathCauses": {
+  "combat": 17,
+  "a wound that wouldn't close": 1,
+  "monster": 11,
+  "villager combat": 2
+ },
+ "trickTally": {
+  "wait:algorithm-tank": 8,
+  "continuity": 4,
+  "wait:spool-record": 9
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "algorithm": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 106,
+   "id": "algorithm"
+  }
+ ],
+ "nFieldFights": 144,
+ "nTbFights": 24,
+ "nWaveKillTricks": 2,
+ "witnessLearnings": [
+  {
+   "learnId": "L147-algorithm",
+   "seq": 147,
+   "day": 106,
+   "id": "algorithm",
+   "trick": "algorithm",
+   "trickText": "Lose on purpose — tank the prediction",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:algorithm-tank"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L147-algorithm",
+   "day": 106,
+   "id": "algorithm",
+   "trick": "algorithm",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 3,
+    "trick fired but failed": 2
+   },
+   "execs": 5,
+   "fights": [
+    {
+     "seq": 148,
+     "day": 106,
+     "path": "field",
+     "vid": "fatima_hassan",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:algorithm-tank"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:algorithm-tank"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 150,
+     "day": 106,
+     "path": "field",
+     "vid": "fatima_hassan",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:algorithm-tank"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:algorithm-tank"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 154,
+     "day": 109,
+     "path": "field",
+     "vid": "quinn_murphy",
+     "outcome": "vFlee",
+     "rounds": 6,
+     "trickLog": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "evals": 6,
+     "fires": 3,
+     "firedTokens": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 163,
+     "day": 113,
+     "path": "field",
+     "vid": "sari_wulandari",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "evals": 3,
+     "fires": 2,
+     "firedTokens": [
+      "wait:algorithm-tank",
+      "wait:algorithm-tank"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 167,
+     "day": 113,
+     "path": "field",
+     "vid": "sari_wulandari",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:algorithm-tank"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:algorithm-tank"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

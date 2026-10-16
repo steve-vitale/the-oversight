@@ -1,0 +1,609 @@
+{
+ "seed": 981,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "treatment",
+ "fightopen": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1",
+ "days": 115,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 50,
+ "fieldDeaths": 43,
+ "playerDeaths": 7,
+ "deathCauses": {
+  "villager combat": 13,
+  "combat": 23,
+  "sickness": 3,
+  "a wound that wouldn't close": 3,
+  "monster": 3,
+  "contest": 2,
+  "The Suburb": 1,
+  "starvation": 2
+ },
+ "trickTally": {
+  "wait:redactor-quiet": 51,
+  "wait:spool-record": 3,
+  "shout": 2,
+  "continuity": 1
+ },
+ "nNodeWitnessReports": 3,
+ "nodeWitnessBySpecies": {
+  "redactor": 1,
+  "murkcap": 1,
+  "rerun": 1
+ },
+ "nNodeWitnessDiscovered": 2,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 53,
+   "id": "redactor"
+  },
+  {
+   "day": 84,
+   "id": "murkcap"
+  }
+ ],
+ "nFieldFights": 110,
+ "nTbFights": 33,
+ "nWaveKillTricks": 4,
+ "witnessLearnings": [
+  {
+   "learnId": "L60-redactor",
+   "seq": 60,
+   "day": 53,
+   "id": "redactor",
+   "trick": "redactor",
+   "trickText": "Go quiet — starve the redaction",
+   "wave": 3,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:redactor-quiet"
+   ]
+  },
+  {
+   "learnId": "L104-murkcap",
+   "seq": 104,
+   "day": 84,
+   "id": "murkcap",
+   "trick": "keep_distance",
+   "trickText": "keep_distance — Stay out of the sporefall",
+   "wave": 1,
+   "store": "monsterCounters",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": []
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L60-redactor",
+   "day": 53,
+   "id": "redactor",
+   "trick": "redactor",
+   "wave": 3,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "flee": 18,
+    "trick fired but failed": 2,
+    "tb-n/a": 5
+   },
+   "execs": 20,
+   "fights": [
+    {
+     "seq": 61,
+     "day": 53,
+     "path": "field",
+     "vid": "gen_wj60p70",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [
+      "wait:redactor-quiet"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 67,
+     "day": 54,
+     "path": "field",
+     "vid": "app_mgpsphgj287",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:redactor-quiet"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:redactor-quiet"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 69,
+     "day": 54,
+     "path": "field",
+     "vid": "caleb_jones",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [
+      "wait:redactor-quiet"
+     ],
+     "evals": 1,
+     "fires": 1,
+     "firedTokens": [
+      "wait:redactor-quiet"
+     ],
+     "cls": "trick fired but failed",
+     "sub": "trick fired, villager died anyway"
+    },
+    {
+     "seq": 72,
+     "day": 55,
+     "path": "field",
+     "vid": "desmond_clarke",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 2,
+     "fires": 2,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 83,
+     "day": 63,
+     "path": "field",
+     "vid": "owen_smith",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 85,
+     "day": 68,
+     "path": "field",
+     "vid": "chen_wei",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 90,
+     "day": 71,
+     "path": "field",
+     "vid": "owen_smith",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 92,
+     "day": 74,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 93,
+     "day": 74,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 2,
+     "fires": 2,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 95,
+     "day": 77,
+     "path": "field",
+     "vid": "owen_smith",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 96,
+     "day": 81,
+     "path": "field",
+     "vid": "nikos_papadopoulos",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 98,
+     "day": 82,
+     "path": "field",
+     "vid": "nikos_papadopoulos",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 99,
+     "day": 83,
+     "path": "field",
+     "vid": "chen_wei",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 100,
+     "day": 83,
+     "path": "field",
+     "vid": "raj_patel",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 2,
+     "fires": 2,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 108,
+     "day": 84,
+     "path": "field",
+     "vid": "nikos_papadopoulos",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 117,
+     "day": 95,
+     "path": "field",
+     "vid": "elijah_scott",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 118,
+     "day": 95,
+     "path": "field",
+     "vid": "raj_patel",
+     "outcome": "vFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, engine"
+    },
+    {
+     "seq": 122,
+     "day": 99,
+     "path": "field",
+     "vid": "dmitri_sokolov",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 125,
+     "day": 101,
+     "path": "field",
+     "vid": "nikos_papadopoulos",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    },
+    {
+     "seq": 131,
+     "day": 108,
+     "path": "field",
+     "vid": "aroha_ngata",
+     "outcome": "mFlee",
+     "rounds": 3,
+     "trickLog": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "evals": 3,
+     "fires": 3,
+     "firedTokens": [
+      "wait:redactor-quiet",
+      "wait:redactor-quiet",
+      "wait:redactor-quiet"
+     ],
+     "cls": "flee",
+     "sub": "flee, trick-driven"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 76,
+     "day": 57,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 89,
+     "day": 69,
+     "path": "tb",
+     "result": "won",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 91,
+     "day": 72,
+     "path": "tb",
+     "result": "routed",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 101,
+     "day": 84,
+     "path": "tb",
+     "result": "won",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 129,
+     "day": 102,
+     "path": "tb",
+     "result": "routed",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  },
+  {
+   "learnId": "L104-murkcap",
+   "day": 84,
+   "id": "murkcap",
+   "trick": "keep_distance",
+   "wave": 1,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "un-actuatable": 1
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 107,
+     "day": 84,
+     "path": "field",
+     "vid": "chen_wei",
+     "outcome": "mFlee",
+     "rounds": 4,
+     "trickLog": [],
+     "evals": 4,
+     "fires": 0,
+     "cls": "un-actuatable",
+     "sub": "trick known, field AI has no gate for it"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 2
+}

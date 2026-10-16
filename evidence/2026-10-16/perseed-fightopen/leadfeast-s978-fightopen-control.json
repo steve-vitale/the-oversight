@@ -1,0 +1,77 @@
+{
+ "seed": 978,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "control",
+ "fightopen": 0,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=0",
+ "days": 172,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 49,
+ "fieldDeaths": 38,
+ "playerDeaths": 11,
+ "deathCauses": {
+  "villager combat": 5,
+  "combat": 32,
+  "monster": 11,
+  "sickness": 1
+ },
+ "trickTally": {
+  "contradict": 8,
+  "wait:nielsen-boring": 18
+ },
+ "nNodeWitnessReports": 3,
+ "nodeWitnessBySpecies": {
+  "influencer": 1,
+  "spoiler": 1,
+  "cancellation": 1
+ },
+ "nNodeWitnessDiscovered": 0,
+ "nodeWitnessDiscovered": [],
+ "nFieldFights": 214,
+ "nTbFights": 48,
+ "nWaveKillTricks": 8,
+ "witnessLearnings": [
+  {
+   "learnId": "L220-spoiler",
+   "seq": 220,
+   "day": 149,
+   "id": "spoiler",
+   "trick": "spoiler",
+   "trickText": "Fall prone — deliberately",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "scholar-observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "prone"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L220-spoiler",
+   "day": 149,
+   "id": "spoiler",
+   "trick": "spoiler",
+   "wave": 5,
+   "via": "scholar-observed",
+   "witnessSourced": "shared",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

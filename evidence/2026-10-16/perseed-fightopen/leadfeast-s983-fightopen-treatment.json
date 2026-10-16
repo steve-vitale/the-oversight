@@ -1,0 +1,82 @@
+{
+ "seed": 983,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "treatment",
+ "fightopen": 1,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=1",
+ "days": 135,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 45,
+ "fieldDeaths": 37,
+ "playerDeaths": 8,
+ "deathCauses": {
+  "villager combat": 7,
+  "combat": 27,
+  "sickness": 1,
+  "dehydration": 1,
+  "monster": 7,
+  "expedition": 2
+ },
+ "trickTally": {
+  "bore": 15,
+  "farewell": 4,
+  "wait:reunion-novel": 7
+ },
+ "nNodeWitnessReports": 2,
+ "nodeWitnessBySpecies": {
+  "algorithm": 1,
+  "timeslot": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 118,
+   "id": "timeslot"
+  }
+ ],
+ "nFieldFights": 194,
+ "nTbFights": 31,
+ "nWaveKillTricks": 9,
+ "witnessLearnings": [
+  {
+   "learnId": "L188-timeslot",
+   "seq": 188,
+   "day": 118,
+   "id": "timeslot",
+   "trick": "timeslot",
+   "trickText": "Be boring enough to get bumped",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": []
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L188-timeslot",
+   "day": 118,
+   "id": "timeslot",
+   "trick": "timeslot",
+   "wave": 5,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "no-opportunity",
+   "summary": {},
+   "execs": 0,
+   "fights": [],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 1
+}

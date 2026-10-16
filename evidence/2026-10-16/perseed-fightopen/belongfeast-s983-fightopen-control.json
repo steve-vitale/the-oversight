@@ -1,0 +1,154 @@
+{
+ "seed": 983,
+ "policyId": "belongfeast",
+ "arm": "fightopen",
+ "armId": "control",
+ "fightopen": 0,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=0",
+ "days": 178,
+ "endReason": "village-lost",
+ "national": 0,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 48,
+ "fieldDeaths": 38,
+ "playerDeaths": 10,
+ "deathCauses": {
+  "villager combat": 9,
+  "combat": 33,
+  "monster": 6
+ },
+ "trickTally": {
+  "farewell": 2,
+  "wait:nielsen-boring": 1,
+  "shout": 4,
+  "wait:spool-record": 6
+ },
+ "nNodeWitnessReports": 3,
+ "nodeWitnessBySpecies": {
+  "rerun": 1,
+  "timeslot": 1,
+  "editor": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 155,
+   "id": "timeslot"
+  }
+ ],
+ "nFieldFights": 265,
+ "nTbFights": 40,
+ "nWaveKillTricks": 4,
+ "witnessLearnings": [
+  {
+   "learnId": "L277-timeslot",
+   "seq": 277,
+   "day": 155,
+   "id": "timeslot",
+   "trick": "timeslot",
+   "trickText": "Be boring enough to get bumped",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": []
+  },
+  {
+   "learnId": "L295-rerun",
+   "seq": 295,
+   "day": 166,
+   "id": "rerun",
+   "trick": "rerun",
+   "trickText": "Win fast — or write between takes",
+   "wave": 5,
+   "store": "villagerTricks",
+   "via": "observed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": []
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L277-timeslot",
+   "day": 155,
+   "id": "timeslot",
+   "trick": "timeslot",
+   "wave": 5,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "un-actuatable": 2
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 283,
+     "day": 157,
+     "path": "field",
+     "vid": "adaeze_nwosu",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [],
+     "evals": 2,
+     "fires": 0,
+     "cls": "un-actuatable",
+     "sub": "trick known, field AI has no gate for it"
+    },
+    {
+     "seq": 289,
+     "day": 159,
+     "path": "field",
+     "vid": "visjoin_147",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "un-actuatable",
+     "sub": "trick known, field AI has no gate for it"
+    }
+   ],
+   "tbFights": []
+  },
+  {
+   "learnId": "L295-rerun",
+   "day": 166,
+   "id": "rerun",
+   "trick": "rerun",
+   "wave": 5,
+   "via": "observed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "un-actuatable": 1
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 296,
+     "day": 166,
+     "path": "field",
+     "vid": "adaeze_nwosu",
+     "outcome": "vFlee",
+     "rounds": 2,
+     "trickLog": [],
+     "evals": 2,
+     "fires": 0,
+     "cls": "un-actuatable",
+     "sub": "trick known, field AI has no gate for it"
+    }
+   ],
+   "tbFights": []
+  }
+ ],
+ "nLearnings": 2
+}

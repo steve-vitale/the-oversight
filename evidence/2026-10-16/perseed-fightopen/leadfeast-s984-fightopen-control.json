@@ -1,0 +1,129 @@
+{
+ "seed": 984,
+ "policyId": "leadfeast",
+ "arm": "fightopen",
+ "armId": "control",
+ "fightopen": 0,
+ "substrate": "pre-seat courtship (FEASTSCALE_R13=1 TRIBFLOOR=1 SUCCGRACE=1 RAIDDENSITY=1 WINPURSUIT=1 WINDEFER=1, SEATDRIVE=0 explicit, NODEWITNESS=1) + FIGHTOPEN=0",
+ "days": 113,
+ "endReason": "village-lost",
+ "national": 1,
+ "table": 1,
+ "won": 0,
+ "wins": 0,
+ "exiled": 0,
+ "maxWave": 5,
+ "wave4Reached": 1,
+ "wave5Reached": 1,
+ "deaths": 46,
+ "fieldDeaths": 36,
+ "playerDeaths": 10,
+ "deathCauses": {
+  "expedition": 2,
+  "villager combat": 6,
+  "combat": 32,
+  "monster": 5,
+  "contest": 1
+ },
+ "trickTally": {
+  "farewell": 1
+ },
+ "nNodeWitnessReports": 1,
+ "nodeWitnessBySpecies": {
+  "reunion": 1
+ },
+ "nNodeWitnessDiscovered": 1,
+ "nodeWitnessDiscovered": [
+  {
+   "day": 88,
+   "id": "reunion"
+  }
+ ],
+ "nFieldFights": 195,
+ "nTbFights": 33,
+ "nWaveKillTricks": 9,
+ "witnessLearnings": [
+  {
+   "learnId": "L189-reunion",
+   "seq": 189,
+   "day": 88,
+   "id": "reunion",
+   "trick": "reunion",
+   "trickText": "Do something you have never done",
+   "wave": 4,
+   "store": "villagerTricks",
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "witnessObsBefore": 1,
+   "tokens": [
+    "wait:reunion-novel"
+   ]
+  }
+ ],
+ "funnel": [
+  {
+   "learnId": "L189-reunion",
+   "day": 88,
+   "id": "reunion",
+   "trick": "reunion",
+   "wave": 4,
+   "via": "node-witnessed",
+   "witnessSourced": "shared",
+   "verdict": "traced",
+   "summary": {
+    "conditions-never-met": 2,
+    "tb-n/a": 2
+   },
+   "execs": 0,
+   "fights": [
+    {
+     "seq": 190,
+     "day": 88,
+     "path": "field",
+     "vid": "gen_3mrjpqr",
+     "outcome": "vFlee",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    },
+    {
+     "seq": 216,
+     "day": 104,
+     "path": "field",
+     "vid": "app_mgpsphkh612",
+     "outcome": "vDie",
+     "rounds": 1,
+     "trickLog": [],
+     "evals": 1,
+     "fires": 0,
+     "cls": "conditions-never-met",
+     "sub": "engine evaluated the gate 1x, never fired"
+    }
+   ],
+   "tbFights": [
+    {
+     "seq": 219,
+     "day": 105,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    },
+    {
+     "seq": 221,
+     "day": 109,
+     "path": "tb",
+     "result": "lost",
+     "performances": [],
+     "cls": "tb-n/a",
+     "sub": "TB path cannot actuate village tricks (w3+)"
+    }
+   ]
+  }
+ ],
+ "nLearnings": 1
+}

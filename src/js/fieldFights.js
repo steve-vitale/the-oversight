@@ -137,6 +137,57 @@
         var rec = fctx.rec || {};
         var members = fctx.members || [];
         var msig = (members[0] || {});
+        // ---- FIGHT-OPENING EXECUTION (2026-10-16, FIGHTOPEN=1; default OFF)
+        // The execensus census measured the execution funnel's sharpest
+        // break: 65% of post-learning wave-4/5 field fights end with
+        // CONDITIONS-NEVER-MET. The trick gates assume multi-round fights
+        // (congregation/argue needs round%3===0; editor/continuity and
+        // cancellation/offscript need 2 strikes; reunion/novelty needs 2
+        // strikes; audit/jank needs round%3===0) but hyper-lethal wave-4/5
+        // field fights are one-round massacres. The villagers KNOW the
+        // tricks — so a fighter who knows the trick OPENS with its first
+        // action on round 1 instead of a doomed strike. Same action the
+        // later-round gate would have returned (same why), same costs:
+        // the opening IS the fighter's round-1 action — the fight loop's
+        // trickAct branch means no strike that round (parity, Steve
+        // 2026-10-13 — no NPC advantage; the player spends round 1 on the
+        // same trick if they choose it). Wave>=4 is the fight-shape proxy:
+        // wave-3 fights run 4-6 rounds, long enough for the multi-round
+        // gates to fire on their own — no opener needed there.
+        // Openers actuate (each mechanically real in the abstract model):
+        // - congregation/argue: rec.trickArgue persists until the next
+        //   round%3===1 beam check (sigW4FieldMonster consumes it there) —
+        //   the beam never falls on round 1 (villager wins initiative) or
+        //   round 4. "Bound by liturgy, it MUST engage the argument."
+        // - reunion/novelty: round-1 non-strike pushes the mirror's wear
+        //   (0.85^(n-2) from the 3rd strike) from round 3 to round 4. "Do
+        //   something you have never done" FIRST.
+        // - editor/continuity: actionKinds opens non-strike, so any
+        //   editorCuts check fails ("the scissors can't cut cleanly").
+        // - cancellation/offscript: variety from round 1 — the stamp on
+        //   round 4 finds no script to cancel.
+        // - audit/inefficient: rec.trickInefficient banks until audit day
+        //   (round 3) — the clipboard finds nothing to tax.
+        // Dishonest as openers, documented never faked: influencer (on
+        // round 1 fol=0 — no follower exists to hunt), eater/poison
+        // (material gate, not multi-round), spoiler/prone (spN%4===3 timing
+        // tied to the prophecy schedule), nielsen (already opens boring),
+        // bad_note (already fires round 1), shout/meet_demand (reactive,
+        // not openings — parity), gavel/confess (needs an active trial),
+        // eulogy/contradict (already every round), suburb/leave (already
+        // round 1), ad_break/look_away and chorus_line/dance (schedule-
+        // timed), herald/finale/rerun/timeslot/finale_crew/finale_opening
+        // (the engine's documented un-actuatable gap).
+        try {
+          if ((typeof process !== 'undefined' && process.env && process.env.FIGHTOPEN === '1') &&
+              fctx.round === 1 && knownSig && ((mdef.wave || 1) >= 4)) {
+            if (mid === 'congregation') return { type: 'argue', why: 'congregation-heresy' };
+            if (mid === 'reunion') return { type: 'wait', why: 'reunion-novel' };
+            if (mid === 'editor') return { type: 'continuity', why: 'editor-continuity' };
+            if (mid === 'cancellation') return { type: 'offscript', why: 'cancellation-offscript' };
+            if (mid === 'audit') return { type: 'inefficient', why: 'audit-jank' };
+          }
+        } catch (e) {}
         // ---- waves 1-2: the counter field ----
         if (known12 && mdef.counter) {
           var kind = mdef.counter.kind;
