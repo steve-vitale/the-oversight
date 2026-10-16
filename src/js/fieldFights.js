@@ -1529,6 +1529,38 @@
           this.noteVillagerTrickObservation(vid, mdef.id);
         }
       } catch (e) {}
+      // NODE-MATE/DEFENDER WITNESS CHANNEL (2026-10-16, sim-nodewitness,
+      // NODEWITNESS=1): the dead tell no tales — but the living who stood
+      // on the same node watched it happen. At kill time the field-fight
+      // context knows who is there: roster node-mates on the monster's
+      // tile (the wild path's npcIds, the raid path's defenders at Haven)
+      // read live via npcsOnNode, plus the party-wired ally still
+      // standing. One witnessed kill = one observation credit via
+      // noteNodeWitnessKill (game.js) — non-lethal learning: nobody is
+      // asked to flee, the witnesses were already there. The fight is
+      // synchronous inside the encounter tick, so nobody has moved since
+      // the encounter staged the scene. Zero trace when NODEWITNESS is
+      // unset (the flag short-circuits before any state read).
+      try {
+        if (vid && vid !== 'player' && rec.outcome === 'vDie' && this.noteNodeWitnessKill &&
+            typeof process !== 'undefined' && process.env && process.env.NODEWITNESS === '1') {
+          var _nw = [];
+          var _nwRoster = [];
+          try { _nwRoster = ((this.state.village || {}).roster) || []; } catch (e) {}
+          if (m && typeof m.tx === 'number' && typeof m.ty === 'number' && this.npcsOnNode) {
+            var _nm = [];
+            try { _nm = this.npcsOnNode(m.tx, m.ty) || []; } catch (e) {}
+            for (var _ni = 0; _ni < _nm.length; _ni++) {
+              var _w = _nm[_ni];
+              if (_w && _w !== vid && _w !== 'player' && _nwRoster.indexOf(_w) >= 0 && _nw.indexOf(_w) < 0) _nw.push(_w);
+            }
+          }
+          try {
+            if (helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid && _nw.indexOf(allyVid) < 0) _nw.push(allyVid);
+          } catch (e) {}
+          if (_nw.length) this.noteNodeWitnessKill(vid, mdef.id, _nw);
+        }
+      } catch (e) {}
       // PARTY-BOND (2026-10-12): surviving together is the practice. The pair
       // bond grows; the village pool grows when a shieldbearer anchors it.
       // Death grieves proportionally — the pair is gone, the survivors' other

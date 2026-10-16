@@ -30406,6 +30406,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const c = mdef.counter;
         const viaLine = via === 'taught' ? 'Someone at the haven knew the trick.'
           : via === 'scholar-observed' ? 'You lived to tell it — twice — and now you see the pattern.'
+          : via === 'node-witnessed' ? 'The village pieced it together from a death someone lived to report.'
           : 'You did the thing — and it worked.';
         this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${c.trick}. ${c.reveal} (${viaLine})`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${c.trick} — ${c.reveal}`); } catch (e) {}
@@ -30626,6 +30627,76 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
           this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
         }
+        try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    },
+    // noteNodeWitnessKill(vid, mid, witnesses): NODE-MATE/DEFENDER WITNESS
+    // CHANNEL (2026-10-16, sim-nodewitness). The dead tell no tales — but
+    // the living who stood on the same node watched it happen. When a
+    // villager dies in a field fight and node-mates/defenders are present
+    // at the kill, the survivors bring the kill home: ONE observation
+    // credit toward the species' trick on the shared villageCounterObs bar
+    // (one kill = one story, no matter how many witnesses — the
+    // 2-observation bar stays meaningful). The sim-witnesslearn arm proved
+    // this mechanism shape (31/31) but its party-wiring witness pool was
+    // structurally empty at kill time (0/5 vDie witnessed); this channel
+    // wires the pool the engine actually stages — node-mates on the
+    // monster's tile (villagerMonsterTick's npcIds) and defenders at Haven
+    // (havenRaidTick) — read live at kill time via npcsOnNode, never
+    // reconstructed from prose.
+    //   Non-lethal learning only: withdrawing is lethal (witnesslearn) and
+    //   scholars die mid-withdrawal (learnfight) — this channel never asks
+    //   anyone to flee; the witnesses were already there.
+    //   Design calls (Steve 2026-10-07 — decided, documented for overrule):
+    //   fires for ANY field vDie with living node witnesses vs a
+    //   trick-bearing species (not gated on round count — the hyper-lethal
+    //   set kills in round 1, and that is the point); only our people
+    //   report to our fire (roster-filtered); a witness who is down is not
+    //   a witness (callers pass only the standing).
+    noteNodeWitnessKill(vid, mid, witnesses) {
+      try {
+        if (!mid || !witnesses || !witnesses.length) return false;
+        if (!vid || vid === 'player') return false;
+        const mdef = (this.data.monsters || []).find(m => m.id === mid);
+        if (!mdef) return false;
+        const defs = this.villagerTrickDefs();
+        if (!mdef.counter && !defs[mid]) return false; // no trick to learn
+        if (this.villageKnowsTrick(mid)) return false; // already known
+        const roster = ((this.state.village || {}).roster) || [];
+        const ours = [];
+        for (const w of (witnesses || [])) {
+          if (w && w !== vid && w !== 'player' && roster.indexOf(w) >= 0 && ours.indexOf(w) < 0) ours.push(w);
+        }
+        if (!ours.length) return false;
+        const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
+        obs[mid] = (obs[mid] || 0) + 1;
+        try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid, via: 'node-witnessed' }); } catch (e) {}
+        // Deterministic narration (seatvoice precedent): no RNG — the
+        // reporter is the first roster witness, names via firstRef
+        // (knowledge-gated), the monster via monsterNoun (sentence-safe;
+        // proper names keep their casing, descriptors take "the" — never
+        // "the The X").
+        const wName = this.firstRef ? this.firstRef(ours[0]) : 'Someone';
+        const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
+        let mn = 'the beast';
+        try { mn = String(this.monsterNoun ? this.monsterNoun(mid) : (this.monsterDisplayName(mid) || 'the beast')); } catch (e) {}
+        const mPhrase = (mn && mn[0] === mn[0].toLowerCase()) ? 'the ' + mn : mn;
+        if (obs[mid] < 2) {
+          this.say(`🗡️ ${wName} came back with ${vName}'s story — watched ${mPhrase} take them, and lived to tell it. The fire listens, and remembers. (${obs[mid]}/2)`);
+          try { if (this.journalNote) this.journalNote('monsters', mid, `Witnessed kill ${obs[mid]}/2: ${wName} reported ${vName}'s death.`); } catch (e) {}
+          return false;
+        }
+        // Two observations: the fire has a theory — framed second-hand.
+        if (mdef.counter) {
+          return this.discoverMonsterCounter(mid, 'node-witnessed');
+        }
+        const vt = this.state.villagerTricks || (this.state.villagerTricks = {});
+        if (vt[mid]) return false;
+        vt[mid] = true;
+        try { this.tele('counter_discovered', { id: mid, via: 'node-witnessed' }); } catch (e) {}
+        const t = defs[mid] || {};
+        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${wName} watched it take ${vName} — the village pieced it together from the death.)`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
       } catch (e) { return false; }
